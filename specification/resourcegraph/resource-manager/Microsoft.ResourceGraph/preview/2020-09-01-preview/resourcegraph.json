@@ -3,7 +3,7 @@
   "info": {
     "title": "Azure Resource Graph",
     "description": "Azure Resource Graph API Reference",
-    "version": "2020-09-01-preview"
+    "version": "2020-04-01-preview"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -34,36 +34,40 @@
     }
   },
   "paths": {
-    "/providers/Microsoft.ResourceGraph/resourceChanges": {
+    "/providers/Microsoft.ResourceGraph/resources": {
       "post": {
-        "description": "List changes to a resource for a given time interval.",
-        "operationId": "ResourceChanges",
         "tags": [
-          "Changes"
+          "Resources"
         ],
+        "operationId": "Resources",
+        "description": "Queries the resources managed by Azure Resource Manager for all subscriptions specified in the request.",
+        "externalDocs": {
+          "description": "Learn more about the query syntax here",
+          "url": "https://aka.ms/resource-graph/learntoquery"
+        },
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "name": "parameters",
-            "description": "the parameters for this request for changes.",
+            "name": "query",
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/ResourceChangesRequestParameters"
-            }
+              "$ref": "#/definitions/QueryRequest"
+            },
+            "description": "Request specifying query and its options."
           }
         ],
         "responses": {
           "200": {
-            "description": "A list of changes associated with a resource over a specific time interval.",
+            "description": "Result of the query operation",
             "schema": {
-              "$ref": "#/definitions/ResourceChangeList"
+              "$ref": "#/definitions/QueryResponse"
             }
           },
           "default": {
-            "description": "A response indicating an error.",
+            "description": "An error occurred while processing the request. See the error.code parameter to identify the specific error.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
@@ -71,294 +75,379 @@
         },
         "x-ms-examples": {
           "Basic query": {
-            "$ref": "./examples/ResourceChanges.json"
+            "$ref": "./examples/ResourcesBasicQuery.json"
+          },
+          "Basic tenant query": {
+            "$ref": "./examples/ResourcesTenantBasicQuery.json"
+          },
+          "Basic management group query": {
+            "$ref": "./examples/ResourcesMgBasicQuery.json"
+          },
+          "Filter resources": {
+            "$ref": "./examples/ResourcesFilterQuery.json"
+          },
+          "Summarize resources by location": {
+            "$ref": "./examples/ResourcesSummarizeQuery.json"
+          },
+          "Complex query": {
+            "$ref": "./examples/ResourcesComplexQuery.json"
+          },
+          "Access a properties field": {
+            "$ref": "./examples/ResourcesPropertiesQuery.json"
+          },
+          "Query with a facet request": {
+            "$ref": "./examples/ResourcesFacetQuery.json"
           },
           "First page query": {
-            "$ref": "./examples/ResourceChangesFirstPage.json"
+            "$ref": "./examples/ResourcesFirstPageQuery.json"
           },
           "Next page query": {
-            "$ref": "./examples/ResourceChangesNextPage.json"
+            "$ref": "./examples/ResourcesNextPageQuery.json"
+          },
+          "Random page query": {
+            "$ref": "./examples/ResourcesRandomPageQuery.json"
           }
         }
       }
     },
-    "/providers/Microsoft.ResourceGraph/resourceChangeDetails": {
-      "post": {
-        "description": "Get resource change details.",
-        "operationId": "ResourceChangeDetails",
+    "/providers/Microsoft.ResourceGraph/operations": {
+      "get": {
         "tags": [
-          "Changes"
+          "Operations"
         ],
+        "description": "Lists all of the available REST API operations.",
+        "operationId": "Operations_List",
+        "x-ms-examples": {
+          "OperationsList": {
+            "$ref": "./examples/OperationsList.json"
+          }
+        },
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "name": "parameters",
-            "description": "The parameters for this request for resource change details.",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/ResourceChangeDetailsRequestParameters"
-            }
           }
         ],
         "responses": {
           "200": {
-            "description": "Resource change details.",
+            "description": "OK. The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/ResourceChangeData"
-            }
-          },
-          "default": {
-            "description": "A response indicating an error.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/OperationListResult"
             }
           }
         },
-        "x-ms-examples": {
-          "Basic query": {
-            "$ref": "./examples/ResourceChangeDetails.json"
-          }
+        "x-ms-pageable": {
+          "nextLinkName": null
         }
       }
     }
   },
   "definitions": {
-    "ResourceChangesRequestParameters": {
-      "description": "The parameters for a specific changes request.",
+    "QueryRequest": {
+      "description": "Describes a query to be executed.",
       "type": "object",
       "properties": {
-        "resourceIds": {
-          "description": "Specifies the list of resources for a changes request.",
+        "subscriptions": {
+          "description": "Azure subscriptions against which to execute the query.",
           "type": "array",
           "items": {
             "type": "string",
-            "description": "Specifies the resource for a changes request."
+            "description": "Subscription Id."
           }
         },
-        "subscriptionId": {
-          "description": "The subscription id of resources to query the changes from. ",
+        "managementGroupId": {
+          "description": "The management group identifier.",
           "type": "string"
         },
-        "interval": {
-          "description": "Specifies the date and time interval for a changes request.",
-          "allOf": [
-            {
-              "$ref": "#/definitions/DateTimeInterval"
-            }
-          ]
+        "query": {
+          "description": "The resources query.",
+          "type": "string"
         },
+        "options": {
+          "description": "The query evaluation options",
+          "$ref": "#/definitions/QueryRequestOptions"
+        },
+        "facets": {
+          "description": "An array of facet requests to be computed against the query result.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/FacetRequest"
+          }
+        }
+      },
+      "required": [
+        "query"
+      ]
+    },
+    "QueryRequestOptions": {
+      "description": "The options for query evaluation",
+      "properties": {
         "$skipToken": {
-          "description": "Acts as the continuation token for paged responses.",
+          "description": "Continuation token for pagination, capturing the next page size and offset, as well as the context of the query.",
           "type": "string"
         },
         "$top": {
-          "description": "The maximum number of changes the client can accept in a paged response.",
+          "description": "The maximum number of rows that the query should return. Overrides the page size when ```$skipToken``` property is present.",
           "type": "integer",
           "format": "int32",
           "minimum": 1,
           "maximum": 1000
         },
-        "table": {
-          "description": "The table name to query resources from.",
-          "type": "string"
+        "$skip": {
+          "description": "The number of rows to skip from the beginning of the results. Overrides the next page offset when ```$skipToken``` property is present.",
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0
         },
-        "fetchPropertyChanges": {
-          "description": "The flag if set to true will fetch property changes",
-          "type": "boolean"
-        },
-        "fetchSnapshots": {
-          "description": "The flag if set to true will fetch change snapshots",
-          "type": "boolean"
-        }
-      },
-      "required": [
-        "interval"
-      ]
-    },
-    "ResourceChangeList": {
-      "description": "A list of changes associated with a resource over a specific time interval.",
-      "type": "object",
-      "properties": {
-        "changes": {
-          "description": "The pageable value returned by the operation, i.e. a list of changes to the resource.\n\n- The list is ordered from the most recent changes to the least recent changes.\n- This list will be empty if there were no changes during the requested interval.\n- The `Before` snapshot timestamp value of the oldest change can be outside of the specified time interval.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ResourceChangeData"
+        "resultFormat": {
+          "description": "Defines in which format query result returned.",
+          "type": "string",
+          "enum": [
+            "table",
+            "objectArray"
+          ],
+          "x-ms-enum": {
+            "name": "ResultFormat",
+            "modelAsString": false
           }
-        },
-        "$skipToken": {
-          "description": "Skip token that encodes the skip information while executing the current request"
         }
       }
     },
-    "ResourceChangeData": {
-      "description": "Data on a specific change, represented by a pair of before and after resource snapshots.",
+    "FacetRequest": {
+      "description": "A request to compute additional statistics (facets) over the query results.",
       "type": "object",
       "properties": {
-        "resourceId": {
-          "description": "The resource for a change.",
+        "expression": {
+          "description": "The column or list of columns to summarize by",
           "type": "string"
         },
-        "changeId": {
-          "description": "The change ID. Valid and unique within the specified resource only.",
+        "options": {
+          "description": "The options for facet evaluation",
+          "$ref": "#/definitions/FacetRequestOptions"
+        }
+      },
+      "required": [
+        "expression"
+      ]
+    },
+    "FacetRequestOptions": {
+      "description": "The options for facet evaluation",
+      "properties": {
+        "sortBy": {
+          "description": "The column name or query expression to sort on. Defaults to count if not present.",
           "type": "string"
         },
-        "beforeSnapshot": {
-          "description": "The snapshot before the change.",
-          "allOf": [
-            {
-              "$ref": "#/definitions/ResourceSnapshotData"
-            }
-          ]
-        },
-        "afterSnapshot": {
-          "description": "The snapshot after the change.",
-          "allOf": [
-            {
-              "$ref": "#/definitions/ResourceSnapshotData"
-            }
-          ]
-        },
-        "changeType": {
-          "description": "The change type for snapshot. PropertyChanges will be provided in case of Update change type",
+        "sortOrder": {
+          "description": "The sorting order by the selected column (count by default).",
           "type": "string",
+          "default": "desc",
           "enum": [
-            "Create",
-            "Update",
-            "Delete"
+            "asc",
+            "desc"
           ],
           "x-ms-enum": {
-            "name": "ChangeType",
+            "name": "FacetSortOrder",
             "modelAsString": false
           }
         },
-        "propertyChanges": {
-          "description": "An array of resource property change",
+        "filter": {
+          "description": "Specifies the filter condition for the 'where' clause which will be run on main query's result, just before the actual faceting.",
+          "type": "string"
+        },
+        "$top": {
+          "description": "The maximum number of facet rows that should be returned.",
+          "type": "integer",
+          "format": "int32",
+          "minimum": 1,
+          "maximum": 1000
+        }
+      }
+    },
+    "QueryResponse": {
+      "description": "Query result.",
+      "type": "object",
+      "properties": {
+        "totalRecords": {
+          "description": "Number of total records matching the query.",
+          "type": "integer",
+          "format": "int64"
+        },
+        "count": {
+          "description": "Number of records returned in the current response. In the case of paging, this is the number of records in the current page.",
+          "type": "integer",
+          "format": "int64"
+        },
+        "resultTruncated": {
+          "description": "Indicates whether the query results are truncated.",
+          "type": "string",
+          "enum": [
+            "true",
+            "false"
+          ],
+          "x-ms-enum": {
+            "name": "ResultTruncated",
+            "modelAsString": false
+          }
+        },
+        "$skipToken": {
+          "description": "When present, the value can be passed to a subsequent query call (together with the same query and subscriptions used in the current request) to retrieve the next page of data.",
+          "type": "string"
+        },
+        "data": {
+          "description": "Query output in tabular format.",
+          "type": "object"
+        },
+        "facets": {
+          "description": "Query facets.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/ResourcePropertyChange"
+            "$ref": "#/definitions/Facet"
           }
         }
       },
       "required": [
-        "changeId",
-        "beforeSnapshot",
-        "afterSnapshot"
+        "totalRecords",
+        "count",
+        "resultTruncated",
+        "data"
       ]
     },
-    "ResourcePropertyChange": {
-      "description": "The resource property change",
+    "Table": {
+      "description": "Query output in tabular format.",
       "type": "object",
       "properties": {
-        "propertyName": {
-          "description": "The property name",
-          "type": "string"
-        },
-        "beforeValue": {
-          "description": "The property value in before snapshot",
-          "type": "string"
-        },
-        "afterValue": {
-          "description": "The property value in after snapshot",
-          "type": "string"
-        },
-        "changeCategory": {
-          "description": "The change category.",
-          "type": "string",
-          "enum": [
-            "User",
-            "System"
-          ],
-          "x-ms-enum": {
-            "name": "ChangeCategory",
-            "modelAsString": false
+        "columns": {
+          "description": "Query result column descriptors.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Column",
+            "description": "Column descriptor."
           }
         },
-        "propertyChangeType": {
-          "description": "The property change Type",
-          "type": "string",
-          "enum": [
-            "Insert",
-            "Update",
-            "Remove"
-          ],
-          "x-ms-enum": {
-            "name": "PropertyChangeType",
-            "modelAsString": false
+        "rows": {
+          "description": "Query result rows.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Row",
+            "description": "Query result row."
           }
         }
       },
       "required": [
-        "propertyName",
-        "changeCategory",
-        "propertyChangeType"
+        "columns",
+        "rows"
       ]
     },
-    "ResourceSnapshotData": {
-      "description": "Data on a specific resource snapshot.",
+    "Column": {
+      "description": "Query result column descriptor.",
       "type": "object",
       "properties": {
-        "timestamp": {
-          "description": "The time when the snapshot was created.\nThe snapshot timestamp provides an approximation as to when a modification to a resource was detected.  There can be a difference between the actual modification time and the detection time.  This is due to differences in how operations that modify a resource are processed, versus how operation that record resource snapshots are processed.",
-          "type": "string",
-          "format": "date-time"
+        "name": {
+          "description": "Column name.",
+          "type": "string"
         },
-        "content": {
-          "description": "The resource snapshot content (in resourceChangeDetails response only).",
+        "type": {
+          "description": "Column data type.",
+          "$ref": "#/definitions/ColumnDataType"
+        }
+      },
+      "required": [
+        "name",
+        "type"
+      ]
+    },
+    "ColumnDataType": {
+      "description": "Data type of a column in a table.",
+      "type": "string",
+      "enum": [
+        "string",
+        "integer",
+        "number",
+        "boolean",
+        "object"
+      ],
+      "x-ms-enum": {
+        "name": "ColumnDataType",
+        "modelAsString": false
+      }
+    },
+    "Row": {
+      "description": "Query result row.",
+      "type": "array",
+      "items": {
+        "type": "object",
+        "description": "Cell value."
+      }
+    },
+    "Facet": {
+      "description": "A facet containing additional statistics on the response of a query. Can be either FacetResult or FacetError.",
+      "type": "object",
+      "properties": {
+        "expression": {
+          "description": "Facet expression, same as in the corresponding facet request.",
+          "type": "string"
+        },
+        "resultType": {
+          "description": "Result type",
+          "type": "string"
+        }
+      },
+      "required": [
+        "expression",
+        "resultType"
+      ],
+      "discriminator": "resultType"
+    },
+    "FacetResult": {
+      "x-ms-discriminator-value": "FacetResult",
+      "description": "Successfully executed facet containing additional statistics on the response of a query.",
+      "type": "object",
+      "properties": {
+        "totalRecords": {
+          "description": "Number of total records in the facet results.",
+          "type": "integer",
+          "format": "int64"
+        },
+        "count": {
+          "description": "Number of records returned in the facet response.",
+          "type": "integer",
+          "format": "int32"
+        },
+        "data": {
+          "description": "A table containing the desired facets. Only present if the facet is valid.",
           "type": "object"
         }
       },
       "required": [
-        "timestamp"
+        "totalRecords",
+        "count",
+        "data"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/Facet"
+        }
       ]
     },
-    "ResourceChangeDetailsRequestParameters": {
-      "description": "The parameters for a specific change details request.",
+    "FacetError": {
+      "x-ms-discriminator-value": "FacetError",
+      "description": "A facet whose execution resulted in an error.",
       "type": "object",
       "properties": {
-        "resourceIds": {
-          "description": "Specifies the list of resources for a change details request.",
+        "errors": {
+          "description": "An array containing detected facet errors with details.",
           "type": "array",
           "items": {
-            "type": "string",
-            "description": "Specifies the resource for a change details request."
-          }
-        },
-        "changeIds": {
-          "description": "Specifies the list of change IDs for a change details request.",
-          "type": "array",
-          "items": {
-            "type": "string",
-            "description": "Specifies the change ID."
+            "$ref": "#/definitions/ErrorDetails"
           }
         }
       },
       "required": [
-        "resourceIds",
-        "changeIds"
-      ]
-    },
-    "DateTimeInterval": {
-      "description": "An interval in time specifying the date and time for the inclusive start and exclusive end, i.e. `[start, end)`.",
-      "type": "object",
-      "properties": {
-        "start": {
-          "description": "A datetime indicating the inclusive/closed start of the time interval, i.e. `[`**`start`**`, end)`. Specifying a `start` that occurs chronologically after `end` will result in an error.",
-          "type": "string",
-          "format": "date-time"
-        },
-        "end": {
-          "description": "A datetime indicating the exclusive/open end of the time interval, i.e. `[start, `**`end`**`)`. Specifying an `end` that occurs chronologically before `start` will result in an error.",
-          "type": "string",
-          "format": "date-time"
+        "errors"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/Facet"
         }
-      },
-      "required": [
-        "start",
-        "end"
       ]
     },
     "ErrorResponse": {
@@ -421,6 +510,52 @@
         "code",
         "message"
       ]
+    },
+    "OperationListResult": {
+      "description": "Result of the request to list Resource Graph operations. It contains a list of operations and a URL link to get the next set of results.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Operation"
+          },
+          "description": "List of Resource Graph operations supported by the Resource Graph resource provider."
+        }
+      }
+    },
+    "Operation": {
+      "description": "Resource Graph REST API operation definition.",
+      "properties": {
+        "name": {
+          "description": "Operation name: {provider}/{resource}/{operation}",
+          "type": "string"
+        },
+        "display": {
+          "description": "Display metadata associated with the operation.",
+          "properties": {
+            "provider": {
+              "description": "Service provider: Microsoft Resource Graph.",
+              "type": "string"
+            },
+            "resource": {
+              "description": "Resource on which the operation is performed etc.",
+              "type": "string"
+            },
+            "operation": {
+              "description": "Type of operation: get, read, delete, etc.",
+              "type": "string"
+            },
+            "description": {
+              "description": "Description for the operation.",
+              "type": "string"
+            }
+          }
+        },
+        "origin": {
+          "type": "string",
+          "description": "The origin of operations."
+        }
+      }
     }
   },
   "parameters": {
