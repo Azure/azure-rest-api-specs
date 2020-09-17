@@ -1,0 +1,514 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2020-10-30-preview",
+    "title": "PowerPlatform"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.PowerPlatform/enterprisePolicies/{enterprisePolicyName}": {
+      "put": {
+        "tags": [
+          "EnterprisePolicies"
+        ],
+        "operationId": "EnterprisePolicies_CreateOrUpdate",
+        "description": "Creates an EnterprisePolicy",
+        "x-ms-examples": {
+          "Create or update EnterprisePolicy": {
+            "$ref": "./examples/createOrUpdateEnterprisePolicy.json"
+          }
+        },
+        "parameters": [
+          {
+            "name": "enterprisePolicyName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Name of the EnterprisePolicy."
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/EnterprisePolicy"
+            },
+            "description": "Parameters supplied to create or update EnterprisePolicy."
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created. The EnterprisePolicy was created successfully.",
+            "schema": {
+              "$ref": "#/definitions/EnterprisePolicy"
+            }
+          },
+          "200": {
+            "description": "OK. The EnterprisePolicy was updated successfully.",
+            "schema": {
+              "$ref": "#/definitions/EnterprisePolicy"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../common/v1/definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": false,
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ]
+      },
+      "get": {
+        "tags": [
+          "EnterprisePolicies"
+        ],
+        "operationId": "EnterprisePolicies_Get",
+        "description": "Get information about an EnterprisePolicy",
+        "x-ms-examples": {
+          "Get an EnterprisePolicy": {
+            "$ref": "./examples/getEnterprisePolicy.json"
+          }
+        },
+        "parameters": [
+          {
+            "name": "enterprisePolicyName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The EnterprisePolicy name."
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The EnterprisePolicy was returned successfully.",
+            "schema": {
+              "$ref": "#/definitions/EnterprisePolicy"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../common/v1/definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ]
+      },
+      "delete": {
+        "tags": [
+          "EnterprisePolicies"
+        ],
+        "operationId": "EnterprisePolicies_Delete",
+        "description": "Delete an EnterprisePolicy",
+        "x-ms-examples": {
+          "Delete an EnterprisePolicy": {
+            "$ref": "./examples/deleteEnterprisePolicy.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "enterprisePolicyName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Name of the EnterprisePolicy"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "204": {
+            "description": "OK"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../common/v1/definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": false,
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ]
+      },
+      "patch": {
+        "tags": [
+          "EnterprisePolicies"
+        ],
+        "operationId": "EnterprisePolicies_Update",
+        "description": "Updates an EnterprisePolicy",
+        "x-ms-examples": {
+          "Update EnterprisePolicy": {
+            "$ref": "./examples/updateEnterprisePolicy.json"
+          }
+        },
+        "parameters": [
+          {
+            "name": "enterprisePolicyName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Name of the EnterprisePolicy."
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/EnterprisePolicy"
+            },
+            "description": "Parameters supplied to update EnterprisePolicy."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The EnterprisePolicy was updated successfully.",
+            "schema": {
+              "$ref": "#/definitions/EnterprisePolicy"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../common/v1/definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": false,
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ]
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.PowerPlatform/enterprisePolicies": {
+      "get": {
+        "tags": [
+          "EnterprisePolicies"
+        ],
+        "operationId": "EnterprisePolicies_ListByResourceGroup",
+        "description": "Retrieve a list of EnterprisePolicies within a given resource group",
+        "x-ms-examples": {
+          "List EnterprisePolicies by resource group": {
+            "$ref": "./examples/listEnterprisePoliciesByResourceGroup.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. List of EnterprisePolicies.",
+            "schema": {
+              "$ref": "#/definitions/EnterprisePolicyList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../common/v1/definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        },
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ]
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.PowerPlatform/enterprisePolicies": {
+      "get": {
+        "tags": [
+          "EnterprisePolicies"
+        ],
+        "operationId": "EnterprisePolicies_ListBySubscription",
+        "description": "Retrieve a list of EnterprisePolicies within a subscription",
+        "x-ms-examples": {
+          "List EnterprisePolicies by subscription": {
+            "$ref": "./examples/listEnterprisePoliciesBySubscription.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. List of EnterprisePolicies.",
+            "schema": {
+              "$ref": "#/definitions/EnterprisePolicyList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../common/v1/definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        },
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ]
+      }
+    },
+    "/providers/Microsoft.PowerPlatform/operations": {
+      "get": {
+        "tags": [
+          "Operations"
+        ],
+        "description": "Lists all of the available PowerPlatform REST API operations.",
+        "x-ms-examples": {
+          "Lists all of the available PowerPlatform REST API operations": {
+            "$ref": "./examples/listOperations.json"
+          }
+        },
+        "operationId": "Operations_List",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "../../common/v1/definitions.json#/definitions/OperationList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../common/v1/definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        },
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "EnterprisePolicy": {
+      "properties": {
+        "identity": {
+          "$ref": "#/definitions/EnterprisePolicyIdentity",
+          "description": "The identity of the EnterprisePolicy."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../common/v1/definitions.json#/definitions/TrackedResource"
+        }
+      ],
+      "description": "Definition of the EnterprisePolicy."
+    },
+    "EnterprisePolicyIdentity": {
+      "properties": {
+        "systemAssignedIdentityPrincipalId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The principal id of EnterprisePolicy identity."
+        },
+        "tenantId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The tenant id associated with the EnterprisePolicy."
+        },
+        "type": {
+          "type": "string",
+          "description": "The type of identity used for the EnterprisePolicy. Currently, the only supported type is 'SystemAssigned', which implicitly creates an identity.",
+          "enum": [
+            "SystemAssigned",
+            "None"
+          ],
+          "x-ms-enum": {
+            "name": "ResourceIdentityType",
+            "modelAsString": false
+          }
+        },
+        "lockbox": {
+          "$ref": "#/definitions/status",
+          "description": "lockbox configuration"
+        },
+        "encryption": {
+          "type": "object",
+          "description": "The encryption settings for a configuration store.",
+          "properties": {
+            "keyVaultProperties": {
+              "$ref": "#/definitions/KeyVaultProperties",
+              "description": "Key vault properties."
+            }
+          }
+        },
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "description": "Metadata for the enterprisePolicy."
+        }
+      },
+      "description": "Identity for the EnterprisePolicy."
+    },
+    "status": {
+      "type": "string",
+      "readOnly": true,
+      "description": "The state of onboarding, which only appears in the response.",
+      "x-ms-enum": {
+        "name": "status",
+        "modelAsString": true
+      },
+      "enum": [
+        "Enabled",
+        "Disabled",
+        "NotConfigured"
+      ]
+    },
+    "KeyVaultProperties": {
+      "type": "object",
+      "description": "Settings concerning key vault encryption for a configuration store.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Uri of KeyVault"
+        },
+        "key": {
+          "$ref": "#/definitions/keyProperties",
+          "description": "Identity of the secret that includes name and version."
+        },
+        "status": {
+          "description": "The state of onboarding, which only appears in the response.",
+          "$ref": "#/definitions/status"
+        }
+      }
+    },
+    "keyProperties": {
+      "properties": {
+        "name": {
+          "description": "The identifier of the key vault key used to encrypt data.",
+          "type": "string"
+        },
+        "version": {
+          "description": "The version of the identity which will be used to access key vault.",
+          "type": "string"
+        }
+      },
+      "description": "Url and version of the KeyVault Secret"
+    },
+    "EnterprisePolicyList": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/EnterprisePolicy"
+          },
+          "description": "Result of the list EnterprisePolicy operation."
+        }
+      },
+      "description": "The response of the list EnterprisePolicy operation."
+    }
+  },
+  "parameters": {}
+}

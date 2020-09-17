@@ -1,0 +1,331 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2020-10-30-preview",
+    "title": "PowerPlatform"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.PowerPlatform/enterprisePolicies/{enterprisePolicyName}/privateEndpointConnections": {
+      "get": {
+        "tags": [
+          "PrivateEndpointConnections"
+        ],
+        "description": "List all private endpoint connections on an EnterprisePolicy.",
+        "operationId": "PrivateEndpointConnections_ListByEnterprisePolicy",
+        "x-ms-pageable": {
+          "nextLinkName": null
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/EnterprisePolicyNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved private endpoint connections.",
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointConnectionListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../common/v1/definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Gets private endpoint connection.": {
+            "$ref": "./examples/PrivateEndpointConnectionListGet.json"
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ]
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.PowerPlatform/enterprisePolicies/{enterprisePolicyName}/privateEndpointConnections/{privateEndpointConnectionName}": {
+      "get": {
+        "tags": [
+          "PrivateEndpointConnections"
+        ],
+        "description": "Gets a private endpoint connection.",
+        "operationId": "PrivateEndpointConnections_Get",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/EnterprisePolicyNameParameter"
+          },
+          {
+            "$ref": "#/parameters/PrivateEndpointConnectionNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved a specified private endpoint connection.",
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointConnection"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../common/v1/definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Gets private endpoint connection.": {
+            "$ref": "./examples/PrivateEndpointConnectionGet.json"
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ]
+      },
+      "put": {
+        "tags": [
+          "PrivateEndpointConnections"
+        ],
+        "description": "Approve or reject a private endpoint connection with a given name.",
+        "operationId": "PrivateEndpointConnections_CreateOrUpdate",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/EnterprisePolicyNameParameter"
+          },
+          {
+            "$ref": "#/parameters/PrivateEndpointConnectionNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointConnection"
+            },
+            "description": "Parameters supplied to create or update a private endpoint connection."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully approved or rejected private endpoint connection.",
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointConnection"
+            }
+          },
+          "202": {
+            "description": "Accepted. The private endpoint connection update will complete asynchronously."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../common/v1/definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Approve or reject a private endpoint connection with a given name.": {
+            "$ref": "./examples/PrivateEndpointConnectionUpdate.json"
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ]
+      },
+      "delete": {
+        "tags": [
+          "PrivateEndpointConnections"
+        ],
+        "description": "Deletes a private endpoint connection with a given name.",
+        "operationId": "PrivateEndpointConnections_Delete",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/EnterprisePolicyNameParameter"
+          },
+          {
+            "$ref": "#/parameters/PrivateEndpointConnectionNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The private endpoint connection was successfully deleted."
+          },
+          "202": {
+            "description": "Accepted. The private endpoint connection delete will complete asynchronously."
+          },
+          "204": {
+            "description": "Private endpoint connection does not exist."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../common/v1/definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Deletes a private endpoint connection with a given name.": {
+            "$ref": "./examples/PrivateEndpointConnectionDelete.json"
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ]
+      }
+    },
+    "/providers/Microsoft.PowerPlatform/operations": {
+      "get": {
+        "tags": [
+          "Operations"
+        ],
+        "description": "Lists all of the available PowerPlatform REST API operations.",
+        "x-ms-examples": {
+          "Lists all of the available PowerPlatform REST API operations": {
+            "$ref": "./examples/listOperations.json"
+          }
+        },
+        "operationId": "Operations_List",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "../../common/v1/definitions.json#/definitions/OperationList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../common/v1/definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        },
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "PrivateEndpointConnectionListResult": {
+      "description": "A list of private endpoint connections",
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "Array of private endpoint connections",
+          "items": {
+            "$ref": "#/definitions/PrivateEndpointConnection"
+          }
+        }
+      }
+    },
+    "PrivateEndpointConnection": {
+      "description": "A private endpoint connection",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "../../../../../common-types/resource-management/v1/privatelinks.json#/definitions/PrivateEndpointConnectionProperties",
+          "description": "Resource properties.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../common/v1/definitions.json#/definitions/ProxyResource"
+        }
+      ]
+    }
+  },
+  "parameters": {
+    "PrivateEndpointConnectionNameParameter": {
+      "name": "privateEndpointConnectionName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "description": "The name of the private endpoint connection."
+    }
+  }
+}
