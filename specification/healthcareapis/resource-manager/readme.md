@@ -39,8 +39,17 @@ These settings apply only when `--tag=package-2020-03` is specified on the comma
 
 ```yaml $(tag) == 'package-2020-03'
 input-file:
+  - Microsoft.HealthcareApis/stable/2020-03-30/healthcare-apis.json
+```
+### Tag: package-2020-03
+
+These settings apply only when `--tag=package-2020-03` is specified on the command line.
+
+``` yaml $(tag) == 'package-2020-03'
+input-file:
   - Microsoft.HealthcareApis/stable/2020-03-15/healthcare-apis.json
 ```
+
 ### Tag: package-2019-09
 
 These settings apply only when `--tag=package-2019-09` is specified on the command line.
@@ -153,13 +162,11 @@ regenerate-manager: true
 generate-interface: true
 ```
 
-
-
 ## AzureResourceSchema
 
 See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
 
-## Multi-API/Profile support for AutoRest v3 generators 
+## Multi-API/Profile support for AutoRest v3 generators
 
 AutoRest V3 generators require the use of `--tag=all-api-versions` to select api files.
 
