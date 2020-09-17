@@ -755,17 +755,20 @@
       "description": "Error body contract.",
       "type": "object",
       "properties": {
-        "code": {
-          "description": "Service-defined error code. This code serves as a sub-status for the HTTP error code specified in the response.",
-          "type": "string"
-        },
-        "message": {
-          "description": "Human-readable representation of the error.",
-          "type": "string"
-        },
-        "details": {
-          "description": "Error details.",
-          "type": "string"
+        "error": {
+          "title": "error details",
+          "description": "Details about the error",
+          "type": "object",
+          "properties": {
+            "code": {
+              "description": "Service-defined error code. This code serves as a sub-status for the HTTP error code specified in the response.",
+              "type": "string"
+            },
+            "message": {
+              "description": "Human-readable representation of the error.",
+              "type": "string"
+            }
+          }
         }
       }
     }

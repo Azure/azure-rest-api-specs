@@ -6,6 +6,7 @@ These settings apply only when `--azureresourceschema` is specified on the comma
 
 ``` yaml $(azureresourceschema) && $(multiapi)
 batch:
+  - tag: schema-workloadmonitor-2018-08-31-preview
   - tag: schema-workloadmonitor-2020-01-13-preview
 ```
 
