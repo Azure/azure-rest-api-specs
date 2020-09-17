@@ -646,6 +646,57 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Datadog/monitors/{monitorName}/refreshSetPasswordLink": {
+      "post": {
+        "tags": [
+          "RefreshSetPasswordLink"
+        ],
+        "summary": "Refresh the setpassword link and return a latest one.",
+        "operationId": "RefreshSetPassword_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "subscriptionId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "resourceGroupName",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "monitorName",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/DatadogSetPasswordLink"
+            }
+          },
+          "default": {
+            "description": "Default error response.",
+            "schema": {
+              "$ref": "#/definitions/ResourceProviderDefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "RefreshSetPassword_Get": {
+            "$ref": "./examples/RefreshSetPassword_Get.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Datadog/monitors/{monitorName}/tagRules": {
       "get": {
         "tags": [
@@ -1522,6 +1573,14 @@
           "additionalProperties": {
             "type": "string"
           }
+        }
+      }
+    },
+    "DatadogSetPasswordLink": {
+      "type": "object",
+      "properties": {
+        "setPasswordLink": {
+          "type": "string"
         }
       }
     },
