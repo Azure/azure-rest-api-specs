@@ -1,0 +1,55 @@
+{
+  "parameters": {
+    "subscriptionId": "00000000-1111-2222-3333-444444444444",
+    "resourceGroupName": "rg1",
+    "enterprisePolicyName": "ep1",
+    "api-version": "2020-10-30-preview",
+    "subnetName": "subnetName"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/rg1/providers/Microsoft.PowerPlatform/enterprisePolicies/ep1/subnets",
+            "name": "subnetName",
+            "type": "Microsoft.PowerPlatform/enterprisePolicies/subnets",
+            "properties": {
+              "subnet": {
+                "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/vn1/subnets/subnet1"
+              },
+              "status": "Enabled",
+              "systemData": {
+                "createdBy": "user1",
+                "createdByType": "User",
+                "createdAt": "2020-01-01T17:18:19.1234567Z",
+                "lastModifiedBy": "user2",
+                "lastModifiedByType": "User",
+                "lastModifiedAt": "2020-01-02T17:18:19.1234567Z"
+              }
+            }
+          },
+          {
+            "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/rg1/providers/Microsoft.PowerPlatform/enterprisePolicies/ep1/subnets",
+            "name": "subnetName",
+            "type": "Microsoft.PowerPlatform/enterprisePolicies/subnets",
+            "properties": {
+              "subnet": {
+                "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/vn1/subnets/subnet2"
+              },
+              "status": "Disabled",
+              "systemData": {
+                "createdBy": "user1",
+                "createdByType": "User",
+                "createdAt": "2020-01-01T17:18:19.1234567Z",
+                "lastModifiedBy": "user2",
+                "lastModifiedByType": "User",
+                "lastModifiedAt": "2020-01-02T17:18:19.1234567Z"
+              }
+            }
+          }
+        ]
+      }
+    }
+  }
+}
