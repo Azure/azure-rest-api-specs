@@ -443,6 +443,302 @@
         },
         "deprecated": false
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HealthcareApis/services/{resourceName}/privateEndpointConnections": {
+      "get": {
+        "tags": [
+          "PrivateEndpointConnections"
+        ],
+        "operationId": "PrivateEndpointConnections_ListByService",
+        "description": "Lists all private endpoint connections for a service.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/resourceName"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointConnectionListResult"
+            }
+          },
+          "default": {
+            "description": "DefaultErrorResponse",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PrivateEndpointConnection_List": {
+            "$ref": "./examples/ServiceListPrivateEndpointConnections.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HealthcareApis/services/{resourceName}/privateEndpointConnections/{privateEndpointConnectionName}": {
+      "get": {
+        "tags": [
+          "PrivateEndpointConnections"
+        ],
+        "operationId": "PrivateEndpointConnections_Get",
+        "description": "Gets the specified private endpoint connection associated with the service.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/resourceName"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "privateEndpointConnectionName",
+            "in": "path",
+            "description": "Private endpoint connection name",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointConnection"
+            }
+          },
+          "default": {
+            "description": "DefaultErrorResponse",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PrivateEndpointConnection_GetConnection": {
+            "$ref": "./examples/ServiceGetPrivateEndpointConnection.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "PrivateEndpointConnections"
+        ],
+        "operationId": "PrivateEndpointConnections_CreateOrUpdate",
+        "description": "Update the state of the specified private endpoint connection associated with the configuration store.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/resourceName"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "privateEndpointConnectionName",
+            "in": "path",
+            "description": "Private endpoint connection name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "privateEndpointConnection",
+            "in": "body",
+            "description": "The private endpoint connection properties.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointConnection"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointConnection"
+            }
+          },
+          "default": {
+            "description": "DefaultErrorResponse",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PrivateEndpointConnection_CreateOrUpdate": {
+            "$ref": "./examples/ServiceCreatePrivateEndpointConnection.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "tags": [
+          "PrivateEndpointConnections"
+        ],
+        "description": "Deletes a private endpoint connection.",
+        "operationId": "PrivateEndpointConnections_Delete",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/resourceName"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "privateEndpointConnectionName",
+            "in": "path",
+            "description": "Private endpoint connection name",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly."
+          },
+          "202": {
+            "description": "The request was successful; the operation will complete asynchronously."
+          },
+          "204": {
+            "description": "No Content - the specified resource was not found."
+          },
+          "default": {
+            "description": "DefaultErrorResponse",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PrivateEndpointConnections_Delete": {
+            "$ref": "./examples/ConfigurationStoresDeletePrivateEndpointConnection.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HealthcareApis/services/{resourceName}/privateLinkResources": {
+      "get": {
+        "tags": [
+          "PrivateLinkResources"
+        ],
+        "operationId": "PrivateLinkResources_ListByService",
+        "description": "Gets the private link resources that need to be created for a service.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/resourceName"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "#/definitions/PrivateLinkResourceListResult"
+            }
+          },
+          "default": {
+            "description": "DefaultErrorResponse",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PrivateLinkResources_ListGroupIds": {
+            "$ref": "./examples/PrivateLinkResourcesListByService.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HealthcareApis/services/{resourceName}/privateLinkResources/{groupName}": {
+      "get": {
+        "tags": [
+          "PrivateLinkResources"
+        ],
+        "operationId": "PrivateLinkResources_Get",
+        "description": "Gets a private link resource that need to be created for a service.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/resourceName"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "groupName",
+            "in": "path",
+            "description": "The name of the private link resource group.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "#/definitions/PrivateLinkResource"
+            }
+          },
+          "default": {
+            "description": "DefaultErrorResponse",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PrivateLinkResources_Get": {
+            "$ref": "./examples/PrivateLinkResourceGet.json"
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -489,6 +785,26 @@
         "exportConfiguration": {
           "$ref": "#/definitions/ServiceExportConfigurationInfo",
           "description": "The settings for the export operation of the service instance."
+        },
+        "privateEndpointConnections": {
+          "description": "The list of private endpoint connections that are set up for this resource.",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/PrivateEndpointConnectionReference"
+          }
+        },
+        "publicNetworkAccess": {
+          "description": "Control permission for data plane traffic coming from public networks while private endpoint is enabled.",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "PublicNetworkAccess",
+            "modelAsString": true
+          }
         }
       }
     },
@@ -638,6 +954,11 @@
           "additionalProperties": {
             "type": "string"
           }
+        },
+        "properties": {
+          "$ref": "#/definitions/ServicesPropertiesUpdateParameters",
+          "description": "The properties for updating a service instance.",
+          "x-ms-client-flatten": true
         }
       }
     },
@@ -840,6 +1161,24 @@
         }
       }
     },
+    "ServicesPropertiesUpdateParameters": {
+      "description": "The properties for updating a service instance.",
+      "type": "object",
+      "properties": {
+        "publicNetworkAccess": {
+          "description": "Control permission for data plane traffic coming from public networks while private endpoint is enabled.",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "PublicNetworkAccess",
+            "modelAsString": true
+          }
+        }
+      }
+    },
     "CheckNameAvailabilityParameters": {
       "description": "Input values.",
       "type": "object",
@@ -926,7 +1265,228 @@
           "description": "Additional properties of the operation result."
         }
       }
-    }
+    },
+    "PrivateEndpointConnectionReference": {
+      "type": "object",
+      "description": "A reference to a related private endpoint connection.",
+      "properties": {
+        "id": {
+          "description": "The resource ID.",
+          "type": "string",
+          "readOnly": true
+        },
+        "name": {
+          "description": "The name of the resource.",
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "description": "The type of the resource.",
+          "type": "string",
+          "readOnly": true
+        },
+        "properties": {
+          "$ref": "#/definitions/PrivateEndpointConnectionProperties",
+          "description": "The properties of a private endpoint connection.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "PrivateEndpointConnectionListResult": {
+        "type": "object",
+        "description": "A list of private endpoint connections",
+        "properties": {
+          "value": {
+            "description": "The collection value.",
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/PrivateEndpointConnection"
+            }
+          },
+          "nextLink": {
+            "description": "The URI that can be used to request the next set of paged results.",
+            "type": "string"
+          }
+        }
+      },
+      "PrivateEndpointConnection": {
+        "description": "A private endpoint connection",
+        "type": "object",
+        "properties": {
+          "id": {
+            "description": "The resource ID.",
+            "type": "string",
+            "readOnly": true
+          },
+          "name": {
+            "description": "The name of the resource.",
+            "type": "string",
+            "readOnly": true
+          },
+          "type": {
+            "description": "The type of the resource.",
+            "type": "string",
+            "readOnly": true
+          },
+          "properties": {
+            "$ref": "#/definitions/PrivateEndpointConnectionProperties",
+            "description": "The properties of a private endpoint.",
+            "x-ms-client-flatten": true
+          }
+        },
+        "x-ms-azure-resource": true
+      },
+      "PrivateEndpointConnectionProperties": {
+        "type": "object",
+        "description": "Properties of a private endpoint connection.",
+        "properties": {
+          "provisioningState": {
+            "enum": [
+              "Creating",
+              "Updating",
+              "Deleting",
+              "Succeeded",
+              "Failed",
+              "Canceled"
+            ],
+            "type": "string",
+            "readOnly": true,
+            "description": "The provisioning status of the private endpoint connection.",
+            "x-ms-enum": {
+              "name": "ProvisioningState",
+              "modelAsString": true
+            }
+          },
+          "privateEndpoint": {
+            "$ref": "#/definitions/PrivateEndpoint",
+            "description": "The resource of private endpoint."
+          },
+          "privateLinkServiceConnectionState": {
+            "$ref": "#/definitions/PrivateLinkServiceConnectionState",
+            "description": "A collection of information about the state of the connection between service consumer and provider."
+          }
+        },
+        "required": [
+          "privateLinkServiceConnectionState"
+        ]
+      },
+      "PrivateEndpoint": {
+        "type": "object",
+        "description": "Private endpoint which a connection belongs to.",
+        "properties": {
+          "id": {
+            "description": "The resource Id for private endpoint",
+            "type": "string"
+          }
+        }
+      },
+      "PrivateLinkServiceConnectionState": {
+        "description": "The state of a private link service connection.",
+        "type": "object",
+        "properties": {
+          "status": {
+            "enum": [
+              "Pending",
+              "Approved",
+              "Rejected",
+              "Disconnected"
+            ],
+            "type": "string",
+            "description": "The private link service connection status.",
+            "x-ms-enum": {
+              "name": "Status",
+              "modelAsString": true
+            }
+          },
+          "description": {
+            "type": "string",
+            "description": "The private link service connection description."
+          },
+          "actionsRequired": {
+            "enum": [
+              "None",
+              "Recreate"
+            ],
+            "type": "string",
+            "readOnly": true,
+            "description": "Any action that is required beyond basic workflow (approve/ reject/ disconnect)",
+            "x-ms-enum": {
+              "name": "ActionsRequired",
+              "modelAsString": true
+            }
+          }
+        }
+      },
+      "PrivateLinkResourceListResult": {
+        "type": "object",
+        "description": "A list of private link resources.",
+        "properties": {
+          "value": {
+            "description": "The collection value.",
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/PrivateLinkResource"
+            }
+          },
+          "nextLink": {
+            "description": "The URI that can be used to request the next set of paged results.",
+            "type": "string"
+          }
+        }
+      },
+      "PrivateLinkResource": {
+        "type": "object",
+        "description": "A resource that supports private link capabilities.",
+        "properties": {
+          "id": {
+            "description": "The resource ID.",
+            "type": "string",
+            "readOnly": true
+          },
+          "name": {
+            "description": "The name of the resource.",
+            "type": "string",
+            "readOnly": true
+          },
+          "type": {
+            "description": "The type of the resource.",
+            "type": "string",
+            "readOnly": true
+          },
+          "properties": {
+            "$ref": "#/definitions/PrivateLinkResourceProperties",
+            "description": "Private link resource properties.",
+            "x-ms-client-flatten": true
+          }
+        }
+      },
+      "PrivateLinkResourceProperties": {
+        "type": "object",
+        "properties": {
+          "groupId": {
+            "description": "The private link resource group id.",
+            "type": "string",
+            "readOnly": true
+          },
+          "requiredMembers": {
+            "description": "The private link resource required member names.",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "readOnly": true
+          },
+          "requiredZoneNames": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "readOnly": true,
+            "description": "The list of required DNS zone names of the private link resource."
+          }
+        },
+        "description": "Properties of a private link resource."
+      }
   },
   "parameters": {
     "subscriptionId": {
