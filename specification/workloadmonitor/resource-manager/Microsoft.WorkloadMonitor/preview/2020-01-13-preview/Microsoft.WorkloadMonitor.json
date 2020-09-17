@@ -370,7 +370,7 @@
     "expand": {
       "name": "$expand",
       "in": "query",
-      "description": "ex: $expand=evidence,config",
+      "description": "ex: $expand=evidence,configuration",
       "required": false,
       "type": "string",
       "x-ms-parameter-location": "method"
@@ -616,6 +616,16 @@
                 }
               ],
               "example": "Critical"
+            },
+            "evidence": {
+              "title": "Evidence",
+              "description": "Evidence of this monitor's last state change.",
+              "type": "object"
+            },
+            "monitorConfiguration": {
+              "title": "Configuration",
+              "description": "Configuration settings at the time of this monitor's last state change.",
+              "type": "object"
             }
           }
         }
