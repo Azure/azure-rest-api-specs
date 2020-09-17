@@ -5285,13 +5285,13 @@
                 "name": "Range"
             }
         },
-        "ProtocolSettings": {
+        "ShareProtocolSettings": {
             "description": "Protocol settings",
             "type": "object",
             "properties": {
-                "SmbSettings": {
+                "Smb": {
                     "description": "Settings for SMB protocol.",
-                    "$ref": "#/definitions/SmbSettings",
+                    "$ref": "#/definitions/ShareSmbSettings",
                     "xml": {
                         "name": "SMB"
                     }
@@ -5462,7 +5462,7 @@
                 "name": "SignedIdentifiers"
             }
         },
-        "SmbSettings": {
+        "ShareSmbSettings": {
             "description": "Settings for SMB protocol.",
             "type": "object",
             "properties": {
@@ -5494,9 +5494,12 @@
                         "wrapped": true
                     }
                 },
-                "ProtocolSettings": {
+                "Protocol": {
                     "description": "Protocol settings",
-                    "$ref":"#/definitions/ProtocolSettings"
+                    "$ref":"#/definitions/ShareProtocolSettings",
+                    "xml": {
+                        "name": "ProtocolSettings"
+                    }
                 }
             }
         },
