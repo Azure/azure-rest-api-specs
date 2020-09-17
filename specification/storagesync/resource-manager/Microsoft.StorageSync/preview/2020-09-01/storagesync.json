@@ -4017,61 +4017,85 @@
           "type": "string",
           "description": "Registered Server Agent Version"
         },
+        "agentVersionStatus": {
+          "$ref": "#/definitions/RegisteredServerAgentVersionStatus",
+          "description": "Registered Server Agent Version Status",
+          "readOnly": true
+        },
+        "agentVersionExpirationDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Registered Server Agent Version Expiration Date",
+          "readOnly": true
+        },
         "serverOSVersion": {
           "type": "string",
           "description": "Registered Server OS Version"
         },
         "serverManagementErrorCode": {
           "type": "integer",
-          "description": "Registered Server Management Error Code"
+          "description": "Registered Server Management Error Code",
+          "readOnly": true
         },
         "lastHeartBeat": {
           "type": "string",
+          "format": "date-time",
           "description": "Registered Server last heart beat"
         },
         "provisioningState": {
           "type": "string",
-          "description": "Registered Server Provisioning State"
+          "description": "Registered Server Provisioning State",
+          "readOnly": true
         },
         "serverRole": {
           "type": "string",
-          "description": "Registered Server serverRole"
+          "description": "Registered Server serverRole",
+          "readOnly": true
         },
         "clusterId": {
           "type": "string",
-          "description": "Registered Server clusterId"
+          "description": "Registered Server clusterId",
+          "readOnly": true
         },
         "clusterName": {
           "type": "string",
-          "description": "Registered Server clusterName"
+          "description": "Registered Server clusterName",
+          "readOnly": true
         },
         "serverId": {
           "type": "string",
-          "description": "Registered Server serverId"
+          "description": "Registered Server serverId",
+          "readOnly": true
         },
         "storageSyncServiceUid": {
           "type": "string",
-          "description": "Registered Server storageSyncServiceUid"
+          "description": "Registered Server storageSyncServiceUid",
+          "readOnly": true
         },
         "lastWorkflowId": {
           "type": "string",
-          "description": "Registered Server lastWorkflowId"
+          "description": "Registered Server lastWorkflowId",
+          "readOnly": true
         },
         "lastOperationName": {
           "type": "string",
-          "description": "Resource Last Operation Name"
+          "description": "Resource Last Operation Name",
+          "readOnly": true
         },
         "discoveryEndpointUri": {
           "type": "string",
-          "description": "Resource discoveryEndpointUri"
+          "description": "Resource discoveryEndpointUri",
+          "readOnly": true
         },
         "resourceLocation": {
           "type": "string",
-          "description": "Resource Location"
+          "description": "Resource Location",
+          "readOnly": true
         },
         "serviceLocation": {
           "type": "string",
-          "description": "Service Location"
+          "description": "Service Location",
+          "readOnly": true
         },
         "friendlyName": {
           "type": "string",
@@ -4079,15 +4103,18 @@
         },
         "managementEndpointUri": {
           "type": "string",
-          "description": "Management Endpoint Uri"
+          "description": "Management Endpoint Uri",
+          "readOnly": true
         },
         "monitoringEndpointUri": {
           "type": "string",
-          "description": "Telemetry Endpoint Uri"
+          "description": "Telemetry Endpoint Uri",
+          "readOnly": true
         },
         "monitoringConfiguration": {
           "type": "string",
-          "description": "Monitoring Configuration"
+          "description": "Monitoring Configuration",
+          "readOnly": true
         }
       }
     },
@@ -4907,6 +4934,20 @@
           "readOnly": true
         }
       }
+    },
+    "RegisteredServerAgentVersionStatus":{
+      "type": "string",
+        "description": "Type of the registered server agent version status",
+        "enum": [
+          "Ok",
+          "NearExpiry",
+          "Expired",
+          "Blocked"
+        ],
+        "x-ms-enum": {
+          "name": "RegisteredServerAgentVersionStatus",
+          "modelAsString": true
+        }
     }
   },
   "parameters": {
