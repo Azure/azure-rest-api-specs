@@ -41,6 +41,14 @@ These settings apply only when `--tag=package-2020-03` is specified on the comma
 input-file:
   - Microsoft.HealthcareApis/stable/2020-03-30/healthcare-apis.json
 ```
+### Tag: package-2020-03
+
+These settings apply only when `--tag=package-2020-03` is specified on the command line.
+
+``` yaml $(tag) == 'package-2020-03'
+input-file:
+  - Microsoft.HealthcareApis/stable/2020-03-15/healthcare-apis.json
+```
 ### Tag: package-2019-09
 
 These settings apply only when `--tag=package-2019-09` is specified on the command line.
