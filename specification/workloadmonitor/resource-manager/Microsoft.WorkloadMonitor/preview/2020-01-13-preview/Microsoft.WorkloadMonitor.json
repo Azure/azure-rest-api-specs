@@ -479,7 +479,7 @@
               "type": "string",
               "example": "logical-disks"
             },
-            "healthState": {
+            "previousMonitorState": {
               "title": "Health State",
               "description": "Current health state of this monitor.",
               "allOf": [
@@ -489,19 +489,29 @@
               ],
               "example": "Healthy"
             },
-            "lastEvaluated": {
+            "currentMonitorState": {
+              "title": "Health State",
+              "description": "Current health state of this monitor.",
+              "allOf": [
+                {
+                  "$ref": "#/definitions/HealthState"
+                }
+              ],
+              "example": "Healthy"
+            },
+            "evaluationTimestamp": {
               "title": "Last Evaluated",
               "description": "Timestamp that this monitor was last evaluated.",
               "type": "string",
               "example": "2020-02-15T20:20:18.5765757Z"
             },
-            "lastStateChange": {
+            "currentStateFirstObservedTimestamp": {
               "title": "Last State Change",
               "description": "Timestamp of this monitor's last state change.",
               "type": "string",
               "example": "2020-02-15T20:20:1.5765757Z"
             },
-            "lastReported": {
+            "lastReportedTimestamp": {
               "title": "Last Reported",
               "description": "Timestamp of this monitor's last reported state.",
               "type": "string",
@@ -512,7 +522,7 @@
               "description": "Evidence of this monitor's last state change.",
               "type": "object"
             },
-            "config": {
+            "monitorConfiguration": {
               "title": "Configuration",
               "description": "Configuration settings at the time of this monitor's last state change.",
               "type": "object"
@@ -575,13 +585,19 @@
               "type": "string",
               "example": "C:"
             },
-            "timestampUtc": {
+            "evaluationTimestamp": {
               "title": "Timestamp",
-              "description": "Timestamp of the state change.",
+              "description": "Timestamp of that this event ocurred.",
               "type": "string",
               "example": "2020-01-08T20:20:18.5765757Z"
             },
-            "prevHealthState": {
+            "currentStateFirstObservedTimestamp": {
+              "title": "Timestamp",
+              "description": "Timestamp of that this health state first ocurred.",
+              "type": "string",
+              "example": "2020-01-08T20:20:18.5765757Z"
+            },
+            "previousMonitorState": {
               "title": "Previous Health State",
               "description": "Previous health state.",
               "allOf": [
@@ -591,7 +607,7 @@
               ],
               "example": "Healthy"
             },
-            "newHealthState": {
+            "currentMonitorState": {
               "title": "New Health State",
               "description": "New health state.",
               "allOf": [
@@ -724,8 +740,8 @@
       }
     }
   },
-  "host": "virtserver.swaggerhub.com",
-  "basePath": "/juweinga/newRP/1.0.0",
+  "host": "management.azure.com",
+  "basePath": "/",
   "schemes": [
     "https"
   ],
