@@ -24,7 +24,6 @@ These are the global settings for the API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2018-08-31-preview
 tag: package-2020-01-13-preview
 ```
 
@@ -138,7 +137,6 @@ go:
 
 ``` yaml $(go) && $(multiapi)
 batch:
-  - tag: package-2018-08-31-preview
   - tag: package-2020-01-13-preview
 ```
 
@@ -179,7 +177,6 @@ output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-workloadmonitor
 
 ``` yaml $(java) && $(multiapi)
 batch:
-  - tag: package-2018-08-31-preview
   - tag: package-2020-01-13-preview
 ```
 
