@@ -60,6 +60,7 @@ These settings apply only when `--tag=package-2019-11` is specified on the comma
 ``` yaml $(tag) == 'package-2019-11'
 input-file:
   - Microsoft.CostManagement/stable/2019-11-01/costmanagement.json
+  - Microsoft.CostManagement/stable/2019-11-01/costmanagement.exports.json
 ```
 
 ### Tag: package-2019-10

@@ -57,7 +57,7 @@ tag: package-managedapplications-2018-06
 ```
 
 ``` yaml $(package-deploymentscripts)
-tag: package-deploymentscripts-2019-10-preview
+tag: package-deploymentscripts-2020-10
 ```
 
 ``` yaml $(package-templatespecs)
@@ -89,6 +89,15 @@ These settings apply only when `--tag=package-subscriptions-2020-01` is specifie
 ``` yaml $(tag) == 'package-subscriptions-2020-01'
 input-file:
   - Microsoft.Resources/stable/2020-01-01/subscriptions.json
+```
+
+### Tag: package-deploymentscripts-2020-10
+
+These settings apply only when `--tag=package-deploymentscripts-2020-10` is specified on the command line.
+
+``` yaml $(tag) == 'package-deploymentscripts-2020-10'
+input-file:
+- Microsoft.Resources/stable/2020-10-01/deploymentScripts.json
 ```
 
 ### Tag: package-deploymentscripts-2019-10-preview
@@ -136,6 +145,7 @@ input-file:
 - Microsoft.Authorization/stable/2020-03-01/policyAssignments.json
 - Microsoft.Authorization/stable/2020-03-01/policyDefinitions.json
 - Microsoft.Authorization/stable/2020-03-01/policySetDefinitions.json
+- Microsoft.Authorization/preview/2020-07-01-preview/policyExemptions.json
 
 # Needed when there is more than one input file
 override-info:
@@ -510,6 +520,10 @@ directive:
     from: policyAssignments.json
     where: $.paths
     reason: policy assignment under an extension resource with Microsoft.Management
+  - suppress: UniqueResourcePaths
+    from: policyExemptions.json
+    where: $.paths
+    reason: policy exemption under an extension resource with Microsoft.Management
   - suppress: OperationsAPIImplementation
     from: policyAssignments.json
     where: $.paths
@@ -522,6 +536,14 @@ directive:
     from: policySetDefinitions.json
     where: $.paths
     reason: operation APIs for Microsoft.Authorization are to be defined in RBAC swagger
+  - suppress: OperationsAPIImplementation
+    from: policyExemptions.json
+    where: $.paths
+    reason: operation APIs for Microsoft.Authorization are to be defined in RBAC swagger
+  - suppress: BodyTopLevelProperties
+    from: policyExemptions.json
+    where: $.definitions.PolicyExemption.properties
+    reason: Currently systemData is not allowed
   - suppress: BodyTopLevelProperties
     from: resources.json
     where: $.definitions.ResourceGroup.properties
@@ -713,9 +735,11 @@ input-file:
   - $(this-folder)/Microsoft.Resources/stable/2020-06-01/resources.json
   - $(this-folder)/Microsoft.Resources/stable/2020-01-01/subscriptions.json
   - $(this-folder)/Microsoft.Resources/preview/2019-10-01-preview/deploymentScripts.json
+  - $(this-folder)/Microsoft.Resources/stable/2020-10-01/deploymentScripts.json
   - $(this-folder)/Microsoft.Features/stable/2015-12-01/features.json
   - $(this-folder)/Microsoft.Authorization/stable/2016-09-01/locks.json
   - $(this-folder)/Microsoft.Authorization/stable/2015-01-01/locks.json
+  - $(this-folder)/Microsoft.Authorization/preview/2020-07-01-preview/policyExemptions.json
   - $(this-folder)/Microsoft.Authorization/stable/2020-03-01/policyAssignments.json
   - $(this-folder)/Microsoft.Authorization/stable/2020-03-01/policyDefinitions.json
   - $(this-folder)/Microsoft.Authorization/stable/2020-03-01/policySetDefinitions.json

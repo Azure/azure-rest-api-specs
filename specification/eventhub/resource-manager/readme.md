@@ -29,6 +29,13 @@ openapi-type: arm
 tag: package-2018-01-preview
 ```
 
+## Suppression
+
+``` yaml
+directive:
+  - suppress: R4007
+    reason: DefaultErrorResponseSchema - we will be Implementing in new API version
+```
 
 ### Tag: package-2017-04
 
