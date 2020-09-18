@@ -1643,6 +1643,423 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/datasets": {
+      "get": {
+        "tags": [
+          "MachineLearningDatasets"
+        ],
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "operationId": "MachineLearningDatasets_ListByWorkspace",
+        "description": "Gets datasets in specified workspace.",
+        "x-ms-examples": {
+          "Get Datasets": {
+            "$ref": "./examples/getDatasets.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/APIVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/PaginationParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The response includes a paginated array of Machine Learning datasets and a URI to the next set of results, if any. For the more information the limits of the number of items in a resource group, see https://azure.microsoft.com/en-us/documentation/articles/azure-subscription-service-limits/.",
+            "schema": {
+              "$ref": "#/definitions/PaginatedDatasetResourcesList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the request failed.",
+            "schema": {
+              "$ref": "#/definitions/MachineLearningServiceError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/datasets/{datasetName}": {
+      "get": {
+        "tags": [
+          "MachineLearningDatasets"
+        ],
+        "operationId": "MachineLearningDatasets_Get",
+        "description": "Get a Dataset by name.",
+        "x-ms-examples": {
+          "Get Dataset": {
+            "$ref": "./examples/getDataset.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/APIVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/DatasetNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/DatasetResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the request failed.",
+            "schema": {
+              "$ref": "#/definitions/MachineLearningServiceError"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "MachineLearningDatasets"
+        ],
+        "operationId": "MachineLearningDatasets_CreateOrUpdate",
+        "description": "Creates or updates dataset. This call will overwrite a dataset if it exists. This is a nonrecoverable operation. If your intent is to create a new dataset, do a GET first to verify that it does not exist yet.",
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Create Dataset": {
+            "$ref": "./examples/createOrUpdateDataset.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DatasetNameParameter"
+          },
+          {
+            "$ref": "#/parameters/APIVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "properties",
+            "description": "The payload that is used to create or update the Dataset.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DatasetCreateRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Dataset creation or update initiated.",
+            "schema": {
+              "$ref": "#/definitions/DatasetResource"
+            }
+          },
+          "201": {
+            "description": "Dataset creation or update initiated.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "description": "URI to poll for asynchronous operation status.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the request failed.",
+            "schema": {
+              "$ref": "#/definitions/MachineLearningServiceError"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "MachineLearningDatasets"
+        ],
+        "operationId": "MachineLearningDatasets_Delete",
+        "description": "Deletes specified Machine Learning Dataset.",
+        "x-ms-examples": {
+          "Delete Dataset": {
+            "$ref": "./examples/deleteDataset.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DatasetNameParameter"
+          },
+          {
+            "$ref": "#/parameters/APIVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly."
+          },
+          "204": {
+            "description": "The resource does not exist and the request was well formed."
+          },
+          "default": {
+            "description": "Error response describing why the request failed.",
+            "schema": {
+              "$ref": "#/definitions/MachineLearningServiceError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/datastores": {
+      "get": {
+        "tags": [
+          "MachineLearningDatastores"
+        ],
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "operationId": "MachineLearningDatastores_ListByWorkspace",
+        "description": "Gets datastores in specified workspace.",
+        "x-ms-examples": {
+          "Get Datastores": {
+            "$ref": "./examples/getDatastores.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/APIVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/PaginationParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The response includes a paginated array of Machine Learning datastores and a URI to the next set of results, if any. For the more information the limits of the number of items in a resource group, see https://azure.microsoft.com/en-us/documentation/articles/azure-subscription-service-limits/.",
+            "schema": {
+              "$ref": "#/definitions/PaginatedDatastoreResourcesList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the request failed.",
+            "schema": {
+              "$ref": "#/definitions/MachineLearningServiceError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/datastores/{datastoreName}": {
+      "get": {
+        "tags": [
+          "MachineLearningDatastores"
+        ],
+        "operationId": "MachineLearningDatastores_Get",
+        "description": "Get a Datastore by name.",
+        "x-ms-examples": {
+          "Get Datastore": {
+            "$ref": "./examples/getDatastore.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/APIVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/DatastoreNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/DatastoreResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the request failed.",
+            "schema": {
+              "$ref": "#/definitions/MachineLearningServiceError"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "MachineLearningDatastores"
+        ],
+        "operationId": "MachineLearningDatastores_CreateOrUpdate",
+        "description": "Creates or updates datastore. This call will overwrite a dataset if it exists. This is a nonrecoverable operation. If your intent is to create a new dataset, do a GET first to verify that it does not exist yet.",
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Create Blob Datastore": {
+            "$ref": "./examples/createOrUpdateBlobDatastore.json"
+          },
+          "Create File Datastore": {
+            "$ref": "./examples/createOrUpdateFileDatastore.json"
+          },
+          "Create SQL Datastore": {
+            "$ref": "./examples/createOrUpdateSqlDatastore.json"
+          },
+          "Create PostgreSQL Datastore": {
+            "$ref": "./examples/createOrUpdatePostgreSqlDatastore.json"
+          },
+          "Create MySQL Datastore": {
+            "$ref": "./examples/createOrUpdateMySqlDatastore.json"
+          },
+          "Create ADLS  Datastore": {
+            "$ref": "./examples/createOrUpdateAdlsDatastore.json"
+          },
+          "Create ADLS Gen2 Datastore": {
+            "$ref": "./examples/createOrUpdateAdlsGen2Datastore.json"
+          },
+          "Create Databricks File System Datastore": {
+            "$ref": "./examples/createOrUpdateDbfsDatastore.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DatastoreNameParameter"
+          },
+          {
+            "$ref": "#/parameters/APIVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "properties",
+            "description": "The payload that is used to create or update the Datastore.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DatastoreCreateRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Datastore creation or update initiated.",
+            "schema": {
+              "$ref": "#/definitions/DatastoreResource"
+            }
+          },
+          "201": {
+            "description": "Datastore creation or update initiated.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "description": "URI to poll for asynchronous operation status.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the request failed.",
+            "schema": {
+              "$ref": "#/definitions/MachineLearningServiceError"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "MachineLearningDatastores"
+        ],
+        "operationId": "MachineLearningDatastores_Delete",
+        "description": "Deletes specified Machine Learning Datastore.",
+        "x-ms-examples": {
+          "Delete Datastore": {
+            "$ref": "./examples/deleteDatastore.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DatastoreNameParameter"
+          },
+          {
+            "$ref": "#/parameters/APIVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly."
+          },
+          "204": {
+            "description": "The resource does not exist and the request was well formed."
+          },
+          "default": {
+            "description": "Error response describing why the request failed.",
+            "schema": {
+              "$ref": "#/definitions/MachineLearningServiceError"
+            }
+          }
+        }
+      }
     }
   },
   "parameters": {
@@ -1848,6 +2265,22 @@
         "name": "OrderString",
         "modelAsString": true
       },
+      "x-ms-parameter-location": "method"
+    },
+    "DatasetNameParameter": {
+      "in": "path",
+      "name": "datasetName",
+      "type": "string",
+      "description": "The Dataset name.",
+      "required": true,
+      "x-ms-parameter-location": "method"
+    },
+    "DatastoreNameParameter": {
+      "in": "path",
+      "name": "datastoreName",
+      "type": "string",
+      "description": "The Datastore name.",
+      "required": true,
       "x-ms-parameter-location": "method"
     }
   },
@@ -2607,6 +3040,796 @@
           "readOnly": true,
           "type": "string"
         }
+      }
+    },
+    "PaginatedDatasetResourcesList": {
+      "type": "object",
+      "description": "Paginated list of Machine Learning dataset objects wrapped in ARM resource envelope.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "An array of Machine Learning dataset objects wrapped in ARM resource envelope.",
+          "items": {
+            "$ref": "#/definitions/DatasetResource"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "A continuation link (absolute URI) to the next page of results in the list."
+        }
+      }
+    },
+    "DatasetResource": {
+      "type": "object",
+      "description": "Machine Learning dataset object wrapped into ARM resource envelope.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "properties": {
+              "description": "Dataset properties",
+              "$ref": "#/definitions/Dataset"
+            }
+          }
+        }
+      ]
+    },
+    "Dataset": {
+      "type": "object",
+      "description": "Machine Learning dataset object.",
+      "properties": {
+        "datasetId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Unique Dataset identifier."
+        },
+        "datasetState": {
+          "type": "object",
+          "$ref": "#/definitions/DatasetState"
+        },
+        "latest": {
+          "type": "object",
+          "description": "Last created Dataset definition.",
+          "properties": {
+            "datasetId": {
+              "readOnly": true,
+              "type": "string",
+              "description": "Unique Dataset identifier."
+            },
+            "versionId": {
+              "readOnly": true,
+              "type": "string",
+              "description": "An identifier uniquely identifies a definition change."
+            },
+            "datasetDefinitionState": {
+              "type": "object",
+              "$ref": "#/definitions/DatasetState"
+            },
+            "dataflow": {
+              "readOnly": true,
+              "type": "string",
+              "description": "Dataflow Json"
+            },
+            "dataPath": {
+              "type": "object",
+              "description": " Datastore and reference to location of data such as relativePath, Sql Query and etc.",
+              "properties": {
+                "datastoreName": {
+                  "readOnly": true,
+                  "type": "string",
+                  "description": "Data store Name"
+                },
+                "relativePath": {
+                  "readOnly": true,
+                  "type": "string",
+                  "description": "Relative path in the data store"
+                },
+                "azureFilePath": {
+                  "readOnly": true,
+                  "type": "string",
+                  "description": "Azure path for Azure Blob or File"
+                },
+                "paths": {
+                  "type": "array",
+                  "description": "List of files expanded from a file GLOB specified",
+                  "items": {
+                    "type": "string"
+                  },
+                  "readOnly": true
+                },
+                "sqlDataPath": {
+                  "type": "object",
+                  "description": "Sql Query/Table/Stored Procedure details.",
+                  "properties": {
+                    "sqlTableName": {
+                      "readOnly": true,
+                      "type": "string",
+                      "description": "SQL table name"
+                    },
+                    "sqlQuery": {
+                      "readOnly": true,
+                      "type": "string",
+                      "description": "SQL query"
+                    },
+                    "sqlStoredProcedureName": {
+                      "readOnly": true,
+                      "type": "string",
+                      "description": "SQL storedProcedure name"
+                    },
+                    "queryTimeout": {
+                      "readOnly": true,
+                      "type": "integer",
+                      "format": "int64",
+                      "description": "SQL query timeout. Unit in seconds."
+                    }
+                  }
+                },
+                "httpUrl": {
+                  "readOnly": true,
+                  "type": "string",
+                  "description": "HTTP URL."
+                },
+                "additionalProperties": {
+                  "description": "Additional Properties.",
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "object"
+                  }
+                },
+                "partitionFormat": {
+                  "readOnly": true,
+                  "type": "string",
+                  "description": "Specify the partition format of path. Defaults to None."
+                },
+                "partitionFormatIgnoreError": {
+                  "type": "boolean",
+                  "description": "Whether or not to ignore unmatched path.",
+                  "readOnly": true
+                }
+              }
+            },
+            "partitionFormatInPath": {
+              "type": "boolean",
+              "description": "Indicates how the source data is partitioned. This is defined to filter on a range of partitioned data before performing actions or materialization.",
+              "readOnly": true
+            },
+            "notes": {
+              "type": "string",
+              "description": "Summary of Definition changes.",
+              "readOnly": true
+            },
+            "etag": {
+              "type": "string",
+              "description": "eTag description",
+              "readOnly": true
+            },
+            "createdTime": {
+              "format": "date-time",
+              "description": "The dataset creation time (UTC).",
+              "type": "string",
+              "readOnly": true
+            },
+            "modifiedTime": {
+              "format": "date-time",
+              "description": "The dataset last modified time (UTC).",
+              "type": "string",
+              "readOnly": true
+            },
+            "createdBy": {
+              "type": "object",
+              "$ref": "#/definitions/UserInfo"
+            },
+            "fileType": {
+              "readOnly": true,
+              "type": "string",
+              "description": "Dataset FileType, specified by user."
+            },
+            "properties": {
+              "description": "Properties stores information like name of time series column for time series dataset.",
+              "type": "object",
+              "additionalProperties": {
+                "type": "object"
+              }
+            },
+            "savedDatasetId": {
+              "readOnly": true,
+              "type": "string",
+              "description": "Indicates the saved dataset this definition is mapping to, populated on Get."
+            },
+            "telemetryInfo": {
+              "description": " Telemetry information about the dataset including information like which service the dataset was created from.",
+              "type": "object",
+              "additionalProperties": {
+                "type": "string"
+              },
+              "readOnly": true
+            },
+            "useDescriptionTagsFromDefinition": {
+              "type": "boolean",
+              "description": " Whether to use description and tags from the definition level as opposed to dataset level (old behavior).",
+              "readOnly": true
+            },
+            "description": {
+              "readOnly": true,
+              "type": "string",
+              "description": "Description about the dataset."
+            },
+            "tags": {
+              "description": "Tags associated with the dataset.",
+              "type": "object",
+              "additionalProperties": {
+                "type": "string"
+              },
+              "readOnly": true
+            }
+          }
+        },
+        "createdTime": {
+          "format": "date-time",
+          "description": "The dataset creation time (UTC).",
+          "type": "string",
+          "readOnly": true
+        },
+        "modifiedTime": {
+          "format": "date-time",
+          "description": "The dataset last modified time (UTC).",
+          "type": "string",
+          "readOnly": true
+        },
+        "etag": {
+          "type": "string",
+          "description": "eTag description",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "description": "Unique dataset name",
+          "readOnly": true
+        },
+        "description": {
+          "type": "string",
+          "description": "Description about this dataset version.",
+          "readOnly": true
+        },
+        "tags": {
+          "description": "Tags for this dataset version.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "isVisible": {
+          "type": "boolean",
+          "description": "Flag to hide Dataset in UI",
+          "readOnly": true
+        },
+        "defaultCompute": {
+          "type": "string",
+          "description": "Name of the default compute to be used for any Dataset actions (such as Profile, Write).",
+          "readOnly": true
+        },
+        "datasetType": {
+          "type": "string",
+          "description": "Dataset Type.",
+          "readOnly": true
+        }
+      }
+    },
+    "DatasetState": {
+      "type": "object",
+      "description": "Dataset state",
+      "properties": {
+        "state": {
+          "description": "Dataset state",
+          "type": "string"
+        },
+        "deprecatedBy": {
+          "description": "Reference to better Dataset or a Definition",
+          "type": "object",
+          "properties": {
+            "datasetId": {
+              "readOnly": true,
+              "type": "string",
+              "description": "Unique Dataset identifier."
+            },
+            "definitionVersion": {
+              "description": "Definition Version",
+              "type": "string"
+            }
+          }
+        },
+        "etag": {
+          "type": "string",
+          "description": "eTag description",
+          "readOnly": true
+        }
+      }
+    },
+    "LinkedInfo": {
+      "type": "object",
+      "description": "Info about origin if it is linked.",
+      "properties": {
+        "linkedId": {
+          "type": "string",
+          "description": "LinkedId id."
+        },
+        "linkedResourceName": {
+          "type": "string",
+          "description": "Linked resource name."
+        },
+        "origin": {
+          "$ref": "#/definitions/Origin"
+        }
+      }
+    },
+    "Origin": {
+      "description": "Datastore origin",
+      "enum": [
+        "Synapse"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "Origin",
+        "modelAsString": true
+      }
+    },
+    "UserInfo": {
+      "type": "object",
+      "description": "User who created.",
+      "properties": {
+        "userObjectId": {
+          "type": "string",
+          "description": "A user or service principal's object ID.."
+        },
+        "userPuId": {
+          "type": "string",
+          "description": "A user or service principal's PuID."
+        },
+        "userIdp": {
+          "type": "string",
+          "description": "A user identity provider. Eg live.com"
+        },
+        "userAltSecId": {
+          "type": "string",
+          "description": "A user alternate sec id. This represents the user in a different identity provider system Eg.1:live.com:puid"
+        },
+        "userIss": {
+          "type": "string",
+          "description": "The issuer which issued the token for this user."
+        },
+        "userTenantId": {
+          "type": "string",
+          "description": "A user or service principal's tenant ID."
+        },
+        "userName": {
+          "type": "string",
+          "description": " A user's full name or a service principal's app ID."
+        }
+      }
+    },
+    "PaginatedDatastoreResourcesList": {
+      "type": "object",
+      "description": "Paginated list of Machine Learning datastore objects wrapped in ARM resource envelope.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "An array of Machine Learning datastore objects wrapped in ARM resource envelope.",
+          "items": {
+            "$ref": "#/definitions/DatastoreResource"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "A continuation link (absolute URI) to the next page of results in the list."
+        }
+      }
+    },
+    "DatastoreResource": {
+      "type": "object",
+      "description": "Machine Learning datastore object wrapped into ARM resource envelope.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "properties": {
+              "description": "Datastore properties",
+              "$ref": "#/definitions/Datastore"
+            }
+          }
+        }
+      ]
+    },
+    "Datastore": {
+      "type": "object",
+      "description": "Machine Learning datastore object.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the datastore."
+        },
+        "description": {
+          "type": "string",
+          "description": "Description of the datastore."
+        },
+        "dataStoreType": {
+          "description": "The datastore type.",
+          "enum": [
+            "AzureBlob",
+            "AzureFile",
+            "AzureDataLake",
+            "AzureSqlDatabase",
+            "AzurePostgreSql",
+            "DBFS",
+            "AzureDataLakeGen2",
+            "AzureMySql"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "DataStoreType",
+            "modelAsString": true
+          }
+        },
+        "hasBeenValidated": {
+          "type": "boolean",
+          "default": false,
+          "description": "A read only property that denotes whether the service datastore has been validated with credentials."
+        },
+        "tags": {
+          "description": "Tags for this datastore.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "azureStorageSection": {
+          "type": "object",
+          "$ref": "#/definitions/AzureStorageSection"
+        },
+        "azureDataLakeSection": {
+          "type": "object",
+          "$ref": "#/definitions/AzureDataLakeSection"
+        },
+        "azureSqlDatabaseSection": {
+          "type": "object",
+          "$ref": "#/definitions/AzureSqlDatabaseSection"
+        },
+        "azurePostgreSqlSection": {
+          "type": "object",
+          "$ref": "#/definitions/AzurePostgreSqlSection"
+        },
+        "azureMySqlSection": {
+          "type": "object",
+          "$ref": "#/definitions/AzureMySqlSection"
+        },
+        "glusterFsSection": {
+          "type": "object",
+          "$ref": "#/definitions/GlusterFsSection"
+        },
+        "createdBy": {
+          "type": "object",
+          "description": "The User who created the datastore.",
+          "$ref": "#/definitions/UserInfo",
+          "readOnly": true
+        },
+        "modifiedBy": {
+          "type": "object",
+          "description": "The User who modified the datastore.",
+          "$ref": "#/definitions/UserInfo",
+          "readOnly": true
+        },
+        "createdTime": {
+          "type": "string",
+          "description": "The date and time when the datastore was created.",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "modifiedTime": {
+          "type": "string",
+          "description": "The date and time when the datastore was last modified.",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "linkedInfo": {
+          "type": "object",
+          "$ref": "#/definitions/LinkedInfo"
+        }
+      }
+    },
+    "AzureResourceDatastore": {
+      "type": "object",
+      "description": "Azure resource for datastore.",
+      "properties": {
+        "subscriptionId": {
+          "type": "string",
+          "description": "Subscription ID."
+        },
+        "resourceGroup": {
+          "type": "string",
+          "description": "Resource Group."
+        },
+        "serviceDataAccessAuthIdentity": {
+          "description": "Indicates which identity to use to authenticate service data access to customer's storage.",
+          "enum": [
+            "None",
+            "WorkspaceSystemAssignedIdentity"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "ServiceDataAccessAuthIdentity",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "AzureStorageSection": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/AzureResourceDatastore"
+        },
+        {
+          "type": "object",
+          "description": "Data specific to azure storage.",
+          "properties": {
+            "accountName": {
+              "type": "string",
+              "description": "Storage Account Name."
+            },
+            "containerName": {
+              "type": "string",
+              "description": "The storage container name."
+            },
+            "endpoint": {
+              "type": "string",
+              "description": "The host of the container."
+            },
+            "protocol": {
+              "type": "string",
+              "description": "The protocol to use. Defaults to https."
+            },
+            "credentialType": {
+              "type": "object",
+              "$ref": "#/definitions/AzureStorageCredentialTypes"
+            },
+            "credential": {
+              "type": "string",
+              "description": "The credential."
+            },
+            "clientCredentials": {
+              "type": "object",
+              "$ref": "#/definitions/ClientCredentials"
+            },
+            "blobCacheTimeout": {
+              "format": "int32",
+              "description": " If this is an \"DataStoreType.AzureBlob\", the length of time (in seconds) to cache files locally after they are accessed (downloaded).",
+              "type": "integer"
+            },
+            "isSas": {
+              "description": "Indicate if we are using SAS token or Account Key (Deprecated).",
+              "type": "boolean"
+            },
+            "accountKey": {
+              "type": "string",
+              "description": " Storage Account Key (Deprecated)."
+            },
+            "sasToken": {
+              "type": "string",
+              "description": " SAS Token for the container (Deprecated)."
+            },
+            "areWorkspaceManagedIdentitiesAllowed": {
+              "description": "Indicate if we are using Workspace ManagedIdentities/MSI token (Deprecated).",
+              "type": "boolean"
+            }
+          }
+        }
+      ]
+    },
+    "AzureDataLakeSection": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/ClientCredentials"
+        },
+        {
+          "type": "object",
+          "description": "Data Specific to azure data lake.",
+          "properties": {
+            "storeName": {
+              "type": "string",
+              "description": "The Azure Data Lake store name."
+            },
+            "credentialType": {
+              "type": "object",
+              "$ref": "#/definitions/AzureDataLakeCredentialTypes"
+            }
+          }
+        }
+      ]
+    },
+    "AzureSqlDatabaseSection": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/AzureSqlSection"
+        },
+        {
+          "type": "object",
+          "description": "Data specific to azure SQL database."
+        }
+      ]
+    },
+    "AzurePostgreSqlSection": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/AzureSqlSection"
+        },
+        {
+          "type": "object",
+          "description": " Data specific to azure PostgreSQL.",
+          "properties": {
+            "enableSsl": {
+              "type": "boolean",
+              "description": "Indicates SSL requirement of Azure Postgresql server."
+            }
+          }
+        }
+      ]
+    },
+    "AzureMySqlSection": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/AzureSqlSection"
+        },
+        {
+          "type": "object",
+          "description": "Data specific to azure MySQL."
+        }
+      ]
+    },
+    "GlusterFsSection": {
+      "type": "object",
+      "description": "Data specific to GlusterFS.",
+      "properties": {
+        "serverAddress": {
+          "type": "string",
+          "description": "The server address of one of the servers that hosts the GlusterFS. Can be either the IP address or server name.",
+          "readOnly": true
+        },
+        "volumeName": {
+          "type": "string",
+          "description": "The name of the created GlusterFS volume.",
+          "readOnly": true
+        }
+      }
+    },
+    "AzureSqlSection": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/ClientCredentials"
+        },
+        {
+          "type": "object",
+          "description": "Data specific to Azure SQL.",
+          "properties": {
+            "serverName": {
+              "type": "string",
+              "description": "The Azure SQL server name."
+            },
+            "databaseName": {
+              "type": "string",
+              "description": "The Azure SQL database name."
+            },
+            "endpoint": {
+              "type": "string",
+              "description": "The server host endpoint."
+            },
+            "userId": {
+              "type": "string",
+              "description": "The Azure SQL user id."
+            },
+            "userPassword": {
+              "type": "string",
+              "description": "The Azure SQL user password."
+            },
+            "portNumber": {
+              "type": "string",
+              "description": "/ The Azure SQL port number."
+            },
+            "credentialType": {
+              "type": "object",
+              "$ref": "#/definitions/SqlCredentialTypes"
+            }
+          }
+        }
+      ]
+    },
+    "ClientCredentials": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/AzureResourceDatastore"
+        },
+        {
+          "type": "object",
+          "description": "Service principal credential when credential type is \"AzureStorageCredentialTypes.ClientCredentials\".",
+          "properties": {
+            "clientId": {
+              "type": "string",
+              "description": "The Client ID/Application ID"
+            },
+            "tenantId": {
+              "type": "string",
+              "description": "The ID of the tenant the service principal/app belongs to."
+            },
+            "isCertAuth": {
+              "description": " Is it using certificate to authenticate. If false then use client secret.",
+              "type": "boolean"
+            },
+            "certificate": {
+              "type": "string",
+              "description": "The content of the certificate used for authentication."
+            },
+            "thumbprint": {
+              "type": "string",
+              "description": "The thumbprint of the certificate above."
+            },
+            "clientSecret": {
+              "type": "string",
+              "description": "The client secret."
+            },
+            "authorityUrl": {
+              "type": "string",
+              "description": "The authority URL used for authentication."
+            },
+            "resourceUri": {
+              "type": "string",
+              "description": "The resource the service principal/app has access to."
+            }
+          }
+        }
+      ]
+    },
+    "AzureStorageCredentialTypes": {
+      "description": " The credential type.",
+      "enum": [
+        "None",
+        "Sas",
+        "AccountKey",
+        "ClientCredentials"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "AzureStorageCredentialTypes",
+        "modelAsString": true
+      }
+    },
+    "AzureDataLakeCredentialTypes": {
+      "description": "The Azure Data Lake credential type.",
+      "enum": [
+        "None",
+        "ServicePrincipal"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "AzureDataLakeCredentialTypes",
+        "modelAsString": true
+      }
+    },
+    "SqlCredentialTypes": {
+      "description": "Sql Authentication type.",
+      "enum": [
+        "SqlAuthentication",
+        "ServicePrincipal",
+        "None"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "SqlCredentialTypes",
+        "modelAsString": true
       }
     },
     "PaginatedComputeResourcesList": {
@@ -5398,6 +6621,296 @@
         }
       ],
       "x-ms-discriminator-value": "Custom"
+    },
+    "DatasetCreateRequest": {
+      "description": "The request for creating dataset.",
+      "type": "object",
+      "properties": {
+        "skipValidation": {
+          "description": "Skip validation that ensures data can be loaded from the dataset before registration.",
+          "default": false,
+          "type": "boolean"
+        },
+        "datasetType": {
+          "description": "Specifies dataset type.",
+          "type": "string",
+          "enum": [
+            "tabular",
+            "file"
+          ],
+          "x-ms-enum": {
+            "name": "DatasetType",
+            "modelAsString": true
+          }
+        },
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "header": {
+              "description": "Header type.",
+              "type": "string",
+              "enum": [
+                "all_files_have_same_headers",
+                "only_first_file_has_headers",
+                "no_headers",
+                "combine_all_files_headers"
+              ],
+              "x-ms-enum": {
+                "name": "Header",
+                "modelAsString": true
+              }
+            },
+            "includePath": {
+              "description": "Boolean to keep path information as column in the dataset. Defaults to False. This is useful when reading multiple files, and want to know which file a particular record originated from, or to keep useful information in file path.",
+              "default": false,
+              "type": "boolean"
+            },
+            "partitionFormat": {
+              "description": "The partition information of each path will be extracted into columns based on the specified format. Format part '{column_name}' creates string column, and '{column_name:yyyy/MM/dd/HH/mm/ss}' creates datetime column, where 'yyyy', 'MM', 'dd', 'HH', 'mm' and 'ss' are used to extract year, month, day, hour, minute and second for the datetime type. The format should start from the position of first partition key until the end of file path. For example, given the path '../USA/2019/01/01/data.parquet' where the partition is by country/region and time, partition_format='/{CountryOrRegion}/{PartitionDate:yyyy/MM/dd}/data.csv' creates a string column 'CountryOrRegion' with the value 'USA' and a datetime column 'PartitionDate' with the value '2019-01-01",
+              "type": "string"
+            },
+            "path": {
+              "type": "object",
+              "properties": {
+                "httpUrl": {
+                  "description": "The Http URL.",
+                  "type": "string"
+                },
+                "dataPath": {
+                  "type": "object",
+                  "properties": {
+                    "datastoreName": {
+                      "description": "The datastore name.",
+                      "type": "string"
+                    },
+                    "relativePath": {
+                      "description": "Path within the datastore.",
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            },
+            "query": {
+              "type": "object",
+              "properties": {
+                "datastoreName": {
+                  "description": "The SQL/PostgreSQL/MySQL datastore name.",
+                  "type": "string"
+                },
+                "query": {
+                  "description": "SQL Quey.",
+                  "type": "string"
+                }
+              }
+            },
+            "sourceType": {
+              "description": "Data source type.",
+              "type": "string",
+              "enum": [
+                "delimited_files",
+                "json_lines_files",
+                "parquet_files"
+              ],
+              "x-ms-enum": {
+                "name": "SourceType",
+                "modelAsString": true
+              }
+            },
+            "separator": {
+              "description": "The separator used to split columns for 'delimited_files' sourceType.",
+              "type": "string"
+            }
+          }
+        },
+        "registration": {
+          "type": "object",
+          "properties": {
+            "description": {
+              "description": "The description for the dataset.",
+              "type": "string"
+            },
+            "name": {
+              "description": "The name of the dataset.",
+              "type": "string"
+            },
+            "tags": {
+              "description": "Tags associated with the dataset.",
+              "type": "object",
+              "additionalProperties": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "timeSeries": {
+          "type": "object",
+          "properties": {
+            "fineGrainTimestamp": {
+              "description": " Column name to be used as FineGrainTimestamp",
+              "type": "string"
+            },
+            "coarseGrainTimestamp": {
+              "description": "Column name to be used as CoarseGrainTimestamp. Can only be used if 'fineGrainTimestamp' is specified and cannot be same as 'fineGrainTimestamp'.",
+              "type": "string"
+            }
+          }
+        }
+      },
+      "required": [
+        "datasetType",
+        "parameters",
+        "registration"
+      ]
+    },
+    "DatastoreCreateRequest": {
+      "description": "The request for creating datastore.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "The name of the datastore.",
+          "type": "string"
+        },
+        "description": {
+          "description": "The description of the datastore.",
+          "type": "string"
+        },
+        "skipValidation": {
+          "description": "Skip validation that ensures data can be loaded from the dataset before registration.",
+          "type": "boolean"
+        },
+        "includeSecret": {
+          "description": "Include datastore secret in response.",
+          "default": true,
+          "type": "boolean"
+        },
+        "dataStoreType": {
+          "description": "Specifies datastore type.",
+          "type": "string",
+          "enum": [
+            "blob",
+            "adls",
+            "adls-gen2",
+            "dbfs",
+            "file",
+            "mysqldb",
+            "sqldb",
+            "psqldb"
+          ],
+          "x-ms-enum": {
+            "name": "DatastoreTypeArm",
+            "modelAsString": true
+          }
+        },
+        "accountName": {
+          "description": "The name of the storage account.",
+          "type": "string"
+        },
+        "shareName": {
+          "description": "The name of the file share.",
+          "type": "string"
+        },
+        "containerName": {
+          "description": "The name of the azure blob container.",
+          "type": "string"
+        },
+        "accountKey": {
+          "description": "Account Key of storage account.",
+          "type": "string"
+        },
+        "endpoint": {
+          "description": "The endpoint of the server.",
+          "type": "string"
+        },
+        "protocol": {
+          "description": "The protocol to be used",
+          "type": "string"
+        },
+        "sasToken": {
+          "description": "Sas Token of storage account.",
+          "type": "string"
+        },
+        "clientId": {
+          "description": "The service principal's client/application ID.",
+          "type": "string"
+        },
+        "clientSecret": {
+          "description": "The service principal's secret.",
+          "type": "string"
+        },
+        "storeName": {
+          "description": "The ADLS store name.",
+          "type": "string"
+        },
+        "tenantId": {
+          "description": "The service principal Tenant ID.",
+          "type": "string"
+        },
+        "authorityUrl": {
+          "description": "Authority url used to authenticate the user.",
+          "type": "string"
+        },
+        "resourceUrl": {
+          "description": "Determines what operations will be performed.",
+          "type": "string"
+        },
+        "storageAccountSubscriptionId": {
+          "description": "The subscription ID of the storage account. Defaults to selected subscription",
+          "type": "string"
+        },
+        "storageAccountResourceGroup": {
+          "description": "The resource group of the storage account. Defaults to selected resource group",
+          "type": "string"
+        },
+        "adlsSubscriptionId": {
+          "description": "The ID of the subscription the ADLS store belongs to. Defaults to selected subscription.",
+          "type": "string"
+        },
+        "adlsResourceGroup": {
+          "description": "The resource group the ADLS store belongs to. Defaults to selected resource group.",
+          "type": "string"
+        },
+        "fileSystem": {
+          "description": "The file system name of the ADLS Gen2.",
+          "type": "string"
+        },
+        "databaseName": {
+          "description": "The database name.",
+          "type": "string"
+        },
+        "password": {
+          "description": "The password.",
+          "type": "string"
+        },
+        "serverName": {
+          "description": "The SQL/MySQL/PostgreSQL server name",
+          "type": "string"
+        },
+        "userId": {
+          "description": "The user ID.",
+          "type": "string"
+        },
+        "port": {
+          "description": "The port number.",
+          "type": "string"
+        },
+        "enforceSSL": {
+          "description": "This sets the ssl value of the server. Defaults to true if not set.",
+          "default": true,
+          "type": "boolean"
+        },
+        "userName": {
+          "description": "The username of the database user.",
+          "type": "string"
+        },
+        "workspaceSystemAssignedIdentity": {
+          "description": "If set to true, datastore support data access authenticated with Workspace MSI.",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "dataStoreType"
+      ]
     }
   }
 }
