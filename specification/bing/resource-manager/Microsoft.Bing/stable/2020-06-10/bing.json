@@ -1,0 +1,1427 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "BingManagementClient",
+    "description": "Bing Management Client",
+    "version": "2020-06-10"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Bing/accounts/{accountName}": {
+      "put": {
+        "tags": [
+          "BingAccounts"
+        ],
+        "description": "Create a Bing account. Accounts is a resource group-wide resource type. It holds keys for developers to access Bing APIs and is the resource type for billing.",
+        "operationId": "Accounts_Create",
+        "x-ms-examples": {
+          "Create Account": {
+            "$ref": "./examples/CreateAccount.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "name": "account",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/BingAccount"
+            },
+            "description": "The parameters of the account to create."
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The resource is successfully created or already existed.",
+            "schema": {
+              "$ref": "#/definitions/BingAccount"
+            }
+          },
+          "201": {
+            "description": "The resource is created and the operation will complete asynchronously",
+            "schema": {
+              "$ref": "#/definitions/BingAccount"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "BingAccounts"
+        ],
+        "description": "Updates a Bing account",
+        "operationId": "Accounts_Update",
+        "x-ms-examples": {
+          "Update Account": {
+            "$ref": "./examples/UpdateAccount.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "name": "account",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/BingAccount"
+            },
+            "description": "The parameters to update in the account."
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The update completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/BingAccount"
+            }
+          },
+          "202": {
+            "description": "The update was successfully started and will complete asynchronously.",
+            "schema": {
+              "$ref": "#/definitions/BingAccount"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed. If the resource group *or* resource does not exist, 404 (NotFound) should be returned.",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "BingAccounts"
+        ],
+        "description": "Deletes a Bing account from the resource group.",
+        "operationId": "Accounts_Delete",
+        "x-ms-examples": {
+          "Delete Account": {
+            "$ref": "./examples/DeleteAccount.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A 200 (OK) should be returned if the object exists and was deleted successfully;"
+          },
+          "204": {
+            "description": "a 204 (NoContent) should be used if the resource does not exist and the request is well formed."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "BingAccounts"
+        ],
+        "description": "Returns a Bing account specified by the parameters.",
+        "operationId": "Accounts_Get",
+        "x-ms-examples": {
+          "Get Account": {
+            "$ref": "./examples/GetAccount.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The resource provider should return 200 (OK) to indicate that the operation completed successfully.\nFor a detailed explanation of each field in the response body, please refer to the request body description in the PUT resource section. The only GET specific properties are \"name,\" \"type\" and \"id.\"\nField\tDescription\nKind\trequired.  String.\n\tThe API set for this API account, for example Bing.CustomSearch, Bing.Search.v7.\nsku.name\tRequired.\n\tThe pricing tier/plan of this API, for example: F0, S1, S2",
+            "schema": {
+              "$ref": "#/definitions/BingAccount"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed. If the resource does not exist, 404 (NotFound) should be returned.",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Bing/accounts": {
+      "get": {
+        "tags": [
+          "BingAccounts"
+        ],
+        "description": "Returns all the resources of a particular type belonging to a resource group",
+        "operationId": "Accounts_ListByResourceGroup",
+        "x-ms-examples": {
+          "List Accounts by Resource Group": {
+            "$ref": "./examples/ListAccountsByResourceGroup.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The resource provider should return 200 (OK) to indicate that the operation completed successfully. For other errors (e.g. internal errors) use the appropriate HTTP error code.\nThe nextLink field is expected to point to the URL the client should use to fetch the next page (per server side paging). This matches the OData guidelines for paged responses here. If a resource provider does not support paging, it should return the same body (JSON object with \"value\" property) but omit nextLink entirely (or set to null, *not* empty string) for future compatibility.\nThe nextLink should be implemented using following query parameters:\n· skipToken: opaque token that allows the resource provider to skip resources already enumerated. This value is defined and returned by the RP after first request via nextLink.\n· top: the optional client query parameter which defines the maximum number of records to be returned by the server.\nImplementation details:\n· NextLink may include all the query parameters (specifically OData $filter) used by the client in the first query. \n· Server may return less records than requested with nextLink. Returning zero records with NextLink is an acceptable response. \nClients must fetch records until the nextLink is not returned back / null. Clients should never rely on number of returned records to determinate if pagination is completed.",
+            "schema": {
+              "$ref": "#/definitions/BingAccountListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed. If the resource group does not exist, 404 (NotFound) will be returned.",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Bing/accounts": {
+      "get": {
+        "tags": [
+          "BingAccounts"
+        ],
+        "description": "Returns all the resources of a particular type belonging to a subscription.",
+        "operationId": "Accounts_List",
+        "x-ms-examples": {
+          "List Accounts by Subscription": {
+            "$ref": "./examples/ListAccountsBySubscription.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The resource provider should return 200 (OK) to indicate that the operation completed successfully. For other errors (e.g. internal errors) use the appropriate HTTP error code.\nThe nextLink field is expected to point to the URL the client should use to fetch the next page (per server side paging). This matches the OData guidelines for paged responses. If a resource provider does not support paging, it should return the same body but leave nextLink empty for future compatibility.\nFor a detailed explanation of each field in the response body, please refer to the request body description in the PUT resource section.",
+            "schema": {
+              "$ref": "#/definitions/BingAccountListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Bing/accounts/{accountName}/listKeys": {
+      "post": {
+        "tags": [
+          "BingAccounts"
+        ],
+        "operationId": "Accounts_ListKeys",
+        "description": "Gets the keys to access the Bing APIs for the specified Bing account.",
+        "x-ms-examples": {
+          "List Keys": {
+            "$ref": "./examples/ListKeys.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns with a response body containing the subscription keys for the resource: key1\nThe first API key for authentication when client calls the API endpoint.\n\nkey2\nThe second API key for authentication when client calls the API endpoint.",
+            "schema": {
+              "$ref": "#/definitions/BingAccountKeys"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Bing/accounts/{accountName}/regenerateKey": {
+      "post": {
+        "tags": [
+          "BingAccounts"
+        ],
+        "operationId": "Accounts_RegenerateKey",
+        "description": "Regenerates the specified account key for the specified Bing account.",
+        "x-ms-examples": {
+          "Regenerate Keys": {
+            "$ref": "./examples/RegenerateKey.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "x-ms-client-flatten": true,
+            "schema": {
+              "$ref": "#/definitions/RegenerateKeyParameters"
+            },
+            "description": "Regenerate key parameters."
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The key list is returned when the specified key is regenerated.",
+            "schema": {
+              "$ref": "#/definitions/BingAccountKeys"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Bing/skus": {
+      "get": {
+        "tags": [
+          "Skus"
+        ],
+        "operationId": "Skus_List",
+        "description": "Gets the list of Microsoft.Bing SKUs available for the subscription.",
+        "x-ms-examples": {
+          "List SKUs for Subscription": {
+            "$ref": "./examples/ListSkusForSubscription.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The operation was successful",
+            "schema": {
+              "$ref": "#/definitions/ResourceSkusResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed. If the resource does not exist, 404 (NotFound) will be returned.",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Bing/accounts/{accountName}/skus": {
+      "get": {
+        "tags": [
+          "BingAccounts",
+          "Skus"
+        ],
+        "description": "List available SKUs for the requested Bing account",
+        "x-ms-examples": {
+          "List SKUs for Account": {
+            "$ref": "./examples/ListSkusForAccount.json"
+          }
+        },
+        "operationId": "Accounts_ListSkus",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The resource provider should return 200 (OK) to indicate that the operation completed successfully.\nFor a detailed explanation of each field in the response body, please refer to the request body description in the PUT resource section. The only GET specific properties are \"name,\" \"type\" and \"id.\"\nField\tDescription\nsku\tRequired, object\n\tThe exact set of keys that define this sku. This matches the fields on the respective resource.\nsku.name\tRequired, string\n\tThe name of the SKU. This is typically a letter + number code, such as A0 or P3\nsku.tier\tRequired, string\n\tThe tier of this particular SKU. Typically one of:\n\t· Free\n\t· Basic\n\t· Standard\n\t· Premium\n",
+            "schema": {
+              "$ref": "#/definitions/BingAccountEnumerateSkusResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed. If the resource does not exist, 404 (NotFound) will be returned.",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Bing/accounts/{accountName}/usages": {
+      "get": {
+        "tags": [
+          "BingAccounts"
+        ],
+        "description": "List usages for the requested Bing account",
+        "x-ms-examples": {
+          "List Usages": {
+            "$ref": "./examples/ListUsages.json"
+          }
+        },
+        "operationId": "Accounts_ListUsages",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/usageFilterParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The usages for Bing account were retrieved successfully.",
+            "schema": {
+              "$ref": "#/definitions/UsagesResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed. If the resource does not exist, 404 (NotFound) will be returned.",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Bing/operations": {
+      "get": {
+        "tags": [
+          "Operations"
+        ],
+        "description": "Lists all the available Bing account operations.",
+        "operationId": "Operations_List",
+        "x-ms-examples": {
+          "List Operations": {
+            "$ref": "./examples/ListOperations.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The operation was successful.",
+            "schema": {
+              "$ref": "#/definitions/AvailableOperations"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed. If the resource does not exist, 404 (NotFound) will be returned.",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "deprecated": false,
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Bing/locations/{location}/checkSkuAvailability": {
+      "post": {
+        "tags": [
+          "Skus"
+        ],
+        "operationId": "CheckSkuAvailability",
+        "description": "Check whether specific SKUs are available for the location and",
+        "x-ms-examples": {
+          "Check SKU Availability": {
+            "$ref": "./examples/CheckSkuAvailability.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/locationParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "x-ms-client-flatten": true,
+            "schema": {
+              "$ref": "#/definitions/CheckSkuAvailabilityParameter"
+            },
+            "description": "The SKUs to check for availability in the specified subscription and location."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/CheckSkuAvailabilityResultList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed. If the resource does not exist, 404 (NotFound) will be returned.",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "BingAccountKind": {
+      "type": "string",
+      "description": "Required. Indicates the type of Bing account."
+    },
+    "Sku": {
+      "properties": {
+        "name": {
+          "$ref": "#/definitions/SkuName",
+          "description": "Gets or sets the SKU name. Required for account creation, optional for update."
+        },
+        "tier": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Gets the SKU tier. This is based on the SKU name.",
+          "enum": [
+            "Free",
+            "Standard",
+            "Premium"
+          ],
+          "x-ms-enum": {
+            "name": "SkuTier",
+            "modelAsString": false
+          }
+        }
+      },
+      "required": [
+        "name"
+      ],
+      "description": "The SKU of the Bing account."
+    },
+    "SkuName": {
+      "type": "string",
+      "description": "The name of SKU."
+    },
+    "BingAccount": {
+      "description": "Bing Account is an Azure resource representing the provisioned account, its type, location and SKU.",
+      "type": "object",
+      "properties": {
+        "etag": {
+          "type": "string",
+          "description": "Entity Tag",
+          "readOnly": true
+        },
+        "id": {
+          "type": "string",
+          "description": "The id of the created account",
+          "readOnly": true
+        },
+        "kind": {
+          "$ref": "#/definitions/BingAccountKind",
+          "description": "The Kind of the resource."
+        },
+        "location": {
+          "type": "string",
+          "description": "The location of the resource"
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the created account",
+          "readOnly": true
+        },
+        "properties": {
+          "$ref": "#/definitions/BingAccountProperties",
+          "description": "Properties of Bing account."
+        },
+        "sku": {
+          "$ref": "#/definitions/Sku",
+          "description": "The SKU of Bing account."
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Gets or sets a list of key-value pairs that describe the resource. These tags can be used in viewing and grouping this resource (across resource groups). A maximum of 15 tags can be provided for a resource. Each tag must have a key no greater than 128 characters and value no greater than 256 characters."
+        },
+        "type": {
+          "type": "string",
+          "description": "Resource type",
+          "readOnly": true
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "BingAccountListResult": {
+      "properties": {
+        "nextLink": {
+          "description": "The link used to get the next page of accounts.",
+          "type": "string"
+        },
+        "value": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/BingAccount"
+          },
+          "description": "Gets the list of Bing accounts and their properties."
+        }
+      },
+      "description": "The list of Bing accounts operation response."
+    },
+    "BingAccountProperties": {
+      "properties": {
+        "provisioningState": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Gets the status of the Bing account at the time the operation was called.",
+          "enum": [
+            "Creating",
+            "Moving",
+            "Deleting",
+            "Succeeded",
+            "Failed"
+          ],
+          "x-ms-enum": {
+            "name": "ProvisioningState",
+            "modelAsString": true
+          }
+        },
+        "endpoint": {
+          "type": "string",
+          "description": "Endpoint of the created account.",
+          "readOnly": true
+        },
+        "internalId": {
+          "type": "string",
+          "description": "An internal identifier.",
+          "readOnly": true
+        },
+        "statisticsEnabled": {
+          "type": "boolean",
+          "description": "(Bing Search Only) A flag indicating whether Bing Statistics is enabled."
+        }
+      },
+      "description": "Properties of Bing account."
+    },
+    "BingAccountKeys": {
+      "properties": {
+        "key1": {
+          "type": "string",
+          "description": "Gets the value of key 1."
+        },
+        "key2": {
+          "type": "string",
+          "description": "Gets the value of key 2."
+        }
+      },
+      "description": "The access keys for the Bing account."
+    },
+    "RegenerateKeyParameters": {
+      "properties": {
+        "keyName": {
+          "type": "string",
+          "description": "key name to generate (Key1|Key2)",
+          "enum": [
+            "Key1",
+            "Key2"
+          ],
+          "x-ms-enum": {
+            "name": "KeyName",
+            "modelAsString": false
+          }
+        }
+      },
+      "required": [
+        "keyName"
+      ],
+      "description": "Regenerate key parameters."
+    },
+    "BingAccountEnumerateSkusResult": {
+      "properties": {
+        "value": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/BingResourceAndSku"
+          },
+          "description": "Gets the list of Bing accounts and their properties."
+        }
+      },
+      "description": "The list of Bing accounts operation response."
+    },
+    "BingResourceAndSku": {
+      "properties": {
+        "resourceType": {
+          "type": "string",
+          "description": "Resource Namespace and Type"
+        },
+        "sku": {
+          "$ref": "#/definitions/Sku",
+          "description": "The SKU of Bing account."
+        }
+      },
+      "description": "Bing resource type and SKU."
+    },
+    "UsagesResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/Usage"
+          },
+          "description": "The list of usages for bing account."
+        }
+      },
+      "description": "The response to a list usage request."
+    },
+    "Usage": {
+      "properties": {
+        "unit": {
+          "description": "The unit of the metric.",
+          "$ref": "#/definitions/UnitType"
+        },
+        "name": {
+          "$ref": "#/definitions/MetricName",
+          "readOnly": true,
+          "description": "The name information for the metric."
+        },
+        "quotaPeriod": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The quota period used to summarize the usage values."
+        },
+        "limit": {
+          "type": "number",
+          "format": "double",
+          "readOnly": true,
+          "description": "Maximum value for this metric."
+        },
+        "currentValue": {
+          "type": "number",
+          "format": "double",
+          "readOnly": true,
+          "description": "Current value for this metric."
+        },
+        "nextResetTime": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Next reset time for current quota."
+        },
+        "status": {
+          "type": "string",
+          "description": "Bing account quota usage status.",
+          "enum": [
+            "Included",
+            "Blocked",
+            "InOverage",
+            "Unknown"
+          ],
+          "x-ms-enum": {
+            "name": "QuotaUsageStatus",
+            "modelAsString": true
+          }
+        }
+      },
+      "description": "The usage data for a usage request."
+    },
+    "MetricName": {
+      "properties": {
+        "value": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The name of the metric."
+        },
+        "localizedValue": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The friendly name of the metric."
+        }
+      },
+      "description": "A metric name."
+    },
+    "UnitType": {
+      "type": "string",
+      "readOnly": true,
+      "description": "The unit of the metric.",
+      "enum": [
+        "Count",
+        "Bytes",
+        "Seconds",
+        "Percent",
+        "CountPerSecond",
+        "BytesPerSecond",
+        "Milliseconds"
+      ],
+      "x-ms-enum": {
+        "modelAsString": true,
+        "name": "UnitType"
+      }
+    },
+    "AvailableOperations": {
+      "description": "Available operations of the service",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Collection of available operation details",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/OperationDetail"
+          }
+        },
+        "nextLink": {
+          "description": "URL client should use to fetch the next page (per server side paging).\r\nIt's null for now, added for future use.",
+          "type": "string"
+        }
+      }
+    },
+    "OperationDetail": {
+      "description": "Operation detail payload",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Name of the operation",
+          "type": "string"
+        },
+        "isDataAction": {
+          "description": "Indicates whether the operation is a data action",
+          "type": "boolean"
+        },
+        "display": {
+          "$ref": "#/definitions/OperationDisplay",
+          "description": "Display of the operation"
+        },
+        "origin": {
+          "description": "Origin of the operation",
+          "type": "string"
+        },
+        "properties": {
+          "$ref": "#/definitions/OperationProperties",
+          "description": "Properties of the operation"
+        }
+      }
+    },
+    "OperationDisplay": {
+      "description": "Operation display payload",
+      "type": "object",
+      "properties": {
+        "provider": {
+          "description": "Resource provider of the operation",
+          "type": "string"
+        },
+        "resource": {
+          "description": "Resource of the operation",
+          "type": "string"
+        },
+        "operation": {
+          "description": "Localized friendly name for the operation",
+          "type": "string"
+        },
+        "description": {
+          "description": "Localized friendly description for the operation",
+          "type": "string"
+        }
+      }
+    },
+    "OperationProperties": {
+      "description": "Extra Operation properties",
+      "type": "object",
+      "properties": {
+        "serviceSpecification": {
+          "$ref": "#/definitions/ServiceSpecification",
+          "description": "Service specifications of the operation"
+        }
+      }
+    },
+    "ServiceSpecification": {
+      "description": "Service specification payload",
+      "type": "object",
+      "properties": {
+        "logSpecifications": {
+          "description": "Specifications of the Log for Azure Monitoring",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/LogSpecification"
+          }
+        },
+        "metricSpecifications": {
+          "description": "Specifications of the Metrics for Azure Monitoring",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MetricSpecification"
+          }
+        }
+      }
+    },
+    "LogSpecification": {
+      "description": "Specifications of the Log for Azure Monitoring",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Name of the log",
+          "type": "string"
+        },
+        "displayName": {
+          "description": "Localized friendly display name of the log",
+          "type": "string"
+        },
+        "blobDuration": {
+          "description": "Blob duration of the log",
+          "type": "string"
+        }
+      }
+    },
+    "MetricSpecification": {
+      "description": "Specifications of the Metrics for Azure Monitoring",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Name of the metric",
+          "type": "string"
+        },
+        "displayName": {
+          "description": "Localized friendly display name of the metric",
+          "type": "string"
+        },
+        "displayDescription": {
+          "description": "Localized friendly description of the metric",
+          "type": "string"
+        },
+        "unit": {
+          "description": "Unit that makes sense for the metric",
+          "type": "string"
+        },
+        "category": {
+          "description": "Name of the metric category that the metric belongs to. A metric can only belong to a single category.",
+          "type": "string"
+        },
+        "aggregationType": {
+          "description": "Only provide one value for this field. Valid values: Average, Minimum, Maximum, Total, Count.",
+          "type": "string"
+        },
+        "availabilities": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Availability"
+          },
+          "description": "List of availability."
+        },
+        "supportedAggregationTypes": {
+          "description": "Supported aggregation types",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "supportedTimeGrainTypes": {
+          "description": "Supported time grain types",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "fillGapWithZero": {
+          "description": "Optional. If set to true, then zero will be returned for time duration where no metric is emitted/published.",
+          "type": "boolean"
+        },
+        "dimensions": {
+          "description": "Dimensions of the metric",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MetricDimension"
+          }
+        }
+      }
+    },
+    "MetricDimension": {
+      "description": "Specifications of the Dimension of metrics",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Name of the dimension",
+          "type": "string"
+        },
+        "displayName": {
+          "description": "Localized friendly display name of the dimension",
+          "type": "string"
+        }
+      }
+    },
+    "Availability": {
+      "description": "Availability of the metric.",
+      "properties": {
+        "timeGrain": {
+          "type": "string",
+          "description": "The time grain of the availability."
+        },
+        "retention": {
+          "type": "string",
+          "description": "The retention of the availability."
+        },
+        "blobDuration": {
+          "type": "string",
+          "description": "Duration of the availability blob."
+        }
+      }
+    },
+    "CheckSkuAvailabilityParameter": {
+      "description": "The SKUs to check for availability in the specified subscription and location",
+      "properties": {
+        "skus": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SkuName"
+          },
+          "description": "The SKU of the resource."
+        },
+        "kind": {
+          "$ref": "#/definitions/BingAccountKind",
+          "description": "The Kind of the resource."
+        },
+        "type": {
+          "type": "string",
+          "description": "The Type of the resource."
+        }
+      },
+      "required": [
+        "skus",
+        "kind",
+        "type"
+      ]
+    },
+    "CheckSkuAvailabilityResultList": {
+      "description": "Check SKU availability result list.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CheckSkuAvailabilityResult"
+          },
+          "description": "Check SKU availability result list."
+        }
+      }
+    },
+    "CheckSkuAvailabilityResult": {
+      "description": "Check SKU availability result.",
+      "properties": {
+        "kind": {
+          "$ref": "#/definitions/BingAccountKind",
+          "description": "The Kind of the resource."
+        },
+        "type": {
+          "type": "string",
+          "description": "The Type of the resource."
+        },
+        "skuName": {
+          "$ref": "#/definitions/SkuName",
+          "description": "The SKU of Bing account."
+        },
+        "skuAvailable": {
+          "type": "boolean",
+          "description": "Indicates the given SKU is available or not."
+        },
+        "reason": {
+          "type": "string",
+          "description": "Reason why the SKU is not available."
+        },
+        "message": {
+          "type": "string",
+          "description": "Additional error message."
+        }
+      }
+    },
+    "SkuCapability": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the SkuCapability."
+        },
+        "value": {
+          "type": "string",
+          "description": "The value of the SkuCapability."
+        }
+      },
+      "description": "SkuCapability indicates the capability of a certain feature."
+    },
+    "ResourceSkuRestrictions": {
+      "properties": {
+        "type": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The type of restrictions.",
+          "enum": [
+            "Location",
+            "Zone"
+          ],
+          "x-ms-enum": {
+            "name": "ResourceSkuRestrictionsType",
+            "modelAsString": false
+          }
+        },
+        "values": {
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "type": "string"
+          },
+          "description": "The value of restrictions. If the restriction type is set to location. This would be different locations where the SKU is restricted."
+        },
+        "restrictionInfo": {
+          "$ref": "#/definitions/ResourceSkuRestrictionInfo",
+          "readOnly": true,
+          "description": "Information about the restriction where the SKU cannot be used."
+        },
+        "reasonCode": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The reason for restriction.",
+          "enum": [
+            "QuotaId",
+            "NotAvailableForSubscription"
+          ],
+          "x-ms-enum": {
+            "name": "ResourceSkuRestrictionsReasonCode",
+            "modelAsString": true
+          }
+        }
+      },
+      "description": "Describes restrictions of a SKU."
+    },
+    "ResourceSkuLocationInfo": {
+      "properties": {
+        "location": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Location of the SKU"
+        },
+        "zones": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "List of availability zones where the SKU is supported."
+        },
+        "zoneDetails": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ResourceSkuZoneDetails"
+          },
+          "description": "Details of capabilities available to a SKU in specific zones."
+        }
+      }
+    },
+    "ResourceSkuZoneDetails": {
+      "properties": {
+        "name": {
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "type": "string"
+          },
+          "description": "The set of zones that the SKU is available in with the specified capabilities."
+        },
+        "capabilities": {
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/SkuCapability"
+          },
+          "description": "A list of capabilities that are available for the SKU in the specified list of zones."
+        }
+      },
+      "description": "Describes The zonal capabilities of a SKU."
+    },
+    "ResourceSku": {
+      "properties": {
+        "resourceType": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The type of resource the SKU applies to."
+        },
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The name of SKU."
+        },
+        "tier": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Specifies the tier of Bing account."
+        },
+        "kind": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The Kind of resources that are supported in this SKU."
+        },
+        "locations": {
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "type": "string"
+          },
+          "description": "The set of locations that the SKU is available."
+        },
+        "locationInfo": {
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/ResourceSkuLocationInfo"
+          },
+          "description": "A list of locations and availability zones in those locations where the SKU is available."
+        },
+        "restrictions": {
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/ResourceSkuRestrictions"
+          },
+          "description": "The restrictions because of which SKU cannot be used. This is empty if there are no restrictions."
+        }
+      },
+      "description": "Describes an available Bing SKU."
+    },
+    "ResourceSkuRestrictionInfo": {
+      "properties": {
+        "locations": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Locations where the SKU is restricted"
+        },
+        "zones": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "List of availability zones where the SKU is restricted."
+        }
+      },
+      "description": "Information about the restriction where the SKU cannot be used."
+    },
+    "ResourceSkusResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ResourceSku"
+          },
+          "description": "The list of SKUs available for the subscription."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The URI to fetch the next page of SKUs."
+        }
+      },
+      "required": [
+        "value"
+      ],
+      "description": "The list SKUs operation response."
+    },
+    "Error": {
+      "x-ms-external": true,
+      "properties": {
+        "error": {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ErrorResponse"
+        }
+      },
+      "description": "An error response from the service."
+    }
+  },
+  "parameters": {
+    "accountNameParameter": {
+      "name": "accountName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "maxLength": 64,
+      "minLength": 2,
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$",
+      "description": "The name of the Bing account.",
+      "x-ms-parameter-location": "method"
+    },
+    "locationParameter": {
+      "name": "location",
+      "in": "path",
+      "description": "Resource location.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "usageFilterParameter": {
+      "name": "$filter",
+      "in": "query",
+      "required": false,
+      "type": "string",
+      "description": "An OData filter expression that describes a subset of usages to return. The supported parameter is name.value (name of the metric, can have an or of multiple names).",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}

@@ -1,48 +1,59 @@
-# Microsoft.Bing
-
-Microsoft.Bing is used to replace the cognitive services.
+# Bing Resource Provider
 
 > see https://aka.ms/autorest
 
-This is the AutoRest configuration file for Bing.
+This is the AutoRest configuration file for the Bing Resource Provider.
 
+# Notice
+Microsoft will use data you send to Bing Search Services to improve Microsoft products and services. Where you send personal data to this service, you are responsible for obtaining sufficient consent from the data subjects. The Data Protection Terms in the Online Services Terms do not apply to Bing Search Services. 
+
+Please refer to the [Search Services Terms](https://www.microsoft.com/en-us/bing/apis/legal) for details.
 
 ---
+
 ## Getting Started
-To build the SDK for Bing Apis, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
+To build the SDK for the Bing RP, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
 
 > `autorest`
 
 To see additional help and options, run:
 
 > `autorest --help`
+
 ---
 
 ## Configuration
 
-
 ### Basic Information
-These are the global settings for the Bing API.
+These are the global settings for the Bing RP.
 
 ``` yaml
 openapi-type: arm
-tag: package-2020-06
+openapi-subtype: rpaas
+tag: package-2020-06-10
 ```
 
+### Tag: package-2020-06-10
 
-### Tag: package-2020-06
+These settings apply only when `--tag=package-2020-06-10` is specified on the command line.
 
-These settings apply only when `--tag=package-2020-06` is specified on the command line.
+``` yaml $(tag) == 'package-2020-06-10'
+input-file:
+- Microsoft.Bing/stable/2020-06-10/bing.json
+```
 
-``` yaml $(tag) == 'package-2020-06-preview'
+### Tag: package-2020-06-10-preview
+
+These settings apply only when `--tag=package-2020-06-10-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2020-06-10-preview'
 input-file:
 - Microsoft.Bing/preview/2020-06-10-preview/bing.json
 ```
 
-
 ---
-# Code Generation
 
+# Code Generation
 
 ## Swagger to SDK
 
@@ -52,45 +63,47 @@ This is not used by Autorest itself.
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
   - repo: azure-sdk-for-net
-  - repo: azure-sdk-for-python 
+  - repo: azure-sdk-for-python
   - repo: azure-sdk-for-java
-  - repo: azure-sdk-for-go     
-  - repo: azure-sdk-for-js     (Todo)
-  - repo: azure-sdk-for-node   (Todo)
-  - repo: azure-sdk-for-ruby   (Todo)
+  - repo: azure-sdk-for-go
+  - repo: azure-sdk-for-js
+  - repo: azure-sdk-for-node
+  - repo: azure-sdk-for-ruby
     after_scripts:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_bing']
 ```
 
-
 ## C#
 
-These settings apply only when `--csharp` is specified on the command line.
-Please also specify `--csharp-sdks-folder=<path to "SDKs" directory of your azure-sdk-for-net clone>`.
+See configuration in [readme.csharp.md](./readme.csharp.md)
 
-``` yaml $(csharp)
-csharp:
-  azure-arm: true
-  license-header: MICROSOFT_MIT_NO_VERSION
-  namespace: Microsoft.Azure.Management.Bing
-  output-folder: $(csharp-sdks-folder)/Bing/Microsoft.Azure.Management.Bing/src/Generated
-  clear-output-folder: true
-```
+## Go
+
+See configuration in [readme.go.md](./readme.go.md)
 
 ## Java
 
-These settings apply only when `--java` is specified on the command line.
-Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-libraries-for-java clone>`.
+See configuration in [readme.java.md](./readme.java.md)
 
-``` yaml $(java)
-azure-arm: true
-fluent: true
-namespace: com.microsoft.azure.management.bing
-license-header: MICROSOFT_MIT_NO_CODEGEN
-payload-flattening-threshold: 1
-output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-bing
-```
+## Node.js
 
+See configuration in [readme.nodejs.md](./readme.nodejs.md)
+
+## Python
+
+See configuration in [readme.python.md](./readme.python.md)
+
+## Ruby
+
+See configuration in [readme.ruby.md](./readme.ruby.md)
+
+## TypeScript
+
+See configuration in [readme.typescript.md](./readme.typescript.md)
+
+## AzureResourceSchema
+
+See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
 
 ## Multi-API/Profile support for AutoRest v3 generators 
 
@@ -104,6 +117,7 @@ require: $(this-folder)/../../../profiles/readme.md
 
 # all the input files across all versions
 input-file:
+  - $(this-folder)/Microsoft.Bing/stable/2020-06-10/bing.json
   - $(this-folder)/Microsoft.Bing/preview/2020-06-10-preview/bing.json
 
 ```
