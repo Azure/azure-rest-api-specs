@@ -54,7 +54,7 @@
           "201": {
             "description": "Success",
             "schema": {
-              "$ref": "#/definitions/NonPagedModelDataCollection"
+              "$ref": "#/definitions/NonPagedDigitalTwinsModelDataCollection"
             }
           },
           "default": {
@@ -111,7 +111,7 @@
           "200": {
             "description": "Success",
             "schema": {
-              "$ref": "#/definitions/PagedModelDataCollection"
+              "$ref": "#/definitions/PagedDigitalTwinsModelDataCollection"
             }
           },
           "default": {
@@ -156,7 +156,7 @@
           "200": {
             "description": "Success",
             "schema": {
-              "$ref": "#/definitions/ModelData"
+              "$ref": "#/definitions/DigitalTwinsModelData"
             }
           },
           "default": {
@@ -1263,22 +1263,22 @@
         }
       }
     },
-    "NonPagedModelDataCollection": {
-      "description": "A collection of ModelData objects.",
+    "NonPagedDigitalTwinsModelDataCollection": {
+      "description": "A collection of DigitalTwinsModelData objects.",
       "type": "array",
       "items": {
-        "$ref": "#/definitions/ModelData"
+        "$ref": "#/definitions/DigitalTwinsModelData"
       }
     },
-    "PagedModelDataCollection": {
-      "description": "A collection of ModelData objects.",
+    "PagedDigitalTwinsModelDataCollection": {
+      "description": "A collection of DigitalTwinsModelData objects.",
       "type": "object",
       "properties": {
         "value": {
-          "description": "The ModelData objects.",
+          "description": "The DigitalTwinsModelData objects.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/ModelData"
+            "$ref": "#/definitions/DigitalTwinsModelData"
           }
         },
         "nextLink": {
@@ -1287,7 +1287,7 @@
         }
       }
     },
-    "ModelData": {
+    "DigitalTwinsModelData": {
       "description": "A model definition and metadata for that model.",
       "required": [
         "id"
