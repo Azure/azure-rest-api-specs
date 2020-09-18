@@ -532,11 +532,6 @@
                             "format": "date-time-rfc1123",
                             "description": "Returns the date and time the share was last modified. Any operation that modifies the share or its properties updates the last modified time. Operations on files do not affect the last modified time of the share."
                           },
-                            "x-ms-lease-time": {
-                                "x-ms-client-name": "LeaseTime",
-                                "type": "integer",
-                                "description": "Approximate time remaining in the lease period, in seconds."
-                            },
                             "x-ms-lease-id": {
                                 "x-ms-client-name": "LeaseId",
                                 "type": "string",
@@ -653,11 +648,6 @@
                             "format": "date-time-rfc1123",
                             "description": "Returns the date and time the share was last modified. Any operation that modifies the share or its properties updates the last modified time. Operations on files do not affect the last modified time of the share."
                           },
-                            "x-ms-lease-time": {
-                                "x-ms-client-name": "LeaseTime",
-                                "type": "integer",
-                                "description": "Approximate time remaining in the lease period, in seconds."
-                            },
                             "x-ms-client-request-id": {
                                 "x-ms-client-name": "ClientRequestId",
                                 "type": "string",
@@ -772,11 +762,6 @@
                             "format": "date-time-rfc1123",
                             "description": "Returns the date and time the share was last modified. Any operation that modifies the share or its properties updates the last modified time. Operations on files do not affect the last modified time of the share."
                           },
-                            "x-ms-lease-time": {
-                                "x-ms-client-name": "LeaseTime",
-                                "type": "integer",
-                                "description": "Approximate time remaining in the lease period, in seconds."
-                            },
                             "x-ms-lease-id": {
                                 "x-ms-client-name": "LeaseId",
                                 "type": "string",
@@ -893,11 +878,6 @@
                             "format": "date-time-rfc1123",
                             "description": "Returns the date and time the share was last modified. Any operation that modifies the share or its properties updates the last modified time. Operations on files do not affect the last modified time of the share."
                           },
-                            "x-ms-lease-time": {
-                                "x-ms-client-name": "LeaseTime",
-                                "type": "integer",
-                                "description": "Approximate time remaining in the lease period, in seconds."
-                            },
                             "x-ms-lease-id": {
                                 "x-ms-client-name": "LeaseId",
                                 "type": "string",
@@ -5305,13 +5285,13 @@
                 "name": "Range"
             }
         },
-        "ProtocolSettings": {
+        "ShareProtocolSettings": {
             "description": "Protocol settings",
             "type": "object",
             "properties": {
-                "SmbSettings": {
+                "Smb": {
                     "description": "Settings for SMB protocol.",
-                    "$ref": "#/definitions/SmbSettings",
+                    "$ref": "#/definitions/ShareSmbSettings",
                     "xml": {
                         "name": "SMB"
                     }
@@ -5482,7 +5462,7 @@
                 "name": "SignedIdentifiers"
             }
         },
-        "SmbSettings": {
+        "ShareSmbSettings": {
             "description": "Settings for SMB protocol.",
             "type": "object",
             "properties": {
@@ -5514,9 +5494,12 @@
                         "wrapped": true
                     }
                 },
-                "ProtocolSettings": {
+                "Protocol": {
                     "description": "Protocol settings",
-                    "$ref":"#/definitions/ProtocolSettings"
+                    "$ref":"#/definitions/ShareProtocolSettings",
+                    "xml": {
+                        "name": "ProtocolSettings"
+                    }
                 }
             }
         },
