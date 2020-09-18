@@ -4349,6 +4349,11 @@
           "$ref": "#/definitions/ServerEndpointOfflineDataTransferState",
           "description": "Offline Data Transfer State",
           "readOnly": true
+        },
+        "backgroundDataDownloadActivity": {
+          "$ref": "#/definitions/ServerEndpointBackgroundDataDownloadActivity",
+          "description": "Background data download activity",
+          "readOnly": true
         }
       }
     },
@@ -4402,6 +4407,11 @@
           },
           "description": "Array of per-item errors coming from the last sync session.",
           "readOnly": true
+        },
+        "lastSyncMode": {
+          "$ref": "#/definitions/ServerEndpointSyncMode",
+          "description": "Sync mode",
+          "readOnly": true
         }
       }
     },
@@ -4449,6 +4459,11 @@
           "minimum": 0,
           "description": "Total bytes (if available)",
           "readOnly": true
+        },
+        "syncMode": {
+          "$ref": "#/definitions/ServerEndpointSyncMode",
+          "description": "Sync mode",
+          "readOnly": true
         }
       }
     },
@@ -4474,6 +4489,33 @@
           "format": "int64",
           "minimum": 0,
           "description": "Count of transient files not syncing with the specified error code",
+          "readOnly": true
+        }
+      }
+    },
+    "ServerEndpointBackgroundDataDownloadActivity": {
+      "type": "object",
+      "description": "Background data download activity object",
+      "properties": {
+        "timestamp": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Timestamp when properties were updated",
+          "readOnly": true
+        },
+        "percentProgress": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0,
+          "maximum": 100,
+          "description": "Progress percentage",
+          "readOnly": true
+        },
+        "downloadedBytes": {
+          "type": "integer",
+          "format": "int64",
+          "minimum": 0,
+          "description": "Running count of bytes downloaded",
           "readOnly": true
         }
       }
