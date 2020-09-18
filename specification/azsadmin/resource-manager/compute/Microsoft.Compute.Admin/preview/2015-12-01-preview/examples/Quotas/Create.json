@@ -1,0 +1,33 @@
+{
+  "parameters": {
+    "subscriptionId": "20ff7fc3-e762-44dd-bd96-b71116dcdc23",
+    "location": "local",
+    "quotaName": "testQuotaCreateUpdateDelete",
+    "api-version": "2015-12-01-preview",
+    "newQuota": {
+      "properties": {
+        "availabilitySetCount": 2,
+        "coresLimit": 2,
+        "virtualMachineCount": 2,
+        "vmScaleSetCount": 2
+      },
+      "location": "local"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/8158498d-27b1-4ccf-9aa1-de0f925731e6/providers/Microsoft.Compute.Admin/locations/local/quotas/testQuotaCreateUpdateDelete",
+        "name": "testQuotaCreateUpdateDelete",
+        "type": "Microsoft.Compute.Admin/quotas",
+        "location": "local",
+        "properties": {
+          "virtualMachineCount": 2,
+          "coresLimit": 2,
+          "availabilitySetCount": 2,
+          "vmScaleSetCount": 2
+        }
+      }
+    }
+  }
+}

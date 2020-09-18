@@ -1,0 +1,249 @@
+{
+  "parameters": {
+    "subscriptionId": "subid",
+    "api-version": "2018-04-01",
+    "resourceGroupName": "demo",
+    "containerGroupName": "demo1",
+    "containerGroup": {
+      "id": "/subscriptions/subid/resourceGroups/demo/providers/Microsoft.ContainerInstance/containerGroups/demo1",
+      "location": "west us",
+      "name": "demo1",
+      "properties": {
+        "containers": [
+          {
+            "name": "demo1",
+            "properties": {
+              "command": [],
+              "environmentVariables": [],
+              "image": "nginx",
+              "ports": [
+                {
+                  "port": 80
+                }
+              ],
+              "resources": {
+                "requests": {
+                  "cpu": 1,
+                  "memoryInGB": 1.5
+                }
+              },
+              "volumeMounts": [
+                {
+                  "name": "volume1",
+                  "mountPath": "/mnt/volume1",
+                  "readOnly": false
+                },
+                {
+                  "name": "volume2",
+                  "mountPath": "/mnt/volume2",
+                  "readOnly": false
+                },
+                {
+                  "name": "volume3",
+                  "mountPath": "/mnt/volume3",
+                  "readOnly": true
+                }
+              ]
+            }
+          }
+        ],
+        "imageRegistryCredentials": [],
+        "ipAddress": {
+          "ports": [
+            {
+              "protocol": "TCP",
+              "port": 80
+            }
+          ],
+          "type": "Public",
+          "dnsNameLabel": "dnsnamelabel1"
+        },
+        "osType": "Linux",
+        "volumes": [
+          {
+            "name": "volume1",
+            "azureFile": {
+              "shareName": "shareName",
+              "storageAccountName": "accountName",
+              "storageAccountKey": "accountKey"
+            }
+          },
+          {
+            "name": "volume2",
+            "emptyDir": {}
+          },
+          {
+            "name": "volume3",
+            "secret": {
+              "secretKey1": "SecretValue1InBase64",
+              "secretKey2": "SecretValue2InBase64"
+            }
+          }
+        ]
+      },
+      "type": "Microsoft.ContainerInstance/containerGroups"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/subid/resourceGroups/demo/providers/Microsoft.ContainerInstance/containerGroups/demo1",
+        "location": "WestUs",
+        "name": "demo1",
+        "properties": {
+          "containers": [
+            {
+              "name": "demo1",
+              "properties": {
+                "command": [],
+                "environmentVariables": [],
+                "image": "nginx",
+                "ports": [
+                  {
+                    "port": 80
+                  }
+                ],
+                "resources": {
+                  "requests": {
+                    "cpu": 1,
+                    "memoryInGB": 1.5
+                  }
+                },
+                "volumeMounts": [
+                  {
+                    "name": "volume1",
+                    "mountPath": "/mnt/volume1",
+                    "readOnly": false
+                  },
+                  {
+                    "name": "volume2",
+                    "mountPath": "/mnt/volume2",
+                    "readOnly": false
+                  },
+                  {
+                    "name": "volume3",
+                    "mountPath": "/mnt/volume3",
+                    "readOnly": true
+                  }
+                ]
+              }
+            }
+          ],
+          "imageRegistryCredentials": [],
+          "ipAddress": {
+            "ip": "10.0.0.1",
+            "ports": [
+              {
+                "port": 80,
+                "protocol": "TCP"
+              }
+            ],
+            "type": "Public",
+            "dnsNameLabel": "dnsnamelabel1",
+            "fqdn": "dnsnamelabel1.azure-container.io"
+          },
+          "osType": "Linux",
+          "provisioningState": "Succeeded",
+          "volumes": [
+            {
+              "name": "volume1",
+              "azureFile": {
+                "shareName": "shareName",
+                "storageAccountName": "accountName"
+              }
+            },
+            {
+              "name": "volume2",
+              "emptyDir": {}
+            },
+            {
+              "name": "volume3",
+              "secret": {}
+            }
+          ]
+        },
+        "type": "Microsoft.ContainerInstance/containerGroups"
+      }
+    },
+    "201": {
+      "body": {
+        "id": "/subscriptions/subid/resourceGroups/demo/providers/Microsoft.ContainerInstance/containerGroups/demo1",
+        "location": "WestUs",
+        "name": "demo1",
+        "properties": {
+          "containers": [
+            {
+              "name": "demo1",
+              "properties": {
+                "command": [],
+                "environmentVariables": [],
+                "image": "nginx",
+                "ports": [
+                  {
+                    "port": 80
+                  }
+                ],
+                "resources": {
+                  "requests": {
+                    "cpu": 1,
+                    "memoryInGB": 1.5
+                  }
+                },
+                "volumeMounts": [
+                  {
+                    "name": "volume1",
+                    "mountPath": "/mnt/volume1",
+                    "readOnly": false
+                  },
+                  {
+                    "name": "volume2",
+                    "mountPath": "/mnt/volume2",
+                    "readOnly": false
+                  },
+                  {
+                    "name": "volume3",
+                    "mountPath": "/mnt/volume3",
+                    "readOnly": true
+                  }
+                ]
+              }
+            }
+          ],
+          "imageRegistryCredentials": [],
+          "ipAddress": {
+            "ip": "10.0.0.1",
+            "ports": [
+              {
+                "port": 80,
+                "protocol": "TCP"
+              }
+            ],
+            "type": "Public",
+            "dnsNameLabel": "dnsnamelabel1",
+            "fqdn": "dnsnamelabel1.azure-container.io"
+          },
+          "osType": "Linux",
+          "provisioningState": "Succeeded",
+          "volumes": [
+            {
+              "name": "volume1",
+              "azureFile": {
+                "shareName": "shareName",
+                "storageAccountName": "accountName"
+              }
+            },
+            {
+              "name": "volume2",
+              "emptyDir": {}
+            },
+            {
+              "name": "volume3",
+              "secret": {}
+            }
+          ]
+        },
+        "type": "Microsoft.ContainerInstance/containerGroups"
+      }
+    }
+  }
+}

@@ -97,6 +97,52 @@
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/loggers/{loggerid}": {
+      "head": {
+        "tags": [
+          "Loggers"
+        ],
+        "operationId": "Logger_GetEntityTag",
+        "description": "Gets the entity state (Etag) version of the logger specified by its identifier.",
+        "x-ms-examples": {
+          "ApiManagementHeadLogger": {
+            "$ref": "./examples/ApiManagementHeadLogger.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "./apimanagement.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/LoggerIdParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Specified logger entity exists and current entity state version is present in the ETag header.",
+            "headers": {
+              "ETag": {
+                "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./apimanagement.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
       "get": {
         "tags": [
           "Loggers"
@@ -153,8 +199,11 @@
         "operationId": "Logger_CreateOrUpdate",
         "description": "Creates or Updates a logger.",
         "x-ms-examples": {
-          "ApiManagementCreateLogger": {
-            "$ref": "./examples/ApiManagementCreateLogger.json"
+          "ApiManagementCreateEHLogger": {
+            "$ref": "./examples/ApiManagementCreateEHLogger.json"
+          },
+          "ApiManagementCreateAILogger": {
+            "$ref": "./examples/ApiManagementCreateAILogger.json"
           }
         },
         "parameters": [
@@ -352,7 +401,8 @@
           "type": "string",
           "description": "Logger type.",
           "enum": [
-            "azureEventHub"
+            "azureEventHub",
+            "applicationInsights"
           ],
           "x-ms-enum": {
             "name": "LoggerType",
@@ -361,6 +411,10 @@
               {
                 "value": "azureEventHub",
                 "description": "Azure Event Hub as log destination."
+              },
+              {
+                "value": "applicationInsights",
+                "description": "Azure Application Insights as log destination."
               }
             ]
           }
@@ -375,7 +429,7 @@
           "additionalProperties": {
             "type": "string"
           },
-          "description": "The name and SendRule connection string of the event hub.",
+          "description": "The name and SendRule connection string of the event hub for azureEventHub logger.\nInstrumentation key for applicationInsights logger.",
           "example": {
             "name": "apim",
             "connectionString": "Endpoint=sb://contoso-ns.servicebus.windows.net/;SharedAccessKeyName=Sender;SharedAccessKey=..."
@@ -384,6 +438,16 @@
         "isBuffered": {
           "type": "boolean",
           "description": "Whether records are buffered in the logger before publishing. Default is assumed to be true."
+        },
+        "sampling": {
+          "$ref": "#/definitions/LoggerSamplingContract",
+          "description": "Sampling settings for an ApplicationInsights logger.",
+          "example": {
+            "sampling": {
+              "samplingType": "adaptive",
+              "evaluationInterval": "PT2M"
+            }
+          }
         }
       },
       "required": [
@@ -408,7 +472,8 @@
           "type": "string",
           "description": "Logger type.",
           "enum": [
-            "azureEventHub"
+            "azureEventHub",
+            "applicationInsights"
           ],
           "x-ms-enum": {
             "name": "LoggerType",
@@ -417,6 +482,10 @@
               {
                 "value": "azureEventHub",
                 "description": "Azure Event Hub as log destination."
+              },
+              {
+                "value": "applicationInsights",
+                "description": "Azure Application Insights as log destination."
               }
             ]
           }
@@ -438,6 +507,94 @@
         }
       },
       "description": "Parameters supplied to the Update Logger operation."
+    },
+    "LoggerSamplingContract": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/LoggerSamplingProperties",
+          "description": "Sampling settings entity contract properties."
+        }
+      },
+      "description": "Sampling settings contract."
+    },
+    "LoggerSamplingProperties": {
+      "properties": {
+        "samplingType": {
+          "type": "string",
+          "description": "Sampling type.",
+          "enum": [
+            "fixed",
+            "adaptive"
+          ],
+          "x-ms-enum": {
+            "name": "SamplingType",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "fixed",
+                "description": "Fixed-rate sampling."
+              },
+              {
+                "value": "adaptive",
+                "description": "Sampling with a dynamically adjustable rate."
+              }
+            ]
+          }
+        },
+        "percentage": {
+          "type": "number",
+          "format": "double",
+          "description": "Rate of sampling for fixed-rate sampling."
+        },
+        "maxTelemetryItemsPerSecond": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Target rate of telemetry items per second."
+        },
+        "evaluationInterval": {
+          "type": "string",
+          "format": "duration",
+          "description": "Rate re-evaluation interval in ISO8601 format.",
+          "minLength": 1,
+          "maxLength": 2000
+        },
+        "percentageDecreaseTimeout": {
+          "type": "string",
+          "format": "duration",
+          "description": "Duration in ISO8601 format after which it's allowed to lower the sampling rate.",
+          "minLength": 1,
+          "maxLength": 2000
+        },
+        "percentageIncreaseTimeout": {
+          "type": "string",
+          "format": "duration",
+          "description": "Duration in ISO8601 format after which it's allowed to increase the sampling rate.",
+          "minLength": 1,
+          "maxLength": 2000
+        },
+        "minPercentage": {
+          "type": "number",
+          "format": "double",
+          "description": "Minimum allowed rate of sampling."
+        },
+        "maxPercentage": {
+          "type": "number",
+          "format": "double",
+          "description": "Maximum allowed rate of sampling."
+        },
+        "movingAverageRatio": {
+          "type": "number",
+          "format": "double",
+          "description": "Moving average ration assigned to most recent value."
+        },
+        "initialPercentage": {
+          "type": "number",
+          "format": "double",
+          "description": "Initial sampling rate."
+        }
+      },
+      "description": "Sampling settings for an ApplicationInsights logger."
     }
   },
   "parameters": {

@@ -93,6 +93,40 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ServiceBus/CheckNameSpaceAvailability": {
+      "post": {
+        "tags": [
+          "Namespaces"
+        ],
+        "operationId": "Namespaces_CheckNameSpaceAvailability",
+        "description": "Check the give namespace name availability.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CheckNameAvailability"
+            },
+            "description": "Parameters to check availability of the given namespace name"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "check availability returned successfully.",
+            "schema": {
+              "$ref": "#/definitions/CheckNameAvailabilityResult"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.ServiceBus/namespaces": {
       "get": {
         "tags": [
@@ -365,6 +399,41 @@
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
+      },
+      "post": {
+        "tags": [
+          "Namespaces"
+        ],
+        "operationId": "Namespaces_ListPostAuthorizationRules",
+        "description": "Gets the authorization rules for a namespace.",
+        "externalDocs": {
+          "url": "https://msdn.microsoft.com/en-us/library/azure/mt639376.aspx"
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/namespaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Namespace authorization rules returned successfully.",
+            "schema": {
+              "$ref": "#/definitions/SharedAccessAuthorizationRuleListResult"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceBus/namespaces/{namespaceName}/AuthorizationRules/{authorizationRuleName}": {
@@ -416,10 +485,10 @@
         "tags": [
           "Namespaces"
         ],
-        "operationId": "Namespaces_UpdateAuthorizationRule",
-        "description": "Creates or updates an authorization rule for a namespace.",
+        "operationId": "Namespaces_PostAuthorizationRule",
+        "description": "Gets an authorization rule for a namespace by rule name.",
         "externalDocs": {
-          "url": "https://msdn.microsoft.com/en-us/library/azure/mt639410.aspx"
+          "url": "https://msdn.microsoft.com/en-us/library/azure/mt639392.aspx"
         },
         "parameters": [
           {
@@ -432,15 +501,6 @@
             "$ref": "#/parameters/authorizationRuleNameParameter"
           },
           {
-            "name": "parameters",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/SharedAccessAuthorizationRuleCreateOrUpdateParameters"
-            },
-            "description": "The shared access authorization rule."
-          },
-          {
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
@@ -449,7 +509,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Namespace authorization rule updated.",
+            "description": "Namespace authorization rule returned successfully.",
             "schema": {
               "$ref": "#/definitions/SharedAccessAuthorizationRuleResource"
             }
@@ -521,7 +581,7 @@
           "200": {
             "description": "Namespace authorization rule returned successfully.",
             "schema": {
-              "$ref": "#/definitions/SharedAccessAuthorizationRuleResource"
+              "$ref": "#/definitions/SharedAccessAuthorizationRuleGetResource"
             }
           }
         }
@@ -769,8 +829,11 @@
         "tags": [
           "Queues"
         ],
-        "operationId": "Queues_UpdateAuthorizationRule",
-        "description": "Creates an authorization rule for a queue.",
+        "operationId": "Queues_PostAuthorizationRule",
+        "description": "Gets an authorization rule for a queue by rule name.",
+        "externalDocs": {
+          "url": "https://msdn.microsoft.com/en-us/library/azure/mt705611.aspx"
+        },
         "parameters": [
           {
             "$ref": "#/parameters/resourceGroupNameParameter"
@@ -785,15 +848,6 @@
             "$ref": "#/parameters/authorizationRuleNameParameter"
           },
           {
-            "name": "parameters",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/SharedAccessAuthorizationRuleCreateOrUpdateParameters"
-            },
-            "description": "The shared access authorization rule."
-          },
-          {
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
@@ -802,7 +856,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Authorization rule successfully created.",
+            "description": "Authorization rule successfully returned.",
             "schema": {
               "$ref": "#/definitions/SharedAccessAuthorizationRuleResource"
             }
@@ -880,7 +934,7 @@
           "200": {
             "description": "Authorization rule successfully returned.",
             "schema": {
-              "$ref": "#/definitions/SharedAccessAuthorizationRuleResource"
+              "$ref": "#/definitions/SharedAccessAuthorizationRuleGetResource"
             }
           }
         }
@@ -1085,7 +1139,7 @@
           "Topics"
         ],
         "operationId": "Topics_CreateOrUpdateAuthorizationRule",
-        "description": "Creates an authorizatio rule for the specified topic.",
+        "description": "Creates an authorization rule for the specified topic.",
         "externalDocs": {
           "url": "https://msdn.microsoft.com/en-us/library/azure/mt720678.aspx"
         },
@@ -1131,10 +1185,10 @@
         "tags": [
           "Topics"
         ],
-        "operationId": "Topics_UpdateAuthorizationRule",
-        "description": "Creates an authorizatio rule for the specified topic.",
+        "operationId": "Topics_PostAuthorizationRule",
+        "description": "Returns the specified authorization rule.",
         "externalDocs": {
-          "url": "https://msdn.microsoft.com/en-us/library/azure/mt720678.aspx"
+          "url": "https://msdn.microsoft.com/en-us/library/azure/mt720676.aspx"
         },
         "parameters": [
           {
@@ -1150,15 +1204,6 @@
             "$ref": "#/parameters/authorizationRuleNameParameter"
           },
           {
-            "name": "parameters",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/SharedAccessAuthorizationRuleCreateOrUpdateParameters"
-            },
-            "description": "The shared access authorization rule."
-          },
-          {
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
@@ -1167,7 +1212,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Topic authorization rule successfully created.",
+            "description": "Topic authorization rule returned successfully.",
             "schema": {
               "$ref": "#/definitions/SharedAccessAuthorizationRuleResource"
             }
@@ -1207,7 +1252,7 @@
           "200": {
             "description": "Topic authorization rule returned successfully.",
             "schema": {
-              "$ref": "#/definitions/SharedAccessAuthorizationRuleResource"
+              "$ref": "#/definitions/SharedAccessAuthorizationRuleGetResource"
             }
           }
         }
@@ -1492,7 +1537,7 @@
         }
       }
     },
-	"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceBus/namespaces/{namespaceName}/eventhubs/{eventhubName}/authorizationRules": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceBus/namespaces/{namespaceName}/eventhubs/{eventhubName}/authorizationRules": {
       "get": {
         "tags": [
           "EventHub"
@@ -1901,6 +1946,44 @@
       ],
       "description": "AuthorizationRule properties."
     },
+    "SharedAccessAuthorizationRuleGetResource": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/SharedAccessAuthorizationRuleGetProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "description": "Description of a namespace authorization rule."
+    },
+    "SharedAccessAuthorizationRuleGetProperties": {
+      "properties": {
+        "rights": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "Manage",
+              "Send",
+              "Listen"
+            ],
+            "x-ms-enum": {
+              "name": "AccessRights",
+              "modelAsString": false
+            }
+          },
+          "description": "The rights associated with the rule."
+        }
+      },
+      "required": [
+        "rights"
+      ],
+      "description": "SharedAccessAuthorizationRule properties."
+    },
     "QueueCreateOrUpdateParameters": {
       "properties": {
         "name": {
@@ -2188,10 +2271,6 @@
           "type": "boolean",
           "description": "Value that indicates whether the topic to be partitioned across multiple message brokers is enabled."
         },
-        "enableSubscriptionPartitioning": {
-          "type": "boolean",
-          "description": "Value that indicates whether partitioning is enabled or disabled."
-        },
         "filteringMessagesBeforePublishing": {
           "type": "boolean",
           "description": "Whether messages should be filtered before publishing."
@@ -2240,7 +2319,7 @@
           "description": "The exact time the message was updated."
         }
       },
-      "description": "The Tpoic Properties definition."
+      "description": "The Topic Properties definition."
     },
     "SubscriptionCreateOrUpdateParameters": {
       "properties": {
@@ -2424,7 +2503,7 @@
       "properties": {
         "name": {
           "type": "string",
-          "description": "The Name to check the namespce name availability and The namespace name can contain only letters, numbers, and hyphens. The namespace must start with a letter, and it must end with a letter or number."
+          "description": "The Name to check the namespace name availability and The namespace name can contain only letters, numbers, and hyphens. The namespace must start with a letter, and it must end with a letter or number."
         }
       },
       "required": [
@@ -2584,7 +2663,7 @@
       "minLength": 1,
       "maxLength": 50,
       "x-ms-parameter-location": "method",
-      "description": "The authorizationrule name."
+      "description": "The authorization rule name."
     },
     "queueNameParameter": {
       "name": "queueName",

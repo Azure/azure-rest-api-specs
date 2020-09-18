@@ -59,7 +59,7 @@ The **title** field is used as the name of the generated client.
 }
 ```
 
-```
+```csharp
 var client = new MyClientName();
 ```
 Override the title client name by passing the `-ClientName` to AutoRest.
@@ -224,7 +224,7 @@ are `in` the `path` must have a `true` value for the `required` field. In this e
 is populated with the value of userId provided in the client method.
 ```json5
 "paths": {
-  "/users/{userid}": {
+  "/users/{userId}": {
     "get": {
       "operationId": "users_getById",
       "parameters": [
@@ -334,7 +334,7 @@ Each operation defines the possible responses by HTTP status code:
 Swagger allows for specifying a `default` response. AutoRest treats the `default` response as defining an error 
 response status code unless `default` is the only status code defined. The reason for imposing this convention is 
 to produce higher quality API signatures. The return type of the generated API is determined by finding a common 
-base type of the success responses. In practice, if the default is considered as a potential success defintion, 
+base type of the success responses. In practice, if the default is considered as a potential success definition, 
 the common ancestor of success responses and error responses ends up being Object.
 
 ### Negative Responses<a name="NegativeResponses"></a>
@@ -342,7 +342,7 @@ You can describe all the [possible HTTP Response status codes](http://www.w3.org
 - If **a schema is provided** for the negative response codes then this will have an impact on the return type of the generated method. 
   - For example: if a schema was provided for 200, and 400 was also described with a schema then,
     - the **return type** would be the Common Ancestor of both the schemas. In most cases there is nothing common between a positive and a negative response code. Hence the return type will be an `Object`. Note:This may not be very helpful to the customer
-    - an exception ** will NOT be thrown for 400** and the generated method will deserialize the response body as per the schema of "400".
+    - an exception **will NOT be thrown for 400** and the generated method will deserialize the response body as per the schema of "400".
     - any other negative response code will be treated as per the "default" response status code defined in the swagger for that operation.
 - If **a schema is NOT provided** for the negative response codes then this will **NOT** have an impact on the return type of the generated method.
   - For example: if a schema was provided for 200 and 404 was described as one of the responses. However, 404 does not have a schema. In this scenario,
@@ -372,7 +372,7 @@ You can describe all the [possible HTTP Response status codes](http://www.w3.org
                         Exception will not be thrown.",
       },
       "default": {
-        "description": "Default Response. It will be deserialized as per the Error defintion 
+        "description": "Default Response. It will be deserialized as per the Error definition 
                         specified in the schema. Exception will be thrown.",
         "schema": {
           "$ref": "#/definitions/Error"
@@ -413,6 +413,35 @@ Please note, that the use of "x-ms-paths" should be minimized to the above scena
 ## Defining Model Types<a name="DefiningModel"></a>
 The request body and response definitions become simple model types in the generated code. The models include 
 basic validation methods, but are generally stateless serialization definitions.
+
+### Understanding the importance of "type" keyword while defining model types.
+"Type-specific" keywords such as properties, items, minLength, etc. do not enforce a type on the schema. It works the other way around – when an instance is validated against a schema, these keywords only apply when the instance is of the corresponding type, otherwise they are ignored. Here's the relevant part of the [JSON Schema Validation](https://tools.ietf.org/html/draft-fge-json-schema-validation-00#section-4.1) spec:
+
+> 4.1. Keywords and instance primitive types
+Some validation keywords only apply to one or more primitive types. When the primitive type of the instance cannot be validated by a given keyword, validation for this keyword and instance SHOULD succeed.
+
+For example, consider this schema:
+
+```yaml
+definitions:
+  Something:
+    properties:
+      id:
+        type: integer
+    required: [id]
+    minLength: 8
+```
+It's a valid schema, even though it combines object-specific keywords properties and required and string-specific keyword minLength. This schema means:
+- If the instance is an object, it must have an integer property named id. For example, `{"id": 4}` and `{"id": -1, "foo": "bar"}` are valid, but `{}` and `{"id": "ACB123"}` are not.
+- If the instance is a string, it must contain at least 8 characters. `"Hello, world!"` is valid, but `""` and `abc` are not.
+- Any instances of other types are valid - `true`, `false`, `-1.234`, `[]`, `[1, 2, 3]`, `[1, "foo", true]`, etc.
+(Except `null` - OpenAPI 2.0 does not have the `null` type and does not support `null` except in extension properties. OpenAPI 3.0 supports the `null` value for schemas with nullable: true.)
+
+If there are tools that infer the `type` from other keywords (for example, handle schemas with no `type` but with `properties` as always objects), then these tools are not exactly following the OpenAPI Specification and JSON Schema.
+
+> Bottom line: If a schema must always be an object, add `"type": "object"` explicitly. Otherwise you might get unexpected results.
+
+**Credits** - Stack Overflow [link](https://stackoverflow.com/questions/47374980/schema-object-without-a-type-attribute-in-swagger-2-0).
 
 ### Model Inheritance<a name="ModelInheritance"></a>
 Swagger schema allows for specifying that one type is `allOf` other types, meaning that the entire specification of 
@@ -645,8 +674,8 @@ as an enum. However, not all enumeration values should necessarily be represente
 considerations, such as how often expected values might change, since adding a new value to a C# enum is a breaking change 
 requiring an updated API version. Additionally, there is some metadata that is required to create a useful C# enum, such 
 as a descriptive name, which is not represented in swagger.  For this reason, enums are not automatically turned into 
-enum types in C# - instead they are rendered in the documentation comments for the property or parameter to indcate allowed 
-values.  To indicate that an enum will rarely change and that C# enum semantics are desired, use the `x-ms-enum` exension.
+enum types in C# - instead they are rendered in the documentation comments for the property or parameter to indicate allowed 
+values.  To indicate that an enum will rarely change and that C# enum semantics are desired, use the `x-ms-enum` extension.
 
 In C#, an enum type is generated and is declared as the type of the related request/response object. The enum is serialized 
 as the string expected by the REST API.
@@ -668,7 +697,7 @@ as the string expected by the REST API.
 ```
 
 ### x-ms-enum extension structure <a name="enum-structure"></a>
-```
+```json5
 {
   "x-ms-enum": {
     "name" : "Specify the name for the Enum."

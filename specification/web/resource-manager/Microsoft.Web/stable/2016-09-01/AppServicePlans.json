@@ -20,8 +20,8 @@
         "tags": [
           "AppServicePlans"
         ],
-        "summary": "Get all App Service plans for a subcription.",
-        "description": "Get all App Service plans for a subcription.",
+        "summary": "Get all App Service plans for a subscription.",
+        "description": "Get all App Service plans for a subscription.",
         "operationId": "AppServicePlans_List",
         "parameters": [
           {
@@ -172,6 +172,12 @@
         "responses": {
           "200": {
             "description": "OK.",
+            "schema": {
+              "$ref": "../2016-03-01/CommonDefinitions.json#/definitions/AppServicePlan"
+            }
+          },
+          "201": {
+            "description": "Created.",
             "schema": {
               "$ref": "../2016-03-01/CommonDefinitions.json#/definitions/AppServicePlan"
             }
@@ -643,8 +649,8 @@
         "tags": [
           "AppServicePlans"
         ],
-        "summary": "Get metrics for an App Serice plan.",
-        "description": "Get metrics for an App Serice plan.",
+        "summary": "Get metrics for an App Service plan.",
+        "description": "Get metrics for an App Service plan.",
         "operationId": "AppServicePlans_ListMetrics",
         "parameters": [
           {
@@ -712,7 +718,7 @@
           {
             "name": "softRestart",
             "in": "query",
-            "description": "Specify <code>true</code> to performa a soft restart, applies the configuration settings and restarts the apps if necessary. The default is <code>false</code>, which always restarts and reprovisions the apps",
+            "description": "Specify <code>true</code> to perform a soft restart, applies the configuration settings and restarts the apps if necessary. The default is <code>false</code>, which always restarts and reprovisions the apps",
             "type": "boolean"
           },
           {
@@ -792,8 +798,8 @@
         "tags": [
           "AppServicePlans"
         ],
-        "summary": "Gets all selectable sku's for a given App Service Plan",
-        "description": "Gets all selectable sku's for a given App Service Plan",
+        "summary": "Gets all selectable SKUs for a given App Service Plan",
+        "description": "Gets all selectable SKUs for a given App Service Plan",
         "operationId": "AppServicePlans_GetServerFarmSkus",
         "parameters": [
           {
@@ -1525,7 +1531,8 @@
         },
         "nextLink": {
           "description": "Link to next page of resources.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         }
       }
     },
@@ -1574,7 +1581,8 @@
         },
         "nextLink": {
           "description": "Link to next page of resources.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         }
       }
     }

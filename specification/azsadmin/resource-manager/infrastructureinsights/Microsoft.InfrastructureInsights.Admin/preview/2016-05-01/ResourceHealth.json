@@ -1,0 +1,209 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "Resource health operation endpoints and objects.",
+    "title": "InfrastructureInsightsManagementClient",
+    "version": "2016-05-01"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.InfrastructureInsights.Admin/regionHealths/{location}/serviceHealths/{serviceRegistrationId}/resourceHealths": {
+      "get": {
+        "x-ms-examples": {
+          "Returns a list of each resource's health under a service.": {
+            "$ref": "./examples/ResourceHealth/List.json"
+          }
+        },
+        "tags": [
+          "Resources"
+        ],
+        "description": "Returns a list of each resource's health under a service.",
+        "operationId": "ResourceHealths_List",
+        "parameters": [
+          {
+            "$ref": "InfrastructureInsights.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "InfrastructureInsights.json#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "InfrastructureInsights.json#/parameters/LocationParameter"
+          },
+          {
+            "$ref": "InfrastructureInsights.json#/parameters/ServiceRegistrationIdParameter"
+          },
+          {
+            "$ref": "InfrastructureInsights.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "InfrastructureInsights.json#/parameters/FilterParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResourceHealthList"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-odata": "#/definitions/ResourceHealth",
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ]
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.InfrastructureInsights.Admin/regionHealths/{location}/serviceHealths/{serviceRegistrationId}/resourceHealths/{resourceRegistrationId}": {
+      "get": {
+        "x-ms-examples": {
+          "Returns the requested health information about a resource.": {
+            "$ref": "./examples/ResourceHealth/Get.json"
+          }
+        },
+        "tags": [
+          "Resources"
+        ],
+        "description": "Returns the requested health information about a resource.",
+        "operationId": "ResourceHealths_Get",
+        "parameters": [
+          {
+            "$ref": "InfrastructureInsights.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "InfrastructureInsights.json#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "InfrastructureInsights.json#/parameters/LocationParameter"
+          },
+          {
+            "$ref": "InfrastructureInsights.json#/parameters/ServiceRegistrationIdParameter"
+          },
+          {
+            "$ref": "InfrastructureInsights.json#/parameters/ResourceRegistrationIdParameter"
+          },
+          {
+            "$ref": "InfrastructureInsights.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "InfrastructureInsights.json#/parameters/FilterParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResourceHealth"
+            }
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "ResourceHealth": {
+      "description": "Health information related to a resource.",
+      "properties": {
+        "properties": {
+          "description": "Health information related to a resource.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ResourceHealthModel"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "InfrastructureInsights.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "ResourceHealthModel": {
+      "description": "Health information related to a resource.",
+      "properties": {
+        "resourceLocation": {
+          "description": "Resource location.",
+          "type": "string"
+        },
+        "resourceName": {
+          "description": "Resource name.",
+          "type": "string"
+        },
+        "resourceDisplayName": {
+          "description": "Resource display name.",
+          "type": "string"
+        },
+        "resourceType": {
+          "description": "Resource type.",
+          "type": "string"
+        },
+        "resourceURI": {
+          "description": "Gets or sets the resource URI.",
+          "type": "string"
+        },
+        "rpRegistrationId": {
+          "description": "Gets or sets the resource provider registration ID.",
+          "type": "string"
+        },
+        "usageMetrics": {
+          "description": "Usage metrics.",
+          "type": "array",
+          "items": {
+            "$ref": "InfrastructureInsights.json#/definitions/UsageMetrics"
+          }
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "InfrastructureInsights.json#/definitions/BaseHealth"
+        }
+      ]
+    },
+    "ResourceHealthList": {
+      "description": "Pageable list of resource health objects.",
+      "properties": {
+        "value": {
+          "description": "List of resource health objects.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ResourceHealth"
+          }
+        },
+        "nextLink": {
+          "description": "URI to next page.",
+          "type": "string"
+        }
+      }
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Authorization uses an Azure Active Directory OAuth2 flow.",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ]
+}

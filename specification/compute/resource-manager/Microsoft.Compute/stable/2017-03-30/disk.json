@@ -72,10 +72,30 @@
             }
           },
           "202": {
-            "description":"Accepted",
+            "description": "Accepted",
             "schema": {
               "$ref": "#/definitions/Disk"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Create an empty managed disk.": {
+            "$ref": "./examples/CreateAnEmptyManagedDisk.json"
+          },
+          "Create a managed disk from a platform image.": {
+            "$ref": "./examples/CreateAManagedDiskFromAPlatformImage.json"
+          },
+          "Create a managed disk from an existing managed disk in the same or different subscription.": {
+            "$ref": "./examples/CreateAManagedDiskFromAnExistingManagedDisk.json"
+          },
+          "Create a managed disk by importing an unmanaged blob from the same subscription.": {
+            "$ref": "./examples/CreateAManagedDiskByImportingAnUnmanagedBlobFromTheSameSubscription.json"
+          },
+          "Create a managed disk by importing an unmanaged blob from a different subscription.": {
+            "$ref": "./examples/CreateAManagedDiskByImportingAnUnmanagedBlobFromADifferentSubscription.json"
+          },
+          "Create a managed disk by copying a snapshot.": {
+            "$ref": "./examples/CreateAManagedDiskByCopyingASnapshot.json"
           }
         },
         "x-ms-long-running-operation": true
@@ -152,6 +172,11 @@
               "$ref": "#/definitions/Disk"
             }
           }
+        },
+        "x-ms-examples": {
+          "Get information about a managed disk.": {
+            "$ref": "./examples/GetInformationAboutAManagedDisk.json"
+          }
         }
       },
       "delete": {
@@ -217,6 +242,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "List all managed disks in a resource group.": {
+            "$ref": "./examples/ListManagedDisksInAResourceGroup.json"
+          }
+        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -243,6 +273,11 @@
             "schema": {
               "$ref": "#/definitions/DiskList"
             }
+          }
+        },
+        "x-ms-examples": {
+          "List all managed disks in a subscription.": {
+            "$ref": "./examples/ListManagedDisksInASubscription.json"
           }
         },
         "x-ms-pageable": {
@@ -326,7 +361,10 @@
             "description": "Accepted"
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/snapshots/{snapshotName}": {
@@ -371,6 +409,17 @@
             "schema": {
               "$ref": "#/definitions/Snapshot"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Create a snapshot from an existing snapshot in the same or a different subscription.": {
+            "$ref": "./examples/CreateASnapshotFromAnExistingSnapshot.json"
+          },
+          "Create a snapshot by importing an unmanaged blob from the same subscription.": {
+            "$ref": "./examples/CreateASnapshotByImportingAnUnmanagedBlobFromTheSameSubscription.json"
+          },
+          "Create a snapshot by importing an unmanaged blob from a different subscription.": {
+            "$ref": "./examples/CreateASnapshotByImportingAnUnmanagedBlobFromADifferentSubscription.json"
           }
         },
         "x-ms-long-running-operation": true
@@ -447,6 +496,11 @@
               "$ref": "#/definitions/Snapshot"
             }
           }
+        },
+        "x-ms-examples": {
+          "Get information about a snapshot.": {
+            "$ref": "./examples/GetInformationAboutASnapshot.json"
+          }
         }
       },
       "delete": {
@@ -512,6 +566,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "List all snapshots in a resource group.": {
+            "$ref": "./examples/ListSnapshotsInAResourceGroup.json"
+          }
+        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -538,6 +597,11 @@
             "schema": {
               "$ref": "#/definitions/SnapshotList"
             }
+          }
+        },
+        "x-ms-examples": {
+          "List all snapshots in a subscription.": {
+            "$ref": "./examples/ListSnapshotsInASubscription.json"
           }
         },
         "x-ms-pageable": {
@@ -621,7 +685,10 @@
             "description": "Accepted"
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
       }
     }
   },
@@ -687,11 +754,11 @@
           "$ref": "#/definitions/DiskSku"
         },
         "zones": {
-            "type": "array",
-            "items": {
-                "type": "string"
+          "type": "array",
+          "items": {
+            "type": "string"
           },
-          "description": "The Logical zone list for Disk." 
+          "description": "The Logical zone list for Disk."
         },
         "properties": {
           "x-ms-client-flatten": true,
@@ -748,7 +815,7 @@
           ],
           "x-ms-enum": {
             "name": "StorageAccountTypes",
-            "modelAsString": false
+            "modelAsString": true
           },
           "description": "The sku name."
         },
@@ -863,7 +930,7 @@
           "description": "Resource Id"
         }
       },
-      "description": "The vault id is an Azure Resource Manager Resoure id in the form /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.KeyVault/vaults/{vaultName}"
+      "description": "The vault id is an Azure Resource Manager Resource id in the form /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.KeyVault/vaults/{vaultName}"
     },
     "DiskUpdateProperties": {
       "properties": {
@@ -934,7 +1001,7 @@
       "properties": {
         "id": {
           "type": "string",
-          "description": "A relative uri containing either a Platform Imgage Repository or user image reference."
+          "description": "A relative uri containing either a Platform Image Repository or user image reference."
         },
         "lun": {
           "type": "integer",
@@ -1176,7 +1243,7 @@
       "in": "path",
       "required": true,
       "type": "string",
-      "description": "The name of the disk within the given subscription and resource group.",
+      "description": "The name of the managed disk that is being created. The name can't be changed after the disk is created. Supported characters for the name are a-z, A-Z, 0-9 and _. The maximum name length is 80 characters.",
       "x-ms-parameter-location": "method"
     },
     "SnapshotNameParameter": {
@@ -1184,7 +1251,7 @@
       "in": "path",
       "required": true,
       "type": "string",
-      "description": "The name of the snapshot within the given subscription and resource group.",
+      "description": "The name of the snapshot that is being created. The name can't be changed after the snapshot is created. Supported characters for the name are a-z, A-Z, 0-9 and _. The max name length is 80 characters.",
       "x-ms-parameter-location": "method"
     }
   }

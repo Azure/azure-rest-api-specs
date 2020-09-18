@@ -16,6 +16,59 @@
     "application/json"
   ],
   "paths": {
+    "/providers/Microsoft.MachineLearning/operations": {
+      "get": {
+        "tags": [
+          "Operation"
+        ],
+        "description": "Lists all of the available Azure Machine Learning Studio Commitment Plan RP REST API operations.",
+        "operationId": "Operations_List",
+        "parameters": [
+          {
+            "$ref": "#/parameters/APIVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/OperationEntityListResult"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.MachineLearning/skus": {
+      "get": {
+        "tags": [
+          "Skus"
+        ],
+        "operationId": "Skus_List",
+        "description": "Lists the available commitment plan SKUs.",
+        "x-ms-pageable": {
+          "nextLinkName": null
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/APIVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SkuListResult"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearning/commitmentPlans/{commitmentPlanName}/commitmentAssociations/{commitmentAssociationName}": {
       "get": {
         "tags": [
@@ -243,7 +296,7 @@
         },
         "parameters": [
           {
-           "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
             "name": "$skipToken",
@@ -312,7 +365,7 @@
         },
         "parameters": [
           {
-           "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
             "$ref": "#/parameters/ResourceGroupNameParameter"
@@ -387,6 +440,192 @@
     }
   },
   "definitions": {
+    "SkuListResult": {
+      "type": "object",
+      "description": "The list of commitment plan SKUs.",
+      "properties": {
+        "value": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CatalogSku"
+          }
+        }
+      }
+    },
+    "CatalogSku": {
+      "type": "object",
+      "description": "Details of a commitment plan SKU.",
+      "properties": {
+        "resourceType": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource type name"
+        },
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "SKU name"
+        },
+        "tier": {
+          "readOnly": true,
+          "type": "string",
+          "description": "SKU tier"
+        },
+        "locations": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Regions where the SKU is available."
+        },
+        "capacity": {
+          "readOnly": true,
+          "description": "SKU scaling information",
+          "$ref": "#/definitions/SkuCapacity"
+        },
+        "capabilities": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SkuCapability"
+          },
+          "description": "The capability information for the specified SKU."
+        },
+        "costs": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SkuCost"
+          },
+          "description": "The cost information for the specified SKU."
+        },
+        "restrictions": {
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/SkuRestrictions"
+          },
+          "description": "Restrictions which would prevent a SKU from being used. This is empty if there are no restrictions."
+        }
+      }
+    },
+    "SkuCapacity": {
+      "type": "object",
+      "description": "Describes scaling information of a SKU.",
+      "properties": {
+        "minimum": {
+          "type": "integer",
+          "readOnly": true,
+          "format": "int64",
+          "description": "The minimum capacity."
+        },
+        "maximum": {
+          "type": "integer",
+          "readOnly": true,
+          "format": "int64",
+          "description": "The maximum capacity that can be set."
+        },
+        "default": {
+          "type": "integer",
+          "readOnly": true,
+          "format": "int64",
+          "description": "The default capacity."
+        },
+        "scaleType": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The scale type applicable to the sku.",
+          "enum": [
+            "Automatic",
+            "Manual",
+            "None"
+          ],
+          "x-ms-enum": {
+            "name": "SkuCapacityScaleType",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "SkuCost": {
+      "type": "object",
+      "description": "Describes metadata for SKU cost info.",
+      "properties": {
+        "meterID": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The meter used for this part of a SKU's cost."
+        },
+        "quantity": {
+          "type": "integer",
+          "readOnly": true,
+          "format": "int64",
+          "description": "The multiplier for the meter ID."
+        },
+        "extendedUnit": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The overall duration represented by the quantity."
+        }
+      }
+    },
+    "SkuCapability": {
+      "type": "object",
+      "description": "Describes The SKU capabilities object.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The capability name."
+        },
+        "value": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The capability value."
+        }
+      }
+    },
+    "SkuRestrictions": {
+      "properties": {
+        "type": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The type of restrictions.",
+          "enum": [
+            "location",
+            "zone"
+          ],
+          "x-ms-enum": {
+            "name": "ResourceSkuRestrictionsType",
+            "modelAsString": true
+          }
+        },
+        "values": {
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "type": "string"
+          },
+          "description": "The value of restrictions. If the restriction type is set to location. This would be different locations where the SKU is restricted."
+        },
+        "reasonCode": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The reason for restriction.",
+          "enum": [
+            "QuotaId",
+            "NotAvailableForSubscription"
+          ],
+          "x-ms-enum": {
+            "name": "ResourceSkuRestrictionsReasonCode",
+            "modelAsString": true
+          }
+        }
+      },
+      "description": "Describes restrictions which would prevent a SKU from being used."
+    },
     "Tags": {
       "type": "object",
       "description": "Resource tags",
@@ -734,6 +973,72 @@
           "type": "string",
           "description": "The date of usage, in ISO 8601 format."
         }
+      }
+    },
+    "OperationEntityListResult": {
+      "description": "The list of REST API operations.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "The list of operations.",
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/OperationEntity"
+          }
+        }
+      }
+    },
+    "OperationEntity": {
+      "description": "An API operation.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Operation name: {provider}/{resource}/{operation}.",
+          "type": "string",
+          "readOnly": true
+        },
+        "display": {
+          "$ref": "#/definitions/OperationDisplayInfo",
+          "description": "The API operation info."
+        }
+      }
+    },
+    "OperationDisplayInfo": {
+      "description": "The API operation info.",
+      "type": "object",
+      "properties": {
+        "description": {
+          "description": "The description of the operation.",
+          "type": "string",
+          "readOnly": true
+        },
+        "operation": {
+          "description": "The action that users can perform, based on their permission level.",
+          "type": "string",
+          "readOnly": true
+        },
+        "provider": {
+          "description": "The service provider.",
+          "type": "string",
+          "readOnly": true
+        },
+        "resource": {
+          "description": "The resource on which the operation is performed.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
       }
     }
   }

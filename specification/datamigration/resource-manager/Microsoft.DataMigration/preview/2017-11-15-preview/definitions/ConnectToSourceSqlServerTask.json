@@ -38,17 +38,19 @@
       "type": "object",
       "description": "Output for the task that validates connection to SQL Server and also validates source server requirements",
       "properties": {
+        "id": {
+          "type": "string",
+          "description": "Result identifier",
+          "readOnly": true
+        },
         "resultType": {
           "description": "Type of result - database level or task level",
           "type": "string"
         }
       },
-      "allOf": [
-        {
-          "$ref": "./TasksCommon.json#/definitions/TaskOutput"
-        }
+      "required": [
+        "resultType"
       ],
-      "required": [ "resultType" ],
       "discriminator": "resultType"
     },
     "ConnectToSourceSqlServerTaskOutputTaskLevel": {

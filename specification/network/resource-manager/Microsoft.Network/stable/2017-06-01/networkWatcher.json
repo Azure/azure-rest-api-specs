@@ -87,6 +87,11 @@
               "$ref": "#/definitions/NetworkWatcher"
             }
           }
+        },
+        "x-ms-examples": {
+          "Create Network Watcher": {
+            "$ref": "./examples/NetworkWatcherCreate.json"
+          }
         }
       },
       "get": {
@@ -123,6 +128,11 @@
             "schema": {
               "$ref": "#/definitions/NetworkWatcher"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Get Network Watcher": {
+            "$ref": "./examples/NetworkWatcherGet.json"
           }
         }
       },
@@ -162,6 +172,11 @@
           "204": {
             "description": "Delete successful."
           }
+        },
+        "x-ms-examples": {
+          "Delete Network Watcher": {
+            "$ref": "./examples/NetworkWatcherDelete.json"
+          }
         }
       }
     },
@@ -195,6 +210,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "List Network Watchers": {
+            "$ref": "./examples/NetworkWatcherList.json"
+          }
+        },
         "x-ms-pageable": {
           "nextLinkName": null
         }
@@ -221,6 +241,11 @@
             "schema": {
               "$ref": "#/definitions/NetworkWatcherListResult"
             }
+          }
+        },
+        "x-ms-examples": {
+          "List Network Watchers": {
+            "$ref": "./examples/NetworkWatcherListAll.json"
           }
         },
         "x-ms-pageable": {
@@ -272,6 +297,11 @@
             "schema": {
               "$ref": "#/definitions/Topology"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Get Topology": {
+            "$ref": "./examples/NetworkWatcherTopologyGet.json"
           }
         }
       }
@@ -328,6 +358,11 @@
               "$ref": "#/definitions/VerificationIPFlowResult"
             }
           }
+        },
+        "x-ms-examples": {
+          "Verify IP Flow": {
+            "$ref": "./examples/NetworkWatcherIpFlowVerify.json"
+          }
         }
       }
     },
@@ -383,6 +418,11 @@
               "$ref": "#/definitions/NextHopResult"
             }
           }
+        },
+        "x-ms-examples": {
+          "Get Next Hop": {
+            "$ref": "./examples/NetworkWatcherNextHopGet.json"
+          }
         }
       }
     },
@@ -437,6 +477,11 @@
             "schema": {
               "$ref": "#/definitions/SecurityGroupViewResult"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Get Security Group View": {
+            "$ref": "./examples/NetworkWatcherSecurityGroupViewGet.json"
           }
         }
       }
@@ -494,6 +539,11 @@
               "$ref": "#/definitions/PacketCaptureResult"
             }
           }
+        },
+        "x-ms-examples": {
+          "Create Packet Capture": {
+            "$ref": "./examples/NetworkWatcherPacketCaptureCreate.json"
+          }
         }
       },
       "get": {
@@ -537,6 +587,11 @@
             "schema": {
               "$ref": "#/definitions/PacketCaptureResult"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Create Packet Capture": {
+            "$ref": "./examples/NetworkWatcherPacketCaptureGet.json"
           }
         }
       },
@@ -582,6 +637,11 @@
           },
           "202": {
             "description": "Accepted and the operation will complete asynchronously."
+          }
+        },
+        "x-ms-examples": {
+          "Delete Packet Capture": {
+            "$ref": "./examples/NetworkWatcherPacketCaptureDelete.json"
           }
         }
       }
@@ -630,6 +690,11 @@
           "202": {
             "description": "Accepted and the operation will complete asynchronously."
           }
+        },
+        "x-ms-examples": {
+          "Stop Packet Capture": {
+            "$ref": "./examples/NetworkWatcherPacketCaptureStop.json"
+          }
         }
       }
     },
@@ -640,6 +705,9 @@
         ],
         "operationId": "PacketCaptures_GetStatus",
         "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
         "description": "Query the status of a running packet capture session.",
         "parameters": [
           {
@@ -683,6 +751,11 @@
               "$ref": "#/definitions/PacketCaptureQueryStatusResult"
             }
           }
+        },
+        "x-ms-examples": {
+          "Get Packet Capture status": {
+            "$ref": "./examples/NetworkWatcherPacketCaptureQueryStatus.json"
+          }
         }
       }
     },
@@ -721,6 +794,11 @@
             "schema": {
               "$ref": "#/definitions/PacketCaptureListResult"
             }
+          }
+        },
+        "x-ms-examples": {
+          "List Packet Captures": {
+            "$ref": "./examples/NetworkWatcherPacketCapturesList.json"
           }
         },
         "x-ms-pageable": {
@@ -780,6 +858,11 @@
               "$ref": "#/definitions/TroubleshootingResult"
             }
           }
+        },
+        "x-ms-examples": {
+          "Troubleshoot Resource": {
+            "$ref": "./examples/NetworkWatcherTroubleshootGet.json"
+          }
         }
       }
     },
@@ -834,6 +917,11 @@
             "schema": {
               "$ref": "#/definitions/TroubleshootingResult"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Get Troubleshoot result": {
+            "$ref": "./examples/NetworkWatcherTroubleshootResultQuery.json"
           }
         }
       }
@@ -890,6 +978,11 @@
               "$ref": "#/definitions/FlowLogInformation"
             }
           }
+        },
+        "x-ms-examples": {
+          "Configure Flow Logs": {
+            "$ref": "./examples/NetworkWatcherFlowLogConfigure.json"
+          }
         }
       }
     },
@@ -945,6 +1038,11 @@
               "$ref": "#/definitions/FlowLogInformation"
             }
           }
+        },
+        "x-ms-examples": {
+          "Query Flow Log Status": {
+            "$ref": "./examples/NetworkWatcherFlowLogStatusQuery.json"
+          }
         }
       }
     },
@@ -999,6 +1097,11 @@
             "schema": {
               "$ref": "#/definitions/ConnectivityInformation"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Check Connectivity": {
+            "$ref": "./examples/NetworkWatcherConnectivityCheck.json"
           }
         }
       }

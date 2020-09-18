@@ -342,7 +342,7 @@
           }
         ],
         "responses": {
-           "200": {
+          "200": {
             "description": "Service was successfully deleted."
           },
           "204": {
@@ -388,14 +388,14 @@
         }
       }
     },
-	  "/subscriptions/{subscriptionId}/providers/Microsoft.ApiManagement/service/": {
-     "get": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ApiManagement/service/": {
+      "get": {
         "tags": [
           "ApiManagementService"
         ],
         "operationId": "ApiManagementServices_List",
         "description": "Lists all API Management services within an Azure subscription.",
-        "parameters": [          
+        "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
           },
@@ -524,7 +524,7 @@
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
-          }     
+          }
         }
       }
     },
@@ -631,7 +631,7 @@
         "certificate"
       ],
       "description": "Custom hostname configuration."
-    },    
+    },
     "VirtualNetworkConfiguration": {
       "properties": {
         "vnetid": {
@@ -646,7 +646,7 @@
         },
         "subnetResourceId": {
           "type": "string",
-          "description": "The name of the subnet Resource ID. This has format /subscriptions/{subid}/resourceGroups/{resourceGroupName}/Microsoft.{Network|ClassicNetwork}/VirtualNetworks/{virtual network name}/subnets/{subnet name}."
+          "description": "The name of the subnet Resource ID. This has format /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/Microsoft.{Network|ClassicNetwork}/VirtualNetworks/{virtual network name}/subnets/{subnet name}."
         },
         "location": {
           "type": "string",
@@ -663,7 +663,7 @@
         },
         "skuType": {
           "type": "string",
-          "description": "The SKU type in the location.",          
+          "description": "The SKU type in the location.",
           "enum": [
             "Developer",
             "Standard",
@@ -738,7 +738,7 @@
         },
         "vpnType": {
           "type": "string",
-          "description": "The type of VPN in which API Managemet service needs to be configured in. None (Default Value) means the API Management service is not part of any Virtual Network, External means the API Management deployment is set up inside a Virtual Network having an Internet Facing Endpoint, and Internal means that the API Management service deployment is set up inside a Virtual Network having an Intranet Facing Endpoint only. When vpnConfiguration is specified, vpnType must be specified.",
+          "description": "The type of VPN in which API Management service needs to be configured in. None (Default Value) means the API Management service is not part of any Virtual Network, External means the API Management deployment is set up inside a Virtual Network having an Internet Facing Endpoint, and Internal means that the API Management service deployment is set up inside a Virtual Network having an Intranet Facing Endpoint only. When vpnConfiguration is specified, vpnType must be specified.",
           "default": "None",
           "enum": [
             "None",
@@ -814,7 +814,7 @@
         "runtimeUrl": {
           "type": "string",
           "description": "Proxy endpoint URL of the API Management service.",
-          "readOnly": true          
+          "readOnly": true
         },
         "portalUrl": {
           "type": "string",
@@ -852,7 +852,7 @@
         },
         "vpnconfiguration": {
           "$ref": "#/definitions/VirtualNetworkConfiguration",
-          "description": "Virtual network configuration of the API Management service."          
+          "description": "Virtual network configuration of the API Management service."
         },
         "additionalLocations": {
           "type": "array",
@@ -870,7 +870,7 @@
         },
         "vpnType": {
           "type": "string",
-          "description": "The type of VPN in which API Managemet service needs to be configured in. None (Default Value) means the API Management service is not part of any Virtual Network, External means the API Management deployment is set up inside a Virtual Network having an Internet Facing Endpoint, and Internal means that API Management deployment is setup inside a Virtual Network having an Intranet Facing Endpoint only.",
+          "description": "The type of VPN in which API Management service needs to be configured in. None (Default Value) means the API Management service is not part of any Virtual Network, External means the API Management deployment is set up inside a Virtual Network having an Internet Facing Endpoint, and Internal means that API Management deployment is setup inside a Virtual Network having an Intranet Facing Endpoint only.",
           "default": "None",
           "enum": [
             "None",
@@ -881,7 +881,7 @@
             "name": "VirtualNetworkType",
             "modelAsString": false
           }
-        }        
+        }
       },
       "required": [
         "publisherEmail",
@@ -946,19 +946,19 @@
         }
       },
       "allOf": [
-          {
-            "$ref" : "#/definitions/ApiManagementServiceBaseParameters"
-          }
-       ],
+        {
+          "$ref": "#/definitions/ApiManagementServiceBaseParameters"
+        }
+      ],
       "required": [
         "sku",
-        "properties",        
+        "properties",
         "location"
       ],
       "description": "Description of an API Management service resource."
     },
     "ApiManagementServiceBaseParameters": {
-      "properties": {        
+      "properties": {
         "tags": {
           "type": "object",
           "additionalProperties": {
@@ -1108,7 +1108,7 @@
       },
       "description": "Parameters supplied to the UpdateHostname operation."
     },
-    "ErrorResponse": {     
+    "ErrorResponse": {
       "properties": {
         "code": {
           "description": "Error code.",
@@ -1128,7 +1128,7 @@
       "in": "path",
       "required": true,
       "type": "string",
-      "description": "Subscription credentials which uniquely identify the Microsoft Azure subscription. The subscription ID forms part of the URI for every service call."
+      "description": "Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call."
     },
     "ApiVersionParameter": {
       "name": "api-version",

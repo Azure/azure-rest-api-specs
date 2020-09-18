@@ -16,25 +16,27 @@
     "application/json"
   ],
   "paths": {
-      "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/serviceObjectives/{serviceObjectiveName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/serviceObjectives/{serviceObjectiveName}": {
       "get": {
         "tags": [
           "ServiceObjectives"
         ],
         "operationId": "ServiceObjectives_Get",
         "description": "Gets a database service objective.",
-        "x-ms-examples":{
-          "Get a service objective": { "$ref": "./examples/ServiceObjectiveGet.json" }
+        "x-ms-examples": {
+          "Get a service objective": {
+            "$ref": "./examples/ServiceObjectiveGet.json"
+          }
         },
         "parameters": [
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ResourceGroupParameter"
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
           },
           {
             "$ref": "#/parameters/ServerNameParameter"
@@ -64,18 +66,20 @@
         ],
         "operationId": "ServiceObjectives_ListByServer",
         "description": "Returns database service objectives.",
-        "x-ms-examples":{
-          "List service objectives": { "$ref": "./examples/ServiceObjectiveList.json" }
+        "x-ms-examples": {
+          "List service objectives": {
+            "$ref": "./examples/ServiceObjectiveList.json"
+          }
         },
         "parameters": [
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ResourceGroupParameter"
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
           },
           {
             "$ref": "#/parameters/ServerNameParameter"
@@ -96,35 +100,6 @@
     }
   },
   "definitions": {
-    "Resource":{
-      "description":"ARM resource.",
-      "properties":{
-        "id":{
-          "readOnly":true,
-          "type":"string",
-          "description":"Resource ID."
-        },
-        "name":{
-          "readOnly":true,
-          "type":"string",
-          "description":"Resource name."
-        },
-        "type":{
-          "readOnly":true,
-          "type":"string",
-          "description":"Resource type."
-        }
-      },
-      "x-ms-azure-resource": true
-    },
-    "ProxyResource":{
-      "description":"ARM proxy resource.",
-      "allOf":[
-        {
-          "$ref":"#/definitions/Resource"
-        }
-      ]
-    },
     "ServiceObjective": {
       "properties": {
         "properties": {
@@ -135,7 +110,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/ProxyResource"
+          "$ref": "../../../common/v1/types.json#/definitions/ProxyResource"
         }
       ],
       "description": "Represents a database service objective."
@@ -183,33 +158,13 @@
           "description": "The list of database service objectives."
         }
       },
-      "required": ["value"],
+      "required": [
+        "value"
+      ],
       "description": "Represents the response to a get database service objectives request."
     }
   },
   "parameters": {
-    "SubscriptionIdParameter": {
-      "name": "subscriptionId",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "The subscription ID that identifies an Azure subscription."
-    },
-    "ApiVersionParameter": {
-      "name": "api-version",
-      "in": "query",
-      "required": true,
-      "type": "string",
-      "description": "The API version to use for the request."
-    },
-    "ResourceGroupParameter": {
-      "name": "resourceGroupName",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "The name of the resource group that contains the resource. You can obtain this value from the Azure Resource Manager API or the portal.",
-      "x-ms-parameter-location": "method"
-    },
     "ServerNameParameter": {
       "name": "serverName",
       "in": "path",

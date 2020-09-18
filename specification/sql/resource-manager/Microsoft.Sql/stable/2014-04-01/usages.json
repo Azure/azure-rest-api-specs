@@ -16,25 +16,27 @@
     "application/json"
   ],
   "paths": {
-      "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/usages": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/usages": {
       "get": {
         "tags": [
           "Servers"
         ],
         "operationId": "ServerUsages_ListByServer",
         "description": "Returns server usages.",
-        "x-ms-examples":{
-          "List servers usages": { "$ref": "./examples/ServerUsageMetricsList.json" }
+        "x-ms-examples": {
+          "List servers usages": {
+            "$ref": "./examples/ServerUsageMetricsList.json"
+          }
         },
         "parameters": [
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ResourceGroupParameter"
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
           },
           {
             "$ref": "#/parameters/ServerNameParameter"
@@ -61,17 +63,19 @@
         "operationId": "DatabaseUsages_ListByDatabase",
         "description": "Returns database usages.",
         "x-ms-examples": {
-          "List database usage metrics": { "$ref": "./examples/DatabaseUsageMetricsList.json" }
+          "List database usage metrics": {
+            "$ref": "./examples/DatabaseUsageMetricsList.json"
+          }
         },
         "parameters": [
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ResourceGroupParameter"
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
           },
           {
             "$ref": "#/parameters/ServerNameParameter"
@@ -99,35 +103,6 @@
     }
   },
   "definitions": {
-    "Resource":{
-      "description":"ARM resource.",
-      "properties":{
-        "id":{
-          "readOnly":true,
-          "type":"string",
-          "description":"Resource ID."
-        },
-        "name":{
-          "readOnly":true,
-          "type":"string",
-          "description":"Resource name."
-        },
-        "type":{
-          "readOnly":true,
-          "type":"string",
-          "description":"Resource type."
-        }
-      },
-      "x-ms-azure-resource": true
-    },
-    "ProxyResource":{
-      "description":"ARM proxy resource.",
-      "allOf":[
-        {
-          "$ref":"#/definitions/Resource"
-        }
-      ]
-    },
     "ServerUsage": {
       "properties": {
         "name": {
@@ -181,7 +156,9 @@
           "description": "The list of server metrics for the server."
         }
       },
-      "required": ["value"],
+      "required": [
+        "value"
+      ],
       "description": "Represents the response to a list server metrics request."
     },
     "DatabaseUsage": {
@@ -237,33 +214,13 @@
           "description": "The list of database usages for the database."
         }
       },
-      "required": ["value"],
+      "required": [
+        "value"
+      ],
       "description": "The response to a list database metrics request."
     }
   },
   "parameters": {
-    "SubscriptionIdParameter": {
-      "name": "subscriptionId",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "The subscription ID that identifies an Azure subscription."
-    },
-    "ApiVersionParameter": {
-      "name": "api-version",
-      "in": "query",
-      "required": true,
-      "type": "string",
-      "description": "The API version to use for the request."
-    },
-    "ResourceGroupParameter": {
-      "name": "resourceGroupName",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "The name of the resource group that contains the resource. You can obtain this value from the Azure Resource Manager API or the portal.",
-      "x-ms-parameter-location": "method"
-    },
     "ServerNameParameter": {
       "name": "serverName",
       "in": "path",

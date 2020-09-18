@@ -1,0 +1,300 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2015-11-01",
+    "title": "SubscriptionsManagementClient",
+    "description": "The Admin Subscriptions Management Client."
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Subscriptions.Admin/subscriptions/{targetSubscriptionId}/acquiredPlans": {
+      "get": {
+        "x-ms-examples": {
+          "Get a collection of all acquired plans that subscription has access to.": {
+            "$ref": "examples/AcquiredPlan/List.json"
+          }
+        },
+        "description": "Get a collection of all acquired plans that subscription has access to.",
+        "tags": [
+          "AcquiredPlans"
+        ],
+        "operationId": "AcquiredPlans_List",
+        "parameters": [
+          {
+            "$ref": "Subscriptions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/TargetSubscriptionIdParameter"
+          },
+          {
+            "$ref": "Subscriptions.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/PlanAcquisitionList"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Subscriptions.Admin/subscriptions/{targetSubscriptionId}/acquiredPlans/{planAcquisitionId}": {
+      "get": {
+        "x-ms-examples": {
+          "Gets the specified plan acquired by a subscription consuming the offer": {
+            "$ref": "examples/AcquiredPlan/Get.json"
+          }
+        },
+        "tags": [
+          "AcquiredPlans"
+        ],
+        "description": "Gets the specified plan acquired by a subscription consuming the offer.",
+        "operationId": "AcquiredPlans_Get",
+        "parameters": [
+          {
+            "$ref": "Subscriptions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/TargetSubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/PlanAcquisitionIdParameter"
+          },
+          {
+            "$ref": "Subscriptions.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/PlanAcquisition"
+            }
+          }
+        }
+      },
+      "delete": {
+        "x-ms-examples": {
+          "Deletes an acquired plan.": {
+            "$ref": "./examples/AcquiredPlan/Delete.json"
+          }
+        },
+        "description": "Deletes an acquired plan.",
+        "tags": [
+          "AcquiredPlans"
+        ],
+        "operationId": "AcquiredPlans_Delete",
+        "parameters": [
+          {
+            "$ref": "Subscriptions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/TargetSubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/PlanAcquisitionIdParameter"
+          },
+          {
+            "$ref": "Subscriptions.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "204": {
+            "description": "No Content"
+          }
+        }
+      },
+      "put": {
+        "x-ms-examples": {
+          "Creates or updates the acquired plan.": {
+            "$ref": "./examples/AcquiredPlan/Create.json"
+          }
+        },
+        "tags": [
+          "AcquiredPlans"
+        ],
+        "description": "Creates an acquired plan.",
+        "operationId": "AcquiredPlans_Create",
+        "parameters": [
+          {
+            "$ref": "Subscriptions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/TargetSubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/PlanAcquisitionIdParameter"
+          },
+          {
+            "$ref": "Subscriptions.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/AcquiredPlanDefinitionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/PlanAcquisition"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/PlanAcquisition"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "PlanAcquisition": {
+      "description": "Represents the acquisition of an add-on plan for a subscription.",
+      "type": "object",
+      "properties": {
+        "acquisitionId": {
+          "description": "Acquisition identifier.",
+          "type": "string"
+        },
+        "id": {
+          "description": "Identifier in the tenant subscription context.",
+          "type": "string"
+        },
+        "planId": {
+          "description": "Plan identifier in the tenant subscription context.",
+          "type": "string"
+        },
+        "externalReferenceId": {
+          "description": "External reference identifier.",
+          "type": "string"
+        },
+        "provisioningState": {
+          "description": "State of the provisioning.",
+          "$ref": "#/definitions/ProvisioningState"
+        },
+        "acquisitionTime": {
+          "description": "Acquisition time.",
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "ProvisioningState": {
+      "description": "Provisioning state for subscriptions service resources, for example, resource provider registration.",
+      "type": "string",
+      "enum": [
+        "NotSpecified",
+        "Accepted",
+        "Failed",
+        "Succeeded"
+      ],
+      "x-ms-enum": {
+        "name": "ProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "description": "The provisioning state is not specified.",
+            "name": "NotSpecified",
+            "value": "NotSpecified"
+          },
+          {
+            "description": "The provisioning state is accepted, and indicates provisioning is ongoing.",
+            "name": "Accepted",
+            "value": "Accepted"
+          },
+          {
+            "description": "The provisioning state is failed, and indicates the data is potentially out-of-sync with third parties.",
+            "name": "Failed",
+            "value": "Failed"
+          },
+          {
+            "description": "The provisioning state is succeeded, and indicates the data is in-sync with third-parties.",
+            "name": "Succeeded",
+            "value": "Succeeded"
+          }
+        ]
+      }
+    },
+    "PlanAcquisitionList": {
+      "description": "List of acquired plans.",
+      "properties": {
+        "value": {
+          "description": "List of acquired plans.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PlanAcquisition"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "URI to the next page."
+        }
+      }
+    }
+  },
+  "parameters": {
+    "TargetSubscriptionIdParameter": {
+      "name": "targetSubscriptionId",
+      "in": "path",
+      "description": "The target subscription ID.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "PlanAcquisitionIdParameter": {
+      "name": "planAcquisitionId",
+      "in": "path",
+      "description": "The plan acquisition Identifier",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "AcquiredPlanDefinitionParameter": {
+      "name": "acquiredPlanDefinition",
+      "in": "body",
+      "description": "The new acquired plan.",
+      "required": true,
+      "schema": {
+        "$ref": "#/definitions/PlanAcquisition"
+      },
+      "x-ms-parameter-location": "method"
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ]
+}

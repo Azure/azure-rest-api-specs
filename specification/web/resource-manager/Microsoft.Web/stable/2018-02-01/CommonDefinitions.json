@@ -1,0 +1,3147 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2018-02-01",
+    "title": "Common Definitions"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {},
+  "definitions": {
+    "ApiDefinitionInfo": {
+      "description": "Information about the formal API definition for the app.",
+      "type": "object",
+      "properties": {
+        "url": {
+          "description": "The URL of the API definition.",
+          "type": "string"
+        }
+      }
+    },
+    "AppServiceEnvironment": {
+      "description": "Description of an App Service Environment.",
+      "required": [
+        "name",
+        "location",
+        "virtualNetwork",
+        "workerPools"
+      ],
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Name of the App Service Environment.",
+          "type": "string"
+        },
+        "location": {
+          "description": "Location of the App Service Environment, e.g. \"West US\".",
+          "type": "string"
+        },
+        "provisioningState": {
+          "description": "Provisioning state of the App Service Environment.",
+          "enum": [
+            "Succeeded",
+            "Failed",
+            "Canceled",
+            "InProgress",
+            "Deleting"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "ProvisioningState",
+            "modelAsString": false
+          }
+        },
+        "status": {
+          "description": "Current status of the App Service Environment.",
+          "enum": [
+            "Preparing",
+            "Ready",
+            "Scaling",
+            "Deleting"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "HostingEnvironmentStatus",
+            "modelAsString": false
+          }
+        },
+        "vnetName": {
+          "description": "Name of the Virtual Network for the App Service Environment.",
+          "type": "string"
+        },
+        "vnetResourceGroupName": {
+          "description": "Resource group of the Virtual Network.",
+          "type": "string"
+        },
+        "vnetSubnetName": {
+          "description": "Subnet of the Virtual Network.",
+          "type": "string"
+        },
+        "virtualNetwork": {
+          "$ref": "#/definitions/VirtualNetworkProfile",
+          "description": "Description of the Virtual Network."
+        },
+        "internalLoadBalancingMode": {
+          "description": "Specifies which endpoints to serve internally in the Virtual Network for the App Service Environment.",
+          "enum": [
+            "None",
+            "Web",
+            "Publishing"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "InternalLoadBalancingMode",
+            "modelAsString": false
+          }
+        },
+        "multiSize": {
+          "description": "Front-end VM size, e.g. \"Medium\", \"Large\".",
+          "type": "string"
+        },
+        "multiRoleCount": {
+          "format": "int32",
+          "description": "Number of front-end instances.",
+          "type": "integer"
+        },
+        "workerPools": {
+          "description": "Description of worker pools with worker size IDs, VM sizes, and number of workers in each pool.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/WorkerPool"
+          }
+        },
+        "ipsslAddressCount": {
+          "format": "int32",
+          "description": "Number of IP SSL addresses reserved for the App Service Environment.",
+          "type": "integer"
+        },
+        "databaseEdition": {
+          "description": "Edition of the metadata database for the App Service Environment, e.g. \"Standard\".",
+          "type": "string",
+          "readOnly": true
+        },
+        "databaseServiceObjective": {
+          "description": "Service objective of the metadata database for the App Service Environment, e.g. \"S0\".",
+          "type": "string",
+          "readOnly": true
+        },
+        "upgradeDomains": {
+          "format": "int32",
+          "description": "Number of upgrade domains of the App Service Environment.",
+          "type": "integer",
+          "readOnly": true
+        },
+        "subscriptionId": {
+          "description": "Subscription of the App Service Environment.",
+          "type": "string",
+          "readOnly": true
+        },
+        "dnsSuffix": {
+          "description": "DNS suffix of the App Service Environment.",
+          "type": "string"
+        },
+        "lastAction": {
+          "description": "Last deployment action on the App Service Environment.",
+          "type": "string",
+          "readOnly": true
+        },
+        "lastActionResult": {
+          "description": "Result of the last deployment action on the App Service Environment.",
+          "type": "string",
+          "readOnly": true
+        },
+        "allowedMultiSizes": {
+          "description": "List of comma separated strings describing which VM sizes are allowed for front-ends.",
+          "type": "string",
+          "readOnly": true
+        },
+        "allowedWorkerSizes": {
+          "description": "List of comma separated strings describing which VM sizes are allowed for workers.",
+          "type": "string",
+          "readOnly": true
+        },
+        "maximumNumberOfMachines": {
+          "format": "int32",
+          "description": "Maximum number of VMs in the App Service Environment.",
+          "type": "integer",
+          "readOnly": true
+        },
+        "vipMappings": {
+          "description": "Description of IP SSL mapping for the App Service Environment.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VirtualIPMapping"
+          },
+          "readOnly": true
+        },
+        "environmentCapacities": {
+          "description": "Current total, used, and available worker capacities.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/StampCapacity"
+          },
+          "readOnly": true
+        },
+        "networkAccessControlList": {
+          "description": "Access control list for controlling traffic to the App Service Environment.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/NetworkAccessControlEntry"
+          }
+        },
+        "environmentIsHealthy": {
+          "description": "True/false indicating whether the App Service Environment is healthy.",
+          "type": "boolean",
+          "readOnly": true
+        },
+        "environmentStatus": {
+          "description": "Detailed message about with results of the last check of the App Service Environment.",
+          "type": "string",
+          "readOnly": true
+        },
+        "resourceGroup": {
+          "description": "Resource group of the App Service Environment.",
+          "type": "string",
+          "readOnly": true
+        },
+        "frontEndScaleFactor": {
+          "format": "int32",
+          "description": "Scale factor for front-ends.",
+          "type": "integer"
+        },
+        "defaultFrontEndScaleFactor": {
+          "format": "int32",
+          "description": "Default Scale Factor for FrontEnds.",
+          "type": "integer",
+          "readOnly": true
+        },
+        "apiManagementAccountId": {
+          "description": "API Management Account associated with the App Service Environment.",
+          "type": "string"
+        },
+        "suspended": {
+          "description": "<code>true</code> if the App Service Environment is suspended; otherwise, <code>false</code>. The environment can be suspended, e.g. when the management endpoint is no longer available\n (most likely because NSG blocked the incoming traffic).",
+          "type": "boolean"
+        },
+        "dynamicCacheEnabled": {
+          "description": "True/false indicating whether the App Service Environment is suspended. The environment can be suspended e.g. when the management endpoint is no longer available\n(most likely because NSG blocked the incoming traffic).",
+          "type": "boolean"
+        },
+        "clusterSettings": {
+          "description": "Custom settings for changing the behavior of the App Service Environment.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/NameValuePair"
+          }
+        },
+        "userWhitelistedIpRanges": {
+          "description": "User added ip ranges to whitelist on ASE db",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "hasLinuxWorkers": {
+          "description": "Flag that displays whether an ASE has linux workers or not",
+          "type": "boolean"
+        },
+        "sslCertKeyVaultId": {
+          "description": "Key Vault ID for ILB App Service Environment default SSL certificate",
+          "type": "string"
+        },
+        "sslCertKeyVaultSecretName": {
+          "description": "Key Vault Secret Name for ILB App Service Environment default SSL certificate",
+          "type": "string"
+        }
+      }
+    },
+    "AppServicePlan": {
+      "description": "App Service plan.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "AppServicePlan resource specific properties",
+          "properties": {
+            "workerTierName": {
+              "description": "Target worker tier assigned to the App Service plan.",
+              "type": "string"
+            },
+            "status": {
+              "description": "App Service plan status.",
+              "enum": [
+                "Ready",
+                "Pending",
+                "Creating"
+              ],
+              "type": "string",
+              "readOnly": true,
+              "x-ms-enum": {
+                "name": "StatusOptions",
+                "modelAsString": false
+              }
+            },
+            "subscription": {
+              "description": "App Service plan subscription.",
+              "type": "string",
+              "readOnly": true
+            },
+            "hostingEnvironmentProfile": {
+              "$ref": "#/definitions/HostingEnvironmentProfile",
+              "description": "Specification for the App Service Environment to use for the App Service plan.",
+              "x-ms-mutability": [
+                "create",
+                "read"
+              ]
+            },
+            "maximumNumberOfWorkers": {
+              "format": "int32",
+              "description": "Maximum number of instances that can be assigned to this App Service plan.",
+              "type": "integer",
+              "readOnly": true
+            },
+            "geoRegion": {
+              "description": "Geographical location for the App Service plan.",
+              "type": "string",
+              "readOnly": true
+            },
+            "perSiteScaling": {
+              "description": "If <code>true</code>, apps assigned to this App Service plan can be scaled independently.\nIf <code>false</code>, apps assigned to this App Service plan will scale to all instances of the plan.",
+              "default": false,
+              "type": "boolean"
+            },
+            "maximumElasticWorkerCount": {
+              "format": "int32",
+              "description": "Maximum number of total workers allowed for this ElasticScaleEnabled App Service Plan",
+              "type": "integer"
+            },
+            "numberOfSites": {
+              "format": "int32",
+              "description": "Number of apps assigned to this App Service plan.",
+              "type": "integer",
+              "readOnly": true
+            },
+            "isSpot": {
+              "description": "If <code>true</code>, this App Service Plan owns spot instances.",
+              "type": "boolean"
+            },
+            "spotExpirationTime": {
+              "format": "date-time",
+              "description": "The time when the server farm expires. Valid only if it is a spot server farm.",
+              "type": "string"
+            },
+            "freeOfferExpirationTime": {
+              "format": "date-time",
+              "description": "The time when the server farm free offer expires.",
+              "type": "string"
+            },
+            "resourceGroup": {
+              "description": "Resource group of the App Service plan.",
+              "type": "string",
+              "readOnly": true
+            },
+            "reserved": {
+              "description": "If Linux app service plan <code>true</code>, <code>false</code> otherwise.",
+              "default": false,
+              "type": "boolean",
+              "x-ms-mutability": [
+                "create",
+                "read"
+              ]
+            },
+            "isXenon": {
+              "description": "Obsolete: If Hyper-V container app service plan <code>true</code>, <code>false</code> otherwise.",
+              "default": false,
+              "type": "boolean",
+              "x-ms-mutability": [
+                "create",
+                "read"
+              ]
+            },
+            "hyperV": {
+              "description": "If Hyper-V container app service plan <code>true</code>, <code>false</code> otherwise.",
+              "default": false,
+              "type": "boolean",
+              "x-ms-mutability": [
+                "create",
+                "read"
+              ]
+            },
+            "targetWorkerCount": {
+              "format": "int32",
+              "description": "Scaling worker count.",
+              "type": "integer"
+            },
+            "targetWorkerSizeId": {
+              "format": "int32",
+              "description": "Scaling worker size ID.",
+              "type": "integer"
+            },
+            "provisioningState": {
+              "description": "Provisioning state of the App Service Environment.",
+              "enum": [
+                "Succeeded",
+                "Failed",
+                "Canceled",
+                "InProgress",
+                "Deleting"
+              ],
+              "type": "string",
+              "readOnly": true,
+              "x-ms-enum": {
+                "name": "ProvisioningState",
+                "modelAsString": false
+              }
+            }
+          },
+          "x-ms-client-flatten": true
+        },
+        "sku": {
+          "$ref": "#/definitions/SkuDescription"
+        }
+      }
+    },
+    "AppServicePlanCollection": {
+      "description": "Collection of App Service plans.",
+      "required": [
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Collection of resources.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AppServicePlan"
+          }
+        },
+        "nextLink": {
+          "description": "Link to next page of resources.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "AutoHealActions": {
+      "description": "Actions which to take by the auto-heal module when a rule is triggered.",
+      "type": "object",
+      "properties": {
+        "actionType": {
+          "description": "Predefined action to be taken.",
+          "enum": [
+            "Recycle",
+            "LogEvent",
+            "CustomAction"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "AutoHealActionType",
+            "modelAsString": false
+          }
+        },
+        "customAction": {
+          "$ref": "#/definitions/AutoHealCustomAction",
+          "description": "Custom action to be taken."
+        },
+        "minProcessExecutionTime": {
+          "description": "Minimum time the process must execute\nbefore taking the action",
+          "type": "string"
+        }
+      }
+    },
+    "AutoHealCustomAction": {
+      "description": "Custom action to be executed\nwhen an auto heal rule is triggered.",
+      "type": "object",
+      "properties": {
+        "exe": {
+          "description": "Executable to be run.",
+          "type": "string"
+        },
+        "parameters": {
+          "description": "Parameters for the executable.",
+          "type": "string"
+        }
+      }
+    },
+    "AutoHealRules": {
+      "description": "Rules that can be defined for auto-heal.",
+      "type": "object",
+      "properties": {
+        "triggers": {
+          "$ref": "#/definitions/AutoHealTriggers",
+          "description": "Conditions that describe when to execute the auto-heal actions."
+        },
+        "actions": {
+          "$ref": "#/definitions/AutoHealActions",
+          "description": "Actions to be executed when a rule is triggered."
+        }
+      }
+    },
+    "AutoHealTriggers": {
+      "description": "Triggers for auto-heal.",
+      "type": "object",
+      "properties": {
+        "requests": {
+          "$ref": "#/definitions/RequestsBasedTrigger",
+          "description": "A rule based on total requests."
+        },
+        "privateBytesInKB": {
+          "format": "int32",
+          "description": "A rule based on private bytes.",
+          "type": "integer"
+        },
+        "statusCodes": {
+          "description": "A rule based on status codes.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/StatusCodesBasedTrigger"
+          }
+        },
+        "slowRequests": {
+          "$ref": "#/definitions/SlowRequestsBasedTrigger",
+          "description": "A rule based on request execution time."
+        }
+      }
+    },
+    "AzureStorageInfoValue": {
+      "description": "Azure Files or Blob Storage access information value for dictionary storage.",
+      "type": "object",
+      "properties": {
+        "type": {
+          "description": "Type of storage.",
+          "enum": [
+            "AzureFiles",
+            "AzureBlob"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "AzureStorageType",
+            "modelAsString": false
+          }
+        },
+        "accountName": {
+          "description": "Name of the storage account.",
+          "type": "string"
+        },
+        "shareName": {
+          "description": "Name of the file share (container name, for Blob storage).",
+          "type": "string"
+        },
+        "accessKey": {
+          "description": "Access key for the storage account.",
+          "type": "string"
+        },
+        "mountPath": {
+          "description": "Path to mount the storage within the site's runtime environment.",
+          "type": "string"
+        },
+        "state": {
+          "description": "State of the storage account.",
+          "enum": [
+            "Ok",
+            "InvalidCredentials",
+            "InvalidShare"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "AzureStorageState",
+            "modelAsString": false
+          }
+        }
+      }
+    },
+    "Capability": {
+      "description": "Describes the capabilities/features allowed for a specific SKU.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Name of the SKU capability.",
+          "type": "string"
+        },
+        "value": {
+          "description": "Value of the SKU capability.",
+          "type": "string"
+        },
+        "reason": {
+          "description": "Reason of the SKU capability.",
+          "type": "string"
+        }
+      }
+    },
+    "CloningInfo": {
+      "description": "Information needed for cloning operation.",
+      "required": [
+        "sourceWebAppId"
+      ],
+      "type": "object",
+      "properties": {
+        "correlationId": {
+          "format": "uuid",
+          "description": "Correlation ID of cloning operation. This ID ties multiple cloning operations\ntogether to use the same snapshot.",
+          "type": "string",
+          "example": "00000000-0000-0000-0000-000000000000"
+        },
+        "overwrite": {
+          "description": "<code>true</code> to overwrite destination app; otherwise, <code>false</code>.",
+          "type": "boolean"
+        },
+        "cloneCustomHostNames": {
+          "description": "<code>true</code> to clone custom hostnames from source app; otherwise, <code>false</code>.",
+          "type": "boolean"
+        },
+        "cloneSourceControl": {
+          "description": "<code>true</code> to clone source control from source app; otherwise, <code>false</code>.",
+          "type": "boolean"
+        },
+        "sourceWebAppId": {
+          "description": "ARM resource ID of the source app. App resource ID is of the form \n/subscriptions/{subId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{siteName} for production slots and \n/subscriptions/{subId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{siteName}/slots/{slotName} for other slots.",
+          "type": "string"
+        },
+        "sourceWebAppLocation": {
+          "description": "Location of source app ex: West US or North Europe",
+          "type": "string"
+        },
+        "hostingEnvironment": {
+          "description": "App Service Environment.",
+          "type": "string"
+        },
+        "appSettingsOverrides": {
+          "description": "Application setting overrides for cloned app. If specified, these settings override the settings cloned \nfrom source app. Otherwise, application settings from source app are retained.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "configureLoadBalancing": {
+          "description": "<code>true</code> to configure load balancing for source and destination app.",
+          "type": "boolean"
+        },
+        "trafficManagerProfileId": {
+          "description": "ARM resource ID of the Traffic Manager profile to use, if it exists. Traffic Manager resource ID is of the form \n/subscriptions/{subId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/trafficManagerProfiles/{profileName}.",
+          "type": "string"
+        },
+        "trafficManagerProfileName": {
+          "description": "Name of Traffic Manager profile to create. This is only needed if Traffic Manager profile does not already exist.",
+          "type": "string"
+        }
+      }
+    },
+    "ConnStringInfo": {
+      "description": "Database connection string information.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Name of connection string.",
+          "type": "string"
+        },
+        "connectionString": {
+          "description": "Connection string value.",
+          "type": "string"
+        },
+        "type": {
+          "description": "Type of database.",
+          "enum": [
+            "MySql",
+            "SQLServer",
+            "SQLAzure",
+            "Custom",
+            "NotificationHub",
+            "ServiceBus",
+            "EventHub",
+            "ApiHub",
+            "DocDb",
+            "RedisCache",
+            "PostgreSQL"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "ConnectionStringType",
+            "modelAsString": false
+          }
+        }
+      }
+    },
+    "CorsSettings": {
+      "description": "Cross-Origin Resource Sharing (CORS) settings for the app.",
+      "type": "object",
+      "properties": {
+        "allowedOrigins": {
+          "description": "Gets or sets the list of origins that should be allowed to make cross-origin\ncalls (for example: http://example.com:12345). Use \"*\" to allow all.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "supportCredentials": {
+          "description": "Gets or sets whether CORS requests with credentials are allowed. See \nhttps://developer.mozilla.org/en-US/docs/Web/HTTP/CORS#Requests_with_credentials\nfor more details.",
+          "type": "boolean"
+        }
+      }
+    },
+    "CsmOperationCollection": {
+      "description": "Collection of Azure resource manager operation metadata.",
+      "required": [
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Collection of resources.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CsmOperationDescription"
+          }
+        },
+        "nextLink": {
+          "description": "Link to next page of resources.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "CsmOperationDescription": {
+      "description": "Description of an operation available for Microsoft.Web resource provider.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "display": {
+          "$ref": "#/definitions/CsmOperationDisplay"
+        },
+        "origin": {
+          "type": "string"
+        },
+        "properties": {
+          "$ref": "#/definitions/CsmOperationDescriptionProperties"
+        }
+      }
+    },
+    "CsmOperationDescriptionProperties": {
+      "description": "Properties available for a Microsoft.Web resource provider operation.",
+      "type": "object",
+      "properties": {
+        "serviceSpecification": {
+          "$ref": "#/definitions/ServiceSpecification"
+        }
+      }
+    },
+    "CsmOperationDisplay": {
+      "description": "Meta data about operation used for display in portal.",
+      "type": "object",
+      "properties": {
+        "provider": {
+          "type": "string"
+        },
+        "resource": {
+          "type": "string"
+        },
+        "operation": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        }
+      }
+    },
+    "CsmUsageQuota": {
+      "description": "Usage of the quota resource.",
+      "type": "object",
+      "properties": {
+        "unit": {
+          "description": "Units of measurement for the quota resource.",
+          "type": "string"
+        },
+        "nextResetTime": {
+          "format": "date-time",
+          "description": "Next reset time for the resource counter.",
+          "type": "string"
+        },
+        "currentValue": {
+          "format": "int64",
+          "description": "The current value of the resource counter.",
+          "type": "integer"
+        },
+        "limit": {
+          "format": "int64",
+          "description": "The resource limit.",
+          "type": "integer"
+        },
+        "name": {
+          "$ref": "#/definitions/LocalizableString",
+          "description": "Quota name."
+        }
+      }
+    },
+    "CsmUsageQuotaCollection": {
+      "description": "Collection of CSM usage quotas.",
+      "required": [
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Collection of resources.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CsmUsageQuota"
+          }
+        },
+        "nextLink": {
+          "description": "Link to next page of resources.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "DefaultErrorResponse": {
+      "description": "App Service error response.",
+      "type": "object",
+      "properties": {
+        "error": {
+          "description": "Error model.",
+          "type": "object",
+          "properties": {
+            "code": {
+              "description": "Standardized string to programmatically identify the error.",
+              "type": "string",
+              "readOnly": true
+            },
+            "message": {
+              "description": "Detailed error description and debugging information.",
+              "type": "string",
+              "readOnly": true
+            },
+            "target": {
+              "description": "Detailed error description and debugging information.",
+              "type": "string",
+              "readOnly": true
+            },
+            "details": {
+              "type": "array",
+              "items": {
+                "description": "Detailed errors.",
+                "properties": {
+                  "code": {
+                    "description": "Standardized string to programmatically identify the error.",
+                    "type": "string",
+                    "readOnly": true
+                  },
+                  "message": {
+                    "description": "Detailed error description and debugging information.",
+                    "type": "string",
+                    "readOnly": true
+                  },
+                  "target": {
+                    "description": "Detailed error description and debugging information.",
+                    "type": "string",
+                    "readOnly": true
+                  }
+                },
+                "readOnly": true
+              }
+            },
+            "innererror": {
+              "description": "More information to debug error.",
+              "type": "string",
+              "readOnly": true
+            }
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "DeletedSite": {
+      "description": "A deleted app.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyOnlyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "DeletedSite resource specific properties",
+          "properties": {
+            "deletedSiteId": {
+              "format": "int32",
+              "description": "Numeric id for the deleted site",
+              "type": "integer",
+              "readOnly": true
+            },
+            "deletedTimestamp": {
+              "description": "Time in UTC when the app was deleted.",
+              "type": "string",
+              "readOnly": true
+            },
+            "subscription": {
+              "description": "Subscription containing the deleted site",
+              "type": "string",
+              "readOnly": true
+            },
+            "resourceGroup": {
+              "description": "ResourceGroup that contained the deleted site",
+              "type": "string",
+              "readOnly": true
+            },
+            "deletedSiteName": {
+              "description": "Name of the deleted site",
+              "type": "string",
+              "readOnly": true
+            },
+            "slot": {
+              "description": "Slot of the deleted site",
+              "type": "string",
+              "readOnly": true
+            },
+            "kind": {
+              "description": "Kind of site that was deleted",
+              "type": "string",
+              "readOnly": true
+            },
+            "geoRegionName": {
+              "description": "Geo Region of the deleted site",
+              "type": "string",
+              "readOnly": true
+            }
+          },
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "Dimension": {
+      "description": "Dimension of a resource metric. For e.g. instance specific HTTP requests for a web app, \nwhere instance name is dimension of the metric HTTP request",
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "displayName": {
+          "type": "string"
+        },
+        "internalName": {
+          "type": "string"
+        },
+        "toBeExportedForShoebox": {
+          "type": "boolean"
+        }
+      }
+    },
+    "ErrorEntity": {
+      "description": "Body of the error response returned from the API.",
+      "type": "object",
+      "properties": {
+        "extendedCode": {
+          "description": "Type of error.",
+          "type": "string"
+        },
+        "messageTemplate": {
+          "description": "Message template.",
+          "type": "string"
+        },
+        "parameters": {
+          "description": "Parameters for the template.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "innerErrors": {
+          "description": "Inner errors.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ErrorEntity"
+          }
+        },
+        "code": {
+          "description": "Basic error code.",
+          "type": "string"
+        },
+        "message": {
+          "description": "Any details of the error.",
+          "type": "string"
+        }
+      }
+    },
+    "Experiments": {
+      "description": "Routing rules in production experiments.",
+      "type": "object",
+      "properties": {
+        "rampUpRules": {
+          "description": "List of ramp-up rules.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RampUpRule"
+          }
+        }
+      }
+    },
+    "GeoDistribution": {
+      "description": "A global distribution definition.",
+      "type": "object",
+      "properties": {
+        "location": {
+          "description": "Location.",
+          "type": "string"
+        },
+        "numberOfWorkers": {
+          "format": "int32",
+          "description": "NumberOfWorkers.",
+          "type": "integer"
+        }
+      }
+    },
+    "HandlerMapping": {
+      "description": "The IIS handler mappings used to define which handler processes HTTP requests with certain extension. \nFor example, it is used to configure php-cgi.exe process to handle all HTTP requests with *.php extension.",
+      "type": "object",
+      "properties": {
+        "extension": {
+          "description": "Requests with this extension will be handled using the specified FastCGI application.",
+          "type": "string"
+        },
+        "scriptProcessor": {
+          "description": "The absolute path to the FastCGI application.",
+          "type": "string"
+        },
+        "arguments": {
+          "description": "Command-line arguments to be passed to the script processor.",
+          "type": "string"
+        }
+      }
+    },
+    "HostNameSslState": {
+      "description": "SSL-enabled hostname.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Hostname.",
+          "type": "string"
+        },
+        "sslState": {
+          "description": "SSL type.",
+          "enum": [
+            "Disabled",
+            "SniEnabled",
+            "IpBasedEnabled"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "SslState",
+            "modelAsString": false
+          }
+        },
+        "virtualIP": {
+          "description": "Virtual IP address assigned to the hostname if IP based SSL is enabled.",
+          "type": "string"
+        },
+        "thumbprint": {
+          "description": "SSL certificate thumbprint.",
+          "type": "string"
+        },
+        "toUpdate": {
+          "description": "Set to <code>true</code> to update existing hostname.",
+          "type": "boolean"
+        },
+        "hostType": {
+          "description": "Indicates whether the hostname is a standard or repository hostname.",
+          "enum": [
+            "Standard",
+            "Repository"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "HostType",
+            "modelAsString": false
+          }
+        }
+      }
+    },
+    "HostingEnvironmentProfile": {
+      "description": "Specification for an App Service Environment to use for this resource.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "Resource ID of the App Service Environment.",
+          "type": "string"
+        },
+        "name": {
+          "description": "Name of the App Service Environment.",
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "description": "Resource type of the App Service Environment.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "HybridConnection": {
+      "description": "Hybrid Connection contract. This is used to configure a Hybrid Connection.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyOnlyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "HybridConnection resource specific properties",
+          "properties": {
+            "serviceBusNamespace": {
+              "description": "The name of the Service Bus namespace.",
+              "type": "string",
+              "x-ms-mutability": [
+                "create",
+                "read"
+              ]
+            },
+            "relayName": {
+              "description": "The name of the Service Bus relay.",
+              "type": "string",
+              "x-ms-mutability": [
+                "create",
+                "read"
+              ]
+            },
+            "relayArmUri": {
+              "description": "The ARM URI to the Service Bus relay.",
+              "type": "string"
+            },
+            "hostname": {
+              "description": "The hostname of the endpoint.",
+              "type": "string"
+            },
+            "port": {
+              "format": "int32",
+              "description": "The port of the endpoint.",
+              "type": "integer"
+            },
+            "sendKeyName": {
+              "description": "The name of the Service Bus key which has Send permissions. This is used to authenticate to Service Bus.",
+              "type": "string"
+            },
+            "sendKeyValue": {
+              "description": "The value of the Service Bus key. This is used to authenticate to Service Bus. In ARM this key will not be returned\nnormally, use the POST /listKeys API instead.",
+              "type": "string"
+            },
+            "serviceBusSuffix": {
+              "description": "The suffix for the service bus endpoint. By default this is .servicebus.windows.net",
+              "type": "string"
+            }
+          },
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "HybridConnectionKey": {
+      "description": "Hybrid Connection key contract. This has the send key name and value for a Hybrid Connection.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyOnlyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "HybridConnectionKey resource specific properties",
+          "properties": {
+            "sendKeyName": {
+              "description": "The name of the send key.",
+              "type": "string",
+              "readOnly": true
+            },
+            "sendKeyValue": {
+              "description": "The value of the send key.",
+              "type": "string",
+              "readOnly": true
+            }
+          },
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "Identifier": {
+      "description": "A domain specific resource identifier.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyOnlyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "Identifier resource specific properties",
+          "properties": {
+            "id": {
+              "description": "String representation of the identity.",
+              "type": "string"
+            }
+          },
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "IdentifierCollection": {
+      "description": "Collection of identifiers.",
+      "required": [
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Collection of resources.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Identifier"
+          }
+        },
+        "nextLink": {
+          "description": "Link to next page of resources.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "IpSecurityRestriction": {
+      "description": "IP security restriction on an app.",
+      "type": "object",
+      "properties": {
+        "ipAddress": {
+          "description": "IP address the security restriction is valid for.\nIt can be in form of pure ipv4 address (required SubnetMask property) or\nCIDR notation such as ipv4/mask (leading bit match). For CIDR,\nSubnetMask property must not be specified.",
+          "type": "string"
+        },
+        "subnetMask": {
+          "description": "Subnet mask for the range of IP addresses the restriction is valid for.",
+          "type": "string"
+        },
+        "vnetSubnetResourceId": {
+          "description": "Virtual network resource id",
+          "type": "string"
+        },
+        "vnetTrafficTag": {
+          "format": "int32",
+          "description": "(internal) Vnet traffic tag",
+          "type": "integer"
+        },
+        "subnetTrafficTag": {
+          "format": "int32",
+          "description": "(internal) Subnet traffic tag",
+          "type": "integer"
+        },
+        "action": {
+          "description": "Allow or Deny access for this IP range.",
+          "type": "string"
+        },
+        "tag": {
+          "description": "Defines what this IP filter will be used for. This is to support IP filtering on proxies.",
+          "enum": [
+            "Default",
+            "XffProxy"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "IpFilterTag",
+            "modelAsString": false
+          }
+        },
+        "priority": {
+          "format": "int32",
+          "description": "Priority of IP restriction rule.",
+          "type": "integer"
+        },
+        "name": {
+          "description": "IP restriction rule name.",
+          "type": "string"
+        },
+        "description": {
+          "description": "IP restriction rule description.",
+          "type": "string"
+        }
+      }
+    },
+    "LocalizableString": {
+      "description": "Localizable string object containing the name and a localized value.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Non-localized name.",
+          "type": "string"
+        },
+        "localizedValue": {
+          "description": "Localized name.",
+          "type": "string"
+        }
+      }
+    },
+    "LogSpecification": {
+      "description": "Log Definition of a single resource metric.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "displayName": {
+          "type": "string"
+        },
+        "blobDuration": {
+          "type": "string"
+        }
+      }
+    },
+    "ManagedServiceIdentity": {
+      "description": "Managed service identity.",
+      "type": "object",
+      "properties": {
+        "type": {
+          "description": "Type of managed service identity.",
+          "enum": [
+            "SystemAssigned",
+            "UserAssigned",
+            "SystemAssigned, UserAssigned",
+            "None"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "ManagedServiceIdentityType",
+            "modelAsString": true
+          }
+        },
+        "tenantId": {
+          "description": "Tenant of managed service identity.",
+          "type": "string",
+          "readOnly": true
+        },
+        "principalId": {
+          "description": "Principal Id of managed service identity.",
+          "type": "string",
+          "readOnly": true
+        },
+        "userAssignedIdentities": {
+          "description": "The list of user assigned identities associated with the resource. The user identity dictionary key references will be ARM resource ids in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}",
+          "type": "object",
+          "additionalProperties": {
+            "type": "object",
+            "properties": {
+              "principalId": {
+                "description": "Principal Id of user assigned identity",
+                "type": "string",
+                "readOnly": true
+              },
+              "clientId": {
+                "description": "Client Id of user assigned identity",
+                "type": "string",
+                "readOnly": true
+              }
+            }
+          }
+        }
+      }
+    },
+    "MetricAvailability": {
+      "description": "Retention policy of a resource metric.",
+      "type": "object",
+      "properties": {
+        "timeGrain": {
+          "type": "string"
+        },
+        "blobDuration": {
+          "type": "string"
+        }
+      }
+    },
+    "MetricSpecification": {
+      "description": "Definition of a single resource metric.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "displayName": {
+          "type": "string"
+        },
+        "displayDescription": {
+          "type": "string"
+        },
+        "unit": {
+          "type": "string"
+        },
+        "aggregationType": {
+          "type": "string"
+        },
+        "supportsInstanceLevelAggregation": {
+          "type": "boolean"
+        },
+        "enableRegionalMdmAccount": {
+          "type": "boolean"
+        },
+        "sourceMdmAccount": {
+          "type": "string"
+        },
+        "sourceMdmNamespace": {
+          "type": "string"
+        },
+        "metricFilterPattern": {
+          "type": "string"
+        },
+        "fillGapWithZero": {
+          "type": "boolean"
+        },
+        "isInternal": {
+          "type": "boolean"
+        },
+        "dimensions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Dimension"
+          }
+        },
+        "category": {
+          "type": "string"
+        },
+        "availabilities": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MetricAvailability"
+          }
+        }
+      }
+    },
+    "NameIdentifier": {
+      "description": "Identifies an object.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Name of the object.",
+          "type": "string"
+        }
+      }
+    },
+    "NameValuePair": {
+      "description": "Name value pair.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Pair name.",
+          "type": "string"
+        },
+        "value": {
+          "description": "Pair value.",
+          "type": "string"
+        }
+      }
+    },
+    "NetworkAccessControlEntry": {
+      "description": "Network access control entry.",
+      "type": "object",
+      "properties": {
+        "action": {
+          "description": "Action object.",
+          "enum": [
+            "Permit",
+            "Deny"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "AccessControlEntryAction",
+            "modelAsString": false
+          }
+        },
+        "description": {
+          "description": "Description of network access control entry.",
+          "type": "string"
+        },
+        "order": {
+          "format": "int32",
+          "description": "Order of precedence.",
+          "type": "integer"
+        },
+        "remoteSubnet": {
+          "description": "Remote subnet.",
+          "type": "string"
+        }
+      }
+    },
+    "Operation": {
+      "description": "An operation on a resource.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "Operation ID.",
+          "type": "string"
+        },
+        "name": {
+          "description": "Operation name.",
+          "type": "string"
+        },
+        "status": {
+          "description": "The current status of the operation.",
+          "enum": [
+            "InProgress",
+            "Failed",
+            "Succeeded",
+            "TimedOut",
+            "Created"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "OperationStatus",
+            "modelAsString": false
+          }
+        },
+        "errors": {
+          "description": "Any errors associate with the operation.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ErrorEntity"
+          }
+        },
+        "createdTime": {
+          "format": "date-time",
+          "description": "Time when operation has started.",
+          "type": "string"
+        },
+        "modifiedTime": {
+          "format": "date-time",
+          "description": "Time when operation has been updated.",
+          "type": "string"
+        },
+        "expirationTime": {
+          "format": "date-time",
+          "description": "Time when operation will expire.",
+          "type": "string"
+        },
+        "geoMasterOperationId": {
+          "format": "uuid",
+          "description": "Applicable only for stamp operation ids.",
+          "type": "string",
+          "example": "00000000-0000-0000-0000-000000000000"
+        }
+      }
+    },
+    "ProxyOnlyResource": {
+      "description": "Azure proxy only resource. This resource is not tracked by Azure Resource Manager.",
+      "properties": {
+        "id": {
+          "description": "Resource Id.",
+          "type": "string",
+          "readOnly": true
+        },
+        "name": {
+          "description": "Resource Name.",
+          "type": "string",
+          "readOnly": true
+        },
+        "kind": {
+          "description": "Kind of resource.",
+          "type": "string"
+        },
+        "type": {
+          "description": "Resource type.",
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "PushSettings": {
+      "description": "Push settings for the App.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyOnlyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "PushSettings resource specific properties",
+          "required": [
+            "isPushEnabled"
+          ],
+          "properties": {
+            "isPushEnabled": {
+              "description": "Gets or sets a flag indicating whether the Push endpoint is enabled.",
+              "type": "boolean"
+            },
+            "tagWhitelistJson": {
+              "description": "Gets or sets a JSON string containing a list of tags that are whitelisted for use by the push registration endpoint.",
+              "type": "string"
+            },
+            "tagsRequiringAuth": {
+              "description": "Gets or sets a JSON string containing a list of tags that require user authentication to be used in the push registration endpoint.\nTags can consist of alphanumeric characters and the following:\n'_', '@', '#', '.', ':', '-'. \nValidation should be performed at the PushRequestHandler.",
+              "type": "string"
+            },
+            "dynamicTagsJson": {
+              "description": "Gets or sets a JSON string containing a list of dynamic tags that will be evaluated from user claims in the push registration endpoint.",
+              "type": "string"
+            }
+          },
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "RampUpRule": {
+      "description": "Routing rules for ramp up testing. This rule allows to redirect static traffic % to a slot or to gradually change routing % based on performance.",
+      "type": "object",
+      "properties": {
+        "actionHostName": {
+          "description": "Hostname of a slot to which the traffic will be redirected if decided to. E.g. myapp-stage.azurewebsites.net.",
+          "type": "string"
+        },
+        "reroutePercentage": {
+          "format": "double",
+          "description": "Percentage of the traffic which will be redirected to <code>ActionHostName</code>.",
+          "type": "number"
+        },
+        "changeStep": {
+          "format": "double",
+          "description": "In auto ramp up scenario this is the step to add/remove from <code>ReroutePercentage</code> until it reaches \n<code>MinReroutePercentage</code> or <code>MaxReroutePercentage</code>. Site metrics are checked every N minutes specified in <code>ChangeIntervalInMinutes</code>.\nCustom decision algorithm can be provided in TiPCallback site extension which URL can be specified in <code>ChangeDecisionCallbackUrl</code>.",
+          "type": "number"
+        },
+        "changeIntervalInMinutes": {
+          "format": "int32",
+          "description": "Specifies interval in minutes to reevaluate ReroutePercentage.",
+          "type": "integer"
+        },
+        "minReroutePercentage": {
+          "format": "double",
+          "description": "Specifies lower boundary above which ReroutePercentage will stay.",
+          "type": "number"
+        },
+        "maxReroutePercentage": {
+          "format": "double",
+          "description": "Specifies upper boundary below which ReroutePercentage will stay.",
+          "type": "number"
+        },
+        "changeDecisionCallbackUrl": {
+          "description": "Custom decision algorithm can be provided in TiPCallback site extension which URL can be specified. See TiPCallback site extension for the scaffold and contracts.\nhttps://www.siteextensions.net/packages/TiPCallback/",
+          "type": "string"
+        },
+        "name": {
+          "description": "Name of the routing rule. The recommended name would be to point to the slot which will receive the traffic in the experiment.",
+          "type": "string"
+        }
+      }
+    },
+    "RequestsBasedTrigger": {
+      "description": "Trigger based on total requests.",
+      "type": "object",
+      "properties": {
+        "count": {
+          "format": "int32",
+          "description": "Request Count.",
+          "type": "integer"
+        },
+        "timeInterval": {
+          "description": "Time interval.",
+          "type": "string"
+        }
+      }
+    },
+    "Resource": {
+      "description": "Azure resource. This resource is tracked in Azure Resource Manager",
+      "required": [
+        "location"
+      ],
+      "properties": {
+        "id": {
+          "description": "Resource Id.",
+          "type": "string",
+          "readOnly": true
+        },
+        "name": {
+          "description": "Resource Name.",
+          "type": "string",
+          "readOnly": true
+        },
+        "kind": {
+          "description": "Kind of resource.",
+          "type": "string"
+        },
+        "location": {
+          "description": "Resource Location.",
+          "type": "string"
+        },
+        "type": {
+          "description": "Resource type.",
+          "type": "string",
+          "readOnly": true
+        },
+        "tags": {
+          "description": "Resource tags.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "ResourceMetric": {
+      "description": "Object representing a metric for any resource .",
+      "type": "object",
+      "properties": {
+        "name": {
+          "$ref": "#/definitions/ResourceMetricName",
+          "description": "Name of metric.",
+          "readOnly": true
+        },
+        "unit": {
+          "description": "Metric unit.",
+          "type": "string",
+          "readOnly": true
+        },
+        "timeGrain": {
+          "description": "Metric granularity. E.g PT1H, PT5M, P1D",
+          "type": "string",
+          "readOnly": true
+        },
+        "startTime": {
+          "format": "date-time",
+          "description": "Metric start time.",
+          "type": "string",
+          "readOnly": true
+        },
+        "endTime": {
+          "format": "date-time",
+          "description": "Metric end time.",
+          "type": "string",
+          "readOnly": true
+        },
+        "resourceId": {
+          "description": "Metric resource Id.",
+          "type": "string",
+          "readOnly": true
+        },
+        "id": {
+          "description": "Resource Id.",
+          "type": "string",
+          "readOnly": true
+        },
+        "metricValues": {
+          "description": "Metric values.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ResourceMetricValue"
+          },
+          "readOnly": true
+        },
+        "properties": {
+          "description": "Resource metric properties collection.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ResourceMetricProperty"
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "ResourceMetricAvailability": {
+      "description": "Metrics availability and retention.",
+      "type": "object",
+      "properties": {
+        "timeGrain": {
+          "description": "Time grain .",
+          "type": "string",
+          "readOnly": true
+        },
+        "retention": {
+          "description": "Retention period for the current time grain.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "ResourceMetricCollection": {
+      "description": "Collection of metric responses.",
+      "required": [
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Collection of resources.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ResourceMetric"
+          }
+        },
+        "nextLink": {
+          "description": "Link to next page of resources.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "ResourceMetricDefinition": {
+      "description": "Metadata for the metrics.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyOnlyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "ResourceMetricDefinition resource specific properties",
+          "properties": {
+            "unit": {
+              "description": "Unit of the metric.",
+              "type": "string",
+              "readOnly": true
+            },
+            "primaryAggregationType": {
+              "description": "Primary aggregation type.",
+              "type": "string",
+              "readOnly": true
+            },
+            "metricAvailabilities": {
+              "description": "List of time grains supported for the metric together with retention period.",
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/ResourceMetricAvailability"
+              },
+              "readOnly": true
+            },
+            "resourceUri": {
+              "description": "Resource URI.",
+              "type": "string",
+              "readOnly": true
+            },
+            "properties": {
+              "description": "Resource metric definition properties.",
+              "type": "object",
+              "additionalProperties": {
+                "type": "string"
+              },
+              "readOnly": true
+            }
+          },
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "ResourceMetricDefinitionCollection": {
+      "description": "Collection of metric definitions.",
+      "required": [
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Collection of resources.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ResourceMetricDefinition"
+          }
+        },
+        "nextLink": {
+          "description": "Link to next page of resources.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "ResourceMetricName": {
+      "description": "Name of a metric for any resource .",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "metric name value.",
+          "type": "string",
+          "readOnly": true
+        },
+        "localizedValue": {
+          "description": "Localized metric name value.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "ResourceMetricProperty": {
+      "description": "Resource metric property.",
+      "type": "object",
+      "properties": {
+        "key": {
+          "description": "Key for resource metric property.",
+          "type": "string"
+        },
+        "value": {
+          "description": "Value of pair.",
+          "type": "string"
+        }
+      }
+    },
+    "ResourceMetricValue": {
+      "description": "Value of resource metric.",
+      "type": "object",
+      "properties": {
+        "timestamp": {
+          "description": "Value timestamp.",
+          "type": "string",
+          "readOnly": true
+        },
+        "average": {
+          "format": "float",
+          "description": "Value average.",
+          "type": "number",
+          "readOnly": true
+        },
+        "minimum": {
+          "format": "float",
+          "description": "Value minimum.",
+          "type": "number",
+          "readOnly": true
+        },
+        "maximum": {
+          "format": "float",
+          "description": "Value maximum.",
+          "type": "number",
+          "readOnly": true
+        },
+        "total": {
+          "format": "float",
+          "description": "Value total.",
+          "type": "number",
+          "readOnly": true
+        },
+        "count": {
+          "format": "float",
+          "description": "Value count.",
+          "type": "number",
+          "readOnly": true
+        },
+        "properties": {
+          "description": "Resource metric properties collection.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ResourceMetricProperty"
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "ServiceSpecification": {
+      "description": "Resource metrics service provided by Microsoft.Insights resource provider.",
+      "type": "object",
+      "properties": {
+        "metricSpecifications": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MetricSpecification"
+          }
+        },
+        "logSpecifications": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/LogSpecification"
+          }
+        }
+      }
+    },
+    "Site": {
+      "description": "A web app, a mobile app backend, or an API app.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "Site resource specific properties",
+          "properties": {
+            "state": {
+              "description": "Current state of the app.",
+              "type": "string",
+              "readOnly": true
+            },
+            "hostNames": {
+              "description": "Hostnames associated with the app.",
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "readOnly": true
+            },
+            "repositorySiteName": {
+              "description": "Name of the repository site.",
+              "type": "string",
+              "readOnly": true
+            },
+            "usageState": {
+              "description": "State indicating whether the app has exceeded its quota usage. Read-only.",
+              "enum": [
+                "Normal",
+                "Exceeded"
+              ],
+              "type": "string",
+              "readOnly": true,
+              "x-ms-enum": {
+                "name": "UsageState",
+                "modelAsString": false
+              }
+            },
+            "enabled": {
+              "description": "<code>true</code> if the app is enabled; otherwise, <code>false</code>. Setting this value to false disables the app (takes the app offline).",
+              "type": "boolean"
+            },
+            "enabledHostNames": {
+              "description": "Enabled hostnames for the app.Hostnames need to be assigned (see HostNames) AND enabled. Otherwise,\nthe app is not served on those hostnames.",
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "readOnly": true
+            },
+            "availabilityState": {
+              "description": "Management information availability state for the app.",
+              "enum": [
+                "Normal",
+                "Limited",
+                "DisasterRecoveryMode"
+              ],
+              "type": "string",
+              "readOnly": true,
+              "x-ms-enum": {
+                "name": "SiteAvailabilityState",
+                "modelAsString": false
+              }
+            },
+            "hostNameSslStates": {
+              "description": "Hostname SSL states are used to manage the SSL bindings for app's hostnames.",
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/HostNameSslState"
+              }
+            },
+            "serverFarmId": {
+              "description": "Resource ID of the associated App Service plan, formatted as: \"/subscriptions/{subscriptionID}/resourceGroups/{groupName}/providers/Microsoft.Web/serverfarms/{appServicePlanName}\".",
+              "type": "string"
+            },
+            "reserved": {
+              "description": "<code>true</code> if reserved; otherwise, <code>false</code>.",
+              "default": false,
+              "type": "boolean",
+              "x-ms-mutability": [
+                "create",
+                "read"
+              ]
+            },
+            "isXenon": {
+              "description": "Obsolete: Hyper-V sandbox.",
+              "default": false,
+              "type": "boolean",
+              "x-ms-mutability": [
+                "create",
+                "read"
+              ]
+            },
+            "hyperV": {
+              "description": "Hyper-V sandbox.",
+              "default": false,
+              "type": "boolean",
+              "x-ms-mutability": [
+                "create",
+                "read"
+              ]
+            },
+            "lastModifiedTimeUtc": {
+              "format": "date-time",
+              "description": "Last time the app was modified, in UTC. Read-only.",
+              "type": "string",
+              "readOnly": true
+            },
+            "siteConfig": {
+              "$ref": "#/definitions/SiteConfig",
+              "description": "Configuration of the app."
+            },
+            "trafficManagerHostNames": {
+              "description": "Azure Traffic Manager hostnames associated with the app. Read-only.",
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "readOnly": true
+            },
+            "scmSiteAlsoStopped": {
+              "description": "<code>true</code> to stop SCM (KUDU) site when the app is stopped; otherwise, <code>false</code>. The default is <code>false</code>.",
+              "default": false,
+              "type": "boolean"
+            },
+            "targetSwapSlot": {
+              "description": "Specifies which deployment slot this app will swap into. Read-only.",
+              "type": "string",
+              "readOnly": true
+            },
+            "hostingEnvironmentProfile": {
+              "$ref": "#/definitions/HostingEnvironmentProfile",
+              "description": "App Service Environment to use for the app.",
+              "x-ms-mutability": [
+                "create",
+                "read"
+              ]
+            },
+            "clientAffinityEnabled": {
+              "description": "<code>true</code> to enable client affinity; <code>false</code> to stop sending session affinity cookies, which route client requests in the same session to the same instance. Default is <code>true</code>.",
+              "type": "boolean"
+            },
+            "clientCertEnabled": {
+              "description": "<code>true</code> to enable client certificate authentication (TLS mutual authentication); otherwise, <code>false</code>. Default is <code>false</code>.",
+              "type": "boolean"
+            },
+            "clientCertExclusionPaths": {
+              "description": "client certificate authentication comma-separated exclusion paths",
+              "type": "string"
+            },
+            "hostNamesDisabled": {
+              "description": "<code>true</code> to disable the public hostnames of the app; otherwise, <code>false</code>.\n If <code>true</code>, the app is only accessible via API management process.",
+              "type": "boolean"
+            },
+            "outboundIpAddresses": {
+              "description": "List of IP addresses that the app uses for outbound connections (e.g. database access). Includes VIPs from tenants that site can be hosted with current settings. Read-only.",
+              "type": "string",
+              "readOnly": true
+            },
+            "possibleOutboundIpAddresses": {
+              "description": "List of IP addresses that the app uses for outbound connections (e.g. database access). Includes VIPs from all tenants. Read-only.",
+              "type": "string",
+              "readOnly": true
+            },
+            "containerSize": {
+              "format": "int32",
+              "description": "Size of the function container.",
+              "type": "integer"
+            },
+            "dailyMemoryTimeQuota": {
+              "format": "int32",
+              "description": "Maximum allowed daily memory-time quota (applicable on dynamic apps only).",
+              "type": "integer"
+            },
+            "suspendedTill": {
+              "format": "date-time",
+              "description": "App suspended till in case memory-time quota is exceeded.",
+              "type": "string",
+              "readOnly": true
+            },
+            "maxNumberOfWorkers": {
+              "format": "int32",
+              "description": "Maximum number of workers.\nThis only applies to Functions container.",
+              "type": "integer",
+              "readOnly": true
+            },
+            "cloningInfo": {
+              "$ref": "#/definitions/CloningInfo",
+              "description": "If specified during app creation, the app is cloned from a source app.",
+              "x-ms-mutability": [
+                "create"
+              ]
+            },
+            "resourceGroup": {
+              "description": "Name of the resource group the app belongs to. Read-only.",
+              "type": "string",
+              "readOnly": true
+            },
+            "isDefaultContainer": {
+              "description": "<code>true</code> if the app is a default container; otherwise, <code>false</code>.",
+              "type": "boolean",
+              "readOnly": true
+            },
+            "defaultHostName": {
+              "description": "Default hostname of the app. Read-only.",
+              "type": "string",
+              "readOnly": true
+            },
+            "slotSwapStatus": {
+              "$ref": "#/definitions/SlotSwapStatus",
+              "description": "Status of the last deployment slot swap operation.",
+              "readOnly": true
+            },
+            "httpsOnly": {
+              "description": "HttpsOnly: configures a web site to accept only https requests. Issues redirect for\nhttp requests",
+              "type": "boolean"
+            },
+            "redundancyMode": {
+              "description": "Site redundancy mode",
+              "enum": [
+                "None",
+                "Manual",
+                "Failover",
+                "ActiveActive",
+                "GeoRedundant"
+              ],
+              "type": "string",
+              "x-ms-enum": {
+                "name": "RedundancyMode",
+                "modelAsString": false
+              }
+            },
+            "inProgressOperationId": {
+              "format": "uuid",
+              "description": "Specifies an operation id if this site has a pending operation.",
+              "type": "string",
+              "readOnly": true,
+              "example": "00000000-0000-0000-0000-000000000000"
+            },
+            "geoDistributions": {
+              "description": "GeoDistributions for this site",
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/GeoDistribution"
+              }
+            }
+          },
+          "x-ms-client-flatten": true
+        },
+        "identity": {
+          "$ref": "#/definitions/ManagedServiceIdentity"
+        }
+      }
+    },
+    "SiteConfig": {
+      "description": "Configuration of an App Service app.",
+      "type": "object",
+      "properties": {
+        "numberOfWorkers": {
+          "format": "int32",
+          "description": "Number of workers.",
+          "type": "integer"
+        },
+        "defaultDocuments": {
+          "description": "Default documents.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "netFrameworkVersion": {
+          "description": ".NET Framework version.",
+          "default": "v4.6",
+          "type": "string"
+        },
+        "phpVersion": {
+          "description": "Version of PHP.",
+          "type": "string"
+        },
+        "pythonVersion": {
+          "description": "Version of Python.",
+          "type": "string"
+        },
+        "nodeVersion": {
+          "description": "Version of Node.js.",
+          "type": "string"
+        },
+        "linuxFxVersion": {
+          "description": "Linux App Framework and version",
+          "type": "string"
+        },
+        "windowsFxVersion": {
+          "description": "Xenon App Framework and version",
+          "type": "string"
+        },
+        "requestTracingEnabled": {
+          "description": "<code>true</code> if request tracing is enabled; otherwise, <code>false</code>.",
+          "type": "boolean"
+        },
+        "requestTracingExpirationTime": {
+          "format": "date-time",
+          "description": "Request tracing expiration time.",
+          "type": "string"
+        },
+        "remoteDebuggingEnabled": {
+          "description": "<code>true</code> if remote debugging is enabled; otherwise, <code>false</code>.",
+          "type": "boolean"
+        },
+        "remoteDebuggingVersion": {
+          "description": "Remote debugging version.",
+          "type": "string"
+        },
+        "httpLoggingEnabled": {
+          "description": "<code>true</code> if HTTP logging is enabled; otherwise, <code>false</code>.",
+          "type": "boolean"
+        },
+        "logsDirectorySizeLimit": {
+          "format": "int32",
+          "description": "HTTP logs directory size limit.",
+          "type": "integer"
+        },
+        "detailedErrorLoggingEnabled": {
+          "description": "<code>true</code> if detailed error logging is enabled; otherwise, <code>false</code>.",
+          "type": "boolean"
+        },
+        "publishingUsername": {
+          "description": "Publishing user name.",
+          "type": "string"
+        },
+        "appSettings": {
+          "description": "Application settings.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/NameValuePair"
+          }
+        },
+        "azureStorageAccounts": {
+          "description": "User-provided Azure storage accounts.",
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/AzureStorageInfoValue"
+          }
+        },
+        "connectionStrings": {
+          "description": "Connection strings.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ConnStringInfo"
+          }
+        },
+        "machineKey": {
+          "$ref": "#/definitions/SiteMachineKey",
+          "description": "Site MachineKey.",
+          "readOnly": true
+        },
+        "handlerMappings": {
+          "description": "Handler mappings.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/HandlerMapping"
+          }
+        },
+        "documentRoot": {
+          "description": "Document root.",
+          "type": "string"
+        },
+        "scmType": {
+          "description": "SCM type.",
+          "enum": [
+            "None",
+            "Dropbox",
+            "Tfs",
+            "LocalGit",
+            "GitHub",
+            "CodePlexGit",
+            "CodePlexHg",
+            "BitbucketGit",
+            "BitbucketHg",
+            "ExternalGit",
+            "ExternalHg",
+            "OneDrive",
+            "VSO"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "ScmType",
+            "modelAsString": true
+          }
+        },
+        "use32BitWorkerProcess": {
+          "description": "<code>true</code> to use 32-bit worker process; otherwise, <code>false</code>.",
+          "type": "boolean"
+        },
+        "webSocketsEnabled": {
+          "description": "<code>true</code> if WebSocket is enabled; otherwise, <code>false</code>.",
+          "type": "boolean"
+        },
+        "alwaysOn": {
+          "description": "<code>true</code> if Always On is enabled; otherwise, <code>false</code>.",
+          "type": "boolean"
+        },
+        "javaVersion": {
+          "description": "Java version.",
+          "type": "string"
+        },
+        "javaContainer": {
+          "description": "Java container.",
+          "type": "string"
+        },
+        "javaContainerVersion": {
+          "description": "Java container version.",
+          "type": "string"
+        },
+        "appCommandLine": {
+          "description": "App command line to launch.",
+          "type": "string"
+        },
+        "managedPipelineMode": {
+          "description": "Managed pipeline mode.",
+          "enum": [
+            "Integrated",
+            "Classic"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "ManagedPipelineMode",
+            "modelAsString": false
+          }
+        },
+        "virtualApplications": {
+          "description": "Virtual applications.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VirtualApplication"
+          }
+        },
+        "loadBalancing": {
+          "description": "Site load balancing.",
+          "enum": [
+            "WeightedRoundRobin",
+            "LeastRequests",
+            "LeastResponseTime",
+            "WeightedTotalTraffic",
+            "RequestHash"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "SiteLoadBalancing",
+            "modelAsString": false
+          }
+        },
+        "experiments": {
+          "$ref": "#/definitions/Experiments",
+          "description": "This is work around for polymorphic types."
+        },
+        "limits": {
+          "$ref": "#/definitions/SiteLimits",
+          "description": "Site limits."
+        },
+        "autoHealEnabled": {
+          "description": "<code>true</code> if Auto Heal is enabled; otherwise, <code>false</code>.",
+          "type": "boolean"
+        },
+        "autoHealRules": {
+          "$ref": "#/definitions/AutoHealRules",
+          "description": "Auto Heal rules."
+        },
+        "tracingOptions": {
+          "description": "Tracing options.",
+          "type": "string"
+        },
+        "vnetName": {
+          "description": "Virtual Network name.",
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "cors": {
+          "$ref": "#/definitions/CorsSettings",
+          "description": "Cross-Origin Resource Sharing (CORS) settings."
+        },
+        "push": {
+          "$ref": "#/definitions/PushSettings",
+          "description": "Push endpoint settings."
+        },
+        "apiDefinition": {
+          "$ref": "#/definitions/ApiDefinitionInfo",
+          "description": "Information about the formal API definition for the app."
+        },
+        "autoSwapSlotName": {
+          "description": "Auto-swap slot name.",
+          "type": "string"
+        },
+        "localMySqlEnabled": {
+          "description": "<code>true</code> to enable local MySQL; otherwise, <code>false</code>.",
+          "default": false,
+          "type": "boolean"
+        },
+        "managedServiceIdentityId": {
+          "format": "int32",
+          "description": "Managed Service Identity Id",
+          "type": "integer"
+        },
+        "xManagedServiceIdentityId": {
+          "format": "int32",
+          "description": "Explicit Managed Service Identity Id",
+          "type": "integer"
+        },
+        "ipSecurityRestrictions": {
+          "description": "IP security restrictions for main.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/IpSecurityRestriction"
+          }
+        },
+        "scmIpSecurityRestrictions": {
+          "description": "IP security restrictions for scm.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/IpSecurityRestriction"
+          }
+        },
+        "scmIpSecurityRestrictionsUseMain": {
+          "description": "IP security restrictions for scm to use main.",
+          "type": "boolean"
+        },
+        "http20Enabled": {
+          "description": "Http20Enabled: configures a web site to allow clients to connect over http2.0",
+          "default": true,
+          "type": "boolean"
+        },
+        "minTlsVersion": {
+          "description": "MinTlsVersion: configures the minimum version of TLS required for SSL requests",
+          "enum": [
+            "1.0",
+            "1.1",
+            "1.2"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "SupportedTlsVersions",
+            "modelAsString": true
+          }
+        },
+        "ftpsState": {
+          "description": "State of FTP / FTPS service",
+          "enum": [
+            "AllAllowed",
+            "FtpsOnly",
+            "Disabled"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "FtpsState",
+            "modelAsString": true
+          }
+        },
+        "reservedInstanceCount": {
+          "format": "int32",
+          "description": "Number of reserved instances.\nThis setting only applies to the Consumption Plan",
+          "maximum": 10,
+          "minimum": 0,
+          "type": "integer"
+        }
+      }
+    },
+    "SiteLimits": {
+      "description": "Metric limits set on an app.",
+      "type": "object",
+      "properties": {
+        "maxPercentageCpu": {
+          "format": "double",
+          "description": "Maximum allowed CPU usage percentage.",
+          "type": "number"
+        },
+        "maxMemoryInMb": {
+          "format": "int64",
+          "description": "Maximum allowed memory usage in MB.",
+          "type": "integer"
+        },
+        "maxDiskSizeInMb": {
+          "format": "int64",
+          "description": "Maximum allowed disk size usage in MB.",
+          "type": "integer"
+        }
+      }
+    },
+    "SiteMachineKey": {
+      "description": "MachineKey of an app.",
+      "type": "object",
+      "properties": {
+        "validation": {
+          "description": "MachineKey validation.",
+          "type": "string"
+        },
+        "validationKey": {
+          "description": "Validation key.",
+          "type": "string"
+        },
+        "decryption": {
+          "description": "Algorithm used for decryption.",
+          "type": "string"
+        },
+        "decryptionKey": {
+          "description": "Decryption key.",
+          "type": "string"
+        }
+      }
+    },
+    "SkuCapacity": {
+      "description": "Description of the App Service plan scale options.",
+      "type": "object",
+      "properties": {
+        "minimum": {
+          "format": "int32",
+          "description": "Minimum number of workers for this App Service plan SKU.",
+          "type": "integer"
+        },
+        "maximum": {
+          "format": "int32",
+          "description": "Maximum number of workers for this App Service plan SKU.",
+          "type": "integer"
+        },
+        "default": {
+          "format": "int32",
+          "description": "Default number of workers for this App Service plan SKU.",
+          "type": "integer"
+        },
+        "scaleType": {
+          "description": "Available scale configurations for an App Service plan.",
+          "type": "string"
+        }
+      }
+    },
+    "SkuDescription": {
+      "description": "Description of a SKU for a scalable resource.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Name of the resource SKU.",
+          "type": "string"
+        },
+        "tier": {
+          "description": "Service tier of the resource SKU.",
+          "type": "string"
+        },
+        "size": {
+          "description": "Size specifier of the resource SKU.",
+          "type": "string"
+        },
+        "family": {
+          "description": "Family code of the resource SKU.",
+          "type": "string"
+        },
+        "capacity": {
+          "format": "int32",
+          "description": "Current number of instances assigned to the resource.",
+          "type": "integer"
+        },
+        "skuCapacity": {
+          "$ref": "#/definitions/SkuCapacity",
+          "description": "Min, max, and default scale values of the SKU."
+        },
+        "locations": {
+          "description": "Locations of the SKU.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "capabilities": {
+          "description": "Capabilities of the SKU, e.g., is traffic manager enabled?",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Capability"
+          }
+        }
+      }
+    },
+    "SlotSwapStatus": {
+      "description": "The status of the last successful slot swap operation.",
+      "type": "object",
+      "properties": {
+        "timestampUtc": {
+          "format": "date-time",
+          "description": "The time the last successful slot swap completed.",
+          "type": "string",
+          "readOnly": true
+        },
+        "sourceSlotName": {
+          "description": "The source slot of the last swap operation.",
+          "type": "string",
+          "readOnly": true
+        },
+        "destinationSlotName": {
+          "description": "The destination slot of the last swap operation.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "SlowRequestsBasedTrigger": {
+      "description": "Trigger based on request execution time.",
+      "type": "object",
+      "properties": {
+        "timeTaken": {
+          "description": "Time taken.",
+          "type": "string"
+        },
+        "count": {
+          "format": "int32",
+          "description": "Request Count.",
+          "type": "integer"
+        },
+        "timeInterval": {
+          "description": "Time interval.",
+          "type": "string"
+        }
+      }
+    },
+    "Snapshot": {
+      "description": "A snapshot of an app.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyOnlyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "Snapshot resource specific properties",
+          "properties": {
+            "time": {
+              "description": "The time the snapshot was taken.",
+              "type": "string",
+              "readOnly": true
+            }
+          },
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "StampCapacity": {
+      "description": "Stamp capacity information.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Name of the stamp.",
+          "type": "string"
+        },
+        "availableCapacity": {
+          "format": "int64",
+          "description": "Available capacity (# of machines, bytes of storage etc...).",
+          "type": "integer"
+        },
+        "totalCapacity": {
+          "format": "int64",
+          "description": "Total capacity (# of machines, bytes of storage etc...).",
+          "type": "integer"
+        },
+        "unit": {
+          "description": "Name of the unit.",
+          "type": "string"
+        },
+        "computeMode": {
+          "description": "Shared/dedicated workers.",
+          "enum": [
+            "Shared",
+            "Dedicated",
+            "Dynamic"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "ComputeModeOptions",
+            "modelAsString": false
+          }
+        },
+        "workerSize": {
+          "description": "Size of the machines.",
+          "enum": [
+            "Small",
+            "Medium",
+            "Large",
+            "D1",
+            "D2",
+            "D3",
+            "Default"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "WorkerSizeOptions",
+            "modelAsString": false
+          }
+        },
+        "workerSizeId": {
+          "format": "int32",
+          "description": "Size ID of machines: \n0 - Small\n1 - Medium\n2 - Large",
+          "type": "integer"
+        },
+        "excludeFromCapacityAllocation": {
+          "description": "If <code>true</code>, it includes basic apps.\nBasic apps are not used for capacity allocation.",
+          "type": "boolean"
+        },
+        "isApplicableForAllComputeModes": {
+          "description": "<code>true</code> if capacity is applicable for all apps; otherwise, <code>false</code>.",
+          "type": "boolean"
+        },
+        "siteMode": {
+          "description": "Shared or Dedicated.",
+          "type": "string"
+        },
+        "isLinux": {
+          "description": "Is this a linux stamp capacity",
+          "type": "boolean"
+        }
+      }
+    },
+    "StatusCodesBasedTrigger": {
+      "description": "Trigger based on status code.",
+      "type": "object",
+      "properties": {
+        "status": {
+          "format": "int32",
+          "description": "HTTP status code.",
+          "type": "integer"
+        },
+        "subStatus": {
+          "format": "int32",
+          "description": "Request Sub Status.",
+          "type": "integer"
+        },
+        "win32Status": {
+          "format": "int32",
+          "description": "Win32 error code.",
+          "type": "integer"
+        },
+        "count": {
+          "format": "int32",
+          "description": "Request Count.",
+          "type": "integer"
+        },
+        "timeInterval": {
+          "description": "Time interval.",
+          "type": "string"
+        }
+      }
+    },
+    "User": {
+      "description": "User credentials used for publishing activity.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyOnlyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "User resource specific properties",
+          "required": [
+            "publishingUserName"
+          ],
+          "properties": {
+            "publishingUserName": {
+              "description": "Username used for publishing.",
+              "type": "string"
+            },
+            "publishingPassword": {
+              "format": "password",
+              "description": "Password used for publishing.",
+              "type": "string"
+            },
+            "publishingPasswordHash": {
+              "format": "password",
+              "description": "Password hash used for publishing.",
+              "type": "string"
+            },
+            "publishingPasswordHashSalt": {
+              "format": "password",
+              "description": "Password hash salt used for publishing.",
+              "type": "string"
+            },
+            "scmUri": {
+              "description": "Url of SCM site.",
+              "type": "string"
+            }
+          },
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "VirtualApplication": {
+      "description": "Virtual application in an app.",
+      "type": "object",
+      "properties": {
+        "virtualPath": {
+          "description": "Virtual path.",
+          "type": "string"
+        },
+        "physicalPath": {
+          "description": "Physical path.",
+          "type": "string"
+        },
+        "preloadEnabled": {
+          "description": "<code>true</code> if preloading is enabled; otherwise, <code>false</code>.",
+          "type": "boolean"
+        },
+        "virtualDirectories": {
+          "description": "Virtual directories for virtual application.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VirtualDirectory"
+          }
+        }
+      }
+    },
+    "VirtualDirectory": {
+      "description": "Directory for virtual application.",
+      "type": "object",
+      "properties": {
+        "virtualPath": {
+          "description": "Path to virtual application.",
+          "type": "string"
+        },
+        "physicalPath": {
+          "description": "Physical path.",
+          "type": "string"
+        }
+      }
+    },
+    "VirtualIPMapping": {
+      "description": "Virtual IP mapping.",
+      "type": "object",
+      "properties": {
+        "virtualIP": {
+          "description": "Virtual IP address.",
+          "type": "string"
+        },
+        "internalHttpPort": {
+          "format": "int32",
+          "description": "Internal HTTP port.",
+          "type": "integer"
+        },
+        "internalHttpsPort": {
+          "format": "int32",
+          "description": "Internal HTTPS port.",
+          "type": "integer"
+        },
+        "inUse": {
+          "description": "Is virtual IP mapping in use.",
+          "type": "boolean"
+        }
+      }
+    },
+    "VirtualNetworkProfile": {
+      "description": "Specification for using a Virtual Network.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "Resource id of the Virtual Network.",
+          "type": "string"
+        },
+        "name": {
+          "description": "Name of the Virtual Network (read-only).",
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "description": "Resource type of the Virtual Network (read-only).",
+          "type": "string",
+          "readOnly": true
+        },
+        "subnet": {
+          "description": "Subnet within the Virtual Network.",
+          "type": "string"
+        }
+      }
+    },
+    "VnetGateway": {
+      "description": "The Virtual Network gateway contract. This is used to give the Virtual Network gateway access to the VPN package.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyOnlyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "VnetGateway resource specific properties",
+          "required": [
+            "vpnPackageUri"
+          ],
+          "properties": {
+            "vnetName": {
+              "description": "The Virtual Network name.",
+              "type": "string",
+              "x-ms-mutability": [
+                "create",
+                "read"
+              ]
+            },
+            "vpnPackageUri": {
+              "description": "The URI where the VPN package can be downloaded.",
+              "type": "string",
+              "x-ms-mutability": [
+                "create",
+                "update"
+              ]
+            }
+          },
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "VnetInfo": {
+      "description": "Virtual Network information contract.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyOnlyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "VnetInfo resource specific properties",
+          "properties": {
+            "vnetResourceId": {
+              "description": "The Virtual Network's resource ID.",
+              "type": "string"
+            },
+            "certThumbprint": {
+              "description": "The client certificate thumbprint.",
+              "type": "string",
+              "readOnly": true
+            },
+            "certBlob": {
+              "description": "A certificate file (.cer) blob containing the public key of the private key used to authenticate a \nPoint-To-Site VPN connection.",
+              "type": "string"
+            },
+            "routes": {
+              "description": "The routes that this Virtual Network connection uses.",
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/VnetRoute"
+              },
+              "readOnly": true
+            },
+            "resyncRequired": {
+              "description": "<code>true</code> if a resync is required; otherwise, <code>false</code>.",
+              "type": "boolean",
+              "readOnly": true
+            },
+            "dnsServers": {
+              "description": "DNS servers to be used by this Virtual Network. This should be a comma-separated list of IP addresses.",
+              "type": "string"
+            },
+            "isSwift": {
+              "description": "Flag that is used to denote if this is VNET injection",
+              "type": "boolean"
+            }
+          },
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "VnetRoute": {
+      "description": "Virtual Network route contract used to pass routing information for a Virtual Network.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyOnlyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "VnetRoute resource specific properties",
+          "properties": {
+            "startAddress": {
+              "description": "The starting address for this route. This may also include a CIDR notation, in which case the end address must not be specified.",
+              "type": "string"
+            },
+            "endAddress": {
+              "description": "The ending address for this route. If the start address is specified in CIDR notation, this must be omitted.",
+              "type": "string"
+            },
+            "routeType": {
+              "description": "The type of route this is:\nDEFAULT - By default, every app has routes to the local address ranges specified by RFC1918\nINHERITED - Routes inherited from the real Virtual Network routes\nSTATIC - Static route set on the app only\n\nThese values will be used for syncing an app's routes with those from a Virtual Network.",
+              "enum": [
+                "DEFAULT",
+                "INHERITED",
+                "STATIC"
+              ],
+              "type": "string",
+              "x-ms-enum": {
+                "name": "RouteType",
+                "modelAsString": true
+              }
+            }
+          },
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "WebAppCollection": {
+      "description": "Collection of App Service apps.",
+      "required": [
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Collection of resources.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Site"
+          }
+        },
+        "nextLink": {
+          "description": "Link to next page of resources.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "WorkerPool": {
+      "description": "Worker pool of an App Service Environment.",
+      "type": "object",
+      "properties": {
+        "workerSizeId": {
+          "format": "int32",
+          "description": "Worker size ID for referencing this worker pool.",
+          "type": "integer"
+        },
+        "computeMode": {
+          "description": "Shared or dedicated app hosting.",
+          "enum": [
+            "Shared",
+            "Dedicated",
+            "Dynamic"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "ComputeModeOptions",
+            "modelAsString": false
+          }
+        },
+        "workerSize": {
+          "description": "VM size of the worker pool instances.",
+          "type": "string"
+        },
+        "workerCount": {
+          "format": "int32",
+          "description": "Number of instances in the worker pool.",
+          "type": "integer"
+        },
+        "instanceNames": {
+          "description": "Names of all instances in the worker pool (read only).",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        }
+      }
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ]
+}

@@ -1,6 +1,6 @@
 {
   "parameters": {
-    "AzureRegion": "westus",
+    "Endpoint": "{Endpoint}",
     "Content-Type": "application/octet-stream",
     "Ocp-Apim-Subscription-Key": "{API key}",
     "returnFaceAttributes": [
@@ -19,13 +19,17 @@
       "exposure",
       "noise"
     ],
-    "Image": "{Image binary in base 64 format}"
+    "Image": "{Image binary in base 64 format}",
+    "recognitionModel": "recognition_01",
+    "returnRecognitionModel": true,
+    "detectionModel": "detection_01"
   },
   "responses": {
     "200": {
       "body": [
         {
           "faceId": "c5c24a82-6845-4031-9d5d-978df9175426",
+          "recognitionModel": "recognition_01",
           "faceRectangle": {
             "width": 78,
             "height": 78,
@@ -155,7 +159,7 @@
             "headPose": {
               "roll": 2.1,
               "yaw": 3,
-              "pitch": 0
+              "pitch": 1.6
             },
             "emotion": {
               "anger": 0.575,

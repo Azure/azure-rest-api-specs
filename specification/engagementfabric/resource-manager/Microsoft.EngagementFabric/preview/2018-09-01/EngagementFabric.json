@@ -1,0 +1,1280 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2018-09-01-preview",
+    "title": "EngagementFabric",
+    "description": "Microsoft Customer Engagement Fabric"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EngagementFabric/Accounts/{accountName}": {
+      "get": {
+        "tags": [
+          "Accounts"
+        ],
+        "summary": "Get the EngagementFabric account",
+        "operationId": "Accounts_Get",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Account"
+            }
+          },
+          "default": {
+            "description": "Error response",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "AccountsGetExample": {
+            "$ref": "./examples/AccountsGetExample.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Accounts"
+        ],
+        "summary": "Create or Update the EngagementFabric account",
+        "operationId": "Accounts_CreateOrUpdate",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AccountNameParameter"
+          },
+          {
+            "name": "account",
+            "in": "body",
+            "description": "The EngagementFabric account description",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Account"
+            }
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Account"
+            }
+          },
+          "default": {
+            "description": "Error response",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "AccountsCreateOrUpdateExample": {
+            "$ref": "./examples/AccountsCreateOrUpdateExample.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Accounts"
+        ],
+        "summary": "Delete the EngagementFabric account",
+        "operationId": "Accounts_Delete",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "204": {
+            "description": "NoContent"
+          },
+          "default": {
+            "description": "Error response",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "AccountsDeleteExample": {
+            "$ref": "./examples/AccountsDeleteExample.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Accounts"
+        ],
+        "summary": "Update EngagementFabric account",
+        "operationId": "Accounts_Update",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AccountNameParameter"
+          },
+          {
+            "name": "accountPatch",
+            "in": "body",
+            "description": "The account patch",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AccountPatch"
+            }
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Account"
+            }
+          },
+          "default": {
+            "description": "Error response",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "AccountsUpdateExample": {
+            "$ref": "./examples/AccountsUpdateExample.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.EngagementFabric/Accounts": {
+      "get": {
+        "tags": [
+          "Accounts"
+        ],
+        "summary": "List the EngagementFabric accounts in given subscription",
+        "operationId": "Accounts_List",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/AccountList"
+            }
+          },
+          "default": {
+            "description": "Error response",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "AccountsListExample": {
+            "$ref": "./examples/AccountsListExample.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EngagementFabric/Accounts": {
+      "get": {
+        "tags": [
+          "Accounts"
+        ],
+        "summary": "List EngagementFabric accounts in given resource group",
+        "operationId": "Accounts_ListByResourceGroup",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/AccountList"
+            }
+          },
+          "default": {
+            "description": "Error response",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "AccountsListByResourceGroupExample": {
+            "$ref": "./examples/AccountsListByResourceGroupExample.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EngagementFabric/Accounts/{accountName}/listKeys": {
+      "post": {
+        "tags": [
+          "Accounts"
+        ],
+        "summary": "List keys of the EngagementFabric account",
+        "operationId": "Accounts_ListKeys",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/KeyDescriptionList"
+            }
+          },
+          "default": {
+            "description": "Error response",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "AccountsListKeysExample": {
+            "$ref": "./examples/AccountsListKeysExample.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EngagementFabric/Accounts/{accountName}/regenerateKey": {
+      "post": {
+        "tags": [
+          "Accounts"
+        ],
+        "summary": "Regenerate key of the EngagementFabric account",
+        "operationId": "Accounts_RegenerateKey",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AccountNameParameter"
+          },
+          {
+            "name": "parameter",
+            "in": "body",
+            "description": "Parameters specifying the key to be regenerated",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RegenerateKeyParameter"
+            }
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/KeyDescription"
+            }
+          },
+          "default": {
+            "description": "Error response",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "AccountsRegenerateKeyExample": {
+            "$ref": "./examples/AccountsRegenerateKeyExample.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EngagementFabric/Accounts/{accountName}/listChannelTypes": {
+      "post": {
+        "tags": [
+          "Accounts"
+        ],
+        "summary": "List available EngagementFabric channel types and functions",
+        "operationId": "Accounts_ListChannelTypes",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ChannelTypeDescriptionList"
+            }
+          },
+          "default": {
+            "description": "Error response",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "AccountsListChannelTypesExample": {
+            "$ref": "./examples/AccountsListChannelTypesExample.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EngagementFabric/Accounts/{accountName}/Channels/{channelName}": {
+      "get": {
+        "tags": [
+          "Channels"
+        ],
+        "summary": "Get the EngagementFabric channel",
+        "operationId": "Channels_Get",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ChannelNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Channel"
+            }
+          },
+          "default": {
+            "description": "Error response",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ChannelsGetExample": {
+            "$ref": "./examples/ChannelsGetExample.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Channels"
+        ],
+        "summary": "Create or Update the EngagementFabric channel",
+        "operationId": "Channels_CreateOrUpdate",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ChannelNameParameter"
+          },
+          {
+            "name": "channel",
+            "in": "body",
+            "description": "The EngagementFabric channel description",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Channel"
+            }
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Channel"
+            }
+          },
+          "default": {
+            "description": "Error response",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ChannelsCreateOrUpdateExample": {
+            "$ref": "./examples/ChannelsCreateOrUpdateExample.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Channels"
+        ],
+        "summary": "Delete the EngagementFabric channel",
+        "operationId": "Channels_Delete",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AccountNameParameter"
+          },
+          {
+            "name": "channelName",
+            "in": "path",
+            "description": "The EngagementFabric channel name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "204": {
+            "description": "NoContent"
+          },
+          "default": {
+            "description": "Error response",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ChannelsDeleteExample": {
+            "$ref": "./examples/ChannelsDeleteExample.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EngagementFabric/Accounts/{accountName}/Channels": {
+      "get": {
+        "tags": [
+          "Channels"
+        ],
+        "summary": "List the EngagementFabric channels",
+        "operationId": "Channels_ListByAccount",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ChannelList"
+            }
+          },
+          "default": {
+            "description": "Error response",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ChannelsListExample": {
+            "$ref": "./examples/ChannelsListExample.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EngagementFabric/checkNameAvailability": {
+      "post": {
+        "tags": [
+          "NameAvailability"
+        ],
+        "summary": "Check availability of EngagementFabric resource",
+        "operationId": "CheckNameAvailability",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "Parameter describing the name to be checked",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CheckNameAvailabilityParameter"
+            }
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/CheckNameAvailabilityResult"
+            }
+          },
+          "default": {
+            "description": "Error response",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CheckNameAvailabilityExample": {
+            "$ref": "./examples/CheckNameAvailabilityExample.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.EngagementFabric/operations": {
+      "get": {
+        "tags": [
+          "Operations"
+        ],
+        "summary": "List operation of EngagementFabric resources",
+        "operationId": "Operations_List",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/OperationList"
+            }
+          },
+          "default": {
+            "description": "Error response",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "OperationsListExample": {
+            "$ref": "./examples/OperationsListExample.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.EngagementFabric/skus": {
+      "get": {
+        "tags": [
+          "Skus"
+        ],
+        "summary": "List available SKUs of EngagementFabric resource",
+        "operationId": "SKUs_List",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SkuDescriptionList"
+            }
+          },
+          "default": {
+            "description": "Error response",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SKUsListExample": {
+            "$ref": "./examples/SKUsListExample.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    }
+  },
+  "definitions": {
+    "SKU": {
+      "description": "The EngagementFabric SKU",
+      "required": [
+        "name"
+      ],
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "The name of the SKU",
+          "type": "string"
+        },
+        "tier": {
+          "description": "The price tier of the SKU",
+          "type": "string"
+        }
+      }
+    },
+    "Resource": {
+      "description": "The base model for Azure resource",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "The ID of the resource",
+          "type": "string",
+          "readOnly": true
+        },
+        "name": {
+          "description": "The name of the resource",
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "description": "The fully qualified type of the resource",
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "TrackedResource": {
+      "description": "The base model for the tracked Azure resource",
+      "required": [
+        "location",
+        "sku"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "location": {
+          "description": "The location of the resource",
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "tags": {
+          "description": "The tags of the resource",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "sku": {
+          "$ref": "#/definitions/SKU",
+          "description": "The SKU of the resource"
+        }
+      }
+    },
+    "Account": {
+      "description": "The EngagementFabric account",
+      "required": [
+        "location",
+        "sku"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "CloudError": {
+      "description": "The default error response",
+      "type": "object",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/CloudErrorBody",
+          "description": "Content of the error"
+        }
+      },
+      "x-ms-external": true
+    },
+    "CloudErrorBody": {
+      "description": "Content of the default error response",
+      "type": "object",
+      "properties": {
+        "code": {
+          "description": "The error code",
+          "type": "string"
+        },
+        "message": {
+          "description": "The error message",
+          "type": "string"
+        },
+        "target": {
+          "description": "The target of the particular error",
+          "type": "string"
+        },
+        "details": {
+          "description": "The list of additional details",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CloudErrorBody"
+          }
+        }
+      },
+      "x-ms-external": true
+    },
+    "AccountPatch": {
+      "description": "The patch of EngagementFabric account",
+      "type": "object",
+      "properties": {
+        "tags": {
+          "description": "The tags of the resource",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "AccountList": {
+      "description": "The list of the EngagementFabric accounts",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "EngagementFabric accounts",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Account"
+          }
+        }
+      }
+    },
+    "KeyDescriptionList": {
+      "description": "The list of the EngagementFabric account keys",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Account keys",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/KeyDescription"
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "KeyDescription": {
+      "description": "The description of the EngagementFabric account key",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "The name of the key",
+          "type": "string",
+          "readOnly": true
+        },
+        "rank": {
+          "$ref": "#/definitions/KeyRank",
+          "description": "The rank of the key",
+          "readOnly": true
+        },
+        "value": {
+          "description": "The value of the key",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "RegenerateKeyParameter": {
+      "description": "The parameter to regenerate single EngagementFabric account key",
+      "required": [
+        "name",
+        "rank"
+      ],
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "The name of key to be regenerated",
+          "type": "string"
+        },
+        "rank": {
+          "$ref": "#/definitions/KeyRank",
+          "description": "The rank of the key to be regenerated"
+        }
+      }
+    },
+    "ChannelTypeDescriptionList": {
+      "description": "List of the EngagementFabric channel descriptions",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Channel descriptions",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ChannelTypeDescription"
+          }
+        }
+      }
+    },
+    "ChannelTypeDescription": {
+      "description": "EngagementFabric channel description",
+      "type": "object",
+      "properties": {
+        "channelType": {
+          "description": "Channel type",
+          "type": "string"
+        },
+        "channelDescription": {
+          "description": "Text description for the channel",
+          "type": "string"
+        },
+        "channelFunctions": {
+          "description": "All the available functions for the channel",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "ChannelProperties": {
+      "description": "The EngagementFabric channel properties",
+      "required": [
+        "channelType"
+      ],
+      "type": "object",
+      "properties": {
+        "channelType": {
+          "description": "The channel type",
+          "type": "string"
+        },
+        "channelFunctions": {
+          "description": "The functions to be enabled for the channel",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "credentials": {
+          "description": "The channel credentials",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "ProxyOnlyResource": {
+      "description": "The base model for the proxy-only Azure resource",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ]
+    },
+    "Channel": {
+      "description": "The EngagementFabric channel",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyOnlyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ChannelProperties",
+          "description": "The properties of the channel",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "ChannelList": {
+      "description": "The list of the EngagementFabric channels",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "EngagementFabric channels",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Channel"
+          }
+        }
+      }
+    },
+    "CheckNameAvailabilityParameter": {
+      "description": "The parameter for name availability check",
+      "required": [
+        "name",
+        "type"
+      ],
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "The name to be checked",
+          "type": "string"
+        },
+        "type": {
+          "description": "The fully qualified resource type for the name to be checked",
+          "type": "string"
+        }
+      }
+    },
+    "CheckNameAvailabilityResult": {
+      "description": "The result of name availability check",
+      "type": "object",
+      "properties": {
+        "nameAvailable": {
+          "description": "The name to be checked",
+          "type": "boolean",
+          "readOnly": true
+        },
+        "reason": {
+          "$ref": "#/definitions/CheckNameUnavailableReason",
+          "description": "The reason if name is unavailable",
+          "readOnly": true
+        },
+        "message": {
+          "description": "The message if name is unavailable",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "OperationList": {
+      "description": "The list of the EngagementFabric operations",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "The EngagementFabric operations",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Operation"
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "Operation": {
+      "description": "The EngagementFabric operation",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "The name of the EngagementFabric operation",
+          "type": "string",
+          "readOnly": true
+        },
+        "display": {
+          "$ref": "#/definitions/OperationDisplay",
+          "description": "The display content of the EngagementFabric operation",
+          "readOnly": true
+        }
+      }
+    },
+    "OperationDisplay": {
+      "description": "The display information of the EngagementFabric operation",
+      "type": "object",
+      "properties": {
+        "provider": {
+          "description": "The resource provider namespace of the EngagementFabric operation",
+          "type": "string",
+          "readOnly": true
+        },
+        "resource": {
+          "description": "The resource type of the EngagementFabric operation",
+          "type": "string",
+          "readOnly": true
+        },
+        "operation": {
+          "description": "The name of the EngagementFabric operation",
+          "type": "string",
+          "readOnly": true
+        },
+        "description": {
+          "description": "The description of the EngagementFabric operation",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "SkuDescriptionList": {
+      "description": "The list of the EngagementFabric SKU descriptions",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "SKU descriptions",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SkuDescription"
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "SkuDescription": {
+      "description": "The EngagementFabric SKU description of given resource type",
+      "type": "object",
+      "properties": {
+        "resourceType": {
+          "description": "The fully qualified resource type",
+          "type": "string",
+          "readOnly": true
+        },
+        "name": {
+          "description": "The name of the SKU",
+          "type": "string",
+          "readOnly": true
+        },
+        "tier": {
+          "description": "The price tier of the SKU",
+          "type": "string",
+          "readOnly": true
+        },
+        "locations": {
+          "description": "The set of locations that the SKU is available",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "locationInfo": {
+          "description": "Locations and zones",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SkuLocationInfoItem"
+          },
+          "readOnly": true
+        },
+        "restrictions": {
+          "description": "The restrictions because of which SKU cannot be used",
+          "type": "array",
+          "items": {
+            "type": "object"
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "SkuLocationInfoItem": {
+      "description": "The Locations and zones info for SKU",
+      "type": "object",
+      "properties": {
+        "location": {
+          "description": "The available location of the SKU",
+          "type": "string"
+        },
+        "zones": {
+          "description": "The available zone of the SKU",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "KeyRank": {
+      "description": "The rank of the EngagementFabric account key",
+      "enum": [
+        "PrimaryKey",
+        "SecondaryKey"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "KeyRank",
+        "modelAsString": true
+      }
+    },
+    "CheckNameUnavailableReason": {
+      "description": "The reason of name availability result",
+      "enum": [
+        "Invalid",
+        "AlreadyExists"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "CheckNameUnavailableReason",
+        "modelAsString": true
+      }
+    }
+  },
+  "parameters": {
+    "SubscriptionIdParameter": {
+      "name": "subscriptionId",
+      "in": "path",
+      "description": "Subscription ID",
+      "required": true,
+      "type": "string"
+    },
+    "ResourceGroupNameParameter": {
+      "name": "resourceGroupName",
+      "in": "path",
+      "description": "Resource Group Name",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "AccountNameParameter": {
+      "name": "accountName",
+      "in": "path",
+      "description": "Account Name",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "ChannelNameParameter": {
+      "name": "channelName",
+      "in": "path",
+      "description": "Channel Name",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "description": "API version",
+      "required": true,
+      "type": "string"
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  }
+}

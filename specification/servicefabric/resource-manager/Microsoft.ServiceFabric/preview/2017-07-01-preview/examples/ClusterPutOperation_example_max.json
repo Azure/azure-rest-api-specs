@@ -9,10 +9,8 @@
       "location": "eastus",
       "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/resRg/providers/Microsoft.ServiceFabric/clusters/myCluster",
       "name": "myCluster",
-      "tags": {},
       "properties": {
         "clusterCodeVersion": "6.0.219.9494",
-        "clusterState": "Default",
         "managementEndpoint": "https://myCluster.eastus.cloudapp.azure.com:19080",
         "certificate": {
           "thumbprint": "5F3660C715EBBDA31DB1FFDCF508302348DE8E7A",
@@ -44,7 +42,6 @@
           }
         ],
         "upgradeDescription": {
-          "overrideUserUpgradePolicy": false,
           "forceRestart": true,
           "upgradeReplicaSetCheckTimeout": "00:10:00",
           "healthCheckWaitDuration": "00:00:30",
@@ -54,31 +51,12 @@
           "upgradeDomainTimeout": "00:15:00",
           "healthPolicy": {
             "maxPercentUnhealthyNodes": 100,
-            "maxPercentUnhealthyApplications": 100,
-            "applicationHealthPolicies": {
-              "myAppHealthPolicy": {
-                "defaultServiceTypeHealthPolicy": {
-                  "maxPercentUnhealthyServices": 100
-                }
-              }
-            }
+            "maxPercentUnhealthyApplications": 100
           },
           "deltaHealthPolicy": {
             "maxPercentDeltaUnhealthyNodes": 0,
             "maxPercentUpgradeDomainDeltaUnhealthyNodes": 0,
-            "maxPercentDeltaUnhealthyApplications": 0,
-            "applicationDeltaHealthPolicies": {
-              "myAppDeltaHealthPolicy": {
-                "defaultServiceTypeDeltaHealthPolicy": {
-                  "maxPercentDeltaUnhealthyServices": 100
-                },
-                "serivceTypeDeltaHealthPolicies": {
-                  "mySvcTypeDeltaHealthPolicy": {
-                    "maxPercentDeltaUnhealthyServices": 100
-                  }
-                }
-              }
-            }
+            "maxPercentDeltaUnhealthyApplications": 0
           }
         },
         "diagnosticsStorageAccountConfig": {
@@ -108,9 +86,9 @@
         ],
         "vmImage": "Windows",
         "azureActiveDirectory": {
-          "tenantId": "some_random_guid",
-          "clusterApplication": "some_random_guid",
-          "clientApplication": "some_random_guid"
+          "tenantId": "6abcc6a0-8666-43f1-87b8-172cf86a9f9c",
+          "clusterApplication": "5886372e-7bf4-4878-a497-8098aba608ae",
+          "clientApplication": "d151ad89-4bce-4ae8-b3d1-1dc79679fa75"
         },
         "reliabilityLevel": "Silver",
         "reverseProxyCertificate": {
@@ -119,7 +97,7 @@
           "x509StoreName": "My"
         },
         "upgradeMode": "Manual",
-        "addonFeatures": [
+        "addOnFeatures": [
           "RepairManager",
           "DnsService"
         ]
@@ -127,7 +105,8 @@
     }
   },
   "responses": {
-    "202": {
+    "202": {},
+    "200": {
       "headers": {
         "Retry-After": "10",
         "Location": "http://10.91.140.224/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.ServiceFabric/locations/eastus/operationResults/4b5f6709-bc12-4365-8df3-894984b2a221?api-version=2017-07-01-privatepreview"
@@ -137,15 +116,13 @@
         "location": "eastus",
         "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/resRg/providers/Microsoft.ServiceFabric/clusters/myCluster",
         "name": "myCluster",
-        "tags": {},
-        "etag": "W/\"636462502169240745\"",
         "properties": {
           "provisioningState": "Succeeded",
           "clusterId": "92584666-9889-4ae8-8d02-91902923d37f",
           "clusterCodeVersion": "6.0.219.9494",
           "clusterState": "WaitingForNodes",
           "managementEndpoint": "https://myCluster.eastus.cloudapp.azure.com:19080",
-          "clusterEndpoint": "92584666-9889-4ae8-8d02-91902923d37f",
+          "clusterEndpoint": "https://eastus.servicefabric.azure.com",
           "certificate": {
             "thumbprint": "5F3660C715EBBDA31DB1FFDCF508302348DE8E7A",
             "thumbprintSecondary": "361A93445450CC8F2FF747F74500E8044942DAFD",
@@ -176,7 +153,6 @@
             }
           ],
           "upgradeDescription": {
-            "overrideUserUpgradePolicy": false,
             "forceRestart": true,
             "upgradeReplicaSetCheckTimeout": "00:10:00",
             "healthCheckWaitDuration": "00:00:30",
@@ -186,31 +162,12 @@
             "upgradeDomainTimeout": "00:15:00",
             "healthPolicy": {
               "maxPercentUnhealthyNodes": 100,
-              "maxPercentUnhealthyApplications": 100,
-              "applicationHealthPolicies": {
-                "myAppHealthPolicy": {
-                  "defaultServiceTypeHealthPolicy": {
-                    "maxPercentUnhealthyServices": 100
-                  }
-                }
-              }
+              "maxPercentUnhealthyApplications": 100
             },
             "deltaHealthPolicy": {
               "maxPercentDeltaUnhealthyNodes": 0,
               "maxPercentUpgradeDomainDeltaUnhealthyNodes": 0,
-              "maxPercentDeltaUnhealthyApplications": 0,
-              "applicationDeltaHealthPolicies": {
-                "myAppDeltaHealthPolicy": {
-                  "defaultServiceTypeDeltaHealthPolicy": {
-                    "maxPercentDeltaUnhealthyServices": 100
-                  },
-                  "serivceTypeDeltaHealthPolicies": {
-                    "mySvcTypeDeltaHealthPolicy": {
-                      "maxPercentDeltaUnhealthyServices": 100
-                    }
-                  }
-                }
-              }
+              "maxPercentDeltaUnhealthyApplications": 0
             }
           },
           "diagnosticsStorageAccountConfig": {
@@ -240,9 +197,9 @@
           ],
           "vmImage": "Windows",
           "azureActiveDirectory": {
-            "tenantId": "some_random_guid",
-            "clusterApplication": "some_random_guid",
-            "clientApplication": "some_random_guid"
+            "tenantId": "6abcc6a0-8666-43f1-87b8-172cf86a9f9c",
+            "clusterApplication": "5886372e-7bf4-4878-a497-8098aba608ae",
+            "clientApplication": "d151ad89-4bce-4ae8-b3d1-1dc79679fa75"
           },
           "reliabilityLevel": "Silver",
           "reverseProxyCertificate": {
@@ -258,7 +215,7 @@
               "environment": "Windows"
             }
           ],
-          "addonFeatures": [
+          "addOnFeatures": [
             "RepairManager",
             "DnsService"
           ]

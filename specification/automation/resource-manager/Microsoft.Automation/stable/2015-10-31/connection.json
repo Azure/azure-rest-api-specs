@@ -2,7 +2,10 @@
   "swagger": "2.0",
   "info": {
     "title": "AutomationManagement",
-    "version": "2015-10-31"
+    "version": "2015-10-31",
+    "x-ms-code-generation-settings": {
+      "useDateTimeOffset": true
+    }
   },
   "host": "management.azure.com",
   "schemes": [
@@ -50,14 +53,10 @@
         },
         "parameters": [
           {
-            "$ref": "./definitions.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "automationAccountName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The automation account name."
+            "$ref": "../../common/v1/definitions.json#/parameters/AutomationAccountNameParameter"
           },
           {
             "name": "connectionName",
@@ -67,17 +66,17 @@
             "description": "The name of connection."
           },
           {
-            "$ref": "./definitions.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "./definitions.json#/parameters/ApiVersionParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "./definitions.json#/definitions/Connection"
+              "$ref": "#/definitions/Connection"
             }
           },
           "204": {
@@ -86,7 +85,7 @@
           "default": {
             "description": "Automation error response describing why the operation failed.",
             "schema": {
-              "$ref": "./definitions.json#/definitions/ErrorResponse"
+              "$ref": "../../common/v1/definitions.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -107,14 +106,10 @@
         },
         "parameters": [
           {
-            "$ref": "./definitions.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "automationAccountName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The automation account name."
+            "$ref": "../../common/v1/definitions.json#/parameters/AutomationAccountNameParameter"
           },
           {
             "name": "connectionName",
@@ -124,23 +119,23 @@
             "description": "The name of connection."
           },
           {
-            "$ref": "./definitions.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "./definitions.json#/parameters/ApiVersionParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "./definitions.json#/definitions/Connection"
+              "$ref": "#/definitions/Connection"
             }
           },
           "default": {
             "description": "Automation error response describing why the operation failed.",
             "schema": {
-              "$ref": "./definitions.json#/definitions/ErrorResponse"
+              "$ref": "../../common/v1/definitions.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -161,14 +156,10 @@
         },
         "parameters": [
           {
-            "$ref": "./definitions.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "automationAccountName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The automation account name."
+            "$ref": "../../common/v1/definitions.json#/parameters/AutomationAccountNameParameter"
           },
           {
             "name": "connectionName",
@@ -182,34 +173,34 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "./definitions.json#/definitions/ConnectionCreateOrUpdateParameters"
+              "$ref": "#/definitions/ConnectionCreateOrUpdateParameters"
             },
             "description": "The parameters supplied to the create or update connection operation."
           },
           {
-            "$ref": "./definitions.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "./definitions.json#/parameters/ApiVersionParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
           "201": {
             "description": "Created",
             "schema": {
-              "$ref": "./definitions.json#/definitions/Connection"
+              "$ref": "#/definitions/Connection"
             }
           },
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "./definitions.json#/definitions/Connection"
+              "$ref": "#/definitions/Connection"
             }
           },
           "default": {
             "description": "Automation error response describing why the operation failed.",
             "schema": {
-              "$ref": "./definitions.json#/definitions/ErrorResponse"
+              "$ref": "../../common/v1/definitions.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -230,14 +221,10 @@
         },
         "parameters": [
           {
-            "$ref": "./definitions.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "automationAccountName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The automation account name."
+            "$ref": "../../common/v1/definitions.json#/parameters/AutomationAccountNameParameter"
           },
           {
             "name": "connectionName",
@@ -251,28 +238,28 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "./definitions.json#/definitions/ConnectionUpdateParameters"
+              "$ref": "#/definitions/ConnectionUpdateParameters"
             },
             "description": "The parameters supplied to the update a connection operation."
           },
           {
-            "$ref": "./definitions.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "./definitions.json#/parameters/ApiVersionParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "./definitions.json#/definitions/Connection"
+              "$ref": "#/definitions/Connection"
             }
           },
           "default": {
             "description": "Automation error response describing why the operation failed.",
             "schema": {
-              "$ref": "./definitions.json#/definitions/ErrorResponse"
+              "$ref": "../../common/v1/definitions.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -298,33 +285,29 @@
         },
         "parameters": [
           {
-            "$ref": "./definitions.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "automationAccountName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The automation account name."
+            "$ref": "../../common/v1/definitions.json#/parameters/AutomationAccountNameParameter"
           },
           {
-            "$ref": "./definitions.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "./definitions.json#/parameters/ApiVersionParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "./definitions.json#/definitions/ConnectionListResult"
+              "$ref": "#/definitions/ConnectionListResult"
             }
           },
           "default": {
             "description": "Automation error response describing why the operation failed.",
             "schema": {
-              "$ref": "./definitions.json#/definitions/ErrorResponse"
+              "$ref": "../../common/v1/definitions.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -334,6 +317,153 @@
       }
     }
   },
-  "definitions": {},
+  "definitions": {
+    "ConnectionCreateOrUpdateProperties": {
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "Gets or sets the description of the connection."
+        },
+        "connectionType": {
+          "$ref": "#/definitions/ConnectionTypeAssociationProperty",
+          "description": "Gets or sets the connectionType of the connection."
+        },
+        "fieldDefinitionValues": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Gets or sets the field definition properties of the connection."
+        }
+      },
+      "required": [
+        "connectionType"
+      ],
+      "description": "The properties of the create connection properties"
+    },
+    "ConnectionCreateOrUpdateParameters": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Gets or sets the name of the connection."
+        },
+        "properties": {
+          "$ref": "#/definitions/ConnectionCreateOrUpdateProperties",
+          "x-ms-client-flatten": true,
+          "description": "Gets or sets the properties of the connection."
+        }
+      },
+      "required": [
+        "name",
+        "properties"
+      ],
+      "description": "The parameters supplied to the create or update connection operation."
+    },
+    "ConnectionProperties": {
+      "properties": {
+        "connectionType": {
+          "$ref": "#/definitions/ConnectionTypeAssociationProperty",
+          "description": "Gets or sets the connectionType of the connection."
+        },
+        "fieldDefinitionValues": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "readOnly": true,
+          "description": "Gets the field definition values of the connection."
+        },
+        "creationTime": {
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true,
+          "description": "Gets the creation time.",
+          "x-nullable": false
+        },
+        "lastModifiedTime": {
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true,
+          "description": "Gets the last modified time.",
+          "x-nullable": false
+        },
+        "description": {
+          "type": "string",
+          "description": "Gets or sets the description."
+        }
+      },
+      "description": "Definition of the connection properties."
+    },
+    "Connection": {
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ConnectionProperties",
+          "x-ms-client-flatten": true,
+          "description": "Gets or sets the properties of the connection."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../common/v1/definitions.json#/definitions/ProxyResource"
+        }
+      ],
+      "description": "Definition of the connection."
+    },
+    "ConnectionListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Connection"
+          },
+          "description": "Gets or sets a list of connection."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Gets or sets the next link."
+        }
+      },
+      "description": "The response model for the list connection operation."
+    },
+    "ConnectionUpdateProperties": {
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "Gets or sets the description of the connection."
+        },
+        "fieldDefinitionValues": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Gets or sets the field definition values of the connection."
+        }
+      },
+      "description": "The properties of the update connection operation."
+    },
+    "ConnectionUpdateParameters": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Gets or sets the name of the connection."
+        },
+        "properties": {
+          "$ref": "#/definitions/ConnectionUpdateProperties",
+          "x-ms-client-flatten": true,
+          "description": "Gets or sets the properties of the connection."
+        }
+      },
+      "description": "The parameters supplied to the update connection operation."
+    },
+    "ConnectionTypeAssociationProperty": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Gets or sets the name of the connection type."
+        }
+      },
+      "description": "The connection type property associated with the entity."
+    }
+  },
   "parameters": {}
 }

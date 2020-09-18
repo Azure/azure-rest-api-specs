@@ -1,0 +1,147 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "AutomationManagement",
+    "version": "2018-01-15",
+    "x-ms-code-generation-settings": {
+      "useDateTimeOffset": true
+    }
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccountName}/nodecounts/{countType}": {
+      "get": {
+        "tags": [
+          "NodeCountInformation"
+        ],
+        "operationId": "NodeCountInformation_Get",
+        "description": "Retrieve counts for Dsc Nodes.",
+        "externalDocs": {
+          "url": "http://aka.ms/azureautomationsdk/nodecounts"
+        },
+        "x-ms-examples": {
+          "Get node's status counts": {
+            "$ref": "./examples/listPagedDscNodeStatusCounts.json"
+          },
+          "Get node's node configuration counts": {
+            "$ref": "./examples/listPagedDscNodeConfigurationCounts.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/AutomationAccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/CountTypeParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/NodeCounts"
+            }
+          },
+          "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../common/v1/definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "NodeCounts": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/NodeCount"
+          },
+          "description": "Gets an array of counts"
+        },
+        "totalCount": {
+          "type": "integer",
+          "description": "Gets the total number of records matching countType criteria."
+        }
+      },
+      "description": "Gets the count of nodes by count type"
+    },
+    "NodeCount": {
+      "description": "Number of nodes based on the Filter",
+      "properties": {
+        "name": {
+          "description": "Gets the name of a count type",
+          "type": "string"
+        },
+        "properties": {
+          "$ref": "#/definitions/NodeCountProperties"
+        }
+      }
+    },
+    "NodeCountProperties": {
+      "properties": {
+        "count": {
+          "description": "Gets the count for the name",
+          "type": "integer"
+        }
+      }
+    }
+  },
+  "parameters": {
+    "CountTypeParameter": {
+      "name": "countType",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The type of counts to retrieve",
+      "enum": [
+        "status",
+        "nodeconfiguration"
+      ],
+      "x-ms-enum": {
+        "name": "CountType",
+        "modelAsString": true
+      },
+      "x-ms-parameter-location": "method"
+    }
+  }
+}

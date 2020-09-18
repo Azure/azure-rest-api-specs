@@ -6,7 +6,10 @@
     "contact": {
       "name": "Mohamed Enein"
     },
-    "version": "2017-05-15-preview"
+    "version": "2017-05-15-preview",
+    "x-ms-code-generation-settings": {
+      "useDateTimeOffset": true
+    }
   },
   "consumes": [
     "application/json"
@@ -55,26 +58,26 @@
         "operationId": "SoftwareUpdateConfigurations_Create",
         "parameters": [
           {
-           "$ref": "../../stable/2015-10-31/definitions.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../stable/2015-10-31/definitions.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "./definitions.json#/parameters/automationAccountName"
+            "$ref": "../../common/v1/definitions.json#/parameters/AutomationAccountNameParameter"
           },
           {
-           "name": "softwareUpdateConfigurationName",
+            "name": "softwareUpdateConfigurationName",
             "description": "The name of the software update configuration to be created.",
             "type": "string",
             "required": true,
             "in": "path"
           },
           {
-            "$ref": "../../stable/2015-10-31/definitions.json#/parameters/ApiVersionParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "./definitions.json#/parameters/clientRequestId"
+            "$ref": "../../common/v1/definitions.json#/parameters/clientRequestId"
           },
           {
             "name": "parameters",
@@ -82,7 +85,7 @@
             "required": true,
             "in": "body",
             "schema": {
-              "$ref": "./definitions.json#/definitions/softwareUpdateConfiguration"
+              "$ref": "#/definitions/softwareUpdateConfiguration"
             }
           }
         ],
@@ -90,23 +93,20 @@
           "200": {
             "description": "Software update configuration with the same name and properties already exists.",
             "schema": {
-              "$ref": "./definitions.json#/definitions/softwareUpdateConfiguration"
+              "$ref": "#/definitions/softwareUpdateConfiguration"
             }
           },
           "201": {
             "description": "Software update configuration is created.",
             "schema": {
-              "$ref": "./definitions.json#/definitions/softwareUpdateConfiguration"
+              "$ref": "#/definitions/softwareUpdateConfiguration"
             }
           },
-          "400": {
-            "description": "Bad request."
-          },
-          "404": {
-            "description": "Resource group or automation account does not exist."
-          },
-          "409": {
-            "description": "A software update configuration with different properties and the same name already exist."
+          "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../common/v1/definitions.json#/definitions/ErrorResponse"
+            }
           }
         }
       },
@@ -126,37 +126,40 @@
         "operationId": "SoftwareUpdateConfigurations_GetByName",
         "parameters": [
           {
-            "$ref": "../../stable/2015-10-31/definitions.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../stable/2015-10-31/definitions.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "./definitions.json#/parameters/automationAccountName"
+            "$ref": "../../common/v1/definitions.json#/parameters/AutomationAccountNameParameter"
           },
           {
-           "name": "softwareUpdateConfigurationName",
+            "name": "softwareUpdateConfigurationName",
             "description": "The name of the software update configuration to be created.",
             "type": "string",
             "required": true,
             "in": "path"
           },
           {
-            "$ref": "../../stable/2015-10-31/definitions.json#/parameters/ApiVersionParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "./definitions.json#/parameters/clientRequestId"
+            "$ref": "../../common/v1/definitions.json#/parameters/clientRequestId"
           }
         ],
         "responses": {
           "200": {
             "description": "A single software update configuration.",
             "schema": {
-              "$ref": "./definitions.json#/definitions/softwareUpdateConfiguration"
+              "$ref": "#/definitions/softwareUpdateConfiguration"
             }
           },
-          "404": {
-            "description": "Resource group, account, or software update configuration doesn't exist."
+          "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../common/v1/definitions.json#/definitions/ErrorResponse"
+            }
           }
         }
       },
@@ -176,26 +179,26 @@
         "operationId": "SoftwareUpdateConfigurations_Delete",
         "parameters": [
           {
-            "$ref": "../../stable/2015-10-31/definitions.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../stable/2015-10-31/definitions.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "./definitions.json#/parameters/automationAccountName"
+            "$ref": "../../common/v1/definitions.json#/parameters/AutomationAccountNameParameter"
           },
           {
-           "name": "softwareUpdateConfigurationName",
+            "name": "softwareUpdateConfigurationName",
             "description": "The name of the software update configuration to be created.",
             "type": "string",
             "required": true,
             "in": "path"
           },
           {
-            "$ref": "../../stable/2015-10-31/definitions.json#/parameters/ApiVersionParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "./definitions.json#/parameters/clientRequestId"
+            "$ref": "../../common/v1/definitions.json#/parameters/clientRequestId"
           }
         ],
         "responses": {
@@ -205,8 +208,11 @@
           "204": {
             "description": "The software update configuration does not exist."
           },
-          "404": {
-            "description": "Resource group, account, or software update configuration doesn't exist."
+          "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../common/v1/definitions.json#/definitions/ErrorResponse"
+            }
           }
         }
       }
@@ -231,19 +237,19 @@
         "operationId": "SoftwareUpdateConfigurations_List",
         "parameters": [
           {
-           "$ref": "../../stable/2015-10-31/definitions.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../stable/2015-10-31/definitions.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "./definitions.json#/parameters/automationAccountName"
+            "$ref": "../../common/v1/definitions.json#/parameters/AutomationAccountNameParameter"
           },
           {
-           "$ref": "../../stable/2015-10-31/definitions.json#/parameters/ApiVersionParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "./definitions.json#/parameters/clientRequestId"
+            "$ref": "../../common/v1/definitions.json#/parameters/clientRequestId"
           },
           {
             "name": "$filter",
@@ -257,11 +263,596 @@
           "200": {
             "description": "Return list of software update configurations.",
             "schema": {
-              "$ref": "./definitions.json#/definitions/softwareUpdateConfigurationListResult"
+              "$ref": "#/definitions/softwareUpdateConfigurationListResult"
             }
           },
-          "404": {
-            "description": "Resource group, or account doesn't exist."
+          "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../common/v1/definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "softwareUpdateConfiguration": {
+      "x-ms-azure-resource": true,
+      "description": "Software update configuration properties.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource name."
+        },
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource Id."
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource type"
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "Software update configuration properties.",
+          "$ref": "#/definitions/softwareUpdateConfigurationProperties"
+        }
+      },
+      "required": [
+        "properties"
+      ]
+    },
+    "softwareUpdateConfigurationProperties": {
+      "description": "Software update configuration properties.",
+      "properties": {
+        "updateConfiguration": {
+          "description": "update specific properties for the Software update configuration",
+          "$ref": "#/definitions/updateConfiguration"
+        },
+        "scheduleInfo": {
+          "description": "Schedule information for the Software update configuration",
+          "$ref": "#/definitions/ScheduleProperties"
+        },
+        "provisioningState": {
+          "type": "string",
+          "description": "Provisioning state for the software update configuration, which only appears in the response.",
+          "readOnly": true
+        },
+        "error": {
+          "description": "Details of provisioning error",
+          "$ref": "../../common/v1/definitions.json#/definitions/ErrorResponse"
+        },
+        "creationTime": {
+          "type": "string",
+          "description": "Creation time of the resource, which only appears in the response.",
+          "format": "date-time",
+          "x-nullable": false,
+          "readOnly": true
+        },
+        "createdBy": {
+          "type": "string",
+          "description": "CreatedBy property, which only appears in the response.",
+          "readOnly": true
+        },
+        "lastModifiedTime": {
+          "type": "string",
+          "description": "Last time resource was modified, which only appears in the response.",
+          "format": "date-time",
+          "x-nullable": false,
+          "readOnly": true
+        },
+        "lastModifiedBy": {
+          "type": "string",
+          "description": "LastModifiedBy property, which only appears in the response.",
+          "readOnly": true
+        },
+        "tasks": {
+          "description": "Tasks information for the Software update configuration.",
+          "$ref": "#/definitions/softwareUpdateConfigurationTasks"
+        }
+      },
+      "required": [
+        "updateConfiguration",
+        "scheduleInfo"
+      ]
+    },
+    "softwareUpdateConfigurationTasks": {
+      "type": "object",
+      "description": "Task properties of the software update configuration.",
+      "properties": {
+        "preTask": {
+          "description": "Pre task properties.",
+          "$ref": "#/definitions/taskProperties"
+        },
+        "postTask": {
+          "description": "Post task properties.",
+          "$ref": "#/definitions/taskProperties"
+        }
+      }
+    },
+    "taskProperties": {
+      "type": "object",
+      "description": "Task properties of the software update configuration.",
+      "properties": {
+        "parameters": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Gets or sets the parameters of the task."
+        },
+        "source": {
+          "type": "string",
+          "description": "Gets or sets the name of the runbook."
+        }
+      }
+    },
+    "WindowsProperties": {
+      "type": "object",
+      "description": "Windows specific update configuration.",
+      "properties": {
+        "includedUpdateClassifications": {
+          "description": "Update classification included in the software update configuration. A comma separated string with required values",
+          "type": "string",
+          "enum": [
+            "Unclassified",
+            "Critical",
+            "Security",
+            "UpdateRollup",
+            "FeaturePack",
+            "ServicePack",
+            "Definition",
+            "Tools",
+            "Updates"
+          ],
+          "x-ms-enum": {
+            "name": "WindowsUpdateClasses",
+            "modelAsString": true
+          }
+        },
+        "excludedKbNumbers": {
+          "type": "array",
+          "description": "KB numbers excluded from the software update configuration.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "includedKbNumbers": {
+          "type": "array",
+          "description": "KB numbers included from the software update configuration.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "rebootSetting": {
+          "description": "Reboot setting for the software update configuration.",
+          "type": "string"
+        }
+      }
+    },
+    "operatingSystemType": {
+      "type": "string",
+      "description": "Target operating system for the software update configuration.",
+      "enum": [
+        "Windows",
+        "Linux"
+      ],
+      "x-ms-enum": {
+        "modelAsString": false,
+        "name": "OperatingSystemType"
+      }
+    },
+    "updateConfiguration": {
+      "type": "object",
+      "description": "Update specific properties of the software update configuration.",
+      "properties": {
+        "operatingSystem": {
+          "description": "operating system of target machines",
+          "$ref": "#/definitions/operatingSystemType"
+        },
+        "windows": {
+          "description": "Windows specific update configuration.",
+          "$ref": "#/definitions/WindowsProperties"
+        },
+        "linux": {
+          "description": "Linux specific update configuration.",
+          "$ref": "#/definitions/LinuxProperties"
+        },
+        "duration": {
+          "type": "string",
+          "format": "duration",
+          "description": "Maximum time allowed for the software update configuration run. Duration needs to be specified using the format PT[n]H[n]M[n]S as per ISO8601"
+        },
+        "azureVirtualMachines": {
+          "type": "array",
+          "description": "List of azure resource Ids for azure virtual machines targeted by the software update configuration.",
+          "items": {
+            "type": "string",
+            "description": "Azure Resource Manager Id for a virtual machine."
+          }
+        },
+        "nonAzureComputerNames": {
+          "type": "array",
+          "description": "List of names of non-azure machines targeted by the software update configuration.",
+          "items": {
+            "type": "string",
+            "description": "Name of Non-Azure OMS Computer."
+          }
+        },
+        "targets": {
+          "description": "Group targets for the software update configuration.",
+          "$ref": "#/definitions/TargetProperties"
+        }
+      },
+      "required": [
+        "operatingSystem"
+      ]
+    },
+    "LinuxProperties": {
+      "type": "object",
+      "description": "Linux specific update configuration.",
+      "properties": {
+        "includedPackageClassifications": {
+          "description": "Update classifications included in the software update configuration.",
+          "type": "string",
+          "enum": [
+            "Unclassified",
+            "Critical",
+            "Security",
+            "Other"
+          ],
+          "x-ms-enum": {
+            "name": "LinuxUpdateClasses",
+            "modelAsString": true
+          }
+        },
+        "excludedPackageNameMasks": {
+          "type": "array",
+          "description": "packages excluded from the software update configuration.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "includedPackageNameMasks": {
+          "type": "array",
+          "description": "packages included from the software update configuration.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "rebootSetting": {
+          "description": "Reboot setting for the software update configuration.",
+          "type": "string"
+        }
+      }
+    },
+    "ScheduleProperties": {
+      "properties": {
+        "startTime": {
+          "type": "string",
+          "format": "date-time",
+          "x-nullable": false,
+          "description": "Gets or sets the start time of the schedule."
+        },
+        "startTimeOffsetMinutes": {
+          "readOnly": true,
+          "type": "number",
+          "format": "double",
+          "description": "Gets the start time's offset in minutes.",
+          "x-nullable": false
+        },
+        "expiryTime": {
+          "type": "string",
+          "format": "date-time",
+          "x-nullable": true,
+          "description": "Gets or sets the end time of the schedule."
+        },
+        "expiryTimeOffsetMinutes": {
+          "type": "number",
+          "format": "double",
+          "description": "Gets or sets the expiry time's offset in minutes.",
+          "x-nullable": false
+        },
+        "isEnabled": {
+          "type": "boolean",
+          "default": false,
+          "description": "Gets or sets a value indicating whether this schedule is enabled."
+        },
+        "nextRun": {
+          "type": "string",
+          "format": "date-time",
+          "x-nullable": true,
+          "description": "Gets or sets the next run time of the schedule."
+        },
+        "nextRunOffsetMinutes": {
+          "type": "number",
+          "format": "double",
+          "description": "Gets or sets the next run time's offset in minutes.",
+          "x-nullable": false
+        },
+        "interval": {
+          "type": "integer",
+          "description": "Gets or sets the interval of the schedule."
+        },
+        "frequency": {
+          "type": "string",
+          "description": "Gets or sets the frequency of the schedule.",
+          "$ref": "../../stable/2015-10-31/schedule.json#/definitions/scheduleFrequency"
+        },
+        "timeZone": {
+          "type": "string",
+          "description": "Gets or sets the time zone of the schedule."
+        },
+        "advancedSchedule": {
+          "$ref": "#/definitions/AdvancedSchedule",
+          "description": "Gets or sets the advanced schedule."
+        },
+        "creationTime": {
+          "type": "string",
+          "format": "date-time",
+          "x-nullable": false,
+          "description": "Gets or sets the creation time."
+        },
+        "lastModifiedTime": {
+          "type": "string",
+          "format": "date-time",
+          "x-nullable": false,
+          "description": "Gets or sets the last modified time."
+        },
+        "description": {
+          "type": "string",
+          "description": "Gets or sets the description."
+        }
+      },
+      "description": "Definition of schedule parameters."
+    },
+    "AdvancedSchedule": {
+      "properties": {
+        "weekDays": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Days of the week that the job should execute on."
+        },
+        "monthDays": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "format": "int32",
+            "x-nullable": false
+          },
+          "description": "Days of the month that the job should execute on. Must be between 1 and 31."
+        },
+        "monthlyOccurrences": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AdvancedScheduleMonthlyOccurrence"
+          },
+          "description": "Occurrences of days within a month."
+        }
+      },
+      "description": "The properties of the create Advanced Schedule."
+    },
+    "AdvancedScheduleMonthlyOccurrence": {
+      "properties": {
+        "occurrence": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Occurrence of the week within the month. Must be between 1 and 5"
+        },
+        "day": {
+          "type": "string",
+          "description": "Day of the occurrence. Must be one of monday, tuesday, wednesday, thursday, friday, saturday, sunday.",
+          "enum": [
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday",
+            "Saturday",
+            "Sunday"
+          ],
+          "x-ms-enum": {
+            "name": "ScheduleDay",
+            "modelAsString": true
+          }
+        }
+      },
+      "description": "The properties of the create advanced schedule monthly occurrence."
+    },
+    "softwareUpdateConfigurationListResult": {
+      "description": "result of listing all software update configuration",
+      "properties": {
+        "value": {
+          "description": "outer object returned when listing all software update configurations",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/softwareUpdateConfigurationCollectionItem"
+          }
+        }
+      }
+    },
+    "softwareUpdateConfigurationCollectionItem": {
+      "description": "Software update configuration collection item properties.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Name of the software update configuration."
+        },
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource Id of the software update configuration"
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "Software update configuration properties.",
+          "$ref": "#/definitions/softwareUpdateConfigurationCollectionItemProperties"
+        }
+      },
+      "required": [
+        "properties"
+      ]
+    },
+    "collectionItemUpdateConfiguration": {
+      "description": "object returned when requesting a collection of software update configuration",
+      "properties": {
+        "azureVirtualMachines": {
+          "type": "array",
+          "description": "List of azure resource Ids for azure virtual machines targeted by the software update configuration.",
+          "items": {
+            "type": "string",
+            "description": "Azure Resource Manager Id for a virtual machine."
+          }
+        },
+        "duration": {
+          "type": "string",
+          "format": "duration",
+          "description": "Maximum time allowed for the software update configuration run. Duration needs to be specified using the format PT[n]H[n]M[n]S as per ISO8601"
+        }
+      }
+    },
+    "softwareUpdateConfigurationCollectionItemProperties": {
+      "description": "Software update configuration collection item properties.",
+      "properties": {
+        "updateConfiguration": {
+          "description": "Update specific properties of the software update configuration.",
+          "$ref": "#/definitions/collectionItemUpdateConfiguration"
+        },
+        "frequency": {
+          "description": "execution frequency of the schedule associated with the software update configuration",
+          "type": "string",
+          "$ref": "../../stable/2015-10-31/schedule.json#/definitions/scheduleFrequency"
+        },
+        "startTime": {
+          "type": "string",
+          "format": "date-time",
+          "x-nullable": false,
+          "description": "the start time of the update."
+        },
+        "creationTime": {
+          "type": "string",
+          "description": "Creation time of the software update configuration, which only appears in the response.",
+          "format": "date-time",
+          "x-nullable": false,
+          "readOnly": true
+        },
+        "lastModifiedTime": {
+          "type": "string",
+          "description": "Last time software update configuration was modified, which only appears in the response.",
+          "format": "date-time",
+          "x-nullable": false,
+          "readOnly": true
+        },
+        "provisioningState": {
+          "type": "string",
+          "description": "Provisioning state for the software update configuration, which only appears in the response.",
+          "readOnly": true
+        },
+        "nextRun": {
+          "type": "string",
+          "format": "date-time",
+          "x-nullable": true,
+          "description": "ext run time of the update."
+        }
+      }
+    },
+    "TargetProperties": {
+      "type": "object",
+      "description": "Group specific to the update configuration.",
+      "properties": {
+        "azureQueries": {
+          "description": "List of Azure queries in the software update configuration.",
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/AzureQueryProperties"
+          }
+        },
+        "nonAzureQueries": {
+          "description": "List of non Azure queries in the software update configuration.",
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/NonAzureQueryProperties"
+          }
+        }
+      }
+    },
+    "NonAzureQueryProperties": {
+      "type": "object",
+      "description": "Non Azure query for the update configuration.",
+      "properties": {
+        "functionAlias": {
+          "type": "string",
+          "description": "Log Analytics Saved Search name."
+        },
+        "workspaceId": {
+          "type": "string",
+          "description": "Workspace Id for Log Analytics in which the saved Search is resided."
+        }
+      }
+    },
+    "AzureQueryProperties": {
+      "type": "object",
+      "description": "Azure query for the update configuration.",
+      "properties": {
+        "scope": {
+          "type": "array",
+          "description": "List of Subscription or Resource Group ARM Ids.",
+          "items": {
+            "type": "string",
+            "description": "Subscription or Resource Group ARM Id."
+          }
+        },
+        "locations": {
+          "type": "array",
+          "description": "List of locations to scope the query to.",
+          "items": {
+            "type": "string",
+            "description": "Location to scope the query to."
+          }
+        },
+        "tagSettings": {
+          "type": "object",
+          "description": "Tag settings for the VM.",
+          "$ref": "#/definitions/TagSettingsProperties"
+        }
+      }
+    },
+    "TagSettingsProperties": {
+      "type": "object",
+      "description": "Tag filter information for the VM.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Dictionary of tags with its list of values.",
+          "additionalProperties": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "description": "List of tag values for a tag."
+            }
+          }
+        },
+        "filterOperator": {
+          "type": "string",
+          "description": "Filter VMs by Any or All specified tags.",
+          "enum": [
+            "All",
+            "Any"
+          ],
+          "x-ms-enum": {
+            "name": "TagOperators",
+            "modelAsString": false
           }
         }
       }

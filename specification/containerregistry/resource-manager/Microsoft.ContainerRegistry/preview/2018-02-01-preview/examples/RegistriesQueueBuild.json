@@ -1,0 +1,52 @@
+{
+  "parameters": {
+    "subscriptionId": "4385cf00-2d3a-425a-832f-f4285b1c9dce",
+    "resourceGroupName": "myResourceGroup",
+    "registryName": "myRegistry",
+    "api-version": "2018-02-01-preview",
+    "buildRequest": {
+      "type": "QuickBuild",
+      "imageNames": [
+        "azurerest:testtag"
+      ],
+      "noCache": true,
+      "sourceLocation": "https://myaccount.blob.core.windows.net/sascontainer/source.zip?sv=2015-04-05&st=2015-04-29T22%3A18%3A26Z&se=2015-04-30T02%3A23%3A26Z&sr=b&sp=rw&sip=168.1.5.60-168.1.5.70&spr=https&sig=Z%2FRHIX5Xcg0Mq2rqI3OlWTjEg2tYkboXr1P9ZUXDtkk%3D",
+      "buildArguments": [
+        {
+          "type": "DockerBuildArgument",
+          "name": "mytestargument",
+          "value": "mytestvalue",
+          "isSecret": false
+        },
+        {
+          "type": "DockerBuildArgument",
+          "name": "mysecrettestargument",
+          "value": "mysecrettestvalue",
+          "isSecret": true
+        }
+      ],
+      "isPushEnabled": true,
+      "platform": {
+        "osType": "Linux",
+        "cpu": 2
+      },
+      "dockerFilePath": "subfolder/Dockerfile"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "provisioningState": "Succeeded",
+          "buildId": "0accec26-d6de-4757-8e74-d080f38eaaab",
+          "status": "Succeeded",
+          "lastUpdatedTime": "2018-01-25T05:13:51.617Z"
+        },
+        "id": "/subscriptions/4385cf00-2d3a-425a-832f-f4285b1c9dce/resourceGroups/myResourceGroup/providers/Microsoft.ContainerRegistry/registries/myRegistry/builds/0accec26-d6de-4757-8e74-d080f38eaaab",
+        "name": "0accec26-d6de-4757-8e74-d080f38eaaab",
+        "type": "Microsoft.ContainerRegistry/registries/builds"
+      }
+    },
+    "202": {}
+  }
+}

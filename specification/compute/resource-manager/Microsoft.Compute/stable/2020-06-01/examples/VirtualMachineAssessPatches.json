@@ -1,0 +1,52 @@
+{
+  "parameters": {
+    "subscriptionId": "{subscription-id}",
+    "resourceGroupName": "myResourceGroupName",
+    "vmName": "myVMName",
+    "api-version": "2020-06-01"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "status": "Succeeded",
+        "assessmentActivityId": "68f8b292-dfc2-4646-9781-33cc88631968",
+        "rebootPending": true,
+        "criticalAndSecurityPatchCount": 1,
+        "otherPatchCount": 2,
+        "startDateTime": "2020-04-24T21:02:04.2556154Z",
+        "patches": [
+          {
+            "patchId": "35428702-5784-4ba4-a6e0-5222258b5411",
+            "name": "Definition Update for Windows Defender Antivirus - KB2267602 (Definition 1.279.1373.0)",
+            "version": "",
+            "kbid": "2267602",
+            "classifications": [
+              "Definition Updates"
+            ],
+            "rebootBehavior": "NeverReboots",
+            "activityId": "68f8b292-dfc2-4646-9781-33cc88631968",
+            "publishedDate": "2018-11-07T00:00:00Z",
+            "lastModifiedDateTime": "2020-04-24T21:18:45.2830263Z",
+            "assessmentState": "Available"
+          },
+          {
+            "patchId": "39f9cdd1-795c-4d0e-8c0a-73ab3f31746d",
+            "name": "Windows Malicious Software Removal Tool x64 - October 2018 (KB890830)",
+            "version": "",
+            "kbid": "890830",
+            "classifications": [
+              "Update Rollups"
+            ],
+            "rebootBehavior": "CanRequestReboot",
+            "activityId": "68f8b292-dfc2-4646-9781-33cc88631968",
+            "publishedDate": "2018-11-07T00:00:00Z",
+            "lastModifiedDateTime": "2020-04-24T21:18:45.2830263Z",
+            "assessmentState": "Available"
+          }
+        ],
+        "error": null
+      }
+    },
+    "202": {}
+  }
+}

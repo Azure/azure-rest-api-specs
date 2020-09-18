@@ -1,0 +1,136 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Azure Data Migration Service Resource Provider",
+    "version": "2018-03-15-preview"
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {},
+  "definitions": {
+    "ConnectToSourceSqlServerTaskInput": {
+      "type": "object",
+      "description": "Input for the task that validates connection to SQL Server and also validates source server requirements",
+      "properties": {
+        "sourceConnectionInfo": {
+          "description": "Connection information for Source SQL Server",
+          "$ref": "./Common.json#/definitions/SqlConnectionInfo"
+        },
+        "checkPermissionsGroup": {
+          "$ref": "./Common.json#/definitions/ServerLevelPermissionsGroup",
+          "description": "Permission group for validations"
+        }
+      },
+      "required": [
+        "sourceConnectionInfo"
+      ]
+    },
+    "ConnectToSourceSqlServerTaskOutput": {
+      "type": "object",
+      "description": "Output for the task that validates connection to SQL Server and also validates source server requirements",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Result identifier",
+          "readOnly": true
+        },
+        "resultType": {
+          "description": "Type of result - database level or task level",
+          "type": "string"
+        }
+      },
+      "required": [
+        "resultType"
+      ],
+      "discriminator": "resultType"
+    },
+    "ConnectToSourceSqlServerTaskOutputTaskLevel": {
+      "x-ms-discriminator-value": "TaskLevelOutput",
+      "type": "object",
+      "description": "Task level output for the task that validates connection to SQL Server and also validates source server requirements",
+      "properties": {
+        "databases": {
+          "type": "string",
+          "description": "Source databases as a map from database name to database id",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "sourceServerVersion": {
+          "type": "string",
+          "description": "Source server version",
+          "readOnly": true
+        },
+        "sourceServerBrandVersion": {
+          "type": "string",
+          "description": "Source server brand version",
+          "readOnly": true
+        },
+        "validationErrors": {
+          "description": "Validation errors",
+          "type": "array",
+          "items": {
+            "$ref": "./Common.json#/definitions/ReportableException"
+          },
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ConnectToSourceSqlServerTaskOutput"
+        }
+      ]
+    },
+    "ConnectToSourceSqlServerTaskOutputDatabaseLevel": {
+      "x-ms-discriminator-value": "DatabaseLevelOutput",
+      "type": "object",
+      "description": "Database level output for the task that validates connection to SQL Server and also validates source server requirements",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Database name",
+          "readOnly": true
+        },
+        "sizeMB": {
+          "type": "number",
+          "format": "double",
+          "description": "Size of the file in megabytes",
+          "readOnly": true
+        },
+        "databaseFiles": {
+          "type": "array",
+          "description": "The list of database files",
+          "items": {
+            "$ref": "./TasksCommon.json#/definitions/DatabaseFileInfo"
+          },
+          "readOnly": true
+        },
+        "compatibilityLevel": {
+          "$ref": "./TasksCommon.json#/definitions/DatabaseCompatLevel",
+          "description": "SQL Server compatibility level of database",
+          "readOnly": true
+        },
+        "databaseState": {
+          "$ref": "./TasksCommon.json#/definitions/DatabaseState",
+          "description": "State of the database",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ConnectToSourceSqlServerTaskOutput"
+        }
+      ]
+    }
+  }
+}

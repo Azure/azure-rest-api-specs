@@ -46,10 +46,10 @@
         },
         "x-ms-examples": {
           "InvoicesList": {
-            "$ref": "./examples/InvoicesList.json" 
+            "$ref": "./examples/InvoicesList.json"
           },
           "InvoicesExpand": {
-            "$ref": "./examples/InvoicesExpand.json" 
+            "$ref": "./examples/InvoicesExpand.json"
           }
         },
         "parameters": [
@@ -118,20 +118,20 @@
         "description": "Gets a named invoice resource. When getting a single invoice, the downloadUrl property is expanded automatically.",
         "x-ms-examples": {
           "InvoicesGet": {
-            "$ref": "./examples/InvoicesGet.json" 
+            "$ref": "./examples/InvoicesGet.json"
           }
         },
         "parameters": [
-          {                                 
+          {
             "$ref": "#/parameters/subscriptionIdParameter"
           },
           {
-            "name": "invoiceName", 
+            "name": "invoiceName",
             "description": "The name of an invoice resource.",
             "in": "path",
             "required": true,
             "type": "string"
-          },   
+          },
           {
             "$ref": "#/parameters/apiVersionParameter"
           }
@@ -140,7 +140,7 @@
           "200": {
             "description": "OK. The request has succeeded.",
             "schema": {
-                "$ref": "#/definitions/Invoice"
+              "$ref": "#/definitions/Invoice"
             }
           },
           "default": {
@@ -161,11 +161,11 @@
         "description": "Gets the most recent invoice. When getting a single invoice, the downloadUrl property is expanded automatically.",
         "x-ms-examples": {
           "InvoicesGetLatest": {
-            "$ref": "./examples/InvoicesGetLatest.json" 
+            "$ref": "./examples/InvoicesGetLatest.json"
           }
         },
         "parameters": [
-          {                                 
+          {
             "$ref": "#/parameters/subscriptionIdParameter"
           },
           {
@@ -176,7 +176,7 @@
           "200": {
             "description": "OK. The request has succeeded.",
             "schema": {
-                "$ref": "#/definitions/Invoice"
+              "$ref": "#/definitions/Invoice"
             }
           },
           "default": {
@@ -231,9 +231,9 @@
           "readOnly": true
         },
         "url": {
-            "description": "The URL to the PDF file.",
-            "type": "string",
-            "readOnly": true
+          "description": "The URL to the PDF file.",
+          "type": "string",
+          "readOnly": true
         }
       }
     },
@@ -255,14 +255,14 @@
           "type": "string",
           "readOnly": true
         }
-      }      
+      }
     },
     "ErrorResponse": {
       "description": "Error response indicates that the service is not able to process the incoming request. The reason is provided in the error message.",
       "type": "object",
       "properties": {
         "error": {
-           "$ref": "#/definitions/ErrorDetails"
+          "$ref": "#/definitions/ErrorDetails"
         }
       }
     },
@@ -299,7 +299,7 @@
         }
       }
     },
-    "InvoiceProperties":{
+    "InvoiceProperties": {
       "description": "The properties of the invoice.",
       "properties": {
         "invoicePeriodStartDate": {
@@ -352,12 +352,12 @@
       }
     },
     "OperationListResult": {
-     "description": "Result of the request to list billing operations. It contains a list of operations and a URL link to get the next set of results.",
+      "description": "Result of the request to list billing operations. It contains a list of operations and a URL link to get the next set of results.",
       "properties": {
         "value": {
           "description": "List of billing operations supported by the Microsoft.Billing resource provider.",
           "type": "array",
-          "readOnly": true, 
+          "readOnly": true,
           "items": {
             "$ref": "#/definitions/Operation"
           }

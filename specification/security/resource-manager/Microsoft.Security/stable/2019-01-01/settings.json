@@ -1,0 +1,275 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Security Center",
+    "description": "API spec for Microsoft.Security (Azure Security Center) resource provider",
+    "version": "2019-01-01"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Security/settings": {
+      "get": {
+        "x-ms-examples": {
+          "Get settings of subscription": {
+            "$ref": "./examples/Settings/GetSettings_example.json"
+          }
+        },
+        "tags": [
+          "Settings"
+        ],
+        "description": "Settings about different configurations in security center",
+        "operationId": "Settings_List",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SettingsList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Security/settings/{settingName}": {
+      "get": {
+        "x-ms-examples": {
+          "Get a setting on subscription": {
+            "$ref": "./examples/Settings/GetSetting_example.json"
+          }
+        },
+        "tags": [
+          "Settings"
+        ],
+        "description": "Settings of different configurations in security center",
+        "operationId": "Settings_Get",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/SettingName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Setting"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "put": {
+        "x-ms-examples": {
+          "Update a setting for subscription": {
+            "$ref": "./examples/Settings/UpdateSetting_example.json"
+          }
+        },
+        "tags": [
+          "Settings"
+        ],
+        "description": "updating settings about different configurations in security center",
+        "operationId": "Settings_Update",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/SettingName"
+          },
+          {
+            "$ref": "#/parameters/Setting"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Setting"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "SettingsList": {
+      "type": "object",
+      "description": "Subscription settings list.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The settings list.",
+          "items": {
+            "$ref": "#/definitions/Setting"
+          }
+        },
+        "nextLink": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The URI to fetch the next page."
+        }
+      }
+    },
+    "Setting": {
+      "type": "object",
+      "description": "Represents a security setting in Azure Security Center.",
+      "properties": {},
+      "allOf": [
+        {
+          "$ref": "#/definitions/SettingResource"
+        }
+      ]
+    },
+    "DataExportSettings": {
+      "type": "object",
+      "description": "Represents a data export setting",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "Data export setting data",
+          "$ref": "#/definitions/DataExportSettingProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Setting"
+        }
+      ],
+      "x-ms-discriminator-value": "DataExportSettings"
+    },
+    "SettingResource": {
+      "type": "object",
+      "description": "The kind of the security setting",
+      "properties": {
+        "kind": {
+          "type": "string",
+          "description": "the kind of the settings string (DataExportSettings)",
+          "enum": [
+            "DataExportSettings",
+            "AlertSuppressionSetting"
+          ],
+          "x-ms-enum": {
+            "name": "SettingKind",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "DataExportSettings"
+              },
+              {
+                "value": "AlertSuppressionSetting"
+              }
+            ]
+          }
+        }
+      },
+      "discriminator": "kind",
+      "required": [
+        "kind"
+      ],
+      "allOf": [
+        {
+          "$ref": "../../../common/v1/types.json#/definitions/Resource"
+        }
+      ]
+    },
+    "DataExportSettingProperties": {
+      "type": "object",
+      "description": "The data export setting properties",
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "description": "Is the data export setting is enabled"
+        }
+      },
+      "required": [
+        "enabled"
+      ]
+    }
+  },
+  "parameters": {
+    "SettingName": {
+      "name": "settingName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Name of setting: (MCAS/WDATP)",
+      "enum": [
+        "MCAS",
+        "WDATP"
+      ],
+      "x-ms-parameter-location": "method"
+    },
+    "Setting": {
+      "name": "setting",
+      "in": "body",
+      "required": true,
+      "description": "Setting object",
+      "schema": {
+        "$ref": "#/definitions/Setting"
+      },
+      "x-ms-parameter-location": "method"
+    }
+  }
+}

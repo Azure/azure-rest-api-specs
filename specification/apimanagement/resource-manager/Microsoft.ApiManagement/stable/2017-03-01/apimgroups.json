@@ -91,6 +91,52 @@
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/groups/{groupId}": {
+      "head": {
+        "tags": [
+          "Groups"
+        ],
+        "operationId": "Group_GetEntityTag",
+        "description": "Gets the entity state (Etag) version of the group specified by its identifier.",
+        "x-ms-examples": {
+          "ApiManagementHeadGroup": {
+            "$ref": "./examples/ApiManagementHeadGroup.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "./apimanagement.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/GroupIdParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Specified group entity exists and current entity state version is present in the ETag header.",
+            "headers": {
+              "ETag": {
+                "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./apimanagement.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
       "get": {
         "tags": [
           "Groups"
@@ -182,7 +228,7 @@
         ],
         "responses": {
           "201": {
-            "description": "Group was created succesfully.",
+            "description": "Group was created successfully.",
             "schema": {
               "$ref": "#/definitions/GroupContract"
             }
@@ -368,6 +414,49 @@
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/groups/{groupId}/users/{uid}": {
+      "head": {
+        "tags": [
+          "GroupUsers"
+        ],
+        "operationId": "GroupUser_CheckEntityExists",
+        "description": "Checks that user entity specified by identifier is associated with the group entity.",
+        "x-ms-examples": {
+          "ApiManagementHeadGroupUser": {
+            "$ref": "./examples/ApiManagementHeadGroupUser.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "./apimanagement.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/GroupIdParameter"
+          },
+          {
+            "$ref": "./apimusers.json#/parameters/UserIdParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Entity exists"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./apimanagement.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
       "put": {
         "tags": [
           "GroupUsers"
@@ -536,7 +625,7 @@
       "required": [
         "displayName"
       ],
-      "description": "Developer group."
+      "description": "Group contract Properties."
     },
     "GroupCreateParameters": {
       "properties": {

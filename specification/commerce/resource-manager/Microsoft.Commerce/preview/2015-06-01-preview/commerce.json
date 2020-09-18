@@ -112,7 +112,7 @@
         },
         "x-ms-examples": {
           "GetRateCard": {
-            "$ref": "./examples/GetRatecard.json"
+            "$ref": "./examples/GetRateCard.json"
           }
         },
         "parameters": [
@@ -180,6 +180,8 @@
           "description": "UTC end time for the usage bucket to which this usage aggregate belongs."
         },
         "quantity": {
+          "type": "number",
+          "format": "float",
           "description": "The amount of the resource consumption that occurred in this time frame."
         },
         "unit": {
@@ -380,10 +382,10 @@
             "Monetary Commitment",
             "Monetary Credit"
           ],
-            "x-ms-enum": {
-              "name": "OfferTermInfo",
-              "modelAsString": false
-            }
+          "x-ms-enum": {
+            "name": "OfferTermInfo",
+            "modelAsString": false
+          }
         },
         "EffectiveDate": {
           "description": "Indicates the date from which the offer term is effective.",

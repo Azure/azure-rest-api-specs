@@ -1,0 +1,55 @@
+{
+  "parameters": {
+    "subscriptionId": "14ddf0c5-77c5-4b53-84f6-e1fa43ad68f7",
+    "resourceGroupName": "gigtest",
+    "ruleName": "chiricutin",
+    "api-version": "2018-03-01"
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "body": {
+        "id": "/subscriptions/14ddf0c5-77c5-4b53-84f6-e1fa43ad68f7/resourceGroups/gigtest/providers/providers/microsoft.insights/metricalerts/chiricutin",
+        "type": "Microsoft.Insights/metricAlerts",
+        "location": "global",
+        "tags": {
+          "hidden-link:/subscriptions/b67f7fec-69fc-4974-9099-a26bd6ffeda3/resourceGroups/Rac46PostSwapRG/providers/Microsoft.Web/sites/leoalerttest": "Resource"
+        },
+        "properties": {
+          "description": "This is the description of the rule1",
+          "severity": 3,
+          "enabled": true,
+          "scopes": [
+            "/subscriptions/14ddf0c5-77c5-4b53-84f6-e1fa43ad68f7/resourceGroups/gigtest/providers/Microsoft.Compute/virtualMachines/gigwadme"
+          ],
+          "evaluationFrequency": "Pt1m",
+          "windowSize": "Pt15m",
+          "criteria": {
+            "odata.type": "Microsoft.Azure.Monitor.SingleResourceMultipleMetricCriteria",
+            "allOf": [
+              {
+                "criterionType": "StaticThresholdCriterion",
+                "name": "High_CPU_80",
+                "metricName": "\\Processor(_Total)\\% Processor Time",
+                "dimensions": [],
+                "operator": "GreaterThan",
+                "threshold": 80.50,
+                "timeAggregation": "Average"
+              }
+            ]
+          },
+          "autoMitigate": false,
+          "actions": [
+            {
+              "actionGroupId": "/subscriptions/14ddf0c5-77c5-4b53-84f6-e1fa43ad68f7/resourcegroups/gigtest/providers/microsoft.insights/notificationgroups/group2",
+              "webHookProperties": {
+                "key11": "value11",
+                "key12": "value12"
+              }
+            }
+          ]
+        }
+      }
+    }
+  }
+}

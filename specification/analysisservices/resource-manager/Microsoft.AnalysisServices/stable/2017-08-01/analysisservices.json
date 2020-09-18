@@ -1,0 +1,1265 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2017-08-01",
+    "title": "AzureAnalysisServices",
+    "description": "The Azure Analysis Services Web API provides a RESTful set of web services that enables users to create, retrieve, update, and delete Analysis Services servers",
+    "x-ms-code-generation-settings": {
+      "name": "AnalysisServicesManagementClient"
+    }
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AnalysisServices/servers/{serverName}": {
+      "get": {
+        "description": "Gets details about the specified Analysis Services server.",
+        "x-ms-examples": {
+          "Get details of a server": {
+            "$ref": "./examples/getServer.json"
+          }
+        },
+        "tags": [
+          "Servers"
+        ],
+        "operationId": "Servers_GetDetails",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "serverName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9]*$",
+            "minLength": 3,
+            "maxLength": 63,
+            "description": "The name of the Analysis Services server. It must be a minimum of 3 characters, and a maximum of 63."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The operation was successful.",
+            "schema": {
+              "$ref": "#/definitions/AnalysisServicesServer"
+            }
+          }
+        }
+      },
+      "put": {
+        "description": "Provisions the specified Analysis Services server based on the configuration specified in the request.",
+        "x-ms-examples": {
+          "Create a server.": {
+            "$ref": "./examples/createServer.json"
+          }
+        },
+        "tags": [
+          "Servers"
+        ],
+        "operationId": "Servers_Create",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "serverName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9]*$",
+            "minLength": 3,
+            "maxLength": 63,
+            "description": "The name of the Analysis Services server. It must be a minimum of 3 characters, and a maximum of 63."
+          },
+          {
+            "name": "serverParameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AnalysisServicesServer"
+            },
+            "description": "Contains the information used to provision the Analysis Services server."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/AnalysisServicesServer"
+            }
+          },
+          "201": {
+            "description": "InProgress. The operation is still completing.",
+            "schema": {
+              "$ref": "#/definitions/AnalysisServicesServer"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "description": "Deletes the specified Analysis Services server.",
+        "x-ms-examples": {
+          "Delete a server.": {
+            "$ref": "./examples/deleteServer.json"
+          }
+        },
+        "tags": [
+          "Servers"
+        ],
+        "operationId": "Servers_Delete",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "serverName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9]*$",
+            "minLength": 3,
+            "maxLength": 63,
+            "description": "The name of the Analysis Services server. It must be at least 3 characters in length, and no more than 63."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK."
+          },
+          "204": {
+            "description": "No Content."
+          },
+          "202": {
+            "description": "Accepted."
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "description": "Updates the current state of the specified Analysis Services server.",
+        "x-ms-examples": {
+          "Update a server.": {
+            "$ref": "./examples/updateServer.json"
+          }
+        },
+        "tags": [
+          "Servers"
+        ],
+        "operationId": "Servers_Update",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "serverName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9]*$",
+            "minLength": 3,
+            "maxLength": 63,
+            "description": "The name of the Analysis Services server. It must be at least 3 characters in length, and no more than 63."
+          },
+          {
+            "name": "serverUpdateParameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AnalysisServicesServerUpdateParameters"
+            },
+            "description": "Request object that contains the updated information for the server."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/AnalysisServicesServer"
+            }
+          },
+          "202": {
+            "description": "Accepted",
+            "schema": {
+              "$ref": "#/definitions/AnalysisServicesServer"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AnalysisServices/servers/{serverName}/suspend": {
+      "post": {
+        "description": "Suspends operation of the specified Analysis Services server instance.",
+        "x-ms-examples": {
+          "Suspend a server.": {
+            "$ref": "./examples/suspendServer.json"
+          }
+        },
+        "tags": [
+          "Servers"
+        ],
+        "operationId": "Servers_Suspend",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "serverName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9]*$",
+            "minLength": 3,
+            "maxLength": 63,
+            "description": "The name of the Analysis Services server. It must be at least 3 characters in length, and no more than 63."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK."
+          },
+          "202": {
+            "description": "Accepted."
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AnalysisServices/servers/{serverName}/resume": {
+      "post": {
+        "description": "Resumes operation of the specified Analysis Services server instance.",
+        "x-ms-examples": {
+          "Resume a server.": {
+            "$ref": "./examples/resumeServer.json"
+          }
+        },
+        "tags": [
+          "Servers"
+        ],
+        "operationId": "Servers_Resume",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "serverName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9]*$",
+            "minLength": 3,
+            "maxLength": 63,
+            "description": "The name of the Analysis Services server. It must be at least 3 characters in length, and no more than 63."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "202": {
+            "description": "Accepted"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AnalysisServices/servers": {
+      "get": {
+        "description": "Gets all the Analysis Services servers for the given resource group.",
+        "x-ms-examples": {
+          "List existing servers in the resource group.": {
+            "$ref": "./examples/listServersInResourceGroup.json"
+          }
+        },
+        "tags": [
+          "Servers"
+        ],
+        "operationId": "Servers_ListByResourceGroup",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/AnalysisServicesServers"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.AnalysisServices/servers": {
+      "get": {
+        "description": "Lists all the Analysis Services servers for the given subscription.",
+        "x-ms-examples": {
+          "List existing servers under the subscription.": {
+            "$ref": "./examples/listServers.json"
+          }
+        },
+        "tags": [
+          "Servers"
+        ],
+        "operationId": "Servers_List",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/AnalysisServicesServers"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.AnalysisServices/skus": {
+      "get": {
+        "description": "Lists eligible SKUs for Analysis Services resource provider.",
+        "x-ms-examples": {
+          "List eligible SKUs for a new server": {
+            "$ref": "./examples/listSkusForNew.json"
+          }
+        },
+        "operationId": "Servers_ListSkusForNew",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SkuEnumerationForNewResourceResult"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AnalysisServices/servers/{serverName}/skus": {
+      "get": {
+        "description": "Lists eligible SKUs for an Analysis Services resource.",
+        "x-ms-examples": {
+          "List eligible SKUs for an existing server": {
+            "$ref": "./examples/listSkusForExisting.json"
+          }
+        },
+        "tags": [
+          "Servers"
+        ],
+        "operationId": "Servers_ListSkusForExisting",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "serverName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9]*$",
+            "minLength": 3,
+            "maxLength": 63,
+            "description": "The name of the Analysis Services server. It must be at least 3 characters in length, and no more than 63."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SkuEnumerationForExistingResourceResult"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AnalysisServices/servers/{serverName}/listGatewayStatus": {
+      "post": {
+        "description": "Return the gateway status of the specified Analysis Services server instance.",
+        "x-ms-examples": {
+          "Get details of a server": {
+            "$ref": "./examples/listGatewayStatus.json"
+          }
+        },
+        "tags": [
+          "Servers"
+        ],
+        "operationId": "Servers_ListGatewayStatus",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "serverName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9]*$",
+            "minLength": 3,
+            "maxLength": 63,
+            "description": "The name of the Analysis Services server."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/GatewayListStatusLive"
+            }
+          },
+          "default": {
+            "description": "Default response as an error",
+            "schema": {
+              "$ref": "#/definitions/GatewayListStatusError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AnalysisServices/servers/{serverName}/dissociateGateway": {
+      "post": {
+        "description": "Dissociates a Unified Gateway associated with the server.",
+        "x-ms-examples": {
+          "Get details of a server": {
+            "$ref": "./examples/dissociateGateway.json"
+          }
+        },
+        "tags": [
+          "Servers"
+        ],
+        "operationId": "Servers_DissociateGateway",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "serverName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9]*$",
+            "minLength": 3,
+            "maxLength": 63,
+            "description": "The name of the Analysis Services server. It must be at least 3 characters in length, and no more than 63."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK."
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.AnalysisServices/locations/{location}/checkNameAvailability": {
+      "post": {
+        "x-ms-examples": {
+          "Get details of a server": {
+            "$ref": "./examples/checkNameAvailability.json"
+          }
+        },
+        "tags": [
+          "Servers"
+        ],
+        "operationId": "Servers_CheckNameAvailability",
+        "description": "Check the name availability in the target location.",
+        "parameters": [
+          {
+            "name": "location",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The region name which the operation will lookup into."
+          },
+          {
+            "name": "serverParameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CheckServerNameAvailabilityParameters"
+            },
+            "description": "Contains the information used to provision the Analysis Services server."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/CheckServerNameAvailabilityResult"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.AnalysisServices/locations/{location}/operationresults/{operationId}": {
+      "get": {
+        "x-ms-examples": {
+          "Get details of a server": {
+            "$ref": "./examples/operationResults.json"
+          }
+        },
+        "tags": [
+          "Servers"
+        ],
+        "operationId": "Servers_ListOperationResults",
+        "description": "List the result of the specified operation.",
+        "parameters": [
+          {
+            "name": "location",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The region name which the operation will lookup into."
+          },
+          {
+            "name": "operationId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The target operation Id."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The operation completed."
+          },
+          "202": {
+            "description": "Accepted. The operation is ongoing."
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.AnalysisServices/locations/{location}/operationstatuses/{operationId}": {
+      "get": {
+        "x-ms-examples": {
+          "Get details of a server": {
+            "$ref": "./examples/operationStatuses.json"
+          }
+        },
+        "tags": [
+          "Servers"
+        ],
+        "operationId": "Servers_ListOperationStatuses",
+        "description": "List the status of operation.",
+        "parameters": [
+          {
+            "name": "location",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The region name which the operation will lookup into."
+          },
+          {
+            "name": "operationId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The target operation Id."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The operation completed.",
+            "schema": {
+              "$ref": "#/definitions/OperationStatus"
+            }
+          },
+          "202": {
+            "description": "Accepted. The operation is ongoing.",
+            "schema": {
+              "$ref": "#/definitions/OperationStatus"
+            }
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.AnalysisServices/operations": {
+      "get": {
+        "tags": [
+          "Operations"
+        ],
+        "operationId": "Operations_List",
+        "description": "Lists all of the available consumption REST API operations.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Operation": {
+      "description": "A Consumption REST API operation.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Operation name: {provider}/{resource}/{operation}.",
+          "type": "string",
+          "readOnly": true
+        },
+        "display": {
+          "description": "The object that represents the operation.",
+          "properties": {
+            "provider": {
+              "description": "Service provider: Microsoft.Consumption.",
+              "type": "string",
+              "readOnly": true
+            },
+            "resource": {
+              "description": "Resource on which the operation is performed: UsageDetail, etc.",
+              "type": "string",
+              "readOnly": true
+            },
+            "operation": {
+              "description": "Operation type: Read, write, delete, etc.",
+              "type": "string",
+              "readOnly": true
+            }
+          }
+        }
+      }
+    },
+    "OperationListResult": {
+      "description": "Result of listing consumption operations. It contains a list of operations and a URL link to get the next set of results.",
+      "properties": {
+        "value": {
+          "description": "List of analysis services operations supported by the Microsoft.AnalysisServices resource provider.",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/Operation"
+          }
+        },
+        "nextLink": {
+          "description": "URL to get the next set of operation list results if there are any.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "Resource": {
+      "description": "Represents an instance of an Analysis Services resource.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "readOnly": true,
+          "description": "An identifier that represents the Analysis Services resource."
+        },
+        "name": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The name of the Analysis Services resource."
+        },
+        "type": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The type of the Analysis Services resource."
+        },
+        "location": {
+          "type": "string",
+          "description": "Location of the Analysis Services resource.",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "sku": {
+          "$ref": "#/definitions/ResourceSku",
+          "description": "The SKU of the Analysis Services resource."
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Key-value pairs of additional resource provisioning properties."
+        }
+      },
+      "required": [
+        "location",
+        "sku"
+      ],
+      "x-ms-azure-resource": true
+    },
+    "AnalysisServicesServer": {
+      "description": "Represents an instance of an Analysis Services resource.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/AnalysisServicesServerProperties",
+          "description": "Properties of the provision operation request."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ]
+    },
+    "AnalysisServicesServers": {
+      "description": "An array of Analysis Services resources.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AnalysisServicesServer"
+          },
+          "description": "An array of Analysis Services resources."
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "AnalysisServicesServerUpdateParameters": {
+      "description": "Provision request specification",
+      "type": "object",
+      "properties": {
+        "sku": {
+          "$ref": "#/definitions/ResourceSku",
+          "description": "The SKU of the Analysis Services resource."
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Key-value pairs of additional provisioning properties."
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/AnalysisServicesServerMutableProperties",
+          "description": "Properties of the provision operation request."
+        }
+      }
+    },
+    "AnalysisServicesServerProperties": {
+      "description": "Properties of Analysis Services resource.",
+      "type": "object",
+      "properties": {
+        "state": {
+          "type": "string",
+          "enum": [
+            "Deleting",
+            "Succeeded",
+            "Failed",
+            "Paused",
+            "Suspended",
+            "Provisioning",
+            "Updating",
+            "Suspending",
+            "Pausing",
+            "Resuming",
+            "Preparing",
+            "Scaling"
+          ],
+          "x-ms-enum": {
+            "name": "State",
+            "modelAsString": true
+          },
+          "readOnly": true,
+          "description": "The current state of Analysis Services resource. The state is to indicate more states outside of resource provisioning."
+        },
+        "provisioningState": {
+          "type": "string",
+          "enum": [
+            "Deleting",
+            "Succeeded",
+            "Failed",
+            "Paused",
+            "Suspended",
+            "Provisioning",
+            "Updating",
+            "Suspending",
+            "Pausing",
+            "Resuming",
+            "Preparing",
+            "Scaling"
+          ],
+          "x-ms-enum": {
+            "name": "ProvisioningState",
+            "modelAsString": true
+          },
+          "readOnly": true,
+          "description": "The current deployment state of Analysis Services resource. The provisioningState is to indicate states for resource provisioning."
+        },
+        "serverFullName": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The full name of the Analysis Services resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/AnalysisServicesServerMutableProperties"
+        }
+      ]
+    },
+    "ResourceSku": {
+      "description": "Represents the SKU name and Azure pricing tier for Analysis Services resource.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the SKU level."
+        },
+        "tier": {
+          "type": "string",
+          "enum": [
+            "Development",
+            "Basic",
+            "Standard"
+          ],
+          "x-ms-enum": {
+            "name": "SkuTier",
+            "modelAsString": true
+          },
+          "description": "The name of the Azure pricing tier to which the SKU applies."
+        },
+        "capacity": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 8,
+          "default": 1,
+          "description": "The number of instances in the read only query pool."
+        }
+      },
+      "required": [
+        "name"
+      ]
+    },
+    "AnalysisServicesServerMutableProperties": {
+      "description": "An object that represents a set of mutable Analysis Services resource properties.",
+      "type": "object",
+      "properties": {
+        "asAdministrators": {
+          "$ref": "#/definitions/ServerAdministrators",
+          "description": "A collection of AS server administrators"
+        },
+        "backupBlobContainerUri": {
+          "type": "string",
+          "description": "The SAS container URI to the backup container."
+        },
+        "gatewayDetails": {
+          "$ref": "#/definitions/GatewayDetails",
+          "description": "The gateway details configured for the AS server."
+        },
+        "ipV4FirewallSettings": {
+          "$ref": "#/definitions/IPv4FirewallSettings",
+          "description": "The firewall settings for the AS server."
+        },
+        "querypoolConnectionMode": {
+          "type": "string",
+          "description": "How the read-write server's participation in the query pool is controlled.<br/>It can have the following values: <ul><li>readOnly - indicates that the read-write server is intended not to participate in query operations</li><li>all - indicates that the read-write server can participate in query operations</li></ul>Specifying readOnly when capacity is 1 results in error.",
+          "enum": [
+            "All",
+            "ReadOnly"
+          ],
+          "x-ms-enum": {
+            "modelAsString": false,
+            "name": "ConnectionMode"
+          },
+          "default": "All"
+        }
+      }
+    },
+    "ServerAdministrators": {
+      "description": "An array of administrator user identities.",
+      "type": "object",
+      "properties": {
+        "members": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "description": "The UPN of the user. For example: johnsmith@contoso.com."
+          },
+          "description": "An array of administrator user identities."
+        }
+      }
+    },
+    "IPv4FirewallSettings": {
+      "description": "An array of firewall rules.",
+      "type": "object",
+      "properties": {
+        "firewallRules": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/IPv4FirewallRule",
+            "description": "The content of firewall rule."
+          },
+          "description": "An array of firewall rules."
+        },
+        "enablePowerBIService": {
+          "type": "boolean",
+          "description": "The indicator of enabling PBI service."
+        }
+      }
+    },
+    "IPv4FirewallRule": {
+      "description": "The detail of firewall rule.",
+      "type": "object",
+      "properties": {
+        "firewallRuleName": {
+          "type": "string",
+          "description": "The rule name."
+        },
+        "rangeStart": {
+          "type": "string",
+          "description": "The start range of IPv4."
+        },
+        "rangeEnd": {
+          "type": "string",
+          "description": "The end range of IPv4."
+        }
+      }
+    },
+    "GatewayDetails": {
+      "description": "The gateway details.",
+      "type": "object",
+      "properties": {
+        "gatewayResourceId": {
+          "type": "string",
+          "description": "Gateway resource to be associated with the server."
+        },
+        "gatewayObjectId": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Gateway object id from in the DMTS cluster for the gateway resource."
+        },
+        "dmtsClusterUri": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Uri of the DMTS cluster."
+        }
+      }
+    },
+    "GatewayListStatusLive": {
+      "description": "Status of gateway is live.",
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "string",
+          "enum": [
+            "Live"
+          ],
+          "x-ms-enum": {
+            "name": "Status",
+            "modelAsString": false
+          },
+          "description": "Live message of list gateway."
+        }
+      }
+    },
+    "GatewayListStatusError": {
+      "description": "Status of gateway is error.",
+      "type": "object",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/GatewayError",
+          "description": "Error of the list gateway status."
+        }
+      }
+    },
+    "GatewayError": {
+      "description": "Detail of gateway errors.",
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "Error code of list gateway."
+        },
+        "message": {
+          "type": "string",
+          "description": "Error message of list gateway."
+        }
+      }
+    },
+    "CheckServerNameAvailabilityParameters": {
+      "description": "Details of server name request body.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9]*$",
+          "minLength": 3,
+          "maxLength": 63,
+          "description": "Name for checking availability."
+        },
+        "type": {
+          "type": "string",
+          "default": "Microsoft.AnalysisServices/servers",
+          "description": "The resource type of azure analysis services."
+        }
+      }
+    },
+    "CheckServerNameAvailabilityResult": {
+      "description": "The checking result of server name availability.",
+      "type": "object",
+      "properties": {
+        "nameAvailable": {
+          "type": "boolean",
+          "description": "Indicator of available of the server name."
+        },
+        "reason": {
+          "type": "string",
+          "description": "The reason of unavailability."
+        },
+        "message": {
+          "type": "string",
+          "description": "The detailed message of the request unavailability."
+        }
+      }
+    },
+    "OperationStatus": {
+      "description": "The status of operation.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The operation Id."
+        },
+        "name": {
+          "type": "string",
+          "description": "The operation name."
+        },
+        "startTime": {
+          "type": "string",
+          "description": "The start time of the operation."
+        },
+        "endTime": {
+          "type": "string",
+          "description": "The end time of the operation."
+        },
+        "status": {
+          "type": "string",
+          "description": "The status of the operation."
+        },
+        "error": {
+          "type": "object",
+          "description": "The error detail of the operation if any.",
+          "$ref": "#/definitions/ErrorResponse"
+        }
+      }
+    },
+    "SkuEnumerationForNewResourceResult": {
+      "description": "An object that represents enumerating SKUs for new resources.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ResourceSku"
+          },
+          "description": "The collection of available SKUs for new resources."
+        }
+      }
+    },
+    "SkuEnumerationForExistingResourceResult": {
+      "description": "An object that represents enumerating SKUs for existing resources.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SkuDetailsForExistingResource"
+          },
+          "description": "The collection of available SKUs for existing resources."
+        }
+      }
+    },
+    "SkuDetailsForExistingResource": {
+      "description": "An object that represents SKU details for existing resources.",
+      "type": "object",
+      "properties": {
+        "sku": {
+          "$ref": "#/definitions/ResourceSku",
+          "description": "The SKU in SKU details for existing resources."
+        }
+      }
+    },
+    "ErrorResponse": {
+      "description": "Describes the format of Error response.",
+      "type": "object",
+      "properties": {
+        "code": {
+          "description": "Error code",
+          "type": "string"
+        },
+        "message": {
+          "description": "Error message indicating why the operation failed.",
+          "type": "string"
+        }
+      }
+    }
+  },
+  "parameters": {
+    "SubscriptionIdParameter": {
+      "name": "subscriptionId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "A unique identifier for a Microsoft Azure subscription. The subscription ID forms part of the URI for every service call."
+    },
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "The client API version."
+    },
+    "ResourceGroupNameParameter": {
+      "name": "resourceGroupName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "pattern": "^[-\\w\\._\\(\\)]+$",
+      "minLength": 1,
+      "maxLength": 90,
+      "x-ms-parameter-location": "method",
+      "description": "The name of the Azure Resource group of which a given Analysis Services server is part. This name must be at least 1 character in length, and no more than 90."
+    }
+  }
+}

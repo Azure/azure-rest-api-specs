@@ -1,10 +1,11 @@
 {
-  "parameters" : {
-    "api-version" : "2017-09-01",
-    "subscriptionId" : "subid",
-    "resourceGroupName" : "rg1",
-    "loadBalancerName" : "lb",
+  "parameters": {
+    "api-version": "2017-09-01",
+    "subscriptionId": "subid",
+    "resourceGroupName": "rg1",
+    "loadBalancerName": "lb",
     "parameters": {
+      "location": "eastus",
       "properties": {
         "frontendIPConfigurations": [
           {
@@ -12,31 +13,17 @@
             "properties": {
               "subnet": {
                 "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/vnetlb/subnets/subnetlb"
-              },
-              "loadBalancingRules": [
-                {
-                  "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/loadBalancers/lb/loadBalancingRules/rulelb"
-                }
-              ],
-              "inboundNatRules": [
-                {
-                  "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/loadBalancers/lb/inboundNatRules/in-nat-rule"
-                }
-              ]
+              }
             },
-            "zones": [ "1" ]
+            "zones": [
+              "1"
+            ]
           }
         ],
         "backendAddressPools": [
           {
             "name": "be-lb",
-            "properties": {
-              "loadBalancingRules": [
-                {
-                  "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/loadBalancers/lb/loadBalancingRules/rulelb"
-                }
-              ]
-            }
+            "properties": {}
           }
         ],
         "loadBalancingRules": [
@@ -69,12 +56,7 @@
               "port": 80,
               "requestPath": "healthcheck.aspx",
               "intervalInSeconds": 15,
-              "numberOfProbes": 2,
-              "loadBalancingRules": [
-                {
-                  "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/loadBalancers/lb/loadBalancingRules/rulelb"
-                }
-              ]
+              "numberOfProbes": 2
             }
           }
         ],
@@ -98,15 +80,15 @@
       }
     }
   },
-  "responses" : {
-    "200" : {
-      "body" : {
+  "responses": {
+    "200": {
+      "body": {
         "name": "lb",
         "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/loadBalancers/lb",
         "type": "Microsoft.Network/loadBalancers",
-        "location": "westus",
+        "location": "eastus",
         "sku": {
-            "name": "Basic"
+          "name": "Basic"
         },
         "properties": {
           "provisioningState": "Succeeded",
@@ -114,7 +96,9 @@
             {
               "name": "fe-lb",
               "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/loadBalancers/lb/frontendIPConfigurations/fe-lb",
-              "zones": [ "1" ],
+              "zones": [
+                "1"
+              ],
               "properties": {
                 "provisioningState": "Succeeded",
                 "privateIPAddress": "10.0.1.4",
@@ -215,14 +199,14 @@
         }
       }
     },
-    "201" : {
-      "body" : {
+    "201": {
+      "body": {
         "name": "lb",
         "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/loadBalancers/lb",
         "type": "Microsoft.Network/loadBalancers",
-        "location": "westus",
+        "location": "eastus",
         "sku": {
-            "name": "Basic"
+          "name": "Basic"
         },
         "properties": {
           "provisioningState": "Succeeded",
@@ -230,7 +214,9 @@
             {
               "name": "fe-lb",
               "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/loadBalancers/lb/frontendIPConfigurations/fe-lb",
-              "zones": [ "1" ],
+              "zones": [
+                "1"
+              ],
               "properties": {
                 "provisioningState": "Succeeded",
                 "privateIPAddress": "10.0.1.4",

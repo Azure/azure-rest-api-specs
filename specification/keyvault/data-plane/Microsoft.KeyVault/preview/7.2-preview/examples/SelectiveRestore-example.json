@@ -1,0 +1,29 @@
+{
+  "parameters": {
+    "vaultBaseUrl": "https://myvault.vault.azure.net",
+    "keyName": "hsm-mail-key",
+    "restoreBlobDetails": {
+      "sasTokenParameters": {
+        "storageResourceUri": "https://myaccount.blob.core.windows.net/sascontainer/sasContainer",
+        "token": "se=2018-02-01T00%3A00Z&spr=https&sv=2017-04-17&sr=b&sig=XXFNfuMCH112BxhemJ7PWn0xGfImMXT6LfbXWvtRUk%3D"
+      },
+      "folder": "mhsm-mypool-20200303062926785"
+    },
+    "api-version": "7.2-preview"
+  },
+  "responses": {
+    "202": {
+      "headers": {
+        "Retry-After": 5,
+        "Azure-AsyncOperation": "https://myvault.vault.azure.net/restore/45aacd568a23b0s49a2803861e8dd3ase21f/pending"
+      },
+      "body": {
+        "status": "InProgress",
+        "statusDetails": "Selective Key restore is in progress",
+        "jobId": "45aacd568a23b0s49a2803861e8dd3ase21f",
+        "startTime": 1490790000,
+        "endTime": 0
+      }
+    }
+  }
+}

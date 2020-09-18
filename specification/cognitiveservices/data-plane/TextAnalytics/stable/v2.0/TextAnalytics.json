@@ -7,16 +7,8 @@
       "url": "https://azure.microsoft.com/en-us/services/cognitive-services/text-analytics/",
       "email": "mlapi@microsoft.com"
     },
-    "title": "Text Analytics API",
+    "title": "Text Analytics Client",
     "description": "The Text Analytics API is a suite of text analytics web services built with best-in-class Microsoft machine learning algorithms. The API can be used to analyze unstructured text for tasks such as sentiment analysis, key phrase extraction and language detection. No training data is needed to use this API; just bring your text data. This API uses advanced natural language processing techniques to deliver best in class predictions. Further documentation can be found in https://docs.microsoft.com/en-us/azure/cognitive-services/text-analytics/overview"
-  },
-  "x-ms-parameterized-host": {
-    "hostTemplate": "{AzureRegion}.api.cognitive.microsoft.com",
-    "parameters": [
-      {
-        "$ref": "../../../Common/ExtendedRegions.json#/parameters/AzureRegion"
-      }
-    ]
   },
   "securityDefinitions": {
     "apim_key": {
@@ -30,18 +22,23 @@
       "apim_key": []
     }
   ],
-  "basePath": "/text/analytics",
-  "schemes": [
-    "https"
-  ],
+  "x-ms-parameterized-host": {
+    "hostTemplate": "{Endpoint}/text/analytics/v2.0",
+    "useSchemePrefix": false,
+    "parameters": [
+      {
+        "$ref": "#/parameters/Endpoint"
+      }
+    ]
+  },
   "paths": {
-    "/v2.0/keyPhrases": {
+    "/keyPhrases": {
       "post": {
         "tags": [
           "Key Phrases"
         ],
         "summary": "The API returns a list of strings denoting the key talking points in the input text.",
-        "description": "We employ techniques from Microsoft Office's sophisticated Natural Language Processing toolkit. See the <a href=\"https://docs.microsoft.com/en-us/azure/cognitive-services/text-analytics/overview#supported-languages\">Text Analytics Documentation</a> for details about the languages that are supported by key phrase extraction.",
+        "description": "See the <a href=\"https://docs.microsoft.com/en-us/azure/cognitive-services/text-analytics/overview#supported-languages\">Text Analytics Documentation</a> for details about the languages that are supported by key phrase extraction.",
         "operationId": "Key Phrases",
         "consumes": [
           "application/json"
@@ -82,7 +79,7 @@
         "deprecated": false
       }
     },
-    "/v2.0/languages": {
+    "/languages": {
       "post": {
         "tags": [
           "Detect Language"
@@ -122,20 +119,20 @@
           }
         },
         "x-ms-examples": {
-          "Successful Key Phrase request": {
+          "Successful Detect Language request": {
             "$ref": "./examples//SuccessfulLanguagesRequest.json"
           }
         },
         "deprecated": false
       }
     },
-    "/v2.0/sentiment": {
+    "/sentiment": {
       "post": {
         "tags": [
           "Sentiment"
         ],
         "summary": "The API returns a numeric score between 0 and 1.",
-        "description": "Scores close to 1 indicate positive sentiment, while scores close to 0 indicate negative sentiment. Sentiment score is generated using classification techniques. The input features to the classifier include n-grams, features generated from part-of-speech tags, and word embeddings. See the <a href=\"https://docs.microsoft.com/en-us/azure/cognitive-services/text-analytics/overview#supported-languages\">Text Analytics Documentation</a> for details about the languages that are supported by sentiment analysis.",
+        "description": "Scores close to 1 indicate positive sentiment, while scores close to 0 indicate negative sentiment. A score of 0.5 indicates the lack of sentiment (e.g. a factoid statement). See the <a href=\"https://docs.microsoft.com/en-us/azure/cognitive-services/text-analytics/overview#supported-languages\">Text Analytics Documentation</a> for details about the languages that are supported by sentiment analysis.",
         "operationId": "Sentiment",
         "consumes": [
           "application/json"
@@ -169,8 +166,55 @@
           }
         },
         "x-ms-examples": {
-          "Successful Key Phrase request": {
+          "Successful Sentiment request": {
             "$ref": "./examples//SuccessfulSentimentRequest.json"
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/entities": {
+      "post": {
+        "tags": [
+          "Entities"
+        ],
+        "summary": "The API returns a list of recognized entities in a given document.",
+        "description": "To get even more information on each recognized entity we recommend using the Bing Entity Search API by querying for the recognized entities names. See the <a href=\"https://docs.microsoft.com/en-us/azure/cognitive-services/text-analytics/text-analytics-supported-languages\">Supported languages in Text Analytics API</a> for the list of enabled languages.",
+        "operationId": "Entities",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "input",
+            "in": "body",
+            "description": "Collection of documents to analyze.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/MultiLanguageBatchInput"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful call results in a list of recognized entities returned for each valid document",
+            "schema": {
+              "$ref": "#/definitions/EntitiesBatchResult"
+            }
+          },
+          "default": {
+            "description": "Error Response",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful Entities request": {
+            "$ref": "./examples//SuccessfulEntitiesRequest.json"
           }
         },
         "deprecated": false
@@ -441,6 +485,107 @@
           "type": "string"
         }
       }
+    },
+    "EntitiesBatchResult": {
+      "type": "object",
+      "properties": {
+        "documents": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/EntitiesBatchResultItem"
+          },
+          "readOnly": true
+        },
+        "errors": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ErrorRecord"
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "EntitiesBatchResultItem": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "Unique document identifier.",
+          "type": "string",
+          "readOnly": true
+        },
+        "entities": {
+          "description": "Recognized entities in the document.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/EntityRecord"
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "EntityRecord": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Entity formal name.",
+          "type": "string"
+        },
+        "matches": {
+          "description": "List of instances this entity appears in the text.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MatchRecord"
+          },
+          "readOnly": true
+        },
+        "wikipediaLanguage": {
+          "description": "Wikipedia language for which the WikipediaId and WikipediaUrl refers to.",
+          "type": "string"
+        },
+        "wikipediaId": {
+          "description": "Wikipedia unique identifier of the recognized entity.",
+          "type": "string"
+        },
+        "wikipediaUrl": {
+          "description": "URL for the entity's English Wikipedia page.",
+          "type": "string",
+          "readOnly": true
+        },
+        "bingId": {
+          "description": "Bing unique identifier of the recognized entity. Use in conjunction with the Bing Entity Search API to fetch additional relevant information.",
+          "type": "string"
+        }
+      }
+    },
+    "MatchRecord": {
+      "type": "object",
+      "properties": {
+        "text": {
+          "description": "Entity text as appears in the request.",
+          "type": "string"
+        },
+        "offset": {
+          "format": "int32",
+          "description": "Start position (in Unicode characters) for the entity match text.",
+          "type": "integer"
+        },
+        "length": {
+          "format": "int32",
+          "description": "Length (in Unicode characters) for the entity match text.",
+          "type": "integer"
+        }
+      }
+    }
+  },
+  "parameters": {
+    "Endpoint": {
+      "name": "Endpoint",
+      "description": "Supported Cognitive Services endpoints (protocol and hostname, for example: https://westus.api.cognitive.microsoft.com).",
+      "x-ms-parameter-location": "client",
+      "required": true,
+      "type": "string",
+      "in": "path",
+      "x-ms-skip-url-encoding": true
     }
   }
 }

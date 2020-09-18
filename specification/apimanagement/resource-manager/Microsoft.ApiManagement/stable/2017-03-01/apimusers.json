@@ -94,6 +94,52 @@
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/users/{uid}": {
+      "head": {
+        "tags": [
+          "Users"
+        ],
+        "operationId": "User_GetEntityTag",
+        "description": "Gets the entity state (Etag) version of the user specified by its identifier.",
+        "x-ms-examples": {
+          "ApiManagementHeadUser": {
+            "$ref": "./examples/ApiManagementHeadUser.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "./apimanagement.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/UserIdParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Specified user entity exists and current entity state version is present in the ETag header.",
+            "headers": {
+              "ETag": {
+                "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./apimanagement.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
       "get": {
         "tags": [
           "Users"
@@ -692,6 +738,28 @@
         "password": {
           "type": "string",
           "description": "User Password. If no value is provided, a default password is generated."
+        },
+        "confirmation": {
+          "type": "string",
+          "description": "Determines the type of confirmation e-mail that will be sent to the newly created user.",
+          "enum": [
+            "signup",
+            "invite"
+          ],
+          "x-ms-enum": {
+            "name": "Confirmation",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "signup",
+                "description": "Send an e-mail to the user confirming they have successfully signed up."
+              },
+              {
+                "value": "invite",
+                "description": "Send an e-mail inviting the user to sign-up and complete registration."
+              }
+            ]
+          }
         }
       },
       "allOf": [
@@ -713,12 +781,32 @@
           "description": "Account state. Specifies whether the user is active or not. Blocked users are unable to sign into the developer portal or call any APIs of subscribed products. Default state is Active.",
           "enum": [
             "active",
-            "blocked"
+            "blocked",
+            "pending",
+            "deleted"
           ],
           "default": "active",
           "x-ms-enum": {
             "name": "UserState",
-            "modelAsString": true
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "active",
+                "description": "User state is active."
+              },
+              {
+                "value": "blocked",
+                "description": "User is blocked. Blocked users cannot authenticate at developer portal or call API."
+              },
+              {
+                "value": "pending",
+                "description": "User account is pending. Requires identity confirmation before it can be made active."
+              },
+              {
+                "value": "deleted",
+                "description": "User account is closed. All identities and related entities are removed."
+              }
+            ]
           }
         },
         "note": {

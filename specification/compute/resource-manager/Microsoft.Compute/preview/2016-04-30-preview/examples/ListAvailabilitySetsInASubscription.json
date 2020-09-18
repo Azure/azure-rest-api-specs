@@ -1,0 +1,46 @@
+{
+  "parameters": {
+    "subscriptionId": "{subscriptionId}",
+    "api-version": "2016-04-30-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "properties": {
+              "platformUpdateDomainCount": 5,
+              "platformFaultDomainCount": 2
+            },
+            "type": "Microsoft.Compute/availabilitySets",
+            "location": "centralus",
+            "tags": {
+              "{tagName}": "{tagValue}"
+            },
+            "id": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/availabilitySets/{availabilitySetName}",
+            "name": "{availabilitySetName}",
+            "sku": {
+              "name": "Aligned"
+            }
+          },
+          {
+            "properties": {
+              "platformUpdateDomainCount": 3,
+              "platformFaultDomainCount": 2
+            },
+            "type": "Microsoft.Compute/availabilitySets",
+            "location": "westus",
+            "tags": {
+              "{tagName}": "{tagValue}"
+            },
+            "id": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/availabilitySets/{availabilitySetName}",
+            "name": "{availabilitySetName}",
+            "sku": {
+              "name": "Classic"
+            }
+          }
+        ]
+      }
+    }
+  }
+}

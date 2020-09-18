@@ -1,0 +1,464 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "Scale unit operation endpoints and objects.",
+    "title": "FabricAdminClient",
+    "version": "2016-05-01"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fabric.Admin/fabricLocations/{location}/scaleUnits/{scaleUnit}/scaleOut": {
+      "post": {
+        "x-ms-examples": {
+          "Scales out a scale unit.": {
+            "$ref": "./examples/ScaleUnit/ScaleOut.json"
+          }
+        },
+        "tags": [
+          "ScaleUnits"
+        ],
+        "description": "Scales out a scale unit.",
+        "operationId": "ScaleUnits_ScaleOut",
+        "parameters": [
+          {
+            "$ref": "Fabric.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "Fabric.json#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "Fabric.json#/parameters/LocationParameter"
+          },
+          {
+            "$ref": "#/parameters/ScaleUnitParameter"
+          },
+          {
+            "$ref": "#/parameters/ScaleOutScaleUnitParametersInBody"
+          },
+          {
+            "$ref": "Fabric.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "202": {
+            "description": "ACCEPTED"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fabric.Admin/fabricLocations/{location}/scaleUnits/{scaleUnit}/createFromJson": {
+      "post": {
+        "x-ms-examples": {
+          "Add a new scale unit.": {
+            "$ref": "./examples/ScaleUnit/CreateFromJson.json"
+          }
+        },
+        "tags": [
+          "ScaleUnits"
+        ],
+        "description": "Add a new scale unit.",
+        "operationId": "ScaleUnits_CreateFromJson",
+        "parameters": [
+          {
+            "$ref": "Fabric.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "Fabric.json#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "Fabric.json#/parameters/LocationParameter"
+          },
+          {
+            "$ref": "#/parameters/ScaleUnitParameter"
+          },
+          {
+            "$ref": "#/parameters/CreateFromJsonScaleUnitParametersInBody"
+          },
+          {
+            "$ref": "Fabric.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "202": {
+            "description": "ACCEPTED"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fabric.Admin/fabricLocations/{location}/scaleUnits/{scaleUnit}": {
+      "get": {
+        "x-ms-examples": {
+          "Returns the requested scale unit": {
+            "$ref": "./examples/ScaleUnit/Get.json"
+          }
+        },
+        "tags": [
+          "ScaleUnits"
+        ],
+        "description": "Returns the requested scale unit.",
+        "operationId": "ScaleUnits_Get",
+        "parameters": [
+          {
+            "$ref": "Fabric.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "Fabric.json#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "Fabric.json#/parameters/LocationParameter"
+          },
+          {
+            "$ref": "#/parameters/ScaleUnitParameter"
+          },
+          {
+            "$ref": "Fabric.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ScaleUnit"
+            }
+          },
+          "404": {
+            "description": "NOT FOUND"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fabric.Admin/fabricLocations/{location}/scaleUnits": {
+      "get": {
+        "x-ms-examples": {
+          "Returns a list of all scale units at a location.": {
+            "$ref": "./examples/ScaleUnit/List.json"
+          }
+        },
+        "tags": [
+          "ScaleUnits"
+        ],
+        "description": "Returns a list of all scale units at a location.",
+        "operationId": "ScaleUnits_List",
+        "parameters": [
+          {
+            "$ref": "Fabric.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "Fabric.json#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "Fabric.json#/parameters/LocationParameter"
+          },
+          {
+            "$ref": "Fabric.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "Fabric.json#/parameters/FilterParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ScaleUnitList"
+            }
+          },
+          "404": {
+            "description": "NOT FOUND"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-odata": "#/definitions/ScaleUnit"
+      }
+    }
+  },
+  "definitions": {
+    "ScaleUnitCapacity": {
+      "description": "The capacity information for a physical machine.",
+      "type": "object",
+      "properties": {
+        "memoryGB": {
+          "description": "The memory for the physical machine.",
+          "type": "number",
+          "format": "float"
+        },
+        "cores": {
+          "description": "The number of CPU cores for the physical machine.",
+          "type": "integer",
+          "format": "int64"
+        }
+      }
+    },
+    "ScaleUnit": {
+      "description": "Represents a cluster. Generally, the cluster will be a collection of hosts backed by failover cluster manager.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "description": "Properties of a scale unit.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ScaleUnitModel"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "Fabric.json#/definitions/Resource"
+        }
+      ]
+    },
+    "ScaleUnitModel": {
+      "description": "Properties of a scale unit.",
+      "type": "object",
+      "properties": {
+        "scaleUnitType": {
+          "description": "Type of cluster.",
+          "enum": [
+            "Unknown",
+            "ComputeOnly",
+            "StorageOnly",
+            "HyperConverged"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "ScaleUnitType"
+          }
+        },
+        "logicalFaultDomain": {
+          "description": "Fault domain name of the cluster.",
+          "type": "integer",
+          "format": "int32"
+        },
+        "nodes": {
+          "description": "List of nodes in the server.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "state": {
+          "description": "Current state of the cluster.",
+          "enum": [
+            "Unknown",
+            "Creating",
+            "Running",
+            "Upgrading",
+            "Deleting"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "ScaleUnitState"
+          }
+        },
+        "model": {
+          "description": "Model of the servers in the cluster.",
+          "type": "string"
+        },
+        "totalCapacity": {
+          "description": "Capacity information for the cluster.",
+          "$ref": "#/definitions/ScaleUnitCapacity"
+        },
+        "isMultiNode": {
+          "description": "Denotes if more than one node in cluster.",
+          "type": "boolean"
+        }
+      }
+    },
+    "ScaleUnitList": {
+      "description": "A pageable list of scale units.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "List of scale units.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ScaleUnit"
+          }
+        },
+        "nextLink": {
+          "description": "URI to the next page.",
+          "type": "string"
+        }
+      }
+    },
+    "ScaleOutScaleUnitParameters": {
+      "description": "Input data that allows for adding a scale unit node.",
+      "type": "object",
+      "properties": {
+        "bmcIpv4Address": {
+          "x-ms-client-name": "BMCIPv4Address",
+          "description": "BMC address of the physical machine.",
+          "type": "string"
+        },
+        "computerName": {
+          "description": "Computer name of the physical machine.",
+          "type": "string"
+        }
+      }
+    },
+    "ScaleOutScaleUnitParametersList": {
+      "description": "A list of input data that allows for adding a set of scale unit nodes.",
+      "type": "object",
+      "properties": {
+        "nodeList": {
+          "description": "List of nodes in the scale unit.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ScaleOutScaleUnitParameters"
+          }
+        },
+        "awaitStorageConvergence": {
+          "description": "Flag indicates if the operation should wait for storage to converge before returning.",
+          "type": "boolean"
+        }
+      }
+    },
+    "NetworkDefinitionParameter": {
+      "description": "A definition of the network received from a new cluster operation.",
+      "type": "object",
+      "properties": {
+        "subnet": {
+          "description": "The subnet IP mask in the example format 10.0.0.0/25.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "vlanId": {
+          "description": "The Vlan ID of the subnet.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "DeploymentJsonPhysicalNodeParameters": {
+      "description": "Description of a bare metal node used for scale unit scale out operations.",
+      "type": "object",
+      "properties": {
+        "bmcIpAddress": {
+          "x-ms-client-name": "BMCIPAddress",
+          "description": "BMC address of the physical machine.",
+          "type": "string"
+        },
+        "name": {
+          "description": "Computer name of the physical machine.",
+          "type": "string"
+        }
+      }
+    },
+    "CreateFromJsonScaleUnitParametersList": {
+      "description": "A list of input data that allows for creating the new scale unit.",
+      "type": "object",
+      "properties": {
+        "clusterName": {
+          "description": "Cluster name for the new scale unit.",
+          "type": "string"
+        },
+        "physicalNodes": {
+          "description": "List of nodes in the scale unit.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DeploymentJsonPhysicalNodeParameters"
+          }
+        },
+        "torSwitchBgpAsn": {
+          "description": "The ASN for the cluster's rack TOR.",
+          "type": "string"
+        },
+        "softwareBgpAsn": {
+          "description": "The software ASN for the cluster's rack.",
+          "type": "string"
+        },
+        "torSwitchBgpPeerIp": {
+          "description": "The list of IP addresses used for TOR communication.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "infrastructureNetwork": {
+          "description": "The information associated with the infrastructure network that will be subdivided into subnets.",
+          "$ref": "#/definitions/NetworkDefinitionParameter"
+        },
+        "storageNetwork": {
+          "description": "The information associated with the storage network that will be subdivided into subnets.",
+          "$ref": "#/definitions/NetworkDefinitionParameter"
+        },
+        "netQosPriority": {
+          "description": "The network QOS priority setting.",
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    }
+  },
+  "parameters": {
+    "ScaleUnitParameter": {
+      "name": "scaleUnit",
+      "description": "Name of the scale units.",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "ScaleOutScaleUnitParametersInBody": {
+      "name": "scaleUnitNodeParameters",
+      "description": "A list of input data that allows for adding a set of scale unit nodes.",
+      "in": "body",
+      "required": true,
+      "schema": {
+        "$ref": "#/definitions/ScaleOutScaleUnitParametersList"
+      },
+      "x-ms-parameter-location": "method"
+    },
+    "CreateFromJsonScaleUnitParametersInBody": {
+      "name": "creationData",
+      "description": "A list of input data that allows for creating the new scale unit.",
+      "in": "body",
+      "required": true,
+      "schema": {
+        "$ref": "#/definitions/CreateFromJsonScaleUnitParametersList"
+      },
+      "x-ms-parameter-location": "method"
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Authorization uses an Azure Active Directory OAuth2 flow.",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ]
+}

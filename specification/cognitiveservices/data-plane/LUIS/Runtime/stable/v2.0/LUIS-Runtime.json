@@ -1,21 +1,18 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "Language Understanding Intelligent Service (LUIS) Endpoint API for running predictions and extracting user intentions and entities from utterances.",
-    "version": "v2.0"
+    "title": "LUIS Runtime Client",
+    "version": "2.0"
   },
   "x-ms-parameterized-host": {
-    "hostTemplate": "{AzureRegion}.api.cognitive.microsoft.com",
+    "hostTemplate": "{Endpoint}/luis/v2.0",
+    "useSchemePrefix": false,
     "parameters": [
       {
-        "$ref": "../../../Common/ExtendedRegions.json#/parameters/AzureRegion"
+        "$ref": "#/parameters/Endpoint"
       }
     ]
   },
-  "basePath": "/luis/v2.0/apps",
-  "schemes": [
-    "https"
-  ],
   "securityDefinitions": {
     "apiKeyHeader": {
       "type": "apiKey",
@@ -29,7 +26,7 @@
     }
   ],
   "paths": {
-    "/{appId}": {
+    "/apps/{appId}": {
       "get": {
         "description": "Gets predictions for a given utterance, in the form of intents and entities. The current maximum query size is 500 characters.",
         "operationId": "Prediction_Resolve2",
@@ -38,12 +35,13 @@
             "name": "appId",
             "in": "path",
             "type": "string",
+            "format": "uuid",
             "required": true,
             "description": "The LUIS application ID (guid)."
           },
           {
             "name": "q",
-            "x-ms-client-name":"query",
+            "x-ms-client-name": "query",
             "in": "query",
             "required": true,
             "maxLength": 500,
@@ -77,7 +75,7 @@
           {
             "name": "bing-spell-check-subscription-key",
             "in": "query",
-            "description": "The subscription key to use when enabling bing spell check",
+            "description": "The subscription key to use when enabling Bing spell check",
             "type": "string"
           },
           {
@@ -118,12 +116,13 @@
             "name": "appId",
             "in": "path",
             "type": "string",
+            "format": "uuid",
             "required": true,
             "description": "The LUIS application ID (Guid)."
           },
           {
             "name": "q",
-            "x-ms-client-name":"query",
+            "x-ms-client-name": "query",
             "in": "body",
             "required": true,
             "schema": {
@@ -158,7 +157,7 @@
           {
             "name": "bing-spell-check-subscription-key",
             "in": "query",
-            "description": "The subscription key to use when enabling bing spell check",
+            "description": "The subscription key to use when enabling Bing spell check",
             "type": "string"
           },
           {
@@ -188,7 +187,7 @@
         "produces": [
           "application/json"
         ],
-        "x-ms-examples":{
+        "x-ms-examples": {
           "Successful Get Predictions From Endpoint Via Post request": {
             "$ref": "./examples/prediction/SuccessfulGetPredictionsFromEndpointViaPostRequest.json"
           }
@@ -208,7 +207,7 @@
       "description": "Prediction, based on the input query, containing intent(s) and entities.",
       "properties": {
         "query": {
-          "description": "The input utterance that was analized.",
+          "description": "The input utterance that was analyzed.",
           "type": "string"
         },
         "alteredQuery": {
@@ -238,6 +237,12 @@
           "items": {
             "$ref": "#/definitions/CompositeEntityModel"
           }
+        },
+        "sentimentAnalysis": {
+          "$ref": "#/definitions/Sentiment"
+        },
+        "connectedServiceResult": {
+          "$ref": "#/definitions/LuisResult"
         }
       }
     },
@@ -304,7 +309,7 @@
     "EntityModel": {
       "description": "An entity extracted from the utterance.",
       "type": "object",
-      "properties":{
+      "properties": {
         "entity": {
           "type": "string",
           "description": "Name of the entity, as defined in LUIS."
@@ -314,19 +319,24 @@
           "description": "Type of the entity, as defined in LUIS."
         },
         "startIndex": {
-          "type": "number",
+          "type": "integer",
           "description": "The position of the first character of the matched entity within the utterance."
         },
         "endIndex": {
-          "type": "number",
+          "type": "integer",
           "description": "The position of the last character of the matched entity within the utterance."
         }
       },
       "additionalProperties": {
         "type": "object",
-        "description": "List of additional properties. E.g.: score and resolution values for pre-built LUIS entities."
+        "description": "List of additional properties. For example, score and resolution values for pre-built LUIS entities."
       },
-      "required": [ "entity", "type", "startIndex", "endIndex" ]
+      "required": [
+        "entity",
+        "type",
+        "startIndex",
+        "endIndex"
+      ]
     },
     "EntityWithScore": {
       "allOf": [
@@ -381,6 +391,31 @@
           "description": "Cause of the error."
         }
       }
+    },
+    "Sentiment": {
+      "description": "Sentiment of the input utterance.",
+      "type": "object",
+      "properties": {
+        "label": {
+          "type": "string",
+          "description": "The polarity of the sentiment, can be positive, neutral or negative."
+        },
+        "score": {
+          "type": "number",
+          "description": "Score of the sentiment, ranges from 0 (most negative) to 1 (most positive)."
+        }
+      }
+    }
+  },
+  "parameters": {
+    "Endpoint": {
+      "name": "Endpoint",
+      "description": "Supported Cognitive Services endpoints (protocol and hostname, for example: https://westus.api.cognitive.microsoft.com).",
+      "x-ms-parameter-location": "client",
+      "required": true,
+      "type": "string",
+      "in": "path",
+      "x-ms-skip-url-encoding": true
     }
   }
 }

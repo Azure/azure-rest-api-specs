@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "version": "1.0",
-    "title": "Face API",
+    "title": "Face Client",
     "description": "An API for face detection, verification, and identification."
   },
   "securityDefinitions": {
@@ -18,21 +18,18 @@
     }
   ],
   "x-ms-parameterized-host": {
-    "hostTemplate": "{AzureRegion}.api.cognitive.microsoft.com",
+    "hostTemplate": "{Endpoint}/face/v1.0",
+    "useSchemePrefix": false,
     "parameters": [
       {
-        "$ref": "../../../Common/ExtendedRegions.json#/parameters/AzureRegion"
+        "$ref": "#/parameters/Endpoint"
       }
     ]
   },
-  "basePath": "/face/v1.0",
-  "schemes": [
-    "https"
-  ],
   "paths": {
     "/findsimilars": {
       "post": {
-        "description": "Given query face's faceId, find the similar-looking faces from a faceId array or a faceListId.",
+        "description": "Given query face's faceId, to search the similar-looking faces from a faceId array, a face list or a large face list. faceId array contains the faces created by [Face - Detect](https://docs.microsoft.com/rest/api/cognitiveservices/face/face/detectwithurl), which will expire 24 hours after creation. A \"faceListId\" is created by [FaceList - Create](https://docs.microsoft.com/rest/api/cognitiveservices/face/facelist/create) containing persistedFaceIds that will not expire. And a \"largeFaceListId\" is created by [LargeFaceList - Create](https://docs.microsoft.com/rest/api/cognitiveservices/face/largefacelist/create) containing persistedFaceIds that will also not expire. Depending on the input the returned similar faces list contains faceIds or persistedFaceIds ranked by similarity.\n<br/>Find similar has two working modes, \"matchPerson\" and \"matchFace\". \"matchPerson\" is the default mode that it tries to find faces of the same person as possible by using internal same-person thresholds. It is useful to find a known person's other photos. Note that an empty list will be returned if no faces pass the internal thresholds. \"matchFace\" mode ignores same-person thresholds and returns ranked similar faces anyway, even the similarity is low. It can be used in the cases like searching celebrity-looking faces.\n<br/>The 'recognitionModel' associated with the query face's faceId should be the same as the 'recognitionModel' used by the target faceId array, face list or large face list.\n",
         "operationId": "Face_FindSimilar",
         "parameters": [
           {
@@ -56,7 +53,7 @@
           "200": {
             "description": "A successful call returns an array of the most similar faces represented in faceId if the input parameter is faceIds or persistedFaceId if the input parameter is faceListId.",
             "schema": {
-              "$ref": "#/definitions/SimilarFaceResults"
+              "$ref": "#/definitions/SimilarFaces"
             }
           },
           "default": {
@@ -75,7 +72,7 @@
     },
     "/group": {
       "post": {
-        "description": "Divide candidate faces into groups based on face similarity.",
+        "description": "Divide candidate faces into groups based on face similarity.<br />\n* The output is one or more disjointed face groups and a messyGroup. A face group contains faces that have similar looking, often of the same person. Face groups are ranked by group size, i.e. number of faces. Notice that faces belonging to a same person might be split into several groups in the result.\n* MessyGroup is a special face group containing faces that cannot find any similar counterpart face from original faces. The messyGroup will not appear in the result if all faces found their counterparts.\n* Group API needs at least 2 candidate faces and 1000 at most. We suggest to try [Face - Verify](https://docs.microsoft.com/rest/api/cognitiveservices/face/face/verifyfacetoface) when you only have 2 candidate faces.\n* The 'recognitionModel' associated with the query faces' faceIds should be the same.\n",
         "operationId": "Face_Group",
         "parameters": [
           {
@@ -99,7 +96,7 @@
           "200": {
             "description": "A successful call returns one or more groups of similar faces (rank by group size) and a messyGroup.",
             "schema": {
-              "$ref": "#/definitions/GroupResponse"
+              "$ref": "#/definitions/GroupResult"
             }
           },
           "default": {
@@ -118,7 +115,7 @@
     },
     "/identify": {
       "post": {
-        "description": "Identify unknown faces from a person group.",
+        "description": "1-to-many identification to find the closest matches of the specific query person face from a person group or large person group.\n<br/> For each face in the faceIds array, Face Identify will compute similarities between the query face and all the faces in the person group (given by personGroupId) or large person group (given by largePersonGroupId), and return candidate person(s) for that face ranked by similarity confidence. The person group/large person group should be trained to make it ready for identification. See more in [PersonGroup - Train](https://docs.microsoft.com/rest/api/cognitiveservices/face/persongroup/train) and [LargePersonGroup - Train](https://docs.microsoft.com/rest/api/cognitiveservices/face/largepersongroup/train).\n<br/>\n \nRemarks:<br />\n* The algorithm allows more than one face to be identified independently at the same request, but no more than 10 faces.\n* Each person in the person group/large person group could have more than one face, but no more than 248 faces.\n* Higher face image quality means better identification precision. Please consider high-quality faces: frontal, clear, and face size is 200x200 pixels (100 pixels between eyes) or bigger.\n* Number of candidates returned is restricted by maxNumOfCandidatesReturned and confidenceThreshold. If no person is identified, the returned candidates will be an empty array.\n* Try [Face - Find Similar](https://docs.microsoft.com/rest/api/cognitiveservices/face/face/findsimilar) when you need to find similar faces from a face list/large face list instead of a person group/large person group.\n* The 'recognitionModel' associated with the query faces' faceIds should be the same as the 'recognitionModel' used by the target person group or large person group.\n",
         "operationId": "Face_Identify",
         "parameters": [
           {
@@ -142,7 +139,7 @@
           "200": {
             "description": "A successful call returns the identified candidate person(s) for each query face.",
             "schema": {
-              "$ref": "#/definitions/IdentifyResult"
+              "$ref": "#/definitions/IdentifyResults"
             }
           },
           "default": {
@@ -153,7 +150,7 @@
           }
         },
         "x-ms-examples": {
-          "Identiy example": {
+          "Identify example": {
             "$ref": "./examples/Identify.json"
           }
         }
@@ -161,17 +158,17 @@
     },
     "/verify": {
       "post": {
-        "description": "Verify whether two faces belong to a same person or whether one face belongs to a person.",
-        "operationId": "Face_Verify",
+        "description": "Verify whether two faces belong to a same person or whether one face belongs to a person.\n<br/>\nRemarks:<br />\n* Higher face image quality means better identification precision. Please consider high-quality faces: frontal, clear, and face size is 200x200 pixels (100 pixels between eyes) or bigger.\n* For the scenarios that are sensitive to accuracy please make your own judgment.\n* The 'recognitionModel' associated with the query faces' faceIds should be the same as the 'recognitionModel' used by the target face, person group or large person group.\n",
+        "operationId": "Face_VerifyFaceToFace",
         "parameters": [
           {
             "name": "body",
-            "description": "Request body for verify operation.",
+            "description": "Request body for face to face verification.",
             "in": "body",
             "required": true,
             "x-ms-client-flatten": true,
             "schema": {
-              "$ref": "#/definitions/VerifyRequest"
+              "$ref": "#/definitions/VerifyFaceToFaceRequest"
             }
           }
         ],
@@ -197,7 +194,7 @@
         },
         "x-ms-examples": {
           "Verify faces example": {
-            "$ref": "./examples/VerifyFaces.json"
+            "$ref": "./examples/VerifyFaceToFace.json"
           }
         }
       }
@@ -205,16 +202,10 @@
     "/persongroups/{personGroupId}/persons": {
       "post": {
         "description": "Create a new person in a specified person group.",
-        "operationId": "Person_Create",
+        "operationId": "PersonGroupPerson_Create",
         "parameters": [
           {
-            "name": "personGroupId",
-            "in": "path",
-            "description": "Specifying the target person group to create the person.",
-            "required": true,
-            "type": "string",
-            "maxLength": 64,
-            "pattern": "^[a-z0-9-_]+$"
+            "$ref": "#/parameters/personGroupId"
           },
           {
             "name": "body",
@@ -223,7 +214,7 @@
             "required": true,
             "x-ms-client-flatten": true,
             "schema": {
-              "$ref": "#/definitions/CreatePersonRequest"
+              "$ref": "#/definitions/NameAndUserDataContract"
             }
           }
         ],
@@ -237,7 +228,7 @@
           "200": {
             "description": "A successful call returns a new personId created.",
             "schema": {
-              "$ref": "#/definitions/CreatePersonResult"
+              "$ref": "#/definitions/Person"
             }
           },
           "default": {
@@ -248,28 +239,17 @@
           }
         },
         "x-ms-examples": {
-          "Create new person example": {
-            "$ref": "./examples//CreateNewPerson.json"
+          "Create new person for person group example": {
+            "$ref": "./examples/CreateNewPersonGroupPerson.json"
           }
         }
       },
       "get": {
         "description": "List all persons in a person group, and retrieve person information (including personId, name, userData and persistedFaceIds of registered faces of the person).",
-        "operationId": "Person_List",
-        "x-ms-examples": {
-          "List persons in person group": {
-            "$ref": "./examples/ListPersonGroupPersons.json"
-          }
-        },
+        "operationId": "PersonGroupPerson_List",
         "parameters": [
           {
-            "name": "personGroupId",
-            "in": "path",
-            "description": "personGroupId of the target person group.",
-            "required": true,
-            "type": "string",
-            "maxLength": 64,
-            "pattern": "^[a-z0-9-_]+$"
+            "$ref": "#/parameters/personGroupId"
           },
           {
             "name": "start",
@@ -295,7 +275,7 @@
           "200": {
             "description": "A successful call returns an array of person information that belong to the person group.",
             "schema": {
-              "$ref": "#/definitions/PersonResults"
+              "$ref": "#/definitions/Persons"
             }
           },
           "default": {
@@ -304,30 +284,24 @@
               "$ref": "#/definitions/APIError"
             }
           }
+        },
+        "x-ms-examples": {
+          "List persons in person group": {
+            "$ref": "./examples/ListPersonGroupPersons.json"
+          }
         }
       }
     },
     "/persongroups/{personGroupId}/persons/{personId}": {
       "delete": {
-        "description": "Delete an existing person from a person group. Persisted face images of the person will also be deleted.",
-        "operationId": "Person_Delete",
+        "description": "Delete an existing person from a person group. The persistedFaceId, userData, person name and face feature in the person entry will all be deleted.",
+        "operationId": "PersonGroupPerson_Delete",
         "parameters": [
           {
-            "name": "personGroupId",
-            "in": "path",
-            "description": "Specifying the person group containing the person.",
-            "required": true,
-            "type": "string",
-            "maxLength": 64,
-            "pattern": "^[a-z0-9-_]+$"
+            "$ref": "#/parameters/personGroupId"
           },
           {
-            "name": "personId",
-            "in": "path",
-            "description": "The target personId to delete.",
-            "required": true,
-            "type": "string",
-            "format": "uuid"
+            "$ref": "#/parameters/personId"
           }
         ],
         "responses": {
@@ -343,30 +317,19 @@
         },
         "x-ms-examples": {
           "Delete an existing person example": {
-            "$ref": "./examples/DeletePerson.json"
+            "$ref": "./examples/DeletePersonGroupPerson.json"
           }
         }
       },
       "get": {
         "description": "Retrieve a person's information, including registered persisted faces, name and userData.",
-        "operationId": "Person_Get",
+        "operationId": "PersonGroupPerson_Get",
         "parameters": [
           {
-            "name": "personGroupId",
-            "in": "path",
-            "description": "Specifying the person group containing the target person.",
-            "required": true,
-            "type": "string",
-            "maxLength": 64,
-            "pattern": "^[a-z0-9-_]+$"
+            "$ref": "#/parameters/personGroupId"
           },
           {
-            "name": "personId",
-            "in": "path",
-            "description": "Specifying the target person.",
-            "required": true,
-            "type": "string",
-            "format": "uuid"
+            "$ref": "#/parameters/personId"
           }
         ],
         "produces": [
@@ -376,7 +339,7 @@
           "200": {
             "description": "A successful call returns the person's information.",
             "schema": {
-              "$ref": "#/definitions/PersonResult"
+              "$ref": "#/definitions/Person"
             }
           },
           "default": {
@@ -388,39 +351,28 @@
         },
         "x-ms-examples": {
           "Get person example": {
-            "$ref": "./examples/GetPerson.json"
+            "$ref": "./examples/GetPersonGroupPerson.json"
           }
         }
       },
       "patch": {
         "description": "Update name or userData of a person.",
-        "operationId": "Person_Update",
+        "operationId": "PersonGroupPerson_Update",
         "parameters": [
           {
-            "name": "personGroupId",
-            "in": "path",
-            "description": "Specifying the person group containing the target person.",
-            "required": true,
-            "type": "string",
-            "maxLength": 64,
-            "pattern": "^[a-z0-9-_]+$"
+            "$ref": "#/parameters/personGroupId"
           },
           {
-            "name": "personId",
-            "in": "path",
-            "description": "personId of the target person.",
-            "required": true,
-            "type": "string",
-            "format": "uuid"
+            "$ref": "#/parameters/personId"
           },
           {
             "name": "body",
-            "description": "Request body  for person update operation.",
+            "description": "Request body for person update operation.",
             "in": "body",
             "required": true,
             "x-ms-client-flatten": true,
             "schema": {
-              "$ref": "#/definitions/CreatePersonRequest"
+              "$ref": "#/definitions/NameAndUserDataContract"
             }
           }
         ],
@@ -440,40 +392,24 @@
         },
         "x-ms-examples": {
           "Update person example": {
-            "$ref": "./examples/UpdatePerson.json"
+            "$ref": "./examples/UpdatePersonGroupPerson.json"
           }
         }
       }
     },
-    "/persongroups/{personGroupId}/persons/{personId}/persistedFaces/{persistedFaceId}": {
+    "/persongroups/{personGroupId}/persons/{personId}/persistedfaces/{persistedFaceId}": {
       "delete": {
-        "description": "Delete a face from a person. Relative image for the persisted face will also be deleted.",
-        "operationId": "Person_DeleteFace",
+        "description": "Delete a face from a person in a person group by specified personGroupId, personId and persistedFaceId.\n<br /> Adding/deleting faces to/from a same person will be processed sequentially. Adding/deleting faces to/from different persons are processed in parallel.",
+        "operationId": "PersonGroupPerson_DeleteFace",
         "parameters": [
           {
-            "name": "personGroupId",
-            "in": "path",
-            "description": "Specifying the person group containing the target person.",
-            "required": true,
-            "type": "string",
-            "maxLength": 64,
-            "pattern": "^[a-z0-9-_]+$"
+            "$ref": "#/parameters/personGroupId"
           },
           {
-            "name": "personId",
-            "in": "path",
-            "description": "Specifying the person that the target persisted face belong to.",
-            "required": true,
-            "type": "string",
-            "format": "uuid"
+            "$ref": "#/parameters/personId"
           },
           {
-            "name": "persistedFaceId",
-            "in": "path",
-            "description": "The persisted face to remove.",
-            "required": true,
-            "type": "string",
-            "format": "uuid"
+            "$ref": "#/parameters/persistedFaceId"
           }
         ],
         "responses": {
@@ -489,38 +425,22 @@
         },
         "x-ms-examples": {
           "Delete face from person example": {
-            "$ref": "./examples/DeletePersonFace.json"
+            "$ref": "./examples/DeletePersonGroupPersonFace.json"
           }
         }
       },
       "get": {
         "description": "Retrieve information about a persisted face (specified by persistedFaceId, personId and its belonging personGroupId).",
-        "operationId": "Person_GetFace",
+        "operationId": "PersonGroupPerson_GetFace",
         "parameters": [
           {
-            "name": "personGroupId",
-            "in": "path",
-            "description": "Specifying the person group containing the target person.",
-            "required": true,
-            "type": "string",
-            "maxLength": 64,
-            "pattern": "^[a-z0-9-_]+$"
+            "$ref": "#/parameters/personGroupId"
           },
           {
-            "name": "personId",
-            "in": "path",
-            "description": "Specifying the target person that the face belongs to.",
-            "required": true,
-            "type": "string",
-            "format": "uuid"
+            "$ref": "#/parameters/personId"
           },
           {
-            "name": "persistedFaceId",
-            "in": "path",
-            "description": "The persistedFaceId of the target persisted face of the person.",
-            "required": true,
-            "type": "string",
-            "format": "uuid"
+            "$ref": "#/parameters/persistedFaceId"
           }
         ],
         "produces": [
@@ -530,7 +450,7 @@
           "200": {
             "description": "A successful call returns target persisted face's information (persistedFaceId and userData).",
             "schema": {
-              "$ref": "#/definitions/PersonFaceResult"
+              "$ref": "#/definitions/PersistedFace"
             }
           },
           "default": {
@@ -542,38 +462,22 @@
         },
         "x-ms-examples": {
           "Get persisted face example": {
-            "$ref": "./examples/GetPersistedFace.json"
+            "$ref": "./examples/GetPersonGroupPersistedFace.json"
           }
         }
       },
       "patch": {
-        "description": "Update a person persisted face's userData field.",
-        "operationId": "Person_UpdateFace",
+        "description": "Add a face to a person into a person group for face identification or verification. To deal with an image contains multiple faces, input face can be specified as an image with a targetFace rectangle. It returns a persistedFaceId representing the added face. No image will be stored. Only the extracted face feature will be stored on server until [PersonGroup PersonFace - Delete](https://docs.microsoft.com/rest/api/cognitiveservices/face/persongroupperson/deleteface), [PersonGroup Person - Delete](https://docs.microsoft.com/rest/api/cognitiveservices/face/persongroupperson/delete) or [PersonGroup - Delete](https://docs.microsoft.com/rest/api/cognitiveservices/face/persongroup/delete) is called.\n<br /> Note persistedFaceId is different from faceId generated by [Face - Detect](https://docs.microsoft.com/rest/api/cognitiveservices/face/face/detectwithurl).\n* Higher face image quality means better recognition precision. Please consider high-quality faces: frontal, clear, and face size is 200x200 pixels (100 pixels between eyes) or bigger.\n* Each person entry can hold up to 248 faces.\n* JPEG, PNG, GIF (the first frame), and BMP format are supported. The allowed image file size is from 1KB to 6MB.\n* \"targetFace\" rectangle should contain one face. Zero or multiple faces will be regarded as an error. If the provided \"targetFace\" rectangle is not returned from [Face - Detect](https://docs.microsoft.com/rest/api/cognitiveservices/face/face/detectwithurl), there’s no guarantee to detect and add the face successfully.\n* Out of detectable face size (36x36 - 4096x4096 pixels), large head-pose, or large occlusions will cause failures.\n* Adding/deleting faces to/from a same person will be processed sequentially. Adding/deleting faces to/from different persons are processed in parallel.",
+        "operationId": "PersonGroupPerson_UpdateFace",
         "parameters": [
           {
-            "name": "personGroupId",
-            "in": "path",
-            "description": "Specifying the person group containing the target person.",
-            "required": true,
-            "type": "string",
-            "maxLength": 64,
-            "pattern": "^[a-z0-9-_]+$"
+            "$ref": "#/parameters/personGroupId"
           },
           {
-            "name": "personId",
-            "in": "path",
-            "description": "personId of the target person.",
-            "required": true,
-            "type": "string",
-            "format": "uuid"
+            "$ref": "#/parameters/personId"
           },
           {
-            "name": "persistedFaceId",
-            "in": "path",
-            "description": "persistedFaceId of target face, which is persisted and will not expire.",
-            "required": true,
-            "type": "string",
-            "format": "uuid"
+            "$ref": "#/parameters/persistedFaceId"
           },
           {
             "name": "body",
@@ -582,7 +486,7 @@
             "required": true,
             "x-ms-client-flatten": true,
             "schema": {
-              "$ref": "#/definitions/UpdatePersonFaceDataRequest"
+              "$ref": "#/definitions/UpdateFaceRequest"
             }
           }
         ],
@@ -602,24 +506,18 @@
         },
         "x-ms-examples": {
           "Update person face example": {
-            "$ref": "./examples/UpdatePersonFace.json"
+            "$ref": "./examples/UpdatePersonGroupPersonFace.json"
           }
         }
       }
     },
     "/persongroups/{personGroupId}": {
       "put": {
-        "description": "Create a new person group with specified personGroupId, name and user-provided userData.",
+        "description": "Create a new person group with specified personGroupId, name, user-provided userData and recognitionModel.\n<br /> A person group is the container of the uploaded person data, including face recognition features.\n<br /> After creation, use [PersonGroup Person - Create](https://docs.microsoft.com/rest/api/cognitiveservices/face/persongroupperson/create) to add persons into the group, and then call [PersonGroup - Train](https://docs.microsoft.com/rest/api/cognitiveservices/face/persongroup/train) to get this group ready for [Face - Identify](https://docs.microsoft.com/rest/api/cognitiveservices/face/face/identify).\n<br /> No image will be stored. Only the person's extracted face features and userData will be stored on server until [PersonGroup Person - Delete](https://docs.microsoft.com/rest/api/cognitiveservices/face/persongroupperson/delete) or [PersonGroup - Delete](https://docs.microsoft.com/rest/api/cognitiveservices/face/persongroup/delete) is called.\n<br/>'recognitionModel' should be specified to associate with this person group. The default value for 'recognitionModel' is 'recognition_01', if the latest model needed, please explicitly specify the model you need in this parameter. New faces that are added to an existing person group will use the recognition model that's already associated with the collection. Existing face features in a person group can't be updated to features extracted by another version of recognition model.\n* 'recognition_01': The default recognition model for [PersonGroup - Create](https://docs.microsoft.com/rest/api/cognitiveservices/face/persongroup/create). All those person groups created before 2019 March are bonded with this recognition model.\n* 'recognition_02': Recognition model released in 2019 March.\n* 'recognition_03': Recognition model released in 2020 May. 'recognition_03' is recommended since its overall accuracy is improved compared with 'recognition_01' and 'recognition_02'.\n\nPerson group quota:\n* Free-tier subscription quota: 1,000 person groups. Each holds up to 1,000 persons.\n* S0-tier subscription quota: 1,000,000 person groups. Each holds up to 10,000 persons.\n* to handle larger scale face identification problem, please consider using [LargePersonGroup](https://docs.microsoft.com/rest/api/cognitiveservices/face/largepersongroup).",
         "operationId": "PersonGroup_Create",
         "parameters": [
           {
-            "name": "personGroupId",
-            "in": "path",
-            "description": "User-provided personGroupId as a string.",
-            "required": true,
-            "type": "string",
-            "maxLength": 64,
-            "pattern": "^[a-z0-9-_]+$"
+            "$ref": "#/parameters/personGroupId"
           },
           {
             "name": "body",
@@ -628,7 +526,7 @@
             "required": true,
             "x-ms-client-flatten": true,
             "schema": {
-              "$ref": "#/definitions/CreatePersonGroupRequest"
+              "$ref": "#/definitions/MetaDataContract"
             }
           }
         ],
@@ -653,17 +551,11 @@
         }
       },
       "delete": {
-        "description": "Delete an existing person group. Persisted face images of all people in the person group will also be deleted.",
+        "description": "Delete an existing person group. Persisted face features of all people in the person group will also be deleted.",
         "operationId": "PersonGroup_Delete",
         "parameters": [
           {
-            "name": "personGroupId",
-            "in": "path",
-            "description": "The personGroupId of the person group to be deleted.",
-            "required": true,
-            "type": "string",
-            "maxLength": 64,
-            "pattern": "^[a-z0-9-_]+$"
+            "$ref": "#/parameters/personGroupId"
           }
         ],
         "responses": {
@@ -684,24 +576,21 @@
         }
       },
       "get": {
-        "description": "Retrieve the information of a person group, including its name and userData.",
+        "description": "Retrieve person group name, userData and recognitionModel. To get person information under this personGroup, use [PersonGroup Person - List](https://docs.microsoft.com/rest/api/cognitiveservices/face/persongroupperson/list).",
         "operationId": "PersonGroup_Get",
         "parameters": [
           {
-            "name": "personGroupId",
-            "in": "path",
-            "description": "personGroupId of the target person group.",
-            "required": true,
-            "type": "string",
-            "maxLength": 64,
-            "pattern": "^[a-z0-9-_]+$"
+            "$ref": "#/parameters/personGroupId"
+          },
+          {
+            "$ref": "#/parameters/returnRecognitionModel"
           }
         ],
         "responses": {
           "200": {
             "description": "A successful call returns the person group's information.",
             "schema": {
-              "$ref": "#/definitions/PersonGroupResult"
+              "$ref": "#/definitions/PersonGroup"
             }
           },
           "default": {
@@ -725,13 +614,7 @@
         "operationId": "PersonGroup_Update",
         "parameters": [
           {
-            "name": "personGroupId",
-            "in": "path",
-            "description": "personGroupId of the person group to be updated.",
-            "required": true,
-            "type": "string",
-            "maxLength": 64,
-            "pattern": "^[a-z0-9-_]+$"
+            "$ref": "#/parameters/personGroupId"
           },
           {
             "name": "body",
@@ -740,7 +623,7 @@
             "required": true,
             "x-ms-client-flatten": true,
             "schema": {
-              "$ref": "#/definitions/CreatePersonGroupRequest"
+              "$ref": "#/definitions/NameAndUserDataContract"
             }
           }
         ],
@@ -771,13 +654,7 @@
         "operationId": "PersonGroup_GetTrainingStatus",
         "parameters": [
           {
-            "name": "personGroupId",
-            "in": "path",
-            "description": "personGroupId of target person group.",
-            "required": true,
-            "type": "string",
-            "maxLength": 64,
-            "pattern": "^[a-z0-9-_]+$"
+            "$ref": "#/parameters/personGroupId"
           }
         ],
         "responses": {
@@ -798,15 +675,15 @@
           "application/json"
         ],
         "x-ms-examples": {
-          "Get training status example": {
-            "$ref": "./examples/GetTrainingStatus.json"
+          "Get person group's training status example": {
+            "$ref": "./examples/GetPersonGroupTrainingStatus.json"
           }
         }
       }
     },
     "/persongroups": {
       "get": {
-        "description": "List person groups and their information.",
+        "description": "List person groups’ personGroupId, name, userData and recognitionModel.<br />\n* Person groups are stored in alphabetical order of personGroupId.\n* \"start\" parameter (string, optional) is a user-provided personGroupId value that returned entries have larger ids by string comparison. \"start\" set to empty to indicate return from the first item.\n* \"top\" parameter (int, optional) specifies the number of entries to return. A maximal of 1000 entries can be returned in one call. To fetch more, you can specify \"start\" with the last returned entry’s Id of the current call.\n<br />\nFor example, total 5 person groups: \"group1\", ..., \"group5\".\n<br /> \"start=&top=\" will return all 5 groups.\n<br /> \"start=&top=2\" will return \"group1\", \"group2\".\n<br /> \"start=group2&top=3\" will return \"group3\", \"group4\", \"group5\".\n",
         "operationId": "PersonGroup_List",
         "parameters": [
           {
@@ -826,6 +703,9 @@
             "minimum": 1,
             "maximum": 1000,
             "default": 1000
+          },
+          {
+            "$ref": "#/parameters/returnRecognitionModel"
           }
         ],
         "produces": [
@@ -835,7 +715,7 @@
           "200": {
             "description": "A successful call returns an array of person groups and their information.",
             "schema": {
-              "$ref": "#/definitions/PersonGroupResults"
+              "$ref": "#/definitions/PersonGroups"
             }
           },
           "default": {
@@ -846,8 +726,8 @@
           }
         },
         "x-ms-examples": {
-          "Get person groups example": {
-            "$ref": "./examples/GetPersonGroups.json"
+          "List person groups example": {
+            "$ref": "./examples/ListPersonGroups.json"
           }
         }
       }
@@ -858,13 +738,7 @@
         "operationId": "PersonGroup_Train",
         "parameters": [
           {
-            "name": "personGroupId",
-            "in": "path",
-            "description": "Target person group to be trained.",
-            "required": true,
-            "type": "string",
-            "maxLength": 64,
-            "pattern": "^[a-z0-9-_]+$"
+            "$ref": "#/parameters/personGroupId"
           }
         ],
         "produces": [
@@ -883,24 +757,18 @@
         },
         "x-ms-examples": {
           "Queue person group training": {
-            "$ref": "./examples/QueueTraining.json"
+            "$ref": "./examples/QueuePersonGroupTraining.json"
           }
         }
       }
     },
     "/facelists/{faceListId}": {
       "put": {
-        "description": "Create an empty face list. Up to 64 face lists are allowed to exist in one subscription.",
+        "description": "Create an empty face list with user-specified faceListId, name, an optional userData and recognitionModel. Up to 64 face lists are allowed in one subscription.\n<br /> Face list is a list of faces, up to 1,000 faces, and used by [Face - Find Similar](https://docs.microsoft.com/rest/api/cognitiveservices/face/face/findsimilar).\n<br /> After creation, user should use [FaceList - Add Face](https://docs.microsoft.com/rest/api/cognitiveservices/face/facelist/addfacefromurl) to import the faces. No image will be stored. Only the extracted face features are stored on server until [FaceList - Delete](https://docs.microsoft.com/rest/api/cognitiveservices/face/facelist/delete) is called.\n<br /> Find Similar is used for scenario like finding celebrity-like faces, similar face filtering, or as a light way face identification. But if the actual use is to identify person, please use [PersonGroup](https://docs.microsoft.com/rest/api/cognitiveservices/face/persongroup) / [LargePersonGroup](https://docs.microsoft.com/rest/api/cognitiveservices/face/largepersongroup) and [Face - Identify](https://docs.microsoft.com/rest/api/cognitiveservices/face/face/identify).\n<br /> Please consider [LargeFaceList](https://docs.microsoft.com/rest/api/cognitiveservices/face/largefacelist) when the face number is large. It can support up to 1,000,000 faces.\n<br />'recognitionModel' should be specified to associate with this face list. The default value for 'recognitionModel' is 'recognition_01', if the latest model needed, please explicitly specify the model you need in this parameter. New faces that are added to an existing face list will use the recognition model that's already associated with the collection. Existing face features in a face list can't be updated to features extracted by another version of recognition model.\n* 'recognition_01': The default recognition model for [FaceList- Create](https://docs.microsoft.com/rest/api/cognitiveservices/face/facelist/create). All those face lists created before 2019 March are bonded with this recognition model.\n* 'recognition_02': Recognition model released in 2019 March.\n* 'recognition_03': Recognition model released in 2020 May. 'recognition_03' is recommended since its overall accuracy is improved compared with 'recognition_01' and 'recognition_02'.",
         "operationId": "FaceList_Create",
         "parameters": [
           {
-            "name": "faceListId",
-            "in": "path",
-            "description": "Id referencing a particular face list.",
-            "required": true,
-            "type": "string",
-            "maxLength": 64,
-            "pattern": "^[a-z0-9-_]+$"
+            "$ref": "#/parameters/faceListId"
           },
           {
             "name": "body",
@@ -909,7 +777,7 @@
             "required": true,
             "x-ms-client-flatten": true,
             "schema": {
-              "$ref": "#/definitions/CreateFaceListRequest"
+              "$ref": "#/definitions/MetaDataContract"
             }
           }
         ],
@@ -937,17 +805,14 @@
         }
       },
       "get": {
-        "description": "Retrieve a face list's information.",
+        "description": "Retrieve a face list’s faceListId, name, userData, recognitionModel and faces in the face list.\n",
         "operationId": "FaceList_Get",
         "parameters": [
           {
-            "name": "faceListId",
-            "in": "path",
-            "description": "Id referencing a Face List.",
-            "required": true,
-            "type": "string",
-            "maxLength": 64,
-            "pattern": "^[a-z0-9-_]+$"
+            "$ref": "#/parameters/faceListId"
+          },
+          {
+            "$ref": "#/parameters/returnRecognitionModel"
           }
         ],
         "produces": [
@@ -957,7 +822,7 @@
           "200": {
             "description": "A successful call returns the face list's information.",
             "schema": {
-              "$ref": "#/definitions/GetFaceListResult"
+              "$ref": "#/definitions/FaceList"
             }
           },
           "default": {
@@ -978,13 +843,7 @@
         "operationId": "FaceList_Update",
         "parameters": [
           {
-            "name": "faceListId",
-            "in": "path",
-            "description": "Id referencing a Face List.",
-            "required": true,
-            "type": "string",
-            "maxLength": 64,
-            "pattern": "^[a-z0-9-_]+$"
+            "$ref": "#/parameters/faceListId"
           },
           {
             "name": "body",
@@ -993,7 +852,7 @@
             "required": true,
             "x-ms-client-flatten": true,
             "schema": {
-              "$ref": "#/definitions/CreateFaceListRequest"
+              "$ref": "#/definitions/NameAndUserDataContract"
             }
           }
         ],
@@ -1018,17 +877,11 @@
         }
       },
       "delete": {
-        "description": "Delete an existing face list according to faceListId. Persisted face images in the face list will also be deleted.",
+        "description": "Delete a specified face list.",
         "operationId": "FaceList_Delete",
         "parameters": [
           {
-            "name": "faceListId",
-            "in": "path",
-            "description": "Id referencing a Face List.",
-            "required": true,
-            "type": "string",
-            "maxLength": 64,
-            "pattern": "^[a-z0-9-_]+$"
+            "$ref": "#/parameters/faceListId"
           }
         ],
         "responses": {
@@ -1051,14 +904,18 @@
     },
     "/facelists": {
       "get": {
-        "description": "Retrieve information about all existing face lists. Only faceListId, name and userData will be returned.",
+        "description": "List face lists’ faceListId, name, userData and recognitionModel. <br /> \nTo get face information inside faceList use [FaceList - Get](https://docs.microsoft.com/rest/api/cognitiveservices/face/facelist/get)\n",
         "operationId": "FaceList_List",
-        "parameters": [],
+        "parameters": [
+          {
+            "$ref": "#/parameters/returnRecognitionModel"
+          }
+        ],
         "responses": {
           "200": {
             "description": "A successful call returns an array of faceList.",
             "schema": {
-              "$ref": "#/definitions/FaceListResults"
+              "$ref": "#/definitions/FaceLists"
             }
           },
           "default": {
@@ -1072,33 +929,22 @@
           "application/json"
         ],
         "x-ms-examples": {
-          "Get Face lists example": {
-            "$ref": "./examples/GetFaceLists.json"
+          "List Face lists example": {
+            "$ref": "./examples/ListFaceLists.json"
           }
         }
       }
     },
-    "/facelists/{faceListId}/persistedFaces/{persistedFaceId}": {
+    "/facelists/{faceListId}/persistedfaces/{persistedFaceId}": {
       "delete": {
-        "description": "Delete an existing face from a face list (given by a persisitedFaceId and a faceListId). Persisted image related to the face will also be deleted.",
+        "description": "Delete a face from a face list by specified faceListId and persistedFaceId.\n<br /> Adding/deleting faces to/from a same face list are processed sequentially and to/from different face lists are in parallel.",
         "operationId": "FaceList_DeleteFace",
         "parameters": [
           {
-            "name": "faceListId",
-            "in": "path",
-            "description": "faceListId of an existing face list.",
-            "required": true,
-            "type": "string",
-            "maxLength": 64,
-            "pattern": "^[a-z0-9-_]+$"
+            "$ref": "#/parameters/faceListId"
           },
           {
-            "name": "persistedFaceId",
-            "in": "path",
-            "description": "persistedFaceId of an existing face.",
-            "required": true,
-            "type": "string",
-            "format": "uuid"
+            "$ref": "#/parameters/persistedFaceId"
           }
         ],
         "responses": {
@@ -1119,40 +965,28 @@
         }
       }
     },
-    "/persongroups/{personGroupId}/persons/{personId}/persistedFaces": {
+    "/persongroups/{personGroupId}/persons/{personId}/persistedfaces": {
       "post": {
-        "description": "Add a representative face to a person for identification. The input face is specified as an image with a targetFace rectangle.",
-        "operationId": "Person_AddPersonFace",
+        "description": "Add a face to a person into a person group for face identification or verification. To deal with an image contains multiple faces, input face can be specified as an image with a targetFace rectangle. It returns a persistedFaceId representing the added face. No image will be stored. Only the extracted face feature will be stored on server until [PersonGroup PersonFace - Delete](https://docs.microsoft.com/rest/api/cognitiveservices/face/persongroupperson/deleteface), [PersonGroup Person - Delete](https://docs.microsoft.com/rest/api/cognitiveservices/face/persongroupperson/delete) or [PersonGroup - Delete](https://docs.microsoft.com/rest/api/cognitiveservices/face/persongroup/delete) is called.\n<br /> Note persistedFaceId is different from faceId generated by [Face - Detect](https://docs.microsoft.com/rest/api/cognitiveservices/face/face/detectwithurl).\n*   Higher face image quality means better recognition precision. Please consider high-quality faces: frontal, clear, and face size is 200x200 pixels (100 pixels between eyes) or bigger.\n*   Each person entry can hold up to 248 faces.\n*   JPEG, PNG, GIF (the first frame), and BMP format are supported. The allowed image file size is from 1KB to 6MB.\n*   \"targetFace\" rectangle should contain one face. Zero or multiple faces will be regarded as an error. If the provided \"targetFace\" rectangle is not returned from [Face - Detect](https://docs.microsoft.com/rest/api/cognitiveservices/face/face/detectwithurl), there’s no guarantee to detect and add the face successfully.\n*   Out of detectable face size (36x36 - 4096x4096 pixels), large head-pose, or large occlusions will cause failures.\n*   Adding/deleting faces to/from a same person will be processed sequentially. Adding/deleting faces to/from different persons are processed in parallel.\n* The minimum detectable face size is 36x36 pixels in an image no larger than 1920x1080 pixels. Images with dimensions higher than 1920x1080 pixels will need a proportionally larger minimum face size.\n* Different 'detectionModel' values can be provided. To use and compare different detection models, please refer to [How to specify a detection model](https://docs.microsoft.com/azure/cognitive-services/face/face-api-how-to-topics/specify-detection-model)\n  | Model | Recommended use-case(s) |\n  | ---------- | -------- |\n  | 'detection_01': | The default detection model for [PersonGroup Person - Add Face](https://docs.microsoft.com/rest/api/cognitiveservices/face/persongroupperson/addfacefromurl). Recommend for near frontal face detection. For scenarios with exceptionally large angle (head-pose) faces, occluded faces or wrong image orientation, the faces in such cases may not be detected. |\n  | 'detection_02': | Detection model released in 2019 May with improved accuracy especially on small, side and blurry faces. |",
+        "operationId": "PersonGroupPerson_AddFaceFromUrl",
         "parameters": [
           {
-            "name": "personGroupId",
-            "in": "path",
-            "description": "Specifying the person group containing the target person.",
-            "required": true,
-            "type": "string",
-            "maxLength": 64,
-            "pattern": "^[a-z0-9-_]+$"
+            "$ref": "#/parameters/personGroupId"
           },
           {
-            "name": "personId",
-            "in": "path",
-            "description": "Target person that the face is added to.",
-            "required": true,
-            "type": "string",
-            "format": "uuid"
+            "$ref": "#/parameters/personId"
           },
           {
-            "name": "userData",
-            "in": "query",
-            "description": "User-specified data about the target face to add for any purpose. The maximum length is 1KB.",
-            "type": "string",
-            "maxLength": 1024
+            "$ref": "#/parameters/faceUserData"
           },
           {
             "$ref": "#/parameters/targetFace"
           },
           {
             "$ref": "../../../Common/Parameters.json#/parameters/ImageUrl"
+          },
+          {
+            "$ref": "#/parameters/detectionModel"
           }
         ],
         "consumes": [
@@ -1165,7 +999,7 @@
           "200": {
             "description": "A successful call returns the new persistedFaceId.",
             "schema": {
-              "$ref": "#/definitions/PersistedFaceResult"
+              "$ref": "#/definitions/PersistedFace"
             }
           },
           "default": {
@@ -1177,15 +1011,15 @@
         },
         "x-ms-examples": {
           "Add Person face example": {
-            "$ref": "./examples/CreateNewPersonFace.json"
+            "$ref": "./examples/AddPersonGroupPersonFaceFromUrl.json"
           }
         }
       }
     },
     "/detect": {
       "post": {
-        "description": "Detect human faces in an image and returns face locations, and optionally with faceIds, landmarks, and attributes.",
-        "operationId": "Face_Detect",
+        "description": "Detect human faces in an image, return face rectangles, and optionally with faceIds, landmarks, and attributes.<br />\n* No image will be stored. Only the extracted face feature will be stored on server. The faceId is an identifier of the face feature and will be used in [Face - Identify](https://docs.microsoft.com/rest/api/cognitiveservices/face/face/identify), [Face - Verify](https://docs.microsoft.com/rest/api/cognitiveservices/face/face/verifyfacetoface), and [Face - Find Similar](https://docs.microsoft.com/rest/api/cognitiveservices/face/face/findsimilar). The stored face feature(s) will expire and be deleted 24 hours after the original detection call.\n* Optional parameters include faceId, landmarks, and attributes. Attributes include age, gender, headPose, smile, facialHair, glasses, emotion, hair, makeup, occlusion, accessories, blur, exposure and noise. Some of the results returned for specific attributes may not be highly accurate.\n* JPEG, PNG, GIF (the first frame), and BMP format are supported. The allowed image file size is from 1KB to 6MB.\n* Up to 100 faces can be returned for an image. Faces are ranked by face rectangle size from large to small.\n* For optimal results when querying [Face - Identify](https://docs.microsoft.com/rest/api/cognitiveservices/face/face/identify), [Face - Verify](https://docs.microsoft.com/rest/api/cognitiveservices/face/face/verifyfacetoface), and [Face - Find Similar](https://docs.microsoft.com/rest/api/cognitiveservices/face/face/findsimilar) ('returnFaceId' is true), please use faces that are: frontal, clear, and with a minimum size of 200x200 pixels (100 pixels between eyes).\n* The minimum detectable face size is 36x36 pixels in an image no larger than 1920x1080 pixels. Images with dimensions higher than 1920x1080 pixels will need a proportionally larger minimum face size.\n* Different 'detectionModel' values can be provided. To use and compare different detection models, please refer to [How to specify a detection model](https://docs.microsoft.com/azure/cognitive-services/face/face-api-how-to-topics/specify-detection-model)\n  | Model | Recommended use-case(s) |\n  | ---------- | -------- |\n  | 'detection_01': | The default detection model for [Face - Detect](https://docs.microsoft.com/rest/api/cognitiveservices/face/face/detectwithurl). Recommend for near frontal face detection. For scenarios with exceptionally large angle (head-pose) faces, occluded faces or wrong image orientation, the faces in such cases may not be detected. |\n  | 'detection_02': | Detection model released in 2019 May with improved accuracy especially on small, side and blurry faces. |\n\n* Different 'recognitionModel' values are provided. If follow-up operations like Verify, Identify, Find Similar are needed, please specify the recognition model with 'recognitionModel' parameter. The default value for 'recognitionModel' is 'recognition_01', if latest model needed, please explicitly specify the model you need in this parameter. Once specified, the detected faceIds will be associated with the specified recognition model. More details, please refer to [How to specify a recognition model](https://docs.microsoft.com/azure/cognitive-services/face/face-api-how-to-topics/specify-recognition-model)\n  | Model | Recommended use-case(s) |\n  | ---------- | -------- |\n  | 'recognition_01': | The default recognition model for [Face - Detect](https://docs.microsoft.com/rest/api/cognitiveservices/face/face/detectwithurl). All those faceIds created before 2019 March are bonded with this recognition model. |\n  | 'recognition_02': | Recognition model released in 2019 March. |\n  | 'recognition_03': | Recognition model released in 2020 May. 'recognition_03' is recommended since its overall accuracy is improved compared with 'recognition_01' and 'recognition_02'. |",
+        "operationId": "Face_DetectWithUrl",
         "parameters": [
           {
             "name": "returnFaceId",
@@ -1206,6 +1040,15 @@
           },
           {
             "$ref": "../../../Common/Parameters.json#/parameters/ImageUrl"
+          },
+          {
+            "$ref": "#/parameters/recognitionModel"
+          },
+          {
+            "$ref": "#/parameters/returnRecognitionModel"
+          },
+          {
+            "$ref": "#/parameters/detectionModel"
           }
         ],
         "consumes": [
@@ -1216,9 +1059,9 @@
         ],
         "responses": {
           "200": {
-            "description": "A successful call returns an array of face entries ranked by face rectangle size in descendingorder. An empty response indicates no faces detected.",
+            "description": "A successful call returns an array of face entries ranked by face rectangle size in descending order. An empty response indicates no faces detected.",
             "schema": {
-              "$ref": "#/definitions/DetectionResult"
+              "$ref": "#/definitions/DetectedFaces"
             }
           },
           "default": {
@@ -1229,38 +1072,31 @@
           }
         },
         "x-ms-examples": {
-          "Detect example": {
-            "$ref": "./examples/Detect.json"
+          "Detect with url example": {
+            "$ref": "./examples/DetectWithUrl.json"
           }
         }
       }
     },
-    "/facelists/{faceListId}/persistedFaces": {
+    "/facelists/{faceListId}/persistedfaces": {
       "post": {
-        "description": "Add a face to a face list. The input face is specified as an image with a targetFace rectangle. It returns a persistedFaceId representing the added face, and persistedFaceId will not expire.",
-        "operationId": "FaceList_AddFace",
+        "description": "Add a face to a specified face list, up to 1,000 faces.\n<br /> To deal with an image contains multiple faces, input face can be specified as an image with a targetFace rectangle. It returns a persistedFaceId representing the added face. No image will be stored. Only the extracted face feature will be stored on server until [FaceList - Delete Face](https://docs.microsoft.com/rest/api/cognitiveservices/face/facelist/deleteface) or [FaceList - Delete](https://docs.microsoft.com/rest/api/cognitiveservices/face/facelist/delete) is called.\n<br /> Note persistedFaceId is different from faceId generated by [Face - Detect](https://docs.microsoft.com/rest/api/cognitiveservices/face/face/detectwithurl).\n* Higher face image quality means better detection and recognition precision. Please consider high-quality faces: frontal, clear, and face size is 200x200 pixels (100 pixels between eyes) or bigger.\n* JPEG, PNG, GIF (the first frame), and BMP format are supported. The allowed image file size is from 1KB to 6MB.\n* \"targetFace\" rectangle should contain one face. Zero or multiple faces will be regarded as an error. If the provided \"targetFace\" rectangle is not returned from [Face - Detect](https://docs.microsoft.com/rest/api/cognitiveservices/face/face/detectwithurl), there’s no guarantee to detect and add the face successfully.\n* Out of detectable face size (36x36 - 4096x4096 pixels), large head-pose, or large occlusions will cause failures.\n* Adding/deleting faces to/from a same face list are processed sequentially and to/from different face lists are in parallel.\n* The minimum detectable face size is 36x36 pixels in an image no larger than 1920x1080 pixels. Images with dimensions higher than 1920x1080 pixels will need a proportionally larger minimum face size.\n* Different 'detectionModel' values can be provided. To use and compare different detection models, please refer to [How to specify a detection model](https://docs.microsoft.com/azure/cognitive-services/face/face-api-how-to-topics/specify-detection-model)\n  | Model | Recommended use-case(s) |\n  | ---------- | -------- |\n  | 'detection_01': | The default detection model for [FaceList - Add Face](https://docs.microsoft.com/rest/api/cognitiveservices/face/facelist/addfacefromurl). Recommend for near frontal face detection. For scenarios with exceptionally large angle (head-pose) faces, occluded faces or wrong image orientation, the faces in such cases may not be detected. |\n  | 'detection_02': | Detection model released in 2019 May with improved accuracy especially on small, side and blurry faces. |",
+        "operationId": "FaceList_AddFaceFromUrl",
         "parameters": [
           {
-            "name": "faceListId",
-            "in": "path",
-            "description": "Id referencing a Face List.",
-            "required": true,
-            "type": "string",
-            "maxLength": 64,
-            "pattern": "^[a-z0-9-_]+$"
+            "$ref": "#/parameters/faceListId"
           },
           {
-            "name": "userData",
-            "in": "query",
-            "description": "User-specified data about the face list for any purpose. The maximum length is 1KB.",
-            "type": "string",
-            "maxLength": 1024
+            "$ref": "#/parameters/faceUserData"
           },
           {
             "$ref": "#/parameters/targetFace"
           },
           {
             "$ref": "../../../Common/Parameters.json#/parameters/ImageUrl"
+          },
+          {
+            "$ref": "#/parameters/detectionModel"
           }
         ],
         "produces": [
@@ -1273,7 +1109,7 @@
           "200": {
             "description": "A successful call returns a new persistedFaceId.",
             "schema": {
-              "$ref": "#/definitions/PersistedFaceResult"
+              "$ref": "#/definitions/PersistedFace"
             }
           },
           "default": {
@@ -1285,26 +1121,1348 @@
         },
         "x-ms-examples": {
           "Create face list face example": {
-            "$ref": "./examples/CreateNewFaceListFace.json"
+            "$ref": "./examples/AddFaceListFaceFromUrl.json"
+          }
+        }
+      }
+    },
+    "/largepersongroups/{largePersonGroupId}/persons": {
+      "post": {
+        "description": "Create a new person in a specified large person group.",
+        "operationId": "LargePersonGroupPerson_Create",
+        "parameters": [
+          {
+            "$ref": "#/parameters/largePersonGroupId"
+          },
+          {
+            "name": "body",
+            "description": "Request body for creating new person.",
+            "in": "body",
+            "required": true,
+            "x-ms-client-flatten": true,
+            "schema": {
+              "$ref": "#/definitions/NameAndUserDataContract"
+            }
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful call returns a new personId created.",
+            "schema": {
+              "$ref": "#/definitions/Person"
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/APIError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create new person for large person group example": {
+            "$ref": "./examples/CreateNewLargePersonGroupPerson.json"
+          }
+        }
+      },
+      "get": {
+        "description": "List all persons in a large person group, and retrieve person information (including personId, name, userData and persistedFaceIds of registered faces of the person).",
+        "operationId": "LargePersonGroupPerson_List",
+        "parameters": [
+          {
+            "$ref": "#/parameters/largePersonGroupId"
+          },
+          {
+            "name": "start",
+            "description": "Starting person id to return (used to list a range of persons).",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "top",
+            "description": "Number of persons to return starting with the person id indicated by the 'start' parameter.",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 1000
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful call returns an array of person information that belong to the large person group.",
+            "schema": {
+              "$ref": "#/definitions/Persons"
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/APIError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List persons in person group": {
+            "$ref": "./examples/ListLargePersonGroupPersons.json"
+          }
+        }
+      }
+    },
+    "/largepersongroups/{largePersonGroupId}/persons/{personId}": {
+      "delete": {
+        "description": "Delete an existing person from a large person group. The persistedFaceId, userData, person name and face feature in the person entry will all be deleted.",
+        "operationId": "LargePersonGroupPerson_Delete",
+        "parameters": [
+          {
+            "$ref": "#/parameters/largePersonGroupId"
+          },
+          {
+            "$ref": "#/parameters/personId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful call returns an empty response body."
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/APIError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete an existing person example": {
+            "$ref": "./examples/DeleteLargePersonGroupPerson.json"
+          }
+        }
+      },
+      "get": {
+        "description": "Retrieve a person's name and userData, and the persisted faceIds representing the registered person face feature.",
+        "operationId": "LargePersonGroupPerson_Get",
+        "parameters": [
+          {
+            "$ref": "#/parameters/largePersonGroupId"
+          },
+          {
+            "$ref": "#/parameters/personId"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful call returns the person's information.",
+            "schema": {
+              "$ref": "#/definitions/Person"
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/APIError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get person example": {
+            "$ref": "./examples/GetLargePersonGroupPerson.json"
+          }
+        }
+      },
+      "patch": {
+        "description": "Update name or userData of a person.",
+        "operationId": "LargePersonGroupPerson_Update",
+        "parameters": [
+          {
+            "$ref": "#/parameters/largePersonGroupId"
+          },
+          {
+            "$ref": "#/parameters/personId"
+          },
+          {
+            "name": "body",
+            "description": "Request body for person update operation.",
+            "in": "body",
+            "required": true,
+            "x-ms-client-flatten": true,
+            "schema": {
+              "$ref": "#/definitions/NameAndUserDataContract"
+            }
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful call returns an empty response body."
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/APIError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update person example": {
+            "$ref": "./examples/UpdateLargePersonGroupPerson.json"
+          }
+        }
+      }
+    },
+    "/largepersongroups/{largePersonGroupId}/persons/{personId}/persistedfaces/{persistedFaceId}": {
+      "delete": {
+        "description": "Delete a face from a person in a large person group by specified largePersonGroupId, personId and persistedFaceId.\n<br /> Adding/deleting faces to/from a same person will be processed sequentially. Adding/deleting faces to/from different persons are processed in parallel.",
+        "operationId": "LargePersonGroupPerson_DeleteFace",
+        "parameters": [
+          {
+            "$ref": "#/parameters/largePersonGroupId"
+          },
+          {
+            "$ref": "#/parameters/personId"
+          },
+          {
+            "$ref": "#/parameters/persistedFaceId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful call returns an empty response body."
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/APIError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete face from person example": {
+            "$ref": "./examples/DeleteLargePersonGroupPersonFace.json"
+          }
+        }
+      },
+      "get": {
+        "description": "Retrieve information about a persisted face (specified by persistedFaceId, personId and its belonging largePersonGroupId).",
+        "operationId": "LargePersonGroupPerson_GetFace",
+        "parameters": [
+          {
+            "$ref": "#/parameters/largePersonGroupId"
+          },
+          {
+            "$ref": "#/parameters/personId"
+          },
+          {
+            "$ref": "#/parameters/persistedFaceId"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful call returns target persisted face's information (persistedFaceId and userData).",
+            "schema": {
+              "$ref": "#/definitions/PersistedFace"
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/APIError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get persisted face example": {
+            "$ref": "./examples/GetLargePersonGroupPersistedFace.json"
+          }
+        }
+      },
+      "patch": {
+        "description": "Update a person persisted face's userData field.",
+        "operationId": "LargePersonGroupPerson_UpdateFace",
+        "parameters": [
+          {
+            "$ref": "#/parameters/largePersonGroupId"
+          },
+          {
+            "$ref": "#/parameters/personId"
+          },
+          {
+            "$ref": "#/parameters/persistedFaceId"
+          },
+          {
+            "name": "body",
+            "description": "Request body for updating persisted face.",
+            "in": "body",
+            "required": true,
+            "x-ms-client-flatten": true,
+            "schema": {
+              "$ref": "#/definitions/UpdateFaceRequest"
+            }
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful call returns an empty response body."
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/APIError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update person face example": {
+            "$ref": "./examples/UpdateLargePersonGroupPersonFace.json"
+          }
+        }
+      }
+    },
+    "/largepersongroups/{largePersonGroupId}": {
+      "put": {
+        "description": "Create a new large person group with user-specified largePersonGroupId, name, an optional userData and recognitionModel.\n<br /> A large person group is the container of the uploaded person data, including face recognition feature, and up to 1,000,000\npeople.\n<br /> After creation, use [LargePersonGroup Person - Create](https://docs.microsoft.com/rest/api/cognitiveservices/face/largepersongroupperson/create) to add person into the group, and call [LargePersonGroup - Train](https://docs.microsoft.com/rest/api/cognitiveservices/face/largepersongroup/train) to get this group ready for [Face - Identify](https://docs.microsoft.com/rest/api/cognitiveservices/face/face/identify).\n<br /> No image will be stored. Only the person's extracted face features and userData will be stored on server until [LargePersonGroup Person - Delete](https://docs.microsoft.com/rest/api/cognitiveservices/face/largepersongroupperson/delete) or [LargePersonGroup - Delete](https://docs.microsoft.com/rest/api/cognitiveservices/face/largepersongroup/delete) is called.\n<br/>'recognitionModel' should be specified to associate with this large person group. The default value for 'recognitionModel' is 'recognition_01', if the latest model needed, please explicitly specify the model you need in this parameter. New faces that are added to an existing large person group will use the recognition model that's already associated with the collection. Existing face features in a large person group can't be updated to features extracted by another version of recognition model.\n* 'recognition_01': The default recognition model for [LargePersonGroup - Create](https://docs.microsoft.com/rest/api/cognitiveservices/face/largepersongroup/create). All those large person groups created before 2019 March are bonded with this recognition model.\n* 'recognition_02': Recognition model released in 2019 March.\n* 'recognition_03': Recognition model released in 2020 May. 'recognition_03' is recommended since its overall accuracy is improved compared with 'recognition_01' and 'recognition_02'.\n\nLarge person group quota:\n* Free-tier subscription quota: 1,000 large person groups.\n* S0-tier subscription quota: 1,000,000 large person groups.",
+        "operationId": "LargePersonGroup_Create",
+        "parameters": [
+          {
+            "$ref": "#/parameters/largePersonGroupId"
+          },
+          {
+            "name": "body",
+            "description": "Request body for creating new large person group.",
+            "in": "body",
+            "required": true,
+            "x-ms-client-flatten": true,
+            "schema": {
+              "$ref": "#/definitions/MetaDataContract"
+            }
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful call returns an empty response body."
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/APIError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create new large person group example": {
+            "$ref": "./examples/CreateNewLargePersonGroup.json"
+          }
+        }
+      },
+      "delete": {
+        "description": "Delete an existing large person group. Persisted face features of all people in the large person group will also be deleted.",
+        "operationId": "LargePersonGroup_Delete",
+        "parameters": [
+          {
+            "$ref": "#/parameters/largePersonGroupId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful call returns an empty response body."
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/APIError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete a large person group example": {
+            "$ref": "./examples/DeleteLargePersonGroup.json"
+          }
+        }
+      },
+      "get": {
+        "description": "Retrieve the information of a large person group, including its name, userData and recognitionModel. This API returns large person group information only, use [LargePersonGroup Person - List](https://docs.microsoft.com/rest/api/cognitiveservices/face/largepersongroupperson/list) instead to retrieve person information under the large person group.\n",
+        "operationId": "LargePersonGroup_Get",
+        "parameters": [
+          {
+            "$ref": "#/parameters/largePersonGroupId"
+          },
+          {
+            "$ref": "#/parameters/returnRecognitionModel"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful call returns the large person group's information.",
+            "schema": {
+              "$ref": "#/definitions/LargePersonGroup"
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/APIError"
+            }
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-examples": {
+          "Get large person group example": {
+            "$ref": "./examples/GetLargePersonGroup.json"
+          }
+        }
+      },
+      "patch": {
+        "description": "Update an existing large person group's display name and userData. The properties which does not appear in request body will not be updated.",
+        "operationId": "LargePersonGroup_Update",
+        "parameters": [
+          {
+            "$ref": "#/parameters/largePersonGroupId"
+          },
+          {
+            "name": "body",
+            "description": "Request body for updating large person group.",
+            "in": "body",
+            "required": true,
+            "x-ms-client-flatten": true,
+            "schema": {
+              "$ref": "#/definitions/NameAndUserDataContract"
+            }
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful call returns an empty response body."
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/APIError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update large person group example": {
+            "$ref": "./examples/UpdateLargePersonGroup.json"
+          }
+        }
+      }
+    },
+    "/largepersongroups/{largePersonGroupId}/training": {
+      "get": {
+        "description": "Retrieve the training status of a large person group (completed or ongoing).",
+        "operationId": "LargePersonGroup_GetTrainingStatus",
+        "parameters": [
+          {
+            "$ref": "#/parameters/largePersonGroupId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful call returns the large person group's training status.",
+            "schema": {
+              "$ref": "#/definitions/TrainingStatus"
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/APIError"
+            }
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-examples": {
+          "Get large person group's training status example": {
+            "$ref": "./examples/GetLargePersonGroupTrainingStatus.json"
+          }
+        }
+      }
+    },
+    "/largepersongroups": {
+      "get": {
+        "description": "List all existing large person groups’ largePersonGroupId, name, userData and recognitionModel.<br />\n* Large person groups are stored in alphabetical order of largePersonGroupId.\n* \"start\" parameter (string, optional) is a user-provided largePersonGroupId value that returned entries have larger ids by string comparison. \"start\" set to empty to indicate return from the first item.\n* \"top\" parameter (int, optional) specifies the number of entries to return. A maximal of 1000 entries can be returned in one call. To fetch more, you can specify \"start\" with the last returned entry’s Id of the current call.\n<br />\nFor example, total 5 large person groups: \"group1\", ..., \"group5\".\n<br /> \"start=&top=\" will return all 5 groups.\n<br /> \"start=&top=2\" will return \"group1\", \"group2\".\n<br /> \"start=group2&top=3\" will return \"group3\", \"group4\", \"group5\".\n",
+        "operationId": "LargePersonGroup_List",
+        "parameters": [
+          {
+            "name": "start",
+            "in": "query",
+            "required": false,
+            "description": "List large person groups from the least largePersonGroupId greater than the \"start\".",
+            "type": "string",
+            "maxLength": 64
+          },
+          {
+            "name": "top",
+            "in": "query",
+            "required": false,
+            "description": "The number of large person groups to list.",
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 1000,
+            "default": 1000
+          },
+          {
+            "$ref": "#/parameters/returnRecognitionModel"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful call returns an array of large person groups and their information.",
+            "schema": {
+              "$ref": "#/definitions/LargePersonGroups"
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/APIError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List large person groups example": {
+            "$ref": "./examples/ListLargePersonGroups.json"
+          }
+        }
+      }
+    },
+    "/largepersongroups/{largePersonGroupId}/train": {
+      "post": {
+        "description": "Queue a large person group training task, the training task may not be started immediately.",
+        "operationId": "LargePersonGroup_Train",
+        "parameters": [
+          {
+            "$ref": "#/parameters/largePersonGroupId"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "202": {
+            "description": "The training task was queued successfully."
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/APIError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Queue large person group training": {
+            "$ref": "./examples/QueueLargePersonGroupTraining.json"
+          }
+        }
+      }
+    },
+    "/largepersongroups/{largePersonGroupId}/persons/{personId}/persistedfaces": {
+      "post": {
+        "description": "Add a face to a person into a large person group for face identification or verification. To deal with an image contains multiple faces, input face can be specified as an image with a targetFace rectangle. It returns a persistedFaceId representing the added face. No image will be stored. Only the extracted face feature will be stored on server until [LargePersonGroup PersonFace - Delete](https://docs.microsoft.com/rest/api/cognitiveservices/face/largepersongroupperson/deleteface), [LargePersonGroup Person - Delete](https://docs.microsoft.com/rest/api/cognitiveservices/face/largepersongroupperson/delete) or [LargePersonGroup - Delete](https://docs.microsoft.com/rest/api/cognitiveservices/face/largepersongroup/delete) is called.\n<br /> Note persistedFaceId is different from faceId generated by [Face - Detect](https://docs.microsoft.com/rest/api/cognitiveservices/face/face/detectwithurl).\n* Higher face image quality means better recognition precision. Please consider high-quality faces: frontal, clear, and face size is 200x200 pixels (100 pixels between eyes) or bigger.\n* Each person entry can hold up to 248 faces.\n* JPEG, PNG, GIF (the first frame), and BMP format are supported. The allowed image file size is from 1KB to 6MB.\n* \"targetFace\" rectangle should contain one face. Zero or multiple faces will be regarded as an error. If the provided \"targetFace\" rectangle is not returned from [Face - Detect](https://docs.microsoft.com/rest/api/cognitiveservices/face/face/detectwithurl), there’s no guarantee to detect and add the face successfully.\n* Out of detectable face size (36x36 - 4096x4096 pixels), large head-pose, or large occlusions will cause failures.\n* Adding/deleting faces to/from a same person will be processed sequentially. Adding/deleting faces to/from different persons are processed in parallel.\n* The minimum detectable face size is 36x36 pixels in an image no larger than 1920x1080 pixels. Images with dimensions higher than 1920x1080 pixels will need a proportionally larger minimum face size.\n* Different 'detectionModel' values can be provided. To use and compare different detection models, please refer to [How to specify a detection model](https://docs.microsoft.com/azure/cognitive-services/face/face-api-how-to-topics/specify-detection-model)\n  | Model | Recommended use-case(s) |\n  | ---------- | -------- |\n  | 'detection_01': | The default detection model for [LargePersonGroup Person - Add Face](https://docs.microsoft.com/rest/api/cognitiveservices/face/largepersongroupperson/addfacefromurl). Recommend for near frontal face detection. For scenarios with exceptionally large angle (head-pose) faces, occluded faces or wrong image orientation, the faces in such cases may not be detected. |\n  | 'detection_02': | Detection model released in 2019 May with improved accuracy especially on small, side and blurry faces. |",
+        "operationId": "LargePersonGroupPerson_AddFaceFromUrl",
+        "parameters": [
+          {
+            "$ref": "#/parameters/largePersonGroupId"
+          },
+          {
+            "$ref": "#/parameters/personId"
+          },
+          {
+            "$ref": "#/parameters/faceUserData"
+          },
+          {
+            "$ref": "#/parameters/targetFace"
+          },
+          {
+            "$ref": "../../../Common/Parameters.json#/parameters/ImageUrl"
+          },
+          {
+            "$ref": "#/parameters/detectionModel"
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful call returns the new persistedFaceId.",
+            "schema": {
+              "$ref": "#/definitions/PersistedFace"
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/APIError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Add Person face example": {
+            "$ref": "./examples/AddLargePersonGroupPersonFaceFromUrl.json"
+          }
+        }
+      }
+    },
+    "/largefacelists/{largeFaceListId}": {
+      "put": {
+        "description": "Create an empty large face list with user-specified largeFaceListId, name, an optional userData and recognitionModel.\n<br /> Large face list is a list of faces, up to 1,000,000 faces, and used by [Face - Find Similar](https://docs.microsoft.com/rest/api/cognitiveservices/face/face/findsimilar).\n<br /> After creation, user should use [LargeFaceList Face - Add](https://docs.microsoft.com/rest/api/cognitiveservices/face/largefacelist/addfacefromurl) to import the faces and [LargeFaceList - Train](https://docs.microsoft.com/rest/api/cognitiveservices/face/largefacelist/train) to make it ready for [Face - Find Similar](https://docs.microsoft.com/rest/api/cognitiveservices/face/face/findsimilar). No image will be stored. Only the extracted face features are stored on server until [LargeFaceList - Delete](https://docs.microsoft.com/rest/api/cognitiveservices/face/largefacelist/delete) is called.\n<br /> Find Similar is used for scenario like finding celebrity-like faces, similar face filtering, or as a light way face identification. But if the actual use is to identify person, please use [PersonGroup](https://docs.microsoft.com/rest/api/cognitiveservices/face/persongroup) / [LargePersonGroup](https://docs.microsoft.com/rest/api/cognitiveservices/face/largepersongroup) and [Face - Identify](https://docs.microsoft.com/rest/api/cognitiveservices/face/face/identify).\n<br/>'recognitionModel' should be specified to associate with this large face list. The default value for 'recognitionModel' is 'recognition_01', if the latest model needed, please explicitly specify the model you need in this parameter. New faces that are added to an existing large face list will use the recognition model that's already associated with the collection. Existing face features in a large face list can't be updated to features extracted by another version of recognition model.\n* 'recognition_01': The default recognition model for [LargeFaceList- Create](https://docs.microsoft.com/rest/api/cognitiveservices/face/largefacelist/create). All those large face lists created before 2019 March are bonded with this recognition model.\n* 'recognition_02': Recognition model released in 2019 March.\n* 'recognition_03': Recognition model released in 2020 May. 'recognition_03' is recommended since its overall accuracy is improved compared with 'recognition_01' and 'recognition_02'.\n\nLarge face list quota:\n* Free-tier subscription quota: 64 large face lists.\n* S0-tier subscription quota: 1,000,000 large face lists.",
+        "operationId": "LargeFaceList_Create",
+        "parameters": [
+          {
+            "$ref": "#/parameters/largeFaceListId"
+          },
+          {
+            "name": "body",
+            "description": "Request body for creating a large face list.",
+            "in": "body",
+            "required": true,
+            "x-ms-client-flatten": true,
+            "schema": {
+              "$ref": "#/definitions/MetaDataContract"
+            }
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful call returns an empty response body."
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/APIError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create new large face list example": {
+            "$ref": "./examples/CreateNewLargeFaceList.json"
+          }
+        }
+      },
+      "get": {
+        "description": "Retrieve a large face list’s largeFaceListId, name, userData and recognitionModel.",
+        "operationId": "LargeFaceList_Get",
+        "parameters": [
+          {
+            "$ref": "#/parameters/largeFaceListId"
+          },
+          {
+            "$ref": "#/parameters/returnRecognitionModel"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful call returns the large face list's information.",
+            "schema": {
+              "$ref": "#/definitions/LargeFaceList"
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/APIError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get large face list example": {
+            "$ref": "./examples/GetLargeFaceList.json"
+          }
+        }
+      },
+      "patch": {
+        "description": "Update information of a large face list.",
+        "operationId": "LargeFaceList_Update",
+        "parameters": [
+          {
+            "$ref": "#/parameters/largeFaceListId"
+          },
+          {
+            "name": "body",
+            "description": "Request body for updating a large face list.",
+            "in": "body",
+            "required": true,
+            "x-ms-client-flatten": true,
+            "schema": {
+              "$ref": "#/definitions/NameAndUserDataContract"
+            }
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful call returns an empty response body."
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/APIError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update large face list example": {
+            "$ref": "./examples/UpdateLargeFaceList.json"
+          }
+        }
+      },
+      "delete": {
+        "description": "Delete a specified large face list.",
+        "operationId": "LargeFaceList_Delete",
+        "parameters": [
+          {
+            "$ref": "#/parameters/largeFaceListId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful call returns an empty response body."
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/APIError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete large face list example": {
+            "$ref": "./examples/DeleteLargeFaceList.json"
+          }
+        }
+      }
+    },
+    "/largefacelists/{largeFaceListId}/training": {
+      "get": {
+        "description": "Retrieve the training status of a large face list (completed or ongoing).",
+        "operationId": "LargeFaceList_GetTrainingStatus",
+        "parameters": [
+          {
+            "$ref": "#/parameters/largeFaceListId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful call returns the large face list's training status.",
+            "schema": {
+              "$ref": "#/definitions/TrainingStatus"
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/APIError"
+            }
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-examples": {
+          "Get large face list's training status example": {
+            "$ref": "./examples/GetLargeFaceListTrainingStatus.json"
+          }
+        }
+      }
+    },
+    "/largefacelists": {
+      "get": {
+        "description": "List large face lists’ information of largeFaceListId, name, userData and recognitionModel. <br /> \nTo get face information inside largeFaceList use [LargeFaceList Face - Get](https://docs.microsoft.com/rest/api/cognitiveservices/face/largefacelist/getface)<br />\n* Large face lists are stored in alphabetical order of largeFaceListId.\n* \"start\" parameter (string, optional) is a user-provided largeFaceListId value that returned entries have larger ids by string comparison. \"start\" set to empty to indicate return from the first item.\n* \"top\" parameter (int, optional) specifies the number of entries to return. A maximal of 1000 entries can be returned in one call. To fetch more, you can specify \"start\" with the last returned entry’s Id of the current call.\n<br />\nFor example, total 5 large person lists: \"list1\", ..., \"list5\".\n<br /> \"start=&top=\" will return all 5 lists.\n<br /> \"start=&top=2\" will return \"list1\", \"list2\".\n<br /> \"start=list2&top=3\" will return \"list3\", \"list4\", \"list5\".\n",
+        "operationId": "LargeFaceList_List",
+        "parameters": [
+          {
+            "$ref": "#/parameters/returnRecognitionModel"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful call returns an array of largeFaceList.",
+            "schema": {
+              "$ref": "#/definitions/LargeFaceLists"
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/APIError"
+            }
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-examples": {
+          "List large face lists example": {
+            "$ref": "./examples/ListLargeFaceLists.json"
+          }
+        }
+      }
+    },
+    "/largefacelists/{largeFaceListId}/train": {
+      "post": {
+        "description": "Queue a large face list training task, the training task may not be started immediately.",
+        "operationId": "LargeFaceList_Train",
+        "parameters": [
+          {
+            "$ref": "#/parameters/largeFaceListId"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "202": {
+            "description": "The training task was queued successfully."
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/APIError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Queue large face list training": {
+            "$ref": "./examples/QueueLargeFaceListTraining.json"
+          }
+        }
+      }
+    },
+    "/largefacelists/{largeFaceListId}/persistedfaces/{persistedFaceId}": {
+      "delete": {
+        "description": "Delete a face from a large face list by specified largeFaceListId and persistedFaceId.\n<br /> Adding/deleting faces to/from a same large face list are processed sequentially and to/from different large face lists are in parallel.",
+        "operationId": "LargeFaceList_DeleteFace",
+        "parameters": [
+          {
+            "$ref": "#/parameters/largeFaceListId"
+          },
+          {
+            "$ref": "#/parameters/persistedFaceId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful call returns an empty response body."
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/APIError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete face in large face list example": {
+            "$ref": "./examples/DeleteLargeFaceListFace.json"
+          }
+        }
+      },
+      "get": {
+        "description": "Retrieve information about a persisted face (specified by persistedFaceId and its belonging largeFaceListId).",
+        "operationId": "LargeFaceList_GetFace",
+        "parameters": [
+          {
+            "$ref": "#/parameters/largeFaceListId"
+          },
+          {
+            "$ref": "#/parameters/persistedFaceId"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful call returns target persisted face's information (persistedFaceId and userData).",
+            "schema": {
+              "$ref": "#/definitions/PersistedFace"
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/APIError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get persisted face example": {
+            "$ref": "./examples/GetLargeFaceListPersistedFace.json"
+          }
+        }
+      },
+      "patch": {
+        "description": "Update a persisted face's userData field.",
+        "operationId": "LargeFaceList_UpdateFace",
+        "parameters": [
+          {
+            "$ref": "#/parameters/largeFaceListId"
+          },
+          {
+            "$ref": "#/parameters/persistedFaceId"
+          },
+          {
+            "name": "body",
+            "description": "Request body for updating persisted face.",
+            "in": "body",
+            "required": true,
+            "x-ms-client-flatten": true,
+            "schema": {
+              "$ref": "#/definitions/UpdateFaceRequest"
+            }
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful call returns an empty response body."
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/APIError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update face example": {
+            "$ref": "./examples/UpdateLargeFaceListFace.json"
+          }
+        }
+      }
+    },
+    "/largefacelists/{largeFaceListId}/persistedfaces": {
+      "post": {
+        "description": "Add a face to a specified large face list, up to 1,000,000 faces.\n<br /> To deal with an image contains multiple faces, input face can be specified as an image with a targetFace rectangle. It returns a persistedFaceId representing the added face. No image will be stored. Only the extracted face feature will be stored on server until [LargeFaceList Face - Delete](https://docs.microsoft.com/rest/api/cognitiveservices/face/largefacelist/deleteface) or [LargeFaceList - Delete](https://docs.microsoft.com/rest/api/cognitiveservices/face/largefacelist/delete) is called.\n<br /> Note persistedFaceId is different from faceId generated by [Face - Detect](https://docs.microsoft.com/rest/api/cognitiveservices/face/face/detectwithurl).\n* Higher face image quality means better recognition precision. Please consider high-quality faces: frontal, clear, and face size is 200x200 pixels (100 pixels between eyes) or bigger.\n* JPEG, PNG, GIF (the first frame), and BMP format are supported. The allowed image file size is from 1KB to 6MB.\n* \"targetFace\" rectangle should contain one face. Zero or multiple faces will be regarded as an error. If the provided \"targetFace\" rectangle is not returned from [Face - Detect](https://docs.microsoft.com/rest/api/cognitiveservices/face/face/detectwithurl), there’s no guarantee to detect and add the face successfully.\n* Out of detectable face size (36x36 - 4096x4096 pixels), large head-pose, or large occlusions will cause failures.\n* Adding/deleting faces to/from a same face list are processed sequentially and to/from different face lists are in parallel.\n* The minimum detectable face size is 36x36 pixels in an image no larger than 1920x1080 pixels. Images with dimensions higher than 1920x1080 pixels will need a proportionally larger minimum face size.\n* Different 'detectionModel' values can be provided. To use and compare different detection models, please refer to [How to specify a detection model](https://docs.microsoft.com/azure/cognitive-services/face/face-api-how-to-topics/specify-detection-model)\n  | Model | Recommended use-case(s) |\n  | ---------- | -------- |\n  | 'detection_01': | The default detection model for [LargeFaceList - Add Face](https://docs.microsoft.com/rest/api/cognitiveservices/face/largefacelist/addfacefromurl). Recommend for near frontal face detection. For scenarios with exceptionally large angle (head-pose) faces, occluded faces or wrong image orientation, the faces in such cases may not be detected. |\n  | 'detection_02': | Detection model released in 2019 May with improved accuracy especially on small, side and blurry faces. |\n\nQuota:\n* Free-tier subscription quota: 1,000 faces per large face list.\n* S0-tier subscription quota: 1,000,000 faces per large face list.",
+        "operationId": "LargeFaceList_AddFaceFromUrl",
+        "parameters": [
+          {
+            "$ref": "#/parameters/largeFaceListId"
+          },
+          {
+            "$ref": "#/parameters/faceUserData"
+          },
+          {
+            "$ref": "#/parameters/targetFace"
+          },
+          {
+            "$ref": "../../../Common/Parameters.json#/parameters/ImageUrl"
+          },
+          {
+            "$ref": "#/parameters/detectionModel"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful call returns a new persistedFaceId.",
+            "schema": {
+              "$ref": "#/definitions/PersistedFace"
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/APIError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create large face list face example": {
+            "$ref": "./examples/AddLargeFaceListFaceFromUrl.json"
+          }
+        }
+      },
+      "get": {
+        "description": "List all faces in a large face list, and retrieve face information (including userData and persistedFaceIds of registered faces of the face).",
+        "operationId": "LargeFaceList_ListFaces",
+        "parameters": [
+          {
+            "$ref": "#/parameters/largeFaceListId"
+          },
+          {
+            "name": "start",
+            "description": "Starting face id to return (used to list a range of faces).",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "top",
+            "description": "Number of faces to return starting with the face id indicated by the 'start' parameter.",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 1000
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful call returns an array of face information that belong to the large face list.",
+            "schema": {
+              "$ref": "#/definitions/PersistedFaces"
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/APIError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List faces in large face list": {
+            "$ref": "./examples/ListLargeFaceListFaces.json"
+          }
+        }
+      }
+    },
+    "/snapshots": {
+      "post": {
+        "description": "Submit an operation to take a snapshot of face list, large face list, person group or large person group, with user-specified snapshot type, source object id, apply scope and an optional user data.<br />\nThe snapshot interfaces are for users to backup and restore their face data from one face subscription to another, inside same region or across regions. The workflow contains two phases, user first calls Snapshot - Take to create a copy of the source object and store it as a snapshot, then calls Snapshot - Apply to paste the snapshot to target subscription. The snapshots are stored in a centralized location (per Azure instance), so that they can be applied cross accounts and regions.<br />\nTaking snapshot is an asynchronous operation. An operation id can be obtained from the \"Operation-Location\" field in response header, to be used in OperationStatus - Get for tracking the progress of creating the snapshot. The snapshot id will be included in the \"resourceLocation\" field in OperationStatus - Get response when the operation status is \"succeeded\".<br />\nSnapshot taking time depends on the number of person and face entries in the source object. It could be in seconds, or up to several hours for 1,000,000 persons with multiple faces.<br />\nSnapshots will be automatically expired and cleaned in 48 hours after it is created by Snapshot - Take. User can delete the snapshot using Snapshot - Delete by themselves any time before expiration.<br />\nTaking snapshot for a certain object will not block any other operations against the object. All read-only operations (Get/List and Identify/FindSimilar/Verify) can be conducted as usual. For all writable operations, including Add/Update/Delete the source object or its persons/faces and Train, they are not blocked but not recommended because writable updates may not be reflected on the snapshot during its taking. After snapshot taking is completed, all readable and writable operations can work as normal. Snapshot will also include the training results of the source object, which means target subscription the snapshot applied to does not need re-train the target object before calling Identify/FindSimilar.<br />\n* Free-tier subscription quota: 100 take operations per month.\n* S0-tier subscription quota: 100 take operations per day.",
+        "operationId": "Snapshot_Take",
+        "parameters": [
+          {
+            "name": "body",
+            "description": "Request body for taking a snapshot.",
+            "in": "body",
+            "required": true,
+            "x-ms-client-flatten": true,
+            "schema": {
+              "$ref": "#/definitions/TakeSnapshotRequest"
+            }
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "202": {
+            "description": "The snapshot taking task was queued successfully.",
+            "headers": {
+              "Operation-Location": {
+                "description": "Operation location with an operation id used to track the progress of taking snapshot. The returned id is the operation id, rather than snapshot id. Snapshot id can be obtained only when the operation status becomes \"succeeded\" in OperationStatus - Get.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/APIError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Take a snapshot example": {
+            "$ref": "./examples/TakeSnapshot.json"
+          }
+        }
+      },
+      "get": {
+        "description": "List all accessible snapshots with related information, including snapshots that were taken by the user, or snapshots to be applied to the user (subscription id was included in the applyScope in Snapshot - Take).",
+        "operationId": "Snapshot_List",
+        "parameters": [
+          {
+            "name": "type",
+            "description": "User specified object type as a search filter.",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "x-ms-enum": {
+              "name": "SnapshotObjectType",
+              "modelAsString": false
+            },
+            "enum": [
+              "FaceList",
+              "LargeFaceList",
+              "LargePersonGroup",
+              "PersonGroup"
+            ]
+          },
+          {
+            "$ref": "#/parameters/applyScope"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful call returns an array of snapshots with snapshot information.",
+            "schema": {
+              "$ref": "#/definitions/Snapshots"
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/APIError"
+            }
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-examples": {
+          "List snapshots example": {
+            "$ref": "./examples/ListSnapshots.json"
+          }
+        }
+      }
+    },
+    "/snapshots/{snapshotId}": {
+      "get": {
+        "description": "Retrieve information about a snapshot. Snapshot is only accessible to the source subscription who took it, and target subscriptions included in the applyScope in Snapshot - Take.",
+        "operationId": "Snapshot_Get",
+        "parameters": [
+          {
+            "$ref": "#/parameters/snapshotId"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful call returns the snapshot's information.",
+            "schema": {
+              "$ref": "#/definitions/Snapshot"
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/APIError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get snapshot example": {
+            "$ref": "./examples/GetSnapshot.json"
+          }
+        }
+      },
+      "patch": {
+        "description": "Update the information of a snapshot. Only the source subscription who took the snapshot can update the snapshot.",
+        "operationId": "Snapshot_Update",
+        "parameters": [
+          {
+            "$ref": "#/parameters/snapshotId"
+          },
+          {
+            "name": "body",
+            "description": "Request body for updating a snapshot.",
+            "in": "body",
+            "required": true,
+            "x-ms-client-flatten": true,
+            "schema": {
+              "$ref": "#/definitions/UpdateSnapshotRequest"
+            }
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful call returns an empty response body."
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/APIError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update snapshot example": {
+            "$ref": "./examples/UpdateSnapshot.json"
+          }
+        }
+      },
+      "delete": {
+        "description": "Delete an existing snapshot according to the snapshotId. All object data and information in the snapshot will also be deleted. Only the source subscription who took the snapshot can delete the snapshot. If the user does not delete a snapshot with this API, the snapshot will still be automatically deleted in 48 hours after creation.",
+        "operationId": "Snapshot_Delete",
+        "parameters": [
+          {
+            "$ref": "#/parameters/snapshotId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful call returns an empty response body."
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/APIError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete snapshot example": {
+            "$ref": "./examples/DeleteSnapshot.json"
+          }
+        }
+      }
+    },
+    "/snapshots/{snapshotId}/apply": {
+      "post": {
+        "description": "Submit an operation to apply a snapshot to current subscription. For each snapshot, only subscriptions included in the applyScope of Snapshot - Take can apply it.<br />\nThe snapshot interfaces are for users to backup and restore their face data from one face subscription to another, inside same region or across regions. The workflow contains two phases, user first calls Snapshot - Take to create a copy of the source object and store it as a snapshot, then calls Snapshot - Apply to paste the snapshot to target subscription. The snapshots are stored in a centralized location (per Azure instance), so that they can be applied cross accounts and regions.<br />\nApplying snapshot is an asynchronous operation. An operation id can be obtained from the \"Operation-Location\" field in response header, to be used in OperationStatus - Get for tracking the progress of applying the snapshot. The target object id will be included in the \"resourceLocation\" field in OperationStatus - Get response when the operation status is \"succeeded\".<br />\nSnapshot applying time depends on the number of person and face entries in the snapshot object. It could be in seconds, or up to 1 hour for 1,000,000 persons with multiple faces.<br />\nSnapshots will be automatically expired and cleaned in 48 hours after it is created by Snapshot - Take. So the target subscription is required to apply the snapshot in 48 hours since its creation.<br />\nApplying a snapshot will not block any other operations against the target object, however it is not recommended because the correctness cannot be guaranteed during snapshot applying. After snapshot applying is completed, all operations towards the target object can work as normal. Snapshot also includes the training results of the source object, which means target subscription the snapshot applied to does not need re-train the target object before calling Identify/FindSimilar.<br />\nOne snapshot can be applied multiple times in parallel, while currently only CreateNew apply mode is supported, which means the apply operation will fail if target subscription already contains an object of same type and using the same objectId. Users can specify the \"objectId\" in request body to avoid such conflicts.<br />\n* Free-tier subscription quota: 100 apply operations per month.\n* S0-tier subscription quota: 100 apply operations per day.",
+        "operationId": "Snapshot_Apply",
+        "parameters": [
+          {
+            "$ref": "#/parameters/snapshotId"
+          },
+          {
+            "name": "body",
+            "description": "Request body for applying a snapshot.",
+            "in": "body",
+            "required": true,
+            "x-ms-client-flatten": true,
+            "schema": {
+              "$ref": "#/definitions/ApplySnapshotRequest"
+            }
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "202": {
+            "description": "The snapshot applying task was queued successfully.",
+            "headers": {
+              "Operation-Location": {
+                "description": "Operation location with an operation id used to track the progress of applying the snapshot by OperationStatus - Get.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/APIError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Apply snapshot example": {
+            "$ref": "./examples/ApplySnapshot.json"
+          }
+        }
+      }
+    },
+    "/operations/{operationId}": {
+      "get": {
+        "description": "Retrieve the status of a take/apply snapshot operation.",
+        "operationId": "Snapshot_GetOperationStatus",
+        "parameters": [
+          {
+            "$ref": "#/parameters/operationId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful call returns the snapshot operation's status.",
+            "schema": {
+              "$ref": "#/definitions/OperationStatus"
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/APIError"
+            }
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-examples": {
+          "Get snapshot operation status example": {
+            "$ref": "./examples/GetSnapshotOperationStatus.json"
           }
         }
       }
     }
   },
   "x-ms-paths": {
-    "/verify?overload=persongroup": {
+    "/verify?overload=person": {
       "post": {
         "description": "Verify whether two faces belong to a same person. Compares a face Id with a Person Id",
-        "operationId": "Face_VerifyWithPersonGroup",
+        "operationId": "Face_VerifyFaceToPerson",
         "parameters": [
           {
             "name": "body",
-            "description": "Request body for verifying two faces in a person group",
+            "description": "Request body for face to person verification.",
             "in": "body",
             "required": true,
             "x-ms-client-flatten": true,
             "schema": {
-              "$ref": "#/definitions/VerifyPersonGroupRequest"
+              "$ref": "#/definitions/VerifyFaceToPersonRequest"
             }
           }
         ],
@@ -1329,16 +2487,16 @@
           }
         },
         "x-ms-examples": {
-          "Verify with person group example": {
-            "$ref": "./examples/VerifyPersonGroup.json"
+          "Verify face to person example": {
+            "$ref": "./examples/VerifyFaceToPerson.json"
           }
         }
       }
     },
     "/detect?overload=stream": {
       "post": {
-        "description": "Detect human faces in an image and returns face locations, and optionally with faceIds, landmarks, and attributes.",
-        "operationId": "Face_DetectInStream",
+        "description": "Detect human faces in an image, return face rectangles, and optionally with faceIds, landmarks, and attributes.<br />\n* No image will be stored. Only the extracted face feature will be stored on server. The faceId is an identifier of the face feature and will be used in [Face - Identify](https://docs.microsoft.com/rest/api/cognitiveservices/face/face/identify), [Face - Verify](https://docs.microsoft.com/rest/api/cognitiveservices/face/face/verifyfacetoface), and [Face - Find Similar](https://docs.microsoft.com/rest/api/cognitiveservices/face/face/findsimilar). The stored face feature(s) will expire and be deleted 24 hours after the original detection call.\n* Optional parameters include faceId, landmarks, and attributes. Attributes include age, gender, headPose, smile, facialHair, glasses, emotion, hair, makeup, occlusion, accessories, blur, exposure and noise. Some of the results returned for specific attributes may not be highly accurate.\n* JPEG, PNG, GIF (the first frame), and BMP format are supported. The allowed image file size is from 1KB to 6MB.\n* Up to 100 faces can be returned for an image. Faces are ranked by face rectangle size from large to small.\n* For optimal results when querying [Face - Identify](https://docs.microsoft.com/rest/api/cognitiveservices/face/face/identify), [Face - Verify](https://docs.microsoft.com/rest/api/cognitiveservices/face/face/verifyfacetoface), and [Face - Find Similar](https://docs.microsoft.com/rest/api/cognitiveservices/face/face/findsimilar) ('returnFaceId' is true), please use faces that are: frontal, clear, and with a minimum size of 200x200 pixels (100 pixels between eyes).\n* The minimum detectable face size is 36x36 pixels in an image no larger than 1920x1080 pixels. Images with dimensions higher than 1920x1080 pixels will need a proportionally larger minimum face size.\n* Different 'detectionModel' values can be provided. To use and compare different detection models, please refer to [How to specify a detection model](https://docs.microsoft.com/azure/cognitive-services/face/face-api-how-to-topics/specify-detection-model)\n  | Model | Recommended use-case(s) |\n  | ---------- | -------- |\n  | 'detection_01': | The default detection model for [Face - Detect](https://docs.microsoft.com/rest/api/cognitiveservices/face/face/detectwithurl). Recommend for near frontal face detection. For scenarios with exceptionally large angle (head-pose) faces, occluded faces or wrong image orientation, the faces in such cases may not be detected. |\n  | 'detection_02': | Detection model released in 2019 May with improved accuracy especially on small, side and blurry faces. |\n\n* Different 'recognitionModel' values are provided. If follow-up operations like Verify, Identify, Find Similar are needed, please specify the recognition model with 'recognitionModel' parameter. The default value for 'recognitionModel' is 'recognition_01', if latest model needed, please explicitly specify the model you need in this parameter. Once specified, the detected faceIds will be associated with the specified recognition model. More details, please refer to [How to specify a recognition model](https://docs.microsoft.com/azure/cognitive-services/face/face-api-how-to-topics/specify-recognition-model)\n  | Model | Recommended use-case(s) |\n  | ---------- | -------- |\n  | 'recognition_01': | The default recognition model for [Face - Detect](https://docs.microsoft.com/rest/api/cognitiveservices/face/face/detectwithurl). All those faceIds created before 2019 March are bonded with this recognition model. |\n  | 'recognition_02': | Recognition model released in 2019 March. |\n  | 'recognition_03': | Recognition model released in 2020 May. 'recognition_03' is recommended since its overall accuracy is improved compared with 'recognition_01' and 'recognition_02'. |",
+        "operationId": "Face_DetectWithStream",
         "parameters": [
           {
             "name": "returnFaceId",
@@ -1359,6 +2517,15 @@
           },
           {
             "$ref": "../../../Common/Parameters.json#/parameters/ImageStream"
+          },
+          {
+            "$ref": "#/parameters/recognitionModel"
+          },
+          {
+            "$ref": "#/parameters/returnRecognitionModel"
+          },
+          {
+            "$ref": "#/parameters/detectionModel"
           }
         ],
         "consumes": [
@@ -1369,9 +2536,9 @@
         ],
         "responses": {
           "200": {
-            "description": "A successful call returns an array of face entries ranked by face rectangle size in descendingorder. An empty response indicates no faces detected.",
+            "description": "A successful call returns an array of face entries ranked by face rectangle size in descending order. An empty response indicates no faces detected.",
             "schema": {
-              "$ref": "#/definitions/DetectionResult"
+              "$ref": "#/definitions/DetectedFaces"
             }
           },
           "default": {
@@ -1388,40 +2555,28 @@
         }
       }
     },
-    "/persongroups/{personGroupId}/persons/{personId}/persistedFaces?overload=stream": {
+    "/persongroups/{personGroupId}/persons/{personId}/persistedfaces?overload=stream": {
       "post": {
-        "description": "Add a representative face to a person for identification. The input face is specified as an image with a targetFace rectangle.",
-        "operationId": "Person_AddPersonFaceFromStream",
+        "description": "Add a face to a person into a person group for face identification or verification. To deal with an image contains multiple faces, input face can be specified as an image with a targetFace rectangle. It returns a persistedFaceId representing the added face. No image will be stored. Only the extracted face feature will be stored on server until [PersonGroup PersonFace - Delete](https://docs.microsoft.com/rest/api/cognitiveservices/face/persongroupperson/deleteface), [PersonGroup Person - Delete](https://docs.microsoft.com/rest/api/cognitiveservices/face/persongroupperson/delete) or [PersonGroup - Delete](https://docs.microsoft.com/rest/api/cognitiveservices/face/persongroup/delete) is called.\n<br /> Note persistedFaceId is different from faceId generated by [Face - Detect](https://docs.microsoft.com/rest/api/cognitiveservices/face/face/detectwithurl).\n*   Higher face image quality means better recognition precision. Please consider high-quality faces: frontal, clear, and face size is 200x200 pixels (100 pixels between eyes) or bigger.\n*   Each person entry can hold up to 248 faces.\n*   JPEG, PNG, GIF (the first frame), and BMP format are supported. The allowed image file size is from 1KB to 6MB.\n*   \"targetFace\" rectangle should contain one face. Zero or multiple faces will be regarded as an error. If the provided \"targetFace\" rectangle is not returned from [Face - Detect](https://docs.microsoft.com/rest/api/cognitiveservices/face/face/detectwithurl), there’s no guarantee to detect and add the face successfully.\n*   Out of detectable face size (36x36 - 4096x4096 pixels), large head-pose, or large occlusions will cause failures.\n*   Adding/deleting faces to/from a same person will be processed sequentially. Adding/deleting faces to/from different persons are processed in parallel.\n* The minimum detectable face size is 36x36 pixels in an image no larger than 1920x1080 pixels. Images with dimensions higher than 1920x1080 pixels will need a proportionally larger minimum face size.\n* Different 'detectionModel' values can be provided. To use and compare different detection models, please refer to [How to specify a detection model](https://docs.microsoft.com/azure/cognitive-services/face/face-api-how-to-topics/specify-detection-model)\n  | Model | Recommended use-case(s) |\n  | ---------- | -------- |\n  | 'detection_01': | The default detection model for [PersonGroup Person - Add Face](https://docs.microsoft.com/rest/api/cognitiveservices/face/persongroupperson/addfacefromurl). Recommend for near frontal face detection. For scenarios with exceptionally large angle (head-pose) faces, occluded faces or wrong image orientation, the faces in such cases may not be detected. |\n  | 'detection_02': | Detection model released in 2019 May with improved accuracy especially on small, side and blurry faces. |",
+        "operationId": "PersonGroupPerson_AddFaceFromStream",
         "parameters": [
           {
-            "name": "personGroupId",
-            "in": "path",
-            "description": "Specifying the person group containing the target person.",
-            "required": true,
-            "type": "string",
-            "maxLength": 64,
-            "pattern": "^[a-z0-9-_]+$"
+            "$ref": "#/parameters/personGroupId"
           },
           {
-            "name": "personId",
-            "in": "path",
-            "description": "Target person that the face is added to.",
-            "required": true,
-            "type": "string",
-            "format": "uuid"
+            "$ref": "#/parameters/personId"
           },
           {
-            "name": "userData",
-            "in": "query",
-            "description": "User-specified data about the target face to add for any purpose. The maximum length is 1KB.",
-            "type": "string",
-            "maxLength": 1024
+            "$ref": "#/parameters/faceUserData"
           },
           {
             "$ref": "#/parameters/targetFace"
           },
           {
             "$ref": "../../../Common/Parameters.json#/parameters/ImageStream"
+          },
+          {
+            "$ref": "#/parameters/detectionModel"
           }
         ],
         "produces": [
@@ -1434,7 +2589,7 @@
           "200": {
             "description": "A successful call returns the new persistedFaceId.",
             "schema": {
-              "$ref": "#/definitions/PersistedFaceResult"
+              "$ref": "#/definitions/PersistedFace"
             }
           },
           "default": {
@@ -1446,37 +2601,30 @@
         },
         "x-ms-examples": {
           "Add face to person with stream example": {
-            "$ref": "./examples/CreateNewPersonFaceFromStream.json"
+            "$ref": "./examples/AddPersonGroupPersonFaceFromStream.json"
           }
         }
       }
     },
-    "/facelists/{faceListId}/persistedFaces?overload=stream": {
+    "/facelists/{faceListId}/persistedfaces?overload=stream": {
       "post": {
-        "description": "Add a face to a face list. The input face is specified as an image with a targetFace rectangle. It returns a persistedFaceId representing the added face, and persistedFaceId will not expire.",
+        "description": "Add a face to a specified face list, up to 1,000 faces.\n<br /> To deal with an image contains multiple faces, input face can be specified as an image with a targetFace rectangle. It returns a persistedFaceId representing the added face. No image will be stored. Only the extracted face feature will be stored on server until [FaceList - Delete Face](https://docs.microsoft.com/rest/api/cognitiveservices/face/facelist/deleteface) or [FaceList - Delete](https://docs.microsoft.com/rest/api/cognitiveservices/face/facelist/delete) is called.\n<br /> Note persistedFaceId is different from faceId generated by [Face - Detect](https://docs.microsoft.com/rest/api/cognitiveservices/face/face/detectwithurl).\n* Higher face image quality means better detection and recognition precision. Please consider high-quality faces: frontal, clear, and face size is 200x200 pixels (100 pixels between eyes) or bigger.\n* JPEG, PNG, GIF (the first frame), and BMP format are supported. The allowed image file size is from 1KB to 6MB.\n* \"targetFace\" rectangle should contain one face. Zero or multiple faces will be regarded as an error. If the provided \"targetFace\" rectangle is not returned from [Face - Detect](https://docs.microsoft.com/rest/api/cognitiveservices/face/face/detectwithurl), there’s no guarantee to detect and add the face successfully.\n* Out of detectable face size (36x36 - 4096x4096 pixels), large head-pose, or large occlusions will cause failures.\n* Adding/deleting faces to/from a same face list are processed sequentially and to/from different face lists are in parallel.\n* The minimum detectable face size is 36x36 pixels in an image no larger than 1920x1080 pixels. Images with dimensions higher than 1920x1080 pixels will need a proportionally larger minimum face size.\n* Different 'detectionModel' values can be provided. To use and compare different detection models, please refer to [How to specify a detection model](https://docs.microsoft.com/azure/cognitive-services/face/face-api-how-to-topics/specify-detection-model)\n  | Model | Recommended use-case(s) |\n  | ---------- | -------- |\n  | 'detection_01': | The default detection model for [FaceList - Add Face](https://docs.microsoft.com/rest/api/cognitiveservices/face/facelist/addfacefromurl). Recommend for near frontal face detection. For scenarios with exceptionally large angle (head-pose) faces, occluded faces or wrong image orientation, the faces in such cases may not be detected. |\n  | 'detection_02': | Detection model released in 2019 May with improved accuracy especially on small, side and blurry faces. |",
         "operationId": "FaceList_AddFaceFromStream",
         "parameters": [
           {
-            "name": "faceListId",
-            "in": "path",
-            "description": "Id referencing a Face List.",
-            "required": true,
-            "type": "string",
-            "maxLength": 64,
-            "pattern": "^[a-z0-9-_]+$"
+            "$ref": "#/parameters/faceListId"
           },
           {
-            "name": "userData",
-            "in": "query",
-            "description": "User-specified data about the face list for any purpose. The  maximum length is 1KB.",
-            "type": "string",
-            "maxLength": 1024
+            "$ref": "#/parameters/faceUserData"
           },
           {
             "$ref": "#/parameters/targetFace"
           },
           {
             "$ref": "../../../Common/Parameters.json#/parameters/ImageStream"
+          },
+          {
+            "$ref": "#/parameters/detectionModel"
           }
         ],
         "consumes": [
@@ -1486,7 +2634,7 @@
           "200": {
             "description": "A successful call returns a new persistedFaceId.",
             "schema": {
-              "$ref": "#/definitions/PersistedFaceResult"
+              "$ref": "#/definitions/PersistedFace"
             }
           },
           "default": {
@@ -1501,7 +2649,106 @@
         ],
         "x-ms-examples": {
           "Add face to face list from stream example": {
-            "$ref": "./examples/CreateNewFaceListFaceFromStream.json"
+            "$ref": "./examples/AddFaceListFaceFromStream.json"
+          }
+        }
+      }
+    },
+    "/largepersongroups/{largePersonGroupId}/persons/{personId}/persistedfaces?overload=stream": {
+      "post": {
+        "description": "Add a face to a person into a large person group for face identification or verification. To deal with an image contains multiple faces, input face can be specified as an image with a targetFace rectangle. It returns a persistedFaceId representing the added face. No image will be stored. Only the extracted face feature will be stored on server until [LargePersonGroup PersonFace - Delete](https://docs.microsoft.com/rest/api/cognitiveservices/face/largepersongroupperson/deleteface), [LargePersonGroup Person - Delete](https://docs.microsoft.com/rest/api/cognitiveservices/face/largepersongroupperson/delete) or [LargePersonGroup - Delete](https://docs.microsoft.com/rest/api/cognitiveservices/face/largepersongroup/delete) is called.\n<br /> Note persistedFaceId is different from faceId generated by [Face - Detect](https://docs.microsoft.com/rest/api/cognitiveservices/face/face/detectwithurl).\n* Higher face image quality means better recognition precision. Please consider high-quality faces: frontal, clear, and face size is 200x200 pixels (100 pixels between eyes) or bigger.\n* Each person entry can hold up to 248 faces.\n* JPEG, PNG, GIF (the first frame), and BMP format are supported. The allowed image file size is from 1KB to 6MB.\n* \"targetFace\" rectangle should contain one face. Zero or multiple faces will be regarded as an error. If the provided \"targetFace\" rectangle is not returned from [Face - Detect](https://docs.microsoft.com/rest/api/cognitiveservices/face/face/detectwithurl), there’s no guarantee to detect and add the face successfully.\n* Out of detectable face size (36x36 - 4096x4096 pixels), large head-pose, or large occlusions will cause failures.\n* Adding/deleting faces to/from a same person will be processed sequentially. Adding/deleting faces to/from different persons are processed in parallel.\n* The minimum detectable face size is 36x36 pixels in an image no larger than 1920x1080 pixels. Images with dimensions higher than 1920x1080 pixels will need a proportionally larger minimum face size.\n* Different 'detectionModel' values can be provided. To use and compare different detection models, please refer to [How to specify a detection model](https://docs.microsoft.com/azure/cognitive-services/face/face-api-how-to-topics/specify-detection-model)\n  | Model | Recommended use-case(s) |\n  | ---------- | -------- |\n  | 'detection_01': | The default detection model for [LargePersonGroup Person - Add Face](https://docs.microsoft.com/rest/api/cognitiveservices/face/largepersongroupperson/addfacefromurl). Recommend for near frontal face detection. For scenarios with exceptionally large angle (head-pose) faces, occluded faces or wrong image orientation, the faces in such cases may not be detected. |\n  | 'detection_02': | Detection model released in 2019 May with improved accuracy especially on small, side and blurry faces. |",
+        "operationId": "LargePersonGroupPerson_AddFaceFromStream",
+        "parameters": [
+          {
+            "$ref": "#/parameters/largePersonGroupId"
+          },
+          {
+            "$ref": "#/parameters/personId"
+          },
+          {
+            "$ref": "#/parameters/faceUserData"
+          },
+          {
+            "$ref": "#/parameters/targetFace"
+          },
+          {
+            "$ref": "../../../Common/Parameters.json#/parameters/ImageStream"
+          },
+          {
+            "$ref": "#/parameters/detectionModel"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/octet-stream"
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful call returns the new persistedFaceId.",
+            "schema": {
+              "$ref": "#/definitions/PersistedFace"
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/APIError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Add face to person with stream example": {
+            "$ref": "./examples/AddLargePersonGroupPersonFaceFromStream.json"
+          }
+        }
+      }
+    },
+    "/largefacelists/{largeFaceListId}/persistedfaces?overload=stream": {
+      "post": {
+        "description": "Add a face to a specified large face list, up to 1,000,000 faces.\n<br /> To deal with an image contains multiple faces, input face can be specified as an image with a targetFace rectangle. It returns a persistedFaceId representing the added face. No image will be stored. Only the extracted face feature will be stored on server until [LargeFaceList Face - Delete](https://docs.microsoft.com/rest/api/cognitiveservices/face/largefacelist/deleteface) or [LargeFaceList - Delete](https://docs.microsoft.com/rest/api/cognitiveservices/face/largefacelist/delete) is called.\n<br /> Note persistedFaceId is different from faceId generated by [Face - Detect](https://docs.microsoft.com/rest/api/cognitiveservices/face/face/detectwithurl).\n* Higher face image quality means better recognition precision. Please consider high-quality faces: frontal, clear, and face size is 200x200 pixels (100 pixels between eyes) or bigger.\n* JPEG, PNG, GIF (the first frame), and BMP format are supported. The allowed image file size is from 1KB to 6MB.\n* \"targetFace\" rectangle should contain one face. Zero or multiple faces will be regarded as an error. If the provided \"targetFace\" rectangle is not returned from [Face - Detect](https://docs.microsoft.com/rest/api/cognitiveservices/face/face/detectwithurl), there’s no guarantee to detect and add the face successfully.\n* Out of detectable face size (36x36 - 4096x4096 pixels), large head-pose, or large occlusions will cause failures.\n* Adding/deleting faces to/from a same face list are processed sequentially and to/from different face lists are in parallel.\n* The minimum detectable face size is 36x36 pixels in an image no larger than 1920x1080 pixels. Images with dimensions higher than 1920x1080 pixels will need a proportionally larger minimum face size.\n* Different 'detectionModel' values can be provided. To use and compare different detection models, please refer to [How to specify a detection model](https://docs.microsoft.com/azure/cognitive-services/face/face-api-how-to-topics/specify-detection-model)\n  | Model | Recommended use-case(s) |\n  | ---------- | -------- |\n  | 'detection_01': | The default detection model for [LargeFaceList - Add Face](https://docs.microsoft.com/rest/api/cognitiveservices/face/largefacelist/addfacefromurl). Recommend for near frontal face detection. For scenarios with exceptionally large angle (head-pose) faces, occluded faces or wrong image orientation, the faces in such cases may not be detected. |\n  | 'detection_02': | Detection model released in 2019 May with improved accuracy especially on small, side and blurry faces. |\n\nQuota:\n* Free-tier subscription quota: 1,000 faces per large face list.\n* S0-tier subscription quota: 1,000,000 faces per large face list.",
+        "operationId": "LargeFaceList_AddFaceFromStream",
+        "parameters": [
+          {
+            "$ref": "#/parameters/largeFaceListId"
+          },
+          {
+            "$ref": "#/parameters/faceUserData"
+          },
+          {
+            "$ref": "#/parameters/targetFace"
+          },
+          {
+            "$ref": "../../../Common/Parameters.json#/parameters/ImageStream"
+          },
+          {
+            "$ref": "#/parameters/detectionModel"
+          }
+        ],
+        "consumes": [
+          "application/octet-stream"
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful call returns a new persistedFaceId.",
+            "schema": {
+              "$ref": "#/definitions/PersistedFace"
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/APIError"
+            }
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-examples": {
+          "Add face to large face list from stream example": {
+            "$ref": "./examples/AddLargeFaceListFaceFromStream.json"
           }
         }
       }
@@ -1529,24 +2776,10 @@
         }
       }
     },
-    "DetectionResult": {
+    "DetectedFaces": {
       "type": "array",
       "items": {
         "$ref": "#/definitions/DetectedFace"
-      }
-    },
-    "PersistedFaceResult": {
-      "type": "object",
-      "required": [
-        "persistedFaceId"
-      ],
-      "description": "Persisted face result.",
-      "properties": {
-        "persistedFaceId": {
-          "type": "string",
-          "format": "uuid",
-          "description": "persistedFaceId of candidate face when find by faceListId. persistedFaceId in face list is persisted and will not expire. As showed in below response"
-        }
       }
     },
     "DetectedFace": {
@@ -1559,6 +2792,9 @@
         "faceId": {
           "type": "string",
           "format": "uuid"
+        },
+        "recognitionModel": {
+          "$ref": "#/definitions/RecognitionModel"
         },
         "faceRectangle": {
           "$ref": "#/definitions/FaceRectangle"
@@ -1603,7 +2839,7 @@
         }
       }
     },
-    "Position": {
+    "Coordinate": {
       "type": "object",
       "required": [
         "x",
@@ -1626,85 +2862,85 @@
       "description": "A collection of 27-point face landmarks pointing to the important positions of face components.",
       "properties": {
         "pupilLeft": {
-          "$ref": "#/definitions/Position"
+          "$ref": "#/definitions/Coordinate"
         },
         "pupilRight": {
-          "$ref": "#/definitions/Position"
+          "$ref": "#/definitions/Coordinate"
         },
         "noseTip": {
-          "$ref": "#/definitions/Position"
+          "$ref": "#/definitions/Coordinate"
         },
         "mouthLeft": {
-          "$ref": "#/definitions/Position"
+          "$ref": "#/definitions/Coordinate"
         },
         "mouthRight": {
-          "$ref": "#/definitions/Position"
+          "$ref": "#/definitions/Coordinate"
         },
         "eyebrowLeftOuter": {
-          "$ref": "#/definitions/Position"
+          "$ref": "#/definitions/Coordinate"
         },
         "eyebrowLeftInner": {
-          "$ref": "#/definitions/Position"
+          "$ref": "#/definitions/Coordinate"
         },
         "eyeLeftOuter": {
-          "$ref": "#/definitions/Position"
+          "$ref": "#/definitions/Coordinate"
         },
         "eyeLeftTop": {
-          "$ref": "#/definitions/Position"
+          "$ref": "#/definitions/Coordinate"
         },
         "eyeLeftBottom": {
-          "$ref": "#/definitions/Position"
+          "$ref": "#/definitions/Coordinate"
         },
         "eyeLeftInner": {
-          "$ref": "#/definitions/Position"
+          "$ref": "#/definitions/Coordinate"
         },
         "eyebrowRightInner": {
-          "$ref": "#/definitions/Position"
+          "$ref": "#/definitions/Coordinate"
         },
         "eyebrowRightOuter": {
-          "$ref": "#/definitions/Position"
+          "$ref": "#/definitions/Coordinate"
         },
         "eyeRightInner": {
-          "$ref": "#/definitions/Position"
+          "$ref": "#/definitions/Coordinate"
         },
         "eyeRightTop": {
-          "$ref": "#/definitions/Position"
+          "$ref": "#/definitions/Coordinate"
         },
         "eyeRightBottom": {
-          "$ref": "#/definitions/Position"
+          "$ref": "#/definitions/Coordinate"
         },
         "eyeRightOuter": {
-          "$ref": "#/definitions/Position"
+          "$ref": "#/definitions/Coordinate"
         },
         "noseRootLeft": {
-          "$ref": "#/definitions/Position"
+          "$ref": "#/definitions/Coordinate"
         },
         "noseRootRight": {
-          "$ref": "#/definitions/Position"
+          "$ref": "#/definitions/Coordinate"
         },
         "noseLeftAlarTop": {
-          "$ref": "#/definitions/Position"
+          "$ref": "#/definitions/Coordinate"
         },
         "noseRightAlarTop": {
-          "$ref": "#/definitions/Position"
+          "$ref": "#/definitions/Coordinate"
         },
         "noseLeftAlarOutTip": {
-          "$ref": "#/definitions/Position"
+          "$ref": "#/definitions/Coordinate"
         },
         "noseRightAlarOutTip": {
-          "$ref": "#/definitions/Position"
+          "$ref": "#/definitions/Coordinate"
         },
         "upperLipTop": {
-          "$ref": "#/definitions/Position"
+          "$ref": "#/definitions/Coordinate"
         },
         "upperLipBottom": {
-          "$ref": "#/definitions/Position"
+          "$ref": "#/definitions/Coordinate"
         },
         "underLipTop": {
-          "$ref": "#/definitions/Position"
+          "$ref": "#/definitions/Coordinate"
         },
         "underLipBottom": {
-          "$ref": "#/definitions/Position"
+          "$ref": "#/definitions/Coordinate"
         }
       }
     },
@@ -1725,25 +2961,22 @@
           },
           "enum": [
             "male",
-            "female",
-            "genderless"
+            "female"
           ]
         },
         "smile": {
-          "type": "number",
-          "format": "float",
           "description": "Smile intensity, a number between [0,1] ",
-          "minimum": 0,
-          "maximum": 1
+          "$ref": "#/definitions/Level"
         },
         "facialHair": {
-          "$ref": "#/definitions/FacialHairProperties"
+          "description": "Properties describing facial hair attributes.",
+          "$ref": "#/definitions/FacialHair"
         },
         "glasses": {
           "type": "string",
           "description": "Glasses type if any of the face.",
           "x-ms-enum": {
-            "name": "GlassesTypes",
+            "name": "GlassesType",
             "modelAsString": false
           },
           "enum": [
@@ -1754,59 +2987,62 @@
           ]
         },
         "headPose": {
-          "$ref": "#/definitions/HeadPoseProperties"
+          "description": "Properties indicating head pose of the face.",
+          "$ref": "#/definitions/HeadPose"
         },
         "emotion": {
-          "$ref": "#/definitions/EmotionProperties"
+          "description": "Properties describing facial emotion in form of confidence ranging from 0 to 1.",
+          "$ref": "#/definitions/Emotion"
         },
         "hair": {
-          "$ref": "#/definitions/HairProperties"
+          "description": "Properties describing hair attributes.",
+          "$ref": "#/definitions/Hair"
         },
         "makeup": {
-          "$ref": "#/definitions/MakeupProperties"
+          "description": "Properties describing present makeups on a given face.",
+          "$ref": "#/definitions/Makeup"
         },
         "occlusion": {
-          "$ref": "#/definitions/OcclusionProperties"
+          "description": "Properties describing occlusions on a given face.",
+          "$ref": "#/definitions/Occlusion"
         },
         "accessories": {
-          "$ref": "#/definitions/AccessoryProperties"
+          "description": "Properties describing any accessories on a given face.",
+          "$ref": "#/definitions/Accessories"
         },
         "blur": {
-          "$ref": "#/definitions/BlurProperties"
+          "description": "Properties describing any presence of blur within the image.",
+          "$ref": "#/definitions/Blur"
         },
         "exposure": {
-          "$ref": "#/definitions/ExposureProperties"
+          "description": "Properties describing exposure level of the image.",
+          "$ref": "#/definitions/Exposure"
         },
         "noise": {
-          "$ref": "#/definitions/NoiseProperties"
+          "description": "Properties describing noise level of the image.",
+          "$ref": "#/definitions/Noise"
         }
       }
     },
-    "FacialHairProperties": {
+    "FacialHair": {
       "type": "object",
       "description": "Properties describing facial hair attributes.",
       "properties": {
         "moustache": {
-          "type": "number",
           "x-nullable": false,
-          "minimum": 0,
-          "maximum": 1
+          "$ref": "#/definitions/Confidence"
         },
         "beard": {
-          "type": "number",
           "x-nullable": false,
-          "minimum": 0,
-          "maximum": 1
+          "$ref": "#/definitions/Confidence"
         },
         "sideburns": {
-          "type": "number",
           "x-nullable": false,
-          "minimum": 0,
-          "maximum": 1
+          "$ref": "#/definitions/Confidence"
         }
       }
     },
-    "HeadPoseProperties": {
+    "HeadPose": {
       "type": "object",
       "description": "Properties indicating head pose of the face.",
       "properties": {
@@ -1824,70 +3060,52 @@
         }
       }
     },
-    "EmotionProperties": {
+    "Emotion": {
       "type": "object",
       "description": "Properties describing facial emotion in form of confidence ranging from 0 to 1.",
       "properties": {
         "anger": {
-          "type": "number",
           "x-nullable": false,
-          "minimum": 0,
-          "maximum": 1
+          "$ref": "#/definitions/Confidence"
         },
         "contempt": {
-          "type": "number",
           "x-nullable": false,
-          "minimum": 0,
-          "maximum": 1
+          "$ref": "#/definitions/Confidence"
         },
         "disgust": {
-          "type": "number",
           "x-nullable": false,
-          "minimum": 0,
-          "maximum": 1
+          "$ref": "#/definitions/Confidence"
         },
         "fear": {
-          "type": "number",
           "x-nullable": false,
-          "minimum": 0,
-          "maximum": 1
+          "$ref": "#/definitions/Confidence"
         },
         "happiness": {
-          "type": "number",
           "x-nullable": false,
-          "minimum": 0,
-          "maximum": 1
+          "$ref": "#/definitions/Confidence"
         },
         "neutral": {
-          "type": "number",
           "x-nullable": false,
-          "minimum": 0,
-          "maximum": 1
+          "$ref": "#/definitions/Confidence"
         },
         "sadness": {
-          "type": "number",
           "x-nullable": false,
-          "minimum": 0,
-          "maximum": 1
+          "$ref": "#/definitions/Confidence"
         },
         "surprise": {
-          "type": "number",
           "x-nullable": false,
-          "minimum": 0,
-          "maximum": 1
+          "$ref": "#/definitions/Confidence"
         }
       }
     },
-    "HairProperties": {
+    "Hair": {
       "type": "object",
       "description": "Properties describing hair attributes.",
       "properties": {
         "bald": {
-          "type": "number",
           "description": "A number describing confidence level of whether the person is bald.",
           "x-nullable": false,
-          "minimum": 0,
-          "maximum": 1
+          "$ref": "#/definitions/Confidence"
         },
         "invisible": {
           "type": "boolean",
@@ -1895,32 +3113,48 @@
           "x-nullable": false
         },
         "hairColor": {
+          "description": "An array of candidate colors and confidence level in the presence of each.",
           "$ref": "#/definitions/HairColors"
         }
       }
     },
     "HairColors": {
       "type": "array",
-      "description": "An array of candidate colors and confidence level in the presence of each.",
       "items": {
-        "$ref": "#/definitions/ColorProperty"
+        "$ref": "#/definitions/HairColor"
       }
     },
-    "ColorProperty": {
+    "HairColor": {
       "type": "object",
       "description": "Hair color and associated confidence",
       "properties": {
         "color": {
           "type": "string",
-          "description": "Name of the color."
+          "description": "Name of the hair color.",
+          "x-nullable": false,
+          "x-ms-enum": {
+            "name": "HairColorType",
+            "modelAsString": false
+          },
+          "enum": [
+            "unknown",
+            "white",
+            "gray",
+            "blond",
+            "brown",
+            "red",
+            "black",
+            "other"
+          ]
         },
         "confidence": {
           "x-nullable": false,
-          "$ref": "#/definitions/ConfidenceProperty"
+          "description": "Confidence level of the color",
+          "$ref": "#/definitions/Confidence"
         }
       }
     },
-    "MakeupProperties": {
+    "Makeup": {
       "type": "object",
       "description": "Properties describing present makeups on a given face.",
       "properties": {
@@ -1936,9 +3170,9 @@
         }
       }
     },
-    "OcclusionProperties": {
+    "Occlusion": {
       "type": "object",
-      "description": "Properties describing occulusions on a given face.",
+      "description": "Properties describing occlusions on a given face.",
       "properties": {
         "foreheadOccluded": {
           "type": "boolean",
@@ -1957,29 +3191,39 @@
         }
       }
     },
-    "AccessoryProperties": {
+    "Accessories": {
       "type": "array",
       "description": "Properties describing any accessories on a given face.",
       "items": {
-        "$ref": "#/definitions/AccessoryItem"
+        "$ref": "#/definitions/Accessory"
       }
     },
-    "AccessoryItem": {
+    "Accessory": {
       "type": "object",
       "description": "Accessory item and corresponding confidence level.",
       "properties": {
         "type": {
           "type": "string",
-          "description": "Description of an accessory",
-          "x-nullable": false
+          "description": "Type of an accessory",
+          "x-nullable": false,
+          "x-ms-enum": {
+            "name": "AccessoryType",
+            "modelAsString": false
+          },
+          "enum": [
+            "headWear",
+            "glasses",
+            "mask"
+          ]
         },
         "confidence": {
           "x-nullable": false,
-          "$ref": "#/definitions/ConfidenceProperty"
+          "description": "Confidence level of an accessory",
+          "$ref": "#/definitions/Confidence"
         }
       }
     },
-    "BlurProperties": {
+    "Blur": {
       "type": "object",
       "description": "Properties describing any presence of blur within the image.",
       "properties": {
@@ -1988,7 +3232,7 @@
           "description": "An enum value indicating level of blurriness.",
           "x-nullable": false,
           "x-ms-enum": {
-            "name": "BlurLevels",
+            "name": "BlurLevel",
             "modelAsString": false
           },
           "enum": [
@@ -1998,15 +3242,13 @@
           ]
         },
         "value": {
-          "type": "number",
           "description": "A number indicating level of blurriness ranging from 0 to 1.",
           "x-nullable": false,
-          "minimum": 0,
-          "maximum": 1
+          "$ref": "#/definitions/Level"
         }
       }
     },
-    "ExposureProperties": {
+    "Exposure": {
       "type": "object",
       "description": "Properties describing exposure level of the image.",
       "properties": {
@@ -2015,7 +3257,7 @@
           "description": "An enum value indicating level of exposure.",
           "x-nullable": false,
           "x-ms-enum": {
-            "name": "ExposureLevels",
+            "name": "ExposureLevel",
             "modelAsString": false
           },
           "enum": [
@@ -2025,15 +3267,13 @@
           ]
         },
         "value": {
-          "type": "number",
           "description": "A number indicating level of exposure level ranging from 0 to 1. [0, 0.25) is under exposure. [0.25, 0.75) is good exposure. [0.75, 1] is over exposure.",
           "x-nullable": false,
-          "minimum": 0,
-          "maximum": 1
+          "$ref": "#/definitions/Level"
         }
       }
     },
-    "NoiseProperties": {
+    "Noise": {
       "type": "object",
       "description": "Properties describing noise level of the image.",
       "properties": {
@@ -2042,7 +3282,7 @@
           "description": "An enum value indicating level of noise.",
           "x-nullable": false,
           "x-ms-enum": {
-            "name": "NoiseLevels",
+            "name": "NoiseLevel",
             "modelAsString": false
           },
           "enum": [
@@ -2052,11 +3292,9 @@
           ]
         },
         "value": {
-          "type": "number",
           "description": "A number indicating level of noise level ranging from 0 to 1. [0, 0.25) is under exposure. [0.25, 0.75) is good exposure. [0.75, 1] is over exposure. [0, 0.3) is low noise level. [0.3, 0.7) is medium noise level. [0.7, 1] is high noise level.",
           "x-nullable": false,
-          "minimum": 0,
-          "maximum": 1
+          "$ref": "#/definitions/Level"
         }
       }
     },
@@ -2074,13 +3312,19 @@
         },
         "faceListId": {
           "type": "string",
-          "description": "An existing user-specified unique candidate face list, created in Face List - Create a Face List. Face list contains a set of persistedFaceIds which are persisted and will never expire. Parameter faceListId and faceIds should not be provided at the same time",
+          "description": "An existing user-specified unique candidate face list, created in Face List - Create a Face List. Face list contains a set of persistedFaceIds which are persisted and will never expire. Parameter faceListId, largeFaceListId and faceIds should not be provided at the same time.",
+          "maxLength": 64,
+          "pattern": "^[a-z0-9-_]+$"
+        },
+        "largeFaceListId": {
+          "type": "string",
+          "description": "An existing user-specified unique candidate large face list, created in LargeFaceList - Create. Large face list contains a set of persistedFaceIds which are persisted and will never expire. Parameter faceListId, largeFaceListId and faceIds should not be provided at the same time.",
           "maxLength": 64,
           "pattern": "^[a-z0-9-_]+$"
         },
         "faceIds": {
           "type": "array",
-          "description": "An array of candidate faceIds. All of them are created by Face - Detect and the faceIds will expire 24 hours after the detection call.",
+          "description": "An array of candidate faceIds. All of them are created by Face - Detect and the faceIds will expire 24 hours after the detection call. The number of faceIds is limited to 1000. Parameter faceListId, largeFaceListId and faceIds should not be provided at the same time.",
           "maxItems": 1000,
           "items": {
             "type": "string",
@@ -2100,7 +3344,7 @@
           "default": "matchPerson",
           "x-nullable": false,
           "x-ms-enum": {
-            "name": "FaceMatchingMode",
+            "name": "FindSimilarMatchMode",
             "modelAsString": false
           },
           "enum": [
@@ -2110,29 +3354,32 @@
         }
       }
     },
-    "SimilarFaceResults": {
+    "SimilarFaces": {
       "type": "array",
       "items": {
-        "$ref": "#/definitions/SimilarFaceResult"
+        "$ref": "#/definitions/SimilarFace"
       }
     },
-    "SimilarFaceResult": {
+    "SimilarFace": {
       "type": "object",
+      "required": [
+        "confidence"
+      ],
       "description": "Response body for find similar face operation.",
       "properties": {
         "faceId": {
           "type": "string",
           "format": "uuid",
-          "description": "faceId of candidate face when find by faceIds. faceId is created by Face - Detect and will expire 24 hours after the detection call"
+          "description": "FaceId of candidate face when find by faceIds. faceId is created by Face - Detect and will expire 24 hours after the detection call"
         },
         "persistedFaceId": {
           "type": "string",
           "format": "uuid",
-          "description": "persistedFaceId of candidate face when find by faceListId. persistedFaceId in face list is persisted and will not expire. As showed in below response"
+          "description": "PersistedFaceId of candidate face when find by faceListId. persistedFaceId in face list is persisted and will not expire. As showed in below response"
         },
         "confidence": {
-          "x-nullable": false,
-          "$ref": "#/definitions/ConfidenceProperty"
+          "description": "Similarity confidence of the candidate face. The higher confidence, the more similar. Range between [0,1].",
+          "$ref": "#/definitions/Confidence"
         }
       }
     },
@@ -2149,12 +3396,13 @@
           "maxItems": 1000,
           "items": {
             "type": "string",
-            "format": "uuid"
+            "format": "uuid",
+            "x-nullable": false
           }
         }
       }
     },
-    "GroupResponse": {
+    "GroupResult": {
       "type": "object",
       "required": [
         "groups"
@@ -2168,7 +3416,8 @@
             "type": "array",
             "items": {
               "type": "string",
-              "format": "uuid"
+              "format": "uuid",
+              "x-nullable": false
             }
           }
         },
@@ -2177,7 +3426,8 @@
           "description": "Face ids array of faces that cannot find any similar faces from original faces.",
           "items": {
             "type": "string",
-            "format": "uuid"
+            "format": "uuid",
+            "x-nullable": false
           }
         }
       }
@@ -2185,45 +3435,52 @@
     "IdentifyRequest": {
       "type": "object",
       "required": [
-        "personGroupId",
         "faceIds"
       ],
       "description": "Request body for identify face operation.",
       "properties": {
+        "faceIds": {
+          "type": "array",
+          "description": "Array of query faces faceIds, created by the Face - Detect. Each of the faces are identified independently. The valid number of faceIds is between [1, 10].",
+          "maxItems": 10,
+          "items": {
+            "type": "string",
+            "format": "uuid",
+            "x-nullable": false
+          }
+        },
         "personGroupId": {
-          "description": "personGroupId of the target person group, created by PersonGroups.Create",
+          "description": "PersonGroupId of the target person group, created by PersonGroup - Create. Parameter personGroupId and largePersonGroupId should not be provided at the same time.",
           "type": "string",
           "maxLength": 64,
           "pattern": "^[a-z0-9-_]+$"
         },
-        "faceIds": {
-          "type": "array",
-          "description": "Array of candidate faceId created by Face - Detect.",
-          "maxItems": 1000,
-          "items": {
-            "type": "string",
-            "format": "uuid"
-          }
+        "largePersonGroupId": {
+          "description": "LargePersonGroupId of the target large person group, created by LargePersonGroup - Create. Parameter personGroupId and largePersonGroupId should not be provided at the same time.",
+          "type": "string",
+          "maxLength": 64,
+          "pattern": "^[a-z0-9-_]+$"
         },
         "maxNumOfCandidatesReturned": {
           "type": "integer",
-          "description": "The number of top similar faces returned.",
+          "description": "The range of maxNumOfCandidatesReturned is between 1 and 5 (default is 1).",
           "default": 1,
           "minimum": 1,
-          "maximum": 1000
+          "maximum": 5
         },
         "confidenceThreshold": {
-          "$ref": "#/definitions/ConfidenceProperty"
+          "description": "Confidence threshold of identification, used to judge whether one face belong to one person. The range of confidenceThreshold is [0, 1] (default specified by algorithm).",
+          "$ref": "#/definitions/Confidence"
         }
       }
     },
-    "IdentifyResult": {
+    "IdentifyResults": {
       "type": "array",
       "items": {
-        "$ref": "#/definitions/IdentifyResultItem"
+        "$ref": "#/definitions/IdentifyResult"
       }
     },
-    "IdentifyResultItem": {
+    "IdentifyResult": {
       "type": "object",
       "required": [
         "faceId",
@@ -2234,17 +3491,18 @@
         "faceId": {
           "type": "string",
           "format": "uuid",
-          "description": "faceId of the query face"
+          "description": "FaceId of the query face"
         },
         "candidates": {
           "type": "array",
+          "description": "Identified person candidates for that face (ranked by confidence). Array size should be no larger than input maxNumOfCandidatesReturned. If no person is identified, will return an empty array.",
           "items": {
-            "$ref": "#/definitions/IdentifyResultCandidate"
+            "$ref": "#/definitions/IdentifyCandidate"
           }
         }
       }
     },
-    "IdentifyResultCandidate": {
+    "IdentifyCandidate": {
       "type": "object",
       "required": [
         "personId",
@@ -2258,62 +3516,68 @@
           "description": "Id of candidate"
         },
         "confidence": {
-          "x-nullable": false,
-          "$ref": "#/definitions/ConfidenceProperty"
+          "description": "Confidence threshold of identification, used to judge whether one face belong to one person. The range of confidenceThreshold is [0, 1] (default specified by algorithm).",
+          "$ref": "#/definitions/Confidence"
         }
       }
     },
-    "VerifyPersonGroupRequest": {
+    "VerifyFaceToPersonRequest": {
       "type": "object",
       "required": [
         "faceId",
-        "personId",
-        "personGroupId"
+        "personId"
       ],
-      "description": "Request body for verify operation.",
+      "description": "Request body for face to person verification.",
       "properties": {
         "faceId": {
           "type": "string",
           "format": "uuid",
-          "description": "faceId the face, comes from Face - Detect"
+          "description": "FaceId of the face, comes from Face - Detect"
+        },
+        "personGroupId": {
+          "description": "Using existing personGroupId and personId for fast loading a specified person. personGroupId is created in PersonGroup - Create. Parameter personGroupId and largePersonGroupId should not be provided at the same time.",
+          "type": "string",
+          "maxLength": 64,
+          "pattern": "^[a-z0-9-_]+$"
+        },
+        "largePersonGroupId": {
+          "description": "Using existing largePersonGroupId and personId for fast loading a specified person. largePersonGroupId is created in LargePersonGroup - Create. Parameter personGroupId and largePersonGroupId should not be provided at the same time.",
+          "type": "string",
+          "maxLength": 64,
+          "pattern": "^[a-z0-9-_]+$"
         },
         "personId": {
           "type": "string",
           "format": "uuid",
-          "description": "Specify a certain person in a person group. personId is created in Persons.Create."
-        },
-        "personGroupId": {
-          "description": "Using existing personGroupId and personId for fast loading a specified person. personGroupId is created in Person Groups.Create.",
-          "type": "string",
-          "maxLength": 64,
-          "pattern": "^[a-z0-9-_]+$"
+          "description": "Specify a certain person in a person group or a large person group. personId is created in PersonGroup Person - Create or LargePersonGroup Person - Create."
         }
       }
     },
-    "VerifyRequest": {
+    "VerifyFaceToFaceRequest": {
       "type": "object",
       "required": [
         "faceId1",
         "faceId2"
       ],
-      "description": "Request body for verify operation.",
+      "description": "Request body for face to face verification.",
       "properties": {
         "faceId1": {
           "type": "string",
           "format": "uuid",
-          "description": "faceId of the first face, comes from Face - Detect"
+          "description": "FaceId of the first face, comes from Face - Detect"
         },
         "faceId2": {
           "type": "string",
           "format": "uuid",
-          "description": "faceId of the second face, comes from Face - Detect"
+          "description": "FaceId of the second face, comes from Face - Detect"
         }
       }
     },
     "VerifyResult": {
       "type": "object",
       "required": [
-        "isIdentical"
+        "isIdentical",
+        "confidence"
       ],
       "description": "Result of the verify operation.",
       "properties": {
@@ -2322,83 +3586,43 @@
           "description": "True if the two faces belong to the same person or the face belongs to the person, otherwise false."
         },
         "confidence": {
-          "x-nullable": false,
-          "$ref": "#/definitions/ConfidenceProperty"
+          "description": "A number indicates the similarity confidence of whether two faces belong to the same person, or whether the face belongs to the person. By default, isIdentical is set to True if similarity confidence is greater than or equal to 0.5. This is useful for advanced users to override \"isIdentical\" and fine-tune the result on their own data.",
+          "$ref": "#/definitions/Confidence"
         }
       }
     },
-    "CreateFaceListRequest": {
-      "type": "object",
-      "description": "Request to create a face list.",
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "Name of the face list, maximum length is 128.",
-          "maxLength": 128
-        },
-        "userData": {
-          "type": "string",
-          "description": "Optional user defined data for the face list. Length should not exceed 16KB.",
-          "maxLength": 16384
-        }
-      }
-    },
-    "GetFaceListResult": {
+    "FaceList": {
+      "description": "Face list object.",
       "type": "object",
       "required": [
         "faceListId"
       ],
-      "description": "Result of the GetFaceList operation.",
       "properties": {
         "faceListId": {
           "type": "string",
-          "description": "faceListId of the target face list.",
+          "description": "FaceListId of the target face list.",
           "maxLength": 64,
           "pattern": "^[a-z0-9-_]+$"
         },
-        "name": {
-          "type": "string",
-          "description": "Face list's display name, maximum length is 128.",
-          "maxLength": 128
-        },
-        "userData": {
-          "type": "string",
-          "description": "User-provided data attached to this face list. Length should not exceed 16KB.",
-          "maxLength": 16384
-        },
         "persistedFaces": {
-          "type": "array",
           "description": "Persisted faces within the face list.",
-          "items": {
-            "$ref": "#/definitions/PersonFaceResult"
-          }
+          "$ref": "#/definitions/PersistedFaces"
         }
-      }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/MetaDataContract"
+        }
+      ]
     },
-    "FaceListResults": {
+    "FaceLists": {
       "type": "array",
-      "description": "An array of face list results.",
+      "description": "An array of face list results, with fields of faceListId, name and userData",
       "items": {
-        "$ref": "#/definitions/GetFaceListResult"
+        "$ref": "#/definitions/FaceList"
       }
     },
-    "CreatePersonGroupRequest": {
-      "type": "object",
-      "description": "Request to create a person group.",
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "Person group display name. The maximum length is 128.",
-          "maxLength": 128
-        },
-        "userData": {
-          "type": "string",
-          "description": "User-provided data attached to the person group. The size limit is 16KB.",
-          "maxLength": 16384
-        }
-      }
-    },
-    "PersonGroupResult": {
+    "PersonGroup": {
       "type": "object",
       "required": [
         "personGroupId"
@@ -2406,61 +3630,26 @@
       "description": "Person group object.",
       "properties": {
         "personGroupId": {
-          "description": "personGroupId of the existing person groups.",
+          "description": "PersonGroupId of the target person group.",
           "type": "string",
           "maxLength": 64,
           "pattern": "^[a-z0-9-_]+$"
-        },
-        "name": {
-          "type": "string",
-          "description": "Person group's display name, maximum length is 128.",
-          "maxLength": 128
-        },
-        "userData": {
-          "type": "string",
-          "description": "User-provided data attached to this person group. Length should not exceed 16KB.",
-          "maxLength": 16384
         }
-      }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/MetaDataContract"
+        }
+      ]
     },
-    "PersonGroupResults": {
+    "PersonGroups": {
       "type": "array",
       "description": "An array of person groups.",
       "items": {
-        "$ref": "#/definitions/PersonGroupResult"
+        "$ref": "#/definitions/PersonGroup"
       }
     },
-    "CreatePersonRequest": {
-      "type": "object",
-      "description": "Request to create a person object.",
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "Display name of the target person. The maximum length is 128.",
-          "maxLength": 128
-        },
-        "userData": {
-          "type": "string",
-          "description": "Optional fields for user-provided data attached to a person. Size limit is 16KB.",
-          "maxLength": 16384
-        }
-      }
-    },
-    "CreatePersonResult": {
-      "type": "object",
-      "required": [
-        "personId"
-      ],
-      "description": "Result of creating person.",
-      "properties": {
-        "personId": {
-          "type": "string",
-          "format": "uuid",
-          "description": "personID of the new created person."
-        }
-      }
-    },
-    "PersonResult": {
+    "Person": {
       "type": "object",
       "required": [
         "personId"
@@ -2470,36 +3659,32 @@
         "personId": {
           "type": "string",
           "format": "uuid",
-          "description": "personId of the target face list."
+          "description": "PersonId of the target face list."
         },
         "persistedFaceIds": {
           "type": "array",
-          "description": "persistedFaceIds of registered faces in the person. These persistedFaceIds are returned from Person - Add a Person Face, and will not expire.",
+          "description": "PersistedFaceIds of registered faces in the person. These persistedFaceIds are returned from Person - Add a Person Face, and will not expire.",
           "items": {
             "type": "string",
-            "format": "uuid"
+            "format": "uuid",
+            "x-nullable": false
           }
-        },
-        "name": {
-          "type": "string",
-          "description": "Person's display name, maximum length is 128.",
-          "maxLength": 128
-        },
-        "userData": {
-          "type": "string",
-          "description": "User-provided data attached to this person. Length should not exceed 16KB.",
-          "maxLength": 16384
         }
-      }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/NameAndUserDataContract"
+        }
+      ]
     },
-    "PersonResults": {
+    "Persons": {
       "type": "array",
-      "description": "An array of PersonResults.",
+      "description": "An array of Persons.",
       "items": {
-        "$ref": "#/definitions/PersonResult"
+        "$ref": "#/definitions/Person"
       }
     },
-    "PersonFaceResult": {
+    "PersistedFace": {
       "type": "object",
       "required": [
         "persistedFaceId"
@@ -2518,9 +3703,70 @@
         }
       }
     },
-    "UpdatePersonFaceDataRequest": {
+    "PersistedFaces": {
+      "type": "array",
+      "description": "An array of persisted faces within the face list or large face list.",
+      "items": {
+        "$ref": "#/definitions/PersistedFace"
+      }
+    },
+    "LargeFaceList": {
+      "description": "Large face list object.",
       "type": "object",
-      "description": "Request to update person face data.",
+      "required": [
+        "largeFaceListId"
+      ],
+      "properties": {
+        "largeFaceListId": {
+          "type": "string",
+          "description": "LargeFaceListId of the target large face list.",
+          "maxLength": 64,
+          "pattern": "^[a-z0-9-_]+$"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/MetaDataContract"
+        }
+      ]
+    },
+    "LargeFaceLists": {
+      "type": "array",
+      "description": "An array of large face list results, with fields of largeFaceListId, name and userData",
+      "items": {
+        "$ref": "#/definitions/LargeFaceList"
+      }
+    },
+    "LargePersonGroup": {
+      "type": "object",
+      "required": [
+        "largePersonGroupId"
+      ],
+      "description": "Large person group object.",
+      "properties": {
+        "largePersonGroupId": {
+          "description": "LargePersonGroupId of the target large person groups",
+          "type": "string",
+          "maxLength": 64,
+          "pattern": "^[a-z0-9-_]+$"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/MetaDataContract"
+        }
+      ]
+    },
+    "LargePersonGroups": {
+      "type": "array",
+      "description": "An array of large person groups.",
+      "items": {
+        "$ref": "#/definitions/LargePersonGroup"
+      }
+    },
+    "UpdateFaceRequest": {
+      "type": "object",
+      "description": "Request to update face data.",
       "properties": {
         "userData": {
           "type": "string",
@@ -2532,14 +3778,14 @@
     "TrainingStatus": {
       "type": "object",
       "required": [
-        "status"
+        "status",
+        "createdDateTime"
       ],
       "description": "Training status object.",
       "properties": {
         "status": {
           "type": "string",
-          "description": "Training status: notstarted, running, succeeded, failed. If the training process is waiting to perform, the status is notstarted. If the training is ongoing, the status is running. Status succeed means this person group is ready for Face - Identify. Status failed is often caused by no person or no persisted face exist in the person group",
-          "x-nullable": false,
+          "description": "Training status: notstarted, running, succeeded, failed. If the training process is waiting to perform, the status is notstarted. If the training is ongoing, the status is running. Status succeed means this person group or large person group is ready for Face - Identify, or this large face list is ready for Face - Find Similar. Status failed is often caused by no person or no persisted face exist in the person group or large person group, or no persisted face exist in the large face list.",
           "x-ms-enum": {
             "name": "TrainingStatusType",
             "modelAsString": false
@@ -2554,14 +3800,20 @@
         "createdDateTime": {
           "type": "string",
           "format": "date-time",
-          "description": "A combined UTC date and time string that describes person group created time.",
+          "description": "A combined UTC date and time string that describes the created time of the person group, large person group or large face list.",
           "x-ms-client-name": "created"
         },
         "lastActionDateTime": {
           "type": "string",
           "format": "date-time",
-          "description": "Person group last modify time in the UTC, could be null value when the person group is not successfully trained.",
+          "description": "A combined UTC date and time string that describes the last modify time of the person group, large person group or large face list, could be null value when the group is not successfully trained.",
           "x-ms-client-name": "lastAction"
+        },
+        "lastSuccessfulTrainingDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "A combined UTC date and time string that describes the last successful training time of the person group, large person group or large face list.",
+          "x-ms-client-name": "lastSuccessfulTraining"
         },
         "message": {
           "type": "string",
@@ -2569,11 +3821,259 @@
         }
       }
     },
-    "ConfidenceProperty": {
+    "Confidence": {
       "description": "A number ranging from 0 to 1 indicating a level of confidence associated with a property.",
       "type": "number",
       "minimum": 0,
       "maximum": 1
+    },
+    "Level": {
+      "description": "A number ranging from 0 to 1 indicating the intensity level associated with a property.",
+      "type": "number",
+      "minimum": 0,
+      "maximum": 1
+    },
+    "NameAndUserDataContract": {
+      "type": "object",
+      "description": "A combination of user defined name and user specified data for the person, largePersonGroup/personGroup, and largeFaceList/faceList.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "User defined name, maximum length is 128.",
+          "maxLength": 128
+        },
+        "userData": {
+          "type": "string",
+          "description": "User specified data. Length should not exceed 16KB.",
+          "maxLength": 16384
+        }
+      }
+    },
+    "MetaDataContract": {
+      "type": "object",
+      "description": "A combination of user defined name and user specified data and recognition model name for largePersonGroup/personGroup, and largeFaceList/faceList.",
+      "properties": {
+        "recognitionModel": {
+          "$ref": "#/definitions/RecognitionModel"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/NameAndUserDataContract"
+        }
+      ]
+    },
+    "RecognitionModel": {
+      "type": "string",
+      "description": "Name of recognition model. Recognition model is used when the face features are extracted and associated with detected faceIds, (Large)FaceList or (Large)PersonGroup. A recognition model name can be provided when performing Face - Detect or (Large)FaceList - Create or (Large)PersonGroup - Create. The default value is 'recognition_01', if latest model needed, please explicitly specify the model you need.",
+      "default": "recognition_01",
+      "x-nullable": false,
+      "x-ms-enum": {
+        "name": "RecognitionModel",
+        "modelAsString": true
+      },
+      "enum": [
+        "recognition_01",
+        "recognition_02",
+        "recognition_03"
+      ]
+    },
+    "ApplyScope": {
+      "type": "array",
+      "description": "Array of the target Face subscription ids for the snapshot, specified by the user who created the snapshot when calling Snapshot - Take. For each snapshot, only subscriptions included in the applyScope of Snapshot - Take can apply it.",
+      "items": {
+        "type": "string",
+        "format": "uuid",
+        "x-nullable": false
+      }
+    },
+    "ApplySnapshotRequest": {
+      "type": "object",
+      "required": [
+        "objectId"
+      ],
+      "description": "Request body for applying snapshot operation.",
+      "properties": {
+        "objectId": {
+          "type": "string",
+          "description": "User specified target object id to be created from the snapshot.",
+          "maxLength": 64,
+          "pattern": "^[a-z0-9-_]+$"
+        },
+        "mode": {
+          "type": "string",
+          "description": "Snapshot applying mode. Currently only CreateNew is supported, which means the apply operation will fail if target subscription already contains an object of same type and using the same objectId. Users can specify the \"objectId\" in request body to avoid such conflicts.",
+          "default": "CreateNew",
+          "x-nullable": false,
+          "x-ms-enum": {
+            "name": "SnapshotApplyMode",
+            "modelAsString": false
+          },
+          "enum": [
+            "CreateNew"
+          ]
+        }
+      }
+    },
+    "Snapshots": {
+      "type": "array",
+      "description": "An array of snapshots.",
+      "items": {
+        "$ref": "#/definitions/Snapshot"
+      }
+    },
+    "Snapshot": {
+      "type": "object",
+      "required": [
+        "id",
+        "account",
+        "type",
+        "applyScope",
+        "createdTime",
+        "lastUpdateTime"
+      ],
+      "description": "Snapshot object.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "uuid",
+          "description": "Snapshot id."
+        },
+        "account": {
+          "type": "string",
+          "description": "Azure Cognitive Service Face account id of the subscriber who created the snapshot by Snapshot - Take."
+        },
+        "type": {
+          "type": "string",
+          "description": "Type of the source object in the snapshot, specified by the subscriber who created the snapshot when calling Snapshot - Take. Currently FaceList, PersonGroup, LargeFaceList and LargePersonGroup are supported.",
+          "x-ms-enum": {
+            "name": "SnapshotObjectType",
+            "modelAsString": false
+          },
+          "enum": [
+            "FaceList",
+            "LargeFaceList",
+            "LargePersonGroup",
+            "PersonGroup"
+          ]
+        },
+        "applyScope": {
+          "description": "Array of the target Face subscription ids for the snapshot, specified by the user who created the snapshot when calling Snapshot - Take. For each snapshot, only subscriptions included in the applyScope of Snapshot - Take can apply it.",
+          "$ref": "#/definitions/ApplyScope"
+        },
+        "userData": {
+          "type": "string",
+          "description": "User specified data about the snapshot for any purpose. Length should not exceed 16KB.",
+          "maxLength": 16384
+        },
+        "createdTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "A combined UTC date and time string that describes the created time of the snapshot. E.g. 2018-12-25T11:41:02.2331413Z."
+        },
+        "lastUpdateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "A combined UTC date and time string that describes the last time when the snapshot was created or updated by Snapshot - Update. E.g. 2018-12-25T11:51:27.8705696Z."
+        }
+      }
+    },
+    "TakeSnapshotRequest": {
+      "type": "object",
+      "required": [
+        "type",
+        "objectId",
+        "applyScope"
+      ],
+      "description": "Request body for taking snapshot operation.",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "User specified type for the source object to take snapshot from. Currently FaceList, PersonGroup, LargeFaceList and LargePersonGroup are supported.",
+          "x-ms-enum": {
+            "name": "SnapshotObjectType",
+            "modelAsString": false
+          },
+          "enum": [
+            "FaceList",
+            "LargeFaceList",
+            "LargePersonGroup",
+            "PersonGroup"
+          ]
+        },
+        "objectId": {
+          "type": "string",
+          "description": "User specified source object id to take snapshot from.",
+          "maxLength": 64,
+          "pattern": "^[a-z0-9-_]+$"
+        },
+        "applyScope": {
+          "description": "User specified array of target Face subscription ids for the snapshot. For each snapshot, only subscriptions included in the applyScope of Snapshot - Take can apply it.",
+          "$ref": "#/definitions/ApplyScope"
+        },
+        "userData": {
+          "type": "string",
+          "description": "User specified data about the snapshot for any purpose. Length should not exceed 16KB.",
+          "maxLength": 16384
+        }
+      }
+    },
+    "UpdateSnapshotRequest": {
+      "type": "object",
+      "description": "Request body for updating a snapshot, with a combination of user defined apply scope and user specified data.",
+      "properties": {
+        "applyScope": {
+          "description": "Array of the target Face subscription ids for the snapshot, specified by the user who created the snapshot when calling Snapshot - Take. For each snapshot, only subscriptions included in the applyScope of Snapshot - Take can apply it.",
+          "$ref": "#/definitions/ApplyScope"
+        },
+        "userData": {
+          "type": "string",
+          "description": "User specified data about the snapshot for any purpose. Length should not exceed 16KB.",
+          "maxLength": 16384
+        }
+      }
+    },
+    "OperationStatus": {
+      "type": "object",
+      "required": [
+        "status",
+        "createdTime"
+      ],
+      "description": "Operation status object. Operation refers to the asynchronous backend task including taking a snapshot and applying a snapshot.",
+      "properties": {
+        "status": {
+          "type": "string",
+          "description": "Operation status: notstarted, running, succeeded, failed. If the operation is requested and waiting to perform, the status is notstarted. If the operation is ongoing in backend, the status is running. Status succeeded means the operation is completed successfully, specifically for snapshot taking operation, it illustrates the snapshot is well taken and ready to apply, and for snapshot applying operation, it presents the target object has finished creating by the snapshot and ready to be used. Status failed is often caused by editing the source object while taking the snapshot or editing the target object while applying the snapshot before completion, see the field \"message\" to check the failure reason.",
+          "x-ms-enum": {
+            "name": "OperationStatusType",
+            "modelAsString": false
+          },
+          "enum": [
+            "notstarted",
+            "running",
+            "succeeded",
+            "failed"
+          ]
+        },
+        "createdTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "A combined UTC date and time string that describes the time when the operation (take or apply a snapshot) is requested. E.g. 2018-12-25T11:41:02.2331413Z."
+        },
+        "lastActionTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "A combined UTC date and time string that describes the last time the operation (take or apply a snapshot) is actively migrating data. The lastActionTime will keep increasing until the operation finishes. E.g. 2018-12-25T11:51:27.8705696Z."
+        },
+        "resourceLocation": {
+          "type": "string",
+          "description": "When the operation succeeds successfully, for snapshot taking operation the snapshot id will be included in this field, and for snapshot applying operation, the path to get the target object will be returned in this field."
+        },
+        "message": {
+          "type": "string",
+          "description": "Show failure message when operation fails (omitted when operation succeeds)."
+        }
+      }
     }
   },
   "parameters": {
@@ -2589,7 +4089,7 @@
         "type": "string",
         "x-nullable": false,
         "x-ms-enum": {
-          "name": "FaceAttributeTypes",
+          "name": "FaceAttributeType",
           "modelAsString": false
         },
         "enum": [
@@ -2625,6 +4125,169 @@
         "maxItems": 4,
         "minItems": 4
       }
+    },
+    "faceUserData": {
+      "name": "userData",
+      "in": "query",
+      "description": "User-specified data about the face for any purpose. The maximum length is 1KB.",
+      "type": "string",
+      "maxLength": 1024,
+      "x-ms-parameter-location": "method",
+      "required": false,
+      "collectionFormat": "csv"
+    },
+    "faceListId": {
+      "name": "faceListId",
+      "in": "path",
+      "description": "Id referencing a particular face list.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "collectionFormat": "csv",
+      "maxLength": 64,
+      "pattern": "^[a-z0-9-_]+$"
+    },
+    "personGroupId": {
+      "name": "personGroupId",
+      "in": "path",
+      "description": "Id referencing a particular person group.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "collectionFormat": "csv",
+      "maxLength": 64,
+      "pattern": "^[a-z0-9-_]+$"
+    },
+    "largeFaceListId": {
+      "name": "largeFaceListId",
+      "in": "path",
+      "description": "Id referencing a particular large face list.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "collectionFormat": "csv",
+      "maxLength": 64,
+      "pattern": "^[a-z0-9-_]+$"
+    },
+    "largePersonGroupId": {
+      "name": "largePersonGroupId",
+      "in": "path",
+      "description": "Id referencing a particular large person group.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "collectionFormat": "csv",
+      "maxLength": 64,
+      "pattern": "^[a-z0-9-_]+$"
+    },
+    "personId": {
+      "name": "personId",
+      "in": "path",
+      "description": "Id referencing a particular person.",
+      "required": true,
+      "type": "string",
+      "format": "uuid",
+      "x-ms-parameter-location": "method",
+      "collectionFormat": "csv"
+    },
+    "persistedFaceId": {
+      "name": "persistedFaceId",
+      "in": "path",
+      "description": "Id referencing a particular persistedFaceId of an existing face.",
+      "required": true,
+      "type": "string",
+      "format": "uuid",
+      "x-ms-parameter-location": "method",
+      "collectionFormat": "csv"
+    },
+    "applyScope": {
+      "name": "applyScope",
+      "description": "User specified snapshot apply scopes as a search filter. ApplyScope is an array of the target Azure subscription ids for the snapshot, specified by the user who created the snapshot by Snapshot - Take.",
+      "in": "query",
+      "required": false,
+      "type": "array",
+      "x-ms-parameter-location": "method",
+      "collectionFormat": "csv",
+      "items": {
+        "type": "string",
+        "format": "uuid",
+        "x-nullable": false
+      }
+    },
+    "operationId": {
+      "name": "operationId",
+      "in": "path",
+      "description": "Id referencing a particular take/apply snapshot operation.",
+      "required": true,
+      "type": "string",
+      "format": "uuid",
+      "x-ms-parameter-location": "method",
+      "collectionFormat": "csv"
+    },
+    "snapshotId": {
+      "name": "snapshotId",
+      "in": "path",
+      "description": "Id referencing a particular snapshot.",
+      "required": true,
+      "type": "string",
+      "format": "uuid",
+      "x-ms-parameter-location": "method",
+      "collectionFormat": "csv"
+    },
+    "Endpoint": {
+      "name": "Endpoint",
+      "description": "Supported Cognitive Services endpoints (protocol and hostname, for example: https://westus.api.cognitive.microsoft.com).",
+      "x-ms-parameter-location": "client",
+      "required": true,
+      "type": "string",
+      "in": "path",
+      "x-ms-skip-url-encoding": true
+    },
+    "recognitionModel": {
+      "name": "recognitionModel",
+      "description": "Name of recognition model. Recognition model is used when the face features are extracted and associated with detected faceIds, (Large)FaceList or (Large)PersonGroup. A recognition model name can be provided when performing Face - Detect or (Large)FaceList - Create or (Large)PersonGroup - Create. The default value is 'recognition_01', if latest model needed, please explicitly specify the model you need.",
+      "default": "recognition_01",
+      "required": false,
+      "type": "string",
+      "in": "query",
+      "x-ms-parameter-location": "method",
+      "x-nullable": false,
+      "x-ms-enum": {
+        "name": "RecognitionModel",
+        "modelAsString": true
+      },
+      "enum": [
+        "recognition_01",
+        "recognition_02",
+        "recognition_03"
+      ]
+    },
+    "returnRecognitionModel": {
+      "name": "returnRecognitionModel",
+      "description": "A value indicating whether the operation should return 'recognitionModel' in response.",
+      "default": false,
+      "required": false,
+      "type": "boolean",
+      "in": "query",
+      "x-ms-parameter-location": "method"
+    },
+    "detectionModel": {
+      "name": "detectionModel",
+      "description": "Name of detection model. Detection model is used to detect faces in the submitted image. A detection model name can be provided when performing Face - Detect or (Large)FaceList - Add Face or (Large)PersonGroup - Add Face. The default value is 'detection_01', if another model is needed, please explicitly specify it.",
+      "default": "detection_01",
+      "required": false,
+      "type": "string",
+      "in": "query",
+      "x-ms-parameter-location": "method",
+      "x-nullable": false,
+      "x-ms-enum": {
+        "name": "DetectionModel",
+        "modelAsString": true
+      },
+      "enum": [
+        "detection_01",
+        "detection_02"
+      ]
     }
   }
 }

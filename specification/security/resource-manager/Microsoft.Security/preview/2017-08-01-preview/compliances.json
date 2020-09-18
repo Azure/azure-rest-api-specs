@@ -1,0 +1,206 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Security Center",
+    "description": "API spec for Microsoft.Security (Azure Security Center) resource provider",
+    "version": "2017-08-01-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/{scope}/providers/Microsoft.Security/compliances": {
+      "get": {
+        "x-ms-examples": {
+          "Get security compliance data over time": {
+            "$ref": "./examples/Compliances/GetCompliances_example.json"
+          }
+        },
+        "tags": [
+          "Compliances"
+        ],
+        "description": "The Compliance scores of the specific management group.",
+        "operationId": "Compliances_List",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/Scope"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ComplianceList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/{scope}/providers/Microsoft.Security/compliances/{complianceName}": {
+      "get": {
+        "x-ms-examples": {
+          "Get security compliance data for a day": {
+            "$ref": "./examples/Compliances/GetCompliance_example.json"
+          }
+        },
+        "tags": [
+          "Compliances"
+        ],
+        "description": "Details of a specific Compliance.",
+        "operationId": "Compliances_Get",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/Scope"
+          },
+          {
+            "$ref": "#/parameters/ComplianceName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Compliance"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ComplianceList": {
+      "type": "object",
+      "readOnly": true,
+      "description": "List of Compliance objects response",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "List of Compliance objects",
+          "items": {
+            "$ref": "#/definitions/Compliance"
+          }
+        },
+        "nextLink": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The URI to fetch the next page."
+        }
+      }
+    },
+    "Compliance": {
+      "type": "object",
+      "readOnly": true,
+      "description": "Compliance of a scope",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "Compliance data",
+          "$ref": "#/definitions/ComplianceProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../common/v1/types.json#/definitions/Resource"
+        }
+      ]
+    },
+    "ComplianceProperties": {
+      "type": "object",
+      "description": "The Compliance score (percentage) of a Subscription is a sum of all Resources' Compliances under the given Subscription. A Resource Compliance is defined as the compliant ('healthy') Policy Definitions out of all Policy Definitions applicable to a given resource.",
+      "properties": {
+        "assessmentTimestampUtcDate": {
+          "readOnly": true,
+          "type": "string",
+          "format": "date-time",
+          "description": "The timestamp when the Compliance calculation was conducted."
+        },
+        "resourceCount": {
+          "readOnly": true,
+          "type": "integer",
+          "description": "The resource count of the given subscription for which the Compliance calculation was conducted (needed for Management Group Compliance calculation)."
+        },
+        "assessmentResult": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ComplianceSegment"
+          },
+          "description": "An array of segment, which is the actually the compliance assessment."
+        }
+      }
+    },
+    "ComplianceSegment": {
+      "type": "object",
+      "description": "A segment of a compliance assessment.",
+      "properties": {
+        "segmentType": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The segment type, e.g. compliant, non-compliance, insufficient coverage, N/A, etc."
+        },
+        "percentage": {
+          "type": "number",
+          "format": "double",
+          "readOnly": true,
+          "description": "The size (%) of the segment."
+        }
+      }
+    }
+  },
+  "parameters": {
+    "ComplianceName": {
+      "name": "complianceName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "name of the Compliance",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}

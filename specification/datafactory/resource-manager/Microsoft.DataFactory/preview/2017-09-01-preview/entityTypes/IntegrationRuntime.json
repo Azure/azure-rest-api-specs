@@ -98,8 +98,7 @@
         "maxParallelExecutionsPerNode": {
           "description": "Maximum parallel executions count per node for managed integration runtime.",
           "type": "integer",
-          "minimum": 1,
-          "maximum": 8
+          "minimum": 1
         },
         "vNetProperties": {
           "description": "VNet properties for managed integration runtime.",
@@ -146,6 +145,26 @@
             "name": "IntegrationRuntimeLicenseType",
             "modelAsString": true
           }
+        },
+        "customSetupScriptProperties": {
+          "description": "Custom setup script properties for a managed dedicated integration runtime.",
+          "$ref": "#/definitions/IntegrationRuntimeCustomSetupScriptProperties"
+        },
+        "dataProxyProperties": {
+          "description": "Data proxy properties for a managed dedicated integration runtime.",
+          "$ref": "#/definitions/IntegrationRuntimeDataProxyProperties"
+        },
+        "edition": {
+          "description": "The edition for the SSIS Integration Runtime",
+          "type": "string",
+          "enum": [
+            "Standard",
+            "Enterprise"
+          ],
+          "x-ms-enum": {
+            "name": "IntegrationRuntimeEdition",
+            "modelAsString": true
+          }
         }
       },
       "additionalProperties": {
@@ -172,21 +191,65 @@
         },
         "catalogPricingTier": {
           "description": "The pricing tier for the catalog database. The valid values could be found in https://azure.microsoft.com/en-us/pricing/details/sql-database/",
-          "type": "string",
-          "enum": [
-            "Basic",
-            "Standard",
-            "Premium",
-            "PremiumRS"
-          ],
-          "x-ms-enum": {
-            "name": "IntegrationRuntimeSsisCatalogPricingTier",
-            "modelAsString": true
-          }
+          "type": "string"
         }
       },
       "additionalProperties": {
         "type": "object"
+      }
+    },
+    "IntegrationRuntimeCustomSetupScriptProperties": {
+      "description": "Custom setup script properties for a managed dedicated integration runtime.",
+      "type": "object",
+      "properties": {
+        "blobContainerUri": {
+          "description": "The URI of the Azure blob container that contains the custom setup script.",
+          "type": "string"
+        },
+        "sasToken": {
+          "description": "The SAS token of the Azure blob container.",
+          "$ref": "../datafactory.json#/definitions/SecureString"
+        }
+      }
+    },
+    "IntegrationRuntimeDataProxyProperties": {
+      "description": "Data proxy properties for a managed dedicated integration runtime.",
+      "type": "object",
+      "properties": {
+        "connectVia": {
+          "description": "The self-hosted integration runtime reference.",
+          "$ref": "#/definitions/EntityReference"
+        },
+        "stagingLinkedService": {
+          "description": "The staging linked service reference.",
+          "$ref": "#/definitions/EntityReference"
+        },
+        "path": {
+          "description": "The path to contain the staged data in the Blob storage.",
+          "type": "string"
+        }
+      }
+    },
+    "EntityReference": {
+      "description": "The entity reference.",
+      "type": "object",
+      "properties": {
+        "type": {
+          "description": "The type of this referenced entity.",
+          "type": "string",
+          "enum": [
+            "IntegrationRuntimeReference",
+            "LinkedServiceReference"
+          ],
+          "x-ms-enum": {
+            "name": "IntegrationRuntimeEntityReferenceType",
+            "modelAsString": true
+          }
+        },
+        "referenceName": {
+          "description": "The name of this referenced entity.",
+          "type": "string"
+        }
       }
     },
     "SelfHostedIntegrationRuntime": {
@@ -197,6 +260,77 @@
         {
           "$ref": "#/definitions/IntegrationRuntime"
         }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "When this property is not null, means this is a linked integration runtime. The property is used to access original integration runtime.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/LinkedIntegrationRuntimeTypeProperties"
+        }
+      },
+      "required": [
+        "typeProperties"
+      ]
+    },
+    "LinkedIntegrationRuntimeTypeProperties": {
+      "description": "The base definition of a secret type.",
+      "type": "object",
+      "properties": {
+        "linkedInfo": {
+          "$ref": "#/definitions/LinkedIntegrationRuntimeProperties"
+        }
+      }
+    },
+    "LinkedIntegrationRuntimeProperties": {
+      "description": "The base definition of a secret type.",
+      "discriminator": "authorizationType",
+      "type": "object",
+      "properties": {
+        "authorizationType": {
+          "type": "string",
+          "description": "Type of the secret."
+        }
+      },
+      "required": [
+        "authorizationType"
+      ]
+    },
+    "LinkedIntegrationRuntimeKey": {
+      "x-ms-discriminator-value": "Key",
+      "description": "The base definition of a secret type.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/LinkedIntegrationRuntimeProperties"
+        }
+      ],
+      "properties": {
+        "key": {
+          "description": "Type of the secret.",
+          "$ref": "../datafactory.json#/definitions/SecureString"
+        }
+      },
+      "required": [
+        "key"
+      ]
+    },
+    "LinkedIntegrationRuntimeRbac": {
+      "x-ms-discriminator-value": "RBAC",
+      "description": "The base definition of a secret type.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/LinkedIntegrationRuntimeProperties"
+        }
+      ],
+      "properties": {
+        "resourceId": {
+          "description": "The resource ID of the integration runtime to be shared.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "resourceId"
       ]
     },
     "IntegrationRuntimeStatus": {
@@ -207,6 +341,11 @@
         "type": {
           "description": "Type of integration runtime.",
           "$ref": "#/definitions/IntegrationRuntimeType"
+        },
+        "dataFactoryName": {
+          "description": "The data factory name which the integration runtime belong to.",
+          "type": "string",
+          "readOnly": true
         },
         "state": {
           "description": "The state of integration runtime.",
@@ -505,6 +644,13 @@
           "description": "Status of the integration runtime version.",
           "type": "string",
           "readOnly": true
+        },
+        "links": {
+          "description": "The list of linked integration runtimes that are created to share with this integration runtime.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/LinkedIntegrationRuntime"
+          }
         }
       }
     },
@@ -519,6 +665,38 @@
       "x-ms-enum": {
         "name": "IntegrationRuntimeAutoUpdate",
         "modelAsString": true
+      }
+    },
+    "LinkedIntegrationRuntime": {
+      "description": "The linked integration runtime information.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "The name of the linked integration runtime.",
+          "type": "string",
+          "readOnly": true
+        },
+        "subscriptionId": {
+          "description": "The subscription ID for which the linked integration runtime belong to.",
+          "type": "string",
+          "readOnly": true
+        },
+        "dataFactoryName": {
+          "description": "The name of the data factory for which the linked integration runtime belong to.",
+          "type": "string",
+          "readOnly": true
+        },
+        "dataFactoryLocation": {
+          "description": "The location of the data factory for which the linked integration runtime belong to.",
+          "type": "string",
+          "readOnly": true
+        },
+        "createTime": {
+          "description": "The creating time of the linked integration runtime.",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        }
       }
     },
     "SelfHostedIntegrationRuntimeNode": {

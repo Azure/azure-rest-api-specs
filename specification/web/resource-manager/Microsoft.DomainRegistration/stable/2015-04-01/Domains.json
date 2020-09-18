@@ -294,7 +294,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Succesfully deleted domain."
+            "description": "Successfully deleted domain."
           },
           "204": {
             "description": "Domain does not exist in Azure database probably because it has already been deleted"
@@ -517,10 +517,10 @@
         ],
         "responses": {
           "200": {
-            "description": "Succesfully deleted domain ownership identifier."
+            "description": "Successfully deleted domain ownership identifier."
           },
           "204": {
-            "description": "Domain ownership identifider does not exist."
+            "description": "Domain ownership identifier does not exist."
           }
         }
       },
@@ -570,6 +570,56 @@
             "description": "OK",
             "schema": {
               "$ref": "#/definitions/DomainOwnershipIdentifier"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DomainRegistration/domains/{domainName}/renew": {
+      "post": {
+        "tags": [
+          "Domains"
+        ],
+        "summary": "Renew a domain.",
+        "description": "Renew a domain.",
+        "operationId": "Domains_Renew",
+        "x-ms-examples": {
+          "Renew an App Service Domain": {
+            "$ref": "./examples/RenewDomain.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "domainName",
+            "in": "path",
+            "description": "Name of the domain.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Domain renewal was successful."
+          },
+          "202": {
+            "description": "Domain renewal in progress."
+          },
+          "204": {
+            "description": "Domain does not exist."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         }
@@ -866,7 +916,7 @@
       }
     },
     "DomainAvailablilityCheckResult": {
-      "description": "Domain availablility check result.",
+      "description": "Domain availability check result.",
       "type": "object",
       "properties": {
         "name": {
@@ -907,7 +957,8 @@
         },
         "nextLink": {
           "description": "Link to next page of resources.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         }
       }
     },
@@ -969,7 +1020,8 @@
         },
         "nextLink": {
           "description": "Link to next page of resources.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         }
       }
     },
@@ -1286,9 +1338,23 @@
         },
         "nextLink": {
           "description": "Link to next page of resources.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         }
       }
+    },
+    "ErrorResponse": {
+      "properties": {
+        "code": {
+          "description": "Error code.",
+          "type": "string"
+        },
+        "message": {
+          "description": "Error message indicating why the operation failed.",
+          "type": "string"
+        }
+      },
+      "description": "Error Response."
     }
   },
   "parameters": {

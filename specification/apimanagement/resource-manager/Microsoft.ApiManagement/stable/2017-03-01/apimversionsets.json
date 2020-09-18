@@ -1,0 +1,467 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "ApiManagementClient",
+    "description": "Use these REST APIs for performing operations on the ApiVersionSet entity associated with your Azure API Management deployment. Using this entity you create and manage API Version Sets that are used to group APIs for consistent versioning.",
+    "version": "2017-03-01"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/api-version-sets": {
+      "parameters": [
+        {
+          "$ref": "./apimanagement.json#/parameters/ResourceGroupNameParameter"
+        },
+        {
+          "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
+        },
+        {
+          "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
+        },
+        {
+          "$ref": "./apimanagement.json#/parameters/SubscriptionIdParameter"
+        }
+      ],
+      "get": {
+        "tags": [
+          "ApiVersionSets"
+        ],
+        "operationId": "ApiVersionSet_ListByService",
+        "description": "Lists a collection of API Version Sets in the specified service instance.",
+        "x-ms-examples": {
+          "ApiManagementListApiVersionSets": {
+            "$ref": "./examples/ApiManagementListApiVersionSets.json"
+          }
+        },
+        "parameters": [
+          {
+            "name": "$filter",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "| Field            | Supported operators    | Supported functions               |\n|------------------|------------------------|-----------------------------------|\n| id               | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |\n| firstName        | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |\n| lastName         | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |\n| email            | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |\n| state            | eq                     | N/A                               |\n| registrationDate | ge, le, eq, ne, gt, lt | N/A                               |\n| note             | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/TopQueryParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/SkipQueryParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Lists a collection of Api Version Set entities.",
+            "schema": {
+              "$ref": "#/definitions/ApiVersionSetCollection"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./apimanagement.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-odata": "#/definitions/ApiVersionSetContract"
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/api-version-sets/{versionSetId}": {
+      "parameters": [
+        {
+          "$ref": "./apimanagement.json#/parameters/ResourceGroupNameParameter"
+        },
+        {
+          "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
+        },
+        {
+          "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
+        },
+        {
+          "$ref": "./apimanagement.json#/parameters/SubscriptionIdParameter"
+        },
+        {
+          "$ref": "#/parameters/ApiVersionSetIdParameter"
+        }
+      ],
+      "head": {
+        "tags": [
+          "ApiVersionSets"
+        ],
+        "operationId": "ApiVersionSet_GetEntityTag",
+        "description": "Gets the entity state (Etag) version of the Api Version Set specified by its identifier.",
+        "x-ms-examples": {
+          "ApiManagementHeadApiVersionSet": {
+            "$ref": "./examples/ApiManagementHeadApiVersionSet.json"
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Specified Api Version Set entity exists and current entity state version is present in the ETag header.",
+            "headers": {
+              "ETag": {
+                "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./apimanagement.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "ApiVersionSets"
+        ],
+        "operationId": "ApiVersionSet_Get",
+        "description": "Gets the details of the Api Version Set specified by its identifier.",
+        "x-ms-examples": {
+          "ApiManagementGetApiVersionSet": {
+            "$ref": "./examples/ApiManagementGetApiVersionSet.json"
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Gets the specified Api Version Set entity.",
+            "schema": {
+              "$ref": "#/definitions/ApiVersionSetContract"
+            },
+            "headers": {
+              "ETag": {
+                "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./apimanagement.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "ApiVersionSets"
+        ],
+        "operationId": "ApiVersionSet_CreateOrUpdate",
+        "description": "Creates or Updates a Api Version Set.",
+        "x-ms-examples": {
+          "ApiManagementCreateApiVersionSet": {
+            "$ref": "./examples/ApiManagementCreateApiVersionSet.json"
+          }
+        },
+        "parameters": [
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ApiVersionSetContract"
+            },
+            "description": "Create or update parameters."
+          },
+          {
+            "name": "If-Match",
+            "in": "header",
+            "required": false,
+            "description": "The entity state (Etag) version of the user to update. A value of \"*\" can be used for If-Match to unconditionally apply the operation.",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Api Version Set was successfully updated.",
+            "schema": {
+              "$ref": "#/definitions/ApiVersionSetContract"
+            }
+          },
+          "201": {
+            "description": "Api Version Set was successfully created.",
+            "schema": {
+              "$ref": "#/definitions/ApiVersionSetContract"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./apimanagement.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "ApiVersionSets"
+        ],
+        "operationId": "ApiVersionSet_Update",
+        "description": "Updates the details of the Api VersionSet specified by its identifier.",
+        "x-ms-examples": {
+          "ApiManagementUpdateApiVersionSet": {
+            "$ref": "./examples/ApiManagementUpdateApiVersionSet.json"
+          }
+        },
+        "parameters": [
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ApiVersionSetUpdateParameters"
+            },
+            "description": "Update parameters."
+          },
+          {
+            "name": "If-Match",
+            "in": "header",
+            "required": true,
+            "description": "The entity state (Etag) version of the user to update. A value of \"*\" can be used for If-Match to unconditionally apply the operation.",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "The Api Version Set details were successfully updated."
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 4XX Error response giving details why the operation failed.",
+            "schema": {
+              "$ref": "./apimanagement.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "ApiVersionSets"
+        ],
+        "operationId": "ApiVersionSet_Delete",
+        "description": "Deletes specific Api Version Set.",
+        "x-ms-examples": {
+          "ApiManagementDeleteApiVersionSet": {
+            "$ref": "./examples/ApiManagementDeleteApiVersionSet.json"
+          }
+        },
+        "parameters": [
+          {
+            "name": "If-Match",
+            "in": "header",
+            "required": true,
+            "description": "The entity state (Etag) version of the Api Version Set to delete. A value of \"*\" can be used for If-Match to unconditionally apply the operation.",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "The ApiVersion Set details were successfully deleted."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./apimanagement.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ApiVersionSetCollection": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ApiVersionSetContract"
+          },
+          "description": "Page values."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Next page link if any."
+        }
+      },
+      "description": "Paged Api Version Set list representation."
+    },
+    "ApiVersionSetEntityBase": {
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "Description of API Version Set."
+        },
+        "versionQueryName": {
+          "type": "string",
+          "description": "Name of query parameter that indicates the API Version if versioningScheme is set to `query`.",
+          "minLength": 1,
+          "maxLength": 100
+        },
+        "versionHeaderName": {
+          "type": "string",
+          "description": "Name of HTTP header parameter that indicates the API Version if versioningScheme is set to `header`.",
+          "minLength": 1,
+          "maxLength": 100
+        }
+      }
+    },
+    "ApiVersionSetContractProperties": {
+      "properties": {
+        "displayName": {
+          "type": "string",
+          "description": "Name of API Version Set",
+          "minLength": 1,
+          "maxLength": 100
+        },
+        "versioningScheme": {
+          "type": "string",
+          "description": "An value that determines where the API Version identifer will be located in a HTTP request.",
+          "enum": [
+            "Segment",
+            "Query",
+            "Header"
+          ],
+          "x-ms-enum": {
+            "name": "versioningScheme",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Segment",
+                "description": "The API Version is passed in a path segment."
+              },
+              {
+                "value": "Query",
+                "description": "The API Version is passed in a query parameter."
+              },
+              {
+                "value": "Header",
+                "description": "The API Version is passed in a HTTP header."
+              }
+            ]
+          }
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ApiVersionSetEntityBase"
+        }
+      ],
+      "required": [
+        "displayName",
+        "versioningScheme"
+      ],
+      "description": "Properties of an API Version Set."
+    },
+    "ApiVersionSetContract": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ApiVersionSetContractProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./apimanagement.json#/definitions/Resource"
+        }
+      ],
+      "description": "Api Version Set Contract details."
+    },
+    "ApiVersionSetUpdateParametersProperties": {
+      "properties": {
+        "displayName": {
+          "type": "string",
+          "description": "Name of API Version Set",
+          "minLength": 1,
+          "maxLength": 100
+        },
+        "versioningScheme": {
+          "type": "string",
+          "description": "An value that determines where the API Version identifer will be located in a HTTP request.",
+          "enum": [
+            "Segment",
+            "Query",
+            "Header"
+          ],
+          "x-ms-enum": {
+            "name": "versioningScheme",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Segment",
+                "description": "The API Version is passed in a path segment."
+              },
+              {
+                "value": "Query",
+                "description": "The API Version is passed in a query parameter."
+              },
+              {
+                "value": "Header",
+                "description": "The API Version is passed in a HTTP header."
+              }
+            ]
+          }
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ApiVersionSetEntityBase"
+        }
+      ],
+      "description": "Properties used to create or update an API Version Set."
+    },
+    "ApiVersionSetUpdateParameters": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ApiVersionSetUpdateParametersProperties",
+          "description": "Parameters to update or create an Api Version Set Contract."
+        }
+      },
+      "description": "Parameters to update or create an Api Version Set Contract."
+    }
+  },
+  "parameters": {
+    "ApiVersionSetIdParameter": {
+      "name": "versionSetId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Api Version Set identifier. Must be unique in the current API Management service instance.",
+      "minLength": 1,
+      "maxLength": 256,
+      "pattern": "^[^*#&+:<>?]+$",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}

@@ -101,6 +101,52 @@
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/products/{productId}": {
+      "head": {
+        "tags": [
+          "Products"
+        ],
+        "operationId": "Product_GetEntityTag",
+        "description": "Gets the entity state (Etag) version of the product specified by its identifier.",
+        "x-ms-examples": {
+          "ApiManagementHeadProduct": {
+            "$ref": "./examples/ApiManagementHeadProduct.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "./apimanagement.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ProductIdParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Specified Product entity exists and current entity state version is present in the ETag header.",
+            "headers": {
+              "ETag": {
+                "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./apimanagement.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
       "get": {
         "tags": [
           "Products"
@@ -254,7 +300,7 @@
         ],
         "responses": {
           "204": {
-            "description": "No Content in case of Update Successfull."
+            "description": "No Content in case of Update Successful."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -382,6 +428,49 @@
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/products/{productId}/apis/{apiId}": {
+      "head": {
+        "tags": [
+          "ProductApis"
+        ],
+        "operationId": "ProductApi_CheckEntityExists",
+        "description": "Checks that API entity specified by identifier is associated with the Product entity.",
+        "x-ms-examples": {
+          "ApiManagementHeadProductApi": {
+            "$ref": "./examples/ApiManagementHeadProductApi.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "./apimanagement.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ProductIdParameter"
+          },
+          {
+            "$ref": "./apimapis.json#/parameters/ApiIdParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Entity exists"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./apimanagement.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
       "put": {
         "tags": [
           "ProductApis"
@@ -541,6 +630,49 @@
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/products/{productId}/groups/{groupId}": {
+      "head": {
+        "tags": [
+          "ProductGroups"
+        ],
+        "operationId": "ProductGroup_CheckEntityExists",
+        "description": "Checks that Group entity specified by identifier is associated with the Product entity.",
+        "x-ms-examples": {
+          "ApiManagementHeadProductGroup": {
+            "$ref": "./examples/ApiManagementHeadProductGroup.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "./apimanagement.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ProductIdParameter"
+          },
+          {
+            "$ref": "./apimgroups.json#/parameters/GroupIdParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Entity exists"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./apimanagement.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
       "put": {
         "tags": [
           "ProductGroups"
@@ -762,6 +894,11 @@
             "$ref": "./examples/ApiManagementGetProductPolicy.json"
           }
         },
+        "produces": [
+          "application/json",
+          "application/vnd.ms-azure-apim.policy+xml",
+          "application/vnd.ms-azure-apim.policy.raw+xml"
+        ],
         "parameters": [
           {
             "$ref": "./apimanagement.json#/parameters/ResourceGroupNameParameter"
@@ -814,6 +951,11 @@
             "$ref": "./examples/ApiManagementCreateProductPolicy.json"
           }
         },
+        "consumes": [
+          "application/json",
+          "application/vnd.ms-azure-apim.policy+xml",
+          "application/vnd.ms-azure-apim.policy.raw+xml"
+        ],
         "parameters": [
           {
             "$ref": "./apimanagement.json#/parameters/ResourceGroupNameParameter"
@@ -984,13 +1126,13 @@
           "type": "boolean"
         },
         "approvalRequired": {
-          "description": "whether subscription approval is required. If false, new subscriptions will be approved automatically enabling developers to call the product’s APIs immediately after subscribing. If true, administrators must manually approve the subscription before the developer can any of the product’s APIs. Can be present only if subscriptionRequired property is present and has a value of false.",
+          "description": "whether subscription approval is required. If false, new subscriptions will be approved automatically enabling developers to call the product’s APIs immediately after subscribing. If true, administrators must manually approve the subscription before the developer can any of the product’s APIs. Can be present only if subscriptionRequired property is present and has a value of true.",
           "type": "boolean"
         },
         "subscriptionsLimit": {
           "type": "integer",
           "format": "int32",
-          "description": "Whether the number of subscriptions a user can have to this product at the same time. Set to null or omit to allow unlimited per user subscriptions. Can be present only if subscriptionRequired property is present and has a value of false."
+          "description": "Whether the number of subscriptions a user can have to this product at the same time. Set to null or omit to allow unlimited per user subscriptions. Can be present only if subscriptionRequired property is present and has a value of true."
         },
         "state": {
           "type": "string",

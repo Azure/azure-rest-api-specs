@@ -236,7 +236,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The operation was successful. The response contains information abouth the cluster.",
+            "description": "The operation was successful. The response contains information about the cluster.",
             "schema": {
               "$ref": "#/definitions/Cluster"
             }
@@ -1063,7 +1063,7 @@
       "description": "Values returned by the List operation."
     },
     "DataDisks": {
-      "properties": {        
+      "properties": {
         "diskSizeInGB": {
           "type": "integer",
           "format": "int32",
@@ -1334,7 +1334,7 @@
         }
       },
       "required": [
-        "vmSize",        
+        "vmSize",
         "userAccountSettings"
       ],
       "description": "The properties of a Cluster."
@@ -1518,7 +1518,7 @@
     "NodeSetup": {
       "properties": {
         "setupTask": {
-          "title": "Specifies a setup task which can be used to customize the compute nodes of the cluster. The NodeSetup task runs everytime a VM is rebooted. For that reason the task code needs to be idempotent. Generally it is used to either download static data that is required for all jobs that run on the cluster VMs or to download/install software.",
+          "title": "Specifies a setup task which can be used to customize the compute nodes of the cluster. The NodeSetup task runs every time a VM is rebooted. For that reason the task code needs to be idempotent. Generally it is used to either download static data that is required for all jobs that run on the cluster VMs or to download/install software.",
           "$ref": "#/definitions/SetupTask"
         },
         "mountVolumes": {
@@ -1608,7 +1608,7 @@
         "vmPriority": {
           "type": "string",
           "title": "dedicated or lowpriority.",
-          "description": "The default value is dedicated. The node can get preempted while the task is running if lowpriority is choosen. This is best suited if the workload is checkpointing and can be restarted.",
+          "description": "The default value is dedicated. The node can get preempted while the task is running if lowpriority is chosen. This is best suited if the workload is checkpointing and can be restarted.",
           "default": "dedicated",
           "enum": [
             "dedicated",
@@ -1795,7 +1795,7 @@
         },
         "jobPreparation": {
           "title": "Specifies the command line to be executed before tool kit is launched.",
-          "description" : "The specified actions will run on all the nodes that are part of the job",
+          "description": "The specified actions will run on all the nodes that are part of the job",
           "$ref": "#/definitions/JobPreparation"
         },
         "stdOutErrPathPrefix": {
@@ -1923,7 +1923,7 @@
         },
         "jobPreparation": {
           "title": "Specifies the actions to be performed before tool kit is launched.",
-          "description" : "The specified actions will run on all the nodes that are part of the job",
+          "description": "The specified actions will run on all the nodes that are part of the job",
           "$ref": "#/definitions/JobPreparation"
         },
         "stdOutErrPathPrefix": {
@@ -1997,7 +1997,7 @@
         "executionState": {
           "type": "string",
           "title": "The current state of the job.",
-          "description": "The current state of the job. Possible values are: queued - The job is queued and able to run. A job enters this state when it is created, or when it is awaiting a retry after a failed run. running - The job is running on a compute cluster. This includes job-level preparation such as downloading resource files or set up container specified on the job - it does not necessarily mean that the job command line has started executing. terminating - The job is terminated by the user, the terminate operation is in progress. succeeded - The job has completed running succesfully and exited with exit code 0. failed - The job has finished unsuccessfully (failed with a non-zero exit code) and has exhausted its retry limit. A job is also marked as failed if an error occurred launching the job.",
+          "description": "The current state of the job. Possible values are: queued - The job is queued and able to run. A job enters this state when it is created, or when it is awaiting a retry after a failed run. running - The job is running on a compute cluster. This includes job-level preparation such as downloading resource files or set up container specified on the job - it does not necessarily mean that the job command line has started executing. terminating - The job is terminated by the user, the terminate operation is in progress. succeeded - The job has completed running successfully and exited with exit code 0. failed - The job has finished unsuccessfully (failed with a non-zero exit code) and has exhausted its retry limit. A job is also marked as failed if an error occurred launching the job.",
           "enum": [
             "queued",
             "running",
@@ -2148,7 +2148,7 @@
         },
         "downloadUrl": {
           "type": "string",
-          "title": "file downloand url, example: https://mystg.blob.core.windows.net/mycontainer/myModel_1.dnn",
+          "title": "file download url, example: https://mystg.blob.core.windows.net/mycontainer/myModel_1.dnn",
           "description": "This will be returned only if the model has been archived. During job run, this won't be returned and customers can use SSH tunneling to download. Users can use Get Remote Login Information API to get the IP address and port information of all the compute nodes running the job."
         },
         "properties": {
@@ -2699,7 +2699,7 @@
         "commandLine": {
           "type": "string",
           "title": "The command line to execute.",
-          "description" : "If containerSettings is specified on the job, this commandLine will be executed in the same container as job. Otherwise it will be executed on the node."
+          "description": "If containerSettings is specified on the job, this commandLine will be executed in the same container as job. Otherwise it will be executed on the node."
         }
       },
       "description": "Specifies the settings for job preparation.",
@@ -2740,7 +2740,7 @@
         "parameterServerCount": {
           "type": "integer",
           "format": "int32",
-          "title": "The number of parmeter server tasks.",
+          "title": "The number of parameter server tasks.",
           "description": "If specified, the value must be less than or equal to nodeCount. If not specified, the default value is equal to 1 for distributed TensorFlow training (This property is not applicable for single machine training). This property can be specified only for distributed TensorFlow training."
         }
       },
@@ -2929,7 +2929,7 @@
       "required": false,
       "type": "string",
       "x-ms-parameter-location": "method",
-      "description": "An OData $select clause. Used to select the properties to be returned in the GET respnose.",
+      "description": "An OData $select clause. Used to select the properties to be returned in the GET response.",
       "x-ms-parameter-grouping": {
         "postfix": "Options"
       }
@@ -2940,7 +2940,7 @@
       "required": false,
       "type": "string",
       "x-ms-parameter-location": "method",
-      "description": "An OData $filter clause.. Used to filter results that are returned in the GET respnose.",
+      "description": "An OData $filter clause. Used to filter results that are returned in the GET response.",
       "x-ms-parameter-grouping": {
         "postfix": "Options"
       }

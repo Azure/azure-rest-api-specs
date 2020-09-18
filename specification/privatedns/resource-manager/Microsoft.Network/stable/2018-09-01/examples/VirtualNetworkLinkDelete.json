@@ -1,0 +1,20 @@
+{
+  "parameters": {
+    "resourceGroupName": "resourceGroup1",
+    "privateZoneName": "privatezone1.com",
+    "virtualNetworkLinkName": "virtualNetworkLink1",
+    "api-version": "2018-09-01",
+    "subscriptionId": "subscriptionId"
+  },
+  "responses": {
+    "200": {},
+    "204": {},
+    "202": {
+      "headers": {
+        "Location": "https://management.azure.com/subscriptions/subscriptionId/resourceGroups/resourceGroup1/providers/Microsoft.Network/privateDnsOperationResults/asyncOperationId?api-version=2018-09-01",
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/subscriptionId/resourceGroups/resourceGroup1/providers/Microsoft.Network/privateDnsOperationStatuses/asyncOperationId?api-version=2018-09-01",
+        "Retry-After": "60"
+      }
+    }
+  }
+}

@@ -295,7 +295,7 @@
             "in": "query",
             "required": false,
             "type": "string",
-            "description": "The return format. Return the response in particular formatxii without access to request headers for standard content-type negotiation (e.g Orders?$format=json). Optional."
+            "description": "The return format. Return the response in particular format without access to request headers for standard content-type negotiation (e.g Orders?$format=json). Optional."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -359,7 +359,7 @@
           "type": "integer",
           "readOnly": true,
           "format": "int32",
-          "description": "the number of failures that occured in this stage."
+          "description": "the number of failures that occurred in this stage."
         },
         "maxVertexDataRead": {
           "type": "integer",
@@ -536,7 +536,6 @@
             "VertexResourceInUserFolder",
             "JobManagerResourceInUserFolder",
             "StatisticsResourceInUserFolder"
-
           ],
           "x-ms-enum": {
             "name": "JobResourceType",
@@ -690,32 +689,32 @@
       },
       "description": "The common Data Lake Analytics job properties."
     },
-    "Diagnostics" : {
+    "Diagnostics": {
       "properties": {
-        "columnNumber" : {
-          "description": "the column where the error occured.",
+        "columnNumber": {
+          "description": "the column where the error occurred.",
           "type": "integer",
           "format": "int32",
           "readOnly": true
         },
-        "end" : {
+        "end": {
           "description": "the ending index of the error.",
           "type": "integer",
           "format": "int32",
           "readOnly": true
         },
-        "lineNumber" : {
-          "description": "the line number the error occured on.",
+        "lineNumber": {
+          "description": "the line number the error occurred on.",
           "type": "integer",
           "format": "int32",
           "readOnly": true
         },
-        "message" : {
+        "message": {
           "description": "the error message.",
           "type": "string",
           "readOnly": true
         },
-        "severity" : {
+        "severity": {
           "description": "the severity of the error.",
           "readOnly": true,
           "type": "string",
@@ -729,7 +728,7 @@
             "modelAsString": false
           }
         },
-        "start" : {
+        "start": {
           "description": "the starting index of the error.",
           "type": "integer",
           "format": "int32",
@@ -779,7 +778,7 @@
           "type": "integer",
           "readOnly": true,
           "format": "int32",
-          "description": "the specific line number in the job where the error occured."
+          "description": "the specific line number in the job where the error occurred."
         },
         "message": {
           "type": "string",
@@ -934,6 +933,11 @@
           "format": "int32",
           "description": "the degree of parallelism used for this job. This must be greater than 0."
         },
+        "degreeOfParallelismPercent": {
+          "type": "number",
+          "format": "double",
+          "description": "the degree of parallelism in percentage used for this job."
+        },
         "priority": {
           "type": "integer",
           "format": "int32",
@@ -1002,7 +1006,7 @@
           "type": "array",
           "items": {
             "type": "string"
-          },        
+          },
           "description": "the list of log file name patterns to find in the logFolder. '*' is the only matching character allowed. Example format: jobExecution*.log or *mylog*.txt"
         },
         "stateAuditRecords": {
@@ -1012,6 +1016,11 @@
             "$ref": "#/definitions/JobStateAuditRecord"
           },
           "description": "the job state audit records, indicating when various operations have been performed on this job."
+        },
+        "hierarchyQueueNode": {
+          "type": "string",
+          "readOnly": true,
+          "description": "the name of hierarchy queue node this job is assigned to, null if job has not been assigned yet or the account doesn't have hierarchy queue."
         },
         "properties": {
           "$ref": "#/definitions/JobProperties",
@@ -1065,7 +1074,8 @@
       "type": "string",
       "default": "azuredatalakeanalytics.net",
       "x-ms-skip-url-encoding": true,
-      "description": "Gets the DNS suffix used as the base for all Azure Data Lake Analytics Job service requests."
+      "description": "Gets the DNS suffix used as the base for all Azure Data Lake Analytics Job service requests.",
+      "x-ms-parameter-location": "client"
     }
   }
 }

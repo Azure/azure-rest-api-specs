@@ -1,132 +1,311 @@
 {
-    "swagger": "2.0",
-    "info": {
-        "version": "2018-01-01",
-        "title": "EventGridClient",
-        "description": "Azure EventGrid Client"
-    },
-    "x-ms-parameterized-host": {
-        "hostTemplate": "{topicHostname}",
-        "useSchemePrefix": true,
-        "positionInOperation": "first",
+  "swagger": "2.0",
+  "info": {
+    "version": "2018-01-01",
+    "title": "EventGridClient",
+    "description": "Azure EventGrid Client"
+  },
+  "x-ms-parameterized-host": {
+    "hostTemplate": "{topicHostname}",
+    "useSchemePrefix": true,
+    "positionInOperation": "first",
+    "parameters": [
+      {
+        "name": "topicHostname",
+        "description": "The host name of the topic, e.g. topic1.westus2-1.eventgrid.azure.net",
+        "required": true,
+        "type": "string",
+        "in": "path",
+        "x-ms-skip-url-encoding": true
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/api/events": {
+      "post": {
+        "tags": [
+          "Events"
+        ],
+        "description": "Publishes a batch of events to an Azure Event Grid topic.",
+        "operationId": "PublishEvents",
         "parameters": [
-            {
-                "name": "topicHostname",
-                "description": "The host name of the topic, e.g. topic1.westus2-1.eventgrid.azure.net",
-                "required": true,
-                "type": "string",
-                "in": "path",
-                "x-ms-skip-url-encoding": true
-            }
-        ]
-    },
-    "schemes": [
-        "https"
-    ],
-    "consumes": [
-        "application/json"
-    ],
-    "produces": [
-        "application/json"
-    ],
-    "paths": {
-        "/api/events": {
-            "post": {
-                "tags": [
-                    "Events"
-                ],
-                "description": "Publishes a batch of events to an Azure Event Grid topic.",
-                "operationId": "PublishEvents",
-                "parameters": [
-                    {
-                        "name": "events",
-                        "description": "An array of events to be published to Event Grid.",
-                        "in": "body",
-                        "required": true,
-                        "schema": {
-                            "type": "array",
-                            "items": {
-                                "$ref": "#/definitions/EventGridEvent"
-                            }
-                        }
-                    },
-                    {
-                        "$ref": "#/parameters/ApiVersionParameter"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK"
-                    },
-                    "default": {
-                        "description": "*** Error Responses: ***\n\n * 400 Bad Request.\n\n * 500 Internal Server Error.\n\n * 429 Too Many Events\n\n * 404 Not Found."
-                    }
-                },
-                "x-ms-examples": {
-                    "PublishEventsToEventGridTopic": {
-                        "$ref": "./examples/PublishEventsToEventGridTopic.json"
-                    }
-                }
-            }
-        }
-    },
-    "definitions": {
-        "EventGridEvent": {
-            "type": "object",
-            "description": "Properties of an event published to an Event Grid topic.",
-            "required": [
-                "id",
-                "subject",
-                "data",
-                "eventType",
-                "eventTime",
-                "dataVersion"
-            ],
-            "properties": {
-                "id": {
-                    "description": "An unique identifier for the event.",
-                    "type": "string"
-                },
-                "topic": {
-                    "description": "The resource path of the event source.",
-                    "type": "string"
-                },
-                "subject": {
-                    "description": "A resource path relative to the topic path.",
-                    "type": "string"
-                },
-                "data": {
-                    "description": "Event data specific to the event type.",
-                    "type": "object"
-                },
-                "eventType": {
-                    "description": "The type of the event that occurred.",
-                    "type": "string"
-                },
-                "eventTime": {
-                    "description": "The time (in UTC) the event was generated.",
-                    "format": "date-time",
-                    "type": "string"
-                },
-                "metadataVersion": {
-                    "description": "The schema version of the event metadata.",
-                    "readOnly": true,
-                    "type": "string"
-                },
-                "dataVersion": {
-                    "description": "The schema version of the data object.",
-                    "type": "string"
-                }
-            }
-        }
-    },
-    "parameters": {
-        "ApiVersionParameter": {
-            "name": "api-version",
-            "in": "query",
-            "description": "Version of the API to be used with the client request.",
+          {
+            "name": "events",
+            "description": "An array of events to be published to Event Grid.",
+            "in": "body",
             "required": true,
-            "type": "string"
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/EventGridEvent"
+              }
+            }
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 Bad Request.\n\n * 500 Internal Server Error.\n\n * 429 Too Many Events\n\n * 404 Not Found."
+          }
+        },
+        "x-ms-examples": {
+          "PublishEventsToEventGridTopic": {
+            "$ref": "./examples/PublishEventsToEventGridTopic.json"
+          }
         }
+      }
     }
+  },
+  "x-ms-paths": {
+    "/api/events?overload=cloudEvent": {
+      "post": {
+        "consumes": [
+          "application/cloudevents-batch+json; charset=utf-8"
+        ],
+        "tags": [
+          "Events"
+        ],
+        "description": "Publishes a batch of events to an Azure Event Grid topic.",
+        "operationId": "PublishCloudEventEvents",
+        "parameters": [
+          {
+            "name": "events",
+            "description": "An array of events to be published to Event Grid.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/CloudEventEvent"
+              }
+            }
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 Bad Request.\n\n * 500 Internal Server Error.\n\n * 429 Too Many Events\n\n * 404 Not Found."
+          }
+        },
+        "x-ms-examples": {
+          "PublishEventsToEventGridTopicAsCloudEvents": {
+            "$ref": "./examples/PublishEventsToEventGridTopicAsCloudEvents.json"
+          }
+        }
+      }
+    },
+    "/api/events?overload=customEvent": {
+      "post": {
+        "tags": [
+          "Events"
+        ],
+        "description": "Publishes a batch of events to an Azure Event Grid topic.",
+        "operationId": "PublishCustomEventEvents",
+        "parameters": [
+          {
+            "name": "events",
+            "description": "An array of events to be published to Event Grid.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/CustomEventEvent"
+              }
+            }
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 Bad Request.\n\n * 500 Internal Server Error.\n\n * 429 Too Many Events\n\n * 404 Not Found."
+          }
+        },
+        "x-ms-examples": {
+          "PublishEventsToEventGridTopicAsCloudEvents": {
+            "$ref": "./examples/PublishEventsToEventGridTopicAsCustomSchemaEvents.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "EventGridEvent": {
+      "type": "object",
+      "description": "Properties of an event published to an Event Grid topic using the EventGrid Schema.",
+      "required": [
+        "id",
+        "subject",
+        "data",
+        "eventType",
+        "eventTime",
+        "dataVersion"
+      ],
+      "properties": {
+        "id": {
+          "description": "An unique identifier for the event.",
+          "type": "string"
+        },
+        "topic": {
+          "description": "The resource path of the event source.",
+          "type": "string"
+        },
+        "subject": {
+          "description": "A resource path relative to the topic path.",
+          "type": "string"
+        },
+        "data": {
+          "description": "Event data specific to the event type.",
+          "type": "object"
+        },
+        "eventType": {
+          "description": "The type of the event that occurred.",
+          "type": "string"
+        },
+        "eventTime": {
+          "description": "The time (in UTC) the event was generated.",
+          "format": "date-time",
+          "type": "string"
+        },
+        "metadataVersion": {
+          "description": "The schema version of the event metadata.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "dataVersion": {
+          "description": "The schema version of the data object.",
+          "type": "string"
+        }
+      }
+    },
+    "CloudEventEvent": {
+      "type": "object",
+      "description": "Properties of an event published to an Event Grid topic using the CloudEvent 1.0 Schema",
+      "required": [
+        "type",
+        "specversion",
+        "source",
+        "id"
+      ],
+      "properties": {
+        "id": {
+          "description": "An identifier for the event. The combination of id and source must be unique for each distinct event.",
+          "type": "string"
+        },
+        "source": {
+          "description": "Identifies the context in which an event happened. The combination of id and source must be unique for each distinct event.",
+          "type": "string"
+        },
+        "data": {
+          "description": "Event data specific to the event type.",
+          "type": "object"
+        },
+        "data_base64": {
+          "description": "Event data specific to the event type, encoded as a base64 string.",
+          "type": "string",
+          "format": "byte"
+        },
+        "type": {
+          "description": "Type of event related to the originating occurrence.",
+          "type": "string"
+        },
+        "time": {
+          "description": "The time (in UTC) the event was generated, in RFC3339 format.",
+          "format": "date-time",
+          "type": "string"
+        },
+        "specversion": {
+          "description": "The version of the CloudEvents specification which the event uses.",
+          "type": "string"
+        },
+        "dataschema": {
+          "description": "Identifies the schema that data adheres to.",
+          "type": "string"
+        },
+        "datacontenttype": {
+          "description": "Content type of data value.",
+          "type": "string"
+        },
+        "subject": {
+          "description": "This describes the subject of the event in the context of the event producer (identified by source).",
+          "type": "string"
+        }
+      },
+      "additionalProperties": true
+    },
+    "CustomEventEvent": {
+      "type": "object",
+      "description": "Properties of an event published to an Event Grid topic using a custom schema"
+    },
+    "SubscriptionValidationEventData": {
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.EventGrid.SubscriptionValidationEvent.",
+      "type": "object",
+      "properties": {
+        "validationCode": {
+          "description": "The validation code sent by Azure Event Grid to validate an event subscription. To complete the validation handshake, the subscriber must either respond with this validation code as part of the validation response, or perform a GET request on the validationUrl (available starting version 2018-05-01-preview).",
+          "type": "string",
+          "readOnly": true
+        },
+        "validationUrl": {
+          "description": "The validation URL sent by Azure Event Grid (available starting version 2018-05-01-preview). To complete the validation handshake, the subscriber must either respond with the validationCode as part of the validation response, or perform a GET request on the validationUrl (available starting version 2018-05-01-preview).",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "SubscriptionValidationResponse": {
+      "description": "To complete an event subscription validation handshake, a subscriber can use either the validationCode or the validationUrl received in a SubscriptionValidationEvent. When the validationCode is used, the SubscriptionValidationResponse can be used to build the response.",
+      "type": "object",
+      "properties": {
+        "validationResponse": {
+          "description": "The validation response sent by the subscriber to Azure Event Grid to complete the validation of an event subscription.",
+          "type": "string"
+        }
+      }
+    },
+    "SubscriptionDeletedEventData": {
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.EventGrid.SubscriptionDeletedEvent.",
+      "type": "object",
+      "properties": {
+        "eventSubscriptionId": {
+          "description": "The Azure resource ID of the deleted event subscription.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    }
+  },
+  "parameters": {
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "description": "Version of the API to be used with the client request.",
+      "required": true,
+      "type": "string"
+    }
+  }
 }

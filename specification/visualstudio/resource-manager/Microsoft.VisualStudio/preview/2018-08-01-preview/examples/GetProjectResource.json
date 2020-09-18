@@ -1,0 +1,38 @@
+{
+  "parameters": {
+    "subscriptionId": "0de7f055-dbea-498d-8e9e-da287eedca90",
+    "resourceGroupName": "VS-Example-Group",
+    "rootResourceName": "ExampleAccount",
+    "resourceName": "ExampleProject",
+    "api-version": "2018-08-01-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/0de7f055-dbea-498d-8e9e-da287eedca90/resourceGroups/VS-Example-Group/providers/microsoft.visualstudio/account/ExampleAccount/project/ExampleProject",
+        "name": "ExampleProject",
+        "type": "microsoft.visualstudio/account/project",
+        "location": "North Central US",
+        "tags": {},
+        "kind": "bootstrappedProject",
+        "properties": {
+          "processTemplateId": "Scrum",
+          "versionControlOption": "Git",
+          "tfsUniqueIdentifier": "vstfs:///Classification/TeamProject/7a4e6ba5-35bf-4667-86a4-9b598a88fa25",
+          "pipelineBootstrapConfigurations": [
+            {
+              "name": "ExampleApplicationDeployPipelineConfiguration",
+              "templateId": "ms-portal-extension-nodejsAppOnWindowsWebApp",
+              "templateParameters": {
+                "webAppName": "ExampleWebApp",
+                "servicePlanTier": "Standard",
+                "azureAuth": null
+              }
+            }
+          ]
+        }
+      }
+    },
+    "404": {}
+  }
+}

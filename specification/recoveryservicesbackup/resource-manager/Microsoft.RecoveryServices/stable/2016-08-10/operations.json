@@ -38,10 +38,9 @@
             }
           }
         },
-        "deprecated": false,
         "x-ms-pageable": {
-          "nextLinkName": "NextLink",
-          "itemName": "Value"
+          "nextLinkName": "nextLink",
+          "itemName": "value"
         },
         "x-ms-examples": {
           "ListOperations": {
@@ -56,20 +55,20 @@
       "description": "Localized display information of an operation.",
       "type": "object",
       "properties": {
-        "Provider": {
+        "provider": {
           "description": "Name of the provider for display purposes",
           "type": "string"
         },
-        "Resource": {
-          "description": "Name of the resource type for display purposes",
+        "resource": {
+          "description": "ResourceType for which this Operation can be performed.",
           "type": "string"
         },
-        "Operation": {
-          "description": "Name of the operation for display purposes",
+        "operation": {
+          "description": "Operations Name itself.",
           "type": "string"
         },
-        "Description": {
-          "description": "Description of the operation for display purposes",
+        "description": {
+          "description": "Description of the operation having details of what operation is about.",
           "type": "string"
         }
       }
@@ -79,7 +78,7 @@
       "type": "object",
       "properties": {
         "name": {
-          "description": "Name",
+          "description": "Name for shoebox log specification.",
           "type": "string"
         },
         "displayName": {
@@ -87,7 +86,7 @@
           "type": "string"
         },
         "blobDuration": {
-          "description": "blob duration",
+          "description": "blob duration of shoebox log specification",
           "type": "string"
         }
       }
@@ -119,15 +118,15 @@
       "description": "Operations List response which contains list of available APIs.",
       "type": "object",
       "properties": {
-        "Value": {
-          "description": "List of available operationss.",
+        "value": {
+          "description": "List of available operations.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/ClientDiscoveryValueForSingleApi"
           }
         },
-        "NextLink": {
-          "description": "NextLink",
+        "nextLink": {
+          "description": "Link to the next chunk of Response.",
           "type": "string"
         }
       }
@@ -136,21 +135,21 @@
       "description": "Available operation details.",
       "type": "object",
       "properties": {
-        "Name": {
-          "description": "Name",
+        "name": {
+          "description": "Name of the Operation.",
           "type": "string"
         },
-        "Display": {
+        "display": {
           "$ref": "#/definitions/ClientDiscoveryDisplay",
           "description": "Contains the localized display information for this particular operation"
         },
-        "Origin": {
+        "origin": {
           "description": "The intended executor of the operation;governs the display of the operation in the RBAC UX and the audit logs UX",
           "type": "string"
         },
-        "Properties": {
+        "properties": {
           "$ref": "#/definitions/ClientDiscoveryForProperties",
-          "description": "Properties"
+          "description": "ShoeBox properties for the given operation."
         }
       }
     }

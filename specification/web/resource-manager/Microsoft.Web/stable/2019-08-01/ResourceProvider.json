@@ -1,0 +1,1319 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2019-08-01",
+    "title": " API Client"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/providers/Microsoft.Web/publishingUsers/web": {
+      "get": {
+        "summary": "Gets publishing user",
+        "description": "Description for Gets publishing user",
+        "operationId": "GetPublishingUser",
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/User"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "summary": "Updates publishing user",
+        "description": "Description for Updates publishing user",
+        "operationId": "UpdatePublishingUser",
+        "parameters": [
+          {
+            "name": "userDetails",
+            "in": "body",
+            "description": "Details of publishing user",
+            "required": true,
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/User"
+            }
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/User"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Web/sourcecontrols": {
+      "get": {
+        "summary": "Gets the source controls available for Azure websites.",
+        "description": "Description for Gets the source controls available for Azure websites.",
+        "operationId": "ListSourceControls",
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SourceControlCollection"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.Web/sourcecontrols/{sourceControlType}": {
+      "get": {
+        "summary": "Gets source control token",
+        "description": "Description for Gets source control token",
+        "operationId": "GetSourceControl",
+        "parameters": [
+          {
+            "name": "sourceControlType",
+            "in": "path",
+            "description": "Type of source control",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SourceControl"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "summary": "Updates source control token",
+        "description": "Description for Updates source control token",
+        "operationId": "UpdateSourceControl",
+        "parameters": [
+          {
+            "name": "sourceControlType",
+            "in": "path",
+            "description": "Type of source control",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "requestMessage",
+            "in": "body",
+            "description": "Source control token information",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SourceControl"
+            }
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SourceControl"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Web/billingMeters": {
+      "get": {
+        "summary": "Gets a list of meters for a given location.",
+        "description": "Description for Gets a list of meters for a given location.",
+        "operationId": "ListBillingMeters",
+        "parameters": [
+          {
+            "name": "billingLocation",
+            "in": "query",
+            "description": "Azure Location of billable resource",
+            "type": "string"
+          },
+          {
+            "name": "osType",
+            "in": "query",
+            "description": "App Service OS type meters used for",
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/BillingMeterCollection"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Web/checknameavailability": {
+      "post": {
+        "summary": "Check if a resource name is available.",
+        "description": "Description for Check if a resource name is available.",
+        "operationId": "CheckNameAvailability",
+        "parameters": [
+          {
+            "name": "request",
+            "in": "body",
+            "description": "Name availability request.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ResourceNameAvailabilityRequest"
+            },
+            "x-ms-client-flatten": true
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResourceNameAvailability"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Web/deploymentLocations": {
+      "get": {
+        "summary": "Gets list of available geo regions plus ministamps",
+        "description": "Description for Gets list of available geo regions plus ministamps",
+        "operationId": "GetSubscriptionDeploymentLocations",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/DeploymentLocations"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Web/geoRegions": {
+      "get": {
+        "summary": "Get a list of available geographical regions.",
+        "description": "Description for Get a list of available geographical regions.",
+        "operationId": "ListGeoRegions",
+        "parameters": [
+          {
+            "name": "sku",
+            "in": "query",
+            "description": "Name of SKU used to filter the regions.",
+            "type": "string",
+            "enum": [
+              "Free",
+              "Shared",
+              "Basic",
+              "Standard",
+              "Premium",
+              "Dynamic",
+              "Isolated",
+              "PremiumV2",
+              "ElasticPremium",
+              "ElasticIsolated"
+            ],
+            "x-ms-enum": {
+              "name": "SkuName",
+              "modelAsString": true
+            }
+          },
+          {
+            "name": "linuxWorkersEnabled",
+            "in": "query",
+            "description": "Specify <code>true</code> if you want to filter to only regions that support Linux workers.",
+            "type": "boolean"
+          },
+          {
+            "name": "xenonWorkersEnabled",
+            "in": "query",
+            "description": "Specify <code>true</code> if you want to filter to only regions that support Xenon workers.",
+            "type": "boolean"
+          },
+          {
+            "name": "linuxDynamicWorkersEnabled",
+            "in": "query",
+            "description": "Specify <code>true</code> if you want to filter to only regions that support Linux Consumption Workers.",
+            "type": "boolean"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/GeoRegionCollection"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Web/listSitesAssignedToHostName": {
+      "post": {
+        "summary": "List all apps that are assigned to a hostname.",
+        "description": "Description for List all apps that are assigned to a hostname.",
+        "operationId": "ListSiteIdentifiersAssignedToHostName",
+        "parameters": [
+          {
+            "name": "nameIdentifier",
+            "in": "body",
+            "description": "Hostname information.",
+            "required": true,
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/NameIdentifier"
+            }
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/IdentifierCollection"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Web/premieraddonoffers": {
+      "get": {
+        "summary": "List all premier add-on offers.",
+        "description": "Description for List all premier add-on offers.",
+        "operationId": "ListPremierAddOnOffers",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/PremierAddOnOfferCollection"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Web/skus": {
+      "get": {
+        "summary": "List all SKUs.",
+        "description": "Description for List all SKUs.",
+        "operationId": "ListSkus",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SkuInfos"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Web/verifyHostingEnvironmentVnet": {
+      "post": {
+        "summary": "Verifies if this VNET is compatible with an App Service Environment by analyzing the Network Security Group rules.",
+        "description": "Description for Verifies if this VNET is compatible with an App Service Environment by analyzing the Network Security Group rules.",
+        "operationId": "VerifyHostingEnvironmentVnet",
+        "parameters": [
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "VNET information",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/VnetParameters"
+            }
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/VnetValidationFailureDetails"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "VerifyHostingEnvironmentVnet": {
+            "$ref": "./examples/VerifyHostingEnvironmentVnet.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/moveResources": {
+      "post": {
+        "summary": "Move resources between resource groups.",
+        "description": "Description for Move resources between resource groups.",
+        "operationId": "Move",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "moveResourceEnvelope",
+            "in": "body",
+            "description": "Object that represents the resource to move.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CsmMoveResourceEnvelope"
+            }
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/validate": {
+      "post": {
+        "summary": "Validate if a resource can be created.",
+        "description": "Description for Validate if a resource can be created.",
+        "operationId": "Validate",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "validateRequest",
+            "in": "body",
+            "description": "Request with the resources to validate.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ValidateRequest"
+            }
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ValidateResponse"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/validateMoveResources": {
+      "post": {
+        "summary": "Validate whether a resource can be moved.",
+        "description": "Description for Validate whether a resource can be moved.",
+        "operationId": "ValidateMove",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "moveResourceEnvelope",
+            "in": "body",
+            "description": "Object that represents the resource to move.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CsmMoveResourceEnvelope"
+            }
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "BillingMeter": {
+      "description": "App Service billing entity that contains information about meter which the Azure billing system utilizes to charge users for services.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "./CommonDefinitions.json#/definitions/ProxyOnlyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "BillingMeter resource specific properties",
+          "properties": {
+            "meterId": {
+              "description": "Meter GUID onboarded in Commerce",
+              "type": "string"
+            },
+            "billingLocation": {
+              "description": "Azure Location of billable resource",
+              "type": "string"
+            },
+            "shortName": {
+              "description": "Short Name from App Service Azure pricing Page",
+              "type": "string"
+            },
+            "friendlyName": {
+              "description": "Friendly name of the meter",
+              "type": "string"
+            },
+            "resourceType": {
+              "description": "App Service ResourceType meter used for",
+              "type": "string"
+            },
+            "osType": {
+              "description": "App Service OS type meter used for",
+              "type": "string"
+            }
+          },
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "BillingMeterCollection": {
+      "description": "Collection of Billing Meters",
+      "required": [
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Collection of resources.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/BillingMeter"
+          }
+        },
+        "nextLink": {
+          "description": "Link to next page of resources.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "CsmMoveResourceEnvelope": {
+      "description": "Object with a list of the resources that need to be moved and the resource group they should be moved to.",
+      "type": "object",
+      "properties": {
+        "targetResourceGroup": {
+          "maxLength": 90,
+          "minLength": 1,
+          "pattern": " ^[-\\w\\._\\(\\)]+[^\\.]$",
+          "type": "string"
+        },
+        "resources": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "DeploymentLocations": {
+      "description": "List of available locations (regions or App Service Environments) for\ndeployment of App Service resources.",
+      "type": "object",
+      "properties": {
+        "locations": {
+          "description": "Available regions.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/GeoRegion"
+          }
+        },
+        "hostingEnvironments": {
+          "description": "Available App Service Environments with full descriptions of the environments.",
+          "type": "array",
+          "items": {
+            "$ref": "./CommonDefinitions.json#/definitions/AppServiceEnvironment"
+          }
+        },
+        "hostingEnvironmentDeploymentInfos": {
+          "description": "Available App Service Environments with basic information.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/HostingEnvironmentDeploymentInfo"
+          }
+        }
+      }
+    },
+    "GeoRegion": {
+      "description": "Geographical region.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "./CommonDefinitions.json#/definitions/ProxyOnlyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "GeoRegion resource specific properties",
+          "properties": {
+            "description": {
+              "description": "Region description.",
+              "type": "string",
+              "readOnly": true
+            },
+            "displayName": {
+              "description": "Display name for region.",
+              "type": "string",
+              "readOnly": true
+            },
+            "orgDomain": {
+              "description": "Display name for region.",
+              "type": "string",
+              "readOnly": true
+            }
+          },
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "GeoRegionCollection": {
+      "description": "Collection of geographical regions.",
+      "required": [
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Collection of resources.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/GeoRegion"
+          }
+        },
+        "nextLink": {
+          "description": "Link to next page of resources.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "GlobalCsmSkuDescription": {
+      "description": "A Global SKU Description.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Name of the resource SKU.",
+          "type": "string"
+        },
+        "tier": {
+          "description": "Service Tier of the resource SKU.",
+          "type": "string"
+        },
+        "size": {
+          "description": "Size specifier of the resource SKU.",
+          "type": "string"
+        },
+        "family": {
+          "description": "Family code of the resource SKU.",
+          "type": "string"
+        },
+        "capacity": {
+          "$ref": "./CommonDefinitions.json#/definitions/SkuCapacity",
+          "description": "Min, max, and default scale values of the SKU."
+        },
+        "locations": {
+          "description": "Locations of the SKU.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "capabilities": {
+          "description": "Capabilities of the SKU, e.g., is traffic manager enabled?",
+          "type": "array",
+          "items": {
+            "$ref": "./CommonDefinitions.json#/definitions/Capability"
+          }
+        }
+      }
+    },
+    "HostingEnvironmentDeploymentInfo": {
+      "description": "Information needed to create resources on an App Service Environment.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Name of the App Service Environment.",
+          "type": "string"
+        },
+        "location": {
+          "description": "Location of the App Service Environment.",
+          "type": "string"
+        }
+      }
+    },
+    "PremierAddOnOffer": {
+      "description": "Premier add-on offer.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "./CommonDefinitions.json#/definitions/ProxyOnlyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "PremierAddOnOffer resource specific properties",
+          "properties": {
+            "sku": {
+              "description": "Premier add on SKU.",
+              "type": "string"
+            },
+            "product": {
+              "description": "Premier add on offer Product.",
+              "type": "string"
+            },
+            "vendor": {
+              "description": "Premier add on offer Vendor.",
+              "type": "string"
+            },
+            "promoCodeRequired": {
+              "description": "<code>true</code> if promotion code is required; otherwise, <code>false</code>.",
+              "type": "boolean"
+            },
+            "quota": {
+              "format": "int32",
+              "description": "Premier add on offer Quota.",
+              "type": "integer"
+            },
+            "webHostingPlanRestrictions": {
+              "description": "App Service plans this offer is restricted to.",
+              "enum": [
+                "None",
+                "Free",
+                "Shared",
+                "Basic",
+                "Standard",
+                "Premium"
+              ],
+              "type": "string",
+              "x-ms-enum": {
+                "name": "AppServicePlanRestrictions",
+                "modelAsString": false
+              }
+            },
+            "privacyPolicyUrl": {
+              "description": "Privacy policy URL.",
+              "type": "string"
+            },
+            "legalTermsUrl": {
+              "description": "Legal terms URL.",
+              "type": "string"
+            },
+            "marketplacePublisher": {
+              "description": "Marketplace publisher.",
+              "type": "string"
+            },
+            "marketplaceOffer": {
+              "description": "Marketplace offer.",
+              "type": "string"
+            }
+          },
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "PremierAddOnOfferCollection": {
+      "description": "Collection of premier add-on offers.",
+      "required": [
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Collection of resources.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PremierAddOnOffer"
+          }
+        },
+        "nextLink": {
+          "description": "Link to next page of resources.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "ResourceNameAvailability": {
+      "description": "Information regarding availability of a resource name.",
+      "type": "object",
+      "properties": {
+        "nameAvailable": {
+          "description": "<code>true</code> indicates name is valid and available. <code>false</code> indicates the name is invalid, unavailable, or both.",
+          "type": "boolean"
+        },
+        "reason": {
+          "description": "<code>Invalid</code> indicates the name provided does not match Azure App Service naming requirements. <code>AlreadyExists</code> indicates that the name is already in use and is therefore unavailable.",
+          "enum": [
+            "Invalid",
+            "AlreadyExists"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "InAvailabilityReasonType",
+            "modelAsString": true
+          }
+        },
+        "message": {
+          "description": "If reason == invalid, provide the user with the reason why the given name is invalid, and provide the resource naming requirements so that the user can select a valid name. If reason == AlreadyExists, explain that resource name is already in use, and direct them to select a different name.",
+          "type": "string"
+        }
+      }
+    },
+    "ResourceNameAvailabilityRequest": {
+      "description": "Resource name availability request content.",
+      "required": [
+        "name",
+        "type"
+      ],
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Resource name to verify.",
+          "type": "string"
+        },
+        "type": {
+          "description": "Resource type used for verification.",
+          "enum": [
+            "Site",
+            "Slot",
+            "HostingEnvironment",
+            "PublishingUser",
+            "Microsoft.Web/sites",
+            "Microsoft.Web/sites/slots",
+            "Microsoft.Web/hostingEnvironments",
+            "Microsoft.Web/publishingUsers"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "CheckNameResourceTypes",
+            "modelAsString": true
+          }
+        },
+        "isFqdn": {
+          "description": "Is fully qualified domain name.",
+          "type": "boolean"
+        }
+      }
+    },
+    "SkuInfos": {
+      "description": "Collection of SKU information.",
+      "type": "object",
+      "properties": {
+        "resourceType": {
+          "description": "Resource type that this SKU applies to.",
+          "type": "string"
+        },
+        "skus": {
+          "description": "List of SKUs the subscription is able to use.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/GlobalCsmSkuDescription"
+          }
+        }
+      }
+    },
+    "SourceControl": {
+      "description": "The source control OAuth token.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "./CommonDefinitions.json#/definitions/ProxyOnlyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "SourceControl resource specific properties",
+          "properties": {
+            "token": {
+              "description": "OAuth access token.",
+              "type": "string"
+            },
+            "tokenSecret": {
+              "description": "OAuth access token secret.",
+              "type": "string"
+            },
+            "refreshToken": {
+              "description": "OAuth refresh token.",
+              "type": "string"
+            },
+            "expirationTime": {
+              "format": "date-time",
+              "description": "OAuth token expiration.",
+              "type": "string"
+            }
+          },
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "SourceControlCollection": {
+      "description": "Collection of source controls.",
+      "required": [
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Collection of resources.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SourceControl"
+          }
+        },
+        "nextLink": {
+          "description": "Link to next page of resources.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "ValidateProperties": {
+      "description": "App properties used for validation.",
+      "type": "object",
+      "properties": {
+        "serverFarmId": {
+          "description": "ARM resource ID of an App Service plan that would host the app.",
+          "type": "string"
+        },
+        "skuName": {
+          "description": "Name of the target SKU for the App Service plan.",
+          "type": "string"
+        },
+        "needLinuxWorkers": {
+          "description": "<code>true</code> if App Service plan is for Linux workers; otherwise, <code>false</code>.",
+          "type": "boolean"
+        },
+        "isSpot": {
+          "description": "<code>true</code> if App Service plan is for Spot instances; otherwise, <code>false</code>.",
+          "type": "boolean"
+        },
+        "capacity": {
+          "format": "int32",
+          "description": "Target capacity of the App Service plan (number of VMs).",
+          "minimum": 1,
+          "type": "integer"
+        },
+        "hostingEnvironment": {
+          "description": "Name of App Service Environment where app or App Service plan should be created.",
+          "type": "string"
+        },
+        "isXenon": {
+          "description": "<code>true</code> if App Service plan is running as a windows container",
+          "type": "boolean"
+        },
+        "containerRegistryBaseUrl": {
+          "description": "Base URL of the container registry",
+          "type": "string"
+        },
+        "containerRegistryUsername": {
+          "description": "Username for to access the container registry",
+          "type": "string"
+        },
+        "containerRegistryPassword": {
+          "description": "Password for to access the container registry",
+          "type": "string"
+        },
+        "containerImageRepository": {
+          "description": "Repository name (image name)",
+          "type": "string"
+        },
+        "containerImageTag": {
+          "description": "Image tag",
+          "type": "string"
+        },
+        "containerImagePlatform": {
+          "description": "Platform (windows or linux)",
+          "type": "string"
+        }
+      }
+    },
+    "ValidateRequest": {
+      "description": "Resource validation request content.",
+      "required": [
+        "name",
+        "type",
+        "location",
+        "properties"
+      ],
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Resource name to verify.",
+          "type": "string"
+        },
+        "type": {
+          "description": "Resource type used for verification.",
+          "enum": [
+            "ServerFarm",
+            "Site"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "ValidateResourceTypes",
+            "modelAsString": true
+          }
+        },
+        "location": {
+          "description": "Expected location of the resource.",
+          "type": "string"
+        },
+        "properties": {
+          "$ref": "#/definitions/ValidateProperties",
+          "description": "Properties of the resource to validate.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "ValidateResponse": {
+      "description": "Describes the result of resource validation.",
+      "type": "object",
+      "properties": {
+        "status": {
+          "description": "Result of validation.",
+          "type": "string"
+        },
+        "error": {
+          "$ref": "#/definitions/ValidateResponseError",
+          "description": "Error details for the case when validation fails."
+        }
+      }
+    },
+    "ValidateResponseError": {
+      "description": "Error details for when validation fails.",
+      "type": "object",
+      "properties": {
+        "code": {
+          "description": "Validation error code.",
+          "type": "string"
+        },
+        "message": {
+          "description": "Validation error message.",
+          "type": "string"
+        }
+      }
+    },
+    "VnetParameters": {
+      "description": "The required set of inputs to validate a VNET",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "./CommonDefinitions.json#/definitions/ProxyOnlyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "VnetParameters resource specific properties",
+          "properties": {
+            "vnetResourceGroup": {
+              "description": "The Resource Group of the VNET to be validated",
+              "type": "string"
+            },
+            "vnetName": {
+              "description": "The name of the VNET to be validated",
+              "type": "string"
+            },
+            "vnetSubnetName": {
+              "description": "The subnet name to be validated",
+              "type": "string"
+            }
+          },
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "VnetValidationFailureDetails": {
+      "description": "A class that describes the reason for a validation failure.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "./CommonDefinitions.json#/definitions/ProxyOnlyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "VnetValidationFailureDetails resource specific properties",
+          "properties": {
+            "failed": {
+              "description": "A flag describing whether or not validation failed.",
+              "type": "boolean"
+            },
+            "failedTests": {
+              "description": "A list of tests that failed in the validation.",
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/VnetValidationTestFailure"
+              }
+            }
+          },
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "VnetValidationTestFailure": {
+      "description": "A class that describes a test that failed during NSG and UDR validation.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "./CommonDefinitions.json#/definitions/ProxyOnlyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "VnetValidationTestFailure resource specific properties",
+          "properties": {
+            "testName": {
+              "description": "The name of the test that failed.",
+              "type": "string"
+            },
+            "details": {
+              "description": "The details of what caused the failure, e.g. the blocking rule name, etc.",
+              "type": "string"
+            }
+          },
+          "x-ms-client-flatten": true
+        }
+      }
+    }
+  },
+  "parameters": {
+    "subscriptionIdParameter": {
+      "name": "subscriptionId",
+      "in": "path",
+      "description": "Your Azure subscription ID. This is a GUID-formatted string (e.g. 00000000-0000-0000-0000-000000000000).",
+      "required": true,
+      "type": "string"
+    },
+    "resourceGroupNameParameter": {
+      "name": "resourceGroupName",
+      "in": "path",
+      "description": "Name of the resource group to which the resource belongs.",
+      "required": true,
+      "type": "string",
+      "maxLength": 90,
+      "minLength": 1,
+      "pattern": "^[-\\w\\._\\(\\)]+[^\\.]$",
+      "x-ms-parameter-location": "method"
+    },
+    "apiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "description": "API Version",
+      "required": true,
+      "type": "string"
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ]
+}

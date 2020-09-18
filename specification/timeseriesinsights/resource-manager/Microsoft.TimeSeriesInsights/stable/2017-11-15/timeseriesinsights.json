@@ -42,7 +42,9 @@
         "operationId": "Operations_List",
         "description": "Lists all of the available Time Series Insights related operations.",
         "x-ms-examples": {
-          "List available operations for the Time Series Insights resource provider": { "$ref": "./examples/Operation_List.json" }
+          "List available operations for the Time Series Insights resource provider": {
+            "$ref": "./examples/Operation_List.json"
+          }
         },
         "parameters": [
           {
@@ -69,7 +71,9 @@
         ],
         "operationId": "Environments_CreateOrUpdate",
         "x-ms-examples": {
-          "EnvironmentsCreate": { "$ref": "./examples/EnvironmentsCreate.json" }
+          "EnvironmentsCreate": {
+            "$ref": "./examples/EnvironmentsCreate.json"
+          }
         },
         "x-ms-long-running-operation": true,
         "description": "Create or update an environment in the specified subscription and resource group.",
@@ -111,7 +115,7 @@
             }
           },
           "201": {
-            "description": "The environment create request was accepted. Environment provisioning is an asynchroneous operation. You can periodically get your environment definition and monitor progress via the provisioningState property.",
+            "description": "The environment create request was accepted. Environment provisioning is an asynchronous operation. You can periodically get your environment definition and monitor progress via the provisioningState property.",
             "schema": {
               "$ref": "#/definitions/EnvironmentResource"
             }
@@ -133,7 +137,9 @@
         ],
         "operationId": "Environments_Get",
         "x-ms-examples": {
-          "EnvironmentsGet": { "$ref": "./examples/EnvironmentsGet.json" }
+          "EnvironmentsGet": {
+            "$ref": "./examples/EnvironmentsGet.json"
+          }
         },
         "description": "Gets the environment with the specified name in the specified subscription and resource group.",
         "parameters": [
@@ -145,6 +151,9 @@
           },
           {
             "$ref": "#/parameters/EnvironmentNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ExpandParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -171,7 +180,9 @@
         ],
         "operationId": "Environments_Update",
         "x-ms-examples": {
-          "EnvironmentsUpdate": { "$ref": "./examples/EnvironmentsPatchSkuCapacity.json" }
+          "EnvironmentsUpdate": {
+            "$ref": "./examples/EnvironmentsPatchSkuCapacity.json"
+          }
         },
         "x-ms-long-running-operation": true,
         "description": "Updates the environment with the specified name in the specified subscription and resource group.",
@@ -200,7 +211,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The environment definition was successfully updated and is in the response. If the environment was updated synchroneously, the response will include a provisioningState value of \"Succeeded\". If the environment was updated asynchroneously, the response will include a provisioningState value of \"Updating\".  You can periodically get your environment definition and monitor progress of the update via the provisioningState property.",
+            "description": "The environment definition was successfully updated and is in the response. If the environment was updated synchronously, the response will include a provisioningState value of \"Succeeded\". If the environment was updated asynchronously, the response will include a provisioningState value of \"Updating\".  You can periodically get your environment definition and monitor progress of the update via the provisioningState property.",
             "schema": {
               "$ref": "#/definitions/EnvironmentResource"
             }
@@ -219,7 +230,9 @@
         ],
         "operationId": "Environments_Delete",
         "x-ms-examples": {
-          "EnvironmentsDelete": { "$ref": "./examples/EnvironmentsDelete.json" }
+          "EnvironmentsDelete": {
+            "$ref": "./examples/EnvironmentsDelete.json"
+          }
         },
         "description": "Deletes the environment with the specified name in the specified subscription and resource group.",
         "parameters": [
@@ -259,7 +272,9 @@
         ],
         "operationId": "Environments_ListByResourceGroup",
         "x-ms-examples": {
-          "EnvironmentsByResourceGroup": { "$ref": "./examples/EnvironmentsListByResourceGroup.json" }
+          "EnvironmentsByResourceGroup": {
+            "$ref": "./examples/EnvironmentsListByResourceGroup.json"
+          }
         },
         "description": "Lists all the available environments associated with the subscription and within the specified resource group.",
         "parameters": [
@@ -296,7 +311,9 @@
         ],
         "operationId": "Environments_ListBySubscription",
         "x-ms-examples": {
-          "EnvironmentsBySubscription": { "$ref": "./examples/EnvironmentsListBySubscription.json" }
+          "EnvironmentsBySubscription": {
+            "$ref": "./examples/EnvironmentsListBySubscription.json"
+          }
         },
         "description": "Lists all the available environments within a subscription, irrespective of the resource groups.",
         "parameters": [
@@ -330,7 +347,9 @@
         ],
         "operationId": "EventSources_CreateOrUpdate",
         "x-ms-examples": {
-          "CreateEventHubEventSource": { "$ref": "./examples/EventSourcesCreateEventHub.json" }
+          "CreateEventHubEventSource": {
+            "$ref": "./examples/EventSourcesCreateEventHub.json"
+          }
         },
         "description": "Create or update an event source under the specified environment.",
         "parameters": [
@@ -393,7 +412,9 @@
         ],
         "operationId": "EventSources_Get",
         "x-ms-examples": {
-          "GetEventHubEventSource": { "$ref": "./examples/EventSourcesGetEventHub.json" }
+          "GetEventHubEventSource": {
+            "$ref": "./examples/EventSourcesGetEventHub.json"
+          }
         },
         "description": "Gets the event source with the specified name in the specified environment.",
         "parameters": [
@@ -434,7 +455,9 @@
         ],
         "operationId": "EventSources_Update",
         "x-ms-examples": {
-          "UpdateEventSource": { "$ref": "./examples/EventSourcesPatchTags.json" }
+          "UpdateEventSource": {
+            "$ref": "./examples/EventSourcesPatchTags.json"
+          }
         },
         "description": "Updates the event source with the specified name in the specified subscription, resource group, and environment.",
         "parameters": [
@@ -484,7 +507,9 @@
         ],
         "operationId": "EventSources_Delete",
         "x-ms-examples": {
-          "DeleteEventSource": { "$ref": "./examples/EventSourcesDelete.json" }
+          "DeleteEventSource": {
+            "$ref": "./examples/EventSourcesDelete.json"
+          }
         },
         "description": "Deletes the event source with the specified name in the specified subscription, resource group, and environment",
         "parameters": [
@@ -527,7 +552,9 @@
         ],
         "operationId": "EventSources_ListByEnvironment",
         "x-ms-examples": {
-          "ListEventSourcesByEnvironment": { "$ref": "./examples/EventSourcesListByEnvironment.json" }
+          "ListEventSourcesByEnvironment": {
+            "$ref": "./examples/EventSourcesListByEnvironment.json"
+          }
         },
         "description": "Lists all the available event sources associated with the subscription and within the specified resource group and environment.",
         "parameters": [
@@ -567,7 +594,9 @@
         ],
         "operationId": "ReferenceDataSets_CreateOrUpdate",
         "x-ms-examples": {
-          "ReferenceDataSetsCreate": { "$ref": "./examples/ReferenceDataSetsCreate.json" }
+          "ReferenceDataSetsCreate": {
+            "$ref": "./examples/ReferenceDataSetsCreate.json"
+          }
         },
         "description": "Create or update a reference data set in the specified environment.",
         "parameters": [
@@ -630,7 +659,9 @@
         ],
         "operationId": "ReferenceDataSets_Get",
         "x-ms-examples": {
-          "ReferenceDataSetsGet": { "$ref": "./examples/ReferenceDataSetsGet.json" }
+          "ReferenceDataSetsGet": {
+            "$ref": "./examples/ReferenceDataSetsGet.json"
+          }
         },
         "description": "Gets the reference data set with the specified name in the specified environment.",
         "parameters": [
@@ -671,7 +702,9 @@
         ],
         "operationId": "ReferenceDataSets_Update",
         "x-ms-examples": {
-          "ReferenceDataSetsUpdate": { "$ref": "./examples/ReferenceDataSetsPatchTags.json" }
+          "ReferenceDataSetsUpdate": {
+            "$ref": "./examples/ReferenceDataSetsPatchTags.json"
+          }
         },
         "description": "Updates the reference data set with the specified name in the specified subscription, resource group, and environment.",
         "parameters": [
@@ -721,7 +754,9 @@
         ],
         "operationId": "ReferenceDataSets_Delete",
         "x-ms-examples": {
-          "ReferenceDataSetsDelete": { "$ref": "./examples/ReferenceDataSetsDelete.json" }
+          "ReferenceDataSetsDelete": {
+            "$ref": "./examples/ReferenceDataSetsDelete.json"
+          }
         },
         "description": "Deletes the reference data set with the specified name in the specified subscription, resource group, and environment",
         "parameters": [
@@ -764,7 +799,9 @@
         ],
         "operationId": "ReferenceDataSets_ListByEnvironment",
         "x-ms-examples": {
-          "ReferenceDataSetsListByEnvironment": { "$ref": "./examples/ReferenceDataSetsListByEnvironment.json" }
+          "ReferenceDataSetsListByEnvironment": {
+            "$ref": "./examples/ReferenceDataSetsListByEnvironment.json"
+          }
         },
         "description": "Lists all the available reference data sets associated with the subscription and within the specified resource group and environment.",
         "parameters": [
@@ -804,7 +841,9 @@
         ],
         "operationId": "AccessPolicies_CreateOrUpdate",
         "x-ms-examples": {
-          "AccessPoliciesCreate": { "$ref": "./examples/AccessPoliciesCreate.json" }
+          "AccessPoliciesCreate": {
+            "$ref": "./examples/AccessPoliciesCreate.json"
+          }
         },
         "description": "Create or update an access policy in the specified environment.",
         "parameters": [
@@ -867,7 +906,9 @@
         ],
         "operationId": "AccessPolicies_Get",
         "x-ms-examples": {
-          "AccessPoliciesGet": { "$ref": "./examples/AccessPoliciesGet.json" }
+          "AccessPoliciesGet": {
+            "$ref": "./examples/AccessPoliciesGet.json"
+          }
         },
         "description": "Gets the access policy with the specified name in the specified environment.",
         "parameters": [
@@ -908,7 +949,9 @@
         ],
         "operationId": "AccessPolicies_Update",
         "x-ms-examples": {
-          "AccessPoliciesUpdate": { "$ref": "./examples/AccessPoliciesPatchRoles.json" }
+          "AccessPoliciesUpdate": {
+            "$ref": "./examples/AccessPoliciesPatchRoles.json"
+          }
         },
         "description": "Updates the access policy with the specified name in the specified subscription, resource group, and environment.",
         "parameters": [
@@ -958,7 +1001,9 @@
         ],
         "operationId": "AccessPolicies_Delete",
         "x-ms-examples": {
-          "AccessPoliciesDelete": { "$ref": "./examples/AccessPoliciesDelete.json" }
+          "AccessPoliciesDelete": {
+            "$ref": "./examples/AccessPoliciesDelete.json"
+          }
         },
         "description": "Deletes the access policy with the specified name in the specified subscription, resource group, and environment",
         "parameters": [
@@ -1001,7 +1046,9 @@
         ],
         "operationId": "AccessPolicies_ListByEnvironment",
         "x-ms-examples": {
-          "AccessPoliciesByEnvironment": { "$ref": "./examples/AccessPoliciesListByEnvironment.json" }
+          "AccessPoliciesByEnvironment": {
+            "$ref": "./examples/AccessPoliciesListByEnvironment.json"
+          }
         },
         "description": "Lists all the available access policies associated with the environment.",
         "parameters": [
@@ -1116,7 +1163,11 @@
       "properties": {
         "location": {
           "type": "string",
-          "description": "Resource location"
+          "description": "Resource location",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         },
         "tags": {
           "type": "object",
@@ -1139,21 +1190,8 @@
     "ResourceProperties": {
       "properties": {
         "provisioningState": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Provisioning state of the resource.",
-          "enum": [
-            "Accepted",
-            "Creating",
-            "Updating",
-            "Succeeded",
-            "Failed",
-            "Deleting"
-          ],
-          "x-ms-enum": {
-            "name": "ProvisioningState",
-            "modelAsString": false
-          }
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "Provisioning state of the resource."
         },
         "creationTime": {
           "readOnly": true,
@@ -1163,6 +1201,23 @@
         }
       },
       "description": "Properties that are common to all tracked resources."
+    },
+    "ProvisioningState": {
+      "readOnly": true,
+      "type": "string",
+      "description": "Provisioning state of the resource.",
+      "enum": [
+        "Accepted",
+        "Creating",
+        "Updating",
+        "Succeeded",
+        "Failed",
+        "Deleting"
+      ],
+      "x-ms-enum": {
+        "name": "ProvisioningState",
+        "modelAsString": false
+      }
     },
     "Sku": {
       "type": "object",
@@ -1197,7 +1252,11 @@
       "properties": {
         "location": {
           "type": "string",
-          "description": "The location of the resource."
+          "description": "The location of the resource.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         },
         "tags": {
           "type": "object",
@@ -1215,7 +1274,8 @@
     "EnvironmentCreateOrUpdateParameters": {
       "properties": {
         "sku": {
-          "$ref": "#/definitions/Sku"
+          "$ref": "#/definitions/Sku",
+          "description": "The sku determines the capacity of the environment, the SLA (in queries-per-minute and total capacity), and the billing rate."
         },
         "properties": {
           "x-ms-client-flatten": true,
@@ -1270,7 +1330,8 @@
     "EnvironmentResource": {
       "properties": {
         "sku": {
-          "$ref": "#/definitions/Sku"
+          "$ref": "#/definitions/Sku",
+          "description": "The sku determines the capacity of the environment, the SLA (in queries-per-minute and total capacity), and the billing rate."
         },
         "properties": {
           "x-ms-client-flatten": true,
@@ -1282,7 +1343,7 @@
           "$ref": "#/definitions/TrackedResource"
         }
       ],
-      "description": "An environment is a set of time-series data avaliable for query, and is the top level Azure Time Series Insights resource."
+      "description": "An environment is a set of time-series data available for query, and is the top level Azure Time Series Insights resource."
     },
     "EnvironmentCreationProperties": {
       "properties": {
@@ -1294,11 +1355,21 @@
         "storageLimitExceededBehavior": {
           "type": "string",
           "description": "The behavior the Time Series Insights service should take when the environment's capacity has been exceeded. If \"PauseIngress\" is specified, new events will not be read from the event source. If \"PurgeOldData\" is specified, new events will continue to be read and old events will be deleted from the environment. The default behavior is PurgeOldData.",
-          "enum": [ "PurgeOldData", "PauseIngress" ],
+          "enum": [
+            "PurgeOldData",
+            "PauseIngress"
+          ],
           "x-ms-enum": {
             "name": "StorageLimitExceededBehavior",
             "modelAsString": false
           }
+        },
+        "partitionKeyProperties": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PartitionKeyProperty"
+          },
+          "description": "The list of partition keys according to which the data in the environment will be ordered."
         }
       },
       "required": [
@@ -1318,6 +1389,10 @@
           "readOnly": true,
           "type": "string",
           "description": "The fully qualified domain name used to access the environment data, e.g. to query the environment's events or upload reference data for the environment."
+        },
+        "status": {
+          "$ref": "#/definitions/EnvironmentStatus",
+          "description": "An object that represents the status of the environment, and its internal state in the Time Series Insights service."
         }
       },
       "allOf": [
@@ -1345,11 +1420,93 @@
         "storageLimitExceededBehavior": {
           "type": "string",
           "description": "The behavior the Time Series Insights service should take when the environment's capacity has been exceeded. If \"PauseIngress\" is specified, new events will not be read from the event source. If \"PurgeOldData\" is specified, new events will continue to be read and old events will be deleted from the environment. The default behavior is PurgeOldData.",
-          "enum": [ "PurgeOldData", "PauseIngress" ],
+          "enum": [
+            "PurgeOldData",
+            "PauseIngress"
+          ],
           "x-ms-enum": {
             "name": "StorageLimitExceededBehavior",
             "modelAsString": false
           }
+        },
+        "partitionKeyProperties": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PartitionKeyProperty"
+          },
+          "description": "The list of event properties which will be used to partition data in the environment."
+        }
+      }
+    },
+    "PartitionKeyProperty": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the property."
+        },
+        "type": {
+          "type": "string",
+          "description": "The type of the property.",
+          "enum": [
+            "String"
+          ],
+          "x-ms-enum": {
+            "name": "PropertyType",
+            "modelAsString": true
+          }
+        }
+      },
+      "description": "The structure of the property that a partition key can have. An environment can have multiple such properties."
+    },
+    "EnvironmentStatus": {
+      "readOnly": true,
+      "type": "object",
+      "description": "An object that represents the status of the environment, and its internal state in the Time Series Insights service.",
+      "properties": {
+        "ingress": {
+          "$ref": "#/definitions/IngressEnvironmentStatus",
+          "description": "An object that represents the status of ingress on an environment."
+        }
+      }
+    },
+    "IngressEnvironmentStatus": {
+      "readOnly": true,
+      "type": "object",
+      "description": "An object that represents the status of ingress on an environment.",
+      "properties": {
+        "state": {
+          "type": "string",
+          "description": "This string represents the state of ingress operations on an environment. It can be \"Disabled\", \"Ready\", \"Running\", \"Paused\" or \"Unknown\"",
+          "enum": [
+            "Disabled",
+            "Ready",
+            "Running",
+            "Paused",
+            "Unknown"
+          ],
+          "x-ms-enum": {
+            "name": "IngressState",
+            "modelAsString": false
+          }
+        },
+        "stateDetails": {
+          "$ref": "#/definitions/EnvironmentStateDetails",
+          "description": "An object that contains the details about an environment's state."
+        }
+      }
+    },
+    "EnvironmentStateDetails": {
+      "readOnly": true,
+      "type": "object",
+      "description": "An object that contains the details about an environment's state.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "Contains the code that represents the reason of an environment being in a particular state. Can be used to programmatically handle specific cases."
+        },
+        "message": {
+          "type": "string",
+          "description": "A message that describes the state in detail."
         }
       }
     },
@@ -1479,7 +1636,10 @@
         "kind": {
           "type": "string",
           "description": "The kind of the event source.",
-          "enum": [ "Microsoft.EventHub", "Microsoft.IoTHub" ]
+          "enum": [
+            "Microsoft.EventHub",
+            "Microsoft.IoTHub"
+          ]
         }
       },
       "required": [
@@ -1673,7 +1833,7 @@
       "type": "object",
       "properties": {
         "format": {
-          "description": "An enum that represents the format of the local timestamp property that needs to be set.", 
+          "description": "An enum that represents the format of the local timestamp property that needs to be set.",
           "type": "string",
           "enum": [
             "Embedded",
@@ -1691,7 +1851,7 @@
           "properties": {
             "propertyName": {
               "type": "string",
-              "description":  "The event property that will be contain the offset information to calculate the local timestamp. When the LocalTimestampFormat is Iana, the property name will contain the name of the column which contains IANA Timezone Name (eg: Americas/Los Angeles). When LocalTimestampFormat is Timespan, it contains the name of property which contains values representing the offset (eg: P1D or 1.00:00:00)" 
+              "description": "The event property that will be contain the offset information to calculate the local timestamp. When the LocalTimestampFormat is Iana, the property name will contain the name of the column which contains IANA Timezone Name (eg: Americas/Los Angeles). When LocalTimestampFormat is Timespan, it contains the name of property which contains values representing the offset (eg: P1D or 1.00:00:00)"
             }
           }
         }
@@ -1706,7 +1866,8 @@
           "description": "The event property that will be used as the event source's timestamp. If a value isn't specified for timestampPropertyName, or if null or empty-string is specified, the event creation time will be used."
         },
         "localTimestamp": {
-          "$ref": "#/definitions/LocalTimestamp"
+          "$ref": "#/definitions/LocalTimestamp",
+          "description": "An object that represents the local timestamp property. It contains the format of local timestamp that needs to be used and the corresponding timezone offset information. If a value isn't specified for localTimestamp, or if null, then the local timestamp will not be ingressed with the events."
         }
       }
     },
@@ -1803,6 +1964,18 @@
             "$ref": "#/definitions/ReferenceDataSetKeyProperty"
           },
           "description": "The list of key properties for the reference data set."
+        },
+        "dataStringComparisonBehavior": {
+          "type": "string",
+          "description": "The reference data set key comparison behavior can be set using this property. By default, the value is 'Ordinal' - which means case sensitive key comparison will be performed while joining reference data with events or while adding new reference data. When 'OrdinalIgnoreCase' is set, case insensitive comparison will be used.",
+          "enum": [
+            "Ordinal",
+            "OrdinalIgnoreCase"
+          ],
+          "x-ms-enum": {
+            "name": "DataStringComparisonBehavior",
+            "modelAsString": false
+          }
         }
       },
       "required": [
@@ -1864,10 +2037,7 @@
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/AccessPolicyMutableProperties"
         }
-      },
-      "required": [
-        "properties"
-      ]
+      }
     },
     "AccessPolicyListResponse": {
       "properties": {
@@ -1953,7 +2123,8 @@
       "type": "object",
       "properties": {
         "error": {
-          "$ref": "#/definitions/CloudErrorBody"
+          "$ref": "#/definitions/CloudErrorBody",
+          "description": "Describes a particular API error with an error code and a message."
         }
       },
       "description": "Contains information about an API error.",
@@ -1965,7 +2136,7 @@
       "properties": {
         "code": {
           "type": "string",
-          "description": "An error code that describes the error condition more precisely than an HTTP status code. Can be used to programatically handle specific error cases."
+          "description": "An error code that describes the error condition more precisely than an HTTP status code. Can be used to programmatically handle specific error cases."
         },
         "message": {
           "type": "string",
@@ -1978,7 +2149,8 @@
         "details": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/CloudErrorBody"
+            "$ref": "#/definitions/CloudErrorBody",
+            "description": "Describes a particular API error with an error code and a message."
           },
           "description": "Contains nested errors that are related to this error."
         }
@@ -2000,6 +2172,14 @@
       "required": true,
       "type": "string",
       "description": "Version of the API to be used with the client request."
+    },
+    "ExpandParameter": {
+      "name": "$expand",
+      "in": "query",
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "description": "Setting $expand=status will include the status of the internal services of the environment in the Time Series Insights service."
     },
     "ResourceGroupNameParameter": {
       "name": "resourceGroupName",

@@ -1,0 +1,164 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2015-11-01",
+    "title": "SubscriptionsManagementClient",
+    "description": "The Admin Subscriptions Management Client."
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Subscriptions.Admin/locations/{location}/quotas": {
+      "get": {
+        "x-ms-examples": {
+          "Get the list of quotas at a location.": {
+            "$ref": "./examples/Quota/List.json"
+          }
+        },
+        "tags": [
+          "Quotas"
+        ],
+        "description": "Get the list of quotas at a location.",
+        "operationId": "Quotas_List",
+        "parameters": [
+          {
+            "$ref": "Subscriptions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "Subscriptions.json#/parameters/LocationParameter"
+          },
+          {
+            "$ref": "Subscriptions.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/QuotaList"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Subscriptions.Admin/locations/{location}/quotas/{quota}": {
+      "get": {
+        "x-ms-examples": {
+          "Gets a quota by name.": {
+            "$ref": "./examples/Quota/Get.json"
+          }
+        },
+        "description": "Gets a quota by name.",
+        "tags": [
+          "Quotas"
+        ],
+        "operationId": "Quotas_Get",
+        "parameters": [
+          {
+            "$ref": "Subscriptions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "Subscriptions.json#/parameters/LocationParameter"
+          },
+          {
+            "$ref": "#/parameters/QuotaParameter"
+          },
+          {
+            "$ref": "Subscriptions.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Quota"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Quota": {
+      "description": "Quotas for DelegatedProviders.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "description": "Quotas for DelegatedProviders.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/QuotaProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "Subscriptions.json#/definitions/Resource"
+        }
+      ]
+    },
+    "QuotaProperties": {
+      "description": "Quotas for DelegatedProviders.",
+      "type": "object",
+      "properties": {
+        "allowCustomPortalBranding": {
+          "description": "Value indicating whether custom portal branding is allowed.",
+          "type": "boolean"
+        }
+      }
+    },
+    "QuotaList": {
+      "description": "List of quotas.",
+      "properties": {
+        "value": {
+          "description": "List of quotas.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Quota"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "URI to next page."
+        }
+      }
+    }
+  },
+  "parameters": {
+    "QuotaParameter": {
+      "name": "quota",
+      "in": "path",
+      "description": "Name of the quota.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ]
+}

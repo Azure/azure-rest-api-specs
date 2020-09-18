@@ -1,0 +1,198 @@
+{
+  "swagger": "2.0",
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "info": {
+    "version": "v1",
+    "title": "Common types"
+  },
+  "paths": {},
+  "definitions": {
+    "AuthenticationMode": {
+      "type": "string",
+      "description": "Authentication Mode. Valid modes are `ConnectionString`, `Msi` and 'UserToken'.",
+      "enum": [
+        "Msi",
+        "UserToken",
+        "ConnectionString"
+      ],
+      "x-ms-enum": {
+        "name": "AuthenticationMode",
+        "modelAsString": true
+      }
+    },
+    "Resource": {
+      "properties": {
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Fully qualified resource Id for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}"
+        },
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The name of the resource"
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The type of the resource. Ex- Microsoft.Compute/virtualMachines or Microsoft.Storage/storageAccounts."
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "TrackedResource": {
+      "description": "The resource model definition for a ARM tracked top level resource",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "x-ms-mutability": [
+            "read",
+            "create",
+            "update"
+          ],
+          "description": "Resource tags."
+        },
+        "location": {
+          "type": "string",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ],
+          "description": "The geo-location where the resource lives"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ]
+    },
+    "ProxyResource": {
+      "description": "The resource model definition for a ARM proxy resource. It will have everything other than required location and tags",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ]
+    },
+    "Error": {
+      "properties": {
+        "error": {
+          "properties": {
+            "code": {
+              "type": "string",
+              "description": "Error code."
+            },
+            "message": {
+              "type": "string",
+              "description": "Error message."
+            },
+            "target": {
+              "type": "string",
+              "description": "Error target."
+            },
+            "details": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/ErrorDetails"
+              },
+              "description": "Error details."
+            }
+          },
+          "description": "Error definition properties."
+        }
+      },
+      "description": "Common error representation."
+    },
+    "ErrorDetails": {
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "Error code."
+        },
+        "target": {
+          "type": "string",
+          "description": "Error target."
+        },
+        "message": {
+          "type": "string",
+          "description": "Error message."
+        }
+      },
+      "description": "Common error details representation."
+    }
+  },
+  "parameters": {
+    "IfMatchHeader": {
+      "name": "If-Match",
+      "in": "header",
+      "required": false,
+      "type": "string",
+      "description": "The ETag of the resource. Omit this value to always overwrite the current record set. Specify the last-seen ETag value to prevent accidentally overwriting concurrent changes.",
+      "x-ms-parameter-location": "method"
+    },
+    "IfNoneMatchHeader": {
+      "name": "If-None-Match",
+      "in": "header",
+      "required": false,
+      "type": "string",
+      "description": "Set to '*' to allow a new resource to be created, but to prevent updating an existing record set. Other values will result in a 412 Pre-condition Failed response.",
+      "x-ms-parameter-location": "method"
+    },
+    "StreamingJobNameParameter": {
+      "name": "jobName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the streaming job.",
+      "x-ms-parameter-location": "method"
+    },
+    "SubscriptionIdParameter": {
+      "name": "subscriptionId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The ID of the target subscription.",
+      "minLength": 1
+    },
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "The API version to use for this operation.",
+      "minLength": 1
+    },
+    "ResourceGroupNameParameter": {
+      "name": "resourceGroupName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the resource group. The name is case insensitive.",
+      "pattern": "^[-\\w\\._\\(\\)]+$",
+      "minLength": 1,
+      "maxLength": 90,
+      "x-ms-parameter-location": "method"
+    }
+  }
+}

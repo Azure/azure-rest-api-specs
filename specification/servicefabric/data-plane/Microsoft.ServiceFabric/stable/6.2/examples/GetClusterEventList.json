@@ -1,0 +1,55 @@
+{
+  "operationId": "GetClusterEventList",
+  "description": "This example shows how to get all cluster-related events during a certain time window.",
+  "parameters": {
+    "api-version": "6.2-preview",
+    "StartTimeUtc": "2018-04-03T18:00:00Z",
+    "EndTimeUtc": "2018-04-04T18:00:00Z"
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "body": [
+        {
+          "Kind": "ClusterUpgradeStart",
+          "CurrentClusterVersion": "0.0.0.0:",
+          "TargetClusterVersion": "6.2:1.0",
+          "UpgradeType": "Rolling",
+          "RollingUpgradeMode": "UnmonitoredAuto",
+          "FailureAction": "Manual",
+          "EventInstanceId": "090add3c-8f56-4d35-8d57-a855745b6064",
+          "TimeStamp": "2018-04-03T20:18:59.4313064Z",
+          "HasCorrelatedEvents": false
+        },
+        {
+          "Kind": "ClusterUpgradeDomainComplete",
+          "TargetClusterVersion": "6.2:1.0",
+          "UpgradeState": "RollingForward",
+          "UpgradeDomains": "(0 1 2)",
+          "UpgradeDomainElapsedTimeInMs": 78.5288,
+          "EventInstanceId": "090add3c-8f56-4d35-8d57-a855745b6064",
+          "TimeStamp": "2018-04-03T20:19:59.5729953Z",
+          "HasCorrelatedEvents": false
+        },
+        {
+          "Kind": "ClusterUpgradeDomainComplete",
+          "TargetClusterVersion": "6.2:1.0",
+          "UpgradeState": "RollingForward",
+          "UpgradeDomains": "(3 4)",
+          "UpgradeDomainElapsedTimeInMs": 0.0,
+          "EventInstanceId": "090add3c-8f56-4d35-8d57-a855745b6064",
+          "TimeStamp": "2018-04-03T20:20:59.6271949Z",
+          "HasCorrelatedEvents": false
+        },
+        {
+          "Kind": "ClusterUpgradeComplete",
+          "TargetClusterVersion": "6.2:1.0",
+          "OverallUpgradeElapsedTimeInMs": 120196.5212,
+          "EventInstanceId": "090add3c-8f56-4d35-8d57-a855745b6064",
+          "TimeStamp": "2018-04-03T20:20:59.8134457Z",
+          "HasCorrelatedEvents": false
+        }
+      ]
+    }
+  }
+}

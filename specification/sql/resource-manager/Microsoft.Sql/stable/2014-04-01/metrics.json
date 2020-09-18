@@ -24,17 +24,19 @@
         "operationId": "Databases_ListMetrics",
         "description": "Returns database metrics.",
         "x-ms-examples": {
-          "List database usage metrics": { "$ref": "./examples/DatabaseMetricsListWithFilter.json" }
+          "List database usage metrics": {
+            "$ref": "./examples/DatabaseMetricsListWithFilter.json"
+          }
         },
         "parameters": [
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ResourceGroupParameter"
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
           },
           {
             "$ref": "#/parameters/ServerNameParameter"
@@ -75,17 +77,19 @@
         "operationId": "Databases_ListMetricDefinitions",
         "description": "Returns database metric definitions.",
         "x-ms-examples": {
-          "List database usage metrics": { "$ref": "./examples/DatabaseMetricsDefinitionsList.json" }
+          "List database usage metrics": {
+            "$ref": "./examples/DatabaseMetricsDefinitionsList.json"
+          }
         },
         "parameters": [
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ResourceGroupParameter"
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
           },
           {
             "$ref": "#/parameters/ServerNameParameter"
@@ -119,17 +123,19 @@
         "operationId": "ElasticPools_ListMetrics",
         "description": "Returns elastic pool  metrics.",
         "x-ms-examples": {
-          "List database usage metrics": { "$ref": "./examples/ElasticPoolMetricsListWithFilter.json" }
+          "List database usage metrics": {
+            "$ref": "./examples/ElasticPoolMetricsListWithFilter.json"
+          }
         },
         "parameters": [
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ResourceGroupParameter"
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
           },
           {
             "$ref": "#/parameters/ServerNameParameter"
@@ -170,17 +176,19 @@
         "operationId": "ElasticPools_ListMetricDefinitions",
         "description": "Returns elastic pool metric definitions.",
         "x-ms-examples": {
-          "List database usage metrics": { "$ref": "./examples/ElasticPoolMetricsDefinitionsList.json" }
+          "List database usage metrics": {
+            "$ref": "./examples/ElasticPoolMetricsDefinitionsList.json"
+          }
         },
         "parameters": [
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ResourceGroupParameter"
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
           },
           {
             "$ref": "#/parameters/ServerNameParameter"
@@ -208,35 +216,6 @@
     }
   },
   "definitions": {
-    "Resource":{
-      "description":"ARM resource.",
-      "properties":{
-        "id":{
-          "readOnly":true,
-          "type":"string",
-          "description":"Resource ID."
-        },
-        "name":{
-          "readOnly":true,
-          "type":"string",
-          "description":"Resource name."
-        },
-        "type":{
-          "readOnly":true,
-          "type":"string",
-          "description":"Resource type."
-        }
-      },
-      "x-ms-azure-resource": true
-    },
-    "ProxyResource":{
-      "description":"ARM proxy resource.",
-      "allOf":[
-        {
-          "$ref":"#/definitions/Resource"
-        }
-      ]
-    },
     "MetricValue": {
       "properties": {
         "count": {
@@ -316,7 +295,14 @@
           "readOnly": true,
           "type": "string",
           "description": "The unit of the metric.",
-          "enum": ["count", "bytes", "seconds", "percent", "countPerSecond", "bytesPerSecond"],
+          "enum": [
+            "count",
+            "bytes",
+            "seconds",
+            "percent",
+            "countPerSecond",
+            "bytesPerSecond"
+          ],
           "x-ms-enum": {
             "modelAsString": true,
             "name": "UnitType"
@@ -348,7 +334,9 @@
           "description": "The list of metrics for the database."
         }
       },
-      "required": ["value"],
+      "required": [
+        "value"
+      ],
       "description": "The response to a list database metrics request."
     },
     "MetricAvailability": {
@@ -377,7 +365,14 @@
           "readOnly": true,
           "type": "string",
           "description": "The primary aggregation type defining how metric values are displayed.",
-          "enum": ["None", "Average", "Count", "Minimum", "Maximum", "Total"],
+          "enum": [
+            "None",
+            "Average",
+            "Count",
+            "Minimum",
+            "Maximum",
+            "Total"
+          ],
           "x-ms-enum": {
             "modelAsString": true,
             "name": "PrimaryAggregationType"
@@ -392,7 +387,14 @@
           "readOnly": true,
           "type": "string",
           "description": "The unit of the metric.",
-          "enum": ["Count", "Bytes", "Seconds", "Percent", "CountPerSecond", "BytesPerSecond"],
+          "enum": [
+            "Count",
+            "Bytes",
+            "Seconds",
+            "Percent",
+            "CountPerSecond",
+            "BytesPerSecond"
+          ],
           "x-ms-enum": {
             "modelAsString": true,
             "name": "UnitDefinitionType"
@@ -404,7 +406,7 @@
           "items": {
             "$ref": "#/definitions/MetricAvailability"
           },
-          "description": "The list of database metric availabities for the metric."
+          "description": "The list of database metric availabilities for the metric."
         }
       },
       "description": "A database metric definition."
@@ -419,33 +421,13 @@
           "description": "The list of metric definitions for the database."
         }
       },
-      "required": ["value"],
+      "required": [
+        "value"
+      ],
       "description": "The response to a list database metric definitions request."
     }
   },
   "parameters": {
-    "SubscriptionIdParameter": {
-      "name": "subscriptionId",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "The subscription ID that identifies an Azure subscription."
-    },
-    "ApiVersionParameter": {
-      "name": "api-version",
-      "in": "query",
-      "required": true,
-      "type": "string",
-      "description": "The API version to use for the request."
-    },
-    "ResourceGroupParameter": {
-      "name": "resourceGroupName",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "The name of the resource group that contains the resource. You can obtain this value from the Azure Resource Manager API or the portal.",
-      "x-ms-parameter-location": "method"
-    },
     "ServerNameParameter": {
       "name": "serverName",
       "in": "path",

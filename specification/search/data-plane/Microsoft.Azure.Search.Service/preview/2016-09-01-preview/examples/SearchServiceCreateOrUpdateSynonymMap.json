@@ -1,0 +1,30 @@
+{
+  "parameters": {
+    "searchServiceName": "myservice",
+    "searchDnsSuffix": "search.windows.net",
+    "synonymMapName": "mysynonymmap",
+    "api-version": "2016-09-01-Preview",
+    "Prefer": "return=representation",
+    "synonymMap": {
+      "name": "mysynonymmap",
+      "format": "solr",
+      "synonyms": "United States, United States of America, USA\nWashington, Wash. => WA"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "mysynonymmap",
+        "format": "solr",
+        "synonyms": "United States, United States of America, USA\nWashington, Wash. => WA"
+      }
+    },
+    "201": {
+      "body": {
+        "name": "mysynonymmap",
+        "format": "solr",
+        "synonyms": "United States, United States of America, USA\nWashington, Wash. => WA"
+      }
+    }
+  }
+}

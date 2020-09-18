@@ -16,6 +16,76 @@
     "application/json"
   ],
   "paths": {
+    "/providers/Microsoft.Advisor/metadata/{name}": {
+      "get": {
+        "tags": [
+          "Metadata"
+        ],
+        "summary": "Gets the metadata entity.",
+        "operationId": "RecommendationMetadata_Get",
+        "parameters": [
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of metadata entity.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. Successfully retrieved metadata entities",
+            "schema": {
+              "$ref": "#/definitions/MetadataEntity"
+            }
+          },
+          "404": {
+            "description": "Client sent unknown metadata name",
+            "schema": {
+              "$ref": "#/definitions/ARMErrorResponseBody"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GetMetadata": {
+            "$ref": "./examples/GetRecommendationMetadataEntity.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Advisor/metadata": {
+      "get": {
+        "tags": [
+          "Metadata"
+        ],
+        "summary": "Gets the list of metadata entities.",
+        "operationId": "RecommendationMetadata_List",
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. Successfully retrieved metadata entities",
+            "schema": {
+              "$ref": "#/definitions/MetadataEntityListResult"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GetMetadata": {
+            "$ref": "./examples/ListRecommendationMetadata.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Advisor/configurations": {
       "get": {
         "tags": [
@@ -41,6 +111,9 @@
           }
         },
         "deprecated": false,
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
         "x-ms-examples": {
           "GetConfigurations": {
             "$ref": "./examples/ListConfigurations.json"
@@ -121,6 +194,9 @@
           }
         },
         "deprecated": false,
+        "x-ms-pageable": {
+          "nextLinkName": null
+        },
         "x-ms-examples": {
           "GetConfigurations": {
             "$ref": "./examples/ListConfigurations.json"
@@ -250,8 +326,7 @@
           "CreateSuppression": {
             "$ref": "./examples/EmptyResponse.json"
           }
-        },
-        "x-ms-long-running-operation": true
+        }
       }
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Advisor/recommendations": {
@@ -271,7 +346,7 @@
           {
             "name": "$filter",
             "in": "query",
-            "description": "The filter to apply to the recommendations.",
+            "description": "The filter to apply to the recommendations.<br>Filter can be applied to properties ['ResourceId', 'ResourceGroup', 'RecommendationTypeGuid', '[Category](#category)'] with operators ['eq', 'and', 'or'].<br>Example:<br>- $filter=Category eq 'Cost' and ResourceGroup eq 'MyResourceGroup' ",
             "required": false,
             "type": "string"
           },
@@ -577,6 +652,98 @@
     }
   },
   "definitions": {
+    "MetadataEntityListResult": {
+      "description": "The list of metadata entities",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "The list of metadata entities.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MetadataEntity"
+          }
+        },
+        "nextLink": {
+          "description": "The link used to get the next page of metadata.",
+          "type": "string"
+        }
+      }
+    },
+    "MetadataEntity": {
+      "description": "The metadata entity contract.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "The resource Id of the metadata entity.",
+          "type": "string"
+        },
+        "type": {
+          "description": "The type of the metadata entity.",
+          "type": "string"
+        },
+        "name": {
+          "description": "The name of the metadata entity.",
+          "type": "string"
+        },
+        "properties": {
+          "$ref": "#/definitions/MetadataEntityProperties",
+          "description": "The metadata entity properties.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "MetadataEntityProperties": {
+      "description": "The metadata entity properties",
+      "type": "object",
+      "properties": {
+        "displayName": {
+          "description": "The display name.",
+          "type": "string"
+        },
+        "dependsOn": {
+          "description": "The list of keys on which this entity depends on.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "applicableScenarios": {
+          "description": "The list of scenarios applicable to this metadata entity.",
+          "type": "array",
+          "items": {
+            "enum": [
+              "Alerts"
+            ],
+            "type": "string",
+            "x-ms-enum": {
+              "name": "Scenario",
+              "modelAsString": true
+            }
+          }
+        },
+        "supportedValues": {
+          "description": "The list of supported values.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MetadataSupportedValueDetail"
+          }
+        }
+      }
+    },
+    "MetadataSupportedValueDetail": {
+      "description": "The metadata supported value detail.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "The id.",
+          "type": "string"
+        },
+        "displayName": {
+          "description": "The display name.",
+          "type": "string"
+        }
+      }
+    },
     "ConfigurationListResult": {
       "description": "The list of Advisor configurations.",
       "type": "object",
@@ -686,7 +853,8 @@
             "HighAvailability",
             "Security",
             "Performance",
-            "Cost"
+            "Cost",
+            "OperationalExcellence"
           ],
           "type": "string",
           "x-ms-enum": {
@@ -753,6 +921,13 @@
           "type": "array",
           "items": {
             "format": "uuid",
+            "type": "string"
+          }
+        },
+        "extendedProperties": {
+          "description": "Extended properties",
+          "type": "object",
+          "additionalProperties": {
             "type": "string"
           }
         }

@@ -1,0 +1,252 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2015-11-01",
+    "title": "SubscriptionsManagementClient",
+    "description": "The Admin Subscriptions Management Client."
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Subscriptions.Admin/directoryTenants": {
+      "get": {
+        "x-ms-examples": {
+          "Lists all the directory tenants under the current subscription and given resource group name.": {
+            "$ref": "./examples/DirectoryTenant/List.json"
+          }
+        },
+        "tags": [
+          "DirectoryTenants"
+        ],
+        "description": "Lists all the directory tenants under the current subscription and given resource group name.",
+        "operationId": "DirectoryTenants_List",
+        "parameters": [
+          {
+            "$ref": "Subscriptions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "Subscriptions.json#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "Subscriptions.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/DirectoryTenantList"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Subscriptions.Admin/directoryTenants/{tenant}": {
+      "get": {
+        "x-ms-examples": {
+          "Get a directory tenant by name.": {
+            "$ref": "./examples/DirectoryTenant/Get.json"
+          }
+        },
+        "description": "Get a directory tenant by name.",
+        "tags": [
+          "DirectoryTenants"
+        ],
+        "operationId": "DirectoryTenants_Get",
+        "parameters": [
+          {
+            "$ref": "Subscriptions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "Subscriptions.json#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/DirectoryTenantParameter"
+          },
+          {
+            "$ref": "Subscriptions.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/DirectoryTenant"
+            }
+          }
+        }
+      },
+      "delete": {
+        "x-ms-examples": {
+          "Delete a directory tenant under a resource group.": {
+            "$ref": "./examples/DirectoryTenant/Delete.json"
+          }
+        },
+        "description": "Delete a directory tenant under a resource group.",
+        "tags": [
+          "DirectoryTenants"
+        ],
+        "operationId": "DirectoryTenants_Delete",
+        "parameters": [
+          {
+            "$ref": "Subscriptions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "Subscriptions.json#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/DirectoryTenantParameter"
+          },
+          {
+            "$ref": "Subscriptions.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "204": {
+            "description": "No Content"
+          }
+        }
+      },
+      "put": {
+        "x-ms-examples": {
+          "Create or updates a directory tenant.": {
+            "$ref": "./examples/DirectoryTenant/Create.json"
+          }
+        },
+        "description": "Create or updates a directory tenant.",
+        "tags": [
+          "DirectoryTenants"
+        ],
+        "operationId": "DirectoryTenants_CreateOrUpdate",
+        "parameters": [
+          {
+            "$ref": "Subscriptions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "Subscriptions.json#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/DirectoryTenantParameter"
+          },
+          {
+            "$ref": "Subscriptions.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/DirectoryTenantDefinitionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/DirectoryTenant"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/DirectoryTenant"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "DirectoryTenant": {
+      "description": "Directory tenant.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "description": "Directory tenant.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/DirectoryTenantProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "Subscriptions.json#/definitions/Resource"
+        }
+      ]
+    },
+    "DirectoryTenantProperties": {
+      "description": "Directory tenant.",
+      "type": "object",
+      "properties": {
+        "tenantId": {
+          "description": "Tenant unique identifier.",
+          "type": "string"
+        }
+      }
+    },
+    "DirectoryTenantList": {
+      "description": "List of directory tenants.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "List of directory tenants.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DirectoryTenant"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Continuation token"
+        }
+      }
+    }
+  },
+  "parameters": {
+    "DirectoryTenantParameter": {
+      "description": "Directory tenant name.",
+      "name": "tenant",
+      "type": "string",
+      "required": true,
+      "in": "path",
+      "x-ms-parameter-location": "method"
+    },
+    "DirectoryTenantDefinitionParameter": {
+      "description": "New directory tenant properties.",
+      "name": "tenantDefinition",
+      "required": true,
+      "in": "body",
+      "schema": {
+        "$ref": "#/definitions/DirectoryTenant"
+      },
+      "x-ms-parameter-location": "method"
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ]
+}

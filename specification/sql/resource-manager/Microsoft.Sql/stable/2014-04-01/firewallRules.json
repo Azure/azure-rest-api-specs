@@ -24,18 +24,22 @@
         "operationId": "FirewallRules_CreateOrUpdate",
         "description": "Creates or updates a firewall rule.",
         "x-ms-examples": {
-          "Create a firewall rule max/min": { "$ref": "./examples/FirewallRuleCreate.json" },
-          "Update a firewall rule max/min": { "$ref": "./examples/FirewallRuleUpdate.json" }
+          "Create a firewall rule max/min": {
+            "$ref": "./examples/FirewallRuleCreate.json"
+          },
+          "Update a firewall rule max/min": {
+            "$ref": "./examples/FirewallRuleUpdate.json"
+          }
         },
         "parameters": [
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ResourceGroupParameter"
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
           },
           {
             "$ref": "#/parameters/ServerNameParameter"
@@ -79,17 +83,19 @@
         "operationId": "FirewallRules_Delete",
         "description": "Deletes a firewall rule.",
         "x-ms-examples": {
-          "Delete a firewall rule": { "$ref": "./examples/FirewallRuleDelete.json" }
+          "Delete a firewall rule": {
+            "$ref": "./examples/FirewallRuleDelete.json"
+          }
         },
         "parameters": [
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ResourceGroupParameter"
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
           },
           {
             "$ref": "#/parameters/ServerNameParameter"
@@ -118,17 +124,19 @@
         "operationId": "FirewallRules_Get",
         "description": "Gets a firewall rule.",
         "x-ms-examples": {
-          "Get Firewall Rule": { "$ref": "./examples/FirewallRuleGet.json" }
+          "Get Firewall Rule": {
+            "$ref": "./examples/FirewallRuleGet.json"
+          }
         },
         "parameters": [
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ResourceGroupParameter"
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
           },
           {
             "$ref": "#/parameters/ServerNameParameter"
@@ -159,17 +167,19 @@
         "operationId": "FirewallRules_ListByServer",
         "description": "Returns a list of firewall rules.",
         "x-ms-examples": {
-          "List Firewall Rules": { "$ref": "./examples/FirewallRuleList.json" }
+          "List Firewall Rules": {
+            "$ref": "./examples/FirewallRuleList.json"
+          }
         },
         "parameters": [
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ResourceGroupParameter"
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
           },
           {
             "$ref": "#/parameters/ServerNameParameter"
@@ -190,35 +200,6 @@
     }
   },
   "definitions": {
-    "Resource":{
-      "description":"ARM resource.",
-      "properties":{
-        "id":{
-          "readOnly":true,
-          "type":"string",
-          "description":"Resource ID."
-        },
-        "name":{
-          "readOnly":true,
-          "type":"string",
-          "description":"Resource name."
-        },
-        "type":{
-          "readOnly":true,
-          "type":"string",
-          "description":"Resource type."
-        }
-      },
-      "x-ms-azure-resource": true
-    },
-    "ProxyResource":{
-      "description":"ARM proxy resource.",
-      "allOf":[
-        {
-          "$ref":"#/definitions/Resource"
-        }
-      ]
-    },
     "FirewallRuleProperties": {
       "properties": {
         "startIpAddress": {
@@ -230,7 +211,10 @@
           "description": "The end IP address of the firewall rule. Must be IPv4 format. Must be greater than or equal to startIpAddress. Use value '0.0.0.0' to represent all Azure-internal IP addresses."
         }
       },
-      "required": ["startIpAddress", "endIpAddress"],
+      "required": [
+        "startIpAddress",
+        "endIpAddress"
+      ],
       "description": "Represents the properties of a server firewall rule."
     },
     "FirewallRule": {
@@ -258,7 +242,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/ProxyResource"
+          "$ref": "../../../common/v1/types.json#/definitions/ProxyResource"
         }
       ],
       "description": "Represents a server firewall rule."
@@ -277,28 +261,6 @@
     }
   },
   "parameters": {
-    "SubscriptionIdParameter": {
-      "name": "subscriptionId",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "The subscription ID that identifies an Azure subscription."
-    },
-    "ApiVersionParameter": {
-      "name": "api-version",
-      "in": "query",
-      "required": true,
-      "type": "string",
-      "description": "The API version to use for the request."
-    },
-    "ResourceGroupParameter": {
-      "name": "resourceGroupName",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "The name of the resource group that contains the resource. You can obtain this value from the Azure Resource Manager API or the portal.",
-      "x-ms-parameter-location": "method"
-    },
     "ServerNameParameter": {
       "name": "serverName",
       "in": "path",

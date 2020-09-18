@@ -1,0 +1,1274 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "DatabricksClient",
+    "version": "2018-04-01",
+    "description": "ARM Databricks"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Databricks/workspaces/{workspaceName}": {
+      "get": {
+        "tags": [
+          "Workspaces"
+        ],
+        "operationId": "Workspaces_Get",
+        "description": "Gets the workspace.",
+        "x-ms-examples": {
+          "Get a workspace": {
+            "$ref": "./examples/WorkspaceGet.json"
+          },
+          "Get a workspace with custom parameters": {
+            "$ref": "./examples/WorkspaceGetParameters.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - Returns the workspace.",
+            "schema": {
+              "$ref": "#/definitions/Workspace"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Workspaces"
+        ],
+        "operationId": "Workspaces_Delete",
+        "description": "Deletes the workspace.",
+        "x-ms-examples": {
+          "Delete a workspace": {
+            "$ref": "./examples/WorkspaceDelete.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "NoContent"
+          },
+          "202": {
+            "description": "Accepted - Returns this status until the asynchronous operation has completed."
+          },
+          "200": {
+            "description": "OK. The request has succeeded."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "put": {
+        "tags": [
+          "Workspaces"
+        ],
+        "operationId": "Workspaces_CreateOrUpdate",
+        "description": "Creates a new workspace.",
+        "x-ms-examples": {
+          "Create or update workspace": {
+            "$ref": "./examples/WorkspaceCreate.json"
+          },
+          "Create or update workspace with custom parameters": {
+            "$ref": "./examples/WorkspaceCreateWithParameters.json"
+          },
+          "Create a workspace which is ready for Customer-Managed Key (CMK) encryption": {
+            "$ref": "./examples/PrepareEncryption.json"
+          },
+          "Enable Customer-Managed Key (CMK) encryption on a workspace which is prepared for encryption": {
+            "$ref": "./examples/EnableEncryption.json"
+          },
+          "Revert Customer-Managed Key (CMK) encryption to Microsoft Managed Keys encryption on a workspace": {
+            "$ref": "./examples/DisableEncryption.json"
+          }
+        },
+        "parameters": [
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Workspace"
+            },
+            "description": "Parameters supplied to the create or update a workspace."
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Created - Returns information about the workspace, including provisioning status.",
+            "schema": {
+              "$ref": "#/definitions/Workspace"
+            }
+          },
+          "201": {
+            "description": "Created - Returns information about the workspace, including provisioning status.",
+            "schema": {
+              "$ref": "#/definitions/Workspace"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "tags": [
+          "Workspaces"
+        ],
+        "operationId": "Workspaces_Update",
+        "description": "Updates a workspace.",
+        "parameters": [
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/WorkspaceUpdate"
+            },
+            "description": "The update to the workspace."
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully updated the workspace.",
+            "schema": {
+              "$ref": "#/definitions/Workspace"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "202": {
+            "description": "Accepted"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Update a workspace's tags.": {
+            "$ref": "./examples/WorkspaceUpdate.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Databricks/workspaces": {
+      "get": {
+        "tags": [
+          "Workspaces"
+        ],
+        "operationId": "Workspaces_ListByResourceGroup",
+        "description": "Gets all the workspaces within a resource group.",
+        "x-ms-examples": {
+          "Lists workspaces": {
+            "$ref": "./examples/WorkspacesListByResourceGroup.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - Returns an array of workspaces.",
+            "schema": {
+              "$ref": "#/definitions/WorkspaceListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Databricks/workspaces": {
+      "get": {
+        "tags": [
+          "Workspaces"
+        ],
+        "operationId": "Workspaces_ListBySubscription",
+        "description": "Gets all the workspaces within a subscription.",
+        "x-ms-examples": {
+          "Lists workspaces": {
+            "$ref": "./examples/WorkspacesListBySubscription.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - Returns an array of workspaces.",
+            "schema": {
+              "$ref": "#/definitions/WorkspaceListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Databricks/workspaces/{workspaceName}/virtualNetworkPeerings/{peeringName}": {
+      "get": {
+        "tags": [
+          "vNetPeering"
+        ],
+        "operationId": "vNetPeering_Get",
+        "description": "Gets the workspace vNet Peering.",
+        "x-ms-examples": {
+          "Get a workspace with vNet Peering Configured": {
+            "$ref": "./examples/WorkspaceVirtualNetPeeringGet.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/PeeringNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/VirtualNetworkPeering"
+            }
+          },
+          "204": {
+            "description": "OK - NoContent"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "vNetPeering"
+        ],
+        "operationId": "vNetPeering_Delete",
+        "description": "Deletes the workspace vNetPeering.",
+        "x-ms-examples": {
+          "Delete a workspace vNet Peering": {
+            "$ref": "./examples/WorkspaceVirtualNetworkPeeringDelete.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/PeeringNameParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted - Returns this status until the asynchronous operation has completed."
+          },
+          "204": {
+            "description": "NoContent"
+          },
+          "200": {
+            "description": "OK. The request has succeeded."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "put": {
+        "tags": [
+          "vNetPeering"
+        ],
+        "operationId": "vNetPeering_CreateOrUpdate",
+        "description": "Creates vNet Peering for workspace.",
+        "x-ms-examples": {
+          "Create vNet Peering for Workspace": {
+            "$ref": "./examples/WorkspaceVirtualNetworkPeeringCreateOrUpdate.json"
+          }
+        },
+        "parameters": [
+          {
+            "name": "VirtualNetworkPeeringParameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/VirtualNetworkPeering"
+            },
+            "description": "Parameters supplied to the create workspace vNet Peering."
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/PeeringNameParameter"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created - Returns information about the workspace vNet peering, including provisioning status.",
+            "schema": {
+              "$ref": "#/definitions/VirtualNetworkPeering"
+            }
+          },
+          "200": {
+            "description": "Update succeeded - Returns information about the workspace vNet peering.",
+            "schema": {
+              "$ref": "#/definitions/VirtualNetworkPeering"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Databricks/workspaces/{workspaceName}/virtualNetworkPeerings": {
+      "get": {
+        "tags": [
+          "vNetPeering"
+        ],
+        "operationId": "vNetPeering_ListByWorkspace",
+        "description": "Lists the workspace vNet Peerings.",
+        "x-ms-examples": {
+          "List all vNet Peerings for the workspace": {
+            "$ref": "./examples/WorkspaceVirtualNetPeeringList.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List succeeded. Returns the resulting resource objects in response body.",
+            "schema": {
+              "$ref": "#/definitions/VirtualNetworkPeeringList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.Databricks/operations": {
+      "get": {
+        "tags": [
+          "Operations"
+        ],
+        "description": "Lists all of the available RP operations.",
+        "x-ms-examples": {
+          "Operations": {
+            "$ref": "./examples/OperationsList.json"
+          }
+        },
+        "operationId": "Operations_List",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "Resource Provider error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Workspace": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/WorkspaceProperties",
+          "description": "The workspace properties."
+        },
+        "sku": {
+          "$ref": "#/definitions/Sku",
+          "description": "The SKU of the resource."
+        }
+      },
+      "required": [
+        "properties"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/TrackedResource"
+        }
+      ],
+      "description": "Information about workspace."
+    },
+    "WorkspaceProperties": {
+      "properties": {
+        "managedResourceGroupId": {
+          "type": "string",
+          "description": "The managed resource group Id."
+        },
+        "parameters": {
+          "$ref": "#/definitions/WorkspaceCustomParameters",
+          "description": "The workspace's custom parameters."
+        },
+        "provisioningState": {
+          "readOnly": true,
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The workspace provisioning state."
+        },
+        "uiDefinitionUri": {
+          "type": "string",
+          "description": "The blob URI where the UI definition file is located."
+        },
+        "authorizations": {
+          "description": "The workspace provider authorizations.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/WorkspaceProviderAuthorization"
+          }
+        },
+        "createdBy": {
+          "description": "Indicates the Object ID, PUID and Application ID of entity that created the workspace.",
+          "$ref": "#/definitions/CreatedBy"
+        },
+        "updatedBy": {
+          "description": "Indicates the Object ID, PUID and Application ID of entity that last updated the workspace.",
+          "$ref": "#/definitions/CreatedBy"
+        },
+        "createdDateTime": {
+          "description": "Specifies the date and time when the workspace is created.",
+          "$ref": "#/definitions/CreatedDateTime"
+        },
+        "workspaceId": {
+          "readOnly": true,
+          "description": "The unique identifier of the databricks workspace in databricks control plane.",
+          "type": "string"
+        },
+        "workspaceUrl": {
+          "readOnly": true,
+          "description": "The workspace URL which is of the format 'adb-{workspaceId}.{random}.azuredatabricks.net'",
+          "type": "string"
+        },
+        "storageAccountIdentity": {
+          "description": "The details of Managed Identity of Storage Account",
+          "$ref": "#/definitions/ManagedIdentityConfiguration"
+        }
+      },
+      "required": [
+        "managedResourceGroupId"
+      ],
+      "description": "The workspace properties."
+    },
+    "TrackedResource": {
+      "description": "The resource model definition for a ARM tracked top level resource",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "x-ms-mutability": [
+            "read",
+            "create",
+            "update"
+          ],
+          "description": "Resource tags."
+        },
+        "location": {
+          "type": "string",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ],
+          "description": "The geo-location where the resource lives"
+        }
+      },
+      "required": [
+        "location"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ]
+    },
+    "Resource": {
+      "description": "The core properties of ARM resources",
+      "properties": {
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Fully qualified resource Id for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}"
+        },
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The name of the resource"
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The type of the resource. Ex- Microsoft.Compute/virtualMachines or Microsoft.Storage/storageAccounts."
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "Sku": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The SKU name."
+        },
+        "tier": {
+          "type": "string",
+          "description": "The SKU tier."
+        }
+      },
+      "required": [
+        "name"
+      ],
+      "description": "SKU for the resource."
+    },
+    "ProvisioningState": {
+      "description": "Provisioning status of the workspace.",
+      "readOnly": true,
+      "enum": [
+        "Accepted",
+        "Running",
+        "Ready",
+        "Creating",
+        "Created",
+        "Deleting",
+        "Deleted",
+        "Canceled",
+        "Failed",
+        "Succeeded",
+        "Updating"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "ProvisioningState",
+        "modelAsString": true
+      }
+    },
+    "PeeringProvisioningState": {
+      "type": "string",
+      "readOnly": true,
+      "description": "The current provisioning state.",
+      "enum": [
+        "Succeeded",
+        "Updating",
+        "Deleting",
+        "Failed"
+      ],
+      "x-ms-enum": {
+        "name": "PeeringProvisioningState",
+        "modelAsString": true
+      }
+    },
+    "ManagedIdentityConfiguration": {
+      "description": "The Managed Identity details for storage account.",
+      "properties": {
+        "principalId": {
+          "type": "string",
+          "format": "uuid",
+          "description": "The objectId of the Managed Identity that is linked to the Managed Storage account.",
+          "readOnly": true
+        },
+        "tenantId": {
+          "type": "string",
+          "format": "uuid",
+          "description": "The tenant Id where the Managed Identity is created.",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "description": "The type of Identity created. It can be either SystemAssigned or UserAssigned.",
+          "readOnly": true
+        }
+      }
+    },
+    "WorkspaceCustomParameterType": {
+      "description": "Provisioning status of the workspace.",
+      "readOnly": true,
+      "enum": [
+        "Bool",
+        "Object",
+        "String"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "CustomParameterType",
+        "modelAsString": true
+      }
+    },
+    "WorkspaceCustomBooleanParameter": {
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/WorkspaceCustomParameterType",
+          "description": "The type of variable that this is"
+        },
+        "value": {
+          "type": "boolean",
+          "description": "The value which should be used for this field."
+        }
+      },
+      "required": [
+        "value"
+      ],
+      "description": "The value which should be used for this field."
+    },
+    "WorkspaceCustomObjectParameter": {
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/WorkspaceCustomParameterType",
+          "description": "The type of variable that this is"
+        },
+        "value": {
+          "type": "object",
+          "description": "The value which should be used for this field."
+        }
+      },
+      "required": [
+        "value"
+      ],
+      "description": "The value which should be used for this field."
+    },
+    "WorkspaceCustomStringParameter": {
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/WorkspaceCustomParameterType",
+          "description": "The type of variable that this is"
+        },
+        "value": {
+          "type": "string",
+          "description": "The value which should be used for this field."
+        }
+      },
+      "required": [
+        "value"
+      ],
+      "description": "The Value."
+    },
+    "WorkspaceCustomParameters": {
+      "properties": {
+        "amlWorkspaceId": {
+          "$ref": "#/definitions/WorkspaceCustomStringParameter",
+          "description": "The ID of a Azure Machine Learning workspace to link with Databricks workspace"
+        },
+        "customVirtualNetworkId": {
+          "$ref": "#/definitions/WorkspaceCustomStringParameter",
+          "description": "The ID of a Virtual Network where this Databricks Cluster should be created"
+        },
+        "customPublicSubnetName": {
+          "$ref": "#/definitions/WorkspaceCustomStringParameter",
+          "description": "The name of a Public Subnet within the Virtual Network"
+        },
+        "customPrivateSubnetName": {
+          "$ref": "#/definitions/WorkspaceCustomStringParameter",
+          "description": "The name of the Private Subnet within the Virtual Network"
+        },
+        "enableNoPublicIp": {
+          "$ref": "#/definitions/WorkspaceCustomBooleanParameter",
+          "description": "Should the Public IP be Disabled?"
+        },
+        "prepareEncryption": {
+          "$ref": "#/definitions/WorkspaceCustomBooleanParameter",
+          "description": "Prepare the workspace for encryption. Enables the Managed Identity for managed storage account."
+        },
+        "encryption": {
+          "$ref": "#/definitions/WorkspaceEncryptionParameter",
+          "description": "Contains the encryption details for Customer-Managed Key (CMK) enabled workspace."
+        },
+        "requireInfrastructureEncryption": {
+          "$ref": "#/definitions/WorkspaceCustomBooleanParameter",
+          "description": "A boolean indicating whether or not the DBFS root file system will be enabled with secondary layer of encryption with platform managed keys for data at rest."
+        }
+      },
+      "description": "Custom Parameters used for Cluster Creation."
+    },
+    "CreatedDateTime": {
+      "type": "string",
+      "format": "date-time",
+      "description": "The date and time stamp when the workspace was created.",
+      "readOnly": true
+    },
+    "CreatedBy": {
+      "properties": {
+        "oid": {
+          "type": "string",
+          "format": "uuid",
+          "description": "The Object ID that created the workspace.",
+          "readOnly": true
+        },
+        "puid": {
+          "type": "string",
+          "description": "The Personal Object ID corresponding to the object ID above",
+          "readOnly": true
+        },
+        "applicationId": {
+          "type": "string",
+          "format": "uuid",
+          "description": "The application ID of the application that initiated the creation of the workspace. For example, Azure Portal.",
+          "readOnly": true
+        }
+      },
+      "description": "Provides details of the entity that created/updated the workspace."
+    },
+    "WorkspaceEncryptionParameter": {
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/WorkspaceCustomParameterType",
+          "description": "The type of variable that this is"
+        },
+        "value": {
+          "$ref": "#/definitions/Encryption",
+          "description": "The value which should be used for this field."
+        }
+      },
+      "description": "The object that contains details of encryption used on the workspace."
+    },
+    "Encryption": {
+      "properties": {
+        "keySource": {
+          "type": "string",
+          "description": "The encryption keySource (provider). Possible values (case-insensitive):  Default, Microsoft.Keyvault",
+          "enum": [
+            "Default",
+            "Microsoft.Keyvault"
+          ],
+          "x-ms-enum": {
+            "name": "KeySource",
+            "modelAsString": true
+          },
+          "default": "Default"
+        },
+        "KeyName": {
+          "type": "string",
+          "description": "The name of KeyVault key."
+        },
+        "keyversion": {
+          "type": "string",
+          "description": "The version of KeyVault key.",
+          "x-ms-client-name": "KeyVersion"
+        },
+        "keyvaulturi": {
+          "type": "string",
+          "description": "The Uri of KeyVault.",
+          "x-ms-client-name": "KeyVaultUri"
+        }
+      },
+      "description": "The object that contains details of encryption used on the workspace."
+    },
+    "WorkspaceProviderAuthorization": {
+      "properties": {
+        "principalId": {
+          "type": "string",
+          "format": "uuid",
+          "description": "The provider's principal identifier. This is the identity that the provider will use to call ARM to manage the workspace resources."
+        },
+        "roleDefinitionId": {
+          "type": "string",
+          "format": "uuid",
+          "description": "The provider's role definition identifier. This role will define all the permissions that the provider must have on the workspace's container resource group. This role definition cannot have permission to delete the resource group."
+        }
+      },
+      "required": [
+        "principalId",
+        "roleDefinitionId"
+      ],
+      "description": "The workspace provider authorization."
+    },
+    "WorkspaceUpdate": {
+      "description": "An update to a workspace.",
+      "type": "object",
+      "properties": {
+        "tags": {
+          "description": "Resource tags.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "ErrorDetail": {
+      "title": "Error details.",
+      "type": "object",
+      "properties": {
+        "code": {
+          "description": "The error's code.",
+          "type": "string"
+        },
+        "message": {
+          "description": "A human readable error message.",
+          "type": "string"
+        },
+        "target": {
+          "description": "Indicates which property in the request is responsible for the error.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "code",
+        "message"
+      ]
+    },
+    "ErrorInfo": {
+      "title": "The code and message for an error.",
+      "type": "object",
+      "properties": {
+        "code": {
+          "description": "A machine readable error code.",
+          "type": "string"
+        },
+        "message": {
+          "description": "A human readable error message.",
+          "type": "string"
+        },
+        "details": {
+          "description": "error details.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ErrorDetail"
+          }
+        },
+        "innererror": {
+          "description": "Inner error details if they exist.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "code",
+        "message"
+      ]
+    },
+    "ErrorResponse": {
+      "title": "Error response.",
+      "description": "Contains details when the response code indicates an error.",
+      "type": "object",
+      "properties": {
+        "error": {
+          "description": "The error details.",
+          "$ref": "#/definitions/ErrorInfo"
+        }
+      },
+      "required": [
+        "error"
+      ]
+    },
+    "WorkspaceListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Workspace"
+          },
+          "description": "The array of workspaces."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The URL to use for getting the next set of results."
+        }
+      },
+      "description": "List of workspaces."
+    },
+    "Operation": {
+      "description": "REST API operation",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Operation name: {provider}/{resource}/{operation}",
+          "type": "string"
+        },
+        "display": {
+          "description": "The object that represents the operation.",
+          "properties": {
+            "provider": {
+              "description": "Service provider: Microsoft.ResourceProvider",
+              "type": "string"
+            },
+            "resource": {
+              "description": "Resource on which the operation is performed.",
+              "type": "string"
+            },
+            "operation": {
+              "description": "Operation type: Read, write, delete, etc.",
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "OperationListResult": {
+      "description": "Result of the request to list Resource Provider operations. It contains a list of operations and a URL link to get the next set of results.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Operation"
+          },
+          "description": "List of Resource Provider operations supported by the Resource Provider resource provider."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "URL to get the next set of operation list results if there are any."
+        }
+      }
+    },
+    "VirtualNetworkPeeringList": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VirtualNetworkPeering"
+          },
+          "description": "List of virtual network peerings on workspace."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "URL to get the next set of virtual network peering list results if there are any."
+        }
+      },
+      "description": "Gets all virtual network peerings under a workspace."
+    },
+    "VirtualNetworkPeering": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/VirtualNetworkPeeringPropertiesFormat",
+          "description": "List of properties for vNet Peering"
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of the virtual network peering resource",
+          "readOnly": true
+        },
+        "id": {
+          "type": "string",
+          "description": "Resource ID.",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "description": "type of the virtual network peering resource",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "properties"
+      ],
+      "description": "Peerings in a VirtualNetwork resource",
+      "x-ms-azure-resource": true
+    },
+    "VirtualNetworkPeeringPropertiesFormat": {
+      "properties": {
+        "allowVirtualNetworkAccess": {
+          "type": "boolean",
+          "description": "Whether the VMs in the local virtual network space would be able to access the VMs in remote virtual network space."
+        },
+        "allowForwardedTraffic": {
+          "type": "boolean",
+          "description": "Whether the forwarded traffic from the VMs in the local virtual network will be allowed/disallowed in remote virtual network."
+        },
+        "allowGatewayTransit": {
+          "type": "boolean",
+          "description": "If gateway links can be used in remote virtual networking to link to this virtual network."
+        },
+        "useRemoteGateways": {
+          "type": "boolean",
+          "description": "If remote gateways can be used on this virtual network. If the flag is set to true, and allowGatewayTransit on remote peering is also true, virtual network will use gateways of remote virtual network for transit. Only one peering can have this flag set to true. This flag cannot be set if virtual network already has a gateway."
+        },
+        "databricksVirtualNetwork": {
+          "properties": {
+            "id": {
+              "type": "string",
+              "description": "The Id of the databricks virtual network."
+            }
+          },
+          "description": " The remote virtual network should be in the same region. See here to learn more (https://docs.microsoft.com/en-us/azure/databricks/administration-guide/cloud-configurations/azure/vnet-peering)."
+        },
+        "databricksAddressSpace": {
+          "$ref": "#/definitions/AddressSpace",
+          "description": "The reference to the databricks virtual network address space."
+        },
+        "remoteVirtualNetwork": {
+          "properties": {
+            "id": {
+              "type": "string",
+              "description": "The Id of the remote virtual network."
+            }
+          },
+          "description": " The remote virtual network should be in the same region. See here to learn more (https://docs.microsoft.com/en-us/azure/databricks/administration-guide/cloud-configurations/azure/vnet-peering)."
+        },
+        "remoteAddressSpace": {
+          "$ref": "#/definitions/AddressSpace",
+          "description": "The reference to the remote virtual network address space."
+        },
+        "peeringState": {
+          "type": "string",
+          "description": "The status of the virtual network peering.",
+          "enum": [
+            "Initiated",
+            "Connected",
+            "Disconnected"
+          ],
+          "x-ms-enum": {
+            "name": "peeringState",
+            "modelAsString": true
+          },
+          "readOnly": true
+        },
+        "provisioningState": {
+          "readOnly": true,
+          "$ref": "#/definitions/PeeringProvisioningState",
+          "description": "The provisioning state of the virtual network peering resource."
+        }
+      },
+      "required": [
+        "remoteVirtualNetwork"
+      ],
+      "description": "Properties of the virtual network peering."
+    },
+    "AddressSpace": {
+      "properties": {
+        "addressPrefixes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "A list of address blocks reserved for this virtual network in CIDR notation."
+        }
+      },
+      "description": "AddressSpace contains an array of IP address ranges that can be used by subnets of the virtual network."
+    }
+  },
+  "parameters": {
+    "SubscriptionIdParameter": {
+      "name": "subscriptionId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The ID of the target subscription."
+    },
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "The API version to use for this operation."
+    },
+    "ResourceGroupName": {
+      "name": "resourceGroupName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the resource group. The name is case insensitive.",
+      "pattern": "^[-\\w\\._\\(\\)]+$",
+      "minLength": 1,
+      "maxLength": 90,
+      "x-ms-parameter-location": "method"
+    },
+    "WorkspaceName": {
+      "name": "workspaceName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the workspace.",
+      "minLength": 3,
+      "maxLength": 64,
+      "x-ms-parameter-location": "method"
+    },
+    "PeeringNameParameter": {
+      "name": "peeringName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the workspace vNet peering.",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}

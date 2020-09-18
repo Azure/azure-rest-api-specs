@@ -1,0 +1,269 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2017-06-01",
+    "title": "AzureStack Azure Bridge Client"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.AzureStack/registrations/{registrationName}/customerSubscriptions": {
+      "get": {
+        "x-ms-examples": {
+          "Returns a list of products.": {
+            "$ref": "examples/CustomerSubscription/List.json"
+          }
+        },
+        "tags": [
+          "CustomerSubscription"
+        ],
+        "description": "Returns a list of products.",
+        "operationId": "CustomerSubscriptions_List",
+        "parameters": [
+          {
+            "$ref": "AzureStack.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "AzureStack.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "AzureStack.json#/parameters/RegistrationNameParameter"
+          },
+          {
+            "$ref": "AzureStack.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/CustomerSubscriptionList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "AzureStack.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.AzureStack/registrations/{registrationName}/customerSubscriptions/{customerSubscriptionName}": {
+      "get": {
+        "x-ms-examples": {
+          "Returns the specified product.": {
+            "$ref": "examples/CustomerSubscription/Get.json"
+          }
+        },
+        "tags": [
+          "CustomerSubscription"
+        ],
+        "description": "Returns the specified product.",
+        "operationId": "CustomerSubscriptions_Get",
+        "parameters": [
+          {
+            "$ref": "AzureStack.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "AzureStack.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "AzureStack.json#/parameters/RegistrationNameParameter"
+          },
+          {
+            "$ref": "#/parameters/CustomerSubscriptionNameParameter"
+          },
+          {
+            "$ref": "AzureStack.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/CustomerSubscription"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "AzureStack.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "x-ms-examples": {
+          "Deletes a customer subscription under a registration.": {
+            "$ref": "examples/CustomerSubscription/Delete.json"
+          }
+        },
+        "tags": [
+          "CustomerSubscription"
+        ],
+        "description": "Deletes a customer subscription under a registration.",
+        "operationId": "CustomerSubscriptions_Delete",
+        "parameters": [
+          {
+            "$ref": "AzureStack.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "AzureStack.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "AzureStack.json#/parameters/RegistrationNameParameter"
+          },
+          {
+            "$ref": "#/parameters/CustomerSubscriptionNameParameter"
+          },
+          {
+            "$ref": "AzureStack.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "204": {
+            "description": "NO CONTENT"
+          }
+        }
+      },
+      "put": {
+        "x-ms-examples": {
+          "Creates a new customer subscription under a registration.": {
+            "$ref": "examples/CustomerSubscription/Put.json"
+          }
+        },
+        "tags": [
+          "CustomerSubscription"
+        ],
+        "description": "Creates a new customer subscription under a registration.",
+        "operationId": "CustomerSubscriptions_Create",
+        "parameters": [
+          {
+            "$ref": "AzureStack.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "AzureStack.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "AzureStack.json#/parameters/RegistrationNameParameter"
+          },
+          {
+            "$ref": "#/parameters/CustomerSubscriptionNameParameter"
+          },
+          {
+            "$ref": "AzureStack.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/CustomerSubscriptionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/CustomerSubscription"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "CustomerSubscription": {
+      "description": "Customer subscription.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "description": "Customer subscription properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/CustomerSubscriptionProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "AzureStack.json#/definitions/Resource"
+        }
+      ]
+    },
+    "CustomerSubscriptionProperties": {
+      "description": "Customer subscription properties.",
+      "type": "object",
+      "properties": {
+        "tenantId": {
+          "description": "Tenant Id.",
+          "type": "string"
+        }
+      }
+    },
+    "CustomerSubscriptionList": {
+      "description": "Pageable list of customer subscriptions.",
+      "type": "object",
+      "properties": {
+        "nextLink": {
+          "description": "URI to the next page.",
+          "type": "string"
+        },
+        "value": {
+          "description": "List of customer subscriptions.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CustomerSubscription"
+          }
+        }
+      }
+    }
+  },
+  "parameters": {
+    "CustomerSubscriptionNameParameter": {
+      "description": "Name of the product.",
+      "name": "customerSubscriptionName",
+      "type": "string",
+      "in": "path",
+      "required": true,
+      "x-ms-parameter-location": "method"
+    },
+    "CustomerSubscriptionParameter": {
+      "description": "Parameters use to create a customer subscription.",
+      "name": "customerCreationParameters",
+      "schema": {
+        "$ref": "#/definitions/CustomerSubscription"
+      },
+      "in": "body",
+      "required": true,
+      "x-ms-parameter-location": "method"
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Authorization uses an Azure Active Directory OAuth2 flow.",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ]
+}

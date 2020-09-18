@@ -1,0 +1,31 @@
+{
+  "parameters": {
+    "api-version": "2018-11-01-preview",
+    "resourceScope": "providers/Microsoft.Management/managementGroups/ContosoOnlineGroup",
+    "blueprintName": "simpleBlueprint",
+    "artifactName": "ownerAssignment",
+    "artifact": {
+      "properties": {
+        "displayName": "enforce owners of given subscription",
+        "roleDefinitionId": "/providers/Microsoft.Authorization/roleDefinitions/acdd72a7-3385-48ef-bd42-f606fba81ae7",
+        "principalIds": "[parameters('owners')]"
+      },
+      "kind": "roleAssignment"
+    }
+  },
+  "responses": {
+    "201": {
+      "body": {
+        "properties": {
+          "displayName": "enforce owners of given subscription",
+          "roleDefinitionId": "/providers/Microsoft.Authorization/roleDefinitions/acdd72a7-3385-48ef-bd42-f606fba81ae7",
+          "principalIds": "[parameters('owners')]"
+        },
+        "kind": "roleAssignment",
+        "id": "/providers/Microsoft.Management/managementGroups/ContosoOnlineGroup/providers/Microsoft.Blueprint/blueprints/simpleBlueprint/artifacts/ownerAssignment",
+        "type": "Microsoft.Blueprint/blueprints/artifacts",
+        "name": "ownerAssignment"
+      }
+    }
+  }
+}

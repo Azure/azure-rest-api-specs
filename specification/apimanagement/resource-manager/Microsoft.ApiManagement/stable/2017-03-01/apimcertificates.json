@@ -41,7 +41,7 @@
         ],
         "operationId": "Certificate_ListByService",
         "description": "Lists a collection of all certificates in the specified service instance.",
-         "x-ms-examples": {
+        "x-ms-examples": {
           "ApiManagementListCertificates": {
             "$ref": "./examples/ApiManagementListCertificates.json"
           }
@@ -94,6 +94,52 @@
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/certificates/{certificateId}": {
+      "head": {
+        "tags": [
+          "Certificates"
+        ],
+        "operationId": "Certificate_GetEntityTag",
+        "description": "Gets the entity state (Etag) version of the certificate specified by its identifier.",
+        "x-ms-examples": {
+          "ApiManagementHeadCertificate": {
+            "$ref": "./examples/ApiManagementHeadCertificate.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "./apimanagement.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/CertificateIdParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Specified certificate entity exists and current entity state version is present in the ETag header.",
+            "headers": {
+              "ETag": {
+                "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./apimanagement.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
       "get": {
         "tags": [
           "Certificates"
@@ -316,8 +362,8 @@
       ],
       "description": "Properties of the Certificate contract."
     },
-    "CertificateCreateOrUpdateParameters":{
-       "properties": {
+    "CertificateCreateOrUpdateParameters": {
+      "properties": {
         "properties": {
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/CertificateCreateOrUpdateProperties",

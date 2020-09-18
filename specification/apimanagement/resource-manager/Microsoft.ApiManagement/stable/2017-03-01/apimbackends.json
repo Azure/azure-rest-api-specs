@@ -94,6 +94,52 @@
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/backends/{backendid}": {
+      "head": {
+        "tags": [
+          "Backends"
+        ],
+        "operationId": "Backend_GetEntityTag",
+        "description": "Gets the entity state (Etag) version of the backend specified by its identifier.",
+        "x-ms-examples": {
+          "ApiManagementHeadBackend": {
+            "$ref": "./examples/ApiManagementHeadBackend.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "./apimanagement.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/BackendIdParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Specified backend entity exists and current entity state version is present in the ETag header.",
+            "headers": {
+              "ETag": {
+                "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./apimanagement.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
       "get": {
         "tags": [
           "Backends"
@@ -307,6 +353,57 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/backends/{backendid}/reconnect": {
+      "post": {
+        "tags": [
+          "Backends"
+        ],
+        "operationId": "Backend_Reconnect",
+        "description": "Notifies the APIM proxy to create a new connection to the backend after the specified timeout. If no timeout was specified, timeout of 2 minutes is used.",
+        "x-ms-examples": {
+          "ApiManagementBackendReconnect": {
+            "$ref": "./examples/ApiManagementBackendReconnect.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "./apimanagement.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/BackendIdParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/BackendReconnectContract"
+            },
+            "description": "Reconnect request parameters."
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Reconnect request accepted."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./apimanagement.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -496,7 +593,7 @@
           "type": "string"
         },
         "maxPartitionResolutionRetries": {
-          "description": "Maximum number of retries while attempting resolve the parition.",
+          "description": "Maximum number of retries while attempting resolve the partition.",
           "format": "int32",
           "type": "integer"
         },
@@ -632,6 +729,33 @@
         }
       ],
       "description": "Parameters supplied to the Update Backend operation."
+    },
+    "BackendReconnectContract": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/BackendReconnectProperties",
+          "description": "Reconnect request properties."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./apimanagement.json#/definitions/Resource"
+        }
+      ],
+      "description": "Reconnect request parameters."
+    },
+    "BackendReconnectProperties": {
+      "properties": {
+        "after": {
+          "type": "string",
+          "format": "duration",
+          "description": "Duration in ISO8601 format after which reconnect will be initiated.",
+          "minLength": 1,
+          "maxLength": 2000
+        }
+      },
+      "description": "Properties to control reconnect requests."
     }
   },
   "parameters": {

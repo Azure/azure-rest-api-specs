@@ -23,7 +23,7 @@
         "tags": [
           "VaultCertificates"
         ],
-        "description": "Upload a certificate for a resource.",
+        "description": "Uploads a certificate for a resource.",
         "operationId": "VaultCertificates_Create",
         "consumes": [
           "application/json"
@@ -69,7 +69,12 @@
             }
           }
         },
-        "deprecated": false
+        "deprecated": false,
+        "x-ms-examples": {
+          "Download vault credential file": {
+            "$ref": "./examples/PUTVaultCred.json"
+          }
+        }
       }
     },
     "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/registeredIdentities/{identityName}": {
@@ -105,7 +110,12 @@
             "description": "NoContent"
           }
         },
-        "deprecated": false
+        "deprecated": false,
+        "x-ms-examples": {
+          "Delete registered Identity": {
+            "$ref": "./examples/DeleteRegisteredIdentities.json"
+          }
+        }
       }
     }
   },
@@ -237,7 +247,7 @@
       "type": "object",
       "properties": {
         "authType": {
-          "description": "This property will be used as the discriminator for deciding the specific types in the polymorhpic chain of types.",
+          "description": "This property will be used as the discriminator for deciding the specific types in the polymorphic chain of types.",
           "type": "string"
         },
         "certificate": {
@@ -246,7 +256,7 @@
           "type": "string"
         },
         "friendlyName": {
-          "description": "Certificate friendlyname.",
+          "description": "Certificate friendly name.",
           "type": "string"
         },
         "issuer": {
@@ -284,18 +294,25 @@
       "type": "object",
       "properties": {
         "name": {
-          "type": "string"
+          "description": "Resource name associated with the resource.",
+          "type": "string",
+          "readOnly": true
         },
         "type": {
-          "type": "string"
+          "description": "Resource type represents the complete path of the form Namespace/ResourceType/ResourceType/...",
+          "type": "string",
+          "readOnly": true
         },
         "id": {
-          "type": "string"
+          "description": "Resource Id represents the complete path to the resource.",
+          "type": "string",
+          "readOnly": true
         },
         "properties": {
           "$ref": "#/definitions/ResourceCertificateDetails"
         }
-      }
+      },
+      "x-ms-azure-resource": true
     }
   },
   "parameters": {

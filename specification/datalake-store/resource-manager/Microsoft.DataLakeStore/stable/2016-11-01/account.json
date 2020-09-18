@@ -37,772 +37,99 @@
     }
   },
   "paths": {
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataLakeStore/accounts/{accountName}/firewallRules/{firewallRuleName}": {
-      "put": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.DataLakeStore/accounts": {
+      "get": {
         "tags": [
-          "FirewallRules"
+          "Accounts"
         ],
-        "operationId": "FirewallRules_CreateOrUpdate",
-        "description": "Creates or updates the specified firewall rule. During update, the firewall rule with the specified name will be replaced with this new firewall rule.",
-        "x-ms-examples": {
-          "Creates or updates the specified firewall rule. During update, the firewall rule with the specified name will be replaced with this new firewall rule": { "$ref": "./examples/Adls_FirewallRules_CreateOrUpdate.json" }
-        },
+        "operationId": "Accounts_List",
+        "description": "Lists the Data Lake Store accounts within the subscription. The response includes a link to the next page of results, if any.",
         "parameters": [
-          {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the Azure resource group that contains the Data Lake Store account."
-          },
-          {
-            "name": "accountName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the Data Lake Store account to add or replace the firewall rule."
-          },
-          {
-            "name": "firewallRuleName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the firewall rule to create or update."
-          },
-          {
-            "name": "parameters",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/FirewallRule"
-            },
-            "description": "Parameters supplied to create or update the firewall rule."
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successfully created or updated the specified firewall rule.",
-            "schema": {
-              "$ref": "#/definitions/FirewallRule"
-            }
-          }
-        }
-      },
-      "patch": {
-        "tags": [
-          "FirewallRules"
-        ],
-        "operationId": "FirewallRules_Update",
-        "description": "Updates the specified firewall rule.",
-        "x-ms-examples": {
-          "Updates the specified firewall rule": { "$ref": "./examples/Adls_FirewallRules_Update.json" }
-        },
-        "parameters": [
-          {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the Azure resource group that contains the Data Lake Store account."
           },
           {
-            "name": "accountName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the Data Lake Store account to which to update the firewall rule."
-          },
-          {
-            "name": "firewallRuleName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the firewall rule to update."
-          },
-          {
-            "name": "parameters",
-            "in": "body",
+            "name": "$filter",
+            "in": "query",
             "required": false,
-            "schema": {
-              "$ref": "#/definitions/UpdateFirewallRuleParameters"
-            },
-            "description": "Parameters supplied to update the firewall rule."
+            "type": "string",
+            "description": "OData filter. Optional."
+          },
+          {
+            "name": "$top",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "minimum": 1,
+            "description": "The number of items to return. Optional."
+          },
+          {
+            "name": "$skip",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "minimum": 1,
+            "description": "The number of items to skip over before returning elements. Optional."
+          },
+          {
+            "name": "$select",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "OData Select statement. Limits the properties on each entry to just those requested, e.g. Categories?$select=CategoryName,Description. Optional."
+          },
+          {
+            "name": "$orderby",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "OrderBy clause. One or more comma-separated expressions with an optional \"asc\" (the default) or \"desc\" depending on the order you'd like the values sorted, e.g. Categories?$orderby=CategoryName desc. Optional."
+          },
+          {
+            "name": "$count",
+            "in": "query",
+            "required": false,
+            "type": "boolean",
+            "description": "The Boolean value of true or false to request a count of the matching resources included with the resources in the response, e.g. Categories?$count=true. Optional."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
           "200": {
-            "description": "Successfully updated the specified firewall rule.",
+            "description": "Successfully retrieved the list of accounts.",
             "schema": {
-              "$ref": "#/definitions/FirewallRule"
+              "$ref": "#/definitions/DataLakeStoreAccountListResult"
             }
           }
-        }
-      },
-      "delete": {
-        "tags": [
-          "FirewallRules"
-        ],
-        "operationId": "FirewallRules_Delete",
-        "description": "Deletes the specified firewall rule from the specified Data Lake Store account",
-        "x-ms-examples": {
-          "Deletes the specified firewall rule from the specified Data Lake Store account": { "$ref": "./examples/Adls_FirewallRules_Delete.json" }
         },
-        "parameters": [
-          {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the Azure resource group that contains the Data Lake Store account."
-          },
-          {
-            "name": "accountName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the Data Lake Store account from which to delete the firewall rule."
-          },
-          {
-            "name": "firewallRuleName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the firewall rule to delete."
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successfully deleted the specified firewall rule."
-          },
-          "204": {
-            "description": "The specified firewall rule does not exist or was already deleted."
-          }
-        }
-      },
-      "get": {
-        "tags": [
-          "FirewallRules"
-        ],
-        "operationId": "FirewallRules_Get",
-        "description": "Gets the specified Data Lake Store firewall rule.",
         "x-ms-examples": {
-          "Gets the specified Data Lake Store firewall rule": { "$ref": "./examples/Adls_FirewallRules_Get.json" }
-        },
-        "parameters": [
-          {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the Azure resource group that contains the Data Lake Store account."
-          },
-          {
-            "name": "accountName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the Data Lake Store account from which to get the firewall rule."
-          },
-          {
-            "name": "firewallRuleName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the firewall rule to retrieve."
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successfully retrieved the firewall rule.",
-            "schema": {
-              "$ref": "#/definitions/FirewallRule"
-            }
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataLakeStore/accounts/{accountName}/firewallRules": {
-      "get": {
-        "tags": [
-          "FirewallRules"
-        ],
-        "operationId": "FirewallRules_ListByAccount",
-        "description": "Lists the Data Lake Store firewall rules within the specified Data Lake Store account.",
-        "x-ms-examples": {
-          "Lists the Data Lake Store firewall rules within the specified Data Lake Store account": { "$ref": "./examples/Adls_FirewallRules_ListByAccount.json" }
-        },
-        "parameters": [
-          {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the Azure resource group that contains the Data Lake Store account."
-          },
-          {
-            "name": "accountName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the Data Lake Store account from which to get the firewall rules."
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successfully retrieved the list of firewall rules.",
-            "schema": {
-              "$ref": "#/definitions/DataLakeStoreFirewallRuleListResult"
-            }
+          "Lists the Data Lake Store accounts within the subscription": {
+            "$ref": "./examples/Accounts_List.json"
           }
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataLakeStore/accounts/{accountName}/trustedIdProviders/{trustedIdProviderName}": {
-      "put": {
-        "tags": [
-          "TrustedIdProviders"
-        ],
-        "operationId": "TrustedIdProviders_CreateOrUpdate",
-        "description": "Creates or updates the specified trusted identity provider. During update, the trusted identity provider with the specified name will be replaced with this new provider",
-        "x-ms-examples": {
-          "Creates or updates the specified trusted identity provider. During update, the trusted identity provider with the specified name will be replaced with this new provider": { "$ref": "./examples/Adls_TrustedIdProviders_CreateOrUpdate.json" }
         },
-        "parameters": [
-          {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the Azure resource group that contains the Data Lake Store account."
-          },
-          {
-            "name": "accountName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the Data Lake Store account to add or replace the trusted identity provider."
-          },
-          {
-            "name": "trustedIdProviderName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the trusted identity provider. This is used for differentiation of providers in the account."
-          },
-          {
-            "name": "parameters",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/TrustedIdProvider"
-            },
-            "description": "Parameters supplied to create or replace the trusted identity provider."
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successfully added the trusted identity provider.",
-            "schema": {
-              "$ref": "#/definitions/TrustedIdProvider"
-            }
-          }
-        }
-      },
-      "patch": {
-        "tags": [
-          "TrustedIdProviders"
-        ],
-        "operationId": "TrustedIdProviders_Update",
-        "description": "Updates the specified trusted identity provider.",
-        "x-ms-examples": {
-          "Updates the specified trusted identity provider": { "$ref": "./examples/Adls_TrustedIdProviders_Update.json" }
-        },
-        "parameters": [
-          {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the Azure resource group that contains the Data Lake Store account."
-          },
-          {
-            "name": "accountName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the Data Lake Store account to which to update the trusted identity provider."
-          },
-          {
-            "name": "trustedIdProviderName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the trusted identity provider. This is used for differentiation of providers in the account."
-          },
-          {
-            "name": "parameters",
-            "in": "body",
-            "required": false,
-            "schema": {
-              "$ref": "#/definitions/UpdateTrustedIdProviderParameters"
-            },
-            "description": "Parameters supplied to update the trusted identity provider."
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successfully added the trusted identity provider.",
-            "schema": {
-              "$ref": "#/definitions/TrustedIdProvider"
-            }
-          }
-        }
-      },
-      "delete": {
-        "tags": [
-          "TrustedIdProviders"
-        ],
-        "operationId": "TrustedIdProviders_Delete",
-        "description": "Deletes the specified trusted identity provider from the specified Data Lake Store account",
-        "x-ms-examples": {
-          "Deletes the specified trusted identity provider from the specified Data Lake Store account": { "$ref": "./examples/Adls_TrustedIdProviders_Delete.json" }
-        },
-        "parameters": [
-          {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the Azure resource group that contains the Data Lake Store account."
-          },
-          {
-            "name": "accountName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the Data Lake Store account from which to delete the trusted identity provider."
-          },
-          {
-            "name": "trustedIdProviderName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the trusted identity provider to delete."
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successfully deleted the specified trusted identity provider details."
-          },
-          "204": {
-            "description": "The specified trusted identity provider was not found."
-          }
-        }
-      },
-      "get": {
-        "tags": [
-          "TrustedIdProviders"
-        ],
-        "operationId": "TrustedIdProviders_Get",
-        "description": "Gets the specified Data Lake Store trusted identity provider.",
-        "x-ms-examples": {
-          "Gets the specified Data Lake Store trusted identity provider": { "$ref": "./examples/Adls_TrustedIdProviders_Get.json" }
-        },
-        "parameters": [
-          {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the Azure resource group that contains the Data Lake Store account."
-          },
-          {
-            "name": "accountName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the Data Lake Store account from which to get the trusted identity provider."
-          },
-          {
-            "name": "trustedIdProviderName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the trusted identity provider to retrieve."
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successfully retrieved details of the specified trusted identity provider.",
-            "schema": {
-              "$ref": "#/definitions/TrustedIdProvider"
-            }
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataLakeStore/accounts/{accountName}/trustedIdProviders": {
-      "get": {
-        "tags": [
-          "TrustedIdProviders"
-        ],
-        "operationId": "TrustedIdProviders_ListByAccount",
-        "description": "Lists the Data Lake Store trusted identity providers within the specified Data Lake Store account.",
-        "x-ms-examples": {
-          "Lists the Data Lake Store trusted identity providers within the specified Data Lake Store account": { "$ref": "./examples/Adls_TrustedIdProviders_ListByAccount.json" }
-        },
-        "parameters": [
-          {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the Azure resource group that contains the Data Lake Store account."
-          },
-          {
-            "name": "accountName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the Data Lake Store account from which to get the trusted identity providers."
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successfully retrieved the list of trusted identity providers.",
-            "schema": {
-              "$ref": "#/definitions/DataLakeStoreTrustedIdProviderListResult"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataLakeStore/accounts/{name}": {
-      "put": {
-        "tags": [
-          "Account"
-        ],
-        "operationId": "Account_Create",
-        "description": "Creates the specified Data Lake Store account.",
-        "x-ms-examples": {
-          "Creates the specified Data Lake Store account": { "$ref": "./examples/Adls_Account_Create.json" }
-        },
-        "parameters": [
-          {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the Azure resource group that contains the Data Lake Store account."
-          },
-          {
-            "name": "name",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the Data Lake Store account to create."
-          },
-          {
-            "name": "parameters",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/DataLakeStoreAccount"
-            },
-            "description": "Parameters supplied to create the Data Lake Store account."
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successfully created the account.",
-            "schema": {
-              "$ref": "#/definitions/DataLakeStoreAccount"
-            }
-          },
-          "201": {
-            "description": "Successfully initiated creation of the account.",
-            "schema": {
-              "$ref": "#/definitions/DataLakeStoreAccount"
-            }
-          }
-        },
-        "x-ms-long-running-operation": true
-      },
-      "patch": {
-        "tags": [
-          "Account"
-        ],
-        "operationId": "Account_Update",
-        "description": "Updates the specified Data Lake Store account information.",
-        "x-ms-examples": {
-          "Updates the specified Data Lake Store account information": { "$ref": "./examples/Adls_Account_Update.json" }
-        },
-        "parameters": [
-          {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the Azure resource group that contains the Data Lake Store account."
-          },
-          {
-            "name": "name",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the Data Lake Store account to update."
-          },
-          {
-            "name": "parameters",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/DataLakeStoreAccountUpdateParameters"
-            },
-            "description": "Parameters supplied to update the Data Lake Store account."
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successfully updated the account details.",
-            "schema": {
-              "$ref": "#/definitions/DataLakeStoreAccount"
-            }
-          },
-          "201": {
-            "description": "Successfully initiated the update of the account details.",
-            "schema": {
-              "$ref": "#/definitions/DataLakeStoreAccount"
-            }
-          },
-          "202": {
-            "description": "Successfully initiated the update of the account details.",
-            "schema": {
-              "$ref": "#/definitions/DataLakeStoreAccount"
-            }
-          }
-        },
-        "x-ms-long-running-operation": true
-      },
-      "delete": {
-        "tags": [
-          "Account"
-        ],
-        "operationId": "Account_Delete",
-        "description": "Deletes the specified Data Lake Store account.",
-        "x-ms-examples": {
-          "Deletes the specified Data Lake Store account": { "$ref": "./examples/Adls_Account_Delete.json" }
-        },
-        "parameters": [
-          {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the Azure resource group that contains the Data Lake Store account."
-          },
-          {
-            "name": "name",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the Data Lake Store account to delete."
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successfully deleted the specified account."
-          },
-          "202": {
-            "description": "Successfully initiated the deletion of the specified account."
-          },
-          "204": {
-            "description": "The specified account was not found."
-          }
-        },
-        "x-ms-long-running-operation": true
-      },
-      "get": {
-        "tags": [
-          "Account"
-        ],
-        "operationId": "Account_Get",
-        "description": "Gets the specified Data Lake Store account.",
-        "x-ms-examples": {
-          "Gets the specified Data Lake Store account": { "$ref": "./examples/Adls_Account_Get.json" }
-        },
-        "parameters": [
-          {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the Azure resource group that contains the Data Lake Store account."
-          },
-          {
-            "name": "name",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the Data Lake Store account to retrieve."
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successfully retrieved details of the specified account.",
-            "schema": {
-              "$ref": "#/definitions/DataLakeStoreAccount"
-            }
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataLakeStore/accounts/{accountName}/enableKeyVault": {
-      "post": {
-        "tags": [
-          "Account"
-        ],
-        "operationId": "Account_EnableKeyVault",
-        "description": "Attempts to enable a user managed Key Vault for encryption of the specified Data Lake Store account.",
-        "x-ms-examples": {
-          "Attempts to enable a user managed Key Vault for encryption of the specified Data Lake Store account": { "$ref": "./examples/Adls_Account_EnableKeyVault.json" }
-        },
-        "parameters": [
-          {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the Azure resource group that contains the Data Lake Store account."
-          },
-          {
-            "name": "accountName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the Data Lake Store account to attempt to enable the Key Vault for."
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successfully enabled the user-managed Key Vault settings used for encrypting this Data Lake Store account."
-          }
-        }
+        "x-ms-odata": "#/definitions/DataLakeStoreAccountBasic"
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataLakeStore/accounts": {
       "get": {
         "tags": [
-          "Account"
+          "Accounts"
         ],
-        "operationId": "Account_ListByResourceGroup",
+        "operationId": "Accounts_ListByResourceGroup",
         "description": "Lists the Data Lake Store accounts within a specific resource group. The response includes a link to the next page of results, if any.",
-        "x-ms-examples": {
-          "Lists the Data Lake Store accounts within a specific resource group": { "$ref": "./examples/Adls_Account_ListByResourceGroup.json" }
-        },
         "parameters": [
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the Azure resource group that contains the Data Lake Store account(s)."
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "$filter",
@@ -852,9 +179,6 @@
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -865,168 +189,895 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Lists the Data Lake Store accounts within a specific resource group": {
+            "$ref": "./examples/Accounts_ListByResourceGroup.json"
+          }
+        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         },
         "x-ms-odata": "#/definitions/DataLakeStoreAccountBasic"
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.DataLakeStore/accounts": {
-      "get": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataLakeStore/accounts/{accountName}": {
+      "put": {
         "tags": [
-          "Account"
+          "Accounts"
         ],
-        "operationId": "Account_List",
-        "description": "Lists the Data Lake Store accounts within the subscription. The response includes a link to the next page of results, if any.",
-        "x-ms-examples": {
-          "Lists the Data Lake Store accounts within the subscription": { "$ref": "./examples/Adls_Account_List.json" }
-        },
+        "operationId": "Accounts_Create",
+        "description": "Creates the specified Data Lake Store account.",
         "parameters": [
-          {
-            "name": "$filter",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "description": "OData filter. Optional."
-          },
-          {
-            "name": "$top",
-            "in": "query",
-            "required": false,
-            "type": "integer",
-            "format": "int32",
-            "minimum": 1,
-            "description": "The number of items to return. Optional."
-          },
-          {
-            "name": "$skip",
-            "in": "query",
-            "required": false,
-            "type": "integer",
-            "format": "int32",
-            "minimum": 1,
-            "description": "The number of items to skip over before returning elements. Optional."
-          },
-          {
-            "name": "$select",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "description": "OData Select statement. Limits the properties on each entry to just those requested, e.g. Categories?$select=CategoryName,Description. Optional."
-          },
-          {
-            "name": "$orderby",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "description": "OrderBy clause. One or more comma-separated expressions with an optional \"asc\" (the default) or \"desc\" depending on the order you'd like the values sorted, e.g. Categories?$orderby=CategoryName desc. Optional."
-          },
-          {
-            "name": "$count",
-            "in": "query",
-            "required": false,
-            "type": "boolean",
-            "description": "The Boolean value of true or false to request a count of the matching resources included with the resources in the response, e.g. Categories?$count=true. Optional."
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successfully retrieved the list of accounts.",
-            "schema": {
-              "$ref": "#/definitions/DataLakeStoreAccountListResult"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
-        "x-ms-odata": "#/definitions/DataLakeStoreAccountBasic"
-      }
-    },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.DataLakeStore/locations/{location}/checkNameAvailability": {
-      "post": {
-        "tags": [
-          "Account"
-        ],
-        "operationId": "Account_CheckNameAvailability",
-        "description": "Checks whether the specified account name is available or taken.",
-        "x-ms-examples": {
-          "Checks whether the specified account name is available or taken": { "$ref": "./examples/Adls_Account_CheckNameAvailability.json" }
-        },
-        "parameters": [
+          },
           {
-            "name": "location",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The Resource location without whitespace."
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AccountNameParameter"
           },
           {
             "name": "parameters",
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/CheckNameAvailabilityParameters"
+              "$ref": "#/definitions/CreateDataLakeStoreAccountParameters"
             },
-            "description": "Parameters supplied to check the Data Lake Store account name availability."
+            "description": "Parameters supplied to create the Data Lake Store account."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
           "200": {
-            "description": "Successfully retrieved the Data Lake Store account name availability information.",
+            "description": "Successfully created the account.",
             "schema": {
-              "$ref": "#/definitions/NameAvailabilityInformation"
+              "$ref": "#/definitions/DataLakeStoreAccount"
             }
+          },
+          "201": {
+            "description": "Successfully initiated creation of the account.",
+            "schema": {
+              "$ref": "#/definitions/DataLakeStoreAccount"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Creates the specified Data Lake Store account": {
+            "$ref": "./examples/Accounts_Create.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "get": {
+        "tags": [
+          "Accounts"
+        ],
+        "operationId": "Accounts_Get",
+        "description": "Gets the specified Data Lake Store account.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved details of the specified account.",
+            "schema": {
+              "$ref": "#/definitions/DataLakeStoreAccount"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Gets the specified Data Lake Store account": {
+            "$ref": "./examples/Accounts_Get.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Accounts"
+        ],
+        "operationId": "Accounts_Update",
+        "description": "Updates the specified Data Lake Store account information.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AccountNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/UpdateDataLakeStoreAccountParameters"
+            },
+            "description": "Parameters supplied to update the Data Lake Store account."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully updated the account details.",
+            "schema": {
+              "$ref": "#/definitions/DataLakeStoreAccount"
+            }
+          },
+          "201": {
+            "description": "Successfully initiated the update of the account details.",
+            "schema": {
+              "$ref": "#/definitions/DataLakeStoreAccount"
+            }
+          },
+          "202": {
+            "description": "Successfully initiated the update of the account details.",
+            "schema": {
+              "$ref": "#/definitions/DataLakeStoreAccount"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Updates the specified Data Lake Store account information": {
+            "$ref": "./examples/Accounts_Update.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "tags": [
+          "Accounts"
+        ],
+        "operationId": "Accounts_Delete",
+        "description": "Deletes the specified Data Lake Store account.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully deleted the specified account."
+          },
+          "202": {
+            "description": "Successfully initiated the deletion of the specified account."
+          },
+          "204": {
+            "description": "The specified account was not found."
+          }
+        },
+        "x-ms-examples": {
+          "Deletes the specified Data Lake Store account": {
+            "$ref": "./examples/Accounts_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataLakeStore/accounts/{accountName}/enableKeyVault": {
+      "post": {
+        "tags": [
+          "Accounts"
+        ],
+        "operationId": "Accounts_EnableKeyVault",
+        "description": "Attempts to enable a user managed Key Vault for encryption of the specified Data Lake Store account.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully enabled the user-managed Key Vault settings used for encrypting this Data Lake Store account."
+          }
+        },
+        "x-ms-examples": {
+          "Attempts to enable a user managed Key Vault for encryption of the specified Data Lake Store account": {
+            "$ref": "./examples/Accounts_EnableKeyVault.json"
           }
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.DataLakeStore/locations/{location}/capability": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataLakeStore/accounts/{accountName}/firewallRules": {
       "get": {
         "tags": [
-          "Locations"
+          "FirewallRules"
         ],
-        "operationId": "Locations_GetCapability",
-        "description": "Gets subscription-level properties and limits for Data Lake Store specified by Resource location.",
-        "x-ms-examples": {
-          "Gets subscription-level properties and limits for Data Lake Store specified by Resource location": { "$ref": "./examples/Adls_Locations_GetCapability.json" }
-        },
+        "operationId": "FirewallRules_ListByAccount",
+        "description": "Lists the Data Lake Store firewall rules within the specified Data Lake Store account.",
         "parameters": [
           {
-            "name": "location",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The Resource location without whitespace."
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AccountNameParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
           "200": {
-            "description": "Successfully retrieved the subscription-level properties and limits for Data Lake Store specified by Resource location.",
+            "description": "Successfully retrieved the list of firewall rules.",
             "schema": {
-              "$ref": "#/definitions/CapabilityInformation"
+              "$ref": "#/definitions/FirewallRuleListResult"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Lists the Data Lake Store firewall rules within the specified Data Lake Store account.": {
+            "$ref": "./examples/FirewallRules_ListByAccount.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataLakeStore/accounts/{accountName}/firewallRules/{firewallRuleName}": {
+      "put": {
+        "tags": [
+          "FirewallRules"
+        ],
+        "operationId": "FirewallRules_CreateOrUpdate",
+        "description": "Creates or updates the specified firewall rule. During update, the firewall rule with the specified name will be replaced with this new firewall rule.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
           },
-          "404": {
-            "description": "Subscription not found."
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AccountNameParameter"
+          },
+          {
+            "name": "firewallRuleName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the firewall rule to create or update."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CreateOrUpdateFirewallRuleParameters"
+            },
+            "description": "Parameters supplied to create or update the firewall rule."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully created or updated the specified firewall rule.",
+            "schema": {
+              "$ref": "#/definitions/FirewallRule"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Creates or updates the specified firewall rule. During update, the firewall rule with the specified name will be replaced with this new firewall rule": {
+            "$ref": "./examples/FirewallRules_CreateOrUpdate.json"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "FirewallRules"
+        ],
+        "operationId": "FirewallRules_Get",
+        "description": "Gets the specified Data Lake Store firewall rule.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AccountNameParameter"
+          },
+          {
+            "name": "firewallRuleName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the firewall rule to retrieve."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the firewall rule.",
+            "schema": {
+              "$ref": "#/definitions/FirewallRule"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Gets the specified Data Lake Store firewall rule.": {
+            "$ref": "./examples/FirewallRules_Get.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "FirewallRules"
+        ],
+        "operationId": "FirewallRules_Update",
+        "description": "Updates the specified firewall rule.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AccountNameParameter"
+          },
+          {
+            "name": "firewallRuleName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the firewall rule to update."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/UpdateFirewallRuleParameters"
+            },
+            "description": "Parameters supplied to update the firewall rule."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully updated the specified firewall rule.",
+            "schema": {
+              "$ref": "#/definitions/FirewallRule"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Updates the specified firewall rule.": {
+            "$ref": "./examples/FirewallRules_Update.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "FirewallRules"
+        ],
+        "operationId": "FirewallRules_Delete",
+        "description": "Deletes the specified firewall rule from the specified Data Lake Store account.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AccountNameParameter"
+          },
+          {
+            "name": "firewallRuleName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the firewall rule to delete."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully deleted the specified firewall rule."
+          },
+          "204": {
+            "description": "The specified firewall rule does not exist or was already deleted."
+          }
+        },
+        "x-ms-examples": {
+          "Deletes the specified firewall rule from the specified Data Lake Store account.": {
+            "$ref": "./examples/FirewallRules_Delete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataLakeStore/accounts/{accountName}/virtualNetworkRules": {
+      "get": {
+        "tags": [
+          "VirtualNetworkRules"
+        ],
+        "operationId": "VirtualNetworkRules_ListByAccount",
+        "description": "Lists the Data Lake Store virtual network rules within the specified Data Lake Store account.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the list of virtual network rules.",
+            "schema": {
+              "$ref": "#/definitions/VirtualNetworkRuleListResult"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Lists the Data Lake Store virtual network rules within the specified Data Lake Store account.": {
+            "$ref": "./examples/VirtualNetworkRules_ListByAccount.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataLakeStore/accounts/{accountName}/virtualNetworkRules/{virtualNetworkRuleName}": {
+      "put": {
+        "tags": [
+          "VirtualNetworkRules"
+        ],
+        "operationId": "VirtualNetworkRules_CreateOrUpdate",
+        "description": "Creates or updates the specified virtual network rule. During update, the virtual network rule with the specified name will be replaced with this new virtual network rule.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AccountNameParameter"
+          },
+          {
+            "name": "virtualNetworkRuleName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the virtual network rule to create or update."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CreateOrUpdateVirtualNetworkRuleParameters"
+            },
+            "description": "Parameters supplied to create or update the virtual network rule."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully created or updated the specified virtual network rule.",
+            "schema": {
+              "$ref": "#/definitions/VirtualNetworkRule"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Creates or updates the specified virtual network rule. During update, the virtual network rule with the specified name will be replaced with this new virtual network rule.": {
+            "$ref": "./examples/VirtualNetworkRules_CreateOrUpdate.json"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "VirtualNetworkRules"
+        ],
+        "operationId": "VirtualNetworkRules_Get",
+        "description": "Gets the specified Data Lake Store virtual network rule.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AccountNameParameter"
+          },
+          {
+            "name": "virtualNetworkRuleName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the virtual network rule to retrieve."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the virtual network rule.",
+            "schema": {
+              "$ref": "#/definitions/VirtualNetworkRule"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Gets the specified Data Lake Store virtual network rule.": {
+            "$ref": "./examples/VirtualNetworkRules_Get.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "VirtualNetworkRules"
+        ],
+        "operationId": "VirtualNetworkRules_Update",
+        "description": "Updates the specified virtual network rule.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AccountNameParameter"
+          },
+          {
+            "name": "virtualNetworkRuleName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the virtual network rule to update."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/UpdateVirtualNetworkRuleParameters"
+            },
+            "description": "Parameters supplied to update the virtual network rule."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully updated the specified virtual network rule.",
+            "schema": {
+              "$ref": "#/definitions/VirtualNetworkRule"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Updates the specified virtual network rule.": {
+            "$ref": "./examples/VirtualNetworkRules_Update.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "VirtualNetworkRules"
+        ],
+        "operationId": "VirtualNetworkRules_Delete",
+        "description": "Deletes the specified virtual network rule from the specified Data Lake Store account.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AccountNameParameter"
+          },
+          {
+            "name": "virtualNetworkRuleName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the virtual network rule to delete."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully deleted the specified virtual network rule."
+          },
+          "204": {
+            "description": "The specified virtual network rule does not exist or was already deleted."
+          }
+        },
+        "x-ms-examples": {
+          "Deletes the specified virtual network rule from the specified Data Lake Store account.": {
+            "$ref": "./examples/VirtualNetworkRules_Delete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataLakeStore/accounts/{accountName}/trustedIdProviders": {
+      "get": {
+        "tags": [
+          "TrustedIdProviders"
+        ],
+        "operationId": "TrustedIdProviders_ListByAccount",
+        "description": "Lists the Data Lake Store trusted identity providers within the specified Data Lake Store account.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the list of trusted identity providers.",
+            "schema": {
+              "$ref": "#/definitions/TrustedIdProviderListResult"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Lists the Data Lake Store trusted identity providers within the specified Data Lake Store account": {
+            "$ref": "./examples/TrustedIdProviders_ListByAccount.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataLakeStore/accounts/{accountName}/trustedIdProviders/{trustedIdProviderName}": {
+      "put": {
+        "tags": [
+          "TrustedIdProviders"
+        ],
+        "operationId": "TrustedIdProviders_CreateOrUpdate",
+        "description": "Creates or updates the specified trusted identity provider. During update, the trusted identity provider with the specified name will be replaced with this new provider",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AccountNameParameter"
+          },
+          {
+            "name": "trustedIdProviderName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the trusted identity provider. This is used for differentiation of providers in the account."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CreateOrUpdateTrustedIdProviderParameters"
+            },
+            "description": "Parameters supplied to create or replace the trusted identity provider."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully added the trusted identity provider.",
+            "schema": {
+              "$ref": "#/definitions/TrustedIdProvider"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Creates or updates the specified trusted identity provider. During update, the trusted identity provider with the specified name will be replaced with this new provider": {
+            "$ref": "./examples/TrustedIdProviders_CreateOrUpdate.json"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "TrustedIdProviders"
+        ],
+        "operationId": "TrustedIdProviders_Get",
+        "description": "Gets the specified Data Lake Store trusted identity provider.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AccountNameParameter"
+          },
+          {
+            "name": "trustedIdProviderName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the trusted identity provider to retrieve."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved details of the specified trusted identity provider.",
+            "schema": {
+              "$ref": "#/definitions/TrustedIdProvider"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Gets the specified Data Lake Store trusted identity provider": {
+            "$ref": "./examples/TrustedIdProviders_Get.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "TrustedIdProviders"
+        ],
+        "operationId": "TrustedIdProviders_Update",
+        "description": "Updates the specified trusted identity provider.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AccountNameParameter"
+          },
+          {
+            "name": "trustedIdProviderName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the trusted identity provider. This is used for differentiation of providers in the account."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/UpdateTrustedIdProviderParameters"
+            },
+            "description": "Parameters supplied to update the trusted identity provider."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully added the trusted identity provider.",
+            "schema": {
+              "$ref": "#/definitions/TrustedIdProvider"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Updates the specified trusted identity provider": {
+            "$ref": "./examples/TrustedIdProviders_Update.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "TrustedIdProviders"
+        ],
+        "operationId": "TrustedIdProviders_Delete",
+        "description": "Deletes the specified trusted identity provider from the specified Data Lake Store account",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AccountNameParameter"
+          },
+          {
+            "name": "trustedIdProviderName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the trusted identity provider to delete."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully deleted the specified trusted identity provider details."
+          },
+          "204": {
+            "description": "The specified trusted identity provider was not found."
+          }
+        },
+        "x-ms-examples": {
+          "Deletes the specified trusted identity provider from the specified Data Lake Store account": {
+            "$ref": "./examples/TrustedIdProviders_Delete.json"
           }
         }
       }
@@ -1038,9 +1089,6 @@
         ],
         "operationId": "Operations_List",
         "description": "Lists all of the available Data Lake Store REST API operations.",
-        "x-ms-examples": {
-          "Lists all of the available Data Lake Store REST API operations": { "$ref": "./examples/Adls_Operations_List.json" }
-        },
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -1053,153 +1101,459 @@
               "$ref": "#/definitions/OperationListResult"
             }
           }
+        },
+        "x-ms-examples": {
+          "Lists all of the available Data Lake Store REST API operations": {
+            "$ref": "./examples/Operations_List.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.DataLakeStore/locations/{location}/capability": {
+      "get": {
+        "tags": [
+          "Locations"
+        ],
+        "operationId": "Locations_GetCapability",
+        "description": "Gets subscription-level properties and limits for Data Lake Store specified by resource location.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "location",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The resource location without whitespace."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the subscription-level properties and limits for Data Lake Store specified by resource location.",
+            "schema": {
+              "$ref": "#/definitions/CapabilityInformation"
+            }
+          },
+          "404": {
+            "description": "Subscription not found."
+          }
+        },
+        "x-ms-examples": {
+          "Gets subscription-level properties and limits for Data Lake Store specified by resource location": {
+            "$ref": "./examples/Locations_GetCapability.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.DataLakeStore/locations/{location}/usages": {
+      "get": {
+        "tags": [
+          "LocationUsage"
+        ],
+        "operationId": "Locations_GetUsage",
+        "description": "Gets the current usage count and the limit for the resources of the location under the subscription.",
+        "x-ms-examples": {
+          "UsageList": {
+            "$ref": "./examples/Locations_GetUsage.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "location",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The resource location without whitespace."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK -- current usage count and limit retrieved and returned successfully.",
+            "schema": {
+              "$ref": "#/definitions/UsageListResult"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.DataLakeStore/locations/{location}/checkNameAvailability": {
+      "post": {
+        "tags": [
+          "Accounts"
+        ],
+        "operationId": "Accounts_CheckNameAvailability",
+        "description": "Checks whether the specified account name is available or taken.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "location",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The resource location without whitespace."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CheckNameAvailabilityParameters"
+            },
+            "description": "Parameters supplied to check the Data Lake Store account name availability."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the Data Lake Store account name availability information.",
+            "schema": {
+              "$ref": "#/definitions/NameAvailabilityInformation"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Checks whether the specified account name is available or taken": {
+            "$ref": "./examples/Accounts_CheckNameAvailability.json"
+          }
         }
       }
     }
   },
   "definitions": {
-    "UpdateFirewallRuleProperties": {
+    "Resource": {
       "properties": {
-        "startIpAddress": {
-          "type": "string",
-          "description": "the start IP address for the firewall rule. This can be either ipv4 or ipv6. Start and End should be in the same protocol."
-        },
-        "endIpAddress": {
-          "type": "string",
-          "description": "the end IP address for the firewall rule. This can be either ipv4 or ipv6. Start and End should be in the same protocol."
-        }
-      },
-      "description": "Data Lake Store firewall rule properties information"
-    },
-    "UpdateFirewallRuleParameters": {
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/UpdateFirewallRuleProperties",
-          "description": "the properties of the firewall rule to update.",
-          "x-ms-client-flatten": true
-        }
-      },
-      "description": "Data Lake Store firewall rule update parameters"
-    },
-    "FirewallRuleProperties": {
-      "required": [
-        "startIpAddress",
-        "endIpAddress"
-      ],
-      "properties": {
-        "startIpAddress": {
-          "type": "string",
-          "description": "the start IP address for the firewall rule. This can be either ipv4 or ipv6. Start and End should be in the same protocol."
-        },
-        "endIpAddress": {
-          "type": "string",
-          "description": "the end IP address for the firewall rule. This can be either ipv4 or ipv6. Start and End should be in the same protocol."
-        }
-      },
-      "description": "Data Lake Store firewall rule properties information"
-    },
-    "FirewallRule": {
-      "required": [
-        "properties"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/SubResource"
-        }
-      ],
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/FirewallRuleProperties",
-          "description": "the properties of the firewall rule.",
-          "x-ms-client-flatten": true
-        }
-      },
-      "description": "Data Lake Store firewall rule information"
-    },
-    "UpdateTrustedIdProviderProperties": {
-      "properties": {
-        "idProvider": {
-          "type": "string",
-          "description": "The URL of this trusted identity provider"
-        }
-      },
-      "description": "Data Lake Store trusted identity provider property update information"
-    },
-    "UpdateTrustedIdProviderParameters": {
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/UpdateTrustedIdProviderProperties",
-          "description": "the properties of the trusted identity provider to update.",
-          "x-ms-client-flatten": true
-        }
-      },
-      "description": "Data Lake Store Trusted Identity Provider update parameters"
-    },
-    "TrustedIdProviderProperties": {
-      "required": [
-        "idProvider"
-      ],
-      "properties": {
-        "idProvider": {
-          "type": "string",
-          "description": "The URL of this trusted identity provider"
-        }
-      },
-      "description": "Data Lake Store trusted identity provider properties information"
-    },
-    "TrustedIdProvider": {
-      "required": [
-        "properties"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/SubResource"
-        }
-      ],
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/TrustedIdProviderProperties",
-          "description": "the properties of the trusted identity provider.",
-          "x-ms-client-flatten": true
-        }
-      },
-      "description": "Data Lake Store Trusted Identity Provider information"
-    },
-    "DataLakeStoreTrustedIdProviderListResult": {
-      "properties": {
-        "value": {
-          "type": "array",
+        "id": {
           "readOnly": true,
-          "items": {
-            "$ref": "#/definitions/TrustedIdProvider"
+          "type": "string",
+          "description": "The resource identifier."
+        },
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The resource name."
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The resource type."
+        },
+        "location": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The resource location."
+        },
+        "tags": {
+          "readOnly": true,
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
           },
-          "description": "the results of the list operation"
-        },
-        "nextLink": {
-          "type": "string",
-          "readOnly": true,
-          "description": "the link (url) to the next page of results."
+          "description": "The resource tags."
         }
       },
-      "description": "Data Lake Store trusted identity provider list information."
+      "x-ms-azure-resource": true,
+      "description": "The resource model definition."
     },
-    "DataLakeStoreFirewallRuleListResult": {
+    "SubResource": {
       "properties": {
-        "value": {
-          "type": "array",
+        "id": {
           "readOnly": true,
+          "type": "string",
+          "description": "The resource identifier."
+        },
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The resource name."
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The resource type."
+        }
+      },
+      "x-ms-azure-resource": true,
+      "description": "The resource model definition for a nested resource."
+    },
+    "DataLakeStoreAccount": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "identity": {
+          "readOnly": true,
+          "$ref": "#/definitions/EncryptionIdentity",
+          "description": "The Key Vault encryption identity, if any."
+        },
+        "properties": {
+          "readOnly": true,
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/DataLakeStoreAccountProperties",
+          "description": "The Data Lake Store account properties."
+        }
+      },
+      "description": "Data Lake Store account information."
+    },
+    "DataLakeStoreAccountBasic": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "readOnly": true,
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/DataLakeStoreAccountPropertiesBasic",
+          "description": "The basic Data Lake Store account properties."
+        }
+      },
+      "description": "Basic Data Lake Store account information, returned on list calls."
+    },
+    "DataLakeStoreAccountProperties": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataLakeStoreAccountPropertiesBasic"
+        }
+      ],
+      "properties": {
+        "defaultGroup": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The default owner group for all new folders and files created in the Data Lake Store account."
+        },
+        "encryptionConfig": {
+          "readOnly": true,
+          "$ref": "#/definitions/EncryptionConfig",
+          "description": "The Key Vault encryption configuration."
+        },
+        "encryptionState": {
+          "readOnly": true,
+          "type": "string",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "EncryptionState",
+            "modelAsString": false
+          },
+          "description": "The current state of encryption for this Data Lake Store account."
+        },
+        "encryptionProvisioningState": {
+          "readOnly": true,
+          "type": "string",
+          "enum": [
+            "Creating",
+            "Succeeded"
+          ],
+          "x-ms-enum": {
+            "name": "EncryptionProvisioningState",
+            "modelAsString": false
+          },
+          "description": "The current state of encryption provisioning for this Data Lake Store account."
+        },
+        "firewallRules": {
+          "readOnly": true,
+          "type": "array",
           "items": {
             "$ref": "#/definitions/FirewallRule"
           },
-          "description": "the results of the list operation"
+          "description": "The list of firewall rules associated with this Data Lake Store account."
         },
-        "nextLink": {
-          "type": "string",
+        "virtualNetworkRules": {
           "readOnly": true,
-          "description": "the link (url) to the next page of results."
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VirtualNetworkRule"
+          },
+          "description": "The list of virtual network rules associated with this Data Lake Store account."
+        },
+        "firewallState": {
+          "readOnly": true,
+          "type": "string",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "FirewallState",
+            "modelAsString": false
+          },
+          "description": "The current state of the IP address firewall for this Data Lake Store account."
+        },
+        "firewallAllowAzureIps": {
+          "readOnly": true,
+          "type": "string",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "FirewallAllowAzureIpsState",
+            "modelAsString": false
+          },
+          "description": "The current state of allowing or disallowing IPs originating within Azure through the firewall. If the firewall is disabled, this is not enforced."
+        },
+        "trustedIdProviders": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TrustedIdProvider"
+          },
+          "description": "The list of trusted identity providers associated with this Data Lake Store account."
+        },
+        "trustedIdProviderState": {
+          "readOnly": true,
+          "type": "string",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "TrustedIdProviderState",
+            "modelAsString": false
+          },
+          "description": "The current state of the trusted identity provider feature for this Data Lake Store account."
+        },
+        "newTier": {
+          "readOnly": true,
+          "type": "string",
+          "enum": [
+            "Consumption",
+            "Commitment_1TB",
+            "Commitment_10TB",
+            "Commitment_100TB",
+            "Commitment_500TB",
+            "Commitment_1PB",
+            "Commitment_5PB"
+          ],
+          "x-ms-enum": {
+            "name": "TierType",
+            "modelAsString": false
+          },
+          "description": "The commitment tier to use for next month."
+        },
+        "currentTier": {
+          "readOnly": true,
+          "type": "string",
+          "enum": [
+            "Consumption",
+            "Commitment_1TB",
+            "Commitment_10TB",
+            "Commitment_100TB",
+            "Commitment_500TB",
+            "Commitment_1PB",
+            "Commitment_5PB"
+          ],
+          "x-ms-enum": {
+            "name": "TierType",
+            "modelAsString": false
+          },
+          "description": "The commitment tier in use for the current month."
         }
       },
-      "description": "Data Lake Store firewall rule list information."
+      "description": "Data Lake Store account properties information."
+    },
+    "DataLakeStoreAccountPropertiesBasic": {
+      "properties": {
+        "accountId": {
+          "readOnly": true,
+          "type": "string",
+          "format": "uuid",
+          "description": "The unique identifier associated with this Data Lake Store account."
+        },
+        "provisioningState": {
+          "readOnly": true,
+          "type": "string",
+          "enum": [
+            "Failed",
+            "Creating",
+            "Running",
+            "Succeeded",
+            "Patching",
+            "Suspending",
+            "Resuming",
+            "Deleting",
+            "Deleted",
+            "Undeleting",
+            "Canceled"
+          ],
+          "x-ms-enum": {
+            "name": "DataLakeStoreAccountStatus",
+            "modelAsString": false
+          },
+          "description": "The provisioning status of the Data Lake Store account."
+        },
+        "state": {
+          "readOnly": true,
+          "type": "string",
+          "enum": [
+            "Active",
+            "Suspended"
+          ],
+          "x-ms-enum": {
+            "name": "DataLakeStoreAccountState",
+            "modelAsString": false
+          },
+          "description": "The state of the Data Lake Store account."
+        },
+        "creationTime": {
+          "readOnly": true,
+          "type": "string",
+          "format": "date-time",
+          "description": "The account creation time."
+        },
+        "lastModifiedTime": {
+          "readOnly": true,
+          "type": "string",
+          "format": "date-time",
+          "description": "The account last modified time."
+        },
+        "endpoint": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The full CName endpoint for this account."
+        }
+      },
+      "description": "The basic account specific properties that are associated with an underlying Data Lake Store account."
+    },
+    "DataLakeStoreAccountListResult": {
+      "properties": {
+        "value": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DataLakeStoreAccountBasic"
+          },
+          "description": "The results of the list operation."
+        },
+        "nextLink": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The link (url) to the next page of results."
+        }
+      },
+      "description": "Data Lake Store account list information response."
     },
     "EncryptionIdentity": {
       "required": [
@@ -1208,25 +1562,25 @@
       "properties": {
         "type": {
           "type": "string",
-          "description": "The type of encryption being used. Currently the only supported type is 'SystemAssigned'.",
           "enum": [
             "SystemAssigned"
           ],
           "x-ms-enum": {
             "name": "EncryptionIdentityType",
             "modelAsString": false
-          }
+          },
+          "description": "The type of encryption being used. Currently the only supported type is 'SystemAssigned'."
         },
         "principalId": {
+          "readOnly": true,
           "type": "string",
           "format": "uuid",
-          "readOnly": true,
           "description": "The principal identifier associated with the encryption."
         },
         "tenantId": {
+          "readOnly": true,
           "type": "string",
           "format": "uuid",
-          "readOnly": true,
           "description": "The tenant identifier associated with the encryption."
         }
       },
@@ -1239,7 +1593,6 @@
       "properties": {
         "type": {
           "type": "string",
-          "description": "The type of encryption configuration being used. Currently the only supported types are 'UserManaged' and 'ServiceManaged'.",
           "enum": [
             "UserManaged",
             "ServiceManaged"
@@ -1247,7 +1600,8 @@
           "x-ms-enum": {
             "name": "EncryptionConfigType",
             "modelAsString": false
-          }
+          },
+          "description": "The type of encryption configuration being used. Currently the only supported types are 'UserManaged' and 'ServiceManaged'."
         },
         "keyVaultMetaInfo": {
           "$ref": "#/definitions/KeyVaultMetaInfo",
@@ -1278,6 +1632,578 @@
       },
       "description": "Metadata information used by account encryption."
     },
+    "FirewallRule": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/SubResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "readOnly": true,
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/FirewallRuleProperties",
+          "description": "The firewall rule properties."
+        }
+      },
+      "description": "Data Lake Store firewall rule information."
+    },
+    "FirewallRuleProperties": {
+      "properties": {
+        "startIpAddress": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The start IP address for the firewall rule. This can be either ipv4 or ipv6. Start and End should be in the same protocol."
+        },
+        "endIpAddress": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The end IP address for the firewall rule. This can be either ipv4 or ipv6. Start and End should be in the same protocol."
+        }
+      },
+      "description": "The firewall rule properties."
+    },
+    "FirewallRuleListResult": {
+      "properties": {
+        "value": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/FirewallRule"
+          },
+          "description": "The results of the list operation."
+        },
+        "nextLink": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The link (url) to the next page of results."
+        }
+      },
+      "description": "Data Lake Store firewall rule list information."
+    },
+    "VirtualNetworkRule": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/SubResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "readOnly": true,
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/VirtualNetworkRuleProperties",
+          "description": "The virtual network rule properties."
+        }
+      },
+      "description": "Data Lake Store virtual network rule information."
+    },
+    "VirtualNetworkRuleProperties": {
+      "properties": {
+        "subnetId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The resource identifier for the subnet."
+        }
+      },
+      "description": "The virtual network rule properties."
+    },
+    "VirtualNetworkRuleListResult": {
+      "properties": {
+        "value": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VirtualNetworkRule"
+          },
+          "description": "The results of the list operation."
+        },
+        "nextLink": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The link (url) to the next page of results."
+        }
+      },
+      "description": "Data Lake Store virtual network rule list information."
+    },
+    "TrustedIdProvider": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/SubResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "readOnly": true,
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/TrustedIdProviderProperties",
+          "description": "The trusted identity provider properties."
+        }
+      },
+      "description": "Data Lake Store trusted identity provider information."
+    },
+    "TrustedIdProviderProperties": {
+      "properties": {
+        "idProvider": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The URL of this trusted identity provider."
+        }
+      },
+      "description": "The trusted identity provider properties."
+    },
+    "TrustedIdProviderListResult": {
+      "properties": {
+        "value": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TrustedIdProvider"
+          },
+          "description": "The results of the list operation."
+        },
+        "nextLink": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The link (url) to the next page of results."
+        }
+      },
+      "description": "Data Lake Store trusted identity provider list information."
+    },
+    "Operation": {
+      "properties": {
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The name of the operation."
+        },
+        "display": {
+          "$ref": "#/definitions/OperationDisplay",
+          "description": "The display information for the operation."
+        },
+        "origin": {
+          "readOnly": true,
+          "type": "string",
+          "enum": [
+            "user",
+            "system",
+            "user,system"
+          ],
+          "x-ms-enum": {
+            "name": "OperationOrigin",
+            "modelAsString": true
+          },
+          "description": "The intended executor of the operation."
+        }
+      },
+      "description": "An available operation for Data Lake Store."
+    },
+    "OperationDisplay": {
+      "properties": {
+        "provider": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The resource provider of the operation."
+        },
+        "resource": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The resource type of the operation."
+        },
+        "operation": {
+          "readOnly": true,
+          "type": "string",
+          "description": "A friendly name of the operation."
+        },
+        "description": {
+          "readOnly": true,
+          "type": "string",
+          "description": "A friendly description of the operation."
+        }
+      },
+      "description": "The display information for a particular operation."
+    },
+    "OperationListResult": {
+      "properties": {
+        "value": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Operation"
+          },
+          "description": "The results of the list operation."
+        },
+        "nextLink": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The link (url) to the next page of results."
+        }
+      },
+      "description": "The list of available operations for Data Lake Store."
+    },
+    "CapabilityInformation": {
+      "properties": {
+        "subscriptionId": {
+          "readOnly": true,
+          "type": "string",
+          "format": "uuid",
+          "description": "The subscription credentials that uniquely identifies the subscription."
+        },
+        "state": {
+          "readOnly": true,
+          "type": "string",
+          "enum": [
+            "Registered",
+            "Suspended",
+            "Deleted",
+            "Unregistered",
+            "Warned"
+          ],
+          "x-ms-enum": {
+            "name": "SubscriptionState",
+            "modelAsString": true
+          },
+          "description": "The subscription state."
+        },
+        "maxAccountCount": {
+          "readOnly": true,
+          "type": "integer",
+          "format": "int32",
+          "description": "The maximum supported number of accounts under this subscription."
+        },
+        "accountCount": {
+          "readOnly": true,
+          "type": "integer",
+          "format": "int32",
+          "description": "The current number of accounts under this subscription."
+        },
+        "migrationState": {
+          "readOnly": true,
+          "type": "boolean",
+          "description": "The Boolean value of true or false to indicate the maintenance state."
+        }
+      },
+      "description": "Subscription-level properties and limits for Data Lake Store."
+    },
+    "UsageName": {
+      "properties": {
+        "value": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Gets a string describing the resource name."
+        },
+        "localizedValue": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Gets a localized string describing the resource name."
+        }
+      },
+      "description": "The usage names that can be used."
+    },
+    "Usage": {
+      "properties": {
+        "unit": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Gets the unit of measurement.",
+          "enum": [
+            "Count",
+            "Bytes",
+            "Seconds",
+            "Percent",
+            "CountsPerSecond",
+            "BytesPerSecond"
+          ],
+          "x-ms-enum": {
+            "name": "UsageUnit",
+            "modelAsString": false
+          }
+        },
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource identifier."
+        },
+        "currentValue": {
+          "readOnly": true,
+          "type": "integer",
+          "format": "int32",
+          "description": "Gets the current count of the allocated resources in the subscription."
+        },
+        "limit": {
+          "readOnly": true,
+          "type": "integer",
+          "format": "int32",
+          "description": "Gets the maximum count of the resources that can be allocated in the subscription."
+        },
+        "name": {
+          "$ref": "#/definitions/UsageName",
+          "readOnly": true,
+          "description": "Gets the name of the type of usage."
+        }
+      },
+      "description": "Describes the Resource Usage."
+    },
+    "UsageListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Usage"
+          },
+          "description": "Gets or sets the list of Storage Resource Usages."
+        }
+      },
+      "description": "The response from the List Usages operation."
+    },
+    "NameAvailabilityInformation": {
+      "properties": {
+        "nameAvailable": {
+          "readOnly": true,
+          "type": "boolean",
+          "description": "The Boolean value of true or false to indicate whether the Data Lake Store account name is available or not."
+        },
+        "reason": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The reason why the Data Lake Store account name is not available, if nameAvailable is false."
+        },
+        "message": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The message describing why the Data Lake Store account name is not available, if nameAvailable is false."
+        }
+      },
+      "description": "Data Lake Store account name availability result information."
+    },
+    "CreateDataLakeStoreAccountParameters": {
+      "required": [
+        "location"
+      ],
+      "properties": {
+        "location": {
+          "type": "string",
+          "description": "The resource location."
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "The resource tags."
+        },
+        "identity": {
+          "$ref": "#/definitions/EncryptionIdentity",
+          "description": "The Key Vault encryption identity, if any."
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/CreateDataLakeStoreAccountProperties",
+          "description": "The Data Lake Store account properties to use for creating."
+        }
+      }
+    },
+    "CreateDataLakeStoreAccountProperties": {
+      "properties": {
+        "defaultGroup": {
+          "type": "string",
+          "description": "The default owner group for all new folders and files created in the Data Lake Store account."
+        },
+        "encryptionConfig": {
+          "$ref": "#/definitions/EncryptionConfig",
+          "description": "The Key Vault encryption configuration."
+        },
+        "encryptionState": {
+          "type": "string",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "EncryptionState",
+            "modelAsString": false
+          },
+          "description": "The current state of encryption for this Data Lake Store account."
+        },
+        "firewallRules": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CreateFirewallRuleWithAccountParameters"
+          },
+          "description": "The list of firewall rules associated with this Data Lake Store account."
+        },
+        "virtualNetworkRules": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CreateVirtualNetworkRuleWithAccountParameters"
+          },
+          "description": "The list of virtual network rules associated with this Data Lake Store account."
+        },
+        "firewallState": {
+          "type": "string",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "FirewallState",
+            "modelAsString": false
+          },
+          "description": "The current state of the IP address firewall for this Data Lake Store account."
+        },
+        "firewallAllowAzureIps": {
+          "type": "string",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "FirewallAllowAzureIpsState",
+            "modelAsString": false
+          },
+          "description": "The current state of allowing or disallowing IPs originating within Azure through the firewall. If the firewall is disabled, this is not enforced."
+        },
+        "trustedIdProviders": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CreateTrustedIdProviderWithAccountParameters"
+          },
+          "description": "The list of trusted identity providers associated with this Data Lake Store account."
+        },
+        "trustedIdProviderState": {
+          "type": "string",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "TrustedIdProviderState",
+            "modelAsString": false
+          },
+          "description": "The current state of the trusted identity provider feature for this Data Lake Store account."
+        },
+        "newTier": {
+          "type": "string",
+          "enum": [
+            "Consumption",
+            "Commitment_1TB",
+            "Commitment_10TB",
+            "Commitment_100TB",
+            "Commitment_500TB",
+            "Commitment_1PB",
+            "Commitment_5PB"
+          ],
+          "x-ms-enum": {
+            "name": "TierType",
+            "modelAsString": false
+          },
+          "description": "The commitment tier to use for next month."
+        }
+      }
+    },
+    "UpdateDataLakeStoreAccountParameters": {
+      "properties": {
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags"
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/UpdateDataLakeStoreAccountProperties",
+          "description": "The Data Lake Store account properties to update."
+        }
+      },
+      "description": "Data Lake Store account information to update."
+    },
+    "UpdateDataLakeStoreAccountProperties": {
+      "properties": {
+        "defaultGroup": {
+          "type": "string",
+          "description": "The default owner group for all new folders and files created in the Data Lake Store account."
+        },
+        "encryptionConfig": {
+          "$ref": "#/definitions/UpdateEncryptionConfig",
+          "description": "Used for rotation of user managed Key Vault keys. Can only be used to rotate a user managed encryption Key Vault key."
+        },
+        "firewallRules": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/UpdateFirewallRuleWithAccountParameters"
+          },
+          "description": "The list of firewall rules associated with this Data Lake Store account."
+        },
+        "virtualNetworkRules": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/UpdateVirtualNetworkRuleWithAccountParameters"
+          },
+          "description": "The list of virtual network rules associated with this Data Lake Store account."
+        },
+        "firewallState": {
+          "type": "string",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "FirewallState",
+            "modelAsString": false
+          },
+          "description": "The current state of the IP address firewall for this Data Lake Store account. Disabling the firewall does not remove existing rules, they will just be ignored until the firewall is re-enabled."
+        },
+        "firewallAllowAzureIps": {
+          "type": "string",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "FirewallAllowAzureIpsState",
+            "modelAsString": false
+          },
+          "description": "The current state of allowing or disallowing IPs originating within Azure through the firewall. If the firewall is disabled, this is not enforced."
+        },
+        "trustedIdProviders": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/UpdateTrustedIdProviderWithAccountParameters"
+          },
+          "description": "The list of trusted identity providers associated with this Data Lake Store account."
+        },
+        "trustedIdProviderState": {
+          "type": "string",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "TrustedIdProviderState",
+            "modelAsString": false
+          },
+          "description": "The current state of the trusted identity provider feature for this Data Lake Store account. Disabling trusted identity provider functionality does not remove the providers, they will just be ignored until this feature is re-enabled."
+        },
+        "newTier": {
+          "type": "string",
+          "enum": [
+            "Consumption",
+            "Commitment_1TB",
+            "Commitment_10TB",
+            "Commitment_100TB",
+            "Commitment_500TB",
+            "Commitment_1PB",
+            "Commitment_5PB"
+          ],
+          "x-ms-enum": {
+            "name": "TierType",
+            "modelAsString": false
+          },
+          "description": "The commitment tier to use for next month."
+        }
+      },
+      "description": "Data Lake Store account properties information to be updated."
+    },
     "UpdateEncryptionConfig": {
       "properties": {
         "keyVaultMetaInfo": {
@@ -1296,560 +2222,271 @@
       },
       "description": "The Key Vault update information used for user managed key rotation."
     },
-    "DataLakeStoreAccountProperties": {
-      "allOf": [
-        {
-          "$ref": "#/definitions/DataLakeStoreAccountPropertiesBasic"
-        }
-      ],
-      "properties": {
-        "encryptionState": {
-          "type": "string",
-          "description": "The current state of encryption for this Data Lake store account.",
-          "enum": [
-            "Enabled",
-            "Disabled"
-          ],
-          "x-ms-enum": {
-            "name": "EncryptionState",
-            "modelAsString": false
-          }
-        },
-        "encryptionProvisioningState": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The current state of encryption provisioning for this Data Lake store account.",
-          "enum": [
-            "Creating",
-            "Succeeded"
-          ],
-          "x-ms-enum": {
-            "name": "EncryptionProvisioningState",
-            "modelAsString": false
-          }
-        },
-        "encryptionConfig": {
-          "$ref": "#/definitions/EncryptionConfig",
-          "description": "The Key Vault encryption configuration."
-        },
-        "firewallState": {
-          "type": "string",
-          "description": "The current state of the IP address firewall for this Data Lake store account.",
-          "enum": [
-            "Enabled",
-            "Disabled"
-          ],
-          "x-ms-enum": {
-            "name": "FirewallState",
-            "modelAsString": false
-          }
-        },
-        "firewallRules": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/FirewallRule"
-          },
-          "description": "The list of firewall rules associated with this Data Lake store account."
-        },
-        "trustedIdProviderState": {
-          "type": "string",
-          "description": "The current state of the trusted identity provider feature for this Data Lake store account.",
-          "enum": [
-            "Enabled",
-            "Disabled"
-          ],
-          "x-ms-enum": {
-            "name": "TrustedIdProviderState",
-            "modelAsString": false
-          }
-        },
-        "trustedIdProviders": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/TrustedIdProvider"
-          },
-          "description": "The list of trusted identity providers associated with this Data Lake store account."
-        },
-        "defaultGroup": {
-          "type": "string",
-          "description": "the default owner group for all new folders and files created in the Data Lake Store account."
-        },
-        "newTier": {
-          "type": "string",
-          "enum": [
-            "Consumption",
-            "Commitment_1TB",
-            "Commitment_10TB",
-            "Commitment_100TB",
-            "Commitment_500TB",
-            "Commitment_1PB",
-            "Commitment_5PB"
-          ],
-          "x-ms-enum": {
-            "name": "TierType",
-            "modelAsString": false
-          },
-          "description": "the commitment tier to use for next month."
-        },
-        "currentTier": {
-          "type": "string",
-           "enum": [
-            "Consumption",
-            "Commitment_1TB",
-            "Commitment_10TB",
-            "Commitment_100TB",
-            "Commitment_500TB",
-            "Commitment_1PB",
-            "Commitment_5PB"
-          ],
-          "x-ms-enum": {
-            "name": "TierType",
-            "modelAsString": false
-          },
-          "readOnly": true,
-          "description": "the commitment tier in use for the current month."
-        },
-        "firewallAllowAzureIps": {
-          "type": "string",
-          "description": "The current state of allowing or disallowing IPs originating within Azure through the firewall. If the firewall is disabled, this is not enforced.",
-          "enum": [
-            "Enabled",
-            "Disabled"
-          ],
-          "x-ms-enum": {
-            "name": "FirewallAllowAzureIpsState",
-            "modelAsString": false
-          }
-        }
-      },
-      "description": "Data Lake Store account properties information"
-    },
-    "UpdateDataLakeStoreAccountProperties": {
-      "properties": {
-        "firewallState": {
-          "type": "string",
-          "description": "The current state of the IP address firewall for this Data Lake store account. Disabling the firewall does not remove existing rules, they will just be ignored until the firewall is re-enabled.",
-          "enum": [
-            "Enabled",
-            "Disabled"
-          ],
-          "x-ms-enum": {
-            "name": "FirewallState",
-            "modelAsString": false
-          }
-        },
-        "trustedIdProviderState": {
-          "type": "string",
-          "description": "The current state of the trusted identity provider feature for this Data Lake store account. Disabling trusted identity provider functionality does not remove the providers, they will just be ignored until this feature is re-enabled.",
-          "enum": [
-            "Enabled",
-            "Disabled"
-          ],
-          "x-ms-enum": {
-            "name": "TrustedIdProviderState",
-            "modelAsString": false
-          }
-        },
-        "defaultGroup": {
-          "type": "string",
-          "description": "the default owner group for all new folders and files created in the Data Lake Store account."
-        },
-        "newTier": {
-          "type": "string",
-           "enum": [
-            "Consumption",
-            "Commitment_1TB",
-            "Commitment_10TB",
-            "Commitment_100TB",
-            "Commitment_500TB",
-            "Commitment_1PB",
-            "Commitment_5PB"
-          ],
-          "x-ms-enum": {
-            "name": "TierType",
-            "modelAsString": false
-          },
-          "description": "the commitment tier to use for next month."
-        },
-        "firewallAllowAzureIps": {
-          "type": "string",
-          "description": "The current state of allowing or disallowing IPs originating within Azure through the firewall. If the firewall is disabled, this is not enforced.",
-          "enum": [
-            "Enabled",
-            "Disabled"
-          ],
-          "x-ms-enum": {
-            "name": "FirewallAllowAzureIpsState",
-            "modelAsString": false
-          }
-        },
-        "encryptionConfig": {
-          "$ref": "#/definitions/UpdateEncryptionConfig",
-          "description": "Used for rotation of user managed Key Vault keys. Can only be used to rotate a user managed encryption Key Vault key."
-        }
-      },
-      "description": "Data Lake Store account properties information to be updated."
-    },
-    "DataLakeStoreAccountUpdateParameters": {
-      "properties": {
-        "tags": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "description": "Resource tags"
-        },
-        "properties": {
-          "$ref": "#/definitions/UpdateDataLakeStoreAccountProperties",
-          "description": "the Data Lake Store account properties to update.",
-          "x-ms-client-flatten": true
-        }
-      },
-      "description": "Data Lake Store account information to update"
-    },
-    "DataLakeStoreAccount": {
-      "allOf": [
-        {
-          "$ref": "#/definitions/Resource"
-        }
-      ],
-      "properties": {
-        "identity": {
-          "$ref": "#/definitions/EncryptionIdentity",
-          "description": "The Key Vault encryption identity, if any."
-        },
-        "properties": {
-          "$ref": "#/definitions/DataLakeStoreAccountProperties",
-          "description": "the Data Lake Store account properties.",
-          "x-ms-client-flatten": true
-        }
-      },
-      "description": "Data Lake Store account information"
-    },
-    "DataLakeStoreAccountBasic": {
-      "allOf": [
-        {
-          "$ref": "#/definitions/Resource"
-        }
+    "CreateOrUpdateFirewallRuleParameters": {
+      "required": [
+        "properties"
       ],
       "properties": {
         "properties": {
-          "$ref": "#/definitions/DataLakeStoreAccountPropertiesBasic",
-          "description": "the basic Data Lake Store account properties.",
-          "x-ms-client-flatten": true
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/CreateOrUpdateFirewallRuleProperties",
+          "description": "The firewall rule properties to use when creating a new firewall rule."
         }
       },
-      "description": "Basic Data Lake Store account information, returned on list calls."
+      "description": "The parameters used to create a new firewall rule."
     },
-    "DataLakeStoreAccountPropertiesBasic": {
-      "properties": {
-        "provisioningState": {
-          "readOnly": true,
-          "type": "string",
-          "description": "the provisioning status of the Data Lake Store account.",
-          "enum": [
-            "Failed",
-            "Creating",
-            "Running",
-            "Succeeded",
-            "Patching",
-            "Suspending",
-            "Resuming",
-            "Deleting",
-            "Deleted",
-            "Undeleting",
-            "Canceled"
-          ],
-          "x-ms-enum": {
-            "name": "DataLakeStoreAccountStatus",
-            "modelAsString": false
-          }
-        },
-        "state": {
-          "readOnly": true,
-          "type": "string",
-          "description": "the state of the Data Lake Store account.",
-          "enum": [
-            "Active",
-            "Suspended"
-          ],
-          "x-ms-enum": {
-            "name": "DataLakeStoreAccountState",
-            "modelAsString": false
-          }
-        },
-        "creationTime": {
-          "type": "string",
-          "readOnly": true,
-          "format": "date-time",
-          "description": "the account creation time."
-        },
-        "lastModifiedTime": {
-          "type": "string",
-          "readOnly": true,
-          "format": "date-time",
-          "description": "the account last modified time."
-        },
-        "endpoint": {
-          "type": "string",
-          "readOnly": true,
-          "description": "the full CName endpoint for this account."
-        },
-        "accountId": {
-          "type": "string",
-          "format": "uuid",
-          "readOnly": true,
-          "description": "The unique identifier associated with this Data Lake Store account."
-        }
-      },
-      "description": "The basic account specific properties that are associated with an underlying Data Lake Store account."
-    },
-    "DataLakeStoreAccountListResult": {
-      "properties": {
-        "value": {
-          "type": "array",
-          "readOnly": true,
-          "items": {
-            "$ref": "#/definitions/DataLakeStoreAccountBasic"
-          },
-          "description": "the results of the list operation"
-        },
-        "nextLink": {
-          "type": "string",
-          "readOnly": true,
-          "description": "the link (url) to the next page of results."
-        }
-      },
-      "description": "Data Lake Store account list information response."
-    },
-    "NameAvailabilityInformation": {
-      "properties": {
-        "nameAvailable": {
-          "type": "boolean",
-          "readOnly": true,
-          "description": "the Boolean value of true or false to indicate whether the Data Lake Store account name is available or not."
-        },
-        "reason": {
-          "type": "string",
-          "readOnly": true,
-          "description": "the reason why the Data Lake Store account name is not available, if nameAvailable is false."
-        },
-        "message": {
-          "type": "string",
-          "readOnly": true,
-          "description": "the message describing why the Data Lake Store account name is not available, if nameAvailable is false."
-        }
-      },
-      "description": "Data Lake Store account name availability result information"
-    },
-    "CheckNameAvailabilityParameters": {
+    "CreateFirewallRuleWithAccountParameters": {
+      "required": [
+        "name",
+        "properties"
+      ],
       "properties": {
         "name": {
           "type": "string",
-          "description": "the Data Lake Store name to check availability for."
+          "description": "The unique name of the firewall rule to create."
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/CreateOrUpdateFirewallRuleProperties",
+          "description": "The firewall rule properties to use when creating a new firewall rule."
+        }
+      },
+      "description": "The parameters used to create a new firewall rule while creating a new Data Lake Store account."
+    },
+    "CreateOrUpdateFirewallRuleProperties": {
+      "required": [
+        "startIpAddress",
+        "endIpAddress"
+      ],
+      "properties": {
+        "startIpAddress": {
+          "type": "string",
+          "description": "The start IP address for the firewall rule. This can be either ipv4 or ipv6. Start and End should be in the same protocol."
+        },
+        "endIpAddress": {
+          "type": "string",
+          "description": "The end IP address for the firewall rule. This can be either ipv4 or ipv6. Start and End should be in the same protocol."
+        }
+      },
+      "description": "The firewall rule properties to use when creating a new firewall rule."
+    },
+    "UpdateFirewallRuleParameters": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/UpdateFirewallRuleProperties",
+          "description": "The firewall rule properties to use when updating a firewall rule."
+        }
+      },
+      "description": "The parameters used to update a firewall rule."
+    },
+    "UpdateFirewallRuleWithAccountParameters": {
+      "required": [
+        "name"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The unique name of the firewall rule to update."
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/UpdateFirewallRuleProperties",
+          "description": "The firewall rule properties to use when updating a firewall rule."
+        }
+      },
+      "description": "The parameters used to update a firewall rule while updating a Data Lake Store account."
+    },
+    "UpdateFirewallRuleProperties": {
+      "properties": {
+        "startIpAddress": {
+          "type": "string",
+          "description": "The start IP address for the firewall rule. This can be either ipv4 or ipv6. Start and End should be in the same protocol."
+        },
+        "endIpAddress": {
+          "type": "string",
+          "description": "The end IP address for the firewall rule. This can be either ipv4 or ipv6. Start and End should be in the same protocol."
+        }
+      },
+      "description": "The firewall rule properties to use when updating a firewall rule."
+    },
+    "CreateOrUpdateVirtualNetworkRuleParameters": {
+      "required": [
+        "properties"
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/CreateOrUpdateVirtualNetworkRuleProperties",
+          "description": "The virtual network rule properties to use when creating a new virtual network rule."
+        }
+      },
+      "description": "The parameters used to create a new virtual network rule."
+    },
+    "CreateVirtualNetworkRuleWithAccountParameters": {
+      "required": [
+        "name",
+        "properties"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The unique name of the virtual network rule to create."
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/CreateOrUpdateVirtualNetworkRuleProperties",
+          "description": "The virtual network rule properties to use when creating a new virtual network rule."
+        }
+      },
+      "description": "The parameters used to create a new virtual network rule while creating a new Data Lake Store account."
+    },
+    "CreateOrUpdateVirtualNetworkRuleProperties": {
+      "required": [
+        "subnetId"
+      ],
+      "properties": {
+        "subnetId": {
+          "type": "string",
+          "description": "The resource identifier for the subnet."
+        }
+      },
+      "description": "The virtual network rule properties to use when creating a new virtual network rule."
+    },
+    "UpdateVirtualNetworkRuleParameters": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/UpdateVirtualNetworkRuleProperties",
+          "description": "The virtual network rule properties to use when updating a virtual network rule."
+        }
+      },
+      "description": "The parameters used to update a virtual network rule."
+    },
+    "UpdateVirtualNetworkRuleWithAccountParameters": {
+      "required": [
+        "name"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The unique name of the virtual network rule to update."
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/UpdateVirtualNetworkRuleProperties",
+          "description": "The virtual network rule properties to use when updating a virtual network rule."
+        }
+      },
+      "description": "The parameters used to update a virtual network rule while updating a Data Lake Store account."
+    },
+    "UpdateVirtualNetworkRuleProperties": {
+      "properties": {
+        "subnetId": {
+          "type": "string",
+          "description": "The resource identifier for the subnet."
+        }
+      },
+      "description": "The virtual network rule properties to use when updating a virtual network rule."
+    },
+    "CreateOrUpdateTrustedIdProviderParameters": {
+      "required": [
+        "properties"
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/CreateOrUpdateTrustedIdProviderProperties",
+          "description": "The trusted identity provider properties to use when creating a new trusted identity provider."
+        }
+      },
+      "description": "The parameters used to create a new trusted identity provider."
+    },
+    "CreateTrustedIdProviderWithAccountParameters": {
+      "required": [
+        "name",
+        "properties"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The unique name of the trusted identity provider to create."
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/CreateOrUpdateTrustedIdProviderProperties",
+          "description": "The trusted identity provider properties to use when creating a new trusted identity provider."
+        }
+      },
+      "description": "The parameters used to create a new trusted identity provider while creating a new Data Lake Store account."
+    },
+    "CreateOrUpdateTrustedIdProviderProperties": {
+      "required": [
+        "idProvider"
+      ],
+      "properties": {
+        "idProvider": {
+          "type": "string",
+          "description": "The URL of this trusted identity provider."
+        }
+      },
+      "description": "The trusted identity provider properties to use when creating a new trusted identity provider."
+    },
+    "UpdateTrustedIdProviderParameters": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/UpdateTrustedIdProviderProperties",
+          "description": "The trusted identity provider properties to use when updating a trusted identity provider."
+        }
+      },
+      "description": "The parameters used to update a trusted identity provider."
+    },
+    "UpdateTrustedIdProviderWithAccountParameters": {
+      "required": [
+        "name"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The unique name of the trusted identity provider to update."
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/UpdateTrustedIdProviderProperties",
+          "description": "The trusted identity provider properties to use when updating a trusted identity provider."
+        }
+      },
+      "description": "The parameters used to update a trusted identity provider while updating a Data Lake Store account."
+    },
+    "UpdateTrustedIdProviderProperties": {
+      "properties": {
+        "idProvider": {
+          "type": "string",
+          "description": "The URL of this trusted identity provider."
+        }
+      },
+      "description": "The trusted identity provider properties to use when updating a trusted identity provider."
+    },
+    "CheckNameAvailabilityParameters": {
+      "required": [
+        "name",
+        "type"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The Data Lake Store name to check availability for."
         },
         "type": {
           "type": "string",
           "enum": [
             "Microsoft.DataLakeStore/accounts"
           ],
-          "description": "the Resource type. Note: This should not be set by the user, as the constant value is Microsoft.DataLakeStore/accounts"
+          "description": "The resource type. Note: This should not be set by the user, as the constant value is Microsoft.DataLakeStore/accounts"
         }
       },
-      "required": [
-        "name",
-        "type"
-      ],
-      "description": "Data Lake Store account name availability check parameters"
-    },
-    "CapabilityInformation": {
-      "properties": {
-        "subscriptionId": {
-          "type": "string",
-          "format": "uuid",
-          "readOnly": true,
-          "description": "the subscription credentials that uniquely identifies the subscription."
-        },
-        "state": {
-          "type": "string",
-          "enum": [
-            "Registered",
-            "Suspended",
-            "Deleted",
-            "Unregistered",
-            "Warned"
-          ],
-          "x-ms-enum": {
-            "name": "SubscriptionState",
-            "modelAsString": true
-          },
-          "readOnly": true,
-          "description": "the subscription state."
-        },
-        "maxAccountCount": {
-          "type": "integer",
-          "format": "int32",
-          "readOnly": true,
-          "description": "the maximum supported number of accounts under this subscription."
-        },
-        "accountCount": {
-          "type": "integer",
-          "format": "int32",
-          "readOnly": true,
-          "description": "the current number of accounts under this subscription."
-        },
-        "migrationState": {
-          "type": "boolean",
-          "readOnly": true,
-          "description": "the Boolean value of true or false to indicate the maintenance state."
-        }
-      },
-      "description": "Subscription-level properties and limits for Data Lake Store"
-    },
-    "OperationDisplay": {
-      "properties": {
-        "provider": {
-          "type": "string",
-          "readOnly": true,
-          "description": "the Resource provider of the operation."
-        },
-        "resource": {
-          "type": "string",
-          "readOnly": true,
-          "description": "the Resource type of the operation."
-        },
-        "operation": {
-          "type": "string",
-          "readOnly": true,
-          "description": "a friendly name of the operation."
-        },
-        "description": {
-          "type": "string",
-          "readOnly": true,
-          "description": "a friendly description of the operation."
-        }
-      },
-      "description": "The display information for a particular operation"
-    },
-    "Operation": {
-      "properties": {
-        "name": {
-          "type": "string",
-          "readOnly": true,
-          "description": "the name of the operation."
-        },
-        "display": {
-          "$ref": "#/definitions/OperationDisplay",
-          "description": "the display information for the operation."
-        },
-        "origin": {
-          "type": "string",
-          "enum": [
-            "user",
-            "system",
-            "user,system"
-          ],
-          "x-ms-enum": {
-            "name": "OperationOrigin",
-            "modelAsString": true
-          },
-          "readOnly": true,
-          "description": "the intended executor of the operation."
-        }
-      },
-      "description": "An available operation for Data Lake Store"
-    },
-    "OperationListResult": {
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Operation"
-          },
-          "readOnly": true,
-          "description": "the results of the list operation."
-        },
-        "nextLink": {
-          "type": "string",
-          "readOnly": true,
-          "description": "the link (url) to the next page of results."
-        }
-      },
-      "description": "The list of available operations for Data Lake Store"
-    },
-    "ErrorDetails": {
-      "properties": {
-        "code": {
-          "type": "string",
-          "readOnly": true,
-          "description": "the HTTP status code or error code associated with this error"
-        },
-        "message": {
-          "type": "string",
-          "readOnly": true,
-          "description": "the error message localized based on Accept-Language"
-        },
-        "target": {
-          "type": "string",
-          "readOnly": true,
-          "description": "the target of the particular error (for example, the name of the property in error)."
-        }
-      },
-      "description": "Data Lake Store error details information"
-    },
-    "Resource": {
-      "description": "The Resource model definition.",
-      "properties": {
-        "id": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Resource Id"
-        },
-        "name": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Resource name"
-        },
-        "type": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Resource type"
-        },
-        "location": {
-          "type": "string",
-          "description": "Resource location"
-        },
-        "tags": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "description": "Resource tags"
-        }
-      },
-      "required": [
-        "location"
-      ],
-      "x-ms-azure-resource": true
-    },
-    "SubResource": {
-      "description": "The Resource model definition for a nested resource.",
-      "properties": {
-        "id": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Resource Id"
-        },
-        "name": {
-          "type": "string",
-          "description": "Resource name"
-        },
-        "type": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Resource type"
-        }
-      }
+      "description": "Data Lake Store account name availability check parameters."
     }
   },
   "parameters": {
@@ -1866,6 +2503,22 @@
       "required": true,
       "type": "string",
       "description": "Client Api Version."
+    },
+    "ResourceGroupNameParameter": {
+      "name": "resourceGroupName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "description": "The name of the Azure resource group."
+    },
+    "AccountNameParameter": {
+      "name": "accountName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "description": "The name of the Data Lake Store account."
     }
   }
 }

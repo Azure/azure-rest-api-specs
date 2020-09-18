@@ -1,0 +1,82 @@
+{
+  "parameters": {
+    "subscriptionId": "613192d7-503f-477a-9cfe-4efc3ee2bd60",
+    "resourceGroupName": "TestRG",
+    "serverName": "azsdktest",
+    "api-version": "2017-08-01",
+    "serverUpdateParameters": {
+      "sku": {
+        "capacity": 1,
+        "name": "S1",
+        "tier": "Standard"
+      },
+      "tags": {
+        "testKey": "testValue"
+      },
+      "properties": {
+        "asAdministrators": {
+          "members": [
+            "azsdktest@microsoft.com",
+            "azsdktest2@microsoft.com"
+          ]
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "body": {
+        "id": "/subscriptions/613192d7-503f-477a-9cfe-4efc3ee2bd60/resourceGroups/TestRG/providers/Microsoft.AnalysisServices/servers/azsdktest",
+        "location": "West US",
+        "name": "azsdktest",
+        "properties": {
+          "asAdministrators": {
+            "members": [
+              "azsdktest@microsoft.com",
+              "azsdktest2@microsoft.com"
+            ]
+          },
+          "provisioningState": "Provisioning",
+          "serverFullName": "asazure://nightly1.asazure-int.windows.net/azsdktest",
+          "state": "Provisioning"
+        },
+        "sku": {
+          "capacity": 1,
+          "name": "S1",
+          "tier": "Standard"
+        },
+        "tags": {
+          "testKey": "testValue"
+        }
+      }
+    },
+    "202": {
+      "headers": {},
+      "body": {
+        "id": "/subscriptions/613192d7-503f-477a-9cfe-4efc3ee2bd60/resourceGroups/TestRG/providers/Microsoft.AnalysisServices/servers/azsdktest",
+        "location": "West US",
+        "name": "azsdktest",
+        "properties": {
+          "asAdministrators": {
+            "members": [
+              "azsdktest@microsoft.com",
+              "azsdktest2@microsoft.com"
+            ]
+          },
+          "provisioningState": "Provisioning",
+          "serverFullName": "asazure://nightly1.asazure-int.windows.net/azsdktest",
+          "state": "Provisioning"
+        },
+        "sku": {
+          "capacity": 1,
+          "name": "S1",
+          "tier": "Standard"
+        },
+        "tags": {
+          "testKey": "testValue"
+        }
+      }
+    }
+  }
+}

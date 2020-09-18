@@ -1,0 +1,104 @@
+{
+  "parameters": {
+    "subscriptionId": "fa68082f-8ff7-4a25-95c7-ce9da541242f",
+    "resourceGroupName": "SdkRg9836",
+    "jobName": "SdkJob8367",
+    "api-version": "2018-01-01",
+    "$expand": "details",
+    "x-ms-client-request-id": [
+      "bdcc8e76-b662-42a4-93fd-5554809712d7"
+    ],
+    "accept-language": [
+      "en-US"
+    ],
+    "User-Agent": [
+      "FxVersion/4.6.26614.01",
+      "Microsoft.Azure.Management.DataBox.DataBoxManagementClient/1.1.0"
+    ]
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "isCancellable": false,
+          "isDeletable": true,
+          "isShippingAddressEditable": false,
+          "status": "Cancelled",
+          "startTime": "2018-09-11T17:58:36.6886059+05:30",
+          "details": {
+            "copyProgress": [
+              {
+                "storageAccountName": "databoxbvttestaccount",
+                "accountId": "/subscriptions/fa68082f-8ff7-4a25-95c7-ce9da541242f/resourcegroups/databoxbvt/providers/Microsoft.Storage/storageAccounts/databoxbvttestaccount",
+                "bytesSentToCloud": 0,
+                "totalBytesToProcess": 0
+              }
+            ],
+            "jobStages": [
+              {
+                "stageName": "DeviceOrdered",
+                "displayName": "Ordered",
+                "stageStatus": "Succeeded",
+                "stageTime": "2018-09-11T17:58:41.7934219+05:30"
+              },
+              {
+                "stageName": "Cancelled",
+                "displayName": "Canceled",
+                "stageStatus": "Succeeded",
+                "stageTime": "2018-09-11T17:59:27.3708564+05:30"
+              }
+            ],
+            "contactDetails": {
+              "contactName": " ",
+              "phone": "",
+              "emailList": [],
+              "notificationPreference": []
+            },
+            "shippingAddress": {
+              "streetAddress1": "16 TOWNSEND ST",
+              "streetAddress2": "Unit 1",
+              "city": "San Francisco",
+              "stateOrProvince": "CA",
+              "country": "US",
+              "postalCode": "94107",
+              "companyName": "Microsoft",
+              "addressType": "Commercial"
+            },
+            "deliveryPackage": {
+              "carrierName": "",
+              "trackingId": "",
+              "trackingUrl": ""
+            },
+            "returnPackage": {
+              "carrierName": "",
+              "trackingId": "",
+              "trackingUrl": ""
+            },
+            "destinationAccountDetails": [
+              {
+                "storageAccountId": "/subscriptions/fa68082f-8ff7-4a25-95c7-ce9da541242f/resourcegroups/databoxbvt/providers/Microsoft.Storage/storageAccounts/databoxbvttestaccount"
+              },
+              {
+                "stagingStorageAccountId": "/subscriptions/fa68082f-8ff7-4a25-95c7-ce9da541242f/resourcegroups/databoxbvt/providers/Microsoft.Storage/storageAccounts/databoxbvttestaccount",
+                "resourceGroupId": "/subscriptions/fa68082f-8ff7-4a25-95c7-ce9da541242f/resourcegroups/databoxbvt"
+              }
+            ],
+            "errorDetails": [],
+            "jobDetailsType": "DataBox",
+            "copyLogDetails": [],
+            "chainOfCustodySasKey": "https://wusbeta.blob.core.windows.net/chainofcustody/dbb287f3-ded6-42ee-b673-0c49d46394dc.txt?sv=2016-05-31&sr=b&sig=ljyW4jh7VAuQg%2Bm9JPKznnKEh7kyekn4zhkZ4vIH5LY%3D&st=2018-09-11T12%3A24%3A31Z&se=2018-09-11T12%3A54%3A31Z&sp=r"
+          },
+          "cancellationReason": "CancelTest"
+        },
+        "location": "westus",
+        "tags": {},
+        "sku": {
+          "name": "DataBox"
+        },
+        "name": "SdkJob8367",
+        "id": "/subscriptions/fa68082f-8ff7-4a25-95c7-ce9da541242f/resourceGroups/SdkRg9836/providers/Microsoft.DataBox/jobs/SdkJob8367",
+        "type": "Microsoft.DataBox/jobs"
+      }
+    }
+  }
+}

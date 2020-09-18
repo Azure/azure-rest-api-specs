@@ -94,6 +94,52 @@
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/subscriptions/{sid}": {
+      "head": {
+        "tags": [
+          "Subscriptions"
+        ],
+        "operationId": "Subscription_GetEntityTag",
+        "description": "Gets the entity state (Etag) version of the apimanagement subscription specified by its identifier.",
+        "x-ms-examples": {
+          "ApiManagementHeadSubscription": {
+            "$ref": "./examples/ApiManagementHeadSubscription.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "./apimanagement.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionEntityIdParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Specified apimanagement subscription entity exists and current entity state version is present in the ETag header.",
+            "headers": {
+              "ETag": {
+                "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./apimanagement.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
       "get": {
         "tags": [
           "Subscriptions"
@@ -206,7 +252,7 @@
           "Subscriptions"
         ],
         "operationId": "Subscription_Update",
-        "description": "Updates the details of a subscription specificied by its identifier.",
+        "description": "Updates the details of a subscription specified by its identifier.",
         "x-ms-examples": {
           "ApiManagementUpdateSubscription": {
             "$ref": "./examples/ApiManagementUpdateSubscription.json"
@@ -524,7 +570,7 @@
         },
         "productId": {
           "type": "string",
-          "description": "Product (product id path) for which subscription is being created in form /products/{productid}"
+          "description": "Product (product id path) for which subscription is being created in form /products/{productId}"
         },
         "displayName": {
           "type": "string",

@@ -2,7 +2,10 @@
   "swagger": "2.0",
   "info": {
     "title": "AutomationManagement",
-    "version": "2015-10-31"
+    "version": "2015-10-31",
+    "x-ms-code-generation-settings": {
+      "useDateTimeOffset": true
+    }
   },
   "host": "management.azure.com",
   "schemes": [
@@ -50,14 +53,10 @@
         },
         "parameters": [
           {
-            "$ref": "./definitions.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "automationAccountName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The automation account name."
+            "$ref": "../../common/v1/definitions.json#/parameters/AutomationAccountNameParameter"
           },
           {
             "name": "jobScheduleId",
@@ -68,10 +67,10 @@
             "description": "The job schedule name."
           },
           {
-            "$ref": "./definitions.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "./definitions.json#/parameters/ApiVersionParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -81,7 +80,7 @@
           "default": {
             "description": "Automation error response describing why the operation failed.",
             "schema": {
-              "$ref": "./definitions.json#/definitions/ErrorResponse"
+              "$ref": "../../common/v1/definitions.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -102,14 +101,10 @@
         },
         "parameters": [
           {
-            "$ref": "./definitions.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "automationAccountName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The automation account name."
+            "$ref": "../../common/v1/definitions.json#/parameters/AutomationAccountNameParameter"
           },
           {
             "name": "jobScheduleId",
@@ -120,23 +115,23 @@
             "description": "The job schedule name."
           },
           {
-            "$ref": "./definitions.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "./definitions.json#/parameters/ApiVersionParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "./definitions.json#/definitions/JobSchedule"
+              "$ref": "#/definitions/JobSchedule"
             }
           },
           "default": {
             "description": "Automation error response describing why the operation failed.",
             "schema": {
-              "$ref": "./definitions.json#/definitions/ErrorResponse"
+              "$ref": "../../common/v1/definitions.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -157,14 +152,10 @@
         },
         "parameters": [
           {
-            "$ref": "./definitions.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "automationAccountName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The automation account name."
+            "$ref": "../../common/v1/definitions.json#/parameters/AutomationAccountNameParameter"
           },
           {
             "name": "jobScheduleId",
@@ -179,28 +170,28 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "./definitions.json#/definitions/JobScheduleCreateParameters"
+              "$ref": "#/definitions/JobScheduleCreateParameters"
             },
             "description": "The parameters supplied to the create job schedule operation."
           },
           {
-            "$ref": "./definitions.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "./definitions.json#/parameters/ApiVersionParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
           "201": {
             "description": "Created",
             "schema": {
-              "$ref": "./definitions.json#/definitions/JobSchedule"
+              "$ref": "#/definitions/JobSchedule"
             }
           },
           "default": {
             "description": "Automation error response describing why the operation failed.",
             "schema": {
-              "$ref": "./definitions.json#/definitions/ErrorResponse"
+              "$ref": "../../common/v1/definitions.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -223,42 +214,175 @@
         },
         "parameters": [
           {
-            "$ref": "./definitions.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "automationAccountName",
-            "in": "path",
-            "required": true,
+            "$ref": "../../common/v1/definitions.json#/parameters/AutomationAccountNameParameter"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "required": false,
             "type": "string",
-            "description": "The automation account name."
+            "description": "The filter to apply on the operation."
           },
           {
-            "$ref": "./definitions.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "./definitions.json#/parameters/ApiVersionParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "./definitions.json#/definitions/JobScheduleListResult"
+              "$ref": "#/definitions/JobScheduleListResult"
             }
           },
           "default": {
             "description": "Automation error response describing why the operation failed.",
             "schema": {
-              "$ref": "./definitions.json#/definitions/ErrorResponse"
+              "$ref": "../../common/v1/definitions.json#/definitions/ErrorResponse"
             }
           }
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
-        }
+        },
+        "x-ms-odata": "#/definitions/JobSchedule"
       }
     }
   },
-  "definitions": {},
+  "definitions": {
+    "JobScheduleListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/JobSchedule"
+          },
+          "description": "Gets or sets a list of job schedules."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Gets or sets the next link."
+        }
+      },
+      "description": "The response model for the list job schedule operation."
+    },
+    "JobSchedule": {
+      "properties": {
+        "id": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Gets the id of the resource."
+        },
+        "name": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Gets the name of the variable."
+        },
+        "type": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Resource type"
+        },
+        "properties": {
+          "$ref": "#/definitions/JobScheduleProperties",
+          "x-ms-client-flatten": true,
+          "description": "Gets or sets the properties of the job schedule."
+        }
+      },
+      "description": "Definition of the job schedule."
+    },
+    "ScheduleAssociationProperty": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Gets or sets the name of the Schedule."
+        }
+      },
+      "description": "The schedule property associated with the entity."
+    },
+    "RunbookAssociationProperty": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Gets or sets the name of the runbook."
+        }
+      },
+      "description": "The runbook property associated with the entity."
+    },
+    "JobScheduleProperties": {
+      "properties": {
+        "jobScheduleId": {
+          "type": "string",
+          "description": "Gets or sets the id of job schedule."
+        },
+        "schedule": {
+          "$ref": "#/definitions/ScheduleAssociationProperty",
+          "description": "Gets or sets the schedule."
+        },
+        "runbook": {
+          "$ref": "#/definitions/RunbookAssociationProperty",
+          "description": "Gets or sets the runbook."
+        },
+        "runOn": {
+          "type": "string",
+          "description": "Gets or sets the hybrid worker group that the scheduled job should run on."
+        },
+        "parameters": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Gets or sets the parameters of the job schedule."
+        }
+      },
+      "description": "Definition of job schedule parameters."
+    },
+    "JobScheduleCreateProperties": {
+      "properties": {
+        "schedule": {
+          "$ref": "#/definitions/ScheduleAssociationProperty",
+          "description": "Gets or sets the schedule."
+        },
+        "runbook": {
+          "$ref": "#/definitions/RunbookAssociationProperty",
+          "description": "Gets or sets the runbook."
+        },
+        "runOn": {
+          "type": "string",
+          "description": "Gets or sets the hybrid worker group that the scheduled job should run on."
+        },
+        "parameters": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Gets or sets a list of job properties."
+        }
+      },
+      "required": [
+        "schedule",
+        "runbook"
+      ],
+      "description": "The parameters supplied to the create job schedule operation."
+    },
+    "JobScheduleCreateParameters": {
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/JobScheduleCreateProperties",
+          "x-ms-client-flatten": true,
+          "description": "Gets or sets the list of job schedule properties."
+        }
+      },
+      "required": [
+        "properties"
+      ],
+      "description": "The parameters supplied to the create job schedule operation."
+    }
+  },
   "parameters": {}
 }

@@ -1,0 +1,593 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2016-01-01",
+    "title": "AzureBridgeAdminClient",
+    "description": "AzureBridge Admin Client."
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "paths": {
+    "/providers/Microsoft.AzureBridge.Admin/operations": {
+      "get": {
+        "x-ms-examples": {
+          "Returns the list of support REST operations.": {
+            "$ref": "./examples/Operations/List.json"
+          }
+        },
+        "description": "Returns the list of support REST operations.",
+        "tags": [
+          "AzureBridge"
+        ],
+        "operationId": "Operations_List",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/OperationList"
+            }
+          },
+          "default": {
+            "description": "Default Response.",
+            "schema": {
+              "$ref": "Activation.json#/definitions/ExtendedErrorInfo"
+            }
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Resource": {
+      "description": "Base Resource Object",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "URI of the resource.",
+          "type": "string"
+        },
+        "name": {
+          "description": "Name of the resource.",
+          "type": "string"
+        },
+        "type": {
+          "description": "Type of resource.",
+          "type": "string"
+        },
+        "location": {
+          "readOnly": true,
+          "description": "Location of the resource",
+          "type": "string"
+        },
+        "tags": {
+          "readOnly": true,
+          "description": "List of key value pairs.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "Operation": {
+      "description": "Describes the supported REST operation.",
+      "properties": {
+        "name": {
+          "description": "The name of the operation being performed on this particular object. This name should match the name that appears in RBAC or the event service.",
+          "type": "string",
+          "readOnly": true
+        },
+        "display": {
+          "description": "Contains the localized display information for this particular operation / action.",
+          "$ref": "#/definitions/Display",
+          "readOnly": true
+        }
+      }
+    },
+    "Display": {
+      "description": "Contains the localized display information for this particular operation / action.",
+      "properties": {
+        "provider": {
+          "description": "The localized friendly form of the resource provider name – it is expected to also include the publisher/company responsible. It should use Title Casing and begin with \"Microsoft\" for 1st party services. e.g. \"Microsoft Monitoring Insights\" or \"Microsoft Compute.\"",
+          "type": "string",
+          "readOnly": true
+        },
+        "resource": {
+          "description": "The localized, friendly version of the resource type related to this action or operation; the resource type should match the public documentation for the resource provider.",
+          "type": "string",
+          "readOnly": true
+        },
+        "operation": {
+          "description": "The localized, friendly name for the operation. Use the name as it will displayed to the user.",
+          "type": "string",
+          "readOnly": true
+        },
+        "description": {
+          "description": "The localized, friendly description for the operation. The description will be displayed to the user. It should be thorough and concise for used in both tooltips and detailed views.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "OperationList": {
+      "description": "List of Operations",
+      "properties": {
+        "value": {
+          "description": "Array of operations",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Operation"
+          },
+          "readOnly": true
+        },
+        "nextLink": {
+          "description": "URI to the next page of operations.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "ProvisioningState": {
+      "description": "The provisioning state of the resource.",
+      "type": "string",
+      "enum": [
+        "Stopped",
+        "Starting",
+        "Running",
+        "Stopping",
+        "Succeeded",
+        "Downloading"
+      ],
+      "x-ms-enum": {
+        "modelAsString": true,
+        "name": "ProvisioningState"
+      }
+    },
+    "ProductBase": {
+      "description": "Base object for all product classes.",
+      "type": "object",
+      "properties": {
+        "displayName": {
+          "description": "Name displayed for the product.",
+          "type": "string"
+        },
+        "description": {
+          "description": "Description of the product.",
+          "type": "string"
+        },
+        "publisherDisplayName": {
+          "description": "Name of publisher.",
+          "type": "string"
+        },
+        "publisherIdentifier": {
+          "description": "Publisher identifier.",
+          "type": "string"
+        },
+        "offer": {
+          "description": "Offer name.",
+          "type": "string"
+        },
+        "offerVersion": {
+          "description": "Offer version.",
+          "type": "string"
+        },
+        "sku": {
+          "description": "Product SKU.",
+          "type": "string"
+        },
+        "billingPartNumber": {
+          "description": "Billing part number.",
+          "type": "string"
+        },
+        "galleryItemIdentity": {
+          "description": "Gallery item identity.",
+          "type": "string"
+        },
+        "iconUris": {
+          "description": "Information about gallery icons.",
+          "$ref": "#/definitions/GalleryIcons"
+        },
+        "payloadLength": {
+          "description": "Size in bytes.",
+          "type": "integer",
+          "format": "int64"
+        },
+        "productKind": {
+          "description": "The kind. E.g. VirtualMachineProductProperties.ProductKind or WebApp, SolutionTemplate.",
+          "type": "string"
+        },
+        "productProperties": {
+          "description": "the product properties. At the moment only VirtualMachineProductProperties is allowed.",
+          "$ref": "#/definitions/ProductProperties"
+        },
+        "compatibility": {
+          "description": "Product compatibility with current device.",
+          "$ref": "#/definitions/Compatibility"
+        }
+      }
+    },
+    "GalleryIcons": {
+      "description": "Icons for the gallery items.",
+      "type": "object",
+      "properties": {
+        "hero": {
+          "description": "The hero (815x290) icon relative path.",
+          "type": "string"
+        },
+        "large": {
+          "description": "The large (115x115) icon relative path.",
+          "type": "string"
+        },
+        "wide": {
+          "description": "The wide (255x115) icon relative path.",
+          "type": "string"
+        },
+        "medium": {
+          "description": "The medium (90x90) icon relative path.",
+          "type": "string"
+        },
+        "small": {
+          "description": "The small (40x40) icon relative path.",
+          "type": "string"
+        }
+      }
+    },
+    "ProductProperties": {
+      "description": "Additional properties of the product",
+      "type": "object",
+      "properties": {
+        "version": {
+          "description": "The version of the product",
+          "type": "string"
+        }
+      }
+    },
+    "ProductLink": {
+      "description": "Link to a product.",
+      "type": "object",
+      "properties": {
+        "displayName": {
+          "description": "Displayed name of product.",
+          "type": "string"
+        },
+        "uri": {
+          "description": "URI to product.",
+          "type": "string"
+        }
+      }
+    },
+    "ProductLinks": {
+      "description": "List of product links.",
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/ProductLink"
+      }
+    },
+    "Compatibility": {
+      "description": "Product compatibility",
+      "type": "object",
+      "properties": {
+        "isCompatible": {
+          "description": "Tells if product is compatible with current device",
+          "type": "boolean"
+        },
+        "message": {
+          "description": "Short error message if any compatibility issues are found",
+          "type": "string"
+        },
+        "description": {
+          "description": "Full error message if any compatibility issues are found",
+          "type": "string"
+        },
+        "issues": {
+          "description": "List of all issues found",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CompatibilityIssue"
+          }
+        }
+      }
+    },
+    "CompatibilityIssue": {
+      "description": "Compatibility issue",
+      "type": "string",
+      "enum": [
+        "HigherDeviceVersionRequired",
+        "LowerDeviceVersionRequired",
+        "CapacityBillingModelRequired",
+        "PayAsYouGoBillingModelRequired",
+        "DevelopmentBillingModelRequired",
+        "AzureADIdentitySystemRequired",
+        "ADFSIdentitySystemRequired",
+        "ConnectionToInternetRequired",
+        "ConnectionToAzureRequired",
+        "DisconnectedEnvironmentRequired"
+      ],
+      "x-ms-enum": {
+        "name": "CompatibilityIssue",
+        "modelAsString": true
+      }
+    },
+    "DownloadedProductResource": {
+      "description": "Downloaded product resource.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "Properties of the resource.",
+          "$ref": "#/definitions/DownloadedProduct"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "AzureBridge.json#/definitions/Resource"
+        }
+      ]
+    },
+    "DownloadedProduct": {
+      "description": "Properties for aggregate usage.",
+      "type": "object",
+      "properties": {
+        "vmExtensionType": {
+          "description": "Extension type of the VM.",
+          "type": "string"
+        },
+        "links": {
+          "description": "Gallery item identity.",
+          "$ref": "AzureBridge.json#/definitions/ProductLinks"
+        },
+        "legalTerms": {
+          "description": "Legal terms for the product.",
+          "type": "string"
+        },
+        "privacyPolicy": {
+          "description": "Privacy policy of the product.",
+          "type": "string"
+        },
+        "provisioningState": {
+          "description": "Provisioning state of the resource.",
+          "$ref": "AzureBridge.json#/definitions/ProvisioningState"
+        },
+        "galleryPackageBlobSasUri": {
+          "description": "The URI to the .azpkg file that provides information required for showing product in the gallery.",
+          "type": "string"
+        },
+        "productDetailsProperties": {
+          "description": "Specifies additional properties describing the product.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ExtendedProductProperties",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "AzureBridge.json#/definitions/ProductBase"
+        }
+      ]
+    },
+    "ExtendedProductProperties": {
+      "description": "Product information.",
+      "type": "object",
+      "properties": {},
+      "allOf": [
+        {
+          "$ref": "#/definitions/VirtualMachineExtensionProductProperties"
+        },
+        {
+          "$ref": "#/definitions/VirtualMachineProductProperties"
+        }
+      ]
+    },
+    "VirtualMachineExtensionProductProperties": {
+      "description": "Product information.",
+      "type": "object",
+      "properties": {
+        "computeRole": {
+          "description": "Specifies kind of compute role included in the package.",
+          "$ref": "#/definitions/ComputeRole",
+          "readOnly": true
+        },
+        "isSystemExtension": {
+          "description": "Specifies if product is a Virtual Machine Extension.",
+          "type": "boolean"
+        },
+        "sourceBlob": {
+          "description": "Specifies a download location where content can be downloaded from.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/Uri",
+          "readOnly": true
+        },
+        "supportMultipleExtensions": {
+          "description": "Indicates if specified product supports multiple extensions.",
+          "type": "boolean"
+        },
+        "version": {
+          "description": "Specifies product version.",
+          "type": "string"
+        },
+        "vmOsType": {
+          "description": "Specifies operating system used by the product.",
+          "$ref": "#/definitions/OperatingSystem",
+          "readOnly": true
+        },
+        "vmScaleSetEnabled": {
+          "description": "Indicates if virtual machine Scale Set is enabled in the specified product.",
+          "type": "boolean"
+        }
+      }
+    },
+    "VirtualMachineProductProperties": {
+      "description": "Product information.",
+      "type": "object",
+      "properties": {
+        "version": {
+          "description": "Specifies product version.",
+          "type": "string"
+        },
+        "osDiskImage": {
+          "description": "OS disk image used by product.",
+          "$ref": "#/definitions/OsDiskImage",
+          "readOnly": true
+        },
+        "dataDiskImages": {
+          "description": "List of attached data disks.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DataDiskImage"
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "ComputeRole": {
+      "description": "Compute role type (IaaS or PaaS).",
+      "type": "string",
+      "enum": [
+        "None",
+        "IaaS",
+        "PaaS"
+      ],
+      "x-ms-enum": {
+        "name": "ComputeRole",
+        "modelAsString": true
+      }
+    },
+    "Uri": {
+      "description": "The URI.",
+      "type": "object",
+      "properties": {
+        "uri": {
+          "description": "The URI.",
+          "type": "string"
+        }
+      }
+    },
+    "OperatingSystem": {
+      "description": "Operating system type (Windows or Linux).",
+      "type": "string",
+      "enum": [
+        "None",
+        "Windows",
+        "Linux"
+      ],
+      "x-ms-enum": {
+        "name": "OperatingSystem",
+        "modelAsString": true
+      }
+    },
+    "OsDiskImage": {
+      "description": "OS disk image.",
+      "type": "object",
+      "properties": {
+        "operatingSystem": {
+          "description": "OS operating system type.",
+          "$ref": "#/definitions/OperatingSystem",
+          "readOnly": true
+        },
+        "sourceBlobSasUri": {
+          "description": "SAS key for source blob.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "DataDiskImage": {
+      "description": "Data disk image.",
+      "type": "object",
+      "properties": {
+        "lun": {
+          "description": "The LUN.",
+          "type": "integer",
+          "format": "int32",
+          "readOnly": true
+        },
+        "sourceBlobSasUri": {
+          "description": "SAS key for source blob.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    }
+  },
+  "parameters": {
+    "SubscriptionIdParameter": {
+      "name": "subscriptionId",
+      "in": "path",
+      "description": "Subscription credentials which uniquely identify Microsoft Azure subscription.The subscription ID forms part of the URI for every service call.",
+      "required": true,
+      "type": "string"
+    },
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "description": "Client Api Version.",
+      "required": true,
+      "type": "string",
+      "default": "2016-01-01"
+    },
+    "ActivationNameParameter": {
+      "name": "activationName",
+      "in": "path",
+      "description": "Name of the activation.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "ProductNameParameter": {
+      "name": "productName",
+      "in": "path",
+      "description": "Name of the product.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "ResourceGroupNameParameter": {
+      "description": "The resource group the resource is located under.",
+      "name": "resourceGroupName",
+      "in": "path",
+      "type": "string",
+      "required": true,
+      "x-ms-parameter-location": "method"
+    },
+    "RegistrationNameParameter": {
+      "name": "registrationName",
+      "in": "path",
+      "description": "Name of the registration.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Authorization uses an Azure Active Directory OAuth2 flow.",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ]
+}

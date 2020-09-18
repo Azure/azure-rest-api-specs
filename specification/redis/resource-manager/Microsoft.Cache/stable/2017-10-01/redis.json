@@ -59,6 +59,94 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Cache/CheckNameAvailability": {
+      "post": {
+        "tags": [
+          "Redis"
+        ],
+        "operationId": "Redis_CheckNameAvailability",
+        "x-ms-examples": {
+          "RedisCacheList": {
+            "$ref": "./examples/RedisCacheCheckNameAvailability.json"
+          }
+        },
+        "description": "Checks that the redis cache name is valid and is not already in use.",
+        "parameters": [
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CheckNameAvailabilityParameters"
+            },
+            "description": "Parameters supplied to the CheckNameAvailability Redis operation. The only supported resource type is 'Microsoft.Cache/redis'"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Name is available"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cache/Redis/{name}/listUpgradeNotifications": {
+      "get": {
+        "tags": [
+          "Redis"
+        ],
+        "operationId": "Redis_ListUpgradeNotifications",
+        "x-ms-examples": {
+          "RedisCacheGet": {
+            "$ref": "./examples/RedisCacheListUpgradeNotifications.json"
+          }
+        },
+        "description": "Gets any upgrade notifications for a Redis cache.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the Redis cache."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "history",
+            "in": "query",
+            "required": true,
+            "type": "number",
+            "format": "double",
+            "description": "how many minutes in past to look for upgrade notifications"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "All upgrade notifications in given time range",
+            "schema": {
+              "$ref": "#/definitions/NotificationListResponse"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cache/Redis/{name}": {
       "put": {
         "tags": [
@@ -66,7 +154,9 @@
         ],
         "operationId": "Redis_Create",
         "x-ms-examples": {
-          "RedisCacheCreate": { "$ref": "./examples/RedisCacheCreate.json" }
+          "RedisCacheCreate": {
+            "$ref": "./examples/RedisCacheCreate.json"
+          }
         },
         "description": "Create or replace (overwrite/recreate, with potential downtime) an existing Redis cache.",
         "x-ms-long-running-operation": true,
@@ -122,7 +212,9 @@
         ],
         "operationId": "Redis_Update",
         "x-ms-examples": {
-          "RedisCacheUpdate": { "$ref": "./examples/RedisCacheUpdate.json" }
+          "RedisCacheUpdate": {
+            "$ref": "./examples/RedisCacheUpdate.json"
+          }
         },
         "description": "Update an existing Redis cache.",
         "parameters": [
@@ -171,7 +263,9 @@
         ],
         "operationId": "Redis_Delete",
         "x-ms-examples": {
-          "RedisCacheDelete": { "$ref": "./examples/RedisCacheDelete.json" }
+          "RedisCacheDelete": {
+            "$ref": "./examples/RedisCacheDelete.json"
+          }
         },
         "description": "Deletes a Redis cache.",
         "x-ms-long-running-operation": true,
@@ -212,7 +306,9 @@
         ],
         "operationId": "Redis_Get",
         "x-ms-examples": {
-          "RedisCacheGet": { "$ref": "./examples/RedisCacheGet.json" }
+          "RedisCacheGet": {
+            "$ref": "./examples/RedisCacheGet.json"
+          }
         },
         "description": "Gets a Redis cache (resource description).",
         "parameters": [
@@ -247,14 +343,16 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cache/Redis/": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cache/Redis": {
       "get": {
         "tags": [
           "Redis"
         ],
         "operationId": "Redis_ListByResourceGroup",
         "x-ms-examples": {
-          "RedisCacheListByResourceGroup": { "$ref": "./examples/RedisCacheListByResourceGroup.json" }
+          "RedisCacheListByResourceGroup": {
+            "$ref": "./examples/RedisCacheListByResourceGroup.json"
+          }
         },
         "description": "Lists all Redis caches in a resource group.",
         "parameters": [
@@ -285,14 +383,16 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Cache/Redis/": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Cache/Redis": {
       "get": {
         "tags": [
           "Redis"
         ],
         "operationId": "Redis_List",
         "x-ms-examples": {
-          "RedisCacheList": { "$ref": "./examples/RedisCacheList.json" }
+          "RedisCacheList": {
+            "$ref": "./examples/RedisCacheList.json"
+          }
         },
         "description": "Gets all Redis caches in the specified subscription.",
         "parameters": [
@@ -323,7 +423,9 @@
         ],
         "operationId": "Redis_ListKeys",
         "x-ms-examples": {
-          "RedisCacheListKeys": { "$ref": "./examples/RedisCacheListKeys.json" }
+          "RedisCacheListKeys": {
+            "$ref": "./examples/RedisCacheListKeys.json"
+          }
         },
         "description": "Retrieve a Redis cache's access keys. This operation requires write permission to the cache resource.",
         "parameters": [
@@ -365,7 +467,9 @@
         ],
         "operationId": "Redis_RegenerateKey",
         "x-ms-examples": {
-          "RedisCacheRegenerateKey": { "$ref": "./examples/RedisCacheRegenerateKey.json" }
+          "RedisCacheRegenerateKey": {
+            "$ref": "./examples/RedisCacheRegenerateKey.json"
+          }
         },
         "description": "Regenerate Redis cache's access keys. This operation requires write permission to the cache resource.",
         "parameters": [
@@ -416,7 +520,9 @@
         ],
         "operationId": "Redis_ForceReboot",
         "x-ms-examples": {
-          "RedisCacheForceReboot": { "$ref": "./examples/RedisCacheForceReboot.json" }
+          "RedisCacheForceReboot": {
+            "$ref": "./examples/RedisCacheForceReboot.json"
+          }
         },
         "description": "Reboot specified Redis node(s). This operation requires write permission to the cache resource. There can be potential data loss.",
         "parameters": [
@@ -467,7 +573,9 @@
         ],
         "operationId": "Redis_ImportData",
         "x-ms-examples": {
-          "RedisCacheImport": { "$ref": "./examples/RedisCacheImport.json" }
+          "RedisCacheImport": {
+            "$ref": "./examples/RedisCacheImport.json"
+          }
         },
         "x-ms-long-running-operation": true,
         "description": "Import data into Redis cache.",
@@ -522,7 +630,9 @@
         ],
         "operationId": "Redis_ExportData",
         "x-ms-examples": {
-          "RedisCacheExport": { "$ref": "./examples/RedisCacheExport.json" }
+          "RedisCacheExport": {
+            "$ref": "./examples/RedisCacheExport.json"
+          }
         },
         "x-ms-long-running-operation": true,
         "description": "Export data from the redis cache to blobs in a container.",
@@ -579,7 +689,9 @@
         "operationId": "FirewallRules_ListByRedisResource",
         "description": "Gets all firewall rules in the specified redis cache.",
         "x-ms-examples": {
-          "RedisCacheFirewallRulesList": { "$ref": "./examples/RedisCacheFirewallRulesList.json" }
+          "RedisCacheFirewallRulesList": {
+            "$ref": "./examples/RedisCacheFirewallRulesList.json"
+          }
         },
         "parameters": [
           {
@@ -625,7 +737,9 @@
         "operationId": "FirewallRules_CreateOrUpdate",
         "description": "Create or update a redis cache firewall rule",
         "x-ms-examples": {
-          "RedisCacheFirewallRuleCreate": { "$ref": "./examples/RedisCacheFirewallRuleCreate.json" }
+          "RedisCacheFirewallRuleCreate": {
+            "$ref": "./examples/RedisCacheFirewallRuleCreate.json"
+          }
         },
         "parameters": [
           {
@@ -688,7 +802,9 @@
         "operationId": "FirewallRules_Get",
         "description": "Gets a single firewall rule in a specified redis cache.",
         "x-ms-examples": {
-          "RedisCacheFirewallRuleGet": { "$ref": "./examples/RedisCacheFirewallRuleGet.json" }
+          "RedisCacheFirewallRuleGet": {
+            "$ref": "./examples/RedisCacheFirewallRuleGet.json"
+          }
         },
         "parameters": [
           {
@@ -736,7 +852,9 @@
         "operationId": "FirewallRules_Delete",
         "description": "Deletes a single firewall rule in a specified redis cache.",
         "x-ms-examples": {
-          "RedisCacheFirewallRuleDelete": { "$ref": "./examples/RedisCacheFirewallRuleDelete.json" }
+          "RedisCacheFirewallRuleDelete": {
+            "$ref": "./examples/RedisCacheFirewallRuleDelete.json"
+          }
         },
         "parameters": [
           {
@@ -777,14 +895,65 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cache/Redis/{name}/patchSchedules/default": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cache/Redis/{cacheName}/patchSchedules": {
+      "get": {
+        "tags": [
+          "Redis",
+          "PatchSchedules"
+        ],
+        "operationId": "PatchSchedules_ListByRedisResource",
+        "description": "Gets all patch schedules in the specified redis cache (there is only one).",
+        "x-ms-examples": {
+          "RedisCachePatchSchedulesList": {
+            "$ref": "./examples/RedisCachePatchSchedulesList.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "cacheName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the Redis cache."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully got the current patch schedules",
+            "schema": {
+              "$ref": "#/definitions/RedisPatchScheduleListResult"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cache/Redis/{name}/patchSchedules/{default}": {
       "put": {
         "tags": [
-          "Redis"
+          "Redis",
+          "PatchSchedules"
         ],
         "operationId": "PatchSchedules_CreateOrUpdate",
         "x-ms-examples": {
-          "RedisCachePatchSchedulesCreateOrUpdate": { "$ref": "./examples/RedisCachePatchSchedulesCreateOrUpdate.json" }
+          "RedisCachePatchSchedulesCreateOrUpdate": {
+            "$ref": "./examples/RedisCachePatchSchedulesCreateOrUpdate.json"
+          }
         },
         "description": "Create or replace the patching schedule for Redis cache (requires Premium SKU).",
         "parameters": [
@@ -801,6 +970,20 @@
             "required": true,
             "type": "string",
             "description": "The name of the Redis cache."
+          },
+          {
+            "name": "default",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Default string modeled as parameter for auto generation to work correctly.",
+            "enum": [
+              "default"
+            ],
+            "x-ms-enum": {
+              "name": "defaultName",
+              "modelAsString": true
+            }
           },
           {
             "name": "parameters",
@@ -835,11 +1018,14 @@
       },
       "delete": {
         "tags": [
-          "Redis"
+          "Redis",
+          "PatchSchedules"
         ],
         "operationId": "PatchSchedules_Delete",
         "x-ms-examples": {
-          "RedisCachePatchSchedulesDelete": { "$ref": "./examples/RedisCachePatchSchedulesDelete.json" }
+          "RedisCachePatchSchedulesDelete": {
+            "$ref": "./examples/RedisCachePatchSchedulesDelete.json"
+          }
         },
         "description": "Deletes the patching schedule of a redis cache (requires Premium SKU).",
         "parameters": [
@@ -856,6 +1042,20 @@
             "required": true,
             "type": "string",
             "description": "The name of the redis cache."
+          },
+          {
+            "name": "default",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Default string modeled as parameter for auto generation to work correctly.",
+            "enum": [
+              "default"
+            ],
+            "x-ms-enum": {
+              "name": "defaultName",
+              "modelAsString": true
+            }
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -875,11 +1075,14 @@
       },
       "get": {
         "tags": [
-          "Redis"
+          "Redis",
+          "PatchSchedules"
         ],
         "operationId": "PatchSchedules_Get",
         "x-ms-examples": {
-          "RedisCachePatchSchedulesGet": { "$ref": "./examples/RedisCachePatchSchedulesGet.json" }
+          "RedisCachePatchSchedulesGet": {
+            "$ref": "./examples/RedisCachePatchSchedulesGet.json"
+          }
         },
         "description": "Gets the patching schedule of a redis cache (requires Premium SKU).",
         "parameters": [
@@ -896,6 +1099,20 @@
             "required": true,
             "type": "string",
             "description": "The name of the redis cache."
+          },
+          {
+            "name": "default",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Default string modeled as parameter for auto generation to work correctly.",
+            "enum": [
+              "default"
+            ],
+            "x-ms-enum": {
+              "name": "defaultName",
+              "modelAsString": true
+            }
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -922,7 +1139,9 @@
         "operationId": "LinkedServer_Create",
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
-          "LinkedServer_Create": { "$ref": "./examples/RedisCacheLinkedServer_Create.json" }
+          "LinkedServer_Create": {
+            "$ref": "./examples/RedisCacheLinkedServer_Create.json"
+          }
         },
         "description": "Adds a linked server to the Redis cache (requires Premium SKU).",
         "parameters": [
@@ -984,7 +1203,9 @@
         ],
         "operationId": "LinkedServer_Delete",
         "x-ms-examples": {
-          "LinkedServerDelete": { "$ref": "./examples/RedisCacheLinkedServer_Delete.json" }
+          "LinkedServerDelete": {
+            "$ref": "./examples/RedisCacheLinkedServer_Delete.json"
+          }
         },
         "description": "Deletes the linked server from a redis cache (requires Premium SKU).",
         "parameters": [
@@ -1028,7 +1249,9 @@
         ],
         "operationId": "LinkedServer_Get",
         "x-ms-examples": {
-          "LinkedServer_Get": { "$ref": "./examples/RedisCacheLinkedServer_Get.json" }
+          "LinkedServer_Get": {
+            "$ref": "./examples/RedisCacheLinkedServer_Get.json"
+          }
         },
         "description": "Gets the detailed information about a linked server of a redis cache (requires Premium SKU).",
         "parameters": [
@@ -1077,7 +1300,9 @@
         ],
         "operationId": "LinkedServer_List",
         "x-ms-examples": {
-          "LinkedServer_List": { "$ref": "./examples/RedisCacheLinkedServer_List.json" }
+          "LinkedServer_List": {
+            "$ref": "./examples/RedisCacheLinkedServer_List.json"
+          }
         },
         "description": "Gets the list of linked servers associated with this redis cache (requires Premium SKU).",
         "parameters": [
@@ -1195,7 +1420,7 @@
         "subnetId": {
           "type": "string",
           "pattern": "^/subscriptions/[^/]*/resourceGroups/[^/]*/providers/Microsoft.(ClassicNetwork|Network)/virtualNetworks/[^/]*/subnets/[^/]*$",
-          "description": "The full resource ID of a subnet in a virtual network to deploy the Redis cache in. Example format: /subscriptions/{subid}/resourceGroups/{resourceGroupName}/Microsoft.{Network|ClassicNetwork}/VirtualNetworks/vnet1/subnets/subnet1"
+          "description": "The full resource ID of a subnet in a virtual network to deploy the Redis cache in. Example format: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/Microsoft.{Network|ClassicNetwork}/VirtualNetworks/vnet1/subnets/subnet1"
         },
         "staticIP": {
           "type": "string",
@@ -1675,6 +1900,23 @@
       ],
       "description": "Response to put/get patch schedules for Redis cache."
     },
+    "RedisPatchScheduleListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RedisPatchSchedule"
+          },
+          "description": "Results of the list patch schedules operation."
+        },
+        "nextLink": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Link for next page of results."
+        }
+      },
+      "description": "The response of list patch schedules Redis operation."
+    },
     "RedisForceRebootResponse": {
       "properties": {
         "message": {
@@ -1732,7 +1974,7 @@
           "items": {
             "$ref": "#/definitions/RedisLinkedServerWithProperties"
           },
-          "description": "List of linked servers (with properites) of a Redis cache."
+          "description": "List of linked servers (with properties) of a Redis cache."
         },
         "nextLink": {
           "type": "string",
@@ -1740,7 +1982,7 @@
           "description": "Link for next set."
         }
       },
-      "description": "List of linked servers (with properites) of a Redis cache."
+      "description": "List of linked servers (with properties) of a Redis cache."
     },
     "RedisLinkedServerCreateProperties": {
       "description": "Create properties for a linked server",
@@ -1832,22 +2074,80 @@
           "description": "URL to get the next set of operation list results if there are any."
         }
       }
+    },
+    "CheckNameAvailabilityParameters": {
+      "description": "Parameters body to pass for name availability check.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Resource name."
+        },
+        "type": {
+          "type": "string",
+          "description": "Resource type. The only legal value of this property for checking redis cache name availability is 'Microsoft.Cache/redis'."
+        }
+      },
+      "required": [
+        "name",
+        "type"
+      ]
+    },
+    "UpgradeNotification": {
+      "properties": {
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Name of upgrade notification."
+        },
+        "timestamp": {
+          "readOnly": true,
+          "type": "string",
+          "format": "date-time",
+          "description": "Timestamp when upgrade notification occurred."
+        },
+        "upsellNotification": {
+          "readOnly": true,
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Details about this upgrade notification"
+        }
+      },
+      "description": "Properties of upgrade notification."
+    },
+    "NotificationListResponse": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/UpgradeNotification"
+          },
+          "description": "List of all notifications."
+        },
+        "nextLink": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Link for next set of notifications."
+        }
+      },
+      "description": "The response of listUpgradeNotifications."
     }
   },
   "parameters": {
-      "SubscriptionIdParameter": {
-        "name": "subscriptionId",
-        "in": "path",
-        "required": true,
-        "type": "string",
-        "description": "Gets subscription credentials which uniquely identify the Microsoft Azure subscription. The subscription ID forms part of the URI for every service call."
-      },
-      "ApiVersionParameter": {
-        "name": "api-version",
-        "in": "query",
-        "required": true,
-        "type": "string",
-        "description": "Client Api Version."
-      }
+    "SubscriptionIdParameter": {
+      "name": "subscriptionId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Gets subscription credentials which uniquely identify the Microsoft Azure subscription. The subscription ID forms part of the URI for every service call."
+    },
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "Client Api Version."
     }
   }
+}

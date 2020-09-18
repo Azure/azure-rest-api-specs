@@ -1,0 +1,540 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "Network admin operation endpoints and objects.",
+    "title": "NetworkAdminManagementClient",
+    "version": "2015-06-15"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Network.Admin/adminOverview": {
+      "get": {
+        "x-ms-examples": {
+          "Get overview of the state of the network resource provider": {
+            "$ref": "./examples/ResourceProviderState/Get.json"
+          }
+        },
+        "tags": [
+          "Network"
+        ],
+        "description": "Get an overview of the state of the network resource provider.",
+        "operationId": "ResourceProviderState_Get",
+        "parameters": [
+          {
+            "$ref": "Network.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "Network.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/AdminOverview"
+            }
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Network.Admin/operations": {
+      "get": {
+        "x-ms-examples": {
+          "Returns the list of support REST operations.": {
+            "$ref": "./examples/Operations/List.json"
+          }
+        },
+        "description": "Returns the list of support REST operations.",
+        "tags": [
+          "Network"
+        ],
+        "operationId": "Operations_List",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/OperationList"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.Network.Admin/locations": {
+      "get": {
+        "x-ms-examples": {
+          "Returns the list of supported locations.": {
+            "$ref": "./examples/Locations/List.json"
+          }
+        },
+        "description": "Returns the list of supported locations",
+        "tags": [
+          "Network"
+        ],
+        "operationId": "OnPremLocations_List",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/LocationsList"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.Network.Admin/locations/{location}/operationResults": {
+      "get": {
+        "x-ms-examples": {
+          "Returns the list of operation results for a location": {
+            "$ref": "./examples/Locations/List.json"
+          }
+        },
+        "description": "Returns the list of operation results for a location",
+        "tags": [
+          "Network"
+        ],
+        "operationId": "LocationsOperationResults_List",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/LocationParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/OperationResultList"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.Network.Admin/locations/{location}/operations": {
+      "get": {
+        "x-ms-examples": {
+          "Returns the list of support REST operations.": {
+            "$ref": "./examples/Locations/List.json"
+          }
+        },
+        "description": "Returns the list of support REST operations.",
+        "tags": [
+          "Network"
+        ],
+        "operationId": "LocationsOperations_List",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/LocationParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/OperationList"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Resource": {
+      "description": "Base Resource Object",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "URI of the resource.",
+          "type": "string",
+          "readOnly": true
+        },
+        "name": {
+          "description": "Name of the resource.",
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "description": "Type of resource.",
+          "type": "string",
+          "readOnly": true
+        },
+        "location": {
+          "description": "Region location of resource.",
+          "type": "string",
+          "readOnly": true
+        },
+        "tags": {
+          "description": "List of key value pairs.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "Operation": {
+      "description": "Describes the supported REST operation.",
+      "properties": {
+        "name": {
+          "description": "The name of the operation being performed on this particular object. This name should match the name that appears in RBAC or the event service.",
+          "type": "string",
+          "readOnly": true
+        },
+        "display": {
+          "description": "Contains the localized display information for this particular operation / action.",
+          "$ref": "#/definitions/Display",
+          "readOnly": true
+        }
+      }
+    },
+    "Location": {
+      "description": "Describes the supported Location",
+      "properties": {
+        "name": {
+          "description": "The name of the location the operation is being held.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "OperationResult": {
+      "description": "Describes results of a given operation",
+      "properties": {
+        "name": {
+          "description": "The name of the operation being performed on this particular object.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "Display": {
+      "description": "Contains the localized display information for this particular operation / action.",
+      "properties": {
+        "provider": {
+          "description": "The localized friendly form of the resource provider name – it is expected to also include the publisher/company responsible. It should use Title Casing and begin with \"Microsoft\" for 1st party services. e.g. \"Microsoft Monitoring Insights\" or \"Microsoft Compute.\"",
+          "type": "string",
+          "readOnly": true
+        },
+        "resource": {
+          "description": "The localized, friendly version of the resource type related to this action or operation; the resource type should match the public documentation for the resource provider.",
+          "type": "string",
+          "readOnly": true
+        },
+        "operation": {
+          "description": "The localized, friendly name for the operation. Use the name as it will displayed to the user.",
+          "type": "string",
+          "readOnly": true
+        },
+        "description": {
+          "description": "The localized, friendly description for the operation. The description will be displayed to the user. It should be thorough and concise for used in both tooltips and detailed views.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "LocationsList": {
+      "description": "List of Locations",
+      "properties": {
+        "value": {
+          "description": "Array of locations",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Location"
+          },
+          "readOnly": true
+        },
+        "nextLink": {
+          "description": "URI to the next page of locations.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "OperationList": {
+      "description": "List of Operations",
+      "properties": {
+        "value": {
+          "description": "Array of operations",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Operation"
+          },
+          "readOnly": true
+        },
+        "nextLink": {
+          "description": "URI to the next page of operations.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "OperationResultList": {
+      "description": "List of Operation Results",
+      "properties": {
+        "value": {
+          "description": "Array of operation results",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/OperationResult"
+          },
+          "readOnly": true
+        },
+        "nextLink": {
+          "description": "URI to the next page of operations.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "ProvisionedResource": {
+      "description": "Objects which have a provisioning state.",
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "description": "The provisioning state.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "TenantResource": {
+      "description": "These resources are utilized by a single tenant.",
+      "type": "object",
+      "properties": {
+        "subscriptionId": {
+          "description": "The subscription ID.",
+          "type": "string",
+          "readOnly": true
+        },
+        "tenantResourceUri": {
+          "description": "The tenant resource URI.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "AdminOverview": {
+      "description": "Admin overview resource object.",
+      "properties": {
+        "properties": {
+          "description": "Admin overview properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/AdminOverviewProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ]
+    },
+    "AdminOverviewProperties": {
+      "description": "Admin overview properties.",
+      "properties": {
+        "provisioningState": {
+          "description": "The provisioning state.",
+          "type": "string",
+          "readOnly": true
+        },
+        "virtualNetworkHealth": {
+          "description": "Health for all virtual networks as reported by the NC.",
+          "$ref": "#/definitions/AdminOverviewResourceHealth"
+        },
+        "loadBalancerMuxHealth": {
+          "description": "Health for all LB MUXes as reported by the NC.",
+          "$ref": "#/definitions/AdminOverviewResourceHealth"
+        },
+        "virtualGatewayHealth": {
+          "description": "Health for all gateways as reported by the NC.",
+          "$ref": "#/definitions/AdminOverviewResourceHealth"
+        },
+        "publicIpAddressUsage": {
+          "description": "Total Public IP usage as reported by the NC.",
+          "$ref": "#/definitions/AdminOverviewResourceUsage"
+        },
+        "backendIpUsage": {
+          "description": "Total Backend IP usage as reported by the NC.",
+          "$ref": "#/definitions/AdminOverviewResourceUsage"
+        },
+        "macAddressUsage": {
+          "description": "Total MAC address usage as reported by the NC.",
+          "$ref": "#/definitions/AdminOverviewResourceUsage"
+        }
+      }
+    },
+    "AdminOverviewResourceHealth": {
+      "description": "Resource health information.",
+      "properties": {
+        "totalResourceCount": {
+          "description": "Total number of resources.",
+          "type": "integer",
+          "format": "int64",
+          "readOnly": true
+        },
+        "healthyResourceCount": {
+          "description": "Number of resources in the success state.",
+          "type": "integer",
+          "format": "int64",
+          "readOnly": true
+        },
+        "errorResourceCount": {
+          "description": "Number of resources in the error state.",
+          "type": "integer",
+          "format": "int64",
+          "readOnly": true
+        },
+        "warningResourceCount": {
+          "description": "Number of resources in the warning state.",
+          "type": "integer",
+          "format": "int64",
+          "readOnly": true
+        },
+        "healthUnknownCount": {
+          "description": "Number of resources in an unknown state.",
+          "type": "integer",
+          "format": "int64",
+          "readOnly": true
+        }
+      }
+    },
+    "AdminOverviewResourceUsage": {
+      "description": "Resource usage information.",
+      "properties": {
+        "totalResourceCount": {
+          "description": "Total number of resources.",
+          "type": "integer",
+          "format": "int64",
+          "readOnly": true
+        },
+        "inUseResourceCount": {
+          "description": "Number of resources in use.",
+          "type": "integer",
+          "format": "int64",
+          "readOnly": true
+        }
+      }
+    }
+  },
+  "parameters": {
+    "SubscriptionIdParameter": {
+      "name": "subscriptionId",
+      "in": "path",
+      "description": "Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.",
+      "required": true,
+      "type": "string"
+    },
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "description": "Client API Version.",
+      "required": true,
+      "type": "string",
+      "default": "2015-06-15"
+    },
+    "LocationParameter": {
+      "description": "Location of the resource.",
+      "name": "location",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "ResourceNameParameter": {
+      "description": "Name of the resource.",
+      "name": "resourceName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "FilterParameter": {
+      "description": "OData filter parameter.",
+      "name": "$filter",
+      "in": "query",
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "OrderByParameter": {
+      "description": "OData orderBy parameter.",
+      "name": "$orderBy",
+      "in": "query",
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "TopParameter": {
+      "description": "OData top parameter.",
+      "name": "$top",
+      "in": "query",
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "SkipParameter": {
+      "description": "OData skip parameter.",
+      "name": "$skip",
+      "in": "query",
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "InlineCountParameter": {
+      "description": "OData inline count parameter.",
+      "name": "$inlineCount",
+      "in": "query",
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 flow.",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ]
+}

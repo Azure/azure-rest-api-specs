@@ -1,0 +1,43 @@
+{
+  "parameters": {
+    "subscriptionId": "subscription-id",
+    "resourceGroupName": "OneResourceGroupName",
+    "api-version": "2018-07-12"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "location": "West US",
+            "tags": {
+              "tag1": "value1",
+              "tag2": "value2"
+            },
+            "id": "someid",
+            "etag": "etag1",
+            "properties": {
+              "state": "Creating",
+              "nodes": [
+                {
+                  "id": "00000000-0000-0000-0000-000000000000",
+                  "state": "Creating",
+                  "name": "Node 1",
+                  "azureSku": "Int1",
+                  "azureLocation": "WestUs"
+                },
+                {
+                  "id": "00000000-0000-0000-0000-000000000001",
+                  "state": "Creating",
+                  "name": "Node 2",
+                  "azureSku": "Int1",
+                  "azureLocation": "EastUs"
+                }
+              ]
+            }
+          }
+        ]
+      }
+    }
+  }
+}

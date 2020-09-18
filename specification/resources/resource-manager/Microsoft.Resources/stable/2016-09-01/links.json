@@ -34,6 +34,31 @@
     }
   },
   "paths": {
+    "/providers/Microsoft.Resources/operations": {
+      "get": {
+        "tags": [
+          "Operations"
+        ],
+        "operationId": "Operations_List",
+        "description": "Lists all of the available Microsoft.Resources REST API operations.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/OperationListResult"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
     "/{linkId}": {
       "delete": {
         "tags": [
@@ -148,7 +173,7 @@
             "in": "query",
             "required": false,
             "type": "string",
-            "description": "The filter to apply on the list resource links operation. The supported filter for list resource links is targetid. For example, $filter=targetid eq {value}"
+            "description": "The filter to apply on the list resource links operation. The supported filter for list resource links is targetId. For example, $filter=targetId eq {value}"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -191,7 +216,9 @@
             "name": "$filter",
             "in": "query",
             "required": false,
-            "enum": ["atScope()"],
+            "enum": [
+              "atScope()"
+            ],
             "x-ms-enum": {
               "name": "Filter",
               "modelAsString": false
@@ -263,11 +290,17 @@
           "type": "string",
           "description": "The name of the resource link."
         },
+        "type": {
+          "readOnly": true,
+          "type": "object",
+          "description": "The resource link object."
+        },
         "properties": {
           "$ref": "#/definitions/ResourceLinkProperties",
           "description": "Properties for resource link."
         }
       },
+      "x-ms-azure-resource": true,
       "description": "The resource link."
     },
     "ResourceLinkProperties": {
@@ -290,6 +323,53 @@
         "targetId"
       ],
       "description": "The resource link properties."
+    },
+    "Operation": {
+      "description": "Microsoft.Resources operation",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Operation name: {provider}/{resource}/{operation}",
+          "type": "string"
+        },
+        "display": {
+          "description": "The object that represents the operation.",
+          "properties": {
+            "provider": {
+              "description": "Service provider: Microsoft.Resources",
+              "type": "string"
+            },
+            "resource": {
+              "description": "Resource on which the operation is performed: Profile, endpoint, etc.",
+              "type": "string"
+            },
+            "operation": {
+              "description": "Operation type: Read, write, delete, etc.",
+              "type": "string"
+            },
+            "description": {
+              "description": "Description of the operation.",
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "OperationListResult": {
+      "description": "Result of the request to list Microsoft.Resources operations. It contains a list of operations and a URL link to get the next set of results.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Operation"
+          },
+          "description": "List of Microsoft.Resources operations."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "URL to get the next set of operation list results if there are any."
+        }
+      }
     }
   },
   "parameters": {

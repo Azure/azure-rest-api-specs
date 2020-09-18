@@ -1,0 +1,1207 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2018-11-20",
+    "title": "GuestConfiguration"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/providers/Microsoft.GuestConfiguration/guestConfigurationAssignments/{guestConfigurationAssignmentName}": {
+      "put": {
+        "tags": [
+          "GuestConfigurationAssignments"
+        ],
+        "operationId": "GuestConfigurationAssignments_CreateOrUpdate",
+        "description": "Creates an association between a VM and guest configuration",
+        "x-ms-examples": {
+          "Create or update guest configuration assignment": {
+            "$ref": "./examples/createOrUpdateGuestConfigurationAssignment.json"
+          }
+        },
+        "parameters": [
+          {
+            "name": "guestConfigurationAssignmentName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Name of the guest configuration assignment."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/GuestConfigurationAssignment"
+            },
+            "description": "Parameters supplied to the create or update guest configuration assignment."
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/VmNameParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created. The guest configuration assignment for the VM was created successfully.",
+            "schema": {
+              "$ref": "#/definitions/GuestConfigurationAssignment"
+            }
+          },
+          "200": {
+            "description": "OK. The guest configuration assignment for the VM was updated successfully.",
+            "schema": {
+              "$ref": "#/definitions/GuestConfigurationAssignment"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../common/v1/definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ]
+      },
+      "get": {
+        "tags": [
+          "GuestConfigurationAssignments"
+        ],
+        "operationId": "GuestConfigurationAssignments_Get",
+        "description": "Get information about a guest configuration assignment",
+        "x-ms-examples": {
+          "Get a guest configuration assignment": {
+            "$ref": "./examples/getGuestConfigurationAssignment.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "guestConfigurationAssignmentName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The guest configuration assignment name."
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/VmNameParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The guest configuration assignment was returned successfully.",
+            "schema": {
+              "$ref": "#/definitions/GuestConfigurationAssignment"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../common/v1/definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ]
+      },
+      "delete": {
+        "tags": [
+          "GuestConfigurationAssignments"
+        ],
+        "operationId": "GuestConfigurationAssignments_Delete",
+        "description": "Delete a guest configuration assignment",
+        "x-ms-examples": {
+          "Delete an guest configuration assignment": {
+            "$ref": "./examples/deleteGuestConfigurationAssignment.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "guestConfigurationAssignmentName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Name of the guest configuration assignment"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/VmNameParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../common/v1/definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ]
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/providers/Microsoft.GuestConfiguration/guestConfigurationAssignments": {
+      "get": {
+        "tags": [
+          "GuestConfigurationAssignments"
+        ],
+        "operationId": "GuestConfigurationAssignments_List",
+        "description": "List all guest configuration assignments for a virtual machine.",
+        "x-ms-examples": {
+          "List all guest configuration assignments for a virtual machine": {
+            "$ref": "./examples/listGuestConfigurationAssignments.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/VmNameParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/GuestConfigurationAssignmentList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../common/v1/definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        },
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ]
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/providers/Microsoft.GuestConfiguration/guestConfigurationAssignments/{guestConfigurationAssignmentName}/reports": {
+      "get": {
+        "tags": [
+          "GuestConfigurationAssignmentReports"
+        ],
+        "operationId": "GuestConfigurationAssignmentReports_List",
+        "description": "List all reports for the guest configuration assignment, latest report first.",
+        "x-ms-examples": {
+          "List all guest configuration assignments for a virtual machine": {
+            "$ref": "./examples/listAllGuestConfigurationAssignmentReports.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "guestConfigurationAssignmentName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The guest configuration assignment name."
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/VmNameParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. This response is due one of these two reasons: 1. Reports were returned successfully 2. Guest configuration assignment was found, but VM is not registered yet, hence no reports returned.",
+            "schema": {
+              "$ref": "#/definitions/GuestConfigurationAssignmentReportList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../common/v1/definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ]
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/providers/Microsoft.GuestConfiguration/guestConfigurationAssignments/{guestConfigurationAssignmentName}/reports/{reportId}": {
+      "get": {
+        "tags": [
+          "GuestConfigurationAssignmentReports"
+        ],
+        "operationId": "GuestConfigurationAssignmentReports_Get",
+        "description": "Get a report for the guest configuration assignment, by reportId.",
+        "x-ms-examples": {
+          "Get a guest configuration assignment report by Id for a virtual machine": {
+            "$ref": "./examples/getGuestConfigurationAssignmentReportById.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "guestConfigurationAssignmentName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The guest configuration assignment name."
+          },
+          {
+            "name": "reportId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The GUID for the guest configuration assignment report."
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/VmNameParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. This response is due one of these two reasons: 1. Report was returned successfully 2. Guest configuration assignment was found, but VM is not registered yet, hence no report was returned.",
+            "schema": {
+              "$ref": "#/definitions/GuestConfigurationAssignmentReport"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../common/v1/definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ]
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridCompute/machines/{machineName}/providers/Microsoft.GuestConfiguration/guestConfigurationAssignments/{guestConfigurationAssignmentName}": {
+      "put": {
+        "tags": [
+          "GuestConfigurationHCRPAssignments"
+        ],
+        "operationId": "GuestConfigurationHCRPAssignments_CreateOrUpdate",
+        "description": "Creates an association between a ARC machine and guest configuration",
+        "x-ms-examples": {
+          "Create or update guest configuration assignment": {
+            "$ref": "./examples/createOrUpdateGuestConfigurationHCRPAssignment.json"
+          }
+        },
+        "parameters": [
+          {
+            "name": "guestConfigurationAssignmentName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Name of the guest configuration assignment."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/GuestConfigurationAssignment"
+            },
+            "description": "Parameters supplied to the create or update guest configuration assignment."
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/MachineNameParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created. The guest configuration assignment for the ARC machine was created successfully.",
+            "schema": {
+              "$ref": "#/definitions/GuestConfigurationAssignment"
+            }
+          },
+          "200": {
+            "description": "OK. The guest configuration assignment for the ARC machine was updated successfully.",
+            "schema": {
+              "$ref": "#/definitions/GuestConfigurationAssignment"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../common/v1/definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ]
+      },
+      "get": {
+        "tags": [
+          "GuestConfigurationHCRPAssignments"
+        ],
+        "operationId": "GuestConfigurationHCRPAssignments_Get",
+        "description": "Get information about a guest configuration assignment",
+        "x-ms-examples": {
+          "Get a guest configuration assignment": {
+            "$ref": "./examples/getGuestConfigurationHCRPAssignment.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "guestConfigurationAssignmentName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The guest configuration assignment name."
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/MachineNameParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The guest configuration assignment was returned successfully.",
+            "schema": {
+              "$ref": "#/definitions/GuestConfigurationAssignment"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../common/v1/definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ]
+      },
+      "delete": {
+        "tags": [
+          "GuestConfigurationHCRPAssignments"
+        ],
+        "operationId": "GuestConfigurationHCRPAssignments_Delete",
+        "description": "Delete a guest configuration assignment",
+        "x-ms-examples": {
+          "Delete an guest configuration assignment": {
+            "$ref": "./examples/deleteGuestConfigurationHCRPAssignment.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "guestConfigurationAssignmentName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Name of the guest configuration assignment"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/MachineNameParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../common/v1/definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ]
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridCompute/machines/{machineName}/providers/Microsoft.GuestConfiguration/guestConfigurationAssignments": {
+      "get": {
+        "tags": [
+          "GuestConfigurationHCRPAssignments"
+        ],
+        "operationId": "GuestConfigurationHCRPAssignments_List",
+        "description": "List all guest configuration assignments for an ARC machine.",
+        "x-ms-examples": {
+          "List all guest configuration assignments for a virtual machine": {
+            "$ref": "./examples/listGuestConfigurationHCRPAssignments.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/MachineNameParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/GuestConfigurationAssignmentList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../common/v1/definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        },
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ]
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridCompute/machines/{machineName}/providers/Microsoft.GuestConfiguration/guestConfigurationAssignments/{guestConfigurationAssignmentName}/reports": {
+      "get": {
+        "tags": [
+          "GuestConfigurationAssignmentHCRPReports"
+        ],
+        "operationId": "GuestConfigurationHCRPAssignmentReports_List",
+        "description": "List all reports for the guest configuration assignment, latest report first.",
+        "x-ms-examples": {
+          "List all guest configuration assignments for a virtual machine": {
+            "$ref": "./examples/listAllGuestConfigurationHCRPAssignmentReports.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "guestConfigurationAssignmentName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The guest configuration assignment name."
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/MachineNameParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. This response is due one of these two reasons: 1. Reports were returned successfully 2. Guest configuration assignment was found, but machine is not registered yet, hence no reports returned.",
+            "schema": {
+              "$ref": "#/definitions/GuestConfigurationAssignmentReportList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../common/v1/definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ]
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridCompute/machines/{machineName}/providers/Microsoft.GuestConfiguration/guestConfigurationAssignments/{guestConfigurationAssignmentName}/reports/{reportId}": {
+      "get": {
+        "tags": [
+          "GuestConfigurationAssignmentHCRPReports"
+        ],
+        "operationId": "GuestConfigurationHCRPAssignmentReports_Get",
+        "description": "Get a report for the guest configuration assignment, by reportId.",
+        "x-ms-examples": {
+          "Get a guest configuration assignment report by Id for a virtual machine": {
+            "$ref": "./examples/getGuestConfigurationHCRPAssignmentReportById.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "guestConfigurationAssignmentName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The guest configuration assignment name."
+          },
+          {
+            "name": "reportId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The GUID for the guest configuration assignment report."
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/MachineNameParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. This response is due one of these two reasons: 1. Report was returned successfully 2. Guest configuration assignment was found, but machine is not registered yet, hence no report was returned.",
+            "schema": {
+              "$ref": "#/definitions/GuestConfigurationAssignmentReport"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../common/v1/definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ]
+      }
+    },
+    "/providers/Microsoft.GuestConfiguration/operations": {
+      "get": {
+        "tags": [
+          "Operations"
+        ],
+        "description": "Lists all of the available GuestConfiguration REST API operations.",
+        "x-ms-examples": {
+          "Lists all of the available GuestConfiguration REST API operations": {
+            "$ref": "./examples/listOperations.json"
+          }
+        },
+        "operationId": "Operations_List",
+        "parameters": [
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "../../common/v1/definitions.json#/definitions/OperationList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../common/v1/definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        },
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "GuestConfigurationAssignmentList": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/GuestConfigurationAssignment"
+          },
+          "description": "Result of the list guest configuration assignment operation."
+        }
+      },
+      "description": "The response of the list guest configuration assignment operation."
+    },
+    "GuestConfigurationAssignment": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": false,
+          "$ref": "#/definitions/GuestConfigurationAssignmentProperties",
+          "description": "Properties of the Guest configuration assignment."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../common/v1/definitions.json#/definitions/ProxyResource"
+        }
+      ],
+      "description": "Guest configuration assignment is an association between a machine and guest configuration."
+    },
+    "GuestConfigurationNavigation": {
+      "description": "Guest configuration is an artifact that encapsulates DSC configuration and its dependencies. The artifact is a zip file containing DSC configuration (as MOF) and dependent resources and other dependencies like modules.",
+      "properties": {
+        "kind": {
+          "type": "string",
+          "description": "Kind of the guest configuration. For example:DSC",
+          "x-ms-enum": {
+            "name": "kind",
+            "modelAsString": true
+          },
+          "enum": [
+            "DSC"
+          ]
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of the guest configuration."
+        },
+        "version": {
+          "type": "string",
+          "description": "Version of the guest configuration."
+        },
+        "contentUri": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Uri of the storage where guest configuration package is uploaded."
+        },
+        "contentHash": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Combined hash of the guest configuration package and configuration parameters."
+        },
+        "configurationParameter": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ConfigurationParameter"
+          },
+          "description": "The configuration parameters for the guest configuration."
+        },
+        "configurationSetting": {
+          "$ref": "#/definitions/ConfigurationSetting",
+          "description": "The configuration setting for the guest configuration."
+        }
+      }
+    },
+    "ConfigurationParameter": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "readOnly": false,
+          "description": "Name of the configuration parameter."
+        },
+        "value": {
+          "type": "string",
+          "readOnly": false,
+          "description": "Value of the configuration parameter."
+        }
+      },
+      "description": "Represents a configuration parameter."
+    },
+    "ConfigurationSetting": {
+      "properties": {
+        "configurationMode": {
+          "type": "string",
+          "readOnly": false,
+          "description": "Specifies how the LCM(Local Configuration Manager) actually applies the configuration to the target nodes. Possible values are ApplyOnly, ApplyAndMonitor, and ApplyAndAutoCorrect.",
+          "x-ms-enum": {
+            "name": "configurationMode",
+            "modelAsString": true
+          },
+          "enum": [
+            "ApplyOnly",
+            "ApplyAndMonitor",
+            "ApplyAndAutoCorrect"
+          ]
+        },
+        "allowModuleOverwrite": {
+          "type": "string",
+          "description": "If true - new configurations downloaded from the pull service are allowed to overwrite the old ones on the target node. Otherwise, false",
+          "x-ms-enum": {
+            "name": "allowModuleOverwrite",
+            "modelAsString": true
+          },
+          "enum": [
+            "True",
+            "False"
+          ]
+        },
+        "actionAfterReboot": {
+          "type": "string",
+          "readOnly": false,
+          "description": "Specifies what happens after a reboot during the application of a configuration. The possible values are ContinueConfiguration and StopConfiguration",
+          "x-ms-enum": {
+            "name": "actionAfterReboot",
+            "modelAsString": true
+          },
+          "enum": [
+            "ContinueConfiguration",
+            "StopConfiguration"
+          ]
+        },
+        "refreshFrequencyMins": {
+          "type": "number",
+          "readOnly": false,
+          "default": 30,
+          "description": "The time interval, in minutes, at which the LCM checks a pull service to get updated configurations. This value is ignored if the LCM is not configured in pull mode. The default value is 30."
+        },
+        "rebootIfNeeded": {
+          "type": "string",
+          "readOnly": false,
+          "default": "False",
+          "description": "Set this to true to automatically reboot the node after a configuration that requires reboot is applied. Otherwise, you will have to manually reboot the node for any configuration that requires it. The default value is false. To use this setting when a reboot condition is enacted by something other than DSC (such as Windows Installer), combine this setting with the xPendingReboot module.",
+          "x-ms-enum": {
+            "name": "rebootIfNeeded",
+            "modelAsString": true
+          },
+          "enum": [
+            "True",
+            "False"
+          ]
+        },
+        "configurationModeFrequencyMins": {
+          "type": "number",
+          "readOnly": false,
+          "default": 15,
+          "description": "How often, in minutes, the current configuration is checked and applied. This property is ignored if the ConfigurationMode property is set to ApplyOnly. The default value is 15."
+        }
+      },
+      "description": "Configuration setting of LCM (Local Configuration Manager)."
+    },
+    "GuestConfigurationAssignmentProperties": {
+      "properties": {
+        "guestConfiguration": {
+          "$ref": "#/definitions/GuestConfigurationNavigation",
+          "description": "The guest configuration to assign."
+        },
+        "complianceStatus": {
+          "type": "string",
+          "readOnly": true,
+          "description": "A value indicating compliance status of the machine for the assigned guest configuration.",
+          "x-ms-enum": {
+            "name": "complianceStatus",
+            "modelAsString": true
+          },
+          "enum": [
+            "Compliant",
+            "NonCompliant",
+            "Pending"
+          ]
+        },
+        "lastComplianceStatusChecked": {
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true,
+          "description": "Date and time when last compliance status was checked.",
+          "x-nullable": true
+        },
+        "latestReportId": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Id of the latest report for the guest configuration assignment. ",
+          "x-nullable": true
+        },
+        "context": {
+          "type": "string",
+          "description": "The source which initiated the guest configuration assignment. Ex: Azure Policy"
+        },
+        "assignmentHash": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Combined hash of the configuration package and parameters.",
+          "x-nullable": true
+        },
+        "provisioningState": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The provisioning state, which only appears in the response.",
+          "x-nullable": true,
+          "x-ms-enum": {
+            "name": "provisioningState",
+            "modelAsString": true
+          },
+          "enum": [
+            "Succeeded",
+            "Failed",
+            "Canceled",
+            "Created"
+          ]
+        }
+      },
+      "description": "Guest configuration assignment properties."
+    },
+    "GuestConfigurationAssignmentReportList": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/GuestConfigurationAssignmentReport"
+          },
+          "description": "List of reports for the guest configuration. Report contains information such as compliance status, reason and more."
+        }
+      },
+      "description": "List of guest configuration assignment reports."
+    },
+    "GuestConfigurationAssignmentReport": {
+      "properties": {
+        "id": {
+          "type": "string",
+          "readOnly": true,
+          "description": "ARM resource id of the report for the guest configuration assignment."
+        },
+        "name": {
+          "type": "string",
+          "readOnly": true,
+          "description": "GUID that identifies the guest configuration assignment report under a subscription, resource group."
+        },
+        "properties": {
+          "$ref": "#/definitions/GuestConfigurationAssignmentReportProperties",
+          "description": "Properties of the guest configuration report."
+        }
+      },
+      "description": "Report for the guest configuration assignment. Report contains information such as compliance status, reason, and more."
+    },
+    "GuestConfigurationAssignmentReportProperties": {
+      "properties": {
+        "complianceStatus": {
+          "type": "string",
+          "readOnly": true,
+          "description": "A value indicating compliance status of the machine for the assigned guest configuration.",
+          "x-ms-enum": {
+            "name": "complianceStatus",
+            "modelAsString": true
+          },
+          "enum": [
+            "Compliant",
+            "NonCompliant",
+            "Pending"
+          ]
+        },
+        "reportId": {
+          "type": "string",
+          "readOnly": true,
+          "description": "GUID that identifies the guest configuration assignment report under a subscription, resource group."
+        },
+        "assignment": {
+          "$ref": "#/definitions/AssignmentInfo",
+          "description": "Configuration details of the guest configuration assignment."
+        },
+        "vm": {
+          "$ref": "#/definitions/VMInfo",
+          "description": "Information about the VM."
+        },
+        "startTime": {
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true,
+          "description": "Start date and time of the guest configuration assignment compliance status check."
+        },
+        "endTime": {
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true,
+          "description": "End date and time of the guest configuration assignment compliance status check."
+        },
+        "details": {
+          "$ref": "#/definitions/AssignmentReportDetails",
+          "description": "Details of the assignment report.",
+          "x-nullable": true
+        }
+      },
+      "description": "Report for the guest configuration assignment. Report contains information such as compliance status, reason, and more."
+    },
+    "AssignmentInfo": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Name of the guest configuration assignment."
+        },
+        "configuration": {
+          "$ref": "#/definitions/ConfigurationInfo",
+          "description": "Information about the configuration."
+        }
+      },
+      "description": "Information about the guest configuration assignment."
+    },
+    "VMInfo": {
+      "properties": {
+        "id": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Azure resource Id of the VM."
+        },
+        "uuid": {
+          "type": "string",
+          "readOnly": true,
+          "description": "UUID(Universally Unique Identifier) of the VM."
+        }
+      },
+      "description": "Information about the VM."
+    },
+    "ConfigurationInfo": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Name of the configuration."
+        },
+        "version": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Version of the configuration."
+        }
+      },
+      "description": "Information about the configuration."
+    },
+    "AssignmentReportDetails": {
+      "properties": {
+        "complianceStatus": {
+          "type": "string",
+          "readOnly": true,
+          "description": "A value indicating compliance status of the machine for the assigned guest configuration.",
+          "x-ms-enum": {
+            "name": "complianceStatus",
+            "modelAsString": true
+          },
+          "enum": [
+            "Compliant",
+            "NonCompliant",
+            "Pending"
+          ]
+        },
+        "startTime": {
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true,
+          "description": "Start date and time of the guest configuration assignment compliance status check."
+        },
+        "endTime": {
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true,
+          "description": "End date and time of the guest configuration assignment compliance status check."
+        },
+        "jobId": {
+          "type": "string",
+          "readOnly": true,
+          "description": "GUID of the report."
+        },
+        "operationType": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Type of report, Consistency or Initial",
+          "x-ms-enum": {
+            "name": "type",
+            "modelAsString": true
+          },
+          "enum": [
+            "Consistency",
+            "Initial"
+          ]
+        },
+        "resources": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AssignmentReportResource"
+          },
+          "description": "The list of resources for which guest configuration assignment compliance is checked."
+        }
+      },
+      "description": "Details of the guest configuration assignment report."
+    },
+    "AssignmentReportResource": {
+      "properties": {
+        "complianceStatus": {
+          "type": "string",
+          "readOnly": true,
+          "description": "A value indicating compliance status of the machine for the assigned guest configuration.",
+          "x-ms-enum": {
+            "name": "complianceStatus",
+            "modelAsString": true
+          },
+          "enum": [
+            "Compliant",
+            "NonCompliant",
+            "Pending"
+          ]
+        },
+        "reasons": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AssignmentReportResourceComplianceReason"
+          },
+          "description": "Compliance reason and reason code for a resource."
+        },
+        "properties": {
+          "type": "object",
+          "readOnly": true,
+          "description": "Properties of a guest configuration assignment resource."
+        }
+      },
+      "description": "The guest configuration assignment resource."
+    },
+    "AssignmentReportResourceComplianceReason": {
+      "properties": {
+        "phrase": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Reason for the compliance of the guest configuration assignment resource."
+        },
+        "code": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Code for the compliance of the guest configuration assignment resource."
+        }
+      },
+      "description": "Reason and code for the compliance of the guest configuration assignment resource."
+    }
+  },
+  "parameters": {}
+}

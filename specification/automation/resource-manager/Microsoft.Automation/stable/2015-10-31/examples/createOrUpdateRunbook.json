@@ -1,97 +1,95 @@
 {
+  "parameters": {
+    "subscriptionId": "subid",
+    "resourceGroupName": "rg",
+    "automationAccountName": "ContoseAutomationAccount",
+    "runbookName": "Get-AzureVMTutorial",
+    "api-version": "2015-10-31",
     "parameters": {
-        "subscriptionId": "subid",
-        "resourceGroupName": "rg",
-        "automationAccountName": "ContoseAutomationAccount",
-        "runbookName": "Get-AzureVMTutorial",
-        "api-version": "2015-10-31",
-        "parameters": {
-            "properties": {
-                "logVerbose": false,
-                "logProgress": true,
-                "runbookType": "PowerShellWorkflow",
-                "publishContentLink": {
-                    "uri": "https://raw.githubusercontent.com/Azure/azure-quickstart-templates/master/101-automation-runbook-getvms/Runbooks/Get-AzureVMTutorial.ps1",
-                    "contentHash": {
-                        "algorithm": "SHA256",
-                        "value": "115775B8FF2BE672D8A946BD0B489918C724DDE15A440373CA54461D53010A80"
-                    }
-                },
-                "description": "Description of the Runbook",
-                "logActivityTrace": 1
-            },
-            "name": "Get-AzureVMTutorial",
-            "location": "East US 2",
-            "tags": {
-                "tag01": "value01",
-                "tag02": "value02"
-            }
-        }
-    },
-    "responses": {
-        "201": {
-            "headers": {},
-            "body": {
-                "id": "/subscriptions/subid/resourceGroups/rg/providers/Microsoft.Automation/automationAccounts/ContoseAutomationAccount/runbooks/Get-AzureVMTutorial",
-                "name": "Get-AzureVMTutorial",
-                "type": "Microsoft.Automation/AutomationAccounts/Runbooks",
-                "location": "East US 2",
-                "tags": {
-                    "tag01": "value01",
-                    "tag02": "value02"
-                },
-                "etag": "\"636263318837230000\"",
-                "properties": {
-                    "description": "Description of the Runbook",
-                    "logVerbose": false,
-                    "logProgress": true,
-                    "logActivityTrace": 1,
-                    "runbookType": "PowerShellWorkflow",
-                    "parameters": {},
-                    "state": "Published",
-                    "jobCount": 0,
-                    "provisioningState": "Succeeded",
-                    "serviceManagementTags": null,
-                    "outputTypes": [],
-                    "creationTime": "2017-03-28T21:04:43.66+00:00",
-                    "lastModifiedBy": "myEmaild@microsoft.com",
-                    "lastModifiedTime": "2017-03-28T21:04:43.723+00:00"
-                }
-            }
+      "properties": {
+        "logVerbose": false,
+        "logProgress": true,
+        "runbookType": "PowerShellWorkflow",
+        "publishContentLink": {
+          "uri": "https://raw.githubusercontent.com/Azure/azure-quickstart-templates/master/101-automation-runbook-getvms/Runbooks/Get-AzureVMTutorial.ps1",
+          "contentHash": {
+            "algorithm": "SHA256",
+            "value": "115775B8FF2BE672D8A946BD0B489918C724DDE15A440373CA54461D53010A80"
+          }
         },
-        "200": {
-            "headers": {},
-            "body": {
-                "id": "/subscriptions/subid/resourceGroups/rg/providers/Microsoft.Automation/automationAccounts/ContoseAutomationAccount/runbooks/Get-AzureVMTutorial",
-                "name": "Get-AzureVMTutorial",
-                "type": "Microsoft.Automation/AutomationAccounts/Runbooks",
-                "location": "East US 2",
-                "tags": {
-                    "tag01": "value01",
-                    "tag02": "value02"
-                },
-                "etag": "\"636263318866000000\"",
-                "properties": {
-                    "description": "Description of the Runbook",
-                    "logVerbose": true,
-                    "logProgress": true,
-                    "logActivityTrace": 1,
-                    "runbookType": "PowerShellWorkflow",
-                    "parameters": {},
-                    "state": "Published",
-                    "jobCount": 0,
-                    "provisioningState": "Succeeded",
-                    "serviceManagementTags": null,
-                    "outputTypes": [],
-                    "creationTime": "2017-03-28T21:04:43.66+00:00",
-                    "lastModifiedBy": "myEmaild@microsoft.com",
-                    "lastModifiedTime": "2017-03-28T21:04:46.6+00:00"
-                }
-            }
-        },
-        "400": {
-            "code": "BadRequest",
-            "message": "{\"Message\":\"Cannot specify the content link for a published runbook and draft at the same time.\"}"
-        }
+        "description": "Description of the Runbook",
+        "logActivityTrace": 1
+      },
+      "name": "Get-AzureVMTutorial",
+      "location": "East US 2",
+      "tags": {
+        "tag01": "value01",
+        "tag02": "value02"
+      }
     }
+  },
+  "responses": {
+    "201": {
+      "headers": {},
+      "body": {
+        "id": "/subscriptions/subid/resourceGroups/rg/providers/Microsoft.Automation/automationAccounts/ContoseAutomationAccount/runbooks/Get-AzureVMTutorial",
+        "name": "Get-AzureVMTutorial",
+        "type": "Microsoft.Automation/AutomationAccounts/Runbooks",
+        "location": "East US 2",
+        "tags": {
+          "tag01": "value01",
+          "tag02": "value02"
+        },
+        "etag": "\"636263318837230000\"",
+        "properties": {
+          "description": "Description of the Runbook",
+          "logVerbose": false,
+          "logProgress": true,
+          "logActivityTrace": 1,
+          "runbookType": "PowerShellWorkflow",
+          "parameters": {},
+          "state": "Published",
+          "jobCount": 0,
+          "provisioningState": "Succeeded",
+          "outputTypes": [],
+          "creationTime": "2017-03-28T21:04:43.66+00:00",
+          "lastModifiedBy": "myEmaild@microsoft.com",
+          "lastModifiedTime": "2017-03-28T21:04:43.723+00:00"
+        }
+      }
+    },
+    "200": {
+      "headers": {},
+      "body": {
+        "id": "/subscriptions/subid/resourceGroups/rg/providers/Microsoft.Automation/automationAccounts/ContoseAutomationAccount/runbooks/Get-AzureVMTutorial",
+        "name": "Get-AzureVMTutorial",
+        "type": "Microsoft.Automation/AutomationAccounts/Runbooks",
+        "location": "East US 2",
+        "tags": {
+          "tag01": "value01",
+          "tag02": "value02"
+        },
+        "etag": "\"636263318866000000\"",
+        "properties": {
+          "description": "Description of the Runbook",
+          "logVerbose": true,
+          "logProgress": true,
+          "logActivityTrace": 1,
+          "runbookType": "PowerShellWorkflow",
+          "parameters": {},
+          "state": "Published",
+          "jobCount": 0,
+          "provisioningState": "Succeeded",
+          "outputTypes": [],
+          "creationTime": "2017-03-28T21:04:43.66+00:00",
+          "lastModifiedBy": "myEmaild@microsoft.com",
+          "lastModifiedTime": "2017-03-28T21:04:46.6+00:00"
+        }
+      }
+    },
+    "400": {
+      "code": "BadRequest",
+      "message": "{\"Message\":\"Cannot specify the content link for a published runbook and draft at the same time.\"}"
+    }
+  }
 }

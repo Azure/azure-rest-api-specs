@@ -1,0 +1,64 @@
+{
+  "parameters": {
+    "api-version": "2018-06-01-privatepreview",
+    "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff",
+    "resourceGroupName": "testResourceGroupName",
+    "serverName": "testServerName",
+    "parameters": {
+      "properties": {
+        "numberOfTopQueries": 5,
+        "aggregationFunction": "avg",
+        "observedMetric": "duration",
+        "observationStartTime": "2019-05-01T20:00:00.000Z",
+        "observationEndTime": "2019-05-07T20:00:00.000Z",
+        "aggregationWindow": "PT15M"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testResourceGroupName/providers/Microsoft.DBforMariaDB/servers/testServerName/queryStatistic/66-636923268000000000-636923277000000000-avg-duration",
+            "name": "66-636923268000000000-636923277000000000-avg-duration",
+            "type": "Microsoft.DBforMariaDB/servers/queryStatistics",
+            "properties": {
+              "aggregationFunction": "avg",
+              "databaseNames": [
+                "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testResourceGroupName/providers/Microsoft.DBforMariaDB/servers/testServerName/databases/mariadb"
+              ],
+              "startTime": "2019-05-01T17:00:00Z",
+              "endTime": "2019-05-01T17:15:00Z",
+              "metricDisplayName": "Query duration",
+              "metricName": "duration",
+              "metricValue": 123.301446136,
+              "metricValueUnit": "milliseconds",
+              "queryExecutionCount": 1,
+              "queryId": "66"
+            }
+          },
+          {
+            "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testResourceGroupName/providers/Microsoft.DBforMariaDB/servers/testServerName/queryStatistic/66-636924483000000000-636924492000000000-avg-duration",
+            "name": "66-636924483000000000-636924492000000000-avg-duration",
+            "type": "Microsoft.DBforMariaDB/servers/queryStatistics",
+            "properties": {
+              "aggregationFunction": "avg",
+              "databaseNames": [
+                "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testResourceGroupName/providers/Microsoft.DBforMariaDB/servers/testServerName/databases/mariadb"
+              ],
+              "startTime": "2019-05-03T02:45:00Z",
+              "endTime": "2019-05-03T03:00:00Z",
+              "metricDisplayName": "Query duration",
+              "metricName": "duration",
+              "metricValue": 1712.301446136,
+              "metricValueUnit": "milliseconds",
+              "queryExecutionCount": 1,
+              "queryId": "66"
+            }
+          }
+        ]
+      }
+    }
+  }
+}

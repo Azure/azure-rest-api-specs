@@ -1,0 +1,4175 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "GraphRbacManagementClient",
+    "version": "1.6",
+    "description": "The Graph RBAC Management Client"
+  },
+  "host": "graph.windows.net",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json",
+    "text/json"
+  ],
+  "produces": [
+    "application/json",
+    "text/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/{tenantID}/me": {
+      "get": {
+        "tags": [
+          "SignedInUser"
+        ],
+        "operationId": "SignedInUser_Get",
+        "description": "Gets the details for the currently logged-in user.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/tenantIDInPath"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The operation was successful.",
+            "schema": {
+              "$ref": "#/definitions/User"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/GraphError"
+            }
+          }
+        }
+      }
+    },
+    "/{tenantID}/me/ownedObjects": {
+      "get": {
+        "tags": [
+          "SignedInUser"
+        ],
+        "operationId": "SignedInUser_ListOwnedObjects",
+        "description": "Get the list of directory objects that are owned by the user.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/tenantIDInPath"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The operation was successful.",
+            "schema": {
+              "$ref": "#/definitions/DirectoryObjectListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/GraphError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "odata.nextLink",
+          "operationName": "SignedInUser_ListOwnedObjectsNext"
+        }
+      }
+    },
+    "/{tenantID}/applications": {
+      "post": {
+        "tags": [
+          "Application"
+        ],
+        "operationId": "Applications_Create",
+        "description": "Create a new application.",
+        "parameters": [
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ApplicationCreateParameters"
+            },
+            "description": "The parameters for creating an application."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/tenantIDInPath"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "The application was created successfully.",
+            "schema": {
+              "$ref": "#/definitions/Application"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/GraphError"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Application"
+        ],
+        "operationId": "Applications_List",
+        "description": "Lists applications by filter parameters.",
+        "parameters": [
+          {
+            "name": "$filter",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "The filters to apply to the operation."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/tenantIDInPath"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The operation was successful.",
+            "schema": {
+              "$ref": "#/definitions/ApplicationListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/GraphError"
+            }
+          }
+        },
+        "x-ms-odata": "#/definitions/Application",
+        "x-ms-pageable": {
+          "nextLinkName": "odata.nextLink",
+          "operationName": "Applications_ListNext"
+        }
+      }
+    },
+    "/{tenantID}/deletedApplications/{objectId}/restore": {
+      "post": {
+        "tags": [
+          "deletedApplications"
+        ],
+        "operationId": "DeletedApplications_Restore",
+        "description": "Restores the deleted application in the directory.",
+        "parameters": [
+          {
+            "name": "objectId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Application object ID."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/tenantIDInPath"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The application was restored successfully.",
+            "schema": {
+              "$ref": "#/definitions/Application"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/GraphError"
+            }
+          }
+        }
+      }
+    },
+    "/{tenantID}/deletedApplications": {
+      "get": {
+        "tags": [
+          "deletedApplications"
+        ],
+        "operationId": "DeletedApplications_List",
+        "description": "Gets a list of deleted applications in the directory.",
+        "parameters": [
+          {
+            "name": "$filter",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "The filter to apply to the operation."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/tenantIDInPath"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The applications were retrieved successfully.",
+            "schema": {
+              "$ref": "#/definitions/ApplicationListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/GraphError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "odata.nextLink",
+          "operationName": "DeletedApplications_ListNext"
+        }
+      }
+    },
+    "/{tenantID}/deletedApplications/{applicationObjectId}": {
+      "delete": {
+        "tags": [
+          "Application"
+        ],
+        "operationId": "DeletedApplications_HardDelete",
+        "description": "Hard-delete an application.",
+        "parameters": [
+          {
+            "name": "applicationObjectId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Application object ID."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/tenantIDInPath"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/GraphError"
+            }
+          }
+        }
+      }
+    },
+    "/{tenantID}/applications/{applicationObjectId}": {
+      "delete": {
+        "tags": [
+          "Application"
+        ],
+        "operationId": "Applications_Delete",
+        "description": "Delete an application.",
+        "parameters": [
+          {
+            "name": "applicationObjectId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Application object ID."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/tenantIDInPath"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/GraphError"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Application"
+        ],
+        "operationId": "Applications_Get",
+        "description": "Get an application by object ID.",
+        "parameters": [
+          {
+            "name": "applicationObjectId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Application object ID."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/tenantIDInPath"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The operation was successful.",
+            "schema": {
+              "$ref": "#/definitions/Application"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/GraphError"
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Application"
+        ],
+        "operationId": "Applications_Patch",
+        "description": "Update an existing application.",
+        "parameters": [
+          {
+            "name": "applicationObjectId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Application object ID."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ApplicationUpdateParameters"
+            },
+            "description": "Parameters to update an existing application."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/tenantIDInPath"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/GraphError"
+            }
+          }
+        }
+      }
+    },
+    "/{tenantID}/applications/{applicationObjectId}/owners": {
+      "get": {
+        "tags": [
+          "ApplicationOwners"
+        ],
+        "operationId": "Applications_ListOwners",
+        "summary": "Directory objects that are owners of the application.",
+        "description": "The owners are a set of non-admin users who are allowed to modify this object.",
+        "parameters": [
+          {
+            "name": "applicationObjectId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The object ID of the application for which to get owners."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/tenantIDInPath"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The operation was successful.",
+            "schema": {
+              "$ref": "#/definitions/DirectoryObjectListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/GraphError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "odata.nextLink"
+        }
+      }
+    },
+    "/{tenantID}/applications/{applicationObjectId}/$links/owners": {
+      "post": {
+        "tags": [
+          "ApplicationOwners"
+        ],
+        "operationId": "Applications_AddOwner",
+        "description": "Add an owner to an application.",
+        "parameters": [
+          {
+            "name": "applicationObjectId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The object ID of the application to which to add the owner."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AddOwnerParameters"
+            },
+            "description": "The URL of the owner object, such as https://graph.windows.net/0b1f9851-1bf0-433f-aec3-cb9272f093dc/directoryObjects/f260bbc4-c254-447b-94cf-293b5ec434dd."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/tenantIDInPath"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content. Indicates success. No response body is returned."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/GraphError"
+            }
+          }
+        }
+      }
+    },
+    "/{tenantID}/applications/{applicationObjectId}/$links/owners/{ownerObjectId}": {
+      "delete": {
+        "tags": [
+          "ApplicationOwners"
+        ],
+        "operationId": "Applications_RemoveOwner",
+        "description": "Remove a member from owners.",
+        "parameters": [
+          {
+            "name": "applicationObjectId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The object ID of the application from which to remove the owner."
+          },
+          {
+            "name": "ownerObjectId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Owner object id"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/tenantIDInPath"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content. Indicates success. No response body is returned."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/GraphError"
+            }
+          }
+        }
+      }
+    },
+    "/{tenantID}/applications/{applicationObjectId}/keyCredentials": {
+      "get": {
+        "tags": [
+          "ApplicationKeyCredentials"
+        ],
+        "operationId": "Applications_ListKeyCredentials",
+        "description": "Get the keyCredentials associated with an application.",
+        "parameters": [
+          {
+            "name": "applicationObjectId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Application object ID."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/tenantIDInPath"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The operation was successful.",
+            "schema": {
+              "$ref": "#/definitions/KeyCredentialListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/GraphError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      },
+      "patch": {
+        "tags": [
+          "ApplicationKeyCredentials"
+        ],
+        "operationId": "Applications_UpdateKeyCredentials",
+        "description": "Update the keyCredentials associated with an application.",
+        "parameters": [
+          {
+            "name": "applicationObjectId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Application object ID."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/KeyCredentialsUpdateParameters"
+            },
+            "description": "Parameters to update the keyCredentials of an existing application."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/tenantIDInPath"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/GraphError"
+            }
+          }
+        }
+      }
+    },
+    "/{tenantID}/applications/{applicationObjectId}/passwordCredentials": {
+      "get": {
+        "tags": [
+          "ApplicationPasswordCredentials"
+        ],
+        "operationId": "Applications_ListPasswordCredentials",
+        "description": "Get the passwordCredentials associated with an application.",
+        "parameters": [
+          {
+            "name": "applicationObjectId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Application object ID."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/tenantIDInPath"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The operation was successful.",
+            "schema": {
+              "$ref": "#/definitions/PasswordCredentialListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/GraphError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      },
+      "patch": {
+        "tags": [
+          "ApplicationPasswordCredentials"
+        ],
+        "operationId": "Applications_UpdatePasswordCredentials",
+        "description": "Update passwordCredentials associated with an application.",
+        "parameters": [
+          {
+            "name": "applicationObjectId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Application object ID."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PasswordCredentialsUpdateParameters"
+            },
+            "description": "Parameters to update passwordCredentials of an existing application."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/tenantIDInPath"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/GraphError"
+            }
+          }
+        }
+      }
+    },
+    "/{tenantID}/isMemberOf": {
+      "post": {
+        "tags": [
+          "Group"
+        ],
+        "operationId": "Groups_IsMemberOf",
+        "description": "Checks whether the specified user, group, contact, or service principal is a direct or transitive member of the specified group.",
+        "parameters": [
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CheckGroupMembershipParameters"
+            },
+            "description": "The check group membership parameters."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/tenantIDInPath"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. Indicates success. Returns true if the user, contact, group, or service principal is a direct or a transitive member of the specified group; otherwise, false.",
+            "schema": {
+              "$ref": "#/definitions/CheckGroupMembershipResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/GraphError"
+            }
+          }
+        }
+      }
+    },
+    "/{tenantID}/groups/{groupObjectId}/$links/members/{memberObjectId}": {
+      "delete": {
+        "tags": [
+          "Group"
+        ],
+        "operationId": "Groups_RemoveMember",
+        "description": "Remove a member from a group.",
+        "parameters": [
+          {
+            "name": "groupObjectId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The object ID of the group from which to remove the member."
+          },
+          {
+            "name": "memberObjectId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Member object id"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/tenantIDInPath"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content. Indicates success. No response body is returned."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/GraphError"
+            }
+          }
+        }
+      }
+    },
+    "/{tenantID}/groups/{groupObjectId}/$links/members": {
+      "post": {
+        "tags": [
+          "Group"
+        ],
+        "operationId": "Groups_AddMember",
+        "description": "Add a member to a group.",
+        "parameters": [
+          {
+            "name": "groupObjectId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The object ID of the group to which to add the member."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/GroupAddMemberParameters"
+            },
+            "description": "The URL of the member object, such as https://graph.windows.net/0b1f9851-1bf0-433f-aec3-cb9272f093dc/directoryObjects/f260bbc4-c254-447b-94cf-293b5ec434dd."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/tenantIDInPath"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content. Indicates success. No response body is returned."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/GraphError"
+            }
+          }
+        }
+      }
+    },
+    "/{tenantID}/groups": {
+      "post": {
+        "tags": [
+          "Group"
+        ],
+        "operationId": "Groups_Create",
+        "description": "Create a group in the directory.",
+        "parameters": [
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/GroupCreateParameters"
+            },
+            "description": "The parameters for the group to create."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/tenantIDInPath"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/ADGroup"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/GraphError"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Group"
+        ],
+        "operationId": "Groups_List",
+        "description": "Gets list of groups for the current tenant.",
+        "parameters": [
+          {
+            "name": "$filter",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "The filter to apply to the operation."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/tenantIDInPath"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The operation was successful.",
+            "schema": {
+              "$ref": "#/definitions/GroupListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/GraphError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "odata.nextLink",
+          "operationName": "Groups_ListNext"
+        },
+        "x-ms-odata": "#/definitions/ADGroup"
+      }
+    },
+    "/{tenantID}/groups/{objectId}/members": {
+      "get": {
+        "tags": [
+          "Group"
+        ],
+        "operationId": "Groups_GetGroupMembers",
+        "description": "Gets the members of a group.",
+        "parameters": [
+          {
+            "name": "objectId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The object ID of the group whose members should be retrieved."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/tenantIDInPath"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The operation was successful.",
+            "schema": {
+              "$ref": "#/definitions/DirectoryObjectListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/GraphError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "odata.nextLink",
+          "operationName": "Groups_GetGroupMembersNext"
+        }
+      }
+    },
+    "/{tenantID}/groups/{objectId}": {
+      "get": {
+        "tags": [
+          "Group"
+        ],
+        "operationId": "Groups_Get",
+        "description": "Gets group information from the directory.",
+        "parameters": [
+          {
+            "name": "objectId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The object ID of the user for which to get group information."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/tenantIDInPath"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The operation was successful.",
+            "schema": {
+              "$ref": "#/definitions/ADGroup"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/GraphError"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Group"
+        ],
+        "operationId": "Groups_Delete",
+        "description": "Delete a group from the directory.",
+        "parameters": [
+          {
+            "name": "objectId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The object ID of the group to delete."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/tenantIDInPath"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/GraphError"
+            }
+          }
+        }
+      }
+    },
+    "/{tenantID}/groups/{objectId}/getMemberGroups": {
+      "post": {
+        "tags": [
+          "Group"
+        ],
+        "operationId": "Groups_GetMemberGroups",
+        "description": "Gets a collection of object IDs of groups of which the specified group is a member.",
+        "parameters": [
+          {
+            "name": "objectId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The object ID of the group for which to get group membership."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/GroupGetMemberGroupsParameters"
+            },
+            "description": "Group filtering parameters."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/tenantIDInPath"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The operation was successful.",
+            "schema": {
+              "$ref": "#/definitions/GroupGetMemberGroupsResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/GraphError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
+    "/{tenantID}/groups/{objectId}/owners": {
+      "get": {
+        "tags": [
+          "GroupOwners"
+        ],
+        "operationId": "Groups_ListOwners",
+        "summary": "Directory objects that are owners of the group.",
+        "description": "The owners are a set of non-admin users who are allowed to modify this object.",
+        "parameters": [
+          {
+            "name": "objectId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The object ID of the group for which to get owners."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/tenantIDInPath"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The operation was successful.",
+            "schema": {
+              "$ref": "#/definitions/DirectoryObjectListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/GraphError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "odata.nextLink"
+        }
+      }
+    },
+    "/{tenantID}/groups/{objectId}/$links/owners": {
+      "post": {
+        "tags": [
+          "GroupsOwners"
+        ],
+        "operationId": "Groups_AddOwner",
+        "description": "Add an owner to a group.",
+        "parameters": [
+          {
+            "name": "objectId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The object ID of the application to which to add the owner."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AddOwnerParameters"
+            },
+            "description": "The URL of the owner object, such as https://graph.windows.net/0b1f9851-1bf0-433f-aec3-cb9272f093dc/directoryObjects/f260bbc4-c254-447b-94cf-293b5ec434dd."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/tenantIDInPath"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content. Indicates success. No response body is returned."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/GraphError"
+            }
+          }
+        }
+      }
+    },
+    "/{tenantID}/groups/{objectId}/$links/owners/{ownerObjectId}": {
+      "delete": {
+        "tags": [
+          "GroupsOwners"
+        ],
+        "operationId": "Groups_RemoveOwner",
+        "description": "Remove a member from owners.",
+        "parameters": [
+          {
+            "name": "objectId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The object ID of the group from which to remove the owner."
+          },
+          {
+            "name": "ownerObjectId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Owner object id"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/tenantIDInPath"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content. Indicates success. No response body is returned."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/GraphError"
+            }
+          }
+        }
+      }
+    },
+    "/{tenantID}/servicePrincipals": {
+      "post": {
+        "tags": [
+          "ServicePrincipal"
+        ],
+        "operationId": "ServicePrincipals_Create",
+        "description": "Creates a service principal in the directory.",
+        "parameters": [
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ServicePrincipalCreateParameters"
+            },
+            "description": "Parameters to create a service principal."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/tenantIDInPath"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "The service principal was created successfully.",
+            "schema": {
+              "$ref": "#/definitions/ServicePrincipal"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/GraphError"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "ServicePrincipal"
+        ],
+        "operationId": "ServicePrincipals_List",
+        "description": "Gets a list of service principals from the current tenant.",
+        "parameters": [
+          {
+            "name": "$filter",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "The filter to apply to the operation."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/tenantIDInPath"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The operation was successful.",
+            "schema": {
+              "$ref": "#/definitions/ServicePrincipalListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/GraphError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "odata.nextLink",
+          "operationName": "ServicePrincipals_ListNext"
+        },
+        "x-ms-odata": "#/definitions/ServicePrincipal"
+      }
+    },
+    "/{tenantID}/servicePrincipalsByAppId/{applicationID}/objectId": {
+      "get": {
+        "tags": [
+          "ServicePrincipalsByAppId"
+        ],
+        "operationId": "Applications_GetServicePrincipalsIdByAppId",
+        "description": "Gets an object id for a given application id from the current tenant.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/tenantIDInPath"
+          },
+          {
+            "name": "applicationID",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The application ID."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The operation was successful.",
+            "schema": {
+              "$ref": "#/definitions/ServicePrincipalObjectResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/GraphError"
+            }
+          }
+        }
+      }
+    },
+    "/{tenantID}/servicePrincipals/{objectId}": {
+      "patch": {
+        "tags": [
+          "ServicePrincipal"
+        ],
+        "operationId": "ServicePrincipals_Update",
+        "description": "Updates a service principal in the directory.",
+        "parameters": [
+          {
+            "name": "objectId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The object ID of the service principal to delete."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ServicePrincipalUpdateParameters"
+            },
+            "description": "Parameters to update a service principal."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/tenantIDInPath"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/GraphError"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "ServicePrincipal"
+        ],
+        "operationId": "ServicePrincipals_Delete",
+        "description": "Deletes a service principal from the directory.",
+        "parameters": [
+          {
+            "name": "objectId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The object ID of the service principal to delete."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/tenantIDInPath"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/GraphError"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "ServicePrincipal"
+        ],
+        "operationId": "ServicePrincipals_Get",
+        "description": "Gets service principal information from the directory. Query by objectId or pass a filter to query by appId",
+        "parameters": [
+          {
+            "name": "objectId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The object ID of the service principal to get."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/tenantIDInPath"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The operation was successful.",
+            "schema": {
+              "$ref": "#/definitions/ServicePrincipal"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/GraphError"
+            }
+          }
+        }
+      }
+    },
+    "/{tenantID}/servicePrincipals/{objectId}/owners": {
+      "get": {
+        "tags": [
+          "ServicePrincipalOwners"
+        ],
+        "operationId": "ServicePrincipals_ListOwners",
+        "summary": "Directory objects that are owners of this service principal.",
+        "description": "The owners are a set of non-admin users who are allowed to modify this object.",
+        "parameters": [
+          {
+            "name": "objectId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The object ID of the service principal for which to get owners."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/tenantIDInPath"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The operation was successful.",
+            "schema": {
+              "$ref": "#/definitions/DirectoryObjectListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/GraphError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "odata.nextLink"
+        }
+      }
+    },
+    "/{tenantID}/servicePrincipals/{objectId}/keyCredentials": {
+      "get": {
+        "tags": [
+          "ServicePrincipalKeyCredentials"
+        ],
+        "operationId": "ServicePrincipals_ListKeyCredentials",
+        "description": "Get the keyCredentials associated with the specified service principal.",
+        "parameters": [
+          {
+            "name": "objectId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The object ID of the service principal for which to get keyCredentials."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/tenantIDInPath"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The operation was successful.",
+            "schema": {
+              "$ref": "#/definitions/KeyCredentialListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/GraphError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      },
+      "patch": {
+        "tags": [
+          "ServicePrincipalKeyCredentials"
+        ],
+        "operationId": "ServicePrincipals_UpdateKeyCredentials",
+        "description": "Update the keyCredentials associated with a service principal.",
+        "parameters": [
+          {
+            "name": "objectId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The object ID for which to get service principal information."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/KeyCredentialsUpdateParameters"
+            },
+            "description": "Parameters to update the keyCredentials of an existing service principal."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/tenantIDInPath"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/GraphError"
+            }
+          }
+        }
+      }
+    },
+    "/{tenantID}/servicePrincipals/{objectId}/passwordCredentials": {
+      "get": {
+        "tags": [
+          "ServicePrincipalPasswordCredentials"
+        ],
+        "operationId": "ServicePrincipals_ListPasswordCredentials",
+        "description": "Gets the passwordCredentials associated with a service principal.",
+        "parameters": [
+          {
+            "name": "objectId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The object ID of the service principal."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/tenantIDInPath"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The operation was successful.",
+            "schema": {
+              "$ref": "#/definitions/PasswordCredentialListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/GraphError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      },
+      "patch": {
+        "tags": [
+          "ServicePrincipalPasswordCredentials"
+        ],
+        "operationId": "ServicePrincipals_UpdatePasswordCredentials",
+        "description": "Updates the passwordCredentials associated with a service principal.",
+        "parameters": [
+          {
+            "name": "objectId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The object ID of the service principal."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PasswordCredentialsUpdateParameters"
+            },
+            "description": "Parameters to update the passwordCredentials of an existing service principal."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/tenantIDInPath"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/GraphError"
+            }
+          }
+        }
+      }
+    },
+    "/{tenantID}/users": {
+      "post": {
+        "tags": [
+          "User"
+        ],
+        "operationId": "Users_Create",
+        "description": "Create a new user.",
+        "parameters": [
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/UserCreateParameters"
+            },
+            "description": "Parameters to create a user."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/tenantIDInPath"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created. Indicates success. The new user is returned in the response body.",
+            "schema": {
+              "$ref": "#/definitions/User"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/GraphError"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "User"
+        ],
+        "operationId": "Users_List",
+        "description": "Gets list of users for the current tenant.",
+        "parameters": [
+          {
+            "name": "$filter",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "The filter to apply to the operation."
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "The expand value for the operation result."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/tenantIDInPath"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The operation was successful.",
+            "schema": {
+              "$ref": "#/definitions/UserListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/GraphError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "odata.nextLink",
+          "operationName": "Users_ListNext"
+        },
+        "x-ms-odata": "#/definitions/User"
+      }
+    },
+    "/{tenantID}/users/{upnOrObjectId}": {
+      "get": {
+        "tags": [
+          "User"
+        ],
+        "operationId": "Users_Get",
+        "description": "Gets user information from the directory.",
+        "parameters": [
+          {
+            "name": "upnOrObjectId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The object ID or principal name of the user for which to get information."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/tenantIDInPath"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The operation was successful.",
+            "schema": {
+              "$ref": "#/definitions/User"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/GraphError"
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "User"
+        ],
+        "operationId": "Users_Update",
+        "description": "Updates a user.",
+        "parameters": [
+          {
+            "name": "upnOrObjectId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The object ID or principal name of the user to update."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/UserUpdateParameters"
+            },
+            "description": "Parameters to update an existing user."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/tenantIDInPath"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/GraphError"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "User"
+        ],
+        "operationId": "Users_Delete",
+        "description": "Delete a user.",
+        "parameters": [
+          {
+            "name": "upnOrObjectId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The object ID or principal name of the user to delete."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/tenantIDInPath"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/GraphError"
+            }
+          }
+        }
+      }
+    },
+    "/{tenantID}/users/{objectId}/getMemberGroups": {
+      "post": {
+        "tags": [
+          "User"
+        ],
+        "operationId": "Users_GetMemberGroups",
+        "description": "Gets a collection that contains the object IDs of the groups of which the user is a member.",
+        "parameters": [
+          {
+            "name": "objectId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The object ID of the user for which to get group membership."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/UserGetMemberGroupsParameters"
+            },
+            "description": "User filtering parameters."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/tenantIDInPath"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The operation was successful.",
+            "schema": {
+              "$ref": "#/definitions/UserGetMemberGroupsResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/GraphError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
+    "/{tenantID}/getObjectsByObjectIds": {
+      "post": {
+        "tags": [
+          "Objects"
+        ],
+        "operationId": "Objects_GetObjectsByObjectIds",
+        "description": "Gets the directory objects specified in a list of object IDs. You can also specify which resource collections (users, groups, etc.) should be searched by specifying the optional types parameter.",
+        "parameters": [
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/GetObjectsParameters"
+            },
+            "description": "Objects filtering parameters."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/tenantIDInPath"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The operation was successful.",
+            "schema": {
+              "$ref": "#/definitions/DirectoryObjectListResult"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "odata.nextLink",
+          "operationName": "Objects_GetObjectsByObjectIdsNext"
+        }
+      }
+    },
+    "/{tenantID}/domains": {
+      "get": {
+        "tags": [
+          "Domain"
+        ],
+        "operationId": "Domains_List",
+        "description": "Gets a list of domains for the current tenant.",
+        "parameters": [
+          {
+            "name": "$filter",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "The filter to apply to the operation."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/tenantIDInPath"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The operation was successful.",
+            "schema": {
+              "$ref": "#/definitions/DomainListResult"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        },
+        "x-ms-odata": "#/definitions/User"
+      }
+    },
+    "/{tenantID}/domains/{domainName}": {
+      "get": {
+        "tags": [
+          "Domain"
+        ],
+        "operationId": "Domains_Get",
+        "description": "Gets a specific domain in the current tenant.",
+        "parameters": [
+          {
+            "name": "domainName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "name of the domain."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/tenantIDInPath"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The operation was successful.",
+            "schema": {
+              "$ref": "#/definitions/Domain"
+            }
+          }
+        }
+      }
+    },
+    "/{tenantID}/oauth2PermissionGrants": {
+      "get": {
+        "tags": [
+          "OAuth2PermissionGrant_List"
+        ],
+        "operationId": "OAuth2PermissionGrant_List",
+        "description": "Queries OAuth2 permissions grants for the relevant SP ObjectId of an app.",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "$filter",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "x-example": "clientId+eq+'61ed44c3-5a1d-4639-a215-07f25129c6c3",
+            "description": "This is the Service Principal ObjectId associated with the app"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/tenantIDInPath"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The operation was successful.",
+            "schema": {
+              "$ref": "#/definitions/OAuth2PermissionGrantListResult"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "odata.nextLink",
+          "operationName": "OAuth2PermissionGrant_ListNext"
+        }
+      },
+      "post": {
+        "tags": [
+          "OAuth2PermissionGrant_Create"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "operationId": "OAuth2PermissionGrant_Create",
+        "description": "Grants OAuth2 permissions for the relevant resource Ids of an app.",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": false,
+            "description": "The relevant app Service Principal Object Id and the Service Principal Object Id you want to grant.",
+            "schema": {
+              "$ref": "#/definitions/OAuth2PermissionGrant"
+            },
+            "x-examples": {
+              "application/json": "{\n\t\"odata.type\": \"Microsoft.DirectoryServices.OAuth2PermissionGrant\",\n\t\"clientId\": \"39afbaa2-4a5c-4f5b-9ee3-2c83f09bbc87\", \n\t\"consentType\": \"AllPrincipals\",\n\t\"principalId\": null,\n\t\"resourceId\": \"d3247842-c517-4520-80a7-332690ae2fe4\",\n\t\"scope\": \"user_impersonation\",\n    \"startTime\": \"0001-01-01T00:00:00\",\n    \"expiryTime\": \"9000-01-01T00:00:00\"\n}",
+              "description": "These are the values required to grant permission to a resourceId for an app, only one operation is allowed per request"
+            }
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/tenantIDInPath"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "OK. The operation was successful.",
+            "schema": {
+              "$ref": "#/definitions/OAuth2PermissionGrant"
+            }
+          }
+        }
+      }
+    },
+    "/{tenantID}/oauth2PermissionGrants/{objectId}": {
+      "delete": {
+        "tags": [
+          "OAuth2PermissionGrant_delete"
+        ],
+        "operationId": "OAuth2PermissionGrant_Delete",
+        "description": "Delete a OAuth2 permission grant for the relevant resource Ids of an app.",
+        "parameters": [
+          {
+            "name": "objectId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The object ID of a permission grant."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/tenantIDInPath"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/GraphError"
+            }
+          }
+        }
+      }
+    }
+  },
+  "x-ms-paths": {
+    "/{tenantID}/{nextLink}?OAuth2PermissionGrant_ListNext": {
+      "get": {
+        "tags": [
+          "OAuth2PermissionGrant_ListNext"
+        ],
+        "operationId": "OAuth2PermissionGrant_ListNext",
+        "description": "Gets the next page of OAuth2 permission grants",
+        "parameters": [
+          {
+            "name": "nextLink",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Next link for the list operation.",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/tenantIDInPath"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The operation was successful.",
+            "schema": {
+              "$ref": "#/definitions/OAuth2PermissionGrantListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/GraphError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "odata.nextLink",
+          "operationName": "OAuth2PermissionGrant_ListNext"
+        }
+      }
+    },
+    "/{tenantID}/{nextLink}?SignedInUser_ListOwnedObjectsNext": {
+      "get": {
+        "tags": [
+          "SignedInUser"
+        ],
+        "operationId": "SignedInUser_ListOwnedObjectsNext",
+        "description": "Get the list of directory objects that are owned by the user.",
+        "parameters": [
+          {
+            "name": "nextLink",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Next link for the list operation.",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/tenantIDInPath"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The operation was successful.",
+            "schema": {
+              "$ref": "#/definitions/DirectoryObjectListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/GraphError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "odata.nextLink",
+          "operationName": "SignedInUser_ListOwnedObjectsNext"
+        }
+      }
+    },
+    "/{tenantID}/{nextLink}?Groups_ListNext": {
+      "get": {
+        "tags": [
+          "Group"
+        ],
+        "operationId": "Groups_ListNext",
+        "description": "Gets a list of groups for the current tenant.",
+        "parameters": [
+          {
+            "name": "nextLink",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Next link for the list operation.",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/tenantIDInPath"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The operation was successful.",
+            "schema": {
+              "$ref": "#/definitions/GroupListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/GraphError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "odata.nextLink",
+          "operationName": "Groups_ListNext"
+        }
+      }
+    },
+    "/{tenantID}/{nextLink}?Groups_GetGroupMembersNext": {
+      "get": {
+        "tags": [
+          "Group"
+        ],
+        "operationId": "Groups_GetGroupMembersNext",
+        "description": "Gets the members of a group.",
+        "parameters": [
+          {
+            "name": "nextLink",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Next link for the list operation.",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/tenantIDInPath"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The operation was successful.",
+            "schema": {
+              "$ref": "#/definitions/DirectoryObjectListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/GraphError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "odata.nextLink",
+          "operationName": "Groups_GetGroupMembersNext"
+        }
+      }
+    },
+    "/{tenantID}/{nextLink}?Applications_ListNext": {
+      "get": {
+        "tags": [
+          "Applications"
+        ],
+        "operationId": "Applications_ListNext",
+        "description": "Gets a list of applications from the current tenant.",
+        "parameters": [
+          {
+            "name": "nextLink",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Next link for the list operation.",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/tenantIDInPath"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The operation was successful.",
+            "schema": {
+              "$ref": "#/definitions/ApplicationListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/GraphError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "odata.nextLink",
+          "operationName": "Applications_ListNext"
+        }
+      }
+    },
+    "/{tenantID}/{nextLink}?DeletedApplications_ListNext": {
+      "get": {
+        "tags": [
+          "deletedApplications"
+        ],
+        "operationId": "DeletedApplications_ListNext",
+        "description": "Gets a list of deleted applications in the directory.",
+        "parameters": [
+          {
+            "name": "nextLink",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Next link for the list operation.",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/tenantIDInPath"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The operation was successful.",
+            "schema": {
+              "$ref": "#/definitions/ApplicationListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/GraphError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "odata.nextLink",
+          "operationName": "DeletedApplications_ListNext"
+        }
+      }
+    },
+    "/{tenantID}/{nextLink}?ServicePrincipals_ListNext": {
+      "get": {
+        "tags": [
+          "ServicePrincipal"
+        ],
+        "operationId": "ServicePrincipals_ListNext",
+        "description": "Gets a list of service principals from the current tenant.",
+        "parameters": [
+          {
+            "name": "nextLink",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Next link for the list operation.",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/tenantIDInPath"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The operation was successful.",
+            "schema": {
+              "$ref": "#/definitions/ServicePrincipalListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/GraphError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "odata.nextLink",
+          "operationName": "ServicePrincipals_ListNext"
+        }
+      }
+    },
+    "/{tenantID}/{nextLink}?Users_ListNext": {
+      "get": {
+        "tags": [
+          "User"
+        ],
+        "operationId": "Users_ListNext",
+        "description": "Gets a list of users for the current tenant.",
+        "parameters": [
+          {
+            "name": "nextLink",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Next link for the list operation.",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/tenantIDInPath"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The operation was successful.",
+            "schema": {
+              "$ref": "#/definitions/UserListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/GraphError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "odata.nextLink",
+          "operationName": "Users_ListNext"
+        }
+      }
+    },
+    "/{tenantID}/{nextLink}?Objects_GetObjectsByObjectIdsNext": {
+      "post": {
+        "tags": [
+          "Objects"
+        ],
+        "operationId": "Objects_GetObjectsByObjectIdsNext",
+        "description": "Gets AD group membership for the specified AD object IDs.",
+        "parameters": [
+          {
+            "name": "nextLink",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Next link for the list operation.",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/tenantIDInPath"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The operation was successful.",
+            "schema": {
+              "$ref": "#/definitions/DirectoryObjectListResult"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "odata.nextLink",
+          "operationName": "Objects_GetObjectsByObjectIdsNext"
+        }
+      }
+    }
+  },
+  "definitions": {
+    "InformationalUrl": {
+      "type": "object",
+      "description": "Represents a group of URIs that provide terms of service, marketing, support and privacy policy information about an application. The default value for each string is null.",
+      "properties": {
+        "termsOfService": {
+          "description": "The terms of service URI",
+          "type": "string"
+        },
+        "marketing": {
+          "description": "The marketing URI",
+          "type": "string"
+        },
+        "privacy": {
+          "description": "The privacy policy URI",
+          "type": "string"
+        },
+        "support": {
+          "description": "The support URI",
+          "type": "string"
+        }
+      }
+    },
+    "OAuth2Permission": {
+      "type": "object",
+      "description": "Represents an OAuth 2.0 delegated permission scope. The specified OAuth 2.0 delegated permission scopes may be requested by client applications (through the requiredResourceAccess collection on the Application object) when calling a resource application. The oauth2Permissions property of the ServicePrincipal entity and of the Application entity is a collection of OAuth2Permission.",
+      "properties": {
+        "adminConsentDescription": {
+          "description": "Permission help text that appears in the admin consent and app assignment experiences.",
+          "type": "string"
+        },
+        "adminConsentDisplayName": {
+          "description": "Display name for the permission that appears in the admin consent and app assignment experiences.",
+          "type": "string"
+        },
+        "id": {
+          "description": "Unique scope permission identifier inside the oauth2Permissions collection.",
+          "type": "string"
+        },
+        "isEnabled": {
+          "description": "When creating or updating a permission, this property must be set to true (which is the default). To delete a permission, this property must first be set to false. At that point, in a subsequent call, the permission may be removed. ",
+          "type": "boolean"
+        },
+        "type": {
+          "description": "Specifies whether this scope permission can be consented to by an end user, or whether it is a tenant-wide permission that must be consented to by a Company Administrator. Possible values are \"User\" or \"Admin\".",
+          "type": "string"
+        },
+        "userConsentDescription": {
+          "description": "Permission help text that appears in the end user consent experience.",
+          "type": "string"
+        },
+        "userConsentDisplayName": {
+          "description": "Display name for the permission that appears in the end user consent experience.",
+          "type": "string"
+        },
+        "value": {
+          "description": "The value of the scope claim that the resource application should expect in the OAuth 2.0 access token.",
+          "type": "string"
+        }
+      }
+    },
+    "OptionalClaims": {
+      "type": "object",
+      "description": "Specifying the claims to be included in the token.",
+      "properties": {
+        "idToken": {
+          "description": "Optional claims requested to be included in the id token.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/OptionalClaim"
+          }
+        },
+        "accessToken": {
+          "description": "Optional claims requested to be included in the access token.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/OptionalClaim"
+          }
+        },
+        "samlToken": {
+          "description": "Optional claims requested to be included in the saml token.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/OptionalClaim"
+          }
+        }
+      }
+    },
+    "OptionalClaim": {
+      "type": "object",
+      "description": "Specifying the claims to be included in a token.",
+      "properties": {
+        "name": {
+          "description": "Claim name.",
+          "type": "string"
+        },
+        "source": {
+          "description": "Claim source.",
+          "type": "string"
+        },
+        "essential": {
+          "description": "Is this a required claim.",
+          "type": "boolean"
+        },
+        "additionalProperties": {
+          "type": "object"
+        }
+      }
+    },
+    "PreAuthorizedApplication": {
+      "type": "object",
+      "description": "Contains information about pre authorized client application.",
+      "properties": {
+        "appId": {
+          "description": "Represents the application id.",
+          "type": "string"
+        },
+        "permissions": {
+          "description": "Collection of required app permissions/entitlements from the resource application.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PreAuthorizedApplicationPermission"
+          }
+        },
+        "extensions": {
+          "description": "Collection of extensions from the resource application.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PreAuthorizedApplicationExtension"
+          }
+        }
+      }
+    },
+    "PreAuthorizedApplicationPermission": {
+      "type": "object",
+      "description": "Contains information about the pre-authorized permissions.",
+      "properties": {
+        "directAccessGrant": {
+          "description": "Indicates whether the permission set is DirectAccess or impersonation.",
+          "type": "boolean"
+        },
+        "accessGrants": {
+          "description": "The list of permissions.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "PreAuthorizedApplicationExtension": {
+      "type": "object",
+      "description": "Representation of an app PreAuthorizedApplicationExtension required by a pre authorized client app.",
+      "properties": {
+        "conditions": {
+          "description": "The extension's conditions.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "GraphError": {
+      "type": "object",
+      "properties": {
+        "odata.error": {
+          "type": "object",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/OdataError",
+          "description": "A Graph API error."
+        }
+      },
+      "description": "Active Directory error information."
+    },
+    "OdataError": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "Error code."
+        },
+        "message": {
+          "type": "object",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ErrorMessage",
+          "description": "Error Message."
+        }
+      },
+      "description": "Active Directory OData error information."
+    },
+    "ErrorMessage": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "string",
+          "x-ms-client-name": "message",
+          "description": "Error message value."
+        }
+      },
+      "description": "Active Directory error message."
+    },
+    "DirectoryObject": {
+      "type": "object",
+      "discriminator": "objectType",
+      "properties": {
+        "objectId": {
+          "type": "string",
+          "description": "The object ID.",
+          "readOnly": true
+        },
+        "objectType": {
+          "type": "string",
+          "description": "The object type."
+        },
+        "deletionTimestamp": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time at which the directory object was deleted.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "objectType"
+      ],
+      "additionalProperties": {
+        "type": "object"
+      },
+      "description": "Represents an Azure Active Directory object."
+    },
+    "KeyCredential": {
+      "type": "object",
+      "properties": {
+        "startDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Start date."
+        },
+        "endDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "End date."
+        },
+        "value": {
+          "type": "string",
+          "description": "Key value."
+        },
+        "keyId": {
+          "type": "string",
+          "description": "Key ID."
+        },
+        "usage": {
+          "type": "string",
+          "description": "Usage. Acceptable values are 'Verify' and 'Sign'."
+        },
+        "type": {
+          "type": "string",
+          "description": "Type. Acceptable values are 'AsymmetricX509Cert' and 'Symmetric'."
+        },
+        "customKeyIdentifier": {
+          "type": "string",
+          "description": "Custom Key Identifier"
+        }
+      },
+      "additionalProperties": {
+        "type": "object"
+      },
+      "description": "Active Directory Key Credential information."
+    },
+    "PasswordCredential": {
+      "type": "object",
+      "properties": {
+        "startDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Start date."
+        },
+        "endDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "End date."
+        },
+        "keyId": {
+          "type": "string",
+          "description": "Key ID."
+        },
+        "value": {
+          "type": "string",
+          "description": "Key value."
+        },
+        "customKeyIdentifier": {
+          "type": "string",
+          "format": "byte",
+          "description": "Custom Key Identifier"
+        }
+      },
+      "additionalProperties": {
+        "type": "object"
+      },
+      "description": "Active Directory Password Credential information."
+    },
+    "RequiredResourceAccess": {
+      "type": "object",
+      "properties": {
+        "resourceAccess": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ResourceAccess"
+          },
+          "description": "The list of OAuth2.0 permission scopes and app roles that the application requires from the specified resource."
+        },
+        "resourceAppId": {
+          "type": "string",
+          "description": "The unique identifier for the resource that the application requires access to. This should be equal to the appId declared on the target resource application."
+        }
+      },
+      "additionalProperties": {
+        "type": "object"
+      },
+      "required": [
+        "resourceAccess"
+      ],
+      "description": "Specifies the set of OAuth 2.0 permission scopes and app roles under the specified resource that an application requires access to. The specified OAuth 2.0 permission scopes may be requested by client applications (through the requiredResourceAccess collection) when calling a resource application. The requiredResourceAccess property of the Application entity is a collection of RequiredResourceAccess."
+    },
+    "ResourceAccess": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The unique identifier for one of the OAuth2Permission or AppRole instances that the resource application exposes."
+        },
+        "type": {
+          "type": "string",
+          "description": "Specifies whether the id property references an OAuth2Permission or an AppRole. Possible values are \"scope\" or \"role\"."
+        }
+      },
+      "additionalProperties": {
+        "type": "object"
+      },
+      "required": [
+        "id"
+      ],
+      "description": "Specifies an OAuth 2.0 permission scope or an app role that an application requires. The resourceAccess property of the RequiredResourceAccess type is a collection of ResourceAccess."
+    },
+    "GroupMembershipClaims": {
+      "type": "string",
+      "description": "Configures the groups claim issued in a user or OAuth 2.0 access token that the app expects.",
+      "enum": [
+        "None",
+        "SecurityGroup",
+        "All"
+      ],
+      "x-ms-enum": {
+        "name": "GroupMembershipClaimTypes",
+        "modelAsString": true
+      }
+    },
+    "ApplicationBase": {
+      "type": "object",
+      "description": "Active Directive Application common properties shared among GET, POST and PATCH",
+      "properties": {
+        "allowGuestsSignIn": {
+          "description": "A property on the application to indicate if the application accepts other IDPs or not or partially accepts.",
+          "type": "boolean"
+        },
+        "allowPassthroughUsers": {
+          "description": "Indicates that the application supports pass through users who have no presence in the resource tenant.",
+          "type": "boolean"
+        },
+        "appLogoUrl": {
+          "description": "The url for the application logo image stored in a CDN.",
+          "type": "string"
+        },
+        "appRoles": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AppRole"
+          },
+          "description": "The collection of application roles that an application may declare. These roles can be assigned to users, groups or service principals."
+        },
+        "appPermissions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "The application permissions."
+        },
+        "availableToOtherTenants": {
+          "type": "boolean",
+          "description": "Whether the application is available to other tenants."
+        },
+        "errorUrl": {
+          "description": "A URL provided by the author of the application to report errors when using the application.",
+          "type": "string"
+        },
+        "groupMembershipClaims": {
+          "$ref": "#/definitions/GroupMembershipClaims",
+          "description": "Configures the groups claim issued in a user or OAuth 2.0 access token that the app expects."
+        },
+        "homepage": {
+          "type": "string",
+          "description": "The home page of the application."
+        },
+        "informationalUrls": {
+          "$ref": "#/definitions/InformationalUrl",
+          "description": "URLs with more information about the application."
+        },
+        "isDeviceOnlyAuthSupported": {
+          "description": "Specifies whether this application supports device authentication without a user. The default is false.",
+          "type": "boolean"
+        },
+        "keyCredentials": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/KeyCredential"
+          },
+          "description": "A collection of KeyCredential objects."
+        },
+        "knownClientApplications": {
+          "description": "Client applications that are tied to this resource application. Consent to any of the known client applications will result in implicit consent to the resource application through a combined consent dialog (showing the OAuth permission scopes required by the client and the resource).",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "logoutUrl": {
+          "type": "string",
+          "description": "the url of the logout page"
+        },
+        "oauth2AllowImplicitFlow": {
+          "type": "boolean",
+          "description": "Whether to allow implicit grant flow for OAuth2"
+        },
+        "oauth2AllowUrlPathMatching": {
+          "description": "Specifies whether during a token Request Azure AD will allow path matching of the redirect URI against the applications collection of replyURLs. The default is false.",
+          "type": "boolean"
+        },
+        "oauth2Permissions": {
+          "description": "The collection of OAuth 2.0 permission scopes that the web API (resource) application exposes to client applications. These permission scopes may be granted to client applications during consent.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/OAuth2Permission"
+          }
+        },
+        "oauth2RequirePostResponse": {
+          "description": "Specifies whether, as part of OAuth 2.0 token requests, Azure AD will allow POST requests, as opposed to GET requests. The default is false, which specifies that only GET requests will be allowed.",
+          "type": "boolean"
+        },
+        "orgRestrictions": {
+          "description": "A list of tenants allowed to access application.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "optionalClaims": {
+          "$ref": "#/definitions/OptionalClaims"
+        },
+        "passwordCredentials": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PasswordCredential"
+          },
+          "description": "A collection of PasswordCredential objects"
+        },
+        "preAuthorizedApplications": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PreAuthorizedApplication"
+          },
+          "description": "list of pre-authorized applications."
+        },
+        "publicClient": {
+          "description": "Specifies whether this application is a public client (such as an installed application running on a mobile device). Default is false.",
+          "type": "boolean"
+        },
+        "publisherDomain": {
+          "description": "Reliable domain which can be used to identify an application.",
+          "type": "string"
+        },
+        "replyUrls": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "A collection of reply URLs for the application."
+        },
+        "requiredResourceAccess": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RequiredResourceAccess"
+          },
+          "description": "Specifies resources that this application requires access to and the set of OAuth permission scopes and application roles that it needs under each of those resources. This pre-configuration of required resource access drives the consent experience."
+        },
+        "samlMetadataUrl": {
+          "description": "The URL to the SAML metadata for the application.",
+          "type": "string"
+        },
+        "signInAudience": {
+          "description": "Audience for signing in to the application (AzureADMyOrganization, AzureADAllOrganizations, AzureADAndMicrosoftAccounts).",
+          "type": "string"
+        },
+        "wwwHomepage": {
+          "description": "The primary Web page.",
+          "type": "string"
+        }
+      }
+    },
+    "ApplicationCreateParameters": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ApplicationBase"
+        }
+      ],
+      "required": [
+        "displayName"
+      ],
+      "properties": {
+        "displayName": {
+          "type": "string",
+          "description": "The display name of the application."
+        },
+        "identifierUris": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "A collection of URIs for the application."
+        }
+      },
+      "description": "Request parameters for creating a new application."
+    },
+    "ApplicationUpdateParameters": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ApplicationBase"
+        }
+      ],
+      "description": "Request parameters for updating a new application.",
+      "properties": {
+        "displayName": {
+          "type": "string",
+          "description": "The display name of the application."
+        },
+        "identifierUris": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "A collection of URIs for the application."
+        }
+      }
+    },
+    "Application": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DirectoryObject"
+        }
+      ],
+      "properties": {
+        "appId": {
+          "type": "string",
+          "description": "The application ID."
+        },
+        "allowGuestsSignIn": {
+          "description": "A property on the application to indicate if the application accepts other IDPs or not or partially accepts.",
+          "type": "boolean"
+        },
+        "allowPassthroughUsers": {
+          "description": "Indicates that the application supports pass through users who have no presence in the resource tenant.",
+          "type": "boolean"
+        },
+        "appLogoUrl": {
+          "description": "The url for the application logo image stored in a CDN.",
+          "type": "string"
+        },
+        "appRoles": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AppRole"
+          },
+          "description": "The collection of application roles that an application may declare. These roles can be assigned to users, groups or service principals."
+        },
+        "appPermissions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "The application permissions."
+        },
+        "availableToOtherTenants": {
+          "type": "boolean",
+          "description": "Whether the application is available to other tenants."
+        },
+        "displayName": {
+          "type": "string",
+          "description": "The display name of the application."
+        },
+        "errorUrl": {
+          "description": "A URL provided by the author of the application to report errors when using the application.",
+          "type": "string"
+        },
+        "groupMembershipClaims": {
+          "$ref": "#/definitions/GroupMembershipClaims",
+          "description": "Configures the groups claim issued in a user or OAuth 2.0 access token that the app expects."
+        },
+        "homepage": {
+          "type": "string",
+          "description": "The home page of the application."
+        },
+        "identifierUris": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "A collection of URIs for the application."
+        },
+        "informationalUrls": {
+          "$ref": "#/definitions/InformationalUrl",
+          "description": "URLs with more information about the application."
+        },
+        "isDeviceOnlyAuthSupported": {
+          "description": "Specifies whether this application supports device authentication without a user. The default is false.",
+          "type": "boolean"
+        },
+        "keyCredentials": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/KeyCredential"
+          },
+          "description": "A collection of KeyCredential objects."
+        },
+        "knownClientApplications": {
+          "description": "Client applications that are tied to this resource application. Consent to any of the known client applications will result in implicit consent to the resource application through a combined consent dialog (showing the OAuth permission scopes required by the client and the resource).",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "logoutUrl": {
+          "type": "string",
+          "description": "the url of the logout page"
+        },
+        "oauth2AllowImplicitFlow": {
+          "type": "boolean",
+          "description": "Whether to allow implicit grant flow for OAuth2"
+        },
+        "oauth2AllowUrlPathMatching": {
+          "description": "Specifies whether during a token Request Azure AD will allow path matching of the redirect URI against the applications collection of replyURLs. The default is false.",
+          "type": "boolean"
+        },
+        "oauth2Permissions": {
+          "description": "The collection of OAuth 2.0 permission scopes that the web API (resource) application exposes to client applications. These permission scopes may be granted to client applications during consent.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/OAuth2Permission"
+          }
+        },
+        "oauth2RequirePostResponse": {
+          "description": "Specifies whether, as part of OAuth 2.0 token requests, Azure AD will allow POST requests, as opposed to GET requests. The default is false, which specifies that only GET requests will be allowed.",
+          "type": "boolean"
+        },
+        "orgRestrictions": {
+          "description": "A list of tenants allowed to access application.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "optionalClaims": {
+          "$ref": "#/definitions/OptionalClaims"
+        },
+        "passwordCredentials": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PasswordCredential"
+          },
+          "description": "A collection of PasswordCredential objects"
+        },
+        "preAuthorizedApplications": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PreAuthorizedApplication"
+          },
+          "description": "list of pre-authorized applications."
+        },
+        "publicClient": {
+          "description": "Specifies whether this application is a public client (such as an installed application running on a mobile device). Default is false.",
+          "type": "boolean"
+        },
+        "publisherDomain": {
+          "description": "Reliable domain which can be used to identify an application.",
+          "type": "string"
+        },
+        "replyUrls": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "A collection of reply URLs for the application."
+        },
+        "requiredResourceAccess": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RequiredResourceAccess"
+          },
+          "description": "Specifies resources that this application requires access to and the set of OAuth permission scopes and application roles that it needs under each of those resources. This pre-configuration of required resource access drives the consent experience."
+        },
+        "samlMetadataUrl": {
+          "description": "The URL to the SAML metadata for the application.",
+          "type": "string"
+        },
+        "signInAudience": {
+          "description": "Audience for signing in to the application (AzureADMyOrganization, AzureADAllOrganizations, AzureADAndMicrosoftAccounts).",
+          "type": "string"
+        },
+        "wwwHomepage": {
+          "description": "The primary Web page.",
+          "type": "string"
+        }
+      },
+      "description": "Active Directory application information."
+    },
+    "ApplicationListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Application"
+          },
+          "description": "A collection of applications."
+        },
+        "odata.nextLink": {
+          "type": "string",
+          "description": "The URL to get the next set of results."
+        }
+      },
+      "description": "Application list operation result."
+    },
+    "ServicePrincipalObjectResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "string",
+          "description": "The Object ID of the service principal with the specified application ID."
+        },
+        "odata.metadata": {
+          "type": "string",
+          "description": "The URL representing edm equivalent."
+        }
+      },
+      "description": "Service Principal Object Result."
+    },
+    "AppRole": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique role identifier inside the appRoles collection."
+        },
+        "allowedMemberTypes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Specifies whether this app role definition can be assigned to users and groups by setting to 'User', or to other applications (that are accessing this application in daemon service scenarios) by setting to 'Application', or to both. "
+        },
+        "description": {
+          "type": "string",
+          "description": "Permission help text that appears in the admin app assignment and consent experiences."
+        },
+        "displayName": {
+          "type": "string",
+          "description": "Display name for the permission that appears in the admin consent and app assignment experiences."
+        },
+        "isEnabled": {
+          "type": "boolean",
+          "description": "When creating or updating a role definition, this must be set to true (which is the default). To delete a role, this must first be set to false. At that point, in a subsequent call, this role may be removed."
+        },
+        "value": {
+          "type": "string",
+          "description": "Specifies the value of the roles claim that the application should expect in the authentication and access tokens."
+        }
+      }
+    },
+    "AddOwnerParameters": {
+      "type": "object",
+      "properties": {
+        "url": {
+          "type": "string",
+          "description": "A owner object URL, such as \"https://graph.windows.net/0b1f9851-1bf0-433f-aec3-cb9272f093dc/directoryObjects/f260bbc4-c254-447b-94cf-293b5ec434dd\", where \"0b1f9851-1bf0-433f-aec3-cb9272f093dc\" is the tenantId and \"f260bbc4-c254-447b-94cf-293b5ec434dd\" is the objectId of the owner (user, application, servicePrincipal, group) to be added."
+        }
+      },
+      "required": [
+        "url"
+      ],
+      "additionalProperties": {
+        "type": "object"
+      },
+      "description": "Request parameters for adding a owner to an application."
+    },
+    "KeyCredentialListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/KeyCredential"
+          },
+          "description": "A collection of KeyCredentials."
+        }
+      },
+      "description": "KeyCredential list operation result."
+    },
+    "DirectoryObjectListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DirectoryObject"
+          },
+          "description": "A collection of DirectoryObject."
+        },
+        "odata.nextLink": {
+          "type": "string",
+          "description": "The URL to get the next set of results."
+        }
+      },
+      "description": "DirectoryObject list operation result."
+    },
+    "KeyCredentialsUpdateParameters": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/KeyCredential"
+          },
+          "description": "A collection of KeyCredentials."
+        }
+      },
+      "required": [
+        "value"
+      ],
+      "description": "Request parameters for a KeyCredentials update operation"
+    },
+    "PasswordCredentialListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PasswordCredential"
+          },
+          "description": "A collection of PasswordCredentials."
+        }
+      },
+      "description": "PasswordCredential list operation result."
+    },
+    "PasswordCredentialsUpdateParameters": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PasswordCredential"
+          },
+          "description": "A collection of PasswordCredentials."
+        }
+      },
+      "required": [
+        "value"
+      ],
+      "description": "Request parameters for a PasswordCredentials update operation."
+    },
+    "GroupAddMemberParameters": {
+      "type": "object",
+      "properties": {
+        "url": {
+          "type": "string",
+          "description": "A member object URL, such as \"https://graph.windows.net/0b1f9851-1bf0-433f-aec3-cb9272f093dc/directoryObjects/f260bbc4-c254-447b-94cf-293b5ec434dd\", where \"0b1f9851-1bf0-433f-aec3-cb9272f093dc\" is the tenantId and \"f260bbc4-c254-447b-94cf-293b5ec434dd\" is the objectId of the member (user, application, servicePrincipal, group) to be added."
+        }
+      },
+      "required": [
+        "url"
+      ],
+      "additionalProperties": {
+        "type": "object"
+      },
+      "description": "Request parameters for adding a member to a group."
+    },
+    "GroupCreateParameters": {
+      "type": "object",
+      "properties": {
+        "displayName": {
+          "type": "string",
+          "description": "Group display name"
+        },
+        "mailEnabled": {
+          "type": "boolean",
+          "description": "Whether the group is mail-enabled. Must be false. This is because only pure security groups can be created using the Graph API.",
+          "enum": [
+            false
+          ]
+        },
+        "mailNickname": {
+          "type": "string",
+          "description": "Mail nickname"
+        },
+        "securityEnabled": {
+          "type": "boolean",
+          "description": "Whether the group is a security group. Must be true. This is because only pure security groups can be created using the Graph API.",
+          "enum": [
+            true
+          ]
+        }
+      },
+      "required": [
+        "displayName",
+        "mailEnabled",
+        "mailNickname",
+        "securityEnabled"
+      ],
+      "additionalProperties": {
+        "type": "object"
+      },
+      "description": "Request parameters for creating a new group."
+    },
+    "ADGroup": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DirectoryObject"
+        }
+      ],
+      "properties": {
+        "displayName": {
+          "type": "string",
+          "description": "The display name of the group."
+        },
+        "mailEnabled": {
+          "type": "boolean",
+          "description": "Whether the group is mail-enabled. Must be false. This is because only pure security groups can be created using the Graph API."
+        },
+        "mailNickname": {
+          "type": "string",
+          "description": "The mail alias for the group. "
+        },
+        "securityEnabled": {
+          "type": "boolean",
+          "description": "Whether the group is security-enable."
+        },
+        "mail": {
+          "type": "string",
+          "description": "The primary email address of the group."
+        }
+      },
+      "x-ms-discriminator-value": "Group",
+      "description": "Active Directory group information."
+    },
+    "GroupListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ADGroup"
+          },
+          "description": "A collection of Active Directory groups."
+        },
+        "odata.nextLink": {
+          "type": "string",
+          "description": "The URL to get the next set of results."
+        }
+      },
+      "description": "Server response for Get tenant groups API call"
+    },
+    "GroupGetMemberGroupsParameters": {
+      "type": "object",
+      "properties": {
+        "securityEnabledOnly": {
+          "type": "boolean",
+          "description": "If true, only membership in security-enabled groups should be checked. Otherwise, membership in all groups should be checked."
+        }
+      },
+      "additionalProperties": {
+        "type": "object"
+      },
+      "required": [
+        "securityEnabledOnly"
+      ],
+      "description": "Request parameters for GetMemberGroups API call."
+    },
+    "GroupGetMemberGroupsResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "A collection of group IDs of which the group is a member."
+        }
+      },
+      "description": "Server response for GetMemberGroups API call."
+    },
+    "CheckGroupMembershipParameters": {
+      "type": "object",
+      "properties": {
+        "groupId": {
+          "type": "string",
+          "description": "The object ID of the group to check."
+        },
+        "memberId": {
+          "type": "string",
+          "description": "The object ID of the contact, group, user, or service principal to check for membership in the specified group."
+        }
+      },
+      "additionalProperties": {
+        "type": "object"
+      },
+      "required": [
+        "groupId",
+        "memberId"
+      ],
+      "description": "Request parameters for IsMemberOf API call."
+    },
+    "CheckGroupMembershipResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "boolean",
+          "description": "True if the specified user, group, contact, or service principal has either direct or transitive membership in the specified group; otherwise, false."
+        }
+      },
+      "additionalProperties": {
+        "type": "object"
+      },
+      "description": "Server response for IsMemberOf API call"
+    },
+    "ServicePrincipalBase": {
+      "type": "object",
+      "description": "Active Directory service principal common properties shared among GET, POST and PATCH",
+      "properties": {
+        "accountEnabled": {
+          "description": "whether or not the service principal account is enabled",
+          "type": "boolean"
+        },
+        "appRoleAssignmentRequired": {
+          "description": "Specifies whether an AppRoleAssignment to a user or group is required before Azure AD will issue a user or access token to the application.",
+          "type": "boolean"
+        },
+        "keyCredentials": {
+          "description": "The collection of key credentials associated with the service principal.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/KeyCredential"
+          }
+        },
+        "passwordCredentials": {
+          "description": "The collection of password credentials associated with the service principal.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PasswordCredential"
+          }
+        },
+        "servicePrincipalType": {
+          "type": "string",
+          "description": "the type of the service principal"
+        },
+        "tags": {
+          "description": "Optional list of tags that you can apply to your service principals. Not nullable.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "ServicePrincipalCreateParameters": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ServicePrincipalBase"
+        }
+      ],
+      "properties": {
+        "appId": {
+          "type": "string",
+          "description": "The application ID."
+        }
+      },
+      "required": [
+        "appId"
+      ],
+      "description": "Request parameters for creating a new service principal."
+    },
+    "ServicePrincipalUpdateParameters": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ServicePrincipalBase"
+        }
+      ],
+      "description": "Request parameters for update an existing service principal."
+    },
+    "ServicePrincipal": {
+      "type": "object",
+      "description": "Active Directory service principal information.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DirectoryObject"
+        }
+      ],
+      "properties": {
+        "accountEnabled": {
+          "description": "whether or not the service principal account is enabled",
+          "type": "boolean"
+        },
+        "alternativeNames": {
+          "description": "alternative names",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "appDisplayName": {
+          "description": "The display name exposed by the associated application.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "appId": {
+          "type": "string",
+          "description": "The application ID."
+        },
+        "appOwnerTenantId": {
+          "readOnly": true,
+          "type": "string"
+        },
+        "appRoleAssignmentRequired": {
+          "description": "Specifies whether an AppRoleAssignment to a user or group is required before Azure AD will issue a user or access token to the application.",
+          "type": "boolean"
+        },
+        "appRoles": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AppRole"
+          },
+          "description": "The collection of application roles that an application may declare. These roles can be assigned to users, groups or service principals."
+        },
+        "displayName": {
+          "type": "string",
+          "description": "The display name of the service principal."
+        },
+        "errorUrl": {
+          "type": "string",
+          "description": "A URL provided by the author of the associated application to report errors when using the application."
+        },
+        "homepage": {
+          "description": "The URL to the homepage of the associated application.",
+          "type": "string"
+        },
+        "keyCredentials": {
+          "description": "The collection of key credentials associated with the service principal.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/KeyCredential"
+          }
+        },
+        "logoutUrl": {
+          "type": "string",
+          "description": "A URL provided by the author of the associated application to logout"
+        },
+        "oauth2Permissions": {
+          "description": "The OAuth 2.0 permissions exposed by the associated application.",
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/OAuth2Permission"
+          }
+        },
+        "passwordCredentials": {
+          "description": "The collection of password credentials associated with the service principal.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PasswordCredential"
+          }
+        },
+        "preferredTokenSigningKeyThumbprint": {
+          "description": "The thumbprint of preferred certificate to sign the token",
+          "type": "string"
+        },
+        "publisherName": {
+          "description": "The publisher's name of the associated application",
+          "type": "string"
+        },
+        "replyUrls": {
+          "description": "The URLs that user tokens are sent to for sign in with the associated application.  The redirect URIs that the oAuth 2.0 authorization code and access tokens are sent to for the associated application.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "samlMetadataUrl": {
+          "type": "string",
+          "description": "The URL to the SAML metadata of the associated application"
+        },
+        "servicePrincipalNames": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "A collection of service principal names."
+        },
+        "servicePrincipalType": {
+          "type": "string",
+          "description": "the type of the service principal"
+        },
+        "tags": {
+          "description": "Optional list of tags that you can apply to your service principals. Not nullable.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "ServicePrincipalListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ServicePrincipal"
+          },
+          "description": "the list of service principals."
+        },
+        "odata.nextLink": {
+          "type": "string",
+          "description": "the URL to get the next set of results."
+        }
+      },
+      "description": "Server response for get tenant service principals API call."
+    },
+    "PasswordProfile": {
+      "type": "object",
+      "properties": {
+        "password": {
+          "type": "string",
+          "description": "Password"
+        },
+        "forceChangePasswordNextLogin": {
+          "type": "boolean",
+          "description": "Whether to force a password change on next login."
+        }
+      },
+      "additionalProperties": {
+        "type": "object"
+      },
+      "required": [
+        "password"
+      ],
+      "description": "The password profile associated with a user."
+    },
+    "UserBase": {
+      "type": "object",
+      "properties": {
+        "immutableId": {
+          "type": "string",
+          "description": "This must be specified if you are using a federated domain for the user's userPrincipalName (UPN) property when creating a new user account. It is used to associate an on-premises Active Directory user account with their Azure AD user object."
+        },
+        "usageLocation": {
+          "type": "string",
+          "description": "A two letter country code (ISO standard 3166). Required for users that will be assigned licenses due to legal requirement to check for availability of services in countries. Examples include: \"US\", \"JP\", and \"GB\"."
+        },
+        "givenName": {
+          "type": "string",
+          "description": "The given name for the user."
+        },
+        "surname": {
+          "type": "string",
+          "description": "The user's surname (family name or last name)."
+        },
+        "userType": {
+          "type": "string",
+          "description": "A string value that can be used to classify user types in your directory, such as 'Member' and 'Guest'.",
+          "enum": [
+            "Member",
+            "Guest"
+          ],
+          "x-ms-enum": {
+            "name": "UserType",
+            "modelAsString": true
+          }
+        }
+      },
+      "additionalProperties": {
+        "type": "object"
+      }
+    },
+    "UserCreateParameters": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/UserBase"
+        }
+      ],
+      "properties": {
+        "accountEnabled": {
+          "type": "boolean",
+          "description": "Whether the account is enabled."
+        },
+        "displayName": {
+          "type": "string",
+          "description": "The display name of the user."
+        },
+        "passwordProfile": {
+          "$ref": "#/definitions/PasswordProfile",
+          "description": "Password Profile"
+        },
+        "userPrincipalName": {
+          "type": "string",
+          "description": "The user principal name (someuser@contoso.com). It must contain one of the verified domains for the tenant."
+        },
+        "mailNickname": {
+          "type": "string",
+          "description": "The mail alias for the user."
+        },
+        "mail": {
+          "type": "string",
+          "description": "The primary email address of the user."
+        }
+      },
+      "required": [
+        "accountEnabled",
+        "displayName",
+        "passwordProfile",
+        "userPrincipalName",
+        "mailNickname"
+      ],
+      "description": "Request parameters for creating a new work or school account user."
+    },
+    "UserUpdateParameters": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/UserBase"
+        }
+      ],
+      "properties": {
+        "accountEnabled": {
+          "type": "boolean",
+          "description": "Whether the account is enabled."
+        },
+        "displayName": {
+          "type": "string",
+          "description": "The display name of the user."
+        },
+        "passwordProfile": {
+          "$ref": "#/definitions/PasswordProfile",
+          "description": "The password profile of the user."
+        },
+        "userPrincipalName": {
+          "type": "string",
+          "description": "The user principal name (someuser@contoso.com). It must contain one of the verified domains for the tenant."
+        },
+        "mailNickname": {
+          "type": "string",
+          "description": "The mail alias for the user."
+        }
+      },
+      "description": "Request parameters for updating an existing work or school account user."
+    },
+    "User": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DirectoryObject"
+        }
+      ],
+      "properties": {
+        "immutableId": {
+          "type": "string",
+          "description": "This must be specified if you are using a federated domain for the user's userPrincipalName (UPN) property when creating a new user account. It is used to associate an on-premises Active Directory user account with their Azure AD user object."
+        },
+        "usageLocation": {
+          "type": "string",
+          "description": "A two letter country code (ISO standard 3166). Required for users that will be assigned licenses due to legal requirement to check for availability of services in countries. Examples include: \"US\", \"JP\", and \"GB\"."
+        },
+        "givenName": {
+          "type": "string",
+          "description": "The given name for the user."
+        },
+        "surname": {
+          "type": "string",
+          "description": "The user's surname (family name or last name)."
+        },
+        "userType": {
+          "type": "string",
+          "description": "A string value that can be used to classify user types in your directory, such as 'Member' and 'Guest'.",
+          "enum": [
+            "Member",
+            "Guest"
+          ],
+          "x-ms-enum": {
+            "name": "UserType",
+            "modelAsString": true
+          }
+        },
+        "accountEnabled": {
+          "type": "boolean",
+          "description": "Whether the account is enabled."
+        },
+        "displayName": {
+          "type": "string",
+          "description": "The display name of the user."
+        },
+        "userPrincipalName": {
+          "type": "string",
+          "description": "The principal name of the user."
+        },
+        "mailNickname": {
+          "type": "string",
+          "description": "The mail alias for the user."
+        },
+        "mail": {
+          "type": "string",
+          "description": "The primary email address of the user."
+        },
+        "signInNames": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SignInName"
+          },
+          "description": "The sign-in names of the user."
+        }
+      },
+      "description": "Active Directory user information."
+    },
+    "SignInName": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "A string value that can be used to classify user sign-in types in your directory, such as 'emailAddress' or 'userName'."
+        },
+        "value": {
+          "type": "string",
+          "description": "The sign-in used by the local account. Must be unique across the company/tenant. For example, 'johnc@example.com'."
+        }
+      },
+      "additionalProperties": {
+        "type": "object"
+      },
+      "description": "Contains information about a sign-in name of a local account user in an Azure Active Directory B2C tenant."
+    },
+    "UserGetMemberGroupsParameters": {
+      "type": "object",
+      "properties": {
+        "securityEnabledOnly": {
+          "type": "boolean",
+          "description": "If true, only membership in security-enabled groups should be checked. Otherwise, membership in all groups should be checked."
+        }
+      },
+      "additionalProperties": {
+        "type": "object"
+      },
+      "required": [
+        "securityEnabledOnly"
+      ],
+      "description": "Request parameters for GetMemberGroups API call."
+    },
+    "UserGetMemberGroupsResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "A collection of group IDs of which the user is a member."
+        }
+      },
+      "description": "Server response for GetMemberGroups API call."
+    },
+    "UserListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/User"
+          },
+          "description": "the list of users."
+        },
+        "odata.nextLink": {
+          "type": "string",
+          "description": "The URL to get the next set of results."
+        }
+      },
+      "description": "Server response for Get tenant users API call."
+    },
+    "GetObjectsParameters": {
+      "type": "object",
+      "properties": {
+        "objectIds": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "The requested object IDs."
+        },
+        "types": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "The requested object types."
+        },
+        "includeDirectoryObjectReferences": {
+          "type": "boolean",
+          "description": "If true, also searches for object IDs in the partner tenant."
+        }
+      },
+      "additionalProperties": {
+        "type": "object"
+      },
+      "description": "Request parameters for the GetObjectsByObjectIds API."
+    },
+    "Domain": {
+      "type": "object",
+      "properties": {
+        "authenticationType": {
+          "type": "string",
+          "description": "the type of the authentication into the domain.",
+          "readOnly": true
+        },
+        "isDefault": {
+          "type": "boolean",
+          "description": "if this is the default domain in the tenant.",
+          "readOnly": true
+        },
+        "isVerified": {
+          "type": "boolean",
+          "description": "if this domain's ownership is verified.",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "description": "the domain name."
+        }
+      },
+      "required": [
+        "name"
+      ],
+      "additionalProperties": {
+        "type": "object"
+      },
+      "description": "Active Directory Domain information."
+    },
+    "DomainListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Domain"
+          },
+          "description": "the list of domains."
+        }
+      },
+      "description": "Server response for Get tenant domains API call."
+    },
+    "OAuth2PermissionGrant": {
+      "properties": {
+        "odata.type": {
+          "type": "string",
+          "description": "Microsoft.DirectoryServices.OAuth2PermissionGrant"
+        },
+        "clientId": {
+          "type": "string",
+          "description": "The id of the resource's service principal granted consent to impersonate the user when accessing the resource (represented by the resourceId property)."
+        },
+        "objectId": {
+          "type": "string",
+          "description": "The id of the permission grant"
+        },
+        "consentType": {
+          "type": "string",
+          "description": "Indicates if consent was provided by the administrator (on behalf of the organization) or by an individual.",
+          "enum": [
+            "AllPrincipals",
+            "Principal"
+          ],
+          "x-ms-enum": {
+            "name": "ConsentType",
+            "modelAsString": true
+          }
+        },
+        "principalId": {
+          "type": "string",
+          "description": "When consent type is Principal, this property specifies the id of the user that granted consent and applies only for that user."
+        },
+        "resourceId": {
+          "type": "string",
+          "description": "Object Id of the resource you want to grant"
+        },
+        "scope": {
+          "type": "string",
+          "description": "Specifies the value of the scope claim that the resource application should expect in the OAuth 2.0 access token. For example, User.Read"
+        },
+        "startTime": {
+          "type": "string",
+          "description": "Start time for TTL"
+        },
+        "expiryTime": {
+          "type": "string",
+          "description": "Expiry time for TTL"
+        }
+      },
+      "example": {
+        "odata.type": "odata.type",
+        "resourceId": "resourceId",
+        "clientId": "clientId",
+        "scope": "scope",
+        "expiryTime": "expiryTime",
+        "consentType": "consentType",
+        "principalId": "",
+        "startTime": "startTime"
+      }
+    },
+    "OAuth2PermissionGrantListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/OAuth2PermissionGrant"
+          },
+          "description": "the list of oauth2 permissions grants"
+        },
+        "odata.nextLink": {
+          "type": "string",
+          "description": "the URL to get the next set of results."
+        }
+      },
+      "description": "Server response for get oauth2 permissions grants"
+    }
+  },
+  "parameters": {
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "Client API version."
+    },
+    "tenantIDInPath": {
+      "name": "tenantID",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The tenant ID.",
+      "x-ms-parameter-location": "client"
+    }
+  }
+}

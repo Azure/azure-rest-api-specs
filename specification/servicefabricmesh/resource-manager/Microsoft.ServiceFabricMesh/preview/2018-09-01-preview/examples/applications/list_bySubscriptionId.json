@@ -1,0 +1,32 @@
+{
+  "operationId": "Application_ListBySubscriptionId",
+  "description": "This example shows how to list all application resources for a specified subscription.",
+  "parameters": {
+    "api-version": "2018-09-01-privatepreview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "type": "Microsoft.ServiceFabricMesh/applications",
+            "location": "EastUS",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/sbz_demo/providers/Microsoft.ServiceFabricMesh/applications/sampleApplication",
+            "name": "sampleApplication",
+            "tags": {},
+            "properties": {
+              "provisioningState": "Succeeded",
+              "description": "Service Fabric Mesh sample application.",
+              "healthState": "Ok",
+              "serviceNames": [
+                "helloWorldService"
+              ],
+              "status": "Ready"
+            }
+          }
+        ]
+      }
+    }
+  }
+}

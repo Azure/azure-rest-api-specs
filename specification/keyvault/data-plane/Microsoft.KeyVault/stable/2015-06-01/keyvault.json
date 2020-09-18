@@ -1813,25 +1813,25 @@
           "x-ms-client-name": "NotBefore",
           "type": "integer",
           "format": "unixtime",
-          "description": "Not before date in UTC"
+          "description": "Not before date in seconds since 1970-01-01T00:00:00Z"
         },
         "exp": {
           "x-ms-client-name": "Expires",
           "type": "integer",
           "format": "unixtime",
-          "description": "Expiry date in UTC"
+          "description": "Expiry date in seconds since 1970-01-01T00:00:00Z"
         },
         "created": {
           "type": "integer",
           "format": "unixtime",
           "readOnly": true,
-          "description": "Creation time in UTC"
+          "description": "Creation time in seconds since 1970-01-01T00:00:00Z"
         },
         "updated": {
           "type": "integer",
           "format": "unixtime",
           "readOnly": true,
-          "description": "Last updated time in UTC"
+          "description": "Last updated time in seconds since 1970-01-01T00:00:00Z"
         }
       },
       "description": "The object attributes managed by the KeyVault service"
@@ -1845,7 +1845,12 @@
         "kty": {
           "type": "string",
           "description": "Supported JsonWebKey key types (kty) for Elliptic Curve, RSA, HSM, Octet, usually RSA",
-          "enum": [ "EC", "RSA", "RSA-HSM", "oct" ],
+          "enum": [
+            "EC",
+            "RSA",
+            "RSA-HSM",
+            "oct"
+          ],
           "x-ms-enum": {
             "name": "JsonWebKeyType",
             "modelAsString": true
@@ -2246,7 +2251,7 @@
         "key_size": {
           "type": "integer",
           "format": "int32",
-          "description": "The key size in bytes. e.g. 2048."
+          "description": "The key size in bits. e.g. 2048."
         },
         "reuse_key": {
           "type": "boolean",
@@ -2286,7 +2291,17 @@
           "type": "array",
           "items": {
             "type": "string",
-            "enum": [ "digitalSignature", "nonRepudiation", "keyEncipherment", "dataEncipherment", "keyAgreement", "keyCertSign", "cRLSign", "encipherOnly", "decipherOnly" ],
+            "enum": [
+              "digitalSignature",
+              "nonRepudiation",
+              "keyEncipherment",
+              "dataEncipherment",
+              "keyAgreement",
+              "keyCertSign",
+              "cRLSign",
+              "encipherOnly",
+              "decipherOnly"
+            ],
             "x-ms-enum": {
               "name": "KeyUsageType",
               "modelAsString": true
@@ -2299,7 +2314,7 @@
           "type": "integer",
           "format": "int32",
           "minimum": 0,
-          "description": "The duration that the ceritifcate is valid in months."
+          "description": "The duration that the certificate is valid in months."
         }
       },
       "description": "Properties of the X509 component of a certificate."
@@ -2336,7 +2351,10 @@
         "action_type": {
           "type": "string",
           "description": "The type of the action.",
-          "enum": [ "EmailContacts", "AutoRenew" ],
+          "enum": [
+            "EmailContacts",
+            "AutoRenew"
+          ],
           "x-ms-enum": {
             "name": "ActionType",
             "modelAsString": false
@@ -2425,13 +2443,13 @@
           "type": "integer",
           "format": "unixtime",
           "readOnly": true,
-          "description": "Creation time in UTC"
+          "description": "Creation time in seconds since 1970-01-01T00:00:00Z"
         },
         "updated": {
           "type": "integer",
           "format": "unixtime",
           "readOnly": true,
-          "description": "Last updated time in UTC"
+          "description": "Last updated time in seconds since 1970-01-01T00:00:00Z"
         }
       },
       "description": "The attributes of an issuer managed by the KeyVault service"
@@ -2479,7 +2497,7 @@
         "email": {
           "x-ms-client-name": "EmailAddress",
           "type": "string",
-          "description": "Email addresss."
+          "description": "Email address."
         },
         "phone": {
           "type": "string",
@@ -2511,7 +2529,7 @@
         "email": {
           "x-ms-client-name": "EmailAddress",
           "type": "string",
-          "description": "Email addresss."
+          "description": "Email address."
         },
         "name": {
           "type": "string",
@@ -2530,7 +2548,12 @@
           "type": "string",
           "minLength": 1,
           "description": "The type of key to create. Valid key types, see JsonWebKeyType. Supported JsonWebKey key types (kty) for Elliptic Curve, RSA, HSM, Octet",
-          "enum": [ "EC", "RSA", "RSA-HSM", "oct" ],
+          "enum": [
+            "EC",
+            "RSA",
+            "RSA-HSM",
+            "oct"
+          ],
           "x-ms-enum": {
             "name": "JsonWebKeyType",
             "modelAsString": true
@@ -2539,14 +2562,21 @@
         "key_size": {
           "type": "integer",
           "format": "int32",
-          "description": "The key size in bytes. e.g. 1024 or 2048."
+          "description": "The key size in bits. e.g. 1024 or 2048."
         },
         "key_ops": {
           "type": "array",
           "items": {
             "type": "string",
             "description": "JSON web key operations. For more information, see JsonWebKeyOperation.",
-            "enum": [ "encrypt", "decrypt", "sign", "verify", "wrapKey", "unwrapKey" ],
+            "enum": [
+              "encrypt",
+              "decrypt",
+              "sign",
+              "verify",
+              "wrapKey",
+              "unwrapKey"
+            ],
             "x-ms-enum": {
               "name": "JsonWebKeyOperation",
               "modelAsString": true
@@ -2566,7 +2596,9 @@
         }
       },
       "description": "The key create parameters",
-      "required": [ "kty" ]
+      "required": [
+        "kty"
+      ]
     },
     "KeyImportParameters": {
       "properties": {
@@ -2592,7 +2624,9 @@
         }
       },
       "description": "The key import parameters",
-      "required": [ "key" ]
+      "required": [
+        "key"
+      ]
     },
     "KeyOperationsParameters": {
       "properties": {
@@ -2601,7 +2635,11 @@
           "type": "string",
           "minLength": 1,
           "description": "algorithm identifier",
-          "enum": [ "RSA-OAEP", "RSA-OAEP-256", "RSA1_5" ],
+          "enum": [
+            "RSA-OAEP",
+            "RSA-OAEP-256",
+            "RSA1_5"
+          ],
           "x-ms-enum": {
             "name": "JsonWebKeyEncryptionAlgorithm",
             "modelAsString": true
@@ -2613,7 +2651,10 @@
         }
       },
       "description": "The key operations parameters",
-      "required": [ "alg", "value" ]
+      "required": [
+        "alg",
+        "value"
+      ]
     },
     "KeySignParameters": {
       "properties": {
@@ -2622,7 +2663,15 @@
           "type": "string",
           "minLength": 1,
           "description": "The signing/verification algorithm identifier. For more information on possible algorithm types, see JsonWebKeySignatureAlgorithm.",
-          "enum": [ "PS256", "PS384", "PS512", "RS256", "RS384", "RS512", "RSNULL" ],
+          "enum": [
+            "PS256",
+            "PS384",
+            "PS512",
+            "RS256",
+            "RS384",
+            "RS512",
+            "RSNULL"
+          ],
           "x-ms-enum": {
             "name": "JsonWebKeySignatureAlgorithm",
             "modelAsString": true
@@ -2634,7 +2683,10 @@
         }
       },
       "description": "The key operations parameters",
-      "required": [ "alg", "value" ]
+      "required": [
+        "alg",
+        "value"
+      ]
     },
     "KeyVerifyParameters": {
       "properties": {
@@ -2643,7 +2695,15 @@
           "type": "string",
           "minLength": 1,
           "description": "The signing/verification algorithm. For more information on possible algorithm types, see JsonWebKeySignatureAlgorithm.",
-          "enum": [ "PS256", "PS384", "PS512", "RS256", "RS384", "RS512", "RSNULL" ],
+          "enum": [
+            "PS256",
+            "PS384",
+            "PS512",
+            "RS256",
+            "RS384",
+            "RS512",
+            "RSNULL"
+          ],
           "x-ms-enum": {
             "name": "JsonWebKeySignatureAlgorithm",
             "modelAsString": true
@@ -2662,7 +2722,11 @@
         }
       },
       "description": "The key verify parameters",
-      "required": [ "alg", "digest", "value" ]
+      "required": [
+        "alg",
+        "digest",
+        "value"
+      ]
     },
     "KeyUpdateParameters": {
       "properties": {
@@ -2670,7 +2734,14 @@
           "type": "array",
           "items": {
             "type": "string",
-            "enum": [ "encrypt", "decrypt", "sign", "verify", "wrapKey", "unwrapKey" ],
+            "enum": [
+              "encrypt",
+              "decrypt",
+              "sign",
+              "verify",
+              "wrapKey",
+              "unwrapKey"
+            ],
             "x-ms-enum": {
               "name": "JsonWebKeyOperation",
               "modelAsString": true
@@ -2702,7 +2773,9 @@
         }
       },
       "description": "The key restore parameters",
-      "required": [ "value" ]
+      "required": [
+        "value"
+      ]
     },
     "SecretSetParameters": {
       "properties": {
@@ -2728,7 +2801,9 @@
         }
       },
       "description": "The secret set parameters",
-      "required": [ "value" ]
+      "required": [
+        "value"
+      ]
     },
     "SecretUpdateParameters": {
       "properties": {
@@ -2804,7 +2879,9 @@
         }
       },
       "description": "The certificate import parameters",
-      "required": [ "value" ]
+      "required": [
+        "value"
+      ]
     },
     "CertificateUpdateParameters": {
       "properties": {
@@ -2853,7 +2930,9 @@
         }
       },
       "description": "The certificate merge parameters",
-      "required": [ "x5c" ]
+      "required": [
+        "x5c"
+      ]
     },
     "CertificateIssuerSetParameters": {
       "properties": {
@@ -2876,7 +2955,9 @@
         }
       },
       "description": "The certificate issuer set parameters.",
-      "required": [ "provider" ]
+      "required": [
+        "provider"
+      ]
     },
     "CertificateIssuerUpdateParameters": {
       "properties": {
@@ -2908,7 +2989,9 @@
         }
       },
       "description": "The certificate operation update parameters.",
-      "required": [ "cancellation_requested" ]
+      "required": [
+        "cancellation_requested"
+      ]
     },
     "KeyOperationResult": {
       "properties": {

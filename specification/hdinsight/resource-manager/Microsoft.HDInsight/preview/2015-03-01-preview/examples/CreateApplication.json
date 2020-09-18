@@ -1,61 +1,68 @@
 {
+  "parameters": {
+    "applicationName": "hue",
+    "clusterName": "cluster1",
+    "resourceGroupName": "rg1",
+    "api-version": "2015-03-01-preview",
+    "subscriptionId": "subid",
     "parameters": {
-        "applicationName": "hue",
-        "clusterName": "cluster1",
-        "resourceGroupName": "rg1",
-        "api-version": "2015-03-01-preview",
-        "subscriptionId": "subid",
-        "parameters": {
-            "computeProfile": {
-                "roles": [{
-                    "name": "edgenode",
-                    "targetInstanceCount": 1,
-                    "hardwareProfile": {
-                        "vmSize": "Standard_D12_v2"
-                    }
-                }]
-            },
-            "installScriptActions": [{
-                "name": "app-install-app1",
-                "uri": "https://.../install.sh",
-                "parameters": "-version latest -port 20000",
-                "roles": [
-                    "edgenode"
-                ]
-            }],
-            "uninstallScriptActions": [],
-            "httpsEndpoints": [{
-                "subDomainSuffix": "dss",
-                "destinationPort": 20000,
-                "accessModes": [
-                    "WebPage"
-                ]
-            }],
-            "provisioningState": "",
-            "applicationType": "CustomApplication",
-            "errors": []
-        }
-    },
-    "responses": {
-        "200": {
-            "body": {
-                "id": "",
-                "name": "",
-                "type": "",
-                "etag": "",
-                "tags": {},
-                "properties": {
-                    "computeProfile": {},
-                    "installScriptActions": [],
-                    "uninstallScriptActions": [],
-                    "httpsEndpoints": [],
-                    "sshEndpoints": [],
-                    "provisioningState": "",
-                    "applicationState": "",
-                    "errors": [],
-                    "createdDate": "2017-02-28"
-                }
+      "properties": {
+        "computeProfile": {
+          "roles": [
+            {
+              "name": "edgenode",
+              "targetInstanceCount": 1,
+              "hardwareProfile": {
+                "vmSize": "Standard_D12_v2"
+              }
             }
-        }
+          ]
+        },
+        "installScriptActions": [
+          {
+            "name": "app-install-app1",
+            "uri": "https://.../install.sh",
+            "parameters": "-version latest -port 20000",
+            "roles": [
+              "edgenode"
+            ]
+          }
+        ],
+        "uninstallScriptActions": [],
+        "httpsEndpoints": [
+          {
+            "subDomainSuffix": "dss",
+            "destinationPort": 20000,
+            "accessModes": [
+              "WebPage"
+            ]
+          }
+        ],
+        "applicationType": "CustomApplication",
+        "errors": []
+      }
     }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "",
+        "name": "",
+        "type": "",
+        "etag": "",
+        "tags": {},
+        "properties": {
+          "computeProfile": {},
+          "installScriptActions": [],
+          "uninstallScriptActions": [],
+          "httpsEndpoints": [],
+          "sshEndpoints": [],
+          "provisioningState": "",
+          "applicationState": "",
+          "errors": [],
+          "createdDate": "2017-02-28"
+        }
+      }
+    }
+  }
 }

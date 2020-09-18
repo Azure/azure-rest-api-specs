@@ -219,7 +219,7 @@
       "additionalProperties": {
         "type": "object"
       },
-      "description": "The recurrence schedule occurence."
+      "description": "The recurrence schedule occurrence."
     },
     "DayOfWeek": {
       "type": "string",
@@ -239,7 +239,7 @@
       "description": "The days of the week."
     },
     "BlobTrigger": {
-      "description": "Trigger that runs everytime the selected Blob container changes.",
+      "description": "Trigger that runs every time the selected Blob container changes.",
       "type": "object",
       "allOf": [
         {
@@ -275,6 +275,65 @@
         "typeProperties"
       ]
     },
+    "BlobEventsTrigger": {
+      "description": "Trigger that runs every time a Blob event occurs.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/MultiplePipelineTrigger"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "Blob Events Trigger properties.",
+          "x-ms-client-flatten": true,
+          "properties": {
+            "blobPathBeginsWith": {
+              "description": "The blob path must begin with the pattern provided for trigger to fire. For example, '/records/blobs/december/' will only fire the trigger for blobs in the december folder under the records container. At least one of these must be provided: blobPathBeginsWith, blobPathEndsWith.",
+              "type": "string"
+            },
+            "blobPathEndsWith": {
+              "description": "The blob path must end with the pattern provided for trigger to fire. For example, 'december/boxes.csv' will only fire the trigger for blobs named boxes in a december folder. At least one of these must be provided: blobPathBeginsWith, blobPathEndsWith.",
+              "type": "string"
+            },
+            "ignoreEmptyBlobs": {
+              "description": "If set to true, blobs with zero bytes will be ignored.",
+              "type": "boolean"
+            },
+            "events": {
+              "description": "The type of events that cause this trigger to fire.",
+              "$ref": "#/definitions/BlobEventTypes"
+            },
+            "scope": {
+              "description": "The ARM resource ID of the Storage Account.",
+              "type": "string"
+            }
+          },
+          "required": [
+            "events",
+            "scope"
+          ]
+        }
+      },
+      "required": [
+        "typeProperties"
+      ]
+    },
+    "BlobEventTypes": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": [
+          "Microsoft.Storage.BlobCreated",
+          "Microsoft.Storage.BlobDeleted"
+        ],
+        "x-ms-enum": {
+          "name": "BlobEventTypes",
+          "modelAsString": true
+        }
+      },
+      "description": "Blob event types."
+    },
     "TumblingWindowTrigger": {
       "description": "Trigger that schedules pipeline runs for all fixed time interval windows from a start time without gaps and also supports backfill scenarios (when start time is in the past).",
       "type": "object",
@@ -293,7 +352,7 @@
           "x-ms-client-flatten": true,
           "properties": {
             "frequency": {
-              "$ref": "#/definitions/TumblingWindowFrequency", 
+              "$ref": "#/definitions/TumblingWindowFrequency",
               "description": "The frequency of the time windows."
             },
             "interval": {

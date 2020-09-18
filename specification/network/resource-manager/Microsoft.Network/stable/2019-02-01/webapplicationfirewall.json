@@ -1,0 +1,553 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2019-02-01",
+    "title": "WebApplicationFirewallManagement",
+    "description": "APIs to manage web application firewall rules"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/ApplicationGatewayWebApplicationFirewallPolicies": {
+      "get": {
+        "tags": [
+          "WebApplicationFirewallPolicies"
+        ],
+        "description": "Lists all of the protection policies within a resource group.",
+        "operationId": "WebApplicationFirewallPolicies_List",
+        "x-ms-examples": {
+          "Lists all WAF policies in a resource group": {
+            "$ref": "./examples/WafListPolicies.json"
+          }
+        },
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/WebApplicationFirewallPolicyListResult"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Network/ApplicationGatewayWebApplicationFirewallPolicies": {
+      "get": {
+        "tags": [
+          "WebApplicationFirewallPolicies"
+        ],
+        "operationId": "WebApplicationFirewallPolicies_ListAll",
+        "x-ms-examples": {
+          "Lists all WAF policies in a subscription": {
+            "$ref": "./examples/WafListAllPolicies.json"
+          }
+        },
+        "description": "Gets all the WAF policies in a subscription.",
+        "parameters": [
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/WebApplicationFirewallPolicyListResult"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/ApplicationGatewayWebApplicationFirewallPolicies/{policyName}": {
+      "get": {
+        "tags": [
+          "WebApplicationFirewallPolicies"
+        ],
+        "description": "Retrieve protection policy with specified name within a resource group.",
+        "operationId": "WebApplicationFirewallPolicies_Get",
+        "x-ms-examples": {
+          "Gets a WAF policy within a resource group": {
+            "$ref": "./examples/WafPolicyGet.json"
+          }
+        },
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "policyName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "maxLength": 128,
+            "description": "The name of the policy"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/WebApplicationFirewallPolicy"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "WebApplicationFirewallPolicies"
+        ],
+        "description": "Creates or update policy with specified rule set name within a resource group.",
+        "operationId": "WebApplicationFirewallPolicies_CreateOrUpdate",
+        "x-ms-examples": {
+          "Creates or updates a WAF policy within a resource group": {
+            "$ref": "./examples/WafPolicyCreateOrUpdate.json"
+          }
+        },
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "policyName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "maxLength": 128,
+            "description": "The name of the policy."
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "description": "Policy to be created.",
+            "in": "body",
+            "name": "parameters",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/WebApplicationFirewallPolicy"
+            }
+          },
+          {
+            "$ref": "network.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/WebApplicationFirewallPolicy"
+            }
+          },
+          "201": {
+            "description": "Created. The request has been fulfilled and a new protection policy has been created.",
+            "schema": {
+              "$ref": "#/definitions/WebApplicationFirewallPolicy"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "WebApplicationFirewallPolicies"
+        ],
+        "description": "Deletes Policy",
+        "operationId": "WebApplicationFirewallPolicies_Delete",
+        "x-ms-examples": {
+          "Deletes a WAF policy within a resource group": {
+            "$ref": "./examples/WafPolicyDelete.json"
+          }
+        },
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "policyName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "maxLength": 128,
+            "description": "The name of the policy."
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted. The request has been accepted for processing and the operation will complete asynchronously."
+          },
+          "204": {
+            "description": "No Content. The request has been accepted but the policy was not found."
+          },
+          "200": {
+            "description": "Delete successful."
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      }
+    }
+  },
+  "definitions": {
+    "WebApplicationFirewallPolicy": {
+      "description": "Defines web application firewall policy.",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/WebApplicationFirewallPolicyPropertiesFormat",
+          "description": "Properties of the web application firewall policy."
+        },
+        "etag": {
+          "type": "string",
+          "description": "Gets a unique read-only string that changes whenever the resource is updated."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./network.json#/definitions/Resource"
+        }
+      ]
+    },
+    "WebApplicationFirewallPolicyPropertiesFormat": {
+      "description": "Defines web application firewall policy properties",
+      "properties": {
+        "policySettings": {
+          "description": "Describes  policySettings for policy",
+          "$ref": "#/definitions/PolicySettings"
+        },
+        "customRules": {
+          "description": "Describes custom rules inside the policy",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/WebApplicationFirewallCustomRule"
+          }
+        },
+        "applicationGateways": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "./applicationGateway.json#/definitions/ApplicationGateway"
+          },
+          "description": "A collection of references to application gateways."
+        },
+        "provisioningState": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Provisioning state of the WebApplicationFirewallPolicy."
+        },
+        "resourceState": {
+          "title": "Resource status of the policy.",
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource status of the policy.",
+          "enum": [
+            "Creating",
+            "Enabling",
+            "Enabled",
+            "Disabling",
+            "Disabled",
+            "Deleting"
+          ],
+          "x-ms-enum": {
+            "name": "WebApplicationFirewallPolicyResourceState",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "WebApplicationFirewallPolicyListResult": {
+      "description": "Result of the request to list WebApplicationFirewallPolicies. It contains a list of WebApplicationFirewallPolicy objects and a URL link to get the next set of results.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/WebApplicationFirewallPolicy"
+          },
+          "description": "List of WebApplicationFirewallPolicies within a resource group."
+        },
+        "nextLink": {
+          "readOnly": true,
+          "type": "string",
+          "description": "URL to get the next set of WebApplicationFirewallPolicy objects if there are any."
+        }
+      }
+    },
+    "PolicySettings": {
+      "description": "Defines contents of a web application firewall global configuration",
+      "properties": {
+        "enabledState": {
+          "description": "Describes if the policy is in enabled state or disabled state",
+          "type": "string",
+          "enum": [
+            "Disabled",
+            "Enabled"
+          ],
+          "x-ms-enum": {
+            "name": "WebApplicationFirewallEnabledState",
+            "modelAsString": true
+          }
+        },
+        "mode": {
+          "description": "Describes if it is in detection mode  or prevention mode at policy level",
+          "type": "string",
+          "enum": [
+            "Prevention",
+            "Detection"
+          ],
+          "x-ms-enum": {
+            "name": "WebApplicationFirewallMode",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "WebApplicationFirewallCustomRule": {
+      "description": "Defines contents of a web application rule",
+      "required": [
+        "priority",
+        "ruleType",
+        "matchConditions",
+        "action"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Gets name of the resource that is unique within a policy. This name can be used to access the resource.",
+          "maxLength": 128
+        },
+        "etag": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Gets a unique read-only string that changes whenever the resource is updated."
+        },
+        "priority": {
+          "description": "Describes priority of the rule. Rules with a lower value will be evaluated before rules with a higher value",
+          "type": "integer"
+        },
+        "ruleType": {
+          "description": "Describes type of rule",
+          "type": "string",
+          "enum": [
+            "MatchRule",
+            "Invalid"
+          ],
+          "x-ms-enum": {
+            "name": "WebApplicationFirewallRuleType",
+            "modelAsString": true
+          }
+        },
+        "matchConditions": {
+          "description": "List of match conditions",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MatchCondition"
+          }
+        },
+        "action": {
+          "description": "Type of Actions",
+          "type": "string",
+          "enum": [
+            "Allow",
+            "Block",
+            "Log"
+          ],
+          "x-ms-enum": {
+            "name": "WebApplicationFirewallAction",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "Transform": {
+      "description": "Describes what transforms applied before matching",
+      "type": "string",
+      "enum": [
+        "Lowercase",
+        "Trim",
+        "UrlDecode",
+        "UrlEncode",
+        "RemoveNulls",
+        "HtmlEntityDecode"
+      ],
+      "x-ms-enum": {
+        "name": "WebApplicationFirewallTransform",
+        "modelAsString": true
+      }
+    },
+    "MatchVariable": {
+      "description": "Define match variables",
+      "required": [
+        "variableName"
+      ],
+      "properties": {
+        "variableName": {
+          "description": "Match Variable",
+          "type": "string",
+          "enum": [
+            "RemoteAddr",
+            "RequestMethod",
+            "QueryString",
+            "PostArgs",
+            "RequestUri",
+            "RequestHeaders",
+            "RequestBody",
+            "RequestCookies"
+          ],
+          "x-ms-enum": {
+            "name": "WebApplicationFirewallMatchVariable",
+            "modelAsString": true
+          }
+        },
+        "selector": {
+          "description": "Describes field of the matchVariable collection",
+          "type": "string"
+        }
+      }
+    },
+    "MatchCondition": {
+      "description": "Define match conditions",
+      "required": [
+        "matchVariables",
+        "operator",
+        "matchValues"
+      ],
+      "properties": {
+        "matchVariables": {
+          "description": "List of match variables",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MatchVariable"
+          }
+        },
+        "operator": {
+          "description": "Describes operator to be matched",
+          "type": "string",
+          "enum": [
+            "IPMatch",
+            "Equal",
+            "Contains",
+            "LessThan",
+            "GreaterThan",
+            "LessThanOrEqual",
+            "GreaterThanOrEqual",
+            "BeginsWith",
+            "EndsWith",
+            "Regex"
+          ],
+          "x-ms-enum": {
+            "name": "WebApplicationFirewallOperator",
+            "modelAsString": true
+          }
+        },
+        "negationConditon": {
+          "description": "Describes if this is negate condition or not",
+          "type": "boolean"
+        },
+        "matchValues": {
+          "description": "Match value",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "transforms": {
+          "description": "List of transforms",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Transform"
+          }
+        }
+      }
+    }
+  },
+  "parameters": {
+    "SubscriptionIdParameter": {
+      "name": "subscriptionId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The subscription credentials which uniquely identify the Microsoft Azure subscription. The subscription ID forms part of the URI for every service call."
+    },
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "Client API version."
+    }
+  }
+}

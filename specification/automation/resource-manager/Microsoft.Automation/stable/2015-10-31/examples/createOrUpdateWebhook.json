@@ -1,64 +1,66 @@
 {
+  "parameters": {
+    "subscriptionId": "subid",
+    "resourceGroupName": "rg",
+    "automationAccountName": "myAutomationAccount33",
+    "webhookName": "TestWebhook",
+    "api-version": "2015-10-31",
     "parameters": {
-        "subscriptionId": "subid",
-        "resourceGroupName": "rg",
-        "automationAccountName": "myAutomationAccount33",
-        "webhookName": "TestWebhook",
-        "api-version": "2015-10-31",
-        "parameters": {
-            "name": "TestWebhook",
-            "properties": {
-                "isEnabled": true,
-                "uri": "https://s1events.azure-automation.net/webhooks?token=7u3KfQvM1vUPWaDMFRv2%2fAA4Jqx8QwS8aBuyO6Xsdcw%3d",
-                "expiryTime": "2018-03-29T22:18:13.7002872Z",
-                "runbook": {
-                    "name": "TestRunbook"
-                }
-            }
+      "name": "TestWebhook",
+      "properties": {
+        "isEnabled": true,
+        "uri": "https://s1events.azure-automation.net/webhooks?token=7u3KfQvM1vUPWaDMFRv2%2fAA4Jqx8QwS8aBuyO6Xsdcw%3d",
+        "expiryTime": "2018-03-29T22:18:13.7002872Z",
+        "runbook": {
+          "name": "TestRunbook"
         }
-    },
-    "responses": {
-        "201": {
-            "headers": {},
-            "body": {
-                "id": "/subscriptions/subid/resourceGroups/rg/providers/Microsoft.Automation/automationAccounts/myAutomationAccount33/webhooks/TestWebhook",
-                "name": "TestWebhook",
-                "properties": {
-                    "isEnabled": true,
-                    "expiryTime": "2018-03-29T22:18:13.7002872+00:00",
-                    "runbook": {
-                        "name": "TestRunbook"
-                    },
-                    "lastInvokedTime": null,
-                    "runOn": null,
-                    "parameters": null,
-                    "uri": "",
-                    "creationTime": "2017-03-29T22:18:14.6651862+00:00",
-                    "lastModifiedBy": "",
-                    "lastModifiedTime": "2017-03-29T22:18:14.6651862+00:00"
-                }
-            }
-        },
-        "200": {
-            "headers": {},
-            "body": {
-                "id": "/subscriptions/subid/resourceGroups/rg/providers/Microsoft.Automation/automationAccounts/myAutomationAccount33/webhooks/TestWebhook",
-                "name": "TestWebhook",
-                "properties": {
-                    "isEnabled": true,
-                    "expiryTime": "2018-03-29T22:18:13.7002872+00:00",
-                    "runbook": {
-                        "name": "TestRunbook"
-                    },
-                    "lastInvokedTime": null,
-                    "runOn": null,
-                    "parameters": null,
-                    "uri": "",
-                    "creationTime": "2017-03-29T22:18:14.6651862+00:00",
-                    "lastModifiedBy": "",
-                    "lastModifiedTime": "2017-03-29T22:18:14.6651862+00:00"
-                }
-            }
-        }
+      }
     }
+  },
+  "responses": {
+    "201": {
+      "headers": {},
+      "body": {
+        "id": "/subscriptions/subid/resourceGroups/rg/providers/Microsoft.Automation/automationAccounts/myAutomationAccount33/webhooks/TestWebhook",
+        "name": "TestWebhook",
+        "type": "Microsoft.Automation/AutomationAccounts/Webhooks",
+        "properties": {
+          "isEnabled": true,
+          "expiryTime": "2018-03-29T22:18:13.7002872+00:00",
+          "runbook": {
+            "name": "TestRunbook"
+          },
+          "lastInvokedTime": null,
+          "runOn": null,
+          "parameters": null,
+          "uri": "",
+          "creationTime": "2017-03-29T22:18:14.6651862+00:00",
+          "lastModifiedBy": "",
+          "lastModifiedTime": "2017-03-29T22:18:14.6651862+00:00"
+        }
+      }
+    },
+    "200": {
+      "headers": {},
+      "body": {
+        "id": "/subscriptions/subid/resourceGroups/rg/providers/Microsoft.Automation/automationAccounts/myAutomationAccount33/webhooks/TestWebhook",
+        "name": "TestWebhook",
+        "type": "Microsoft.Automation/AutomationAccounts/Webhooks",
+        "properties": {
+          "isEnabled": true,
+          "expiryTime": "2018-03-29T22:18:13.7002872+00:00",
+          "runbook": {
+            "name": "TestRunbook"
+          },
+          "lastInvokedTime": null,
+          "runOn": null,
+          "parameters": null,
+          "uri": "",
+          "creationTime": "2017-03-29T22:18:14.6651862+00:00",
+          "lastModifiedBy": "",
+          "lastModifiedTime": "2017-03-29T22:18:14.6651862+00:00"
+        }
+      }
+    }
+  }
 }

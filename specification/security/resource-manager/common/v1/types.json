@@ -1,0 +1,382 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0",
+    "title": "Common types"
+  },
+  "paths": {},
+  "definitions": {
+    "CloudError": {
+      "x-ms-external": true,
+      "type": "object",
+      "description": "Error response structure.",
+      "properties": {
+        "error": {
+          "x-ms-client-flatten": true,
+          "description": "Error data",
+          "$ref": "#/definitions/CloudErrorBody"
+        }
+      }
+    },
+    "CloudErrorBody": {
+      "x-ms-external": true,
+      "type": "object",
+      "description": "Error details.",
+      "properties": {
+        "code": {
+          "readOnly": true,
+          "type": "string",
+          "description": "An identifier for the error. Codes are invariant and are intended to be consumed programmatically."
+        },
+        "message": {
+          "readOnly": true,
+          "type": "string",
+          "description": "A message describing the error, intended to be suitable for display in a user interface."
+        }
+      }
+    },
+    "Resource": {
+      "type": "object",
+      "description": "Describes an Azure resource.",
+      "properties": {
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource Id"
+        },
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource name"
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource type"
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "TrackedResource": {
+      "type": "object",
+      "description": "Describes an Azure tracked resource.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        },
+        {
+          "$ref": "#/definitions/AzureTrackedResourceLocation"
+        },
+        {
+          "$ref": "#/definitions/Kind"
+        },
+        {
+          "$ref": "#/definitions/ETag"
+        },
+        {
+          "$ref": "#/definitions/Tags"
+        }
+      ]
+    },
+    "ETag": {
+      "type": "object",
+      "description": "Entity tag is used for comparing two or more entities from the same requested resource.",
+      "properties": {
+        "etag": {
+          "type": "string",
+          "description": "Entity tag is used for comparing two or more entities from the same requested resource."
+        }
+      }
+    },
+    "Tags": {
+      "type": "object",
+      "description": "A list of key value pairs that describe the resource.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "A list of key value pairs that describe the resource.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "Kind": {
+      "type": "object",
+      "description": "Describes an Azure resource with kind",
+      "properties": {
+        "kind": {
+          "type": "string",
+          "description": "Kind of the resource"
+        }
+      }
+    },
+    "Location": {
+      "type": "object",
+      "description": "Describes an Azure resource with location",
+      "properties": {
+        "location": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Location where the resource is stored"
+        }
+      }
+    },
+    "AzureTrackedResourceLocation": {
+      "type": "object",
+      "description": "Describes an Azure resource with location",
+      "properties": {
+        "location": {
+          "type": "string",
+          "description": "Location where the resource is stored"
+        }
+      }
+    },
+    "AscLocationList": {
+      "type": "object",
+      "description": "List of locations where ASC saves your data",
+      "properties": {
+        "value": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AscLocation"
+          }
+        },
+        "nextLink": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The URI to fetch the next page."
+        }
+      }
+    },
+    "AscLocation": {
+      "type": "object",
+      "description": "The ASC location of the subscription is in the \"name\" field",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/AscLocationProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ]
+    },
+    "AscLocationProperties": {
+      "type": "object",
+      "description": "An empty set of properties"
+    },
+    "ResourceDetails": {
+      "type": "object",
+      "description": "Details of the resource that was assessed",
+      "discriminator": "source",
+      "properties": {
+        "source": {
+          "type": "string",
+          "description": "The platform where the assessed resource resides",
+          "enum": [
+            "Azure",
+            "OnPremise",
+            "OnPremiseSql"
+          ],
+          "x-ms-enum": {
+            "name": "source",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Azure",
+                "description": "Resource is in Azure"
+              },
+              {
+                "value": "OnPremise",
+                "description": "Resource in an on premise machine connected to Azure cloud"
+              },
+              {
+                "value": "OnPremiseSql",
+                "description": "SQL Resource in an on premise machine connected to Azure cloud"
+              }
+            ]
+          }
+        }
+      },
+      "required": [
+        "source"
+      ]
+    },
+    "AzureResourceDetails": {
+      "type": "object",
+      "description": "Details of the Azure resource that was assessed",
+      "x-ms-discriminator-value": "Azure",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ResourceDetails"
+        }
+      ],
+      "properties": {
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Azure resource Id of the assessed resource"
+        }
+      }
+    },
+    "OnPremiseResourceDetails": {
+      "type": "object",
+      "description": "Details of the On Premise resource that was assessed",
+      "x-ms-discriminator-value": "OnPremise",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ResourceDetails"
+        }
+      ],
+      "properties": {
+        "workspaceId": {
+          "type": "string",
+          "description": "Azure resource Id of the workspace the machine is attached to"
+        },
+        "vmuuid": {
+          "type": "string",
+          "description": "The unique Id of the machine"
+        },
+        "sourceComputerId": {
+          "type": "string",
+          "description": "The oms agent Id installed on the machine"
+        },
+        "machineName": {
+          "type": "string",
+          "description": "The name of the machine"
+        }
+      },
+      "required": [
+        "workspaceId",
+        "vmuuid",
+        "sourceComputerId",
+        "machineName"
+      ]
+    },
+    "OnPremiseSqlResourceDetails": {
+      "type": "object",
+      "description": "Details of the On Premise Sql resource that was assessed",
+      "x-ms-discriminator-value": "OnPremiseSql",
+      "allOf": [
+        {
+          "$ref": "#/definitions/OnPremiseResourceDetails"
+        }
+      ],
+      "properties": {
+        "serverName": {
+          "type": "string",
+          "description": "The Sql server name installed on the machine"
+        },
+        "databaseName": {
+          "type": "string",
+          "description": "The Sql database name installed on the machine"
+        }
+      },
+      "required": [
+        "serverName",
+        "databaseName"
+      ]
+    },
+    "AzureResourceLinks": {
+      "description": "array of azure resource IDs",
+      "readOnly": true,
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/AzureResourceLink"
+      }
+    },
+    "AzureResourceLink": {
+      "type": "object",
+      "description": "Describes an Azure resource with kind",
+      "properties": {
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Azure resource Id"
+        }
+      }
+    }
+  },
+  "parameters": {
+    "SubscriptionId": {
+      "name": "subscriptionId",
+      "in": "path",
+      "required": true,
+      "pattern": "^[0-9A-Fa-f]{8}-([0-9A-Fa-f]{4}-){3}[0-9A-Fa-f]{12}$",
+      "type": "string",
+      "description": "Azure subscription ID"
+    },
+    "ResourceGroupName": {
+      "name": "resourceGroupName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the resource group within the user's subscription. The name is case insensitive.",
+      "pattern": "^[-\\w\\._\\(\\)]+$",
+      "minLength": 1,
+      "maxLength": 90,
+      "x-ms-parameter-location": "method"
+    },
+    "ApiVersion": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "API version for the operation"
+    },
+    "AscLocation": {
+      "name": "ascLocation",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The location where ASC stores the data of the subscription. can be retrieved from Get locations",
+      "x-ms-parameter-location": "client"
+    },
+    "ResourceId": {
+      "name": "resourceId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The identifier of the resource.",
+      "x-ms-parameter-location": "method",
+      "x-ms-skip-url-encoding": true
+    },
+    "Scope": {
+      "name": "scope",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Scope of the query, can be subscription (/subscriptions/0b06d9ea-afe6-4779-bd59-30e5c2d9d13f) or management group (/providers/Microsoft.Management/managementGroups/mgName).",
+      "x-ms-parameter-location": "method",
+      "x-ms-skip-url-encoding": true
+    },
+    "ODataFilter": {
+      "name": "$filter",
+      "in": "query",
+      "required": false,
+      "type": "string",
+      "description": "OData filter. Optional.",
+      "x-ms-parameter-location": "method"
+    },
+    "ODataSelect": {
+      "name": "$select",
+      "in": "query",
+      "required": false,
+      "type": "string",
+      "description": "OData select. Optional.",
+      "x-ms-parameter-location": "method"
+    },
+    "ODataExpand": {
+      "name": "$expand",
+      "in": "query",
+      "required": false,
+      "type": "string",
+      "description": "OData expand. Optional.",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}

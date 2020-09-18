@@ -1,0 +1,685 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "ApiManagementClient",
+    "description": "Use these REST APIs for performing operations on tenant entity associated with your Azure API Management deployment. Using this entity you can manage properties and configuration that apply to the entire API Management service instance.",
+    "version": "2017-03-01"
+  },
+  "x-ms-parameterized-host": {
+    "hostTemplate": "{apimBaseUrl}",
+    "useSchemePrefix": false,
+    "positionInOperation": "first",
+    "parameters": [
+      {
+        "name": "apimBaseUrl",
+        "description": "The management endpoint of the API Management service, for example https://myapimservice.management.azure-api.net.",
+        "required": true,
+        "type": "string",
+        "in": "path",
+        "x-ms-skip-url-encoding": true
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "securityDefinitions": {
+    "apim_key": {
+      "type": "apiKey",
+      "name": "Authorization",
+      "in": "header"
+    }
+  },
+  "security": [
+    {
+      "apim_key": []
+    }
+  ],
+  "paths": {
+    "/tenant/{accessName}": {
+      "get": {
+        "tags": [
+          "TenantAccess"
+        ],
+        "operationId": "TenantAccess_Get",
+        "description": "Get tenant access information details.",
+        "x-ms-examples": {
+          "ApiManagementGetTenant": {
+            "$ref": "./examples/ApiManagementGetTenant.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/AccessParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Tenant Access information.",
+            "schema": {
+              "$ref": "#/definitions/AccessInformationContract"
+            },
+            "headers": {
+              "ETag": {
+                "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
+                "type": "string"
+              }
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "TenantAccess"
+        ],
+        "operationId": "TenantAccess_Update",
+        "description": "Update tenant access information details.",
+        "x-ms-examples": {
+          "ApiManagementPatchTenant": {
+            "$ref": "./examples/ApiManagementPatchTenant.json"
+          }
+        },
+        "parameters": [
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AccessInformationUpdateParameters"
+            },
+            "description": "Parameters supplied to retrieve the Tenant Access Information."
+          },
+          {
+            "$ref": "#/parameters/AccessParameter"
+          },
+          {
+            "name": "If-Match",
+            "in": "header",
+            "required": true,
+            "description": "The entity state (Etag) version of the property to update. A value of \"*\" can be used for If-Match to unconditionally apply the operation.",
+            "type": "string"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Tenant's access information updated successfully."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./apimanagement.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/tenant/{accessName}/regeneratePrimaryKey": {
+      "post": {
+        "tags": [
+          "TenantAccess"
+        ],
+        "operationId": "TenantAccess_RegeneratePrimaryKey",
+        "description": "Regenerate primary access key.",
+        "x-ms-examples": {
+          "ApiManagementPostTenantRegeneratePrimaryKey": {
+            "$ref": "./examples/ApiManagementPostTenantRegeneratePrimaryKey.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/AccessParameter"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "The primary key was successfully regenerated."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./apimanagement.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/tenant/{accessName}/regenerateSecondaryKey": {
+      "post": {
+        "tags": [
+          "TenantAccess"
+        ],
+        "operationId": "TenantAccess_RegenerateSecondaryKey",
+        "description": "Regenerate secondary access key.",
+        "x-ms-examples": {
+          "ApiManagementPostTenantRegenerateSecondaryKey": {
+            "$ref": "./examples/ApiManagementPostTenantRegenerateSecondaryKey.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/AccessParameter"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "The secondary key was successfully regenerated."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./apimanagement.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/tenant/{accessName}/git": {
+      "get": {
+        "tags": [
+          "TenantAccessGit"
+        ],
+        "operationId": "TenantAccessGit_Get",
+        "description": "Gets the Git access configuration for the tenant.",
+        "x-ms-examples": {
+          "ApiManagementListTenantGit": {
+            "$ref": "./examples/ApiManagementListTenantGit.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/AccessParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Git Access Information for the Service.",
+            "schema": {
+              "$ref": "#/definitions/AccessInformationContract"
+            },
+            "headers": {
+              "ETag": {
+                "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./apimanagement.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/tenant/{accessName}/git/regeneratePrimaryKey": {
+      "post": {
+        "tags": [
+          "TenantAccessGit"
+        ],
+        "operationId": "TenantAccessGit_RegeneratePrimaryKey",
+        "description": "Regenerate primary access key for GIT.",
+        "x-ms-examples": {
+          "ApiManagementPostTenantGit": {
+            "$ref": "./examples/ApiManagementPostTenantGit.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/AccessParameter"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "The primary key was successfully regenerated."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./apimanagement.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/tenant/{accessName}/git/regenerateSecondaryKey": {
+      "post": {
+        "tags": [
+          "TenantAccessGit"
+        ],
+        "operationId": "TenantAccessGit_RegenerateSecondaryKey",
+        "description": "Regenerate secondary access key for GIT.",
+        "x-ms-examples": {
+          "ApiManagementPostTenantGit": {
+            "$ref": "./examples/ApiManagementPostTenantGit.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/AccessParameter"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "The secondary key was successfully regenerated."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./apimanagement.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/tenant/{configurationName}/deploy": {
+      "post": {
+        "tags": [
+          "TenantConfiguration"
+        ],
+        "operationId": "TenantConfiguration_Deploy",
+        "description": "This operation applies changes from the specified Git branch to the configuration database. This is a long running operation and could take several minutes to complete.",
+        "x-ms-examples": {
+          "ApiManagementPostTenantDeploy": {
+            "$ref": "./examples/ApiManagementPostTenantDeploy.json"
+          }
+        },
+        "externalDocs": {
+          "description": "To deploy any service configuration changes to the API Management service instance",
+          "url": "https://azure.microsoft.com/en-us/documentation/articles/api-management-configuration-repository-git/#to-deploy-any-service-configuration-changes-to-the-api-management-service-instance"
+        },
+        "x-ms-long-running-operation": true,
+        "parameters": [
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DeployConfigurationParameters"
+            },
+            "description": "Deploy Configuration parameters."
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ConfigurationParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted: Location header contains the URL where the status of the long running operation can be checked."
+          },
+          "200": {
+            "description": "Result of applying changes from Git branch to database.",
+            "schema": {
+              "$ref": "#/definitions/OperationResultContract"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./apimanagement.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/tenant/{configurationName}/save": {
+      "post": {
+        "tags": [
+          "TenantConfiguration"
+        ],
+        "operationId": "TenantConfiguration_Save",
+        "description": "This operation creates a commit with the current configuration snapshot to the specified branch in the repository. This is a long running operation and could take several minutes to complete.",
+        "x-ms-examples": {
+          "ApiManagementPostTenantSave": {
+            "$ref": "./examples/ApiManagementPostTenantSave.json"
+          }
+        },
+        "externalDocs": {
+          "description": "To save the service configuration to the Git repository",
+          "url": "https://azure.microsoft.com/en-us/documentation/articles/api-management-configuration-repository-git/#to-save-the-service-configuration-to-the-git-repository"
+        },
+        "x-ms-long-running-operation": true,
+        "parameters": [
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SaveConfigurationParameter"
+            },
+            "description": "Save Configuration parameters."
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ConfigurationParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted: Location header contains the URL where the status of the long running operation can be checked."
+          },
+          "200": {
+            "description": "Result of creating a commit in the repository.",
+            "schema": {
+              "$ref": "#/definitions/OperationResultContract"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./apimanagement.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/tenant/{configurationName}/validate": {
+      "post": {
+        "tags": [
+          "TenantConfiguration"
+        ],
+        "operationId": "TenantConfiguration_Validate",
+        "description": "This operation validates the changes in the specified Git branch. This is a long running operation and could take several minutes to complete.",
+        "x-ms-examples": {
+          "ApiManagementPostTenantValidate": {
+            "$ref": "./examples/ApiManagementPostTenantValidate.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "parameters": [
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DeployConfigurationParameters"
+            },
+            "description": "Validate Configuration parameters."
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ConfigurationParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted: Location header contains the URL where the status of the long running operation can be checked."
+          },
+          "200": {
+            "description": "Result of validating the changes in the specified Git branch.",
+            "schema": {
+              "$ref": "#/definitions/OperationResultContract"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./apimanagement.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/tenant/{configurationName}/syncState": {
+      "get": {
+        "tags": [
+          "TenantConfigurationSyncState"
+        ],
+        "operationId": "TenantConfiguration_GetSyncState",
+        "description": "Gets the status of the most recent synchronization between the configuration database and the Git repository.",
+        "x-ms-examples": {
+          "ApiManagementListTenantSyncState": {
+            "$ref": "./examples/ApiManagementListTenantSyncState.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ConfigurationParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Sync state result.",
+            "schema": {
+              "$ref": "#/definitions/TenantConfigurationSyncStateContract"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "AccessInformationContract": {
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Identifier."
+        },
+        "primaryKey": {
+          "type": "string",
+          "description": "Primary access key."
+        },
+        "secondaryKey": {
+          "type": "string",
+          "description": "Secondary access key."
+        },
+        "enabled": {
+          "type": "boolean",
+          "description": "Tenant access information of the API Management service."
+        }
+      },
+      "description": "Tenant access information contract of the API Management service."
+    },
+    "AccessInformationUpdateParameters": {
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "description": "Tenant access information of the API Management service."
+        }
+      },
+      "description": "Tenant access information update parameters of the API Management service."
+    },
+    "DeployConfigurationParameters": {
+      "properties": {
+        "branch": {
+          "type": "string",
+          "description": "The name of the Git branch from which the configuration is to be deployed to the configuration database."
+        },
+        "force": {
+          "type": "boolean",
+          "description": "The value enforcing deleting subscriptions to products that are deleted in this update."
+        }
+      },
+      "required": [
+        "branch"
+      ],
+      "description": "Parameters supplied to the Deploy Configuration operation."
+    },
+    "OperationResultContract": {
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Operation result identifier."
+        },
+        "status": {
+          "type": "string",
+          "description": "Status of an async operation.",
+          "enum": [
+            "Started",
+            "InProgress",
+            "Succeeded",
+            "Failed"
+          ],
+          "x-ms-enum": {
+            "name": "AsyncOperationStatus",
+            "modelAsString": false
+          }
+        },
+        "started": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Start time of an async operation. The date conforms to the following format: `yyyy-MM-ddTHH:mm:ssZ` as specified by the ISO 8601 standard.\n"
+        },
+        "updated": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Last update time of an async operation. The date conforms to the following format: `yyyy-MM-ddTHH:mm:ssZ` as specified by the ISO 8601 standard.\n"
+        },
+        "resultInfo": {
+          "type": "string",
+          "description": "Optional result info."
+        },
+        "error": {
+          "$ref": "./apimanagement.json#/definitions/ErrorResponse",
+          "description": "Error Body Contract"
+        },
+        "actionLog": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/OperationResultLogItemContract"
+          },
+          "readOnly": true,
+          "description": "This property if only provided as part of the TenantConfiguration_Validate operation. It contains the log the entities which will be updated/created/deleted as part of the TenantConfiguration_Deploy operation."
+        }
+      },
+      "description": "Operation Result."
+    },
+    "OperationResultLogItemContract": {
+      "properties": {
+        "objectType": {
+          "type": "string",
+          "description": "The type of entity contract."
+        },
+        "action": {
+          "type": "string",
+          "description": "Action like create/update/delete."
+        },
+        "objectKey": {
+          "type": "string",
+          "description": "Identifier of the entity being created/updated/deleted."
+        }
+      },
+      "description": "Log of the entity being created, updated or deleted."
+    },
+    "SaveConfigurationParameter": {
+      "properties": {
+        "branch": {
+          "type": "string",
+          "description": "The name of the Git branch in which to commit the current configuration snapshot."
+        },
+        "force": {
+          "type": "boolean",
+          "description": "The value if true, the current configuration database is committed to the Git repository, even if the Git repository has newer changes that would be overwritten."
+        }
+      },
+      "required": [
+        "branch"
+      ],
+      "description": "Parameters supplied to the Save Tenant Configuration operation."
+    },
+    "TenantConfigurationSyncStateContract": {
+      "properties": {
+        "branch": {
+          "type": "string",
+          "description": "The name of Git branch."
+        },
+        "commitId": {
+          "type": "string",
+          "description": "The latest commit Id."
+        },
+        "isExport": {
+          "type": "boolean",
+          "description": "value indicating if last sync was save (true) or deploy (false) operation."
+        },
+        "isSynced": {
+          "type": "boolean",
+          "description": "value indicating if last synchronization was later than the configuration change."
+        },
+        "isGitEnabled": {
+          "type": "boolean",
+          "description": "value indicating whether Git configuration access is enabled."
+        },
+        "syncDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The date of the latest synchronization. The date conforms to the following format: `yyyy-MM-ddTHH:mm:ssZ` as specified by the ISO 8601 standard.\n"
+        },
+        "configurationChangeDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The date of the latest configuration change. The date conforms to the following format: `yyyy-MM-ddTHH:mm:ssZ` as specified by the ISO 8601 standard.\n"
+        }
+      },
+      "description": "Tenant Configuration Synchronization State."
+    }
+  },
+  "parameters": {
+    "AccessParameter": {
+      "name": "accessName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "enum": [
+        "access"
+      ],
+      "x-ms-enum": {
+        "modelAsString": true,
+        "name": "AccessIdName"
+      },
+      "description": "The identifier of the Access configuration.",
+      "x-ms-parameter-location": "method"
+    },
+    "ConfigurationParameter": {
+      "name": "configurationName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "enum": [
+        "configuration"
+      ],
+      "x-ms-enum": {
+        "modelAsString": true,
+        "name": "configurationIdName"
+      },
+      "description": "The identifier of the Git Configuration Operation.",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}

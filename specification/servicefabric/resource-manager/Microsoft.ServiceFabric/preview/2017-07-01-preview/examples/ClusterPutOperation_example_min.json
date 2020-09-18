@@ -9,9 +9,7 @@
       "location": "eastus",
       "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/resRg/providers/Microsoft.ServiceFabric/clusters/myCluster",
       "name": "myCluster",
-      "tags": {},
       "properties": {
-        "clusterState": "Default",
         "managementEndpoint": "http://myCluster.eastus.cloudapp.azure.com:19080",
         "fabricSettings": [
           {
@@ -50,8 +48,7 @@
           }
         ],
         "reliabilityLevel": "Silver",
-        "upgradeMode": "Automatic",
-        "addonFeatures": []
+        "upgradeMode": "Automatic"
       }
     }
   },
@@ -63,15 +60,13 @@
         "location": "eastus",
         "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/resRg/providers/Microsoft.ServiceFabric/clusters/myCluster",
         "name": "myCluster",
-        "tags": {},
-        "etag": "W/\"636462502169240743\"",
         "properties": {
           "provisioningState": "Succeeded",
           "clusterId": "92584666-9889-4ae8-8d02-91902923d37f",
           "clusterCodeVersion": "6.0.219.9494",
           "clusterState": "WaitingForNodes",
           "managementEndpoint": "http://myCluster.eastus.cloudapp.azure.com:19080",
-          "clusterEndpoint": "92584666-9889-4ae8-8d02-91902923d37f",
+          "clusterEndpoint": "https://eastus.servicefabric.azure.com",
           "clientCertificateThumbprints": [],
           "clientCertificateCommonNames": [],
           "fabricSettings": [
@@ -86,7 +81,6 @@
             }
           ],
           "upgradeDescription": {
-            "overrideUserUpgradePolicy": false,
             "forceRestart": false,
             "upgradeReplicaSetCheckTimeout": "10675199.02:48:05.4775807",
             "healthCheckWaitDuration": "00:05:00",
@@ -137,10 +131,10 @@
               "supportExpiryUtc": "9999-12-31T23:59:59.9999999",
               "environment": "Windows"
             }
-          ],
-          "addonFeatures": []
+          ]
         }
       }
-    }
+    },
+    "202": {}
   }
 }

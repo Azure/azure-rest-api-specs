@@ -40,6 +40,11 @@
           "Machines"
         ],
         "operationId": "Machines_ListByWorkspace",
+        "x-ms-examples": {
+          "SMMachinesListByWorkspaceGet": {
+            "$ref": "./examples/Machines/SMMachinesListByWorkspaceGet.json"
+          }
+        },
         "description": "Returns a collection of machines matching the specified conditions.  The returned collection represents either machines that are active/live during the specified interval  of time (`live=true` and `startTime`/`endTime` are specified) or that are known to have existed at or  some time prior to the specified point in time (`live=false` and `timestamp` is specified).",
         "parameters": [
           {
@@ -122,6 +127,11 @@
           "Machines"
         ],
         "operationId": "Machines_Get",
+        "x-ms-examples": {
+          "SMMachinesGetGet": {
+            "$ref": "./examples/Machines/SMMachinesGetGet.json"
+          }
+        },
         "description": "Returns the specified machine.",
         "parameters": [
           {
@@ -170,6 +180,11 @@
           "Machines"
         ],
         "operationId": "Machines_GetLiveness",
+        "x-ms-examples": {
+          "SMMachinesGetLivenessGet": {
+            "$ref": "./examples/Machines/SMMachinesGetLivenessGet.json"
+          }
+        },
         "description": "Obtains the liveness status of the machine during the specified time interval.",
         "parameters": [
           {
@@ -226,6 +241,11 @@
           "Machines"
         ],
         "operationId": "Machines_ListConnections",
+        "x-ms-examples": {
+          "SMMachinesListConnectionsGet": {
+            "$ref": "./examples/Machines/SMMachinesListConnectionsGet.json"
+          }
+        },
         "description": "Returns a collection of connections terminating or originating at the specified machine",
         "parameters": [
           {
@@ -286,6 +306,11 @@
           "Machines"
         ],
         "operationId": "Machines_ListProcesses",
+        "x-ms-examples": {
+          "SMMachinesListProcessesGet": {
+            "$ref": "./examples/Machines/Processes/SMMachinesListProcessesGet.json"
+          }
+        },
         "description": "Returns a collection of processes on the specified machine matching the specified conditions. The returned collection represents either processes that are active/live during the specified interval  of time (`live=true` and `startTime`/`endTime` are specified) or that are known to have existed at or  some time prior to the specified point in time (`live=false` and `timestamp` is specified).        ",
         "parameters": [
           {
@@ -361,6 +386,11 @@
           "Processes"
         ],
         "operationId": "Processes_Get",
+        "x-ms-examples": {
+          "SMMachinesProcessesGetGet": {
+            "$ref": "./examples/Machines/Processes/SMMachinesProcessesGetGet.json"
+          }
+        },
         "description": "Returns the specified process.",
         "parameters": [
           {
@@ -412,6 +442,11 @@
           "Processes"
         ],
         "operationId": "Processes_GetLiveness",
+        "x-ms-examples": {
+          "SMMachinesProcessesGetLivenessGet": {
+            "$ref": "./examples/Machines/Processes/SMMachinesProcessesGetLivenessGet.json"
+          }
+        },
         "description": "Obtains the liveness status of the process during the specified time interval.",
         "parameters": [
           {
@@ -471,6 +506,11 @@
           "Processes"
         ],
         "operationId": "Processes_ListAcceptingPorts",
+        "x-ms-examples": {
+          "SMMachinesProcessesListAcceptingPortsGet": {
+            "$ref": "./examples/Machines/Processes/SMMachinesProcessesListAcceptingPortsGet.json"
+          }
+        },
         "description": "Returns a collection of ports on which this process is accepting",
         "parameters": [
           {
@@ -533,6 +573,11 @@
           "Processes"
         ],
         "operationId": "Processes_ListConnections",
+        "x-ms-examples": {
+          "SMMachinesProcessesListConnectionsGet": {
+            "$ref": "./examples/Machines/Processes/SMMachinesProcessesListConnectionsGet.json"
+          }
+        },
         "description": "Returns a collection of connections terminating or originating at the specified process",
         "parameters": [
           {
@@ -596,6 +641,11 @@
           "Ports"
         ],
         "operationId": "Machines_ListPorts",
+        "x-ms-examples": {
+          "SMMachinesListPortsGet": {
+            "$ref": "./examples/Machines/Ports/SMMachinesListPortsGet.json"
+          }
+        },
         "description": "Returns a collection of live ports on the specified machine during the specified time interval.",
         "parameters": [
           {
@@ -655,6 +705,11 @@
           "Ports"
         ],
         "operationId": "Ports_Get",
+        "x-ms-examples": {
+          "SMMachinesPortsGetGet": {
+            "$ref": "./examples/Machines/Ports/SMMachinesPortsGetGet.json"
+          }
+        },
         "description": "Returns the specified port. The port must be live during the specified time interval. If the port is not live during the interval, status 404 (Not Found) is returned.",
         "parameters": [
           {
@@ -714,6 +769,11 @@
           "Ports"
         ],
         "operationId": "Ports_GetLiveness",
+        "x-ms-examples": {
+          "SMMachinesPortsGetLivenessGet": {
+            "$ref": "./examples/Machines/Ports/SMMachinesPortsGetLivenessGet.json"
+          }
+        },
         "description": "Obtains the liveness status of the port during the specified time interval.",
         "parameters": [
           {
@@ -774,6 +834,11 @@
           "Processes"
         ],
         "operationId": "Ports_ListAcceptingProcesses",
+        "x-ms-examples": {
+          "SMMachinesPortsListAcceptingProcessesGet": {
+            "$ref": "./examples/Machines/Ports/SMMachinesPortsListAcceptingProcessesGet.json"
+          }
+        },
         "description": "Returns a collection of processes accepting on the specified port",
         "parameters": [
           {
@@ -836,6 +901,11 @@
           "Ports"
         ],
         "operationId": "Ports_ListConnections",
+        "x-ms-examples": {
+          "SMMachinesPortsListConnectionsGet": {
+            "$ref": "./examples/Machines/Ports/SMMachinesPortsListConnectionsGet.json"
+          }
+        },
         "description": "Returns a collection of connections established via the specified port.",
         "parameters": [
           {
@@ -899,7 +969,12 @@
           "MachineGroups"
         ],
         "operationId": "Machines_ListMachineGroupMembership",
-        "description": "Returns a collection of machine groups this machine belongs to.",
+        "x-ms-examples": {
+          "SMMachinesListMachineGroupMembershipGet": {
+            "$ref": "./examples/Machines/MachineGroups/SMMachinesListMachineGroupMembershipGet.json"
+          }
+        },
+        "description": "Returns a collection of machine groups this machine belongs to during the specified time interval.",
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -915,6 +990,22 @@
           },
           {
             "$ref": "#/parameters/MachineNameParameter"
+          },
+          {
+            "name": "startTime",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time",
+            "description": "UTC date and time specifying the start time of an interval. When not specified the service uses DateTime.UtcNow - 10m"
+          },
+          {
+            "name": "endTime",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time",
+            "description": "UTC date and time specifying the end time of an interval. When not specified the service uses DateTime.UtcNow"
           }
         ],
         "responses": {
@@ -942,6 +1033,11 @@
           "Client Groups"
         ],
         "operationId": "ClientGroups_Get",
+        "x-ms-examples": {
+          "SMClientGroupsGetGet": {
+            "$ref": "./examples/ClientGroups/SMClientGroupsGetGet.json"
+          }
+        },
         "description": "Retrieves the specified client group",
         "parameters": [
           {
@@ -998,6 +1094,11 @@
           "Client Groups"
         ],
         "operationId": "ClientGroups_GetMembersCount",
+        "x-ms-examples": {
+          "SMClientGroupsGetMembersCountGet": {
+            "$ref": "./examples/ClientGroups/SMClientGroupsGetMembersCountGet.json"
+          }
+        },
         "description": "Returns the approximate number of members in the client group.",
         "parameters": [
           {
@@ -1054,6 +1155,11 @@
           "Client Groups"
         ],
         "operationId": "ClientGroups_ListMembers",
+        "x-ms-examples": {
+          "SMClientGroupsListMembersGet": {
+            "$ref": "./examples/ClientGroups/SMClientGroupsListMembersGet.json"
+          }
+        },
         "description": "Returns the members of the client group during the specified time interval.",
         "parameters": [
           {
@@ -1123,6 +1229,17 @@
           "Maps"
         ],
         "operationId": "Maps_Generate",
+        "x-ms-examples": {
+          "SMMapsGenerateSingleMachineDependencyPost": {
+            "$ref": "./examples/Maps/SMMapsGenerateSingleMachineDependencyPost.json"
+          },
+          "SMMapsGenerateMachineGroupDependencyPost": {
+            "$ref": "./examples/Maps/SMMapsGenerateMachineGroupDependencyPost.json"
+          },
+          "SMMapsGenerateMachineListDependencyPost": {
+            "$ref": "./examples/Maps/SMMapsGenerateMachineListDependencyPost.json"
+          }
+        },
         "description": "Generates the specified map.",
         "parameters": [
           {
@@ -1169,6 +1286,11 @@
           "Summaries"
         ],
         "operationId": "Summaries_GetMachines",
+        "x-ms-examples": {
+          "SMSummariesGetMachinesGet": {
+            "$ref": "./examples/Summaries/SMSummariesGetMachinesGet.json"
+          }
+        },
         "description": "Returns summary information about the machines in the workspace.",
         "parameters": [
           {
@@ -1222,7 +1344,12 @@
           "MachineGroups"
         ],
         "operationId": "MachineGroups_ListByWorkspace",
-        "description": "Returns all machine groups.",
+        "x-ms-examples": {
+          "SMMachineGroupsListByWorkspaceGet": {
+            "$ref": "./examples/MachineGroups/SMMachineGroupsListByWorkspaceGet.json"
+          }
+        },
+        "description": "Returns all machine groups during the specified time interval.",
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -1235,6 +1362,22 @@
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "startTime",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time",
+            "description": "UTC date and time specifying the start time of an interval. When not specified the service uses DateTime.UtcNow - 10m"
+          },
+          {
+            "name": "endTime",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time",
+            "description": "UTC date and time specifying the end time of an interval. When not specified the service uses DateTime.UtcNow"
           }
         ],
         "responses": {
@@ -1260,6 +1403,11 @@
           "MachineGroups"
         ],
         "operationId": "MachineGroups_Create",
+        "x-ms-examples": {
+          "SMMachineGroupsCreatePost": {
+            "$ref": "./examples/MachineGroups/SMMachineGroupsCreatePost.json"
+          }
+        },
         "description": "Creates a new machine group.",
         "parameters": [
           {
@@ -1306,7 +1454,12 @@
           "MachineGroups"
         ],
         "operationId": "MachineGroups_Get",
-        "description": "Returns the specified machine group.",
+        "x-ms-examples": {
+          "SMMachineGroupsGetGet": {
+            "$ref": "./examples/MachineGroups/SMMachineGroupsGetGet.json"
+          }
+        },
+        "description": "Returns the specified machine group as it existed during the specified time interval.",
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -1322,6 +1475,22 @@
           },
           {
             "$ref": "#/parameters/MachineGroupNameParameter"
+          },
+          {
+            "name": "startTime",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time",
+            "description": "UTC date and time specifying the start time of an interval. When not specified the service uses DateTime.UtcNow - 10m"
+          },
+          {
+            "name": "endTime",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time",
+            "description": "UTC date and time specifying the end time of an interval. When not specified the service uses DateTime.UtcNow"
           }
         ],
         "responses": {
@@ -1344,6 +1513,11 @@
           "MachineGroups"
         ],
         "operationId": "MachineGroups_Update",
+        "x-ms-examples": {
+          "SMMachineGroupsUpdatePut": {
+            "$ref": "./examples/MachineGroups/SMMachineGroupsUpdatePut.json"
+          }
+        },
         "description": "Updates a machine group.",
         "parameters": [
           {
@@ -1391,6 +1565,11 @@
           "MachineGroups"
         ],
         "operationId": "MachineGroups_Delete",
+        "x-ms-examples": {
+          "SMMachineGroupsDeleteDelete": {
+            "$ref": "./examples/MachineGroups/SMMachineGroupsDeleteDelete.json"
+          }
+        },
         "description": "Deletes the specified Machine Group.",
         "parameters": [
           {
@@ -1471,7 +1650,8 @@
             "ref:machinewithhints",
             "ref:process",
             "ref:port",
-            "ref:onmachine"
+            "ref:onmachine",
+            "ref:clientgroup"
           ]
         }
       },
@@ -1573,6 +1753,15 @@
         }
       }
     },
+    "ClientGroupReference": {
+      "description": "Reference to a client group.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ResourceReference"
+        }
+      ],
+      "x-ms-discriminator-value": "ref:clientgroup"
+    },
     "CoreResource": {
       "description": "Marker resource for the core Service Map resources",
       "allOf": [
@@ -1673,6 +1862,10 @@
             "hypervisor": {
               "$ref": "#/definitions/HypervisorConfiguration",
               "description": "Hypervisor-related configuration. Present only when 'virtualizationState' is `hypervisor`."
+            },
+            "hosting": {
+              "$ref": "#/definitions/HostingConfiguration",
+              "description": "Hosting-related configuration. Present if hosting information is discovered for the VM."
             }
           }
         }
@@ -1733,6 +1926,10 @@
               },
               "description": "The inferred role of this process based on its name, command line, etc."
             },
+            "group": {
+              "type": "string",
+              "description": "The name of the product or suite of the process. The group is determined by its executable name, command line, etc."
+            },
             "details": {
               "$ref": "#/definitions/ProcessDetails",
               "description": "Process metadata (command line, product name, etc.)."
@@ -1748,6 +1945,10 @@
             "acceptorOf": {
               "$ref": "#/definitions/ResourceReference",
               "description": "Present only for a discovered process acting as a server. References the port on which the discovered process is accepting."
+            },
+            "hosting": {
+              "$ref": "#/definitions/ProcessHostingConfiguration",
+              "description": "Information about the hosting environment"
             }
           }
         }
@@ -1867,18 +2068,38 @@
           "type": "object",
           "description": "Resource properties.",
           "properties": {
+            "groupType": {
+              "type": "string",
+              "enum": [
+                "unknown",
+                "azure-cs",
+                "azure-sf",
+                "azure-vmss",
+                "user-static"
+              ],
+              "x-ms-enum": {
+                "name": "MachineGroupType",
+                "modelAsString": true
+              },
+              "description": "Type of the machine group"
+            },
             "displayName": {
               "type": "string",
               "description": "User defined name for the group",
               "minLength": 1,
               "maxLength": 256
             },
+            "count": {
+              "type": "integer",
+              "format": "int32",
+              "description": "Count of machines in this group. The value of count may be bigger than the number of machines in case of the group has been truncated due to exceeding the max number of machines a group can handle."
+            },
             "machines": {
               "type": "array",
               "items": {
                 "$ref": "#/definitions/MachineReferenceWithHints"
               },
-              "description": "References of the machines in this group. The hints within each reference do not represent the current value of  the corresponding fields. They are a snapshot created during the last time the machine group was updated."
+              "description": "References of the machines in this group. The hints within each reference do not represent the current value of the corresponding fields. They are a snapshot created during the last time the machine group was updated."
             }
           },
           "required": [
@@ -2486,7 +2707,7 @@
       }
     },
     "VirtualMachineConfiguration": {
-      "description": "Describes the virtualizaton-related configuration of a machine.",
+      "description": "Describes the virtualization-related configuration of a machine.",
       "properties": {
         "virtualMachineType": {
           "$ref": "#/definitions/VirtualMachineType",
@@ -2494,7 +2715,7 @@
         },
         "nativeMachineId": {
           "type": "string",
-          "description": "The unique identifier of the virtual machine as reported by the underlying virtualization sytem."
+          "description": "The unique identifier of the virtual machine as reported by the underlying virtualization system."
         },
         "virtualMachineName": {
           "type": "string",
@@ -2519,6 +2740,181 @@
         }
       }
     },
+    "HostingConfiguration": {
+      "description": "Describes the hosting configuration of a machine.",
+      "discriminator": "kind",
+      "properties": {
+        "provider": {
+          "type": "string",
+          "description": "The hosting provider of the VM.",
+          "enum": [
+            "azure"
+          ]
+        },
+        "kind": {
+          "type": "string",
+          "description": "Additional hosting configuration type qualifier.",
+          "enum": [
+            "provider:azure"
+          ]
+        }
+      },
+      "required": [
+        "kind"
+      ]
+    },
+    "AzureHostingConfiguration": {
+      "description": "Provides information about how a machine is hosted in Azure",
+      "allOf": [
+        {
+          "$ref": "#/definitions/HostingConfiguration"
+        }
+      ],
+      "x-ms-discriminator-value": "provider:azure",
+      "properties": {
+        "vmId": {
+          "type": "string",
+          "description": "Virtual Machine ID (unique identifier)."
+        },
+        "location": {
+          "type": "string",
+          "description": "Geographical location of the VM."
+        },
+        "name": {
+          "type": "string",
+          "description": "Machine name according to the hosting provider."
+        },
+        "size": {
+          "type": "string",
+          "description": "Size of the VM."
+        },
+        "updateDomain": {
+          "type": "string",
+          "description": "Update domain of the VM."
+        },
+        "faultDomain": {
+          "type": "string",
+          "description": "Fault domain of the VM."
+        },
+        "subscriptionId": {
+          "type": "string",
+          "description": "Subscription ID."
+        },
+        "resourceGroup": {
+          "type": "string",
+          "description": "Resource group name within the specified subscription."
+        },
+        "resourceId": {
+          "type": "string",
+          "description": "Unique identifier of the resource."
+        },
+        "image": {
+          "$ref": "#/definitions/ImageConfiguration",
+          "description": "Image of the machine."
+        },
+        "cloudService": {
+          "$ref": "#/definitions/AzureCloudServiceConfiguration",
+          "description": "Contains information about machines hosted as an Azure Cloud Service"
+        },
+        "vmScaleSet": {
+          "$ref": "#/definitions/AzureVmScaleSetConfiguration",
+          "description": "Contains information about machines hosted as an Azure Virtual Machine Scale Set"
+        },
+        "serviceFabricCluster": {
+          "$ref": "#/definitions/AzureServiceFabricClusterConfiguration",
+          "description": "Contains information about machines that belong an Azure Service Fabric Cluster"
+        }
+      }
+    },
+    "AzureCloudServiceConfiguration": {
+      "description": "Describes an Azure Cloud Service",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Cloud Service name"
+        },
+        "instanceId": {
+          "type": "string",
+          "description": "Cloud Service instance identifier"
+        },
+        "deployment": {
+          "type": "string",
+          "description": "Cloud Service deployment identifier"
+        },
+        "roleName": {
+          "type": "string",
+          "description": "Cloud Service role name"
+        },
+        "roleType": {
+          "type": "string",
+          "enum": [
+            "unknown",
+            "worker",
+            "web"
+          ],
+          "x-ms-enum": {
+            "name": "AzureCloudServiceRoleType",
+            "modelAsString": false
+          },
+          "description": "Used to specify type of an Azure Cloud Service role"
+        }
+      }
+    },
+    "AzureVmScaleSetConfiguration": {
+      "description": "Describes an Azure Virtual Machine Scale Set",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Virtual Machine Scale Set name"
+        },
+        "instanceId": {
+          "type": "string",
+          "description": "Virtual Machine Scale Set instance identifier"
+        },
+        "deployment": {
+          "type": "string",
+          "description": "Virtual Machine Scale Set deployment identifier"
+        },
+        "resourceId": {
+          "type": "string",
+          "description": "Unique identifier of the resource."
+        }
+      }
+    },
+    "AzureServiceFabricClusterConfiguration": {
+      "description": "Describes an Azure Service Fabric Cluster",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Service Fabric cluster name."
+        },
+        "clusterId": {
+          "type": "string",
+          "description": "Service Fabric cluster identifier."
+        }
+      }
+    },
+    "ImageConfiguration": {
+      "description": "Describes the VM image of a machine.",
+      "properties": {
+        "publisher": {
+          "type": "string",
+          "description": "Publisher of the VM image."
+        },
+        "offering": {
+          "type": "string",
+          "description": "Offering of the VM image."
+        },
+        "sku": {
+          "type": "string",
+          "description": "SKU of the VM image."
+        },
+        "version": {
+          "type": "string",
+          "description": "Version of the VM image."
+        }
+      }
+    },
     "ProcessUser": {
       "description": "Describes the user under which a process is running.",
       "properties": {
@@ -2537,17 +2933,17 @@
       "properties": {
         "persistentKey": {
           "type": "string",
-          "description": "A unique indentifier for a process, generally resilient to process restart, computed by Service Map."
+          "description": "A unique identifier for a process, generally resilient to process restart, computed by Service Map."
         },
         "poolId": {
           "type": "integer",
           "format": "int32",
-          "description": "Represents the identity of the process pool assigned to the process by Dependency Agent. "
+          "description": "Represents the identity of the process pool assigned to the process by Dependency Agent."
         },
         "firstPid": {
           "type": "integer",
           "format": "int32",
-          "description": "The Operating System Process Idendifier (PID) of the first process in this process pool."
+          "description": "The Operating System Process Identifier (PID) of the first process in this process pool."
         },
         "description": {
           "type": "string",
@@ -2584,6 +2980,68 @@
         "workingDirectory": {
           "type": "string",
           "description": "Process workingDirectory."
+        },
+        "services": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ProcessHostedService"
+          },
+          "description": "Collection of services hosted by this Process (Windows only)."
+        },
+        "zoneName": {
+          "type": "string",
+          "description": "Process zone name (Linux only)."
+        }
+      }
+    },
+    "ProcessHostedService": {
+      "description": "A service hosted by a process.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the service."
+        },
+        "displayName": {
+          "type": "string",
+          "description": "The service's display name."
+        }
+      }
+    },
+    "ProcessHostingConfiguration": {
+      "description": "Describes the hosting configuration of a process.",
+      "discriminator": "kind",
+      "properties": {
+        "provider": {
+          "type": "string",
+          "description": "The hosting provider of the VM.",
+          "enum": [
+            "azure"
+          ]
+        },
+        "kind": {
+          "type": "string",
+          "description": "Additional hosting configuration type qualifier.",
+          "enum": [
+            "provider:azure"
+          ]
+        }
+      },
+      "required": [
+        "kind"
+      ]
+    },
+    "AzureProcessHostingConfiguration": {
+      "description": "Describes the hosting configuration of a process when hosted on azure",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProcessHostingConfiguration"
+        }
+      ],
+      "x-ms-discriminator-value": "provider:azure",
+      "properties": {
+        "cloudService": {
+          "$ref": "#/definitions/AzureCloudServiceConfiguration",
+          "description": "Contains information about the cloud service the process belongs to"
         }
       }
     },
@@ -2605,14 +3063,14 @@
             "$ref": "#/definitions/Process"
           }
         },
-        "Ports": {
+        "ports": {
           "description": "Port resources.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/Port"
           }
         },
-        "ClientGroups": {
+        "clientGroups": {
           "description": "Client Group resources.",
           "type": "array",
           "items": {
@@ -2702,7 +3160,8 @@
           "description": "The type of map to create.",
           "enum": [
             "map:single-machine-dependency",
-            "map:machine-group-dependency"
+            "map:machine-group-dependency",
+            "map:machine-list-dependency"
           ]
         }
       },
@@ -2728,11 +3187,46 @@
         "machineId"
       ]
     },
-    "MachineGroupMapRequest": {
-      "description": "Specifies the computation of a machine group dependency map. A machine group dependency map includes all direct dependencies of a group of machines.",
+    "MultipleMachinesMapRequest": {
+      "description": "Provides a base class for describing map requests for a collection of machines",
       "allOf": [
         {
           "$ref": "#/definitions/MapRequest"
+        }
+      ],
+      "properties": {
+        "filterProcesses": {
+          "type": "boolean",
+          "description": "If true, only processes between specified machines will be included. Any connections in or out of those processes will be included."
+        }
+      }
+    },
+    "MachineListMapRequest": {
+      "description": "Specifies the computation of a one hope dependency map for a list of machines. The resulting map includes all direct dependencies for the specified machines.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/MultipleMachinesMapRequest"
+        }
+      ],
+      "x-ms-discriminator-value": "map:machine-list-dependency",
+      "properties": {
+        "machineIds": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "a list of URIs of machine resources for which to generate the map."
+        }
+      },
+      "required": [
+        "machineIds"
+      ]
+    },
+    "MachineGroupMapRequest": {
+      "description": "Specifies the computation of a machine group dependency map. A machine group dependency map includes all direct dependencies the machines in the group.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/MultipleMachinesMapRequest"
         }
       ],
       "x-ms-discriminator-value": "map:machine-group-dependency",
@@ -2740,10 +3234,6 @@
         "machineGroupId": {
           "type": "string",
           "description": "URI of machine group resource for which to generate the map."
-        },
-        "filterProcesses": {
-          "type": "boolean",
-          "description": "If true, only processes between grouped machines will be included. Any connections in or out of those processes will be included."
         }
       },
       "required": [

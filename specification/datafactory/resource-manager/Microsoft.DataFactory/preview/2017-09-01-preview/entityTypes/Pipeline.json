@@ -29,6 +29,13 @@
           "type": "integer",
           "minimum": 1,
           "description": "The max number of concurrent runs for the pipeline."
+        },
+        "annotations": {
+          "description": "List of tags that can be used for describing the Pipeline.",
+          "type": "array",
+          "items": {
+            "type": "object"
+          }
         }
       }
     },
@@ -145,6 +152,10 @@
           "description": "Interval between each retry attempt (in seconds). The default is 30 sec.",
           "minimum": 30,
           "maximum": 86400
+        },
+        "secureOutput": {
+          "type": "boolean",
+          "description": "When set to true, Output from activity is considered as secure and will not be logged to monitoring."
         }
       },
       "additionalProperties": {
@@ -196,8 +207,8 @@
           "$ref": "#/definitions/CopySink"
         },
         "translator": {
-          "description": "Copy activity translator. If not specificed, tabular translator is used.",
-          "$ref": "#/definitions/CopyTranslator"
+          "description": "Copy activity translator. If not specified, tabular translator is used.",
+          "type": "object"
         },
         "enableStaging": {
           "type": "object",
@@ -360,7 +371,7 @@
         },
         "readBehavior": {
           "description": "The read behavior for the operation. Default is Query.",
-          "type": "string",
+          "type": "object",
           "enum": [
             "Query",
             "QueryAll"
@@ -384,6 +395,21 @@
         "query": {
           "type": "object",
           "description": "SAP Cloud for Customer OData query. For example, \"$top=1\". Type: string (or Expression with resultType string)."
+        }
+      }
+    },
+    "SapEccSource": {
+      "description": "A copy activity source for SAP ECC source.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CopySource"
+        }
+      ],
+      "properties": {
+        "query": {
+          "type": "object",
+          "description": "SAP ECC OData query. For example, \"$top=1\". Type: string (or Expression with resultType string)."
         }
       }
     },
@@ -551,7 +577,7 @@
         },
         "consistencyLevel": {
           "description": "The consistency level specifies how many Cassandra servers must respond to a read request before returning data to the client application. Cassandra checks the specified number of Cassandra servers for data to satisfy the read request. Must be one of cassandraSourceReadConsistencyLevels. The default value is 'ONE'. It is case-insensitive.",
-          "type": "string",
+          "type": "object",
           "enum": [
             "ALL",
             "EACH_QUORUM",
@@ -616,395 +642,455 @@
         }
       }
     },
-    "AmazonMWSSource": { 
-      "description": "A copy activity Amazon Marketplace Web Service source.", 
-      "type": "object", 
-      "allOf": [ 
-        { 
-          "$ref": "#/definitions/CopySource" 
-        } 
-      ], 
-      "properties": {
-        "query": { 
-          "type": "object", 
-          "description": "A query to retrieve data from source. Type: string (or Expression with resultType string)." 
+    "AmazonMWSSource": {
+      "description": "A copy activity Amazon Marketplace Web Service source.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CopySource"
         }
-      } 
-    }, 
-    "AzurePostgreSqlSource": { 
-      "description": "A copy activity Azure PostgreSQL source.", 
-      "type": "object", 
-      "allOf": [ 
-        { 
-          "$ref": "#/definitions/CopySource" 
-        } 
-      ], 
+      ],
       "properties": {
-        "query": { 
-          "type": "object", 
-          "description": "A query to retrieve data from source. Type: string (or Expression with resultType string)." 
+        "query": {
+          "type": "object",
+          "description": "A query to retrieve data from source. Type: string (or Expression with resultType string)."
         }
-      } 
-    }, 
-    "ConcurSource": { 
-      "description": "A copy activity Concur Serivce source.", 
-      "type": "object", 
-      "allOf": [ 
-        { 
-          "$ref": "#/definitions/CopySource" 
-        } 
-      ], 
+      }
+    },
+    "AzurePostgreSqlSource": {
+      "description": "A copy activity Azure PostgreSQL source.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CopySource"
+        }
+      ],
       "properties": {
-        "query": { 
-          "type": "object", 
-          "description": "A query to retrieve data from source. Type: string (or Expression with resultType string)." 
+        "query": {
+          "type": "object",
+          "description": "A query to retrieve data from source. Type: string (or Expression with resultType string)."
         }
-      } 
-    }, 
-    "CouchbaseSource": { 
-      "description": "A copy activity Couchbase server source.", 
-      "type": "object", 
-      "allOf": [ 
-        { 
-          "$ref": "#/definitions/CopySource" 
-        } 
-      ], 
+      }
+    },
+    "ConcurSource": {
+      "description": "A copy activity Concur Service source.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CopySource"
+        }
+      ],
       "properties": {
-        "query": { 
-          "type": "object", 
-          "description": "A query to retrieve data from source. Type: string (or Expression with resultType string)." 
+        "query": {
+          "type": "object",
+          "description": "A query to retrieve data from source. Type: string (or Expression with resultType string)."
         }
-      } 
-    }, 
-    "DrillSource": { 
-      "description": "A copy activity Drill server source.", 
-      "type": "object", 
-      "allOf": [ 
-        { 
-          "$ref": "#/definitions/CopySource" 
-        } 
-      ], 
+      }
+    },
+    "CouchbaseSource": {
+      "description": "A copy activity Couchbase server source.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CopySource"
+        }
+      ],
       "properties": {
-        "query": { 
-          "type": "object", 
-          "description": "A query to retrieve data from source. Type: string (or Expression with resultType string)." 
+        "query": {
+          "type": "object",
+          "description": "A query to retrieve data from source. Type: string (or Expression with resultType string)."
         }
-      } 
-    }, 
-    "EloquaSource": { 
-      "description": "A copy activity Eloqua server source.", 
-      "type": "object", 
-      "allOf": [ 
-        { 
-          "$ref": "#/definitions/CopySource" 
-        } 
-      ], 
+      }
+    },
+    "DrillSource": {
+      "description": "A copy activity Drill server source.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CopySource"
+        }
+      ],
       "properties": {
-        "query": { 
-          "type": "object", 
-          "description": "A query to retrieve data from source. Type: string (or Expression with resultType string)." 
+        "query": {
+          "type": "object",
+          "description": "A query to retrieve data from source. Type: string (or Expression with resultType string)."
         }
-      } 
-    }, 
-    "GoogleBigQuerySource": { 
-      "description": "A copy activity Google BigQuery service source.", 
-      "type": "object", 
-      "allOf": [ 
-        { 
-          "$ref": "#/definitions/CopySource" 
-        } 
-      ], 
+      }
+    },
+    "EloquaSource": {
+      "description": "A copy activity Eloqua server source.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CopySource"
+        }
+      ],
       "properties": {
-        "query": { 
-          "type": "object", 
-          "description": "A query to retrieve data from source. Type: string (or Expression with resultType string)." 
+        "query": {
+          "type": "object",
+          "description": "A query to retrieve data from source. Type: string (or Expression with resultType string)."
         }
-      } 
-    }, 
-    "GreenplumSource": { 
-      "description": "A copy activity Greenplum Database source.", 
-      "type": "object", 
-      "allOf": [ 
-        { 
-          "$ref": "#/definitions/CopySource" 
-        } 
-      ], 
+      }
+    },
+    "GoogleBigQuerySource": {
+      "description": "A copy activity Google BigQuery service source.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CopySource"
+        }
+      ],
       "properties": {
-        "query": { 
-          "type": "object", 
-          "description": "A query to retrieve data from source. Type: string (or Expression with resultType string)." 
+        "query": {
+          "type": "object",
+          "description": "A query to retrieve data from source. Type: string (or Expression with resultType string)."
         }
-      } 
-    }, 
-    "HBaseSource": { 
-      "description": "A copy activity HBase server source.", 
-      "type": "object", 
-      "allOf": [ 
-        { 
-          "$ref": "#/definitions/CopySource" 
-        } 
-      ], 
+      }
+    },
+    "GreenplumSource": {
+      "description": "A copy activity Greenplum Database source.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CopySource"
+        }
+      ],
       "properties": {
-        "query": { 
-          "type": "object", 
-          "description": "A query to retrieve data from source. Type: string (or Expression with resultType string)." 
+        "query": {
+          "type": "object",
+          "description": "A query to retrieve data from source. Type: string (or Expression with resultType string)."
         }
-      } 
-    }, 
-    "HiveSource": { 
-      "description": "A copy activity Hive Server source.", 
-      "type": "object", 
-      "allOf": [ 
-        { 
-          "$ref": "#/definitions/CopySource" 
-        } 
-      ], 
+      }
+    },
+    "HBaseSource": {
+      "description": "A copy activity HBase server source.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CopySource"
+        }
+      ],
       "properties": {
-        "query": { 
-          "type": "object", 
-          "description": "A query to retrieve data from source. Type: string (or Expression with resultType string)." 
+        "query": {
+          "type": "object",
+          "description": "A query to retrieve data from source. Type: string (or Expression with resultType string)."
         }
-      } 
-    }, 
-    "HubspotSource": { 
-      "description": "A copy activity Hubspot Serivce source.", 
-      "type": "object", 
-      "allOf": [ 
-        { 
-          "$ref": "#/definitions/CopySource" 
-        } 
-      ], 
+      }
+    },
+    "HiveSource": {
+      "description": "A copy activity Hive Server source.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CopySource"
+        }
+      ],
       "properties": {
-        "query": { 
-          "type": "object", 
-          "description": "A query to retrieve data from source. Type: string (or Expression with resultType string)." 
+        "query": {
+          "type": "object",
+          "description": "A query to retrieve data from source. Type: string (or Expression with resultType string)."
         }
-      } 
-    }, 
-    "ImpalaSource": { 
-      "description": "A copy activity Impala server source.", 
-      "type": "object", 
-      "allOf": [ 
-        { 
-          "$ref": "#/definitions/CopySource" 
-        } 
-      ], 
+      }
+    },
+    "HubspotSource": {
+      "description": "A copy activity Hubspot Service source.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CopySource"
+        }
+      ],
       "properties": {
-        "query": { 
-          "type": "object", 
-          "description": "A query to retrieve data from source. Type: string (or Expression with resultType string)." 
+        "query": {
+          "type": "object",
+          "description": "A query to retrieve data from source. Type: string (or Expression with resultType string)."
         }
-      } 
-    }, 
-    "JiraSource": { 
-      "description": "A copy activity Jira Serivce source.", 
-      "type": "object", 
-      "allOf": [ 
-        { 
-          "$ref": "#/definitions/CopySource" 
-        } 
-      ], 
+      }
+    },
+    "ImpalaSource": {
+      "description": "A copy activity Impala server source.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CopySource"
+        }
+      ],
       "properties": {
-        "query": { 
-          "type": "object", 
-          "description": "A query to retrieve data from source. Type: string (or Expression with resultType string)." 
+        "query": {
+          "type": "object",
+          "description": "A query to retrieve data from source. Type: string (or Expression with resultType string)."
         }
-      } 
-    }, 
-    "MagentoSource": { 
-      "description": "A copy activity Magento server source.", 
-      "type": "object", 
-      "allOf": [ 
-        { 
-          "$ref": "#/definitions/CopySource" 
-        } 
-      ], 
+      }
+    },
+    "JiraSource": {
+      "description": "A copy activity Jira Service source.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CopySource"
+        }
+      ],
       "properties": {
-        "query": { 
-          "type": "object", 
-          "description": "A query to retrieve data from source. Type: string (or Expression with resultType string)." 
+        "query": {
+          "type": "object",
+          "description": "A query to retrieve data from source. Type: string (or Expression with resultType string)."
         }
-      } 
-    }, 
-    "MariaDBSource": { 
-      "description": "A copy activity MariaDB server source.", 
-      "type": "object", 
-      "allOf": [ 
-        { 
-          "$ref": "#/definitions/CopySource" 
-        } 
-      ], 
+      }
+    },
+    "MagentoSource": {
+      "description": "A copy activity Magento server source.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CopySource"
+        }
+      ],
       "properties": {
-        "query": { 
-          "type": "object", 
-          "description": "A query to retrieve data from source. Type: string (or Expression with resultType string)." 
+        "query": {
+          "type": "object",
+          "description": "A query to retrieve data from source. Type: string (or Expression with resultType string)."
         }
-      } 
-    }, 
-    "MarketoSource": { 
-      "description": "A copy activity Marketo server source.", 
-      "type": "object", 
-      "allOf": [ 
-        { 
-          "$ref": "#/definitions/CopySource" 
-        } 
-      ], 
+      }
+    },
+    "MariaDBSource": {
+      "description": "A copy activity MariaDB server source.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CopySource"
+        }
+      ],
       "properties": {
-        "query": { 
-          "type": "object", 
-          "description": "A query to retrieve data from source. Type: string (or Expression with resultType string)." 
+        "query": {
+          "type": "object",
+          "description": "A query to retrieve data from source. Type: string (or Expression with resultType string)."
         }
-      } 
-    }, 
-    "PaypalSource": { 
-      "description": "A copy activity Paypal Serivce source.", 
-      "type": "object", 
-      "allOf": [ 
-        { 
-          "$ref": "#/definitions/CopySource" 
-        } 
-      ], 
+      }
+    },
+    "MarketoSource": {
+      "description": "A copy activity Marketo server source.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CopySource"
+        }
+      ],
       "properties": {
-        "query": { 
-          "type": "object", 
-          "description": "A query to retrieve data from source. Type: string (or Expression with resultType string)." 
+        "query": {
+          "type": "object",
+          "description": "A query to retrieve data from source. Type: string (or Expression with resultType string)."
         }
-      } 
-    }, 
-    "PhoenixSource": { 
-      "description": "A copy activity Phoenix server source.", 
-      "type": "object", 
-      "allOf": [ 
-        { 
-          "$ref": "#/definitions/CopySource" 
-        } 
-      ], 
+      }
+    },
+    "PaypalSource": {
+      "description": "A copy activity Paypal Service source.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CopySource"
+        }
+      ],
       "properties": {
-        "query": { 
-          "type": "object", 
-          "description": "A query to retrieve data from source. Type: string (or Expression with resultType string)." 
+        "query": {
+          "type": "object",
+          "description": "A query to retrieve data from source. Type: string (or Expression with resultType string)."
         }
-      } 
-    }, 
-    "PrestoSource": { 
-      "description": "A copy activity Presto server source.", 
-      "type": "object", 
-      "allOf": [ 
-        { 
-          "$ref": "#/definitions/CopySource" 
-        } 
-      ], 
+      }
+    },
+    "PhoenixSource": {
+      "description": "A copy activity Phoenix server source.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CopySource"
+        }
+      ],
       "properties": {
-        "query": { 
-          "type": "object", 
-          "description": "A query to retrieve data from source. Type: string (or Expression with resultType string)." 
+        "query": {
+          "type": "object",
+          "description": "A query to retrieve data from source. Type: string (or Expression with resultType string)."
         }
-      } 
-    }, 
-    "QuickBooksSource": { 
-      "description": "A copy activity QuickBooks server source.", 
-      "type": "object", 
-      "allOf": [ 
-        { 
-          "$ref": "#/definitions/CopySource" 
-        } 
-      ], 
+      }
+    },
+    "PrestoSource": {
+      "description": "A copy activity Presto server source.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CopySource"
+        }
+      ],
       "properties": {
-        "query": { 
-          "type": "object", 
-          "description": "A query to retrieve data from source. Type: string (or Expression with resultType string)." 
+        "query": {
+          "type": "object",
+          "description": "A query to retrieve data from source. Type: string (or Expression with resultType string)."
         }
-      } 
-    }, 
-    "ServiceNowSource": { 
-      "description": "A copy activity ServiceNow server source.", 
-      "type": "object", 
-      "allOf": [ 
-        { 
-          "$ref": "#/definitions/CopySource" 
-        } 
-      ], 
+      }
+    },
+    "QuickBooksSource": {
+      "description": "A copy activity QuickBooks server source.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CopySource"
+        }
+      ],
       "properties": {
-        "query": { 
-          "type": "object", 
-          "description": "A query to retrieve data from source. Type: string (or Expression with resultType string)." 
+        "query": {
+          "type": "object",
+          "description": "A query to retrieve data from source. Type: string (or Expression with resultType string)."
         }
-      } 
-    }, 
-    "ShopifySource": { 
-      "description": "A copy activity Shopify Serivce source.", 
-      "type": "object", 
-      "allOf": [ 
-        { 
-          "$ref": "#/definitions/CopySource" 
-        } 
-      ], 
+      }
+    },
+    "ServiceNowSource": {
+      "description": "A copy activity ServiceNow server source.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CopySource"
+        }
+      ],
       "properties": {
-        "query": { 
-          "type": "object", 
-          "description": "A query to retrieve data from source. Type: string (or Expression with resultType string)." 
+        "query": {
+          "type": "object",
+          "description": "A query to retrieve data from source. Type: string (or Expression with resultType string)."
         }
-      } 
-    }, 
-    "SparkSource": { 
-      "description": "A copy activity Spark Server source.", 
-      "type": "object", 
-      "allOf": [ 
-        { 
-          "$ref": "#/definitions/CopySource" 
-        } 
-      ], 
+      }
+    },
+    "ShopifySource": {
+      "description": "A copy activity Shopify Service source.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CopySource"
+        }
+      ],
       "properties": {
-        "query": { 
-          "type": "object", 
-          "description": "A query to retrieve data from source. Type: string (or Expression with resultType string)." 
+        "query": {
+          "type": "object",
+          "description": "A query to retrieve data from source. Type: string (or Expression with resultType string)."
         }
-      } 
-    }, 
-    "SquareSource": { 
-      "description": "A copy activity Square Serivce source.", 
-      "type": "object", 
-      "allOf": [ 
-        { 
-          "$ref": "#/definitions/CopySource" 
-        } 
-      ], 
+      }
+    },
+    "SparkSource": {
+      "description": "A copy activity Spark Server source.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CopySource"
+        }
+      ],
       "properties": {
-        "query": { 
-          "type": "object", 
-          "description": "A query to retrieve data from source. Type: string (or Expression with resultType string)." 
+        "query": {
+          "type": "object",
+          "description": "A query to retrieve data from source. Type: string (or Expression with resultType string)."
         }
-      } 
-    }, 
-    "XeroSource": { 
-      "description": "A copy activity Xero Serivce source.", 
-      "type": "object", 
-      "allOf": [ 
-        { 
-          "$ref": "#/definitions/CopySource" 
-        } 
-      ], 
+      }
+    },
+    "SquareSource": {
+      "description": "A copy activity Square Service source.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CopySource"
+        }
+      ],
       "properties": {
-        "query": { 
-          "type": "object", 
-          "description": "A query to retrieve data from source. Type: string (or Expression with resultType string)." 
+        "query": {
+          "type": "object",
+          "description": "A query to retrieve data from source. Type: string (or Expression with resultType string)."
         }
-      } 
-    }, 
-    "ZohoSource": { 
-      "description": "A copy activity Zoho server source.", 
-      "type": "object", 
-      "allOf": [ 
-        { 
-          "$ref": "#/definitions/CopySource" 
-        } 
-      ], 
+      }
+    },
+    "XeroSource": {
+      "description": "A copy activity Xero Service source.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CopySource"
+        }
+      ],
       "properties": {
-        "query": { 
-          "type": "object", 
-          "description": "A query to retrieve data from source. Type: string (or Expression with resultType string)." 
+        "query": {
+          "type": "object",
+          "description": "A query to retrieve data from source. Type: string (or Expression with resultType string)."
         }
-      } 
+      }
+    },
+    "ZohoSource": {
+      "description": "A copy activity Zoho server source.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CopySource"
+        }
+      ],
+      "properties": {
+        "query": {
+          "type": "object",
+          "description": "A query to retrieve data from source. Type: string (or Expression with resultType string)."
+        }
+      }
+    },
+    "NetezzaSource": {
+      "description": "A copy activity Netezza source.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CopySource"
+        }
+      ],
+      "properties": {
+        "query": {
+          "type": "object",
+          "description": "A query to retrieve data from source. Type: string (or Expression with resultType string)."
+        }
+      }
+    },
+    "VerticaSource": {
+      "description": "A copy activity Vertica source.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CopySource"
+        }
+      ],
+      "properties": {
+        "query": {
+          "type": "object",
+          "description": "A query to retrieve data from source. Type: string (or Expression with resultType string)."
+        }
+      }
+    },
+    "SalesforceMarketingCloudSource": {
+      "description": "A copy activity Salesforce Marketing Cloud source.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CopySource"
+        }
+      ],
+      "properties": {
+        "query": {
+          "type": "object",
+          "description": "A query to retrieve data from source. Type: string (or Expression with resultType string)."
+        }
+      }
+    },
+    "ResponsysSource": {
+      "description": "A copy activity Responsys source.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CopySource"
+        }
+      ],
+      "properties": {
+        "query": {
+          "type": "object",
+          "description": "A query to retrieve data from source. Type: string (or Expression with resultType string)."
+        }
+      }
     },
     "AmazonRedshiftSource": {
       "description": "A copy activity source for Amazon Redshift Source.",
@@ -1062,10 +1148,11 @@
     },
     "StoredProcedureParameterType": {
       "description": "Stored procedure parameter type.",
-      "type": "string",
+      "type": "object",
       "enum": [
         "String",
         "Int",
+        "Int64",
         "Decimal",
         "Guid",
         "Boolean",
@@ -1120,7 +1207,7 @@
       "properties": {
         "writeBehavior": {
           "description": "The write behavior for the operation. Default is 'Insert'.",
-          "type": "string",
+          "type": "object",
           "enum": [
             "Insert",
             "Update"
@@ -1144,7 +1231,7 @@
     },
     "CopyBehaviorType": {
       "description": "All available types of copy behavior.",
-      "type": "string",
+      "type": "object",
       "enum": [
         "PreserveHierarchy",
         "FlattenHierarchy",
@@ -1205,7 +1292,7 @@
         },
         "copyBehavior": {
           "description": "The type of copy behavior for copy sink.",
-          "$ref": "#/definitions/CopyBehaviorType"
+          "type": "object"
         }
       }
     },
@@ -1220,7 +1307,7 @@
       "properties": {
         "copyBehavior": {
           "description": "The type of copy behavior for copy sink.",
-          "$ref": "#/definitions/CopyBehaviorType"
+          "type": "object"
         }
       }
     },
@@ -1319,7 +1406,7 @@
     },
     "PolybaseSettingsRejectType": {
       "description": "Indicates whether the RejectValue property is specified as a literal value or a percentage.",
-      "type": "string",
+      "type": "object",
       "enum": [
         "value",
         "percentage"
@@ -1399,7 +1486,7 @@
       "properties": {
         "copyBehavior": {
           "description": "The type of copy behavior for copy sink.",
-          "$ref": "#/definitions/CopyBehaviorType"
+          "type": "object"
         }
       }
     },
@@ -1414,7 +1501,7 @@
       "properties": {
         "writeBehavior": {
           "description": "Specify the write behavior when upserting documents into Azure Search Index.",
-          "type": "string",
+          "type": "object",
           "enum": [
             "Merge",
             "Upload"
@@ -1452,7 +1539,7 @@
       "properties": {
         "writeBehavior": {
           "description": "The write behavior for the operation.",
-          "type": "string",
+          "type": "object",
           "enum": [
             "Upsert"
           ],
@@ -1481,7 +1568,7 @@
       "properties": {
         "writeBehavior": {
           "description": "The write behavior for the operation. Default is Insert.",
-          "type": "string",
+          "type": "object",
           "enum": [
             "Insert",
             "Upsert"
@@ -1507,7 +1594,7 @@
       "type": "object",
       "properties": {
         "type": {
-          "type": "string",
+          "type": "object",
           "description": "Copy translator type."
         }
       },
@@ -1529,7 +1616,11 @@
       "properties": {
         "columnMappings": {
           "type": "object",
-          "description": "Column mappings. Type: string (or Expression with resultType string)."
+          "description": "Column mappings. Example: \"UserId: MyUserId, Group: MyGroup, Name: MyName\" Type: string (or Expression with resultType string)."
+        },
+        "schemaMapping": {
+          "type": "object",
+          "description": "The schema mapping to map between tabular data and hierarchical data. Example: {\"Column1\": \"$.Column1\", \"Column2\": \"$.Column2.Property1\", \"Column3\": \"$.Column2.Property2\"}. Type: object (or Expression with resultType object)."
         }
       }
     },
@@ -1932,28 +2023,63 @@
           "$ref": "#/definitions/SSISPackageLocation"
         },
         "runtime": {
-          "description": "Specifies the runtime to execute SSIS package.",
-          "type": "string",
-          "enum": [
-            "x64",
-            "x86"
-          ],
-          "x-ms-enum": {
-            "name": "SSISExecutionRuntime",
-            "modelAsString": true
-          }
+          "description": "Specifies the runtime to execute SSIS package. The value should be \"x86\" or \"x64\". Type: string (or Expression with resultType string).",
+          "type": "object"
         },
         "loggingLevel": {
-          "description": "The logging level of SSIS package execution.",
-          "type": "string"
+          "description": "The logging level of SSIS package execution. Type: string (or Expression with resultType string).",
+          "type": "object"
         },
         "environmentPath": {
-          "description": "The environment path to execution the SSIS package.",
-          "type": "string"
+          "description": "The environment path to execute the SSIS package. Type: string (or Expression with resultType string).",
+          "type": "object"
+        },
+        "executionCredential": {
+          "description": "The package execution credential.",
+          "$ref": "#/definitions/SSISExecutionCredential"
         },
         "connectVia": {
           "description": "The integration runtime reference.",
           "$ref": "../datafactory.json#/definitions/IntegrationRuntimeReference"
+        },
+        "projectParameters": {
+          "description": "The project level parameters to execute the SSIS package.",
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/SSISExecutionParameter"
+          }
+        },
+        "packageParameters": {
+          "description": "The package level parameters to execute the SSIS package.",
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/SSISExecutionParameter"
+          }
+        },
+        "projectConnectionManagers": {
+          "description": "The project level connection managers to execute the SSIS package.",
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/SSISConnectionManager"
+          }
+        },
+        "packageConnectionManagers": {
+          "description": "The package level connection managers to execute the SSIS package.",
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/SSISConnectionManager"
+          }
+        },
+        "propertyOverrides": {
+          "description": "The property overrides to execute the SSIS package.",
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/SSISPropertyOverride"
+          }
+        },
+        "logLocation": {
+          "description": "SSIS package execution log location.",
+          "$ref": "#/definitions/SSISLogLocation"
         }
       },
       "required": [
@@ -1963,16 +2089,179 @@
     },
     "SSISPackageLocation": {
       "description": "SSIS package location.",
-      "type" : "object",
+      "type": "object",
       "properties": {
         "packagePath": {
-          "description": "The SSIS package path.",
-          "type": "string"
+          "description": "The SSIS package path. Type: string (or Expression with resultType string).",
+          "type": "object"
+        },
+        "type": {
+          "description": "The type of SSIS package location.",
+          "type": "string",
+          "enum": [
+            "SSISDB",
+            "File"
+          ],
+          "x-ms-enum": {
+            "name": "SsisPackageLocationType",
+            "modelAsString": true
+          }
+        },
+        "typeProperties": {
+          "x-ms-client-flatten": true,
+          "description": "SSIS package location properties.",
+          "$ref": "#/definitions/SSISPackageLocationTypeProperties"
         }
       },
       "required": [
         "packagePath"
       ]
+    },
+    "SSISPackageLocationTypeProperties": {
+      "description": "SSIS package location properties.",
+      "type": "object",
+      "properties": {
+        "packagePassword": {
+          "$ref": "../datafactory.json#/definitions/SecretBase",
+          "description": "Password of the package."
+        },
+        "accessCredential": {
+          "description": "The package access credential.",
+          "$ref": "#/definitions/SSISAccessCredential"
+        },
+        "configurationPath": {
+          "description": "The configuration file of the package execution. Type: string (or Expression with resultType string).",
+          "type": "object"
+        }
+      }
+    },
+    "SSISConnectionManager": {
+      "description": "SSIS Connection Manager.",
+      "type": "object",
+      "additionalProperties": {
+        "$ref": "#/definitions/SSISExecutionParameter"
+      }
+    },
+    "SSISExecutionParameter": {
+      "description": "SSIS execution parameter.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "object",
+          "description": "SSIS package execution parameter value. Type: string (or Expression with resultType string)."
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "SSISPropertyOverride": {
+      "description": "SSIS property override.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "object",
+          "description": "SSIS package property override value. Type: string (or Expression with resultType string)."
+        },
+        "isSensitive": {
+          "type": "boolean",
+          "description": "Whether SSIS package property override value is sensitive data. Value will be encrypted in SSISDB if it is true"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "SSISExecutionCredential": {
+      "description": "SSIS package execution credential.",
+      "type": "object",
+      "properties": {
+        "domain": {
+          "type": "object",
+          "description": "Domain for windows authentication."
+        },
+        "userName": {
+          "type": "object",
+          "description": "UseName for windows authentication."
+        },
+        "password": {
+          "$ref": "../datafactory.json#/definitions/SecureString",
+          "description": "Password for windows authentication."
+        }
+      },
+      "required": [
+        "domain",
+        "userName",
+        "password"
+      ]
+    },
+    "SSISAccessCredential": {
+      "description": "SSIS access credential.",
+      "type": "object",
+      "properties": {
+        "domain": {
+          "type": "object",
+          "description": "Domain for windows authentication."
+        },
+        "userName": {
+          "type": "object",
+          "description": "UseName for windows authentication."
+        },
+        "password": {
+          "$ref": "../datafactory.json#/definitions/SecretBase",
+          "description": "Password for windows authentication."
+        }
+      },
+      "required": [
+        "domain",
+        "userName",
+        "password"
+      ]
+    },
+    "SSISLogLocation": {
+      "description": "SSIS package execution log location",
+      "type": "object",
+      "properties": {
+        "logPath": {
+          "description": "The SSIS package execution log path. Type: string (or Expression with resultType string).",
+          "type": "object"
+        },
+        "type": {
+          "description": "The type of SSIS log location.",
+          "type": "string",
+          "enum": [
+            "File"
+          ],
+          "x-ms-enum": {
+            "name": "SsisLogLocationType",
+            "modelAsString": true
+          }
+        },
+        "typeProperties": {
+          "x-ms-client-flatten": true,
+          "description": "SSIS package execution log location properties.",
+          "$ref": "#/definitions/SSISLogLocationTypeProperties"
+        }
+      },
+      "required": [
+        "logPath",
+        "type",
+        "typeProperties"
+      ]
+    },
+    "SSISLogLocationTypeProperties": {
+      "description": "SSIS package execution log location properties.",
+      "type": "object",
+      "properties": {
+        "accessCredential": {
+          "description": "The package execution log access credential.",
+          "$ref": "#/definitions/SSISAccessCredential"
+        },
+        "logRefreshInterval": {
+          "type": "object",
+          "description": "Specifies the interval to refresh log. The default interval is 5 minutes. Type: string (or Expression with resultType string), pattern: ((\\d+)\\.)?(\\d\\d):(60|([0-5][0-9])):(60|([0-5][0-9]))."
+        }
+      }
     },
     "CustomActivity": {
       "description": "Custom activity type.",
@@ -2168,7 +2457,8 @@
       "enum": [
         "GET",
         "POST",
-        "PUT"
+        "PUT",
+        "DELETE"
       ],
       "x-ms-enum": {
         "name": "WebActivityMethod",
@@ -2198,7 +2488,7 @@
       "description": "Web activity authentication properties.",
       "properties": {
         "type": {
-          "description": "Web activity authentication (Basic/ClientCertificate)",
+          "description": "Web activity authentication (Basic/ClientCertificate/MSI)",
           "type": "string"
         },
         "pfx": {
@@ -2212,6 +2502,10 @@
         "password": {
           "description": "Password for the PFX file or basic authentication.",
           "$ref": "../datafactory.json#/definitions/SecureString"
+        },
+        "resource": {
+          "description": "Resource for which Azure Auth token will be requested when using MSI Authentication.",
+          "type": "string"
         }
       },
       "required": [
@@ -2368,8 +2662,13 @@
       "description": "ForEach activity properties.",
       "properties": {
         "isSequential": {
-          "description": "Should the loop be executed in sequence or in parallel (max 20)",
+          "description": "Should the loop be executed in sequence or in parallel (max 50)",
           "type": "boolean"
+        },
+        "batchCount": {
+          "description": "Batch count to be used for controlling the number of parallel execution (when isSequential is set to false).",
+          "type": "integer",
+          "maximum": 50
         },
         "items": {
           "description": "Collection to iterate.",
@@ -2625,6 +2924,81 @@
       "required": [
         "expression",
         "activities"
+      ]
+    },
+    "FilterActivity": {
+      "x-ms-discriminator-value": "Filter",
+      "description": "Filter and return results from input array based on the conditions.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ControlActivity"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "Filter activity properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/FilterActivityTypeProperties"
+        }
+      },
+      "required": [
+        "typeProperties"
+      ]
+    },
+    "FilterActivityTypeProperties": {
+      "description": "Filter activity properties.",
+      "properties": {
+        "items": {
+          "description": "Input array on which filter should be applied.",
+          "$ref": "../datafactory.json#/definitions/Expression"
+        },
+        "condition": {
+          "description": "Condition to be used for filtering the input.",
+          "$ref": "../datafactory.json#/definitions/Expression"
+        }
+      },
+      "required": [
+        "condition",
+        "items"
+      ]
+    },
+    "DatabricksNotebookActivity": {
+      "description": "DatabricksNotebook activity.",
+      "x-ms-discriminator-value": "DatabricksNotebook",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ExecutionActivity"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "x-ms-client-flatten": true,
+          "description": "Databricks Notebook activity properties.",
+          "$ref": "#/definitions/DatabricksNotebookActivityTypeProperties"
+        }
+      },
+      "required": [
+        "typeProperties"
+      ]
+    },
+    "DatabricksNotebookActivityTypeProperties": {
+      "description": "Databricks Notebook activity properties.",
+      "properties": {
+        "notebookPath": {
+          "type": "object",
+          "description": "The absolute path of the notebook to be run in the Databricks Workspace. This path must begin with a slash. Type: string (or Expression with resultType string)."
+        },
+        "baseParameters": {
+          "description": "Base parameters to be used for each run of this job.If the notebook takes a parameter that is not specified, the default value from the notebook will be used.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "object",
+            "description": "Type: string (or Expression with resultType string)."
+          }
+        }
+      },
+      "required": [
+        "notebookPath"
       ]
     }
   }

@@ -6,7 +6,10 @@
     "contact": {
       "name": "Mohamed Enein"
     },
-    "version": "2017-05-15-preview"
+    "version": "2017-05-15-preview",
+    "x-ms-code-generation-settings": {
+      "useDateTimeOffset": true
+    }
   },
   "consumes": [
     "application/json"
@@ -55,13 +58,13 @@
         "operationId": "SoftwareUpdateConfigurationMachineRuns_GetById",
         "parameters": [
           {
-            "$ref": "../../stable/2015-10-31/definitions.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../stable/2015-10-31/definitions.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "./definitions.json#/parameters/automationAccountName"
+            "$ref": "../../common/v1/definitions.json#/parameters/AutomationAccountNameParameter"
           },
           {
             "name": "softwareUpdateConfigurationMachineRunId",
@@ -72,21 +75,24 @@
             "format": "uuid"
           },
           {
-            "$ref": "../../stable/2015-10-31/definitions.json#/parameters/ApiVersionParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "./definitions.json#/parameters/clientRequestId"
+            "$ref": "../../common/v1/definitions.json#/parameters/clientRequestId"
           }
         ],
         "responses": {
           "200": {
             "description": "A single software update configuration machine run.",
             "schema": {
-              "$ref": "./definitions.json#/definitions/softwareUpdateConfigurationMachineRun"
+              "$ref": "#/definitions/softwareUpdateConfigurationMachineRun"
             }
           },
-          "404": {
-            "description": "Resource group, account, or software update configuration machine run doesn't exist."
+          "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../common/v1/definitions.json#/definitions/ErrorResponse"
+            }
           }
         }
       }
@@ -111,19 +117,19 @@
         "operationId": "SoftwareUpdateConfigurationMachineRuns_List",
         "parameters": [
           {
-            "$ref": "../../stable/2015-10-31/definitions.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../stable/2015-10-31/definitions.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "./definitions.json#/parameters/automationAccountName"
+            "$ref": "../../common/v1/definitions.json#/parameters/AutomationAccountNameParameter"
           },
           {
-            "$ref": "../../stable/2015-10-31/definitions.json#/parameters/ApiVersionParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "./definitions.json#/parameters/clientRequestId"
+            "$ref": "../../common/v1/definitions.json#/parameters/clientRequestId"
           },
           {
             "name": "$filter",
@@ -151,12 +157,169 @@
           "200": {
             "description": "Return list of software update configuration machine runs.",
             "schema": {
-              "$ref": "./definitions.json#/definitions/softwareUpdateConfigurationMachineRunListResult"
+              "$ref": "#/definitions/softwareUpdateConfigurationMachineRunListResult"
             }
           },
-          "404": {
-            "description": "Resource group, or account doesn't exist."
+          "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../common/v1/definitions.json#/definitions/ErrorResponse"
+            }
           }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "softwareUpdateConfigurationMachineRun": {
+      "description": "Software update configuration machine run model.",
+      "x-ms-azure-resource": false,
+      "type": "object",
+      "properties": {
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Name of the software update configuration machine run"
+        },
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource Id of the software update configuration machine run"
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "Software update configuration machine run properties.",
+          "$ref": "#/definitions/updateConfigurationMachineRunProperties"
+        }
+      }
+    },
+    "softwareUpdateConfigurationMachineRunListResult": {
+      "description": "result of listing all software update configuration machine runs",
+      "properties": {
+        "value": {
+          "description": "outer object returned when listing all software update configuration machine runs",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/softwareUpdateConfigurationMachineRun"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "link to next page of results."
+        }
+      }
+    },
+    "updateConfigurationMachineRunProperties": {
+      "description": "Software update configuration machine run properties.",
+      "properties": {
+        "targetComputer": {
+          "type": "string",
+          "description": "name of the updated computer",
+          "readOnly": true
+        },
+        "targetComputerType": {
+          "type": "string",
+          "description": "type of the updated computer.",
+          "readOnly": true
+        },
+        "softwareUpdateConfiguration": {
+          "description": "software update configuration triggered this run",
+          "$ref": "#/definitions/updateConfigurationNavigation"
+        },
+        "status": {
+          "type": "string",
+          "description": "Status of the software update configuration machine run.",
+          "readOnly": true
+        },
+        "osType": {
+          "type": "string",
+          "description": "Operating system target of the software update configuration triggered this run",
+          "readOnly": true
+        },
+        "correlationId": {
+          "type": "string",
+          "format": "uuid",
+          "description": "correlation id of the software update configuration machine run",
+          "readOnly": true
+        },
+        "sourceComputerId": {
+          "type": "string",
+          "format": "uuid",
+          "description": "source computer id of the software update configuration machine run",
+          "readOnly": true
+        },
+        "startTime": {
+          "type": "string",
+          "format": "date-time",
+          "x-nullable": false,
+          "description": "Start time of the software update configuration machine run.",
+          "readOnly": true
+        },
+        "endTime": {
+          "type": "string",
+          "format": "date-time",
+          "x-nullable": true,
+          "description": "End time of the software update configuration machine run.",
+          "readOnly": true
+        },
+        "configuredDuration": {
+          "type": "string",
+          "description": "configured duration for the software update configuration run.",
+          "readOnly": true
+        },
+        "job": {
+          "description": "Job associated with the software update configuration machine run",
+          "$ref": "#/definitions/jobNavigation"
+        },
+        "creationTime": {
+          "type": "string",
+          "description": "Creation time of the resource, which only appears in the response.",
+          "format": "date-time",
+          "x-nullable": false,
+          "readOnly": true
+        },
+        "createdBy": {
+          "type": "string",
+          "description": "createdBy property, which only appears in the response.",
+          "readOnly": true
+        },
+        "lastModifiedTime": {
+          "type": "string",
+          "description": "Last time resource was modified, which only appears in the response.",
+          "format": "date-time",
+          "x-nullable": false,
+          "readOnly": true
+        },
+        "lastModifiedBy": {
+          "type": "string",
+          "description": "lastModifiedBy property, which only appears in the response.",
+          "readOnly": true
+        },
+        "error": {
+          "description": "Details of provisioning error",
+          "$ref": "../../common/v1/definitions.json#/definitions/ErrorResponse"
+        }
+      }
+    },
+    "updateConfigurationNavigation": {
+      "description": "Software update configuration Run Navigation model.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Name of the software update configuration triggered the software update configuration run",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "jobNavigation": {
+      "description": "Software update configuration machine run job navigation properties.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "Id of the job associated with the software update configuration run",
+          "type": "string",
+          "readOnly": true
         }
       }
     }

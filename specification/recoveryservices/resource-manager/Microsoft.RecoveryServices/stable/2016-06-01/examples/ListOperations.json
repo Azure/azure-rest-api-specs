@@ -1,1339 +1,463 @@
 {
-    "parameters": {
-        "api-version": "2016-06-01"
-    },
-    "responses": {
-        "200": {
-            "body": {
-                "Value": [
-                    {
-                        "Name": "Microsoft.RecoveryServices/Vaults/usages/read",
-                        "Display": {
-                            "Provider": "Microsoft.RecoveryServices",
-                            "Resource": "VaultUsage",
-                            "Operation": "Recovery Services Vault usage details.",
-                            "Description": "Returnsusage details for a Recovery Services Vault."
-                        },
-                        "Origin": "user"
-                    },
-                    {
-                        "Name": "Microsoft.RecoveryServices/Vaults/backupUsageSummaries/read",
-                        "Display": {
-                            "Provider": "Microsoft.RecoveryServices",
-                            "Resource": "BackupUsages Summaries",
-                            "Operation": "Recovery Services Protected Items and ProtectedServers usage summaries details.",
-                            "Description": "Returns summaries for ProtectedItems and Protected Servers for a Recovery Services ."
-                        },
-                        "Origin": "user"
-                    },
-                    {
-                        "Name": "Microsoft.RecoveryServices/Vaults/storageConfig/read",
-                        "Display": {
-                            "Provider": "Microsoft.RecoveryServices",
-                            "Resource": "VaultStorage Config",
-                            "Operation": "Get Resource Storage Config",
-                            "Description": "ReturnsStorage Configuration for Recovery Services Vault."
-                        },
-                        "Origin": "user"
-                    },
-                    {
-                        "Name": "Microsoft.RecoveryServices/Vaults/storageConfig/write",
-                        "Display": {
-                            "Provider": "Microsoft.RecoveryServices",
-                            "Resource": "VaultStorage Config",
-                            "Operation": "Write Resource Storage Config",
-                            "Description": "UpdatesStorage Configuration for Recovery Services Vault."
-                        },
-                        "Origin": "user"
-                    },
-                    {
-                        "Name": "Microsoft.RecoveryServices/Vaults/backupconfig/vaultconfig/read",
-                        "Display": {
-                            "Provider": "Microsoft.RecoveryServices",
-                            "Resource": "VaultConfig",
-                            "Operation": "Get Resource Config",
-                            "Description": "Returns Configurationfor Recovery Services Vault."
-                        },
-                        "Origin": "user"
-                    },
-                    {
-                        "Name": "Microsoft.RecoveryServices/Vaults/backupconfig/vaultconfig/write",
-                        "Display": {
-                            "Provider": "Microsoft.RecoveryServices",
-                            "Resource": "VaultConfig",
-                            "Operation": "Update Resource Config",
-                            "Description": "Updates Configurationfor Recovery Services Vault."
-                        },
-                        "Origin": "user"
-                    },
-                    {
-                        "Name": "Microsoft.RecoveryServices/Vaults/tokenInfo/read",
-                        "Display": {
-                            "Provider": "Microsoft.RecoveryServices",
-                            "Resource": "TokenInfo",
-                            "Operation": "Get Vault Token Info",
-                            "Description": "Returns token informationfor Recovery Services Vault."
-                        },
-                        "Origin": "user"
-                    },
-                    {
-                        "Name": "Microsoft.RecoveryServices/Vaults/backupSecurityPIN/read",
-                        "Display": {
-                            "Provider": "Microsoft.RecoveryServices",
-                            "Resource": "SecurityPINInfo",
-                            "Operation": "GetSecurity PIN Info",
-                            "Description": "Returns Security PIN Information for RecoveryServices Vault."
-                        },
-                        "Origin": "user"
-                    },
-                    {
-                        "Name": "Microsoft.RecoveryServices/Vaults/backupManagementMetaData/read",
-                        "Display": {
-                            "Provider": "Microsoft.RecoveryServices",
-                            "Resource": "BackupManagement Metadata",
-                            "Operation": "Get Backup Management Metadata",
-                            "Description": "ReturnsBackup Management Metadata for Recovery Services Vault."
-                        },
-                        "Origin": "user"
-                    },
-                    {
-                        "Name": "Microsoft.RecoveryServices/Vaults/backupOperationResults/read",
-                        "Display": {
-                            "Provider": "Microsoft.RecoveryServices",
-                            "Resource": "BackupOperation Results",
-                            "Operation": "Get Backup Operation Result",
-                            "Description": "ReturnsBackup Operation Result for Recovery Services Vault."
-                        },
-                        "Origin": "user"
-                    },
-                    {
-                        "Name": "Microsoft.RecoveryServices/Vaults/backupOperations/read",
-                        "Display": {
-                            "Provider": "Microsoft.RecoveryServices",
-                            "Resource": "BackupOperation Status",
-                            "Operation": "Get Backup Operation Status",
-                            "Description": "ReturnsBackup Operation Status for Recovery Services Vault."
-                        },
-                        "Origin": "user"
-                    },
-                    {
-                        "Name": "Microsoft.RecoveryServices/Vaults/backupJobs/read",
-                        "Display": {
-                            "Provider": "Microsoft.RecoveryServices",
-                            "Resource": "BackupJobs",
-                            "Operation": "Get Jobs",
-                            "Description": "Returns all Job Objects"
-                        },
-                        "Origin": "user"
-                    },
-                    {
-                        "Name": "Microsoft.RecoveryServices/Vaults/backupJobs/cancel/action",
-                        "Display": {
-                            "Provider": "Microsoft.RecoveryServices",
-                            "Resource": "BackupJobs",
-                            "Operation": "Cancel Jobs",
-                            "Description": "Cancel the Job"
-                        },
-                        "Origin": "user"
-                    },
-                    {
-                        "Name": "Microsoft.RecoveryServices/Vaults/backupJobsExport/action",
-                        "Display": {
-                            "Provider": "Microsoft.RecoveryServices",
-                            "Resource": "ExportBackup Jobs",
-                            "Operation": "Export Jobs",
-                            "Description": "Export Jobs"
-                        },
-                        "Origin": "user"
-                    },
-                    {
-                        "Name": "Microsoft.RecoveryServices/Vaults/backupJobs/operationResults/read",
-                        "Display": {
-                            "Provider": "Microsoft.RecoveryServices",
-                            "Resource": "BackupJobs Operation Results",
-                            "Operation": "Get Job Operation Result",
-                            "Description": "Returnsthe Result of Job Operation."
-                        },
-                        "Origin": "user"
-                    },
-                    {
-                        "Name": "Microsoft.RecoveryServices/Vaults/backupJobsExport/operationResults/read",
-                        "Display": {
-                            "Provider": "Microsoft.RecoveryServices",
-                            "Resource": "ExportBackup Jobs Operation Results",
-                            "Operation": "Get Export Job Operation Result",
-                            "Description": "Returnsthe Result of Export Job Operation."
-                        },
-                        "Origin": "user"
-                    },
-                    {
-                        "Name": "Microsoft.RecoveryServices/Vaults/backupFabrics/protectionContainers/protectedItems/recoveryPoints/read",
-                        "Display": {
-                            "Provider": "Microsoft.RecoveryServices",
-                            "Resource": "RecoveryPoints",
-                            "Operation": "Get Recovery Points",
-                            "Description": "Get Recovery Pointsfor Protected Items."
-                        },
-                        "Origin": "user"
-                    },
-                    {
-                        "Name": "Microsoft.RecoveryServices/Vaults/backupFabrics/protectionContainers/protectedItems/recoveryPoints/restore/action",
-                        "Display": {
-                            "Provider": "Microsoft.RecoveryServices",
-                            "Resource": "RecoveryPoints",
-                            "Operation": "Restore Recovery Points",
-                            "Description": "Restore RecoveryPoints for Protected Items."
-                        },
-                        "Origin": "user"
-                    },
-                    {
-                        "Name": "Microsoft.RecoveryServices/Vaults/backupFabrics/protectionContainers/protectedItems/recoveryPoints/provisionInstantItemRecovery/action",
-                        "Display": {
-                            "Provider": "Microsoft.RecoveryServices",
-                            "Resource": "RecoveryPoints",
-                            "Operation": "Provision Instant Item Recovery for Protected Item",
-                            "Description": "ProvisionInstant Item Recovery for Protected Item"
-                        },
-                        "Origin": "user"
-                    },
-                    {
-                        "Name": "Microsoft.RecoveryServices/Vaults/backupFabrics/protectionContainers/protectedItems/recoveryPoints/revokeInstantItemRecovery/action",
-                        "Display": {
-                            "Provider": "Microsoft.RecoveryServices",
-                            "Resource": "RecoveryPoints",
-                            "Operation": "Revoke Instant Item Recovery for Protected Item",
-                            "Description": "RevokeInstant Item Recovery for Protected Item"
-                        },
-                        "Origin": "user"
-                    },
-                    {
-                        "Name": "Microsoft.RecoveryServices/Vaults/backupPolicies/read",
-                        "Display": {
-                            "Provider": "Microsoft.RecoveryServices",
-                            "Resource": "BackupPolicies",
-                            "Operation": "Get Protection Policy",
-                            "Description": "Returns all ProtectionPolicies"
-                        },
-                        "Origin": "user"
-                    },
-                    {
-                        "Name": "Microsoft.RecoveryServices/Vaults/backupPolicies/write",
-                        "Display": {
-                            "Provider": "Microsoft.RecoveryServices",
-                            "Resource": "BackupPolicies",
-                            "Operation": "Create Protection Policy",
-                            "Description": "Creates ProtectionPolicy"
-                        },
-                        "Origin": "user"
-                    },
-                    {
-                        "Name": "Microsoft.RecoveryServices/Vaults/backupPolicies/delete",
-                        "Display": {
-                            "Provider": "Microsoft.RecoveryServices",
-                            "Resource": "BackupPolicies",
-                            "Operation": "Delete Protection Policy",
-                            "Description": "Delete a ProtectionPolicy"
-                        },
-                        "Origin": "user"
-                    },
-                    {
-                        "Name": "Microsoft.RecoveryServices/Vaults/backupPolicies/operationResults/read",
-                        "Display": {
-                            "Provider": "Microsoft.RecoveryServices",
-                            "Resource": "BackupPolicy Operation Results",
-                            "Operation": "Get Policy Operation Results",
-                            "Description": "GetResults of Policy Operation."
-                        },
-                        "Origin": "user"
-                    },
-                    {
-                        "Name": "Microsoft.RecoveryServices/Vaults/backupPolicies/operationStatus/read",
-                        "Display": {
-                            "Provider": "Microsoft.RecoveryServices",
-                            "Resource": "BackupPolicy Operation Status",
-                            "Operation": "Get Policy Operation Status",
-                            "Description": "GetStatus of Policy Operation."
-                        },
-                        "Origin": "user"
-                    },
-                    {
-                        "Name": "Microsoft.RecoveryServices/Vaults/backupFabrics/protectionContainers/protectedItems/read",
-                        "Display": {
-                            "Provider": "Microsoft.RecoveryServices",
-                            "Resource": "ProtectedItems",
-                            "Operation": "Get Protected Item Details",
-                            "Description": "Returns objectdetails of the Protected Item"
-                        },
-                        "Origin": "user"
-                    },
-                    {
-                        "Name": "Microsoft.RecoveryServices/Vaults/backupProtectedItems/read",
-                        "Display": {
-                            "Provider": "Microsoft.RecoveryServices",
-                            "Resource": "ProtectedItems",
-                            "Operation": "Get All Protected Items",
-                            "Description": "Returns the listof all Protected Items."
-                        },
-                        "Origin": "user"
-                    },
-                    {
-                        "Name": "Microsoft.RecoveryServices/Vaults/backupFabrics/protectionContainers/protectedItems/write",
-                        "Display": {
-                            "Provider": "Microsoft.RecoveryServices",
-                            "Resource": "ProtectedItems",
-                            "Operation": "Create Backup Protected Item",
-                            "Description": "Create abackup Protected Item"
-                        },
-                        "Origin": "user"
-                    },
-                    {
-                        "Name": "Microsoft.RecoveryServices/Vaults/backupFabrics/protectionContainers/protectedItems/delete",
-                        "Display": {
-                            "Provider": "Microsoft.RecoveryServices",
-                            "Resource": "ProtectedItems",
-                            "Operation": "Delete Protected Items",
-                            "Description": "Deletes ProtectedItem"
-                        },
-                        "Origin": "user"
-                    },
-                    {
-                        "Name": "Microsoft.RecoveryServices/Vaults/backupFabrics/protectionContainers/protectedItems/operationResults/read",
-                        "Display": {
-                            "Provider": "Microsoft.RecoveryServices",
-                            "Resource": "ProtectedItem Operation Results",
-                            "Operation": "Get Protected Items Operation Results",
-                            "Description": "GetsResult of Operation Performed on Protected Items."
-                        },
-                        "Origin": "user"
-                    },
-                    {
-                        "Name": "Microsoft.RecoveryServices/Vaults/backupFabrics/protectionContainers/protectedItems/operationStatus/read",
-                        "Display": {
-                            "Provider": "Microsoft.RecoveryServices",
-                            "Resource": "ProtectedItem Operation Status",
-                            "Operation": "Get Protected Items operation status",
-                            "Description": "Returnsthe status of Operation performed on Protected Items."
-                        },
-                        "Origin": "user"
-                    },
-                    {
-                        "Name": "Microsoft.RecoveryServices/Vaults/backupFabrics/protectionContainers/protectedItems/backup/action",
-                        "Display": {
-                            "Provider": "Microsoft.RecoveryServices",
-                            "Resource": "ProtectedItems",
-                            "Operation": "Backup Protected Item",
-                            "Description": "Performs Backupfor Protected Item."
-                        },
-                        "Origin": "user"
-                    },
-                    {
-                        "Name": "Microsoft.RecoveryServices/Vaults/backupProtectableItems/read",
-                        "Display": {
-                            "Provider": "Microsoft.RecoveryServices",
-                            "Resource": "BackupProtectable Items",
-                            "Operation": "Get Protectable Items",
-                            "Description": "Returnslist of all Protectable Items."
-                        },
-                        "Origin": "user"
-                    },
-                    {
-                        "Name": "Microsoft.RecoveryServices/Vaults/refreshContainers/read",
-                        "Display": {
-                            "Provider": "Microsoft.RecoveryServices",
-                            "Resource": "RefreshContainers",
-                            "Operation": "Refresh container",
-                            "Description": "Refreshes the containerlist"
-                        },
-                        "Origin": "user"
-                    },
-                    {
-                        "Name": "Microsoft.RecoveryServices/Vaults/backupFabrics/operationResults/read",
-                        "Display": {
-                            "Provider": "Microsoft.RecoveryServices",
-                            "Resource": "RefreshContainers Operation Results",
-                            "Operation": "Get Operation Results",
-                            "Description": "Returnsstatus of the operation"
-                        },
-                        "Origin": "user"
-                    },
-                    {
-                        "Name": "Microsoft.RecoveryServices/Vaults/backupProtectionContainers/read",
-                        "Display": {
-                            "Provider": "Microsoft.RecoveryServices",
-                            "Resource": "BackupProtection Containers",
-                            "Operation": "Get Containers In Subscription",
-                            "Description": "Returnsall containers belonging to the subscription"
-                        },
-                        "Origin": "user"
-                    },
-                    {
-                        "Name": "Microsoft.RecoveryServices/Vaults/backupFabrics/protectionContainers/read",
-                        "Display": {
-                            "Provider": "Microsoft.RecoveryServices",
-                            "Resource": "ProtectionContainers",
-                            "Operation": "Get Registered Container",
-                            "Description": "Returnsall registered containers"
-                        },
-                        "Origin": "user"
-                    },
-                    {
-                        "Name": "Microsoft.RecoveryServices/Vaults/backupFabrics/protectionContainers/operationResults/read",
-                        "Display": {
-                            "Provider": "Microsoft.RecoveryServices",
-                            "Resource": "ProtectionContainers Operation Results",
-                            "Operation": "Get Container Operation Results",
-                            "Description": "Getsresult of Operation performed on Protection Container."
-                        },
-                        "Origin": "user"
-                    },
-                    {
-                        "Name": "Microsoft.RecoveryServices/Vaults/backupEngines",
-                        "Display": {
-                            "Provider": "Microsoft.RecoveryServices",
-                            "Resource": "BackupEngines",
-                            "Operation": "List of backup management servers.",
-                            "Description": "Returnsall the backup management servers registered with vault."
-                        },
-                        "Origin": "user"
-                    },
-                    {
-                        "Name": "Microsoft.RecoveryServices/Vaults/backupStatus",
-                        "Display": {
-                            "Provider": "Microsoft.RecoveryServices",
-                            "Resource": "BackupStatus",
-                            "Operation": "Check Backup Status for Vault",
-                            "Description": "Check BackupStatus for Recovery Services Vaults"
-                        },
-                        "Origin": "user"
-                    },
-                    {
-                        "Name": "Microsoft.RecoveryServices/vaults/replicationAlertSettings/read",
-                        "Display": {
-                            "Provider": "MicrosoftRecovery Services",
-                            "Resource": "Alerts Settings",
-                            "Operation": "Read Alerts Settings",
-                            "Description": "ReadAny Alerts Settings"
-                        },
-                        "Origin": "user,system"
-                    },
-                    {
-                        "Name": "Microsoft.RecoveryServices/vaults/replicationAlertSettings/write",
-                        "Display": {
-                            "Provider": "MicrosoftRecovery Services",
-                            "Resource": "Alerts Settings",
-                            "Operation": "Create or UpdateAlerts Settings",
-                            "Description": "Create or Update Any Alerts Settings"
-                        },
-                        "Origin": "user,system"
-                    },
-                    {
-                        "Name": "Microsoft.RecoveryServices/vaults/replicationEvents/read",
-                        "Display": {
-                            "Provider": "MicrosoftRecovery Services",
-                            "Resource": "Events",
-                            "Operation": "Read Events",
-                            "Description": "ReadAny Events"
-                        },
-                        "Origin": "user,system"
-                    },
-                    {
-                        "Name": "Microsoft.RecoveryServices/vaults/replicationFabrics/replicationNetworks/read",
-                        "Display": {
-                            "Provider": "MicrosoftRecovery Services",
-                            "Resource": "Networks",
-                            "Operation": "Read Networks",
-                            "Description": "ReadAny Networks"
-                        },
-                        "Origin": "user,system"
-                    },
-                    {
-                        "Name": "Microsoft.RecoveryServices/vaults/replicationFabrics/replicationNetworks/replicationNetworkMappings/read",
-                        "Display": {
-                            "Provider": "MicrosoftRecovery Services",
-                            "Resource": "Network Mappings",
-                            "Operation": "Read NetworkMappings",
-                            "Description": "Read Any Network Mappings"
-                        },
-                        "Origin": "user,system"
-                    },
-                    {
-                        "Name": "Microsoft.RecoveryServices/vaults/replicationFabrics/replicationNetworks/replicationNetworkMappings/write",
-                        "Display": {
-                            "Provider": "MicrosoftRecovery Services",
-                            "Resource": "Network Mappings",
-                            "Operation": "Create or UpdateNetwork Mappings",
-                            "Description": "Create or Update Any Network Mappings"
-                        },
-                        "Origin": "user,system"
-                    },
-                    {
-                        "Name": "Microsoft.RecoveryServices/vaults/replicationFabrics/replicationNetworks/replicationNetworkMappings/delete",
-                        "Display": {
-                            "Provider": "MicrosoftRecovery Services",
-                            "Resource": "Network Mappings",
-                            "Operation": "Delete NetworkMappings",
-                            "Description": "Delete Any Network Mappings"
-                        },
-                        "Origin": "user,system"
-                    },
-                    {
-                        "Name": "Microsoft.RecoveryServices/vaults/replicationFabrics/replicationProtectionContainers/replicationProtectableItems/read",
-                        "Display": {
-                            "Provider": "MicrosoftRecovery Services",
-                            "Resource": "Protectable Items",
-                            "Operation": "Read ProtectableItems",
-                            "Description": "Read Any Protectable Items"
-                        },
-                        "Origin": "user,system"
-                    },
-                    {
-                        "Name": "Microsoft.RecoveryServices/vaults/replicationFabrics/replicationProtectionContainers/replicationProtectionContainerMappings/read",
-                        "Display": {
-                            "Provider": "MicrosoftRecovery Services",
-                            "Resource": "Protection Container Mappings",
-                            "Operation": "ReadProtection Container Mappings",
-                            "Description": "Read Any Protection ContainerMappings"
-                        },
-                        "Origin": "user,system"
-                    },
-                    {
-                        "Name": "Microsoft.RecoveryServices/vaults/replicationFabrics/replicationProtectionContainers/replicationProtectionContainerMappings/write",
-                        "Display": {
-                            "Provider": "MicrosoftRecovery Services",
-                            "Resource": "Protection Container Mappings",
-                            "Operation": "Createor Update Protection Container Mappings",
-                            "Description": "Create or Update AnyProtection Container Mappings"
-                        },
-                        "Origin": "user,system"
-                    },
-                    {
-                        "Name": "Microsoft.RecoveryServices/vaults/replicationFabrics/replicationProtectionContainers/replicationProtectionContainerMappings/remove/action",
-                        "Display": {
-                            "Provider": "MicrosoftRecovery Services",
-                            "Resource": "Protection Container Mappings",
-                            "Operation": "RemoveProtection Container Mapping",
-                            "Description": "Remove Protection Container Mapping"
-                        },
-                        "Origin": "user,system"
-                    },
-                    {
-                        "Name": "Microsoft.RecoveryServices/vaults/replicationFabrics/replicationProtectionContainers/replicationProtectionContainerMappings/delete",
-                        "Display": {
-                            "Provider": "MicrosoftRecovery Services",
-                            "Resource": "Protection Container Mappings",
-                            "Operation": "DeleteProtection Container Mappings",
-                            "Description": "Delete Any Protection ContainerMappings"
-                        },
-                        "Origin": "user,system"
-                    },
-                    {
-                        "Name": "Microsoft.RecoveryServices/vaults/replicationFabrics/replicationProtectionContainers/replicationProtectedItems/recoveryPoints/read",
-                        "Display": {
-                            "Provider": "MicrosoftRecovery Services",
-                            "Resource": "Replication Recovery Points",
-                            "Operation": "ReadReplication Recovery Points",
-                            "Description": "Read Any Replication RecoveryPoints"
-                        },
-                        "Origin": "user,system"
-                    },
-                    {
-                        "Name": "Microsoft.RecoveryServices/vaults/replicationFabrics/replicationProtectionContainers/replicationProtectedItems/read",
-                        "Display": {
-                            "Provider": "MicrosoftRecovery Services",
-                            "Resource": "Protected Items",
-                            "Operation": "Read ProtectedItems",
-                            "Description": "Read Any Protected Items"
-                        },
-                        "Origin": "user,system"
-                    },
-                    {
-                        "Name": "Microsoft.RecoveryServices/vaults/replicationFabrics/replicationProtectionContainers/replicationProtectedItems/write",
-                        "Display": {
-                            "Provider": "MicrosoftRecovery Services",
-                            "Resource": "Protected Items",
-                            "Operation": "Create or UpdateProtected Items",
-                            "Description": "Create or Update Any Protected Items"
-                        },
-                        "Origin": "user,system"
-                    },
-                    {
-                        "Name": "Microsoft.RecoveryServices/vaults/replicationFabrics/replicationProtectionContainers/replicationProtectedItems/delete",
-                        "Display": {
-                            "Provider": "MicrosoftRecovery Services",
-                            "Resource": "Protected Items",
-                            "Operation": "Delete ProtectedItems",
-                            "Description": "Delete Any Protected Items"
-                        },
-                        "Origin": "user,system"
-                    },
-                    {
-                        "Name": "Microsoft.RecoveryServices/vaults/replicationFabrics/replicationProtectionContainers/replicationProtectedItems/remove/action",
-                        "Display": {
-                            "Provider": "MicrosoftRecovery Services",
-                            "Resource": "Protected Items",
-                            "Operation": "Remove ProtectedItem",
-                            "Description": "Remove Protected Item"
-                        },
-                        "Origin": "user,system"
-                    },
-                    {
-                        "Name": "Microsoft.RecoveryServices/vaults/replicationFabrics/replicationProtectionContainers/replicationProtectedItems/plannedFailover/action",
-                        "Display": {
-                            "Provider": "MicrosoftRecovery Services",
-                            "Resource": "Protected Items",
-                            "Operation": "Planned Failover",
-                            "Description": "PlannedFailover"
-                        },
-                        "Origin": "user,system"
-                    },
-                    {
-                        "Name": "Microsoft.RecoveryServices/vaults/replicationFabrics/replicationProtectionContainers/replicationProtectedItems/unplannedFailover/action",
-                        "Display": {
-                            "Provider": "MicrosoftRecovery Services",
-                            "Resource": "Protected Items",
-                            "Operation": "Failover",
-                            "Description": "Failover"
-                        },
-                        "Origin": "user,system"
-                    },
-                    {
-                        "Name": "Microsoft.RecoveryServices/vaults/replicationFabrics/replicationProtectionContainers/replicationProtectedItems/testFailover/action",
-                        "Display": {
-                            "Provider": "MicrosoftRecovery Services",
-                            "Resource": "Protected Items",
-                            "Operation": "Test Failover",
-                            "Description": "TestFailover"
-                        },
-                        "Origin": "user,system"
-                    },
-                    {
-                        "Name": "Microsoft.RecoveryServices/vaults/replicationFabrics/replicationProtectionContainers/replicationProtectedItems/testFailoverCleanup/action",
-                        "Display": {
-                            "Provider": "MicrosoftRecovery Services",
-                            "Resource": "Protected Items",
-                            "Operation": "Test FailoverCleanup",
-                            "Description": "Test Failover Cleanup"
-                        },
-                        "Origin": "user,system"
-                    },
-                    {
-                        "Name": "Microsoft.RecoveryServices/vaults/replicationFabrics/replicationProtectionContainers/replicationProtectedItems/failoverCommit/action",
-                        "Display": {
-                            "Provider": "MicrosoftRecovery Services",
-                            "Resource": "Protected Items",
-                            "Operation": "Failover Commit",
-                            "Description": "FailoverCommit"
-                        },
-                        "Origin": "user,system"
-                    },
-                    {
-                        "Name": "Microsoft.RecoveryServices/vaults/replicationFabrics/replicationProtectionContainers/replicationProtectedItems/reProtect/action",
-                        "Display": {
-                            "Provider": "MicrosoftRecovery Services",
-                            "Resource": "Protected Items",
-                            "Operation": "ReProtect ProtectedItem",
-                            "Description": "ReProtect Protected Item"
-                        },
-                        "Origin": "user,system"
-                    },
-                    {
-                        "Name": "Microsoft.RecoveryServices/vaults/replicationFabrics/replicationProtectionContainers/replicationProtectedItems/updateMobilityService/action",
-                        "Display": {
-                            "Provider": "MicrosoftRecovery Services",
-                            "Resource": "Protected Items",
-                            "Operation": "Update MobilityService",
-                            "Description": "Update Mobility Service"
-                        },
-                        "Origin": "user,system"
-                    },
-                    {
-                        "Name": "Microsoft.RecoveryServices/vaults/replicationFabrics/replicationProtectionContainers/replicationProtectedItems/repairReplication/action",
-                        "Display": {
-                            "Provider": "MicrosoftRecovery Services",
-                            "Resource": "Protected Items",
-                            "Operation": "Repair replication",
-                            "Description": "Repairreplication"
-                        },
-                        "Origin": "user,system"
-                    },
-                    {
-                        "Name": "Microsoft.RecoveryServices/vaults/replicationFabrics/replicationProtectionContainers/replicationProtectedItems/applyRecoveryPoint/action",
-                        "Display": {
-                            "Provider": "MicrosoftRecovery Services",
-                            "Resource": "Protected Items",
-                            "Operation": "Apply RecoveryPoint",
-                            "Description": "Apply Recovery Point"
-                        },
-                        "Origin": "user,system"
-                    },
-                    {
-                        "Name": "Microsoft.RecoveryServices/vaults/replicationJobs/read",
-                        "Display": {
-                            "Provider": "MicrosoftRecovery Services",
-                            "Resource": "Jobs",
-                            "Operation": "Read Jobs",
-                            "Description": "ReadAny Jobs"
-                        },
-                        "Origin": "user,system"
-                    },
-                    {
-                        "Name": "Microsoft.RecoveryServices/vaults/replicationJobs/cancel/action",
-                        "Display": {
-                            "Provider": "MicrosoftRecovery Services",
-                            "Resource": "Jobs",
-                            "Operation": "Cancel Job",
-                            "Description": "CancelJob"
-                        },
-                        "Origin": "user,system"
-                    },
-                    {
-                        "Name": "Microsoft.RecoveryServices/vaults/replicationJobs/restart/action",
-                        "Display": {
-                            "Provider": "MicrosoftRecovery Services",
-                            "Resource": "Jobs",
-                            "Operation": "Restart job",
-                            "Description": "Restartjob"
-                        },
-                        "Origin": "user,system"
-                    },
-                    {
-                        "Name": "Microsoft.RecoveryServices/vaults/replicationJobs/resume/action",
-                        "Display": {
-                            "Provider": "MicrosoftRecovery Services",
-                            "Resource": "Jobs",
-                            "Operation": "Resume Job",
-                            "Description": "ResumeJob"
-                        },
-                        "Origin": "user,system"
-                    },
-                    {
-                        "Name": "Microsoft.RecoveryServices/vaults/replicationFabrics/replicationProtectionContainers/read",
-                        "Display": {
-                            "Provider": "MicrosoftRecovery Services",
-                            "Resource": "Protection Containers",
-                            "Operation": "Read ProtectionContainers",
-                            "Description": "Read Any Protection Containers"
-                        },
-                        "Origin": "user,system"
-                    },
-                    {
-                        "Name": "Microsoft.RecoveryServices/vaults/replicationFabrics/replicationProtectionContainers/discoverProtectableItem/action",
-                        "Display": {
-                            "Provider": "MicrosoftRecovery Services",
-                            "Resource": "Protection Containers",
-                            "Operation": "DiscoverProtectable Item",
-                            "Description": "Discover Protectable Item"
-                        },
-                        "Origin": "user,system"
-                    },
-                    {
-                        "Name": "Microsoft.RecoveryServices/vaults/replicationFabrics/replicationProtectionContainers/write",
-                        "Display": {
-                            "Provider": "MicrosoftRecovery Services",
-                            "Resource": "Protection Containers",
-                            "Operation": "Createor Update Protection Containers",
-                            "Description": "Create or Update Any ProtectionContainers"
-                        },
-                        "Origin": "user,system"
-                    },
-                    {
-                        "Name": "Microsoft.RecoveryServices/vaults/replicationFabrics/replicationProtectionContainers/remove/action",
-                        "Display": {
-                            "Provider": "MicrosoftRecovery Services",
-                            "Resource": "Protection Containers",
-                            "Operation": "RemoveProtection Container",
-                            "Description": "Remove Protection Container"
-                        },
-                        "Origin": "user,system"
-                    },
-                    {
-                        "Name": "Microsoft.RecoveryServices/vaults/replicationFabrics/replicationProtectionContainers/switchprotection/action",
-                        "Display": {
-                            "Provider": "MicrosoftRecovery Services",
-                            "Resource": "Protection Containers",
-                            "Operation": "SwitchProtection Container",
-                            "Description": "Switch Protection Container"
-                        },
-                        "Origin": "user,system"
-                    },
-                    {
-                        "Name": "Microsoft.RecoveryServices/vaults/replicationPolicies/read",
-                        "Display": {
-                            "Provider": "MicrosoftRecovery Services",
-                            "Resource": "Policies",
-                            "Operation": "Read Policies",
-                            "Description": "ReadAny Policies"
-                        },
-                        "Origin": "user,system"
-                    },
-                    {
-                        "Name": "Microsoft.RecoveryServices/vaults/replicationPolicies/write",
-                        "Display": {
-                            "Provider": "MicrosoftRecovery Services",
-                            "Resource": "Policies",
-                            "Operation": "Create or Update Policies",
-                            "Description": "Createor Update Any Policies"
-                        },
-                        "Origin": "user,system"
-                    },
-                    {
-                        "Name": "Microsoft.RecoveryServices/vaults/replicationPolicies/delete",
-                        "Display": {
-                            "Provider": "MicrosoftRecovery Services",
-                            "Resource": "Policies",
-                            "Operation": "Delete Policies",
-                            "Description": "DeleteAny Policies"
-                        },
-                        "Origin": "user,system"
-                    },
-                    {
-                        "Name": "Microsoft.RecoveryServices/vaults/replicationRecoveryPlans/read",
-                        "Display": {
-                            "Provider": "MicrosoftRecovery Services",
-                            "Resource": "Recovery Plans",
-                            "Operation": "Read RecoveryPlans",
-                            "Description": "Read Any Recovery Plans"
-                        },
-                        "Origin": "user,system"
-                    },
-                    {
-                        "Name": "Microsoft.RecoveryServices/vaults/replicationRecoveryPlans/write",
-                        "Display": {
-                            "Provider": "MicrosoftRecovery Services",
-                            "Resource": "Recovery Plans",
-                            "Operation": "Create or UpdateRecovery Plans",
-                            "Description": "Create or Update Any Recovery Plans"
-                        },
-                        "Origin": "user,system"
-                    },
-                    {
-                        "Name": "Microsoft.RecoveryServices/vaults/replicationRecoveryPlans/delete",
-                        "Display": {
-                            "Provider": "MicrosoftRecovery Services",
-                            "Resource": "Recovery Plans",
-                            "Operation": "Delete RecoveryPlans",
-                            "Description": "Delete Any Recovery Plans"
-                        },
-                        "Origin": "user,system"
-                    },
-                    {
-                        "Name": "Microsoft.RecoveryServices/vaults/replicationRecoveryPlans/plannedFailover/action",
-                        "Display": {
-                            "Provider": "MicrosoftRecovery Services",
-                            "Resource": "Recovery Plans",
-                            "Operation": "Planned FailoverRecovery Plan",
-                            "Description": "Planned Failover Recovery Plan"
-                        },
-                        "Origin": "user,system"
-                    },
-                    {
-                        "Name": "Microsoft.RecoveryServices/vaults/replicationRecoveryPlans/unplannedFailover/action",
-                        "Display": {
-                            "Provider": "MicrosoftRecovery Services",
-                            "Resource": "Recovery Plans",
-                            "Operation": "Failover RecoveryPlan",
-                            "Description": "Failover Recovery Plan"
-                        },
-                        "Origin": "user,system"
-                    },
-                    {
-                        "Name": "Microsoft.RecoveryServices/vaults/replicationRecoveryPlans/testFailover/action",
-                        "Display": {
-                            "Provider": "MicrosoftRecovery Services",
-                            "Resource": "Recovery Plans",
-                            "Operation": "Test FailoverRecovery Plan",
-                            "Description": "Test Failover Recovery Plan"
-                        },
-                        "Origin": "user,system"
-                    },
-                    {
-                        "Name": "Microsoft.RecoveryServices/vaults/replicationRecoveryPlans/testFailoverCleanup/action",
-                        "Display": {
-                            "Provider": "MicrosoftRecovery Services",
-                            "Resource": "Recovery Plans",
-                            "Operation": "Test FailoverCleanup Recovery Plan",
-                            "Description": "Test Failover Cleanup Recovery Plan"
-                        },
-                        "Origin": "user,system"
-                    },
-                    {
-                        "Name": "Microsoft.RecoveryServices/vaults/replicationRecoveryPlans/failoverCommit/action",
-                        "Display": {
-                            "Provider": "MicrosoftRecovery Services",
-                            "Resource": "Recovery Plans",
-                            "Operation": "Failover CommitRecovery Plan",
-                            "Description": "Failover Commit Recovery Plan"
-                        },
-                        "Origin": "user,system"
-                    },
-                    {
-                        "Name": "Microsoft.RecoveryServices/vaults/replicationRecoveryPlans/reProtect/action",
-                        "Display": {
-                            "Provider": "MicrosoftRecovery Services",
-                            "Resource": "Recovery Plans",
-                            "Operation": "ReProtect RecoveryPlan",
-                            "Description": "ReProtect Recovery Plan"
-                        },
-                        "Origin": "user,system"
-                    },
-                    {
-                        "Name": "Microsoft.RecoveryServices/vaults/replicationFabrics/replicationRecoveryServicesProviders/read",
-                        "Display": {
-                            "Provider": "MicrosoftRecovery Services",
-                            "Resource": "Recovery Services Providers",
-                            "Operation": "ReadRecovery Services Providers",
-                            "Description": "Read Any Recovery Services Providers"
-                        },
-                        "Origin": "user,system"
-                    },
-                    {
-                        "Name": "Microsoft.RecoveryServices/vaults/replicationFabrics/replicationRecoveryServicesProviders/remove/action",
-                        "Display": {
-                            "Provider": "MicrosoftRecovery Services",
-                            "Resource": "Recovery Services Providers",
-                            "Operation": "RemoveRecovery Services Provider",
-                            "Description": "Remove Recovery Services Provider"
-                        },
-                        "Origin": "user,system"
-                    },
-                    {
-                        "Name": "Microsoft.RecoveryServices/vaults/replicationFabrics/replicationRecoveryServicesProviders/delete",
-                        "Display": {
-                            "Provider": "MicrosoftRecovery Services",
-                            "Resource": "Recovery Services Providers",
-                            "Operation": "DeleteRecovery Services Providers",
-                            "Description": "Delete Any Recovery Services Providers"
-                        },
-                        "Origin": "user,system"
-                    },
-                    {
-                        "Name": "Microsoft.RecoveryServices/vaults/replicationFabrics/replicationRecoveryServicesProviders/refreshProvider/action",
-                        "Display": {
-                            "Provider": "MicrosoftRecovery Services",
-                            "Resource": "Recovery Services Providers",
-                            "Operation": "RefreshProvider",
-                            "Description": "Refresh Provider"
-                        },
-                        "Origin": "user,system"
-                    },
-                    {
-                        "Name": "Microsoft.RecoveryServices/vaults/replicationFabrics/read",
-                        "Display": {
-                            "Provider": "MicrosoftRecovery Services",
-                            "Resource": "Fabrics",
-                            "Operation": "Read Fabrics",
-                            "Description": "ReadAny Fabrics"
-                        },
-                        "Origin": "user,system"
-                    },
-                    {
-                        "Name": "Microsoft.RecoveryServices/vaults/replicationFabrics/write",
-                        "Display": {
-                            "Provider": "MicrosoftRecovery Services",
-                            "Resource": "Fabrics",
-                            "Operation": "Create or Update Fabrics",
-                            "Description": "Createor Update Any Fabrics"
-                        },
-                        "Origin": "user,system"
-                    },
-                    {
-                        "Name": "Microsoft.RecoveryServices/vaults/replicationFabrics/remove/action",
-                        "Display": {
-                            "Provider": "MicrosoftRecovery Services",
-                            "Resource": "Fabrics",
-                            "Operation": "Remove Fabric",
-                            "Description": "RemoveFabric"
-                        },
-                        "Origin": "user,system"
-                    },
-                    {
-                        "Name": "Microsoft.RecoveryServices/vaults/replicationFabrics/checkConsistency/action",
-                        "Display": {
-                            "Provider": "MicrosoftRecovery Services",
-                            "Resource": "Fabrics",
-                            "Operation": "Checks Consistency ofthe Fabric",
-                            "Description": "Checks Consistency of the Fabric"
-                        },
-                        "Origin": "user,system"
-                    },
-                    {
-                        "Name": "Microsoft.RecoveryServices/vaults/replicationFabrics/delete",
-                        "Display": {
-                            "Provider": "MicrosoftRecovery Services",
-                            "Resource": "Fabrics",
-                            "Operation": "Delete Fabrics",
-                            "Description": "DeleteAny Fabrics"
-                        },
-                        "Origin": "user,system"
-                    },
-                    {
-                        "Name": "Microsoft.RecoveryServices/vaults/replicationFabrics/renewcertificate/action",
-                        "Display": {
-                            "Provider": "MicrosoftRecovery Services",
-                            "Resource": "Fabrics",
-                            "Operation": "Renew Certificate forFabric",
-                            "Description": "Renew Certificate for Fabric"
-                        },
-                        "Origin": "user,system"
-                    },
-                    {
-                        "Name": "Microsoft.RecoveryServices/vaults/replicationFabrics/deployProcessServerImage/action",
-                        "Display": {
-                            "Provider": "MicrosoftRecovery Services",
-                            "Resource": "Fabrics",
-                            "Operation": "Deploy Process ServerImage",
-                            "Description": "Deploy Process Server Image"
-                        },
-                        "Origin": "user,system"
-                    },
-                    {
-                        "Name": "Microsoft.RecoveryServices/vaults/replicationFabrics/reassociateGateway/action",
-                        "Display": {
-                            "Provider": "MicrosoftRecovery Services",
-                            "Resource": "Fabrics",
-                            "Operation": "Reassociate Gateway",
-                            "Description": "ReassociateGateway"
-                        },
-                        "Origin": "user,system"
-                    },
-                    {
-                        "Name": "Microsoft.RecoveryServices/vaults/replicationFabrics/replicationStorageClassifications/read",
-                        "Display": {
-                            "Provider": "MicrosoftRecovery Services",
-                            "Resource": "Storage Classifications",
-                            "Operation": "ReadStorage Classifications",
-                            "Description": "Read Any Storage Classifications"
-                        },
-                        "Origin": "user,system"
-                    },
-                    {
-                        "Name": "Microsoft.RecoveryServices/vaults/replicationFabrics/replicationStorageClassifications/replicationStorageClassificationMappings/read",
-                        "Display": {
-                            "Provider": "MicrosoftRecovery Services",
-                            "Resource": "Storage Classification Mappings",
-                            "Operation": "ReadStorage Classification Mappings",
-                            "Description": "Read Any Storage ClassificationMappings"
-                        },
-                        "Origin": "user,system"
-                    },
-                    {
-                        "Name": "Microsoft.RecoveryServices/vaults/replicationFabrics/replicationStorageClassifications/replicationStorageClassificationMappings/write",
-                        "Display": {
-                            "Provider": "MicrosoftRecovery Services",
-                            "Resource": "Storage Classification Mappings",
-                            "Operation": "Createor Update Storage Classification Mappings",
-                            "Description": "Create or UpdateAny Storage Classification Mappings"
-                        },
-                        "Origin": "user,system"
-                    },
-                    {
-                        "Name": "Microsoft.RecoveryServices/vaults/replicationFabrics/replicationStorageClassifications/replicationStorageClassificationMappings/delete",
-                        "Display": {
-                            "Provider": "MicrosoftRecovery Services",
-                            "Resource": "Storage Classification Mappings",
-                            "Operation": "DeleteStorage Classification Mappings",
-                            "Description": "Delete Any Storage ClassificationMappings"
-                        },
-                        "Origin": "user,system"
-                    },
-                    {
-                        "Name": "Microsoft.RecoveryServices/vaults/usages/read",
-                        "Display": {
-                            "Provider": "MicrosoftRecovery Services",
-                            "Resource": "Vault Usages",
-                            "Operation": "Read Vault Usages",
-                            "Description": "ReadAny Vault Usages"
-                        },
-                        "Origin": "user,system"
-                    },
-                    {
-                        "Name": "Microsoft.RecoveryServices/vaults/replicationFabrics/replicationvCenters/read",
-                        "Display": {
-                            "Provider": "MicrosoftRecovery Services",
-                            "Resource": "Jobs",
-                            "Operation": "Read Jobs",
-                            "Description": "ReadAny Jobs"
-                        },
-                        "Origin": "user,system"
-                    },
-                    {
-                        "Name": "Microsoft.RecoveryServices/vaults/replicationFabrics/replicationvCenters/write",
-                        "Display": {
-                            "Provider": "MicrosoftRecovery Services",
-                            "Resource": "Jobs",
-                            "Operation": "Create or Update Jobs",
-                            "Description": "Createor Update Any Jobs"
-                        },
-                        "Origin": "user,system"
-                    },
-                    {
-                        "Name": "Microsoft.RecoveryServices/vaults/replicationFabrics/replicationvCenters/delete",
-                        "Display": {
-                            "Provider": "MicrosoftRecovery Services",
-                            "Resource": "Jobs",
-                            "Operation": "Delete Jobs",
-                            "Description": "DeleteAny Jobs"
-                        },
-                        "Origin": "user,system"
-                    },
-                    {
-                        "Name": "Microsoft.RecoveryServices/Vaults/vaultTokens/read",
-                        "Display": {
-                            "Provider": "Microsoft.RecoveryServices",
-                            "Resource": "Vaults",
-                            "Operation": "VaultToken",
-                            "Description": "The Vault Token operation can be used to get Vault Tokenfor vault level backend operations."
-                        },
-                        "Origin": "user"
-                    },
-                    {
-                        "Name": "Microsoft.RecoveryServices/Vaults/registeredIdentities/write",
-                        "Display": {
-                            "Provider": "Microsoft.RecoveryServices",
-                            "Resource": "Vaults",
-                            "Operation": "RegisterService Container",
-                            "Description": "The Register Service Container operationcan be used to register a container with Recovery Service."
-                        },
-                        "Origin": "user,system"
-                    },
-                    {
-                        "Name": "Microsoft.RecoveryServices/Vaults/registeredIdentities/operationResults/read",
-                        "Display": {
-                            "Provider": "Microsoft.RecoveryServices",
-                            "Resource": "Vaults",
-                            "Operation": "GetOperation Results",
-                            "Description": "The Get Operation Results operation canbe used get the operation status and result for the asynchronously submittedoperation"
-                        },
-                        "Origin": "user,system"
-                    },
-                    {
-                        "Name": "Microsoft.RecoveryServices/Vaults/registeredIdentities/read",
-                        "Display": {
-                            "Provider": "Microsoft.RecoveryServices",
-                            "Resource": "Vaults",
-                            "Operation": "GetContainers",
-                            "Description": "The Get Containers operation can be used get thecontainers registered for a resource."
-                        },
-                        "Origin": "user,system"
-                    },
-                    {
-                        "Name": "Microsoft.RecoveryServices/Vaults/registeredIdentities/delete",
-                        "Display": {
-                            "Provider": "Microsoft.RecoveryServices",
-                            "Resource": "Vaults",
-                            "Operation": "UnregisterService Container",
-                            "Description": "The UnRegister Container operation can beused to unregister a container."
-                        },
-                        "Origin": "user,system"
-                    },
-                    {
-                        "Name": "Microsoft.RecoveryServices/Vaults/certificates/write",
-                        "Display": {
-                            "Provider": "Microsoft.RecoveryServices",
-                            "Resource": "Vaults",
-                            "Operation": "UpdateResource Certificate",
-                            "Description": "The Update Resource Certificate operationupdates the resource/vault credential certificate."
-                        },
-                        "Origin": "user"
-                    },
-                    {
-                        "Name": "Microsoft.RecoveryServices/Vaults/monitoringAlerts/read",
-                        "Display": {
-                            "Provider": "Microsoft.RecoveryServices",
-                            "Resource": "Vaults",
-                            "Operation": "Getalerts",
-                            "Description": "Gets the alerts for the Recovery services vault."
-                        },
-                        "Origin": "user"
-                    },
-                    {
-                        "Name": "Microsoft.RecoveryServices/Vaults/monitoringAlerts/{uniqueAlertId}/read",
-                        "Display": {
-                            "Provider": "Microsoft.RecoveryServices",
-                            "Resource": "Vaults",
-                            "Operation": "Getalert details",
-                            "Description": "Gets the details of the alert."
-                        },
-                        "Origin": "user"
-                    },
-                    {
-                        "Name": "Microsoft.RecoveryServices/Vaults/monitoringAlerts/{uniqueAlertId}/patch",
-                        "Display": {
-                            "Provider": "Microsoft.RecoveryServices",
-                            "Resource": "Vaults",
-                            "Operation": "Resolvealert",
-                            "Description": "Resolves the alert."
-                        },
-                        "Origin": "user"
-                    },
-                    {
-                        "Name": "Microsoft.RecoveryServices/Vaults/monitoringConfigurations/notificationConfiguration/read",
-                        "Display": {
-                            "Provider": "Microsoft.RecoveryServices",
-                            "Resource": "Vaults",
-                            "Operation": "Getconfiguration",
-                            "Description": "Gets the Recovery services vault notificationconfiguration."
-                        },
-                        "Origin": "user"
-                    },
-                    {
-                        "Name": "Microsoft.RecoveryServices/Vaults/monitoringConfigurations/notificationConfiguration/patch",
-                        "Display": {
-                            "Provider": "Microsoft.RecoveryServices",
-                            "Resource": "Vaults",
-                            "Operation": "Configuree-mail notification",
-                            "Description": "Configures e-mail notifications to Recoveryservices vault."
-                        },
-                        "Origin": "user"
-                    },
-                    {
-                        "Name": "Microsoft.RecoveryServices/Vaults/providers/Microsoft.Insights/logDefinitions/read",
-                        "Display": {
-                            "Provider": "Microsoft.RecoveryServices",
-                            "Resource": "Vaults",
-                            "Operation": "AzureBackup Logs",
-                            "Description": "Azure Backup Logs"
-                        },
-                        "Origin": "system",
-                        "Properties": {
-                            "serviceSpecification": {
-                                "logSpecifications": [
-                                    {
-                                        "name": "AzureBackupReport",
-                                        "displayName": "AzureBackup Reporting Data",
-                                        "blobDuration": "PT1H"
-                                    },
-                                    {
-                                        "name": "AzureSiteRecoveryJobs",
-                                        "displayName": "AzureSite Recovery Jobs",
-                                        "blobDuration": "PT1H"
-                                    },
-                                    {
-                                        "name": "AzureSiteRecoveryEvents",
-                                        "displayName": "AzureSite Recovery Events",
-                                        "blobDuration": "PT1H"
-                                    },
-                                    {
-                                        "name": "AzureSiteRecoveryReplicatedItems",
-                                        "displayName": "AzureSite Recovery Replicated Items",
-                                        "blobDuration": "PT1H"
-                                    }
-                                ]
-                            }
-                        }
-                    },
-                    {
-                        "Name": "Microsoft.RecoveryServices/Vaults/providers/Microsoft.Insights/metricDefinitions/read",
-                        "Display": {
-                            "Provider": "Microsoft.RecoveryServices",
-                            "Resource": "Vaults",
-                            "Operation": "AzureBackup Metrics",
-                            "Description": "Azure Backup Metrics"
-                        },
-                        "Origin": "system"
-                    },
-                    {
-                        "Name": "Microsoft.RecoveryServices/Vaults/providers/Microsoft.Insights/diagnosticSettings/read",
-                        "Display": {
-                            "Provider": "Microsoft.RecoveryServices",
-                            "Resource": "Vaults",
-                            "Operation": "AzureBackup Diagnostics",
-                            "Description": "Azure Backup Diagnostics"
-                        },
-                        "Origin": "system"
-                    },
-                    {
-                        "Name": "Microsoft.RecoveryServices/Vaults/providers/Microsoft.Insights/diagnosticSettings/write",
-                        "Display": {
-                            "Provider": "Microsoft.RecoveryServices",
-                            "Resource": "Vaults",
-                            "Operation": "AzureBackup Diagnostics",
-                            "Description": "Azure Backup Diagnostics"
-                        },
-                        "Origin": "system"
-                    },
-                    {
-                        "Name": "Microsoft.RecoveryServices/Vaults/write",
-                        "Display": {
-                            "Provider": "Microsoft.RecoveryServices",
-                            "Resource": "Vaults",
-                            "Operation": "CreateVault",
-                            "Description": "Create Vault operation creates an Azure resource oftype ''vault''"
-                        },
-                        "Origin": "user"
-                    },
-                    {
-                        "Name": "Microsoft.RecoveryServices/Vaults/read",
-                        "Display": {
-                            "Provider": "Microsoft.RecoveryServices",
-                            "Resource": "Vaults",
-                            "Operation": "GetVault",
-                            "Description": "The Get Vault operation gets an object representingthe Azure resource of type ''vault''"
-                        },
-                        "Origin": "user"
-                    },
-                    {
-                        "Name": "Microsoft.RecoveryServices/Vaults/delete",
-                        "Display": {
-                            "Provider": "Microsoft.RecoveryServices",
-                            "Resource": "Vaults",
-                            "Operation": "DeleteVault",
-                            "Description": "The Delete Vault operation deletes the specified Azureresource of type ''vault''"
-                        },
-                        "Origin": "user"
-                    },
-                    {
-                        "Name": "Microsoft.RecoveryServices/Vaults/extendedInformation/read",
-                        "Display": {
-                            "Provider": "Microsoft.RecoveryServices",
-                            "Resource": "Vaults",
-                            "Operation": "GetExtended Info",
-                            "Description": "The Get Extended Info operation gets an object''sExtended Info representing the Azure resource of type ?vault?"
-                        },
-                        "Origin": "user"
-                    },
-                    {
-                        "Name": "Microsoft.RecoveryServices/Vaults/extendedInformation/write",
-                        "Display": {
-                            "Provider": "Microsoft.RecoveryServices",
-                            "Resource": "Vaults",
-                            "Operation": "GetExtended Info",
-                            "Description": "The Get Extended Info operation gets an object''sExtended Info representing the Azure resource of type ?vault?"
-                        },
-                        "Origin": "user"
-                    },
-                    {
-                        "Name": "Microsoft.RecoveryServices/Vaults/extendedInformation/delete",
-                        "Display": {
-                            "Provider": "Microsoft.RecoveryServices",
-                            "Resource": "Vaults",
-                            "Operation": "GetExtended Info",
-                            "Description": "The Get Extended Info operation gets an object''sExtended Info representing the Azure resource of type ?vault?"
-                        },
-                        "Origin": "user"
-                    },
-                    {
-                        "Name": "Microsoft.RecoveryServices/locations/allocatedStamp/read",
-                        "Display": {
-                            "Provider": "Microsoft.RecoveryServices",
-                            "Resource": "locations/allocatedStamp",
-                            "Operation": "GetAllocated Stamp",
-                            "Description": "GetAllocatedStamp is internal operation usedby service"
-                        },
-                        "Origin": "user"
-                    },
-                    {
-                        "Name": "Microsoft.RecoveryServices/locations/allocateStamp/action",
-                        "Display": {
-                            "Provider": "Microsoft.RecoveryServices",
-                            "Resource": "locations/allocateStamp",
-                            "Operation": "AllocatedStamp Action",
-                            "Description": "AllocateStamp is internal operation used by service"
-                        },
-                        "Origin": "user"
-                    }
-                ]
-            }
-        }
+  "parameters": {
+    "api-version": "2016-06-01"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "microsoft.recoveryservices/vaults/usages/read",
+            "display": {
+              "provider": "microsoft.recoveryservices",
+              "resource": "Vault Usage",
+              "operation": "Recovery Services Vault usage details.",
+              "description": "Returns usage details for a Recovery Services Vault."
+            },
+            "origin": "user"
+          },
+          {
+            "name": "microsoft.recoveryservices/vaults/backupUsageSummaries/read",
+            "display": {
+              "provider": "microsoft.recoveryservices",
+              "resource": "Backup Usages Summaries",
+              "operation": "Recovery Services Protected Items and Protected Servers usage summaries details.",
+              "description": "Returns summaries for Protected Items and Protected Servers for a Recovery Services ."
+            },
+            "origin": "user"
+          },
+          {
+            "name": "microsoft.recoveryservices/vaults/storageConfig/read",
+            "display": {
+              "provider": "microsoft.recoveryservices",
+              "resource": "Vault Storage Config",
+              "operation": "Get Resource Storage Config",
+              "description": "Returns Storage Configuration for Recovery Services Vault."
+            },
+            "origin": "user"
+          },
+          {
+            "name": "microsoft.recoveryservices/vaults/storageConfig/write",
+            "display": {
+              "provider": "microsoft.recoveryservices",
+              "resource": "Vault Storage Config",
+              "operation": "Write Resource Storage Config",
+              "description": "Updates Storage Configuration for Recovery Services Vault."
+            },
+            "origin": "user"
+          },
+          {
+            "name": "microsoft.recoveryservices/vaults/backupconfig/vaultconfig/read",
+            "display": {
+              "provider": "microsoft.recoveryservices",
+              "resource": "Vault Config",
+              "operation": "Get Resource Config",
+              "description": "Returns Configuration for Recovery Services Vault."
+            },
+            "origin": "user"
+          },
+          {
+            "name": "microsoft.recoveryservices/vaults/backupconfig/vaultconfig/write",
+            "display": {
+              "provider": "microsoft.recoveryservices",
+              "resource": "Vault Config",
+              "operation": "Update Resource Config",
+              "description": "Updates Configuration for Recovery Services Vault."
+            },
+            "origin": "user"
+          },
+          {
+            "name": "microsoft.recoveryservices/vaults/tokenInfo/read",
+            "display": {
+              "provider": "microsoft.recoveryservices",
+              "resource": "Token Info",
+              "operation": "Get Vault Token Info",
+              "description": "Returns token information for Recovery Services Vault."
+            },
+            "origin": "user"
+          },
+          {
+            "name": "microsoft.recoveryservices/vaults/backupSecurityPIN/read",
+            "display": {
+              "provider": "microsoft.recoveryservices",
+              "resource": "SecurityPINInfo",
+              "operation": "Get Security PIN Info",
+              "description": "Returns Security PIN Information for Recovery Services Vault."
+            },
+            "origin": "user"
+          },
+          {
+            "name": "microsoft.recoveryservices/vaults/backupManagementMetaData/read",
+            "display": {
+              "provider": "microsoft.recoveryservices",
+              "resource": "Backup Management Metadata",
+              "operation": "Get Backup Management Metadata",
+              "description": "Returns Backup Management Metadata for Recovery Services Vault."
+            },
+            "origin": "user"
+          },
+          {
+            "name": "microsoft.recoveryservices/vaults/backupOperationResults/read",
+            "display": {
+              "provider": "microsoft.recoveryservices",
+              "resource": "Backup Operation Results",
+              "operation": "Get Backup Operation Result",
+              "description": "Returns Backup Operation Result for Recovery Services Vault."
+            },
+            "origin": "user"
+          },
+          {
+            "name": "microsoft.recoveryservices/vaults/backupOperations/read",
+            "display": {
+              "provider": "microsoft.recoveryservices",
+              "resource": "Backup Operation Status",
+              "operation": "Get Backup Operation Status",
+              "description": "Returns Backup Operation Status for Recovery Services Vault."
+            },
+            "origin": "user"
+          },
+          {
+            "name": "microsoft.recoveryservices/vaults/backupJobs/read",
+            "display": {
+              "provider": "microsoft.recoveryservices",
+              "resource": "Backup Jobs",
+              "operation": "Get Jobs",
+              "description": "Returns all Job Objects"
+            },
+            "origin": "user"
+          },
+          {
+            "name": "microsoft.recoveryservices/vaults/backupJobs/cancel/action",
+            "display": {
+              "provider": "microsoft.recoveryservices",
+              "resource": "Backup Jobs",
+              "operation": "Cancel Jobs",
+              "description": "Cancel the Job"
+            },
+            "origin": "user"
+          },
+          {
+            "name": "microsoft.recoveryservices/vaults/backupJobsExport/action",
+            "display": {
+              "provider": "microsoft.recoveryservices",
+              "resource": "Export Backup Jobs",
+              "operation": "Export Jobs",
+              "description": "Export Jobs"
+            },
+            "origin": "user"
+          },
+          {
+            "name": "microsoft.recoveryservices/vaults/backupJobs/operationResults/read",
+            "display": {
+              "provider": "microsoft.recoveryservices",
+              "resource": "Backup Jobs Operation Results",
+              "operation": "Get Job Operation Result",
+              "description": "Returns the Result of Job Operation."
+            },
+            "origin": "user"
+          },
+          {
+            "name": "microsoft.recoveryservices/vaults/backupJobsExport/operationResults/read",
+            "display": {
+              "provider": "microsoft.recoveryservices",
+              "resource": "Export Backup Jobs Operation Results",
+              "operation": "Get Export Job Operation Result",
+              "description": "Returns the Result of Export Job Operation."
+            },
+            "origin": "user"
+          },
+          {
+            "name": "microsoft.recoveryservices/vaults/backupFabrics/protectionContainers/protectedItems/recoveryPoints/read",
+            "display": {
+              "provider": "microsoft.recoveryservices",
+              "resource": "Recovery Points",
+              "operation": "Get Recovery Points",
+              "description": "Get Recovery Points for Protected Items."
+            },
+            "origin": "user"
+          },
+          {
+            "name": "microsoft.recoveryservices/vaults/backupFabrics/protectionContainers/protectedItems/recoveryPoints/restore/action",
+            "display": {
+              "provider": "microsoft.recoveryservices",
+              "resource": "Recovery Points",
+              "operation": "Restore Recovery Points",
+              "description": "Restore Recovery Points for Protected Items."
+            },
+            "origin": "user"
+          },
+          {
+            "name": "microsoft.recoveryservices/vaults/backupFabrics/protectionContainers/protectedItems/recoveryPoints/provisionInstantItemRecovery/action",
+            "display": {
+              "provider": "microsoft.recoveryservices",
+              "resource": "Recovery Points",
+              "operation": "Provision Instant Item Recovery for Protected Item",
+              "description": "Provision Instant Item Recovery for Protected Item"
+            },
+            "origin": "user"
+          },
+          {
+            "name": "microsoft.recoveryservices/vaults/backupFabrics/protectionContainers/protectedItems/recoveryPoints/revokeInstantItemRecovery/action",
+            "display": {
+              "provider": "microsoft.recoveryservices",
+              "resource": "Recovery Points",
+              "operation": "Revoke Instant Item Recovery for Protected Item",
+              "description": "Revoke Instant Item Recovery for Protected Item"
+            },
+            "origin": "user"
+          },
+          {
+            "name": "microsoft.recoveryservices/vaults/backupPolicies/read",
+            "display": {
+              "provider": "microsoft.recoveryservices",
+              "resource": "Backup Policies",
+              "operation": "Get Protection Policy",
+              "description": "Returns all Protection Policies"
+            },
+            "origin": "user"
+          },
+          {
+            "name": "microsoft.recoveryservices/vaults/backupPolicies/write",
+            "display": {
+              "provider": "microsoft.recoveryservices",
+              "resource": "Backup Policies",
+              "operation": "Create Protection Policy",
+              "description": "Creates Protection Policy"
+            },
+            "origin": "user"
+          },
+          {
+            "name": "microsoft.recoveryservices/vaults/backupPolicies/delete",
+            "display": {
+              "provider": "microsoft.recoveryservices",
+              "resource": "Backup Policies",
+              "operation": "Delete Protection Policy",
+              "description": "Delete a Protection Policy"
+            },
+            "origin": "user"
+          },
+          {
+            "name": "microsoft.recoveryservices/vaults/backupPolicies/operationResults/read",
+            "display": {
+              "provider": "microsoft.recoveryservices",
+              "resource": "Backup Policy Operation Results",
+              "operation": "Get Policy Operation Results",
+              "description": "Get Results of Policy Operation."
+            },
+            "origin": "user"
+          },
+          {
+            "name": "microsoft.recoveryservices/vaults/backupPolicies/operationsStatus/read",
+            "display": {
+              "provider": "microsoft.recoveryservices",
+              "resource": "Backup Policy Operation Status",
+              "operation": "Get Policy Operation Status",
+              "description": "Get Status of Policy Operation."
+            },
+            "origin": "user"
+          },
+          {
+            "name": "microsoft.recoveryservices/vaults/backupFabrics/protectionContainers/protectedItems/read",
+            "display": {
+              "provider": "microsoft.recoveryservices",
+              "resource": "Protected Items",
+              "operation": "Get Protected Item Details",
+              "description": "Returns object details of the Protected Item"
+            },
+            "origin": "user"
+          },
+          {
+            "name": "microsoft.recoveryservices/vaults/backupProtectedItems/read",
+            "display": {
+              "provider": "microsoft.recoveryservices",
+              "resource": "Protected Items",
+              "operation": "Get All Protected Items",
+              "description": "Returns the list of all Protected Items."
+            },
+            "origin": "user"
+          },
+          {
+            "name": "microsoft.recoveryservices/vaults/backupFabrics/protectionContainers/protectedItems/write",
+            "display": {
+              "provider": "microsoft.recoveryservices",
+              "resource": "Protected Items",
+              "operation": "Create Backup Protected Item",
+              "description": "Create a backup Protected Item"
+            },
+            "origin": "user"
+          },
+          {
+            "name": "microsoft.recoveryservices/vaults/backupFabrics/protectionContainers/protectedItems/delete",
+            "display": {
+              "provider": "microsoft.recoveryservices",
+              "resource": "Protected Items",
+              "operation": "Delete Protected Items",
+              "description": "Deletes Protected Item"
+            },
+            "origin": "user"
+          },
+          {
+            "name": "microsoft.recoveryservices/vaults/backupFabrics/protectionContainers/protectedItems/operationResults/read",
+            "display": {
+              "provider": "microsoft.recoveryservices",
+              "resource": "Protected Item Operation Results",
+              "operation": "Get Protected Items Operation Results",
+              "description": "Gets Result of Operation Performed on Protected Items."
+            },
+            "origin": "user"
+          },
+          {
+            "name": "microsoft.recoveryservices/vaults/backupFabrics/protectionContainers/protectedItems/operationsStatus/read",
+            "display": {
+              "provider": "microsoft.recoveryservices",
+              "resource": "Protected Item Operation Status",
+              "operation": "Get Protected Items operation status",
+              "description": "Returns the status of Operation performed on Protected Items."
+            },
+            "origin": "user"
+          },
+          {
+            "name": "microsoft.recoveryservices/vaults/backupFabrics/protectionContainers/protectedItems/backup/action",
+            "display": {
+              "provider": "microsoft.recoveryservices",
+              "resource": "Protected Items",
+              "operation": "Backup Protected Item",
+              "description": "Performs Backup for Protected Item."
+            },
+            "origin": "user"
+          },
+          {
+            "name": "microsoft.recoveryservices/vaults/backupProtectableItems/read",
+            "display": {
+              "provider": "microsoft.recoveryservices",
+              "resource": "Backup Protectable Items",
+              "operation": "Get Protectable Items",
+              "description": "Returns list of all Protectable Items."
+            },
+            "origin": "user"
+          },
+          {
+            "name": "microsoft.recoveryservices/vaults/refreshContainers/read",
+            "display": {
+              "provider": "microsoft.recoveryservices",
+              "resource": "Refresh Containers",
+              "operation": "Refresh container",
+              "description": "Refreshes the container list"
+            },
+            "origin": "user"
+          },
+          {
+            "name": "microsoft.recoveryservices/vaults/backupFabrics/operationResults/read",
+            "display": {
+              "provider": "microsoft.recoveryservices",
+              "resource": "Refresh Containers Operation Results",
+              "operation": "Get Operation Results",
+              "description": "Returns status of the operation"
+            },
+            "origin": "user"
+          },
+          {
+            "name": "microsoft.recoveryservices/vaults/backupProtectionContainers/read",
+            "display": {
+              "provider": "microsoft.recoveryservices",
+              "resource": "Backup Protection Containers",
+              "operation": "Get Containers In Subscription",
+              "description": "Returns all containers belonging to the subscription"
+            },
+            "origin": "user"
+          },
+          {
+            "name": "microsoft.recoveryservices/vaults/backupFabrics/protectionContainers/read",
+            "display": {
+              "provider": "microsoft.recoveryservices",
+              "resource": "Protection Containers",
+              "operation": "Get Registered Container",
+              "description": "Returns all registered containers"
+            },
+            "origin": "user"
+          },
+          {
+            "name": "microsoft.recoveryservices/vaults/backupFabrics/protectionContainers/operationResults/read",
+            "display": {
+              "provider": "microsoft.recoveryservices",
+              "resource": "Protection Containers Operation Results",
+              "operation": "Get Container Operation Results",
+              "description": "Gets result of Operation performed on Protection Container."
+            },
+            "origin": "user"
+          },
+          {
+            "name": "microsoft.recoveryservices/vaults/backupEngines",
+            "display": {
+              "provider": "microsoft.recoveryservices",
+              "resource": "Backup Engines",
+              "operation": "List of backup management servers.",
+              "description": "Returns all the backup management servers registered with vault."
+            },
+            "origin": "user"
+          },
+          {
+            "name": "microsoft.recoveryservices/vaults/backupStatus",
+            "display": {
+              "provider": "microsoft.recoveryservices",
+              "resource": "Backup Status",
+              "operation": "Check Backup Status for Vault",
+              "description": "Check Backup Status for Recovery Services Vaults"
+            },
+            "origin": "user"
+          },
+          {
+            "name": "microsoft.recoveryservices/vaults/backupPreValidateProtection",
+            "display": {
+              "provider": "microsoft.recoveryservices",
+              "resource": "PreValidate Protection",
+              "operation": "Pre Validate Enable Protection",
+              "description": ""
+            },
+            "origin": "user"
+          },
+          {
+            "name": "microsoft.recoveryservices/vaults/backupValidateFeatures",
+            "display": {
+              "provider": "microsoft.recoveryservices",
+              "resource": "Validate Features",
+              "operation": "Validate Features",
+              "description": "Validate Features"
+            },
+            "origin": "user"
+          },
+          {
+            "name": "microsoft.recoveryservices/vaults/backupFabrics/backupProtectionIntent/write",
+            "display": {
+              "provider": "microsoft.recoveryservices",
+              "resource": "Protection Intent",
+              "operation": "Create backup Protection Intent",
+              "description": "Create a backup Protection Intent"
+            },
+            "origin": "user"
+          },
+          {
+            "name": "microsoft.recoveryservices/vaults/backupFabrics/{fabricName}/protectionContainers/{containerName}/items/read",
+            "display": {
+              "provider": "microsoft.recoveryservices",
+              "resource": "Workload Items",
+              "operation": "Get all items in a container",
+              "description": "Get all items in a container"
+            },
+            "origin": "user"
+          },
+          {
+            "name": "microsoft.recoveryservices/vaults/backupFabrics/protectionContainers/inquire/action",
+            "display": {
+              "provider": "microsoft.recoveryservices",
+              "resource": "Protection Containers Inquire",
+              "operation": "Get all items in a container",
+              "description": "Get all items in a container"
+            },
+            "origin": "user"
+          }
+        ]
+      }
     }
+  }
 }

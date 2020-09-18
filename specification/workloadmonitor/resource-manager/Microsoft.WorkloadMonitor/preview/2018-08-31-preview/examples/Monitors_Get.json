@@ -1,0 +1,53 @@
+{
+  "parameters": {
+    "subscriptionId": "a7f23fdb-e626-4f95-89aa-3a360a90861e",
+    "resourceGroupName": "viv_rg",
+    "resourceNamespace": "Microsoft.Compute",
+    "resourceType": "virtualMachines",
+    "resourceName": "Canary-WLI-2",
+    "monitorId": "1bbf53b8-2557-a521-f7c1-1023de57367a",
+    "api-version": "2018-08-31-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "description": "Monitor the number of free MBytes remaining on a logical disk.",
+          "monitorId": "1bbf53b8-2557-a521-f7c1-1023de57367a",
+          "monitorName": "Microsoft.Windows.Server.10.0.LogicalDisk.MBFreeSpace",
+          "monitorDisplayName": "Windows Server 2016 Logical Disk Free Space (MB) Low",
+          "parentMonitorName": "Microsoft.Windows.Server.10.0.LogicalDisk.FreeSpaceMonitorRollup",
+          "parentMonitorDisplayName": "Windows Server 2016 Logical Disk - Free Space Rollup Monitor",
+          "monitorType": "Unit",
+          "monitorCategory": "AvailabilityHealth",
+          "componentTypeId": "75582e9b-cae6-397b-6764-f7cf6cc620b0",
+          "componentTypeName": "Microsoft.Windows.Server.10.0.LogicalDisk",
+          "componentTypeDisplayName": "Windows Server 2016 Logical Disk",
+          "monitorState": "Enabled",
+          "criteria": [
+            {
+              "healthState": "Warning",
+              "comparisonOperator": "LessThan",
+              "threshold": 2000.0
+            },
+            {
+              "healthState": "Error",
+              "comparisonOperator": "LessThan",
+              "threshold": 1000.0
+            }
+          ],
+          "alertGeneration": "Enabled",
+          "frequency": 15,
+          "lookbackDuration": 0,
+          "documentationURL": "https://aka.ms/Tgp5nn",
+          "signalType": "Metrics",
+          "signalName": "Windows Server 2016 Logical Disk Free Space (MB) Low"
+        },
+        "etag": null,
+        "id": "/subscriptions/a7f23fdb-e626-4f95-89aa-3a360a90861e/resourcegroups/viv_rg/providers/Microsoft.WorkloadMonitor/workloadInsights/Canary-WLI-2/monitors/ComponentTypeId='75582e9b-cae6-397b-6764-f7cf6cc620b0',MonitorId='1bbf53b8-2557-a521-f7c1-1023de57367a'",
+        "name": "ComponentTypeId='75582e9b-cae6-397b-6764-f7cf6cc620b0',MonitorId='1bbf53b8-2557-a521-f7c1-1023de57367a'",
+        "type": "Microsoft.WorkloadMonitor/workloadInsights/monitors"
+      }
+    }
+  }
+}

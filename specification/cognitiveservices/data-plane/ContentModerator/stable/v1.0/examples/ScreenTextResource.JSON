@@ -1,7 +1,7 @@
 {
   "parameters": {
     "Ocp-Apim-Subscription-Key": "34adfa4f-cedf-4dc0-ba29-b6d1a69ab345",
-    "baseUrl": "southeastasia.api.cognitive.microsoft.com",
+    "Endpoint": "{Endpoint}",
     "Content-Type": "text/plain",
     "language": "eng",
     "autocorrect": false,
@@ -12,13 +12,60 @@
   },
   "responses": {
     "200": {
-      "headers": {
-      },
+      "headers": {},
       "body": {
         "OriginalText": "Is this a crap email abcdef@abcd.com, phone: 6657789887, IP: 255.255.255.255, 1 Microsoft Way, Redmond, WA 98052",
         "NormalizedText": "Is this a crap email abcdef@ abcd. com, phone: 6657789887, IP: 255. 255. 255. 255, 1 Microsoft Way, Redmond, WA 98052",
         "Misrepresentation": [],
         "Language": "eng",
+        "PII": {
+          "Email": [
+            {
+              "Detected": "abcdef@abcd.com",
+              "SubType": "Regular",
+              "Text": "abcdef@abcd.com",
+              "Index": 21
+            }
+          ],
+          "IPA": [
+            {
+              "SubType": "IPV4",
+              "Text": "255.255.255.255",
+              "Index": 61
+            }
+          ],
+          "Phone": [
+            {
+              "CountryCode": "US",
+              "Text": "6657789887",
+              "Index": 45
+            }
+          ],
+          "Address": [
+            {
+              "Text": "1 Microsoft Way, Redmond, WA 98052",
+              "Index": 78
+            }
+          ],
+          "SSN": [
+            {
+              "Text": "665778988",
+              "Index": 45
+            }
+          ]
+        },
+        "Classification": {
+          "ReviewRecommended": true,
+          "Category1": {
+            "Score": 0.00040505084325559437
+          },
+          "Category2": {
+            "Score": 0.22345089912414551
+          },
+          "Category3": {
+            "Score": 0.98799997568130493
+          }
+        },
         "Terms": [
           {
             "Index": 10,

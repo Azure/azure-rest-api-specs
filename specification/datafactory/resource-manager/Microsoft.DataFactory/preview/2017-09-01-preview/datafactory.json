@@ -105,6 +105,54 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.DataFactory/locations/{locationId}/configureFactoryRepo": {
+      "post": {
+        "tags": [
+          "configureFactoryRepo"
+        ],
+        "operationId": "Factories_ConfigureFactoryRepo",
+        "x-ms-examples": {
+          "Factories_ConfigureFactoryRepo": {
+            "$ref": "./examples/Factories_ConfigureFactoryRepo.json"
+          }
+        },
+        "description": "Updates a factory's repo information.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/locationId"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "name": "factoryRepoUpdate",
+            "description": "Update factory repo request definition.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/FactoryRepoUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/Factory"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Azure Data Factory service.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories": {
       "get": {
         "tags": [
@@ -1007,7 +1055,7 @@
             "$ref": "./examples/IntegrationRuntimes_Upgrade.json"
           }
         },
-        "description": "Upgrade self-hosted integration runtime to latest version if availably.",
+        "description": "Upgrade self-hosted integration runtime to latest version if availability.",
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionId"
@@ -2400,1387 +2448,1454 @@
       }
     }
   },
-    "definitions": {
-      "Resource": {
-        "x-ms-azure-resource": true,
-        "description": "Azure Data Factory top-level resource.",
+  "definitions": {
+    "Resource": {
+      "x-ms-azure-resource": true,
+      "description": "Azure Data Factory top-level resource.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The resource identifier.",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "description": "The resource name.",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "description": "The resource type.",
+          "readOnly": true
+        },
+        "location": {
+          "type": "string",
+          "description": "The resource location.",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "The resource tags."
+        }
+      }
+    },
+    "SubResource": {
+      "description": "Azure Data Factory nested resource, which belongs to a factory.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The resource identifier.",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "description": "The resource name.",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "description": "The resource type.",
+          "readOnly": true
+        },
+        "etag": {
+          "type": "string",
+          "description": "Etag identifies change in the resource.",
+          "readOnly": true
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "Expression": {
+      "description": "Azure Data Factory expression definition.",
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "Expression type.",
+          "enum": [
+            "Expression"
+          ]
+        },
+        "value": {
+          "type": "string",
+          "description": "Expression value."
+        }
+      },
+      "required": [
+        "type",
+        "value"
+      ]
+    },
+    "SecureString": {
+      "x-ms-discriminator-value": "SecureString",
+      "description": "Azure Data Factory secure string definition. The string value will be masked with asterisks '*' during Get or List API calls.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/SecretBase"
+        }
+      ],
+      "properties": {
+        "value": {
+          "type": "string",
+          "description": "Value of secure string."
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "AzureKeyVaultSecretReference": {
+      "x-ms-discriminator-value": "AzureKeyVaultSecret",
+      "description": "Azure Key Vault secret reference.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/SecretBase"
+        }
+      ],
+      "properties": {
+        "store": {
+          "description": "The Azure Key Vault linked service reference.",
+          "$ref": "#/definitions/LinkedServiceReference"
+        },
+        "secretName": {
+          "type": "object",
+          "description": "The name of the secret in Azure Key Vault. Type: string (or Expression with resultType string)."
+        },
+        "secretVersion": {
+          "type": "object",
+          "description": "The version of the secret in Azure Key Vault. The default value is the latest version of the secret. Type: string (or Expression with resultType string)."
+        }
+      },
+      "required": [
+        "store",
+        "secretName"
+      ]
+    },
+    "SecretBase": {
+      "description": "The base definition of a secret type.",
+      "discriminator": "type",
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "Type of the secret."
+        }
+      },
+      "required": [
+        "type"
+      ]
+    },
+    "FactoryListResponse": {
+      "description": "A list of factory resources.",
+      "type": "object",
+      "required": [
+        "value"
+      ],
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "List of factories.",
+          "items": {
+            "$ref": "#/definitions/Factory"
+          }
+        },
+        "nextLink": {
+          "description": "The link to the next page of results, if any remaining results exist.",
+          "type": "string"
+        }
+      }
+    },
+    "IntegrationRuntimeListResponse": {
+      "description": "A list of integration runtime resources.",
+      "type": "object",
+      "required": [
+        "value"
+      ],
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "List of integration runtimes.",
+          "items": {
+            "$ref": "#/definitions/IntegrationRuntimeResource"
+          }
+        },
+        "nextLink": {
+          "description": "The link to the next page of results, if any remaining results exist.",
+          "type": "string"
+        }
+      }
+    },
+    "IntegrationRuntimeReference": {
+      "description": "Integration runtime reference type.",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "Type of integration runtime.",
+          "enum": [
+            "IntegrationRuntimeReference"
+          ]
+        },
+        "referenceName": {
+          "type": "string",
+          "description": "Reference integration runtime name."
+        },
+        "parameters": {
+          "$ref": "#/definitions/ParameterValueSpecification",
+          "description": "Arguments for integration runtime."
+        }
+      },
+      "required": [
+        "type",
+        "referenceName"
+      ]
+    },
+    "IntegrationRuntimeResource": {
+      "description": "Integration runtime resource type.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/SubResource"
+        }
+      ],
+      "properties": {
         "properties": {
-          "id": {
-            "type": "string",
-            "description": "The resource identifier.",
-            "readOnly": true
+          "$ref": "./entityTypes/IntegrationRuntime.json#/definitions/IntegrationRuntime",
+          "description": "Integration runtime properties."
+        }
+      },
+      "required": [
+        "properties"
+      ]
+    },
+    "IntegrationRuntimeStatusResponse": {
+      "description": "Integration runtime status response.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The integration runtime name.",
+          "readOnly": true
+        },
+        "properties": {
+          "$ref": "./entityTypes/IntegrationRuntime.json#/definitions/IntegrationRuntimeStatus",
+          "description": "Integration runtime properties."
+        }
+      },
+      "required": [
+        "properties"
+      ]
+    },
+    "IntegrationRuntimeStatusListResponse": {
+      "description": "A list of integration runtime status.",
+      "type": "object",
+      "required": [
+        "value"
+      ],
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "List of integration runtime status.",
+          "items": {
+            "$ref": "#/definitions/IntegrationRuntimeStatusResponse"
+          }
+        },
+        "nextLink": {
+          "description": "The link to the next page of results, if any remaining results exist.",
+          "type": "string"
+        }
+      }
+    },
+    "UpdateIntegrationRuntimeRequest": {
+      "description": "Update integration runtime request.",
+      "type": "object",
+      "properties": {
+        "autoUpdate": {
+          "description": "Enables or disables the auto-update feature of the self-hosted integration runtime. See https://go.microsoft.com/fwlink/?linkid=854189.",
+          "$ref": "./entityTypes/IntegrationRuntime.json#/definitions/IntegrationRuntimeAutoUpdate"
+        },
+        "updateDelayOffset": {
+          "description": "The time offset (in hours) in the day, e.g., PT03H is 3 hours. The integration runtime auto update will happen on that time.",
+          "type": "string"
+        }
+      }
+    },
+    "UpdateIntegrationRuntimeNodeRequest": {
+      "description": "Update integration runtime node request.",
+      "type": "object",
+      "properties": {
+        "concurrentJobsLimit": {
+          "description": "The number of concurrent jobs permitted to run on the integration runtime node. Values between 1 and maxConcurrentJobs(inclusive) are allowed.",
+          "type": "integer",
+          "minimum": 1
+        }
+      }
+    },
+    "LinkedServiceListResponse": {
+      "description": "A list of linked service resources.",
+      "type": "object",
+      "required": [
+        "value"
+      ],
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "List of linked services.",
+          "items": {
+            "$ref": "#/definitions/LinkedServiceResource"
+          }
+        },
+        "nextLink": {
+          "description": "The link to the next page of results, if any remaining results exist.",
+          "type": "string"
+        }
+      }
+    },
+    "DatasetListResponse": {
+      "description": "A list of dataset resources.",
+      "type": "object",
+      "required": [
+        "value"
+      ],
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "List of datasets.",
+          "items": {
+            "$ref": "#/definitions/DatasetResource"
+          }
+        },
+        "nextLink": {
+          "description": "The link to the next page of results, if any remaining results exist.",
+          "type": "string"
+        }
+      }
+    },
+    "PipelineListResponse": {
+      "description": "A list of pipeline resources.",
+      "type": "object",
+      "required": [
+        "value"
+      ],
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "List of pipelines.",
+          "items": {
+            "$ref": "#/definitions/PipelineResource"
+          }
+        },
+        "nextLink": {
+          "description": "The link to the next page of results, if any remaining results exist.",
+          "type": "string"
+        }
+      }
+    },
+    "TriggerListResponse": {
+      "description": "A list of trigger resources.",
+      "type": "object",
+      "required": [
+        "value"
+      ],
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "List of triggers.",
+          "items": {
+            "$ref": "#/definitions/TriggerResource"
+          }
+        },
+        "nextLink": {
+          "description": "The link to the next page of results, if any remaining results exist.",
+          "type": "string"
+        }
+      }
+    },
+    "CreateRunResponse": {
+      "description": "Response body with a run identifier.",
+      "type": "object",
+      "properties": {
+        "runId": {
+          "description": "Identifier of a run.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "runId"
+      ]
+    },
+    "ErrorResponse": {
+      "description": "The object that defines the structure of an Azure Data Factory response.",
+      "type": "object",
+      "properties": {
+        "code": {
+          "description": "Error code.",
+          "type": "string"
+        },
+        "message": {
+          "description": "Error message.",
+          "type": "string"
+        },
+        "target": {
+          "description": "Property name/path in request associated with error.",
+          "type": "string"
+        },
+        "details": {
+          "description": "Array with additional error details.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ErrorResponse"
+          }
+        }
+      },
+      "required": [
+        "code",
+        "message"
+      ]
+    },
+    "ParameterDefinitionSpecification": {
+      "description": "Definition of all parameters for an entity.",
+      "type": "object",
+      "additionalProperties": {
+        "$ref": "#/definitions/ParameterSpecification"
+      }
+    },
+    "ParameterSpecification": {
+      "description": "Definition of a single parameter for an entity.",
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "Parameter type.",
+          "enum": [
+            "Object",
+            "String",
+            "Int",
+            "Float",
+            "Bool",
+            "Array",
+            "SecureString"
+          ],
+          "x-ms-enum": {
+            "name": "ParameterType",
+            "modelAsString": true
+          }
+        },
+        "defaultValue": {
+          "type": "object",
+          "description": "Default value of parameter."
+        }
+      },
+      "required": [
+        "type"
+      ]
+    },
+    "ParameterValueSpecification": {
+      "description": "An object mapping parameter names to argument values.",
+      "type": "object",
+      "additionalProperties": {
+        "type": "object"
+      }
+    },
+    "FactoryVSTSConfiguration": {
+      "description": "Factory's VSTS repo information.",
+      "properties": {
+        "accountName": {
+          "description": "VSTS account name.",
+          "type": "string"
+        },
+        "projectName": {
+          "description": "VSTS project name.",
+          "type": "string"
+        },
+        "repositoryName": {
+          "description": "VSTS repository name.",
+          "type": "string"
+        },
+        "collaborationBranch": {
+          "description": "VSTS collaboration branch.",
+          "type": "string"
+        },
+        "rootFolder": {
+          "description": "VSTS root folder.",
+          "type": "string"
+        },
+        "lastCommitId": {
+          "description": "VSTS last commit id.",
+          "type": "string"
+        },
+        "tenantId": {
+          "description": "VSTS tenant id.",
+          "type": "string"
+        }
+      }
+    },
+    "FactoryRepoUpdate": {
+      "description": "Factory's VSTS repo information.",
+      "properties": {
+        "factoryResourceId": {
+          "description": "The factory resource id.",
+          "type": "string"
+        },
+        "resourceGroupName": {
+          "description": "The resource group name.",
+          "type": "string"
+        },
+        "vstsConfiguration": {
+          "$ref": "#/definitions/FactoryVSTSConfiguration",
+          "description": "VSTS repo information of the factory."
+        }
+      }
+    },
+    "FactoryProperties": {
+      "description": "Factory resource properties.",
+      "properties": {
+        "provisioningState": {
+          "description": "Factory provisioning state, example Succeeded.",
+          "type": "string",
+          "readOnly": true
+        },
+        "createTime": {
+          "description": "Time the factory was created in ISO8601 format.",
+          "type": "string",
+          "readOnly": true,
+          "format": "date-time"
+        },
+        "version": {
+          "description": "Version of the factory.",
+          "type": "string",
+          "readOnly": true
+        },
+        "vstsConfiguration": {
+          "$ref": "#/definitions/FactoryVSTSConfiguration",
+          "description": "VSTS repo information of the factory."
+        }
+      }
+    },
+    "PipelineResource": {
+      "description": "Pipeline resource type.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/SubResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "./entityTypes/Pipeline.json#/definitions/Pipeline",
+          "description": "Properties of the pipeline."
+        }
+      },
+      "additionalProperties": {
+        "type": "object"
+      },
+      "required": [
+        "properties"
+      ]
+    },
+    "PipelineReference": {
+      "description": "Pipeline reference type.",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "Pipeline reference type.",
+          "enum": [
+            "PipelineReference"
+          ]
+        },
+        "referenceName": {
+          "type": "string",
+          "description": "Reference pipeline name."
+        },
+        "name": {
+          "type": "string",
+          "description": "Reference name."
+        }
+      },
+      "required": [
+        "type",
+        "referenceName"
+      ]
+    },
+    "TriggerPipelineReference": {
+      "description": "Pipeline that needs to be triggered with the given parameters.",
+      "properties": {
+        "pipelineReference": {
+          "description": "Pipeline reference.",
+          "$ref": "#/definitions/PipelineReference"
+        },
+        "parameters": {
+          "description": "Pipeline parameters.",
+          "$ref": "#/definitions/ParameterValueSpecification"
+        }
+      }
+    },
+    "TriggerResource": {
+      "description": "Trigger resource type.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/SubResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "./entityTypes/Trigger.json#/definitions/Trigger",
+          "description": "Properties of the trigger."
+        }
+      },
+      "required": [
+        "properties"
+      ]
+    },
+    "Factory": {
+      "description": "Factory resource type.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "identity": {
+          "$ref": "#/definitions/FactoryIdentity",
+          "description": "Managed service identity of the factory."
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/FactoryProperties",
+          "description": "Properties of the factory."
+        }
+      },
+      "additionalProperties": {
+        "type": "object"
+      }
+    },
+    "FactoryUpdateParameters": {
+      "description": "Parameters for updating a factory resource.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
           },
-          "name": {
-            "type": "string",
-            "description": "The resource name.",
-            "readOnly": true
+          "description": "The resource tags."
+        },
+        "identity": {
+          "$ref": "#/definitions/FactoryIdentity",
+          "description": "Managed service identity of the factory."
+        }
+      }
+    },
+    "FactoryIdentity": {
+      "description": "Identity properties of the factory resource.",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "The identity type. Currently the only supported type is 'SystemAssigned'.",
+          "enum": [
+            "SystemAssigned"
+          ],
+          "x-ms-enum": {
+            "name": "FactoryIdentityType",
+            "modelAsString": false
+          }
+        },
+        "principalId": {
+          "type": "string",
+          "format": "uuid",
+          "readOnly": true,
+          "description": "The principal id of the identity."
+        },
+        "tenantId": {
+          "type": "string",
+          "format": "uuid",
+          "readOnly": true,
+          "description": "The client tenant id of the identity."
+        }
+      },
+      "required": [
+        "type"
+      ]
+    },
+    "DatasetReference": {
+      "description": "Dataset reference type.",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "Dataset reference type.",
+          "enum": [
+            "DatasetReference"
+          ]
+        },
+        "referenceName": {
+          "type": "string",
+          "description": "Reference dataset name."
+        },
+        "parameters": {
+          "$ref": "#/definitions/ParameterValueSpecification",
+          "description": "Arguments for dataset."
+        }
+      },
+      "required": [
+        "type",
+        "referenceName"
+      ]
+    },
+    "DatasetResource": {
+      "description": "Dataset resource type.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/SubResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "./entityTypes/Dataset.json#/definitions/Dataset",
+          "description": "Dataset properties."
+        }
+      },
+      "required": [
+        "properties"
+      ]
+    },
+    "LinkedServiceReference": {
+      "description": "Linked service reference type.",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "Linked service reference type.",
+          "enum": [
+            "LinkedServiceReference"
+          ]
+        },
+        "referenceName": {
+          "type": "string",
+          "description": "Reference LinkedService name."
+        },
+        "parameters": {
+          "$ref": "#/definitions/ParameterValueSpecification",
+          "description": "Arguments for LinkedService."
+        }
+      },
+      "required": [
+        "type",
+        "referenceName"
+      ]
+    },
+    "LinkedServiceResource": {
+      "description": "Linked service resource type.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/SubResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "./entityTypes/LinkedService.json#/definitions/LinkedService",
+          "description": "Properties of linked service."
+        }
+      },
+      "required": [
+        "properties"
+      ]
+    },
+    "PipelineRunFilterParameters": {
+      "description": "Query parameters for listing pipeline runs.",
+      "type": "object",
+      "properties": {
+        "continuationToken": {
+          "description": "The continuation token for getting the next page of results. Null for first page.",
+          "type": "string"
+        },
+        "lastUpdatedAfter": {
+          "description": "The time at or after which the pipeline run event was updated in 'ISO 8601' format.",
+          "type": "string",
+          "format": "date-time"
+        },
+        "lastUpdatedBefore": {
+          "description": "The time at or before which the pipeline run event was updated in 'ISO 8601' format.",
+          "type": "string",
+          "format": "date-time"
+        },
+        "filters": {
+          "type": "array",
+          "description": "List of filters.",
+          "items": {
+            "$ref": "#/definitions/PipelineRunQueryFilter"
+          }
+        },
+        "orderBy": {
+          "type": "array",
+          "description": "List of OrderBy option.",
+          "items": {
+            "$ref": "#/definitions/PipelineRunQueryOrderBy"
+          }
+        }
+      },
+      "required": [
+        "lastUpdatedAfter",
+        "lastUpdatedBefore"
+      ]
+    },
+    "PipelineRunQueryFilter": {
+      "description": "Query filter option for listing pipeline runs.",
+      "type": "object",
+      "properties": {
+        "operand": {
+          "description": "Parameter name to be used for filter.",
+          "type": "string",
+          "enum": [
+            "PipelineName",
+            "Status",
+            "RunStart",
+            "RunEnd"
+          ],
+          "x-ms-enum": {
+            "name": "PipelineRunQueryFilterOperand",
+            "modelAsString": true
+          }
+        },
+        "operator": {
+          "description": "Operator to be used for filter.",
+          "type": "string",
+          "enum": [
+            "Equals",
+            "NotEquals",
+            "In",
+            "NotIn"
+          ],
+          "x-ms-enum": {
+            "name": "PipelineRunQueryFilterOperator",
+            "modelAsString": true
+          }
+        },
+        "values": {
+          "type": "array",
+          "description": "List of filter values.",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "operand",
+        "operator",
+        "values"
+      ]
+    },
+    "PipelineRunQueryOrderBy": {
+      "description": "An object to provide order by options for listing pipeline runs.",
+      "type": "object",
+      "properties": {
+        "orderBy": {
+          "description": "Parameter name to be used for order by.",
+          "type": "string",
+          "enum": [
+            "RunStart",
+            "RunEnd"
+          ],
+          "x-ms-enum": {
+            "name": "PipelineRunQueryOrderByField",
+            "modelAsString": true
+          }
+        },
+        "order": {
+          "description": "Sorting order of the parameter.",
+          "type": "string",
+          "enum": [
+            "ASC",
+            "DESC"
+          ],
+          "x-ms-enum": {
+            "name": "PipelineRunQueryOrder",
+            "modelAsString": true
+          }
+        }
+      },
+      "required": [
+        "orderBy",
+        "order"
+      ]
+    },
+    "PipelineRunQueryResponse": {
+      "description": "A list pipeline runs.",
+      "type": "object",
+      "required": [
+        "value"
+      ],
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "List of pipeline runs.",
+          "items": {
+            "$ref": "#/definitions/PipelineRun"
+          }
+        },
+        "continuationToken": {
+          "description": "The continuation token for getting the next page of results, if any remaining results exist, null otherwise.",
+          "type": "string"
+        }
+      }
+    },
+    "PipelineRun": {
+      "description": "Information about a pipeline run.",
+      "type": "object",
+      "properties": {
+        "runId": {
+          "description": "Identifier of a run.",
+          "type": "string",
+          "readOnly": true
+        },
+        "pipelineName": {
+          "description": "The pipeline name.",
+          "type": "string",
+          "readOnly": true
+        },
+        "parameters": {
+          "description": "The full or partial list of parameter name, value pair used in the pipeline run.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
           },
-          "type": {
-            "type": "string",
-            "description": "The resource type.",
-            "readOnly": true
+          "readOnly": true
+        },
+        "invokedBy": {
+          "description": "Entity that started the pipeline run.",
+          "$ref": "#/definitions/PipelineRunInvokedBy",
+          "readOnly": true
+        },
+        "lastUpdated": {
+          "description": "The last updated timestamp for the pipeline run event in ISO8601 format.",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "runStart": {
+          "description": "The start time of a pipeline run in ISO8601 format.",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "runEnd": {
+          "description": "The end time of a pipeline run in ISO8601 format.",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "durationInMs": {
+          "description": "The duration of a pipeline run.",
+          "type": "integer",
+          "readOnly": true
+        },
+        "status": {
+          "description": "The status of a pipeline run.",
+          "type": "string",
+          "readOnly": true
+        },
+        "message": {
+          "description": "The message from a pipeline run.",
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "additionalProperties": {
+        "type": "object"
+      }
+    },
+    "PipelineRunInvokedBy": {
+      "description": "Provides entity name and id that started the pipeline run.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Name of the entity that started the pipeline run.",
+          "type": "string",
+          "readOnly": true
+        },
+        "id": {
+          "description": "The ID of the entity that started the run.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "ActivityRunsListResponse": {
+      "description": "A list activity runs.",
+      "type": "object",
+      "required": [
+        "value"
+      ],
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "List of activity runs.",
+          "items": {
+            "$ref": "#/definitions/ActivityRun"
+          }
+        },
+        "nextLink": {
+          "description": "The link to the next page of results, if any remaining results exist.",
+          "type": "string"
+        }
+      }
+    },
+    "ActivityRun": {
+      "description": "Information about an activity run in a pipeline.",
+      "type": "object",
+      "properties": {
+        "pipelineName": {
+          "description": "The name of the pipeline.",
+          "type": "string",
+          "readOnly": true
+        },
+        "pipelineRunId": {
+          "description": "The id of the pipeline run.",
+          "type": "string",
+          "readOnly": true
+        },
+        "activityName": {
+          "description": "The name of the activity.",
+          "type": "string",
+          "readOnly": true
+        },
+        "activityType": {
+          "description": "The type of the activity.",
+          "type": "string",
+          "readOnly": true
+        },
+        "activityRunId": {
+          "description": "The id of the activity run.",
+          "type": "string",
+          "readOnly": true
+        },
+        "linkedServiceName": {
+          "description": "The name of the compute linked service.",
+          "type": "string",
+          "readOnly": true
+        },
+        "status": {
+          "description": "The status of the activity run.",
+          "type": "string",
+          "readOnly": true
+        },
+        "activityRunStart": {
+          "description": "The start time of the activity run in 'ISO 8601' format.",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "activityRunEnd": {
+          "description": "The end time of the activity run in 'ISO 8601' format.",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "durationInMs": {
+          "description": "The duration of the activity run.",
+          "type": "integer",
+          "readOnly": true
+        },
+        "input": {
+          "description": "The input for the activity.",
+          "type": "object",
+          "readOnly": true
+        },
+        "output": {
+          "description": "The output for the activity.",
+          "type": "object",
+          "readOnly": true
+        },
+        "error": {
+          "description": "The error if any from the activity run.",
+          "type": "object",
+          "readOnly": true
+        }
+      },
+      "additionalProperties": {
+        "type": "object"
+      }
+    },
+    "TriggerRunListResponse": {
+      "description": "A list of trigger runs.",
+      "type": "object",
+      "required": [
+        "value"
+      ],
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "List of trigger runs.",
+          "items": {
+            "$ref": "#/definitions/TriggerRun"
+          }
+        },
+        "nextLink": {
+          "description": "The link to the next page of results, if any remaining results exist.",
+          "type": "string"
+        }
+      }
+    },
+    "TriggerRun": {
+      "description": "Trigger runs.",
+      "type": "object",
+      "properties": {
+        "triggerRunId": {
+          "type": "string",
+          "description": "Trigger run id.",
+          "readOnly": true
+        },
+        "triggerName": {
+          "type": "string",
+          "description": "Trigger name.",
+          "readOnly": true
+        },
+        "triggerType": {
+          "type": "string",
+          "description": "Trigger type.",
+          "readOnly": true
+        },
+        "triggerRunTimestamp": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Trigger run start time.",
+          "readOnly": true
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "Succeeded",
+            "Failed",
+            "Inprogress"
+          ],
+          "x-ms-enum": {
+            "name": "TriggerRunStatus",
+            "modelAsString": true
           },
-          "location": {
-            "type": "string",
-            "description": "The resource location.",
-            "x-ms-mutability": [
-              "create",
-              "read"
-            ]
+          "description": "Trigger run status.",
+          "readOnly": true
+        },
+        "message": {
+          "type": "string",
+          "description": "Trigger error message.",
+          "readOnly": true
+        },
+        "properties": {
+          "description": "List of property name and value related to trigger run. Name, value pair depends on type of trigger.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
           },
-          "tags": {
-            "type": "object",
-            "additionalProperties": {
+          "readOnly": true
+        },
+        "triggeredPipelines": {
+          "description": "List of pipeline name and run Id triggered by the trigger run.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "readOnly": true
+        }
+      },
+      "additionalProperties": {
+        "type": "object"
+      }
+    },
+    "OperationListResponse": {
+      "description": "A list of operations that can be performed by the Data Factory service.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Operation"
+          },
+          "description": "List of Data Factory operations supported by the Data Factory resource provider."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The link to the next page of results, if any remaining results exist."
+        }
+      }
+    },
+    "Operation": {
+      "description": "Azure Data Factory API operation definition.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Operation name: {provider}/{resource}/{operation}",
+          "type": "string"
+        },
+        "origin": {
+          "description": "The intended executor of the operation.",
+          "type": "string"
+        },
+        "display": {
+          "description": "Metadata associated with the operation.",
+          "properties": {
+            "description": {
+              "description": "The description of the operation.",
               "type": "string"
             },
-            "description": "The resource tags."
-          }
-        }
-      },
-      "SubResource": {
-        "description": "Azure Data Factory nested resource, which belongs to a factory.",
-        "properties": {
-          "id": {
-            "type": "string",
-            "description": "The resource identifier.",
-            "readOnly": true
-          },
-          "name": {
-            "type": "string",
-            "description": "The resource name.",
-            "readOnly": true
-          },
-          "type": {
-            "type": "string",
-            "description": "The resource type.",
-            "readOnly": true
-          },
-          "etag": {
-            "type": "string",
-            "description": "Etag identifies change in the resource.",
-            "readOnly": true
-          }
-        },
-        "x-ms-azure-resource": true
-      },
-      "Expression": {
-        "description": "Azure Data Factory expression definition.",
-        "type": "object",
-        "properties": {
-          "type": {
-            "type": "string",
-            "description": "Expression type.",
-            "enum": [
-              "Expression"
-            ]
-          },
-          "value": {
-            "type": "string",
-            "description": "Expression value."
-          }
-        },
-        "required": [
-          "type",
-          "value"
-        ]
-      },
-      "SecureString": {
-        "x-ms-discriminator-value": "SecureString",
-        "description": "Azure Data Factory secure string definition. The string value will be masked with asterisks '*' during Get or List API calls.",
-        "type": "object",
-        "allOf": [
-          {
-            "$ref": "#/definitions/SecretBase"
-          }
-        ],
-        "properties": {
-          "value": {
-            "type": "string",
-            "description": "Value of secure string."
-          }
-        },
-        "required": [
-          "value"
-        ]
-      },
-      "AzureKeyVaultSecretReference": {
-        "x-ms-discriminator-value": "AzureKeyVaultSecret",
-        "description": "Azure Key Vault secret reference.",
-        "type": "object",
-        "allOf": [
-          {
-            "$ref": "#/definitions/SecretBase"
-          }
-        ],
-        "properties": {
-          "store": {
-            "description": "The Azure Key Vault linked service reference.",
-            "$ref": "#/definitions/LinkedServiceReference"
-          },
-          "secretName": {
-            "type": "object",
-            "description": "The name of the secret in Azure Key Vault. Type: string (or Expression with resultType string)."
-          },
-          "secretVersion": {
-            "type": "object",
-            "description": "The version of the secret in Azure Key Vault. The default value is the latest version of the secret. Type: string (or Expression with resultType string)."
-          }
-        },
-        "required": [
-          "store",
-          "secretName"
-        ]
-      },
-      "SecretBase": {
-        "description": "The base definition of a secret type.",
-        "discriminator": "type",
-        "type": "object",
-        "properties": {
-          "type": {
-            "type": "string",
-            "description": "Type of the secret."
-          }
-        },
-        "required": [
-          "type"
-        ]
-      },
-      "FactoryListResponse": {
-        "description": "A list of factory resources.",
-        "type": "object",
-        "required": [
-          "value"
-        ],
-        "properties": {
-          "value": {
-            "type": "array",
-            "description": "List of factories.",
-            "items": {
-              "$ref": "#/definitions/Factory"
-            }
-          },
-          "nextLink": {
-            "description": "The link to the next page of results, if any remaining results exist.",
-            "type": "string"
-          }
-        }
-      },
-      "IntegrationRuntimeListResponse": {
-        "description": "A list of integration runtime resources.",
-        "type": "object",
-        "required": [
-          "value"
-        ],
-        "properties": {
-          "value": {
-            "type": "array",
-            "description": "List of integration runtimes.",
-            "items": {
-              "$ref": "#/definitions/IntegrationRuntimeResource"
-            }
-          },
-          "nextLink": {
-            "description": "The link to the next page of results, if any remaining results exist.",
-            "type": "string"
-          }
-        }
-      },
-      "IntegrationRuntimeReference": {
-        "description": "Integration runtime reference type.",
-        "properties": {
-          "type": {
-            "type": "string",
-            "description": "Type of integration runtime.",
-            "enum": [
-              "IntegrationRuntimeReference"
-            ]
-          },
-          "referenceName": {
-            "type": "string",
-            "description": "Reference integration runtime name."
-          },
-          "parameters": {
-            "$ref": "#/definitions/ParameterValueSpecification",
-            "description": "Arguments for integration runtime."
-          }
-        },
-        "required": [
-          "type",
-          "referenceName"
-        ]
-      },
-      "IntegrationRuntimeResource": {
-        "description": "Integration runtime resource type.",
-        "allOf": [
-          {
-            "$ref": "#/definitions/SubResource"
-          }
-        ],
-        "properties": {
-          "properties": {
-            "$ref": "./entityTypes/IntegrationRuntime.json#/definitions/IntegrationRuntime",
-            "description": "Integration runtime properties."
-          }
-        },
-        "required": [
-          "properties"
-        ]
-      },
-      "IntegrationRuntimeStatusResponse": {
-        "description": "Integration runtime status response.",
-        "properties": {
-          "name": {
-            "type": "string",
-            "description": "The integration runtime name.",
-            "readOnly": true
-          },
-          "properties": {
-            "$ref": "./entityTypes/IntegrationRuntime.json#/definitions/IntegrationRuntimeStatus",
-            "description": "Integration runtime properties."
-          }
-        },
-        "required": [
-          "properties"
-        ]
-      },
-      "IntegrationRuntimeStatusListResponse": {
-        "description": "A list of integration runtime status.",
-        "type": "object",
-        "required": [
-          "value"
-        ],
-        "properties": {
-          "value": {
-            "type": "array",
-            "description": "List of integration runtime status.",
-            "items": {
-              "$ref": "#/definitions/IntegrationRuntimeStatusResponse"
-            }
-          },
-          "nextLink": {
-            "description": "The link to the next page of results, if any remaining results exist.",
-            "type": "string"
-          }
-        }
-      },
-      "UpdateIntegrationRuntimeRequest": {
-        "description": "Update integration runtime request.",
-        "type": "object",
-        "properties": {
-          "autoUpdate": {
-            "description": "Enables or disables the auto-update feature of the self-hosted integration runtime. See https://go.microsoft.com/fwlink/?linkid=854189.",
-            "$ref": "./entityTypes/IntegrationRuntime.json#/definitions/IntegrationRuntimeAutoUpdate"
-          },
-          "updateDelayOffset": {
-            "description": "The time offset (in hours) in the day, e.g., PT03H is 3 hours. The integration runtime auto update will happen on that time.",
-            "type": "string"
-          }
-        }
-      },
-      "UpdateIntegrationRuntimeNodeRequest": {
-        "description": "Update integration runtime node request.",
-        "type": "object",
-        "properties": {
-          "concurrentJobsLimit": {
-            "description": "The number of concurrent jobs permitted to run on the integration runtime node. Values between 1 and maxConcurrentJobs(inclusive) are allowed.",
-            "type": "integer",
-            "minimum": 1
-          }
-        }
-      },
-      "LinkedServiceListResponse": {
-        "description": "A list of linked service resources.",
-        "type": "object",
-        "required": [
-          "value"
-        ],
-        "properties": {
-          "value": {
-            "type": "array",
-            "description": "List of linked services.",
-            "items": {
-              "$ref": "#/definitions/LinkedServiceResource"
-            }
-          },
-          "nextLink": {
-            "description": "The link to the next page of results, if any remaining results exist.",
-            "type": "string"
-          }
-        }
-      },
-      "DatasetListResponse": {
-        "description": "A list of dataset resources.",
-        "type": "object",
-        "required": [
-          "value"
-        ],
-        "properties": {
-          "value": {
-            "type": "array",
-            "description": "List of datasets.",
-            "items": {
-              "$ref": "#/definitions/DatasetResource"
-            }
-          },
-          "nextLink": {
-            "description": "The link to the next page of results, if any remaining results exist.",
-            "type": "string"
-          }
-        }
-      },
-      "PipelineListResponse": {
-        "description": "A list of pipeline resources.",
-        "type": "object",
-        "required": [
-          "value"
-        ],
-        "properties": {
-          "value": {
-            "type": "array",
-            "description": "List of pipelines.",
-            "items": {
-              "$ref": "#/definitions/PipelineResource"
-            }
-          },
-          "nextLink": {
-            "description": "The link to the next page of results, if any remaining results exist.",
-            "type": "string"
-          }
-        }
-      },
-      "TriggerListResponse": {
-        "description": "A list of trigger resources.",
-        "type": "object",
-        "required": [
-          "value"
-        ],
-        "properties": {
-          "value": {
-            "type": "array",
-            "description": "List of triggers.",
-            "items": {
-              "$ref": "#/definitions/TriggerResource"
-            }
-          },
-          "nextLink": {
-            "description": "The link to the next page of results, if any remaining results exist.",
-            "type": "string"
-          }
-        }
-      },
-      "CreateRunResponse": {
-        "description": "Response body with a run identifier.",
-        "type": "object",
-        "properties": {
-          "runId": {
-            "description": "Identifier of a run.",
-            "type": "string"
-          }
-        },
-        "required": [
-          "runId"
-        ]
-      },
-      "ErrorResponse": {
-        "description": "The object that defines the structure of an Azure Data Factory response.",
-        "type": "object",
-        "properties": {
-          "code": {
-            "description": "Error code.",
-            "type": "string"
-          },
-          "message": {
-            "description": "Error message.",
-            "type": "string"
-          },
-          "target": {
-            "description": "Property name/path in request associated with error.",
-            "type": "string"
-          },
-          "details": {
-            "description": "Array with additional error details.",
-            "type": "array",
-            "items": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "required": [
-          "code",
-          "message"
-        ]
-      },
-      "ParameterDefinitionSpecification": {
-        "description": "Definition of all parameters for an entity.",
-        "type": "object",
-        "additionalProperties": {
-          "$ref": "#/definitions/ParameterSpecification"
-        }
-      },
-      "ParameterSpecification": {
-        "description": "Definition of a single parameter for an entity.",
-        "type": "object",
-        "properties": {
-          "type": {
-            "type": "string",
-            "description": "Parameter type.",
-            "enum": [
-              "Object",
-              "String",
-              "Int",
-              "Float",
-              "Bool",
-              "Array"
-            ],
-            "x-ms-enum": {
-              "name": "ParameterType",
-              "modelAsString": true
-            }
-          },
-          "defaultValue": {
-            "type": "object",
-            "description": "Default value of parameter."
-          }
-        },
-        "required": [
-          "type"
-        ]
-      },
-      "ParameterValueSpecification": {
-        "description": "An object mapping parameter names to argument values.",
-        "type": "object",
-        "additionalProperties": {
-          "type": "object"
-        }
-      },
-      "FactoryProperties": {
-        "description": "Factory resource properties.",
-        "properties": {
-          "provisioningState": {
-            "description": "Factory provisioning state, example Succeeded.",
-            "type": "string",
-            "readOnly": true
-          },
-          "createTime": {
-            "description": "Time the factory was created in ISO8601 format.",
-            "type": "string",
-            "readOnly": true,
-            "format": "date-time"
-          },
-          "version": {
-            "description": "Version of the factory.",
-            "type": "string",
-            "readOnly": true
-          }
-        }
-      },
-      "PipelineResource": {
-        "description": "Pipeline resource type.",
-        "type": "object",
-        "allOf": [
-          {
-            "$ref": "#/definitions/SubResource"
-          }
-        ],
-        "properties": {
-          "properties": {
-            "x-ms-client-flatten": true,
-            "$ref": "./entityTypes/Pipeline.json#/definitions/Pipeline",
-            "description": "Properties of the pipeline."
-          }
-        },
-        "additionalProperties": {
-          "type": "object"
-        },
-        "required": [
-          "properties"
-        ]
-      },
-      "PipelineReference": {
-        "description": "Pipeline reference type.",
-        "properties": {
-          "type": {
-            "type": "string",
-            "description": "Pipeline reference type.",
-            "enum": [
-              "PipelineReference"
-            ]
-          },
-          "referenceName": {
-            "type": "string",
-            "description": "Reference pipeline name."
-          },
-          "name": {
-            "type": "string",
-            "description": "Reference name."
-          }
-        },
-        "required": [
-          "type",
-          "referenceName"
-        ]
-      },
-      "TriggerPipelineReference": {
-        "description": "Pipeline that needs to be triggered with the given parameters.",
-        "properties": {
-          "pipelineReference": {
-            "description": "Pipeline reference.",
-            "$ref": "#/definitions/PipelineReference"
-          },
-          "parameters": {
-            "description": "Pipeline parameters.",
-            "$ref": "#/definitions/ParameterValueSpecification"
-          }
-        }
-      },
-      "TriggerResource": {
-        "description": "Trigger resource type.",
-        "allOf": [
-          {
-            "$ref": "#/definitions/SubResource"
-          }
-        ],
-        "properties": {
-          "properties": {
-            "$ref": "./entityTypes/Trigger.json#/definitions/Trigger",
-            "description": "Properties of the trigger."
-          }
-        },
-        "required": [
-          "properties"
-        ]
-      },
-      "Factory": {
-        "description": "Factory resource type.",
-        "type": "object",
-        "allOf": [
-          {
-            "$ref": "#/definitions/Resource"
-          }
-        ],
-        "properties": {
-          "identity": {
-            "$ref": "#/definitions/FactoryIdentity",
-            "description": "Managed service identity of the factory."
-          },
-          "properties": {
-            "x-ms-client-flatten": true,
-            "$ref": "#/definitions/FactoryProperties",
-            "description": "Properties of the factory."
-          }
-        },
-        "additionalProperties": {
-          "type": "object"
-        }
-      },
-      "FactoryUpdateParameters": {
-        "description": "Parameters for updating a factory resource.",
-        "properties": {
-          "tags": {
-            "type": "object",
-            "additionalProperties": {
+            "provider": {
+              "description": "The name of the provider.",
               "type": "string"
             },
-            "description": "The resource tags."
-          },
-          "identity": {
-            "$ref": "#/definitions/FactoryIdentity",
-            "description": "Managed service identity of the factory."
-          }
-        }
-      },
-      "FactoryIdentity": {
-        "description": "Identity properties of the factory resource.",
-        "properties": {
-          "type": {
-            "type": "string",
-            "description": "The identity type. Currently the only supported type is 'SystemAssigned'.",
-            "enum": [
-              "SystemAssigned"
-            ],
-            "x-ms-enum": {
-              "name": "FactoryIdentityType",
-              "modelAsString": false
-            }
-          },
-          "principalId": {
-            "type": "string",
-            "format": "uuid",
-            "readOnly": true,
-            "description": "The principal id of the identity."
-          },
-          "tenantId": {
-            "type": "string",
-            "format": "uuid",
-            "readOnly": true,
-            "description": "The client tenant id of the identity."
-          }
-        },
-        "required": [
-          "type"
-        ]
-      },
-      "DatasetReference": {
-        "description": "Dataset reference type.",
-        "properties": {
-          "type": {
-            "type": "string",
-            "description": "Dataset reference type.",
-            "enum": [
-              "DatasetReference"
-            ]
-          },
-          "referenceName": {
-            "type": "string",
-            "description": "Reference dataset name."
-          },
-          "parameters": {
-            "$ref": "#/definitions/ParameterValueSpecification",
-            "description": "Arguments for dataset."
-          }
-        },
-        "required": [
-          "type",
-          "referenceName"
-        ]
-      },
-      "DatasetResource": {
-        "description": "Dataset resource type.",
-        "allOf": [
-          {
-            "$ref": "#/definitions/SubResource"
-          }
-        ],
-        "properties": {
-          "properties": {
-            "$ref": "./entityTypes/Dataset.json#/definitions/Dataset",
-            "description": "Dataset properties."
-          }
-        },
-        "required": [
-          "properties"
-        ]
-      },
-      "LinkedServiceReference": {
-        "description": "Linked service reference type.",
-        "properties": {
-          "type": {
-            "type": "string",
-            "description": "Linked service reference type.",
-            "enum": [
-              "LinkedServiceReference"
-            ]
-          },
-          "referenceName": {
-            "type": "string",
-            "description": "Reference LinkedService name."
-          }
-        },
-        "required": [
-          "type",
-          "referenceName"
-        ]
-      },
-      "LinkedServiceResource": {
-        "description": "Linked service resource type.",
-        "allOf": [
-          {
-            "$ref": "#/definitions/SubResource"
-          }
-        ],
-        "properties": {
-          "properties": {
-            "$ref": "./entityTypes/LinkedService.json#/definitions/LinkedService",
-            "description": "Properties of linked service."
-          }
-        },
-        "required": [
-          "properties"
-        ]
-      },
-      "PipelineRunFilterParameters": {
-        "description": "Query parameters for listing pipeline runs.",
-        "type": "object",
-        "properties": {
-          "continuationToken": {
-            "description": "The continuation token for getting the next page of results. Null for first page.",
-            "type": "string"
-          },
-          "lastUpdatedAfter": {
-            "description": "The time at or after which the pipeline run event was updated in 'ISO 8601' format.",
-            "type": "string",
-            "format": "date-time"
-          },
-          "lastUpdatedBefore": {
-            "description": "The time at or before which the pipeline run event was updated in 'ISO 8601' format.",
-            "type": "string",
-            "format": "date-time"
-          },
-          "filters": {
-            "type": "array",
-            "description": "List of filters.",
-            "items": {
-              "$ref": "#/definitions/PipelineRunQueryFilter"
-            }
-          },
-          "orderBy": {
-            "type": "array",
-            "description": "List of OrderBy option.",
-            "items": {
-              "$ref": "#/definitions/PipelineRunQueryOrderBy"
-            }
-          }
-        },
-        "required": [
-          "lastUpdatedAfter",
-          "lastUpdatedBefore"
-        ]
-      },
-      "PipelineRunQueryFilter": {
-        "description": "Query filter option for listing pipeline runs.",
-        "type": "object",
-        "properties": {
-          "operand": {
-            "description": "Parameter name to be used for filter.",
-            "type": "string",
-            "enum": [
-              "PipelineName",
-              "Status",
-              "RunStart",
-              "RunEnd"
-            ],
-            "x-ms-enum": {
-              "name": "PipelineRunQueryFilterOperand",
-              "modelAsString": true
-            }
-          },
-          "operator": {
-            "description": "Operator to be used for filter.",
-            "type": "string",
-            "enum": [
-              "Equals",
-              "NotEquals",
-              "In",
-              "NotIn"
-            ],
-            "x-ms-enum": {
-              "name": "PipelineRunQueryFilterOperator",
-              "modelAsString": true
-            }
-          },
-          "values": {
-            "type": "array",
-            "description": "List of filter values.",
-            "items": {
+            "resource": {
+              "description": "The name of the resource type on which the operation is performed.",
+              "type": "string"
+            },
+            "operation": {
+              "description": "The type of operation: get, read, delete, etc.",
               "type": "string"
             }
           }
         },
-        "required": [
-          "operand",
-          "operator",
-          "values"
-        ]
-      },
-      "PipelineRunQueryOrderBy": {
-        "description": "An object to provide order by options for listing pipeline runs.",
-        "type": "object",
         "properties": {
-          "orderBy": {
-            "description": "Parameter name to be used for order by.",
-            "type": "string",
-            "enum": [
-              "RunStart",
-              "RunEnd"
-            ],
-            "x-ms-enum": {
-              "name": "PipelineRunQueryOrderByField",
-              "modelAsString": true
-            }
-          },
-          "order": {
-            "description": "Sorting order of the parameter.",
-            "type": "string",
-            "enum": [
-              "ASC",
-              "DESC"
-            ],
-            "x-ms-enum": {
-              "name": "PipelineRunQueryOrder",
-              "modelAsString": true
-            }
+          "description": "Additional details about the operation.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/OperationProperties"
+        }
+      }
+    },
+    "OperationProperties": {
+      "description": "Additional details about an operation.",
+      "type": "object",
+      "x-ms-client-flatten": true,
+      "properties": {
+        "serviceSpecification": {
+          "description": "Details about a service operation.",
+          "$ref": "#/definitions/OperationServiceSpecification"
+        }
+      }
+    },
+    "OperationServiceSpecification": {
+      "description": "Details about a service operation.",
+      "type": "object",
+      "properties": {
+        "logSpecifications": {
+          "description": "Details about operations related to logs.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/OperationLogSpecification"
           }
         },
-        "required": [
-          "orderBy",
-          "order"
-        ]
-      },
-      "PipelineRunQueryResponse": {
-        "description": "A list pipeline runs.",
-        "type": "object",
-        "required": [
-          "value"
-        ],
-        "properties": {
-          "value": {
-            "type": "array",
-            "description": "List of pipeline runs.",
-            "items": {
-              "$ref": "#/definitions/PipelineRun"
-            }
-          },
-          "continuationToken": {
-            "description": "The continuation token for getting the next page of results, if any remaining results exist, null otherwise.",
-            "type": "string"
-          }
-        }
-      },
-      "PipelineRun": {
-        "description": "Information about a pipeline run.",
-        "type": "object",
-        "properties": {
-          "runId": {
-            "description": "Identifier of a run.",
-            "type": "string",
-            "readOnly": true
-          },
-          "pipelineName": {
-            "description": "The pipeline name.",
-            "type": "string",
-            "readOnly": true
-          },
-          "parameters": {
-            "description": "The full or partial list of parameter name, value pair used in the pipeline run.",
-            "type": "object",
-            "additionalProperties": {
-              "type": "string"
-            },
-            "readOnly": true
-          },
-          "invokedBy": {
-            "description": "Entity that started the pipeline run.",
-            "$ref": "#/definitions/PipelineRunInvokedBy",
-            "readOnly": true
-          },
-          "lastUpdated": {
-            "description": "The last updated timestamp for the pipeline run event in ISO8601 format.",
-            "type": "string",
-            "format": "date-time",
-            "readOnly": true
-          },
-          "runStart": {
-            "description": "The start time of a pipeline run in ISO8601 format.",
-            "type": "string",
-            "format": "date-time",
-            "readOnly": true
-          },
-          "runEnd": {
-            "description": "The end time of a pipeline run in ISO8601 format.",
-            "type": "string",
-            "format": "date-time",
-            "readOnly": true
-          },
-          "durationInMs": {
-            "description": "The duration of a pipeline run.",
-            "type": "integer",
-            "readOnly": true
-          },
-          "status": {
-            "description": "The status of a pipeline run.",
-            "type": "string",
-            "readOnly": true
-          },
-          "message": {
-            "description": "The message from a pipeline run.",
-            "type": "string",
-            "readOnly": true
-          }
-        },
-        "additionalProperties": {
-          "type": "object"
-        }
-      },
-      "PipelineRunInvokedBy": {
-        "description": "Provides entity name and id that started the pipeline run.",
-        "type": "object",
-        "properties": {
-          "name": {
-            "description": "Name of the entity that started the pipeline run.",
-            "type": "string",
-            "readOnly": true
-          },
-          "id": {
-            "description": "The ID of the entity that started the run.",
-            "type": "string",
-            "readOnly": true
-          }
-        }
-      },
-      "ActivityRunsListResponse": {
-        "description": "A list activity runs.",
-        "type": "object",
-        "required": [
-          "value"
-        ],
-        "properties": {
-          "value": {
-            "type": "array",
-            "description": "List of activity runs.",
-            "items": {
-              "$ref": "#/definitions/ActivityRun"
-            }
-          },
-          "nextLink": {
-            "description": "The link to the next page of results, if any remaining results exist.",
-            "type": "string"
-          }
-        }
-      },
-      "ActivityRun": {
-        "description": "Information about an activity run in a pipeline.",
-        "type": "object",
-        "properties": {
-          "pipelineName": {
-            "description": "The name of the pipeline.",
-            "type": "string",
-            "readOnly": true
-          },
-          "pipelineRunId": {
-            "description": "The id of the pipeline run.",
-            "type": "string",
-            "readOnly": true
-          },
-          "activityName": {
-            "description": "The name of the activity.",
-            "type": "string",
-            "readOnly": true
-          },
-          "activityType": {
-            "description": "The type of the activity.",
-            "type": "string",
-            "readOnly": true
-          },
-          "activityRunId": {
-            "description": "The id of the activity run.",
-            "type": "string",
-            "readOnly": true
-          },
-          "linkedServiceName": {
-            "description": "The name of the compute linked service.",
-            "type": "string",
-            "readOnly": true
-          },
-          "status": {
-            "description": "The status of the activity run.",
-            "type": "string",
-            "readOnly": true
-          },
-          "activityRunStart": {
-            "description": "The start time of the activity run in 'ISO 8601' format.",
-            "type": "string",
-            "format": "date-time",
-            "readOnly": true
-          },
-          "activityRunEnd": {
-            "description": "The end time of the activity run in 'ISO 8601' format.",
-            "type": "string",
-            "format": "date-time",
-            "readOnly": true
-          },
-          "durationInMs": {
-            "description": "The duration of the activity run.",
-            "type": "integer",
-            "readOnly": true
-          },
-          "input": {
-            "description": "The input for the activity.",
-            "type": "object",
-            "readOnly": true
-          },
-          "output": {
-            "description": "The output for the activity.",
-            "type": "object",
-            "readOnly": true
-          },
-          "error": {
-            "description": "The error if any from the activity run.",
-            "type": "object",
-            "readOnly": true
-          }
-        },
-        "additionalProperties": {
-          "type": "object"
-        }
-      },
-      "TriggerRunListResponse": {
-        "description": "A list of trigger runs.",
-        "type": "object",
-        "required": [
-          "value"
-        ],
-        "properties": {
-          "value": {
-            "type": "array",
-            "description": "List of trigger runs.",
-            "items": {
-              "$ref": "#/definitions/TriggerRun"
-            }
-          },
-          "nextLink": {
-            "description": "The link to the next page of results, if any remaining results exist.",
-            "type": "string"
-          }
-        }
-      },
-      "TriggerRun": {
-        "description": "Trigger runs.",
-        "type": "object",
-        "properties": {
-          "triggerRunId": {
-            "type": "string",
-            "description": "Trigger run id.",
-            "readOnly": true
-          },
-          "triggerName": {
-            "type": "string",
-            "description": "Trigger name.",
-            "readOnly": true
-          },
-          "triggerType": {
-            "type": "string",
-            "description": "Trigger type.",
-            "readOnly": true
-          },
-          "triggerRunTimestamp": {
-            "type": "string",
-            "format": "date-time",
-            "description": "Trigger run start time.",
-            "readOnly": true
-          },
-          "status": {
-            "type": "string",
-            "enum": [
-              "Succeeded",
-              "Failed",
-              "Inprogress"
-            ],
-            "x-ms-enum": {
-              "name": "TriggerRunStatus",
-              "modelAsString": true
-            },
-            "description": "Trigger run status.",
-            "readOnly": true
-          },
-          "message": {
-            "type": "string",
-            "description": "Trigger error message.",
-            "readOnly": true
-          },
-          "properties": {
-            "description": "List of property name and value related to trigger run. Name, value pair depends on type of trigger.",
-            "type": "object",
-            "additionalProperties": {
-              "type": "string"
-            },
-            "readOnly": true
-          },
-          "triggeredPipelines": {
-            "description": "List of pipeline name and run Id triggered by the trigger run.",
-            "type": "object",
-            "additionalProperties": {
-              "type": "string"
-            },
-            "readOnly": true
-          }
-        },
-        "additionalProperties": {
-          "type": "object"
-        }
-      },
-      "OperationListResponse": {
-        "description": "A list of operations that can be performed by the Data Factory service.",
-        "properties": {
-          "value": {
-            "type": "array",
-            "items": {
-              "$ref": "#/definitions/Operation"
-            },
-            "description": "List of Data Factory operations supported by the Data Factory resource provider."
-          },
-          "nextLink": {
-            "type": "string",
-            "description": "The link to the next page of results, if any remaining results exist."
-          }
-        }
-      },
-      "Operation": {
-        "description": "Azure Data Factory API operation definition.",
-        "type": "object",
-        "properties": {
-          "name": {
-            "description": "Operation name: {provider}/{resource}/{operation}",
-            "type": "string"
-          },
-          "origin": {
-            "description": "The intended executor of the operation.",
-            "type": "string"
-          },
-          "display": {
-            "description": "Metadata associated with the operation.",
-            "properties": {
-              "description": {
-                "description": "The description of the operation.",
-                "type": "string"
-              },
-              "provider": {
-                "description": "The name of the provider.",
-                "type": "string"
-              },
-              "resource": {
-                "description": "The name of the resource type on which the operation is performed.",
-                "type": "string"
-              },
-              "operation": {
-                "description": "The type of operation: get, read, delete, etc.",
-                "type": "string"
-              }
-            }
-          },
-          "properties": {
-            "description": "Additional details about the operation.",
-            "x-ms-client-flatten": true,
-            "$ref": "#/definitions/OperationProperties"
-          }
-        }
-      },
-      "OperationProperties": {
-        "description": "Additional details about an operation.",
-        "type": "object",
-        "x-ms-client-flatten": true,
-        "properties": {
-          "serviceSpecification": {
-            "description": "Details about a service operation.",
-            "$ref": "#/definitions/OperationServiceSpecification"
-          }
-        }
-      },
-      "OperationServiceSpecification": {
-        "description": "Details about a service operation.",
-        "type": "object",
-        "properties": {
-          "logSpecifications": {
-            "description": "Details about operations related to logs.",
-            "type": "array",
-            "items": {
-              "$ref": "#/definitions/OperationLogSpecification"
-            }
-          },
-          "metricSpecifications": {
-            "description": "Details about operations related to metrics.",
-            "type": "array",
-            "items": {
-              "$ref": "#/definitions/OperationMetricSpecification"
-            }
-          }
-        }
-      },
-      "OperationLogSpecification": {
-        "description": "Details about an operation related to logs.",
-        "type": "object",
-        "properties": {
-          "name": {
-            "description": "The name of the log category.",
-            "type": "string"
-          },
-          "displayName": {
-            "description": "Localized display name.",
-            "type": "string"
-          },
-          "blobDuration": {
-            "description": "Blobs created in the customer storage account, per hour.",
-            "type": "string"
-          }
-        }
-      },
-      "OperationMetricSpecification": {
-        "description": "Details about an operation related to metrics.",
-        "type": "object",
-        "properties": {
-          "name": {
-            "description": "The name of the metric.",
-            "type": "string"
-          },
-          "displayName": {
-            "description": "Localized display name of the metric.",
-            "type": "string"
-          },
-          "displayDescription": {
-            "description": "The description of the metric.",
-            "type": "string"
-          },
-          "unit": {
-            "description": "The unit that the metric is measured in.",
-            "type": "string"
-          },
-          "aggregationType": {
-            "description": "The type of metric aggregation.",
-            "type": "string"
-          },
-          "enableRegionalMdmAccount": {
-            "description": "Whether or not the service is using regional MDM accounts.",
-            "type": "string"
-          },
-          "sourceMdmAccount": {
-            "description": "The name of the MDM account.",
-            "type": "string"
-          },
-          "sourceMdmNamespace": {
-            "description": "The name of the MDM namespace.",
-            "type": "string"
-          },
-          "availabilities": {
-            "description": "Defines how often data for metrics becomes available.",
-            "type": "array",
-            "items": {
-              "$ref": "#/definitions/OperationMetricAvailability"
-            }
-          }
-        }
-      },
-      "OperationMetricAvailability": {
-        "description": "Defines how often data for a metric becomes available.",
-        "type": "object",
-        "properties": {
-          "timeGrain": {
-            "description": "The granularity for the metric.",
-            "type": "string"
-          },
-          "blobDuration": {
-            "description": "Blob created in the customer storage account, per hour.",
-            "type": "string"
+        "metricSpecifications": {
+          "description": "Details about operations related to metrics.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/OperationMetricSpecification"
           }
         }
       }
     },
-    "parameters": {
-      "subscriptionId": {
-        "name": "subscriptionId",
-        "description": "The subscription identifier.",
-        "in": "path",
-        "required": true,
-        "type": "string"
-      },
-      "resourceGroupName": {
-        "name": "resourceGroupName",
-        "description": "The resource group name.",
-        "in": "path",
-        "required": true,
-        "type": "string",
-        "pattern": "^[-\\w\\._\\(\\)]+$",
-        "minLength": 1,
-        "maxLength": 90,
-        "x-ms-parameter-location": "method"
-      },
-      "factoryName": {
-        "name": "factoryName",
-        "description": "The factory name.",
-        "in": "path",
-        "required": true,
-        "type": "string",
-        "pattern": "^[A-Za-z0-9]+(?:-[A-Za-z0-9]+)*$",
-        "minLength": 3,
-        "maxLength": 63,
-        "x-ms-parameter-location": "method"
-      },
-      "linkedServiceName": {
-        "name": "linkedServiceName",
-        "description": "The linked service name.",
-        "in": "path",
-        "required": true,
-        "type": "string",
-        "pattern": "^[A-Za-z0-9_][^<>*#.%&:\\\\+?/]*$",
-        "minLength": 1,
-        "maxLength": 260,
-        "x-ms-parameter-location": "method"
-      },
-      "datasetName": {
-        "name": "datasetName",
-        "description": "The dataset name.",
-        "in": "path",
-        "required": true,
-        "type": "string",
-        "pattern": "^[A-Za-z0-9_][^<>*#.%&:\\\\+?/]*$",
-        "minLength": 1,
-        "maxLength": 260,
-        "x-ms-parameter-location": "method"
-      },
-      "pipelineName": {
-        "name": "pipelineName",
-        "description": "The pipeline name.",
-        "in": "path",
-        "required": true,
-        "type": "string",
-        "pattern": "^[A-Za-z0-9_][^<>*#.%&:\\\\+?/]*$",
-        "minLength": 1,
-        "maxLength": 260,
-        "x-ms-parameter-location": "method"
-      },
-      "triggerName": {
-        "name": "triggerName",
-        "description": "The trigger name.",
-        "in": "path",
-        "required": true,
-        "type": "string",
-        "pattern": "^[A-Za-z0-9_][^<>*#.%&:\\\\+?/]*$",
-        "minLength": 1,
-        "maxLength": 260,
-        "x-ms-parameter-location": "method"
-      },
-      "runId": {
-        "name": "runId",
-        "description": "The pipeline run identifier.",
-        "in": "path",
-        "required": true,
-        "type": "string",
-        "x-ms-parameter-location": "method"
-      },
-      "referencePipelineRunId": {
-        "name": "referencePipelineRunId",
-        "description": "The pipeline run identifier.",
-        "in": "path",
-        "required": true,
-        "type": "string",
-        "x-ms-parameter-location": "method"
-      },
-      "integrationRuntimeName": {
-        "name": "integrationRuntimeName",
-        "description": "The integration runtime name.",
-        "in": "path",
-        "required": true,
-        "type": "string",
-        "pattern": "^[A-Za-z0-9]+(?:-[A-Za-z0-9]+)*$",
-        "minLength": 3,
-        "maxLength": 63,
-        "x-ms-parameter-location": "method"
-      },
-      "nodeName": {
-        "name": "nodeName",
-        "description": "The integration runtime node name.",
-        "in": "path",
-        "required": true,
-        "type": "string",
-        "pattern": "^[a-z0-9A-Z][a-z0-9A-Z_-]{0,149}$",
-        "minLength": 1,
-        "maxLength": 150,
-        "x-ms-parameter-location": "method"
-      },
-      "api-version": {
-        "name": "api-version",
-        "description": "The API version.",
-        "in": "query",
-        "required": true,
-        "type": "string"
+    "OperationLogSpecification": {
+      "description": "Details about an operation related to logs.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "The name of the log category.",
+          "type": "string"
+        },
+        "displayName": {
+          "description": "Localized display name.",
+          "type": "string"
+        },
+        "blobDuration": {
+          "description": "Blobs created in the customer storage account, per hour.",
+          "type": "string"
+        }
+      }
+    },
+    "OperationMetricSpecification": {
+      "description": "Details about an operation related to metrics.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "The name of the metric.",
+          "type": "string"
+        },
+        "displayName": {
+          "description": "Localized display name of the metric.",
+          "type": "string"
+        },
+        "displayDescription": {
+          "description": "The description of the metric.",
+          "type": "string"
+        },
+        "unit": {
+          "description": "The unit that the metric is measured in.",
+          "type": "string"
+        },
+        "aggregationType": {
+          "description": "The type of metric aggregation.",
+          "type": "string"
+        },
+        "enableRegionalMdmAccount": {
+          "description": "Whether or not the service is using regional MDM accounts.",
+          "type": "string"
+        },
+        "sourceMdmAccount": {
+          "description": "The name of the MDM account.",
+          "type": "string"
+        },
+        "sourceMdmNamespace": {
+          "description": "The name of the MDM namespace.",
+          "type": "string"
+        },
+        "availabilities": {
+          "description": "Defines how often data for metrics becomes available.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/OperationMetricAvailability"
+          }
+        }
+      }
+    },
+    "OperationMetricAvailability": {
+      "description": "Defines how often data for a metric becomes available.",
+      "type": "object",
+      "properties": {
+        "timeGrain": {
+          "description": "The granularity for the metric.",
+          "type": "string"
+        },
+        "blobDuration": {
+          "description": "Blob created in the customer storage account, per hour.",
+          "type": "string"
+        }
       }
     }
+  },
+  "parameters": {
+    "subscriptionId": {
+      "name": "subscriptionId",
+      "description": "The subscription identifier.",
+      "in": "path",
+      "required": true,
+      "type": "string"
+    },
+    "resourceGroupName": {
+      "name": "resourceGroupName",
+      "description": "The resource group name.",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "pattern": "^[-\\w\\._\\(\\)]+$",
+      "minLength": 1,
+      "maxLength": 90,
+      "x-ms-parameter-location": "method"
+    },
+    "factoryName": {
+      "name": "factoryName",
+      "description": "The factory name.",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "pattern": "^[A-Za-z0-9]+(?:-[A-Za-z0-9]+)*$",
+      "minLength": 3,
+      "maxLength": 63,
+      "x-ms-parameter-location": "method"
+    },
+    "locationId": {
+      "name": "locationId",
+      "description": "The location identifier.",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "linkedServiceName": {
+      "name": "linkedServiceName",
+      "description": "The linked service name.",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "pattern": "^[A-Za-z0-9_][^<>*#.%&:\\\\+?/]*$",
+      "minLength": 1,
+      "maxLength": 260,
+      "x-ms-parameter-location": "method"
+    },
+    "datasetName": {
+      "name": "datasetName",
+      "description": "The dataset name.",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "pattern": "^[A-Za-z0-9_][^<>*#.%&:\\\\+?/]*$",
+      "minLength": 1,
+      "maxLength": 260,
+      "x-ms-parameter-location": "method"
+    },
+    "pipelineName": {
+      "name": "pipelineName",
+      "description": "The pipeline name.",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "pattern": "^[A-Za-z0-9_][^<>*#.%&:\\\\+?/]*$",
+      "minLength": 1,
+      "maxLength": 260,
+      "x-ms-parameter-location": "method"
+    },
+    "triggerName": {
+      "name": "triggerName",
+      "description": "The trigger name.",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "pattern": "^[A-Za-z0-9_][^<>*#.%&:\\\\+?/]*$",
+      "minLength": 1,
+      "maxLength": 260,
+      "x-ms-parameter-location": "method"
+    },
+    "runId": {
+      "name": "runId",
+      "description": "The pipeline run identifier.",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "referencePipelineRunId": {
+      "name": "referencePipelineRunId",
+      "description": "The pipeline run identifier.",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "integrationRuntimeName": {
+      "name": "integrationRuntimeName",
+      "description": "The integration runtime name.",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "pattern": "^[A-Za-z0-9]+(?:-[A-Za-z0-9]+)*$",
+      "minLength": 3,
+      "maxLength": 63,
+      "x-ms-parameter-location": "method"
+    },
+    "nodeName": {
+      "name": "nodeName",
+      "description": "The integration runtime node name.",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "pattern": "^[a-z0-9A-Z][a-z0-9A-Z_-]{0,149}$",
+      "minLength": 1,
+      "maxLength": 150,
+      "x-ms-parameter-location": "method"
+    },
+    "api-version": {
+      "name": "api-version",
+      "description": "The API version.",
+      "in": "query",
+      "required": true,
+      "type": "string"
+    }
   }
+}

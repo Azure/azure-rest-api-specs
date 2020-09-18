@@ -2,7 +2,10 @@
   "swagger": "2.0",
   "info": {
     "title": "AutomationManagement",
-    "version": "2015-10-31"
+    "version": "2015-10-31",
+    "x-ms-code-generation-settings": {
+      "useDateTimeOffset": true
+    }
   },
   "host": "management.azure.com",
   "schemes": [
@@ -50,14 +53,10 @@
         },
         "parameters": [
           {
-            "$ref": "./definitions.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "automationAccountName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The automation account name."
+            "$ref": "../../common/v1/definitions.json#/parameters/AutomationAccountNameParameter"
           },
           {
             "name": "scheduleName",
@@ -71,22 +70,28 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "./definitions.json#/definitions/ScheduleCreateOrUpdateParameters"
+              "$ref": "#/definitions/ScheduleCreateOrUpdateParameters"
             },
             "description": "The parameters supplied to the create or update schedule operation."
           },
           {
-            "$ref": "./definitions.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "./definitions.json#/parameters/ApiVersionParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
           "201": {
             "description": "Created",
             "schema": {
-              "$ref": "./definitions.json#/definitions/Schedule"
+              "$ref": "#/definitions/Schedule"
+            }
+          },
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Schedule"
             }
           },
           "409": {
@@ -95,7 +100,7 @@
           "default": {
             "description": "Automation error response describing why the operation failed.",
             "schema": {
-              "$ref": "./definitions.json#/definitions/ErrorResponse"
+              "$ref": "../../common/v1/definitions.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -116,14 +121,10 @@
         },
         "parameters": [
           {
-            "$ref": "./definitions.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "automationAccountName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The automation account name."
+            "$ref": "../../common/v1/definitions.json#/parameters/AutomationAccountNameParameter"
           },
           {
             "name": "scheduleName",
@@ -137,28 +138,28 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "./definitions.json#/definitions/ScheduleUpdateParameters"
+              "$ref": "#/definitions/ScheduleUpdateParameters"
             },
             "description": "The parameters supplied to the update schedule operation."
           },
           {
-            "$ref": "./definitions.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "./definitions.json#/parameters/ApiVersionParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "./definitions.json#/definitions/Schedule"
+              "$ref": "#/definitions/Schedule"
             }
           },
           "default": {
             "description": "Automation error response describing why the operation failed.",
             "schema": {
-              "$ref": "./definitions.json#/definitions/ErrorResponse"
+              "$ref": "../../common/v1/definitions.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -179,14 +180,10 @@
         },
         "parameters": [
           {
-            "$ref": "./definitions.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "automationAccountName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The automation account name."
+            "$ref": "../../common/v1/definitions.json#/parameters/AutomationAccountNameParameter"
           },
           {
             "name": "scheduleName",
@@ -196,23 +193,23 @@
             "description": "The schedule name."
           },
           {
-            "$ref": "./definitions.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "./definitions.json#/parameters/ApiVersionParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "./definitions.json#/definitions/Schedule"
+              "$ref": "#/definitions/Schedule"
             }
           },
           "default": {
             "description": "Automation error response describing why the operation failed.",
             "schema": {
-              "$ref": "./definitions.json#/definitions/ErrorResponse"
+              "$ref": "../../common/v1/definitions.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -233,14 +230,10 @@
         },
         "parameters": [
           {
-            "$ref": "./definitions.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "automationAccountName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The automation account name."
+            "$ref": "../../common/v1/definitions.json#/parameters/AutomationAccountNameParameter"
           },
           {
             "name": "scheduleName",
@@ -250,23 +243,20 @@
             "description": "The schedule name."
           },
           {
-            "$ref": "./definitions.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "./definitions.json#/parameters/ApiVersionParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
           "200": {
             "description": "OK"
           },
-          "404": {
-            "description": "Not Found"
-          },
           "default": {
             "description": "Automation error response describing why the operation failed.",
             "schema": {
-              "$ref": "./definitions.json#/definitions/ErrorResponse"
+              "$ref": "../../common/v1/definitions.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -292,33 +282,29 @@
         },
         "parameters": [
           {
-            "$ref": "./definitions.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "automationAccountName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The automation account name."
+            "$ref": "../../common/v1/definitions.json#/parameters/AutomationAccountNameParameter"
           },
           {
-            "$ref": "./definitions.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "./definitions.json#/parameters/ApiVersionParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "./definitions.json#/definitions/ScheduleListResult"
+              "$ref": "#/definitions/ScheduleListResult"
             }
           },
           "default": {
             "description": "Automation error response describing why the operation failed.",
             "schema": {
-              "$ref": "./definitions.json#/definitions/ErrorResponse"
+              "$ref": "../../common/v1/definitions.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -328,6 +314,295 @@
       }
     }
   },
-  "definitions": {},
+  "definitions": {
+    "AdvancedSchedule": {
+      "properties": {
+        "weekDays": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Days of the week that the job should execute on."
+        },
+        "monthDays": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "format": "int32",
+            "x-nullable": false
+          },
+          "description": "Days of the month that the job should execute on. Must be between 1 and 31."
+        },
+        "monthlyOccurrences": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AdvancedScheduleMonthlyOccurrence"
+          },
+          "description": "Occurrences of days within a month."
+        }
+      },
+      "description": "The properties of the create Advanced Schedule."
+    },
+    "AdvancedScheduleMonthlyOccurrence": {
+      "properties": {
+        "occurrence": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Occurrence of the week within the month. Must be between 1 and 5"
+        },
+        "day": {
+          "type": "string",
+          "description": "Day of the occurrence. Must be one of monday, tuesday, wednesday, thursday, friday, saturday, sunday.",
+          "enum": [
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday",
+            "Saturday",
+            "Sunday"
+          ],
+          "x-ms-enum": {
+            "name": "ScheduleDay",
+            "modelAsString": true
+          }
+        }
+      },
+      "description": "The properties of the create advanced schedule monthly occurrence."
+    },
+    "ScheduleCreateOrUpdateProperties": {
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "Gets or sets the description of the schedule."
+        },
+        "startTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Gets or sets the start time of the schedule.",
+          "x-nullable": false
+        },
+        "expiryTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Gets or sets the end time of the schedule.",
+          "x-nullable": true
+        },
+        "interval": {
+          "description": "Gets or sets the interval of the schedule."
+        },
+        "frequency": {
+          "type": "string",
+          "description": "Gets or sets the frequency of the schedule.",
+          "$ref": "#/definitions/scheduleFrequency"
+        },
+        "timeZone": {
+          "type": "string",
+          "description": "Gets or sets the time zone of the schedule."
+        },
+        "advancedSchedule": {
+          "$ref": "#/definitions/AdvancedSchedule",
+          "description": "Gets or sets the AdvancedSchedule."
+        }
+      },
+      "required": [
+        "startTime",
+        "frequency"
+      ],
+      "description": "The parameters supplied to the create or update schedule operation."
+    },
+    "scheduleFrequency": {
+      "type": "string",
+      "description": "Gets or sets the frequency of the schedule.",
+      "enum": [
+        "OneTime",
+        "Day",
+        "Hour",
+        "Week",
+        "Month",
+        "Minute"
+      ],
+      "x-ms-enum": {
+        "name": "ScheduleFrequency",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "OneTime"
+          },
+          {
+            "value": "Day"
+          },
+          {
+            "value": "Hour"
+          },
+          {
+            "value": "Week"
+          },
+          {
+            "value": "Month"
+          },
+          {
+            "value": "Minute",
+            "description": "The minimum allowed interval for Minute schedules is 15 minutes."
+          }
+        ]
+      }
+    },
+    "ScheduleCreateOrUpdateParameters": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Gets or sets the name of the Schedule."
+        },
+        "properties": {
+          "$ref": "#/definitions/ScheduleCreateOrUpdateProperties",
+          "x-ms-client-flatten": true,
+          "description": "Gets or sets the list of schedule properties."
+        }
+      },
+      "required": [
+        "name",
+        "properties"
+      ],
+      "description": "The parameters supplied to the create or update schedule operation."
+    },
+    "Schedule": {
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ScheduleProperties",
+          "x-ms-client-flatten": true,
+          "description": "Gets or sets the properties of the schedule."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../common/v1/definitions.json#/definitions/ProxyResource"
+        }
+      ],
+      "description": "Definition of the schedule."
+    },
+    "ScheduleProperties": {
+      "properties": {
+        "startTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Gets or sets the start time of the schedule.",
+          "x-nullable": false
+        },
+        "startTimeOffsetMinutes": {
+          "readOnly": true,
+          "type": "number",
+          "format": "double",
+          "description": "Gets the start time's offset in minutes.",
+          "x-nullable": false
+        },
+        "expiryTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Gets or sets the end time of the schedule.",
+          "x-nullable": true
+        },
+        "expiryTimeOffsetMinutes": {
+          "type": "number",
+          "format": "double",
+          "description": "Gets or sets the expiry time's offset in minutes.",
+          "x-nullable": false
+        },
+        "isEnabled": {
+          "type": "boolean",
+          "default": false,
+          "description": "Gets or sets a value indicating whether this schedule is enabled."
+        },
+        "nextRun": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Gets or sets the next run time of the schedule.",
+          "x-nullable": true
+        },
+        "nextRunOffsetMinutes": {
+          "type": "number",
+          "format": "double",
+          "description": "Gets or sets the next run time's offset in minutes.",
+          "x-nullable": false
+        },
+        "interval": {
+          "description": "Gets or sets the interval of the schedule."
+        },
+        "frequency": {
+          "type": "string",
+          "description": "Gets or sets the frequency of the schedule.",
+          "$ref": "#/definitions/scheduleFrequency"
+        },
+        "timeZone": {
+          "type": "string",
+          "description": "Gets or sets the time zone of the schedule."
+        },
+        "advancedSchedule": {
+          "$ref": "#/definitions/AdvancedSchedule",
+          "description": "Gets or sets the advanced schedule."
+        },
+        "creationTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Gets or sets the creation time.",
+          "x-nullable": false
+        },
+        "lastModifiedTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Gets or sets the last modified time.",
+          "x-nullable": false
+        },
+        "description": {
+          "type": "string",
+          "description": "Gets or sets the description."
+        }
+      },
+      "description": "Definition of schedule parameters."
+    },
+    "ScheduleUpdateProperties": {
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "Gets or sets the description of the schedule."
+        },
+        "isEnabled": {
+          "type": "boolean",
+          "description": "Gets or sets a value indicating whether this schedule is enabled."
+        }
+      },
+      "description": "The parameters supplied to the update schedule operation."
+    },
+    "ScheduleUpdateParameters": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Gets or sets the name of the Schedule."
+        },
+        "properties": {
+          "$ref": "#/definitions/ScheduleUpdateProperties",
+          "x-ms-client-flatten": true,
+          "description": "Gets or sets the list of schedule properties."
+        }
+      },
+      "description": "The parameters supplied to the update schedule operation."
+    },
+    "ScheduleListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Schedule"
+          },
+          "description": "Gets or sets a list of schedules."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Gets or sets the next link."
+        }
+      },
+      "description": "The response model for the list schedule operation."
+    }
+  },
   "parameters": {}
 }

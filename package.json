@@ -10,19 +10,22 @@
   "description": "Tests for Azure REST API Specifications",
   "license": "MIT",
   "devDependencies": {
-    "fs-extra": "^3.0.1",
+    "@azure/avocado": "^0.6.3",
+    "@azure/rest-api-specs-scripts": "^0.10.2",
+    "@ts-common/commonmark-to-markdown": "^1.2.0",
+    "@ts-common/fs": "0.2.0",
+    "@ts-common/iterator": "^0.3.6",
+    "@types/js-yaml": "^3.12.1",
+    "@types/mocha": "^5.2.6",
+    "@types/prettier": "^1.18.3",
+    "cspell": "^4.0.30",
+    "js-yaml": "^3.13.1",
+    "json-schema-ref-parser": "^6.1.0",
     "mocha": "*",
-    "glob": "^5.0.14",
-    "json-schema-ref-parser": "^3.1.2",
-    "request": "^2.61.0",
-    "z-schema": "^3.16.1",
-    "oav": "^0.4.1",
-    "js-yaml": "^3.8.2",
-    "azure-storage": "^2.1.0",
-    "@microsoft.azure/literate": "^1.0.21",
-    "@microsoft.azure/async-io": "^1.0.21",
-    "@microsoft.azure/polyfill": "^1.0.17",
-    "oad": "^0.1.9"
+    "prettier": "^1.19.1",
+    "ts-node": "^8.1.0",
+    "tslib": "^1.10.0",
+    "typescript": "3.5.3"
   },
   "homepage": "https://github.com/azure/azure-rest-api-specs",
   "repository": {
@@ -33,6 +36,13 @@
     "url": "http://github.com/azure/azure-rest-api-specs/issues"
   },
   "scripts": {
-    "test": "mocha -t 500000"
+    "postinstall": "ts-node scripts/switch-to-preproduction.ts && tsc",
+    "test": "tsc && mocha -t 500000 --reporter min",
+    "spellcheck": "ts-node ./scripts/spellcheck.ts",
+    "prettier-check": "ts-node ./scripts/prettier-check.ts",
+    "prettier-fix": "prettier --write specification/**/*.json",
+    "prettier": "prettier",
+    "tsc": "tsc",
+    "multiapi": "ts-node ./scripts/multiapi.ts"
   }
 }
