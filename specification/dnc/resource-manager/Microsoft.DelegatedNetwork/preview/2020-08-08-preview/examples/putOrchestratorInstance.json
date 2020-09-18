@@ -1,0 +1,57 @@
+{
+  "parameters": {
+    "subscriptionId": "613192d7-503f-477a-9cfe-4efc3ee2bd60",
+    "resourceGroupName": "TestRG",
+    "resourceName": "testk8s1",
+    "api-version": "2020-08-08-preview",
+    "parameters": {
+      "location": "West US",
+      "properties": {
+        "orchestratorInstanceDetails": {
+          "orchestratorType": "Kubernetes",
+          "properties": {
+            "appId": "546192d7-503f-477a-9cfe-4efc3ee2b6e1",
+            "tenantId": "da6192d7-503f-477a-9cfe-4efc3ee2b6c3",
+            "clusterRootCA": "ddsadsad344mfdsfdl",
+            "apiServerEndpoint": "https://testk8s.cloudapp.net"
+          }
+        },
+        "controllerDetails": {
+          "id": "/subscriptions/613192d7-503f-477a-9cfe-4efc3ee2bd60/resourceGroups/TestRG/providers/Microsoft.DelegatedNetwork/controller/testcontroller"
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "body": {
+        "id": "/subscriptions/613192d7-503f-477a-9cfe-4efc3ee2bd60/resourceGroups/TestRG/providers/Microsoft.DelegatedNetwork/orchestratorInstances/testk8s1",
+        "location": "West US",
+        "name": "testk8s1",
+        "type": "Microsoft.DelegatedNetwork/orchestratorInstances",
+        "properties": {
+          "state": "Succeeded",
+          "resourceGuid": "1b2192d7-503f-477a-9cfe-4efc3ee2bd60",
+          "controllerProperties": {
+            "id": "/subscriptions/613192d7-503f-477a-9cfe-4efc3ee2bd60/resourceGroups/TestRG/providers/Microsoft.DelegatedNetwork/controller/testcontroller",
+            "appId": "ac1192d7-503f-477a-9cfe-4efc3ee2bd60",
+            "endpoint": "https://orch.useast.dnc.azure.com"
+          }
+        }
+      }
+    },
+    "201": {
+      "headers": {},
+      "body": {
+        "id": "/subscriptions/613192d7-503f-477a-9cfe-4efc3ee2bd60/resourceGroups/TestRG/providers/Microsoft.DelegatedNetwork/orchestratorInstances/testk8s1",
+        "location": "West US",
+        "name": "testk8s1",
+        "type": "Microsoft.DelegatedNetwork/orchestratorInstances",
+        "properties": {
+          "state": "Provisioning"
+        }
+      }
+    }
+  }
+}
