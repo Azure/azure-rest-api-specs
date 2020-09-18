@@ -3969,24 +3969,47 @@
       "properties": {
         "lastStepName": {
           "type": "string",
-          "description": "last step name"
+          "description": "last step name",
+          "readOnly": true
         },
         "status": {
           "$ref": "#/definitions/WorkflowStatus",
-          "description": "workflow status."
+          "description": "workflow status.",
+          "readOnly": true
         },
         "operation": {
           "$ref": "#/definitions/OperationDirection",
-          "description": "operation direction."
+          "description": "operation direction.",
+          "readOnly": true
         },
         "steps": {
           "type": "string",
-          "description": "workflow steps"
+          "description": "workflow steps",
+          "readOnly": true
         },
         "lastOperationId": {
           "type": "string",
-          "description": "workflow last operation identifier."
+          "description": "workflow last operation identifier.",
+          "readOnly": true
+        },
+        "commandName": {
+          "type": "string",
+          "description": "workflow command name.",
+          "readOnly": true
+        },
+        "createdTimestamp": {
+          "type": "string",
+          "format": "date-time",
+          "description": "workflow created timestamp.",
+          "readOnly": true
+        },
+        "lastStatusTimestamp": {
+          "type": "string",
+          "format": "date-time",
+          "description": "workflow last status timestamp.",
+          "readOnly": true
         }
+
       }
     },
     "SyncGroupProperties": {
