@@ -787,8 +787,12 @@
           "description": "The settings for the export operation of the service instance."
         },
         "privateEndpointConnections": {
-          "$ref": "#/definitions/PrivateEndpointConnectionReference",
-          "description": "The list of private endpoint connections that are set up for this resource."
+          "description": "The list of private endpoint connections that are set up for this resource.",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/PrivateEndpointConnectionReference"
+          }
         },
         "publicNetworkAccess": {
           "description": "Control permission for data plane traffic coming from public networks while private endpoint is enabled.",
