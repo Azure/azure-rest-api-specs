@@ -18,20 +18,31 @@
             "properties": {
               "state": "Active",
               "provisioningState": "Succeeded",
-              "ipFilterRules": [],
+              "ipFilterRules": [
+                {
+                  "filterName": "rule1",
+                  "action": "Accept",
+                  "ipMask": "131.117.159.53"
+                },
+                {
+                  "filterName": "rule2",
+                  "action": "Accept",
+                  "ipMask": "157.55.59.128/25"
+                }
+              ],
               "networkRuleSets": {
                 "defaultAction": "Deny",
                 "applyToBuiltInEventHubEndpoint": true,
                 "ipRules": [
                   {
                     "filterName": "rule1",
-                    "ipMask": "131.117.159.53",
-                    "action": "Allow"
+                    "action": "Allow",
+                    "ipMask": "131.117.159.53"
                   },
                   {
                     "filterName": "rule2",
-                    "ipMask": "157.55.59.128/25",
-                    "action": "Allow"
+                    "action": "Allow",
+                    "ipMask": "157.55.59.128/25"
                   }
                 ]
               },
