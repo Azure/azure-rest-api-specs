@@ -17,7 +17,34 @@
         "properties": {
           "state": "Active",
           "provisioningState": "Succeeded",
-          "ipFilterRules": [],
+          "ipFilterRules": [
+            {
+              "filterName": "rule1",
+              "action": "Accept",
+              "ipMask": "131.117.159.53"
+            },
+            {
+              "filterName": "rule2",
+              "action": "Accept",
+              "ipMask": "157.55.59.128/25"
+            }
+          ],
+          "networkRuleSets": {
+            "defaultAction": "Deny",
+            "applyToBuiltInEventHubEndpoint": true,
+            "ipRules": [
+              {
+                "filterName": "rule1",
+                "action": "Allow",
+                "ipMask": "131.117.159.53"
+              },
+              {
+                "filterName": "rule2",
+                "action": "Allow",
+                "ipMask": "157.55.59.128/25"
+              }
+            ]
+          },
           "hostName": "iot-dps-cit-hub-1.azure-devices.net",
           "eventHubEndpoints": {
             "events": {

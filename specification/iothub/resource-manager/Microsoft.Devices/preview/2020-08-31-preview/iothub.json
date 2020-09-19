@@ -2290,6 +2290,9 @@
             "$ref": "#/definitions/IpFilterRule"
           }
         },
+        "networkRuleSets": {
+          "$ref": "#/definitions/NetworkRuleSetProperties"
+        },
         "minTlsVersion": {
           "type": "string",
           "description": "Specifies the minimum TLS version to support for this hub. Can be set to \"1.2\" to have clients that use a TLS version below 1.2 to be rejected."
@@ -2576,6 +2579,70 @@
       "required": [
         "filterName",
         "action",
+        "ipMask"
+      ]
+    },
+    "NetworkRuleSetProperties": {
+      "description": "Network Rule Set Properties of IotHub",
+      "type": "object",
+      "properties": {
+        "defaultAction": {
+          "type": "string",
+          "description": "Default Action for Network Rule Set",
+          "enum": [
+            "Deny",
+            "Allow"
+          ],
+          "x-ms-enum": {
+            "name": "DefaultAction",
+            "modelAsString": true
+          },
+          "default": "Deny"
+        },
+        "applyToBuiltInEventHubEndpoint": {
+          "type": "boolean",
+          "description": "If True, then Network Rule Set is also applied to BuiltIn EventHub EndPoint of IotHub"
+        },
+        "ipRules": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/NetworkRuleSetIpRule"
+          },
+          "description": "List of IP Rules"
+        }
+      },
+      "required": [
+        "applyToBuiltInEventHubEndpoint",
+        "ipRules"
+      ]
+    },
+    "NetworkRuleSetIpRule": {
+      "description": "IP Rule to be applied as part of Network Rule Set",
+      "type": "object",
+      "properties": {
+        "filterName": {
+          "type": "string",
+          "description": "Name of the IP filter rule."
+        },
+        "action": {
+          "type": "string",
+          "description": "IP Filter Action",
+          "enum": [
+            "Allow"
+          ],
+          "x-ms-enum": {
+            "name": "NetworkRuleIPAction",
+            "modelAsString": true
+          },
+          "default": "Allow"
+        },
+        "ipMask": {
+          "type": "string",
+          "description": "A string that contains the IP address range in CIDR notation for the rule."
+        }
+      },
+      "required": [
+        "filterName",
         "ipMask"
       ]
     },
