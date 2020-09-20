@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "2.1-preview.2",
+    "version": "2.1-preview.3",
     "title": "Form Recognizer Client",
     "description": "Extracts information from forms and images into structured data."
   },
@@ -18,7 +18,7 @@
     }
   ],
   "x-ms-parameterized-host": {
-    "hostTemplate": "{endpoint}/formrecognizer/v2.1-preview.2",
+    "hostTemplate": "{endpoint}/formrecognizer/v2.1-preview.3",
     "useSchemePrefix": false,
     "parameters": [
       {
@@ -33,7 +33,7 @@
     "/custom/models": {
       "post": {
         "summary": "Train Custom Model",
-        "description": "Create and train a custom model. The request must include a source parameter that is either an externally accessible Azure storage blob container Uri (preferably a Shared Access Signature Uri) or valid path to a data folder in a locally mounted drive. When local paths are specified, they must follow the Linux/Unix path format and be an absolute path rooted to the input mount configuration setting value e.g., if '{Mounts:Input}' configuration setting value is '/input' then a valid source path would be '/input/contosodataset'. All data to be trained is expected to be under the source folder or sub folders under it. Models are trained using documents that are of the following content type - 'application/pdf', 'image/jpeg', 'image/png', 'image/tiff'. Other type of content is ignored.",
+        "description": "Create and train a custom model. The request must include a source parameter that is either an externally accessible Azure storage blob container Uri (preferably a Shared Access Signature Uri) or valid path to a data folder in a locally mounted drive. When local paths are specified, they must follow the Linux/Unix path format and be an absolute path rooted to the input mount configuration setting value e.g., if '{Mounts:Input}' configuration setting value is '/input' then a valid source path would be '/input/contosodataset'. All data to be trained is expected to be under the source folder or sub folders under it. Models are trained using documents that are of the following content type - 'application/pdf', 'image/jpeg', 'image/png', 'image/tiff' or 'image/bmp'. Other type of content is ignored.",
         "operationId": "TrainCustomModelAsync",
         "consumes": [
           "application/json"
@@ -167,14 +167,10 @@
     "/custom/models/{modelId}/analyze": {
       "post": {
         "summary": "Analyze Form",
-        "description": "Extract key-value pairs, tables, and semantic values from a given document. The input document must be of one of the supported content types - 'application/pdf', 'image/jpeg', 'image/png' or 'image/tiff'. Alternatively, use 'application/json' type to specify the location (Uri or local path) of the document to be analyzed.",
+        "description": "Extract key-value pairs, tables, and semantic values from a given document. The input document must be of one of the supported content types - 'application/pdf', 'image/jpeg', 'image/png', 'image/tiff' or 'image/bmp'. Alternatively, use 'application/json' type to specify the location (Uri or local path) of the document to be analyzed.",
         "operationId": "AnalyzeWithCustomModel",
         "consumes": [
-          "application/pdf",
-          "application/json",
-          "image/jpeg",
-          "image/png",
-          "image/tiff"
+
         ],
         "produces": [
           "application/json"
@@ -197,6 +193,15 @@
             "type": "boolean",
             "x-nullable": false
           },
+	  {
+	    "name": "pageRange",
+	    "in": "query",
+	    "description": "Specify page number or range of page numbers to process, e.g: 1, 5, 7, 9-10",
+	    "required": false,
+	    "type": "string",
+	    "pattern": "^\d+(-\d+)?$",
+	    "x-nullable": false
+	  },
           {
             "$ref": "#/parameters/FileStream"
           }
@@ -469,14 +474,9 @@
     "/prebuilt/businessCard/analyze": {
       "post": {
         "summary": "Analyze Business Card",
-        "description": "Extract field text and semantic values from a given business card document. The input document must be of one of the supported content types - 'application/pdf', 'image/jpeg', 'image/png' or 'image/tiff'. Alternatively, use 'application/json' type to specify the location (Uri) of the document to be analyzed.",
+        "description": "Extract field text and semantic values from a given business card document. The input document must be of one of the supported content types - 'application/pdf', 'image/jpeg', 'image/png', 'image/tiff' or 'image/bmp'. Alternatively, use 'application/json' type to specify the location (Uri) of the document to be analyzed.",
         "operationId": "AnalyzeBusinessCardAsync",
         "consumes": [
-          "application/pdf",
-          "application/json",
-          "image/jpeg",
-          "image/png",
-          "image/tiff"
         ],
         "produces": [
           "application/json"
@@ -498,6 +498,14 @@
             "required": false,
             "type": "string"
           },
+          {
+            "name": "pageRange",
+            "in": "query",
+            "description": "Specify page number or range of page numbers to process, e.g: 1, 5, 7, 9-10",
+            "required": false,
+            "type": "string",
+            "pattern": "^\d+(-\d+)?$"
+          },	  
           {
             "$ref": "#/parameters/FileStream"
           }
@@ -570,14 +578,9 @@
     "/prebuilt/invoice/analyze": {
       "post": {
         "summary": "Analyze Invoice Document",
-        "description": "Extract field text and semantic values from a given invoice document. The input document must be of one of the supported content types - 'application/pdf', 'image/jpeg', 'image/png' or 'image/tiff'. Alternatively, use 'application/json' type to specify the location (Uri) of the document to be analyzed.",
+        "description": "Extract field text and semantic values from a given invoice document. The input document must be of one of the supported content types - 'application/pdf', 'image/jpeg', 'image/png', 'image/tiff' or "image/bmp". Alternatively, use 'application/json' type to specify the location (Uri) of the document to be analyzed.",
         "operationId": "AnalyzeInvoiceAsync",
         "consumes": [
-          "application/pdf",
-          "application/json",
-          "image/jpeg",
-          "image/png",
-          "image/tiff"
         ],
         "produces": [
           "application/json"
@@ -599,6 +602,14 @@
             "required": false,
             "type": "string"
           },
+          {
+            "name": "pageRange",
+            "in": "query",
+            "description": "Specify page number or range of page numbers to process, e.g: 1, 5, 7, 9-10",
+            "required": false,
+            "type": "string",
+            "pattern": "^\d+(-\d+)?$"
+          },	  
           {
             "$ref": "#/parameters/FileStream"
           }
@@ -668,17 +679,101 @@
         }
       }
     },
+    "/prebuilt/id/analyze": {
+      "post": {
+        "summary": "Analyze ID",
+        "description": "Extract field text and semantic values from a given ID document. The input document must be of one of the supported content types - 'application/pdf', 'image/jpeg', 'image/png', 'image/tiff' or 'image/bmp'. Alternatively, use 'application/json' type to specify the location (Uri) of the document to be analyzed.",
+        "operationId": "AnalyzeIdAsync",
+        "consumes": [
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "includeTextDetails",
+            "in": "query",
+            "description": "Include text lines and element references in the result.",
+            "required": false,
+            "default": false,
+            "type": "boolean",
+            "x-nullable": false
+          },
+          {
+            "$ref": "#/parameters/FileStream"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Request is queued successfully.",
+            "headers": {
+              "Operation-Location": {
+                "type": "string",
+                "description": "URL containing the resultId used to track the progress and obtain the result of the analyze operation."
+              }
+            }
+          },
+          "default": {
+            "description": "Response entity accompanying non-successful responses containing additional details about the error.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Analyze Id": {
+            "$ref": "./examples/IdsBatch.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/prebuilt/id/analyzeResults/{resultId}": {
+      "get": {
+        "summary": "Get Analyze ID Result",
+        "description": "Track the progress and obtain the result of the analyze ID operation.",
+        "operationId": "GetAnalyzeIdResult",
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "resultId",
+            "in": "path",
+            "description": "Analyze operation result identifier.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/AnalyzeOperationResult"
+            }
+          },
+          "default": {
+            "description": "Response entity accompanying non-successful responses containing additional details about the error.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get analyze id result": {
+            "$ref": "./examples/IdsBatchResult.json"
+          }
+        }
+      }
+    },    
     "/prebuilt/receipt/analyze": {
       "post": {
         "summary": "Analyze Receipt",
-        "description": "Extract field text and semantic values from a given receipt document. The input document must be of one of the supported content types - 'application/pdf', 'image/jpeg', 'image/png' or 'image/tiff'. Alternatively, use 'application/json' type to specify the location (Uri) of the document to be analyzed.",
+        "description": "Extract field text and semantic values from a given receipt document. The input document must be of one of the supported content types - 'application/pdf', 'image/jpeg', 'image/png', 'image/tiff' or 'image/bmp'. Alternatively, use 'application/json' type to specify the location (Uri) of the document to be analyzed.",
         "operationId": "AnalyzeReceiptAsync",
         "consumes": [
-          "application/pdf",
-          "application/json",
-          "image/jpeg",
-          "image/png",
-          "image/tiff"
         ],
         "produces": [
           "application/json"
@@ -700,6 +795,14 @@
             "required": false,
             "type": "string"
           },
+          {
+            "name": "pageRange",
+            "in": "query",
+            "description": "Specify page number or range of page numbers to process, e.g: 1, 5, 7, 9-10",
+            "required": false,
+            "type": "string",
+            "pattern": "^\d+(-\d+)?$"
+          },	  
           {
             "$ref": "#/parameters/FileStream"
           }
