@@ -2722,16 +2722,25 @@
         },
         "bytesToCapturePerPacket": {
           "type": "integer",
+          "format": "int64",
+          "minimum": 0,
+          "maximum": 4294967295,
           "default": 0,
           "description": "Number of bytes captured per packet, the remaining bytes are truncated."
         },
         "totalBytesPerSession": {
           "type": "integer",
+          "format": "int64",
+          "minimum": 0,
+          "maximum": 4294967295,
           "default": 1073741824,
           "description": "Maximum size of the capture output."
         },
         "timeLimitInSeconds": {
           "type": "integer",
+          "format": "int32",
+          "minimum": 0,
+          "maximum": 18000,
           "default": 18000,
           "description": "Maximum duration of the capture session in seconds."
         },
@@ -3157,6 +3166,7 @@
         "days": {
           "description": "Number of days to retain flow log records.",
           "type": "integer",
+          "format": "int32",
           "default": 0
         },
         "enabled": {
@@ -3183,6 +3193,7 @@
         "version": {
           "description": "The version (revision) of the flow log.",
           "type": "integer",
+          "format": "int32",
           "default": 0
         }
       }
@@ -3239,7 +3250,8 @@
         },
         "trafficAnalyticsInterval": {
           "description": "The interval in minutes which would decide how frequently TA service should do flow analytics.",
-          "type": "integer"
+          "type": "integer",
+          "format": "int32"
         }
       }
     },
@@ -3294,7 +3306,10 @@
         },
         "port": {
           "description": "The source port from which a connectivity check will be performed.",
-          "type": "integer"
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0,
+          "maximum": 65535
         }
       }
     },
@@ -3311,7 +3326,10 @@
         },
         "port": {
           "description": "Port on which check connectivity will be performed.",
-          "type": "integer"
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0,
+          "maximum": 65535
         }
       }
     },
@@ -3344,27 +3362,32 @@
         "avgLatencyInMs": {
           "description": "Average latency in milliseconds.",
           "readOnly": true,
-          "type": "integer"
+          "type": "integer",
+          "format": "int32"
         },
         "minLatencyInMs": {
           "description": "Minimum latency in milliseconds.",
           "readOnly": true,
-          "type": "integer"
+          "type": "integer",
+          "format": "int32"
         },
         "maxLatencyInMs": {
           "description": "Maximum latency in milliseconds.",
           "readOnly": true,
-          "type": "integer"
+          "type": "integer",
+          "format": "int32"
         },
         "probesSent": {
           "description": "Total number of probes sent.",
           "readOnly": true,
-          "type": "integer"
+          "type": "integer",
+          "format": "int32"
         },
         "probesFailed": {
           "description": "Number of failed probes.",
           "readOnly": true,
-          "type": "integer"
+          "type": "integer",
+          "format": "int32"
         }
       }
     },
@@ -3480,17 +3503,26 @@
         "roundTripTimeMin": {
           "description": "Minimum roundtrip time in milliseconds.",
           "readOnly": true,
-          "type": "integer"
+          "type": "integer",
+          "format": "int64",
+          "minimum": 0,
+          "maximum": 4294967295
         },
         "roundTripTimeAvg": {
           "description": "Average roundtrip time in milliseconds.",
           "readOnly": true,
-          "type": "integer"
+          "type": "integer",
+          "format": "int64",
+          "minimum": 0,
+          "maximum": 4294967295
         },
         "roundTripTimeMax": {
           "description": "Maximum roundtrip time in milliseconds.",
           "readOnly": true,
-          "type": "integer"
+          "type": "integer",
+          "format": "int64",
+          "minimum": 0,
+          "maximum": 4294967295
         }
       }
     },
@@ -3593,7 +3625,8 @@
         "validStatusCodes": {
           "type": "array",
           "items": {
-            "type": "integer"
+            "type": "integer",
+            "format": "int32"
           },
           "description": "Valid status codes."
         }
@@ -3725,6 +3758,7 @@
         },
         "score": {
           "type": "integer",
+          "format": "int32",
           "description": "The relative latency score between 1 and 100, higher values indicating a faster connection.",
           "minimum": 1,
           "maximum": 100
@@ -4061,6 +4095,9 @@
         },
         "monitoringIntervalInSeconds": {
           "type": "integer",
+          "format": "int32",
+          "minimum": 30,
+          "maximum": 1800,
           "default": 60,
           "description": "Monitoring interval in seconds."
         },
@@ -4107,6 +4144,9 @@
         },
         "port": {
           "type": "integer",
+          "format": "int32",
+          "minimum": 0,
+          "maximum": 65535,
           "description": "The source port used by connection monitor."
         }
       },
@@ -4127,6 +4167,9 @@
         },
         "port": {
           "type": "integer",
+          "format": "int32",
+          "minimum": 0,
+          "maximum": 65535,
           "description": "The destination port used by connection monitor."
         }
       },
@@ -4311,6 +4354,7 @@
         },
         "testFrequencySec": {
           "type": "integer",
+          "format": "int32",
           "description": "The frequency of test evaluation, in seconds."
         },
         "protocol": {
@@ -4365,6 +4409,9 @@
       "properties": {
         "port": {
           "type": "integer",
+          "format": "int32",
+          "minimum": 0,
+          "maximum": 65535,
           "description": "The port to connect to."
         },
         "method": {
@@ -4408,6 +4455,9 @@
       "properties": {
         "port": {
           "type": "integer",
+          "format": "int32",
+          "minimum": 0,
+          "maximum": 65535,
           "description": "The port to connect to."
         },
         "disableTraceRoute": {
@@ -4442,6 +4492,7 @@
       "properties": {
         "checksFailedPercent": {
           "type": "integer",
+          "format": "int32",
           "description": "The maximum percentage of failed checks permitted for a test to evaluate as successful."
         },
         "roundTripTimeMs": {
@@ -4520,22 +4571,37 @@
         },
         "avgLatencyInMs": {
           "type": "integer",
+          "format": "int64",
+          "minimum": 0,
+          "maximum": 4294967295,
           "description": "Average latency in ms."
         },
         "minLatencyInMs": {
           "type": "integer",
+          "format": "int64",
+          "minimum": 0,
+          "maximum": 4294967295,
           "description": "Minimum latency in ms."
         },
         "maxLatencyInMs": {
           "type": "integer",
+          "format": "int64",
+          "minimum": 0,
+          "maximum": 4294967295,
           "description": "Maximum latency in ms."
         },
         "probesSent": {
           "type": "integer",
+          "format": "int64",
+          "minimum": 0,
+          "maximum": 4294967295,
           "description": "The number of sent probes."
         },
         "probesFailed": {
           "type": "integer",
+          "format": "int64",
+          "minimum": 0,
+          "maximum": 4294967295,
           "description": "The number of failed probes."
         },
         "hops": {
