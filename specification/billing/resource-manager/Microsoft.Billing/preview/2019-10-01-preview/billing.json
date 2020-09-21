@@ -5392,6 +5392,143 @@
           }
         }
       }
+    },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/invoices/{invoiceName}/initiatePayNow": {
+      "post": {
+        "tags": [
+          "PayNow"
+        ],
+        "summary": "Initiates a pay now request.",
+        "operationId": "payNow_Initiate",
+        "x-ms-examples": {
+          "InitiateTransfer": {
+            "$ref": "./examples/InitiatePayNow.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/billingAccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/invoiceNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/InitiatePayNowRequest"
+            },
+            "description": "Request parameters that are provided to the initiated pay now operation."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Details of the initiated pay now.",
+            "schema": {
+              "$ref": "#/definitions/PayNowDetails"
+            }
+          },
+          "default": {
+            "description": "Unexpected error.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/invoices/{invoiceName}/payNows/{payNowName}": {
+      "get": {
+        "tags": [
+          "PayNow"
+        ],
+        "description": "Gets a pay now request by ID. The operation is supported only for billing accounts with agreement type EA.",
+        "operationId": "PayNow_Get",
+        "x-ms-examples": {
+          "PayNowGet": {
+            "$ref": "./examples/GetPayNow.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/billingAccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/invoiceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/payNowNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Details of pay now.",
+            "schema": {
+              "$ref": "#/definitions/PayNowDetails"
+            }
+          },
+          "default": {
+            "description": "Unexpected error.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+   "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/paynows": {
+      "get": {
+        "tags": [
+          "PayNow"
+        ],
+        "x-ms-examples": {
+          "PayNowListByBillingAccount": {
+            "$ref": "./examples/PayNowListByBillingAccount.json"
+          }
+        },
+        "operationId": "PayNows_ListByBillingAccount",
+        "description": "Lists the pay nows that are initiated for the billing account. The operation is supported only for billing accounts with agreement type EA.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/billingAccountNameParameter"
+          },
+          {
+            "name": "$filter",
+            "description": "May be used to filter the list of pay nows.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "$skiptoken",
+            "description": "Skiptoken is only used if a previous operation returned a partial result. If a previous response contains a nextLink element, the value of the nextLink element will include a skiptoken parameter that specifies a starting point to use for subsequent calls.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/PayNowListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
     }
   },
   "definitions": {
@@ -8593,6 +8730,117 @@
       "description": "The set of actions that the caller is not allowed to perform.",
       "type": "string",
       "readOnly": true
+    },
+    "InitiatePayNowRequest": {
+      "type": "object",
+      "description": "Request parameters to initiate pay now.",
+      "properties": {
+        "properties": {
+          "description": "Request parameters to initiate pay now.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/InitiatePayNowProperties"
+        }
+      }
+    },
+    "InitiatePayNowProperties": {
+      "type": "object",
+      "description": "Request parameters to initiate pay now.",
+      "properties": {
+        "sourceBillingAccountName": {
+          "type": "string",
+          "description": "The billing account to choose payoff balance."
+        },
+        "paymentInstrumentType": {
+          "type": "string",
+          "description": "enum..."
+        }
+      }
+    },
+    "PayNowDetails": {
+      "type": "object",
+      "description": "Details of the pay now.",
+      "properties": {
+        "properties": {
+          "description": "Details of the pay now.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/PayNowProperties"
+        }
+      }
+    },
+    "PayNowProperties": {
+      "type": "object",
+      "description": "Request parameters to initiate pay now.",
+      "properties": {
+        "creationTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time at which the pay now request was created.",
+          "readOnly": true
+        },
+        "errorCode": {
+          "description": "The error code for failed pay now.",
+          "type": "string"
+        },
+        "errorMessage": {
+          "description": "The error message for failed pay now.",
+          "type": "string"
+        },
+        "id": {
+          "description": "The pay now operation id for the initated pay now.",
+          "type": "string"
+        },
+        "invoiceNumber": {
+          "description": "The invoice number being paid off.",
+          "type": "string"
+        },
+        "overageAmount": {
+          "description": "The total overage amount.",
+          "type": "string"
+        },
+        "percentComplete": {
+          "description": "The percent of operation completed.",
+          "type": "string"
+        },
+        "lastModifiedTime": {
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true,
+          "description": "The time at which the pay now request was last modified."
+        },
+        "state": {
+          "description": "Identifies the state of the pay now operation.",
+          "type": "string",
+          "enum": [
+            "NotStarted",
+            "Running",
+            "Succeeded",
+            "Failed"
+          ],
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "PayNowState",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "PayNowListResult": {
+      "description": "The list of pay nows initiated.",
+      "properties": {
+        "value": {
+          "description": "The list of pay nows initiated.",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/PayNowDetails"
+          }
+        },
+        "nextLink": {
+          "description": "The link (url) to the next page of results.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
     }
   },
   "parameters": {
@@ -8747,6 +8995,14 @@
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method"
+    },
+    "payNowNameParameter": {
+      "name": "payNowName",
+      "x-ms-parameter-location": "method",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The ID that uniquely identifies a pay now request."
     }
   },
   "security": [
