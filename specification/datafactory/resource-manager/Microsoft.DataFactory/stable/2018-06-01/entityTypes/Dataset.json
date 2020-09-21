@@ -1520,6 +1520,38 @@
         "collectionName"
       ]
     },
+    "MongoDbAtlasCollectionDataset": {
+      "x-ms-discriminator-value": "MongoDbAtlasCollection",
+      "description": "The MongoDB Atlas database dataset.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Dataset"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "MongoDB Atlas database dataset properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/MongoDbAtlasCollectionDatasetTypeProperties"
+        }
+      },
+      "required": [
+        "typeProperties"
+      ]
+    },
+    "MongoDbAtlasCollectionDatasetTypeProperties": {
+      "description": "MongoDB Atlas database dataset properties.",
+      "properties": {
+        "collection": {
+          "type": "object",
+          "description": "The collection name of the MongoDB Atlas database. Type: string (or Expression with resultType string)."
+        }
+      },
+      "required": [
+        "collection"
+      ]
+    },
     "MongoDbV2CollectionDataset": {
       "x-ms-discriminator-value": "MongoDbV2Collection",
       "description": "The MongoDB database dataset.",
