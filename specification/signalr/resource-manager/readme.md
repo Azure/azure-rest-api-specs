@@ -111,6 +111,9 @@ swagger-to-sdk:
   - repo: azure-sdk-for-ruby
     after_scripts:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_signalr']
+  - repo: azure-resource-manager-schemas
+    after_scripts:
+      - node sdkauto_afterscript.js signalr/resource-manager
 ```
 
 
@@ -137,6 +140,10 @@ csharp:
   clear-output-folder: true
 ```
 
+## AzureResourceSchema
+
+See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
+
 ## Multi-API/Profile support for AutoRest v3 generators 
 
 AutoRest V3 generators require the use of `--tag=all-api-versions` to select api files.
@@ -149,6 +156,7 @@ require: $(this-folder)/../../../profiles/readme.md
 
 # all the input files across all versions
 input-file:
+  - $(this-folder)/Microsoft.SignalRService/preview/2020-07-01-preview/signalr.json
   - $(this-folder)/Microsoft.SignalRService/stable/2020-05-01/signalr.json
   - $(this-folder)/Microsoft.SignalRService/stable/2018-10-01/signalr.json
   - $(this-folder)/Microsoft.SignalRService/preview/2018-03-01-preview/signalr.json

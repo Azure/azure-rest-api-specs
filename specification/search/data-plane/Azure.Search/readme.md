@@ -162,7 +162,7 @@ directive:
       - RequiredReadOnlyProperties
   - where:
       -  $.definitions.SuggestResult.properties["@search.text"]
-      suppress:
+    suppress:
       - RequiredReadOnlyProperties
 ```
 
@@ -723,6 +723,10 @@ input-file:
   - $(this-folder)/preview/2020-06-30-Preview/searchindex.json
   - $(this-folder)/preview/2020-06-30/searchservice.json
   - $(this-folder)/preview/2020-06-30/searchindex.json
+  - $(this-folder)/preview/2019-05-06-preview/searchservice.json
+  - $(this-folder)/preview/2019-05-06-preview/searchindex.json
+  - $(this-folder)/stable/2019-05-06/searchservice.json
+  - $(this-folder)/stable/2019-05-06/searchindex.json
 
 ```
 

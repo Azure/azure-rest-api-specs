@@ -52,6 +52,12 @@ These settings apply only when `--tag=package-2019-01-preview-only` is specified
 ```yaml $(tag) == 'package-2019-01-preview-only'
 input-file:
 - Microsoft.SecurityInsights/preview/2019-01-01-preview/SecurityInsights.json
+directive:
+  - suppress: R4017
+    from: Microsoft.SecurityInsights/preview/2019-01-01-preview/SecurityInsights.json
+    where: $.definitions.ThreatIntelligenceResource
+    reason: Our API is designed based on per region per workspace concept. There is no use case of our customers to get all indicators in multiple workspaces.
+    approved-by: "@cheggert"
 ```
 
 ---
@@ -71,6 +77,9 @@ swagger-to-sdk:
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-node
   - repo: azure-cli-extensions
+  - repo: azure-resource-manager-schemas
+    after_scripts:
+      - node sdkauto_afterscript.js securityinsights/resource-manager
 ```
 
 ## C#
@@ -103,6 +112,10 @@ See configuration in [readme.nodejs.md](./readme.nodejs.md)
 ## TypeScript
 
 See configuration in [readme.typescript.md](./readme.typescript.md)
+
+## AzureResourceSchema
+
+See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
 
 ## Multi-API/Profile support for AutoRest v3 generators 
 

@@ -3864,6 +3864,24 @@
         }
       }
     },
+    "UrlSigningAction": {
+      "description": "Defines the url signing action for the delivery rule.",
+      "x-ms-discriminator-value": "UrlSigning",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DeliveryRuleAction"
+        }
+      ],
+      "required": [
+        "parameters"
+      ],
+      "properties": {
+        "parameters": {
+          "description": "Defines the parameters for the action.",
+          "$ref": "#/definitions/UrlSigningActionParameters"
+        }
+      }
+    },
     "UrlSigningActionParameters": {
       "description": "Defines the parameters for the Url Signing action.",
       "required": [

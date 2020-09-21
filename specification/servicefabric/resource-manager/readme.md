@@ -68,6 +68,8 @@ These settings apply only when `--tag=package-2020-03` is specified on the comma
 input-file:
 - Microsoft.ServiceFabric/stable/2020-03-01/cluster.json
 - Microsoft.ServiceFabric/stable/2020-03-01/application.json
+- Microsoft.ServiceFabric/preview/2020-01-01-preview/managedcluster.json
+- Microsoft.ServiceFabric/preview/2020-01-01-preview/nodetype.json
 ```
 
 ### Tag: package-2020-01-preview
@@ -176,6 +178,9 @@ swagger-to-sdk:
   - repo: azure-sdk-for-ruby
     after_scripts:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_service_fabric']
+  - repo: azure-resource-manager-schemas
+    after_scripts:
+      - node sdkauto_afterscript.js servicefabric/resource-manager
 ```
 
 
@@ -203,6 +208,10 @@ See configuration in [readme.go.md](./readme.go.md)
 
 See configuration in [readme.java.md](./readme.java.md)
 
+## AzureResourceSchema
+
+See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
+
 ## Multi-API/Profile support for AutoRest v3 generators 
 
 AutoRest V3 generators require the use of `--tag=all-api-versions` to select api files.
@@ -217,6 +226,8 @@ require: $(this-folder)/../../../profiles/readme.md
 input-file:
   - $(this-folder)/Microsoft.ServiceFabric/stable/2020-03-01/cluster.json
   - $(this-folder)/Microsoft.ServiceFabric/stable/2020-03-01/application.json
+  - $(this-folder)/Microsoft.ServiceFabric/preview/2020-01-01-preview/managedcluster.json
+  - $(this-folder)/Microsoft.ServiceFabric/preview/2020-01-01-preview/nodetype.json
   - $(this-folder)/Microsoft.ServiceFabric/preview/2019-11-01-preview/cluster.json
   - $(this-folder)/Microsoft.ServiceFabric/preview/2019-11-01-preview/application.json
   - $(this-folder)/Microsoft.ServiceFabric/preview/2019-06-01-preview/cluster.json
@@ -229,8 +240,6 @@ input-file:
   - $(this-folder)/Microsoft.ServiceFabric/preview/2017-07-01-preview/application.json
   - $(this-folder)/Microsoft.ServiceFabric/preview/2017-07-01-preview/servicefabric.json
   - $(this-folder)/Microsoft.ServiceFabric/stable/2016-09-01/servicefabric.json
-  - $(this-folder)/Microsoft.ServiceFabric/preview/2020-01-01-preview/managedcluster.json
-  - $(this-folder)/Microsoft.ServiceFabric/preview/2020-01-01-preview/nodetype.json
 
 ```
 

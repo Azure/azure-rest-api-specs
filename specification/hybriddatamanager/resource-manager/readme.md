@@ -82,6 +82,9 @@ swagger-to-sdk:
   - repo: azure-sdk-for-ruby
     after_scripts:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_hybriddatamanager']
+  - repo: azure-resource-manager-schemas
+    after_scripts:
+      - node sdkauto_afterscript.js hybriddatamanager/resource-manager
 ```
 
 
@@ -149,6 +152,10 @@ python:
   basic-setup-py: true
   output-folder: $(python-sdks-folder)/azure-mgmt-hybriddatamanager
 ```
+
+## AzureResourceSchema
+
+See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
 
 ## Multi-API/Profile support for AutoRest v3 generators 
 

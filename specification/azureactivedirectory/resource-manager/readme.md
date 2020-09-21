@@ -95,6 +95,9 @@ swagger-to-sdk:
   - repo: azure-sdk-for-ruby
     after_scripts:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_azureactivedirectory']
+  - repo: azure-resource-manager-schemas
+    after_scripts:
+      - node sdkauto_afterscript.js azureactivedirectory/resource-manager
 ```
 
 ## Go
@@ -117,6 +120,10 @@ See configuration in [readme.typescript.md](./readme.typescript.md)
 
 See configuration in [readme.csharp.md](./readme.csharp.md)
 
+## AzureResourceSchema
+
+See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
+
 ## Multi-API/Profile support for AutoRest v3 generators
 
 AutoRest V3 generators require the use of `--tag=all-api-versions` to select api files.
@@ -129,11 +136,10 @@ require: $(this-folder)/../../../profiles/readme.md
 
 # all the input files across all versions
 input-file:
-  - $(this-folder)/Microsoft.Aadiam/stable/2017-04-01/azureactivedirectory.json
   - $(this-folder)/Microsoft.Aadiam/preview/2020-07-01-preview/azureADMetrics.json
   - $(this-folder)/Microsoft.Aadiam/preview/2020-03-01-preview/privateLinkForAzureAD.json
   - $(this-folder)/Microsoft.Aadiam/preview/2020-03-01-preview/privateLinkResources.json
-
+  - $(this-folder)/Microsoft.Aadiam/stable/2017-04-01/azureactivedirectory.json
 
 ```
 

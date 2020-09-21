@@ -145,6 +145,7 @@
       },
       "put": {
         "operationId": "IntegrationRuntimes_Create",
+        "x-ms-long-running-operation": true,
         "summary": "Create integration runtime",
         "description": "Create an integration runtime",
         "tags": [
@@ -191,6 +192,9 @@
               "$ref": "#/definitions/IntegrationRuntimeResource"
             }
           },
+          "202": {
+            "description": "Accepted."
+          },
           "default": {
             "description": "An error response received from PUT integration runtime operation.",
             "schema": {
@@ -212,6 +216,7 @@
       },
       "delete": {
         "operationId": "IntegrationRuntimes_Delete",
+        "x-ms-long-running-operation": true,
         "summary": "Delete integration runtime",
         "description": "Delete an integration runtime",
         "tags": [
@@ -238,6 +243,9 @@
         "responses": {
           "200": {
             "description": "OK."
+          },
+          "202": {
+            "description": "Accepted."
           },
           "204": {
             "description": "No Content."
@@ -1158,30 +1166,12 @@
   },
   "definitions": {
     "SubResource": {
-      "description": "Azure Synapse nested resource, which belongs to a factory.",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "The resource identifier.",
-          "readOnly": true
-        },
-        "name": {
-          "type": "string",
-          "description": "The resource name.",
-          "readOnly": true
-        },
-        "type": {
-          "type": "string",
-          "description": "The resource type.",
-          "readOnly": true
-        },
-        "etag": {
-          "type": "string",
-          "description": "Etag identifies change in the resource.",
-          "readOnly": true
+      "description": "Azure Synapse nested resource, which belongs to a workspace.",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/AzureEntityResource"
         }
-      },
-      "x-ms-azure-resource": true
+      ]
     },
     "IntegrationRuntime": {
       "description": "Azure Synapse nested object which serves as a compute resource for activities.",
