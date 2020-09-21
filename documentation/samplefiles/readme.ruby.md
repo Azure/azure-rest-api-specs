@@ -3,17 +3,17 @@
 These settings apply only when `--ruby` is specified on the command line.
 
 ```yaml
-package-name: azure_mgmt_YourServiceName
-package-version: 2019-12-01
+package-name: azure_mgmt_[[ServiceName]]
+package-version: [[Version]]
 azure-arm: true
 ```
 
-### Tag: package-2019-12-01 and ruby
+### Tag: package-[[Version]] and ruby
 
-These settings apply only when `--tag=package-2019-12-01 --ruby` is specified on the command line.
+These settings apply only when `--tag=package-[[Version]] --ruby` is specified on the command line.
 Please also specify `--ruby-sdks-folder=<path to the root directory of your azure-sdk-for-ruby clone>`.
 
-```yaml $(tag) == 'package-2019-12-01' && $(ruby)
-namespace: Microsoft.YourServiceName
-output-folder: $(ruby-sdks-folder)/YourServiceName
+```yaml $(tag) == 'package-[[Version]]' && $(ruby)
+namespace: [[ResourceProviderName]]
+output-folder: $(ruby-sdks-folder)/[[ServiceName]]
 ```
