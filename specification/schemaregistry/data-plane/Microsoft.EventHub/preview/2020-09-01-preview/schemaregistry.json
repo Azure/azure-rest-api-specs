@@ -80,7 +80,8 @@
               }
             },
             "schema": {
-              "type": "string"
+              "type": "object",
+              "additionalProperties": {}
             }
           },
           "default": {
@@ -121,16 +122,6 @@
             "type": "string"
           },
           {
-            "name": "schema-content",
-            "in": "body",
-            "description": "String representation of the registered schema.",
-            "required": true,
-            "schema": {
-              "type": "object",
-              "format": "binary"
-            }
-          },
-          {
             "name": "Serialization-Type",
             "in": "header",
             "type": "string",
@@ -151,6 +142,16 @@
               ]
             },
             "x-nullable": false
+          },
+          {
+            "name": "schema-content",
+            "in": "body",
+            "description": "String representation of the registered schema.",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "additionalProperties": {}
+            }
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -249,7 +250,7 @@
             "required": true,
             "schema": {
               "type": "object",
-              "format": "binary"
+              "additionalProperties": {}
             }
           },
           {
