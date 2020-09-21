@@ -25,6 +25,8 @@ output-folder: $(python-sdks-folder)/synapse/azure-synapse-spark/azure/synapse/s
 ``` yaml $(package-artifacts)
 no-namespace-folders: true
 namespace: azure.synapse.artifacts
+modelerfour:
+  lenient-model-deduplication: true
 output-folder: $(python-sdks-folder)/synapse/azure-synapse-artifacts/azure/synapse/artifacts
 ```
 ``` yaml $(package-access-control)
