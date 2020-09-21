@@ -3,7 +3,7 @@
   "info": {
     "title": "Azure Schema Registry",
     "version": "2020-09-01-preview",
-    "description": "Azure Schema Registry is as a central schema repository for enterprise-level data infrastructure, complete with support for versioning and management."
+    "description": "Azure Schema Registry is as a central schema repository, complete with support for versioning, management, compatibility checking, and RBAC."
   },
   "x-ms-parameterized-host": {
     "hostTemplate": "{endpoint}",
@@ -64,7 +64,21 @@
               },
               "Serialization-Type": {
                 "type": "string",
-                "description": "Serialization type for the schema being stored."
+                "description": "Serialization type for the schema being stored.",
+                "enum": [
+                  "avro"
+                ],
+                "x-ms-enum": {
+                  "name": "SerializationType",
+                  "modelAsString": true,
+                  "values": [
+                    {
+                      "value": "avro",
+                      "name": "AVRO",
+                      "description": "Avro Serialization schema type"
+                    }
+                  ]
+                }
               },
               "Schema-Id": {
                 "type": "string",
@@ -167,7 +181,21 @@
               },
               "Serialization-Type": {
                 "type": "string",
-                "description": "Serialization type for the schema being stored."
+                "description": "Serialization type for the schema being stored.",
+                "enum": [
+                  "avro"
+                ],
+                "x-ms-enum": {
+                  "name": "SerializationType",
+                  "modelAsString": true,
+                  "values": [
+                    {
+                      "value": "avro",
+                      "name": "AVRO",
+                      "description": "Avro Serialization schema type"
+                    }
+                  ]
+                }
               },
               "Schema-Id": {
                 "type": "string",
@@ -267,7 +295,21 @@
               },
               "Serialization-Type": {
                 "type": "string",
-                "description": "Serialization type for the schema being registered."
+                "description": "Serialization type for the schema being registered.",
+                "enum": [
+                  "avro"
+                ],
+                "x-ms-enum": {
+                  "name": "SerializationType",
+                  "modelAsString": true,
+                  "values": [
+                    {
+                      "value": "avro",
+                      "name": "AVRO",
+                      "description": "Avro Serialization schema type"
+                    }
+                  ]
+                }
               },
               "Schema-Id": {
                 "type": "string",
