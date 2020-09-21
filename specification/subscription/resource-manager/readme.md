@@ -220,8 +220,9 @@ require: $(this-folder)/../../../profiles/readme.md
 
 # all the input files across all versions
 input-file:
-  - $(this-folder)/Microsoft.Subscription/stable/2020-01-01/subscriptions.json
   - $(this-folder)/Microsoft.Subscription/stable/2016-06-01/subscriptions.json
+  - $(this-folder)/Microsoft.Subscription/stable/2020-09-01/subscriptions.json
+  - $(this-folder)/Microsoft.Subscription/stable/2020-01-01/subscriptions.json
   - $(this-folder)/Microsoft.Subscription/preview/2019-10-01-preview/subscriptions.json
   - $(this-folder)/Microsoft.Subscription/preview/2019-03-01-preview/subscriptions.json
   - $(this-folder)/Microsoft.Subscription/preview/2018-11-01-preview/subscriptions.json

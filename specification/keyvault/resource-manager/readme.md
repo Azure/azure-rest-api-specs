@@ -4,10 +4,10 @@
 
 This is the AutoRest configuration file for KeyVault.
 
-
-
 ---
+
 ## Getting Started
+
 To build the SDK for KeyVault, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
 
 > `autorest`
@@ -15,13 +15,13 @@ To build the SDK for KeyVault, simply [Install AutoRest](https://aka.ms/autorest
 To see additional help and options, run:
 
 > `autorest --help`
+
 ---
 
 ## Configuration
 
-
-
 ### Basic Information
+
 These are the global settings for the KeyVault API.
 
 ``` yaml
@@ -29,6 +29,29 @@ openapi-type: arm
 tag: package-2019-09
 ```
 
+### Tag: package-preview-2020-04
+
+These settings apply only when `--tag=package-preview-2020-04` is specified on the command line.
+This tag is for the development of preview features related to managed HSM of Azure CLI and PowerShell.
+
+```yaml $(tag) == 'package-preview-2020-04'
+input-file:
+  - Microsoft.KeyVault/stable/2019-09-01/keyvault.json
+  - Microsoft.KeyVault/stable/2019-09-01/providers.json
+  - Microsoft.KeyVault/preview/2020-04-01-preview/managedHsm.json
+```
+
+### Tag: package-preview-2020-04-full
+
+These settings apply only when `--tag=package-preview-2020-04-full` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2020-04-full'
+input-file:
+  - Microsoft.KeyVault/preview/2020-04-01-preview/keyvault.json
+  - Microsoft.KeyVault/preview/2020-04-01-preview/providers.json
+  - Microsoft.KeyVault/preview/2020-04-01-preview/secrets.json
+  - Microsoft.KeyVault/preview/2020-04-01-preview/managedHsm.json
+```
 
 ### Tag: package-2019-09
 
@@ -60,8 +83,6 @@ input-file:
 - Microsoft.KeyVault/stable/2018-02-14/providers.json
 ```
 
-
-
 ### Tag: package-2016-10
 
 These settings apply only when `--tag=package-2016-10` is specified on the command line.
@@ -91,8 +112,8 @@ directive:
 ```
 
 ---
-# Code Generation
 
+# Code Generation
 
 ## Swagger to SDK
 
@@ -144,6 +165,10 @@ require: $(this-folder)/../../../profiles/readme.md
 input-file:
   - $(this-folder)/Microsoft.KeyVault/stable/2019-09-01/keyvault.json
   - $(this-folder)/Microsoft.KeyVault/stable/2019-09-01/providers.json
+  - $(this-folder)/Microsoft.KeyVault/preview/2020-04-01-preview/managedHsm.json
+  - $(this-folder)/Microsoft.KeyVault/preview/2020-04-01-preview/keyvault.json
+  - $(this-folder)/Microsoft.KeyVault/preview/2020-04-01-preview/providers.json
+  - $(this-folder)/Microsoft.KeyVault/preview/2020-04-01-preview/secrets.json
   - $(this-folder)/Microsoft.KeyVault/preview/2018-02-14-preview/keyvault.json
   - $(this-folder)/Microsoft.KeyVault/preview/2018-02-14-preview/providers.json
   - $(this-folder)/Microsoft.KeyVault/stable/2018-02-14/keyvault.json
@@ -154,11 +179,10 @@ input-file:
 
 ```
 
-If there are files that should not be in the `all-api-versions` set, 
+If there are files that should not be in the `all-api-versions` set,
 uncomment the  `exclude-file` section below and add the file paths.
 
 ``` yaml $(tag) == 'all-api-versions'
 #exclude-file: 
 #  - $(this-folder)/Microsoft.Example/stable/2010-01-01/somefile.json
 ```
-

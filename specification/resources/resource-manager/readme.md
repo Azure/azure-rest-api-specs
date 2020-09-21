@@ -37,7 +37,7 @@ tag: package-locks-2016-09
 ```
 
 ``` yaml $(package-policy)
-tag: package-policy-2019-09
+tag: package-policy-2020-03
 ```
 
 ``` yaml $(package-resources)
@@ -57,13 +57,22 @@ tag: package-managedapplications-2018-06
 ```
 
 ``` yaml $(package-deploymentscripts)
-tag: package-deploymentscripts-2019-10-preview
+tag: package-deploymentscripts-2020-10
 ```
 
 ``` yaml $(package-templatespecs)
-tag: package-templatespecs-2019-06-preview
+tag: package-preview-2020-08
 ```
 
+
+### Tag: package-preview-2020-08
+
+These settings apply only when `--tag=package-preview-2020-08` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2020-08'
+input-file:
+  - Microsoft.Solutions/preview/2020-08-21-preview/managedapplications.json
+```
 ### Tag: package-resources-2020-06
 
 These settings apply only when `--tag=package-resources-2020-06` is specified on the command line.
@@ -77,9 +86,18 @@ input-file:
 
 These settings apply only when `--tag=package-subscriptions-2020-01` is specified on the command line.
 
-```yaml $(tag) == 'package-subscriptions-2020-01'
+``` yaml $(tag) == 'package-subscriptions-2020-01'
 input-file:
   - Microsoft.Resources/stable/2020-01-01/subscriptions.json
+```
+
+### Tag: package-deploymentscripts-2020-10
+
+These settings apply only when `--tag=package-deploymentscripts-2020-10` is specified on the command line.
+
+``` yaml $(tag) == 'package-deploymentscripts-2020-10'
+input-file:
+- Microsoft.Resources/stable/2020-10-01/deploymentScripts.json
 ```
 
 ### Tag: package-deploymentscripts-2019-10-preview
@@ -116,6 +134,22 @@ These settings apply only when `--tag=package-locks-2015-01` is specified on the
 ``` yaml $(tag) == 'package-locks-2015-01'
 input-file:
 - Microsoft.Authorization/stable/2015-01-01/locks.json
+```
+
+### Tag: package-policy-2020-03
+
+These settings apply only when `--tag=package-policy-2020-03` is specified on the command line.
+
+``` yaml $(tag) == 'package-policy-2020-03'
+input-file:
+- Microsoft.Authorization/stable/2020-03-01/policyAssignments.json
+- Microsoft.Authorization/stable/2020-03-01/policyDefinitions.json
+- Microsoft.Authorization/stable/2020-03-01/policySetDefinitions.json
+- Microsoft.Authorization/preview/2020-07-01-preview/policyExemptions.json
+
+# Needed when there is more than one input file
+override-info:
+  title: PolicyClient
 ```
 
 ### Tag: package-policy-2019-09
@@ -486,6 +520,10 @@ directive:
     from: policyAssignments.json
     where: $.paths
     reason: policy assignment under an extension resource with Microsoft.Management
+  - suppress: UniqueResourcePaths
+    from: policyExemptions.json
+    where: $.paths
+    reason: policy exemption under an extension resource with Microsoft.Management
   - suppress: OperationsAPIImplementation
     from: policyAssignments.json
     where: $.paths
@@ -498,6 +536,14 @@ directive:
     from: policySetDefinitions.json
     where: $.paths
     reason: operation APIs for Microsoft.Authorization are to be defined in RBAC swagger
+  - suppress: OperationsAPIImplementation
+    from: policyExemptions.json
+    where: $.paths
+    reason: operation APIs for Microsoft.Authorization are to be defined in RBAC swagger
+  - suppress: BodyTopLevelProperties
+    from: policyExemptions.json
+    where: $.definitions.PolicyExemption.properties
+    reason: Currently systemData is not allowed
   - suppress: BodyTopLevelProperties
     from: resources.json
     where: $.definitions.ResourceGroup.properties
@@ -685,12 +731,18 @@ require: $(this-folder)/../../../profiles/readme.md
 
 # all the input files across all versions
 input-file:
+  - $(this-folder)/Microsoft.Solutions/preview/2020-08-21-preview/managedapplications.json
   - $(this-folder)/Microsoft.Resources/stable/2020-06-01/resources.json
   - $(this-folder)/Microsoft.Resources/stable/2020-01-01/subscriptions.json
   - $(this-folder)/Microsoft.Resources/preview/2019-10-01-preview/deploymentScripts.json
+  - $(this-folder)/Microsoft.Resources/stable/2020-10-01/deploymentScripts.json
   - $(this-folder)/Microsoft.Features/stable/2015-12-01/features.json
   - $(this-folder)/Microsoft.Authorization/stable/2016-09-01/locks.json
   - $(this-folder)/Microsoft.Authorization/stable/2015-01-01/locks.json
+  - $(this-folder)/Microsoft.Authorization/preview/2020-07-01-preview/policyExemptions.json
+  - $(this-folder)/Microsoft.Authorization/stable/2020-03-01/policyAssignments.json
+  - $(this-folder)/Microsoft.Authorization/stable/2020-03-01/policyDefinitions.json
+  - $(this-folder)/Microsoft.Authorization/stable/2020-03-01/policySetDefinitions.json
   - $(this-folder)/Microsoft.Authorization/stable/2019-09-01/policyAssignments.json
   - $(this-folder)/Microsoft.Authorization/stable/2019-09-01/policyDefinitions.json
   - $(this-folder)/Microsoft.Authorization/stable/2019-09-01/policySetDefinitions.json

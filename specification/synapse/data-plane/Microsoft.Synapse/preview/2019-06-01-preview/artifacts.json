@@ -254,6 +254,7 @@
           }
         },
         "description": "Creates or updates a dataset.",
+        "x-ms-long-running-operation": true,
         "parameters": [
           {
             "$ref": "#/parameters/datasetName"
@@ -284,6 +285,9 @@
             "schema": {
               "$ref": "#/definitions/DatasetResource"
             }
+          },
+          "202": {
+            "description": "Accepted."
           },
           "default": {
             "description": "An error response received from the Azure Synapse service.",
@@ -348,6 +352,7 @@
           }
         },
         "description": "Deletes a dataset.",
+        "x-ms-long-running-operation": true,
         "parameters": [
           {
             "$ref": "#/parameters/datasetName"
@@ -359,6 +364,9 @@
         "responses": {
           "200": {
             "description": "OK."
+          },
+          "202": {
+            "description": "Accepted."
           },
           "204": {
             "description": "No Content."
@@ -561,7 +569,6 @@
           }
         },
         "description": "Creates a run of a pipeline.",
-        "x-ms-long-running-operation": true,
         "parameters": [
           {
             "$ref": "#/parameters/pipelineName"
@@ -604,14 +611,11 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "OK.",
+          "202": {
+            "description": "Accepted.",
             "schema": {
               "$ref": "#/definitions/CreateRunResponse"
             }
-          },
-          "202": {
-            "description": "Accepted."
           },
           "default": {
             "description": "An error response received from the Azure Synapse service.",
@@ -1278,6 +1282,7 @@
           }
         },
         "description": "Creates or updates a data flow.",
+        "x-ms-long-running-operation": true,
         "parameters": [
           {
             "$ref": "#/parameters/dataFlowName"
@@ -1308,6 +1313,9 @@
             "schema": {
               "$ref": "#/definitions/DataFlowResource"
             }
+          },
+          "202": {
+            "description": "Accepted."
           },
           "default": {
             "description": "An error response received from the Azure Synapse service.",
@@ -1369,6 +1377,7 @@
           }
         },
         "description": "Deletes a data flow.",
+        "x-ms-long-running-operation": true,
         "parameters": [
           {
             "$ref": "#/parameters/dataFlowName"
@@ -1380,6 +1389,9 @@
         "responses": {
           "200": {
             "description": "OK."
+          },
+          "202": {
+            "description": "Accepted."
           },
           "204": {
             "description": "No Content."
@@ -2301,70 +2313,13 @@
     }
   },
   "definitions": {
-    "Resource": {
-      "description": "Azure Synapse top-level resource.",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "The resource identifier.",
-          "readOnly": true
-        },
-        "name": {
-          "type": "string",
-          "description": "The resource name.",
-          "readOnly": true
-        },
-        "type": {
-          "type": "string",
-          "description": "The resource type.",
-          "readOnly": true
-        },
-        "location": {
-          "type": "string",
-          "description": "The resource location.",
-          "x-ms-mutability": [
-            "create",
-            "read"
-          ]
-        },
-        "tags": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "description": "The resource tags."
-        },
-        "eTag": {
-          "type": "string",
-          "description": "Etag identifies change in the resource.",
-          "readOnly": true
-        }
-      }
-    },
     "SubResource": {
       "description": "Azure Synapse nested resource, which belongs to a workspace.",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "The resource identifier.",
-          "readOnly": true
-        },
-        "name": {
-          "type": "string",
-          "description": "The resource name.",
-          "readOnly": true
-        },
-        "type": {
-          "type": "string",
-          "description": "The resource type.",
-          "readOnly": true
-        },
-        "etag": {
-          "type": "string",
-          "description": "Etag identifies change in the resource.",
-          "readOnly": true
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/AzureEntityResource"
         }
-      }
+      ]
     },
     "SubResourceDebugResource": {
       "description": "Azure Synapse nested debug resource.",
@@ -3139,29 +3094,6 @@
         }
       }
     },
-    "Workspace": {
-      "description": "Workspace resource type.",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/Resource"
-        }
-      ],
-      "properties": {
-        "identity": {
-          "$ref": "#/definitions/WorkspaceIdentity",
-          "description": "Managed service identity of the workspace."
-        },
-        "properties": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/WorkspaceProperties",
-          "description": "Properties of the workspace."
-        }
-      },
-      "additionalProperties": {
-        "type": "object"
-      }
-    },
     "WorkspaceUpdateParameters": {
       "description": "Parameters for updating a workspace resource.",
       "properties": {
@@ -3206,35 +3138,6 @@
       "required": [
         "type"
       ]
-    },
-    "WorkspaceProperties": {
-      "description": "Workspace resource properties.",
-      "properties": {
-        "provisioningState": {
-          "description": "Workspace provisioning state, example Succeeded.",
-          "type": "string",
-          "readOnly": true
-        },
-        "createTime": {
-          "description": "Time the workspace was created in ISO8601 format.",
-          "type": "string",
-          "readOnly": true,
-          "format": "date-time"
-        },
-        "version": {
-          "description": "Version of the workspace.",
-          "type": "string",
-          "readOnly": true
-        },
-        "defaultStorage": {
-          "description": "Linked service reference.",
-          "$ref": "#/definitions/LinkedServiceReference"
-        },
-        "defaultSqlServer": {
-          "description": "Linked service reference.",
-          "$ref": "#/definitions/LinkedServiceReference"
-        }
-      }
     },
     "DatasetReference": {
       "description": "Dataset reference type.",

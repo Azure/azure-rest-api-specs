@@ -6,35 +6,43 @@ These settings apply only when `--azureresourceschema` is specified on the comma
 
 ``` yaml $(azureresourceschema) && $(multiapi)
 batch:
-  - tag: package-2017-09-preview
-  - tag: package-2018-03
-  - tag: package-2018-05
+  - tag: schema-batchai-2018-05-01
+  - tag: schema-batchai-2018-03-01
+  - tag: schema-batchai-2017-09-01-preview
+
 ```
 
-### Tag: package-2017-09-preview and azureresourceschema
-
-These settings apply only when `--tag=package-2017-09-preview --azureresourceschema` is specified on the command line.
 Please also specify `--azureresourceschema-folder=<path to the root directory of your azure-resource-manager-schemas clone>`.
 
-``` yaml $(tag) == 'package-2017-09-preview' && $(azureresourceschema)
+### Tag: schema-batchai-2018-05-01 and azureresourceschema
+
+``` yaml $(tag) == 'schema-batchai-2018-05-01' && $(azureresourceschema)
 output-folder: $(azureresourceschema-folder)/schemas
+
+# all the input files in this apiVersion
+input-file:
+  - Microsoft.BatchAI/stable/2018-05-01/BatchAI.json
+
 ```
 
-### Tag: package-2018-03 and azureresourceschema
+### Tag: schema-batchai-2018-03-01 and azureresourceschema
 
-These settings apply only when `--tag=package-2018-03 --azureresourceschema` is specified on the command line.
-Please also specify `--azureresourceschema-folder=<path to the root directory of your azure-resource-manager-schemas clone>`.
-
-``` yaml $(tag) == 'package-2018-03' && $(azureresourceschema)
+``` yaml $(tag) == 'schema-batchai-2018-03-01' && $(azureresourceschema)
 output-folder: $(azureresourceschema-folder)/schemas
+
+# all the input files in this apiVersion
+input-file:
+  - Microsoft.BatchAI/stable/2018-03-01/BatchAI.json
+
 ```
 
-### Tag: package-2018-05 and azureresourceschema
+### Tag: schema-batchai-2017-09-01-preview and azureresourceschema
 
-These settings apply only when `--tag=package-2018-05 --azureresourceschema` is specified on the command line.
-Please also specify `--azureresourceschema-folder=<path to the root directory of your azure-resource-manager-schemas clone>`.
-
-``` yaml $(tag) == 'package-2018-05' && $(azureresourceschema)
+``` yaml $(tag) == 'schema-batchai-2017-09-01-preview' && $(azureresourceschema)
 output-folder: $(azureresourceschema-folder)/schemas
-```
 
+# all the input files in this apiVersion
+input-file:
+  - Microsoft.BatchAI/preview/2017-09-01-preview/BatchAI.json
+
+```

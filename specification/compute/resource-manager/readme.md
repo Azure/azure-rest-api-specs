@@ -34,7 +34,7 @@ These are the global settings for the Compute API.
 title: ComputeManagementClient
 description: Compute Client
 openapi-type: arm
-tag: package-2020-06-01
+tag: package-2020-06-30
 
 directive:
   - where:
@@ -208,6 +208,53 @@ directive:
     reason:
       - ACS service is deprecated so a PATCH endpoint won't be implemented
 
+```
+### Tag: package-2020-06-30
+
+These settings apply only when `--tag=package-2020-06-30` is specified on the command line.
+
+``` yaml $(tag) == 'package-2020-06-30'
+input-file:
+- Microsoft.Compute/stable/2020-06-01/compute.json
+- Microsoft.Compute/stable/2020-06-01/runCommands.json
+- Microsoft.Compute/stable/2019-04-01/skus.json
+- Microsoft.Compute/stable/2020-06-30/disk.json
+- Microsoft.Compute/stable/2019-12-01/gallery.json
+- Microsoft.ContainerService/stable/2017-01-31/containerService.json
+```
+
+### Tag: package-2020-06-30-only
+
+These settings apply only when `--tag=package-2020-06-30-only` is specified on the command line.
+
+``` yaml $(tag) == 'package-2020-06-30-only'
+input-file:
+- Microsoft.Compute/stable/2020-06-30/disk.json
+```
+
+### Tag: package-2020-09-30
+
+These settings apply only when `--tag=package-2020-09-30` is specified on the command line.
+
+``` yaml $(tag) == 'package-2020-09-30'
+input-file:
+- Microsoft.Compute/stable/2020-06-01/compute.json
+- Microsoft.Compute/stable/2020-06-01/runCommands.json
+- Microsoft.Compute/stable/2019-04-01/skus.json
+- Microsoft.Compute/stable/2020-05-01/disk.json
+- Microsoft.Compute/preview/2020-09-30/gallery.json
+- Microsoft.Compute/preview/2020-09-30/sharedGallery.json
+- Microsoft.ContainerService/stable/2017-01-31/containerService.json
+```
+
+### Tag: package-2020-09-30-only
+
+These settings apply only when `--tag=package-2020-09-30-only` is specified on the command line.
+
+``` yaml $(tag) == 'package-2020-09-30-only'
+input-file:
+- Microsoft.Compute/preview/2020-09-30/gallery.json
+- Microsoft.Compute/preview/2020-09-30/sharedGallery.json
 ```
 
 ### Tag: package-2020-06-01
@@ -824,12 +871,15 @@ require: $(this-folder)/../../../profiles/readme.md
 
 # all the input files across all versions
 input-file:
+  - $(this-folder)/Microsoft.Compute/preview/2020-09-30/sharedGallery.json
+  - $(this-folder)/Microsoft.Compute/preview/2020-09-30/gallery.json
   - $(this-folder)/Microsoft.Compute/stable/2020-06-01/compute.json
   - $(this-folder)/Microsoft.Compute/stable/2020-06-01/runCommands.json
   - $(this-folder)/Microsoft.Compute/stable/2019-04-01/skus.json
-  - $(this-folder)/Microsoft.Compute/stable/2020-05-01/disk.json
+  - $(this-folder)/Microsoft.Compute/stable/2020-06-30/disk.json
   - $(this-folder)/Microsoft.Compute/stable/2019-12-01/gallery.json
   - $(this-folder)/Microsoft.ContainerService/stable/2017-01-31/containerService.json
+  - $(this-folder)/Microsoft.Compute/stable/2020-05-01/disk.json
   - $(this-folder)/Microsoft.Compute/stable/2019-12-01/compute.json
   - $(this-folder)/Microsoft.Compute/stable/2019-12-01/runCommands.json
   - $(this-folder)/Microsoft.Compute/stable/2019-11-01/disk.json

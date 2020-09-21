@@ -79,6 +79,8 @@ This is not used by Autorest itself.
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
   - repo: azure-sdk-for-python
+    after_scripts:
+      - python ./scripts/multiapi_init_gen.py azure-mgmt-appplatform
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-net
   - repo: azure-sdk-for-node
@@ -131,6 +133,7 @@ require: $(this-folder)/../../../profiles/readme.md
 
 # all the input files across all versions
 input-file:
+  - $(this-folder)/Microsoft.AppPlatform/stable/2020-07-01/appplatform.json
   - $(this-folder)/Microsoft.AppPlatform/preview/2019-05-01-preview/appplatform.json
 
 ```

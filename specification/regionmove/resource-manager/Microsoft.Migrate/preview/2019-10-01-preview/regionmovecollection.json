@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "Region Move Service API",
+    "title": "Resource Mover Service API",
     "description": "A first party Azure service orchestrating the move of Azure resources from one Azure region to another or between zones within a region.",
     "version": "2019-10-01-preview"
   },
@@ -19,6 +19,7 @@
           "MoveCollections"
         ],
         "operationId": "MoveCollections_Create",
+        "description": "Creates or updates a move collection.",
         "consumes": [
           "application/json"
         ],
@@ -30,16 +31,10 @@
             "$ref": "#/parameters/subscriptionId"
           },
           {
-            "in": "path",
-            "name": "resourceGroupName",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/resourceGroupName"
           },
           {
-            "in": "path",
-            "name": "moveCollectionName",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/moveCollectionName"
           },
           {
             "$ref": "#/parameters/api-version"
@@ -83,6 +78,7 @@
           "MoveCollections"
         ],
         "operationId": "MoveCollections_Update",
+        "description": "Updates a move collection.",
         "consumes": [
           "application/json"
         ],
@@ -94,16 +90,10 @@
             "$ref": "#/parameters/subscriptionId"
           },
           {
-            "in": "path",
-            "name": "resourceGroupName",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/resourceGroupName"
           },
           {
-            "in": "path",
-            "name": "moveCollectionName",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/moveCollectionName"
           },
           {
             "$ref": "#/parameters/api-version"
@@ -131,8 +121,8 @@
           }
         },
         "x-ms-examples": {
-          "MoveCollection_Update": {
-            "$ref": "./examples/MoveCollection_Update.json"
+          "MoveCollections_Update": {
+            "$ref": "./examples/MoveCollections_Update.json"
           }
         }
       },
@@ -141,6 +131,7 @@
           "MoveCollections"
         ],
         "operationId": "MoveCollections_Delete",
+        "description": "Deletes a move collection.",
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation"
@@ -153,16 +144,10 @@
             "$ref": "#/parameters/subscriptionId"
           },
           {
-            "in": "path",
-            "name": "resourceGroupName",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/resourceGroupName"
           },
           {
-            "in": "path",
-            "name": "moveCollectionName",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/moveCollectionName"
           },
           {
             "$ref": "#/parameters/api-version"
@@ -199,6 +184,7 @@
           "MoveCollections"
         ],
         "operationId": "MoveCollections_Get",
+        "description": "Gets the move collection.",
         "produces": [
           "application/json"
         ],
@@ -207,16 +193,10 @@
             "$ref": "#/parameters/subscriptionId"
           },
           {
-            "in": "path",
-            "name": "resourceGroupName",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/resourceGroupName"
           },
           {
-            "in": "path",
-            "name": "moveCollectionName",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/moveCollectionName"
           },
           {
             "$ref": "#/parameters/api-version"
@@ -262,16 +242,10 @@
             "$ref": "#/parameters/subscriptionId"
           },
           {
-            "in": "path",
-            "name": "resourceGroupName",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/resourceGroupName"
           },
           {
-            "in": "path",
-            "name": "moveCollectionName",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/moveCollectionName"
           },
           {
             "$ref": "#/parameters/api-version"
@@ -327,16 +301,10 @@
             "$ref": "#/parameters/subscriptionId"
           },
           {
-            "in": "path",
-            "name": "resourceGroupName",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/resourceGroupName"
           },
           {
-            "in": "path",
-            "name": "moveCollectionName",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/moveCollectionName"
           },
           {
             "$ref": "#/parameters/api-version"
@@ -392,16 +360,10 @@
             "$ref": "#/parameters/subscriptionId"
           },
           {
-            "in": "path",
-            "name": "resourceGroupName",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/resourceGroupName"
           },
           {
-            "in": "path",
-            "name": "moveCollectionName",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/moveCollectionName"
           },
           {
             "$ref": "#/parameters/api-version"
@@ -457,16 +419,10 @@
             "$ref": "#/parameters/subscriptionId"
           },
           {
-            "in": "path",
-            "name": "resourceGroupName",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/resourceGroupName"
           },
           {
-            "in": "path",
-            "name": "moveCollectionName",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/moveCollectionName"
           },
           {
             "$ref": "#/parameters/api-version"
@@ -522,16 +478,10 @@
             "$ref": "#/parameters/subscriptionId"
           },
           {
-            "in": "path",
-            "name": "resourceGroupName",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/resourceGroupName"
           },
           {
-            "in": "path",
-            "name": "moveCollectionName",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/moveCollectionName"
           },
           {
             "$ref": "#/parameters/api-version"
@@ -567,6 +517,7 @@
           "MoveCollections"
         ],
         "operationId": "MoveResources_List",
+        "description": "Lists the Move Resources in the move collection.",
         "produces": [
           "application/json"
         ],
@@ -575,16 +526,10 @@
             "$ref": "#/parameters/subscriptionId"
           },
           {
-            "in": "path",
-            "name": "resourceGroupName",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/resourceGroupName"
           },
           {
-            "in": "path",
-            "name": "moveCollectionName",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/moveCollectionName"
           },
           {
             "$ref": "#/parameters/api-version"
@@ -628,6 +573,7 @@
           "MoveCollections"
         ],
         "operationId": "UnresolvedDependencies_Get",
+        "description": "Gets a list of unresolved dependencies.",
         "produces": [
           "application/json"
         ],
@@ -636,16 +582,10 @@
             "$ref": "#/parameters/subscriptionId"
           },
           {
-            "in": "path",
-            "name": "resourceGroupName",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/resourceGroupName"
           },
           {
-            "in": "path",
-            "name": "moveCollectionName",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/moveCollectionName"
           },
           {
             "$ref": "#/parameters/api-version"
@@ -678,6 +618,7 @@
           "MoveResources"
         ],
         "operationId": "MoveResources_Create",
+        "description": "Creates or updates a Move Resource in the move collection.",
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation"
@@ -693,22 +634,13 @@
             "$ref": "#/parameters/subscriptionId"
           },
           {
-            "in": "path",
-            "name": "resourceGroupName",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/resourceGroupName"
           },
           {
-            "in": "path",
-            "name": "moveCollectionName",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/moveCollectionName"
           },
           {
-            "in": "path",
-            "name": "moveResourceName",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/moveResourceName"
           },
           {
             "$ref": "#/parameters/api-version"
@@ -749,6 +681,7 @@
           "MoveResources"
         ],
         "operationId": "MoveResources_Delete",
+        "description": "Deletes a Move Resource from the move collection.",
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation"
@@ -761,22 +694,13 @@
             "$ref": "#/parameters/subscriptionId"
           },
           {
-            "in": "path",
-            "name": "resourceGroupName",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/resourceGroupName"
           },
           {
-            "in": "path",
-            "name": "moveCollectionName",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/moveCollectionName"
           },
           {
-            "in": "path",
-            "name": "moveResourceName",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/moveResourceName"
           },
           {
             "$ref": "#/parameters/api-version"
@@ -813,6 +737,7 @@
           "MoveResources"
         ],
         "operationId": "MoveResources_Get",
+        "description": "Gets the Move Resource.",
         "produces": [
           "application/json"
         ],
@@ -821,22 +746,13 @@
             "$ref": "#/parameters/subscriptionId"
           },
           {
-            "in": "path",
-            "name": "resourceGroupName",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/resourceGroupName"
           },
           {
-            "in": "path",
-            "name": "moveCollectionName",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/moveCollectionName"
           },
           {
-            "in": "path",
-            "name": "moveResourceName",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/moveResourceName"
           },
           {
             "$ref": "#/parameters/api-version"
@@ -900,8 +816,8 @@
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Migrate/moveCollections": {
       "get": {
-        "summary": "Get all MoveCollections.",
-        "description": "Get all the MoveCollections in the subscription.",
+        "summary": "Get all Move Collections.",
+        "description": "Get all the Move Collections in the subscription.",
         "operationId": "MoveCollections_ListMoveCollectionsBySubscription",
         "produces": [
           "application/json"
@@ -940,8 +856,8 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/moveCollections": {
       "get": {
-        "summary": "Get all projects.",
-        "description": "Get all the projects in the resource group.",
+        "summary": "Get all Move Collections.",
+        "description": "Get all the Move Collections in the resource group.",
         "operationId": "MoveCollections_ListMoveCollectionsByResourceGroup",
         "produces": [
           "application/json"
@@ -951,10 +867,7 @@
             "$ref": "#/parameters/subscriptionId"
           },
           {
-            "in": "path",
-            "name": "resourceGroupName",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/resourceGroupName"
           },
           {
             "$ref": "#/parameters/api-version"
@@ -987,7 +900,7 @@
   },
   "definitions": {
     "ResourceIdentityType": {
-      "description": "The type of identity used for the region move service.",
+      "description": "The type of identity used for the resource mover service.",
       "enum": [
         "None",
         "SystemAssigned",
@@ -1034,6 +947,7 @@
         "Committed"
       ],
       "type": "string",
+      "readOnly": true,
       "x-ms-enum": {
         "name": "MoveState",
         "modelAsString": true
@@ -1047,7 +961,7 @@
         "MoveResourceSourceId"
       ],
       "x-ms-enum": {
-        "name": "moveResourceInputType",
+        "name": "MoveResourceInputType",
         "modelAsString": true
       }
     },
@@ -1067,11 +981,12 @@
       }
     },
     "JobName": {
-      "description": "Defines the job names.",
+      "description": "Defines the job name.",
       "enum": [
         "InitialSync"
       ],
       "type": "string",
+      "readOnly": true,
       "x-ms-enum": {
         "name": "JobName",
         "modelAsString": true
@@ -1086,7 +1001,8 @@
         },
         "jobProgress": {
           "description": "Gets or sets the monitoring job percentage.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         }
       }
     },
@@ -1105,7 +1021,8 @@
         },
         "targetId": {
           "description": "Gets the Target ARM Id of the resource.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         }
       }
     },
@@ -1164,7 +1081,7 @@
       }
     },
     "MoveResourceDependencyOverride": {
-      "description": "Defines the dependency of the move resource.",
+      "description": "Defines the dependency override of the move resource.",
       "type": "object",
       "properties": {
         "id": {
@@ -1234,6 +1151,7 @@
           "readOnly": true
         },
         "moveStatus": {
+          "description": "Defines the move resource status.",
           "allOf": [
             {
               "$ref": "#/definitions/MoveResourceStatus"
@@ -1257,7 +1175,13 @@
           }
         },
         "errors": {
-          "$ref": "#/definitions/MoveResourceError"
+          "description": "Defines the move resource errors.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/MoveResourceError"
+            }
+          ],
+          "readOnly": true
         }
       }
     },
@@ -1345,7 +1269,7 @@
             "read",
             "create"
           ],
-          "description": "The geo-location where the resource lives"
+          "description": "The geo-location where the resource lives."
         },
         "identity": {
           "$ref": "#/definitions/Identity"
@@ -1425,11 +1349,11 @@
       ],
       "properties": {
         "validateOnly": {
-          "description": "Gets or sets the list of resource Id's, by default it accepts move resource id's unless the input type is switched via moveResourceInputType property.",
+          "description": "Gets or sets a value indicating whether the operation needs to only run pre-requisite.",
           "type": "boolean"
         },
         "moveResources": {
-          "description": "Gets or sets the list of move resources ARM id's.",
+          "description": "Gets or sets the list of resource Id's, by default it accepts move resource id's unless the input type is switched via moveResourceInputType property.",
           "type": "array",
           "items": {
             "type": "string"
@@ -1616,24 +1540,28 @@
           "$ref": "#/definitions/MoveResourceErrorBody"
         }
       },
-      "description": "An error response from the azure region move service."
+      "description": "An error response from the azure resource mover service."
     },
     "MoveResourceErrorBody": {
       "properties": {
         "code": {
           "type": "string",
+          "readOnly": true,
           "description": "An identifier for the error. Codes are invariant and are intended to be consumed programmatically."
         },
         "message": {
           "type": "string",
+          "readOnly": true,
           "description": "A message describing the error, intended to be suitable for display in a user interface."
         },
         "target": {
           "type": "string",
+          "readOnly": true,
           "description": "The target of the particular error. For example, the name of the property in error."
         },
         "details": {
           "type": "array",
+          "readOnly": true,
           "items": {
             "$ref": "#/definitions/MoveResourceErrorBody"
           },
@@ -1680,12 +1608,12 @@
             "NA"
           ],
           "x-ms-enum": {
-            "name": "targetAvailabilityZone",
+            "name": "TargetAvailabilityZone",
             "modelAsString": true
           }
         },
         "targetVmSize": {
-          "description": "Gets or sets the target vm size.",
+          "description": "Gets or sets the target virtual machine size.",
           "type": "string"
         },
         "targetAvailabilitySetId": {
@@ -2301,6 +2229,30 @@
       "description": "Client Api Version.",
       "required": true,
       "type": "string"
+    },
+    "resourceGroupName": {
+      "in": "path",
+      "name": "resourceGroupName",
+      "description": "The Resource Group Name.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "moveCollectionName": {
+      "in": "path",
+      "name": "moveCollectionName",
+      "description": "The Move Collection Name.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "moveResourceName": {
+      "in": "path",
+      "name": "moveResourceName",
+      "description": "The Move Resource Name.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
     }
   },
   "securityDefinitions": {

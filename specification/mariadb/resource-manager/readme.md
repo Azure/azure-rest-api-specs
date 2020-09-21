@@ -28,7 +28,7 @@ These are the global settings for the MariaDB API.
 title: MariaDBManagementClient
 description: The Microsoft Azure management API provides create, read, update, and delete functionality for Azure MariaDB resources including servers, databases, firewall rules, VNET rules, log files and configurations with new business model.
 openapi-type: arm
-tag: package-2018-06-01
+tag: package-2020-01-01
 ```
 
 ### Tag: package-2018-06-01-preview
@@ -85,7 +85,11 @@ These settings apply only when `--tag=package-2020-01-01` is specified on the co
 ``` yaml $(tag) == 'package-2020-01-01'
 input-file:
 - Microsoft.DBforMariaDB/stable/2018-06-01/mariadb.json
-- Microsoft.DBforMariaDB/stable/2020-01-01/ServerSecurityAlertPolicies.json
+- Microsoft.DBforMariaDB/stable/2018-06-01/QueryPerformanceInsights.json
+- Microsoft.DBforMariaDB/stable/2018-06-01/PerformanceRecommendations.json
+- Microsoft.DBforMariaDB/stable/2018-06-01/PrivateEndpointConnections.json
+- Microsoft.DBforMariaDB/stable/2018-06-01/PrivateLinkResources.json
+- Microsoft.DBforMariaDB/stable/2018-06-01/ServerSecurityAlertPolicies.json
 - Microsoft.DBforMariaDB/stable/2020-01-01/Servers.json
 ```
 
@@ -93,7 +97,6 @@ input-file:
 ``` yaml
 directive:
   - suppress: PathResourceProviderNamePascalCase
-    from: Servers.json
     reason: The name of the provider is Microsoft.DBforMariaDB
 ```
 
@@ -197,7 +200,6 @@ input-file:
   - $(this-folder)/Microsoft.DBforMariaDB/preview/2018-06-01-privatepreview/PrivateEndpointConnections.json
   - $(this-folder)/Microsoft.DBforMariaDB/preview/2018-06-01-privatepreview/PrivateLinkResources.json
   - $(this-folder)/Microsoft.DBforMariaDB/preview/2020-01-01-privatepreview/DataEncryptionKeys.json
-  - $(this-folder)/Microsoft.DBforMariaDB/stable/2020-01-01/ServerSecurityAlertPolicies.json
   - $(this-folder)/Microsoft.DBforMariaDB/stable/2020-01-01/Servers.json
 
 ```

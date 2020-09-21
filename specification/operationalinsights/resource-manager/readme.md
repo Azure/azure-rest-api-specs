@@ -70,6 +70,7 @@ These settings apply only when `--tag=package-2020-03-preview` is specified on t
 input-file:
 - Microsoft.OperationalInsights/preview/2020-03-01-preview/DataExports.json
 - Microsoft.OperationalInsights/preview/2020-03-01-preview/DataSources.json
+- Microsoft.OperationalInsights/preview/2020-03-01-preview/DataCollectorLogs.json
 - Microsoft.OperationalInsights/preview/2020-03-01-preview/IntelligencePacks.json
 - Microsoft.OperationalInsights/preview/2020-03-01-preview/LinkedServices.json
 - Microsoft.OperationalInsights/preview/2020-03-01-preview/LinkedStorageAccounts.json
@@ -237,6 +238,7 @@ input-file:
   - $(this-folder)/Microsoft.OperationalInsights/preview/2019-08-01-preview/OperationalInsights.json
   - $(this-folder)/Microsoft.OperationalInsights/preview/2020-03-01-preview/DataExports.json
   - $(this-folder)/Microsoft.OperationalInsights/preview/2020-03-01-preview/DataSources.json
+  - $(this-folder)/Microsoft.OperationalInsights/preview/2020-03-01-preview/DataCollectorLogs.json
   - $(this-folder)/Microsoft.OperationalInsights/preview/2020-03-01-preview/IntelligencePacks.json
   - $(this-folder)/Microsoft.OperationalInsights/preview/2020-03-01-preview/LinkedServices.json
   - $(this-folder)/Microsoft.OperationalInsights/preview/2020-03-01-preview/LinkedStorageAccounts.json
