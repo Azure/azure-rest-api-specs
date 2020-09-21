@@ -36,7 +36,10 @@ These settings apply only when `--tag=package-2020-08-08-preview` is specified o
 
 ``` yaml $(tag) == 'package-2020-08-08-preview'
 input-file:
-- Microsoft.DelegatedNetwork/preview/2020-08-08-preview/DelegatedNetwork.json
+- Microsoft.DelegatedNetwork/preview/2020-08-08-preview/controller.json
+- Microsoft.DelegatedNetwork/preview/2020-08-08-preview/orchestratorInstances.json
+- Microsoft.DelegatedNetwork/preview/2020-08-08-preview/delegatedSubnets.json
+- Microsoft.DelegatedNetwork/preview/2020-08-08-preview/operations.json
 ```
 
 ---
@@ -127,7 +130,10 @@ require: $(this-folder)/../../../profiles/readme.md
 
 # all the input files across all versions
 input-file:
-  - $(this-folder)/Microsoft.DelegatedNetwork/preview/2020-08-08-preview/DelegatedNetwork.json
+- Microsoft.DelegatedNetwork/preview/2020-08-08-preview/controller.json
+- Microsoft.DelegatedNetwork/preview/2020-08-08-preview/orchestratorInstances.json
+- Microsoft.DelegatedNetwork/preview/2020-08-08-preview/delegatedSubnets.json
+- Microsoft.DelegatedNetwork/preview/2020-08-08-preview/operations.json
 
 ```
 
