@@ -1,8 +1,8 @@
-# YourServiceName
+# [[ServiceName]]
 
 > see https://aka.ms/autorest
 
-This is the AutoRest configuration file for YourServiceName.
+This is the AutoRest configuration file for [[ServiceName]].
 
 ## Getting Started
 
@@ -22,20 +22,20 @@ For other options on installation see [Installing AutoRest](https://aka.ms/autor
 
 ### Basic Information
 
-These are the global settings for the YourServiceName.
+These are the global settings for the [[ServiceName]].
 
 ```yaml
-openapi-type: arm
-tag: package-YYYY-MM-DD
+openapi-type: [[OpenApiType]]
+tag: package-YYYY-MM-DD	tag: package-[[Version]]
 ```
 
-### Tag: package-YYYY-MM-DD
+### Tag: package-[[Version]]
 
-These settings apply only when `--tag=package-YYYY-MM-DD` is specified on the command line.
+These settings apply only when `--tag=package-[[Version]]` is specified on the command line.
 
-```yaml $(tag) == 'package-YYYY-MM-DD'
+```yaml $(tag) == 'package-[[Version]]'
 input-file:
-  - Microsoft.YourServiceName/stable/YYYY-MM-DD/YourServiceName.json
+  - [[ResourceProviderName]]/[[ReleaseState]]/[[Version]]/[[ServiceName]].json
 ```
 
 ---
@@ -54,8 +54,9 @@ swagger-to-sdk:
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-ruby
+  - repo: azure-sdk-for-azureresourceschema
     after_scripts:
-      - bundle install && rake arm:regen_all_profiles['azure_mgmt_YourServiceName']
+      - bundle install && rake arm:regen_all_profiles['azure_mgmt_[[ServiceName]]']
 ```
 
 ## Go
@@ -77,3 +78,7 @@ See configuration in [readme.typescript.md](https://github.com/Azure/azure-rest-
 ## CSharp
 
 See configuration in [readme.csharp.md](https://github.com/Azure/azure-rest-api-specs/blob/master/documentation/samplefiles/readme.chsarp.md)
+
+## AzureResourceSchema
+
+See configuration in [readme.csharp.md](https://github.com/Azure/azure-rest-api-specs/blob/master/documentation/samplefiles/readme.azureresourceschema.md)
