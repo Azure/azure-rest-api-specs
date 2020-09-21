@@ -1,0 +1,121 @@
+{
+  "parameters": {
+    "api-version": "1.0",
+    "subscription-key": "[subscription-key]"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "statesetDetailList": [
+          {
+            "statesetId": "09abcdf8-cad0-b3dd-a38f-d5ee3cff5eea",
+            "datasetIdList": [
+              "8d700cc7-fd2c-4e21-b402-ad3f5e524f36"
+            ],
+            "statesetStyle": {
+              "styles": [
+                {
+                  "keyName": "s1",
+                  "type": "boolean",
+                  "rules": [
+                    {
+                      "true": "#0FFF00",
+                      "false": "#00FFF0"
+                    }
+                  ]
+                },
+                {
+                  "keyName": "s2",
+                  "type": "number",
+                  "rules": [
+                    {
+                      "range": {
+                        "minimum": null,
+                        "maximum": null,
+                        "exclusiveMinumum": null,
+                        "exclusiveMaximum": "50"
+                      },
+                      "color": "#343deb"
+                    },
+                    {
+                      "range": {
+                        "minimum": "50",
+                        "maximum": null,
+                        "exclusiveMinumum": null,
+                        "exclusiveMaximum": "69"
+                      },
+                      "color": "#34ebb1"
+                    },
+                    {
+                      "range": {
+                        "minimum": "69",
+                        "maximum": null,
+                        "exclusiveMinumum": null,
+                        "exclusiveMaximum": "90"
+                      },
+                      "color": "#eba834"
+                    },
+                    {
+                      "range": {
+                        "minimum": "90",
+                        "maximum": null,
+                        "exclusiveMinumum": null,
+                        "exclusiveMaximum": null
+                      },
+                      "color": "#eb3434"
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        ]
+      }
+    },
+    "400": {
+      "headers": {},
+      "body": {
+        "error": {
+          "code": "400 BadRequest",
+          "message": "Bad request: one or more parameters were incorrectly specified or are mutually exclusive."
+        }
+      }
+    },
+    "401": {
+      "headers": {},
+      "body": {
+        "error": {
+          "code": "401 Unauthorized",
+          "message": "Access denied due to invalid subscription key. Make sure to provide a valid key for an active subscription."
+        }
+      }
+    },
+    "403": {
+      "headers": {},
+      "body": {
+        "error": {
+          "code": "403 Forbidden",
+          "message": "Permission, capacity, or authentication issues."
+        }
+      }
+    },
+    "404": {
+      "headers": {},
+      "body": {
+        "error": {
+          "code": "404 NotFound",
+          "message": "Not Found: the requested resource could not be found, but it may be available again in the future."
+        }
+      }
+    },
+    "500": {
+      "headers": {},
+      "body": {
+        "error": {
+          "code": "500 InternalServerError",
+          "message": "An error occurred while processing the request. Please try again later."
+        }
+      }
+    }
+  }
+}
