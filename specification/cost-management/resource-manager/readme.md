@@ -50,6 +50,7 @@ These settings apply only when `--tag=package-2020-06` is specified on the comma
 ```yaml $(tag) == 'package-2020-06'
 input-file:
   - Microsoft.CostManagement/stable/2020-06-01/costmanagement.json
+  - Microsoft.CostManagement/stable/2020-06-01/costmanagement.exports.json
 ```
 
 
