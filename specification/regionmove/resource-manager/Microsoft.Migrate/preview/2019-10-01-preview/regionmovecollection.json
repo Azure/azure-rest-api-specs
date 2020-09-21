@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "Region Move Service API",
+    "title": "Resource Mover Service API",
     "description": "A first party Azure service orchestrating the move of Azure resources from one Azure region to another or between zones within a region.",
     "version": "2019-10-01-preview"
   },
@@ -121,8 +121,8 @@
           }
         },
         "x-ms-examples": {
-          "MoveCollection_Update": {
-            "$ref": "./examples/MoveCollection_Update.json"
+          "MoveCollections_Update": {
+            "$ref": "./examples/MoveCollections_Update.json"
           }
         }
       },
@@ -900,7 +900,7 @@
   },
   "definitions": {
     "ResourceIdentityType": {
-      "description": "The type of identity used for the region move service.",
+      "description": "The type of identity used for the resource mover service.",
       "enum": [
         "None",
         "SystemAssigned",
@@ -1540,7 +1540,7 @@
           "$ref": "#/definitions/MoveResourceErrorBody"
         }
       },
-      "description": "An error response from the azure region move service."
+      "description": "An error response from the azure resource mover service."
     },
     "MoveResourceErrorBody": {
       "properties": {
