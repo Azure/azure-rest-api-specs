@@ -563,6 +563,67 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppPlatform/Spring/{serviceName}/configServers/validate": {
+      "post": {
+        "tags": [
+          "AppPlatform"
+        ],
+        "description": "Check if the config server settings are valid.",
+        "operationId": "ConfigServers_Validate",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServiceNameParameter"
+          },
+          {
+            "name": "configServerSettings",
+            "in": "body",
+            "description": "Config server settings to be validated",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ConfigServerSettings"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success. The response describes the validation result of Config Server.",
+            "schema": {
+              "$ref": "#/definitions/ConfigServerSettingsValidateResult"
+            }
+          },
+          "202": {
+            "description": "Accepted. The response indicates the ConfigServerSetting is validating.",
+            "schema": {
+              "$ref": "#/definitions/ConfigServerSettingsValidateResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "ConfigServers_Validate": {
+            "$ref": "./examples/ConfigServers_Validate.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppPlatform/Spring/{serviceName}/monitoringSettings/default": {
       "get": {
         "tags": [
@@ -2830,6 +2891,44 @@
           "format": "int32",
           "description": "Current capacity of the target resource",
           "type": "integer"
+        }
+      }
+    },
+    "ConfigServerSettingsValidateResult": {
+      "description": "Validation result for config server settings",
+      "type": "object",
+      "properties": {
+        "isValid": {
+          "description": "Indicate if the config server settings are valid",
+          "type": "boolean"
+        },
+        "detail": {
+          "description": "The detail validation results",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ConfigServerSettingsErrorRecord"
+          }
+        }
+      }
+    },
+    "ConfigServerSettingsErrorRecord": {
+      "description": "Error record of the config server settings",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "The name of the config server settings error record",
+          "type": "string"
+        },
+        "uri": {
+          "description": "The uri of the config server settings error record",
+          "type": "string"
+        },
+        "msg": {
+          "description": "The detail error messages of the record",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
         }
       }
     },
