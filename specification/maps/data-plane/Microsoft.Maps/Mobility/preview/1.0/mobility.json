@@ -1,0 +1,2483 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Azure Maps Mobility Service",
+    "version": "1.0"
+  },
+  "host": "atlas.microsoft.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [],
+  "produces": [
+    "application/json"
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "These are the [Azure Active Directory OAuth2](https://docs.microsoft.com/en-us/azure/active-directory/develop/v1-overview)  Flows. When paired with [Azure Role Based Access](https://docs.microsoft.com/en-us/azure/role-based-access-control/overview)  control it can be used to control access to Azure Maps REST APIs. Azure Role based access controls are used to designate access to one or more Azure Maps resource account or sub-resources. Any user, group, or service principal can be granted access via a  built in role or a custom role composed of one or more permissions to Azure Maps REST APIs.\n\nTo implement scenarios we recommend viewing [authentication concepts](https://aka.ms/amauth). In summary, this security definition provides a solution  for modeling application(s) via objects capable of access control on specific APIs and scopes.\n\n#### Note\n* This security definition **requires** the use of the `x-ms-client-id` header to indicate which Azure Maps resource the application is requesting access to.  This can be acquired from the [Maps management API](https://aka.ms/amauthdetails).\n* The `Authorization URL` is specific to the Azure public cloud instance. Sovereign clouds have unique Authorization URLs and Azure Active directory configurations. \n* The Azure role based access control is configured from the [Azure management plane](https://aka.ms/amrbac) via Azure portal, Powershell, CLI, Azure SDKs, or REST APIs.\n* Usage of the [Azure Maps Web SDK](https://aka.ms/amaadmc) allows for configuration based setup of an application for multiple use cases.\n* Currently Azure Active Directory [v1.0](https://docs.microsoft.com/en-us/azure/active-directory/develop/azure-ad-endpoint-comparison) tokens are supported.",
+      "scopes": {
+        "user_impersonation": "Impersonates a user's Azure Active Directory account."
+      }
+    },
+    "apiKeyQuery": {
+      "type": "apiKey",
+      "description": "This is a shared key which is provisioned when creating an [Azure Maps resource](https://aka.ms/amauth) through the Azure management plane  via Azure portal, Powershell, CLI, Azure SDKs, or REST APIs. With this key, any application is authorized to access  all REST APIs. In other words, these can currently be treated as master keys to the account which they are issued for.  For publicly exposed applications our recommendation is to use server to server access of Azure Maps REST APIs where this key can be  securely stored.",
+      "name": "subscription-key",
+      "in": "query"
+    }
+  },
+  "security": [
+    {
+      "azure_auth": []
+    },
+    {
+      "apiKeyQuery": []
+    }
+  ],
+  "responses": {
+    "400": {
+      "description": "Bad request: one or more parameters were incorrectly specified or are mutually exclusive.",
+      "schema": {
+        "$ref": "#/definitions/ODataErrorResponse"
+      }
+    },
+    "401": {
+      "description": "Access denied due to invalid subscription key or invalid Azure Active Directory bearer token.  Make sure to provide a valid key for an active Azure subscription and Maps resource.  Otherwise, verify the [WWW-Authenticate](https://tools.ietf.org/html/rfc6750#section-3.1) header for error code and description of the provided AAD bearer token.",
+      "schema": {
+        "$ref": "#/definitions/ODataErrorResponse"
+      },
+      "headers": {
+        "WWW-Authenticate": {
+          "type": "string",
+          "description": "Bearer realm=\"https://atlas.microsoft.com/\", error=\"invalid_token\", error_description=\"The access token expired\""
+        }
+      }
+    },
+    "403": {
+      "description": "Permission, capacity, or authentication issues.",
+      "schema": {
+        "$ref": "#/definitions/ODataErrorResponse"
+      }
+    },
+    "404": {
+      "description": "Not Found: the requested resource could not be found, but it may be available again in the future.",
+      "schema": {
+        "$ref": "#/definitions/ODataErrorResponse"
+      }
+    },
+    "500": {
+      "description": "An error occurred while processing the request. Please try again later.",
+      "schema": {
+        "$ref": "#/definitions/ODataErrorResponse"
+      }
+    }
+  },
+  "parameters": {
+    "ClientId": {
+      "name": "x-ms-client-id",
+      "description": "Specifies which account is intended for usage in conjunction with the Azure AD security model.  It represents a unique ID for the Azure Maps account and can be retrieved from Azure Maps management  plane Account API. To use Azure AD security in Azure Maps see the following [articles](https://aka.ms/amauthdetails) for guidance.",
+      "type": "string",
+      "in": "header",
+      "required": false,
+      "x-ms-parameter-location": "client"
+    },
+    "SubscriptionKey": {
+      "name": "subscription-key",
+      "description": "One of the Azure Maps keys provided from an Azure Map Account. Please refer to this [article](https://docs.microsoft.com/azure/azure-maps/how-to-manage-authentication) for details on how to manage authentication.",
+      "type": "string",
+      "in": "query",
+      "required": false,
+      "x-ms-parameter-location": "client"
+    },
+    "ApiVersion": {
+      "name": "api-version",
+      "description": "Version number of Azure Maps API. Current version is 1.0",
+      "type": "string",
+      "in": "query",
+      "required": true,
+      "default": "1.0",
+      "x-ms-parameter-location": "client"
+    },
+    "JsonFormat": {
+      "name": "format",
+      "description": "Desired format of the response. Only `json` format is supported.",
+      "type": "string",
+      "in": "path",
+      "required": true,
+      "enum": [
+        "json"
+      ],
+      "x-ms-enum": {
+        "name": "JsonFormat",
+        "modelAsString": false,
+        "values": [
+          {
+            "value": "json",
+            "description": "[The JavaScript Object Notation Data Interchange Format](https://tools.ietf.org/html/rfc8259)"
+          }
+        ]
+      },
+      "x-ms-parameter-location": "method"
+    },
+    "MetroId": {
+      "name": "metroId",
+      "description": "The unique id of the metro area. Can be retrieved via [Get Metro Area API](https://aka.ms/AzureMapsMobilityMetro).",
+      "type": "integer",
+      "in": "query",
+      "required": false,
+      "x-ms-parameter-location": "method"
+    },
+    "MobilityLanguage": {
+      "name": "language",
+      "description": "Language in which search results will be returned.  Only NGT is supported. Please refer to [Supported languages](https://docs.microsoft.com/azure/azure-maps/supported-languages) for details.",
+      "type": "string",
+      "in": "query",
+      "required": false,
+      "x-ms-parameter-location": "method"
+    }
+  },
+  "paths": {
+    "/mobility/metroArea/id/{format}": {
+      "get": {
+        "x-publish": true,
+        "operationId": "Mobility_GetMetroAreaPreview",
+        "description": "**Metro Area API**\n\n**Applies to**: S1 pricing tier.\n\nService allows to request metro areas in which the Azure Maps Mobility Service is available. The service supports filtering results by country or coordinate location. Information returned includes Metro Area  details such as metro Id, name and a representation of the metro area geometry in GeoJSON format.",
+        "x-ms-examples": {
+          "MetroArea": {
+            "$ref": "./examples/GetMetroArea.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ClientId"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionKey"
+          },
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/JsonFormat"
+          },
+          {
+            "name": "query",
+            "description": "The applicable location input. Can be position (specified as a comma  separated string composed by latitude followed by longitude e.g. \"47.641268,-122.125679\") or  countryCode (2-character ISO country code).",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "queryType",
+            "description": "The type of the query. By default originType=position, specified as a comma separated string composed by latitude followed by longitude, e.g. \"47.641268,-122.125679”.",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "default": "position",
+            "enum": [
+              "position",
+              "countryCode"
+            ],
+            "x-ms-enum": {
+              "name": "MetroAreaQueryType",
+              "modelAsString": false,
+              "values": [
+                {
+                  "value": "position",
+                  "description": "The origin of the route as a comma separated string composed by latitude followed by longitude e.g. \"47.641268,-122.125679\"."
+                },
+                {
+                  "value": "countryCode",
+                  "description": "2-character [ISO 3166-1](https://www.iso.org/iso-3166-country-codes.html) alpha-2 country code. E.g. US."
+                }
+              ]
+            },
+            "x-ms-parameter-location": "method"
+          },
+          {
+            "$ref": "#/parameters/MobilityLanguage"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/MetroAreaResponse"
+            }
+          },
+          "400": {
+            "$ref": "#/responses/400"
+          },
+          "401": {
+            "$ref": "#/responses/401"
+          },
+          "403": {
+            "$ref": "#/responses/403"
+          },
+          "404": {
+            "$ref": "#/responses/404"
+          },
+          "500": {
+            "$ref": "#/responses/500"
+          }
+        }
+      }
+    },
+    "/mobility/metroArea/info/{format}": {
+      "get": {
+        "x-publish": true,
+        "operationId": "Mobility_GetMetroAreaInfoPreview",
+        "description": "**Metro Area Info API**\n\n**Applies to**: S1 pricing tier.\n\nService allows to request additional information for metro areas in which the Azure Maps Mobility Service is available. Information such as supported transit types, transit agencies and active alerts is available, depending on the options selected.",
+        "x-ms-examples": {
+          "MetroAreaInfo": {
+            "$ref": "./examples/GetMetroAreaInfo.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ClientId"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionKey"
+          },
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/JsonFormat"
+          },
+          {
+            "name": "query",
+            "description": "metroId. The unique id of the metro area. Required parameter specifying the required metro area to search in. Can be retrieved via [Get Metro Area API](https://aka.ms/AzureMapsMobilityTransitRoute).",
+            "in": "query",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "name": "detailType",
+            "description": "Specify details requested respective to the metro area as a comma separated list. Supported values are:\n  * `agencies` - Return a list of all public transit agencies operating in the given metro area.\n  * `alerts` - Returns a list of all active service alerts, that are defined in the metro or agency level, and are not connected to a specific line or stop.\n  * `alertDetails` - Applicable only when alerts are requested. Returns details of the alerts.\n  * `transitTypes` - Returns a list of all supported transit types in the given metro area.",
+            "in": "query",
+            "required": true,
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "agencies",
+                "alerts",
+                "alertDetails",
+                "transitTypes"
+              ],
+              "x-ms-enum": {
+                "name": "MetroAreaDetailType",
+                "modelAsString": false,
+                "values": [
+                  {
+                    "value": "agencies",
+                    "description": "Return a list of all public transit agencies operating in the given metro area."
+                  },
+                  {
+                    "value": "alerts",
+                    "description": "Returns a list of all active service alerts, that are defined in the metro or agency level, and are not connected to a specific line or stop."
+                  },
+                  {
+                    "value": "alertDetails",
+                    "description": "Applicable only when alerts are requested. Returns details of the alerts."
+                  },
+                  {
+                    "value": "transitTypes",
+                    "description": "Returns a list of all supported transit types in the given metro area."
+                  }
+                ]
+              }
+            },
+            "x-ms-parameter-location": "method"
+          },
+          {
+            "$ref": "#/parameters/MobilityLanguage"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/MetroAreaInfoResponse"
+            }
+          },
+          "400": {
+            "$ref": "#/responses/400"
+          },
+          "401": {
+            "$ref": "#/responses/401"
+          },
+          "403": {
+            "$ref": "#/responses/403"
+          },
+          "404": {
+            "$ref": "#/responses/404"
+          },
+          "500": {
+            "$ref": "#/responses/500"
+          }
+        }
+      }
+    },
+    "/mobility/transit/nearby/{format}": {
+      "get": {
+        "x-publish": true,
+        "operationId": "Mobility_GetNearbyTransitPreview",
+        "description": "**Find Nearby Transit API**\n\n**Applies to**: S1 pricing tier.\n\nGet Nearby Transit service allows you to search public transit stops around a given location  returning the transit object details. Service allows users to search for public transit stops within a given radius returning a set of stops with stop details. Additional  information such as transit operator information is returned depending on the options selected. The returned information can be used for further processing such as requesting [real-time arrivals](https://aka.ms/AzureMapsMobilityRealTimeArrivals) for the stop or [transit stop details](https://aka.ms/AzureMapsMobilityTransitStop) such as main transit type of most lines stopping for a given public, active service alerts or main transport agency.",
+        "x-ms-examples": {
+          "NearbyTransit": {
+            "$ref": "./examples/GetNearbyTransit.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ClientId"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionKey"
+          },
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/JsonFormat"
+          },
+          {
+            "$ref": "#/parameters/MetroId"
+          },
+          {
+            "name": "query",
+            "description": "Location input from user. The applicable location query specified as a comma separated string  composed by latitude followed by longitude e.g. \"47.641268,-122.125679\".",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "limit",
+            "description": "Maximum number of responses that will be returned. Default is 3, minimum 1 and maximum 100. Sort order is based on distance from input location.",
+            "in": "query",
+            "required": false,
+            "type": "integer"
+          },
+          {
+            "name": "radius",
+            "description": "Specifies the search area to constrain a search. The radius in meters  to for the results to be constrained to the defined area. Default value is 30 meters, minimum 1 meter and maximum 5000 meters (5km).",
+            "in": "query",
+            "required": false,
+            "type": "integer"
+          },
+          {
+            "name": "objectType",
+            "description": "The transit object type. By default, objectType is set to `stop`",
+            "in": "query",
+            "required": false,
+            "default": "stop",
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/MobilityLanguage"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/NearbyTransitResponse"
+            }
+          },
+          "400": {
+            "$ref": "#/responses/400"
+          },
+          "401": {
+            "$ref": "#/responses/401"
+          },
+          "403": {
+            "$ref": "#/responses/403"
+          },
+          "404": {
+            "$ref": "#/responses/404"
+          },
+          "500": {
+            "$ref": "#/responses/500"
+          }
+        }
+      }
+    },
+    "/mobility/transit/line/{format}": {
+      "get": {
+        "x-publish": true,
+        "operationId": "Mobility_GetTransitLineInfoPreview",
+        "description": "**Transit Line Info API**\n\n**Applies to**: S1 pricing tier.\n\nYour scenario might require requesting transit line specific data such as stops and line geometry. Transit Line Info service  allows you to request line group by line group id returning a line group comprised a set of lines.  Additional information such  as 24 hours static schedule, active alerts for the line group and line patterns is also available, depending on the options  selected. Mobility services uses a parallel data model for public transit lines and line groups. Usually line group contains  2 lines, one going from A to B, and the other returning from B to A, both operating by the same Public Transport Agency having  the same line number. We recommend you review our guidance [article](https://aka.ms/AMapsPublicTRansitConcepts) to understand  the concepts of lines and line groups.",
+        "x-ms-examples": {
+          "TransitLineInfo": {
+            "$ref": "./examples/GetTransitLineInfo.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ClientId"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionKey"
+          },
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/JsonFormat"
+          },
+          {
+            "$ref": "#/parameters/MetroId"
+          },
+          {
+            "name": "query",
+            "description": "lineGroupId, for example,'666074'. Typically contains 2 lines having the same agency and line, one going from A to B, and the other from B to A.",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "detailType",
+            "description": "Specify additional details requested respective to the line group as a comma separated list. As a default service returns line basic info. Supported values are:\n  * `alerts` - Return any active service alerts for the specified stop. Response provides brief information for disruption in service and all basic data associated with the alert.\n  * `alertDetails` - Can only be used in conjunction with detailType=alerts.Return additional details associated with the active service alerts.\n  * `lines` - Return transit lines that stops at the specified stop.\n  * `stops` - Return list of stops the line group goes through.\n  * `schedule` - Return a 24h static schedule for the specified line group from the current time of the day to the end of the current day.\n  * `patterns` - Return list of patterns this group is comprised of. A pattern consists of a stop sequence and shape per line.",
+            "in": "query",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "alerts",
+                "alertDetails",
+                "lines",
+                "stops",
+                "schedule",
+                "patterns"
+              ],
+              "x-ms-enum": {
+                "name": "TransitLineDetailType",
+                "modelAsString": false,
+                "values": [
+                  {
+                    "value": "alerts",
+                    "description": "Return any active service alerts for the specified stop. Response provides brief information for disruption in service and all basic data associated with the alert."
+                  },
+                  {
+                    "value": "alertDetails",
+                    "description": "Can only be used in conjunction with detailType=alerts.Return additional details associated with the active service alerts."
+                  },
+                  {
+                    "value": "lines",
+                    "description": "Return transit lines that stops at the specified stop."
+                  },
+                  {
+                    "value": "stops",
+                    "description": "Return list of stops the line group goes through."
+                  },
+                  {
+                    "value": "schedule",
+                    "description": "Return a 24h static schedule for the specified line group from the current time of the day to the end of the current day."
+                  },
+                  {
+                    "value": "patterns",
+                    "description": "Return list of patterns this group is comprised of. A pattern consists of a stop sequence and shape per line."
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "$ref": "#/parameters/MobilityLanguage"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/TransitLineInfoResponse"
+            }
+          },
+          "400": {
+            "$ref": "#/responses/400"
+          },
+          "401": {
+            "$ref": "#/responses/401"
+          },
+          "403": {
+            "$ref": "#/responses/403"
+          },
+          "404": {
+            "$ref": "#/responses/404"
+          },
+          "500": {
+            "$ref": "#/responses/500"
+          }
+        }
+      }
+    },
+    "/mobility/transit/stop/{format}": {
+      "get": {
+        "x-publish": true,
+        "operationId": "Mobility_GetTransitStopInfoPreview",
+        "description": "**Transit Stop Info API**\n\n**Applies to**: S1 pricing tier.\n\nGet Transit Stop Info service allows you to request information for a given public transit stop. Basic information returned includes  details such as main transit type of most lines stopping for a given public and main transport agency. Additional details such as stop  lines and active service alerts for specified stop are also available, depending on the options selected.",
+        "x-ms-examples": {
+          "TransitStopInfo": {
+            "$ref": "./examples/GetTransitStopInfo.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ClientId"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionKey"
+          },
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/JsonFormat"
+          },
+          {
+            "$ref": "#/parameters/MetroId"
+          },
+          {
+            "name": "query",
+            "description": "The stopId or stopKey for which the user is requesting transit stop details.",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "queryType",
+            "description": "The type of the unique query parameter of the stop. By default queryType=stopId.",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "stopId",
+              "stopKey"
+            ],
+            "default": "stopId",
+            "x-ms-enum": {
+              "name": "TransitStopQueryType",
+              "modelAsString": false,
+              "values": [
+                {
+                  "value": "stopId",
+                  "description": "The unique Azure Maps identifier for the respective public transit stop. When referring to public transit stops over time, it is recommended to use `stopId` since it will not change, as long as the physical stop exists"
+                },
+                {
+                  "value": "stopKey",
+                  "description": "The GTFS stop Id. GTFS stop Ids are provided by the transit authority and are subject to change.<br> **Note**: When this value is used, the metroId parameter is required."
+                }
+              ]
+            },
+            "x-ms-parameter-location": "method"
+          },
+          {
+            "name": "detailType",
+            "description": "Specify additional details requested respective to the transit stop as a comma separated list. Supported values are:\n  * `alerts` - Return any active service alerts for the specified stop. Response provides brief information for disruption in service and all basic data associated with the alert.\n  * `alertDetails` - Can only be used in conjunction with detailType=alerts.Return additional details associated with the active service alerts.\n  * `lines` - Return transit lines that stops at the specified stop.\n  * `lineGroups` - Return line groups that stops at the specified stop.",
+            "in": "query",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "alerts",
+                "alertDetails",
+                "lines",
+                "lineGroups"
+              ],
+              "x-ms-enum": {
+                "name": "TransitStopDetailType",
+                "modelAsString": false,
+                "values": [
+                  {
+                    "value": "alerts",
+                    "description": "Return any active service alerts for the specified stop. Response provides brief information for disruption in service and all basic data associated with the alert."
+                  },
+                  {
+                    "value": "alertDetails",
+                    "description": "Can only be used in conjunction with detailType=alerts.Return additional details associated with the active service alerts."
+                  },
+                  {
+                    "value": "lines",
+                    "description": "Return transit lines that stops at the specified stop."
+                  },
+                  {
+                    "value": "lineGroups",
+                    "description": "Return line groups that stops at the specified stop."
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "$ref": "#/parameters/MobilityLanguage"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/TransitStopInfoResponse"
+            }
+          },
+          "400": {
+            "$ref": "#/responses/400"
+          },
+          "401": {
+            "$ref": "#/responses/401"
+          },
+          "403": {
+            "$ref": "#/responses/403"
+          },
+          "404": {
+            "$ref": "#/responses/404"
+          },
+          "500": {
+            "$ref": "#/responses/500"
+          }
+        }
+      }
+    },
+    "/mobility/transit/route/{format}": {
+      "get": {
+        "x-publish": true,
+        "operationId": "Mobility_GetTransitRoutePreview",
+        "description": "**Transit Route API**\n\n**Applies to**: S1 pricing tier.\n\nGet Transit Route API will allow trip planning returning the best possible route options between an origin and destination by using multi-modal search. Service provides a variety of travel modes, including walk, bike, and public transit.  The API supports parameters to request one or multiple public transit types such as bus, tram and subway, and prefer a specific transit agency operating in the area. Also, service provides options to choose optimal route with least walk or transfers and specify arrival or departure times when user need to be at a specific destination by a certain time.",
+        "x-ms-examples": {
+          "TransitRoute": {
+            "$ref": "./examples/GetTransitRoute.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ClientId"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionKey"
+          },
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/JsonFormat"
+          },
+          {
+            "$ref": "#/parameters/MetroId"
+          },
+          {
+            "name": "origin",
+            "description": "The origin of the route. By default originType=position, specified as a comma separated string composed by latitude followed by longitude, e.g. \"47.641268,-122.125679”.",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "originType",
+            "description": "The type of the origin. By default originType=position, specified as a comma separated string composed by latitude followed by longitude, e.g., \"47.641268,-122.125679”.",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "position",
+              "stopId",
+              "stopKey"
+            ],
+            "default": "position",
+            "x-ms-enum": {
+              "name": "OriginType",
+              "modelAsString": false,
+              "values": [
+                {
+                  "value": "position",
+                  "description": "The origin of the route as a comma separated string composed by latitude followed by longitude e.g. \"47.641268,-122.125679\"."
+                },
+                {
+                  "value": "stopId",
+                  "description": "The unique Azure Maps identifier for the respective public transit stop. When referring to public transit stops over time, it is recommended to use `stopId` since it will not change, as long as the physical stop exists"
+                },
+                {
+                  "value": "stopKey",
+                  "description": "The GTFS stop Id. GTFS stop Ids are provided by the transit authority and are subject to change.<br> **Note**: When this value is used, the metroId parameter is required."
+                }
+              ]
+            },
+            "x-ms-parameter-location": "method"
+          },
+          {
+            "name": "destination",
+            "description": "The destination of the route. By default the destinationType=position, specified as a comma separated string composed by latitude followed by longitude, e.g. \"47.641268,-122.125679”.",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "destinationType",
+            "description": "The type of the destination.",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "default": "position",
+            "enum": [
+              "position",
+              "stopId",
+              "stopKey"
+            ],
+            "x-ms-enum": {
+              "name": "DestinationType",
+              "modelAsString": false,
+              "values": [
+                {
+                  "value": "position",
+                  "description": "The destination of the route as a comma separated string composed by latitude followed by longitude e.g. \"47.641268,-122.125679\"."
+                },
+                {
+                  "value": "stopId",
+                  "description": "The unique Azure Maps identifier for the respective public transit stop. When referring to public transit stops over time, it is recommended to use `stopId` since it will not change, as long as the physical stop exists."
+                },
+                {
+                  "value": "stopKey",
+                  "description": "The GTFS stop Id. GTFS stop Ids are provided by the transit authority and are subject to change.<br> **Note**: When this value is used, the metroId parameter is required."
+                }
+              ]
+            },
+            "x-ms-parameter-location": "method"
+          },
+          {
+            "name": "modeType",
+            "description": "The mode of travel for the requested route; as comma separated list. If not specified, all modes will be allowed. All modes might not be available in all metro areas. If valid trip is not found, empty result will be returned. Supported values are:\n  * `walk` - Walk (pedestrian)\n  * `bike` - Bike\n  * `publicTransit` - Public transit",
+            "required": false,
+            "in": "query",
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "walk",
+                "bike",
+                "publicTransit"
+              ],
+              "x-ms-enum": {
+                "name": "ModeType",
+                "modelAsString": false,
+                "values": [
+                  {
+                    "value": "walk",
+                    "description": "walk (pedestrian)"
+                  },
+                  {
+                    "value": "bike",
+                    "description": "bike"
+                  },
+                  {
+                    "value": "publicTransit",
+                    "description": "public transit"
+                  }
+                ]
+              }
+            },
+            "x-ms-parameter-location": "method"
+          },
+          {
+            "name": "transitType",
+            "description": "Applicable only with modeType = publicTransit. Allow only a specific set of public transit types (as a comma separated list) to be returned for the route.  Note that the requested transitType may not be available for the entire route. If not specified, all modes will be allowed. Supported values are:\n  * `bus` - Bus\n  * `cableCar` - Cable car\n  * `ferry` - Ferry\n  * `funicular` - Funicular\n  * `gondola` - Gondola\n  * `rail` - Rail\n  * `tram` - Tram\n  * `subway` - Subway/Metro",
+            "in": "query",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "bus",
+                "cableCar",
+                "ferry",
+                "funicular",
+                "gondola",
+                "rail",
+                "tram",
+                "subway"
+              ],
+              "x-ms-enum": {
+                "name": "TransitTypeFilter",
+                "modelAsString": false,
+                "values": [
+                  {
+                    "value": "bus",
+                    "description": "bus"
+                  },
+                  {
+                    "value": "cableCar",
+                    "description": "cableCar"
+                  },
+                  {
+                    "value": "ferry",
+                    "description": "ferry"
+                  },
+                  {
+                    "value": "funicular",
+                    "description": "funicular"
+                  },
+                  {
+                    "value": "gondola",
+                    "description": "gondola"
+                  },
+                  {
+                    "value": "rail",
+                    "description": "rail"
+                  },
+                  {
+                    "value": "tram",
+                    "description": "tram"
+                  },
+                  {
+                    "value": "subway",
+                    "description": "subway"
+                  }
+                ]
+              }
+            },
+            "x-ms-parameter-location": "method"
+          },
+          {
+            "name": "agency",
+            "description": "Specifies whether to prefer routes from a specific set of agencies if possible; as a comma separated list. If valid trip isn’t found with the preferred agency, or only one with very long trips or with large number of transfers, itineraries with other agencies will be returned.",
+            "in": "query",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "agencyType",
+            "description": "Specifies the agency identifier to request routes from preferred agencies. By default the agencyType=agencyId.",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "default": "agencyId",
+            "enum": [
+              "agencyId",
+              "agencyKey",
+              "agencyName"
+            ],
+            "x-ms-enum": {
+              "name": "AgencyType",
+              "modelAsString": false,
+              "values": [
+                {
+                  "value": "agencyId",
+                  "description": "The Id of the transit agency, e.g. '5872'"
+                },
+                {
+                  "value": "agencyKey",
+                  "description": "The agency’s GTFS Id.<br> **Note**: When this value is used, the metroId parameter is required."
+                },
+                {
+                  "value": "agencyName",
+                  "description": "The name of the transit agency, e.g. Metro Transit."
+                }
+              ]
+            },
+            "x-ms-parameter-location": "method"
+          },
+          {
+            "name": "time",
+            "description": "The time of departure or arrival in the local time in ISO format (2019-04-05T14:24:18-04:00). If timeType is not specified, it will be assumed to be 'departure' and time is the current local time at the origin point.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "timeType",
+            "description": "Specifies whether the time signifies departure time or arrival time. If not defined, default value is 'departure'.",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "default": "departure",
+            "enum": [
+              "arrival",
+              "departure",
+              "last"
+            ],
+            "x-ms-enum": {
+              "name": "TimeType",
+              "modelAsString": false,
+              "values": [
+                {
+                  "value": "arrival",
+                  "description": "arrival at the destination point. Requires that 'time' value must be in the future."
+                },
+                {
+                  "value": "departure",
+                  "description": "Request departure at the destination point. Requires that 'time' value must be now or in the future."
+                },
+                {
+                  "value": "last",
+                  "description": "Request the last lines for the day."
+                }
+              ]
+            }
+          },
+          {
+            "name": "routeType",
+            "description": "The type of route requested. If not specified, 'optimal' will be used.",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "default": "optimal",
+            "enum": [
+              "optimal",
+              "leastWalk",
+              "leastTransfers"
+            ],
+            "x-ms-enum": {
+              "name": "TransitRouteType",
+              "modelAsString": false,
+              "values": [
+                {
+                  "value": "optimal",
+                  "description": "The best optimal route."
+                },
+                {
+                  "value": "leastWalk",
+                  "description": "Route with least walk."
+                },
+                {
+                  "value": "leastTransfers",
+                  "description": "Route with least transfers."
+                }
+              ]
+            }
+          },
+          {
+            "name": "bikeType",
+            "description": "Bike type of the bike. Specifies which type of bikes will be used. Only private bikes are supported.",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "default": "privateBike"
+          },
+          {
+            "$ref": "#/parameters/MobilityLanguage"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/TransitRouteResponse"
+            }
+          },
+          "400": {
+            "$ref": "#/responses/400"
+          },
+          "401": {
+            "$ref": "#/responses/401"
+          },
+          "403": {
+            "$ref": "#/responses/403"
+          },
+          "404": {
+            "$ref": "#/responses/404"
+          },
+          "500": {
+            "$ref": "#/responses/500"
+          }
+        }
+      }
+    },
+    "/mobility/transit/itinerary/{format}": {
+      "get": {
+        "x-publish": true,
+        "operationId": "Mobility_GetTransitItineraryPreview",
+        "description": "**Transit Itinerary API**\n\n**Applies to**: S1 pricing tier.\n\nReturns data according to an itinerary Id previously returned by [Transit Route API](https://aka.ms/AzureMapsMobilityTransitRoute). The basic info contains data as to the various legs comprising  the itinerary, including the locations, public transit lines, start and end times. User can request additional routing information such as the  shape of the itinerary and detailed itinerary schedules is also available, depending on the options selected. An itinerary is available up to 24  hours following a search request.",
+        "x-ms-examples": {
+          "TransitItinerary": {
+            "$ref": "./examples/GetTransitItinerary.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ClientId"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionKey"
+          },
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/JsonFormat"
+          },
+          {
+            "name": "query",
+            "description": "The unique id (itineraryId) of an itinerary previously returned by [Transit Route API](https://aka.ms/AzureMapsMobilityTransitRoute).",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "detailType",
+            "description": "Specify additional details returned in the transit route itinerary response, as a comma separated list. Supported values are:\n  * `geometry` - Shape of an in GeoJSON format. For public transit legs will return also the stops that the leg passes through. For walk and bike legs, will return also the turn-by-turn navigation data. \n  * `schedule` - Static schedule data as to all departures of Public Transit legs from the current time of the day to the end of the current day.",
+            "required": false,
+            "in": "query",
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "geometry",
+                "schedule"
+              ],
+              "x-ms-enum": {
+                "name": "TransitItineraryDetailType",
+                "modelAsString": false,
+                "values": [
+                  {
+                    "value": "geometry",
+                    "description": "Shape of an in GeoJSON format. For public transit legs will return also the stops that the leg passes through. For walk and bike legs, will return also the turn-by-turn navigation data."
+                  },
+                  {
+                    "value": "schedule",
+                    "description": "Static schedule data as to all departures of Public Transit legs from the current time of the day to the end of the current day."
+                  }
+                ]
+              }
+            },
+            "x-ms-parameter-location": "method"
+          },
+          {
+            "$ref": "#/parameters/MobilityLanguage"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/TransitItineraryResponse"
+            }
+          },
+          "400": {
+            "$ref": "#/responses/400"
+          },
+          "401": {
+            "$ref": "#/responses/401"
+          },
+          "403": {
+            "$ref": "#/responses/403"
+          },
+          "404": {
+            "$ref": "#/responses/404"
+          },
+          "500": {
+            "$ref": "#/responses/500"
+          }
+        }
+      }
+    },
+    "/mobility/realtime/arrivals/{format}": {
+      "get": {
+        "x-publish": true,
+        "operationId": "Mobility_GetRealTimeArrivalsPreview",
+        "description": "**Real-time Arrivals API**\n\n**Applies to**: S1 pricing tier.\n\nGet Real Time Arrivals API returns for a given a stop, line or location the requested number of real-time arrivals. Endpoint support different modes to request real-time arrivals such as number of live arrivals for all lines arriving at the specified stop or all arrivals of a line to stops near the user’s location. The API supports parameters to request one or multiple public transit types such as bus, tram and subway, maximum number if arrivals, and prefer a specific transit agency operating in the area. In some cases real-time arrivals may not be available, for example, if arrival is too far in the future or transit vehicle does not have capability to share the real-time location. This is symbolized in a scheduleType field present in all responses.",
+        "x-ms-examples": {
+          "RealTimeArrivals": {
+            "$ref": "./examples/GetRealTimeArrivals.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ClientId"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionKey"
+          },
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/JsonFormat"
+          },
+          {
+            "$ref": "#/parameters/MetroId"
+          },
+          {
+            "name": "query",
+            "description": "Stop, line or location identifier.",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "queryType",
+            "description": "The type of the query parameter. Defines the mode of the request. Only one mode per request is supported. By default queryType is set to be ‘stops’ returning the requested number of Live Arrivals for all lines arriving at the specified stop.",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "stops",
+              "line",
+              "lineAndStop",
+              "position"
+            ],
+            "default": "stops",
+            "x-ms-enum": {
+              "name": "RealTimeArrivalsQueryType",
+              "modelAsString": false,
+              "values": [
+                {
+                  "value": "stops",
+                  "description": "One or multiple stops as a comma separated list. Returns the requested number of live arrivals for all lines arriving at the specified stop. Defined by parameter stopQueryType."
+                },
+                {
+                  "value": "line",
+                  "description": "Returns the next live arrival times for each stop within the specified line. lineId, for example, '3785742'."
+                },
+                {
+                  "value": "lineAndStop",
+                  "description": "Returns up to three next Live Arrival times for a given line at a given stop. Comma-separated list including lineId and stop identifier, for example, 1228526,14014071 (lineId,stopId)."
+                },
+                {
+                  "value": "position",
+                  "description": "Returns arrivals of a line to stops near the user’s location. The applicable location query specified as a comma separated string composed by latitude followed by longitude e.g. \"47.641268,-122.125679\"."
+                }
+              ]
+            },
+            "x-ms-parameter-location": "method"
+          },
+          {
+            "name": "stopQueryType",
+            "description": "The type of the unique query parameter of the stop. By default stopQueryType=stopId. This parameter can only be used in conjunction with queryType=stops or queryType=lineAndStop.",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "stopId",
+              "stopKey"
+            ],
+            "default": "stopId",
+            "x-ms-enum": {
+              "name": "StopQueryType",
+              "modelAsString": false,
+              "values": [
+                {
+                  "value": "stopId",
+                  "description": "The unique Azure Maps identifier for the respective public transit stop. When referring to public transit stops over time, it is recommended to use `stopId` since it will not change, as long as the physical stop exists."
+                },
+                {
+                  "value": "stopKey",
+                  "description": "The GTFS stop Id. GTFS stop Ids are provided by the transit authority and are subject to change.<br> **Note**: When this value is used, the metroId parameter is required."
+                }
+              ]
+            },
+            "x-ms-parameter-location": "method"
+          },
+          {
+            "name": "limit",
+            "description": "The maximum arrivals to return. If not specified, the system default will be used. For stops max number of arrivals per stop. For lines max arrivals per stop on the line. For everything else max arrivals overall.",
+            "in": "query",
+            "required": false,
+            "type": "integer"
+          },
+          {
+            "name": "maxMinutesInFuture",
+            "description": "The maximum time (in minutes) in the future to return arrivals for. If not specified, the system default (30 minutes) will be used.  The minimum value is 0 and maximum value is 60 minutes.",
+            "required": false,
+            "type": "integer",
+            "in": "query"
+          },
+          {
+            "name": "transitType",
+            "description": "Type of public transit user is requesting respective transit stop, as a comma separated list. For example, transitType=Bus,Subway. If not specified, all will be allowed. This parameter can only be used in conjunction with queryType=stops. Supported values are:\n  * `bus` - Bus\n  * `cableCar` - Cable car\n  * `ferry` - Ferry\n  * `funicular` - Funicular\n  * `gondola` - Gondola\n  * `rail` - Rail\n  * `tram` - Tram\n  * `subway` - Subway/Metro",
+            "in": "query",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "bus",
+                "cableCar",
+                "ferry",
+                "funicular",
+                "gondola",
+                "rail",
+                "tram",
+                "subway"
+              ],
+              "x-ms-enum": {
+                "name": "TransitTypeFilter",
+                "modelAsString": false,
+                "values": [
+                  {
+                    "value": "bus",
+                    "description": "bus"
+                  },
+                  {
+                    "value": "cableCar",
+                    "description": "cableCar"
+                  },
+                  {
+                    "value": "ferry",
+                    "description": "ferry"
+                  },
+                  {
+                    "value": "funicular",
+                    "description": "funicular"
+                  },
+                  {
+                    "value": "gondola",
+                    "description": "gondola"
+                  },
+                  {
+                    "value": "rail",
+                    "description": "rail"
+                  },
+                  {
+                    "value": "tram",
+                    "description": "tram"
+                  },
+                  {
+                    "value": "subway",
+                    "description": "subway"
+                  }
+                ]
+              }
+            },
+            "x-ms-parameter-location": "method"
+          },
+          {
+            "name": "agency",
+            "description": "In case you prefer routes from a specific set of agencies to be returned. Specified as a comma separated string.",
+            "in": "query",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "agencyType",
+            "description": "Specifies the agency identifier to request routes from a specific set of agencies to be returned. By default the agencyType=agencyId.",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "default": "agencyId",
+            "enum": [
+              "agencyId",
+              "agencyKey",
+              "agencyName"
+            ],
+            "x-ms-enum": {
+              "name": "AgencyType",
+              "modelAsString": false,
+              "values": [
+                {
+                  "value": "agencyId",
+                  "description": "The Id of the transit agency, e.g. '5872'"
+                },
+                {
+                  "value": "agencyKey",
+                  "description": "The agency’s GTFS Id.<br> **Note**: When this value is used, the metroId parameter is required."
+                },
+                {
+                  "value": "agencyName",
+                  "description": "The name of the transit agency, e.g. Metro Transit."
+                }
+              ]
+            },
+            "x-ms-parameter-location": "method"
+          },
+          {
+            "name": "timeoutInSeconds",
+            "description": "Time in seconds within which if the provider doesn’t respond, end point will return static data.",
+            "in": "query",
+            "required": false,
+            "type": "integer"
+          },
+          {
+            "$ref": "#/parameters/MobilityLanguage"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/RealTimeArrivalsResponse"
+            }
+          },
+          "400": {
+            "$ref": "#/responses/400"
+          },
+          "401": {
+            "$ref": "#/responses/401"
+          },
+          "403": {
+            "$ref": "#/responses/403"
+          },
+          "404": {
+            "$ref": "#/responses/404"
+          },
+          "500": {
+            "$ref": "#/responses/500"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ODataErrorResponse": {
+      "type": "object",
+      "description": "This response object is returned when an error occurs in the Maps API.",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/ODataError"
+        }
+      }
+    },
+    "ODataError": {
+      "type": "object",
+      "description": "This object is returned when an error occurs in the Maps API.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The ODataError code."
+        },
+        "message": {
+          "type": "string",
+          "readOnly": true,
+          "description": "If available, a human readable description of the error."
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ODataError"
+          }
+        },
+        "target": {
+          "type": "string",
+          "readOnly": true,
+          "description": "If available, the target causing the error."
+        }
+      }
+    },
+    "Coordinate": {
+      "description": "A location represented as a latitude and longitude.",
+      "type": "object",
+      "properties": {
+        "latitude": {
+          "description": "Latitude property",
+          "type": "number",
+          "format": "double",
+          "readOnly": true
+        },
+        "longitude": {
+          "description": "Longitude property",
+          "type": "number",
+          "format": "double",
+          "readOnly": true
+        }
+      }
+    },
+    "GeoJSONGeometry": {
+      "description": "A valid `GeoJSON` geometry object. Please refer to [RFC 7946](https://tools.ietf.org/html/rfc7946#section-3.1) for details.",
+      "type": "object",
+      "discriminator": "type",
+      "required": [
+        "type"
+      ],
+      "properties": {
+        "type": {
+          "description": "Specifies the `GeoJSON` geometry type. Must be one of the seven valid GeoJSON geometry types - Point, MultiPoint, LineString, MultiLineString, Polygon, MultiPolygon and GeometryCollection.",
+          "type": "string",
+          "enum": [
+            "Point",
+            "MultiPoint",
+            "LineString",
+            "MultiLineString",
+            "Polygon",
+            "MultiPolygon",
+            "GeometryCollection"
+          ],
+          "x-ms-enum": {
+            "name": "GeoJSONGeometryType",
+            "modelAsString": false,
+            "values": [
+              {
+                "value": "Point",
+                "description": "`GeoJSON Point` geometry."
+              },
+              {
+                "value": "MultiPoint",
+                "description": "`GeoJSON MultiPoint` geometry."
+              },
+              {
+                "value": "LineString",
+                "description": "`GeoJSON LineString` geometry."
+              },
+              {
+                "value": "MultiLineString",
+                "description": "`GeoJSON MultiLineString` geometry."
+              },
+              {
+                "value": "Polygon",
+                "description": "`GeoJSON Polygon` geometry."
+              },
+              {
+                "value": "MultiPolygon",
+                "description": "`GeoJSON MultiPolygon` geometry."
+              },
+              {
+                "value": "GeometryCollection",
+                "description": "`GeoJSON GeometryCollection` geometry."
+              }
+            ]
+          }
+        }
+      }
+    },
+    "Polygon": {
+      "description": "A valid `GeoJSON Polygon` geometry type. Please refer to [RFC 7946](https://tools.ietf.org/html/rfc7946#section-3.1.6) for details.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/GeoJSONGeometry"
+        },
+        {
+          "properties": {
+            "type": {
+              "description": "Specifies the `type` for the object. Value should always be equal to \"Polygon\".",
+              "type": "string"
+            },
+            "coordinates": {
+              "description": "Coordinates for the `Polygon` geometry type.",
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/GeoJSONLinearRing"
+              }
+            }
+          },
+          "required": [
+            "coordinates"
+          ]
+        }
+      ]
+    },
+    "LineString": {
+      "description": "A valid `GeoJSON LineString` geometry type. Please refer to [RFC 7946](https://tools.ietf.org/html/rfc7946#section-3.1.4) for details.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/GeoJSONGeometry"
+        },
+        {
+          "properties": {
+            "type": {
+              "description": "Specifies the `type` for the geometry. Value should always be equal to \"LineString\".",
+              "type": "string"
+            },
+            "coordinates": {
+              "description": "Coordinates for the `LineString` geometry.",
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/GeoJSONPosition"
+              }
+            }
+          },
+          "required": [
+            "coordinates"
+          ]
+        }
+      ]
+    },
+    "GeoJSONLinearRing": {
+      "description": "Though a linear ring is not explicitly represented as a GeoJSON geometry type, it helps in defining the polygon as an array of linear rings. Please refer to [RFC 7946](https://tools.ietf.org/html/rfc7946#section-3.1.6) for details.",
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/GeoJSONPosition"
+      }
+    },
+    "GeoJSONPosition": {
+      "description": "A valid `GeoJSON Position` geometry type. A `Position` is an array of numbers with two or more elements. The first two elements are _longitude_ and _latitude_, precisely in that order. _Altitude/Elevation_ is an optional third element. Please refer to [RFC 7946](https://tools.ietf.org/html/rfc7946#section-3.1.1) for details.",
+      "type": "array",
+      "items": {
+        "type": "number",
+        "format": "double"
+      }
+    },
+    "MetroAreaResponse": {
+      "description": "This object is returned from a successful Get Metro Area call",
+      "type": "object",
+      "properties": {
+        "results": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MetroAreaResult"
+          }
+        }
+      }
+    },
+    "MetroAreaInfoResponse": {
+      "description": "This object is returned from a successful Metro Area call.",
+      "type": "object",
+      "properties": {
+        "metroName": {
+          "type": "string",
+          "description": "The name of the metro area."
+        },
+        "transitTypes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TransitTypeResult"
+          }
+        },
+        "agencies": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Agency"
+          }
+        },
+        "alerts": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Alert"
+          }
+        }
+      }
+    },
+    "NearbyTransitResponse": {
+      "description": "This object is returned from a successful Get Nearby Transit call",
+      "type": "object",
+      "properties": {
+        "results": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TransitObjectResult"
+          }
+        }
+      }
+    },
+    "TransitStopInfoResponse": {
+      "description": "This object is returned from a successful Get Transit Stop Info call",
+      "type": "object",
+      "properties": {
+        "stop": {
+          "$ref": "#/definitions/Stop"
+        },
+        "lines": {
+          "$ref": "#/definitions/Lines"
+        },
+        "lineGroups": {
+          "$ref": "#/definitions/LineGroups"
+        },
+        "alerts": {
+          "$ref": "#/definitions/Alerts"
+        }
+      }
+    },
+    "TransitRouteResponse": {
+      "description": "This object is returned from a successful Get Transit Stop Info call",
+      "type": "object",
+      "properties": {
+        "results": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ItineraryResult"
+          }
+        }
+      }
+    },
+    "TransitItineraryResponse": {
+      "description": "This object is returned from a successful Get Transit Itinerary call",
+      "type": "object",
+      "properties": {
+        "departureTime": {
+          "description": "The date and time of departure from the origin point in ISO 8601 format, e.g. 1996-12-19T16:39:57-08:00.",
+          "type": "string"
+        },
+        "arrivalTime": {
+          "description": "The date and time of arrival at the destination point in ISO 8601 format, e.g. 1996-12-19T19:39:57-08:00.",
+          "type": "string"
+        },
+        "legs": {
+          "$ref": "#/definitions/ItinerarySummary"
+        }
+      }
+    },
+    "TransitLineInfoResponse": {
+      "description": "This object is returned from a successful Transit Line Info call.",
+      "type": "object",
+      "properties": {
+        "lineGroup": {
+          "description": "Groups together all lines that are logically part of the same group. Typically contains 2 lines having the same agency and line, one going from A to B, and the other from B to A.",
+          "$ref": "#/definitions/LineGroup"
+        },
+        "lines": {
+          "description": "The line group’s basic info and list of the lines.",
+          "$ref": "#/definitions/Lines"
+        },
+        "stops": {
+          "description": "List of stops the line group goes through.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Stop"
+          }
+        },
+        "patterns": {
+          "description": "List of patterns this group is comprised of. A pattern consists of a stop sequence and shape per a line in GeoJSON format.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Pattern"
+          }
+        },
+        "schedule": {
+          "description": "Line schedule for the current 24h. May be null in case no schedule exists for the current time.",
+          "$ref": "#/definitions/LineArrival"
+        }
+      }
+    },
+    "RealTimeArrivalsResponse": {
+      "description": "This object is returned from a successful Get Real Time Arrival Info call.",
+      "type": "object",
+      "properties": {
+        "results": {
+          "description": "Results array. Contains results related details.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RealTimeArrivalResult"
+          }
+        }
+      }
+    },
+    "MetroAreaResult": {
+      "description": "Details of the metro area.",
+      "type": "object",
+      "properties": {
+        "metroId": {
+          "description": "The metro area's Id for use with other API calls.",
+          "type": "integer"
+        },
+        "metroName": {
+          "description": "The main display name of the metro.",
+          "type": "string"
+        },
+        "geometry": {
+          "$ref": "#/definitions/Polygon"
+        },
+        "viewport": {
+          "$ref": "#/definitions/ResultViewport"
+        }
+      }
+    },
+    "ResultViewport": {
+      "description": "The viewport that covers the result represented by the top-left and bottom-right coordinates of the  viewport.",
+      "type": "object",
+      "properties": {
+        "topLeftPoint": {
+          "$ref": "#/definitions/Coordinate"
+        },
+        "btmRightPoint": {
+          "$ref": "#/definitions/Coordinate"
+        }
+      }
+    },
+    "TransitObjectResult": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "The unique identifier (stopID) for the returned public transit stop. When referring to public transit stops over time, it is recommended to use `stopId` since it will not change, as long as the physical stop exists.",
+          "type": "string"
+        },
+        "type": {
+          "description": "The type of object found as a result of the query.",
+          "type": "string"
+        },
+        "objectDetails": {
+          "description": "The object specific details.",
+          "type": "object"
+        },
+        "position": {
+          "description": "The transit object's position.",
+          "$ref": "#/definitions/Coordinate"
+        },
+        "viewport": {
+          "$ref": "#/definitions/ResultViewport"
+        }
+      }
+    },
+    "Stop": {
+      "description": "The stop's basic info",
+      "type": "object",
+      "properties": {
+        "stopId": {
+          "description": "The unique Azure Maps identifier for the respective public transit stop. When referring to public transit stops over time, it is recommended to use `stopId` since it will not change, as long as the physical stop exists.",
+          "type": "string"
+        },
+        "stopKey": {
+          "description": "The GTFS stop Id. GTFS stop Ids are provided by the transit authority and subject to change.",
+          "type": "string"
+        },
+        "stopName": {
+          "description": "The name of the stop.",
+          "type": "string"
+        },
+        "stopCode": {
+          "description": "The stop code displayed at the physical stop. Returned if available.",
+          "type": "string"
+        },
+        "position": {
+          "description": "The Stop's location, latitude and longitude.",
+          "$ref": "#/definitions/Coordinate"
+        },
+        "mainTransitType": {
+          "description": "The transit type of most lines stopping at this stop. One of Tram, Subway, Rail, Bus, Ferry, CableCar, Gondola, Funicular",
+          "type": "string"
+        },
+        "mainAgencyId": {
+          "description": "The Id of the transit agency of most lines stopping at this stop. For example '5872'.",
+          "type": "string"
+        },
+        "mainAgencyName": {
+          "description": "The name of the agency of most lines stopping at this stop, for example, 'Metro Transit'.",
+          "type": "string"
+        }
+      }
+    },
+    "Lines": {
+      "description": "A list of stop lines",
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/Line"
+      }
+    },
+    "Line": {
+      "description": "A stop line",
+      "type": "object",
+      "properties": {
+        "lineId": {
+          "description": "Line Id.",
+          "type": "string"
+        },
+        "lineGroupId": {
+          "description": "Line group Id. Typically contains 2 lines having the same agency and line, one going from A to B, and the other from B to A.",
+          "type": "string"
+        },
+        "direction": {
+          "description": "Line direction. Possible values 'forward' or 'backward'.",
+          "type": "string"
+        },
+        "agencyId": {
+          "description": "The Id of the transit agency, for example, '5872'.",
+          "type": "string"
+        },
+        "agencyName": {
+          "description": "The name of the transit agency, for example, 'NJ Transit'.",
+          "type": "string"
+        },
+        "lineNumber": {
+          "description": "The transit line number.",
+          "type": "string"
+        },
+        "origin": {
+          "description": "The line’s origin, will be present according to metro settings.",
+          "type": "string"
+        },
+        "lineDestination": {
+          "description": "The line’s user displayable destination.",
+          "type": "string"
+        },
+        "mostFrequentPatternId": {
+          "description": "Most common pattern for the line.",
+          "type": "string"
+        },
+        "transitType": {
+          "description": "The public transit type of the line.",
+          "$ref": "#/definitions/TransitType"
+        }
+      }
+    },
+    "LineGroups": {
+      "description": "A list of line groups",
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/LineGroup"
+      }
+    },
+    "LineGroup": {
+      "description": "A line group",
+      "type": "object",
+      "properties": {
+        "lineGroupId": {
+          "description": "Line group Id. Typically contains 2 lines having the same agency and line, one going from A to B, and the other from B to A.",
+          "type": "string"
+        },
+        "agencyId": {
+          "description": "The Id of the transit agency, for example, '5872'.",
+          "type": "string"
+        },
+        "agencyName": {
+          "description": "The name of the transit agency, e.g. Metro Transit.",
+          "type": "string"
+        },
+        "lineNumber": {
+          "description": "The transit line number.",
+          "type": "string"
+        },
+        "caption1": {
+          "description": "A descriptive string. In case caption2 is null, should be used alone as a subtitle to the line number (i.e. Circular). In case caption2 has a value present, should be used in conjunction with it (i.e. Rome ↔ Napoli).",
+          "type": "string"
+        },
+        "caption2": {
+          "description": "A descriptive string.",
+          "type": "string"
+        },
+        "color": {
+          "description": "HEX color for the line.",
+          "type": "string"
+        },
+        "transitType": {
+          "description": "The public transit type of the line.",
+          "$ref": "#/definitions/TransitType"
+        }
+      }
+    },
+    "Alerts": {
+      "description": "A list of stop alerts",
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/Alert"
+      }
+    },
+    "Alert": {
+      "description": "Basic information associated with the active alert.",
+      "type": "object",
+      "properties": {
+        "alertSummary": {
+          "description": "Text summarizing the alert.",
+          "type": "string"
+        },
+        "publicationDate": {
+          "description": "The date and time in ISO 8601 format, e.g. 2019-04-05T14:24:18-04:00.",
+          "type": "string",
+          "format": "date-time"
+        },
+        "category": {
+          "description": "The category of the alert. One of None, Regular, Info, Modified, Critical.",
+          "type": "string"
+        },
+        "alertLevel": {
+          "description": "The level at which the respective alert extents to. One of Metro, Agency, Line, Stop.",
+          "type": "string"
+        },
+        "details": {
+          "$ref": "#/definitions/AlertDetail"
+        }
+      }
+    },
+    "AlertDetail": {
+      "description": "A list of alert details.",
+      "type": "object",
+      "properties": {
+        "agencyId": {
+          "description": "The Id of the relevant transit agency, for example, '5872'.",
+          "type": "string"
+        },
+        "agencyName": {
+          "description": "Name of the relevant transit agency, e.g. Metro Transit.",
+          "type": "string"
+        },
+        "title": {
+          "description": "The title of the alert.",
+          "type": "string"
+        },
+        "description": {
+          "description": "A short description of the alert.",
+          "$ref": "#/definitions/AlertDescription"
+        },
+        "activeFrom": {
+          "description": "The start time of the alert in the local time in ISO format (2019-04-05T14:24:18-04:00).",
+          "type": "string",
+          "format": "date-time"
+        },
+        "activeTo": {
+          "description": "The estimated end time of the alert in the local time in ISO format (2019-04-05T14:24:18-04:00).",
+          "type": "string",
+          "format": "date-time"
+        },
+        "effect": {
+          "description": "Service Alert effect - one of SA_NO_SERVICE, SA_REDUCED_SERVICE, SA_SIGNIFICANT_DELAYS, SA_DETOUR, SA_ADDITIONAL_SERVICE, SA_MODIFIED_SERVICE, SA_OTHER_EFFECT, SA_STOP_MOVED, SA_GOOD_SERVICE, SA_SLEEPING, SA_OTHER_EFFECT",
+          "type": "string"
+        }
+      }
+    },
+    "ItineraryResult": {
+      "type": "object",
+      "properties": {
+        "itineraryId": {
+          "description": "A unique identifier of the returned itinerary.",
+          "type": "string"
+        },
+        "departureTime": {
+          "description": "The date and time of departure from the origin point in ISO 8601 format, e.g. 1996-12-19T16:39:57-08:00.",
+          "type": "string",
+          "format": "date-time"
+        },
+        "arrivalTime": {
+          "description": "The date and time of arrival at the destination point in ISO 8601 format, e.g. 1996-12-19T19:39:57-08:00.",
+          "type": "string",
+          "format": "date-time"
+        },
+        "travelTimeInSeconds": {
+          "description": "Estimated travel time in seconds.",
+          "type": "integer"
+        },
+        "numberOfLegs": {
+          "description": "Number of legs.",
+          "type": "integer"
+        },
+        "legs": {
+          "description": "An array summarizing the legs of this itinerary.",
+          "$ref": "#/definitions/RouteItinerarySummary"
+        }
+      }
+    },
+    "RouteItinerarySummary": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/RouteItineraryLeg"
+      }
+    },
+    "RouteItineraryLeg": {
+      "type": "object",
+      "properties": {
+        "legType": {
+          "description": "The travel mode of the leg.",
+          "$ref": "#/definitions/LegType"
+        },
+        "legStartTime": {
+          "description": "Start time for the leg in ISO 8601 format, e.g. 1996-12-19T19:39:57-08:00.",
+          "type": "string"
+        },
+        "legEndTime": {
+          "description": "End time for the leg in ISO 8601 format, e.g. 1996-12-19T19:39:57-08:00.",
+          "type": "string"
+        },
+        "caption": {
+          "description": "For Public Transit legs the caption of the line serving the leg, for example, line number.",
+          "type": "string"
+        },
+        "lengthInMeters": {
+          "description": "The total distance of the leg in meters.",
+          "type": "integer"
+        }
+      }
+    },
+    "ItinerarySummary": {
+      "description": "An array summarizing the legs of this itinerary.",
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/Leg"
+      }
+    },
+    "Leg": {
+      "type": "object",
+      "properties": {
+        "legType": {
+          "description": "The travel mode of the leg.",
+          "$ref": "#/definitions/LegType"
+        },
+        "legStartTime": {
+          "description": "Start time for the leg.",
+          "type": "string"
+        },
+        "legEndTime": {
+          "description": "End time for the leg.",
+          "type": "string"
+        },
+        "steps": {
+          "description": "In case of walk or bike leg, the directions.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Step"
+          }
+        },
+        "origin": {
+          "description": "The walk/bike leg’s origin.",
+          "$ref": "#/definitions/LegPoint"
+        },
+        "destination": {
+          "description": "The walk/bike leg’s destination.",
+          "$ref": "#/definitions/LegPoint"
+        },
+        "geometry": {
+          "$ref": "#/definitions/LineString"
+        },
+        "lineGroup": {
+          "description": "In case of a public transit leg, the line group serving this leg.",
+          "$ref": "#/definitions/LineGroup"
+        },
+        "line": {
+          "description": "In case of a public transit leg, the line serving this leg.",
+          "$ref": "#/definitions/Line"
+        },
+        "stops": {
+          "description": "List of stops comprising the line’s route within the leg (e.g. the stops the leg passes through).",
+          "$ref": "#/definitions/Stops"
+        },
+        "departures": {
+          "description": "Relevant for Public Transit and Wait legs only",
+          "$ref": "#/definitions/Departures"
+        },
+        "waitOnVehicle": {
+          "description": "Indicates whether it’s necessary to wait for the next leg on the same vehicle (i.e. the bus will only change its line number).",
+          "type": "string"
+        }
+      }
+    },
+    "LegType": {
+      "type": "string",
+      "enum": [
+        "Walk",
+        "Bicycle",
+        "Tram",
+        "Subway",
+        "Rail",
+        "Bus",
+        "Ferry",
+        "Cable",
+        "Gondola",
+        "Funicular",
+        "PathWayWalk",
+        "Wait",
+        "WaitOnVehicle"
+      ],
+      "x-ms-enum": {
+        "name": "LegType",
+        "modelAsString": false,
+        "values": [
+          {
+            "value": "Walk",
+            "description": "Pedestrian walk"
+          },
+          {
+            "value": "Bicycle",
+            "description": "Bicycle"
+          },
+          {
+            "value": "Tram",
+            "description": "Tram"
+          },
+          {
+            "value": "Subway",
+            "description": "Subway"
+          },
+          {
+            "value": "Rail",
+            "description": "Rail"
+          },
+          {
+            "value": "Bus",
+            "description": "Bus"
+          },
+          {
+            "value": "Ferry",
+            "description": "Ferry"
+          },
+          {
+            "value": "Cable",
+            "description": "Cable Car"
+          },
+          {
+            "value": "Gondola",
+            "description": "Gondola"
+          },
+          {
+            "value": "Funicular",
+            "description": "Funicular"
+          },
+          {
+            "value": "PathWayWalk",
+            "description": "A Leg describing a walk within a compound, e.g. Central Station"
+          },
+          {
+            "value": "Wait",
+            "description": "A Leg describing a wait for the next public transit leg"
+          },
+          {
+            "value": "WaitOnVehicle",
+            "description": "It’s necessary to wait for the next leg on the same vehicle (i.e. the bus will only change its line number)"
+          }
+        ]
+      }
+    },
+    "LegPoint": {
+      "type": "object",
+      "properties": {
+        "position": {
+          "$ref": "#/definitions/Coordinate"
+        }
+      }
+    },
+    "Stops": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/Stop"
+      }
+    },
+    "Step": {
+      "type": "object",
+      "properties": {
+        "direction": {
+          "description": "The walking direction associated with this step.",
+          "$ref": "#/definitions/Direction"
+        },
+        "streetName": {
+          "description": "The name of the street in which this step takes place.",
+          "type": "string"
+        }
+      }
+    },
+    "Direction": {
+      "description": "The walking directions guidance.",
+      "type": "object",
+      "properties": {
+        "relativeDirection": {
+          "description": "The relative walking direction associated with applicable step.",
+          "type": "string",
+          "enum": [
+            "depart",
+            "hardLeft",
+            "left",
+            "slightlyLeft",
+            "continue",
+            "slightlyRight",
+            "right",
+            "hardRight",
+            "circleClockwise",
+            "circleCounterclockwise",
+            "elevator",
+            "uturnLeft",
+            "uturnRight"
+          ],
+          "x-ms-enum": {
+            "name": "RelativeDirection",
+            "modelAsString": false,
+            "values": [
+              {
+                "value": "depart",
+                "description": "Leave"
+              },
+              {
+                "value": "hardLeft",
+                "description": "Turn sharp left."
+              },
+              {
+                "value": "left",
+                "description": "Turn left."
+              },
+              {
+                "value": "slightlyLeft",
+                "description": "Turn slightly left."
+              },
+              {
+                "value": "continue",
+                "description": "Keep going."
+              },
+              {
+                "value": "slightlyRight",
+                "description": "Turn slightly right."
+              },
+              {
+                "value": "right",
+                "description": "Turn right."
+              },
+              {
+                "value": "hardRight",
+                "description": "Turn sharp right."
+              },
+              {
+                "value": "circleClockwise",
+                "description": "Circle clockwise."
+              },
+              {
+                "value": "circleCounterclockwise",
+                "description": "Circle counter clockwise."
+              },
+              {
+                "value": "elevator",
+                "description": "Take the elevator."
+              },
+              {
+                "value": "uturnLeft",
+                "description": "Make a U-turn left."
+              },
+              {
+                "value": "uturnRight",
+                "description": "Make a U-turn right."
+              }
+            ]
+          }
+        },
+        "absoluteDirection": {
+          "description": "The absolute walking direction associated with this step.",
+          "type": "string",
+          "enum": [
+            "north",
+            "northeast",
+            "east",
+            "southeast",
+            "south",
+            "southwest",
+            "west",
+            "northwest"
+          ],
+          "x-ms-enum": {
+            "name": "AbsoluteDirection",
+            "modelAsString": false,
+            "values": [
+              {
+                "value": "north",
+                "description": "North"
+              },
+              {
+                "value": "northeast",
+                "description": "NorthEast"
+              },
+              {
+                "value": "east",
+                "description": "East"
+              },
+              {
+                "value": "southeast",
+                "description": "SouthEast"
+              },
+              {
+                "value": "south",
+                "description": "South"
+              },
+              {
+                "value": "southwest",
+                "description": "SouthWest"
+              },
+              {
+                "value": "west",
+                "description": "West"
+              },
+              {
+                "value": "northwest",
+                "description": "NorthWest"
+              }
+            ]
+          }
+        }
+      }
+    },
+    "Departures": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/LineArrival"
+      }
+    },
+    "LineArrival": {
+      "type": "object",
+      "properties": {
+        "lineId": {
+          "description": "Line Id.",
+          "type": "string"
+        },
+        "stopId": {
+          "description": "The unique Azure Maps identifier for the respective public transit stop. When referring to public transit stops over time, it is recommended to use `stopId` since it will not change, as long as the physical stop exists.",
+          "type": "string"
+        },
+        "scheduleTime": {
+          "description": "The date and time of departure from the stop in ISO 8601 format, e.g. 1996-12-19T19:39:57-08:00.",
+          "type": "string",
+          "format": "date-time"
+        },
+        "scheduleType": {
+          "description": "Whether the result is based on real-time or static data.",
+          "$ref": "#/definitions/ScheduleType"
+        }
+      }
+    },
+    "Pattern": {
+      "type": "object",
+      "description": "Stop-shape-segments of the trip pattern, which are an ordered list of the stops and the shapes connecting them.",
+      "properties": {
+        "patternId": {
+          "description": "Pattern Id, for example, '3267995'.",
+          "type": "string"
+        },
+        "lineId": {
+          "description": "Line Id.",
+          "type": "string"
+        },
+        "stopIds": {
+          "description": "Stops the line goes through.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "geometry": {
+          "description": "Stop sequence and shape per a line in GeoJSON format.",
+          "$ref": "#/definitions/LineString"
+        }
+      }
+    },
+    "TransitTypeResult": {
+      "type": "object",
+      "properties": {
+        "transitType": {
+          "description": "Supported public transit type.",
+          "$ref": "#/definitions/TransitType"
+        },
+        "captionOverride": {
+          "description": "For metro areas in which local name is different than the GTFS supported transit type, original name is returned.",
+          "type": "string"
+        }
+      }
+    },
+    "Agency": {
+      "type": "object",
+      "description": "Details of the agency.",
+      "properties": {
+        "agencyId": {
+          "description": "The Id of the relevant transit agency, for example, '5872'",
+          "type": "string"
+        },
+        "agencyKey": {
+          "description": "The agency’s GTFS Id.",
+          "type": "string"
+        },
+        "agencyName": {
+          "description": "Name of the relevant transit agency, e.g. Metro Transit.",
+          "type": "string"
+        },
+        "transitType": {
+          "description": "Supported public transit type. One of Tram, Subway, Rail, Bus, Ferry, CableCar, Gondola, Funicular.",
+          "$ref": "#/definitions/TransitTypeResult"
+        }
+      }
+    },
+    "TransitType": {
+      "type": "string",
+      "enum": [
+        "Bus",
+        "CableCar",
+        "Ferry",
+        "Funicular",
+        "Gondola",
+        "Rail",
+        "Tram",
+        "Subway"
+      ],
+      "x-ms-enum": {
+        "name": "TransitType",
+        "modelAsString": false,
+        "values": [
+          {
+            "value": "Bus",
+            "description": "bus"
+          },
+          {
+            "value": "CableCar",
+            "description": "cableCar"
+          },
+          {
+            "value": "Ferry",
+            "description": "ferry"
+          },
+          {
+            "value": "Funicular",
+            "description": "funicular"
+          },
+          {
+            "value": "Gondola",
+            "description": "gondola"
+          },
+          {
+            "value": "Rail",
+            "description": "rail"
+          },
+          {
+            "value": "Tram",
+            "description": "tram"
+          },
+          {
+            "value": "Subway",
+            "description": "subway"
+          }
+        ]
+      }
+    },
+    "AlertDescription": {
+      "type": "object",
+      "properties": {
+        "data": {
+          "description": "Description of the alert.",
+          "type": "string"
+        },
+        "format": {
+          "description": "Format of the alert description.",
+          "type": "string"
+        },
+        "sourceUrl": {
+          "description": "Source URL.",
+          "type": "string"
+        }
+      }
+    },
+    "RealTimeArrivalResult": {
+      "description": "Contains real-time arrival related details.",
+      "type": "object",
+      "properties": {
+        "arrivalMinutes": {
+          "description": "The estimated time of arrival in minutes.",
+          "type": "integer"
+        },
+        "scheduleType": {
+          "description": "Whether the result is based on real-time or static data.",
+          "$ref": "#/definitions/ScheduleType"
+        },
+        "patternId": {
+          "description": "The pattern Id.",
+          "type": "string"
+        },
+        "line": {
+          "description": "The public transit type of the line.",
+          "$ref": "#/definitions/Line"
+        },
+        "stop": {
+          "description": "Object for the given stop.",
+          "$ref": "#/definitions/Stop"
+        }
+      }
+    },
+    "ScheduleType": {
+      "description": "Whether the result is based on real-time or static data.",
+      "type": "string",
+      "enum": [
+        "scheduledTime",
+        "realTime"
+      ],
+      "x-ms-enum": {
+        "name": "ScheduleType",
+        "modelAsString": false,
+        "values": [
+          {
+            "value": "scheduledTime",
+            "description": "Returned when estimated time of arrival is based on real-time data."
+          },
+          {
+            "value": "realTime",
+            "description": "Returned when estimated time of arrival is based on static data."
+          }
+        ]
+      }
+    }
+  }
+}
