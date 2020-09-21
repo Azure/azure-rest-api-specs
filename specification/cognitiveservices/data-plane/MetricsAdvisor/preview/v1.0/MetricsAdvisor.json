@@ -1,0 +1,6312 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Azure Cognitive Service Metrics Advisor REST API (OpenAPI v2)",
+    "description": "Azure Cognitive Service Metrics Advisor REST API (OpenAPI v2)",
+    "version": "1.0"
+  },
+  "paths": {
+    "/stats/latest": {
+      "get": {
+        "tags": [
+          "Admin"
+        ],
+        "summary": "Get latest usage stats",
+        "operationId": "getActiveSeriesCount",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/UsageStats"
+            },
+            "examples": {
+              "application/json": {
+  "timestamp": "2020-03-01T00:00:00Z",
+  "activeSeriesCount": 100,
+  "allSeriesCount": 1000,
+  "metricsCount": 10,
+  "datafeedCount": 5
+}
+            }
+          },
+          "default": {
+            "description": "Client error or server error (4xx or 5xx)",
+            "schema": {
+              "$ref": "#/definitions/ErrorCode"
+            }
+          }
+        }
+      }
+    },
+    "/alert/anomaly/configurations/{configurationId}": {
+      "get": {
+        "tags": [
+          "AnomalyAlerting"
+        ],
+        "summary": "Query a single anomaly alerting configuration",
+        "operationId": "getAnomalyAlertingConfiguration",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "configurationId",
+            "description": "anomaly alerting configuration unique id",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/AnomalyAlertingConfiguration"
+            },
+            "examples": {
+              "application/json": {
+  "anomalyAlertingConfigurationId": "44444444-4444-4444-4444-000000000001",
+  "name": "alerting configuration name",
+  "description": "this is an anomaly alerting configuration",
+  "crossMetricsOperator": "AND",
+  "hookIds": [
+    "00000000-0000-0000-0000-000000000001"
+  ],
+  "metricAlertingConfigurations": [
+    {
+      "anomalyDetectionConfigurationId": "33333333-3333-3333-3333-000000000001",
+      "anomalyScopeType": "All",
+      "negationOperation": false,
+      "severityFilter": {
+        "minAlertSeverity": "Medium",
+        "maxAlertSeverity": "High"
+      },
+      "snoozeFilter": {
+        "autoSnooze": 0,
+        "snoozeScope": "Series",
+        "onlyForSuccessive": true
+      }
+    },
+    {
+      "anomalyDetectionConfigurationId": "33333333-3333-3333-3333-000000000002",
+      "anomalyScopeType": "Dimension",
+      "negationOperation": false,
+      "dimensionAnomalyScope": {
+        "dimension": {
+          "city": "Beijing"
+        }
+      },
+      "severityFilter": {
+        "minAlertSeverity": "Low",
+        "maxAlertSeverity": "High"
+      },
+      "snoozeFilter": {
+        "autoSnooze": 0,
+        "snoozeScope": "Series",
+        "onlyForSuccessive": true
+      },
+      "valueFilter": {
+        "lower": 0.0,
+        "upper": 1000.0,
+        "direction": "Both"
+      }
+    }
+  ]
+}
+            }
+          },
+          "default": {
+            "description": "Client error or server error (4xx or 5xx)",
+            "schema": {
+              "$ref": "#/definitions/ErrorCode"
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "AnomalyAlerting"
+        ],
+        "summary": "Update anomaly alerting configuration",
+        "operationId": "updateAnomalyAlertingConfiguration",
+        "consumes": [
+          "application/merge-patch+json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "configurationId",
+            "description": "anomaly alerting configuration unique id",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "anomaly alerting configuration",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AnomalyAlertingConfigurationPatch"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Success"
+          },
+          "default": {
+            "description": "Client error or server error (4xx or 5xx)",
+            "schema": {
+              "$ref": "#/definitions/ErrorCode"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "AnomalyAlerting"
+        ],
+        "summary": "Delete anomaly alerting configuration",
+        "operationId": "deleteAnomalyAlertingConfiguration",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "configurationId",
+            "description": "anomaly alerting configuration unique id",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "The resource is deleted successfully or does not exist."
+          },
+          "default": {
+            "description": "Client error or server error (4xx or 5xx)",
+            "schema": {
+              "$ref": "#/definitions/ErrorCode"
+            }
+          }
+        }
+      }
+    },
+    "/alert/anomaly/configurations": {
+      "post": {
+        "tags": [
+          "AnomalyAlerting"
+        ],
+        "summary": "Create anomaly alerting configuration",
+        "operationId": "createAnomalyAlertingConfiguration",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "anomaly alerting configuration",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AnomalyAlertingConfiguration"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Success",
+            "headers": {
+              "Location": {
+                "description": "Location of the newly created resource.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Client error or server error (4xx or 5xx)",
+            "schema": {
+              "$ref": "#/definitions/ErrorCode"
+            }
+          }
+        }
+      }
+    },
+    "/alert/anomaly/configurations/{configurationId}/alerts/query": {
+      "post": {
+        "tags": [
+          "AnomalyAlerting"
+        ],
+        "summary": "Query alerts under anomaly alerting configuration",
+        "operationId": "getAlertsByAnomalyAlertingConfiguration",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "configurationId",
+            "description": "anomaly alerting configuration unique id",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "in": "query",
+            "name": "$skip",
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "in": "query",
+            "name": "$top",
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "query alerting result request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AlertingResultQuery"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/AlertResultList"
+            },
+            "examples": {
+              "application/json": {
+  "value": [
+    {
+      "alertId": "aaaaaaaaaaaa",
+      "timestamp": "2020-01-01T00:00:00Z",
+      "createdTime": "2020-03-01T00:00:00Z",
+      "modifiedTime": "2020-03-01T00:00:00Z"
+    }
+  ]
+}
+            }
+          },
+          "default": {
+            "description": "Client error or server error (4xx or 5xx)",
+            "schema": {
+              "$ref": "#/definitions/ErrorCode"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "@nextLink"
+        }
+      }
+    },
+    "/alert/anomaly/configurations/{configurationId}/alerts/{alertId}/anomalies": {
+      "get": {
+        "tags": [
+          "AnomalyAlerting"
+        ],
+        "summary": "Query anomalies under a specific alert",
+        "operationId": "getAnomaliesFromAlertByAnomalyAlertingConfiguration",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "configurationId",
+            "description": "anomaly alerting configuration unique id",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "in": "path",
+            "name": "alertId",
+            "description": "alert id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$skip",
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "in": "query",
+            "name": "$top",
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/AnomalyResultList"
+            },
+            "examples": {
+              "application/json": {
+  "value": [
+    {
+      "metricId": "22222222-2222-2222-2222-000000000001",
+      "anomalyDetectionConfigurationId": "33333333-3333-3333-3333-000000000001",
+      "timestamp": "2020-01-01T00:00:00Z",
+      "createdTime": "2020-03-01T00:00:00Z",
+      "modifiedTime": "2020-03-01T00:00:00Z",
+      "dimension": {
+        "category": "__SUM__",
+        "city": "Beijing"
+      },
+      "property": {
+        "anomalySeverity": "High",
+        "anomalyStatus": "Active"
+      }
+    }
+  ]
+}
+            }
+          },
+          "default": {
+            "description": "Client error or server error (4xx or 5xx)",
+            "schema": {
+              "$ref": "#/definitions/ErrorCode"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "@nextLink"
+        }
+      }
+    },
+    "/alert/anomaly/configurations/{configurationId}/alerts/{alertId}/incidents": {
+      "get": {
+        "tags": [
+          "AnomalyAlerting"
+        ],
+        "summary": "Query incidents under a specific alert",
+        "operationId": "getIncidentsFromAlertByAnomalyAlertingConfiguration",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "configurationId",
+            "description": "anomaly alerting configuration unique id",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "in": "path",
+            "name": "alertId",
+            "description": "alert id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$skip",
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "in": "query",
+            "name": "$top",
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/IncidentResultList"
+            },
+            "examples": {
+              "application/json": {
+  "value": [
+    {
+      "metricId": "22222222-2222-2222-2222-000000000001",
+      "anomalyDetectionConfigurationId": "33333333-3333-3333-3333-000000000001",
+      "incidentId": "iiiiiiiiiiii",
+      "startTime": "2020-01-01T00:00:00Z",
+      "lastTime": "2020-02-01T00:00:00Z",
+      "rootNode": {
+        "dimension": {
+          "category": "__SUM__",
+          "city": "Beijing"
+        }
+      },
+      "property": {
+        "maxSeverity": "High",
+        "incidentStatus": "Active"
+      }
+    }
+  ]
+}
+            }
+          },
+          "default": {
+            "description": "Client error or server error (4xx or 5xx)",
+            "schema": {
+              "$ref": "#/definitions/ErrorCode"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "@nextLink"
+        }
+      }
+    },
+    "/enrichment/anomalyDetection/configurations/{configurationId}": {
+      "get": {
+        "tags": [
+          "AnomalyDetection"
+        ],
+        "summary": "Query a single anomaly detection configuration",
+        "operationId": "getAnomalyDetectionConfiguration",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "configurationId",
+            "description": "anomaly detection configuration unique id",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/AnomalyDetectionConfiguration"
+            },
+            "examples": {
+              "application/json": {
+  "anomalyDetectionConfigurationId": "33333333-3333-3333-3333-000000000001",
+  "name": "Anomaly detection configuration name",
+  "description": "Anomaly detection configuration description",
+  "metricId": "22222222-2222-2222-2222-000000000001",
+  "wholeMetricConfiguration": {
+    "conditionOperator": "AND",
+    "smartDetectionCondition": {
+      "sensitivity": 91.0,
+      "anomalyDetectorDirection": "Both",
+      "suppressCondition": {
+        "minNumber": 1,
+        "minRatio": 100.0
+      }
+    },
+    "hardThresholdCondition": {
+      "lowerBound": 1.0,
+      "upperBound": 100.0,
+      "anomalyDetectorDirection": "Both",
+      "suppressCondition": {
+        "minNumber": 1,
+        "minRatio": 100.0
+      }
+    },
+    "changeThresholdCondition": {
+      "changePercentage": 5.0,
+      "shiftPoint": 1,
+      "withinRange": false,
+      "anomalyDetectorDirection": "Both",
+      "suppressCondition": {
+        "minNumber": 1,
+        "minRatio": 100.0
+      }
+    }
+  },
+  "dimensionGroupOverrideConfigurations": [
+    {
+      "group": {
+        "dimension": {
+          "city": "Beijing"
+        }
+      },
+      "conditionOperator": "AND",
+      "smartDetectionCondition": {
+        "sensitivity": 91.0,
+        "anomalyDetectorDirection": "Both",
+        "suppressCondition": {
+          "minNumber": 1,
+          "minRatio": 100.0
+        }
+      },
+      "hardThresholdCondition": {
+        "lowerBound": 1.0,
+        "upperBound": 100.0,
+        "anomalyDetectorDirection": "Both",
+        "suppressCondition": {
+          "minNumber": 1,
+          "minRatio": 100.0
+        }
+      },
+      "changeThresholdCondition": {
+        "changePercentage": 5.0,
+        "shiftPoint": 1,
+        "withinRange": false,
+        "anomalyDetectorDirection": "Both",
+        "suppressCondition": {
+          "minNumber": 1,
+          "minRatio": 100.0
+        }
+      }
+    }
+  ],
+  "seriesOverrideConfigurations": [
+    {
+      "series": {
+        "dimension": {
+          "category": "Jewelry",
+          "city": "Beijing"
+        }
+      },
+      "conditionOperator": "AND",
+      "smartDetectionCondition": {
+        "sensitivity": 91.0,
+        "anomalyDetectorDirection": "Both",
+        "suppressCondition": {
+          "minNumber": 1,
+          "minRatio": 100.0
+        }
+      },
+      "hardThresholdCondition": {
+        "lowerBound": 1.0,
+        "upperBound": 100.0,
+        "anomalyDetectorDirection": "Both",
+        "suppressCondition": {
+          "minNumber": 1,
+          "minRatio": 100.0
+        }
+      },
+      "changeThresholdCondition": {
+        "changePercentage": 5.0,
+        "shiftPoint": 1,
+        "withinRange": false,
+        "anomalyDetectorDirection": "Both",
+        "suppressCondition": {
+          "minNumber": 1,
+          "minRatio": 100.0
+        }
+      }
+    }
+  ]
+}
+            }
+          },
+          "default": {
+            "description": "Client error or server error (4xx or 5xx)",
+            "schema": {
+              "$ref": "#/definitions/ErrorCode"
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "AnomalyDetection"
+        ],
+        "summary": "Update anomaly detection configuration",
+        "operationId": "updateAnomalyDetectionConfiguration",
+        "consumes": [
+          "application/merge-patch+json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "configurationId",
+            "description": "anomaly detection configuration unique id",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "anomaly detection configuration",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AnomalyDetectionConfigurationPatch"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Success"
+          },
+          "default": {
+            "description": "Client error or server error (4xx or 5xx)",
+            "schema": {
+              "$ref": "#/definitions/ErrorCode"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "AnomalyDetection"
+        ],
+        "summary": "Delete anomaly detection configuration",
+        "operationId": "deleteAnomalyDetectionConfiguration",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "configurationId",
+            "description": "anomaly detection configuration unique id",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "The resource is deleted successfully or does not exist."
+          },
+          "default": {
+            "description": "Client error or server error (4xx or 5xx)",
+            "schema": {
+              "$ref": "#/definitions/ErrorCode"
+            }
+          }
+        }
+      }
+    },
+    "/enrichment/anomalyDetection/configurations": {
+      "post": {
+        "tags": [
+          "AnomalyDetection"
+        ],
+        "summary": "Create anomaly detection configuration",
+        "operationId": "createAnomalyDetectionConfiguration",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "anomaly detection configuration",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AnomalyDetectionConfiguration"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Success",
+            "headers": {
+              "Location": {
+                "description": "Location of the newly created resource.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Client error or server error (4xx or 5xx)",
+            "schema": {
+              "$ref": "#/definitions/ErrorCode"
+            }
+          }
+        }
+      }
+    },
+    "/enrichment/anomalyDetection/configurations/{configurationId}/alert/anomaly/configurations": {
+      "get": {
+        "tags": [
+          "AnomalyDetection"
+        ],
+        "summary": "Query all anomaly alerting configurations for specific anomaly detection configuration",
+        "operationId": "getAnomalyAlertingConfigurationsByAnomalyDetectionConfiguration",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "configurationId",
+            "description": "anomaly detection configuration unique id",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/AnomalyAlertingConfigurationList"
+            },
+            "examples": {
+              "application/json": {
+  "value": [
+    {
+      "anomalyAlertingConfigurationId": "44444444-4444-4444-4444-000000000001",
+      "name": "alerting configuration name",
+      "description": "this is an anomaly alerting configuration",
+      "crossMetricsOperator": "AND",
+      "hookIds": [
+        "00000000-0000-0000-0000-000000000001"
+      ],
+      "metricAlertingConfigurations": [
+        {
+          "anomalyDetectionConfigurationId": "33333333-3333-3333-3333-000000000001",
+          "anomalyScopeType": "All",
+          "negationOperation": false,
+          "severityFilter": {
+            "minAlertSeverity": "Medium",
+            "maxAlertSeverity": "High"
+          },
+          "snoozeFilter": {
+            "autoSnooze": 0,
+            "snoozeScope": "Series",
+            "onlyForSuccessive": true
+          }
+        },
+        {
+          "anomalyDetectionConfigurationId": "33333333-3333-3333-3333-000000000002",
+          "anomalyScopeType": "Dimension",
+          "negationOperation": false,
+          "dimensionAnomalyScope": {
+            "dimension": {
+              "city": "Beijing"
+            }
+          },
+          "severityFilter": {
+            "minAlertSeverity": "Low",
+            "maxAlertSeverity": "High"
+          },
+          "snoozeFilter": {
+            "autoSnooze": 0,
+            "snoozeScope": "Series",
+            "onlyForSuccessive": true
+          },
+          "valueFilter": {
+            "lower": 0.0,
+            "upper": 1000.0,
+            "direction": "Both"
+          }
+        }
+      ]
+    }
+  ]
+}
+            }
+          },
+          "default": {
+            "description": "Client error or server error (4xx or 5xx)",
+            "schema": {
+              "$ref": "#/definitions/ErrorCode"
+            }
+          }
+        }
+      }
+    },
+    "/enrichment/anomalyDetection/configurations/{configurationId}/series/query": {
+      "post": {
+        "tags": [
+          "AnomalyDetection"
+        ],
+        "summary": "Query series enriched by anomaly detection",
+        "operationId": "getSeriesByAnomalyDetectionConfiguration",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "configurationId",
+            "description": "anomaly detection configuration unique id",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "query series detection result request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DetectionSeriesQuery"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/SeriesResultList"
+            },
+            "examples": {
+              "application/json": {
+  "value": [
+    {
+      "series": {
+        "dimension": {
+          "category": "Jewelry",
+          "city": "Beijing"
+        }
+      },
+      "timestampList": [
+        "2020-01-01T00:00:00Z"
+      ],
+      "valueList": [
+        108.3
+      ],
+      "isAnomalyList": [
+        false
+      ],
+      "periodList": [
+        0
+      ],
+      "expectedValueList": [
+        108.0
+      ],
+      "lowerBoundaryList": [
+        100.1
+      ],
+      "upperBoundaryList": [
+        112.8
+      ]
+    }
+  ]
+}
+            }
+          },
+          "default": {
+            "description": "Client error or server error (4xx or 5xx)",
+            "schema": {
+              "$ref": "#/definitions/ErrorCode"
+            }
+          }
+        }
+      }
+    },
+    "/enrichment/anomalyDetection/configurations/{configurationId}/anomalies/query": {
+      "post": {
+        "tags": [
+          "AnomalyDetection"
+        ],
+        "summary": "Query anomalies under anomaly detection configuration",
+        "operationId": "getAnomaliesByAnomalyDetectionConfiguration",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "configurationId",
+            "description": "anomaly detection configuration unique id",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "in": "query",
+            "name": "$skip",
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "in": "query",
+            "name": "$top",
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "query detection anomaly result request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DetectionAnomalyResultQuery"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/AnomalyResultList"
+            },
+            "examples": {
+              "application/json": {
+  "value": [
+    {
+      "metricId": "22222222-2222-2222-2222-000000000001",
+      "anomalyDetectionConfigurationId": "33333333-3333-3333-3333-000000000001",
+      "timestamp": "2020-01-01T00:00:00Z",
+      "createdTime": "2020-03-01T00:00:00Z",
+      "modifiedTime": "2020-03-01T00:00:00Z",
+      "dimension": {
+        "category": "__SUM__",
+        "city": "Beijing"
+      },
+      "property": {
+        "anomalySeverity": "High",
+        "anomalyStatus": "Active"
+      }
+    }
+  ]
+}
+            }
+          },
+          "default": {
+            "description": "Client error or server error (4xx or 5xx)",
+            "schema": {
+              "$ref": "#/definitions/ErrorCode"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "@nextLink"
+        }
+      }
+    },
+    "/enrichment/anomalyDetection/configurations/{configurationId}/anomalies/dimension/query": {
+      "post": {
+        "tags": [
+          "AnomalyDetection"
+        ],
+        "summary": "Query dimension values of anomalies",
+        "operationId": "getDimensionOfAnomaliesByAnomalyDetectionConfiguration",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "configurationId",
+            "description": "anomaly detection configuration unique id",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "in": "query",
+            "name": "$skip",
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "in": "query",
+            "name": "$top",
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "query dimension values request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AnomalyDimensionQuery"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/AnomalyDimensionList"
+            },
+            "examples": {
+              "application/json": {
+  "value": [
+    "Jewelry"
+  ]
+}
+            }
+          },
+          "default": {
+            "description": "Client error or server error (4xx or 5xx)",
+            "schema": {
+              "$ref": "#/definitions/ErrorCode"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "@nextLink"
+        }
+      }
+    },
+    "/enrichment/anomalyDetection/configurations/{configurationId}/incidents/query": {
+      "post": {
+        "tags": [
+          "AnomalyDetection"
+        ],
+        "summary": "Query incidents under anomaly detection configuration",
+        "operationId": "getIncidentsByAnomalyDetectionConfiguration",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "configurationId",
+            "description": "anomaly detection configuration unique id",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "in": "query",
+            "name": "$top",
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "query detection incident result request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DetectionIncidentResultQuery"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/IncidentResultList"
+            },
+            "examples": {
+              "application/json": {
+  "value": [
+    {
+      "metricId": "22222222-2222-2222-2222-000000000001",
+      "anomalyDetectionConfigurationId": "33333333-3333-3333-3333-000000000001",
+      "incidentId": "iiiiiiiiiiii",
+      "startTime": "2020-01-01T00:00:00Z",
+      "lastTime": "2020-02-01T00:00:00Z",
+      "rootNode": {
+        "dimension": {
+          "category": "__SUM__",
+          "city": "Beijing"
+        }
+      },
+      "property": {
+        "maxSeverity": "High",
+        "incidentStatus": "Active"
+      }
+    }
+  ]
+}
+            }
+          },
+          "default": {
+            "description": "Client error or server error (4xx or 5xx)",
+            "schema": {
+              "$ref": "#/definitions/ErrorCode"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "@nextLink"
+        }
+      },
+      "get": {
+        "tags": [
+          "AnomalyDetection"
+        ],
+        "summary": "Query incidents under anomaly detection configuration",
+        "operationId": "getIncidentsByAnomalyDetectionConfigurationNextPages",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "configurationId",
+            "description": "anomaly detection configuration unique id",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "in": "query",
+            "name": "$top",
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "in": "query",
+            "name": "$token",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/IncidentResultList"
+            },
+            "examples": {
+              "application/json": {
+  "value": [
+    {
+      "metricId": "22222222-2222-2222-2222-000000000001",
+      "anomalyDetectionConfigurationId": "33333333-3333-3333-3333-000000000001",
+      "incidentId": "iiiiiiiiiiii",
+      "startTime": "2020-01-01T00:00:00Z",
+      "lastTime": "2020-02-01T00:00:00Z",
+      "rootNode": {
+        "dimension": {
+          "category": "__SUM__",
+          "city": "Beijing"
+        }
+      },
+      "property": {
+        "maxSeverity": "High",
+        "incidentStatus": "Active"
+      }
+    }
+  ]
+}
+            }
+          },
+          "default": {
+            "description": "Client error or server error (4xx or 5xx)",
+            "schema": {
+              "$ref": "#/definitions/ErrorCode"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "@nextLink"
+        }
+      }
+    },
+    "/enrichment/anomalyDetection/configurations/{configurationId}/incidents/{incidentId}/rootCause": {
+      "get": {
+        "tags": [
+          "AnomalyDetection"
+        ],
+        "summary": "Query root cause for incident",
+        "operationId": "getRootCauseOfIncidentByAnomalyDetectionConfiguration",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "configurationId",
+            "description": "anomaly detection configuration unique id",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "in": "path",
+            "name": "incidentId",
+            "description": "incident id",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/RootCauseList"
+            },
+            "examples": {
+              "application/json": {
+  "value": [
+    {
+      "rootCause": {
+        "dimension": {
+          "city": "Beijing"
+        }
+      },
+      "path": [
+        "city"
+      ],
+      "score": 0.67,
+      "description": "city = Beijing contributes the most to this anomaly."
+    }
+  ]
+}
+            }
+          },
+          "default": {
+            "description": "Client error or server error (4xx or 5xx)",
+            "schema": {
+              "$ref": "#/definitions/ErrorCode"
+            }
+          }
+        }
+      }
+    },
+    "/dataFeeds": {
+      "get": {
+        "tags": [
+          "DataFeed"
+        ],
+        "summary": "List all data feeds",
+        "operationId": "listDataFeeds",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "dataFeedName",
+            "description": "filter data feed by its name",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "dataSourceType",
+            "description": "filter data feed by its source type",
+            "type": "string",
+            "enum": [
+              "AzureApplicationInsights",
+              "AzureBlob",
+              "AzureCosmosDB",
+              "AzureDataExplorer",
+              "AzureDataLakeStorageGen2",
+              "AzureTable",
+              "Elasticsearch",
+              "HttpRequest",
+              "InfluxDB",
+              "MongoDB",
+              "MySql",
+              "PostgreSql",
+              "SqlServer"
+            ],
+            "x-ms-enum": {
+              "name": "DataSourceType",
+              "modelAsString": true
+            }
+          },
+          {
+            "in": "query",
+            "name": "granularityName",
+            "description": "filter data feed by its granularity",
+            "type": "string",
+            "enum": [
+              "Yearly",
+              "Monthly",
+              "Weekly",
+              "Daily",
+              "Hourly",
+              "Minutely",
+              "Secondly",
+              "Custom"
+            ],
+            "x-ms-enum": {
+              "name": "Granularity",
+              "modelAsString": true
+            }
+          },
+          {
+            "in": "query",
+            "name": "status",
+            "description": "filter data feed by its status",
+            "type": "string",
+            "enum": [
+              "Active",
+              "Paused"
+            ],
+            "x-ms-enum": {
+              "name": "EntityStatus",
+              "modelAsString": true
+            }
+          },
+          {
+            "in": "query",
+            "name": "creator",
+            "description": "filter data feed by its creator",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$skip",
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "in": "query",
+            "name": "$top",
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/DataFeedList"
+            },
+            "examples": {
+              "application/json": {
+  "@nextLink": "https://localhost/dataFeeds?$skip=1&$top=1",
+  "value": [
+    {
+      "dataSourceParameter": {
+        "connectionString": "Server=your_sql_server,1433;Initial Catalog=your_database;Persist Security Info=False;User ID=your_user;Password=your_password;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;",
+        "query": "select * from your_table where timestamp = @StartTime"
+      },
+      "dataFeedId": "11111111-1111-1111-1111-000000000001",
+      "dataFeedName": "Sample - cost/revenue - city/category",
+      "dataFeedDescription": "This is a sample data feed.",
+      "granularityName": "Daily",
+      "metrics": [
+        {
+          "metricId": "22222222-2222-2222-2222-000000000001",
+          "metricName": "cost",
+          "metricDisplayName": "cost"
+        },
+        {
+          "metricId": "22222222-2222-2222-2222-000000000002",
+          "metricName": "revenue",
+          "metricDisplayName": "revenue"
+        }
+      ],
+      "dimension": [
+        {
+          "dimensionName": "category",
+          "dimensionDisplayName": "category"
+        },
+        {
+          "dimensionName": "city",
+          "dimensionDisplayName": "city"
+        }
+      ],
+      "timestampColumn": "timestamp",
+      "dataStartFrom": "2020-01-01T00:00:00Z",
+      "dataSourceType": "SqlServer",
+      "startOffsetInSeconds": 86400,
+      "maxConcurrency": 5,
+      "minRetryIntervalInSeconds": 3600,
+      "stopRetryAfterInSeconds": 604800,
+      "needRollup": "NeedRollup",
+      "rollUpMethod": "Sum",
+      "allUpIdentification": "__SUM__",
+      "fillMissingPointType": "SmartFilling",
+      "viewMode": "Private",
+      "admins": [
+        "admin@company.example"
+      ],
+      "viewers": [],
+      "isAdmin": true,
+      "creator": "admin@company.example",
+      "status": "Active",
+      "createdTime": "2020-03-01T00:00:00Z"
+    }
+  ]
+}
+            }
+          },
+          "default": {
+            "description": "Client error or server error (4xx or 5xx)",
+            "schema": {
+              "$ref": "#/definitions/ErrorCode"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "@nextLink"
+        }
+      },
+      "post": {
+        "tags": [
+          "DataFeed"
+        ],
+        "summary": "Create a new data feed",
+        "operationId": "createDataFeed",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "parameters to create a data feed",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DataFeedDetail"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Success",
+            "headers": {
+              "Location": {
+                "description": "Location of the newly created resource.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Client error or server error (4xx or 5xx)",
+            "schema": {
+              "$ref": "#/definitions/ErrorCode"
+            }
+          }
+        }
+      }
+    },
+    "/dataFeeds/{dataFeedId}": {
+      "get": {
+        "tags": [
+          "DataFeed"
+        ],
+        "summary": "Get a data feed by its id",
+        "operationId": "getDataFeedById",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "dataFeedId",
+            "description": "The data feed unique id",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/DataFeedDetail"
+            },
+            "examples": {
+              "application/json": {
+  "dataSourceParameter": {
+    "connectionString": "Server=your_sql_server,1433;Initial Catalog=your_database;Persist Security Info=False;User ID=your_user;Password=your_password;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;",
+    "query": "select * from your_table where timestamp = @StartTime"
+  },
+  "dataFeedId": "11111111-1111-1111-1111-000000000001",
+  "dataFeedName": "Sample - cost/revenue - city/category",
+  "dataFeedDescription": "This is a sample data feed.",
+  "granularityName": "Daily",
+  "metrics": [
+    {
+      "metricId": "22222222-2222-2222-2222-000000000001",
+      "metricName": "cost",
+      "metricDisplayName": "cost"
+    },
+    {
+      "metricId": "22222222-2222-2222-2222-000000000002",
+      "metricName": "revenue",
+      "metricDisplayName": "revenue"
+    }
+  ],
+  "dimension": [
+    {
+      "dimensionName": "category",
+      "dimensionDisplayName": "category"
+    },
+    {
+      "dimensionName": "city",
+      "dimensionDisplayName": "city"
+    }
+  ],
+  "timestampColumn": "timestamp",
+  "dataStartFrom": "2020-01-01T00:00:00Z",
+  "dataSourceType": "SqlServer",
+  "startOffsetInSeconds": 86400,
+  "maxConcurrency": 5,
+  "minRetryIntervalInSeconds": 3600,
+  "stopRetryAfterInSeconds": 604800,
+  "needRollup": "NeedRollup",
+  "rollUpMethod": "Sum",
+  "allUpIdentification": "__SUM__",
+  "fillMissingPointType": "SmartFilling",
+  "viewMode": "Private",
+  "admins": [
+    "admin@company.example"
+  ],
+  "viewers": [],
+  "isAdmin": true,
+  "creator": "admin@company.example",
+  "status": "Active",
+  "createdTime": "2020-03-01T00:00:00Z"
+}
+            }
+          },
+          "default": {
+            "description": "Client error or server error (4xx or 5xx)",
+            "schema": {
+              "$ref": "#/definitions/ErrorCode"
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "DataFeed"
+        ],
+        "summary": "Update a data feed",
+        "operationId": "updateDataFeed",
+        "consumes": [
+          "application/merge-patch+json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "dataFeedId",
+            "description": "The data feed unique id",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "parameters to update a data feed",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DataFeedDetailPatch"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Success"
+          },
+          "default": {
+            "description": "Client error or server error (4xx or 5xx)",
+            "schema": {
+              "$ref": "#/definitions/ErrorCode"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "DataFeed"
+        ],
+        "summary": "Delete a data feed",
+        "operationId": "deleteDataFeed",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "dataFeedId",
+            "description": "The data feed unique id",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "The resource is deleted successfully or does not exist."
+          },
+          "default": {
+            "description": "Client error or server error (4xx or 5xx)",
+            "schema": {
+              "$ref": "#/definitions/ErrorCode"
+            }
+          }
+        }
+      }
+    },
+    "/feedback/metric/{feedbackId}": {
+      "get": {
+        "tags": [
+          "Feedback"
+        ],
+        "summary": "Get a metric feedback by its id",
+        "operationId": "getMetricFeedback",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "feedbackId",
+            "description": "",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/MetricFeedback"
+            },
+            "examples": {
+              "application/json": {
+  "startTime": "2020-01-01T00:00:00Z",
+  "endTime": "2020-01-01T00:00:00Z",
+  "value": {
+    "anomalyValue": "NotAnomaly"
+  },
+  "anomalyDetectionConfigurationId": "00000000-0000-0000-0000-000000000000",
+  "anomalyDetectionConfigurationSnapshot": {
+    "anomalyDetectionConfigurationId": "33333333-3333-3333-3333-000000000001",
+    "name": "Anomaly detection configuration name",
+    "description": "Anomaly detection configuration description",
+    "metricId": "22222222-2222-2222-2222-000000000001",
+    "wholeMetricConfiguration": {
+      "conditionOperator": "AND",
+      "smartDetectionCondition": {
+        "sensitivity": 91.0,
+        "anomalyDetectorDirection": "Both",
+        "suppressCondition": {
+          "minNumber": 1,
+          "minRatio": 100.0
+        }
+      },
+      "hardThresholdCondition": {
+        "lowerBound": 1.0,
+        "upperBound": 100.0,
+        "anomalyDetectorDirection": "Both",
+        "suppressCondition": {
+          "minNumber": 1,
+          "minRatio": 100.0
+        }
+      },
+      "changeThresholdCondition": {
+        "changePercentage": 5.0,
+        "shiftPoint": 1,
+        "withinRange": false,
+        "anomalyDetectorDirection": "Both",
+        "suppressCondition": {
+          "minNumber": 1,
+          "minRatio": 100.0
+        }
+      }
+    },
+    "dimensionGroupOverrideConfigurations": [
+      {
+        "group": {
+          "dimension": {
+            "city": "Beijing"
+          }
+        },
+        "conditionOperator": "AND",
+        "smartDetectionCondition": {
+          "sensitivity": 91.0,
+          "anomalyDetectorDirection": "Both",
+          "suppressCondition": {
+            "minNumber": 1,
+            "minRatio": 100.0
+          }
+        },
+        "hardThresholdCondition": {
+          "lowerBound": 1.0,
+          "upperBound": 100.0,
+          "anomalyDetectorDirection": "Both",
+          "suppressCondition": {
+            "minNumber": 1,
+            "minRatio": 100.0
+          }
+        },
+        "changeThresholdCondition": {
+          "changePercentage": 5.0,
+          "shiftPoint": 1,
+          "withinRange": false,
+          "anomalyDetectorDirection": "Both",
+          "suppressCondition": {
+            "minNumber": 1,
+            "minRatio": 100.0
+          }
+        }
+      }
+    ],
+    "seriesOverrideConfigurations": [
+      {
+        "series": {
+          "dimension": {
+            "category": "Jewelry",
+            "city": "Beijing"
+          }
+        },
+        "conditionOperator": "AND",
+        "smartDetectionCondition": {
+          "sensitivity": 91.0,
+          "anomalyDetectorDirection": "Both",
+          "suppressCondition": {
+            "minNumber": 1,
+            "minRatio": 100.0
+          }
+        },
+        "hardThresholdCondition": {
+          "lowerBound": 1.0,
+          "upperBound": 100.0,
+          "anomalyDetectorDirection": "Both",
+          "suppressCondition": {
+            "minNumber": 1,
+            "minRatio": 100.0
+          }
+        },
+        "changeThresholdCondition": {
+          "changePercentage": 5.0,
+          "shiftPoint": 1,
+          "withinRange": false,
+          "anomalyDetectorDirection": "Both",
+          "suppressCondition": {
+            "minNumber": 1,
+            "minRatio": 100.0
+          }
+        }
+      }
+    ]
+  },
+  "feedbackId": "99999999-9999-9999-9999-000000000001",
+  "createdTime": "2020-03-01T00:00:00Z",
+  "userPrincipal": "viewer@company.example",
+  "metricId": "22222222-2222-2222-2222-000000000001",
+  "dimensionFilter": {
+    "dimension": {
+      "city": "Beijing"
+    }
+  },
+  "feedbackType": "Anomaly"
+}
+            }
+          },
+          "default": {
+            "description": "Client error or server error (4xx or 5xx)",
+            "schema": {
+              "$ref": "#/definitions/ErrorCode"
+            }
+          }
+        }
+      }
+    },
+    "/feedback/metric/query": {
+      "post": {
+        "tags": [
+          "Feedback"
+        ],
+        "summary": "List feedback on the given metric",
+        "operationId": "listMetricFeedbacks",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "$skip",
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "in": "query",
+            "name": "$top",
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "metric feedback filter",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/MetricFeedbackFilter"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/MetricFeedbackList"
+            },
+            "examples": {
+              "application/json": {
+  "@nextLink": "https://localhost/feedback?$skip=1&$top=1",
+  "value": [
+    {
+      "startTime": "2020-01-01T00:00:00Z",
+      "endTime": "2020-01-01T00:00:00Z",
+      "value": {
+        "anomalyValue": "NotAnomaly"
+      },
+      "anomalyDetectionConfigurationId": "00000000-0000-0000-0000-000000000000",
+      "anomalyDetectionConfigurationSnapshot": {
+        "anomalyDetectionConfigurationId": "33333333-3333-3333-3333-000000000001",
+        "name": "Anomaly detection configuration name",
+        "description": "Anomaly detection configuration description",
+        "metricId": "22222222-2222-2222-2222-000000000001",
+        "wholeMetricConfiguration": {
+          "conditionOperator": "AND",
+          "smartDetectionCondition": {
+            "sensitivity": 91.0,
+            "anomalyDetectorDirection": "Both",
+            "suppressCondition": {
+              "minNumber": 1,
+              "minRatio": 100.0
+            }
+          },
+          "hardThresholdCondition": {
+            "lowerBound": 1.0,
+            "upperBound": 100.0,
+            "anomalyDetectorDirection": "Both",
+            "suppressCondition": {
+              "minNumber": 1,
+              "minRatio": 100.0
+            }
+          },
+          "changeThresholdCondition": {
+            "changePercentage": 5.0,
+            "shiftPoint": 1,
+            "withinRange": false,
+            "anomalyDetectorDirection": "Both",
+            "suppressCondition": {
+              "minNumber": 1,
+              "minRatio": 100.0
+            }
+          }
+        },
+        "dimensionGroupOverrideConfigurations": [
+          {
+            "group": {
+              "dimension": {
+                "city": "Beijing"
+              }
+            },
+            "conditionOperator": "AND",
+            "smartDetectionCondition": {
+              "sensitivity": 91.0,
+              "anomalyDetectorDirection": "Both",
+              "suppressCondition": {
+                "minNumber": 1,
+                "minRatio": 100.0
+              }
+            },
+            "hardThresholdCondition": {
+              "lowerBound": 1.0,
+              "upperBound": 100.0,
+              "anomalyDetectorDirection": "Both",
+              "suppressCondition": {
+                "minNumber": 1,
+                "minRatio": 100.0
+              }
+            },
+            "changeThresholdCondition": {
+              "changePercentage": 5.0,
+              "shiftPoint": 1,
+              "withinRange": false,
+              "anomalyDetectorDirection": "Both",
+              "suppressCondition": {
+                "minNumber": 1,
+                "minRatio": 100.0
+              }
+            }
+          }
+        ],
+        "seriesOverrideConfigurations": [
+          {
+            "series": {
+              "dimension": {
+                "category": "Jewelry",
+                "city": "Beijing"
+              }
+            },
+            "conditionOperator": "AND",
+            "smartDetectionCondition": {
+              "sensitivity": 91.0,
+              "anomalyDetectorDirection": "Both",
+              "suppressCondition": {
+                "minNumber": 1,
+                "minRatio": 100.0
+              }
+            },
+            "hardThresholdCondition": {
+              "lowerBound": 1.0,
+              "upperBound": 100.0,
+              "anomalyDetectorDirection": "Both",
+              "suppressCondition": {
+                "minNumber": 1,
+                "minRatio": 100.0
+              }
+            },
+            "changeThresholdCondition": {
+              "changePercentage": 5.0,
+              "shiftPoint": 1,
+              "withinRange": false,
+              "anomalyDetectorDirection": "Both",
+              "suppressCondition": {
+                "minNumber": 1,
+                "minRatio": 100.0
+              }
+            }
+          }
+        ]
+      },
+      "feedbackId": "99999999-9999-9999-9999-000000000001",
+      "createdTime": "2020-03-01T00:00:00Z",
+      "userPrincipal": "viewer@company.example",
+      "metricId": "22222222-2222-2222-2222-000000000001",
+      "dimensionFilter": {
+        "dimension": {
+          "city": "Beijing"
+        }
+      },
+      "feedbackType": "Anomaly"
+    }
+  ]
+}
+            }
+          },
+          "default": {
+            "description": "Client error or server error (4xx or 5xx)",
+            "schema": {
+              "$ref": "#/definitions/ErrorCode"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "@nextLink"
+        }
+      }
+    },
+    "/feedback/metric": {
+      "post": {
+        "tags": [
+          "Feedback"
+        ],
+        "summary": "Create a new metric feedback",
+        "operationId": "createMetricFeedback",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "metric feedback",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/MetricFeedback"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Success",
+            "headers": {
+              "Location": {
+                "description": "Location of the newly created resource.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Client error or server error (4xx or 5xx)",
+            "schema": {
+              "$ref": "#/definitions/ErrorCode"
+            }
+          }
+        }
+      }
+    },
+    "/hooks": {
+      "get": {
+        "tags": [
+          "Hook"
+        ],
+        "summary": "List all hooks",
+        "operationId": "listHooks",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "hookName",
+            "description": "filter hook by its name",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$skip",
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "in": "query",
+            "name": "$top",
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/HookList"
+            },
+            "examples": {
+              "application/json": {
+  "@nextLink": "https://localhost/hooks?$skip=1&$top=1",
+  "value": [
+    {
+      "hookParameter": {
+        "endpoint": "https://localhost/demo/post"
+      },
+      "hookId": "00000000-0000-0000-0000-000000000001",
+      "hookName": "A webhook",
+      "hookType": "Webhook",
+      "description": "This is a webhook.",
+      "externalLink": "",
+      "admins": [
+        "admin@company.example"
+      ]
+    }
+  ]
+}
+            }
+          },
+          "default": {
+            "description": "Client error or server error (4xx or 5xx)",
+            "schema": {
+              "$ref": "#/definitions/ErrorCode"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "@nextLink"
+        }
+      },
+      "post": {
+        "tags": [
+          "Hook"
+        ],
+        "summary": "Create a new hook",
+        "operationId": "createHook",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Create hook request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/HookInfo"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Success",
+            "headers": {
+              "Location": {
+                "description": "Location of the newly created resource.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Client error or server error (4xx or 5xx)",
+            "schema": {
+              "$ref": "#/definitions/ErrorCode"
+            }
+          }
+        }
+      }
+    },
+    "/hooks/{hookId}": {
+      "get": {
+        "tags": [
+          "Hook"
+        ],
+        "summary": "Get a hook by its id",
+        "operationId": "getHook",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "hookId",
+            "description": "Hook unique ID",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/HookInfo"
+            },
+            "examples": {
+              "application/json": {
+  "hookParameter": {
+    "endpoint": "https://localhost/demo/post"
+  },
+  "hookId": "00000000-0000-0000-0000-000000000001",
+  "hookName": "A webhook",
+  "hookType": "Webhook",
+  "description": "This is a webhook.",
+  "externalLink": "",
+  "admins": [
+    "admin@company.example"
+  ]
+}
+            }
+          },
+          "default": {
+            "description": "Client error or server error (4xx or 5xx)",
+            "schema": {
+              "$ref": "#/definitions/ErrorCode"
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Hook"
+        ],
+        "summary": "Update a hook",
+        "operationId": "updateHook",
+        "consumes": [
+          "application/merge-patch+json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "hookId",
+            "description": "Hook unique ID",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Update hook request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/HookInfoPatch"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Success"
+          },
+          "default": {
+            "description": "Client error or server error (4xx or 5xx)",
+            "schema": {
+              "$ref": "#/definitions/ErrorCode"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Hook"
+        ],
+        "summary": "Delete a hook",
+        "operationId": "deleteHook",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "hookId",
+            "description": "Hook unique ID",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "The resource is deleted successfully or does not exist."
+          },
+          "default": {
+            "description": "Client error or server error (4xx or 5xx)",
+            "schema": {
+              "$ref": "#/definitions/ErrorCode"
+            }
+          }
+        }
+      }
+    },
+    "/dataFeeds/{dataFeedId}/ingestionStatus/query": {
+      "post": {
+        "tags": [
+          "IngestionStatus"
+        ],
+        "summary": "Get data ingestion status by data feed",
+        "operationId": "getDataFeedIngestionStatus",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "dataFeedId",
+            "description": "The data feed unique id",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "in": "query",
+            "name": "$skip",
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "in": "query",
+            "name": "$top",
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "The query time range",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/IngestionStatusQueryOptions"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/IngestionStatusList"
+            },
+            "examples": {
+              "application/json": {
+  "@nextLink": "https://localhost/dataFeeds/01234567-8901-2345-6789-012345678901/ingestionStatus/query?$skip=2&$top=2",
+  "value": [
+    {
+      "timestamp": "2020-01-01T00:00:00Z",
+      "status": "Succeeded",
+      "message": ""
+    },
+    {
+      "timestamp": "2020-01-02T00:00:00Z",
+      "status": "Succeeded",
+      "message": ""
+    }
+  ]
+}
+            }
+          },
+          "default": {
+            "description": "Client error or server error (4xx or 5xx)",
+            "schema": {
+              "$ref": "#/definitions/ErrorCode"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "@nextLink"
+        }
+      }
+    },
+    "/dataFeeds/{dataFeedId}/ingestionProgress/reset": {
+      "post": {
+        "tags": [
+          "IngestionStatus"
+        ],
+        "summary": "Reset data ingestion status by data feed to backfill data",
+        "operationId": "resetDataFeedIngestionStatus",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "dataFeedId",
+            "description": "The data feed unique id",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "The backfill time range",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/IngestionProgressResetOptions"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Success"
+          },
+          "default": {
+            "description": "Client error or server error (4xx or 5xx)",
+            "schema": {
+              "$ref": "#/definitions/ErrorCode"
+            }
+          }
+        }
+      }
+    },
+    "/dataFeeds/{dataFeedId}/ingestionProgress": {
+      "get": {
+        "tags": [
+          "IngestionStatus"
+        ],
+        "summary": "Get data last success ingestion job timestamp by data feed",
+        "operationId": "getIngestionProgress",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "dataFeedId",
+            "description": "The data feed unique id",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/DataFeedIngestionProgress"
+            },
+            "examples": {
+              "application/json": {
+  "latestSuccessTimestamp": "2020-01-30T00:00:00Z",
+  "latestActiveTimestamp": "2020-01-31T00:00:00Z"
+}
+            }
+          },
+          "default": {
+            "description": "Client error or server error (4xx or 5xx)",
+            "schema": {
+              "$ref": "#/definitions/ErrorCode"
+            }
+          }
+        }
+      }
+    },
+    "/metrics/{metricId}/data/query": {
+      "post": {
+        "tags": [
+          "Metric"
+        ],
+        "summary": "Get time series data from metric",
+        "operationId": "getMetricData",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "metricId",
+            "description": "metric unique id",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "query time series data condition",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/MetricDataQueryOptions"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/MetricDataList"
+            },
+            "examples": {
+              "application/json": {
+  "value": [
+    {
+      "id": {
+        "metricId": "22222222-2222-2222-2222-000000000001",
+        "dimension": {
+          "category": "__SUM__",
+          "city": "Beijing"
+        }
+      },
+      "timestampList": [
+        "2020-01-01T00:00:00Z",
+        "2020-01-02T00:00:00Z"
+      ],
+      "valueList": [
+        2.718281828459045,
+        3.141592653589793
+      ]
+    }
+  ]
+}
+            }
+          },
+          "default": {
+            "description": "Client error or server error (4xx or 5xx)",
+            "schema": {
+              "$ref": "#/definitions/ErrorCode"
+            }
+          }
+        }
+      }
+    },
+    "/metrics/{metricId}/series/query": {
+      "post": {
+        "tags": [
+          "Metric"
+        ],
+        "summary": "List series (dimension combinations) from metric",
+        "operationId": "getMetricSeries",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "metricId",
+            "description": "metric unique id",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "in": "query",
+            "name": "$skip",
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "in": "query",
+            "name": "$top",
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "filter to query series",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/MetricSeriesQueryOptions"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/MetricSeriesList"
+            },
+            "examples": {
+              "application/json": {
+  "@nextLink": "https://localhost/metrics/22222222-2222-2222-2222-000000000001/series/query?$skip=2&$top=2",
+  "value": [
+    {
+      "metricId": "22222222-2222-2222-2222-000000000001",
+      "dimension": {
+        "category": "__SUM__",
+        "city": "Beijing"
+      }
+    },
+    {
+      "metricId": "22222222-2222-2222-2222-000000000001",
+      "dimension": {
+        "category": "Jewelry",
+        "city": "Beijing"
+      }
+    }
+  ]
+}
+            }
+          },
+          "default": {
+            "description": "Client error or server error (4xx or 5xx)",
+            "schema": {
+              "$ref": "#/definitions/ErrorCode"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "@nextLink"
+        }
+      }
+    },
+    "/metrics/{metricId}/dimension/query": {
+      "post": {
+        "tags": [
+          "Metric"
+        ],
+        "summary": "List dimension from certain metric",
+        "operationId": "getMetricDimension",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "metricId",
+            "description": "metric unique id",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "in": "query",
+            "name": "$skip",
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "in": "query",
+            "name": "$top",
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "query dimension option",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/MetricDimensionQueryOptions"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/MetricDimensionList"
+            },
+            "examples": {
+              "application/json": {
+  "@nextLink": "https://localhost/metrics/22222222-2222-2222-2222-000000000001/dimension/query?$skip=2&$top=2",
+  "value": [
+    "__SUM__",
+    "Beijing"
+  ]
+}
+            }
+          },
+          "default": {
+            "description": "Client error or server error (4xx or 5xx)",
+            "schema": {
+              "$ref": "#/definitions/ErrorCode"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "@nextLink"
+        }
+      }
+    },
+    "/metrics/{metricId}/enrichment/anomalyDetection/configurations": {
+      "get": {
+        "tags": [
+          "Metric"
+        ],
+        "summary": "Query all anomaly detection configurations for specific metric",
+        "operationId": "getAnomalyDetectionConfigurationsByMetric",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "metricId",
+            "description": "metric unique id",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/AnomalyDetectionConfigurationList"
+            },
+            "examples": {
+              "application/json": {
+  "value": [
+    {
+      "anomalyDetectionConfigurationId": "33333333-3333-3333-3333-000000000001",
+      "name": "Anomaly detection configuration name",
+      "description": "Anomaly detection configuration description",
+      "metricId": "22222222-2222-2222-2222-000000000001",
+      "wholeMetricConfiguration": {
+        "conditionOperator": "AND",
+        "smartDetectionCondition": {
+          "sensitivity": 91.0,
+          "anomalyDetectorDirection": "Both",
+          "suppressCondition": {
+            "minNumber": 1,
+            "minRatio": 100.0
+          }
+        },
+        "hardThresholdCondition": {
+          "lowerBound": 1.0,
+          "upperBound": 100.0,
+          "anomalyDetectorDirection": "Both",
+          "suppressCondition": {
+            "minNumber": 1,
+            "minRatio": 100.0
+          }
+        },
+        "changeThresholdCondition": {
+          "changePercentage": 5.0,
+          "shiftPoint": 1,
+          "withinRange": false,
+          "anomalyDetectorDirection": "Both",
+          "suppressCondition": {
+            "minNumber": 1,
+            "minRatio": 100.0
+          }
+        }
+      },
+      "dimensionGroupOverrideConfigurations": [
+        {
+          "group": {
+            "dimension": {
+              "city": "Beijing"
+            }
+          },
+          "conditionOperator": "AND",
+          "smartDetectionCondition": {
+            "sensitivity": 91.0,
+            "anomalyDetectorDirection": "Both",
+            "suppressCondition": {
+              "minNumber": 1,
+              "minRatio": 100.0
+            }
+          },
+          "hardThresholdCondition": {
+            "lowerBound": 1.0,
+            "upperBound": 100.0,
+            "anomalyDetectorDirection": "Both",
+            "suppressCondition": {
+              "minNumber": 1,
+              "minRatio": 100.0
+            }
+          },
+          "changeThresholdCondition": {
+            "changePercentage": 5.0,
+            "shiftPoint": 1,
+            "withinRange": false,
+            "anomalyDetectorDirection": "Both",
+            "suppressCondition": {
+              "minNumber": 1,
+              "minRatio": 100.0
+            }
+          }
+        }
+      ],
+      "seriesOverrideConfigurations": [
+        {
+          "series": {
+            "dimension": {
+              "category": "Jewelry",
+              "city": "Beijing"
+            }
+          },
+          "conditionOperator": "AND",
+          "smartDetectionCondition": {
+            "sensitivity": 91.0,
+            "anomalyDetectorDirection": "Both",
+            "suppressCondition": {
+              "minNumber": 1,
+              "minRatio": 100.0
+            }
+          },
+          "hardThresholdCondition": {
+            "lowerBound": 1.0,
+            "upperBound": 100.0,
+            "anomalyDetectorDirection": "Both",
+            "suppressCondition": {
+              "minNumber": 1,
+              "minRatio": 100.0
+            }
+          },
+          "changeThresholdCondition": {
+            "changePercentage": 5.0,
+            "shiftPoint": 1,
+            "withinRange": false,
+            "anomalyDetectorDirection": "Both",
+            "suppressCondition": {
+              "minNumber": 1,
+              "minRatio": 100.0
+            }
+          }
+        }
+      ]
+    }
+  ]
+}
+            }
+          },
+          "default": {
+            "description": "Client error or server error (4xx or 5xx)",
+            "schema": {
+              "$ref": "#/definitions/ErrorCode"
+            }
+          }
+        }
+      }
+    },
+    "/metrics/{metricId}/status/enrichment/anomalyDetection/query": {
+      "post": {
+        "tags": [
+          "Metric"
+        ],
+        "summary": "Query anomaly detection status",
+        "operationId": "getEnrichmentStatusByMetric",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "metricId",
+            "description": "metric unique id",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "in": "query",
+            "name": "$skip",
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "in": "query",
+            "name": "$top",
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "query options",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/EnrichmentStatusQueryOption"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/EnrichmentStatusList"
+            },
+            "examples": {
+              "application/json": {
+  "@nextLink": "https://localhost/metrics/22222222-2222-2222-2222-000000000001/status/enrichment/anomalyDetection/query?$skip=2&$top=2",
+  "value": [
+    {
+      "timestamp": "2020-01-01T00:00:00Z",
+      "status": "Succeeded",
+      "message": ""
+    },
+    {
+      "timestamp": "2020-01-02T00:00:00Z",
+      "status": "Succeeded",
+      "message": ""
+    }
+  ]
+}
+            }
+          },
+          "default": {
+            "description": "Client error or server error (4xx or 5xx)",
+            "schema": {
+              "$ref": "#/definitions/ErrorCode"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "@nextLink"
+        }
+      }
+    }
+  },
+  "definitions": {
+    "UsageStats": {
+      "type": "object",
+      "properties": {
+        "timestamp": {
+          "format": "date-time",
+          "description": "The timestamp of the stats",
+          "type": "string",
+          "readOnly": true
+        },
+        "activeSeriesCount": {
+          "format": "int32",
+          "description": "The active series count",
+          "type": "integer",
+          "readOnly": true
+        },
+        "allSeriesCount": {
+          "format": "int32",
+          "description": "All series count under non deleted data feed",
+          "type": "integer",
+          "readOnly": true
+        },
+        "metricsCount": {
+          "format": "int32",
+          "description": "The metrics count under non deleted data feed",
+          "type": "integer",
+          "readOnly": true
+        },
+        "datafeedCount": {
+          "format": "int32",
+          "description": "The count of non deleted data feed",
+          "type": "integer",
+          "readOnly": true
+        }
+      }
+    },
+    "ErrorCode": {
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string"
+        },
+        "code": {
+          "type": "string"
+        }
+      }
+    },
+    "DimensionGroupIdentity": {
+      "required": [
+        "dimension"
+      ],
+      "type": "object",
+      "properties": {
+        "dimension": {
+          "description": "dimension specified for series group",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "TopNGroupScope": {
+      "required": [
+        "minTopCount",
+        "period",
+        "top"
+      ],
+      "type": "object",
+      "properties": {
+        "top": {
+          "format": "int32",
+          "description": "top N, value range : [1, +∞)",
+          "type": "integer"
+        },
+        "period": {
+          "format": "int32",
+          "description": "point count used to look back, value range : [1, +∞)",
+          "type": "integer"
+        },
+        "minTopCount": {
+          "format": "int32",
+          "description": "min count should be in top N, value range : [1, +∞)\r\n\r\nshould be less than or equal to period",
+          "type": "integer"
+        }
+      }
+    },
+    "SeverityCondition": {
+      "required": [
+        "maxAlertSeverity",
+        "minAlertSeverity"
+      ],
+      "type": "object",
+      "properties": {
+        "minAlertSeverity": {
+          "description": "min alert severity",
+          "enum": [
+            "Low",
+            "Medium",
+            "High"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "Severity",
+            "modelAsString": true
+          }
+        },
+        "maxAlertSeverity": {
+          "description": "max alert severity",
+          "enum": [
+            "Low",
+            "Medium",
+            "High"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "Severity",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "AlertSnoozeCondition": {
+      "required": [
+        "autoSnooze",
+        "onlyForSuccessive",
+        "snoozeScope"
+      ],
+      "type": "object",
+      "properties": {
+        "autoSnooze": {
+          "format": "int32",
+          "description": "snooze point count, value range : [0, +∞)",
+          "type": "integer"
+        },
+        "snoozeScope": {
+          "description": "snooze scope",
+          "enum": [
+            "Metric",
+            "Series"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "SnoozeScope",
+            "modelAsString": true
+          }
+        },
+        "onlyForSuccessive": {
+          "description": "only snooze for successive anomalies",
+          "type": "boolean"
+        }
+      }
+    },
+    "ValueCondition": {
+      "required": [
+        "direction"
+      ],
+      "type": "object",
+      "properties": {
+        "lower": {
+          "format": "double",
+          "description": "lower bound\r\n\r\nshould be specified when direction is Both or Down",
+          "type": "number"
+        },
+        "upper": {
+          "format": "double",
+          "description": "upper bound\r\n\r\nshould be specified when direction is Both or Up",
+          "type": "number"
+        },
+        "direction": {
+          "description": "value filter direction",
+          "enum": [
+            "Both",
+            "Down",
+            "Up"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "Direction",
+            "modelAsString": true
+          }
+        },
+        "metricId": {
+          "format": "uuid",
+          "description": "the other metric unique id used for value filter",
+          "type": "string"
+        },
+        "triggerForMissing": {
+          "description": "trigger alert when the corresponding point is missing in the other metric\r\n\r\nshould be specified only when using other metric to filter",
+          "type": "boolean"
+        }
+      }
+    },
+    "MetricAlertingConfiguration": {
+      "required": [
+        "anomalyDetectionConfigurationId",
+        "anomalyScopeType"
+      ],
+      "type": "object",
+      "properties": {
+        "anomalyDetectionConfigurationId": {
+          "format": "uuid",
+          "description": "Anomaly detection configuration unique id",
+          "type": "string"
+        },
+        "anomalyScopeType": {
+          "description": "Anomaly scope",
+          "enum": [
+            "All",
+            "Dimension",
+            "TopN"
+          ],
+          "type": "string",
+          "example": "All",
+          "x-ms-enum": {
+            "name": "AnomalyScope",
+            "modelAsString": true
+          }
+        },
+        "negationOperation": {
+          "description": "Negation operation",
+          "type": "boolean"
+        },
+        "dimensionAnomalyScope": {
+          "$ref": "#/definitions/DimensionGroupIdentity"
+        },
+        "topNAnomalyScope": {
+          "$ref": "#/definitions/TopNGroupScope"
+        },
+        "severityFilter": {
+          "$ref": "#/definitions/SeverityCondition"
+        },
+        "snoozeFilter": {
+          "$ref": "#/definitions/AlertSnoozeCondition"
+        },
+        "valueFilter": {
+          "$ref": "#/definitions/ValueCondition"
+        }
+      }
+    },
+    "AnomalyAlertingConfiguration": {
+      "required": [
+        "hookIds",
+        "metricAlertingConfigurations",
+        "name"
+      ],
+      "type": "object",
+      "properties": {
+        "anomalyAlertingConfigurationId": {
+          "format": "uuid",
+          "description": "anomaly alerting configuration unique id",
+          "type": "string",
+          "readOnly": true
+        },
+        "name": {
+          "description": "anomaly alerting configuration name",
+          "type": "string"
+        },
+        "description": {
+          "description": "anomaly alerting configuration description",
+          "type": "string"
+        },
+        "crossMetricsOperator": {
+          "description": "cross metrics operator\r\n\r\nshould be specified when setting up multiple metric alerting configurations",
+          "enum": [
+            "AND",
+            "OR",
+            "XOR"
+          ],
+          "type": "string"
+        },
+        "hookIds": {
+          "description": "hook unique ids",
+          "uniqueItems": true,
+          "type": "array",
+          "items": {
+            "format": "uuid",
+            "type": "string"
+          }
+        },
+        "metricAlertingConfigurations": {
+          "description": "Anomaly alerting configurations",
+          "uniqueItems": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MetricAlertingConfiguration"
+          }
+        }
+      }
+    },
+    "AnomalyAlertingConfigurationPatch": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Anomaly alerting configuration name",
+          "type": "string"
+        },
+        "description": {
+          "description": "anomaly alerting configuration description",
+          "type": "string"
+        },
+        "crossMetricsOperator": {
+          "description": "cross metrics operator",
+          "enum": [
+            "AND",
+            "OR",
+            "XOR"
+          ],
+          "type": "string"
+        },
+        "hookIds": {
+          "description": "hook unique ids",
+          "uniqueItems": true,
+          "type": "array",
+          "items": {
+            "format": "uuid",
+            "type": "string"
+          }
+        },
+        "metricAlertingConfigurations": {
+          "description": "Anomaly alerting configurations",
+          "uniqueItems": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MetricAlertingConfiguration"
+          }
+        }
+      }
+    },
+    "AlertingResultQuery": {
+      "required": [
+        "endTime",
+        "startTime",
+        "timeMode"
+      ],
+      "type": "object",
+      "properties": {
+        "startTime": {
+          "format": "date-time",
+          "description": "start time",
+          "type": "string"
+        },
+        "endTime": {
+          "format": "date-time",
+          "description": "end time",
+          "type": "string"
+        },
+        "timeMode": {
+          "description": "time mode",
+          "enum": [
+            "AnomalyTime",
+            "CreatedTime",
+            "ModifiedTime"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "TimeMode",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "AlertResult": {
+      "type": "object",
+      "properties": {
+        "alertId": {
+          "description": "alert id",
+          "type": "string",
+          "readOnly": true
+        },
+        "timestamp": {
+          "format": "date-time",
+          "description": "anomaly time",
+          "type": "string",
+          "readOnly": true
+        },
+        "createdTime": {
+          "format": "date-time",
+          "description": "created time",
+          "type": "string",
+          "readOnly": true
+        },
+        "modifiedTime": {
+          "format": "date-time",
+          "description": "modified time",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "AlertResultList": {
+      "required": [
+        "@nextLink",
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "@nextLink": {
+          "type": "string"
+        },
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AlertResult"
+          }
+        }
+      }
+    },
+    "AnomalyProperty": {
+      "required": [
+        "anomalySeverity"
+      ],
+      "type": "object",
+      "properties": {
+        "anomalySeverity": {
+          "description": "anomaly severity",
+          "enum": [
+            "Low",
+            "Medium",
+            "High"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "Severity",
+            "modelAsString": true
+          }
+        },
+        "anomalyStatus": {
+          "description": "anomaly status\r\n\r\nonly return for alerting anomaly result",
+          "enum": [
+            "Active",
+            "Resolved"
+          ],
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "AnomalyResult": {
+      "required": [
+        "dimension",
+        "property",
+        "timestamp"
+      ],
+      "type": "object",
+      "properties": {
+        "metricId": {
+          "format": "uuid",
+          "description": "metric unique id\r\n\r\nonly return for alerting anomaly result",
+          "type": "string",
+          "readOnly": true
+        },
+        "anomalyDetectionConfigurationId": {
+          "format": "uuid",
+          "description": "anomaly detection configuration unique id\r\n\r\nonly return for alerting anomaly result",
+          "type": "string",
+          "readOnly": true
+        },
+        "timestamp": {
+          "format": "date-time",
+          "description": "anomaly time",
+          "type": "string"
+        },
+        "createdTime": {
+          "format": "date-time",
+          "description": "created time\r\n\r\nonly return for alerting result",
+          "type": "string",
+          "readOnly": true
+        },
+        "modifiedTime": {
+          "format": "date-time",
+          "description": "modified time\r\n\r\nonly return for alerting result",
+          "type": "string",
+          "readOnly": true
+        },
+        "dimension": {
+          "description": "dimension specified for series",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "property": {
+          "$ref": "#/definitions/AnomalyProperty"
+        }
+      }
+    },
+    "AnomalyResultList": {
+      "required": [
+        "@nextLink",
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "@nextLink": {
+          "type": "string"
+        },
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AnomalyResult"
+          }
+        }
+      }
+    },
+    "SeriesIdentity": {
+      "required": [
+        "dimension"
+      ],
+      "type": "object",
+      "properties": {
+        "dimension": {
+          "description": "dimension specified for series",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "IncidentProperty": {
+      "required": [
+        "maxSeverity"
+      ],
+      "type": "object",
+      "properties": {
+        "maxSeverity": {
+          "description": "max severity of latest anomalies in the incident",
+          "enum": [
+            "Low",
+            "Medium",
+            "High"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "Severity",
+            "modelAsString": true
+          }
+        },
+        "incidentStatus": {
+          "description": "incident status\r\n\r\nonly return for alerting incident result",
+          "enum": [
+            "Active",
+            "Resolved"
+          ],
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "IncidentResult": {
+      "required": [
+        "incidentId",
+        "lastTime",
+        "property",
+        "rootNode",
+        "startTime"
+      ],
+      "type": "object",
+      "properties": {
+        "metricId": {
+          "format": "uuid",
+          "description": "metric unique id\r\n\r\nonly return for alerting incident result",
+          "type": "string",
+          "readOnly": true
+        },
+        "anomalyDetectionConfigurationId": {
+          "format": "uuid",
+          "description": "anomaly detection configuration unique id\r\n\r\nonly return for alerting incident result",
+          "type": "string",
+          "readOnly": true
+        },
+        "incidentId": {
+          "description": "incident id",
+          "type": "string"
+        },
+        "startTime": {
+          "format": "date-time",
+          "description": "incident start time",
+          "type": "string"
+        },
+        "lastTime": {
+          "format": "date-time",
+          "description": "incident last time",
+          "type": "string"
+        },
+        "rootNode": {
+          "$ref": "#/definitions/SeriesIdentity"
+        },
+        "property": {
+          "$ref": "#/definitions/IncidentProperty"
+        }
+      }
+    },
+    "IncidentResultList": {
+      "required": [
+        "@nextLink",
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "@nextLink": {
+          "type": "string"
+        },
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/IncidentResult"
+          }
+        }
+      }
+    },
+    "SuppressCondition": {
+      "required": [
+        "minNumber",
+        "minRatio"
+      ],
+      "type": "object",
+      "properties": {
+        "minNumber": {
+          "format": "int32",
+          "description": "min point number, value range : [1, +∞)",
+          "type": "integer"
+        },
+        "minRatio": {
+          "format": "double",
+          "description": "min point ratio, value range : (0, 100]",
+          "type": "number"
+        }
+      }
+    },
+    "SmartDetectionCondition": {
+      "required": [
+        "anomalyDetectorDirection",
+        "sensitivity",
+        "suppressCondition"
+      ],
+      "type": "object",
+      "properties": {
+        "sensitivity": {
+          "format": "double",
+          "description": "sensitivity, value range : (0, 100]",
+          "type": "number"
+        },
+        "anomalyDetectorDirection": {
+          "description": "detection direction",
+          "enum": [
+            "Both",
+            "Down",
+            "Up"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "AnomalyDetectorDirection",
+            "modelAsString": true
+          }
+        },
+        "suppressCondition": {
+          "$ref": "#/definitions/SuppressCondition"
+        }
+      }
+    },
+    "HardThresholdCondition": {
+      "required": [
+        "anomalyDetectorDirection",
+        "suppressCondition"
+      ],
+      "type": "object",
+      "properties": {
+        "lowerBound": {
+          "format": "double",
+          "description": "lower bound\r\n\r\nshould be specified when anomalyDetectorDirection is Both or Down",
+          "type": "number"
+        },
+        "upperBound": {
+          "format": "double",
+          "description": "upper bound\r\n\r\nshould be specified when anomalyDetectorDirection is Both or Up",
+          "type": "number"
+        },
+        "anomalyDetectorDirection": {
+          "description": "detection direction",
+          "enum": [
+            "Both",
+            "Down",
+            "Up"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "AnomalyDetectorDirection",
+            "modelAsString": true
+          }
+        },
+        "suppressCondition": {
+          "$ref": "#/definitions/SuppressCondition"
+        }
+      }
+    },
+    "ChangeThresholdCondition": {
+      "required": [
+        "anomalyDetectorDirection",
+        "changePercentage",
+        "shiftPoint",
+        "suppressCondition",
+        "withinRange"
+      ],
+      "type": "object",
+      "properties": {
+        "changePercentage": {
+          "format": "double",
+          "description": "change percentage, value range : [0, +∞)",
+          "type": "number"
+        },
+        "shiftPoint": {
+          "format": "int32",
+          "description": "shift point, value range : [1, +∞)",
+          "type": "integer"
+        },
+        "withinRange": {
+          "description": "if the withinRange = true, detected data is abnormal when the value falls in the range, in this case anomalyDetectorDirection must be Both\r\nif the withinRange = false, detected data is abnormal when the value falls out of the range",
+          "type": "boolean"
+        },
+        "anomalyDetectorDirection": {
+          "description": "detection direction",
+          "enum": [
+            "Both",
+            "Down",
+            "Up"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "AnomalyDetectorDirection",
+            "modelAsString": true
+          }
+        },
+        "suppressCondition": {
+          "$ref": "#/definitions/SuppressCondition"
+        }
+      }
+    },
+    "WholeMetricConfiguration": {
+      "type": "object",
+      "properties": {
+        "conditionOperator": {
+          "description": "condition operator\r\n\r\nshould be specified when combining multiple detection conditions",
+          "enum": [
+            "AND",
+            "OR"
+          ],
+          "type": "string"
+        },
+        "smartDetectionCondition": {
+          "$ref": "#/definitions/SmartDetectionCondition"
+        },
+        "hardThresholdCondition": {
+          "$ref": "#/definitions/HardThresholdCondition"
+        },
+        "changeThresholdCondition": {
+          "$ref": "#/definitions/ChangeThresholdCondition"
+        }
+      }
+    },
+    "DimensionGroupConfiguration": {
+      "required": [
+        "group"
+      ],
+      "type": "object",
+      "properties": {
+        "group": {
+          "$ref": "#/definitions/DimensionGroupIdentity"
+        },
+        "conditionOperator": {
+          "description": "condition operator\r\n\r\nshould be specified when combining multiple detection conditions",
+          "enum": [
+            "AND",
+            "OR"
+          ],
+          "type": "string"
+        },
+        "smartDetectionCondition": {
+          "$ref": "#/definitions/SmartDetectionCondition"
+        },
+        "hardThresholdCondition": {
+          "$ref": "#/definitions/HardThresholdCondition"
+        },
+        "changeThresholdCondition": {
+          "$ref": "#/definitions/ChangeThresholdCondition"
+        }
+      }
+    },
+    "SeriesConfiguration": {
+      "required": [
+        "series"
+      ],
+      "type": "object",
+      "properties": {
+        "series": {
+          "$ref": "#/definitions/SeriesIdentity"
+        },
+        "conditionOperator": {
+          "description": "condition operator\r\n\r\nshould be specified when combining multiple detection conditions",
+          "enum": [
+            "AND",
+            "OR"
+          ],
+          "type": "string"
+        },
+        "smartDetectionCondition": {
+          "$ref": "#/definitions/SmartDetectionCondition"
+        },
+        "hardThresholdCondition": {
+          "$ref": "#/definitions/HardThresholdCondition"
+        },
+        "changeThresholdCondition": {
+          "$ref": "#/definitions/ChangeThresholdCondition"
+        }
+      }
+    },
+    "AnomalyDetectionConfiguration": {
+      "required": [
+        "metricId",
+        "name",
+        "wholeMetricConfiguration"
+      ],
+      "type": "object",
+      "properties": {
+        "anomalyDetectionConfigurationId": {
+          "format": "uuid",
+          "description": "anomaly detection configuration unique id",
+          "type": "string",
+          "readOnly": true
+        },
+        "name": {
+          "description": "anomaly detection configuration name",
+          "type": "string"
+        },
+        "description": {
+          "description": "anomaly detection configuration description",
+          "type": "string"
+        },
+        "metricId": {
+          "format": "uuid",
+          "description": "metric unique id",
+          "type": "string"
+        },
+        "wholeMetricConfiguration": {
+          "$ref": "#/definitions/WholeMetricConfiguration"
+        },
+        "dimensionGroupOverrideConfigurations": {
+          "description": "detection configuration for series group",
+          "uniqueItems": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DimensionGroupConfiguration"
+          }
+        },
+        "seriesOverrideConfigurations": {
+          "description": "detection configuration for specific series",
+          "uniqueItems": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SeriesConfiguration"
+          }
+        }
+      }
+    },
+    "AnomalyDetectionConfigurationPatch": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "anomaly detection configuration name",
+          "type": "string"
+        },
+        "description": {
+          "description": "anomaly detection configuration description",
+          "type": "string"
+        },
+        "wholeMetricConfiguration": {
+          "$ref": "#/definitions/WholeMetricConfiguration"
+        },
+        "dimensionGroupOverrideConfigurations": {
+          "description": "detection configuration for series group",
+          "uniqueItems": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DimensionGroupConfiguration"
+          }
+        },
+        "seriesOverrideConfigurations": {
+          "description": "detection configuration for specific series",
+          "uniqueItems": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SeriesConfiguration"
+          }
+        }
+      }
+    },
+    "AnomalyAlertingConfigurationList": {
+      "required": [
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AnomalyAlertingConfiguration"
+          }
+        }
+      }
+    },
+    "DetectionSeriesQuery": {
+      "required": [
+        "endTime",
+        "series",
+        "startTime"
+      ],
+      "type": "object",
+      "properties": {
+        "startTime": {
+          "format": "date-time",
+          "description": "start time",
+          "type": "string"
+        },
+        "endTime": {
+          "format": "date-time",
+          "description": "end time",
+          "type": "string"
+        },
+        "series": {
+          "description": "series",
+          "uniqueItems": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SeriesIdentity"
+          }
+        }
+      }
+    },
+    "SeriesResult": {
+      "required": [
+        "expectedValueList",
+        "isAnomalyList",
+        "lowerBoundaryList",
+        "periodList",
+        "series",
+        "timestampList",
+        "upperBoundaryList",
+        "valueList"
+      ],
+      "type": "object",
+      "properties": {
+        "series": {
+          "$ref": "#/definitions/SeriesIdentity"
+        },
+        "timestampList": {
+          "description": "timestamps of the series",
+          "type": "array",
+          "items": {
+            "format": "date-time",
+            "type": "string"
+          }
+        },
+        "valueList": {
+          "description": "values of the series",
+          "type": "array",
+          "items": {
+            "format": "double",
+            "type": "number"
+          }
+        },
+        "isAnomalyList": {
+          "description": "whether points of the series are anomalies",
+          "type": "array",
+          "items": {
+            "type": "boolean"
+          }
+        },
+        "periodList": {
+          "description": "period calculated on each point of the series",
+          "type": "array",
+          "items": {
+            "format": "int32",
+            "type": "integer"
+          }
+        },
+        "expectedValueList": {
+          "description": "expected values of the series given by smart detector",
+          "type": "array",
+          "items": {
+            "format": "double",
+            "type": "number"
+          }
+        },
+        "lowerBoundaryList": {
+          "description": "lower boundary list of the series given by smart detector",
+          "type": "array",
+          "items": {
+            "format": "double",
+            "type": "number"
+          }
+        },
+        "upperBoundaryList": {
+          "description": "upper boundary list of the series given by smart detector",
+          "type": "array",
+          "items": {
+            "format": "double",
+            "type": "number"
+          }
+        }
+      }
+    },
+    "SeriesResultList": {
+      "required": [
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SeriesResult"
+          }
+        }
+      }
+    },
+    "SeverityFilterCondition": {
+      "required": [
+        "max",
+        "min"
+      ],
+      "type": "object",
+      "properties": {
+        "min": {
+          "description": "min severity",
+          "enum": [
+            "Low",
+            "Medium",
+            "High"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "Severity",
+            "modelAsString": true
+          }
+        },
+        "max": {
+          "description": "max severity",
+          "enum": [
+            "Low",
+            "Medium",
+            "High"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "Severity",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "DetectionAnomalyFilterCondition": {
+      "type": "object",
+      "properties": {
+        "dimensionFilter": {
+          "description": "dimension filter",
+          "uniqueItems": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DimensionGroupIdentity"
+          }
+        },
+        "severityFilter": {
+          "$ref": "#/definitions/SeverityFilterCondition"
+        }
+      }
+    },
+    "DetectionAnomalyResultQuery": {
+      "required": [
+        "endTime",
+        "startTime"
+      ],
+      "type": "object",
+      "properties": {
+        "startTime": {
+          "format": "date-time",
+          "description": "start time",
+          "type": "string"
+        },
+        "endTime": {
+          "format": "date-time",
+          "description": "end time",
+          "type": "string"
+        },
+        "filter": {
+          "$ref": "#/definitions/DetectionAnomalyFilterCondition"
+        }
+      }
+    },
+    "AnomalyDimensionQuery": {
+      "required": [
+        "dimensionName",
+        "endTime",
+        "startTime"
+      ],
+      "type": "object",
+      "properties": {
+        "startTime": {
+          "format": "date-time",
+          "description": "start time",
+          "type": "string"
+        },
+        "endTime": {
+          "format": "date-time",
+          "description": "end time",
+          "type": "string"
+        },
+        "dimensionName": {
+          "description": "dimension to query",
+          "type": "string"
+        },
+        "dimensionFilter": {
+          "$ref": "#/definitions/DimensionGroupIdentity"
+        }
+      }
+    },
+    "AnomalyDimensionList": {
+      "required": [
+        "@nextLink",
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "@nextLink": {
+          "type": "string"
+        },
+        "value": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "DetectionIncidentFilterCondition": {
+      "type": "object",
+      "properties": {
+        "dimensionFilter": {
+          "description": "dimension filter",
+          "uniqueItems": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DimensionGroupIdentity"
+          }
+        }
+      }
+    },
+    "DetectionIncidentResultQuery": {
+      "required": [
+        "endTime",
+        "startTime"
+      ],
+      "type": "object",
+      "properties": {
+        "startTime": {
+          "format": "date-time",
+          "description": "start time",
+          "type": "string"
+        },
+        "endTime": {
+          "format": "date-time",
+          "description": "end time",
+          "type": "string"
+        },
+        "filter": {
+          "$ref": "#/definitions/DetectionIncidentFilterCondition"
+        }
+      }
+    },
+    "RootCause": {
+      "required": [
+        "description",
+        "path",
+        "rootCause",
+        "score"
+      ],
+      "type": "object",
+      "properties": {
+        "rootCause": {
+          "$ref": "#/definitions/DimensionGroupIdentity"
+        },
+        "path": {
+          "description": "drilling down path from query anomaly to root cause",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "score": {
+          "format": "double",
+          "description": "score",
+          "type": "number"
+        },
+        "description": {
+          "description": "description",
+          "type": "string"
+        }
+      }
+    },
+    "RootCauseList": {
+      "required": [
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RootCause"
+          }
+        }
+      }
+    },
+    "AzureApplicationInsightsParameter": {
+      "required": [
+        "apiKey",
+        "applicationId",
+        "azureCloud",
+        "query"
+      ],
+      "type": "object",
+      "properties": {
+        "azureCloud": {
+          "description": "Azure cloud environment",
+          "type": "string"
+        },
+        "applicationId": {
+          "description": "Azure Application Insights ID",
+          "type": "string"
+        },
+        "apiKey": {
+          "description": "API Key",
+          "type": "string"
+        },
+        "query": {
+          "description": "Query",
+          "type": "string"
+        }
+      }
+    },
+    "Metric": {
+      "required": [
+        "metricName"
+      ],
+      "type": "object",
+      "properties": {
+        "metricId": {
+          "format": "uuid",
+          "description": "metric id",
+          "type": "string",
+          "readOnly": true
+        },
+        "metricName": {
+          "description": "metric name",
+          "type": "string"
+        },
+        "metricDisplayName": {
+          "description": "metric display name",
+          "pattern": "[.a-zA-Z0-9_-]+",
+          "type": "string"
+        },
+        "metricDescription": {
+          "description": "metric description",
+          "type": "string"
+        }
+      }
+    },
+    "Dimension": {
+      "required": [
+        "dimensionName"
+      ],
+      "type": "object",
+      "properties": {
+        "dimensionName": {
+          "description": "dimension name",
+          "type": "string"
+        },
+        "dimensionDisplayName": {
+          "description": "dimension display name",
+          "pattern": "[.a-zA-Z0-9_-]+",
+          "type": "string"
+        }
+      }
+    },
+    "DataFeedDetail": {
+      "required": [
+        "dataFeedName",
+        "dataSourceType",
+        "dataStartFrom",
+        "granularityName",
+        "metrics"
+      ],
+      "type": "object",
+      "properties": {
+        "dataSourceType": {
+          "description": "data source type",
+          "enum": [
+            "AzureApplicationInsights",
+            "AzureBlob",
+            "AzureCosmosDB",
+            "AzureDataExplorer",
+            "AzureDataLakeStorageGen2",
+            "AzureTable",
+            "Elasticsearch",
+            "HttpRequest",
+            "InfluxDB",
+            "MongoDB",
+            "MySql",
+            "PostgreSql",
+            "SqlServer"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "DataSourceType",
+            "modelAsString": true
+          }
+        },
+        "dataFeedId": {
+          "format": "uuid",
+          "description": "data feed unique id",
+          "type": "string",
+          "readOnly": true
+        },
+        "dataFeedName": {
+          "description": "data feed name",
+          "type": "string",
+          "example": "dummy data feed name"
+        },
+        "dataFeedDescription": {
+          "description": "data feed description",
+          "type": "string"
+        },
+        "granularityName": {
+          "description": "granularity of the time series",
+          "enum": [
+            "Yearly",
+            "Monthly",
+            "Weekly",
+            "Daily",
+            "Hourly",
+            "Minutely",
+            "Secondly",
+            "Custom"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "Granularity",
+            "modelAsString": true
+          }
+        },
+        "granularityAmount": {
+          "format": "int32",
+          "description": "if granularity is custom,it is required.",
+          "type": "integer"
+        },
+        "metrics": {
+          "description": "measure list",
+          "uniqueItems": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Metric"
+          }
+        },
+        "dimension": {
+          "description": "dimension list",
+          "uniqueItems": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Dimension"
+          }
+        },
+        "timestampColumn": {
+          "description": "user-defined timestamp column. if timestampColumn is null, start time of every time slice will be used as default value.",
+          "type": "string"
+        },
+        "dataStartFrom": {
+          "format": "date-time",
+          "description": "ingestion start time",
+          "type": "string"
+        },
+        "startOffsetInSeconds": {
+          "format": "int64",
+          "description": "the time that the beginning of data ingestion task will delay for every data slice according to this offset.",
+          "default": 0,
+          "type": "integer"
+        },
+        "maxConcurrency": {
+          "format": "int32",
+          "description": "the max concurrency of data ingestion queries against user data source. 0 means no limitation.",
+          "default": -1,
+          "type": "integer"
+        },
+        "minRetryIntervalInSeconds": {
+          "format": "int64",
+          "description": "the min retry interval for failed data ingestion tasks.",
+          "default": -1,
+          "type": "integer"
+        },
+        "stopRetryAfterInSeconds": {
+          "format": "int64",
+          "description": "stop retry data ingestion after the data slice first schedule time in seconds.",
+          "default": -1,
+          "type": "integer"
+        },
+        "needRollup": {
+          "description": "mark if the data feed need rollup",
+          "default": "NeedRollup",
+          "enum": [
+            "NoRollup",
+            "NeedRollup",
+            "AlreadyRollup"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "NeedRollupEnum",
+            "modelAsString": true
+          }
+        },
+        "rollUpMethod": {
+          "description": "roll up method",
+          "enum": [
+            "None",
+            "Sum",
+            "Max",
+            "Min",
+            "Avg",
+            "Count"
+          ],
+          "type": "string"
+        },
+        "rollUpColumns": {
+          "description": "roll up columns",
+          "uniqueItems": true,
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "allUpIdentification": {
+          "description": "the identification value for the row of calculated all-up value.",
+          "type": "string"
+        },
+        "fillMissingPointType": {
+          "description": "the type of fill missing point for anomaly detection",
+          "default": "SmartFilling",
+          "enum": [
+            "SmartFilling",
+            "PreviousValue",
+            "CustomValue",
+            "NoFilling"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "FillMissingPointType",
+            "modelAsString": true
+          }
+        },
+        "fillMissingPointValue": {
+          "format": "double",
+          "description": "the value of fill missing point for anomaly detection",
+          "type": "number"
+        },
+        "viewMode": {
+          "description": "data feed access mode, default is Private",
+          "default": "Private",
+          "enum": [
+            "Private",
+            "Public"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "ViewMode",
+            "modelAsString": true
+          }
+        },
+        "admins": {
+          "description": "data feed administrator",
+          "uniqueItems": true,
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "viewers": {
+          "description": "data feed viewer",
+          "uniqueItems": true,
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "isAdmin": {
+          "description": "the query user is one of data feed administrator or not",
+          "type": "boolean",
+          "readOnly": true
+        },
+        "creator": {
+          "description": "data feed creator",
+          "type": "string",
+          "readOnly": true
+        },
+        "status": {
+          "description": "data feed status",
+          "default": "Active",
+          "enum": [
+            "Active",
+            "Paused"
+          ],
+          "type": "string",
+          "readOnly": true
+        },
+        "createdTime": {
+          "format": "date-time",
+          "description": "data feed created time",
+          "type": "string",
+          "readOnly": true
+        },
+        "actionLinkTemplate": {
+          "description": "action link for alert",
+          "type": "string"
+        }
+      },
+      "discriminator": "dataSourceType"
+    },
+    "AzureApplicationInsightsDataFeed": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataFeedDetail"
+        },
+        {
+          "required": [
+            "dataFeedName",
+            "dataSourceParameter",
+            "dataSourceType",
+            "dataStartFrom",
+            "granularityName",
+            "metrics"
+          ],
+          "type": "object",
+          "properties": {
+            "dataSourceParameter": {
+              "$ref": "#/definitions/AzureApplicationInsightsParameter"
+            }
+          },
+          "x-ms-discriminator-value": "AzureApplicationInsights"
+        }
+      ]
+    },
+    "AzureBlobParameter": {
+      "required": [
+        "blobTemplate",
+        "connectionString",
+        "container"
+      ],
+      "type": "object",
+      "properties": {
+        "connectionString": {
+          "description": "Azure Blob connection string",
+          "type": "string"
+        },
+        "container": {
+          "description": "Container",
+          "type": "string"
+        },
+        "blobTemplate": {
+          "description": "Blob Template",
+          "type": "string"
+        }
+      }
+    },
+    "AzureBlobDataFeed": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataFeedDetail"
+        },
+        {
+          "required": [
+            "dataFeedName",
+            "dataSourceParameter",
+            "dataSourceType",
+            "dataStartFrom",
+            "granularityName",
+            "metrics"
+          ],
+          "type": "object",
+          "properties": {
+            "dataSourceParameter": {
+              "$ref": "#/definitions/AzureBlobParameter"
+            }
+          },
+          "x-ms-discriminator-value": "AzureBlob"
+        }
+      ]
+    },
+    "AzureCosmosDBParameter": {
+      "required": [
+        "collectionId",
+        "connectionString",
+        "database",
+        "sqlQuery"
+      ],
+      "type": "object",
+      "properties": {
+        "connectionString": {
+          "description": "Azure CosmosDB connection string",
+          "type": "string"
+        },
+        "sqlQuery": {
+          "description": "Query script",
+          "type": "string"
+        },
+        "database": {
+          "description": "Database name",
+          "type": "string"
+        },
+        "collectionId": {
+          "description": "Collection id",
+          "type": "string"
+        }
+      }
+    },
+    "AzureCosmosDBDataFeed": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataFeedDetail"
+        },
+        {
+          "required": [
+            "dataFeedName",
+            "dataSourceParameter",
+            "dataSourceType",
+            "dataStartFrom",
+            "granularityName",
+            "metrics"
+          ],
+          "type": "object",
+          "properties": {
+            "dataSourceParameter": {
+              "$ref": "#/definitions/AzureCosmosDBParameter"
+            }
+          },
+          "x-ms-discriminator-value": "AzureCosmosDB"
+        }
+      ]
+    },
+    "SqlSourceParameter": {
+      "required": [
+        "connectionString",
+        "query"
+      ],
+      "type": "object",
+      "properties": {
+        "connectionString": {
+          "description": "Database connection string",
+          "type": "string"
+        },
+        "query": {
+          "description": "Query script",
+          "type": "string"
+        }
+      }
+    },
+    "AzureDataExplorerDataFeed": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataFeedDetail"
+        },
+        {
+          "required": [
+            "dataFeedName",
+            "dataSourceParameter",
+            "dataSourceType",
+            "dataStartFrom",
+            "granularityName",
+            "metrics"
+          ],
+          "type": "object",
+          "properties": {
+            "dataSourceParameter": {
+              "$ref": "#/definitions/SqlSourceParameter"
+            }
+          },
+          "x-ms-discriminator-value": "AzureDataExplorer"
+        }
+      ]
+    },
+    "AzureDataLakeStorageGen2Parameter": {
+      "required": [
+        "accountKey",
+        "accountName",
+        "directoryTemplate",
+        "fileSystemName",
+        "fileTemplate"
+      ],
+      "type": "object",
+      "properties": {
+        "accountName": {
+          "description": "Account name",
+          "type": "string"
+        },
+        "accountKey": {
+          "description": "Account key",
+          "type": "string"
+        },
+        "fileSystemName": {
+          "description": "File system name (Container)",
+          "type": "string"
+        },
+        "directoryTemplate": {
+          "description": "Directory template",
+          "type": "string"
+        },
+        "fileTemplate": {
+          "description": "File template",
+          "type": "string"
+        }
+      }
+    },
+    "AzureDataLakeStorageGen2DataFeed": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataFeedDetail"
+        },
+        {
+          "required": [
+            "dataFeedName",
+            "dataSourceParameter",
+            "dataSourceType",
+            "dataStartFrom",
+            "granularityName",
+            "metrics"
+          ],
+          "type": "object",
+          "properties": {
+            "dataSourceParameter": {
+              "$ref": "#/definitions/AzureDataLakeStorageGen2Parameter"
+            }
+          },
+          "x-ms-discriminator-value": "AzureDataLakeStorageGen2"
+        }
+      ]
+    },
+    "AzureTableParameter": {
+      "required": [
+        "connectionString",
+        "query",
+        "table"
+      ],
+      "type": "object",
+      "properties": {
+        "connectionString": {
+          "description": "Azure Table connection string",
+          "type": "string"
+        },
+        "table": {
+          "description": "Table name",
+          "type": "string"
+        },
+        "query": {
+          "description": "Query script",
+          "type": "string"
+        }
+      }
+    },
+    "AzureTableDataFeed": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataFeedDetail"
+        },
+        {
+          "required": [
+            "dataFeedName",
+            "dataSourceParameter",
+            "dataSourceType",
+            "dataStartFrom",
+            "granularityName",
+            "metrics"
+          ],
+          "type": "object",
+          "properties": {
+            "dataSourceParameter": {
+              "$ref": "#/definitions/AzureTableParameter"
+            }
+          },
+          "x-ms-discriminator-value": "AzureTable"
+        }
+      ]
+    },
+    "ElasticsearchParameter": {
+      "required": [
+        "authHeader",
+        "host",
+        "port",
+        "query"
+      ],
+      "type": "object",
+      "properties": {
+        "host": {
+          "description": "Host",
+          "type": "string"
+        },
+        "port": {
+          "description": "Port",
+          "type": "string"
+        },
+        "authHeader": {
+          "description": "Authorization header",
+          "type": "string"
+        },
+        "query": {
+          "description": "Query",
+          "type": "string"
+        }
+      }
+    },
+    "ElasticsearchDataFeed": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataFeedDetail"
+        },
+        {
+          "required": [
+            "dataFeedName",
+            "dataSourceParameter",
+            "dataSourceType",
+            "dataStartFrom",
+            "granularityName",
+            "metrics"
+          ],
+          "type": "object",
+          "properties": {
+            "dataSourceParameter": {
+              "$ref": "#/definitions/ElasticsearchParameter"
+            }
+          },
+          "x-ms-discriminator-value": "Elasticsearch"
+        }
+      ]
+    },
+    "HttpRequestParameter": {
+      "required": [
+        "httpHeader",
+        "httpMethod",
+        "payload",
+        "url"
+      ],
+      "type": "object",
+      "properties": {
+        "url": {
+          "description": "HTTP URL",
+          "type": "string"
+        },
+        "httpHeader": {
+          "description": "HTTP header",
+          "type": "string"
+        },
+        "httpMethod": {
+          "description": "HTTP method",
+          "type": "string"
+        },
+        "payload": {
+          "description": "HTTP reuqest body",
+          "type": "string"
+        }
+      }
+    },
+    "HttpRequestDataFeed": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataFeedDetail"
+        },
+        {
+          "required": [
+            "dataFeedName",
+            "dataSourceParameter",
+            "dataSourceType",
+            "dataStartFrom",
+            "granularityName",
+            "metrics"
+          ],
+          "type": "object",
+          "properties": {
+            "dataSourceParameter": {
+              "$ref": "#/definitions/HttpRequestParameter"
+            }
+          },
+          "x-ms-discriminator-value": "HttpRequest"
+        }
+      ]
+    },
+    "InfluxDBParameter": {
+      "required": [
+        "connectionString",
+        "database",
+        "password",
+        "query",
+        "userName"
+      ],
+      "type": "object",
+      "properties": {
+        "connectionString": {
+          "description": "InfluxDB connection string",
+          "type": "string"
+        },
+        "database": {
+          "description": "Database name",
+          "type": "string"
+        },
+        "userName": {
+          "description": "Database access user",
+          "type": "string"
+        },
+        "password": {
+          "description": "Database access password",
+          "type": "string"
+        },
+        "query": {
+          "description": "Query script",
+          "type": "string"
+        }
+      }
+    },
+    "InfluxDBDataFeed": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataFeedDetail"
+        },
+        {
+          "required": [
+            "dataFeedName",
+            "dataSourceParameter",
+            "dataSourceType",
+            "dataStartFrom",
+            "granularityName",
+            "metrics"
+          ],
+          "type": "object",
+          "properties": {
+            "dataSourceParameter": {
+              "$ref": "#/definitions/InfluxDBParameter"
+            }
+          },
+          "x-ms-discriminator-value": "InfluxDB"
+        }
+      ]
+    },
+    "MySqlDataFeed": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataFeedDetail"
+        },
+        {
+          "required": [
+            "dataFeedName",
+            "dataSourceParameter",
+            "dataSourceType",
+            "dataStartFrom",
+            "granularityName",
+            "metrics"
+          ],
+          "type": "object",
+          "properties": {
+            "dataSourceParameter": {
+              "$ref": "#/definitions/SqlSourceParameter"
+            }
+          },
+          "x-ms-discriminator-value": "MySql"
+        }
+      ]
+    },
+    "PostgreSqlDataFeed": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataFeedDetail"
+        },
+        {
+          "required": [
+            "dataFeedName",
+            "dataSourceParameter",
+            "dataSourceType",
+            "dataStartFrom",
+            "granularityName",
+            "metrics"
+          ],
+          "type": "object",
+          "properties": {
+            "dataSourceParameter": {
+              "$ref": "#/definitions/SqlSourceParameter"
+            }
+          },
+          "x-ms-discriminator-value": "PostgreSql"
+        }
+      ]
+    },
+    "SQLServerDataFeed": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataFeedDetail"
+        },
+        {
+          "required": [
+            "dataFeedName",
+            "dataSourceParameter",
+            "dataSourceType",
+            "dataStartFrom",
+            "granularityName",
+            "metrics"
+          ],
+          "type": "object",
+          "properties": {
+            "dataSourceParameter": {
+              "$ref": "#/definitions/SqlSourceParameter"
+            }
+          },
+          "x-ms-discriminator-value": "SqlServer"
+        }
+      ]
+    },
+    "MongoDBParameter": {
+      "required": [
+        "command",
+        "connectionString",
+        "database"
+      ],
+      "type": "object",
+      "properties": {
+        "connectionString": {
+          "description": "MongoDB connection string",
+          "type": "string"
+        },
+        "database": {
+          "description": "Database name",
+          "type": "string"
+        },
+        "command": {
+          "description": "Query script",
+          "type": "string"
+        }
+      }
+    },
+    "MongoDBDataFeed": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataFeedDetail"
+        },
+        {
+          "required": [
+            "dataFeedName",
+            "dataSourceParameter",
+            "dataSourceType",
+            "dataStartFrom",
+            "granularityName",
+            "metrics"
+          ],
+          "type": "object",
+          "properties": {
+            "dataSourceParameter": {
+              "$ref": "#/definitions/MongoDBParameter"
+            }
+          },
+          "x-ms-discriminator-value": "MongoDB"
+        }
+      ]
+    },
+    "DataFeedList": {
+      "type": "object",
+      "properties": {
+        "@nextLink": {
+          "type": "string",
+          "readOnly": true
+        },
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DataFeedDetail"
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "DataFeedDetailPatch": {
+      "required": [
+        "dataSourceType"
+      ],
+      "type": "object",
+      "properties": {
+        "dataSourceType": {
+          "description": "data source type",
+          "enum": [
+            "AzureApplicationInsights",
+            "AzureBlob",
+            "AzureCosmosDB",
+            "AzureDataExplorer",
+            "AzureDataLakeStorageGen2",
+            "AzureTable",
+            "Elasticsearch",
+            "HttpRequest",
+            "InfluxDB",
+            "MongoDB",
+            "MySql",
+            "PostgreSql",
+            "SqlServer"
+          ],
+          "type": "string"
+        },
+        "dataFeedName": {
+          "description": "data feed name",
+          "type": "string"
+        },
+        "dataFeedDescription": {
+          "description": "data feed description",
+          "type": "string"
+        },
+        "timestampColumn": {
+          "description": "user-defined timestamp column. if timestampColumn is null, start time of every time slice will be used as default value.",
+          "type": "string"
+        },
+        "dataStartFrom": {
+          "format": "date-time",
+          "description": "ingestion start time",
+          "type": "string"
+        },
+        "startOffsetInSeconds": {
+          "format": "int64",
+          "description": "the time that the beginning of data ingestion task will delay for every data slice according to this offset.",
+          "type": "integer"
+        },
+        "maxConcurrency": {
+          "format": "int32",
+          "description": "the max concurrency of data ingestion queries against user data source. 0 means no limitation.",
+          "type": "integer"
+        },
+        "minRetryIntervalInSeconds": {
+          "format": "int64",
+          "description": "the min retry interval for failed data ingestion tasks.",
+          "type": "integer"
+        },
+        "stopRetryAfterInSeconds": {
+          "format": "int64",
+          "description": "stop retry data ingestion after the data slice first schedule time in seconds.",
+          "type": "integer"
+        },
+        "needRollup": {
+          "description": "mark if the data feed need rollup",
+          "enum": [
+            "NoRollup",
+            "NeedRollup",
+            "AlreadyRollup"
+          ],
+          "type": "string"
+        },
+        "rollUpMethod": {
+          "description": "roll up method",
+          "enum": [
+            "None",
+            "Sum",
+            "Max",
+            "Min",
+            "Avg",
+            "Count"
+          ],
+          "type": "string"
+        },
+        "rollUpColumns": {
+          "description": "roll up columns",
+          "uniqueItems": true,
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "allUpIdentification": {
+          "description": "the identification value for the row of calculated all-up value.",
+          "type": "string"
+        },
+        "fillMissingPointType": {
+          "description": "the type of fill missing point for anomaly detection",
+          "enum": [
+            "SmartFilling",
+            "PreviousValue",
+            "CustomValue",
+            "NoFilling"
+          ],
+          "type": "string"
+        },
+        "fillMissingPointValue": {
+          "format": "double",
+          "description": "the value of fill missing point for anomaly detection",
+          "type": "number"
+        },
+        "viewMode": {
+          "description": "data feed access mode, default is Private",
+          "enum": [
+            "Private",
+            "Public"
+          ],
+          "type": "string"
+        },
+        "admins": {
+          "description": "data feed administrator",
+          "uniqueItems": true,
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "viewers": {
+          "description": "data feed viewer",
+          "uniqueItems": true,
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "status": {
+          "description": "data feed status",
+          "enum": [
+            "Active",
+            "Paused"
+          ],
+          "type": "string"
+        },
+        "actionLinkTemplate": {
+          "description": "action link for alert",
+          "type": "string"
+        }
+      },
+      "discriminator": "dataSourceType"
+    },
+    "AzureApplicationInsightsDataFeedPatch": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataFeedDetailPatch"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "dataSourceParameter": {
+              "$ref": "#/definitions/AzureApplicationInsightsParameter"
+            }
+          },
+          "x-ms-discriminator-value": "AzureApplicationInsights"
+        }
+      ]
+    },
+    "AzureBlobDataFeedPatch": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataFeedDetailPatch"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "dataSourceParameter": {
+              "$ref": "#/definitions/AzureBlobParameter"
+            }
+          },
+          "x-ms-discriminator-value": "AzureBlob"
+        }
+      ]
+    },
+    "AzureCosmosDBDataFeedPatch": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataFeedDetailPatch"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "dataSourceParameter": {
+              "$ref": "#/definitions/AzureCosmosDBParameter"
+            }
+          },
+          "x-ms-discriminator-value": "AzureCosmosDB"
+        }
+      ]
+    },
+    "AzureDataExplorerDataFeedPatch": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataFeedDetailPatch"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "dataSourceParameter": {
+              "$ref": "#/definitions/SqlSourceParameter"
+            }
+          },
+          "x-ms-discriminator-value": "AzureDataExplorer"
+        }
+      ]
+    },
+    "AzureDataLakeStorageGen2DataFeedPatch": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataFeedDetailPatch"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "dataSourceParameter": {
+              "$ref": "#/definitions/AzureDataLakeStorageGen2Parameter"
+            }
+          },
+          "x-ms-discriminator-value": "AzureDataLakeStorageGen2"
+        }
+      ]
+    },
+    "AzureTableDataFeedPatch": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataFeedDetailPatch"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "dataSourceParameter": {
+              "$ref": "#/definitions/AzureTableParameter"
+            }
+          },
+          "x-ms-discriminator-value": "AzureTable"
+        }
+      ]
+    },
+    "ElasticsearchDataFeedPatch": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataFeedDetailPatch"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "dataSourceParameter": {
+              "$ref": "#/definitions/ElasticsearchParameter"
+            }
+          },
+          "x-ms-discriminator-value": "Elasticsearch"
+        }
+      ]
+    },
+    "HttpRequestDataFeedPatch": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataFeedDetailPatch"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "dataSourceParameter": {
+              "$ref": "#/definitions/HttpRequestParameter"
+            }
+          },
+          "x-ms-discriminator-value": "HttpRequest"
+        }
+      ]
+    },
+    "InfluxDBDataFeedPatch": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataFeedDetailPatch"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "dataSourceParameter": {
+              "$ref": "#/definitions/InfluxDBParameter"
+            }
+          },
+          "x-ms-discriminator-value": "InfluxDB"
+        }
+      ]
+    },
+    "MySqlDataFeedPatch": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataFeedDetailPatch"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "dataSourceParameter": {
+              "$ref": "#/definitions/SqlSourceParameter"
+            }
+          },
+          "x-ms-discriminator-value": "MySql"
+        }
+      ]
+    },
+    "PostgreSqlDataFeedPatch": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataFeedDetailPatch"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "dataSourceParameter": {
+              "$ref": "#/definitions/SqlSourceParameter"
+            }
+          },
+          "x-ms-discriminator-value": "PostgreSql"
+        }
+      ]
+    },
+    "SQLServerDataFeedPatch": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataFeedDetailPatch"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "dataSourceParameter": {
+              "$ref": "#/definitions/SqlSourceParameter"
+            }
+          },
+          "x-ms-discriminator-value": "SqlServer"
+        }
+      ]
+    },
+    "MongoDBDataFeedPatch": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataFeedDetailPatch"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "dataSourceParameter": {
+              "$ref": "#/definitions/MongoDBParameter"
+            }
+          },
+          "x-ms-discriminator-value": "MongoDB"
+        }
+      ]
+    },
+    "AnomalyFeedbackValue": {
+      "required": [
+        "anomalyValue"
+      ],
+      "type": "object",
+      "properties": {
+        "anomalyValue": {
+          "enum": [
+            "AutoDetect",
+            "Anomaly",
+            "NotAnomaly"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "AnomalyValue",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "FeedbackDimensionFilter": {
+      "required": [
+        "dimension"
+      ],
+      "type": "object",
+      "properties": {
+        "dimension": {
+          "description": "metric dimension filter",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "MetricFeedback": {
+      "required": [
+        "dimensionFilter",
+        "feedbackType",
+        "metricId"
+      ],
+      "type": "object",
+      "properties": {
+        "feedbackType": {
+          "description": "feedback type",
+          "enum": [
+            "Anomaly",
+            "ChangePoint",
+            "Period",
+            "Comment"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "FeedbackType",
+            "modelAsString": true
+          }
+        },
+        "feedbackId": {
+          "format": "uuid",
+          "description": "feedback unique id",
+          "type": "string",
+          "readOnly": true
+        },
+        "createdTime": {
+          "format": "date-time",
+          "description": "feedback created time",
+          "type": "string",
+          "readOnly": true
+        },
+        "userPrincipal": {
+          "description": "user who gives this feedback",
+          "type": "string",
+          "readOnly": true
+        },
+        "metricId": {
+          "format": "uuid",
+          "description": "metric unique id",
+          "type": "string"
+        },
+        "dimensionFilter": {
+          "$ref": "#/definitions/FeedbackDimensionFilter"
+        }
+      },
+      "discriminator": "feedbackType"
+    },
+    "AnomalyFeedback": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/MetricFeedback"
+        },
+        {
+          "required": [
+            "dimensionFilter",
+            "endTime",
+            "feedbackType",
+            "metricId",
+            "startTime",
+            "value"
+          ],
+          "type": "object",
+          "properties": {
+            "startTime": {
+              "format": "date-time",
+              "description": "the start timestamp of feedback timerange",
+              "type": "string"
+            },
+            "endTime": {
+              "format": "date-time",
+              "description": "the end timestamp of feedback timerange, when equals to startTime means only one timestamp",
+              "type": "string"
+            },
+            "value": {
+              "$ref": "#/definitions/AnomalyFeedbackValue"
+            },
+            "anomalyDetectionConfigurationId": {
+              "format": "uuid",
+              "description": "the corresponding anomaly detection configuration of this feedback",
+              "type": "string"
+            },
+            "anomalyDetectionConfigurationSnapshot": {
+              "$ref": "#/definitions/AnomalyDetectionConfiguration"
+            }
+          },
+          "x-ms-discriminator-value": "Anomaly"
+        }
+      ]
+    },
+    "ChangePointFeedbackValue": {
+      "required": [
+        "changePointValue"
+      ],
+      "type": "object",
+      "properties": {
+        "changePointValue": {
+          "enum": [
+            "AutoDetect",
+            "ChangePoint",
+            "NotChangePoint"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "ChangePointValue",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "ChangePointFeedback": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/MetricFeedback"
+        },
+        {
+          "required": [
+            "dimensionFilter",
+            "endTime",
+            "feedbackType",
+            "metricId",
+            "startTime",
+            "value"
+          ],
+          "type": "object",
+          "properties": {
+            "startTime": {
+              "format": "date-time",
+              "description": "the start timestamp of feedback timerange",
+              "type": "string"
+            },
+            "endTime": {
+              "format": "date-time",
+              "description": "the end timestamp of feedback timerange, when equals to startTime means only one timestamp",
+              "type": "string"
+            },
+            "value": {
+              "$ref": "#/definitions/ChangePointFeedbackValue"
+            }
+          },
+          "x-ms-discriminator-value": "ChangePoint"
+        }
+      ]
+    },
+    "CommentFeedbackValue": {
+      "required": [
+        "commentValue"
+      ],
+      "type": "object",
+      "properties": {
+        "commentValue": {
+          "description": "the comment string",
+          "type": "string"
+        }
+      }
+    },
+    "CommentFeedback": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/MetricFeedback"
+        },
+        {
+          "required": [
+            "dimensionFilter",
+            "feedbackType",
+            "metricId",
+            "value"
+          ],
+          "type": "object",
+          "properties": {
+            "startTime": {
+              "format": "date-time",
+              "description": "the start timestamp of feedback timerange",
+              "type": "string"
+            },
+            "endTime": {
+              "format": "date-time",
+              "description": "the end timestamp of feedback timerange, when equals to startTime means only one timestamp",
+              "type": "string"
+            },
+            "value": {
+              "$ref": "#/definitions/CommentFeedbackValue"
+            }
+          },
+          "x-ms-discriminator-value": "Comment"
+        }
+      ]
+    },
+    "PeriodFeedbackValue": {
+      "required": [
+        "periodType",
+        "periodValue"
+      ],
+      "type": "object",
+      "properties": {
+        "periodType": {
+          "description": "the type of setting period",
+          "enum": [
+            "AutoDetect",
+            "AssignValue"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "PeriodType",
+            "modelAsString": true
+          }
+        },
+        "periodValue": {
+          "format": "int32",
+          "description": "the number of intervals a period contains, when no period set to 0",
+          "default": 0,
+          "type": "integer"
+        }
+      }
+    },
+    "PeriodFeedback": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/MetricFeedback"
+        },
+        {
+          "required": [
+            "dimensionFilter",
+            "feedbackType",
+            "metricId",
+            "value"
+          ],
+          "type": "object",
+          "properties": {
+            "value": {
+              "$ref": "#/definitions/PeriodFeedbackValue"
+            }
+          },
+          "x-ms-discriminator-value": "Period"
+        }
+      ]
+    },
+    "MetricFeedbackFilter": {
+      "required": [
+        "metricId"
+      ],
+      "type": "object",
+      "properties": {
+        "metricId": {
+          "format": "uuid",
+          "description": "filter feedbacks by metric id",
+          "type": "string"
+        },
+        "dimensionFilter": {
+          "$ref": "#/definitions/FeedbackDimensionFilter"
+        },
+        "feedbackType": {
+          "description": "filter feedbacks by type",
+          "enum": [
+            "Anomaly",
+            "ChangePoint",
+            "Period",
+            "Comment"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "FeedbackType",
+            "modelAsString": true
+          }
+        },
+        "startTime": {
+          "format": "date-time",
+          "description": "start time filter under chosen time mode",
+          "type": "string"
+        },
+        "endTime": {
+          "format": "date-time",
+          "description": "end time filter under chosen time mode",
+          "type": "string"
+        },
+        "timeMode": {
+          "description": "time mode to filter feedback",
+          "enum": [
+            "MetricTimestamp",
+            "FeedbackCreatedTime"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "FeedbackQueryTimeMode",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "MetricFeedbackList": {
+      "type": "object",
+      "properties": {
+        "@nextLink": {
+          "type": "string",
+          "readOnly": true
+        },
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MetricFeedback"
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "EmailHookParameter": {
+      "required": [
+        "toList"
+      ],
+      "type": "object",
+      "properties": {
+        "toList": {
+          "description": "Email TO: list.",
+          "uniqueItems": true,
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "HookInfo": {
+      "required": [
+        "hookName",
+        "hookType"
+      ],
+      "type": "object",
+      "properties": {
+        "hookType": {
+          "description": "hook type",
+          "enum": [
+            "Webhook",
+            "Email"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "HookType",
+            "modelAsString": true
+          }
+        },
+        "hookId": {
+          "format": "uuid",
+          "description": "Hook unique id",
+          "type": "string",
+          "readOnly": true
+        },
+        "hookName": {
+          "description": "hook unique name",
+          "type": "string"
+        },
+        "description": {
+          "description": "hook description",
+          "type": "string"
+        },
+        "externalLink": {
+          "description": "hook external link",
+          "type": "string"
+        },
+        "admins": {
+          "description": "hook administrators",
+          "uniqueItems": true,
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        }
+      },
+      "discriminator": "hookType"
+    },
+    "EmailHookInfo": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/HookInfo"
+        },
+        {
+          "required": [
+            "hookName",
+            "hookParameter",
+            "hookType"
+          ],
+          "type": "object",
+          "properties": {
+            "hookParameter": {
+              "$ref": "#/definitions/EmailHookParameter"
+            }
+          },
+          "x-ms-discriminator-value": "Email"
+        }
+      ]
+    },
+    "WebhookHookParameter": {
+      "required": [
+        "endpoint"
+      ],
+      "type": "object",
+      "properties": {
+        "endpoint": {
+          "description": "API address, will be called when alert is triggered, only support POST method via SSL",
+          "type": "string"
+        },
+        "username": {
+          "description": "basic authentication",
+          "type": "string"
+        },
+        "password": {
+          "description": "basic authentication",
+          "type": "string"
+        },
+        "headers": {
+          "description": "custom headers in api call",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "certificateKey": {
+          "description": "client certificate",
+          "type": "string"
+        },
+        "certificatePassword": {
+          "description": "client certificate password",
+          "type": "string"
+        }
+      }
+    },
+    "WebhookHookInfo": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/HookInfo"
+        },
+        {
+          "required": [
+            "hookName",
+            "hookParameter",
+            "hookType"
+          ],
+          "type": "object",
+          "properties": {
+            "hookParameter": {
+              "$ref": "#/definitions/WebhookHookParameter"
+            }
+          },
+          "x-ms-discriminator-value": "Webhook"
+        }
+      ]
+    },
+    "HookList": {
+      "type": "object",
+      "properties": {
+        "@nextLink": {
+          "type": "string",
+          "readOnly": true
+        },
+        "value": {
+          "uniqueItems": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/HookInfo"
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "HookInfoPatch": {
+      "required": [
+        "hookType"
+      ],
+      "type": "object",
+      "properties": {
+        "hookType": {
+          "description": "hook type",
+          "enum": [
+            "Webhook",
+            "Email"
+          ],
+          "type": "string"
+        },
+        "hookName": {
+          "description": "hook unique name",
+          "type": "string"
+        },
+        "description": {
+          "description": "hook description",
+          "type": "string"
+        },
+        "externalLink": {
+          "description": "hook external link",
+          "type": "string"
+        },
+        "admins": {
+          "description": "hook administrators",
+          "uniqueItems": true,
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        }
+      },
+      "discriminator": "hookType"
+    },
+    "EmailHookInfoPatch": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/HookInfoPatch"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "hookParameter": {
+              "$ref": "#/definitions/EmailHookParameter"
+            }
+          },
+          "x-ms-discriminator-value": "Email"
+        }
+      ]
+    },
+    "WebhookHookInfoPatch": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/HookInfoPatch"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "hookParameter": {
+              "$ref": "#/definitions/WebhookHookParameter"
+            }
+          },
+          "x-ms-discriminator-value": "Webhook"
+        }
+      ]
+    },
+    "IngestionStatusQueryOptions": {
+      "required": [
+        "endTime",
+        "startTime"
+      ],
+      "type": "object",
+      "properties": {
+        "startTime": {
+          "format": "date-time",
+          "description": "the start point of time range to query data ingestion status.",
+          "type": "string"
+        },
+        "endTime": {
+          "format": "date-time",
+          "description": "the end point of time range to query data ingestion status.",
+          "type": "string"
+        }
+      }
+    },
+    "IngestionStatus": {
+      "type": "object",
+      "properties": {
+        "timestamp": {
+          "format": "date-time",
+          "description": "data slice timestamp.",
+          "type": "string",
+          "readOnly": true
+        },
+        "status": {
+          "description": "latest ingestion task status for this data slice.",
+          "enum": [
+            "NotStarted",
+            "Scheduled",
+            "Running",
+            "Succeeded",
+            "Failed",
+            "NoData",
+            "Error",
+            "Paused"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "IngestionStatusType",
+            "modelAsString": true
+          }
+        },
+        "message": {
+          "description": "the trimmed message of last ingestion job.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "IngestionStatusList": {
+      "type": "object",
+      "properties": {
+        "@nextLink": {
+          "type": "string",
+          "readOnly": true
+        },
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/IngestionStatus"
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "IngestionProgressResetOptions": {
+      "required": [
+        "endTime",
+        "startTime"
+      ],
+      "type": "object",
+      "properties": {
+        "startTime": {
+          "format": "date-time",
+          "description": "the start point of time range to reset data ingestion status.",
+          "type": "string"
+        },
+        "endTime": {
+          "format": "date-time",
+          "description": "the end point of time range to reset data ingestion status.",
+          "type": "string"
+        }
+      }
+    },
+    "DataFeedIngestionProgress": {
+      "type": "object",
+      "properties": {
+        "latestSuccessTimestamp": {
+          "format": "date-time",
+          "description": "the timestamp of lastest success ingestion job.\r\nnull indicates not available",
+          "type": "string",
+          "readOnly": true
+        },
+        "latestActiveTimestamp": {
+          "format": "date-time",
+          "description": "the timestamp of lastest ingestion job with status update.\r\nnull indicates not available",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "MetricDataQueryOptions": {
+      "required": [
+        "endTime",
+        "series",
+        "startTime"
+      ],
+      "type": "object",
+      "properties": {
+        "startTime": {
+          "format": "date-time",
+          "description": "start time of query a time series data, and format should be yyyy-MM-ddThh:mm:ssZ",
+          "type": "string"
+        },
+        "endTime": {
+          "format": "date-time",
+          "description": "start time of query a time series data, and format should be yyyy-MM-ddThh:mm:ssZ",
+          "type": "string"
+        },
+        "series": {
+          "description": "query specific series",
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "MetricSeriesItem": {
+      "type": "object",
+      "properties": {
+        "metricId": {
+          "format": "uuid",
+          "description": "metric unique id",
+          "type": "string",
+          "readOnly": true
+        },
+        "dimension": {
+          "description": "dimension name and value pair",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "MetricDataItem": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "$ref": "#/definitions/MetricSeriesItem"
+        },
+        "timestampList": {
+          "description": "timestamps of the data related to this time series",
+          "type": "array",
+          "items": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "valueList": {
+          "description": "values of the data related to this time series",
+          "type": "array",
+          "items": {
+            "format": "double",
+            "type": "number"
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "MetricDataList": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MetricDataItem"
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "MetricSeriesQueryOptions": {
+      "required": [
+        "activeSince"
+      ],
+      "type": "object",
+      "properties": {
+        "activeSince": {
+          "format": "date-time",
+          "description": "query series ingested after this time, the format should be yyyy-MM-ddTHH:mm:ssZ",
+          "type": "string"
+        },
+        "dimensionFilter": {
+          "description": "filter specfic dimension name and values",
+          "type": "object",
+          "additionalProperties": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "MetricSeriesList": {
+      "type": "object",
+      "properties": {
+        "@nextLink": {
+          "type": "string",
+          "readOnly": true
+        },
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MetricSeriesItem"
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "MetricDimensionQueryOptions": {
+      "required": [
+        "dimensionName"
+      ],
+      "type": "object",
+      "properties": {
+        "dimensionName": {
+          "description": "dimension name",
+          "type": "string"
+        },
+        "dimensionValueFilter": {
+          "description": "dimension value to be filtered",
+          "type": "string"
+        }
+      }
+    },
+    "MetricDimensionList": {
+      "type": "object",
+      "properties": {
+        "@nextLink": {
+          "type": "string",
+          "readOnly": true
+        },
+        "value": {
+          "uniqueItems": true,
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "AnomalyDetectionConfigurationList": {
+      "required": [
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AnomalyDetectionConfiguration"
+          }
+        }
+      }
+    },
+    "EnrichmentStatusQueryOption": {
+      "required": [
+        "endTime",
+        "startTime"
+      ],
+      "type": "object",
+      "properties": {
+        "startTime": {
+          "format": "date-time",
+          "description": "the start point of time range to query anomaly detection status.",
+          "type": "string"
+        },
+        "endTime": {
+          "format": "date-time",
+          "description": "the end point of time range to query anomaly detection status.",
+          "type": "string"
+        }
+      }
+    },
+    "EnrichmentStatus": {
+      "type": "object",
+      "properties": {
+        "timestamp": {
+          "format": "date-time",
+          "description": "data slice timestamp.",
+          "type": "string",
+          "readOnly": true
+        },
+        "status": {
+          "description": "latest enrichment status for this data slice.",
+          "type": "string",
+          "readOnly": true
+        },
+        "message": {
+          "description": "the trimmed message describes details of the enrichment status.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "EnrichmentStatusList": {
+      "type": "object",
+      "properties": {
+        "@nextLink": {
+          "type": "string",
+          "readOnly": true
+        },
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/EnrichmentStatus"
+          },
+          "readOnly": true
+        }
+      }
+    }
+  },
+  "securityDefinitions": {
+    "apiKeyHeader": {
+      "type": "apiKey",
+      "name": "x-api-key",
+      "in": "header"
+    }
+  },
+  "parameters": {
+    "Endpoint": {
+      "name": "endpoint",
+      "description": "Supported Cognitive Services endpoints (protocol and hostname, for example: https://<resource-name>.cognitiveservices.azure.com).",
+      "x-ms-parameter-location": "client",
+      "required": true,
+      "type": "string",
+      "in": "path",
+      "x-ms-skip-url-encoding": true
+    }
+  },
+  "x-ms-parameterized-host": {
+    "hostTemplate": "{endpoint}/metricsadvisor/v1.0/",
+    "useSchemePrefix": false,
+    "parameters": [
+      {
+        "$ref": "#/parameters/Endpoint"
+      }
+    ]
+  }
+}
