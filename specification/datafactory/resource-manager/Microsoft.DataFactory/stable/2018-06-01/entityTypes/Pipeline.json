@@ -3621,6 +3621,82 @@
         }
       }
     },
+    "AzureDatabricksDeltaLakeSource": {
+      "description": "A copy activity Azure Databricks Delta Lake source.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CopySource"
+        }
+      ],
+      "properties": {
+        "query": {
+          "type": "object",
+          "description": "Azure Databricks Delta Lake Sql query. Type: string (or Expression with resultType string)."
+        },
+        "exportSettings": {
+          "$ref": "#/definitions/AzureDatabricksDeltaLakeExportCommand",
+          "description": "Azure Databricks Delta Lake export settings."
+        }
+      }
+    },
+    "AzureDatabricksDeltaLakeExportCommand": {
+      "description": "Azure Databricks Delta Lake export command settings.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ExportSettings"
+        }
+      ],
+      "properties": {
+        "dateFormat": {
+          "type": "object",
+          "description": "Specify the date format for the csv in Azure Databricks Delta Lake Copy. Type: string (or Expression with resultType string)."
+        },
+        "timestampFormat": {
+          "type": "object",
+          "description": "Specify the timestamp format for the csv in Azure Databricks Delta Lake Copy. Type: string (or Expression with resultType string)."
+        }
+      }
+    },
+    "AzureDatabricksDeltaLakeSink": {
+      "description": "A copy activity Azure Databricks Delta Lake sink.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CopySink"
+        }
+      ],
+      "properties": {
+        "preCopyScript": {
+          "type": "object",
+          "description": "SQL pre-copy script. Type: string (or Expression with resultType string)."
+        },
+        "importSettings": {
+          "$ref": "#/definitions/AzureDatabricksDeltaLakeImportCommand",
+          "description": "Azure Databricks Delta Lake import settings."
+        }
+      }
+    },
+    "AzureDatabricksDeltaLakeImportCommand": {
+      "description": "Azure Databricks Delta Lake import command settings.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ImportSettings"
+        }
+      ],
+      "properties": {
+        "dateFormat": {
+          "type": "object",
+          "description": "Specify the date format for csv in Azure Databricks Delta Lake Copy. Type: string (or Expression with resultType string)."
+        },
+        "timestampFormat": {
+          "type": "object",
+          "description": "Specify the timestamp format for csv in Azure Databricks Delta Lake Copy. Type: string (or Expression with resultType string)."
+        }
+      }
+    },
     "StoredProcedureParameter": {
       "description": "SQL stored procedure parameter.",
       "type": "object",
