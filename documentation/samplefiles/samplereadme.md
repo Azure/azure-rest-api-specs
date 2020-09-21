@@ -60,20 +60,20 @@ swagger-to-sdk:
 
 ## Go
 
-See configuration in [readme.go.md](./readme.go.md)
+See configuration in [readme.go.md](https://github.com/Azure/azure-rest-api-specs/blob/master/documentation/samplefiles/readme.go.md)
 
 ## Python
 
-See configuration in [readme.python.md](./readme.python.md)
+See configuration in [readme.python.md](https://github.com/Azure/azure-rest-api-specs/blob/master/documentation/samplefiles/readme.python.md)
 
 ## Ruby
 
-See configuration in [readme.ruby.md](./readme.ruby.md)
+See configuration in [readme.ruby.md](https://github.com/Azure/azure-rest-api-specs/blob/master/documentation/samplefiles/readme.ruby.md)
 
 ## TypeScript
 
-See configuration in [readme.typescript.md](./readme.typescript.md)
+See configuration in [readme.typescript.md](https://github.com/Azure/azure-rest-api-specs/blob/master/documentation/samplefiles/readme.typescript.md)
 
 ## CSharp
 
-See configuration in [readme.csharp.md](./readme.csharp.md)
+See configuration in [readme.csharp.md](https://github.com/Azure/azure-rest-api-specs/blob/master/documentation/samplefiles/readme.chsarp.md)
