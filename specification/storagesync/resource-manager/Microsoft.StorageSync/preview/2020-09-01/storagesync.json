@@ -3578,6 +3578,10 @@
         "origin": {
           "type": "string",
           "description": "The origin."
+        },
+        "properties": {
+          "$ref": "#/definitions/OperationProperties",
+          "description": "Properties of the operations resource."
         }
       }
     },
@@ -3622,6 +3626,84 @@
         "description": {
           "type": "string",
           "description": "Operation Display Resource Description."
+        }
+      }
+    },
+    "OperationProperties": {
+      "type": "object",
+      "description": "Properties of the operations resource.",
+      "properties": {
+        "serviceSpecification": {
+          "$ref": "#/definitions/OperationResourceServiceSpecification",
+          "description": "Service specification for the operations resource."
+        }
+      }
+    },
+    "OperationResourceServiceSpecification": {
+      "type": "object",
+      "description": "Service specification.",
+      "properties": {
+        "metricSpecifications": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/OperationResourceMetricSpecification"
+          },
+          "description": "List of metric specifications."
+        }
+      }
+    },
+    "OperationResourceMetricSpecification": {
+      "type": "object",
+      "description": "Operation Display Resource object.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the metric."
+        },
+        "displayName": {
+          "type": "string",
+          "description": "Display name for the metric."
+        },
+        "displayDescription": {
+          "type": "string",
+          "description": "Display description for the metric."
+        },
+        "unit": {
+          "type": "string",
+          "description": "Unit for the metric."
+        },
+        "aggregationType": {
+          "type": "string",
+          "description": "Aggregation type for the metric."
+        },
+        "fillGapWithZero": {
+          "type": "boolean",
+          "description": "Fill gaps in the metric with zero."
+        },
+        "dimensions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/OperationResourceMetricSpecificationDimension"
+          },
+          "description": "Dimensions for the metric specification."
+        }
+      }
+    },
+    "OperationResourceMetricSpecificationDimension": {
+      "type": "object",
+      "description": "OperationResourceMetricSpecificationDimension object.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the dimension."
+        },
+        "displayName": {
+          "type": "string",
+          "description": "Display name of the dimentions."
+        },
+        "toBeExportedForShoebox": {
+          "type": "boolean",
+          "description": "Indicates metric should be exported for Shoebox."
         }
       }
     },
