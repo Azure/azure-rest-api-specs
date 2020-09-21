@@ -3249,6 +3249,36 @@
           "description": "The name of the SharePoint Online list. Type: string (or Expression with resultType string)."
         }
       }
+    },
+    "AzureDatabricksDeltaLakeDataset": {
+      "x-ms-discriminator-value": "AzureDatabricksDeltaLakeDataset",
+      "description": "Azure Databricks Delta Lake dataset.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Dataset"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "Properties specific to this dataset type.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/AzureDatabricksDeltaLakeDatasetTypeProperties"
+        }
+      }
+    },
+    "AzureDatabricksDeltaLakeDatasetTypeProperties": {
+      "description": "Azure Databricks Delta Lake Dataset Properties",
+      "properties": {
+        "table": {
+          "type": "object",
+          "description": "The name of delta table. Type: string (or Expression with resultType string)."
+        },
+        "database": {
+          "type": "object",
+          "description": "The database name of delta table. Type: string (or Expression with resultType string)."
+        }
+      }
     }
   }
 }
