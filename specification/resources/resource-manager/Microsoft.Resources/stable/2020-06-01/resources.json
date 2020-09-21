@@ -749,6 +749,30 @@
         "x-ms-odata": "#/definitions/DeploymentExtendedFilter"
       }
     },
+    "/providers/Microsoft.Management/managementGroups/{managementGroupId}/providers/{resourceProviderNamespace}/register": {
+      "post": {
+        "tags": [
+          "Providers"
+        ],
+        "operationId": "Providers_Register",
+        "description": "Registers a management group with a resource provider.",
+        "parameters": [
+          {
+            "name": "resourceProviderNamespace",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The namespace of the resource provider to register."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ]
+      }
+    },
     "/providers/Microsoft.Management/managementGroups/{groupId}/providers/Microsoft.Resources/deployments/{deploymentName}": {
       "delete": {
         "tags": [
