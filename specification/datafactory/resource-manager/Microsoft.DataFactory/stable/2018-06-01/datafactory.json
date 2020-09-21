@@ -4886,6 +4886,44 @@
         "globalParameters": {
           "$ref": "#/definitions/GlobalParameterDefinitionSpecification",
           "description": "List of parameters for factory."
+        },
+        "encryption": {
+          "$ref": "#/definitions/EncryptionConfiguration",
+          "description": "Properties to enable Customer Managed Key for the factory."
+        }
+      }
+    },
+    "EncryptionConfiguration": {
+      "description": "Definition of CMK for the factory.",
+      "properties": {
+        "keyName": {
+          "type": "string",
+          "description": "The name of the key in Azure Key Vault to use as Customer Managed Key."
+        },
+        "vaultBaseUrl": {
+          "type": "string",
+          "description": "The url of the Azure Key Vault used for CMK."
+        },
+        "keyVersion": {
+          "type": "string",
+          "description": "The version of the key used for CMK. If not provided, latest version will be used."
+        },
+        "identity": {
+          "$ref": "#/definitions/CMKIdentityDefinition",
+          "description": "User assigned identity to use to authenticate to customer's key vault. If not provided Managed Service Identity will be used."
+        }
+      },
+      "required": [
+        "keyName",
+        "vaultBaseUrl"
+      ]
+    },
+    "CMKIdentityDefinition": {
+      "description": "Managed Identity used for CMK.",
+      "properties": {
+        "userAssignedIdentity": {
+          "type": "string",
+          "description": "The resource id of the user assigned identity to authenticate to customer's key vault."
         }
       }
     },
@@ -5046,9 +5084,11 @@
       "properties": {
         "type": {
           "type": "string",
-          "description": "The identity type. Currently the only supported type is 'SystemAssigned'.",
+          "description": "The identity type.",
           "enum": [
-            "SystemAssigned"
+            "SystemAssigned",
+            "UserAssigned",
+            "SystemAssigned,UserAssigned"
           ],
           "x-ms-enum": {
             "name": "FactoryIdentityType",
@@ -5066,11 +5106,28 @@
           "format": "uuid",
           "readOnly": true,
           "description": "The client tenant id of the identity."
+        },
+        "userAssignedIdentities": {
+          "$ref": "#/definitions/UserAssignedIdentitiesDefinitionSpecification",
+          "description": "List of user assigned identities for the factory."
         }
       },
       "required": [
         "type"
       ]
+    },
+    "UserAssignedIdentitiesDefinitionSpecification": {
+      "description": "Definition of all user assigned identities for a factory.",
+      "type": "object",
+      "additionalProperties": {
+        "$ref": "#/definitions/UserAssignedIdentitySpecification"
+      }
+    },
+    "UserAssignedIdentitySpecification": {
+      "description": "Definition of a single user assigned identity for a factory.",
+      "type": "object",
+      "properties": {
+      }
     },
     "DatasetReference": {
       "description": "Dataset reference type.",
