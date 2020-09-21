@@ -1,0 +1,103 @@
+{
+  "parameters": {
+    "subscriptionId": "35f16a99-532a-4a47-9e93-00305f6c40f2",
+    "resourceGroupName": "acjain-mleastUS2",
+    "workspaceName": "acjain-mleastUS2",
+    "api-version": "2020-05-01-preview",
+    "datasetName": "datasetName123",
+    "properties": {
+      "skipValidation": false,
+      "datasetType": "file",
+      "parameters": {
+        "path": {
+          "dataPath": {
+            "datastoreName": "testblobfromarm",
+            "relativePath": "UI/03-26-2020_083359_UTC/latin1encoding.csv"
+          }
+        }
+      },
+      "registration": {
+        "description": "test description",
+        "name": "datasetName123"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/35f16a99-532a-4a47-9e93-00305f6c40f2/resourceGroups/acjain-mleastUS2/providers/Microsoft.MachineLearningServices/workspaces/acjain-mleastUS2/datasets/datasetName123",
+        "name": "datasetName123",
+        "type": "Microsoft.MachineLearningServices/workspaces/datasets",
+        "location": "eastus2",
+        "tags": null,
+        "properties": {
+          "datasetId": "db9c8fbe-a404-4019-9b9e-722a544f83ff",
+          "datasetState": {
+            "state": "active",
+            "deprecatedBy": null,
+            "etag": "\"6e121555-0000-0200-0000-5f4ea2230000\""
+          },
+          "latest": {
+            "datasetId": "db9c8fbe-a404-4019-9b9e-722a544f83ff",
+            "versionId": "1",
+            "datasetDefinitionState": {
+              "state": "active",
+              "deprecatedBy": null,
+              "etag": "\"6e121455-0000-0200-0000-5f4ea2230000\""
+            },
+            "dataflow": "{\n  \"blocks\": [\n    {\n      \"id\": \"11c52b64-7e70-4dae-9091-c57372827491\",\n      \"type\": \"Microsoft.DPrep.GetDatastoreFilesBlock\",\n      \"arguments\": {\n        \"datastores\": [\n          {\n            \"datastoreName\": \"testblobfromarm\",\n            \"path\": \"UI/03-26-2020_083359_UTC/latin1encoding.csv\",\n            \"resourceGroup\": \"acjain-mleastUS2\",\n            \"subscription\": \"35f16a99-532a-4a47-9e93-00305f6c40f2\",\n            \"workspaceName\": \"acjain-mleastUS2\"\n          }\n        ]\n      },\n      \"localData\": {},\n      \"isEnabled\": true,\n      \"name\": null,\n      \"annotation\": null\n    }\n  ],\n  \"inspectors\": [],\n  \"meta\": {\n    \"savedDatasetId\": \"47198920-b0d5-4274-85c0-fba9ec6662a6\",\n    \"datasetType\": \"file\",\n    \"subscriptionId\": \"35f16a99-532a-4a47-9e93-00305f6c40f2\",\n    \"workspaceId\": \"5da947c5-53aa-41a5-bb2b-074074e73b76\",\n    \"workspaceLocation\": \"eastus2\"\n  }\n}",
+            "dataPath": {
+              "datastoreName": "testblobfromarm",
+              "relativePath": "UI/03-26-2020_083359_UTC/latin1encoding.csv",
+              "azureFilePath": "https://acjainmleastus9484093746.blob.core.windows.net/azureml-blobstore-5da947c5-53aa-41a5-bb2b-074074e73b76/UI/03-26-2020_083359_UTC/latin1encoding.csv",
+              "paths": null,
+              "sqlDataPath": null,
+              "httpUrl": null,
+              "additionalProperties": {},
+              "partitionFormat": null,
+              "partitionFormatIgnoreError": false
+            },
+            "partitionFormatInPath": null,
+            "notes": "Auto generated from UI/03-26-2020_083359_UTC/latin1encoding.csv.",
+            "etag": "\"6e121455-0000-0200-0000-5f4ea2230000\"",
+            "createdTime": "2020-09-01T19:33:55.014954Z",
+            "modifiedTime": "2020-09-01T19:33:55.014954Z",
+            "createdBy": {
+              "userObjectId": "fa3fb1ee-ab39-4c79-b5ea-9dcb0a0b1a5c",
+              "userPuId": "100320004068320D",
+              "userIdp": null,
+              "userAltSecId": null,
+              "userIss": "https://sts.windows.net/72f988bf-86f1-41af-91ab-2d7cd011db47/",
+              "userTenantId": "72f988bf-86f1-41af-91ab-2d7cd011db47",
+              "userName": "Achal Jain"
+            },
+            "fileType": "Unknown",
+            "properties": {},
+            "savedDatasetId": "47198920-b0d5-4274-85c0-fba9ec6662a6",
+            "telemetryInfo": {},
+            "useDescriptionTagsFromDefinition": true,
+            "description": "geggegegegeg",
+            "tags": {}
+          },
+          "createdTime": "2020-09-01T19:33:55.0914964Z",
+          "modifiedTime": "2020-09-01T19:33:55.0914964Z",
+          "etag": "\"6e121555-0000-0200-0000-5f4ea2230000\"",
+          "name": "datasetNdddamdddeefe",
+          "description": "geggegegegeg",
+          "tags": {},
+          "isVisible": true,
+          "defaultCompute": null,
+          "datasetType": "file"
+        },
+        "identity": null,
+        "sku": null
+      }
+    },
+    "201": {
+      "description": "The request was accepted.",
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/...pathToOperationStatus..."
+      }
+    }
+  }
+}
