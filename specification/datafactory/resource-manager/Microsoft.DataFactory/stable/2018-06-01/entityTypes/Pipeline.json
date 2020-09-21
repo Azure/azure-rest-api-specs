@@ -4,6 +4,17 @@
     "title": "DataFactoryManagementClient",
     "version": "2018-06-01"
   },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
   "paths": {},
   "definitions": {
     "Pipeline": {
@@ -4507,6 +4518,17 @@
         }
       }
     },
+    "DynamicsSinkWriteBehavior": {
+      "description": "Defines values for DynamicsSinkWriteBehavior.",
+      "type": "string",
+      "enum": [
+        "Upsert"
+      ],
+      "x-ms-enum": {
+        "name": "DynamicsSinkWriteBehavior",
+        "modelAsString": true
+      }
+    },
     "DynamicsSink": {
       "description": "A copy activity Dynamics sink.",
       "type": "object",
@@ -4518,14 +4540,7 @@
       "properties": {
         "writeBehavior": {
           "description": "The write behavior for the operation.",
-          "type": "string",
-          "enum": [
-            "Upsert"
-          ],
-          "x-ms-enum": {
-            "name": "DynamicsSinkWriteBehavior",
-            "modelAsString": true
-          }
+          "$ref": "#/definitions/DynamicsSinkWriteBehavior"
         },
         "ignoreNullValues": {
           "type": "object",
@@ -4551,14 +4566,7 @@
       "properties": {
         "writeBehavior": {
           "description": "The write behavior for the operation.",
-          "type": "string",
-          "enum": [
-            "Upsert"
-          ],
-          "x-ms-enum": {
-            "name": "DynamicsSinkWriteBehavior",
-            "modelAsString": true
-          }
+          "$ref": "#/definitions/DynamicsSinkWriteBehavior"
         },
         "ignoreNullValues": {
           "type": "object",
@@ -4584,14 +4592,7 @@
       "properties": {
         "writeBehavior": {
           "description": "The write behavior for the operation.",
-          "type": "string",
-          "enum": [
-            "Upsert"
-          ],
-          "x-ms-enum": {
-            "name": "DynamicsSinkWriteBehavior",
-            "modelAsString": true
-          }
+          "$ref": "#/definitions/DynamicsSinkWriteBehavior"
         },
         "ignoreNullValues": {
           "type": "object",
