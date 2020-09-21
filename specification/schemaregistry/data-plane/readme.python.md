@@ -10,7 +10,7 @@ python:
   payload-flattening-threshold: 2
   namespace: Microsoft.EventHub
   package-name: schemaregistry
-  package-version: 2018-01-01-preview
+  package-version: 2020-09-01-preview
   clear-output-folder: true
 ```
 
