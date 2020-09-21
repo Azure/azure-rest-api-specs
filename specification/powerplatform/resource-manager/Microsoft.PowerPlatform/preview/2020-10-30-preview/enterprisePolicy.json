@@ -398,6 +398,7 @@
       "description": "Definition of the EnterprisePolicy.",
       "allOf": [
         {
+          "description": "The resource model definition for a ARM tracked top level resource",
           "$ref": "../../common/v1/definitions.json#/definitions/TrackedResource"
         }
       ],
@@ -407,13 +408,13 @@
           "description": "The identity of the EnterprisePolicy."
         },
         "properties": {
-          "$ref": "#/definitions/ConfigurationProperties",
+          "$ref": "#/definitions/Properties",
           "description": "The properties that define configuration.",
           "x-ms-client-flatten": true
         }
       }
     },
-    "ConfigurationProperties": {
+    "Properties": {
       "type": "object",
       "description": "The properties that define configuration for the enterprise policy.",
       "properties": {
