@@ -4,6 +4,7 @@
 
 ```yaml
 tag: 2019-09-01-preview
+openapi-subtype: rpaas
 ```
 
 ```yaml $(tag) == '2019-09-01-preview'
