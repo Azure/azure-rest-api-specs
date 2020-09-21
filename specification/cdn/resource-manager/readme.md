@@ -28,7 +28,17 @@ These are the global settings for the Cdn API.
 title: CdnManagementClient
 description: Cdn Management Client
 openapi-type: arm
-tag: package-2019-06
+tag: package-2020-04
+```
+
+### Tag: package-2020-04
+
+These settings apply only when `--tag=package-2020-04` is specified on the command line.
+
+``` yaml $(tag) == 'package-2020-04'
+input-file:
+- Microsoft.Cdn/stable/2020-04-15/cdn.json
+- Microsoft.Cdn/stable/2020-04-15/cdnwebapplicationfirewall.json
 ```
 
 ### Tag: package-2019-12
@@ -138,6 +148,9 @@ swagger-to-sdk:
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-node
   - repo: azure-sdk-for-ruby
+  - repo: azure-resource-manager-schemas
+    after_scripts:
+      - node sdkauto_afterscript.js cdn/resource-manager
 ```
 
 
@@ -165,6 +178,10 @@ See configuration in [readme.node.md](./readme.node.md)
 
 See configuration in [readme.ruby.md](./readme.ruby.md)
 
+## AzureResourceSchema
+
+See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
+
 ## Multi-API/Profile support for AutoRest v3 generators 
 
 AutoRest V3 generators require the use of `--tag=all-api-versions` to select api files.
@@ -177,6 +194,8 @@ require: $(this-folder)/../../../profiles/readme.md
 
 # all the input files across all versions
 input-file:
+  - $(this-folder)/Microsoft.Cdn/stable/2020-04-15/cdn.json
+  - $(this-folder)/Microsoft.Cdn/stable/2020-04-15/cdnwebapplicationfirewall.json
   - $(this-folder)/Microsoft.Cdn/stable/2019-12-31/cdn.json
   - $(this-folder)/Microsoft.Cdn/stable/2019-06-15/cdn.json
   - $(this-folder)/Microsoft.Cdn/stable/2019-06-15/cdnwebapplicationfirewall.json

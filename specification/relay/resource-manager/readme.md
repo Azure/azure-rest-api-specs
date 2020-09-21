@@ -50,6 +50,19 @@ input-file:
 ```
 
 
+### Tag: package-2018-01-preview
+
+These settings apply only when `--tag=package-2018-01-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2018-01-preview'
+input-file:
+- Microsoft.Relay/preview/2018-01-01-preview/Namespaces-preview.json
+- Microsoft.Relay/preview/2018-01-01-preview/NetworkRuleSets-preview.json
+- Microsoft.Relay/preview/2018-01-01-preview/PrivateEndpointConnection-preview.json
+- Microsoft.Relay/preview/2018-01-01-preview/PrivateLinkResources-preview.json
+```
+
+
 ---
 # Code Generation
 
@@ -70,6 +83,9 @@ swagger-to-sdk:
   - repo: azure-sdk-for-ruby
     after_scripts:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_relay']
+  - repo: azure-resource-manager-schemas
+    after_scripts:
+      - node sdkauto_afterscript.js relay/resource-manager
 ```
 
 
@@ -141,6 +157,10 @@ generate-interface: true
 
 
 
+## AzureResourceSchema
+
+See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
+
 ## Multi-API/Profile support for AutoRest v3 generators 
 
 AutoRest V3 generators require the use of `--tag=all-api-versions` to select api files.
@@ -155,6 +175,10 @@ require: $(this-folder)/../../../profiles/readme.md
 input-file:
   - $(this-folder)/Microsoft.Relay/stable/2017-04-01/relay.json
   - $(this-folder)/Microsoft.Relay/stable/2016-07-01/relay.json
+  - $(this-folder)/Microsoft.Relay/preview/2018-01-01-preview/Namespaces-preview.json
+  - $(this-folder)/Microsoft.Relay/preview/2018-01-01-preview/NetworkRuleSets-preview.json
+  - $(this-folder)/Microsoft.Relay/preview/2018-01-01-preview/PrivateEndpointConnection-preview.json
+  - $(this-folder)/Microsoft.Relay/preview/2018-01-01-preview/PrivateLinkResources-preview.json
 
 ```
 

@@ -26,18 +26,27 @@ These are the global settings for the Storage Sync API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2019-10-01
+tag: package-2020-03-01
 ```
 
 
+### Tag: package-2020-03-01
+
+These settings apply only when `--tag=package-2020-03-01` is specified on the command line.
+
+```yaml $(tag) == 'package-2020-03-01'
+input-file:
+  - Microsoft.StorageSync/stable/2020-03-01/storagesync.json
+```
 ### Tag: package-2019-10-01
 
 These settings apply only when `--tag=package-2019-10-01` is specified on the command line.
 
-```yaml $(tag) == 'package-2019-10-01'
+``` yaml $(tag) == 'package-2019-10-01'
 input-file:
   - Microsoft.StorageSync/stable/2019-10-01/storagesync.json
 ```
+
 ### Tag: package-2019-06-01
 
 These settings apply only when `--tag=package-2019-06-01` is specified on the command line.
@@ -119,6 +128,9 @@ swagger-to-sdk:
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-node
   - repo: azure-cli-extensions
+  - repo: azure-resource-manager-schemas
+    after_scripts:
+      - node sdkauto_afterscript.js storagesync/resource-manager
 ```
 
 ## C#
@@ -174,6 +186,10 @@ See configuration in [readme.go.md](./readme.go.md)
 
 See configuration in [readme.java.md](./readme.java.md)
 
+## AzureResourceSchema
+
+See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
+
 ## Multi-API/Profile support for AutoRest v3 generators
 
 AutoRest V3 generators require the use of `--tag=all-api-versions` to select api files.
@@ -186,6 +202,7 @@ require: $(this-folder)/../../../profiles/readme.md
 
 # all the input files across all versions
 input-file:
+  - $(this-folder)/Microsoft.StorageSync/stable/2020-03-01/storagesync.json
   - $(this-folder)/Microsoft.StorageSync/stable/2019-10-01/storagesync.json
   - $(this-folder)/Microsoft.StorageSync/stable/2019-06-01/storagesync.json
   - $(this-folder)/Microsoft.StorageSync/stable/2019-03-01/storagesync.json

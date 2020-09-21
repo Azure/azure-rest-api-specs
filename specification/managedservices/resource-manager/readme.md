@@ -26,18 +26,27 @@ These are the global settings for the ManagedServices API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2019-09
+tag: package-2020-02-preview
 ```
 
 
+### Tag: package-2020-02-preview
+
+These settings apply only when `--tag=package-2020-02-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2020-02-preview'
+input-file:
+  - Microsoft.ManagedServices/preview/2020-02-01-preview/managedservices.json
+```
 ### Tag: package-2019-09
 
 These settings apply only when `--tag=package-2019-09` is specified on the command line.
 
-```yaml $(tag) == 'package-2019-09'
+``` yaml $(tag) == 'package-2019-09'
 input-file:
   - Microsoft.ManagedServices/stable/2019-09-01/managedservices.json
 ```
+
 ### Tag: package-2019-06
 
 These settings apply only when `--tag=package-2019-06` is specified on the command line.
@@ -85,6 +94,9 @@ swagger-to-sdk:
   - repo: azure-sdk-for-ruby
     after_scripts:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_billing']
+  - repo: azure-resource-manager-schemas
+    after_scripts:
+      - node sdkauto_afterscript.js managedservices/resource-manager
 ```
 
 ## C#
@@ -105,6 +117,10 @@ csharp:
 
 See configuration in [readme.go.md](./readme.go.md)
 
+## AzureResourceSchema
+
+See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
+
 ## Multi-API/Profile support for AutoRest v3 generators
 
 AutoRest V3 generators require the use of `--tag=all-api-versions` to select api files.
@@ -117,6 +133,7 @@ require: $(this-folder)/../../../profiles/readme.md
 
 # all the input files across all versions
 input-file:
+  - $(this-folder)/Microsoft.ManagedServices/preview/2020-02-01-preview/managedservices.json
   - $(this-folder)/Microsoft.ManagedServices/stable/2019-09-01/managedservices.json
   - $(this-folder)/Microsoft.ManagedServices/stable/2019-06-01/managedservices.json
   - $(this-folder)/Microsoft.ManagedServices/preview/2019-04-01-preview/managedservices.json

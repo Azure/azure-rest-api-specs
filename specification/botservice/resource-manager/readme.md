@@ -4,10 +4,10 @@
 
 This is the AutoRest configuration file for BotService.
 
-
-
 ---
+
 ## Getting Started
+
 To build the SDK for BotService, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
 
 > `autorest`
@@ -15,20 +15,29 @@ To build the SDK for BotService, simply [Install AutoRest](https://aka.ms/autore
 To see additional help and options, run:
 
 > `autorest --help`
+
 ---
 
 ## Configuration
 
-
-
 ### Basic Information
+
 These are the global settings for the BotService API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2018-07-12
+tag: package-2020-06-02
 ```
 
+
+### Tag: package-2020-06-02
+
+These settings apply only when `--tag=package-2020-06-02` is specified on the command line.
+
+```yaml $(tag) == 'package-2020-06-02'
+input-file:
+  - Microsoft.BotService/stable/2020-06-02/botservice.json
+```
 ### Tag: package-2018-07-12
 
 These settings apply only when `--tag=package-2018-07-12` is specified on the command line.
@@ -72,7 +81,9 @@ directive:
     from: botservice.json
     reason: The path as-is is quite descriptive.
 ```
+
 ---
+
 # Code Generation
 
 ## Swagger to SDK
@@ -85,6 +96,9 @@ swagger-to-sdk:
   - repo: azure-sdk-for-net
   - repo: azure-sdk-for-python
   - repo: azure-sdk-for-go
+  - repo: azure-resource-manager-schemas
+    after_scripts:
+      - node sdkauto_afterscript.js botservice/resource-manager
 ```
 
 ## C#
@@ -113,7 +127,11 @@ See configuration in [readme.java.md](./readme.java.md)
 
 See readme.python.md file.
 
-## Multi-API/Profile support for AutoRest v3 generators 
+## AzureResourceSchema
+
+See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
+
+## Multi-API/Profile support for AutoRest v3 generators
 
 AutoRest V3 generators require the use of `--tag=all-api-versions` to select api files.
 
@@ -125,16 +143,16 @@ require: $(this-folder)/../../../profiles/readme.md
 
 # all the input files across all versions
 input-file:
+  - $(this-folder)/Microsoft.BotService/stable/2020-06-02/botservice.json
   - $(this-folder)/Microsoft.BotService/preview/2018-07-12/botservice.json
   - $(this-folder)/Microsoft.BotService/preview/2017-12-01/botservice.json
 
 ```
 
-If there are files that should not be in the `all-api-versions` set, 
-uncomment the  `exclude-file` section below and add the file paths.
+If there are files that should not be in the `all-api-versions` set,
+uncomment the `exclude-file` section below and add the file paths.
 
 ``` yaml $(tag) == 'all-api-versions'
 #exclude-file: 
 #  - $(this-folder)/Microsoft.Example/stable/2010-01-01/somefile.json
 ```
-

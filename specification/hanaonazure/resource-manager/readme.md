@@ -28,7 +28,7 @@ These are the global settings for the HANA on Azure API.
 title: HanaManagementClient
 description: HANA on Azure Client
 openapi-type: arm
-tag: package-2017-11
+tag: package-2020-02-07-preview
 azure-arm: true
 ```
 
@@ -67,6 +67,9 @@ swagger-to-sdk:
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-node
+  - repo: azure-resource-manager-schemas
+    after_scripts:
+      - node sdkauto_afterscript.js hanaonazure/resource-manager
 ```
 
 ## Go
@@ -108,6 +111,10 @@ generate-interface: true
 ```
 
 
+
+## AzureResourceSchema
+
+See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
 
 ## Multi-API/Profile support for AutoRest v3 generators 
 

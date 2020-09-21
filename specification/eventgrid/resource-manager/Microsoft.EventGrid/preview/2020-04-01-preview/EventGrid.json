@@ -3475,13 +3475,13 @@
             "description": "*** Error Responses: ***\n\n * 400 Bad Request.\n\n * 500 Internal Server Error."
           }
         },
-        "x-ms-pageable": {
-          "nextLinkName": null
-        },
         "x-ms-examples": {
           "PartnerRegistrations_List": {
             "$ref": "./examples/PartnerRegistrations_List.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
         }
       }
     },
@@ -3888,7 +3888,11 @@
             "in": "path",
             "description": "The type of the parent resource. This can be either \\'topics\\' or \\'domains\\'.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "enum": [
+              "topics",
+              "domains"
+            ]
           },
           {
             "name": "parentName",
@@ -3954,7 +3958,11 @@
             "in": "path",
             "description": "The type of the parent resource. This can be either \\'topics\\' or \\'domains\\'.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "enum": [
+              "topics",
+              "domains"
+            ]
           },
           {
             "name": "parentName",
@@ -4034,7 +4042,11 @@
             "in": "path",
             "description": "The type of the parent resource. This can be either \\'topics\\' or \\'domains\\'.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "enum": [
+              "topics",
+              "domains"
+            ]
           },
           {
             "name": "parentName",
@@ -4101,7 +4113,11 @@
             "in": "path",
             "description": "The type of the parent resource. This can be either \\'topics\\' or \\'domains\\'.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "enum": [
+              "topics",
+              "domains"
+            ]
           },
           {
             "name": "parentName",
@@ -5378,7 +5394,7 @@
       "type": "object",
       "properties": {
         "name": {
-          "description": "the Sku name of the resource.\r\nthe possible values: Basic; Premium",
+          "description": "The Sku name of the resource. The possible values are: Basic or Premium.",
           "enum": [
             "Basic",
             "Premium"
@@ -5896,9 +5912,33 @@
             "modelAsString": true
           }
         },
+        "partnerTopicReadinessState": {
+          "description": "The readiness state of the corresponding partner topic.",
+          "enum": [
+            "NotActivatedByUserYet",
+            "ActivatedByUser",
+            "DeactivatedByUser",
+            "DeletedByUser"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "PartnerTopicReadinessState",
+            "modelAsString": true
+          }
+        },
+        "expirationTimeIfNotActivatedUtc": {
+          "format": "date-time",
+          "description": "Expiration time of the event channel. If this timer expires while the corresponding partner topic is never activated,\r\nthe event channel and corresponding partner topic are deleted.",
+          "type": "string"
+        },
         "filter": {
           "$ref": "#/definitions/EventChannelFilter",
           "description": "Information about the filter for the event channel."
+        },
+        "partnerTopicFriendlyDescription": {
+          "description": "Friendly description about the topic. This can be set by the publisher/partner to show custom description for the customer partner topic.\r\nThis will be helpful to remove any ambiguity of the origin of creation of the partner topic for the customer.",
+          "type": "string"
         }
       }
     },
@@ -5934,25 +5974,6 @@
       "description": "Filter for the Event Channel.",
       "type": "object",
       "properties": {
-        "subjectBeginsWith": {
-          "description": "An optional string to filter events for an event channel based on a resource path prefix.\r\nThe format of this depends on the publisher of the events. Wildcard characters are not supported in this path.",
-          "type": "string"
-        },
-        "subjectEndsWith": {
-          "description": "An optional string to filter events for an event channel based on a resource path suffix.\r\nWildcard characters are not supported in this path.",
-          "type": "string"
-        },
-        "includedEventTypes": {
-          "description": "A list of applicable event types that need to be part of the event channel. If it is desired to subscribe to all default event types, set the IncludedEventTypes to null.",
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
-        "isSubjectCaseSensitive": {
-          "description": "Specifies if the SubjectBeginsWith and SubjectEndsWith properties of the filter\r\nshould be compared in a case sensitive manner.",
-          "type": "boolean"
-        },
         "advancedFilters": {
           "description": "An array of advanced filters that are used for filtering event channels.",
           "type": "array",
@@ -7027,7 +7048,23 @@
           "type": "string"
         },
         "partnerResourceTypeDescription": {
-          "description": "Description of the partner resource type.",
+          "description": "Short description of the partner resource type. The length of this description should not exceed 256 characters.",
+          "type": "string"
+        },
+        "longDescription": {
+          "description": "Long description for the custom scenarios and integration to be displayed in the portal if needed.\r\nLength of this description should not exceed 2048 characters.",
+          "type": "string"
+        },
+        "partnerCustomerServiceNumber": {
+          "description": "The customer service number of the publisher. The expected phone format should start with a '+' sign \r\nfollowed by the country code. The remaining digits are then followed. Only digits and spaces are allowed and its\r\nlength cannot exceed 16 digits including country code. Examples of valid phone numbers are: +1 515 123 4567 and\r\n+966 7 5115 2471. Examples of invalid phone numbers are: +1 (515) 123-4567, 1 515 123 4567 and +966 121 5115 24 7 551 1234 43",
+          "type": "string"
+        },
+        "partnerCustomerServiceExtension": {
+          "description": "The extension of the customer service number of the publisher. Only digits are allowed and number of digits should not exceed 10.",
+          "type": "string"
+        },
+        "customerServiceUri": {
+          "description": "The extension of the customer service URI of the publisher.",
           "type": "string"
         },
         "setupUri": {
@@ -7209,6 +7246,11 @@
           "description": "Source associated with this partner topic. This represents a unique partner resource.",
           "type": "string"
         },
+        "expirationTimeIfNotActivatedUtc": {
+          "format": "date-time",
+          "description": "Expiration time of the partner topic. If this timer expires while the partner topic is still never activated,\r\nthe partner topic and corresponding event channel are deleted.",
+          "type": "string"
+        },
         "provisioningState": {
           "description": "Provisioning state of the partner topic.",
           "enum": [
@@ -7238,6 +7280,10 @@
             "name": "PartnerTopicActivationState",
             "modelAsString": true
           }
+        },
+        "partnerTopicFriendlyDescription": {
+          "description": "Friendly description about the topic. This can be set by the publisher/partner to show custom description for the customer partner topic.\r\nThis will be helpful to remove any ambiguity of the origin of creation of the partner topic for the customer.",
+          "type": "string"
         }
       }
     },

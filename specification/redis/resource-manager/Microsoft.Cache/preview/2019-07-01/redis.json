@@ -1375,7 +1375,7 @@
         "capacity": {
           "type": "integer",
           "format": "int32",
-          "description": "The size of the Redis cache to deploy. Valid values: for C (Basic/Standard) family (0, 1, 2, 3, 4, 5, 6), for P (Premium) family (1, 2, 3, 4)."
+          "description": "The size of the Redis cache to deploy. Valid values: for C (Basic/Standard) family (0, 1, 2, 3, 4, 5, 6), for P (Premium) family (1, 2, 3, 4, 5)."
         }
       },
       "required": [
@@ -1796,6 +1796,11 @@
           "type": "integer",
           "format": "int32",
           "description": "If clustering is enabled, the Shard ID of Redis Instance"
+        },
+        "isMaster": {
+          "readOnly": true,
+          "type": "boolean",
+          "description": "Specifies whether the instance is a master node."
         }
       },
       "description": "Details of single instance of redis."
@@ -1856,11 +1861,15 @@
           "type": "integer",
           "format": "int32",
           "description": "If clustering is enabled, the ID of the shard to be rebooted."
+        },
+        "ports": {
+          "type": "array",
+          "items": {
+            "type": "integer"
+          },
+          "description": "A list of redis instances to reboot, specified by per-instance SSL ports or non-SSL ports."
         }
       },
-      "required": [
-        "rebootType"
-      ],
       "description": "Specifies which Redis node(s) to reboot."
     },
     "ExportRDBParameters": {

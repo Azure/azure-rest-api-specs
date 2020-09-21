@@ -36,8 +36,18 @@ These settings apply only when `--tag=package-2018-11-preview` is specified on t
 ``` yaml $(tag) == 'package-2018-11-preview'
 input-file:
 - Microsoft.HDInsight/preview/2018-11-01-preview/job.json
+- Microsoft.HDInsight/preview/2018-11-01-preview/livySpark.json
 ```
 
+## Suppression
+``` yaml
+directive:
+  - suppress: DefinitionsPropertiesNamesCamelCase
+    reason: This would require a breaking change, and need to be consistent with the response from RP side.
+    from: livySpark.json
+    where:
+      - $.definitions.SparkStatementOutput.properties.execution_count
+```
 
 ---
 # Code Generation
@@ -146,6 +156,7 @@ require: $(this-folder)/../../../profiles/readme.md
 # all the input files across all versions
 input-file:
   - $(this-folder)/Microsoft.HDInsight/preview/2018-11-01-preview/job.json
+  - $(this-folder)/Microsoft.HDInsight/preview/2018-11-01-preview/livySpark.json
 
 ```
 

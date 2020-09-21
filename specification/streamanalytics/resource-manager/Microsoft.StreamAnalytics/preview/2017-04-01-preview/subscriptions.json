@@ -1,0 +1,139 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "StreamAnalyticsManagementClient",
+    "version": "2017-04-01-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.StreamAnalytics/locations/{location}/quotas": {
+      "get": {
+        "tags": [
+          "Subscriptions"
+        ],
+        "operationId": "Subscriptions_ListQuotas",
+        "description": "Retrieves the subscription's current quota information in a particular region.",
+        "x-ms-examples": {
+          "List subscription quota information in West US": {
+            "$ref": "./examples/Subscription_ListQuotas.json"
+          }
+        },
+        "parameters": [
+          {
+            "name": "location",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The region in which to retrieve the subscription's quota information. You can find out which regions Azure Stream Analytics is supported in here: https://azure.microsoft.com/en-us/regions/"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the subscription's quota information in the specified region.",
+            "schema": {
+              "$ref": "#/definitions/SubscriptionQuotasListResult"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "SubscriptionQuotasListResult": {
+      "description": "Result of the GetQuotas operation. It contains a list of quotas for the subscription in a particular region.",
+      "properties": {
+        "value": {
+          "description": "List of quotas for the subscription in a particular region.",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/SubscriptionQuota"
+          }
+        }
+      }
+    },
+    "SubscriptionQuota": {
+      "description": "Describes the current quota for the subscription.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/SubResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "Describes the properties of the quota.",
+          "readOnly": true,
+          "properties": {
+            "maxCount": {
+              "description": "The max permitted usage of this resource.",
+              "type": "integer",
+              "format": "int32",
+              "readOnly": true
+            },
+            "currentCount": {
+              "description": "The current usage of this resource.",
+              "type": "integer",
+              "format": "int32",
+              "readOnly": true
+            }
+          },
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "SubResource": {
+      "description": "The base sub-resource model definition.",
+      "properties": {
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource Id"
+        },
+        "name": {
+          "type": "string",
+          "description": "Resource name"
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource type"
+        }
+      },
+      "x-ms-azure-resource": true
+    }
+  }
+}

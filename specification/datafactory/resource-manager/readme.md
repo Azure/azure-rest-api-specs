@@ -37,6 +37,13 @@ These settings apply only when `--tag=package-2018-06` is specified on the comma
 ``` yaml $(tag) == 'package-2018-06'
 input-file:
 - Microsoft.DataFactory/stable/2018-06-01/datafactory.json
+- Microsoft.DataFactory/stable/2018-06-01/entityTypes/DataFlow.json
+- Microsoft.DataFactory/stable/2018-06-01/entityTypes/Dataset.json
+- Microsoft.DataFactory/stable/2018-06-01/entityTypes/IntegrationRuntime.json
+- Microsoft.DataFactory/stable/2018-06-01/entityTypes/LinkedService.json
+- Microsoft.DataFactory/stable/2018-06-01/entityTypes/ManagedPrivateEndpoint.json
+- Microsoft.DataFactory/stable/2018-06-01/entityTypes/Pipeline.json
+- Microsoft.DataFactory/stable/2018-06-01/entityTypes/Trigger.json
 ```
 
 ### Tag: package-2017-09-preview
@@ -65,6 +72,10 @@ swagger-to-sdk:
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-node
+  - repo: azure-cli-extensions
+  - repo: azure-resource-manager-schemas
+    after_scripts:
+      - node sdkauto_afterscript.js datafactory/resource-manager
 ```
 
 
@@ -82,33 +93,6 @@ csharp:
   clear-output-folder: true
 ```
 
-## Python
-
-These settings apply only when `--python` is specified on the command line.
-Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
-Use `--python-mode=update` if you already have a setup.py and just want to update the code itself.
-
-``` yaml $(python)
-python-mode: create
-python:
-  azure-arm: true
-  license-header: MICROSOFT_MIT_NO_VERSION
-  payload-flattening-threshold: 2
-  namespace: azure.mgmt.datafactory
-  package-name: azure-mgmt-datafactory
-  package-version: 1.0.0
-  clear-output-folder: true
-```
-``` yaml $(python) && $(python-mode) == 'update'
-python:
-  no-namespace-folders: true
-  output-folder: $(python-sdks-folder)/datafactory/azure-mgmt-datafactory/azure/mgmt/datafactory
-```
-``` yaml $(python) && $(python-mode) == 'create'
-python:
-  basic-setup-py: true
-  output-folder: $(python-sdks-folder)/datafactory/azure-mgmt-datafactory
-```
 
 ## Go
 
@@ -218,6 +202,10 @@ directive:
     reason:
       - DataFlow add type required  
 ```
+
+## AzureResourceSchema
+
+See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
 
 ## Multi-API/Profile support for AutoRest v3 generators 
 

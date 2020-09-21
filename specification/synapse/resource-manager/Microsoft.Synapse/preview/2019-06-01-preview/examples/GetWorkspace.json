@@ -24,7 +24,28 @@
           "sqlAdministratorLogin": "login",
           "sqlAdministratorLoginPassword": "password",
           "managedResourceGroupName": "resourceGroup2",
-          "provisioningState": "Succeeded"
+          "provisioningState": "Succeeded",
+          "privateEndpointConnections": [
+            {
+              "id": "/subscriptions/01234567-89ab-4def-0123-456789abcdef/resourceGroups/ExampleResourceGroup/providers/Microsoft.Synapse/workspaces/ExampleWorkspace/privateEndpointConnections/ExamplePrivateEndpointConnection",
+              "name": "sql",
+              "type": "Microsoft.Synapse/workspaces/privateEndpointConnections",
+              "properties": {
+                "provisioningState": "Succeeded",
+                "privateEndpoint": {
+                  "id": "/subscriptions/01234567-89ab-4def-0123-456789abcdef/resourceGroups/ExampleResourceGroup/providers/Microsoft.Network/privateEndpoints/ExamplePrivateEndpoint"
+                },
+                "privateLinkServiceConnectionState": {
+                  "status": "Approved",
+                  "description": "Auto-approved",
+                  "actionsRequired": "None"
+                }
+              }
+            }
+          ],
+          "extraProperties": {
+            "IsScopeEnabled": "false"
+          }
         },
         "tags": {
           "key": "value"

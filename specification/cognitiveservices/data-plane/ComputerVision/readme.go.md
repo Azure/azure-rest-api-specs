@@ -42,5 +42,14 @@ These settings apply only when `--tag=release_3_0 --go` is specified on the comm
 Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
 
 ``` yaml $(tag) == 'release_3_0' && $(go)
-output-folder: $(go-sdk-folder)/services/preview/cognitiveservices/v3.0-preview/$(namespace)
+output-folder: $(go-sdk-folder)/services/cognitiveservices/v3.0/$(namespace)
+```
+
+### Tag: release_3_1 and go
+
+These settings apply only when `--tag=release_3_1 --go` is specified on the command line.
+Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
+
+``` yaml $(tag) == 'release_3_1' && $(go)
+output-folder: $(go-sdk-folder)/services/preview/cognitiveservices/v3.1-preview.2/$(namespace)
 ```

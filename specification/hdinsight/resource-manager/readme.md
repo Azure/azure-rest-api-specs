@@ -95,6 +95,7 @@ input-file:
 - Microsoft.HDInsight/stable/2018-06-01-preview/extensions.json
 - Microsoft.HDInsight/stable/2018-06-01-preview/scriptActions.json
 - Microsoft.HDInsight/stable/2018-06-01-preview/operations.json
+- Microsoft.HDInsight/stable/2018-06-01-preview/virtualMachines.json
 ```
 
 
@@ -131,6 +132,9 @@ swagger-to-sdk:
   - repo: azure-sdk-for-python
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-node
+  - repo: azure-resource-manager-schemas
+    after_scripts:
+      - node sdkauto_afterscript.js hdinsight/resource-manager
 ```
 
 ## Python
@@ -207,6 +211,10 @@ generate-interface: true
 
 
 
+## AzureResourceSchema
+
+See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
+
 ## Multi-API/Profile support for AutoRest v3 generators 
 
 AutoRest V3 generators require the use of `--tag=all-api-versions` to select api files.
@@ -226,6 +234,7 @@ input-file:
   - $(this-folder)/Microsoft.HDInsight/stable/2018-06-01-preview/extensions.json
   - $(this-folder)/Microsoft.HDInsight/stable/2018-06-01-preview/scriptActions.json
   - $(this-folder)/Microsoft.HDInsight/stable/2018-06-01-preview/operations.json
+  - $(this-folder)/Microsoft.HDInsight/stable/2018-06-01-preview/virtualMachines.json
   - $(this-folder)/Microsoft.HDInsight/preview/2015-03-01-preview/cluster.json
   - $(this-folder)/Microsoft.HDInsight/preview/2015-03-01-preview/applications.json
   - $(this-folder)/Microsoft.HDInsight/preview/2015-03-01-preview/locations.json

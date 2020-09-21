@@ -26,9 +26,19 @@ These are the global settings for the portal.
 
 ``` yaml
 openapi-type: arm
-tag: package-2019-01-01-preview
+tag: package-2020-09-01-preview
 ```
 
+
+### Tag: package-2020-09-01-preview
+
+These settings apply only when `--tag=package-2020-09-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2020-09-01-preview'
+input-file:
+  - Microsoft.Portal/preview/2020-09-01-preview/portal.json
+  - Microsoft.Portal/preview/2020-09-01-preview/tenantConfiguration.json
+```
 ### Tag: package-2019-01-01-preview
 
 These settings apply only when `--tag=package-2019-01-01-preview` is specified on the command line.
@@ -36,13 +46,14 @@ These settings apply only when `--tag=package-2019-01-01-preview` is specified o
 ``` yaml $(tag) == 'package-2019-01-01-preview'
 input-file:
   - Microsoft.Portal/preview/2019-01-01-preview/portal.json
+  - Microsoft.Portal/preview/2019-01-01-preview/tenantConfiguration.json
 ```
 
 ### Tag: package-2018-10-01-preview
 
 These settings apply only when `--tag=package-2018-10-01-preview` is specified on the command line.
 
-```yaml $(tag) == 'package-2018-10-01-preview'
+``` yaml $(tag) == 'package-2018-10-01-preview'
 input-file:
   - Microsoft.Portal/preview/2018-10-01-preview/portal.json
 ```
@@ -73,9 +84,12 @@ swagger-to-sdk:
   - repo: azure-sdk-for-node
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-ruby
-  - repo: azure-cli-extensions
     after_scripts:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_portal']
+  - repo: azure-cli-extensions
+  - repo: azure-resource-manager-schemas
+    after_scripts:
+      - node sdkauto_afterscript.js portal/resource-manager
 ```
 
 ## Go
@@ -102,7 +116,11 @@ See configuration in [readme.csharp.md](./readme.csharp.md)
 
 See configuration in [readme.nodejs.md](./readme.nodejs.md)
 
-## Multi-API/Profile support for AutoRest v3 generators 
+## AzureResourceSchema
+
+See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
+
+## Multi-API/Profile support for AutoRest v3 generators
 
 AutoRest V3 generators require the use of `--tag=all-api-versions` to select api files.
 
@@ -115,16 +133,16 @@ require: $(this-folder)/../../../profiles/readme.md
 # all the input files across all versions
 input-file:
   - $(this-folder)/Microsoft.Portal/preview/2019-01-01-preview/portal.json
+  - $(this-folder)/Microsoft.Portal/preview/2019-01-01-preview/tenantConfiguration.json
   - $(this-folder)/Microsoft.Portal/preview/2018-10-01-preview/portal.json
   - $(this-folder)/Microsoft.Portal/preview/2015-08-01-preview/portal.json
 
 ```
 
-If there are files that should not be in the `all-api-versions` set, 
+If there are files that should not be in the `all-api-versions` set,
 uncomment the  `exclude-file` section below and add the file paths.
 
 ``` yaml $(tag) == 'all-api-versions'
 #exclude-file: 
 #  - $(this-folder)/Microsoft.Example/stable/2010-01-01/somefile.json
 ```
-

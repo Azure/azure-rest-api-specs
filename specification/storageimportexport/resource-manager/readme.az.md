@@ -7,7 +7,8 @@ az:
   extensions: storageimportexport
   package-name: azure-mgmt-storageimportexport
   namespace: azure.mgmt.storageimportexport
-python-sdk-output-folder: "$(output-folder)/src/storageimportexport/azext_storageimportexport/vendored_sdks/storageimportexport"
+az-output-folder: $(azure-cli-extension-folder)/src/storageimportexport
+python-sdk-output-folder: "$(az-output-folder)/azext_storageimportexport/vendored_sdks/storageimportexport"
 cli:
   cli-directive:
     - where:          
