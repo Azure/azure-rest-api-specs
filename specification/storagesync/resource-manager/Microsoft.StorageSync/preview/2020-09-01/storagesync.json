@@ -3107,6 +3107,10 @@
         "details": {
           "$ref": "#/definitions/StorageSyncErrorDetails",
           "description": "Error details of the given entry."
+        },
+        "innerError": {
+          "$ref": "#/definitions/StorageSyncInnerErrorDetails",
+          "description": "Inner error details of the given entry."
         }
       }
     },
@@ -3125,6 +3129,48 @@
         "target": {
           "type": "string",
           "description": "Target of the given entry."
+        },
+        "requestUri": {
+          "type": "string",
+          "description": "Request URI of the given entry."
+        },
+        "exceptionType": {
+          "type": "string",
+          "description": "Exception type of the given entry."
+        },
+        "httpMethod": {
+          "type": "string",
+          "description": "HTTP method of the given entry."
+        },
+        "hashedMessage": {
+          "type": "string",
+          "description": "Hashed message of the given entry."
+        },
+        "httpErrorCode": {
+          "type": "string",
+          "description": "HTTP error code of the given entry."
+        }
+      }
+    },
+    "StorageSyncInnerErrorDetails": {
+      "type": "object",
+      "description": "Error Details object.",
+      "properties": {
+        "callStack": {
+          "type": "string",
+          "description": "Call stack of the error."
+        },
+        "message": {
+          "type": "string",
+          "description": "Error message of the error."
+        },
+        "innerException": {
+          "type": "string",
+          "description": "Exception of the inner error."
+        },
+        "innerExceptionCallStack": {
+          "type": "string",
+          "description": "Call stack of the inner error."
         }
       }
     },
