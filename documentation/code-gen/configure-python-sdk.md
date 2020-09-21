@@ -86,7 +86,8 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
-  - repo: azure-sdk-for-python
+  - repo: azure-sdk-for-python                          // for track1 SDK
+  - repo: azure-sdk-for-python-track2                   // for track2 SDK
   - ...
 
 
@@ -226,12 +227,13 @@ After configure all the readme files, autorest can be used to generate SDK.
 Track1 SDK is based on AutoRest version V2 that's going to be replaced by version V3.
 
 ~~~
-autorest --keep-version-file --multiapi --no-async --python --python-mode=update --python-sdks-folder=C:\ZZ\projects\codegen\azure-sdk-for-python\sdk --use=@microsoft.azure/autorest.python@~4.0.71 --version=V2 ..\azure-rest-api-specs\specification\appconfiguration\resource-manager\readme.md
+> autorest --keep-version-file --multiapi --no-async --python --python-mode=update --python-sdks-folder=C:\ZZ\projects\codegen\azure-sdk-for-python\sdk --use=@microsoft.azure/autorest.python@~4.0.71 --version=V2 ..\azure-rest-api-specs\specification\appconfiguration\resource-manager\readme.md
 ~~~
 
 ### Track2 (for latest Autorest)
 Track 2 is based on the latest AutoRest code generator
 
 ~~~
-autorest --python --track2 --use=@autorest/python@5.1.0-preview.4 --python-sdks-folder=..\azure-sdk-for-python\sdk --multiapi --python-mode=update  ..\azure-rest-api-specs\specification\appconfiguration\resource-manager\readme.md
+> autorest --reset
+> autorest --python --track2 --use=@autorest/python@5.3.0 --python-sdks-folder=..\azure-sdk-for-python\sdk --multiapi --python-mode=update  ..\azure-rest-api-specs\specification\appconfiguration\resource-manager\readme.md
 ~~~
