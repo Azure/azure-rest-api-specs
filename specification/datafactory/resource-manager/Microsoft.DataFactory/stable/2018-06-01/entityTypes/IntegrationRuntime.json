@@ -444,6 +444,38 @@
         "componentName"
       ]
     },
+    "AzPowerShellSetup": {
+      "description": "The express custom setup of installing Azure PowerShell.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CustomSetupBase"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "Install Azure PowerShell type properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/AzPowerShellSetupTypeProperties"
+        }
+      },
+      "required": [
+        "typeProperties"
+      ]
+    },
+    "AzPowerShellSetupTypeProperties": {
+      "description": "Installation of Azure PowerShell type properties.",
+      "type": "object",
+      "properties": {
+        "version": {
+          "description": "The required version of Azure PowerShell to install.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "version"
+      ]
+    },
     "EntityReference": {
       "description": "The entity reference.",
       "type": "object",

@@ -436,6 +436,103 @@
         }
       }
     },
+    "/{scope}/providers/Microsoft.CostManagement/alerts/{alertId}": {
+      "get": {
+        "tags": [
+          "Alerts"
+        ],
+        "operationId": "Alerts_Get",
+        "description": "Gets the alert for the scope by alert ID.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/costmanagement/"
+        },
+        "x-ms-examples": {
+          "SubscriptionAlerts": {
+            "$ref": "./examples/SingleSubscriptionAlert.json"
+          },
+          "ResourceGroupAlerts": {
+            "$ref": "./examples/SingleResourceGroupAlert.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/scopeAlertParameter"
+          },
+          {
+            "$ref": "#/parameters/alertIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Alert"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Alerts"
+        ],
+        "operationId": "Alerts_Dismiss",
+        "description": "Dismisses the specified alert",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/costmanagement/"
+        },
+        "x-ms-examples": {
+          "SubscriptionAlerts": {
+            "$ref": "./examples/DismissSubscriptionAlerts.json"
+          },
+          "ResourceGroupAlerts": {
+            "$ref": "./examples/DismissResourceGroupAlerts.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/scopeAlertParameter"
+          },
+          {
+            "$ref": "#/parameters/alertIdParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DismissAlertPayload"
+            },
+            "description": "Parameters supplied to the Dismiss Alert operation."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Alert"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
     "/providers/Microsoft.CostManagement/{externalCloudProviderType}/{externalCloudProviderId}/alerts": {
       "get": {
         "tags": [
@@ -990,350 +1087,6 @@
             "description": "OK. The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/QueryResult"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        }
-      }
-    },
-    "/{scope}/providers/Microsoft.CostManagement/exports": {
-      "get": {
-        "tags": [
-          "Exports"
-        ],
-        "operationId": "Exports_List",
-        "description": "The operation to list all exports at the given scope.",
-        "externalDocs": {
-          "url": "https://docs.microsoft.com/en-us/rest/api/costmanagement/"
-        },
-        "x-ms-examples": {
-          "SubscriptionExportList": {
-            "$ref": "./examples/ExportListBySubscription.json"
-          },
-          "ResourceGroupExportList": {
-            "$ref": "./examples/ExportListByResourceGroup.json"
-          },
-          "BillingAccountExportList": {
-            "$ref": "./examples/ExportListByBillingAccount.json"
-          },
-          "DepartmentExportList": {
-            "$ref": "./examples/ExportListByDepartment.json"
-          },
-          "EnrollmentAccountExportList": {
-            "$ref": "./examples/ExportListByEnrollmentAccount.json"
-          },
-          "ManagementGroupExportList": {
-            "$ref": "./examples/ExportListByManagementGroup.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "#/parameters/scopeQueryParameter"
-          },
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK. The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/ExportListResult"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        }
-      }
-    },
-    "/{scope}/providers/Microsoft.CostManagement/exports/{exportName}": {
-      "get": {
-        "tags": [
-          "Exports"
-        ],
-        "operationId": "Exports_Get",
-        "description": "The operation to get the export for the defined scope by export name.",
-        "externalDocs": {
-          "url": "https://docs.microsoft.com/en-us/rest/api/costmanagement/"
-        },
-        "x-ms-examples": {
-          "SubscriptionExport": {
-            "$ref": "./examples/ExportBySubscription.json"
-          },
-          "ResourceGroupExport": {
-            "$ref": "./examples/ExportByResourceGroup.json"
-          },
-          "BillingAccountExport": {
-            "$ref": "./examples/ExportByBillingAccount.json"
-          },
-          "DepartmentExport": {
-            "$ref": "./examples/ExportByDepartment.json"
-          },
-          "EnrollmentAccountExport": {
-            "$ref": "./examples/ExportByEnrollmentAccount.json"
-          },
-          "ManagementGroupExport": {
-            "$ref": "./examples/ExportByManagementGroup.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "#/parameters/scopeQueryParameter"
-          },
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/exportNameParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK. The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/Export"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        }
-      },
-      "put": {
-        "tags": [
-          "Exports"
-        ],
-        "operationId": "Exports_CreateOrUpdate",
-        "description": "The operation to create or update a export. Update operation requires latest eTag to be set in the request. You may obtain the latest eTag by performing a get operation. Create operation does not require eTag.",
-        "externalDocs": {
-          "url": "https://docs.microsoft.com/en-us/rest/api/costmanagement/"
-        },
-        "x-ms-examples": {
-          "SubscriptionCreateOrUpdateExport": {
-            "$ref": "./examples/ExportCreateOrUpdateBySubscription.json"
-          },
-          "ResourceGroupCreateOrUpdateExport": {
-            "$ref": "./examples/ExportCreateOrUpdateByResourceGroup.json"
-          },
-          "BillingAccountCreateOrUpdateExport": {
-            "$ref": "./examples/ExportCreateOrUpdateByBillingAccount.json"
-          },
-          "DepartmentCreateOrUpdateExport": {
-            "$ref": "./examples/ExportCreateOrUpdateByDepartment.json"
-          },
-          "EnrollmentAccountCreateOrUpdateExport": {
-            "$ref": "./examples/ExportCreateOrUpdateByEnrollmentAccount.json"
-          },
-          "ManagementGroupCreateOrUpdateExport": {
-            "$ref": "./examples/ExportCreateOrUpdateByManagementGroup.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "#/parameters/scopeQueryParameter"
-          },
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/exportNameParameter"
-          },
-          {
-            "name": "parameters",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/Export"
-            },
-            "description": "Parameters supplied to the CreateOrUpdate Export operation."
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK. The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/Export"
-            }
-          },
-          "201": {
-            "description": "Created.",
-            "schema": {
-              "$ref": "#/definitions/Export"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        }
-      },
-      "delete": {
-        "tags": [
-          "Exports"
-        ],
-        "operationId": "Exports_Delete",
-        "description": "The operation to delete a export.",
-        "externalDocs": {
-          "url": "https://docs.microsoft.com/en-us/rest/api/costmanagement/"
-        },
-        "x-ms-examples": {
-          "SubscriptionDeleteExport": {
-            "$ref": "./examples/ExportDeleteBySubscription.json"
-          },
-          "ResourceGroupDeleteExport": {
-            "$ref": "./examples/ExportDeleteByResourceGroup.json"
-          },
-          "BillingAccountDeleteExport": {
-            "$ref": "./examples/ExportDeleteByBillingAccount.json"
-          },
-          "EnrollmentAccountDeleteExport": {
-            "$ref": "./examples/ExportDeleteByEnrollmentAccount.json"
-          },
-          "DepartmentDeleteExport": {
-            "$ref": "./examples/ExportDeleteByDepartment.json"
-          },
-          "ManagementGroupDeleteExport": {
-            "$ref": "./examples/ExportDeleteByManagementGroup.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "#/parameters/scopeQueryParameter"
-          },
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/exportNameParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK. The request has succeeded."
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        }
-      }
-    },
-    "/{scope}/providers/Microsoft.CostManagement/exports/{exportName}/run": {
-      "post": {
-        "tags": [
-          "Exports"
-        ],
-        "operationId": "Exports_Execute",
-        "description": "The operation to execute a export.",
-        "externalDocs": {
-          "url": "https://docs.microsoft.com/en-us/rest/api/costmanagement/"
-        },
-        "x-ms-examples": {
-          "SubscriptionExecuteExport": {
-            "$ref": "./examples/ExportExecutionBySubscription.json"
-          },
-          "ResourceGroupExecuteExport": {
-            "$ref": "./examples/ExportExecutionByResourceGroup.json"
-          },
-          "BillingAccountExecuteExport": {
-            "$ref": "./examples/ExportExecutionByBillingAccount.json"
-          },
-          "DepartmentExecuteExport": {
-            "$ref": "./examples/ExportExecutionByDepartment.json"
-          },
-          "EnrollmentAccountExecuteExport": {
-            "$ref": "./examples/ExportExecutionByEnrollmentAccount.json"
-          },
-          "ManagementGroupExecuteExport": {
-            "$ref": "./examples/ExportExecutionByManagementGroup.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "#/parameters/scopeQueryParameter"
-          },
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/exportNameParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK. The request has succeeded."
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        }
-      }
-    },
-    "/{scope}/providers/Microsoft.CostManagement/exports/{exportName}/runHistory": {
-      "get": {
-        "tags": [
-          "Exports"
-        ],
-        "operationId": "Exports_GetExecutionHistory",
-        "description": "The operation to get the execution history of an export for the defined scope by export name.",
-        "externalDocs": {
-          "url": "https://docs.microsoft.com/en-us/rest/api/costmanagement/"
-        },
-        "x-ms-examples": {
-          "SubscriptionExecutionHistoryExport": {
-            "$ref": "./examples/ExportExecutionListBySubscription.json"
-          },
-          "ResourceGroupExecutionHistoryExport": {
-            "$ref": "./examples/ExportExecutionListByResourceGroup.json"
-          },
-          "BillingAccountExecutionHistoryExport": {
-            "$ref": "./examples/ExportExecutionListByBillingAccount.json"
-          },
-          "DepartmentExecutionHistoryExport": {
-            "$ref": "./examples/ExportExecutionListByDepartment.json"
-          },
-          "EnrollmentAccountExecutionHistoryExport": {
-            "$ref": "./examples/ExportExecutionListByEnrollmentAccount.json"
-          },
-          "ManagementGroupExecutionHistoryExport": {
-            "$ref": "./examples/ExportExecutionListByManagementGroup.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "#/parameters/scopeQueryParameter"
-          },
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/exportNameParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK. The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/ExportExecutionListResult"
             }
           },
           "default": {
@@ -2018,15 +1771,58 @@
           "properties": {
             "type": {
               "description": "type of alert",
-              "type": "string"
+              "type": "string",
+              "enum": [
+                "Budget",
+                "Invoice",
+                "Credit",
+                "Quota",
+                "General",
+                "xCloud",
+                "BudgetForecast"
+              ],
+              "x-ms-enum": {
+                "name": "AlertType",
+                "modelAsString": true
+              }
             },
             "category": {
               "description": "Alert category",
-              "type": "string"
+              "type": "string",
+              "enum": [
+                "Cost",
+                "Usage",
+                "Billing",
+                "System"
+              ],
+              "x-ms-enum": {
+                "name": "AlertCategory",
+                "modelAsString": true
+              }
             },
             "criteria": {
               "description": "Criteria that triggered alert",
-              "type": "string"
+              "type": "string",
+              "enum": [
+                "CostThresholdExceeded",
+                "UsageThresholdExceeded",
+                "CreditThresholdApproaching",
+                "CreditThresholdReached",
+                "QuotaThresholdApproaching",
+                "QuotaThresholdReached",
+                "MultiCurrency",
+                "ForecastCostThresholdExceeded",
+                "ForecastUsageThresholdExceeded",
+                "InvoiceDueDateApproaching",
+                "InvoiceDueDateReached",
+                "CrossCloudNewDataAvailable",
+                "CrossCloudCollectionError",
+                "GeneralThresholdError"
+              ],
+              "x-ms-enum": {
+                "name": "AlertCriteria",
+                "modelAsString": true
+              }
             }
           }
         },
@@ -2036,7 +1832,15 @@
         },
         "source": {
           "description": "Source of alert",
-          "type": "string"
+          "type": "string",
+          "enum": [
+            "Preset",
+            "User"
+          ],
+          "x-ms-enum": {
+            "name": "AlertSource",
+            "modelAsString": true
+          }
         },
         "details": {
           "description": "Alert details",
@@ -2044,7 +1848,20 @@
           "properties": {
             "timeGrainType": {
               "description": "Type of timegrain cadence",
-              "type": "string"
+              "type": "string",
+              "enum": [
+                "None",
+                "Monthly",
+                "Quarterly",
+                "Annually",
+                "BillingMonth",
+                "BillingQuarter",
+                "BillingAnnual"
+              ],
+              "x-ms-enum": {
+                "name": "AlertTimeGrainType",
+                "modelAsString": true
+              }
             },
             "periodStartDate": {
               "description": "datetime of periodStartDate",
@@ -2081,7 +1898,19 @@
             },
             "operator": {
               "description": "operator used to compare currentSpend with amount",
-              "type": "string"
+              "type": "string",
+              "enum": [
+                "None",
+                "EqualTo",
+                "GreaterThan",
+                "GreaterThanOrEqualTo",
+                "LessThan",
+                "LessThanOrEqualTo"
+              ],
+              "x-ms-enum": {
+                "name": "AlertOperator",
+                "modelAsString": true
+              }
             },
             "amount": {
               "description": "budget threshold amount",
@@ -2130,7 +1959,18 @@
         },
         "status": {
           "description": "alert status",
-          "type": "string"
+          "type": "string",
+          "enum": [
+            "None",
+            "Active",
+            "Overridden",
+            "Resolved",
+            "Dismissed"
+          ],
+          "x-ms-enum": {
+            "name": "AlertStatus",
+            "modelAsString": true
+          }
         },
         "creationTime": {
           "description": "dateTime in which alert was created",
@@ -2151,6 +1991,16 @@
         "statusModificationTime": {
           "description": "dateTime in which the alert status was last modified",
           "type": "string"
+        }
+      }
+    },
+    "DismissAlertPayload": {
+      "description": "The request payload to update an alert",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/AlertProperties",
+          "title": "Alert properties"
         }
       }
     },
@@ -2547,256 +2397,6 @@
         "operator",
         "values"
       ]
-    },
-    "ExportListResult": {
-      "description": "Result of listing exports. It contains a list of available exports in the scope provided.",
-      "properties": {
-        "value": {
-          "description": "The list of exports.",
-          "type": "array",
-          "readOnly": true,
-          "items": {
-            "$ref": "#/definitions/Export"
-          }
-        }
-      }
-    },
-    "Export": {
-      "description": "A export resource.",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/Resource"
-        }
-      ],
-      "properties": {
-        "properties": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/ExportProperties",
-          "title": "Export properties"
-        }
-      }
-    },
-    "ExportProperties": {
-      "description": "The properties of the export.",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/CommonExportProperties"
-        }
-      ],
-      "properties": {
-        "schedule": {
-          "description": "Has schedule information for the export.",
-          "$ref": "#/definitions/ExportSchedule"
-        }
-      }
-    },
-    "CommonExportProperties": {
-      "description": "The common properties of the export.",
-      "properties": {
-        "format": {
-          "description": "The format of the export being delivered.",
-          "type": "string",
-          "enum": [
-            "Csv"
-          ],
-          "x-ms-enum": {
-            "name": "FormatType",
-            "modelAsString": true
-          }
-        },
-        "deliveryInfo": {
-          "description": "Has delivery information for the export.",
-          "$ref": "#/definitions/ExportDeliveryInfo"
-        },
-        "definition": {
-          "description": "Has definition for the export.",
-          "$ref": "#/definitions/QueryDefinition"
-        }
-      },
-      "required": [
-        "deliveryInfo",
-        "definition"
-      ]
-    },
-    "ExportSchedule": {
-      "description": "The schedule associated with a export.",
-      "properties": {
-        "status": {
-          "description": "The status of the schedule. Whether active or not. If inactive, the export's scheduled execution is paused.",
-          "type": "string",
-          "enum": [
-            "Active",
-            "Inactive"
-          ],
-          "x-ms-enum": {
-            "name": "StatusType",
-            "modelAsString": true
-          }
-        },
-        "recurrence": {
-          "description": "The schedule recurrence.",
-          "type": "string",
-          "enum": [
-            "Daily",
-            "Weekly",
-            "Monthly",
-            "Annually"
-          ],
-          "x-ms-enum": {
-            "name": "RecurrenceType",
-            "modelAsString": true
-          }
-        },
-        "recurrencePeriod": {
-          "description": "Has start and end date of the recurrence. The start date must be in future. If present, the end date must be greater than start date.",
-          "$ref": "#/definitions/ExportRecurrencePeriod"
-        }
-      },
-      "required": [
-        "recurrence"
-      ]
-    },
-    "ExportDeliveryInfo": {
-      "description": "The delivery information associated with a export.",
-      "properties": {
-        "destination": {
-          "description": "Has destination for the export being delivered.",
-          "$ref": "#/definitions/ExportDeliveryDestination"
-        }
-      },
-      "required": [
-        "destination"
-      ]
-    },
-    "ExportRecurrencePeriod": {
-      "description": "The start and end date for recurrence schedule.",
-      "properties": {
-        "from": {
-          "description": "The start date of recurrence.",
-          "type": "string",
-          "format": "date-time"
-        },
-        "to": {
-          "description": "The end date of recurrence.",
-          "type": "string",
-          "format": "date-time"
-        }
-      },
-      "required": [
-        "from"
-      ]
-    },
-    "ExportDeliveryDestination": {
-      "description": "The destination information for the delivery of the export. To allow access to a storage account, you must register the account's subscription with the Microsoft.CostManagementExports resource provider. This is required once per subscription. When creating an export in the Azure portal, it is done automatically, however API users need to register the subscription. For more information see https://docs.microsoft.com/en-us/azure/azure-resource-manager/resource-manager-supported-services .",
-      "properties": {
-        "resourceId": {
-          "description": "The resource id of the storage account where exports will be delivered.",
-          "type": "string"
-        },
-        "container": {
-          "description": "The name of the container where exports will be uploaded.",
-          "type": "string"
-        },
-        "rootFolderPath": {
-          "description": "The name of the directory where exports will be uploaded.",
-          "type": "string"
-        }
-      },
-      "required": [
-        "resourceId",
-        "container"
-      ]
-    },
-    "ExportExecutionListResult": {
-      "description": "Result of listing exports execution history of a export by name",
-      "properties": {
-        "value": {
-          "description": "The list of export executions.",
-          "type": "array",
-          "readOnly": true,
-          "items": {
-            "$ref": "#/definitions/ExportExecution"
-          }
-        }
-      }
-    },
-    "ExportExecution": {
-      "description": "A export execution.",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/Resource"
-        }
-      ],
-      "properties": {
-        "properties": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/ExportExecutionProperties",
-          "title": "Export execution properties"
-        }
-      }
-    },
-    "ExportExecutionProperties": {
-      "description": "The properties of the export execution.",
-      "properties": {
-        "executionType": {
-          "description": "The type of the export execution.",
-          "type": "string",
-          "enum": [
-            "OnDemand",
-            "Scheduled"
-          ],
-          "x-ms-enum": {
-            "name": "ExecutionType",
-            "modelAsString": true
-          }
-        },
-        "status": {
-          "description": "The status of the export execution.",
-          "type": "string",
-          "enum": [
-            "Queued",
-            "InProgress",
-            "Completed",
-            "Failed",
-            "Timeout",
-            "NewDataNotAvailable",
-            "DataNotAvailable"
-          ],
-          "x-ms-enum": {
-            "name": "ExecutionStatus",
-            "modelAsString": true
-          }
-        },
-        "submittedBy": {
-          "description": "The identifier for the entity that executed the export. For OnDemand executions, it is the email id. For Scheduled executions, it is the constant value - System.",
-          "type": "string"
-        },
-        "submittedTime": {
-          "description": "The time when export was queued to be executed.",
-          "type": "string",
-          "format": "date-time"
-        },
-        "processingStartTime": {
-          "description": "The time when export was picked up to be executed.",
-          "type": "string",
-          "format": "date-time"
-        },
-        "processingEndTime": {
-          "description": "The time when export execution finished.",
-          "type": "string",
-          "format": "date-time"
-        },
-        "fileName": {
-          "description": "The name of the file export got written to.",
-          "type": "string"
-        },
-        "runSettings": {
-          "$ref": "#/definitions/CommonExportProperties"
-        }
-      }
     }
   },
   "parameters": {
@@ -2906,14 +2506,6 @@
       "type": "string",
       "x-ms-parameter-location": "method"
     },
-    "exportNameParameter": {
-      "name": "exportName",
-      "in": "path",
-      "description": "Export Name.",
-      "required": true,
-      "type": "string",
-      "x-ms-parameter-location": "method"
-    },
     "externalCloudProviderTypeParameter": {
       "name": "externalCloudProviderType",
       "in": "path",
@@ -2937,6 +2529,15 @@
       "type": "string",
       "description": "This can be '{externalSubscriptionId}' for linked account or '{externalBillingAccountId}' for consolidated account used with dimension/query operations.",
       "x-ms-parameter-location": "method"
+    },
+    "alertIdParameter": {
+      "name": "alertId",
+      "in": "path",
+      "description": "Alert ID",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "x-ms-skip-url-encoding": true
     }
   }
 }

@@ -271,6 +271,10 @@
           "type": "object",
           "description": "Specify the root path where partition discovery starts from. Type: string (or Expression with resultType string)."
         },
+        "deleteFilesAfterCompletion": {
+          "type": "object",
+          "description": "Indicates whether the source files need to be deleted after copy completion. Default is false. Type: boolean (or Expression with resultType boolean)."
+        },
         "modifiedDatetimeStart": {
           "type": "object",
           "description": "The start of file's modified datetime. Type: string (or Expression with resultType string)."
@@ -314,6 +318,10 @@
           "type": "object",
           "description": "Specify the root path where partition discovery starts from. Type: string (or Expression with resultType string)."
         },
+        "deleteFilesAfterCompletion": {
+          "type": "object",
+          "description": "Indicates whether the source files need to be deleted after copy completion. Default is false. Type: boolean (or Expression with resultType boolean)."
+        },
         "modifiedDatetimeStart": {
           "type": "object",
           "description": "The start of file's modified datetime. Type: string (or Expression with resultType string)."
@@ -349,6 +357,14 @@
           "type": "object",
           "description": "Point to a text file that lists each file (relative path to the path configured in the dataset) that you want to copy. Type: string (or Expression with resultType string)."
         },
+        "listAfter": {
+          "type": "object",
+          "description": "Lists files after the value (exclusive) based on file/folder names’ lexicographical order. Applies under the folderPath in data set, and filter files/sub-folders under the folderPath. Type: string (or Expression with resultType string)."
+        },
+        "listBefore": {
+          "type": "object",
+          "description": "Lists files before the value (inclusive) based on file/folder names’ lexicographical order. Applies under the folderPath in data set, and filter files/sub-folders under the folderPath. Type: string (or Expression with resultType string)."
+        },
         "enablePartitionDiscovery": {
           "type": "boolean",
           "description": "Indicates whether to enable partition discovery."
@@ -356,6 +372,10 @@
         "partitionRootPath": {
           "type": "object",
           "description": "Specify the root path where partition discovery starts from. Type: string (or Expression with resultType string)."
+        },
+        "deleteFilesAfterCompletion": {
+          "type": "object",
+          "description": "Indicates whether the source files need to be deleted after copy completion. Default is false. Type: boolean (or Expression with resultType boolean)."
         },
         "modifiedDatetimeStart": {
           "type": "object",
@@ -404,6 +424,10 @@
           "type": "object",
           "description": "Specify the root path where partition discovery starts from. Type: string (or Expression with resultType string)."
         },
+        "deleteFilesAfterCompletion": {
+          "type": "object",
+          "description": "Indicates whether the source files need to be deleted after copy completion. Default is false. Type: boolean (or Expression with resultType boolean)."
+        },
         "modifiedDatetimeStart": {
           "type": "object",
           "description": "The start of file's modified datetime. Type: string (or Expression with resultType string)."
@@ -446,6 +470,10 @@
         "partitionRootPath": {
           "type": "object",
           "description": "Specify the root path where partition discovery starts from. Type: string (or Expression with resultType string)."
+        },
+        "deleteFilesAfterCompletion": {
+          "type": "object",
+          "description": "Indicates whether the source files need to be deleted after copy completion. Default is false. Type: boolean (or Expression with resultType boolean)."
         },
         "modifiedDatetimeStart": {
           "type": "object",
@@ -497,6 +525,10 @@
         "partitionRootPath": {
           "type": "object",
           "description": "Specify the root path where partition discovery starts from. Type: string (or Expression with resultType string)."
+        },
+        "deleteFilesAfterCompletion": {
+          "type": "object",
+          "description": "Indicates whether the source files need to be deleted after copy completion. Default is false. Type: boolean (or Expression with resultType boolean)."
         },
         "modifiedDatetimeStart": {
           "type": "object",
@@ -564,6 +596,10 @@
           "type": "object",
           "description": "Specify the root path where partition discovery starts from. Type: string (or Expression with resultType string)."
         },
+        "deleteFilesAfterCompletion": {
+          "type": "object",
+          "description": "Indicates whether the source files need to be deleted after copy completion. Default is false. Type: boolean (or Expression with resultType boolean)."
+        },
         "modifiedDatetimeStart": {
           "type": "object",
           "description": "The start of file's modified datetime. Type: string (or Expression with resultType string)."
@@ -602,6 +638,10 @@
         "partitionRootPath": {
           "type": "object",
           "description": "Specify the root path where partition discovery starts from. Type: string (or Expression with resultType string)."
+        },
+        "deleteFilesAfterCompletion": {
+          "type": "object",
+          "description": "Indicates whether the source files need to be deleted after copy completion. Default is false. Type: boolean (or Expression with resultType boolean)."
         },
         "fileListPath": {
           "type": "object",
@@ -645,6 +685,10 @@
         "fileListPath": {
           "type": "object",
           "description": "Point to a text file that lists each file (relative path to the path configured in the dataset) that you want to copy. Type: string (or Expression with resultType string)."
+        },
+        "deleteFilesAfterCompletion": {
+          "type": "object",
+          "description": "Indicates whether the source files need to be deleted after copy completion. Default is false. Type: boolean (or Expression with resultType boolean)."
         },
         "modifiedDatetimeStart": {
           "type": "object",
@@ -735,6 +779,10 @@
         "distcpSettings": {
           "description": "Specifies Distcp-related settings.",
           "$ref": "#/definitions/DistcpSettings"
+        },
+        "deleteFilesAfterCompletion": {
+          "type": "object",
+          "description": "Indicates whether the source files need to be deleted after copy completion. Default is false. Type: boolean (or Expression with resultType boolean)."
         }
       }
     },
@@ -817,6 +865,15 @@
         }
       ]
     },
+    "AzureFileStorageWriteSettings": {
+      "description": "Azure File Storage write settings.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/StoreWriteSettings"
+        }
+      ]
+    },
     "FormatReadSettings": {
       "description": "Format read settings.",
       "discriminator": "type",
@@ -866,6 +923,36 @@
         }
       }
     },
+    "TarReadSettings": {
+      "description": "The Tar compression read settings.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CompressionReadSettings"
+        }
+      ],
+      "properties": {
+        "preserveCompressionFileNameAsFolder": {
+          "description": "Preserve the compression file name as folder path. Type: boolean (or Expression with resultType boolean).",
+          "type": "object"
+        }
+      }
+    },
+    "TarGZipReadSettings": {
+      "description": "The TarGZip compression read settings.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CompressionReadSettings"
+        }
+      ],
+      "properties": {
+        "preserveCompressionFileNameAsFolder": {
+          "description": "Preserve the compression file name as folder path. Type: boolean (or Expression with resultType boolean).",
+          "type": "object"
+        }
+      }
+    },
     "DelimitedTextReadSettings": {
       "description": "Delimited text read settings.",
       "type": "object",
@@ -897,6 +984,37 @@
         "compressionProperties": {
           "$ref": "#/definitions/CompressionReadSettings",
           "description": "Compression settings."
+        }
+      }
+    },
+    "XmlReadSettings": {
+      "description": "Xml read settings.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/FormatReadSettings"
+        }
+      ],
+      "properties": {
+        "compressionProperties": {
+          "$ref": "#/definitions/CompressionReadSettings",
+          "description": "Compression settings."
+        },
+        "validationMode": {
+          "type": "object",
+          "description": "Indicates what validation method is used when reading the xml files. Allowed values: 'none', 'xsd', or 'dtd'. Type: string (or Expression with resultType string)."
+        },
+        "detectDataType": {
+          "type": "object",
+          "description": "Indicates whether type detection is enabled when reading the xml files. Type: boolean (or Expression with resultType boolean)."
+        },
+        "namespaces": {
+          "type": "object",
+          "description": "Indicates whether namespace is enabled when reading the xml files. Type: boolean (or Expression with resultType boolean)."
+        },
+        "namespacePrefixes": {
+          "type": "object",
+          "description": "Namespace uri to prefix mappings to override the prefixes in column names when namespace is enabled, if no prefix is defined for a namespace uri, the prefix of xml element/attribute name in the xml data file will be used. Example: \"{\"http://www.example.com/xml\":\"prefix\"}\" Type: object (or Expression with resultType object)."
         }
       }
     },
@@ -948,6 +1066,52 @@
         "recordNamespace": {
           "type": "string",
           "description": "Record namespace in the write result."
+        },
+        "maxRowsPerFile": {
+          "type": "object",
+          "description": "Limit the written file's row count to be smaller than or equal to the specified count. Type: integer (or Expression with resultType integer)."
+        },
+        "fileNamePrefix": {
+          "type": "object",
+          "description": "Specifies the file name pattern <fileNamePrefix>_<fileIndex>.<fileExtension> when copy from non-file based store without partitionOptions. Type: string (or Expression with resultType string)."
+        }
+      }
+    },
+    "OrcWriteSettings": {
+      "description": "Orc write settings.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/FormatWriteSettings"
+        }
+      ],
+      "properties": {
+        "maxRowsPerFile": {
+          "type": "object",
+          "description": "Limit the written file's row count to be smaller than or equal to the specified count. Type: integer (or Expression with resultType integer)."
+        },
+        "fileNamePrefix": {
+          "type": "object",
+          "description": "Specifies the file name pattern <fileNamePrefix>_<fileIndex>.<fileExtension> when copy from non-file based store without partitionOptions. Type: string (or Expression with resultType string)."
+        }
+      }
+    },
+    "ParquetWriteSettings": {
+      "description": "Parquet write settings.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/FormatWriteSettings"
+        }
+      ],
+      "properties": {
+        "maxRowsPerFile": {
+          "type": "object",
+          "description": "Limit the written file's row count to be smaller than or equal to the specified count. Type: integer (or Expression with resultType integer)."
+        },
+        "fileNamePrefix": {
+          "type": "object",
+          "description": "Specifies the file name pattern <fileNamePrefix>_<fileIndex>.<fileExtension> when copy from non-file based store without partitionOptions. Type: string (or Expression with resultType string)."
         }
       }
     },
@@ -967,6 +1131,14 @@
         "fileExtension": {
           "type": "object",
           "description": "The file extension used to create the files. Type: string (or Expression with resultType string)."
+        },
+        "maxRowsPerFile": {
+          "type": "object",
+          "description": "Limit the written file's row count to be smaller than or equal to the specified count. Type: integer (or Expression with resultType integer)."
+        },
+        "fileNamePrefix": {
+          "type": "object",
+          "description": "Specifies the file name pattern <fileNamePrefix>_<fileIndex>.<fileExtension> when copy from non-file based store without partitionOptions. Type: string (or Expression with resultType string)."
         }
       },
       "required": [
@@ -1114,6 +1286,32 @@
         }
       }
     },
+    "XmlSource": {
+      "description": "A copy activity Xml source.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CopySource"
+        }
+      ],
+      "properties": {
+        "storeSettings": {
+          "$ref": "#/definitions/StoreReadSettings",
+          "description": "Xml store settings."
+        },
+        "formatSettings": {
+          "$ref": "#/definitions/XmlReadSettings",
+          "description": "Xml format settings."
+        },
+        "additionalColumns": {
+          "type": "array",
+          "description": "Specifies the additional columns to be added to source data. Type: array of objects (or Expression with resultType array of objects).",
+          "items": {
+            "$ref": "#/definitions/AdditionalColumns"
+          }
+        }
+      }
+    },
     "OrcSource": {
       "description": "A copy activity ORC source.",
       "type": "object",
@@ -1186,6 +1384,10 @@
         "storeSettings": {
           "$ref": "#/definitions/StoreWriteSettings",
           "description": "ORC store settings."
+        },
+        "formatSettings": {
+          "$ref": "#/definitions/OrcWriteSettings",
+          "description": "ORC format settings."
         }
       }
     },
@@ -1457,6 +1659,10 @@
         "preferredRegions": {
           "type": "object",
           "description": "Preferred regions. Type: array of strings (or Expression with resultType array of strings)."
+        },
+        "detectDatetime": {
+          "type": "object",
+          "description": "Whether detect primitive values as datetime values. Type: boolean (or Expression with resultType boolean)."
         },
         "additionalColumns": {
           "type": "array",
@@ -1869,6 +2075,14 @@
         "baseRequestId": {
           "type": "object",
           "description": "The ID of request for delta loading. Once it is set, only data with requestId larger than the value of this property will be retrieved. The default value is 0. Type: integer (or Expression with resultType integer )."
+        },
+        "customRfcReadTableFunctionModule": {
+          "type": "object",
+          "description": "Specifies the custom RFC function module that will be used to read data from SAP Table. Type: string (or Expression with resultType string)."
+        },
+        "sapDataColumnDelimiter": {
+          "type": "object",
+          "description": "The single character that will be used as delimiter passed to SAP RFC as well as splitting the output data retrieved. Type: string (or Expression with resultType string)."
         }
       }
     },
@@ -1904,6 +2118,10 @@
         "customRfcReadTableFunctionModule": {
           "type": "object",
           "description": "Specifies the custom RFC function module that will be used to read data from SAP Table. Type: string (or Expression with resultType string)."
+        },
+        "sapDataColumnDelimiter": {
+          "type": "object",
+          "description": "The single character that will be used as delimiter passed to SAP RFC as well as splitting the output data retrieved. Type: string (or Expression with resultType string)."
         },
         "partitionOption": {
           "description": "The partition mechanism that will be used for SAP table read in parallel.",
@@ -1946,6 +2164,41 @@
         "maxPartitionsNumber": {
           "type": "object",
           "description": "The maximum value of partitions the table will be split into. Type: integer (or Expression with resultType string)."
+        }
+      }
+    },
+    "RestSink": {
+      "description": "A copy activity Rest service Sink.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CopySink"
+        }
+      ],
+      "properties": {
+        "requestMethod": {
+          "type": "object",
+          "description": "The HTTP method used to call the RESTful API. The default is POST. Type: string (or Expression with resultType string)."
+        },
+        "additionalHeaders": {
+          "type": "object",
+          "description": "The additional HTTP headers in the request to the RESTful API. Type: string (or Expression with resultType string)."
+        },
+        "httpRequestTimeout": {
+          "type": "object",
+          "description": "The timeout (TimeSpan) to get an HTTP response. It is the timeout to get a response, not the timeout to read response data. Default value: 00:01:40. Type: string (or Expression with resultType string), pattern: ((\\d+)\\.)?(\\d\\d):(60|([0-5][0-9])):(60|([0-5][0-9]))."
+        },
+        "requestInterval": {
+          "type": "object",
+          "description": "The time to await before sending next request, in milliseconds "
+        },
+        "compressionType": {
+          "type": "object",
+          "description": "Compression Type to Send data in compressed format with Optimal Compression Level, Default is None. And The Only Supported option is Gzip. "
+        },
+        "wrapRequestJsonInAnObject": {
+          "type": "object",
+          "description": "Wraps Request Array Json into an Object before calling the rest endpoint , Default is false. ex: if true request content sample format is { rows:[]} else the format is []"
         }
       }
     },
@@ -2018,6 +2271,14 @@
         "isolationLevel": {
           "description": "Specifies the transaction locking behavior for the SQL source. Allowed values: ReadCommitted/ReadUncommitted/RepeatableRead/Serializable/Snapshot. The default value is ReadCommitted. Type: string (or Expression with resultType string).",
           "type": "object"
+        },
+        "partitionOption": {
+          "description": "The partition mechanism that will be used for Sql read in parallel.",
+          "$ref": "#/definitions/SqlPartitionOption"
+        },
+        "partitionSettings": {
+          "description": "The settings that will be leveraged for Sql source partitioning.",
+          "$ref": "#/definitions/SqlPartitionSettings"
         }
       }
     },
@@ -2048,6 +2309,14 @@
         "produceAdditionalTypes": {
           "description": "Which additional types to produce.",
           "type": "object"
+        },
+        "partitionOption": {
+          "description": "The partition mechanism that will be used for Sql read in parallel.",
+          "$ref": "#/definitions/SqlPartitionOption"
+        },
+        "partitionSettings": {
+          "description": "The settings that will be leveraged for Sql source partitioning.",
+          "$ref": "#/definitions/SqlPartitionSettings"
         }
       }
     },
@@ -2078,6 +2347,14 @@
         "produceAdditionalTypes": {
           "description": "Which additional types to produce.",
           "type": "object"
+        },
+        "partitionOption": {
+          "description": "The partition mechanism that will be used for Sql read in parallel.",
+          "$ref": "#/definitions/SqlPartitionOption"
+        },
+        "partitionSettings": {
+          "description": "The settings that will be leveraged for Sql source partitioning.",
+          "$ref": "#/definitions/SqlPartitionSettings"
         }
       }
     },
@@ -2108,6 +2385,14 @@
         "produceAdditionalTypes": {
           "description": "Which additional types to produce.",
           "type": "object"
+        },
+        "partitionOption": {
+          "description": "The partition mechanism that will be used for Sql read in parallel.",
+          "$ref": "#/definitions/SqlPartitionOption"
+        },
+        "partitionSettings": {
+          "description": "The settings that will be leveraged for Sql source partitioning.",
+          "$ref": "#/definitions/SqlPartitionSettings"
         }
       }
     },
@@ -2131,7 +2416,46 @@
         "storedProcedureParameters": {
           "type": "object",
           "description": "Value and type setting for stored procedure parameters. Example: \"{Parameter1: {value: \"1\", type: \"int\"}}\". Type: object (or Expression with resultType object), itemType: StoredProcedureParameter."
+        },
+        "partitionOption": {
+          "description": "The partition mechanism that will be used for Sql read in parallel.",
+          "$ref": "#/definitions/SqlPartitionOption"
+        },
+        "partitionSettings": {
+          "description": "The settings that will be leveraged for Sql source partitioning.",
+          "$ref": "#/definitions/SqlPartitionSettings"
         }
+      }
+    },
+    "SqlPartitionSettings": {
+      "description": "The settings that will be leveraged for Sql source partitioning.",
+      "type": "object",
+      "properties": {
+        "partitionColumnName": {
+          "type": "object",
+          "description": "The name of the column in integer or datetime type that will be used for proceeding partitioning. If not specified, the primary key of the table is auto-detected and used as the partition column. Type: string (or Expression with resultType string)."
+        },
+        "partitionUpperBound": {
+          "type": "object",
+          "description": "The maximum value of the partition column for partition range splitting. This value is used to decide the partition stride, not for filtering the rows in table. All rows in the table or query result will be partitioned and copied. Type: string (or Expression with resultType string)."
+        },
+        "partitionLowerBound": {
+          "type": "object",
+          "description": "The minimum value of the partition column for partition range splitting. This value is used to decide the partition stride, not for filtering the rows in table. All rows in the table or query result will be partitioned and copied. Type: string (or Expression with resultType string)."
+        }
+      }
+    },
+    "SqlPartitionOption": {
+      "description": "The partition mechanism that will be used for Sql read in parallel.",
+      "type": "string",
+      "enum": [
+        "None",
+        "PhysicalPartitionsOfTable",
+        "DynamicRange"
+      ],
+      "x-ms-enum": {
+        "name": "SqlPartitionOption",
+        "modelAsString": true
       }
     },
     "FileSystemSource": {
@@ -3473,6 +3797,10 @@
         "storeSettings": {
           "$ref": "#/definitions/StoreWriteSettings",
           "description": "Parquet store settings."
+        },
+        "formatSettings": {
+          "$ref": "#/definitions/ParquetWriteSettings",
+          "description": "Parquet format settings."
         }
       }
     },
@@ -3897,6 +4225,14 @@
         "path": {
           "type": "object",
           "description": "The path to storage for storing detailed logs of activity execution. Type: string (or Expression with resultType string)."
+        },
+        "logLevel": {
+          "type": "object",
+          "description": "Gets or sets the log level, support: Info, Warning. Type: string (or Expression with resultType string)."
+        },
+        "enableReliableLogging": {
+          "type": "object",
+          "description": "Specifies whether to enable reliable logging. Type: boolean (or Expression with resultType boolean)."
         }
       },
       "additionalProperties": {
@@ -5908,7 +6244,7 @@
       "properties": {
         "waitTimeInSeconds": {
           "description": "Duration in seconds.",
-          "type": "integer"
+          "type": "object"
         }
       },
       "required": [
@@ -6375,7 +6711,7 @@
         },
         "reportStatusOnCallBack": {
           "type": "object",
-          "description": "When set to true, statusCode, output and error in callback request body will be consumed by activity. The activity can be marked as failed by setting statusCode >= 400 in callback request. Default is false. Type: boolean (or Expression with resultType boolean)."
+          "description": "When set to true, statusCode, output and error in callback request body will be consumed by activity. The activity can be marked as failed by setting statusCode >= 400 in callback request. Default is false. Type: boolean (or Expression with resultType boolean)."
         }
       },
       "required": [

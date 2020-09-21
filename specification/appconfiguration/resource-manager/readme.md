@@ -26,7 +26,16 @@ These are the global settings for the AppConfiguration API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2019-11-01-preview
+tag: package-2020-06-01
+```
+
+### Tag: package-2020-06-01
+
+These settings apply only when `--tag=package-2020-06-01` is specified on the command line.
+
+``` yaml $(tag) == 'package-2020-06-01'
+input-file:
+- Microsoft.AppConfiguration/stable/2020-06-01/appconfiguration.json
 ```
 
 ### Tag: package-2019-11-01-preview
@@ -68,6 +77,7 @@ This is not used by Autorest itself.
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
   - repo: azure-sdk-for-python
+  - repo: azure-sdk-for-python-track2
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-net
   - repo: azure-sdk-for-js
@@ -75,6 +85,9 @@ swagger-to-sdk:
   - repo: azure-sdk-for-ruby
     after_scripts:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_app_configuration']
+  - repo: azure-resource-manager-schemas
+    after_scripts:
+      - node sdkauto_afterscript.js appconfiguration/resource-manager
 ```
 
 ## C#
@@ -119,6 +132,10 @@ directive:
     reason: This is data plane level information proxied through the RP and cannot be changed.
 ```
 
+## AzureResourceSchema
+
+See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
+
 ## Multi-API/Profile support for AutoRest v3 generators 
 
 AutoRest V3 generators require the use of `--tag=all-api-versions` to select api files.
@@ -131,6 +148,7 @@ require: $(this-folder)/../../../profiles/readme.md
 
 # all the input files across all versions
 input-file:
+  - $(this-folder)/Microsoft.AppConfiguration/stable/2020-06-01/appconfiguration.json
   - $(this-folder)/Microsoft.AppConfiguration/preview/2019-11-01-preview/appconfiguration.json
   - $(this-folder)/Microsoft.AppConfiguration/preview/2019-02-01-preview/appconfiguration.json
   - $(this-folder)/Microsoft.AppConfiguration/stable/2019-10-01/appconfiguration.json

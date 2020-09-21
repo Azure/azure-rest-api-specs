@@ -40,7 +40,7 @@ input-file:
 - Microsoft.Network/stable/2020-05-01/network.json
 - Microsoft.Network/stable/2019-11-01/networkexperiment.json
 - Microsoft.Network/stable/2020-05-01/frontdoor.json
-- Microsoft.Network/stable/2019-10-01/webapplicationfirewall.json
+- Microsoft.Network/stable/2020-04-01/webapplicationfirewall.json
 directive:
   - where:
       - $.paths
@@ -199,6 +199,9 @@ swagger-to-sdk:
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-node
+  - repo: azure-resource-manager-schemas
+    after_scripts:
+      - node sdkauto_afterscript.js frontdoor/resource-manager
 ```
 
 
@@ -257,6 +260,10 @@ directive:
     reason: Direct copy of ValidateCustomDomain API in CDN Resource Provider.
 ```
 
+## AzureResourceSchema
+
+See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
+
 ## Multi-API/Profile support for AutoRest v3 generators 
 
 AutoRest V3 generators require the use of `--tag=all-api-versions` to select api files.
@@ -272,12 +279,12 @@ input-file:
   - $(this-folder)/Microsoft.Network/stable/2020-05-01/network.json
   - $(this-folder)/Microsoft.Network/stable/2019-11-01/networkexperiment.json
   - $(this-folder)/Microsoft.Network/stable/2020-05-01/frontdoor.json
-  - $(this-folder)/Microsoft.Network/stable/2019-10-01/webapplicationfirewall.json
+  - $(this-folder)/Microsoft.Network/stable/2020-04-01/webapplicationfirewall.json
   - $(this-folder)/Microsoft.Network/stable/2020-04-01/network.json
   - $(this-folder)/Microsoft.Network/stable/2020-04-01/frontdoor.json
-  - $(this-folder)/Microsoft.Network/stable/2020-04-01/webapplicationfirewall.json
   - $(this-folder)/Microsoft.Network/stable/2020-01-01/network.json
   - $(this-folder)/Microsoft.Network/stable/2020-01-01/frontdoor.json
+  - $(this-folder)/Microsoft.Network/stable/2019-10-01/webapplicationfirewall.json
   - $(this-folder)/Microsoft.Network/stable/2019-11-01/network.json
   - $(this-folder)/Microsoft.Network/stable/2019-05-01/frontdoor.json
   - $(this-folder)/Microsoft.Network/stable/2019-05-01/network.json

@@ -53,6 +53,9 @@ swagger-to-sdk:
     after_scripts:
       - python ./scripts/multiapi_init_gen.py azure-mgmt-redhatopenshift
   - repo: azure-sdk-for-go
+  - repo: azure-resource-manager-schemas
+    after_scripts:
+      - node sdkauto_afterscript.js redhatopenshift/resource-manager
 ```
 
 ## Go
@@ -62,6 +65,10 @@ See configuration in [readme.go.md](./readme.go.md)
 ## Python
 
 See configuration in [readme.python.md](./readme.python.md)
+
+## AzureResourceSchema
+
+See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
 
 ## Multi-API/Profile support for AutoRest v3 generators
 

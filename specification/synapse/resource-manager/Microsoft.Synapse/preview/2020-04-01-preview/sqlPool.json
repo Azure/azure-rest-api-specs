@@ -1,0 +1,407 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2020-04-01-preview",
+    "title": "SynapseSqlV3ManagementClient",
+    "description": "The Azure Synapse SQL management API provides a RESTful set of web APIs that interact with Azure Synapse SQL services to manage your resources. The API enables users to create, retrieve, update, and delete SqlPools, SqlDatabases, and other entities."
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces/{workspaceName}/sqlPools/{sqlPoolName}": {
+      "get": {
+        "tags": [
+          "SqlPoolsV3"
+        ],
+        "description": "Gets a SqlPool.",
+        "operationId": "SqlPoolsV3_Get",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../common/v1/types.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "../../../../common/v1/types.json#/parameters/SqlPoolNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the specified SqlPool.",
+            "schema": {
+              "$ref": "#/definitions/SqlPoolV3"
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": "../../../../common/v1/types.json#/definitions/ErrorContract"
+            },
+            "description": ""
+          }
+        },
+        "x-ms-examples": {
+          "Gets a sqlpool.": {
+            "$ref": "./examples/GetSqlPool.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "SqlPoolsV3"
+        ],
+        "description": "Creates a new SqlPool or updates an existing SqlPool.",
+        "operationId": "SqlPoolsV3_CreateOrUpdate",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../common/v1/types.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "../../../../common/v1/types.json#/parameters/SqlPoolNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "The requested SqlPool resource state.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SqlPoolV3"
+            }
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully updated the SqlPool.",
+            "schema": {
+              "$ref": "#/definitions/SqlPoolV3"
+            }
+          },
+          "202": {
+            "description": "Creating or updating the SqlPool is in progress."
+          },
+          "201": {
+            "description": "Successfully created the SqlPool.",
+            "schema": {
+              "$ref": "#/definitions/SqlPoolV3"
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": "../../../../common/v1/types.json#/definitions/ErrorContract"
+            },
+            "description": ""
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Creates a sqlpool.": {
+            "$ref": "./examples/PutSqlPool.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "SqlPoolsV3"
+        ],
+        "description": "Deletes the SqlPool.",
+        "operationId": "SqlPoolsV3_Delete",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../common/v1/types.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "../../../../common/v1/types.json#/parameters/SqlPoolNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully deleted the SqlPool."
+          },
+          "202": {
+            "description": "Deleting the SqlPool is in progress."
+          },
+          "204": {
+            "description": "The specified SqlPool does not exist."
+          },
+          "default": {
+            "schema": {
+              "$ref": "../../../../common/v1/types.json#/definitions/ErrorContract"
+            },
+            "description": ""
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Deletes a sqlpool.": {
+            "$ref": "./examples/DeleteSqlPool.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "SqlPoolsV3"
+        ],
+        "description": "Updates an existing sqlpool.",
+        "operationId": "SqlPoolsV3_Update",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../common/v1/types.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "../../../../common/v1/types.json#/parameters/SqlPoolNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "The requested SqlPool resource state.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SqlPoolUpdate"
+            }
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully updated the SqlPool.",
+            "schema": {
+              "$ref": "#/definitions/SqlPoolV3"
+            }
+          },
+          "202": {
+            "description": "Updating the SqlPool is in progress."
+          },
+          "default": {
+            "schema": {
+              "$ref": "../../../../common/v1/types.json#/definitions/ErrorContract"
+            },
+            "description": ""
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Updates a sqlpool.": {
+            "$ref": "./examples/PatchSqlPool.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces/{workspaceName}/sqlPools": {
+      "get": {
+        "tags": [
+          "SqlPoolsV3"
+        ],
+        "description": "Gets a list of sql pools.",
+        "operationId": "SqlPoolsV3_ListByWorkspace",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../common/v1/types.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the list of sql pools.",
+            "schema": {
+              "$ref": "#/definitions/SqlPoolListResult"
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": "../../../../common/v1/types.json#/definitions/ErrorContract"
+            },
+            "description": ""
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Gets a list of sql pools.": {
+            "$ref": "./examples/ListSqlPoolsByWorkspace.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "SqlPoolProperties": {
+      "description": "The sql pool's properties.",
+      "type": "object",
+      "properties": {
+        "status": {
+          "description": "The status of the sql pool.",
+          "enum": [
+            "Invisible",
+            "Online",
+            "Offline",
+            "Creating",
+            "Inaccessible",
+            "Pausing",
+            "Paused",
+            "Resuming",
+            "Scaling",
+            "Dropping",
+            "Error",
+            "Unknown"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "SqlPoolStatus",
+            "modelAsString": true
+          }
+        },
+        "sqlPoolGuid": {
+          "format": "uuid",
+          "description": "The Guid of the sql pool.",
+          "type": "string",
+          "readOnly": true
+        },
+        "currentServiceObjectiveName": {
+          "description": "The current service level objective name of the sql pool.",
+          "type": "string",
+          "readOnly": true
+        },
+        "requestedServiceObjectiveName": {
+          "description": "The requested service level objective name of the sql pool.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "SqlPoolV3": {
+      "description": "A sql pool resource.",
+      "required": [
+        "location"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/TrackedResource"
+        }
+      ],
+      "properties": {
+        "sku": {
+          "$ref": "../../../../common/v1/types.json#/definitions/Sku",
+          "description": "The sql pool SKU. The list of SKUs may vary by region and support offer."
+        },
+        "kind": {
+          "description": "Kind of SqlPool.",
+          "type": "string",
+          "readOnly": true
+        },
+        "systemData": {
+          "$ref": "../../../../common/v1/types.json#/definitions/SystemData",
+          "description": "SystemData of SqlPool.",
+          "readOnly": true
+        },
+        "properties": {
+          "$ref": "#/definitions/SqlPoolProperties",
+          "description": "Resource properties.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "SqlPoolUpdate": {
+      "description": "A sql pool resource.",
+      "type": "object",
+      "properties": {
+        "sku": {
+          "$ref": "../../../../common/v1/types.json#/definitions/Sku",
+          "description": "The name and tier of the SKU."
+        },
+        "properties": {
+          "$ref": "#/definitions/SqlPoolProperties",
+          "description": "Resource properties.",
+          "x-ms-client-flatten": true
+        },
+        "tags": {
+          "description": "Resource tags.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "SqlPoolListResult": {
+      "description": "A list of sql pools.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Array of results.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SqlPoolV3"
+          },
+          "readOnly": true
+        },
+        "nextLink": {
+          "description": "Link to retrieve next page of results.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  }
+}

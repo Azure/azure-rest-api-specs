@@ -2697,7 +2697,9 @@
         "urlSigningKeys": {
           "description": "List of keys used to validate the signed URL hashes.",
           "type": "array",
-          "$ref": "#/definitions/UrlSigningKey"
+          "items": {
+            "$ref": "#/definitions/UrlSigningKey"
+          }
         },
         "deliveryPolicy": {
           "description": "A policy that specifies the delivery rules to be used for an endpoint.",
@@ -3862,12 +3864,36 @@
         }
       }
     },
+    "UrlSigningAction": {
+      "description": "Defines the url signing action for the delivery rule.",
+      "x-ms-discriminator-value": "UrlSigning",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DeliveryRuleAction"
+        }
+      ],
+      "required": [
+        "parameters"
+      ],
+      "properties": {
+        "parameters": {
+          "description": "Defines the parameters for the action.",
+          "$ref": "#/definitions/UrlSigningActionParameters"
+        }
+      }
+    },
     "UrlSigningActionParameters": {
       "description": "Defines the parameters for the Url Signing action.",
       "required": [
         "keyId"
       ],
       "properties": {
+        "@odata.type": {
+          "type": "string",
+          "enum": [
+            "#Microsoft.Azure.Cdn.Models.DeliveryRuleUrlSigningActionParameters"
+          ]
+        },
         "keyId": {
           "description": "Id reference of the key to be used to verify the hash and should be defined in UrlSigningKeys",
           "type": "string"
@@ -3906,9 +3932,9 @@
           "description": "Indicates the purpose of the parameter",
           "type": "string",
           "enum": [
-            "expires",
-            "keyId",
-            "signature"
+            "Expires",
+            "KeyId",
+            "Signature"
           ]
         },
         "paramName": {
@@ -4420,7 +4446,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/TrackedResource"
+          "$ref": "#/definitions/ProxyResource"
         }
       ],
       "properties": {
@@ -4466,13 +4492,6 @@
       "type": "object",
       "description": "Origin properties needed for origin update.",
       "properties": {
-        "tags": {
-          "description": "Origin tags.",
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
         "properties": {
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/OriginUpdatePropertiesParameters"

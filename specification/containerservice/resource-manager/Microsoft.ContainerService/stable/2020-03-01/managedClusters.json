@@ -720,6 +720,9 @@
           "Create/Update Agent Pool": {
             "$ref": "./examples/AgentPoolsCreate_Update.json"
           },
+          "Update Agent Pool": {
+            "$ref": "./examples/AgentPools_Update.json"
+          },
           "Create Spot Agent Pool": {
             "$ref": "./examples/AgentPoolsCreate_Spot.json"
           }
@@ -1426,10 +1429,7 @@
         "count": {
           "type": "integer",
           "format": "int32",
-          "maximum": 100,
-          "minimum": 0,
-          "description": "Number of agents (VMs) to host docker containers. Allowed values must be in the range of 0 to 100 (inclusive). The default value is 1. ",
-          "default": 1
+          "description": "Number of agents (VMs) to host docker containers. Allowed values must be in the range of 0 to 100 (inclusive) for user pools and in the range of 1 to 100 (inclusive) for system pools. The default value is 1."
         },
         "vmSize": {
           "$ref": "#/definitions/ContainerServiceVMSize",
@@ -1528,10 +1528,6 @@
           "description": "Taints added to new nodes during node pool create and scale. For example, key=value:NoSchedule."
         }
       },
-      "required": [
-        "vmSize",
-        "count"
-      ],
       "description": "Properties for the container service agent pool profile."
     },
     "ManagedClusterAgentPoolProfile": {
@@ -1983,7 +1979,7 @@
         },
         "enablePodSecurityPolicy": {
           "type": "boolean",
-          "description": "(PREVIEW) Whether to enable Kubernetes Pod security policy."
+          "description": "(DEPRECATING) Whether to enable Kubernetes pod security policy (preview). This feature is set for removal on October 15th, 2020. Learn more at aka.ms/aks/azpodpolicy."
         },
         "networkProfile": {
           "$ref": "#/definitions/ContainerServiceNetworkProfile",

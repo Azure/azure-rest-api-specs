@@ -83,7 +83,7 @@
         "tags": [
           "Secure Score"
         ],
-        "description": "Get secure score for a specific initiative within your current scope. For the ASC Default initiative, use 'ascScore'.",
+        "description": "Get secure score for a specific Security Center initiative within your current scope. For the ASC Default initiative, use 'ascScore'.",
         "operationId": "SecureScores_Get",
         "parameters": [
           {
@@ -331,6 +331,14 @@
           "readOnly": true,
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/ScoreDetails"
+        },
+        "weight": {
+          "description": "The weight for calculation of an aggregated score for several scopes",
+          "readOnly": true,
+          "type": "integer",
+          "format": "int64",
+          "minimum": 0,
+          "exclusiveMinimum": false
         }
       }
     },

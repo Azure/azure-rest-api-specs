@@ -29,6 +29,14 @@ openapi-type: arm
 tag: package-preview-2019-07
 ```
 
+### Tag: package-preview-2020-09-08
+
+These settings apply only when `--tag=package-preview-2020-09-08` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2020-09-08'
+input-file:
+  - Microsoft.AzureData/preview/2020-09-08-preview/azuredata.json
+```
 
 ### Tag: package-preview-2019-07
 
@@ -66,6 +74,9 @@ swagger-to-sdk:
   - repo: azure-sdk-for-ruby
     after_scripts:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_azuredata']
+  - repo: azure-resource-manager-schemas
+    after_scripts:
+      - node sdkauto_afterscript.js azuredata/resource-manager
 ```
 
 ## Go
@@ -87,6 +98,10 @@ See configuration in [readme.typescript.md](./readme.typescript.md)
 ## CSharp
 
 See configuration in [readme.csharp.md](./readme.csharp.md)
+
+## AzureResourceSchema
+
+See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
 
 ## Multi-API/Profile support for AutoRest v3 generators
 
