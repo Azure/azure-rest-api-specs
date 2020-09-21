@@ -1,4 +1,4 @@
-## C#
+## C
 
 These settings apply only when `--csharp` is specified on the command line.
 Please also specify `--csharp-sdks-folder=<path to "SDKs" directory of your azure-sdk-for-net clone>`.
@@ -10,6 +10,6 @@ csharp:
   payload-flattening-threshold: 1
   clear-output-folder: true
   client-side-validation: false
-  namespace: Microsoft.YourServiceName
-  output-folder: $(csharp-sdks-folder)/YourServiceName/management/Microsoft.YourServiceName/GeneratedProtocol
+  namespace: [[ResourceProviderName]]
+  output-folder: $(csharp-sdks-folder)/[[ServiceName]]/management/[[ResourceProviderName]]/GeneratedProtocol
 ```

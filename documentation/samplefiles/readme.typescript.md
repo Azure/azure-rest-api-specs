@@ -6,8 +6,8 @@ Please also specify `--typescript-sdks-folder=<path to root folder of your azure
 ```yaml $(typescript)
 typescript:
   azure-arm: true
-  package-name: "YourServiceName"
-  output-folder: "$(typescript-sdks-folder)/packages/YourServiceName"
+  package-name: "[[ServiceName]]"
+  output-folder: "$(typescript-sdks-folder)/packages/[[ServiceName]]"
   payload-flattening-threshold: 1
   generate-metadata: true
 ```
