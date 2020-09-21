@@ -1,0 +1,166 @@
+{
+  "parameters": {
+    "api-version": "1.0",
+    "format": "json",
+    "query": "121---14013676",
+    "queryType": "stopId",
+    "detailType": [
+      "lines"
+    ]
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "stop": {
+          "stopId": "121---14013676",
+          "stopKey": "307460",
+          "stopName": "Adams St/Bklyn Supreme Crt",
+          "position": {
+            "latitude": 40.69256,
+            "longitude": -73.989131
+          },
+          "mainTransitType": "Bus",
+          "mainAgencyId": "121---857463",
+          "mainAgencyName": "MTA Bus"
+        },
+        "lines": [
+          {
+            "lineId": "121---1227940",
+            "lineGroupId": "121---373227",
+            "direction": "forward",
+            "agencyId": "121---857463",
+            "agencyName": "MTA Bus",
+            "lineNumber": "B25",
+            "lineDestination": "Broadway Jct Alabama Av Via Fulton",
+            "transitType": "Bus"
+          },
+          {
+            "lineId": "121---1227962",
+            "lineGroupId": "121---373234",
+            "direction": "forward",
+            "agencyId": "121---857463",
+            "agencyName": "MTA Bus",
+            "lineNumber": "B38",
+            "lineDestination": "Ltd Ridgewood Catalpa Av",
+            "transitType": "Bus"
+          },
+          {
+            "lineId": "121---1227960",
+            "lineGroupId": "121---373234",
+            "direction": "forward",
+            "agencyId": "121---857463",
+            "agencyName": "MTA Bus",
+            "lineNumber": "B38",
+            "lineDestination": "Ridgewood Metro Av",
+            "transitType": "Bus"
+          },
+          {
+            "lineId": "121---1227961",
+            "lineGroupId": "121---373234",
+            "direction": "forward",
+            "agencyId": "121---857463",
+            "agencyName": "MTA Bus",
+            "lineNumber": "B38",
+            "lineDestination": "Ridgewood Catalpa Av",
+            "transitType": "Bus"
+          },
+          {
+            "lineId": "121---3996060",
+            "lineGroupId": "121---373236",
+            "direction": "backward",
+            "agencyId": "121---857463",
+            "agencyName": "MTA Bus",
+            "lineNumber": "B41",
+            "lineDestination": "Kings Plaza Via Flatbush",
+            "transitType": "Bus"
+          },
+          {
+            "lineId": "121---3996040",
+            "lineGroupId": "121---373236",
+            "direction": "backward",
+            "agencyId": "121---857463",
+            "agencyName": "MTA Bus",
+            "lineNumber": "B41",
+            "lineDestination": "Bergen Beach Veterans Av Via Flatbush",
+            "transitType": "Bus"
+          },
+          {
+            "lineId": "121---3996059",
+            "lineGroupId": "121---373236",
+            "direction": "backward",
+            "agencyId": "121---857463",
+            "agencyName": "MTA Bus",
+            "lineNumber": "B41",
+            "lineDestination": "Limited Kings Plaza Via Flatbush",
+            "transitType": "Bus"
+          },
+          {
+            "lineId": "121---1227976",
+            "lineGroupId": "121---373236",
+            "direction": "backward",
+            "agencyId": "121---857463",
+            "agencyName": "MTA Bus",
+            "lineNumber": "B41",
+            "lineDestination": "Ltd Bergen Bch Veterans Av Via Flatbush",
+            "transitType": "Bus"
+          },
+          {
+            "lineId": "121---1228017",
+            "lineGroupId": "121---373245",
+            "direction": "forward",
+            "agencyId": "121---857463",
+            "agencyName": "MTA Bus",
+            "lineNumber": "B52",
+            "lineDestination": "Ridgewood Term Via Gates",
+            "transitType": "Bus"
+          }
+        ]
+      }
+    },
+    "400": {
+      "headers": {},
+      "body": {
+        "error": {
+          "code": "400 BadRequest",
+          "message": "Bad request: one or more parameters were incorrectly specified or are mutually exclusive."
+        }
+      }
+    },
+    "401": {
+      "headers": {},
+      "body": {
+        "error": {
+          "code": "401 Unauthorized",
+          "message": "Access denied due to invalid subscription key. Make sure to provide a valid key for an active subscription."
+        }
+      }
+    },
+    "403": {
+      "headers": {},
+      "body": {
+        "error": {
+          "code": "403 Forbidden",
+          "message": "Permission, capacity, or authentication issues."
+        }
+      }
+    },
+    "404": {
+      "headers": {},
+      "body": {
+        "error": {
+          "code": "404 NotFound",
+          "message": "Not Found: the requested resource could not be found, but it may be available again in the future."
+        }
+      }
+    },
+    "500": {
+      "headers": {},
+      "body": {
+        "error": {
+          "code": "500 InternalServerError",
+          "message": "An error occurred while processing the request. Please try again later."
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,1154 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Azure Maps Traffic Service",
+    "version": "1.0",
+    "description": "Azure Maps Traffic REST APIs"
+  },
+  "host": "atlas.microsoft.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [],
+  "produces": [
+    "application/json",
+    "application/xml"
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "These are the [Azure Active Directory OAuth2](https://docs.microsoft.com/en-us/azure/active-directory/develop/v1-overview)  Flows. When paired with [Azure Role Based Access](https://docs.microsoft.com/en-us/azure/role-based-access-control/overview)  control it can be used to control access to Azure Maps REST APIs. Azure Role based access controls are used to designate access to one or more Azure Maps resource account or sub-resources. Any user, group, or service principal can be granted access via a  built in role or a custom role composed of one or more permissions to Azure Maps REST APIs.\n\nTo implement scenarios we recommend viewing [authentication concepts](https://aka.ms/amauth). In summary, this security definition provides a solution  for modeling application(s) via objects capable of access control on specific APIs and scopes.\n\n#### Note\n* This security definition **requires** the use of the `x-ms-client-id` header to indicate which Azure Maps resource the application is requesting access to.  This can be acquired from the [Maps management API](https://aka.ms/amauthdetails).\n* The `Authorization URL` is specific to the Azure public cloud instance. Sovereign clouds have unique Authorization URLs and Azure Active directory configurations. \n* The Azure role based access control is configured from the [Azure management plane](https://aka.ms/amrbac) via Azure portal, Powershell, CLI, Azure SDKs, or REST APIs.\n* Usage of the [Azure Maps Web SDK](https://aka.ms/amaadmc) allows for configuration based setup of an application for multiple use cases.\n* Currently Azure Active Directory [v1.0](https://docs.microsoft.com/en-us/azure/active-directory/develop/azure-ad-endpoint-comparison) tokens are supported.",
+      "scopes": {
+        "user_impersonation": "Impersonates a user's Azure Active Directory account."
+      }
+    },
+    "apiKeyQuery": {
+      "type": "apiKey",
+      "description": "This is a shared key which is provisioned when creating an [Azure Maps resource](https://aka.ms/amauth) through the Azure management plane  via Azure portal, Powershell, CLI, Azure SDKs, or REST APIs. With this key, any application is authorized to access  all REST APIs. In other words, these can currently be treated as master keys to the account which they are issued for.  For publicly exposed applications our recommendation is to use server to server access of Azure Maps REST APIs where this key can be  securely stored.",
+      "name": "subscription-key",
+      "in": "query"
+    }
+  },
+  "security": [
+    {
+      "azure_auth": []
+    },
+    {
+      "apiKeyQuery": []
+    }
+  ],
+  "responses": {
+    "202": {
+      "description": "Request Accepted: The request has been accepted for processing. Please use the URL in the Location Header to retry or access the results.",
+      "headers": {
+        "Location": {
+          "type": "string",
+          "description": "New URL to check for the results of the long running process."
+        }
+      }
+    },
+    "400": {
+      "description": "Bad request: one or more parameters were incorrectly specified or are mutually exclusive.",
+      "schema": {
+        "$ref": "#/definitions/ODataErrorResponse"
+      }
+    },
+    "401": {
+      "description": "Access denied due to invalid subscription key or invalid Azure Active Directory bearer token.  Make sure to provide a valid key for an active Azure subscription and Maps resource.  Otherwise, verify the [WWW-Authenticate](https://tools.ietf.org/html/rfc6750#section-3.1) header for error code and description of the provided AAD bearer token.",
+      "schema": {
+        "$ref": "#/definitions/ODataErrorResponse"
+      },
+      "headers": {
+        "WWW-Authenticate": {
+          "type": "string",
+          "description": "Bearer realm=\"https://atlas.microsoft.com/\", error=\"invalid_token\", error_description=\"The access token expired\""
+        }
+      }
+    },
+    "403": {
+      "description": "Permission, capacity, or authentication issues.",
+      "schema": {
+        "$ref": "#/definitions/ODataErrorResponse"
+      }
+    },
+    "404": {
+      "description": "Not Found: the requested resource could not be found, but it may be available again in the future.",
+      "schema": {
+        "$ref": "#/definitions/ODataErrorResponse"
+      }
+    },
+    "500": {
+      "description": "An error occurred while processing the request. Please try again later.",
+      "schema": {
+        "$ref": "#/definitions/ODataErrorResponse"
+      }
+    }
+  },
+  "parameters": {
+    "ClientId": {
+      "name": "x-ms-client-id",
+      "description": "Specifies which account is intended for usage in conjunction with the Azure AD security model.  It represents a unique ID for the Azure Maps account and can be retrieved from Azure Maps management  plane Account API. To use Azure AD security in Azure Maps see the following [articles](https://aka.ms/amauthdetails) for guidance.",
+      "type": "string",
+      "in": "header",
+      "required": false,
+      "x-ms-parameter-location": "client"
+    },
+    "SubscriptionKey": {
+      "name": "subscription-key",
+      "description": "One of the Azure Maps keys provided from an Azure Map Account. Please refer to this [article](https://docs.microsoft.com/azure/azure-maps/how-to-manage-authentication) for details on how to manage authentication.",
+      "type": "string",
+      "in": "query",
+      "required": false,
+      "x-ms-parameter-location": "client"
+    },
+    "ApiVersion": {
+      "name": "api-version",
+      "description": "Version number of Azure Maps API. Current version is 1.0",
+      "type": "string",
+      "in": "query",
+      "required": true,
+      "default": "1.0",
+      "x-ms-parameter-location": "client"
+    },
+    "JsonFormat": {
+      "name": "format",
+      "description": "Desired format of the response. Only `json` format is supported.",
+      "type": "string",
+      "in": "path",
+      "required": true,
+      "enum": [
+        "json"
+      ],
+      "x-ms-enum": {
+        "name": "JsonFormat",
+        "modelAsString": false,
+        "values": [
+          {
+            "value": "json",
+            "description": "[The JavaScript Object Notation Data Interchange Format](https://tools.ietf.org/html/rfc8259)"
+          }
+        ]
+      },
+      "x-ms-parameter-location": "method"
+    },
+    "TextFormat": {
+      "name": "format",
+      "description": "Desired format of the response. Value can be either _json_ or _xml_.",
+      "type": "string",
+      "in": "path",
+      "required": true,
+      "enum": [
+        "json",
+        "xml"
+      ],
+      "x-ms-enum": {
+        "name": "TextFormat",
+        "modelAsString": false,
+        "values": [
+          {
+            "value": "json",
+            "description": "[The JavaScript Object Notation Data Interchange Format](https://tools.ietf.org/html/rfc8259)"
+          },
+          {
+            "value": "xml",
+            "description": "[The Extensible Markup Language](https://www.w3.org/TR/xml/)"
+          }
+        ]
+      },
+      "x-ms-parameter-location": "method"
+    },
+    "RasterTileFormat": {
+      "name": "format",
+      "description": "Desired format of the response. Possible value: png.",
+      "type": "string",
+      "in": "path",
+      "required": true,
+      "enum": [
+        "png"
+      ],
+      "x-ms-enum": {
+        "name": "RasterTileFormat",
+        "modelAsString": false,
+        "values": [
+          {
+            "value": "png",
+            "description": "An image in the png format. Supports zoom levels 0 through 18."
+          }
+        ]
+      },
+      "x-ms-parameter-location": "method"
+    },
+    "TileFormat": {
+      "name": "format",
+      "description": "Desired format of the response. Possible values are png & pbf.",
+      "type": "string",
+      "in": "path",
+      "required": true,
+      "enum": [
+        "png",
+        "pbf"
+      ],
+      "x-ms-enum": {
+        "name": "TileFormat",
+        "modelAsString": false,
+        "values": [
+          {
+            "value": "png",
+            "description": "An image in the png format. Supports zoom levels 0 through 18."
+          },
+          {
+            "value": "pbf",
+            "description": "Vector graphic in the pbf format. Supports zoom levels 0 through 22."
+          }
+        ]
+      },
+      "x-ms-parameter-location": "method"
+    },
+    "RasterZoom": {
+      "name": "zoom",
+      "in": "query",
+      "description": "Zoom level for the desired tile. Zoom value must be in the range: 0-22 (inclusive).\nPlease see [Zoom Levels and Tile Grid](https://docs.microsoft.com/en-us/azure/location-based-services/zoom-levels-and-tile-grid) for details.",
+      "required": true,
+      "type": "integer",
+      "x-ms-parameter-location": "method"
+    },
+    "RasterVectorZoom": {
+      "name": "zoom",
+      "in": "query",
+      "description": "Zoom level for the desired tile. For _raster_ tiles, value must be in the range: 0-22 (inclusive). For _vector_ tiles, value must be in the range: 0-22 (inclusive).\nPlease see [Zoom Levels and Tile Grid](https://docs.microsoft.com/en-us/azure/location-based-services/zoom-levels-and-tile-grid) for details.",
+      "required": true,
+      "type": "integer",
+      "x-ms-parameter-location": "method"
+    },
+    "xTileIndex": {
+      "name": "x",
+      "x-ms-client-name": "xTileIndex",
+      "in": "query",
+      "description": "X coordinate of the tile on zoom grid. Value must be in the range [0, 2<sup>`zoom`</sup> -1].\n\nPlease see [Zoom Levels and Tile Grid](https://docs.microsoft.com/en-us/azure/location-based-services/zoom-levels-and-tile-grid) for details.",
+      "required": true,
+      "type": "integer",
+      "x-ms-parameter-location": "method"
+    },
+    "yTileIndex": {
+      "name": "y",
+      "x-ms-client-name": "yTileIndex",
+      "in": "query",
+      "description": "Y coordinate of the tile on zoom grid. Value must be in the range [0, 2<sup>`zoom`</sup> -1].\n\nPlease see [Zoom Levels and Tile Grid](https://docs.microsoft.com/en-us/azure/location-based-services/zoom-levels-and-tile-grid) for details.",
+      "required": true,
+      "type": "integer",
+      "x-ms-parameter-location": "method"
+    }
+  },
+  "paths": {
+    "/traffic/flow/tile/{format}": {
+      "get": {
+        "x-publish": true,
+        "description": "__Traffic Flow Tile__\n\n\n**Applies to**: S0 and S1 pricing tiers.\n\nThe Azure Flow Tile API serves 256 x 256 pixel tiles showing traffic flow. All tiles use the same grid system. Because the traffic tiles use transparent images, they can be layered on top of map tiles to create a compound  display. The Flow tiles use colors to indicate either the speed of traffic on different road segments, or the difference between that speed and the free-flow speed on the road segment in question.",
+        "operationId": "Traffic_GetTrafficFlowTile",
+        "x-ms-examples": {
+          "GetTrafficFlowTile": {
+            "$ref": "./examples/GetTrafficFlowTile.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ClientId"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionKey"
+          },
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/TileFormat"
+          },
+          {
+            "name": "style",
+            "in": "query",
+            "description": "<p>The style to be used to render the tile.</p> <ul> <li> Absolute which returns colors reflecting the absolute speed measured. </li> <li> Relative to which returns the speed relative to free-flow. </li> <li> Relative-delay displays when relative speeds are different from the free-flow speeds. </li> </ul>",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "absolute",
+              "relative",
+              "relative-delay",
+              "reduced-sensitivity"
+            ],
+            "x-ms-enum": {
+              "name": "TrafficFlowTileStyle",
+              "modelAsString": false,
+              "values": [
+                {
+                  "value": "absolute",
+                  "description": "Colors will reflect the absolute speed measured."
+                },
+                {
+                  "value": "relative",
+                  "description": "Colors will reflect the speed relative to free-flow."
+                },
+                {
+                  "value": "relative-delay",
+                  "description": "Displays relative colors only where they are different from the freeflow speeds."
+                },
+                {
+                  "value": "reduced-sensitivity",
+                  "description": "Displays relative colors but a larger difference from freeflow is required for segments to change the color. This mode only valid when format is png."
+                }
+              ]
+            }
+          },
+          {
+            "$ref": "#/parameters/RasterVectorZoom"
+          },
+          {
+            "$ref": "#/parameters/xTileIndex"
+          },
+          {
+            "$ref": "#/parameters/yTileIndex"
+          },
+          {
+            "name": "thickness",
+            "in": "query",
+            "description": "The value of the width of the line representing traffic. This value is a multiplier and the accepted values range from 1 - 20. The default value is 10. This parameter is not valid when format is pbf.",
+            "required": false,
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 20,
+            "default": 10
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/TrafficFlowTileResult"
+            }
+          },
+          "400": {
+            "$ref": "#/responses/400"
+          },
+          "401": {
+            "$ref": "#/responses/401"
+          },
+          "403": {
+            "$ref": "#/responses/403"
+          },
+          "404": {
+            "$ref": "#/responses/404"
+          },
+          "500": {
+            "$ref": "#/responses/500"
+          }
+        },
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/traffic/flow/segment/{format}": {
+      "get": {
+        "x-publish": true,
+        "description": "__Traffic Flow Segment__\n\n\n**Applies to**: S0 and S1 pricing tiers.\n\nThis service provides information about the speeds and travel times of the road fragment closest to the given coordinates. It is designed to work alongside the Flow layer of the Render Service to support clickable  flow data visualizations. With this API, the client side can connect any place in the map with flow data on the  closest road and present it to the user.",
+        "operationId": "Traffic_GetTrafficFlowSegment",
+        "x-ms-examples": {
+          "GetTrafficFlowSegment": {
+            "$ref": "./examples/GetTrafficFlowSegment.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ClientId"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionKey"
+          },
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/TextFormat"
+          },
+          {
+            "name": "style",
+            "in": "query",
+            "description": "The style to be used to render the tile. Valid values are absolute which returns colors reflecting the absolute speed measured, relative which returns the speed relative to free-flow, Relative-delay which displays relative speeds only where they are different from the freeflow speeds",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "absolute",
+              "relative",
+              "relative-delay"
+            ],
+            "x-ms-enum": {
+              "name": "TrafficFlowSegmentStyle",
+              "modelAsString": false
+            }
+          },
+          {
+            "$ref": "#/parameters/RasterZoom"
+          },
+          {
+            "name": "query",
+            "in": "query",
+            "description": "Coordinates of the point close to the road segment. They have to be comma-separated and calculated using EPSG4326 projection.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "unit",
+            "in": "query",
+            "description": "Unit of speed in KMPH or MPH",
+            "required": false,
+            "type": "string",
+            "default": "KMPH",
+            "enum": [
+              "KMPH",
+              "MPH"
+            ],
+            "x-ms-enum": {
+              "name": "SpeedUnit",
+              "modelAsString": false,
+              "values": [
+                {
+                  "value": "KMPH",
+                  "description": "Kilometers Per Hour"
+                },
+                {
+                  "value": "MPH",
+                  "description": "Miles Per Hour"
+                }
+              ]
+            }
+          },
+          {
+            "name": "thickness",
+            "in": "query",
+            "description": "The value of the width of the line representing traffic. This value is a multiplier and the accepted values range from 1 - 20. The default value is 10.",
+            "required": false,
+            "type": "integer",
+            "default": 10,
+            "minimum": 1,
+            "maximum": 20
+          },
+          {
+            "name": "openLr",
+            "in": "query",
+            "description": "Boolean on whether the response should include OpenLR code",
+            "required": false,
+            "type": "boolean",
+            "default": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/TrafficFlowSegmentResult"
+            }
+          },
+          "400": {
+            "$ref": "#/responses/400"
+          },
+          "401": {
+            "$ref": "#/responses/401"
+          },
+          "403": {
+            "$ref": "#/responses/403"
+          },
+          "404": {
+            "$ref": "#/responses/404"
+          },
+          "500": {
+            "$ref": "#/responses/500"
+          }
+        }
+      }
+    },
+    "/traffic/incident/tile/{format}": {
+      "get": {
+        "x-publish": true,
+        "description": "__Traffic Incident Tile__\n\n\n**Applies to**: S0 and S1 pricing tiers.\n\nThis service serves 256 x 256 pixel tiles showing traffic incidents. All tiles use the same grid system. Because the traffic tiles use transparent images, they can be layered on top of map tiles to create a compound display. Traffic tiles render graphics to indicate traffic on the roads in the specified area.",
+        "operationId": "Traffic_GetTrafficIncidentTile",
+        "x-ms-examples": {
+          "GetTrafficIncidentTile": {
+            "$ref": "./examples/GetTrafficIncidentTile.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ClientId"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionKey"
+          },
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/TileFormat"
+          },
+          {
+            "name": "style",
+            "in": "query",
+            "description": "The style to be used to render the tile. This parameter is not valid when format is pbf.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "s1",
+              "s2",
+              "s3",
+              "night"
+            ],
+            "x-ms-enum": {
+              "name": "TrafficIncidentTileStyle",
+              "modelAsString": false,
+              "values": [
+                {
+                  "value": "s1",
+                  "description": "Creates traffic lines with colored chevrons indicating severity."
+                },
+                {
+                  "value": "s2",
+                  "description": "Creates plain lines with certain degree of glow."
+                },
+                {
+                  "value": "s3",
+                  "description": "Creates plain lines with certain degree of glow."
+                },
+                {
+                  "value": "night",
+                  "description": "Night style."
+                }
+              ]
+            }
+          },
+          {
+            "$ref": "#/parameters/RasterVectorZoom"
+          },
+          {
+            "$ref": "#/parameters/xTileIndex"
+          },
+          {
+            "$ref": "#/parameters/yTileIndex"
+          },
+          {
+            "name": "t",
+            "x-ms-client-name": "trafficState",
+            "in": "query",
+            "description": "Reference value for the state of traffic at a particular time, obtained from the Viewport API call, trafficModelId attribute in trafficState field. It is updated every minute, and is valid for two minutes before it times out. Use -1 to  get the most recent traffic information. Default: most recent traffic information.",
+            "required": false,
+            "type": "string",
+            "default": "-1"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/TrafficIncidentTileResult"
+            }
+          },
+          "400": {
+            "$ref": "#/responses/400"
+          },
+          "401": {
+            "$ref": "#/responses/401"
+          },
+          "403": {
+            "$ref": "#/responses/403"
+          },
+          "404": {
+            "$ref": "#/responses/404"
+          },
+          "500": {
+            "$ref": "#/responses/500"
+          }
+        },
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/traffic/incident/detail/{format}": {
+      "get": {
+        "x-publish": true,
+        "description": "__Traffic Incident Detail__ \n\n\n\n**Applies to**: S0 and S1 pricing tiers.\n\nThis API provides information on traffic incidents inside a given bounding box, based on the current Traffic  Model ID. The Traffic Model ID is available to grant synchronization of data between calls and API's. The  Traffic Model ID is a key value for determining the currency of traffic incidents. It is updated every minute,  and is valid for two minutes before it times out. It is used in rendering  [incident tiles](https://docs.microsoft.com/en-us/rest/api/maps/traffic/gettrafficincidenttile). It can be  obtained from the [Viewport API](https://docs.microsoft.com/en-us/rest/api/maps/traffic/gettrafficincidentviewport).",
+        "operationId": "Traffic_GetTrafficIncidentDetail",
+        "x-ms-examples": {
+          "GetTrafficIncidentDetail": {
+            "$ref": "./examples/GetTrafficIncidentDetail.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ClientId"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionKey"
+          },
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/TextFormat"
+          },
+          {
+            "name": "style",
+            "in": "query",
+            "description": "The style that will be used to render the tile in Traffic [Incident Tile API](https://docs.microsoft.com/en-us/rest/api/maps/traffic/gettrafficincidenttile).  This will have an effect on the coordinates of traffic incidents in the reply.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "s1",
+              "s2",
+              "s3",
+              "night"
+            ],
+            "x-ms-enum": {
+              "name": "TrafficIncidentDetailStyle",
+              "modelAsString": false,
+              "values": [
+                {
+                  "value": "s1",
+                  "description": "Creates traffic lines with colored chevrons indicating severity."
+                },
+                {
+                  "value": "s2",
+                  "description": "Creates plain lines with certain degree of glow."
+                },
+                {
+                  "value": "s3",
+                  "description": "Creates plain lines with certain degree of glow."
+                },
+                {
+                  "value": "night",
+                  "description": "Night style."
+                }
+              ]
+            }
+          },
+          {
+            "name": "boundingbox",
+            "in": "query",
+            "description": "The `boundingbox` is represented by two value pairs describing it's corners (first pair for lower left corner and second for upper right). The pairs can either be specified using any of the `projection`'s specified below (e.g., _minY,minX,maxY,maxX_) or by two latitude-longitude pairs (e.g., _minLat,minLon,maxLat,maxLon_).<br><br>NOTE: If latitude/longitude pairs are used, then the `projection` parameter must be set to \"EPSG4326\".",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "boundingZoom",
+            "in": "query",
+            "description": "Zoom level for desired tile. 0 to 22 for raster tiles, 0 through 22 for vector tiles",
+            "required": true,
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 22
+          },
+          {
+            "name": "trafficmodelid",
+            "in": "query",
+            "description": "Number referencing traffic model. This can be obtained from the [Viewport API](https://docs.microsoft.com/en-us/rest/api/maps/traffic/gettrafficincidentviewport). It is updated every minute, and is valid for two minutes before it times out. If the wrong Traffic Model ID is specified, the correct one will be returned by the interface. A value of -1 will always invoke the most recent traffic model",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "language",
+            "in": "query",
+            "description": "[ISO 639-1 code](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) for the output language. Supported languages are ar, ca, cs, da, de, el, en, en-GB, en-US, es, et, fi, fr, he, hu, id, in*, it, lt, lv, nb, nl, no, pl, pt, ro, ru, sk, sv, th, tr, zh.\n\nPlease refer to [Supported Languages](https://docs.microsoft.com/en-us/azure/azure-maps/supported-languages) for details. When invalid language code is provided response is returned in English. When incident cause or description does not have translation, English description is returned.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "projection",
+            "in": "query",
+            "description": "The projection used to specify the coordinates in the request and response. [EPSG900913](http://docs.openlayers.org/library/spherical_mercator.html) (default) or [EPSG4326](http://spatialreference.org/ref/epsg/4326/)",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "EPSG900913",
+              "EPSG4326"
+            ]
+          },
+          {
+            "name": "geometries",
+            "in": "query",
+            "description": "The type of vector geometry added to incidents (returned in the <v> element of the response).",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "original",
+              "shifted"
+            ],
+            "x-ms-enum": {
+              "name": "IncidentGeometryType",
+              "modelAsString": false,
+              "values": [
+                {
+                  "value": "original",
+                  "description": "Places incidents precisely on the road."
+                },
+                {
+                  "value": "shifted",
+                  "description": "Moves the incident slightly (depending on zoom level) to indicate specific road lanes."
+                }
+              ]
+            }
+          },
+          {
+            "name": "expandCluster",
+            "in": "query",
+            "description": "Boolean to indicate whether to list all traffic incidents in a cluster separately",
+            "required": false,
+            "type": "boolean",
+            "default": false
+          },
+          {
+            "name": "originalPosition",
+            "in": "query",
+            "description": "Boolean on whether to return the original position of the incident (<op>) as well as the one shifted to the beginning of the traffic tube (<op>)",
+            "required": false,
+            "type": "boolean",
+            "default": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/TrafficIncidentDetailResult"
+            }
+          },
+          "400": {
+            "$ref": "#/responses/400"
+          },
+          "401": {
+            "$ref": "#/responses/401"
+          },
+          "403": {
+            "$ref": "#/responses/403"
+          },
+          "404": {
+            "$ref": "#/responses/404"
+          },
+          "500": {
+            "$ref": "#/responses/500"
+          }
+        }
+      }
+    },
+    "/traffic/incident/viewport/{format}": {
+      "get": {
+        "x-publish": true,
+        "description": "__Traffic Incident Viewport__\n\n\n**Applies to**: S0 and S1 pricing tiers.\n\nThis API returns legal and technical information for the viewport described in the request. It should be called  by client applications whenever the viewport changes (for instance, through zooming, panning, going to a  location, or displaying a route). The request should contain the bounding box and zoom level of the viewport  whose information is needed. The return will contain map version information, as well as the current Traffic  Model ID and copyright IDs. The Traffic Model ID returned by the Viewport Description is used by other APIs to  retrieve last traffic information for further processing.",
+        "operationId": "Traffic_GetTrafficIncidentViewport",
+        "x-ms-examples": {
+          "GetTrafficIncidentViewport": {
+            "$ref": "./examples/GetTrafficIncidentViewport.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ClientId"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionKey"
+          },
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/TextFormat"
+          },
+          {
+            "name": "boundingbox",
+            "in": "query",
+            "description": "Bounding box of the map viewport in [EPSG900913](http://docs.openlayers.org/library/spherical_mercator.html) projection. The `boundingbox` is represented by two value pairs describing it's corners (first pair for lower left corner and second for upper right). All values should be separated by commas (e.g., _minY,minX,maxY,maxX_). The maximum size of the bounding box that can be passed is dependent on the requested zoom level. The width and height cannot exceed 4092 pixels when rendered on the given zoom level.<br><br>NOTE: Bounding boxes that cross the 180° meridian require special treatment. For such boxes, the eastern _maxX_ value will be negative, and thus less than the _minX_ value west of the 180° meridian. To address that, the value 40075016.6855874 should be added to the true _maxX_ value before it is passed in the request.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "boundingzoom",
+            "in": "query",
+            "description": "Zoom level of the map viewport. Used to determine whether the view can be zoomed in.",
+            "required": true,
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 22
+          },
+          {
+            "name": "overviewbox",
+            "in": "query",
+            "description": "Bounding box of the overview map in [EPSG900913](http://docs.openlayers.org/library/spherical_mercator.html) projection.<br><br>Used in case the overview box/mini map has different copyright data than the main map. If there is no mini map, the same coordinates as `boundingBox` is used.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "overviewzoom",
+            "in": "query",
+            "description": "Zoom level of the overview map. If there is no mini map, use the same zoom level as boundingZoom.",
+            "required": true,
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 22
+          },
+          {
+            "name": "copyright",
+            "in": "query",
+            "description": "Determines what copyright information to return. When true the copyright text is returned; when false only the copyright index is returned.",
+            "required": true,
+            "type": "boolean",
+            "default": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/TrafficIncidentViewportResult"
+            }
+          },
+          "400": {
+            "$ref": "#/responses/400"
+          },
+          "401": {
+            "$ref": "#/responses/401"
+          },
+          "403": {
+            "$ref": "#/responses/403"
+          },
+          "404": {
+            "$ref": "#/responses/404"
+          },
+          "500": {
+            "$ref": "#/responses/500"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ODataErrorResponse": {
+      "type": "object",
+      "description": "This response object is returned when an error occurs in the Maps API.",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/ODataError"
+        }
+      }
+    },
+    "ODataError": {
+      "type": "object",
+      "description": "This object is returned when an error occurs in the Maps API.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The ODataError code."
+        },
+        "message": {
+          "type": "string",
+          "readOnly": true,
+          "description": "If available, a human readable description of the error."
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ODataError"
+          }
+        },
+        "target": {
+          "type": "string",
+          "readOnly": true,
+          "description": "If available, the target causing the error."
+        }
+      }
+    },
+    "Coordinate": {
+      "description": "A location represented as a latitude and longitude.",
+      "type": "object",
+      "properties": {
+        "latitude": {
+          "description": "Latitude property",
+          "type": "number",
+          "format": "double",
+          "readOnly": true
+        },
+        "longitude": {
+          "description": "Longitude property",
+          "type": "number",
+          "format": "double",
+          "readOnly": true
+        }
+      }
+    },
+    "TrafficFlowTileResult": {
+      "description": "This image is returned from a successful Traffic Flow Tile call",
+      "type": "string",
+      "format": "binary",
+      "readOnly": true
+    },
+    "TrafficFlowSegmentResult": {
+      "description": "This object is returned from a successful Traffic Flow Segment call",
+      "type": "object",
+      "properties": {
+        "flowSegmentData": {
+          "description": "Flow Segment Data property",
+          "type": "object",
+          "readOnly": true,
+          "properties": {
+            "frc": {
+              "description": "Functional Road Class. This indicates the road type:\n  0: Motorway, freeway or other major road.\n  1: Major road, less important than a motorway.\n  2: Other major road.\n  3: Secondary road.\n  4: Local connecting road.\n  5: Local road of high importance.\n  6: Local road.",
+              "type": "string",
+              "readOnly": true
+            },
+            "currentSpeed": {
+              "description": "The current average speed at the selected point, in the units requested. This is calculated from the currentTravelTime and the length of the selected segment.",
+              "type": "integer",
+              "readOnly": true
+            },
+            "freeFlowSpeed": {
+              "description": "The free flow speed expected under ideal conditions, expressed in the units requested. This is related to the freeFlowTravelTime.",
+              "type": "integer",
+              "readOnly": true
+            },
+            "currentTravelTime": {
+              "description": "Current travel time in seconds based on fused real-time measurements between the defined locations in the specified direction.",
+              "type": "integer",
+              "readOnly": true
+            },
+            "freeFlowTravelTime": {
+              "description": "The travel time in seconds which would be expected under ideal free flow conditions.",
+              "type": "integer",
+              "readOnly": true
+            },
+            "confidence": {
+              "description": "The confidence is a measure of the quality of the provided travel time and speed. A value of 1 means full confidence, that the response contains the highest quality data.  Lower values indicate the degree that the response may vary from the actual conditions on the road. Any value greater than 0.6 means the information was based on real-time probe input. A value of 0.5 means the reported speed is based on historical info.   A value between 0.5 and 0.6 has a calculated weighted average between historical and live speeds.",
+              "type": "number",
+              "readOnly": true
+            },
+            "coordinates": {
+              "description": "Includes the coordinates describing the shape of the segment. Coordinates are shifted from the road depending on the zoom level to support high quality visualization in every scale.",
+              "type": "object",
+              "properties": {
+                "coordinate": {
+                  "description": "Coordinate array",
+                  "type": "array",
+                  "readOnly": true,
+                  "items": {
+                    "$ref": "#/definitions/Coordinate"
+                  }
+                }
+              }
+            },
+            "@version": {
+              "description": "This indicates the software version that generated the response.",
+              "type": "string",
+              "readOnly": true
+            },
+            "openlr": {
+              "description": "OpenLR code for segment",
+              "type": "number",
+              "readOnly": true
+            }
+          }
+        }
+      }
+    },
+    "TrafficIncidentTileResult": {
+      "description": "This object is returned from a successful Traffic Incident Tile call",
+      "type": "object",
+      "properties": {
+        "image": {
+          "description": "Image property",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "TrafficIncidentDetailResult": {
+      "description": "This object is returned from a successful Traffic incident Detail call",
+      "type": "object",
+      "properties": {
+        "tm": {
+          "description": "Main response element",
+          "type": "object",
+          "readOnly": true,
+          "properties": {
+            "@id": {
+              "description": "ID of the traffic incident",
+              "type": "string",
+              "readOnly": true
+            },
+            "poi": {
+              "description": "A single traffic incident, or a cluster of traffic incidents",
+              "type": "array",
+              "readOnly": true,
+              "items": {
+                "$ref": "#/definitions/TrafficIncidentPoi"
+              }
+            }
+          }
+        }
+      }
+    },
+    "TrafficIncidentPoi": {
+      "type": "object",
+      "readOnly": true,
+      "properties": {
+        "id": {
+          "description": "ID of the traffic incident",
+          "type": "string",
+          "readOnly": true
+        },
+        "p": {
+          "description": "The point where an icon of the cluster or raw incident should be drawn, expressed in the requested projection. This is affected by traffic style, zoom level and road type",
+          "type": "object",
+          "readOnly": true,
+          "properties": {
+            "x": {
+              "description": "x coordinate",
+              "type": "number",
+              "readOnly": true
+            },
+            "y": {
+              "description": "y coordinate",
+              "type": "number",
+              "readOnly": true
+            }
+          }
+        },
+        "ic": {
+          "description": "The icon category associated with this incident. Values are numbers in the range 0-13, with the following meanings -- 0: Unknown, 1: Accident, 2: Fog, 3: Dangerous Conditions, 4: Rain, 5: Ice, 6: Jam, 7: Lane Closed, 8: Road Closed, 9: Road Works, 10: Wind, 11: Flooding, 12: Detour, 13: Cluster",
+          "type": "integer",
+          "readOnly": true
+        },
+        "ty": {
+          "description": "The magnitude of delay associated with incident. These values correspond to incident colors in the traffic tiles",
+          "type": "integer",
+          "readOnly": true
+        },
+        "cbl": {
+          "description": "Bottom left coordinate of the cluster in the projection of the request",
+          "type": "object",
+          "readOnly": true,
+          "properties": {
+            "x": {
+              "description": "x coordinate",
+              "type": "number",
+              "readOnly": true
+            },
+            "y": {
+              "description": "y coordinate",
+              "type": "number",
+              "readOnly": true
+            }
+          }
+        },
+        "ctr": {
+          "description": "Top right coordinate of the cluster in the projection of the request",
+          "type": "object",
+          "readOnly": true,
+          "properties": {
+            "x": {
+              "description": "x coordinate",
+              "type": "number",
+              "readOnly": true
+            },
+            "y": {
+              "description": "y coordinate",
+              "type": "number",
+              "readOnly": true
+            }
+          }
+        },
+        "cs": {
+          "description": "Cluster size: the number of incidents in the cluster",
+          "type": "integer",
+          "readOnly": true
+        },
+        "l": {
+          "description": "Length of the incident in meters",
+          "type": "integer",
+          "readOnly": true
+        },
+        "r": {
+          "description": "The road number(s) affected by the incident. Multiple road numbers will delimited by slashes",
+          "type": "string",
+          "readOnly": true
+        },
+        "dl": {
+          "description": "Delay caused by the incident in seconds (except in road closures)",
+          "type": "integer",
+          "readOnly": true
+        },
+        "t": {
+          "description": "To: the name of the intersection or location where the traffic due to the incident ends",
+          "type": "string",
+          "readOnly": true
+        },
+        "f": {
+          "description": "From: the name of the intersection or location where the traffic due to the incident starts",
+          "type": "string",
+          "readOnly": true
+        },
+        "d": {
+          "description": "Description of the incident in the language requested",
+          "type": "string",
+          "readOnly": true
+        },
+        "c": {
+          "description": "Cause of the incident, where available, in the language requested",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "TrafficIncidentViewportResult": {
+      "description": "This object is returned from a successful Traffic Incident Viewport call",
+      "type": "object",
+      "properties": {
+        "viewpResp": {
+          "description": "Viewport Response object",
+          "type": "object",
+          "readOnly": true,
+          "properties": {
+            "trafficState": {
+              "description": "Traffic State array",
+              "type": "object",
+              "readOnly": true,
+              "properties": {
+                "@trafficAge": {
+                  "description": "@Traffic Age property",
+                  "type": "integer",
+                  "readOnly": true
+                },
+                "@trafficModelId": {
+                  "description": "@Traffic Model Id property",
+                  "type": "string",
+                  "readOnly": true
+                }
+              }
+            },
+            "copyrightIds": {
+              "description": "Copyright Ids property",
+              "type": "string",
+              "readOnly": true
+            },
+            "@version": {
+              "description": "@Version property",
+              "type": "string",
+              "readOnly": true
+            },
+            "@maps": {
+              "description": "@maps property",
+              "type": "string",
+              "readOnly": true
+            }
+          }
+        }
+      }
+    }
+  }
+}
