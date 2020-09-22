@@ -45,7 +45,7 @@
         "tags": [
           "OrchestratorInstance"
         ],
-        "operationId": "OrchestratorInstance_GetDetails",
+        "operationId": "OrchestratorInstanceService_GetDetails",
         "parameters": [
           {
             "$ref": "#/parameters/ResourceGroupNameParameter"
@@ -85,7 +85,7 @@
         "tags": [
           "OrchestratorInstance"
         ],
-        "operationId": "orchestratorInstance_Create",
+        "operationId": "OrchestratorInstanceService_Create",
         "parameters": [
           {
             "$ref": "#/parameters/ResourceGroupNameParameter"
@@ -141,7 +141,7 @@
         "tags": [
           "OrchestratorInstance"
         ],
-        "operationId": "OrchestratorInstance_Delete",
+        "operationId": "OrchestratorInstanceService_Delete",
         "parameters": [
           {
             "$ref": "#/parameters/ResourceGroupNameParameter"
@@ -185,7 +185,7 @@
         "tags": [
           "OrchestratorInstance"
         ],
-        "operationId": "OrchestratorInstance_Patch",
+        "operationId": "OrchestratorInstanceService_Patch",
         "parameters": [
           {
             "$ref": "#/parameters/ResourceGroupNameParameter"
@@ -234,10 +234,10 @@
     "/subscriptions/{subscriptionId}/providers/Microsoft.DelegatedNetwork/orchestratorInstanceList": {
       "get": {
         "tags": [
-          "OrchestratorInstances"
+          "OrchestratorInstanceList"
         ],
         "description": "Get all the orchestratorInstance resources in a subscription.",
-        "operationId": "orchestratorInstance_ListBySubscription",
+        "operationId": "oOrchestratorInstanceService_ListBySubscription",
         "x-ms-examples": {
           "Get orchestratorInstance resources by subscription": {
             "$ref": "./examples/orchestratorInstanceListBySub.json"
@@ -270,10 +270,10 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DelegatedNetwork/orchestratorInstanceList": {
       "get": {
         "tags": [
-          "OrchestratorInstances"
+          "OrchestratorInstanceList"
         ],
         "description": "Get all the OrchestratorInstances resources in a resource group.",
-        "operationId": "OrchestratorInstances_ListByResourceGroup",
+        "operationId": "OrchestratorInstanceService_ListByResourceGroup",
         "x-ms-examples": {
           "Get OrchestratorInstance resources by resource group": {
             "$ref": "./examples/orchestratorInstanceListByRG.json"
