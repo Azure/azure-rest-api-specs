@@ -439,6 +439,8 @@ The working folder of all the scripts is the __root folder of sdk repo__.
           "type": "string"
         },
         "logPrefix": {
+          // Prefix to be added to SDK Automation log. By default it would be filename of the script.
+          "type": "string"
         },
         "stdout": {
           // How should SDK Automation handle the script stdout stream
