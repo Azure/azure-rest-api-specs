@@ -39,5 +39,5 @@ input-file:
 
 A preview release `2020-09-15_Preview` is currently available.
 ``` yaml $(tag) == 'release_2_0'
-input-file: preview/2020-09-15/swagger.json
+input-file: preview/2020-09-15_Preview/swagger.json
 ```
