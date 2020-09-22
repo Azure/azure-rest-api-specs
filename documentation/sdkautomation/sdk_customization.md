@@ -116,18 +116,24 @@ This is type of file `./specificationRepositoryConfiguration.json` in swagger sp
     "sdkRepositoryMappings": {
       // A mapping of SDK repository names to the names of the SDK repositories
       // that all interaction should go to instead.
-      // The property name is the sdk name.
       "type": "object",
       "additionalProperties": {
         "$ref": "#/definitions/SdkRepositoryConfig"
+      },
+      "propertyNames": {
+        // The property name is the sdk name identifier.
+        "type": "string"
       }
     },
     "overrides": {
       // Override config for specific repository.
-      // The property name is #/definitions/RepositoryName.
       "type": "object",
       "additionalProperties": {
         "$ref": "#/"
+      },
+      "propertyNames": {
+        // The property name is the sdk repo ref.
+        "$ref": "#/definitions/RepositoryName"
       }
     },
     "required": [
