@@ -40,7 +40,7 @@
         },
         "operationId": "Schema_GetById",
         "produces": [
-          "application/json"
+          "text/plain"
         ],
         "parameters": [
           {
@@ -94,8 +94,8 @@
               }
             },
             "schema": {
-              "type": "object",
-              "additionalProperties": {}
+              "description": "String representation (UTF-8) of the registered schema.",
+              "type": "string"
             }
           },
           "default": {
@@ -117,6 +117,9 @@
           }
         },
         "operationId": "Schema_QueryIdByContent",
+        "consumes": [
+          "text/plain"
+        ],
         "produces": [
           "application/json"
         ],
@@ -160,11 +163,10 @@
           {
             "name": "schema-content",
             "in": "body",
-            "description": "String representation of the registered schema.",
+            "description": "String representation (UTF-8) of the registered schema.",
             "required": true,
             "schema": {
-              "type": "object",
-              "additionalProperties": {}
+              "type": "string"
             }
           },
           {
@@ -231,6 +233,9 @@
           }
         },
         "operationId": "Schema_Register",
+        "consumes": [
+          "text/plain"
+        ],
         "produces": [
           "application/json"
         ],
@@ -274,11 +279,10 @@
           {
             "name": "schema-content",
             "in": "body",
-            "description": "String representation of the schema being registered.",
+            "description": "String representation (UTF-8) of the schema being registered.",
             "required": true,
             "schema": {
-              "type": "object",
-              "additionalProperties": {}
+              "type": "string"
             }
           },
           {
