@@ -1,0 +1,550 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Security Center",
+    "description": "API spec for Microsoft.Security (Azure Security Center) resource provider",
+    "version": "2020-08-06-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Security/devices": {
+      "get": {
+        "x-ms-examples": {
+          "Get Devices": {
+            "$ref": "./examples/Devices/GetDevicesListForSubscription.json"
+          }
+        },
+        "tags": [
+          "Device Inventory"
+        ],
+        "description": "Get list of the devices by their subscription.",
+        "operationId": "Devices_List",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
+          },
+          {
+            "in": "query",
+            "name": "$limit",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "description": "Limit the number of items returned in a single page"
+          },
+          {
+            "in": "query",
+            "name": "$skipToken",
+            "required": false,
+            "type": "string",
+            "description": "Skip token used for pagination"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/DeviceList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+	"/{resourceId}/providers/Microsoft.Security/devices": {
+      "get": {
+        "x-ms-examples": {
+          "Get Devices": {
+            "$ref": "./examples/Devices/GetDevicesListForHub.json"
+          }
+        },
+        "tags": [
+          "Device Inventory"
+        ],
+        "description": "Get list of the devices for the specified IoT Hub resource.",
+        "operationId": "Devices_List",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceId"
+          },
+          {
+            "in": "query",
+            "name": "$limit",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "description": "Limit the number of items returned in a single page"
+          },
+          {
+            "in": "query",
+            "name": "$skipToken",
+            "required": false,
+            "type": "string",
+            "description": "Skip token used for pagination"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/DeviceList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/{resourceId}/providers/Microsoft.Security/devices/{deviceId}": {
+      "get": {
+        "x-ms-examples": {
+          "Get Device": {
+            "$ref": "./examples/Devices/GetDevice.json"
+          }
+        },
+        "tags": [
+          "Device Inventory"
+        ],
+        "description": "Get device.",
+        "operationId": "Device_Get",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/resourceId"
+          },
+          {
+            "$ref": "#/parameters/DeviceId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Device"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "DeviceList": {
+      "description": "List of Devices",
+      "required": [
+        "value"
+      ],
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "List of devices",
+          "items": {
+            "$ref": "#/definitions/Device"
+          }
+        },
+        "nextLink": {
+          "readOnly": true,
+          "type": "string",
+          "description": "When there are too many devices for one page, use this URI to fetch the next page."
+        }
+      }
+    },
+    "Device": {
+      "type": "object",
+      "description": "Device model",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "Device data",
+          "$ref": "#/definitions/DeviceProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../common/v1/types.json#/definitions/Resource"
+        }
+      ]
+    },
+    "DeviceProperties": {
+      "type": "object",
+      "description": "Device Information",
+      "properties": {
+        "displayName": {
+          "type": "string",
+          "description": "Device display name given by the collector"
+        },
+        "deviceType": {
+          "type": "string",
+          "description": "Device type."
+        },
+        "sourceName": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The source that created the device"
+        },
+        "networkInterfaces": {
+          "readOnly": true,
+          "type": "array",
+          "description": "List of network interfaces.",
+          "items": {
+            "$ref": "#/definitions/NetworkInterface"
+          }
+        },
+        "vendor": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Device vendor"
+        },
+        "osName": {
+          "description": "Device operating system name.",
+          "type": "string"
+        },
+        "protocols": {
+          "readOnly": true,
+          "type": "array",
+          "description": "List of protocols.",
+          "items": {
+            "$ref": "#/definitions/Protocol"
+          }
+        },
+        "lastActiveTime": {
+          "readOnly": true,
+          "type": "string",
+          "format": "date-time",
+          "description": "last time the device was active in the network"
+        },
+        "lastUpdateTime": {
+          "readOnly": true,
+          "type": "string",
+          "format": "date-time",
+          "description": "last time the device was updated"
+        },
+        "managementState": {
+          "readOnly": true,
+          "type": "string",
+          "enum": [
+            "Managed",
+            "Unmanaged"
+          ],
+          "description": "Managed state of the device.",
+          "x-ms-enum": {
+            "name": "ManagementState",
+            "modelAsString": true
+          }
+        },
+        "authorizationState": {
+          "type": "string",
+          "enum": [
+            "Authorized",
+            "Unauthorized"
+          ],
+          "default": "Unauthorized",
+          "description": "Authorized state of the device.",
+          "x-ms-enum": {
+            "name": "AuthorizationState",
+            "modelAsString": true
+          }
+        },
+        "deviceCriticality": {
+          "type": "string",
+          "enum": [
+            "Important",
+            "Standard"
+          ],
+          "default": "Standard",
+          "x-ms-enum": {
+            "name": "DeviceCriticality",
+            "modelAsString": true
+          },
+          "description": "Device criticality."
+        },
+        "purdueLevel": {
+          "type": "string",
+          "enum": [
+            "ProcessControl",
+            "Supervisory",
+            "Enterprise"
+          ],
+          "default": "ProcessControl",
+          "x-ms-enum": {
+            "name": "PurdueLevel",
+            "modelAsString": true
+          },
+          "description": "Purdue level of the device."
+        },
+        "notes": {
+          "type": "string",
+          "description": "user notes for the device, up to 300 characters."
+        },
+        "firmwares": {
+          "readOnly": true,
+          "type": "array",
+          "description": "List of device firmwares.",
+          "items": {
+            "$ref": "#/definitions/Firmware"
+          }
+        },
+        "vlans": {
+          "readOnly": true,
+          "type": "array",
+          "description": "List of device vlans.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "discoveryTime": {
+          "readOnly": true,
+          "type": "string",
+          "format": "date-time",
+          "description": "Discovered time of the device."
+        },
+        "programmingState": {
+          "readOnly": true,
+          "type": "string",
+          "enum": [
+            "ProgrammingDevice",
+            "NotProgrammingDevice"
+          ],
+          "x-ms-enum": {
+            "name": "ProgrammingState",
+            "modelAsString": true
+          },
+          "description": "Indicates whether this device is programming"
+        },
+        "lastProgrammingTime": {
+          "readOnly": true,
+          "type": "string",
+          "format": "date-time",
+          "description": "last time the device was programming or programed."
+        },
+        "scanningFunctionality": {
+          "readOnly": true,
+          "type": "string",
+          "enum": [
+            "ScannerDevice",
+            "NotScannerDevice"
+          ],
+          "x-ms-enum": {
+            "name": "ScanningFunctionality",
+            "modelAsString": true
+          },
+          "description": "Indicates whether the device is a scanner"
+        },
+        "lastScanTime": {
+          "readOnly": true,
+          "type": "string",
+          "format": "date-time",
+          "description": "last time the device was scanning."
+        }
+      }
+    },
+    "NetworkInterface": {
+      "type": "object",
+      "description": "Network interface",
+      "properties": {
+        "ipAddress": {
+          "$ref": "#/definitions/IpAddress"
+        },
+        "macAddress": {
+          "$ref": "#/definitions/MacAddress"
+        }
+      }
+    },
+    "IpAddress": {
+      "type": "object",
+      "description": "IP Address information",
+      "properties": {
+        "v4Address": {
+          "readOnly": true,
+          "type": "string",
+          "description": "IPV4 address"
+        },
+        "detectionTime": {
+          "readOnly": true,
+          "type": "string",
+          "format": "date-time",
+          "description": "Detection time of the ip address."
+        },
+        "subnetCidr": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Subnet Classless Inter-Domain Routing"
+        },
+        "fqdn": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Fully qualified domain name"
+        },
+        "fqdnLastLookupTime": {
+          "readOnly": true,
+          "type": "string",
+          "format": "date-time",
+          "description": "FQDN last lookup time."
+        }
+      }
+    },
+    "MacAddress": {
+      "type": "object",
+      "description": "MAC Address information",
+      "properties": {
+        "address": {
+          "readOnly": true,
+          "type": "string",
+          "description": "MAC address"
+        },
+        "detectionTime": {
+          "readOnly": true,
+          "type": "string",
+          "format": "date-time",
+          "description": "Detection time of the mac address."
+        },
+        "significance": {
+          "readOnly": true,
+          "type": "string",
+          "enum": [
+            "Primary",
+            "Secondary"
+          ],
+          "x-ms-enum": {
+            "name": "MacSignificance",
+            "modelAsString": true
+          },
+          "description": "Indicates whether this is the primary secondary MAC address of the device"
+        },
+        "relationToIpStatus": {
+          "readOnly": true,
+          "type": "string",
+          "enum": [
+            "Guess",
+            "Certain"
+          ],
+          "x-ms-enum": {
+            "name": "RelationToIpStatus",
+            "modelAsString": true
+          },
+          "description": "Indicates whether the relation of the mac to the ip address is certain or a guess"
+        }
+      }
+    },
+    "Firmware": {
+      "type": "object",
+      "description": "Firmware information",
+      "properties": {
+        "moduleAddress": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Address of the specific module a firmware is related to"
+        },
+        "rack": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Rack number of the module a firmware is related to."
+        },
+        "slot": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Slot number in the rack of the module a firmware is related to"
+        },
+        "serial": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Serial of the firmware"
+        },
+        "model": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Firmware model"
+        },
+        "version": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Firmware version"
+        },
+        "additionalData": {
+          "readOnly": true,
+          "type": "object",
+          "description": " A bag of fields which extends the firmware information."
+        }
+      }
+    },
+    "Protocol": {
+      "type": "object",
+      "description": "Protocol data",
+      "properties": {
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Protocol name"
+        },
+        "identifiers": {
+          "type": "string",
+          "description": "list of protocol identifiers."
+        }
+      }
+    }
+  },
+  "parameters": {
+    "DeviceId": {
+      "name": "deviceId",
+      "in": "path",
+      "required": true,
+      "description": "Identifier of the device.",
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}

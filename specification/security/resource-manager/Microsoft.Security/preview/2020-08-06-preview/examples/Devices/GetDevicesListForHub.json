@@ -1,0 +1,71 @@
+{
+  "parameters": {
+    "api-version": "2020-08-06-preview",
+    "resourceId": "subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/MyGroup/providers/Microsoft.Devices/iotHubs/myHub"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/MyGroup/providers/Microsoft.Devices/iotHubs/myHub/providers/Microsoft.Security/devices/myDevice",
+            "name": "myDevice",
+            "type": "Microsoft.Security/devices",
+            "properties": {
+              "displayName": "10.168.140.1",
+              "deviceType": "PLC",
+              "sourceName": "HORIZON",
+              "networkInterfaces": [
+                {
+                  "ipAddress": {
+                    "v4Address": "10.168.140.1",
+                    "detectionTime": "2020-05-13T06:32:25Z"
+                  },
+                  "macAddress": {
+                    "address": "34-E1-2D-77-80-D0",
+                    "detectionTime": "2020-05-13T06:32:25Z",
+                    "significance": "Primary",
+                    "relationToIpStatus": "Certain"
+                  }
+                }
+              ],
+              "vendor": "BROADCOM",
+              "osName": "Windows 10 64",
+              "protocols": [
+                {
+                  "name": "CIP",
+                  "identifiers": "0, 1"
+                },
+                {
+                  "name": "EtherNet/IP",
+                  "identifiers": "0, 1"
+                }
+              ],
+              "lastActiveTime": "2020-05-13T06:32:25Z",
+              "lastUpdateTime": "2020-05-13T06:32:25Z",
+              "managementState": "Unmanaged",
+              "authorizationState": "Authorized",
+              "deviceCriticality": "Standard",
+              "purdueLevel": "ProcessControl",
+              "firmwares": [
+                {
+                  "serial": "0x27269242",
+                  "model": "1768-ENBT",
+                  "version": "29.11"
+                }
+              ],
+              "vlans": [
+                "name(1)->2",
+                "3",
+                "another_name(4)"
+              ],
+              "discoveryTime": "2020-05-13T06:32:25Z",
+              "programmingState": "NotProgrammingDevice",
+              "scanningFunctionality": "NotScannerDevice"
+            }
+          }
+        ]
+      }
+    }
+  }
+}
