@@ -221,13 +221,13 @@
           "200": {
             "description": "Success",
             "schema": {
-              "$ref": "#/definitions/CodeVersionResource"
+              "$ref": "codeContainer.json#/definitions/CodeContainerResource"
             }
           },
           "201": {
             "description": "Success",
             "schema": {
-              "$ref": "#/definitions/CodeVersionResource"
+              "$ref": "codeContainer.json#/definitions/CodeContainerResource"
             }
           },
           "default": {
@@ -245,7 +245,7 @@
       "in": "path",
       "name": "name",
       "type": "string",
-      "description": "Name for CodeVersion.",
+      "description": "Code name.",
       "required": true,
       "x-ms-parameter-location": "method"
     },
@@ -253,7 +253,7 @@
       "in": "path",
       "name": "version",
       "type": "string",
-      "description": "Version for CodeVersion.",
+      "description": "Code version.",
       "required": true,
       "x-ms-parameter-location": "method"
     }
