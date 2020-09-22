@@ -1,5 +1,5 @@
 # Exporter for Azure Monitor
-This is the AutoRest configuration file for Monitor Exporter.
+> see https://aka.ms/autorest
 
 ## Getting Started
 
@@ -14,6 +14,15 @@ To see additional help and options, run:
 For other options on installation see [Installing AutoRest](https://aka.ms/autorest/install) on the AutoRest github page.
 
 ## Configuration
+
+The following are the settings for this using this API with AutoRest.
+
+``` yaml
+# specify the version of Autorest to use
+version: 1.0.1-20170402
+
+# (more settings here...)
+```
 
 ### Basic Information
 

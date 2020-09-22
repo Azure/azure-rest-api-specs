@@ -17,14 +17,14 @@
   "paths": {
     "/track": {
       "post": {
-        "summary": "Detect anomalies for the entire series in batch.",
-        "description": "This operation generates a model using an entire series, each point is detected with the same model. With this method, points before and after a certain point are used to determine whether it is an anomaly. The entire detection can give user an overall status of the time series.",
+        "summary": "Track telemetry events",
+        "description": "This operation sends a sequence of telemetry events that will be monitored by Azure Monitor.",
         "operationId": "track",
         "parameters": [
           {
             "name": "body",
             "in": "body",
-            "description": "Time series points and period if needed. Advanced model parameters can also be set in the request.",
+            "description": "The list of telemetry events to track.",
             "required": true,
             "schema": {
               "type": "array",
