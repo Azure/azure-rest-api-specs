@@ -34,7 +34,7 @@
     }
   },
   "paths": {
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DelegatedNetwork/orchestratorInstance/{resourceName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DelegatedNetwork/orchestratorInstances/{resourceName}": {
       "get": {
         "description": "Gets details about the orchestrator instance.",
         "x-ms-examples": {
@@ -404,7 +404,7 @@
             "Provisioning"
           ],
           "x-ms-enum": {
-            "name": "orchestratorInstance state",
+            "name": "OrchestratorInstanceState",
             "modelAsString": true
           },
           "readOnly": true,
@@ -425,8 +425,15 @@
       "type": "object",
       "properties": {
         "orchestratorType": {
-          "description": "AAD ID used with apiserver",
-          "type": "string"
+          "description": "Orchestrator Type",
+          "type": "string",
+          "enum": [
+            "Kubernetes"
+          ],
+          "x-ms-enum": {
+            "name": "OrchestratorType",
+            "modelAsString": true
+          }
         },
         "properties": {
           "description": "orchestrator instance properties",
@@ -451,7 +458,7 @@
           "type": "string"
         },
         "apiServerEndpoint": {
-          "description": "APIServer url",
+          "description": "K8s APIServer url",
           "type": "string"
         }
       }
