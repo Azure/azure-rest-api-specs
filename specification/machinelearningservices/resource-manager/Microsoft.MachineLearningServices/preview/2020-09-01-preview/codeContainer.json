@@ -1,470 +1,470 @@
 {
-	"swagger": "2.0",
-	"info": {
-		"title": "Azure Machine Learning Workspaces",
-		"description": "These APIs allow end users to operate on Azure Machine Learning Workspace resources.",
-		"version": "2020-09-01-preview"
-	},
-	"host": "management.azure.com",
-	"schemes": [
-		"https"
-	],
-	"consumes": [
-		"application/json"
-	],
-	"produces": [
-		"application/json"
-	],
-	"security": [
-		{
-			"azure_auth": [
-			"user_impersonation"
-			]
-		}
-	],
-	"securityDefinitions": {
-		"azure_auth": {
-			"type": "oauth2",
-			"authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
-			"flow": "implicit",
-			"description": "Azure Active Directory OAuth2 Flow.",
-			"scopes": {
-			"user_impersonation": "impersonate your user account"
-			}
-		}
-	},
-	"paths": {
-		"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/codes": {
-			"get": {
-				"tags": [
-					"CodeContainer"
-				],
-				"x-ms-examples": {
-					"List CodeContainers": {
-						"$ref": "./examples/listCodeContainers.json"
-					}
-				},
-				"x-ms-pageable": {
-					"nextLinkName": "nextLink"
-				},
-				"description": "Lists Code containers in the workspace.",
-				"operationId": "CodeVersions_List",
-				"parameters": [
-					{
-						"$ref": "machineLearningServices.json#/parameters/SubscriptionIdParameter"
-					},
-					{
-						"$ref": "machineLearningServices.json#/parameters/ResourceGroupNameParameter"
-					},
-					{
-						"$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
-					},
-					{
-						"$ref": "machineLearningServices.json#/parameters/APIVersionParameter"
-					},
-					{
-						"$ref": "machineLearningServices.json#/parameters/PaginationParameter"
-					}
-				],
-				"responses": {
-					"200": {
-						"description": "Success",
-						"schema": {
-							"$ref": "#/definitions/AssetContainerResourcePaginatedResult"
-						}
-					},
-					"default": {
-						"description": "Error",
-						"schema": {
-							"$ref": "#/definitions/MachineLearningServiceError"
-						}
-					}
-				}
-			}
-		},
-		"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/codes/{name}": {
-			"delete": {
-				"tags": [
-					"CodeContainer"
-				],
-				"x-ms-examples": {
-					"Delete CodeContainer": {
-						"$ref": "./examples/deleteCodeContainer.json"
-					}
-				},
-				"description": "Delete CodeVersion entity.",
-				"operationId": "CodeVersions_Delete",
-				"parameters": [
-					{
-						"$ref": "machineLearningServices.json#/parameters/SubscriptionIdParameter"
-					},
-					{
-						"$ref": "machineLearningServices.json#/parameters/ResourceGroupNameParameter"
-					},
-					{
-						"$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
-					},
-					{
-						"$ref": "machineLearningServices.json#/parameters/APIVersionParameter"
-					},
-					{
-						"$ref": "#/parameters/CodeContainerNameParameter"
-					}
-				],
-				"responses": {
-					"default": {
-						"description": "Error",
-						"schema": {
-							"$ref": "#/definitions/MachineLearningServiceError"
-						}
-					},
-					"200": {
-						"description": "Success"
-					}
-				}
-			},
-			"get": {
-				"tags": [
-					"CodeContainer"
-				],
-				"x-ms-examples": {
-					"Get CodeContainer": {
-						"$ref": "./examples/getCodeContainer.json"
-					}
-				},
-				"description": "Get model container.",
-				"operationId": "Code_Get",
-				"parameters": [
-					{
-						"$ref": "machineLearningServices.json#/parameters/SubscriptionIdParameter"
-					},
-					{
-						"$ref": "machineLearningServices.json#/parameters/ResourceGroupNameParameter"
-					},
-					{
-						"$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
-					},
-					{
-						"$ref": "machineLearningServices.json#/parameters/APIVersionParameter"
-					},
-					{
-						"$ref": "#/parameters/CodeContainerNameParameter"
-					}
-				],
-				"responses": {
-					"200": {
-						"description": "Success",
-						"schema": {
-							"$ref": "#/definitions/AssetContainerResource"
-						}
-					},
-					"default": {
-						"description": "Error",
-						"schema": {
-							"$ref": "#/definitions/MachineLearningServiceError"
-						}
-					}
-				}
-			},
-			"put": {
-				"tags": [
-					"CodeContainer"
-				],
-				"x-ms-examples": {
-					"Create or Update CodeContainer": {
-						"$ref": "./examples/createOrUpdateCodeContainer.json"
-					}
-				},
-				"description": "Create or update code container.",
-				"operationId": "Code_CreateOrUpdate",
-				"parameters": [
-					{
-						"$ref": "machineLearningServices.json#/parameters/SubscriptionIdParameter"
-					},
-					{
-						"$ref": "machineLearningServices.json#/parameters/ResourceGroupNameParameter"
-					},
-					{
-						"$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
-					},
-					{
-						"$ref": "machineLearningServices.json#/parameters/APIVersionParameter"
-					},
-					{
-						"$ref": "#/parameters/CodeContainerNameParameter"
-					},
-					{
-						"in": "body",
-						"name": "body",
-						"description": "Model container entity to create or update.",
-						"schema": {
-							"$ref": "#/definitions/CodeVersionResourceRequest"
-						}
-					}
-				],
-				"responses": {
-					"200": {
-						"description": "Success",
-						"schema": {
-							"$ref": "#/definitions/AssetContainerResource"
-						}
-					},
-					"201": {
-						"description": "Success",
-						"schema": {
-							"$ref": "#/definitions/AssetContainerResource"
-						}
-					},
-					"default": {
-						"description": "Error",
-						"schema": {
-							"$ref": "#/definitions/MachineLearningServiceError"
-						}
-					}
-				}
-			}
-		}
-	},
-	"parameters": {
-		"CodeContainerNameParameter": {
-			"in": "path",
-			"name": "name",
-			"type": "string",
-			"description": "Name for CodeVersion.",
-			"required": true,
-			"x-ms-parameter-location": "method"
-		}
-	},
-	"definitions": {
-		"SystemData": {
-			"description": "Azure Resource Manager resource Envelope",
-			"type": "object",
-			"properties": {
-				"createdAt": {
-					"format": "date-time",
-					"description": "the timestamp of resource creation (UTC)",
-					"type": "string"
-				},
-				"createdBy": {
-					"description": "a string identifier for the identity that created the resource",
-					"type": "string"
-				},
-				"createdByType": {
-					"$ref": "#/definitions/UserType"
-				},
-				"lastModifiedAt": {
-					"format": "date-time",
-					"description": "the timestamp of resource last modification (UTC)",
-					"type": "string"
-				},
-				"lastModifiedBy": {
-					"description": "a string identifier for the identity that last modified the resource",
-					"type": "string"
-				},
-				"lastModifiedByType": {
-					"$ref": "#/definitions/UserType"
-				}
-			}
-		},
-		"UserType": {
-			"enum": [
-				"User",
-				"Application",
-				"ManagedIdentity",
-				"Key"
-			],
-			"type": "string"
-		},
-		"MachineLearningServiceError": {
-			"type": "object",
-			"description": "Wrapper for error response to follow ARM guidelines.",
-			"properties": {
-				"error": {
-					"description": "The error response.",
-					"$ref": "#/definitions/ErrorResponse",
-					"readOnly": true
-				}
-			}
-		},
-		"ErrorResponse": {
-			"type": "object",
-			"description": "Error response information.",
-			"properties": {
-				"code": {
-					"type": "string",
-					"description": "Error code.",
-					"readOnly": true
-				},
-				"message": {
-					"type": "string",
-					"description": "Error message.",
-					"readOnly": true
-				},
-				"details": {
-					"type": "array",
-					"description": "An array of error detail objects.",
-					"items": {
-						"$ref": "#/definitions/ErrorDetail"
-					},
-					"readOnly": true
-				}
-			}
-		},
-		"ErrorDetail": {
-			"type": "object",
-			"description": "Error detail information.",
-			"properties": {
-				"code": {
-					"type": "string",
-					"description": "Error code."
-				},
-				"message": {
-					"type": "string",
-					"description": "Error message."
-				}
-			},
-			"required": [
-				"code",
-				"message"
-			]
-		},
-		"AssetContainer": {
-			"type": "object",
-			"properties": {
-				"name": {
-					"type": "string",
-					"description": "The Name of the Asset container"
-				}
-			},
-			"additionalProperties": false
-		},
-		"AssetContainerResource": {
-			"description": "Azure Resource Manager resource Envelope",
-			"type": "object",
-			"x-ms-azure-resource": true,
-			"properties": {
-				"id": {
-					"type": "string",
-					"description": "The resource URL of the entity (not URL encoded).",
-					"readOnly": true
-				},
-				"name": {
-					"type": "string",
-					"description": "The name of the resource entity.",
-					"readOnly": true
-				},
-				"type": {
-					"type": "string",
-					"description": "The resource provider and type.",
-					"readOnly": true
-				},
-				"properties": {
-					"$ref": "#/definitions/AssetContainer"
-				},
-				"systemData": {
-					"$ref": "#/definitions/SystemData"
-				}
-			},
-			"additionalProperties": false
-		},
-		"AssetContainerResourcePaginatedResult": {
-			"type": "object",
-			"properties": {
-				"value": {
-					"type": "array",
-					"items": {
-						"$ref": "#/definitions/AssetContainerResource"
-					}
-				},
-				"continuationToken": {
-					"type": "string"
-				},
-				"nextLink": {
-					"type": "string"
-				}
-			},
-			"additionalProperties": false
-		},
-		"AssetPath": {
-			"description": "Details of an AssetUri.",
-			"type": "object",
-			"properties": {
-				"path": {
-					"description": "The path of file/directory.",
-					"type": "string"
-				},
-				"isDirectory": {
-					"description": "Whether the path defines a directory or a single file.",
-					"type": "boolean"
-				}
-			},
-			"additionalProperties": false
-		},
-		"CodeVersion": {
-			"description": "Details of an RegisteredCode",
-			"type": "object",
-			"properties": {
-				"name": {
-					"description": "The Name of the Asset.",
-					"type": "string",
-					"readOnly": true
-				},
-				"version": {
-					"description": "The Asset version assigned by service.",
-					"type": "string",
-					"readOnly": true
-				},
-				"description": {
-					"description": "The Asset description text.",
-					"type": "string"
-				},
-				"datastoreId": {
-					"description": "The Asset datastoreId",
-					"type": "string"
-				},
-				"tags": {
-					"description": "The Asset tag dictionary.",
-					"type": "object",
-					"additionalProperties": {
-						"type": "string"
-					}
-				},
-				"properties": {
-					"description": "The Asset property dictionary.",
-					"type": "object",
-					"additionalProperties": {
-						"type": "string"
-					}
-				},
-				"assetPaths": {
-					"description": "Details of asset path\r\nAdding list of back compat",
-					"type": "array",
-					"items": {
-						"$ref": "#/definitions/AssetPath"
-					}
-				},
-				"linkedResourceIds": {
-					"description": "Associated ARM resources. Key is the link type, value is a list of ARM IDs.",
-					"type": "object",
-					"additionalProperties": {
-						"type": "array",
-						"items": {
-							"type": "string"
-						}
-					}
-				}
-			},
-			"additionalProperties": false
-		},
-		"CodeVersionResourceRequest": {
-			"description": "Azure Resource Management create resource envelope.",
-			"type": "object",
-			"properties": {
-				"properties": {
-					"$ref": "#/definitions/CodeVersion"
-				}
-			},
-			"additionalProperties": false
-		}
-	}
+  "swagger": "2.0",
+  "info": {
+    "title": "Azure Machine Learning Workspaces",
+    "description": "These APIs allow end users to operate on Azure Machine Learning Workspace resources.",
+    "version": "2020-09-01-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/codes": {
+      "get": {
+        "tags": [
+          "CodeContainer"
+        ],
+        "x-ms-examples": {
+          "List CodeContainers": {
+            "$ref": "./examples/listCodeContainers.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "description": "Lists Code containers in the workspace.",
+        "operationId": "CodeVersions_List",
+        "parameters": [
+          {
+            "$ref": "machineLearningServices.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/APIVersionParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/PaginationParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/AssetContainerResourcePaginatedResult"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/MachineLearningServiceError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/codes/{name}": {
+      "delete": {
+        "tags": [
+          "CodeContainer"
+        ],
+        "x-ms-examples": {
+          "Delete CodeContainer": {
+            "$ref": "./examples/deleteCodeContainer.json"
+          }
+        },
+        "description": "Delete CodeVersion entity.",
+        "operationId": "CodeVersions_Delete",
+        "parameters": [
+          {
+            "$ref": "machineLearningServices.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/APIVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/CodeContainerNameParameter"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/MachineLearningServiceError"
+            }
+          },
+          "200": {
+            "description": "Success"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "CodeContainer"
+        ],
+        "x-ms-examples": {
+          "Get CodeContainer": {
+            "$ref": "./examples/getCodeContainer.json"
+          }
+        },
+        "description": "Get model container.",
+        "operationId": "Code_Get",
+        "parameters": [
+          {
+            "$ref": "machineLearningServices.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/APIVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/CodeContainerNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/AssetContainerResource"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/MachineLearningServiceError"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "CodeContainer"
+        ],
+        "x-ms-examples": {
+          "Create or Update CodeContainer": {
+            "$ref": "./examples/createOrUpdateCodeContainer.json"
+          }
+        },
+        "description": "Create or update code container.",
+        "operationId": "Code_CreateOrUpdate",
+        "parameters": [
+          {
+            "$ref": "machineLearningServices.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/APIVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/CodeContainerNameParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Model container entity to create or update.",
+            "schema": {
+              "$ref": "#/definitions/CodeVersionResourceRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/AssetContainerResource"
+            }
+          },
+          "201": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/AssetContainerResource"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/MachineLearningServiceError"
+            }
+          }
+        }
+      }
+    }
+  },
+  "parameters": {
+    "CodeContainerNameParameter": {
+      "in": "path",
+      "name": "name",
+      "type": "string",
+      "description": "Name for CodeVersion.",
+      "required": true,
+      "x-ms-parameter-location": "method"
+    }
+  },
+  "definitions": {
+    "SystemData": {
+      "description": "Azure Resource Manager resource Envelope",
+      "type": "object",
+      "properties": {
+        "createdAt": {
+          "format": "date-time",
+          "description": "the timestamp of resource creation (UTC)",
+          "type": "string"
+        },
+        "createdBy": {
+          "description": "a string identifier for the identity that created the resource",
+          "type": "string"
+        },
+        "createdByType": {
+          "$ref": "#/definitions/UserType"
+        },
+        "lastModifiedAt": {
+          "format": "date-time",
+          "description": "the timestamp of resource last modification (UTC)",
+          "type": "string"
+        },
+        "lastModifiedBy": {
+          "description": "a string identifier for the identity that last modified the resource",
+          "type": "string"
+        },
+        "lastModifiedByType": {
+          "$ref": "#/definitions/UserType"
+        }
+      }
+    },
+    "UserType": {
+      "enum": [
+        "User",
+        "Application",
+        "ManagedIdentity",
+        "Key"
+      ],
+      "type": "string"
+    },
+    "MachineLearningServiceError": {
+      "type": "object",
+      "description": "Wrapper for error response to follow ARM guidelines.",
+      "properties": {
+        "error": {
+          "description": "The error response.",
+          "$ref": "#/definitions/ErrorResponse",
+          "readOnly": true
+        }
+      }
+    },
+    "ErrorResponse": {
+      "type": "object",
+      "description": "Error response information.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "Error code.",
+          "readOnly": true
+        },
+        "message": {
+          "type": "string",
+          "description": "Error message.",
+          "readOnly": true
+        },
+        "details": {
+          "type": "array",
+          "description": "An array of error detail objects.",
+          "items": {
+            "$ref": "#/definitions/ErrorDetail"
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "ErrorDetail": {
+      "type": "object",
+      "description": "Error detail information.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "Error code."
+        },
+        "message": {
+          "type": "string",
+          "description": "Error message."
+        }
+      },
+      "required": [
+        "code",
+        "message"
+      ]
+    },
+    "AssetContainer": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The Name of the Asset container"
+        }
+      },
+      "additionalProperties": false
+    },
+    "AssetContainerResource": {
+      "description": "Azure Resource Manager resource Envelope",
+      "type": "object",
+      "x-ms-azure-resource": true,
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The resource URL of the entity (not URL encoded).",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the resource entity.",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "description": "The resource provider and type.",
+          "readOnly": true
+        },
+        "properties": {
+          "$ref": "#/definitions/AssetContainer"
+        },
+        "systemData": {
+          "$ref": "#/definitions/SystemData"
+        }
+      },
+      "additionalProperties": false
+    },
+    "AssetContainerResourcePaginatedResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AssetContainerResource"
+          }
+        },
+        "continuationToken": {
+          "type": "string"
+        },
+        "nextLink": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "AssetPath": {
+      "description": "Details of an AssetUri.",
+      "type": "object",
+      "properties": {
+        "path": {
+          "description": "The path of file/directory.",
+          "type": "string"
+        },
+        "isDirectory": {
+          "description": "Whether the path defines a directory or a single file.",
+          "type": "boolean"
+        }
+      },
+      "additionalProperties": false
+    },
+    "CodeVersion": {
+      "description": "Details of an RegisteredCode",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "The Name of the Asset.",
+          "type": "string",
+          "readOnly": true
+        },
+        "version": {
+          "description": "The Asset version assigned by service.",
+          "type": "string",
+          "readOnly": true
+        },
+        "description": {
+          "description": "The Asset description text.",
+          "type": "string"
+        },
+        "datastoreId": {
+          "description": "The Asset datastoreId",
+          "type": "string"
+        },
+        "tags": {
+          "description": "The Asset tag dictionary.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "properties": {
+          "description": "The Asset property dictionary.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "assetPaths": {
+          "description": "Details of asset path\r\nAdding list of back compat",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AssetPath"
+          }
+        },
+        "linkedResourceIds": {
+          "description": "Associated ARM resources. Key is the link type, value is a list of ARM IDs.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "CodeVersionResourceRequest": {
+      "description": "Azure Resource Management create resource envelope.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/CodeVersion"
+        }
+      },
+      "additionalProperties": false
+    }
+  }
 }
