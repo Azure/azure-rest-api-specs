@@ -22,7 +22,7 @@
 					"CodeContainer"
 				],
 				"x-ms-examples": {
-					"List CodeVersions": {
+					"List CodeContainers": {
 						"$ref": "./examples/listCodeContainers.json"
 					}
 				},
@@ -31,7 +31,8 @@
 				},
 				"description": "Lists Code containers in the workspace.",
 				"operationId": "CodeVersions_List",
-				"parameters": [{
+				"parameters": [
+					{
 						"$ref": "machineLearningServices.json#/parameters/SubscriptionIdParameter"
 					},
 					{
@@ -69,13 +70,14 @@
 					"CodeContainer"
 				],
 				"x-ms-examples": {
-					"List CodeVersions": {
+					"Delete CodeContainer": {
 						"$ref": "./examples/deleteCodeContainer.json"
 					}
 				},
 				"description": "Delete CodeVersion entity.",
 				"operationId": "CodeVersions_Delete",
-				"parameters": [{
+				"parameters": [
+					{
 						"$ref": "machineLearningServices.json#/parameters/SubscriptionIdParameter"
 					},
 					{
@@ -108,13 +110,14 @@
 					"CodeContainer"
 				],
 				"x-ms-examples": {
-					"List CodeVersions": {
+					"Get CodeContainer": {
 						"$ref": "./examples/getCodeContainer.json"
 					}
 				},
 				"description": "Get model container.",
 				"operationId": "Code_Get",
-				"parameters": [{
+				"parameters": [
+					{
 						"$ref": "machineLearningServices.json#/parameters/SubscriptionIdParameter"
 					},
 					{
@@ -150,13 +153,14 @@
 					"CodeContainer"
 				],
 				"x-ms-examples": {
-					"List CodeVersions": {
+					"Create or Update CodeContainer": {
 						"$ref": "./examples/createOrUpdateCodeContainer.json"
 					}
 				},
 				"description": "Create or update code container.",
 				"operationId": "Code_CreateOrUpdate",
-				"parameters": [{
+				"parameters": [
+					{
 						"$ref": "machineLearningServices.json#/parameters/SubscriptionIdParameter"
 					},
 					{
@@ -182,6 +186,12 @@
 				],
 				"responses": {
 					"200": {
+						"description": "Success",
+						"schema": {
+							"$ref": "#/definitions/AssetContainerResource"
+						}
+					},
+					"201": {
 						"description": "Success",
 						"schema": {
 							"$ref": "#/definitions/AssetContainerResource"
