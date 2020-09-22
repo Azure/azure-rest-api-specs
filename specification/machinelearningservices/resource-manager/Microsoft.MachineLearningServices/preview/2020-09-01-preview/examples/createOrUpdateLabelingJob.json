@@ -1,0 +1,145 @@
+{
+    "parameters": {
+      "subscriptionId": "00000000-1111-2222-3333-444444444444",
+      "resourceGroupName": "workspace-1234",
+      "workspaceName": "testworkspace",
+      "api-version": "2020-09-01-preview",
+      "id": "testLabelingJob",
+      "body": {
+        "properties": {
+          "datasetConfiguration": {
+            "assetName": "testdataasset",
+            "enableIncrementalDatasetRefresh": true,
+            "datasetVersion": 1
+          },
+          "mlAssistConfiguration": {
+            "inferencingComputeBinding": {
+                "computeId": "inferencingcompute"
+            },
+            "trainingComputeBinding": {
+                "computeId": "trainingcompute"
+            },
+            "modelNamePrefix": "testmodel_1",
+            "prelabelAccuracyThreshold": 0.8,
+            "mlAssistEnabled": true
+          },
+          "jobInstructions": {
+            "uri": "https://www.testjobInstructions.com/labeling1.txt"
+          },
+          "labelCategories": {
+              "testCategory": {
+                "displayName": "testCategory",
+                "allowMultiSelect": false,
+                "classes": {
+                    "testClass1": {
+                        "displayName": "testClass1",
+                        "subclasses": {
+                            "testclass1-1": {
+                              "displayName": "testClass1-1"
+                            }
+                        }
+                    },
+                    "testClass2": {
+                      "displayName": "testClass2"
+                    }
+                }
+              }
+          },
+          "labelingJobMediaProperties": {
+            "mediaType": "Image",
+            "annotationType": "BoundingBox"
+          },
+          "properties": {
+            "additionalProp1": "string",
+            "additionalProp2": "string",
+            "additionalProp3": "string"
+          },
+          "tags": {
+            "additionalProp1": "string",
+            "additionalProp2": "string",
+            "additionalProp3": "string"
+          }
+        }
+      }
+    },
+    "responses": {
+      "200": {
+        "body": {
+          "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/workspace-1234/providers/Microsoft.MachineLearningServices/workspaces/testworkspace/labelingJobs/testLabelingJob",
+          "name": "testLabelingJob",
+          "type": "Microsoft.MachineLearningServices/workspaces/labelingJobs",
+          "properties": {
+            "projectId": "c6e088e2-3b60-45c4-ab33-dd8e99722e6a",
+            "status": "NotStarted",
+            "createdTimeUtc": "2020-09-06T00:20:20.327Z",
+            "progressMetrics": {
+              "totalDatapointCount": 0,
+              "completedDatapointCount": 0,
+              "skippedDatapointCount": 0,
+              "incrementalDatasetLastRefreshTime": "2020-09-06T00:20:20.327Z"
+            },
+            "statusMessages": {
+              "level": "Information",
+              "code": "Test code",
+              "message": "Test message",
+              "createdTimeUtc": "2020-09-06T00:20:20.327Z"
+            },
+            "datasetConfiguration": {
+              "assetName": "testdataasset",
+              "enableIncrementalDatasetRefresh": true,
+              "datasetVersion": 1
+            },
+            "mlAssistConfiguration": {
+              "inferencingComputeBinding": {
+                "computeId": "inferencingcompute"
+              },
+              "trainingComputeBinding": {
+                "computeId": "trainingcompute"
+              },
+              "modelNamePrefix": "testmodel_1",
+              "prelabelAccuracyThreshold": 0.8,
+              "mlAssistEnabled": true
+            },
+            "jobInstructions": {
+              "uri": "https://www.testjobInstructions.com/labeling1.txt"
+            },
+            "labelCategories": {
+              "testCategory": {
+                "displayName": "testCategory",
+                "allowMultiSelect": false,
+                "classes": {
+                    "testClass1": {
+                        "displayName": "testClass1",
+                        "subclasses": {
+                            "testclass1-1": {
+                              "displayName": "testClass1-1"
+                            }
+                        }
+                    },
+                    "testClass2": {
+                      "displayName": "testClass2"
+                    }
+                }
+              }
+          },
+            "labelingJobMediaProperties": {
+              "mediaType": "Image",
+              "annotationType": "BoundingBox"
+            },
+            "id": "testLabelingJob",
+            "properties": {
+              "additionalProp1": "string",
+              "additionalProp2": "string",
+              "additionalProp3": "string"
+            },
+            "tags": {
+              "additionalProp1": "string",
+              "additionalProp2": "string",
+              "additionalProp3": "string"
+            }
+          }
+        }
+      }
+    }
+  }
+  
