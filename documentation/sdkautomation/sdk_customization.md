@@ -590,6 +590,7 @@ Output file for generate script.
 {
   "packages": [
     {
+      "packageName": "Microsoft.Cdn",
       "path": [
         "sdk/cdn"
       ],
@@ -630,6 +631,11 @@ Output file for generate script.
   "definitions": {
     "PackageResult": {
       "properties": {
+        "packageName": {
+          // Name of package. Will be used in branch name and PR title.
+          // By default it's folder name of first entry in path.
+          "type": "string",
+        },
         "path": {
           // List of package content paths.
           // If the path points to a folder then
