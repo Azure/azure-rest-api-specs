@@ -45,7 +45,7 @@
           "Device Inventory"
         ],
         "description": "Get list of the devices by their subscription.",
-        "operationId": "Devices_List",
+        "operationId": "Devices_List_For_Subscription",
         "parameters": [
           {
             "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
@@ -88,7 +88,7 @@
         }
       }
     },
-	"/{resourceId}/providers/Microsoft.Security/devices": {
+    "/{resourceId}/providers/Microsoft.Security/devices": {
       "get": {
         "x-ms-examples": {
           "Get Devices": {
@@ -99,7 +99,7 @@
           "Device Inventory"
         ],
         "description": "Get list of the devices for the specified IoT Hub resource.",
-        "operationId": "Devices_List",
+        "operationId": "Devices_List_For_Hub",
         "parameters": [
           {
             "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
@@ -159,7 +159,7 @@
             "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
           },
           {
-            "$ref": "../../../common/v1/types.json#/parameters/resourceId"
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceId"
           },
           {
             "$ref": "#/parameters/DeviceId"
