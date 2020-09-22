@@ -76,7 +76,7 @@
           "default": {
             "description": "Error",
             "schema": {
-              "$ref": "#/definitions/MachineLearningServiceError"
+              "$ref": "machineLearningServices.json#/definitions/MachineLearningServiceError"
             }
           }
         }
@@ -115,7 +115,7 @@
           "default": {
             "description": "Error",
             "schema": {
-              "$ref": "#/definitions/MachineLearningServiceError"
+              "$ref": "machineLearningServices.json#/definitions/MachineLearningServiceError"
             }
           },
           "200": {
@@ -161,7 +161,7 @@
           "default": {
             "description": "Error",
             "schema": {
-              "$ref": "#/definitions/MachineLearningServiceError"
+              "$ref": "machineLearningServices.json#/definitions/MachineLearningServiceError"
             }
           }
         }
@@ -218,7 +218,7 @@
           "default": {
             "description": "Error",
             "schema": {
-              "$ref": "#/definitions/MachineLearningServiceError"
+              "$ref": "machineLearningServices.json#/definitions/MachineLearningServiceError"
             }
           }
         }
@@ -274,59 +274,6 @@
         "Key"
       ],
       "type": "string"
-    },
-    "MachineLearningServiceError": {
-      "type": "object",
-      "description": "Wrapper for error response to follow ARM guidelines.",
-      "properties": {
-        "error": {
-          "description": "The error response.",
-          "$ref": "#/definitions/ErrorResponse",
-          "readOnly": true
-        }
-      }
-    },
-    "ErrorResponse": {
-      "type": "object",
-      "description": "Error response information.",
-      "properties": {
-        "code": {
-          "type": "string",
-          "description": "Error code.",
-          "readOnly": true
-        },
-        "message": {
-          "type": "string",
-          "description": "Error message.",
-          "readOnly": true
-        },
-        "details": {
-          "type": "array",
-          "description": "An array of error detail objects.",
-          "items": {
-            "$ref": "#/definitions/ErrorDetail"
-          },
-          "readOnly": true
-        }
-      }
-    },
-    "ErrorDetail": {
-      "type": "object",
-      "description": "Error detail information.",
-      "properties": {
-        "code": {
-          "type": "string",
-          "description": "Error code."
-        },
-        "message": {
-          "type": "string",
-          "description": "Error message."
-        }
-      },
-      "required": [
-        "code",
-        "message"
-      ]
     },
     "AssetContainer": {
       "type": "object",
