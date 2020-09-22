@@ -275,60 +275,63 @@
       "additionalProperties": false
     },
     "CodeVersion": {
-      "description": "Details of an RegisteredCode",
+      "required": [
+        "assetPaths"
+      ],
       "type": "object",
       "properties": {
         "name": {
-          "description": "The Name of the Asset.",
           "type": "string",
+          "description": "The Name of the Asset.",
           "readOnly": true
         },
         "version": {
-          "description": "The Asset version assigned by service.",
           "type": "string",
+          "description": "The Asset version assigned by service.",
           "readOnly": true
         },
         "description": {
-          "description": "The Asset description text.",
-          "type": "string"
+          "type": "string",
+          "description": "The Asset description text."
         },
         "datastoreId": {
-          "description": "The Asset datastoreId",
-          "type": "string"
+          "type": "string",
+          "description": "The Asset datastoreId"
         },
         "tags": {
-          "description": "The Asset tag dictionary.",
           "type": "object",
           "additionalProperties": {
             "type": "string"
-          }
+          },
+          "description": "The Asset tag dictionary."
         },
         "properties": {
-          "description": "The Asset property dictionary.",
           "type": "object",
           "additionalProperties": {
             "type": "string"
-          }
+          },
+          "description": "The Asset property dictionary."
         },
         "assetPaths": {
-          "description": "Details of asset path\r\nAdding list of back compat",
           "type": "array",
           "items": {
             "$ref": "#/definitions/AssetPath"
-          }
+          },
+          "description": "Details of asset path\r\nAdding list of back compat"
         },
         "linkedResourceIds": {
-          "description": "Associated ARM resources. Key is the link type, value is a list of ARM IDs.",
           "type": "object",
           "additionalProperties": {
             "type": "array",
             "items": {
               "type": "string"
             }
-          }
+          },
+          "description": "Associated ARM resources. Key is the link type, value is a list of ARM IDs."
         }
       },
-      "additionalProperties": false
+      "additionalProperties": false,
+      "description": "Details of an RegisteredCode"
     },
     "CodeVersionResource": {
       "type": "object",

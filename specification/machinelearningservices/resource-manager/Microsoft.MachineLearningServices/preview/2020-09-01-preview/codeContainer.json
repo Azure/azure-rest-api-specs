@@ -47,7 +47,7 @@
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         },
-        "description": "Lists Code containers in the workspace.",
+        "description": "Lists code containers in the workspace.",
         "operationId": "CodeContainers_List",
         "parameters": [
           {
@@ -70,7 +70,7 @@
           "200": {
             "description": "Success",
             "schema": {
-              "$ref": "#/definitions/AssetContainerResourcePaginatedResult"
+              "$ref": "#/definitions/CodeContainerResourcePaginatedResult"
             }
           },
           "default": {
@@ -92,7 +92,7 @@
             "$ref": "./examples/deleteCodeContainer.json"
           }
         },
-        "description": "Delete CodeContainer entity.",
+        "description": "Delete Code Container entity.",
         "operationId": "CodeContainers_Delete",
         "parameters": [
           {
@@ -135,8 +135,8 @@
             "$ref": "./examples/getCodeContainer.json"
           }
         },
-        "description": "Get model container.",
-        "operationId": "Code_Get",
+        "description": "Get code container.",
+        "operationId": "CodeContainers_Get",
         "parameters": [
           {
             "$ref": "machineLearningServices.json#/parameters/SubscriptionIdParameter"
@@ -158,7 +158,7 @@
           "200": {
             "description": "Success",
             "schema": {
-              "$ref": "#/definitions/AssetContainerResource"
+              "$ref": "#/definitions/CodeContainerResource"
             }
           },
           "default": {
@@ -174,12 +174,12 @@
           "CodeContainer"
         ],
         "x-ms-examples": {
-          "Create or Update CodeContainer": {
+          "Create or update code container": {
             "$ref": "./examples/createOrUpdateCodeContainer.json"
           }
         },
         "description": "Create or update code container.",
-        "operationId": "Code_CreateOrUpdate",
+        "operationId": "CodeContainers_CreateOrUpdate",
         "parameters": [
           {
             "$ref": "machineLearningServices.json#/parameters/SubscriptionIdParameter"
@@ -199,9 +199,9 @@
           {
             "in": "body",
             "name": "body",
-            "description": "Model container entity to create or update.",
+            "description": "Code container entity to create or update.",
             "schema": {
-              "$ref": "#/definitions/CodeVersionResourceRequest"
+              "$ref": "#/definitions/CodeContainerResourceRequest"
             }
           }
         ],
@@ -209,13 +209,13 @@
           "200": {
             "description": "Success",
             "schema": {
-              "$ref": "#/definitions/AssetContainerResource"
+              "$ref": "#/definitions/CodeContainerResource"
             }
           },
           "201": {
             "description": "Success",
             "schema": {
-              "$ref": "#/definitions/AssetContainerResource"
+              "$ref": "#/definitions/CodeContainerResource"
             }
           },
           "default": {
@@ -233,26 +233,14 @@
       "in": "path",
       "name": "name",
       "type": "string",
-      "description": "Name for CodeContainer.",
+      "description": "Code Container identifier.",
       "required": true,
       "x-ms-parameter-location": "method"
     }
   },
   "definitions": {
-    "AssetContainer": {
+    "CodeContainerResource": {
       "type": "object",
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "The Name of the Asset container"
-        }
-      },
-      "additionalProperties": false
-    },
-    "AssetContainerResource": {
-      "description": "Azure Resource Manager resource Envelope",
-      "type": "object",
-      "x-ms-azure-resource": true,
       "properties": {
         "id": {
           "type": "string",
@@ -270,21 +258,22 @@
           "readOnly": true
         },
         "properties": {
-          "$ref": "#/definitions/AssetContainer"
+          "$ref": "#/definitions/CodeContainer"
         },
         "systemData": {
           "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
         }
       },
-      "additionalProperties": false
+      "additionalProperties": false,
+      "description": "Azure Resource Manager resource Envelope"
     },
-    "AssetContainerResourcePaginatedResult": {
+    "CodeContainerResourcePaginatedResult": {
       "type": "object",
       "properties": {
         "value": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/AssetContainerResource"
+            "$ref": "#/definitions/CodeContainerResource"
           }
         },
         "continuationToken": {
@@ -296,83 +285,40 @@
       },
       "additionalProperties": false
     },
-    "AssetPath": {
-      "description": "Details of an AssetUri.",
+    "CodeContainer": {
       "type": "object",
       "properties": {
-        "path": {
-          "description": "The path of file/directory.",
-          "type": "string"
-        },
-        "isDirectory": {
-          "description": "Whether the path defines a directory or a single file.",
-          "type": "boolean"
-        }
-      },
-      "additionalProperties": false
-    },
-    "CodeVersion": {
-      "description": "Details of an RegisteredCode",
-      "type": "object",
-      "properties": {
-        "name": {
-          "description": "The Name of the Asset.",
-          "type": "string",
-          "readOnly": true
-        },
-        "version": {
-          "description": "The Asset version assigned by service.",
-          "type": "string",
-          "readOnly": true
-        },
         "description": {
-          "description": "The Asset description text.",
-          "type": "string"
-        },
-        "datastoreId": {
-          "description": "The Asset datastoreId",
-          "type": "string"
+          "type": "string",
+          "description": "The asset container description text."
         },
         "tags": {
-          "description": "The Asset tag dictionary.",
           "type": "object",
           "additionalProperties": {
             "type": "string"
-          }
+          },
+          "description": "The asset tag dictionary. Tags can be added, removed, and updated."
         },
-        "properties": {
-          "description": "The Asset property dictionary.",
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "assetPaths": {
-          "description": "Details of asset path\r\nAdding list of back compat",
+        "latestVersions": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/AssetPath"
-          }
+            "$ref": "codeVersion.json#/definitions/CodeVersionResource"
+          },
+          "description": "Latest Versions for all assets"
         },
-        "linkedResourceIds": {
-          "description": "Associated ARM resources. Key is the link type, value is a list of ARM IDs.",
-          "type": "object",
-          "additionalProperties": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
-          }
+        "name": {
+          "type": "string",
+          "description": "The Name of the Asset container"
         }
       },
       "additionalProperties": false
     },
-    "CodeVersionResourceRequest": {
+    "CodeContainerResourceRequest": {
       "description": "Azure Resource Management create resource envelope.",
       "type": "object",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/CodeVersion"
+          "$ref": "#/definitions/CodeContainer"
         }
       },
       "additionalProperties": false
