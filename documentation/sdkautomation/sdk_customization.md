@@ -14,7 +14,7 @@ SDK Automation is launched with matrix in azure pipeline. For each language conf
 
 2. Get the PR changed file list. For each changed file, find the nearest readme.md in parent folder. Get list of related readme.md.
 
-3. Filter the list of readme.md with: find the `swagger-to-sdk` section in the readme.md, and see if the specified language is configured for that readme.md. Example of `swagger-to-sdk` in sdk automation:
+3. Filter the list of readme.md with: find the `swagger-to-sdk` section in the readme.md, and see if the specified language is configured for that readme.md. Example of `swagger-to-sdk` in SDK Automation:
 ```
 ```yaml $(swagger-to-sdk)
 swagger-to-sdk:
@@ -26,13 +26,36 @@ swagger-to-sdk:
 ```
 If the configured language is not found here, generation for this readme.md will be skipped.
 
-4. Get `specificationRepositoryConfiguration.json` from spec repo default branch. See [#definitions/SpecRepoConfig](#specrepoconfig). Get the repo and branch config in the file.
+4. Get `specificationRepositoryConfiguration.json` from spec repo default branch. See [SpecRepoConfig](#specrepoconfig). Get the repo and branch config in the file.
 
 5. Clone __mainRepository__ and checkout __mainBranch__. If __secondaryRepository__ is specified then checkout __secondaryRepository__ and __secondaryBranch__ instead.
 
-6. Get `swagger_to_sdk_config.json` from cloned sdk repository. The config file path could be customized by __configFilePath__ in spec config. For the definition of the config see [#definitions/SwaggerToSdkConfig](#swaggertosdkconfig).
+6. Get `swagger_to_sdk_config.json` from cloned SDK repository. The config file path could be customized by __configFilePath__ in spec config. For the definition of the config see [SwaggerToSdkConfig](#swaggertosdkconfig).
 
-7. 
+7. Launch __initScript__ defined in [SwaggerToSdkConfig](#swaggertosdkconfig). All the script's working directory is root folder of cloned SDK repository.
+
+8. Calculate __PR diff__ and related `readme.md`. If __generationCallMode__ is __one-for-all-configs__ then run ___one pass for the rest steps___, else (__one-per-configs__) ___loop the rest steps___ with each `readme.md`.
+
+9. Launch __generateScript__ defined in [SwaggerToSdkConfig](#swaggertosdkconfig) with [generateInput.json](#generateinput). It should produce [generateOutput.json](#generateoutput) if __parseGenerateOutput__ is true.
+
+10. Get generated package. If __packageFolderFromFileSearch__ is defined with file search then package folder is detected based on git diff in SDK repository and algorithm described in [SwaggerToSdkConfig Schema](#swaggertosdkconfig-schema). Else package folder is from [generateOutput.json](#generateoutput). For each package ___loop the rest steps___.
+
+11. Launch __buildScript__ to build the package. Collect the artifacts by config __artifactPathFromFileSearch__. This step could be skipped if it's not defined in [SwaggerToSdkConfig](#swaggertosdkconfig) and it's covered by __generateScript__ and the result could be found in [generateOutput.json](#generateoutput).
+
+12. Upload all the package related artifacts to Azure Storage Blob Container. All the artifact for one package is uploaded in one folder. These file could be downloaded on URL prefixed by __downloadUrlPrefix__ defined in [InstallInstructionScriptInput](#installinstructionscriptinput). It's redirected by openapiHub by design, and for SDK Automation on public repo the redirect don't need auth, but for SDK Automation in private repo it requires microsoft AAD auth. User could authenticate and download via web page oauth in browser or bearer token auth with `az rest --resource` in command line.
+
+13. Launch __changelogScript__ to get changelog and detect breaking change. This step could be skipped if changelog and breaking change could be found in [generateOutput.json](#generateoutput). If breaking change is found, the spec PR will be labelled with `CI-BreakingChange-<Lang>`.
+
+14. Launch __installInstructionScript__ to get install instruction for that package. This step could be skipped if install instruction could be found in [generateOutput.json](#generateoutput). The lite install instruction will be shown in spec PR comment, the full install instruction will be shown in generated SDK PR.
+
+15. Commit the package related code in SDK repository. Force push to [GenerationBranch](#generationbranch) in __integrationRepository__. Create or update [GenerationPR](#generationpr) from [GenerationBranch](#generationbranch) to [MainBranch](#mainbranch) in __integrationRepository__. If __integrationRepository__ is a fork of __mainRepository__, its [MainBranch](#mainbranch) should be synced once a day.
+
+### Continuous Integration (PR Merged) Trigger
+
+Almost the same as opened PR trigger, with different on step 15:
+
+15. Commit the package related code in SDK repository. Close [GenerationPR](#generationpr) and delete [GenerationBranch](#generationbranch). Force push to [IntegrationBranch](#integrationbranch) in __integrationRepository__. Create or update [IntegrationPR](#integrationpr) from [IntegrationBranch](#integrationbranch) to [MainBranch](#mainbranch) in __mainRepository__. Close the [integrationPR](#integrationPR) if __closeIntegrationPR__ in [SwaggerToSdkConfig](#swaggertosdkconfig) is set to true.
+
 
 ## Definitions
 
@@ -78,7 +101,7 @@ This is type of file `./specificationRepositoryConfiguration.json` in swagger sp
         "azure-sdk-for-python-track2": {
           "integrationRepository": "azure-sdk/azure-sdk-for-python-pr",
           "mainRepository": "Azure/azure-sdk-for-python-pr"
-        },
+        }
       }
     }
   }
@@ -170,40 +193,40 @@ The working folder of all the scripts is the __root folder of sdk repo__.
 #### SwaggerToSdkConfig Example
 ``` jsonc
 {
-  "advanced_options": {
-    "create_sdk_pull_requests": true,
-    "generation_call_mode": "one-for-all-configs"
+  "advancedOptions": {
+    "createSdkPullRequests": true,
+    "generationCallMode": "one-for-all-configs"
   },
-  "init_options": {
-    "init_script": {
+  "initOptions": {
+    "initScript": {
       "path": "./eng/tools/sdk_init"
     }
   },
-  "generate_options": {
-    // Param: <path_to_generate_input.json> <path_to_generate_output.json>
-    // generate_input.json: See #GenerateInput .
-    // generate_output.json: See #GenerateOutput .
-    "generate_script": {
+  "generateOptions": {
+    // Param: <path_to_generateInput.json> <path_to_generateOutput.json>
+    // generateInput.json: See #GenerateInput .
+    // generateOutput.json: See #GenerateOutput .
+    "generateScript": {
       "path": "./eng/tools/sdk_generate",
       "stderr": {
-        "show_in_comment": true
+        "showInComment": true
       },
       "stdout": {
         // Show logs start with "[Autorest]" in PR comment.
-        "show_in_comment": "^\\[Autorest\\]"
+        "showInComment": "^\\[Autorest\\]"
       }
     },
 
-    "parse_generate_output": true
+    "parseGenerateOutput": true
   },
-  "package_options": {
+  "packageOptions": {
     // Param: <path_to_package_folder>
-    "build_script": {
+    "buildScript": {
       "path": "./eng/tools/sdk_package",
       "stderr": {
         // Everything in stderr will show in comment and mark package with warning.
-        "show_in_comment": true,
-        "script_warning": true
+        "showInComment": true,
+        "scriptWarning": true
       },
       "exitCode": {
         // If exit code is not zero, mark package with warning instead of error.
@@ -212,16 +235,16 @@ The working folder of all the scripts is the __root folder of sdk repo__.
     },
     
     // Param: <path_to_package_folder>
-    "changelog_script": {
+    "changelogScript": {
       "path": "./eng/tools/sdk_breaking_change",
-      "breaking_change_detect": "Breaking Change"
+      "breakingChangeDetect": "Breaking Change"
     }
   },
-  "artifact_options": {
-    // Param: <path_to_install_instruction_input.json> <path_to_install_instruction_output.md> <lite|full>
-    // install_instruction_input.json: See #InstallInstructionScriptInput .
-    // install_instruction_output.md: Install instruction in markdown.
-    "install_instruction_script": {
+  "artifactOptions": {
+    // Param: <path_to_install_instructionInput.json> <path_to_installInstructionOutput.md> <lite|full>
+    // installInstructionInput.json: See #InstallInstructionScriptInput .
+    // installInstructionOutput.md: Install instruction in markdown.
+    "installInstructionScript": {
       "path": "./eng/tools/sdk_install_instruction"
     }
   }
@@ -233,15 +256,20 @@ The working folder of all the scripts is the __root folder of sdk repo__.
 {
   "type": "object",
   "properties": {
-    "advanced_options": {
+    "advancedOptions": {
       // To keep backward compatibility, but will not list schema for old config options.
       "properties": {
-        "create_sdk_pull_requests": {
+        "createSdkPullRequests": {
           // Should SDK Automation create PR or not.
-          "type": boolean,
-          "default": false
+          "type": "boolean",
+          "default": true
         },
-        "generation_call_mode": {
+        "closeIntegrationPR": {
+          // Should SDK Automation close integrationPR to reduce noise.
+          "type": "boolean",
+          "default": true
+        },
+        "generationCallMode": {
           // If we have multiple related readme.md, should we call generation once with
           // all the readme.md or should we call generation multiple times and one per readme.md.
           "type": "string",
@@ -253,32 +281,32 @@ The working folder of all the scripts is the __root folder of sdk repo__.
         }
       }
     },
-    "init_options": {
+    "initOptions": {
       // Init the environment. Install dependencies.
       "type": "object",
       "properties": {
-        "init_script": {
+        "initScript": {
           // Script to init.
           "$ref": "#/definitions/RunOptions"
         }
       },
       "required": [
-        "init_script"
+        "initScript"
       ]
     },
-    "generate_options": {
+    "generateOptions": {
       // Generate the SDK code.
       "type": "object",
       "properties": {
-        "generate_script": {
+        "generateScript": {
           // Script to generate the SDK code.
-          // Param: <path_to_generate_input.json> <path_to_generate_output.json>
-          // generate_input.json: See #GenerateInput
-          // generate_output.json: See #GenerateOutput
+          // Param: <path_to_generateInput.json> <path_to_generateOutput.json>
+          // generateInput.json: See #GenerateInput
+          // generateOutput.json: See #GenerateOutput
           "$ref": "#/definitions/RunOptions"
         },
-        "parse_generate_output": {
-          // Will this script output to generate_output.json.
+        "parseGenerateOutput": {
+          // Will this script output to generateOutput.json.
           // If not, default behavior will be applied that outcome will be
           // detected automatically based on filename regex search.
           "type": "boolean",
@@ -286,27 +314,27 @@ The working folder of all the scripts is the __root folder of sdk repo__.
         }
       },
       "required": [
-        "generate_script"
+        "generateScript"
       ]
     },
-    "package_options": {
+    "packageOptions": {
       // Get package folder and build / get changelog
       "type": "object",
       "properties": {
-        "package_folder_from_file_search": {
+        "packageFolderFromFileSearch": {
           "oneOf": [
             {
               // If this option is set to object, then package folder will be detected automatically.
               //   based on filename regex search.
-              // This options must be set to object if parse_generate_output is false.
+              // This options must be set to object if parseGenerateOutput is false.
               "type": "object",
               "properties": {
-                "search_regex": {
+                "searchRegex": {
                   // Search algorithm:
                   //  For each changed file detected after generation
                   //    PotentialPackageFolder = folder of changed file
                   //    While PotentialPackageFolder is not root folder of sdk repo:
-                  //      If PotentialPackageFolder contains a file that matches the search_regex:
+                  //      If PotentialPackageFolder contains a file that matches the searchRegex:
                   //        PackageFolder found, break
                   //      Else:
                   //        PotentialPackageFolder = parent folder of PotentialPackageFolder
@@ -319,7 +347,7 @@ The working folder of all the scripts is the __root folder of sdk repo__.
                 }
               },
               "required": [
-                "search_regex"
+                "searchRegex"
               ]
             },
             {
@@ -329,22 +357,22 @@ The working folder of all the scripts is the __root folder of sdk repo__.
           ],
           "default": false,
         },
-        "build_script": {
+        "buildScript": {
           // Build the generated sdk.
           // Param: <path_to_package_folder>
-          // Package folder could be a list separated by space if it's from generate_output.json.
+          // Package folder could be a list separated by space if it's from generateOutput.json.
           "$ref": "#/definitions/RunOptions"
         },
-        "changelog_script": {
+        "changelogScript": {
           // Changelog generation and breaking-change detection.
           // Param: <path_to_package_folder>
-          // Package folder could be a list separated by space if it's from generate_output.json.
+          // Package folder could be a list separated by space if it's from generateOutput.json.
           // Expected output from stdout/stderr: Changelog in markdown
           "allOf": {
             "$ref": "#/definitions/RunOptions"
           },
           "properties": {
-            "breaking_change_detect": {
+            "breakingChangeDetect": {
               // If stdout or stderr matches this in output of changelog tool
               // then we assume this SDK has breaking change.
               "$ref": "#/definitions/RunLogFilterOptions"
@@ -353,41 +381,41 @@ The working folder of all the scripts is the __root folder of sdk repo__.
         }
       }
     },
-    "artifact_options": {
-      "artifact_path_from_file_search": {
+    "artifactOptions": {
+      "artifactPathFromFileSearch": {
         "oneOf": [
           {
             // If this option is set to object, then artifacts will be detected automatically
             //   based on filename regex search.
-            // This options must be set to object if parse_generate_output is false.
+            // This options must be set to object if parseGenerateOutput is false.
             "type": "object",
             "properties": {
-              "search_regex": {
-                // Any file under package folder matching the search_regex is package artifact.
+              "searchRegex": {
+                // Any file under package folder matching the searchRegex is package artifact.
                 "type": "string",
                 "format": "regex",
               }
             }
           },
           {
-            // If this option is set to false, then package folder will be from generate_output.json
+            // If this option is set to false, then package folder will be from generateOutput.json
             "const": false
           }
         ],
         "default": false
       },
-      "install_instruction_script": {
+      "installInstructionScript": {
         // Generate install instruction that could be shown in spec PR comment (lite version)
         //  or in generated SDK PR (full version).
         // If generate_output.json contains install_instruction then this could be skipped.
-        // Param: <path_to_install_instruction_input.json> <path_to_install_instruction_output.md> <lite|full>
-        // install_instruction_input.json: See #InstallInstructionScriptInput .
-        // install_instruction_output.md: Install instruction in markdown.
+        // Param: <path_to_installInstructionInput.json> <path_to_installInstructionOutput.md> <lite|full>
+        // installInstructionInput.json: See #InstallInstructionScriptInput .
+        // installInstructionOutput.md: Install instruction in markdown.
         "allOf": {
           "$ref": "#/definitions/RunOptions"
         },
         "properties": {
-          "enable_lite_install_instruction": {
+          "enableLiteInstallInstruction": {
             "type": "boolean",
             "default": false
           }
@@ -416,7 +444,7 @@ The working folder of all the scripts is the __root folder of sdk repo__.
         },
         "exitCode": {
           // How should SDK Automation handle non-zero exitCode.
-          "show_in_comment": {
+          "showInComment": {
             // Should we show this error in comment.
             "type": "boolean",
             "default": true
@@ -437,15 +465,15 @@ The working folder of all the scripts is the __root folder of sdk repo__.
     },
     "RunLogOptions": {
       // How should SDK Automation handle the log stream.
-      "show_in_comment": {
+      "showInComment": {
         // Should we show this stream in comment.
         "$ref": "#/definitions/RunLogFilterOptions"
       },
-      "script_error": {
+      "scriptError": {
         // If any line match, assume the script fails.
         "$ref": "#/definitions/RunLogFilterOptions"
       },
-      "script_warning": {
+      "scriptWarning": {
         // If any line match, assume the script warns.
         "$ref": "#/definitions/RunLogFilterOptions"
       }
@@ -476,16 +504,16 @@ Input file for generate script.
 
 ```jsonc
 {
-  "spec_folder": "/z/work/azure-rest-api-specs",
-  "head_sha": "fce3400431eff281bddd04bed9727e63765b8da0",
-  "head_ref": "refs/pull/1234/merge",
-  "repo_git": "git@github.com:Azure/azure-rest-api-specs.git",
-  "repo_https": "https://github.com/Azure/azure-rest-api-specs.git",
+  "specFolder": "/z/work/azure-rest-api-specs",
+  "headSha": "fce3400431eff281bddd04bed9727e63765b8da0",
+  "headRef": "refs/pull/1234/merge",
+  "repoGitUrl": "git@github.com:Azure/azure-rest-api-specs.git",
+  "repoHttpsUrl": "https://github.com/Azure/azure-rest-api-specs.git",
   "trigger": "pull_request",
-  "changed_files": [
+  "changedFiles": [
     "specification/cdn/something/cdn.json"
   ],
-  "related_readme_md_files": [
+  "relatedReadmeMdFiles": [
     "specification/cdn/something/readme.md"
   ]
 }
@@ -497,24 +525,24 @@ Input file for generate script.
 {
   "type": "object",
   "properties": {
-    "spec_folder": {
+    "specFolder": {
       // Path to local spec folder.
       "type": "string"
     },
-    "head_sha": {
+    "headSha": {
       // Git head sha.
       "type": "string"
     },
-    "head_ref": {
+    "headRef": {
       // Git head ref.
       // Format will be "refs/pull/<number>/merge" or "refs/heads/<branch>".
       "type": "string"
     },
-    "repo_git": {
+    "repoGitUrl": {
       // Spec repo url in git without auth.
       "type": "string"
     },
-    "repo_https": {
+    "repoHttpsUrl": {
       // Spec repo url in https without auth.
       "type": "string"
     },
@@ -522,32 +550,32 @@ Input file for generate script.
       // How this generation is triggered.
       "type": "string",
       "enum": [
-        "pull_request",
-        "continuous_integration"
+        "pullRequest",
+        "continuousIntegration"
       ]
     },
-    "changed_files": {
+    "changedFiles": {
       // Changed file list in spec PR.
       "type": "array",
       "items": {
         "type": "string"
       }
     },
-    "related_readme_md_files": {
+    "relatedReadmeMdFiles": {
       // Related readme.md files that pending generation.
       "type": "array",
       "items": {
         "type": "string"
       }
     },
-    "install_instruction_input": {
+    "installInstructionInput": {
       // See #InstallInstructionScriptInput
       "$ref": "#/definitions/InstallInstructionScriptInput"
     }
   },
   "required": [
-    "spec_folder", "head_sha", "head_ref", "repo_git", "repo_https",
-    "trigger", "changed_files", "related_readme_md_files"
+    "specFolder", "headSha", "headRef", "repoGitUrl", "repoHttpsUrl",
+    "trigger", "changedFiles", "relatedReadmeMdFiles"
   ]
 }
 ```
@@ -573,7 +601,7 @@ Output file for generate script.
         "sdk/cdn/cdn.nuget",
         "sdk/cdn/cdn.snuget"
       ],
-      "install_instructions": {
+      "installInstructions": {
         "full": "To install something...",
         "lite": "dotnet something"
       },
@@ -633,7 +661,7 @@ Output file for generate script.
             "type": "string"
           }
         },
-        "install_instructions": {
+        "installInstructions": {
           "type": "object",
           "properties": {
             "full": {
@@ -672,7 +700,7 @@ Input of install instruction script.
   "isPublic": true,
   "downloadUrlPrefix": "https://portal.azure-devex-tools.com/api/sdk-dl-pub?p=Azure/azure-rest-api-specs/1234/azure-sdk-for-net/",
   "downloadCommandTemplate": "curl -L \"{URL}\" -o {FILENAME}",
-  "trigger": "pull_request",
+  "trigger": "pullRequest",
 }
 ```
 
@@ -711,8 +739,8 @@ Input of install instruction script.
     "trigger": {
       "type": "string",
       "enum": [
-        "pull_request",
-        "continuous_integration"
+        "pullRequest",
+        "continuousIntegration"
       ]
     }
   }
