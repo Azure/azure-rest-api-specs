@@ -372,49 +372,10 @@
 			},
 			"additionalProperties": false
 		},
-		"DirTreeNode": {
-			"type": "object",
-			"properties": {
-				"name": {
-					"type": "string"
-				},
-				"hash": {
-					"type": "string"
-				},
-				"type": {
-					"type": "string"
-				},
-				"timestamp": {
-					"type": "string",
-					"format": "date-time"
-				},
-				"sasUrl": {
-					"type": "string",
-					"format": "uri"
-				},
-				"sizeBytes": {
-					"type": "integer",
-					"format": "int64"
-				},
-				"sizeSet": {
-					"type": "boolean"
-				},
-				"children": {
-					"type": "object",
-					"additionalProperties": {
-						"$ref": "#/definitions/DirTreeNode"
-					}
-				}
-			},
-			"additionalProperties": false
-		},
 		"CodeVersion": {
 			"description": "Details of an RegisteredCode",
 			"type": "object",
 			"properties": {
-				"root": {
-					"$ref": "#/definitions/DirTreeNode"
-				},
 				"name": {
 					"description": "The Name of the Asset.",
 					"type": "string",
