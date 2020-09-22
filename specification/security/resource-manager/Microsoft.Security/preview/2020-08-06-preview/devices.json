@@ -3,7 +3,7 @@
   "info": {
     "title": "Security Center",
     "description": "API spec for Microsoft.Security (Azure Security Center) resource provider",
-    "version": "2019-08-01"
+    "version": "2020-08-06-preview"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -34,17 +34,17 @@
     }
   },
   "paths": {
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/iotSecuritySolutions/{solutionName}/devices": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Security/devices": {
       "get": {
         "x-ms-examples": {
           "Get Devices": {
-            "$ref": "./examples/Devices/GetDevicesList.json"
+            "$ref": "./examples/Devices/GetDevicesListForSubscription.json"
           }
         },
         "tags": [
           "Device Inventory"
         ],
-        "description": "Get list of the devices.",
+        "description": "Get list of the devices by their subscription.",
         "operationId": "Devices_List",
         "parameters": [
           {
@@ -52,12 +52,6 @@
           },
           {
             "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
-          },
-          {
-            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupName"
-          },
-          {
-            "$ref": "#/parameters/SolutionName"
           },
           {
             "in": "query",
@@ -94,7 +88,61 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/iotSecuritySolutions/{solutionName}/devices/{deviceId}": {
+	"/{resourceId}/providers/Microsoft.Security/devices": {
+      "get": {
+        "x-ms-examples": {
+          "Get Devices": {
+            "$ref": "./examples/Devices/GetDevicesListForHub.json"
+          }
+        },
+        "tags": [
+          "Device Inventory"
+        ],
+        "description": "Get list of the devices for the specified IoT Hub resource.",
+        "operationId": "Devices_List",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceId"
+          },
+          {
+            "in": "query",
+            "name": "$limit",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "description": "Limit the number of items returned in a single page"
+          },
+          {
+            "in": "query",
+            "name": "$skipToken",
+            "required": false,
+            "type": "string",
+            "description": "Skip token used for pagination"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/DeviceList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/{resourceId}/providers/Microsoft.Security/devices/{deviceId}": {
       "get": {
         "x-ms-examples": {
           "Get Device": {
@@ -111,13 +159,7 @@
             "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
           },
           {
-            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
-          },
-          {
-            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupName"
-          },
-          {
-            "$ref": "#/parameters/SolutionName"
+            "$ref": "../../../common/v1/types.json#/parameters/resourceId"
           },
           {
             "$ref": "#/parameters/DeviceId"
@@ -137,52 +179,6 @@
             }
           }
         }
-      },
-      "patch": {
-        "x-ms-examples": {
-          "Use this method to update device": {
-            "$ref": "./examples/Devices/UpdateDevice.json"
-          }
-        },
-        "tags": [
-          "Device Inventory"
-        ],
-        "description": "Update existing device name, type, operating system, purdue level, device criticality and notes.",
-        "operationId": "Device_Update",
-        "parameters": [
-          {
-            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
-          },
-          {
-            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
-          },
-          {
-            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupName"
-          },
-          {
-            "$ref": "#/parameters/SolutionName"
-          },
-          {
-            "$ref": "#/parameters/DeviceId"
-          },
-          {
-            "$ref": "#/parameters/DeviceData"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Updated",
-            "schema": {
-              "$ref": "#/definitions/Device"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
-            }
-          }
-        }
       }
     }
   },
@@ -190,15 +186,9 @@
     "DeviceList": {
       "description": "List of Devices",
       "required": [
-        "value",
-        "totalCount"
+        "value"
       ],
       "properties": {
-        "totalCount": {
-          "type": "integer",
-          "format": "int64",
-          "description": "Total count of devices in all the pages."
-        },
         "value": {
           "type": "array",
           "description": "List of devices",
@@ -399,14 +389,6 @@
           "type": "string",
           "format": "date-time",
           "description": "last time the device was scanning."
-        },
-        "fieldsChangedByUser": {
-          "readOnly": true,
-          "type": "array",
-          "description": "List of field names that their value was modified by the user.",
-          "items": {
-            "type": "string"
-          }
         }
       }
     },
@@ -556,14 +538,6 @@
     }
   },
   "parameters": {
-    "SolutionName": {
-      "name": "solutionName",
-      "in": "path",
-      "required": true,
-      "description": "The name of the IoT Security solution.",
-      "type": "string",
-      "x-ms-parameter-location": "method"
-    },
     "DeviceId": {
       "name": "deviceId",
       "in": "path",
@@ -571,16 +545,6 @@
       "description": "Identifier of the device.",
       "type": "string",
       "x-ms-parameter-location": "method"
-    },
-    "DeviceData": {
-      "name": "deviceData",
-      "in": "body",
-      "required": true,
-      "description": "The device data",
-      "x-ms-parameter-location": "method",
-      "schema": {
-        "$ref": "#/definitions/Device"
-      }
     }
   }
 }

@@ -1,26 +1,17 @@
 {
   "parameters": {
-    "api-version": "2019-08-01",
-    "subscriptionId": "20ff7fc3-e762-44dd-bd96-b71116dcdc23",
-    "resourceGroupName": "myGroup",
-    "solutionName": "mySolution",
-    "deviceId": "myDevice",
-    "deviceData": {
-      "properties": {
-        "displayName": "myDisplayName",
-        "osName": "Windows 10 32",
-        "deviceCriticality": "Important"
-      }
-    }
+    "api-version": "2020-08-06-preview",
+    "resourceId": "subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/MyGroup/providers/Microsoft.Devices/iotHubs/myHub",
+    "deviceId": "myDevice"
   },
   "responses": {
     "200": {
       "body": {
-        "id": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/MyGroup/providers/Microsoft.Security/IoTSecuritySolutions/mySolution/devices/myDevice",
+        "id": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/MyGroup/providers/Microsoft.Devices/iotHubs/myHub/providers/Microsoft.Security/devices/myDevice",
         "name": "myDevice",
-        "type": "Microsoft.Security/IoTSecuritySolutions/devices",
+        "type": "Microsoft.Security/devices",
         "properties": {
-          "displayName": "myDisplayName",
+          "displayName": "10.168.140.1",
           "deviceType": "PLC",
           "sourceName": "HORIZON",
           "networkInterfaces": [
@@ -38,7 +29,7 @@
             }
           ],
           "vendor": "BROADCOM",
-          "osName": "Windows 10 32",
+          "osName": "Windows 10 64",
           "protocols": [
             {
               "name": "CIP",
@@ -53,7 +44,7 @@
           "lastUpdateTime": "2020-05-13T06:32:25Z",
           "managementState": "Unmanaged",
           "authorizationState": "Authorized",
-          "deviceCriticality": "Important",
+          "deviceCriticality": "Standard",
           "purdueLevel": "ProcessControl",
           "firmwares": [
             {
@@ -69,12 +60,7 @@
           ],
           "discoveryTime": "2020-05-13T06:32:25Z",
           "programmingState": "NotProgrammingDevice",
-          "scanningFunctionality": "NotScannerDevice",
-          "fieldsChangedByUser": [
-            "displayName",
-            "osName",
-            "deviceCriticality"
-          ]
+          "scanningFunctionality": "NotScannerDevice"
         }
       }
     }
