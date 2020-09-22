@@ -66,11 +66,15 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
+  - repo: azure-sdk-for-net
   - repo: azure-sdk-for-python
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-node
+  - repo: azure-resource-manager-schemas
+    after_scripts:
+      - node sdkauto_afterscript.js batchai/resource-manager
 ```
 
 
@@ -151,7 +155,7 @@ Please also specify `--azure-libraries-for-java-folder=<path to the root directo
 ``` yaml $(tag)=='package-2017-09-preview' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.batchai.v2017_09_01_preview
-  output-folder: $(azure-libraries-for-java-folder)/batchai/resource-manager/v2017_09_01_preview
+  output-folder: $(azure-libraries-for-java-folder)/sdk/batchai/mgmt-v2017_09_01_preview
 regenerate-manager: true
 generate-interface: true
 ```
@@ -164,7 +168,7 @@ Please also specify `--azure-libraries-for-java-folder=<path to the root directo
 ``` yaml $(tag)=='package-2018-03' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.batchai.v2018_03_01
-  output-folder: $(azure-libraries-for-java-folder)/batchai/resource-manager/v2018_03_01
+  output-folder: $(azure-libraries-for-java-folder)/sdk/batchai/mgmt-v2018_03_01
 regenerate-manager: true
 generate-interface: true
 ```
@@ -177,7 +181,12 @@ Please also specify `--azure-libraries-for-java-folder=<path to the root directo
 ``` yaml $(tag)=='package-2018-05' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.batchai.v2018_05_01
-  output-folder: $(azure-libraries-for-java-folder)/batchai/resource-manager/v2018_05_01
+  output-folder: $(azure-libraries-for-java-folder)/sdk/batchai/mgmt-v2018_05_01
 regenerate-manager: true
 generate-interface: true
 ```
+
+## AzureResourceSchema
+
+See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
+

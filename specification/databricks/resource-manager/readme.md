@@ -23,7 +23,7 @@ Please also specify `--azure-libraries-for-java=<path to the root directory of y
 ``` yaml $(tag) == 'package-2018-04-01' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.databricks.v2018_04_01
-  output-folder: $(azure-libraries-for-java-folder)/databricks/resource-manager/v2018_04_01
+  output-folder: $(azure-libraries-for-java-folder)/sdk/databricks/mgmt-v2018_04_01
 regenerate-manager: true
 generate-interface: true
 ```
@@ -74,6 +74,9 @@ swagger-to-sdk:
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-node
+  - repo: azure-resource-manager-schemas
+    after_scripts:
+      - node sdkauto_afterscript.js databricks/resource-manager
 ```
 
 ## Go
@@ -83,3 +86,7 @@ See configuration in [readme.go.md](./readme.go.md)
 ## Python
 
 See configuration in [readme.python.md](./readme.python.md)
+## AzureResourceSchema
+
+See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
+

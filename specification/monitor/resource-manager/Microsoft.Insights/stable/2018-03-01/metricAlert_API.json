@@ -9,9 +9,15 @@
     "description": "Azure Monitor client to create/update/delete metric based alerts."
   },
   "host": "management.azure.com",
-  "schemes": [ "https" ],
-  "consumes": [ "application/json" ],
-  "produces": [ "application/json" ],
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
   "security": [
     {
       "azure_auth": [
@@ -33,12 +39,18 @@
   "paths": {
     "/subscriptions/{subscriptionId}/providers/Microsoft.Insights/metricAlerts": {
       "get": {
-        "tags": [ "MetricAlerts" ],
+        "tags": [
+          "MetricAlerts"
+        ],
         "description": "Retrieve alert rule definitions in a subscription.",
         "operationId": "MetricAlerts_ListBySubscription",
         "parameters": [
-          { "$ref": "#/parameters/SubscriptionIdParameter" },
-          { "$ref": "#/parameters/ApiVersionParameter" }
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
         ],
         "responses": {
           "200": {
@@ -49,26 +61,38 @@
           },
           "default": {
             "description": "BadRequest",
-            "schema": { "$ref": "../../stable/2016-03-01/alertRules_API.json#/definitions/ErrorResponse" }
+            "schema": {
+              "$ref": "../../stable/2016-03-01/alertRules_API.json#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-pageable": {
           "nextLinkName": null
         },
         "x-ms-examples": {
-          "List metric alert rules": { "$ref": "./examples/listMetricAlert.json" }
+          "List metric alert rules": {
+            "$ref": "./examples/listMetricAlert.json"
+          }
         }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Insights/metricAlerts": {
       "get": {
-        "tags": [ "MetricAlerts" ],
+        "tags": [
+          "MetricAlerts"
+        ],
         "description": "Retrieve alert rule definitions in a resource group.",
         "operationId": "MetricAlerts_ListByResourceGroup",
         "parameters": [
-          { "$ref": "#/parameters/SubscriptionIdParameter" },
-          { "$ref": "#/parameters/ResourceGroupNameParameter" },
-          { "$ref": "#/parameters/ApiVersionParameter" }
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
         ],
         "responses": {
           "200": {
@@ -79,27 +103,41 @@
           },
           "default": {
             "description": "BadRequest",
-            "schema": { "$ref": "../../stable/2016-03-01/alertRules_API.json#/definitions/ErrorResponse" }
+            "schema": {
+              "$ref": "../../stable/2016-03-01/alertRules_API.json#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-pageable": {
           "nextLinkName": null
         },
         "x-ms-examples": {
-          "List metric alert rules": { "$ref": "./examples/listMetricAlert.json" }
+          "List metric alert rules": {
+            "$ref": "./examples/listMetricAlert.json"
+          }
         }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Insights/metricAlerts/{ruleName}": {
       "get": {
-        "tags": [ "MetricAlerts" ],
+        "tags": [
+          "MetricAlerts"
+        ],
         "description": "Retrieve an alert rule definition.",
         "operationId": "MetricAlerts_Get",
         "parameters": [
-          { "$ref": "#/parameters/SubscriptionIdParameter" },
-          { "$ref": "#/parameters/ResourceGroupNameParameter" },
-          { "$ref": "#/parameters/RuleNameParameter" },
-          { "$ref": "#/parameters/ApiVersionParameter" }
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/RuleNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
         ],
         "responses": {
           "200": {
@@ -110,27 +148,54 @@
           },
           "default": {
             "description": "BadRequest",
-            "schema": { "$ref": "../../stable/2016-03-01/alertRules_API.json#/definitions/ErrorResponse" }
+            "schema": {
+              "$ref": "../../stable/2016-03-01/alertRules_API.json#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-examples": {
-          "Get an alert rule for single resource": { "$ref": "./examples/getMetricAlertSingleResource.json" },
-          "Get an alert rule for multiple resources": { "$ref": "./examples/getMetricAlertMultipleResource.json" },
-          "Get an alert rule on resource group(s)": { "$ref": "./examples/getMetricAlertResourceGroup.json" },
-          "Get an alert rule on subscription": { "$ref": "./examples/getMetricAlertSubscription.json" },
-          "Get a dynamic alert rule for single resource": { "$ref": "./examples/getDynamicMetricAlertSingleResource.json" },
-          "Get a dynamic alert rule for multiple resources": { "$ref": "./examples/getDynamicMetricAlertMultipleResource.json" }
+          "Get an alert rule for single resource": {
+            "$ref": "./examples/getMetricAlertSingleResource.json"
+          },
+          "Get an alert rule for multiple resources": {
+            "$ref": "./examples/getMetricAlertMultipleResource.json"
+          },
+          "Get an alert rule on resource group(s)": {
+            "$ref": "./examples/getMetricAlertResourceGroup.json"
+          },
+          "Get an alert rule on subscription": {
+            "$ref": "./examples/getMetricAlertSubscription.json"
+          },
+          "Get a dynamic alert rule for single resource": {
+            "$ref": "./examples/getDynamicMetricAlertSingleResource.json"
+          },
+          "Get a dynamic alert rule for multiple resources": {
+            "$ref": "./examples/getDynamicMetricAlertMultipleResource.json"
+          },
+          "Get a web test alert rule": {
+            "$ref": "./examples/getWebTestMetricAlert.json"
+          }
         }
       },
       "put": {
-        "tags": [ "MetricAlerts" ],
+        "tags": [
+          "MetricAlerts"
+        ],
         "description": "Create or update an metric alert definition.",
         "operationId": "MetricAlerts_CreateOrUpdate",
         "parameters": [
-          { "$ref": "#/parameters/SubscriptionIdParameter" },
-          { "$ref": "#/parameters/ResourceGroupNameParameter" },
-          { "$ref": "#/parameters/RuleNameParameter" },
-          { "$ref": "#/parameters/ApiVersionParameter" },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/RuleNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
           {
             "name": "parameters",
             "in": "body",
@@ -150,27 +215,54 @@
           },
           "default": {
             "description": "BadRequest",
-            "schema": { "$ref": "../../stable/2016-03-01/alertRules_API.json#/definitions/ErrorResponse" }
+            "schema": {
+              "$ref": "../../stable/2016-03-01/alertRules_API.json#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-examples": {
-          "Create or update an alert rule for Single Resource": { "$ref": "./examples/createOrUpdateMetricAlertSingleResource.json" },
-          "Create or update an alert rule for Multiple Resource": { "$ref": "./examples/createOrUpdateMetricAlertMultipleResource.json" },
-          "Create or update an alert rule on Resource group(s)": { "$ref": "./examples/createOrUpdateMetricAlertResourceGroup.json" },
-          "Create or update an alert rule on Subscription ": { "$ref": "./examples/createOrUpdateMetricAlertSubscription.json" },
-          "Create or update a dynamic alert rule for Single Resource": { "$ref": "./examples/createOrUpdateDynamicMetricAlertSingleResource.json" },
-          "Create or update a dynamic alert rule for Multiple Resources": { "$ref": "./examples/createOrUpdateDynamicMetricAlertMultipleResource.json" }
+          "Create or update an alert rule for Single Resource": {
+            "$ref": "./examples/createOrUpdateMetricAlertSingleResource.json"
+          },
+          "Create or update an alert rule for Multiple Resource": {
+            "$ref": "./examples/createOrUpdateMetricAlertMultipleResource.json"
+          },
+          "Create or update an alert rule on Resource group(s)": {
+            "$ref": "./examples/createOrUpdateMetricAlertResourceGroup.json"
+          },
+          "Create or update an alert rule on Subscription ": {
+            "$ref": "./examples/createOrUpdateMetricAlertSubscription.json"
+          },
+          "Create or update a dynamic alert rule for Single Resource": {
+            "$ref": "./examples/createOrUpdateDynamicMetricAlertSingleResource.json"
+          },
+          "Create or update a dynamic alert rule for Multiple Resources": {
+            "$ref": "./examples/createOrUpdateDynamicMetricAlertMultipleResource.json"
+          },
+          "Create or update a web test alert rule": {
+            "$ref": "./examples/createOrUpdateWebTestMetricAlert.json"
+          }
         }
       },
       "patch": {
-        "tags": [ "MetricAlerts" ],
+        "tags": [
+          "MetricAlerts"
+        ],
         "description": "Update an metric alert definition.",
         "operationId": "MetricAlerts_Update",
         "parameters": [
-          { "$ref": "#/parameters/SubscriptionIdParameter" },
-          { "$ref": "#/parameters/ResourceGroupNameParameter" },
-          { "$ref": "#/parameters/RuleNameParameter" },
-          { "$ref": "#/parameters/ApiVersionParameter" },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/RuleNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
           {
             "name": "parameters",
             "in": "body",
@@ -190,46 +282,72 @@
           },
           "default": {
             "description": "BadRequest",
-            "schema": { "$ref": "../../stable/2016-03-01/alertRules_API.json#/definitions/ErrorResponse" }
+            "schema": {
+              "$ref": "../../stable/2016-03-01/alertRules_API.json#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-examples": {
-          "Create or update an alert rule": { "$ref": "./examples/UpdateMetricAlert.json" }
+          "Create or update an alert rule": {
+            "$ref": "./examples/UpdateMetricAlert.json"
+          }
         }
       },
       "delete": {
-        "tags": [ "MetricAlerts" ],
+        "tags": [
+          "MetricAlerts"
+        ],
         "description": "Delete an alert rule definition.",
         "operationId": "MetricAlerts_Delete",
         "parameters": [
-          { "$ref": "#/parameters/SubscriptionIdParameter" },
-          { "$ref": "#/parameters/ResourceGroupNameParameter" },
-          { "$ref": "#/parameters/RuleNameParameter" },
-          { "$ref": "#/parameters/ApiVersionParameter" }
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/RuleNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
         ],
         "responses": {
-          "204": {
-            "description": "No content: the request was successful, but the response is empty"
-          },
           "200": {
             "description": "Successful request to delete an metric alert rule"
+          },
+          "204": {
+            "description": "No content: the request was successful, but the response is empty"
           }
         },
         "x-ms-examples": {
-          "Delete an alert rule": { "$ref": "./examples/deleteMetricAlert.json" }
+          "Delete an alert rule": {
+            "$ref": "./examples/deleteMetricAlert.json"
+          }
         }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Insights/metricAlerts/{ruleName}/status": {
       "get": {
-        "tags": [ "MetricAlertsStatus" ],
+        "tags": [
+          "MetricAlertsStatus"
+        ],
         "description": "Retrieve an alert rule status.",
         "operationId": "MetricAlertsStatus_List",
         "parameters": [
-          { "$ref": "#/parameters/SubscriptionIdParameter" },
-          { "$ref": "#/parameters/ResourceGroupNameParameter" },
-          { "$ref": "#/parameters/RuleNameParameter" },
-          { "$ref": "#/parameters/ApiVersionParameter" }
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/RuleNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
         ],
         "responses": {
           "200": {
@@ -240,25 +358,41 @@
           },
           "default": {
             "description": "BadRequest",
-            "schema": { "$ref": "../../stable/2016-03-01/alertRules_API.json#/definitions/ErrorResponse" }
+            "schema": {
+              "$ref": "../../stable/2016-03-01/alertRules_API.json#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-examples": {
-          "Get an alert rule status": { "$ref": "./examples/getMetricAlertStatus.json" }
+          "Get an alert rule status": {
+            "$ref": "./examples/getMetricAlertStatus.json"
+          }
         }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Insights/metricAlerts/{ruleName}/status/{statusName}": {
       "get": {
-        "tags": [ "MetricAlertsStatus" ],
+        "tags": [
+          "MetricAlertsStatus"
+        ],
         "description": "Retrieve an alert rule status.",
         "operationId": "MetricAlertsStatus_ListByName",
         "parameters": [
-          { "$ref": "#/parameters/SubscriptionIdParameter" },
-          { "$ref": "#/parameters/ResourceGroupNameParameter" },
-          { "$ref": "#/parameters/RuleNameParameter" },
-          { "$ref": "#/parameters/StatusNameParameter" },
-          { "$ref": "#/parameters/ApiVersionParameter" }
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/RuleNameParameter"
+          },
+          {
+            "$ref": "#/parameters/StatusNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
         ],
         "responses": {
           "200": {
@@ -269,11 +403,15 @@
           },
           "default": {
             "description": "BadRequest",
-            "schema": { "$ref": "../../stable/2016-03-01/alertRules_API.json#/definitions/ErrorResponse" }
+            "schema": {
+              "$ref": "../../stable/2016-03-01/alertRules_API.json#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-examples": {
-          "Get an alert rule status": { "$ref": "./examples/getMetricAlertStatusByName.json" }
+          "Get an alert rule status": {
+            "$ref": "./examples/getMetricAlertStatusByName.json"
+          }
         }
       }
     }
@@ -324,7 +462,7 @@
           "type": "string",
           "description": "the id of the action group to use."
         },
-        "webhookProperties": {
+        "webHookProperties": {
           "type": "object",
           "additionalProperties": {
             "type": "string",
@@ -373,13 +511,13 @@
           "format": "duration",
           "description": "the period of time (in ISO 8601 duration format) that is used to monitor alert activity based on the threshold."
         },
-        "targetResourceType" :{
-          "type" : "string",
-          "description" : "the resource type of the target resource(s) on which the alert is created/updated. Mandatory for MultipleResourceMultipleMetricCriteria."
+        "targetResourceType": {
+          "type": "string",
+          "description": "the resource type of the target resource(s) on which the alert is created/updated. Mandatory for MultipleResourceMultipleMetricCriteria."
         },
-        "targetResourceRegion" : {
-          "type" : "string",
-          "description" : "the region of the target resource(s) on which the alert is created/updated. Mandatory for MultipleResourceMultipleMetricCriteria."
+        "targetResourceRegion": {
+          "type": "string",
+          "description": "the region of the target resource(s) on which the alert is created/updated. Mandatory for MultipleResourceMultipleMetricCriteria."
         },
         "criteria": {
           "$ref": "#/definitions/MetricAlertCriteria",
@@ -387,7 +525,7 @@
         },
         "autoMitigate": {
           "type": "boolean",
-          "description":"the flag that indicates whether the alert should be auto resolved or not."
+          "description": "the flag that indicates whether the alert should be auto resolved or not. The default is true."
         },
         "actions": {
           "type": "array",
@@ -510,14 +648,16 @@
     "MetricAlertCriteria": {
       "type": "object",
       "additionalProperties": {
-          "type": "object"
+        "type": "object"
       },
       "discriminator": "odata.type",
       "properties": {
         "odata.type": {
+          "type": "string",
           "enum": [
             "Microsoft.Azure.Monitor.SingleResourceMultipleMetricCriteria",
-            "Microsoft.Azure.Monitor.MultipleResourceMultipleMetricCriteria"
+            "Microsoft.Azure.Monitor.MultipleResourceMultipleMetricCriteria",
+            "Microsoft.Azure.Monitor.WebtestLocationAvailabilityCriteria"
           ],
           "x-ms-enum": {
             "name": "odatatype",
@@ -526,7 +666,9 @@
           "description": "specifies the type of the alert criteria."
         }
       },
-      "required": [ "odata.type" ],
+      "required": [
+        "odata.type"
+      ],
       "description": "The rule criteria that defines the conditions of the alert rule."
     },
     "MetricAlertSingleResourceMultipleMetricCriteria": {
@@ -548,6 +690,35 @@
       },
       "description": "Specifies the metric alert criteria for a single resource that has multiple metric criteria."
     },
+    "WebtestLocationAvailabilityCriteria": {
+      "x-ms-discriminator-value": "Microsoft.Azure.Monitor.WebtestLocationAvailabilityCriteria",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/MetricAlertCriteria"
+        }
+      ],
+      "properties": {
+        "webTestId": {
+          "type": "string",
+          "description": "The Application Insights web test Id."
+        },
+        "componentId": {
+          "type": "string",
+          "description": "The Application Insights resource Id."
+        },
+        "failedLocationCount": {
+          "type": "number",
+          "description": "The number of failed locations."
+        }
+      },
+      "required": [
+        "webTestId",
+        "componentId",
+        "failedLocationCount"
+      ],
+      "description": "Specifies the metric alert rule criteria for a web test resource."
+    },
     "MetricCriteria": {
       "x-ms-discriminator-value": "StaticThresholdCriterion",
       "type": "object",
@@ -556,12 +727,13 @@
           "$ref": "#/definitions/MultiMetricCriteria"
         }
       ],
-     "required": [
+      "required": [
         "operator",
         "threshold"
       ],
       "properties": {
         "operator": {
+          "type": "string",
           "enum": [
             "Equals",
             "NotEquals",
@@ -578,7 +750,7 @@
         },
         "threshold": {
           "type": "number",
-          "format":  "double",
+          "format": "double",
           "description": "the criteria threshold value that activates the alert."
         }
       },
@@ -609,19 +781,19 @@
       },
       "description": "Specifies a metric dimension."
     },
-    "MetricAlertMultipleResourceMultipleMetricCriteria":{
+    "MetricAlertMultipleResourceMultipleMetricCriteria": {
       "x-ms-discriminator-value": "Microsoft.Azure.Monitor.MultipleResourceMultipleMetricCriteria",
       "type": "object",
-      "allOf":[
+      "allOf": [
         {
-          "$ref":"#/definitions/MetricAlertCriteria"
+          "$ref": "#/definitions/MetricAlertCriteria"
         }
       ],
-      "properties":{
-        "allOf":{
+      "properties": {
+        "allOf": {
           "type": "array",
-          "items":{
-            "$ref":"#/definitions/MultiMetricCriteria"
+          "items": {
+            "$ref": "#/definitions/MultiMetricCriteria"
           },
           "description": "the list of multiple metric criteria for this 'all of' operation. "
         }
@@ -633,18 +805,19 @@
       "additionalProperties": {
         "type": "object"
       },
-      "discriminator":"criterionType",
-      "properties":{
-        "criterionType" : {
-          "enum":[
-           "StaticThresholdCriterion",
-           "DynamicThresholdCriterion"
+      "discriminator": "criterionType",
+      "properties": {
+        "criterionType": {
+          "type": "string",
+          "enum": [
+            "StaticThresholdCriterion",
+            "DynamicThresholdCriterion"
           ],
-          "x-ms-enum" : {
-            "name" : "criterionType",
+          "x-ms-enum": {
+            "name": "criterionType",
             "modelAsString": true
           },
-          "description":" Specifies the type of threshold criteria"
+          "description": "Specifies the type of threshold criteria"
         },
         "name": {
           "type": "string",
@@ -661,6 +834,7 @@
         "timeAggregation": {
           "enum": [
             "Average",
+            "Count",
             "Minimum",
             "Maximum",
             "Total"
@@ -677,12 +851,21 @@
             "$ref": "#/definitions/MetricDimension"
           },
           "description": "List of dimension conditions."
+        },
+        "skipMetricValidation": {
+          "type": "boolean",
+          "description": "Allows creating an alert rule on a custom metric that isn't yet emitted, by causing the metric validation to be skipped."
         }
       },
-      "required": [ "criterionType", "name", "metricName", "timeAggregation" ],
+      "required": [
+        "criterionType",
+        "name",
+        "metricName",
+        "timeAggregation"
+      ],
       "description": "The types of conditions for a multi resource alert."
     },
-    "DynamicMetricCriteria" : {	 
+    "DynamicMetricCriteria": {
       "x-ms-discriminator-value": "DynamicThresholdCriterion",
       "type": "object",
       "allOf": [
@@ -690,13 +873,14 @@
           "$ref": "#/definitions/MultiMetricCriteria"
         }
       ],
-     "required": [
+      "required": [
         "operator",
         "alertSensitivity",
         "failingPeriods"
       ],
       "properties": {
         "operator": {
+          "type": "string",
           "enum": [
             "GreaterThan",
             "LessThan",
@@ -709,31 +893,32 @@
           "description": "The operator used to compare the metric value against the threshold."
         },
         "alertSensitivity": {
-          "enum" : [
+          "type": "string",
+          "enum": [
             "Low",
             "Medium",
             "High"
           ],
-          "x-ms-enum" : {
-            "name" : "DynamicThresholdSensitivity",
+          "x-ms-enum": {
+            "name": "DynamicThresholdSensitivity",
             "modelAsString": true
           },
           "description": "The extent of deviation required to trigger an alert. This will affect how tight the threshold is to the metric series pattern."
         },
-        "failingPeriods" : {
-          "type" : "object",
-          "$ref"  : "#/definitions/DynamicThresholdFailingPeriods",
-          "description" : "The minimum number of violations required within the selected lookback time window required to raise an alert."
+        "failingPeriods": {
+          "type": "object",
+          "$ref": "#/definitions/DynamicThresholdFailingPeriods",
+          "description": "The minimum number of violations required within the selected lookback time window required to raise an alert."
         },
-        "ignoreDataBefore" : {
-          "type" : "string",
+        "ignoreDataBefore": {
+          "type": "string",
           "format": "date-time",
-          "description" :"Use this option to set the date from which to start learning the metric historical data and calculate the dynamic thresholds (in ISO8601 format)"
+          "description": "Use this option to set the date from which to start learning the metric historical data and calculate the dynamic thresholds (in ISO8601 format)"
         }
       },
       "description": "Criterion for dynamic threshold."
     },
-    "DynamicThresholdFailingPeriods" : {
+    "DynamicThresholdFailingPeriods": {
       "required": [
         "numberOfEvaluationPeriods",
         "minFailingPeriodsToAlert"

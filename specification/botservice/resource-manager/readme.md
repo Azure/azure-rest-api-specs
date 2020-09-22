@@ -4,44 +4,10 @@
 
 This is the AutoRest configuration file for BotService.
 
-
-
 ---
 
-### Java multi-api
-
-``` yaml $(java) && $(multiapi)
-batch:
-  - tag: package-2017-12-01
-  - tag: package-2018-07-12
-```
-
-### Tag: package-2018-07-12 and java
-
-These settings apply only when `--tag=package-2018-07-12 --java` is specified on the command line.
-Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
-
-``` yaml $(tag) == 'package-2018-07-12' && $(java) && $(multiapi)
-java:
-  namespace: com.microsoft.azure.management.botservice.v2018-07-12
-  output-folder: $(azure-libraries-for-java-folder)/botservice/resource-manager/v2018-07-12
-regenerate-manager: true
-generate-interface: true
-```
-### Tag: package-2017-12-01 and java
-
-These settings apply only when `--tag=package-2017-12-01 --java` is specified on the command line.
-Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
-
-``` yaml $(tag) == 'package-2017-12-01' && $(java) && $(multiapi)
-java:
-  namespace: com.microsoft.azure.management.botservice.v2017_12_01
-  output-folder: $(azure-libraries-for-java-folder)/botservice/resource-manager/v2017_12_01
-regenerate-manager: true
-generate-interface: true
-```
-
 ## Getting Started
+
 To build the SDK for BotService, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
 
 > `autorest`
@@ -49,20 +15,29 @@ To build the SDK for BotService, simply [Install AutoRest](https://aka.ms/autore
 To see additional help and options, run:
 
 > `autorest --help`
+
 ---
 
 ## Configuration
 
-
-
 ### Basic Information
+
 These are the global settings for the BotService API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2018-07-12
+tag: package-2020-06-02
 ```
 
+
+### Tag: package-2020-06-02
+
+These settings apply only when `--tag=package-2020-06-02` is specified on the command line.
+
+```yaml $(tag) == 'package-2020-06-02'
+input-file:
+  - Microsoft.BotService/stable/2020-06-02/botservice.json
+```
 ### Tag: package-2018-07-12
 
 These settings apply only when `--tag=package-2018-07-12` is specified on the command line.
@@ -106,7 +81,9 @@ directive:
     from: botservice.json
     reason: The path as-is is quite descriptive.
 ```
+
 ---
+
 # Code Generation
 
 ## Swagger to SDK
@@ -116,8 +93,12 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
+  - repo: azure-sdk-for-net
   - repo: azure-sdk-for-python
   - repo: azure-sdk-for-go
+  - repo: azure-resource-manager-schemas
+    after_scripts:
+      - node sdkauto_afterscript.js botservice/resource-manager
 ```
 
 ## C#
@@ -138,6 +119,15 @@ csharp:
 
 See configuration in [readme.go.md](./readme.go.md)
 
+## Java
+
+See configuration in [readme.java.md](./readme.java.md)
+
 ## Python
 
 See readme.python.md file.
+
+## AzureResourceSchema
+
+See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
+

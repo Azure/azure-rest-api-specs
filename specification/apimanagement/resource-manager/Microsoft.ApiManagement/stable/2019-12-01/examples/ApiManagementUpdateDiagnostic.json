@@ -1,0 +1,59 @@
+{
+  "parameters": {
+    "serviceName": "apimService1",
+    "resourceGroupName": "rg1",
+    "api-version": "2019-12-01",
+    "subscriptionId": "subid",
+    "diagnosticId": "applicationinsights",
+    "If-Match": "*",
+    "parameters": {
+      "properties": {
+        "alwaysLog": "allErrors",
+        "loggerId": "/loggers/applicationinsights",
+        "sampling": {
+          "samplingType": "fixed",
+          "percentage": 50
+        },
+        "frontend": {
+          "request": {
+            "headers": [
+              "Content-type"
+            ],
+            "body": {
+              "bytes": 512
+            }
+          },
+          "response": {
+            "headers": [
+              "Content-type"
+            ],
+            "body": {
+              "bytes": 512
+            }
+          }
+        },
+        "backend": {
+          "request": {
+            "headers": [
+              "Content-type"
+            ],
+            "body": {
+              "bytes": 512
+            }
+          },
+          "response": {
+            "headers": [
+              "Content-type"
+            ],
+            "body": {
+              "bytes": 512
+            }
+          }
+        }
+      }
+    }
+  },
+  "responses": {
+    "204": {}
+  }
+}

@@ -26,9 +26,9 @@ These are the global settings for the MariaDB API.
 
 ``` yaml
 title: MariaDBManagementClient
-description: MariaDB Client
+description: The Microsoft Azure management API provides create, read, update, and delete functionality for Azure MariaDB resources including servers, databases, firewall rules, VNET rules, log files and configurations with new business model.
 openapi-type: arm
-tag: package-2018-06-01
+tag: package-2020-01-01
 ```
 
 ### Tag: package-2018-06-01-preview
@@ -48,6 +48,11 @@ These settings apply only when `--tag=package-2018-06-01` is specified on the co
 ``` yaml $(tag) == 'package-2018-06-01'
 input-file:
 - Microsoft.DBforMariaDB/stable/2018-06-01/mariadb.json
+- Microsoft.DBforMariaDB/stable/2018-06-01/QueryPerformanceInsights.json
+- Microsoft.DBforMariaDB/stable/2018-06-01/PerformanceRecommendations.json
+- Microsoft.DBforMariaDB/stable/2018-06-01/PrivateEndpointConnections.json
+- Microsoft.DBforMariaDB/stable/2018-06-01/PrivateLinkResources.json
+- Microsoft.DBforMariaDB/stable/2018-06-01/ServerSecurityAlertPolicies.json
 ```
 
 
@@ -58,8 +63,42 @@ These settings apply only when `--tag=package-2018-06-01-privatepreview` is spec
 ``` yaml $(tag) == 'package-2018-06-01-privatepreview'
 input-file:
 - Microsoft.DBforMariaDB/preview/2018-06-01-privatepreview/mariadb.json
+- Microsoft.DBforMariaDB/preview/2018-06-01-privatepreview/PrivateEndpointConnections.json
+- Microsoft.DBforMariaDB/preview/2018-06-01-privatepreview/PrivateLinkResources.json
 ```
 
+### Tag: package-2020-01-01-privatepreview
+
+These settings apply only when `--tag=package-2020-01-01-privatepreview` is specified on the command line.
+
+
+``` yaml $(tag) == 'package-2020-01-01-privatepreview'
+input-file:
+- Microsoft.DBforMariaDB/preview/2020-01-01-privatepreview/DataEncryptionKeys.json
+```
+
+
+### Tag: package-2020-01-01
+
+These settings apply only when `--tag=package-2020-01-01` is specified on the command line.
+
+``` yaml $(tag) == 'package-2020-01-01'
+input-file:
+- Microsoft.DBforMariaDB/stable/2018-06-01/mariadb.json
+- Microsoft.DBforMariaDB/stable/2018-06-01/QueryPerformanceInsights.json
+- Microsoft.DBforMariaDB/stable/2018-06-01/PerformanceRecommendations.json
+- Microsoft.DBforMariaDB/stable/2018-06-01/PrivateEndpointConnections.json
+- Microsoft.DBforMariaDB/stable/2018-06-01/PrivateLinkResources.json
+- Microsoft.DBforMariaDB/stable/2018-06-01/ServerSecurityAlertPolicies.json
+- Microsoft.DBforMariaDB/stable/2020-01-01/Servers.json
+```
+
+## Suppression
+``` yaml
+directive:
+  - suppress: PathResourceProviderNamePascalCase
+    reason: The name of the provider is Microsoft.DBforMariaDB
+```
 
 ---
 # Code Generation
@@ -72,11 +111,15 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
+  - repo: azure-sdk-for-net
   - repo: azure-sdk-for-python
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-node
+  - repo: azure-resource-manager-schemas
+    after_scripts:
+      - node sdkauto_afterscript.js mariadb/resource-manager
 ```
 
 
@@ -90,7 +133,7 @@ csharp:
   azure-arm: true
   license-header: MICROSOFT_MIT_NO_VERSION
   namespace: Microsoft.Azure.Management.MariaDB
-  output-folder: $(csharp-sdks-folder)/MariaDB/Management.MariaDB/Generated
+  output-folder: $(csharp-sdks-folder)/mariadb/Microsoft.Azure.Management.MariaDB/src/Generated
   clear-output-folder: true
 ```
 
@@ -129,3 +172,8 @@ See configuration in [readme.go.md](./readme.go.md)
 ## Java
 
 See configuration in [readme.java.md](./readme.java.md)
+
+## AzureResourceSchema
+
+See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
+

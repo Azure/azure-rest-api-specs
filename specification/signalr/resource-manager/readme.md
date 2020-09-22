@@ -26,7 +26,7 @@ These are the global settings for the SignalR API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2018-10-01
+tag: package-2020-07-01-preview
 ```
 
 ### Suppression
@@ -40,7 +40,37 @@ directive:
   - suppress: EnumInsteadOfBoolean
     from: signalr.json
     where: $.definitions.Dimension.properties.toBeExportedForShoebox
-    reason:  The boolean properties 'toBeExportedForShoebox' is defined by Geneva metrics
+    reason:  The boolean properties 'toBeExportedForShoebox' is defined by Geneva metrics.
+  - suppress: EnumInsteadOfBoolean
+    from: signalr.json
+    where: $.definitions.Operation.properties.isDataAction
+    reason:  The boolean properties 'isDataAction' is a standard property for Azuer Operatoins.
+  - suppress: TrackedResourceListByImmediateParent
+    reason: Another list APIs naming approach is used over the specs
+  - suppress: AvoidNestedProperties
+    from: signalr.json
+    where:
+    - $.definitions.SignalRFeature.properties.properties
+    - $.definitions.PrivateEndpointConnection.properties.properties
+    reason:  The 'properties' is a user-defined dictionary, cannot be flattened.
+```
+
+### Tag: package-2020-07-01-preview
+
+These settings apply only when `--tag=package-2020-07-01-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2020-07-01-preview'
+input-file:
+- Microsoft.SignalRService/preview/2020-07-01-preview/signalr.json
+```
+
+### Tag: package-2020-05-01
+
+These settings apply only when `--tag=package-2020-05-01` is specified on the command line.
+
+``` yaml $(tag) == 'package-2020-05-01'
+input-file:
+- Microsoft.SignalRService/stable/2020-05-01/signalr.json
 ```
 
 ### Tag: package-2018-10-01
@@ -72,6 +102,7 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
+  - repo: azure-sdk-for-net
   - repo: azure-sdk-for-python
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-node
@@ -80,6 +111,9 @@ swagger-to-sdk:
   - repo: azure-sdk-for-ruby
     after_scripts:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_signalr']
+  - repo: azure-resource-manager-schemas
+    after_scripts:
+      - node sdkauto_afterscript.js signalr/resource-manager
 ```
 
 
@@ -89,51 +123,7 @@ See configuration in [readme.go.md](./readme.go.md)
 
 ## Java
 
-These settings apply only when `--java` is specified on the command line.
-Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-libraries-for-java clone>`.
-
-``` yaml $(java)
-azure-arm: true
-fluent: true
-namespace: com.microsoft.azure.management.signalr
-license-header: MICROSOFT_MIT_NO_CODEGEN
-payload-flattening-threshold: 1
-output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-signalr
-```
-
-### Java multi-api
-
-``` yaml $(java) && $(multiapi)
-batch:
-  - tag: package-2018-03-01-preview
-  - tag: package-2018-10-01
-```
-
-### Tag: package-2018-10-01 and java
-
-These settings apply only when `--tag=package-2018-10-01 --java` is specified on the command line.
-Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-sdk-for-java clone>`.
-
-``` yaml $(tag) == 'package-2018-10-01' && $(java) && $(multiapi)
-java:
-  namespace: com.microsoft.azure.management.signalr.v2018_10_01
-  output-folder: $(azure-libraries-for-java-folder)/signalr/resource-manager/v2018_10_01
-regenerate-manager: true
-generate-interface: true
-```
-
-### Tag: package-2018-03-01-preview and java
-
-These settings apply only when `--tag=package-2018-03-01-preview --java` is specified on the command line.
-Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-sdk-for-java clone>`.
-
-``` yaml $(tag) == 'package-2018-03-01-preview' && $(java) && $(multiapi)
-java:
-  namespace: com.microsoft.azure.management.signalr.v2018_03_01_preview
-  output-folder: $(azure-libraries-for-java-folder)/signalr/resource-manager/v2018_03_01_preview
-regenerate-manager: true
-generate-interface: true
-```
+See configuration in [readme.java.md](./readme.java.md)
 
 ## C#
 
@@ -149,3 +139,8 @@ csharp:
   output-folder: $(csharp-sdks-folder)/signalr/Microsoft.Azure.Management.SignalR/src/Generated
   clear-output-folder: true
 ```
+
+## AzureResourceSchema
+
+See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
+

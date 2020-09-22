@@ -25,8 +25,8 @@
           ],
           "evaluationFrequency": "PT1M",
           "windowSize": "PT15M",
-          "targetResourceType":"Microsoft.Compute/virtualMachines",
-          "targetResourceRegion":"southcentralus",
+          "targetResourceType": "Microsoft.Compute/virtualMachines",
+          "targetResourceRegion": "southcentralus",
           "criteria": {
             "odata.type": "Microsoft.Azure.Monitor.MultipleResourceMultipleMetricCriteria",
             "allOf": [
@@ -35,8 +35,7 @@
                 "name": "High_CPU_80",
                 "metricName": "Percentage CPU",
                 "metricNamespace": "microsoft.compute/virtualmachines",
-                "dimensions": [
-                ],
+                "dimensions": [],
                 "operator": "GreaterThan",
                 "threshold": 80.50,
                 "timeAggregation": "Average"
@@ -47,7 +46,7 @@
           "actions": [
             {
               "actionGroupId": "/subscriptions/14ddf0c5-77c5-4b53-84f6-e1fa43ad68f7/resourcegroups/gigtest/providers/microsoft.insights/notificationgroups/group2",
-              "webhookProperties": {
+              "webHookProperties": {
                 "key11": "value11",
                 "key12": "value12"
               }

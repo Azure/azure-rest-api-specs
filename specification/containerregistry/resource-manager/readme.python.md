@@ -18,6 +18,8 @@ Generate all API versions currently shipped for this package
 
 ```yaml $(python) && $(multiapi)
 batch:
+  - tag: package-2019-12-preview
+  - tag: package-2019-06-preview
   - tag: package-2019-05
   - tag: package-2019-05-preview
   - tag: package-2019-04
@@ -25,6 +27,28 @@ batch:
   - tag: package-2018-02-preview
   - tag: package-2017-10
   - tag: package-2017-03
+```
+
+### Tag: package-2019-12-preview and python
+
+These settings apply only when `--tag=package-2019-12-preview --python` is specified on the command line.
+Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
+
+``` yaml $(tag) == 'package-2019-12-preview' && $(python)
+python:
+  namespace: azure.mgmt.containerregistry.v2019_12_01_preview
+  output-folder: $(python-sdks-folder)/containerregistry/azure-mgmt-containerregistry/azure/mgmt/containerregistry/v2019_12_01_preview
+```
+
+### Tag: package-2019-06-preview and python
+
+These settings apply only when `--tag=package-2019-06-preview --python` is specified on the command line.
+Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
+
+``` yaml $(tag) == 'package-2019-06-preview' && $(python)
+python:
+  namespace: azure.mgmt.containerregistry.v2019_06_01_preview
+  output-folder: $(python-sdks-folder)/containerregistry/azure-mgmt-containerregistry/azure/mgmt/containerregistry/v2019_06_01_preview
 ```
 
 ### Tag: package-2019-05 and python

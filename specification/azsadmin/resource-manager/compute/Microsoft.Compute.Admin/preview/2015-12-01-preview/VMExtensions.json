@@ -4,7 +4,7 @@
     "version": "2015-12-01-preview",
     "title": "Compute Admin Client"
   },
-  "host": "adminmanagement.local.azurestack.external",
+  "host": "management.azure.com",
   "schemes": [
     "https"
   ],
@@ -223,6 +223,10 @@
         "vmOsType": {
           "description": "Target virtual machine operating system type necessary for deploying the extension handler.",
           "$ref": "PlatformImages.json#/definitions/OsType"
+        },
+        "publisher": {
+          "description": "The publisher of the VM Extension",
+          "type": "string"
         },
         "computeRole": {
           "description": "Compute role",

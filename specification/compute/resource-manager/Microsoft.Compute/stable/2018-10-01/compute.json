@@ -245,6 +245,13 @@
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "The expand expression to apply to the operation. Allowed values are 'instanceView'."
           }
         ],
         "responses": {
@@ -257,6 +264,11 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List availability sets in a subscription.": {
+            "$ref": "./examples/ListAvailabilitySetsInASubscription.json"
+          }
         }
       }
     },
@@ -1118,11 +1130,11 @@
             "description": "A valid image SKU."
           },
           {
-            "name": "$filter",
+            "name": "$expand",
             "in": "query",
             "required": false,
             "type": "string",
-            "description": "The filter to apply on the operation."
+            "description": "The expand expression to apply on the operation."
           },
           {
             "name": "$top",
@@ -1154,8 +1166,7 @@
               }
             }
           }
-        },
-        "x-ms-odata": "#/definitions/VirtualMachineImageResource"
+        }
       }
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/publishers/{publisherName}/artifacttypes/vmimage/offers": {
@@ -2238,6 +2249,11 @@
         },
         "x-ms-pageable": {
           "nextLinkName": null
+        },
+        "x-ms-examples": {
+          "Lists all available virtual machine sizes to which the specified virtual machine can be resized": {
+            "$ref": "./examples/ListAvailableVmSizes_VirtualMachines.json"
+          }
         }
       }
     },
@@ -2367,7 +2383,7 @@
           "VirtualMachines"
         ],
         "operationId": "VirtualMachines_Redeploy",
-        "description": "The operation to redeploy a virtual machine.",
+        "description": "Shuts down the virtual machine, moves it to a new node, and powers it back on.",
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -2587,6 +2603,9 @@
           },
           "Create a scale set with ephemeral os disks.": {
             "$ref": "./examples/CreateAScaleSetWithDiffOsDisk.json"
+          },
+          "Create a scale set with automatic repairs enabled": {
+            "$ref": "./examples/CreateAScaleSetWithAutomaticRepairs.json"
           }
         }
       },
@@ -3356,7 +3375,7 @@
           "VirtualMachineScaleSets"
         ],
         "operationId": "VirtualMachineScaleSets_Redeploy",
-        "description": "Redeploy one or more virtual machines in a VM scale set.",
+        "description": "Shuts down all the virtual machines in the virtual machine scale set, moves them to a new node, and powers them back on.",
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -4182,21 +4201,21 @@
             "in": "query",
             "required": false,
             "type": "string",
-            "description": "The filter to apply to the operation."
+            "description": "The filter to apply to the operation. Allowed values are 'startswith(instanceView/statuses/code, 'PowerState') eq true', 'properties/latestModelApplied eq true', 'properties/latestModelApplied eq false'."
           },
           {
             "name": "$select",
             "in": "query",
             "required": false,
             "type": "string",
-            "description": "The list parameters."
+            "description": "The list parameters. Allowed values are 'instanceView', 'instanceView/statuses'."
           },
           {
             "name": "$expand",
             "in": "query",
             "required": false,
             "type": "string",
-            "description": "The expand expression to apply to the operation."
+            "description": "The expand expression to apply to the operation. Allowed values are 'instanceView'."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -4366,7 +4385,7 @@
           "VirtualMachineScaleSetVMs"
         ],
         "operationId": "VirtualMachineScaleSetVMs_Redeploy",
-        "description": "Redeploys a virtual machine in a VM scale set.",
+        "description": "Shuts down the virtual machine in the virtual machine scale set, moves it to a new node, and powers it back on.",
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -4761,7 +4780,7 @@
       "properties": {
         "proximityPlacementGroupType": {
           "type": "string",
-          "description": "Specifies the type of the proximity placement group. <br><br> Possible values are: <br><br> **Standard** <br><br> **Ultra**",
+          "description": "Specifies the type of the proximity placement group. <br><br> Possible values are: <br><br> **Standard** : Co-locate resources within an Azure region or Availability Zone. <br><br> **Ultra** : For future use.",
           "enum": [
             "Standard",
             "Ultra"
@@ -5284,7 +5303,7 @@
       "properties": {
         "tempDisk": {
           "type": "boolean",
-          "description": "Specifies whether to reimage temp disk. Default value: false."
+          "description": "Specifies whether to reimage temp disk. Default value: false. Note: This temp disk reimage parameter is only supported for VM/VMSS with Ephemeral OS disk."
         }
       },
       "description": "Parameters for Reimaging Virtual Machine. NOTE: Virtual Machine OS disk will always be reimaged"
@@ -5571,7 +5590,7 @@
           "$ref": "#/definitions/SubResource"
         }
       ],
-      "description": "Specifies information about the image to use. You can specify information about platform images, marketplace images, or virtual machine images. This element is required when you want to use a platform image, marketplace image, or virtual machine image, but is not used in other creation operations."
+      "description": "Specifies information about the image to use. You can specify information about platform images, marketplace images, or virtual machine images. This element is required when you want to use a platform image, marketplace image, or virtual machine image, but is not used in other creation operations. NOTE: Image reference publisher and offer can only be set when you create the scale set."
     },
     "KeyVaultSecretReference": {
       "properties": {
@@ -5661,7 +5680,7 @@
     },
     "StorageAccountType": {
       "type": "string",
-      "description": "Specifies the storage account type for the managed disk. NOTE: UltraSSD_LRS can only be used with data disks, it cannot be used with OS Disk.",
+      "description": "Specifies the storage account type for the managed disk. Managed OS disk storage account type can only be set when you create the scale set. NOTE: UltraSSD_LRS can only be used with data disks, it cannot be used with OS Disk.",
       "enum": [
         "Standard_LRS",
         "Premium_LRS",
@@ -6058,6 +6077,19 @@
         }
       },
       "description": "Specifies the operating system settings for the virtual machine."
+    },
+    "AutomaticRepairsPolicy": {
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "description": "Specifies whether automatic repairs should be enabled on the virtual machine scale set. The default value is false."
+        },
+        "gracePeriod": {
+          "type": "string",
+          "description": "The amount of time for which automatic repairs are suspended due to a state change on VM. The grace time starts after the state change has completed. This helps avoid premature or accidental repairs. The time duration should be specified in ISO 8601 format. The minimum allowed grace period is 30 minutes (PT30M), which is also the default value. The maximum allowed grace period is 90 minutes (PT90M)."
+        }
+      },
+      "description": "Specifies the configuration parameters for automatic repairs on the virtual machine scale set."
     },
     "NetworkInterfaceReferenceProperties": {
       "properties": {
@@ -6515,7 +6547,7 @@
           "description": "Specifies the number of virtual machines in the scale set."
         }
       },
-      "description": "Describes a virtual machine scale set sku."
+      "description": "Describes a virtual machine scale set sku. NOTE: If the new VM SKU is not supported on the hardware the scale set is currently on, you need to deallocate the VMs in the scale set before you modify the SKU name."
     },
     "AutomaticOSUpgradePolicy": {
       "properties": {
@@ -7195,7 +7227,7 @@
           "description": "The load balancer inbound nat pools."
         }
       },
-      "description": "Describes a virtual machine scale set network profile's IP configuration properties."
+      "description": "Describes a virtual machine scale set network profile's IP configuration properties. NOTE: The subnet of a scale set may be modified as long as the original subnet and the new subnet are in the same virtual network."
     },
     "VirtualMachineScaleSetIPConfiguration": {
       "properties": {
@@ -7661,6 +7693,10 @@
           "$ref": "#/definitions/UpgradePolicy",
           "description": "The upgrade policy."
         },
+        "automaticRepairsPolicy": {
+          "$ref": "#/definitions/AutomaticRepairsPolicy",
+          "description": "Policy for automatic repairs."
+        },
         "virtualMachineProfile": {
           "$ref": "#/definitions/VirtualMachineScaleSetVMProfile",
           "description": "The virtual machine profile."
@@ -7709,6 +7745,10 @@
           "$ref": "#/definitions/UpgradePolicy",
           "description": "The upgrade policy."
         },
+        "automaticRepairsPolicy": {
+          "$ref": "#/definitions/AutomaticRepairsPolicy",
+          "description": "Policy for automatic repairs."
+        },
         "virtualMachineProfile": {
           "$ref": "#/definitions/VirtualMachineScaleSetUpdateVMProfile",
           "description": "The virtual machine profile."
@@ -7717,9 +7757,17 @@
           "type": "boolean",
           "description": "Specifies whether the Virtual Machine Scale Set should be overprovisioned."
         },
+        "doNotRunExtensionsOnOverprovisionedVMs": {
+          "type": "boolean",
+          "description": "When Overprovision is enabled, extensions are launched only on the requested number of VMs which are finally kept. This property will hence ensure that the extensions do not run on the extra overprovisioned VMs."
+        },
         "singlePlacementGroup": {
           "type": "boolean",
-          "description": "When true this limits the scale set to a single placement group, of max size 100 virtual machines."
+          "description": "When true this limits the scale set to a single placement group, of max size 100 virtual machines. NOTE: If singlePlacementGroup is true, it may be modified to false. However, if singlePlacementGroup is false, it may not be modified to true."
+        },
+        "proximityPlacementGroup": {
+          "$ref": "#/definitions/SubResource",
+          "description": "Specifies information about the proximity placement group that the virtual machine scale set should be assigned to. <br><br>Minimum api-version: 2018-04-01."
         }
       },
       "description": "Describes the properties of a Virtual Machine Scale Set."
@@ -7747,7 +7795,7 @@
           "items": {
             "type": "string"
           },
-          "description": "The virtual machine scale set zones."
+          "description": "The virtual machine scale set zones. NOTE: Availability zones can only be set when you create the scale set."
         }
       },
       "allOf": [

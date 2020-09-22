@@ -1,95 +1,98 @@
 {
-    "parameters": {
-        "subscriptionId": "52b8da2f-61e0-4a1f-8dde-336911f367fb",
-        "resourceGroupName": "SampleResourceGroup_1",
-        "storageSyncServiceName": "SampleStorageSyncService_1",
-        "syncGroupName": "SampleSyncGroup_1",
-        "api-version": "2018-10-01"
-    },
-    "responses": {
-        "200": {
-            "headers": {
-                "x-ms-request-id": "74e55a4d-1c6f-46de-9a8d-278e53a47403",
-                "x-ms-correlation-request-id": "d166ca76-dad2-49df-b409-d2acfd42d730"
+  "parameters": {
+    "subscriptionId": "52b8da2f-61e0-4a1f-8dde-336911f367fb",
+    "resourceGroupName": "SampleResourceGroup_1",
+    "storageSyncServiceName": "SampleStorageSyncService_1",
+    "syncGroupName": "SampleSyncGroup_1",
+    "api-version": "2018-10-01"
+  },
+  "responses": {
+    "200": {
+      "headers": {
+        "x-ms-request-id": "74e55a4d-1c6f-46de-9a8d-278e53a47403",
+        "x-ms-correlation-request-id": "d166ca76-dad2-49df-b409-d2acfd42d730"
+      },
+      "body": {
+        "value": [
+          {
+            "name": "SampleServerEndpoint_1",
+            "properties": {
+              "serverLocalPath": "D:\\SampleServerEndpoint_1",
+              "cloudTiering": "off",
+              "volumeFreeSpacePercent": 100,
+              "friendlyName": "somemachine.redmond.corp.microsoft.com",
+              "serverResourceId": "/subscriptions/52b8da2f-61e0-4a1f-8dde-336911f367fb/resourceGroups/SampleResourceGroup_1/providers/Microsoft.StorageSync/storageSyncServices/SampleStorageSyncService_1/registeredServers/080d4133-bdb5-40a0-96a0-71a6057bfe9a",
+              "provisioningState": "Succeeded",
+              "lastWorkflowId": "storageSyncServices/healthDemo1/workflows/569afb5c-7172-4cf8-a8ea-d987f727f11a",
+              "lastOperationName": "ICreateServerEndpointWorkflow",
+              "tierFilesOlderThanDays": 0,
+              "syncStatus": {
+                "downloadHealth": "Healthy",
+                "uploadHealth": "Error",
+                "combinedHealth": "Error",
+                "lastUpdatedTimestamp": "2018-06-11T23:32:51.1057915Z",
+                "uploadStatus": {
+                  "lastSyncResult": -2134351810,
+                  "lastSyncTimestamp": "2018-06-11T23:32:51.1057915Z",
+                  "lastSyncSuccessTimestamp": null,
+                  "lastSyncPerItemErrorCount": 69
+                },
+                "downloadStatus": {
+                  "lastSyncResult": 0,
+                  "lastSyncTimestamp": "2018-06-11T23:28:33.9217334Z",
+                  "lastSyncSuccessTimestamp": "2018-06-11T23:28:33.9217334Z",
+                  "lastSyncPerItemErrorCount": 0
+                },
+                "currentProgress": null,
+                "offlineDataTransferStatus": "NotRunning"
+              },
+              "offlineDataTransfer": "on",
+              "offlineDataTransferStorageAccountResourceId": "/subscriptions/744f4d70-6d17-4921-8970-a765d14f763f/resourceGroups/myRG/providers/Microsoft.Storage/storageAccounts/mysa",
+              "offlineDataTransferStorageAccountTenantId": "72f988bf-86f1-41af-91ab-2d7cd011db47",
+              "offlineDataTransferShareName": "myfileshare"
             },
-            "body": {
-                "value": [{
-                    "name": "SampleServerEndpoint_1",
-                    "properties": {
-                        "serverLocalPath": "D:\\SampleServerEndpoint_1",
-                        "cloudTiering": "off",
-                        "volumeFreeSpacePercent": 100,
-                        "friendlyName": "somemachine.redmond.corp.microsoft.com",
-                        "serverResourceId": "/subscriptions/52b8da2f-61e0-4a1f-8dde-336911f367fb/resourceGroups/SampleResourceGroup_1/providers/Microsoft.StorageSync/storageSyncServices/SampleStorageSyncService_1/registeredServers/080d4133-bdb5-40a0-96a0-71a6057bfe9a",
-                        "provisioningState": "Succeeded",
-                        "lastWorkflowId": "storageSyncServices/healthDemo1/workflows/569afb5c-7172-4cf8-a8ea-d987f727f11a",
-                        "lastOperationName": "ICreateServerEndpointWorkflow",
-                        "tierFilesOlderThanDays" : 0,
-                        "syncStatus": {
-                            "downloadHealth": "Healthy",
-                            "uploadHealth": "Error",
-                            "combinedHealth": "Error",
-                            "lastUpdatedTimestamp": "2018-06-11T23:32:51.1057915Z",
-                            "uploadStatus": {
-                                "lastSyncResult": -2134351810,
-                                "lastSyncTimestamp": "2018-06-11T23:32:51.1057915Z",
-                                "lastSyncSuccessTimestamp": null,
-                                "lastSyncPerItemErrorCount": 69
-                            },
-                            "downloadStatus": {
-                                "lastSyncResult": 0,
-                                "lastSyncTimestamp": "2018-06-11T23:28:33.9217334Z",
-                                "lastSyncSuccessTimestamp": "2018-06-11T23:28:33.9217334Z",
-                                "lastSyncPerItemErrorCount": 0
-                            },
-                            "currentProgress": null,
-                            "offlineDataTransferStatus": "NotRunning"
-                        },
-                        "offlineDataTransfer": "on",
-                        "offlineDataTransferStorageAccountResourceId": "/subscriptions/744f4d70-6d17-4921-8970-a765d14f763f/resourceGroups/myRG/providers/Microsoft.Storage/storageAccounts/mysa",
-                        "offlineDataTransferStorageAccountTenantId": "72f988bf-86f1-41af-91ab-2d7cd011db47",
-                        "offlineDataTransferShareName": "myfileshare"
-                    },
-                    "id": "/subscriptions/52b8da2f-61e0-4a1f-8dde-336911f367fb/resourceGroups/SampleResourceGroup_1/providers/Microsoft.StorageSync/storageSyncServices/SampleStorageSyncService_1/syncGroups/SampleSyncGroup_1/serverEndpoints/SampleServerEndpoint_1",
-                    "type": "Microsoft.StorageSync/storageSyncServices/syncGroups/serverEndpoints"
-                }, {
-                    "name": "SampleServerEndpoint_2",
-                    "properties": {
-                        "serverLocalPath": "D:\\SampleServerEndpoint_2",
-                        "cloudTiering": "on",
-                        "volumeFreeSpacePercent": 80,
-                        "friendlyName": "somemachine2.redmond.corp.microsoft.com",
-                        "serverResourceId": "/subscriptions/52b8da2f-61e0-4a1f-8dde-336911f367fb/resourceGroups/SampleResourceGroup_1/providers/Microsoft.StorageSync/storageSyncServices/SampleStorageSyncService_1/registeredServers/f94e2944-b48d-4e5b-bdc7-c48ab3712659",
-                        "provisioningState": "Succeeded",
-                        "lastWorkflowId": "storageSyncServices/healthDemo1/workflows/40b1dc00-d7d9-4721-a1e9-ab60139b830a",
-                        "lastOperationName": "ICreateServerEndpointWorkflow",
-                        "tierFilesOlderThanDays" : 5,
-                        "syncStatus": {
-                            "downloadHealth": "Healthy",
-                            "uploadHealth": "Healthy",
-                            "combinedHealth": "Healthy",
-                            "lastUpdatedTimestamp": "2018-06-11T23:32:51.1057915Z",
-                            "uploadStatus": {
-                                "lastSyncResult": 0,
-                                "lastSyncTimestamp": "2018-06-11T23:32:51.1057915Z",
-                                "lastSyncSuccessTimestamp": "2018-06-11T23:28:33.9217334Z",
-                                "lastSyncPerItemErrorCount": 0
-                            },
-                            "downloadStatus": {
-                                "lastSyncResult": 0,
-                                "lastSyncTimestamp": "2018-06-11T23:28:33.9217334Z",
-                                "lastSyncSuccessTimestamp": "2018-06-11T23:28:33.9217334Z",
-                                "lastSyncPerItemErrorCount": 0
-                            },
-                            "currentProgress": null,
-                            "offlineDataTransferStatus": "NotRunning"
-                        },
-                        "offlineDataTransfer": "off"
-                    },
-                    "id": "/subscriptions/52b8da2f-61e0-4a1f-8dde-336911f367fb/resourceGroups/SampleResourceGroup_1/providers/Microsoft.StorageSync/storageSyncServices/SampleStorageSyncService_1/syncGroups/SampleSyncGroup_1/serverEndpoints/SampleServerEndpoint_2",
-                    "type": "Microsoft.StorageSync/storageSyncServices/syncGroups/serverEndpoints"
-                }]
-            }
-        }
+            "id": "/subscriptions/52b8da2f-61e0-4a1f-8dde-336911f367fb/resourceGroups/SampleResourceGroup_1/providers/Microsoft.StorageSync/storageSyncServices/SampleStorageSyncService_1/syncGroups/SampleSyncGroup_1/serverEndpoints/SampleServerEndpoint_1",
+            "type": "Microsoft.StorageSync/storageSyncServices/syncGroups/serverEndpoints"
+          },
+          {
+            "name": "SampleServerEndpoint_2",
+            "properties": {
+              "serverLocalPath": "D:\\SampleServerEndpoint_2",
+              "cloudTiering": "on",
+              "volumeFreeSpacePercent": 80,
+              "friendlyName": "somemachine2.redmond.corp.microsoft.com",
+              "serverResourceId": "/subscriptions/52b8da2f-61e0-4a1f-8dde-336911f367fb/resourceGroups/SampleResourceGroup_1/providers/Microsoft.StorageSync/storageSyncServices/SampleStorageSyncService_1/registeredServers/f94e2944-b48d-4e5b-bdc7-c48ab3712659",
+              "provisioningState": "Succeeded",
+              "lastWorkflowId": "storageSyncServices/healthDemo1/workflows/40b1dc00-d7d9-4721-a1e9-ab60139b830a",
+              "lastOperationName": "ICreateServerEndpointWorkflow",
+              "tierFilesOlderThanDays": 5,
+              "syncStatus": {
+                "downloadHealth": "Healthy",
+                "uploadHealth": "Healthy",
+                "combinedHealth": "Healthy",
+                "lastUpdatedTimestamp": "2018-06-11T23:32:51.1057915Z",
+                "uploadStatus": {
+                  "lastSyncResult": 0,
+                  "lastSyncTimestamp": "2018-06-11T23:32:51.1057915Z",
+                  "lastSyncSuccessTimestamp": "2018-06-11T23:28:33.9217334Z",
+                  "lastSyncPerItemErrorCount": 0
+                },
+                "downloadStatus": {
+                  "lastSyncResult": 0,
+                  "lastSyncTimestamp": "2018-06-11T23:28:33.9217334Z",
+                  "lastSyncSuccessTimestamp": "2018-06-11T23:28:33.9217334Z",
+                  "lastSyncPerItemErrorCount": 0
+                },
+                "currentProgress": null,
+                "offlineDataTransferStatus": "NotRunning"
+              },
+              "offlineDataTransfer": "off"
+            },
+            "id": "/subscriptions/52b8da2f-61e0-4a1f-8dde-336911f367fb/resourceGroups/SampleResourceGroup_1/providers/Microsoft.StorageSync/storageSyncServices/SampleStorageSyncService_1/syncGroups/SampleSyncGroup_1/serverEndpoints/SampleServerEndpoint_2",
+            "type": "Microsoft.StorageSync/storageSyncServices/syncGroups/serverEndpoints"
+          }
+        ]
+      }
     }
+  }
 }

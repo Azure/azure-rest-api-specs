@@ -8,14 +8,14 @@ python:
   azure-arm: true
   license-header: MICROSOFT_MIT_NO_VERSION
   payload-flattening-threshold: 2
-  namespace: Microsoft.Portal
-  package-name: portal
-  package-version: 2015-11-01-preview
+  namespace: azure.mgmt.portal
+  package-name: azure-mgmt-portal
+  package-version: 0.1.0
   clear-output-folder: true
 ```
 
 ```yaml $(python)
 python:
   no-namespace-folders: true
-  output-folder: $(python-sdks-folder)/azure-mgmt/portal
+  output-folder: $(python-sdks-folder)/portal/azure-mgmt-portal/azure/mgmt/portal
 ```

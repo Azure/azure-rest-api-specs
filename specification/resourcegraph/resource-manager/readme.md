@@ -27,7 +27,7 @@ These are the global settings for the ResourceGraph API.
 ``` yaml
 title: ResourceGraphClient
 openapi-type: arm
-tag: package-2019-04
+tag: package-preview-2020-04
 ```
 
 ### Validations
@@ -41,11 +41,20 @@ model-validator: true
 message-format: json
 ```
 
+### Tag: package-preview-2020-04
+
+These settings apply only when `--tag=package-preview-2020-04` is specified on the command line.
+
+``` yaml $(tag) == 'package-preview-2020-04'
+input-file:
+  - Microsoft.ResourceGraph/preview/2020-04-01-preview/resourcegraph.json
+```
+
 ### Tag: package-2019-04
 
 These settings apply only when `--tag=package-2019-04` is specified on the command line.
 
-```yaml $(tag) == 'package-2019-04'
+``` yaml $(tag) == 'package-2019-04'
 input-file:
   - Microsoft.ResourceGraph/stable/2019-04-01/resourcegraph.json
 ```
@@ -69,10 +78,15 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
+  - repo: azure-sdk-for-net
   - repo: azure-sdk-for-python
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-js
+  - repo: azure-sdk-for-trenton
+  - repo: azure-resource-manager-schemas
+    after_scripts:
+      - node sdkauto_afterscript.js resourcegraph/resource-manager
 ```
 
 ## C#
@@ -112,4 +126,42 @@ directive:
       Renaming it to ResourceChanges_ListResourceChanges causes yet another warning:
               "Per the Noun_Verb convention for Operation Ids, the noun 'ResourceChanges' should not appear after the underscore."
       Renaming it to ResourceChanges_Listresourcechanges seems to get rid of warnings, but the result looks very strange.
+  - suppress: EnumInsteadOfBoolean
+    where: $.definitions.ResourceChangesRequestParameters.properties.fetchPropertyChanges
+    from: resourcegraph.json
+    reason: This is a clear scenario for a boolean and will not have more than 2 values in the future.
+```
+
+## AzureResourceSchema
+
+See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
+
+## cli
+
+These settings apply only when `--cli` is specified on the command line.
+
+``` yaml $(cli)
+cli:
+  cli-name: ResourceGraph
+  azure-arm: true
+  license-header: MICROSOFT_MIT_NO_VERSION
+  payload-flattening-threshold: 2
+  namespace: azure.mgmt.ResourceGraph
+  package-name: azure-mgmt-ResourceGraph
+  clear-output-folder: false
+```
+
+## trenton
+
+These settings apply only when `--trenton` is specified on the command line.
+
+``` yaml $(trenton)
+trenton:
+  cli_name: ResourceGraph
+  azure_arm: true
+  license_header: MICROSOFT_MIT_NO_VERSION
+  payload_flattening_threshold: 2
+  namespace: azure.mgmt.ResourceGraph
+  package_name: azure-mgmt-ResourceGraph
+  clear_output_folder: false
 ```

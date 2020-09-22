@@ -26,9 +26,16 @@ These are the global settings for the EventHub API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2017-04
+tag: package-2018-01-preview
 ```
 
+## Suppression
+
+``` yaml
+directive:
+  - suppress: R4007
+    reason: DefaultErrorResponseSchema - we will be Implementing in new API version
+```
 
 ### Tag: package-2017-04
 
@@ -36,7 +43,15 @@ These settings apply only when `--tag=package-2017-04` is specified on the comma
 
 ``` yaml $(tag) == 'package-2017-04'
 input-file:
-- Microsoft.EventHub/stable/2017-04-01/EventHub.json
+- Microsoft.EventHub/stable/2017-04-01/AuthorizationRules.json
+- Microsoft.EventHub/stable/2017-04-01/CheckNameAvailability.json
+- Microsoft.EventHub/stable/2017-04-01/consumergroups.json
+- Microsoft.EventHub/stable/2017-04-01/disasterRecoveryConfigs.json
+- Microsoft.EventHub/stable/2017-04-01/eventhubs.json
+- Microsoft.EventHub/stable/2017-04-01/namespaces.json
+- Microsoft.EventHub/stable/2017-04-01/networkRuleSets.json
+- Microsoft.EventHub/stable/2017-04-01/operations.json
+- Microsoft.EventHub/stable/2017-04-01/sku.json
 ```
 
 
@@ -66,7 +81,20 @@ These settings apply only when `--tag=package-2018-01-preview` is specified on t
 
 ``` yaml $(tag) == 'package-2018-01-preview'
 input-file:
-- Microsoft.EventHub/preview/2018-01-01-preview/EventHub-preview.json
+- Microsoft.EventHub/preview/2018-01-01-preview/AvailableClusterRegions-preview.json
+- Microsoft.EventHub/preview/2018-01-01-preview/Clusters-preview.json
+- Microsoft.EventHub/preview/2018-01-01-preview/ipfilterrules-preview.json
+- Microsoft.EventHub/preview/2018-01-01-preview/namespaces-preview.json
+- Microsoft.EventHub/preview/2018-01-01-preview/quotaConfiguration-preview.json
+- Microsoft.EventHub/preview/2018-01-01-preview/virtualnetworkrules-preview.json
+- Microsoft.EventHub/preview/2018-01-01-preview/networkrulessets-preview.json
+- Microsoft.EventHub/stable/2017-04-01/AuthorizationRules.json
+- Microsoft.EventHub/stable/2017-04-01/CheckNameAvailability.json
+- Microsoft.EventHub/stable/2017-04-01/consumergroups.json
+- Microsoft.EventHub/stable/2017-04-01/disasterRecoveryConfigs.json
+- Microsoft.EventHub/stable/2017-04-01/operations.json
+- Microsoft.EventHub/stable/2017-04-01/eventhubs.json
+- Microsoft.EventHub/stable/2017-04-01/sku.json
 ```
 
 
@@ -81,9 +109,11 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
+  - repo: azure-sdk-for-net
   - repo: azure-sdk-for-python
     after_scripts:
       - python ./scripts/multiapi_init_gen.py azure-mgmt-eventhub
+  - repo: azure-sdk-for-python-track2
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-js
@@ -91,6 +121,9 @@ swagger-to-sdk:
   - repo: azure-sdk-for-ruby
     after_scripts:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_event_hub']
+  - repo: azure-resource-manager-schemas
+    after_scripts:
+      - node sdkauto_afterscript.js eventhub/resource-manager
 ```
 
 
@@ -118,64 +151,9 @@ See configuration in [readme.go.md](./readme.go.md)
 
 ## Java
 
-These settings apply only when `--java` is specified on the command line.
-Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-libraries-for-java clone>`.
+See configuration in [readme.java.md](./readme.java.md)
 
-``` yaml $(java)
-azure-arm: true
-fluent: true
-namespace: com.microsoft.azure.management.eventhub
-license-header: MICROSOFT_MIT_NO_CODEGEN
-payload-flattening-threshold: 1
-output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-eventhub
-```
+## AzureResourceSchema
 
-### Java multi-api
-
-``` yaml $(java) && $(multiapi)
-batch:
-  - tag: package-2018-01-preview
-  - tag: package-2015-08
-  - tag: package-2017-04
-```
-
-### Tag: package-2018-01-preview and java
-
-These settings apply only when `--tag=package-2018-01-preview --java` is specified on the command line.
-Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
-
-``` yaml $(tag) == 'package-2018-01-preview' && $(java) && $(multiapi)
-java:
-  namespace: com.microsoft.azure.management.eventhub.v2018_01_01_preview
-  output-folder: $(azure-libraries-for-java-folder)/eventhub/resource-manager/v2018_01_01_preview
-regenerate-manager: true
-generate-interface: true
-```
-
-### Tag: package-2015-08 and java
-
-These settings apply only when `--tag=package-2015-08 --java` is specified on the command line.
-Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
-
-``` yaml $(tag) == 'package-2015-08' && $(java) && $(multiapi)
-java:
-  namespace: com.microsoft.azure.management.eventhub.v2015_08_01
-  output-folder: $(azure-libraries-for-java-folder)/eventhub/resource-manager/v2015_08_01
-regenerate-manager: true
-generate-interface: true
-```
-
-### Tag: package-2017-04 and java
-
-These settings apply only when `--tag=package-2017-04 --java` is specified on the command line.
-Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
-
-``` yaml $(tag) == 'package-2017-04' && $(java) && $(multiapi)
-java:
-  namespace: com.microsoft.azure.management.eventhub.v2017_04_01
-  output-folder: $(azure-libraries-for-java-folder)/eventhub/resource-manager/v2017_04_01
-regenerate-manager: true
-generate-interface: true
-```
-
+See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
 

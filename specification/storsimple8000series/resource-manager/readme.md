@@ -54,12 +54,16 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
+  - repo: azure-sdk-for-net
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-node
   - repo: azure-sdk-for-ruby
     after_scripts:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_stor_simple8000_series']
+  - repo: azure-resource-manager-schemas
+    after_scripts:
+      - node sdkauto_afterscript.js storsimple8000series/resource-manager
 ```
 
 
@@ -110,9 +114,14 @@ Please also specify `--azure-libraries-for-java=<path to the root directory of y
 ``` yaml $(tag) == 'package-2017-06' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.storsimple.v2017_06_01
-  output-folder: $(azure-libraries-for-java-folder)/storsimple/resource-manager/v2017_06_01
+  output-folder: $(azure-libraries-for-java-folder)/sdk/storsimple/mgmt-v2017_06_01
 regenerate-manager: true
 generate-interface: true
 ```
 
+
+
+## AzureResourceSchema
+
+See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
 

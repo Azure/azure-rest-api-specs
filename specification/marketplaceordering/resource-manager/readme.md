@@ -4,7 +4,7 @@
 
 The underlying APIs are available to users who would like to write their own REST calls. These APIs would allow the user to accept the terms at a subscription, offer and SKU level. These apis are invoked in the context of azure subscription.
 
-----
+---
 ***GetAzureRmMarketplaceTerms***
 
 **Request**
@@ -73,6 +73,7 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
+  - repo: azure-sdk-for-net
   - repo: azure-sdk-for-python
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-js
@@ -80,6 +81,9 @@ swagger-to-sdk:
   - repo: azure-sdk-for-ruby
     after_scripts:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_marketplace_ordering']
+  - repo: azure-resource-manager-schemas
+    after_scripts:
+      - node sdkauto_afterscript.js marketplaceordering/resource-manager
 ```
 
 
@@ -186,9 +190,14 @@ Please also specify `--azure-libraries-for-java=<path to the root directory of y
 ``` yaml $(tag) == 'package-2015-06-01' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.marketplaceagreementsapi.v2015_06_01
-  output-folder: $(azure-libraries-for-java-folder)/marketplaceagreementsapi/resource-manager/v2015_06_01
+  output-folder: $(azure-libraries-for-java-folder)/sdk/marketplaceagreementsapi/mgmt-v2015_06_01
 regenerate-manager: true
 generate-interface: true
 ```
 
+
+
+## AzureResourceSchema
+
+See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
 

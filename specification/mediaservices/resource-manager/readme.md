@@ -26,8 +26,60 @@ These are the global settings for the MediaServices API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2019-05-preview
+tag: package-2020-05
 opt-in-extensible-enums: true
+```
+
+
+### Tag: package-2020-05
+
+These settings apply only when `--tag=package-2020-05` is specified on the command line.
+
+```yaml $(tag) == 'package-2020-05'
+input-file:
+  - Microsoft.Media/stable/2020-05-01/AccountFilters.json
+  - Microsoft.Media/stable/2020-05-01/Accounts.json
+  - Microsoft.Media/stable/2020-05-01/AssetsAndAssetFilters.json
+  - Microsoft.Media/stable/2020-05-01/ContentKeyPolicies.json
+  - Microsoft.Media/stable/2020-05-01/Encoding.json
+  - Microsoft.Media/stable/2020-05-01/StreamingPoliciesAndStreamingLocators.json
+  - Microsoft.Media/stable/2020-05-01/streamingservice.json
+  - Microsoft.Media/stable/2020-05-01/Common.json
+directive:
+  - suppress: R2016
+    where: $.definitions.TrackedResource.required
+    reason: location is a required property for our patch calls
+```
+### Tag: package-2020-02-preview
+
+These settings apply only when `--tag=package-2020-02-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2020-02-preview'
+input-file:
+  - Microsoft.Media/stable/2018-07-01/AccountFilters.json
+  - Microsoft.Media/stable/2018-07-01/Accounts.json
+  - Microsoft.Media/stable/2018-07-01/AssetsAndAssetFilters.json
+  - Microsoft.Media/stable/2018-07-01/ContentKeyPolicies.json
+  - Microsoft.Media/stable/2018-07-01/Encoding.json
+  - Microsoft.Media/preview/2020-02-01-preview/MediaGraphs.json
+  - Microsoft.Media/stable/2018-07-01/StreamingPoliciesAndStreamingLocators.json
+  - Microsoft.Media/stable/2018-07-01/streamingservice.json
+```
+
+### Tag: package-2019-09-preview
+
+These settings apply only when `--tag=package-2019-09-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2019-09-preview'
+input-file:
+  - Microsoft.Media/stable/2018-07-01/AccountFilters.json
+  - Microsoft.Media/stable/2018-07-01/Accounts.json
+  - Microsoft.Media/stable/2018-07-01/AssetsAndAssetFilters.json
+  - Microsoft.Media/stable/2018-07-01/ContentKeyPolicies.json
+  - Microsoft.Media/stable/2018-07-01/Encoding.json
+  - Microsoft.Media/preview/2019-09-01-preview/MediaGraphs.json
+  - Microsoft.Media/stable/2018-07-01/StreamingPoliciesAndStreamingLocators.json
+  - Microsoft.Media/stable/2018-07-01/streamingservice.json
 ```
 
 ### Tag: package-2019-05-preview
@@ -110,6 +162,7 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
+  - repo: azure-sdk-for-net
   - repo: azure-sdk-for-python
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
@@ -118,6 +171,9 @@ swagger-to-sdk:
   - repo: azure-sdk-for-ruby
     after_scripts:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_media_services']
+  - repo: azure-resource-manager-schemas
+    after_scripts:
+      - node sdkauto_afterscript.js mediaservices/resource-manager
 ```
 
 ## C#
@@ -191,6 +247,7 @@ batch:
   - tag: package-2018-03-preview
   - tag: package-2018-06-preview
   - tag: package-2018-07
+  - tag: package-2019-05-preview
 ```
 
 ### Tag: package-2015-10 and java
@@ -201,7 +258,7 @@ Please also specify the `--azure-libraries-for-java-folder=<path to the root dir
 ``` yaml $(tag) == 'package-2015-10' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.mediaservices.v2015_10_01
-  output-folder: $(azure-libraries-for-java-folder)/mediaservices/resource-manager/v2015_10_01
+  output-folder: $(azure-libraries-for-java-folder)/sdk/mediaservices/mgmt-v2015_10_01
 regenerate-manager: true
 generate-interface: true
 ```
@@ -214,7 +271,7 @@ Please also specify the `--azure-libraries-for-java-folder=<path to the root dir
 ``` yaml $(tag) == 'package-2018-03-preview' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.mediaservices.v2018_03_30_preview
-  output-folder: $(azure-libraries-for-java-folder)/mediaservices/resource-manager/v2018_03_30_preview
+  output-folder: $(azure-libraries-for-java-folder)/sdk/mediaservices/mgmt-v2018_03_30_preview
 regenerate-manager: true
 generate-interface: true
 ```
@@ -227,7 +284,7 @@ Please also specify the `--azure-libraries-for-java-folder=<path to the root dir
 ``` yaml $(tag) == 'package-2018-06-preview' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.mediaservices.v2018_06_01_preview
-  output-folder: $(azure-libraries-for-java-folder)/mediaservices/resource-manager/v2018_06_01_preview
+  output-folder: $(azure-libraries-for-java-folder)/sdk/mediaservices/mgmt-v2018_06_01_preview
 regenerate-manager: true
 generate-interface: true
 ```
@@ -240,7 +297,20 @@ Please also specify the `--azure-libraries-for-java-folder=<path to the root dir
 ``` yaml $(tag) == 'package-2018-07' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.mediaservices.v2018_07_01
-  output-folder: $(azure-libraries-for-java-folder)/mediaservices/resource-manager/v2018_07_01
+  output-folder: $(azure-libraries-for-java-folder)/sdk/mediaservices/mgmt-v2018_07_01
+regenerate-manager: true
+generate-interface: true
+```
+
+### Tag: package-2019-05-preview and java
+
+These settings apply only when `--tag=package-2019-05-preview --java` is specified on the command line.
+Please also specify the `--azure-libraries-for-java-folder=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-2019-05-preview' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.mediaservices.v2019_05_01_preview
+  output-folder: $(azure-libraries-for-java-folder)/sdk/mediaservices/mgmt-v2019_05_01_preview
 regenerate-manager: true
 generate-interface: true
 ```
@@ -258,3 +328,8 @@ directive:
     where: $.definitions.JobProperties
     reason: Output not required for job update
 ```
+
+## AzureResourceSchema
+
+See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
+

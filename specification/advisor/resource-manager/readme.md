@@ -4,10 +4,10 @@
 
 This is the AutoRest configuration file for Advisor.
 
-
-
 ---
+
 ## Getting Started
+
 To build the SDK for Advisor, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
 
 > `autorest`
@@ -15,21 +15,37 @@ To build the SDK for Advisor, simply [Install AutoRest](https://aka.ms/autorest/
 To see additional help and options, run:
 
 > `autorest --help`
+
 ---
 
 ## Configuration
 
-
-
 ### Basic Information
+
 These are the global settings for the Advisor API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2017-04
+tag: package-2020-01
 ```
 
+### Tag: package-2020-07-preview
 
+These settings apply only when `--tag=package-2020-07-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2020-07-preview'
+input-file:
+  - Microsoft.Advisor/preview/2020-07-01-preview/advisor.json
+```
+
+### Tag: package-2020-01
+
+These settings apply only when `--tag=package-2020-01` is specified on the command line.
+
+```yaml $(tag) == 'package-2020-01'
+input-file:
+  - Microsoft.Advisor/stable/2020-01-01/advisor.json
+```
 ### Tag: package-2017-04
 
 These settings apply only when `--tag=package-2017-04` is specified on the command line.
@@ -57,10 +73,9 @@ input-file:
 - Microsoft.Advisor/preview/2016-07-12-preview/advisor.json
 ```
 
-
 ---
-# Code Generation
 
+# Code Generation
 
 ## Swagger to SDK
 
@@ -69,13 +84,16 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
+  - repo: azure-sdk-for-net
   - repo: azure-sdk-for-python
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-node
+  - repo: azure-resource-manager-schemas
+    after_scripts:
+      - node sdkauto_afterscript.js advisor/resource-manager
 ```
-
 
 ## Python
 
@@ -94,11 +112,13 @@ python:
   package-version: 1.0.1
   clear-output-folder: true
 ```
+
 ``` yaml $(python) && $(python-mode) == 'update'
 python:
   no-namespace-folders: true
   output-folder: $(python-sdks-folder)/advisor/azure-mgmt-advisor/azure/mgmt/advisor
 ```
+
 ``` yaml $(python) && $(python-mode) == 'create'
 python:
   basic-setup-py: true
@@ -126,64 +146,9 @@ csharp:
 
 ## Java
 
-These settings apply only when `--java` is specified on the command line.
-Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-libraries-for-java clone>`.
+See configuration in [readme.java.md](./readme.java.md)
 
-``` yaml $(java)
-azure-arm: true
-fluent: true
-namespace: com.microsoft.azure.management.advisor
-license-header: MICROSOFT_MIT_NO_CODEGEN
-payload-flattening-threshold: 1
-output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-advisor
-```
+## AzureResourceSchema
 
-### Java multi-api
-
-``` yaml $(java) && $(multiapi)
-batch:
-  - tag: package-2017-03
-  - tag: package-2017-04
-  - tag: package-2016-07-preview
-```
-
-### Tag: package-2017-03 and java
-
-These settings apply only when `--tag=package-2017-03 --java` is specified on the command line.
-Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
-
-``` yaml $(tag) == 'package-2017-03' && $(java) && $(multiapi)
-java:
-  namespace: com.microsoft.azure.management.advisor.v2017_03_31
-  output-folder: $(azure-libraries-for-java-folder)/advisor/resource-manager/v2017_03_31
-regenerate-manager: true
-generate-interface: true
-```
-
-### Tag: package-2017-04 and java
-
-These settings apply only when `--tag=package-2017-04 --java` is specified on the command line.
-Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
-
-``` yaml $(tag) == 'package-2017-04' && $(java) && $(multiapi)
-java:
-  namespace: com.microsoft.azure.management.advisor.v2017_04_19
-  output-folder: $(azure-libraries-for-java-folder)/advisor/resource-manager/v2017_04_19
-regenerate-manager: true
-generate-interface: true
-```
-
-### Tag: package-2016-07-preview and java
-
-These settings apply only when `--tag=package-2016-07-preview --java` is specified on the command line.
-Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
-
-``` yaml $(tag) == 'package-2016-07-preview' && $(java) && $(multiapi)
-java:
-  namespace: com.microsoft.azure.management.advisor.v2016_07_12_preview
-  output-folder: $(azure-libraries-for-java-folder)/advisor/resource-manager/v2016_07_12_preview
-regenerate-manager: true
-generate-interface: true
-```
-
+See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
 

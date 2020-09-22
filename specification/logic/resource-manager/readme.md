@@ -25,7 +25,7 @@ These are the global settings for the Logic API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2018-07-preview
+tag: package-2019-05
 
 directive:
   - where:
@@ -39,9 +39,18 @@ directive:
 
 ```
 
+### Tag: package-2019-05
+
+These settings apply only when `--tag=package-2019-05` is specified on the command line.
+
+``` yaml $(tag) == 'package-2019-05'
+input-file:
+- Microsoft.Logic/stable/2019-05-01/logic.json
+```
+
 ### Tag: package-2018-07-preview
 
-These settings apply only when `--package-2018-07-preview` is specified on the command line.
+These settings apply only when `--tag=package-2018-07-preview` is specified on the command line.
 
 ``` yaml $(tag) == 'package-2018-07-preview'
 input-file:
@@ -116,14 +125,20 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
+  - repo: azure-sdk-for-net
   - repo: azure-sdk-for-python
   - repo: azure-sdk-for-java
+  - repo: azure-sdk-for-trenton
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-node
   - repo: azure-sdk-for-ruby
     after_scripts:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_logic']
+  - repo: azure-cli-extensions
+  - repo: azure-resource-manager-schemas
+    after_scripts:
+      - node sdkauto_afterscript.js logic/resource-manager
 ```
 
 ## C#
@@ -191,10 +206,22 @@ output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-logic
 
 ``` yaml $(java) && $(multiapi)
 batch:
+  - tag: package-2019-05
   - tag: package-2018-07-preview
   - tag: package-2016-06
 ```
+### Tag: package-2019-05 and java
 
+These settings apply only when `--tag=package-2019-05 --java` is specified on the command line.
+Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-2019-05' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.logic.v2019_05_01
+  output-folder: $(azure-libraries-for-java-folder)/sdk/logic/mgmt-v2019_05_01
+regenerate-manager: true
+generate-interface: true
+```
 ### Tag: package-2018-07-preview and java
 
 These settings apply only when `--tag=package-2018-07-preview --java` is specified on the command line.
@@ -203,7 +230,7 @@ Please also specify `--azure-libraries-for-java-folder=<path to the root directo
 ``` yaml $(tag) == 'package-2018-07-preview' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.logic.v2018_07_01_preview
-  output-folder: $(azure-libraries-for-java-folder)/logic/resource-manager/v2018_07_01_preview
+  output-folder: $(azure-libraries-for-java-folder)/sdk/logic/mgmt-v2018_07_01_preview
 regenerate-manager: true
 generate-interface: true
 ```
@@ -216,7 +243,26 @@ Please also specify `--azure-libraries-for-java-folder=<path to the root directo
 ``` yaml $(tag) == 'package-2016-06' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.logic.v2016_06_01
-  output-folder: $(azure-libraries-for-java-folder)/logic/resource-manager/v2016_06_01
+  output-folder: $(azure-libraries-for-java-folder)/sdk/logic/mgmt-v2016_06_01
 regenerate-manager: true
 generate-interface: true
+```
+
+## AzureResourceSchema
+
+See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
+
+## trenton
+
+These settings apply only when `--trenton` is specified on the command line.
+
+``` yaml $(trenton)
+trenton:
+    cli-name: logic
+    azure_arm: true
+    license_header: MICROSOFT_MIT_NO_VERSION
+    payload_flattening_threshold: 2
+    namespace: logic
+    package-name: logic
+    clear_output_folder: false
 ```

@@ -84,6 +84,7 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
+  - repo: azure-sdk-for-net
   - repo: azure-sdk-for-python
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
@@ -92,6 +93,9 @@ swagger-to-sdk:
   - repo: azure-sdk-for-ruby
     after_scripts:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_notification_hubs']
+  - repo: azure-resource-manager-schemas
+    after_scripts:
+      - node sdkauto_afterscript.js notificationhubs/resource-manager
 ```
 
 
@@ -172,7 +176,7 @@ Please also specify `--azure-libraries-for-java=<path to the root directory of y
 ``` yaml $(tag) == 'package-2014-09' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.notificationhubs.v2014_09_01
-  output-folder: $(azure-libraries-for-java-folder)/notificationhubs/resource-manager/v2014_09_01
+  output-folder: $(azure-libraries-for-java-folder)/sdk/notificationhubs/mgmt-v2014_09_01
 regenerate-manager: true
 generate-interface: true
 ```
@@ -185,7 +189,7 @@ Please also specify `--azure-libraries-for-java=<path to the root directory of y
 ``` yaml $(tag) == 'package-2017-04' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.notificationhubs.v2017_04_01
-  output-folder: $(azure-libraries-for-java-folder)/notificationhubs/resource-manager/v2017_04_01
+  output-folder: $(azure-libraries-for-java-folder)/sdk/notificationhubs/mgmt-v2017_04_01
 regenerate-manager: true
 generate-interface: true
 ```
@@ -198,9 +202,14 @@ Please also specify `--azure-libraries-for-java=<path to the root directory of y
 ``` yaml $(tag) == 'package-2016-03' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.notificationhubs.v2016_03_01
-  output-folder: $(azure-libraries-for-java-folder)/notificationhubs/resource-manager/v2016_03_01
+  output-folder: $(azure-libraries-for-java-folder)/sdk/notificationhubs/mgmt-v2016_03_01
 regenerate-manager: true
 generate-interface: true
 ```
 
+
+
+## AzureResourceSchema
+
+See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
 

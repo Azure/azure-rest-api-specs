@@ -53,9 +53,15 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
+  - repo: azure-sdk-for-net
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-node
+  - repo: azure-sdk-for-python
+  - repo: azure-cli-extensions
+  - repo: azure-resource-manager-schemas
+    after_scripts:
+      - node sdkauto_afterscript.js operationsmanagement/resource-manager
 ```
 
 
@@ -71,13 +77,17 @@ csharp:
   namespace: Microsoft.Azure.Management.OperationsManagement
   payload-flattening-threshold: 1
   license-header: MICROSOFT_MIT_NO_VERSION
-  output-folder: $(csharp-sdks-folder)/OperationsManagement/Management.OperationsManagement/Generated
+  output-folder: $(csharp-sdks-folder)/operationsmanagement/Microsoft.Azure.Management.OperationsManagement/src/Generated
   clear-output-folder: true
 ```
 
 ## Go
 
 See configuration in [readme.go.md](./readme.go.md)
+
+## Python
+
+See configuration in [readme.python.md](./readme.python.md)
 
 ## Java
 
@@ -108,9 +118,14 @@ Please also specify `--azure-libraries-for-java=<path to the root directory of y
 ``` yaml $(tag) == 'package-2015-11-preview' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.operationsmanagement.v2015_11_01_preview
-  output-folder: $(azure-libraries-for-java-folder)/operationsmanagement/resource-manager/v2015_11_01_preview
+  output-folder: $(azure-libraries-for-java-folder)/sdk/operationsmanagement/mgmt-v2015_11_01_preview
 regenerate-manager: true
 generate-interface: true
 ```
 
+
+
+## AzureResourceSchema
+
+See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
 

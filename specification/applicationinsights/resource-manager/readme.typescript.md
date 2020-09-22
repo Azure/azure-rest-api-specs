@@ -8,5 +8,6 @@ typescript:
   azure-arm: true
   package-name: "@azure/arm-appinsights"
   output-folder: "$(typescript-sdks-folder)/sdk/applicationinsights/arm-appinsights"
+  clear-output-folder: true
   generate-metadata: true
 ```

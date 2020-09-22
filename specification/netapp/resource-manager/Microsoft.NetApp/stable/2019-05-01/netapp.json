@@ -1656,10 +1656,10 @@
         },
         "protocolTypes": {
           "title": "protocolTypes",
-	  "description": "Set of protocol types",
-	  "type": "array",
+          "description": "Set of protocol types",
+          "type": "array",
           "items": {
-	    "type": "string"
+            "type": "string"
           },
           "example": "['NFSv3', 'NFSv4']"
         },
@@ -1693,9 +1693,10 @@
         },
         "mountTargets": {
           "title": "mountTargets",
-	  "description": "List of mount targets",
+          "type": "array",
+          "description": "List of mount targets",
           "items": {
-             "$ref": "#/definitions/mountTargetList"
+            "$ref": "#/definitions/mountTargetProperties"
           }
         }
       }
@@ -1726,7 +1727,7 @@
         },
         "nfsv4": {
           "type": "boolean",
-          "description": "Allows NFSv4 protocol"
+          "description": "Deprecated: Will use the NFSv4.1 protocol, please use swagger version 2019-07-01 or later"
         },
         "allowedClients": {
           "type": "string",

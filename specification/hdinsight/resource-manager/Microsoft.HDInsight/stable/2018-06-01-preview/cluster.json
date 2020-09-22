@@ -56,6 +56,24 @@
           },
           "Create Hadoop cluster with Azure Data Lake Storage Gen 2": {
             "$ref": "./examples/CreateLinuxHadoopAdlsGen2.json"
+          },
+          "Create HDInsight cluster with Autoscale configuration": {
+            "$ref": "./examples/CreateHDInsightClusterWithAutoscaleConfig.json"
+          },
+          "Create Kafka cluster with Kafka Rest Proxy": {
+            "$ref": "./examples/CreateKafkaClusterWithKafkaRestProxy.json"
+          },
+          "Create cluster with TLS 1.2": {
+            "$ref": "./examples/CreateHDInsightClusterWithTLS12.json"
+          },
+          "Create cluster with custom network settings": {
+            "$ref": "./examples/CreateHDInsightClusterWithCustomNetworkSettings.json"
+          },
+          "Create cluster with encryption in transit": {
+            "$ref": "./examples/CreateHDInsightClusterWithEncryptionInTransit.json"
+          },
+          "Create cluster with encryption at host": {
+            "$ref": "./examples/CreateHDInsightClusterWithEncryptionAtHost.json"
           }
         },
         "parameters": [
@@ -339,6 +357,78 @@
         "x-ms-long-running-operation": true
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HDInsight/clusters/{clusterName}/roles/{roleName}/autoscale": {
+      "post": {
+        "tags": [
+          "Clusters"
+        ],
+        "operationId": "Clusters_UpdateAutoScaleConfiguration",
+        "description": "Updates the Autoscale Configuration for HDInsight cluster.",
+        "x-ms-examples": {
+          "Enable or Update Autoscale with the load based configuration for HDInsight cluster": {
+            "$ref": "./examples/EnableOrUpdateAutoScaleWithLoadBasedConfiguration.json"
+          },
+          "Enable or Update Autoscale with the schedule based configuration for HDInsight cluster": {
+            "$ref": "./examples/EnableOrUpdateAutoScaleWithScheduleBasedConfiguration.json"
+          },
+          "Disable Autoscale for the HDInsight cluster": {
+            "$ref": "./examples/DisableClusterAutoScale.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterNameParameter"
+          },
+          {
+            "name": "roleName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The constant value for the roleName",
+            "enum": [
+              "workernode"
+            ],
+            "x-ms-enum": {
+              "name": "RoleName",
+              "modelAsString": true
+            }
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AutoscaleConfigurationUpdateParameter"
+            },
+            "description": "The parameters for the update autoscale configuration operation."
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./operations.json#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "OK response definition."
+          },
+          "202": {
+            "description": "Accepted response definition."
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.HDInsight/clusters": {
       "get": {
         "tags": [
@@ -550,6 +640,28 @@
         }
       }
     },
+    "ClientGroupInfo": {
+      "description": "The information of AAD security group.",
+      "properties": {
+        "groupName": {
+          "type": "string",
+          "description": "The AAD security group name."
+        },
+        "groupId": {
+          "type": "string",
+          "description": "The AAD security group id."
+        }
+      }
+    },
+    "KafkaRestProperties": {
+      "description": "The kafka rest proxy configuration which contains AAD security group information.",
+      "properties": {
+        "clientGroupInfo": {
+          "$ref": "#/definitions/ClientGroupInfo",
+          "description": "The information of AAD security group."
+        }
+      }
+    },
     "SecurityProfile": {
       "description": "The security profile which contains Ssh public key for the HDInsight cluster.",
       "properties": {
@@ -604,6 +716,107 @@
           "description": "User assigned identity that has permissions to read and create cluster-related artifacts in the user's AADDS."
         }
       }
+    },
+    "AutoscaleTimeAndCapacity": {
+      "properties": {
+        "time": {
+          "type": "string",
+          "description": "24-hour time in the form xx:xx"
+        },
+        "minInstanceCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The minimum instance count of the cluster"
+        },
+        "maxInstanceCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The maximum instance count of the cluster"
+        }
+      },
+      "description": "Time and capacity request parameters"
+    },
+    "AutoscaleSchedule": {
+      "properties": {
+        "days": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "Monday",
+              "Tuesday",
+              "Wednesday",
+              "Thursday",
+              "Friday",
+              "Saturday",
+              "Sunday"
+            ],
+            "x-ms-enum": {
+              "name": "DaysOfWeek",
+              "modelAsString": false
+            }
+          },
+          "description": "Days of the week for a schedule-based autoscale rule"
+        },
+        "timeAndCapacity": {
+          "$ref": "#/definitions/AutoscaleTimeAndCapacity",
+          "description": "Time and capacity for a schedule-based autoscale rule"
+        }
+      },
+      "description": "Parameters for a schedule-based autoscale rule, consisting of an array of days + a time and capacity"
+    },
+    "AutoscaleCapacity": {
+      "properties": {
+        "minInstanceCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The minimum instance count of the cluster"
+        },
+        "maxInstanceCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The maximum instance count of the cluster"
+        }
+      },
+      "description": "The load-based autoscale request parameters"
+    },
+    "AutoscaleRecurrence": {
+      "properties": {
+        "timeZone": {
+          "type": "string",
+          "description": "The time zone for the autoscale schedule times"
+        },
+        "schedule": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AutoscaleSchedule"
+          },
+          "description": "Array of schedule-based autoscale rules"
+        }
+      },
+      "description": "Schedule-based autoscale request parameters"
+    },
+    "Autoscale": {
+      "properties": {
+        "capacity": {
+          "$ref": "#/definitions/AutoscaleCapacity",
+          "description": "Parameters for load-based autoscale"
+        },
+        "recurrence": {
+          "$ref": "#/definitions/AutoscaleRecurrence",
+          "description": "Parameters for schedule-based autoscale"
+        }
+      },
+      "description": "The autoscale request parameters"
+    },
+    "AutoscaleConfigurationUpdateParameter": {
+      "properties": {
+        "autoscale": {
+          "$ref": "#/definitions/Autoscale",
+          "description": "The autoscale configuration."
+        }
+      },
+      "description": "The autoscale configuration update parameter."
     },
     "HardwareProfile": {
       "properties": {
@@ -710,6 +923,11 @@
           "format": "int32",
           "description": "The instance count of the cluster."
         },
+        "autoscale": {
+          "$ref": "#/definitions/Autoscale",
+          "x-ms-client-name": "autoscaleConfiguration",
+          "description": "The autoscale configurations."
+        },
         "hardwareProfile": {
           "$ref": "#/definitions/HardwareProfile",
           "description": "The hardware profile."
@@ -767,7 +985,7 @@
         },
         "fileSystem": {
           "type": "string",
-          "description": "The filesystem, only to be specified for Azure Data Lake Storage type Gen 2."
+          "description": "The filesystem, only to be specified for Azure Data Lake Storage Gen 2."
         },
         "key": {
           "type": "string",
@@ -795,6 +1013,35 @@
         }
       },
       "description": "The storage profile."
+    },
+    "NetworkSettings": {
+      "properties": {
+        "publicNetworkAccess": {
+          "type": "string",
+          "description": "Specifies whether public network access is enabled for inbound and outbound, or outbound only.",
+          "enum": [
+            "InboundAndOutbound",
+            "OutboundOnly"
+          ],
+          "x-ms-enum": {
+            "name": "PublicNetworkAccess",
+            "modelAsString": true
+          }
+        },
+        "outboundOnlyPublicNetworkAccessType": {
+          "type": "string",
+          "description": "The mechanism through which the cluster will have outbound access to the public network.",
+          "enum": [
+            "PublicLoadBalancer",
+            "UDR"
+          ],
+          "x-ms-enum": {
+            "name": "OutboundOnlyPublicNetworkAccessType",
+            "modelAsString": true
+          }
+        }
+      },
+      "description": "The network settings."
     },
     "ClusterCreateProperties": {
       "description": "The cluster create parameters.",
@@ -831,6 +1078,10 @@
           "$ref": "#/definitions/ClusterDefinition",
           "description": "The cluster definition."
         },
+        "kafkaRestProperties": {
+          "$ref": "#/definitions/KafkaRestProperties",
+          "description": "The cluster kafka rest proxy configuration."
+        },
         "securityProfile": {
           "$ref": "#/definitions/SecurityProfile",
           "description": "The security profile."
@@ -846,6 +1097,18 @@
         "diskEncryptionProperties": {
           "$ref": "#/definitions/DiskEncryptionProperties",
           "description": "The disk encryption properties."
+        },
+        "encryptionInTransitProperties": {
+          "$ref": "#/definitions/EncryptionInTransitProperties",
+          "description": "The encryption-in-transit properties."
+        },
+        "minSupportedTlsVersion": {
+          "type": "string",
+          "description": "The minimal supported tls version."
+        },
+        "networkSettings": {
+          "$ref": "#/definitions/NetworkSettings",
+          "description": "The network settings."
         }
       }
     },
@@ -966,6 +1229,10 @@
           "$ref": "#/definitions/ClusterDefinition",
           "description": "The cluster definition."
         },
+        "kafkaRestProperties": {
+          "$ref": "#/definitions/KafkaRestProperties",
+          "description": "The cluster kafka rest proxy configuration."
+        },
         "securityProfile": {
           "$ref": "#/definitions/SecurityProfile",
           "description": "The security profile."
@@ -1018,6 +1285,18 @@
         "diskEncryptionProperties": {
           "$ref": "#/definitions/DiskEncryptionProperties",
           "description": "The disk encryption properties."
+        },
+        "encryptionInTransitProperties": {
+          "$ref": "#/definitions/EncryptionInTransitProperties",
+          "description": "The encryption-in-transit properties."
+        },
+        "minSupportedTlsVersion": {
+          "type": "string",
+          "description": "The minimal supported tls version."
+        },
+        "networkSettings": {
+          "$ref": "#/definitions/NetworkSettings",
+          "description": "The network settings."
         }
       },
       "required": [
@@ -1323,6 +1602,21 @@
         "msiResourceId": {
           "type": "string",
           "description": "Resource ID of Managed Identity that is used to access the key vault."
+        },
+        "encryptionAtHost": {
+          "type": "boolean",
+          "default": false,
+          "description": "Indicates whether or not resource disk encryption is enabled."
+        }
+      }
+    },
+    "EncryptionInTransitProperties": {
+      "description": "The encryption-in-transit properties.",
+      "properties": {
+        "isEncryptionInTransitEnabled": {
+          "type": "boolean",
+          "default": false,
+          "description": "Indicates whether or not inter cluster node communication is encrypted in transit."
         }
       }
     },

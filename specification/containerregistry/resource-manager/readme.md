@@ -4,10 +4,10 @@
 
 This is the AutoRest configuration file for ContainerRegistry.
 
-
-
 ---
+
 ## Getting Started
+
 To build the SDK for ContainerRegistry, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
 
 > `autorest`
@@ -15,18 +15,49 @@ To build the SDK for ContainerRegistry, simply [Install AutoRest](https://aka.ms
 To see additional help and options, run:
 
 > `autorest --help`
+
 ---
 
 ## Configuration
 
-
-
 ### Basic Information
+
 These are the global settings for the ContainerRegistry API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2019-05
+tag: package-2019-12-preview
+```
+
+
+### Tag: package-2019-12-preview
+
+These settings apply only when `--tag=package-2019-12-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2019-12-preview'
+input-file:
+  - Microsoft.ContainerRegistry/preview/2019-12-01-preview/containerregistry.json
+  - Microsoft.ContainerRegistry/preview/2019-06-01-preview/containerregistry_build.json
+  - Microsoft.ContainerRegistry/preview/2019-05-01-preview/containerregistry_scopemap.json
+```
+### Tag: package-2019-06-preview
+
+These settings apply only when `--tag=package-2019-06-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2019-06-preview'
+input-file:
+- Microsoft.ContainerRegistry/stable/2019-05-01/containerregistry.json
+- Microsoft.ContainerRegistry/preview/2019-06-01-preview/containerregistry_build.json
+- Microsoft.ContainerRegistry/preview/2019-05-01-preview/containerregistry_scopemap.json
+```
+
+### Tag: package-2019-06-preview-only
+
+These settings apply only when `--tag=package-2019-06-preview-only` is specified on the command line.
+
+``` yaml $(tag) == 'package-2019-06-preview-only'
+input-file:
+- Microsoft.ContainerRegistry/preview/2019-06-01-preview/containerregistry_build.json
 ```
 
 ### Tag: package-2019-05
@@ -124,10 +155,9 @@ input-file:
 - Microsoft.ContainerRegistry/preview/2016-06-27-preview/containerregistry.json
 ```
 
-
 ---
-# Code Generation
 
+# Code Generation
 
 ## Swagger to SDK
 
@@ -136,6 +166,7 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
+  - repo: azure-sdk-for-net
   - repo: azure-sdk-for-python
     autorest_options:
       use: "@microsoft.azure/autorest.python@4.0.70"
@@ -149,8 +180,10 @@ swagger-to-sdk:
   - repo: azure-sdk-for-ruby
     after_scripts:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_container_registry']
+  - repo: azure-resource-manager-schemas
+    after_scripts:
+      - node sdkauto_afterscript.js containerregistry/resource-manager
 ```
-
 
 ## C#
 
@@ -178,3 +211,8 @@ See configuration in [readme.go.md](./readme.go.md)
 ## Java
 
 See configuration in [readme.java.md](./readme.java.md)
+
+## AzureResourceSchema
+
+See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
+

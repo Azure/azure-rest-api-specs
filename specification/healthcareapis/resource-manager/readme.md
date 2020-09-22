@@ -4,10 +4,10 @@
 
 This is the AutoRest configuration file for HealthcareApis.
 
-
-
 ---
+
 ## Getting Started
+
 To build the SDK for HealthcareApis, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
 
 > `autorest`
@@ -15,35 +15,51 @@ To build the SDK for HealthcareApis, simply [Install AutoRest](https://aka.ms/au
 To see additional help and options, run:
 
 > `autorest --help`
+
 ---
 
 ## Configuration
 
-
-
 ### Basic Information
-These are the global settings for the HANA on Azure API.
+
+These are the global settings for HealthcareApis service.
 
 ``` yaml
 title: HealthcareApisManagementClient
 description: Azure Healthcare APIs Client
 openapi-type: arm
-tag: package-2018-08
+tag: package-2020-03
 azure-arm: true
 ```
 
 
+### Tag: package-2020-03
+
+These settings apply only when `--tag=package-2020-03` is specified on the command line.
+
+```yaml $(tag) == 'package-2020-03'
+input-file:
+  - Microsoft.HealthcareApis/stable/2020-03-15/healthcare-apis.json
+```
+### Tag: package-2019-09
+
+These settings apply only when `--tag=package-2019-09` is specified on the command line.
+
+``` yaml $(tag) == 'package-2019-09'
+input-file:
+- Microsoft.HealthcareApis/stable/2019-09-16/healthcare-apis.json
+```
+
 ### Tag: package-2018-08-preview
 
-These settings apply only when `--tag=package-2018-08` is specified on the command line.
+These settings apply only when `--tag=package-2018-08-preview` is specified on the command line.
 
-``` yaml $(tag) == 'package-2018-08'
+``` yaml $(tag) == 'package-2018-08-preview'
 input-file:
 - Microsoft.HealthcareApis/preview/2018-08-20-preview/healthcare-apis.json
 ```
 
 # Code Generation
-
 
 ## Swagger to SDK
 
@@ -52,39 +68,38 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
+  - repo: azure-sdk-for-net
   - repo: azure-sdk-for-python
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-js
+  - repo: azure-resource-manager-schemas
+    after_scripts:
+      - node sdkauto_afterscript.js healthcareapis/resource-manager
+```
+
+## C#
+
+These settings apply only when `--csharp` is specified on the command line.
+Please also specify `--csharp-sdks-folder=<path to "SDKs" directory of your azure-sdk-for-net clone>`.
+
+``` yaml $(csharp)
+csharp:
+  # last generated with AutoRest.2.0.4144
+  azure-arm: true
+  license-header: MICROSOFT_MIT_NO_VERSION
+  namespace: Microsoft.Azure.Management.HealthcareApis
+  output-folder: $(csharp-sdks-folder)/healthcareapis/Microsoft.Azure.Management.HealthcareApis/src/Generated
+  clear-output-folder: true
 ```
 
 ## Python
 
-These settings apply only when `--python` is specified on the command line.
-Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
-Use `--python-mode=update` if you already have a setup.py and just want to update the code itself.
+See configuration in [readme.python.md](./readme.python.md)
 
-``` yaml $(python)
-python-mode: create
-python:
-  azure-arm: true
-  license-header: MICROSOFT_MIT_NO_VERSION
-  payload-flattening-threshold: 2
-  namespace: azure.mgmt.healthcareapis
-  package-name: azure-mgmt-healthcareapis
-  clear-output-folder: true
-  package-version: 0.1.0
-```
-``` yaml $(python) && $(python-mode) == 'update'
-python:
-  no-namespace-folders: true
-  output-folder: $(python-sdks-folder)/azure-mgmt-healthcareapis/azure/mgmt/healthcareapis
-```
-``` yaml $(python) && $(python-mode) == 'create'
-python:
-  basic-setup-py: true
-  output-folder: $(python-sdks-folder)/azure-mgmt-healthcareapis
-```
+## CLI
+
+See configuration in [readme.cli.md](./readme.cli.md)
 
 ## Go
 
@@ -108,20 +123,39 @@ output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-healthcareapis
 
 ``` yaml $(java) && $(multiapi)
 batch:
-  - tag: package-2018-08
+  - tag: package-2019-09
+  - tag: package-2018-08-preview
 ```
 
-### Tag: package-2018-08 and java
+### Tag: package-2019-09 and java
 
-These settings apply only when `--tag=package-2018-08 --java` is specified on the command line.
+These settings apply only when `--tag=package-2019-09 --java` is specified on the command line.
 Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
 
-``` yaml $(tag) == 'package-2018-08' && $(java) && $(multiapi)
+``` yaml $(tag) == 'package-2019-09' && $(java) && $(multiapi)
 java:
-  namespace: com.microsoft.azure.management.healthcareapis.v2018_08_20_preview
-  output-folder: $(azure-libraries-for-java-folder)/healthcareapis/resource-manager/v2018_08_20_preview
+  namespace: com.microsoft.azure.management.healthcareapis.v2019-09-16
+  output-folder: $(azure-libraries-for-java-folder)/sdk/healthcareapis/mgmt-v2019-09-16
 regenerate-manager: true
 generate-interface: true
 ```
 
+### Tag: package-2018-08-preview and java
+
+These settings apply only when `--tag=package-2018-08-preview --java` is specified on the command line.
+Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-2018-08-preview' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.healthcareapis.v2018_08_20_preview
+  output-folder: $(azure-libraries-for-java-folder)/sdk/healthcareapis/mgmt-v2018_08_20_preview
+regenerate-manager: true
+generate-interface: true
+```
+
+
+
+## AzureResourceSchema
+
+See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
 

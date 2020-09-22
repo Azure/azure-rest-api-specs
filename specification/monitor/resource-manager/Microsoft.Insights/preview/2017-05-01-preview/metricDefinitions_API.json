@@ -65,7 +65,8 @@
             },
             "examples": {
               "application/json": {
-                "value": [{
+                "value": [
+                  {
                     "id": "/subscriptions/07c0b09d-9f69-4e6e-8d05-f59f67299cb2/resourceGroups/Rac46PostSwapRG/providers/Microsoft.Web/sites/alertruleTest/providers/microsoft.insights/metricdefinitions/CpuTime",
                     "resourceId": "/subscriptions/07c0b09d-9f69-4e6e-8d05-f59f67299cb2/resourceGroups/Rac46PostSwapRG/providers/Microsoft.Web/sites/alertruleTest",
                     "name": {
@@ -75,20 +76,24 @@
                     "isDimensionRequired": false,
                     "unit": "Seconds",
                     "primaryAggregationType": "Total",
-                    "metricAvailabilities": [{
+                    "metricAvailabilities": [
+                      {
                         "timeGrain": "PT1M",
                         "retention": "P30D"
-                      }, {
+                      },
+                      {
                         "timeGrain": "PT1H",
                         "retention": "P30D"
                       }
                     ],
-                    "dimensions": [{
+                    "dimensions": [
+                      {
                         "value": "Instance",
                         "localizedValue": "Instance"
                       }
                     ]
-                  }, {
+                  },
+                  {
                     "id": "/subscriptions/07c0b09d-9f69-4e6e-8d05-f59f67299cb2/resourceGroups/Rac46PostSwapRG/providers/Microsoft.Web/sites/alertruleTest/providers/microsoft.insights/metricdefinitions/MemoryWorkingSet",
                     "resourceId": "/subscriptions/07c0b09d-9f69-4e6e-8d05-f59f67299cb2/resourceGroups/Rac46PostSwapRG/providers/Microsoft.Web/sites/alertruleTest",
                     "name": {
@@ -98,20 +103,24 @@
                     "isDimensionRequired": false,
                     "unit": "Bytes",
                     "primaryAggregationType": "Average",
-                    "metricAvailabilities": [{
+                    "metricAvailabilities": [
+                      {
                         "timeGrain": "PT1M",
                         "retention": "P30D"
-                      }, {
+                      },
+                      {
                         "timeGrain": "PT1H",
                         "retention": "P30D"
                       }
                     ],
-                    "dimensions": [{
+                    "dimensions": [
+                      {
                         "value": "Instance",
                         "localizedValue": "Instance"
                       }
                     ]
-                  }, {
+                  },
+                  {
                     "id": "/subscriptions/07c0b09d-9f69-4e6e-8d05-f59f67299cb2/resourceGroups/Rac46PostSwapRG/providers/Microsoft.Web/sites/alertruleTest/providers/microsoft.insights/metricdefinitions/AverageMemoryWorkingSet",
                     "resourceId": "/subscriptions/07c0b09d-9f69-4e6e-8d05-f59f67299cb2/resourceGroups/Rac46PostSwapRG/providers/Microsoft.Web/sites/alertruleTest",
                     "name": {
@@ -121,22 +130,25 @@
                     "isDimensionRequired": false,
                     "unit": "Bytes",
                     "primaryAggregationType": "Average",
-                    "metricAvailabilities": [{
+                    "metricAvailabilities": [
+                      {
                         "timeGrain": "PT1M",
                         "retention": "P30D"
-                      }, {
+                      },
+                      {
                         "timeGrain": "PT1H",
                         "retention": "P30D"
                       }
                     ],
-                    "dimensions": [{
+                    "dimensions": [
+                      {
                         "value": "Instance",
                         "localizedValue": "Instance"
                       }
                     ]
                   }
                 ]
-              } 
+              }
             }
           }
         },
@@ -144,14 +156,18 @@
           "nextLinkName": null
         },
         "x-ms-examples": {
-          "Get Metric Definitions without filter": { "$ref": "./examples/GetMetricDefinitions.json" }
+          "Get Metric Definitions without filter": {
+            "$ref": "./examples/GetMetricDefinitions.json"
+          }
         }
       }
     }
   },
   "definitions": {
     "LocalizableString": {
-      "required": [ "value" ],
+      "required": [
+        "value"
+      ],
       "properties": {
         "value": {
           "type": "string",
@@ -263,7 +279,9 @@
           "description": "the values for the metric definitions."
         }
       },
-      "required": ["value"],
+      "required": [
+        "value"
+      ],
       "description": "Represents collection of metric definitions."
     },
     "ErrorResponse": {

@@ -11,7 +11,7 @@
           {
             "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.HealthcareApis/services/dddb8dcb-effb-4290-bb47-ce1e8440c729",
             "name": "service1",
-            "location": "westus",
+            "location": "eastus",
             "type": "Microsoft.HealthcareApis/services",
             "kind": "fhir",
             "tags": {},
@@ -28,6 +28,29 @@
               ],
               "cosmosDbConfiguration": {
                 "offerThroughput": 1000
+              },
+              "authenticationConfiguration": {
+                "authority": "https://login.microsoftonline.com/abfde7b2-df0f-47e6-aabf-2462b07508dc",
+                "audience": "https://azurehealthcareapis.com",
+                "smartProxyEnabled": true
+              },
+              "corsConfiguration": {
+                "origins": [
+                  "*"
+                ],
+                "headers": [
+                  "*"
+                ],
+                "methods": [
+                  "DELETE",
+                  "GET",
+                  "OPTIONS",
+                  "PATCH",
+                  "POST",
+                  "PUT"
+                ],
+                "maxAge": 1440,
+                "allowCredentials": false
               }
             }
           }

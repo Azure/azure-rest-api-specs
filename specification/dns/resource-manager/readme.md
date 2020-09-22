@@ -160,6 +160,9 @@ swagger-to-sdk:
   - repo: azure-sdk-for-ruby
     after_scripts:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_dns']
+  - repo: azure-resource-manager-schemas
+    after_scripts:
+      - node sdkauto_afterscript.js dns/resource-manager
 ```
 
 ## Go
@@ -196,7 +199,7 @@ Please also specify `--azure-libraries-for-java-folder=<path to the root directo
 ``` yaml $(tag) == 'package-2017-10' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.dns.v2017_10_01
-  output-folder: $(azure-libraries-for-java-folder)/dns/resource-manager/v2017_10_01
+  output-folder: $(azure-libraries-for-java-folder)/sdk/dns/mgmt-v2017_10_01
 regenerate-manager: true
 generate-interface: true
 ```
@@ -209,7 +212,7 @@ Please also specify `--azure-libraries-for-java-folder=<path to the root directo
 ``` yaml $(tag) == 'package-2016-04' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.dns.v2016_04_01
-  output-folder: $(azure-libraries-for-java-folder)/dns/resource-manager/v2016_04_01
+  output-folder: $(azure-libraries-for-java-folder)/sdk/dns/mgmt-v2016_04_01
 regenerate-manager: true
 generate-interface: true
 ```
@@ -223,3 +226,8 @@ Creating this tag to pick proper resources from the hybrid profile.
 input-file:
 - Microsoft.Network/stable/2016-04-01/dns.json
 ```
+
+## AzureResourceSchema
+
+See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
+

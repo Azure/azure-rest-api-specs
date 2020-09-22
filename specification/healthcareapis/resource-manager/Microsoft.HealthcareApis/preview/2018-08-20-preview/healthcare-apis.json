@@ -2,8 +2,8 @@
   "swagger": "2.0",
   "info": {
     "version": "2018-08-20-preview",
-    "title": "HealthcareClient",
-    "description": "Use this API to manage Microsoft Healthcare services in your Azure subscription."
+    "title": "HealthcareApisClient",
+    "description": "Use this API to manage Microsoft HealthcareApis services in your Azure subscription."
   },
   "host": "management.azure.com",
   "schemes": [
@@ -354,7 +354,7 @@
         "description": "Check if a service instance name is available.",
         "operationId": "Services_CheckNameAvailability",
         "x-ms-examples": {
-          "ServiceList": {
+          "CheckNameAvailabilityPost": {
             "$ref": "./examples/CheckNameAvailabilityPost.json"
           }
         },
@@ -392,52 +392,6 @@
         "deprecated": false
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HealthcareApis/moveResources": {
-      "post": {
-        "tags": [
-          "Proxy"
-        ],
-        "description": "Moves resources to another subscription and/or resource group.",
-        "operationId": "Services_MoveResources",
-        "x-ms-examples": {
-          "ServiceList": {
-            "$ref": "./examples/MoveResourcesPost.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "#/parameters/api-version"
-          },
-          {
-            "$ref": "#/parameters/subscriptionId"
-          },
-          {
-            "$ref": "#/parameters/resourceGroupName"
-          },
-          {
-            "name": "moveResourcesInputs",
-            "in": "body",
-            "description": "Set the move resource structure to the name of the service instance to check.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/MoveResourcesParameters"
-            }
-          }
-        ],
-        "responses": {
-          "202": {
-            "description": "Accepted - Move request accepted; the operation will complete asynchronously."
-          },
-          "default": {
-            "description": "DefaultErrorResponse",
-            "schema": {
-              "$ref": "#/definitions/ErrorDetails"
-            }
-          }
-        },
-        "deprecated": false
-      }
-    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.HealthcareApis/locations/{locationName}/operationresults/{operationResultId}": {
       "get": {
         "tags": [
@@ -445,55 +399,6 @@
         ],
         "description": "Get the operation result for a long running operation.",
         "operationId": "OperationResults_Get",
-        "x-ms-examples": {
-          "OperationResultsGet": {
-            "$ref": "./examples/OperationResultsGet.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "#/parameters/api-version"
-          },
-          {
-            "$ref": "#/parameters/subscriptionId"
-          },
-          {
-            "$ref": "#/parameters/locationName"
-          },
-          {
-            "$ref": "#/parameters/operationResultId"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The body contains all of the properties of the operation result.",
-            "schema": {
-              "$ref": "#/definitions/OperationResultsDescription"
-            }
-          },
-          "404": {
-            "description": "No operation result was found matching operationResultId.",
-            "schema": {
-              "$ref": "#/definitions/ErrorDetails"
-            }
-          },
-          "default": {
-            "description": "Default error response",
-            "schema": {
-              "$ref": "#/definitions/ErrorDetails"
-            }
-          }
-        },
-        "deprecated": false
-      }
-    },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.HealthcareApis/locations/{locationName}/moveResourcesStatus/{operationResultId}": {
-      "get": {
-        "tags": [
-          "Resource"
-        ],
-        "description": "Get the operation result for a long running move operation.",
-        "operationId": "MoveResourcesStatus_Get",
         "x-ms-examples": {
           "OperationResultsGet": {
             "$ref": "./examples/OperationResultsGet.json"
@@ -569,16 +474,20 @@
         "cosmosDbConfiguration": {
           "$ref": "#/definitions/ServiceCosmosDbConfigurationInfo",
           "description": "The settings for the Cosmos DB database backing the service."
+        },
+        "authenticationConfiguration": {
+          "$ref": "#/definitions/ServiceAuthenticationConfigurationInfo",
+          "description": "The authentication configuration for the service instance."
+        },
+        "corsConfiguration": {
+          "$ref": "#/definitions/ServiceCorsConfigurationInfo",
+          "description": "The settings for the CORS configuration of the service instance."
         }
-      },
-      "required": [
-        "accessPolicies"
-      ]
+      }
     },
     "ServiceAccessPoliciesInfo": {
       "description": "The access policies of the service instance.",
       "type": "array",
-      "minItems": 1,
       "items": {
         "$ref": "#/definitions/ServiceAccessPolicyEntry"
       }
@@ -603,9 +512,87 @@
         "offerThroughput": {
           "type": "integer",
           "description": "The provisioned throughput for the backing database.",
+          "readOnly": false,
+          "minimum": 400,
+          "maximum": 10000
+        }
+      }
+    },
+    "ServiceAuthenticationConfigurationInfo": {
+      "description": "Authentication configuration information",
+      "type": "object",
+      "properties": {
+        "authority": {
+          "type": "string",
+          "description": "The authority url for the service",
+          "readOnly": false
+        },
+        "audience": {
+          "type": "string",
+          "description": "The audience url for the service",
+          "readOnly": false
+        },
+        "smartProxyEnabled": {
+          "type": "boolean",
+          "description": "If the SMART on FHIR proxy is enabled",
           "readOnly": false
         }
       }
+    },
+    "ServiceCorsConfigurationInfo": {
+      "description": "The settings for the CORS configuration of the service instance.",
+      "type": "object",
+      "properties": {
+        "origins": {
+          "type": "array",
+          "description": "The origins to be allowed via CORS.",
+          "readOnly": false,
+          "items": {
+            "$ref": "#/definitions/ServiceCorsConfigurationOriginEntry"
+          }
+        },
+        "headers": {
+          "type": "array",
+          "description": "The headers to be allowed via CORS.",
+          "readOnly": false,
+          "items": {
+            "$ref": "#/definitions/ServiceCorsConfigurationHeaderEntry"
+          }
+        },
+        "methods": {
+          "type": "array",
+          "description": "The methods to be allowed via CORS.",
+          "readOnly": false,
+          "items": {
+            "$ref": "#/definitions/ServiceCorsConfigurationMethodEntry"
+          }
+        },
+        "maxAge": {
+          "type": "integer",
+          "description": "The max age to be allowed via CORS.",
+          "readOnly": false,
+          "minimum": 0,
+          "maximum": 99999
+        },
+        "allowCredentials": {
+          "type": "boolean",
+          "description": "If credentials are allowed via CORS.",
+          "readOnly": false
+        }
+      }
+    },
+    "ServiceCorsConfigurationOriginEntry": {
+      "description": "An origin for CORS.",
+      "type": "string",
+      "pattern": "^(?:(?:(?:[hH][tT][tT][pP](?:[sS]|))\\:\\/\\/(?:[a-zA-Z0-9-]+[.]?)+(?:\\:[0-9]{1,5})?|[*]))$"
+    },
+    "ServiceCorsConfigurationHeaderEntry": {
+      "description": "A header for CORS.",
+      "type": "string"
+    },
+    "ServiceCorsConfigurationMethodEntry": {
+      "description": "A method for CORS.",
+      "type": "string"
     },
     "ServicesDescription": {
       "description": "The description of the service.",
@@ -658,9 +645,11 @@
         "kind": {
           "readOnly": false,
           "type": "string",
-          "description": "The kind of the service. Valid values are: fhir.",
+          "description": "The kind of the service. Valid values are: fhir, fhir-Stu3 and fhir-R4.",
           "enum": [
-            "fhir"
+            "fhir",
+            "fhir-Stu3",
+            "fhir-R4"
           ],
           "x-ms-enum": {
             "name": "kind",
@@ -851,34 +840,6 @@
         }
       }
     },
-    "MoveResourcesParameters": {
-      "description": "Input values.",
-      "type": "object",
-      "properties": {
-        "targetSubscriptionId": {
-          "description": "The target subscription to move resources to.",
-          "type": "string"
-        },
-        "targetResourceGroupName": {
-          "description": "The target resource group to move resources to.",
-          "type": "string"
-        },
-        "resourceIdsToMove": {
-          "description": "The list of resources to move.",
-          "type": "array",
-          "minItems": 1,
-          "maxItems": 250,
-          "items": {
-            "type": "string"
-          }
-        }
-      },
-      "required": [
-        "targetSubscriptionId",
-        "targetResourceGroupName",
-        "resourceIdsToMove"
-      ]
-    },
     "OperationResultsDescription": {
       "description": "The properties indicating the operation result of an operation on a service.",
       "type": "object",
@@ -927,8 +888,7 @@
       "in": "path",
       "description": "The subscription identifier.",
       "required": true,
-      "type": "string",
-      "format": "uuid"
+      "type": "string"
     },
     "api-version": {
       "name": "api-version",

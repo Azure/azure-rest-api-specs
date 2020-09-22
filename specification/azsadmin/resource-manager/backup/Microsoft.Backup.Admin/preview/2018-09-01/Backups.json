@@ -5,7 +5,7 @@
     "title": "BackupManagementClient",
     "description": "The Admin Backup Management Client."
   },
-  "host": "adminmanagement.local.azurestack.external",
+  "host": "management.azure.com",
   "schemes": [
     "https"
   ],
@@ -16,7 +16,7 @@
     "application/json"
   ],
   "paths": {
-    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Backup.Admin/backupLocations/{location}/backups": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Backup.Admin/backupLocations/{location}/backups": {
       "get": {
         "x-ms-examples": {
           "Returns a list of backups from a location.": {
@@ -40,6 +40,12 @@
           },
           {
             "$ref": "Backup.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "Backup.json#/parameters/TopParameter"
+          },
+          {
+            "$ref": "Backup.json#/parameters/SkipParameter"
           }
         ],
         "responses": {
@@ -55,7 +61,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Backup.Admin/backupLocations/{location}/backups/{backup}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Backup.Admin/backupLocations/{location}/backups/{backup}": {
       "get": {
         "x-ms-examples": {
           "Returns a backup from a location based on name.": {
@@ -94,11 +100,14 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Backup.Admin/backupLocations/{location}/backups/{backup}/restore": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Backup.Admin/backupLocations/{location}/backups/{backup}/restore": {
       "post": {
         "x-ms-examples": {
           "Restore a backup.": {
             "$ref": "./examples/Backups/Restore.json"
+          },
+          "Restore a single role from backup.": {
+            "$ref": "./examples/Backups/SingleRepoRestore.json"
           }
         },
         "description": "Restore a backup.",
@@ -134,7 +143,10 @@
             "description": "ACCEPTED"
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
       }
     }
   },
@@ -210,6 +222,11 @@
           "type": "string",
           "readOnly": true
         },
+        "isCloudRecoveryReady": {
+          "description": "True if the backup can be used for cloud recovery scenario.",
+          "type": "boolean",
+          "readOnly": true
+        },
         "encryptionCertThumbprint": {
           "description": "The thumbprint of the certificate used to encrypt the backup encryption key.",
           "type": "string",
@@ -275,6 +292,10 @@
     "RestoreOptions": {
       "description": "Properties for restore options.",
       "properties": {
+        "roleName": {
+          "description": "The Azure Stack role name for restore, set it to empty for all infrastructure role",
+          "type": "string"
+        },
         "decryptionCertBase64": {
           "description": "The certificate file raw data in Base64 string. This should be the .pfx file with the private key.",
           "type": "string"

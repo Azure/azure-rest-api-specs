@@ -28,19 +28,28 @@ These are the global settings for the Virtual Machine Image Builder API.
 title: ImageBuilderClient
 description: Azure Virtual Machine Image Builder Client
 openapi-type: arm
-tag: package-preview-2019-05
+tag: package-2020-02
 azure-arm: true
 ```
 
 
+### Tag: package-2020-02
+
+These settings apply only when `--tag=package-2020-02` is specified on the command line.
+
+```yaml $(tag) == 'package-2020-02'
+input-file:
+  - Microsoft.VirtualMachineImages/stable/2020-02-14/imagebuilder.json
+```
 ### Tag: package-preview-2019-05
 
 These settings apply only when `--tag=package-preview-2019-05` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2019-05'
+``` yaml $(tag) == 'package-preview-2019-05'
 input-file:
   - Microsoft.VirtualMachineImages/preview/2019-05-01-preview/imagebuilder.json
 ```
+
 ### Tag: package-2018-02
 
 These settings apply only when `--tag=package-2018-02` is specified on the command line.
@@ -73,6 +82,9 @@ swagger-to-sdk:
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-node
+  - repo: azure-resource-manager-schemas
+    after_scripts:
+      - node sdkauto_afterscript.js imagebuilder/resource-manager
 ```
 
 ## Python
@@ -90,7 +102,7 @@ python:
   namespace: azure.mgmt.imagebuilder
   package-name: azure-mgmt-imagebuilder
   clear-output-folder: true
-  package-version: 0.2.1
+  package-version: 0.3.0
 ```
 
 ``` yaml $(python) && $(python-mode) == 'update'
@@ -138,7 +150,7 @@ Please also specify `--azure-libraries-for-java=<path to the root directory of y
 ``` yaml $(tag) == 'package-2018-02' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.imagebuilder.v2018_02_01_preview
-  output-folder: $(azure-libraries-for-java-folder)/imagebuilder/resource-manager/v2018_02_01_preview
+  output-folder: $(azure-libraries-for-java-folder)/sdk/imagebuilder/mgmt-v2018_02_01_preview
 regenerate-manager: true
 generate-interface: true
 ```
@@ -151,7 +163,12 @@ Please also specify `--azure-libraries-for-java=<path to the root directory of y
 ``` yaml $(tag) == 'package-2019-02' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.imagebuilder.v2019_02_01_preview
-  output-folder: $(azure-libraries-for-java-folder)/imagebuilder/resource-manager/v2019_02_01_preview
+  output-folder: $(azure-libraries-for-java-folder)/sdk/imagebuilder/mgmt-v2019_02_01_preview
 regenerate-manager: true
 generate-interface: true
 ```
+
+## AzureResourceSchema
+
+See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
+

@@ -23,7 +23,7 @@ Please also specify `--azure-libraries-for-java=<path to the root directory of y
 ``` yaml $(tag) == 'package-2018-12-03' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.EnterpriseKnowledgeGraphService.v2018-12-03
-  output-folder: $(azure-libraries-for-java-folder)/EnterpriseKnowledgeGraphService/resource-manager/v2018-12-03
+  output-folder: $(azure-libraries-for-java-folder)/sdk/EnterpriseKnowledgeGraphService/mgmt-v2018-12-03
 regenerate-manager: true
 generate-interface: true
 ```
@@ -72,8 +72,12 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
+  - repo: azure-sdk-for-net
   - repo: azure-sdk-for-python
   - repo: azure-sdk-for-go
+  - repo: azure-resource-manager-schemas
+    after_scripts:
+      - node sdkauto_afterscript.js EnterpriseKnowledgeGraph/resource-manager
 ```
 
 ## C#
@@ -86,6 +90,11 @@ csharp:
   azure-arm: true
   license-header: MICROSOFT_MIT_NO_VERSION
   namespace: Microsoft.Azure.Management.EnterpriseKnowledgeGraphService
-  output-folder: $(csharp-sdks-folder)/EnterpriseKnowledgeGraphService/Microsoft.Azure.Management.EnterpriseKnowledgeGraphService/Generated
+  output-folder: $(csharp-sdks-folder)/enterpriseknowledgegraphservice/Microsoft.Azure.Management.EnterpriseKnowledgeGraphService/src/Generated
   clear-output-folder: true
 ```
+
+## AzureResourceSchema
+
+See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
+

@@ -26,9 +26,18 @@ These are the global settings for the Reservations API.
 
 ``` yaml
 openapi-type: arm
-tag: package-preview-2019-04
+tag: package-preview-2019-07-19
 ```
 
+### Tag: package-preview-2019-07-19
+
+These settings apply only when `--tag=package-preview-2019-07-19` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2019-07-19'
+input-file:
+  - Microsoft.Capacity/preview/2019-07-19/quota.json
+  - Microsoft.Capacity/preview/2019-04-01/reservations.json
+```
 
 ### Tag: package-preview-2019-04
 
@@ -67,10 +76,14 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
+  - repo: azure-sdk-for-net
   - repo: azure-sdk-for-python
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-node
+  - repo: azure-resource-manager-schemas
+    after_scripts:
+      - node sdkauto_afterscript.js reservations/resource-manager
 ```
 
 ## C#
@@ -120,3 +133,8 @@ python:
 ## Go
 
 See configuration in [readme.go.md](./readme.go.md)
+
+## AzureResourceSchema
+
+See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
+

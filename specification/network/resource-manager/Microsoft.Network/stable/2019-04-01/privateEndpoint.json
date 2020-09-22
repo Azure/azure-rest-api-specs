@@ -74,7 +74,7 @@
             "description": "Delete successful."
           },
           "default": {
-            "description": "Error",
+            "description": "Error.",
             "schema": {
               "$ref": "./network.json#/definitions/Error"
             }
@@ -133,7 +133,7 @@
             }
           },
           "default": {
-            "description": "Error",
+            "description": "Error.",
             "schema": {
               "$ref": "./network.json#/definitions/Error"
             }
@@ -176,7 +176,7 @@
             "schema": {
               "$ref": "#/definitions/PrivateEndpoint"
             },
-            "description": "Parameters supplied to the create or update private endpoint operation"
+            "description": "Parameters supplied to the create or update private endpoint operation."
           },
           {
             "$ref": "./network.json#/parameters/ApiVersionParameter"
@@ -199,7 +199,7 @@
             }
           },
           "default": {
-            "description": "Error",
+            "description": "Error.",
             "schema": {
               "$ref": "./network.json#/definitions/Error"
             }
@@ -249,7 +249,7 @@
             }
           },
           "default": {
-            "description": "Error",
+            "description": "Error.",
             "schema": {
               "$ref": "./network.json#/definitions/Error"
             }
@@ -288,7 +288,7 @@
             }
           },
           "default": {
-            "description": "Error",
+            "description": "Error.",
             "schema": {
               "$ref": "./network.json#/definitions/Error"
             }
@@ -297,6 +297,87 @@
         "x-ms-examples": {
           "List all private endpoints": {
             "$ref": "./examples/PrivateEndpointListAll.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Network/locations/{location}/availablePrivateEndpointTypes": {
+      "get": {
+        "operationId": "AvailablePrivateEndpointTypes_List",
+        "description": "Returns all of the resource types that can be linked to a Private Endpoint in this subscription in this region.",
+        "parameters": [
+          {
+            "name": "location",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The location of the domain name."
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. Returns all of the resource types that can be linked to a Private Endpoint in this subscription in this region.",
+            "schema": {
+              "$ref": "#/definitions/AvailablePrivateEndpointTypesResult"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get available PrivateEndpoint types": {
+            "$ref": "./examples/AvailablePrivateEndpointTypesGet.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/locations/{location}/availablePrivateEndpointTypes": {
+      "get": {
+        "operationId": "AvailablePrivateEndpointTypes_ListByResourceGroup",
+        "description": "Returns all of the resource types that can be linked to a Private Endpoint in this subscription in this region.",
+        "parameters": [
+          {
+            "name": "location",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The location of the domain name."
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. Returns all of the resource types that can be linked to a Private Endpoint in this subscription in this region.",
+            "schema": {
+              "$ref": "#/definitions/AvailablePrivateEndpointTypesResult"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get available PrivateEndpoint types in the resource group": {
+            "$ref": "./examples/AvailablePrivateEndpointTypesResourceGroupGet.json"
           }
         },
         "x-ms-pageable": {
@@ -315,7 +396,7 @@
         },
         "etag": {
           "type": "string",
-          "description": "Gets a unique read-only string that changes whenever the resource is updated."
+          "description": "A unique read-only string that changes whenever the resource is updated."
         }
       },
       "allOf": [
@@ -341,8 +422,8 @@
         },
         "provisioningState": {
           "readOnly": true,
-          "type": "string",
-          "description": "The provisioning state of the private endpoint. Possible values are: 'Updating', 'Deleting', and 'Failed'."
+          "$ref": "./network.json#/definitions/ProvisioningState",
+          "description": "The provisioning state of the private endpoint."
         },
         "privateLinkServiceConnections": {
           "type": "array",
@@ -371,6 +452,16 @@
         "name": {
           "type": "string",
           "description": "The name of the resource that is unique within a resource group. This name can be used to access the resource."
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The resource type."
+        },
+        "etag": {
+          "readOnly": true,
+          "type": "string",
+          "description": "A unique read-only string that changes whenever the resource is updated."
         }
       },
       "allOf": [
@@ -382,6 +473,11 @@
     },
     "PrivateLinkServiceConnectionProperties": {
       "properties": {
+        "provisioningState": {
+          "readOnly": true,
+          "$ref": "./network.json#/definitions/ProvisioningState",
+          "description": "The provisioning state of the private link service connection."
+        },
         "privateLinkServiceId": {
           "type": "string",
           "description": "The resource id of private link service."
@@ -420,6 +516,44 @@
         }
       },
       "description": "Response for the ListPrivateEndpoints API service call."
+    },
+    "AvailablePrivateEndpointTypesResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AvailablePrivateEndpointType"
+          },
+          "description": "An array of available privateEndpoint type."
+        },
+        "nextLink": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The URL to get the next set of results."
+        }
+      },
+      "description": "An array of available PrivateEndpoint types."
+    },
+    "AvailablePrivateEndpointType": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the service and resource."
+        },
+        "id": {
+          "type": "string",
+          "description": "A unique identifier of the AvailablePrivateEndpoint Type resource."
+        },
+        "type": {
+          "type": "string",
+          "description": "Resource type."
+        },
+        "resourceName": {
+          "type": "string",
+          "description": "The name of the service and resource."
+        }
+      },
+      "description": "The information of an AvailablePrivateEndpointType."
     }
   }
 }

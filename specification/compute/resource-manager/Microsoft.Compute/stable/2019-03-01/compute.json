@@ -245,6 +245,13 @@
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "The expand expression to apply to the operation. Allowed values are 'instanceView'."
           }
         ],
         "responses": {
@@ -257,6 +264,11 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List availability sets in a subscription.": {
+            "$ref": "./examples/ListAvailabilitySetsInASubscription.json"
+          }
         }
       }
     },
@@ -598,6 +610,527 @@
           "Create a proximity placement group.": {
             "$ref": "./examples/ListProximityPlacementGroupsInAResourceGroup.json"
           }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/hostGroups/{hostGroupName}": {
+      "put": {
+        "tags": [
+          "DedicatedHostGroups"
+        ],
+        "operationId": "DedicatedHostGroups_CreateOrUpdate",
+        "description": "Create or update a dedicated host group. For details of Dedicated Host and Dedicated Host Groups please see [Dedicated Host Documentation] (https://go.microsoft.com/fwlink/?linkid=2082596)",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "hostGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the dedicated host group."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DedicatedHostGroup"
+            },
+            "description": "Parameters supplied to the Create Dedicated Host Group."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/DedicatedHostGroup"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/DedicatedHostGroup"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create or update a dedicated host group.": {
+            "$ref": "./examples/CreateOrUpdateADedicatedHostGroup.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "DedicatedHostGroups"
+        ],
+        "operationId": "DedicatedHostGroups_Update",
+        "description": "Update an dedicated host group.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "hostGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the dedicated host group."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DedicatedHostGroupUpdate"
+            },
+            "description": "Parameters supplied to the Update Dedicated Host Group operation."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/DedicatedHostGroup"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "DedicatedHostGroups"
+        ],
+        "operationId": "DedicatedHostGroups_Delete",
+        "description": "Delete a dedicated host group.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "hostGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the dedicated host group."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "204": {
+            "description": "No Content"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "DedicatedHostGroups"
+        ],
+        "operationId": "DedicatedHostGroups_Get",
+        "description": "Retrieves information about a dedicated host group.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "hostGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the dedicated host group."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/DedicatedHostGroup"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create a dedicated host group.": {
+            "$ref": "./examples/GetADedicatedHostGroup.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/hostGroups": {
+      "get": {
+        "tags": [
+          "DedicatedHostGroups"
+        ],
+        "operationId": "DedicatedHostGroups_ListByResourceGroup",
+        "description": "Lists all of the dedicated host groups in the specified resource group. Use the nextLink property in the response to get the next page of dedicated host groups.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/DedicatedHostGroupListResult"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/hostGroups": {
+      "get": {
+        "tags": [
+          "DedicatedHostGroups"
+        ],
+        "operationId": "DedicatedHostGroups_ListBySubscription",
+        "description": "Lists all of the dedicated host groups in the subscription. Use the nextLink property in the response to get the next page of dedicated host groups.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/DedicatedHostGroupListResult"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/hostGroups/{hostGroupName}/hosts/{hostName}": {
+      "put": {
+        "tags": [
+          "DedicatedHosts"
+        ],
+        "operationId": "DedicatedHosts_CreateOrUpdate",
+        "description": "Create or update a dedicated host .",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "hostGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the dedicated host group."
+          },
+          {
+            "name": "hostName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the dedicated host ."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DedicatedHost"
+            },
+            "description": "Parameters supplied to the Create Dedicated Host."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/DedicatedHost"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/DedicatedHost"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create or update a dedicated host .": {
+            "$ref": "./examples/CreateOrUpdateADedicatedHost.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "tags": [
+          "DedicatedHosts"
+        ],
+        "operationId": "DedicatedHosts_Update",
+        "description": "Update an dedicated host .",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "hostGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the dedicated host group."
+          },
+          {
+            "name": "hostName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the dedicated host ."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DedicatedHostUpdate"
+            },
+            "description": "Parameters supplied to the Update Dedicated Host operation."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/DedicatedHost"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "tags": [
+          "DedicatedHosts"
+        ],
+        "operationId": "DedicatedHosts_Delete",
+        "description": "Delete a dedicated host.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "hostGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the dedicated host group."
+          },
+          {
+            "name": "hostName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the dedicated host."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "204": {
+            "description": "No Content"
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "get": {
+        "tags": [
+          "DedicatedHosts"
+        ],
+        "operationId": "DedicatedHosts_Get",
+        "description": "Retrieves information about a dedicated host.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "hostGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the dedicated host group."
+          },
+          {
+            "name": "hostName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the dedicated host."
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "The expand expression to apply on the operation.",
+            "enum": [
+              "instanceView"
+            ],
+            "x-ms-enum": {
+              "name": "InstanceViewTypes",
+              "modelAsString": false
+            }
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/DedicatedHost"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get a dedicated host.": {
+            "$ref": "./examples/GetADedicatedHost.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/hostGroups/{hostGroupName}/hosts": {
+      "get": {
+        "tags": [
+          "DedicatedHost"
+        ],
+        "operationId": "DedicatedHosts_ListByHostGroup",
+        "description": "Lists all of the dedicated hosts in the specified dedicated host group. Use the nextLink property in the response to get the next page of dedicated hosts.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "hostGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the dedicated host group."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/DedicatedHostListResult"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -1118,11 +1651,11 @@
             "description": "A valid image SKU."
           },
           {
-            "name": "$filter",
+            "name": "$expand",
             "in": "query",
             "required": false,
             "type": "string",
-            "description": "The filter to apply on the operation."
+            "description": "The expand expression to apply on the operation."
           },
           {
             "name": "$top",
@@ -1154,8 +1687,7 @@
               }
             }
           }
-        },
-        "x-ms-odata": "#/definitions/VirtualMachineImageResource"
+        }
       }
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/publishers/{publisherName}/artifacttypes/vmimage/offers": {
@@ -1525,7 +2057,12 @@
             }
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Updates tags of an Image.": {
+            "$ref": "./examples/UpdateImage.json"
+          }
+        }
       },
       "delete": {
         "tags": [
@@ -1891,7 +2428,6 @@
           "Update a VM by detaching data disk": {
             "$ref": "./examples/UpdateVMDetachDataDiskUsingToBeDetachedProperty.json"
           }
-
         }
       },
       "delete": {
@@ -2244,6 +2780,11 @@
         },
         "x-ms-pageable": {
           "nextLinkName": null
+        },
+        "x-ms-examples": {
+          "Lists all available virtual machine sizes to which the specified virtual machine can be resized": {
+            "$ref": "./examples/ListAvailableVmSizes_VirtualMachines.json"
+          }
         }
       }
     },
@@ -2381,7 +2922,7 @@
           "VirtualMachines"
         ],
         "operationId": "VirtualMachines_Redeploy",
-        "description": "The operation to redeploy a virtual machine.",
+        "description": "Shuts down the virtual machine, moves it to a new node, and powers it back on.",
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -2601,6 +3142,12 @@
           },
           "Create a scale set with ephemeral os disks.": {
             "$ref": "./examples/CreateAScaleSetWithDiffOsDisk.json"
+          },
+          "Create a scale set with terminate scheduled events enabled.": {
+            "$ref": "./examples/CreateAScaleSetWithTerminateScheduledEventEnabled.json"
+          },
+          "Create a scale set with automatic repairs enabled": {
+            "$ref": "./examples/CreateAScaleSetWithAutomaticRepairs.json"
           }
         }
       },
@@ -3378,7 +3925,7 @@
           "VirtualMachineScaleSets"
         ],
         "operationId": "VirtualMachineScaleSets_Redeploy",
-        "description": "Redeploy one or more virtual machines in a VM scale set.",
+        "description": "Shuts down all the virtual machines in the virtual machine scale set, moves them to a new node, and powers them back on.",
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -3859,6 +4406,9 @@
             "description": "The input object for ConvertToSinglePlacementGroup API."
           },
           {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
             "$ref": "#/parameters/SubscriptionIdParameter"
           }
         ],
@@ -4157,6 +4707,20 @@
             "description": "The instance ID of the virtual machine."
           },
           {
+            "name": "$expand",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "The expand expression to apply on the operation.",
+            "enum": [
+              "instanceView"
+            ],
+            "x-ms-enum": {
+              "name": "InstanceViewTypes",
+              "modelAsString": false
+            }
+          },
+          {
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
@@ -4246,21 +4810,21 @@
             "in": "query",
             "required": false,
             "type": "string",
-            "description": "The filter to apply to the operation."
+            "description": "The filter to apply to the operation. Allowed values are 'startswith(instanceView/statuses/code, 'PowerState') eq true', 'properties/latestModelApplied eq true', 'properties/latestModelApplied eq false'."
           },
           {
             "name": "$select",
             "in": "query",
             "required": false,
             "type": "string",
-            "description": "The list parameters."
+            "description": "The list parameters. Allowed values are 'instanceView', 'instanceView/statuses'."
           },
           {
             "name": "$expand",
             "in": "query",
             "required": false,
             "type": "string",
-            "description": "The expand expression to apply to the operation."
+            "description": "The expand expression to apply to the operation. Allowed values are 'instanceView'."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -4438,7 +5002,7 @@
           "VirtualMachineScaleSetVMs"
         ],
         "operationId": "VirtualMachineScaleSetVMs_Redeploy",
-        "description": "Redeploys a virtual machine in a VM scale set.",
+        "description": "Shuts down the virtual machine in the virtual machine scale set, moves it to a new node, and powers it back on.",
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -4695,7 +5259,7 @@
     },
     "HyperVGenerationType": {
       "type": "string",
-      "description": "Specifies the HyperVGeneration Type for the Virtual Machine created from the image",
+      "description": "Specifies the HyperVGeneration Type",
       "enum": [
         "V1",
         "V2"
@@ -4845,7 +5409,7 @@
       "properties": {
         "proximityPlacementGroupType": {
           "type": "string",
-          "description": "Specifies the type of the proximity placement group. <br><br> Possible values are: <br><br> **Standard** <br><br> **Ultra**",
+          "description": "Specifies the type of the proximity placement group. <br><br> Possible values are: <br><br> **Standard** : Co-locate resources within an Azure region or Availability Zone. <br><br> **Ultra** : For future use.",
           "enum": [
             "Standard",
             "Ultra"
@@ -4923,6 +5487,253 @@
         "value"
       ],
       "description": "The List Proximity Placement Group operation response."
+    },
+    "DedicatedHostGroupProperties": {
+      "properties": {
+        "platformFaultDomainCount": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 1,
+          "maximum": 3,
+          "description": "Number of fault domains that the host group can span."
+        },
+        "hosts": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SubResourceReadOnly"
+          },
+          "readOnly": true,
+          "description": "A list of references to all dedicated hosts in the dedicated host group."
+        }
+      },
+      "required": [
+        "platformFaultDomainCount"
+      ],
+      "description": "Dedicated Host Group Properties."
+    },
+    "DedicatedHostGroup": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/DedicatedHostGroupProperties"
+        },
+        "zones": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Availability Zone to use for this host group. Only single zone is supported. The zone can be assigned only during creation. If not provided, the group supports all zones in the region. If provided, enforces each host in the group to be in the same zone."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "description": "Specifies information about the dedicated host group that the dedicated hosts should be assigned to. <br><br> Currently, a dedicated host can only be added to a dedicated host group at creation time. An existing dedicated host cannot be added to another dedicated host group."
+    },
+    "DedicatedHostGroupUpdate": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/DedicatedHostGroupProperties"
+        },
+        "zones": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Availability Zone to use for this host group. Only single zone is supported. The zone can be assigned only during creation. If not provided, the group supports all zones in the region. If provided, enforces each host in the group to be in the same zone."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/UpdateResource"
+        }
+      ],
+      "description": "Specifies information about the dedicated host group that the dedicated host should be assigned to. Only tags may be updated."
+    },
+    "DedicatedHostGroupListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DedicatedHostGroup"
+          },
+          "description": "The list of dedicated host groups"
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The URI to fetch the next page of Dedicated Host Groups. Call ListNext() with this URI to fetch the next page of Dedicated Host Groups."
+        }
+      },
+      "required": [
+        "value"
+      ],
+      "description": "The List Dedicated Host Group with resource group response."
+    },
+    "DedicatedHostLicenseType": {
+      "type": "string",
+      "description": "Specifies the software license type that will be applied to the VMs deployed on the dedicated host. <br><br> Possible values are: <br><br> **None** <br><br> **Windows_Server_Hybrid** <br><br> **Windows_Server_Perpetual** <br><br> Default: **None**",
+      "enum": [
+        "None",
+        "Windows_Server_Hybrid",
+        "Windows_Server_Perpetual"
+      ],
+      "x-ms-enum": {
+        "name": "DedicatedHostLicenseTypes",
+        "modelAsString": false
+      }
+    },
+    "DedicatedHostAllocatableVM": {
+      "properties": {
+        "vmSize": {
+          "type": "string",
+          "description": "VM size in terms of which the unutilized capacity is represented."
+        },
+        "count": {
+          "type": "number",
+          "format": "double",
+          "description": "Maximum number of VMs of size vmSize that can fit in the dedicated host's remaining capacity."
+        }
+      },
+      "description": "Represents the dedicated host unutilized capacity in terms of a specific VM size."
+    },
+    "DedicatedHostAvailableCapacity": {
+      "properties": {
+        "allocatableVMs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DedicatedHostAllocatableVM"
+          },
+          "description": "The unutilized capacity of the dedicated host represented in terms of each VM size that is allowed to be deployed to the dedicated host."
+        }
+      },
+      "description": "Dedicated host unutilized capacity."
+    },
+    "DedicatedHostInstanceView": {
+      "properties": {
+        "assetId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Specifies the unique id of the dedicated physical machine on which the dedicated host resides."
+        },
+        "availableCapacity": {
+          "$ref": "#/definitions/DedicatedHostAvailableCapacity",
+          "description": "Unutilized capacity of the dedicated host."
+        },
+        "statuses": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/InstanceViewStatus"
+          },
+          "description": "The resource status information."
+        }
+      },
+      "description": "The instance view of a dedicated host."
+    },
+    "DedicatedHostProperties": {
+      "properties": {
+        "platformFaultDomain": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0,
+          "maximum": 2,
+          "description": "Fault domain of the dedicated host within a dedicated host group."
+        },
+        "autoReplaceOnFailure": {
+          "type": "boolean",
+          "description": "Specifies whether the dedicated host should be replaced automatically in case of a failure. The value is defaulted to 'true' when not provided."
+        },
+        "hostId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "A unique id generated and assigned to the dedicated host by the platform. <br><br> Does not change throughout the lifetime of the host."
+        },
+        "virtualMachines": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SubResourceReadOnly"
+          },
+          "readOnly": true,
+          "description": "A list of references to all virtual machines in the Dedicated Host."
+        },
+        "licenseType": {
+          "$ref": "#/definitions/DedicatedHostLicenseType",
+          "description": "Specifies the software license type that will be applied to the VMs deployed on the dedicated host. <br><br> Possible values are: <br><br> **None** <br><br> **Windows_Server_Hybrid** <br><br> **Windows_Server_Perpetual** <br><br> Default: **None**"
+        },
+        "provisioningTime": {
+          "readOnly": true,
+          "type": "string",
+          "format": "date-time",
+          "description": "The date when the host was first provisioned."
+        },
+        "provisioningState": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The provisioning state, which only appears in the response."
+        },
+        "instanceView": {
+          "$ref": "#/definitions/DedicatedHostInstanceView",
+          "readOnly": true,
+          "description": "The dedicated host instance view."
+        }
+      },
+      "description": "Properties of the dedicated host."
+    },
+    "DedicatedHost": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/DedicatedHostProperties"
+        },
+        "sku": {
+          "$ref": "#/definitions/Sku",
+          "description": "SKU of the dedicated host for Hardware Generation and VM family. Only name is required to be set. List Microsoft.Compute SKUs for a list of possible values."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "required": [
+        "sku"
+      ],
+      "description": "Specifies information about the Dedicated host."
+    },
+    "DedicatedHostUpdate": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/DedicatedHostProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/UpdateResource"
+        }
+      ],
+      "description": "Specifies information about the dedicated host. Only tags, autoReplaceOnFailure and licenseType may be updated."
+    },
+    "DedicatedHostListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DedicatedHost"
+          },
+          "description": "The list of dedicated hosts"
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The URI to fetch the next page of dedicated hosts. Call ListNext() with this URI to fetch the next page of dedicated hosts."
+        }
+      },
+      "required": [
+        "value"
+      ],
+      "description": "The list dedicated host operation response."
     },
     "VirtualMachineSize": {
       "properties": {
@@ -5274,6 +6085,9 @@
         },
         "automaticOSUpgradeProperties": {
           "$ref": "#/definitions/AutomaticOSUpgradeProperties"
+        },
+        "hyperVGeneration": {
+          "$ref": "#/definitions/HyperVGenerationType"
         }
       },
       "description": "Describes the properties of a Virtual Machine Image."
@@ -5368,7 +6182,7 @@
       "properties": {
         "tempDisk": {
           "type": "boolean",
-          "description": "Specifies whether to reimage temp disk. Default value: false."
+          "description": "Specifies whether to reimage temp disk. Default value: false. Note: This temp disk reimage parameter is only supported for VM/VMSS with Ephemeral OS disk."
         }
       },
       "description": "Parameters for Reimaging Virtual Machine. NOTE: Virtual Machine OS disk will always be reimaged"
@@ -5655,7 +6469,7 @@
           "$ref": "#/definitions/SubResource"
         }
       ],
-      "description": "Specifies information about the image to use. You can specify information about platform images, marketplace images, or virtual machine images. This element is required when you want to use a platform image, marketplace image, or virtual machine image, but is not used in other creation operations."
+      "description": "Specifies information about the image to use. You can specify information about platform images, marketplace images, or virtual machine images. This element is required when you want to use a platform image, marketplace image, or virtual machine image, but is not used in other creation operations. NOTE: Image reference publisher and offer can only be set when you create the scale set."
     },
     "KeyVaultSecretReference": {
       "properties": {
@@ -5745,7 +6559,7 @@
     },
     "StorageAccountType": {
       "type": "string",
-      "description": "Specifies the storage account type for the managed disk. NOTE: UltraSSD_LRS can only be used with data disks, it cannot be used with OS Disk.",
+      "description": "Specifies the storage account type for the managed disk. Managed OS disk storage account type can only be set when you create the scale set. NOTE: UltraSSD_LRS can only be used with data disks. It cannot be used with OS Disk. Standard_LRS uses Standard HDD. StandardSSD_LRS uses Standard SSD. Premium_LRS uses Premium SSD. UltraSSD_LRS uses Ultra disk. For more information regarding disks supported for Windows Virtual Machines, refer to https://docs.microsoft.com/en-us/azure/virtual-machines/windows/disks-types and, for Linux Virtual Machines, refer to https://docs.microsoft.com/en-us/azure/virtual-machines/linux/disks-types ",
       "enum": [
         "Standard_LRS",
         "Premium_LRS",
@@ -5894,7 +6708,7 @@
         },
         "toBeDetached": {
           "type": "boolean",
-          "description":  "Specifies whether the data disk is in process of detachment from the VirtualMachine/VirtualMachineScaleset"
+          "description": "Specifies whether the data disk is in process of detachment from the VirtualMachine/VirtualMachineScaleset"
         }
       },
       "required": [
@@ -6016,7 +6830,7 @@
         },
         "enableAutomaticUpdates": {
           "type": "boolean",
-          "description": "Indicates whether virtual machine is enabled for automatic Windows updates. Default value is true. <br><br> For virtual machine scale sets, this property can be updated and updates will take effect on OS reprovisioning."
+          "description": "Indicates whether Automatic Updates is enabled for the Windows virtual machine. Default value is true. <br><br> For virtual machine scale sets, this property can be updated and updates will take effect on OS reprovisioning."
         },
         "timeZone": {
           "type": "string",
@@ -6143,9 +6957,26 @@
         "allowExtensionOperations": {
           "type": "boolean",
           "description": "Specifies whether extension operations should be allowed on the virtual machine. <br><br>This may only be set to False when no extensions are present on the virtual machine."
+        },
+        "requireGuestProvisionSignal": {
+          "type": "boolean",
+          "description": "Specifies whether the guest provision signal is required from the virtual machine."
         }
       },
       "description": "Specifies the operating system settings for the virtual machine."
+    },
+    "AutomaticRepairsPolicy": {
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "description": "Specifies whether automatic repairs should be enabled on the virtual machine scale set. The default value is false."
+        },
+        "gracePeriod": {
+          "type": "string",
+          "description": "The amount of time for which automatic repairs are suspended due to a state change on VM. The grace time starts after the state change has completed. This helps avoid premature or accidental repairs. The time duration should be specified in ISO 8601 format. The minimum allowed grace period is 30 minutes (PT30M), which is also the default value. The maximum allowed grace period is 90 minutes (PT90M)."
+        }
+      },
+      "description": "Specifies the configuration parameters for automatic repairs on the virtual machine scale set."
     },
     "NetworkInterfaceReferenceProperties": {
       "properties": {
@@ -6203,6 +7034,41 @@
         }
       },
       "description": "Specifies the boot diagnostic settings state. <br><br>Minimum api-version: 2015-06-15."
+    },
+    "priority": {
+      "type": "string",
+      "description": "Specifies the priority for a standalone virtual machine or the virtual machines in the scale set. <br><br> 'Low' enum will be deprecated in the future, please use 'Spot' as the enum to deploy Azure Spot VM/VMSS.",
+      "enum": [
+        "Regular",
+        "Low",
+        "Spot"
+      ],
+      "x-ms-enum": {
+        "name": "VirtualMachinePriorityTypes",
+        "modelAsString": true
+      }
+    },
+    "evictionPolicy": {
+      "type": "string",
+      "description": "Specifies the eviction policy for the Azure Spot VM/VMSS",
+      "enum": [
+        "Deallocate",
+        "Delete"
+      ],
+      "x-ms-enum": {
+        "name": "VirtualMachineEvictionPolicyTypes",
+        "modelAsString": true
+      }
+    },
+    "BillingProfile": {
+      "properties": {
+        "maxPrice": {
+          "type": "number",
+          "format": "double",
+          "description": "Specifies the maximum price you are willing to pay for a Azure Spot VM/VMSS. This price is in US Dollars. <br><br> This price will be compared with the current Azure Spot price for the VM size. Also, the prices are compared at the time of create/update of Azure Spot VM/VMSS and the operation will only succeed if  the maxPrice is greater than the current Azure Spot price. <br><br> The maxPrice will also be used for evicting a Azure Spot VM/VMSS if the current Azure Spot price goes beyond the maxPrice after creation of VM/VMSS. <br><br> Possible values are: <br><br> - Any decimal value greater than zero. Example: 0.01538 <br><br> -1 – indicates default price to be up-to on-demand. <br><br> You can set the maxPrice to -1 to indicate that the Azure Spot VM/VMSS should not be evicted for price reasons. Also, the default max price is -1 if it is not provided by you. <br><br>Minimum api-version: 2019-03-01."
+        }
+      },
+      "description": "Specifies the billing related details of a Azure Spot VM or VMSS. <br><br>Minimum api-version: 2019-03-01."
     },
     "VirtualMachineExtensionHandlerInstanceView": {
       "properties": {
@@ -6406,6 +7272,18 @@
           "type": "string",
           "description": "The version of Operating System running on the virtual machine."
         },
+        "hyperVGeneration": {
+          "type": "string",
+          "description": "Specifies the HyperVGeneration Type associated with a resource",
+          "enum": [
+            "V1",
+            "V2"
+          ],
+          "x-ms-enum": {
+            "name": "HyperVGenerationType",
+            "modelAsString": true
+          }
+        },
         "rdpThumbPrint": {
           "type": "string",
           "description": "The Remote desktop certificate thumbprint."
@@ -6474,11 +7352,31 @@
         },
         "availabilitySet": {
           "$ref": "#/definitions/SubResource",
-          "description": "Specifies information about the availability set that the virtual machine should be assigned to. Virtual machines specified in the same availability set are allocated to different nodes to maximize availability. For more information about availability sets, see [Manage the availability of virtual machines](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-manage-availability?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json). <br><br> For more information on Azure planned maintenance, see [Planned maintenance for virtual machines in Azure](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-planned-maintenance?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json) <br><br> Currently, a VM can only be added to availability set at creation time. An existing VM cannot be added to an availability set."
+          "description": "Specifies information about the availability set that the virtual machine should be assigned to. Virtual machines specified in the same availability set are allocated to different nodes to maximize availability. For more information about availability sets, see [Manage the availability of virtual machines](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-manage-availability?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json). <br><br> For more information on Azure planned maintenance, see [Planned maintenance for virtual machines in Azure](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-planned-maintenance?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json) <br><br> Currently, a VM can only be added to availability set at creation time. An existing VM cannot be added to an availability set. <br><br>This property cannot exist along with a non-null properties.virtualMachineScaleSet reference."
+        },
+        "virtualMachineScaleSet": {
+          "$ref": "#/definitions/SubResource",
+          "description": "Specifies information about the virtual machine scale set that the virtual machine should be assigned to. Virtual machines specified in the same virtual machine scale set are allocated to different nodes to maximize availability. Currently, a VM can only be added to virtual machine scale set at creation time. An existing VM cannot be added to a virtual machine scale set. <br><br>This property cannot exist along with a non-null properties.availabilitySet reference. <br><br>Minimum api‐version: 2019‐03‐01"
         },
         "proximityPlacementGroup": {
           "$ref": "#/definitions/SubResource",
           "description": "Specifies information about the proximity placement group that the virtual machine should be assigned to. <br><br>Minimum api-version: 2018-04-01."
+        },
+        "priority": {
+          "$ref": "#/definitions/priority",
+          "description": "Specifies the priority for the virtual machine. <br><br>Minimum api-version: 2019-03-01"
+        },
+        "evictionPolicy": {
+          "$ref": "#/definitions/evictionPolicy",
+          "description": "Specifies the eviction policy for the Azure Spot virtual machine. Only supported value is 'Deallocate'. <br><br>Minimum api-version: 2019-03-01"
+        },
+        "billingProfile": {
+          "$ref": "#/definitions/BillingProfile",
+          "description": "Specifies the billing related details of a Azure Spot virtual machine. <br><br>Minimum api-version: 2019-03-01."
+        },
+        "host": {
+          "$ref": "#/definitions/SubResource",
+          "description": "Specifies information about the dedicated host that the virtual machine resides in. <br><br>Minimum api-version: 2018-10-01."
         },
         "provisioningState": {
           "readOnly": true,
@@ -6603,13 +7501,13 @@
           "description": "Specifies the number of virtual machines in the scale set."
         }
       },
-      "description": "Describes a virtual machine scale set sku."
+      "description": "Describes a virtual machine scale set sku. NOTE: If the new VM SKU is not supported on the hardware the scale set is currently on, you need to deallocate the VMs in the scale set before you modify the SKU name."
     },
     "AutomaticOSUpgradePolicy": {
       "properties": {
         "enableAutomaticOSUpgrade": {
           "type": "boolean",
-          "description": "Indicates whether OS upgrades should automatically be applied to scale set instances in a rolling fashion when a newer version of the OS image becomes available. Default value is false. If this is set to true for Windows based scale sets, recommendation is to set [enableAutomaticUpdates](https://docs.microsoft.com/dotnet/api/microsoft.azure.management.compute.models.windowsconfiguration.enableautomaticupdates?view=azure-dotnet) to false."
+          "description": "Indicates whether OS upgrades should automatically be applied to scale set instances in a rolling fashion when a newer version of the OS image becomes available. Default value is false. <br><br> If this is set to true for Windows based scale sets, [enableAutomaticUpdates](https://docs.microsoft.com/dotnet/api/microsoft.azure.management.compute.models.windowsconfiguration.enableautomaticupdates?view=azure-dotnet) is automatically set to false and cannot be set to true."
         },
         "disableAutomaticRollback": {
           "type": "boolean",
@@ -6674,6 +7572,27 @@
       },
       "description": "The configuration parameters used while performing a rolling upgrade."
     },
+    "ScaleInPolicy": {
+      "properties": {
+        "rules": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "Default",
+              "OldestVM",
+              "NewestVM"
+            ],
+            "x-ms-enum": {
+              "name": "VirtualMachineScaleSetScaleInRules",
+              "modelAsString": true
+            }
+          },
+          "description": "The rules to be followed when scaling-in a virtual machine scale set. <br><br> Possible values are: <br><br> **Default** When a virtual machine scale set is scaled in, the scale set will first be balanced across zones if it is a zonal scale set. Then, it will be balanced across Fault Domains as far as possible. Within each Fault Domain, the virtual machines chosen for removal will be the newest ones that are not protected from scale-in. <br><br> **OldestVM** When a virtual machine scale set is being scaled-in, the oldest virtual machines that are not protected from scale-in will be chosen for removal. For zonal virtual machine scale sets, the scale set will first be balanced across zones. Within each zone, the oldest virtual machines that are not protected will be chosen for removal. <br><br> **NewestVM** When a virtual machine scale set is being scaled-in, the newest virtual machines that are not protected from scale-in will be chosen for removal. For zonal virtual machine scale sets, the scale set will first be balanced across zones. Within each zone, the newest virtual machines that are not protected will be chosen for removal. <br><br>"
+        }
+      },
+      "description": "Describes a scale-in policy for a virtual machine scale set."
+    },
     "ImageOSDisk": {
       "properties": {
         "osType": {
@@ -6685,7 +7604,17 @@
           ],
           "x-ms-enum": {
             "name": "OperatingSystemTypes",
-            "modelAsString": false
+            "modelAsString": false,
+            "values": [
+              {
+                "value": "Windows",
+                "description": "Windows OS Type"
+              },
+              {
+                "value": "Linux",
+                "description": "Linux OS Type"
+              }
+            ]
           }
         },
         "osState": {
@@ -6697,7 +7626,17 @@
           ],
           "x-ms-enum": {
             "name": "OperatingSystemStateTypes",
-            "modelAsString": false
+            "modelAsString": false,
+            "values": [
+              {
+                "value": "Generalized",
+                "description": "Generalized image. Needs to be provisioned during deployment time."
+              },
+              {
+                "value": "Specialized",
+                "description": "Specialized image. Contains already provisioned OS Disk."
+              }
+            ]
           }
         },
         "snapshot": {
@@ -7287,7 +8226,7 @@
           "description": "The load balancer inbound nat pools."
         }
       },
-      "description": "Describes a virtual machine scale set network profile's IP configuration properties."
+      "description": "Describes a virtual machine scale set network profile's IP configuration properties. NOTE: The subnet of a scale set may be modified as long as the original subnet and the new subnet are in the same virtual network."
     },
     "VirtualMachineScaleSetIPConfiguration": {
       "properties": {
@@ -7557,6 +8496,10 @@
     },
     "VirtualMachineScaleSetUpdateNetworkProfile": {
       "properties": {
+        "healthProbe": {
+          "$ref": "#/definitions/ApiEntityReference",
+          "description": "A reference to a load balancer probe used to determine the health of an instance in the virtual machine scale set. The reference will be in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/loadBalancers/{loadBalancerName}/probes/{probeName}'."
+        },
         "networkInterfaceConfigurations": {
           "type": "array",
           "items": {
@@ -7688,28 +8631,20 @@
           "description": "Specifies that the image or disk that is being used was licensed on-premises. This element is only used for images that contain the Windows Server operating system. <br><br> Possible values are: <br><br> Windows_Client <br><br> Windows_Server <br><br> If this element is included in a request for an update, the value must match the initial value. This value cannot be updated. <br><br> For more information, see [Azure Hybrid Use Benefit for Windows Server](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-hybrid-use-benefit-licensing?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json) <br><br> Minimum api-version: 2015-06-15"
         },
         "priority": {
-          "type": "string",
-          "description": "Specifies the priority for the virtual machines in the scale set. <br><br>Minimum api-version: 2017-10-30-preview",
-          "enum": [
-            "Regular",
-            "Low"
-          ],
-          "x-ms-enum": {
-            "name": "VirtualMachinePriorityTypes",
-            "modelAsString": true
-          }
+          "$ref": "#/definitions/priority",
+          "description": "Specifies the priority for the virtual machines in the scale set. <br><br>Minimum api-version: 2017-10-30-preview"
         },
         "evictionPolicy": {
-          "type": "string",
-          "description": "Specifies the eviction policy for virtual machines in a low priority scale set. <br><br>Minimum api-version: 2017-10-30-preview",
-          "enum": [
-            "Deallocate",
-            "Delete"
-          ],
-          "x-ms-enum": {
-            "name": "VirtualMachineEvictionPolicyTypes",
-            "modelAsString": true
-          }
+          "$ref": "#/definitions/evictionPolicy",
+          "description": "Specifies the eviction policy for virtual machines in a Azure Spot scale set. <br><br>Minimum api-version: 2017-10-30-preview"
+        },
+        "billingProfile": {
+          "$ref": "#/definitions/BillingProfile",
+          "description": "Specifies the billing related details of a Azure Spot VMSS. <br><br>Minimum api-version: 2019-03-01."
+        },
+        "scheduledEventsProfile": {
+          "$ref": "#/definitions/ScheduledEventsProfile",
+          "description": "Specifies Scheduled Event related configurations."
         }
       },
       "description": "Describes a virtual machine scale set virtual machine profile."
@@ -7739,6 +8674,14 @@
         "licenseType": {
           "type": "string",
           "description": "The license type, which is for bring your own license scenario."
+        },
+        "billingProfile": {
+          "$ref": "#/definitions/BillingProfile",
+          "description": "Specifies the billing related details of a low priority VMSS. <br><br>Minimum api-version: 2019-03-01."
+        },
+        "scheduledEventsProfile": {
+          "$ref": "#/definitions/ScheduledEventsProfile",
+          "description": "Specifies Scheduled Event related configurations."
         }
       },
       "description": "Describes a virtual machine scale set virtual machine profile."
@@ -7748,6 +8691,10 @@
         "upgradePolicy": {
           "$ref": "#/definitions/UpgradePolicy",
           "description": "The upgrade policy."
+        },
+        "automaticRepairsPolicy": {
+          "$ref": "#/definitions/AutomaticRepairsPolicy",
+          "description": "Policy for automatic repairs."
         },
         "virtualMachineProfile": {
           "$ref": "#/definitions/VirtualMachineScaleSetVMProfile",
@@ -7791,6 +8738,10 @@
         "additionalCapabilities": {
           "$ref": "#/definitions/AdditionalCapabilities",
           "description": "Specifies additional capabilities enabled or disabled on the Virtual Machines in the Virtual Machine Scale Set. For instance: whether the Virtual Machines have the capability to support attaching managed data disks with UltraSSD_LRS storage account type."
+        },
+        "scaleInPolicy": {
+          "$ref": "#/definitions/ScaleInPolicy",
+          "description": "Specifies the scale-in policy that decides which virtual machines are chosen for removal when a Virtual Machine Scale Set is scaled-in."
         }
       },
       "description": "Describes the properties of a Virtual Machine Scale Set."
@@ -7801,6 +8752,10 @@
           "$ref": "#/definitions/UpgradePolicy",
           "description": "The upgrade policy."
         },
+        "automaticRepairsPolicy": {
+          "$ref": "#/definitions/AutomaticRepairsPolicy",
+          "description": "Policy for automatic repairs."
+        },
         "virtualMachineProfile": {
           "$ref": "#/definitions/VirtualMachineScaleSetUpdateVMProfile",
           "description": "The virtual machine profile."
@@ -7809,13 +8764,25 @@
           "type": "boolean",
           "description": "Specifies whether the Virtual Machine Scale Set should be overprovisioned."
         },
+        "doNotRunExtensionsOnOverprovisionedVMs": {
+          "type": "boolean",
+          "description": "When Overprovision is enabled, extensions are launched only on the requested number of VMs which are finally kept. This property will hence ensure that the extensions do not run on the extra overprovisioned VMs."
+        },
         "singlePlacementGroup": {
           "type": "boolean",
-          "description": "When true this limits the scale set to a single placement group, of max size 100 virtual machines."
+          "description": "When true this limits the scale set to a single placement group, of max size 100 virtual machines. NOTE: If singlePlacementGroup is true, it may be modified to false. However, if singlePlacementGroup is false, it may not be modified to true."
         },
         "additionalCapabilities": {
           "$ref": "#/definitions/AdditionalCapabilities",
           "description": "Specifies additional capabilities enabled or disabled on the Virtual Machines in the Virtual Machine Scale Set. For instance: whether the Virtual Machines have the capability to support attaching managed data disks with UltraSSD_LRS storage account type."
+        },
+        "scaleInPolicy": {
+          "$ref": "#/definitions/ScaleInPolicy",
+          "description": "Specifies the scale-in policy that decides which virtual machines are chosen for removal when a Virtual Machine Scale Set is scaled-in."
+        },
+        "proximityPlacementGroup": {
+          "$ref": "#/definitions/SubResource",
+          "description": "Specifies information about the proximity placement group that the virtual machine scale set should be assigned to. <br><br>Minimum api-version: 2018-04-01."
         }
       },
       "description": "Describes the properties of a Virtual Machine Scale Set."
@@ -7843,7 +8810,7 @@
           "items": {
             "type": "string"
           },
-          "description": "The virtual machine scale set zones."
+          "description": "The virtual machine scale set zones. NOTE: Availability zones can only be set when you create the scale set."
         }
       },
       "allOf": [
@@ -8452,6 +9419,28 @@
         }
       },
       "description": "The protection policy of a virtual machine scale set VM."
+    },
+    "ScheduledEventsProfile": {
+      "type": "object",
+      "properties": {
+        "terminateNotificationProfile": {
+          "$ref": "#/definitions/TerminateNotificationProfile",
+          "description": "Specifies Terminate Scheduled Event related configurations."
+        }
+      }
+    },
+    "TerminateNotificationProfile": {
+      "type": "object",
+      "properties": {
+        "notBeforeTimeout": {
+          "type": "string",
+          "description": "Configurable length of time a Virtual Machine being deleted will have to potentially approve the Terminate Scheduled Event before the event is auto approved (timed out). The configuration must be specified in ISO 8601 format, the default value is 5 minutes (PT5M)"
+        },
+        "enable": {
+          "type": "boolean",
+          "description": "Specifies whether the Terminate Scheduled event is enabled or disabled."
+        }
+      }
     },
     "VirtualMachineHealthStatus": {
       "properties": {

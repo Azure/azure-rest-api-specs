@@ -2,123 +2,20 @@ name: "Preproduction CI for Azure Rest API specifications"
 
 trigger: none
 
+pr:
+  autoCancel: false
+
 variables:
-  TRAVIS: 'true'
+  TRAVIS: "true"
   TRAVIS_BRANCH: $(System.PullRequest.TargetBranch)
   TRAVIS_PULL_REQUEST: $(System.PullRequest.PullRequestNumber)
   TRAVIS_REPO_SLUG: $(Build.Repository.Name)
   TRAVIS_PULL_REQUEST_SLUG: $(Build.Repository.Name)
   TRAVIS_PULL_REQUEST_SHA: $(Build.SourceVersion)
-  PR_ONLY: 'true'
+  PR_ONLY: "true"
+  PREPRODUCTION_PIPELINE: "true"
 
 jobs:
-
-- job: "BranchProtection"
-  pool:
-    vmImage: 'Ubuntu 16.04'
-  condition: and(variables['PRIVATE'], eq(variables['System.PullRequest.TargetBranch'], 'master'))
-  steps:
-  - script: '>&2 echo "the branch is protected"'
-    failOnStderr: true
-
-- job: "Syntax"
-  pool:
-    vmImage: 'Ubuntu 16.04'
-  steps:
-  - script: |
-      echo TRAVIS: $(TRAVIS)
-      echo TRAVIS_BRANCH: $(TRAVIS_BRANCH)
-      echo TRAVIS_REPO_SLUG: $(TRAVIS_REPO_SLUG)
-      echo TRAVIS_PULL_REQUEST: $(TRAVIS_PULL_REQUEST)
-      echo TRAVIS_PULL_REQUEST_SLUG: $(TRAVIS_PULL_REQUEST_SLUG)
-      echo TRAVIS_PULL_REQUEST_SHA: $(TRAVIS_PULL_REQUEST_SHA)
-      echo PR_ONLY: $(PR_ONLY)
-    displayName: "Info"
-  - task: Npm@1
-    displayName: 'npm install'
-    inputs:
-      verbose: false
-  - script: 'npm install -D @azure/rest-api-specs-scripts@0.3.9'
-  - script: 'npm test -- test/syntax.js'
-    displayName: 'Syntax validation'
-
-- job: "Semantic"
-  pool:
-    vmImage: 'Ubuntu 16.04'
-  steps:
-  - task: Npm@1
-    displayName: 'npm install'
-    inputs:
-      verbose: false
-  - script: 'npm install -D @azure/rest-api-specs-scripts@0.3.9'
-  - script: 'npm run tsc && node scripts/semanticValidation.js'
-    displayName: 'Semantic Validation'
-
-- job: "ModelValidation"
-  pool:
-    vmImage: 'Ubuntu 16.04'
-  steps:
-  - task: Npm@1
-    displayName: 'npm install'
-    inputs:
-      verbose: false
-  - script: 'npm install -D @azure/rest-api-specs-scripts@0.3.9'
-  - script: 'npm run tsc && node scripts/modelValidation.js'
-    displayName: 'Model Validation'
-
-- job: "Avocado"
-  pool:
-    vmImage: 'Ubuntu 16.04'
-  continueOnError: true
-  steps:
-  - task: Npm@1
-    displayName: 'npm install'
-    inputs:
-      verbose: false
-  - script: './node_modules/.bin/avocado'
-    displayName: 'Avocado'
-
-- job: "BreakingChange"
-  pool:
-    vmImage: 'Ubuntu 16.04'
-  steps:
-  - script: 'scripts/install-dotnet.sh'
-    displayName: 'Install .Net'
-  - task: Npm@1
-    displayName: 'npm install'
-    inputs:
-      verbose: false
-  - script: 'npm install -D @azure/rest-api-specs-scripts@0.3.9'
-  - script: 'npm run tsc && node scripts/breaking-change.js'
-    displayName: 'Breaking Changes'
-
-- job: "LintDiff"
-  variables:
-    NODE_OPTIONS: '--max-old-space-size=8192'
-  pool:
-    vmImage: 'Ubuntu 16.04'
-  steps:
-  - task: Npm@1
-    displayName: 'npm install'
-    inputs:
-      verbose: false
-  - script: 'scripts/install-dotnet.sh'
-    displayName: 'install .Net'
-  - script: 'npm install -D @azure/rest-api-specs-scripts@0.3.9'
-  - script: 'npm run tsc && node scripts/momentOfTruth.js && node scripts/momentOfTruthPostProcessing.js'
-    displayName: 'LintDiff'
-
-- job: "Spellcheck"
-  condition: "not(variables['PRIVATE'])"
-  variables:
-    NODE_OPTIONS: '--max-old-space-size=8192'
-  pool:
-    vmImage: 'Ubuntu 16.04'
-  continueOnError: true
-  steps:
-  - task: Npm@1
-    displayName: 'npm install'
-    inputs:
-      verbose: false
-  - script: 'npm run spellcheck'
-    displayName: 'Run cSpell'
+  - template: .azure-pipelines/ModelValidation.yml
+  - template: .azure-pipelines/LintDiff.yml
+  - template: .azure-pipelines/Avocado.yml

@@ -24,7 +24,9 @@
         "operationId": "Servers_List",
         "description": "Returns a list of servers.",
         "x-ms-examples": {
-          "List servers": { "$ref": "./examples/ServerList.json" }
+          "List servers": {
+            "$ref": "./examples/ServerList.json"
+          }
         },
         "parameters": [
           {
@@ -55,8 +57,12 @@
         "operationId": "Servers_CreateOrUpdate",
         "description": "Creates or updates a new server.",
         "x-ms-examples": {
-          "Create server min": { "$ref": "./examples/ServerCreateOrUpdateMin.json" },
-          "Create server max": { "$ref": "./examples/ServerCreateOrUpdateMax.json" }
+          "Create server min": {
+            "$ref": "./examples/ServerCreateOrUpdateMin.json"
+          },
+          "Create server max": {
+            "$ref": "./examples/ServerCreateOrUpdateMax.json"
+          }
         },
         "parameters": [
           {
@@ -103,8 +109,12 @@
         "operationId": "Servers_Update",
         "description": "Updates an existing server.",
         "x-ms-examples": {
-          "Create server min": { "$ref": "./examples/ServerUpdateMin.json" },
-          "Create server max": { "$ref": "./examples/ServerUpdateMax.json" }
+          "Create server min": {
+            "$ref": "./examples/ServerUpdateMin.json"
+          },
+          "Create server max": {
+            "$ref": "./examples/ServerUpdateMax.json"
+          }
         },
         "parameters": [
           {
@@ -145,7 +155,9 @@
         "operationId": "Servers_Delete",
         "description": "Deletes a SQL server.",
         "x-ms-examples": {
-          "Delete SQL Server": { "$ref": "./examples/ServerDelete.json" }
+          "Delete SQL Server": {
+            "$ref": "./examples/ServerDelete.json"
+          }
         },
         "parameters": [
           {
@@ -177,7 +189,9 @@
         "operationId": "Servers_Get",
         "description": "Gets a server.",
         "x-ms-examples": {
-          "Get Server": { "$ref": "./examples/ServerGet.json" }
+          "Get Server": {
+            "$ref": "./examples/ServerGet.json"
+          }
         },
         "parameters": [
           {
@@ -211,7 +225,9 @@
         "operationId": "Servers_ListByResourceGroup",
         "description": "Returns a list of servers in a resource group.",
         "x-ms-examples": {
-          "List servers by resource group": { "$ref": "./examples/ServerListByResourceGroup.json" }
+          "List servers by resource group": {
+            "$ref": "./examples/ServerListByResourceGroup.json"
+          }
         },
         "parameters": [
           {
@@ -248,22 +264,31 @@
         },
         "version": {
           "type": "string",
-          "enum": ["2.0", "12.0"],
+          "enum": [
+            "2.0",
+            "12.0"
+          ],
           "description": "The version of the server.",
           "x-ms-enum": {
-              "name": "ServerVersion",
-              "modelAsString": true
+            "name": "ServerVersion",
+            "modelAsString": true
           }
         },
         "administratorLogin": {
           "type": "string",
           "description": "Administrator username for the server. Can only be specified when the server is being created (and is required for creation).",
-          "x-ms-mutability": [ "create", "read" ]
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
         },
         "administratorLoginPassword": {
           "type": "string",
           "description": "The administrator login password (required for server creation).",
-          "x-ms-mutability": [ "create", "update" ]
+          "x-ms-mutability": [
+            "create",
+            "update"
+          ]
         },
         "externalAdministratorSid": {
           "readOnly": true,
@@ -280,9 +305,12 @@
           "readOnly": true,
           "type": "string",
           "description": "The state of the server.",
-          "enum": ["Ready", "Disabled"],
+          "enum": [
+            "Ready",
+            "Disabled"
+          ],
           "x-ms-enum": {
-              "name": "ServerState"
+            "name": "ServerState"
           }
         }
       },
@@ -310,12 +338,12 @@
     },
     "ServerUpdate": {
       "properties": {
-        "tags":{
-          "type":"object",
-          "additionalProperties":{
-            "type":"string"
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
           },
-          "description":"Resource tags."
+          "description": "Resource tags."
         },
         "properties": {
           "$ref": "#/definitions/ServerProperties",
@@ -340,7 +368,9 @@
           "description": "The list of servers."
         }
       },
-      "required": ["value"],
+      "required": [
+        "value"
+      ],
       "description": "Represents the response to a get server request."
     }
   },
@@ -374,4 +404,3 @@
     }
   }
 }
-

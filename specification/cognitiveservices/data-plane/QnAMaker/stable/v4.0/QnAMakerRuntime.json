@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "version": "4.0",
-    "title": "QnAMaker Client",
+    "title": "QnAMaker Runtime Client",
     "description": "An API for QnAMaker runtime"
   },
   "securityDefinitions": {
@@ -33,7 +33,7 @@
           "Knowledgebases"
         ],
         "summary": "GenerateAnswer call to query the knowledgebase.",
-        "operationId": "Knowledgebase_GenerateAnswer",
+        "operationId": "Runtime_GenerateAnswer",
         "parameters": [
           {
             "$ref": "#/parameters/KbId"
@@ -75,7 +75,7 @@
           "Knowledgebases"
         ],
         "summary": "Train call to add suggestions to the knowledgebase.",
-        "operationId": "Knowledgebase_Train",
+        "operationId": "Runtime_Train",
         "parameters": [
           {
             "$ref": "#/parameters/KbId"
@@ -357,12 +357,28 @@
             }
           ]
         },
+        "rankerType": {
+          "type": "string",
+          "description": "Optional field. Set to 'QuestionOnly' for using a question only Ranker."
+        },
         "strictFilters": {
           "type": "array",
           "description": "Find only answers that contain these metadata.",
           "items": {
             "$ref": "#/definitions/MetadataDTO"
           }
+        },
+        "strictFiltersCompoundOperationType": {
+          "type": "string",
+          "description": "Optional field. Set to OR for using OR as Operation for Strict Filters.",
+          "x-ms-enum": {
+            "name": "StrictFiltersCompoundOperationType",
+            "modelAsString": true
+          },
+          "enum": [
+            "AND",
+            "OR"
+          ]
         }
       }
     },
@@ -390,7 +406,7 @@
           "type": "array",
           "description": "Represents Search Result list.",
           "items": {
-              "$ref": "#/definitions/QnASearchResult"
+            "$ref": "#/definitions/QnASearchResult"
           }
         }
       }
@@ -428,8 +444,8 @@
           "type": "array",
           "description": "List of metadata.",
           "items": {
-              "$ref": "#/definitions/MetadataDTO"
-            }
+            "$ref": "#/definitions/MetadataDTO"
+          }
         },
         "context": {
           "type": "object",

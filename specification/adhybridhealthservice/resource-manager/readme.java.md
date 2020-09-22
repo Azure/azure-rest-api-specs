@@ -34,7 +34,7 @@ Please also specify `--azure-libraries-for-java=<path to the root directory of y
 ``` yaml $(tag) == 'package-2014-01' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.adhybridhealthservice.v2014_01_01
-  output-folder: $(azure-libraries-for-java-folder)/adhybridhealthservice/resource-manager/v2014_01_01
+  output-folder: $(azure-libraries-for-java-folder)/sdk/adhybridhealthservice/mgmt-v2014_01_01
 regenerate-manager: true
 generate-interface: true
 ```

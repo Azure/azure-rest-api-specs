@@ -72,7 +72,7 @@
           "Gets the diagnostic setting": {
             "$ref": "./examples/getDiagnosticSettingsCategory.json"
           }
-        } 
+        }
       }
     },
     "/{resourceUri}/providers/microsoft.insights/diagnosticSettingsCategories": {
@@ -108,7 +108,7 @@
           "Gets the diagnostic setting": {
             "$ref": "./examples/listDiagnosticSettingsCategories.json"
           }
-        } 
+        }
       }
     }
   },
@@ -137,10 +137,13 @@
     "DiagnosticSettingsCategory": {
       "properties": {
         "categoryType": {
-          "enum": ["Metrics", "Logs"],
+          "enum": [
+            "Metrics",
+            "Logs"
+          ],
           "type": "string",
           "x-ms-enum": {
-             "name": "categoryType"
+            "name": "categoryType"
           },
           "x-nullable": false,
           "description": "The type of the diagnostic settings category."

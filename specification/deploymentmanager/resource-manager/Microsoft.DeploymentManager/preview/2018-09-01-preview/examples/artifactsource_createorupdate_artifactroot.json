@@ -1,42 +1,42 @@
 {
-    "parameters": {
-        "subscriptionId": "caac1590-e859-444f-a9e0-62091c0f5929",
-        "resourceGroupName": "myResourceGroup",
-        "artifactSourceName": "myArtifactSource",
-        "api-version": "2018-09-01-preview",
-        "artifactSourceInfo": {
-            "type": "Microsoft.DeploymentManager/artifactSources",
-            "location": "centralus",
-            "tags": {},
-            "properties": {
-                "sourceType": "AzureStorage",
-                "artifactRoot": "1.0.0.0",
-                "authentication": {
-                    "type": "Sas",
-                    "properties": {
-                    "sasUri": "https://mystorageaccount.blob.core.windows.net/myartifactsource?st=2018-07-07T14%3A10%3A00Z&se=2019-12-31T15%3A10%3A00Z&sp=rl&sv=2017-04-17&sr=c&sig=Yh2SoJ1NhhLRwCLln7de%2Fkabcdefghijklmno5sWEIk%3D"
-                    }
-                }
-            }
+  "parameters": {
+    "subscriptionId": "caac1590-e859-444f-a9e0-62091c0f5929",
+    "resourceGroupName": "myResourceGroup",
+    "artifactSourceName": "myArtifactSource",
+    "api-version": "2018-09-01-preview",
+    "artifactSourceInfo": {
+      "type": "Microsoft.DeploymentManager/artifactSources",
+      "location": "centralus",
+      "tags": {},
+      "properties": {
+        "sourceType": "AzureStorage",
+        "artifactRoot": "1.0.0.0",
+        "authentication": {
+          "type": "Sas",
+          "properties": {
+            "sasUri": "https://mystorageaccount.blob.core.windows.net/myartifactsource?st=2018-07-07T14%3A10%3A00Z&se=2019-12-31T15%3A10%3A00Z&sp=rl&sv=2017-04-17&sr=c&sig=Yh2SoJ1NhhLRwCLln7de%2Fkabcdefghijklmno5sWEIk%3D"
+          }
         }
-    },
-    "responses": {
-        "201": {
-            "body": {
-                "name": "myArtifactSource",
-                "type": "Microsoft.DeploymentManager/artifactSources",
-                "location": "centralus",
-                "tags": {},
-                "properties": {
-                    "sourceType": "AzureStorage",
-                    "authentication": {
-                        "type": "Sas",
-                        "properties": {
-                            "sasUri": "https://mystorageaccount.blob.core.windows.net/myartifactsource?st=2018-07-07T14%3A10%3A00Z&se=2019-12-31T15%3A10%3A00Z&sp=rl&sv=2017-04-17&sr=c&sig=Yh2SoJ1NhhLRwCLln7de%2Fkabcdefghijklmno5sWEIk%3D"
-                        }
-                    }
-                }
-            }
-        }
+      }
     }
+  },
+  "responses": {
+    "201": {
+      "body": {
+        "name": "myArtifactSource",
+        "type": "Microsoft.DeploymentManager/artifactSources",
+        "location": "centralus",
+        "tags": {},
+        "properties": {
+          "sourceType": "AzureStorage",
+          "authentication": {
+            "type": "Sas",
+            "properties": {
+              "sasUri": "https://mystorageaccount.blob.core.windows.net/myartifactsource?st=2018-07-07T14%3A10%3A00Z&se=2019-12-31T15%3A10%3A00Z&sp=rl&sv=2017-04-17&sr=c&sig=Yh2SoJ1NhhLRwCLln7de%2Fkabcdefghijklmno5sWEIk%3D"
+            }
+          }
+        }
+      }
+    }
+  }
 }

@@ -4,10 +4,10 @@
 
 This is the AutoRest configuration file for Managed Services.
 
-
-
 ---
+
 ## Getting Started
+
 To build the SDK for ManagedServices, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
 
 > `autorest`
@@ -15,18 +15,45 @@ To build the SDK for ManagedServices, simply [Install AutoRest](https://aka.ms/a
 To see additional help and options, run:
 
 > `autorest --help`
+
 ---
 
 ## Configuration
 
-
-
 ### Basic Information
+
 These are the global settings for the ManagedServices API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2019-04-preview
+tag: package-2020-02-preview
+```
+
+
+### Tag: package-2020-02-preview
+
+These settings apply only when `--tag=package-2020-02-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2020-02-preview'
+input-file:
+  - Microsoft.ManagedServices/preview/2020-02-01-preview/managedservices.json
+```
+### Tag: package-2019-09
+
+These settings apply only when `--tag=package-2019-09` is specified on the command line.
+
+``` yaml $(tag) == 'package-2019-09'
+input-file:
+  - Microsoft.ManagedServices/stable/2019-09-01/managedservices.json
+```
+
+### Tag: package-2019-06
+
+These settings apply only when `--tag=package-2019-06` is specified on the command line.
+
+``` yaml $(tag) == 'package-2019-06'
+input-file:
+  - Microsoft.ManagedServices/stable/2019-06-01/managedservices.json
 ```
 
 ### Tag: package-2019-04-preview
@@ -48,8 +75,8 @@ input-file:
 ```
 
 ---
-# Code Generation
 
+# Code Generation
 
 ## Swagger to SDK
 
@@ -58,6 +85,7 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
+  - repo: azure-sdk-for-net
   - repo: azure-sdk-for-python
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
@@ -66,8 +94,10 @@ swagger-to-sdk:
   - repo: azure-sdk-for-ruby
     after_scripts:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_billing']
+  - repo: azure-resource-manager-schemas
+    after_scripts:
+      - node sdkauto_afterscript.js managedservices/resource-manager
 ```
-
 
 ## C#
 
@@ -86,3 +116,8 @@ csharp:
 ## Go
 
 See configuration in [readme.go.md](./readme.go.md)
+
+## AzureResourceSchema
+
+See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
+

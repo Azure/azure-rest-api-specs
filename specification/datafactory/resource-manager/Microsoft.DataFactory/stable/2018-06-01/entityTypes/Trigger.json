@@ -4,6 +4,17 @@
     "title": "DataFactoryManagementClient",
     "version": "2018-06-01"
   },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
   "paths": {},
   "definitions": {
     "Trigger": {
@@ -303,6 +314,10 @@
               "description": "The blob path must end with the pattern provided for trigger to fire. For example, 'december/boxes.csv' will only fire the trigger for blobs named boxes in a december folder. At least one of these must be provided: blobPathBeginsWith, blobPathEndsWith.",
               "type": "string"
             },
+            "ignoreEmptyBlobs": {
+              "description": "If set to true, blobs with zero bytes will be ignored.",
+              "type": "boolean"
+            },
             "events": {
               "description": "The type of events that cause this trigger to fire.",
               "$ref": "#/definitions/BlobEventTypes"
@@ -500,7 +515,7 @@
         "offset": {
           "description": "Timespan applied to the start time of a tumbling window when evaluating dependency.",
           "type": "string",
-          "pattern": "((\\d+)\\.)?(\\d\\d):(60|([0-5][0-9])):(60|([0-5][0-9]))",
+          "pattern": "-?((\\d+)\\.)?(\\d\\d):(60|([0-5][0-9])):(60|([0-5][0-9]))",
           "minLength": 8,
           "maxLength": 15
         },
@@ -525,7 +540,7 @@
         "offset": {
           "description": "Timespan applied to the start time of a tumbling window when evaluating dependency.",
           "type": "string",
-          "pattern": "((\\d+)\\.)?(\\d\\d):(60|([0-5][0-9])):(60|([0-5][0-9]))",
+          "pattern": "-((\\d+)\\.)?(\\d\\d):(60|([0-5][0-9])):(60|([0-5][0-9]))",
           "minLength": 8,
           "maxLength": 15
         },
@@ -568,7 +583,7 @@
               "format": "date-time",
               "description": "The end time for the time period for which restatement is initiated. Only UTC time is currently supported."
             },
-            "maxConcurrency": {
+            "rerunConcurrency": {
               "description": "The max number of parallel time windows (ready for execution) for which a rerun is triggered.",
               "type": "integer",
               "minimum": 1,
@@ -576,13 +591,54 @@
             }
           },
           "required": [
+            "parentTrigger",
             "requestedStartTime",
             "requestedEndTime",
-            "maxConcurrency"
+            "rerunConcurrency"
           ]
         }
       },
       "required": [
+        "typeProperties"
+      ]
+    },
+    "ChainingTrigger": {
+      "description": "Trigger that allows the referenced pipeline to depend on other pipeline runs based on runDimension Name/Value pairs. Upstream pipelines should declare the same runDimension Name and their runs should have the values for those runDimensions. The referenced pipeline run would be triggered if the values for the runDimension match for all upstream pipeline runs.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Trigger"
+        }
+      ],
+      "properties": {
+        "pipeline": {
+          "$ref": "../datafactory.json#/definitions/TriggerPipelineReference",
+          "description": "Pipeline for which runs are created when all upstream pipelines complete successfully."
+        },
+        "typeProperties": {
+          "description": "Chaining Trigger properties.",
+          "x-ms-client-flatten": true,
+          "properties": {
+            "dependsOn": {
+              "type": "array",
+              "items": {
+                "$ref": "../datafactory.json#/definitions/PipelineReference"
+              },
+              "description": "Upstream Pipelines."
+            },
+            "runDimension": {
+              "description": "Run Dimension property that needs to be emitted by upstream pipelines.",
+              "type": "string"
+            }
+          },
+          "required": [
+            "runDimension",
+            "dependsOn"
+          ]
+        }
+      },
+      "required": [
+        "pipeline",
         "typeProperties"
       ]
     }

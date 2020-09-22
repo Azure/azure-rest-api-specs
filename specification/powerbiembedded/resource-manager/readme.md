@@ -51,6 +51,7 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
+  - repo: azure-sdk-for-net
   - repo: azure-sdk-for-python
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
@@ -59,6 +60,9 @@ swagger-to-sdk:
   - repo: azure-sdk-for-ruby
     after_scripts:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_powerbi_embedded']
+  - repo: azure-resource-manager-schemas
+    after_scripts:
+      - node sdkauto_afterscript.js powerbiembedded/resource-manager
 ```
 
 
@@ -73,7 +77,7 @@ csharp:
   license-header: MICROSOFT_MIT_NO_VERSION
   namespace: Microsoft.Azure.Management.PowerBIEmbedded
   payload-flattening-threshold: 2
-  output-folder: $(csharp-sdks-folder)/PowerBIEmbedded/Management.PowerBIEmbedded/Generated
+  output-folder: $(csharp-sdks-folder)/powerbiembedded/Microsoft.Azure.Management.PowerBIEmbedded/src/Generated
   clear-output-folder: true
 ```
 
@@ -110,36 +114,9 @@ See configuration in [readme.go.md](./readme.go.md)
 
 ## Java
 
-These settings apply only when `--java` is specified on the command line.
-Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-libraries-for-java clone>`.
+See configuration in [readme.java.md](./readme.java.md)
 
-``` yaml $(java)
-azure-arm: true
-fluent: true
-namespace: com.microsoft.azure.management.powerbiembedded
-license-header: MICROSOFT_MIT_NO_CODEGEN
-payload-flattening-threshold: 1
-output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-powerbiembedded
-```
+## AzureResourceSchema
 
-### Java multi-api
-
-``` yaml $(java) && $(multiapi)
-batch:
-  - tag: package-2016-01
-```
-
-### Tag: package-2016-01 and java
-
-These settings apply only when `--tag=package-2016-01 --java` is specified on the command line.
-Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
-
-``` yaml $(tag) == 'package-2016-01' && $(java) && $(multiapi)
-java:
-  namespace: com.microsoft.azure.management.powerbi.v2016_01_29
-  output-folder: $(azure-libraries-for-java-folder)/powerbi/resource-manager/v2016_01_29
-regenerate-manager: true
-generate-interface: true
-```
-
+See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
 

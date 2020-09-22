@@ -104,6 +104,120 @@
             "$ref": "./Common.json#/definitions/ReportableException"
           },
           "readOnly": true
+        },
+        "databaseSchemaMap": {
+          "type": "array",
+          "description": "Mapping of schemas per database",
+          "items": {
+            "type": "object",
+            "properties": {
+              "database": {
+                "type": "string"
+              },
+              "schemas": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "GetUserTablesOracleTaskInput": {
+      "type": "object",
+      "description": "Input for the task that gets the list of tables contained within a provided list of Oracle schemas.",
+      "properties": {
+        "connectionInfo": {
+          "$ref": "./Common.json#/definitions/OracleConnectionInfo",
+          "description": "Information for connecting to Oracle source"
+        },
+        "selectedSchemas": {
+          "type": "array",
+          "description": "List of Oracle schemas for which to collect tables",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "connectionInfo",
+        "selectedSchemas"
+      ]
+    },
+    "GetUserTablesOracleTaskOutput": {
+      "type": "object",
+      "description": "Output for the task that gets the list of tables contained within a provided list of Oracle schemas.",
+      "properties": {
+        "schemaName": {
+          "type": "string",
+          "description": "The schema this result is for",
+          "readOnly": true
+        },
+        "tables": {
+          "type": "array",
+          "description": "List of valid tables found for this schema",
+          "items": {
+            "$ref": "./TasksCommon.json#/definitions/DatabaseTable"
+          },
+          "readOnly": true
+        },
+        "validationErrors": {
+          "description": "Validation errors associated with the task",
+          "type": "array",
+          "items": {
+            "$ref": "./Common.json#/definitions/ReportableException"
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "GetUserTablesPostgreSqlTaskInput": {
+      "type": "object",
+      "description": "Input for the task that gets the list of tables for a provided list of PostgreSQL databases.",
+      "properties": {
+        "connectionInfo": {
+          "$ref": "./Common.json#/definitions/PostgreSqlConnectionInfo",
+          "description": "Information for connecting to PostgreSQL source"
+        },
+        "selectedDatabases": {
+          "type": "array",
+          "description": "List of PostgreSQL databases for which to collect tables",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "connectionInfo",
+        "selectedDatabases"
+      ]
+    },
+    "GetUserTablesPostgreSqlTaskOutput": {
+      "type": "object",
+      "description": "Output for the task that gets the list of tables for a provided list of PostgreSQL databases.",
+      "properties": {
+        "databaseName": {
+          "type": "string",
+          "description": "The database this result is for",
+          "readOnly": true
+        },
+        "tables": {
+          "type": "array",
+          "description": "List of valid tables found for this database",
+          "items": {
+            "$ref": "./TasksCommon.json#/definitions/DatabaseTable"
+          },
+          "readOnly": true
+        },
+        "validationErrors": {
+          "description": "Validation errors associated with the task",
+          "type": "array",
+          "items": {
+            "$ref": "./Common.json#/definitions/ReportableException"
+          },
+          "readOnly": true
         }
       }
     },
@@ -158,10 +272,12 @@
         },
         "resultType": {
           "description": "Result type",
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         }
       },
+      "required": [
+        "resultType"
+      ],
       "discriminator": "resultType"
     },
     "MigrateOracleAzureDbPostgreSqlSyncTaskOutputMigrationLevel": {
@@ -433,6 +549,10 @@
       "type": "object",
       "description": "Database specific information for Oracle to Azure Database for PostgreSQL migration task inputs",
       "properties": {
+        "caseManipulation": {
+          "type": "string",
+          "description": "How to handle object name casing: either Preserve or ToLower"
+        },
         "name": {
           "type": "string",
           "description": "Name of the migration pipeline"

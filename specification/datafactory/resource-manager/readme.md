@@ -37,6 +37,13 @@ These settings apply only when `--tag=package-2018-06` is specified on the comma
 ``` yaml $(tag) == 'package-2018-06'
 input-file:
 - Microsoft.DataFactory/stable/2018-06-01/datafactory.json
+- Microsoft.DataFactory/stable/2018-06-01/entityTypes/DataFlow.json
+- Microsoft.DataFactory/stable/2018-06-01/entityTypes/Dataset.json
+- Microsoft.DataFactory/stable/2018-06-01/entityTypes/IntegrationRuntime.json
+- Microsoft.DataFactory/stable/2018-06-01/entityTypes/LinkedService.json
+- Microsoft.DataFactory/stable/2018-06-01/entityTypes/ManagedPrivateEndpoint.json
+- Microsoft.DataFactory/stable/2018-06-01/entityTypes/Pipeline.json
+- Microsoft.DataFactory/stable/2018-06-01/entityTypes/Trigger.json
 ```
 
 ### Tag: package-2017-09-preview
@@ -59,11 +66,16 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
+  - repo: azure-sdk-for-net
   - repo: azure-sdk-for-python
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-node
+  - repo: azure-cli-extensions
+  - repo: azure-resource-manager-schemas
+    after_scripts:
+      - node sdkauto_afterscript.js datafactory/resource-manager
 ```
 
 
@@ -81,33 +93,6 @@ csharp:
   clear-output-folder: true
 ```
 
-## Python
-
-These settings apply only when `--python` is specified on the command line.
-Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
-Use `--python-mode=update` if you already have a setup.py and just want to update the code itself.
-
-``` yaml $(python)
-python-mode: create
-python:
-  azure-arm: true
-  license-header: MICROSOFT_MIT_NO_VERSION
-  payload-flattening-threshold: 2
-  namespace: azure.mgmt.datafactory
-  package-name: azure-mgmt-datafactory
-  package-version: 1.0.0
-  clear-output-folder: true
-```
-``` yaml $(python) && $(python-mode) == 'update'
-python:
-  no-namespace-folders: true
-  output-folder: $(python-sdks-folder)/datafactory/azure-mgmt-datafactory/azure/mgmt/datafactory
-```
-``` yaml $(python) && $(python-mode) == 'create'
-python:
-  basic-setup-py: true
-  output-folder: $(python-sdks-folder)/datafactory/azure-mgmt-datafactory
-```
 
 ## Go
 
@@ -115,54 +100,7 @@ See configuration in [readme.go.md](./readme.go.md)
 
 ## Java
 
-These settings apply only when `--java` is specified on the command line.
-Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-libraries-for-java clone>`.
-
-``` yaml $(java)
-azure-arm: true
-fluent: true
-namespace: com.microsoft.azure.management.datafactory
-license-header: MICROSOFT_MIT_NO_CODEGEN
-payload-flattening-threshold: 1
-output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-datafactory
-```
-
-# Validation
-
-
-### Java multi-api
-
-``` yaml $(java) && $(multiapi)
-batch:
-  - tag: package-2017-09-preview
-  - tag: package-2018-06
-```
-
-### Tag: package-2017-09-preview and java
-
-These settings apply only when `--tag=package-2017-09-preview --java` is specified on the command line.
-Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
-
-``` yaml $(tag) == 'package-2017-09-preview' && $(java) && $(multiapi)
-java:
-  namespace: com.microsoft.azure.management.datafactoryv2.v2017_09_01_preview
-  output-folder: $(azure-libraries-for-java-folder)/datafactoryv2/resource-manager/v2017_09_01_preview
-regenerate-manager: true
-generate-interface: true
-```
-
-### Tag: package-2018-06 and java
-
-These settings apply only when `--tag=package-2018-06 --java` is specified on the command line.
-Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
-
-``` yaml $(tag) == 'package-2018-06' && $(java) && $(multiapi)
-java:
-  namespace: com.microsoft.azure.management.datafactoryv2.v2018_06_01
-  output-folder: $(azure-libraries-for-java-folder)/datafactoryv2/resource-manager/v2018_06_01
-regenerate-manager: true
-generate-interface: true
-```
+See configuration in [readme.java.md](./readme.java.md)
 
 
 ## Suppression
@@ -258,5 +196,14 @@ directive:
     reason:
       - toBeExportedForShoebox is property we send to Azure Monitor which requires the boolean type
       - The other properties are simple and self explanatory
-
+  - suppress: OAV131  # EnumInsteadOfBoolean
+    where:
+      - $(this-folder)/Microsoft.DataFactory/stable/2018-06-01/entityTypes/LinkedService.json
+    reason:
+      - DataFlow add type required  
 ```
+
+## AzureResourceSchema
+
+See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
+

@@ -268,6 +268,171 @@
         "publisher",
         "product"
       ]
+    },
+    "ErrorResponse": {
+      "properties": {
+        "code": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The error code."
+        },
+        "message": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The error message."
+        },
+        "target": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The error target."
+        },
+        "details": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ErrorResponse"
+          },
+          "description": "The error details."
+        },
+        "additionalInfo": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ErrorAdditionalInfo"
+          },
+          "description": "The error additional info."
+        }
+      },
+      "description": "The resource management error response."
+    },
+    "ErrorAdditionalInfo": {
+      "properties": {
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The additional info type."
+        },
+        "info": {
+          "readOnly": true,
+          "type": "object",
+          "description": "The additional info."
+        }
+      },
+      "description": "The resource management error additional info."
+    },
+    "locationData": {
+      "description": "Metadata pertaining to the geographic location of the resource.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "maxLength": 256,
+          "description": "A canonical name for the geographic or physical location."
+        },
+        "city": {
+          "type": "string",
+          "description": "The city or locality where the resource is located."
+        },
+        "district": {
+          "type": "string",
+          "description": "The district, state, or province where the resource is located."
+        },
+        "countryOrRegion": {
+          "type": "string",
+          "description": "The country or region where the resource is located"
+        }
+      },
+      "required": [
+        "name"
+      ]
+    },
+    "systemData": {
+      "description": "Metadata pertaining to creation and last modification of the resource.",
+      "type": "object",
+      "readOnly": true,
+      "properties": {
+        "createdBy": {
+          "type": "string",
+          "description": "The identity that created the resource."
+        },
+        "createdByType": {
+          "type": "string",
+          "description": "The type of identity that created the resource.",
+          "enum": [
+            "User",
+            "Application",
+            "ManagedIdentity",
+            "Key"
+          ],
+          "x-ms-enum": {
+            "name": "createdByType",
+            "modelAsString": true
+          }
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The timestamp of resource creation (UTC)."
+        },
+        "lastModifiedBy": {
+          "type": "string",
+          "description": "The identity that last modified the resource."
+        },
+        "lastModifiedByType": {
+          "type": "string",
+          "description": "The type of identity that last modified the resource.",
+          "enum": [
+            "User",
+            "Application",
+            "ManagedIdentity",
+            "Key"
+          ],
+          "x-ms-enum": {
+            "name": "createdByType",
+            "modelAsString": true
+          }
+        },
+        "lastModifiedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The type of identity that last modified the resource."
+        }
+      }
+    },
+    "encryptionProperties": {
+      "description": "Configuration of key for data encryption",
+      "type": "object",
+      "properties": {
+        "status": {
+          "description": "Indicates whether or not the encryption is enabled for container registry.",
+          "enum": [
+            "enabled",
+            "disabled"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "EncryptionStatus",
+            "modelAsString": true
+          }
+        },
+        "keyVaultProperties": {
+          "$ref": "#/definitions/KeyVaultProperties",
+          "description": "Key vault properties."
+        }
+      }
+    },
+    "KeyVaultProperties": {
+      "type": "object",
+      "properties": {
+        "keyIdentifier": {
+          "description": "Key vault uri to access the encryption key.",
+          "type": "string"
+        },
+        "identity": {
+          "description": "The client id of the identity which will be used to access key vault.",
+          "type": "string"
+        }
+      }
     }
   },
   "parameters": {

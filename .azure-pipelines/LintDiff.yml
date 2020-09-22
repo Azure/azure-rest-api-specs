@@ -1,0 +1,15 @@
+jobs:
+- job: "LintDiff"
+  variables:
+    NODE_OPTIONS: '--max-old-space-size=8192'
+  pool:
+    vmImage: 'Ubuntu 16.04'
+  steps:
+  - task: Npm@1
+    displayName: 'npm install'
+    inputs:
+      verbose: false
+  - script: 'scripts/install-dotnet.sh'
+    displayName: 'install .Net'
+  - script: 'npm run tsc && node scripts/momentOfTruth.js && node scripts/momentOfTruthPostProcessing.js'
+    displayName: 'LintDiff'

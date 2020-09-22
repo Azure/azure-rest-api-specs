@@ -52,6 +52,42 @@
         }
       }
     },
+    "/providers/Microsoft.AlertsManagement/alertsMetaData": {
+      "get": {
+        "operationId": "Alerts_MetaData",
+        "description": "List alerts meta data information based on value of identifier parameter.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "$ref": "#/parameters/identifier"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. Successfully listed alert meta data.",
+            "schema": {
+              "$ref": "#/definitions/alertsMetaData"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/AlertsManagementErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "MonService": {
+            "$ref": "./examples/AlertsMetaData_MonitorService.json"
+          }
+        }
+      }
+    },
     "/{scope}/providers/Microsoft.AlertsManagement/alerts": {
       "get": {
         "operationId": "Alerts_GetAll",
@@ -128,7 +164,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/errorResponse"
+              "$ref": "#/definitions/AlertsManagementErrorResponse"
             }
           }
         },
@@ -171,7 +207,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/errorResponse"
+              "$ref": "#/definitions/AlertsManagementErrorResponse"
             }
           }
         },
@@ -210,7 +246,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/errorResponse"
+              "$ref": "#/definitions/AlertsManagementErrorResponse"
             }
           }
         },
@@ -246,7 +282,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/errorResponse"
+              "$ref": "#/definitions/AlertsManagementErrorResponse"
             }
           }
         },
@@ -315,211 +351,13 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/errorResponse"
+              "$ref": "#/definitions/AlertsManagementErrorResponse"
             }
           }
         },
         "x-ms-examples": {
           "Summary": {
             "$ref": "./examples/Alerts_Summary.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.AlertsManagement/smartGroups": {
-      "get": {
-        "operationId": "SmartGroups_GetAll",
-        "summary": "Get all Smart Groups within a specified subscription",
-        "description": "List all the Smart Groups within a specified subscription. ",
-        "parameters": [
-          {
-            "$ref": "#/parameters/subscriptionId"
-          },
-          {
-            "$ref": "#/parameters/targetResource"
-          },
-          {
-            "$ref": "#/parameters/targetResourceGroup"
-          },
-          {
-            "$ref": "#/parameters/targetResourceType"
-          },
-          {
-            "$ref": "#/parameters/monitorService"
-          },
-          {
-            "$ref": "#/parameters/monitorCondition"
-          },
-          {
-            "$ref": "#/parameters/severity"
-          },
-          {
-            "$ref": "#/parameters/smartGroupState"
-          },
-          {
-            "$ref": "#/parameters/timeRange"
-          },
-          {
-            "$ref": "#/parameters/pageCount"
-          },
-          {
-            "$ref": "#/parameters/smartGroupsSortBy"
-          },
-          {
-            "$ref": "#/parameters/sortOrder"
-          },
-          {
-            "$ref": "#/parameters/api-version"
-          }
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "responses": {
-          "200": {
-            "description": "OK. Returns list of all smartGroups.",
-            "schema": {
-              "$ref": "#/definitions/smartGroupsList",
-              "description": "List of smart groups in value property."
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/errorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "List": {
-            "$ref": "./examples/SmartGroups_List.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.AlertsManagement/smartGroups/{smartGroupId}": {
-      "get": {
-        "operationId": "SmartGroups_GetById",
-        "summary": "Get information related to a specific Smart Group.",
-        "description": "Get information related to a specific Smart Group.",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "$ref": "#/parameters/subscriptionId"
-          },
-          {
-            "$ref": "#/parameters/smartGroupId"
-          },
-          {
-            "$ref": "#/parameters/api-version"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK. Returns the group with the specified smart group Id.",
-            "headers": {
-              "x-ms-request-id": {
-                "type": "string",
-                "description": "Service generated Request ID."
-              }
-            },
-            "schema": {
-              "$ref": "#/definitions/smartGroup"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/errorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Get": {
-            "$ref": "./examples/SmartGroups_GetById.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.AlertsManagement/smartGroups/{smartGroupId}/changeState": {
-      "post": {
-        "operationId": "SmartGroups_ChangeState",
-        "description": "Change the state of a Smart Group.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/subscriptionId"
-          },
-          {
-            "$ref": "#/parameters/smartGroupId"
-          },
-          {
-            "$ref": "#/parameters/api-version"
-          },
-          {
-            "$ref": "#/parameters/newState"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK. Smart Group state updated.",
-            "headers": {
-              "x-ms-request-id": {
-                "type": "string",
-                "description": "Service generated Request ID."
-              }
-            },
-            "schema": {
-              "$ref": "#/definitions/smartGroup"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/errorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "changestate": {
-            "$ref": "./examples/SmartGroups_ChangeState.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.AlertsManagement/smartGroups/{smartGroupId}/history": {
-      "get": {
-        "operationId": "SmartGroups_GetHistory",
-        "description": "Get the history a smart group, which captures any Smart Group state changes (New/Acknowledged/Closed) .",
-        "parameters": [
-          {
-            "$ref": "#/parameters/subscriptionId"
-          },
-          {
-            "$ref": "#/parameters/smartGroupId"
-          },
-          {
-            "$ref": "#/parameters/api-version"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK. Returns the list of changes of smart group.",
-            "schema": {
-              "$ref": "#/definitions/smartGroupModification"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/errorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Resolve": {
-            "$ref": "./examples/SmartGroups_History.json"
           }
         }
       }
@@ -867,6 +705,21 @@
       "in": "query",
       "required": false,
       "x-ms-parameter-location": "method"
+    },
+    "identifier": {
+      "name": "identifier",
+      "description": "Identification of the information to be retrieved by API call.",
+      "type": "string",
+      "in": "query",
+      "required": true,
+      "enum": [
+        "MonitorServiceList"
+      ],
+      "x-ms-enum": {
+        "name": "identifier",
+        "modelAsString": true
+      },
+      "x-ms-parameter-location": "method"
     }
   },
   "definitions": {
@@ -920,7 +773,7 @@
         "value"
       ]
     },
-    "errorResponse": {
+    "AlertsManagementErrorResponse": {
       "description": "An error response from the service.",
       "x-ms-external": true,
       "properties": {
@@ -1388,6 +1241,34 @@
         }
       }
     },
+    "alertsMetaData": {
+      "description": "alert meta data information.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/alertsMetaDataProperties"
+        }
+      }
+    },
+    "alertsMetaDataProperties": {
+      "description": "alert meta data property bag",
+      "discriminator": "metadataIdentifier",
+      "required": [
+        "metadataIdentifier"
+      ],
+      "properties": {
+        "metadataIdentifier": {
+          "type": "string",
+          "description": "Identification of the information to be retrieved by API call",
+          "enum": [
+            "MonitorServiceList"
+          ],
+          "x-ms-enum": {
+            "name": "metadataIdentifier",
+            "modelAsString": true
+          }
+        }
+      }
+    },
     "smartGroupsList": {
       "description": "List the alerts.",
       "properties": {
@@ -1539,6 +1420,43 @@
         "count": {
           "type": "integer",
           "description": "Total number of items of type."
+        }
+      }
+    },
+    "MonitorServiceList": {
+      "title": "Monitor service details",
+      "description": "Monitor service details",
+      "required": [
+        "data"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/alertsMetaDataProperties"
+        },
+        {
+          "type": "object"
+        }
+      ],
+      "properties": {
+        "data": {
+          "description": "Array of operations",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MonitorServiceDetails"
+          }
+        }
+      }
+    },
+    "MonitorServiceDetails": {
+      "description": "Details of a monitor service",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Monitor service name"
+        },
+        "displayName": {
+          "type": "string",
+          "description": "Monitor service display name"
         }
       }
     }

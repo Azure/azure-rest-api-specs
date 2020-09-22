@@ -1,398 +1,401 @@
 {
-    "swagger": "2.0",
-    "info": {
-        "version": "2017-06-01",
-        "title": "Azure Stack Azure Bridge Client"
-    },
-    "host": "management.azure.com",
-    "schemes": [
-        "https"
-    ],
-    "consumes": [
-        "application/json"
-    ],
-    "produces": [
-        "application/json"
-    ],
-    "paths": {
-        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.AzureStack/registrations": {
-            "get": {
-                "x-ms-examples": {
-                    "Returns a list of all registrations.": {
-                        "$ref": "examples/Registration/List.json"
-                    }
-                },
-                "tags": [
-                    "Registrations"
-                ],
-                "description": "Returns a list of all registrations.",
-                "operationId": "Registrations_List",
-                "parameters": [
-                    {
-                        "$ref": "AzureStack.json#/parameters/SubscriptionIdParameter"
-                    },
-                    {
-                        "$ref": "AzureStack.json#/parameters/ResourceGroupNameParameter"
-                    },
-                    {
-                        "$ref": "AzureStack.json#/parameters/ApiVersionParameter"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "$ref": "#/definitions/RegistrationList"
-                        }
-                    },
-                    "default": {
-						"description": "Error response describing why the operation failed.",
-						"schema": {
-						  "$ref": "AzureStack.json#/definitions/ErrorResponse"
-						}
-					}
-                },
-                "x-ms-pageable": {
-                    "nextLinkName": "nextLink"
-                }
-            }
+  "swagger": "2.0",
+  "info": {
+    "version": "2017-06-01",
+    "title": "Azure Stack Azure Bridge Client"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.AzureStack/registrations": {
+      "get": {
+        "x-ms-examples": {
+          "Returns a list of all registrations.": {
+            "$ref": "examples/Registration/List.json"
+          }
         },
-        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.AzureStack/registrations/{registrationName}": {
-            "get": {
-                "x-ms-examples": {
-                    "Returns the properties of an Azure Stack registration.": {
-                        "$ref": "examples/Registration/Get.json"
-                    }
-                },
-                "tags": [
-                    "Registrations"
-                ],
-                "description": "Returns the properties of an Azure Stack registration.",
-                "operationId": "Registrations_Get",
-                "parameters": [
-                    {
-                        "$ref": "AzureStack.json#/parameters/SubscriptionIdParameter"
-                    },
-                    {
-                        "$ref": "AzureStack.json#/parameters/ResourceGroupNameParameter"
-                    },
-                    {
-                        "$ref": "AzureStack.json#/parameters/RegistrationNameParameter"
-                    },
-                    {
-                        "$ref": "AzureStack.json#/parameters/ApiVersionParameter"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "$ref": "#/definitions/Registration"
-                        }
-                    },
-                    "default": {
-						"description": "Error response describing why the operation failed.",
-						"schema": {
-						  "$ref": "AzureStack.json#/definitions/ErrorResponse"
-						}
-					}
-                }
-            },
-            "delete": {
-                "x-ms-examples": {
-                    "Delete the requested Azure Stack registration.": {
-                        "$ref": "./examples/Registration/Delete.json"
-                    }
-                },
-                "tags": [
-                    "Registrations"
-                ],
-                "description": "Delete the requested Azure Stack registration.",
-                "operationId": "Registrations_Delete",
-                "parameters": [
-                    {
-                        "$ref": "AzureStack.json#/parameters/SubscriptionIdParameter"
-                    },
-                    {
-                        "$ref": "AzureStack.json#/parameters/ResourceGroupNameParameter"
-                    },
-                    {
-                        "$ref": "AzureStack.json#/parameters/RegistrationNameParameter"
-                    },
-                    {
-                        "$ref": "AzureStack.json#/parameters/ApiVersionParameter"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK"
-                    },
-                    "204": {
-                        "description": "NO CONTENT"
-                    },
-                    "default": {
-						"description": "Error response describing why the operation failed.",
-						"schema": {
-						  "$ref": "AzureStack.json#/definitions/ErrorResponse"
-						}
-					}
-                }
-            },
-            "put": {
-                "x-ms-examples": {
-                    "Create or update an Azure Stack registration.": {
-                        "$ref": "examples/Registration/Put.json"
-                    }
-                },
-                "tags": [
-                    "Registrations"
-                ],
-                "description": "Create or update an Azure Stack registration.",
-                "operationId": "Registrations_CreateOrUpdate",
-                "parameters": [
-                    {
-                        "$ref": "AzureStack.json#/parameters/SubscriptionIdParameter"
-                    },
-                    {
-                        "$ref": "AzureStack.json#/parameters/ResourceGroupNameParameter"
-                    },
-                    {
-                        "$ref": "AzureStack.json#/parameters/RegistrationNameParameter"
-                    },
-                    {
-                        "$ref": "AzureStack.json#/parameters/ApiVersionParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/NewRegistrationParameter"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "$ref": "#/definitions/Registration"
-                        }
-                    },
-                    "201": {
-                        "description": "CREATED",
-                        "schema": {
-                            "$ref": "#/definitions/Registration"
-                        }
-                    }
-                }
-            },
-			"patch": {
-                "x-ms-examples": {
-                    "Patch an Azure Stack registration.": {
-                        "$ref": "examples/Registration/Patch.json"
-                    }
-                },
-                "tags": [
-                    "Registrations"
-                ],
-                "description": "Patch an Azure Stack registration.",
-                "operationId": "Registrations_Update",
-                "parameters": [
-                    {
-                        "$ref": "AzureStack.json#/parameters/SubscriptionIdParameter"
-                    },
-                    {
-                        "$ref": "AzureStack.json#/parameters/ResourceGroupNameParameter"
-                    },
-                    {
-                        "$ref": "AzureStack.json#/parameters/RegistrationNameParameter"
-                    },
-                    {
-                        "$ref": "AzureStack.json#/parameters/ApiVersionParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/NewRegistrationParameter"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "$ref": "#/definitions/Registration"
-                        }
-                    },
-					"default": {
-						"description": "Error response describing why the operation failed.",
-						"schema": {
-						  "$ref": "AzureStack.json#/definitions/ErrorResponse"
-						}
-					}
-                }
-            }
-        },
-        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.AzureStack/registrations/{registrationName}/getactivationkey": {
-            "post": {
-                "x-ms-examples": {
-                    "Returns Azure Stack Activation Key.": {
-                        "$ref": "./examples/Registration/Post.json"
-                    }
-                },
-                "tags": [
-                    "Registrations"
-                ],
-                "description": "Returns Azure Stack Activation Key.",
-                "operationId": "Registrations_GetActivationKey",
-                "parameters": [
-                    {
-                        "$ref": "AzureStack.json#/parameters/SubscriptionIdParameter"
-                    },
-                    {
-                        "$ref": "AzureStack.json#/parameters/ResourceGroupNameParameter"
-                    },
-                    {
-                        "$ref": "AzureStack.json#/parameters/RegistrationNameParameter"
-                    },
-                    {
-                        "$ref": "AzureStack.json#/parameters/ApiVersionParameter"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "$ref": "#/definitions/ActivationKeyResult"
-                        }
-                    }
-                }
-            }
-        }
-    },
-    "definitions": {
-        "Registration": {
-            "description": "Registration information.",
-            "type": "object",
-            "properties": {
-                "properties": {
-                    "description": "Registration resource.",
-                    "x-ms-client-flatten": true,
-                    "$ref": "#/definitions/RegistrationProperties"
-                }
-            },
-            "allOf": [
-                {
-                    "$ref": "AzureStack.json#/definitions/TrackedResource"
-                }
-            ]
-        },
-        "RegistrationProperties": {
-            "description": "Properties portion of the registration resource.",
-            "type": "object",
-            "properties": {
-                "objectId": {
-                    "description": "The object identifier associated with the Azure Stack connecting to Azure.",
-                    "type": "string"
-                },
-                "cloudId": {
-                    "description": "The identifier of the registered Azure Stack.",
-                    "type": "string"
-                },
-                "billingModel": {
-                    "description": "Specifies the billing mode for the Azure Stack registration.",
-                    "type": "string"
-                }
-            }
-        },
-        "RegistrationList": {
-            "description": "Pageable list of registrations.",
-            "type": "object",
-            "properties": {
-                "nextLink": {
-                    "description": "URI to the next page.",
-                    "type": "string"
-                },
-                "value": {
-                    "description": "List of Registrations",
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/Registration"
-                    }
-                }
-            }
-        },
-        "ActivationKeyResult": {
-            "description": "The resource containing the Azure Stack activation key.",
-            "type": "object",
-            "properties": {
-                "activationKey": {
-                    "description": "Azure Stack activation key.",
-                    "type": "string"
-                }
-            }
-        },
-        "RegistrationParameter": {
-            "description": "Registration resource",
-            "type": "object",
-            "properties": {
-                "properties": {
-                    "description": "Properties of the Azure Stack registration resource",
-                    "x-ms-client-flatten": true,
-                    "$ref": "#/definitions/RegistrationParameterProperties"
-					
-                },
-				"location": {
-					"description": "Location of the resource.",
-					"type": "string",
-					"enum": [
-						"global"
-					],
-					"x-ms-enum": {
-						"name": "Location",
-						"modelAsString": true
-					},
-					"x-ms-mutability": [
-						"create",
-						"read"
-					]
-				}
-            }
-        },
-        "RegistrationParameterProperties": {
-            "description": "Properties of the Azure Stack registration resource",
-            "type": "object",
-            "properties": {
-                "registrationToken": {
-                    "description": "The token identifying registered Azure Stack",
-                    "type": "string"
-                }
-            },
-            "required": [
-                "registrationToken"
-            ]
-        }
-    },
-    "parameters": {
-        "NewRegistrationParameter": {
-            "description": "Registration token",
-            "name": "token",
-            "in": "body",
+        "tags": [
+          "Registrations"
+        ],
+        "description": "Returns a list of all registrations.",
+        "operationId": "Registrations_List",
+        "parameters": [
+          {
+            "$ref": "AzureStack.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "AzureStack.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "AzureStack.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
             "schema": {
-                "$ref": "#/definitions/RegistrationParameter"
-            },
-            "required": true,
-            "x-ms-parameter-location": "method"
-        }
-    },
-    "securityDefinitions": {
-        "azure_auth": {
-            "type": "oauth2",
-            "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
-            "flow": "implicit",
-            "description": "Authorization uses an Azure Active Directory OAuth2 flow.",
-            "scopes": {
-                "user_impersonation": "impersonate your user account"
+              "$ref": "#/definitions/RegistrationList"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "AzureStack.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
+      }
     },
-    "security": [
-        {
-            "azure_auth": [
-                "user_impersonation"
-            ]
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.AzureStack/registrations/{registrationName}": {
+      "get": {
+        "x-ms-examples": {
+          "Returns the properties of an Azure Stack registration.": {
+            "$ref": "examples/Registration/Get.json"
+          }
+        },
+        "tags": [
+          "Registrations"
+        ],
+        "description": "Returns the properties of an Azure Stack registration.",
+        "operationId": "Registrations_Get",
+        "parameters": [
+          {
+            "$ref": "AzureStack.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "AzureStack.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "AzureStack.json#/parameters/RegistrationNameParameter"
+          },
+          {
+            "$ref": "AzureStack.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Registration"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "AzureStack.json#/definitions/ErrorResponse"
+            }
+          }
         }
-    ]
+      },
+      "delete": {
+        "x-ms-examples": {
+          "Delete the requested Azure Stack registration.": {
+            "$ref": "./examples/Registration/Delete.json"
+          }
+        },
+        "tags": [
+          "Registrations"
+        ],
+        "description": "Delete the requested Azure Stack registration.",
+        "operationId": "Registrations_Delete",
+        "parameters": [
+          {
+            "$ref": "AzureStack.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "AzureStack.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "AzureStack.json#/parameters/RegistrationNameParameter"
+          },
+          {
+            "$ref": "AzureStack.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "204": {
+            "description": "NO CONTENT"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "AzureStack.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "x-ms-examples": {
+          "Create or update an Azure Stack registration.": {
+            "$ref": "examples/Registration/Put.json"
+          }
+        },
+        "tags": [
+          "Registrations"
+        ],
+        "description": "Create or update an Azure Stack registration.",
+        "operationId": "Registrations_CreateOrUpdate",
+        "parameters": [
+          {
+            "$ref": "AzureStack.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "AzureStack.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "AzureStack.json#/parameters/RegistrationNameParameter"
+          },
+          {
+            "$ref": "AzureStack.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/NewRegistrationParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Registration"
+            }
+          },
+          "201": {
+            "description": "CREATED",
+            "schema": {
+              "$ref": "#/definitions/Registration"
+            }
+          }
+        }
+      },
+      "patch": {
+        "x-ms-examples": {
+          "Patch an Azure Stack registration.": {
+            "$ref": "examples/Registration/Patch.json"
+          }
+        },
+        "tags": [
+          "Registrations"
+        ],
+        "description": "Patch an Azure Stack registration.",
+        "operationId": "Registrations_Update",
+        "parameters": [
+          {
+            "$ref": "AzureStack.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "AzureStack.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "AzureStack.json#/parameters/RegistrationNameParameter"
+          },
+          {
+            "$ref": "AzureStack.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/NewRegistrationParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Registration"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "AzureStack.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.AzureStack/registrations/{registrationName}/getactivationkey": {
+      "post": {
+        "x-ms-examples": {
+          "Returns Azure Stack Activation Key.": {
+            "$ref": "./examples/Registration/Post.json"
+          }
+        },
+        "tags": [
+          "Registrations"
+        ],
+        "description": "Returns Azure Stack Activation Key.",
+        "operationId": "Registrations_GetActivationKey",
+        "parameters": [
+          {
+            "$ref": "AzureStack.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "AzureStack.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "AzureStack.json#/parameters/RegistrationNameParameter"
+          },
+          {
+            "$ref": "AzureStack.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ActivationKeyResult"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Registration": {
+      "description": "Registration information.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "description": "Registration resource.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/RegistrationProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "AzureStack.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "RegistrationProperties": {
+      "description": "Properties portion of the registration resource.",
+      "type": "object",
+      "properties": {
+        "objectId": {
+          "description": "The object identifier associated with the Azure Stack connecting to Azure.",
+          "type": "string"
+        },
+        "cloudId": {
+          "description": "The identifier of the registered Azure Stack.",
+          "type": "string"
+        },
+        "billingModel": {
+          "description": "Specifies the billing mode for the Azure Stack registration.",
+          "type": "string"
+        }
+      }
+    },
+    "RegistrationList": {
+      "description": "Pageable list of registrations.",
+      "type": "object",
+      "properties": {
+        "nextLink": {
+          "description": "URI to the next page.",
+          "type": "string"
+        },
+        "value": {
+          "description": "List of Registrations",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Registration"
+          }
+        }
+      }
+    },
+    "ActivationKeyResult": {
+      "description": "The resource containing the Azure Stack activation key.",
+      "type": "object",
+      "properties": {
+        "activationKey": {
+          "description": "Azure Stack activation key.",
+          "type": "string"
+        }
+      }
+    },
+    "RegistrationParameter": {
+      "description": "Registration resource",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "description": "Properties of the Azure Stack registration resource",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/RegistrationParameterProperties"
+        },
+        "location": {
+          "description": "Location of the resource.",
+          "type": "string",
+          "enum": [
+            "global"
+          ],
+          "x-ms-enum": {
+            "name": "Location",
+            "modelAsString": true
+          },
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        }
+      },
+      "required": [
+        "properties",
+        "location"
+      ]
+    },
+    "RegistrationParameterProperties": {
+      "description": "Properties of the Azure Stack registration resource",
+      "type": "object",
+      "properties": {
+        "registrationToken": {
+          "description": "The token identifying registered Azure Stack",
+          "type": "string"
+        }
+      },
+      "required": [
+        "registrationToken"
+      ]
+    }
+  },
+  "parameters": {
+    "NewRegistrationParameter": {
+      "description": "Registration token",
+      "name": "token",
+      "in": "body",
+      "schema": {
+        "$ref": "#/definitions/RegistrationParameter"
+      },
+      "required": true,
+      "x-ms-parameter-location": "method"
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Authorization uses an Azure Active Directory OAuth2 flow.",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ]
 }

@@ -14,11 +14,61 @@ go:
 ### Go multi-api
 ``` yaml $(go) && $(multiapi)
 batch:
+  - tag: package-2020-09
+  - tag: package-2020-05
+  - tag: package-2020-03
+  - tag: package-2019-08
+  - tag: package-2019-04
   - tag: package-2018-12
   - tag: package-2017-09
   - tag: package-2017-05
   - tag: package-2017-01
   - tag: package-2015-12
+```
+
+### Tag: package-2020-09 and go
+
+These settings apply only when `--tag=package-2020-09 --go` is specified on the command line.
+Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
+
+``` yaml $(tag) == 'package-2020-09' && $(go)
+output-folder: $(go-sdk-folder)/services/$(namespace)/mgmt/2020-09-01/$(namespace)
+```
+
+### Tag: package-2020-05 and go
+
+These settings apply only when `--tag=package-2020-05 --go` is specified on the command line.
+Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
+
+``` yaml $(tag) == 'package-2020-05' && $(go)
+output-folder: $(go-sdk-folder)/services/$(namespace)/mgmt/2020-05-01/$(namespace)
+```
+
+### Tag: package-2020-03 and go
+
+These settings apply only when `--tag=package-2020-03 --go` is specified on the command line.
+Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
+
+``` yaml $(tag) == 'package-2020-03' && $(go)
+output-folder: $(go-sdk-folder)/services/$(namespace)/mgmt/2020-03-01/$(namespace)
+```
+
+### Tag: package-2019-08 and go
+
+These settings apply only when `--tag=package-2019-08 --go` is specified on the command line.
+Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
+
+``` yaml $(tag) == 'package-2019-08' && $(go)
+output-folder: $(go-sdk-folder)/services/$(namespace)/mgmt/2019-08-01/$(namespace)
+```
+
+### Tag: package-2019-04 and go
+
+These settings apply only when `--tag=package-2019-04 --go` is specified on the command line.
+Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
+
+``` yaml $(tag) == 'package-2019-04' && $(go)
+output-folder: $(go-sdk-folder)/services/$(namespace)/mgmt/2019-04-01/$(namespace)
 ```
 
 ### Tag: package-2018-12 and go

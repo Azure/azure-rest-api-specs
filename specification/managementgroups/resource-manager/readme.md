@@ -24,8 +24,33 @@ These are the global settings for the API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2018-03
+tag: package-2020-05
 ```
+
+### Tag: package-2020-05
+These settings apply only when `--tag=package-2020-05` is specified on the command line.
+
+``` yaml $(tag) == 'package-2020-05'
+input-file:
+  - Microsoft.Management/stable/2020-05-01/management.json
+```
+
+### Tag: package-2020-02
+These settings apply only when `--tag=package-2020-02` is specified on the command line.
+
+``` yaml $(tag) == 'package-2020-02'
+input-file:
+  - Microsoft.Management/stable/2020-02-01/management.json
+```
+
+### Tag: package-2019-11
+These settings apply only when `--tag=package-2019-11` is specified on the command line.
+
+``` yaml $(tag) == 'package-2019-11'
+input-file:
+  - Microsoft.Management/stable/2019-11-01/management.json
+```
+
 ### Tag: package-2018-03
 These settings apply only when `--tag=package-2018-03` is specified on the command line.
 
@@ -69,11 +94,16 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
+  - repo: azure-sdk-for-net
   - repo: azure-sdk-for-python
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-node
+  - repo: azure-cli-extensions
+  - repo: azure-resource-manager-schemas
+    after_scripts:
+      - node sdkauto_afterscript.js managementgroups/resource-manager
 ```
 
 ## C#
@@ -143,6 +173,9 @@ batch:
   - tag: package-2017-11
   - tag: package-2018-01
   - tag: package-2018-03
+  - tag: package-2019-11
+  - tag: package-2020-02
+  - tag: package-2020-05
 ```
 
 ### Tag: package-2017-08 and java
@@ -153,7 +186,7 @@ Please also specify `--azure-libraries-for-java=<path to the root directory of y
 ``` yaml $(tag) == 'package-2017-08' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.managementgroups.v2017_08_31_preview
-  output-folder: $(azure-libraries-for-java-folder)/managementgroups/resource-manager/v2017_08_31_preview
+  output-folder: $(azure-libraries-for-java-folder)/sdk/managementgroups/mgmt-v2017_08_31_preview
 regenerate-manager: true
 generate-interface: true
 ```
@@ -166,7 +199,7 @@ Please also specify `--azure-libraries-for-java=<path to the root directory of y
 ``` yaml $(tag) == 'package-2017-11' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.managementgroups.v2017_11_01_preview
-  output-folder: $(azure-libraries-for-java-folder)/managementgroups/resource-manager/v2017_11_01_preview
+  output-folder: $(azure-libraries-for-java-folder)/sdk/managementgroups/mgmt-v2017_11_01_preview
 regenerate-manager: true
 generate-interface: true
 ```
@@ -179,7 +212,7 @@ Please also specify `--azure-libraries-for-java=<path to the root directory of y
 ``` yaml $(tag) == 'package-2018-01' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.managementgroups.v2018_01_01_preview
-  output-folder: $(azure-libraries-for-java-folder)/managementgroups/resource-manager/v2018_01_01_preview
+  output-folder: $(azure-libraries-for-java-folder)/sdk/managementgroups/mgmt-v2018_01_01_preview
 regenerate-manager: true
 generate-interface: true
 ```
@@ -192,9 +225,52 @@ Please also specify `--azure-libraries-for-java=<path to the root directory of y
 ``` yaml $(tag) == 'package-2018-03' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.managementgroups.v2018_03_01_preview
-  output-folder: $(azure-libraries-for-java-folder)/managementgroups/resource-manager/v2018_03_01_preview
+  output-folder: $(azure-libraries-for-java-folder)/sdk/managementgroups/mgmt-v2018_03_01_preview
 regenerate-manager: true
 generate-interface: true
 ```
 
+### Tag: package-2019-11 and java
+
+These settings apply only when `--tag=package-2019-11 --java` is specified on the command line.
+Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-2019-11' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.managementgroups.v2019_11_01
+  output-folder: $(azure-libraries-for-java-folder)/sdk/managementgroups/mgmt-v2019_11_01
+regenerate-manager: true
+generate-interface: true
+```
+
+### Tag: package-2020-02 and java
+
+These settings apply only when `--tag=package-2020-02 --java` is specified on the command line.
+Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-2020-02' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.managementgroups.v2020_02_01
+  output-folder: $(azure-libraries-for-java-folder)/sdk/managementgroups/mgmt-v2020_02_01
+regenerate-manager: true
+generate-interface: true
+```
+
+### Tag: package-2020-05 and java
+
+These settings apply only when `--tag=package-2020-05 --java` is specified on the command line.
+Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-2020-05' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.managementgroups.v2020_05_01
+  output-folder: $(azure-libraries-for-java-folder)/sdk/managementgroups/mgmt-v2020_05_01
+regenerate-manager: true
+generate-interface: true
+```
+
+
+## AzureResourceSchema
+
+See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
 

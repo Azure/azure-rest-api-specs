@@ -61,12 +61,16 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
+  - repo: azure-sdk-for-net
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-node
   - repo: azure-sdk-for-ruby
     after_scripts:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_customer_insights']
+  - repo: azure-resource-manager-schemas
+    after_scripts:
+      - node sdkauto_afterscript.js customer-insights/resource-manager
 ```
 
 
@@ -118,7 +122,7 @@ Please also specify `--azure-libraries-for-java=<path to the root directory of y
 ``` yaml $(tag) == 'package-2017-01' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.customerinsights.v2017_01_01
-  output-folder: $(azure-libraries-for-java-folder)/customerinsights/resource-manager/v2017_01_01
+  output-folder: $(azure-libraries-for-java-folder)/sdk/customerinsights/mgmt-v2017_01_01
 regenerate-manager: true
 generate-interface: true
 ```
@@ -131,10 +135,15 @@ Please also specify `--azure-libraries-for-java=<path to the root directory of y
 ``` yaml $(tag) == 'package-2017-04' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.customerinsights.v2017_04_26
-  output-folder: $(azure-libraries-for-java-folder)/customerinsights/resource-manager/v2017_04_26
+  output-folder: $(azure-libraries-for-java-folder)/sdk/customerinsights/mgmt-v2017_04_26
 regenerate-manager: true
 generate-interface: true
 ```
 
 
+
+
+## AzureResourceSchema
+
+See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
 

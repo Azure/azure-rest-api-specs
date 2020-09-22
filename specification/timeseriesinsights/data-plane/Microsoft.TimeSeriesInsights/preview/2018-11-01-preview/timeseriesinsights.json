@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "TimeSeriesInsightsClient",
-    "description": "Time Series Insights environment data plane client for PAYG (Preview L1 SKU) environments.",
+    "description": "Time Series Insights environment data plane client for Gen2 (Preview L1 SKU) environments.",
     "version": "2018-11-01-preview"
   },
   "x-ms-parameterized-host": {
@@ -54,6 +54,12 @@
           "AvailabilityGet": {
             "$ref": "./examples/AvailabilityGet.json"
           },
+          "ColdStoreAvailabilityGet": {
+            "$ref": "./examples/ColdStoreAvailabilityGet.json"
+          },
+          "WarmStoreAvailabilityGet": {
+            "$ref": "./examples/WarmStoreAvailabilityGet.json"
+          },
           "AvailabilityGetEmpty": {
             "$ref": "./examples/AvailabilityGetEmpty.json"
           }
@@ -61,6 +67,9 @@
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/StoreType"
           },
           {
             "$ref": "#/parameters/ClientRequestId"
@@ -112,11 +121,20 @@
           },
           "EventSchemaGetEmpty": {
             "$ref": "./examples/EventSchemaGetEmpty.json"
+          },
+          "ColdStoreEventSchemaGet": {
+            "$ref": "./examples/ColdStoreEventSchemaGet.json"
+          },
+          "WarmStoreEventSchemaGet": {
+            "$ref": "./examples/WarmStoreEventSchemaGet.json"
           }
         },
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/StoreType"
           },
           {
             "name": "parameters",
@@ -170,7 +188,7 @@
           "ModelSettings"
         ],
         "operationId": "ModelSettings_Get",
-        "description": "Returns the model settings which includes model display name, Time Series ID properties and default type ID. Every pay-as-you-go environment has a model that is automatically created.",
+        "description": "Returns the model settings which includes model display name, Time Series ID properties and default type ID. Every Gen2 environment has a model that is automatically created.",
         "x-ms-examples": {
           "ModelSettingsGet": {
             "$ref": "./examples/ModelSettingsGet.json"
@@ -291,6 +309,24 @@
           "QueryAggregateSeriesPage2": {
             "$ref": "./examples/QueryAggregateSeriesPage2.json"
           },
+          "ColdStoreQueryAggregateSeriesPage1": {
+            "$ref": "./examples/ColdStoreQueryAggregateSeriesPage1.json"
+          },
+          "ColdStoreQueryAggregateSeriesPage2": {
+            "$ref": "./examples/ColdStoreQueryAggregateSeriesPage2.json"
+          },
+          "WarmStoreQueryAggregateSeriesPage": {
+            "$ref": "./examples/WarmStoreQueryAggregateSeriesPage.json"
+          },
+          "QueryAggregateSeriesWithSampleInterpolation": {
+            "$ref": "./examples/QueryAggregateSeriesWithSampleInterpolation.json"
+          },
+          "QueryAggregateSeriesWithCategoricalVariable": {
+            "$ref": "./examples/QueryAggregateSeriesWithCategoricalVariable.json"
+          },
+          "QueryAggregateSeriesWithCategoricalInterpolatedVariable": {
+            "$ref": "./examples/QueryAggregateSeriesWithCategoricalInterpolatedVariable.json"
+          },
           "QueryGetEventsPage1": {
             "$ref": "./examples/QueryGetEventsPage1.json"
           },
@@ -303,6 +339,36 @@
           "QueryGetEventsPage4": {
             "$ref": "./examples/QueryGetEventsPage4.json"
           },
+          "ColdStoreQueryGetEventsPage1": {
+            "$ref": "./examples/ColdStoreQueryGetEventsPage1.json"
+          },
+          "ColdStoreQueryGetEventsPage2": {
+            "$ref": "./examples/ColdStoreQueryGetEventsPage2.json"
+          },
+          "ColdStoreQueryGetEventsPage3": {
+            "$ref": "./examples/ColdStoreQueryGetEventsPage3.json"
+          },
+          "ColdStoreQueryGetEventsPage4": {
+            "$ref": "./examples/ColdStoreQueryGetEventsPage4.json"
+          },
+          "WarmStoreQueryGetEventsPage1": {
+            "$ref": "./examples/WarmStoreQueryGetEventsPage1.json"
+          },
+          "WarmStoreQueryGetEventsPage2": {
+            "$ref": "./examples/WarmStoreQueryGetEventsPage2.json"
+          },
+          "WarmStoreQueryGetEventsPage3": {
+            "$ref": "./examples/WarmStoreQueryGetEventsPage3.json"
+          },
+          "WarmStoreQueryGetEventsPage4": {
+            "$ref": "./examples/WarmStoreQueryGetEventsPage4.json"
+          },
+          "QueryGetEventsWithTakePage1": {
+            "$ref": "./examples/QueryGetEventsWithTakePage1.json"
+          },
+          "QueryGetEventsWithTakePage2": {
+            "$ref": "./examples/QueryGetEventsWithTakePage2.json"
+          },
           "QueryGetSeriesPage1": {
             "$ref": "./examples/QueryGetSeriesPage1.json"
           },
@@ -311,11 +377,38 @@
           },
           "QueryGetSeriesPage3": {
             "$ref": "./examples/QueryGetSeriesPage3.json"
+          },
+          "QueryGetSeriesWithTakePage1": {
+            "$ref": "./examples/QueryGetSeriesWithTakePage1.json"
+          },
+          "QueryGetSeriesWithTakePage2": {
+            "$ref": "./examples/QueryGetSeriesWithTakePage2.json"
+          },
+          "ColdStoreQueryGetSeriesPage1": {
+            "$ref": "./examples/ColdStoreQueryGetSeriesPage1.json"
+          },
+          "ColdStoreQueryGetSeriesPage2": {
+            "$ref": "./examples/ColdStoreQueryGetSeriesPage2.json"
+          },
+          "ColdStoreQueryGetSeriesPage3": {
+            "$ref": "./examples/ColdStoreQueryGetSeriesPage3.json"
+          },
+          "WarmStoreQueryGetSeriesPage1": {
+            "$ref": "./examples/WarmStoreQueryGetSeriesPage1.json"
+          },
+          "WarmStoreQueryGetSeriesPage2": {
+            "$ref": "./examples/WarmStoreQueryGetSeriesPage2.json"
+          },
+          "WarmStoreQueryGetSeriesPage3": {
+            "$ref": "./examples/WarmStoreQueryGetSeriesPage3.json"
           }
         },
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/StoreType"
           },
           {
             "$ref": "#/parameters/ContinuationToken"
@@ -446,7 +539,7 @@
             "$ref": "./examples/InstancesBatchGetByIds.json"
           },
           "InstancesBatchGetByNames": {
-            "$ref": "./examples/InstancesBatchGetByIds.json"
+            "$ref": "./examples/InstancesBatchGetByNames.json"
           },
           "InstancesBatchUpdate": {
             "$ref": "./examples/InstancesBatchUpdate.json"
@@ -575,14 +668,29 @@
         "operationId": "TimeSeriesInstances_Search",
         "description": "Partial list of hits on search for time series instances based on instance attributes.",
         "x-ms-examples": {
-          "InstancesSearchPage1": {
-            "$ref": "./examples/InstancesSearchPage1.json"
+          "SearchInstancesHierarchiesDefaultInputPage1": {
+            "$ref": "./examples/SearchInstancesHierarchiesDefaultInputPage1.json"
           },
-          "InstancesSearchPage2": {
-            "$ref": "./examples/InstancesSearchPage2.json"
+          "SearchInstancesHierarchiesDefaultInputPage2": {
+            "$ref": "./examples/SearchInstancesHierarchiesDefaultInputPage2.json"
           },
-          "InstancesSearchPage3": {
-            "$ref": "./examples/InstancesSearchPage3.json"
+          "SearchInstancesHierarchiesDefaultInputPage3": {
+            "$ref": "./examples/SearchInstancesHierarchiesDefaultInputPage3.json"
+          },
+          "SearchInstancesUntilChildren": {
+            "$ref": "./examples/SearchInstancesUntilChildren.json"
+          },
+          "SearchInstancesDefault": {
+            "$ref": "./examples/SearchInstancesDefault.json"
+          },
+          "SearchInstancesExpandHierarchiesOnly": {
+            "$ref": "./examples/SearchInstancesExpandHierarchiesOnly.json"
+          },
+          "SearchInstancesRecursive": {
+            "$ref": "./examples/SearchInstancesRecursive.json"
+          },
+          "SearchInstancesOneLevel": {
+            "$ref": "./examples/SearchInstancesOneLevel.json"
           }
         },
         "parameters": [
@@ -597,7 +705,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/InstancesSearchRequest"
+              "$ref": "#/definitions/SearchInstancesRequest"
             },
             "description": "Time series instances search request body."
           },
@@ -612,7 +720,7 @@
           "200": {
             "description": "Successful search response.",
             "schema": {
-              "$ref": "#/definitions/InstancesSearchResponsePage"
+              "$ref": "#/definitions/SearchInstancesResponsePage"
             },
             "headers": {
               "x-ms-request-id": {
@@ -1015,6 +1123,11 @@
           "items": {
             "$ref": "#/definitions/EventProperty"
           }
+        },
+        "take": {
+          "description": "Maximum number of property values in the whole response set, not the maximum number of property values per page. Defaults to 10,000 when not set. Maximum value of take can be 250,000.",
+          "type": "integer",
+          "format": "int32"
         }
       },
       "required": [
@@ -1051,6 +1164,11 @@
           "additionalProperties": {
             "$ref": "#/definitions/Variable"
           }
+        },
+        "take": {
+          "description": "Maximum number of property values in the whole response set, not the maximum number of property values per page. Defaults to 10,000 when not set. Maximum value of take can be 250,000.",
+          "type": "integer",
+          "format": "int32"
         }
       },
       "required": [
@@ -1121,6 +1239,34 @@
         "tsx"
       ]
     },
+    "Interpolation": {
+      "description": "The interpolation operation to be performed on the raw data points. Currently, only sampling of interpolated time series is allowed. Allowed aggregate function - eg: left($value). Can be null if no interpolation needs to be applied.",
+      "type": "object",
+      "properties": {
+        "kind": {
+          "description": "The type of interpolation technique : \"Linear\" or \"Step\".",
+          "type": "string",
+          "enum": [
+            "Linear",
+            "Step"
+          ],
+          "x-ms-enum": {
+            "name": "InterpolationKind",
+            "modelAsString": true
+          }
+        },
+        "boundary": {
+          "description": "The time range to the left and right of the search span to be used for Interpolation. This is helpful in scenarios where the data points are missing close to the start or end of the input search span. Can be null.",
+          "type": "object",
+          "properties": {
+            "span": {
+              "type": "string",
+              "format": "duration"
+            }
+          }
+        }
+      }
+    },
     "DateTimeRange": {
       "description": "The range of time. Cannot be null or negative.",
       "type": "object",
@@ -1155,6 +1301,9 @@
               "description": "Value time series expression is used to represent the value of the signal that is going to be aggregated or interpolated. For example, temperature values from the event is represented like this: \"$event.Temperature.Double\".",
               "$ref": "#/definitions/Tsx"
             },
+            "interpolation": {
+              "$ref": "#/definitions/Interpolation"
+            },
             "aggregation": {
               "description": "Aggregation time series expression when kind is \"numeric\" is used to represent the aggregation that needs to be performed on the $value expression. This requires $value to be specified and can only use $value inside the aggregate functions. For example, aggregation for calculating minimum of the $value is written as: \"min($value)\".",
               "$ref": "#/definitions/Tsx"
@@ -1169,7 +1318,7 @@
       ]
     },
     "AggregateVariable": {
-      "description": "Aggregate variable represents any aggregation calculation.",
+      "description": "Aggregate variable represents any aggregation calculation. Aggregate Variables does not support interpolation.",
       "x-ms-discriminator-value": "aggregate",
       "allOf": [
         {
@@ -1188,6 +1337,76 @@
       "required": [
         "kind",
         "aggregation"
+      ]
+    },
+    "CategoricalVariable": {
+      "description": "Categorical variable represents signal that needs to be analyzed based on the count or duration of occurrence of limited set of defined values.",
+      "x-ms-discriminator-value": "categorical",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Variable"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "value": {
+              "description": "Value time series expression is used to represent the value of the signal that is going to be categorized. It can evaluate to only 'String' or 'Long' type for categorical variables.",
+              "$ref": "#/definitions/Tsx"
+            },
+            "interpolation": {
+              "description": "Categorical variable supports only 'step' interpolation.",
+              "$ref": "#/definitions/Interpolation"
+            },
+            "categories": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/TimeSeriesAggregateCategory"
+              }
+            },
+            "defaultCategory": {
+              "$ref": "#/definitions/TimeSeriesDefaultCategory"
+            }
+          }
+        }
+      ],
+      "required": [
+        "kind",
+        "value",
+        "defaultCategory"
+      ]
+    },
+    "TimeSeriesAggregateCategory": {
+      "description": "Category used in categorical variables. A category is defined by 'label' and the 'values' that are assigned this label.",
+      "type": "object",
+      "properties": {
+        "label": {
+          "description": "The name of the category which will be used in constructing the output variable names.",
+          "type": "string"
+        },
+        "values": {
+          "description": "The list of values that a category maps to. Can be either a unique list of string or list of long.",
+          "type": "array",
+          "items": {
+            "type": "object"
+          }
+        }
+      },
+      "required": [
+        "label",
+        "values"
+      ]
+    },
+    "TimeSeriesDefaultCategory": {
+      "description": "Represents the default category.",
+      "type": "object",
+      "properties": {
+        "label": {
+          "description": "The name of the default category which will be assigned to the values that does not match any of those that are defined in the 'categories'.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "label"
       ]
     },
     "Variable": {
@@ -1233,6 +1452,12 @@
               "items": {
                 "$ref": "#/definitions/PropertyValues"
               }
+            },
+            "progress": {
+              "description": "Approximate progress of the query in percentage. It can be between 0 and 100. When the continuation token in the response is null, the progress is expected to be 100.",
+              "readOnly": true,
+              "type": "number",
+              "format": "double"
             }
           }
         }
@@ -1287,8 +1512,7 @@
         },
         "typeId": {
           "description": "This represents the type that this instance belongs to. Never null.",
-          "type": "string",
-          "format": "uuid"
+          "type": "string"
         },
         "name": {
           "description": "Optional name of the instance which is unique in an environment. Names acts as a mutable alias or display name of the time series instance. Mutable, may be null.",
@@ -1302,8 +1526,7 @@
           "description": "Set of time series hierarchy IDs that the instance belong to. May be null.",
           "type": "array",
           "items": {
-            "type": "string",
-            "format": "uuid"
+            "type": "string"
           }
         },
         "instanceFields": {
@@ -1445,9 +1668,8 @@
       "type": "object",
       "properties": {
         "id": {
-          "description": "Unique type identifier that is immutable. Can be null on create or update requests, and then server generates the ID. Not null on get and delete operations.",
-          "type": "string",
-          "format": "uuid"
+          "description": "Case-sensitive unique type identifier that is immutable. Can be null on create or update requests, and then server generates the ID. Not null on get and delete operations.",
+          "type": "string"
         },
         "name": {
           "description": "User-given unique name for the type. Mutable, not null.",
@@ -1498,8 +1720,7 @@
           "description": "List of IDs of time series types to return or delete.",
           "type": "array",
           "items": {
-            "type": "string",
-            "format": "uuid"
+            "type": "string"
           }
         },
         "names": {
@@ -1583,9 +1804,8 @@
       "type": "object",
       "properties": {
         "id": {
-          "description": "Unique hierarchy identifier that is a immutable GUID. Can be null while creating hierarchy objects and then server generates the id, not null on get and delete operations.",
-          "type": "string",
-          "format": "uuid"
+          "description": "Case-sensitive unique hierarchy identifier. Can be null while creating hierarchy objects and then server generates the id, not null on get and delete operations.",
+          "type": "string"
         },
         "name": {
           "description": "User-given unique name for the type. It is mutable and not null.",
@@ -1639,8 +1859,7 @@
           "description": "List of hierarchy IDs.",
           "type": "array",
           "items": {
-            "type": "string",
-            "format": "uuid"
+            "type": "string"
           }
         },
         "names": {
@@ -1726,8 +1945,7 @@
         "defaultTypeId": {
           "description": "Default type ID of the model that new time series instances will automatically belong to.",
           "readOnly": true,
-          "type": "string",
-          "format": "uuid"
+          "type": "string"
         }
       }
     },
@@ -1772,34 +1990,201 @@
         },
         "defaultTypeId": {
           "description": "Default type id of the model that new instances will automatically belong to.",
-          "type": "string",
-          "format": "uuid"
-        }
-      }
-    },
-    "InstancesSearchRequest": {
-      "description": "Request to search time series instances using a search string.",
-      "type": "object",
-      "properties": {
-        "searchString": {
-          "description": "Search string for which the instances are required. Must be present, but can be empty string.",
           "type": "string"
         }
       }
     },
-    "InstancesSearchResponsePage": {
-      "description": "Single page of time series instance search results.",
+    "SearchInstancesRequest": {
+      "description": "Request to execute a search query against time series instances and return matching time series instances.",
+      "type": "object",
+      "properties": {
+        "searchString": {
+          "description": "Query search string that will be matched to the attributes of time series instances. Example: \"floor 100\". Case-insensitive, must be present, but can be empty string.",
+          "type": "string"
+        },
+        "path": {
+          "description": "Filter on hierarchy path of time series instances. Path is represented as array of string path segments. First element should be hierarchy name. Example: [\"Location\", \"California\"]. Optional, case sensitive, never empty and can be null.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "instances": {
+          "description": "Parameters of how to return time series instances. Can be null. When both the instances and hierarchies parameters are null, the instances are returned in the results based on the default values of parameters, and hierarchies are not returned.",
+          "type": "object",
+          "$ref": "#/definitions/SearchInstancesParameters"
+        },
+        "hierarchies": {
+          "description": "Parameters of how to return time series instance hierarchies. If null, hierarchies are not returned. If instances parameter is null and hierarchies parameter is not null, only hierarchies with no instances are returned.",
+          "type": "object",
+          "$ref": "#/definitions/SearchInstancesHierarchiesParameters"
+        }
+      },
+      "required": [
+        "searchString"
+      ]
+    },
+    "SearchInstancesParameters": {
+      "description": "Parameters of how to return time series instances by search instances call.",
+      "type": "object",
+      "properties": {
+        "recursive": {
+          "description": "Definition of which instances are returned. When recursive is set to 'true', all instances that have the path that starts with path the path parameter are returned. When recursive is set to 'false', only instances that have the path that exactly matches the path parameter are returned. Using recursive search allows to implement search user experience, while using non-recursive search allows to implement navigation experience. Optional, default is 'true'.",
+          "type": "boolean"
+        },
+        "sort": {
+          "description": "Definition of how time series instances are sorted before being returned by search instances call - relevance or alphabetical. Optional, default is \"Rank\".",
+          "type": "object",
+          "$ref": "#/definitions/InstancesSortParameter"
+        },
+        "highlights": {
+          "description": "Definition of highlighted search results or not. When it is set to 'true', the highlighted search results are returned. When it is set to 'false', the highlighted search results are not returned. Default is 'true'.",
+          "type": "boolean"
+        },
+        "pageSize": {
+          "description": "Maximum number of instances expected in each page of the result. Defaults to 10 when not set. Ranges from 1 to 100. If there are results beyond the page size, the user can use the continuation token to fetch the next page.",
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "InstancesSortParameter": {
+      "description": "Definition of how time series instances are sorted before being returned by search instances call.",
+      "type": "object",
+      "properties": {
+        "by": {
+          "description": "Value to use for sorting of the time series instances before being returned by search instances call. When it is set to 'Rank', the returned instances are sorted based on the relevance. When it is set to 'DisplayName', the returned results are sorted based on the display name. Display name is the name of the instance if it exists, otherwise, display name is the time series ID. Default is 'Rank'.",
+          "type": "string",
+          "enum": [
+            "Rank",
+            "DisplayName"
+          ],
+          "x-ms-enum": {
+            "name": "InstancesSortBy",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "SearchInstancesHierarchiesParameters": {
+      "description": "Parameter of how to return time series instance hierarchies by search instances call.",
+      "type": "object",
+      "properties": {
+        "expand": {
+          "description": "Definition of whether to expand hierarchy nodes in the same search instances call. Optional, default is 'UntilChildren'.",
+          "type": "object",
+          "$ref": "#/definitions/HierarchiesExpandParameter"
+        },
+        "sort": {
+          "description": "Definition of sorting of hierarchy nodes. Optional, default is 'CumulativeInstanceCount'.",
+          "type": "object",
+          "$ref": "#/definitions/HierarchiesSortParameter"
+        },
+        "pageSize": {
+          "description": "Maximum number of hierarchies in the same level to return in the same page. Optional, default is 10 when not set. Range is from 1 to 100. If there are results beyond the page size, the continuation token can be used to fetch the next page.",
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "HierarchiesExpandParameter": {
+      "description": "Definition of whether to expand hierarchy nodes in the same search instances call.",
+      "type": "object",
+      "properties": {
+        "kind": {
+          "description": "Kind of the expansion of hierarchy nodes. When it is set to 'UntilChildren', the hierarchy nodes are expanded recursively until there is more than one child. When it is set to 'OneLevel', the hierarchies are expanded only at the single level matching path search instances parameter. Optional, default is 'UntilChildren'.",
+          "type": "string",
+          "enum": [
+            "UntilChildren",
+            "OneLevel"
+          ],
+          "x-ms-enum": {
+            "name": "HierarchiesExpandKind",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "HierarchiesSortParameter": {
+      "description": "Definition of sorting of hierarchy nodes.",
+      "type": "object",
+      "properties": {
+        "by": {
+          "description": "Value to use for hierarchy node sorting. When it is set to 'CumulativeInstanceCount', the returned hierarchies are sorted based on the total instances belonging to the hierarchy node and its child hierarchy nodes. When it is set to 'Name', the returned hierarchies are sorted based on the hierarchy name. Optional, default is 'CumulativeInstanceCount'.",
+          "type": "string",
+          "enum": [
+            "CumulativeInstanceCount",
+            "Name"
+          ],
+          "x-ms-enum": {
+            "name": "HierarchiesSortBy",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "SearchInstancesResponsePage": {
+      "description": "Single page of the search results.",
       "type": "object",
       "properties": {
         "instances": {
-          "description": "List of top instances matching the query by relevance. May be empty or null.",
+          "description": "The instances matching the query based on the input. May be empty or null.",
+          "readOnly": true,
+          "type": "object",
+          "$ref": "#/definitions/SearchInstancesResponse"
+        },
+        "hierarchyNodes": {
+          "description": "The hierarchy nodes which contains the instances matching the query based on the input. May be empty or null.",
+          "readOnly": true,
+          "type": "object",
+          "$ref": "#/definitions/SearchHierarchyNodesResponse"
+        }
+      }
+    },
+    "SearchInstancesResponse": {
+      "description": "The instances matching the query based on the input. May be empty or null.",
+      "type": "object",
+      "properties": {
+        "hits": {
+          "description": "The list of instances matching the query based on the input. May be empty.",
           "readOnly": true,
           "type": "array",
           "items": {
             "$ref": "#/definitions/InstanceHit"
           }
         },
-        "instancesContinuationToken": {
+        "hitCount": {
+          "description": "Total number of instances matching the query based on the input.",
+          "readOnly": true,
+          "type": "integer",
+          "format": "int32"
+        },
+        "continuationToken": {
+          "description": "If returned, this means that current results represent a partial result. Continuation token allows to get the next page of results. To get the next page of query results, send the same request with continuation token parameter in \"x-ms-continuation\" HTTP header.",
+          "readOnly": true,
+          "type": "string"
+        }
+      }
+    },
+    "SearchHierarchyNodesResponse": {
+      "description": "The hierarchy nodes which contains the instances matching the query based on the input. May be empty or null.",
+      "type": "object",
+      "properties": {
+        "hits": {
+          "description": "The list of hierarchy nodes which contains the instances matching the query based on the input. May be empty.",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/HierarchyHit"
+          }
+        },
+        "hitCount": {
+          "description": "Total number of hierarchy nodes which contains the instances matching the query based on the input.",
+          "readOnly": true,
+          "type": "integer",
+          "format": "int32"
+        },
+        "continuationToken": {
           "description": "If returned, this means that current results represent a partial result. Continuation token allows to get the next page of results. To get the next page of query results, send the same request with continuation token parameter in \"x-ms-continuation\" HTTP header.",
           "readOnly": true,
           "type": "string"
@@ -1807,20 +2192,39 @@
       }
     },
     "InstanceHit": {
-      "description": "Time series instance that is returned by instances search call. Returned instance matched the search string and contains highlighted text to be displayed to the user.",
+      "description": "Time series instance that is returned by instances search call. Returned instance matched the search request and contains highlighted text to be displayed to the user if it is set to 'true'.",
       "type": "object",
       "properties": {
         "timeSeriesId": {
           "description": "Time series ID of the time series instance that matched the search request.",
           "readOnly": true,
+          "type": "array",
           "$ref": "#/definitions/TimeSeriesId"
+        },
+        "name": {
+          "description": "Name of the time series instance that matched the search request. May be null.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "typeId": {
+          "description": "Represents the type that time series instance which matched the search request belongs to. Never null.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "hierarchyIds": {
+          "description": "List of time series hierarchy IDs that time series instance which matched the search request belongs to. Cannot be used to lookup hierarchies. May be null.",
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
         },
         "highlights": {
           "description": "Highlighted text of time series instance to be displayed to the user. Highlighting inserts <hit> and </hit> tags in the portions of text that matched the search string. Do not use any of the highlighted properties to do further API calls.",
           "readOnly": true,
           "type": "object",
           "properties": {
-            "timeSeriesIds": {
+            "timeSeriesId": {
               "description": "List of highlighted string values of Time Series ID for displaying. Cannot be used to lookup instance.",
               "readOnly": true,
               "type": "array",
@@ -1828,7 +2232,7 @@
                 "type": "string"
               }
             },
-            "type": {
+            "typeName": {
               "description": "Highlighted time series type name that this instance belongs to.",
               "readOnly": true,
               "type": "string"
@@ -1848,8 +2252,15 @@
               "readOnly": true,
               "type": "array",
               "items": {
-                "type": "string",
-                "format": "uuid"
+                "type": "string"
+              }
+            },
+            "hierarchyNames": {
+              "description": "List of highlighted time series hierarchy names that time series instance belongs to. Cannot be used to lookup hierarchies. May be null.",
+              "readOnly": true,
+              "type": "array",
+              "items": {
+                "type": "string"
               }
             },
             "instanceFieldNames": {
@@ -1869,6 +2280,29 @@
               }
             }
           }
+        }
+      }
+    },
+    "HierarchyHit": {
+      "description": "The hierarchy node which contains the instances matching the query based on the input. May be empty or null.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Name of the hierarchy node. May be empty, cannot be null.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "cumulativeInstanceCount": {
+          "description": "Total number of instances that belong to this node and it's subtrees matching the query.",
+          "readOnly": true,
+          "type": "integer",
+          "format": "int32"
+        },
+        "hierarchyNodes": {
+          "description": "Child hierarchy nodes of this node. May be empty or null.",
+          "readOnly": true,
+          "type": "object",
+          "$ref": "#/definitions/SearchHierarchyNodesResponse"
         }
       }
     },
@@ -1953,7 +2387,8 @@
         "DateTime",
         "Double",
         "String",
-        "TimeSpan"
+        "TimeSpan",
+        "Long"
       ],
       "x-ms-enum": {
         "name": "PropertyTypes",
@@ -2033,6 +2468,14 @@
       "default": "2018-11-01-preview",
       "type": "string",
       "description": "Version of the API to be used with the client request. Currently supported version is \"2018-11-01-preview\"."
+    },
+    "StoreType": {
+      "name": "storeType",
+      "in": "query",
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "description": "For the environments with warm store enabled, the query can be executed either on the 'WarmStore' or 'ColdStore'. This parameter in the query defines which store the query should be executed on. If not defined, the query will be executed on the cold store."
     },
     "EnvironmentFqdn": {
       "name": "environmentFqdn",

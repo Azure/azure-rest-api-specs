@@ -28,7 +28,110 @@ These are the global settings for the FrontDoor API.
 title: FrontDoorManagementClient
 description: FrontDoor Client
 openapi-type: arm
-tag: package-2019-04
+tag: package-2020-05
+```
+
+### Tag: package-2020-05
+
+These settings apply only when `--tag=package-2020-05` is specified on the command line.
+
+``` yaml $(tag) == 'package-2020-05'
+input-file:
+- Microsoft.Network/stable/2020-05-01/network.json
+- Microsoft.Network/stable/2019-11-01/networkexperiment.json
+- Microsoft.Network/stable/2020-05-01/frontdoor.json
+- Microsoft.Network/stable/2020-04-01/webapplicationfirewall.json
+directive:
+  - where:
+      - $.paths
+    suppress:
+      - OperationsAPIImplementation
+```
+
+
+### Tag: package-2020-04
+
+These settings apply only when `--tag=package-2020-04` is specified on the command line.
+
+``` yaml $(tag) == 'package-2020-04'
+input-file:
+- Microsoft.Network/stable/2020-04-01/network.json
+- Microsoft.Network/stable/2019-11-01/networkexperiment.json
+- Microsoft.Network/stable/2020-04-01/frontdoor.json
+- Microsoft.Network/stable/2020-04-01/webapplicationfirewall.json
+directive:
+  - where:
+      - $.paths
+    suppress:
+      - OperationsAPIImplementation
+```
+
+
+### Tag: package-2020-01
+
+These settings apply only when `--tag=package-2020-01` is specified on the command line.
+
+``` yaml $(tag) == 'package-2020-01'
+input-file:
+- Microsoft.Network/stable/2020-01-01/network.json
+- Microsoft.Network/stable/2019-11-01/networkexperiment.json
+- Microsoft.Network/stable/2020-01-01/frontdoor.json
+- Microsoft.Network/stable/2019-10-01/webapplicationfirewall.json
+directive:
+  - where:
+      - $.paths
+    suppress:
+      - OperationsAPIImplementation
+```
+
+
+### Tag: package-2019-11
+
+These settings apply only when `--tag=package-2019-11` is specified on the command line.
+
+``` yaml $(tag) == 'package-2019-11'
+input-file:
+- Microsoft.Network/stable/2019-11-01/network.json
+- Microsoft.Network/stable/2019-11-01/networkexperiment.json
+- Microsoft.Network/stable/2019-05-01/frontdoor.json
+- Microsoft.Network/stable/2019-10-01/webapplicationfirewall.json
+directive:
+  - where:
+      - $.paths
+    suppress:
+      - OperationsAPIImplementation
+```
+
+### Tag: package-2019-10
+
+These settings apply only when `--tag=package-2019-10` is specified on the command line.
+
+``` yaml $(tag) == 'package-2019-10'
+input-file:
+- Microsoft.Network/stable/2019-05-01/frontdoor.json
+- Microsoft.Network/stable/2019-05-01/network.json
+- Microsoft.Network/stable/2019-10-01/webapplicationfirewall.json
+directive:
+  - where:
+      - $.paths
+    suppress:
+      - OperationsAPIImplementation
+```
+
+### Tag: package-2019-05
+
+These settings apply only when `--tag=package-2019-05` is specified on the command line.
+
+``` yaml $(tag) == 'package-2019-05'
+input-file:
+- Microsoft.Network/stable/2019-05-01/frontdoor.json
+- Microsoft.Network/stable/2019-05-01/network.json
+- Microsoft.Network/stable/2019-03-01/webapplicationfirewall.json
+directive:
+  - where:
+      - $.paths
+    suppress:
+      - OperationsAPIImplementation
 ```
 
 ### Tag: package-2019-04
@@ -90,11 +193,15 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
+  - repo: azure-sdk-for-net
   - repo: azure-sdk-for-python
   - repo: azure-libraries-for-java
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-node
+  - repo: azure-resource-manager-schemas
+    after_scripts:
+      - node sdkauto_afterscript.js frontdoor/resource-manager
 ```
 
 
@@ -115,6 +222,10 @@ csharp:
 ## Go
 
 See configuration in [readme.go.md](./readme.go.md)
+
+## CLI
+
+See configuration in [readme.cli.md](./readme.cli.md)
 
 ## Java
 
@@ -148,3 +259,8 @@ directive:
     suppress: EnumInsteadOfBoolean
     reason: Direct copy of ValidateCustomDomain API in CDN Resource Provider.
 ```
+
+## AzureResourceSchema
+
+See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
+

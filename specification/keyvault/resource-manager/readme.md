@@ -4,10 +4,10 @@
 
 This is the AutoRest configuration file for KeyVault.
 
-
-
 ---
+
 ## Getting Started
+
 To build the SDK for KeyVault, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
 
 > `autorest`
@@ -15,20 +15,63 @@ To build the SDK for KeyVault, simply [Install AutoRest](https://aka.ms/autorest
 To see additional help and options, run:
 
 > `autorest --help`
+
 ---
 
 ## Configuration
 
-
-
 ### Basic Information
+
 These are the global settings for the KeyVault API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2018-02
+tag: package-2019-09
 ```
 
+### Tag: package-preview-2020-04
+
+These settings apply only when `--tag=package-preview-2020-04` is specified on the command line.
+This tag is for the development of preview features related to managed HSM of Azure CLI and PowerShell.
+
+```yaml $(tag) == 'package-preview-2020-04'
+input-file:
+  - Microsoft.KeyVault/stable/2019-09-01/keyvault.json
+  - Microsoft.KeyVault/stable/2019-09-01/providers.json
+  - Microsoft.KeyVault/preview/2020-04-01-preview/managedHsm.json
+```
+
+### Tag: package-preview-2020-04-full
+
+These settings apply only when `--tag=package-preview-2020-04-full` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2020-04-full'
+input-file:
+  - Microsoft.KeyVault/preview/2020-04-01-preview/keyvault.json
+  - Microsoft.KeyVault/preview/2020-04-01-preview/providers.json
+  - Microsoft.KeyVault/preview/2020-04-01-preview/secrets.json
+  - Microsoft.KeyVault/preview/2020-04-01-preview/managedHsm.json
+```
+
+### Tag: package-2019-09
+
+These settings apply only when `--tag=package-2019-09` is specified on the command line.
+
+``` yaml $(tag) == 'package-2019-09'
+input-file:
+- Microsoft.KeyVault/stable/2019-09-01/keyvault.json
+- Microsoft.KeyVault/stable/2019-09-01/providers.json
+```
+
+### Tag: package-2018-02-14-preview
+
+These settings apply only when `--tag=package-2018-02-14-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2018-02-14-preview'
+input-file:
+- Microsoft.KeyVault/preview/2018-02-14-preview/keyvault.json
+- Microsoft.KeyVault/preview/2018-02-14-preview/providers.json
+```
 
 ### Tag: package-2018-02
 
@@ -40,8 +83,6 @@ input-file:
 - Microsoft.KeyVault/stable/2018-02-14/providers.json
 ```
 
-
-
 ### Tag: package-2016-10
 
 These settings apply only when `--tag=package-2016-10` is specified on the command line.
@@ -52,7 +93,6 @@ input-file:
 - Microsoft.KeyVault/stable/2016-10-01/providers.json
 ```
 
-
 ### Tag: package-2015-06
 
 These settings apply only when `--tag=package-2015-06` is specified on the command line.
@@ -62,10 +102,18 @@ input-file:
 - Microsoft.KeyVault/stable/2015-06-01/keyvault.json
 ```
 
+### Supressions
+
+``` yaml
+directive:
+- suppress:
+    - R3026 # The 'PrivateEndpointConnection' and 'PrivateLinkResource' sub-resources don't define PATCH as per Network Team's specification.
+    - R3025 # The 'PrivateLinkResource' is only accessible via List operation; does not define GET as per Network Team's specification.
+```
 
 ---
-# Code Generation
 
+# Code Generation
 
 ## Swagger to SDK
 
@@ -74,9 +122,11 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
+  - repo: azure-sdk-for-net
   - repo: azure-sdk-for-python
     after_scripts:
       - python ./scripts/multiapi_init_gen.py azure-mgmt-keyvault
+  - repo: azure-sdk-for-python-track2
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-node
@@ -84,6 +134,9 @@ swagger-to-sdk:
   - repo: azure-sdk-for-ruby
     after_scripts:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_key_vault']
+  - repo: azure-resource-manager-schemas
+    after_scripts:
+      - node sdkauto_afterscript.js keyvault/resource-manager
 ```
 
 ## Go
@@ -92,63 +145,9 @@ See configuration in [readme.go.md](./readme.go.md)
 
 ## Java
 
-These settings apply only when `--java` is specified on the command line.
-Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-libraries-for-java clone>`.
+See configuration in [readme.java.md](./readme.java.md)
 
-``` yaml $(java)
-azure-arm: true
-namespace: com.microsoft.azure.management.keyvault
-license-header: MICROSOFT_MIT_NO_CODEGEN
-payload-flattening-threshold: 1
-output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-keyvault
-```
+## AzureResourceSchema
 
-### Java multi-api
+See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
 
-```yaml $(java) && $(multiapi)
-batch:
-  - tag: package-2016-10
-  - tag: package-2015-06
-```
-
-### Tag: package-2016-10 and java
-
-These settings apply only when `--tag=package-2016-10 --java` is specified on the command line.
-Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-sdk-for-java clone>`.
-
-``` yaml $(tag) == 'package-2016-10' && $(java) && $(multiapi)
-java:
-  namespace: com.microsoft.azure.management.keyvault.v2016_10_01
-  output-folder: $(azure-libraries-for-java-folder)/keyvault/resource-manager/v2016_10_01
-regenerate-manager: true
-generate-interface: true
-directive:
-  from: keyvault.json
-  where: $.paths["/subscriptions/{subscriptionId}/resources"].get
-  transform: $['operationId'] = 'Vaults_ListResource'
-```
-
-### Tag: package-2015-06 and java
-
-These settings apply only when `--tag=package-2015-06 --java` is specified on the command line.
-Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-sdk-for-java clone>`.
-
-``` yaml $(tag) == 'package-2015-06' && $(java) && $(multiapi)
-java:
-  namespace: com.microsoft.azure.management.keyvault.v2015_06_01
-  output-folder: $(azure-libraries-for-java-folder)/keyvault/resource-manager/v2015_06_01
-regenerate-manager: true
-generate-interface: true
-```
-
-### Tag: profile-hybrid-2019-03-01
-
-These settings apply only when `--tag=profile-hybrid-2019-03-01` is specified on the command line.
-Creating this tag to pick proper resources from the hybrid profile.
-
-``` yaml $(tag) == 'profile-hybrid-2019-03-01'
-input-file:
-- Microsoft.KeyVault/stable/2016-10-01/providers.json
-- Microsoft.KeyVault/stable/2016-10-01/keyvault.json
-- Microsoft.KeyVault/stable/2016-10-01/secrets.json
-```

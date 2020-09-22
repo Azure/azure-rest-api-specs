@@ -1,12 +1,66 @@
 {
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "gigtest",
+    "ruleName": "MetricAlertOnMultipleResources",
+    "api-version": "2018-03-01",
     "parameters": {
-      "subscriptionId": "00000000-0000-0000-0000-000000000000",
-      "resourceGroupName": "gigtest",
-      "ruleName": "MetricAlertOnMultipleResources",
-      "api-version": "2018-03-01",
-      "parameters": {
+      "location": "global",
+      "tags": {},
+      "properties": {
+        "description": "This is the description of the rule1",
+        "severity": 3,
+        "enabled": true,
+        "scopes": [
+          "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/gigtest/providers/Microsoft.Compute/virtualMachines/gigwadme1",
+          "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/gigtest/providers/Microsoft.Compute/virtualMachines/gigwadme2"
+        ],
+        "evaluationFrequency": "PT1M",
+        "windowSize": "PT15M",
+        "targetResourceType": "Microsoft.Compute/virtualMachines",
+        "targetResourceRegion": "southcentralus",
+        "criteria": {
+          "odata.type": "Microsoft.Azure.Monitor.MultipleResourceMultipleMetricCriteria",
+          "allOf": [
+            {
+              "criterionType": "DynamicThresholdCriterion",
+              "name": "High_CPU_80",
+              "metricName": "Percentage CPU",
+              "metricNamespace": "microsoft.compute/virtualmachines",
+              "operator": "GreaterOrLessThan",
+              "timeAggregation": "Average",
+              "dimensions": [],
+              "alertSensitivity": "Medium",
+              "failingPeriods": {
+                "numberOfEvaluationPeriods": 4,
+                "minFailingPeriodsToAlert": 4
+              }
+            }
+          ]
+        },
+        "autoMitigate": false,
+        "actions": [
+          {
+            "actionGroupId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/gigtest/providers/microsoft.insights/notificationgroups/group2",
+            "webHookProperties": {
+              "key11": "value11",
+              "key12": "value12"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/gigtest/providers/providers/microsoft.insights/metricalerts/MetricAlertOnMultipleResources",
+        "type": "Microsoft.Insights/metricAlerts",
         "location": "global",
-        "tags": {},
+        "tags": {
+          "hidden-link:/subscriptions/b67f7fec-69fc-4974-9099-a26bd6ffeda3/resourceGroups/Rac46PostSwapRG/providers/Microsoft.Web/sites/leoalerttest": "Resource"
+        },
         "properties": {
           "description": "This is the description of the rule1",
           "severity": 3,
@@ -17,8 +71,8 @@
           ],
           "evaluationFrequency": "PT1M",
           "windowSize": "PT15M",
-          "targetResourceType":"Microsoft.Compute/virtualMachines",
-          "targetResourceRegion":"southcentralus",
+          "targetResourceType": "Microsoft.Compute/virtualMachines",
+          "targetResourceRegion": "southcentralus",
           "criteria": {
             "odata.type": "Microsoft.Azure.Monitor.MultipleResourceMultipleMetricCriteria",
             "allOf": [
@@ -32,8 +86,8 @@
                 "dimensions": [],
                 "alertSensitivity": "Medium",
                 "failingPeriods": {
-                    "numberOfEvaluationPeriods": 4,
-                    "minFailingPeriodsToAlert": 4
+                  "numberOfEvaluationPeriods": 4,
+                  "minFailingPeriodsToAlert": 4
                 }
               }
             ]
@@ -42,7 +96,7 @@
           "actions": [
             {
               "actionGroupId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/gigtest/providers/microsoft.insights/notificationgroups/group2",
-              "webhookProperties": {
+              "webHookProperties": {
                 "key11": "value11",
                 "key12": "value12"
               }
@@ -50,60 +104,6 @@
           ]
         }
       }
-    },
-    "responses": {
-      "200": {
-        "headers": {},
-        "body": {
-          "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/gigtest/providers/providers/microsoft.insights/metricalerts/MetricAlertOnMultipleResources",
-          "type": "Microsoft.Insights/metricAlerts",
-          "location": "global",
-          "tags": {
-            "hidden-link:/subscriptions/b67f7fec-69fc-4974-9099-a26bd6ffeda3/resourceGroups/Rac46PostSwapRG/providers/Microsoft.Web/sites/leoalerttest": "Resource"
-          },
-          "properties": {
-            "description": "This is the description of the rule1",
-            "severity": 3,
-            "enabled": true,
-            "scopes": [
-              "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/gigtest/providers/Microsoft.Compute/virtualMachines/gigwadme1",
-              "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/gigtest/providers/Microsoft.Compute/virtualMachines/gigwadme2"
-            ],
-            "evaluationFrequency": "PT1M",
-            "windowSize": "PT15M",
-            "targetResourceType":"Microsoft.Compute/virtualMachines",
-            "targetResourceRegion":"southcentralus",
-            "criteria": {
-              "odata.type": "Microsoft.Azure.Monitor.MultipleResourceMultipleMetricCriteria",
-              "allOf": [
-                {
-                    "criterionType": "DynamicThresholdCriterion",
-                    "name": "High_CPU_80",
-                    "metricName": "Percentage CPU",
-                    "metricNamespace": "microsoft.compute/virtualmachines",
-                    "operator": "GreaterOrLessThan",
-                    "timeAggregation": "Average",
-                    "dimensions": [],
-                    "alertSensitivity": "Medium",
-                    "failingPeriods": {
-                        "numberOfEvaluationPeriods": 4,
-                        "minFailingPeriodsToAlert": 4
-                    }
-                }
-              ]
-            },
-            "autoMitigate":false,
-            "actions": [
-              {
-                "actionGroupId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/gigtest/providers/microsoft.insights/notificationgroups/group2",
-                "webhookProperties": {
-                  "key11": "value11",
-                  "key12": "value12"
-                }
-              }
-            ]
-          }
-        }
-      }
     }
   }
+}

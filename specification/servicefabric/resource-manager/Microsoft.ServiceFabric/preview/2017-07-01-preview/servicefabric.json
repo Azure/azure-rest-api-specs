@@ -468,7 +468,7 @@
           {
             "name": "api-version",
             "in": "query",
-            "description": "The version of the ServiceFabric resouce provider api",
+            "description": "The version of the ServiceFabric resource provider api",
             "required": true,
             "type": "string"
           }
@@ -624,7 +624,7 @@
         },
         "MaxPercentUnhealthyServices": {
           "type": "integer",
-          "description": "The maximum maximum allowed percentage of unhealthy services. Allowed values are Byte values from zero to 100.\n\nThe percentage represents the maximum tolerated percentage of services that can be unhealthy before the application is considered in error.\nIf the percentage is respected but there is at least one unhealthy service, the health is evaluated as Warning.\nThis is calculated by dividing the number of unhealthy services of the specific service type over the total number of services of the specific service type.\nThe computation rounds up to tolerate one failure on small numbers of services. Default percentage is zero.\n",
+          "description": "The maximum allowed percentage of unhealthy services. Allowed values are Byte values from zero to 100.\n\nThe percentage represents the maximum tolerated percentage of services that can be unhealthy before the application is considered in error.\nIf the percentage is respected but there is at least one unhealthy service, the health is evaluated as Warning.\nThis is calculated by dividing the number of unhealthy services of the specific service type over the total number of services of the specific service type.\nThe computation rounds up to tolerate one failure on small numbers of services. Default percentage is zero.\n",
           "default": 0
         }
       }
@@ -1621,7 +1621,7 @@
       "properties": {
         "reliabilityLevel": {
           "type": "string",
-          "description": "The reliability level sets the replica set size of system services. Learn about [ReliabilityLevel](https://docs.microsoft.com/en-us/azure/service-fabric/service-fabric-cluster-capacity).",
+          "description": "The reliability level sets the replica set size of system services. Learn about [ReliabilityLevel](https://docs.microsoft.com/azure/service-fabric/service-fabric-cluster-capacity).",
           "enum": [
             "Bronze",
             "Silver",
@@ -1751,7 +1751,7 @@
         },
         "upgradeReplicaSetCheckTimeout": {
           "type": "string",
-          "description": "The maximum amount of time to block processing of an upgrade domain and revent loss of availability when there are unexpected issues. When this timeout expires, processing of the upgrade domain will proceed regardless of availability loss issues. The timeout is reset at the start of each upgrade domain. The timeout can be in either hh:mm:ss or in d.hh:mm:ss.ms format."
+          "description": "The maximum amount of time to block processing of an upgrade domain and prevent loss of availability when there are unexpected issues. When this timeout expires, processing of the upgrade domain will proceed regardless of availability loss issues. The timeout is reset at the start of each upgrade domain. The timeout can be in either hh:mm:ss or in d.hh:mm:ss.ms format."
         },
         "healthCheckWaitDuration": {
           "type": "string",
@@ -1908,7 +1908,7 @@
           "$ref": "#/definitions/EndpointRangeDescription"
         },
         "ephemeralPorts": {
-          "description": "The range of empheral ports that nodes in this node type should be configured with.",
+          "description": "The range of ephemeral ports that nodes in this node type should be configured with.",
           "$ref": "#/definitions/EndpointRangeDescription"
         },
         "isPrimary": {
@@ -2133,7 +2133,7 @@
     },
     "DurabilityLevel": {
       "type": "string",
-      "description": "The durability level of the node type. Learn about [DurabilityLevel](https://docs.microsoft.com/en-us/azure/service-fabric/service-fabric-cluster-capacity).\n\n  - Bronze - No privileges. This is the default.\n  - Silver - The infrastructure jobs can be paused for a duration of 30 minutes per UD.\n  - Gold - The infrastructure jobs can be paused for a duration of 2 hours per UD. Gold durability can be enabled only on full node VM skus like D15_V2, G5 etc.\n",
+      "description": "The durability level of the node type. Learn about [DurabilityLevel](https://docs.microsoft.com/azure/service-fabric/service-fabric-cluster-capacity).\n\n  - Bronze - No privileges. This is the default.\n  - Silver - The infrastructure jobs can be paused for a duration of 30 minutes per UD.\n  - Gold - The infrastructure jobs can be paused for a duration of 2 hours per UD. Gold durability can be enabled only on full node VM skus like D15_V2, G5 etc.\n",
       "enum": [
         "Bronze",
         "Silver",
@@ -2142,7 +2142,7 @@
     },
     "ReliabilityLevel": {
       "type": "string",
-      "description": "The reliability level sets the replica set size of system services. Learn about [ReliabilityLevel](https://docs.microsoft.com/en-us/azure/service-fabric/service-fabric-cluster-capacity).\n\n  - None - Run the System services with a target replica set count of 1. This should only be used for test clusters.\n  - Bronze - Run the System services with a target replica set count of 3. This should only be used for test clusters.\n  - Silver - Run the System services with a target replica set count of 5.\n  - Gold - Run the System services with a target replica set count of 7.\n  - Platinum - Run the System services with a target replica set count of 9.\n",
+      "description": "The reliability level sets the replica set size of system services. Learn about [ReliabilityLevel](https://docs.microsoft.com/azure/service-fabric/service-fabric-cluster-capacity).\n\n  - None - Run the System services with a target replica set count of 1. This should only be used for test clusters.\n  - Bronze - Run the System services with a target replica set count of 3. This should only be used for test clusters.\n  - Silver - Run the System services with a target replica set count of 5.\n  - Gold - Run the System services with a target replica set count of 7.\n  - Platinum - Run the System services with a target replica set count of 9.\n",
       "enum": [
         "None",
         "Bronze",

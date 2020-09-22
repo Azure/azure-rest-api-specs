@@ -28,7 +28,7 @@ These are the global settings for the OperationalInsights API.
 title: OperationalInsightsManagementClient
 description: Operational Insights Client
 openapi-type: arm
-tag: package-2015-11-preview
+tag: package-2020-08
 ```
 
 
@@ -38,6 +38,7 @@ These settings apply only when `--tag=package-2015-11-preview` is specified on t
 
 ``` yaml $(tag) == 'package-2015-11-preview'
 input-file:
+- Microsoft.OperationalInsights/preview/2015-11-01-preview/LinkedServices.json
 - Microsoft.OperationalInsights/preview/2015-11-01-preview/OperationalInsights.json
 ```
 
@@ -48,6 +49,74 @@ These settings apply only when `--tag=package-2015-03` is specified on the comma
 ``` yaml $(tag) == 'package-2015-03'
 input-file:
 - Microsoft.OperationalInsights/stable/2015-03-20/OperationalInsights.json
+```
+
+### Tag: package-2019-08-preview
+
+These settings apply only when `--tag=package-2019-08-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2019-08-preview'
+input-file:
+- Microsoft.OperationalInsights/preview/2019-08-01-preview/Clusters.json
+- Microsoft.OperationalInsights/preview/2019-08-01-preview/LinkedServices.json
+- Microsoft.OperationalInsights/preview/2019-08-01-preview/OperationalInsights.json
+```
+
+### Tag: package-2020-03-preview
+
+These settings apply only when `--tag=package-2020-03-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2020-03-preview'
+input-file:
+- Microsoft.OperationalInsights/preview/2020-03-01-preview/DataExports.json
+- Microsoft.OperationalInsights/preview/2020-03-01-preview/DataSources.json
+- Microsoft.OperationalInsights/preview/2020-03-01-preview/DataCollectorLogs.json
+- Microsoft.OperationalInsights/preview/2020-03-01-preview/IntelligencePacks.json
+- Microsoft.OperationalInsights/preview/2020-03-01-preview/LinkedServices.json
+- Microsoft.OperationalInsights/preview/2020-03-01-preview/LinkedStorageAccounts.json
+- Microsoft.OperationalInsights/preview/2020-03-01-preview/ManagementGroups.json
+- Microsoft.OperationalInsights/preview/2020-03-01-preview/Operations.json
+- Microsoft.OperationalInsights/preview/2020-03-01-preview/OperationStatuses.json
+- Microsoft.OperationalInsights/preview/2020-03-01-preview/SharedKeys.json
+- Microsoft.OperationalInsights/preview/2020-03-01-preview/Usages.json
+- Microsoft.OperationalInsights/preview/2020-03-01-preview/Workspaces.json
+- Microsoft.OperationalInsights/preview/2020-03-01-preview/Clusters.json
+- Microsoft.OperationalInsights/preview/2020-03-01-preview/StorageInsightConfigs.json
+- Microsoft.OperationalInsights/preview/2020-03-01-preview/SavedSearches.json
+- Microsoft.OperationalInsights/preview/2020-03-01-preview/AvailableServiceTiers.json
+- Microsoft.OperationalInsights/preview/2020-03-01-preview/Gateways.json
+- Microsoft.OperationalInsights/preview/2020-03-01-preview/Schema.json
+- Microsoft.OperationalInsights/preview/2020-03-01-preview/SharedKeys.json
+- Microsoft.OperationalInsights/preview/2020-03-01-preview/WorkspacePurge.json
+- Microsoft.OperationalInsights/preview/2020-03-01-preview/Tables.json
+```
+
+### Tag: package-2020-08
+
+These settings apply only when `--tag=package-2020-08` is specified on the command line.
+
+``` yaml $(tag) == 'package-2020-08'
+input-file:
+- Microsoft.OperationalInsights/stable/2020-08-01/DataExports.json
+- Microsoft.OperationalInsights/stable/2020-08-01/DataSources.json
+- Microsoft.OperationalInsights/stable/2020-08-01/IntelligencePacks.json
+- Microsoft.OperationalInsights/stable/2020-08-01/LinkedServices.json
+- Microsoft.OperationalInsights/stable/2020-08-01/LinkedStorageAccounts.json
+- Microsoft.OperationalInsights/stable/2020-08-01/ManagementGroups.json
+- Microsoft.OperationalInsights/stable/2020-08-01/Operations.json
+- Microsoft.OperationalInsights/stable/2020-08-01/OperationStatuses.json
+- Microsoft.OperationalInsights/stable/2020-08-01/SharedKeys.json
+- Microsoft.OperationalInsights/stable/2020-08-01/Usages.json
+- Microsoft.OperationalInsights/stable/2020-08-01/Workspaces.json
+- Microsoft.OperationalInsights/stable/2020-08-01/Clusters.json
+- Microsoft.OperationalInsights/stable/2020-08-01/StorageInsightConfigs.json
+- Microsoft.OperationalInsights/stable/2020-08-01/SavedSearches.json
+- Microsoft.OperationalInsights/stable/2020-08-01/AvailableServiceTiers.json
+- Microsoft.OperationalInsights/stable/2020-08-01/Gateways.json
+- Microsoft.OperationalInsights/stable/2020-08-01/Schema.json
+- Microsoft.OperationalInsights/stable/2020-08-01/SharedKeys.json
+- Microsoft.OperationalInsights/stable/2020-08-01/WorkspacePurge.json
+- Microsoft.OperationalInsights/stable/2020-08-01/Tables.json
 ```
 
 ---
@@ -61,13 +130,18 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
+  - repo: azure-sdk-for-net
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-python
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-node
   - repo: azure-sdk-for-ruby
+  - repo: azure-sdk-for-java
     after_scripts:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_operational_insights']
+  - repo: azure-resource-manager-schemas
+    after_scripts:
+      - node sdkauto_afterscript.js operationalinsights/resource-manager
 ```
 
 
@@ -93,7 +167,15 @@ These settings apply only when `--python` is specified on the command line.
 Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
 Use `--python-mode=update` if you already have a setup.py and just want to update the code itself.
 
-``` yaml $(python)
+``` yaml $(python) && !$(track2)
+directive:
+    - from: swagger-document
+      where: $.info
+      transform: >
+          $.title = 'LogAnalyticsManagementClient';
+          $.description = 'The Log Analytics Client.';
+          return $;
+         
 python-mode: create
 python:
   azure-arm: true
@@ -101,16 +183,14 @@ python:
   payload-flattening-threshold: 2
   namespace: azure.mgmt.loganalytics
   package-name: azure-mgmt-loganalytics
-  title: LogAnalyticsManagementClient
-  description: The Log Analytics Client.
   clear-output-folder: true
 ```
-``` yaml $(python) && $(python-mode) == 'update'
+``` yaml $(python) && $(python-mode) == 'update' && !$(track2)
 python:
   no-namespace-folders: true
   output-folder: $(python-sdks-folder)/loganalytics/azure-mgmt-loganalytics/azure/mgmt/loganalytics
 ```
-``` yaml $(python) && $(python-mode) == 'create'
+``` yaml $(python) && $(python-mode) == 'create'  && !$(track2)
 python:
   basic-setup-py: true
   output-folder: $(python-sdks-folder)/loganalytics/azure-mgmt-loganalytics
@@ -122,53 +202,7 @@ See configuration in [readme.go.md](./readme.go.md)
 
 ## Java
 
-These settings apply only when `--java` is specified on the command line.
-Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-libraries-for-java clone>`.
-
-``` yaml $(java)
-azure-arm: true
-fluent: true
-namespace: com.microsoft.azure.management.operationalinsights
-license-header: MICROSOFT_MIT_NO_CODEGEN
-payload-flattening-threshold: 1
-output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-operationalinsights
-```
-
-
-
-### Java multi-api
-
-``` yaml $(java) && $(multiapi)
-batch:
-  - tag: package-2015-03
-  - tag: package-2015-11-preview
-```
-
-### Tag: package-2015-03 and java
-
-These settings apply only when `--tag=package-2015-03 --java` is specified on the command line.
-Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
-
-``` yaml $(tag) == 'package-2015-03' && $(java) && $(multiapi)
-java:
-  namespace: com.microsoft.azure.management.operationalinsights.v2015_03_20
-  output-folder: $(azure-libraries-for-java-folder)/operationalinsights/resource-manager/v2015_03_20
-regenerate-manager: true
-generate-interface: true
-```
-
-### Tag: package-2015-11-preview and java
-
-These settings apply only when `--tag=package-2015-11-preview --java` is specified on the command line.
-Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
-
-``` yaml $(tag) == 'package-2015-11-preview' && $(java) && $(multiapi)
-java:
-  namespace: com.microsoft.azure.management.operationalinsights.v2015_11_01_preview
-  output-folder: $(azure-libraries-for-java-folder)/operationalinsights/resource-manager/v2015_11_01_preview
-regenerate-manager: true
-generate-interface: true
-```
+See configuration in [readme.java.md](./readme.java.md)
 
 
 ## Suppression
@@ -179,3 +213,8 @@ directive:
     suppress: R3006  # BodyTopLevelProperties/R3006/RPCViolation
     reason: properties etag defined as eTag in model
 ```
+
+## AzureResourceSchema
+
+See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
+

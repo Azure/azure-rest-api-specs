@@ -1,0 +1,205 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "ApplicationInsightsManagementClient",
+    "x-ms-code-generation-settings": {
+      "name": "ApplicationInsightsManagementClient"
+    },
+    "version": "2020-06-02-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/providers/microsoft.insights/operations": {
+      "get": {
+        "tags": [
+          "Operations"
+        ],
+        "summary": "List available operations.",
+        "description": "List the available operations supported by the resource provider.",
+        "operationId": "Operations_List",
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/OperationsListResult"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 Bad Request.\n\n * 500 Internal Server Error."
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Operations_List": {
+            "$ref": "./examples/Operations_List.json"
+          }
+        }
+      }
+    },
+    "/{resourceUri}/providers/microsoft.insights/generatelivetoken": {
+      "post": {
+        "tags": [
+          "LiveToken"
+        ],
+        "operationId": "LiveToken_Get",
+        "description": "**Gets an access token for live metrics stream data.**",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceUriParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../2020-03-01-preview/componentLinkedStorageAccounts_API.json#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "Successful response containing the live metrics stream token.",
+            "schema": {
+              "$ref": "#/definitions/LiveTokenResponse"
+            },
+            "examples": {
+              "application/json": {
+                "liveToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c"
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get live token for resource": {
+            "$ref": "./examples/LiveTokenGet.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "LiveTokenResponse": {
+      "type": "object",
+      "properties": {
+        "liveToken": {
+          "type": "string",
+          "description": "JWT token for accessing live metrics stream data.",
+          "readOnly": true
+        }
+      },
+      "description": "The response to a live token query."
+    },
+    "OperationsListResult": {
+      "description": "Result of the List Operations operation",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "A collection of operations",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/OperationLive"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "URL to get the next set of operation list results if there are any."
+        }
+      }
+    },
+    "OperationLive": {
+      "description": "Represents an operation returned by the GetOperations request",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Name of the operation",
+          "type": "string"
+        },
+        "display": {
+          "$ref": "#/definitions/OperationInfo",
+          "description": "Display name of the operation"
+        },
+        "origin": {
+          "description": "Origin of the operation",
+          "type": "string"
+        },
+        "properties": {
+          "description": "Properties of the operation",
+          "type": "object",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "OperationInfo": {
+      "description": "Information about an operation",
+      "type": "object",
+      "properties": {
+        "provider": {
+          "description": "Name of the provider",
+          "type": "string"
+        },
+        "resource": {
+          "description": "Name of the resource type",
+          "type": "string"
+        },
+        "operation": {
+          "description": "Name of the operation",
+          "type": "string"
+        },
+        "description": {
+          "description": "Description of the operation",
+          "type": "string"
+        }
+      }
+    }
+  },
+  "parameters": {
+    "ResourceUriParameter": {
+      "name": "resourceUri",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The identifier of the resource.",
+      "x-ms-parameter-location": "method",
+      "x-ms-skip-url-encoding": true
+    }
+  }
+}

@@ -15,7 +15,7 @@ csharp:
 
 ``` yaml $(csharp) && !$(multiapi) && !$(profile)
   namespace: Microsoft.Azure.Management.Security
-  output-folder: $(csharp-sdks-folder)/SecurityCenter/Management.SecurityCenter/Generated
+  output-folder: $(csharp-sdks-folder)/securitycenter/Microsoft.Azure.Management.SecurityCenter/src/Generated
 ```
 
 ## Batch settings

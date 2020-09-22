@@ -1,0 +1,113 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "ServiceBusManagementClient",
+    "description": "Azure Service Bus client",
+    "version": "2017-04-01"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceBus/namespaces/{namespaceName}/migrate": {
+      "post": {
+        "tags": [
+          "Namespaces"
+        ],
+        "operationId": "Namespaces_Migrate",
+        "x-ms-examples": {
+          "NameSpaceUpdate": {
+            "$ref": "./examples/NameSpaces/SBNamespaceMigrate.json"
+          }
+        },
+        "description": "This operation Migrate the given namespace to provided name type",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/NamespaceNameParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SBNamespaceMigrate"
+            },
+            "description": "Parameters supplied to migrate namespace type."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Migrate Namespace type is successful."
+          },
+          "default": {
+            "description": "ServiceBus error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "SBNamespaceMigrate": {
+      "type": "object",
+      "properties": {
+        "targetNamespaceType": {
+          "type": "string",
+          "description": "Type of namespaces",
+          "enum": [
+            "Messaging",
+            "NotificationHub",
+            "Mixed",
+            "EventHub",
+            "Relay"
+          ],
+          "x-ms-enum": {
+            "name": "NameSpaceType",
+            "modelAsString": false
+          }
+        }
+      },
+      "required": [
+        "targetNamespaceType"
+      ],
+      "description": "Namespace Migrate Object"
+    }
+  },
+  "parameters": {}
+}

@@ -1,0 +1,144 @@
+{
+  "parameters": {
+    "api-version": "2018-11-01-preview",
+    "storeType": "warmstore",
+    "environmentFqdn": "10000000-0000-0000-0000-100000000109.env.timeseries.azure.com",
+    "parameters": {
+      "aggregateSeries": {
+        "timeSeriesId": [
+          "006dfc2d-0324-4937-998c-d16f3b4f1952",
+          "T1"
+        ],
+        "searchSpan": {
+          "from": "2016-08-01T00:00:00Z",
+          "to": "2016-08-01T00:16:50Z"
+        },
+        "interval": "PT1M",
+        "inlineVariables": {
+          "Count": {
+            "kind": "aggregate",
+            "filter": null,
+            "aggregation": {
+              "tsx": "count()"
+            }
+          },
+          "MinTemperature": {
+            "kind": "numeric",
+            "value": {
+              "tsx": "$event.Temperature"
+            },
+            "filter": null,
+            "aggregation": {
+              "tsx": "min($value)"
+            }
+          },
+          "MaxTemperature": {
+            "kind": "numeric",
+            "value": {
+              "tsx": "$event.Temperature"
+            },
+            "filter": null,
+            "aggregation": {
+              "tsx": "max($value)"
+            }
+          }
+        },
+        "projectedVariables": [
+          "Count",
+          "MinTemperature",
+          "MaxTemperature"
+        ]
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "timestamps": [
+          "2016-08-01T00:00:00Z",
+          "2016-08-01T00:01:00Z",
+          "2016-08-01T00:02:00Z",
+          "2016-08-01T00:03:00Z",
+          "2016-08-01T00:04:00Z",
+          "2016-08-01T00:05:00Z",
+          "2016-08-01T00:06:00Z",
+          "2016-08-01T00:07:00Z",
+          "2016-08-01T00:08:00Z",
+          "2016-08-01T00:09:00Z",
+          "2016-08-01T00:10:00Z"
+        ],
+        "properties": [
+          {
+            "name": "Count",
+            "type": "Long",
+            "values": [
+              50,
+              60,
+              60,
+              60,
+              60,
+              60,
+              60,
+              60,
+              60,
+              60,
+              null
+            ]
+          },
+          {
+            "name": "AverageTemperature",
+            "type": "Double",
+            "values": [
+              71.25,
+              85.0,
+              82.5,
+              80.0,
+              89.166666666666671,
+              75.0,
+              90.0,
+              75.833333333333329,
+              85.0,
+              82.5,
+              null
+            ]
+          },
+          {
+            "name": "MinTemperature",
+            "type": "Double",
+            "values": [
+              65.125,
+              77.625,
+              65.125,
+              72.625,
+              65.125,
+              67.625,
+              82.625,
+              65.125,
+              77.625,
+              65.125,
+              null
+            ]
+          },
+          {
+            "name": "MaxTemperature",
+            "type": "Double",
+            "values": [
+              77.375,
+              92.375,
+              99.875,
+              87.375,
+              99.875,
+              82.375,
+              97.375,
+              99.875,
+              92.375,
+              99.875,
+              null
+            ]
+          }
+        ],
+        "progress": 100.0
+      }
+    }
+  }
+}

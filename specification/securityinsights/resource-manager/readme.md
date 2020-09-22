@@ -35,7 +35,29 @@ These settings apply only when `--tag=package-composite-v1` is specified on the 
 
 ```yaml $(tag) == 'package-composite-v1'
 input-file:
+- Microsoft.SecurityInsights/stable/2020-01-01/SecurityInsights.json
+directive:
+  - suppress: R2059
+    from: Microsoft.SecurityInsights/stable/2020-01-01/SecurityInsights.json
+    reason: it's not actually a resource path; the validator is confused because the LogAnalytics namespace is in the URI path.
+    approved-by: "@lirenhe"
+```
+
+---
+
+### Tag: package-2019-01-preview-only
+
+These settings apply only when `--tag=package-2019-01-preview-only` is specified on the command line.
+
+```yaml $(tag) == 'package-2019-01-preview-only'
+input-file:
 - Microsoft.SecurityInsights/preview/2019-01-01-preview/SecurityInsights.json
+directive:
+  - suppress: R4017
+    from: Microsoft.SecurityInsights/preview/2019-01-01-preview/SecurityInsights.json
+    where: $.definitions.ThreatIntelligenceResource
+    reason: Our API is designed based on per region per workspace concept. There is no use case of our customers to get all indicators in multiple workspaces.
+    approved-by: "@cheggert"
 ```
 
 ---
@@ -49,10 +71,15 @@ This is not used by Autorest itself.
 
 ```yaml $(swagger-to-sdk)
 swagger-to-sdk:
+  - repo: azure-sdk-for-net
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-python
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-node
+  - repo: azure-cli-extensions
+  - repo: azure-resource-manager-schemas
+    after_scripts:
+      - node sdkauto_afterscript.js securityinsights/resource-manager
 ```
 
 ## C#
@@ -66,7 +93,7 @@ csharp:
   license-header: MICROSOFT_MIT_NO_VERSION
   namespace: Microsoft.Azure.Management.SecurityInsights
   payload-flattening-threshold: 2
-  output-folder: $(csharp-sdks-folder)/SecurityInsights/Management.SecurityInsights/Generated
+  output-folder: $(csharp-sdks-folder)/securityinsights/Microsoft.Azure.Management.SecurityInsights/src/Generated
   clear-output-folder: true
 ```
 
@@ -85,3 +112,8 @@ See configuration in [readme.nodejs.md](./readme.nodejs.md)
 ## TypeScript
 
 See configuration in [readme.typescript.md](./readme.typescript.md)
+
+## AzureResourceSchema
+
+See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
+

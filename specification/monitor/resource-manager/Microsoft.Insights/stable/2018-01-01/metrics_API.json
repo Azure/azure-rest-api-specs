@@ -98,15 +98,21 @@
         },
         "x-ms-odata": "#/definitions/MetadataValue",
         "x-ms-examples": {
-          "Get Metric for data": { "$ref": "./examples/GetMetric.json" },
-          "Get Metric for metadata": { "$ref": "./examples/GetMetricMetadata.json" }
+          "Get Metric for data": {
+            "$ref": "./examples/GetMetric.json"
+          },
+          "Get Metric for metadata": {
+            "$ref": "./examples/GetMetricMetadata.json"
+          }
         }
       }
     }
   },
   "definitions": {
     "LocalizableString": {
-      "required": [ "value" ],
+      "required": [
+        "value"
+      ],
       "properties": {
         "value": {
           "type": "string",
@@ -131,7 +137,11 @@
         "Percent",
         "MilliSeconds",
         "ByteSeconds",
-        "Unspecified"
+        "Unspecified",
+        "Cores",
+        "MilliCores",
+        "NanoCores",
+        "BitsPerSecond"
       ],
       "x-ms-enum": {
         "name": "Unit",
@@ -139,7 +149,9 @@
       }
     },
     "MetricValue": {
-      "required": [ "timeStamp" ],
+      "required": [
+        "timeStamp"
+      ],
       "properties": {
         "timeStamp": {
           "type": "string",
@@ -167,8 +179,8 @@
           "description": "the sum of all of the values in the time range."
         },
         "count": {
-          "type": "integer",
-          "format": "int64",
+          "type": "number",
+          "format": "double",
           "description": "the number of samples in the time range. Can be used to determine the number of values that contributed to the average value."
         }
       },
@@ -235,7 +247,10 @@
           "description": "the value of the collection."
         }
       },
-      "required": [ "timespan", "value" ],
+      "required": [
+        "timespan",
+        "value"
+      ],
       "description": "The response to a metrics query."
     },
     "Metric": {
@@ -265,7 +280,13 @@
           "description": "the time series returned when a data query is performed."
         }
       },
-      "required": [ "id", "type", "name", "unit", "timeseries" ],
+      "required": [
+        "id",
+        "type",
+        "name",
+        "unit",
+        "timeseries"
+      ],
       "description": "The result data of a query."
     },
     "TimeSeriesElement": {

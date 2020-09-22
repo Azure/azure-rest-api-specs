@@ -190,7 +190,8 @@
             "wsdl-link",
             "openapi",
             "openapi+json",
-            "openapi-link"
+            "openapi-link",
+            "openapi+json-link"
           ],
           "x-ms-enum": {
             "name": "ContentFormat",
@@ -231,6 +232,10 @@
               {
                 "value": "openapi-link",
                 "description": "The Open Api 3.0 document is hosted on a publicly accessible internet address."
+              },
+              {
+                "value": "openapi+json-link",
+                "description": "The Open Api 3.0 Json document is hosted on a publicly accessible internet address."
               }
             ]
           }
@@ -850,10 +855,6 @@
         "openid": {
           "$ref": "#/definitions/OpenIdAuthenticationSettingsContract",
           "description": "OpenID Connect Authentication Settings"
-        },
-        "subscriptionKeyRequired": {
-          "type": "boolean",
-          "description": "Specifies whether subscription key is required during call to this API, true - API is included into closed products only, false - API is included into open products alone, null - there is a mix of products."
         }
       },
       "description": "API Authentication Settings."
@@ -1786,6 +1787,60 @@
         "enableHttpCorrelationHeaders": {
           "type": "boolean",
           "description": "Whether to process Correlation Headers coming to Api Management Service. Only applicable to Application Insights diagnostics. Default is true."
+        },
+        "httpCorrelationProtocol": {
+          "type": "string",
+          "enum": [
+            "None",
+            "Legacy",
+            "W3C"
+          ],
+          "x-ms-enum": {
+            "name": "HttpCorrelationProtocol",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "None",
+                "description": "Do not read and inject correlation headers."
+              },
+              {
+                "value": "Legacy",
+                "description": "Inject Request-Id and Request-Context headers with request correlation data. See https://github.com/dotnet/corefx/blob/master/src/System.Diagnostics.DiagnosticSource/src/HttpCorrelationProtocol.md."
+              },
+              {
+                "value": "W3C",
+                "description": "Inject Trace Context headers. See https://w3c.github.io/trace-context."
+              }
+            ]
+          },
+          "description": "Sets correlation protocol to use for Application Insights diagnostics."
+        },
+        "verbosity": {
+          "type": "string",
+          "enum": [
+            "verbose",
+            "information",
+            "error"
+          ],
+          "x-ms-enum": {
+            "name": "Verbosity",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "verbose",
+                "description": "All the traces emitted by trace policies will be sent to the logger attached to this diagnostic instance."
+              },
+              {
+                "value": "information",
+                "description": "Traces with 'severity' set to 'information' and 'error' will be sent to the logger attached to this diagnostic instance."
+              },
+              {
+                "value": "error",
+                "description": "Only traces with 'severity' set to 'error' will be sent to the logger attached to this diagnostic instance."
+              }
+            ]
+          },
+          "description": "The verbosity level applied to traces emitted by trace policies."
         }
       },
       "required": [
@@ -2157,6 +2212,10 @@
             ]
           },
           "description": "Identity Provider Type identifier."
+        },
+        "signinTenant": {
+          "type": "string",
+          "description": "The TenantId to use instead of Common when logging into Active Directory"
         },
         "allowedTenants": {
           "type": "array",
@@ -3426,13 +3485,13 @@
           "type": "boolean"
         },
         "approvalRequired": {
-          "description": "whether subscription approval is required. If false, new subscriptions will be approved automatically enabling developers to call the product’s APIs immediately after subscribing. If true, administrators must manually approve the subscription before the developer can any of the product’s APIs. Can be present only if subscriptionRequired property is present and has a value of false.",
+          "description": "whether subscription approval is required. If false, new subscriptions will be approved automatically enabling developers to call the product’s APIs immediately after subscribing. If true, administrators must manually approve the subscription before the developer can any of the product’s APIs. Can be present only if subscriptionRequired property is present and has a value of true.",
           "type": "boolean"
         },
         "subscriptionsLimit": {
           "type": "integer",
           "format": "int32",
-          "description": "Whether the number of subscriptions a user can have to this product at the same time. Set to null or omit to allow unlimited per user subscriptions. Can be present only if subscriptionRequired property is present and has a value of false."
+          "description": "Whether the number of subscriptions a user can have to this product at the same time. Set to null or omit to allow unlimited per user subscriptions. Can be present only if subscriptionRequired property is present and has a value of true."
         },
         "state": {
           "type": "string",
@@ -4904,6 +4963,28 @@
         "password": {
           "type": "string",
           "description": "User Password. If no value is provided, a default password is generated."
+        },
+        "appType": {
+          "type": "string",
+          "description": "Determines the type of application which send the create user request. Default is legacy portal.",
+          "enum": [
+            "portal",
+            "developerPortal"
+          ],
+          "x-ms-enum": {
+            "name": "AppType",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "portal",
+                "description": "User create request was sent by legacy developer portal."
+              },
+              {
+                "value": "developerPortal",
+                "description": "User create request was sent by new developer portal."
+              }
+            ]
+          }
         },
         "confirmation": {
           "type": "string",
