@@ -26,7 +26,7 @@ These are the global settings for the [[ServiceName]].
 
 ```yaml
 openapi-type: [[OpenApiType]]
-tag: package-[[Version]]
+tag: package-YYYY-MM-DD	tag: package-[[Version]]
 ```
 
 ### Tag: package-[[Version]]
@@ -54,6 +54,7 @@ swagger-to-sdk:
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-ruby
+  - repo: azure-sdk-for-azureresourceschema
     after_scripts:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_[[ServiceName]]']
 ```
@@ -77,3 +78,7 @@ See configuration in [readme.typescript.md](https://github.com/Azure/azure-rest-
 ## CSharp
 
 See configuration in [readme.csharp.md](https://github.com/Azure/azure-rest-api-specs/blob/master/documentation/samplefiles/readme.chsarp.md)
+
+## AzureResourceSchema
+
+See configuration in [readme.csharp.md](https://github.com/Azure/azure-rest-api-specs/blob/master/documentation/samplefiles/readme.azureresourceschema.md)
