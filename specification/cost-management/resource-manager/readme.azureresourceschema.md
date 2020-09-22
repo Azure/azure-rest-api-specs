@@ -52,6 +52,7 @@ output-folder: $(azureresourceschema-folder)/schemas
 # all the input files in this apiVersion
 input-file:
   - Microsoft.CostManagement/stable/2019-11-01/costmanagement.json
+  - Microsoft.CostManagement/stable/2019-11-01/costmanagement.exports.json
 
 ```
 
