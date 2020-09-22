@@ -4,10 +4,10 @@
 
 This is the AutoRest configuration file for Data Factory V2.
 
-
-
 ---
+
 ## Getting Started
+
 To build the SDK for Data Factory V2, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
 
 > `autorest`
@@ -15,21 +15,31 @@ To build the SDK for Data Factory V2, simply [Install AutoRest](https://aka.ms/a
 To see additional help and options, run:
 
 > `autorest --help`
+
 ---
 
 ## Configuration
 
-
 ### Basic Information
+
 These are the global settings for the Data Factory V2 API.
 
 ``` yaml
 title: DataFactoryManagementClient
 description: The Azure Data Factory V2 management API provides a RESTful set of web services that interact with Azure Data Factory V2 services.
 openapi-type: arm
-tag: package-2018-06
+tag: package-2020-09
 ```
 
+
+### Tag: package-2020-09
+
+These settings apply only when `--tag=package-2020-09` is specified on the command line.
+
+```yaml $(tag) == 'package-2020-09'
+input-file:
+  - Microsoft.DataFactory/stable/2020-09-02/datafactory.json
+```
 ### Tag: package-2018-06
 
 These settings apply only when `--tag=package-2018-06` is specified on the command line.
@@ -56,8 +66,8 @@ input-file:
 ```
 
 ---
-# Code Generation
 
+# Code Generation
 
 ## Swagger to SDK
 
@@ -78,7 +88,6 @@ swagger-to-sdk:
       - node sdkauto_afterscript.js datafactory/resource-manager
 ```
 
-
 ## C#
 
 These settings apply only when `--csharp` is specified on the command line.
@@ -93,7 +102,6 @@ csharp:
   clear-output-folder: true
 ```
 
-
 ## Go
 
 See configuration in [readme.go.md](./readme.go.md)
@@ -101,7 +109,6 @@ See configuration in [readme.go.md](./readme.go.md)
 ## Java
 
 See configuration in [readme.java.md](./readme.java.md)
-
 
 ## Suppression
 
@@ -206,4 +213,3 @@ directive:
 ## AzureResourceSchema
 
 See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
-
