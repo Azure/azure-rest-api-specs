@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "Region Move Service API",
+    "title": "Resource Mover Service API",
     "description": "A first party Azure service orchestrating the move of Azure resources from one Azure region to another or between zones within a region.",
     "version": "2019-10-01-preview"
   },
@@ -121,8 +121,8 @@
           }
         },
         "x-ms-examples": {
-          "MoveCollection_Update": {
-            "$ref": "./examples/MoveCollection_Update.json"
+          "MoveCollections_Update": {
+            "$ref": "./examples/MoveCollections_Update.json"
           }
         }
       },
@@ -900,7 +900,7 @@
   },
   "definitions": {
     "ResourceIdentityType": {
-      "description": "The type of identity used for the region move service.",
+      "description": "The type of identity used for the resource mover service.",
       "enum": [
         "None",
         "SystemAssigned",
@@ -947,6 +947,7 @@
         "Committed"
       ],
       "type": "string",
+      "readOnly": true,
       "x-ms-enum": {
         "name": "MoveState",
         "modelAsString": true
@@ -985,6 +986,7 @@
         "InitialSync"
       ],
       "type": "string",
+      "readOnly": true,
       "x-ms-enum": {
         "name": "JobName",
         "modelAsString": true
@@ -999,7 +1001,8 @@
         },
         "jobProgress": {
           "description": "Gets or sets the monitoring job percentage.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         }
       }
     },
@@ -1018,7 +1021,8 @@
         },
         "targetId": {
           "description": "Gets the Target ARM Id of the resource.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         }
       }
     },
@@ -1536,24 +1540,28 @@
           "$ref": "#/definitions/MoveResourceErrorBody"
         }
       },
-      "description": "An error response from the azure region move service."
+      "description": "An error response from the azure resource mover service."
     },
     "MoveResourceErrorBody": {
       "properties": {
         "code": {
           "type": "string",
+          "readOnly": true,
           "description": "An identifier for the error. Codes are invariant and are intended to be consumed programmatically."
         },
         "message": {
           "type": "string",
+          "readOnly": true,
           "description": "A message describing the error, intended to be suitable for display in a user interface."
         },
         "target": {
           "type": "string",
+          "readOnly": true,
           "description": "The target of the particular error. For example, the name of the property in error."
         },
         "details": {
           "type": "array",
+          "readOnly": true,
           "items": {
             "$ref": "#/definitions/MoveResourceErrorBody"
           },

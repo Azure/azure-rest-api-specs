@@ -1,0 +1,58 @@
+{
+  "parameters": {
+    "api-version": "2017-04-01-preview",
+    "subscriptionId": "56b5e0a9-b645-407d-99b0-c64f86013e3d",
+    "resourceGroupName": "sjrg",
+    "jobName": "sj9742",
+    "inputName": "input7970",
+    "input": {
+      "properties": {
+        "type": "Stream",
+        "datasource": {
+          "type": "Microsoft.Devices/IotHubs",
+          "properties": {
+            "endpoint": "messages/operationsMonitoringEvents"
+          }
+        },
+        "serialization": {
+          "type": "Csv",
+          "properties": {
+            "fieldDelimiter": "|",
+            "encoding": "UTF8"
+          }
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "headers": {
+        "ETag": "e2d847e0-c95b-48ef-9e14-1afc1f2270cb"
+      },
+      "body": {
+        "id": "/subscriptions/56b5e0a9-b645-407d-99b0-c64f86013e3d/resourceGroups/sjrg/providers/Microsoft.StreamAnalytics/streamingjobs/sj9742/inputs/input7970",
+        "name": "input7970",
+        "type": "Microsoft.StreamAnalytics/streamingjobs/inputs",
+        "properties": {
+          "type": "Stream",
+          "datasource": {
+            "type": "Microsoft.Devices/IotHubs",
+            "properties": {
+              "iotHubNamespace": "iothub",
+              "sharedAccessPolicyName": "owner",
+              "endpoint": "messages/operationsMonitoringEvents",
+              "consumerGroupName": "sdkconsumergroup"
+            }
+          },
+          "serialization": {
+            "type": "Csv",
+            "properties": {
+              "fieldDelimiter": "|",
+              "encoding": "UTF8"
+            }
+          }
+        }
+      }
+    }
+  }
+}

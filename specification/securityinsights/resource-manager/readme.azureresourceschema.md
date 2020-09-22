@@ -6,25 +6,31 @@ These settings apply only when `--azureresourceschema` is specified on the comma
 
 ``` yaml $(azureresourceschema) && $(multiapi)
 batch:
-  - tag: package-composite-v1
-  - tag: package-2019-01-preview-only
+  - tag: schema-securityinsights-2020-01-01
+  - tag: schema-securityinsights-2019-01-01-preview
+
 ```
 
-### Tag: package-composite-v1 and azureresourceschema
-
-These settings apply only when `--tag=package-composite-v1 --azureresourceschema` is specified on the command line.
 Please also specify `--azureresourceschema-folder=<path to the root directory of your azure-resource-manager-schemas clone>`.
 
-``` yaml $(tag) == 'package-composite-v1' && $(azureresourceschema)
+### Tag: schema-securityinsights-2020-01-01 and azureresourceschema
+
+``` yaml $(tag) == 'schema-securityinsights-2020-01-01' && $(azureresourceschema)
 output-folder: $(azureresourceschema-folder)/schemas
+
+# all the input files in this apiVersion
+input-file:
+  - Microsoft.SecurityInsights/stable/2020-01-01/SecurityInsights.json
+
 ```
 
-### Tag: package-2019-01-preview-only and azureresourceschema
+### Tag: schema-securityinsights-2019-01-01-preview and azureresourceschema
 
-These settings apply only when `--tag=package-2019-01-preview-only --azureresourceschema` is specified on the command line.
-Please also specify `--azureresourceschema-folder=<path to the root directory of your azure-resource-manager-schemas clone>`.
-
-``` yaml $(tag) == 'package-2019-01-preview-only' && $(azureresourceschema)
+``` yaml $(tag) == 'schema-securityinsights-2019-01-01-preview' && $(azureresourceschema)
 output-folder: $(azureresourceschema-folder)/schemas
-```
 
+# all the input files in this apiVersion
+input-file:
+  - Microsoft.SecurityInsights/preview/2019-01-01-preview/SecurityInsights.json
+
+```

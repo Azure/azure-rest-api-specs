@@ -56,7 +56,7 @@ swagger-to-sdk:
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-ruby
     after_scripts:
-      - bundle install && rake arm:regen_all_profiles['azure_mgmt_regionmove']
+      - bundle install && rake arm:regen_all_profiles['azure_mgmt_resourcemover']
   - repo: azure-resource-manager-schemas
     after_scripts:
       - node sdkauto_afterscript.js regionmove/resource-manager
@@ -85,4 +85,5 @@ See configuration in [readme.csharp.md](./readme.csharp.md)
 ## AzureResourceSchema
 
 See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
+
 
