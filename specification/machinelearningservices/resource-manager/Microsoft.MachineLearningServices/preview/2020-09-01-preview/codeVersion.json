@@ -31,7 +31,8 @@
 						"$ref": "./examples/listCodeVersions.json"
 					}
 				},
-				"parameters": [{
+				"parameters": [
+					{
 						"$ref": "machineLearningServices.json#/parameters/SubscriptionIdParameter"
 					},
 					{
@@ -77,7 +78,7 @@
 				"description": "Delete code.",
 				"operationId": "CodeVersions_Delete",
 				"x-ms-examples": {
-					"List CodeVersions": {
+					"Delete CodeVersion": {
 						"$ref": "./examples/deleteCodeVersion.json"
 					}
 				},
@@ -122,7 +123,7 @@
 				"description": "Get code.",
 				"operationId": "CodeVersions_Get",
 				"x-ms-examples": {
-					"List CodeVersions": {
+					"Get CodeVersion": {
 						"$ref": "./examples/getCodeVersion.json"
 					}
 				},
@@ -167,7 +168,7 @@
 				"description": "Create or update code.",
 				"operationId": "CodeVersions_CreateOrUpdate",
 				"x-ms-examples": {
-					"List CodeVersions": {
+					"Create or Update CodeVersion": {
 						"$ref": "./examples/createOrUpdateCodeVersion.json"
 					}
 				},
@@ -199,6 +200,12 @@
 					}
 				],
 				"responses": {
+					"200": {
+						"description": "Success",
+						"schema": {
+							"$ref": "#/definitions/CodeVersionResource"
+						}
+					},
 					"201": {
 						"description": "Success",
 						"schema": {
@@ -404,41 +411,33 @@
 			},
 			"additionalProperties": false
 		},
-		"CodeVersionProperties": {
-			"properties": {
-				"id": {
-					"description": "The resource URL of the entity (not URL encoded).",
-					"type": "string",
-					"readOnly": true
-				},
-				"name": {
-					"description": "The name of the resource entity.",
-					"type": "string",
-					"readOnly": true
-				},
-				"type": {
-					"description": "The resource provider and type.",
-					"type": "string",
-					"readOnly": true
-				},
-				"systemData": {
-					"$ref": "#/definitions/SystemData"
-				},
-				"properties": {
-					"$ref": "#/definitions/CodeVersion"
-				}
-			}
-		},
 		"CodeVersionResource": {
-			"description": "Azure Resource Manager resource Envelope",
 			"type": "object",
-			"x-ms-azure-resource": true,
 			"properties": {
-				"properties": {
-					"$ref": "#/definitions/CodeVersionProperties"
-				}
+			  "id": {
+				"type": "string",
+				"description": "The resource URL of the entity (not URL encoded).",
+				"readOnly": true
+			  },
+			  "name": {
+				"type": "string",
+				"description": "The name of the resource entity.",
+				"readOnly": true
+			  },
+			  "type": {
+				"type": "string",
+				"description": "The resource provider and type.",
+				"readOnly": true
+			  },
+			  "properties": {
+				"$ref": "#/definitions/CodeVersion"
+			  },
+			  "systemData": {
+				"$ref": "#/definitions/SystemData"
+			  }
 			},
-			"additionalProperties": false
+			"additionalProperties": false,
+			"description": "Azure Resource Manager resource Envelope"
 		},
 		"CodeVersionResourcePaginatedResult": {
 			"type": "object",

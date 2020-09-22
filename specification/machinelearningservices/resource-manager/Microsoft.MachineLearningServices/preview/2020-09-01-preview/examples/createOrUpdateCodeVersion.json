@@ -1,9 +1,9 @@
 {
-  "parameters": {
-    "subscriptionId": "00000000-1111-2222-3333-444444444444",
-    "resourceGroupName": "testrg123",
-    "workspaceName": "testworkspace",
-    "api-version": "2020-09-01-preview",
+	"parameters": {
+		"subscriptionId": "00000000-1111-2222-3333-444444444444",
+		"resourceGroupName": "testrg123",
+		"workspaceName": "testworkspace",
+		"api-version": "2020-09-01-preview",
 		"name": "testCodeVersion",
 		"version": "1",
 		"body": {
@@ -11,12 +11,12 @@
 				"description": "string",
 				"datastoreId": "string",
 				"tags": {
-					"property1": "string",
-					"property2": "string"
+					"tag1": "value1",
+					"tag2": "value2"
 				},
 				"properties": {
-					"property1": "string",
-					"property2": "string"
+					"prop1": "value1",
+					"prop2": "value2"
 				},
 				"assetPaths": [
 					{
@@ -25,60 +25,96 @@
 					}
 				],
 				"linkedResourceIds": {
-					"property1": [
-						"string"
-					],
-					"property2": [
-						"string"
+					"prop1": [
+						"value1_1",
+						"value1_2"
 					]
 				}
 			}
 		}
-  },
-  "responses": {
-    "200": {
-			"properties": {
+	},
+	"responses": {
+		"200": {
+			"body": {
 				"id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg123/providers/Microsoft.MachineLearningServices/workspaces/testworkspace/codes/testCodeVersion/versions/1",
 				"name": "string",
 				"type": "Microsoft.MachineLearningServices/workspaces/codeVersion",
-				"systemData": {
-					"createdAt": "2019-08-24T14:15:22Z",
-					"createdBy": "string",
-					"createdByType": "User",
-					"lastModifiedAt": "2019-08-24T14:15:22Z",
-					"lastModifiedBy": "string",
-					"lastModifiedByType": "User"
-				},
 				"properties": {
-					"name": "testCodeVersion",
-					"version": "1",
+					"name": "string",
+					"version": "string",
 					"description": "string",
 					"datastoreId": "string",
 					"tags": {
-						"property1": "string",
-						"property2": "string"
+						"tag1": "value1",
+						"tag2": "value2"
 					},
 					"properties": {
-						"property1": "string",
-						"property2": "string"
+						"prop1": "value1",
+						"prop2": "value2"
 					},
 					"assetPaths": [
 						{
-							"path": "string",
-							"isDirectory": true
+						"path": "string",
+						"isDirectory": true
 						}
 					],
 					"linkedResourceIds": {
-						"property1": [
-							"string"
-						],
-						"property2": [
-							"string"
+						"prop1": [
+							"value1_1",
+							"value1_2"
 						]
 					}
+				},
+				"systemData": {
+					"createdAt": "2020-09-22T06:17:48.843Z",
+					"createdBy": "string",
+					"createdByType": "User",
+					"lastModifiedAt": "2020-09-22T06:17:48.843Z",
+					"lastModifiedBy": "string",
+					"lastModifiedByType": "User"
+				}
+			}
+		},
+		"201": {
+			"body": {
+				"id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg123/providers/Microsoft.MachineLearningServices/workspaces/testworkspace/codes/testCodeVersion/versions/1",
+				"name": "string",
+				"type": "Microsoft.MachineLearningServices/workspaces/codeVersion",
+				"properties": {
+					"name": "string",
+					"version": "string",
+					"description": "string",
+					"datastoreId": "string",
+					"tags": {
+						"tag1": "value1",
+						"tag2": "value2"
+					},
+					"properties": {
+						"prop1": "value1",
+						"prop2": "value2"
+					},
+					"assetPaths": [
+						{
+						"path": "string",
+						"isDirectory": true
+						}
+					],
+					"linkedResourceIds": {
+						"prop1": [
+							"value1_1",
+							"value1_2"
+						]
+					}
+				},
+				"systemData": {
+					"createdAt": "2020-09-22T06:17:48.843Z",
+					"createdBy": "string",
+					"createdByType": "User",
+					"lastModifiedAt": "2020-09-22T06:17:48.843Z",
+					"lastModifiedBy": "string",
+					"lastModifiedByType": "User"
 				}
 			}
 		}
-  }
+	}
 }
-
