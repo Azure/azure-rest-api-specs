@@ -269,45 +269,6 @@
     }
   },
   "definitions": {
-    "SystemData": {
-      "description": "Azure Resource Manager resource Envelope",
-      "type": "object",
-      "properties": {
-        "createdAt": {
-          "format": "date-time",
-          "description": "the timestamp of resource creation (UTC)",
-          "type": "string"
-        },
-        "createdBy": {
-          "description": "a string identifier for the identity that created the resource",
-          "type": "string"
-        },
-        "createdByType": {
-          "$ref": "#/definitions/UserType"
-        },
-        "lastModifiedAt": {
-          "format": "date-time",
-          "description": "the timestamp of resource last modification (UTC)",
-          "type": "string"
-        },
-        "lastModifiedBy": {
-          "description": "a string identifier for the identity that last modified the resource",
-          "type": "string"
-        },
-        "lastModifiedByType": {
-          "$ref": "#/definitions/UserType"
-        }
-      }
-    },
-    "UserType": {
-      "enum": [
-        "User",
-        "Application",
-        "ManagedIdentity",
-        "Key"
-      ],
-      "type": "string"
-    },
     "AssetPath": {
       "description": "Details of an AssetUri.",
       "type": "object",
@@ -401,7 +362,7 @@
           "$ref": "#/definitions/CodeVersion"
         },
         "systemData": {
-          "$ref": "#/definitions/SystemData"
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
         }
       },
       "additionalProperties": false,
