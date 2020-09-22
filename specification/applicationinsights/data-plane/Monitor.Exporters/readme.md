@@ -30,14 +30,6 @@ These settings apply only when `--tag=2020-09-15-preview` is specified on the co
 
 ```yaml $(tag) == '2020-09-15-preview'
 input-file:
-  - preview/2020-09-15/swagger.json
+  - preview/2020-09-15_Preview/swagger.json
 ```
 
-## Releases
-
-> see https://aka.ms/autorest
-
-A preview release `2020-09-15_Preview` is currently available.
-``` yaml $(tag) == 'release_2_0'
-input-file: preview/2020-09-15_Preview/swagger.json
-```
