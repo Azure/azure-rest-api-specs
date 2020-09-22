@@ -5285,6 +5285,32 @@
                 "name": "Range"
             }
         },
+        "ClearRange": {
+            "type": "object",
+            "required": [
+                "Start",
+                "End"
+            ],
+            "properties": {
+                "Start": {
+                    "type": "integer",
+                    "format": "int64",
+                    "xml": {
+                    "name": "Start"
+                }
+            },
+            "End": {
+                "type": "integer",
+                "format": "int64",
+                "xml": {
+                    "name": "End"
+                }
+            }
+            },
+            "xml": {
+                "name": "ClearRange"
+            }
+        },
         "ShareProtocolSettings": {
             "description": "Protocol settings",
             "type": "object",
@@ -5299,14 +5325,21 @@
             }
         },
         "RangeList": {
-            "description": "A list of non-overlapping valid ranges, sorted by increasing address range.",
-            "type": "array",
-            "items": {
-                "$ref": "#/definitions/Range"
-            },
-            "xml": {
-                "wrapped": true,
-                "name": "Ranges"
+            "description": "the list of pages",
+            "type": "object",
+            "properties": {
+                "Ranges": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/Range"
+                    }
+                },
+                "ClearRanges": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/ClearRange"
+                    }
+                }
             }
         },
         "StorageError": {
