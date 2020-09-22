@@ -350,7 +350,7 @@
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/listNotebookKeys": {
-      "get": {
+      "post": {
         "tags": [
           "Workspaces"
         ],
@@ -499,7 +499,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/TransitivePEUsagesResult"
+              "$ref": "#/definitions/ListTransitivePEUsagesResult"
             }
           },
           "default": {
@@ -513,6 +513,9 @@
           "Get Transitive PE Usages": {
             "$ref": "./examples/getTransitivePEUsages.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
         }
       }
     },
@@ -2429,6 +2432,24 @@
           "type": "integer"
         }
       }
+    },
+    "ListTransitivePEUsagesResult": {
+      "properties": {
+        "value": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TransitivePEUsagesResult"
+          },
+          "description": "The list of transitive private endpoint usages."
+        },
+        "nextLink": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The URI to fetch the next page of transitive private endpoint usages information. Call ListNext() with this to fetch the next page of AML resource usage information."
+        }
+      },
+      "description": "The List transitive private endpoint usages operation response."
     },
     "ListUsagesResult": {
       "properties": {
