@@ -35,46 +35,6 @@
   },
   "paths": {
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/datastores": {
-      "delete": {
-        "tags": [
-          "Datastore"
-        ],
-        "summary": "Delete all datastores within a workspace.",
-        "operationId": "Datastores_DeleteAll",
-        "parameters": [
-          {
-            "$ref": "machineLearningServices.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "machineLearningServices.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
-          },
-          {
-            "$ref": "machineLearningServices.json#/parameters/APIVersionParameter"
-          }
-        ],
-        "responses": {
-          "default": {
-            "description": "Error",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          },
-          "200": {
-            "description": "Success"
-          },
-          "204": {
-            "description": "Success"
-          }
-        },
-        "x-ms-examples": {
-          "Delete all datastores.": {
-            "$ref": "./examples/deleteAllDatastores.json"
-          }
-        }
-      },
       "get": {
         "tags": [
           "Datastore"
@@ -138,7 +98,7 @@
           "default": {
             "description": "Error",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "machineLearningServices.json#/definitions/MachineLearningServiceError"
             }
           },
           "200": {
@@ -190,7 +150,7 @@
           "default": {
             "description": "Error",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "machineLearningServices.json#/definitions/MachineLearningServiceError"
             }
           },
           "200": {
@@ -237,7 +197,7 @@
           "default": {
             "description": "Error",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "machineLearningServices.json#/definitions/MachineLearningServiceError"
             }
           },
           "200": {
@@ -293,10 +253,16 @@
           "default": {
             "description": "Error",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "machineLearningServices.json#/definitions/MachineLearningServiceError"
             }
           },
           "201": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/DatastorePropertiesResource"
+            }
+          },
+          "200": {
             "description": "Success",
             "schema": {
               "$ref": "#/definitions/DatastorePropertiesResource"
@@ -342,7 +308,7 @@
           "default": {
             "description": "Error",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "machineLearningServices.json#/definitions/MachineLearningServiceError"
             }
           },
           "200": {
@@ -391,7 +357,7 @@
           "default": {
             "description": "Error",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "machineLearningServices.json#/definitions/MachineLearningServiceError"
             }
           },
           "200": {
@@ -430,7 +396,7 @@
           "default": {
             "description": "Error",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "machineLearningServices.json#/definitions/MachineLearningServiceError"
             }
           },
           "200": {
@@ -482,7 +448,7 @@
           "default": {
             "description": "Error",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "machineLearningServices.json#/definitions/MachineLearningServiceError"
             }
           },
           "200": {
@@ -534,7 +500,7 @@
           "default": {
             "description": "Error",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "machineLearningServices.json#/definitions/MachineLearningServiceError"
             }
           },
           "200": {
@@ -581,7 +547,7 @@
           "default": {
             "description": "Error",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "machineLearningServices.json#/definitions/MachineLearningServiceError"
             }
           },
           "200": {
@@ -637,10 +603,16 @@
           "default": {
             "description": "Error",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "machineLearningServices.json#/definitions/MachineLearningServiceError"
             }
           },
           "201": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ModelContainerResource"
+            }
+          },
+          "200": {
             "description": "Success",
             "schema": {
               "$ref": "#/definitions/ModelContainerResource"
@@ -740,7 +712,7 @@
           "default": {
             "description": "Error",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "machineLearningServices.json#/definitions/MachineLearningServiceError"
             }
           },
           "200": {
@@ -799,7 +771,7 @@
           "default": {
             "description": "Error",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "machineLearningServices.json#/definitions/MachineLearningServiceError"
             }
           },
           "200": {
@@ -853,7 +825,7 @@
           "default": {
             "description": "Error",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "machineLearningServices.json#/definitions/MachineLearningServiceError"
             }
           },
           "200": {
@@ -916,10 +888,16 @@
           "default": {
             "description": "Error",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "machineLearningServices.json#/definitions/MachineLearningServiceError"
             }
           },
           "201": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ModelVersionResource"
+            }
+          },
+          "200": {
             "description": "Success",
             "schema": {
               "$ref": "#/definitions/ModelVersionResource"
@@ -935,113 +913,6 @@
     }
   },
   "definitions": {
-    "InnerErrorResponse": {
-      "type": "object",
-      "properties": {
-        "code": {
-          "type": "string"
-        },
-        "innerError": {
-          "$ref": "#/definitions/InnerErrorResponse"
-        }
-      }
-    },
-    "DebugInfoResponse": {
-      "type": "object",
-      "properties": {
-        "type": {
-          "type": "string"
-        },
-        "message": {
-          "type": "string"
-        },
-        "stackTrace": {
-          "type": "string"
-        },
-        "innerException": {
-          "$ref": "#/definitions/DebugInfoResponse"
-        },
-        "data": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "object"
-          }
-        },
-        "errorResponse": {
-          "$ref": "#/definitions/ErrorResponse"
-        }
-      }
-    },
-    "RootError": {
-      "type": "object",
-      "properties": {
-        "code": {
-          "type": "string"
-        },
-        "severity": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "message": {
-          "type": "string"
-        },
-        "messageFormat": {
-          "type": "string"
-        },
-        "messageParameters": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "referenceCode": {
-          "type": "string"
-        },
-        "detailsUri": {
-          "format": "uri",
-          "type": "string"
-        },
-        "target": {
-          "type": "string"
-        },
-        "details": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/RootError"
-          }
-        },
-        "innerError": {
-          "$ref": "#/definitions/InnerErrorResponse"
-        }
-      }
-    },
-    "ErrorResponse": {
-      "type": "object",
-      "properties": {
-        "error": {
-          "$ref": "#/definitions/RootError"
-        },
-        "correlation": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "environment": {
-          "type": "string"
-        },
-        "location": {
-          "type": "string"
-        },
-        "time": {
-          "format": "date-time",
-          "type": "string"
-        },
-        "componentName": {
-          "type": "string"
-        }
-      }
-    },
     "ContentsType": {
       "enum": [
         "AzureBlob",
@@ -1053,7 +924,11 @@
         "AzureSqlDatabase",
         "GlusterFs"
       ],
-      "type": "string"
+      "type": "string",
+      "x-ms-enum": {
+        "name": "ContentsType",
+        "modelAsString": false
+      }
     },
     "CredentialsType": {
       "enum": [
@@ -1063,13 +938,22 @@
         "ServicePrincipal",
         "SqlAdmin"
       ],
-      "type": "string"
+      "type": "string",
+      "x-ms-enum": {
+        "name": "CredentialsType",
+        "modelAsString": false
+      }
     },
     "AccountKeySection": {
       "type": "object",
       "properties": {
         "key": {
+          "description": "Storage account key.",
           "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "update"
+          ],
           "x-ms-secret": true
         }
       }
@@ -1083,24 +967,34 @@
       "type": "object",
       "properties": {
         "authorityUrl": {
+          "description": "Authority URL used for authentication.",
           "type": "string"
         },
         "resourceUri": {
+          "description": "Resource the service principal has access to.",
           "type": "string"
         },
         "tenantId": {
           "format": "uuid",
+          "description": "ID of the tenant to which the service principal belongs.",
           "type": "string"
         },
         "clientId": {
           "format": "uuid",
+          "description": "Service principal client ID.",
           "type": "string"
         },
         "certificate": {
+          "description": "Service principal certificate.",
           "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "update"
+          ],
           "x-ms-secret": true
         },
         "thumbprint": {
+          "description": "Thumbprint of the certificate used for authentication.",
           "pattern": "\\w",
           "type": "string"
         }
@@ -1110,7 +1004,12 @@
       "type": "object",
       "properties": {
         "sasToken": {
+          "description": "Storage container SAS token.",
           "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "update"
+          ],
           "x-ms-secret": true
         }
       }
@@ -1123,21 +1022,30 @@
       "type": "object",
       "properties": {
         "authorityUrl": {
+          "description": "Authority URL used for authentication.",
           "type": "string"
         },
         "resourceUri": {
+          "description": "Resource the service principal has access to.",
           "type": "string"
         },
         "tenantId": {
           "format": "uuid",
+          "description": "ID of the tenant to which the service principal belongs.",
           "type": "string"
         },
         "clientId": {
           "format": "uuid",
+          "description": "Service principal client ID.",
           "type": "string"
         },
         "clientSecret": {
+          "description": "Service principal secret.",
           "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "update"
+          ],
           "x-ms-secret": true
         }
       }
@@ -1149,11 +1057,17 @@
       "type": "object",
       "properties": {
         "userId": {
+          "description": "SQL database user name.",
           "pattern": "\\w",
           "type": "string"
         },
         "password": {
+          "description": "SQL database password.",
           "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "update"
+          ],
           "x-ms-secret": true
         }
       }
@@ -1165,22 +1079,52 @@
       "type": "object",
       "properties": {
         "type": {
-          "$ref": "#/definitions/CredentialsType"
+          "description": "Credential type used to authentication with storage.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/CredentialsType"
+            }
+          ]
         },
         "accountKey": {
-          "$ref": "#/definitions/AccountKeySection"
+          "description": "Storage account key authentication.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/AccountKeySection"
+            }
+          ]
         },
         "certificate": {
-          "$ref": "#/definitions/CertificateSection"
+          "description": "Service principal certificate authentication.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/CertificateSection"
+            }
+          ]
         },
         "sas": {
-          "$ref": "#/definitions/SasSection"
+          "description": "Storage container SAS token authentication.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/SasSection"
+            }
+          ]
         },
         "servicePrincipal": {
-          "$ref": "#/definitions/ServicePrincipalSection"
+          "description": "Service principal password authentication.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/ServicePrincipalSection"
+            }
+          ]
         },
         "sqlAdmin": {
-          "$ref": "#/definitions/SqlAdminSection"
+          "description": "SQL user/password authentication.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/SqlAdminSection"
+            }
+          ]
         }
       }
     },
@@ -1192,9 +1136,15 @@
       "type": "object",
       "properties": {
         "credentials": {
-          "$ref": "#/definitions/DatastoreCredentials"
+          "description": "Azure Data Lake credentials.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/DatastoreCredentials"
+            }
+          ]
         },
         "storeName": {
+          "description": "Azure Data Lake store name.",
           "pattern": "\\w",
           "type": "string"
         }
@@ -1211,9 +1161,15 @@
       "type": "object",
       "properties": {
         "credentials": {
-          "$ref": "#/definitions/DatastoreCredentials"
+          "description": "Azure SQL database credentials.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/DatastoreCredentials"
+            }
+          ]
         },
         "databaseName": {
+          "description": "Azure SQL database name.",
           "pattern": "\\w",
           "type": "string",
           "x-ms-mutability": [
@@ -1222,8 +1178,10 @@
           ]
         },
         "endpoint": {
+          "description": "Azure cloud endpoint for the database.",
           "pattern": "\\w",
           "type": "string",
+          "example": "database.windows.net",
           "x-ms-mutability": [
             "create",
             "read"
@@ -1231,6 +1189,7 @@
         },
         "portNumber": {
           "format": "int32",
+          "description": "Azure SQL server port.",
           "type": "integer",
           "x-ms-mutability": [
             "create",
@@ -1238,6 +1197,7 @@
           ]
         },
         "serverName": {
+          "description": "Azure SQL server name.",
           "pattern": "\\w",
           "type": "string",
           "x-ms-mutability": [
@@ -1258,6 +1218,7 @@
       "type": "object",
       "properties": {
         "enableSSL": {
+          "description": "Whether the Azure PostgreSQL server requires SSL.",
           "type": "boolean",
           "x-ms-mutability": [
             "create",
@@ -1265,9 +1226,15 @@
           ]
         },
         "credentials": {
-          "$ref": "#/definitions/DatastoreCredentials"
+          "description": "Azure SQL database credentials.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/DatastoreCredentials"
+            }
+          ]
         },
         "databaseName": {
+          "description": "Azure SQL database name.",
           "pattern": "\\w",
           "type": "string",
           "x-ms-mutability": [
@@ -1276,8 +1243,10 @@
           ]
         },
         "endpoint": {
+          "description": "Azure cloud endpoint for the database.",
           "pattern": "\\w",
           "type": "string",
+          "example": "database.windows.net",
           "x-ms-mutability": [
             "create",
             "read"
@@ -1285,6 +1254,7 @@
         },
         "portNumber": {
           "format": "int32",
+          "description": "Azure SQL server port.",
           "type": "integer",
           "x-ms-mutability": [
             "create",
@@ -1292,6 +1262,7 @@
           ]
         },
         "serverName": {
+          "description": "Azure SQL server name.",
           "pattern": "\\w",
           "type": "string",
           "x-ms-mutability": [
@@ -1312,9 +1283,15 @@
       "type": "object",
       "properties": {
         "credentials": {
-          "$ref": "#/definitions/DatastoreCredentials"
+          "description": "Azure SQL database credentials.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/DatastoreCredentials"
+            }
+          ]
         },
         "databaseName": {
+          "description": "Azure SQL database name.",
           "pattern": "\\w",
           "type": "string",
           "x-ms-mutability": [
@@ -1323,8 +1300,10 @@
           ]
         },
         "endpoint": {
+          "description": "Azure cloud endpoint for the database.",
           "pattern": "\\w",
           "type": "string",
+          "example": "database.windows.net",
           "x-ms-mutability": [
             "create",
             "read"
@@ -1332,6 +1311,7 @@
         },
         "portNumber": {
           "format": "int32",
+          "description": "Azure SQL server port.",
           "type": "integer",
           "x-ms-mutability": [
             "create",
@@ -1339,6 +1319,7 @@
           ]
         },
         "serverName": {
+          "description": "Azure SQL server name.",
           "pattern": "\\w",
           "type": "string",
           "x-ms-mutability": [
@@ -1359,6 +1340,7 @@
       "type": "object",
       "properties": {
         "accountName": {
+          "description": "Storage account name.",
           "pattern": "\\w",
           "type": "string",
           "x-ms-mutability": [
@@ -1368,6 +1350,7 @@
         },
         "blobCacheTimeout": {
           "format": "int32",
+          "description": "Blob storage cache timeout.",
           "type": "integer",
           "x-ms-mutability": [
             "create",
@@ -1375,6 +1358,7 @@
           ]
         },
         "containerName": {
+          "description": "Storage account container name.",
           "pattern": "\\w",
           "type": "string",
           "x-ms-mutability": [
@@ -1383,19 +1367,28 @@
           ]
         },
         "credentials": {
-          "$ref": "#/definitions/DatastoreCredentials"
+          "description": "Storage account credentials.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/DatastoreCredentials"
+            }
+          ]
         },
         "endpoint": {
+          "description": "Azure cloud endpoint for the storage account.",
           "pattern": "\\w",
           "type": "string",
+          "example": "core.windows.net",
           "x-ms-mutability": [
             "create",
             "read"
           ]
         },
         "protocol": {
+          "description": "Protocol used to communicate with the storage account.",
           "pattern": "\\w",
           "type": "string",
+          "example": "https",
           "x-ms-mutability": [
             "create",
             "read"
@@ -1411,6 +1404,7 @@
       "type": "object",
       "properties": {
         "serverAddress": {
+          "description": "GlusterFS server address (can be the IP address or server name).",
           "pattern": "\\w",
           "type": "string",
           "x-ms-mutability": [
@@ -1419,6 +1413,7 @@
           ]
         },
         "volumeName": {
+          "description": "GlusterFS volume name.",
           "pattern": "\\w",
           "type": "string",
           "x-ms-mutability": [
@@ -1435,25 +1430,60 @@
       "type": "object",
       "properties": {
         "type": {
-          "$ref": "#/definitions/ContentsType"
+          "description": "Storage type backing the datastore.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/ContentsType"
+            }
+          ]
         },
         "azureDataLake": {
-          "$ref": "#/definitions/AzureDataLakeSection"
+          "description": "Azure Data Lake (Gen1/2) storage information.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/AzureDataLakeSection"
+            }
+          ]
         },
         "azureMySql": {
-          "$ref": "#/definitions/AzureMySqlSection"
+          "description": "Azure Database for MySQL information.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/AzureMySqlSection"
+            }
+          ]
         },
         "azurePostgreSql": {
-          "$ref": "#/definitions/AzurePostgreSqlSection"
+          "description": "Azure Database for PostgreSQL information.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/AzurePostgreSqlSection"
+            }
+          ]
         },
         "azureSqlDatabase": {
-          "$ref": "#/definitions/AzureSqlDatabaseSection"
+          "description": "Azure SQL Database information.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/AzureSqlDatabaseSection"
+            }
+          ]
         },
         "azureStorage": {
-          "$ref": "#/definitions/AzureStorageSection"
+          "description": "Azure storage account (blobs, files) information.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/AzureStorageSection"
+            }
+          ]
         },
         "glusterFs": {
-          "$ref": "#/definitions/GlusterFsSection"
+          "description": "GlusterFS volume information.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/GlusterFsSection"
+            }
+          ]
         }
       }
     },
@@ -1461,19 +1491,30 @@
       "enum": [
         "Synapse"
       ],
-      "type": "string"
+      "type": "string",
+      "x-ms-enum": {
+        "name": "OriginType",
+        "modelAsString": false
+      }
     },
     "LinkedInfo": {
       "type": "object",
       "properties": {
         "linkedId": {
+          "description": "Linked service ID.",
           "type": "string"
         },
         "linkedResourceName": {
+          "description": "Linked service resource name.",
           "type": "string"
         },
         "origin": {
-          "$ref": "#/definitions/OriginType"
+          "description": "Type of the linked service.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/OriginType"
+            }
+          ]
         }
       }
     },
@@ -1484,28 +1525,37 @@
       "type": "object",
       "properties": {
         "contents": {
-          "$ref": "#/definitions/DatastoreContents"
+          "description": "Reference to the datastore storage contents.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/DatastoreContents"
+            }
+          ]
         },
         "description": {
+          "description": "Datastore description.",
           "type": "string"
         },
         "hasBeenValidated": {
+          "description": "Whether the service has validated access to the datastore with the provided credentials.",
           "type": "boolean",
           "readOnly": true
         },
-        "id": {
-          "format": "uuid",
-          "type": "string",
-          "readOnly": true
-        },
         "isDefault": {
+          "description": "Whether this datastore is the default for the workspace.",
           "type": "boolean",
           "readOnly": true
         },
         "linkedInfo": {
-          "$ref": "#/definitions/LinkedInfo"
+          "description": "Information about the datastore origin, if linked.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/LinkedInfo"
+            }
+          ]
         },
         "tags": {
+          "description": "Tags (key-value metadata).",
           "type": "object",
           "additionalProperties": {
             "type": "string"
@@ -1515,10 +1565,18 @@
     },
     "DatastorePropertiesResource": {
       "description": "Azure Resource Manager resource Envelope",
+      "required": [
+        "properties"
+      ],
       "type": "object",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/DatastoreProperties"
+          "description": "Additional attributes of the entity.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/DatastoreProperties"
+            }
+          ]
         },
         "systemData": {
           "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
@@ -1534,15 +1592,14 @@
       "type": "object",
       "properties": {
         "value": {
+          "description": "A page of resources returned from the list operation.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/DatastorePropertiesResource"
           }
         },
-        "continuationToken": {
-          "type": "string"
-        },
         "nextLink": {
+          "description": "URI of the next page of results.",
           "type": "string"
         }
       }
@@ -1569,40 +1626,30 @@
           "description": "Model asset stage.",
           "type": "string"
         },
-        "name": {
-          "description": "The Name of the Asset.",
-          "type": "string",
-          "readOnly": true
-        },
-        "version": {
-          "description": "The Asset version assigned by service.",
-          "type": "string",
-          "readOnly": true
-        },
         "description": {
-          "description": "The Asset description text.",
+          "description": "The asset description text.",
           "type": "string"
         },
         "datastoreId": {
-          "description": "The Asset datastoreId",
+          "description": "The asset datastoreId",
           "type": "string"
         },
         "tags": {
-          "description": "The Asset tag dictionary.",
+          "description": "The asset tag dictionary.",
           "type": "object",
           "additionalProperties": {
             "type": "string"
           }
         },
         "properties": {
-          "description": "The Asset property dictionary.",
+          "description": "The asset property dictionary.",
           "type": "object",
           "additionalProperties": {
             "type": "string"
           }
         },
         "assetPaths": {
-          "description": "Details of asset path\r\nAdding list of back compat",
+          "description": "Details of asset paths in the datastore.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/AssetPath"
@@ -1622,10 +1669,18 @@
     },
     "ModelVersionResource": {
       "description": "Azure Resource Manager resource Envelope",
+      "required": [
+        "properties"
+      ],
       "type": "object",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/ModelVersion"
+          "description": "Additional attributes of the entity.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/ModelVersion"
+            }
+          ]
         },
         "systemData": {
           "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
@@ -1640,17 +1695,6 @@
     "ModelContainer": {
       "type": "object",
       "properties": {
-        "latestVersions": {
-          "description": "Latest Versions for all assets",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ModelVersionResource"
-          }
-        },
-        "name": {
-          "description": "The Name of the Asset container",
-          "type": "string"
-        },
         "description": {
           "description": "The asset container description text.",
           "type": "string"
@@ -1661,15 +1705,30 @@
           "additionalProperties": {
             "type": "string"
           }
+        },
+        "latestVersions": {
+          "description": "Latest Versions for all assets",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ModelVersionResource"
+          }
         }
       }
     },
     "ModelContainerResource": {
       "description": "Azure Resource Manager resource Envelope",
+      "required": [
+        "properties"
+      ],
       "type": "object",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/ModelContainer"
+          "description": "Additional attributes of the entity.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/ModelContainer"
+            }
+          ]
         },
         "systemData": {
           "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
@@ -1686,15 +1745,14 @@
       "properties": {
         "value": {
           "type": "array",
+          "description": "A page of resources returned from the list operation.",
           "items": {
             "$ref": "#/definitions/ModelContainerResource"
           }
         },
-        "continuationToken": {
-          "type": "string"
-        },
         "nextLink": {
-          "type": "string"
+          "type": "string",
+          "description": "URI of the next page of results."
         }
       }
     },
@@ -1703,15 +1761,14 @@
       "properties": {
         "value": {
           "type": "array",
+          "description": "A page of resources returned from the list operation.",
           "items": {
             "$ref": "#/definitions/ModelVersionResource"
           }
         },
-        "continuationToken": {
-          "type": "string"
-        },
         "nextLink": {
-          "type": "string"
+          "type": "string",
+          "description": "URI of the next page of results."
         }
       }
     }

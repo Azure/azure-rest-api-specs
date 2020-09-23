@@ -34,6 +34,45 @@
     }
   },
   "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg123/providers/Microsoft.MachineLearningServices/workspaces/workspace123/models/model123/versions/999",
+        "name": "999",
+        "type": "Microsoft.MachineLearningService/workspaces/models/versions",
+        "properties": {
+          "stage": "Production",
+          "description": "Model version description",
+          "datastoreId": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg123/providers/Microsoft.MachineLearningServices/workspaces/workspace123/datastores/datastore123",
+          "tags": {
+            "tag1": "value1",
+            "tag2": "value2"
+          },
+          "properties": {
+            "prop1": "value1",
+            "prop2": "value2"
+          },
+          "assetPaths": [
+            {
+              "path": "LocalUpload/12345/some/path",
+              "isDirectory": true
+            }
+          ],
+          "linkedResourceIds": {
+            "azureml.parentModel": [
+              "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg123/providers/Microsoft.MachineLearningServices/workspaces/workspace123/models/model123/versions/123"
+            ]
+          }
+        },
+        "systemData": {
+          "createdAt": "2020-09-01T12:00:00.000Z",
+          "createdBy": "John Smith",
+          "createdByType": "User",
+          "lastModifiedAt": "2020-09-01T12:00:00.000Z",
+          "lastModifiedBy": "John Smith",
+          "lastModifiedByType": "User"
+        }
+      }
+    },
     "201": {
       "body": {
         "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg123/providers/Microsoft.MachineLearningServices/workspaces/workspace123/models/model123/versions/999",
@@ -41,8 +80,6 @@
         "type": "Microsoft.MachineLearningService/workspaces/models/versions",
         "properties": {
           "stage": "Production",
-          "name": "model123",
-          "version": "999",
           "description": "Model version description",
           "datastoreId": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg123/providers/Microsoft.MachineLearningServices/workspaces/workspace123/datastores/datastore123",
           "tags": {
