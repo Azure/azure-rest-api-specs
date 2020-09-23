@@ -1865,10 +1865,11 @@
         }
       }
     },
-    "DocumentPiiEntities": {
+    "PiiDocumentEntities": {
       "type": "object",
       "required": [
         "id",
+        "redactedText",
         "entities",
         "warnings"
       ],
@@ -1877,11 +1878,15 @@
           "type": "string",
           "description": "Unique, non-empty document identifier."
         },
+        "redactedText": {
+          "type": "string",
+          "description": "Returns redacted text."
+        },
         "entities": {
           "type": "array",
           "description": "Recognized entities in the document.",
           "items": {
-            "$ref": "#/definitions/PiiEntity"
+            "$ref": "#/definitions/Entity"
           }
         },
         "warnings": {
@@ -1935,24 +1940,6 @@
           "description": "Confidence score between 0 and 1 of the extracted entity."
         }
       }
-    },
-    "PiiEntity": {
-      "allOf": [
-        {
-          "$ref": "#/definitions/Entity"
-        },
-        {
-          "type": "object",
-          "required": [
-            "redactedText"
-          ],
-          "properties": {
-            "redactedText": {
-              "type": "string"
-            }
-          }
-        }
-      ]
     },
     "EntityLinkingResult": {
       "type": "object",
@@ -2463,7 +2450,7 @@
           "type": "array",
           "description": "Response by document",
           "items": {
-            "$ref": "#/definitions/DocumentPiiEntities"
+            "$ref": "#/definitions/PiiDocumentEntities"
           }
         },
         "errors": {
