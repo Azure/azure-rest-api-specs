@@ -41,7 +41,7 @@ jobs:
         SDK_REPO_NAME: azure-sdk-for-go
       Trenton:
         SDK_REPO_NAME: azure-sdk-for-trenton
-      ${{ if eq(variables['ENABLE_RESOURCE_MANAGER_SCHEMAS'], 'true') }}:
+      ${{ if eq(variables['Build.Repository.Name'], 'azure-rest-api-specs') }}:
         Schema:
           SDK_REPO_NAME: azure-resource-manager-schemas
   steps:
