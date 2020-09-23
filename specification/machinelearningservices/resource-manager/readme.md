@@ -26,27 +26,37 @@ These are the global settings for the Machine Learning Services API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2020-06-01
+tag: package-2020-09-01
+```
+
+### Tag: package-preview-2020-09
+
+These settings apply only when `--tag=package-preview-2020-09` is specified on the command line.
+
+``` yaml $(tag) == 'package-preview-2020-09'
+input-file:
+  - Microsoft.MachineLearningServices/preview/2020-09-01-preview/jobs.json
+  - Microsoft.MachineLearningServices/preview/2020-09-01-preview/machineLearningServices.json
 ```
 
 ### Tag: package-2020-06-01
 
 These settings apply only when `--tag=package-2020-06` is specified on the command line.
 
-```yaml $(tag) == 'package-2020-06-01'
+``` yaml $(tag) == 'package-2020-06-01'
 input-file:
   - Microsoft.MachineLearningServices/stable/2020-06-01/machineLearningServices.json
 ```
-
 
 ### Tag: package-preview-2020-05
 
 These settings apply only when `--tag=package-preview-2020-05` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2020-05'
+``` yaml $(tag) == 'package-preview-2020-05'
 input-file:
   - Microsoft.MachineLearningServices/preview/2020-05-15-preview/machineLearningServices.json
 ```
+
 ### Tag: package-2020-04-01
 
 These settings apply only when `--tag=package-2020-04` is specified on the command line.
@@ -227,6 +237,20 @@ batch:
   - tag: package-2020-02-18-preview
   - tag: package-2018-03-preview
 ```
+
+### Tag: package-2020-09-01-preview and java
+
+These settings apply only when `--tag=package-2020-09-01-preview --java` is specified on the command line.
+Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-2020-09-01-preview' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.machinelearningservices.v2020_09_01_preview
+  output-folder: $(azure-libraries-for-java-folder)/sdk/machinelearningservices/mgmt-v2020_09_01_preview
+regenerate-manager: true
+generate-interface: true
+```
+
 ### Tag: package-2020-06-01 and java
 
 These settings apply only when `--tag=package-2020-06-01 --java` is specified on the command line.
@@ -408,6 +432,7 @@ input-file:
   - $(this-folder)/Microsoft.MachineLearningServices/stable/2019-06-01/machineLearningServices.json
   - $(this-folder)/Microsoft.MachineLearningServices/stable/2019-05-01/machineLearningServices.json
   - $(this-folder)/Microsoft.MachineLearningServices/stable/2018-11-19/machineLearningServices.json
+  - $(this-folder)/Microsoft.MachineLearningServices/preview/2020-09-01-preview/jobs.json
   - $(this-folder)/Microsoft.MachineLearningServices/preview/2020-09-01-preview/machineLearningServices.json
   - $(this-folder)/Microsoft.MachineLearningServices/preview/2020-05-01-preview/machineLearningServices.json
   - $(this-folder)/Microsoft.MachineLearningServices/preview/2020-04-01-preview/machineLearningServices.json
