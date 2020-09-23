@@ -43,7 +43,7 @@ jobs:
         SDK_REPO_NAME: azure-sdk-for-trenton
       Schema:
         SDK_REPO_NAME: azure-resource-manager-schemas
-  condition: or(ne(SDK_REPO_NAME, 'azure-resource-manager-schemas'), eq(SPEC_REPO, 'azure-rest-api-specs'))
+  condition: or(ne(variables['SDK_REPO_NAME'], 'azure-resource-manager-schemas'), eq(variables['SPEC_REPO'], 'azure-rest-api-specs'))
   steps:
   - checkout: none
   - script: |
