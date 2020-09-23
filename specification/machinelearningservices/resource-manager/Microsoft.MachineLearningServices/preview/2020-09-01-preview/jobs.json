@@ -176,8 +176,14 @@
               "$ref": "#/definitions/MachineLearningServiceError"
             }
           },
-          "200": {
-            "description": "Success"
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "description": "URI to poll for asynchronous operation status.",
+                "type": "string"
+              }
+            }
           }
         }
       }
@@ -715,11 +721,6 @@
         "status": {
           "description": "Status of the job.",
           "$ref": "#/definitions/JobStatus",
-          "allOf": [
-            {
-              "$ref": "#/definitions/JobStatus"
-            }
-          ],
           "x-ms-mutability": [
             "read"
           ],
