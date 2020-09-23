@@ -1033,83 +1033,6 @@
     }
   },
   "definitions": {
-    "KeyReleaseCondition": {
-      "properties": {
-        "claim": {
-          "x-ms-client-name": "claimType",
-          "type": "string",
-          "minLength": 1,
-          "description": "claim type name"
-        },
-        "condition": {
-          "x-ms-client-name": "claimCondition",
-          "type": "string",
-          "minLength": 1,
-          "description": "condition to test",
-          "enum": [
-            "equals"
-          ],
-          "x-ms-enum": {
-            "name": "KeyReleaseConditionCondition",
-            "modelAsString": true,
-            "values": [
-              {
-                "value": "equals",
-                "description": "equals comparison."
-              }
-            ]
-          }
-        },
-        "value": {
-          "type": "string"
-        }
-      }
-    },
-    "KeyReleaseAuthority": {
-      "properties": {
-        "authority": {
-          "x-ms-client-name": "authorityURL",
-          "type": "string",
-          "minLength": 1,
-          "description": "Base URL of the attestation service."
-        },
-        "allOf": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/KeyReleaseCondition",
-            "description": "The set of claim conditions that must be met."
-          }
-        }
-      }
-    },
-    "KeyReleasePolicy": {
-      "properties": {
-        "version": {
-          "description": "key release policy version",
-          "type": "string",
-          "enum": [
-            "0.2"
-          ],
-          "x-ms-enum": {
-            "name": "KeyReleasePolicyVersion",
-            "modelAsString": true,
-            "values": [
-              {
-                "value": "0.2",
-                "description": "Schema version 0.2"
-              }
-            ]
-          }
-        },
-        "anyOf": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/KeyReleaseAuthority",
-            "description": "Authorities."
-          }
-        }
-      }
-    },
     "JsonWebKey": {
       "properties": {
         "kid": {
@@ -1356,8 +1279,9 @@
           "description": "True if the key's lifetime is managed by key vault. If this is a key backing a certificate, then managed will be true."
         },
         "release_policy": {
-          "$ref": "#/definitions/KeyReleasePolicy",
-          "description": "The policy rules under which the key can be exported."
+          "description": "Blob encoding the policy rules under which the key can be exported.",
+          "type": "string",
+          "format": "base64url"
         }
       },
       "description": "A KeyBundle consisting of a WebKey plus its attributes."
@@ -1566,8 +1490,9 @@
           }
         },
         "release_policy": {
-          "$ref": "#/definitions/KeyReleasePolicy",
-          "description": "The policy rules under which the key can be exported."
+          "description": "Blob encoding the policy rules under which the key can be exported.",
+          "type": "string",
+          "format": "base64url",
         }
       },
       "description": "The key create parameters.",
@@ -1598,8 +1523,9 @@
           "description": "Application specific metadata in the form of key-value pairs."
         },
         "release_policy": {
-          "$ref": "#/definitions/KeyReleasePolicy",
-          "description": "The policy rules under which the key can be exported."
+          "description": "Blob encoding the policy rules under which the key can be exported.",
+          "type": "string",
+          "format": "base64url",
         }
       },
       "description": "The key import parameters.",
@@ -1838,8 +1764,9 @@
           "description": "Application specific metadata in the form of key-value pairs."
         },
         "release_policy": {
-          "$ref": "#/definitions/KeyReleasePolicy",
-          "description": "The policy rules under which the key can be exported."
+          "description": "Blob encoding the policy rules under which the key can be exported.",
+          "type": "string",
+          "format": "base64url",
         }
       },
       "description": "The key update parameters."
