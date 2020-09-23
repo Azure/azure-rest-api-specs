@@ -45,6 +45,7 @@ jobs:
         SDK_REPO_NAME: azure-resource-manager-schemas
   condition: or(ne(variables['SDK_REPO_NAME'], 'azure-resource-manager-schemas'), endsWith(variables['SPEC_REPO'], '/azure-rest-api-specs'))
   steps:
+  - script: printenv
   - checkout: none
   - script: |
       curl \
