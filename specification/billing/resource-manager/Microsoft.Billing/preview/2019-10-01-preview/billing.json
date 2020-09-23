@@ -1526,6 +1526,51 @@
         }
       }
     },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/createEnrollmentAccount": {
+      "post": {
+        "tags": [
+          "EnrollmentAccounts"          
+        ],
+        "x-ms-examples": {
+          "AddEnrollmentAccount": {
+            "$ref": "./examples/AddEnrollmentAccount.json"
+          }
+        },
+        "operationId": "EnrollmentAccounts_AddEnrollmentAccount",
+        "description": "Add an enrollment account to an enrollment or department",
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/billingAccountNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CreateEnrollmentAccount"
+            },
+            "description": "Request parameters that are provided to the create an enrollment account."
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created. Account added successfully",
+            "schema": {
+              "$ref": "#/definitions/EnrollmentAccount"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
     "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/enrollmentAccounts": {
       "get": {
         "tags": [
@@ -1622,6 +1667,89 @@
         "responses": {
           "200": {
             "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/EnrollmentAccount"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "EnrollmentAccounts"          
+        ],
+        "x-ms-examples": {
+          "UpdateEnrollmentAccount": {
+            "$ref": "./examples/UpdateEnrollmentAccount.json"
+          }
+        },
+        "operationId": "EnrollmentAccounts_UpdateEnrollmentAccount",
+        "description": "Update an enrollment account to an enrollment or department",
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/billingAccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/enrollmentAccountNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/UpdateEnrollmentAccount"
+            },
+            "description": "Request parameters that are provided to update enrollment account parameters."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Account modified successfully",
+            "schema": {
+              "$ref": "#/definitions/EnrollmentAccount"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "EnrollmentAccounts"
+        ],
+        "x-ms-examples": {
+          "DeleteEnrollmentAccount": {
+            "$ref": "./examples/DeleteEnrollmentAccount.json"
+          }
+        },
+        "operationId": "EnrollmentAccounts_DeleteEnrollmentAccount",
+        "description": "Delete the given enrollment account",
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/billingAccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/enrollmentAccountNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The specified enrollment account is deleted",
             "schema": {
               "$ref": "#/definitions/EnrollmentAccount"
             }
@@ -6669,6 +6797,62 @@
         }
       }
     },
+    "CreateEnrollmentAccount": {
+      "type": "object",
+      "description": "Request parameters to create an account.",
+      "properties": {
+        "accountName": {
+          "type": "string",
+          "description": "Name of the account"
+        },
+        "accountOwner": {
+          "type": "string",
+          "description": "Email address of account owner"
+        },
+        "authType": {
+          "type": "string",
+          "description": "Type of authentication to be supported",
+          "enum": [
+            "MicrosoftAccount",
+            "WorkOrSchoolAccount"
+          ],
+          "x-ms-enum": {
+            "name": "authType",
+            "modelAsString": true
+          }
+        },
+        "costCenter": {
+          "type": "string",
+          "description": "Cost Center associated to account"
+        },
+        "departmentName": {
+          "type": "string",
+          "description": "Department Id to which account should be associated"
+        }
+      }
+    },
+    "UpdateEnrollmentAccount": {
+      "type": "object",
+      "description": "Request parameters to update an account.",
+      "properties": {
+        "accountName": {
+          "type": "string",
+          "description": "Name of the account"
+        },        
+        "costCenter": {
+          "type": "string",
+          "description": "Cost Center associated to account"
+        },
+        "departmentName": {
+          "type": "string",
+          "description": "Department Id to which account should be associated"
+        },
+        "devTest": {
+          "type": "boolean",
+          "description": "Provides information on whether Enterprise dev test offer is enabled or not. Only Enrollment Administrators will be able to enable or disable this."
+        }
+      }
+    },
     "EnrollmentAccountProperties": {
       "description": "The properties of an enrollment account.",
       "properties": {
@@ -6697,6 +6881,11 @@
           "description": "The end date of the enrollment account.",
           "type": "string",
           "format": "date-time"
+        },
+        "devTest": {
+          "description": "Provides information on whether Enterprise dev test offer is enabled or not",
+          "type": "boolean",
+          "readOnly": true
         },
         "department": {
           "description": "Associated department. By default this is not populated, unless it's specified in $expand.",
