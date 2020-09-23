@@ -201,6 +201,9 @@
         ],
         "operationId": "IotSensors_DownloadActivation",
         "description": "Download sensor activation file",
+        "produces": [
+          "application/zip"
+        ],
         "parameters": [
           {
             "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
@@ -214,7 +217,11 @@
         ],
         "responses": {
           "200": {
-            "description": "Downloaded activation file"
+            "description": "Downloaded activation file",
+            "schema": {
+              "type": "object",
+              "format": "file"
+            }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -269,7 +276,7 @@
       "in": "path",
       "required": true,
       "type": "string",
-      "description": "Scope of the query, can be subscription (/subscriptions/326b1ffa-8ac7-4034-8437-69bef733dede) or IoT Hub (/providers/Microsoft.Devices/iotHubs/myHub)",
+      "description": "Scope of the query (IoT Hub, /providers/Microsoft.Devices/iotHubs/myHub)",
       "x-ms-parameter-location": "method",
       "x-ms-skip-url-encoding": true
     },

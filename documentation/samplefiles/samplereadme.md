@@ -56,6 +56,9 @@ swagger-to-sdk:
   - repo: azure-sdk-for-ruby
     after_scripts:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_YourServiceName']
+  - repo: azure-resource-manager-schemas
+    after_scripts:
+      - node sdkauto_afterscript.js yourservicename/resource-manager
 ```
 
 ## Go
@@ -77,3 +80,7 @@ See configuration in [readme.typescript.md](https://github.com/Azure/azure-rest-
 ## CSharp
 
 See configuration in [readme.csharp.md](https://github.com/Azure/azure-rest-api-specs/blob/master/documentation/samplefiles/readme.chsarp.md)
+
+## AzureResourceSchema
+
+See configuration in [readme.azureresourceschema.md](https://github.com/Azure/azure-rest-api-specs/blob/master/documentation/samplefiles/readme.azureresourceschema.md)
