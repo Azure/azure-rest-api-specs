@@ -1475,8 +1475,12 @@
           "$ref": "#/definitions/RedirectIncompatibleRowSettings"
         },
         "logStorageSettings": {
-          "description": "Log storage settings customer need to provide when enabling session log.",
+          "description": "(Deprecated. Please use LogSettings) Log storage settings customer need to provide when enabling session log.",
           "$ref": "#/definitions/LogStorageSettings"
+        },
+        "logSettings": {
+          "description": "Log settings customer needs provide when enabling log.",
+          "$ref": "#/definitions/LogSettings"
         },
         "preserveRules": {
           "type": "array",
@@ -4298,7 +4302,7 @@
       }
     },
     "LogStorageSettings": {
-      "description": "Log storage settings.",
+      "description": "(Deprecated. Please use LogSettings) Log storage settings.",
       "type": "object",
       "properties": {
         "linkedServiceName": {
@@ -4324,6 +4328,58 @@
       "required": [
         "linkedServiceName"
       ]
+    },
+    "LogSettings": {
+      "description": "Log settings.",
+      "type": "object",
+      "properties": {
+        "enableCopyActivityLog": {
+          "type": "object",
+          "description": "Specifies whether to enable copy activity log. Type: boolean (or Expression with resultType boolean)."
+        },
+        "copyActivityLogSettings": {
+          "description": "Specifies settings for copy activity log.",
+          "$ref": "#/definitions/CopyActivityLogSettings"
+        },
+        "logLocationSettings": {
+          "description": "Log location settings customer needs to provide when enabling log.",
+          "$ref": "#/definitions/LogLocationSettings"
+        }
+      },
+      "required": [
+        "logLocationSettings"
+      ]
+    },
+    "LogLocationSettings": {
+      "description": "Log location settings.",
+      "type": "object",
+      "properties": {
+        "linkedServiceName": {
+          "description": "Log storage linked service reference.",
+          "$ref": "../datafactory.json#/definitions/LinkedServiceReference"
+        },
+        "path": {
+          "type": "object",
+          "description": "The path to storage for storing detailed logs of activity execution. Type: string (or Expression with resultType string)."
+        } 
+      },
+      "required": [
+        "linkedServiceName"
+      ]     
+    },
+    "CopyActivityLogSettings": {
+      "description": "Settings for copy activity log.",
+      "type": "object",
+      "properties": {
+        "logLevel": {
+          "type": "object",
+          "description": "Gets or sets the log level, support: Info, Warning. Type: string (or Expression with resultType string)."
+        },
+        "enableReliableLogging": {
+          "type": "object",
+          "description": "Specifies whether to enable reliable logging. Type: boolean (or Expression with resultType boolean)."
+        }
+      }
     },
     "StagingSettings": {
       "description": "Staging settings.",
