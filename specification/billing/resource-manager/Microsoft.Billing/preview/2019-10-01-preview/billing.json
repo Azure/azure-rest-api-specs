@@ -1755,6 +1755,12 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/DownloadUrl"
+            }
+          },
           "202": {
             "description": "Accepted.",
             "headers": {
@@ -1770,12 +1776,6 @@
                 "description": "The operation entity Id GUID.",
                 "type": "string"
               }
-            }
-          },
-          "200": {
-            "description": "OK. The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/DownloadUrl"
             }
           },
           "default": {
@@ -1815,6 +1815,12 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/DownloadUrl"
+            }
+          },
           "202": {
             "description": "Accepted.",
             "headers": {
@@ -1830,12 +1836,6 @@
                 "description": "The operation entity Id GUID.",
                 "type": "string"
               }
-            }
-          },
-          "200": {
-            "description": "OK. The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/DownloadUrl"
             }
           },
           "default": {
@@ -4521,6 +4521,134 @@
         }
       }
     },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/departments/{departmentName}/enrollmentAccounts/{enrollmentAccountName}": {
+      "get": {
+        "tags": [
+          "DepartmentAccounts"
+        ],
+        "x-ms-examples": {
+          "DepartmentAccount": {
+            "$ref": "./examples/DepartmentAccount.json"
+          }
+        },
+        "operationId": "DepartmentAccounts_GetByBillingAccount",
+        "description": "Gets an enrollment accounts for the caller on a department. The operation is supported for billing accounts with agreement type Microsoft Partner Agreement, Microsoft Customer Agreement or Enterprise Agreement.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/billingAccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/departmentNameParameter"
+          },
+          {
+            "$ref": "#/parameters/enrollmentAccountNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/DepartmentAccount"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "DepartmentAccounts"
+        ],
+        "x-ms-examples": {
+          "DepartmentAccountDelete": {
+            "$ref": "./examples/DepartmentAccountDelete.json"
+          }
+        },
+        "operationId": "DepartmentAccounts_DeleteByBillingAccount",
+        "description": "Deletes an department account association for the caller on a billing account. The operation is supported for billing accounts with agreement type Microsoft Partner Agreement or Microsoft Customer Agreement.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/billingAccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/departmentNameParameter"
+          },
+          {
+            "$ref": "#/parameters/enrollmentAccountNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/DepartmentAccount"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "DepartmentAccounts"
+        ],
+        "operationId": "DepartmentAccounts_Put",
+        "description": "Create or update a department account association.",
+        "x-ms-examples": {
+          "PutDepartmentAccount": {
+            "$ref": "./examples/PutDepartmentAccount.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/billingAccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/departmentNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/departmentAccount"
+            },
+            "description": "The new or updated department account association."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/DepartmentAccou"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
     "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/invoiceSections/{invoiceSectionName}/billingRoleAssignments/{billingRoleAssignmentName}": {
       "get": {
         "tags": [
@@ -4981,6 +5109,51 @@
             "description": "OK. The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/BillingRoleAssignmentListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/departments/{departmentName}/enrollmentAccounts": {
+      "get": {
+        "tags": [
+          "DepartmentAccounts"
+        ],
+        "x-ms-examples": {
+          "BillingAccountRoleAssignmentList": {
+            "$ref": "./examples/DepartmentAccountList.json"
+          },
+          "BillingAccountEaRoleAssignmentList": {
+            "$ref": "./examples/DepartmentAccountList.json"
+          }
+        },
+        "operationId": "DepartmentAccounts_ListByBillingAccount",
+        "description": "Lists the department account association for the caller on a billing account. The operation is supported for billing accounts with agreement type Microsoft Partner Agreement, Microsoft Customer Agreement or Enterprise Agreement.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/billingAccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/departmentNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/DepartmentAccountListResult"
             }
           },
           "default": {
@@ -8215,6 +8388,19 @@
         }
       }
     },
+    "DepartmentAccountPayload": {
+      "description": "The payload use to update department account association on a scope",
+      "properties": {
+        "departmentId": {
+          "description": "The department id that is associated to an account",
+          "type": "string"
+        },
+        "accountId": {
+          "description": "The enrollment account id which is associated to the department",
+          "type": "string"
+        }
+      }
+    },
     "BillingRoleAssignmentListResult": {
       "description": "The list of role assignments.",
       "properties": {
@@ -8224,6 +8410,24 @@
           "readOnly": true,
           "items": {
             "$ref": "#/definitions/BillingRoleAssignment"
+          }
+        },
+        "nextLink": {
+          "description": "The link (url) to the next page of results.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "DepartmentAccountListResult": {
+      "description": "The list of department accounts.",
+      "properties": {
+        "value": {
+          "description": "The list of department accounts.",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/DepartmentAccount"
           }
         },
         "nextLink": {
@@ -8246,6 +8450,22 @@
           "description": "The properties of the role assignment.",
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/BillingRoleAssignmentProperties"
+        }
+      }
+    },
+    "DepartmentAccount": {
+      "description": "The Department Account",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "The properties of the department account.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/DepartmentAccountProperties"
         }
       }
     },
@@ -8301,6 +8521,52 @@
         "userAuthenticationType": {
           "description": "The authentication type of the user, whether Organization or MSA, of the user to whom the role was assigned. This is supported only for billing accounts with agreement type Enterprise Agreement.",
           "type": "string"
+        }
+      }
+    },
+    "DepartmentAccountProperties": {
+      "description": "The properties of the role assignment.",
+      "properties": {
+        "createdOn": {
+          "description": "The date the role assignment was created.",
+          "type": "string",
+          "readOnly": true
+        },
+        "createdByPrincipalTenantId": {
+          "description": "The tenant Id of the user who created the role assignment.",
+          "type": "string",
+          "readOnly": true
+        },
+        "createdByPrincipalId": {
+          "description": "The principal Id of the user who created the role assignment.",
+          "type": "string",
+          "readOnly": true
+        },
+        "createdByUserEmailAddress": {
+          "description": "The email address of the user who created the role assignment. This is supported only for billing accounts with agreement type Enterprise Agreement.",
+          "type": "string",
+          "readOnly": true
+        },
+        "departmentId": {
+          "description": "The id of the department.",
+          "type": "string",
+          "readOnly": true
+        },
+        "accountId": {
+          "description": "The enrollment account id for the department.",
+          "type": "string"
+        },
+        "enrollmentId": {
+          "description": "The billing account id.",
+          "type": "string"
+        },
+        "startsOn": {
+          "description": "The starts On date for department account association",
+          "type": "datetime"
+        },
+        "endsOn": {
+          "description": "The ends On date for department account association",
+          "type": "datetime"
         }
       }
     },
