@@ -1638,6 +1638,10 @@
         "confidence": {
           "description": "Confidence value.",
           "$ref": "#/definitions/Confidence"
+        },
+        "appearance": {
+          "description": "Style and its confidence value.",
+          "$ref": "#/definitions/Appearance"
         }
       }
     },
@@ -2046,6 +2050,33 @@
       "minimum": 0,
       "maximum": 1,
       "x-nullable": false
+    },
+    "Appearance": {
+      "description": "Information about style of extracted text.",
+      "type": "object",
+      "required": [
+        "style",
+        "styleConfidence"
+      ],
+      "properties": {
+        "style": {
+          "description": "Extracted text can have one of following listed styles.",
+          "enum": [
+            "handwriting",
+            "printed"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "style",
+            "modelAsString": false
+          },
+          "x-nullable": false
+        },
+        "styleConfidence": {
+          "description": "Confidence value of predicted style.",
+          "$ref": "#/definitions/Confidence"
+        }
+      }
     }
   },
   "parameters": {
