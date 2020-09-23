@@ -349,48 +349,6 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/listNotebookKeys": {
-      "post": {
-        "tags": [
-          "Workspaces"
-        ],
-        "description": "Lists notebook keys associated with this workspace. The notebook keys are used for loading notebook components, which a reader should have access to. So make it a Get, not Post call",
-        "operationId": "Workspaces_ListNotebookKeys",
-        "x-ms-examples": {
-          "List Workspace Keys": {
-            "$ref": "./examples/listWorkspaceNotebookKeys.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "#/parameters/APIVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/WorkspaceNameParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request was successful; the request was well-formed and received properly.",
-            "schema": {
-              "$ref": "#/definitions/NotebookListCredentialsResult"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed",
-            "schema": {
-              "$ref": "#/definitions/MachineLearningServiceError"
-            }
-          }
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/listKeys": {
       "post": {
         "tags": [
@@ -469,53 +427,6 @@
               "$ref": "#/definitions/MachineLearningServiceError"
             }
           }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.MachineLearningServices/locations/{location}/transitivepeusages": {
-      "get": {
-        "tags": [
-          "TransitivePEUsage"
-        ],
-        "operationId": "TransitivePEUsage_Get",
-        "description": "Gets the current transitive private endpoint usage information as well as limits for AML resources for given subscription and location.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/APIVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "name": "location",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The location for which resource usage is queried.",
-            "pattern": "^[-\\w\\._]+$"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/ListTransitivePEUsagesResult"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the request failed.",
-            "schema": {
-              "$ref": "#/definitions/MachineLearningServiceError"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Get Transitive PE Usages": {
-            "$ref": "./examples/getTransitivePEUsages.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": null
         }
       }
     },
@@ -2380,77 +2291,6 @@
       },
       "description": "Describes AML Resource Usage."
     },
-    "TransitivePEUsage": {
-      "type": "object",
-      "properties": {
-        "totalUsage": {
-          "readOnly": true,
-          "format": "int32",
-          "type": "integer"
-        }
-      }
-    },
-    "PrivateDNSZoneUsage": {
-      "type": "object",
-      "properties": {
-        "totalUsage": {
-          "readOnly": true,
-          "format": "int32",
-          "type": "integer"
-        }
-      }
-    },
-    "TransitivePEUsagesResult": {
-      "type": "object",
-      "description": "The transitive private endpoint usage in this location",
-      "properties": {
-        "subscriptionId": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Subscription id that the transitive private endpoint usage is measured."
-        },
-        "transitivePrivateEndpointsUsage": {
-          "readOnly": true,
-          "description": "Transitive private endpoint usage",
-          "$ref": "#/definitions/TransitivePEUsage"
-        },
-        "transitivePrivateEndpointsQuota": {
-          "readOnly": true,
-          "description": "Transitive private endpoint quota that currently set",
-          "format": "int32",
-          "type": "integer"
-        },
-        "privateDnsZonesUsage": {
-          "readOnly": true,
-          "description": "Private DNS zone usage",
-          "$ref": "#/definitions/PrivateDNSZoneUsage"
-        },
-        "privateDnsZonesQuota": {
-          "readOnly": true,
-          "description": "Private Dns Zones quota that currently set",
-          "format": "int32",
-          "type": "integer"
-        }
-      }
-    },
-    "ListTransitivePEUsagesResult": {
-      "properties": {
-        "value": {
-          "readOnly": true,
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/TransitivePEUsagesResult"
-          },
-          "description": "The list of transitive private endpoint usages."
-        },
-        "nextLink": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The URI to fetch the next page of transitive private endpoint usages information. Call ListNext() with this to fetch the next page of AML resource usage information."
-        }
-      },
-      "description": "The List transitive private endpoint usages operation response."
-    },
     "ListUsagesResult": {
       "properties": {
         "value": {
@@ -2957,17 +2797,6 @@
       ],
       "description": "Represents a resource ID. For example, for a subnet, it is the resource URL for the subnet.",
       "x-ms-azure-resource": true
-    },
-    "NotebookListCredentialsResult": {
-      "type": "object",
-      "properties": {
-        "primaryAccessKey": {
-          "type": "string"
-        },
-        "secondaryAccessKey": {
-          "type": "string"
-        }
-      }
     },
     "ListWorkspaceKeysResult": {
       "type": "object",
