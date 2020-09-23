@@ -736,9 +736,6 @@ input-file:
 - Microsoft.Authorization/stable/2016-12-01/policyAssignments.json
 - Microsoft.Resources/stable/2016-06-01/subscriptions.json
 - Microsoft.Resources/stable/2019-10-01/resources.json
-
-override-info:
-  title: PolicyClient
 ```
 
 ## AzureResourceSchema
