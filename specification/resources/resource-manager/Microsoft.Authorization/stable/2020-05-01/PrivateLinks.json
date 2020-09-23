@@ -1,0 +1,171 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "PrivateLinkClient",
+    "version": "2020-05-01",
+    "description": "To manage and control access to your resources, you can define resource manager private links and private link association assign them at a scope."
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{sourceResourceGroupName}/providers/Microsoft.Authorization/resourceManagementPrivateLinks/{resourceManagementPrivateLinksName}": {
+      "put": {
+        "summary": "Creates a resource management private link.",
+        "description": "This operation creates or updates a private link with the given name.",
+        "operationId": "ResourceManagementPrivateLinks_Put",
+        "x-ms-examples": {
+          "Create a resource management private link": {
+            "$ref": "./examples/createPrivateLink.json"
+          }
+        },
+        "parameters": [
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resourceManagementPrivateLinksName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource management private link to create."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "location": {
+                "type": "string",
+                "description": "Resource manager private link location"
+              }
+            },
+            "description": "Parameters for resource management private link location."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ]
+      },
+      "delete": {
+        "summary": "Delete a resource management private link.",
+        "description": "This operation deletes a private link with the given name.",
+        "operationId": "ResourceManagementPrivateLinks_Delete",
+        "x-ms-examples": {
+          "Delete a resource management private link": {
+            "$ref": "./examples/deletePrivateLink.json"
+          }
+        },
+        "parameters": [
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resourceManagementPrivateLinksName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource management private link to delete."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ]
+      },
+      "get": {
+        "summary": "Get a resource management private link.",
+        "description": "This operation gets a private link with the given name.",
+        "operationId": "ResourceManagementPrivateLinks_Get",
+        "x-ms-examples": {
+          "Get a resource management private link": {
+            "$ref": "./examples/getPrivateLink.json"
+          }
+        },
+        "parameters": [
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resourceManagementPrivateLinksName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource management private link to get."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "ResourceManagerPrivateLink": {
+      "location": {
+        "type": "string",
+        "description": "Resource manager private link location"
+      }
+    }
+  },
+  "parameters": {
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "The API version to use for this operation."
+    }
+  }
+}

@@ -1,0 +1,70 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "PrivateLinkAssociationClient",
+    "version": "2020-05-01",
+    "description": "To manage and control access to your resources, you can define private link association assign them at a scope."
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/providers/Microsoft.Management/ManagementGroups/{managementGroupName}/providers/Microsoft.Authorization/privateLinkAssociations": {
+      "get": {
+        "summary": "Gets private link associations at management group scope.",
+        "description": "This operation get a private link associations assigned at management group.",
+        "operationId": "PrivateLinkAssociations_Get",
+        "x-ms-examples": {
+          "Get a private link association": {
+            "$ref": "./examples/getPrivateLinkAssociation.json"
+          }
+        },
+        "parameters": [
+          {
+            "name": "managementGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ]
+      }
+    }
+  },
+  "parameters": {
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "The API version to use for this operation."
+    }
+  }
+}
