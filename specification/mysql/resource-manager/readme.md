@@ -161,7 +161,7 @@ csharp:
   azure-arm: true
   license-header: MICROSOFT_MIT_NO_VERSION
   namespace: Microsoft.Azure.Management.MySQL
-  output-folder: $(csharp-sdks-folder)/mysql/Microsoft.Azure.Management.MySQL/src/Generated
+  output-folder: $(csharp-sdks-folder)/postgresql/Microsoft.Azure.Management.PostgreSQL/src/postgresql/Generated
   clear-output-folder: true
 ```
 
