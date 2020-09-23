@@ -788,7 +788,9 @@ namespace: Microsoft.Azure.Management.Profiles.$(csharp-profile).ResourceManager
 output-folder: $(csharp-sdks-folder)/$(csharp-profile)/Resource/Management.ResourceManager/Generated
 
 batch:
-  - tag: profile-hybrid-2019-03-01
+ - tag: package-policy-2016-12
+ - tag: package-locks-2016-09
+ - tag: package-resources-2018-05
  ```
 
 ### Profile: hybrid_2020_09_01
