@@ -5974,6 +5974,11 @@
           "description": "Flag to indicate whether to enable storage analytics.",
           "type": "boolean"
         },
+        "backupPolicy": {
+          "description": "The object representing the policy for taking backups on an account.",
+          "type": "object",
+          "$ref": "#/definitions/BackupPolicy"
+        },
         "cors": {
           "type": "array",
           "description": "The CORS policy for the Cosmos DB database account.",
@@ -6064,6 +6069,11 @@
         "enableAnalyticalStorage": {
           "description": "Flag to indicate whether to enable storage analytics.",
           "type": "boolean"
+        },
+        "backupPolicy": {
+          "description": "The object representing the policy for taking backups on an account.",
+          "type": "object",
+          "$ref": "#/definitions/BackupPolicy"
         },
         "cors": {
           "type": "array",
@@ -6187,6 +6197,11 @@
         "enableAnalyticalStorage": {
           "description": "Flag to indicate whether to enable storage analytics.",
           "type": "boolean"
+        },
+        "backupPolicy": {
+          "description": "The object representing the policy for taking backups on an account.",
+          "type": "object",
+          "$ref": "#/definitions/BackupPolicy"
         },
         "cors": {
           "type": "array",
@@ -8151,6 +8166,77 @@
             "modelAsString": true,
             "name": "ServerVersion"
           }
+        }
+      }
+    },
+    "BackupPolicy": {
+      "type": "object",
+      "description": "The object representing the policy for taking backups on an account.",
+      "discriminator": "type",
+      "properties": {
+        "type": {
+          "type": "string",
+          "$ref": "#/definitions/BackupPolicyType"
+        }
+      },
+      "required": [
+        "type"
+      ]
+    },
+    "BackupPolicyType": {
+      "description": "Describes the mode of backups.",
+      "type": "string",
+      "enum": [
+        "Periodic",
+        "Continuous"
+      ],
+      "x-ms-enum": {
+        "modelAsString": true,
+        "name": "BackupPolicyType"
+      }
+    },
+    "PeriodicModeBackupPolicy": {
+      "description": "The object representing periodic mode backup policy.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/BackupPolicy"
+        }
+      ],
+      "properties": {
+        "periodicModeProperties": {
+          "type": "object",
+          "description": "Configuration values for periodic mode backup",
+          "$ref": "#/definitions/PeriodicModeProperties"
+        }
+      },
+      "x-ms-discriminator-value": "Periodic"
+    },
+    "ContinuousModeBackupPolicy": {
+      "description": "The object representing continuous mode backup policy.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/BackupPolicy"
+        }
+      ],
+      "x-ms-discriminator-value": "Continuous"
+    },
+    "PeriodicModeProperties": {
+      "type": "object",
+      "description": "Configuration values for periodic mode backup",
+      "properties": {
+        "backupIntervalInMinutes": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0,
+          "description": "An integer representing the interval in minutes between two backups"
+        },
+        "backupRetentionIntervalInHours": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0,
+          "description": "An integer representing the time (in hours) that each backup is retained"
         }
       }
     }
