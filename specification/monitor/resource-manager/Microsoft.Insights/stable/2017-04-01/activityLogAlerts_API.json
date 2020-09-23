@@ -396,22 +396,15 @@
         "actions"
       ]
     },
-    "ActivityLogAlertCondition": {
-      "description": "An Activity Log Alert rule condition that is met when all its member conditions are met."
-    },
     "ActivityLogAlertAllOfCondition": {
       "description": "An Activity Log Alert rule condition that is met when all its member conditions are met.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/ActivityLogAlertCondition"
-        }
-      ],
+      "type": "object",
       "properties": {
         "allOf": {
           "description": "The list of Activity Log Alert rule conditions.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/ActivityLogAlertCondition"
+            "$ref": "#/definitions/ActivityLogAlertAnyOfOrLeafCondition"
           }
         }
       },
@@ -419,52 +412,69 @@
         "allOf"
       ]
     },
+    "ActivityLogAlertAnyOfOrLeafCondition": {
+      "description": "An Activity Log Alert rule condition that is met when all its member conditions are met.",
+      "type": "object",
+      "discriminator": "odata.type",
+      "properties": {
+        "odata.type": {
+          "type": "string",
+          "default": null
+        }
+      }
+    },
     "ActivityLogAlertAnyOfCondition": {
       "description": "An Activity Log Alert rule condition that is met when at least one of its member conditions are met.",
       "allOf": [
         {
-          "$ref": "#/definitions/ActivityLogAlertCondition"
+          "$ref": "#/definitions/ActivityLogAlertAnyOfOrLeafCondition"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "anyOf": {
+              "description": "The list of Activity Log Alert rule conditions.",
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/ActivityLogAlertLeafCondition"
+              }
+            }
+          },
+          "required": [
+            "anyOf"
+          ]
         }
-      ],
-      "properties": {
-        "anyOf": {
-          "description": "The list of Activity Log Alert rule conditions.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ActivityLogAlertCondition"
-          }
-        }
-      },
-      "required": [
-        "anyOf"
-      ]
+      ]      
     },
     "ActivityLogAlertLeafCondition": {
       "description": "An Activity Log Alert rule condition that is met by comparing an activity log field and value.",
       "allOf": [
         {
-          "$ref": "#/definitions/ActivityLogAlertCondition"
-        }
-      ],
-      "properties": {
-        "field": {
-          "type": "string",
-          "description": "The name of the field that this condition will examine. The possible values for this field are (case-insensitive): 'resourceId', 'category', 'caller', 'level', 'operationName', 'resourceGroup', 'resourceProvider', 'status', 'subStatus', 'resourceType', or anything beginning with 'properties.'."
+          "$ref": "#/definitions/ActivityLogAlertAnyOfOrLeafCondition"
         },
-        "equals": {
-          "type": "string",
-          "description": "The field value will be compared to this value (case-insensitive) to determine if the condition is met."
-        },
-        "containsAny": {
-          "type": "array",
-          "items": {
-            "type": "string"
+        {
+          "type": "object",
+          "properties": {
+            "field": {
+              "description": "The name of the field that this condition will examine. The possible values for this field are (case-insensitive): 'resourceId', 'category', 'caller', 'level', 'operationName', 'resourceGroup', 'resourceProvider', 'status', 'subStatus', 'resourceType', or anything beginning with 'properties'.",
+              "type": "string"
+            },
+            "equals": {
+              "description": "The field value will be compared to this value (case-insensitive) to determine if the condition is met.",
+              "type": "string"
+            },
+            "containsAny": {
+              "description": "The field value will be compared to the values in this array (case-insensitive) to determine if the condition is met.",
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
           },
-          "description": "The field value will be compared to the values in this array (case-insensitive) to determine if the condition is met."
+          "required": [
+            "field"
+          ]
         }
-      },
-      "required": [
-        "field"
       ]
     },
     "ActivityLogAlertActionList": {
