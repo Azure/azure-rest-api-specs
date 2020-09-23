@@ -147,6 +147,11 @@
         ],
         "description": "Delete a labeling job.",
         "operationId": "LabelingJobs_Delete",
+        "x-ms-examples": {
+          "Delete LabelingJob": {
+            "$ref": "./examples/deleteLabelingJob.json"
+          }
+        },
         "parameters": [
           {
             "$ref": "machineLearningServices.json#/parameters/SubscriptionIdParameter"
@@ -184,6 +189,11 @@
         ],
         "description": "Lists labeling jobs in the workspace.",
         "operationId": "LabelingJobs_List",
+        "x-ms-examples": {
+          "List LabelingJob": {
+            "$ref": "./examples/listLabelingJob.json"
+          }
+        },
         "parameters": [
           {
             "$ref": "machineLearningServices.json#/parameters/SubscriptionIdParameter"
@@ -499,6 +509,60 @@
       },
       "required": [
         "mediaType"
+      ]
+    },
+    "LabelingJobImageProperties": {
+      "description": "Properties in an labeling job of image media.",
+      "type": "object",
+      "properties": {
+        "annotationType": {
+          "description": "Annotation type of image labeling tasks.",
+          "type": "string",
+          "enum": [
+            "Classification",
+            "BoundingBox",
+            "InstanceSegmentation"
+          ],
+          "x-ms-enum": {
+            "name": "ImageAnnotationType",
+            "modelAsString": true
+          },
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/LabelingJobMediaProperties"
+        }
+      ]
+    },
+    "LabelingJobTextProperties": {
+      "description": "Properties in a labeling job of text media.",
+      "type": "object",
+      "properties": {
+        "annotationType": {
+          "description": "Annotation type of text labeling tasks.",
+          "type": "string",
+          "enum": [
+            "Classification"
+          ],
+          "x-ms-enum": {
+            "name": "TextAnnotationType",
+            "modelAsString": true
+          },
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/LabelingJobMediaProperties"
+        }
       ]
     },
     "ProgressMetrics": {
