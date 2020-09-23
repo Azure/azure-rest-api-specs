@@ -805,5 +805,5 @@ batch:
  - tag: package-policy-2016-12
  - tag: package-locks-2016-09
  - tag: package-subscriptions-2016-06
- - tag: package-resources-2019-06
+ - tag: package-resources-2019-10
  ```
