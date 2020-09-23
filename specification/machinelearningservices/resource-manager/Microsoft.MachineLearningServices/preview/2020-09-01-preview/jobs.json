@@ -1,0 +1,778 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Azure Machine Learning Workspaces",
+    "description": "These APIs allow end users to operate on Azure Machine Learning Workspace resources.",
+    "version": "2020-09-01-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/labelingJobs/{labelingJobId}": {
+      "put": {
+        "tags": [
+          "LabelingJobs"
+        ],
+        "description": "Creates or updates a labeling job.",
+        "operationId": "LabelingJobs_CreateOrUpdate",
+        "x-ms-examples": {
+          "Create or update LabelingJob": {
+            "$ref": "./examples/createOrUpdateLabelingJob.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "machineLearningServices.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/APIVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/LabelingJobIdParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "The payload for creating or updating a LabelingJob .",
+            "schema": {
+              "$ref": "#/definitions/LabelingJobCreateResource"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/MachineLearningServiceError"
+            }
+          },
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/LabelingJobResource"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "LabelingJobs"
+        ],
+        "description": "Gets a labeling job by id.",
+        "operationId": "LabelingJobs_Get",
+        "x-ms-examples": {
+          "Get LabelingJob": {
+            "$ref": "./examples/getLabelingJob.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "machineLearningServices.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/APIVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/LabelingJobIdParameter"
+          },
+          {
+            "in": "query",
+            "name": "includeJobInstructions",
+            "description": "Boolean value to indicate whether to include JobInstructions in response.",
+            "type": "boolean"
+          },
+          {
+            "in": "query",
+            "name": "includeLabelCategories",
+            "description": "Boolean value to indicate whether to include LabelCategories in response.",
+            "type": "boolean"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/MachineLearningServiceError"
+            }
+          },
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/LabelingJobResource"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "LabelingJobs"
+        ],
+        "description": "Delete a labeling job.",
+        "operationId": "LabelingJobs_Delete",
+        "parameters": [
+          {
+            "$ref": "machineLearningServices.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/APIVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/LabelingJobIdParameter"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/MachineLearningServiceError"
+            }
+          },
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/labelingJobs": {
+      "get": {
+        "tags": [
+          "LabelingJob"
+        ],
+        "description": "Lists labeling jobs in the workspace.",
+        "operationId": "LabelingJobs_List",
+        "parameters": [
+          {
+            "$ref": "machineLearningServices.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/APIVersionParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/PaginationParameter"
+          },
+          {
+            "in": "query",
+            "name": "count",
+            "description": "Number of labeling jobs to return.",
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/MachineLearningServiceError"
+            }
+          },
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/LabelingJobResourcePaginatedResult"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    }
+  },
+  "parameters": {
+    "LabelingJobIdParameter": {
+      "in": "path",
+      "name": "labelingJobId",
+      "type": "string",
+      "description": "Name and identifier for LabelingJob.",
+      "required": true,
+      "x-ms-parameter-location": "method"
+    }
+  },
+  "definitions": {
+    "JobStatus": {
+      "description": "The status of a job.",
+      "enum": [
+        "NotStarted",
+        "Starting",
+        "Provisioning",
+        "Preparing",
+        "Queued",
+        "Running",
+        "Finalizing",
+        "CancelRequested",
+        "Completed",
+        "Failed",
+        "Canceled",
+        "NotResponding",
+        "Paused"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "JobStatus",
+        "modelAsString": true
+      }
+    },
+    "ComputeBinding": {
+      "description": "Compute binding definition.",
+      "type": "object",
+      "properties": {
+        "computeId": {
+          "description": "ID of the compute resource.",
+          "type": "string"
+        },
+        "nodeCount": {
+          "format": "int32",
+          "description": "Number of nodes.",
+          "type": "integer"
+        }
+      }
+    },
+    "MachineLearningServiceError": {
+      "type": "object",
+      "description": "Wrapper for error response to follow ARM guidelines.",
+      "properties": {
+        "error": {
+          "description": "The error response.",
+          "$ref": "#/definitions/ErrorResponse",
+          "readOnly": true
+        }
+      }
+    },
+    "ErrorResponse": {
+      "type": "object",
+      "description": "Error response information.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "Error code.",
+          "readOnly": true
+        },
+        "message": {
+          "type": "string",
+          "description": "Error message.",
+          "readOnly": true
+        },
+        "details": {
+          "type": "array",
+          "description": "An array of error detail objects.",
+          "items": {
+            "$ref": "#/definitions/ErrorDetail"
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "ErrorDetail": {
+      "type": "object",
+      "description": "Error detail information.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "Error code."
+        },
+        "message": {
+          "type": "string",
+          "description": "Error message."
+        }
+      },
+      "required": [
+        "code",
+        "message"
+      ]
+    },
+    "LabelClass": {
+      "description": "Represents a label or a category of labels in a labeling job.",
+      "type": "object",
+      "properties": {
+        "displayName": {
+          "description": "Display name of the label class.",
+          "type": "string"
+        },
+        "subclasses": {
+          "description": "Dictionary of subclasses of the label class.",
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/LabelClass"
+          }
+        }
+      }
+    },
+    "LabelCategory": {
+      "description": "Represents a category of labels in a labeling job.",
+      "type": "object",
+      "properties": {
+        "displayName": {
+          "description": "Display name of the label category.",
+          "type": "string"
+        },
+        "allowMultiSelect": {
+          "description": "Indicates whether it is allowed to select multiple classes in this category.",
+          "type": "boolean"
+        },
+        "classes": {
+          "description": "Dictionary of label classes in this category.",
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/LabelClass"
+          }
+        }
+      },
+      "required": [
+        "classes"
+      ]
+    },
+    "LabelingJobInstructions": {
+      "description": "Instructions for a labeling job.",
+      "type": "object",
+      "properties": {
+        "uri": {
+          "description": "The link to a page with detailed labeling instructions for labelers.",
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "read",
+            "update"
+          ]
+        }
+      }
+    },
+    "LabelingDatasetConfiguration": {
+      "description": "Represents configuration of dataset used in a labeling job.",
+      "type": "object",
+      "properties": {
+        "assetName": {
+          "description": "Name of the data asset to perform labeling.",
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "enableIncrementalDatasetRefresh": {
+          "description": "Indicates whether to enable incremental dataset refresh.",
+          "type": "boolean",
+          "x-ms-mutability": [
+            "create",
+            "read",
+            "update"
+          ]
+        },
+        "datasetVersion": {
+          "description": "AML dataset version.",
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        }
+      },
+      "required": [
+        "assetName",
+        "datasetVersion"
+      ]
+    },
+    "MLAssistConfiguration": {
+      "description": "Represents configuration for machine learning assisted features in a labeling job.",
+      "type": "object",
+      "properties": {
+        "inferencingComputeBinding": {
+          "description": "The compute designated for inferencing.",
+          "$ref": "#/definitions/ComputeBinding",
+          "x-ms-mutability": [
+            "create",
+            "read",
+            "update"
+          ]
+        },
+        "trainingComputeBinding": {
+          "description": "The compute designated for training.",
+          "$ref": "#/definitions/ComputeBinding",
+          "x-ms-mutability": [
+            "create",
+            "read",
+            "update"
+          ]
+        },
+        "modelNamePrefix": {
+          "description": "Name prefix to use for machine learning model. For each iteration modelName will be appended with iteration e.g.{modelName}_{i}.",
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "prelabelAccuracyThreshold": {
+          "format": "double",
+          "description": "Prelabel accuracy threshold used in MLAssist feature.",
+          "type": "number",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "mlAssistEnabled": {
+          "description": "Indicates whether MLAssist feature is enabled.",
+          "type": "boolean",
+          "x-ms-mutability": [
+            "create",
+            "read",
+            "update"
+          ]
+        }
+      },
+      "required": [
+        "inferencingComputeBinding",
+        "trainingComputeBinding",
+        "modelNamePrefix"
+      ]
+    },
+    "LabelingJobMediaProperties": {
+      "description": "Media specific properties in a labeling job.",
+      "type": "object",
+      "properties": {
+        "mediaType": {
+          "description": "Media type of data asset.",
+          "type": "string",
+          "enum": [
+            "Image",
+            "Text"
+          ],
+          "x-ms-enum": {
+            "name": "MediaType",
+            "modelAsString": true
+          },
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        }
+      },
+      "required": [
+        "mediaType"
+      ]
+    },
+    "ProgressMetrics": {
+      "description": "Progress metrics for a labeling job.",
+      "type": "object",
+      "properties": {
+        "totalDatapointCount": {
+          "format": "int64",
+          "description": "The total datapoint count.",
+          "type": "integer",
+          "x-ms-mutability": [
+            "read"
+          ],
+          "readOnly": true
+        },
+        "completedDatapointCount": {
+          "format": "int64",
+          "description": "The completed datapoint count.",
+          "type": "integer",
+          "x-ms-mutability": [
+            "read"
+          ],
+          "readOnly": true
+        },
+        "skippedDatapointCount": {
+          "format": "int64",
+          "description": "The skipped datapoint count.",
+          "type": "integer",
+          "x-ms-mutability": [
+            "read"
+          ],
+          "readOnly": true
+        },
+        "incrementalDatasetLastRefreshTime": {
+          "format": "date-time",
+          "description": "The time of last successful incremental dataset refresh in UTC.",
+          "type": "string",
+          "x-ms-mutability": [
+            "read"
+          ],
+          "readOnly": true
+        }
+      }
+    },
+    "StatusMessage": {
+      "description": "Active message associated with project.",
+      "type": "object",
+      "properties": {
+        "level": {
+          "description": "Severity level of the status message.",
+          "type": "string",
+          "enum": [
+            "Error",
+            "Information",
+            "Warning"
+          ],
+          "x-ms-enum": {
+            "name": "StatusMessageLevel",
+            "modelAsString": true
+          },
+          "x-ms-mutability": [
+            "read"
+          ],
+          "readOnly": true
+        },
+        "code": {
+          "description": "Service-defined message code.",
+          "type": "string",
+          "x-ms-mutability": [
+            "read"
+          ],
+          "readOnly": true
+        },
+        "message": {
+          "description": "A human-readable representation of the message code.",
+          "type": "string",
+          "x-ms-mutability": [
+            "read"
+          ],
+          "readOnly": true
+        },
+        "createdTimeUtc": {
+          "format": "date-time",
+          "description": "Time in UTC at which the message was created.",
+          "type": "string",
+          "x-ms-mutability": [
+            "read"
+          ],
+          "readOnly": true
+        }
+      }
+    },
+    "LabelingJobProperties": {
+      "description": "Definition of a labeling job.",
+      "type": "object",
+      "properties": {
+        "labelCategories": {
+          "description": "Label categories of the job.",
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/LabelCategory"
+          },
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "jobInstructions": {
+          "description": "Instructions for the job.",
+          "$ref": "#/definitions/LabelingJobInstructions",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "datasetConfiguration": {
+          "description": "Dataset configuration for the job.",
+          "$ref": "#/definitions/LabelingDatasetConfiguration",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "mlAssistConfiguration": {
+          "description": "Machine learning assisted configuration for the job.",
+          "$ref": "#/definitions/MLAssistConfiguration",
+          "x-ms-mutability": [
+            "create",
+            "read",
+            "update"
+          ]
+        },
+        "labelingJobMediaProperties": {
+          "description": "Media specific properties in a labeling job.",
+          "$ref": "#/definitions/LabelingJobMediaProperties",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "projectId": {
+          "format": "uuid",
+          "description": "Internal id of the job(Previously called project).",
+          "type": "string",
+          "x-ms-mutability": [
+            "read"
+          ],
+          "readOnly": true
+        },
+        "status": {
+          "description": "Status of the job.",
+          "$ref": "#/definitions/JobStatus",
+          "allOf": [
+            {
+              "$ref": "#/definitions/JobStatus"
+            }
+          ],
+          "x-ms-mutability": [
+            "read"
+          ],
+          "readOnly": true
+        },
+        "progressMetrics": {
+          "description": "Progress metrics of the job.",
+          "$ref": "#/definitions/ProgressMetrics",
+          "x-ms-mutability": [
+            "read"
+          ],
+          "readOnly": true
+        },
+        "statusMessages": {
+          "description": "Status messages of the job.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/StatusMessage"
+          },
+          "x-ms-mutability": [
+            "read"
+          ],
+          "readOnly": true
+        },
+        "createdTimeUtc": {
+          "format": "date-time",
+          "description": "Created time of the job in UTC timezone.",
+          "type": "string",
+          "x-ms-mutability": [
+            "read"
+          ],
+          "readOnly": true
+        },
+        "id": {
+          "description": "Name and identifier for a job.",
+          "type": "string",
+          "x-ms-mutability": [
+            "read"
+          ],
+          "readOnly": true
+        },
+        "properties": {
+          "description": "The job property dictionary. Properties can be added, but not removed or altered.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "x-ms-mutability": [
+            "create",
+            "read",
+            "update"
+          ]
+        },
+        "tags": {
+          "description": "The job tag dictionary. Tags can be added, removed, and updated.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "x-ms-mutability": [
+            "create",
+            "read",
+            "update"
+          ]
+        }
+      },
+      "required": [
+        "labelCategories",
+        "jobInstructions",
+        "datasetConfiguration",
+        "labelingJobMediaProperties"
+      ]
+    },
+    "LabelingJobCreateResource": {
+      "description": "The parameters for creating or updating a labeling job.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/LabelingJobProperties"
+        }
+      }
+    },
+    "LabelingJobResource": {
+      "description": "Machine Learning labeling job object wrapped into ARM resource envelope.",
+      "type": "object",
+      "x-ms-azure-resource": true,
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/LabelingJobProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "LabelingJobResourcePaginatedResult": {
+      "type": "object",
+      "description": "Paginated list of Machine Learning labeling job objects wrapped in ARM resource envelope.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/LabelingJobResource"
+          },
+          "readOnly": true
+        },
+        "continuationToken": {
+          "type": "string",
+          "readOnly": true
+        },
+        "nextLink": {
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    }
+  }
+}
