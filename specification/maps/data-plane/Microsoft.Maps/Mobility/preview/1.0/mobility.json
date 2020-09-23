@@ -144,7 +144,7 @@
       "get": {
         "x-publish": true,
         "operationId": "Mobility_GetMetroAreaPreview",
-        "description": "**Metro Area API**\n\n**Applies to**: S1 pricing tier.\n\nService allows to request metro areas in which the Azure Maps Mobility Service is available. The service supports filtering results by country or coordinate location. Information returned includes Metro Area  details such as metro Id, name and a representation of the metro area geometry in GeoJSON format.",
+        "description": "**Metro Area API**\n\n**Applies to**: S1 pricing tier.\n\nService allows users to request metro areas in which the Azure Maps Mobility Service is available. The service supports filtering results by country or coordinate location. Information returned includes Metro Area  details such as metro Id, name and a representation of the metro area geometry in GeoJSON format.",
         "x-ms-examples": {
           "MetroArea": {
             "$ref": "./examples/GetMetroArea.json"
@@ -230,8 +230,8 @@
       "get": {
         "x-publish": true,
         "operationId": "Mobility_GetMetroAreaInfoPreview",
-        "description": "**Metro Area Info API**\n\n**Applies to**: S1 pricing tier.\n\nService allows to request additional information for metro areas in which the Azure Maps Mobility Service is available. Information such as supported transit types, transit agencies and active alerts is available, depending on the options selected.",
-        "x-ms-examples": {
+        "description": "**Metro Area Info API**\n\n**Applies to**: S1 pricing tier.\n\nService allows users to request additional information for metro areas in which the Azure Maps Mobility services are available. Information such as supported transit types, transit agencies and active alerts is available, depending on the options selected. Also, the service returns information if the public transit fare information is available for the requested metro area.",
+        "x-ms-examples": { 
           "MetroAreaInfo": {
             "$ref": "./examples/GetMetroAreaInfo.json"
           }
@@ -1521,12 +1521,16 @@
       }
     },
     "MetroAreaInfoResponse": {
-      "description": "This object is returned from a successful Metro Area call.",
+      "description": "This object is returned from a successful Metro Area Info call.",
       "type": "object",
       "properties": {
         "metroName": {
           "type": "string",
           "description": "The name of the metro area."
+        },
+        "isFaresSupported": {
+          "type": "string",
+          "description": "Indicates if public transit fares information is available in the metro area. Fare information is available through [Get Transit Route API](https://aka.ms/AzureMapsMobilityTransitRoute) and [Get Transit Itinerary APIs](https://aka.ms/AzureMapsMobilityTransitItinerary)."
         },
         "transitTypes": {
           "type": "array",
@@ -1852,7 +1856,7 @@
       }
     },
     "Alert": {
-      "description": "Basic information associated with the active alert.",
+      "description": "Basic information associated with the active alert. Returned if specified in the request and there is an active alert in the metro area.",
       "type": "object",
       "properties": {
         "alertSummary": {
@@ -2332,7 +2336,7 @@
       "type": "object",
       "properties": {
         "transitType": {
-          "description": "Supported public transit type.",
+          "description": "Supported public transit type. Returned if specified in the request.",
           "$ref": "#/definitions/TransitType"
         },
         "captionOverride": {
@@ -2343,7 +2347,7 @@
     },
     "Agency": {
       "type": "object",
-      "description": "Details of the agency.",
+      "description": "Details of the agency. Returned if specified in the request.",
       "properties": {
         "agencyId": {
           "description": "The Id of the relevant transit agency, for example, '5872'",
