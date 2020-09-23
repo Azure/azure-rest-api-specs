@@ -518,58 +518,62 @@
       ]
     },
     "LabelingJobImageProperties": {
-      "description": "Properties in an labeling job of image media.",
-      "type": "object",
-      "properties": {
-        "annotationType": {
-          "description": "Annotation type of image labeling tasks.",
-          "type": "string",
-          "enum": [
-            "Classification",
-            "BoundingBox",
-            "InstanceSegmentation"
-          ],
-          "x-ms-enum": {
-            "name": "ImageAnnotationType",
-            "modelAsString": true
-          },
-          "x-ms-mutability": [
-            "create",
-            "read"
-          ]
-        }
-      },
       "x-ms-discriminator-value": "mediaType",
       "allOf": [
         {
           "$ref": "#/definitions/LabelingJobMediaProperties"
+        },
+        {
+          "description": "Properties in an labeling job of image media.",
+          "type": "object",
+          "properties": {
+            "annotationType": {
+              "description": "Annotation type of image labeling tasks.",
+              "type": "string",
+              "enum": [
+                "Classification",
+                "BoundingBox",
+                "InstanceSegmentation"
+              ],
+              "x-ms-enum": {
+                "name": "ImageAnnotationType",
+                "modelAsString": true
+              },
+              "x-ms-mutability": [
+                "create",
+                "read"
+              ]
+            }
+          }
         }
       ]
     },
     "LabelingJobTextProperties": {
-      "description": "Properties in a labeling job of text media.",
-      "type": "object",
-      "properties": {
-        "annotationType": {
-          "description": "Annotation type of text labeling tasks.",
-          "type": "string",
-          "enum": [
-            "Classification"
-          ],
-          "x-ms-enum": {
-            "name": "TextAnnotationType",
-            "modelAsString": true
-          },
-          "x-ms-mutability": [
-            "create",
-            "read"
-          ]
-        }
-      },
       "x-ms-discriminator-value": "mediaType",
       "allOf": [
         {
           "$ref": "#/definitions/LabelingJobMediaProperties"
+        },
+        {
+          "description": "Properties in a labeling job of text media.",
+          "type": "object",
+          "properties": {
+            "annotationType": {
+              "description": "Annotation type of text labeling tasks.",
+              "type": "string",
+              "enum": [
+                "Classification"
+              ],
+              "x-ms-enum": {
+                "name": "TextAnnotationType",
+                "modelAsString": true
+              },
+              "x-ms-mutability": [
+                "create",
+                "read"
+              ]
+            }
+          }
         }
       ]
     },
