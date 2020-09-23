@@ -4418,7 +4418,7 @@
                             }
                         },
                         "schema": {
-                            "$ref": "#/definitions/RangeList"
+                            "$ref": "#/definitions/ShareFileRangeList"
                         }
                     },
                     "default": {
@@ -5262,7 +5262,7 @@
                 "name": "Multichannel"
             }
         },
-        "Range": {
+        "FileRange": {
             "description": "An Azure Storage file range.",
             "type": "object",
             "required": [
@@ -5324,14 +5324,14 @@
                 }
             }
         },
-        "RangeList": {
-            "description": "the list of pages",
+        "ShareFileRangeList": {
+            "description": "The list of file ranges",
             "type": "object",
             "properties": {
                 "Ranges": {
                     "type": "array",
                     "items": {
-                        "$ref": "#/definitions/Range"
+                        "$ref": "#/definitions/FileRange"
                     }
                 },
                 "ClearRanges": {
