@@ -628,7 +628,7 @@ This document lists the set of automated rules that can be validated against swa
 
 **Description**: The property used as discriminator has a value {0} but it's not found in swagger spec.
 
-**How to fix the violation**: Add the model that has the discriminator value. The discriminator value could be specified by model name in definitions or by "x-ms-discriminator-value".
+**How to fix the violation**: Add the model that has the discriminator value or fix the discriminator value. The discriminator value could be specified by model name in definitions or by "x-ms-discriminator-value".
 
 
 ### <a name="DISCRIMINATOR_NOT_REQUIRED" />DISCRIMINATOR_NOT_REQUIRED 
