@@ -5,7 +5,9 @@
 This is the AutoRest configuration file for AzureMachineLearning.
 
 ---
+
 ## Getting Started
+
 To build the SDK for AzureMachineLearning, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
 
 > `autorest`
@@ -13,20 +15,20 @@ To build the SDK for AzureMachineLearning, simply [Install AutoRest](https://aka
 To see additional help and options, run:
 
 > `autorest --help`
+
 ---
 
 ## Configuration
 
-
-
 ### Basic Information
+
 These are the global settings for the AzureMachineLearning API.
 
 ``` yaml
 title: Azure Machine Learning Service
 description: These APIs allow end users to manage Azure Machine Learning Services.
 openapi-type: data-plane
-tag: package-2019-09-preview
+tag: package-preview-2020-09
 use-internal-constructors: true
 add-credentials: true
 ```
@@ -48,11 +50,25 @@ directive:
     reason: Existing service; would be a breaking change
 ```
 
+
+### Tag: package-preview-2020-09
+
+These settings apply only when `--tag=package-preview-2020-09` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2020-09'
+input-file:
+  - Microsoft.MachineLearningServices/preview/2020-09-23/artifact.json
+  - Microsoft.MachineLearningServices/preview/2020-09-23/datastore.json
+  - Microsoft.MachineLearningServices/preview/2020-09-23/execution.json
+  - Microsoft.MachineLearningServices/preview/2020-09-23/hyperdrive.json
+  - Microsoft.MachineLearningServices/preview/2020-09-23/modelManagement.json
+  - Microsoft.MachineLearningServices/preview/2020-09-23/runHistory.json
+```
 ### Tag: package-2019-09-preview
 
 These settings apply only when `--tag=package-2019-09-preview` is specified on the command line.
 
-```yaml $(tag) == 'package-2019-09-preview'
+``` yaml $(tag) == 'package-2019-09-preview'
 input-file:
   - Microsoft.MachineLearningServices\preview\2019-09-30\execution.json
   - Microsoft.MachineLearningServices\preview\2019-09-30\modelManagement.json
@@ -77,8 +93,8 @@ input-file:
 ```
 
 ---
-# Code Generation
 
+# Code Generation
 
 ## Swagger to SDK
 
@@ -98,11 +114,9 @@ csharp:
   clear-output-folder: true
 ```
 
-
 ## Python
 
 Python generation is intentionally disabled.  Please use the published Python package for Azure Machine Learning on PyPi.
-
 
 ## Java
 
@@ -117,7 +131,7 @@ java:
   output-folder: $(azure-libraries-for-java-folder)/azure-machinelearning-services
 ```
 
-## Multi-API/Profile support for AutoRest v3 generators 
+## Multi-API/Profile support for AutoRest v3 generators
 
 AutoRest V3 generators require the use of `--tag=all-api-versions` to select api files.
 
@@ -144,11 +158,10 @@ input-file:
 
 ```
 
-If there are files that should not be in the `all-api-versions` set, 
+If there are files that should not be in the `all-api-versions` set,
 uncomment the  `exclude-file` section below and add the file paths.
 
 ``` yaml $(tag) == 'all-api-versions'
 #exclude-file: 
 #  - $(this-folder)/Microsoft.Example/stable/2010-01-01/somefile.json
 ```
-
