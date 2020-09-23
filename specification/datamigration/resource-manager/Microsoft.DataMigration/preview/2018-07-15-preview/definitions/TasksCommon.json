@@ -1,0 +1,1303 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Azure Database Migration Service Resource Provider",
+    "version": "2018-07-15-preview"
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {},
+  "definitions": {
+    "Database": {
+      "type": "object",
+      "description": "Information about a single database",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the database"
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of the database"
+        },
+        "compatibilityLevel": {
+          "$ref": "#/definitions/DatabaseCompatLevel",
+          "description": "SQL Server compatibility level of database"
+        },
+        "collation": {
+          "type": "string",
+          "description": "Collation name of the database"
+        },
+        "serverName": {
+          "type": "string",
+          "description": "Name of the server"
+        },
+        "fqdn": {
+          "type": "string",
+          "description": "Fully qualified name"
+        },
+        "installId": {
+          "type": "string",
+          "description": "Install id of the database"
+        },
+        "serverVersion": {
+          "type": "string",
+          "description": "Version of the server"
+        },
+        "serverEdition": {
+          "type": "string",
+          "description": "Edition of the server"
+        },
+        "serverLevel": {
+          "type": "string",
+          "description": "Product level of the server (RTM, SP, CTP)."
+        },
+        "serverDefaultDataPath": {
+          "type": "string",
+          "description": "Default path of the data files"
+        },
+        "serverDefaultLogPath": {
+          "type": "string",
+          "description": "Default path of the log files"
+        },
+        "serverDefaultBackupPath": {
+          "type": "string",
+          "description": "Default path of the backup folder"
+        },
+        "serverCoreCount": {
+          "type": "integer",
+          "description": "Number of cores on the server"
+        },
+        "serverVisibleOnlineCoreCount": {
+          "type": "integer",
+          "description": "Number of cores on the server that have VISIBLE ONLINE status"
+        },
+        "databaseState": {
+          "$ref": "#/definitions/DatabaseState",
+          "description": "State of the database"
+        },
+        "serverId": {
+          "type": "string",
+          "description": "The unique Server Id"
+        }
+      }
+    },
+    "DatabaseCompatLevel": {
+      "type": "string",
+      "description": "An enumeration of SQL Server database compatibility levels",
+      "enum": [
+        "CompatLevel80",
+        "CompatLevel90",
+        "CompatLevel100",
+        "CompatLevel110",
+        "CompatLevel120",
+        "CompatLevel130",
+        "CompatLevel140"
+      ],
+      "x-ms-enum": {
+        "name": "DatabaseCompatLevel",
+        "modelAsString": true
+      }
+    },
+    "DatabaseState": {
+      "type": "string",
+      "description": "An enumeration of SQL Server Database states",
+      "enum": [
+        "Online",
+        "Restoring",
+        "Recovering",
+        "RecoveryPending",
+        "Suspect",
+        "Emergency",
+        "Offline",
+        "Copying",
+        "OfflineSecondary"
+      ],
+      "x-ms-enum": {
+        "name": "DatabaseState",
+        "modelAsString": true
+      }
+    },
+    "DatabaseObjectType": {
+      "type": "string",
+      "description": "An enumeration of type of objects",
+      "enum": [
+        "StoredProcedures",
+        "Table",
+        "User",
+        "View",
+        "Function"
+      ],
+      "x-ms-enum": {
+        "name": "ObjectType",
+        "modelAsString": true
+      }
+    },
+    "ScenarioSource": {
+      "type": "string",
+      "description": "An enumeration of source type",
+      "enum": [
+        "Access",
+        "DB2",
+        "MySQL",
+        "Oracle",
+        "SQL",
+        "Sybase",
+        "PostgreSQL",
+        "MongoDB",
+        "SQLRDS",
+        "MySQLRDS",
+        "PostgreSQLRDS"
+      ],
+      "x-ms-enum": {
+        "name": "ScenarioSource",
+        "modelAsString": true
+      }
+    },
+    "ScenarioTarget": {
+      "type": "string",
+      "description": "An enumeration of target type",
+      "enum": [
+        "SQLServer",
+        "SQLDB",
+        "SQLDW",
+        "SQLMI",
+        "AzureDBForMySql",
+        "AzureDBForPostgresSQL",
+        "MongoDB"
+      ],
+      "x-ms-enum": {
+        "name": "ScenarioTarget",
+        "modelAsString": true
+      }
+    },
+    "ReplicateMigrationState": {
+      "type": "string",
+      "description": "Wrapper for replicate reported migration states.",
+      "enum": [
+        "UNDEFINED",
+        "VALIDATING",
+        "PENDING",
+        "COMPLETE",
+        "ACTION_REQUIRED",
+        "FAILED"
+      ],
+      "x-ms-enum": {
+        "name": "ReplicateMigrationState",
+        "modelAsString": true
+      }
+    },
+    "DatabaseObjectName": {
+      "type": "object",
+      "description": "A representation of the name of an object in a database",
+      "properties": {
+        "databaseName": {
+          "type": "string",
+          "description": "The unescaped name of the database containing the object",
+          "readOnly": true
+        },
+        "objectName": {
+          "type": "string",
+          "description": "The unescaped name of the object",
+          "readOnly": true
+        },
+        "schemaName": {
+          "type": "string",
+          "description": "The unescaped name of the schema containing the object",
+          "readOnly": true
+        },
+        "objectType": {
+          "$ref": "#/definitions/DatabaseObjectType",
+          "description": "Type of the object in the database"
+        }
+      }
+    },
+    "DataItemMigrationSummaryResult": {
+      "type": "object",
+      "description": "Basic summary of a data item migration",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the item",
+          "readOnly": true
+        },
+        "startedOn": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Migration start time",
+          "readOnly": true
+        },
+        "endedOn": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Migration end time",
+          "readOnly": true
+        },
+        "state": {
+          "$ref": "#/definitions/MigrationState",
+          "description": "Current state of migration",
+          "readOnly": true
+        },
+        "statusMessage": {
+          "type": "string",
+          "description": "Status message",
+          "readOnly": true
+        },
+        "itemsCount": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Number of items",
+          "readOnly": true
+        },
+        "itemsCompletedCount": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Number of successfully completed items",
+          "readOnly": true
+        },
+        "errorPrefix": {
+          "type": "string",
+          "description": "Wildcard string prefix to use for querying all errors of the item",
+          "readOnly": true
+        },
+        "resultPrefix": {
+          "type": "string",
+          "description": "Wildcard string prefix to use for querying all sub-tem results of the item",
+          "readOnly": true
+        }
+      }
+    },
+    "DataMigrationProjectMetadata": {
+      "type": "object",
+      "description": "Common metadata for migration projects",
+      "properties": {
+        "sourceServerName": {
+          "type": "string",
+          "description": "Source server name",
+          "readOnly": true
+        },
+        "sourceServerPort": {
+          "type": "string",
+          "description": "Source server port number",
+          "readOnly": true
+        },
+        "sourceUsername": {
+          "type": "string",
+          "description": "Source username",
+          "readOnly": true
+        },
+        "targetServerName": {
+          "type": "string",
+          "description": "Target server name",
+          "readOnly": true
+        },
+        "targetUsername": {
+          "type": "string",
+          "description": "Target username",
+          "readOnly": true
+        },
+        "targetDbName": {
+          "type": "string",
+          "description": "Target database name",
+          "readOnly": true
+        },
+        "targetUsingWinAuth": {
+          "type": "boolean",
+          "description": "Whether target connection is Windows authentication",
+          "readOnly": true
+        },
+        "selectedMigrationTables": {
+          "type": "array",
+          "description": "List of tables selected for migration",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/MigrationTableMetadata"
+          }
+        }
+      }
+    },
+    "DatabaseTable": {
+      "type": "object",
+      "description": "Table properties",
+      "properties": {
+        "hasRows": {
+          "type": "boolean",
+          "description": "Indicates whether table is empty or not",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "description": "Schema-qualified name of the table",
+          "readOnly": true
+        }
+      }
+    },
+    "GetProjectDetailsNonSqlTaskInput": {
+      "type": "object",
+      "description": "Input for the task that reads configuration from project artifacts",
+      "properties": {
+        "projectName": {
+          "type": "string",
+          "description": "Name of the migration project"
+        },
+        "projectLocation": {
+          "type": "string",
+          "description": "A URL that points to the location to access project artifacts"
+        }
+      },
+      "required": [
+        "projectName",
+        "projectLocation"
+      ]
+    },
+    "SqlServerSqlMISyncTaskInput": {
+      "type": "object",
+      "description": "Input for task that migrates SQL Server databases to Azure SQL Database Managed Instance online scenario.",
+      "properties": {
+        "selectedDatabases": {
+          "description": "Databases to migrate",
+          "type": "array",
+          "items": {
+            "$ref": "./TasksCommon.json#/definitions/MigrateSqlServerSqlMIDatabaseInput"
+          }
+        },
+        "backupFileShare": {
+          "$ref": "./TasksCommon.json#/definitions/FileShare",
+          "description": "Backup file share information for all selected databases."
+        },
+        "storageResourceId": {
+          "type": "string",
+          "description": "Fully qualified resourceId of storage"
+        },
+        "sourceConnectionInfo": {
+          "$ref": "./Common.json#/definitions/SqlConnectionInfo",
+          "description": "Connection information for source SQL Server"
+        },
+        "targetConnectionInfo": {
+          "$ref": "./Common.json#/definitions/MiSqlConnectionInfo",
+          "description": "Connection information for Azure SQL Database Managed Instance"
+        },
+        "azureApp": {
+          "$ref": "./Common.json#/definitions/AzureActiveDirectoryApp",
+          "description": "Azure Active Directory Application the DMS instance will use to connect to the target instance of Azure SQL Database Managed Instance and the Azure Storage Account"
+        }
+      },
+      "required": [
+        "selectedDatabases",
+        "azureApp",
+        "sourceConnectionInfo",
+        "targetConnectionInfo",
+        "storageResourceId"
+      ]
+    },
+    "MigrationState": {
+      "type": "string",
+      "description": "Current state of migration",
+      "enum": [
+        "None",
+        "InProgress",
+        "Failed",
+        "Warning",
+        "Completed",
+        "Skipped",
+        "Stopped"
+      ],
+      "x-ms-enum": {
+        "name": "MigrationState",
+        "modelAsString": true
+      }
+    },
+    "MigrationStatus": {
+      "type": "string",
+      "description": "Current status of migration",
+      "enum": [
+        "Default",
+        "Connecting",
+        "SourceAndTargetSelected",
+        "SelectLogins",
+        "Configured",
+        "Running",
+        "Error",
+        "Stopped",
+        "Completed",
+        "CompletedWithWarnings"
+      ],
+      "x-ms-enum": {
+        "name": "MigrationStatus",
+        "modelAsString": true
+      }
+    },
+    "SqlMigrationTaskInput": {
+      "type": "object",
+      "description": "Base class for migration task input",
+      "properties": {
+        "sourceConnectionInfo": {
+          "$ref": "./Common.json#/definitions/SqlConnectionInfo",
+          "description": "Information for connecting to source"
+        },
+        "targetConnectionInfo": {
+          "$ref": "./Common.json#/definitions/SqlConnectionInfo",
+          "description": "Information for connecting to target"
+        }
+      },
+      "required": [
+        "sourceConnectionInfo",
+        "targetConnectionInfo"
+      ]
+    },
+    "MigrateSqlServerSqlDbDatabaseInput": {
+      "type": "object",
+      "description": "Database specific information for SQL to Azure SQL DB migration task inputs",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the database"
+        },
+        "targetDatabaseName": {
+          "type": "string",
+          "description": "Name of target database. Note: Target database will be truncated before starting migration."
+        },
+        "makeSourceDbReadOnly": {
+          "type": "boolean",
+          "description": "Whether to set database read only before migration"
+        },
+        "tableMap": {
+          "type": "object",
+          "description": "Mapping of source to target tables",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "MigrateSqlServerSqlDbSyncDatabaseInput": {
+      "type": "object",
+      "description": "Database specific information for SQL to Azure SQL DB sync migration task inputs",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for database"
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of database"
+        },
+        "targetDatabaseName": {
+          "type": "string",
+          "description": "Target database name"
+        },
+        "schemaName": {
+          "type": "string",
+          "description": "Schema name to be migrated"
+        },
+        "tableMap": {
+          "type": "object",
+          "description": "Mapping of source to target tables",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "migrationSetting": {
+          "type": "object",
+          "description": "Migration settings which tune the migration behavior",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "sourceSetting": {
+          "type": "object",
+          "description": "Source settings to tune source endpoint migration behavior",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "targetSetting": {
+          "type": "object",
+          "description": "Target settings to tune target endpoint migration behavior",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "MigrationTableMetadata": {
+      "type": "object",
+      "description": "Metadata for tables selected in migration project",
+      "properties": {
+        "sourceTableName": {
+          "type": "string",
+          "description": "Source table name",
+          "readOnly": true
+        },
+        "targetTableName": {
+          "type": "string",
+          "description": "Target table name",
+          "readOnly": true
+        }
+      }
+    },
+    "NonSqlMigrationTaskInput": {
+      "type": "object",
+      "description": "Base class for non sql migration task input",
+      "properties": {
+        "targetConnectionInfo": {
+          "$ref": "./Common.json#/definitions/SqlConnectionInfo",
+          "description": "Information for connecting to target"
+        },
+        "targetDatabaseName": {
+          "type": "string",
+          "description": "Target database name"
+        },
+        "projectName": {
+          "type": "string",
+          "description": "Name of the migration project"
+        },
+        "projectLocation": {
+          "type": "string",
+          "description": "A URL that points to the drop location to access project artifacts"
+        },
+        "selectedTables": {
+          "type": "array",
+          "description": "Metadata of the tables selected for migration",
+          "items": {
+            "$ref": "#/definitions/NonSqlDataMigrationTable"
+          }
+        }
+      },
+      "required": [
+        "targetConnectionInfo",
+        "targetDatabaseName",
+        "projectName",
+        "projectLocation",
+        "selectedTables"
+      ]
+    },
+    "NonSqlDataMigrationTable": {
+      "type": "object",
+      "description": "Defines metadata for table to be migrated",
+      "properties": {
+        "sourceName": {
+          "type": "string",
+          "description": "Source table name"
+        }
+      }
+    },
+    "NonSqlMigrationTaskOutput": {
+      "type": "object",
+      "description": "Base class for non sql migration task output",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Result identifier",
+          "readOnly": true
+        },
+        "startedOn": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Migration start time",
+          "readOnly": true
+        },
+        "endedOn": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Migration end time",
+          "readOnly": true
+        },
+        "status": {
+          "$ref": "#/definitions/MigrationStatus",
+          "description": "Current state of migration",
+          "readOnly": true
+        },
+        "dataMigrationTableResults": {
+          "type": "string",
+          "description": "Results of the migration. The key contains the table name and the value the table result object",
+          "additionalProperties": {
+            "$ref": "#/definitions/NonSqlDataMigrationTableResult"
+          },
+          "readOnly": true
+        },
+        "progressMessage": {
+          "type": "string",
+          "description": "Message about the progress of the migration",
+          "readOnly": true
+        },
+        "sourceServerName": {
+          "type": "string",
+          "description": "Name of source server",
+          "readOnly": true
+        },
+        "targetServerName": {
+          "type": "string",
+          "description": "Name of target server",
+          "readOnly": true
+        }
+      }
+    },
+    "NonSqlDataMigrationTableResult": {
+      "type": "object",
+      "description": "Object used to report the data migration results of a table",
+      "properties": {
+        "resultCode": {
+          "type": "string",
+          "description": "Result code of the data migration",
+          "enum": [
+            "Initial",
+            "Completed",
+            "ObjectNotExistsInSource",
+            "ObjectNotExistsInTarget",
+            "TargetObjectIsInaccessible",
+            "FatalError"
+          ],
+          "x-ms-enum": {
+            "name": "DataMigrationResultCode",
+            "modelAsString": true
+          },
+          "readOnly": true
+        },
+        "sourceName": {
+          "type": "string",
+          "description": "Name of the source table",
+          "readOnly": true
+        },
+        "targetName": {
+          "type": "string",
+          "description": "Name of the target table",
+          "readOnly": true
+        },
+        "sourceRowCount": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Number of rows in the source table",
+          "readOnly": true
+        },
+        "targetRowCount": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Number of rows in the target table",
+          "readOnly": true
+        },
+        "elapsedTimeInMiliseconds": {
+          "type": "number",
+          "format": "double",
+          "description": "Time taken to migrate the data",
+          "readOnly": true
+        },
+        "errors": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DataMigrationError"
+          },
+          "description": "List of errors, if any, during migration",
+          "readOnly": true
+        }
+      }
+    },
+    "DataMigrationError": {
+      "type": "object",
+      "description": "Migration Task errors",
+      "properties": {
+        "message": {
+          "type": "string",
+          "description": "Error description",
+          "readOnly": true
+        },
+        "type": {
+          "$ref": "#/definitions/ErrorType"
+        }
+      }
+    },
+    "ErrorType": {
+      "type": "string",
+      "description": "Error type",
+      "enum": [
+        "Default",
+        "Warning",
+        "Error"
+      ],
+      "x-ms-enum": {
+        "name": "ErrorType",
+        "modelAsString": true
+      }
+    },
+    "MigrateSqlServerSqlMIDatabaseInput": {
+      "type": "object",
+      "description": "Database specific information for SQL to Azure SQL DB Managed Instance migration task inputs",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the database"
+        },
+        "restoreDatabaseName": {
+          "type": "string",
+          "description": "Name of the database at destination"
+        },
+        "backupFileShare": {
+          "$ref": "#/definitions/FileShare",
+          "description": "Backup file share information for backing up this database."
+        },
+        "backupFilePaths": {
+          "type": "array",
+          "description": "The list of backup files to be used in case of existing backups.",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "name",
+        "restoreDatabaseName"
+      ]
+    },
+    "MigrateSqlServerSqlServerDatabaseInput": {
+      "type": "object",
+      "description": "Database specific information for SQL to SQL migration task inputs",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the database"
+        },
+        "restoreDatabaseName": {
+          "type": "string",
+          "description": "Name of the database at destination"
+        },
+        "backupAndRestoreFolder": {
+          "type": "string",
+          "description": "The backup and restore folder"
+        },
+        "databaseFiles": {
+          "type": "array",
+          "description": "The list of database files",
+          "items": {
+            "$ref": "#/definitions/DatabaseFileInput"
+          }
+        }
+      }
+    },
+    "DatabaseFileInput": {
+      "type": "object",
+      "description": "Database file specific information for input",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for database file"
+        },
+        "logicalName": {
+          "type": "string",
+          "description": "Logical name of the file"
+        },
+        "physicalFullName": {
+          "type": "string",
+          "description": "Operating-system full path of the file"
+        },
+        "restoreFullName": {
+          "type": "string",
+          "description": "Suggested full path of the file for restoring"
+        },
+        "fileType": {
+          "$ref": "#/definitions/DatabaseFileType",
+          "description": "Database file type"
+        }
+      }
+    },
+    "DatabaseFileInfo": {
+      "type": "object",
+      "description": "Database file specific information",
+      "properties": {
+        "databaseName": {
+          "type": "string",
+          "description": "Name of the database"
+        },
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for database file"
+        },
+        "logicalName": {
+          "type": "string",
+          "description": "Logical name of the file"
+        },
+        "physicalFullName": {
+          "type": "string",
+          "description": "Operating-system full path of the file"
+        },
+        "restoreFullName": {
+          "type": "string",
+          "description": "Suggested full path of the file for restoring"
+        },
+        "fileType": {
+          "$ref": "#/definitions/DatabaseFileType",
+          "description": "Database file type"
+        },
+        "sizeMB": {
+          "type": "number",
+          "format": "double",
+          "description": "Size of the file in megabytes"
+        }
+      }
+    },
+    "DatabaseFileType": {
+      "type": "string",
+      "description": "An enumeration of SQL Server database file types",
+      "enum": [
+        "Rows",
+        "Log",
+        "Filestream",
+        "NotSupported",
+        "Fulltext"
+      ],
+      "x-ms-enum": {
+        "name": "DatabaseFileType",
+        "modelAsString": true
+      }
+    },
+    "ConnectToSourceNonSqlTaskOutput": {
+      "type": "object",
+      "description": "Output for connect to MySQL type source",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Result identifier",
+          "readOnly": true
+        },
+        "sourceServerBrandVersion": {
+          "type": "string",
+          "description": "Server brand version",
+          "readOnly": true
+        },
+        "serverProperties": {
+          "$ref": "#/definitions/ServerProperties",
+          "description": "Server properties",
+          "readOnly": true
+        },
+        "databases": {
+          "type": "array",
+          "description": "List of databases on the server",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "validationErrors": {
+          "description": "Validation errors associated with the task",
+          "type": "array",
+          "items": {
+            "$ref": "./Common.json#/definitions/ReportableException"
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "ServerProperties": {
+      "type": "object",
+      "description": "Server properties for MySQL type source",
+      "properties": {
+        "serverPlatform": {
+          "type": "string",
+          "description": "Name of the server platform",
+          "readOnly": true
+        },
+        "serverName": {
+          "type": "string",
+          "description": "Name of the server",
+          "readOnly": true
+        },
+        "serverVersion": {
+          "type": "string",
+          "description": "Version of the database server",
+          "readOnly": true
+        },
+        "serverEdition": {
+          "type": "string",
+          "description": "Edition of the database server",
+          "readOnly": true
+        },
+        "serverOperatingSystemVersion": {
+          "type": "string",
+          "description": "Version of the operating system",
+          "readOnly": true
+        },
+        "serverDatabaseCount": {
+          "type": "integer",
+          "description": "Number of databases in the server",
+          "readOnly": true
+        }
+      }
+    },
+    "DatabaseMigrationStage": {
+      "type": "string",
+      "description": "Current stage of migration",
+      "enum": [
+        "None",
+        "Initialize",
+        "Backup",
+        "FileCopy",
+        "Restore",
+        "Completed"
+      ],
+      "x-ms-enum": {
+        "name": "DatabaseMigrationStage",
+        "modelAsString": true
+      }
+    },
+    "SchemaMigrationStage": {
+      "type": "string",
+      "description": "Current stage of schema migration",
+      "enum": [
+        "NotStarted",
+        "ValidatingInputs",
+        "CollectingObjects",
+        "DownloadingScript",
+        "GeneratingScript",
+        "UploadingScript",
+        "DeployingSchema",
+        "Completed",
+        "CompletedWithWarnings",
+        "Failed"
+      ],
+      "x-ms-enum": {
+        "name": "SchemaMigrationStage",
+        "modelAsString": true
+      }
+    },
+    "BlobShare": {
+      "type": "object",
+      "description": "Blob container storage information.",
+      "properties": {
+        "sasUri": {
+          "type": "string",
+          "description": "SAS URI of Azure Storage Account Container."
+        }
+      },
+      "required": [
+        "sasUri"
+      ]
+    },
+    "FileShare": {
+      "type": "object",
+      "description": "File share information with Path, Username, and Password.",
+      "properties": {
+        "userName": {
+          "type": "string",
+          "description": "User name credential to connect to the share location"
+        },
+        "password": {
+          "type": "string",
+          "description": "Password credential used to connect to the share location."
+        },
+        "path": {
+          "type": "string",
+          "description": "The folder path for this share."
+        }
+      },
+      "required": [
+        "path"
+      ]
+    },
+    "StartMigrationScenarioServerRoleResult": {
+      "type": "object",
+      "description": "Server role migration result",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of server role.",
+          "readOnly": true
+        },
+        "state": {
+          "$ref": "./TasksCommon.json#/definitions/MigrationState",
+          "description": "Current state of migration",
+          "readOnly": true
+        },
+        "exceptionsAndWarnings": {
+          "description": "Migration exceptions and warnings.",
+          "type": "array",
+          "items": {
+            "$ref": "./Common.json#/definitions/ReportableException"
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "LoginType": {
+      "type": "string",
+      "description": "Enum mapping of SMO LoginType.",
+      "enum": [
+        "WindowsUser",
+        "WindowsGroup",
+        "SqlLogin",
+        "Certificate",
+        "AsymmetricKey",
+        "ExternalUser",
+        "ExternalGroup"
+      ],
+      "x-ms-enum": {
+        "name": "LoginType",
+        "modelAsString": true
+      }
+    },
+    "LoginMigrationStage": {
+      "type": "string",
+      "description": "Enum of the different stage of login migration.",
+      "enum": [
+        "None",
+        "Initialize",
+        "LoginMigration",
+        "EstablishUserMapping",
+        "AssignRoleMembership",
+        "AssignRoleOwnership",
+        "EstablishServerPermissions",
+        "EstablishObjectPermissions",
+        "Completed"
+      ],
+      "x-ms-enum": {
+        "name": "LoginMigrationStage",
+        "modelAsString": true
+      }
+    },
+    "MigrationEligibilityInfo": {
+      "type": "object",
+      "description": "Information about migration eligibility of a server object",
+      "properties": {
+        "isEligibleForMigration": {
+          "type": "boolean",
+          "description": "Whether object is eligible for migration or not.",
+          "readOnly": true
+        },
+        "validationMessages": {
+          "description": "Information about eligibility failure for the server object.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "SyncDatabaseMigrationReportingState": {
+      "type": "string",
+      "description": "Enum of the different state of database level online migration.",
+      "enum": [
+        "UNDEFINED",
+        "CONFIGURING",
+        "INITIALIAZING",
+        "STARTING",
+        "RUNNING",
+        "READY_TO_COMPLETE",
+        "COMPLETING",
+        "COMPLETE",
+        "CANCELLING",
+        "CANCELLED",
+        "FAILED",
+        "VALIDATING",
+        "VALIDATION_COMPLETE",
+        "VALIDATION_FAILED",
+        "RESTORE_IN_PROGRESS",
+        "RESTORE_COMPLETED",
+        "BACKUP_IN_PROGRESS",
+        "BACKUP_COMPLETED"
+      ],
+      "x-ms-enum": {
+        "name": "SyncDatabaseMigrationReportingState",
+        "modelAsString": true
+      }
+    },
+    "SyncTableMigrationState": {
+      "type": "string",
+      "description": "Enum of the different state of table level online migration.",
+      "enum": [
+        "BEFORE_LOAD",
+        "FULL_LOAD",
+        "COMPLETED",
+        "CANCELED",
+        "ERROR",
+        "FAILED"
+      ],
+      "x-ms-enum": {
+        "name": "SyncTableMigrationState",
+        "modelAsString": true
+      }
+    },
+    "SyncMigrationDatabaseErrorEvent": {
+      "type": "object",
+      "description": "Database migration errors for online migration",
+      "properties": {
+        "timestampString": {
+          "type": "string",
+          "description": "String value of timestamp.",
+          "readOnly": true
+        },
+        "eventTypeString": {
+          "description": "Event type.",
+          "type": "string",
+          "readOnly": true
+        },
+        "eventText": {
+          "description": "Event text.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "BackupMode": {
+      "type": "string",
+      "description": "An enumeration of backup modes",
+      "enum": [
+        "CreateBackup",
+        "ExistingBackup"
+      ],
+      "x-ms-enum": {
+        "name": "BackupMode",
+        "modelAsString": true
+      }
+    },
+    "DatabaseBackupInfo": {
+      "type": "object",
+      "description": "Information about backup files when existing backup mode is used.",
+      "properties": {
+        "databaseName": {
+          "type": "string",
+          "description": "Database name.",
+          "readOnly": true
+        },
+        "backupType": {
+          "description": "Backup Type.",
+          "$ref": "#/definitions/BackupType",
+          "readOnly": true
+        },
+        "backupFiles": {
+          "type": "array",
+          "description": "The list of backup files for the current database.",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "position": {
+          "description": "Position of current database backup in the file.",
+          "type": "integer",
+          "readOnly": true
+        },
+        "isDamaged": {
+          "type": "boolean",
+          "description": "Database was damaged when backed up, but the backup operation was requested to continue despite errors.",
+          "readOnly": true
+        },
+        "isCompressed": {
+          "type": "boolean",
+          "description": "Whether the backup set is compressed",
+          "readOnly": true
+        },
+        "familyCount": {
+          "type": "integer",
+          "description": "Number of files in the backup set.",
+          "readOnly": true
+        },
+        "backupFinishDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Date and time when the backup operation finished.",
+          "readOnly": true
+        }
+      }
+    },
+    "BackupType": {
+      "type": "string",
+      "description": "Enum of the different backup types.",
+      "enum": [
+        "Database",
+        "TransactionLog",
+        "File",
+        "DifferentialDatabase",
+        "DifferentialFile",
+        "Partial",
+        "DifferentialPartial"
+      ],
+      "x-ms-enum": {
+        "name": "BackupType",
+        "modelAsString": true
+      }
+    },
+    "DatabaseMigrationState": {
+      "type": "string",
+      "description": "Database level migration state.",
+      "enum": [
+        "UNDEFINED",
+        "INITIAL",
+        "FULL_BACKUP_UPLOAD_START",
+        "LOG_SHIPPING_START",
+        "UPLOAD_LOG_FILES_START",
+        "CUTOVER_START",
+        "POST_CUTOVER_COMPLETE",
+        "COMPLETED",
+        "CANCELLED",
+        "FAILED"
+      ],
+      "x-ms-enum": {
+        "name": "DatabaseMigrationState",
+        "modelAsString": true
+      }
+    },
+    "SsisMigrationInfo": {
+      "type": "object",
+      "description": "SSIS migration info with SSIS store type, overwrite policy.",
+      "properties": {
+        "ssisStoreType": {
+          "$ref": "#/definitions/SsisStoreType",
+          "description": "The SSIS store type of source, only SSIS catalog is supported now in DMS"
+        },
+        "projectOverwriteOption": {
+          "$ref": "#/definitions/SsisMigrationOverwriteOption",
+          "description": "The overwrite option for the SSIS project migration"
+        },
+        "environmentOverwriteOption": {
+          "$ref": "#/definitions/SsisMigrationOverwriteOption",
+          "description": "The overwrite option for the SSIS environment migration"
+        }
+      }
+    },
+    "SsisStoreType": {
+      "type": "string",
+      "description": "An enumeration of supported source SSIS store type in DMS",
+      "enum": [
+        "SsisCatalog"
+      ],
+      "x-ms-enum": {
+        "name": "SsisStoreType",
+        "modelAsString": true
+      }
+    },
+    "SsisMigrationOverwriteOption": {
+      "type": "string",
+      "description": "The overwrite option for SSIS object migration, only ignore and overwrite are supported in DMS now and future may add Reuse option for container object",
+      "enum": [
+        "Ignore",
+        "Overwrite"
+      ],
+      "x-ms-enum": {
+        "name": "SsisMigrationOverwriteOption",
+        "modelAsString": true
+      }
+    },
+    "SsisMigrationStage": {
+      "type": "string",
+      "description": "Current stage of SSIS migration",
+      "enum": [
+        "None",
+        "Initialize",
+        "InProgress",
+        "Completed"
+      ],
+      "x-ms-enum": {
+        "name": "SsisMigrationStage",
+        "modelAsString": true
+      }
+    }
+  }
+}

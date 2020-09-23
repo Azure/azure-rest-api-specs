@@ -1,6 +1,6 @@
 {
   "parameters": {
-    "subscriptionId": "27de630f-e1ee-42de-8849-90def4986454",
+    "subscriptionId": "{subscription-id}",
     "resourceGroupName": "res9101",
     "accountName": "sto4445",
     "api-version": "2018-02-01",
@@ -10,6 +10,9 @@
       },
       "kind": "Storage",
       "location": "eastus2euap",
+      "properties": {
+        "isHnsEnabled": true
+      },
       "tags": {
         "key1": "value1",
         "key2": "value2"
@@ -19,13 +22,16 @@
   "responses": {
     "200": {
       "body": {
-        "id": "/subscriptions/27de630f-e1ee-42de-8849-90def4986454/resourceGroups/res9101/providers/Microsoft.Storage/storageAccounts/sto4445",
+        "id": "/subscriptions/{subscription-id}/resourceGroups/res9101/providers/Microsoft.Storage/storageAccounts/sto4445",
         "kind": "Storage",
         "location": "eastus2euap",
         "name": "sto4445",
         "properties": {
+          "isHnsEnabled": true,
           "creationTime": "2017-05-24T13:25:33.4863236Z",
           "primaryEndpoints": {
+            "web": "https://sto4445.web.core.windows.net/",
+            "dfs": "https://sto4445.dfs.core.windows.net/",
             "blob": "https://sto4445.blob.core.windows.net/",
             "file": "https://sto4445.file.core.windows.net/",
             "queue": "https://sto4445.queue.core.windows.net/",
@@ -49,8 +55,6 @@
         "type": "Microsoft.Storage/storageAccounts"
       }
     },
-    "202": {
-      "body": ""
-    }
+    "202": {}
   }
 }

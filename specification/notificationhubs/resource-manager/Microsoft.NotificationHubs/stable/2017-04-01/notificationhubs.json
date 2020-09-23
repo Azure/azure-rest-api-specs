@@ -101,7 +101,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Checks if the Namespace name is a valid availabile name",
+            "description": "Checks if the Namespace name is a valid available name",
             "schema": {
               "$ref": "#/definitions/CheckAvailabilityResult"
             }
@@ -345,7 +345,7 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "Aauthorization Rule Name."
+            "description": "Authorization Rule Name."
           },
           {
             "name": "parameters",
@@ -648,7 +648,7 @@
           "Namespaces"
         ],
         "x-ms-examples": {
-          "NameSpaceAuthorizationRuleRegenrateKey": {
+          "NameSpaceAuthorizationRuleRegenerateKey": {
             "$ref": "./examples/Namespaces/NHNameSpaceAuthorizationRuleRegenrateKey.json"
           }
         },
@@ -747,7 +747,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Checks if the NotificationHub name is a valid availabile name",
+            "description": "Checks if the NotificationHub name is a valid available name",
             "schema": {
               "$ref": "#/definitions/CheckAvailabilityResult"
             }
@@ -761,7 +761,7 @@
           "NotificationHubs"
         ],
         "x-ms-examples": {
-          "notificationhubCreate": {
+          "NotificationHubCreate": {
             "$ref": "./examples/NotificationHubs/NotificationHubCreate.json"
           }
         },
@@ -820,12 +820,70 @@
           }
         }
       },
+      "patch": {
+        "tags": [
+          "NotificationHubs"
+        ],
+        "x-ms-examples": {
+          "NotificationHubPatch": {
+            "$ref": "./examples/NotificationHubs/NotificationHubPatch.json"
+          }
+        },
+        "operationId": "NotificationHubs_Patch",
+        "description": "Patch a NotificationHub in a namespace.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "namespaceName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The namespace name."
+          },
+          {
+            "name": "notificationHubName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The notification hub name."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/NotificationHubPatchParameters"
+            },
+            "description": "Parameters supplied to patch a NotificationHub Resource."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "NotificationHub is patched",
+            "schema": {
+              "$ref": "#/definitions/NotificationHubResource"
+            }
+          }
+        }
+      },
       "delete": {
         "tags": [
           "NotificationHubs"
         ],
         "x-ms-examples": {
-          "notificationhubDelete": {
+          "NotificationHubDelete": {
             "$ref": "./examples/NotificationHubs/NotificationHubDelete.json"
           }
         },
@@ -871,7 +929,7 @@
           "NotificationHubs"
         ],
         "x-ms-examples": {
-          "notificationhubGet": {
+          "NotificationHubGet": {
             "$ref": "./examples/NotificationHubs/NotificationHubGet.json"
           }
         },
@@ -916,13 +974,73 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NotificationHubs/namespaces/{namespaceName}/notificationHubs/{notificationHubName}/debugsend": {
+      "post": {
+        "tags": [
+          "NotificationHubs"
+        ],
+        "x-ms-examples": {
+          "debugsend": {
+            "$ref": "./examples/NotificationHubs/NotificationHubDebugSend.json"
+          }
+        },
+        "operationId": "NotificationHubs_DebugSend",
+        "description": "test send a push notification",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "namespaceName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The namespace name."
+          },
+          {
+            "name": "notificationHubName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The notification hub name."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/DebugSendParameters"
+            },
+            "description": "Debug send parameters"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "push send status",
+            "schema": {
+              "$ref": "#/definitions/DebugSendResponse"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NotificationHubs/namespaces/{namespaceName}/notificationHubs/{notificationHubName}/AuthorizationRules/{authorizationRuleName}": {
       "put": {
         "tags": [
           "NotificationHubs"
         ],
         "x-ms-examples": {
-          "notificationhubAuthorizationRuleCreate": {
+          "NotificationHubAuthorizationRuleCreate": {
             "$ref": "./examples/NotificationHubs/NotificationHubAuthorizationRuleCreate.json"
           }
         },
@@ -987,7 +1105,7 @@
           "NotificationHubs"
         ],
         "x-ms-examples": {
-          "notificationhubAuthorizationRuleDelete": {
+          "NotificationHubAuthorizationRuleDelete": {
             "$ref": "./examples/NotificationHubs/NotificationHubAuthorizationRuleDelete.json"
           }
         },
@@ -1043,7 +1161,7 @@
           "NotificationHubs"
         ],
         "x-ms-examples": {
-          "notificationhubAuthorizationRuleGet": {
+          "NotificationHubAuthorizationRuleGet": {
             "$ref": "./examples/NotificationHubs/NotificationHubAuthorizationRuleGet.json"
           }
         },
@@ -1101,7 +1219,7 @@
           "NotificationHubs"
         ],
         "x-ms-examples": {
-          "notificationhubListByNameSpace": {
+          "NotificationHubListByNameSpace": {
             "$ref": "./examples/NotificationHubs/NotificationHubListByNameSpace.json"
           }
         },
@@ -1148,7 +1266,7 @@
           "NotificationHubs"
         ],
         "x-ms-examples": {
-          "notificationhubAuthorizationRuleListAll": {
+          "NotificationHubAuthorizationRuleListAll": {
             "$ref": "./examples/NotificationHubs/NotificationHubAuthorizationRuleListAll.json"
           }
         },
@@ -1202,7 +1320,7 @@
           "NotificationHubs"
         ],
         "x-ms-examples": {
-          "notificationhubAuthorizationRuleListKey": {
+          "NotificationHubAuthorizationRuleListKey": {
             "$ref": "./examples/NotificationHubs/NotificationHubAuthorizationRuleListKey.json"
           }
         },
@@ -1260,7 +1378,7 @@
           "NotificationHubs"
         ],
         "x-ms-examples": {
-          "notificationhubAuthorizationRuleRegenrateKey": {
+          "NotificationHubAuthorizationRuleRegenrateKey": {
             "$ref": "./examples/NotificationHubs/NotificationHubAuthorizationRuleRegenrateKey.json"
           }
         },
@@ -1424,7 +1542,7 @@
       }
     },
     "ErrorResponse": {
-      "description": "Error reponse indicates NotificationHubs service is not able to process the incoming request. The reason is provided in the error message.",
+      "description": "Error response indicates NotificationHubs service is not able to process the incoming request. The reason is provided in the error message.",
       "type": "object",
       "properties": {
         "code": {
@@ -1474,8 +1592,7 @@
         }
       },
       "required": [
-        "name",
-        "location"
+        "name"
       ],
       "description": "Parameters supplied to the Check Name Availability for Namespace and NotificationHubs."
     },
@@ -1491,7 +1608,7 @@
           "$ref": "#/definitions/Resource"
         }
       ],
-      "description": "Description of a CheckAvailibility resource."
+      "description": "Description of a CheckAvailability resource."
     },
     "NamespaceProperties": {
       "properties": {
@@ -1508,7 +1625,7 @@
             "url": "http://msdn.microsoft.com/en-us/library/windowsazure/jj873988.aspx"
           },
           "type": "string",
-          "description": "Specifies the targeted region in which the namespace should be created. It can be any of the following values: Australia EastAustralia SoutheastCentral USEast USEast US 2West USNorth Central USSouth Central USEast AsiaSoutheast AsiaBrazil SouthJapan EastJapan WestNorth EuropeWest Europe"
+          "description": "Specifies the targeted region in which the namespace should be created. It can be any of the following values: Australia East, Australia Southeast, Central US, East US, East US 2, West US, North Central US, South Central US, East Asia, Southeast Asia, Brazil South, Japan East, Japan West, North Europe, West Europe"
         },
         "metricId": {
           "readOnly": true,
@@ -1701,7 +1818,7 @@
         "properties": {
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/SharedAccessAuthorizationRuleProperties",
-          "description": "Pproperties of the Namespace AuthorizationRule."
+          "description": "Properties of the Namespace AuthorizationRule."
         }
       },
       "allOf": [
@@ -1781,38 +1898,38 @@
       "properties": {
         "apnsCertificate": {
           "type": "string",
-          "description": "The APNS certificate."
+          "description": "The APNS certificate. Specify if using Certificate Authentication Mode."
         },
         "certificateKey": {
           "type": "string",
-          "description": "The certificate key."
+          "description": "The APNS certificate password if it exists."
         },
         "endpoint": {
           "type": "string",
-          "description": "The endpoint of this credential."
+          "description": "The APNS endpoint of this credential. If using Certificate Authentication Mode and Sandbox specify 'gateway.sandbox.push.apple.com'. If using Certificate Authentication Mode and Production specify 'gateway.push.apple.com'. If using Token Authentication Mode and Sandbox specify 'https://api.development.push.apple.com:443/3/device'. If using Token Authentication Mode and Production specify 'https://api.push.apple.com:443/3/device'."
         },
         "thumbprint": {
           "type": "string",
-          "description": "The Apns certificate Thumbprint"
+          "description": "The APNS certificate thumbprint. Specify if using Certificate Authentication Mode."
         },
         "keyId": {
           "type": "string",
-          "description": "A 10-character key identifier (kid) key, obtained from your developer account"
+          "description": "A 10-character key identifier (kid) key, obtained from your developer account. Specify if using Token Authentication Mode."
         },
         "appName": {
           "type": "string",
-          "description": "The name of the application"
+          "description": "The name of the application or BundleId. Specify if using Token Authentication Mode."
         },
         "appId": {
           "type": "string",
-          "description": "The issuer (iss) registered claim key, whose value is your 10-character Team ID, obtained from your developer account"
+          "description": "The issuer (iss) registered claim key. The value is a 10-character TeamId, obtained from your developer account. Specify if using Token Authentication Mode."
         },
         "token": {
           "type": "string",
-          "description": "Provider Authentication Token, obtained through your developer account"
+          "description": "Provider Authentication Token, obtained through your developer account. Specify if using Token Authentication Mode."
         }
       },
-      "description": "Description of a NotificationHub ApnsCredential."
+      "description": "Description of a NotificationHub ApnsCredential. Note that there is no explicit switch between Certificate and Token Authentication Modes. The mode is determined based on the properties passed in."
     },
     "ApnsCredential": {
       "properties": {
@@ -1855,7 +1972,7 @@
       "properties": {
         "gcmEndpoint": {
           "type": "string",
-          "description": "The GCM endpoint."
+          "description": "The FCM legacy endpoint. Default value is 'https://fcm.googleapis.com/fcm/send'"
         },
         "googleApiKey": {
           "type": "string",
@@ -1886,7 +2003,7 @@
         },
         "thumbprint": {
           "type": "string",
-          "description": "The Mpns certificate Thumbprint"
+          "description": "The MPNS certificate Thumbprint"
         }
       },
       "description": "Description of a NotificationHub MpnsCredential."
@@ -2017,11 +2134,45 @@
       ],
       "description": "Parameters supplied to the CreateOrUpdate NotificationHub operation."
     },
+    "NotificationHubPatchParameters": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/NotificationHubProperties",
+          "description": "Properties of the NotificationHub."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "description": "Parameters supplied to the patch NotificationHub operation."
+    },
+    "DebugSendParameters": {
+      "description": "Debug Send payload",
+      "type": "object"
+    },
     "NotificationHubResource": {
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/NotificationHubProperties",
+          "description": "Properties of the NotificationHub."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "description": "Description of a NotificationHub Resource."
+    },
+    "DebugSendResponse": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/DebugSendResult",
           "description": "Properties of the NotificationHub."
         }
       },
@@ -2132,6 +2283,23 @@
         "id": {
           "type": "string",
           "description": "Resource Id"
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "DebugSendResult": {
+      "properties": {
+        "success": {
+          "type": "number",
+          "description": "successful send"
+        },
+        "failure": {
+          "type": "number",
+          "description": "send failure"
+        },
+        "results": {
+          "type": "object",
+          "description": "actual failure description"
         }
       },
       "x-ms-azure-resource": true

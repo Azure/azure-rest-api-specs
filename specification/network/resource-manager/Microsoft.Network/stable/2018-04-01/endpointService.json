@@ -47,10 +47,10 @@
             "description": "The location to check available endpoint services."
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -65,7 +65,9 @@
           "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
-          "EndpointServicesList": { "$ref": "./examples/EndpointServicesList.json" }
+          "EndpointServicesList": {
+            "$ref": "./examples/EndpointServicesList.json"
+          }
         }
       }
     }
@@ -106,22 +108,6 @@
         }
       ],
       "description": "Endpoint service."
-    }
-  },
-  "parameters": {
-    "SubscriptionIdParameter": {
-      "name": "subscriptionId",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "The subscription credentials which uniquely identify the Microsoft Azure subscription. The subscription ID forms part of the URI for every service call."
-    },
-    "ApiVersionParameter": {
-      "name": "api-version",
-      "in": "query",
-      "required": true,
-      "type": "string",
-      "description": "Client API version."
     }
   }
 }

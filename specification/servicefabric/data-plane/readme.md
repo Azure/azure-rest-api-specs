@@ -25,7 +25,7 @@ These are the global settings for the ServiceFabricClient API.
 
 ``` yaml
 openapi-type: data-plane
-tag: '6.2'
+tag: '7.1'
 ```
 
 ### Suppression
@@ -37,11 +37,11 @@ directive:
   - suppress: ListInOperationName
     reason: The operation names follow the Service Fabric Client API operation names from the existing .NET SDK.
   - suppress: GetInOperationName
-    reason: The operation names follow the Service Fabric Client API operation names from the existing .NET SDK.    
+    reason: The operation names follow the Service Fabric Client API operation names from the existing .NET SDK.
   - suppress: PutInOperationName
     reason: The operation names follow the Service Fabric Client API operation names from the existing .NET SDK.
   - suppress: HttpsSupportedScheme
-    reason: Service Fabric clusters are owned by the users and they can be configured to have a secure or un-secure client connection endpoint.    
+    reason: Service Fabric clusters are owned by the users and they can be configured to have a secure or un-secure client connection endpoint.
   - suppress: LongRunningOperationsWithLongRunningExtension
     reason: Service Fabric platform has already established pattern for paged responses based on ContinuationToken parameter.
   - suppress: SecurityDefinitionsStructure
@@ -53,7 +53,7 @@ directive:
   - suppress: APIVersionPattern
     reason: The URL scheme for Service Fabric does not follow Azure Service rules. Service Fabric supports various functions on different entities that are modeled using POST.
   - suppress: DefinitionsPropertiesNamesCamelCase
-    reason: The property names for Service Fabric follow the naming scheme of existing property names in our client SDK and concepts. 
+    reason: The property names for Service Fabric follow the naming scheme of existing property names in our client SDK and concepts.
   - suppress: GuidUsage
     reason: The IDs of the service partition in Service Fabric are GUIDs.
   - suppress: EnumInsteadOfBoolean
@@ -63,45 +63,6 @@ directive:
   - suppress: XmsExamplesRequired
     reason: There are a lot of APIs that does not have the example. While it is being worked upon disabling this to ensure that we catch and fix other violations
 
-```
-
-### Tag: 1.0.0
-
-These settings apply only when `--tag=1.0.0` is specified on the command line.
-
-``` yaml $(tag) == '1.0.0'
-input-file:
-- Microsoft.ServiceFabric/stable/1.0.0/servicefabric.json
-```
-
-
-### Tag: 5.6
-
-These settings apply only when `--tag=5.6` is specified on the command line.
-
-``` yaml $(tag) == '5.6'
-input-file:
-- Microsoft.ServiceFabric/stable/5.6/servicefabric.json
-```
-
-
-### Tag: 6.0
-
-These settings apply only when `--tag=6.0` is specified on the command line.
-
-``` yaml $(tag) == '6.0'
-input-file:
-- Microsoft.ServiceFabric/stable/6.0/servicefabric.json
-```
-
-
-### Tag: 6.1
-
-These settings apply only when `--tag=6.1` is specified on the command line.
-
-``` yaml $(tag) == '6.1'
-input-file:
-- Microsoft.ServiceFabric/stable/6.1/servicefabric.json
 ```
 
 ### Tag: 6.2
@@ -114,9 +75,58 @@ input-file:
 
 ```
 
+### Tag: 6.3
+
+These settings apply only when `--tag=6.3` is specified on the command line.
+
+``` yaml $(tag) == '6.3'
+input-file:
+- Microsoft.ServiceFabric/stable/6.3/servicefabric.json
+
+```
+
+### Tag: 6.4
+
+These settings apply only when `--tag=6.4` is specified on the command line.
+
+``` yaml $(tag) == '6.4'
+input-file:
+- Microsoft.ServiceFabric/stable/6.4/servicefabric.json
+
+```
+
+### Tag: 6.5
+
+These settings apply only when `--tag=6.5` is specified on the command line.
+
+``` yaml $(tag) == '6.5'
+input-file:
+- Microsoft.ServiceFabric/stable/6.5/servicefabric.json
+
+```
+
+### Tag: 7.0
+
+These settings apply only when `--tag=7.0` is specified on the command line.
+
+``` yaml $(tag) == '7.0'
+input-file:
+- Microsoft.ServiceFabric/stable/7.0/servicefabric.json
+
+```
+
+### Tag: 7.1
+
+These settings apply only when `--tag=7.1` is specified on the command line.
+
+``` yaml $(tag) == '7.1'
+input-file:
+- Microsoft.ServiceFabric/stable/7.1/servicefabric.json
+
+```
+
 ---
 # Code Generation
-
 
 ## Swagger to SDK
 
@@ -126,102 +136,15 @@ This is not used by Autorest itself.
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
   - repo: azure-sdk-for-python
-  - repo: azure-libraries-for-java
+  - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
+  - repo: azure-sdk-for-js
   - repo: azure-sdk-for-node
 ```
 
-
-## Python
-
-These settings apply only when `--python` is specified on the command line.
-Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
-Use `--python-mode=update` if you already have a setup.py and just want to update the code itself.
-
-``` yaml $(python)
-python-mode: create
-python:
-  license-header: MICROSOFT_MIT_NO_VERSION
-  payload-flattening-threshold: 2
-  namespace: azure.servicefabric
-  package-name: azure-servicefabric
-  package-version: 6.2.0.0
-  add-credentials: true
-  clear-output-folder: true
-```
-``` yaml $(python) && $(python-mode) == 'update'
-python:
-  no-namespace-folders: true
-  output-folder: $(python-sdks-folder)/azure-servicefabric/azure/servicefabric
-```
-``` yaml $(python) && $(python-mode) == 'create'
-python:
-  basic-setup-py: true
-  output-folder: $(python-sdks-folder)/azure-servicefabric
-```
-
-
 ## Go
 
-These settings apply only when `--go` is specified on the command line.
-
-``` yaml $(go)
-go:
-  license-header: MICROSOFT_APACHE_NO_VERSION
-  namespace: servicefabric
-  clear-output-folder: true
-```
-
-### Go multi-api
-
-``` yaml $(go) && $(multiapi)
-batch:
-  - tag: "1.0.0"
-  - tag: "5.6"
-  - tag: "6.0"
-  - tag: "6.1"
-  - tag: "6.2"
-```
-
-### Tag: 1.0.0 and go
-
-These settings apply only when `--tag=1.0.0 --go` is specified on the command line.
-
-``` yaml $(tag) == '1.0.0' && $(go)
-output-folder: $(go-sdk-folder)/services/servicefabric/1.0.0/servicefabric
-```
-
-### Tag: 5.6 and go
-
-These settings apply only when `--tag=5.6 --go` is specified on the command line.
-
-``` yaml $(tag) == '5.6' && $(go)
-output-folder: $(go-sdk-folder)/services/servicefabric/5.6/servicefabric
-```
-
-### Tag: 6.0 and go
-
-These settings apply only when `--tag=6.0 --go` is specified on the command line.
-
-``` yaml $(tag) == '6.0' && $(go)
-output-folder: $(go-sdk-folder)/services/servicefabric/6.0/servicefabric
-```
-
-### Tag: 6.1 and go
-
-These settings apply only when `--tag=6.1 --go` is specified on the command line.
-
-``` yaml $(tag) == '6.1' && $(go)
-output-folder: $(go-sdk-folder)/services/servicefabric/6.1/servicefabric
-```
-
-### Tag: 6.2 and go
-
-These settings apply only when `--tag=6.2 --go` is specified on the command line.
-
-``` yaml $(tag) == '6.2' && $(go)
-output-folder: $(go-sdk-folder)/services/servicefabric/6.2/servicefabric
-```
+See configuration in [readme.go.md](./readme.go.md)
 
 ## Java
 
@@ -237,3 +160,33 @@ java:
   payload-flattening-threshold: 1
   output-folder: $(azure-libraries-for-java-folder)/azure-servicefabric
 ```
+
+## Multi-API/Profile support for AutoRest v3 generators 
+
+AutoRest V3 generators require the use of `--tag=all-api-versions` to select api files.
+
+This block is updated by an automatic script. Edits may be lost!
+
+``` yaml $(tag) == 'all-api-versions' /* autogenerated */
+# include the azure profile definitions from the standard location
+require: $(this-folder)/../../../profiles/readme.md
+
+# all the input files across all versions
+input-file:
+  - $(this-folder)/Microsoft.ServiceFabric/stable/6.2/servicefabric.json
+  - $(this-folder)/Microsoft.ServiceFabric/stable/6.3/servicefabric.json
+  - $(this-folder)/Microsoft.ServiceFabric/stable/6.4/servicefabric.json
+  - $(this-folder)/Microsoft.ServiceFabric/stable/6.5/servicefabric.json
+  - $(this-folder)/Microsoft.ServiceFabric/stable/7.0/servicefabric.json
+  - $(this-folder)/Microsoft.ServiceFabric/stable/7.1/servicefabric.json
+
+```
+
+If there are files that should not be in the `all-api-versions` set, 
+uncomment the  `exclude-file` section below and add the file paths.
+
+``` yaml $(tag) == 'all-api-versions'
+#exclude-file: 
+#  - $(this-folder)/Microsoft.Example/stable/2010-01-01/somefile.json
+```
+

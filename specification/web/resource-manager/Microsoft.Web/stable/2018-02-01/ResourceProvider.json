@@ -189,6 +189,12 @@
             "type": "string"
           },
           {
+            "name": "osType",
+            "in": "query",
+            "description": "App Service OS type meters used for",
+            "type": "string"
+          },
+          {
             "$ref": "#/parameters/subscriptionIdParameter"
           },
           {
@@ -301,7 +307,9 @@
               "Premium",
               "Dynamic",
               "Isolated",
-              "PremiumV2"
+              "PremiumV2",
+              "ElasticPremium",
+              "ElasticIsolated"
             ],
             "x-ms-enum": {
               "name": "SkuName",
@@ -312,6 +320,18 @@
             "name": "linuxWorkersEnabled",
             "in": "query",
             "description": "Specify <code>true</code> if you want to filter to only regions that support Linux workers.",
+            "type": "boolean"
+          },
+          {
+            "name": "xenonWorkersEnabled",
+            "in": "query",
+            "description": "Specify <code>true</code> if you want to filter to only regions that support Xenon workers.",
+            "type": "boolean"
+          },
+          {
+            "name": "linuxDynamicWorkersEnabled",
+            "in": "query",
+            "description": "Specify <code>true</code> if you want to filter to only regions that support Linux Consumption Workers.",
             "type": "boolean"
           },
           {
@@ -558,6 +578,47 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/validateContainerSettings": {
+      "post": {
+        "summary": "Validate if the container settings are correct.",
+        "description": "Validate if the container settings are correct.",
+        "operationId": "ValidateContainerSettings",
+        "parameters": [
+          {
+            "name": "validateContainerSettingsRequest",
+            "in": "body",
+            "description": "",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ValidateContainerSettingsRequest"
+            }
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/validateMoveResources": {
       "post": {
         "summary": "Validate whether a resource can be moved.",
@@ -622,6 +683,10 @@
             },
             "resourceType": {
               "description": "App Service ResourceType meter used for",
+              "type": "string"
+            },
+            "osType": {
+              "description": "App Service OS type meter used for",
               "type": "string"
             }
           },
@@ -889,7 +954,7 @@
       }
     },
     "ResourceNameAvailability": {
-      "description": "Information regarding availbility of a resource name.",
+      "description": "Information regarding availability of a resource name.",
       "type": "object",
       "properties": {
         "nameAvailable": {
@@ -1022,6 +1087,36 @@
         }
       }
     },
+    "ValidateContainerSettingsRequest": {
+      "description": "Container settings validation request context",
+      "type": "object",
+      "properties": {
+        "baseUrl": {
+          "description": "Base URL of the container registry",
+          "type": "string"
+        },
+        "username": {
+          "description": "Username for to access the container registry",
+          "type": "string"
+        },
+        "password": {
+          "description": "Password for to access the container registry",
+          "type": "string"
+        },
+        "repository": {
+          "description": "Repository name (image name)",
+          "type": "string"
+        },
+        "tag": {
+          "description": "Image tag",
+          "type": "string"
+        },
+        "platform": {
+          "description": "Platform (windows or linux)",
+          "type": "string"
+        }
+      }
+    },
     "ValidateProperties": {
       "description": "App properties used for validation.",
       "type": "object",
@@ -1044,13 +1139,17 @@
         },
         "capacity": {
           "format": "int32",
-          "description": "Target capacity of the App Service plan (number of VM's).",
+          "description": "Target capacity of the App Service plan (number of VMs).",
           "minimum": 1,
           "type": "integer"
         },
         "hostingEnvironment": {
           "description": "Name of App Service Environment where app or App Service plan should be created.",
           "type": "string"
+        },
+        "isXenon": {
+          "description": "<code>true</code> if App Service plan is running as a windows container",
+          "type": "boolean"
         }
       }
     },

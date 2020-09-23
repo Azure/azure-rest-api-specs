@@ -7,10 +7,25 @@ Please also specify `--node-sdks-folder=<path to root folder of your azure-sdk-f
 nodejs:
   azure-arm: true
   package-name: azure-arm-compute
-  package-version: 5.1.0
   output-folder: $(node-sdks-folder)/lib/services/computeManagement2
   payload-flattening-threshold: 1
   generate-license-txt: true
   generate-package-json: true
   generate-readme-md: false
+
+directive:
+    # dynamically add a DummyOrchestrationServiceName value to the enum 
+  - from: compute.json
+    where: $..enum
+    transform: >-
+      if( $.length === 1 && $[0] === "AutomaticRepairs") { 
+        $.push('DummyOrchestrationServiceName');
+      }
+      return $;
+
+  - from: source-file-nodejs
+    where: $ 
+    transform: >-
+      return $.
+        replace(/[,*] 'DummyOrchestrationServiceName'/g,'');
 ```

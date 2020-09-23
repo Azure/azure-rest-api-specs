@@ -232,6 +232,46 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/availabilitySets": {
+      "get": {
+        "tags": [
+          "AvailabilitySets"
+        ],
+        "operationId": "AvailabilitySets_ListBySubscription",
+        "description": "Lists all availability sets in a subscription.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "The expand expression to apply to the operation. Allowed values are 'instanceView'."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/AvailabilitySetListResult"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List availability sets in a subscription.": {
+            "$ref": "./examples/ListAvailabilitySetsInASubscription.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/availabilitySets": {
       "get": {
         "tags": [
@@ -263,7 +303,7 @@
           }
         },
         "x-ms-pageable": {
-          "nextLinkName": null
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -306,6 +346,270 @@
         },
         "x-ms-pageable": {
           "nextLinkName": null
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/proximityPlacementGroups/{proximityPlacementGroupName}": {
+      "put": {
+        "tags": [
+          "ProximityPlacementGroups"
+        ],
+        "operationId": "ProximityPlacementGroups_CreateOrUpdate",
+        "description": "Create or update a proximity placement group.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "proximityPlacementGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the proximity placement group."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ProximityPlacementGroup"
+            },
+            "description": "Parameters supplied to the Create Proximity Placement Group operation."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ProximityPlacementGroup"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/ProximityPlacementGroup"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create or Update a proximity placement group.": {
+            "$ref": "./examples/CreateOrUpdateAProximityPlacementGroup.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "ProximityPlacementGroups"
+        ],
+        "operationId": "ProximityPlacementGroups_Update",
+        "description": "Update a proximity placement group.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "proximityPlacementGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the proximity placement group."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ProximityPlacementGroupUpdate"
+            },
+            "description": "Parameters supplied to the Update Proximity Placement Group operation."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ProximityPlacementGroup"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create a proximity placement group.": {
+            "$ref": "./examples/PatchAProximityPlacementGroup.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "ProximityPlacementGroups"
+        ],
+        "operationId": "ProximityPlacementGroups_Delete",
+        "description": "Delete a proximity placement group.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "proximityPlacementGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the proximity placement group."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "x-ms-examples": {
+          "Create a proximity placement group.": {
+            "$ref": "./examples/DeleteAProximityPlacementGroup.json"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "ProximityPlacementGroups"
+        ],
+        "operationId": "ProximityPlacementGroups_Get",
+        "description": "Retrieves information about a proximity placement group .",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "proximityPlacementGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the proximity placement group."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ProximityPlacementGroup"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create a proximity placement group.": {
+            "$ref": "./examples/GetAProximityPlacementGroup.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/proximityPlacementGroups": {
+      "get": {
+        "tags": [
+          "ProximityPlacementGroups"
+        ],
+        "operationId": "ProximityPlacementGroups_ListBySubscription",
+        "description": "Lists all proximity placement groups in a subscription.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ProximityPlacementGroupListResult"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Create a proximity placement group.": {
+            "$ref": "./examples/ListProximityPlacementGroupsInASubscription.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/proximityPlacementGroups": {
+      "get": {
+        "tags": [
+          "ProximityPlacementGroups"
+        ],
+        "operationId": "ProximityPlacementGroups_ListByResourceGroup",
+        "description": "Lists all proximity placement groups in a resource group.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ProximityPlacementGroupListResult"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Create a proximity placement group.": {
+            "$ref": "./examples/ListProximityPlacementGroupsInAResourceGroup.json"
+          }
         }
       }
     },
@@ -826,11 +1130,11 @@
             "description": "A valid image SKU."
           },
           {
-            "name": "$filter",
+            "name": "$expand",
             "in": "query",
             "required": false,
             "type": "string",
-            "description": "The filter to apply on the operation."
+            "description": "The expand expression to apply on the operation."
           },
           {
             "name": "$top",
@@ -862,8 +1166,7 @@
               }
             }
           }
-        },
-        "x-ms-odata": "#/definitions/VirtualMachineImageResource"
+        }
       }
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/publishers/{publisherName}/artifacttypes/vmimage/offers": {
@@ -1021,6 +1324,47 @@
             "schema": {
               "$ref": "#/definitions/ListUsagesResult"
             }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/virtualMachines": {
+      "get": {
+        "tags": [
+          "VirtualMachines"
+        ],
+        "operationId": "VirtualMachines_ListByLocation",
+        "description": "Gets all the virtual machines under the specified subscription for the specified location.",
+        "parameters": [
+          {
+            "name": "location",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The location for which virtual machines under the subscription are queried.",
+            "pattern": "^[-\\w\\._]+$"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/VirtualMachineListResult"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Lists all the virtual machines under the specified subscription for the specified location.": {
+            "$ref": "./examples/ListVirtualMachinesInASubscriptionByLocation.json"
           }
         },
         "x-ms-pageable": {
@@ -1407,7 +1751,10 @@
             "description": "Accepted"
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}": {
@@ -2028,7 +2375,7 @@
           "VirtualMachines"
         ],
         "operationId": "VirtualMachines_Redeploy",
-        "description": "The operation to redeploy a virtual machine.",
+        "description": "Shuts down the virtual machine, moves it to a new node, and powers it back on.",
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -2188,6 +2535,9 @@
           },
           "Create a custom-image scale set from an unmanaged generalized os image.": {
             "$ref": "./examples/CreateACustomImageScaleSetFromAnUnmanagedGeneralizedOsImage.json"
+          },
+          "Create a scale set with virtual machines in different zones.": {
+            "$ref": "./examples/CreateAScaleSetWithVMsInDifferentZones.json"
           }
         }
       },
@@ -2957,7 +3307,7 @@
           "VirtualMachineScaleSets"
         ],
         "operationId": "VirtualMachineScaleSets_Redeploy",
-        "description": "Redeploy one or more virtual machines in a VM scale set.",
+        "description": "Shuts down all the virtual machines in the virtual machine scale set, moves them to a new node, and powers them back on.",
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -3006,7 +3356,7 @@
           "VirtualMachineScaleSets"
         ],
         "operationId": "VirtualMachineScaleSets_PerformMaintenance",
-        "description": "Perform maintenance on one or more virtual machines in a VM scale set.",
+        "description": "Perform maintenance on one or more virtual machines in a VM scale set. Operation on instances which are not eligible for perform maintenance will be failed. Please refer to best practices for more details: https://docs.microsoft.com/en-us/azure/virtual-machine-scale-sets/virtual-machine-scale-sets-maintenance-notifications",
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -3729,21 +4079,21 @@
             "in": "query",
             "required": false,
             "type": "string",
-            "description": "The filter to apply to the operation."
+            "description": "The filter to apply to the operation. Allowed values are 'startswith(instanceView/statuses/code, 'PowerState') eq true', 'properties/latestModelApplied eq true', 'properties/latestModelApplied eq false'."
           },
           {
             "name": "$select",
             "in": "query",
             "required": false,
             "type": "string",
-            "description": "The list parameters."
+            "description": "The list parameters. Allowed values are 'instanceView', 'instanceView/statuses'."
           },
           {
             "name": "$expand",
             "in": "query",
             "required": false,
             "type": "string",
-            "description": "The expand expression to apply to the operation."
+            "description": "The expand expression to apply to the operation. Allowed values are 'instanceView'."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -3913,7 +4263,7 @@
           "VirtualMachineScaleSetVMs"
         ],
         "operationId": "VirtualMachineScaleSetVMs_Redeploy",
-        "description": "Redeploys a virtual machine in a VM scale set.",
+        "description": "Shuts down the virtual machine in the virtual machine scale set, moves it to a new node, and powers it back on.",
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -4049,7 +4399,10 @@
             "description": "Accepted"
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
       }
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/logAnalytics/apiAccess/getThrottledRequests": {
@@ -4100,7 +4453,10 @@
             "description": "Accepted"
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
       }
     }
   },
@@ -4216,6 +4572,10 @@
           },
           "description": "A list of references to all virtual machines in the availability set."
         },
+        "proximityPlacementGroup": {
+          "$ref": "#/definitions/SubResource",
+          "description": "Specifies information about the proximity placement group that the availability set should be assigned to. <br><br>Minimum api-version: 2018-04-01."
+        },
         "statuses": {
           "readOnly": true,
           "type": "array",
@@ -4243,7 +4603,7 @@
           "$ref": "#/definitions/Resource"
         }
       ],
-      "description": "Specifies information about the availability set that the virtual machine should be assigned to. Virtual machines specified in the same availability set are allocated to different nodes to maximize availability. For more information about availability sets, see [Manage the availability of virtual machines](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-manage-availability?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json). <br><br> For more information on Azure planned maintainance, see [Planned maintenance for virtual machines in Azure](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-planned-maintenance?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json) <br><br> Currently, a VM can only be added to availability set at creation time. An existing VM cannot be added to an availability set."
+      "description": "Specifies information about the availability set that the virtual machine should be assigned to. Virtual machines specified in the same availability set are allocated to different nodes to maximize availability. For more information about availability sets, see [Manage the availability of virtual machines](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-manage-availability?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json). <br><br> For more information on Azure planned maintenance, see [Planned maintenance for virtual machines in Azure](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-planned-maintenance?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json) <br><br> Currently, a VM can only be added to availability set at creation time. An existing VM cannot be added to an availability set."
     },
     "AvailabilitySetUpdate": {
       "properties": {
@@ -4271,9 +4631,99 @@
             "$ref": "#/definitions/AvailabilitySet"
           },
           "description": "The list of availability sets"
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The URI to fetch the next page of AvailabilitySets. Call ListNext() with this URI to fetch the next page of AvailabilitySets."
         }
       },
+      "required": [
+        "value"
+      ],
       "description": "The List Availability Set operation response."
+    },
+    "ProximityPlacementGroupProperties": {
+      "properties": {
+        "proximityPlacementGroupType": {
+          "type": "string",
+          "description": "Specifies the type of the proximity placement group. <br><br> Possible values are: <br><br> **Standard** : Co-locate resources within an Azure region or Availability Zone. <br><br> **Ultra** : For future use.",
+          "enum": [
+            "Standard",
+            "Ultra"
+          ],
+          "x-ms-enum": {
+            "name": "ProximityPlacementGroupType",
+            "modelAsString": true
+          }
+        },
+        "virtualMachines": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SubResource"
+          },
+          "description": "A list of references to all virtual machines in the proximity placement group."
+        },
+        "virtualMachineScaleSets": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SubResource"
+          },
+          "description": "A list of references to all virtual machine scale sets in the proximity placement group."
+        },
+        "availabilitySets": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SubResource"
+          },
+          "description": "A list of references to all availability sets in the proximity placement group."
+        }
+      },
+      "description": "Describes the properties of a Proximity Placement Group."
+    },
+    "ProximityPlacementGroup": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ProximityPlacementGroupProperties",
+          "description": "Describes the properties of a Proximity Placement Group."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "description": "Specifies information about the proximity placement group."
+    },
+    "ProximityPlacementGroupUpdate": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/UpdateResource"
+        }
+      ],
+      "description": "Specifies information about the proximity placement group."
+    },
+    "ProximityPlacementGroupListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ProximityPlacementGroup"
+          },
+          "description": "The list of proximity placement groups"
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The URI to fetch the next page of proximity placement groups."
+        }
+      },
+      "required": [
+        "value"
+      ],
+      "description": "The List Proximity Placement Group operation response."
     },
     "VirtualMachineSize": {
       "properties": {
@@ -4982,7 +5432,7 @@
           "$ref": "#/definitions/SubResource"
         }
       ],
-      "description": "Specifies information about the image to use. You can specify information about platform images, marketplace images, or virtual machine images. This element is required when you want to use a platform image, marketplace image, or virtual machine image, but is not used in other creation operations."
+      "description": "Specifies information about the image to use. You can specify information about platform images, marketplace images, or virtual machine images. This element is required when you want to use a platform image, marketplace image, or virtual machine image, but is not used in other creation operations. NOTE: Image reference publisher and offer can only be set when you create the scale set."
     },
     "KeyVaultSecretReference": {
       "properties": {
@@ -5072,10 +5522,11 @@
     },
     "StorageAccountType": {
       "type": "string",
-      "description": "Specifies the storage account type for the managed disk. Possible values are: Standard_LRS or Premium_LRS.",
+      "description": "Specifies the storage account type for the managed disk. Possible values are: Standard_LRS, Premium_LRS, and StandardSSD_LRS. NOTE: Managed OS disk storage account type can only be set when you create the scale set.",
       "enum": [
         "Standard_LRS",
-        "Premium_LRS"
+        "Premium_LRS",
+        "StandardSSD_LRS"
       ],
       "x-ms-enum": {
         "name": "StorageAccountTypes",
@@ -5086,7 +5537,7 @@
       "properties": {
         "storageAccountType": {
           "$ref": "#/definitions/StorageAccountType",
-          "description": "Specifies the storage account type for the managed disk. Possible values are: Standard_LRS or Premium_LRS."
+          "description": "Specifies the storage account type for the managed disk. Possible values are: Standard_LRS, Premium_LRS, and StandardSSD_LRS."
         }
       },
       "allOf": [
@@ -5141,7 +5592,7 @@
         "diskSizeGB": {
           "type": "integer",
           "format": "int32",
-          "description": "Specifies the size of an empty data disk in gigabytes. This element can be used to overwrite the name of the disk in a virtual machine image. <br><br> This value cannot be larger than 1023 GB"
+          "description": "Specifies the size of an empty data disk in gigabytes. This element can be used to overwrite the size of the disk in a virtual machine image. <br><br> This value cannot be larger than 1023 GB"
         },
         "managedDisk": {
           "description": "The managed disk parameters.",
@@ -5187,7 +5638,7 @@
         "diskSizeGB": {
           "type": "integer",
           "format": "int32",
-          "description": "Specifies the size of an empty data disk in gigabytes. This element can be used to overwrite the name of the disk in a virtual machine image. <br><br> This value cannot be larger than 1023 GB"
+          "description": "Specifies the size of an empty data disk in gigabytes. This element can be used to overwrite the size of the disk in a virtual machine image. <br><br> This value cannot be larger than 1023 GB"
         },
         "managedDisk": {
           "description": "The managed disk parameters.",
@@ -5370,7 +5821,7 @@
         },
         "certificateStore": {
           "type": "string",
-          "description": "For Windows VMs, specifies the certificate store on the Virtual Machine to which the certificate should be added. The specified certificate store is implicitly in the LocalMachine account. <br><br>For Linux VMs, the certificate file is placed under the /var/lib/waagent directory, with the file name <UppercaseThumbprint>.crt for the X509 certificate file and <UppercaseThumbpring>.prv for private key. Both of these files are .pem formatted."
+          "description": "For Windows VMs, specifies the certificate store on the Virtual Machine to which the certificate should be added. The specified certificate store is implicitly in the LocalMachine account. <br><br>For Linux VMs, the certificate file is placed under the /var/lib/waagent directory, with the file name &lt;UppercaseThumbprint&gt;.crt for the X509 certificate file and &lt;UppercaseThumbprint&gt;.prv for private key. Both of these files are .pem formatted."
         }
       },
       "description": "Describes a single certificate reference in a Key Vault, and where the certificate should reside on the VM."
@@ -5395,7 +5846,7 @@
       "properties": {
         "computerName": {
           "type": "string",
-          "description": "Specifies the host OS name of the virtual machine. <br><br> **Max-length (Windows):** 15 characters <br><br> **Max-length (Linux):** 64 characters. <br><br> For naming conventions and restrictions see [Azure infrastructure services implementation guidelines](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-linux-infrastructure-subscription-accounts-guidelines?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json#1-naming-conventions)."
+          "description": "Specifies the host OS name of the virtual machine. <br><br> This name cannot be updated after the VM is created. <br><br> **Max-length (Windows):** 15 characters <br><br> **Max-length (Linux):** 64 characters. <br><br> For naming conventions and restrictions see [Azure infrastructure services implementation guidelines](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-linux-infrastructure-subscription-accounts-guidelines?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json#1-naming-conventions)."
         },
         "adminUsername": {
           "type": "string",
@@ -5473,13 +5924,13 @@
           "description": "Uri of the storage account to use for placing the console output and screenshot."
         }
       },
-      "description": "Boot Diagnostics is a debugging feature which allows you to view Console Output and Screenshot to diagnose VM status. <br><br> For Linux Virtual Machines, you can easily view the output of your console log. <br><br> For both Windows and Linux virtual machines, Azure also enables you to see a screenshot of the VM from the hypervisor."
+      "description": "Boot Diagnostics is a debugging feature which allows you to view Console Output and Screenshot to diagnose VM status. <br><br> You can easily view the output of your console log. <br><br> Azure also enables you to see a screenshot of the VM from the hypervisor."
     },
     "DiagnosticsProfile": {
       "properties": {
         "bootDiagnostics": {
           "$ref": "#/definitions/BootDiagnostics",
-          "description": "Boot Diagnostics is a debugging feature which allows you to view Console Output and Screenshot to diagnose VM status. <br><br> For Linux Virtual Machines, you can easily view the output of your console log. <br><br> For both Windows and Linux virtual machines, Azure also enables you to see a screenshot of the VM from the hypervisor."
+          "description": "Boot Diagnostics is a debugging feature which allows you to view Console Output and Screenshot to diagnose VM status. <br><br> You can easily view the output of your console log. <br><br> Azure also enables you to see a screenshot of the VM from the hypervisor."
         }
       },
       "description": "Specifies the boot diagnostic settings state. <br><br>Minimum api-version: 2015-06-15."
@@ -5550,12 +6001,19 @@
     "BootDiagnosticsInstanceView": {
       "properties": {
         "consoleScreenshotBlobUri": {
+          "readOnly": true,
           "type": "string",
           "description": "The console screenshot blob URI."
         },
         "serialConsoleLogBlobUri": {
+          "readOnly": true,
           "type": "string",
           "description": "The Linux serial console log blob Uri."
+        },
+        "status": {
+          "readOnly": true,
+          "$ref": "#/definitions/InstanceViewStatus",
+          "description": "The boot diagnostics status information for the VM. <br><br> NOTE: It will be set only if there are errors encountered in enabling boot diagnostics."
         }
       },
       "description": "The instance view of a virtual machine boot diagnostics."
@@ -5695,7 +6153,7 @@
         },
         "bootDiagnostics": {
           "$ref": "#/definitions/BootDiagnosticsInstanceView",
-          "description": "Boot Diagnostics is a debugging feature which allows you to view Console Output and Screenshot to diagnose VM status. <br><br> For Linux Virtual Machines, you can easily view the output of your console log. <br><br> For both Windows and Linux virtual machines, Azure also enables you to see a screenshot of the VM from the hypervisor."
+          "description": "Boot Diagnostics is a debugging feature which allows you to view Console Output and Screenshot to diagnose VM status. <br><br> You can easily view the output of your console log. <br><br> Azure also enables you to see a screenshot of the VM from the hypervisor."
         },
         "statuses": {
           "type": "array",
@@ -5731,7 +6189,11 @@
         },
         "availabilitySet": {
           "$ref": "#/definitions/SubResource",
-          "description": "Specifies information about the availability set that the virtual machine should be assigned to. Virtual machines specified in the same availability set are allocated to different nodes to maximize availability. For more information about availability sets, see [Manage the availability of virtual machines](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-manage-availability?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json). <br><br> For more information on Azure planned maintainance, see [Planned maintenance for virtual machines in Azure](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-planned-maintenance?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json) <br><br> Currently, a VM can only be added to availability set at creation time. An existing VM cannot be added to an availability set."
+          "description": "Specifies information about the availability set that the virtual machine should be assigned to. Virtual machines specified in the same availability set are allocated to different nodes to maximize availability. For more information about availability sets, see [Manage the availability of virtual machines](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-manage-availability?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json). <br><br> For more information on Azure planned maintenance, see [Planned maintenance for virtual machines in Azure](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-planned-maintenance?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json) <br><br> Currently, a VM can only be added to availability set at creation time. An existing VM cannot be added to an availability set."
+        },
+        "proximityPlacementGroup": {
+          "$ref": "#/definitions/SubResource",
+          "description": "Specifies information about the proximity placement group that the virtual machine should be assigned to. <br><br>Minimum api-version: 2018-04-01."
         },
         "provisioningState": {
           "readOnly": true,
@@ -5856,7 +6318,7 @@
           "description": "Specifies the number of virtual machines in the scale set."
         }
       },
-      "description": "Describes a virtual machine scale set sku."
+      "description": "Describes a virtual machine scale set sku. NOTE: If the new VM SKU is not supported on the hardware the scale set is currently on, you need to deallocate the VMs in the scale set before you modify the SKU name."
     },
     "AutoOSUpgradePolicy": {
       "properties": {
@@ -5985,7 +6447,7 @@
         },
         "storageAccountType": {
           "$ref": "#/definitions/StorageAccountType",
-          "description": "Specifies the storage account type for the managed disk. Possible values are: Standard_LRS or Premium_LRS."
+          "description": "Specifies the storage account type for the managed disk. Possible values are: Standard_LRS, Premium_LRS, and StandardSSD_LRS."
         }
       },
       "required": [
@@ -6033,7 +6495,7 @@
         },
         "storageAccountType": {
           "$ref": "#/definitions/StorageAccountType",
-          "description": "Specifies the storage account type for the managed disk. Possible values are: Standard_LRS or Premium_LRS."
+          "description": "Specifies the storage account type for the managed disk. Possible values are: Standard_LRS, Premium_LRS, and StandardSSD_LRS."
         }
       },
       "required": [
@@ -6056,7 +6518,7 @@
         },
         "zoneResilient": {
           "type": "boolean",
-          "description":  "Specifies whether an image is zone resilient or not. Default is false. Zone resilient images can be created only in regions that provide Zone Redundant Storage (ZRS)."
+          "description": "Specifies whether an image is zone resilient or not. Default is false. Zone resilient images can be created only in regions that provide Zone Redundant Storage (ZRS)."
         }
       },
       "description": "Describes a storage profile."
@@ -6226,7 +6688,7 @@
       "properties": {
         "storageAccountType": {
           "$ref": "#/definitions/StorageAccountType",
-          "description": "Specifies the storage account type for the managed disk. Possible values are: Standard_LRS or Premium_LRS."
+          "description": "Specifies the storage account type for the managed disk. Possible values are: Standard_LRS, Premium_LRS, and StandardSSD_LRS."
         }
       },
       "description": "Describes the parameters of a ScaleSet managed disk."
@@ -6248,6 +6710,11 @@
         "createOption": {
           "$ref": "#/definitions/CreateOption",
           "description": "Specifies how the virtual machines in the scale set should be created.<br><br> The only allowed value is: **FromImage** \\u2013 This value is used when you are using an image to create the virtual machine. If you are using a platform image, you also use the imageReference element described above. If you are using a marketplace image, you  also use the plan element previously described."
+        },
+        "diskSizeGB": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Specifies the size of the operating system disk in gigabytes. This element can be used to overwrite the size of the disk in a virtual machine image. <br><br> This value cannot be larger than 1023 GB"
         },
         "osType": {
           "type": "string",
@@ -6291,6 +6758,11 @@
         "writeAcceleratorEnabled": {
           "type": "boolean",
           "description": "Specifies whether writeAccelerator should be enabled or disabled on the disk."
+        },
+        "diskSizeGB": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Specifies the size of the operating system disk in gigabytes. This element can be used to overwrite the size of the disk in a virtual machine image. <br><br> This value cannot be larger than 1023 GB"
         },
         "image": {
           "$ref": "#/definitions/VirtualHardDisk",
@@ -6336,7 +6808,7 @@
         "diskSizeGB": {
           "type": "integer",
           "format": "int32",
-          "description": "Specifies the size of an empty data disk in gigabytes. This element can be used to overwrite the name of the disk in a virtual machine image. <br><br> This value cannot be larger than 1023 GB"
+          "description": "Specifies the size of an empty data disk in gigabytes. This element can be used to overwrite the size of the disk in a virtual machine image. <br><br> This value cannot be larger than 1023 GB"
         },
         "managedDisk": {
           "description": "The managed disk parameters.",
@@ -6393,7 +6865,7 @@
       "properties": {
         "id": {
           "type": "string",
-          "description": "The ARM resource id in the form of /subscriptions/{SubcriptionId}/resourceGroups/{ResourceGroupName}/..."
+          "description": "The ARM resource id in the form of /subscriptions/{SubscriptionId}/resourceGroups/{ResourceGroupName}/..."
         }
       },
       "description": "The API entity reference."
@@ -6496,7 +6968,7 @@
           "description": "The load balancer inbound nat pools."
         }
       },
-      "description": "Describes a virtual machine scale set network profile's IP configuration properties."
+      "description": "Describes a virtual machine scale set network profile's IP configuration properties. NOTE: The subnet of a scale set may be modified as long as the original subnet and the new subnet are in the same virtual network."
     },
     "VirtualMachineScaleSetIPConfiguration": {
       "properties": {
@@ -6678,8 +7150,8 @@
           "description": "IP tag associated with the public IP. Example: SQL, Storage etc."
         }
       },
-      "description": "Contains the IP tag associated with the public IP address." 
-    }, 
+      "description": "Contains the IP tag associated with the public IP address."
+    },
     "VirtualMachineScaleSetPublicIPAddressConfiguration": {
       "properties": {
         "name": {
@@ -6723,9 +7195,9 @@
         "ipTags": {
           "type": "array",
           "items": {
-          "$ref": "#/definitions/VirtualMachineScaleSetIpTag"
+            "$ref": "#/definitions/VirtualMachineScaleSetIpTag"
           },
-        "description": "The list of IP tags associated with the public IP address."
+          "description": "The list of IP tags associated with the public IP address."
         }
       },
       "description": "Describes a virtual machines scale set IP Configuration's PublicIPAddress configuration"
@@ -6971,12 +7443,16 @@
         },
         "zoneBalance": {
           "type": "boolean",
-          "description": "Whether to force stictly even Virtual Machine distribution cross x-zones in case there is zone outage."
+          "description": "Whether to force strictly even Virtual Machine distribution cross x-zones in case there is zone outage."
         },
         "platformFaultDomainCount": {
           "type": "integer",
           "format": "int32",
           "description": "Fault Domain count for each placement group."
+        },
+        "proximityPlacementGroup": {
+          "$ref": "#/definitions/SubResource",
+          "description": "Specifies information about the proximity placement group that the virtual machine scale set should be assigned to. <br><br>Minimum api-version: 2018-04-01."
         }
       },
       "description": "Describes the properties of a Virtual Machine Scale Set."
@@ -6997,7 +7473,11 @@
         },
         "singlePlacementGroup": {
           "type": "boolean",
-          "description": "When true this limits the scale set to a single placement group, of max size 100 virtual machines."
+          "description": "When true this limits the scale set to a single placement group, of max size 100 virtual machines. NOTE: If singlePlacementGroup is true, it may be modified to false. However, if singlePlacementGroup is false, it may not be modified to true."
+        },
+        "proximityPlacementGroup": {
+          "$ref": "#/definitions/SubResource",
+          "description": "Specifies information about the proximity placement group that the virtual machine scale set should be assigned to. <br><br>Minimum api-version: 2018-04-01."
         }
       },
       "description": "Describes the properties of a Virtual Machine Scale Set."
@@ -7025,7 +7505,7 @@
           "items": {
             "type": "string"
           },
-          "description": "The virtual machine scale set zones."
+          "description": "The virtual machine scale set zones. NOTE: Availability zones can only be set when you create the scale set."
         }
       },
       "allOf": [
@@ -7274,20 +7754,20 @@
       "description": "The Virtual Machine Scale Set List Skus operation response."
     },
     "RollbackStatusInfo": {
-      "properties":{
-        "successfullyRolledbackInstanceCount" : {
+      "properties": {
+        "successfullyRolledbackInstanceCount": {
           "readOnly": true,
           "type": "integer",
           "format": "int32",
           "description": "The number of instances which have been successfully rolled back."
         },
-        "failedRolledbackInstanceCount" : {
+        "failedRolledbackInstanceCount": {
           "readOnly": true,
           "type": "integer",
           "format": "int32",
           "description": "The number of instances which failed to rollback."
         },
-        "rollbackError" : {
+        "rollbackError": {
           "$ref": "#/definitions/ApiError",
           "readOnly": true,
           "description": "Error details if OS rollback failed."
@@ -7337,7 +7817,7 @@
         "progress": {
           "$ref": "#/definitions/RollingUpgradeProgressInfo",
           "readOnly": true,
-          "description": "Counts of the VM's in each state."
+          "description": "Counts of the VMs in each state."
         },
         "error": {
           "$ref": "#/definitions/ApiError",
@@ -7423,7 +7903,7 @@
           "description": "Azure VM unique ID."
         },
         "instanceView": {
-          "$ref": "#/definitions/VirtualMachineInstanceView",
+          "$ref": "#/definitions/VirtualMachineScaleSetVMInstanceView",
           "readOnly": true,
           "description": "The virtual machine instance view."
         },
@@ -7449,7 +7929,7 @@
         },
         "availabilitySet": {
           "$ref": "#/definitions/SubResource",
-          "description": "Specifies information about the availability set that the virtual machine should be assigned to. Virtual machines specified in the same availability set are allocated to different nodes to maximize availability. For more information about availability sets, see [Manage the availability of virtual machines](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-manage-availability?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json). <br><br> For more information on Azure planned maintainance, see [Planned maintenance for virtual machines in Azure](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-planned-maintenance?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json) <br><br> Currently, a VM can only be added to availability set at creation time. An existing VM cannot be added to an availability set."
+          "description": "Specifies information about the availability set that the virtual machine should be assigned to. Virtual machines specified in the same availability set are allocated to different nodes to maximize availability. For more information about availability sets, see [Manage the availability of virtual machines](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-manage-availability?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json). <br><br> For more information on Azure planned maintenance, see [Planned maintenance for virtual machines in Azure](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-planned-maintenance?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json) <br><br> Currently, a VM can only be added to availability set at creation time. An existing VM cannot be added to an availability set."
         },
         "provisioningState": {
           "readOnly": true,
@@ -7490,6 +7970,14 @@
             "$ref": "#/definitions/VirtualMachineExtension"
           },
           "description": "The virtual machine child extension resources."
+        },
+        "zones": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "The virtual machine zones."
         }
       },
       "allOf": [
@@ -7544,7 +8032,7 @@
         },
         "bootDiagnostics": {
           "$ref": "#/definitions/BootDiagnosticsInstanceView",
-          "description": "Boot Diagnostics is a debugging feature which allows you to view Console Output and Screenshot to diagnose VM status. <br><br> For Linux Virtual Machines, you can easily view the output of your console log. <br><br> For both Windows and Linux virtual machines, Azure also enables you to see a screenshot of the VM from the hypervisor."
+          "description": "Boot Diagnostics is a debugging feature which allows you to view Console Output and Screenshot to diagnose VM status. <br><br> You can easily view the output of your console log. <br><br> Azure also enables you to see a screenshot of the VM from the hypervisor."
         },
         "statuses": {
           "type": "array",
@@ -7899,7 +8387,7 @@
         },
         "groupByOperationName": {
           "type": "boolean",
-          "description": "Group query result by  by Operation Name."
+          "description": "Group query result by Operation Name."
         },
         "groupByResourceName": {
           "type": "boolean",

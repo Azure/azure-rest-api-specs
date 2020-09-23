@@ -1,0 +1,34 @@
+{
+  "parameters": {
+    "api-version": "2019-09-01-preview",
+    "subscriptionId": "86dc51d3-92ed-4d7e-947a-775ea79b4918",
+    "resourceGroupName": "my-resource-group",
+    "queryPackName": "my-querypack",
+    "id": "a449f8af-8e64-4b3a-9b16-5a7165ff98c4"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/86dc51d3-92ed-4d7e-947a-775ea79b4918/resourceGroups/my-resource-group/providers/microsoft.insights/queryPacks/my-querypack/queries/a449f8af-8e64-4b3a-9b16-5a7165ff98c4",
+        "name": "a449f8af-8e64-4b3a-9b16-5a7165ff98c4",
+        "type": "microsoft.insights/queryPacks/queries",
+        "systemData": {
+          "createdBy": "string",
+          "createdByType": "application",
+          "createdAt": "2020-02-03T01:01:01.1075056Z",
+          "lastModifiedBy": "string",
+          "lastModifiedByType": "application",
+          "lastModifiedAt": "2020-02-04T02:03:01.1974346Z"
+        },
+        "properties": {
+          "displayName": "Exceptions - New in the last 24 hours",
+          "id": "a449f8af-8e64-4b3a-9b16-5a7165ff98c4",
+          "body": "let newExceptionsTimeRange = 1d;\nlet timeRangeToCheckBefore = 7d;\nexceptions\n| where timestamp < ago(timeRangeToCheckBefore)\n| summarize count() by problemId\n| join kind= rightanti (\nexceptions\n| where timestamp >= ago(newExceptionsTimeRange)\n| extend stack = tostring(details[0].rawStack)\n| summarize count(), dcount(user_AuthenticatedId), min(timestamp), max(timestamp), any(stack) by problemId  \n) on problemId \n| order by  count_ desc\n",
+          "timeModified": "2018-02-14T13:13:19.3381394Z",
+          "timeCreated": "2018-02-12T11:44:39.2980634Z",
+          "description": "Thie query fetcges the recent exceptions from the last 24 hours"
+        }
+      }
+    }
+  }
+}

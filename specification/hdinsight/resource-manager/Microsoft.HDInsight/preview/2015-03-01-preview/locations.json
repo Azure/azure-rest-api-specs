@@ -1,0 +1,587 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "HDInsightManagementClient",
+    "description": "The HDInsight Management Client.",
+    "version": "2015-03-01-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.HDInsight/locations/{location}/capabilities": {
+      "get": {
+        "tags": [
+          "Regions"
+        ],
+        "operationId": "Locations_GetCapabilities",
+        "description": "Gets the capabilities for the specified location.",
+        "x-ms-examples": {
+          "Get the subscription capabilities for specific location": {
+            "$ref": "./examples/GetHDInsightCapabilities.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/LocationParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./operations.json#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "OK response definition.",
+            "schema": {
+              "$ref": "#/definitions/CapabilitiesResult"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.HDInsight/locations/{location}/usages": {
+      "get": {
+        "tags": [
+          "Regions"
+        ],
+        "operationId": "Locations_ListUsages",
+        "description": "Lists the usages for the specified location.",
+        "x-ms-examples": {
+          "Get the subscription usages for specific location": {
+            "$ref": "./examples/GetHDInsightUsages.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/LocationParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./operations.json#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "OK response definition.",
+            "schema": {
+              "$ref": "#/definitions/UsagesListResult"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.HDInsight/locations/{location}/billingSpecs": {
+      "get": {
+        "tags": [
+          "Regions"
+        ],
+        "operationId": "Locations_ListBillingSpecs",
+        "description": "Lists the billingSpecs for the specified subscription and location.",
+        "x-ms-examples": {
+          "Get the subscription billingSpecs for the specified location": {
+            "$ref": "./examples/HDI_Locations_ListBillingSpecs.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/LocationParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./operations.json#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "OK response definition.",
+            "schema": {
+              "$ref": "#/definitions/BillingResponseListResult"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "VersionSpec": {
+      "description": "The version properties.",
+      "properties": {
+        "friendlyName": {
+          "type": "string",
+          "description": "The friendly name"
+        },
+        "displayName": {
+          "type": "string",
+          "description": "The display name"
+        },
+        "isDefault": {
+          "type": "string",
+          "description": "Whether or not the version is the default version."
+        },
+        "componentVersions": {
+          "type": "object",
+          "description": "The component version property.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "readOnly": true
+    },
+    "VersionsCapability": {
+      "description": "The version capability.",
+      "properties": {
+        "available": {
+          "description": "The list of version capabilities.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VersionSpec"
+          }
+        }
+      },
+      "readOnly": true
+    },
+    "RegionsCapability": {
+      "description": "The regions capability.",
+      "properties": {
+        "available": {
+          "description": "The list of region capabilities.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "readOnly": true
+    },
+    "VmSizesCapability": {
+      "description": "The virtual machine sizes capability.",
+      "properties": {
+        "available": {
+          "description": "The list of virtual machine size capabilities.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "readOnly": true
+    },
+    "VmSizeCompatibilityFilter": {
+      "description": "The virtual machine type compatibility filter.",
+      "properties": {
+        "FilterMode": {
+          "description": "The mode for the filter.",
+          "type": "string"
+        },
+        "Regions": {
+          "description": "The list of regions.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "ClusterFlavors": {
+          "description": "The list of cluster types available.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "NodeTypes": {
+          "description": "The list of node types.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "ClusterVersions": {
+          "description": "The list of cluster versions.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "vmsizes": {
+          "description": "The list of virtual machine sizes.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "readOnly": true
+    },
+    "RegionalQuotaCapability": {
+      "description": "The regional quota capacity.",
+      "properties": {
+        "region_name": {
+          "description": "The region name.",
+          "type": "string"
+        },
+        "cores_used": {
+          "description": "The number of cores used in the region.",
+          "type": "integer",
+          "format": "int64"
+        },
+        "cores_available": {
+          "description": "The number of cores available in the region.",
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "readOnly": true
+    },
+    "QuotaCapability": {
+      "description": "The regional quota capability.",
+      "properties": {
+        "cores_used": {
+          "description": "The number of cores used in the subscription.",
+          "type": "integer",
+          "format": "int64"
+        },
+        "max_cores_allowed": {
+          "description": "The number of cores that the subscription allowed.",
+          "type": "integer",
+          "format": "int64"
+        },
+        "regionalQuotas": {
+          "description": "The list of region quota capabilities.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RegionalQuotaCapability"
+          }
+        }
+      },
+      "readOnly": true
+    },
+    "CapabilitiesResult": {
+      "description": "The Get Capabilities operation response.",
+      "properties": {
+        "versions": {
+          "description": "The version capability.",
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/VersionsCapability"
+          }
+        },
+        "regions": {
+          "description": "The virtual machine size compatibility features.",
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/RegionsCapability"
+          }
+        },
+        "vmSizes": {
+          "description": "The virtual machine sizes.",
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/VmSizesCapability"
+          }
+        },
+        "vmSize_filters": {
+          "description": "The virtual machine size compatibility filters.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VmSizeCompatibilityFilter"
+          }
+        },
+        "features": {
+          "description": "The capability features.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "quota": {
+          "description": "The quota capability.",
+          "$ref": "#/definitions/QuotaCapability"
+        }
+      },
+      "readOnly": true
+    },
+    "LocalizedName": {
+      "description": "The details about the localizable name of a type of usage.",
+      "properties": {
+        "value": {
+          "description": "The name of the used resource.",
+          "type": "string"
+        },
+        "localizedValue": {
+          "description": "The localized name of the used resource.",
+          "type": "string"
+        }
+      }
+    },
+    "Usage": {
+      "description": "The details about the usage of a particular limited resource.",
+      "properties": {
+        "unit": {
+          "description": "The type of measurement for usage.",
+          "type": "string"
+        },
+        "currentValue": {
+          "description": "The current usage.",
+          "type": "integer"
+        },
+        "limit": {
+          "description": "The maximum allowed usage.",
+          "type": "integer"
+        },
+        "name": {
+          "description": "The details about the localizable name of the used resource.",
+          "$ref": "#/definitions/LocalizedName"
+        }
+      }
+    },
+    "UsagesListResult": {
+      "description": "The response for the operation to get regional usages for a subscription.",
+      "properties": {
+        "value": {
+          "description": "The list of usages.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Usage"
+          }
+        }
+      }
+    },
+    "BillingResponseListResult": {
+      "type": "object",
+      "description": "The response for the operation to get regional billingSpecs for a subscription.",
+      "properties": {
+        "vmSizes": {
+          "description": "The virtual machine sizes to include or exclude.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "vmSizeFilters": {
+          "description": "The virtual machine filtering mode. Effectively this can enabling or disabling the virtual machine sizes in a particular set.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VmSizeCompatibilityFilterV2"
+          }
+        },
+        "billingResources": {
+          "description": "The billing and managed disk billing resources for a region.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/BillingResources"
+          }
+        }
+      }
+    },
+    "VmSizeCompatibilityFilterV2": {
+      "type": "object",
+      "description": "This class represent a single filter object that defines a multidimensional set. The dimensions of this set are Regions, ClusterFlavors, NodeTypes and ClusterVersions. The constraint should be defined based on the following: FilterMode (Exclude vs Include), VMSizes (the vm sizes in affect of exclusion/inclusion) and the ordering of the Filters. Later filters override previous settings if conflicted.",
+      "properties": {
+        "filterMode": {
+          "description": "The filtering mode. Effectively this can enabling or disabling the VM sizes in a particular set.",
+          "type": "string",
+          "enum": [
+            "Exclude",
+            "Include"
+          ],
+          "x-ms-enum": {
+            "name": "FilterMode",
+            "modelAsString": true
+          }
+        },
+        "regions": {
+          "description": "The list of regions under the effect of the filter.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "clusterFlavors": {
+          "description": "The list of cluster flavors under the effect of the filter.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "nodeTypes": {
+          "description": "The list of node types affected by the filter.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "clusterVersions": {
+          "description": "The list of cluster versions affected in Major.Minor format.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "osType": {
+          "description": "The OSType affected, Windows or Linux.",
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "Windows",
+              "Linux"
+            ],
+            "x-ms-enum": {
+              "name": "OSType",
+              "modelAsString": false
+            }
+          }
+        },
+        "vmSizes": {
+          "description": "The list of virtual machine sizes to include or exclude.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "BillingResources": {
+      "type": "object",
+      "description": "The billing resources.",
+      "properties": {
+        "region": {
+          "description": "The region or location.",
+          "type": "string"
+        },
+        "billingMeters": {
+          "description": "The billing meter information.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/BillingMeters"
+          }
+        },
+        "diskBillingMeters": {
+          "description": "The managed disk billing information.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DiskBillingMeters"
+          }
+        }
+      }
+    },
+    "BillingMeters": {
+      "type": "object",
+      "description": "The billing meters.",
+      "properties": {
+        "meterParameter": {
+          "description": "The virtual machine sizes.",
+          "type": "string"
+        },
+        "meter": {
+          "description": "The HDInsight meter guid.",
+          "type": "string"
+        },
+        "unit": {
+          "description": "The unit of meter, VMHours or CoreHours.",
+          "type": "string"
+        }
+      }
+    },
+    "DiskBillingMeters": {
+      "type": "object",
+      "description": "The disk billing meters.",
+      "properties": {
+        "diskRpMeter": {
+          "description": "The managed disk meter guid.",
+          "type": "string"
+        },
+        "sku": {
+          "description": "The managed disk billing sku, P30 or S30.",
+          "type": "string"
+        },
+        "tier": {
+          "description": "The managed disk billing tier, Standard or Premium.",
+          "type": "string",
+          "enum": [
+            "Standard",
+            "Premium"
+          ],
+          "x-ms-enum": {
+            "name": "Tier",
+            "modelAsString": false
+          }
+        }
+      }
+    }
+  },
+  "parameters": {
+    "SubscriptionIdParameter": {
+      "name": "subscriptionId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call."
+    },
+    "LocationParameter": {
+      "name": "location",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The Azure location (region) for which to make the request.",
+      "x-ms-parameter-location": "method"
+    },
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "The HDInsight client API Version."
+    }
+  }
+}

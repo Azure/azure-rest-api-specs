@@ -4,21 +4,57 @@
 
 Configuration for generating Computer Vision SDK.
 
-The current release is `release_1_0`.
+The current release is `release_3_0`.
 
 ``` yaml
 
-tag: release_1_0
+tag: release_3_0
 add-credentials: true
 openapi-type: data-plane
 ```
 # Releases
 
-### Release 1.0
-These settings apply only when `--tag=release_1_0` is specified on the command line.
+### Release 2.0
+These settings apply only when `--tag=release_2_0` is specified on the command line.
 
-``` yaml $(tag) == 'release_1_0'
-input-file: stable/v1.0/ComputerVision.json
+``` yaml $(tag) == 'release_2_0'
+input-file:
+  - stable/v2.0/ComputerVision.json
+  - stable/v2.0/Ocr.json
+```
+
+### Release 2.1
+These settings apply only when `--tag=release_2_1` is specified on the command line.
+
+``` yaml $(tag) == 'release_2_1'
+input-file:
+  - stable/v2.1/ComputerVision.json
+  - stable/v2.1/Ocr.json
+```
+
+### Release 3.0-preview
+These settings apply only when `--tag=release_3_0_preview` is specified on the command line.
+
+``` yaml $(tag) == 'release_3_0_preview'
+input-file:
+  - preview/v3.0-preview/Ocr.json
+```
+
+### Release 3.0
+These settings apply only when `--tag=release_3_0` is specified on the command line.
+
+``` yaml $(tag) == 'release_3_0'
+input-file:
+  - stable/v3.0/ComputerVision.json
+  - stable/v3.0/Ocr.json
+```
+
+### Release 3.1-preview.2
+These settings apply only when `--tag=release_3_1_preview_2` is specified on the command line.
+
+``` yaml $(tag) == 'release_3_1_preview_2'
+input-file:
+  - preview/v3.1-preview.2/Ocr.json
 ```
 
 ## Swagger to SDK
@@ -29,8 +65,9 @@ This is not used by Autorest itself.
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
   - repo: azure-sdk-for-python
-  - repo: azure-libraries-for-java
+  - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
+  - repo: azure-sdk-for-js
   - repo: azure-sdk-for-node
   - repo: azure-sdk-for-ruby
     after_scripts:
@@ -46,8 +83,15 @@ csharp:
   license-header: MICROSOFT_MIT_NO_VERSION
   azure-arm: false
   namespace: Microsoft.Azure.CognitiveServices.Vision.ComputerVision
-  output-folder: $(csharp-sdks-folder)/CognitiveServices/dataPlane/Vision/ComputerVision/ComputerVision/Generated
+  output-folder: $(csharp-sdks-folder)/CognitiveServices/Vision.ComputerVision/src/Generated
   clear-output-folder: true
+
+directive:
+  from: source-file-csharp
+  where: $
+  transform: >
+    $ = $.replace( /TextRecognitionMode mode, string url,/g, "string url, TextRecognitionMode mode," );
+    $ = $.replace( /mode, url,/g, "url, mode," );
 ```
 
 ## Python
@@ -65,45 +109,27 @@ python:
   namespace: azure.cognitiveservices.vision.computervision
   package-name: azure-cognitiveservices-vision-computervision
   clear-output-folder: true
+
+directive:
+  from: source-file-python
+  where: $
+  transform: >
+    $ = $.replace( /self, mode, url,/g, "self, url, mode," );
 ```
 ``` yaml $(python) && $(python-mode) == 'update'
 python:
   no-namespace-folders: true
-  output-folder: $(python-sdks-folder)/azure-cognitiveservices-vision-computervision/azure/cognitiveservices/vision/computervision
+  output-folder: $(python-sdks-folder)/cognitiveservices/azure-cognitiveservices-vision-computervision/azure/cognitiveservices/vision/computervision
 ```
 ``` yaml $(python) && $(python-mode) == 'create'
 python:
   basic-setup-py: true
-  output-folder: $(python-sdks-folder)/azure-cognitiveservices-vision-computervision
+  output-folder: $(python-sdks-folder)/cognitiveservices/azure-cognitiveservices-vision-computervision
 ```
 
 ## Go
 
-These settings apply only when `--go` is specified on the command line.
-
-``` yaml $(go)
-go:
-  license-header: MICROSOFT_APACHE_NO_VERSION
-  namespace: computervision
-  clear-output-folder: true
-```
-
-### Go multi-api
-
-``` yaml $(go) && $(multiapi)
-batch:
-  - tag: release_1_0
-```
-
-### Tag: release_1_0 and go
-
-These settings apply only when `--tag=release_1_0 --go` is specified on the command line.
-Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
-
-``` yaml $(tag) == 'release_1_0' && $(go)
-output-folder: $(go-sdk-folder)/services/cognitiveservices/v1.0/computervision
-```
-
+See configuration in [readme.go.md](./readme.go.md)
 
 ## Java
 
@@ -116,7 +142,47 @@ java:
   namespace: com.microsoft.azure.cognitiveservices.vision.computervision
   license-header: MICROSOFT_MIT_NO_CODEGEN
   payload-flattening-threshold: 1
-  output-folder: $(azure-libraries-for-java-folder)/azure-cognitiveservices/vision/computervision
+  output-folder: $(azure-libraries-for-java-folder)/cognitiveservices/data-plane/vision/computervision
   with-optional-parameters: true
   with-single-async-method: true
+  with-default-group-name: ComputerVision
+
+directive:
+  from: source-file-java
+  where: $
+  transform: >
+    $ = $.replace( /TextRecognitionMode mode, String url/g, "String url, TextRecognitionMode mode" );
+    $ = $.replace( /recognizeTextWithServiceResponseAsync\(mode, url\)/g, "recognizeTextWithServiceResponseAsync(url, mode)" )
 ```
+
+## Multi-API/Profile support for AutoRest v3 generators 
+
+AutoRest V3 generators require the use of `--tag=all-api-versions` to select api files.
+
+This block is updated by an automatic script. Edits may be lost!
+
+``` yaml $(tag) == 'all-api-versions' /* autogenerated */
+# include the azure profile definitions from the standard location
+require: $(this-folder)/../../../../profiles/readme.md
+
+# all the input files across all versions
+input-file:
+  - $(this-folder)/stable/v2.0/ComputerVision.json
+  - $(this-folder)/stable/v2.0/Ocr.json
+  - $(this-folder)/stable/v2.1/ComputerVision.json
+  - $(this-folder)/stable/v2.1/Ocr.json
+  - $(this-folder)/preview/v3.0-preview/Ocr.json
+  - $(this-folder)/stable/v3.0/ComputerVision.json
+  - $(this-folder)/stable/v3.0/Ocr.json
+  - $(this-folder)/preview/v3.1-preview.2/Ocr.json
+
+```
+
+If there are files that should not be in the `all-api-versions` set, 
+uncomment the  `exclude-file` section below and add the file paths.
+
+``` yaml $(tag) == 'all-api-versions'
+#exclude-file: 
+#  - $(this-folder)/Microsoft.Example/stable/2010-01-01/somefile.json
+```
+

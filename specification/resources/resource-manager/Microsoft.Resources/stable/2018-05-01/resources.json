@@ -34,6 +34,31 @@
     }
   },
   "paths": {
+    "/providers/Microsoft.Resources/operations": {
+      "get": {
+        "tags": [
+          "Operations"
+        ],
+        "operationId": "Operations_List",
+        "description": "Lists all of the available Microsoft.Resources REST API operations.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/OperationListResult"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Resources/deployments/{deploymentName}": {
       "delete": {
         "tags": [
@@ -496,6 +521,14 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Create a deployment that will redeploy the last successful deployment on failure": {
+            "$ref": "./examples/PutDeploymentWithOnErrorDeploymentLastSuccessful.json"
+          },
+          "Create a deployment that will redeploy another deployment on failure": {
+            "$ref": "./examples/PutDeploymentWithOnErrorDeploymentSpecificDeployment.json"
+          }
+        },
         "x-ms-long-running-operation": true
       },
       "get": {
@@ -768,7 +801,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK - Returns informatin about the resource provider.",
+            "description": "OK - Returns information about the resource provider.",
             "schema": {
               "$ref": "#/definitions/Provider"
             }
@@ -913,14 +946,14 @@
             "in": "query",
             "required": false,
             "type": "string",
-            "description": "The filter to apply on the operation."
+            "description": "The filter to apply on the operation.<br><br>The properties you can use for eq (equals) or ne (not equals) are: location, resourceType, name, resourceGroup, identity, identity/principalId, plan, plan/publisher, plan/product, plan/name, plan/version, and plan/promotionCode.<br><br>For example, to filter by a resource type, use: $filter=resourceType eq 'Microsoft.Network/virtualNetworks'<br><br>You can use substringof(value, property) in the filter. The properties you can use for substring are: name and resourceGroup.<br><br>For example, to get all resources with 'demo' anywhere in the name, use: $filter=substringof('demo', name)<br><br>You can link more than one substringof together by adding and/or operators.<br><br>You can filter by tag names and values. For example, to filter for a tag name and value, use $filter=tagName eq 'tag1' and tagValue eq 'Value1'<br><br>You can use some properties together when filtering. The combinations you can use are: substringof and/or resourceType, plan and plan/publisher and plan/name, identity and identity/principalId."
           },
           {
             "name": "$expand",
             "in": "query",
             "required": false,
             "type": "string",
-            "description": "The $expand query parameter"
+            "description": "Comma-separated list of additional properties to be included in the response. Valid values include `createdTime`, `changedTime` and `provisioningState`. For example, `$expand=createdTime,changedTime`."
           },
           {
             "name": "$top",
@@ -989,6 +1022,11 @@
         "tags": [
           "ResourceGroups"
         ],
+        "x-ms-examples": {
+          "Create or update a resource group": {
+            "$ref": "./examples/CreateResourceGroup.json"
+          }
+        },
         "operationId": "ResourceGroups_CreateOrUpdate",
         "description": "Creates or updates a resource group.",
         "parameters": [
@@ -997,7 +1035,7 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the resource group to create or update.",
+            "description": "The name of the resource group to create or update. Can include alphanumeric, underscore, parentheses, hyphen, period (except at end), and Unicode characters that match the allowed characters.",
             "pattern": "^[-\\w\\._\\(\\)]+$",
             "minLength": 1,
             "maxLength": 90
@@ -1202,7 +1240,7 @@
             "in": "query",
             "required": false,
             "type": "string",
-            "description": "The filter to apply on the operation."
+            "description": "The filter to apply on the operation.<br><br>You can filter by tag names and values. For example, to filter for a tag name and value, use $filter=tagName eq 'tag1' and tagValue eq 'Value1'"
           },
           {
             "name": "$top",
@@ -1341,14 +1379,14 @@
             "in": "query",
             "required": false,
             "type": "string",
-            "description": "The filter to apply on the operation."
+            "description": "The filter to apply on the operation.<br><br>The properties you can use for eq (equals) or ne (not equals) are: location, resourceType, name, resourceGroup, identity, identity/principalId, plan, plan/publisher, plan/product, plan/name, plan/version, and plan/promotionCode.<br><br>For example, to filter by a resource type, use: $filter=resourceType eq 'Microsoft.Network/virtualNetworks'<br><br>You can use substringof(value, property) in the filter. The properties you can use for substring are: name and resourceGroup.<br><br>For example, to get all resources with 'demo' anywhere in the name, use: $filter=substringof('demo', name)<br><br>You can link more than one substringof together by adding and/or operators.<br><br>You can filter by tag names and values. For example, to filter for a tag name and value, use $filter=tagName eq 'tag1' and tagValue eq 'Value1'<br><br>You can use some properties together when filtering. The combinations you can use are: substringof and/or resourceType, plan and plan/publisher and plan/name, identity and identity/principalId."
           },
           {
             "name": "$expand",
             "in": "query",
             "required": false,
             "type": "string",
-            "description": "The $expand query parameter."
+            "description": "Comma-separated list of additional properties to be included in the response. Valid values include `createdTime`, `changedTime` and `provisioningState`. For example, `$expand=createdTime,changedTime`."
           },
           {
             "name": "$top",
@@ -2325,6 +2363,48 @@
           "nextLinkName": "nextLink"
         }
       }
+    },
+    "/providers/Microsoft.Resources/calculateTemplateHash": {
+      "post": {
+        "tags": [
+          "Deployments"
+        ],
+        "operationId": "Deployments_CalculateTemplateHash",
+        "description": "Calculate the hash of the given template.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "template",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object"
+            },
+            "description": "The template provided to calculate hash."
+          }
+        ],
+        "x-ms-examples": {
+          "Calculate template hash": {
+            "$ref": "./examples/CalculateTemplateHash.json"
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK - Returns the hash.",
+            "schema": {
+              "$ref": "#/definitions/TemplateHashResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -2397,7 +2477,7 @@
       "required": [
         "uri"
       ],
-      "description": "Entity representing the reference to the deployment paramaters."
+      "description": "Entity representing the reference to the deployment parameters."
     },
     "DeploymentProperties": {
       "properties": {
@@ -2475,6 +2555,15 @@
         }
       },
       "description": "The deployment export result. "
+    },
+    "CloudError": {
+      "x-ms-external": true,
+      "properties": {
+        "error": {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ErrorResponse"
+        }
+      },
+      "description": "An error response for a resource management request."
     },
     "ResourceManagementErrorWithDetails": {
       "properties": {
@@ -2662,7 +2751,7 @@
         },
         "outputs": {
           "type": "object",
-          "description": "Key/value pairs that represent deploymentoutput."
+          "description": "Key/value pairs that represent deployment output."
         },
         "providers": {
           "type": "array",
@@ -2785,8 +2874,14 @@
           "description": "The ID of the deployment."
         },
         "name": {
+          "readOnly": true,
           "type": "string",
           "description": "The name of the deployment."
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The type of the deployment."
         },
         "location": {
           "type": "string",
@@ -2797,9 +2892,6 @@
           "description": "Deployment properties."
         }
       },
-      "required": [
-        "name"
-      ],
       "x-ms-azure-resource": true,
       "description": "Deployment information."
     },
@@ -2868,6 +2960,33 @@
       "allOf": [
         {
           "$ref": "#/definitions/Resource"
+        }
+      ],
+      "description": "Resource information."
+    },
+    "GenericResourceExpanded": {
+      "properties": {
+        "createdTime": {
+          "readOnly": true,
+          "type": "string",
+          "format": "date-time",
+          "description": "The created time of the resource. This is only present if requested via the $expand query parameter."
+        },
+        "changedTime": {
+          "readOnly": true,
+          "type": "string",
+          "format": "date-time",
+          "description": "The changed time of the resource. This is only present if requested via the $expand query parameter."
+        },
+        "provisioningState": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The provisioning state of the resource. This is only present if requested via the $expand query parameter."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/GenericResource"
         }
       ],
       "description": "Resource information."
@@ -2952,6 +3071,25 @@
             "name": "ResourceIdentityType",
             "modelAsString": false
           }
+        },
+        "userAssignedIdentities": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "object",
+            "properties": {
+              "principalId": {
+                "readOnly": true,
+                "type": "string",
+                "description": "The principal id of user assigned identity."
+              },
+              "clientId": {
+                "readOnly": true,
+                "type": "string",
+                "description": "The client id of user assigned identity."
+              }
+            }
+          },
+          "description": "The list of user identities associated with the resource. The user identity dictionary key references will be ARM resource ids in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}'."
         }
       },
       "description": "Identity for the resource."
@@ -2961,7 +3099,7 @@
         "value": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/GenericResource"
+            "$ref": "#/definitions/GenericResourceExpanded"
           },
           "description": "An array of resources."
         },
@@ -2981,8 +3119,14 @@
           "description": "The ID of the resource group."
         },
         "name": {
+          "readOnly": true,
           "type": "string",
           "description": "The name of the resource group."
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The type of the resource group."
         },
         "properties": {
           "$ref": "#/definitions/ResourceGroupProperties"
@@ -3084,11 +3228,11 @@
           "items": {
             "type": "string"
           },
-          "description": "The IDs of the resources. The only supported string currently is '*' (all resources). Future updates will support exporting specific resources."
+          "description": "The IDs of the resources to filter the export by. To export all resources, supply an array with single entry '*'."
         },
         "options": {
           "type": "string",
-          "description": "The export template options. Supported values include 'IncludeParameterDefaultValue', 'IncludeComments' or 'IncludeParameterDefaultValue, IncludeComments"
+          "description": "The export template options. A CSV-formatted list containing zero or more of the following: 'IncludeParameterDefaultValue', 'IncludeComments', 'SkipResourceNameParameterization', 'SkipAllParameterization'"
         }
       },
       "description": "Export resource group template request parameters."
@@ -3291,7 +3435,7 @@
         },
         "operation": {
           "type": "string",
-          "description": "Operation."
+          "description": "Resource provider operation."
         },
         "description": {
           "type": "string",
@@ -3330,7 +3474,7 @@
         }
       },
       "x-ms-azure-resource": true,
-      "description": "Resource."
+      "description": "Specified resource."
     },
     "SubResource": {
       "properties": {
@@ -3354,6 +3498,66 @@
         }
       },
       "description": "Resource group export result."
+    },
+    "Operation": {
+      "description": "Microsoft.Resources operation",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Operation name: {provider}/{resource}/{operation}",
+          "type": "string"
+        },
+        "display": {
+          "description": "The object that represents the operation.",
+          "properties": {
+            "provider": {
+              "description": "Service provider: Microsoft.Resources",
+              "type": "string"
+            },
+            "resource": {
+              "description": "Resource on which the operation is performed: Profile, endpoint, etc.",
+              "type": "string"
+            },
+            "operation": {
+              "description": "Operation type: Read, write, delete, etc.",
+              "type": "string"
+            },
+            "description": {
+              "description": "Description of the operation.",
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "OperationListResult": {
+      "description": "Result of the request to list Microsoft.Resources operations. It contains a list of operations and a URL link to get the next set of results.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Operation"
+          },
+          "description": "List of Microsoft.Resources operations."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "URL to get the next set of operation list results if there are any."
+        }
+      }
+    },
+    "TemplateHashResult": {
+      "description": "Result of the request to calculate template hash. It contains a string of minified template and its hash.",
+      "properties": {
+        "minifiedTemplate": {
+          "type": "string",
+          "description": "The minified template string."
+        },
+        "templateHash": {
+          "type": "string",
+          "description": "The template hash."
+        }
+      }
     }
   },
   "parameters": {

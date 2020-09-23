@@ -4,10 +4,10 @@
 
 This is the AutoRest configuration file for Advisor.
 
-
-
 ---
+
 ## Getting Started
+
 To build the SDK for Advisor, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
 
 > `autorest`
@@ -15,21 +15,37 @@ To build the SDK for Advisor, simply [Install AutoRest](https://aka.ms/autorest/
 To see additional help and options, run:
 
 > `autorest --help`
+
 ---
 
 ## Configuration
 
-
-
 ### Basic Information
+
 These are the global settings for the Advisor API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2017-04
+tag: package-2020-01
 ```
 
+### Tag: package-2020-07-preview
 
+These settings apply only when `--tag=package-2020-07-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2020-07-preview'
+input-file:
+  - Microsoft.Advisor/preview/2020-07-01-preview/advisor.json
+```
+
+### Tag: package-2020-01
+
+These settings apply only when `--tag=package-2020-01` is specified on the command line.
+
+```yaml $(tag) == 'package-2020-01'
+input-file:
+  - Microsoft.Advisor/stable/2020-01-01/advisor.json
+```
 ### Tag: package-2017-04
 
 These settings apply only when `--tag=package-2017-04` is specified on the command line.
@@ -57,10 +73,9 @@ input-file:
 - Microsoft.Advisor/preview/2016-07-12-preview/advisor.json
 ```
 
-
 ---
-# Code Generation
 
+# Code Generation
 
 ## Swagger to SDK
 
@@ -69,12 +84,16 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
+  - repo: azure-sdk-for-net
   - repo: azure-sdk-for-python
-  - repo: azure-libraries-for-java
+  - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
+  - repo: azure-sdk-for-js
   - repo: azure-sdk-for-node
+  - repo: azure-resource-manager-schemas
+    after_scripts:
+      - node sdkauto_afterscript.js advisor/resource-manager
 ```
-
 
 ## Python
 
@@ -93,77 +112,43 @@ python:
   package-version: 1.0.1
   clear-output-folder: true
 ```
+
 ``` yaml $(python) && $(python-mode) == 'update'
 python:
   no-namespace-folders: true
-  output-folder: $(python-sdks-folder)/azure-mgmt-advisor/azure/mgmt/advisor
+  output-folder: $(python-sdks-folder)/advisor/azure-mgmt-advisor/azure/mgmt/advisor
 ```
+
 ``` yaml $(python) && $(python-mode) == 'create'
 python:
   basic-setup-py: true
-  output-folder: $(python-sdks-folder)/azure-mgmt-advisor
+  output-folder: $(python-sdks-folder)/advisor/azure-mgmt-advisor
 ```
-
 
 ## Go
 
-These settings apply only when `--go` is specified on the command line.
+See configuration in [readme.go.md](./readme.go.md)
 
-``` yaml $(go)
-go:
-  license-header: MICROSOFT_APACHE_NO_VERSION
-  namespace: advisor
+## C#
+
+These settings apply only when `--csharp` is specified on the command line.
+Please also specify `--csharp-sdks-folder=<path to "SDKs" directory of your azure-sdk-for-net clone>`.
+
+``` yaml $(csharp)
+csharp:
+  azure-arm: true
+  payload-flattening-threshold: 1
+  license-header: MICROSOFT_MIT_NO_VERSION
+  namespace: Microsoft.Azure.Management.Advisor
+  output-folder: $(csharp-sdks-folder)/advisor/Microsoft.Azure.Management.Advisor/src/Generated
   clear-output-folder: true
 ```
 
-### Go multi-api
-
-``` yaml $(go) && $(multiapi)
-batch:
-  - tag: package-2017-04
-  - tag: package-2017-03
-  - tag: package-2016-07-preview
-```
-
-### Tag: package-2017-04 and go
-
-These settings apply only when `--tag=package-2017-04 --go` is specified on the command line.
-Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
-
-``` yaml $(tag) == 'package-2017-04' && $(go)
-output-folder: $(go-sdk-folder)/services/advisor/mgmt/2017-04-19/advisor
-```
-
-### Tag: package-2017-03 and go
-
-These settings apply only when `--tag=package-2017-03 --go` is specified on the command line.
-Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
-
-``` yaml $(tag) == 'package-2017-03' && $(go)
-output-folder: $(go-sdk-folder)/services/advisor/mgmt/2017-03-31/advisor
-```
-
-### Tag: package-2016-07-preview and go
-
-These settings apply only when `--tag=package-2016-07-preview --go` is specified on the command line.
-Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
-
-``` yaml $(tag) == 'package-2016-07-preview' && $(go)
-output-folder: $(go-sdk-folder)/services/preview/advisor/mgmt/2016-07-12-preview/advisor
-```
-
-
 ## Java
 
-These settings apply only when `--java` is specified on the command line.
-Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-libraries-for-java clone>`.
+See configuration in [readme.java.md](./readme.java.md)
 
-``` yaml $(java)
-java:
-  azure-arm: true
-  fluent: true
-  namespace: com.microsoft.azure.management.advisor
-  license-header: MICROSOFT_MIT_NO_CODEGEN
-  payload-flattening-threshold: 1
-  output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-advisor
-```
+## AzureResourceSchema
+
+See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
+

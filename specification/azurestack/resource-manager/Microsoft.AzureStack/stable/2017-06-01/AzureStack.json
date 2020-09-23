@@ -1,220 +1,418 @@
 {
-    "swagger": "2.0",
-    "info": {
-        "version": "2017-06-01",
-        "title": "Azure Stack Azure Bridge Client"
-    },
-    "host": "management.azure.com",
-    "schemes": [
-        "https"
-    ],
-    "consumes": [
-        "application/json"
-    ],
-    "produces": [
-        "application/json"
-    ],
-    "paths": {
-        "/providers/Microsoft.AzureStack/operations": {
-            "get": {
-                "x-ms-examples": {
-                    "Returns the list of supported REST operations.": {
-                        "$ref": "./examples/Operation/List.json"
-                    }
-                },
-                "description": "Returns the list of supported REST operations.",
-                "tags": [
-                    "AzureStack"
-                ],
-                "operationId": "Operations_List",
-                "parameters": [
-                    {
-                        "$ref": "#/parameters/ApiVersionParameter"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "$ref": "#/definitions/OperationList"
-                        }
-                    }
-                },
-                "x-ms-pageable": {
-                    "nextLinkName": "nextLink"
-                }
+  "swagger": "2.0",
+  "info": {
+    "version": "2017-06-01",
+    "title": "Azure Stack Azure Bridge Client"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/providers/Microsoft.AzureStack/operations": {
+      "get": {
+        "x-ms-examples": {
+          "Returns the list of supported REST operations.": {
+            "$ref": "./examples/Operation/List.json"
+          }
+        },
+        "description": "Returns the list of supported REST operations.",
+        "tags": [
+          "AzureStack"
+        ],
+        "operationId": "Operations_List",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/OperationList"
             }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
+      }
     },
-    "definitions": {
-        "Resource": {
-            "description": "Base resource object.",
-            "type": "object",
-            "properties": {
-                "id": {
-                    "readOnly": true,
-                    "description": "ID of the resource.",
-                    "type": "string"
-                },
-                "name": {
-                    "readOnly": true,
-                    "description": "Name of the resource.",
-                    "type": "string"
-                },
-                "type": {
-                    "readOnly": true,
-                    "description": "Type of Resource.",
-                    "type": "string"
-                },
-                "location": {
-                    "description": "Location of the resource.",
-                    "type": "string",
-                    "enum": [
-                        "global"
-                    ],
-                    "x-ms-enum": {
-                        "name": "Location",
-                        "modelAsString": true
-                    },
-                    "x-ms-mutability": [
-                        "create",
-                        "read"
-                    ]
-                },
-                "tags": {
-                    "description": "Custom tags for the resource.",
-                    "type": "object",
-                    "additionalProperties": {
-                        "type": "string"
-                    }
-                },
-                "etag": {
-                    "description": "The entity tag used for optimistic concurency when modifying the resource.",
-                    "type": "string"
-                }
-            },
-            "required": [
-                "location"
-            ],
-            "x-ms-azure-resource": true
+    "/providers/Microsoft.AzureStack/cloudManifestFiles": {
+      "get": {
+        "x-ms-examples": {
+          "Returns the properties of a cloud specific manifest file with latest version.": {
+            "$ref": "examples/CloudManifestFile/List.json"
+          }
         },
-        "ProvisioningState": {
-            "description": "The provisioning state of the resource.",
-            "enum": [
-                "Creating",
-                "Failed",
-                "Succeeded",
-                "Canceled"
-            ],
-            "type": "string",
-            "x-ms-enum": {
-                "name": "ProvisioningState"
+        "tags": [
+          "AzureStack"
+        ],
+        "description": "Returns a cloud specific manifest JSON file with latest version.",
+        "operationId": "CloudManifestFile_List",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/CloudManifestFileResponse"
             }
-        },
-        "Operation": {
-            "description": "Describes the supported REST operation.",
-            "properties": {
-                "name": {
-                    "description": "The name of the operation being performed on this particular object.",
-                    "type": "string"
-                },
-                "display": {
-                    "description": "Contains the localized display information for this particular operation or action.",
-                    "$ref": "#/definitions/Display"
-                },
-                "origin" : {
-                    "description" : "The intended executor of the operation.",
-                    "type" : "string"
-                }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
             }
-        },
-        "Display": {
-            "description": "Contains the localized display information for this particular operation or action.",
-            "properties": {
-                "provider": {
-                    "description": "The localized, friendly version of the resource provider name.",
-                    "type": "string"
-                },
-                "resource": {
-                    "description": "The localized, friendly version of the resource type related to this action or operation; the resource type should match the public documentation for the resource provider.",
-                    "type": "string"
-                },
-                "operation": {
-                    "description": "The localized, friendly name for the operation. Use the name as it will displayed to the user.",
-                    "type": "string"
-                },
-                "description": {
-                    "description": "The localized, friendly description for the operation. The description will be displayed to the user. It should be thorough and concise for used in both tooltips and detailed views.",
-                    "type": "string"
-                }
-            }
-        },
-        "OperationList": {
-            "description": "List of Operations",
-            "properties": {
-                "value": {
-                    "description": "Array of operations",
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/Operation"
-                    }
-                },
-                "nextLink": {
-                    "description": "URI to the next page of operations.",
-                    "type": "string"
-                }
-            }
+          }
         }
+      }
     },
-    "parameters": {
-        "SubscriptionIdParameter": {
-            "name": "subscriptionId",
+    "/providers/Microsoft.AzureStack/cloudManifestFiles/{verificationVersion}": {
+      "get": {
+        "x-ms-examples": {
+          "Returns the properties of a cloud specific manifest file.": {
+            "$ref": "examples/CloudManifestFile/Get.json"
+          }
+        },
+        "tags": [
+          "AzureStack"
+        ],
+        "description": "Returns a cloud specific manifest JSON file.",
+        "operationId": "CloudManifestFile_Get",
+        "parameters": [
+          {
+            "name": "verificationVersion",
             "in": "path",
-            "description": "Subscription credentials that uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.",
+            "description": "Signing verification key version.",
             "required": true,
             "type": "string"
-        },
-        "ApiVersionParameter": {
-            "name": "api-version",
+          },
+          {
+            "name": "versionCreationDate",
             "in": "query",
-            "description": "Client API Version.",
-            "required": true,
-            "type": "string",
-            "default": "2017-06-01"
-        },
-        "ResourceGroupNameParameter": {
-            "description": "Name of the resource group.",
-            "name": "resourceGroup",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "x-ms-parameter-location": "method"
-        },
-        "RegistrationNameParameter": {
-            "description": "Name of the Azure Stack registration.",
-            "name": "registrationName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "x-ms-parameter-location": "method"
-        }
-    },
-    "securityDefinitions": {
-        "azure_auth": {
-            "type": "oauth2",
-            "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
-            "flow": "implicit",
-            "description": "Authorization uses an Azure Active Directory OAuth2 flow.",
-            "scopes": {
-                "user_impersonation": "impersonate your user account"
+            "description": "Signing verification key version creation date.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/CloudManifestFileResponse"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
         }
+      }
+    }
+  },
+  "definitions": {
+    "Resource": {
+      "description": "Base resource object.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "readOnly": true,
+          "description": "ID of the resource.",
+          "type": "string"
+        },
+        "name": {
+          "readOnly": true,
+          "description": "Name of the resource.",
+          "type": "string"
+        },
+        "type": {
+          "readOnly": true,
+          "description": "Type of Resource.",
+          "type": "string"
+        },
+        "etag": {
+          "description": "The entity tag used for optimistic concurrency when modifying the resource.",
+          "type": "string"
+        }
+      },
+      "x-ms-azure-resource": true
     },
-    "security": [
-        {
-            "azure_auth": [
-                "user_impersonation"
-            ]
+    "TrackedResource": {
+      "description": "Base resource object.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "readOnly": true,
+          "description": "ID of the resource.",
+          "type": "string"
+        },
+        "name": {
+          "readOnly": true,
+          "description": "Name of the resource.",
+          "type": "string"
+        },
+        "type": {
+          "readOnly": true,
+          "description": "Type of Resource.",
+          "type": "string"
+        },
+        "location": {
+          "description": "Location of the resource.",
+          "type": "string",
+          "enum": [
+            "global"
+          ],
+          "x-ms-enum": {
+            "name": "Location",
+            "modelAsString": true
+          },
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "tags": {
+          "description": "Custom tags for the resource.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "etag": {
+          "description": "The entity tag used for optimistic concurrency when modifying the resource.",
+          "type": "string"
         }
-    ]
+      },
+      "required": [
+        "location"
+      ],
+      "x-ms-azure-resource": true
+    },
+    "ProvisioningState": {
+      "description": "The provisioning state of the resource.",
+      "enum": [
+        "Creating",
+        "Failed",
+        "Succeeded",
+        "Canceled"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "ProvisioningState"
+      }
+    },
+    "Operation": {
+      "description": "Describes the supported REST operation.",
+      "properties": {
+        "name": {
+          "description": "The name of the operation being performed on this particular object.",
+          "type": "string"
+        },
+        "display": {
+          "description": "Contains the localized display information for this particular operation or action.",
+          "$ref": "#/definitions/Display"
+        },
+        "origin": {
+          "description": "The intended executor of the operation.",
+          "type": "string"
+        }
+      }
+    },
+    "Display": {
+      "description": "Contains the localized display information for this particular operation or action.",
+      "properties": {
+        "provider": {
+          "description": "The localized, friendly version of the resource provider name.",
+          "type": "string"
+        },
+        "resource": {
+          "description": "The localized, friendly version of the resource type related to this action or operation; the resource type should match the public documentation for the resource provider.",
+          "type": "string"
+        },
+        "operation": {
+          "description": "The localized, friendly name for the operation. Use the name as it will displayed to the user.",
+          "type": "string"
+        },
+        "description": {
+          "description": "The localized, friendly description for the operation. The description will be displayed to the user. It should be thorough and concise for used in both tooltips and detailed views.",
+          "type": "string"
+        }
+      }
+    },
+    "OperationList": {
+      "description": "List of Operations",
+      "properties": {
+        "value": {
+          "description": "Array of operations",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Operation"
+          }
+        },
+        "nextLink": {
+          "description": "URI to the next page of operations.",
+          "type": "string"
+        }
+      }
+    },
+    "CloudManifestFileResponse": {
+      "description": "Cloud specific manifest GET response.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "description": "Cloud specific manifest data.",
+          "$ref": "#/definitions/CloudManifestFileProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ]
+    },
+    "CloudManifestFileProperties": {
+      "description": "Cloud specific manifest JSON properties.",
+      "type": "object",
+      "properties": {
+        "deploymentData": {
+          "description": "Cloud specific manifest data.",
+          "$ref": "#/definitions/CloudManifestFileDeploymentData"
+        },
+        "signature": {
+          "description": "Signature of the cloud specific manifest data.",
+          "type": "string"
+        }
+      }
+    },
+    "CloudManifestFileDeploymentData": {
+      "description": "Cloud specific manifest data for AzureStack deployment.",
+      "type": "object",
+      "properties": {
+        "externalDsmsCertificates": {
+          "description": "Dsms external certificates.",
+          "type": "string"
+        },
+        "customCloudVerificationKey": {
+          "description": "Signing verification public key.",
+          "type": "string"
+        },
+        "customEnvironmentEndpoints": {
+          "description": "Environment endpoints.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/CloudManifestFileEnvironmentEndpoints"
+        }
+      }
+    },
+    "CloudManifestFileEnvironmentEndpoints": {
+      "description": "Cloud specific environment endpoints for AzureStack deployment.",
+      "type": "object",
+      "properties": {
+        "customCloudArmEndpoint": {
+          "description": "ARM endpoint.",
+          "type": "string"
+        },
+        "externalDsmsEndpoint": {
+          "description": "Dsms endpoint.",
+          "type": "string"
+        }
+      }
+    },
+    "ErrorDetails": {
+      "description": "The details of the error.",
+      "properties": {
+        "code": {
+          "description": "Error code.",
+          "type": "string",
+          "readOnly": true
+        },
+        "message": {
+          "description": "Error message indicating why the operation failed.",
+          "type": "string",
+          "readOnly": true
+        },
+        "target": {
+          "description": "The target of the particular error.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "ErrorResponse": {
+      "description": "Error response indicates that the service is not able to process the incoming request. The reason is provided in the error message.",
+      "type": "object",
+      "properties": {
+        "error": {
+          "description": "The details of the error.",
+          "$ref": "#/definitions/ErrorDetails"
+        }
+      }
+    }
+  },
+  "parameters": {
+    "SubscriptionIdParameter": {
+      "name": "subscriptionId",
+      "in": "path",
+      "description": "Subscription credentials that uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.",
+      "required": true,
+      "type": "string"
+    },
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "description": "Client API Version.",
+      "required": true,
+      "type": "string",
+      "default": "2017-06-01"
+    },
+    "ResourceGroupNameParameter": {
+      "description": "Name of the resource group.",
+      "name": "resourceGroup",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "RegistrationNameParameter": {
+      "description": "Name of the Azure Stack registration.",
+      "name": "registrationName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Authorization uses an Azure Active Directory OAuth2 flow.",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ]
 }

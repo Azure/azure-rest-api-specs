@@ -24,14 +24,16 @@
         "description": "Gets a database's threat detection policy.",
         "operationId": "DatabaseThreatDetectionPolicies_Get",
         "x-ms-examples": {
-          "Get database security alert policy": { "$ref": "./examples/DatabaseSecurityAlertGet.json" }
+          "Get database security alert policy": {
+            "$ref": "./examples/DatabaseSecurityAlertGet.json"
+          }
         },
         "parameters": [
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ResourceGroupParameter"
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
           },
           {
             "$ref": "#/parameters/ServerNameParameter"
@@ -48,7 +50,9 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "enum": ["default"],
+            "enum": [
+              "default"
+            ],
             "description": "The name of the security alert policy.",
             "x-ms-enum": {
               "modelAsString": true,
@@ -56,7 +60,7 @@
             }
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -78,15 +82,19 @@
         "description": "Creates or updates a database's threat detection policy.",
         "operationId": "DatabaseThreatDetectionPolicies_CreateOrUpdate",
         "x-ms-examples": {
-          "Create database security alert policy min": { "$ref": "./examples/DatabaseSecurityAlertCreateMin.json" },
-          "Create database security alert policy max": { "$ref": "./examples/DatabaseSecurityAlertCreateMax.json" }
+          "Create database security alert policy min": {
+            "$ref": "./examples/DatabaseSecurityAlertCreateMin.json"
+          },
+          "Create database security alert policy max": {
+            "$ref": "./examples/DatabaseSecurityAlertCreateMax.json"
+          }
         },
         "parameters": [
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ResourceGroupParameter"
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
           },
           {
             "$ref": "#/parameters/ServerNameParameter"
@@ -103,7 +111,9 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "enum": ["default"],
+            "enum": [
+              "default"
+            ],
             "description": "The name of the security alert policy.",
             "x-ms-enum": {
               "modelAsString": true,
@@ -120,7 +130,7 @@
             }
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -148,13 +158,13 @@
       "description": "Contains information about a database Threat Detection policy.",
       "type": "object",
       "properties": {
-        "location":{
-          "type":"string",
-          "x-ms-mutability":[
+        "location": {
+          "type": "string",
+          "x-ms-mutability": [
             "read",
             "create"
           ],
-          "description":"The geo-location where the resource lives"
+          "description": "The geo-location where the resource lives"
         },
         "kind": {
           "readOnly": true,
@@ -190,7 +200,7 @@
           }
         },
         "disabledAlerts": {
-          "description": "Specifies the semicolon-separated list of alerts that are disabled, or empty string to disable no alerts. Possible values: Sql_Injection; Sql_Injection_Vulnerability; Access_Anomaly; Usage_Anomaly.",
+          "description": "Specifies the semicolon-separated list of alerts that are disabled, or empty string to disable no alerts. Possible values: Sql_Injection; Sql_Injection_Vulnerability; Access_Anomaly; Data_Exfiltration; Unsafe_Action.",
           "type": "string"
         },
         "emailAddresses": {
@@ -216,7 +226,8 @@
           "description": "Specifies the identifier key of the Threat Detection audit storage account. If state is Enabled, storageAccountAccessKey is required.",
           "type": "string",
           "x-ms-mutability": [
-            "create", "update"
+            "create",
+            "update"
           ]
         },
         "retentionDays": {
@@ -236,32 +247,12 @@
           }
         }
       },
-      "required": [ "state" ]
+      "required": [
+        "state"
+      ]
     }
   },
   "parameters": {
-    "SubscriptionIdParameter": {
-      "name": "subscriptionId",
-      "in": "path",
-      "description": "The subscription ID that identifies an Azure subscription.",
-      "required": true,
-      "type": "string"
-    },
-    "ApiVersionParameter": {
-      "name": "api-version",
-      "in": "query",
-      "required": true,
-      "type": "string",
-      "description": "The API version to use for the request."
-    },
-    "ResourceGroupParameter": {
-      "name": "resourceGroupName",
-      "in": "path",
-      "description": "The name of the resource group that contains the resource. You can obtain this value from the Azure Resource Manager API or the portal.",
-      "required": true,
-      "x-ms-parameter-location": "method",
-      "type": "string"
-    },
     "ServerNameParameter": {
       "name": "serverName",
       "in": "path",

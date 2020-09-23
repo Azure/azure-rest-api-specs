@@ -6,11 +6,16 @@ Please also specify `--node-sdks-folder=<path to root folder of your azure-sdk-f
 ``` yaml $(nodejs)
 nodejs:
   package-name: azure-cognitiveservices-computervision
-  package-version: 1.0.0-preview
   output-folder: $(node-sdks-folder)/lib/services/computerVision
-  override-client-name: ComputerVisionAPIClient
   azure-arm: false
   generate-license-txt: true
   generate-package-json: true
   generate-readme-md: false
+
+directive:
+  from: source-file-nodejs
+  where: $
+  transform: >
+    $ = $.replace( /mode: string, url: string/g, "url: string, mode: string" );
+    $ = $.replace( /mode, url/g, "url, mode" );
 ```

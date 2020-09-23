@@ -1,164 +1,284 @@
 {
+  "parameters": {
+    "subscriptionId": "51766542-3ed7-4a72-a187-0c8ab644ddab",
+    "resourceGroupName": "mygroup",
+    "automationAccountName": "myaccount",
+    "softwareUpdateConfigurationName": "testpatch",
+    "api-version": "2017-05-15-preview",
     "parameters": {
-        "subscriptionId": "51766542-3ed7-4a72-a187-0c8ab644ddab",
-        "resourceGroupName": "mygroup",
-        "automationAccountName": "myaccount",
-        "softwareUpdateConfigurationName": "testpatch",
-        "api-version": "2017-05-15-preview",
-        "parameters": {
-            "properties": {
-                "updateConfiguration": {
-                    "operatingSystem": "Windows",
-                    "duration": "PT2H0M",
-                    "windows": {
-                        "excludedKbNumbers": [
-                            "168934",
-                            "168973"
-                        ],
-                        "includedUpdateClassifications": "Critical",
-                        "rebootSetting": "IfRequired"
+      "properties": {
+        "updateConfiguration": {
+          "operatingSystem": "Windows",
+          "duration": "PT2H0M",
+          "windows": {
+            "excludedKbNumbers": [
+              "168934",
+              "168973"
+            ],
+            "includedUpdateClassifications": "Critical",
+            "rebootSetting": "IfRequired"
+          },
+          "azureVirtualMachines": [
+            "/subscriptions/5ae68d89-69a4-454f-b5ce-e443cc4e0067/resourceGroups/myresources/providers/Microsoft.Compute/virtualMachines/vm-01",
+            "/subscriptions/5ae68d89-69a4-454f-b5ce-e443cc4e0067/resourceGroups/myresources/providers/Microsoft.Compute/virtualMachines/vm-02",
+            "/subscriptions/5ae68d89-69a4-454f-b5ce-e443cc4e0067/resourceGroups/myresources/providers/Microsoft.Compute/virtualMachines/vm-03"
+          ],
+          "nonAzureComputerNames": [
+            "box1.contoso.com",
+            "box2.contoso.com"
+          ],
+          "targets": {
+            "azureQueries": [
+              {
+                "scope": [
+                  "/subscriptions/5ae68d89-69a4-454f-b5ce-e443cc4e0067/resourceGroups/myresources",
+                  "/subscriptions/5ae68d89-69a4-454f-b5ce-e443cc4e0067"
+                ],
+                "tagSettings": {
+                  "tags": [
+                    {
+                      "tag1": [
+                        "tag1Value1",
+                        "tag1Value2",
+                        "tag1Value3"
+                      ]
                     },
-                    "azureVirtualMachines": [
-                        "/subscriptions/5ae68d89-69a4-454f-b5ce-e443cc4e0067/resourceGroups/myresources/providers/Microsoft.Compute/virtualMachines/vm-01",
-                        "/subscriptions/5ae68d89-69a4-454f-b5ce-e443cc4e0067/resourceGroups/myresources/providers/Microsoft.Compute/virtualMachines/vm-02",
-                        "/subscriptions/5ae68d89-69a4-454f-b5ce-e443cc4e0067/resourceGroups/myresources/providers/Microsoft.Compute/virtualMachines/vm-03"
-                    ],
-                    "nonAzureComputerNames": [
-                        "box1.contoso.com",
-                        "box2.contoso.com"
-                    ]
-                },
-                "scheduleInfo": {
-                    "frequency": "Hour",
-                    "startTime": "2017-10-19T12:22:57+00:00",
-                    "timeZone": "America/Los_Angeles",
-                    "interval": 1,
-                    "expiryTime": "2018-11-09T11:22:57+00:00",
-                    "advancedSchedule": {
-                        "weekDays": [
-                            "Monday",
-                            "Thursday"
-                        ]
+                    {
+                      "tag2": [
+                        "tag2Value1",
+                        "tag2Value2",
+                        "tag2Value3"
+                      ]
                     }
-                }
+                  ],
+                  "filterOperator": "All"
+                },
+                "locations": [
+                  "Japan East",
+                  "UK South"
+                ]
+              }
+            ],
+            "nonAzureQueries": [
+              {
+                "functionAlias": "SavedSearch1",
+                "workspaceId": "WorkspaceId1"
+              },
+              {
+                "functionAlias": "SavedSearch2",
+                "workspaceId": "WorkspaceId2"
+              }
+            ]
+          }
+        },
+        "scheduleInfo": {
+          "frequency": "Hour",
+          "startTime": "2017-10-19T12:22:57+00:00",
+          "timeZone": "America/Los_Angeles",
+          "interval": 1,
+          "expiryTime": "2018-11-09T11:22:57+00:00",
+          "advancedSchedule": {
+            "weekDays": [
+              "Monday",
+              "Thursday"
+            ]
+          }
+        },
+        "tasks": {
+          "preTask": {
+            "source": "HelloWorld",
+            "parameters": {
+              "COMPUTERNAME": "Computer1"
             }
+          },
+          "postTask": {
+            "source": "GetCache",
+            "parameters": null
+          }
         }
-    },
-    "responses": {
-        "200": {
-            "headers": {},
-            "body": {
-                "name": "testpatch",
-                "id": "/subscriptions/51766542-3ed7-4a72-a187-0c8ab644ddab/resourceGroups/mygroup/providers/Microsoft.Automation/automationAccounts/myaccount/softwareUpdateConfigurations/testpatch",
-                "properties": {
-                    "updateConfiguration": {
-                        "operatingSystem": "Windows",
-                        "windows": {
-                            "includedUpdateClassifications": "Critical",
-                            "excludedKbNumbers": [
-                                "168934",
-                                "168973"
-                            ]
-                        },
-                        "linux": {},
-                        "duration": "PT2H",
-                        "azureVirtualMachines": [
-                            "/subscriptions/5ae68d89-69a4-454f-b5ce-e443cc4e0067/resourceGroups/myresources/providers/Microsoft.Compute/virtualMachines/vm-01",
-                            "/subscriptions/5ae68d89-69a4-454f-b5ce-e443cc4e0067/resourceGroups/myresources/providers/Microsoft.Compute/virtualMachines/vm-02",
-                            "/subscriptions/5ae68d89-69a4-454f-b5ce-e443cc4e0067/resourceGroups/myresources/providers/Microsoft.Compute/virtualMachines/vm-03"
-                        ],
-                        "nonAzureComputerNames": [
-                            "box1.contoso.com",
-                            "box2.contoso.com"
-                        ]
-                    },
-                    "scheduleInfo": {
-                        "description": "",
-                        "startTime": "2017-10-19T12:22:00-07:00",
-                        "startTimeOffsetMinutes": -420.0,
-                        "expiryTime": "2018-11-09T11:22:00-08:00",
-                        "expiryTimeOffsetMinutes": -480.0,
-                        "isEnabled": true,
-                        "nextRun": "2017-10-19T12:22:00-07:00",
-                        "nextRunOffsetMinutes": -420.0,
-                        "interval": 1,
-                        "frequency": "Week",
-                        "creationTime": "2017-10-19T18:54:50.5233333+00:00",
-                        "lastModifiedTime": "2017-10-19T18:54:50.5233333+00:00",
-                        "timeZone": "America/Los_Angeles",
-                        "advancedSchedule": {}
-                    },
-                    "provisioningState": "Provisioning",
-                    "error": {},
-                    "creationTime": "2017-10-19T18:54:50.5233333+00:00",
-                    "createdBy": "adam@contoso.com",
-                    "lastModifiedBy": "adam@contoso.com",
-                    "lastModifiedTime": "2017-10-19T18:54:50.68+00:00"
-                }
-            }
-        },
-        "201": {
-            "headers": {},
-            "body": {
-                "name": "testpatch",
-                "id": "/subscriptions/51766542-3ed7-4a72-a187-0c8ab644ddab/resourceGroups/mygroup/providers/Microsoft.Automation/automationAccounts/myaccount/softwareUpdateConfigurations/testpatch",
-                "properties": {
-                    "updateConfiguration": {
-                        "operatingSystem": "Windows",
-                        "windows": {
-                            "includedUpdateClassifications": "Critical",
-                            "excludedKbNumbers": [
-                                "168934",
-                                "168973"
-                            ]
-                        },
-                        "linux": {},
-                        "duration": "PT2H",
-                        "azureVirtualMachines": [
-                            "/subscriptions/5ae68d89-69a4-454f-b5ce-e443cc4e0067/resourceGroups/myresources/providers/Microsoft.Compute/virtualMachines/vm-01",
-                            "/subscriptions/5ae68d89-69a4-454f-b5ce-e443cc4e0067/resourceGroups/myresources/providers/Microsoft.Compute/virtualMachines/vm-02",
-                            "/subscriptions/5ae68d89-69a4-454f-b5ce-e443cc4e0067/resourceGroups/myresources/providers/Microsoft.Compute/virtualMachines/vm-03"
-                        ],
-                        "nonAzureComputerNames": [
-                            "box1.contoso.com",
-                            "box2.contoso.com"
-                        ]
-                    },
-                    "scheduleInfo": {
-                        "description": "",
-                        "startTime": "2017-10-19T12:22:00-07:00",
-                        "startTimeOffsetMinutes": -420.0,
-                        "expiryTime": "2018-11-09T11:22:00-08:00",
-                        "expiryTimeOffsetMinutes": -480.0,
-                        "isEnabled": true,
-                        "nextRun": "2017-10-19T12:22:00-07:00",
-                        "nextRunOffsetMinutes": -420.0,
-                        "interval": 1,
-                        "frequency": "Week",
-                        "creationTime": "2017-10-19T18:54:50.5233333+00:00",
-                        "lastModifiedTime": "2017-10-19T18:54:50.5233333+00:00",
-                        "timeZone": "America/Los_Angeles",
-                        "advancedSchedule": null
-                    },
-                    "provisioningState": "Provisioning",
-                    "error": {},
-                    "creationTime": "2017-10-19T18:54:50.5233333+00:00",
-                    "lastModifiedBy": "",
-                    "lastModifiedTime": "2017-10-19T18:54:50.68+00:00"
-                }
-            }
-        },
-        "400": {
-            "code": "BadRequest",
-            "message": "{\"Message\":\"The request is invalid.\",\"ModelState\":{\"softwareUpdateConfiguration.properties.scheduleInfo\":[\"The scheduleInfo field is required.\"]}}"
-        },
-        "404": {
-            "code": "NotFound",
-            "message": "{\"Message\":\"Could not find the account. SubscriptionId: 51766542-3ed7-4a72-a187-0c8ab644ddab AccountName: myaccount\"}"
-        },
-        "409": {
-            "code": "Conflict",
-            "message": "\"Software update configuration with the same name already exist.\""
-        }
+      }
     }
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "body": {
+        "name": "testpatch",
+        "id": "/subscriptions/51766542-3ed7-4a72-a187-0c8ab644ddab/resourceGroups/mygroup/providers/Microsoft.Automation/automationAccounts/myaccount/softwareUpdateConfigurations/testpatch",
+        "properties": {
+          "updateConfiguration": {
+            "operatingSystem": "Windows",
+            "windows": {
+              "includedUpdateClassifications": "Critical",
+              "excludedKbNumbers": [
+                "168934",
+                "168973"
+              ]
+            },
+            "linux": {},
+            "targets": {
+              "azureQueries": [
+                {
+                  "scope": [
+                    "/subscriptions/422b6c61-95b0-4213-b3be-7282315df71d/resourceGroups/a-stasku-rg0",
+                    "/subscriptions/422b6c61-95b0-4213-b3be-7282315df71d"
+                  ],
+                  "tagSettings": {
+                    "tags": {
+                      "tag1": [
+                        "tag1Value1",
+                        "tag1Value2"
+                      ],
+                      "tag2": [
+                        "tag2Value1",
+                        "tag2Value2"
+                      ]
+                    },
+                    "filterOperator": "All"
+                  },
+                  "locations": [
+                    "Japan East",
+                    "UK South"
+                  ]
+                }
+              ]
+            },
+            "duration": "PT2H",
+            "azureVirtualMachines": [
+              "/subscriptions/5ae68d89-69a4-454f-b5ce-e443cc4e0067/resourceGroups/myresources/providers/Microsoft.Compute/virtualMachines/vm-01",
+              "/subscriptions/5ae68d89-69a4-454f-b5ce-e443cc4e0067/resourceGroups/myresources/providers/Microsoft.Compute/virtualMachines/vm-02",
+              "/subscriptions/5ae68d89-69a4-454f-b5ce-e443cc4e0067/resourceGroups/myresources/providers/Microsoft.Compute/virtualMachines/vm-03"
+            ],
+            "nonAzureComputerNames": [
+              "box1.contoso.com",
+              "box2.contoso.com"
+            ]
+          },
+          "scheduleInfo": {
+            "description": "",
+            "startTime": "2017-10-19T12:22:00-07:00",
+            "startTimeOffsetMinutes": -420,
+            "expiryTime": "2018-11-09T11:22:00-08:00",
+            "expiryTimeOffsetMinutes": -480,
+            "isEnabled": true,
+            "nextRun": "2017-10-19T12:22:00-07:00",
+            "nextRunOffsetMinutes": -420,
+            "interval": 1,
+            "frequency": "Week",
+            "creationTime": "2017-10-19T18:54:50.5233333+00:00",
+            "lastModifiedTime": "2017-10-19T18:54:50.5233333+00:00",
+            "timeZone": "America/Los_Angeles",
+            "advancedSchedule": {}
+          },
+          "tasks": {
+            "preTask": {
+              "source": "HelloWorld",
+              "parameters": {
+                "COMPUTERNAME": "Computer1"
+              }
+            },
+            "postTask": {
+              "source": "GetCache",
+              "parameters": null
+            }
+          },
+          "provisioningState": "Provisioning",
+          "error": {},
+          "creationTime": "2017-10-19T18:54:50.5233333+00:00",
+          "createdBy": "adam@contoso.com",
+          "lastModifiedBy": "adam@contoso.com",
+          "lastModifiedTime": "2017-10-19T18:54:50.68+00:00"
+        }
+      }
+    },
+    "201": {
+      "headers": {},
+      "body": {
+        "name": "testpatch",
+        "id": "/subscriptions/51766542-3ed7-4a72-a187-0c8ab644ddab/resourceGroups/mygroup/providers/Microsoft.Automation/automationAccounts/myaccount/softwareUpdateConfigurations/testpatch",
+        "properties": {
+          "updateConfiguration": {
+            "operatingSystem": "Windows",
+            "windows": {
+              "includedUpdateClassifications": "Critical",
+              "excludedKbNumbers": [
+                "168934",
+                "168973"
+              ]
+            },
+            "linux": {},
+            "targets": {
+              "azureQueries": [
+                {
+                  "scope": [
+                    "/subscriptions/422b6c61-95b0-4213-b3be-7282315df71d/resourceGroups/a-stasku-rg0",
+                    "/subscriptions/422b6c61-95b0-4213-b3be-7282315df71d"
+                  ],
+                  "tagSettings": {
+                    "tags": {
+                      "tag1": [
+                        "tag1Value1",
+                        "tag1Value2"
+                      ],
+                      "tag2": [
+                        "tag2Value1",
+                        "tag2Value2"
+                      ]
+                    },
+                    "filterOperator": "All"
+                  },
+                  "locations": [
+                    "Japan East",
+                    "UK South"
+                  ]
+                }
+              ]
+            },
+            "duration": "PT2H",
+            "azureVirtualMachines": [
+              "/subscriptions/5ae68d89-69a4-454f-b5ce-e443cc4e0067/resourceGroups/myresources/providers/Microsoft.Compute/virtualMachines/vm-01",
+              "/subscriptions/5ae68d89-69a4-454f-b5ce-e443cc4e0067/resourceGroups/myresources/providers/Microsoft.Compute/virtualMachines/vm-02",
+              "/subscriptions/5ae68d89-69a4-454f-b5ce-e443cc4e0067/resourceGroups/myresources/providers/Microsoft.Compute/virtualMachines/vm-03"
+            ],
+            "nonAzureComputerNames": [
+              "box1.contoso.com",
+              "box2.contoso.com"
+            ]
+          },
+          "scheduleInfo": {
+            "description": "",
+            "startTime": "2017-10-19T12:22:00-07:00",
+            "startTimeOffsetMinutes": -420,
+            "expiryTime": "2018-11-09T11:22:00-08:00",
+            "expiryTimeOffsetMinutes": -480,
+            "isEnabled": true,
+            "nextRun": "2017-10-19T12:22:00-07:00",
+            "nextRunOffsetMinutes": -420,
+            "interval": 1,
+            "frequency": "Week",
+            "creationTime": "2017-10-19T18:54:50.5233333+00:00",
+            "lastModifiedTime": "2017-10-19T18:54:50.5233333+00:00",
+            "timeZone": "America/Los_Angeles"
+          },
+          "tasks": {
+            "preTask": {
+              "source": "HelloWorld",
+              "parameters": {
+                "COMPUTERNAME": "Computer1"
+              }
+            },
+            "postTask": {
+              "source": "GetCache",
+              "parameters": null
+            }
+          },
+          "provisioningState": "Provisioning",
+          "error": {},
+          "creationTime": "2017-10-19T18:54:50.5233333+00:00",
+          "lastModifiedBy": "",
+          "lastModifiedTime": "2017-10-19T18:54:50.68+00:00"
+        }
+      }
+    }
+  }
 }

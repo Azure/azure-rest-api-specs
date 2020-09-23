@@ -51,12 +51,18 @@ This is not used by Autorest itself.
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
   - repo: azure-sdk-for-python
-  - repo: azure-libraries-for-java
+    after_scripts:
+      - python ./scripts/multiapi_init_gen.py azure-mgmt-commerce
+  - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
+  - repo: azure-sdk-for-js
   - repo: azure-sdk-for-node
   - repo: azure-sdk-for-ruby
     after_scripts:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_commerce']
+  - repo: azure-resource-manager-schemas
+    after_scripts:
+      - node sdkauto_afterscript.js commerce/resource-manager
 ```
 
 
@@ -75,46 +81,34 @@ python:
   namespace: azure.mgmt.commerce
   package-name: azure-mgmt-commerce
   clear-output-folder: true
-```
-``` yaml $(python) && $(python-mode) == 'update'
-python:
   no-namespace-folders: true
-  output-folder: $(python-sdks-folder)/azure-mgmt-commerce/azure/mgmt/commerce
-```
-``` yaml $(python) && $(python-mode) == 'create'
-python:
-  basic-setup-py: true
-  output-folder: $(python-sdks-folder)/azure-mgmt-commerce
 ```
 
+### Python multi-api
 
-## Go
+Generate all API versions currently shipped for this package
 
-These settings apply only when `--go` is specified on the command line.
-
-``` yaml $(go)
-go:
-  license-header: MICROSOFT_APACHE_NO_VERSION
-  namespace: commerce
-  clear-output-folder: true
-```
-
-### Go multi-api
-
-``` yaml $(go) && $(multiapi)
+```yaml $(python) && $(multiapi)
 batch:
   - tag: package-2015-06-preview
 ```
 
-### Tag: package-2015-06-preview and go
+### Tag: package-2015-06-preview and python
 
-These settings apply only when `--tag=package-2015-06-preview --go` is specified on the command line.
-Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
+These settings apply only when `--tag=package-2015-06-preview --python` is specified on the command line.
+Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
 
-``` yaml $(tag) == 'package-2015-06-preview' && $(go)
-output-folder: $(go-sdk-folder)/services/preview/commerce/mgmt/2015-06-01-preview/commerce
+``` yaml $(tag) == 'package-2015-06-preview' && $(python)
+namespace: azure.mgmt.commerce.v2015_06_01_preview
+output-folder: $(python-sdks-folder)/commerce/azure-mgmt-commerce/azure/mgmt/commerce/v2015_06_01_preview
+python:
+  namespace: azure.mgmt.commerce.v2015_06_01_preview
+  output-folder: $(python-sdks-folder)/commerce/azure-mgmt-commerce/azure/mgmt/commerce/v2015_06_01_preview
 ```
 
+## Go
+
+See configuration in [readme.go.md](./readme.go.md)
 
 ## Java
 
@@ -122,11 +116,37 @@ These settings apply only when `--java` is specified on the command line.
 Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-libraries-for-java clone>`.
 
 ``` yaml $(java)
-java:
-  azure-arm: true
-  fluent: true
-  namespace: com.microsoft.azure.management.commerce
-  license-header: MICROSOFT_MIT_NO_CODEGEN
-  payload-flattening-threshold: 1
-  output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-commerce
+azure-arm: true
+fluent: true
+namespace: com.microsoft.azure.management.commerce
+license-header: MICROSOFT_MIT_NO_CODEGEN
+payload-flattening-threshold: 1
+output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-commerce
 ```
+
+### Java multi-api
+
+``` yaml $(java) && $(multiapi)
+batch:
+  - tag: package-2015-06-preview
+```
+
+### Tag: package-2015-06-preview and java
+
+These settings apply only when `--tag=package-2015-06-preview --java` is specified on the command line.
+Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-2015-06-preview' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.commerce.v2015_06_01_preview
+  output-folder: $(azure-libraries-for-java-folder)/sdk/commerce/mgmt-v2015_06_01_preview
+regenerate-manager: true
+generate-interface: true
+```
+
+
+
+## AzureResourceSchema
+
+See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
+

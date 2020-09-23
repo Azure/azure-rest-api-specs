@@ -24,17 +24,19 @@
         "operationId": "ServerConnectionPolicies_CreateOrUpdate",
         "description": "Creates or updates the server's connection policy.",
         "x-ms-examples": {
-          "Create or update a server's secure connection policy": { "$ref": "./examples/ServerConnectionPolicyCreateOrUpdate.json" }
+          "Create or update a server's secure connection policy": {
+            "$ref": "./examples/ServerConnectionPolicyCreateOrUpdate.json"
+          }
         },
         "parameters": [
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ResourceGroupParameter"
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
           },
           {
             "$ref": "#/parameters/ServerNameParameter"
@@ -74,17 +76,19 @@
         "operationId": "ServerConnectionPolicies_Get",
         "description": "Gets the server's secure connection policy.",
         "x-ms-examples": {
-          "Get a server's secure connection policy": { "$ref": "./examples/ServerConnectionPolicyGet.json" }
+          "Get a server's secure connection policy": {
+            "$ref": "./examples/ServerConnectionPolicyGet.json"
+          }
         },
         "parameters": [
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ResourceGroupParameter"
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
           },
           {
             "$ref": "#/parameters/ServerNameParameter"
@@ -120,7 +124,9 @@
           }
         }
       },
-      "required": [ "connectionType" ],
+      "required": [
+        "connectionType"
+      ],
       "description": "The properties of a server secure connection policy."
     },
     "ServerConnectionPolicy": {
@@ -130,9 +136,9 @@
           "type": "string",
           "description": "Metadata used for the Azure portal experience."
         },
-        "location":{
-          "type":"string",
-          "description":"Resource location.",
+        "location": {
+          "type": "string",
+          "description": "Resource location.",
           "readOnly": true
         },
         "properties": {
@@ -150,28 +156,6 @@
     }
   },
   "parameters": {
-    "SubscriptionIdParameter": {
-      "name": "subscriptionId",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "The subscription ID that identifies an Azure subscription."
-    },
-    "ApiVersionParameter": {
-      "name": "api-version",
-      "in": "query",
-      "required": true,
-      "type": "string",
-      "description": "The API version to use for the request."
-    },
-    "ResourceGroupParameter": {
-      "name": "resourceGroupName",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "The name of the resource group that contains the resource. You can obtain this value from the Azure Resource Manager API or the portal.",
-      "x-ms-parameter-location": "method"
-    },
     "ServerNameParameter": {
       "name": "serverName",
       "in": "path",
@@ -185,7 +169,9 @@
       "in": "path",
       "required": true,
       "type": "string",
-      "enum": ["default"],
+      "enum": [
+        "default"
+      ],
       "description": "The name of the connection policy.",
       "x-ms-enum": {
         "modelAsString": true,

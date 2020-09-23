@@ -41,6 +41,11 @@
         ],
         "operationId": "Workflows_ListBySubscription",
         "description": "Gets a list of workflows by subscription.",
+        "x-ms-examples": {
+          "List all workflows in a subscription": {
+            "$ref": "./examples/WorkflowsListBySubscription.json"
+          }
+        },
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionId"
@@ -58,7 +63,7 @@
           },
           {
             "name": "$filter",
-            "description": "The filter to apply on the operation.",
+            "description": "The filter to apply on the operation. Options for filters include: State, Trigger, and ReferencedResourceId.",
             "in": "query",
             "required": false,
             "type": "string"
@@ -85,6 +90,11 @@
         ],
         "operationId": "Workflows_ListByResourceGroup",
         "description": "Gets a list of workflows by resource group.",
+        "x-ms-examples": {
+          "List all workflows in a resource group": {
+            "$ref": "./examples/WorkflowsListByResourceGroup.json"
+          }
+        },
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionId"
@@ -109,7 +119,7 @@
           },
           {
             "name": "$filter",
-            "description": "The filter to apply on the operation.",
+            "description": "The filter to apply on the operation. Options for filters include: State, Trigger, and ReferencedResourceId.",
             "in": "query",
             "required": false,
             "type": "string"
@@ -136,6 +146,11 @@
         ],
         "operationId": "Workflows_Get",
         "description": "Gets a workflow.",
+        "x-ms-examples": {
+          "Get a workflow": {
+            "$ref": "./examples/WorkflowsGet.json"
+          }
+        },
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionId"
@@ -173,6 +188,11 @@
         ],
         "operationId": "Workflows_CreateOrUpdate",
         "description": "Creates or updates a workflow.",
+        "x-ms-examples": {
+          "Create or update a workflow": {
+            "$ref": "./examples/WorkflowsCreateOrUpdate.json"
+          }
+        },
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionId"
@@ -225,6 +245,11 @@
         ],
         "operationId": "Workflows_Update",
         "description": "Updates a workflow.",
+        "x-ms-examples": {
+          "Patch a workflow": {
+            "$ref": "./examples/WorkflowsUpdate.json"
+          }
+        },
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionId"
@@ -271,6 +296,11 @@
         ],
         "operationId": "Workflows_Delete",
         "description": "Deletes a workflow.",
+        "x-ms-examples": {
+          "Delete a workflow": {
+            "$ref": "./examples/WorkflowsDelete.json"
+          }
+        },
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionId"
@@ -310,6 +340,11 @@
         ],
         "operationId": "Workflows_Disable",
         "description": "Disables a workflow.",
+        "x-ms-examples": {
+          "Disable a workflow": {
+            "$ref": "./examples/WorkflowsDisable.json"
+          }
+        },
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionId"
@@ -346,6 +381,11 @@
         ],
         "operationId": "Workflows_Enable",
         "description": "Enables a workflow.",
+        "x-ms-examples": {
+          "Enable a workflow": {
+            "$ref": "./examples/WorkflowsEnable.json"
+          }
+        },
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionId"
@@ -382,6 +422,11 @@
         ],
         "operationId": "Workflows_GenerateUpgradedDefinition",
         "description": "Generates the upgraded definition for a workflow.",
+        "x-ms-examples": {
+          "Generate an upgraded definition": {
+            "$ref": "./examples/WorkflowsGenerateUpgradedDefinition.json"
+          }
+        },
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionId"
@@ -483,6 +528,11 @@
         ],
         "operationId": "Workflows_ListSwagger",
         "description": "Gets an OpenAPI definition for the workflow.",
+        "x-ms-examples": {
+          "Get the swagger for a workflow": {
+            "$ref": "./examples/WorkflowsListSwagger.json"
+          }
+        },
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionId"
@@ -625,6 +675,11 @@
         ],
         "operationId": "Workflows_ValidateWorkflow",
         "description": "Validates the workflow.",
+        "x-ms-examples": {
+          "Validate a workflow": {
+            "$ref": "./examples/WorkflowsValidateByResourceGroup.json"
+          }
+        },
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionId"
@@ -670,6 +725,11 @@
         ],
         "operationId": "WorkflowVersions_List",
         "description": "Gets a list of workflow versions.",
+        "x-ms-examples": {
+          "List a workflows versions": {
+            "$ref": "./examples/WorkflowVersionsList.json"
+          }
+        },
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionId"
@@ -720,6 +780,11 @@
         ],
         "operationId": "WorkflowVersions_Get",
         "description": "Gets a workflow version.",
+        "x-ms-examples": {
+          "Get a workflow version": {
+            "$ref": "./examples/WorkflowVersionsGet.json"
+          }
+        },
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionId"
@@ -759,13 +824,18 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Logic/workflows/{workflowName}/triggers/": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Logic/workflows/{workflowName}/triggers": {
       "get": {
         "tags": [
           "WorkflowTriggers"
         ],
         "operationId": "WorkflowTriggers_List",
         "description": "Gets a list of workflow triggers.",
+        "x-ms-examples": {
+          "List workflow triggers": {
+            "$ref": "./examples/WorkflowTriggersList.json"
+          }
+        },
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionId"
@@ -824,6 +894,11 @@
         ],
         "operationId": "WorkflowTriggers_Get",
         "description": "Gets a workflow trigger.",
+        "x-ms-examples": {
+          "Get a workflow trigger": {
+            "$ref": "./examples/WorkflowTriggersGet.json"
+          }
+        },
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionId"
@@ -872,7 +947,7 @@
         "description": "Resets a workflow trigger.",
         "x-ms-examples": {
           "Reset trigger": {
-            "$ref": "./examples/WorkflowsTriggerReset.json"
+            "$ref": "./examples/WorkflowTriggersReset.json"
           }
         },
         "parameters": [
@@ -918,6 +993,11 @@
         ],
         "operationId": "WorkflowTriggers_Run",
         "description": "Runs a workflow trigger.",
+        "x-ms-examples": {
+          "Run a workflow trigger": {
+            "$ref": "./examples/WorkflowTriggersRun.json"
+          }
+        },
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionId"
@@ -966,7 +1046,7 @@
         "description": "Get the trigger schema as JSON.",
         "x-ms-examples": {
           "Get trigger schema": {
-            "$ref": "./examples/WorkflowsTriggerSchemaJson.json"
+            "$ref": "./examples/WorkflowTriggersGetSchemaJson.json"
           }
         },
         "parameters": [
@@ -1017,7 +1097,7 @@
         "description": "Sets the state of a workflow trigger.",
         "x-ms-examples": {
           "Set trigger state": {
-            "$ref": "./examples/WorkflowsTriggerSetState.json"
+            "$ref": "./examples/WorkflowTriggersSetState.json"
           }
         },
         "parameters": [
@@ -1072,6 +1152,11 @@
         ],
         "operationId": "WorkflowTriggers_ListCallbackUrl",
         "description": "Get the callback URL for a workflow trigger.",
+        "x-ms-examples": {
+          "Get the callback URL for a trigger": {
+            "$ref": "./examples/WorkflowTriggersListCallbackUrl.json"
+          }
+        },
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionId"
@@ -1120,7 +1205,7 @@
         "description": "Get the callback url for a trigger of a workflow version.",
         "x-ms-examples": {
           "Get the callback url for a trigger of a workflow version": {
-            "$ref": "./examples/WorkflowVersionsListCallbackUrl.json"
+            "$ref": "./examples/WorkflowVersionsTriggersListCallbackUrl.json"
           }
         },
         "parameters": [
@@ -1185,6 +1270,11 @@
         ],
         "operationId": "WorkflowTriggerHistories_List",
         "description": "Gets a list of workflow trigger histories.",
+        "x-ms-examples": {
+          "List a workflow trigger history": {
+            "$ref": "./examples/WorkflowTriggerHistoriesList.json"
+          }
+        },
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionId"
@@ -1223,7 +1313,7 @@
           },
           {
             "name": "$filter",
-            "description": "The filter to apply on the operation.",
+            "description": "The filter to apply on the operation. Options for filters include: Status, StartTime, and ClientTrackingId.",
             "in": "query",
             "required": false,
             "type": "string"
@@ -1250,6 +1340,11 @@
         ],
         "operationId": "WorkflowTriggerHistories_Get",
         "description": "Gets a workflow trigger history.",
+        "x-ms-examples": {
+          "Get a workflow trigger history": {
+            "$ref": "./examples/WorkflowTriggerHistoriesGet.json"
+          }
+        },
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionId"
@@ -1358,6 +1453,11 @@
         ],
         "operationId": "WorkflowRuns_List",
         "description": "Gets a list of workflow runs.",
+        "x-ms-examples": {
+          "List workflow runs": {
+            "$ref": "./examples/WorkflowRunsList.json"
+          }
+        },
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionId"
@@ -1389,7 +1489,7 @@
           },
           {
             "name": "$filter",
-            "description": "The filter to apply on the operation.",
+            "description": "The filter to apply on the operation. Options for filters include: Status, StartTime, and ClientTrackingId.",
             "in": "query",
             "required": false,
             "type": "string"
@@ -1416,6 +1516,11 @@
         ],
         "operationId": "WorkflowRuns_Get",
         "description": "Gets a workflow run.",
+        "x-ms-examples": {
+          "Get a run for a workflow": {
+            "$ref": "./examples/WorkflowRunsGet.json"
+          }
+        },
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionId"
@@ -1453,6 +1558,55 @@
             }
           }
         }
+      },
+      "delete": {
+        "tags": [
+          "WorkflowRuns"
+        ],
+        "operationId": "WorkflowRuns_Delete",
+        "description": "Deletes a workflow run.",
+        "x-ms-examples": {
+          "Delete a run for a workflow": {
+            "$ref": "./examples/WorkflowRuns_Delete.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "name": "resourceGroupName",
+            "description": "The resource group name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "workflowName",
+            "description": "The workflow name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "runName",
+            "description": "The workflow run name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "204": {
+            "description": "No Content"
+          }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Logic/workflows/{workflowName}/runs/{runName}/cancel": {
@@ -1462,6 +1616,11 @@
         ],
         "operationId": "WorkflowRuns_Cancel",
         "description": "Cancels a workflow run.",
+        "x-ms-examples": {
+          "Cancel a workflow run": {
+            "$ref": "./examples/WorkflowRunsCancel.json"
+          }
+        },
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionId"
@@ -1505,6 +1664,11 @@
         ],
         "operationId": "WorkflowRunActions_List",
         "description": "Gets a list of workflow run actions.",
+        "x-ms-examples": {
+          "List a workflow run actions": {
+            "$ref": "./examples/WorkflowRunActionsList.json"
+          }
+        },
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionId"
@@ -1543,7 +1707,7 @@
           },
           {
             "name": "$filter",
-            "description": "The filter to apply on the operation.",
+            "description": "The filter to apply on the operation. Options for filters include: Status.",
             "in": "query",
             "required": false,
             "type": "string"
@@ -1570,6 +1734,11 @@
         ],
         "operationId": "WorkflowRunActions_Get",
         "description": "Gets a workflow run action.",
+        "x-ms-examples": {
+          "Get a workflow run action": {
+            "$ref": "./examples/WorkflowRunActionsGet.json"
+          }
+        },
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionId"
@@ -1812,8 +1981,8 @@
         "operationId": "WorkflowRunActionRepetitions_ListExpressionTraces",
         "description": "Lists a workflow run expression trace.",
         "x-ms-examples": {
-          "List expression traces": {
-            "$ref": "./examples/WorkflowRunActionsListExpressionTraces.json"
+          "List expression traces for a repetition": {
+            "$ref": "./examples/WorkflowRunActionRepetitionsListExpressionTraces.json"
           }
         },
         "parameters": [
@@ -1870,6 +2039,296 @@
         "x-ms-pageable": {
           "nextLinkName": null,
           "itemName": "inputs"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Logic/workflows/{workflowName}/runs/{runName}/actions/{actionName}/repetitions/{repetitionName}/requestHistories": {
+      "get": {
+        "tags": [
+          "WorkflowRunActions"
+        ],
+        "operationId": "WorkflowRunActionRepetitionsRequestHistories_List",
+        "description": "List a workflow run repetition request history.",
+        "x-ms-examples": {
+          "List repetition request history": {
+            "$ref": "./examples/WorkflowRunActionRepetitionsRequestHistories_List.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "name": "resourceGroupName",
+            "description": "The resource group name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "workflowName",
+            "description": "The workflow name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "runName",
+            "description": "The workflow run name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "actionName",
+            "description": "The workflow action name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "repetitionName",
+            "description": "The workflow repetition.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/RequestHistoryListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Logic/workflows/{workflowName}/runs/{runName}/actions/{actionName}/repetitions/{repetitionName}/requestHistories/{requestHistoryName}": {
+      "get": {
+        "tags": [
+          "WorkflowRunActions"
+        ],
+        "operationId": "WorkflowRunActionRepetitionsRequestHistories_Get",
+        "description": "Gets a workflow run repetition request history.",
+        "x-ms-examples": {
+          "Get a repetition request history": {
+            "$ref": "./examples/WorkflowRunActionRepetitionsRequestHistories_Get.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "name": "resourceGroupName",
+            "description": "The resource group name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "workflowName",
+            "description": "The workflow name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "runName",
+            "description": "The workflow run name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "actionName",
+            "description": "The workflow action name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "repetitionName",
+            "description": "The workflow repetition.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "requestHistoryName",
+            "description": "The request history name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/RequestHistory"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Logic/workflows/{workflowName}/runs/{runName}/actions/{actionName}/requestHistories": {
+      "get": {
+        "tags": [
+          "WorkflowRunActions"
+        ],
+        "operationId": "WorkflowRunActionRequestHistories_List",
+        "description": "List a workflow run request history.",
+        "x-ms-examples": {
+          "List a request history": {
+            "$ref": "./examples/WorkflowRunActionRequestHistories_List.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "name": "resourceGroupName",
+            "description": "The resource group name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "workflowName",
+            "description": "The workflow name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "runName",
+            "description": "The workflow run name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "actionName",
+            "description": "The workflow action name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/RequestHistoryListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Logic/workflows/{workflowName}/runs/{runName}/actions/{actionName}/requestHistories/{requestHistoryName}": {
+      "get": {
+        "tags": [
+          "WorkflowRunActions"
+        ],
+        "operationId": "WorkflowRunActionRequestHistories_Get",
+        "description": "Gets a workflow run request history.",
+        "x-ms-examples": {
+          "Get a request history": {
+            "$ref": "./examples/WorkflowRunActionRequestHistories_Get.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "name": "resourceGroupName",
+            "description": "The resource group name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "workflowName",
+            "description": "The workflow name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "runName",
+            "description": "The workflow run name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "actionName",
+            "description": "The workflow action name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "requestHistoryName",
+            "description": "The request history name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/RequestHistory"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
         }
       }
     },
@@ -2061,6 +2520,11 @@
         ],
         "operationId": "Workflows_Validate",
         "description": "Validates the workflow definition.",
+        "x-ms-examples": {
+          "Validate a workflow": {
+            "$ref": "./examples/WorkflowsValidateByLocation.json"
+          }
+        },
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionId"
@@ -2114,7 +2578,7 @@
         "operationId": "IntegrationAccounts_ListBySubscription",
         "description": "Gets a list of integration accounts by subscription.",
         "x-ms-examples": {
-          "List IntegrationAccounts by subscription": {
+          "List integration accounts by subscription": {
             "$ref": "./examples/IntegrationAccountsListBySubscription.json"
           }
         },
@@ -2155,7 +2619,7 @@
         "operationId": "IntegrationAccounts_ListByResourceGroup",
         "description": "Gets a list of integration accounts by resource group.",
         "x-ms-examples": {
-          "List IntegrationAccounts by resource group name": {
+          "List integration accounts by resource group name": {
             "$ref": "./examples/IntegrationAccountsListByResourceGroup.json"
           }
         },
@@ -2203,7 +2667,7 @@
         "operationId": "IntegrationAccounts_Get",
         "description": "Gets an integration account.",
         "x-ms-examples": {
-          "Get IntegrationAccount by name": {
+          "Get integration account by name": {
             "$ref": "./examples/IntegrationAccountsGet.json"
           }
         },
@@ -2245,7 +2709,7 @@
         "operationId": "IntegrationAccounts_CreateOrUpdate",
         "description": "Creates or updates an integration account.",
         "x-ms-examples": {
-          "Create or update an IntegrationAccount": {
+          "Create or update an integration account": {
             "$ref": "./examples/IntegrationAccountsCreateOrUpdate.json"
           }
         },
@@ -2302,7 +2766,7 @@
         "operationId": "IntegrationAccounts_Update",
         "description": "Updates an integration account.",
         "x-ms-examples": {
-          "Patch an IntegrationAccount": {
+          "Patch an integration account": {
             "$ref": "./examples/IntegrationAccountsUpdate.json"
           }
         },
@@ -2353,7 +2817,7 @@
         "operationId": "IntegrationAccounts_Delete",
         "description": "Deletes an integration account.",
         "x-ms-examples": {
-          "Delete an IntegrationAccount": {
+          "Delete an integration account": {
             "$ref": "./examples/IntegrationAccountsDelete.json"
           }
         },
@@ -2397,8 +2861,8 @@
         "operationId": "IntegrationAccountAssemblies_List",
         "description": "List the assemblies for an integration account.",
         "x-ms-examples": {
-          "List integration account assemblies.": {
-            "$ref": "./examples/IntegrationAccountsAssembliesList.json"
+          "List integration account assemblies": {
+            "$ref": "./examples/IntegrationAccountAssembliesList.json"
           }
         },
         "parameters": [
@@ -2444,8 +2908,8 @@
         "operationId": "IntegrationAccountAssemblies_Get",
         "description": "Get an assembly for an integration account.",
         "x-ms-examples": {
-          "Get an integration account assembly.": {
-            "$ref": "./examples/IntegrationAccountsAssembliesGet.json"
+          "Get an integration account assembly": {
+            "$ref": "./examples/IntegrationAccountAssembliesGet.json"
           }
         },
         "parameters": [
@@ -2493,8 +2957,8 @@
         "operationId": "IntegrationAccountAssemblies_CreateOrUpdate",
         "description": "Create or update an assembly for an integration account.",
         "x-ms-examples": {
-          "Create or update an account assembly.": {
-            "$ref": "./examples/IntegrationAccountsAssembliesCreateOrUpdate.json"
+          "Create or update an account assembly": {
+            "$ref": "./examples/IntegrationAccountAssembliesCreateOrUpdate.json"
           }
         },
         "parameters": [
@@ -2557,8 +3021,8 @@
         "operationId": "IntegrationAccountAssemblies_Delete",
         "description": "Delete an assembly for an integration account.",
         "x-ms-examples": {
-          "Delete an integration account assembly.": {
-            "$ref": "./examples/IntegrationAccountsAssembliesDelete.json"
+          "Delete an integration account assembly": {
+            "$ref": "./examples/IntegrationAccountAssembliesDelete.json"
           }
         },
         "parameters": [
@@ -2608,8 +3072,8 @@
         "operationId": "IntegrationAccountAssemblies_ListContentCallbackUrl",
         "description": "Get the content callback url for an integration account assembly.",
         "x-ms-examples": {
-          "Get the callback url for an integration account assembly.": {
-            "$ref": "./examples/IntegrationAccountsAssembliesListContentCallbackUrl.json"
+          "Get the callback url for an integration account assembly": {
+            "$ref": "./examples/IntegrationAccountAssembliesListContentCallbackUrl.json"
           }
         },
         "parameters": [
@@ -2659,7 +3123,7 @@
         "operationId": "IntegrationAccountBatchConfigurations_List",
         "description": "List the batch configurations for an integration account.",
         "x-ms-examples": {
-          "List batch configurations.": {
+          "List batch configurations": {
             "$ref": "./examples/IntegrationAccountBatchConfigurationsList.json"
           }
         },
@@ -2706,7 +3170,7 @@
         "operationId": "IntegrationAccountBatchConfigurations_Get",
         "description": "Get a batch configuration for an integration account.",
         "x-ms-examples": {
-          "Get a batch configuration.": {
+          "Get a batch configuration": {
             "$ref": "./examples/IntegrationAccountBatchConfigurationsGet.json"
           }
         },
@@ -2755,7 +3219,7 @@
         "operationId": "IntegrationAccountBatchConfigurations_CreateOrUpdate",
         "description": "Create or update a batch configuration for an integration account.",
         "x-ms-examples": {
-          "Create or update a batch configuration.": {
+          "Create or update a batch configuration": {
             "$ref": "./examples/IntegrationAccountBatchConfigurationsCreateOrUpdate.json"
           }
         },
@@ -2819,7 +3283,7 @@
         "operationId": "IntegrationAccountBatchConfigurations_Delete",
         "description": "Delete a batch configuration for an integration account.",
         "x-ms-examples": {
-          "Delete a batch configuration.": {
+          "Delete a batch configuration": {
             "$ref": "./examples/IntegrationAccountBatchConfigurationsDelete.json"
           }
         },
@@ -3083,7 +3547,7 @@
         "description": "Gets a list of integration account schemas.",
         "x-ms-examples": {
           "Get schemas by integration account name": {
-            "$ref": "./examples/SchemasListByIntegrationAccounts.json"
+            "$ref": "./examples/SchemasList.json"
           }
         },
         "parameters": [
@@ -3117,7 +3581,7 @@
           },
           {
             "name": "$filter",
-            "description": "The filter to apply on the operation.",
+            "description": "The filter to apply on the operation. Options for filters include: SchemaType.",
             "in": "query",
             "required": false,
             "type": "string"
@@ -3369,7 +3833,7 @@
         "description": "Gets a list of integration account maps.",
         "x-ms-examples": {
           "Get maps by integration account name": {
-            "$ref": "./examples/MapsListByIntegrationAccounts.json"
+            "$ref": "./examples/MapsList.json"
           }
         },
         "parameters": [
@@ -3403,7 +3867,7 @@
           },
           {
             "name": "$filter",
-            "description": "The filter to apply on the operation.",
+            "description": "The filter to apply on the operation. Options for filters include: MapType.",
             "in": "query",
             "required": false,
             "type": "string"
@@ -3655,7 +4119,7 @@
         "description": "Gets a list of integration account partners.",
         "x-ms-examples": {
           "Get partners by integration account name": {
-            "$ref": "./examples/PartnersListByIntegrationAccounts.json"
+            "$ref": "./examples/PartnersList.json"
           }
         },
         "parameters": [
@@ -3689,7 +4153,7 @@
           },
           {
             "name": "$filter",
-            "description": "The filter to apply on the operation.",
+            "description": "The filter to apply on the operation. Options for filters include: PartnerType.",
             "in": "query",
             "required": false,
             "type": "string"
@@ -3941,7 +4405,7 @@
         "description": "Gets a list of integration account agreements.",
         "x-ms-examples": {
           "Get agreements by integration account name": {
-            "$ref": "./examples/AgreementsListByIntegrationAccounts.json"
+            "$ref": "./examples/AgreementsList.json"
           }
         },
         "parameters": [
@@ -3975,7 +4439,7 @@
           },
           {
             "name": "$filter",
-            "description": "The filter to apply on the operation.",
+            "description": "The filter to apply on the operation. Options for filters include: AgreementType.",
             "in": "query",
             "required": false,
             "type": "string"
@@ -4226,8 +4690,8 @@
         "operationId": "Certificates_ListByIntegrationAccounts",
         "description": "Gets a list of integration account certificates.",
         "x-ms-examples": {
-          "Get certificates by integrationAccount name": {
-            "$ref": "./examples/CertificatesListByIntegrationAccounts.json"
+          "Get certificates by integration account name": {
+            "$ref": "./examples/CertificatesList.json"
           }
         },
         "parameters": [
@@ -4445,10 +4909,79 @@
         "operationId": "Sessions_ListByIntegrationAccounts",
         "x-ms-examples": {
           "SessionsListByIntegrationAccounts": {
-            "$ref": "./examples/SessionsListByIntegrationAccounts.json"
+            "$ref": "./examples/SessionsList.json"
           }
         },
         "description": "Gets a list of integration account sessions.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "name": "resourceGroupName",
+            "description": "The resource group name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "integrationAccountName",
+            "description": "The integration account name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "name": "$top",
+            "description": "The number of items to be included in the result.",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "$filter",
+            "description": "The filter to apply on the operation. Options for filters include: ChangedTime.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/IntegrationAccountSessionListResult"
+            }
+          },
+          "default": {
+            "description": "Logic error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-odata": "#/definitions/IntegrationAccountSessionFilter"
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Logic/integrationAccounts/{integrationAccountName}/rosettanetprocessconfigurations": {
+      "get": {
+        "tags": [
+          "IntegrationAccountRosettaNetProcessConfigurations"
+        ],
+        "operationId": "RosettaNetProcessConfigurations_ListByIntegrationAccounts",
+        "description": "Gets a list of integration account RosettaNet process configurations.",
+        "x-ms-examples": {
+          "Get RosettaNetProcessConfigurations by integrationaccount name": {
+            "$ref": "./examples/RosettaNetProcessConfigurationsListByIntegrationAccounts.json"
+          }
+        },
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionId"
@@ -4490,20 +5023,177 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/IntegrationAccountSessionListResult"
-            }
-          },
-          "default": {
-            "description": "Logic error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/IntegrationAccountRosettaNetProcessConfigurationListResult"
             }
           }
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Logic/integrationAccounts/{integrationAccountName}/rosettanetprocessconfigurations/{rosettaNetProcessConfigurationName}": {
+      "get": {
+        "tags": [
+          "IntegrationAccountRosettaNetProcessConfigurations"
+        ],
+        "operationId": "RosettaNetProcessConfigurations_Get",
+        "description": "Gets an integration account RosettaNetProcessConfiguration.",
+        "x-ms-examples": {
+          "Get RosettaNetProcessConfiguration by name": {
+            "$ref": "./examples/RosettaNetProcessConfigurationsGet.json"
+          }
         },
-        "x-ms-odata": "#/definitions/IntegrationAccountSessionFilter"
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "name": "resourceGroupName",
+            "description": "The resource group name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "integrationAccountName",
+            "description": "The integration account name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "rosettaNetProcessConfigurationName",
+            "description": "The integration account RosettaNetProcessConfiguration name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/IntegrationAccountRosettaNetProcessConfiguration"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "IntegrationAccountRosettaNetProcessConfigurations"
+        ],
+        "operationId": "RosettaNetProcessConfigurations_CreateOrUpdate",
+        "description": "Creates or updates an integration account RosettaNetProcessConfiguration.",
+        "x-ms-examples": {
+          "Create or update an RosettaNetProcessConfiguration": {
+            "$ref": "./examples/RosettaNetProcessConfigurationsCreateOrUpdate.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "name": "resourceGroupName",
+            "description": "The resource group name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "integrationAccountName",
+            "description": "The integration account name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "rosettaNetProcessConfigurationName",
+            "description": "The integration account RosettaNet ProcessConfiguration name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "name": "rosettaNetProcessConfiguration",
+            "description": "The integration account RosettaNet ProcessConfiguration.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/IntegrationAccountRosettaNetProcessConfiguration"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/IntegrationAccountRosettaNetProcessConfiguration"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/IntegrationAccountRosettaNetProcessConfiguration"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "IntegrationAccountRosettaNetProcessConfigurations"
+        ],
+        "operationId": "RosettaNetProcessConfigurations_Delete",
+        "description": "Deletes an integration account RosettaNet ProcessConfiguration.",
+        "x-ms-examples": {
+          "Delete an RosettaNetProcessConfiguration": {
+            "$ref": "./examples/RosettaNetProcessConfigurationsDelete.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "name": "resourceGroupName",
+            "description": "The resource group name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "integrationAccountName",
+            "description": "The integration account name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "rosettaNetProcessConfigurationName",
+            "description": "The integration account RosettaNetProcessConfiguration name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "204": {
+            "description": "No Content"
+          }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Logic/integrationAccounts/{integrationAccountName}/sessions/{sessionName}": {
@@ -4695,6 +5385,11 @@
         ],
         "description": "Lists all of the available Logic REST API operations.",
         "operationId": "ListOperations",
+        "x-ms-examples": {
+          "List Microsoft.Logic operations": {
+            "$ref": "./examples/OperationsList.json"
+          }
+        },
         "parameters": [
           {
             "$ref": "#/parameters/api-version"
@@ -4849,7 +5544,7 @@
         },
         "definition": {
           "$ref": "#/definitions/Object",
-          "description": "The definition."
+          "description": "The definition. See [Schema reference for Workflow Definition Language in Azure Logic Apps](https://aka.ms/logic-apps-workflow-definition-language)."
         },
         "parameters": {
           "type": "object",
@@ -5137,7 +5832,7 @@
           "description": "The SAS signature."
         },
         "se": {
-          "type":"string",
+          "type": "string",
           "description": "The SAS timestamp."
         }
       },
@@ -7789,6 +8484,19 @@
         "modelAsString": true
       }
     },
+    "MessageEncoding": {
+      "type": "string",
+      "enum": [
+        "NotSpecified",
+        "Base64",
+        "EightBit",
+        "QuotedPrintable"
+      ],
+      "x-ms-enum": {
+        "name": "MessageEncoding",
+        "modelAsString": false
+      }
+    },
     "TrailingSeparatorPolicy": {
       "type": "string",
       "enum": [
@@ -8610,6 +9318,323 @@
         "modelAsString": false
       }
     },
+    "IntegrationAccountRosettaNetProcessConfigurationListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/IntegrationAccountRosettaNetProcessConfiguration"
+          },
+          "description": "The list of integration account RosettaNet PIP configuration."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The URL to get the next set of results."
+        }
+      },
+      "description": "The list of integration account RosettaNet process configuration."
+    },
+    "IntegrationAccountRosettaNetProcessConfiguration": {
+      "type": "object",
+      "required": [
+        "properties"
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/IntegrationAccountRosettaNetProcessConfigurationProperties",
+          "description": "The integration account RosettaNet process configuration properties."
+        }
+      },
+      "description": "The integration account RosettaNet process configuration.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ]
+    },
+    "IntegrationAccountRosettaNetProcessConfigurationProperties": {
+      "type": "object",
+      "required": [
+        "processCode",
+        "processVersion",
+        "processName",
+        "activitySettings",
+        "initiatorRoleSettings",
+        "responderRoleSettings"
+      ],
+      "properties": {
+        "createdTime": {
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true,
+          "description": "The created time."
+        },
+        "changedTime": {
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true,
+          "description": "The changed time."
+        },
+        "metadata": {
+          "type": "object",
+          "description": "The metadata.",
+          "properties": {},
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "activitySettings": {
+          "$ref": "#/definitions/RosettaNetPipActivitySettings",
+          "description": "The RosettaNet process configuration activity settings."
+        },
+        "processCode": {
+          "type": "string",
+          "description": "The integration account RosettaNet process code."
+        },
+        "processVersion": {
+          "type": "string",
+          "description": "The integration account RosettaNet process version."
+        },
+        "processName": {
+          "type": "string",
+          "description": "The integration account RosettaNet process name."
+        },
+        "initiatorRoleSettings": {
+          "$ref": "#/definitions/RosettaNetPipRoleSettings",
+          "description": "The RosettaNet initiator role settings."
+        },
+        "responderRoleSettings": {
+          "$ref": "#/definitions/RosettaNetPipRoleSettings",
+          "description": "The RosettaNet responder role settings."
+        },
+        "description": {
+          "type": "string",
+          "description": "The integration account RosettaNet ProcessConfiguration properties."
+        }
+      },
+      "description": "The integration account RosettaNet process configuration properties."
+    },
+    "RosettaNetPipActivitySettings": {
+      "type": "object",
+      "required": [
+        "activityType",
+        "activityBehavior",
+        "acknowledgmentOfReceiptSettings"
+      ],
+      "properties": {
+        "activityType": {
+          "$ref": "#/definitions/RosettaNetPipActivityType",
+          "description": "The RosettaNet ProcessConfiguration activity type."
+        },
+        "activityBehavior": {
+          "$ref": "#/definitions/RosettaNetPipActivityBehavior",
+          "description": "The RosettaNet ProcessConfiguration activity behavior."
+        },
+        "acknowledgmentOfReceiptSettings": {
+          "$ref": "#/definitions/RosettaNetPipAcknowledgmentOfReceiptSettings",
+          "description": "The RosettaNet ProcessConfiguration acknowledgement settings."
+        }
+      },
+      "description": "The integration account RosettaNet ProcessConfiguration activity settings."
+    },
+    "RosettaNetPipActivityType": {
+      "type": "string",
+      "enum": [
+        "NotSpecified",
+        "InformationDistribution",
+        "BusinessTransaction",
+        "Notification",
+        "QueryResponse",
+        "RequestConfirm",
+        "RequestResponse"
+      ],
+      "x-ms-enum": {
+        "name": "RosettaNetPipActivityType",
+        "modelAsString": false
+      }
+    },
+    "RosettaNetPipActivityBehavior": {
+      "type": "object",
+      "required": [
+        "isAuthorizationRequired",
+        "persistentConfidentialityScope",
+        "isSecuredTransportRequired",
+        "actionType",
+        "responseType",
+        "nonRepudiationOfOriginAndContent",
+        "retryCount",
+        "timeToPerformInSeconds"
+      ],
+      "properties": {
+        "isAuthorizationRequired": {
+          "type": "boolean",
+          "description": "The value indicating whether authorization is required."
+        },
+        "persistentConfidentialityScope": {
+          "$ref": "#/definitions/RosettaNetPipConfidentialityScope",
+          "description": "The persistent confidentiality encryption scope."
+        },
+        "isSecuredTransportRequired": {
+          "type": "boolean",
+          "description": "The value indicating whether secured transport is required."
+        },
+        "actionType": {
+          "$ref": "#/definitions/RosettaNetActionType",
+          "description": "The value indicating whether the RosettaNet PIP is used for a single action."
+        },
+        "responseType": {
+          "$ref": "#/definitions/RosettaNetResponseType",
+          "description": "The value indicating whether the RosettaNet PIP communication is synchronous."
+        },
+        "nonRepudiationOfOriginAndContent": {
+          "type": "boolean",
+          "description": "The value indicating whether non-repudiation is for origin and content."
+        },
+        "retryCount": {
+          "type": "integer",
+          "description": "The value indicating retry count."
+        },
+        "timeToPerformInSeconds": {
+          "type": "integer",
+          "description": "The time to perform in seconds."
+        }
+      },
+      "description": "The integration account RosettaNet ProcessConfiguration activity behavior."
+    },
+    "RosettaNetPipConfidentialityScope": {
+      "type": "string",
+      "enum": [
+        "NotSpecified",
+        "None",
+        "Payload",
+        "PayloadContainer"
+      ],
+      "x-ms-enum": {
+        "name": "RosettaNetPipConfidentialityScope",
+        "modelAsString": false
+      }
+    },
+    "RosettaNetActionType": {
+      "type": "string",
+      "enum": [
+        "NotSpecified",
+        "SingleAction",
+        "DoubleAction"
+      ],
+      "x-ms-enum": {
+        "name": "RosettaNetActionType",
+        "modelAsString": false
+      }
+    },
+    "RosettaNetResponseType": {
+      "type": "string",
+      "enum": [
+        "NotSpecified",
+        "Sync",
+        "Async"
+      ],
+      "x-ms-enum": {
+        "name": "RosettaNetResponseType",
+        "modelAsString": false
+      }
+    },
+    "RosettaNetPipAcknowledgmentOfReceiptSettings": {
+      "type": "object",
+      "required": [
+        "isNonRepudiationRequired",
+        "timeToAcknowledgeInSeconds"
+      ],
+      "properties": {
+        "isNonRepudiationRequired": {
+          "type": "boolean",
+          "description": "The non-repudiation is required or not."
+        },
+        "timeToAcknowledgeInSeconds": {
+          "type": "integer",
+          "description": "The time to acknowledge in seconds."
+        }
+      },
+      "description": "The integration account RosettaNet ProcessConfiguration Acknowledgement settings."
+    },
+    "RosettaNetPipRoleSettings": {
+      "type": "object",
+      "required": [
+        "action",
+        "role",
+        "roleType",
+        "service",
+        "serviceClassification",
+        "businessDocument"
+      ],
+      "properties": {
+        "action": {
+          "type": "string",
+          "description": "The action name."
+        },
+        "role": {
+          "type": "string",
+          "description": "The role name."
+        },
+        "roleType": {
+          "$ref": "#/definitions/RosettaNetPipRoleType",
+          "description": "The RosettaNet ProcessConfiguration role type."
+        },
+        "service": {
+          "type": "string",
+          "description": "The service name."
+        },
+        "serviceClassification": {
+          "type": "string",
+          "description": "The service classification name."
+        },
+        "businessDocument": {
+          "$ref": "#/definitions/RosettaNetPipBusinessDocument",
+          "description": "The RosettaNet ProcessConfiguration business document."
+        },
+        "description": {
+          "type": "string",
+          "description": "The description."
+        }
+      },
+      "description": "The integration account RosettaNet ProcessConfiguration role settings."
+    },
+    "RosettaNetPipRoleType": {
+      "type": "string",
+      "enum": [
+        "NotSpecified",
+        "Functional",
+        "Organizational",
+        "Employee"
+      ],
+      "x-ms-enum": {
+        "name": "RosettaNetPipRoleType",
+        "modelAsString": false
+      }
+    },
+    "RosettaNetPipBusinessDocument": {
+      "type": "object",
+      "required": [
+        "name",
+        "version"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The business document name."
+        },
+        "version": {
+          "type": "string",
+          "description": "The business document version."
+        },
+        "description": {
+          "type": "string",
+          "description": "The business document description."
+        }
+      },
+      "description": "The RosettaNet ProcessConfiguration business document settings."
+    },
     "IntegrationAccountCertificateListResult": {
       "type": "object",
       "properties": {
@@ -9103,7 +10128,7 @@
           "description": "The path."
         }
       },
-      "allOf": [ 
+      "allOf": [
         {
           "$ref": "#/definitions/Expression"
         }
@@ -9554,6 +10579,103 @@
         "recurrence": {
           "$ref": "#/definitions/WorkflowTriggerRecurrence",
           "description": "The recurrence."
+        }
+      }
+    },
+    "RequestHistoryListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RequestHistory"
+          },
+          "description": "A list of workflow request histories."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The URL to get the next set of results."
+        }
+      },
+      "description": "The list of workflow request histories."
+    },
+    "RequestHistory": {
+      "type": "object",
+      "additionalProperties": false,
+      "description": "The request history.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/RequestHistoryProperties",
+          "description": "The request history properties."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ]
+    },
+    "RequestHistoryProperties": {
+      "type": "object",
+      "additionalProperties": false,
+      "description": "The request history.",
+      "properties": {
+        "startTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time the request started."
+        },
+        "endTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time the request ended."
+        },
+        "request": {
+          "$ref": "#/definitions/Request",
+          "description": "The request."
+        },
+        "response": {
+          "$ref": "#/definitions/Response",
+          "description": "The response."
+        }
+      }
+    },
+    "Request": {
+      "type": "object",
+      "additionalProperties": false,
+      "description": "A request.",
+      "properties": {
+        "headers": {
+          "$ref": "#/definitions/Object",
+          "description": "A list of all the headers attached to the request."
+        },
+        "uri": {
+          "type": "string",
+          "description": "The destination for the request."
+        },
+        "method": {
+          "type": "string",
+          "description": "The HTTP method used for the request."
+        }
+      }
+    },
+    "Response": {
+      "type": "object",
+      "additionalProperties": false,
+      "description": "A response.",
+      "properties": {
+        "headers": {
+          "$ref": "#/definitions/Object",
+          "description": "A list of all the headers attached to the response."
+        },
+        "statusCode": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The status code of the response."
+        },
+        "bodyLink": {
+          "$ref": "#/definitions/ContentLink",
+          "description": "Details on the location of the body content."
         }
       }
     }

@@ -40,7 +40,7 @@
         "description": "Lists all of the available Network Rest API operations.",
         "parameters": [
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -55,14 +55,16 @@
           "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
-          "Get a list of operations for a resource provider": { "$ref": "./examples/OperationList.json" }
+          "Get a list of operations for a resource provider": {
+            "$ref": "./examples/OperationList.json"
+          }
         }
       }
     }
   },
   "definitions": {
     "OperationListResult": {
-     "description": "Result of the request to list Network operations. It contains a list of operations and a URL link to get the next set of results.",
+      "description": "Result of the request to list Network operations. It contains a list of operations and a URL link to get the next set of results.",
       "properties": {
         "value": {
           "type": "array",
@@ -258,22 +260,6 @@
           "description": "Duration of the availability blob."
         }
       }
-    }
-  },
-  "parameters": {
-    "SubscriptionIdParameter": {
-      "name": "subscriptionId",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "The subscription credentials which uniquely identify the Microsoft Azure subscription. The subscription ID forms part of the URI for every service call."
-    },
-    "ApiVersionParameter": {
-      "name": "api-version",
-      "in": "query",
-      "required": true,
-      "type": "string",
-      "description": "Client API version."
     }
   }
 }

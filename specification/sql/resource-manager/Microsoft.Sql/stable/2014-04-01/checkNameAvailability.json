@@ -1,190 +1,168 @@
 {
-    "swagger":"2.0",
-    "info":{
-        "title":"Azure SQL Database",
-        "description":"Provides create, read, update and delete functionality for Azure SQL Database resources including servers, databases, elastic pools, recommendations, and operations.",
-        "version":"2014-04-01"
-    },
-    "host":"management.azure.com",
-    "schemes":[
-        "https"
-    ],
-    "consumes":[
-        "application/json"
-    ],
-    "produces":[
-        "application/json"
-    ],
-    "paths":{
-        "/subscriptions/{subscriptionId}/providers/Microsoft.Sql/checkNameAvailability":{
-            "post":{
-                "tags":[
-                    "Servers"
-                ],
-                "operationId":"Servers_CheckNameAvailability",
-                "description":"Determines whether a resource can be created with the specified name.",
-                "x-ms-examples":{
-                    "Check for a server name that is available":{
-                        "$ref":"./examples/CheckNameAvailabilityServerAvailable.json"
-                    },
-                    "Check for a server name that already exists":{
-                        "$ref":"./examples/CheckNameAvailabilityServerAlreadyExists.json"
-                    },
-                    "Check for a server name that is invalid":{
-                        "$ref":"./examples/CheckNameAvailabilityServerInvalid.json"
-                    }
-                },
-                "parameters":[
-                    {
-                        "$ref":"#/parameters/ApiVersionParameter"
-                    },
-                    {
-                        "$ref":"#/parameters/SubscriptionIdParameter"
-                    },
-                    {
-                        "name":"parameters",
-                        "in":"body",
-                        "required":true,
-                        "schema":{
-                            "$ref":"#/definitions/CheckNameAvailabilityRequest"
-                        },
-                        "description":"The parameters to request for name availability."
-                    }
-                ],
-                "responses":{
-                    "200":{
-                        "description":"OK",
-                        "schema":{
-                            "$ref":"#/definitions/CheckNameAvailabilityResponse"
-                        }
-                    }
-                }
+  "swagger": "2.0",
+  "info": {
+    "title": "Azure SQL Database",
+    "description": "Provides create, read, update and delete functionality for Azure SQL Database resources including servers, databases, elastic pools, recommendations, and operations.",
+    "version": "2014-04-01"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Sql/checkNameAvailability": {
+      "post": {
+        "tags": [
+          "Servers"
+        ],
+        "operationId": "Servers_CheckNameAvailability",
+        "description": "Determines whether a resource can be created with the specified name.",
+        "x-ms-examples": {
+          "Check for a server name that is available": {
+            "$ref": "./examples/CheckNameAvailabilityServerAvailable.json"
+          },
+          "Check for a server name that already exists": {
+            "$ref": "./examples/CheckNameAvailabilityServerAlreadyExists.json"
+          },
+          "Check for a server name that is invalid": {
+            "$ref": "./examples/CheckNameAvailabilityServerInvalid.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CheckNameAvailabilityRequest"
+            },
+            "description": "The parameters to request for name availability."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/CheckNameAvailabilityResponse"
             }
+          }
         }
-    },
-    "definitions":{
-        "CheckNameAvailabilityRequest":{
-            "properties":{
-                "name":{
-                    "type":"string",
-                    "description":"The name whose availability is to be checked."
-                },
-                "type":{
-                    "type":"string",
-                    "description":"The type of resource that is used as the scope of the availability check.",
-                    "enum":[
-                        "Microsoft.Sql/servers"
-                    ],
-                    "x-ms-enum":{
-                        "name":"CheckNameAvailabilityResourceType",
-                        "modelAsString":false
-                    }
-                }
-            },
-            "required":[
-                "name",
-                "type"
-            ],
-            "description":"A request to check whether the specified name for a resource is available."
-        },
-        "CheckNameAvailabilityResponse":{
-            "properties":{
-                "available":{
-                    "type":"boolean",
-                    "description":"True if the name is available, otherwise false.",
-                    "readOnly":true
-                },
-                "message":{
-                    "type":"string",
-                    "description":"A message explaining why the name is unavailable. Will be null if the name is available.",
-                    "readOnly":true
-                },
-                "name":{
-                    "type":"string",
-                    "description":"The name whose availability was checked.",
-                    "readOnly":true
-                },
-                "reason":{
-                    "type":"string",
-                    "description":"The reason code explaining why the name is unavailable. Will be null if the name is available.",
-                    "enum":[
-                        "Invalid",
-                        "AlreadyExists"
-                    ],
-                    "x-ms-enum":{
-                        "name":"CheckNameAvailabilityReason",
-                        "modelAsString":false
-                    },
-                    "readOnly":true
-                }
-            },
-            "description":"A response indicating whether the specified name for a resource is available."
-        }
-    },
-    "parameters":{
-        "SubscriptionIdParameter":{
-            "name":"subscriptionId",
-            "in":"path",
-            "required":true,
-            "type":"string",
-            "description":"The subscription ID that identifies an Azure subscription."
-        },
-        "ApiVersionParameter":{
-            "name":"api-version",
-            "in":"query",
-            "required":true,
-            "type":"string",
-            "description":"The API version to use for the request."
-        },
-        "ResourceGroupParameter":{
-            "name":"resourceGroupName",
-            "in":"path",
-            "required":true,
-            "type":"string",
-            "description":"The name of the resource group that contains the resource. You can obtain this value from the Azure Resource Manager API or the portal.",
-            "x-ms-parameter-location":"method"
-        },
-        "ServerNameParameter":{
-            "name":"serverName",
-            "in":"path",
-            "required":true,
-            "type":"string",
-            "description":"The name of the server.",
-            "x-ms-parameter-location":"method"
-        },
-        "DatabaseExpandParameter":{
-            "name":"$expand",
-            "in":"query",
-            "required":false,
-            "type":"string",
-            "description":"A comma separated list of child objects to expand in the response. Possible properties: serviceTierAdvisors, transparentDataEncryption.",
-            "x-ms-parameter-location":"method"
-        },
-        "TransparentDataEncryptionNameParameter":{
-            "name":"transparentDataEncryptionName",
-            "in":"path",
-            "required":true,
-            "type":"string",
-            "enum":[
-                "current"
-            ],
-            "description":"The name of the transparent data encryption configuration.",
-            "x-ms-enum":{
-                "modelAsString":true,
-                "name":"TransparentDataEncryptionName"
-            },
-            "x-ms-parameter-location":"method"
-        }
-    },
-    "securityDefinitions":{
-        "azure_auth":{
-            "type":"oauth2",
-            "description":"Azure Active Directory OAuth2 Flow",
-            "flow":"implicit",
-            "authorizationUrl":"https://login.microsoftonline.com/common/oauth2/authorize",
-            "scopes":{
-                "user_impersonation":"impersonate your user account"
-            }
-        }
+      }
     }
+  },
+  "definitions": {
+    "CheckNameAvailabilityRequest": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name whose availability is to be checked."
+        },
+        "type": {
+          "type": "string",
+          "description": "The type of resource that is used as the scope of the availability check.",
+          "enum": [
+            "Microsoft.Sql/servers"
+          ],
+          "x-ms-enum": {
+            "name": "CheckNameAvailabilityResourceType",
+            "modelAsString": false
+          }
+        }
+      },
+      "required": [
+        "name",
+        "type"
+      ],
+      "description": "A request to check whether the specified name for a resource is available."
+    },
+    "CheckNameAvailabilityResponse": {
+      "properties": {
+        "available": {
+          "type": "boolean",
+          "description": "True if the name is available, otherwise false.",
+          "readOnly": true
+        },
+        "message": {
+          "type": "string",
+          "description": "A message explaining why the name is unavailable. Will be null if the name is available.",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "description": "The name whose availability was checked.",
+          "readOnly": true
+        },
+        "reason": {
+          "type": "string",
+          "description": "The reason code explaining why the name is unavailable. Will be null if the name is available.",
+          "enum": [
+            "Invalid",
+            "AlreadyExists"
+          ],
+          "x-ms-enum": {
+            "name": "CheckNameAvailabilityReason",
+            "modelAsString": false
+          },
+          "readOnly": true
+        }
+      },
+      "description": "A response indicating whether the specified name for a resource is available."
+    }
+  },
+  "parameters": {
+    "ServerNameParameter": {
+      "name": "serverName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the server.",
+      "x-ms-parameter-location": "method"
+    },
+    "DatabaseExpandParameter": {
+      "name": "$expand",
+      "in": "query",
+      "required": false,
+      "type": "string",
+      "description": "A comma separated list of child objects to expand in the response. Possible properties: serviceTierAdvisors, transparentDataEncryption.",
+      "x-ms-parameter-location": "method"
+    },
+    "TransparentDataEncryptionNameParameter": {
+      "name": "transparentDataEncryptionName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "enum": [
+        "current"
+      ],
+      "description": "The name of the transparent data encryption configuration.",
+      "x-ms-enum": {
+        "modelAsString": true,
+        "name": "TransparentDataEncryptionName"
+      },
+      "x-ms-parameter-location": "method"
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  }
 }

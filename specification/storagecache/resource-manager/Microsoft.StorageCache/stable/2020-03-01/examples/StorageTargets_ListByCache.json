@@ -1,0 +1,78 @@
+{
+  "parameters": {
+    "resourceGroupName": "scgroup",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "api-version": "2020-03-01",
+    "cacheName": "sc1"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "st1",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/scgroup/providers/Microsoft.StorageCache/caches/sc1/storagetargets/st1",
+            "type": "Microsoft.StorageCache/Cache/StorageTarget",
+            "properties": {
+              "junctions": [
+                {
+                  "namespacePath": "/path/on/cache",
+                  "targetPath": "/path/on/exp1",
+                  "nfsExport": "exp1"
+                },
+                {
+                  "namespacePath": "/path2/on/cache",
+                  "targetPath": "/path2/on/exp2",
+                  "nfsExport": "exp2"
+                }
+              ],
+              "targetType": "nfs3",
+              "nfs3": {
+                "target": "10.0.44.44",
+                "usageModel": "READ_HEAVY_FREQ"
+              }
+            }
+          },
+          {
+            "name": "st2",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/scgroup/providers/Microsoft.StorageCache/caches/sc1/storagetargets/st2",
+            "type": "Microsoft.StorageCache/Cache/StorageTarget",
+            "properties": {
+              "junctions": [
+                {
+                  "namespacePath": "/some/crazy/place/on/cache",
+                  "targetPath": "/"
+                }
+              ],
+              "targetType": "clfs",
+              "clfs": {
+                "target": "https://atj5c2fc9b8c00.blob.core.windows.net/atj5c2fc9b8c01"
+              }
+            }
+          },
+          {
+            "name": "st3",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/scgroup/providers/Microsoft.StorageCache/caches/sc1/storagetargets/st3",
+            "type": "Microsoft.StorageCache/Cache/StorageTarget",
+            "properties": {
+              "junctions": [
+                {
+                  "namespacePath": "/some/crazier/place/on/cache",
+                  "targetPath": "/",
+                  "nfsExport": ""
+                }
+              ],
+              "targetType": "unknown",
+              "unknown": {
+                "unknownMap": {
+                  "foo": "bar",
+                  "foo2": "test"
+                }
+              }
+            }
+          }
+        ]
+      }
+    }
+  }
+}

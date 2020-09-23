@@ -88,7 +88,7 @@
             }
           },
           "default": {
-          "description": "Error response describing why the operation failed.",
+            "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
@@ -224,7 +224,7 @@
             "description": "OData apply expression to aggregate usageDetails by tags or (tags and properties/usageStart)",
             "in": "query",
             "required": false,
-            "type": "string",            
+            "type": "string",
             "x-ms-parameter-location": "method",
             "x-ms-parameter-grouping": {
               "name": "QueryOptions"
@@ -301,7 +301,7 @@
             "description": "OData apply expression to aggregate usageDetails by tags or (tags and properties/usageStart) for specified billing period",
             "in": "query",
             "required": false,
-            "type": "string",            
+            "type": "string",
             "x-ms-parameter-location": "method",
             "x-ms-parameter-grouping": {
               "name": "QueryOptions"
@@ -401,7 +401,7 @@
             "description": "OData apply expression to aggregate usageDetails by tags or (tags and properties/usageStart)",
             "in": "query",
             "required": false,
-            "type": "string",            
+            "type": "string",
             "x-ms-parameter-location": "method",
             "x-ms-parameter-grouping": {
               "name": "QueryOptions"
@@ -517,7 +517,7 @@
           "nextLinkName": "nextLink"
         }
       }
-  },
+    },
     "/providers/Microsoft.Billing/departments/{departmentId}/providers/Microsoft.Consumption/usageDetails": {
       "get": {
         "tags": [
@@ -572,7 +572,7 @@
             "description": "OData apply expression to aggregate usageDetails by tags or (tags and properties/usageStart)",
             "in": "query",
             "required": false,
-            "type": "string",            
+            "type": "string",
             "x-ms-parameter-location": "method",
             "x-ms-parameter-grouping": {
               "name": "QueryOptions"
@@ -603,7 +603,7 @@
       }
     },
     "/providers/Microsoft.Billing/departments/{departmentId}/providers/Microsoft.Billing/billingPeriods/{billingPeriodName}/providers/Microsoft.Consumption/usageDetails": {
-"get": {
+      "get": {
         "tags": [
           "UsageDetails"
         ],
@@ -643,7 +643,7 @@
             "description": "OData apply expression to aggregate usageDetails by tags or (tags and properties/usageStart) for specified billing period",
             "in": "query",
             "required": false,
-            "type": "string",            
+            "type": "string",
             "x-ms-parameter-location": "method",
             "x-ms-parameter-grouping": {
               "name": "QueryOptions"
@@ -688,7 +688,7 @@
           "nextLinkName": "nextLink"
         }
       }
-  },
+    },
     "/providers/Microsoft.Billing/enrollmentAccounts/{enrollmentAccountId}/providers/Microsoft.Consumption/usageDetails": {
       "get": {
         "tags": [
@@ -743,7 +743,7 @@
             "description": "OData apply expression to aggregate usageDetails by tags or (tags and properties/usageStart)",
             "in": "query",
             "required": false,
-            "type": "string",            
+            "type": "string",
             "x-ms-parameter-location": "method",
             "x-ms-parameter-grouping": {
               "name": "QueryOptions"
@@ -774,7 +774,7 @@
       }
     },
     "/providers/Microsoft.Billing/enrollmentAccounts/{enrollmentAccountId}/providers/Microsoft.Billing/billingPeriods/{billingPeriodName}/providers/Microsoft.Consumption/usageDetails": {
-"get": {
+      "get": {
         "tags": [
           "UsageDetails"
         ],
@@ -814,7 +814,7 @@
             "description": "OData apply expression to aggregate usageDetails by tags or (tags and properties/usageStart) for specified billing period",
             "in": "query",
             "required": false,
-            "type": "string",            
+            "type": "string",
             "x-ms-parameter-location": "method",
             "x-ms-parameter-grouping": {
               "name": "QueryOptions"
@@ -859,7 +859,7 @@
           "nextLinkName": "nextLink"
         }
       }
-  },
+    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Consumption/forecasts": {
       "get": {
         "tags": [
@@ -1003,7 +1003,7 @@
             }
           }
         }
-      }        
+      }
     },
     "OperationListResult": {
       "description": "Result of listing consumption operations. It contains a list of operations and a URL link to get the next set of results.",
@@ -1097,7 +1097,7 @@
         "meterId": {
           "description": "The meter id (GUID)",
           "type": "string",
-          "format":"uuid",
+          "format": "uuid",
           "readOnly": true
         },
         "meterDetails": {
@@ -1131,14 +1131,14 @@
           "description": "Currency Code",
           "type": "string",
           "readOnly": true
-        },        
+        },
         "offerId": {
           "description": "Offer Id",
           "type": "string",
           "readOnly": true
-		    }
-	    }
-    },   
+        }
+      }
+    },
     "Forecast": {
       "description": "A forecast resource.",
       "type": "object",
@@ -1302,7 +1302,7 @@
         "meterId": {
           "description": "The meter id (GUID).",
           "type": "string",
-          "format":"uuid",
+          "format": "uuid",
           "readOnly": true
         },
         "meterDetails": {
@@ -1313,7 +1313,7 @@
         "subscriptionGuid": {
           "description": "Subscription guid.",
           "type": "string",
-          "format":"uuid",
+          "format": "uuid",
           "readOnly": true
         },
         "subscriptionName": {
@@ -1464,7 +1464,6 @@
               }
             }
           },
-
           "readOnly": true
         }
       }
@@ -1501,7 +1500,7 @@
       "type": "string",
       "x-ms-parameter-location": "method"
     },
-	 "departmentIdParameter": {
+    "departmentIdParameter": {
       "name": "departmentId",
       "in": "path",
       "description": "Department ID",
@@ -1509,7 +1508,7 @@
       "type": "string",
       "x-ms-parameter-location": "method"
     },
-	 "enrollmentAccountIdParameter": {
+    "enrollmentAccountIdParameter": {
       "name": "enrollmentAccountId",
       "in": "path",
       "description": "EnrollmentAccount ID",

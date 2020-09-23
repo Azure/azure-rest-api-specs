@@ -26,7 +26,61 @@ These are the global settings for the Batch API.
 
 ``` yaml
 openapi-type: data-plane
-tag: package-2018-03.6.1
+tag: package-2020-09.12.0
+```
+
+### Tag: package-2020-09.12.0
+
+These settings apply only when `--tag=package-2020-09.12.0` is specified on the command line.
+
+``` yaml $(tag) == 'package-2020-09.12.0'
+input-file:
+- Microsoft.Batch/stable/2020-09-01.12.0/BatchService.json
+```
+
+### Tag: package-2020-03.11.0
+
+These settings apply only when `--tag=package-2020-03.11.0` is specified on the command line.
+
+``` yaml $(tag) == 'package-2020-03.11.0'
+input-file:
+- Microsoft.Batch/stable/2020-03-01.11.0/BatchService.json
+```
+
+### Tag: package-2019-08.10.0
+
+These settings apply only when `--tag=package-2019-08.10.0` is specified on the command line.
+
+``` yaml $(tag) == 'package-2019-08.10.0'
+input-file:
+- Microsoft.Batch/stable/2019-08-01.10.0/BatchService.json
+```
+
+### Tag: package-2019-06.9.0
+
+These settings apply only when `--tag=package-2019-06.9.0` is specified on the command line.
+
+``` yaml $(tag) == 'package-2019-06.9.0'
+input-file:
+- Microsoft.Batch/stable/2019-06-01.9.0/BatchService.json
+```
+
+### Tag: package-2018-12.8.0
+
+These settings apply only when `--tag=package-2018-12.8.0` is specified on the command line.
+
+``` yaml $(tag) == 'package-2018-12.8.0'
+input-file:
+- Microsoft.Batch/stable/2018-12-01.8.0/BatchService.json
+```
+
+### Tag: package-2018-08.7.0
+
+These settings apply only when `--tag=package-2018-08.7.0` is specified on the command line.
+
+``` yaml $(tag) == 'package-2018-08.7.0'
+input-file:
+- Microsoft.Batch/stable/2018-08-01.7.0/BatchService.json
 ```
 
 ### Tag: package-2018-03.6.1
@@ -221,6 +275,7 @@ This is not used by Autorest itself.
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
   - repo: azure-sdk-for-go
+  - repo: azure-sdk-for-js
   - repo: azure-sdk-for-node
 ```
 
@@ -235,8 +290,9 @@ csharp:
   license-header: MICROSOFT_MIT_NO_VERSION
   payload-flattening-threshold: 1
   namespace: Microsoft.Azure.Batch.Protocol
-  output-folder: $(csharp-sdks-folder)/Batch/DataPlane/Azure.Batch/GeneratedProtocol
+  output-folder: $(csharp-sdks-folder)/batch/Microsoft.Azure.Batch/src/GeneratedProtocol
   clear-output-folder: true
+  client-side-validation: false
 ```
 
 ## Python
@@ -268,95 +324,23 @@ python:
 
 ## Go
 
-These settings apply only when `--go` is specified on the command line.
+See configuration in [readme.go.md](./readme.go.md)
 
-``` yaml $(go)
-go:
-  license-header: MICROSOFT_APACHE_NO_VERSION
+## Java
+
+These settings apply only when `--java` is specified on the command line.
+Please also specify `--node-sdks-folder=<path to root folder of your azure-batch-sdk-for-java clone>`.
+
+``` yaml $(java)
+nodejs:
+  azure-arm: true
+  license-header: MICROSOFT_MIT_NO_VERSION
+  namespace: com.microsoft.azure.batch.protocol
+  output-folder: $(node-sdks-folder)/src/main/java
+  payload-flattening-threshold: 1
+  generate-license-txt: true
   clear-output-folder: true
-  namespace: batch
 ```
-
-### Go multi-api
-
-``` yaml $(go) && $(multiapi)
-batch:
-  - tag: package-2017-05.5.0
-  - tag: package-2018-03.6.1
-```
-
-### Tag: package-2018-03.6.1 and go
-
-These settings apply only when `--tag=package-2018-03.6.1 --go` is specified on the command line.
-Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
-
-``` yaml $(tag)=='package-2018-03.6.1' && $(go)
-output-folder: $(go-sdk-folder)/services/batch/2018-03-01.6.1/batch
-```
-
-### Tag: package-2017-09.6.0 and go
-
-These settings apply only when `--tag=package-2017-09.6.0 --go` is specified on the command line.
-Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
-
-``` yaml $(tag)=='package-2017-09.6.0' && $(go)
-output-folder: $(go-sdk-folder)/services/batch/2017-09-01.6.0/batch
-```
-
-### Tag: package-2017-06.5.1 and go
-
-These settings apply only when `--tag=package-2017-06.5.1 --go` is specified on the command line.
-Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
-
-``` yaml $(tag)=='package-2017-06.5.1' && $(go)
-output-folder: $(go-sdk-folder)/services/batch/2017-06-01.5.1/batch
-```
-
-### Tag: package-2017-05.5.0 and go
-
-These settings apply only when `--tag=package-2017-05.5.0 --go` is specified on the command line.
-Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
-
-``` yaml $(tag)=='package-2017-05.5.0' && $(go)
-output-folder: $(go-sdk-folder)/services/batch/2017-05-01.5.0/batch
-```
-
-### Tag: package-2017-01.4.0 and go
-
-These settings apply only when `--tag=package-2017-01.4.0 --go` is specified on the command line.
-Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
-
-``` yaml $(tag)=='package-2017-01.4.0' && $(go)
-output-folder: $(go-sdk-folder)/services/batch/2017-01-01.4.0/batch
-```
-
-### Tag: package-2016-07.3.1 and go
-
-These settings apply only when `--tag=package-2016-07.3.1 --go` is specified on the command line.
-Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
-
-``` yaml $(tag)=='package-2016-07.3.1' && $(go)
-output-folder: $(go-sdk-folder)/services/batch/2016-07-01.3.1/batch
-```
-
-### Tag: package-2016-02.3.0 and go
-
-These settings apply only when `--tag=package-2016-02.3.0 --go` is specified on the command line.
-Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
-
-``` yaml $(tag)=='package-2016-02.3.0' && $(go)
-output-folder: $(go-sdk-folder)/services/batch/2016-02-01.3.0/batch
-```
-
-### Tag: package-2015-12.2.2 and go
-
-These settings apply only when `--tag=package-2017-05.5.0 --go` is specified on the command line.
-Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
-
-``` yaml $(tag)=='package-2017-05.5.0' && $(go)
-output-folder: $(go-sdk-folder)/services/batch/2015-12-01.2.2/batch
-```
-
 
 ## Java
 
@@ -372,3 +356,41 @@ java:
   payload-flattening-threshold: 1
   output-folder: $(azure-libraries-for-java-folder)/azure-batch
 ```
+
+## Multi-API/Profile support for AutoRest v3 generators 
+
+AutoRest V3 generators require the use of `--tag=all-api-versions` to select api files.
+
+This block is updated by an automatic script. Edits may be lost!
+
+``` yaml $(tag) == 'all-api-versions' /* autogenerated */
+# include the azure profile definitions from the standard location
+require: $(this-folder)/../../../profiles/readme.md
+
+# all the input files across all versions
+input-file:
+  - $(this-folder)/Microsoft.Batch/stable/2020-09-01.12.0/BatchService.json
+  - $(this-folder)/Microsoft.Batch/stable/2020-03-01.11.0/BatchService.json
+  - $(this-folder)/Microsoft.Batch/stable/2019-08-01.10.0/BatchService.json
+  - $(this-folder)/Microsoft.Batch/stable/2019-06-01.9.0/BatchService.json
+  - $(this-folder)/Microsoft.Batch/stable/2018-12-01.8.0/BatchService.json
+  - $(this-folder)/Microsoft.Batch/stable/2018-08-01.7.0/BatchService.json
+  - $(this-folder)/Microsoft.Batch/stable/2018-03-01.6.1/BatchService.json
+  - $(this-folder)/Microsoft.Batch/stable/2017-09-01.6.0/BatchService.json
+  - $(this-folder)/Microsoft.Batch/stable/2017-06-01.5.1/BatchService.json
+  - $(this-folder)/Microsoft.Batch/stable/2017-05-01.5.0/BatchService.json
+  - $(this-folder)/Microsoft.Batch/stable/2017-01-01.4.0/BatchService.json
+  - $(this-folder)/Microsoft.Batch/stable/2016-07-01.3.1/BatchService.json
+  - $(this-folder)/Microsoft.Batch/stable/2016-02-01.3.0/BatchService.json
+  - $(this-folder)/Microsoft.Batch/stable/2015-12-01.2.2/BatchService.json
+
+```
+
+If there are files that should not be in the `all-api-versions` set, 
+uncomment the  `exclude-file` section below and add the file paths.
+
+``` yaml $(tag) == 'all-api-versions'
+#exclude-file: 
+#  - $(this-folder)/Microsoft.Example/stable/2010-01-01/somefile.json
+```
+

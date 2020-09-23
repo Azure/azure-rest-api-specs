@@ -1,13 +1,13 @@
 # BotService
-    
+
 > see https://aka.ms/autorest
 
 This is the AutoRest configuration file for BotService.
 
-
-
 ---
-## Getting Started 
+
+## Getting Started
+
 To build the SDK for BotService, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
 
 > `autorest`
@@ -15,18 +15,49 @@ To build the SDK for BotService, simply [Install AutoRest](https://aka.ms/autore
 To see additional help and options, run:
 
 > `autorest --help`
+
 ---
 
 ## Configuration
 
+### Basic Information
 
-
-### Basic Information 
 These are the global settings for the BotService API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2017-12-01
+tag: package-2020-06-02
+```
+
+
+### Tag: package-2020-06-02
+
+These settings apply only when `--tag=package-2020-06-02` is specified on the command line.
+
+```yaml $(tag) == 'package-2020-06-02'
+input-file:
+  - Microsoft.BotService/stable/2020-06-02/botservice.json
+```
+### Tag: package-2018-07-12
+
+These settings apply only when `--tag=package-2018-07-12` is specified on the command line.
+
+``` yaml $(tag) == 'package-2018-07-12'
+input-file:
+- Microsoft.BotService/preview/2018-07-12/botservice.json
+directive:
+  - suppress: R3010
+    from: botservice.json
+    reason: It is not a useful operation in the bot service.
+  - suppress: R2001
+    from: botservice.json
+    reason: Flatten does not improve the programming experience here.
+  - suppress: R3018
+    from: botservice.json
+    reason: We used Enums where we might extend to multiple states, and left booleans where it would ease development.
+  - suppress: R2066
+    from: botservice.json
+    reason: The path as-is is quite descriptive.
 ```
 
 ### Tag: package-2017-12-01
@@ -50,7 +81,9 @@ directive:
     from: botservice.json
     reason: The path as-is is quite descriptive.
 ```
+
 ---
+
 # Code Generation
 
 ## Swagger to SDK
@@ -60,11 +93,15 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
+  - repo: azure-sdk-for-net
   - repo: azure-sdk-for-python
   - repo: azure-sdk-for-go
+  - repo: azure-resource-manager-schemas
+    after_scripts:
+      - node sdkauto_afterscript.js botservice/resource-manager
 ```
 
-## C# 
+## C#
 
 These settings apply only when `--csharp` is specified on the command line.
 Please also specify `--csharp-sdks-folder=<path to "SDKs" directory of your azure-sdk-for-net clone>`.
@@ -74,37 +111,23 @@ csharp:
   azure-arm: true
   license-header: MICROSOFT_MIT_NO_VERSION
   namespace: Microsoft.Azure.Management.BotService
-  output-folder: $(csharp-sdks-folder)/BotService/Microsoft.Azure.Management.BotService/Generated
+  output-folder: $(csharp-sdks-folder)/botservice/Microsoft.Azure.Management.BotService/src/Generated
   clear-output-folder: true
 ```
+
+## Go
+
+See configuration in [readme.go.md](./readme.go.md)
+
+## Java
+
+See configuration in [readme.java.md](./readme.java.md)
 
 ## Python
 
 See readme.python.md file.
 
-## Go
+## AzureResourceSchema
 
-These settings apply only when `--go` is specified on the command line.
+See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
 
-``` yaml $(go)
-go:
-  license-header: MICROSOFT_APACHE_NO_VERSION
-  namespace: botservice
-  clear-output-folder: true
-```
-
-### Go multi-api
-
-``` yaml $(go) && $(multiapi)
-batch:
-  - tag: package-2017-12-01
-```
-
-### Tag: package-2017-12-01 and go
-
-These settings apply only when `--tag=package-2017-12-01 --go` is specified on the command line.
-Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
-
-``` yaml $(tag) == 'package-2017-12-01' && $(go)
-output-folder: $(go-sdk-folder)/services/preview/botservice/mgmt/2017-12-01/botservices
-```

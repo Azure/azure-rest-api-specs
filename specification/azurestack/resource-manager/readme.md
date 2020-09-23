@@ -9,7 +9,7 @@ The Azure Stack RP comprises of small services where each service has its own ta
 Hence, each sub-service has its own swagger spec.
 
 All of them are tied together using this configuration and are packaged together into one Azure Stack client library.
-This makes it easier for customers to download one (nuget/npm/pip/maven/gem) Azure Stack client library package rather than installing individual packages for each sub service.
+This makes it easier for customers to download one (NuGet/npm/pip/maven/gem) Azure Stack client library package rather than installing individual packages for each sub service.
 
 
 ---
@@ -71,8 +71,13 @@ This is not used by Autorest itself.
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
   - repo: azure-sdk-for-python
-  - repo: azure-libraries-for-java
+  - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
+  - repo: azure-sdk-for-js
+  - repo: azure-sdk-for-node
+  - repo: azure-resource-manager-schemas
+    after_scripts:
+      - node sdkauto_afterscript.js azurestack/resource-manager
 ```
 
 ## C#
@@ -87,50 +92,13 @@ csharp:
   license-header: MICROSOFT_MIT_NO_VERSION
   namespace: Microsoft.Azure.Management.AzureStack
   payload-flattening-threshold: 1
-  output-folder: $(csharp-sdks-folder)/AzureStack/Management.AzureStack/Generated
+  output-folder: $(csharp-sdks-folder)/azurestack/Microsoft.Azure.Management.AzureStack/src/Generated
   clear-output-folder: true
 ```
 
 ## Go
 
-These settings apply only when `--go` is specified on the command line.
-
-``` yaml $(go)
-go:
-  license-header: MICROSOFT_APACHE_NO_VERSION
-  clear-output-folder: true
-  namespace: azurestack
-```
-
-### Go multi-api
-
-``` yaml $(go) && $(multiapi)
-batch:
-  - tag: package-2017-06-01
-```
-
-### Tag: package-2017-06-01 and go
-
-These settings apply only when `--tag=package-2017-06-01 --go` is specified on the command line.
-Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
-
-``` yaml $(tag)=='package-2017-06-01' && $(go)
-output-folder: $(go-sdk-folder)/services/$(namespace)/mgmt/2017-06-01/$(namespace)
-```
-
-## Python
-
-These settings apply only when `--python` is specified on the command line.
-
-``` yaml $(python)
-python:
-  azure-arm: true
-  license-header: MICROSOFT_MIT_NO_VERSION
-  payload-flattening-threshold: 2
-  package-name: azure-mgmt-azurestack
-  no-namespace-folders: true
-  clear-output-folder: true
-```
+See configuration in [readme.go.md](./readme.go.md)
 
 ## Java
 
@@ -138,11 +106,40 @@ These settings apply only when `--java` is specified on the command line.
 Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-libraries-for-java clone>`.
 
 ``` yaml $(java)
-java:
-  azure-arm: true
-  fluent: true
-  namespace: com.microsoft.azure.management.azurestack
-  license-header: MICROSOFT_MIT_NO_CODEGEN
-  payload-flattening-threshold: 1
-  output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-azurestack
+azure-arm: true
+fluent: true
+namespace: com.microsoft.azure.management.azurestack
+license-header: MICROSOFT_MIT_NO_CODEGEN
+payload-flattening-threshold: 1
+output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-azurestack
 ```
+
+### Java multi-api
+
+``` yaml $(java) && $(multiapi)
+batch:
+  - tag: package-2017-06-01
+```
+
+### Tag: package-2017-06-01 and java
+
+These settings apply only when `--tag=package-2017-06-01 --java` is specified on the command line.
+Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-2017-06-01' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.azurestack.v2017_06_01
+  output-folder: $(azure-libraries-for-java-folder)/sdk/azurestack/mgmt-v2017_06_01
+regenerate-manager: true
+generate-interface: true
+```
+
+## Python
+
+See configuration in [readme.python.md](./readme.python.md)
+
+
+## AzureResourceSchema
+
+See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
+

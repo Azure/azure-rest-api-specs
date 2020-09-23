@@ -3,7 +3,7 @@
     "subscriptionId": "e68d4145-c9ae-4667-925d-c51c8d88ad73",
     "resourceGroupName": "azuresdkfornetautoresttrafficmanager2583",
     "profileName": "azuresdkfornetautoresttrafficmanager6192",
-    "api-version": "2017-05-01",
+    "api-version": "2018-03-01",
     "parameters": {
       "properties": {
         "profileStatus": "Enabled",
@@ -19,9 +19,28 @@
           "intervalInSeconds": 10,
           "timeoutInSeconds": 5,
           "toleratedNumberOfFailures": 2,
-          "customHeaders" : [{"name":"header-1", "value":"value-1"},{"name":"header-2", "value":"value-2"}],
-          "expectedStatusCodeRanges" : [{"min":200, "max":205},{"min":400, "max":410}]
+          "customHeaders": [
+            {
+              "name": "header-1",
+              "value": "value-1"
+            },
+            {
+              "name": "header-2",
+              "value": "value-2"
+            }
+          ],
+          "expectedStatusCodeRanges": [
+            {
+              "min": 200,
+              "max": 205
+            },
+            {
+              "min": 400,
+              "max": 410
+            }
+          ]
         },
+        "trafficViewEnrollmentStatus": "Disabled",
         "endpoints": [
           {
             "name": "My external endpoint",
@@ -30,7 +49,12 @@
               "target": "foobar.contoso.com",
               "endpointStatus": "Enabled",
               "endpointLocation": "North Europe",
-              "customHeaders" : [{"name":"header-2", "value":"value-2-overriden"}]
+              "customHeaders": [
+                {
+                  "name": "header-2",
+                  "value": "value-2-overridden"
+                }
+              ]
             }
           }
         ]
@@ -61,8 +85,18 @@
             "intervalInSeconds": 10,
             "toleratedNumberOfFailures": 2,
             "timeoutInSeconds": 5,
-            "customHeaders" : [{"name":"header-1", "value":"value-1"},{"name":"header-2", "value":"value-2"}]
+            "customHeaders": [
+              {
+                "name": "header-1",
+                "value": "value-1"
+              },
+              {
+                "name": "header-2",
+                "value": "value-2"
+              }
+            ]
           },
+          "trafficViewEnrollmentStatus": "Disabled",
           "endpoints": [
             {
               "id": "/subscriptions/e68d4145-c9ae-4667-925d-c51c8d88ad73/resourceGroups/azuresdkfornetautoresttrafficmanager2583/providers/Microsoft.Network/trafficManagerProfiles/azuresdkfornetautoresttrafficmanager6192/externalEndpoints/My external endpoint",
@@ -75,7 +109,12 @@
                 "weight": 1,
                 "priority": 1,
                 "endpointLocation": "North Europe",
-                "customHeaders" : [{"name":"header-2", "value":"value-2-overriden"}]
+                "customHeaders": [
+                  {
+                    "name": "header-2",
+                    "value": "value-2-overridden"
+                  }
+                ]
               }
             }
           ]
@@ -104,8 +143,18 @@
             "intervalInSeconds": 10,
             "toleratedNumberOfFailures": 2,
             "timeoutInSeconds": 5,
-            "customHeaders" : [{"name":"header-1", "value":"value-1"},{"name":"header-2", "value":"value-2"}]
+            "customHeaders": [
+              {
+                "name": "header-1",
+                "value": "value-1"
+              },
+              {
+                "name": "header-2",
+                "value": "value-2"
+              }
+            ]
           },
+          "trafficViewEnrollmentStatus": "Disabled",
           "endpoints": [
             {
               "id": "/subscriptions/e68d4145-c9ae-4667-925d-c51c8d88ad73/resourceGroups/azuresdkfornetautoresttrafficmanager2583/providers/Microsoft.Network/trafficManagerProfiles/azuresdkfornetautoresttrafficmanager6192/externalEndpoints/My external endpoint",
@@ -118,7 +167,12 @@
                 "weight": 1,
                 "priority": 1,
                 "endpointLocation": "North Europe",
-                "customHeaders" : [{"name":"header-2", "value":"value-2-overriden"}]
+                "customHeaders": [
+                  {
+                    "name": "header-2",
+                    "value": "value-2-overridden"
+                  }
+                ]
               }
             }
           ]

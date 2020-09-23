@@ -53,8 +53,15 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
+  - repo: azure-sdk-for-net
   - repo: azure-sdk-for-go
+  - repo: azure-sdk-for-js
   - repo: azure-sdk-for-node
+  - repo: azure-sdk-for-python
+  - repo: azure-cli-extensions
+  - repo: azure-resource-manager-schemas
+    after_scripts:
+      - node sdkauto_afterscript.js operationsmanagement/resource-manager
 ```
 
 
@@ -70,38 +77,17 @@ csharp:
   namespace: Microsoft.Azure.Management.OperationsManagement
   payload-flattening-threshold: 1
   license-header: MICROSOFT_MIT_NO_VERSION
-  output-folder: $(csharp-sdks-folder)/OperationsManagement/Management.OperationsManagement/Generated
+  output-folder: $(csharp-sdks-folder)/operationsmanagement/Microsoft.Azure.Management.OperationsManagement/src/Generated
   clear-output-folder: true
 ```
-
 
 ## Go
 
-These settings apply only when `--go` is specified on the command line.
+See configuration in [readme.go.md](./readme.go.md)
 
-``` yaml $(go)
-go:
-  license-header: MICROSOFT_APACHE_NO_VERSION
-  namespace: operationsmanagement
-  clear-output-folder: true
-```
+## Python
 
-### Go multi-api
-
-``` yaml $(go) && $(multiapi)
-batch:
-  - tag: package-2015-11-preview
-```
-
-### Tag: package-2015-11-preview and go
-
-These settings apply only when `--tag=package-2015-11-preview --go` is specified on the command line.
-Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
-
-``` yaml $(tag) == 'package-2015-11-preview' && $(go)
-output-folder: $(go-sdk-folder)/services/preview/operationsmanagement/mgmt/2015-11-01-preview/operationsmanagement
-```
-
+See configuration in [readme.python.md](./readme.python.md)
 
 ## Java
 
@@ -109,11 +95,37 @@ These settings apply only when `--java` is specified on the command line.
 Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-libraries-for-java clone>`.
 
 ``` yaml $(java)
-java:
-  azure-arm: true
-  fluent: true
-  namespace: com.microsoft.azure.management.operationsmanagement
-  license-header: MICROSOFT_MIT_NO_CODEGEN
-  payload-flattening-threshold: 1
-  output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-operationsmanagement
+azure-arm: true
+fluent: true
+namespace: com.microsoft.azure.management.operationsmanagement
+license-header: MICROSOFT_MIT_NO_CODEGEN
+payload-flattening-threshold: 1
+output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-operationsmanagement
 ```
+
+### Java multi-api
+
+``` yaml $(java) && $(multiapi)
+batch:
+  - tag: package-2015-11-preview
+```
+
+### Tag: package-2015-11-preview and java
+
+These settings apply only when `--tag=package-2015-11-preview --java` is specified on the command line.
+Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-2015-11-preview' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.operationsmanagement.v2015_11_01_preview
+  output-folder: $(azure-libraries-for-java-folder)/sdk/operationsmanagement/mgmt-v2015_11_01_preview
+regenerate-manager: true
+generate-interface: true
+```
+
+
+
+## AzureResourceSchema
+
+See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
+

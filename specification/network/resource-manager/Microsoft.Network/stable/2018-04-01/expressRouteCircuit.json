@@ -64,10 +64,10 @@
             "description": "The name of the authorization."
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -81,7 +81,12 @@
             "description": "Delete successful."
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Delete ExpressRouteCircuit Authorization": {
+            "$ref": "./examples/ExpressRouteCircuitAuthorizationDelete.json"
+          }
+        }
       },
       "get": {
         "tags": [
@@ -112,10 +117,10 @@
             "description": "The name of the authorization."
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -124,6 +129,11 @@
             "schema": {
               "$ref": "#/definitions/ExpressRouteCircuitAuthorization"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Get ExpressRouteCircuit Authorization": {
+            "$ref": "./examples/ExpressRouteCircuitAuthorizationGet.json"
           }
         }
       },
@@ -165,10 +175,10 @@
             "description": "Parameters supplied to the create or update express route circuit authorization operation."
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -185,7 +195,12 @@
             }
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Create ExpressRouteCircuit Authorization": {
+            "$ref": "./examples/ExpressRouteCircuitAuthorizationCreate.json"
+          }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteCircuits/{circuitName}/authorizations": {
@@ -211,10 +226,10 @@
             "description": "The name of the circuit."
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -227,6 +242,11 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List ExpressRouteCircuit Authorization": {
+            "$ref": "./examples/ExpressRouteCircuitAuthorizationList.json"
+          }
         }
       }
     },
@@ -260,10 +280,10 @@
             "description": "The name of the peering."
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -277,14 +297,19 @@
             "description": "Delete successful."
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Delete ExpressRouteCircuit Peerings": {
+            "$ref": "./examples/ExpressRouteCircuitPeeringDelete.json"
+          }
+        }
       },
       "get": {
         "tags": [
           "ExpressRouteCircuitPeerings"
         ],
         "operationId": "ExpressRouteCircuitPeerings_Get",
-        "description": "Gets the specified authorization from the specified express route circuit.",
+        "description": "Gets the specified peering for the express route circuit.",
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -308,10 +333,10 @@
             "description": "The name of the peering."
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -320,6 +345,11 @@
             "schema": {
               "$ref": "#/definitions/ExpressRouteCircuitPeering"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Get ExpressRouteCircuit Peering": {
+            "$ref": "./examples/ExpressRouteCircuitPeeringGet.json"
           }
         }
       },
@@ -361,10 +391,10 @@
             "description": "Parameters supplied to the create or update express route circuit peering operation."
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -381,7 +411,12 @@
             }
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Create ExpressRouteCircuit Peerings": {
+            "$ref": "./examples/ExpressRouteCircuitPeeringCreate.json"
+          }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteCircuits/{circuitName}/peerings": {
@@ -407,10 +442,10 @@
             "description": "The name of the express route circuit."
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -423,6 +458,11 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List ExpressRouteCircuit Peerings": {
+            "$ref": "./examples/ExpressRouteCircuitPeeringList.json"
+          }
         }
       }
     },
@@ -463,10 +503,10 @@
             "description": "The name of the express route circuit connection."
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -481,7 +521,7 @@
           }
         },
         "x-ms-examples": {
-          "ExpressRouteCircuitConnectionDelete": {
+          "Delete ExpressRouteCircuit": {
             "$ref": "./examples/ExpressRouteCircuitConnectionDelete.json"
           }
         },
@@ -523,10 +563,10 @@
             "description": "The name of the express route circuit connection."
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -585,13 +625,13 @@
             "schema": {
               "$ref": "#/definitions/ExpressRouteCircuitConnection"
             },
-            "description": "Parameters supplied to the create or update express route circuit circuit connection operation."
+            "description": "Parameters supplied to the create or update express route circuit connection operation."
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -639,10 +679,10 @@
             "description": "The name of the express route circuit."
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -656,7 +696,12 @@
             "description": "Delete successful."
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Delete ExpressRouteCircuit": {
+            "$ref": "./examples/ExpressRouteCircuitDelete.json"
+          }
+        }
       },
       "get": {
         "tags": [
@@ -680,10 +725,10 @@
             "description": "The name of express route circuit."
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -692,6 +737,11 @@
             "schema": {
               "$ref": "#/definitions/ExpressRouteCircuit"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Get ExpressRouteCircuit": {
+            "$ref": "./examples/ExpressRouteCircuitGet.json"
           }
         }
       },
@@ -726,10 +776,10 @@
             "description": "Parameters supplied to the create or update express route circuit operation."
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -746,7 +796,12 @@
             }
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Create ExpressRouteCircuit": {
+            "$ref": "./examples/ExpressRouteCircuitCreate.json"
+          }
+        }
       },
       "patch": {
         "tags": [
@@ -779,10 +834,10 @@
             "description": "Parameters supplied to update express route circuit tags."
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -838,10 +893,10 @@
             "description": "The path of the device."
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -855,7 +910,12 @@
             "description": "Accepted and the operation will complete asynchronously."
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "List ARP Table": {
+            "$ref": "./examples/ExpressRouteCircuitARPTableList.json"
+          }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteCircuits/{circuitName}/peerings/{peeringName}/routeTables/{devicePath}": {
@@ -895,10 +955,10 @@
             "description": "The path of the device."
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -912,7 +972,12 @@
             "description": "Accepted and the operation will complete asynchronously."
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "List Route Tables": {
+            "$ref": "./examples/ExpressRouteCircuitRouteTableList.json"
+          }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteCircuits/{circuitName}/peerings/{peeringName}/routeTablesSummary/{devicePath}": {
@@ -952,10 +1017,10 @@
             "description": "The path of the device."
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -969,7 +1034,12 @@
             "description": "Accepted and the operation will complete asynchronously."
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "List Route Table Summary": {
+            "$ref": "./examples/ExpressRouteCircuitRouteTableSummaryList.json"
+          }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteCircuits/{circuitName}/stats": {
@@ -995,10 +1065,10 @@
             "description": "The name of the express route circuit."
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -1007,6 +1077,11 @@
             "schema": {
               "$ref": "#/definitions/ExpressRouteCircuitStats"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Get ExpressRoute Circuit Traffic Stats": {
+            "$ref": "./examples/ExpressRouteCircuitStats.json"
           }
         }
       }
@@ -1041,10 +1116,10 @@
             "description": "The name of the peering."
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -1053,6 +1128,11 @@
             "schema": {
               "$ref": "#/definitions/ExpressRouteCircuitStats"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Get ExpressRoute Circuit Peering Traffic Stats": {
+            "$ref": "./examples/ExpressRouteCircuitPeeringStats.json"
           }
         }
       }
@@ -1073,10 +1153,10 @@
             "description": "The name of the resource group."
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -1089,6 +1169,11 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List ExpressRouteCircuits in a resource group": {
+            "$ref": "./examples/ExpressRouteCircuitListByResourceGroup.json"
+          }
         }
       }
     },
@@ -1101,10 +1186,10 @@
         "description": "Gets all the express route circuits in a subscription.",
         "parameters": [
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -1117,6 +1202,11 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List ExpressRouteCircuits in a subscription": {
+            "$ref": "./examples/ExpressRouteCircuitListBySubscription.json"
+          }
         }
       }
     },
@@ -1129,15 +1219,15 @@
         "description": "Gets all the available express route service providers.",
         "parameters": [
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
           "200": {
-            "description": "Request successful. The operation returns a list of ExpressRouteServiceProdiver resources.",
+            "description": "Request successful. The operation returns a list of ExpressRouteServiceProvider resources.",
             "schema": {
               "$ref": "#/definitions/ExpressRouteServiceProviderListResult"
             }
@@ -1145,6 +1235,11 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List ExpressRoute providers": {
+            "$ref": "./examples/ExpressRouteProviderList.json"
+          }
         }
       }
     }
@@ -1227,7 +1322,7 @@
           "items": {
             "type": "string"
           },
-          "description": "The communities of bgp peering. Spepcified for microsoft peering"
+          "description": "The communities of bgp peering. Specified for microsoft peering"
         },
         "advertisedPublicPrefixesState": {
           "type": "string",
@@ -1501,7 +1596,7 @@
         "provisioningState": {
           "type": "string",
           "readOnly": true,
-          "description": "Provisioning state of the circuit connection resource. Possible values are: 'Succeded', 'Updating', 'Deleting', and 'Failed'."
+          "description": "Provisioning state of the circuit connection resource. Possible values are: 'Succeeded', 'Updating', 'Deleting', and 'Failed'."
         }
       }
     },
@@ -1868,22 +1963,6 @@
         }
       },
       "description": "Response for the ListExpressRouteServiceProvider API service call."
-    }
-  },
-  "parameters": {
-    "SubscriptionIdParameter": {
-      "name": "subscriptionId",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "The subscription credentials which uniquely identify the Microsoft Azure subscription. The subscription ID forms part of the URI for every service call."
-    },
-    "ApiVersionParameter": {
-      "name": "api-version",
-      "in": "query",
-      "required": true,
-      "type": "string",
-      "description": "Client API version."
     }
   }
 }

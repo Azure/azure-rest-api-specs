@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "News Search API",
+    "title": "News Search Client",
     "description": "The News Search API lets you send a search query to Bing and get back a list of news that are relevant to the search query. This section provides technical details about the query parameters and headers that you use to request news and the JSON response objects that contain them. For examples that show how to make requests, see [Searching the web for news](https://docs.microsoft.com/en-us/azure/cognitive-services/bing-news-search/search-the-web).",
     "version": "1.0"
   },
@@ -22,11 +22,20 @@
       ]
     }
   },
+  "x-ms-parameterized-host": {
+    "hostTemplate": "{Endpoint}",
+    "useSchemePrefix": false,
+    "parameters": [
+      {
+        "$ref": "../../../Common/Parameters.json#/parameters/GlobalEndpoint"
+      }
+    ]
+  },
   "host": "api.cognitive.microsoft.com",
+  "basePath": "/bing/v7.0",
   "schemes": [
     "https"
   ],
-  "basePath": "/bing/v7.0",
   "produces": [
     "application/json"
   ],
@@ -241,15 +250,15 @@
           }
         },
         "x-ms-examples": {
-            "Successful query": {
-                "$ref": "./examples//SuccessfulNewsSearchRequest.json"
-            }
+          "Successful query": {
+            "$ref": "./examples//SuccessfulNewsSearchRequest.json"
+          }
         }
       }
     },
     "/news": {
       "get": {
-        "summary": "The News Category API lets lets you search on Bing and get back a list of top news articles by category. This section provides technical details about the query parameters and headers that you use to request news and the JSON response objects that contain them.  For examples that show how to make requests, see [Searching the web for news](https://docs.microsoft.com/en-us/azure/cognitive-services/bing-news-search/search-the-web).",
+        "summary": "The News Category API lets you search on Bing and get back a list of top news articles by category. This section provides technical details about the query parameters and headers that you use to request news and the JSON response objects that contain them.  For examples that show how to make requests, see [Searching the web for news](https://docs.microsoft.com/en-us/azure/cognitive-services/bing-news-search/search-the-web).",
         "operationId": "News_Category",
         "tags": [
           "NewsCategory"
@@ -429,15 +438,15 @@
           }
         },
         "x-ms-examples": {
-            "Successful query": {
-                "$ref": "./examples//SuccessfulNewsCategoryRequest.json"
-            }
+          "Successful query": {
+            "$ref": "./examples//SuccessfulNewsCategoryRequest.json"
+          }
         }
       }
     },
     "/news/trendingtopics": {
       "get": {
-        "summary": "The News Trending Topics API lets lets you search on Bing and get back a list of trending news topics that are currently trending on Bing. This section provides technical details about the query parameters and headers that you use to request news and the JSON response objects that contain them.  For examples that show how to make requests, see [Searching the web for news](https://docs.microsoft.com/en-us/azure/cognitive-services/bing-news-search/search-the-web).",
+        "summary": "The News Trending Topics API lets you search on Bing and get back a list of trending news topics that are currently trending on Bing. This section provides technical details about the query parameters and headers that you use to request news and the JSON response objects that contain them.  For examples that show how to make requests, see [Searching the web for news](https://docs.microsoft.com/en-us/azure/cognitive-services/bing-news-search/search-the-web).",
         "operationId": "News_Trending",
         "tags": [
           "NewsTrendingTopics"
@@ -609,9 +618,9 @@
           }
         },
         "x-ms-examples": {
-            "Successful query": {
-                "$ref": "./examples//SuccessfulNewsTrendingRequest.json"
-            }
+          "Successful query": {
+            "$ref": "./examples//SuccessfulNewsTrendingRequest.json"
+          }
         }
       }
     }
@@ -637,7 +646,7 @@
           }
         },
         "location": {
-          "description" : "Location of local news",
+          "description": "Location of local news",
           "readOnly": true,
           "type": "string"
         }

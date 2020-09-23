@@ -59,6 +59,9 @@
           },
           "ImportImageByManifestDigest": {
             "$ref": "./examples/ImportImageByManifestDigest.json"
+          },
+          "ImportImageFromPublicRegistry": {
+            "$ref": "./examples/ImportImageFromPublicRegistry.json"
           }
         },
         "x-ms-long-running-operation": true
@@ -489,6 +492,91 @@
             "$ref": "./examples/RegistryListUsages.json"
           }
         }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerRegistry/registries/{registryName}/listPolicies": {
+      "get": {
+        "tags": [
+          "Registries"
+        ],
+        "description": "Lists the policies for the specified container registry.",
+        "operationId": "Registries_ListPolicies",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/RegistryNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the registry policies were retrieved and returned successfully.",
+            "schema": {
+              "$ref": "#/definitions/RegistryPolicies"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "RegistryListPolicies": {
+            "$ref": "./examples/RegistryListPolicies.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerRegistry/registries/{registryName}/updatePolicies": {
+      "post": {
+        "tags": [
+          "Registries"
+        ],
+        "description": "Updates the policies for the specified container registry.",
+        "operationId": "Registries_UpdatePolicies",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/RegistryNameParameter"
+          },
+          {
+            "name": "registryPoliciesUpdateParameters",
+            "in": "body",
+            "description": "The parameters for updating policies of a container registry.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RegistryPolicies"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "#/definitions/RegistryPolicies"
+            }
+          },
+          "202": {
+            "description": "The request was successful; the operation will complete asynchronously."
+          }
+        },
+        "x-ms-examples": {
+          "RegistryUpdatePolicies": {
+            "$ref": "./examples/RegistryUpdatePolicies.json"
+          }
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerRegistry/registries/{registryName}/replications/{replicationName}": {
@@ -1104,17 +1192,40 @@
     },
     "ImportSource": {
       "required": [
-        "resourceId",
         "sourceImage"
       ],
       "type": "object",
       "properties": {
         "resourceId": {
-          "description": "The resource identifier of the target Azure Container Registry.",
+          "description": "The resource identifier of the source Azure Container Registry.",
           "type": "string"
+        },
+        "registryUri": {
+          "description": "The address of the source registry (e.g. 'mcr.microsoft.com').",
+          "type": "string"
+        },
+        "credentials": {
+          "$ref": "#/definitions/ImportSourceCredentials",
+          "description": "Credentials used when importing from a registry uri."
         },
         "sourceImage": {
           "description": "Repository name of the source image.\r\nSpecify an image by repository ('hello-world'). This will use the 'latest' tag.\r\nSpecify an image by tag ('hello-world:latest').\r\nSpecify an image by sha256-based manifest digest ('hello-world@sha256:abc123').",
+          "type": "string"
+        }
+      }
+    },
+    "ImportSourceCredentials": {
+      "required": [
+        "password"
+      ],
+      "type": "object",
+      "properties": {
+        "username": {
+          "description": "The username to authenticate with the source registry.",
+          "type": "string"
+        },
+        "password": {
+          "description": "The password used to authenticate with the source registry.",
           "type": "string"
         }
       }
@@ -1186,6 +1297,10 @@
       "description": "The definition of a container registry operation.",
       "type": "object",
       "properties": {
+        "origin": {
+          "description": "The origin information of the container registry operation.",
+          "type": "string"
+        },
         "name": {
           "description": "Operation name: {provider}/{resource}/{operation}.",
           "type": "string"
@@ -1193,6 +1308,11 @@
         "display": {
           "$ref": "#/definitions/OperationDisplayDefinition",
           "description": "The display information for the container registry operation."
+        },
+        "properties": {
+          "$ref": "#/definitions/OperationPropertiesDefinition",
+          "description": "The properties information for the container registry operation.",
+          "x-ms-client-flatten": true
         }
       }
     },
@@ -1214,6 +1334,59 @@
         },
         "description": {
           "description": "The description for the operation.",
+          "type": "string"
+        }
+      }
+    },
+    "OperationPropertiesDefinition": {
+      "description": "The definition of Azure Monitoring properties.",
+      "type": "object",
+      "properties": {
+        "serviceSpecification": {
+          "$ref": "#/definitions/OperationServiceSpecificationDefinition",
+          "description": "The definition of Azure Monitoring service."
+        }
+      }
+    },
+    "OperationServiceSpecificationDefinition": {
+      "description": "The definition of Azure Monitoring metrics list.",
+      "type": "object",
+      "properties": {
+        "metricSpecifications": {
+          "description": "A list of Azure Monitoring metrics definition.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/OperationMetricSpecificationDefinition"
+          }
+        }
+      }
+    },
+    "OperationMetricSpecificationDefinition": {
+      "description": "The definition of Azure Monitoring metric.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Metric name.",
+          "type": "string"
+        },
+        "displayName": {
+          "description": "Metric display name.",
+          "type": "string"
+        },
+        "displayDescription": {
+          "description": "Metric description.",
+          "type": "string"
+        },
+        "unit": {
+          "description": "Metric unit.",
+          "type": "string"
+        },
+        "aggregationType": {
+          "description": "Metric aggregation type.",
+          "type": "string"
+        },
+        "internalMetricName": {
+          "description": "Internal metric name.",
           "type": "string"
         }
       }
@@ -1324,6 +1497,10 @@
         "storageAccount": {
           "$ref": "#/definitions/StorageAccountProperties",
           "description": "The properties of the storage account for the container registry. Only applicable to Classic SKU."
+        },
+        "networkRuleSet": {
+          "$ref": "#/definitions/NetworkRuleSet",
+          "description": "The network rule set for a container registry."
         }
       }
     },
@@ -1362,6 +1539,94 @@
         }
       }
     },
+    "NetworkRuleSet": {
+      "description": "The network rule set for a container registry.",
+      "required": [
+        "defaultAction"
+      ],
+      "type": "object",
+      "properties": {
+        "defaultAction": {
+          "description": "The default action of allow or deny when no other rules match.",
+          "default": "Allow",
+          "enum": [
+            "Allow",
+            "Deny"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "DefaultAction",
+            "modelAsString": true
+          }
+        },
+        "virtualNetworkRules": {
+          "description": "The virtual network rules.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VirtualNetworkRule"
+          }
+        },
+        "ipRules": {
+          "description": "The IP ACL rules.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/IPRule"
+          }
+        }
+      }
+    },
+    "VirtualNetworkRule": {
+      "description": "Virtual network rule.",
+      "required": [
+        "id"
+      ],
+      "type": "object",
+      "properties": {
+        "action": {
+          "description": "The action of virtual network rule.",
+          "default": "Allow",
+          "enum": [
+            "Allow"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "Action",
+            "modelAsString": true
+          }
+        },
+        "id": {
+          "description": "Resource ID of a subnet, for example: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworks/{vnetName}/subnets/{subnetName}.",
+          "type": "string",
+          "x-ms-client-name": "VirtualNetworkResourceId"
+        }
+      }
+    },
+    "IPRule": {
+      "description": "IP rule with specific IP or IP range in CIDR format.",
+      "required": [
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "action": {
+          "description": "The action of IP ACL rule.",
+          "default": "Allow",
+          "enum": [
+            "Allow"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "Action",
+            "modelAsString": true
+          }
+        },
+        "value": {
+          "description": "Specifies the IP or IP range in CIDR format. Only IPV4 address is allowed.",
+          "type": "string",
+          "x-ms-client-name": "IPAddressOrRange"
+        }
+      }
+    },
     "RegistryUpdateParameters": {
       "description": "The parameters for updating a container registry.",
       "type": "object",
@@ -1395,6 +1660,10 @@
         "storageAccount": {
           "$ref": "#/definitions/StorageAccountProperties",
           "description": "The parameters of a storage account for the container registry. Only applicable to Classic SKU. If specified, the storage account must be in the same physical location as the container registry."
+        },
+        "networkRuleSet": {
+          "$ref": "#/definitions/NetworkRuleSet",
+          "description": "The network rule set for a container registry."
         }
       }
     },
@@ -1520,6 +1789,67 @@
         }
       }
     },
+    "RegistryPolicies": {
+      "description": "An object that represents policies for a container registry.",
+      "type": "object",
+      "properties": {
+        "quarantinePolicy": {
+          "$ref": "#/definitions/QuarantinePolicy",
+          "description": "An object that represents quarantine policy for a container registry."
+        },
+        "trustPolicy": {
+          "$ref": "#/definitions/TrustPolicy",
+          "description": "An object that represents content trust policy for a container registry."
+        }
+      }
+    },
+    "QuarantinePolicy": {
+      "description": "An object that represents quarantine policy for a container registry.",
+      "type": "object",
+      "properties": {
+        "status": {
+          "description": "The value that indicates whether the policy is enabled or not.",
+          "enum": [
+            "enabled",
+            "disabled"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "PolicyStatus",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "TrustPolicy": {
+      "description": "An object that represents content trust policy for a container registry.",
+      "type": "object",
+      "properties": {
+        "type": {
+          "description": "The type of trust policy.",
+          "enum": [
+            "Notary"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "TrustPolicyType",
+            "modelAsString": true
+          }
+        },
+        "status": {
+          "description": "The value that indicates whether the policy is enabled or not.",
+          "enum": [
+            "enabled",
+            "disabled"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "PolicyStatus",
+            "modelAsString": true
+          }
+        }
+      }
+    },
     "Replication": {
       "description": "An object that represents a replication for a container registry.",
       "type": "object",
@@ -1639,7 +1969,10 @@
           "items": {
             "enum": [
               "push",
-              "delete"
+              "delete",
+              "quarantine",
+              "chart_push",
+              "chart_delete"
             ],
             "type": "string",
             "x-ms-enum": {
@@ -1733,7 +2066,10 @@
           "items": {
             "enum": [
               "push",
-              "delete"
+              "delete",
+              "quarantine",
+              "chart_push",
+              "chart_delete"
             ],
             "type": "string",
             "x-ms-enum": {
@@ -1799,7 +2135,10 @@
           "items": {
             "enum": [
               "push",
-              "delete"
+              "delete",
+              "quarantine",
+              "chart_push",
+              "chart_delete"
             ],
             "type": "string",
             "x-ms-enum": {
@@ -2019,6 +2358,14 @@
         "tag": {
           "description": "The tag name.",
           "type": "string"
+        },
+        "name": {
+          "description": "The name of the artifact.",
+          "type": "string"
+        },
+        "version": {
+          "description": "The version of the artifact.",
+          "type": "string"
         }
       }
     },
@@ -2133,6 +2480,7 @@
       "description": "The name of the resource group to which the container registry belongs.",
       "required": true,
       "type": "string",
+      "minLength": 1,
       "x-ms-parameter-location": "method"
     },
     "RegistryNameParameter": {

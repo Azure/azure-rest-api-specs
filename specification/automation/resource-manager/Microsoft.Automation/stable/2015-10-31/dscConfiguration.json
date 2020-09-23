@@ -55,14 +55,10 @@
         },
         "parameters": [
           {
-            "$ref": "./definitions.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "automationAccountName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The automation account name."
+            "$ref": "../../common/v1/definitions.json#/parameters/AutomationAccountNameParameter"
           },
           {
             "name": "configurationName",
@@ -72,10 +68,10 @@
             "description": "The configuration name."
           },
           {
-            "$ref": "./definitions.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "./definitions.json#/parameters/ApiVersionParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -88,7 +84,7 @@
           "default": {
             "description": "Automation error response describing why the operation failed.",
             "schema": {
-              "$ref": "./definitions.json#/definitions/ErrorResponse"
+              "$ref": "../../common/v1/definitions.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -109,14 +105,10 @@
         },
         "parameters": [
           {
-            "$ref": "./definitions.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "automationAccountName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The automation account name."
+            "$ref": "../../common/v1/definitions.json#/parameters/AutomationAccountNameParameter"
           },
           {
             "name": "configurationName",
@@ -126,23 +118,23 @@
             "description": "The configuration name."
           },
           {
-            "$ref": "./definitions.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "./definitions.json#/parameters/ApiVersionParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "./definitions.json#/definitions/DscConfiguration"
+              "$ref": "#/definitions/DscConfiguration"
             }
           },
           "default": {
             "description": "Automation error response describing why the operation failed.",
             "schema": {
-              "$ref": "./definitions.json#/definitions/ErrorResponse"
+              "$ref": "../../common/v1/definitions.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -163,14 +155,10 @@
         },
         "parameters": [
           {
-            "$ref": "./definitions.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "automationAccountName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The automation account name."
+            "$ref": "../../common/v1/definitions.json#/parameters/AutomationAccountNameParameter"
           },
           {
             "name": "configurationName",
@@ -184,34 +172,34 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "./definitions.json#/definitions/DscConfigurationCreateOrUpdateParameters"
+              "$ref": "#/definitions/DscConfigurationCreateOrUpdateParameters"
             },
             "description": "The create or update parameters for configuration."
           },
           {
-            "$ref": "./definitions.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "./definitions.json#/parameters/ApiVersionParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "./definitions.json#/definitions/DscConfiguration"
+              "$ref": "#/definitions/DscConfiguration"
             }
           },
           "201": {
             "description": "Created",
             "schema": {
-              "$ref": "./definitions.json#/definitions/DscConfiguration"
+              "$ref": "#/definitions/DscConfiguration"
             }
           },
           "default": {
             "description": "Automation error response describing why the operation failed.",
             "schema": {
-              "$ref": "./definitions.json#/definitions/ErrorResponse"
+              "$ref": "../../common/v1/definitions.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -232,14 +220,10 @@
         },
         "parameters": [
           {
-            "$ref": "./definitions.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "automationAccountName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The automation account name."
+            "$ref": "../../common/v1/definitions.json#/parameters/AutomationAccountNameParameter"
           },
           {
             "name": "configurationName",
@@ -252,28 +236,28 @@
             "name": "parameters",
             "in": "body",
             "schema": {
-              "$ref": "./definitions.json#/definitions/DscConfigurationUpdateParameters"
+              "$ref": "#/definitions/DscConfigurationUpdateParameters"
             },
             "description": "The create or update parameters for configuration."
           },
           {
-            "$ref": "./definitions.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "./definitions.json#/parameters/ApiVersionParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "./definitions.json#/definitions/DscConfiguration"
+              "$ref": "#/definitions/DscConfiguration"
             }
           },
           "default": {
             "description": "Automation error response describing why the operation failed.",
             "schema": {
-              "$ref": "./definitions.json#/definitions/ErrorResponse"
+              "$ref": "../../common/v1/definitions.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -294,16 +278,15 @@
             "$ref": "./examples/getDscConfigurationContent.json"
           }
         },
+        "produces": [
+          "text/powershell"
+        ],
         "parameters": [
           {
-            "$ref": "./definitions.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "automationAccountName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The automation account name."
+            "$ref": "../../common/v1/definitions.json#/parameters/AutomationAccountNameParameter"
           },
           {
             "name": "configurationName",
@@ -313,23 +296,23 @@
             "description": "The configuration name."
           },
           {
-            "$ref": "./definitions.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "./definitions.json#/parameters/ApiVersionParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
           "200": {
             "description": "OK",
             "schema": {
-              "type": "string"
+              "type": "file"
             }
           },
           "default": {
             "description": "Automation error response describing why the operation failed.",
             "schema": {
-              "$ref": "./definitions.json#/definitions/ErrorResponse"
+              "$ref": "../../common/v1/definitions.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -358,20 +341,16 @@
         },
         "parameters": [
           {
-            "$ref": "./definitions.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "automationAccountName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The automation account name."
+            "$ref": "../../common/v1/definitions.json#/parameters/AutomationAccountNameParameter"
           },
           {
-            "$ref": "./definitions.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "./definitions.json#/parameters/ApiVersionParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
           },
           {
             "name": "$filter",
@@ -392,7 +371,7 @@
             "in": "query",
             "required": false,
             "type": "integer",
-            "description": "The the number of rows to take."
+            "description": "The number of rows to take."
           },
           {
             "name": "$inlinecount",
@@ -406,23 +385,282 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "./definitions.json#/definitions/DscConfigurationListResult"
+              "$ref": "#/definitions/DscConfigurationListResult"
             }
           },
           "default": {
             "description": "Automation error response describing why the operation failed.",
             "schema": {
-              "$ref": "./definitions.json#/definitions/ErrorResponse"
+              "$ref": "../../common/v1/definitions.json#/definitions/ErrorResponse"
             }
           }
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         },
-        "x-ms-odata": "./definitions.json#/definitions/DscConfiguration"
+        "x-ms-odata": "#/definitions/DscConfiguration"
       }
     }
   },
-  "definitions": {},
+  "definitions": {
+    "ContentHash": {
+      "properties": {
+        "algorithm": {
+          "type": "string",
+          "description": "Gets or sets the content hash algorithm used to hash the content."
+        },
+        "value": {
+          "type": "string",
+          "description": "Gets or sets expected hash value of the content."
+        }
+      },
+      "required": [
+        "algorithm",
+        "value"
+      ],
+      "description": "Definition of the runbook property type."
+    },
+    "ContentSource": {
+      "properties": {
+        "hash": {
+          "$ref": "#/definitions/ContentHash",
+          "description": "Gets or sets the hash."
+        },
+        "type": {
+          "type": "string",
+          "description": "Gets or sets the content source type.",
+          "enum": [
+            "embeddedContent",
+            "uri"
+          ],
+          "x-ms-enum": {
+            "name": "ContentSourceType",
+            "modelAsString": true
+          }
+        },
+        "value": {
+          "type": "string",
+          "description": "Gets or sets the value of the content. This is based on the content source type."
+        },
+        "version": {
+          "type": "string",
+          "description": "Gets or sets the version of the content."
+        }
+      },
+      "description": "Definition of the content source."
+    },
+    "DscConfigurationCreateOrUpdateParameters": {
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/DscConfigurationCreateOrUpdateProperties",
+          "x-ms-client-flatten": true,
+          "description": "Gets or sets configuration create or update properties."
+        },
+        "name": {
+          "type": "string",
+          "description": "Gets or sets name of the resource."
+        },
+        "location": {
+          "type": "string",
+          "description": "Gets or sets the location of the resource."
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Gets or sets the tags attached to the resource."
+        }
+      },
+      "required": [
+        "properties"
+      ],
+      "description": "The parameters supplied to the create or update configuration operation."
+    },
+    "DscConfigurationListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DscConfiguration"
+          },
+          "description": "Gets or sets a list of configurations."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Gets or sets the next link."
+        },
+        "totalCount": {
+          "type": "integer",
+          "description": "Gets the total number of configurations matching filter criteria."
+        }
+      },
+      "description": "The response model for the list configuration operation."
+    },
+    "DscConfigurationCreateOrUpdateProperties": {
+      "properties": {
+        "logVerbose": {
+          "type": "boolean",
+          "description": "Gets or sets verbose log option."
+        },
+        "logProgress": {
+          "type": "boolean",
+          "description": "Gets or sets progress log option."
+        },
+        "source": {
+          "$ref": "#/definitions/ContentSource",
+          "description": "Gets or sets the source."
+        },
+        "parameters": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/DscConfigurationParameter"
+          },
+          "description": "Gets or sets the configuration parameters."
+        },
+        "description": {
+          "type": "string",
+          "description": "Gets or sets the description of the configuration."
+        }
+      },
+      "required": [
+        "source"
+      ],
+      "description": "The properties to create or update configuration."
+    },
+    "DscConfigurationParameter": {
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "Gets or sets the type of the parameter."
+        },
+        "isMandatory": {
+          "type": "boolean",
+          "description": "Gets or sets a Boolean value to indicate whether the parameter is mandatory or not."
+        },
+        "position": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Get or sets the position of the parameter."
+        },
+        "defaultValue": {
+          "type": "string",
+          "description": "Gets or sets the default value of parameter."
+        }
+      },
+      "description": "Definition of the configuration parameter type."
+    },
+    "DscConfigurationUpdateParameters": {
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/DscConfigurationCreateOrUpdateProperties",
+          "x-ms-client-flatten": true,
+          "description": "Gets or sets configuration create or update properties."
+        },
+        "name": {
+          "type": "string",
+          "description": "Gets or sets name of the resource."
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Gets or sets the tags attached to the resource."
+        }
+      },
+      "description": "The parameters supplied to the create or update configuration operation."
+    },
+    "DscConfigurationProperties": {
+      "properties": {
+        "provisioningState": {
+          "type": "string",
+          "description": "Gets or sets the provisioning state of the configuration.",
+          "enum": [
+            "Succeeded"
+          ],
+          "x-ms-enum": {
+            "name": "DscConfigurationProvisioningState",
+            "modelAsString": false
+          }
+        },
+        "jobCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Gets or sets the job count of the configuration."
+        },
+        "parameters": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/DscConfigurationParameter"
+          },
+          "description": "Gets or sets the configuration parameters."
+        },
+        "source": {
+          "$ref": "#/definitions/ContentSource",
+          "description": "Gets or sets the source."
+        },
+        "state": {
+          "type": "string",
+          "description": "Gets or sets the state of the configuration.",
+          "enum": [
+            "New",
+            "Edit",
+            "Published"
+          ],
+          "x-ms-enum": {
+            "name": "DscConfigurationState",
+            "modelAsString": true
+          }
+        },
+        "logVerbose": {
+          "type": "boolean",
+          "description": "Gets or sets verbose log option."
+        },
+        "creationTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Gets or sets the creation time.",
+          "x-nullable": false
+        },
+        "lastModifiedTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Gets or sets the last modified time.",
+          "x-nullable": false
+        },
+        "nodeConfigurationCount": {
+          "type": "integer",
+          "description": "Gets the number of compiled node configurations.",
+          "x-nullable": false
+        },
+        "description": {
+          "type": "string",
+          "description": "Gets or sets the description."
+        }
+      },
+      "description": "Definition of the configuration property type."
+    },
+    "DscConfiguration": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/DscConfigurationProperties",
+          "x-ms-client-flatten": true,
+          "description": "Gets or sets the configuration properties."
+        },
+        "etag": {
+          "type": "string",
+          "description": "Gets or sets the etag of the resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../common/v1/definitions.json#/definitions/TrackedResource"
+        }
+      ],
+      "description": "Definition of the configuration type."
+    }
+  },
   "parameters": {}
 }

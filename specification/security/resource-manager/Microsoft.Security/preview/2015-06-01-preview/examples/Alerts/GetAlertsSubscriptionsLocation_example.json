@@ -1,154 +1,177 @@
 {
-    "parameters": {
-        "api-version": "2015-06-01-preview",
-        "subscriptionId": "20ff7fc3-e762-44dd-bd96-b71116dcdc23",
-        "ascLocation": "westeurope"
-    },
-    "responses": {
-        "200": {
-            "body": {
-                "value": [{
-                        "id": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/myRg1/providers/Microsoft.Security/locations/westeurope/alerts/2518770965529163669_F144EE95-A3E5-42DA-A279-967D115809AA",
-                        "name": "2518770965529163669_F144EE95-A3E5-42DA-A279-967D115809AA",
-                        "type": "Microsoft.Security/Locations/alerts",
-                        "properties": {
-                            "vendorName": "Microsoft",
-                            "alertDisplayName": "Threat Intelligence Alert",
-                            "alertName": "ThreatIntelligence",
-                            "detectedTimeUtc": "2018-05-01T19:50:47.083633Z",
-                            "description": "Process was detected running on the host and is considered to be suspicious, verify that the user run it",
-                            "remediationSteps": "verify that the user invoked this process\r\nrun antimalware scan of the VM",
-                            "actionTaken": "Undefined",
-                            "reportedSeverity": "High",
-                            "compromisedEntity": "vm1",
-                            "associatedResource": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/myRg1/providers/Microsoft.Compute/virtualMachines/vm1",
-                            "subscriptionId": "20ff7fc3-e762-44dd-bd96-b71116dcdc23",
-                            "instanceId": "f144ee95-a3e5-42da-a279-967d115809aa",
-                            "extendedProperties": {
-                                "user Name": "administrator",
-                                "domain Name": "Contoso",
-                                "attacker IP": "192.0.2.1",
-                                "resourceType": "Virtual Machine"
-                            },
-                            "state": "Dismissed",
-                            "reportedTimeUtc": "2018-05-02T05:36:12.2089889Z",
-                            "confidenceScore": 0.8,
-                            "confidenceReasons": [{
-                                "type": "User",
-                                "reason": "Some user reason"
-                            }, {
-                                "type": "Process",
-                                "reason": "Some proccess reason"
-                            }, {
-                                "type": "Computer",
-                                "reason": "Some computer reason"
-                            }],
-                            "canBeInvestigated": true,
-                            "entities": [{
-                                "address": "192.0.2.1",
-                                "location": {
-                                    "countryCode": "gb",
-                                    "state": "wokingham",
-                                    "city": "sonning",
-                                    "longitude": -0.909,
-                                    "latitude": 51.468,
-                                    "asn": 6584
-                                },
-                                "threatIntelligence": [{
-                                    "providerName": "Team Cymru",
-                                    "threatType": "C2",
-                                    "threatName": "rarog",
-                                    "confidence": 0.8,
-                                    "reportLink": "http://www.microsoft.com",
-                                    "threatDescription": "In bot armies, the controller is the server machine(s) that gives instructions to the controlled (zombied) hosts that connect to the command and control (C2) network. The controller host is usually running a botnet management application that is sending the commands to the zombied members of the bot army. These commands include, but are not limited to, the following: updating bitcoin wallet information, distributed denial-of-service (DDoS) target listings, updated C2 communication contact lists, and targeting data. C2 servers may be either directly controlled by the malware operators or run on hardware compromised by malware. There are multiple techniques for dynamically changing the control servers so that they are not isolated and brought down. Control servers utilize two general architectures: client-server and peer-to-peer. In a client-server model, all the hosts are controlled by a single server or a few control servers. In a peer-to-peer model, the infected hosts are both clients and servers, and they control other hosts so that instead of isolating the few control servers, all the hosts need to be removed."
-                                }],
-                                "type": "ip"
-                            }]
-                        }
-                    },
+  "parameters": {
+    "api-version": "2015-06-01-preview",
+    "subscriptionId": "20ff7fc3-e762-44dd-bd96-b71116dcdc23",
+    "ascLocation": "westeurope"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/myRg1/providers/Microsoft.Security/locations/westeurope/alerts/2518770965529163669_F144EE95-A3E5-42DA-A279-967D115809AA",
+            "name": "2518770965529163669_F144EE95-A3E5-42DA-A279-967D115809AA",
+            "type": "Microsoft.Security/Locations/alerts",
+            "properties": {
+              "vendorName": "Microsoft",
+              "alertDisplayName": "Threat Intelligence Alert",
+              "alertName": "ThreatIntelligence",
+              "detectedTimeUtc": "2018-05-01T19:50:47.083633Z",
+              "description": "Process was detected running on the host and is considered to be suspicious, verify that the user run it",
+              "remediationSteps": "verify that the user invoked this process\r\nrun antimalware scan of the VM",
+              "actionTaken": "Detected",
+              "reportedSeverity": "High",
+              "compromisedEntity": "vm1",
+              "associatedResource": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/myRg1/providers/Microsoft.Compute/virtualMachines/vm1",
+              "subscriptionId": "20ff7fc3-e762-44dd-bd96-b71116dcdc23",
+              "instanceId": "f144ee95-a3e5-42da-a279-967d115809aa",
+              "extendedProperties": {
+                "user Name": "administrator",
+                "domain Name": "Contoso",
+                "attacker IP": "192.0.2.1",
+                "resourceType": "Virtual Machine"
+              },
+              "state": "Dismissed",
+              "reportedTimeUtc": "2018-05-02T05:36:12.2089889Z",
+              "confidenceScore": 0.8,
+              "confidenceReasons": [
+                {
+                  "type": "User",
+                  "reason": "Some user reason"
+                },
+                {
+                  "type": "Process",
+                  "reason": "Some proccess reason"
+                },
+                {
+                  "type": "Computer",
+                  "reason": "Some computer reason"
+                }
+              ],
+              "canBeInvestigated": true,
+              "isIncident": false,
+              "entities": [
+                {
+                  "address": "192.0.2.1",
+                  "location": {
+                    "countryCode": "gb",
+                    "state": "wokingham",
+                    "city": "sonning",
+                    "longitude": -0.909,
+                    "latitude": 51.468,
+                    "asn": 6584
+                  },
+                  "threatIntelligence": [
                     {
-                        "id": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/myRg2/providers/Microsoft.Security/locations/westeurope/alerts/2518765996949954086_2325cf9e-42a2-4f72-ae7f-9b863cba2d22",
-                        "name": "2518765996949954086_2325cf9e-42a2-4f72-ae7f-9b863cba2d22",
-                        "type": "Microsoft.Security/Locations/alerts",
-                        "properties": {
-                            "systemSource": "Azure",
-                            "vendorName": "Microsoft",
-                            "alertDisplayName": "Suspicious Screensaver process executed",
-                            "alertName": "SuspiciousScreenSaver",
-                            "detectedTimeUtc": "2018-05-07T13:51:45.0045913Z",
-                            "description": "The process ‘%{process name}’ was observed executing from an uncommon location.\r\n\r\nFiles with the .scr extensions are screen saver files and are normally reside and execute from the Windows system directory.",
-                            "remediationSteps": "1. Run Process Explorer and try to identify unknown running processes (see https://technet.microsoft.com/en-us/sysinternals/bb896653.aspx)\r\n2. Make sure the machine is completely updated and has an updated anti-malware application installed\r\n3. Run a full anti-malware scan and verify that the threat was removed\r\n4. Install and run Microsoft’s Malicious Software Removal Tool (see https://www.microsoft.com/en-us/download/malicious-software-removal-tool-details.aspx)\r\n5. Run Microsoft’s Autoruns utility and try to identify unknown applications that are configured to run at login (see https://technet.microsoft.com/en-us/sysinternals/bb963902.aspx)\r\n6. Escalate the alert to the information security team",
-                            "actionTaken": "Undefined",
-                            "reportedSeverity": "Low",
-                            "compromisedEntity": "vm2",
-                            "associatedResource": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourcegroups/myRg2/providers/microsoft.compute/virtualmachines/vm2",
-                            "subscriptionId": "20ff7fc3-e762-44dd-bd96-b71116dcdc23",
-                            "instanceId": "2325cf9e-42a2-4f72-ae7f-9b863cba2d22",
-                            "extendedProperties": {
-                                "domain name": "vm2",
-                                "user name": "vm2\\contosoUser",
-                                "process name": "c:\\users\\contosoUser\\scrsave.scr",
-                                "command line": "c:\\users\\contosoUser\\scrsave.scr",
-                                "parent process": "cmd.exe",
-                                "process id": "0x4aec",
-                                "account logon id": "0x61450d87",
-                                "user SID": "S-1-5-21-2144575486-8928446540-5163864319-500",
-                                "parent process id": "0x3c44",
-                                "enrichment_tas_threat__reports": "{\"Kind\":\"MultiLink\",\"DisplayValueToUrlDictionary\":{\"Report: Suspicious Screen Saver Execution\":\"https://iflowreportsproda.blob.core.windows.net/reports/MSTI-TS-Suspicious-Screen-Saver-Execution.pdf?sv=2016-05-31&sr=b&sig=2igHPl764UM7aBHNaO9mPAnpzoXlwRw8YjpFLLuB2NE%3D&spr=https&st=2018-05-07T00%3A20%3A54Z&se=2018-05-08T00%3A35%3A54Z&sp=r\"}}",
-                                "resourceType": "Virtual Machine"
-                            },
-                            "state": "Active",
-                            "reportedTimeUtc": "2018-05-07T13:51:48.3810457Z",
-                            "workspaceArmId": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourcegroups/defaultresourcegroup-weu/providers/microsoft.operationalinsights/workspaces/defaultworkspace-21ff7fc3-e762-48dd-bd96-b551f6dcdd23-weu",
-                            "confidenceScore": 0.3,
-                            "confidenceReasons": [{
-                                "type": "Process",
-                                "reason": "Suspicious process execution history for this subscription"
-                            }, {
-                                "type": "Process",
-                                "reason": "Suspicious process execution history for this subscription"
-                            }, {
-                                "type": "Process",
-                                "reason": "cmd.exe appeared in multiple alerts of the same type"
-                            }],
-                            "canBeInvestigated": true,
-                            "entities": [{
-                                "dnsDomain": "",
-                                "ntDomain": "",
-                                "hostName": "vm2",
-                                "netBiosName": "vm2",
-                                "azureID": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourcegroups/myRg2/providers/microsoft.compute/virtualmachines/vm2",
-                                "omsAgentID": "45b44640-3b94-4892-a28c-4a5cae27065a",
-                                "operatingSystem": "Unknown",
-                                "type": "host",
-                                "OsVersion": null
-                            }, {
-                                "name": "contosoUser",
-                                "ntDomain": "vm2",
-                                "logonId": "0x61450d87",
-                                "sid": "S-1-5-21-2144575486-8928446540-5163864319-500",
-                                "type": "account"
-                            }, {
-                                "directory": "c:\\windows\\system32",
-                                "name": "cmd.exe",
-                                "type": "file"
-                            }, {
-                                "processId": "0x3c44",
-                                "type": "process"
-                            }, {
-                                "directory": "c:\\users\\contosoUser",
-                                "name": "scrsave.scr",
-                                "type": "file"
-                            }, {
-                                "processId": "0x4aec",
-                                "commandLine": "c:\\users\\contosoUser\\scrsave.scr",
-                                "creationTimeUtc": "2018-05-07T13:51:45.0045913Z",
-                                "type": "process"
-                            }]
-                        }
+                      "providerName": "Team Cymru",
+                      "threatType": "C2",
+                      "threatName": "rarog",
+                      "confidence": 0.8,
+                      "reportLink": "http://www.microsoft.com",
+                      "threatDescription": "In bot armies, the controller is the server machine(s) that gives instructions to the controlled (zombied) hosts that connect to the command and control (C2) network. The controller host is usually running a botnet management application that is sending the commands to the zombied members of the bot army. These commands include, but are not limited to, the following: updating bitcoin wallet information, distributed denial-of-service (DDoS) target listings, updated C2 communication contact lists, and targeting data. C2 servers may be either directly controlled by the malware operators or run on hardware compromised by malware. There are multiple techniques for dynamically changing the control servers so that they are not isolated and brought down. Control servers utilize two general architectures: client-server and peer-to-peer. In a client-server model, all the hosts are controlled by a single server or a few control servers. In a peer-to-peer model, the infected hosts are both clients and servers, and they control other hosts so that instead of isolating the few control servers, all the hosts need to be removed."
                     }
-                ]
+                  ],
+                  "type": "ip"
+                }
+              ],
+              "correlationKey": "Rkso6LFWxzCll5tqrk4hnrBJ+MY1BX806W6q6+0s9Jk="
             }
-        }
+          },
+          {
+            "id": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/myRg2/providers/Microsoft.Security/locations/westeurope/alerts/2518765996949954086_2325cf9e-42a2-4f72-ae7f-9b863cba2d22",
+            "name": "2518765996949954086_2325cf9e-42a2-4f72-ae7f-9b863cba2d22",
+            "type": "Microsoft.Security/Locations/alerts",
+            "properties": {
+              "systemSource": "Azure",
+              "vendorName": "Microsoft",
+              "alertDisplayName": "Suspicious Screensaver process executed",
+              "alertName": "SuspiciousScreenSaver",
+              "detectedTimeUtc": "2018-05-07T13:51:45.0045913Z",
+              "description": "The process ‘%{process name}’ was observed executing from an uncommon location.\r\n\r\nFiles with the .scr extensions are screen saver files and are normally reside and execute from the Windows system directory.",
+              "remediationSteps": "1. Run Process Explorer and try to identify unknown running processes (see https://technet.microsoft.com/en-us/sysinternals/bb896653.aspx)\r\n2. Make sure the machine is completely updated and has an updated anti-malware application installed\r\n3. Run a full anti-malware scan and verify that the threat was removed\r\n4. Install and run Microsoft’s Malicious Software Removal Tool (see https://www.microsoft.com/en-us/download/malicious-software-removal-tool-details.aspx)\r\n5. Run Microsoft’s Autoruns utility and try to identify unknown applications that are configured to run at login (see https://technet.microsoft.com/en-us/sysinternals/bb963902.aspx)\r\n6. Escalate the alert to the information security team",
+              "actionTaken": "Detected",
+              "reportedSeverity": "Low",
+              "compromisedEntity": "vm2",
+              "associatedResource": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourcegroups/myRg2/providers/microsoft.compute/virtualmachines/vm2",
+              "subscriptionId": "20ff7fc3-e762-44dd-bd96-b71116dcdc23",
+              "instanceId": "2325cf9e-42a2-4f72-ae7f-9b863cba2d22",
+              "extendedProperties": {
+                "domain name": "vm2",
+                "user name": "vm2\\contosoUser",
+                "process name": "c:\\users\\contosoUser\\scrsave.scr",
+                "command line": "c:\\users\\contosoUser\\scrsave.scr",
+                "parent process": "cmd.exe",
+                "process id": "0x4aec",
+                "account logon id": "0x61450d87",
+                "user SID": "S-1-5-21-2144575486-8928446540-5163864319-500",
+                "parent process id": "0x3c44",
+                "enrichment_tas_threat__reports": "{\"Kind\":\"MultiLink\",\"DisplayValueToUrlDictionary\":{\"Report: Suspicious Screen Saver Execution\":\"https://iflowreportsproda.blob.core.windows.net/reports/MSTI-TS-Suspicious-Screen-Saver-Execution.pdf?sv=2016-05-31&sr=b&sig=2igHPl764UM7aBHNaO9mPAnpzoXlwRw8YjpFLLuB2NE%3D&spr=https&st=2018-05-07T00%3A20%3A54Z&se=2018-05-08T00%3A35%3A54Z&sp=r\"}}",
+                "resourceType": "Virtual Machine"
+              },
+              "state": "Active",
+              "reportedTimeUtc": "2018-05-07T13:51:48.3810457Z",
+              "workspaceArmId": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourcegroups/defaultresourcegroup-weu/providers/microsoft.operationalinsights/workspaces/defaultworkspace-21ff7fc3-e762-48dd-bd96-b551f6dcdd23-weu",
+              "confidenceScore": 0.3,
+              "confidenceReasons": [
+                {
+                  "type": "Process",
+                  "reason": "Suspicious process execution history for this subscription"
+                },
+                {
+                  "type": "Process",
+                  "reason": "Suspicious process execution history for this subscription"
+                },
+                {
+                  "type": "Process",
+                  "reason": "cmd.exe appeared in multiple alerts of the same type"
+                }
+              ],
+              "canBeInvestigated": true,
+              "entities": [
+                {
+                  "dnsDomain": "",
+                  "ntDomain": "",
+                  "hostName": "vm2",
+                  "netBiosName": "vm2",
+                  "azureID": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourcegroups/myRg2/providers/microsoft.compute/virtualmachines/vm2",
+                  "omsAgentID": "45b44640-3b94-4892-a28c-4a5cae27065a",
+                  "operatingSystem": "Unknown",
+                  "type": "host",
+                  "OsVersion": null
+                },
+                {
+                  "name": "contosoUser",
+                  "ntDomain": "vm2",
+                  "logonId": "0x61450d87",
+                  "sid": "S-1-5-21-2144575486-8928446540-5163864319-500",
+                  "type": "account"
+                },
+                {
+                  "directory": "c:\\windows\\system32",
+                  "name": "cmd.exe",
+                  "type": "file"
+                },
+                {
+                  "processId": "0x3c44",
+                  "type": "process"
+                },
+                {
+                  "directory": "c:\\users\\contosoUser",
+                  "name": "scrsave.scr",
+                  "type": "file"
+                },
+                {
+                  "processId": "0x4aec",
+                  "commandLine": "c:\\users\\contosoUser\\scrsave.scr",
+                  "creationTimeUtc": "2018-05-07T13:51:45.0045913Z",
+                  "type": "process"
+                }
+              ],
+              "correlationKey": "6Lso6LFWxzCll5tqrk4hnrBJ+MY1BX806W6q6+0s9MY1"
+            }
+          }
+        ]
+      }
     }
+  }
 }

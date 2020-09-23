@@ -1,404 +1,384 @@
 {
-    "swagger": "2.0",
-    "info": {
-        "title": "Azure SQL Database capabilities",
-        "description": "Describes the Azure SQL capabilities available to a subscription for a given location.",
-        "version": "2014-04-01"
-    },
-    "host": "management.azure.com",
-    "schemes": [
-        "https"
-    ],
-    "consumes": [
-        "application/json"
-    ],
-    "produces": [
-        "application/json"
-    ],
-    "paths": {
-        "/subscriptions/{subscriptionId}/providers/Microsoft.Sql/locations/{locationId}/capabilities": {
-            "get": {
-                "tags": [
-                    "Capabilities"
-                ],
-                "operationId": "Capabilities_ListByLocation",
-                "description": "Gets the capabilities available for the specified location.",
-                "parameters": [
-                    {
-                        "$ref": "#/parameters/ApiVersionParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/SubscriptionIdParameter"
-                    },
-                    {
-                        "name": "locationId",
-                        "in": "path",
-                        "required": true,
-                        "type": "string",
-                        "description": "The location id whose capabilities are retrieved."
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "$ref": "#/definitions/LocationCapabilities"
-                        }
-                    }
-                },
-                "x-ms-examples": {
-                    "Get location capabilities": { "$ref": "./examples/CapabilitiesList.json" }
-                }
-            }
-        }
-    },
-    "definitions": {
-        "CapabilityStatus": {
-            "type": "string",
-            "description": "The availability status of the capability",
-            "enum": [
-                "Visible",
-                "Available",
-                "Default",
-                "Disabled"
-            ],
-            "x-ms-enum": {
-                "name": "CapabilityStatus"
-            }
-        },
-        "MaxSizeCapability": {
-            "properties": {
-                "limit": {
-                    "readOnly": true,
-                    "type": "integer",
-                    "format": "int64",
-                    "description": "The maximum size of the database (see 'unit' for the units).",
-                    "x-nullable": false
-                },
-                "unit": {
-                    "readOnly": true,
-                    "type": "string",
-                    "description": "The units that the limit is expressed in.",
-                    "enum": [
-                        "Megabytes",
-                        "Gigabytes",
-                        "Terabytes",
-                        "Petabytes"
-                    ],
-                    "x-ms-enum": {
-                        "name": "MaxSizeUnits"
-                    }
-                },
-                "status": {
-                    "readOnly": true,
-                    "description": "The status of the maximum size capability.",
-                    "$ref": "#/definitions/CapabilityStatus"
-                }
-            },
-            "description": "The maximum size limits for a database."
-        },
-        "ServiceObjectiveCapability": {
-            "properties": {
-                "name": {
-                    "readOnly": true,
-                    "type": "string",
-                    "description": "The service objective name."
-                },
-                "status": {
-                    "readOnly": true,
-                    "type": "string",
-                    "description": "The status of the service objective.",
-                    "$ref": "#/definitions/CapabilityStatus"
-                },
-                "performanceLevel": {
-                    "readOnly": true,
-                    "$ref": "#/definitions/PerformanceLevel",
-                    "description": "The performance level of the service objective capability.",
-                    "x-ms-client-flatten": true
-                },
-                "id": {
-                    "readOnly": true,
-                    "type": "string",
-                    "format": "uuid",
-                    "description": "The unique ID of the service objective.",
-                    "x-nullable": false
-                },
-                "supportedMaxSizes": {
-                    "readOnly": true,
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/MaxSizeCapability"
-                    },
-                    "description": "The list of supported maximum database sizes for this service objective."
-                },
-                "includedMaxSize": {
-                    "readOnly": true,
-                    "$ref": "#/definitions/MaxSizeCapability",
-                    "description": "The included (free) max size for this service level objective."
-                }
-            },
-            "description": "The service objectives capability."
-        },
-        "PerformanceLevel": {
-            "description": "A possible performance level of a service objective capability.",
-            "properties": {
-                "unit": {
-                    "type": "string",
-                    "readOnly": true,
-                    "description": "Unit type used to measure service objective performance level.",
-                    "enum": [
-                        "DTU"
-                    ],
-                    "x-ms-enum": {
-                        "name": "PerformanceLevelUnit"
-                    }
-                },
-                "value": {
-                    "type": "integer",
-                    "readOnly": true,
-                    "description": "Performance level value."
-                }
-            }
-        },
-        "EditionCapability": {
-            "properties": {
-                "name": {
-                    "readOnly": true,
-                    "type": "string",
-                    "description": "The edition name."
-                },
-                "status": {
-                    "readOnly": true,
-                    "type": "string",
-                    "description": "The status of the edition.",
-                    "$ref": "#/definitions/CapabilityStatus"
-                },
-                "supportedServiceLevelObjectives": {
-                    "readOnly": true,
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/ServiceObjectiveCapability"
-                    },
-                    "description": "The list of supported service objectives for the edition."
-                },
-                "zoneRedundant": {
-                  "description": "Whether or not zone redundancy is supported for the edition.",
-                  "type": "boolean",
-                  "readOnly": true
-                }
-            },
-            "description": "The database edition capabilities."
-        },
-        "ServerVersionCapability": {
-            "properties": {
-                "name": {
-                    "readOnly": true,
-                    "type": "string",
-                    "description": "The server version name."
-                },
-                "status": {
-                    "readOnly": true,
-                    "type": "string",
-                    "description": "The status of the server version.",
-                    "$ref": "#/definitions/CapabilityStatus"
-                },
-                "supportedEditions": {
-                    "readOnly": true,
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/EditionCapability"
-                    },
-                    "description": "The list of supported database editions."
-                },
-                "supportedElasticPoolEditions": {
-                    "readOnly": true,
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/ElasticPoolEditionCapability"
-                    },
-                    "description": "The list of supported elastic pool editions."
-                }
-            },
-            "description": "The server capabilities."
-        },
-        "LocationCapabilities": {
-            "properties": {
-                "name": {
-                    "readOnly": true,
-                    "type": "string",
-                    "description": "The location name."
-                },
-                "status": {
-                    "readOnly": true,
-                    "type": "string",
-                    "description": "Azure SQL Database's status for the location.",
-                    "$ref": "#/definitions/CapabilityStatus"
-                },
-                "supportedServerVersions": {
-                    "readOnly": true,
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/ServerVersionCapability"
-                    },
-                    "description": "The list of supported server versions."
-                }
-            },
-            "description": "The capabilities for a location."
-        },
-        "ElasticPoolEditionCapability": {
-            "properties": {
-                "name": {
-                    "readOnly": true,
-                    "type": "string",
-                    "description": "The elastic pool edition name."
-                },
-                "status": {
-                    "readOnly": true,
-                    "type": "string",
-                    "description": "The status of the elastic pool edition.",
-                    "$ref": "#/definitions/CapabilityStatus"
-                },
-                "supportedElasticPoolDtus": {
-                    "readOnly": true,
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/ElasticPoolDtuCapability"
-                    },
-                    "description": "The list of supported elastic pool DTU levels for the edition."
-                },
-                "zoneRedundant": {
-                  "description": "Whether or not zone redundancy is supported for the edition.",
-                  "type": "boolean",
-                  "readOnly": true
-                }
-            },
-            "description": "The elastic pool edition capabilities."
-        },
-        "ElasticPoolDtuCapability": {
-            "properties": {
-                "limit": {
-                    "readOnly": true,
-                    "type": "integer",
-                    "format": "int64",
-                    "description": "The maximum size of the database (see 'unit' for the units)."
-                },
-                "maxDatabaseCount": {
-                    "readOnly": true,
-                    "type": "integer",
-                    "format": "int64",
-                    "description": "The maximum number of databases supported."
-                },
-                "status": {
-                    "readOnly": true,
-                    "type": "string",
-                    "description": "The status of the capability.",
-                    "$ref": "#/definitions/CapabilityStatus"
-                },
-                "supportedMaxSizes": {
-                    "readOnly": true,
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/MaxSizeCapability"
-                    },
-                    "description": "The list of supported max sizes."
-                },
-                "includedMaxSize": {
-                    "readOnly": true,
-                    "$ref": "#/definitions/MaxSizeCapability",
-                    "description": "The included (free) max size for this service level objective."
-                },
-                "supportedPerDatabaseMaxSizes": {
-                    "readOnly": true,
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/MaxSizeCapability"
-                    },
-                    "description": "The list of supported max database sizes."
-                },
-                "supportedPerDatabaseMaxDtus": {
-                    "readOnly": true,
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/ElasticPoolPerDatabaseMaxDtuCapability"
-                    },
-                    "description": "The list of supported max database DTUs."
-                }
-            },
-            "description": "The Elastic Pool DTU capability."
-        },
-        "ElasticPoolPerDatabaseMaxDtuCapability": {
-            "properties": {
-                "limit": {
-                    "readOnly": true,
-                    "type": "integer",
-                    "format": "int64",
-                    "description": "The maximum DTUs per database."
-                },
-                "status": {
-                    "readOnly": true,
-                    "description": "The status of the capability.",
-                    "$ref": "#/definitions/CapabilityStatus"
-                },
-                "supportedPerDatabaseMinDtus": {
-                    "readOnly": true,
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/ElasticPoolPerDatabaseMinDtuCapability"
-                    },
-                    "description": "The list of supported min database DTUs."
-                }
-            },
-            "description": "The max per-database DTU capability."
-        },
-        "ElasticPoolPerDatabaseMinDtuCapability": {
-            "properties": {
-                "limit": {
-                    "readOnly": true,
-                    "type": "integer",
-                    "format": "int64",
-                    "description": "The maximum DTUs per database."
-                },
-                "status": {
-                    "readOnly": true,
-                    "description": "The status of the capability.",
-                    "$ref": "#/definitions/CapabilityStatus"
-                }
-            },
-            "description": "The minimum per-database DTU capability."
-        }
-    },
-    "parameters": {
-        "SubscriptionIdParameter": {
-            "name": "subscriptionId",
+  "swagger": "2.0",
+  "info": {
+    "title": "Azure SQL Database capabilities",
+    "description": "Describes the Azure SQL capabilities available to a subscription for a given location.",
+    "version": "2014-04-01"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Sql/locations/{locationId}/capabilities": {
+      "get": {
+        "tags": [
+          "Capabilities"
+        ],
+        "operationId": "Capabilities_ListByLocation",
+        "description": "Gets the capabilities available for the specified location.",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "locationId",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The subscription ID that identifies an Azure subscription."
+            "description": "The location id whose capabilities are retrieved."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/LocationCapabilities"
+            }
+          }
         },
-        "ApiVersionParameter": {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "type": "string",
-            "description": "The API version to use for the request."
-        },
-        "ResourceGroupParameter": {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group that contains the resource. You can obtain this value from the Azure Resource Manager API or the portal.",
-            "x-ms-parameter-location": "method"
-        },
-        "ServerNameParameter": {
-            "name": "serverName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the server.",
-            "x-ms-parameter-location": "method"
+        "x-ms-examples": {
+          "Get location capabilities": {
+            "$ref": "./examples/CapabilitiesList.json"
+          }
         }
+      }
+    }
+  },
+  "definitions": {
+    "CapabilityStatus": {
+      "type": "string",
+      "description": "The availability status of the capability",
+      "enum": [
+        "Visible",
+        "Available",
+        "Default",
+        "Disabled"
+      ],
+      "x-ms-enum": {
+        "name": "CapabilityStatus"
+      }
     },
+    "MaxSizeCapability": {
+      "properties": {
+        "limit": {
+          "readOnly": true,
+          "type": "integer",
+          "format": "int64",
+          "description": "The maximum size of the database (see 'unit' for the units).",
+          "x-nullable": false
+        },
+        "unit": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The units that the limit is expressed in.",
+          "enum": [
+            "Megabytes",
+            "Gigabytes",
+            "Terabytes",
+            "Petabytes"
+          ],
+          "x-ms-enum": {
+            "name": "MaxSizeUnits"
+          }
+        },
+        "status": {
+          "readOnly": true,
+          "description": "The status of the maximum size capability.",
+          "$ref": "#/definitions/CapabilityStatus"
+        }
+      },
+      "description": "The maximum size limits for a database."
+    },
+    "ServiceObjectiveCapability": {
+      "properties": {
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The service objective name."
+        },
+        "status": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The status of the service objective.",
+          "$ref": "#/definitions/CapabilityStatus"
+        },
+        "performanceLevel": {
+          "readOnly": true,
+          "$ref": "#/definitions/PerformanceLevel",
+          "description": "The performance level of the service objective capability.",
+          "x-ms-client-flatten": true
+        },
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "format": "uuid",
+          "description": "The unique ID of the service objective.",
+          "x-nullable": false
+        },
+        "supportedMaxSizes": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MaxSizeCapability"
+          },
+          "description": "The list of supported maximum database sizes for this service objective."
+        },
+        "includedMaxSize": {
+          "readOnly": true,
+          "$ref": "#/definitions/MaxSizeCapability",
+          "description": "The included (free) max size for this service level objective."
+        }
+      },
+      "description": "The service objectives capability."
+    },
+    "PerformanceLevel": {
+      "description": "A possible performance level of a service objective capability.",
+      "properties": {
+        "unit": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Unit type used to measure service objective performance level.",
+          "enum": [
+            "DTU"
+          ],
+          "x-ms-enum": {
+            "name": "PerformanceLevelUnit"
+          }
+        },
+        "value": {
+          "type": "integer",
+          "readOnly": true,
+          "description": "Performance level value."
+        }
+      }
+    },
+    "EditionCapability": {
+      "properties": {
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The edition name."
+        },
+        "status": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The status of the edition.",
+          "$ref": "#/definitions/CapabilityStatus"
+        },
+        "supportedServiceLevelObjectives": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ServiceObjectiveCapability"
+          },
+          "description": "The list of supported service objectives for the edition."
+        },
+        "zoneRedundant": {
+          "description": "Whether or not zone redundancy is supported for the edition.",
+          "type": "boolean",
+          "readOnly": true
+        }
+      },
+      "description": "The database edition capabilities."
+    },
+    "ServerVersionCapability": {
+      "properties": {
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The server version name."
+        },
+        "status": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The status of the server version.",
+          "$ref": "#/definitions/CapabilityStatus"
+        },
+        "supportedEditions": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/EditionCapability"
+          },
+          "description": "The list of supported database editions."
+        },
+        "supportedElasticPoolEditions": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ElasticPoolEditionCapability"
+          },
+          "description": "The list of supported elastic pool editions."
+        }
+      },
+      "description": "The server capabilities."
+    },
+    "LocationCapabilities": {
+      "properties": {
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The location name."
+        },
+        "status": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Azure SQL Database's status for the location.",
+          "$ref": "#/definitions/CapabilityStatus"
+        },
+        "supportedServerVersions": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ServerVersionCapability"
+          },
+          "description": "The list of supported server versions."
+        }
+      },
+      "description": "The capabilities for a location."
+    },
+    "ElasticPoolEditionCapability": {
+      "properties": {
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The elastic pool edition name."
+        },
+        "status": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The status of the elastic pool edition.",
+          "$ref": "#/definitions/CapabilityStatus"
+        },
+        "supportedElasticPoolDtus": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ElasticPoolDtuCapability"
+          },
+          "description": "The list of supported elastic pool DTU levels for the edition."
+        },
+        "zoneRedundant": {
+          "description": "Whether or not zone redundancy is supported for the edition.",
+          "type": "boolean",
+          "readOnly": true
+        }
+      },
+      "description": "The elastic pool edition capabilities."
+    },
+    "ElasticPoolDtuCapability": {
+      "properties": {
+        "limit": {
+          "readOnly": true,
+          "type": "integer",
+          "format": "int64",
+          "description": "The maximum size of the database (see 'unit' for the units)."
+        },
+        "maxDatabaseCount": {
+          "readOnly": true,
+          "type": "integer",
+          "format": "int64",
+          "description": "The maximum number of databases supported."
+        },
+        "status": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The status of the capability.",
+          "$ref": "#/definitions/CapabilityStatus"
+        },
+        "supportedMaxSizes": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MaxSizeCapability"
+          },
+          "description": "The list of supported max sizes."
+        },
+        "includedMaxSize": {
+          "readOnly": true,
+          "$ref": "#/definitions/MaxSizeCapability",
+          "description": "The included (free) max size for this service level objective."
+        },
+        "supportedPerDatabaseMaxSizes": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MaxSizeCapability"
+          },
+          "description": "The list of supported max database sizes."
+        },
+        "supportedPerDatabaseMaxDtus": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ElasticPoolPerDatabaseMaxDtuCapability"
+          },
+          "description": "The list of supported max database DTUs."
+        }
+      },
+      "description": "The Elastic Pool DTU capability."
+    },
+    "ElasticPoolPerDatabaseMaxDtuCapability": {
+      "properties": {
+        "limit": {
+          "readOnly": true,
+          "type": "integer",
+          "format": "int64",
+          "description": "The maximum DTUs per database."
+        },
+        "status": {
+          "readOnly": true,
+          "description": "The status of the capability.",
+          "$ref": "#/definitions/CapabilityStatus"
+        },
+        "supportedPerDatabaseMinDtus": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ElasticPoolPerDatabaseMinDtuCapability"
+          },
+          "description": "The list of supported min database DTUs."
+        }
+      },
+      "description": "The max per-database DTU capability."
+    },
+    "ElasticPoolPerDatabaseMinDtuCapability": {
+      "properties": {
+        "limit": {
+          "readOnly": true,
+          "type": "integer",
+          "format": "int64",
+          "description": "The maximum DTUs per database."
+        },
+        "status": {
+          "readOnly": true,
+          "description": "The status of the capability.",
+          "$ref": "#/definitions/CapabilityStatus"
+        }
+      },
+      "description": "The minimum per-database DTU capability."
+    }
+  },
+  "parameters": {
+    "ServerNameParameter": {
+      "name": "serverName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the server.",
+      "x-ms-parameter-location": "method"
+    }
+  },
   "securityDefinitions": {
     "azure_auth": {
       "type": "oauth2",
@@ -411,4 +391,3 @@
     }
   }
 }
-

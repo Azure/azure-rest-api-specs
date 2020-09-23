@@ -25,8 +25,63 @@ To see additional help and options, run:
 These are the global settings for the Cdn API.
 
 ``` yaml
+title: CdnManagementClient
+description: Cdn Management Client
 openapi-type: arm
-tag: package-2017-10
+tag: package-2020-04
+```
+
+### Tag: package-2020-04
+
+These settings apply only when `--tag=package-2020-04` is specified on the command line.
+
+``` yaml $(tag) == 'package-2020-04'
+input-file:
+- Microsoft.Cdn/stable/2020-04-15/cdn.json
+- Microsoft.Cdn/stable/2020-04-15/cdnwebapplicationfirewall.json
+```
+
+### Tag: package-2019-12
+
+These settings apply only when `--tag=package-2019-12` is specified on the command line.
+
+``` yaml $(tag) == 'package-2019-12'
+input-file:
+- Microsoft.Cdn/stable/2019-12-31/cdn.json
+```
+
+### Tag: package-2019-06
+
+These settings apply only when `--tag=package-2019-06` is specified on the command line.
+
+``` yaml $(tag) == 'package-2019-06'
+input-file:
+- Microsoft.Cdn/stable/2019-06-15/cdn.json
+- Microsoft.Cdn/stable/2019-06-15/cdnwebapplicationfirewall.json
+```
+
+### Tag: package-2019-06-preview
+
+These settings apply only when `--tag=package-2019-06-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2019-06-preview'
+input-file:
+- Microsoft.Cdn/preview/2019-06-15-preview/cdn.json
+- Microsoft.Cdn/preview/2019-06-15-preview/cdnwebapplicationfirewall.json
+directive:
+  - where:
+      - $.paths
+    suppress:
+      - OperationsAPIImplementation
+```
+
+### Tag: package-2019-04
+
+These settings apply only when `--tag=package-2019-04` is specified on the command line.
+
+``` yaml $(tag) == 'package-2019-04'
+input-file:
+- Microsoft.Cdn/stable/2019-04-15/cdn.json
 ```
 
 ### Tag: package-2017-10
@@ -87,13 +142,15 @@ This is not used by Autorest itself.
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
   - repo: azure-sdk-for-python
-  - repo: azure-libraries-for-java
+  - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-net
+  - repo: azure-sdk-for-js
   - repo: azure-sdk-for-node
   - repo: azure-sdk-for-ruby
+  - repo: azure-resource-manager-schemas
     after_scripts:
-      - bundle install && rake arm:regen_all_profiles['azure_mgmt_cdn']
+      - node sdkauto_afterscript.js cdn/resource-manager
 ```
 
 
@@ -120,3 +177,8 @@ See configuration in [readme.node.md](./readme.node.md)
 ## Ruby
 
 See configuration in [readme.ruby.md](./readme.ruby.md)
+
+## AzureResourceSchema
+
+See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
+

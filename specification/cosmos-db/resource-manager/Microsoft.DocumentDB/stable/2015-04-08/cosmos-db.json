@@ -38,7 +38,9 @@
       "get": {
         "operationId": "DatabaseAccounts_Get",
         "x-ms-examples": {
-          "CosmosDBDatabaseAccountGet": { "$ref": "./examples/CosmosDBDatabaseAccountGet.json" }
+          "CosmosDBDatabaseAccountGet": {
+            "$ref": "./examples/CosmosDBDatabaseAccountGet.json"
+          }
         },
         "description": "Retrieves the properties of an existing Azure Cosmos DB database account.",
         "parameters": [
@@ -67,7 +69,9 @@
       "patch": {
         "operationId": "DatabaseAccounts_Patch",
         "x-ms-examples": {
-          "CosmosDBDatabaseAccountPatch": { "$ref": "./examples/CosmosDBDatabaseAccountPatch.json" }
+          "CosmosDBDatabaseAccountPatch": {
+            "$ref": "./examples/CosmosDBDatabaseAccountPatch.json"
+          }
         },
         "description": "Patches the properties of an existing Azure Cosmos DB database account.",
         "x-ms-long-running-operation": true,
@@ -106,8 +110,12 @@
       "put": {
         "operationId": "DatabaseAccounts_CreateOrUpdate",
         "x-ms-examples": {
-          "CosmosDBDatabaseAccountCreateMin": { "$ref": "./examples/CosmosDBDatabaseAccountCreateMin.json" },
-          "CosmosDBDatabaseAccountCreateMax": { "$ref": "./examples/CosmosDBDatabaseAccountCreateMax.json" }
+          "CosmosDBDatabaseAccountCreateMin": {
+            "$ref": "./examples/CosmosDBDatabaseAccountCreateMin.json"
+          },
+          "CosmosDBDatabaseAccountCreateMax": {
+            "$ref": "./examples/CosmosDBDatabaseAccountCreateMax.json"
+          }
         },
         "description": "Creates or updates an Azure Cosmos DB database account.",
         "x-ms-long-running-operation": true,
@@ -146,7 +154,9 @@
       "delete": {
         "operationId": "DatabaseAccounts_Delete",
         "x-ms-examples": {
-          "CosmosDBDatabaseAccountDelete": { "$ref": "./examples/CosmosDBDatabaseAccountDelete.json" }
+          "CosmosDBDatabaseAccountDelete": {
+            "$ref": "./examples/CosmosDBDatabaseAccountDelete.json"
+          }
         },
         "description": "Deletes an existing Azure Cosmos DB database account.",
         "x-ms-long-running-operation": true,
@@ -178,7 +188,9 @@
       "post": {
         "operationId": "DatabaseAccounts_FailoverPriorityChange",
         "x-ms-examples": {
-          "CosmosDBDatabaseAccountFailoverPriorityChange": { "$ref": "./examples/CosmosDBDatabaseAccountFailoverPriorityChange.json" }
+          "CosmosDBDatabaseAccountFailoverPriorityChange": {
+            "$ref": "./examples/CosmosDBDatabaseAccountFailoverPriorityChange.json"
+          }
         },
         "description": "Changes the failover priority for the Azure Cosmos DB database account. A failover priority of 0 indicates a write region. The maximum value for a failover priority = (total number of regions - 1). Failover priority values must be unique for each of the regions in which the database account exists.",
         "x-ms-long-running-operation": true,
@@ -219,7 +231,9 @@
       "get": {
         "operationId": "DatabaseAccounts_List",
         "x-ms-examples": {
-          "CosmosDBDatabaseAccountList": { "$ref": "./examples/CosmosDBDatabaseAccountList.json" }
+          "CosmosDBDatabaseAccountList": {
+            "$ref": "./examples/CosmosDBDatabaseAccountList.json"
+          }
         },
         "description": "Lists all the Azure Cosmos DB database accounts available under the subscription.",
         "parameters": [
@@ -247,7 +261,9 @@
       "get": {
         "operationId": "DatabaseAccounts_ListByResourceGroup",
         "x-ms-examples": {
-          "CosmosDBDatabaseAccountListByResourceGroup": { "$ref": "./examples/CosmosDBDatabaseAccountListByResourceGroup.json" }
+          "CosmosDBDatabaseAccountListByResourceGroup": {
+            "$ref": "./examples/CosmosDBDatabaseAccountListByResourceGroup.json"
+          }
         },
         "description": "Lists all the Azure Cosmos DB database accounts available under the given resource group.",
         "parameters": [
@@ -278,7 +294,9 @@
       "post": {
         "operationId": "DatabaseAccounts_ListKeys",
         "x-ms-examples": {
-          "CosmosDBDatabaseAccountListKeys": { "$ref": "./examples/CosmosDBDatabaseAccountListKeys.json" }
+          "CosmosDBDatabaseAccountListKeys": {
+            "$ref": "./examples/CosmosDBDatabaseAccountListKeys.json"
+          }
         },
         "description": "Lists the access keys for the specified Azure Cosmos DB database account.",
         "parameters": [
@@ -309,8 +327,12 @@
       "post": {
         "operationId": "DatabaseAccounts_ListConnectionStrings",
         "x-ms-examples": {
-          "CosmosDBDatabaseAccountListConnectionStrings": { "$ref": "./examples/CosmosDBDatabaseAccountListConnectionStrings.json" },
-          "CosmosDBDatabaseAccountListConnectionStringsMongo": { "$ref": "./examples/CosmosDBDatabaseAccountListConnectionStringsMongo.json" }
+          "CosmosDBDatabaseAccountListConnectionStrings": {
+            "$ref": "./examples/CosmosDBDatabaseAccountListConnectionStrings.json"
+          },
+          "CosmosDBDatabaseAccountListConnectionStringsMongo": {
+            "$ref": "./examples/CosmosDBDatabaseAccountListConnectionStringsMongo.json"
+          }
         },
         "description": "Lists the connection strings for the specified Azure Cosmos DB database account.",
         "parameters": [
@@ -341,7 +363,9 @@
       "post": {
         "operationId": "DatabaseAccounts_OfflineRegion",
         "x-ms-examples": {
-          "CosmosDBDatabaseAccountOfflineRegion": { "$ref": "./examples/CosmosDBDatabaseAccountOfflineRegion.json" }
+          "CosmosDBDatabaseAccountOfflineRegion": {
+            "$ref": "./examples/CosmosDBDatabaseAccountOfflineRegion.json"
+          }
         },
         "description": "Offline the specified region for the specified Azure Cosmos DB database account.",
         "x-ms-long-running-operation": true,
@@ -388,7 +412,9 @@
       "post": {
         "operationId": "DatabaseAccounts_OnlineRegion",
         "x-ms-examples": {
-          "CosmosDBDatabaseAccountOnlineRegion": { "$ref": "./examples/CosmosDBDatabaseAccountOnlineRegion.json" }
+          "CosmosDBDatabaseAccountOnlineRegion": {
+            "$ref": "./examples/CosmosDBDatabaseAccountOnlineRegion.json"
+          }
         },
         "description": "Online the specified region for the specified Azure Cosmos DB database account.",
         "x-ms-long-running-operation": true,
@@ -433,9 +459,42 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/readonlykeys": {
       "get": {
+        "operationId": "DatabaseAccounts_GetReadOnlyKeys",
+        "x-ms-examples": {
+          "CosmosDBDatabaseAccountListReadOnlyKeys": {
+            "$ref": "./examples/CosmosDBDatabaseAccountListReadOnlyKeys.json"
+          }
+        },
+        "description": "Lists the read-only access keys for the specified Azure Cosmos DB database account.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DatabaseAccountListReadOnlyKeysResult"
+            }
+          }
+        }
+      },
+      "post": {
         "operationId": "DatabaseAccounts_ListReadOnlyKeys",
         "x-ms-examples": {
-          "CosmosDBDatabaseAccountListReadOnlyKeys": { "$ref": "./examples/CosmosDBDatabaseAccountListReadOnlyKeys.json" }
+          "CosmosDBDatabaseAccountListReadOnlyKeys": {
+            "$ref": "./examples/CosmosDBDatabaseAccountListReadOnlyKeys.json"
+          }
         },
         "description": "Lists the read-only access keys for the specified Azure Cosmos DB database account.",
         "parameters": [
@@ -466,7 +525,9 @@
       "post": {
         "operationId": "DatabaseAccounts_RegenerateKey",
         "x-ms-examples": {
-          "CosmosDBDatabaseAccountRegenerateKey": { "$ref": "./examples/CosmosDBDatabaseAccountRegenerateKey.json" }
+          "CosmosDBDatabaseAccountRegenerateKey": {
+            "$ref": "./examples/CosmosDBDatabaseAccountRegenerateKey.json"
+          }
         },
         "description": "Regenerates an access key for the specified Azure Cosmos DB database account.",
         "x-ms-long-running-operation": true,
@@ -507,7 +568,9 @@
       "head": {
         "operationId": "DatabaseAccounts_CheckNameExists",
         "x-ms-examples": {
-          "CosmosDBDatabaseAccountCheckNameExists": { "$ref": "./examples/CosmosDBDatabaseAccountCheckNameExists.json" }
+          "CosmosDBDatabaseAccountCheckNameExists": {
+            "$ref": "./examples/CosmosDBDatabaseAccountCheckNameExists.json"
+          }
         },
         "description": "Checks that the Azure Cosmos DB account name already exists. A valid account name may contain only lowercase letters, numbers, and the '-' character, and must be between 3 and 50 characters.",
         "parameters": [
@@ -536,7 +599,9 @@
         "description": "Lists all of the available Cosmos DB Resource Provider operations.",
         "operationId": "Operations_List",
         "x-ms-examples": {
-          "CosmosDBOperationsList": { "$ref": "./examples/CosmosDBOperationsList.json" }
+          "CosmosDBOperationsList": {
+            "$ref": "./examples/CosmosDBOperationsList.json"
+          }
         },
         "parameters": [
           {
@@ -560,8 +625,10 @@
       "get": {
         "operationId": "DatabaseAccounts_ListMetrics",
         "x-ms-examples": {
-          "CosmosDBDatabaseAccountGetMetrics": { "$ref": "./examples/CosmosDBDatabaseAccountGetMetrics.json" }
-        }, 
+          "CosmosDBDatabaseAccountGetMetrics": {
+            "$ref": "./examples/CosmosDBDatabaseAccountGetMetrics.json"
+          }
+        },
         "x-ms-pageable": {
           "nextLinkName": null
         },
@@ -597,7 +664,9 @@
       "get": {
         "operationId": "Database_ListMetrics",
         "x-ms-examples": {
-          "CosmosDBDatabaseGetMetrics": { "$ref": "./examples/CosmosDBDatabaseGetMetrics.json" }
+          "CosmosDBDatabaseGetMetrics": {
+            "$ref": "./examples/CosmosDBDatabaseGetMetrics.json"
+          }
         },
         "x-ms-pageable": {
           "nextLinkName": null
@@ -637,7 +706,9 @@
       "get": {
         "operationId": "Collection_ListMetrics",
         "x-ms-examples": {
-          "CosmosDBCollectionGetMetrics": { "$ref": "./examples/CosmosDBCollectionGetMetrics.json" }
+          "CosmosDBCollectionGetMetrics": {
+            "$ref": "./examples/CosmosDBCollectionGetMetrics.json"
+          }
         },
         "x-ms-pageable": {
           "nextLinkName": null
@@ -680,7 +751,9 @@
       "get": {
         "operationId": "CollectionRegion_ListMetrics",
         "x-ms-examples": {
-          "CosmosDBRegionCollectionGetMetrics": { "$ref": "./examples/CosmosDBRegionCollectionGetMetrics.json" }
+          "CosmosDBRegionCollectionGetMetrics": {
+            "$ref": "./examples/CosmosDBRegionCollectionGetMetrics.json"
+          }
         },
         "x-ms-pageable": {
           "nextLinkName": null
@@ -726,7 +799,9 @@
       "get": {
         "operationId": "DatabaseAccountRegion_ListMetrics",
         "x-ms-examples": {
-          "CosmosDBDatabaseAccountRegionGetMetrics": { "$ref": "./examples/CosmosDBDatabaseAccountRegionGetMetrics.json" }
+          "CosmosDBDatabaseAccountRegionGetMetrics": {
+            "$ref": "./examples/CosmosDBDatabaseAccountRegionGetMetrics.json"
+          }
         },
         "x-ms-pageable": {
           "nextLinkName": null
@@ -766,7 +841,9 @@
       "get": {
         "operationId": "PercentileSourceTarget_ListMetrics",
         "x-ms-examples": {
-          "CosmosDBDatabaseAccountRegionGetMetrics": { "$ref": "./examples/CosmosDBPercentileSourceTargetGetMetrics.json" }
+          "CosmosDBDatabaseAccountRegionGetMetrics": {
+            "$ref": "./examples/CosmosDBPercentileSourceTargetGetMetrics.json"
+          }
         },
         "x-ms-pageable": {
           "nextLinkName": null
@@ -809,7 +886,9 @@
       "get": {
         "operationId": "PercentileTarget_ListMetrics",
         "x-ms-examples": {
-          "CosmosDBDatabaseAccountRegionGetMetrics": { "$ref": "./examples/CosmosDBPercentileTargetGetMetrics.json" }
+          "CosmosDBDatabaseAccountRegionGetMetrics": {
+            "$ref": "./examples/CosmosDBPercentileTargetGetMetrics.json"
+          }
         },
         "x-ms-pageable": {
           "nextLinkName": null
@@ -849,7 +928,9 @@
       "get": {
         "operationId": "Percentile_ListMetrics",
         "x-ms-examples": {
-          "CosmosDBDatabaseAccountRegionGetMetrics": { "$ref": "./examples/CosmosDBPercentileGetMetrics.json" }
+          "CosmosDBDatabaseAccountRegionGetMetrics": {
+            "$ref": "./examples/CosmosDBPercentileGetMetrics.json"
+          }
         },
         "x-ms-pageable": {
           "nextLinkName": null
@@ -886,7 +967,9 @@
       "get": {
         "operationId": "CollectionPartitionRegion_ListMetrics",
         "x-ms-examples": {
-          "CosmosDBDatabaseAccountRegionGetMetrics": { "$ref": "./examples/CosmosDBCollectionPartitionRegionGetMetrics.json" }
+          "CosmosDBDatabaseAccountRegionGetMetrics": {
+            "$ref": "./examples/CosmosDBCollectionPartitionRegionGetMetrics.json"
+          }
         },
         "x-ms-pageable": {
           "nextLinkName": null
@@ -932,7 +1015,9 @@
       "get": {
         "operationId": "CollectionPartition_ListMetrics",
         "x-ms-examples": {
-          "CosmosDBDatabaseAccountRegionGetMetrics": { "$ref": "./examples/CosmosDBCollectionPartitionGetMetrics.json" }
+          "CosmosDBDatabaseAccountRegionGetMetrics": {
+            "$ref": "./examples/CosmosDBCollectionPartitionGetMetrics.json"
+          }
         },
         "x-ms-pageable": {
           "nextLinkName": null
@@ -975,7 +1060,9 @@
       "get": {
         "operationId": "PartitionKeyRangeId_ListMetrics",
         "x-ms-examples": {
-          "CosmosDBDatabaseAccountRegionGetMetrics": { "$ref": "./examples/CosmosDBPKeyRangeIdGetMetrics.json" }
+          "CosmosDBDatabaseAccountRegionGetMetrics": {
+            "$ref": "./examples/CosmosDBPKeyRangeIdGetMetrics.json"
+          }
         },
         "x-ms-pageable": {
           "nextLinkName": null
@@ -1021,7 +1108,9 @@
       "get": {
         "operationId": "PartitionKeyRangeIdRegion_ListMetrics",
         "x-ms-examples": {
-          "CosmosDBDatabaseAccountRegionGetMetrics": { "$ref": "./examples/CosmosDBPKeyRangeIdRegionGetMetrics.json" }
+          "CosmosDBDatabaseAccountRegionGetMetrics": {
+            "$ref": "./examples/CosmosDBPKeyRangeIdRegionGetMetrics.json"
+          }
         },
         "x-ms-pageable": {
           "nextLinkName": null
@@ -1070,7 +1159,9 @@
       "get": {
         "operationId": "DatabaseAccounts_ListUsages",
         "x-ms-examples": {
-          "CosmosDBDatabaseAccountGetUsages": { "$ref": "./examples/CosmosDBDatabaseAccountGetUsages.json" }
+          "CosmosDBDatabaseAccountGetUsages": {
+            "$ref": "./examples/CosmosDBDatabaseAccountGetUsages.json"
+          }
         },
         "description": "Retrieves the usages (most recent data) for the given database account.",
         "parameters": [
@@ -1100,14 +1191,16 @@
         },
         "x-ms-pageable": {
           "nextLinkName": null
-        }        
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/databases/{databaseRid}/usages": {
       "get": {
         "operationId": "Database_ListUsages",
         "x-ms-examples": {
-          "CosmosDBDatabaseGetUsages": { "$ref": "./examples/CosmosDBDatabaseGetUsages.json" }
+          "CosmosDBDatabaseGetUsages": {
+            "$ref": "./examples/CosmosDBDatabaseGetUsages.json"
+          }
         },
         "description": "Retrieves the usages (most recent data) for the given database.",
         "parameters": [
@@ -1140,14 +1233,16 @@
         },
         "x-ms-pageable": {
           "nextLinkName": null
-        }        
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/databases/{databaseRid}/collections/{collectionRid}/usages": {
       "get": {
         "operationId": "Collection_ListUsages",
         "x-ms-examples": {
-          "CosmosDBCollectionGetUsages": { "$ref": "./examples/CosmosDBCollectionGetUsages.json" }
+          "CosmosDBCollectionGetUsages": {
+            "$ref": "./examples/CosmosDBCollectionGetUsages.json"
+          }
         },
         "description": "Retrieves the usages (most recent storage data) for the given collection.",
         "parameters": [
@@ -1183,14 +1278,16 @@
         },
         "x-ms-pageable": {
           "nextLinkName": null
-        }        
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/databases/{databaseRid}/collections/{collectionRid}/partitions/usages": {
       "get": {
         "operationId": "CollectionPartition_ListUsages",
         "x-ms-examples": {
-          "CosmosDBCollectionGetUsages": { "$ref": "./examples/CosmosDBCollectionPartitionGetUsages.json" }
+          "CosmosDBCollectionGetUsages": {
+            "$ref": "./examples/CosmosDBCollectionPartitionGetUsages.json"
+          }
         },
         "description": "Retrieves the usages (most recent storage data) for the given collection, split by partition.",
         "parameters": [
@@ -1233,9 +1330,11 @@
       "get": {
         "operationId": "Database_ListMetricDefinitions",
         "x-ms-examples": {
-          "CosmosDBDatabaseGetMetricDefinitions": { "$ref": "./examples/CosmosDBDatabaseGetMetricDefinitions.json" }
+          "CosmosDBDatabaseGetMetricDefinitions": {
+            "$ref": "./examples/CosmosDBDatabaseGetMetricDefinitions.json"
+          }
         },
-        "description": "Retrieves metric defintions for the given database.",
+        "description": "Retrieves metric definitions for the given database.",
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionIdParameter"
@@ -1263,16 +1362,18 @@
         },
         "x-ms-pageable": {
           "nextLinkName": null
-        }        
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/databases/{databaseRid}/collections/{collectionRid}/metricDefinitions": {
       "get": {
         "operationId": "Collection_ListMetricDefinitions",
         "x-ms-examples": {
-          "CosmosDBCollectionGetMetricDefinitions": { "$ref": "./examples/CosmosDBCollectionGetMetricDefinitions.json" }
+          "CosmosDBCollectionGetMetricDefinitions": {
+            "$ref": "./examples/CosmosDBCollectionGetMetricDefinitions.json"
+          }
         },
-        "description": "Retrieves metric defintions for the given collection.",
+        "description": "Retrieves metric definitions for the given collection.",
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionIdParameter"
@@ -1303,16 +1404,18 @@
         },
         "x-ms-pageable": {
           "nextLinkName": null
-        }        
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/metricDefinitions": {
       "get": {
         "operationId": "DatabaseAccounts_ListMetricDefinitions",
         "x-ms-examples": {
-          "CosmosDBDatabaseAccountGetMetricDefinitions": { "$ref": "./examples/CosmosDBDatabaseAccountGetMetricDefinitions.json" }
+          "CosmosDBDatabaseAccountGetMetricDefinitions": {
+            "$ref": "./examples/CosmosDBDatabaseAccountGetMetricDefinitions.json"
+          }
         },
-        "description": "Retrieves metric defintions for the given database account.",
+        "description": "Retrieves metric definitions for the given database account.",
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionIdParameter"
@@ -1337,7 +1440,2212 @@
         },
         "x-ms-pageable": {
           "nextLinkName": null
-        }        
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/apis/sql/databases": {
+      "get": {
+        "operationId": "DatabaseAccounts_ListSqlDatabases",
+        "x-ms-examples": {
+          "CosmosDBSqlDatabaseList": {
+            "$ref": "./examples/CosmosDBSqlDatabaseList.json"
+          }
+        },
+        "description": "Lists the SQL databases under an existing Azure Cosmos DB database account.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The SQL database properties were retrieved successfully.",
+            "schema": {
+              "$ref": "#/definitions/SqlDatabaseListResult"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/apis/sql/databases/{databaseName}": {
+      "get": {
+        "operationId": "DatabaseAccounts_GetSqlDatabase",
+        "x-ms-examples": {
+          "CosmosDBSqlDatabaseGet": {
+            "$ref": "./examples/CosmosDBSqlDatabaseGet.json"
+          }
+        },
+        "description": "Gets the SQL database under an existing Azure Cosmos DB database account with the provided name.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/databaseNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The SQL database property was retrieved successfully.",
+            "schema": {
+              "$ref": "#/definitions/SqlDatabase"
+            }
+          }
+        }
+      },
+      "put": {
+        "operationId": "DatabaseAccounts_CreateUpdateSqlDatabase",
+        "x-ms-examples": {
+          "CosmosDBSqlDatabaseCreateUpdate": {
+            "$ref": "./examples/CosmosDBSqlDatabaseCreateUpdate.json"
+          }
+        },
+        "description": "Create or update an Azure Cosmos DB SQL database",
+        "x-ms-long-running-operation": true,
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/databaseNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "name": "createUpdateSqlDatabaseParameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SqlDatabaseCreateUpdateParameters"
+            },
+            "description": "The parameters to provide for the current SQL database."
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The SQL database create or update operation will complete asynchronously."
+          },
+          "200": {
+            "description": "The SQL database create or update operation was completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SqlDatabase"
+            }
+          }
+        }
+      },
+      "delete": {
+        "operationId": "DatabaseAccounts_DeleteSqlDatabase",
+        "x-ms-examples": {
+          "CosmosDBSqlDatabaseDelete": {
+            "$ref": "./examples/CosmosDBSqlDatabaseDelete.json"
+          }
+        },
+        "description": "Deletes an existing Azure Cosmos DB SQL database.",
+        "x-ms-long-running-operation": true,
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/databaseNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The SQL database delete operation will complete asynchronously."
+          },
+          "204": {
+            "description": "The SQL database delete operation was completed successfully."
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/apis/sql/databases/{databaseName}/settings/throughput": {
+      "get": {
+        "operationId": "DatabaseAccounts_GetSqlDatabaseThroughput",
+        "x-ms-examples": {
+          "CosmosDBSqlDatabaseThroughputGet": {
+            "$ref": "./examples/CosmosDBSqlDatabaseThroughputGet.json"
+          }
+        },
+        "description": "Gets the RUs per second of the SQL database under an existing Azure Cosmos DB database account with the provided name.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/databaseNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The RUs per second of the SQL database was retrieved successfully.",
+            "schema": {
+              "$ref": "#/definitions/Throughput"
+            }
+          }
+        }
+      },
+      "put": {
+        "operationId": "DatabaseAccounts_UpdateSqlDatabaseThroughput",
+        "x-ms-examples": {
+          "CosmosDBSqlDatabaseThroughputUpdate": {
+            "$ref": "./examples/CosmosDBSqlDatabaseThroughputUpdate.json"
+          }
+        },
+        "description": "Update RUs per second of an Azure Cosmos DB SQL database",
+        "x-ms-long-running-operation": true,
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/databaseNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "name": "updateThroughputParameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ThroughputUpdateParameters"
+            },
+            "description": "The parameters to provide for the RUs per second of the current SQL database."
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The RUs per second of the SQL database update operation will complete asynchronously."
+          },
+          "200": {
+            "description": "The RUs per second of the SQL database update operation was completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Throughput"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/apis/sql/databases/{databaseName}/containers": {
+      "get": {
+        "operationId": "DatabaseAccounts_ListSqlContainers",
+        "x-ms-examples": {
+          "CosmosDBSqlContainerList": {
+            "$ref": "./examples/CosmosDBSqlContainerList.json"
+          }
+        },
+        "description": "Lists the SQL container under an existing Azure Cosmos DB database account.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/databaseNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The SQL container properties were retrieved successfully.",
+            "schema": {
+              "$ref": "#/definitions/SqlContainerListResult"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/apis/sql/databases/{databaseName}/containers/{containerName}": {
+      "get": {
+        "operationId": "DatabaseAccounts_GetSqlContainer",
+        "x-ms-examples": {
+          "CosmosDBSqlContainerGet": {
+            "$ref": "./examples/CosmosDBSqlContainerGet.json"
+          }
+        },
+        "description": "Gets the SQL container under an existing Azure Cosmos DB database account.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/databaseNameParameter"
+          },
+          {
+            "$ref": "#/parameters/containerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The SQL container property was retrieved successfully.",
+            "schema": {
+              "$ref": "#/definitions/SqlContainer"
+            }
+          }
+        }
+      },
+      "put": {
+        "operationId": "DatabaseAccounts_CreateUpdateSqlContainer",
+        "x-ms-examples": {
+          "CosmosDBSqlContainerCreateUpdate": {
+            "$ref": "./examples/CosmosDBSqlContainerCreateUpdate.json"
+          }
+        },
+        "description": "Create or update an Azure Cosmos DB SQL container",
+        "x-ms-long-running-operation": true,
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/databaseNameParameter"
+          },
+          {
+            "$ref": "#/parameters/containerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "name": "createUpdateSqlContainerParameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SqlContainerCreateUpdateParameters"
+            },
+            "description": "The parameters to provide for the current SQL container."
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The SQL container create or update operation will complete asynchronously."
+          },
+          "200": {
+            "description": "The SQL container create or update operation was completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SqlContainer"
+            }
+          }
+        }
+      },
+      "delete": {
+        "operationId": "DatabaseAccounts_DeleteSqlContainer",
+        "x-ms-examples": {
+          "CosmosDBSqlContainerDelete": {
+            "$ref": "./examples/CosmosDBSqlContainerDelete.json"
+          }
+        },
+        "description": "Deletes an existing Azure Cosmos DB SQL container.",
+        "x-ms-long-running-operation": true,
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/databaseNameParameter"
+          },
+          {
+            "$ref": "#/parameters/containerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The SQL container delete operation will complete asynchronously."
+          },
+          "204": {
+            "description": "The SQL container delete operation was completed successfully."
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/apis/sql/databases/{databaseName}/containers/{containerName}/settings/throughput": {
+      "get": {
+        "operationId": "DatabaseAccounts_GetSqlContainerThroughput",
+        "x-ms-examples": {
+          "CosmosDBSqlContainerThroughputGet": {
+            "$ref": "./examples/CosmosDBSqlContainerThroughputGet.json"
+          }
+        },
+        "description": "Gets the RUs per second of the SQL container under an existing Azure Cosmos DB database account.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/databaseNameParameter"
+          },
+          {
+            "$ref": "#/parameters/containerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The RUs per second of the SQL container was retrieved successfully.",
+            "schema": {
+              "$ref": "#/definitions/Throughput"
+            }
+          }
+        }
+      },
+      "put": {
+        "operationId": "DatabaseAccounts_UpdateSqlContainerThroughput",
+        "x-ms-examples": {
+          "CosmosDBSqlContainerThroughputUpdate": {
+            "$ref": "./examples/CosmosDBSqlContainerThroughputUpdate.json"
+          }
+        },
+        "description": "Update RUs per second of an Azure Cosmos DB SQL container",
+        "x-ms-long-running-operation": true,
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/databaseNameParameter"
+          },
+          {
+            "$ref": "#/parameters/containerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "name": "updateThroughputParameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ThroughputUpdateParameters"
+            },
+            "description": "The parameters to provide for the RUs per second of the current SQL container."
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The RUs per second of the SQL container update operation will complete asynchronously."
+          },
+          "200": {
+            "description": "The RUs per second of the SQL container update operation was completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Throughput"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/apis/mongodb/databases": {
+      "get": {
+        "operationId": "DatabaseAccounts_ListMongoDBDatabases",
+        "x-ms-examples": {
+          "CosmosDBMongoDBDatabaseList": {
+            "$ref": "./examples/CosmosDBMongoDBDatabaseList.json"
+          }
+        },
+        "description": "Lists the MongoDB databases under an existing Azure Cosmos DB database account.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The MongoDB database properties were retrieved successfully.",
+            "schema": {
+              "$ref": "#/definitions/MongoDBDatabaseListResult"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/apis/mongodb/databases/{databaseName}": {
+      "get": {
+        "operationId": "DatabaseAccounts_GetMongoDBDatabase",
+        "x-ms-examples": {
+          "CosmosDBMongoDBDatabaseGet": {
+            "$ref": "./examples/CosmosDBMongoDBDatabaseGet.json"
+          }
+        },
+        "description": "Gets the MongoDB databases under an existing Azure Cosmos DB database account with the provided name.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/databaseNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The MongoDB database property was retrieved successfully.",
+            "schema": {
+              "$ref": "#/definitions/MongoDBDatabase"
+            }
+          }
+        }
+      },
+      "put": {
+        "operationId": "DatabaseAccounts_CreateUpdateMongoDBDatabase",
+        "x-ms-examples": {
+          "CosmosDBMongoDBDatabaseCreateUpdate": {
+            "$ref": "./examples/CosmosDBMongoDBDatabaseCreateUpdate.json"
+          }
+        },
+        "description": "Create or updates Azure Cosmos DB MongoDB database",
+        "x-ms-long-running-operation": true,
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/databaseNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "name": "createUpdateMongoDBDatabaseParameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/MongoDBDatabaseCreateUpdateParameters"
+            },
+            "description": "The parameters to provide for the current MongoDB database."
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The MongoDB database create or update operation will complete asynchronously."
+          },
+          "200": {
+            "description": "The MongoDB database create or update operation was completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/MongoDBDatabase"
+            }
+          }
+        }
+      },
+      "delete": {
+        "operationId": "DatabaseAccounts_DeleteMongoDBDatabase",
+        "x-ms-examples": {
+          "CosmosDBMongoDBDatabaseDelete": {
+            "$ref": "./examples/CosmosDBMongoDBDatabaseDelete.json"
+          }
+        },
+        "description": "Deletes an existing Azure Cosmos DB MongoDB database.",
+        "x-ms-long-running-operation": true,
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/databaseNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The MongoDB database delete operation will complete asynchronously."
+          },
+          "204": {
+            "description": "The MongoDB database delete operation was completed successfully."
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/apis/mongodb/databases/{databaseName}/settings/throughput": {
+      "get": {
+        "operationId": "DatabaseAccounts_GetMongoDBDatabaseThroughput",
+        "x-ms-examples": {
+          "CosmosDBMongoDBDatabaseThroughputGet": {
+            "$ref": "./examples/CosmosDBMongoDBDatabaseThroughputGet.json"
+          }
+        },
+        "description": "Gets the RUs per second of the MongoDB database under an existing Azure Cosmos DB database account with the provided name.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/databaseNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The RUs per second of the MongoDB database was retrieved successfully.",
+            "schema": {
+              "$ref": "#/definitions/Throughput"
+            }
+          }
+        }
+      },
+      "put": {
+        "operationId": "DatabaseAccounts_UpdateMongoDBDatabaseThroughput",
+        "x-ms-examples": {
+          "CosmosDBMongoDBDatabaseThroughputUpdate": {
+            "$ref": "./examples/CosmosDBMongoDBDatabaseThroughputUpdate.json"
+          }
+        },
+        "description": "Update RUs per second of the an Azure Cosmos DB MongoDB database",
+        "x-ms-long-running-operation": true,
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/databaseNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "name": "updateThroughputParameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ThroughputUpdateParameters"
+            },
+            "description": "The RUs per second of the parameters to provide for the current MongoDB database."
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The RUs per second of the MongoDB database update operation will complete asynchronously."
+          },
+          "200": {
+            "description": "The RUs per second of the MongoDB database update operation was completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Throughput"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/apis/mongodb/databases/{databaseName}/collections": {
+      "get": {
+        "operationId": "DatabaseAccounts_ListMongoDBCollections",
+        "x-ms-examples": {
+          "CosmosDBMongoDBCollectionList": {
+            "$ref": "./examples/CosmosDBMongoDBCollectionList.json"
+          }
+        },
+        "description": "Lists the MongoDB collection under an existing Azure Cosmos DB database account.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/databaseNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The MongoDB collection properties were retrieved successfully.",
+            "schema": {
+              "$ref": "#/definitions/MongoDBCollectionListResult"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/apis/mongodb/databases/{databaseName}/collections/{collectionName}": {
+      "get": {
+        "operationId": "DatabaseAccounts_GetMongoDBCollection",
+        "x-ms-examples": {
+          "CosmosDBMongoDBCollectionGet": {
+            "$ref": "./examples/CosmosDBMongoDBCollectionGet.json"
+          }
+        },
+        "description": "Gets the MongoDB collection under an existing Azure Cosmos DB database account.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/databaseNameParameter"
+          },
+          {
+            "$ref": "#/parameters/collectionNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The MongoDB collection property was retrieved successfully.",
+            "schema": {
+              "$ref": "#/definitions/MongoDBCollection"
+            }
+          }
+        }
+      },
+      "put": {
+        "operationId": "DatabaseAccounts_CreateUpdateMongoDBCollection",
+        "x-ms-examples": {
+          "CosmosDBMongoDBCollectionCreateUpdate": {
+            "$ref": "./examples/CosmosDBMongoDBCollectionCreateUpdate.json"
+          }
+        },
+        "description": "Create or update an Azure Cosmos DB MongoDB Collection",
+        "x-ms-long-running-operation": true,
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/databaseNameParameter"
+          },
+          {
+            "$ref": "#/parameters/collectionNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "name": "createUpdateMongoDBCollectionParameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/MongoDBCollectionCreateUpdateParameters"
+            },
+            "description": "The parameters to provide for the current MongoDB Collection."
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The MongoDB Collection create or update operation will complete asynchronously."
+          },
+          "200": {
+            "description": "The MongoDB Collection create or update operation was completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/MongoDBCollection"
+            }
+          }
+        }
+      },
+      "delete": {
+        "operationId": "DatabaseAccounts_DeleteMongoDBCollection",
+        "x-ms-examples": {
+          "CosmosDBMongoDBCollectionDelete": {
+            "$ref": "./examples/CosmosDBMongoDBCollectionDelete.json"
+          }
+        },
+        "description": "Deletes an existing Azure Cosmos DB MongoDB Collection.",
+        "x-ms-long-running-operation": true,
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/databaseNameParameter"
+          },
+          {
+            "$ref": "#/parameters/collectionNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The MongoDB collection delete operation will complete asynchronously."
+          },
+          "204": {
+            "description": "The MongoDB collection delete operation was completed successfully."
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/apis/mongodb/databases/{databaseName}/collections/{collectionName}/settings/throughput": {
+      "get": {
+        "operationId": "DatabaseAccounts_GetMongoDBCollectionThroughput",
+        "x-ms-examples": {
+          "CosmosDBMongoDBCollectionThroughputGet": {
+            "$ref": "./examples/CosmosDBMongoDBCollectionThroughputGet.json"
+          }
+        },
+        "description": "Gets the RUs per second of the MongoDB collection under an existing Azure Cosmos DB database account with the provided name.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/databaseNameParameter"
+          },
+          {
+            "$ref": "#/parameters/collectionNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The RUs per second of the MongoDB collection was retrieved successfully.",
+            "schema": {
+              "$ref": "#/definitions/Throughput"
+            }
+          }
+        }
+      },
+      "put": {
+        "operationId": "DatabaseAccounts_UpdateMongoDBCollectionThroughput",
+        "x-ms-examples": {
+          "CosmosDBMongoDBCollectionThroughputUpdate": {
+            "$ref": "./examples/CosmosDBMongoDBCollectionThroughputUpdate.json"
+          }
+        },
+        "description": "Update the RUs per second of an Azure Cosmos DB MongoDB collection",
+        "x-ms-long-running-operation": true,
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/databaseNameParameter"
+          },
+          {
+            "$ref": "#/parameters/collectionNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "name": "updateThroughputParameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ThroughputUpdateParameters"
+            },
+            "description": "The RUs per second of the parameters to provide for the current MongoDB collection."
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The RUs per second of the MongoDB collection update operation will complete asynchronously."
+          },
+          "200": {
+            "description": "The RUs per second of the MongoDB collection update operation was completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Throughput"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/apis/table/tables": {
+      "get": {
+        "operationId": "DatabaseAccounts_ListTables",
+        "x-ms-examples": {
+          "CosmosDBTableList": {
+            "$ref": "./examples/CosmosDBTableList.json"
+          }
+        },
+        "description": "Lists the Tables under an existing Azure Cosmos DB database account.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The Table properties were retrieved successfully.",
+            "schema": {
+              "$ref": "#/definitions/TableListResult"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/apis/table/tables/{tableName}": {
+      "get": {
+        "operationId": "DatabaseAccounts_GetTable",
+        "x-ms-examples": {
+          "CosmosDBTableGet": {
+            "$ref": "./examples/CosmosDBTableGet.json"
+          }
+        },
+        "description": "Gets the Tables under an existing Azure Cosmos DB database account with the provided name.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/tableNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The Table property was retrieved successfully.",
+            "schema": {
+              "$ref": "#/definitions/Table"
+            }
+          }
+        }
+      },
+      "put": {
+        "operationId": "DatabaseAccounts_CreateUpdateTable",
+        "x-ms-examples": {
+          "CosmosDBTableReplace": {
+            "$ref": "./examples/CosmosDBTableCreateUpdate.json"
+          }
+        },
+        "description": "Create or update an Azure Cosmos DB Table",
+        "x-ms-long-running-operation": true,
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/tableNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "name": "createUpdateTableParameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/TableCreateUpdateParameters"
+            },
+            "description": "The parameters to provide for the current Table."
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The Table create or update operation will complete asynchronously."
+          },
+          "200": {
+            "description": "The Table create or update operation was completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Table"
+            }
+          }
+        }
+      },
+      "delete": {
+        "operationId": "DatabaseAccounts_DeleteTable",
+        "x-ms-examples": {
+          "CosmosDBTableDelete": {
+            "$ref": "./examples/CosmosDBTableDelete.json"
+          }
+        },
+        "description": "Deletes an existing Azure Cosmos DB Table.",
+        "x-ms-long-running-operation": true,
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/tableNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The Table delete operation will complete asynchronously."
+          },
+          "204": {
+            "description": "The Table delete operation was completed successfully."
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/apis/table/tables/{tableName}/settings/throughput": {
+      "get": {
+        "operationId": "DatabaseAccounts_GetTableThroughput",
+        "x-ms-examples": {
+          "CosmosDBTableThroughputGet": {
+            "$ref": "./examples/CosmosDBTableThroughputGet.json"
+          }
+        },
+        "description": "Gets the RUs per second of the Table under an existing Azure Cosmos DB database account with the provided name.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/tableNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The RUs per second of the Table was retrieved successfully.",
+            "schema": {
+              "$ref": "#/definitions/Throughput"
+            }
+          }
+        }
+      },
+      "put": {
+        "operationId": "DatabaseAccounts_UpdateTableThroughput",
+        "x-ms-examples": {
+          "CosmosDBTableThroughputUpdate": {
+            "$ref": "./examples/CosmosDBTableThroughputUpdate.json"
+          }
+        },
+        "description": "Update RUs per second of an Azure Cosmos DB Table",
+        "x-ms-long-running-operation": true,
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/tableNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "name": "updateThroughputParameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ThroughputUpdateParameters"
+            },
+            "description": "The parameters to provide for the RUs per second of the current Table."
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The RUs per second of the Table update operation will complete asynchronously."
+          },
+          "200": {
+            "description": "The RUs per second of the Table update operation was completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Throughput"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/apis/cassandra/keyspaces": {
+      "get": {
+        "operationId": "DatabaseAccounts_ListCassandraKeyspaces",
+        "x-ms-examples": {
+          "CosmosDBCassandraKeyspaceList": {
+            "$ref": "./examples/CosmosDBCassandraKeyspaceList.json"
+          }
+        },
+        "description": "Lists the Cassandra keyspaces under an existing Azure Cosmos DB database account.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The Cassandra keyspace properties were retrieved successfully.",
+            "schema": {
+              "$ref": "#/definitions/CassandraKeyspaceListResult"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/apis/cassandra/keyspaces/{keyspaceName}": {
+      "get": {
+        "operationId": "DatabaseAccounts_GetCassandraKeyspace",
+        "x-ms-examples": {
+          "CosmosDBCassandraKeyspaceGet": {
+            "$ref": "./examples/CosmosDBCassandraKeyspaceGet.json"
+          }
+        },
+        "description": "Gets the Cassandra keyspaces under an existing Azure Cosmos DB database account with the provided name.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/keyspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The Cassandra keyspace property was retrieved successfully.",
+            "schema": {
+              "$ref": "#/definitions/CassandraKeyspace"
+            }
+          }
+        }
+      },
+      "put": {
+        "operationId": "DatabaseAccounts_CreateUpdateCassandraKeyspace",
+        "x-ms-examples": {
+          "CosmosDBCassandraKeyspaceCreateUpdate": {
+            "$ref": "./examples/CosmosDBCassandraKeyspaceCreateUpdate.json"
+          }
+        },
+        "description": "Create or update an Azure Cosmos DB Cassandra keyspace",
+        "x-ms-long-running-operation": true,
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/keyspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "name": "createUpdateCassandraKeyspaceParameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CassandraKeyspaceCreateUpdateParameters"
+            },
+            "description": "The parameters to provide for the current Cassandra keyspace."
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The Cassandra keyspace create or update operation will complete asynchronously."
+          },
+          "200": {
+            "description": "The Cassandra keyspace create or update operation was completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/CassandraKeyspace"
+            }
+          }
+        }
+      },
+      "delete": {
+        "operationId": "DatabaseAccounts_DeleteCassandraKeyspace",
+        "x-ms-examples": {
+          "CosmosDBCassandraKeyspaceDelete": {
+            "$ref": "./examples/CosmosDBCassandraKeyspaceDelete.json"
+          }
+        },
+        "description": "Deletes an existing Azure Cosmos DB Cassandra keyspace.",
+        "x-ms-long-running-operation": true,
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/keyspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The Cassandra keyspace delete operation will complete asynchronously."
+          },
+          "204": {
+            "description": "The Cassandra keyspace delete operation was completed successfully."
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/apis/cassandra/keyspaces/{keyspaceName}/settings/throughput": {
+      "get": {
+        "operationId": "DatabaseAccounts_GetCassandraKeyspaceThroughput",
+        "x-ms-examples": {
+          "CosmosDBCassandraKeyspaceThroughputGet": {
+            "$ref": "./examples/CosmosDBCassandraKeyspaceThroughputGet.json"
+          }
+        },
+        "description": "Gets the RUs per second of the Cassandra Keyspace under an existing Azure Cosmos DB database account with the provided name.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/keyspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The RUs per second of the Cassandra Keyspace was retrieved successfully.",
+            "schema": {
+              "$ref": "#/definitions/Throughput"
+            }
+          }
+        }
+      },
+      "put": {
+        "operationId": "DatabaseAccounts_UpdateCassandraKeyspaceThroughput",
+        "x-ms-examples": {
+          "CosmosDBCassandraKeyspaceThroughputUpdate": {
+            "$ref": "./examples/CosmosDBCassandraKeyspaceThroughputUpdate.json"
+          }
+        },
+        "description": "Update RUs per second of an Azure Cosmos DB Cassandra Keyspace",
+        "x-ms-long-running-operation": true,
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/keyspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "name": "updateThroughputParameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ThroughputUpdateParameters"
+            },
+            "description": "The RUs per second of the parameters to provide for the current Cassandra Keyspace."
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The RUs per second of the Cassandra Keyspace update operation will complete asynchronously."
+          },
+          "200": {
+            "description": "The RUs per second of the Cassandra Keyspace update operation was completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Throughput"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/apis/cassandra/keyspaces/{keyspaceName}/tables": {
+      "get": {
+        "operationId": "DatabaseAccounts_ListCassandraTables",
+        "x-ms-examples": {
+          "CosmosDBCassandraTableList": {
+            "$ref": "./examples/CosmosDBCassandraTableList.json"
+          }
+        },
+        "description": "Lists the Cassandra table under an existing Azure Cosmos DB database account.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/keyspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The Cassandra table properties were retrieved successfully.",
+            "schema": {
+              "$ref": "#/definitions/CassandraTableListResult"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/apis/cassandra/keyspaces/{keyspaceName}/tables/{tableName}": {
+      "get": {
+        "operationId": "DatabaseAccounts_GetCassandraTable",
+        "x-ms-examples": {
+          "CosmosDBCassandraTableGet": {
+            "$ref": "./examples/CosmosDBCassandraTableGet.json"
+          }
+        },
+        "description": "Gets the Cassandra table under an existing Azure Cosmos DB database account.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/keyspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/tableNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The Cassandra table property was retrieved successfully.",
+            "schema": {
+              "$ref": "#/definitions/CassandraTable"
+            }
+          }
+        }
+      },
+      "put": {
+        "operationId": "DatabaseAccounts_CreateUpdateCassandraTable",
+        "x-ms-examples": {
+          "CosmosDBCassandraTableCreateUpdate": {
+            "$ref": "./examples/CosmosDBCassandraTableCreateUpdate.json"
+          }
+        },
+        "description": "Create or update an Azure Cosmos DB Cassandra Table",
+        "x-ms-long-running-operation": true,
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/keyspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/tableNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "name": "createUpdateCassandraTableParameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CassandraTableCreateUpdateParameters"
+            },
+            "description": "The parameters to provide for the current Cassandra Table."
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The Cassandra Table create or update operation will complete asynchronously."
+          },
+          "200": {
+            "description": "The Cassandra Table create or update operation was completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/CassandraTable"
+            }
+          }
+        }
+      },
+      "delete": {
+        "operationId": "DatabaseAccounts_DeleteCassandraTable",
+        "x-ms-examples": {
+          "CosmosDBCassandraTableDelete": {
+            "$ref": "./examples/CosmosDBCassandraTableDelete.json"
+          }
+        },
+        "description": "Deletes an existing Azure Cosmos DB Cassandra table.",
+        "x-ms-long-running-operation": true,
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/keyspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/tableNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The Cassandra table delete operation will complete asynchronously."
+          },
+          "204": {
+            "description": "The Cassandra table delete operation was completed successfully."
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/apis/cassandra/keyspaces/{keyspaceName}/tables/{tableName}/settings/throughput": {
+      "get": {
+        "operationId": "DatabaseAccounts_GetCassandraTableThroughput",
+        "x-ms-examples": {
+          "CosmosDBCassandraTableThroughputGet": {
+            "$ref": "./examples/CosmosDBCassandraTableThroughputGet.json"
+          }
+        },
+        "description": "Gets the RUs per second of the Cassandra table under an existing Azure Cosmos DB database account with the provided name.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/keyspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/tableNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The RUs per second of the Cassandra table was retrieved successfully.",
+            "schema": {
+              "$ref": "#/definitions/Throughput"
+            }
+          }
+        }
+      },
+      "put": {
+        "operationId": "DatabaseAccounts_UpdateCassandraTableThroughput",
+        "x-ms-examples": {
+          "CosmosDBCassandraTableThroughputUpdate": {
+            "$ref": "./examples/CosmosDBCassandraTableThroughputUpdate.json"
+          }
+        },
+        "description": "Update RUs per second of an Azure Cosmos DB Cassandra table",
+        "x-ms-long-running-operation": true,
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/keyspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/tableNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "name": "updateThroughputParameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ThroughputUpdateParameters"
+            },
+            "description": "The RUs per second of the parameters to provide for the current Cassandra table."
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The RUs per second of the Cassandra table update operation will complete asynchronously."
+          },
+          "200": {
+            "description": "The RUs per second of the Cassandra table update operation was completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Throughput"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/apis/gremlin/databases": {
+      "get": {
+        "operationId": "DatabaseAccounts_ListGremlinDatabases",
+        "x-ms-examples": {
+          "CosmosDBGremlinDatabaseList": {
+            "$ref": "./examples/CosmosDBGremlinDatabaseList.json"
+          }
+        },
+        "description": "Lists the Gremlin databases under an existing Azure Cosmos DB database account.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The Gremlin database properties were retrieved successfully.",
+            "schema": {
+              "$ref": "#/definitions/GremlinDatabaseListResult"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/apis/gremlin/databases/{databaseName}": {
+      "get": {
+        "operationId": "DatabaseAccounts_GetGremlinDatabase",
+        "x-ms-examples": {
+          "CosmosDBGremlinDatabaseGet": {
+            "$ref": "./examples/CosmosDBGremlinDatabaseGet.json"
+          }
+        },
+        "description": "Gets the Gremlin databases under an existing Azure Cosmos DB database account with the provided name.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/databaseNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The Gremlin database property was retrieved successfully.",
+            "schema": {
+              "$ref": "#/definitions/GremlinDatabase"
+            }
+          }
+        }
+      },
+      "put": {
+        "operationId": "DatabaseAccounts_CreateUpdateGremlinDatabase",
+        "x-ms-examples": {
+          "CosmosDBGremlinDatabaseCreateUpdate": {
+            "$ref": "./examples/CosmosDBGremlinDatabaseCreateUpdate.json"
+          }
+        },
+        "description": "Create or update an Azure Cosmos DB Gremlin database",
+        "x-ms-long-running-operation": true,
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/databaseNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "name": "createUpdateGremlinDatabaseParameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/GremlinDatabaseCreateUpdateParameters"
+            },
+            "description": "The parameters to provide for the current Gremlin database."
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The Gremlin database create or update operation will complete asynchronously."
+          },
+          "200": {
+            "description": "The Gremlin database create or update operation was completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/GremlinDatabase"
+            }
+          }
+        }
+      },
+      "delete": {
+        "operationId": "DatabaseAccounts_DeleteGremlinDatabase",
+        "x-ms-examples": {
+          "CosmosDBGremlinDatabaseDelete": {
+            "$ref": "./examples/CosmosDBGremlinDatabaseDelete.json"
+          }
+        },
+        "description": "Deletes an existing Azure Cosmos DB Gremlin database.",
+        "x-ms-long-running-operation": true,
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/databaseNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The Gremlin database delete operation will complete asynchronously."
+          },
+          "204": {
+            "description": "The Gremlin database delete operation was completed successfully."
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/apis/gremlin/databases/{databaseName}/settings/throughput": {
+      "get": {
+        "operationId": "DatabaseAccounts_GetGremlinDatabaseThroughput",
+        "x-ms-examples": {
+          "CosmosDBGremlinDatabaseThroughputGet": {
+            "$ref": "./examples/CosmosDBGremlinDatabaseThroughputGet.json"
+          }
+        },
+        "description": "Gets the RUs per second of the Gremlin database under an existing Azure Cosmos DB database account with the provided name.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/databaseNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The RUs per second of the Gremlin database was retrieved successfully.",
+            "schema": {
+              "$ref": "#/definitions/Throughput"
+            }
+          }
+        }
+      },
+      "put": {
+        "operationId": "DatabaseAccounts_UpdateGremlinDatabaseThroughput",
+        "x-ms-examples": {
+          "CosmosDBGremlinDatabaseThroughputUpdate": {
+            "$ref": "./examples/CosmosDBGremlinDatabaseThroughputUpdate.json"
+          }
+        },
+        "description": "Update RUs per second of an Azure Cosmos DB Gremlin database",
+        "x-ms-long-running-operation": true,
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/databaseNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "name": "updateThroughputParameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ThroughputUpdateParameters"
+            },
+            "description": "The RUs per second of the parameters to provide for the current Gremlin database."
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The RUs per second of the Gremlin database update operation will complete asynchronously."
+          },
+          "200": {
+            "description": "The RUs per second of the Gremlin database update operation was completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Throughput"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/apis/gremlin/databases/{databaseName}/graphs": {
+      "get": {
+        "operationId": "DatabaseAccounts_ListGremlinGraphs",
+        "x-ms-examples": {
+          "CosmosDBGremlinGraphList": {
+            "$ref": "./examples/CosmosDBGremlinGraphList.json"
+          }
+        },
+        "description": "Lists the Gremlin graph under an existing Azure Cosmos DB database account.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/databaseNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The Gremlin graph properties were retrieved successfully.",
+            "schema": {
+              "$ref": "#/definitions/GremlinGraphListResult"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/apis/gremlin/databases/{databaseName}/graphs/{graphName}": {
+      "get": {
+        "operationId": "DatabaseAccounts_GetGremlinGraph",
+        "x-ms-examples": {
+          "CosmosDBGremlinGraphGet": {
+            "$ref": "./examples/CosmosDBGremlinGraphGet.json"
+          }
+        },
+        "description": "Gets the Gremlin graph under an existing Azure Cosmos DB database account.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/databaseNameParameter"
+          },
+          {
+            "$ref": "#/parameters/graphNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The Gremlin graph property was retrieved successfully.",
+            "schema": {
+              "$ref": "#/definitions/GremlinGraph"
+            }
+          }
+        }
+      },
+      "put": {
+        "operationId": "DatabaseAccounts_CreateUpdateGremlinGraph",
+        "x-ms-examples": {
+          "CosmosDBGremlinGraphCreateUpdate": {
+            "$ref": "./examples/CosmosDBGremlinGraphCreateUpdate.json"
+          }
+        },
+        "description": "Create or update an Azure Cosmos DB Gremlin graph",
+        "x-ms-long-running-operation": true,
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/databaseNameParameter"
+          },
+          {
+            "$ref": "#/parameters/graphNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "name": "createUpdateGremlinGraphParameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/GremlinGraphCreateUpdateParameters"
+            },
+            "description": "The parameters to provide for the current Gremlin graph."
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The Gremlin graph create or update operation will complete asynchronously."
+          },
+          "200": {
+            "description": "The Gremlin graph create or update operation was completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/GremlinGraph"
+            }
+          }
+        }
+      },
+      "delete": {
+        "operationId": "DatabaseAccounts_DeleteGremlinGraph",
+        "x-ms-examples": {
+          "CosmosDBGremlinGraphDelete": {
+            "$ref": "./examples/CosmosDBGremlinGraphDelete.json"
+          }
+        },
+        "description": "Deletes an existing Azure Cosmos DB Gremlin graph.",
+        "x-ms-long-running-operation": true,
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/databaseNameParameter"
+          },
+          {
+            "$ref": "#/parameters/graphNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The Gremlin graph delete operation will complete asynchronously."
+          },
+          "204": {
+            "description": "The Gremlin graph delete operation was completed successfully."
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/apis/gremlin/databases/{databaseName}/graphs/{graphName}/settings/throughput": {
+      "get": {
+        "operationId": "DatabaseAccounts_GetGremlinGraphThroughput",
+        "x-ms-examples": {
+          "CosmosDBGremlinGraphThroughputGet": {
+            "$ref": "./examples/CosmosDBGremlinGraphThroughputGet.json"
+          }
+        },
+        "description": "Gets the Gremlin graph throughput under an existing Azure Cosmos DB database account with the provided name.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/databaseNameParameter"
+          },
+          {
+            "$ref": "#/parameters/graphNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The RUs per second of the Gremlin graph was retrieved successfully.",
+            "schema": {
+              "$ref": "#/definitions/Throughput"
+            }
+          }
+        }
+      },
+      "put": {
+        "operationId": "DatabaseAccounts_UpdateGremlinGraphThroughput",
+        "x-ms-examples": {
+          "CosmosDBGremlinGraphThroughputUpdate": {
+            "$ref": "./examples/CosmosDBGremlinGraphThroughputUpdate.json"
+          }
+        },
+        "description": "Update RUs per second of an Azure Cosmos DB Gremlin graph",
+        "x-ms-long-running-operation": true,
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/databaseNameParameter"
+          },
+          {
+            "$ref": "#/parameters/graphNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "name": "updateThroughputParameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ThroughputUpdateParameters"
+            },
+            "description": "The RUs per second of the parameters to provide for the current Gremlin graph."
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The RUs per second of the Gremlin graph update operation will complete asynchronously."
+          },
+          "200": {
+            "description": "The RUs per second of the Gremlin graph update operation was completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Throughput"
+            }
+          }
+        }
       }
     }
   },
@@ -1354,6 +3662,123 @@
         }
       },
       "description": "The List operation response, that contains the database accounts and their properties."
+    },
+    "SqlDatabaseListResult": {
+      "properties": {
+        "value": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SqlDatabase"
+          },
+          "description": "List of SQL databases and their properties."
+        }
+      },
+      "description": "The List operation response, that contains the SQL databases and their properties."
+    },
+    "SqlContainerListResult": {
+      "properties": {
+        "value": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SqlContainer"
+          },
+          "description": "List of containers and their properties."
+        }
+      },
+      "description": "The List operation response, that contains the containers and their properties."
+    },
+    "MongoDBDatabaseListResult": {
+      "properties": {
+        "value": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MongoDBDatabase"
+          },
+          "description": "List of MongoDB databases and their properties."
+        }
+      },
+      "description": "The List operation response, that contains the MongoDB databases and their properties."
+    },
+    "MongoDBCollectionListResult": {
+      "properties": {
+        "value": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MongoDBCollection"
+          },
+          "description": "List of MongoDB collections and their properties."
+        }
+      },
+      "description": "The List operation response, that contains the MongoDB collections and their properties."
+    },
+    "TableListResult": {
+      "properties": {
+        "value": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Table"
+          },
+          "description": "List of Table and their properties."
+        }
+      },
+      "description": "The List operation response, that contains the Table and their properties."
+    },
+    "CassandraKeyspaceListResult": {
+      "properties": {
+        "value": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CassandraKeyspace"
+          },
+          "description": "List of Cassandra keyspaces and their properties."
+        }
+      },
+      "description": "The List operation response, that contains the Cassandra keyspaces and their properties."
+    },
+    "CassandraTableListResult": {
+      "properties": {
+        "value": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CassandraTable"
+          },
+          "description": "List of Cassandra tables and their properties."
+        }
+      },
+      "description": "The List operation response, that contains the Cassandra tables and their properties."
+    },
+    "GremlinDatabaseListResult": {
+      "properties": {
+        "value": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/GremlinDatabase"
+          },
+          "description": "List of Gremlin databases and their properties."
+        }
+      },
+      "description": "The List operation response, that contains the Gremlin databases and their properties."
+    },
+    "GremlinGraphListResult": {
+      "properties": {
+        "value": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/GremlinGraph"
+          },
+          "description": "List of graphs and their properties."
+        }
+      },
+      "description": "The List operation response, that contains the graphs and their properties."
     },
     "ErrorResponse": {
       "properties": {
@@ -1442,12 +3867,16 @@
           "format": "int32",
           "type": "integer",
           "minimum": 0
+        },
+        "isZoneRedundant": {
+          "type": "boolean",
+          "description": "Flag to indicate whether or not this region is an AvailabilityZone region"
         }
       }
     },
     "Resource": {
       "type": "object",
-      "description": "A database account resource.",
+      "description": "The core properties of ARM resources.",
       "properties": {
         "id": {
           "readOnly": true,
@@ -1472,9 +3901,6 @@
           "$ref": "#/definitions/Tags"
         }
       },
-      "required": [
-        "location"
-      ],
       "x-ms-azure-resource": true
     },
     "DatabaseAccount": {
@@ -1503,6 +3929,305 @@
       "allOf": [
         {
           "$ref": "#/definitions/Resource"
+        }
+      ]
+    },
+    "ExtendedResourceProperties": {
+      "description": "The system generated resource properties associated with SQL databases and SQL containers.",
+      "type": "object",
+      "properties": {
+        "_rid": {
+          "type": "string",
+          "description": "A system generated property. A unique identifier."
+        },
+        "_ts": {
+          "description": "A system generated property that denotes the last updated timestamp of the resource."
+        },
+        "_etag": {
+          "type": "string",
+          "description": "A system generated property representing the resource etag required for optimistic concurrency control."
+        }
+      }
+    },
+    "Throughput": {
+      "description": "An Azure Cosmos DB resource throughput.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "The properties of an Azure Cosmos DB resource throughput",
+          "$ref": "#/definitions/ThroughputProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ]
+    },
+    "ThroughputProperties": {
+      "description": "The properties of an Azure Cosmos DB resource throughput",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ThroughputResource"
+        }
+      ]
+    },
+    "SqlDatabase": {
+      "description": "An Azure Cosmos DB SQL database.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "The properties of an Azure Cosmos DB SQL database",
+          "$ref": "#/definitions/SqlDatabaseProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ]
+    },
+    "SqlDatabaseProperties": {
+      "description": "The properties of an Azure Cosmos DB SQL database",
+      "type": "object",
+      "properties": {
+        "_colls": {
+          "type": "string",
+          "description": "A system generated property that specified the addressable path of the collections resource."
+        },
+        "_users": {
+          "type": "string",
+          "description": "A system generated property that specifies the addressable path of the users resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/SqlDatabaseResource"
+        },
+        {
+          "$ref": "#/definitions/ExtendedResourceProperties"
+        }
+      ]
+    },
+    "SqlContainer": {
+      "description": "An Azure Cosmos DB container.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "The properties of an Azure Cosmos DB container",
+          "$ref": "#/definitions/SqlContainerProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ]
+    },
+    "SqlContainerProperties": {
+      "description": "The properties of an Azure Cosmos DB container",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/SqlContainerResource"
+        },
+        {
+          "$ref": "#/definitions/ExtendedResourceProperties"
+        }
+      ]
+    },
+    "MongoDBDatabase": {
+      "description": "An Azure Cosmos DB MongoDB database.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "The properties of an Azure Cosmos DB MongoDB database",
+          "$ref": "#/definitions/MongoDBDatabaseProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ]
+    },
+    "MongoDBDatabaseProperties": {
+      "description": "The properties of an Azure Cosmos DB MongoDB database",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/MongoDBDatabaseResource"
+        }
+      ]
+    },
+    "MongoDBCollection": {
+      "description": "An Azure Cosmos DB MongoDB collection.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "The properties of an Azure Cosmos DB MongoDB collection",
+          "$ref": "#/definitions/MongoDBCollectionProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ]
+    },
+    "MongoDBCollectionProperties": {
+      "description": "The properties of an Azure Cosmos DB MongoDB collection",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/MongoDBCollectionResource"
+        }
+      ]
+    },
+    "Table": {
+      "description": "An Azure Cosmos DB Table.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "The properties of an Azure Cosmos DB Table",
+          "$ref": "#/definitions/TableProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ]
+    },
+    "TableProperties": {
+      "description": "The properties of an Azure Cosmos Table",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/TableResource"
+        }
+      ]
+    },
+    "CassandraKeyspace": {
+      "description": "An Azure Cosmos DB Cassandra keyspace.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "The properties of an Azure Cosmos DB Cassandra keyspace",
+          "$ref": "#/definitions/CassandraKeyspaceProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ]
+    },
+    "CassandraKeyspaceProperties": {
+      "description": "The properties of an Azure Cosmos DB Cassandra keyspace",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CassandraKeyspaceResource"
+        }
+      ]
+    },
+    "CassandraTable": {
+      "description": "An Azure Cosmos DB Cassandra table.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "The properties of an Azure Cosmos DB Cassandra table",
+          "$ref": "#/definitions/CassandraTableProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ]
+    },
+    "CassandraTableProperties": {
+      "description": "The properties of an Azure Cosmos DB Cassandra table",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CassandraTableResource"
+        }
+      ]
+    },
+    "GremlinDatabase": {
+      "description": "An Azure Cosmos DB Gremlin database.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "The properties of an Azure Cosmos DB SQL database",
+          "$ref": "#/definitions/GremlinDatabaseProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ]
+    },
+    "GremlinDatabaseProperties": {
+      "description": "The properties of an Azure Cosmos DB SQL database",
+      "type": "object",
+      "properties": {
+        "_rid": {
+          "type": "string",
+          "description": "A system generated property. A unique identifier."
+        },
+        "_ts": {
+          "description": "A system generated property that denotes the last updated timestamp of the resource."
+        },
+        "_etag": {
+          "type": "string",
+          "description": "A system generated property representing the resource etag required for optimistic concurrency control."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/GremlinDatabaseResource"
+        }
+      ]
+    },
+    "GremlinGraph": {
+      "description": "An Azure Cosmos DB Gremlin graph.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "The properties of an Azure Cosmos DB Gremlin graph",
+          "$ref": "#/definitions/GremlinGraphProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ]
+    },
+    "GremlinGraphProperties": {
+      "description": "The properties of an Azure Cosmos DB Gremlin graph",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/GremlinGraphResource"
+        },
+        {
+          "$ref": "#/definitions/ExtendedResourceProperties"
         }
       ]
     },
@@ -1614,6 +4339,18 @@
           "items": {
             "$ref": "#/definitions/VirtualNetworkRule"
           }
+        },
+        "enableMultipleWriteLocations": {
+          "description": "Enables the account to write in multiple locations",
+          "type": "boolean"
+        },
+        "enableCassandraConnector": {
+          "description": "Enables the cassandra connector on the Cosmos DB C* account",
+          "type": "boolean"
+        },
+        "connectorOffer": {
+          "description": "The cassandra connector offer type for the Cosmos DB database C* account.",
+          "$ref": "#/definitions/ConnectorOffer"
         }
       }
     },
@@ -1646,6 +4383,7 @@
           }
         },
         "databaseAccountOfferType": {
+          "description": "The offer type for the database",
           "$ref": "#/definitions/DatabaseAccountOfferType"
         },
         "ipRangeFilter": {
@@ -1673,6 +4411,18 @@
           "items": {
             "$ref": "#/definitions/VirtualNetworkRule"
           }
+        },
+        "enableMultipleWriteLocations": {
+          "description": "Enables the account to write in multiple locations",
+          "type": "boolean"
+        },
+        "enableCassandraConnector": {
+          "description": "Enables the cassandra connector on the Cosmos DB C* account",
+          "type": "boolean"
+        },
+        "connectorOffer": {
+          "description": "The cassandra connector offer type for the Cosmos DB database C* account.",
+          "$ref": "#/definitions/ConnectorOffer"
         }
       },
       "required": [
@@ -1752,12 +4502,13 @@
           "readOnly": true,
           "type": "string",
           "description": "Base 64 encoded value of the secondary read-write key."
-        },
-        "properties": {
-          "x-ms-client-flatten": true,
+        }
+      },
+      "allOf": [
+        {
           "$ref": "#/definitions/DatabaseAccountListReadOnlyKeysResult"
         }
-      }
+      ]
     },
     "DatabaseAccountConnectionString": {
       "description": "Connection string for the Cosmos DB account",
@@ -1820,6 +4571,822 @@
         "modelAsString": false
       }
     },
+    "ThroughputUpdateParameters": {
+      "description": "Parameters to update Cosmos DB resource throughput.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "Properties to update Azure Cosmos DB resource throughput.",
+          "$ref": "#/definitions/ThroughputUpdateProperties"
+        }
+      },
+      "required": [
+        "properties"
+      ]
+    },
+    "ThroughputUpdateProperties": {
+      "description": "Properties to update Azure Cosmos DB resource throughput.",
+      "type": "object",
+      "properties": {
+        "resource": {
+          "description": "The standard JSON format of a resource throughput",
+          "$ref": "#/definitions/ThroughputResource"
+        }
+      },
+      "required": [
+        "resource"
+      ]
+    },
+    "SqlDatabaseCreateUpdateParameters": {
+      "description": "Parameters to create and update Cosmos DB SQL database.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "Properties to create and update Azure Cosmos DB SQL database.",
+          "$ref": "#/definitions/SqlDatabaseCreateUpdateProperties"
+        }
+      },
+      "required": [
+        "properties"
+      ]
+    },
+    "SqlDatabaseCreateUpdateProperties": {
+      "description": "Properties to create and update Azure Cosmos DB SQL database.",
+      "type": "object",
+      "properties": {
+        "resource": {
+          "description": "The standard JSON format of a SQL database",
+          "$ref": "#/definitions/SqlDatabaseResource"
+        },
+        "options": {
+          "description": "A key-value pair of options to be applied for the request. This corresponds to the headers sent with the request.",
+          "$ref": "#/definitions/CreateUpdateOptions"
+        }
+      },
+      "required": [
+        "resource",
+        "options"
+      ]
+    },
+    "SqlContainerCreateUpdateParameters": {
+      "description": "Parameters to create and update Cosmos DB container.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "Properties to create and update Azure Cosmos DB container.",
+          "$ref": "#/definitions/SqlContainerCreateUpdateProperties"
+        }
+      },
+      "required": [
+        "properties"
+      ]
+    },
+    "SqlContainerCreateUpdateProperties": {
+      "description": "Properties to create and update Azure Cosmos DB container.",
+      "type": "object",
+      "properties": {
+        "resource": {
+          "description": "The standard JSON format of a container",
+          "$ref": "#/definitions/SqlContainerResource"
+        },
+        "options": {
+          "description": "A key-value pair of options to be applied for the request. This corresponds to the headers sent with the request.",
+          "$ref": "#/definitions/CreateUpdateOptions"
+        }
+      },
+      "required": [
+        "resource",
+        "options"
+      ]
+    },
+    "MongoDBDatabaseCreateUpdateParameters": {
+      "description": "Parameters to create and update Cosmos DB MongoDB database.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "Properties to create and update Azure Cosmos DB MongoDB database.",
+          "$ref": "#/definitions/MongoDBDatabaseCreateUpdateProperties"
+        }
+      },
+      "required": [
+        "properties"
+      ]
+    },
+    "MongoDBDatabaseCreateUpdateProperties": {
+      "description": "Properties to create and update Azure Cosmos DB MongoDB database.",
+      "type": "object",
+      "properties": {
+        "resource": {
+          "description": "The standard JSON format of a MongoDB database",
+          "$ref": "#/definitions/MongoDBDatabaseResource"
+        },
+        "options": {
+          "description": "A key-value pair of options to be applied for the request. This corresponds to the headers sent with the request.",
+          "$ref": "#/definitions/CreateUpdateOptions"
+        }
+      },
+      "required": [
+        "resource",
+        "options"
+      ]
+    },
+    "MongoDBCollectionCreateUpdateParameters": {
+      "description": "Parameters to create and update Cosmos DB MongoDB collection.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "Properties to create and update Azure Cosmos DB MongoDB collection.",
+          "$ref": "#/definitions/MongoDBCollectionCreateUpdateProperties"
+        }
+      },
+      "required": [
+        "properties"
+      ]
+    },
+    "MongoDBCollectionCreateUpdateProperties": {
+      "description": "Properties to create and update Azure Cosmos DB MongoDB collection.",
+      "type": "object",
+      "properties": {
+        "resource": {
+          "description": "The standard JSON format of a MongoDB collection",
+          "$ref": "#/definitions/MongoDBCollectionResource"
+        },
+        "options": {
+          "description": "A key-value pair of options to be applied for the request. This corresponds to the headers sent with the request.",
+          "$ref": "#/definitions/CreateUpdateOptions"
+        }
+      },
+      "required": [
+        "resource",
+        "options"
+      ]
+    },
+    "TableCreateUpdateParameters": {
+      "description": "Parameters to create and update Cosmos DB Table.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "Properties to create and update Azure Cosmos DB Table.",
+          "$ref": "#/definitions/TableCreateUpdateProperties"
+        }
+      },
+      "required": [
+        "properties"
+      ]
+    },
+    "TableCreateUpdateProperties": {
+      "description": "Properties to create and update Azure Cosmos DB Table.",
+      "type": "object",
+      "properties": {
+        "resource": {
+          "description": "The standard JSON format of a Table",
+          "$ref": "#/definitions/TableResource"
+        },
+        "options": {
+          "description": "A key-value pair of options to be applied for the request. This corresponds to the headers sent with the request.",
+          "$ref": "#/definitions/CreateUpdateOptions"
+        }
+      },
+      "required": [
+        "resource",
+        "options"
+      ]
+    },
+    "CassandraKeyspaceCreateUpdateParameters": {
+      "description": "Parameters to create and update Cosmos DB Cassandra keyspace.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "Properties to create and update Azure Cosmos DB Cassandra keyspace.",
+          "$ref": "#/definitions/CassandraKeyspaceCreateUpdateProperties"
+        }
+      },
+      "required": [
+        "properties"
+      ]
+    },
+    "CassandraKeyspaceCreateUpdateProperties": {
+      "description": "Properties to create and update Azure Cosmos DB Cassandra keyspace.",
+      "type": "object",
+      "properties": {
+        "resource": {
+          "description": "The standard JSON format of a Cassandra keyspace",
+          "$ref": "#/definitions/CassandraKeyspaceResource"
+        },
+        "options": {
+          "description": "A key-value pair of options to be applied for the request. This corresponds to the headers sent with the request.",
+          "$ref": "#/definitions/CreateUpdateOptions"
+        }
+      },
+      "required": [
+        "resource",
+        "options"
+      ]
+    },
+    "CassandraTableCreateUpdateParameters": {
+      "description": "Parameters to create and update Cosmos DB Cassandra table.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "Properties to create and update Azure Cosmos DB Cassandra table.",
+          "$ref": "#/definitions/CassandraTableCreateUpdateProperties"
+        }
+      },
+      "required": [
+        "properties"
+      ]
+    },
+    "CassandraTableCreateUpdateProperties": {
+      "description": "Properties to create and update Azure Cosmos DB Cassandra table.",
+      "type": "object",
+      "properties": {
+        "resource": {
+          "description": "The standard JSON format of a Cassandra table",
+          "$ref": "#/definitions/CassandraTableResource"
+        },
+        "options": {
+          "description": "A key-value pair of options to be applied for the request. This corresponds to the headers sent with the request.",
+          "$ref": "#/definitions/CreateUpdateOptions"
+        }
+      },
+      "required": [
+        "resource",
+        "options"
+      ]
+    },
+    "GremlinDatabaseCreateUpdateParameters": {
+      "description": "Parameters to create and update Cosmos DB Gremlin database.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "Properties to create and update Azure Cosmos DB Gremlin database.",
+          "$ref": "#/definitions/GremlinDatabaseCreateUpdateProperties"
+        }
+      },
+      "required": [
+        "properties"
+      ]
+    },
+    "GremlinDatabaseCreateUpdateProperties": {
+      "description": "Properties to create and update Azure Cosmos DB Gremlin database.",
+      "type": "object",
+      "properties": {
+        "resource": {
+          "description": "The standard JSON format of a Gremlin database",
+          "$ref": "#/definitions/GremlinDatabaseResource"
+        },
+        "options": {
+          "description": "A key-value pair of options to be applied for the request. This corresponds to the headers sent with the request.",
+          "$ref": "#/definitions/CreateUpdateOptions"
+        }
+      },
+      "required": [
+        "resource",
+        "options"
+      ]
+    },
+    "GremlinGraphCreateUpdateParameters": {
+      "description": "Parameters to create and update Cosmos DB Gremlin graph.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "Properties to create and update Azure Cosmos DB Gremlin graph.",
+          "$ref": "#/definitions/GremlinGraphCreateUpdateProperties"
+        }
+      },
+      "required": [
+        "properties"
+      ]
+    },
+    "GremlinGraphCreateUpdateProperties": {
+      "description": "Properties to create and update Azure Cosmos DB Gremlin graph.",
+      "type": "object",
+      "properties": {
+        "resource": {
+          "description": "The standard JSON format of a Gremlin graph",
+          "$ref": "#/definitions/GremlinGraphResource"
+        },
+        "options": {
+          "description": "A key-value pair of options to be applied for the request. This corresponds to the headers sent with the request.",
+          "$ref": "#/definitions/CreateUpdateOptions"
+        }
+      },
+      "required": [
+        "resource",
+        "options"
+      ]
+    },
+    "ThroughputResource": {
+      "type": "object",
+      "description": "Cosmos DB resource throughput object",
+      "properties": {
+        "throughput": {
+          "type": "integer",
+          "description": "Value of the Cosmos DB resource throughput"
+        }
+      },
+      "required": [
+        "throughput"
+      ]
+    },
+    "SqlDatabaseResource": {
+      "type": "object",
+      "description": "Cosmos DB SQL database id object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Name of the Cosmos DB SQL database"
+        }
+      },
+      "required": [
+        "id"
+      ]
+    },
+    "SqlContainerResource": {
+      "type": "object",
+      "description": "Cosmos DB SQL container resource object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Name of the Cosmos DB SQL container"
+        },
+        "indexingPolicy": {
+          "$ref": "#/definitions/IndexingPolicy",
+          "description": "The configuration of the indexing policy. By default, the indexing is automatic for all document paths within the container"
+        },
+        "partitionKey": {
+          "$ref": "#/definitions/ContainerPartitionKey",
+          "description": "The configuration of the partition key to be used for partitioning data into multiple partitions"
+        },
+        "defaultTtl": {
+          "type": "integer",
+          "description": "Default time to live"
+        },
+        "uniqueKeyPolicy": {
+          "$ref": "#/definitions/UniqueKeyPolicy",
+          "description": "The unique key policy configuration for specifying uniqueness constraints on documents in the collection in the Azure Cosmos DB service."
+        },
+        "conflictResolutionPolicy": {
+          "$ref": "#/definitions/ConflictResolutionPolicy",
+          "description": "The conflict resolution policy for the container."
+        }
+      },
+      "required": [
+        "id"
+      ]
+    },
+    "GremlinGraphResource": {
+      "type": "object",
+      "description": "Cosmos DB Gremlin graph resource object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Name of the Cosmos DB Gremlin graph"
+        },
+        "indexingPolicy": {
+          "$ref": "#/definitions/IndexingPolicy",
+          "description": "The configuration of the indexing policy. By default, the indexing is automatic for all document paths within the graph"
+        },
+        "partitionKey": {
+          "$ref": "#/definitions/ContainerPartitionKey",
+          "description": "The configuration of the partition key to be used for partitioning data into multiple partitions"
+        },
+        "defaultTtl": {
+          "type": "integer",
+          "description": "Default time to live"
+        },
+        "uniqueKeyPolicy": {
+          "$ref": "#/definitions/UniqueKeyPolicy",
+          "description": "The unique key policy configuration for specifying uniqueness constraints on documents in the collection in the Azure Cosmos DB service."
+        },
+        "conflictResolutionPolicy": {
+          "$ref": "#/definitions/ConflictResolutionPolicy",
+          "description": "The conflict resolution policy for the graph."
+        }
+      },
+      "required": [
+        "id"
+      ]
+    },
+    "IndexingPolicy": {
+      "type": "object",
+      "description": "Cosmos DB indexing policy",
+      "properties": {
+        "automatic": {
+          "type": "boolean",
+          "description": "Indicates if the indexing policy is automatic"
+        },
+        "indexingMode": {
+          "description": "Indicates the indexing mode.",
+          "type": "string",
+          "default": "Consistent",
+          "enum": [
+            "Consistent",
+            "Lazy",
+            "None"
+          ],
+          "x-ms-enum": {
+            "name": "IndexingMode",
+            "modelAsString": true
+          }
+        },
+        "includedPaths": {
+          "description": "List of paths to include in the indexing",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/IncludedPath"
+          }
+        },
+        "excludedPaths": {
+          "description": "List of paths to exclude from indexing",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ExcludedPath"
+          }
+        }
+      }
+    },
+    "ExcludedPath": {
+      "type": "object",
+      "properties": {
+        "path": {
+          "type": "string",
+          "description": "The path for which the indexing behavior applies to. Index paths typically start with root and end with wildcard (/path/*)"
+        }
+      }
+    },
+    "IncludedPath": {
+      "type": "object",
+      "description": "The paths that are included in indexing",
+      "properties": {
+        "path": {
+          "type": "string",
+          "description": "The path for which the indexing behavior applies to. Index paths typically start with root and end with wildcard (/path/*)"
+        },
+        "indexes": {
+          "description": "List of indexes for this path",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Indexes"
+          }
+        }
+      }
+    },
+    "Indexes": {
+      "type": "object",
+      "description": "The indexes for the path.",
+      "properties": {
+        "dataType": {
+          "description": "The datatype for which the indexing behavior is applied to.",
+          "type": "string",
+          "default": "String",
+          "enum": [
+            "String",
+            "Number",
+            "Point",
+            "Polygon",
+            "LineString",
+            "MultiPolygon"
+          ],
+          "x-ms-enum": {
+            "name": "DataType",
+            "modelAsString": true
+          }
+        },
+        "precision": {
+          "description": "The precision of the index. -1 is maximum precision.",
+          "type": "integer"
+        },
+        "kind": {
+          "description": "Indicates the type of index.",
+          "type": "string",
+          "default": "Hash",
+          "enum": [
+            "Hash",
+            "Range",
+            "Spatial"
+          ],
+          "x-ms-enum": {
+            "name": "IndexKind",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "ContainerPartitionKey": {
+      "type": "object",
+      "description": "The configuration of the partition key to be used for partitioning data into multiple partitions",
+      "properties": {
+        "paths": {
+          "description": "List of paths using which data within the container can be partitioned",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Path"
+          }
+        },
+        "kind": {
+          "description": "Indicates the kind of algorithm used for partitioning",
+          "type": "string",
+          "default": "Hash",
+          "enum": [
+            "Hash",
+            "Range"
+          ],
+          "x-ms-enum": {
+            "name": "PartitionKind",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "Path": {
+      "type": "string",
+      "description": "A path. These typically start with root (/path)"
+    },
+    "UniqueKeyPolicy": {
+      "type": "object",
+      "description": "The unique key policy configuration for specifying uniqueness constraints on documents in the collection in the Azure Cosmos DB service.",
+      "properties": {
+        "uniqueKeys": {
+          "description": "List of unique keys on that enforces uniqueness constraint on documents in the collection in the Azure Cosmos DB service.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/UniqueKey"
+          }
+        }
+      }
+    },
+    "UniqueKey": {
+      "type": "object",
+      "description": "The unique key on that enforces uniqueness constraint on documents in the collection in the Azure Cosmos DB service.",
+      "properties": {
+        "paths": {
+          "description": "List of paths must be unique for each document in the Azure Cosmos DB service",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Path"
+          }
+        }
+      }
+    },
+    "ConflictResolutionPolicy": {
+      "type": "object",
+      "description": "The conflict resolution policy for the container.",
+      "properties": {
+        "mode": {
+          "description": "Indicates the conflict resolution mode.",
+          "type": "string",
+          "default": "LastWriterWins",
+          "enum": [
+            "LastWriterWins",
+            "Custom"
+          ],
+          "x-ms-enum": {
+            "name": "ConflictResolutionMode",
+            "modelAsString": true
+          }
+        },
+        "conflictResolutionPath": {
+          "type": "string",
+          "description": "The conflict resolution path in the case of LastWriterWins mode."
+        },
+        "conflictResolutionProcedure": {
+          "type": "string",
+          "description": "The procedure to resolve conflicts in the case of custom mode."
+        }
+      }
+    },
+    "MongoDBDatabaseResource": {
+      "type": "object",
+      "description": "Cosmos DB MongoDB database id object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Name of the Cosmos DB MongoDB database"
+        }
+      },
+      "required": [
+        "id"
+      ]
+    },
+    "MongoDBCollectionResource": {
+      "type": "object",
+      "description": "Cosmos DB MongoDB collection resource object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Name of the Cosmos DB MongoDB collection"
+        },
+        "shardKey": {
+          "description": "A key-value pair of shard keys to be applied for the request.",
+          "$ref": "#/definitions/ShardKeys"
+        },
+        "indexes": {
+          "description": "List of index keys",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MongoIndex"
+          }
+        }
+      },
+      "required": [
+        "id"
+      ]
+    },
+    "ShardKeys": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "string"
+      },
+      "description": "The shard key and partition kind pair, only support \"Hash\" partition kind"
+    },
+    "MongoIndex": {
+      "type": "object",
+      "description": "Cosmos DB MongoDB collection index key",
+      "properties": {
+        "key": {
+          "description": "Cosmos DB MongoDB collection index keys",
+          "$ref": "#/definitions/MongoIndexKeys"
+        },
+        "options": {
+          "description": "Cosmos DB MongoDB collection index key options",
+          "$ref": "#/definitions/MongoIndexOptions"
+        }
+      }
+    },
+    "MongoIndexKeys": {
+      "type": "object",
+      "description": "Cosmos DB MongoDB collection resource object",
+      "properties": {
+        "keys": {
+          "description": "List of keys for each MongoDB collection in the Azure Cosmos DB service",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Key"
+          }
+        }
+      }
+    },
+    "Key": {
+      "type": "string",
+      "description": "A Key."
+    },
+    "MongoIndexOptions": {
+      "type": "object",
+      "description": "Cosmos DB MongoDB collection index options",
+      "properties": {
+        "expireAfterSeconds": {
+          "description": "Expire after seconds",
+          "type": "integer"
+        },
+        "unique": {
+          "description": "Is unique or not",
+          "type": "boolean"
+        }
+      }
+    },
+    "TableResource": {
+      "type": "object",
+      "description": "Cosmos DB table id object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Name of the Cosmos DB table"
+        }
+      },
+      "required": [
+        "id"
+      ]
+    },
+    "CassandraKeyspaceResource": {
+      "type": "object",
+      "description": "Cosmos DB Cassandra keyspace id object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Name of the Cosmos DB Cassandra keyspace"
+        }
+      },
+      "required": [
+        "id"
+      ]
+    },
+    "CassandraTableResource": {
+      "type": "object",
+      "description": "Cosmos DB Cassandra table id object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Name of the Cosmos DB Cassandra table"
+        },
+        "defaultTtl": {
+          "type": "integer",
+          "description": "Time to live of the Cosmos DB Cassandra table"
+        },
+        "schema": {
+          "description": "Schema of the Cosmos DB Cassandra table",
+          "$ref": "#/definitions/CassandraSchema"
+        }
+      },
+      "required": [
+        "id"
+      ]
+    },
+    "CassandraSchema": {
+      "type": "object",
+      "description": "Cosmos DB Cassandra table schema",
+      "properties": {
+        "columns": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Column"
+          },
+          "description": "List of Cassandra table columns."
+        },
+        "partitionKeys": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CassandraPartitionKey"
+          },
+          "description": "List of partition key."
+        },
+        "clusterKeys": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ClusterKey"
+          },
+          "description": "List of cluster key."
+        }
+      }
+    },
+    "Column": {
+      "type": "object",
+      "description": "Cosmos DB Cassandra table column",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the Cosmos DB Cassandra table column"
+        },
+        "type": {
+          "type": "string",
+          "description": "Type of the Cosmos DB Cassandra table column"
+        }
+      }
+    },
+    "CassandraPartitionKey": {
+      "type": "object",
+      "description": "Cosmos DB Cassandra table partition key",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the Cosmos DB Cassandra table partition key"
+        }
+      }
+    },
+    "ClusterKey": {
+      "type": "object",
+      "description": "Cosmos DB Cassandra table cluster key",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the Cosmos DB Cassandra table cluster key"
+        },
+        "orderBy": {
+          "type": "string",
+          "description": "Order of the Cosmos DB Cassandra table cluster key, only support \"Asc\" and \"Desc\""
+        }
+      }
+    },
+    "GremlinDatabaseResource": {
+      "type": "object",
+      "description": "Cosmos DB Gremlin database id object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Name of the Cosmos DB Gremlin database"
+        }
+      },
+      "required": [
+        "id"
+      ]
+    },
+    "CreateUpdateOptions": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "string"
+      },
+      "description": "CreateUpdateOptions are a list of key-value pairs that describe the resource. Supported keys are \"If-Match\", \"If-None-Match\", \"Session-Token\" and \"Throughput\""
+    },
     "Capability": {
       "type": "object",
       "description": "Cosmos DB capability object",
@@ -1840,7 +5407,7 @@
     "ProvisioningState": {
       "type": "string",
       "readOnly": true,
-      "description": "The status of the Cosmos DB account at the time the operation was called. The status can be one of following. 'Creating' – the Cosmos DB account is being created. When an account is in Creating state, only properties that are specified as input for the Create Cosmos DB account operation are returned. 'Succeeded' – the Cosmos DB account is active for use. 'Updating' – the Cosmos DB account is being updated. 'Deleting' – the Cosmos DB account is being deleted. 'Failed' – the Cosmos DB account failed creation."
+      "description": "The status of the Cosmos DB account at the time the operation was called. The status can be one of following. 'Creating' – the Cosmos DB account is being created. When an account is in Creating state, only properties that are specified as input for the Create Cosmos DB account operation are returned. 'Succeeded' – the Cosmos DB account is active for use. 'Updating' – the Cosmos DB account is being updated. 'Deleting' – the Cosmos DB account is being deleted. 'Failed' – the Cosmos DB account failed creation. 'Offline' - the Cosmos DB account is not active. 'DeletionFailed' – the Cosmos DB account deletion failed."
     },
     "IPRangeFilter": {
       "type": "string",
@@ -1850,9 +5417,13 @@
       "type": "object",
       "description": "Virtual Network ACL Rule object",
       "properties": {
-        "id":{
+        "id": {
           "type": "string",
           "description": "Resource ID of a subnet, for example: /subscriptions/{subscriptionId}/resourceGroups/{groupName}/providers/Microsoft.Network/virtualNetworks/{virtualNetworkName}/subnets/{subnetName}."
+        },
+        "ignoreMissingVNetServiceEndpoint": {
+          "type": "boolean",
+          "description": "Create firewall rule before the virtual network has vnet service endpoint enabled."
         }
       }
     },
@@ -1934,11 +5505,13 @@
         },
         "limit": {
           "type": "integer",
+          "format": "int64",
           "readOnly": true,
           "description": "Maximum value for this metric"
         },
         "currentValue": {
           "type": "integer",
+          "format": "int64",
           "readOnly": true,
           "description": "Current value for this metric"
         }
@@ -1968,7 +5541,7 @@
         "partitionId": {
           "readOnly": true,
           "type": "string",
-          "description": "The parition id (GUID identifier) of the usages."
+          "description": "The partition id (GUID identifier) of the usages."
         },
         "partitionKeyRangeId": {
           "readOnly": true,
@@ -2009,7 +5582,7 @@
             "None",
             "Average",
             "Total",
-            "Minimimum",
+            "Minimum",
             "Maximum",
             "Last"
           ],
@@ -2234,13 +5807,13 @@
           "type": "number",
           "format": "double",
           "description": "The 50th percentile value for the metric."
-        }, 
+        },
         "P75": {
           "readOnly": true,
           "type": "number",
           "format": "double",
           "description": "The 75th percentile value for the metric."
-        }, 
+        },
         "P90": {
           "readOnly": true,
           "type": "number",
@@ -2252,7 +5825,7 @@
           "type": "number",
           "format": "double",
           "description": "The 95th percentile value for the metric."
-        }, 
+        },
         "P99": {
           "readOnly": true,
           "type": "number",
@@ -2275,7 +5848,7 @@
       },
       "description": "The response to a list partition metrics request."
     },
-    "PartitionMetric" : {
+    "PartitionMetric": {
       "allOf": [
         {
           "$ref": "#/definitions/Metric"
@@ -2285,7 +5858,7 @@
         "partitionId": {
           "readOnly": true,
           "type": "string",
-          "description": "The parition id (GUID identifier) of the metric values."
+          "description": "The partition id (GUID identifier) of the metric values."
         },
         "partitionKeyRangeId": {
           "readOnly": true,
@@ -2295,7 +5868,7 @@
       },
       "description": "The metric values for a single partition."
     },
-    "UnitType" : {
+    "UnitType": {
       "type": "string",
       "readOnly": true,
       "description": "The unit of the metric.",
@@ -2311,6 +5884,17 @@
       "x-ms-enum": {
         "modelAsString": true,
         "name": "UnitType"
+      }
+    },
+    "ConnectorOffer": {
+      "description": "The cassandra connector offer type for the Cosmos DB C* database account.",
+      "type": "string",
+      "enum": [
+        "Small"
+      ],
+      "x-ms-enum": {
+        "name": "ConnectorOffer",
+        "modelAsString": true
       }
     }
   },
@@ -2348,7 +5932,8 @@
       "x-ms-parameter-location": "method",
       "description": "Cosmos DB database account name.",
       "minLength": 3,
-      "maxLength": 50
+      "maxLength": 50,
+      "pattern": "^[a-z0-9]+(-[a-z0-9]+)*"
     },
     "filterParameter": {
       "name": "$filter",
@@ -2381,6 +5966,54 @@
       "type": "string",
       "x-ms-parameter-location": "method",
       "description": "Cosmos DB collection rid."
+    },
+    "databaseNameParameter": {
+      "name": "databaseName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "description": "Cosmos DB database name."
+    },
+    "containerNameParameter": {
+      "name": "containerName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "description": "Cosmos DB container name."
+    },
+    "tableNameParameter": {
+      "name": "tableName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "description": "Cosmos DB table name."
+    },
+    "collectionNameParameter": {
+      "name": "collectionName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "description": "Cosmos DB collection name."
+    },
+    "keyspaceNameParameter": {
+      "name": "keyspaceName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "description": "Cosmos DB keyspace name."
+    },
+    "graphNameParameter": {
+      "name": "graphName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "description": "Cosmos DB graph name."
     },
     "regionParameter": {
       "name": "region",

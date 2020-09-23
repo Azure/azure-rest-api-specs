@@ -3,7 +3,7 @@
   "info": {
     "title": "Content Moderator Client",
     "version": "1.0",
-    "description": "You use the API to scan your content as it is generated. Content Moderator then processes your content and sends the results along with relevant information either back to your systems or to the built-in review tool. You can use this information to take decisions e.g. take it down, send to human judge, etc.\r\n\r\nWhen using the API, images need to have a minimum of 128 pixels and a maximum file size of 4MB. \r\nText can be at most 1024 characters long. \r\nIf the content passed to the text API or the image API exceeds the size limits, the API will return an error code that informs about the issue.\r\n\r\nThis API is currently available in:\r\n\r\n* West US - westus.api.cognitive.microsoft.com\r\n* East US 2 - eastus2.api.cognitive.microsoft.com\r\n* West Central US - westcentralus.api.cognitive.microsoft.com\r\n* West Europe - westeurope.api.cognitive.microsoft.com\r\n* Southeast Asia - southeastasia.api.cognitive.microsoft.com ."
+    "description": "You use the API to scan your content as it is generated. Content Moderator then processes your content and sends the results along with relevant information either back to your systems or to the built-in review tool. You can use this information to take decisions e.g. take it down, send to human judge, etc.\r\n\r\nWhen using the API, images need to have a minimum of 128 pixels and a maximum file size of 4MB. \r\nText can be at most 1024 characters long. \r\nIf the content passed to the text API or the image API exceeds the size limits, the API will return an error code that informs about the issue."
   },
   "securityDefinitions": {
     "apim_key": {
@@ -18,17 +18,14 @@
     }
   ],
   "x-ms-parameterized-host": {
-    "hostTemplate": "{baseUrl}",
+    "hostTemplate": "{Endpoint}",
+    "useSchemePrefix": false,
     "parameters": [
       {
-        "$ref": "#/parameters/baseUrl"
+        "$ref": "#/parameters/Endpoint"
       }
     ]
   },
-  "basePath": "/",
-  "schemes": [
-    "https"
-  ],
   "paths": {
     "/contentmoderator/moderate/v1.0/ProcessImage/FindFaces": {
       "post": {
@@ -41,7 +38,6 @@
           {
             "$ref": "#/parameters/CacheImage"
           }
-          
         ],
         "consumes": [
           "application/json",
@@ -109,7 +105,6 @@
               "$ref": "#/definitions/APIError"
             }
           }
-
         },
         "produces": [
           "application/json"
@@ -169,7 +164,6 @@
           {
             "$ref": "#/parameters/CacheImage"
           }
-
         ],
         "consumes": [
           "application/json",
@@ -206,7 +200,6 @@
         "summary": "Detect profanity and match against custom and shared blacklists",
         "description": "Detects profanity in more than 100 languages and match against custom and shared blacklists.",
         "operationId": "TextModeration_ScreenText",
-
         "parameters": [
           {
             "$ref": "#/parameters/textLanguage"
@@ -237,7 +230,6 @@
               "text/markdown"
             ]
           },
-          
           {
             "$ref": "#/parameters/textContent"
           }
@@ -280,7 +272,6 @@
         "operationId": "TextModeration_DetectLanguage",
         "description": "This operation will detect the language of given input content. Returns the <a href=\"http://www-01.sil.org/iso639-3/codes.asp\">ISO 639-3 code</a> for the predominant language comprising the submitted text. Over 110 languages supported.",
         "parameters": [
-         
           {
             "name": "Content-Type",
             "description": "The content type.",
@@ -337,11 +328,9 @@
         "operationId": "ListManagementImageLists_GetDetails",
         "description": "Returns the details of the image list with list Id equal to list Id passed.",
         "parameters": [
-         
           {
             "$ref": "#/parameters/listId"
           }
-
         ],
         "responses": {
           "200": {
@@ -499,9 +488,7 @@
         ],
         "operationId": "ListManagementImageLists_GetAllImageLists",
         "description": "Gets all the Image Lists.",
-        "parameters": [
-          
-        ],
+        "parameters": [],
         "responses": {
           "200": {
             "description": "OK",
@@ -733,9 +720,7 @@
         ],
         "operationId": "ListManagementTermLists_GetAllTermLists",
         "description": "gets all the Term Lists",
-        "parameters": [
-         
-        ],
+        "parameters": [],
         "responses": {
           "200": {
             "description": "OK",
@@ -771,7 +756,6 @@
           {
             "$ref": "#/parameters/listId"
           },
-          
           {
             "$ref": "#/parameters/language"
           }
@@ -820,7 +804,6 @@
           {
             "$ref": "#/parameters/label"
           }
-
         ],
         "consumes": [
           "application/json",
@@ -978,17 +961,13 @@
           {
             "$ref": "#/parameters/language"
           }
-
         ],
         "consumes": [
           "application/json"
         ],
         "responses": {
           "201": {
-            "description": "Created",
-            "schema": {
-
-            }
+            "description": "Created"
           },
           "default": {
             "description": "Error response.",
@@ -1036,7 +1015,6 @@
               "$ref": "#/definitions/APIError"
             }
           }
-
         },
         "x-ms-examples": {
           "Delete Term request": {
@@ -1062,7 +1040,6 @@
           {
             "$ref": "#/parameters/language"
           },
-          
           {
             "name": "offset",
             "in": "query",
@@ -1342,7 +1319,6 @@
         "produces": [
           "application/json"
         ]
-
       }
     },
     "/contentmoderator/review/v1.0/teams/{teamName}/jobs": {
@@ -1368,7 +1344,6 @@
           {
             "$ref": "#/parameters/CallBackEndpoint"
           },
-          
           {
             "name": "Content-Type",
             "description": "The content type.",
@@ -1440,7 +1415,6 @@
         "operationId": "Reviews_AddVideoFrame",
         "description": "The reviews created would show up for Reviewers on your team. As Reviewers complete reviewing, results of the Review would be POSTED (i.e. HTTP POST) on the specified CallBackEndpoint.\r\n\r\n<h3>CallBack Schemas </h3>\r\n<h4>Review Completion CallBack Sample</h4>\r\n<p>\r\n{<br/>\r\n  \"ReviewId\": \"<Review Id>\",<br/>\r\n  \"ModifiedOn\": \"2016-10-11T22:36:32.9934851Z\",<br/>\r\n  \"ModifiedBy\": \"<Name of the Reviewer>\",<br/>\r\n  \"CallBackType\": \"Review\",<br/>\r\n  \"ContentId\": \"<The ContentId that was specified input>\",<br/>\r\n  \"Metadata\": {<br/>\r\n    \"adultscore\": \"0.xxx\",<br/>\r\n    \"a\": \"False\",<br/>\r\n    \"racyscore\": \"0.xxx\",<br/>\r\n    \"r\": \"True\"<br/>\r\n  },<br/>\r\n  \"ReviewerResultTags\": {<br/>\r\n    \"a\": \"False\",<br/>\r\n    \"r\": \"True\"<br/>\r\n  }<br/>\r\n}<br/>\r\n\r\n</p>.",
         "parameters": [
-
           {
             "$ref": "#/parameters/teamName"
           },
@@ -1477,7 +1451,6 @@
         "produces": [
           "application/json"
         ]
-
       },
       "get": {
         "tags": [
@@ -1486,14 +1459,12 @@
         "operationId": "Reviews_GetVideoFrames",
         "description": "The reviews created would show up for Reviewers on your team. As Reviewers complete reviewing, results of the Review would be POSTED (i.e. HTTP POST) on the specified CallBackEndpoint.\r\n\r\n<h3>CallBack Schemas </h3>\r\n<h4>Review Completion CallBack Sample</h4>\r\n<p>\r\n{<br/>\r\n  \"ReviewId\": \"<Review Id>\",<br/>\r\n  \"ModifiedOn\": \"2016-10-11T22:36:32.9934851Z\",<br/>\r\n  \"ModifiedBy\": \"<Name of the Reviewer>\",<br/>\r\n  \"CallBackType\": \"Review\",<br/>\r\n  \"ContentId\": \"<The ContentId that was specified input>\",<br/>\r\n  \"Metadata\": {<br/>\r\n    \"adultscore\": \"0.xxx\",<br/>\r\n    \"a\": \"False\",<br/>\r\n    \"racyscore\": \"0.xxx\",<br/>\r\n    \"r\": \"True\"<br/>\r\n  },<br/>\r\n  \"ReviewerResultTags\": {<br/>\r\n    \"a\": \"False\",<br/>\r\n    \"r\": \"True\"<br/>\r\n  }<br/>\r\n}<br/>\r\n\r\n</p>.",
         "parameters": [
-
           {
             "$ref": "#/parameters/teamName"
           },
           {
             "$ref": "#/parameters/reviewId"
           },
-         
           {
             "name": "startSeed",
             "in": "query",
@@ -1538,7 +1509,6 @@
         "produces": [
           "application/json"
         ]
-
       }
     },
     "/contentmoderator/review/v1.0/teams/{teamName}/reviews/{reviewId}/publish": {
@@ -1589,7 +1559,6 @@
         "description": "This API adds a transcript screen text result file for a video review. Transcript screen text result file is a result of Screen Text API . In order to generate transcript screen text result file , a transcript file has to be screened for profanity using Screen Text API.",
         "parameters": [
           {
-
             "name": "Content-Type",
             "description": "The content type.",
             "x-ms-client-name": "ContentType",
@@ -1629,7 +1598,6 @@
         "produces": [
           "application/json"
         ]
-
       }
     },
     "/contentmoderator/review/v1.0/teams/{teamName}/reviews/{reviewId}/transcript": {
@@ -1646,7 +1614,6 @@
           {
             "$ref": "#/parameters/reviewId"
           },
-         
           {
             "name": "Content-Type",
             "description": "The content type.",
@@ -1686,7 +1653,6 @@
         ]
       }
     }
-
   },
   "x-ms-paths": {
     "/contentmoderator/moderate/v1.0/ProcessImage/FindFaces?overload=stream": {
@@ -1700,8 +1666,6 @@
           {
             "$ref": "#/parameters/CacheImage"
           },
-         
-
           {
             "$ref": "#/parameters/ImageStreamParameter"
           }
@@ -1727,7 +1691,6 @@
             }
           }
         },
-
         "produces": [
           "application/json"
         ]
@@ -1744,7 +1707,6 @@
           {
             "$ref": "#/parameters/CacheImage"
           },
-          
           {
             "name": "Content-Type",
             "description": "The content type.",
@@ -1800,7 +1762,6 @@
           {
             "$ref": "#/parameters/enhanced"
           },
-          
           {
             "name": "Content-Type",
             "description": "The content type.",
@@ -1856,7 +1817,6 @@
           {
             "$ref": "#/parameters/enhanced"
           },
-          
           {
             "$ref": "#/parameters/ImageStreamParameter"
           }
@@ -1881,9 +1841,7 @@
               "$ref": "#/definitions/APIError"
             }
           }
-
         },
-
         "produces": [
           "application/json"
         ]
@@ -1900,8 +1858,6 @@
           {
             "$ref": "#/parameters/CacheImage"
           },
-          
-
           {
             "$ref": "#/parameters/ImageStreamParameter"
           }
@@ -1927,7 +1883,6 @@
             }
           }
         },
-
         "produces": [
           "application/json"
         ]
@@ -1944,7 +1899,6 @@
           {
             "$ref": "#/parameters/CacheImage"
           },
-         
           {
             "name": "Content-Type",
             "description": "The content type.",
@@ -1997,7 +1951,6 @@
           {
             "$ref": "#/parameters/CacheImage"
           },
-          
           {
             "name": "Content-Type",
             "description": "The content type.",
@@ -2050,7 +2003,6 @@
           {
             "$ref": "#/parameters/CacheImage"
           },
-          
           {
             "$ref": "#/parameters/ImageStreamParameter"
           }
@@ -2076,7 +2028,6 @@
             }
           }
         },
-
         "produces": [
           "application/json"
         ]
@@ -2099,7 +2050,6 @@
           {
             "$ref": "#/parameters/label"
           },
-          
           {
             "name": "Content-Type",
             "description": "The content type.",
@@ -2155,7 +2105,6 @@
           {
             "$ref": "#/parameters/label"
           },
-          
           {
             "$ref": "#/parameters/ImageStreamParameter"
           }
@@ -2181,7 +2130,6 @@
             }
           }
         },
-
         "produces": [
           "application/json"
         ]
@@ -2237,7 +2185,6 @@
         "produces": [
           "application/json"
         ]
-
       }
     },
     "/contentmoderator/review/v1.0/teams/{teamName}/reviews/{reviewId}/frames?overload=url": {
@@ -2267,7 +2214,6 @@
           {
             "$ref": "#/parameters/videoFrameBody"
           }
-          
         ],
         "consumes": [
           "application/json"
@@ -2291,7 +2237,6 @@
         "produces": [
           "application/json"
         ]
-
       }
     },
     "/contentmoderator/review/v1.0/teams/{teamName}/reviews/{reviewId}/frames?overload=stream": {
@@ -2330,14 +2275,12 @@
             "required": false,
             "type": "integer"
           },
-
           {
             "name": "frameImageZip",
             "description": "Zip file containing frame images.",
             "in": "formData",
             "required": true,
             "type": "file"
-
           },
           {
             "name": "frameMetadata",
@@ -2345,7 +2288,6 @@
             "in": "formData",
             "required": true,
             "type": "string"
-
           }
         ],
         "consumes": [
@@ -2362,14 +2304,11 @@
             }
           }
         },
-
         "produces": [
           "application/json"
         ]
-
       }
     }
-
   },
   "definitions": {
     "Frames": {
@@ -2412,7 +2351,6 @@
             "$ref": "#/definitions/Tag"
           }
         }
-
       }
     },
     "Screen": {
@@ -2501,7 +2439,6 @@
         }
       }
     },
-
     "PII": {
       "description": "Personal Identifier Information details.",
       "properties": {
@@ -2510,7 +2447,6 @@
           "items": {
             "$ref": "#/definitions/Email"
           }
-
         },
         "SSN": {
           "type": "array",
@@ -2522,7 +2458,6 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/IPA"
-
           }
         },
         "Phone": {
@@ -2619,7 +2554,6 @@
           "type": "integer"
         }
       }
-
     },
     "DetectedTerms": {
       "description": "Detected Terms details.",
@@ -2641,7 +2575,6 @@
           "type": "string"
         }
       }
-
     },
     "FoundFaces": {
       "description": "Request object the contains found faces.",
@@ -2792,7 +2725,7 @@
           "type": "boolean"
         },
         "RacyClassificationScore": {
-          "description": "The racy classication score.",
+          "description": "The racy classification score.",
           "type": "number"
         },
         "IsImageRacyClassified": {
@@ -2916,18 +2849,9 @@
         "Metadata": {
           "description": "Image List Metadata.",
           "type": "object",
-
-          "properties": {
-            "Key One": {
-              "description": "Optional Key value pair to describe your list.",
-              "type": "string"
-            },
-            "Key Two": {
-              "description": "Optional Key value pair to describe your list.",
-              "type": "string"
-            }
+          "additionalProperties": {
+            "type": "string"
           }
-
         }
       }
     },
@@ -2949,15 +2873,8 @@
         "Metadata": {
           "description": "Term list metadata.",
           "type": "object",
-          "properties": {
-            "Key One": {
-              "description": "Optional Key value pair to describe your list.",
-              "type": "string"
-            },
-            "Key Two": {
-              "description": "Optional Key value pair to describe your list.",
-              "type": "string"
-            }
+          "additionalProperties": {
+            "type": "string"
           }
         }
       }
@@ -2990,15 +2907,8 @@
           "type": "array",
           "items": {
             "type": "object",
-            "properties": {
-              "Key One": {
-                "description": "Key parameter to describe advanced info.",
-                "type": "string"
-              },
-              "Key Two": {
-                "description": "Key parameter to describe advanced info.",
-                "type": "string"
-              }
+            "additionalProperties": {
+              "type": "string"
             }
           }
         },
@@ -3015,7 +2925,6 @@
     "Image": {
       "description": "Image Properties.",
       "properties": {
-
         "ContentId": {
           "description": "Content Id.",
           "type": "string"
@@ -3046,7 +2955,6 @@
           "type": "string"
         }
       }
-
     },
     "Status": {
       "description": "Status properties.",
@@ -3336,7 +3244,6 @@
       "description": "Callback endpoint for posting the create job result.",
       "type": "string",
       "x-ms-parameter-location": "method"
-
     },
     "WorkflowName": {
       "name": "WorkflowName",
@@ -3566,7 +3473,6 @@
                   "Id",
                   "Timestamp",
                   "FrameImage"
-
                 ],
                 "type": "object",
                 "properties": {
@@ -3625,7 +3531,6 @@
                   }
                 }
               }
-
             },
             "Metadata": {
               "description": "Optional metadata details.",
@@ -3680,8 +3585,6 @@
               "description": "Optional CallbackEndpoint.",
               "type": "string"
             }
-
-
           }
         }
       },
@@ -3694,9 +3597,7 @@
       "required": true,
       "schema": {
         "type": "object",
-
         "properties": {
-
           "Name": {
             "description": "Name of the list.",
             "type": "string"
@@ -3708,21 +3609,11 @@
           "Metadata": {
             "description": "Metadata of the list.",
             "type": "object",
-
-            "properties": {
-              "Key One": {
-                "description": "Optional key value pair to describe your list.",
-                "type": "string"
-              },
-              "Key Two": {
-                "description": "Optional key value pair to describe your list.",
-                "type": "string"
-              }
+            "additionalProperties": {
+              "type": "string"
             }
-
           }
         }
-
       },
       "x-ms-parameter-location": "method"
     },
@@ -3741,7 +3632,6 @@
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method"
-
     },
     "ImageUrlParameter": {
       "name": "ImageUrl",
@@ -3843,34 +3733,14 @@
       "description": "The image file.",
       "x-ms-parameter-location": "method"
     },
-    "baseUrl": {
-      "name": "baseUrl",
-      "description": "Supported Azure regions for Content Moderator endpoints",
+    "Endpoint": {
+      "name": "Endpoint",
+      "description": "Supported Cognitive Services endpoints (protocol and hostname, for example: https://westus.api.cognitive.microsoft.com).",
       "x-ms-parameter-location": "client",
       "required": true,
       "type": "string",
       "in": "path",
-      "x-ms-skip-url-encoding": true,
-      "x-ms-enum": {
-        "name": "azureRegionBaseUrl",
-        "modelAsString": true
-      },
-      "enum": [
-        "westus.api.cognitive.microsoft.com",
-        "westus2.api.cognitive.microsoft.com",
-        "eastus.api.cognitive.microsoft.com",
-        "eastus2.api.cognitive.microsoft.com",
-        "westcentralus.api.cognitive.microsoft.com",
-        "southcentralus.api.cognitive.microsoft.com",
-        "westeurope.api.cognitive.microsoft.com",
-        "northeurope.api.cognitive.microsoft.com",
-        "southeastasia.api.cognitive.microsoft.com",
-        "eastasia.api.cognitive.microsoft.com",
-        "australiaeast.api.cognitive.microsoft.com",
-        "brazilsouth.api.cognitive.microsoft.com",
-        "contentmoderatortest.azure-api.net"
-      ]
+      "x-ms-skip-url-encoding": true
     }
-
   }
-} 
+}

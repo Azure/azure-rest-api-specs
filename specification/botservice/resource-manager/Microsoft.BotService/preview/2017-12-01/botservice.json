@@ -245,7 +245,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The resource provider should return 200 (OK) to indicate that the operation completed successfully. For other errors (e.g. internal errors) use the appropriate HTTP error code.\nThe nextLink field is expected to point to the URL the client should use to fetch the next page (per server side paging). This matches the OData guidelines for paged responses here. If a resource provider does not support paging, it should return the same body (JSON object with “value” property) but omit nextLink entirely (or set to null, *not* empty string) for future compatibility.\nThe nextLink should be implemented using following query parameters:\n· skipToken: opaque token that allows the resource provider to skip resources already enumerated. This value is defined and returned by the RP after first request via nextLink.\n· top: the optional client query parameter which defines the maximum number of records to be returned by the server.\nImplementation details:\n· NextLink may include all the query parameters (specifically OData $filter) used by the client in the first query. \n· Server may return less records than requested with nextLink. Returning zero records with NextLink is an acceptable response. \nClients must fetch records until the nextLink is not returned back / null. Clients should never rely on number of returned records to determinate if pagination is completed.",
+            "description": "The resource provider should return 200 (OK) to indicate that the operation completed successfully. For other errors (e.g. internal errors) use the appropriate HTTP error code.\nThe nextLink field is expected to point to the URL the client should use to fetch the next page (per server side paging). This matches the OData guidelines for paged responses here. If a resource provider does not support paging, it should return the same body (JSON object with \"value\" property) but omit nextLink entirely (or set to null, *not* empty string) for future compatibility.\nThe nextLink should be implemented using following query parameters:\n· skipToken: opaque token that allows the resource provider to skip resources already enumerated. This value is defined and returned by the RP after first request via nextLink.\n· top: the optional client query parameter which defines the maximum number of records to be returned by the server.\nImplementation details:\n· NextLink may include all the query parameters (specifically OData $filter) used by the client in the first query. \n· Server may return less records than requested with nextLink. Returning zero records with NextLink is an acceptable response. \nClients must fetch records until the nextLink is not returned back / null. Clients should never rely on number of returned records to determinate if pagination is completed.",
             "schema": {
               "$ref": "#/definitions/BotResponseList"
             }
@@ -593,7 +593,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The resource provider should return 200 (OK) to indicate that the operation completed successfully. For other errors (e.g. internal errors) use the appropriate HTTP error code.\nThe nextLink field is expected to point to the URL the client should use to fetch the next page (per server side paging). This matches the OData guidelines for paged responses here. If a resource provider does not support paging, it should return the same body (JSON object with “value” property) but omit nextLink entirely (or set to null, *not* empty string) for future compatibility.\nThe nextLink should be implemented using following query parameters:\n· skipToken: opaque token that allows the resource provider to skip resources already enumerated. This value is defined and returned by the RP after first request via nextLink.\n· top: the optional client query parameter which defines the maximum number of records to be returned by the server.\nImplementation details:\n· NextLink may include all the query parameters (specifically OData $filter) used by the client in the first query. \n· Server may return less records than requested with nextLink. Returning zero records with NextLink is an acceptable response. \nClients must fetch records until the nextLink is not returned back / null. Clients should never rely on number of returned records to determinate if pagination is completed.",
+            "description": "The resource provider should return 200 (OK) to indicate that the operation completed successfully. For other errors (e.g. internal errors) use the appropriate HTTP error code.\nThe nextLink field is expected to point to the URL the client should use to fetch the next page (per server side paging). This matches the OData guidelines for paged responses here. If a resource provider does not support paging, it should return the same body (JSON object with \"value\" property) but omit nextLink entirely (or set to null, *not* empty string) for future compatibility.\nThe nextLink should be implemented using following query parameters:\n· skipToken: opaque token that allows the resource provider to skip resources already enumerated. This value is defined and returned by the RP after first request via nextLink.\n· top: the optional client query parameter which defines the maximum number of records to be returned by the server.\nImplementation details:\n· NextLink may include all the query parameters (specifically OData $filter) used by the client in the first query. \n· Server may return less records than requested with nextLink. Returning zero records with NextLink is an acceptable response. \nClients must fetch records until the nextLink is not returned back / null. Clients should never rely on number of returned records to determinate if pagination is completed.",
             "schema": {
               "$ref": "#/definitions/ChannelResponseList"
             }
@@ -683,7 +683,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.BotService/BotServices/listServiceProviders": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.BotService/listAuthServiceProviders": {
       "post": {
         "tags": [
           "ListServiceProviders"
@@ -696,9 +696,6 @@
           }
         },
         "parameters": [
-          {
-            "$ref": "#/parameters/resourceGroupNameParameter"
-          },
           {
             "$ref": "#/parameters/apiVersionParameter"
           },
@@ -765,7 +762,7 @@
             }
           }
         }
-      }      
+      }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.BotService/botServices/{resourceName}/Connections/{connectionName}": {
       "put": {
@@ -999,7 +996,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The resource provider should return 200 (OK) to indicate that the operation completed successfully. For other errors (e.g. internal errors) use the appropriate HTTP error code.\nThe nextLink field is expected to point to the URL the client should use to fetch the next page (per server side paging). This matches the OData guidelines for paged responses here. If a resource provider does not support paging, it should return the same body (JSON object with “value” property) but omit nextLink entirely (or set to null, *not* empty string) for future compatibility.\nThe nextLink should be implemented using following query parameters:\n· skipToken: opaque token that allows the resource provider to skip resources already enumerated. This value is defined and returned by the RP after first request via nextLink.\n· top: the optional client query parameter which defines the maximum number of records to be returned by the server.\nImplementation details:\n· NextLink may include all the query parameters (specifically OData $filter) used by the client in the first query. \n· Server may return less records than requested with nextLink. Returning zero records with NextLink is an acceptable response. \nClients must fetch records until the nextLink is not returned back / null. Clients should never rely on number of returned records to determinate if pagination is completed.",
+            "description": "The resource provider should return 200 (OK) to indicate that the operation completed successfully. For other errors (e.g. internal errors) use the appropriate HTTP error code.\nThe nextLink field is expected to point to the URL the client should use to fetch the next page (per server side paging). This matches the OData guidelines for paged responses here. If a resource provider does not support paging, it should return the same body (JSON object with \"value\" property) but omit nextLink entirely (or set to null, *not* empty string) for future compatibility.\nThe nextLink should be implemented using following query parameters:\n· skipToken: opaque token that allows the resource provider to skip resources already enumerated. This value is defined and returned by the RP after first request via nextLink.\n· top: the optional client query parameter which defines the maximum number of records to be returned by the server.\nImplementation details:\n· NextLink may include all the query parameters (specifically OData $filter) used by the client in the first query. \n· Server may return less records than requested with nextLink. Returning zero records with NextLink is an acceptable response. \nClients must fetch records until the nextLink is not returned back / null. Clients should never rely on number of returned records to determinate if pagination is completed.",
             "schema": {
               "$ref": "#/definitions/ConnectionSettingResponseList"
             }
@@ -1851,13 +1848,11 @@
       "properties": {
         "key": {
           "type": "string",
-          "description": "Key for the Connection Setting Parameter.",
-          "readOnly": true
+          "description": "Key for the Connection Setting Parameter."
         },
         "value": {
           "type": "string",
-          "description": "Value associated with the Connection Setting Parameter.",
-          "readOnly": true
+          "description": "Value associated with the Connection Setting Parameter."
         }
       },
       "description": "Extra Parameter in a Connection Setting Properties to indicate service provider specific properties"
@@ -1867,6 +1862,11 @@
         "clientId": {
           "type": "string",
           "description": "Client Id associated with the Connection Setting."
+        },
+        "settingId": {
+          "type": "string",
+          "description": "Setting Id set by the service for the Connection Setting.",
+          "readOnly": true
         },
         "clientSecret": {
           "type": "string",
@@ -1904,7 +1904,7 @@
       ],
       "properties": {
         "properties": {
-        "$ref": "#/definitions/ConnectionSettingProperties",
+          "$ref": "#/definitions/ConnectionSettingProperties",
           "description": "The set of properties specific to bot channel resource"
         }
       }
@@ -1929,7 +1929,7 @@
     "ServiceProviderResponseList": {
       "properties": {
         "nextLink": {
-          "description": "The link used to get the next page of bot service service providers.",
+          "description": "The link used to get the next page of bot service providers.",
           "type": "string"
         },
         "value": {
@@ -1938,10 +1938,10 @@
           "items": {
             "$ref": "#/definitions/ServiceProvider"
           },
-          "description": "Gets the list of bot service service providers and their properties."
+          "description": "Gets the list of bot service providers and their properties."
         }
       },
-      "description": "The list of bot service service providers response."
+      "description": "The list of bot service providers response."
     },
     "ServiceProviderParameter": {
       "properties": {
@@ -1987,22 +1987,22 @@
         },
         "displayName": {
           "type": "string",
-          "description": "Diplay Name of the Service Provider",
+          "description": "Display Name of the Service Provider",
           "readOnly": true
         },
-        "serviceProviderName": {  
+        "serviceProviderName": {
           "type": "string",
-          "description": "Diplay Name of the Service Provider",
+          "description": "Display Name of the Service Provider",
           "readOnly": true
         },
         "devPortalUrl": {
           "type": "string",
-          "description": "Diplay Name of the Service Provider",
+          "description": "Display Name of the Service Provider",
           "readOnly": true
         },
         "iconUrl": {
           "type": "string",
-          "description": "Diplay Name of the Service Provider",
+          "description": "Display Name of the Service Provider",
           "readOnly": true
         },
         "parameters": {
@@ -2212,34 +2212,34 @@
         "modelAsString": false,
         "values": [
           {
-            "value": "FacebookChannel"  
+            "value": "FacebookChannel"
           },
           {
-            "value": "EmailChannel"  
+            "value": "EmailChannel"
           },
           {
-            "value": "KikChannel"  
+            "value": "KikChannel"
           },
           {
-            "value": "TelegramChannel"  
+            "value": "TelegramChannel"
           },
           {
-            "value": "SlackChannel"  
+            "value": "SlackChannel"
           },
           {
-            "value": "MsTeamsChannel"  
+            "value": "MsTeamsChannel"
           },
           {
-            "value": "SkypeChannel"  
+            "value": "SkypeChannel"
           },
           {
-            "value": "WebChatChannel"  
+            "value": "WebChatChannel"
           },
           {
-            "value": "DirectLineChannel"  
+            "value": "DirectLineChannel"
           },
           {
-            "value": "SmsChannel"  
+            "value": "SmsChannel"
           }
         ]
       },

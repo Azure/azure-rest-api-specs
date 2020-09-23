@@ -1,326 +1,324 @@
 {
-    "swagger": "2.0",
-    "info": {
-        "version": "2015-12-01-preview",
-        "title": "Compute Admin Client"
-    },
-    "host": "adminmanagement.local.azurestack.external",
-    "schemes": [
-        "https"
-    ],
-    "paths": {
-        "/subscriptions/{subscriptionId}/providers/Microsoft.Compute.Admin/locations/{location}/artifactTypes/VMExtension/publishers/{publisher}/types/{type}/versions/{version}": {
-            "get": {
-                "x-ms-examples": {
-                    "Returns requested Virtual Machine Extension Image.": {
-                        "$ref": "examples/VMExtensions/Get.json"
-                    }
-                },
-                "tags": [
-                    "VMExtensions"
-                ],
-                "summary": "Returns requested Virtual Machine Extension Image.",
-                "description": "Returns requested Virtual Machine Extension Image.",
-                "operationId": "VMExtensions_Get",
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "parameters": [
-                    {
-                        "$ref": "Compute.json#/parameters/SubscriptionIdParameter"
-                    },
-                    {
-                        "$ref": "Compute.json#/parameters/LocationParameter"
-                    },
-                    {
-                        "$ref": "Compute.json#/parameters/PublisherParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/TypeParameter"
-                    },
-                    {
-                        "$ref": "Compute.json#/parameters/VersionParameter"
-                    },
-                    {
-                        "$ref": "Compute.json#/parameters/ApiVersionParameter"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "$ref": "#/definitions/VMExtension"
-                        }
-                    },
-                    "404": {
-                        "description": "NOT FOUND"
-                    }
-                }
-            },
-            "put": {
-                "x-ms-examples": {
-                    "Create a Virtual Machine Extension Image.": {
-                        "$ref": "examples/VMExtensions/Create.json"
-                    }
-                },
-                "tags": [
-                    "VMExtensions"
-                ],
-                "summary": "Create a Virtual Machine Extension Image.",
-                "description": "Create a Virtual Machine Extension Image.",
-                "operationId": "VMExtensions_Create",
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "parameters": [
-                    {
-                        "$ref": "Compute.json#/parameters/SubscriptionIdParameter"
-                    },
-                    {
-                        "$ref": "Compute.json#/parameters/LocationParameter"
-                    },
-                    {
-                        "$ref": "Compute.json#/parameters/PublisherParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/TypeParameter"
-                    },
-                    {
-                        "$ref": "Compute.json#/parameters/VersionParameter"
-                    },
-                    {
-                        "$ref": "Compute.json#/parameters/ApiVersionParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/VMExtensionParameter"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "$ref": "#/definitions/VMExtension"
-                        }
-                    },
-                    "201": {
-                        "description": "OK",
-                        "schema": {
-                            "$ref": "#/definitions/VMExtension"
-                        }
-                    }
-                }
-            },
-            "delete": {
-                "x-ms-examples": {
-                    "Delete a Virtual Machine Extension Image.": {
-                        "$ref": "examples/VMExtensions/Delete.json"
-                    }
-                },
-                "tags": [
-                    "VMExtensions"
-                ],
-                "summary": "Deletes a Virtual Machine Extension Image.",
-                "description": "Deletes specified Virtual Machine Extension Image.",
-                "operationId": "VMExtensions_Delete",
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "parameters": [
-                    {
-                        "$ref": "Compute.json#/parameters/SubscriptionIdParameter"
-                    },
-                    {
-                        "$ref": "Compute.json#/parameters/LocationParameter"
-                    },
-                    {
-                        "$ref": "Compute.json#/parameters/PublisherParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/TypeParameter"
-                    },
-                    {
-                        "$ref": "Compute.json#/parameters/VersionParameter"
-                    },
-                    {
-                        "$ref": "Compute.json#/parameters/ApiVersionParameter"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK"
-                    }
-                }
-            }
+  "swagger": "2.0",
+  "info": {
+    "version": "2015-12-01-preview",
+    "title": "Compute Admin Client"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Compute.Admin/locations/{location}/artifactTypes/VMExtension/publishers/{publisher}/types/{type}/versions/{version}": {
+      "get": {
+        "x-ms-examples": {
+          "Returns requested Virtual Machine Extension Image.": {
+            "$ref": "examples/VMExtensions/Get.json"
+          }
         },
-        "/subscriptions/{subscriptionId}/providers/Microsoft.Compute.Admin/locations/{location}/artifactTypes/VMExtension": {
-            "get": {
-                "x-ms-examples": {
-                    "Returns a list of all Virtual Machine Extension Image.": {
-                        "$ref": "examples/VMExtensions/List.json"
-                    }
-                },
-                "tags": [
-                    "VMExtensions"
-                ],
-                "summary": "Returns a list of all Virtual Machine Extension Image.",
-                "description": "Returns a list of all Virtual Machine Extension Image.",
-                "operationId": "VMExtensions_List",
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "parameters": [
-                    {
-                        "$ref": "Compute.json#/parameters/SubscriptionIdParameter"
-                    },
-                    {
-                        "$ref": "Compute.json#/parameters/LocationParameter"
-                    },
-                    {
-                        "$ref": "Compute.json#/parameters/ApiVersionParameter"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "$ref": "#/definitions/VMExtensionList"
-                        }
-                    },
-                    "404": {
-                        "description": "NOT FOUND"
-                    }
-                }
-            }
-        }
-    },
-    "definitions": {
-        "VMExtension": {
-            "description": "Virtual Machine Extension Image.",
-            "type": "object",
-            "properties": {
-                "properties": {
-                    "description": "Inner properties of a Virtual Machine Extension Image.",
-                    "x-ms-client-flatten": true,
-                    "$ref": "#/definitions/VMExtensionProperties"
-                }
-            },
-            "allOf": [
-                {
-                    "$ref": "Compute.json#/definitions/Resource"
-                }
-            ]
-        },
-        "VMExtensionProperties": {
-            "description": "Properties of a Virtual Machine Extension Image.",
-            "type": "object",
-            "properties": {
-                "vmOsType": {
-                    "description": "Target virtual machine operating system type necessary for deploying the extension handler.",
-                    "$ref": "PlatformImages.json#/definitions/OsType"
-                },
-                "computeRole": {
-                    "description": "Compute role",
-                    "type": "string"
-                },
-                "vmScaleSetEnabled": {
-                    "description": "Value indicating whether the extension is enabled for virtual machine scale set support.",
-                    "type": "boolean"
-                },
-                "supportMultipleExtensions": {
-                    "description": "True if supports multiple extensions.",
-                    "type": "boolean"
-                },
-                "isSystemExtension": {
-                    "description": "Indicates if the extension is for the system.",
-                    "type": "boolean"
-                },
-                "sourceBlob": {
-                    "description": "URI to Azure or AzureStack blob.",
-                    "$ref": "#/definitions/AzureBlob"
-                },
-                "provisioningState": {
-                    "description": "Provisioning state of extension.",
-                    "$ref": "Compute.json#/definitions/ProvisioningState"
-                }
-            }
-        },
-        "AzureBlob": {
-            "description": "Azure or AzureStack blob information.",
-            "type": "object",
-            "properties": {
-                "uri": {
-                    "description": "URI to Azure or AzureStack blob.",
-                    "type": "string"
-                }
-            }
-        },
-        "VMExtensionList": {
-            "description": "List of virtual machine extensions.",
-            "type": "array",
-            "items": {
-                "$ref": "#/definitions/VMExtension"
-            }
-        },
-        "VMExtensionParameters": {
-            "description": "Parameters used to create a new Virtual Machine Extension Image.",
-            "type": "object",
-            "properties": {
-                "properties": {
-                    "description": "Properties of a Virtual Machine Extension Image.",
-                    "x-ms-client-flatten": true,
-                    "$ref": "#/definitions/VMExtensionProperties"
-                }
-            }
-        }
-    },
-    "parameters": {
-        "VMExtensionParameter": {
-            "description": "Virtual Machine Extension Image creation properties.",
-            "name": "extension",
-            "in": "body",
-            "required": true,
+        "tags": [
+          "VMExtensions"
+        ],
+        "summary": "Returns requested Virtual Machine Extension Image.",
+        "description": "Returns requested Virtual Machine Extension Image matching publisher, type, version.",
+        "operationId": "VMExtensions_Get",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "Compute.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "Compute.json#/parameters/LocationParameter"
+          },
+          {
+            "$ref": "Compute.json#/parameters/PublisherParameter"
+          },
+          {
+            "$ref": "#/parameters/TypeParameter"
+          },
+          {
+            "$ref": "Compute.json#/parameters/VersionParameter"
+          },
+          {
+            "$ref": "Compute.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
             "schema": {
-                "$ref": "#/definitions/VMExtensionParameters"
-            },
-            "x-ms-parameter-location": "method"
-        },
-        "TypeParameter": {
-            "description": "Type of extension.",
-            "name": "type",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "x-ms-parameter-location": "method"
-        }
-    },
-    "securityDefinitions": {
-        "azure_auth": {
-            "type": "oauth2",
-            "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
-            "flow": "implicit",
-            "description": "Authorization uses an Azure Active Directory OAuth2 flow.",
-            "scopes": {
-                "user_impersonation": "impersonate your user account"
+              "$ref": "#/definitions/VMExtension"
             }
+          }
         }
+      },
+      "put": {
+        "x-ms-examples": {
+          "Create a Virtual Machine Extension Image.": {
+            "$ref": "examples/VMExtensions/Create.json"
+          }
+        },
+        "tags": [
+          "VMExtensions"
+        ],
+        "summary": "Create a Virtual Machine Extension Image.",
+        "description": "Create a Virtual Machine Extension Image with publisher, version.",
+        "operationId": "VMExtensions_Create",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "Compute.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "Compute.json#/parameters/LocationParameter"
+          },
+          {
+            "$ref": "Compute.json#/parameters/PublisherParameter"
+          },
+          {
+            "$ref": "#/parameters/TypeParameter"
+          },
+          {
+            "$ref": "Compute.json#/parameters/VersionParameter"
+          },
+          {
+            "$ref": "Compute.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/VMExtensionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/VMExtension"
+            }
+          },
+          "201": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/VMExtension"
+            }
+          }
+        }
+      },
+      "delete": {
+        "x-ms-examples": {
+          "Delete a Virtual Machine Extension Image.": {
+            "$ref": "examples/VMExtensions/Delete.json"
+          }
+        },
+        "tags": [
+          "VMExtensions"
+        ],
+        "summary": "Deletes a Virtual Machine Extension Image.",
+        "description": "Deletes specified Virtual Machine Extension Image.",
+        "operationId": "VMExtensions_Delete",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "Compute.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "Compute.json#/parameters/LocationParameter"
+          },
+          {
+            "$ref": "Compute.json#/parameters/PublisherParameter"
+          },
+          {
+            "$ref": "#/parameters/TypeParameter"
+          },
+          {
+            "$ref": "Compute.json#/parameters/VersionParameter"
+          },
+          {
+            "$ref": "Compute.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
     },
-    "security": [
-        {
-            "azure_auth": [
-                "user_impersonation"
-            ]
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Compute.Admin/locations/{location}/artifactTypes/VMExtension": {
+      "get": {
+        "x-ms-examples": {
+          "Returns a list of all Virtual Machine Extension Image.": {
+            "$ref": "examples/VMExtensions/List.json"
+          }
+        },
+        "tags": [
+          "VMExtensions"
+        ],
+        "summary": "Returns a list of all Virtual Machine Extension Images.",
+        "description": "List of all Virtual Machine Extension Images for the current location are returned.",
+        "operationId": "VMExtensions_List",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "Compute.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "Compute.json#/parameters/LocationParameter"
+          },
+          {
+            "$ref": "Compute.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/VMExtensionList"
+            }
+          }
         }
-    ]
+      }
+    }
+  },
+  "definitions": {
+    "VMExtension": {
+      "description": "Virtual Machine Extension Image.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "description": "Inner properties of a Virtual Machine Extension Image.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/VMExtensionProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "Compute.json#/definitions/Resource"
+        }
+      ]
+    },
+    "VMExtensionProperties": {
+      "description": "Properties of a Virtual Machine Extension Image.",
+      "type": "object",
+      "properties": {
+        "vmOsType": {
+          "description": "Target virtual machine operating system type necessary for deploying the extension handler.",
+          "$ref": "PlatformImages.json#/definitions/OsType"
+        },
+        "publisher": {
+          "description": "The publisher of the VM Extension",
+          "type": "string"
+        },
+        "computeRole": {
+          "description": "Compute role",
+          "type": "string"
+        },
+        "vmScaleSetEnabled": {
+          "description": "Value indicating whether the extension is enabled for virtual machine scale set support.",
+          "type": "boolean"
+        },
+        "supportMultipleExtensions": {
+          "description": "True if supports multiple extensions.",
+          "type": "boolean"
+        },
+        "isSystemExtension": {
+          "description": "Indicates if the extension is for the system.",
+          "type": "boolean"
+        },
+        "sourceBlob": {
+          "description": "URI to Azure or AzureStack blob.",
+          "$ref": "#/definitions/AzureBlob"
+        },
+        "provisioningState": {
+          "description": "Provisioning state of extension.",
+          "$ref": "Compute.json#/definitions/ProvisioningState"
+        }
+      }
+    },
+    "AzureBlob": {
+      "description": "Azure or AzureStack blob information.",
+      "type": "object",
+      "properties": {
+        "uri": {
+          "description": "URI to Azure or AzureStack blob.",
+          "type": "string"
+        }
+      }
+    },
+    "VMExtensionList": {
+      "description": "List of virtual machine extensions.",
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/VMExtension"
+      }
+    },
+    "VMExtensionParameters": {
+      "description": "Parameters used to create a new Virtual Machine Extension Image.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "description": "Properties of a Virtual Machine Extension Image.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/VMExtensionProperties"
+        }
+      }
+    }
+  },
+  "parameters": {
+    "VMExtensionParameter": {
+      "description": "Virtual Machine Extension Image creation properties.",
+      "name": "extension",
+      "in": "body",
+      "required": true,
+      "schema": {
+        "$ref": "#/definitions/VMExtensionParameters"
+      },
+      "x-ms-parameter-location": "method"
+    },
+    "TypeParameter": {
+      "description": "Type of extension.",
+      "name": "type",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Authorization uses an Azure Active Directory OAuth2 flow.",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ]
 }

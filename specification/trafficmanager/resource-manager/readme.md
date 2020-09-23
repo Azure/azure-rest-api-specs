@@ -25,7 +25,7 @@ These are the global settings for the TrafficManager API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2018-03
+tag: package-2018-04
 ```
 
 ## Suppression
@@ -34,9 +34,36 @@ directive:
   - suppress: OperationsAPIImplementation
     reason: We do have a operations api as "/providers/Microsoft.Network/operations"
     from: trafficmanager.json
-    where:
-      - $.paths["/providers/Microsoft.Network/operations"]
+    where: $.paths
+  - suppress: RequiredPropertiesMissingInResourceModel
+    reason: This will cause breaking changes in .NET SDK
+    from: trafficmanager.json
+    where: $.definitions.HeatMapModel
+  - suppress: RequiredPropertiesMissingInResourceModel
+    reason: This will cause breaking changes in .NET SDK
+    from: trafficmanager.json
+    where: $.definitions.TrafficManagerGeographicHierarchy
+  - suppress: RequiredPropertiesMissingInResourceModel
+    reason: This will cause breaking changes in .NET SDK
+    from: trafficmanager.json
+    where: $.definitions.Profile
+  - suppress: RequiredPropertiesMissingInResourceModel
+    reason: This will cause breaking changes in .NET SDK
+    from: trafficmanager.json
+    where: $.definitions.Endpoint
+  - suppress: RequiredPropertiesMissingInResourceModel
+    reason: This will cause breaking changes in .NET SDK
+    from: trafficmanager.json
+    where: $.definitions.UserMetricsModel
+```
 
+### Tag: package-2018-04
+
+These settings apply only when `--tag=package-2018-04` is specified on the command line.
+
+``` yaml $(tag) == 'package-2018-04'
+input-file:
+- Microsoft.Network/stable/2018-04-01/trafficmanager.json
 ```
 
 ### Tag: package-2018-03
@@ -65,7 +92,7 @@ directive:
   - suppress: R3023
     reason: it's implemented in the main network spec
     approved-by: "@fearthecowboy"
-  
+
   - where: $.paths["/providers/Microsoft.Network/checkTrafficManagerNameAvailability"].post.operationId
     suppress: R2066
     reason: the name does include it.
@@ -79,7 +106,7 @@ directive:
     suppress: R3006
     reason: Existing API; can't change without breaking API. Will consider in future API version
     approved-by: "@fearthecowboy"
-    
+
 ```
 ### Tag: package-2017-09-preview
 
@@ -145,13 +172,18 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
+  - repo: azure-sdk-for-net
   - repo: azure-sdk-for-python
   - repo: azure-libraries-for-java
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-node
+  - repo: azure-sdk-for-js
   - repo: azure-sdk-for-ruby
     after_scripts:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_traffic_manager']
+  - repo: azure-resource-manager-schemas
+    after_scripts:
+      - node sdkauto_afterscript.js trafficmanager/resource-manager
 ```
 
 
@@ -167,7 +199,7 @@ csharp:
   license-header: MICROSOFT_MIT_NO_VERSION
   namespace: Microsoft.Azure.Management.TrafficManager
   payload-flattening-threshold: 2
-  output-folder: $(csharp-sdks-folder)/TrafficManager/Management.TrafficManager/Generated
+  output-folder: $(csharp-sdks-folder)/trafficmanager/Microsoft.Azure.Management.TrafficManager/src/Generated
   clear-output-folder: true
 ```
 
@@ -190,93 +222,17 @@ python:
 ``` yaml $(python) && $(python-mode) == 'update'
 python:
   no-namespace-folders: true
-  output-folder: $(python-sdks-folder)/azure-mgmt-trafficmanager/azure/mgmt/trafficmanager
+  output-folder: $(python-sdks-folder)/trafficmanager/azure-mgmt-trafficmanager/azure/mgmt/trafficmanager
 ```
 ``` yaml $(python) && $(python-mode) == 'create'
 python:
   basic-setup-py: true
-  output-folder: $(python-sdks-folder)/azure-mgmt-trafficmanager
+  output-folder: $(python-sdks-folder)/trafficmanager/azure-mgmt-trafficmanager
 ```
-
-
 
 ## Go
 
-These settings apply only when `--go` is specified on the command line.
-
-``` yaml $(go)
-go:
-  license-header: MICROSOFT_APACHE_NO_VERSION
-  namespace: trafficmanager
-  clear-output-folder: true
-```
-
-### Go multi-api
-
-``` yaml $(go) && $(multiapi)
-batch:
-  - tag: package-2018-03
-  - tag: package-2018-02
-  - tag: package-2017-09-preview
-  - tag: package-2017-05
-  - tag: package-2017-03
-  - tag: package-2015-11
-```
-
-### Tag: package-2018-03 and go
-
-These settings apply only when `--tag=package-2018-03 --go` is specified on the command line.
-Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
-
-``` yaml $(tag) == 'package-2018-03' && $(go)
-output-folder: $(go-sdk-folder)/services/trafficmanager/mgmt/2018-03-01/trafficmanager
-```
-
-### Tag: package-2018-02 and go
-
-These settings apply only when `--tag=package-2018-02 --go` is specified on the command line.
-Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
-
-``` yaml $(tag) == 'package-2018-02' && $(go)
-output-folder: $(go-sdk-folder)/services/trafficmanager/mgmt/2018-02-01/trafficmanager
-```
-
-### Tag: package-2017-09-preview and go
-
-These settings apply only when `--tag=package-2017-09-preview --go` is specified on the command line.
-Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
-
-``` yaml $(tag) == 'package-2017-09-preview' && $(go)
-output-folder: $(go-sdk-folder)/services/preview/trafficmanager/mgmt/2017-09-01-preview/trafficmanager
-```
-
-### Tag: package-2017-05 and go
-
-These settings apply only when `--tag=package-2017-05 --go` is specified on the command line.
-Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
-
-``` yaml $(tag) == 'package-2017-05' && $(go)
-output-folder: $(go-sdk-folder)/services/trafficmanager/mgmt/2017-05-01/trafficmanager
-```
-
-### Tag: package-2017-03 and go
-
-These settings apply only when `--tag=package-2017-03 --go` is specified on the command line.
-Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
-
-``` yaml $(tag) == 'package-2017-03' && $(go)
-output-folder: $(go-sdk-folder)/services/trafficmanager/mgmt/2017-03-01/trafficmanager
-```
-
-### Tag: package-2015-11 and go
-
-These settings apply only when `--tag=package-2015-11 --go` is specified on the command line.
-Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
-
-``` yaml $(tag) == 'package-2015-11' && $(go)
-output-folder: $(go-sdk-folder)/services/trafficmanager/mgmt/2015-11-01/trafficmanager
-```
-
+See configuration in [readme.go.md](./readme.go.md)
 
 ## Java
 
@@ -292,3 +248,8 @@ java:
   payload-flattening-threshold: 1
   output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-trafficmanager
 ```
+
+## AzureResourceSchema
+
+See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
+

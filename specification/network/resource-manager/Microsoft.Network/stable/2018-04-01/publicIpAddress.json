@@ -57,10 +57,10 @@
             "description": "The name of the subnet."
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -75,7 +75,9 @@
           }
         },
         "x-ms-examples": {
-          "Delete public IP address": { "$ref": "./examples/PublicIpAddressDelete.json" }
+          "Delete public IP address": {
+            "$ref": "./examples/PublicIpAddressDelete.json"
+          }
         },
         "x-ms-long-running-operation": true
       },
@@ -101,10 +103,10 @@
             "description": "The name of the subnet."
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
           },
           {
             "name": "$expand",
@@ -123,7 +125,9 @@
           }
         },
         "x-ms-examples": {
-          "Get public IP address": { "$ref": "./examples/PublicIpAddressGet.json" }
+          "Get public IP address": {
+            "$ref": "./examples/PublicIpAddressGet.json"
+          }
         }
       },
       "put": {
@@ -157,10 +161,10 @@
             "description": "Parameters supplied to the create or update public IP address operation."
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -178,9 +182,15 @@
           }
         },
         "x-ms-examples": {
-          "Create public IP address defaults": { "$ref": "./examples/PublicIpAddressCreateDefaults.json" },
-          "Create public IP address allocation method": { "$ref": "./examples/PublicIpAddressCreateCustomizedValues.json" },
-          "Create public IP address DNS": { "$ref": "./examples/PublicIpAddressCreateDns.json" }
+          "Create public IP address defaults": {
+            "$ref": "./examples/PublicIpAddressCreateDefaults.json"
+          },
+          "Create public IP address allocation method": {
+            "$ref": "./examples/PublicIpAddressCreateCustomizedValues.json"
+          },
+          "Create public IP address DNS": {
+            "$ref": "./examples/PublicIpAddressCreateDns.json"
+          }
         },
         "x-ms-long-running-operation": true
       },
@@ -215,10 +225,10 @@
             "description": "Parameters supplied to update public IP address tags."
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -230,7 +240,9 @@
           }
         },
         "x-ms-examples": {
-          "Update public IP address tags": { "$ref": "./examples/PublicIpAddressUpdateTags.json" }
+          "Update public IP address tags": {
+            "$ref": "./examples/PublicIpAddressUpdateTags.json"
+          }
         },
         "x-ms-long-running-operation": true
       }
@@ -244,10 +256,10 @@
         "description": "Gets all the public IP addresses in a subscription.",
         "parameters": [
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -259,7 +271,9 @@
           }
         },
         "x-ms-examples": {
-          "List all public IP addresses": { "$ref": "./examples/PublicIpAddressListAll.json" }
+          "List all public IP addresses": {
+            "$ref": "./examples/PublicIpAddressListAll.json"
+          }
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
@@ -282,10 +296,10 @@
             "description": "The name of the resource group."
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -297,7 +311,9 @@
           }
         },
         "x-ms-examples": {
-          "List resource group public IP addresses": { "$ref": "./examples/PublicIpAddressList.json" }
+          "List resource group public IP addresses": {
+            "$ref": "./examples/PublicIpAddressList.json"
+          }
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
@@ -460,22 +476,6 @@
         }
       },
       "description": "Contains the IpTag associated with the public IP address"
-    }
-  },
-  "parameters": {
-    "SubscriptionIdParameter": {
-      "name": "subscriptionId",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "The subscription credentials which uniquely identify the Microsoft Azure subscription. The subscription ID forms part of the URI for every service call."
-    },
-    "ApiVersionParameter": {
-      "name": "api-version",
-      "in": "query",
-      "required": true,
-      "type": "string",
-      "description": "Client API version."
     }
   }
 }

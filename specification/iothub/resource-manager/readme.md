@@ -4,10 +4,10 @@
 
 This is the AutoRest configuration file for IotHub.
 
-
-
 ---
+
 ## Getting Started
+
 To build the SDK for IotHub, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
 
 > `autorest`
@@ -15,18 +15,108 @@ To build the SDK for IotHub, simply [Install AutoRest](https://aka.ms/autorest/i
 To see additional help and options, run:
 
 > `autorest --help`
+
 ---
 
 ## Configuration
 
-
-
 ### Basic Information
+
 These are the global settings for the IotHub API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2018-04
+tag: package-2020-08
+```
+
+
+### Tag: package-2020-08
+
+These settings apply only when `--tag=package-2020-08` is specified on the command line.
+
+```yaml $(tag) == 'package-2020-08'
+input-file:
+  - Microsoft.Devices/stable/2020-08-01/iothub.json
+```
+### Tag: package-preview-2020-07
+
+These settings apply only when `--tag=package-preview-2020-07` is specified on the command line.
+
+``` yaml $(tag) == 'package-preview-2020-07'
+input-file:
+  - Microsoft.Devices/preview/2020-07-10-preview/iothub.json
+```
+
+### Tag: package-2020-06
+
+These settings apply only when `--tag=package-2020-06` is specified on the command line.
+
+``` yaml $(tag) == 'package-2020-06'
+input-file:
+  - Microsoft.Devices/stable/2020-06-15/iothub.json
+```
+
+### Tag: package-2020-04
+
+These settings apply only when `--tag=package-2020-04` is specified on the command line.
+
+``` yaml $(tag) == 'package-2020-04'
+input-file:
+  - Microsoft.Devices/stable/2020-04-01/iothub.json
+```
+
+### Tag: package-2020-03
+
+These settings apply only when `--tag=package-2020-03` is specified on the command line.
+
+``` yaml $(tag) == 'package-2020-03'
+input-file:
+  - Microsoft.Devices/stable/2020-03-01/iothub.json
+```
+
+### Tag: package-2019-11
+
+These settings apply only when `--tag=package-2019-11` is specified on the command line.
+
+``` yaml $(tag) == 'package-2019-11'
+input-file:
+  - Microsoft.Devices/stable/2019-11-04/iothub.json
+```
+
+### Tag: package-preview-2019-07
+
+These settings apply only when `--tag=package-preview-2019-07` is specified on the command line.
+
+``` yaml $(tag) == 'package-preview-2019-07'
+input-file:
+  - Microsoft.Devices/preview/2019-07-01-preview/iothub.json
+```
+
+### Tag: package-2019-03
+
+These settings apply only when `--tag=package-2019-03` is specified on the command line.
+
+``` yaml $(tag) == 'package-2019-03'
+input-file:
+  - Microsoft.Devices/stable/2019-03-22/iothub.json
+```
+
+### Tag: package-preview-2019-03
+
+These settings apply only when `--tag=package-preview-2019-03` is specified on the command line.
+
+``` yaml $(tag) == 'package-preview-2019-03'
+input-file:
+  - Microsoft.Devices/preview/2019-03-22-preview/iothub.json
+```
+
+### Tag: package-2018-12-preview
+
+These settings apply only when `--tag=package-2018-12-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2018-12-preview'
+input-file:
+- Microsoft.Devices/preview/2018-12-01-preview/iothub.json
 ```
 
 ### Tag: package-2018-04
@@ -75,8 +165,8 @@ input-file:
 ```
 
 ---
-# Code Generation
 
+# Code Generation
 
 ## Swagger to SDK
 
@@ -85,15 +175,21 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
+  - repo: azure-sdk-for-net
   - repo: azure-sdk-for-python
-  - repo: azure-libraries-for-java
+    after_scripts:
+      - python ./scripts/multiapi_init_gen.py azure-mgmt-iothub
+  - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
+  - repo: azure-sdk-for-js
   - repo: azure-sdk-for-node
   - repo: azure-sdk-for-ruby
     after_scripts:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_iot_hub']
+  - repo: azure-resource-manager-schemas
+    after_scripts:
+      - node sdkauto_afterscript.js iothub/resource-manager
 ```
-
 
 ## C#
 
@@ -105,116 +201,19 @@ csharp:
   azure-arm: true
   license-header: MICROSOFT_MIT_NO_VERSION
   namespace: Microsoft.Azure.Management.IotHub
-  output-folder: $(csharp-sdks-folder)/IotHub/Management.IotHub/Generated
+  output-folder: $(csharp-sdks-folder)/iothub/Microsoft.Azure.Management.IotHub/src/Generated
   clear-output-folder: true
 ```
-
-## Python
-
-These settings apply only when `--python` is specified on the command line.
-Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
-Use `--python-mode=update` if you already have a setup.py and just want to update the code itself.
-
-``` yaml $(python)
-python-mode: create
-python:
-  azure-arm: true
-  license-header: MICROSOFT_MIT_NO_VERSION
-  payload-flattening-threshold: 2
-  namespace: azure.mgmt.iothub
-  package-name: azure-mgmt-iothub
-  clear-output-folder: true
-```
-``` yaml $(python) && $(python-mode) == 'update'
-python:
-  no-namespace-folders: true
-  output-folder: $(python-sdks-folder)/azure-mgmt-iothub/azure/mgmt/iothub
-```
-``` yaml $(python) && $(python-mode) == 'create'
-python:
-  basic-setup-py: true
-  output-folder: $(python-sdks-folder)/azure-mgmt-iothub
-```
-
 
 ## Go
 
-These settings apply only when `--go` is specified on the command line.
-
-``` yaml $(go)
-go:
-  license-header: MICROSOFT_APACHE_NO_VERSION
-  namespace: devices
-  clear-output-folder: true
-```
-
-### Go multi-api
-
-``` yaml $(go) && $(multiapi)
-batch:
-  - tag: package-2018-04
-  - tag: package-2018-01
-  - tag: package-2017-07
-  - tag: package-2017-01
-  - tag: package-2016-02
-```
-### Tag: package-2018-04 and go
-
-These settings apply only when `--tag=package-2018-04 --go` is specified on the command line.
-Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
-
-``` yaml $(tag) == 'package-2018-04' && $(go)
-output-folder: $(go-sdk-folder)/services/iothub/mgmt/2018-04-01/devices
-```
-
-### Tag: package-2018-01 and go
-
-These settings apply only when `--tag=package-2018-01 --go` is specified on the command line.
-Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
-
-``` yaml $(tag) == 'package-2018-01' && $(go)
-output-folder: $(go-sdk-folder)/services/iothub/mgmt/2018-01-22/devices
-```
-
-### Tag: package-2017-07 and go
-
-These settings apply only when `--tag=package-2017-07 --go` is specified on the command line.
-Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
-
-``` yaml $(tag) == 'package-2017-07' && $(go)
-output-folder: $(go-sdk-folder)/services/iothub/mgmt/2017-07-01/devices
-```
-
-### Tag: package-2017-01 and go
-
-These settings apply only when `--tag=package-2017-01 --go` is specified on the command line.
-Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
-
-``` yaml $(tag) == 'package-2017-01' && $(go)
-output-folder: $(go-sdk-folder)/services/iothub/mgmt/2017-01-19/devices
-```
-
-### Tag: package-2016-02 and go
-
-These settings apply only when `--tag=package-2016-02 --go` is specified on the command line.
-Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
-
-``` yaml $(tag) == 'package-2016-02' && $(go)
-output-folder: $(go-sdk-folder)/services/iothub/mgmt/2016-02-03/devices
-```
-
+See configuration in [readme.go.md](./readme.go.md)
 
 ## Java
 
-These settings apply only when `--java` is specified on the command line.
-Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-libraries-for-java clone>`.
+See configuration in [readme.java.md](./readme.go.md)
 
-``` yaml $(java)
-java:
-  azure-arm: true
-  fluent: true
-  namespace: com.microsoft.azure.management.iothub
-  license-header: MICROSOFT_MIT_NO_CODEGEN
-  payload-flattening-threshold: 1
-  output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-iothub
-```
+## AzureResourceSchema
+
+See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
+

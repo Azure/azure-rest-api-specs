@@ -3,7 +3,7 @@
   "info": {
     "title": "AutomationManagement",
     "version": "2017-05-15-preview",
-    "x-ms-code-generation-settings": {  
+    "x-ms-code-generation-settings": {
       "useDateTimeOffset": true
     }
   },
@@ -56,39 +56,39 @@
         },
         "parameters": [
           {
-            "$ref": "./definitions.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "./definitions.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "./definitions.json#/parameters/AutomationAccountNameParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/AutomationAccountNameParameter"
           },
           {
             "name": "jobName",
-             "description": "The name of the job to be created.",
-             "type": "string",
-             "required": true,
-             "in": "path"
-          },          
-          {
-            "$ref": "./definitions.json#/parameters/ApiVersionParameter"
+            "description": "The name of the job to be created.",
+            "type": "string",
+            "required": true,
+            "in": "path"
           },
           {
-            "$ref": "./definitions.json#/parameters/clientRequestId"
+            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/clientRequestId"
           }
         ],
         "responses": {
           "200": {
             "description": "OK",
             "schema": {
-              "type": "string"
+              "type": "file"
             }
           },
           "default": {
             "description": "Automation error response describing why the operation failed.",
             "schema": {
-              "$ref": "./definitions.json#/definitions/ErrorResponse"
+              "$ref": "../../common/v1/definitions.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -101,9 +101,6 @@
         ],
         "operationId": "Job_GetRunbookContent",
         "description": "Retrieve the runbook content of the job identified by job name.",
-        "produces": [
-          "text/powershell"
-        ],
         "externalDocs": {
           "url": "http://aka.ms/azureautomationsdk/joboperations"
         },
@@ -114,13 +111,13 @@
         },
         "parameters": [
           {
-            "$ref": "./definitions.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "./definitions.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "./definitions.json#/parameters/AutomationAccountNameParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/AutomationAccountNameParameter"
           },
           {
             "name": "jobName",
@@ -128,25 +125,25 @@
             "type": "string",
             "required": true,
             "in": "path"
-          },          
-          {
-            "$ref": "./definitions.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "./definitions.json#/parameters/clientRequestId"
+            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/clientRequestId"
           }
         ],
         "responses": {
           "200": {
             "description": "OK",
             "schema": {
-              "type": "string"
+              "type": "file"
             }
           },
           "default": {
             "description": "Automation error response describing why the operation failed.",
             "schema": {
-              "$ref": "./definitions.json#/definitions/ErrorResponse"
+              "$ref": "../../common/v1/definitions.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -169,26 +166,26 @@
         },
         "parameters": [
           {
-            "$ref": "./definitions.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "./definitions.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "./definitions.json#/parameters/AutomationAccountNameParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/AutomationAccountNameParameter"
           },
           {
             "name": "jobName",
-             "description": "The job name.",
-             "type": "string",
-             "required": true,
-             "in": "path"
-          },          
-          {
-            "$ref": "./definitions.json#/parameters/ApiVersionParameter"
+            "description": "The job name.",
+            "type": "string",
+            "required": true,
+            "in": "path"
           },
           {
-            "$ref": "./definitions.json#/parameters/clientRequestId"
+            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/clientRequestId"
           }
         ],
         "responses": {
@@ -198,7 +195,7 @@
           "default": {
             "description": "Automation error response describing why the operation failed.",
             "schema": {
-              "$ref": "./definitions.json#/definitions/ErrorResponse"
+              "$ref": "../../common/v1/definitions.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -221,26 +218,26 @@
         },
         "parameters": [
           {
-            "$ref": "./definitions.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "./definitions.json#/parameters/AutomationAccountNameParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/AutomationAccountNameParameter"
           },
           {
             "name": "jobName",
-             "description": "The job name.",
-             "type": "string",
-             "required": true,
-             "in": "path"
-           },
-          {
-            "$ref": "./definitions.json#/parameters/SubscriptionIdParameter"
+            "description": "The job name.",
+            "type": "string",
+            "required": true,
+            "in": "path"
           },
           {
-            "$ref": "./definitions.json#/parameters/ApiVersionParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "./definitions.json#/parameters/clientRequestId"
+            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/clientRequestId"
           }
         ],
         "responses": {
@@ -250,7 +247,7 @@
           "default": {
             "description": "Automation error response describing why the operation failed.",
             "schema": {
-              "$ref": "./definitions.json#/definitions/ErrorResponse"
+              "$ref": "../../common/v1/definitions.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -273,39 +270,39 @@
         },
         "parameters": [
           {
-            "$ref": "./definitions.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "./definitions.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "./definitions.json#/parameters/AutomationAccountNameParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/AutomationAccountNameParameter"
           },
           {
             "name": "jobName",
-             "description": "The job name.",
-             "type": "string",
-             "required": true,
-             "in": "path"
-          },          
-          {
-            "$ref": "./definitions.json#/parameters/ApiVersionParameter"
+            "description": "The job name.",
+            "type": "string",
+            "required": true,
+            "in": "path"
           },
           {
-            "$ref": "./definitions.json#/parameters/clientRequestId"
+            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/clientRequestId"
           }
         ],
         "responses": {
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "./definitions.json#/definitions/Job"
+              "$ref": "#/definitions/Job"
             }
           },
           "default": {
             "description": "Automation error response describing why the operation failed.",
             "schema": {
-              "$ref": "./definitions.json#/definitions/ErrorResponse"
+              "$ref": "../../common/v1/definitions.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -326,13 +323,13 @@
         },
         "parameters": [
           {
-            "$ref": "./definitions.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "./definitions.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "./definitions.json#/parameters/AutomationAccountNameParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/AutomationAccountNameParameter"
           },
           {
             "name": "jobName",
@@ -340,34 +337,34 @@
             "type": "string",
             "required": true,
             "in": "path"
-           },
+          },
           {
             "name": "parameters",
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "./definitions.json#/definitions/JobCreateParameters"
+              "$ref": "#/definitions/JobCreateParameters"
             },
             "description": "The parameters supplied to the create job operation."
-          },          
-          {
-            "$ref": "./definitions.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "./definitions.json#/parameters/clientRequestId"
+            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/clientRequestId"
           }
         ],
         "responses": {
           "201": {
             "description": "Created",
             "schema": {
-              "$ref": "./definitions.json#/definitions/Job"
+              "$ref": "#/definitions/Job"
             }
           },
           "default": {
             "description": "Automation error response describing why the operation failed.",
             "schema": {
-              "$ref": "./definitions.json#/definitions/ErrorResponse"
+              "$ref": "../../common/v1/definitions.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -390,10 +387,10 @@
         },
         "parameters": [
           {
-            "$ref": "./definitions.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "./definitions.json#/parameters/AutomationAccountNameParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/AutomationAccountNameParameter"
           },
           {
             "name": "$filter",
@@ -403,33 +400,33 @@
             "description": "The filter to apply on the operation."
           },
           {
-            "$ref": "./definitions.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "./definitions.json#/parameters/ApiVersionParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "./definitions.json#/parameters/clientRequestId"
+            "$ref": "../../common/v1/definitions.json#/parameters/clientRequestId"
           }
         ],
         "responses": {
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "./definitions.json#/definitions/JobListResultV2"
+              "$ref": "#/definitions/JobListResultV2"
             }
           },
           "default": {
             "description": "Automation error response describing why the operation failed.",
             "schema": {
-              "$ref": "./definitions.json#/definitions/ErrorResponse"
+              "$ref": "../../common/v1/definitions.json#/definitions/ErrorResponse"
             }
           }
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         },
-        "x-ms-odata": "./definitions.json#/definitions/JobCollectionItem"
+        "x-ms-odata": "#/definitions/JobCollectionItem"
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccountName}/jobs/{jobName}/resume": {
@@ -449,26 +446,26 @@
         },
         "parameters": [
           {
-            "$ref": "./definitions.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "./definitions.json#/parameters/AutomationAccountNameParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/AutomationAccountNameParameter"
           },
           {
             "name": "jobName",
-             "description": "The job name.",
-             "type": "string",
-             "required": true,
-             "in": "path"
-           },
-          {
-            "$ref": "./definitions.json#/parameters/SubscriptionIdParameter"
+            "description": "The job name.",
+            "type": "string",
+            "required": true,
+            "in": "path"
           },
           {
-            "$ref": "./definitions.json#/parameters/ApiVersionParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "./definitions.json#/parameters/clientRequestId"
+            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/clientRequestId"
           }
         ],
         "responses": {
@@ -478,7 +475,7 @@
           "default": {
             "description": "Automation error response describing why the operation failed.",
             "schema": {
-              "$ref": "./definitions.json#/definitions/ErrorResponse"
+              "$ref": "../../common/v1/definitions.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -501,46 +498,46 @@
         },
         "parameters": [
           {
-            "$ref": "./definitions.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "./definitions.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "./definitions.json#/parameters/AutomationAccountNameParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/AutomationAccountNameParameter"
           },
           {
             "name": "jobName",
-             "description": "The job name.",
-             "type": "string",
-             "required": true,
-             "in": "path"
-           },
+            "description": "The job name.",
+            "type": "string",
+            "required": true,
+            "in": "path"
+          },
           {
             "name": "jobStreamId",
             "in": "path",
             "required": true,
             "type": "string",
             "description": "The job stream id."
-          },          
-          {
-            "$ref": "./definitions.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "./definitions.json#/parameters/clientRequestId"
+            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/clientRequestId"
           }
         ],
         "responses": {
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "./definitions.json#/definitions/JobStream"
+              "$ref": "#/definitions/JobStream"
             }
           },
           "default": {
             "description": "Automation error response describing why the operation failed.",
             "schema": {
-              "$ref": "./definitions.json#/definitions/ErrorResponse"
+              "$ref": "../../common/v1/definitions.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -563,18 +560,18 @@
         },
         "parameters": [
           {
-            "$ref": "./definitions.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "./definitions.json#/parameters/AutomationAccountNameParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/AutomationAccountNameParameter"
           },
           {
             "name": "jobName",
-             "description": "The job name.",
-             "type": "string",
-             "required": true,
-             "in": "path"
-           },
+            "description": "The job name.",
+            "type": "string",
+            "required": true,
+            "in": "path"
+          },
           {
             "name": "$filter",
             "in": "query",
@@ -583,26 +580,26 @@
             "description": "The filter to apply on the operation."
           },
           {
-            "$ref": "./definitions.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "./definitions.json#/parameters/ApiVersionParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "./definitions.json#/parameters/clientRequestId"
+            "$ref": "../../common/v1/definitions.json#/parameters/clientRequestId"
           }
         ],
         "responses": {
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "./definitions.json#/definitions/JobStreamListResult"
+              "$ref": "#/definitions/JobStreamListResult"
             }
           },
           "default": {
             "description": "Automation error response describing why the operation failed.",
             "schema": {
-              "$ref": "./definitions.json#/definitions/ErrorResponse"
+              "$ref": "../../common/v1/definitions.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -612,6 +609,370 @@
       }
     }
   },
-  "definitions": {},
+  "definitions": {
+    "JobStream": {
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Gets or sets the id of the resource."
+        },
+        "properties": {
+          "$ref": "#/definitions/JobStreamProperties",
+          "x-ms-client-flatten": true,
+          "description": "Gets or sets the id of the job stream."
+        }
+      },
+      "description": "Definition of the job stream."
+    },
+    "JobStreamProperties": {
+      "properties": {
+        "jobStreamId": {
+          "type": "string",
+          "description": "Gets or sets the id of the job stream."
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Gets or sets the creation time of the job.",
+          "x-nullable": false
+        },
+        "streamType": {
+          "type": "string",
+          "description": "Gets or sets the stream type.",
+          "enum": [
+            "Progress",
+            "Output",
+            "Warning",
+            "Error",
+            "Debug",
+            "Verbose",
+            "Any"
+          ],
+          "x-ms-enum": {
+            "name": "JobStreamType",
+            "modelAsString": true
+          }
+        },
+        "streamText": {
+          "type": "string",
+          "description": "Gets or sets the stream text."
+        },
+        "summary": {
+          "type": "string",
+          "description": "Gets or sets the summary."
+        },
+        "value": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "object"
+          },
+          "description": "Gets or sets the values of the job stream."
+        }
+      },
+      "x-ms-client-flatten": true,
+      "description": "Definition of the job stream."
+    },
+    "JobStreamListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/JobStream"
+          },
+          "description": "A list of job streams."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Gets or sets the next link."
+        }
+      },
+      "description": "The response model for the list job stream operation."
+    },
+    "Job": {
+      "description": "Definition of the job.",
+      "x-ms-mutability": [
+        "read",
+        "create"
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/JobProperties",
+          "x-ms-client-flatten": true,
+          "description": "The properties of the job."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../common/v1/definitions.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "JobListResultV2": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/JobCollectionItem",
+            "readOnly": true
+          },
+          "description": "List of jobs."
+        },
+        "nextLink": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The  link to the next page."
+        }
+      },
+      "description": "The response model for the list job operation."
+    },
+    "JobCollectionItem": {
+      "description": "Job collection item properties.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "Job properties.",
+          "$ref": "#/definitions/JobCollectionItemProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../common/v1/definitions.json#/definitions/ProxyResource"
+        }
+      ],
+      "required": [
+        "properties"
+      ]
+    },
+    "JobProperties": {
+      "properties": {
+        "runbook": {
+          "$ref": "#/definitions/RunbookAssociationProperty",
+          "description": "Gets or sets the runbook."
+        },
+        "startedBy": {
+          "type": "string",
+          "description": "Gets or sets the job started by."
+        },
+        "runOn": {
+          "type": "string",
+          "description": "Gets or sets the runOn which specifies the group name where the job is to be executed."
+        },
+        "jobId": {
+          "type": "string",
+          "format": "uuid",
+          "description": "Gets or sets the id of the job.",
+          "x-nullable": false
+        },
+        "creationTime": {
+          "type": "string",
+          "format": "date-time",
+          "x-nullable": false,
+          "description": "Gets or sets the creation time of the job."
+        },
+        "status": {
+          "type": "string",
+          "description": "Gets or sets the status of the job.",
+          "enum": [
+            "New",
+            "Activating",
+            "Running",
+            "Completed",
+            "Failed",
+            "Stopped",
+            "Blocked",
+            "Suspended",
+            "Disconnected",
+            "Suspending",
+            "Stopping",
+            "Resuming",
+            "Removing"
+          ],
+          "x-ms-enum": {
+            "name": "JobStatus",
+            "modelAsString": true
+          }
+        },
+        "statusDetails": {
+          "type": "string",
+          "description": "Gets or sets the status details of the job."
+        },
+        "startTime": {
+          "type": "string",
+          "format": "date-time",
+          "x-nullable": true,
+          "description": "Gets or sets the start time of the job."
+        },
+        "endTime": {
+          "type": "string",
+          "format": "date-time",
+          "x-nullable": true,
+          "description": "Gets or sets the end time of the job."
+        },
+        "exception": {
+          "type": "string",
+          "description": "Gets or sets the exception of the job."
+        },
+        "lastModifiedTime": {
+          "type": "string",
+          "format": "date-time",
+          "x-nullable": true,
+          "description": "Gets or sets the last modified time of the job."
+        },
+        "lastStatusModifiedTime": {
+          "type": "string",
+          "format": "date-time",
+          "x-nullable": true,
+          "description": "Gets or sets the last status modified time of the job."
+        },
+        "parameters": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Gets or sets the parameters of the job."
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/JobProvisioningStateProperty",
+          "description": "The current provisioning state of the job."
+        }
+      },
+      "description": "Definition of job properties."
+    },
+    "RunbookAssociationProperty": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Gets or sets the name of the runbook."
+        }
+      },
+      "description": "The runbook property associated with the entity."
+    },
+    "JobCreateParameters": {
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/JobCreateProperties",
+          "x-ms-client-flatten": true,
+          "description": "Gets or sets the list of job properties."
+        }
+      },
+      "required": [
+        "properties"
+      ],
+      "description": "The parameters supplied to the create job operation."
+    },
+    "JobCollectionItemProperties": {
+      "description": "Job collection item properties.",
+      "properties": {
+        "runbook": {
+          "$ref": "#/definitions/RunbookAssociationProperty",
+          "readOnly": true,
+          "description": "The runbook association."
+        },
+        "jobId": {
+          "type": "string",
+          "format": "uuid",
+          "readOnly": true,
+          "description": "The id of the job.",
+          "x-nullable": false
+        },
+        "creationTime": {
+          "type": "string",
+          "format": "date-time",
+          "x-nullable": false,
+          "readOnly": true,
+          "description": "The creation time of the job."
+        },
+        "status": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The status of the job.",
+          "enum": [
+            "New",
+            "Activating",
+            "Running",
+            "Completed",
+            "Failed",
+            "Stopped",
+            "Blocked",
+            "Suspended",
+            "Disconnected",
+            "Suspending",
+            "Stopping",
+            "Resuming",
+            "Removing"
+          ],
+          "x-ms-enum": {
+            "name": "JobStatus",
+            "modelAsString": true
+          }
+        },
+        "startTime": {
+          "type": "string",
+          "format": "date-time",
+          "x-nullable": true,
+          "readOnly": true,
+          "description": "The start time of the job."
+        },
+        "endTime": {
+          "type": "string",
+          "format": "date-time",
+          "x-nullable": true,
+          "readOnly": true,
+          "description": "The end time of the job."
+        },
+        "lastModifiedTime": {
+          "type": "string",
+          "format": "date-time",
+          "x-nullable": true,
+          "readOnly": true,
+          "description": "The last modified time of the job."
+        },
+        "provisioningState": {
+          "type": "string",
+          "description": "The provisioning state of a resource.",
+          "readOnly": true
+        },
+        "runOn": {
+          "type": "string",
+          "description": "Specifies the runOn group name where the job was executed."
+        }
+      }
+    },
+    "JobCreateProperties": {
+      "properties": {
+        "runbook": {
+          "$ref": "#/definitions/RunbookAssociationProperty",
+          "description": "Gets or sets the runbook."
+        },
+        "parameters": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Gets or sets the parameters of the job."
+        },
+        "runOn": {
+          "type": "string",
+          "description": "Gets or sets the runOn which specifies the group name where the job is to be executed."
+        }
+      }
+    },
+    "JobProvisioningStateProperty": {
+      "readOnly": true,
+      "type": "string",
+      "description": "The provisioning state of the resource.",
+      "enum": [
+        "Failed",
+        "Succeeded",
+        "Suspended",
+        "Processing"
+      ],
+      "x-ms-enum": {
+        "name": "JobProvisioningState",
+        "modelAsString": true
+      }
+    }
+  },
   "parameters": {}
 }

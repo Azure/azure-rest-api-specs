@@ -6,69 +6,69 @@
     "$recurse": true,
     "Cache-Control": "no-cache"
   },
-    "responses": {
-        "200": {
-            "body": {
-                "id": "/providers/Microsoft.Management/managementGroups/00000000-0000-0000-0000-000000000001",
-                "type": "/providers/Microsoft.Management/managementGroups",
-                "name": "00000000-0000-0000-0000-000000000001",
-                "properties": {
-                    "tenantId": "00000000-0000-0000-0000-000000000000",
-                    "displayName": "Group Name 1",
-                    "details": {
-                    "version": 1,
-                    "updatedTime": "2017-01-01T00:00:00Z",
-                    "updatedBy": "Test",
-                      "parent": {
-                        "parentId": "/providers/Microsoft.Management/managementGroups/RootGroup",
-                        "displayName": "RootGroup"
-                      }
-                  },
-                    "children": [
-                        {
-                            "childType": "ManagementGroup",
-                            "childId": "/providers/Microsoft.Management/managementGroups/00000000-0000-0000-0000-000000000002",
-                            "displayName": "Group Name 2",
-                            "children": [
-                                {
-                                    "childType": "ManagementGroup",
-                                    "childId": "/providers/Microsoft.Management/managementGroups/00000000-0000-0000-0000-000000000004",
-                                    "displayName": "Group Name 4",
-                                    "children": [
-                                        {
-                                            "childType": "Subscription",
-                                            "childId": "/subscriptions/00000000-0000-0000-0000-000000000012",
-                                            "displayName": "Subscription Name 2"
-                                        },
-                                        {
-                                            "childType": "Subscription",
-                                            "childId": "/subscriptions/00000000-0000-0000-0000-000000000013",
-                                            "displayName": "Subscription Name 3"
-                                        }
-                                    ]
-                                }
-                            ]
-                        },
-                        {
-                            "childType": "ManagementGroup",
-                            "childId": "/providers/Microsoft.Management/managementGroups/00000000-0000-0000-0000-000000000003",
-                            "displayName": "Group Name 3",
-                            "children": [
-                                {
-                                    "childType": "Subscription",
-                                    "childId": "/subscriptions/00000000-0000-0000-0000-000000000014",
-                                    "displayName": "Subscription Name 4"
-                                }
-                            ]
-                        },
-                        {
-                            "childType": "Subscription",
-                            "childId": "/subscriptions/00000000-0000-0000-0000-000000000011",
-                            "displayName": "Subscription Name 1"
-                        }
-                    ]
-                }
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/providers/Microsoft.Management/managementGroups/00000000-0000-0000-0000-000000000001",
+        "type": "/providers/Microsoft.Management/managementGroups",
+        "name": "00000000-0000-0000-0000-000000000001",
+        "properties": {
+          "tenantId": "00000000-0000-0000-0000-000000000000",
+          "displayName": "Group Name 1",
+          "details": {
+            "version": 1,
+            "updatedTime": "2017-01-01T00:00:00Z",
+            "updatedBy": "Test",
+            "parent": {
+              "parentId": "/providers/Microsoft.Management/managementGroups/RootGroup",
+              "displayName": "RootGroup"
             }
+          },
+          "children": [
+            {
+              "childType": "ManagementGroup",
+              "childId": "/providers/Microsoft.Management/managementGroups/00000000-0000-0000-0000-000000000002",
+              "displayName": "Group Name 2",
+              "children": [
+                {
+                  "childType": "ManagementGroup",
+                  "childId": "/providers/Microsoft.Management/managementGroups/00000000-0000-0000-0000-000000000004",
+                  "displayName": "Group Name 4",
+                  "children": [
+                    {
+                      "childType": "Subscription",
+                      "childId": "/subscriptions/00000000-0000-0000-0000-000000000012",
+                      "displayName": "Subscription Name 2"
+                    },
+                    {
+                      "childType": "Subscription",
+                      "childId": "/subscriptions/00000000-0000-0000-0000-000000000013",
+                      "displayName": "Subscription Name 3"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "childType": "ManagementGroup",
+              "childId": "/providers/Microsoft.Management/managementGroups/00000000-0000-0000-0000-000000000003",
+              "displayName": "Group Name 3",
+              "children": [
+                {
+                  "childType": "Subscription",
+                  "childId": "/subscriptions/00000000-0000-0000-0000-000000000014",
+                  "displayName": "Subscription Name 4"
+                }
+              ]
+            },
+            {
+              "childType": "Subscription",
+              "childId": "/subscriptions/00000000-0000-0000-0000-000000000011",
+              "displayName": "Subscription Name 1"
+            }
+          ]
         }
+      }
     }
+  }
 }

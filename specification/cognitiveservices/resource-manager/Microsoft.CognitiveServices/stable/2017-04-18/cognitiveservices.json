@@ -35,42 +35,34 @@
         "description": "Create Cognitive Services Account. Accounts is a resource group wide resource type. It holds the keys for developer to access intelligent APIs. It's also the resource type for billing.",
         "operationId": "Accounts_Create",
         "x-ms-examples": {
-          "Get Account": {
+          "Create Account": {
             "$ref": "./examples/CreateAccount.json"
+          },
+          "Create Account Min": {
+            "$ref": "./examples/CreateAccountMin.json"
           }
         },
         "parameters": [
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group within the user's subscription."
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "accountName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "maxLength": 64,
-            "minLength": 2,
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$",
-            "description": "The name of Cognitive Services account."
+            "$ref": "#/parameters/accountNameParameter"
           },
           {
-            "name": "parameters",
+            "name": "account",
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/CognitiveServicesAccountCreateParameters"
+              "$ref": "#/definitions/CognitiveServicesAccount"
             },
             "description": "The parameters to provide for the created account."
           },
           {
-            "$ref": "#/parameters/apiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/subscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -82,6 +74,12 @@
           },
           "201": {
             "description": "If resource is created successfully, the service should return 201 (OK).",
+            "schema": {
+              "$ref": "#/definitions/CognitiveServicesAccount"
+            }
+          },
+          "202": {
+            "description": "HTTP 202 (Accepted) if the operation was successfully started and will complete asynchronously.",
             "schema": {
               "$ref": "#/definitions/CognitiveServicesAccount"
             }
@@ -101,48 +99,42 @@
         "description": "Updates a Cognitive Services account",
         "operationId": "Accounts_Update",
         "x-ms-examples": {
-          "Get Account": {
+          "Update Account": {
             "$ref": "./examples/UpdateAccount.json"
           }
         },
         "parameters": [
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group within the user's subscription."
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "accountName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "maxLength": 64,
-            "minLength": 2,
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$",
-            "description": "The name of Cognitive Services account."
+            "$ref": "#/parameters/accountNameParameter"
           },
           {
-            "name": "parameters",
+            "name": "account",
             "in": "body",
             "required": true,
-            "x-ms-client-flatten": true,
             "schema": {
-              "$ref": "#/definitions/CognitiveServicesAccountUpdateParameters"
+              "$ref": "#/definitions/CognitiveServicesAccount"
             },
             "description": "The parameters to provide for the created account."
           },
           {
-            "$ref": "#/parameters/apiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/subscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
           "200": {
             "description": "The resource provider should return 200 (OK) to indicate that the operation completed successfully. ",
+            "schema": {
+              "$ref": "#/definitions/CognitiveServicesAccount"
+            }
+          },
+          "202": {
+            "description": "HTTP 202 (Accepted) if the operation was successfully started and will complete asynchronously.",
             "schema": {
               "$ref": "#/definitions/CognitiveServicesAccount"
             }
@@ -168,32 +160,24 @@
         },
         "parameters": [
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group within the user's subscription."
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "accountName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "maxLength": 64,
-            "minLength": 2,
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$",
-            "description": "The name of Cognitive Services account."
+            "$ref": "#/parameters/accountNameParameter"
           },
           {
-            "$ref": "#/parameters/apiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/subscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
           "200": {
             "description": "A 200 (OK) should be returned if the object exists and was deleted successfully;"
+          },
+          "202": {
+            "description": "HTTP 202 (Accepted) if the operation was successfully started and will complete asynchronously."
           },
           "204": {
             "description": "a 204 (NoContent) should be used if the resource does not exist and the request is well formed."
@@ -219,32 +203,21 @@
         },
         "parameters": [
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group within the user's subscription."
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "accountName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "maxLength": 64,
-            "minLength": 2,
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$",
-            "description": "The name of Cognitive Services account."
+            "$ref": "#/parameters/accountNameParameter"
           },
           {
-            "$ref": "#/parameters/apiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/subscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
           "200": {
-            "description": "The resource provider should return 200 (OK) to indicate that the operation completed successfully.\nFor a detailed explanation of each field in the response body, please refer to the request body description in the PUT resource section. The only GET specific properties are “name,” “type” and “id.”\nField\tDescription\nKind\trequired.  String.\n\tThe API set for this API account. It can be \n\t· a single API, for example: Face API, Vision API, Speech API. \n\ta bundle of APIs:  Face + Speech, Vision + Emotion, etc.\nsku.name\tRequired.\n\tThe pricing tier/plan of this API. Could be: \n\tF0 - Free\n\tB0 - Basic\n\tS0 - Standard\n\tP0 - Premium\n",
+            "description": "The resource provider should return 200 (OK) to indicate that the operation completed successfully.\nFor a detailed explanation of each field in the response body, please refer to the request body description in the PUT resource section. The only GET specific properties are \"name,\" \"type\" and \"id.\"\nField\tDescription\nKind\trequired.  String.\n\tThe API set for this API account. It can be \n\t· a single API, for example: Face API, Vision API, Speech API. \n\ta bundle of APIs:  Face + Speech, Vision + Emotion, etc.\nsku.name\tRequired.\n\tThe pricing tier/plan of this API. Could be: \n\tF0 - Free\n\tB0 - Basic\n\tS0 - Standard\n\tP0 - Premium\n",
             "schema": {
               "$ref": "#/definitions/CognitiveServicesAccount"
             }
@@ -272,22 +245,18 @@
         },
         "parameters": [
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group within the user's subscription."
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/subscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/apiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
           "200": {
-            "description": "The resource provider should return 200 (OK) to indicate that the operation completed successfully. For other errors (e.g. internal errors) use the appropriate HTTP error code.\nThe nextLink field is expected to point to the URL the client should use to fetch the next page (per server side paging). This matches the OData guidelines for paged responses here. If a resource provider does not support paging, it should return the same body (JSON object with “value” property) but omit nextLink entirely (or set to null, *not* empty string) for future compatibility.\nThe nextLink should be implemented using following query parameters:\n· skipToken: opaque token that allows the resource provider to skip resources already enumerated. This value is defined and returned by the RP after first request via nextLink.\n· top: the optional client query parameter which defines the maximum number of records to be returned by the server.\nImplementation details:\n· NextLink may include all the query parameters (specifically OData $filter) used by the client in the first query. \n· Server may return less records than requested with nextLink. Returning zero records with NextLink is an acceptable response. \nClients must fetch records until the nextLink is not returned back / null. Clients should never rely on number of returned records to determinate if pagination is completed.",
+            "description": "The resource provider should return 200 (OK) to indicate that the operation completed successfully. For other errors (e.g. internal errors) use the appropriate HTTP error code.\nThe nextLink field is expected to point to the URL the client should use to fetch the next page (per server side paging). This matches the OData guidelines for paged responses here. If a resource provider does not support paging, it should return the same body (JSON object with \"value\" property) but omit nextLink entirely (or set to null, *not* empty string) for future compatibility.\nThe nextLink should be implemented using following query parameters:\n· skipToken: opaque token that allows the resource provider to skip resources already enumerated. This value is defined and returned by the RP after first request via nextLink.\n· top: the optional client query parameter which defines the maximum number of records to be returned by the server.\nImplementation details:\n· NextLink may include all the query parameters (specifically OData $filter) used by the client in the first query. \n· Server may return less records than requested with nextLink. Returning zero records with NextLink is an acceptable response. \nClients must fetch records until the nextLink is not returned back / null. Clients should never rely on number of returned records to determinate if pagination is completed.",
             "schema": {
               "$ref": "#/definitions/CognitiveServicesAccountListResult"
             }
@@ -318,10 +287,10 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/apiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/subscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -357,27 +326,16 @@
         },
         "parameters": [
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group within the user's subscription."
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "accountName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "maxLength": 64,
-            "minLength": 2,
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$",
-            "description": "The name of Cognitive Services account."
+            "$ref": "#/parameters/accountNameParameter"
           },
           {
-            "$ref": "#/parameters/apiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/subscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -410,21 +368,10 @@
         },
         "parameters": [
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group within the user's subscription."
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "accountName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "maxLength": 64,
-            "minLength": 2,
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$",
-            "description": "The name of Cognitive Services account."
+            "$ref": "#/parameters/accountNameParameter"
           },
           {
             "name": "parameters",
@@ -437,10 +384,10 @@
             "description": "regenerate key parameters."
           },
           {
-            "$ref": "#/parameters/apiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/subscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -474,10 +421,10 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/apiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/subscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -493,7 +440,7 @@
         }
       }
     },
-   "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/skus": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/skus": {
       "get": {
         "tags": [
           "CognitiveServicesAccounts"
@@ -507,32 +454,21 @@
         "operationId": "Accounts_ListSkus",
         "parameters": [
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group within the user's subscription."
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "accountName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "maxLength": 64,
-            "minLength": 2,
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$",
-            "description": "The name of Cognitive Services account."
+            "$ref": "#/parameters/accountNameParameter"
           },
           {
-            "$ref": "#/parameters/apiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/subscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
           "200": {
-            "description": "The resource provider should return 200 (OK) to indicate that the operation completed successfully.\nFor a detailed explanation of each field in the response body, please refer to the request body description in the PUT resource section. The only GET specific properties are “name,” “type” and “id.”\nField\tDescription\nsku\tRequired, object\n\tThe exact set of keys that define this sku. This matches the fields on the respective resource.\nsku.name\tRequired, string\n\tThe name of the SKU. This is typically a letter + number code, such as A0 or P3\nsku.tier\tRequired, string\n\tThe tier of this particular SKU. Typically one of:\n\t· Free\n\t· Basic\n\t· Standard\n\t· Premium\n",
+            "description": "The resource provider should return 200 (OK) to indicate that the operation completed successfully.\nFor a detailed explanation of each field in the response body, please refer to the request body description in the PUT resource section. The only GET specific properties are \"name,\" \"type\" and \"id.\"\nField\tDescription\nsku\tRequired, object\n\tThe exact set of keys that define this sku. This matches the fields on the respective resource.\nsku.name\tRequired, string\n\tThe name of the SKU. This is typically a letter + number code, such as A0 or P3\nsku.tier\tRequired, string\n\tThe tier of this particular SKU. Typically one of:\n\t· Free\n\t· Basic\n\t· Standard\n\t· Premium\n",
             "schema": {
               "$ref": "#/definitions/CognitiveServicesAccountEnumerateSkusResult"
             }
@@ -560,27 +496,16 @@
         "operationId": "Accounts_GetUsages",
         "parameters": [
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group within the user's subscription."
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "accountName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "maxLength": 64,
-            "minLength": 2,
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$",
-            "description": "The name of Cognitive Services account."
+            "$ref": "#/parameters/accountNameParameter"
           },
           {
-            "$ref": "#/parameters/apiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/subscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
           },
           {
             "$ref": "#/parameters/usageFilterParameter"
@@ -616,7 +541,7 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/apiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -638,7 +563,7 @@
         "tags": [
           "CognitiveServicesAccounts"
         ],
-        "operationId": "CheckSkuAvailability_List",
+        "operationId": "CheckSkuAvailability",
         "description": "Check available SKUs.",
         "x-ms-examples": {
           "Check SKU Availability": {
@@ -647,10 +572,10 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/subscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/apiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/locationParameter"
@@ -663,7 +588,7 @@
             "schema": {
               "$ref": "#/definitions/CheckSkuAvailabilityParameter"
             },
-            "description": "Check SKU Availablity POST body."
+            "description": "Check SKU Availability POST body."
           }
         ],
         "responses": {
@@ -675,87 +600,252 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.CognitiveServices/checkDomainAvailability": {
+      "post": {
+        "tags": [
+          "CognitiveServicesAccounts"
+        ],
+        "operationId": "CheckDomainAvailability",
+        "description": "Check whether a domain is available.",
+        "x-ms-examples": {
+          "Check SKU Availability": {
+            "$ref": "./examples/CheckDomainAvailability.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "x-ms-client-flatten": true,
+            "schema": {
+              "$ref": "#/definitions/CheckDomainAvailabilityParameter"
+            },
+            "description": "Check Domain Availability parameter."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/CheckDomainAvailabilityResult"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/privateEndpointConnections": {
+      "get": {
+        "tags": [
+          "PrivateEndpointConnections"
+        ],
+        "operationId": "PrivateEndpointConnections_List",
+        "description": "Gets the private endpoint connections associated with the Cognitive Services account.",
+        "x-ms-examples": {
+          "GetPrivateEndpointConnection": {
+            "$ref": "./examples/ListPrivateEndpointConnections.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved private endpoint connections.",
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointConnectionListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/privateEndpointConnections/{privateEndpointConnectionName}": {
+      "get": {
+        "tags": [
+          "PrivateEndpointConnections"
+        ],
+        "operationId": "PrivateEndpointConnections_Get",
+        "description": "Gets the specified private endpoint connection associated with the Cognitive Services account.",
+        "x-ms-examples": {
+          "GetPrivateEndpointConnection": {
+            "$ref": "./examples/GetPrivateEndpointConnection.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/privateEndpointConnectionName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK -- Get the private endpoint connection properties successfully.",
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointConnection"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "PrivateEndpointConnections"
+        ],
+        "operationId": "PrivateEndpointConnections_CreateOrUpdate",
+        "description": "Update the state of specified private endpoint connection associated with the Cognitive Services account.",
+        "x-ms-examples": {
+          "PutPrivateEndpointConnection": {
+            "$ref": "./examples/PutPrivateEndpointConnection.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/privateEndpointConnectionName"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointConnection"
+            },
+            "description": "The private endpoint connection properties."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK -- Update the private endpoint connection properties successfully.",
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointConnection"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "PrivateEndpointConnections"
+        ],
+        "operationId": "PrivateEndpointConnections_Delete",
+        "description": "Deletes the specified private endpoint connection associated with the Cognitive Services account.",
+        "x-ms-examples": {
+          "DeletePrivateEndpointConnection": {
+            "$ref": "./examples/DeletePrivateEndpointConnection.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/privateEndpointConnectionName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK -- Delete the private endpoint connection successfully."
+          },
+          "204": {
+            "description": "No Content -- The private endpoint connection does not exist."
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/privateLinkResources": {
+      "get": {
+        "tags": [
+          "PrivateLinkResources"
+        ],
+        "operationId": "PrivateLinkResources_List",
+        "description": "Gets the private link resources that need to be created for a Cognitive Services account.",
+        "x-ms-examples": {
+          "ListPrivateLinkResources": {
+            "$ref": "./examples/ListPrivateLinkResources.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved private link resources.",
+            "schema": {
+              "$ref": "#/definitions/PrivateLinkResourceListResult"
+            }
+          }
+        }
+      }
     }
   },
   "definitions": {
-    "CognitiveServicesAccountCreateParameters": {
-      "properties": {
-        "sku": {
-          "$ref": "#/definitions/Sku",
-          "description": "Required. Gets or sets the SKU of the resource."
-        },
-        "kind": {
-          "$ref": "#/definitions/CognitiveServicesAccountKind",
-          "description": "Required. Gets or sets the Kind of the resource."
-        },
-        "location": {
-          "type": "string",
-          "description": "Required. Gets or sets the location of the resource. This will be one of the supported and registered Azure Geo Regions (e.g. West US, East US, Southeast Asia, etc.). The geo region of a resource cannot be changed once it is created, but if an identical geo region is specified on update the request will succeed."
-        },
-        "tags": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "description": "Gets or sets a list of key value pairs that describe the resource. These tags can be used in viewing and grouping this resource (across resource groups). A maximum of 15 tags can be provided for a resource. Each tag must have a key no greater than 128 characters and value no greater than 256 characters."
-        },
-        "properties": {
-          "type": "object",
-          "description": "Must exist in the request. Must be an empty object. Must not be null."
-        }
-      },
-      "required": [
-        "sku",
-        "kind",
-        "location",
-        "properties"
-      ],
-      "description": "The parameters to provide for the account."
-    },
     "CognitiveServicesAccountKind": {
       "type": "string",
-      "description": "Required. Indicates the type of cognitive service account.",
-      "enum": [
-        "Bing.Autosuggest.v7",
-        "Bing.CustomSearch",
-        "Bing.Search.v7",
-        "Bing.Speech",
-        "Bing.SpellCheck.v7",
-        "ComputerVision",
-        "ContentModerator",
-        "CustomSpeech",
-        "CustomVision.Prediction",
-        "CustomVision.Training",
-        "Emotion",
-        "Face",
-        "LUIS",
-        "QnAMaker",
-        "SpeakerRecognition",
-        "SpeechTranslation",
-        "TextAnalytics",
-        "TextTranslation",
-        "WebLM"
-      ],
-      "x-ms-enum": {
-        "name": "Kind",
-        "modelAsString": true
-      }
-    },
-    "CognitiveServicesAccountUpdateParameters": {
-      "properties": {
-        "sku": {
-          "$ref": "#/definitions/Sku",
-          "description": "Gets or sets the SKU of the resource."
-        },
-        "tags": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "description": "Gets or sets a list of key value pairs that describe the resource. These tags can be used in viewing and grouping this resource (across resource groups). A maximum of 15 tags can be provided for a resource. Each tag must have a key no greater than 128 characters and value no greater than 256 characters."
-        }
-      },
-      "description": "The parameters to provide for the account."
+      "description": "Required. Indicates the type of cognitive service account."
     },
     "Sku": {
       "properties": {
@@ -785,24 +875,7 @@
     },
     "SkuName": {
       "type": "string",
-      "description": "The name of SKU.",
-      "enum": [
-        "F0",
-        "P0",
-        "P1",
-        "P2",
-        "S0",
-        "S1",
-        "S2",
-        "S3",
-        "S4",
-        "S5",
-        "S6"
-      ],
-      "x-ms-enum": {
-        "name": "SkuName",
-        "modelAsString": true
-      }
+      "description": "The name of SKU."
     },
     "CognitiveServicesAccount": {
       "description": "Cognitive Services Account is an Azure resource representing the provisioned account, its type, location and SKU.",
@@ -810,7 +883,8 @@
       "properties": {
         "etag": {
           "type": "string",
-          "description": "Entity Tag"
+          "description": "Entity Tag",
+          "readOnly": true
         },
         "id": {
           "type": "string",
@@ -818,8 +892,8 @@
           "readOnly": true
         },
         "kind": {
-          "type": "string",
-          "description": "Type of cognitive service account."
+          "$ref": "#/definitions/CognitiveServicesAccountKind",
+          "description": "The Kind of the resource."
         },
         "location": {
           "type": "string",
@@ -831,7 +905,6 @@
           "readOnly": true
         },
         "properties": {
-          "x-ms-client-flatten": true,
           "$ref": "#/definitions/CognitiveServicesAccountProperties",
           "description": "Properties of Cognitive Services account."
         },
@@ -850,6 +923,10 @@
           "type": "string",
           "description": "Resource type",
           "readOnly": true
+        },
+        "identity": {
+          "$ref": "#/definitions/Identity",
+          "description": "The identity of Cognitive Services account."
         }
       },
       "x-ms-azure-resource": true
@@ -892,14 +969,111 @@
         },
         "endpoint": {
           "type": "string",
-          "description": "Endpoint of the created account."
+          "description": "Endpoint of the created account.",
+          "readOnly": true
         },
         "internalId": {
           "type": "string",
-          "description": "The internal identifier."
+          "description": "The internal identifier.",
+          "readOnly": true
+        },
+        "capabilities": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SkuCapability"
+          },
+          "description": "Gets the capabilities of the cognitive services account. Each item indicates the capability of a specific feature. The values are read-only and for reference only."
+        },
+        "customSubDomainName": {
+          "type": "string",
+          "description": "Optional subdomain name used for token-based authentication."
+        },
+        "networkAcls": {
+          "$ref": "#/definitions/NetworkRuleSet",
+          "description": "A collection of rules governing the accessibility from specific network locations."
+        },
+        "encryption": {
+          "$ref": "#/definitions/Encryption",
+          "description": "The encryption properties for this resource."
+        },
+        "userOwnedStorage": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/UserOwnedStorage"
+          },
+          "description": "The storage accounts for this resource."
+        },
+        "privateEndpointConnections": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PrivateEndpointConnection"
+          },
+          "description": "The private endpoint connection associated with the Cognitive Services account."
+        },
+        "publicNetworkAccess": {
+          "type": "string",
+          "description": "Whether or not public endpoint access is allowed for this account. Value is optional but if passed in, must be 'Enabled' or 'Disabled'",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "PublicNetworkAccess",
+            "modelAsString": true
+          }
+        },
+        "apiProperties": {
+          "$ref": "#/definitions/CognitiveServicesAccountApiProperties",
+          "description": "The api properties for special APIs."
         }
       },
       "description": "Properties of Cognitive Services account."
+    },
+    "CognitiveServicesAccountApiProperties": {
+      "properties": {
+        "qnaRuntimeEndpoint": {
+          "type": "string",
+          "description": "(QnAMaker Only) The runtime endpoint of QnAMaker."
+        },
+        "statisticsEnabled": {
+          "type": "boolean",
+          "description": "(Bing Search Only) The flag to enable statistics of Bing Search."
+        },
+        "eventHubConnectionString": {
+          "type": "string",
+          "description": "(Personalization Only) The flag to enable statistics of Bing Search.",
+          "pattern": "^( *)Endpoint=sb://(.*);( *)SharedAccessKeyName=(.*);( *)SharedAccessKey=(.*)$",
+          "maxLength": 1000
+        },
+        "storageAccountConnectionString": {
+          "type": "string",
+          "description": "(Personalization Only) The storage account connection string.",
+          "pattern": "^(( *)DefaultEndpointsProtocol=(http|https)( *);( *))?AccountName=(.*)AccountKey=(.*)EndpointSuffix=(.*)$",
+          "maxLength": 1000
+        },
+        "aadClientId": {
+          "type": "string",
+          "description": "(Metrics Advisor Only) The Azure AD Client Id (Application Id).",
+          "maxLength": 500
+        },
+        "aadTenantId": {
+          "type": "string",
+          "description": "(Metrics Advisor Only) The Azure AD Tenant Id.",
+          "maxLength": 500
+        },
+        "superUser": {
+          "type": "string",
+          "description": "(Metrics Advisor Only) The super user of Metrics Advisor.",
+          "maxLength": 500
+        },
+        "websiteName": {
+          "type": "string",
+          "description": "(Metrics Advisor Only) The website name of Metrics Advisor.",
+          "maxLength": 500
+        }
+      },
+      "description": "The api properties for special APIs."
     },
     "CognitiveServicesAccountKeys": {
       "properties": {
@@ -1209,6 +1383,57 @@
         }
       }
     },
+    "SkuCapability": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the SkuCapability."
+        },
+        "value": {
+          "type": "string",
+          "description": "The value of the SkuCapability."
+        }
+      },
+      "description": "SkuCapability indicates the capability of a certain feature."
+    },
+    "CheckDomainAvailabilityParameter": {
+      "description": "Check Domain availability parameter.",
+      "properties": {
+        "subdomainName": {
+          "type": "string",
+          "description": "The subdomain name to use."
+        },
+        "type": {
+          "type": "string",
+          "description": "The Type of the resource."
+        }
+      },
+      "required": [
+        "subdomainName",
+        "type"
+      ]
+    },
+    "CheckDomainAvailabilityResult": {
+      "description": "Check Domain availability result.",
+      "properties": {
+        "isSubdomainAvailable": {
+          "type": "boolean",
+          "description": "Indicates the given SKU is available or not."
+        },
+        "reason": {
+          "type": "string",
+          "description": "Reason why the SKU is not available."
+        },
+        "subdomainName": {
+          "type": "string",
+          "description": "The subdomain name to use."
+        },
+        "type": {
+          "type": "string",
+          "description": "The Type of the resource."
+        }
+      }
+    },
     "ResourceSkuRestrictions": {
       "properties": {
         "type": {
@@ -1332,22 +1557,327 @@
         "value"
       ],
       "description": "The Get Skus operation response."
+    },
+    "NetworkRuleSet": {
+      "properties": {
+        "defaultAction": {
+          "type": "string",
+          "description": "The default action when no rule from ipRules and from virtualNetworkRules match. This is only used after the bypass property has been evaluated.",
+          "enum": [
+            "Allow",
+            "Deny"
+          ],
+          "x-ms-enum": {
+            "name": "NetworkRuleAction",
+            "modelAsString": true
+          }
+        },
+        "ipRules": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/IpRule"
+          },
+          "description": "The list of IP address rules."
+        },
+        "virtualNetworkRules": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VirtualNetworkRule"
+          },
+          "description": "The list of virtual network rules."
+        }
+      },
+      "description": "A set of rules governing the network accessibility."
+    },
+    "IpRule": {
+      "properties": {
+        "value": {
+          "type": "string",
+          "description": "An IPv4 address range in CIDR notation, such as '124.56.78.91' (simple IP address) or '124.56.78.0/24' (all addresses that start with 124.56.78)."
+        }
+      },
+      "required": [
+        "value"
+      ],
+      "description": "A rule governing the accessibility from a specific ip address or ip range."
+    },
+    "VirtualNetworkRule": {
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Full resource id of a vnet subnet, such as '/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/test-vnet/subnets/subnet1'."
+        },
+        "state": {
+          "type": "string",
+          "description": "Gets the state of virtual network rule."
+        },
+        "ignoreMissingVnetServiceEndpoint": {
+          "type": "boolean",
+          "description": "Ignore missing vnet service endpoint or not."
+        }
+      },
+      "required": [
+        "id"
+      ],
+      "description": "A rule governing the accessibility from a specific virtual network."
+    },
+    "Identity": {
+      "description": "Managed service identity.",
+      "type": "object",
+      "properties": {
+        "type": {
+          "description": "Type of managed service identity.",
+          "enum": [
+            "None",
+            "SystemAssigned",
+            "UserAssigned"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "IdentityType",
+            "modelAsString": false
+          }
+        },
+        "tenantId": {
+          "description": "Tenant of managed service identity.",
+          "type": "string",
+          "readOnly": true
+        },
+        "principalId": {
+          "description": "Principal Id of managed service identity.",
+          "type": "string",
+          "readOnly": true
+        },
+        "userAssignedIdentities": {
+          "description": "The list of user assigned identities associated with the resource. The user identity dictionary key references will be ARM resource ids in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}",
+          "type": "object",
+          "additionalProperties": {
+            "description": "User-assigned managed identity.",
+            "$ref": "#/definitions/UserAssignedIdentity"
+          }
+        }
+      }
+    },
+    "UserAssignedIdentity": {
+      "type": "object",
+      "description": "User-assigned managed identity.",
+      "properties": {
+        "principalId": {
+          "type": "string",
+          "description": "Azure Active Directory principal ID associated with this Identity."
+        },
+        "clientId": {
+          "type": "string",
+          "description": "Client App Id associated with this identity."
+        }
+      }
+    },
+    "Encryption": {
+      "properties": {
+        "keyVaultProperties": {
+          "$ref": "#/definitions/KeyVaultProperties",
+          "description": "Properties of KeyVault"
+        },
+        "keySource": {
+          "type": "string",
+          "description": "Enumerates the possible value of keySource for Encryption",
+          "default": "Microsoft.KeyVault",
+          "enum": [
+            "Microsoft.CognitiveServices",
+            "Microsoft.KeyVault"
+          ],
+          "x-ms-enum": {
+            "name": "keySource",
+            "modelAsString": true
+          }
+        }
+      },
+      "description": "Properties to configure Encryption"
+    },
+    "KeyVaultProperties": {
+      "properties": {
+        "keyName": {
+          "type": "string",
+          "description": "Name of the Key from KeyVault"
+        },
+        "keyVersion": {
+          "type": "string",
+          "description": "Version of the Key from KeyVault"
+        },
+        "keyVaultUri": {
+          "type": "string",
+          "description": "Uri of KeyVault"
+        }
+      },
+      "description": "Properties to configure keyVault Properties"
+    },
+    "UserOwnedStorage": {
+      "properties": {
+        "resourceId": {
+          "type": "string",
+          "description": "Full resource id of a Microsoft.Storage resource."
+        }
+      },
+      "description": "The user owned storage for Cognitive Services account."
+    },
+    "PrivateEndpointConnectionListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "Array of private endpoint connections",
+          "items": {
+            "$ref": "#/definitions/PrivateEndpointConnection"
+          }
+        }
+      },
+      "description": "A list of private endpoint connections"
+    },
+    "PrivateEndpointConnection": {
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/PrivateEndpointConnectionProperties",
+          "description": "Resource properties."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/Resource"
+        }
+      ],
+      "description": "The Private Endpoint Connection resource."
+    },
+    "PrivateEndpointConnectionProperties": {
+      "properties": {
+        "privateEndpoint": {
+          "$ref": "#/definitions/PrivateEndpoint",
+          "description": "The resource of private end point."
+        },
+        "privateLinkServiceConnectionState": {
+          "$ref": "#/definitions/PrivateLinkServiceConnectionState",
+          "description": "A collection of information about the state of the connection between service consumer and provider."
+        },
+        "groupIds": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "The private link resource group ids."
+        }
+      },
+      "required": [
+        "privateLinkServiceConnectionState"
+      ],
+      "description": "Properties of the PrivateEndpointConnectProperties."
+    },
+    "PrivateEndpoint": {
+      "properties": {
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The ARM identifier for Private Endpoint"
+        }
+      },
+      "description": "The Private Endpoint resource."
+    },
+    "PrivateLinkServiceConnectionState": {
+      "properties": {
+        "status": {
+          "$ref": "#/definitions/PrivateEndpointServiceConnectionStatus",
+          "description": "Indicates whether the connection has been Approved/Rejected/Removed by the owner of the service."
+        },
+        "description": {
+          "type": "string",
+          "description": "The reason for approval/rejection of the connection."
+        },
+        "actionRequired": {
+          "type": "string",
+          "description": "A message indicating if changes on the service provider require any updates on the consumer."
+        }
+      },
+      "description": "A collection of information about the state of the connection between service consumer and provider."
+    },
+    "PrivateEndpointServiceConnectionStatus": {
+      "type": "string",
+      "description": "The private endpoint connection status.",
+      "enum": [
+        "Pending",
+        "Approved",
+        "Rejected",
+        "Disconnected"
+      ],
+      "x-ms-enum": {
+        "name": "PrivateEndpointServiceConnectionStatus",
+        "modelAsString": true
+      }
+    },
+    "PrivateLinkResourceListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "Array of private link resources",
+          "items": {
+            "$ref": "#/definitions/PrivateLinkResource"
+          }
+        }
+      },
+      "description": "A list of private link resources"
+    },
+    "PrivateLinkResource": {
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/PrivateLinkResourceProperties",
+          "description": "Resource properties."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/Resource"
+        }
+      ],
+      "description": "A private link resource"
+    },
+    "PrivateLinkResourceProperties": {
+      "properties": {
+        "groupId": {
+          "description": "The private link resource group id.",
+          "type": "string",
+          "readOnly": true
+        },
+        "displayName": {
+          "description": "The private link resource display name.",
+          "type": "string",
+          "readOnly": true
+        },
+        "requiredMembers": {
+          "description": "The private link resource required member names.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "requiredZoneNames": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "The private link resource Private link DNS zone name."
+        }
+      },
+      "description": "Properties of a private link resource."
     }
   },
   "parameters": {
-    "subscriptionIdParameter": {
-      "name": "subscriptionId",
+    "accountNameParameter": {
+      "name": "accountName",
       "in": "path",
-      "description": "Azure Subscription ID.",
-      "required": true,
-      "type": "string"
-    },
-    "apiVersionParameter": {
-      "name": "api-version",
-      "in": "query",
       "required": true,
       "type": "string",
-      "description": "Version of the API to be used with the client request. Current version is 2017-04-18"
+      "maxLength": 64,
+      "minLength": 2,
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$",
+      "description": "The name of Cognitive Services account.",
+      "x-ms-parameter-location": "method"
     },
     "locationParameter": {
       "name": "location",
@@ -1363,6 +1893,14 @@
       "required": false,
       "type": "string",
       "description": "An OData filter expression that describes a subset of usages to return. The supported parameter is name.value (name of the metric, can have an or of multiple names).",
+      "x-ms-parameter-location": "method"
+    },
+    "privateEndpointConnectionName": {
+      "name": "privateEndpointConnectionName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the private endpoint connection associated with the Cognitive Services Account",
       "x-ms-parameter-location": "method"
     }
   }

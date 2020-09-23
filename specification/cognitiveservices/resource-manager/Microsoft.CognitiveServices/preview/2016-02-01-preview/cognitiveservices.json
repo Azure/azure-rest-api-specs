@@ -215,12 +215,12 @@
         ],
         "responses": {
           "200": {
-            "description": "The resource provider should return 200 (OK) to indicate that the operation completed successfully.\nFor a detailed explanation of each field in the response body, please refer to the request body description in the PUT resource section. The only GET specific properties are “name,” “type” and “id.”\nField\tDescription\nKind\trequired.  String.\n\tThe API set for this API account. It can be \n\t· a single API, for example: Face API, Vision API, Speech API. \n\ta bundle of APIs:  Face + Speech, Vision + Emotion, etc.\nsku.name\tRequired.\n\tThe pricing tier/plan of this API. Could be: \n\tF0 - Free\n\tB0 - Basic\n\tS0 - Standard\n\tP0 - Premium\n",
+            "description": "The resource provider should return 200 (OK) to indicate that the operation completed successfully.\nFor a detailed explanation of each field in the response body, please refer to the request body description in the PUT resource section. The only GET specific properties are \"name,\" \"type\" and \"id.\"\nField\tDescription\nKind\trequired.  String.\n\tThe API set for this API account. It can be \n\t· a single API, for example: Face API, Vision API, Speech API. \n\ta bundle of APIs:  Face + Speech, Vision + Emotion, etc.\nsku.name\tRequired.\n\tThe pricing tier/plan of this API. Could be: \n\tF0 - Free\n\tB0 - Basic\n\tS0 - Standard\n\tP0 - Premium\n",
             "schema": {
               "$ref": "#/definitions/CognitiveServicesAccount"
             },
             "examples": {
-              "application/json": "{\n  “id”: “/subscriptions/{id}/resourceGroups/{group}/providers/{rpns}/{type}/{name}”,\n  “name”: “{name}”,\n  “type”: “Microsoft.CognitiveSerices/accounts”,\n  \"location\": \"North US\",\n  \"tags\": {\n    \"key1\": \"value 1\",\n    \"key2\": \"value 2\"\n   },\n  \"kind\" : \"resource kind\",\n   \"sku\": {\n\t    \"name\": \"sku code\"\n\t} \n  “etag”: “00000000-0000-0000-0000-000000000000”,\n  \"properties\": { }\n}"
+              "application/json": "{\n  \"id\": \"/subscriptions/{id}/resourceGroups/{group}/providers/{rpns}/{type}/{name}\",\n  \"name\": \"{name}\",\n  \"type\": \"Microsoft.CognitiveServices/accounts\",\n  \"location\": \"North US\",\n  \"tags\": {\n    \"key1\": \"value 1\",\n    \"key2\": \"value 2\"\n   },\n  \"kind\" : \"resource kind\",\n   \"sku\": {\n\t    \"name\": \"sku code\"\n\t} \n  \"etag\": \"00000000-0000-0000-0000-000000000000\",\n  \"properties\": { }\n}"
             }
           },
           "default": {
@@ -256,12 +256,12 @@
         ],
         "responses": {
           "200": {
-            "description": "The resource provider should return 200 (OK) to indicate that the operation completed successfully. For other errors (e.g. internal errors) use the appropriate HTTP error code.\nThe nextLink field is expected to point to the URL the client should use to fetch the next page (per server side paging). This matches the OData guidelines for paged responses here. If a resource provider does not support paging, it should return the same body (JSON object with “value” property) but omit nextLink entirely (or set to null, *not* empty string) for future compatibility.\nThe nextLink should be implemented using following query parameters:\n· skipToken: opaque token that allows the resource provider to skip resources already enumerated. This value is defined and returned by the RP after first request via nextLink.\n· top: the optional client query parameter which defines the maximum number of records to be returned by the server.\nImplementation details:\n· NextLink may include all the query parameters (specifically OData $filter) used by the client in the first query. \n· Server may return less records than requested with nextLink. Returning zero records with NextLink is an acceptable response. \nClients must fetch records until the nextLink is not returned back / null. Clients should never rely on number of returned records to determinate if pagination is completed.",
+            "description": "The resource provider should return 200 (OK) to indicate that the operation completed successfully. For other errors (e.g. internal errors) use the appropriate HTTP error code.\nThe nextLink field is expected to point to the URL the client should use to fetch the next page (per server side paging). This matches the OData guidelines for paged responses here. If a resource provider does not support paging, it should return the same body (JSON object with \"value\" property) but omit nextLink entirely (or set to null, *not* empty string) for future compatibility.\nThe nextLink should be implemented using following query parameters:\n· skipToken: opaque token that allows the resource provider to skip resources already enumerated. This value is defined and returned by the RP after first request via nextLink.\n· top: the optional client query parameter which defines the maximum number of records to be returned by the server.\nImplementation details:\n· NextLink may include all the query parameters (specifically OData $filter) used by the client in the first query. \n· Server may return less records than requested with nextLink. Returning zero records with NextLink is an acceptable response. \nClients must fetch records until the nextLink is not returned back / null. Clients should never rely on number of returned records to determinate if pagination is completed.",
             "schema": {
               "$ref": "#/definitions/CognitiveServicesAccountListResult"
             },
             "examples": {
-              "application/json": "{\n  “value”: [\n    {\n        “id”: “{url to resource 1}”,\n        “name”: “Name1”,\n        “type”: “Microsoft.CognitiveServices/accounts”,\n        \"location\": \"North US\"    \n        \"kind\" : \"resource kind\",\n        \"sku\": {\n\t        \"name\": \"sku code\"\n\t  }, \n        \"etag\": \"00000000-0000-0000-0000-000000000000\",\n        \"properties\": { }\n    },\n    {\n        “id”: “{url to resource 2}”,\n        “name”: “Name2”,\n        “type”: “Microsoft.CognitiveServices/accounts”,\n        \"location\": \"North US\",\n        \"kind\" : \"resource kind\",\n        \"sku\": {\n\t        \"name\": \"sku code\"\n\t  }, \n        \"etag\": \"00000000-0000-0000-0000-000000000000\",\n        \"properties\": { }\n    }\n  ],\n  “nextLink”: “{originalRequestUrl}?$skipToken={opaqueString}”\n}"
+              "application/json": "{\n  \"value\": [\n    {\n        \"id\": \"{url to resource 1}\",\n        \"name\": \"Name1\",\n        \"type\": \"Microsoft.CognitiveServices/accounts\",\n        \"location\": \"North US\"    \n        \"kind\" : \"resource kind\",\n        \"sku\": {\n\t        \"name\": \"sku code\"\n\t  }, \n        \"etag\": \"00000000-0000-0000-0000-000000000000\",\n        \"properties\": { }\n    },\n    {\n        \"id\": \"{url to resource 2}\",\n        \"name\": \"Name2\",\n        \"type\": \"Microsoft.CognitiveServices/accounts\",\n        \"location\": \"North US\",\n        \"kind\" : \"resource kind\",\n        \"sku\": {\n\t        \"name\": \"sku code\"\n\t  }, \n        \"etag\": \"00000000-0000-0000-0000-000000000000\",\n        \"properties\": { }\n    }\n  ],\n  \"nextLink\": \"{originalRequestUrl}?$skipToken={opaqueString}\"\n}"
             }
           },
           "default": {
@@ -298,7 +298,7 @@
               "$ref": "#/definitions/CognitiveServicesAccountListResult"
             },
             "examples": {
-              "application/json": "{\n  “value”: [\n    {\n        “id”: “{url to resource 1}”,\n        “name”: “Name1”,\n        “type”: “Microsoft.CognitiveServices/accounts”,\n        \"location\": \"North US\"    \n        \"kind\" : \"resource kind\",\n            \"sku\": {\n            \"name\": \"sku code\"\n        }, \n       \"etag\": \"00000000-0000-0000-0000-000000000000\",\n        \"properties\": { }\n    },\n    {\n        “id”: “{url to resource 2}”,\n        “name”: “Name2”,\n        “type”: “Microsoft.CognitiveServices/accounts”,\n        \"location\": \"North US\",\n        \"kind\" : \"resource kind\",\n            \"sku\": {\n            \"name\": \"sku code\"\n        }, \n       \"etag\": \"00000000-0000-0000-0000-000000000000\",\n        \"properties\": { }\n    }\n  ],\n  “nextLink”: “{originalRequestUrl}?$skipToken={opaqueString}”\n}\n"
+              "application/json": "{\n  \"value\": [\n    {\n        \"id\": \"{url to resource 1}\",\n        \"name\": \"Name1\",\n        \"type\": \"Microsoft.CognitiveServices/accounts\",\n        \"location\": \"North US\"    \n        \"kind\" : \"resource kind\",\n            \"sku\": {\n            \"name\": \"sku code\"\n        }, \n       \"etag\": \"00000000-0000-0000-0000-000000000000\",\n        \"properties\": { }\n    },\n    {\n        \"id\": \"{url to resource 2}\",\n        \"name\": \"Name2\",\n        \"type\": \"Microsoft.CognitiveServices/accounts\",\n        \"location\": \"North US\",\n        \"kind\" : \"resource kind\",\n            \"sku\": {\n            \"name\": \"sku code\"\n        }, \n       \"etag\": \"00000000-0000-0000-0000-000000000000\",\n        \"properties\": { }\n    }\n  ],\n  \"nextLink\": \"{originalRequestUrl}?$skipToken={opaqueString}\"\n}\n"
             }
           },
           "default": {
@@ -333,7 +333,7 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the cognitive services account within the specified resource group. Congitive Services account names must be between 3 and 24 characters in length and use numbers and lower-case letters only.  ",
+            "description": "The name of the cognitive services account within the specified resource group. Cognitive Services account names must be between 3 and 24 characters in length and use numbers and lower-case letters only.  ",
             "maxLength": 24,
             "minLength": 3,
             "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
@@ -459,8 +459,8 @@
         ],
         "responses": {
           "200": {
-            "description": "The resource provider should return 200 (OK) to indicate that the operation completed successfully.\nFor a detailed explanation of each field in the response body, please refer to the request body description in the PUT resource section. The only GET specific properties are “name,” “type” and “id.”\nField\tDescription\nsku\tRequired, object\n\tThe exact set of keys that define this sku. This matches the fields on the respective resource.\nsku.name\tRequired, string\n\tThe name of the SKU. This is typically a letter + number code, such as A0 or P3\nsku.tier\tRequired, string\n\tThe tier of this particular SKU. Typically one of:\n\t· Free\n\t· Basic\n\t· Standard\n\t· Premium\n",
-             "schema": {
+            "description": "The resource provider should return 200 (OK) to indicate that the operation completed successfully.\nFor a detailed explanation of each field in the response body, please refer to the request body description in the PUT resource section. The only GET specific properties are \"name,\" \"type\" and \"id.\"\nField\tDescription\nsku\tRequired, object\n\tThe exact set of keys that define this sku. This matches the fields on the respective resource.\nsku.name\tRequired, string\n\tThe name of the SKU. This is typically a letter + number code, such as A0 or P3\nsku.tier\tRequired, string\n\tThe tier of this particular SKU. Typically one of:\n\t· Free\n\t· Basic\n\t· Standard\n\t· Premium\n",
+            "schema": {
               "$ref": "#/definitions/CognitiveServicesAccountEnumerateSkusResult"
             },
             "examples": {
@@ -594,7 +594,7 @@
       "description": "The SKU of the cognitive services account."
     },
     "CognitiveServicesAccountPropertiesCreateParameters": {
-      "description": "required empty proprties object. Must be an empty object, and must exist in the request."
+      "description": "required empty properties object. Must be an empty object, and must exist in the request."
     },
     "CognitiveServicesAccount": {
       "description": "Cognitive Services Account is an Azure resource representing the provisioned account, its type, location and SKU.",
@@ -610,7 +610,7 @@
         },
         "kind": {
           "type": "string",
-          "description": "Type of cognitive service account."       
+          "description": "Type of cognitive service account."
         },
         "location": {
           "type": "string",

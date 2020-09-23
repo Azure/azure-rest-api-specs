@@ -1,0 +1,60 @@
+{
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "contoso",
+    "accountName": "contosomedia",
+    "streamingPolicyName": "UserCreatedSecureStreamingPolicyWithEnvelopeEncryptionOnly",
+    "api-version": "2018-06-01-preview",
+    "parameters": {
+      "properties": {
+        "defaultContentKeyPolicyName": "PolicyWithClearKeyOptionAndTokenRestriction",
+        "envelopeEncryption": {
+          "enabledProtocols": {
+            "dash": true,
+            "hls": true,
+            "smoothStreaming": true
+          },
+          "contentKeys": {
+            "defaultKey": {
+              "label": "aesDefaultKey"
+            }
+          },
+          "customKeyAcquisitionUrlTemplate": "https://contoso.com/{AssetAlternativeId}/envelope/{ContentKeyId}"
+        }
+      }
+    }
+  },
+  "responses": {
+    "201": {
+      "body": {
+        "name": "UserCreatedSecureStreamingPolicyWithEnvelopeEncryptionOnly",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/contoso/providers/Microsoft.Media/mediaservices/contosomedia/streamingPolicies/UserCreatedSecureStreamingPolicyWithEnvelopeEncryptionOnly",
+        "type": "Microsoft.Media/mediaservices/streamingPolicies",
+        "properties": {
+          "created": "2018-03-07T18:49:21.8642989Z",
+          "defaultContentKeyPolicyName": "PolicyWithClearKeyOptionAndTokenRestriction",
+          "envelopeEncryption": {
+            "enabledProtocols": {
+              "download": false,
+              "dash": true,
+              "hls": true,
+              "smoothStreaming": true
+            },
+            "clearTracks": [],
+            "contentKeys": {
+              "defaultKey": {
+                "label": "aesDefaultKey",
+                "policyName": null
+              },
+              "keyToTrackMappings": []
+            },
+            "customKeyAcquisitionUrlTemplate": "https://contoso.com/{AssetAlternativeId}/envelope/{ContentKeyId}"
+          },
+          "commonEncryptionCenc": null,
+          "commonEncryptionCbcs": null,
+          "noEncryption": null
+        }
+      }
+    }
+  }
+}

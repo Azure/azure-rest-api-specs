@@ -43,7 +43,9 @@
         ],
         "operationId": "VirtualMachineRunCommands_List",
         "x-ms-examples": {
-            "VirtualMachineRunCommandList": { "$ref": "./examples/VirtualMachineRunCommandList.json" }
+          "VirtualMachineRunCommandList": {
+            "$ref": "./examples/VirtualMachineRunCommandList.json"
+          }
         },
         "description": "Lists all available run commands for a subscription in a location.",
         "parameters": [
@@ -82,7 +84,9 @@
         ],
         "operationId": "VirtualMachineRunCommands_Get",
         "x-ms-examples": {
-            "VirtualMachineRunCommandGet": { "$ref": "./examples/VirtualMachineRunCommandGet.json" }
+          "VirtualMachineRunCommandGet": {
+            "$ref": "./examples/VirtualMachineRunCommandGet.json"
+          }
         },
         "description": "Gets specific run command for a subscription in a location.",
         "parameters": [
@@ -125,7 +129,9 @@
         ],
         "operationId": "VirtualMachines_RunCommand",
         "x-ms-examples": {
-            "VirtualMachineRunCommand": { "$ref": "./examples/VirtualMachineRunCommand.json" }
+          "VirtualMachineRunCommand": {
+            "$ref": "./examples/VirtualMachineRunCommand.json"
+          }
         },
         "description": "Run command on the VM.",
         "parameters": [
@@ -170,7 +176,10 @@
             "description": "Accepted"
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
       }
     }
   },

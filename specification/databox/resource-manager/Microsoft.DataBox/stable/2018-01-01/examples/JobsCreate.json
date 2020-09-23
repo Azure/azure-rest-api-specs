@@ -1,0 +1,84 @@
+{
+  "parameters": {
+    "subscriptionId": "fa68082f-8ff7-4a25-95c7-ce9da541242f",
+    "resourceGroupName": "SdkRg9836",
+    "jobName": "SdkJob8367",
+    "api-version": "2018-01-01",
+    "x-ms-client-request-id": [
+      "ee686d79-42c2-4b01-9afe-5e99f4cabfee"
+    ],
+    "accept-language": [
+      "en-US"
+    ],
+    "User-Agent": [
+      "FxVersion/4.6.26614.01",
+      "Microsoft.Azure.Management.DataBox.DataBoxManagementClient/1.1.0"
+    ],
+    "Content-Type": [
+      "application/json; charset=utf-8"
+    ],
+    "Content-Length": [
+      "931"
+    ],
+    "jobResource": {
+      "properties": {
+        "details": {
+          "jobDetailsType": "DataBox",
+          "contactDetails": {
+            "contactName": "Public SDK Test",
+            "phone": "1234567890",
+            "phoneExtension": "1234",
+            "emailList": [
+              "testing@microsoft.com"
+            ]
+          },
+          "shippingAddress": {
+            "streetAddress1": "16 TOWNSEND ST",
+            "streetAddress2": "Unit 1",
+            "city": "San Francisco",
+            "stateOrProvince": "CA",
+            "country": "US",
+            "postalCode": "94107",
+            "companyName": "Microsoft",
+            "addressType": "Commercial"
+          },
+          "destinationAccountDetails": [
+            {
+              "storageAccountId": "/subscriptions/fa68082f-8ff7-4a25-95c7-ce9da541242f/resourcegroups/databoxbvt/providers/Microsoft.Storage/storageAccounts/databoxbvttestaccount"
+            },
+            {
+              "stagingStorageAccountId": "/subscriptions/fa68082f-8ff7-4a25-95c7-ce9da541242f/resourcegroups/databoxbvt/providers/Microsoft.Storage/storageAccounts/databoxbvttestaccount",
+              "resourceGroupId": "/subscriptions/fa68082f-8ff7-4a25-95c7-ce9da541242f/resourcegroups/databoxbvt"
+            }
+          ]
+        }
+      },
+      "location": "westus",
+      "sku": {
+        "name": "DataBox"
+      }
+    }
+  },
+  "responses": {
+    "202": {},
+    "200": {
+      "body": {
+        "properties": {
+          "isCancellable": true,
+          "isDeletable": false,
+          "isShippingAddressEditable": true,
+          "status": "DeviceOrdered",
+          "startTime": "2018-09-11T17:58:36.6886059+05:30"
+        },
+        "location": "westus",
+        "tags": {},
+        "sku": {
+          "name": "DataBox"
+        },
+        "name": "SdkJob8367",
+        "id": "/subscriptions/fa68082f-8ff7-4a25-95c7-ce9da541242f/resourceGroups/SdkRg9836/providers/Microsoft.DataBox/jobs/SdkJob8367",
+        "type": "Microsoft.DataBox/jobs"
+      }
+    }
+  }
+}

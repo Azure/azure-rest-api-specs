@@ -51,7 +51,7 @@
         "name": "demo_job",
         "type": "Microsoft.BatchAI/Job",
         "properties": {
-          "priority": "normal",
+          "schedulingPriority": "normal",
           "cluster": {
             "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/demo_resource_group/providers/Microsoft.BatchAI/workspaces/demo_workspace/clusters/demo_cluster"
           },
@@ -66,7 +66,7 @@
             "commandLine": "echo hi | tee $AZ_BATCHAI_OUTPUT_OUTPUTS/hi.txt"
           },
           "stdOutErrPathPrefix": "$AZ_BATCHAI_MOUNT_ROOT/azfiles",
-                    "jobOutputDirectoryPathSegment": "00000000-0000-0000-0000-000000000000/demo_resource_group/workspaces/demo_workspace/00000000-0000-0000-0000-000000000000/experiments/demo_experiment/00000000-0000-0000-0000-000000000000/jobs/demo_job/00000000-0000-0000-0000-000000000000",
+          "jobOutputDirectoryPathSegment": "00000000-0000-0000-0000-000000000000/demo_resource_group/workspaces/demo_workspace/00000000-0000-0000-0000-000000000000/experiments/demo_experiment/00000000-0000-0000-0000-000000000000/jobs/demo_job/00000000-0000-0000-0000-000000000000",
           "inputDirectories": [
             {
               "id": "INPUT",

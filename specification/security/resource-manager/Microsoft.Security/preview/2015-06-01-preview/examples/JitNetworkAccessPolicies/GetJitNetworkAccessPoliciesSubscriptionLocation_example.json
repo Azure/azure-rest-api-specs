@@ -1,53 +1,65 @@
 {
-    "parameters": {
-        "api-version": "2015-06-01-preview",
-        "subscriptionId": "20ff7fc3-e762-44dd-bd96-b71116dcdc23",
-        "ascLocation": "westeurope"
-    },
-    "responses": {
-        "200": {
-            "body": {
-                "value": [{
-                    "kind": "Basic",
-                    "properties": {
-                        "virtualMachines": [{
-                            "id": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/myRg1/providers/Microsoft.Compute/virtualMachines/vm1",
-                            "ports": [{
-                                    "number": 22,
-                                    "protocol": "*",
-                                    "allowedSourceAddressPrefix": "*",
-                                    "maxRequestAccessDuration": "PT3H"
-                                },
-                                {
-                                    "number": 3389,
-                                    "protocol": "*",
-                                    "allowedSourceAddressPrefix": "*",
-                                    "maxRequestAccessDuration": "PT3H"
-                                }
-                            ]
-                        }],
-                        "requests": [{
-                            "virtualMachines": [{
-                                "id": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/myRg1/providers/Microsoft.Compute/virtualMachines/vm1",
-                                "ports": [{
-                                    "number": 3389,
-                                    "allowedSourceAddressPrefix": "192.127.0.2",
-                                    "endTimeUtc": "2018-05-17T09:06:45.5691611Z",
-                                    "status": "Initiated",
-                                    "statusReason": "UserRequested"
-                                }]
-                            }],
-                            "startTimeUtc": "2018-05-17T08:06:45.5691611Z",
-                            "requestor": "barbara@contoso.com"
-                        }],
-                        "provisioningState": "Succeeded"
+  "parameters": {
+    "api-version": "2015-06-01-preview",
+    "subscriptionId": "20ff7fc3-e762-44dd-bd96-b71116dcdc23",
+    "ascLocation": "westeurope"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "kind": "Basic",
+            "properties": {
+              "virtualMachines": [
+                {
+                  "id": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/myRg1/providers/Microsoft.Compute/virtualMachines/vm1",
+                  "ports": [
+                    {
+                      "number": 22,
+                      "protocol": "*",
+                      "allowedSourceAddressPrefix": "*",
+                      "maxRequestAccessDuration": "PT3H"
                     },
-                    "id": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/myRg1/providers/Microsoft.Security/locations/westeurope/jitNetworkAccessPolicies/default",
-                    "name": "default",
-                    "type": "Microsoft.Security/locations/jitNetworkAccessPolicies",
-                    "location": "westeurope"
-                }]
-            }
-        }
+                    {
+                      "number": 3389,
+                      "protocol": "*",
+                      "allowedSourceAddressPrefix": "*",
+                      "maxRequestAccessDuration": "PT3H"
+                    }
+                  ]
+                }
+              ],
+              "requests": [
+                {
+                  "virtualMachines": [
+                    {
+                      "id": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/myRg1/providers/Microsoft.Compute/virtualMachines/vm1",
+                      "ports": [
+                        {
+                          "number": 3389,
+                          "allowedSourceAddressPrefix": "192.127.0.2",
+                          "endTimeUtc": "2018-05-17T09:06:45.5691611Z",
+                          "status": "Initiated",
+                          "statusReason": "UserRequested"
+                        }
+                      ]
+                    }
+                  ],
+                  "startTimeUtc": "2018-05-17T08:06:45.5691611Z",
+                  "requestor": "barbara@contoso.com",
+                  "justification": "testing a new version of the product"
+                }
+              ],
+              "provisioningState": "Succeeded"
+            },
+            "id": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/myRg1/providers/Microsoft.Security/locations/westeurope/jitNetworkAccessPolicies/default",
+            "name": "default",
+            "type": "Microsoft.Security/locations/jitNetworkAccessPolicies",
+            "location": "westeurope"
+          }
+        ]
+      }
     }
+  }
 }

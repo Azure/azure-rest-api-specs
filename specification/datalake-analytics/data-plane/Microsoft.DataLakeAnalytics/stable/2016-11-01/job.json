@@ -43,7 +43,9 @@
         "operationId": "Pipeline_List",
         "description": "Lists all pipelines.",
         "x-ms-examples": {
-          "Lists all pipelines": { "$ref": "./examples/Adla_Pipeline_List.json" }
+          "Lists all pipelines": {
+            "$ref": "./examples/Adla_Pipeline_List.json"
+          }
         },
         "parameters": [
           {
@@ -87,7 +89,9 @@
         "operationId": "Pipeline_Get",
         "description": "Gets the Pipeline information for the specified pipeline ID.",
         "x-ms-examples": {
-          "Gets the Pipeline information for the specified pipeline ID": { "$ref": "./examples/Adla_Pipeline_Get.json" }
+          "Gets the Pipeline information for the specified pipeline ID": {
+            "$ref": "./examples/Adla_Pipeline_Get.json"
+          }
         },
         "parameters": [
           {
@@ -136,7 +140,9 @@
         "operationId": "Recurrence_List",
         "description": "Lists all recurrences.",
         "x-ms-examples": {
-          "Lists all recurrences": { "$ref": "./examples/Adla_Recurrence_List.json" }
+          "Lists all recurrences": {
+            "$ref": "./examples/Adla_Recurrence_List.json"
+          }
         },
         "parameters": [
           {
@@ -180,7 +186,9 @@
         "operationId": "Recurrence_Get",
         "description": "Gets the recurrence information for the specified recurrence ID.",
         "x-ms-examples": {
-          "Gets the recurrence information for the specified recurrence ID": { "$ref": "./examples/Adla_Recurrence_Get.json" }
+          "Gets the recurrence information for the specified recurrence ID": {
+            "$ref": "./examples/Adla_Recurrence_Get.json"
+          }
         },
         "parameters": [
           {
@@ -229,7 +237,9 @@
         "operationId": "Job_GetStatistics",
         "description": "Gets statistics of the specified job.",
         "x-ms-examples": {
-          "Gets statistics of the specified job": { "$ref": "./examples/Adla_Job_GetStatistics.json" }
+          "Gets statistics of the specified job": {
+            "$ref": "./examples/Adla_Job_GetStatistics.json"
+          }
         },
         "parameters": [
           {
@@ -262,7 +272,9 @@
         "operationId": "Job_GetDebugDataPath",
         "description": "Gets the job debug data information specified by the job ID.",
         "x-ms-examples": {
-          "Gets the job debug data information specified by the job ID": { "$ref": "./examples/Adla_Job_GetDebugDataPath.json" }
+          "Gets the job debug data information specified by the job ID": {
+            "$ref": "./examples/Adla_Job_GetDebugDataPath.json"
+          }
         },
         "parameters": [
           {
@@ -295,7 +307,9 @@
         "operationId": "Job_Build",
         "description": "Builds (compiles) the specified job in the specified Data Lake Analytics account for job correctness and validation.",
         "x-ms-examples": {
-          "Builds (compiles) the specified job in the specified Data Lake Analytics account for job correctness and validation": { "$ref": "./examples/Adla_Job_Build.json" }
+          "Builds (compiles) the specified job in the specified Data Lake Analytics account for job correctness and validation": {
+            "$ref": "./examples/Adla_Job_Build.json"
+          }
         },
         "parameters": [
           {
@@ -329,7 +343,9 @@
         "operationId": "Job_Cancel",
         "description": "Cancels the running job specified by the job ID.",
         "x-ms-examples": {
-          "Cancels the running job specified by the job ID": { "$ref": "./examples/Adla_Job_Cancel.json" }
+          "Cancels the running job specified by the job ID": {
+            "$ref": "./examples/Adla_Job_Cancel.json"
+          }
         },
         "parameters": [
           {
@@ -359,7 +375,9 @@
         "operationId": "Job_Create",
         "description": "Submits a job to the specified Data Lake Analytics account.",
         "x-ms-examples": {
-          "Submits a job to the specified Data Lake Analytics account": { "$ref": "./examples/Adla_Job_Create.json" }
+          "Submits a job to the specified Data Lake Analytics account": {
+            "$ref": "./examples/Adla_Job_Create.json"
+          }
         },
         "parameters": [
           {
@@ -399,7 +417,9 @@
         "operationId": "Job_Get",
         "description": "Gets the job information for the specified job ID.",
         "x-ms-examples": {
-          "Gets the job information for the specified job ID": { "$ref": "./examples/Adla_Job_Get.json" }
+          "Gets the job information for the specified job ID": {
+            "$ref": "./examples/Adla_Job_Get.json"
+          }
         },
         "parameters": [
           {
@@ -432,7 +452,9 @@
         "operationId": "Job_List",
         "description": "Lists the jobs, if any, associated with the specified Data Lake Analytics account. The response includes a link to the next page of results, if any.",
         "x-ms-examples": {
-          "Lists the jobs, if any, associated with the specified Data Lake Analytics account": { "$ref": "./examples/Adla_Job_List.json" }
+          "Lists the jobs, if any, associated with the specified Data Lake Analytics account": {
+            "$ref": "./examples/Adla_Job_List.json"
+          }
         },
         "parameters": [
           {
@@ -543,7 +565,7 @@
           "type": "integer",
           "readOnly": true,
           "format": "int32",
-          "description": "the number of failures that occured in this stage."
+          "description": "the number of failures that occurred in this stage."
         },
         "maxVertexDataRead": {
           "type": "integer",
@@ -865,6 +887,7 @@
       "properties": {
         "runtimeVersion": {
           "type": "string",
+          "readOnly": true,
           "description": "the runtime version of the Data Lake Analytics engine to use for the specific type of job being run."
         },
         "script": {
@@ -927,7 +950,7 @@
     "Diagnostics": {
       "properties": {
         "columnNumber": {
-          "description": "the column where the error occured.",
+          "description": "the column where the error occurred.",
           "type": "integer",
           "format": "int32",
           "readOnly": true
@@ -939,7 +962,7 @@
           "readOnly": true
         },
         "lineNumber": {
-          "description": "the line number the error occured on.",
+          "description": "the line number the error occurred on.",
           "type": "integer",
           "format": "int32",
           "readOnly": true
@@ -1017,7 +1040,7 @@
           "type": "integer",
           "readOnly": true,
           "format": "int32",
-          "description": "the specific line number in the job where the error occured."
+          "description": "the specific line number in the job where the error occurred."
         },
         "message": {
           "type": "string",
@@ -1387,7 +1410,12 @@
           "type": "integer",
           "default": 1,
           "format": "int32",
-          "description": "the degree of parallelism to use for this job. This must be greater than 0, if set to less than 0 it will default to 1."
+          "description": "the degree of parallelism used for this job. At most one of degreeOfParallelism and degreeOfParallelismPercent should be specified. If none, a default value of 1 will be used."
+        },
+        "degreeOfParallelismPercent": {
+          "type": "number",
+          "format": "double",
+          "description": "the degree of parallelism in percentage used for this job. At most one of degreeOfParallelism and degreeOfParallelismPercent should be specified. If none, a default value of 1 will be used for degreeOfParallelism."
         },
         "priority": {
           "type": "integer",
@@ -1483,11 +1511,19 @@
           "type": "integer",
           "default": 1,
           "format": "int32",
-          "description": "the degree of parallelism used for this job. This must be greater than 0, if set to less than 0 it will default to 1."
+          "readOnly": true,
+          "description": "the degree of parallelism used for this job."
+        },
+        "degreeOfParallelismPercent": {
+          "type": "number",
+          "format": "double",
+          "readOnly": true,
+          "description": "the degree of parallelism in percentage used for this job."
         },
         "priority": {
           "type": "integer",
           "format": "int32",
+          "readOnly": true,
           "description": "the priority value for the current job. Lower numbers have a higher priority. By default, a job has a priority of 1000. This must be greater than 0."
         },
         "submitTime": {
@@ -1554,11 +1590,17 @@
           "items": {
             "type": "string"
           },
+          "readOnly": true,
           "description": "the list of log file name patterns to find in the logFolder. '*' is the only matching character allowed. Example format: jobExecution*.log or *mylog*.txt"
         },
         "related": {
           "$ref": "#/definitions/JobRelationshipProperties",
           "description": "the recurring job relationship information properties."
+        },
+        "hierarchyQueueNode": {
+          "type": "string",
+          "readOnly": true,
+          "description": "the name of hierarchy queue node this job is assigned to, null if job has not been assigned yet or the account doesn't have hierarchy queue."
         }
       },
       "required": [
@@ -1634,7 +1676,8 @@
       "type": "string",
       "default": "azuredatalakeanalytics.net",
       "x-ms-skip-url-encoding": true,
-      "description": "Gets the DNS suffix used as the base for all Azure Data Lake Analytics Job service requests."
+      "description": "Gets the DNS suffix used as the base for all Azure Data Lake Analytics Job service requests.",
+      "x-ms-parameter-location": "client"
     }
   }
 }

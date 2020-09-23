@@ -689,7 +689,13 @@
           "type": "integer",
           "format": "int32",
           "default": 1,
-          "description": "The degree of parallelism used for this job. This must be greater than 0, if set to less than 0 it will default to 1."
+          "description": "The degree of parallelism used for this job."
+        },
+        "degreeOfParallelismPercent": {
+          "type": "number",
+          "format": "double",
+          "readOnly": true,
+          "description": "the degree of parallelism in percentage used for this job."
         },
         "priority": {
           "type": "integer",
@@ -727,7 +733,9 @@
             "Scheduling",
             "Starting",
             "Paused",
-            "WaitingForCapacity"
+            "WaitingForCapacity",
+            "Yielded",
+            "Finalizing"
           ],
           "x-ms-enum": {
             "name": "JobState",
@@ -772,6 +780,11 @@
             "type": "string"
           },
           "description": "The key-value pairs used to add additional metadata to the job information. (Only for use internally with Scope job type.)"
+        },
+        "hierarchyQueueNode": {
+          "type": "string",
+          "readOnly": true,
+          "description": "the name of hierarchy queue node this job is assigned to, Null if job has not been assigned yet or the account doesn't have hierarchy queue."
         }
       },
       "description": "The common Data Lake Analytics job information properties."
@@ -988,7 +1001,7 @@
           "readOnly": true,
           "type": "integer",
           "format": "int32",
-          "description": "The number of failures that occured in this stage."
+          "description": "The number of failures that occurred in this stage."
         },
         "maxVertexDataRead": {
           "readOnly": true,
@@ -1237,13 +1250,13 @@
           "readOnly": true,
           "type": "integer",
           "format": "int32",
-          "description": "The line number the error occured on."
+          "description": "The line number the error occurred on."
         },
         "columnNumber": {
           "readOnly": true,
           "type": "integer",
           "format": "int32",
-          "description": "The column where the error occured."
+          "description": "The column where the error occurred."
         },
         "start": {
           "readOnly": true,
@@ -1453,7 +1466,7 @@
           "readOnly": true,
           "type": "integer",
           "format": "int32",
-          "description": "The specific line number in the job where the error occured."
+          "description": "The specific line number in the job where the error occurred."
         },
         "startOffset": {
           "readOnly": true,
@@ -1853,7 +1866,12 @@
           "type": "integer",
           "format": "int32",
           "default": 1,
-          "description": "The degree of parallelism to use for this job. This must be greater than 0, if set to less than 0 it will default to 1."
+          "description": "The degree of parallelism to use for this job. At most one of degreeOfParallelism and degreeOfParallelismPercent should be specified. If none, a default value of 1 will be used for degreeOfParallelism."
+        },
+        "degreeOfParallelismPercent": {
+          "type": "number",
+          "format": "double",
+          "description": "the degree of parallelism in percentage used for this job. At most one of degreeOfParallelism and degreeOfParallelismPercent should be specified. If none, a default value of 1 will be used for degreeOfParallelism."
         },
         "priority": {
           "type": "integer",
@@ -1872,7 +1890,6 @@
           "description": "The recurring job relationship information properties."
         }
       },
-
       "description": "The parameters used to submit a new Data Lake Analytics job."
     },
     "CreateScopeJobParameters": {
@@ -1979,7 +1996,12 @@
         "degreeOfParallelism": {
           "type": "integer",
           "format": "int32",
-          "description": "The degree of parallelism used for this job. This must be greater than 0, if set to less than 0 it will default to 1."
+          "description": "The degree of parallelism used for this job."
+        },
+        "degreeOfParallelismPercent": {
+          "type": "number",
+          "format": "double",
+          "description": "the degree of parallelism in percentage used for this job."
         },
         "priority": {
           "type": "integer",

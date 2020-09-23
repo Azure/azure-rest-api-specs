@@ -1,0 +1,56 @@
+{
+  "parameters": {
+    "api-version": "2019-01-01-preview",
+    "subscriptionId": "d0cfe6b2-9ac0-4464-9919-dccaee2e48c0",
+    "resourceGroupName": "myRg",
+    "workspaceName": "myWorkspace",
+    "operationalInsightsResourceProvider": "Microsoft.OperationalIinsights",
+    "$orderby": "properties/createdTimeUtc desc",
+    "$top": 1
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/d0cfe6b2-9ac0-4464-9919-dccaee2e48c0/resourceGroups/myRg/providers/Microsoft.OperationalIinsights/workspaces/myWorkspace/providers/Microsoft.SecurityInsights/cases/73e01a99-5cd7-4139-a149-9f2736ff2ab5",
+            "name": "73e01a99-5cd7-4139-a149-9f2736ff2ab5",
+            "type": "Microsoft.SecurityInsights/cases",
+            "etag": "\"0300bf09-0000-0000-0000-5c37296e0000\"",
+            "properties": {
+              "lastUpdatedTimeUtc": "2019-01-01T13:15:30Z",
+              "createdTimeUtc": "2019-01-01T13:15:30Z",
+              "endTimeUtc": "2019-01-01T13:05:30Z",
+              "startTimeUtc": "2019-01-01T13:00:30Z",
+              "labels": [
+                "Tag1",
+                "Tag2"
+              ],
+              "description": "This is a demo case",
+              "title": "My case",
+              "owner": {
+                "objectId": "2046feea-040d-4a46-9e2b-91c2941bfa70",
+                "email": "john@contoso.com",
+                "name": "john doe"
+              },
+              "severity": "High",
+              "closeReason": "Resolved",
+              "status": "Closed",
+              "closedReasonText": "case resolved",
+              "relatedAlertIds": [
+                "cf441808-2d50-4c10-81af-cdd0b908c121"
+              ],
+              "tactics": [
+                "InitialAccess",
+                "Persistence"
+              ],
+              "caseNumber": 3177,
+              "lastComment": "This is a demo case",
+              "totalComments": 3
+            }
+          }
+        ]
+      }
+    }
+  }
+}

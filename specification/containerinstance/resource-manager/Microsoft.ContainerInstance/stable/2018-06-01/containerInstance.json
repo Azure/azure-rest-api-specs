@@ -179,7 +179,7 @@
               "$ref": "#/definitions/ContainerGroup"
             }
           }
-        }, 
+        },
         "x-ms-long-running-operation": true
       },
       "patch": {
@@ -259,6 +259,69 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerInstance/containerGroups/{containerGroupName}/restart": {
+      "post": {
+        "operationId": "ContainerGroups_Restart",
+        "x-ms-examples": {
+          "ContainerRestart": {
+            "$ref": "./examples/ContainerGroupsRestart.json"
+          }
+        },
+        "summary": "Restarts all containers in a container group.",
+        "description": "Restarts all containers in a container group in place. If container image has updates, new image will be downloaded.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ContainerGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "NoContent"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerInstance/containerGroups/{containerGroupName}/stop": {
+      "post": {
+        "operationId": "ContainerGroups_Stop",
+        "x-ms-examples": {
+          "ContainerStop": {
+            "$ref": "./examples/ContainerGroupsStop.json"
+          }
+        },
+        "summary": "Stops all containers in a container group.",
+        "description": "Stops all containers in a container group. Compute resources will be deallocated and billing will stop.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ContainerGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "NoContent"
+          }
+        }
+      }
+    },
     "/providers/Microsoft.ContainerInstance/operations": {
       "get": {
         "tags": [
@@ -318,10 +381,10 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerInstance/containerGroups/{containerGroupName}/containers/{containerName}/logs": {
       "get": {
-        "operationId": "ContainerLogs_List",
+        "operationId": "Container_ListLogs",
         "x-ms-examples": {
-          "ContainerLogsList": {
-            "$ref": "./examples/ContainerLogsList.json"
+          "ContainerListLogs": {
+            "$ref": "./examples/ContainerListLogs.json"
           }
         },
         "summary": "Get the logs for a specified container instance.",
@@ -365,14 +428,14 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerInstance/containerGroups/{containerGroupName}/containers/{containerName}/exec": {
       "post": {
-        "operationId": "StartContainer_LaunchExec",
+        "operationId": "Container_ExecuteCommand",
         "x-ms-examples": {
-          "ContainerExecStart": {
-            "$ref": "./examples/ContainerExecStart.json"
+          "ContainerExec": {
+            "$ref": "./examples/ContainerExec.json"
           }
         },
-        "summary": "Starts the exec command for a specific container instance.",
-        "description": "Starts the exec command for a specified container instance in a specified resource group and container group.",
+        "summary": "Executes a command in a specific container instance.",
+        "description": "Executes a command for a specific container instance in a specified resource group and container group.",
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -394,12 +457,12 @@
             "type": "string"
           },
           {
-            "name":"containerExecRequest",
-            "in":"body",
-            "description":"The request for the exec command.",
-            "required":true,
-            "schema":{
-                "$ref":"#/definitions/ContainerExecRequest"
+            "name": "containerExecRequest",
+            "in": "body",
+            "description": "The request for the exec command.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ContainerExecRequest"
             }
           }
         ],
@@ -672,7 +735,7 @@
     "GitRepoVolume": {
       "description": "Represents a volume that is populated with the contents of a git repository",
       "required": [
-       "repository"
+        "repository"
       ],
       "properties": {
         "directory": {
@@ -1087,7 +1150,7 @@
         "name"
       ]
     },
-    "OperationListResult":{
+    "OperationListResult": {
       "description": "The operation list response that contains all operations for Azure Container Instance service.",
       "type": "object",
       "properties": {
@@ -1148,8 +1211,8 @@
         }
       },
       "required": [
-          "name",
-          "display"
+        "name",
+        "display"
       ]
     },
     "UsageListResult": {
@@ -1189,7 +1252,7 @@
           "type": "object",
           "description": "The name object of the resource",
           "properties": {
-            "value":{
+            "value": {
               "readOnly": true,
               "type": "string",
               "description": "The name of the resource"
@@ -1231,7 +1294,7 @@
       }
     },
     "ContainerExecRequest": {
-      "description": "The start container exec request.",
+      "description": "The container exec request.",
       "type": "object",
       "properties": {
         "command": {
@@ -1242,11 +1305,11 @@
           "type": "object",
           "description": "The size of the terminal.",
           "properties": {
-            "row":{
+            "rows": {
               "type": "integer",
               "description": "The row size of the terminal"
             },
-            "column": {
+            "cols": {
               "type": "integer",
               "description": "The column size of the terminal"
             }

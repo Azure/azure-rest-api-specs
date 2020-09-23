@@ -254,6 +254,14 @@
         "hasLinuxWorkers": {
           "description": "Flag that displays whether an ASE has linux workers or not",
           "type": "boolean"
+        },
+        "sslCertKeyVaultId": {
+          "description": "Key Vault ID for ILB App Service Environment default SSL certificate",
+          "type": "string"
+        },
+        "sslCertKeyVaultSecretName": {
+          "description": "Key Vault Secret Name for ILB App Service Environment default SSL certificate",
+          "type": "string"
         }
       }
     },
@@ -292,10 +300,6 @@
               "type": "string",
               "readOnly": true
             },
-            "adminSiteName": {
-              "description": "App Service plan administration site.",
-              "type": "string"
-            },
             "hostingEnvironmentProfile": {
               "$ref": "#/definitions/HostingEnvironmentProfile",
               "description": "Specification for the App Service Environment to use for the App Service plan.",
@@ -320,6 +324,11 @@
               "default": false,
               "type": "boolean"
             },
+            "maximumElasticWorkerCount": {
+              "format": "int32",
+              "description": "Maximum number of total workers allowed for this ElasticScaleEnabled App Service Plan",
+              "type": "integer"
+            },
             "numberOfSites": {
               "format": "int32",
               "description": "Number of apps assigned to this App Service plan.",
@@ -333,6 +342,11 @@
             "spotExpirationTime": {
               "format": "date-time",
               "description": "The time when the server farm expires. Valid only if it is a spot server farm.",
+              "type": "string"
+            },
+            "freeOfferExpirationTime": {
+              "format": "date-time",
+              "description": "The time when the server farm free offer expires.",
               "type": "string"
             },
             "resourceGroup": {
@@ -350,6 +364,15 @@
               ]
             },
             "isXenon": {
+              "description": "Obsolete: If Hyper-V container app service plan <code>true</code>, <code>false</code> otherwise.",
+              "default": false,
+              "type": "boolean",
+              "x-ms-mutability": [
+                "create",
+                "read"
+              ]
+            },
+            "hyperV": {
               "description": "If Hyper-V container app service plan <code>true</code>, <code>false</code> otherwise.",
               "default": false,
               "type": "boolean",
@@ -494,6 +517,54 @@
         }
       }
     },
+    "AzureStorageInfoValue": {
+      "description": "Azure Files or Blob Storage access information value for dictionary storage.",
+      "type": "object",
+      "properties": {
+        "type": {
+          "description": "Type of storage.",
+          "enum": [
+            "AzureFiles",
+            "AzureBlob"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "AzureStorageType",
+            "modelAsString": false
+          }
+        },
+        "accountName": {
+          "description": "Name of the storage account.",
+          "type": "string"
+        },
+        "shareName": {
+          "description": "Name of the file share (container name, for Blob storage).",
+          "type": "string"
+        },
+        "accessKey": {
+          "description": "Access key for the storage account.",
+          "type": "string"
+        },
+        "mountPath": {
+          "description": "Path to mount the storage within the site's runtime environment.",
+          "type": "string"
+        },
+        "state": {
+          "description": "State of the storage account.",
+          "enum": [
+            "Ok",
+            "InvalidCredentials",
+            "InvalidShare"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "AzureStorageState",
+            "modelAsString": false
+          }
+        }
+      }
+    },
     "Capability": {
       "description": "Describes the capabilities/features allowed for a specific SKU.",
       "type": "object",
@@ -539,6 +610,10 @@
         },
         "sourceWebAppId": {
           "description": "ARM resource ID of the source app. App resource ID is of the form \n/subscriptions/{subId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{siteName} for production slots and \n/subscriptions/{subId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{siteName}/slots/{slotName} for other slots.",
+          "type": "string"
+        },
+        "sourceWebAppLocation": {
+          "description": "Location of source app ex: West US or North Europe",
           "type": "string"
         },
         "hostingEnvironment": {
@@ -611,6 +686,10 @@
           "items": {
             "type": "string"
           }
+        },
+        "supportCredentials": {
+          "description": "Gets or sets whether CORS requests with credentials are allowed. See \nhttps://developer.mozilla.org/en-US/docs/Web/HTTP/CORS#Requests_with_credentials\nfor more details.",
+          "type": "boolean"
         }
       }
     },
@@ -685,7 +764,7 @@
       "type": "object",
       "properties": {
         "unit": {
-          "description": "Units of measurement for the quota resourse.",
+          "description": "Units of measurement for the quota resource.",
           "type": "string"
         },
         "nextResetTime": {
@@ -787,6 +866,64 @@
         }
       }
     },
+    "DeletedSite": {
+      "description": "A deleted app.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyOnlyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "DeletedSite resource specific properties",
+          "properties": {
+            "deletedSiteId": {
+              "format": "int32",
+              "description": "Numeric id for the deleted site",
+              "type": "integer",
+              "readOnly": true
+            },
+            "deletedTimestamp": {
+              "description": "Time in UTC when the app was deleted.",
+              "type": "string",
+              "readOnly": true
+            },
+            "subscription": {
+              "description": "Subscription containing the deleted site",
+              "type": "string",
+              "readOnly": true
+            },
+            "resourceGroup": {
+              "description": "ResourceGroup that contained the deleted site",
+              "type": "string",
+              "readOnly": true
+            },
+            "deletedSiteName": {
+              "description": "Name of the deleted site",
+              "type": "string",
+              "readOnly": true
+            },
+            "slot": {
+              "description": "Slot of the deleted site",
+              "type": "string",
+              "readOnly": true
+            },
+            "kind": {
+              "description": "Kind of site that was deleted",
+              "type": "string",
+              "readOnly": true
+            },
+            "geoRegionName": {
+              "description": "Geo Region of the deleted site",
+              "type": "string",
+              "readOnly": true
+            }
+          },
+          "x-ms-client-flatten": true
+        }
+      }
+    },
     "Dimension": {
       "description": "Dimension of a resource metric. For e.g. instance specific HTTP requests for a web app, \nwhere instance name is dimension of the metric HTTP request",
       "type": "object",
@@ -851,6 +988,21 @@
           "items": {
             "$ref": "#/definitions/RampUpRule"
           }
+        }
+      }
+    },
+    "GeoDistribution": {
+      "description": "A global distribution definition.",
+      "type": "object",
+      "properties": {
+        "location": {
+          "description": "Location.",
+          "type": "string"
+        },
+        "numberOfWorkers": {
+          "format": "int32",
+          "description": "NumberOfWorkers.",
+          "type": "integer"
         }
       }
     },
@@ -1068,17 +1220,57 @@
     },
     "IpSecurityRestriction": {
       "description": "IP security restriction on an app.",
-      "required": [
-        "ipAddress"
-      ],
       "type": "object",
       "properties": {
         "ipAddress": {
-          "description": "IP address the security restriction is valid for.",
+          "description": "IP address the security restriction is valid for.\nIt can be in form of pure ipv4 address (required SubnetMask property) or\nCIDR notation such as ipv4/mask (leading bit match). For CIDR,\nSubnetMask property must not be specified.",
           "type": "string"
         },
         "subnetMask": {
           "description": "Subnet mask for the range of IP addresses the restriction is valid for.",
+          "type": "string"
+        },
+        "vnetSubnetResourceId": {
+          "description": "Virtual network resource id",
+          "type": "string"
+        },
+        "vnetTrafficTag": {
+          "format": "int32",
+          "description": "(internal) Vnet traffic tag",
+          "type": "integer"
+        },
+        "subnetTrafficTag": {
+          "format": "int32",
+          "description": "(internal) Subnet traffic tag",
+          "type": "integer"
+        },
+        "action": {
+          "description": "Allow or Deny access for this IP range.",
+          "type": "string"
+        },
+        "tag": {
+          "description": "Defines what this IP filter will be used for. This is to support IP filtering on proxies.",
+          "enum": [
+            "Default",
+            "XffProxy"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "IpFilterTag",
+            "modelAsString": false
+          }
+        },
+        "priority": {
+          "format": "int32",
+          "description": "Priority of IP restriction rule.",
+          "type": "integer"
+        },
+        "name": {
+          "description": "IP restriction rule name.",
+          "type": "string"
+        },
+        "description": {
+          "description": "IP restriction rule description.",
           "type": "string"
         }
       }
@@ -1097,6 +1289,21 @@
         }
       }
     },
+    "LogSpecification": {
+      "description": "Log Definition of a single resource metric.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "displayName": {
+          "type": "string"
+        },
+        "blobDuration": {
+          "type": "string"
+        }
+      }
+    },
     "ManagedServiceIdentity": {
       "description": "Managed service identity.",
       "type": "object",
@@ -1105,7 +1312,9 @@
           "description": "Type of managed service identity.",
           "enum": [
             "SystemAssigned",
-            "UserAssigned"
+            "UserAssigned",
+            "SystemAssigned, UserAssigned",
+            "None"
           ],
           "type": "string",
           "x-ms-enum": {
@@ -1123,12 +1332,23 @@
           "type": "string",
           "readOnly": true
         },
-        "identityIds": {
-          "description": "Array of UserAssigned managed service identities.",
-          "type": "array",
-          "items": {
-            "description": "Resource Id for UserAssigned managed service identity",
-            "type": "string"
+        "userAssignedIdentities": {
+          "description": "The list of user assigned identities associated with the resource. The user identity dictionary key references will be ARM resource ids in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}",
+          "type": "object",
+          "additionalProperties": {
+            "type": "object",
+            "properties": {
+              "principalId": {
+                "description": "Principal Id of user assigned identity",
+                "type": "string",
+                "readOnly": true
+              },
+              "clientId": {
+                "description": "Client Id of user assigned identity",
+                "type": "string",
+                "readOnly": true
+              }
+            }
           }
         }
       }
@@ -1390,12 +1610,12 @@
         },
         "changeStep": {
           "format": "double",
-          "description": "In auto ramp up scenario this is the step to to add/remove from <code>ReroutePercentage</code> until it reaches \n<code>MinReroutePercentage</code> or <code>MaxReroutePercentage</code>. Site metrics are checked every N minutes specificed in <code>ChangeIntervalInMinutes</code>.\nCustom decision algorithm can be provided in TiPCallback site extension which URL can be specified in <code>ChangeDecisionCallbackUrl</code>.",
+          "description": "In auto ramp up scenario this is the step to add/remove from <code>ReroutePercentage</code> until it reaches \n<code>MinReroutePercentage</code> or <code>MaxReroutePercentage</code>. Site metrics are checked every N minutes specified in <code>ChangeIntervalInMinutes</code>.\nCustom decision algorithm can be provided in TiPCallback site extension which URL can be specified in <code>ChangeDecisionCallbackUrl</code>.",
           "type": "number"
         },
         "changeIntervalInMinutes": {
           "format": "int32",
-          "description": "Specifies interval in mimuntes to reevaluate ReroutePercentage.",
+          "description": "Specifies interval in minutes to reevaluate ReroutePercentage.",
           "type": "integer"
         },
         "minReroutePercentage": {
@@ -1725,6 +1945,12 @@
           "items": {
             "$ref": "#/definitions/MetricSpecification"
           }
+        },
+        "logSpecifications": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/LogSpecification"
+          }
         }
       }
     },
@@ -1818,6 +2044,15 @@
               ]
             },
             "isXenon": {
+              "description": "Obsolete: Hyper-V sandbox.",
+              "default": false,
+              "type": "boolean",
+              "x-ms-mutability": [
+                "create",
+                "read"
+              ]
+            },
+            "hyperV": {
               "description": "Hyper-V sandbox.",
               "default": false,
               "type": "boolean",
@@ -1870,6 +2105,10 @@
               "description": "<code>true</code> to enable client certificate authentication (TLS mutual authentication); otherwise, <code>false</code>. Default is <code>false</code>.",
               "type": "boolean"
             },
+            "clientCertExclusionPaths": {
+              "description": "client certificate authentication comma-separated exclusion paths",
+              "type": "string"
+            },
             "hostNamesDisabled": {
               "description": "<code>true</code> to disable the public hostnames of the app; otherwise, <code>false</code>.\n If <code>true</code>, the app is only accessible via API management process.",
               "type": "boolean"
@@ -1913,13 +2152,6 @@
                 "create"
               ]
             },
-            "snapshotInfo": {
-              "$ref": "#/definitions/SnapshotRecoveryRequest",
-              "description": "If specified during app creation, the app is created from a previous snapshot.",
-              "x-ms-mutability": [
-                "create"
-              ]
-            },
             "resourceGroup": {
               "description": "Name of the resource group the app belongs to. Read-only.",
               "type": "string",
@@ -1943,6 +2175,35 @@
             "httpsOnly": {
               "description": "HttpsOnly: configures a web site to accept only https requests. Issues redirect for\nhttp requests",
               "type": "boolean"
+            },
+            "redundancyMode": {
+              "description": "Site redundancy mode",
+              "enum": [
+                "None",
+                "Manual",
+                "Failover",
+                "ActiveActive",
+                "GeoRedundant"
+              ],
+              "type": "string",
+              "x-ms-enum": {
+                "name": "RedundancyMode",
+                "modelAsString": false
+              }
+            },
+            "inProgressOperationId": {
+              "format": "uuid",
+              "description": "Specifies an operation id if this site has a pending operation.",
+              "type": "string",
+              "readOnly": true,
+              "example": "00000000-0000-0000-0000-000000000000"
+            },
+            "geoDistributions": {
+              "description": "GeoDistributions for this site",
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/GeoDistribution"
+              }
             }
           },
           "x-ms-client-flatten": true
@@ -1989,7 +2250,7 @@
           "description": "Linux App Framework and version",
           "type": "string"
         },
-        "xenonFxVersion": {
+        "windowsFxVersion": {
           "description": "Xenon App Framework and version",
           "type": "string"
         },
@@ -2032,6 +2293,13 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/NameValuePair"
+          }
+        },
+        "azureStorageAccounts": {
+          "description": "User-provided Azure storage accounts.",
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/AzureStorageInfoValue"
           }
         },
         "connectionStrings": {
@@ -2144,7 +2412,7 @@
         },
         "experiments": {
           "$ref": "#/definitions/Experiments",
-          "description": "This is work around for polymophic types."
+          "description": "This is work around for polymorphic types."
         },
         "limits": {
           "$ref": "#/definitions/SiteLimits",
@@ -2202,11 +2470,22 @@
           "type": "integer"
         },
         "ipSecurityRestrictions": {
-          "description": "IP security restrictions.",
+          "description": "IP security restrictions for main.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/IpSecurityRestriction"
           }
+        },
+        "scmIpSecurityRestrictions": {
+          "description": "IP security restrictions for scm.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/IpSecurityRestriction"
+          }
+        },
+        "scmIpSecurityRestrictionsUseMain": {
+          "description": "IP security restrictions for scm to use main.",
+          "type": "boolean"
         },
         "http20Enabled": {
           "description": "Http20Enabled: configures a web site to allow clients to connect over http2.0",
@@ -2238,6 +2517,13 @@
             "name": "FtpsState",
             "modelAsString": true
           }
+        },
+        "reservedInstanceCount": {
+          "format": "int32",
+          "description": "Number of reserved instances.\nThis setting only applies to the Consumption Plan",
+          "maximum": 10,
+          "minimum": 0,
+          "type": "integer"
         }
       }
     },
@@ -2355,7 +2641,7 @@
       }
     },
     "SlotSwapStatus": {
-      "description": "The status of the last successfull slot swap operation.",
+      "description": "The status of the last successful slot swap operation.",
       "type": "object",
       "properties": {
         "timestampUtc": {
@@ -2395,8 +2681,8 @@
         }
       }
     },
-    "SnapshotRecoveryRequest": {
-      "description": "Details about app recovery operation.",
+    "Snapshot": {
+      "description": "A snapshot of an app.",
       "type": "object",
       "allOf": [
         {
@@ -2405,47 +2691,15 @@
       ],
       "properties": {
         "properties": {
-          "description": "SnapshotRecoveryRequest resource specific properties",
-          "required": [
-            "overwrite"
-          ],
+          "description": "Snapshot resource specific properties",
           "properties": {
-            "snapshotTime": {
-              "description": "Point in time in which the app recovery should be attempted, formatted as a DateTime string.",
-              "type": "string"
-            },
-            "recoveryTarget": {
-              "$ref": "#/definitions/SnapshotRecoveryTarget",
-              "description": "Specifies the web app that snapshot contents will be written to."
-            },
-            "overwrite": {
-              "description": "If <code>true</code> the recovery operation can overwrite source app; otherwise, <code>false</code>.",
-              "type": "boolean"
-            },
-            "recoverConfiguration": {
-              "description": "If true, site configuration, in addition to content, will be reverted.",
-              "type": "boolean"
-            },
-            "ignoreConflictingHostNames": {
-              "description": "If true, custom hostname conflicts will be ignored when recovering to a target web app.\nThis setting is only necessary when RecoverConfiguration is enabled.",
-              "type": "boolean"
+            "time": {
+              "description": "The time the snapshot was taken.",
+              "type": "string",
+              "readOnly": true
             }
           },
           "x-ms-client-flatten": true
-        }
-      }
-    },
-    "SnapshotRecoveryTarget": {
-      "description": "Specifies the web app that snapshot contents will be written to.",
-      "type": "object",
-      "properties": {
-        "location": {
-          "description": "Geographical location of the target web app, e.g. SouthEastAsia, SouthCentralUS",
-          "type": "string"
-        },
-        "id": {
-          "description": "ARM resource ID of the target app. \n/subscriptions/{subId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{siteName} for production slots and \n/subscriptions/{subId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{siteName}/slots/{slotName} for other slots.",
-          "type": "string"
         }
       }
     },
@@ -2555,7 +2809,7 @@
       }
     },
     "User": {
-      "description": "User crendentials used for publishing activity.",
+      "description": "User credentials used for publishing activity.",
       "type": "object",
       "allOf": [
         {
@@ -2742,7 +2996,6 @@
               "readOnly": true
             },
             "certBlob": {
-              "format": "byte",
               "description": "A certificate file (.cer) blob containing the public key of the private key used to authenticate a \nPoint-To-Site VPN connection.",
               "type": "string"
             },
@@ -2762,6 +3015,10 @@
             "dnsServers": {
               "description": "DNS servers to be used by this Virtual Network. This should be a comma-separated list of IP addresses.",
               "type": "string"
+            },
+            "isSwift": {
+              "description": "Flag that is used to denote if this is VNET injection",
+              "type": "boolean"
             }
           },
           "x-ms-client-flatten": true

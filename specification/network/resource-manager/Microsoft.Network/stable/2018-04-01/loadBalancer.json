@@ -57,10 +57,10 @@
             "description": "The name of the load balancer."
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -75,7 +75,9 @@
           }
         },
         "x-ms-examples": {
-          "Delete load balancer": { "$ref": "./examples/LoadBalancerDelete.json" }
+          "Delete load balancer": {
+            "$ref": "./examples/LoadBalancerDelete.json"
+          }
         },
         "x-ms-long-running-operation": true
       },
@@ -101,10 +103,10 @@
             "description": "The name of the load balancer."
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
           },
           {
             "name": "$expand",
@@ -123,7 +125,9 @@
           }
         },
         "x-ms-examples": {
-          "Get load balancer": { "$ref": "./examples/LoadBalancerGet.json" }
+          "Get load balancer": {
+            "$ref": "./examples/LoadBalancerGet.json"
+          }
         }
       },
       "put": {
@@ -157,10 +161,10 @@
             "description": "Parameters supplied to the create or update load balancer operation."
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -178,8 +182,18 @@
           }
         },
         "x-ms-examples": {
-          "Create load balancer": { "$ref": "./examples/LoadBalancerCreate.json" },
-          "Create load balancer with inbound nat pool": { "$ref": "./examples/LoadBalancerCreateWithInboundNatPool.json" }
+          "Create load balancer": {
+            "$ref": "./examples/LoadBalancerCreate.json"
+          },
+          "Create load balancer with Standard SKU": {
+            "$ref": "./examples/LoadBalancerCreateStandardSku.json"
+          },
+          "Create load balancer with Frontend IP in Zone 1": {
+            "$ref": "./examples/LoadBalancerCreateWithZones.json"
+          },
+          "Create load balancer with inbound nat pool": {
+            "$ref": "./examples/LoadBalancerCreateWithInboundNatPool.json"
+          }
         },
         "x-ms-long-running-operation": true
       },
@@ -214,10 +228,10 @@
             "description": "Parameters supplied to update load balancer tags."
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -229,7 +243,9 @@
           }
         },
         "x-ms-examples": {
-          "Update load balancer tags": { "$ref": "./examples/LoadBalancerUpdateTags.json" }
+          "Update load balancer tags": {
+            "$ref": "./examples/LoadBalancerUpdateTags.json"
+          }
         },
         "x-ms-long-running-operation": true
       }
@@ -243,10 +259,10 @@
         "description": "Gets all the load balancers in a subscription.",
         "parameters": [
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -258,7 +274,9 @@
           }
         },
         "x-ms-examples": {
-          "List all load balancers": { "$ref": "./examples/LoadBalancerListAll.json" }
+          "List all load balancers": {
+            "$ref": "./examples/LoadBalancerListAll.json"
+          }
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
@@ -281,10 +299,10 @@
             "description": "The name of the resource group."
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -296,7 +314,9 @@
           }
         },
         "x-ms-examples": {
-          "List load balancers in resource group": { "$ref": "./examples/LoadBalancerList.json" }
+          "List load balancers in resource group": {
+            "$ref": "./examples/LoadBalancerList.json"
+          }
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
@@ -326,10 +346,10 @@
             "description": "The name of the load balancer."
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -341,7 +361,9 @@
           }
         },
         "x-ms-examples": {
-          "LoadBalancerBackendAddressPoolList": { "$ref": "./examples/LoadBalancerBackendAddressPoolList.json" }
+          "LoadBalancerBackendAddressPoolList": {
+            "$ref": "./examples/LoadBalancerBackendAddressPoolList.json"
+          }
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
@@ -378,10 +400,10 @@
             "description": "The name of the backend address pool."
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -393,7 +415,9 @@
           }
         },
         "x-ms-examples": {
-          "LoadBalancerBackendAddressPoolGet": { "$ref": "./examples/LoadBalancerBackendAddressPoolGet.json" }
+          "LoadBalancerBackendAddressPoolGet": {
+            "$ref": "./examples/LoadBalancerBackendAddressPoolGet.json"
+          }
         }
       }
     },
@@ -420,10 +444,10 @@
             "description": "The name of the load balancer."
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -435,7 +459,9 @@
           }
         },
         "x-ms-examples": {
-          "LoadBalancerFrontendIPConfigurationList": { "$ref": "./examples/LoadBalancerFrontendIPConfigurationList.json" }
+          "LoadBalancerFrontendIPConfigurationList": {
+            "$ref": "./examples/LoadBalancerFrontendIPConfigurationList.json"
+          }
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
@@ -472,10 +498,10 @@
             "description": "The name of the frontend IP configuration."
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -487,7 +513,9 @@
           }
         },
         "x-ms-examples": {
-          "LoadBalancerFrontendIPConfigurationGet": { "$ref": "./examples/LoadBalancerFrontendIPConfigurationGet.json" }
+          "LoadBalancerFrontendIPConfigurationGet": {
+            "$ref": "./examples/LoadBalancerFrontendIPConfigurationGet.json"
+          }
         }
       }
     },
@@ -514,10 +542,10 @@
             "description": "The name of the load balancer."
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -532,7 +560,9 @@
           "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
-          "InboundNatRuleList": { "$ref": "./examples/InboundNatRuleList.json" }
+          "InboundNatRuleList": {
+            "$ref": "./examples/InboundNatRuleList.json"
+          }
         }
       }
     },
@@ -566,10 +596,10 @@
             "description": "The name of the inbound nat rule."
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -584,7 +614,9 @@
           }
         },
         "x-ms-examples": {
-          "InboundNatRuleDelete": { "$ref": "./examples/InboundNatRuleDelete.json" }
+          "InboundNatRuleDelete": {
+            "$ref": "./examples/InboundNatRuleDelete.json"
+          }
         },
         "x-ms-long-running-operation": true
       },
@@ -617,10 +649,10 @@
             "description": "The name of the inbound nat rule."
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
           },
           {
             "name": "$expand",
@@ -639,7 +671,9 @@
           }
         },
         "x-ms-examples": {
-          "InboundNatRuleGet": { "$ref": "./examples/InboundNatRuleGet.json" }
+          "InboundNatRuleGet": {
+            "$ref": "./examples/InboundNatRuleGet.json"
+          }
         }
       },
       "put": {
@@ -680,10 +714,10 @@
             "description": "Parameters supplied to the create or update inbound nat rule operation."
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -702,7 +736,9 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
-          "InboundNatRuleCreate": { "$ref": "./examples/InboundNatRuleCreate.json" }
+          "InboundNatRuleCreate": {
+            "$ref": "./examples/InboundNatRuleCreate.json"
+          }
         }
       }
     },
@@ -729,10 +765,10 @@
             "description": "The name of the load balancer."
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -747,7 +783,9 @@
           "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
-          "LoadBalancerLoadBalancingRuleList": { "$ref": "./examples/LoadBalancerLoadBalancingRuleList.json" }
+          "LoadBalancerLoadBalancingRuleList": {
+            "$ref": "./examples/LoadBalancerLoadBalancingRuleList.json"
+          }
         }
       }
     },
@@ -781,10 +819,10 @@
             "description": "The name of the load balancing rule."
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -796,7 +834,9 @@
           }
         },
         "x-ms-examples": {
-          "LoadBalancerLoadBalancingRuleGet": { "$ref": "./examples/LoadBalancerLoadBalancingRuleGet.json" }
+          "LoadBalancerLoadBalancingRuleGet": {
+            "$ref": "./examples/LoadBalancerLoadBalancingRuleGet.json"
+          }
         }
       }
     },
@@ -823,10 +863,10 @@
             "description": "The name of the load balancer."
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -838,8 +878,12 @@
           }
         },
         "x-ms-examples": {
-          "LoadBalancerNetworkInterfaceListVmss": { "$ref": "./examples/LoadBalancerNetworkInterfaceListVmss.json" },
-          "LoadBalancerNetworkInterfaceListSimple": { "$ref": "./examples/LoadBalancerNetworkInterfaceListSimple.json" }
+          "LoadBalancerNetworkInterfaceListVmss": {
+            "$ref": "./examples/LoadBalancerNetworkInterfaceListVmss.json"
+          },
+          "LoadBalancerNetworkInterfaceListSimple": {
+            "$ref": "./examples/LoadBalancerNetworkInterfaceListSimple.json"
+          }
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
@@ -869,10 +913,10 @@
             "description": "The name of the load balancer."
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -884,7 +928,9 @@
           }
         },
         "x-ms-examples": {
-          "LoadBalancerProbeList": { "$ref": "./examples/LoadBalancerProbeList.json" }
+          "LoadBalancerProbeList": {
+            "$ref": "./examples/LoadBalancerProbeList.json"
+          }
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
@@ -921,10 +967,10 @@
             "description": "The name of the probe."
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -936,7 +982,9 @@
           }
         },
         "x-ms-examples": {
-          "LoadBalancerProbeGet": { "$ref": "./examples/LoadBalancerProbeGet.json" }
+          "LoadBalancerProbeGet": {
+            "$ref": "./examples/LoadBalancerProbeGet.json"
+          }
         }
       }
     }
@@ -1159,7 +1207,7 @@
         "disableOutboundSnat": {
           "type": "boolean",
           "description": "Configures SNAT for the VMs in the backend pool to use the publicIP address specified in the frontend of the load balancing rule."
-         },
+        },
         "provisioningState": {
           "type": "string",
           "description": "Gets the provisioning state of the PublicIP resource. Possible values are: 'Updating', 'Deleting', and 'Failed'."
@@ -1206,10 +1254,11 @@
         },
         "protocol": {
           "type": "string",
-          "description": "The protocol of the end point. Possible values are: 'Http' or 'Tcp'. If 'Tcp' is specified, a received ACK is required for the probe to be successful. If 'Http' is specified, a 200 OK response from the specifies URI is required for the probe to be successful.",
+          "description": "The protocol of the end point. Possible values are: 'Http', 'Tcp', or 'Https'. If 'Tcp' is specified, a received ACK is required for the probe to be successful. If 'Http' or 'Https' is specified, a 200 OK response from the specifies URI is required for the probe to be successful.",
           "enum": [
             "Http",
-            "Tcp"
+            "Tcp",
+            "Https"
           ],
           "x-ms-enum": {
             "name": "ProbeProtocol",
@@ -1651,22 +1700,6 @@
         "name": "TransportProtocol",
         "modelAsString": true
       }
-    }
-  },
-  "parameters": {
-    "SubscriptionIdParameter": {
-      "name": "subscriptionId",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "The subscription credentials which uniquely identify the Microsoft Azure subscription. The subscription ID forms part of the URI for every service call."
-    },
-    "ApiVersionParameter": {
-      "name": "api-version",
-      "in": "query",
-      "required": true,
-      "type": "string",
-      "description": "Client API version."
     }
   }
 }

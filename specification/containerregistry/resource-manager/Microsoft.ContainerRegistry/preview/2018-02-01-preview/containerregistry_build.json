@@ -1251,12 +1251,9 @@
           "description": "The time the build finished.",
           "type": "string"
         },
-        "outputImageNames": {
-          "description": "The list of all images that were generated from the build.",
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
+        "outputImageManifests": {
+          "description": "The list of comma-separated image manifests that were generated from the build.",
+          "type": "string"
         },
         "isArchiveEnabled": {
           "description": "The value that indicates whether archiving is enabled or not.",
@@ -1564,7 +1561,7 @@
           }
         },
         "repositoryUrl": {
-          "description": "The full URL to the source code respository",
+          "description": "The full URL to the source code repository",
           "type": "string"
         },
         "isCommitTriggerEnabled": {
@@ -1994,7 +1991,7 @@
           }
         },
         "sourceLocation": {
-          "description": "The URL(absolute or relative) of the source that needs to be built. For Docker build, it can be an URL to a tar or github repoistory as supported by Docker.\r\nIf it is relative URL, the relative path should be obtained from calling getSourceUploadUrl API.",
+          "description": "The URL(absolute or relative) of the source that needs to be built. For Docker build, it can be an URL to a tar or github repository as supported by Docker.\r\nIf it is relative URL, the relative path should be obtained from calling getSourceUploadUrl API.",
           "type": "string"
         },
         "buildArguments": {

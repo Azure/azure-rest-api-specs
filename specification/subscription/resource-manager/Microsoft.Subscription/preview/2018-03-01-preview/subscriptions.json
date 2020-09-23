@@ -16,36 +16,6 @@
     "application/json"
   ],
   "paths": {
-    "/providers/Microsoft.Subscription/operations": {
-      "get": {
-        "description": "Lists all of the available Microsoft.Subscription API operations.",
-        "operationId": "Operations_List",
-        "x-ms-examples": {
-          "getOperations": {
-            "$ref": "./examples/getOperations.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK. The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/OperationListResult"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        }
-      }
-    },
     "/providers/Microsoft.Subscription/subscriptionOperations": {
       "get": {
         "description": "Lists all of the available pending Microsoft.Subscription API operations.",
@@ -142,7 +112,7 @@
       "description": "The created subscription object.",
       "properties": {
         "subscriptionLink": {
-          "description": "The link to the new subscription.",
+          "description": "The link to the new subscription. Use this link to check the status of subscription creation operation.",
           "type": "string"
         }
       }
@@ -173,10 +143,10 @@
             "MS-AZR-0148P"
           ]
         },
-        "additionalParameters": {  
+        "additionalParameters": {
           "description": "Additional, untyped parameters to support custom subscription creation scenarios.",
           "type": "object",
-          "additionalProperties": {  
+          "additionalProperties": {
             "type": "object"
           }
         }
@@ -197,7 +167,7 @@
       }
     },
     "AdPrincipal": {
-      "description": "Active Directory Principal for subscription creation delegated permission",
+      "description": "Active Directory Principal who’ll get owner access on the new subscription.",
       "properties": {
         "objectId": {
           "description": "Object id of the Principal",
@@ -235,49 +205,6 @@
         "statusDetail": {
           "description": "Status Detail of the pending subscription",
           "type": "string"
-        }
-      }
-    },
-    "OperationListResult": {
-      "description": "Result of the request to list operations. It contains a list of operations and a URL link to get the next set of results.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Operation"
-          },
-          "description": "List of operations."
-        },
-        "nextLink": {
-          "type": "string",
-          "description": "URL to get the next set of operation list results if there are any."
-        }
-      }
-    },
-    "Operation": {
-      "description": "REST API operation",
-      "type": "object",
-      "properties": {
-        "name": {
-          "description": "Operation name: {provider}/{resource}/{operation}",
-          "type": "string"
-        },
-        "display": {
-          "description": "The object that represents the operation.",
-          "properties": {
-            "provider": {
-              "description": "Service provider: Microsoft.Subscription",
-              "type": "string"
-            },
-            "resource": {
-              "description": "Resource on which the operation is performed: Profile, endpoint, etc.",
-              "type": "string"
-            },
-            "operation": {
-              "description": "Operation type: Read, write, delete, etc.",
-              "type": "string"
-            }
-          }
         }
       }
     }

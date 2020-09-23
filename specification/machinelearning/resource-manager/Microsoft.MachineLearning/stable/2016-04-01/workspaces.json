@@ -176,7 +176,7 @@
           }
         ],
         "x-ms-examples": {
-          "WorkspaceDelere": {
+          "WorkspaceDelete": {
             "$ref": "./examples/DeleteWorkspace.json"
           }
         },
@@ -244,7 +244,7 @@
           }
         }
       }
-    }, 
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearning/workspaces/{workspaceName}/resyncStorageKeys": {
       "post": {
         "tags": [
@@ -446,7 +446,8 @@
       "type": "object",
       "description": "The properties of a machine learning workspace.",
       "required": [
-        "userStorageAccountId"
+        "userStorageAccountId",
+        "ownerEmail"
       ],
       "properties": {
         "userStorageAccountId": {

@@ -3,7 +3,7 @@
   "info": {
     "title": "AutomationManagement",
     "version": "2015-10-31",
-    "x-ms-code-generation-settings": {  
+    "x-ms-code-generation-settings": {
       "useDateTimeOffset": true
     }
   },
@@ -53,47 +53,38 @@
         },
         "parameters": [
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "pattern": "^[-\\w\\._]+$",
-            "description": "The resource group name."
+            "$ref": "../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "automationAccountName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "Automation account name."
+            "$ref": "../../common/v1/definitions.json#/parameters/AutomationAccountNameParameter"
           },
           {
             "name": "parameters",
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "./definitions.json#/definitions/AutomationAccountUpdateParameters"
+              "$ref": "#/definitions/AutomationAccountUpdateParameters"
             },
             "description": "Parameters supplied to the update automation account."
           },
           {
-            "$ref": "./definitions.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "./definitions.json#/parameters/ApiVersionParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "./definitions.json#/definitions/AutomationAccount"
+              "$ref": "#/definitions/AutomationAccount"
             }
           },
           "default": {
             "description": "Automation error response describing why the operation failed.",
             "schema": {
-              "$ref": "./definitions.json#/definitions/ErrorResponse"
+              "$ref": "../../common/v1/definitions.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -114,53 +105,44 @@
         },
         "parameters": [
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "pattern": "^[-\\w\\._]+$",
-            "description": "The resource group name."
+            "$ref": "../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "automationAccountName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "Parameters supplied to the create or update automation account."
+            "$ref": "../../common/v1/definitions.json#/parameters/AutomationAccountNameParameter"
           },
           {
             "name": "parameters",
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "./definitions.json#/definitions/AutomationAccountCreateOrUpdateParameters"
+              "$ref": "#/definitions/AutomationAccountCreateOrUpdateParameters"
             },
             "description": "Parameters supplied to the create or update automation account."
           },
           {
-            "$ref": "./definitions.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "./definitions.json#/parameters/ApiVersionParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
           "201": {
             "description": "Created",
             "schema": {
-              "$ref": "./definitions.json#/definitions/AutomationAccount"
+              "$ref": "#/definitions/AutomationAccount"
             }
           },
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "./definitions.json#/definitions/AutomationAccount"
+              "$ref": "#/definitions/AutomationAccount"
             }
           },
           "default": {
             "description": "Automation error response describing why the operation failed.",
             "schema": {
-              "$ref": "./definitions.json#/definitions/ErrorResponse"
+              "$ref": "../../common/v1/definitions.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -181,25 +163,16 @@
         },
         "parameters": [
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "pattern": "^[-\\w\\._]+$",
-            "description": "The resource group name."
+            "$ref": "../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "automationAccountName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "Automation account name."
+            "$ref": "../../common/v1/definitions.json#/parameters/AutomationAccountNameParameter"
           },
           {
-            "$ref": "./definitions.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "./definitions.json#/parameters/ApiVersionParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -212,7 +185,7 @@
           "default": {
             "description": "Automation error response describing why the operation failed.",
             "schema": {
-              "$ref": "./definitions.json#/definitions/ErrorResponse"
+              "$ref": "../../common/v1/definitions.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -233,38 +206,29 @@
         },
         "parameters": [
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "pattern": "^[-\\w\\._]+$",
-            "description": "The resource group name."
+            "$ref": "../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "automationAccountName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The automation account name."
+            "$ref": "../../common/v1/definitions.json#/parameters/AutomationAccountNameParameter"
           },
           {
-            "$ref": "./definitions.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "./definitions.json#/parameters/ApiVersionParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "./definitions.json#/definitions/AutomationAccount"
+              "$ref": "#/definitions/AutomationAccount"
             }
           },
           "default": {
             "description": "Automation error response describing why the operation failed.",
             "schema": {
-              "$ref": "./definitions.json#/definitions/ErrorResponse"
+              "$ref": "../../common/v1/definitions.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -287,31 +251,26 @@
         },
         "parameters": [
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "pattern": "^[-\\w\\._]+$",
-            "description": "The resource group name."
+            "$ref": "../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "./definitions.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "./definitions.json#/parameters/ApiVersionParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "./definitions.json#/definitions/AutomationAccountListResult"
+              "$ref": "#/definitions/AutomationAccountListResult"
             }
           },
           "default": {
             "description": "Automation error response describing why the operation failed.",
             "schema": {
-              "$ref": "./definitions.json#/definitions/ErrorResponse"
+              "$ref": "../../common/v1/definitions.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -329,20 +288,20 @@
         "operationId": "Operations_List",
         "parameters": [
           {
-            "$ref": "./definitions.json#/parameters/ApiVersionParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "./definitions.json#/definitions/OperationListResult"
+              "$ref": "#/definitions/OperationListResult"
             }
           },
           "default": {
             "description": "Automation error response describing why the operation failed.",
             "schema": {
-              "$ref": "./definitions.json#/definitions/ErrorResponse"
+              "$ref": "../../common/v1/definitions.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -366,23 +325,23 @@
         },
         "parameters": [
           {
-            "$ref": "./definitions.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "./definitions.json#/parameters/ApiVersionParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "./definitions.json#/definitions/AutomationAccountListResult"
+              "$ref": "#/definitions/AutomationAccountListResult"
             }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "./definitions.json#/definitions/ErrorResponse"
+              "$ref": "../../common/v1/definitions.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -408,19 +367,10 @@
         },
         "parameters": [
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "pattern": "^[-\\w\\._]+$",
-            "description": "The resource group name."
+            "$ref": "../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "automationAccountName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The automation account name."
+            "$ref": "../../common/v1/definitions.json#/parameters/AutomationAccountNameParameter"
           },
           {
             "name": "$filter",
@@ -430,23 +380,23 @@
             "description": "The filter to apply on the operation."
           },
           {
-            "$ref": "./definitions.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "./definitions.json#/parameters/ApiVersionParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "./definitions.json#/definitions/StatisticsListResult"
+              "$ref": "#/definitions/StatisticsListResult"
             }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "./definitions.json#/definitions/ErrorResponse"
+              "$ref": "../../common/v1/definitions.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -472,38 +422,29 @@
         },
         "parameters": [
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "pattern": "^[-\\w\\._]+$",
-            "description": "The resource group name."
+            "$ref": "../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "automationAccountName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The automation account name."
+            "$ref": "../../common/v1/definitions.json#/parameters/AutomationAccountNameParameter"
           },
           {
-            "$ref": "./definitions.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "./definitions.json#/parameters/ApiVersionParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "./definitions.json#/definitions/UsageListResult"
+              "$ref": "#/definitions/UsageListResult"
             }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "./definitions.json#/definitions/ErrorResponse"
+              "$ref": "../../common/v1/definitions.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -520,48 +461,408 @@
         "operationId": "Keys_ListByAutomationAccount",
         "description": "Retrieve the automation keys for an account.",
         "x-ms-examples": {
-          "Get usages of an automation account": {
+          "Get lists of an automation account": {
             "$ref": "./examples/listAutomationAccountKeys.json"
           }
         },
         "parameters": [
           {
-            "$ref": "./definitions.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "automationAccountName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The automation account name."
+            "$ref": "../../common/v1/definitions.json#/parameters/AutomationAccountNameParameter"
           },
           {
-            "$ref": "./definitions.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "./definitions.json#/parameters/ApiVersionParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "./definitions.json#/definitions/KeyListResult"
+              "$ref": "#/definitions/KeyListResult"
             }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "./definitions.json#/definitions/ErrorResponse"
+              "$ref": "../../common/v1/definitions.json#/definitions/ErrorResponse"
             }
           }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": null
         }
       }
     }
   },
-  "definitions": {},
+  "definitions": {
+    "AutomationAccount": {
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/AutomationAccountProperties",
+          "x-ms-client-flatten": true,
+          "description": "Gets or sets the automation account properties."
+        },
+        "etag": {
+          "type": "string",
+          "description": "Gets or sets the etag of the resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../common/v1/definitions.json#/definitions/TrackedResource"
+        }
+      ],
+      "description": "Definition of the automation account type."
+    },
+    "AutomationAccountProperties": {
+      "properties": {
+        "sku": {
+          "$ref": "#/definitions/Sku",
+          "description": "Gets or sets the SKU of account."
+        },
+        "lastModifiedBy": {
+          "type": "string",
+          "description": "Gets or sets the last modified by."
+        },
+        "state": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Gets status of account.",
+          "enum": [
+            "Ok",
+            "Unavailable",
+            "Suspended"
+          ],
+          "x-ms-enum": {
+            "name": "AutomationAccountState",
+            "modelAsString": true
+          }
+        },
+        "creationTime": {
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true,
+          "description": "Gets the creation time.",
+          "x-nullable": false
+        },
+        "lastModifiedTime": {
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true,
+          "description": "Gets the last modified time.",
+          "x-nullable": false
+        },
+        "description": {
+          "type": "string",
+          "description": "Gets or sets the description."
+        }
+      },
+      "description": "Definition of the account property."
+    },
+    "Sku": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Gets or sets the SKU name of the account.",
+          "enum": [
+            "Free",
+            "Basic"
+          ],
+          "x-ms-enum": {
+            "name": "SkuNameEnum",
+            "modelAsString": true
+          }
+        },
+        "family": {
+          "type": "string",
+          "description": "Gets or sets the SKU family."
+        },
+        "capacity": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Gets or sets the SKU capacity."
+        }
+      },
+      "required": [
+        "name"
+      ],
+      "description": "The account SKU."
+    },
+    "AutomationAccountCreateOrUpdateParameters": {
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/AutomationAccountCreateOrUpdateProperties",
+          "x-ms-client-flatten": true,
+          "description": "Gets or sets account create or update properties."
+        },
+        "name": {
+          "type": "string",
+          "description": "Gets or sets name of the resource."
+        },
+        "location": {
+          "type": "string",
+          "description": "Gets or sets the location of the resource."
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Gets or sets the tags attached to the resource."
+        }
+      },
+      "description": "The parameters supplied to the create or update automation account operation."
+    },
+    "AutomationAccountCreateOrUpdateProperties": {
+      "properties": {
+        "sku": {
+          "$ref": "#/definitions/Sku",
+          "description": "Gets or sets account SKU."
+        }
+      },
+      "description": "The parameters supplied to the create or update account properties."
+    },
+    "AutomationAccountListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AutomationAccount"
+          },
+          "description": "Gets or sets list of accounts."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Gets or sets the next link."
+        }
+      },
+      "description": "The response model for the list account operation."
+    },
+    "OperationListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Operation"
+          },
+          "description": "List of Automation operations supported by the Automation resource provider."
+        }
+      },
+      "description": "The response model for the list of Automation operations"
+    },
+    "Operation": {
+      "description": "Automation REST API operation",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Operation name: {provider}/{resource}/{operation}",
+          "type": "string"
+        },
+        "display": {
+          "properties": {
+            "provider": {
+              "description": "Service provider: Microsoft.Automation",
+              "type": "string"
+            },
+            "resource": {
+              "description": "Resource on which the operation is performed: Runbooks, Jobs etc.",
+              "type": "string"
+            },
+            "operation": {
+              "description": "Operation type: Read, write, delete, etc.",
+              "type": "string"
+            }
+          },
+          "description": "Provider, Resource and Operation values"
+        }
+      }
+    },
+    "Statistics": {
+      "properties": {
+        "counterProperty": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Gets the property value of the statistic."
+        },
+        "counterValue": {
+          "type": "integer",
+          "format": "int64",
+          "readOnly": true,
+          "description": "Gets the value of the statistic."
+        },
+        "startTime": {
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true,
+          "description": "Gets the startTime of the statistic.",
+          "x-nullable": false
+        },
+        "endTime": {
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true,
+          "description": "Gets the endTime of the statistic.",
+          "x-nullable": true
+        },
+        "id": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Gets the id."
+        }
+      },
+      "description": "Definition of the statistic."
+    },
+    "StatisticsListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Statistics"
+          },
+          "description": "Gets or sets a list of statistics."
+        }
+      },
+      "description": "The response model for the list statistics operation."
+    },
+    "Usage": {
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Gets or sets the id of the resource."
+        },
+        "name": {
+          "$ref": "#/definitions/UsageCounterName",
+          "description": "Gets or sets the usage counter name."
+        },
+        "unit": {
+          "type": "string",
+          "description": "Gets or sets the usage unit name."
+        },
+        "currentValue": {
+          "type": "number",
+          "format": "double",
+          "description": "Gets or sets the current usage value."
+        },
+        "limit": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Gets or sets max limit. -1 for unlimited"
+        },
+        "throttleStatus": {
+          "type": "string",
+          "description": "Gets or sets the throttle status."
+        }
+      },
+      "description": "Definition of Usage."
+    },
+    "UsageCounterName": {
+      "properties": {
+        "value": {
+          "type": "string",
+          "description": "Gets or sets the usage counter name."
+        },
+        "localizedValue": {
+          "type": "string",
+          "description": "Gets or sets the localized usage counter name."
+        }
+      },
+      "description": "Definition of usage counter name."
+    },
+    "UsageListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Usage"
+          },
+          "description": "Gets or sets usage."
+        }
+      },
+      "description": "The response model for the get usage operation."
+    },
+    "Key": {
+      "properties": {
+        "KeyName": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Automation key name.",
+          "enum": [
+            "Primary",
+            "Secondary"
+          ],
+          "x-ms-enum": {
+            "name": "AutomationKeyName",
+            "modelAsString": true
+          }
+        },
+        "Permissions": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Automation key permissions.",
+          "enum": [
+            "Read",
+            "Full"
+          ],
+          "x-ms-enum": {
+            "name": "AutomationKeyPermissions",
+            "modelAsString": true
+          }
+        },
+        "Value": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Value of the Automation Key used for registration."
+        }
+      },
+      "description": "Automation key which is used to register a DSC Node"
+    },
+    "KeyListResult": {
+      "properties": {
+        "keys": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Key"
+          },
+          "description": "Lists the automation keys."
+        }
+      }
+    },
+    "AutomationAccountUpdateProperties": {
+      "properties": {
+        "sku": {
+          "$ref": "#/definitions/Sku",
+          "description": "Gets or sets account SKU."
+        }
+      },
+      "description": "The parameters supplied to the update account properties."
+    },
+    "AutomationAccountUpdateParameters": {
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/AutomationAccountUpdateProperties",
+          "x-ms-client-flatten": true,
+          "description": "Gets or sets account update properties."
+        },
+        "name": {
+          "type": "string",
+          "description": "Gets or sets the name of the resource."
+        },
+        "location": {
+          "type": "string",
+          "description": "Gets or sets the location of the resource."
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Gets or sets the tags attached to the resource."
+        }
+      },
+      "description": "The parameters supplied to the update automation account operation."
+    }
+  },
   "parameters": {}
 }

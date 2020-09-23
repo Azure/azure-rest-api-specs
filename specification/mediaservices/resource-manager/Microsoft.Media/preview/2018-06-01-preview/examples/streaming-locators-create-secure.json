@@ -1,0 +1,62 @@
+{
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "contoso",
+    "accountName": "contosomedia",
+    "streamingLocatorName": "UserCreatedSecureStreamingLocator",
+    "api-version": "2018-06-01-preview",
+    "parameters": {
+      "properties": {
+        "streamingPolicyName": "secureStreamingPolicy",
+        "assetName": "ClimbingMountRainier",
+        "startTime": "2018-03-01T00:00:00Z",
+        "endTime": "2028-12-31T23:59:59.9999999Z"
+      }
+    }
+  },
+  "responses": {
+    "201": {
+      "body": {
+        "name": "UserCreatedSecureStreamingLocator",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/contoso/providers/Microsoft.Media/mediaservices/contosomedia/streamingLocators/UserCreatedSecureStreamingLocator",
+        "type": "Microsoft.Media/mediaservices/streamingLocators",
+        "properties": {
+          "assetName": "ClimbingMountRainier",
+          "created": "2018-05-31T21:08:50.3885741Z",
+          "startTime": "2018-03-01T00:00:00Z",
+          "endTime": "2028-12-31T23:59:59.9999999Z",
+          "streamingLocatorId": "436213ed-b205-4635-9218-faae77e95802",
+          "streamingPolicyName": "secureStreamingPolicy",
+          "defaultContentKeyPolicyName": null,
+          "contentKeys": [
+            {
+              "id": "453cf220-04c6-4996-9355-199630850c6c",
+              "type": "CommonEncryptionCbcs",
+              "label": "cbcsDefaultKey",
+              "value": null,
+              "policyName": null,
+              "tracks": []
+            },
+            {
+              "id": "a8e02c6e-442c-47f3-bf28-ce892ecbefdb",
+              "type": "CommonEncryptionCenc",
+              "label": "cencDefaultKey",
+              "value": null,
+              "policyName": null,
+              "tracks": []
+            },
+            {
+              "id": "cfff3213-8ced-443d-bf2e-888b5cf4c1d8",
+              "type": "EnvelopeEncryption",
+              "label": "aesDefaultKey",
+              "value": null,
+              "policyName": null,
+              "tracks": []
+            }
+          ],
+          "alternativeMediaId": null
+        }
+      }
+    }
+  }
+}

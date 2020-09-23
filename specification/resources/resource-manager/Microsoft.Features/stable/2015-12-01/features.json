@@ -36,6 +36,36 @@
     }
   },
   "paths": {
+    "/providers/Microsoft.Features/operations": {
+      "get": {
+        "tags": [
+          "Operations"
+        ],
+        "operationId": "ListOperations",
+        "description": "Lists all of the available Microsoft.Features REST API operations.",
+        "x-ms-examples": {
+          "List Features operations": {
+            "$ref": "./examples/listFeaturesOperations.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/OperationListResult"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Features/features": {
       "get": {
         "tags": [
@@ -43,6 +73,11 @@
         ],
         "operationId": "Features_ListAll",
         "description": "Gets all the preview features that are available through AFEC for the subscription.",
+        "x-ms-examples": {
+          "List subscription Features": {
+            "$ref": "./examples/listSubscriptionFeatures.json"
+          }
+        },
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -71,6 +106,11 @@
         ],
         "operationId": "Features_List",
         "description": "Gets all the preview features in a provider namespace that are available through AFEC for the subscription.",
+        "x-ms-examples": {
+          "List provider Features": {
+            "$ref": "./examples/listProviderFeatures.json"
+          }
+        },
         "parameters": [
           {
             "name": "resourceProviderNamespace",
@@ -106,6 +146,11 @@
         ],
         "operationId": "Features_Get",
         "description": "Gets the preview feature with the specified name.",
+        "x-ms-examples": {
+          "Get feature": {
+            "$ref": "./examples/getFeature.json"
+          }
+        },
         "parameters": [
           {
             "name": "resourceProviderNamespace",
@@ -145,6 +190,11 @@
         ],
         "operationId": "Features_Register",
         "description": "Registers the preview feature for the subscription.",
+        "x-ms-examples": {
+          "Register feature": {
+            "$ref": "./examples/registerFeature.json"
+          }
+        },
         "parameters": [
           {
             "name": "resourceProviderNamespace",
@@ -169,7 +219,51 @@
         ],
         "responses": {
           "200": {
-            "description": "OK - Returns metadata about the registerd feature. The metadata includes the name of the feature, the registration state, the resource ID, and resource type.",
+            "description": "OK - Returns metadata about the registered feature. The metadata includes the name of the feature, the registration state, the resource ID, and resource type.",
+            "schema": {
+              "$ref": "#/definitions/FeatureResult"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Features/providers/{resourceProviderNamespace}/features/{featureName}/unregister": {
+      "post": {
+        "tags": [
+          "Features"
+        ],
+        "operationId": "Features_Unregister",
+        "description": "Unregisters the preview feature for the subscription.",
+        "x-ms-examples": {
+          "Register feature": {
+            "$ref": "./examples/unregisterFeature.json"
+          }
+        },
+        "parameters": [
+          {
+            "name": "resourceProviderNamespace",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The namespace of the resource provider."
+          },
+          {
+            "name": "featureName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the feature to unregister."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - Returns metadata about the unregistered feature. The metadata includes the name of the feature, the registration state, the resource ID, and resource type.",
             "schema": {
               "$ref": "#/definitions/FeatureResult"
             }
@@ -224,6 +318,49 @@
         }
       },
       "description": "List of previewed features."
+    },
+    "Operation": {
+      "description": "Microsoft.Features operation",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Operation name: {provider}/{resource}/{operation}",
+          "type": "string"
+        },
+        "display": {
+          "description": "The object that represents the operation.",
+          "properties": {
+            "provider": {
+              "description": "Service provider: Microsoft.Features",
+              "type": "string"
+            },
+            "resource": {
+              "description": "Resource on which the operation is performed: Profile, endpoint, etc.",
+              "type": "string"
+            },
+            "operation": {
+              "description": "Operation type: Read, write, delete, etc.",
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "OperationListResult": {
+      "description": "Result of the request to list Microsoft.Features operations. It contains a list of operations and a URL link to get the next set of results.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Operation"
+          },
+          "description": "List of Microsoft.Features operations."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "URL to get the next set of operation list results if there are any."
+        }
+      }
     }
   },
   "parameters": {

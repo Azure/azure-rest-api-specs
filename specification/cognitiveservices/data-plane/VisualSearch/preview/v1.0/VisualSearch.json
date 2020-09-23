@@ -1,8 +1,8 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "Visual Search API",
-    "description": "Visual Search API lets you discover insights about an image such as visually similar images, shopping sources, and related searches. The API can also perform text recognition, identify entities (people, places, things), return other topical content for the user to explore, and more. For more information, see [Visual Search Overview](https://docs.microsoft.com/azure/cognitive-services/bing-visual-search/overview).",
+    "title": "Visual Search Client",
+    "description": "Visual Search API lets you discover insights about an image such as visually similar images, shopping sources, and related searches. The API can also perform text recognition, identify entities (people, places, things), return other topical content for the user to explore, and more. For more information, see [Visual Search Overview](https://docs.microsoft.com/azure/cognitive-services/bing-visual-search/overview).  **NOTE:** To comply with the new EU Copyright Directive in France, the Bing Visual Search API must omit some content from certain EU News sources for French users. The removed content may include thumbnail images and videos, video previews, and snippets which accompany search results from these sources. As a consequence, the Bing APIs may serve fewer results with thumbnail images and videos, video previews, and snippets to French users.",
     "version": "1.0"
   },
   "parameters": {
@@ -22,11 +22,20 @@
       ]
     }
   },
+  "x-ms-parameterized-host": {
+    "hostTemplate": "{Endpoint}",
+    "useSchemePrefix": false,
+    "parameters": [
+      {
+        "$ref": "../../../Common/Parameters.json#/parameters/GlobalEndpoint"
+      }
+    ]
+  },
   "host": "api.cognitive.microsoft.com",
+  "basePath": "/bing/v7.0",
   "schemes": [
     "https"
   ],
-  "basePath": "/bing/v7.0",
   "produces": [
     "application/json"
   ],
@@ -118,6 +127,39 @@
             "type": "string"
           },
           {
+            "name": "mkt",
+            "x-ms-client-name": "Market",
+            "in": "query",
+            "description": "The market where the results come from. Typically, mkt is the country where the user is making the request from. However, it could be a different country if the user is not located in a country where Bing delivers results. The market must be in the form <language code>-<country code>. For example, en-US. The string is case insensitive. For a list of possible market values, see [Market Codes](https://docs.microsoft.com/en-us/azure/cognitive-services/bing-visual-search/supported-countries-markets). NOTE: If known, you are encouraged to always specify the market. Specifying the market helps Bing route the request and return an appropriate and optimal response. If you specify a market that is not listed in [Market Codes](https://docs.microsoft.com/en-us/azure/cognitive-services/bing-visual-search/supported-countries-markets), Bing uses a best fit market code based on an internal mapping that is subject to change.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "safeSearch",
+            "x-ms-client-name": "SafeSearch",
+            "in": "query",
+            "description": "Filter the image results in actions with type 'VisualSearch' for adult content. The following are the possible filter values. Off: May return images with adult content. Moderate: Do not return images with adult content. Strict: Do not return images with adult content. The default is Moderate. If the request comes from a market that Bing's adult policy requires that safeSearch is set to Strict, Bing ignores the safeSearch value and uses Strict. If you use the site: filter in the knowledge request, there is the chance that the response may contain adult content regardless of what the safeSearch query parameter is set to. Use site: only if you are aware of the content on the site and your scenario supports the possibility of adult content.",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "Off",
+              "Moderate",
+              "Strict"
+            ],
+            "x-ms-enum": {
+              "name": "SafeSearch",
+              "modelAsString": true
+            }
+          },
+          {
+            "name": "setLang",
+            "x-ms-client-name": "SetLang",
+            "in": "query",
+            "description": "The language to use for user interface strings. Specify the language using the ISO 639-1 2-letter language code. For example, the language code for English is EN. The default is EN (English). Although optional, you should always specify the language. Typically, you set setLang to the same language specified by mkt unless the user wants the user interface strings displayed in a different language. A user interface string is a string that's used as a label in a user interface. There are few user interface strings in the JSON response objects. Also, any links to Bing.com properties in the response objects apply the specified language.",
+            "required": false,
+            "type": "string"
+          },
+          {
             "name": "knowledgeRequest",
             "x-ms-client-name": "VisualSearchRequest",
             "in": "formData",
@@ -129,7 +171,7 @@
             "name": "image",
             "x-ms-client-name": "Image",
             "in": "formData",
-            "description": "The form data is an image binary. The Content-Disposition header's filename parameter must be set to \"image\". You must specify an image binary if you do not use knowledgeRequest form data to specify the image; you may not use both forms to specify an image. You may specify knowledgeRequest form data and image form data in the same request only if knowledgeRequest form data specifies the cropArea field only  (it must not include an insights token or URL).",
+            "description": "The form data is an image binary. The Content-Disposition header's name parameter must be set to \"image\". You must specify an image binary if you do not use knowledgeRequest form data to specify the image; you may not use both forms to specify an image. You may specify knowledgeRequest form data and image form data in the same request only if knowledgeRequest form data specifies the cropArea field only  (it must not include an insights token or URL).",
             "required": false,
             "type": "file"
           }
@@ -158,6 +200,7 @@
   },
   "definitions": {
     "ImageKnowledge": {
+      "description": "Defines a visual search API response.",
       "allOf": [
         {
           "$ref": "#/definitions/Response"
@@ -202,6 +245,7 @@
       }
     },
     "ImageTag": {
+      "description": "A visual search tag.",
       "allOf": [
         {
           "$ref": "#/definitions/Thing"
@@ -249,7 +293,7 @@
           "type": "string"
         },
         "insightsMetadata": {
-          "description": "A count of the number of websites where you can shop or perform other actions related to the image. For example, if the image is of an apple pie, this object includes a count of the number of websites where you can buy an apple pie. To indicate the number of offers in your UX, include badging such as a shopping cart icon that contains the count. When the user clicks on the icon, use imageInisghtsToken in a subsequent Visual Search API call to get the list of shopping websites.",
+          "description": "A count of the number of websites where you can shop or perform other actions related to the image. For example, if the image is of an apple pie, this object includes a count of the number of websites where you can buy an apple pie. To indicate the number of offers in your UX, include badging such as a shopping cart icon that contains the count. When the user clicks on the icon, use imageInsightsToken in a subsequent Visual Search API call to get the list of shopping websites.",
           "$ref": "#/definitions/ImagesImageMetadata",
           "readOnly": true
         },
@@ -264,7 +308,7 @@
           "type": "string"
         },
         "visualWords": {
-          "description": "For interal use only.",
+          "description": "For internal use only.",
           "readOnly": true,
           "type": "string"
         }
@@ -349,6 +393,7 @@
       }
     },
     "Action": {
+      "description": "Defines an action.",
       "allOf": [
         {
           "$ref": "#/definitions/CreativeWork"
@@ -382,6 +427,7 @@
       }
     },
     "ImageTagRegion": {
+      "description": "Defines an image region relevant to the ImageTag.",
       "type": "object",
       "required": [
         "queryRectangle",
@@ -399,17 +445,30 @@
       }
     },
     "ImageAction": {
+      "description": "Defines an image action.",
       "allOf": [
         {
           "$ref": "#/definitions/Action"
         }
       ],
       "type": "object",
+      "discriminator": "_type",
       "properties": {
         "actionType": {
           "description": "A string representing the type of action.",
           "readOnly": true,
           "type": "string"
+        },
+        "_type": {
+          "type": "string",
+          "description": "Specifies the sub-class of the action.",
+          "enum": [
+            "ImageEntityAction",
+            "ImageModuleAction",
+            "ImageRecipesAction",
+            "ImageRelatedSearchesAction",
+            "ImageShoppingSourcesAction"
+          ]
         }
       }
     },
@@ -438,7 +497,7 @@
           "type": "string"
         },
         "encodingFormat": {
-          "description": "Encoding format (e.g., mp3, mp4, jpeg, etc).",
+          "description": "Encoding format (e.g., png, gif, jpeg, etc).",
           "readOnly": true,
           "type": "string"
         },
@@ -895,27 +954,24 @@
       }
     },
     "ImageEntityAction": {
+      "description": "Defines an entity action.",
       "allOf": [
         {
           "$ref": "#/definitions/ImageAction"
         }
       ],
       "type": "object",
-      "properties": {
-        "data": {
-          "description": "Information about the entity.",
-          "$ref": "#/definitions/Thing",
-          "readOnly": true
-        }
-      }
+      "x-ms-discriminator-value": "ImageEntityAction"
     },
     "ImageModuleAction": {
+      "description": "Defines an image list action.",
       "allOf": [
         {
           "$ref": "#/definitions/ImageAction"
         }
       ],
       "type": "object",
+      "x-ms-discriminator-value": "ImageModuleAction",
       "properties": {
         "data": {
           "description": "A list of images.",
@@ -925,12 +981,14 @@
       }
     },
     "ImageRecipesAction": {
+      "description": "Defines an recipe action.",
       "allOf": [
         {
           "$ref": "#/definitions/ImageAction"
         }
       ],
       "type": "object",
+      "x-ms-discriminator-value": "ImageRecipesAction",
       "properties": {
         "data": {
           "description": "A list of recipes related to the image.",
@@ -940,12 +998,14 @@
       }
     },
     "ImageRelatedSearchesAction": {
+      "description": "Defines an related search action.",
       "allOf": [
         {
           "$ref": "#/definitions/ImageAction"
         }
       ],
       "type": "object",
+      "x-ms-discriminator-value": "ImageRelatedSearchesAction",
       "properties": {
         "data": {
           "description": "A list of queries related to the image.",
@@ -955,12 +1015,14 @@
       }
     },
     "ImageShoppingSourcesAction": {
+      "description": "Defines a shopping sources action.",
       "allOf": [
         {
           "$ref": "#/definitions/ImageAction"
         }
       ],
       "type": "object",
+      "x-ms-discriminator-value": "ImageShoppingSourcesAction",
       "properties": {
         "data": {
           "description": "A list of merchants that offer items related to the image.",
@@ -1092,6 +1154,7 @@
       }
     },
     "Point2D": {
+      "description": "Defines a 2D point with X and Y coordinates.",
       "allOf": [
         {
           "$ref": "#/definitions/StructuredValue"

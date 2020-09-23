@@ -272,6 +272,51 @@
         "x-ms-long-running-operation": true
       }
     },
+    "/providers/Microsoft.Management/managementGroups/{groupId}/descendants": {
+      "get": {
+        "tags": [
+          "ManagementGroups_Descendants"
+        ],
+        "operationId": "ManagementGroups_GetDescendants",
+        "description": "List all entities that descend from a management group.\n",
+        "parameters": [
+          {
+            "$ref": "#/parameters/GroupIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SkipTokenParameter"
+          },
+          {
+            "$ref": "#/parameters/TopParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/DescendantListResult"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "GetDescendants": {
+            "$ref": "./examples/GetDescendants.json"
+          }
+        }
+      }
+    },
     "/providers/Microsoft.Management/managementGroups/{groupId}/subscriptions/{subscriptionId}": {
       "put": {
         "tags": [
@@ -945,6 +990,76 @@
         }
       }
     },
+    "DescendantListResult": {
+      "description": "Describes the result of the request to view descendants.",
+      "properties": {
+        "value": {
+          "description": "The list of descendants.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DescendantInfo"
+          }
+        },
+        "nextLink": {
+          "description": "The URL to use for getting the next set of results.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "DescendantInfo": {
+      "description": "The descendant.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The fully qualified ID for the descendant.  For example, /providers/Microsoft.Management/managementGroups/0000000-0000-0000-0000-000000000000 or /subscriptions/0000000-0000-0000-0000-000000000000",
+          "readOnly": true,
+          "x-nullable": true
+        },
+        "type": {
+          "type": "string",
+          "description": "The type of the resource. For example, /providers/Microsoft.Management/managementGroups or /subscriptions",
+          "readOnly": true,
+          "x-nullable": true
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the descendant. For example, 00000000-0000-0000-0000-000000000000",
+          "readOnly": true
+        },
+        "properties": {
+          "title": "Properties",
+          "x-ms-client-flatten": true,
+          "x-nullable": true,
+          "$ref": "#/definitions/DescendantInfoProperties"
+        }
+      }
+    },
+    "DescendantInfoProperties": {
+      "description": "The generic properties of an descendant.",
+      "type": "object",
+      "properties": {
+        "displayName": {
+          "type": "string",
+          "description": "The friendly name of the management group.",
+          "x-nullable": true
+        },
+        "parent": {
+          "title": "Parent",
+          "$ref": "#/definitions/DescendantParentGroupInfo",
+          "x-nullable": true
+        }
+      }
+    },
+    "DescendantParentGroupInfo": {
+      "description": "The ID of the parent management group.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The fully qualified ID for the parent management group.  For example, /providers/Microsoft.Management/managementGroups/0000000-0000-0000-0000-000000000000"
+        }
+      }
+    },
     "EntityListResult": {
       "description": "Describes the result of the request to view entities.",
       "properties": {
@@ -954,6 +1069,11 @@
           "items": {
             "$ref": "#/definitions/EntityInfo"
           }
+        },
+        "count": {
+          "description": "Total count of records that match the filter",
+          "type": "integer",
+          "readOnly": true
         },
         "nextLink": {
           "description": "The URL to use for getting the next set of results.",
@@ -1021,6 +1141,18 @@
         },
         "numberOfDescendants": {
           "title": "Number of Descendants",
+          "type": "integer",
+          "x-nullable": true
+        },
+        "numberOfChildren": {
+          "title": "Number of Children",
+          "description": "Number of children is the number of Groups and Subscriptions that are exactly one level underneath the current Group.",
+          "type": "integer",
+          "x-nullable": true
+        },
+        "numberOfChildGroups": {
+          "title": "Number of Child Groups",
+          "description": "Number of child groups is the number of Groups that are exactly one level underneath the current Group.",
           "type": "integer",
           "x-nullable": true
         },
@@ -1387,7 +1519,7 @@
       "name": "$filter",
       "in": "query",
       "required": false,
-      "description": "The filter parameter allows you to filter on the the name or display name fields. You can check for equality on the name field (e.g. name eq '{entityName}')  and you can check for substrings on either the name or display name fields(e.g. contains(name, '{substringToSearch}'), contains(displayName, '{substringToSearch')). Note that the '{entityName}' and '{substringToSearch}' fields are checked case insensitively.",
+      "description": "The filter parameter allows you to filter on the name or display name fields. You can check for equality on the name field (e.g. name eq '{entityName}')  and you can check for substrings on either the name or display name fields(e.g. contains(name, '{substringToSearch}'), contains(displayName, '{substringToSearch')). Note that the '{entityName}' and '{substringToSearch}' fields are checked case insensitively.",
       "type": "string",
       "x-ms-parameter-location": "method"
     },
@@ -1407,7 +1539,9 @@
       "enum": [
         "AllowedParents",
         "AllowedChildren",
-        "ParentAndFirstLevelChildren"
+        "ParentAndFirstLevelChildren",
+        "ParentOnly",
+        "ChildrenOnly"
       ],
       "x-ms-parameter-location": "method",
       "description": "The $search parameter is used in conjunction with the $filter parameter to return three different outputs depending on the parameter passed in. With $search=AllowedParents the API will return the entity info of all groups that the requested entity will be able to reparent to as determined by the user's permissions. With $search=AllowedChildren the API will return the entity info of all entities that can be added as children of the requested entity. With $search=ParentAndFirstLevelChildren the API will return the parent and  first level of children that the user has either direct access to or indirect access via one of their descendants."

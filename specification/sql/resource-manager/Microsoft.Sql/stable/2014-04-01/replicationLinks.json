@@ -24,17 +24,19 @@
         "operationId": "ReplicationLinks_Delete",
         "description": "Deletes a database replication link. Cannot be done during failover.",
         "x-ms-examples": {
-          "Delete a replication link": { "$ref": "./examples/ReplicationLinkDelete.json" }
+          "Delete a replication link": {
+            "$ref": "./examples/ReplicationLinkDelete.json"
+          }
         },
         "parameters": [
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ResourceGroupParameter"
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
           },
           {
             "$ref": "#/parameters/ServerNameParameter"
@@ -70,17 +72,19 @@
         "operationId": "ReplicationLinks_Get",
         "description": "Gets a database replication link.",
         "x-ms-examples": {
-          "Get a replication link": { "$ref": "./examples/ReplicationLinkGet.json" }
+          "Get a replication link": {
+            "$ref": "./examples/ReplicationLinkGet.json"
+          }
         },
         "parameters": [
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ResourceGroupParameter"
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
           },
           {
             "$ref": "#/parameters/ServerNameParameter"
@@ -118,17 +122,19 @@
         "operationId": "ReplicationLinks_Failover",
         "description": "Sets which replica database is primary by failing over from the current primary replica database.",
         "x-ms-examples": {
-          "Failover a replication link": { "$ref": "./examples/ReplicationLinkFailover.json" }
+          "Failover a replication link": {
+            "$ref": "./examples/ReplicationLinkFailover.json"
+          }
         },
         "parameters": [
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ResourceGroupParameter"
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
           },
           {
             "$ref": "#/parameters/ServerNameParameter"
@@ -167,17 +173,19 @@
         "operationId": "ReplicationLinks_FailoverAllowDataLoss",
         "description": "Sets which replica database is primary by failing over from the current primary replica database. This operation might result in data loss.",
         "x-ms-examples": {
-          "Failover a replication link": { "$ref": "./examples/ReplicationLinkFailover.json" }
+          "Failover a replication link": {
+            "$ref": "./examples/ReplicationLinkFailover.json"
+          }
         },
         "parameters": [
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ResourceGroupParameter"
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
           },
           {
             "$ref": "#/parameters/ServerNameParameter"
@@ -208,6 +216,66 @@
         "x-ms-long-running-operation": true
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/replicationLinks/{linkId}/unlink": {
+      "post": {
+        "tags": [
+          "DatabaseReplicationLinks"
+        ],
+        "operationId": "ReplicationLinks_Unlink",
+        "description": "Deletes a database replication link in forced or friendly way.",
+        "x-ms-examples": {
+          "Delete replication link": {
+            "$ref": "./examples/ReplicationLinkUnlink.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          },
+          {
+            "name": "databaseName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the database that has the replication link to be failed over."
+          },
+          {
+            "name": "linkId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The ID of the replication link to be failed over."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/UnlinkParameters"
+            },
+            "description": "The required parameters for unlinking replication link."
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "202": {
+            "description": "Accepted"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/replicationLinks": {
       "get": {
         "tags": [
@@ -216,17 +284,19 @@
         "operationId": "ReplicationLinks_ListByDatabase",
         "description": "Lists a database's replication links.",
         "x-ms-examples": {
-          "List Replication links": { "$ref": "./examples/ReplicationLinkList.json" }
+          "List Replication links": {
+            "$ref": "./examples/ReplicationLinkList.json"
+          }
         },
         "parameters": [
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ResourceGroupParameter"
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
           },
           {
             "$ref": "#/parameters/ServerNameParameter"
@@ -377,31 +447,18 @@
         }
       },
       "description": "Represents the response to a List database replication link request."
+    },
+    "UnlinkParameters": {
+      "properties": {
+        "forcedTermination": {
+          "type": "boolean",
+          "description": "Determines whether link will be terminated in a forced or a friendly way."
+        }
+      },
+      "description": "Represents the parameters for Unlink Replication Link request."
     }
   },
   "parameters": {
-    "SubscriptionIdParameter": {
-      "name": "subscriptionId",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "The subscription ID that identifies an Azure subscription."
-    },
-    "ApiVersionParameter": {
-      "name": "api-version",
-      "in": "query",
-      "required": true,
-      "type": "string",
-      "description": "The API version to use for the request."
-    },
-    "ResourceGroupParameter": {
-      "name": "resourceGroupName",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "The name of the resource group that contains the resource. You can obtain this value from the Azure Resource Manager API or the portal.",
-      "x-ms-parameter-location": "method"
-    },
     "ServerNameParameter": {
       "name": "serverName",
       "in": "path",

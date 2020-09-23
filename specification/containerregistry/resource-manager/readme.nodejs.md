@@ -7,9 +7,12 @@ Please also specify `--node-sdks-folder=<path to root folder of your azure-sdk-f
 nodejs:
   azure-arm: true
   package-name: azure-arm-containerregistry
-  package-version: 2.1.0-preview
   output-folder: $(node-sdks-folder)/lib/services/containerRegistryManagement
   generate-license-txt: true
   generate-package-json: true
   generate-readme-md: true
+input-file:
+- Microsoft.ContainerRegistry/preview/2019-12-01-preview/containerregistry.json
+- Microsoft.ContainerRegistry/preview/2019-06-01-preview/containerregistry_build.json
+- Microsoft.ContainerRegistry/preview/2019-05-01-preview/containerregistry_scopemap.json
 ```

@@ -505,7 +505,9 @@
         "operationId": "Usage_ListByLocation",
         "description": "Gets the current usage count and the limit for the resources of the location under the subscription.",
         "x-ms-examples": {
-          "UsageList": { "$ref": "./examples/StorageAccountListLocationUsage.json"}
+          "UsageList": {
+            "$ref": "./examples/StorageAccountListLocationUsage.json"
+          }
         },
         "parameters": [
           {
@@ -520,7 +522,7 @@
             "required": true,
             "type": "string",
             "description": "The location of the Azure Storage resource."
-          }         
+          }
         ],
         "responses": {
           "200": {
@@ -673,6 +675,10 @@
             "operation": {
               "description": "Type of operation: get, read, delete, etc.",
               "type": "string"
+            },
+            "description": {
+              "description": "Description of the operation.",
+              "type": "string"
             }
           }
         },
@@ -754,7 +760,7 @@
       }
     },
     "Dimension": {
-      "description": "Dimension of blobs, possiblly be blob type or access tier.",
+      "description": "Dimension of blobs, possibly be blob type or access tier.",
       "properties": {
         "name": {
           "type": "string",
@@ -788,7 +794,7 @@
         "name",
         "type"
       ],
-      "description": "The parameters used to check the availabity of the storage account name."
+      "description": "The parameters used to check the availability of the storage account name."
     },
     "SKUCapability": {
       "properties": {
@@ -830,7 +836,7 @@
             "name": "ReasonCode",
             "modelAsString": true
           },
-          "description": "The reason for the restriction. As of now this can be “QuotaId” or “NotAvailableForSubscription”. Quota Id is set when the SKU has requiredQuotas parameter as the subscription does not belong to that quota. The “NotAvailableForSubscription” is related to capacity at DC."
+          "description": "The reason for the restriction. As of now this can be \"QuotaId\" or \"NotAvailableForSubscription\". Quota Id is set when the SKU has requiredQuotas parameter as the subscription does not belong to that quota. The \"NotAvailableForSubscription\" is related to capacity at DC."
         }
       },
       "description": "The restriction because of which SKU cannot be used."
@@ -960,7 +966,7 @@
           "type": "string",
           "description": "Gets or sets the custom domain name assigned to the storage account. Name is the CNAME source."
         },
-        "useSubDomain": {
+        "useSubDomainName": {
           "type": "boolean",
           "description": "Indicates whether indirect CName validation is enabled. Default value is false. This should only be set on updates."
         }
@@ -1208,6 +1214,12 @@
           "default": false,
           "x-ms-client-name": "EnableHttpsTrafficOnly",
           "description": "Allows https traffic only to storage service if sets to true."
+        },
+        "isHnsEnabled": {
+          "type": "boolean",
+          "default": false,
+          "x-ms-client-name": "IsHnsEnabled",
+          "description": "Account HierarchicalNamespace enabled if sets to true."
         }
       },
       "description": "The parameters used to create the storage account."
@@ -1309,9 +1321,19 @@
           "readOnly": true,
           "type": "string",
           "description": "Gets the file endpoint."
+        },
+        "web": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Gets the web endpoint."
+        },
+        "dfs": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Gets the dfs endpoint."
         }
       },
-      "description": "The URIs that are used to perform a retrieval of a public blob, queue, or table object."
+      "description": "The URIs that are used to perform a retrieval of a public blob, queue, table, web or dfs object."
     },
     "StorageAccountProperties": {
       "properties": {
@@ -1421,6 +1443,12 @@
           "x-ms-client-name": "NetworkRuleSet",
           "description": "Network rule set",
           "readOnly": true
+        },
+        "isHnsEnabled": {
+          "type": "boolean",
+          "default": false,
+          "x-ms-client-name": "IsHnsEnabled",
+          "description": "Account HierarchicalNamespace enabled if sets to true."
         }
       },
       "description": "Properties of the storage account."
@@ -1521,7 +1549,7 @@
       "properties": {
         "keyName": {
           "type": "string",
-          "description": "The name of storage keys that want to be regenerated, possible vaules are key1, key2."
+          "description": "The name of storage keys that want to be regenerated, possible values are key1, key2."
         }
       },
       "required": [
@@ -1899,17 +1927,16 @@
         }
       },
       "required": [
-        "canonicalizedResource",
-        "signedResource"
+        "canonicalizedResource"
       ],
-      "description": "The parameters to list service SAS credentials of a speicific resource."
+      "description": "The parameters to list service SAS credentials of a specific resource."
     },
     "ListServiceSasResponse": {
       "properties": {
         "serviceSasToken": {
           "readOnly": true,
           "type": "string",
-          "description": "List service SAS credentials of speicific resource."
+          "description": "List service SAS credentials of specific resource."
         }
       },
       "description": "The List service SAS credentials operation response."

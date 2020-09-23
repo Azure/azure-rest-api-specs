@@ -7,7 +7,7 @@
       "name": "Mohamed Enein"
     },
     "version": "2017-05-15-preview",
-    "x-ms-code-generation-settings": {  
+    "x-ms-code-generation-settings": {
       "useDateTimeOffset": true
     }
   },
@@ -58,13 +58,13 @@
         "operationId": "SoftwareUpdateConfigurationRuns_GetById",
         "parameters": [
           {
-            "$ref": "./definitions.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "./definitions.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "./definitions.json#/parameters/AutomationAccountNameParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/AutomationAccountNameParameter"
           },
           {
             "name": "softwareUpdateConfigurationRunId",
@@ -75,26 +75,23 @@
             "format": "uuid"
           },
           {
-            "$ref": "./definitions.json#/parameters/ApiVersionParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "./definitions.json#/parameters/clientRequestId"
+            "$ref": "../../common/v1/definitions.json#/parameters/clientRequestId"
           }
         ],
         "responses": {
           "200": {
             "description": "A single software update configuration Run.",
             "schema": {
-              "$ref": "./definitions.json#/definitions/softwareUpdateConfigurationRun"
+              "$ref": "#/definitions/softwareUpdateConfigurationRun"
             }
-          },
-          "404": {
-            "description": "Resource group, account, or software update configuration doesn't exist."
           },
           "default": {
             "description": "Automation error response describing why the operation failed.",
             "schema": {
-              "$ref": "./definitions.json#/definitions/ErrorResponse"
+              "$ref": "../../common/v1/definitions.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -120,19 +117,19 @@
         "operationId": "SoftwareUpdateConfigurationRuns_List",
         "parameters": [
           {
-            "$ref": "./definitions.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "./definitions.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "./definitions.json#/parameters/AutomationAccountNameParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/AutomationAccountNameParameter"
           },
           {
-            "$ref": "./definitions.json#/parameters/ApiVersionParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "./definitions.json#/parameters/clientRequestId"
+            "$ref": "../../common/v1/definitions.json#/parameters/clientRequestId"
           },
           {
             "name": "$filter",
@@ -146,7 +143,7 @@
             "in": "query",
             "required": false,
             "type": "string",
-            "description": "number of entries you skip before returning results"
+            "description": "Number of entries you skip before returning results"
           },
           {
             "name": "$top",
@@ -160,18 +157,174 @@
           "200": {
             "description": "Return list of software update configurations runs.",
             "schema": {
-              "$ref": "./definitions.json#/definitions/softwareUpdateConfigurationRunListResult"
+              "$ref": "#/definitions/softwareUpdateConfigurationRunListResult"
             }
-          },
-          "404": {
-            "description": "Resource group, or account doesn't exist."
           },
           "default": {
             "description": "Automation error response describing why the operation failed.",
             "schema": {
-              "$ref": "./definitions.json#/definitions/ErrorResponse"
+              "$ref": "../../common/v1/definitions.json#/definitions/ErrorResponse"
             }
           }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "softwareUpdateConfigurationRun": {
+      "description": "Software update configuration Run properties.",
+      "x-ms-azure-resource": false,
+      "type": "object",
+      "properties": {
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Name of the software update configuration run."
+        },
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource Id of the software update configuration run"
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "Software update configuration Run properties.",
+          "$ref": "#/definitions/softwareUpdateConfigurationRunProperties"
+        }
+      }
+    },
+    "softwareUpdateConfigurationRunProperties": {
+      "description": "Software update configuration properties.",
+      "properties": {
+        "softwareUpdateConfiguration": {
+          "description": "software update configuration triggered this run",
+          "$ref": "#/definitions/updateConfigurationNavigation"
+        },
+        "status": {
+          "type": "string",
+          "description": "Status of the software update configuration run.",
+          "readOnly": true
+        },
+        "configuredDuration": {
+          "type": "string",
+          "description": "Configured duration for the software update configuration run.",
+          "readOnly": true
+        },
+        "osType": {
+          "type": "string",
+          "description": "Operating system target of the software update configuration triggered this run",
+          "readOnly": true
+        },
+        "startTime": {
+          "type": "string",
+          "format": "date-time",
+          "x-nullable": false,
+          "description": "Start time of the software update configuration run.",
+          "readOnly": true
+        },
+        "endTime": {
+          "type": "string",
+          "format": "date-time",
+          "x-nullable": true,
+          "description": "End time of the software update configuration run.",
+          "readOnly": true
+        },
+        "computerCount": {
+          "type": "integer",
+          "description": "Number of computers in the software update configuration run.",
+          "readOnly": true
+        },
+        "failedCount": {
+          "type": "integer",
+          "description": "Number of computers with failed status.",
+          "readOnly": true
+        },
+        "creationTime": {
+          "type": "string",
+          "description": "Creation time of the resource, which only appears in the response.",
+          "format": "date-time",
+          "x-nullable": false,
+          "readOnly": true
+        },
+        "createdBy": {
+          "type": "string",
+          "description": "CreatedBy property, which only appears in the response.",
+          "readOnly": true
+        },
+        "lastModifiedTime": {
+          "type": "string",
+          "description": "Last time resource was modified, which only appears in the response.",
+          "format": "date-time",
+          "x-nullable": false,
+          "readOnly": true
+        },
+        "lastModifiedBy": {
+          "type": "string",
+          "description": "LastModifiedBy property, which only appears in the response.",
+          "readOnly": true
+        },
+        "tasks": {
+          "description": "Software update configuration tasks triggered in this run",
+          "$ref": "#/definitions/softareUpdateConfigurationRunTasks"
+        }
+      }
+    },
+    "softareUpdateConfigurationRunTasks": {
+      "description": "Software update configuration run tasks model.",
+      "type": "object",
+      "properties": {
+        "preTask": {
+          "description": "Pre task properties.",
+          "$ref": "#/definitions/softareUpdateConfigurationRunTaskProperties"
+        },
+        "postTask": {
+          "description": "Post task properties.",
+          "$ref": "#/definitions/softareUpdateConfigurationRunTaskProperties"
+        }
+      }
+    },
+    "softareUpdateConfigurationRunTaskProperties": {
+      "type": "object",
+      "description": "Task properties of the software update configuration.",
+      "properties": {
+        "status": {
+          "type": "string",
+          "description": "The status of the task."
+        },
+        "source": {
+          "type": "string",
+          "description": "The name of the source of the task."
+        },
+        "jobId": {
+          "type": "string",
+          "description": "The job id of the task."
+        }
+      }
+    },
+    "updateConfigurationNavigation": {
+      "description": "Software update configuration Run Navigation model.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Name of the software update configuration triggered the software update configuration run",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "softwareUpdateConfigurationRunListResult": {
+      "description": "result of listing all software update configuration runs",
+      "properties": {
+        "value": {
+          "description": "outer object returned when listing all software update configuration runs",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/softwareUpdateConfigurationRun"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "link to next page of results."
         }
       }
     }

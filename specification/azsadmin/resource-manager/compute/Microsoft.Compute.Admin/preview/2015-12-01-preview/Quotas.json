@@ -1,290 +1,284 @@
 {
-    "swagger": "2.0",
-    "info": {
-        "version": "2015-12-01-preview",
-        "title": "Compute Admin Client"
-    },
-    "host": "adminmanagement.local.azurestack.external",
-    "schemes": [
-        "https"
-    ],
-    "paths": {
-        "/subscriptions/{subscriptionId}/providers/Microsoft.Compute.Admin/locations/{location}/quotas/{quotaName}": {
-            "get": {
-                "x-ms-examples": {
-                    "Get an existing Quota.": {
-                        "$ref": "examples/Quotas/Get.json"
-                    }
-                },
-                "tags": [
-                    "Quotas"
-                ],
-                "summary": "Returns the requested quota.",
-                "description": "Get an existing Quota.",
-                "operationId": "Quotas_Get",
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "parameters": [
-                    {
-                        "$ref": "Compute.json#/parameters/SubscriptionIdParameter"
-                    },
-                    {
-                        "$ref": "Compute.json#/parameters/LocationParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/QuotaParameter"
-                    },
-                    {
-                        "$ref": "Compute.json#/parameters/ApiVersionParameter"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "$ref": "#/definitions/Quota"
-                        }
-                    },
-                    "404": {
-                        "description": "NOT FOUND"
-                    }
-                }
-            },
-            "put": {
-                "x-ms-examples": {
-                    "Creates or Updates a Quota.": {
-                        "$ref": "examples/Quotas/Create.json"
-                    }
-                },
-                "tags": [
-                    "Quotas"
-                ],
-                "description": "Creates or Updates a Quota.",
-                "summary": "Creates or Updates a Quota.",
-                "operationId": "Quotas_CreateOrUpdate",
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "parameters": [
-                    {
-                        "$ref": "Compute.json#/parameters/SubscriptionIdParameter"
-                    },
-                    {
-                        "$ref": "Compute.json#/parameters/LocationParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/QuotaParameter"
-                    },
-                    {
-                        "$ref": "Compute.json#/parameters/ApiVersionParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/NewQuotaParameter"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "$ref": "#/definitions/Quota"
-                        }
-                    }
-                }
-            },
-            "delete": {
-                "x-ms-examples": {
-                    "Deletes specified quota.": {
-                        "$ref": "examples/Quotas/Delete.json"
-                    }
-                },
-                "tags": [
-                    "Quotas"
-                ],
-                "summary": "Deletes specified quota",
-                "description": "Delete an existing quota.",
-                "operationId": "Quotas_Delete",
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "parameters": [
-                    {
-                        "$ref": "Compute.json#/parameters/SubscriptionIdParameter"
-                    },
-                    {
-                        "$ref": "Compute.json#/parameters/LocationParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/QuotaParameter"
-                    },
-                    {
-                        "$ref": "Compute.json#/parameters/ApiVersionParameter"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK"
-                    }
-                }
-            }
+  "swagger": "2.0",
+  "info": {
+    "version": "2015-12-01-preview",
+    "title": "Compute Admin Client"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Compute.Admin/locations/{location}/quotas/{quotaName}": {
+      "get": {
+        "x-ms-examples": {
+          "Get an existing Quota.": {
+            "$ref": "examples/Quotas/Get.json"
+          }
         },
-        "/subscriptions/{subscriptionId}/providers/Microsoft.Compute.Admin/locations/{location}/quotas": {
-            "get": {
-                "x-ms-examples": {
-                    "Get a list of existing quotas.": {
-                        "$ref": "examples/Quotas/List.json"
-                    }
-                },
-                "tags": [
-                    "Quotas"
-                ],
-                "summary": "Lists all quotas.",
-                "description": "Get a list of existing quotas.",
-                "operationId": "Quotas_List",
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "parameters": [
-                    {
-                        "$ref": "Compute.json#/parameters/SubscriptionIdParameter"
-                    },
-                    {
-                        "$ref": "Compute.json#/parameters/LocationParameter"
-                    },
-                    {
-                        "$ref": "Compute.json#/parameters/ApiVersionParameter"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "$ref": "#/definitions/QuotaList"
-                        }
-                    },
-                    "404": {
-                        "description": "NOT FOUND"
-                    }
-                },
-                "x-ms-pageable": {
-                    "nextLinkName": null
-                }
-            }
-        }
-    },
-    "definitions": {
-        "Quota": {
-            "description": "Holds quota information used to control resource allocation.",
-            "type": "object",
-            "properties": {
-                "properties": {
-                    "description": "Quota properties.",
-                    "x-ms-client-flatten": true,
-                    "$ref": "#/definitions/QuotaProperties"
-                }
-            },
-            "allOf": [
-                {
-                    "$ref": "Compute.json#/definitions/Resource"
-                }
-            ]
-        },
-        "QuotaProperties": {
-            "description": "Properties for a Quota",
-            "type": "object",
-            "properties": {
-                "availabilitySetCount": {
-                    "description": "Maximum number of availability sets allowed.",
-                    "format": "int32",
-                    "type": "integer",
-                    "minimum": 0
-                },
-                "coresLimit": {
-                    "description": "Maximum number of core allowed.",
-                    "format": "int32",
-                    "type": "integer",
-                    "minimum": 0
-                },
-                "virtualMachineCount": {
-                    "description": "Maximum number of virtual machines allowed.",
-                    "format": "int32",
-                    "type": "integer",
-                    "minimum": 0
-                },
-                "vmScaleSetCount": {
-                    "description": "Maximum number of scale sets allowed.",
-                    "format": "int32",
-                    "type": "integer",
-                    "minimum": 0
-                }
-            }
-        },
-        "QuotaList": {
-            "description": "List of quotas",
-            "type": "object",
-            "properties": {
-                "nextLink": {
-                    "description": "URI to the next page.",
-                    "type": "string"
-                },
-                "value": {
-                    "description": "List of quotas",
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/Quota"
-                    }
-                }
-            }
-        }
-    },
-    "parameters": {
-        "QuotaParameter": {
-            "description": "Name of the quota.",
-            "name": "quotaName",
-            "type": "string",
-            "required": true,
-            "in": "path",
-            "x-ms-parameter-location": "method"
-        },
-        "NewQuotaParameter": {
-            "description": "New quota to create.",
-            "name": "newQuota",
-            "in": "body",
-            "required": true,
+        "tags": [
+          "Quotas"
+        ],
+        "summary": "Returns the requested quota.",
+        "description": "Get an existing Quota.",
+        "operationId": "Quotas_Get",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "Compute.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "Compute.json#/parameters/LocationParameter"
+          },
+          {
+            "$ref": "#/parameters/QuotaParameter"
+          },
+          {
+            "$ref": "Compute.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
             "schema": {
-                "$ref": "#/definitions/Quota"
-            },
-            "x-ms-parameter-location": "method"
-        }
-    },
-    "securityDefinitions": {
-        "azure_auth": {
-            "type": "oauth2",
-            "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
-            "flow": "implicit",
-            "description": "Authorization uses an Azure Active Directory OAuth2 flow.",
-            "scopes": {
-                "user_impersonation": "impersonate your user account"
+              "$ref": "#/definitions/Quota"
             }
+          }
         }
+      },
+      "put": {
+        "x-ms-examples": {
+          "Creates or Updates a Quota.": {
+            "$ref": "examples/Quotas/Create.json"
+          }
+        },
+        "tags": [
+          "Quotas"
+        ],
+        "description": "Creates or Updates a Quota.",
+        "summary": "Creates or Updates a Quota.",
+        "operationId": "Quotas_CreateOrUpdate",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "Compute.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "Compute.json#/parameters/LocationParameter"
+          },
+          {
+            "$ref": "#/parameters/QuotaParameter"
+          },
+          {
+            "$ref": "Compute.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/NewQuotaParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Quota"
+            }
+          }
+        }
+      },
+      "delete": {
+        "x-ms-examples": {
+          "Deletes specified quota.": {
+            "$ref": "examples/Quotas/Delete.json"
+          }
+        },
+        "tags": [
+          "Quotas"
+        ],
+        "summary": "Deletes specified quota",
+        "description": "Delete an existing quota.",
+        "operationId": "Quotas_Delete",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "Compute.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "Compute.json#/parameters/LocationParameter"
+          },
+          {
+            "$ref": "#/parameters/QuotaParameter"
+          },
+          {
+            "$ref": "Compute.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
     },
-    "security": [
-        {
-            "azure_auth": [
-                "user_impersonation"
-            ]
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Compute.Admin/locations/{location}/quotas": {
+      "get": {
+        "x-ms-examples": {
+          "Get a list of existing quotas.": {
+            "$ref": "examples/Quotas/List.json"
+          }
+        },
+        "tags": [
+          "Quotas"
+        ],
+        "summary": "Lists all quotas.",
+        "description": "Get a list of existing quotas.",
+        "operationId": "Quotas_List",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "Compute.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "Compute.json#/parameters/LocationParameter"
+          },
+          {
+            "$ref": "Compute.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/QuotaList"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
         }
-    ]
+      }
+    }
+  },
+  "definitions": {
+    "Quota": {
+      "description": "Holds quota information used to control resource allocation.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "description": "Quota properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/QuotaProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "Compute.json#/definitions/Resource"
+        }
+      ]
+    },
+    "QuotaProperties": {
+      "description": "Properties for a Quota",
+      "type": "object",
+      "properties": {
+        "availabilitySetCount": {
+          "description": "Maximum number of availability sets allowed.",
+          "format": "int32",
+          "type": "integer",
+          "minimum": 0
+        },
+        "coresLimit": {
+          "description": "Maximum number of core allowed.",
+          "format": "int32",
+          "type": "integer",
+          "minimum": 0
+        },
+        "virtualMachineCount": {
+          "description": "Maximum number of virtual machines allowed.",
+          "format": "int32",
+          "type": "integer",
+          "minimum": 0
+        },
+        "vmScaleSetCount": {
+          "description": "Maximum number of scale sets allowed.",
+          "format": "int32",
+          "type": "integer",
+          "minimum": 0
+        }
+      }
+    },
+    "QuotaList": {
+      "description": "List of quotas",
+      "type": "object",
+      "properties": {
+        "nextLink": {
+          "description": "URI to the next page.",
+          "type": "string"
+        },
+        "value": {
+          "description": "List of quotas",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Quota"
+          }
+        }
+      }
+    }
+  },
+  "parameters": {
+    "QuotaParameter": {
+      "description": "Name of the quota.",
+      "name": "quotaName",
+      "type": "string",
+      "required": true,
+      "in": "path",
+      "x-ms-parameter-location": "method"
+    },
+    "NewQuotaParameter": {
+      "description": "New quota to create.",
+      "name": "newQuota",
+      "in": "body",
+      "required": true,
+      "schema": {
+        "$ref": "#/definitions/Quota"
+      },
+      "x-ms-parameter-location": "method"
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Authorization uses an Azure Active Directory OAuth2 flow.",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ]
 }

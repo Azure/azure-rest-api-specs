@@ -1,0 +1,64 @@
+{
+  "parameters": {
+    "subscriptionId": "20D7082A-0FC7-4468-82BD-542694D5042B",
+    "resourceGroupName": "testrg",
+    "managedInstanceName": "testinstance",
+    "api-version": "2018-06-01-preview",
+    "parameters": {
+      "tags": {
+        "tagKey1": "TagValue1"
+      },
+      "sku": {
+        "name": "GP_Gen4",
+        "tier": "GeneralPurpose",
+        "capacity": 8
+      },
+      "properties": {
+        "administratorLogin": "dummylogin",
+        "administratorLoginPassword": "Un53cuRE!",
+        "proxyOverride": "Redirect",
+        "publicDataEndpointEnabled": false,
+        "licenseType": "BasePrice",
+        "vCores": 8,
+        "storageSizeInGB": 448,
+        "collation": "SQL_Latin1_General_CP1_CI_AS",
+        "maintenanceConfigurationId": "/subscriptions/ab0e51c0-83c0-4380-8ae9-025516df392f/providers/Microsoft.Maintenance/publicMaintenanceConfigurations/SQL_WestEurope_MI_Mon_Fri_10PM_6AM"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "tags": {
+          "tagKey1": "TagValue1"
+        },
+        "id": "/subscriptions/20D7082A-0FC7-4468-82BD-542694D5042B/resourceGroups/testrg/providers/Microsoft.Sql/managedInstances/testinstance",
+        "name": "testinstance",
+        "type": "Microsoft.Sql/managedInstances",
+        "location": "japaneast",
+        "sku": {
+          "name": "GP_Gen4",
+          "tier": "GeneralPurpose",
+          "capacity": 8,
+          "family": "Gen4"
+        },
+        "properties": {
+          "fullyQualifiedDomainName": "testinstance.1b4e2caff2530.database.windows.net",
+          "administratorLogin": "dummylogin",
+          "subnetId": "/subscriptions/20D7082A-0FC7-4468-82BD-542694D5042B/resourceGroups/testrg/providers/Microsoft.Network/virtualNetworks/vnet1/subnets/subnet1",
+          "state": "Ready",
+          "vCores": 8,
+          "storageSizeInGB": 448,
+          "licenseType": "BasePrice",
+          "collation": "SQL_Latin1_General_CP1_CI_AS",
+          "publicDataEndpointEnabled": false,
+          "proxyOverride": "Redirect",
+          "dnsZone": "1b4e2caff2530",
+          "instancePoolId": "/subscriptions/20d7082a-0fc7-4468-82bd-542694d5042b/resourceGroups/testrg/providers/Microsoft.Sql/instancePools/instancePool1",
+          "maintenanceConfigurationId": "/subscriptions/ab0e51c0-83c0-4380-8ae9-025516df392f/providers/Microsoft.Maintenance/publicMaintenanceConfigurations/SQL_WestEurope_MI_Mon_Fri_10PM_6AM"
+        }
+      }
+    },
+    "202": {}
+  }
+}

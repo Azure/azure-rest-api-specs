@@ -41,8 +41,12 @@
         "operationId": "Functions_CreateOrReplace",
         "description": "Creates a function or replaces an already existing function under an existing streaming job.",
         "x-ms-examples": {
-          "Create an Azure ML function": { "$ref": "./examples/Function_Create_AzureML.json" },
-          "Create a JavaScript function": { "$ref": "./examples/Function_Create_JavaScript.json" }
+          "Create an Azure ML function": {
+            "$ref": "./examples/Function_Create_AzureML.json"
+          },
+          "Create a JavaScript function": {
+            "$ref": "./examples/Function_Create_JavaScript.json"
+          }
         },
         "parameters": [
           {
@@ -60,7 +64,7 @@
             "required": false,
             "type": "string",
             "x-ms-client-name": "IfMatch",
-            "description": "The ETag of the function. Omit this value to always overwrite the current function. Specify the last-seen ETag value to prevent accidentally overwritting concurrent changes."
+            "description": "The ETag of the function. Omit this value to always overwrite the current function. Specify the last-seen ETag value to prevent accidentally overwriting concurrent changes."
           },
           {
             "name": "If-None-Match",
@@ -120,8 +124,12 @@
         "operationId": "Functions_Update",
         "description": "Updates an existing function under an existing streaming job. This can be used to partially update (ie. update one or two properties) a function without affecting the rest the job or function definition.",
         "x-ms-examples": {
-          "Update an Azure ML function": { "$ref": "./examples/Function_Update_AzureML.json" },
-          "Update a JavaScript function": { "$ref": "./examples/Function_Update_JavaScript.json" }
+          "Update an Azure ML function": {
+            "$ref": "./examples/Function_Update_AzureML.json"
+          },
+          "Update a JavaScript function": {
+            "$ref": "./examples/Function_Update_JavaScript.json"
+          }
         },
         "parameters": [
           {
@@ -139,7 +147,7 @@
             "required": false,
             "type": "string",
             "x-ms-client-name": "IfMatch",
-            "description": "The ETag of the function. Omit this value to always overwrite the current function. Specify the last-seen ETag value to prevent accidentally overwritting concurrent changes."
+            "description": "The ETag of the function. Omit this value to always overwrite the current function. Specify the last-seen ETag value to prevent accidentally overwriting concurrent changes."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -179,7 +187,9 @@
         "operationId": "Functions_Delete",
         "description": "Deletes a function from the streaming job.",
         "x-ms-examples": {
-          "Delete a function": { "$ref": "./examples/Function_Delete.json" }
+          "Delete a function": {
+            "$ref": "./examples/Function_Delete.json"
+          }
         },
         "parameters": [
           {
@@ -214,8 +224,12 @@
         "operationId": "Functions_Get",
         "description": "Gets details about the specified function.",
         "x-ms-examples": {
-          "Get an Azure ML function": { "$ref": "./examples/Function_Get_AzureML.json" },
-          "Get a JavaScript function": { "$ref": "./examples/Function_Get_JavaScript.json" }
+          "Get an Azure ML function": {
+            "$ref": "./examples/Function_Get_AzureML.json"
+          },
+          "Get a JavaScript function": {
+            "$ref": "./examples/Function_Get_JavaScript.json"
+          }
         },
         "parameters": [
           {
@@ -258,7 +272,9 @@
         "operationId": "Functions_ListByStreamingJob",
         "description": "Lists all of the functions under the specified streaming job.",
         "x-ms-examples": {
-          "List all functions in a streaming job": { "$ref": "./examples/Function_ListByStreamingJob.json" }
+          "List all functions in a streaming job": {
+            "$ref": "./examples/Function_ListByStreamingJob.json"
+          }
         },
         "parameters": [
           {
@@ -266,7 +282,7 @@
             "in": "query",
             "required": false,
             "type": "string",
-            "description": "The $select OData query parameter. This is a comma-separated list of structural properties to include in the response, or “*” to include all properties. By default, all properties are returned except diagnostics. Currently only accepts '*' as a valid value."
+            "description": "The $select OData query parameter. This is a comma-separated list of structural properties to include in the response, or \"*\" to include all properties. By default, all properties are returned except diagnostics. Currently only accepts '*' as a valid value."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -302,8 +318,12 @@
         "operationId": "Functions_Test",
         "description": "Tests if the information provided for a function is valid. This can range from testing the connection to the underlying web service behind the function or making sure the function code provided is syntactically correct.",
         "x-ms-examples": {
-          "Test the connection for an Azure ML function": { "$ref": "./examples/Function_Test_AzureML.json" },
-          "Test the connection for a JavaScript function": { "$ref": "./examples/Function_Test_JavaScript.json" }
+          "Test the connection for an Azure ML function": {
+            "$ref": "./examples/Function_Test_AzureML.json"
+          },
+          "Test the connection for a JavaScript function": {
+            "$ref": "./examples/Function_Test_JavaScript.json"
+          }
         },
         "parameters": [
           {
@@ -353,7 +373,9 @@
         "operationId": "Functions_RetrieveDefaultDefinition",
         "description": "Retrieves the default definition of a function based on the parameters specified.",
         "x-ms-examples": {
-          "Retrieve the default definition for an Azure ML function": { "$ref": "./examples/Function_RetrieveDefaultDefinition_AzureML.json" }
+          "Retrieve the default definition for an Azure ML function": {
+            "$ref": "./examples/Function_RetrieveDefaultDefinition_AzureML.json"
+          }
         },
         "parameters": [
           {

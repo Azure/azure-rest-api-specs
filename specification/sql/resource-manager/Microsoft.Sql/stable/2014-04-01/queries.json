@@ -23,18 +23,20 @@
         ],
         "operationId": "Queries_ListByDatabase",
         "description": "Gets a list of top queries by database.",
-        "x-ms-examples":{
-          "List top queries": { "$ref": "./examples/QueriesList.json" }
+        "x-ms-examples": {
+          "List top queries": {
+            "$ref": "./examples/QueriesList.json"
+          }
         },
         "parameters": [
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ResourceGroupParameter"
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
           },
           {
             "$ref": "#/parameters/ServerNameParameter"
@@ -63,18 +65,20 @@
         ],
         "operationId": "QueryStatistics_ListByQuery",
         "description": "Lists a query's statistics.",
-        "x-ms-examples":{
-          "Get a query": { "$ref": "./examples/QueryStatisticsList.json" }
+        "x-ms-examples": {
+          "Get a query": {
+            "$ref": "./examples/QueryStatisticsList.json"
+          }
         },
         "parameters": [
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ResourceGroupParameter"
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
           },
           {
             "$ref": "#/parameters/ServerNameParameter"
@@ -110,18 +114,20 @@
         ],
         "operationId": "QueryTexts_ListByQuery",
         "description": "Gets a query's text.",
-        "x-ms-examples":{
-          "Get a query": { "$ref": "./examples/QueryTextsList.json" }
+        "x-ms-examples": {
+          "Get a query": {
+            "$ref": "./examples/QueryTextsList.json"
+          }
         },
         "parameters": [
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ResourceGroupParameter"
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
           },
           {
             "$ref": "#/parameters/ServerNameParameter"
@@ -157,7 +163,7 @@
         "aggregationFunction": {
           "description": "The function that is used to aggregate each query's metrics.",
           "type": "string",
-          "enum":[
+          "enum": [
             "min",
             "max",
             "avg",
@@ -179,7 +185,7 @@
             "aborted",
             "exception"
           ],
-          "x-ms-enum":{
+          "x-ms-enum": {
             "name": "QueryExecutionType",
             "modelAsString": false
           },
@@ -211,7 +217,7 @@
         "observedMetric": {
           "description": "The type of metric to use for ordering the top metrics.",
           "type": "string",
-          "enum":[
+          "enum": [
             "cpu",
             "io",
             "logio",
@@ -323,7 +329,9 @@
           "description": "The list of top queries."
         }
       },
-      "required": ["value"],
+      "required": [
+        "value"
+      ],
       "description": "Represents the response to a get top queries request."
     },
     "QueryStatisticListResult": {
@@ -336,25 +344,27 @@
           "description": "The query."
         }
       },
-      "required": ["value"],
+      "required": [
+        "value"
+      ],
       "description": "Represents the response to a get query request."
     },
     "QueryText": {
       "properties": {
         "name": {
-          "readOnly":true,
-          "type":"string",
-          "description":"Resource name."
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource name."
         },
         "type": {
-          "readOnly":true,
-          "type":"string",
-          "description":"Resource type."
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource type."
         },
         "queryText": {
-          "readOnly":true,
-          "type":"string",
-          "description":"Query text."
+          "readOnly": true,
+          "type": "string",
+          "description": "Query text."
         }
       }
     },
@@ -368,33 +378,13 @@
           "description": "The query text."
         }
       },
-      "required": ["value"],
+      "required": [
+        "value"
+      ],
       "description": "Represents the response to a get query text request."
     }
   },
   "parameters": {
-    "SubscriptionIdParameter": {
-      "name": "subscriptionId",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "The subscription ID that identifies an Azure subscription."
-    },
-    "ApiVersionParameter": {
-      "name": "api-version",
-      "in": "query",
-      "required": true,
-      "type": "string",
-      "description": "The API version to use for the request."
-    },
-    "ResourceGroupParameter": {
-      "name": "resourceGroupName",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "The name of the resource group that contains the resource. You can obtain this value from the Azure Resource Manager API or the portal.",
-      "x-ms-parameter-location": "method"
-    },
     "ServerNameParameter": {
       "name": "serverName",
       "in": "path",

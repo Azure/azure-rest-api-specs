@@ -4,10 +4,10 @@
 
 This is the AutoRest configuration file for Authorization.
 
-
-
 ---
+
 ## Getting Started
+
 To build the SDK for Authorization, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
 
 > `autorest`
@@ -15,37 +15,80 @@ To build the SDK for Authorization, simply [Install AutoRest](https://aka.ms/aut
 To see additional help and options, run:
 
 > `autorest --help`
+
 ---
 
 ## Configuration
 
-
-
 ### Basic Information
+
 These are the global settings for the Authorization API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2018-01-01-preview
+tag: package-2020-04-01-preview-only
 ```
 
 ## Suppression
+
 ``` yaml
 directive:
   - suppress: OperationsAPIImplementation
     reason: we do have a operations api as "/providers/Microsoft.Authorization/operations"
-    #where:
-    #  -   $.paths["/providers/Microsoft.Authorization/operations"]
-
+  - suppress: OperationIdNounConflictingModelNames
+    where: '$.paths["/providers/Microsoft.Authorization/providerOperations/{resourceProviderNamespace}"].get.operationId'
+    from: authorization-ProviderOperationsCalls.json
+    reason: the full operationId value is "ProviderOperationsMetadata_Get" the linter does not seem to be picking what's after the '_'
+  - suppress: OperationIdNounConflictingModelNames
+    where: '$.paths["/providers/Microsoft.Authorization/providerOperations"].get.operationId'
+    from: authorization-ProviderOperationsCalls.json
+    reason: the full operationId value is "ProviderOperationsMetadata_List" the linter does not seem to be picking what's after the '_'
+  - suppress: EnumInsteadOfBoolean
+    where: $.definitions.RoleAssignmentFilter.properties.canDelegate
+    from: authorization-RoleAssignmentsCalls.json
+    reason: for this case the result of the proposed change would resemble a boolean anyways
+  - suppress: EnumInsteadOfBoolean
+    where: $.definitions.RoleAssignmentPropertiesWithScope.properties.canDelegate
+    from: authorization-RoleAssignmentsCalls.json
+    reason: for this case the result of the proposed change would resemble a boolean anyways
+  - suppress: EnumInsteadOfBoolean
+    where: $.definitions.RoleAssignmentProperties.properties.canDelegate
+    from: authorization-RoleAssignmentsCalls.json
+    reason: for this case the result of the proposed change would resemble a boolean anyways
+  - suppress: EnumInsteadOfBoolean
+    where: $.definitions.ProviderOperation.properties.isDataAction
+    from: authorization-ProviderOperationsCalls.json
+    reason: for this case the result of the proposed change would resemble a boolean anyways
+  - suppress: EnumInsteadOfBoolean
+    where: $.definitions.DenyAssignmentProperties.properties.doNotApplyToChildScopes
+    from: authorization-DenyAssignmentGetCalls.json
+    reason: for this case the result of the proposed change would resemble a boolean anyways
+  - suppress: EnumInsteadOfBoolean
+    where: $.definitions.DenyAssignmentProperties.properties.isSystemProtected
+    from: authorization-DenyAssignmentGetCalls.json
+    reason: for this case the result of the proposed change would resemble a boolean anyways
 ```
 
-### Tag: package-2015-07
+### Tag: package-2020-04-01-preview-only
 
-These settings apply only when `--tag=package-2015-07` is specified on the command line.
+These settings apply only when `--tag=package-2020-04-preview` is specified on the command line.
 
-``` yaml $(tag) == 'package-2015-07'
+``` yaml $(tag) == 'package-2020-04-01-preview-only'
 input-file:
-- Microsoft.Authorization/stable/2015-07-01/authorization.json
+- Microsoft.Authorization/preview/2020-04-01-preview/authorization-RoleAssignmentsCalls.json
+```
+
+### Tag: package-2015-07-01
+
+These settings apply only when `--tag=package-2015-07-01` is specified on the command line.
+
+``` yaml $(tag) == 'package-2015-07-01'
+input-file:
+- Microsoft.Authorization/stable/2015-07-01/authorization-RoleDefinitionsCalls.json
+- Microsoft.Authorization/stable/2015-07-01/authorization-ProviderOperationsCalls.json
+- Microsoft.Authorization/stable/2015-07-01/authorization-ElevateAccessCalls.json
+- Microsoft.Authorization/stable/2015-07-01/authorization-RoleAssignmentsCalls.json
+- Microsoft.Authorization/stable/2015-07-01/authorization-ClassicAdminCalls.json
 ```
 
 ### Tag: package-2015-06-01-preview
@@ -57,22 +100,13 @@ input-file:
 - Microsoft.Authorization/preview/2015-06-01/authorization-ClassicAdminCalls.json
 ```
 
-### Tag: package-2015-07-01-preview
-
-These settings apply only when `--tag=package-2015-07-01-preview` is specified on the command line.
-
-``` yaml $(tag) == 'package-2015-07-01-preview'
-input-file:
-- Microsoft.Authorization/preview/2015-07-01/authorization.json
-```
-
 ### Tag: package-2017-10-01-preview-only
 
 These settings apply only when `--tag=package-2017-10-01-preview-only` is specified on the command line.
 
 ``` yaml $(tag) == 'package-2017-10-01-preview-only'
 input-file:
-- Microsoft.Authorization/preview/2017-10-01-preview/authorization-RACalls.json
+- Microsoft.Authorization/preview/2017-10-01-preview/authorization-RoleAssignmentsCalls.json
 ```
 
 ### Tag: package-2018-01-01-preview-only
@@ -81,7 +115,27 @@ These settings apply only when `--tag=package-2018-01-01-preview-only` is specif
 
 ``` yaml $(tag) == 'package-2018-01-01-preview-only'
 input-file:
-- Microsoft.Authorization/preview/2018-01-01-preview/authorization-RoleBasedCalls.json
+- Microsoft.Authorization/preview/2018-01-01-preview/authorization-ProviderOperationsCalls.json
+- Microsoft.Authorization/preview/2018-01-01-preview/authorization-RoleAssignmentsCalls.json
+- Microsoft.Authorization/preview/2018-01-01-preview/authorization-RoleDefinitionsCalls.json
+```
+
+### Tag: package-2018-07-01-preview-only
+
+These settings apply only when `--tag=package-2018-07-01-preview-only` is specified on the command line.
+
+``` yaml $(tag) == 'package-2018-07-01-preview-only'
+input-file:
+- Microsoft.Authorization/preview/2018-07-01-preview/authorization-DenyAssignmentGetCalls.json
+```
+
+### Tag: package-2018-09-01-preview-only
+
+These settings apply only when `--tag=package-2018-09-01-preview-only` is specified on the command line.
+
+``` yaml $(tag) == 'package-2018-09-01-preview-only'
+input-file:
+- Microsoft.Authorization/preview/2018-09-01-preview/authorization-RoleAssignmentsCalls.json
 ```
 
 ### Tag: package-2017-10-01-preview
@@ -91,8 +145,10 @@ These settings apply only when `--tag=package-2017-10-01-preview` is specified o
 ``` yaml $(tag) == 'package-2017-10-01-preview'
 input-file:
 - Microsoft.Authorization/preview/2015-06-01/authorization-ClassicAdminCalls.json
-- Microsoft.Authorization/preview/2015-07-01/authorization.json
-- Microsoft.Authorization/preview/2017-10-01-preview/authorization-RACalls.json
+- Microsoft.Authorization/stable/2015-07-01/authorization-RoleDefinitionsCalls.json
+- Microsoft.Authorization/stable/2015-07-01/authorization-ProviderOperationsCalls.json
+- Microsoft.Authorization/stable/2015-07-01/authorization-ElevateAccessCalls.json
+- Microsoft.Authorization/preview/2017-10-01-preview/authorization-RoleAssignmentsCalls.json
 ```
 
 ### Tag: package-2018-01-01-preview
@@ -102,12 +158,56 @@ These settings apply only when `--tag=package-2018-01-01-preview` is specified o
 ``` yaml $(tag) == 'package-2018-01-01-preview'
 input-file:
 - Microsoft.Authorization/preview/2015-06-01/authorization-ClassicAdminCalls.json
-- Microsoft.Authorization/preview/2018-01-01-preview/authorization-RoleBasedCalls.json
+- Microsoft.Authorization/stable/2015-07-01/authorization-ElevateAccessCalls.json
+- Microsoft.Authorization/preview/2018-01-01-preview/authorization-ProviderOperationsCalls.json
+- Microsoft.Authorization/preview/2018-01-01-preview/authorization-RoleAssignmentsCalls.json
+- Microsoft.Authorization/preview/2018-01-01-preview/authorization-RoleDefinitionsCalls.json
+```
+
+### Tag: package-2018-07-01-preview
+
+These settings apply only when `--tag=package-2018-07-01-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2018-07-01-preview'
+input-file:
+- Microsoft.Authorization/preview/2015-06-01/authorization-ClassicAdminCalls.json
+- Microsoft.Authorization/stable/2015-07-01/authorization-ElevateAccessCalls.json
+- Microsoft.Authorization/preview/2018-01-01-preview/authorization-ProviderOperationsCalls.json
+- Microsoft.Authorization/preview/2018-01-01-preview/authorization-RoleAssignmentsCalls.json
+- Microsoft.Authorization/preview/2018-01-01-preview/authorization-RoleDefinitionsCalls.json
+- Microsoft.Authorization/preview/2018-07-01-preview/authorization-DenyAssignmentGetCalls.json
+```
+
+### Tag: package-2018-09-01-preview
+
+These settings apply only when `--tag=package-2018-09-01-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2018-09-01-preview'
+input-file:
+- Microsoft.Authorization/preview/2015-06-01/authorization-ClassicAdminCalls.json
+- Microsoft.Authorization/stable/2015-07-01/authorization-ElevateAccessCalls.json
+- Microsoft.Authorization/preview/2018-01-01-preview/authorization-ProviderOperationsCalls.json
+- Microsoft.Authorization/preview/2018-09-01-preview/authorization-RoleAssignmentsCalls.json
+- Microsoft.Authorization/preview/2018-01-01-preview/authorization-RoleDefinitionsCalls.json
+- Microsoft.Authorization/preview/2018-07-01-preview/authorization-DenyAssignmentGetCalls.json
+```
+
+### Tag: profile-hybrid-2019-03-01
+
+These settings apply only when `--tag=profile-hybrid-2019-03-01` is specified on the command line.
+Creating this tag to pick proper resources from the hybrid profile.
+
+``` yaml $(tag) == 'profile-hybrid-2019-03-01'
+input-file:
+- Microsoft.Authorization/stable/2015-07-01/authorization-RoleDefinitionsCalls.json
+- Microsoft.Authorization/stable/2015-07-01/authorization-ProviderOperationsCalls.json
+- Microsoft.Authorization/stable/2015-07-01/authorization-ElevateAccessCalls.json
+- Microsoft.Authorization/stable/2015-07-01/authorization-RoleAssignmentsCalls.json
 ```
 
 ---
-# Code Generation
 
+# Code Generation
 
 ## Swagger to SDK
 
@@ -116,101 +216,31 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
+  - repo: azure-sdk-for-net
   - repo: azure-sdk-for-python
-  - repo: azure-libraries-for-java
+    after_scripts:
+      - python ./scripts/multiapi_init_gen.py azure-mgmt-authorization --default-api-version=2018-09-01-preview
+  - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-node
+  - repo: azure-sdk-for-js
   - repo: azure-sdk-for-ruby
     after_scripts:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_authorization']
-```
-
-## Python
-
-These settings apply only when `--python` is specified on the command line.
-Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
-Use `--python-mode=update` if you already have a setup.py and just want to update the code itself.
-
-``` yaml $(python)
-python-mode: create
-python:
-  azure-arm: true
-  license-header: MICROSOFT_MIT_NO_VERSION
-  payload-flattening-threshold: 2
-  namespace: azure.mgmt.authorization
-  package-name: azure-mgmt-authorization
-  package-version: 0.40.0
-  clear-output-folder: true
-```
-``` yaml $(python) && $(python-mode) == 'update'
-python:
-  no-namespace-folders: true
-  output-folder: $(python-sdks-folder)/azure-mgmt-authorization/azure/mgmt/authorization
-```
-``` yaml $(python) && $(python-mode) == 'create'
-python:
-  basic-setup-py: true
-  output-folder: $(python-sdks-folder)/azure-mgmt-authorization
+  - repo: azure-resource-manager-schemas
+    after_scripts:
+      - node sdkauto_afterscript.js authorization/resource-manager
 ```
 
 ## Go
 
-These settings apply only when `--go` is specified on the command line.
-
-``` yaml $(go)
-go:
-  license-header: MICROSOFT_APACHE_NO_VERSION
-  namespace: authorization
-  clear-output-folder: true
-```
-
-### Go multi-api
-
-``` yaml $(go) && $(multiapi)
-batch:
-  - tag: package-2015-07
-  - tag: package-2017-10-01-preview
-  - tag: package-2018-01-01-preview
-```
-
-### Tag: package-2015-07 and go
-
-These settings apply only when `--tag=package-2015-07 --go` is specified on he command line.
-Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
-
-``` yaml $(tag) == 'package-2015-07' && $(go)
-output-folder: $(go-sdk-folder)/services/authorization/mgmt/2015-07-01/authorization
-```
-
-### Tag: package-2017-10-01-preview and go
-
-These settings apply only when `--tag=package-2017-10-01-preview --go` is specified on he command line.
-Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
-
-``` yaml $(tag) == 'package-2017-10-01-preview' && $(go)
-output-folder: $(go-sdk-folder)/services/preview/authorization/mgmt/2017-10-01-preview/authorization
-```
-
-### Tag: package-2018-01-01-preview and go
-
-These settings apply only when `--tag=package-2018-01-01-preview --go` is specified on he command line.
-Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
-
-``` yaml $(tag) == 'package-2018-01-01-preview' && $(go)
-output-folder: $(go-sdk-folder)/services/preview/authorization/mgmt/2018-01-01-preview/authorization
-```
+See configuration in [readme.go.md](./readme.go.md)
 
 ## Java
 
-These settings apply only when `--java` is specified on the command line.
-Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-libraries-for-java clone>`.
+See configuration in [readme.java.md](./readme.java.md)
 
-``` yaml $(java)
-java:
-  azure-arm: true
-  fluent: true
-  namespace: com.microsoft.azure.management.authorization
-  license-header: MICROSOFT_MIT_NO_CODEGEN
-  payload-flattening-threshold: 1
-  output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-authorization
-```
+## AzureResourceSchema
+
+See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
+

@@ -61,11 +61,16 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
+  - repo: azure-sdk-for-net
   - repo: azure-sdk-for-go
+  - repo: azure-sdk-for-js
   - repo: azure-sdk-for-node
   - repo: azure-sdk-for-ruby
     after_scripts:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_customer_insights']
+  - repo: azure-resource-manager-schemas
+    after_scripts:
+      - node sdkauto_afterscript.js customer-insights/resource-manager
 ```
 
 
@@ -79,48 +84,13 @@ csharp:
   azure-arm: true
   license-header: MICROSOFT_MIT_NO_VERSION
   namespace: Microsoft.Azure.Management.CustomerInsights
-  output-folder: $(csharp-sdks-folder)/CustomerInsights/Management.CustomerInsights/Generated
+  output-folder: $(csharp-sdks-folder)/customer-insights/Microsoft.Azure.Management.CustomerInsights/src/Generated
   clear-output-folder: true
 ```
-
 
 ## Go
 
-These settings apply only when `--go` is specified on the command line.
-
-``` yaml $(go)
-go:
-  license-header: MICROSOFT_APACHE_NO_VERSION
-  namespace: customerinsights
-  clear-output-folder: true
-```
-
-### Go multi-api
-
-``` yaml $(go) && $(multiapi)
-batch:
-  - tag: package-2017-04
-  - tag: package-2017-01
-```
-
-### Tag: package-2017-04 and go
-
-These settings apply only when `--tag=package-2017-04 --go` is specified on the command line.
-Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
-
-``` yaml $(tag) == 'package-2017-04' && $(go)
-output-folder: $(go-sdk-folder)/services/customerinsights/mgmt/2017-04-26/customerinsights
-```
-
-### Tag: package-2017-01 and go
-
-These settings apply only when `--tag=package-2017-01 --go` is specified on the command line.
-Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
-
-``` yaml $(tag) == 'package-2017-01' && $(go)
-output-folder: $(go-sdk-folder)/services/customerinsights/mgmt/2017-01-01/customerinsights
-```
-
+See configuration in [readme.go.md](./readme.go.md)
 
 ## Java
 
@@ -128,11 +98,52 @@ These settings apply only when `--java` is specified on the command line.
 Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-libraries-for-java clone>`.
 
 ``` yaml $(java)
-java:
-  azure-arm: true
-  fluent: true
-  namespace: com.microsoft.azure.management.customerinsights
-  license-header: MICROSOFT_MIT_NO_CODEGEN
-  payload-flattening-threshold: 1
-  output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-customerinsights
+azure-arm: true
+fluent: true
+namespace: com.microsoft.azure.management.customerinsights
+license-header: MICROSOFT_MIT_NO_CODEGEN
+payload-flattening-threshold: 1
+output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-customerinsights
 ```
+
+### Java multi-api
+
+``` yaml $(java) && $(multiapi)
+batch:
+  - tag: package-2017-01
+  - tag: package-2017-04
+```
+
+### Tag: package-2017-01 and java
+
+These settings apply only when `--tag=package-2017-01 --java` is specified on the command line.
+Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-2017-01' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.customerinsights.v2017_01_01
+  output-folder: $(azure-libraries-for-java-folder)/sdk/customerinsights/mgmt-v2017_01_01
+regenerate-manager: true
+generate-interface: true
+```
+
+### Tag: package-2017-04 and java
+
+These settings apply only when `--tag=package-2017-04 --java` is specified on the command line.
+Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-2017-04' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.customerinsights.v2017_04_26
+  output-folder: $(azure-libraries-for-java-folder)/sdk/customerinsights/mgmt-v2017_04_26
+regenerate-manager: true
+generate-interface: true
+```
+
+
+
+
+## AzureResourceSchema
+
+See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
+

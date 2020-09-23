@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "Image Search API",
+    "title": "Image Search Client",
     "description": "The Image Search API lets you send a search query to Bing and get back a list of relevant images. This section provides technical details about the query parameters and headers that you use to request images and the JSON response objects that contain them. For examples that show how to make requests, see [Searching the Web for Images](https://docs.microsoft.com/azure/cognitive-services/bing-image-search/search-the-web).",
     "version": "1.0"
   },
@@ -22,11 +22,20 @@
       ]
     }
   },
+  "x-ms-parameterized-host": {
+    "hostTemplate": "{Endpoint}",
+    "useSchemePrefix": false,
+    "parameters": [
+      {
+        "$ref": "../../../Common/Parameters.json#/parameters/GlobalEndpoint"
+      }
+    ]
+  },
   "host": "api.cognitive.microsoft.com",
+  "basePath": "/bing/v7.0",
   "schemes": [
     "https"
   ],
-  "basePath": "/bing/v7.0",
   "produces": [
     "application/json"
   ],
@@ -862,7 +871,7 @@
           "type": "string"
         },
         "insightsMetadata": {
-          "description": "A count of the number of websites where you can shop or perform other actions related to the image. For example, if the image is of an apple pie, this object includes a count of the number of websites where you can buy an apple pie. To indicate the number of offers in your UX, include badging such as a shopping cart icon that contains the count. When the user clicks on the icon, use imageInisghtsToken to get the list of websites.",
+          "description": "A count of the number of websites where you can shop or perform other actions related to the image. For example, if the image is of an apple pie, this object includes a count of the number of websites where you can buy an apple pie. To indicate the number of offers in your UX, include badging such as a shopping cart icon that contains the count. When the user clicks on the icon, use imageInsightsToken to get the list of websites.",
           "$ref": "#/definitions/ImagesImageMetadata",
           "readOnly": true
         },

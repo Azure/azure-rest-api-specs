@@ -98,8 +98,7 @@
         "maxParallelExecutionsPerNode": {
           "description": "Maximum parallel executions count per node for managed integration runtime.",
           "type": "integer",
-          "minimum": 1,
-          "maximum": 8
+          "minimum": 1
         },
         "vNetProperties": {
           "description": "VNet properties for managed integration runtime.",
@@ -151,13 +150,17 @@
           "description": "Custom setup script properties for a managed dedicated integration runtime.",
           "$ref": "#/definitions/IntegrationRuntimeCustomSetupScriptProperties"
         },
+        "dataProxyProperties": {
+          "description": "Data proxy properties for a managed dedicated integration runtime.",
+          "$ref": "#/definitions/IntegrationRuntimeDataProxyProperties"
+        },
         "edition": {
           "description": "The edition for the SSIS Integration Runtime",
           "type": "string",
           "enum": [
             "Standard",
             "Enterprise"
-          ], 
+          ],
           "x-ms-enum": {
             "name": "IntegrationRuntimeEdition",
             "modelAsString": true
@@ -188,17 +191,7 @@
         },
         "catalogPricingTier": {
           "description": "The pricing tier for the catalog database. The valid values could be found in https://azure.microsoft.com/en-us/pricing/details/sql-database/",
-          "type": "string",
-          "enum": [
-            "Basic",
-            "Standard",
-            "Premium",
-            "PremiumRS"
-          ],
-          "x-ms-enum": {
-            "name": "IntegrationRuntimeSsisCatalogPricingTier",
-            "modelAsString": true
-          }
+          "type": "string"
         }
       },
       "additionalProperties": {
@@ -216,6 +209,46 @@
         "sasToken": {
           "description": "The SAS token of the Azure blob container.",
           "$ref": "../datafactory.json#/definitions/SecureString"
+        }
+      }
+    },
+    "IntegrationRuntimeDataProxyProperties": {
+      "description": "Data proxy properties for a managed dedicated integration runtime.",
+      "type": "object",
+      "properties": {
+        "connectVia": {
+          "description": "The self-hosted integration runtime reference.",
+          "$ref": "#/definitions/EntityReference"
+        },
+        "stagingLinkedService": {
+          "description": "The staging linked service reference.",
+          "$ref": "#/definitions/EntityReference"
+        },
+        "path": {
+          "description": "The path to contain the staged data in the Blob storage.",
+          "type": "string"
+        }
+      }
+    },
+    "EntityReference": {
+      "description": "The entity reference.",
+      "type": "object",
+      "properties": {
+        "type": {
+          "description": "The type of this referenced entity.",
+          "type": "string",
+          "enum": [
+            "IntegrationRuntimeReference",
+            "LinkedServiceReference"
+          ],
+          "x-ms-enum": {
+            "name": "IntegrationRuntimeEntityReferenceType",
+            "modelAsString": true
+          }
+        },
+        "referenceName": {
+          "description": "The name of this referenced entity.",
+          "type": "string"
         }
       }
     },
@@ -312,7 +345,7 @@
         "dataFactoryName": {
           "description": "The data factory name which the integration runtime belong to.",
           "type": "string",
-          "readOnly":  true
+          "readOnly": true
         },
         "state": {
           "description": "The state of integration runtime.",

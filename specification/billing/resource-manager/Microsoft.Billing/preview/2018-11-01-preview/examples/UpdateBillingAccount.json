@@ -1,0 +1,52 @@
+{
+  "parameters": {
+    "api-version": "2018-11-01-preview",
+    "billingAccountName": "{billingAccountName}",
+    "parameters": {
+      "properties": {
+        "address": {
+          "companyName": "Contoso",
+          "firstName": "Test",
+          "lastName": "User",
+          "addressLine1": "1 Microsoft Way",
+          "city": "Redmond",
+          "postalCode": "98052",
+          "region": "WA",
+          "country": "US"
+        }
+      }
+    }
+  },
+  "responses": {
+    "202": {
+      "headers": {
+        "Azure-AsyncOperation": "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/operationStatus/65e1f2bf-c31c-4b89-a599-25d9d4172af9?api-version=2018-11-01-preview",
+        "Retry-After": "10"
+      }
+    },
+    "200": {
+      "body": {
+        "id": "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}",
+        "name": "{billingAccountName}",
+        "type": "Microsoft.Billing/billingAccounts",
+        "properties": {
+          "displayName": "Test Account",
+          "accountType": "Organization",
+          "address": {
+            "companyName": "Contoso",
+            "firstName": "Test",
+            "lastName": "User",
+            "addressLine1": "1 Microsoft Way",
+            "addressLine2": "",
+            "addressLine3": "",
+            "city": "Redmond",
+            "postalCode": "98052",
+            "region": "WA",
+            "country": "US"
+          },
+          "hasReadAccess": true
+        }
+      }
+    }
+  }
+}

@@ -56,23 +56,19 @@
         },
         "parameters": [
           {
-            "$ref": "./definitions.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "automationAccountName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The automation account name."
+            "$ref": "../../common/v1/definitions.json#/parameters/AutomationAccountNameParameter"
           },
           {
             "$ref": "#/parameters/CountTypeParameter"
           },
           {
-            "$ref": "./definitions.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "./definitions.json#/parameters/ApiVersionParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -85,7 +81,7 @@
           "default": {
             "description": "Automation error response describing why the operation failed.",
             "schema": {
-              "$ref": "./definitions.json#/definitions/ErrorResponse"
+              "$ref": "../../common/v1/definitions.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -110,6 +106,7 @@
       "description": "Gets the count of nodes by count type"
     },
     "NodeCount": {
+      "description": "Number of nodes based on the Filter",
       "properties": {
         "name": {
           "description": "Gets the name of a count type",
@@ -143,7 +140,8 @@
       "x-ms-enum": {
         "name": "CountType",
         "modelAsString": true
-      }
+      },
+      "x-ms-parameter-location": "method"
     }
   }
 }

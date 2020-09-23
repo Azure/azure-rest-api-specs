@@ -1,73 +1,146 @@
 {
-    "parameters": {
-        "subscriptionId": "1a7d4044-286c-4acb-969a-96639265bf2e",
-        "resourceGroupName": "mygroup",
-        "automationAccountName": "myaccount",
-        "api-version": "2017-05-15-preview",
-        "body": {}
-    },
-    "responses": {
-        "200": {
-            "value": [
-                {
-                    "name": "testpatch-01",
-                    "id": "/subscriptions/1a7d4044-286c-4acb-969a-96639265bf2e/resourceGroups/Mo-Resources-WCUS/providers/Microsoft.Automation/automationAccounts/Mo-AAA-WCUS/softwareUpdateConfigurations/testpatch-01",
-                    "properties": {
-                        "updateConfiguration": {
-                            "operatingSystem": "Windows",
-                            "windows": {
-                                "includedUpdateClassifications": "Critical, Security, UpdateRollup, FeaturePack, ServicePack, Definition, Tools, Updates",
-                                "excludedKbNumbers": null
-                            },
-                            "linux": null,
-                            "duration": "PT2H",
-                            "azureVirtualMachines": [
-                                "/subscriptions/1a7d4044-286c-4acb-969a-96639265bf2e/resourceGroups/myresources/providers/Microsoft.Compute/virtualMachines/vm-01",
-                                "/subscriptions/1a7d4044-286c-4acb-969a-96639265bf2e/resourceGroups/myresources/providers/Microsoft.Compute/virtualMachines/vm-02",
-                                "/subscriptions/1a7d4044-286c-4acb-969a-96639265bf2e/resourceGroups/myresources/providers/Microsoft.Compute/virtualMachines/vm-03"
-                            ],
-                            "nonAzureComputerNames": null
-                        },
-                        "frequency": "Week",
-                        "startTime": "2017-10-19T12:22:00-07:00",
-                        "creationTime": "2017-10-19T18:54:50.5233333+00:00",
-                        "lastModifiedTime": "2017-10-19T18:54:50.68+00:00",
-                        "provisioningState": "Succeeded",
-                        "nextRun": "2017-10-23T12:22:00-07:00"
-                    }
+  "parameters": {
+    "subscriptionId": "1a7d4044-286c-4acb-969a-96639265bf2e",
+    "resourceGroupName": "mygroup",
+    "automationAccountName": "myaccount",
+    "api-version": "2017-05-15-preview",
+    "body": {}
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "testpatch-01",
+            "id": "/subscriptions/1a7d4044-286c-4acb-969a-96639265bf2e/resourceGroups/Mo-Resources-WCUS/providers/Microsoft.Automation/automationAccounts/Mo-AAA-WCUS/softwareUpdateConfigurations/testpatch-01",
+            "properties": {
+              "updateConfiguration": {
+                "operatingSystem": "Windows",
+                "windows": {
+                  "includedUpdateClassifications": "Critical, Security, UpdateRollup, FeaturePack, ServicePack, Definition, Tools, Updates",
+                  "excludedKbNumbers": null
                 },
-                {
-                    "name": "testpatch-02",
-                    "id": "/subscriptions/1a7d4044-286c-4acb-969a-96639265bf2e/resourceGroups/Mo-Resources-WCUS/providers/Microsoft.Automation/automationAccounts/Mo-AAA-WCUS/softwareUpdateConfigurations/testpatch-02",
-                    "properties": {
-                        "updateConfiguration": {
-                            "operatingSystem": "Windows",
-                            "windows": {
-                                "includedUpdateClassifications": "Critical, FeaturePack",
-                                "excludedKbNumbers":null
-                            },
-                        "linux": null,
-                        "duration": "PT2H30M",
-                        "azureVirtualMachines": [
-                            "/subscriptions/1a7d4044-286c-4acb-969a-96639265bf2e/resourceGroups/myresources/providers/Microsoft.Compute/virtualMachines/vm-04",
-                            "/subscriptions/1a7d4044-286c-4acb-969a-96639265bf2e/resourceGroups/myresources/providers/Microsoft.Compute/virtualMachines/vm-05",
-                            "/subscriptions/1a7d4044-286c-4acb-969a-96639265bf2e/resourceGroups/myresources/providers/Microsoft.Compute/virtualMachines/vm-06"
-                        ],
-                        "nonAzureComputerNames": null
+                "linux": null,
+                "targets": {
+                  "azureQueries": [
+                    {
+                      "scope": [
+                        "/subscriptions/422b6c61-95b0-4213-b3be-7282315df71d/resourceGroups/a-stasku-rg0",
+                        "/subscriptions/422b6c61-95b0-4213-b3be-7282315df71d"
+                      ],
+                      "tagSettings": {
+                        "tags": {
+                          "tag1": [
+                            "tag1Value1",
+                            "tag1Value2"
+                          ],
+                          "tag2": [
+                            "tag2Value1",
+                            "tag2Value2"
+                          ]
                         },
-                        "frequency": "Hour",
-                        "startTime": "2018-05-05T12:26:00-07:00",
-                        "creationTime": "2017-08-11T21:52:02.7733333+00:00",
-                        "lastModifiedTime": "2017-08-11T21:52:22.88+00:00",
-                        "provisioningState": "Succeeded",
-                        "nextRun":"2018-05-05T12:26:00-07:00"
+                        "filterOperator": "All"
+                      },
+                      "locations": null
                     }
+                  ]
+                },
+                "duration": "PT2H",
+                "azureVirtualMachines": [
+                  "/subscriptions/1a7d4044-286c-4acb-969a-96639265bf2e/resourceGroups/myresources/providers/Microsoft.Compute/virtualMachines/vm-01",
+                  "/subscriptions/1a7d4044-286c-4acb-969a-96639265bf2e/resourceGroups/myresources/providers/Microsoft.Compute/virtualMachines/vm-02",
+                  "/subscriptions/1a7d4044-286c-4acb-969a-96639265bf2e/resourceGroups/myresources/providers/Microsoft.Compute/virtualMachines/vm-03"
+                ],
+                "nonAzureComputerNames": null
+              },
+              "tasks": {
+                "preTask": {
+                  "source": "HelloWorld",
+                  "parameters": {
+                    "COMPUTERNAME": "Computer1"
+                  }
+                },
+                "postTask": {
+                  "source": "GetCache",
+                  "parameters": null
                 }
-            ]
-        },
-        "404": {
-            "code": "NotFound",
-            "message": "{\"Message\":\"Could not find the account. SubscriptionId: 1a7d4044-286c-4acb-969a-96639265bf2e AccountName: myaccount\"}"
-        }
+              },
+              "frequency": "Week",
+              "startTime": "2017-10-19T12:22:00-07:00",
+              "creationTime": "2017-10-19T18:54:50.5233333+00:00",
+              "lastModifiedTime": "2017-10-19T18:54:50.68+00:00",
+              "provisioningState": "Succeeded",
+              "nextRun": "2017-10-23T12:22:00-07:00"
+            }
+          },
+          {
+            "name": "testpatch-02",
+            "id": "/subscriptions/1a7d4044-286c-4acb-969a-96639265bf2e/resourceGroups/Mo-Resources-WCUS/providers/Microsoft.Automation/automationAccounts/Mo-AAA-WCUS/softwareUpdateConfigurations/testpatch-02",
+            "properties": {
+              "updateConfiguration": {
+                "operatingSystem": "Windows",
+                "windows": {
+                  "includedUpdateClassifications": "Critical, FeaturePack",
+                  "excludedKbNumbers": null
+                },
+                "linux": null,
+                "targets": {
+                  "azureQueries": [
+                    {
+                      "scope": [
+                        "/subscriptions/422b6c61-95b0-4213-b3be-7282315df71d/resourceGroups/a-stasku-rg0",
+                        "/subscriptions/422b6c61-95b0-4213-b3be-7282315df71d"
+                      ],
+                      "tagSettings": {
+                        "tags": {
+                          "tag1": [
+                            "tag1Value1",
+                            "tag1Value2"
+                          ],
+                          "tag2": [
+                            "tag2Value1",
+                            "tag2Value2"
+                          ]
+                        },
+                        "filterOperator": "All"
+                      },
+                      "locations": [
+                        "Japan East",
+                        "UK South"
+                      ]
+                    }
+                  ]
+                },
+                "duration": "PT2H30M",
+                "azureVirtualMachines": [
+                  "/subscriptions/1a7d4044-286c-4acb-969a-96639265bf2e/resourceGroups/myresources/providers/Microsoft.Compute/virtualMachines/vm-04",
+                  "/subscriptions/1a7d4044-286c-4acb-969a-96639265bf2e/resourceGroups/myresources/providers/Microsoft.Compute/virtualMachines/vm-05",
+                  "/subscriptions/1a7d4044-286c-4acb-969a-96639265bf2e/resourceGroups/myresources/providers/Microsoft.Compute/virtualMachines/vm-06"
+                ],
+                "nonAzureComputerNames": null
+              },
+              "tasks": {
+                "preTask": {
+                  "source": "HelloWorld",
+                  "parameters": {
+                    "COMPUTERNAME": "Computer1"
+                  }
+                },
+                "postTask": {
+                  "source": "GetCache",
+                  "parameters": null
+                }
+              },
+              "frequency": "Hour",
+              "startTime": "2018-05-05T12:26:00-07:00",
+              "creationTime": "2017-08-11T21:52:02.7733333+00:00",
+              "lastModifiedTime": "2017-08-11T21:52:22.88+00:00",
+              "provisioningState": "Succeeded",
+              "nextRun": "2018-05-05T12:26:00-07:00"
+            }
+          }
+        ]
+      }
     }
+  }
 }

@@ -1,0 +1,172 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Visual Studio Projects Resource Provider Client",
+    "version": "2018-08-01-preview",
+    "description": "Use these APIs to manage Visual Studio Team Services resources through the Azure Resource Manager. All task operations conform to the HTTP/1.1 protocol specification and each operation returns an x-ms-request-id header that can be used to obtain information about the request. You must make sure that requests made to these resources are secure. For more information, see https://docs.microsoft.com/en-us/rest/api/index."
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "paths": {
+    "/providers/microsoft.visualstudio/pipelineTemplates": {
+      "get": {
+        "deprecated": true,
+        "tags": [
+          "PipelineTemplates"
+        ],
+        "summary": "PipelineTemplates_List",
+        "description": "Gets all pipeline templates which can be used to configure a CI/CD pipeline in a new or an existing Team Services project.",
+        "operationId": "PipelineTemplates_List",
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "The operation succeeded. The response is a list of all pipeline templates which can be used to configure a CI/CD pipeline in a new or an existing Team Services project.",
+            "schema": {
+              "$ref": "#/definitions/PipelineTemplateResourceListResult"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get a list of pipeline templates": {
+            "$ref": "./examples/GetPipelineTemplates_List.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "InputDescriptor": {
+      "description": "Defines a pipeline template input.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "Identifier for the input.",
+          "type": "string"
+        },
+        "description": {
+          "description": "Description of what this input is used for.",
+          "type": "string"
+        },
+        "type": {
+          "description": "Data type of the input.",
+          "type": "string",
+          "enum": [
+            "String",
+            "SecureString",
+            "Int",
+            "Bool",
+            "Authorization"
+          ],
+          "x-ms-enum": {
+            "name": "InputDataType",
+            "modelAsString": true
+          }
+        },
+        "possibleValues": {
+          "description": "Possible values that this input can take.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/InputValue"
+          }
+        }
+      },
+      "required": [
+        "id",
+        "type"
+      ]
+    },
+    "InputValue": {
+      "description": "Value for an input.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Value to store for an input.",
+          "type": "string"
+        },
+        "displayValue": {
+          "description": "Display text to show for the value of an input.",
+          "type": "string"
+        }
+      }
+    },
+    "PipelineTemplateResourceListResult": {
+      "description": "The response to pipeline template resource list GET request.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Array of resource details.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PipelineTemplate"
+          }
+        }
+      }
+    },
+    "PipelineTemplate": {
+      "description": "Defines a pipeline template resource.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "Unique id of pipeline template.",
+          "type": "string"
+        },
+        "description": {
+          "description": "Description of the pipeline which this template enables.",
+          "type": "string"
+        },
+        "inputs": {
+          "description": "Inputs required by this template to create pipeline.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/InputDescriptor"
+          }
+        }
+      },
+      "required": [
+        "id"
+      ]
+    }
+  },
+  "parameters": {
+    "apiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "description": "API Version",
+      "required": true,
+      "type": "string"
+    }
+  }
+}

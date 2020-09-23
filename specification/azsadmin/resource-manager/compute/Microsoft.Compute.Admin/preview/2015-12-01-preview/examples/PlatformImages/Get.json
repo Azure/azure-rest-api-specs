@@ -1,28 +1,27 @@
 {
-    "parameters": {
-        "subscriptionId": "20ff7fc3-e762-44dd-bd96-b71116dcdc23",
+  "parameters": {
+    "subscriptionId": "20ff7fc3-e762-44dd-bd96-b71116dcdc23",
+    "location": "local",
+    "publisher": "Canonical",
+    "offer": "UbuntuServer",
+    "sku": "16.04-:LTS",
+    "version": "16.04",
+    "api-version": "2015-12-01-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/8158498d-27b1-4ccf-9aa1-de0f925731e6/providers/Microsoft.Compute.Admin/locations/local/artifactTypes/platformImage/publishers/Canonical/offers/UbuntuServer/skus/16.04-LTS/versions/1.0.0",
+        "type": "Microsoft.Compute.Admin/locations/artifactTypes/publishers/offers/skus/versions",
         "location": "local",
-        "publisher": "Canonical",
-        "offer": "UbuntuServer",
-        "sku": "16.04-:LTS",
-        "version": "16.04",
-        "api-version": "2015-06-01-preview"
-    },
-    "responses": {
-        "200": {
-            "body": {
-                "id": "/subscriptions/8158498d-27b1-4ccf-9aa1-de0f925731e6/providers/Microsoft.Compute.Admin/locations/local/artifactTypes/platformImage/publishers/Canonical/offers/UbuntuServer/skus/16.04-LTS/versions/1.0.0",
-                "type": "Microsoft.Compute.Admin/locations/artifactTypes/publishers/offers/skus/versions",
-                "location": "local",
-                "properties": {
-                    "osDisk": {
-                        "osType": "Linux",
-                        "uri": "https://test.blob.local.azurestack.external/test/medium.vhd"
-                    },
-                    "provisioningState": "Creating"
-                }
-            }
-        },
-        "404": {}
+        "properties": {
+          "osDisk": {
+            "osType": "Linux",
+            "uri": "https://test.blob.local.azurestack.external/test/medium.vhd"
+          },
+          "provisioningState": "Creating"
+        }
+      }
     }
+  }
 }

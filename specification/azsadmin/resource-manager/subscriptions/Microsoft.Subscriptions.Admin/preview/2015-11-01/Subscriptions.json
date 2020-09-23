@@ -1,973 +1,1314 @@
 {
-    "swagger": "2.0",
-    "info": {
-        "version": "2015-11-01",
-        "title": "SubscriptionsManagementClient",
-        "description": "The Admin Subscriptions Management Client."
-    },
-    "host": "adminmanagement.local.azurestack.external",
-    "schemes": [
-        "https"
-    ],
-    "produces": [
-        "application/json"
-    ],
-    "consumes": [
-        "application/json"
-    ],
-    "paths": {
-        "/providers/Microsoft.Subscriptions.Admin/operations": {
-            "get": {
-                "x-ms-examples": {
-                    "Get the list of Operations.": {
-                        "$ref": "./examples/Subscriptions/Operations.json"
-                    }
-                },
-                "description": "Get the list of Operations.",
-                "tags": [
-                    "Operations"
-                ],
-                "operationId": "Operations_List",
-                "parameters": [
-                    {
-                        "$ref": "#/parameters/ApiVersionParameter"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "$ref": "#/definitions/OperationList"
-                        }
-                    }
-                }
-            }
+  "swagger": "2.0",
+  "info": {
+    "version": "2015-11-01",
+    "title": "SubscriptionsManagementClient",
+    "description": "The Admin Subscriptions Management Client."
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "paths": {
+    "/providers/Microsoft.Subscriptions.Admin/operations": {
+      "get": {
+        "x-ms-examples": {
+          "Get the list of Operations.": {
+            "$ref": "./examples/Subscriptions/Operations.json"
+          }
         },
-        "/subscriptions/{subscriptionId}/providers/Microsoft.Subscriptions.Admin/updateEncryption": {
-            "post": {
-                "x-ms-examples": {
-                    "Update the encryption settings.": {
-                        "$ref": "./examples/Subscriptions/UpdateEncryption.json"
-                    }
-                },
-                "description": "Update the encryption settings.",
-                "tags": [
-                    "Subscriptions"
-                ],
-                "operationId": "UpdateEncryption",
-                "parameters": [
-                    {
-                        "$ref": "#/parameters/SubscriptionIdParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/ApiVersionParameter"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK"
-                    }
-                }
+        "description": "Get the list of Operations.",
+        "tags": [
+          "Operations"
+        ],
+        "operationId": "Operations_List",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/OperationList"
             }
-        },
-        "/subscriptions/{subscriptionId}/providers/Microsoft.Subscriptions.Admin/restoreData": {
-            "post": {
-                "x-ms-examples": {
-                    "Get the list of subscriptions.": {
-                        "$ref": "./examples/Subscriptions/List.json"
-                    }
-                },
-                "description": "Restores the data",
-                "tags": [
-                    "Subscriptions"
-                ],
-                "operationId": "RestoreData",
-                "parameters": [
-                    {
-                        "$ref": "#/parameters/SubscriptionIdParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/ApiVersionParameter"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "$ref": "#/definitions/SubscriptionList"
-                        }
-                    }
-                }
-            }
-        },
-        "/subscriptions/{subscriptionId}/providers/Microsoft.Subscriptions.Admin/moveSubscriptions": {
-            "post": {
-                "x-ms-examples": {
-                    "Move user subscriptions from the Default Provider to a Delegated Provider.": {
-                        "$ref": "./examples/Subscriptions/MoveSubscriptionsToDelegatedProvider.json"
-                    },
-                    "Move user subscriptions from a Delegated Provider to the Default Provider.": {
-                        "$ref": "./examples/Subscriptions/MoveSubscriptionsToDefaultProvider.json"
-                    }
-                },
-                "description": "Move subscriptions between delegated provider offers.",
-                "tags": [
-                    "Subscriptions"
-                ],
-                "operationId": "Subscriptions_MoveSubscriptions",
-                "parameters": [
-                    {
-                        "$ref": "#/parameters/SubscriptionIdParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/ApiVersionParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/MoveSubscriptionsParameter"
-                    }
-                ],
-                "responses": {
-                    "204": {
-                        "description": "No Content -- The subscriptions were successfully moved to the target delegated provider offer."
-                    },
-                    "202": {
-                        "description": "Accepted -- Move subscriptions request accepted; operation will complete asynchronously."
-                    }
-                },
-                "x-ms-long-running-operation": true
-            }
-        },
-        "/subscriptions/{subscriptionId}/providers/Microsoft.Subscriptions.Admin/validateMoveSubscriptions": {
-            "post": {
-                "x-ms-examples": {
-                    "Validate that user subscriptions can be moved from the Default Provider to a Delegated Provider.": {
-                        "$ref": "./examples/Subscriptions/ValidateMoveSubscriptionsToDelegatedProvider.json"
-                    },
-                    "Validate that user subscriptions can be moved from a Delegated Provider to the Default Provider.": {
-                        "$ref": "./examples/Subscriptions/ValidateMoveSubscriptionsToDefaultProvider.json"
-                    }
-                },
-                "description": "Validate that user subscriptions can be moved between delegated provider offers.",
-                "tags": [
-                    "Subscriptions"
-                ],
-                "operationId": "Subscriptions_ValidateMoveSubscriptions",
-                "parameters": [
-                    {
-                        "$ref": "#/parameters/SubscriptionIdParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/ApiVersionParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/MoveSubscriptionsParameter"
-                    }
-                ],
-                "responses": {
-                    "204": {
-                        "description": "No Content -- The subscriptions can be moved to the target delegated provider offer."
-                    },
-                    "202": {
-                        "description": "Accepted -- Validate move subscriptions request accepted; operation will complete asynchronously."
-                    }
-                },
-                "x-ms-long-running-operation": true
-            }
-        },
-        "/subscriptions/{subscriptionId}/providers/Microsoft.Subscriptions.Admin/subscriptions": {
-            "get": {
-                "x-ms-examples": {
-                    "Get the list of subscriptions.": {
-                        "$ref": "./examples/Subscriptions/List.json"
-                    }
-                },
-                "description": "Get the list of subscriptions.",
-                "tags": [
-                    "Subscriptions"
-                ],
-                "operationId": "Subscriptions_List",
-                "parameters": [
-                    {
-                        "$ref": "#/parameters/SubscriptionIdParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/ApiVersionParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/FilterParameter"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "$ref": "#/definitions/SubscriptionList"
-                        }
-                    }
-                },
-                "x-ms-pageable": {
-                    "nextLinkName": null
-                },
-                "x-ms-odata": "#/definitions/Subscription"
-            }
-        },
-        "/subscriptions/{subscriptionId}/providers/Microsoft.Subscriptions.Admin/checkNameAvailability": {
-            "post": {
-                "x-ms-examples": {
-                    "Checks name availability in the Microsoft.Subscriptions.Admin namespace": {
-                        "$ref": "./examples/Subscriptions/CheckNameAvailability.json"
-                    }
-                },
-                "description": "Get the list of subscriptions.",
-                "tags": [
-                    "Subscriptions"
-                ],
-                "operationId": "Subscriptions_CheckNameAvailability",
-                "parameters": [
-                    {
-                        "$ref": "#/parameters/SubscriptionIdParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/ApiVersionParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/CheckNameAvailabilityParameter"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "$ref": "#/definitions/CheckNameAvailabilityResponse"
-                        }
-                    }
-                },
-                "x-ms-pageable": {
-                    "nextLinkName": null
-                }
-            }
-        },
-        "/subscriptions/{subscriptionId}/providers/Microsoft.Subscriptions.Admin/subscriptions/{subscription}": {
-            "get": {
-                "x-ms-examples": {
-                    "Get a specified subscription.": {
-                        "$ref": "./examples/Subscriptions/Get.json"
-                    }
-                },
-                "description": "Get a specified subscription.",
-                "tags": [
-                    "Subscriptions"
-                ],
-                "operationId": "Subscriptions_Get",
-                "parameters": [
-                    {
-                        "$ref": "#/parameters/SubscriptionIdParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/SubscriptionParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/ApiVersionParameter"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "$ref": "#/definitions/Subscription"
-                        }
-                    }
-                }
-            },
-            "put": {
-                "x-ms-examples": {
-                    "Creates or updates the specified subscription.": {
-                        "$ref": "./examples/Subscriptions/Create.json"
-                    }
-                },
-                "description": "Creates or updates the specified subscription.",
-                "tags": [
-                    "Subscriptions"
-                ],
-                "operationId": "Subscriptions_CreateOrUpdate",
-                "parameters": [
-                    {
-                        "$ref": "#/parameters/SubscriptionIdParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/SubscriptionParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/NewSubscriptionParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/ApiVersionParameter"
-                    }
-                ],
-                "responses": {
-                    "201": {
-                        "description": "Created",
-                        "schema": {
-                            "$ref": "#/definitions/Subscription"
-                        }
-                    },
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "$ref": "#/definitions/Subscription"
-                        }
-                    }
-                }
-            },
-            "delete": {
-                "x-ms-examples": {
-                    "Delete the specified subscription.": {
-                        "$ref": "./examples/Subscriptions/Delete.json"
-                    }
-                },
-                "description": "Delete the specified subscription.",
-                "tags": [
-                    "Subscriptions"
-                ],
-                "operationId": "Subscriptions_Delete",
-                "parameters": [
-                    {
-                        "$ref": "#/parameters/SubscriptionIdParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/SubscriptionParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/ApiVersionParameter"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK"
-                    },
-                    "204": {
-                        "description": "No Content"
-                    }
-                }
-            }
+          }
         }
+      }
     },
-    "definitions": {
-        "Resource": {
-            "description": "Base Resource Object",
-            "type": "object",
-            "properties": {
-                "id": {
-                    "readOnly": true,
-                    "description": "URI of the resource.",
-                    "type": "string"
-                },
-                "name": {
-                    "readOnly": true,
-                    "description": "Name of the resource.",
-                    "type": "string"
-                },
-                "type": {
-                    "readOnly": true,
-                    "description": "Type of resource.",
-                    "type": "string"
-                },
-                "location": {
-                    "description": "Location of the resource",
-                    "type": "string"
-                },
-                "tags": {
-                    "readOnly": true,
-                    "description": "List of key-value pairs.",
-                    "type": "object",
-                    "additionalProperties": {
-                        "type": "string"
-                    }
-                }
-            },
-            "x-ms-azure-resource": true
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Subscriptions.Admin/updateEncryption": {
+      "post": {
+        "x-ms-examples": {
+          "Update the encryption settings.": {
+            "$ref": "./examples/Subscriptions/UpdateEncryption.json"
+          }
         },
-        "Operation": {
-            "description": "Supported REST operation.",
-            "type": "object",
-            "properties": {
-                "display": {
-                    "description": "Display information for the operation.",
-                    "type": "object",
-                    "properties": {
-                        "description": {
-                            "description": "Description for the operation.",
-                            "type": "string",
-                            "readOnly": true
-                        },
-                        "operation": {
-                            "description": "Display name of the operation.",
-                            "type": "string",
-                            "readOnly": true
-                        },
-                        "provider": {
-                            "description": "Resource provider display name.",
-                            "type": "string",
-                            "readOnly": true
-                        },
-                        "resource": {
-                            "description": "Resource type display name related to the operation.",
-                            "type": "string",
-                            "readOnly": true
-                        }
-                    }
-                },
-                "name": {
-                    "description": "Name of the operation being performed on an object.",
-                    "type": "string",
-                    "readOnly": true
-                },
-                "origin": {
-                    "description": "Origin for the operation.",
-                    "type": "string",
-                    "readOnly": true
-                }
-            }
-        },
-        "OperationList": {
-            "description": "List of supported operations.",
-            "type": "object",
-            "properties": {
-                "value": {
-                    "description": "List of supported operations.",
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/Operation"
-                    }
-                }
-            }
-        },
-        "CheckNameAvailabilityDefinition": {
-            "description": "The check name availability action definition.",
-            "type": "object",
-            "properties": {
-                "name": {
-                    "description": "The resource name to verify.",
-                    "type": "string"
-                },
-                "resourceType": {
-                    "description": "The resource type to verify.",
-                    "type": "string"
-                }
-            }
-        },
-        "CheckNameAvailabilityResponse": {
-            "description": "The check name availability response definition",
-            "type": "object",
-            "properties": {
-                "nameAvailable": {
-                    "description": "A value indicating whether the name is available.",
-                    "type": "boolean"
-                },
-                "reason": {
-                    "description": "The reason for the unavailability of the name.",
-                    "$ref": "#/definitions/NameUnavailabilityReason"
-                },
-                "message": {
-                    "description": "The message explaining the reason.",
-                    "type": "string"
-                }
-            }
-        },
-        "NameUnavailabilityReason": {
-            "description": "The reason that the name is not available.",
-            "type": "string",
-            "enum": [
-                "Invalid",
-                "AlreadyExists"
-            ],
-            "x-ms-enum": {
-                "name": "NameUnavailabilityReason",
-                "modelAsString": true
-            }
-        },
-        "MoveSubscriptionsDefinition": {
-            "description": "The move subscriptions action definition",
-            "type": "object",
-            "required": [
-                "resources"
-            ],
-            "properties": {
-                "targetDelegatedProviderOffer": {
-                    "description": "The delegated provider offer identifier (from the Admin context) that the subscriptions to be moved to.",
-                    "type": "string"
-                },
-                "resources": {
-                    "description": "A collection of subscriptions to move to the target delegated provider offer.",
-                    "type": "array",
-                    "items": {
-                        "type": "string"
-                    }
-                }
-            }
-        },
-        "Subscription": {
-            "description": "List of supported operations.",
-            "type": "object",
-            "properties": {
-                "delegatedProviderSubscriptionId": {
-                    "description": "Parent DelegatedProvider subscription identifier.",
-                    "type": "string"
-                },
-                "displayName": {
-                    "description": "Subscription name.",
-                    "type": "string"
-                },
-                "id": {
-                    "description": "Fully qualified identifier.",
-                    "type": "string"
-                },
-                "externalReferenceId": {
-                    "description": "External reference identifier.",
-                    "type": "string"
-                },
-                "offerId": {
-                    "description": "Identifier of the offer under the scope of a delegated provider.",
-                    "type": "string"
-                },
-                "owner": {
-                    "description": "Subscription owner.",
-                    "type": "string"
-                },
-                "routingResourceManagerType": {
-                    "description": "Routing resource manager type.",
-                    "$ref": "#/definitions/ResourceManagerType"
-                },
-                "state": {
-                    "description": "Subscription state.",
-                    "$ref": "#/definitions/SubscriptionState"
-                },
-                "subscriptionId": {
-                    "description": "Subscription identifier.",
-                    "type": "string"
-                },
-                "tenantId": {
-                    "description": "Directory tenant identifier.",
-                    "type": "string"
-                }
-            }
-        },
-        "SubscriptionList": {
-            "description": "List of subscriptions.",
-            "properties": {
-                "value": {
-                    "type": "array",
-                    "description": "Subscription definition.",
-                    "items": {
-                        "$ref": "#/definitions/Subscription"
-                    }
-                },
-                "nextLink": {
-                    "description": "URI to the next page.",
-                    "type": "string"
-                }
-            }
-        },
-        "ResourceManagerType": {
-            "description": "Resource manager type.",
-            "type": "string",
-            "enum": [
-                "Default",
-                "Admin"
-            ],
-            "x-ms-enum": {
-                "name": "ResourceManagerType",
-                "modelAsString": true
-            }
-        },
-        "SubscriptionState": {
-            "description": "Subscription notification state.",
-            "type": "string",
-            "enum": [
-                "NotDefined",
-                "Enabled",
-                "Warned",
-                "PastDue",
-                "Disabled",
-                "Deleted",
-                "Deleting",
-                "PartiallyDeleted"
-            ],
-            "x-ms-enum": {
-                "name": "SubscriptionState",
-                "modelAsString": true
-            }
-        },
-        "Metric": {
-            "description": "The resource metric set that represents the metrics for a particular resource.",
-            "type": "object",
-            "properties": {
-                "metricUnit": {
-                    "description": "Unit of metrics.",
-                    "$ref": "#/definitions/MetricUnit"
-                },
-                "timeGrain": {
-                    "description": "Timespan of the metric.",
-                    "type": "string"
-                },
-                "startTime": {
-                    "description": "Start time of the metric.",
-                    "type": "string",
-                    "format": "date-time"
-                },
-                "endTime": {
-                    "description": "End time of the metric.",
-                    "type": "string",
-                    "format": "date-time"
-                },
-                "metricValues": {
-                    "description": "Collected metric values in the timespan.",
-                    "$ref": "#/definitions/MetricValueList"
-                }
-            }
-        },
-        "MetricValue": {
-            "description": "Metric value",
-            "type": "object",
-            "properties": {
-                "timeStamp": {
-                    "description": "Timestamp of when the metric value was collected.",
-                    "type": "string",
-                    "format": "date-time"
-                },
-                "average": {
-                    "description": "Average value for metric sample period.",
-                    "type": "number",
-                    "format": "double"
-                },
-                "minimum": {
-                    "description": "Minimum value for metric sample period.",
-                    "type": "number",
-                    "format": "double"
-                },
-                "maximum": {
-                    "description": "Maximum value for metric sample period.",
-                    "type": "number",
-                    "format": "double"
-                },
-                "total": {
-                    "description": "Total value for metric sample period.",
-                    "type": "number",
-                    "format": "double"
-                },
-                "count": {
-                    "description": "Number of measurements for metric sample period.",
-                    "type": "integer"
-                },
-                "properties": {
-                    "x-ms-client-name": "extendedProperties",
-                    "description": "Extended properties.",
-                    "type": "object",
-                    "additionalProperties": {
-                        "type": "string"
-                    }
-                }
-            }
-        },
-        "MetricValueList": {
-            "description": "List of metric values.",
-            "type": "array",
-            "items": {
-                "$ref": "#/definitions/MetricValue"
-            }
-        },
-        "MetricDefinition": {
-            "description": "Metric Definition",
-            "type": "object",
-            "properties": {
-                "name": {
-                    "description": "Metric definition name.",
-                    "type": "string"
-                },
-                "unit": {
-                    "description": "Unit of metrics.",
-                    "$ref": "#/definitions/MetricUnit"
-                },
-                "primaryAggregationType": {
-                    "description": "Type of the primary aggregation.",
-                    "$ref": "#/definitions/MetricPrimaryAggregationType"
-                },
-                "metricAvailabilities": {
-                    "description": "Metric availabilities.",
-                    "$ref": "#/definitions/MetricAvailabilityList"
-                }
-            }
-        },
-        "MetricUnit": {
-            "description": "The resource metric unit.",
-            "type": "string",
-            "enum": [
-                "Count",
-                "Bytes",
-                "Seconds",
-                "CountPerSecond",
-                "BytesPerSecond"
-            ],
-            "x-ms-enum": {
-                "name": "MetricUnit",
-                "modelAsString": true,
-                "values": [
-                    {
-                        "description": "The count.",
-                        "name": "Count",
-                        "value": "Count"
-                    },
-                    {
-                        "description": "The bytes.",
-                        "name": "Bytes",
-                        "value": "Bytes"
-                    },
-                    {
-                        "description": "The seconds.",
-                        "name": "Seconds",
-                        "value": "Seconds"
-                    },
-                    {
-                        "description": "The count per second.",
-                        "name": "CountPerSecond",
-                        "value": "CountPerSecond"
-                    },
-                    {
-                        "description": "The bytes per second.",
-                        "name": "BytesPerSecond",
-                        "value": "BytesPerSecond"
-                    }
-                ]
-            }
-        },
-        "MetricPrimaryAggregationType": {
-            "description": "The primary aggregation type for resource metric.",
-            "type": "string",
-            "enum": [
-                "None",
-                "Average",
-                "Total",
-                "Minimum",
-                "Maximum",
-                "Last"
-            ],
-            "x-ms-enum": {
-                "name": "MetricPrimaryAggregationType",
-                "modelAsString": true,
-                "values": [
-                    {
-                        "description": "No aggregation applied to resource.",
-                        "name": "None",
-                        "value": "None"
-                    },
-                    {
-                        "description": "The average aggregation type.",
-                        "name": "Average",
-                        "value": "Average"
-                    },
-                    {
-                        "description": "The total aggregation type.",
-                        "name": "Total",
-                        "value": "Total"
-                    },
-                    {
-                        "description": "The minimum aggregation type.",
-                        "name": "Minimum",
-                        "value": "Minimum"
-                    },
-                    {
-                        "description": "The maximum aggregation type.",
-                        "name": "Maximum",
-                        "value": "Maximum"
-                    },
-                    {
-                        "description": "The last aggregation type.",
-                        "name": "Last",
-                        "value": "Last"
-                    }
-                ]
-            }
-        },
-        "MetricAvailability": {
-            "description": "Metric Definition",
-            "type": "object",
-            "properties": {
-                "timeGrain": {
-                    "description": "The time grain. Metrics will be available for this time grain.",
-                    "type": "string"
-                },
-                "retention": {
-                    "description": "the retention. Metrics may be queried for this interval.",
-                    "type": "string"
-                }
-            }
-        },
-        "MetricAvailabilityList": {
-            "description": "List of metric definitions.",
-            "type": "array",
-            "items": {
-                "$ref": "#/definitions/MetricAvailability"
-            }
-        },
-        "MetricList": {
-            "description": "List of metrics.",
-            "properties": {
-                "value": {
-                    "description": "List of metrics.",
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/Metric"
-                    }
-                },
-                "nextLink": {
-                    "type": "string",
-                    "description": "Continuation token"
-                }
-            }
-        },
-        "MetricDefinitionList": {
-            "description": "List of metric definitions.",
-            "properties": {
-                "value": {
-                    "description": "Array of metric definitions.",
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/MetricDefinition"
-                    }
-                },
-                "nextLink": {
-                    "type": "string",
-                    "description": "Continuation token"
-                }
-            }
+        "description": "Update the encryption settings.",
+        "tags": [
+          "Subscriptions"
+        ],
+        "operationId": "UpdateEncryption",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
         }
+      }
     },
-    "parameters": {
-        "SubscriptionIdParameter": {
-            "name": "subscriptionId",
-            "in": "path",
-            "description": "Subscription credentials which uniquely identify Microsoft Azure subscription.The subscription ID forms part of the URI for every service call.",
-            "required": true,
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Subscriptions.Admin/restoreData": {
+      "post": {
+        "x-ms-examples": {
+          "Get the list of subscriptions.": {
+            "$ref": "./examples/Subscriptions/List.json"
+          }
+        },
+        "description": "Restores the data",
+        "tags": [
+          "Subscriptions"
+        ],
+        "operationId": "RestoreData",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SubscriptionList"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Subscriptions.Admin/checkIdentityHealth": {
+      "post": {
+        "x-ms-examples": {
+          "Check the identity health.": {
+            "$ref": "./examples/Subscriptions/CheckIdentityHealth.json"
+          }
+        },
+        "description": "Checks the identity health",
+        "tags": [
+          "Subscriptions"
+        ],
+        "operationId": "CheckIdentityHealth",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/IdentityHealthCheckReportDefinition"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Subscriptions.Admin/moveSubscriptions": {
+      "post": {
+        "x-ms-examples": {
+          "Move user subscriptions from the Default Provider to a Delegated Provider.": {
+            "$ref": "./examples/Subscriptions/MoveSubscriptionsToDelegatedProvider.json"
+          },
+          "Move user subscriptions from a Delegated Provider to the Default Provider.": {
+            "$ref": "./examples/Subscriptions/MoveSubscriptionsToDefaultProvider.json"
+          }
+        },
+        "description": "Move subscriptions between delegated provider offers.",
+        "tags": [
+          "Subscriptions"
+        ],
+        "operationId": "Subscriptions_MoveSubscriptions",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/MoveSubscriptionsParameter"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content -- The subscriptions were successfully moved to the target delegated provider offer."
+          },
+          "202": {
+            "description": "Accepted -- Move subscriptions request accepted; operation will complete asynchronously."
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Subscriptions.Admin/validateMoveSubscriptions": {
+      "post": {
+        "x-ms-examples": {
+          "Validate that user subscriptions can be moved from the Default Provider to a Delegated Provider.": {
+            "$ref": "./examples/Subscriptions/ValidateMoveSubscriptionsToDelegatedProvider.json"
+          },
+          "Validate that user subscriptions can be moved from a Delegated Provider to the Default Provider.": {
+            "$ref": "./examples/Subscriptions/ValidateMoveSubscriptionsToDefaultProvider.json"
+          }
+        },
+        "description": "Validate that user subscriptions can be moved between delegated provider offers.",
+        "tags": [
+          "Subscriptions"
+        ],
+        "operationId": "Subscriptions_ValidateMoveSubscriptions",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/MoveSubscriptionsParameter"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content -- The subscriptions can be moved to the target delegated provider offer."
+          },
+          "202": {
+            "description": "Accepted -- Validate move subscriptions request accepted; operation will complete asynchronously."
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Subscriptions.Admin/subscriptions": {
+      "get": {
+        "x-ms-examples": {
+          "Get the list of subscriptions.": {
+            "$ref": "./examples/Subscriptions/List.json"
+          }
+        },
+        "description": "Get the list of subscriptions.",
+        "tags": [
+          "Subscriptions"
+        ],
+        "operationId": "Subscriptions_List",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/FilterParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SubscriptionList"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        },
+        "x-ms-odata": "#/definitions/SubscriptionDefinition"
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Subscriptions.Admin/checkNameAvailability": {
+      "post": {
+        "x-ms-examples": {
+          "Checks name availability in the Microsoft.Subscriptions.Admin namespace": {
+            "$ref": "./examples/Subscriptions/CheckNameAvailability.json"
+          }
+        },
+        "description": "Get the list of subscriptions.",
+        "tags": [
+          "Subscriptions"
+        ],
+        "operationId": "Subscriptions_CheckNameAvailability",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/CheckNameAvailabilityParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/CheckNameAvailabilityResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Subscriptions.Admin/subscriptions/{targetSubscriptionId}": {
+      "get": {
+        "x-ms-examples": {
+          "Get a specified subscription.": {
+            "$ref": "./examples/Subscriptions/Get.json"
+          }
+        },
+        "description": "Get a specified subscription.",
+        "tags": [
+          "Subscriptions"
+        ],
+        "operationId": "Subscriptions_Get",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/TargetSubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SubscriptionDefinition"
+            }
+          }
+        }
+      },
+      "put": {
+        "x-ms-examples": {
+          "Creates or updates the specified subscription.": {
+            "$ref": "./examples/Subscriptions/Create.json"
+          }
+        },
+        "description": "Creates or updates the specified subscription.",
+        "tags": [
+          "Subscriptions"
+        ],
+        "operationId": "Subscriptions_CreateOrUpdate",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/TargetSubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionDefinitionParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/SubscriptionDefinition"
+            }
+          },
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SubscriptionDefinition"
+            }
+          }
+        }
+      },
+      "delete": {
+        "x-ms-examples": {
+          "Delete the specified subscription.": {
+            "$ref": "./examples/Subscriptions/Delete.json"
+          }
+        },
+        "description": "Delete the specified subscription.",
+        "tags": [
+          "Subscriptions"
+        ],
+        "operationId": "Subscriptions_Delete",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/TargetSubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "204": {
+            "description": "No Content"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Resource": {
+      "description": "Base Resource Object",
+      "type": "object",
+      "properties": {
+        "id": {
+          "readOnly": true,
+          "description": "URI of the resource.",
+          "type": "string"
+        },
+        "name": {
+          "readOnly": true,
+          "description": "Name of the resource.",
+          "type": "string"
+        },
+        "type": {
+          "readOnly": true,
+          "description": "Type of resource.",
+          "type": "string"
+        },
+        "location": {
+          "description": "Location of the resource",
+          "type": "string"
+        },
+        "tags": {
+          "readOnly": true,
+          "description": "List of key-value pairs.",
+          "type": "object",
+          "additionalProperties": {
             "type": "string"
-        },
-        "ApiVersionParameter": {
-            "name": "api-version",
-            "in": "query",
-            "description": "Client Api Version.",
-            "required": true,
-            "type": "string",
-            "default": "2015-11-01"
-        },
-        "ResourceGroupParameter": {
-            "description": "The resource group the resource is located under.",
-            "name": "resourceGroupName",
-            "in": "path",
-            "type": "string",
-            "required": true,
-            "x-ms-parameter-location": "method"
-        },
-        "LocationParameter": {
-            "description": "The AzureStack location.",
-            "name": "location",
-            "in": "path",
-            "type": "string",
-            "required": true,
-            "x-ms-parameter-location": "method"
-        },
-        "SubscriptionParameter": {
-            "description": "Subscription parameter.",
-            "name": "subscription",
-            "in": "path",
-            "type": "string",
-            "required": true,
-            "x-ms-parameter-location": "method"
-        },
-        "NewSubscriptionParameter": {
-            "description": "Subscription parameter.",
-            "name": "newSubscription",
-            "in": "body",
-            "schema": {
-                "$ref": "#/definitions/Subscription"
-            },
-            "required": true,
-            "x-ms-parameter-location": "method"
-        },
-        "OfferParameter": {
-            "description": "Name of an offer.",
-            "name": "offer",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "x-ms-parameter-location": "method"
-        },
-        "PlanParameter": {
-            "description": "Name of the plan.",
-            "name": "plan",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "x-ms-parameter-location": "method"
-        },
-        "DelegatedProviderParameter": {
-            "description": "DelegatedProvider identifier.",
-            "name": "delegatedProvider",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "x-ms-parameter-location": "method"
-        },
-        "DelegatedProviderSubscriptionIdParameter": {
-            "description": "Delegated provider subscription identifier.",
-            "name": "delegatedProviderSubscriptionId",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "x-ms-parameter-location": "method"
-        },
-        "CheckNameAvailabilityParameter": {
-            "description": "Check name availability parameter",
-            "name": "nameAvailabilityDefinition",
-            "in": "body",
-            "schema": {
-                "$ref": "#/definitions/CheckNameAvailabilityDefinition"
-            },
-            "required": true,
-            "x-ms-parameter-location": "method"
-        },
-        "MoveSubscriptionsParameter": {
-            "description": "Move subscriptions parameter.",
-            "name": "moveSubscriptionsDefinition",
-            "in": "body",
-            "schema": {
-                "$ref": "#/definitions/MoveSubscriptionsDefinition"
-            },
-            "required": true,
-            "x-ms-parameter-location": "method"
-        },
-        "FilterParameter": {
-            "description": "OData filter parameter.",
-            "name": "$filter",
-            "in": "query",
-            "type": "string",
-            "x-ms-parameter-location": "method"
+          }
         }
+      },
+      "x-ms-azure-resource": true
     },
-    "securityDefinitions": {
-        "azure_auth": {
-            "type": "oauth2",
-            "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
-            "flow": "implicit",
-            "description": "Azure Active Directory OAuth2 flow",
-            "scopes": {
-                "user_impersonation": "impersonate your user account"
+    "Operation": {
+      "description": "Supported REST operation.",
+      "type": "object",
+      "properties": {
+        "display": {
+          "description": "Display information for the operation.",
+          "type": "object",
+          "properties": {
+            "description": {
+              "description": "Description for the operation.",
+              "type": "string",
+              "readOnly": true
+            },
+            "operation": {
+              "description": "Display name of the operation.",
+              "type": "string",
+              "readOnly": true
+            },
+            "provider": {
+              "description": "Resource provider display name.",
+              "type": "string",
+              "readOnly": true
+            },
+            "resource": {
+              "description": "Resource type display name related to the operation.",
+              "type": "string",
+              "readOnly": true
             }
+          }
+        },
+        "name": {
+          "description": "Name of the operation being performed on an object.",
+          "type": "string",
+          "readOnly": true
+        },
+        "origin": {
+          "description": "Origin for the operation.",
+          "type": "string",
+          "readOnly": true
         }
+      }
     },
-    "security": [
-        {
-            "azure_auth": [
-                "user_impersonation"
-            ]
+    "OperationList": {
+      "description": "List of supported operations.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "List of supported operations.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Operation"
+          }
         }
-    ]
+      }
+    },
+    "CheckNameAvailabilityDefinition": {
+      "description": "The check name availability action definition.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "The resource name to verify.",
+          "type": "string"
+        },
+        "resourceType": {
+          "description": "The resource type to verify.",
+          "type": "string"
+        }
+      }
+    },
+    "CheckNameAvailabilityResponse": {
+      "description": "The check name availability response definition",
+      "type": "object",
+      "properties": {
+        "nameAvailable": {
+          "description": "A value indicating whether the name is available.",
+          "type": "boolean"
+        },
+        "reason": {
+          "description": "The reason for the unavailability of the name.",
+          "$ref": "#/definitions/NameUnavailabilityReason"
+        },
+        "message": {
+          "description": "The message explaining the reason.",
+          "type": "string"
+        }
+      }
+    },
+    "IdentityHealthCheckReportDefinition": {
+      "description": "The identity health check report action definition.",
+      "type": "object",
+      "properties": {
+        "reportStartTimeUtc": {
+          "description": "Start time of the report.",
+          "type": "string",
+          "format": "date-time"
+        },
+        "reportEndTimeUtc": {
+          "description": "End time of the report.",
+          "type": "string",
+          "format": "date-time"
+        },
+        "status": {
+          "description": "The roll-up health status for the directory.",
+          "$ref": "#/definitions/HealthStatus"
+        },
+        "directoryTenants": {
+          "description": "List of directory tenant health reports.",
+          "$ref": "#/definitions/DirectoryTenantHealthReportList"
+        }
+      }
+    },
+    "DirectoryTenantHealthReportList": {
+      "description": "List of directory tenant health reports.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "Directory tenant health report.",
+          "items": {
+            "$ref": "#/definitions/DirectoryTenantHealthReport"
+          }
+        },
+        "nextLink": {
+          "description": "URI to the next page.",
+          "type": "string"
+        }
+      }
+    },
+    "DirectoryTenantHealthReport": {
+      "description": "A report of the health status of a directory tenant and identity applications within.",
+      "type": "object",
+      "properties": {
+        "tenantId": {
+          "description": "The tenant unique identifier.",
+          "type": "string"
+        },
+        "tenantName": {
+          "description": "The directory tenant resource name.",
+          "type": "string"
+        },
+        "status": {
+          "description": "The roll-up health status for the directory.",
+          "$ref": "#/definitions/HealthStatus"
+        },
+        "applications": {
+          "description": "List of the application health reports.",
+          "$ref": "#/definitions/ApplicationHealthReportList"
+        }
+      }
+    },
+    "ApplicationHealthReportList": {
+      "description": "List of the application health reports.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "A report of the health status of an identity applications.",
+          "items": {
+            "$ref": "#/definitions/ApplicationHealthReport"
+          }
+        },
+        "nextLink": {
+          "description": "URI to the next page.",
+          "type": "string"
+        }
+      }
+    },
+    "ApplicationHealthReport": {
+      "description": "A report of the health status of an identity applications.",
+      "type": "object",
+      "properties": {
+        "appId": {
+          "description": "The application identifier.",
+          "type": "string"
+        },
+        "servicePrincipalObjectId": {
+          "description": "The service principal identifier.",
+          "type": "string"
+        },
+        "status": {
+          "description": "The roll-up health status for the application",
+          "$ref": "#/definitions/HealthStatus"
+        },
+        "appRoleAssignments": {
+          "description": "List of AppRoleAssignment health reports for the application.",
+          "$ref": "#/definitions/AppRoleAssignmentHealthReportList"
+        },
+        "oAuth2PermissionGrants": {
+          "description": "List of OAuth2PermissionGrant health reports for the application.",
+          "$ref": "#/definitions/OAuth2PermissionGrantHealthReportList"
+        },
+        "servicePrincipalTags": {
+          "description": "List of ServicePrincipalTag health reports for the application.",
+          "$ref": "#/definitions/ServicePrincipalTagHealthReportList"
+        }
+      }
+    },
+    "AppRoleAssignmentHealthReportList": {
+      "description": "List of AppRoleAssignment health reports for the application.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "A report of the health status of an AppRoleAssignment.",
+          "items": {
+            "$ref": "#/definitions/AppRoleAssignmentHealthReport"
+          }
+        },
+        "nextLink": {
+          "description": "URI to the next page.",
+          "type": "string"
+        }
+      }
+    },
+    "AppRoleAssignmentHealthReport": {
+      "description": "A report of the health status of an AppRoleAssignment.",
+      "type": "object",
+      "properties": {
+        "appRoleAssignment": {
+          "description": "The permission description.",
+          "$ref": "#/definitions/AppRoleAssignmentDefinition"
+        },
+        "status": {
+          "description": "The health status for the permission.",
+          "$ref": "#/definitions/HealthStatus"
+        }
+      }
+    },
+    "AppRoleAssignmentDefinition": {
+      "description": "Application role assignment definition.",
+      "type": "object",
+      "properties": {
+        "resource": {
+          "description": "The resource identifier. This should be the application identifier of the resource application.",
+          "type": "string"
+        },
+        "client": {
+          "description": "The client identifier. This should be the application identifier of the client application.",
+          "type": "string"
+        },
+        "roleId": {
+          "description": "The role identifier. This should be the ID of the AppRole exposed by the resource application.",
+          "type": "string"
+        }
+      }
+    },
+    "OAuth2PermissionGrantHealthReportList": {
+      "description": "List of OAuth2PermissionGrant health reports for the application.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "A report of the health status of an OAuth2PermissionGrant.",
+          "items": {
+            "$ref": "#/definitions/OAuth2PermissionGrantHealthReport"
+          }
+        },
+        "nextLink": {
+          "description": "URI to the next page.",
+          "type": "string"
+        }
+      }
+    },
+    "OAuth2PermissionGrantHealthReport": {
+      "description": "A report of the health status of an OAuth2PermissionGrant.",
+      "type": "object",
+      "properties": {
+        "oAuth2PermissionGrant": {
+          "description": "The permission description.",
+          "$ref": "#/definitions/OAuth2PermissionGrantDefinition"
+        },
+        "status": {
+          "description": "The health status for the permission.",
+          "$ref": "#/definitions/HealthStatus"
+        }
+      }
+    },
+    "OAuth2PermissionGrantDefinition": {
+      "description": "Application permission grant definition.",
+      "type": "object",
+      "properties": {
+        "resource": {
+          "description": "The resource identifier. This should be the application identifier of the resource application.",
+          "type": "string"
+        },
+        "client": {
+          "description": "The client identifier. This should be the application identifier of the client application.",
+          "type": "string"
+        },
+        "scope": {
+          "description": "The scope identifier. This should be the scope value of the OAUTH2PERMISSION exposed by the resource application.",
+          "type": "string"
+        }
+      }
+    },
+    "ServicePrincipalTagHealthReportList": {
+      "description": "List of ServicePrincipalTag health reports for the application.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "A report of the health status of a tag on an identity application service principal.",
+          "items": {
+            "$ref": "#/definitions/ServicePrincipalTagHealthReport"
+          }
+        },
+        "nextLink": {
+          "description": "URI to the next page.",
+          "type": "string"
+        }
+      }
+    },
+    "ServicePrincipalTagHealthReport": {
+      "description": "A report of the health status of a tag on an identity application service principal.",
+      "type": "object",
+      "properties": {
+        "servicePrincipalTag": {
+          "description": "The tag.",
+          "type": "string"
+        },
+        "status": {
+          "description": "The health status for the tag.",
+          "$ref": "#/definitions/HealthStatus"
+        }
+      }
+    },
+    "NameUnavailabilityReason": {
+      "description": "The reason that the name is not available.",
+      "type": "string",
+      "enum": [
+        "Invalid",
+        "AlreadyExists"
+      ],
+      "x-ms-enum": {
+        "name": "NameUnavailabilityReason",
+        "modelAsString": true
+      }
+    },
+    "MoveSubscriptionsDefinition": {
+      "description": "The move subscriptions action definition",
+      "type": "object",
+      "required": [
+        "resources"
+      ],
+      "properties": {
+        "targetDelegatedProviderOffer": {
+          "description": "The delegated provider offer identifier (from the Admin context) that the subscriptions to be moved to.",
+          "type": "string"
+        },
+        "resources": {
+          "description": "A collection of subscriptions to move to the target delegated provider offer.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "SubscriptionDefinition": {
+      "description": "Subscription object properties.",
+      "type": "object",
+      "properties": {
+        "delegatedProviderSubscriptionId": {
+          "description": "Parent DelegatedProvider subscription identifier.",
+          "type": "string"
+        },
+        "displayName": {
+          "description": "Subscription name.",
+          "type": "string"
+        },
+        "id": {
+          "description": "Fully qualified identifier.",
+          "type": "string"
+        },
+        "externalReferenceId": {
+          "description": "External reference identifier.",
+          "type": "string"
+        },
+        "offerId": {
+          "description": "Identifier of the offer under the scope of a delegated provider.",
+          "type": "string"
+        },
+        "owner": {
+          "description": "Subscription owner.",
+          "type": "string"
+        },
+        "routingResourceManagerType": {
+          "description": "Routing resource manager type.",
+          "$ref": "#/definitions/ResourceManagerType"
+        },
+        "state": {
+          "description": "Subscription state.",
+          "$ref": "#/definitions/SubscriptionState"
+        },
+        "subscriptionId": {
+          "description": "Subscription identifier.",
+          "type": "string"
+        },
+        "tenantId": {
+          "description": "Directory tenant identifier.",
+          "type": "string"
+        }
+      }
+    },
+    "SubscriptionList": {
+      "description": "List of subscriptions.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "Subscription definition.",
+          "items": {
+            "$ref": "#/definitions/SubscriptionDefinition"
+          }
+        },
+        "nextLink": {
+          "description": "URI to the next page.",
+          "type": "string"
+        }
+      }
+    },
+    "ResourceManagerType": {
+      "description": "Resource manager type.",
+      "type": "string",
+      "enum": [
+        "Default",
+        "Admin"
+      ],
+      "x-ms-enum": {
+        "name": "ResourceManagerType",
+        "modelAsString": true
+      }
+    },
+    "SubscriptionState": {
+      "description": "Subscription notification state.",
+      "type": "string",
+      "enum": [
+        "NotDefined",
+        "Enabled",
+        "Warned",
+        "PastDue",
+        "Disabled",
+        "Deleted",
+        "Deleting",
+        "PartiallyDeleted"
+      ],
+      "x-ms-enum": {
+        "name": "SubscriptionState",
+        "modelAsString": true,
+        "values": [
+          {
+            "description": "Subscription is active. New resources can be created.",
+            "name": "Enabled",
+            "value": "Enabled"
+          },
+          {
+            "description": "This state is not used in Azure Stack.",
+            "name": "PastDue",
+            "value": "PastDue"
+          },
+          {
+            "description": "This state is not used in Azure Stack.",
+            "name": "Warned",
+            "value": "Warned"
+          },
+          {
+            "description": "Subscription is not active and usage is not reported. Resources are shut down (VMs stopped and deallocated, IP addresses are freed, etc). During this period, the Azure Stack Operator can re-enable the subscription which allows creation of new resources but doesn’t automatically restore disabled resources.",
+            "name": "Disabled",
+            "value": "Disabled"
+          },
+          {
+            "description": "This state is unique to Azure Stack and is only visible to the Azure Stack Operator, and if used, to the respective Delegated Provider. Resources and Data are being deleted before subscription state is set to Deleted. This state cannot be reversed. It means that deletion is in progress.",
+            "name": "Deleting",
+            "value": "Deleting"
+          },
+          {
+            "description": "Final state of subscription. All resources and data are deleted. This state cannot be reversed.",
+            "name": "Deleted",
+            "value": "Deleted"
+          },
+          {
+            "description": "This state is not used in Azure Stack.",
+            "name": "NotDefined",
+            "value": "NotDefined"
+          },
+          {
+            "description": "This state is unique to Azure Stack and is only visible to the Azure Stack Operator, and if used, to the respective Delegated Provider. It means that deletion failed.  You can’t reverse the deletion process, so in this state all you can do is restart deletion.  This state is not reported to RPs.",
+            "name": "PartiallyDeleted",
+            "value": "PartiallyDeleted"
+          }
+        ]
+      }
+    },
+    "HealthStatus": {
+      "description": "Health Status.",
+      "type": "string",
+      "enum": [
+        "Unknown",
+        "Unhealthy",
+        "Healthy"
+      ],
+      "x-ms-enum": {
+        "name": "HealthStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "description": "The health status is unknown.",
+            "name": "Unknown",
+            "value": "Unknown"
+          },
+          {
+            "description": "The health status is unhealthy, indicating something is wrong or a sub-health status is Unhealthy or Unknown.",
+            "name": "Unhealthy",
+            "value": "Unhealthy"
+          },
+          {
+            "description": "The health status is healthy, indicating nothing is wrong.",
+            "name": "Healthy",
+            "value": "Healthy"
+          }
+        ]
+      }
+    },
+    "Metric": {
+      "description": "The resource metric set that represents the metrics for a particular resource.",
+      "type": "object",
+      "properties": {
+        "metricUnit": {
+          "description": "Unit of metrics.",
+          "$ref": "#/definitions/MetricUnit"
+        },
+        "timeGrain": {
+          "description": "Timespan of the metric.",
+          "type": "string"
+        },
+        "startTime": {
+          "description": "Start time of the metric.",
+          "type": "string",
+          "format": "date-time"
+        },
+        "endTime": {
+          "description": "End time of the metric.",
+          "type": "string",
+          "format": "date-time"
+        },
+        "metricValues": {
+          "description": "Collected metric values in the timespan.",
+          "$ref": "#/definitions/MetricValueList"
+        }
+      }
+    },
+    "MetricValue": {
+      "description": "Metric value",
+      "type": "object",
+      "properties": {
+        "timeStamp": {
+          "description": "Timestamp of when the metric value was collected.",
+          "type": "string",
+          "format": "date-time"
+        },
+        "average": {
+          "description": "Average value for metric sample period.",
+          "type": "number",
+          "format": "double"
+        },
+        "minimum": {
+          "description": "Minimum value for metric sample period.",
+          "type": "number",
+          "format": "double"
+        },
+        "maximum": {
+          "description": "Maximum value for metric sample period.",
+          "type": "number",
+          "format": "double"
+        },
+        "total": {
+          "description": "Total value for metric sample period.",
+          "type": "number",
+          "format": "double"
+        },
+        "count": {
+          "description": "Number of measurements for metric sample period.",
+          "type": "integer"
+        },
+        "properties": {
+          "x-ms-client-name": "extendedProperties",
+          "description": "Extended properties.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "MetricValueList": {
+      "description": "List of metric values.",
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/MetricValue"
+      }
+    },
+    "MetricDefinition": {
+      "description": "Metric Definition",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Metric definition name.",
+          "type": "string"
+        },
+        "unit": {
+          "description": "Unit of metrics.",
+          "$ref": "#/definitions/MetricUnit"
+        },
+        "primaryAggregationType": {
+          "description": "Type of the primary aggregation.",
+          "$ref": "#/definitions/MetricPrimaryAggregationType"
+        },
+        "metricAvailabilities": {
+          "description": "Metric availabilities.",
+          "$ref": "#/definitions/MetricAvailabilityList"
+        }
+      }
+    },
+    "MetricUnit": {
+      "description": "The resource metric unit.",
+      "type": "string",
+      "enum": [
+        "Count",
+        "Bytes",
+        "Seconds",
+        "CountPerSecond",
+        "BytesPerSecond"
+      ],
+      "x-ms-enum": {
+        "name": "MetricUnit",
+        "modelAsString": true,
+        "values": [
+          {
+            "description": "The count.",
+            "name": "Count",
+            "value": "Count"
+          },
+          {
+            "description": "The bytes.",
+            "name": "Bytes",
+            "value": "Bytes"
+          },
+          {
+            "description": "The seconds.",
+            "name": "Seconds",
+            "value": "Seconds"
+          },
+          {
+            "description": "The count per second.",
+            "name": "CountPerSecond",
+            "value": "CountPerSecond"
+          },
+          {
+            "description": "The bytes per second.",
+            "name": "BytesPerSecond",
+            "value": "BytesPerSecond"
+          }
+        ]
+      }
+    },
+    "MetricPrimaryAggregationType": {
+      "description": "The primary aggregation type for resource metric.",
+      "type": "string",
+      "enum": [
+        "None",
+        "Average",
+        "Total",
+        "Minimum",
+        "Maximum",
+        "Last"
+      ],
+      "x-ms-enum": {
+        "name": "MetricPrimaryAggregationType",
+        "modelAsString": true,
+        "values": [
+          {
+            "description": "No aggregation applied to resource.",
+            "name": "None",
+            "value": "None"
+          },
+          {
+            "description": "The average aggregation type.",
+            "name": "Average",
+            "value": "Average"
+          },
+          {
+            "description": "The total aggregation type.",
+            "name": "Total",
+            "value": "Total"
+          },
+          {
+            "description": "The minimum aggregation type.",
+            "name": "Minimum",
+            "value": "Minimum"
+          },
+          {
+            "description": "The maximum aggregation type.",
+            "name": "Maximum",
+            "value": "Maximum"
+          },
+          {
+            "description": "The last aggregation type.",
+            "name": "Last",
+            "value": "Last"
+          }
+        ]
+      }
+    },
+    "MetricAvailability": {
+      "description": "Metric Definition",
+      "type": "object",
+      "properties": {
+        "timeGrain": {
+          "description": "The time grain. Metrics will be available for this time grain.",
+          "type": "string"
+        },
+        "retention": {
+          "description": "the retention. Metrics may be queried for this interval.",
+          "type": "string"
+        }
+      }
+    },
+    "MetricAvailabilityList": {
+      "description": "List of metric definitions.",
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/MetricAvailability"
+      }
+    },
+    "MetricList": {
+      "description": "List of metrics.",
+      "properties": {
+        "value": {
+          "description": "List of metrics.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Metric"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Continuation token"
+        }
+      }
+    },
+    "MetricDefinitionList": {
+      "description": "List of metric definitions.",
+      "properties": {
+        "value": {
+          "description": "Array of metric definitions.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MetricDefinition"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Continuation token"
+        }
+      }
+    }
+  },
+  "parameters": {
+    "SubscriptionIdParameter": {
+      "name": "subscriptionId",
+      "in": "path",
+      "description": "Subscription credentials which uniquely identify Microsoft Azure subscription.The subscription ID forms part of the URI for every service call.",
+      "required": true,
+      "type": "string"
+    },
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "description": "Client Api Version.",
+      "required": true,
+      "type": "string",
+      "default": "2015-11-01"
+    },
+    "ResourceGroupParameter": {
+      "description": "The resource group the resource is located under.",
+      "name": "resourceGroupName",
+      "in": "path",
+      "type": "string",
+      "required": true,
+      "x-ms-parameter-location": "method"
+    },
+    "OperationsStatusParameter": {
+      "description": "The operation status name.",
+      "name": "operationsStatusName",
+      "in": "path",
+      "type": "string",
+      "required": true,
+      "x-ms-parameter-location": "method"
+    },
+    "LocationParameter": {
+      "description": "The AzureStack location.",
+      "name": "location",
+      "in": "path",
+      "type": "string",
+      "required": true,
+      "x-ms-parameter-location": "method"
+    },
+    "TargetSubscriptionIdParameter": {
+      "description": "The target subscription ID.",
+      "name": "targetSubscriptionId",
+      "in": "path",
+      "type": "string",
+      "required": true,
+      "x-ms-parameter-location": "method"
+    },
+    "SubscriptionDefinitionParameter": {
+      "description": "Subscription parameter.",
+      "name": "subscriptionDefinition",
+      "in": "body",
+      "schema": {
+        "$ref": "#/definitions/SubscriptionDefinition"
+      },
+      "required": true,
+      "x-ms-parameter-location": "method"
+    },
+    "OfferParameter": {
+      "description": "Name of an offer.",
+      "name": "offer",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "PlanParameter": {
+      "description": "Name of the plan.",
+      "name": "plan",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "DelegatedProviderParameter": {
+      "description": "DelegatedProvider identifier.",
+      "name": "delegatedProvider",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "DelegatedProviderSubscriptionIdParameter": {
+      "description": "Delegated provider subscription identifier.",
+      "name": "delegatedProviderSubscriptionId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "CheckNameAvailabilityParameter": {
+      "description": "Check name availability parameter",
+      "name": "nameAvailabilityDefinition",
+      "in": "body",
+      "schema": {
+        "$ref": "#/definitions/CheckNameAvailabilityDefinition"
+      },
+      "required": true,
+      "x-ms-parameter-location": "method"
+    },
+    "MoveSubscriptionsParameter": {
+      "description": "Move subscriptions parameter.",
+      "name": "moveSubscriptionsDefinition",
+      "in": "body",
+      "schema": {
+        "$ref": "#/definitions/MoveSubscriptionsDefinition"
+      },
+      "required": true,
+      "x-ms-parameter-location": "method"
+    },
+    "FilterParameter": {
+      "description": "OData filter parameter.",
+      "name": "$filter",
+      "in": "query",
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ]
 }

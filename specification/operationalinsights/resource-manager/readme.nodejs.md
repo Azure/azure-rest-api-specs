@@ -7,7 +7,6 @@ Please also specify `--node-sdks-folder=<path to root folder of your azure-sdk-f
 nodejs:
   azure-arm: true
   package-name: azure-arm-operationalinsights
-  package-version: 1.1.0
   output-folder: $(node-sdks-folder)/lib/services/operationalInsightsManagement
   override-client-name: OperationalInsightsManagementClient
   generate-license-txt: true

@@ -3,7 +3,7 @@
   "info": {
     "title": "AutomationManagement",
     "version": "2015-10-31",
-    "x-ms-code-generation-settings": {  
+    "x-ms-code-generation-settings": {
       "useDateTimeOffset": true
     }
   },
@@ -53,14 +53,10 @@
         },
         "parameters": [
           {
-            "$ref": "./definitions.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "automationAccountName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "Automation account name."
+            "$ref": "../../common/v1/definitions.json#/parameters/AutomationAccountNameParameter"
           },
           {
             "name": "hybridRunbookWorkerGroupName",
@@ -70,10 +66,10 @@
             "description": "The hybrid runbook worker group name"
           },
           {
-            "$ref": "./definitions.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "./definitions.json#/parameters/ApiVersionParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -83,7 +79,7 @@
           "default": {
             "description": "Automation error response describing why the operation failed.",
             "schema": {
-              "$ref": "./definitions.json#/definitions/ErrorResponse"
+              "$ref": "../../common/v1/definitions.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -104,14 +100,10 @@
         },
         "parameters": [
           {
-            "$ref": "./definitions.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "automationAccountName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The automation account name."
+            "$ref": "../../common/v1/definitions.json#/parameters/AutomationAccountNameParameter"
           },
           {
             "name": "hybridRunbookWorkerGroupName",
@@ -121,23 +113,23 @@
             "description": "The hybrid runbook worker group name"
           },
           {
-            "$ref": "./definitions.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "./definitions.json#/parameters/ApiVersionParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "./definitions.json#/definitions/HybridRunbookWorkerGroup"
+              "$ref": "#/definitions/HybridRunbookWorkerGroup"
             }
           },
           "default": {
             "description": "Automation error response describing why the operation failed.",
             "schema": {
-              "$ref": "./definitions.json#/definitions/ErrorResponse"
+              "$ref": "../../common/v1/definitions.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -158,14 +150,10 @@
         },
         "parameters": [
           {
-            "$ref": "./definitions.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "automationAccountName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The automation account name."
+            "$ref": "../../common/v1/definitions.json#/parameters/AutomationAccountNameParameter"
           },
           {
             "name": "hybridRunbookWorkerGroupName",
@@ -179,28 +167,28 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "./definitions.json#/definitions/HybridRunbookWorkerGroupUpdateParameters"
+              "$ref": "#/definitions/HybridRunbookWorkerGroupUpdateParameters"
             },
             "description": "The hybrid runbook worker group"
           },
           {
-            "$ref": "./definitions.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "./definitions.json#/parameters/ApiVersionParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "./definitions.json#/definitions/HybridRunbookWorkerGroup"
+              "$ref": "#/definitions/HybridRunbookWorkerGroup"
             }
           },
           "default": {
             "description": "Automation error response describing why the operation failed.",
             "schema": {
-              "$ref": "./definitions.json#/definitions/ErrorResponse"
+              "$ref": "../../common/v1/definitions.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -223,14 +211,10 @@
         },
         "parameters": [
           {
-            "$ref": "./definitions.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "automationAccountName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The automation account name."
+            "$ref": "../../common/v1/definitions.json#/parameters/AutomationAccountNameParameter"
           },
           {
             "name": "$filter",
@@ -240,33 +224,129 @@
             "description": "The filter to apply on the operation."
           },
           {
-            "$ref": "./definitions.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "./definitions.json#/parameters/ApiVersionParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "./definitions.json#/definitions/HybridRunbookWorkerGroupsListResult"
+              "$ref": "#/definitions/HybridRunbookWorkerGroupsListResult"
             }
           },
           "default": {
             "description": "Automation error response describing why the operation failed.",
             "schema": {
-              "$ref": "./definitions.json#/definitions/ErrorResponse"
+              "$ref": "../../common/v1/definitions.json#/definitions/ErrorResponse"
             }
           }
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         },
-        "x-ms-odata": "./definitions.json#/definitions/HybridRunbookWorkerGroup"
+        "x-ms-odata": "#/definitions/HybridRunbookWorkerGroup"
       }
     }
   },
-  "definitions": {},
+  "definitions": {
+    "RunAsCredentialAssociationProperty": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Gets or sets the name of the credential."
+        }
+      },
+      "description": "Definition of RunAs credential to use for hybrid worker."
+    },
+    "HybridRunbookWorker": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Gets or sets the worker machine name."
+        },
+        "ip": {
+          "type": "string",
+          "description": "Gets or sets the assigned machine IP address."
+        },
+        "registrationTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Gets or sets the registration time of the worker machine.",
+          "x-nullable": false
+        },
+        "lastSeenDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Last Heartbeat from the Worker",
+          "x-nullable": false
+        }
+      },
+      "description": "Definition of hybrid runbook worker."
+    },
+    "HybridRunbookWorkerGroup": {
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Gets or sets the id of the resource."
+        },
+        "name": {
+          "type": "string",
+          "description": "Gets or sets the name of the group."
+        },
+        "hybridRunbookWorkers": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/HybridRunbookWorker"
+          },
+          "description": "Gets or sets the list of hybrid runbook workers."
+        },
+        "credential": {
+          "$ref": "#/definitions/RunAsCredentialAssociationProperty",
+          "description": "Sets the credential of a worker group."
+        },
+        "groupType": {
+          "type": "string",
+          "description": "Type of the HybridWorkerGroup.",
+          "enum": [
+            "User",
+            "System"
+          ],
+          "x-ms-enum": {
+            "name": "GroupTypeEnum",
+            "modelAsString": true
+          }
+        }
+      },
+      "description": "Definition of hybrid runbook worker group."
+    },
+    "HybridRunbookWorkerGroupsListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/HybridRunbookWorkerGroup"
+          },
+          "description": "Gets or sets a list of hybrid runbook worker groups."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Gets or sets the next link."
+        }
+      },
+      "description": "The response model for the list hybrid runbook worker groups."
+    },
+    "HybridRunbookWorkerGroupUpdateParameters": {
+      "properties": {
+        "credential": {
+          "$ref": "#/definitions/RunAsCredentialAssociationProperty",
+          "description": "Sets the credential of a worker group."
+        }
+      },
+      "description": "Parameters supplied to the update operation."
+    }
+  },
   "parameters": {}
 }

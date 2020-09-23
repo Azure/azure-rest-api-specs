@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "MySQLManagementClient",
-    "description": "The Microsoft Azure management API provides create, read, update, and delete functionality for Azure MySQL resources including servers, databases, firewall rules, log files and configurations with new business model.",
+    "description": "The Microsoft Azure management API provides create, read, update, and delete functionality for Azure MySQL resources including servers, databases, firewall rules, VNET rules, log files and configurations with new business model.",
     "version": "2017-12-01-preview"
   },
   "host": "management.azure.com",
@@ -34,15 +34,24 @@
     }
   },
   "paths": {
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforMySQL/servers/{serverName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBForMySQL/servers/{serverName}": {
       "put": {
         "tags": [
           "Servers"
         ],
         "operationId": "Servers_Create",
         "x-ms-examples": {
-          "ServerCreate": {
+          "Create a new server": {
             "$ref": "./examples/ServerCreate.json"
+          },
+          "Create a database as a point in time restore": {
+            "$ref": "./examples/ServerCreatePointInTimeRestore.json"
+          },
+          "Create a server as a geo restore ": {
+            "$ref": "./examples/ServerCreateGeoRestoreMode.json"
+          },
+          "Create a replica server": {
+            "$ref": "./examples/ServerCreateReplicaMode.json"
           }
         },
         "description": "Creates a new server or updates an existing server. The update action will overwrite the existing server.",
@@ -208,7 +217,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforMySQL/servers": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBForMySQL/servers": {
       "get": {
         "tags": [
           "Servers"
@@ -244,7 +253,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.DBforMySQL/servers": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.DBForMySQL/servers": {
       "get": {
         "tags": [
           "Servers"
@@ -277,7 +286,89 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforMySQL/servers/{serverName}/firewallRules/{firewallRuleName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBForMySQL/servers/{serverName}/restart": {
+      "post": {
+        "tags": [
+          "ServerRestart"
+        ],
+        "operationId": "Servers_Restart",
+        "x-ms-examples": {
+          "ServerRestart": {
+            "$ref": "./examples/ServerRestart.json"
+          }
+        },
+        "description": "Restarts a server.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBForMySQL/servers/{serverName}/replicas": {
+      "get": {
+        "tags": [
+          "Replicas"
+        ],
+        "operationId": "Replicas_ListByServer",
+        "x-ms-examples": {
+          "ReplicasListByServer": {
+            "$ref": "./examples/ReplicasListByServer.json"
+          }
+        },
+        "description": "List all the replicas for a given server.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ServerListResult"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBForMySQL/servers/{serverName}/firewallRules/{firewallRuleName}": {
       "put": {
         "tags": [
           "FirewallRules"
@@ -413,7 +504,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforMySQL/servers/{serverName}/firewallRules": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBForMySQL/servers/{serverName}/firewallRules": {
       "get": {
         "tags": [
           "FirewallRules"
@@ -452,7 +543,194 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforMySQL/servers/{serverName}/databases/{databaseName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBForMySQL/servers/{serverName}/virtualNetworkRules/{virtualNetworkRuleName}": {
+      "get": {
+        "tags": [
+          "VirtualNetworkRules"
+        ],
+        "description": "Gets a virtual network rule.",
+        "operationId": "VirtualNetworkRules_Get",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/virtualNetworkRuleNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved a specified virtual network rule.",
+            "schema": {
+              "$ref": "#/definitions/VirtualNetworkRule"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 ResourceNotFound - The requested resource was not found."
+          }
+        },
+        "x-ms-examples": {
+          "Gets a virtual network rule": {
+            "$ref": "./examples/VirtualNetworkRulesGet.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "VirtualNetworkRules"
+        ],
+        "description": "Creates or updates an existing virtual network rule.",
+        "operationId": "VirtualNetworkRules_CreateOrUpdate",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/virtualNetworkRuleNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "The requested virtual Network Rule Resource state.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/VirtualNetworkRule"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully updated a virtual network rule.",
+            "schema": {
+              "$ref": "#/definitions/VirtualNetworkRule"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 InvalidResourceId - Invalid resource identifier.\n\n * 400 MismatchingSubscriptionWithUrl - The provided subscription did not match the subscription in the Url.\n\n * 400 MismatchingResourceGroupNameWithUrl - The provided resource group name did not match the name in the Url.\n\n * 400 MismatchingServerNameWithUrl - The provided server name did not match the name in the Url.\n\n * 400 NullVirtualNetworkRequest - Virtual Network Request is Null\n\n * 400 NullVirtualNetworkRequestParameters - Virtual Network Request Parameters are Null\n\n * 400 NullVirtualNetworkSubnetId - The Virtual Network Subnet Id is null\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 VirtualNetworkRuleNotEnabled - Azure SQL Server Virtual Network Rule feature is not enabled\n\n * 404 OperationIdNotFound - The operation with Id does not exist.\n\n * 409 OperationCancelled - The operation has been cancelled by user.\n\n * 409 OperationInterrupted - The operation on the resource could not be completed because it was interrupted by another operation on the same resource.\n\n * 500 OperationTimedOut - The operation timed out and automatically rolled back. Please retry the operation."
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "201": {
+            "description": "Successfully created a virtual network rule.",
+            "schema": {
+              "$ref": "#/definitions/VirtualNetworkRule"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Create or update a virtual network rule": {
+            "$ref": "./examples/VirtualNetworkRulesCreateOrUpdate.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "VirtualNetworkRules"
+        ],
+        "description": "Deletes the virtual network rule with the given name.",
+        "operationId": "VirtualNetworkRules_Delete",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/virtualNetworkRuleNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully deleted the virtual network rule."
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 InvalidResourceId - Invalid resource identifier.\n\n * 400 MismatchingSubscriptionWithUrl - The provided subscription did not match the subscription in the Url.\n\n * 400 MismatchingResourceGroupNameWithUrl - The provided resource group name did not match the name in the Url.\n\n * 400 MismatchingServerNameWithUrl - The provided server name did not match the name in the Url.\n\n * 400 NullVirtualNetworkRequest - Virtual Network Request is Null\n\n * 400 NullVirtualNetworkRequestParameters - Virtual Network Request Parameters are Null\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 OperationIdNotFound - The operation with Id does not exist.\n\n * 409 OperationCancelled - The operation has been cancelled by user.\n\n * 409 OperationInterrupted - The operation on the resource could not be completed because it was interrupted by another operation on the same resource.\n\n * 500 OperationTimedOut - The operation timed out and automatically rolled back. Please retry the operation."
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "204": {
+            "description": "The specified virtual network rule does not exist."
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Delete a virtual network rule": {
+            "$ref": "./examples/VirtualNetworkRulesDelete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBForMySQL/servers/{serverName}/virtualNetworkRules": {
+      "get": {
+        "tags": [
+          "VirtualNetworkRules"
+        ],
+        "description": "Gets a list of virtual network rules in a server.",
+        "operationId": "VirtualNetworkRules_ListByServer",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the list of virtual network rules.",
+            "schema": {
+              "$ref": "#/definitions/VirtualNetworkRuleListResult"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 ResourceNotFound - The requested resource was not found."
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List virtual network rules": {
+            "$ref": "./examples/VirtualNetworkRulesList.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBForMySQL/servers/{serverName}/databases/{databaseName}": {
       "put": {
         "tags": [
           "Databases"
@@ -588,7 +866,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforMySQL/servers/{serverName}/databases": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBForMySQL/servers/{serverName}/databases": {
       "get": {
         "tags": [
           "Databases"
@@ -627,7 +905,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforMySQL/servers/{serverName}/configurations/{configurationName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBForMySQL/servers/{serverName}/configurations/{configurationName}": {
       "put": {
         "tags": [
           "Configurations"
@@ -716,7 +994,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforMySQL/servers/{serverName}/configurations": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBForMySQL/servers/{serverName}/configurations": {
       "get": {
         "tags": [
           "Configurations"
@@ -755,7 +1033,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforMySQL/servers/{serverName}/logFiles": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBForMySQL/servers/{serverName}/logFiles": {
       "get": {
         "tags": [
           "LogFiles"
@@ -794,7 +1072,194 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.DBforMySQL/locations/{locationName}/performanceTiers": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBForMySQL/servers/{serverName}/Administrators/activeDirectory": {
+      "get": {
+        "tags": [
+          "ServerAdministrators"
+        ],
+        "operationId": "ServerAdministrators_Get",
+        "x-ms-examples": {
+          "ServerAdministratorGet": {
+            "$ref": "./examples/ServerAdminGet.json"
+          }
+        },
+        "description": "Gets information about a AAD server administrator.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ServerAdministratorResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "ServerAdministrators"
+        ],
+        "operationId": "ServerAdministrators_CreateOrUpdate",
+        "x-ms-examples": {
+          "ServerAdministratorCreate": {
+            "$ref": "./examples/ServerAdminCreateUpdate.json"
+          }
+        },
+        "description": "Creates or update active directory administrator on an existing server. The update action will overwrite the existing administrator.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ServerAdministratorResource"
+            },
+            "description": "The required parameters for creating or updating an AAD server administrator."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully updated the active directory administrator",
+            "schema": {
+              "$ref": "#/definitions/ServerAdministratorResource"
+            }
+          },
+          "202": {
+            "description": "Operation in progress",
+            "schema": {
+              "$ref": "#/definitions/ServerAdministratorResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "tags": [
+          "ServerAdministrators"
+        ],
+        "operationId": "ServerAdministrators_Delete",
+        "x-ms-examples": {
+          "ServerAdministratorsDelete": {
+            "$ref": "./examples/ServerAdminDelete.json"
+          }
+        },
+        "description": "Deletes AAD Administrator.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully deleted the active directory administrator"
+          },
+          "202": {
+            "description": "Operation in progress"
+          },
+          "204": {
+            "description": "The specified Server active directory administrator does not exist"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBForMySQL/servers/{serverName}/administrators": {
+      "get": {
+        "tags": [
+          "ServerAdministrators"
+        ],
+        "operationId": "ServerAdministrators_List",
+        "description": "Returns a list of server Administrators.",
+        "x-ms-examples": {
+          "get a list of server administrators": {
+            "$ref": "./examples/ServerAdminList.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ServerAdministratorResourceListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.DBForMySQL/locations/{locationName}/performanceTiers": {
       "get": {
         "tags": [
           "LocationBasedPerformanceTier"
@@ -830,7 +1295,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.DBforMySQL/checkNameAvailability": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.DBForMySQL/checkNameAvailability": {
       "post": {
         "tags": [
           "CheckNameAvailability"
@@ -869,7 +1334,127 @@
         }
       }
     },
-    "/providers/Microsoft.DBforMySQL/operations": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBForMySQL/servers/{serverName}/securityAlertPolicies/{securityAlertPolicyName}": {
+      "get": {
+        "tags": [
+          "ServerSecurityAlertPolicies"
+        ],
+        "description": "Get a server's security alert policy.",
+        "operationId": "ServerSecurityAlertPolicies_Get",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          },
+          {
+            "name": "securityAlertPolicyName",
+            "in": "path",
+            "description": "The name of the security alert policy.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "Default"
+            ],
+            "x-ms-enum": {
+              "name": "SecurityAlertPolicyName",
+              "modelAsString": true
+            }
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the server threat detection policy.",
+            "schema": {
+              "$ref": "#/definitions/ServerSecurityAlertPolicy"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation of getting security alert policies failed."
+          }
+        },
+        "x-ms-examples": {
+          "Get a server's threat detection policy": {
+            "$ref": "./examples/ServerSecurityAlertsGet.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "ServerSecurityAlertPolicies"
+        ],
+        "description": "Creates or updates a threat detection policy.",
+        "operationId": "ServerSecurityAlertPolicies_CreateOrUpdate",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          },
+          {
+            "name": "securityAlertPolicyName",
+            "in": "path",
+            "description": "The name of the threat detection policy.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "Default"
+            ],
+            "x-ms-enum": {
+              "name": "SecurityAlertPolicyName",
+              "modelAsString": true
+            }
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "The server security alert policy.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ServerSecurityAlertPolicy"
+            }
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully updated the threat detection policy.",
+            "schema": {
+              "$ref": "#/definitions/ServerSecurityAlertPolicy"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation of setting security alert policies failed."
+          },
+          "202": {
+            "description": "Created request to set the server threat detection policy."
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Update a server's threat detection policy with all parameters": {
+            "$ref": "./examples/ServerSecurityAlertsCreateMax.json"
+          },
+          "Update a server's threat detection policy with minimal parameters": {
+            "$ref": "./examples/ServerSecurityAlertsCreateMin.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.DBForMySQL/operations": {
       "get": {
         "tags": [
           "Operations"
@@ -903,7 +1488,8 @@
       "description": "The version of a server.",
       "enum": [
         "5.6",
-        "5.7"
+        "5.7",
+        "8.0"
       ],
       "x-ms-enum": {
         "name": "ServerVersion",
@@ -922,50 +1508,114 @@
         "modelAsString": false
       }
     },
-    "ProxyResource": {
-      "description": "Resource properties.",
+    "MinimalTlsVersion": {
+      "type": "string",
+      "description": "Enforce a minimal Tls version for the server.",
+      "enum": [
+        "TLS1_0",
+        "TLS1_1",
+        "TLS1_2",
+        "TLSEnforcementDisabled"
+      ],
+      "x-ms-enum": {
+        "name": "MinimalTlsVersionEnum",
+        "modelAsString": true
+      }
+    },
+    "ServerPrivateEndpointConnection": {
+      "description": "A private endpoint connection under a server",
+      "type": "object",
       "properties": {
         "id": {
-          "readOnly": true,
+          "description": "Resource Id of the private endpoint connection.",
           "type": "string",
-          "description": "Resource ID"
+          "readOnly": true
         },
-        "name": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Resource name."
+        "properties": {
+          "$ref": "#/definitions/PrivateEndpointConnectionProperties",
+          "description": "Private endpoint connection properties",
+          "readOnly": true
+        }
+      }
+    },
+    "PrivateEndpointConnectionProperties": {
+      "description": "Properties of a private endpoint connection.",
+      "type": "object",
+      "properties": {
+        "privateEndpoint": {
+          "$ref": "#/definitions/PrivateEndpointProperty",
+          "description": "Private endpoint which the connection belongs to."
         },
-        "type": {
-          "readOnly": true,
+        "privateLinkServiceConnectionState": {
+          "$ref": "#/definitions/PrivateLinkServiceConnectionStateProperty",
+          "description": "Connection state of the private endpoint connection."
+        },
+        "provisioningState": {
+          "description": "State of the private endpoint connection.",
+          "enum": [
+            "Approving",
+            "Ready",
+            "Dropping",
+            "Failed",
+            "Rejecting"
+          ],
           "type": "string",
-          "description": "Resource type."
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "PrivateEndpointProvisioningState",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "PrivateEndpointProperty": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "Resource id of the private endpoint.",
+          "type": "string"
         }
       },
       "x-ms-azure-resource": true
     },
-    "TrackedResource": {
-      "description": "Resource properties including location and tags for track resources.",
-      "properties": {
-        "location": {
-          "type": "string",
-          "description": "The location the resource resides in."
-        },
-        "tags": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "description": "Application-specific metadata in the form of key-value pairs."
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/ProxyResource"
-        }
-      ],
+    "PrivateLinkServiceConnectionStateProperty": {
       "required": [
-        "location"
-      ]
+        "status",
+        "description"
+      ],
+      "type": "object",
+      "properties": {
+        "status": {
+          "description": "The private link service connection status.",
+          "enum": [
+            "Approved",
+            "Pending",
+            "Rejected",
+            "Disconnected"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "PrivateLinkServiceConnectionStateStatus",
+            "modelAsString": true
+          }
+        },
+        "description": {
+          "description": "The private link service connection description.",
+          "type": "string"
+        },
+        "actionsRequired": {
+          "description": "The actions required for private link service connection.",
+          "enum": [
+            "None"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "PrivateLinkServiceConnectionStateActionsRequire",
+            "modelAsString": true
+          }
+        }
+      }
     },
     "ServerProperties": {
       "properties": {
@@ -981,13 +1631,35 @@
           "$ref": "#/definitions/SslEnforcement",
           "description": "Enable ssl enforcement or not when connect to server."
         },
+        "minimalTlsVersion": {
+          "$ref": "#/definitions/MinimalTlsVersion",
+          "description": "Enforce a minimal Tls version for the server."
+        },
+        "byokEnforcement": {
+          "type": "string",
+          "description": "Status showing whether the server data encryption is enabled with customer-managed keys.",
+          "readOnly": true
+        },
+        "infrastructureEncryption": {
+          "type": "string",
+          "description": "Status showing whether the server enabled infrastructure encryption.",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "InfrastructureEncryption",
+            "modelAsString": true
+          }
+        },
         "userVisibleState": {
           "type": "string",
           "description": "A state of a server that is visible to user.",
           "enum": [
             "Ready",
             "Dropping",
-            "Disabled"
+            "Disabled",
+            "Inaccessible"
           ],
           "x-ms-enum": {
             "name": "ServerState",
@@ -1006,6 +1678,40 @@
         "storageProfile": {
           "$ref": "#/definitions/StorageProfile",
           "description": "Storage profile of a server."
+        },
+        "replicationRole": {
+          "type": "string",
+          "description": "The replication role of the server."
+        },
+        "masterServerId": {
+          "type": "string",
+          "description": "The master server id of a replica server."
+        },
+        "replicaCapacity": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0,
+          "description": "The maximum number of replicas that a master server can have."
+        },
+        "publicNetworkAccess": {
+          "type": "string",
+          "description": "Whether or not public endpoint access is allowed for this server.  Value is optional but if passed in, must be 'Enabled' or 'Disabled'",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "PublicNetworkAccessEnum",
+            "modelAsString": true
+          }
+        },
+        "privateEndpointConnections": {
+          "description": "List of private endpoint connections on a server",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ServerPrivateEndpointConnection"
+          },
+          "readOnly": true
         }
       },
       "description": "The properties of a server."
@@ -1032,6 +1738,18 @@
           "type": "integer",
           "format": "int32",
           "description": "Max storage allowed for a server."
+        },
+        "storageAutogrow": {
+          "type": "string",
+          "description": "Enable Storage Auto Grow.",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "StorageAutogrow",
+            "modelAsString": true
+          }
         }
       },
       "description": "Storage Profile properties of a server"
@@ -1050,6 +1768,10 @@
           "$ref": "#/definitions/SslEnforcement",
           "description": "Enable ssl enforcement or not when connect to server."
         },
+        "minimalTlsVersion": {
+          "$ref": "#/definitions/MinimalTlsVersion",
+          "description": "Enforce a minimal Tls version for the server."
+        },
         "storageProfile": {
           "$ref": "#/definitions/StorageProfile",
           "description": "Storage profile of a server."
@@ -1059,7 +1781,9 @@
           "description": "The mode to create a new server.",
           "enum": [
             "Default",
-            "PointInTimeRestore"
+            "PointInTimeRestore",
+            "GeoRestore",
+            "Replica"
           ],
           "x-ms-enum": {
             "name": "CreateMode",
@@ -1115,7 +1839,43 @@
         "sourceServerId",
         "restorePointInTime"
       ],
-      "description": "The properties to a new server by restoring from a backup."
+      "description": "The properties used to create a new server by restoring from a backup."
+    },
+    "ServerPropertiesForGeoRestore": {
+      "x-ms-discriminator-value": "GeoRestore",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ServerPropertiesForCreate"
+        }
+      ],
+      "properties": {
+        "sourceServerId": {
+          "type": "string",
+          "description": "The source server id to restore from."
+        }
+      },
+      "required": [
+        "sourceServerId"
+      ],
+      "description": "The properties used to create a new server by restoring to a different region from a geo replicated backup."
+    },
+    "ServerPropertiesForReplica": {
+      "x-ms-discriminator-value": "Replica",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ServerPropertiesForCreate"
+        }
+      ],
+      "properties": {
+        "sourceServerId": {
+          "type": "string",
+          "description": "The master server id to create replica from."
+        }
+      },
+      "required": [
+        "sourceServerId"
+      ],
+      "description": "The properties to create a new replica."
     },
     "Sku": {
       "properties": {
@@ -1151,10 +1911,46 @@
           "description": "The family of hardware."
         }
       },
+      "required": [
+        "name"
+      ],
       "description": "Billing information related properties of a server."
+    },
+    "ResourceIdentity": {
+      "description": "Azure Active Directory identity configuration for a resource.",
+      "type": "object",
+      "properties": {
+        "principalId": {
+          "format": "uuid",
+          "description": "The Azure Active Directory principal id.",
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "description": "The identity type. Set this to 'SystemAssigned' in order to automatically create and assign an Azure Active Directory principal for the resource.",
+          "enum": [
+            "SystemAssigned"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "IdentityType",
+            "modelAsString": true
+          }
+        },
+        "tenantId": {
+          "format": "uuid",
+          "description": "The Azure Active Directory tenant id.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
     },
     "Server": {
       "properties": {
+        "identity": {
+          "$ref": "#/definitions/ResourceIdentity",
+          "description": "The Azure Active Directory identity of the server."
+        },
         "sku": {
           "$ref": "#/definitions/Sku",
           "description": "The SKU (pricing tier) of the server."
@@ -1167,7 +1963,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/TrackedResource"
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/TrackedResource"
         }
       ],
       "description": "Represents a server."
@@ -1225,6 +2021,14 @@
             "sslEnforcement": {
               "$ref": "#/definitions/SslEnforcement",
               "description": "Enable ssl enforcement or not when connect to server."
+            },
+            "minimalTlsVersion": {
+              "$ref": "#/definitions/MinimalTlsVersion",
+              "description": "Enforce a minimal Tls version for the server."
+            },
+            "replicationRole": {
+              "type": "string",
+              "description": "The replication role of the server."
             }
           },
           "x-ms-client-flatten": true,
@@ -1238,7 +2042,7 @@
           "description": "Application-specific metadata in the form of key-value pairs."
         }
       },
-      "description": "Parameters allowd to update for a server."
+      "description": "Parameters allowed to update for a server."
     },
     "ServerListResult": {
       "properties": {
@@ -1281,7 +2085,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/ProxyResource"
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ProxyResource"
         }
       ],
       "required": [
@@ -1300,6 +2104,74 @@
         }
       },
       "description": "A list of firewall rules."
+    },
+    "VirtualNetworkRuleProperties": {
+      "description": "Properties of a virtual network rule.",
+      "required": [
+        "virtualNetworkSubnetId"
+      ],
+      "type": "object",
+      "properties": {
+        "virtualNetworkSubnetId": {
+          "description": "The ARM resource id of the virtual network subnet.",
+          "type": "string"
+        },
+        "ignoreMissingVnetServiceEndpoint": {
+          "description": "Create firewall rule before the virtual network has vnet service endpoint enabled.",
+          "type": "boolean"
+        },
+        "state": {
+          "description": "Virtual Network Rule State",
+          "enum": [
+            "Initializing",
+            "InProgress",
+            "Ready",
+            "Deleting",
+            "Unknown"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "VirtualNetworkRuleState",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "VirtualNetworkRule": {
+      "description": "A virtual network rule.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/VirtualNetworkRuleProperties",
+          "description": "Resource properties.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "VirtualNetworkRuleListResult": {
+      "description": "A list of virtual network rules.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Array of results.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VirtualNetworkRule"
+          },
+          "readOnly": true
+        },
+        "nextLink": {
+          "description": "Link to retrieve next page of results.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
     },
     "DatabaseProperties": {
       "properties": {
@@ -1324,7 +2196,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/ProxyResource"
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ProxyResource"
         }
       ],
       "description": "Represents a Database."
@@ -1384,7 +2256,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/ProxyResource"
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ProxyResource"
         }
       ],
       "description": "Represents a Configuration."
@@ -1478,10 +2350,6 @@
     },
     "LogFileProperties": {
       "properties": {
-        "name": {
-          "type": "string",
-          "description": "Log file name."
-        },
         "sizeInKB": {
           "type": "integer",
           "format": "int64",
@@ -1524,7 +2392,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/ProxyResource"
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ProxyResource"
         }
       ],
       "description": "Represents a log file."
@@ -1558,15 +2426,6 @@
         "hardwareGeneration": {
           "type": "string",
           "description": "Hardware generation associated with the service level objective"
-        }
-      },
-      "description": "Service level objectives for performance tier."
-    },
-    "PerformanceTierProperties": {
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "ID of the performance tier."
         },
         "maxBackupRetentionDays": {
           "type": "integer",
@@ -1585,6 +2444,15 @@
           "type": "integer",
           "format": "int32",
           "description": "Max storage allowed for a server."
+        }
+      },
+      "description": "Service level objectives for performance tier."
+    },
+    "PerformanceTierProperties": {
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "ID of the performance tier."
         },
         "serviceLevelObjectives": {
           "type": "array",
@@ -1640,6 +2508,170 @@
         }
       },
       "description": "Represents a resource name availability."
+    },
+    "SecurityAlertPolicyProperties": {
+      "description": "Properties of a security alert policy.",
+      "required": [
+        "state"
+      ],
+      "type": "object",
+      "properties": {
+        "state": {
+          "description": "Specifies the state of the policy, whether it is enabled or disabled.",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "ServerSecurityAlertPolicyState",
+            "modelAsString": false
+          }
+        },
+        "disabledAlerts": {
+          "description": "Specifies an array of alerts that are disabled. Allowed values are: Sql_Injection, Sql_Injection_Vulnerability, Access_Anomaly",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "emailAddresses": {
+          "description": "Specifies an array of e-mail addresses to which the alert is sent.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "emailAccountAdmins": {
+          "description": "Specifies that the alert is sent to the account administrators.",
+          "type": "boolean"
+        },
+        "storageEndpoint": {
+          "description": "Specifies the blob storage endpoint (e.g. https://MyAccount.blob.core.windows.net). This blob storage will hold all Threat Detection audit logs.",
+          "type": "string"
+        },
+        "storageAccountAccessKey": {
+          "description": "Specifies the identifier key of the Threat Detection audit storage account.",
+          "type": "string"
+        },
+        "retentionDays": {
+          "format": "int32",
+          "description": "Specifies the number of days to keep in the Threat Detection audit logs.",
+          "type": "integer"
+        }
+      }
+    },
+    "ServerSecurityAlertPolicy": {
+      "description": "A server security alert policy.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/SecurityAlertPolicyProperties",
+          "description": "Resource properties.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "CloudError": {
+      "x-ms-external": true,
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/CloudErrorBody"
+        }
+      },
+      "description": "An error response from the Batch service."
+    },
+    "CloudErrorBody": {
+      "x-ms-external": true,
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "An identifier for the error. Codes are invariant and are intended to be consumed programmatically."
+        },
+        "message": {
+          "type": "string",
+          "description": "A message describing the error, intended to be suitable for display in a user interface."
+        },
+        "target": {
+          "type": "string",
+          "description": "The target of the particular error. For example, the name of the property in error."
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CloudErrorBody"
+          },
+          "description": "A list of additional details about the error."
+        }
+      },
+      "description": "An error response from the Batch service."
+    },
+    "ServerAdministratorProperties": {
+      "properties": {
+        "administratorType": {
+          "type": "string",
+          "description": "The type of administrator.",
+          "enum": [
+            "ActiveDirectory"
+          ],
+          "x-ms-enum": {
+            "name": "AdministratorType"
+          }
+        },
+        "login": {
+          "type": "string",
+          "description": "The server administrator login account name."
+        },
+        "sid": {
+          "type": "string",
+          "description": "The server administrator Sid (Secure ID).",
+          "format": "uuid"
+        },
+        "tenantId": {
+          "type": "string",
+          "description": "The server Active Directory Administrator tenant id.",
+          "format": "uuid"
+        }
+      },
+      "required": [
+        "tenantId",
+        "administratorType",
+        "login",
+        "sid"
+      ],
+      "description": "The properties of an server Administrator."
+    },
+    "ServerAdministratorResource": {
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ServerAdministratorProperties",
+          "x-ms-client-flatten": true,
+          "description": "Properties of the server AAD administrator."
+        }
+      },
+      "description": "Represents a and external administrator to be created.",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "ServerAdministratorResourceListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ServerAdministratorResource"
+          },
+          "description": "The list of server Active Directory Administrators for the server."
+        }
+      },
+      "description": "The response to a list Active Directory Administrators request."
     }
   },
   "parameters": {
@@ -1681,6 +2713,14 @@
       "description": "The name of the server firewall rule.",
       "x-ms-parameter-location": "method"
     },
+    "virtualNetworkRuleNameParameter": {
+      "name": "virtualNetworkRuleName",
+      "in": "path",
+      "description": "The name of the virtual network rule.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
     "DatabaseNameParameter": {
       "name": "databaseName",
       "in": "path",
@@ -1703,6 +2743,17 @@
       "required": true,
       "type": "string",
       "description": "The name of the location.",
+      "x-ms-parameter-location": "method"
+    },
+    "SecurityAlertPolicyNameParameter": {
+      "name": "securityAlertPolicyName",
+      "in": "path",
+      "description": "The name of the security alert policy.",
+      "required": true,
+      "type": "string",
+      "enum": [
+        "default"
+      ],
       "x-ms-parameter-location": "method"
     }
   }

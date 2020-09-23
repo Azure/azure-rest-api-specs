@@ -73,13 +73,17 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
+  - repo: azure-sdk-for-net
   - repo: azure-sdk-for-python
-  - repo: azure-libraries-for-java
+  - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-node
   - repo: azure-sdk-for-ruby
     after_scripts:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_datalake_analytics']
+  - repo: azure-resource-manager-schemas
+    after_scripts:
+      - node sdkauto_afterscript.js datalake-analytics/resource-manager
 ```
 
 
@@ -93,7 +97,7 @@ csharp:
   azure-arm: true
   license-header: MICROSOFT_MIT_NO_VERSION
   namespace: Microsoft.Azure.Management.DataLake.Analytics
-  output-folder: $(csharp-sdks-folder)/DataLake.Analytics/Management.DataLake.Analytics/Generated
+  output-folder: $(csharp-sdks-folder)/datalake-analytics/Microsoft.Azure.Management.DataLake.Analytics/src/Generated
   clear-output-folder: true
 ```
 
@@ -111,47 +115,12 @@ python:
   clear-output-folder: true
   no-namespace-folders: true
   namespace: azure.mgmt.datalake.analytics.account
-  output-folder: $(python-sdks-folder)/azure-mgmt-datalake-analytics/azure/mgmt/datalake/analytics/account
+  output-folder: $(python-sdks-folder)/datalake/azure-mgmt-datalake-analytics/azure/mgmt/datalake/analytics/account
 ```
-
 
 ## Go
 
-These settings apply only when `--go` is specified on the command line.
-
-``` yaml $(go)
-go:
-  license-header: MICROSOFT_APACHE_NO_VERSION
-  namespace: account
-  clear-output-folder: true
-```
-
-### Go multi-api
-
-``` yaml $(go) && $(multiapi)
-batch:
-  - tag: package-2016-11
-  - tag: package-2015-10-preview
-```
-
-### Tag: package-2016-11 and go
-
-These settings apply only when `--tag=package-2016-11 --go` is specified on the command line.
-Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
-
-``` yaml $(tag) == 'package-2016-11' && $(go)
-output-folder: $(go-sdk-folder)/services/datalake/analytics/mgmt/2016-11-01/account
-```
-
-### Tag: package-2015-10-preview and go
-
-These settings apply only when `--tag=package-2015-10-preview --go` is specified on the command line.
-Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
-
-``` yaml $(tag) == 'package-2015-10-preview' && $(go)
-output-folder: $(go-sdk-folder)/services/preview/datalake/analytics/mgmt/2015-10-01-preview/account
-```
-
+See configuration in [readme.go.md](./readme.go.md)
 
 ## Java
 
@@ -159,9 +128,50 @@ These settings apply only when `--java` is specified on the command line.
 Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-libraries-for-java clone>`.
 
 ``` yaml $(java)
-java:
-  azure-arm: true
-  namespace: com.microsoft.azure.management.datalake.analytics
-  license-header: MICROSOFT_MIT_NO_CODEGEN
-  output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-datalake/analytics
+azure-arm: true
+fluent: true
+namespace: com.microsoft.azure.management.datalake.analytics
+license-header: MICROSOFT_MIT_NO_CODEGEN
+output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-datalake/analytics
 ```
+
+### Java multi-api
+
+``` yaml $(java) && $(multiapi)
+batch:
+  - tag: package-2015-10-preview
+  - tag: package-2016-11
+```
+
+### Tag: package-2015-10-preview and java
+
+These settings apply only when `--tag=package-2015-10-preview --java` is specified on the command line.
+Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-2015-10-preview' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.datalakeanalytics.v2015_10_01_preview
+  output-folder: $(azure-libraries-for-java-folder)/sdk/datalakeanalytics/mgmt-v2015_10_01_preview
+regenerate-manager: true
+generate-interface: true
+```
+
+### Tag: package-2016-11 and java
+
+These settings apply only when `--tag=package-2016-11 --java` is specified on the command line.
+Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-2016-11' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.datalakeanalytics.v2016_11_01
+  output-folder: $(azure-libraries-for-java-folder)/sdk/datalakeanalytics/mgmt-v2016_11_01
+regenerate-manager: true
+generate-interface: true
+```
+
+
+
+## AzureResourceSchema
+
+See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
+

@@ -29,6 +29,16 @@ openapi-type: arm
 tag: package-2017-06
 ```
 
+### Tag: package-2020-01
+
+These settings apply only when `--tag=package-2020-01` is specified on the command line.
+
+``` yaml $(tag) == 'package-2020-01'
+input-file:
+- Microsoft.AAD/stable/2020-01-01/domainservices.json
+- Microsoft.AAD/stable/2020-01-01/oucontainer.json
+```
+
 ### Tag: package-2017-06
 
 These settings apply only when `--tag=package-2017-06` is specified on the command line.
@@ -36,6 +46,7 @@ These settings apply only when `--tag=package-2017-06` is specified on the comma
 ``` yaml $(tag) == 'package-2017-06'
 input-file:
 - Microsoft.AAD/stable/2017-06-01/domainservices.json
+- Microsoft.AAD/stable/2017-06-01/oucontainer.json
 ```
 
 ### Tag: package-2017-01
@@ -58,7 +69,9 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
+  - repo: azure-sdk-for-net
   - repo: azure-sdk-for-go
+  - repo: azure-sdk-for-js
   - repo: azure-sdk-for-node
 ```
 
@@ -73,47 +86,13 @@ csharp:
   license-header: MICROSOFT_MIT_NO_VERSION
   namespace: Microsoft.Azure.Management.DomainServices
   payload-flattening-threshold: 2
-  output-folder: $(csharp-sdks-folder)/DomainServices/Management.DomainServices/Generated
+  output-folder: $(csharp-sdks-folder)/domainservices/Microsoft.Azure.Management.DomainServices/src/Generated
   clear-output-folder: true
 ```
-
 
 ## Go
 
-These settings apply only when `--go` is specified on the command line.
-
-``` yaml $(go)
-go:
-  license-header: MICROSOFT_APACHE_NO_VERSION
-  namespace: aad
-  clear-output-folder: true
-```
-
-### Go multi-api
-
-``` yaml $(go) && $(multiapi)
-batch:
-  - tag: package-2017-01
-  - tag: package-2017-06
-```
-
-### Tag: package-2017-01 and go
-
-These settings apply only when `--tag=package-2017-01 --go` is specified on the command line.
-Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
-
-``` yaml $(tag) == 'package-2017-01' && $(go)
-output-folder: $(go-sdk-folder)/services/domainservices/mgmt/2017-01-01/aad
-```
-
-### Tag: package-2017-06 and go
-
-These settings apply only when `--tag=package-2017-01 --go` is specified on the command line.
-Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
-
-``` yaml $(tag) == 'package-2017-06' && $(go)
-output-folder: $(go-sdk-folder)/services/domainservices/mgmt/2017-06-01/aad
-```
+See configuration in [readme.go.md](./readme.go.md)
 
 ## Java
 
@@ -121,11 +100,61 @@ These settings apply only when `--java` is specified on the command line.
 Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-libraries-for-java clone>`.
 
 ``` yaml $(java)
-java:
-  azure-arm: true
-  fluent: true
-  namespace: com.microsoft.azure.management.domainservices
-  license-header: MICROSOFT_MIT_NO_CODEGEN
-  payload-flattening-threshold: 1
-  output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-domainservices
+azure-arm: true
+fluent: true
+namespace: com.microsoft.azure.management.domainservices
+license-header: MICROSOFT_MIT_NO_CODEGEN
+payload-flattening-threshold: 1
+output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-domainservices
 ```
+
+### Java multi-api
+
+``` yaml $(java) && $(multiapi)
+batch:
+  - tag: package-2020-01
+  - tag: package-2017-06
+  - tag: package-2017-01
+```
+
+### Tag: package-2020-01 and java
+
+These settings apply only when `--tag=package-2020-01 --java` is specified on the command line.
+Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-2020-01' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.domainservices.v2020_01_01
+  output-folder: $(azure-libraries-for-java-folder)/sdk/domainservices/mgmt-v2020_01_01
+regenerate-manager: true
+generate-interface: true
+```
+
+### Tag: package-2017-06 and java
+
+These settings apply only when `--tag=package-2017-06 --java` is specified on the command line.
+Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-2017-06' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.domainservices.v2017_06_01
+  output-folder: $(azure-libraries-for-java-folder)/sdk/domainservices/mgmt-v2017_06_01
+regenerate-manager: true
+generate-interface: true
+```
+
+### Tag: package-2017-01 and java
+
+These settings apply only when `--tag=package-2017-01 --java` is specified on the command line.
+Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-2017-01' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.domainservices.v2017_01_01
+  output-folder: $(azure-libraries-for-java-folder)/sdk/domainservices/mgmt-v2017_01_01
+regenerate-manager: true
+generate-interface: true
+```
+
+
+

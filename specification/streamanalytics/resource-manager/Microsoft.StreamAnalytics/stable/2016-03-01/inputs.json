@@ -41,10 +41,18 @@
         "operationId": "Inputs_CreateOrReplace",
         "description": "Creates an input or replaces an already existing input under an existing streaming job.",
         "x-ms-examples": {
-          "Create a reference blob input wtih CSV serialization": { "$ref": "./examples/Input_Create_Reference_Blob_CSV.json" },
-          "Create a stream blob input with CSV serialization": { "$ref": "./examples/Input_Create_Stream_Blob_CSV.json" },
-          "Create a stream Event Hub input with JSON serialization": { "$ref": "./examples/Input_Create_Stream_EventHub_JSON.json" },
-          "Create a stream IoT Hub input with Avro serialization": { "$ref": "./examples/Input_Create_Stream_IoTHub_Avro.json" }
+          "Create a reference blob input with CSV serialization": {
+            "$ref": "./examples/Input_Create_Reference_Blob_CSV.json"
+          },
+          "Create a stream blob input with CSV serialization": {
+            "$ref": "./examples/Input_Create_Stream_Blob_CSV.json"
+          },
+          "Create a stream Event Hub input with JSON serialization": {
+            "$ref": "./examples/Input_Create_Stream_EventHub_JSON.json"
+          },
+          "Create a stream IoT Hub input with Avro serialization": {
+            "$ref": "./examples/Input_Create_Stream_IoTHub_Avro.json"
+          }
         },
         "parameters": [
           {
@@ -62,7 +70,7 @@
             "required": false,
             "type": "string",
             "x-ms-client-name": "IfMatch",
-            "description": "The ETag of the input. Omit this value to always overwrite the current input. Specify the last-seen ETag value to prevent accidentally overwritting concurrent changes."
+            "description": "The ETag of the input. Omit this value to always overwrite the current input. Specify the last-seen ETag value to prevent accidentally overwriting concurrent changes."
           },
           {
             "name": "If-None-Match",
@@ -122,10 +130,18 @@
         "operationId": "Inputs_Update",
         "description": "Updates an existing input under an existing streaming job. This can be used to partially update (ie. update one or two properties) an input without affecting the rest the job or input definition.",
         "x-ms-examples": {
-          "Update a reference blob input": { "$ref": "./examples/Input_Update_Reference_Blob.json" },
-          "Update a stream blob input": { "$ref": "./examples/Input_Update_Stream_Blob.json" },
-          "Update a stream Event Hub input": { "$ref": "./examples/Input_Update_Stream_EventHub.json" },
-          "Update a stream IoT Hub input": { "$ref": "./examples/Input_Update_Stream_IoTHub.json" }
+          "Update a reference blob input": {
+            "$ref": "./examples/Input_Update_Reference_Blob.json"
+          },
+          "Update a stream blob input": {
+            "$ref": "./examples/Input_Update_Stream_Blob.json"
+          },
+          "Update a stream Event Hub input": {
+            "$ref": "./examples/Input_Update_Stream_EventHub.json"
+          },
+          "Update a stream IoT Hub input": {
+            "$ref": "./examples/Input_Update_Stream_IoTHub.json"
+          }
         },
         "parameters": [
           {
@@ -143,7 +159,7 @@
             "required": false,
             "type": "string",
             "x-ms-client-name": "IfMatch",
-            "description": "The ETag of the input. Omit this value to always overwrite the current input. Specify the last-seen ETag value to prevent accidentally overwritting concurrent changes."
+            "description": "The ETag of the input. Omit this value to always overwrite the current input. Specify the last-seen ETag value to prevent accidentally overwriting concurrent changes."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -183,7 +199,9 @@
         "operationId": "Inputs_Delete",
         "description": "Deletes an input from the streaming job.",
         "x-ms-examples": {
-          "Delete an input": { "$ref": "./examples/Input_Delete.json" }
+          "Delete an input": {
+            "$ref": "./examples/Input_Delete.json"
+          }
         },
         "parameters": [
           {
@@ -218,10 +236,18 @@
         "operationId": "Inputs_Get",
         "description": "Gets details about the specified input.",
         "x-ms-examples": {
-          "Get a reference blob input wtih CSV serialization": { "$ref": "./examples/Input_Get_Reference_Blob_CSV.json" },
-          "Get a stream blob input with CSV serialization": { "$ref": "./examples/Input_Get_Stream_Blob_CSV.json" },
-          "Get a stream Event Hub input with JSON serialization": { "$ref": "./examples/Input_Get_Stream_EventHub_JSON.json" },
-          "Get a stream IoT Hub input with Avro serialization": { "$ref": "./examples/Input_Get_Stream_IoTHub_Avro.json" }
+          "Get a reference blob input with CSV serialization": {
+            "$ref": "./examples/Input_Get_Reference_Blob_CSV.json"
+          },
+          "Get a stream blob input with CSV serialization": {
+            "$ref": "./examples/Input_Get_Stream_Blob_CSV.json"
+          },
+          "Get a stream Event Hub input with JSON serialization": {
+            "$ref": "./examples/Input_Get_Stream_EventHub_JSON.json"
+          },
+          "Get a stream IoT Hub input with Avro serialization": {
+            "$ref": "./examples/Input_Get_Stream_IoTHub_Avro.json"
+          }
         },
         "parameters": [
           {
@@ -264,8 +290,12 @@
         "operationId": "Inputs_ListByStreamingJob",
         "description": "Lists all of the inputs under the specified streaming job.",
         "x-ms-examples": {
-          "List all inputs in a streaming job": { "$ref": "./examples/Input_ListByStreamingJob.json" },
-          "List all inputs in a streaming job and include diagnostic information using the $select OData query parameter": { "$ref": "./examples/Input_ListByStreamingJob_Diagnostics.json" }
+          "List all inputs in a streaming job": {
+            "$ref": "./examples/Input_ListByStreamingJob.json"
+          },
+          "List all inputs in a streaming job and include diagnostic information using the $select OData query parameter": {
+            "$ref": "./examples/Input_ListByStreamingJob_Diagnostics.json"
+          }
         },
         "parameters": [
           {
@@ -273,7 +303,7 @@
             "in": "query",
             "required": false,
             "type": "string",
-            "description": "The $select OData query parameter. This is a comma-separated list of structural properties to include in the response, or “*” to include all properties. By default, all properties are returned except diagnostics. Currently only accepts '*' as a valid value."
+            "description": "The $select OData query parameter. This is a comma-separated list of structural properties to include in the response, or \"*\" to include all properties. By default, all properties are returned except diagnostics. Currently only accepts '*' as a valid value."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -309,7 +339,9 @@
         "operationId": "Inputs_Test",
         "description": "Tests whether an input’s datasource is reachable and usable by the Azure Stream Analytics service.",
         "x-ms-examples": {
-          "Test the connection for an input": { "$ref": "./examples/Input_Test.json" }
+          "Test the connection for an input": {
+            "$ref": "./examples/Input_Test.json"
+          }
         },
         "parameters": [
           {

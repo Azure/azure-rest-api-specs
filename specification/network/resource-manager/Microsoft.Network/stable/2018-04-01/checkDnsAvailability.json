@@ -54,10 +54,10 @@
             "description": "The domain name to be verified. It must conform to the following regular expression: ^[a-z][a-z0-9-]{1,61}[a-z0-9]$."
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -69,7 +69,9 @@
           }
         },
         "x-ms-examples": {
-          "Check Dns Name Availability": { "$ref": "./examples/CheckDnsNameAvailability.json" }
+          "Check Dns Name Availability": {
+            "$ref": "./examples/CheckDnsNameAvailability.json"
+          }
         }
       }
     }
@@ -83,22 +85,6 @@
         }
       },
       "description": "Response for the CheckDnsNameAvailability API service call."
-    }
-  },
-  "parameters": {
-    "SubscriptionIdParameter": {
-      "name": "subscriptionId",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "The subscription credentials which uniquely identify the Microsoft Azure subscription. The subscription ID forms part of the URI for every service call."
-    },
-    "ApiVersionParameter": {
-      "name": "api-version",
-      "in": "query",
-      "required": true,
-      "type": "string",
-      "description": "Client API version."
     }
   }
 }

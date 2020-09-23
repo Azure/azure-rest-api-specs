@@ -1,463 +1,543 @@
 {
-    "parameters": {
-        "subscriptionId": "subid",
-        "resourceGroupName": "rg",
-        "automationAccountName": "myAutomationAccount33",
-        "moduleName": "OmsCompositeResources",
-        "activityName": "Add-AzureRmAccount",
-        "api-version": "2015-10-31"
-    },
-    "responses": {
-        "200": {
-            "headers": {},
-            "body": {
-                "id": "/subscriptions/subid/resourceGroups/rg/providers/Microsoft.Automation/automationAccounts/myAutomationAccount33/modules/AzureRM.Profile/activities/Add-AzureRmAccount",
-                "name": "Add-AzureRmAccount",
-                "properties": {
-                    "definition": "",
-                    "description": "The Add-AzureRmAcccount cmdlet adds an authenticated Azure account to use for Azure Resource Manager cmdlet requests.\n\nYou can use this authenticated account only with Azure Resource Manager cmdlets. To add an authenticated account for use with Service Management cmdlets, use the Add-AzureAccount or the Import-AzurePublishSettingsFile cmdlet.",
-                    "parameterSets": [
-                        {
-                            "name": "SubscriptionId",
-                            "parameters": [
-                                {
-                                    "name": "AccessToken",
-                                    "type": "System.String",
-                                    "isMandatory": false,
-                                    "isDynamic": false,
-                                    "position": -2147483648,
-                                    "valueFromPipeline": false,
-                                    "valueFromPipelineByPropertyName": false,
-                                    "valueFromRemainingArguments": false
-                                },
-                                {
-                                    "name": "AccountId",
-                                    "type": "System.String",
-                                    "isMandatory": false,
-                                    "isDynamic": false,
-                                    "position": -2147483648,
-                                    "valueFromPipeline": false,
-                                    "valueFromPipelineByPropertyName": false,
-                                    "valueFromRemainingArguments": false
-                                },
-                                {
-                                    "name": "ApplicationId",
-                                    "type": "System.String",
-                                    "isMandatory": false,
-                                    "isDynamic": false,
-                                    "position": -2147483648,
-                                    "valueFromPipeline": false,
-                                    "valueFromPipelineByPropertyName": false,
-                                    "valueFromRemainingArguments": false
-                                },
-                                {
-                                    "name": "CertificateThumbprint",
-                                    "type": "System.String",
-                                    "isMandatory": false,
-                                    "isDynamic": false,
-                                    "position": -2147483648,
-                                    "valueFromPipeline": false,
-                                    "valueFromPipelineByPropertyName": false,
-                                    "valueFromRemainingArguments": false
-                                },
-                                {
-                                    "name": "Credential",
-                                    "type": "System.Management.Automation.PSCredential",
-                                    "isMandatory": false,
-                                    "isDynamic": false,
-                                    "position": -2147483648,
-                                    "valueFromPipeline": false,
-                                    "valueFromPipelineByPropertyName": false,
-                                    "valueFromRemainingArguments": false
-                                },
-                                {
-                                    "name": "Environment",
-                                    "type": "Microsoft.Azure.Common.Authentication.Models.AzureEnvironment",
-                                    "isMandatory": false,
-                                    "isDynamic": false,
-                                    "position": -2147483648,
-                                    "valueFromPipeline": false,
-                                    "valueFromPipelineByPropertyName": false,
-                                    "valueFromRemainingArguments": false
-                                },
-                                {
-                                    "name": "EnvironmentName",
-                                    "type": "System.String",
-                                    "isMandatory": false,
-                                    "isDynamic": false,
-                                    "position": -2147483648,
-                                    "valueFromPipeline": false,
-                                    "valueFromPipelineByPropertyName": false,
-                                    "valueFromRemainingArguments": false
-                                },
-                                {
-                                    "name": "SubscriptionId",
-                                    "type": "System.String",
-                                    "isMandatory": false,
-                                    "isDynamic": false,
-                                    "position": -2147483648,
-                                    "valueFromPipeline": false,
-                                    "valueFromPipelineByPropertyName": true,
-                                    "valueFromRemainingArguments": false
-                                },
-                                {
-                                    "name": "TenantId",
-                                    "type": "System.String",
-                                    "isMandatory": false,
-                                    "isDynamic": false,
-                                    "position": -2147483648,
-                                    "valueFromPipeline": false,
-                                    "valueFromPipelineByPropertyName": false,
-                                    "valueFromRemainingArguments": false
-                                }
-                            ]
-                        },
-                        {
-                            "name": "ServicePrincipal",
-                            "parameters": [
-                                {
-                                    "name": "Credential",
-                                    "type": "System.Management.Automation.PSCredential",
-                                    "isMandatory": true,
-                                    "isDynamic": false,
-                                    "position": -2147483648,
-                                    "valueFromPipeline": false,
-                                    "valueFromPipelineByPropertyName": false,
-                                    "valueFromRemainingArguments": false
-                                },
-                                {
-                                    "name": "Environment",
-                                    "type": "Microsoft.Azure.Common.Authentication.Models.AzureEnvironment",
-                                    "isMandatory": false,
-                                    "isDynamic": false,
-                                    "position": -2147483648,
-                                    "valueFromPipeline": false,
-                                    "valueFromPipelineByPropertyName": false,
-                                    "valueFromRemainingArguments": false
-                                },
-                                {
-                                    "name": "EnvironmentName",
-                                    "type": "System.String",
-                                    "isMandatory": false,
-                                    "isDynamic": false,
-                                    "position": -2147483648,
-                                    "valueFromPipeline": false,
-                                    "valueFromPipelineByPropertyName": false,
-                                    "valueFromRemainingArguments": false
-                                },
-                                {
-                                    "name": "ServicePrincipal",
-                                    "type": "System.Management.Automation.SwitchParameter",
-                                    "isMandatory": true,
-                                    "isDynamic": false,
-                                    "position": -2147483648,
-                                    "valueFromPipeline": false,
-                                    "valueFromPipelineByPropertyName": false,
-                                    "valueFromRemainingArguments": false
-                                },
-                                {
-                                    "name": "SubscriptionId",
-                                    "type": "System.String",
-                                    "isMandatory": false,
-                                    "isDynamic": false,
-                                    "position": -2147483648,
-                                    "valueFromPipeline": false,
-                                    "valueFromPipelineByPropertyName": true,
-                                    "valueFromRemainingArguments": false
-                                },
-                                {
-                                    "name": "SubscriptionName",
-                                    "type": "System.String",
-                                    "isMandatory": false,
-                                    "isDynamic": false,
-                                    "position": -2147483648,
-                                    "valueFromPipeline": false,
-                                    "valueFromPipelineByPropertyName": true,
-                                    "valueFromRemainingArguments": false
-                                },
-                                {
-                                    "name": "TenantId",
-                                    "type": "System.String",
-                                    "isMandatory": true,
-                                    "isDynamic": false,
-                                    "position": -2147483648,
-                                    "valueFromPipeline": false,
-                                    "valueFromPipelineByPropertyName": false,
-                                    "valueFromRemainingArguments": false
-                                }
-                            ]
-                        },
-                        {
-                            "name": "SubscriptionName",
-                            "parameters": [
-                                {
-                                    "name": "AccessToken",
-                                    "type": "System.String",
-                                    "isMandatory": false,
-                                    "isDynamic": false,
-                                    "position": -2147483648,
-                                    "valueFromPipeline": false,
-                                    "valueFromPipelineByPropertyName": false,
-                                    "valueFromRemainingArguments": false
-                                },
-                                {
-                                    "name": "AccountId",
-                                    "type": "System.String",
-                                    "isMandatory": false,
-                                    "isDynamic": false,
-                                    "position": -2147483648,
-                                    "valueFromPipeline": false,
-                                    "valueFromPipelineByPropertyName": false,
-                                    "valueFromRemainingArguments": false
-                                },
-                                {
-                                    "name": "ApplicationId",
-                                    "type": "System.String",
-                                    "isMandatory": false,
-                                    "isDynamic": false,
-                                    "position": -2147483648,
-                                    "valueFromPipeline": false,
-                                    "valueFromPipelineByPropertyName": false,
-                                    "valueFromRemainingArguments": false
-                                },
-                                {
-                                    "name": "CertificateThumbprint",
-                                    "type": "System.String",
-                                    "isMandatory": false,
-                                    "isDynamic": false,
-                                    "position": -2147483648,
-                                    "valueFromPipeline": false,
-                                    "valueFromPipelineByPropertyName": false,
-                                    "valueFromRemainingArguments": false
-                                },
-                                {
-                                    "name": "Credential",
-                                    "type": "System.Management.Automation.PSCredential",
-                                    "isMandatory": false,
-                                    "isDynamic": false,
-                                    "position": -2147483648,
-                                    "valueFromPipeline": false,
-                                    "valueFromPipelineByPropertyName": false,
-                                    "valueFromRemainingArguments": false
-                                },
-                                {
-                                    "name": "Environment",
-                                    "type": "Microsoft.Azure.Common.Authentication.Models.AzureEnvironment",
-                                    "isMandatory": false,
-                                    "isDynamic": false,
-                                    "position": -2147483648,
-                                    "valueFromPipeline": false,
-                                    "valueFromPipelineByPropertyName": false,
-                                    "valueFromRemainingArguments": false
-                                },
-                                {
-                                    "name": "EnvironmentName",
-                                    "type": "System.String",
-                                    "isMandatory": false,
-                                    "isDynamic": false,
-                                    "position": -2147483648,
-                                    "valueFromPipeline": false,
-                                    "valueFromPipelineByPropertyName": false,
-                                    "valueFromRemainingArguments": false
-                                },
-                                {
-                                    "name": "SubscriptionName",
-                                    "type": "System.String",
-                                    "isMandatory": false,
-                                    "isDynamic": false,
-                                    "position": -2147483648,
-                                    "valueFromPipeline": false,
-                                    "valueFromPipelineByPropertyName": true,
-                                    "valueFromRemainingArguments": false
-                                },
-                                {
-                                    "name": "TenantId",
-                                    "type": "System.String",
-                                    "isMandatory": false,
-                                    "isDynamic": false,
-                                    "position": -2147483648,
-                                    "valueFromPipeline": false,
-                                    "valueFromPipelineByPropertyName": false,
-                                    "valueFromRemainingArguments": false
-                                }
-                            ]
-                        },
-                        {
-                            "name": "User",
-                            "parameters": [
-                                {
-                                    "name": "Credential",
-                                    "type": "System.Management.Automation.PSCredential",
-                                    "isMandatory": false,
-                                    "isDynamic": false,
-                                    "position": -2147483648,
-                                    "valueFromPipeline": false,
-                                    "valueFromPipelineByPropertyName": false,
-                                    "valueFromRemainingArguments": false
-                                },
-                                {
-                                    "name": "Environment",
-                                    "type": "Microsoft.Azure.Common.Authentication.Models.AzureEnvironment",
-                                    "isMandatory": false,
-                                    "isDynamic": false,
-                                    "position": -2147483648,
-                                    "valueFromPipeline": false,
-                                    "valueFromPipelineByPropertyName": false,
-                                    "valueFromRemainingArguments": false
-                                },
-                                {
-                                    "name": "EnvironmentName",
-                                    "type": "System.String",
-                                    "isMandatory": false,
-                                    "isDynamic": false,
-                                    "position": -2147483648,
-                                    "valueFromPipeline": false,
-                                    "valueFromPipelineByPropertyName": false,
-                                    "valueFromRemainingArguments": false
-                                },
-                                {
-                                    "name": "TenantId",
-                                    "type": "System.String",
-                                    "isMandatory": false,
-                                    "isDynamic": false,
-                                    "position": -2147483648,
-                                    "valueFromPipeline": false,
-                                    "valueFromPipelineByPropertyName": false,
-                                    "valueFromRemainingArguments": false
-                                }
-                            ]
-                        },
-                        {
-                            "name": "AccessToken",
-                            "parameters": [
-                                {
-                                    "name": "AccessToken",
-                                    "type": "System.String",
-                                    "isMandatory": true,
-                                    "isDynamic": false,
-                                    "position": -2147483648,
-                                    "valueFromPipeline": false,
-                                    "valueFromPipelineByPropertyName": false,
-                                    "valueFromRemainingArguments": false
-                                },
-                                {
-                                    "name": "AccountId",
-                                    "type": "System.String",
-                                    "isMandatory": true,
-                                    "isDynamic": false,
-                                    "position": -2147483648,
-                                    "valueFromPipeline": false,
-                                    "valueFromPipelineByPropertyName": false,
-                                    "valueFromRemainingArguments": false
-                                },
-                                {
-                                    "name": "Environment",
-                                    "type": "Microsoft.Azure.Common.Authentication.Models.AzureEnvironment",
-                                    "isMandatory": false,
-                                    "isDynamic": false,
-                                    "position": -2147483648,
-                                    "valueFromPipeline": false,
-                                    "valueFromPipelineByPropertyName": false,
-                                    "valueFromRemainingArguments": false
-                                },
-                                {
-                                    "name": "EnvironmentName",
-                                    "type": "System.String",
-                                    "isMandatory": false,
-                                    "isDynamic": false,
-                                    "position": -2147483648,
-                                    "valueFromPipeline": false,
-                                    "valueFromPipelineByPropertyName": false,
-                                    "valueFromRemainingArguments": false
-                                },
-                                {
-                                    "name": "TenantId",
-                                    "type": "System.String",
-                                    "isMandatory": false,
-                                    "isDynamic": false,
-                                    "position": -2147483648,
-                                    "valueFromPipeline": false,
-                                    "valueFromPipelineByPropertyName": false,
-                                    "valueFromRemainingArguments": false
-                                }
-                            ]
-                        },
-                        {
-                            "name": "ServicePrincipalCertificate",
-                            "parameters": [
-                                {
-                                    "name": "ApplicationId",
-                                    "type": "System.String",
-                                    "isMandatory": true,
-                                    "isDynamic": false,
-                                    "position": -2147483648,
-                                    "valueFromPipeline": false,
-                                    "valueFromPipelineByPropertyName": false,
-                                    "valueFromRemainingArguments": false
-                                },
-                                {
-                                    "name": "CertificateThumbprint",
-                                    "type": "System.String",
-                                    "isMandatory": true,
-                                    "isDynamic": false,
-                                    "position": -2147483648,
-                                    "valueFromPipeline": false,
-                                    "valueFromPipelineByPropertyName": false,
-                                    "valueFromRemainingArguments": false
-                                },
-                                {
-                                    "name": "Environment",
-                                    "type": "Microsoft.Azure.Common.Authentication.Models.AzureEnvironment",
-                                    "isMandatory": false,
-                                    "isDynamic": false,
-                                    "position": -2147483648,
-                                    "valueFromPipeline": false,
-                                    "valueFromPipelineByPropertyName": false,
-                                    "valueFromRemainingArguments": false
-                                },
-                                {
-                                    "name": "EnvironmentName",
-                                    "type": "System.String",
-                                    "isMandatory": false,
-                                    "isDynamic": false,
-                                    "position": -2147483648,
-                                    "valueFromPipeline": false,
-                                    "valueFromPipelineByPropertyName": false,
-                                    "valueFromRemainingArguments": false
-                                },
-                                {
-                                    "name": "ServicePrincipal",
-                                    "type": "System.Management.Automation.SwitchParameter",
-                                    "isMandatory": true,
-                                    "isDynamic": false,
-                                    "position": -2147483648,
-                                    "valueFromPipeline": false,
-                                    "valueFromPipelineByPropertyName": false,
-                                    "valueFromRemainingArguments": false
-                                },
-                                {
-                                    "name": "TenantId",
-                                    "type": "System.String",
-                                    "isMandatory": true,
-                                    "isDynamic": false,
-                                    "position": -2147483648,
-                                    "valueFromPipeline": false,
-                                    "valueFromPipelineByPropertyName": false,
-                                    "valueFromRemainingArguments": false
-                                }
-                            ]
-                        }
-                    ],
-                    "outputTypes": [
-                        {
-                            "name": "Microsoft.Azure.Commands.Profile.Models.PSAzureProfile",
-                            "type": "Microsoft.Azure.Commands.Profile.Models.PSAzureProfile"
-                        }
-                    ],
-                    "creationTime": "2017-03-17T17:05:21.697+00:00",
-                    "lastModifiedTime": "2017-03-17T17:05:21.697+00:00"
+  "parameters": {
+    "subscriptionId": "subid",
+    "resourceGroupName": "rg",
+    "automationAccountName": "myAutomationAccount33",
+    "moduleName": "OmsCompositeResources",
+    "activityName": "Add-AzureRmAccount",
+    "api-version": "2015-10-31"
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "body": {
+        "id": "/subscriptions/subid/resourceGroups/rg/providers/Microsoft.Automation/automationAccounts/myAutomationAccount33/modules/AzureRM.Profile/activities/Add-AzureRmAccount",
+        "name": "Add-AzureRmAccount",
+        "properties": {
+          "definition": "",
+          "description": "The Add-AzureRmAcccount cmdlet adds an authenticated Azure account to use for Azure Resource Manager cmdlet requests.\n\nYou can use this authenticated account only with Azure Resource Manager cmdlets. To add an authenticated account for use with Service Management cmdlets, use the Add-AzureAccount or the Import-AzurePublishSettingsFile cmdlet.",
+          "parameterSets": [
+            {
+              "name": "SubscriptionId",
+              "parameters": [
+                {
+                  "name": "AccessToken",
+                  "type": "System.String",
+                  "isMandatory": false,
+                  "isDynamic": false,
+                  "position": -2147483648,
+                  "valueFromPipeline": false,
+                  "valueFromPipelineByPropertyName": false,
+                  "valueFromRemainingArguments": false,
+                  "description": "Specify the feature description",
+                  "validationSet": []
+                },
+                {
+                  "name": "AccountId",
+                  "type": "System.String",
+                  "isMandatory": false,
+                  "isDynamic": false,
+                  "position": -2147483648,
+                  "valueFromPipeline": false,
+                  "valueFromPipelineByPropertyName": false,
+                  "valueFromRemainingArguments": false,
+                  "description": "Specify the feature description",
+                  "validationSet": []
+                },
+                {
+                  "name": "ApplicationId",
+                  "type": "System.String",
+                  "isMandatory": false,
+                  "isDynamic": false,
+                  "position": -2147483648,
+                  "valueFromPipeline": false,
+                  "valueFromPipelineByPropertyName": false,
+                  "valueFromRemainingArguments": false,
+                  "description": "Specify the feature description",
+                  "validationSet": []
+                },
+                {
+                  "name": "CertificateThumbprint",
+                  "type": "System.String",
+                  "isMandatory": false,
+                  "isDynamic": false,
+                  "position": -2147483648,
+                  "valueFromPipeline": false,
+                  "valueFromPipelineByPropertyName": false,
+                  "valueFromRemainingArguments": false,
+                  "description": "Specify the feature description",
+                  "validationSet": []
+                },
+                {
+                  "name": "Credential",
+                  "type": "System.Management.Automation.PSCredential",
+                  "isMandatory": false,
+                  "isDynamic": false,
+                  "position": -2147483648,
+                  "valueFromPipeline": false,
+                  "valueFromPipelineByPropertyName": false,
+                  "valueFromRemainingArguments": false,
+                  "description": "Specify the feature description",
+                  "validationSet": []
+                },
+                {
+                  "name": "Environment",
+                  "type": "Microsoft.Azure.Common.Authentication.Models.AzureEnvironment",
+                  "isMandatory": false,
+                  "isDynamic": false,
+                  "position": -2147483648,
+                  "valueFromPipeline": false,
+                  "valueFromPipelineByPropertyName": false,
+                  "valueFromRemainingArguments": false,
+                  "description": "Specify the feature description",
+                  "validationSet": []
+                },
+                {
+                  "name": "EnvironmentName",
+                  "type": "System.String",
+                  "isMandatory": false,
+                  "isDynamic": false,
+                  "position": -2147483648,
+                  "valueFromPipeline": false,
+                  "valueFromPipelineByPropertyName": false,
+                  "valueFromRemainingArguments": false,
+                  "description": "Specify the feature description",
+                  "validationSet": []
+                },
+                {
+                  "name": "SubscriptionId",
+                  "type": "System.String",
+                  "isMandatory": false,
+                  "isDynamic": false,
+                  "position": -2147483648,
+                  "valueFromPipeline": false,
+                  "valueFromPipelineByPropertyName": true,
+                  "valueFromRemainingArguments": false,
+                  "description": "Specify the feature description",
+                  "validationSet": []
+                },
+                {
+                  "name": "TenantId",
+                  "type": "System.String",
+                  "isMandatory": false,
+                  "isDynamic": false,
+                  "position": -2147483648,
+                  "valueFromPipeline": false,
+                  "valueFromPipelineByPropertyName": false,
+                  "valueFromRemainingArguments": false,
+                  "description": "Specify the feature description",
+                  "validationSet": []
                 }
+              ]
+            },
+            {
+              "name": "ServicePrincipal",
+              "parameters": [
+                {
+                  "name": "Credential",
+                  "type": "System.Management.Automation.PSCredential",
+                  "isMandatory": true,
+                  "isDynamic": false,
+                  "position": -2147483648,
+                  "valueFromPipeline": false,
+                  "valueFromPipelineByPropertyName": false,
+                  "valueFromRemainingArguments": false,
+                  "description": "Specify the feature description",
+                  "validationSet": []
+                },
+                {
+                  "name": "Environment",
+                  "type": "Microsoft.Azure.Common.Authentication.Models.AzureEnvironment",
+                  "isMandatory": false,
+                  "isDynamic": false,
+                  "position": -2147483648,
+                  "valueFromPipeline": false,
+                  "valueFromPipelineByPropertyName": false,
+                  "valueFromRemainingArguments": false,
+                  "description": "Specify the feature description",
+                  "validationSet": []
+                },
+                {
+                  "name": "EnvironmentName",
+                  "type": "System.String",
+                  "isMandatory": false,
+                  "isDynamic": false,
+                  "position": -2147483648,
+                  "valueFromPipeline": false,
+                  "valueFromPipelineByPropertyName": false,
+                  "valueFromRemainingArguments": false,
+                  "description": "Specify the feature description",
+                  "validationSet": []
+                },
+                {
+                  "name": "ServicePrincipal",
+                  "type": "System.Management.Automation.SwitchParameter",
+                  "isMandatory": true,
+                  "isDynamic": false,
+                  "position": -2147483648,
+                  "valueFromPipeline": false,
+                  "valueFromPipelineByPropertyName": false,
+                  "valueFromRemainingArguments": false,
+                  "description": "Specify the feature description",
+                  "validationSet": []
+                },
+                {
+                  "name": "SubscriptionId",
+                  "type": "System.String",
+                  "isMandatory": false,
+                  "isDynamic": false,
+                  "position": -2147483648,
+                  "valueFromPipeline": false,
+                  "valueFromPipelineByPropertyName": true,
+                  "valueFromRemainingArguments": false,
+                  "description": "Specify the feature description",
+                  "validationSet": []
+                },
+                {
+                  "name": "SubscriptionName",
+                  "type": "System.String",
+                  "isMandatory": false,
+                  "isDynamic": false,
+                  "position": -2147483648,
+                  "valueFromPipeline": false,
+                  "valueFromPipelineByPropertyName": true,
+                  "valueFromRemainingArguments": false,
+                  "description": "Specify the feature description",
+                  "validationSet": []
+                },
+                {
+                  "name": "TenantId",
+                  "type": "System.String",
+                  "isMandatory": true,
+                  "isDynamic": false,
+                  "position": -2147483648,
+                  "valueFromPipeline": false,
+                  "valueFromPipelineByPropertyName": false,
+                  "valueFromRemainingArguments": false,
+                  "description": "Specify the feature description",
+                  "validationSet": []
+                }
+              ]
+            },
+            {
+              "name": "SubscriptionName",
+              "parameters": [
+                {
+                  "name": "AccessToken",
+                  "type": "System.String",
+                  "isMandatory": false,
+                  "isDynamic": false,
+                  "position": -2147483648,
+                  "valueFromPipeline": false,
+                  "valueFromPipelineByPropertyName": false,
+                  "valueFromRemainingArguments": false,
+                  "description": "Specify the feature description",
+                  "validationSet": []
+                },
+                {
+                  "name": "AccountId",
+                  "type": "System.String",
+                  "isMandatory": false,
+                  "isDynamic": false,
+                  "position": -2147483648,
+                  "valueFromPipeline": false,
+                  "valueFromPipelineByPropertyName": false,
+                  "valueFromRemainingArguments": false,
+                  "description": "Specify the feature description",
+                  "validationSet": []
+                },
+                {
+                  "name": "ApplicationId",
+                  "type": "System.String",
+                  "isMandatory": false,
+                  "isDynamic": false,
+                  "position": -2147483648,
+                  "valueFromPipeline": false,
+                  "valueFromPipelineByPropertyName": false,
+                  "valueFromRemainingArguments": false,
+                  "description": "Specify the feature description",
+                  "validationSet": []
+                },
+                {
+                  "name": "CertificateThumbprint",
+                  "type": "System.String",
+                  "isMandatory": false,
+                  "isDynamic": false,
+                  "position": -2147483648,
+                  "valueFromPipeline": false,
+                  "valueFromPipelineByPropertyName": false,
+                  "valueFromRemainingArguments": false,
+                  "description": "Specify the feature description",
+                  "validationSet": []
+                },
+                {
+                  "name": "Credential",
+                  "type": "System.Management.Automation.PSCredential",
+                  "isMandatory": false,
+                  "isDynamic": false,
+                  "position": -2147483648,
+                  "valueFromPipeline": false,
+                  "valueFromPipelineByPropertyName": false,
+                  "valueFromRemainingArguments": false,
+                  "description": "Specify the feature description",
+                  "validationSet": []
+                },
+                {
+                  "name": "Environment",
+                  "type": "Microsoft.Azure.Common.Authentication.Models.AzureEnvironment",
+                  "isMandatory": false,
+                  "isDynamic": false,
+                  "position": -2147483648,
+                  "valueFromPipeline": false,
+                  "valueFromPipelineByPropertyName": false,
+                  "valueFromRemainingArguments": false,
+                  "description": "Specify the feature description",
+                  "validationSet": []
+                },
+                {
+                  "name": "EnvironmentName",
+                  "type": "System.String",
+                  "isMandatory": false,
+                  "isDynamic": false,
+                  "position": -2147483648,
+                  "valueFromPipeline": false,
+                  "valueFromPipelineByPropertyName": false,
+                  "valueFromRemainingArguments": false,
+                  "description": "Specify the feature description",
+                  "validationSet": []
+                },
+                {
+                  "name": "SubscriptionName",
+                  "type": "System.String",
+                  "isMandatory": false,
+                  "isDynamic": false,
+                  "position": -2147483648,
+                  "valueFromPipeline": false,
+                  "valueFromPipelineByPropertyName": true,
+                  "valueFromRemainingArguments": false,
+                  "description": "Specify the feature description",
+                  "validationSet": []
+                },
+                {
+                  "name": "TenantId",
+                  "type": "System.String",
+                  "isMandatory": false,
+                  "isDynamic": false,
+                  "position": -2147483648,
+                  "valueFromPipeline": false,
+                  "valueFromPipelineByPropertyName": false,
+                  "valueFromRemainingArguments": false,
+                  "description": "Specify the feature description",
+                  "validationSet": []
+                }
+              ]
+            },
+            {
+              "name": "User",
+              "parameters": [
+                {
+                  "name": "Credential",
+                  "type": "System.Management.Automation.PSCredential",
+                  "isMandatory": false,
+                  "isDynamic": false,
+                  "position": -2147483648,
+                  "valueFromPipeline": false,
+                  "valueFromPipelineByPropertyName": false,
+                  "valueFromRemainingArguments": false,
+                  "description": "Specify the feature description",
+                  "validationSet": []
+                },
+                {
+                  "name": "Environment",
+                  "type": "Microsoft.Azure.Common.Authentication.Models.AzureEnvironment",
+                  "isMandatory": false,
+                  "isDynamic": false,
+                  "position": -2147483648,
+                  "valueFromPipeline": false,
+                  "valueFromPipelineByPropertyName": false,
+                  "valueFromRemainingArguments": false,
+                  "description": "Specify the feature description",
+                  "validationSet": []
+                },
+                {
+                  "name": "EnvironmentName",
+                  "type": "System.String",
+                  "isMandatory": false,
+                  "isDynamic": false,
+                  "position": -2147483648,
+                  "valueFromPipeline": false,
+                  "valueFromPipelineByPropertyName": false,
+                  "valueFromRemainingArguments": false,
+                  "description": "Specify the feature description",
+                  "validationSet": []
+                },
+                {
+                  "name": "TenantId",
+                  "type": "System.String",
+                  "isMandatory": false,
+                  "isDynamic": false,
+                  "position": -2147483648,
+                  "valueFromPipeline": false,
+                  "valueFromPipelineByPropertyName": false,
+                  "valueFromRemainingArguments": false,
+                  "description": "Specify the feature description",
+                  "validationSet": []
+                }
+              ]
+            },
+            {
+              "name": "AccessToken",
+              "parameters": [
+                {
+                  "name": "AccessToken",
+                  "type": "System.String",
+                  "isMandatory": true,
+                  "isDynamic": false,
+                  "position": -2147483648,
+                  "valueFromPipeline": false,
+                  "valueFromPipelineByPropertyName": false,
+                  "valueFromRemainingArguments": false,
+                  "description": "Specify the feature description",
+                  "validationSet": []
+                },
+                {
+                  "name": "AccountId",
+                  "type": "System.String",
+                  "isMandatory": true,
+                  "isDynamic": false,
+                  "position": -2147483648,
+                  "valueFromPipeline": false,
+                  "valueFromPipelineByPropertyName": false,
+                  "valueFromRemainingArguments": false,
+                  "description": "Specify the feature description",
+                  "validationSet": []
+                },
+                {
+                  "name": "Environment",
+                  "type": "Microsoft.Azure.Common.Authentication.Models.AzureEnvironment",
+                  "isMandatory": false,
+                  "isDynamic": false,
+                  "position": -2147483648,
+                  "valueFromPipeline": false,
+                  "valueFromPipelineByPropertyName": false,
+                  "valueFromRemainingArguments": false,
+                  "description": "Specify the feature description",
+                  "validationSet": []
+                },
+                {
+                  "name": "EnvironmentName",
+                  "type": "System.String",
+                  "isMandatory": false,
+                  "isDynamic": false,
+                  "position": -2147483648,
+                  "valueFromPipeline": false,
+                  "valueFromPipelineByPropertyName": false,
+                  "valueFromRemainingArguments": false,
+                  "description": "Specify the feature description",
+                  "validationSet": []
+                },
+                {
+                  "name": "TenantId",
+                  "type": "System.String",
+                  "isMandatory": false,
+                  "isDynamic": false,
+                  "position": -2147483648,
+                  "valueFromPipeline": false,
+                  "valueFromPipelineByPropertyName": false,
+                  "valueFromRemainingArguments": false,
+                  "description": "Specify the feature description",
+                  "validationSet": []
+                }
+              ]
+            },
+            {
+              "name": "ServicePrincipalCertificate",
+              "parameters": [
+                {
+                  "name": "ApplicationId",
+                  "type": "System.String",
+                  "isMandatory": true,
+                  "isDynamic": false,
+                  "position": -2147483648,
+                  "valueFromPipeline": false,
+                  "valueFromPipelineByPropertyName": false,
+                  "valueFromRemainingArguments": false,
+                  "description": "Specify the feature description",
+                  "validationSet": []
+                },
+                {
+                  "name": "CertificateThumbprint",
+                  "type": "System.String",
+                  "isMandatory": true,
+                  "isDynamic": false,
+                  "position": -2147483648,
+                  "valueFromPipeline": false,
+                  "valueFromPipelineByPropertyName": false,
+                  "valueFromRemainingArguments": false,
+                  "description": "Specify the feature description",
+                  "validationSet": []
+                },
+                {
+                  "name": "Environment",
+                  "type": "Microsoft.Azure.Common.Authentication.Models.AzureEnvironment",
+                  "isMandatory": false,
+                  "isDynamic": false,
+                  "position": -2147483648,
+                  "valueFromPipeline": false,
+                  "valueFromPipelineByPropertyName": false,
+                  "valueFromRemainingArguments": false,
+                  "description": "Specify the feature description",
+                  "validationSet": []
+                },
+                {
+                  "name": "EnvironmentName",
+                  "type": "System.String",
+                  "isMandatory": false,
+                  "isDynamic": false,
+                  "position": -2147483648,
+                  "valueFromPipeline": false,
+                  "valueFromPipelineByPropertyName": false,
+                  "valueFromRemainingArguments": false,
+                  "description": "Specify the feature description",
+                  "validationSet": []
+                },
+                {
+                  "name": "ServicePrincipal",
+                  "type": "System.Management.Automation.SwitchParameter",
+                  "isMandatory": true,
+                  "isDynamic": false,
+                  "position": -2147483648,
+                  "valueFromPipeline": false,
+                  "valueFromPipelineByPropertyName": false,
+                  "valueFromRemainingArguments": false,
+                  "description": "Specify the feature description",
+                  "validationSet": []
+                },
+                {
+                  "name": "TenantId",
+                  "type": "System.String",
+                  "isMandatory": true,
+                  "isDynamic": false,
+                  "position": -2147483648,
+                  "valueFromPipeline": false,
+                  "valueFromPipelineByPropertyName": false,
+                  "valueFromRemainingArguments": false,
+                  "description": "Specify the feature description",
+                  "validationSet": []
+                }
+              ]
             }
+          ],
+          "outputTypes": [
+            {
+              "name": "Microsoft.Azure.Commands.Profile.Models.PSAzureProfile",
+              "type": "Microsoft.Azure.Commands.Profile.Models.PSAzureProfile"
+            }
+          ],
+          "creationTime": "2017-03-17T17:05:21.697+00:00",
+          "lastModifiedTime": "2017-03-17T17:05:21.697+00:00"
         }
+      }
     }
+  }
 }

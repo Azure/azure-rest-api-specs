@@ -100,7 +100,7 @@ This is not used by Autorest itself.
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
   - repo: azure-sdk-for-python
-  - repo: azure-libraries-for-java
+  - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-node
 ```
@@ -147,7 +147,7 @@ Please also specify `--python-sdks-folder=<path to the root directory of your az
 ``` yaml $(tag) == 'package-job-2017-09-preview' && $(python)
 python:
   namespace: azure.mgmt.datalake.analytics.job
-  output-folder: $(python-sdks-folder)/azure-mgmt-datalake-analytics/azure/mgmt/datalake/analytics/job
+  output-folder: $(python-sdks-folder)/datalake/azure-mgmt-datalake-analytics/azure/mgmt/datalake/analytics/job
 ```
 
 ### Tag: package-catalog-2016-11 and python
@@ -158,92 +158,12 @@ Please also specify `--python-sdks-folder=<path to the root directory of your az
 ``` yaml $(tag) == 'package-catalog-2016-11' && $(python)
 python:
   namespace: azure.mgmt.datalake.analytics.catalog
-  output-folder: $(python-sdks-folder)/azure-mgmt-datalake-analytics/azure/mgmt/datalake/analytics/catalog
+  output-folder: $(python-sdks-folder)/datalake/azure-mgmt-datalake-analytics/azure/mgmt/datalake/analytics/catalog
 ```
-
 
 ## Go
 
-These settings apply only when `--go` is specified on the command line.
-
-``` yaml $(go)
-go:
-  license-header: MICROSOFT_APACHE_NO_VERSION
-  clear-output-folder: true
-```
-
-### Go multi-api
-
-``` yaml $(go) && $(multiapi)
-batch:
-  - tag: package-job-2017-09-preview
-  - tag: package-catalog-2016-11
-  - tag: package-job-2016-11
-  - tag: package-job-2016-03-preview
-  - tag: package-job-2015-11-preview
-  - tag: package-catalog-2015-10-preview
-```
-
-### Tag: package-job-2017-09-preview and go
-
-These settings apply only when `--tag=package-job-2017-09-preview --go` is specified on the command line.
-Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
-
-``` yaml $(tag) == 'package-job-2017-09-preview' && $(go)
-namespace: job
-output-folder: $(go-sdk-folder)/services/preview/datalake/analytics/2017-09-01-preview/job
-```
-
-### Tag: package-catalog-2016-11 and go
-
-These settings apply only when `--tag=package-catalog-2015-10 --go` is specified on the command line.
-Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
-
-``` yaml $(tag) == 'package-catalog-2016-11' && $(go)
-namespace: catalog
-output-folder: $(go-sdk-folder)/services/datalake/analytics/2016-11-01-preview/catalog
-```
-
-### Tag: package-job-2016-11 and go
-
-These settings apply only when `--tag=package-job-2016-11 --go` is specified on the command line.
-Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
-
-``` yaml $(tag) == 'package-job-2016-11' && $(go)
-namespace: job
-output-folder: $(go-sdk-folder)/services/datalake/analytics/2016-11-01/job
-```
-
-### Tag: package-job-2016-03-preview and go
-
-These settings apply only when `--tag=package-job-2016-03-preview --go` is specified on the command line.
-Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
-
-``` yaml $(tag) == 'package-job-2016-03-preview' && $(go)
-namespace: job
-output-folder: $(go-sdk-folder)/services/preview/datalake/analytics/2016-03-20-preview/job
-```
-
-### Tag: package-job-2015-11-preview and go
-
-These settings apply only when `--tag=package-job-2015-11-preview --go` is specified on the command line.
-Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
-
-``` yaml $(tag) == 'package-job-2015-11-preview' && $(go)
-namespace: job
-output-folder: $(go-sdk-folder)/services/preview/datalake/analytics/2015-11-01-preview/job
-```
-
-### Tag: package-catalog-2015-10-preview and go
-
-These settings apply only when `--tag=package-catalog-2015-10-preview --go` is specified on the command line.
-Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
-
-``` yaml $(tag) == 'package-catalog-2015-10-preview' && $(go)
-namespace: catalog
-output-folder: $(go-sdk-folder)/services/preview/datalake/analytics/2015-10-01-preview/catalog
-```
-
+See configuration in [readme.go.md](./readme.go.md)
 
 ## Java
 
@@ -259,6 +179,18 @@ java:
   output-folder: $(azure-libraries-for-java-folder)/azure-datalake/analytics
 ```
 
+### Java multi-api
+
+``` yaml $(java) && $(multiapi)
+batch:
+  - tag: package-job-2017-09-preview
+  - tag: package-catalog-2016-11
+  - tag: package-job-2016-11
+  - tag: package-job-2016-03-preview
+  - tag: package-job-2015-11-preview
+  - tag: package-catalog-2015-10-preview
+```
+
 # Validation
 
 Since this RP has no unique default package, iterate over all of them for validation:
@@ -268,3 +200,33 @@ batch:
   - package-catalog: true
   - package-job: true
 ```
+
+## Multi-API/Profile support for AutoRest v3 generators 
+
+AutoRest V3 generators require the use of `--tag=all-api-versions` to select api files.
+
+This block is updated by an automatic script. Edits may be lost!
+
+``` yaml $(tag) == 'all-api-versions' /* autogenerated */
+# include the azure profile definitions from the standard location
+require: $(this-folder)/../../../profiles/readme.md
+
+# all the input files across all versions
+input-file:
+  - $(this-folder)/Microsoft.DataLakeAnalytics/stable/2016-11-01/catalog.json
+  - $(this-folder)/Microsoft.DataLakeAnalytics/preview/2015-10-01-preview/catalog.json
+  - $(this-folder)/Microsoft.DataLakeAnalytics/preview/2017-09-01-preview/job.json
+  - $(this-folder)/Microsoft.DataLakeAnalytics/stable/2016-11-01/job.json
+  - $(this-folder)/Microsoft.DataLakeAnalytics/preview/2016-03-20-preview/job.json
+  - $(this-folder)/Microsoft.DataLakeAnalytics/preview/2015-11-01-preview/job.json
+
+```
+
+If there are files that should not be in the `all-api-versions` set, 
+uncomment the  `exclude-file` section below and add the file paths.
+
+``` yaml $(tag) == 'all-api-versions'
+#exclude-file: 
+#  - $(this-folder)/Microsoft.Example/stable/2010-01-01/somefile.json
+```
+

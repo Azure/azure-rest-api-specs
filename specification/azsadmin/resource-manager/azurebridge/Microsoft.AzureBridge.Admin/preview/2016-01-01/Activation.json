@@ -1,278 +1,336 @@
 {
-    "swagger": "2.0",
-    "info": {
-        "version": "2016-01-01",
-        "title": "AzureBridgeAdminClient",
-        "description": "AzureBridge Admin Client."
-    },
-    "host": "adminmanagement.local.azurestack.external",
-    "schemes": [
-        "https"
-    ],
-    "paths": {
-        "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroup}/providers/Microsoft.AzureBridge.Admin/activations": {
-            "get": {
-                "x-ms-examples": {
-                    "Return product name.": {
-                        "$ref": "./examples/Activation/List.json"
-                    }
-                },
-                "description": "Returns the list of activations.",
-                "tags": [
-                    "Activations"
-                ],
-                "operationId": "Activations_List",
-                "parameters": [
-                    {
-                        "$ref": "AzureBridge.json#/parameters/SubscriptionIdParameter"
-                    },
-                    {
-                        "$ref": "AzureBridge.json#/parameters/ResourceGroupParameter"
-                    },
-                    {
-                        "$ref": "AzureBridge.json#/parameters/ApiVersionParameter"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "$ref": "#/definitions/ActivationResourcesPage"
-                        }
-                    }
-                },
-                "produces": [
-                    "application/json"
-                ],
-                "consumes": [
-                    "application/json"
-                ],
-                "x-ms-pageable": {
-                    "nextLinkName": "nextLink"
-                }
-            }
+  "swagger": "2.0",
+  "info": {
+    "version": "2016-01-01",
+    "title": "AzureBridgeAdminClient",
+    "description": "AzureBridge Admin Client."
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureBridge.Admin/activations": {
+      "get": {
+        "x-ms-examples": {
+          "Return product name.": {
+            "$ref": "./examples/Activation/List.json"
+          }
         },
-        "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroup}/providers/Microsoft.AzureBridge.Admin/activations/{activationName}": {
-            "get": {
-                "x-ms-examples": {
-                    "Return activation name.": {
-                        "$ref": "./examples/Activation/Get.json"
-                    }
-                },
-                "description": "Returns activation name.",
-                "tags": [
-                    "Activations"
-                ],
-                "operationId": "Activations_Get",
-                "parameters": [
-                    {
-                        "$ref": "AzureBridge.json#/parameters/SubscriptionIdParameter"
-                    },
-                    {
-                        "$ref": "AzureBridge.json#/parameters/ResourceGroupParameter"
-                    },
-                    {
-                        "$ref": "AzureBridge.json#/parameters/ActivationNameParameter"
-                    },
-                    {
-                        "$ref": "AzureBridge.json#/parameters/ApiVersionParameter"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "$ref": "#/definitions/ActivationResource"
-                        }
-                    },
-                    "404": {
-                        "description": "Not Found"
-                    }
-                },
-                "produces": [
-                    "application/json"
-                ],
-                "consumes": [
-                    "application/json"
-                ]
-            },
-            "put": {
-                "x-ms-examples": {
-                    "Return product name.": {
-                        "$ref": "./examples/Activation/Create.json"
-                    }
-                },
-                "description": "Create a new activation.",
-                "tags": [
-                    "Activations"
-                ],
-                "operationId": "Activations_CreateOrUpdate",
-                "parameters": [
-                    {
-                        "$ref": "AzureBridge.json#/parameters/SubscriptionIdParameter"
-                    },
-                    {
-                        "$ref": "AzureBridge.json#/parameters/ResourceGroupParameter"
-                    },
-                    {
-                        "$ref": "AzureBridge.json#/parameters/ActivationNameParameter"
-                    },
-                    {
-                        "$ref": "AzureBridge.json#/parameters/ApiVersionParameter"
-                    },
-                    {
-                        "$ref": "Activation.json#/parameters/ActivationParameter"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "$ref": "#/definitions/ActivationResource"
-                        }
-                    }
-                },
-                "produces": [
-                    "application/json"
-                ],
-                "consumes": [
-                    "application/json"
-                ]
-            },
-            "delete": {
-                "x-ms-examples": {
-                    "Delete an activation.": {
-                        "$ref": "./examples/Activation/Delete.json"
-                    }
-                },
-                "description": "Delete an activation.",
-                "tags": [
-                    "Activations"
-                ],
-                "operationId": "Activations_Delete",
-                "parameters": [
-                    {
-                        "$ref": "AzureBridge.json#/parameters/SubscriptionIdParameter"
-                    },
-                    {
-                        "$ref": "AzureBridge.json#/parameters/ResourceGroupParameter"
-                    },
-                    {
-                        "$ref": "AzureBridge.json#/parameters/ActivationNameParameter"
-                    },
-                    {
-                        "$ref": "AzureBridge.json#/parameters/ApiVersionParameter"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "$ref": "#/definitions/ActivationResource"
-                        }
-                    }
-                },
-                "produces": [
-                    "application/json"
-                ],
-                "consumes": [
-                    "application/json"
-                ]
-            }
-        }
-    },
-    "definitions": {
-        "ActivationResource": {
-            "description": "Published activation resource.",
-            "type": "object",
-            "properties": {
-                "properties": {
-                    "x-ms-client-flatten": true,
-                    "description": "Properties of the resource.",
-                    "$ref": "#/definitions/Activation"
-                }
-            },
-            "allOf": [
-                {
-                    "$ref": "AzureBridge.json#/definitions/Resource"
-                }
-            ]
-        },
-        "Activation": {
-            "description": "Holds properties related to activation.",
-            "type": "object",
-            "properties": {
-                "displayName": {
-                    "description": "Name displayed for the product.",
-                    "type": "string"
-                },
-                "azureRegistrationResourceIdentifier": {
-                    "description": "Azure registration resource identifier.",
-                    "type": "string"
-                },
-                "provisioningState": {
-                    "description": "Provisioning state of the resource.",
-                    "$ref": "AzureBridge.json#/definitions/ProvisioningState"
-                },
-                "expiration": {
-                    "description": "The activation expiration.",
-                    "type": "string"
-                },
-                "marketplaceSyndicationEnabled": {
-                    "description": "Value indicating whether the marketplace syndication feature is enabled.",
-                    "type": "boolean"
-                },
-                "usageReportingEnabled": {
-                    "description": "Value indicating whether the usage reporting feature is enabled.",
-                    "type": "boolean"
-                }
-            }
-        },
-        "ActivationResourcesPage": {
-            "description": "Holds an array of activation resources and the next link.",
-            "properties": {
-                "value": {
-                    "description": "List of activation resources.",
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/ActivationResource"
-                    }
-                },
-                "nextLink": {
-                    "type": "string",
-                    "description": "URI to the next page."
-                }
-            }
-        }
-    },
-    "parameters": {
-        "ActivationParameter": {
-            "name": "activation",
-            "in": "body",
-            "description": "new activation.",
-            "required": true,
+        "description": "Returns the list of activations.",
+        "tags": [
+          "Activations"
+        ],
+        "operationId": "Activations_List",
+        "parameters": [
+          {
+            "$ref": "AzureBridge.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "AzureBridge.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "AzureBridge.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
             "schema": {
-                "$ref": "Activation.json#/definitions/Activation"
-            },
-            "x-ms-parameter-location": "method"
-        }
-    },
-    "securityDefinitions": {
-        "azure_auth": {
-            "type": "oauth2",
-            "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
-            "flow": "implicit",
-            "description": "Authorization uses an Azure Active Directory OAuth2 flow.",
-            "scopes": {
-                "user_impersonation": "impersonate your user account"
+              "$ref": "#/definitions/ActivationResourcesPage"
             }
+          },
+          "default": {
+            "description": "Default Response.",
+            "schema": {
+              "$ref": "#/definitions/ExtendedErrorInfo"
+            }
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
+      }
     },
-    "security": [
-        {
-            "azure_auth": [
-                "user_impersonation"
-            ]
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureBridge.Admin/activations/{activationName}": {
+      "get": {
+        "x-ms-examples": {
+          "Return activation name.": {
+            "$ref": "./examples/Activation/Get.json"
+          }
+        },
+        "description": "Returns activation name.",
+        "tags": [
+          "Activations"
+        ],
+        "operationId": "Activations_Get",
+        "parameters": [
+          {
+            "$ref": "AzureBridge.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "AzureBridge.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "AzureBridge.json#/parameters/ActivationNameParameter"
+          },
+          {
+            "$ref": "AzureBridge.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ActivationResource"
+            }
+          },
+          "default": {
+            "description": "Default Response.",
+            "schema": {
+              "$ref": "#/definitions/ExtendedErrorInfo"
+            }
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ]
+      },
+      "put": {
+        "x-ms-examples": {
+          "Return product name.": {
+            "$ref": "./examples/Activation/Create.json"
+          }
+        },
+        "description": "Create a new activation.",
+        "tags": [
+          "Activations"
+        ],
+        "operationId": "Activations_CreateOrUpdate",
+        "parameters": [
+          {
+            "$ref": "AzureBridge.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "AzureBridge.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "AzureBridge.json#/parameters/ActivationNameParameter"
+          },
+          {
+            "$ref": "AzureBridge.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ActivationParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ActivationResource"
+            }
+          },
+          "default": {
+            "description": "Default Response.",
+            "schema": {
+              "$ref": "#/definitions/ExtendedErrorInfo"
+            }
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ]
+      },
+      "delete": {
+        "x-ms-examples": {
+          "Delete an activation.": {
+            "$ref": "./examples/Activation/Delete.json"
+          }
+        },
+        "description": "Delete an activation.",
+        "tags": [
+          "Activations"
+        ],
+        "operationId": "Activations_Delete",
+        "parameters": [
+          {
+            "$ref": "AzureBridge.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "AzureBridge.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "AzureBridge.json#/parameters/ActivationNameParameter"
+          },
+          {
+            "$ref": "AzureBridge.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ActivationResource"
+            }
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Default Response.",
+            "schema": {
+              "$ref": "#/definitions/ExtendedErrorInfo"
+            }
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "ActivationResource": {
+      "description": "Published activation resource.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "Properties of the resource.",
+          "$ref": "#/definitions/Activation"
         }
-    ]
+      },
+      "allOf": [
+        {
+          "$ref": "AzureBridge.json#/definitions/Resource"
+        }
+      ]
+    },
+    "Activation": {
+      "description": "Holds properties related to activation.",
+      "type": "object",
+      "properties": {
+        "displayName": {
+          "description": "Name displayed for the product.",
+          "type": "string"
+        },
+        "azureRegistrationResourceIdentifier": {
+          "description": "Azure registration resource identifier.",
+          "type": "string"
+        },
+        "provisioningState": {
+          "description": "Provisioning state of the resource.",
+          "$ref": "AzureBridge.json#/definitions/ProvisioningState"
+        },
+        "expiration": {
+          "description": "The activation expiration.",
+          "type": "string"
+        },
+        "marketplaceSyndicationEnabled": {
+          "description": "Value indicating whether the marketplace syndication feature is enabled.",
+          "type": "boolean"
+        },
+        "usageReportingEnabled": {
+          "description": "Value indicating whether the usage reporting feature is enabled.",
+          "type": "boolean"
+        }
+      }
+    },
+    "ActivationResourcesPage": {
+      "description": "Holds an array of activation resources and the next link.",
+      "properties": {
+        "value": {
+          "description": "List of activation resources.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ActivationResource"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "URI to the next page."
+        }
+      }
+    },
+    "ExtendedErrorInfo": {
+      "type": "object",
+      "description": "Error response.",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/ErrorDefinition",
+          "description": "The error details."
+        }
+      }
+    },
+    "ErrorDefinition": {
+      "type": "object",
+      "description": "Error definition.",
+      "properties": {
+        "code": {
+          "description": "Service specific error code which serves as the substatus for the HTTP error code.",
+          "type": "string",
+          "readOnly": true
+        },
+        "message": {
+          "description": "Description of the error.",
+          "type": "string",
+          "readOnly": true
+        },
+        "details": {
+          "description": "Internal error details.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ErrorDefinition"
+          },
+          "readOnly": true
+        }
+      }
+    }
+  },
+  "parameters": {
+    "ActivationParameter": {
+      "name": "activation",
+      "in": "body",
+      "description": "new activation.",
+      "required": true,
+      "schema": {
+        "$ref": "#/definitions/Activation"
+      },
+      "x-ms-parameter-location": "method"
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Authorization uses an Azure Active Directory OAuth2 flow.",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ]
 }

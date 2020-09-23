@@ -216,7 +216,154 @@
         },
         "x-ms-examples": {
           "GetHealthHistoryByResource": {
-            "$ref": "./examples/Availabilitystatuses_List.json"
+            "$ref": "./examples/AvailabilityStatuses_List.json"
+          }
+        }
+      }
+    },
+    "/{resourceUri}/providers/Microsoft.ResourceHealth/childAvailabilityStatuses/current": {
+      "get": {
+        "tags": [
+          "ChildAvailabilityStatuses"
+        ],
+        "operationId": "ChildAvailabilityStatuses_GetByResource",
+        "description": "Gets current availability status for a single resource",
+        "parameters": [
+          {
+            "name": "resourceUri",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The fully qualified ID of the resource, including the resource name and resource type. Currently the API only support one nesting level resource types : /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resource-provider-name}/{parentResourceType}/{parentResourceName}/{resourceType}/{resourceName}",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/FilterParameter"
+          },
+          {
+            "$ref": "#/parameters/ExpandParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The body contains the current availability status for a single resource",
+            "schema": {
+              "$ref": "#/definitions/availabilityStatus"
+            }
+          },
+          "default": {
+            "description": "DefaultErrorResponse",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GetCurrentHealthByResource": {
+            "$ref": "./examples/ChildAvailabilityStatus_GetByResource.json"
+          }
+        }
+      }
+    },
+    "/{resourceUri}/providers/Microsoft.ResourceHealth/childAvailabilityStatuses": {
+      "get": {
+        "tags": [
+          "ChildAvailabilityStatuses"
+        ],
+        "operationId": "ChildAvailabilityStatuses_List",
+        "description": "Lists the historical availability statuses for a single child resource. Use the nextLink property in the response to get the next page of availability status",
+        "parameters": [
+          {
+            "name": "resourceUri",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The fully qualified ID of the resource, including the resource name and resource type. Currently the API only support one nesting level resource types : /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resource-provider-name}/{parentResourceType}/{parentResourceName}/{resourceType}/{resourceName}",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/FilterParameter"
+          },
+          {
+            "$ref": "#/parameters/ExpandParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The body contains the list of the historical availability statuses for a single child resource",
+            "schema": {
+              "$ref": "#/definitions/availabilityStatusListResult"
+            }
+          },
+          "default": {
+            "description": "DefaultErrorResponse",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "GetHealthHistoryByResource": {
+            "$ref": "./examples/ChildAvailabilityStatuses_List.json"
+          }
+        }
+      }
+    },
+    "/{resourceUri}/providers/Microsoft.ResourceHealth/childResources": {
+      "get": {
+        "tags": [
+          "ChildResources"
+        ],
+        "operationId": "ChildResources_List",
+        "description": "Lists the all the children and its current health status for a parent resource. Use the nextLink property in the response to get the next page of children current health",
+        "parameters": [
+          {
+            "name": "resourceUri",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The fully qualified ID of the resource, including the resource name and resource type. Currently the API only support not nested parent resource type: /subscriptions/{subscriptionId}/resourceGroups/{resource-group-name}/providers/{resource-provider-name}/{resource-type}/{resource-name}",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/FilterParameter"
+          },
+          {
+            "$ref": "#/parameters/ExpandParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The body contains the list of the children's current availability statuses for a single resource which contains children",
+            "schema": {
+              "$ref": "#/definitions/availabilityStatusListResult"
+            }
+          },
+          "default": {
+            "description": "DefaultErrorResponse",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "GetHealthHistoryByResource": {
+            "$ref": "./examples/ChildResources_List.json"
           }
         }
       }
@@ -246,6 +393,78 @@
               "$ref": "#/definitions/ErrorResponse"
             }
           }
+        }
+      }
+    },
+    "/providers/Microsoft.ResourceHealth/emergingIssues/{issueName}": {
+      "get": {
+        "tags": [
+          "EmergingIssues"
+        ],
+        "operationId": "EmergingIssues_Get",
+        "description": "Gets Azure services' emerging issues.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/IssueNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The body contains properties of azure emerging issues, which includes a list of status banner and status active events.",
+            "schema": {
+              "$ref": "#/definitions/emergingIssuesGetResult"
+            }
+          },
+          "default": {
+            "description": "DefaultErrorResponse",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GetEmergingIssues": {
+            "$ref": "./examples/EmergingIssues_Get.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.ResourceHealth/emergingIssues": {
+      "get": {
+        "tags": [
+          "EmergingIssues"
+        ],
+        "operationId": "EmergingIssues_List",
+        "description": "Lists Azure services' emerging issues.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The body contains a list of azure emerging issues.",
+            "schema": {
+              "$ref": "#/definitions/emergingIssueListResult"
+            }
+          },
+          "default": {
+            "description": "DefaultErrorResponse",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GetEmergingIssues": {
+            "$ref": "./examples/EmergingIssues_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     }
@@ -488,6 +707,188 @@
       ],
       "description": "Lists the operations response."
     },
+    "statusBanner": {
+      "description": "Banner type of emerging issue.",
+      "properties": {
+        "title": {
+          "type": "string",
+          "description": "The banner title."
+        },
+        "message": {
+          "type": "string",
+          "description": "The details of banner."
+        },
+        "cloud": {
+          "type": "string",
+          "description": "The cloud type of this banner."
+        },
+        "lastModifiedTime": {
+          "type": "string",
+          "description": "The last time modified on this banner.",
+          "format": "date-time"
+        }
+      }
+    },
+    "impactedRegion": {
+      "description": "Object of impacted region.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The impacted region id."
+        },
+        "name": {
+          "type": "string",
+          "description": "The impacted region name."
+        }
+      }
+    },
+    "emergingIssueImpact": {
+      "type": "object",
+      "description": "Object of the emerging issue impact on services and regions.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The impacted service id."
+        },
+        "name": {
+          "type": "string",
+          "description": "The impacted service name."
+        },
+        "regions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/impactedRegion"
+          },
+          "description": "The list of impacted regions for corresponding emerging issues."
+        }
+      }
+    },
+    "statusActiveEvent": {
+      "description": "Active event type of emerging issue.",
+      "properties": {
+        "title": {
+          "type": "string",
+          "description": "The active event title."
+        },
+        "description": {
+          "type": "string",
+          "description": "The details of active event."
+        },
+        "trackingId": {
+          "type": "string",
+          "description": "The tracking id of this active event."
+        },
+        "startTime": {
+          "type": "string",
+          "description": "The impact start time on this active event.",
+          "format": "date-time"
+        },
+        "cloud": {
+          "type": "string",
+          "description": "The cloud type of this active event."
+        },
+        "severity": {
+          "type": "string",
+          "description": "The severity level of this active event.",
+          "enum": [
+            "Information",
+            "Warning",
+            "Error"
+          ],
+          "x-ms-enum": {
+            "name": "SeverityValues",
+            "modelAsString": true
+          }
+        },
+        "stage": {
+          "type": "string",
+          "description": "The stage of this active event.",
+          "enum": [
+            "Active",
+            "Resolve",
+            "Archived"
+          ],
+          "x-ms-enum": {
+            "name": "StageValues",
+            "modelAsString": true
+          }
+        },
+        "published": {
+          "type": "boolean",
+          "description": "The boolean value of this active event if published or not."
+        },
+        "lastModifiedTime": {
+          "type": "string",
+          "description": "The last time modified on this banner.",
+          "format": "date-time"
+        },
+        "impacts": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/emergingIssueImpact"
+          },
+          "description": "The list of emerging issues impacts."
+        }
+      }
+    },
+    "emergingIssuesGetResult": {
+      "description": "The Get EmergingIssues operation response.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/emergingIssue",
+          "description": "The emerging issue entity properties.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/Resource"
+        }
+      ]
+    },
+    "emergingIssue": {
+      "type": "object",
+      "description": "On-going emerging issue from azure status.",
+      "properties": {
+        "refreshTimestamp": {
+          "type": "string",
+          "description": "Timestamp for when last time refreshed for ongoing emerging issue.",
+          "format": "date-time"
+        },
+        "statusBanners": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/statusBanner"
+          },
+          "description": "The list of emerging issues of banner type."
+        },
+        "statusActiveEvents": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/statusActiveEvent"
+          },
+          "description": "The list of emerging issues of active event type."
+        }
+      }
+    },
+    "emergingIssueListResult": {
+      "description": "The list of emerging issues.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "The list of emerging issues.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/emergingIssuesGetResult"
+          }
+        },
+        "nextLink": {
+          "description": "The link used to get the next page of emerging issues.",
+          "type": "string"
+        }
+      }
+    },
     "operation": {
       "description": "Operation available in the resourcehealth resource provider.",
       "properties": {
@@ -555,6 +956,17 @@
       "required": true,
       "type": "string",
       "description": "Client Api Version."
+    },
+    "IssueNameParameter": {
+      "name": "issueName",
+      "in": "path",
+      "description": "The name of the emerging issue.",
+      "required": true,
+      "type": "string",
+      "enum": [
+        "default"
+      ],
+      "x-ms-parameter-location": "method"
     },
     "ResourceGroupNameParameter": {
       "name": "resourceGroupName",

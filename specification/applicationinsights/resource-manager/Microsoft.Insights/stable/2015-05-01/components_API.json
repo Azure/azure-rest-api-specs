@@ -40,10 +40,10 @@
         "operationId": "Components_List",
         "parameters": [
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -70,13 +70,13 @@
         "operationId": "Components_ListByResourceGroup",
         "parameters": [
           {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -103,13 +103,13 @@
         "operationId": "Components_Delete",
         "parameters": [
           {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
           },
           {
             "$ref": "#/parameters/ResourceNameParameter"
@@ -134,13 +134,13 @@
         "operationId": "Components_Get",
         "parameters": [
           {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
           },
           {
             "$ref": "#/parameters/ResourceNameParameter"
@@ -165,13 +165,13 @@
         "operationId": "Components_CreateOrUpdate",
         "parameters": [
           {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
           },
           {
             "$ref": "#/parameters/ResourceNameParameter"
@@ -208,13 +208,13 @@
         "operationId": "Components_UpdateTags",
         "parameters": [
           {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
           },
           {
             "$ref": "#/parameters/ResourceNameParameter"
@@ -246,37 +246,30 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Insights/components/{resourceName}/purge": {
       "post": {
-        "description": "Purges data in an Application Insights component by a set of user-defined filters.",
+        "description": "Purges data in an Application Insights component by a set of user-defined filters.\n\nIn order to manage system resources, purge requests are throttled at 50 requests per hour. You should batch the execution of purge requests by sending a single command whose predicate includes all user identities that require purging. Use the in operator to specify multiple identities. You should run the query prior to using for a purge request to verify that the results are expected.",
         "operationId": "Components_Purge",
-        "x-ms-long-running-operation": true,
         "parameters": [
           {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
           },
           {
             "$ref": "#/parameters/ResourceNameParameter"
           },
           {
             "$ref": "#/parameters/ComponentPurgeParameter"
-          }         
+          }
         ],
         "responses": {
           "202": {
             "description": "Accepted request for purging an Application Insights component.",
             "schema": {
               "$ref": "#/definitions/ComponentPurgeResponse"
-            }
-          },
-          "200": {
-            "description": "Returns status of purge operation in body of response. e.g.:  running, completed.",
-            "schema": {
-              "$ref": "#/definitions/ComponentPurgeStatusResponse"
             }
           }
         },
@@ -286,10 +279,46 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Insights/components/{resourceName}/operations/{purgeId}": {
+      "get": {
+        "description": "Get status for an ongoing purge operation.",
+        "operationId": "Components_GetPurgeStatus",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ComponentPurgeIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns status of purge operation in body of response. e.g.:  running, completed.",
+            "schema": {
+              "$ref": "#/definitions/ComponentPurgeStatusResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ComponentPurge": {
+            "$ref": "./examples/ComponentsPurgeStatus.json"
+          }
+        }
+      }
     }
   },
   "definitions": {
-    "Resource": {
+    "ComponentsResource": {
       "properties": {
         "id": {
           "type": "string",
@@ -308,7 +337,11 @@
         },
         "location": {
           "type": "string",
-          "description": "Resource location"
+          "description": "Resource location",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
         },
         "tags": {
           "additionalProperties": {
@@ -348,7 +381,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/Resource"
+          "$ref": "#/definitions/ComponentsResource"
         }
       ],
       "required": [
@@ -453,11 +486,64 @@
           "externalDocs": {
             "url": "https://aka.ms/sl0yqd"
           }
+        },
+        "ConnectionString": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Application Insights component connection string."
+        },
+        "RetentionInDays": {
+          "type": "integer",
+          "description": "Retention period in days.",
+          "default": 90
+        },
+        "DisableIpMasking": {
+          "type": "boolean",
+          "description": "Disable IP masking."
+        },
+        "ImmediatePurgeDataOn30Days": {
+          "type": "boolean",
+          "description": "Purge data immediately after 30 days."
+        },
+        "PrivateLinkScopedResources": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PrivateLinkScopedResource"
+          },
+          "description": "List of linked private link scope resources."
+        },
+        "IngestionMode": {
+          "type": "string",
+          "description": "Indicates the flow of the ingestion.",
+          "default": "ApplicationInsights",
+          "enum": [
+            "ApplicationInsights",
+            "ApplicationInsightsWithDiagnosticSettings",
+            "LogAnalytics"
+          ],
+          "x-ms-enum": {
+            "name": "IngestionMode",
+            "modelAsString": true
+          }
         }
       },
       "required": [
         "Application_Type"
       ]
+    },
+    "PrivateLinkScopedResource": {
+      "properties": {
+        "ResourceId": {
+          "type": "string",
+          "description": "The full resource Id of the private link scope resource."
+        },
+        "ScopeId": {
+          "type": "string",
+          "description": "The private link scope unique Identifier."
+        }
+      },
+      "description": "The private link scope resource reference."
     },
     "ApplicationInsightsComponentListResult": {
       "description": "Describes the list of Application Insights Resources.",
@@ -474,7 +560,7 @@
         },
         "nextLink": {
           "type": "string",
-          "description": "The URI to get the next set of Application Insights component defintions if too many components where returned in the result set."
+          "description": "The URI to get the next set of Application Insights component definitions if too many components where returned in the result set."
         }
       }
     },
@@ -506,11 +592,15 @@
           "type": "string"
         },
         "operator": {
-          "description": "A query operator to evaluate over the provided column and value(s).",
+          "description": "A query operator to evaluate over the provided column and value(s). Supported operators are ==, =~, in, in~, >, >=, <, <=, between, and have the same behavior as they would in a KQL query.",
           "type": "string"
         },
         "value": {
           "description": "the value for the operator to function over. This can be a number (e.g., > 100), a string (timestamp >= '2017-09-01') or array of values."
+        },
+        "key": {
+          "description": "When filtering over custom dimensions, this key will be used as the name of the custom dimension.",
+          "type": "string"
         }
       }
     },
@@ -533,8 +623,8 @@
           "description": "Status of the operation represented by the requested Id.",
           "type": "string",
           "enum": [
-            "Pending",
-            "Completed"
+            "pending",
+            "completed"
           ],
           "x-ms-enum": {
             "name": "PurgeState",
@@ -548,28 +638,6 @@
     }
   },
   "parameters": {
-    "SubscriptionIdParameter": {
-      "name": "subscriptionId",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "The Azure subscription ID."
-    },
-    "ApiVersionParameter": {
-      "name": "api-version",
-      "in": "query",
-      "required": true,
-      "type": "string",
-      "description": "Client Api Version."
-    },
-    "ResourceGroupNameParameter": {
-      "name": "resourceGroupName",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "The name of the resource group.",
-      "x-ms-parameter-location": "method"
-    },
     "ResourceNameParameter": {
       "name": "resourceName",
       "in": "path",
@@ -577,7 +645,7 @@
       "type": "string",
       "description": "The name of the Application Insights component resource.",
       "x-ms-parameter-location": "method"
-    }, 
+    },
     "ComponentPurgeParameter": {
       "name": "body",
       "in": "body",

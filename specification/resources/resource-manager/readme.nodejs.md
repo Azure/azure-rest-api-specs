@@ -6,53 +6,53 @@ Please also specify `--node-sdks-folder=<path to root folder of your azure-sdk-f
 ```yaml $(nodejs)
 nodejs:
   azure-arm: true
+  batch: true
   package-name: azure-arm-resource
-  package-version: 3.1.1-preview
-  generate-license-txt: false
+  generate-license-txt: true
   generate-package-json: false
   generate-readme-md: false
   output-folder: $(node-sdks-folder)/lib/services/resourceManagement
-  batch:
-  - tag: package-features
-  - tag: package-locks
-  - tag: package-policy
-  - tag: package-resources
-  - tag: package-subscriptions
-  - tag: package-links
-  - tag: package-management
+batch:
+  - package-features: true
+  - package-locks: true
+  - package-policy: true
+  - package-resources: true
+  - package-subscriptions: true
+  - package-links: true
+  - package-managedapplications: true
 ```
 
-```yaml $(nodejs) && $(tag) == 'package-features'
+```yaml $(nodejs) && $(package-features)
 nodejs:
   source-code-folder-path: lib/feature
 ```
 
-```yaml $(nodejs) && $(tag) == 'package-locks'
+```yaml $(nodejs) && $(package-locks)
 nodejs:
   source-code-folder-path: lib/lock
 ```
 
-```yaml $(nodejs) && $(tag) == 'package-policy'
+```yaml $(nodejs) && $(package-policy)
 nodejs:
   source-code-folder-path: lib/policy
 ```
 
-```yaml $(nodejs) && $(tag) == 'package-resources'
+```yaml $(nodejs) && $(package-resources)
 nodejs:
   source-code-folder-path: lib/resource
 ```
 
-```yaml $(nodejs) && $(tag) == 'package-subscriptions'
+```yaml $(nodejs) && $(package-subscriptions)
 nodejs:
   source-code-folder-path: lib/subscription
 ```
 
-```yaml $(nodejs) && $(tag) == 'package-links'
+```yaml $(nodejs) && $(package-links)
 nodejs:
   source-code-folder-path: lib/link
 ```
 
-```yaml $(nodejs) && $(tag) == 'package-management'
+```yaml $(nodejs) && $(package-management)
 nodejs:
   source-code-folder-path: lib/management
   override-client-name: ManagementGroupsClient

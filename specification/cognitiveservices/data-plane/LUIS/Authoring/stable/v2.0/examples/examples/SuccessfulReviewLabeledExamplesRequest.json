@@ -1,6 +1,6 @@
 {
   "parameters": {
-    "AzureRegion": "westus",
+    "Endpoint": "{Endpoint}",
     "Ocp-Apim-Subscription-Key": "00000000000000000000000000000000",
     "appId": "86226c53-b7a6-416f-876b-226b2b5ab07b",
     "versionId": "0.1"
@@ -72,14 +72,16 @@
           "intentLabel": "BookFlight",
           "entityLabels": [
             {
-              "entityName": "Location::To",
+              "entityName": "Location",
               "startTokenIndex": 7,
-              "endTokenIndex": 7
+              "endTokenIndex": 7,
+              "role": "To"
             },
             {
-              "entityName": "Location::From",
+              "entityName": "Location",
               "startTokenIndex": 5,
-              "endTokenIndex": 5
+              "endTokenIndex": 5,
+              "role": "from"
             }
           ],
           "intentPredictions": [

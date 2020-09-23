@@ -1,0 +1,358 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "MonitorManagementClient",
+    "x-ms-code-generation-settings": {
+      "name": "MonitorManagementClient"
+    },
+    "version": "2015-04-01"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/providers/microsoft.insights/eventtypes/management/values": {
+      "get": {
+        "tags": [
+          "TenantActivityLogs"
+        ],
+        "operationId": "TenantActivityLogs_List",
+        "description": "Gets the Activity Logs for the Tenant.<br>Everything that is applicable to the API to get the Activity Logs for the subscription is applicable to this API (the parameters, $filter, etc.).<br>One thing to point out here is that this API does *not* retrieve the logs at the individual subscription of the tenant but only surfaces the logs that were generated at the tenant level.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "type": "string",
+            "required": false,
+            "description": "Reduces the set of data collected. <br>The **$filter** is very restricted and allows only the following patterns.<br>- List events for a resource group: $filter=eventTimestamp ge '<Start Time>' and eventTimestamp le '<End Time>' and eventChannels eq 'Admin, Operation' and resourceGroupName eq '<ResourceGroupName>'.<br>- List events for resource: $filter=eventTimestamp ge '<Start Time>' and eventTimestamp le '<End Time>' and eventChannels eq 'Admin, Operation' and resourceUri eq '<ResourceURI>'.<br>- List events for a subscription: $filter=eventTimestamp ge '<Start Time>' and eventTimestamp le '<End Time>' and eventChannels eq 'Admin, Operation'.<br>- List events for a resource provider: $filter=eventTimestamp ge '<Start Time>' and eventTimestamp le '<End Time>' and eventChannels eq 'Admin, Operation' and resourceProvider eq '<ResourceProviderName>'.<br>- List events for a correlation Id: api-version=2014-04-01&$filter=eventTimestamp ge '2014-07-16T04:36:37.6407898Z' and eventTimestamp le '2014-07-20T04:36:37.6407898Z' and eventChannels eq 'Admin, Operation' and correlationId eq '<CorrelationID>'.<br>**NOTE**: No other syntax is allowed."
+          },
+          {
+            "$ref": "#/parameters/SelectParameter"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "Successful request to get a page of events in the tenant activity logs",
+            "schema": {
+              "$ref": "#/definitions/EventDataCollection"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-odata": "#/definitions/EventData",
+        "x-ms-examples": {
+          "Get Tenant Activity Logs without filter or select": {
+            "$ref": "./examples/GetTenantActivityLogsNoParams.json"
+          },
+          "Get Tenant Activity Logs with filter": {
+            "$ref": "./examples/GetTenantActivityLogsFiltered.json"
+          },
+          "Get Tenant Activity Logs with select": {
+            "$ref": "./examples/GetTenantActivityLogsSelected.json"
+          },
+          "Get Tenant Activity Logs with filter and select": {
+            "$ref": "./examples/GetTenantActivityLogsFilteredAndSelected.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "LocalizableString": {
+      "required": [
+        "value"
+      ],
+      "properties": {
+        "value": {
+          "type": "string",
+          "description": "the invariant value."
+        },
+        "localizedValue": {
+          "type": "string",
+          "description": "the locale specific value."
+        }
+      },
+      "description": "The localizable string class."
+    },
+    "SenderAuthorization": {
+      "properties": {
+        "action": {
+          "type": "string",
+          "description": "the permissible actions. For instance: microsoft.support/supporttickets/write"
+        },
+        "role": {
+          "type": "string",
+          "description": "the role of the user. For instance: Subscription Admin"
+        },
+        "scope": {
+          "type": "string",
+          "description": "the scope."
+        }
+      },
+      "description": "the authorization used by the user who has performed the operation that led to this event. This captures the RBAC properties of the event. These usually include the 'action', 'role' and the 'scope'"
+    },
+    "HttpRequestInfo": {
+      "properties": {
+        "clientRequestId": {
+          "type": "string",
+          "description": "the client request id."
+        },
+        "clientIpAddress": {
+          "type": "string",
+          "description": "the client Ip Address"
+        },
+        "method": {
+          "type": "string",
+          "description": "the Http request method."
+        },
+        "uri": {
+          "type": "string",
+          "description": "the Uri."
+        }
+      },
+      "description": "The Http request info."
+    },
+    "EventData": {
+      "properties": {
+        "authorization": {
+          "readOnly": true,
+          "$ref": "#/definitions/SenderAuthorization",
+          "description": "The sender authorization information."
+        },
+        "claims": {
+          "readOnly": true,
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "key value pairs to identify ARM permissions."
+        },
+        "caller": {
+          "readOnly": true,
+          "type": "string",
+          "description": "the email address of the user who has performed the operation, the UPN claim or SPN claim based on availability."
+        },
+        "description": {
+          "readOnly": true,
+          "type": "string",
+          "description": "the description of the event."
+        },
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "the Id of this event as required by ARM for RBAC. It contains the EventDataID and a timestamp information."
+        },
+        "eventDataId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "the event data Id. This is a unique identifier for an event."
+        },
+        "correlationId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "the correlation Id, usually a GUID in the string format. The correlation Id is shared among the events that belong to the same uber operation."
+        },
+        "eventName": {
+          "readOnly": true,
+          "$ref": "#/definitions/LocalizableString",
+          "description": "the event name. This value should not be confused with OperationName. For practical purposes, OperationName might be more appealing to end users."
+        },
+        "category": {
+          "readOnly": true,
+          "$ref": "#/definitions/LocalizableString",
+          "description": "the event category."
+        },
+        "httpRequest": {
+          "readOnly": true,
+          "$ref": "#/definitions/HttpRequestInfo",
+          "description": "the HTTP request info. Usually includes the 'clientRequestId', 'clientIpAddress' (IP address of the user who initiated the event) and 'method' (HTTP method e.g. PUT)."
+        },
+        "level": {
+          "readOnly": true,
+          "type": "string",
+          "description": "the event level",
+          "enum": [
+            "Critical",
+            "Error",
+            "Warning",
+            "Informational",
+            "Verbose"
+          ],
+          "x-ms-enum": {
+            "name": "EventLevel",
+            "modelAsString": false
+          }
+        },
+        "resourceGroupName": {
+          "readOnly": true,
+          "externalDocs": {
+            "url": "http://msdn.microsoft.com/en-us/library/azure/dn790546.aspx"
+          },
+          "type": "string",
+          "description": "the resource group name of the impacted resource."
+        },
+        "resourceProviderName": {
+          "readOnly": true,
+          "$ref": "#/definitions/LocalizableString",
+          "externalDocs": {
+            "url": "http://msdn.microsoft.com/en-us/library/azure/dn790572.aspx"
+          },
+          "description": "the resource provider name of the impacted resource."
+        },
+        "resourceId": {
+          "readOnly": true,
+          "externalDocs": {
+            "url": "http://msdn.microsoft.com/en-us/library/azure/dn790569.aspx"
+          },
+          "type": "string",
+          "description": "the resource uri that uniquely identifies the resource that caused this event."
+        },
+        "resourceType": {
+          "readOnly": true,
+          "$ref": "#/definitions/LocalizableString",
+          "externalDocs": {
+            "url": "http://msdn.microsoft.com/en-us/library/azure/dn790569.aspx"
+          },
+          "description": "the resource type"
+        },
+        "operationId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "It is usually a GUID shared among the events corresponding to single operation. This value should not be confused with EventName."
+        },
+        "operationName": {
+          "readOnly": true,
+          "$ref": "#/definitions/LocalizableString",
+          "description": "the operation name."
+        },
+        "properties": {
+          "readOnly": true,
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "the set of <Key, Value> pairs (usually a Dictionary<String, String>) that includes details about the event."
+        },
+        "status": {
+          "readOnly": true,
+          "$ref": "#/definitions/LocalizableString",
+          "description": "a string describing the status of the operation. Some typical values are: Started, In progress, Succeeded, Failed, Resolved."
+        },
+        "subStatus": {
+          "readOnly": true,
+          "$ref": "#/definitions/LocalizableString",
+          "description": "the event sub status. Most of the time, when included, this captures the HTTP status code of the REST call. Common values are: OK (HTTP Status Code: 200), Created (HTTP Status Code: 201), Accepted (HTTP Status Code: 202), No Content (HTTP Status Code: 204), Bad Request(HTTP Status Code: 400), Not Found (HTTP Status Code: 404), Conflict (HTTP Status Code: 409), Internal Server Error (HTTP Status Code: 500), Service Unavailable (HTTP Status Code:503), Gateway Timeout (HTTP Status Code: 504)"
+        },
+        "eventTimestamp": {
+          "readOnly": true,
+          "type": "string",
+          "format": "date-time",
+          "description": "the timestamp of when the event was generated by the Azure service processing the request corresponding the event. It in ISO 8601 format."
+        },
+        "submissionTimestamp": {
+          "readOnly": true,
+          "type": "string",
+          "format": "date-time",
+          "description": "the timestamp of when the event became available for querying via this API. It is in ISO 8601 format. This value should not be confused eventTimestamp. As there might be a delay between the occurrence time of the event, and the time that the event is submitted to the Azure logging infrastructure."
+        },
+        "subscriptionId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "the Azure subscription Id usually a GUID."
+        },
+        "tenantId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "the Azure tenant Id"
+        }
+      },
+      "description": "The Azure event log entries are of type EventData"
+    },
+    "EventDataCollection": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/EventData"
+          },
+          "description": "this list that includes the Azure audit logs."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Provides the link to retrieve the next set of events."
+        }
+      },
+      "required": [
+        "value"
+      ],
+      "description": "Represents collection of events."
+    },
+    "ErrorResponse": {
+      "description": "Describes the format of Error response.",
+      "type": "object",
+      "properties": {
+        "code": {
+          "description": "Error code",
+          "type": "string"
+        },
+        "message": {
+          "description": "Error message indicating why the operation failed.",
+          "type": "string"
+        }
+      }
+    }
+  },
+  "parameters": {
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "Client Api Version."
+    },
+    "SelectParameter": {
+      "name": "$select",
+      "in": "query",
+      "required": false,
+      "type": "string",
+      "description": "Used to fetch events with only the given properties.<br>The **$select** argument is a comma separated list of property names to be returned. Possible values are: *authorization*, *claims*, *correlationId*, *description*, *eventDataId*, *eventName*, *eventTimestamp*, *httpRequest*, *level*, *operationId*, *operationName*, *properties*, *resourceGroupName*, *resourceProviderName*, *resourceId*, *status*, *submissionTimestamp*, *subStatus*, *subscriptionId*",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}

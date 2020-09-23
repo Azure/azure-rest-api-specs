@@ -43,7 +43,9 @@
         ],
         "operationId": "VirtualMachineRunCommands_List",
         "x-ms-examples": {
-            "VirtualMachineRunCommandList": { "$ref": "./examples/VirtualMachineRunCommandList.json" }
+          "VirtualMachineRunCommandList": {
+            "$ref": "./examples/VirtualMachineRunCommandList.json"
+          }
         },
         "description": "Lists all available run commands for a subscription in a location.",
         "parameters": [
@@ -82,7 +84,9 @@
         ],
         "operationId": "VirtualMachineRunCommands_Get",
         "x-ms-examples": {
-            "VirtualMachineRunCommandGet": { "$ref": "./examples/VirtualMachineRunCommandGet.json" }
+          "VirtualMachineRunCommandGet": {
+            "$ref": "./examples/VirtualMachineRunCommandGet.json"
+          }
         },
         "description": "Gets specific run command for a subscription in a location.",
         "parameters": [
@@ -125,7 +129,9 @@
         ],
         "operationId": "VirtualMachines_RunCommand",
         "x-ms-examples": {
-            "VirtualMachineRunCommand": { "$ref": "./examples/VirtualMachineRunCommand.json" }
+          "VirtualMachineRunCommand": {
+            "$ref": "./examples/VirtualMachineRunCommand.json"
+          }
         },
         "description": "Run command on the VM.",
         "parameters": [
@@ -163,17 +169,79 @@
           "200": {
             "description": "OK",
             "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/InstanceViewStatus"
-              }
+              "$ref": "#/definitions/RunCommandResult"
             }
           },
           "202": {
             "description": "Accepted"
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/virtualmachines/{instanceId}/runCommand": {
+      "post": {
+        "tags": [
+          "VirtualMachineScaleSetVMs"
+        ],
+        "operationId": "VirtualMachineScaleSetVMs_RunCommand",
+        "description": "Run command on a virtual machine in a VM scale set.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "vmScaleSetName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the VM scale set."
+          },
+          {
+            "name": "instanceId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The instance ID of the virtual machine."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RunCommandInput"
+            },
+            "description": "Parameters supplied to the Run command operation."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/RunCommandResult"
+            }
+          },
+          "202": {
+            "description": "Accepted"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
       }
     }
   },
@@ -333,24 +401,6 @@
       ],
       "description": "The List Virtual Machine operation response."
     },
-    "RunCommandResultProperties": {
-      "properties": {
-        "output": {
-          "type": "object",
-          "description": "Operation output data (raw JSON)"
-        }
-      },
-      "description": "Compute-specific operation properties, including output"
-    },
-    "RunCommandResult": {
-      "properties": {
-        "properties": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/RunCommandResultProperties"
-        }
-      },
-      "description": "Run command operation response."
-    },
     "InstanceViewStatus": {
       "properties": {
         "code": {
@@ -385,6 +435,17 @@
         }
       },
       "description": "Instance view status."
+    },
+    "RunCommandResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/InstanceViewStatus"
+          },
+          "description": "Run command operation response."
+        }
+      }
     }
   },
   "parameters": {

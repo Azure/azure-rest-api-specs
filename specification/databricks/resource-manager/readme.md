@@ -1,5 +1,5 @@
 # Databricks
-    
+
 > see https://aka.ms/autorest
 
 This is the AutoRest configuration file for Databricks.
@@ -7,7 +7,29 @@ This is the AutoRest configuration file for Databricks.
 
 
 ---
-## Getting Started 
+
+### Java multi-api
+
+``` yaml $(java) && $(multiapi)
+batch:
+  - tag: package-2018-04-01
+```
+
+### Tag: package-2018-04-01 and java
+
+These settings apply only when `--tag=package-2018-04-01 --java` is specified on the command line.
+Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-2018-04-01' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.databricks.v2018_04_01
+  output-folder: $(azure-libraries-for-java-folder)/sdk/databricks/mgmt-v2018_04_01
+regenerate-manager: true
+generate-interface: true
+```
+
+
+## Getting Started
 To build the SDK for Databricks, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
 
 > `autorest`
@@ -21,7 +43,7 @@ To see additional help and options, run:
 
 
 
-### Basic Information 
+### Basic Information
 These are the global settings for the Databricks API.
 
 ``` yaml
@@ -48,32 +70,23 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
+  - repo: azure-sdk-for-python
   - repo: azure-sdk-for-go
+  - repo: azure-sdk-for-js
+  - repo: azure-sdk-for-node
+  - repo: azure-resource-manager-schemas
+    after_scripts:
+      - node sdkauto_afterscript.js databricks/resource-manager
 ```
 
 ## Go
 
-These settings apply only when `--go` is specified on the command line.
+See configuration in [readme.go.md](./readme.go.md)
 
-``` yaml $(go)
-go:
-  license-header: MICROSOFT_APACHE_NO_VERSION
-  clear-output-folder: true
-  namespace: databricks
-```
+## Python
 
-### Go multi-api
+See configuration in [readme.python.md](./readme.python.md)
+## AzureResourceSchema
 
-``` yaml $(go) && $(multiapi)
-batch:
-  - tag: package-2018-04-01
-```
+See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
 
-### Tag: package-2018-04-01 and go
-
-These settings apply only when `--tag=package-2018-04-01 --go` is specified on the command line.
-Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
-
-``` yaml $(tag)=='package-2018-04-01' && $(go)
-output-folder: $(go-sdk-folder)/services/$(namespace)/mgmt/2018-04-01/$(namespace)
-```

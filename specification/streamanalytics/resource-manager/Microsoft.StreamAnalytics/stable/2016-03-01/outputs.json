@@ -41,15 +41,33 @@
         "operationId": "Outputs_CreateOrReplace",
         "description": "Creates an output or replaces an already existing output under an existing streaming job.",
         "x-ms-examples": {
-          "Create an Azure SQL database output": { "$ref": "./examples/Output_Create_AzureSQL.json" },
-          "Create an Azure Table output": { "$ref": "./examples/Output_Create_AzureTable.json" },
-          "Create a blob output with CSV serialization": { "$ref": "./examples/Output_Create_Blob_CSV.json" },
-          "Create a DocumentDB output": { "$ref": "./examples/Output_Create_DocumentDB.json" },
-          "Create an Event Hub output with JSON serialization": { "$ref": "./examples/Output_Create_EventHub_JSON.json" },
-          "Create a Service Bus Queue output with Avro serialization": { "$ref": "./examples/Output_Create_ServiceBusQueue_Avro.json" },
-          "Create a Service Bus Topic output with CSV serialization": { "$ref": "./examples/Output_Create_ServiceBusTopic_CSV.json" },
-          "Create a Power BI output": { "$ref": "./examples/Output_Create_PowerBI.json" },
-          "Create an Azure Data Lake Store output with JSON serialization": { "$ref": "./examples/Output_Create_AzureDataLakeStore_JSON.json" }
+          "Create an Azure SQL database output": {
+            "$ref": "./examples/Output_Create_AzureSQL.json"
+          },
+          "Create an Azure Table output": {
+            "$ref": "./examples/Output_Create_AzureTable.json"
+          },
+          "Create a blob output with CSV serialization": {
+            "$ref": "./examples/Output_Create_Blob_CSV.json"
+          },
+          "Create a DocumentDB output": {
+            "$ref": "./examples/Output_Create_DocumentDB.json"
+          },
+          "Create an Event Hub output with JSON serialization": {
+            "$ref": "./examples/Output_Create_EventHub_JSON.json"
+          },
+          "Create a Service Bus Queue output with Avro serialization": {
+            "$ref": "./examples/Output_Create_ServiceBusQueue_Avro.json"
+          },
+          "Create a Service Bus Topic output with CSV serialization": {
+            "$ref": "./examples/Output_Create_ServiceBusTopic_CSV.json"
+          },
+          "Create a Power BI output": {
+            "$ref": "./examples/Output_Create_PowerBI.json"
+          },
+          "Create an Azure Data Lake Store output with JSON serialization": {
+            "$ref": "./examples/Output_Create_AzureDataLakeStore_JSON.json"
+          }
         },
         "parameters": [
           {
@@ -67,7 +85,7 @@
             "required": false,
             "type": "string",
             "x-ms-client-name": "IfMatch",
-            "description": "The ETag of the output. Omit this value to always overwrite the current output. Specify the last-seen ETag value to prevent accidentally overwritting concurrent changes."
+            "description": "The ETag of the output. Omit this value to always overwrite the current output. Specify the last-seen ETag value to prevent accidentally overwriting concurrent changes."
           },
           {
             "name": "If-None-Match",
@@ -127,15 +145,33 @@
         "operationId": "Outputs_Update",
         "description": "Updates an existing output under an existing streaming job. This can be used to partially update (ie. update one or two properties) an output without affecting the rest the job or output definition.",
         "x-ms-examples": {
-          "Update an Azure SQL database output": { "$ref": "./examples/Output_Update_AzureSQL.json" },
-          "Update an Azure Table output": { "$ref": "./examples/Output_Update_AzureTable.json" },
-          "Update a blob output with CSV serialization": { "$ref": "./examples/Output_Update_Blob.json" },
-          "Update a DocumentDB output": { "$ref": "./examples/Output_Update_DocumentDB.json" },
-          "Update an Event Hub output with JSON serialization": { "$ref": "./examples/Output_Update_EventHub.json" },
-          "Update a Service Bus Queue output with Avro serialization": { "$ref": "./examples/Output_Update_ServiceBusQueue.json" },
-          "Update a Service Bus Topic output with CSV serialization": { "$ref": "./examples/Output_Update_ServiceBusTopic.json" },
-          "Update a Power BI output": { "$ref": "./examples/Output_Update_PowerBI.json" },
-          "Update an Azure Data Lake Store output with JSON serialization": { "$ref": "./examples/Output_Update_AzureDataLakeStore.json" }
+          "Update an Azure SQL database output": {
+            "$ref": "./examples/Output_Update_AzureSQL.json"
+          },
+          "Update an Azure Table output": {
+            "$ref": "./examples/Output_Update_AzureTable.json"
+          },
+          "Update a blob output with CSV serialization": {
+            "$ref": "./examples/Output_Update_Blob.json"
+          },
+          "Update a DocumentDB output": {
+            "$ref": "./examples/Output_Update_DocumentDB.json"
+          },
+          "Update an Event Hub output with JSON serialization": {
+            "$ref": "./examples/Output_Update_EventHub.json"
+          },
+          "Update a Service Bus Queue output with Avro serialization": {
+            "$ref": "./examples/Output_Update_ServiceBusQueue.json"
+          },
+          "Update a Service Bus Topic output with CSV serialization": {
+            "$ref": "./examples/Output_Update_ServiceBusTopic.json"
+          },
+          "Update a Power BI output": {
+            "$ref": "./examples/Output_Update_PowerBI.json"
+          },
+          "Update an Azure Data Lake Store output with JSON serialization": {
+            "$ref": "./examples/Output_Update_AzureDataLakeStore.json"
+          }
         },
         "parameters": [
           {
@@ -153,7 +189,7 @@
             "required": false,
             "type": "string",
             "x-ms-client-name": "IfMatch",
-            "description": "The ETag of the output. Omit this value to always overwrite the current output. Specify the last-seen ETag value to prevent accidentally overwritting concurrent changes."
+            "description": "The ETag of the output. Omit this value to always overwrite the current output. Specify the last-seen ETag value to prevent accidentally overwriting concurrent changes."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -193,7 +229,9 @@
         "operationId": "Outputs_Delete",
         "description": "Deletes an output from the streaming job.",
         "x-ms-examples": {
-          "Delete an output": { "$ref": "./examples/Output_Delete.json" }
+          "Delete an output": {
+            "$ref": "./examples/Output_Delete.json"
+          }
         },
         "parameters": [
           {
@@ -228,15 +266,33 @@
         "operationId": "Outputs_Get",
         "description": "Gets details about the specified output.",
         "x-ms-examples": {
-          "Get an Azure SQL database output": { "$ref": "./examples/Output_Get_AzureSQL.json" },
-          "Get an Azure Table output": { "$ref": "./examples/Output_Get_AzureTable.json" },
-          "Get a blob output with CSV serialization": { "$ref": "./examples/Output_Get_Blob_CSV.json" },
-          "Get a DocumentDB output": { "$ref": "./examples/Output_Get_DocumentDB.json" },
-          "Get an Event Hub output with JSON serialization": { "$ref": "./examples/Output_Get_EventHub_JSON.json" },
-          "Get a Service Bus Queue output with Avro serialization": { "$ref": "./examples/Output_Get_ServiceBusQueue_Avro.json" },
-          "Get a Service Bus Topic output with CSV serialization": { "$ref": "./examples/Output_Get_ServiceBusTopic_CSV.json" },
-          "Get a Power BI output": { "$ref": "./examples/Output_Get_PowerBI.json" },
-          "Get an Azure Data Lake Store output with JSON serialization": { "$ref": "./examples/Output_Get_AzureDataLakeStore_JSON.json" }
+          "Get an Azure SQL database output": {
+            "$ref": "./examples/Output_Get_AzureSQL.json"
+          },
+          "Get an Azure Table output": {
+            "$ref": "./examples/Output_Get_AzureTable.json"
+          },
+          "Get a blob output with CSV serialization": {
+            "$ref": "./examples/Output_Get_Blob_CSV.json"
+          },
+          "Get a DocumentDB output": {
+            "$ref": "./examples/Output_Get_DocumentDB.json"
+          },
+          "Get an Event Hub output with JSON serialization": {
+            "$ref": "./examples/Output_Get_EventHub_JSON.json"
+          },
+          "Get a Service Bus Queue output with Avro serialization": {
+            "$ref": "./examples/Output_Get_ServiceBusQueue_Avro.json"
+          },
+          "Get a Service Bus Topic output with CSV serialization": {
+            "$ref": "./examples/Output_Get_ServiceBusTopic_CSV.json"
+          },
+          "Get a Power BI output": {
+            "$ref": "./examples/Output_Get_PowerBI.json"
+          },
+          "Get an Azure Data Lake Store output with JSON serialization": {
+            "$ref": "./examples/Output_Get_AzureDataLakeStore_JSON.json"
+          }
         },
         "parameters": [
           {
@@ -279,7 +335,9 @@
         "operationId": "Outputs_ListByStreamingJob",
         "description": "Lists all of the outputs under the specified streaming job.",
         "x-ms-examples": {
-          "List all outputs in a streaming job": { "$ref": "./examples/Output_ListByStreamingJob.json" }
+          "List all outputs in a streaming job": {
+            "$ref": "./examples/Output_ListByStreamingJob.json"
+          }
         },
         "parameters": [
           {
@@ -287,7 +345,7 @@
             "in": "query",
             "required": false,
             "type": "string",
-            "description": "The $select OData query parameter. This is a comma-separated list of structural properties to include in the response, or “*” to include all properties. By default, all properties are returned except diagnostics. Currently only accepts '*' as a valid value."
+            "description": "The $select OData query parameter. This is a comma-separated list of structural properties to include in the response, or \"*\" to include all properties. By default, all properties are returned except diagnostics. Currently only accepts '*' as a valid value."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -323,7 +381,9 @@
         "operationId": "Outputs_Test",
         "description": "Tests whether an output’s datasource is reachable and usable by the Azure Stream Analytics service.",
         "x-ms-examples": {
-          "Test the connection for an output": { "$ref": "./examples/Output_Test.json" }
+          "Test the connection for an output": {
+            "$ref": "./examples/Output_Test.json"
+          }
         },
         "parameters": [
           {

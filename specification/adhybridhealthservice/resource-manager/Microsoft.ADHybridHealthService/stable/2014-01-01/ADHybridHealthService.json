@@ -3,16 +3,24 @@
   "info": {
     "version": "2014-01-01",
     "title": "ADHybridHealthService",
-    "description": "REST APIs for Azure Active Drectory Connect Health"
+    "description": "REST APIs for Azure Active Directory Connect Health"
   },
   "host": "management.azure.com",
-  "schemes": [ "https" ],
-  "consumes": [ "application/json" ],
-  "produces": [ "application/json" ],
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
   "paths": {
     "/providers/Microsoft.ADHybridHealthService/addsservices": {
       "get": {
-        "tags": [ "Adds" ],
+        "tags": [
+          "Adds"
+        ],
         "description": "Gets the details of Active Directory Domain Service, for a tenant, that are onboarded to Azure Active Directory Connect Health.",
         "operationId": "addsServices_list",
         "x-ms-examples": {
@@ -66,7 +74,9 @@
         }
       },
       "post": {
-        "tags": [ "Adds" ],
+        "tags": [
+          "Adds"
+        ],
         "description": "Onboards a service for a given tenant in Azure Active Directory Connect Health.",
         "operationId": "addsServices_add",
         "x-ms-examples": {
@@ -100,7 +110,9 @@
     },
     "/providers/Microsoft.ADHybridHealthService/addsservices/{serviceName}": {
       "get": {
-        "tags": [ "Services" ],
+        "tags": [
+          "Services"
+        ],
         "description": "Gets the details of an Active Directory Domain Service for a tenant having Azure AD Premium license and is onboarded to Azure Active Directory Connect Health.",
         "x-ms-examples": {
           "addsServices_get": {
@@ -130,7 +142,9 @@
         }
       },
       "delete": {
-        "tags": [ "Services" ],
+        "tags": [
+          "Services"
+        ],
         "description": "Deletes an Active Directory Domain Service which is onboarded to Azure Active Directory Connect Health.",
         "x-ms-examples": {
           "addsServices_delete": {
@@ -164,7 +178,9 @@
         }
       },
       "patch": {
-        "tags": [ "Services" ],
+        "tags": [
+          "Services"
+        ],
         "description": "Updates an Active Directory Domain Service properties of an onboarded service.",
         "x-ms-examples": {
           "addsServices_update": {
@@ -195,7 +211,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Sucessfully updated service.",
+            "description": "Successfully updated service.",
             "schema": {
               "$ref": "#/definitions/ServiceProperties"
             }
@@ -205,7 +221,9 @@
     },
     "/providers/Microsoft.ADHybridHealthService/addsservices/{serviceName}/alerts": {
       "get": {
-        "tags": [ "Adds" ],
+        "tags": [
+          "Adds"
+        ],
         "description": "Gets the alerts for a given Active Directory Domain Service.",
         "x-ms-examples": {
           "alerts_listAddsAlerts": {
@@ -270,7 +288,9 @@
     },
     "/providers/Microsoft.ADHybridHealthService/addsservices/{serviceName}/configuration": {
       "get": {
-        "tags": [ "Adds" ],
+        "tags": [
+          "Adds"
+        ],
         "description": "Gets the service configurations.",
         "x-ms-examples": {
           "configuration_listAddsConfigurations": {
@@ -309,7 +329,9 @@
     },
     "/providers/Microsoft.ADHybridHealthService/addsservices/{serviceName}/dimensions/{dimension}": {
       "get": {
-        "tags": [ "Adds" ],
+        "tags": [
+          "Adds"
+        ],
         "description": "Gets the dimensions for a given dimension type in a server.",
         "x-ms-examples": {
           "dimensions_listAddsDimensions": {
@@ -351,7 +373,9 @@
     },
     "/providers/Microsoft.ADHybridHealthService/addsservices/{serviceName}/addsservicemembers": {
       "get": {
-        "tags": [ "Adds" ],
+        "tags": [
+          "Adds"
+        ],
         "description": "Gets the details of the Active Directory Domain servers, for a given Active Directory Domain Service, that are onboarded to Azure Active Directory Connect Health.",
         "x-ms-examples": {
           "addsServiceMembers_list": {
@@ -393,7 +417,9 @@
     },
     "/providers/Microsoft.ADHybridHealthService/addsservices/{serviceName}/addomainservicemembers": {
       "get": {
-        "tags": [ "Adds" ],
+        "tags": [
+          "Adds"
+        ],
         "description": "Gets the details of the servers, for a given Active Directory Domain Service, that are onboarded to Azure Active Directory Connect Health.",
         "x-ms-examples": {
           "adDomainServiceMembers_list": {
@@ -436,7 +462,9 @@
             "description": "The next partition key to query for.",
             "required": true,
             "type": "string",
-            "enum": [ " " ],
+            "enum": [
+              " "
+            ],
             "x-ms-enum": {
               "name": "nextPartitionKey",
               "modelAsString": true
@@ -448,7 +476,9 @@
             "description": "The next row key to query for.",
             "required": true,
             "type": "string",
-            "enum": [ " " ],
+            "enum": [
+              " "
+            ],
             "x-ms-enum": {
               "name": "nextRowKey",
               "modelAsString": true
@@ -480,7 +510,9 @@
     },
     "/providers/Microsoft.ADHybridHealthService/addsservices/{serviceName}/features/{featureName}/userpreference": {
       "get": {
-        "tags": [ "Adds" ],
+        "tags": [
+          "Adds"
+        ],
         "description": "Gets the user preferences for a given feature.",
         "x-ms-examples": {
           "addsServicesUserPreference_get": {
@@ -517,7 +549,9 @@
         }
       },
       "delete": {
-        "tags": [ "Adds" ],
+        "tags": [
+          "Adds"
+        ],
         "description": "Deletes the user preferences for a given feature.",
         "x-ms-examples": {
           "addsServicesUserPreference_delete": {
@@ -551,7 +585,9 @@
         }
       },
       "post": {
-        "tags": [ "Adds" ],
+        "tags": [
+          "Adds"
+        ],
         "description": "Adds the user preferences for a given feature.",
         "x-ms-examples": {
           "addsServicesUserPreference_add": {
@@ -596,7 +632,9 @@
     },
     "/providers/Microsoft.ADHybridHealthService/addsservices/{serviceName}/forestsummary": {
       "get": {
-        "tags": [ "Adds" ],
+        "tags": [
+          "Adds"
+        ],
         "description": "Gets the forest summary for a given Active Directory Domain Service, that is onboarded to Azure Active Directory Connect Health.",
         "x-ms-examples": {
           "addsServices_getForestSummary": {
@@ -628,7 +666,9 @@
     },
     "/providers/Microsoft.ADHybridHealthService/addsservices/{serviceName}/metrics/{metricName}/groups/{groupName}": {
       "get": {
-        "tags": [ "Adds" ],
+        "tags": [
+          "Adds"
+        ],
         "description": "Gets the server related metrics for a given metric and group combination.",
         "x-ms-examples": {
           "addsService_getMetrics": {
@@ -697,7 +737,9 @@
     },
     "/providers/Microsoft.ADHybridHealthService/addsservices/{serviceName}/metrics/{metricName}/groups/{groupName}/average": {
       "get": {
-        "tags": [ "Adds" ],
+        "tags": [
+          "Adds"
+        ],
         "description": "Gets the average of the metric values for a given metric and group combination.",
         "x-ms-examples": {
           "addsServices_listMetricsAverage": {
@@ -746,7 +788,9 @@
     },
     "/providers/Microsoft.ADHybridHealthService/addsservices/{serviceName}/metrics/{metricName}/groups/{groupName}/sum": {
       "get": {
-        "tags": [ "Adds" ],
+        "tags": [
+          "Adds"
+        ],
         "description": "Gets the sum of the metric values for a given metric and group combination.",
         "x-ms-examples": {
           "addsServices_listMetricsSum": {
@@ -795,7 +839,9 @@
     },
     "/providers/Microsoft.ADHybridHealthService/addsservices/{serviceName}/metricmetadata": {
       "get": {
-        "tags": [ "Adds" ],
+        "tags": [
+          "Adds"
+        ],
         "description": "Gets the service related metrics information.",
         "x-ms-examples": {
           "addsServices_listMetricMetadata": {
@@ -844,7 +890,9 @@
     },
     "/providers/Microsoft.ADHybridHealthService/addsservices/{serviceName}/metricmetadata/{metricName}": {
       "get": {
-        "tags": [ "Adds" ],
+        "tags": [
+          "Adds"
+        ],
         "description": "Gets the service related metric information.",
         "x-ms-examples": {
           "addsServices_getMetricMetadata": {
@@ -883,7 +931,9 @@
     },
     "/providers/Microsoft.ADHybridHealthService/addsservices/{serviceName}/metricmetadata/{metricName}/groups/{groupName}": {
       "get": {
-        "tags": [ "Adds" ],
+        "tags": [
+          "Adds"
+        ],
         "description": "Gets the service related metrics for a given metric and group combination.",
         "x-ms-examples": {
           "addsServices_getMetricMetadataForGroup": {
@@ -952,7 +1002,9 @@
     },
     "/providers/Microsoft.ADHybridHealthService/addsservices/{serviceName}/replicationdetails": {
       "get": {
-        "tags": [ "Adds" ],
+        "tags": [
+          "Adds"
+        ],
         "description": "Gets complete domain controller list along with replication details for a given Active Directory Domain Service, that is onboarded to Azure Active Directory Connect Health.",
         "x-ms-examples": {
           "addsServices_listReplicationDetails": {
@@ -1001,7 +1053,9 @@
     },
     "/providers/Microsoft.ADHybridHealthService/addsservices/{serviceName}/replicationstatus": {
       "get": {
-        "tags": [ "Adds" ],
+        "tags": [
+          "Adds"
+        ],
         "description": "Gets Replication status for a given Active Directory Domain Service, that is onboarded to Azure Active Directory Connect Health.",
         "x-ms-examples": {
           "addsServicesReplicationStatus_get": {
@@ -1033,7 +1087,9 @@
     },
     "/providers/Microsoft.ADHybridHealthService/addsservices/{serviceName}/replicationsummary": {
       "get": {
-        "tags": [ "Adds" ],
+        "tags": [
+          "Adds"
+        ],
         "description": "Gets complete domain controller list along with replication details for a given Active Directory Domain Service, that is onboarded to Azure Active Directory Connect Health.",
         "x-ms-examples": {
           "addsServices_listReplicationSummary": {
@@ -1076,7 +1132,9 @@
             "description": "The next partition key to query for.",
             "required": true,
             "type": "string",
-            "enum": [ " " ],
+            "enum": [
+              " "
+            ],
             "x-ms-enum": {
               "name": "nextPartitionKey",
               "modelAsString": true
@@ -1088,7 +1146,9 @@
             "description": "The next row key to query for.",
             "required": true,
             "type": "string",
-            "enum": [ " " ],
+            "enum": [
+              " "
+            ],
             "x-ms-enum": {
               "name": "nextRowKey",
               "modelAsString": true
@@ -1120,7 +1180,9 @@
     },
     "/providers/Microsoft.ADHybridHealthService/addsservices/{serviceName}/servicemembers": {
       "get": {
-        "tags": [ "Adds" ],
+        "tags": [
+          "Adds"
+        ],
         "description": "Gets the details of the servers, for a given Active Directory Domain Controller service, that are onboarded to Azure Active Directory Connect Health Service.",
         "x-ms-examples": {
           "addsServicesServiceMembers_list": {
@@ -1174,7 +1236,9 @@
         }
       },
       "post": {
-        "tags": [ "Adds" ],
+        "tags": [
+          "Adds"
+        ],
         "description": "Onboards  a server, for a given Active Directory Domain Controller service, to Azure Active Directory Connect Health Service.",
         "x-ms-examples": {
           "addsServicesServiceMembers_add": {
@@ -1215,7 +1279,9 @@
     },
     "/providers/Microsoft.ADHybridHealthService/addsservices/{serviceName}/servicemembers/{serviceMemberId}": {
       "get": {
-        "tags": [ "Adds" ],
+        "tags": [
+          "Adds"
+        ],
         "description": "Gets the details of a server, for a given Active Directory Domain Controller service, that are onboarded to Azure Active Directory Connect Health Service.",
         "x-ms-examples": {
           "addsServiceMembers_get": {
@@ -1253,7 +1319,9 @@
         }
       },
       "delete": {
-        "tags": [ "Adds" ],
+        "tags": [
+          "Adds"
+        ],
         "description": "Deletes a Active Directory Domain Controller server that has been onboarded to Azure Active Directory Connect Health Service.",
         "x-ms-examples": {
           "addsServiceMembers_delete": {
@@ -1297,7 +1365,9 @@
     },
     "/providers/Microsoft.ADHybridHealthService/addsservices/{serviceName}/servicemembers/{serviceMemberId}/alerts": {
       "get": {
-        "tags": [ "Adds" ],
+        "tags": [
+          "Adds"
+        ],
         "description": "Gets the details of an alert for a given Active Directory Domain Controller service and server combination.",
         "x-ms-examples": {
           "addsServices_listServerAlerts": {
@@ -1370,7 +1440,9 @@
     },
     "/providers/Microsoft.ADHybridHealthService/addsservices/{serviceName}/servicemembers/{serviceMemberId}/credentials": {
       "get": {
-        "tags": [ "Adds" ],
+        "tags": [
+          "Adds"
+        ],
         "description": "Gets the credentials of the server which is needed by the agent to connect to Azure Active Directory Connect Health Service.",
         "x-ms-examples": {
           "addsServiceMembers_listCredentials": {
@@ -1420,7 +1492,9 @@
     },
     "/providers/Microsoft.ADHybridHealthService/addsservices/premiumCheck": {
       "get": {
-        "tags": [ "Services" ],
+        "tags": [
+          "Services"
+        ],
         "description": "Gets the details of Active Directory Domain Services for a tenant having Azure AD Premium license and is onboarded to Azure Active Directory Connect Health.",
         "x-ms-examples": {
           "addsServices_listPremiumServices": {
@@ -1506,7 +1580,9 @@
     },
     "/providers/Microsoft.ADHybridHealthService/configuration": {
       "post": {
-        "tags": [ "Configuration" ],
+        "tags": [
+          "Configuration"
+        ],
         "description": "Onboards a tenant in Azure Active Directory Connect Health.",
         "x-ms-examples": {
           "configuration_add": {
@@ -1529,7 +1605,9 @@
         }
       },
       "get": {
-        "tags": [ "Configuration" ],
+        "tags": [
+          "Configuration"
+        ],
         "description": "Gets the details of a tenant onboarded to Azure Active Directory Connect Health.",
         "x-ms-examples": {
           "configuration_get": {
@@ -1552,7 +1630,9 @@
         }
       },
       "patch": {
-        "tags": [ "Configuration" ],
+        "tags": [
+          "Configuration"
+        ],
         "description": "Updates tenant properties for tenants onboarded to Azure Active Directory Connect Health.",
         "x-ms-examples": {
           "configuration_update": {
@@ -1586,7 +1666,9 @@
     },
     "/providers/Microsoft.ADHybridHealthService/reports/DevOps/IsDevOps": {
       "get": {
-        "tags": [ "DevOps" ],
+        "tags": [
+          "DevOps"
+        ],
         "description": "Checks if the user is enabled for Dev Ops access.",
         "x-ms-examples": {
           "reports_getDevOps": {
@@ -1611,7 +1693,9 @@
     },
     "/providers/Microsoft.ADHybridHealthService/services": {
       "get": {
-        "tags": [ "Services" ],
+        "tags": [
+          "Services"
+        ],
         "description": "Gets the details of services, for a tenant, that are onboarded to Azure Active Directory Connect Health.",
         "x-ms-examples": {
           "services_list": {
@@ -1665,7 +1749,9 @@
         }
       },
       "post": {
-        "tags": [ "Services" ],
+        "tags": [
+          "Services"
+        ],
         "description": "Onboards a service for a given tenant in Azure Active Directory Connect Health.",
         "x-ms-examples": {
           "services_add": {
@@ -1699,7 +1785,9 @@
     },
     "/providers/Microsoft.ADHybridHealthService/services/premiumCheck": {
       "get": {
-        "tags": [ "Services" ],
+        "tags": [
+          "Services"
+        ],
         "description": "Gets the details of services for a tenant having Azure AD Premium license and is onboarded to Azure Active Directory Connect Health.",
         "x-ms-examples": {
           "services_listPremium": {
@@ -1755,7 +1843,9 @@
     },
     "/providers/Microsoft.ADHybridHealthService/services/{serviceName}": {
       "get": {
-        "tags": [ "Services" ],
+        "tags": [
+          "Services"
+        ],
         "description": "Gets the details of a service for a tenant having Azure AD Premium license and is onboarded to Azure Active Directory Connect Health.",
         "x-ms-examples": {
           "services_get": {
@@ -1785,7 +1875,9 @@
         }
       },
       "delete": {
-        "tags": [ "Services" ],
+        "tags": [
+          "Services"
+        ],
         "description": "Deletes a service which is onboarded to Azure Active Directory Connect Health.",
         "x-ms-examples": {
           "services_delete": {
@@ -1819,7 +1911,9 @@
         }
       },
       "patch": {
-        "tags": [ "Services" ],
+        "tags": [
+          "Services"
+        ],
         "description": "Updates the service properties of an onboarded service.",
         "x-ms-examples": {
           "services_update": {
@@ -1860,7 +1954,9 @@
     },
     "/providers/Microsoft.ADHybridHealthService/services/{serviceName}/alerts": {
       "get": {
-        "tags": [ "Alerts" ],
+        "tags": [
+          "Alerts"
+        ],
         "description": "Gets the alerts for a given service.",
         "x-ms-examples": {
           "services_listAlerts": {
@@ -1925,7 +2021,9 @@
     },
     "/providers/Microsoft.ADHybridHealthService/services/{serviceName}/checkServiceFeatureAvailibility/{featureName}": {
       "get": {
-        "tags": [ "Services" ],
+        "tags": [
+          "Services"
+        ],
         "description": "Checks if the service has all the pre-requisites met to use a feature.",
         "x-ms-examples": {
           "services_getFeatureAvailibility": {
@@ -1964,7 +2062,9 @@
     },
     "/providers/Microsoft.ADHybridHealthService/services/{serviceName}/exporterrors/counts": {
       "get": {
-        "tags": [ "Services" ],
+        "tags": [
+          "Services"
+        ],
         "description": "Gets the count of latest AAD export errors.",
         "x-ms-examples": {
           "services_listExportErrors": {
@@ -1999,7 +2099,9 @@
     },
     "/providers/Microsoft.ADHybridHealthService/services/{serviceName}/exporterrors/listV2": {
       "get": {
-        "tags": [ "Services" ],
+        "tags": [
+          "Services"
+        ],
         "description": " Gets the categorized export errors.",
         "x-ms-examples": {
           "services_listExportErrorsV2": {
@@ -2041,7 +2143,9 @@
     },
     "/providers/Microsoft.ADHybridHealthService/services/{serviceName}/exportstatus": {
       "get": {
-        "tags": [ "Services" ],
+        "tags": [
+          "Services"
+        ],
         "description": "Gets the export status.",
         "x-ms-examples": {
           "services_listExportStatus": {
@@ -2076,7 +2180,9 @@
     },
     "/providers/Microsoft.ADHybridHealthService/services/{serviceName}/feedbacktype/alerts/feedback": {
       "post": {
-        "tags": [ "Feedback" ],
+        "tags": [
+          "Feedback"
+        ],
         "description": "Adds an alert feedback submitted by customer.",
         "x-ms-examples": {
           "services_addAlertFeedback": {
@@ -2117,7 +2223,9 @@
     },
     "/providers/Microsoft.ADHybridHealthService/services/{serviceName}/feedbacktype/alerts/{shortName}/alertfeedback": {
       "get": {
-        "tags": [ "Feedback" ],
+        "tags": [
+          "Feedback"
+        ],
         "description": "Gets a list of all alert feedback for a given tenant and alert type.",
         "x-ms-examples": {
           "services_listAlertFeedback": {
@@ -2159,7 +2267,9 @@
     },
     "/providers/Microsoft.ADHybridHealthService/services/{serviceName}/metrics/{metricName}/groups/{groupName}": {
       "get": {
-        "tags": [ "Metrics" ],
+        "tags": [
+          "Metrics"
+        ],
         "description": "Gets the server related metrics for a given metric and group combination.",
         "x-ms-examples": {
           "service_getMetrics": {
@@ -2228,7 +2338,9 @@
     },
     "/providers/Microsoft.ADHybridHealthService/services/{serviceName}/metrics/{metricName}/groups/{groupName}/average": {
       "get": {
-        "tags": [ "Metrics" ],
+        "tags": [
+          "Metrics"
+        ],
         "description": "Gets the average of the metric values for a given metric and group combination.",
         "x-ms-examples": {
           "services_listMetricsAverage": {
@@ -2277,7 +2389,9 @@
     },
     "/providers/Microsoft.ADHybridHealthService/services/{serviceName}/metrics/{metricName}/groups/{groupName}/sum": {
       "get": {
-        "tags": [ "Metrics" ],
+        "tags": [
+          "Metrics"
+        ],
         "description": "Gets the sum of the metric values for a given metric and group combination.",
         "x-ms-examples": {
           "services_listMetricsSum": {
@@ -2326,7 +2440,9 @@
     },
     "/providers/Microsoft.ADHybridHealthService/services/{serviceName}/metricmetadata": {
       "get": {
-        "tags": [ "Metrics" ],
+        "tags": [
+          "Metrics"
+        ],
         "description": "Gets the service related metrics information.",
         "x-ms-examples": {
           "services_listMetricMetadata": {
@@ -2375,7 +2491,9 @@
     },
     "/providers/Microsoft.ADHybridHealthService/services/{serviceName}/metricmetadata/{metricName}": {
       "get": {
-        "tags": [ "Metrics" ],
+        "tags": [
+          "Metrics"
+        ],
         "description": "Gets the service related metrics information.",
         "x-ms-examples": {
           "services_getMetricMetadata": {
@@ -2414,7 +2532,9 @@
     },
     "/providers/Microsoft.ADHybridHealthService/services/{serviceName}/metricmetadata/{metricName}/groups/{groupName}": {
       "get": {
-        "tags": [ "Metrics" ],
+        "tags": [
+          "Metrics"
+        ],
         "description": "Gets the service related metrics for a given metric and group combination.",
         "x-ms-examples": {
           "services_getMetricMetadataForGroup": {
@@ -2483,7 +2603,9 @@
     },
     "/providers/Microsoft.ADHybridHealthService/services/{serviceName}/monitoringconfiguration": {
       "patch": {
-        "tags": [ "Services" ],
+        "tags": [
+          "Services"
+        ],
         "description": "Updates the service level monitoring configuration.",
         "x-ms-examples": {
           "services_updateMonitoringConfiguration": {
@@ -2521,7 +2643,9 @@
     },
     "/providers/Microsoft.ADHybridHealthService/services/{serviceName}/monitoringconfigurations": {
       "get": {
-        "tags": [ "Services" ],
+        "tags": [
+          "Services"
+        ],
         "description": "Gets the service level monitoring configurations.",
         "x-ms-examples": {
           "services_listMonitoringConfigurations": {
@@ -2556,7 +2680,9 @@
     },
     "/providers/Microsoft.ADHybridHealthService/services/{serviceName}/reports/badpassword/details/user": {
       "get": {
-        "tags": [ "Reports" ],
+        "tags": [
+          "Reports"
+        ],
         "description": "Gets the bad password login attempt report for an user",
         "x-ms-examples": {
           "services_listUserBadPasswordReport": {
@@ -2598,7 +2724,9 @@
     },
     "/providers/Microsoft.ADHybridHealthService/services/{serviceName}/servicemembers": {
       "get": {
-        "tags": [ "ServiceMembers" ],
+        "tags": [
+          "ServiceMembers"
+        ],
         "description": "Gets the details of the servers, for a given service, that are onboarded to Azure Active Directory Connect Health Service.",
         "x-ms-examples": {
           "serviceMembers_list": {
@@ -2652,7 +2780,9 @@
         }
       },
       "post": {
-        "tags": [ "ServiceMembers" ],
+        "tags": [
+          "ServiceMembers"
+        ],
         "description": "Onboards  a server, for a given service, to Azure Active Directory Connect Health Service.",
         "x-ms-examples": {
           "serviceMembers_add": {
@@ -2693,7 +2823,9 @@
     },
     "/providers/Microsoft.ADHybridHealthService/services/{serviceName}/servicemembers/{serviceMemberId}": {
       "get": {
-        "tags": [ "ServiceMembers" ],
+        "tags": [
+          "ServiceMembers"
+        ],
         "description": "Gets the details of a server, for a given service, that are onboarded to Azure Active Directory Connect Health Service.",
         "x-ms-examples": {
           "serviceMembers_get": {
@@ -2731,7 +2863,9 @@
         }
       },
       "delete": {
-        "tags": [ "ServiceMembers" ],
+        "tags": [
+          "ServiceMembers"
+        ],
         "description": "Deletes a server that has been onboarded to Azure Active Directory Connect Health Service.",
         "x-ms-examples": {
           "serviceMembers_delete": {
@@ -2775,7 +2909,9 @@
     },
     "/providers/Microsoft.ADHybridHealthService/services/{serviceName}/servicemembers/{serviceMemberId}/alerts": {
       "get": {
-        "tags": [ "Alerts" ],
+        "tags": [
+          "Alerts"
+        ],
         "description": "Gets the details of an alert for a given service and server combination.",
         "x-ms-examples": {
           "serviceMembers_listAlerts": {
@@ -2787,7 +2923,7 @@
           {
             "name": "serviceMemberId",
             "in": "path",
-            "description": "The server Id for which the laert details needs to be queried.",
+            "description": "The server Id for which the alert details needs to be queried.",
             "required": true,
             "type": "string",
             "format": "uuid"
@@ -2848,7 +2984,9 @@
     },
     "/providers/Microsoft.ADHybridHealthService/service/{serviceName}/servicemembers/{serviceMemberId}/connectors": {
       "get": {
-        "tags": [ "ServiceMembers" ],
+        "tags": [
+          "ServiceMembers"
+        ],
         "description": "Gets the connector details for a service.",
         "x-ms-examples": {
           "serviceMembers_listConnectors": {
@@ -2891,7 +3029,9 @@
     },
     "/providers/Microsoft.ADHybridHealthService/services/{serviceName}/servicemembers/{serviceMemberId}/credentials": {
       "get": {
-        "tags": [ "ServiceMembers" ],
+        "tags": [
+          "ServiceMembers"
+        ],
         "description": "Gets the credentials of the server which is needed by the agent to connect to Azure Active Directory Connect Health Service.",
         "x-ms-examples": {
           "serviceMembers_listCredentials": {
@@ -2941,7 +3081,9 @@
     },
     "/providers/Microsoft.ADHybridHealthService/services/{serviceName}/servicemembers/{serviceMemberId}/data": {
       "delete": {
-        "tags": [ "ServiceMembers" ],
+        "tags": [
+          "ServiceMembers"
+        ],
         "description": "Deletes the data uploaded by the server to Azure Active Directory Connect Health Service.",
         "x-ms-examples": {
           "serviceMembers_deleteData": {
@@ -2978,7 +3120,9 @@
     },
     "/providers/Microsoft.ADHybridHealthService/services/{serviceName}/servicemembers/{serviceMemberId}/datafreshness": {
       "get": {
-        "tags": [ "ServiceMembers" ],
+        "tags": [
+          "ServiceMembers"
+        ],
         "description": "Gets the last time when the server uploaded data to Azure Active Directory Connect Health Service.",
         "x-ms-examples": {
           "serviceMembers_listDataFreshness": {
@@ -3021,7 +3165,9 @@
     },
     "/providers/Microsoft.ADHybridHealthService/services/{serviceName}/servicemembers/{serviceMemberId}/exportstatus": {
       "get": {
-        "tags": [ "ServiceMembers" ],
+        "tags": [
+          "ServiceMembers"
+        ],
         "description": "Gets the export status.",
         "x-ms-examples": {
           "serviceMembers_listExportStatus": {
@@ -3064,7 +3210,9 @@
     },
     "/providers/Microsoft.ADHybridHealthService/services/{serviceName}/servicemembers/{serviceMemberId}/globalconfiguration": {
       "get": {
-        "tags": [ "ServiceMembers" ],
+        "tags": [
+          "ServiceMembers"
+        ],
         "description": "Gets the global configuration.",
         "x-ms-examples": {
           "serviceMembers_listGlobalConfiguration": {
@@ -3106,7 +3254,9 @@
     },
     "/providers/Microsoft.ADHybridHealthService/services/{serviceName}/servicemembers/{serviceMemberId}/metrics/{metricName}/groups/{groupName}": {
       "get": {
-        "tags": [ "Metrics" ],
+        "tags": [
+          "Metrics"
+        ],
         "description": "Gets the server related metrics for a given metric and group combination.",
         "x-ms-examples": {
           "serviceMembers_getMetrics": {
@@ -3183,7 +3333,9 @@
     },
     "/providers/Microsoft.ADHybridHealthService/services/{serviceName}/servicemembers/{serviceMemberId}/serviceconfiguration": {
       "get": {
-        "tags": [ "ServiceMembers" ],
+        "tags": [
+          "ServiceMembers"
+        ],
         "description": "Gets the service configuration.",
         "x-ms-examples": {
           "serviceMembers_getServiceConfiguration": {
@@ -3222,7 +3374,9 @@
     },
     "/providers/Microsoft.ADHybridHealthService/services/{serviceName}/TenantWhitelisting/{featureName}": {
       "get": {
-        "tags": [ "Services" ],
+        "tags": [
+          "Services"
+        ],
         "description": "Checks if the tenant, to which a service is registered, is whitelisted to use a feature.",
         "x-ms-examples": {
           "services_getTenantWhitelisting": {
@@ -3258,6 +3412,248 @@
           }
         }
       }
+    },
+    "/providers/Microsoft.ADHybridHealthService/services/{serviceName}/reports/riskyIp/blobUris": {
+      "get": {
+        "tags": [
+          "Reports"
+        ],
+        "description": "Gets all Risky IP report URIs for the last 7 days.",
+        "x-ms-examples": {
+          "services_listAllRiskyIpDownloadReport": {
+            "$ref": "./examples/RiskyIpDownload.json"
+          }
+        },
+        "operationId": "services_listAllRiskyIpDownloadReport",
+        "parameters": [
+          {
+            "name": "serviceName",
+            "in": "path",
+            "description": "The name of the service.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Risky IP report URIs for the last 7 days.",
+            "schema": {
+              "$ref": "#/definitions/RiskyIPBlobUris"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
+    "/providers/Microsoft.ADHybridHealthService/services/{serviceName}/reports/riskyIp/generateBlobUri": {
+      "post": {
+        "tags": [
+          "Reports"
+        ],
+        "description": "Initiate the generation of a new Risky IP report. Returns the URI for the new one.",
+        "x-ms-examples": {
+          "services_listCurrentRiskyIpDownloadReport": {
+            "$ref": "./examples/RiskyIpDownload.json"
+          }
+        },
+        "operationId": "services_listCurrentRiskyIpDownloadReport",
+        "parameters": [
+          {
+            "name": "serviceName",
+            "in": "path",
+            "description": "The name of the service.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The URI of the Risky IP report that was requested.",
+            "schema": {
+              "$ref": "#/definitions/RiskyIPBlobUris"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
+    "/providers/Microsoft.ADHybridHealthService/services/{serviceName}/servicemembers/{serviceMemberId}/metrics/{metricName}": {
+      "get": {
+        "tags": [
+          "Metrics"
+        ],
+        "description": "Gets the list of connectors and run profile names.",
+        "x-ms-examples": {
+          "serviceMembers_getConnectorMetadata": {
+            "$ref": "./examples/ConnectorMetadata.json"
+          }
+        },
+        "operationId": "serviceMembers_getConnectorMetadata",
+        "parameters": [
+          {
+            "name": "serviceName",
+            "in": "path",
+            "description": "The name of the service.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "serviceMemberId",
+            "in": "path",
+            "description": "The service member id.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "name": "metricName",
+            "in": "path",
+            "description": "The name of the metric.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Gets the list of connectors and run profile names for the given service and service member.",
+            "schema": {
+              "$ref": "#/definitions/ConnectorMetadata"
+            }
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.ADHybridHealthService/services/{serviceName}/ipAddressAggregates": {
+      "get": {
+        "tags": [
+          "Reports"
+        ],
+        "description": "Gets the IP address aggregates for a given service.",
+        "x-ms-examples": {
+          "list_IPAddressAggregatesByService": {
+            "$ref": "./examples/IpAddressAggregates.json"
+          }
+        },
+        "operationId": "list_IPAddressAggregatesByService",
+        "parameters": [
+          {
+            "name": "serviceName",
+            "in": "path",
+            "description": "The name of the service.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "skiptoken",
+            "in": "query",
+            "description": "A continuationtoken value returned in paginated result to load different pages.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The list of IP addresses.",
+            "schema": {
+              "$ref": "#/definitions/IPAddressAggregates"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.ADHybridHealthService/services/{serviceName}/ipAddressAggregateSettings": {
+      "get": {
+        "tags": [
+          "Reports"
+        ],
+        "description": "Gets the IP address aggregate settings.",
+        "x-ms-examples": {
+          "list_IPAddressAggregateSettings": {
+            "$ref": "./examples/IpAddressAggregateSettings.json"
+          }
+        },
+        "operationId": "list_IPAddressAggregateSettings",
+        "parameters": [
+          {
+            "name": "serviceName",
+            "in": "path",
+            "description": "The name of the service.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "IP address aggregate settings.",
+            "schema": {
+              "$ref": "#/definitions/IPAddressAggregateSetting"
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Configuration"
+        ],
+        "description": "Updates the IP address aggregate settings alert thresholds.",
+        "x-ms-examples": {
+          "update_IPAddressAggregateSettings": {
+            "$ref": "./examples/IpAddressAggregateSettingsUpdate.json"
+          }
+        },
+        "operationId": "update_IPAddressAggregateSettings",
+        "parameters": [
+          {
+            "name": "serviceName",
+            "in": "path",
+            "description": "The name of the service.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "IPAddressAggregateSetting",
+            "in": "body",
+            "description": "The IP address aggregate setting object.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/IPAddressAggregateSetting"
+            }
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "IP AddressAggregate Settings.",
+            "schema": {
+              "$ref": "#/definitions/IPAddressAggregateSetting"
+            }
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -3287,7 +3683,7 @@
       }
     },
     "AdditionalInformation": {
-      "description": "The addtional information for a property.",
+      "description": "The additional information for a property.",
       "type": "object",
       "properties": {
         "titleName": {
@@ -3299,7 +3695,7 @@
           "type": "string"
         },
         "properties": {
-          "description": "The list of properties which are included in the aditional information.",
+          "description": "The list of properties which are included in the additional information.",
           "type": "object",
           "items": {
             "$ref": "#/definitions/Item"
@@ -3374,7 +3770,7 @@
           "type": "string"
         },
         "createdDate": {
-          "description": "The date time , in UTC, when the server was onboaraded to Azure Active Directory Connect Health.",
+          "description": "The date time , in UTC, when the server was onboarded to Azure Active Directory Connect Health.",
           "type": "string",
           "format": "date-time"
         },
@@ -3416,7 +3812,7 @@
           "format": "date-time"
         },
         "lastUpdated": {
-          "description": "The date and time, in UTC, when the server proeprties were last updated.",
+          "description": "The date and time, in UTC, when the server properties were last updated.",
           "type": "string",
           "format": "date-time"
         },
@@ -3577,7 +3973,7 @@
           }
         },
         "state": {
-          "description": "The alert state which can be either active or resolved with multile resolution types.",
+          "description": "The alert state which can be either active or resolved with multiple resolution types.",
           "type": "string",
           "enum": [
             "Active",
@@ -3684,7 +4080,7 @@
           "type": "string"
         },
         "state": {
-          "description": "The alert state which can be either active or resolved with multile resolution types.",
+          "description": "The alert state which can be either active or resolved with multiple resolution types.",
           "type": "string"
         },
         "shortName": {
@@ -3964,7 +4360,7 @@
             "Update",
             "Delete",
             "Obsolete",
-            "DeletAdd"
+            "DeleteAdd"
           ],
           "x-ms-enum": {
             "name": "DeltaOperationType",
@@ -3990,7 +4386,7 @@
           "type": "string"
         },
         "objectClasses": {
-          "description": "The olist of object classes.",
+          "description": "The list of object classes.",
           "type": "array",
           "items": {
             "type": "string"
@@ -4144,7 +4540,7 @@
           "type": "string"
         },
         "timeOccured": {
-          "description": "The time when the connection error occured.",
+          "description": "The time when the connection error occurred.",
           "type": "string",
           "format": "date-time"
         },
@@ -4164,6 +4560,40 @@
           "items": {
             "$ref": "#/definitions/ConnectorConnectionError"
           }
+        }
+      }
+    },
+    "ConnectorMetadata": {
+      "description": "Gets the list of connectors and run profile names.",
+      "type": "object",
+      "properties": {
+        "connectors": {
+          "description": "The list of connectors.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ConnectorMetadataDetails"
+          }
+        },
+        "runProfileNames": {
+          "description": "The list of run profile names.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "ConnectorMetadataDetails": {
+      "description": "Details of the connector.",
+      "type": "object",
+      "properties": {
+        "connectorId": {
+          "description": "The Connector Id.",
+          "type": "string"
+        },
+        "connectorDisplayName": {
+          "description": "The Connector Display Name",
+          "type": "string"
         }
       }
     },
@@ -4196,7 +4626,7 @@
           "type": "string"
         },
         "entryNumber": {
-          "description": "The entry number for object error occured.",
+          "description": "The entry number for object error occurred.",
           "type": "integer"
         },
         "lineNumber": {
@@ -4208,7 +4638,7 @@
           "type": "integer"
         },
         "dn": {
-          "description": "The distingished name of the object.",
+          "description": "The distinguished name of the object.",
           "type": "string"
         },
         "anchor": {
@@ -4482,7 +4912,7 @@
           "type": "string"
         },
         "timeFirstOccured": {
-          "description": "The date and time when the export error first occured.",
+          "description": "The date and time when the export error first occurred.",
           "type": "string",
           "format": "date-time"
         },
@@ -4563,7 +4993,7 @@
           "type": "string"
         },
         "timeOccured": {
-          "description": "The date and time of occurance.",
+          "description": "The date and time of occurrence.",
           "type": "string",
           "format": "date-time"
         },
@@ -4587,7 +5017,7 @@
           "description": "The AAD side user principal name.",
           "type": "string"
         },
-        "aadDistringuishedName": {
+        "aadDistinguishedName": {
           "description": "The AAD side distinguished name for the object.",
           "type": "string"
         },
@@ -4601,7 +5031,7 @@
           "format": "date-time"
         },
         "modifiedAttributeValue": {
-          "description": "The modified atttribute value.",
+          "description": "The modified attribute value.",
           "type": "string"
         }
       }
@@ -4628,7 +5058,7 @@
           "type": "string"
         },
         "ipAddress": {
-          "description": "The Ip address corresponding to the last error event.",
+          "description": "The IP address corresponding to the last error event.",
           "type": "string"
         },
         "lastUpdated": {
@@ -4956,7 +5386,7 @@
           "type": "string"
         },
         "consecutiveFailureCount": {
-          "description": "The number of consecutive faulire counts.",
+          "description": "The number of consecutive failure counts.",
           "type": "integer"
         },
         "namingContext": {
@@ -5017,6 +5447,135 @@
           "items": {
             "$ref": "#/definitions/InboundReplicationNeighbor"
           }
+        }
+      }
+    },
+    "IPAddressAggregate": {
+      "description": "The key value pair for properties.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "Unique ID for the entree",
+          "type": "string"
+        },
+        "tenantId": {
+          "description": "The tenant ID",
+          "type": "string"
+        },
+        "serviceId": {
+          "description": "The service ID",
+          "type": "string"
+        },
+        "ipAddress": {
+          "description": "The IP address from where the attempted login originated from.",
+          "type": "string"
+        },
+        "timestamp": {
+          "description": "When the event occurred",
+          "type": "string"
+        },
+        "firstAuditTimestamp": {
+          "description": "The first audit timestamp",
+          "type": "string"
+        },
+        "lastAuditTimestamp": {
+          "description": "The last audit timestamp",
+          "type": "string"
+        },
+        "extranetLockoutErrorCount": {
+          "description": "The extranet lockout error count",
+          "type": "integer"
+        },
+        "badPasswordErrorCount": {
+          "description": "The bad password error count",
+          "type": "integer"
+        },
+        "uniqueUsernamesAttemptedCount": {
+          "description": "The unique usernames attempted",
+          "type": "integer"
+        },
+        "attemptCountThresholdIsExceeded": {
+          "description": "A value indicating whether the attempt count threshold been exceeded",
+          "type": "boolean"
+        },
+        "timeSpan": {
+          "description": "The duration of the event",
+          "type": "string"
+        },
+        "isWhitelistedIpAddress": {
+          "description": "A value indicating whether the IP address has been whitelisted.",
+          "type": "boolean"
+        },
+        "networkLocation": {
+          "description": "The network location",
+          "type": "string"
+        },
+        "attemptCountThresholdOnTrigger": {
+          "description": "The attempted count threshold on trigger.",
+          "type": "integer"
+        },
+        "attemptThresholdTypeOnTrigger": {
+          "description": "The attempted threshold type on trigger.",
+          "type": "string"
+        },
+        "geographicLocation": {
+          "description": "The geographic location.",
+          "type": "string"
+        }
+      }
+    },
+    "IPAddressAggregates": {
+      "description": "IP address aggregates.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "The value returned by the operation.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/IPAddressAggregate"
+          }
+        },
+        "nextLink": {
+          "description": "URL to get the next set of IP Aggregate list results if there are any.",
+          "type": "string"
+        },
+        "totalCount": {
+          "description": "The number of results.",
+          "type": "integer"
+        },
+        "continuationToken": {
+          "description": "The continuation token for paginated calls.",
+          "type": "string"
+        }
+      }
+    },
+    "IPAddressAggregateSetting": {
+      "description": "The key value pair for IP aggregate thresholds.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "Unique ID for the entree",
+          "type": "string"
+        },
+        "badPasswordAndExtranetLockoutCombinedDailyThreshold": {
+          "description": "This threshold setting defines the per day trigger for a new event to be generated in the report.",
+          "type": "integer"
+        },
+        "badPasswordAndExtranetLockoutCombinedHourlyThreshold": {
+          "description": "This threshold setting defines the per hour trigger for a new event to be generated in the report.",
+          "type": "integer"
+        },
+        "extranetLockoutDailyThreshold": {
+          "description": "This threshold setting defines the per hour trigger for a new event to be generated in the report.",
+          "type": "integer"
+        },
+        "extranetLockoutHourlyThreshold": {
+          "description": "This threshold setting defines the per hour trigger for a new event to be generated in the report.",
+          "type": "integer"
+        },
+        "emailNotificationEnabled": {
+          "description": "A value indicating whether email notification has been enabled.",
+          "type": "boolean"
         }
       }
     },
@@ -5106,7 +5665,7 @@
           "$ref": "#/definitions/AssociatedObject"
         },
         "modifiedOrRemovedAttributeValue": {
-          "description": "The modified or removed attribute vlaue.",
+          "description": "The modified or removed attribute value.",
           "type": "string"
         },
         "runStepResultId": {
@@ -5232,7 +5791,7 @@
           "type": "string"
         },
         "minValue": {
-          "description": "The minimun value.",
+          "description": "The minimum value.",
           "type": "integer"
         },
         "maxValue": {
@@ -5355,7 +5914,7 @@
       }
     },
     "ObjectWithSyncError": {
-      "description": "The objects withg sync errors.",
+      "description": "The objects with sync errors.",
       "type": "object",
       "properties": {
         "sourceOfAuthority": {
@@ -5391,7 +5950,7 @@
           "type": "string"
         },
         "attributeMultiValues": {
-          "description": "Indicates if the atttibute is multi-valued or not.",
+          "description": "Indicates if the attribute is multi-valued or not.",
           "type": "boolean"
         },
         "minLimit": {
@@ -5411,7 +5970,7 @@
           "type": "string"
         },
         "timeOccured": {
-          "description": "The date and time of occurance.",
+          "description": "The date and time of occurrence.",
           "type": "string",
           "format": "date-time"
         },
@@ -5452,7 +6011,7 @@
           "readOnly": true
         },
         "value": {
-          "description": "List of operations supported by the Microsoft.ADHybridhHealthService resource provider.",
+          "description": "List of operations supported by the Microsoft.ADHybridHealthService resource provider.",
           "type": "array",
           "readOnly": true,
           "items": {
@@ -5460,14 +6019,13 @@
           }
         },
         "totalCount": {
-          "description": "The total count of opertaions.",
+          "description": "The total count of operations.",
           "type": "integer"
         },
         "continuationToken": {
           "description": "The continuation token to get next set of operations.",
           "type": "string"
         }
-
       }
     },
     "Partition": {
@@ -5513,7 +6071,6 @@
           "type": "string"
         }
       }
-
     },
     "PartitionScope": {
       "description": "The connector partition scope.",
@@ -5545,7 +6102,6 @@
           }
         }
       }
-
     },
     "PasswordManagementSettings": {
       "description": "The password management settings.",
@@ -5564,7 +6120,7 @@
           "type": "string"
         },
         "connectionTimeout": {
-          "description": "Connection timeoit for password extension.",
+          "description": "Connection timeout for password extension.",
           "type": "integer"
         },
         "user": {
@@ -5597,7 +6153,7 @@
           "type": "boolean"
         },
         "unlockAccount": {
-          "description": "Indicates if accounts should be unloacked when resetting password.",
+          "description": "Indicates if accounts should be unlocked when resetting password.",
           "type": "boolean"
         }
       }
@@ -5650,7 +6206,7 @@
           "type": "string"
         },
         "totalDcCount": {
-          "description": "The total numbe of domain controllers for a given forest.",
+          "description": "The total number of domain controllers for a given forest.",
           "type": "integer"
         },
         "errorDcCount": {
@@ -5721,6 +6277,51 @@
         }
       }
     },
+    "RiskyIPBlobUri": {
+      "description": "The blob uri pointing to Risky IP Report.",
+      "type": "object",
+      "properties": {
+        "tenantId": {
+          "description": "The tenant id for whom the report belongs to.",
+          "type": "string"
+        },
+        "serviceId": {
+          "description": "The service id for whom the report belongs to.",
+          "type": "string"
+        },
+        "resultSasUri": {
+          "description": "The blob uri for the report.",
+          "type": "string"
+        },
+        "blobCreateDateTime": {
+          "description": "Time at which the new Risky IP report was requested.",
+          "type": "string",
+          "format": "date-time"
+        },
+        "jobCompletionTime": {
+          "description": "Time at which the blob creation job for the new Risky IP report was completed.",
+          "type": "string",
+          "format": "date-time"
+        },
+        "status": {
+          "description": "Status of the Risky IP report generation.",
+          "type": "string"
+        }
+      }
+    },
+    "RiskyIPBlobUris": {
+      "description": "The list containing blob uris.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "The list of blob uris.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RiskyIPBlobUri"
+          }
+        }
+      }
+    },
     "RuleErrorInfo": {
       "description": "The error details in legacy rule processing.",
       "type": "object",
@@ -5756,7 +6357,7 @@
           "type": "integer"
         },
         "objectProcessLimit": {
-          "description": "The obect processing limit.",
+          "description": "The object processing limit.",
           "type": "integer"
         },
         "objectDeleteLimit": {
@@ -5768,7 +6369,7 @@
           "type": "integer"
         },
         "partitionId": {
-          "description": "The Id of the partition that a current run setp operation is executing.",
+          "description": "The Id of the partition that a current run step operation is executing.",
           "type": "string"
         },
         "operationType": {
@@ -5879,7 +6480,7 @@
           "format": "date-time"
         },
         "customNotificationEmails": {
-          "description": "The list of additional emails that are configured to recieve notifications about the service.",
+          "description": "The list of additional emails that are configured to receive notifications about the service.",
           "type": "array",
           "items": {
             "type": "string"
@@ -6027,7 +6628,7 @@
           "type": "string"
         },
         "createdDate": {
-          "description": "The date time , in UTC, when the server was onboaraded to Azure Active Directory Connect Health.",
+          "description": "The date time , in UTC, when the server was onboarded to Azure Active Directory Connect Health.",
           "type": "string",
           "format": "date-time"
         },
@@ -6069,7 +6670,7 @@
           "format": "date-time"
         },
         "lastUpdated": {
-          "description": "The date and time, in UTC, when the server proeprties were last updated.",
+          "description": "The date and time, in UTC, when the server properties were last updated.",
           "type": "string",
           "format": "date-time"
         },
@@ -6216,7 +6817,7 @@
         },
         "alertSuppressionTimeInMins": {
           "type": "integer",
-          "description": "The time in minutues after which an alert will be autosupressed."
+          "description": "The time in minutes after which an alert will be auto-suppressed."
         },
         "consentedToMicrosoftDevOps": {
           "type": "boolean",
@@ -6245,11 +6846,11 @@
           "description": "The reason due to which the tenant was disabled in Azure Active Directory Connect Health."
         },
         "globalAdminsEmail": {
-          "type": "object",
+          "type": "array",
           "items": {
             "type": "string"
           },
-          "description": "The list of golbal administrators for the tenant."
+          "description": "The list of global administrators for the tenant."
         },
         "initialDomain": {
           "type": "string",
@@ -6365,7 +6966,9 @@
   },
   "security": [
     {
-      "azure_auth": [ "user_impersonation" ]
+      "azure_auth": [
+        "user_impersonation"
+      ]
     }
   ]
 }

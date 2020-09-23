@@ -59,7 +59,7 @@
           "default": {
             "description": "The streaming error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ApiError"
+              "$ref": "./Encoding.json#/definitions/ApiError"
             }
           }
         },
@@ -111,7 +111,7 @@
           "default": {
             "description": "The streaming error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ApiError"
+              "$ref": "./Encoding.json#/definitions/ApiError"
             }
           }
         },
@@ -173,7 +173,7 @@
           "default": {
             "description": "The streaming error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ApiError"
+              "$ref": "./Encoding.json#/definitions/ApiError"
             }
           }
         },
@@ -232,7 +232,7 @@
           "default": {
             "description": "The streaming error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ApiError"
+              "$ref": "./Encoding.json#/definitions/ApiError"
             }
           }
         },
@@ -280,7 +280,7 @@
           "default": {
             "description": "The streaming error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ApiError"
+              "$ref": "./Encoding.json#/definitions/ApiError"
             }
           }
         },
@@ -327,7 +327,7 @@
           "default": {
             "description": "The streaming error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ApiError"
+              "$ref": "./Encoding.json#/definitions/ApiError"
             }
           }
         },
@@ -383,7 +383,7 @@
           "default": {
             "description": "The streaming error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ApiError"
+              "$ref": "./Encoding.json#/definitions/ApiError"
             }
           }
         },
@@ -430,7 +430,7 @@
           "default": {
             "description": "The streaming error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ApiError"
+              "$ref": "./Encoding.json#/definitions/ApiError"
             }
           }
         },
@@ -477,7 +477,7 @@
           "default": {
             "description": "The streaming error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ApiError"
+              "$ref": "./Encoding.json#/definitions/ApiError"
             }
           }
         },
@@ -532,7 +532,7 @@
           "default": {
             "description": "The streaming error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ApiError"
+              "$ref": "./Encoding.json#/definitions/ApiError"
             }
           }
         },
@@ -594,7 +594,7 @@
           "default": {
             "description": "The streaming error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ApiError"
+              "$ref": "./Encoding.json#/definitions/ApiError"
             }
           }
         },
@@ -645,7 +645,7 @@
           "default": {
             "description": "The streaming error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ApiError"
+              "$ref": "./Encoding.json#/definitions/ApiError"
             }
           }
         },
@@ -689,7 +689,7 @@
           "default": {
             "description": "The streaming error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ApiError"
+              "$ref": "./Encoding.json#/definitions/ApiError"
             }
           }
         },
@@ -700,7 +700,7 @@
           "List all StreamingEndpoints": {
             "$ref": "examples/streamingendpoint-list-all.json"
           }
-         }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Media/mediaservices/{accountName}/streamingEndpoints/{streamingEndpointName}": {
@@ -741,7 +741,7 @@
           "default": {
             "description": "The streaming error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ApiError"
+              "$ref": "./Encoding.json#/definitions/ApiError"
             }
           }
         },
@@ -803,7 +803,7 @@
           "default": {
             "description": "The streaming error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ApiError"
+              "$ref": "./Encoding.json#/definitions/ApiError"
             }
           }
         },
@@ -812,7 +812,7 @@
           "Create a StreamingEndpoint": {
             "$ref": "examples/streamingendpoint-create.json"
           }
-         }
+        }
       },
       "patch": {
         "tags": [
@@ -863,7 +863,7 @@
           "default": {
             "description": "The streaming error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ApiError"
+              "$ref": "./Encoding.json#/definitions/ApiError"
             }
           }
         },
@@ -911,7 +911,7 @@
           "default": {
             "description": "The streaming error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ApiError"
+              "$ref": "./Encoding.json#/definitions/ApiError"
             }
           }
         },
@@ -958,7 +958,7 @@
           "default": {
             "description": "The streaming error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ApiError"
+              "$ref": "./Encoding.json#/definitions/ApiError"
             }
           }
         },
@@ -1005,7 +1005,7 @@
           "default": {
             "description": "The streaming error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ApiError"
+              "$ref": "./Encoding.json#/definitions/ApiError"
             }
           }
         },
@@ -1046,7 +1046,7 @@
             "description": "StreamingEndpoint scale parameters",
             "in": "body",
             "required": true,
-            "schema": {             
+            "schema": {
               "$ref": "#/definitions/StreamingEntityScaleUnit"
             }
           }
@@ -1054,14 +1054,14 @@
         "responses": {
           "200": {
             "description": "OK. The request has succeeded."
-          },        
+          },
           "202": {
             "description": "Accepted. The request has been accepted for processing and the operation will complete asynchronously."
           },
           "default": {
             "description": "The streaming error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ApiError"
+              "$ref": "./Encoding.json#/definitions/ApiError"
             }
           }
         },
@@ -1086,7 +1086,10 @@
       "description": "The HLS configuration."
     },
     "LiveOutputProperties": {
-      "required": ["assetName","archiveWindowLength"],
+      "required": [
+        "assetName",
+        "archiveWindowLength"
+      ],
       "properties": {
         "description": {
           "type": "string",
@@ -1200,7 +1203,9 @@
       "description": "The Live Event endpoint."
     },
     "LiveEventInput": {
-      "required": ["streamingProtocol"],
+      "required": [
+        "streamingProtocol"
+      ],
       "properties": {
         "streamingProtocol": {
           "type": "string",
@@ -1341,7 +1346,9 @@
       "description": "The LiveEvent action input parameter definition."
     },
     "LiveEventProperties": {
-      "required": ["input"],
+      "required": [
+        "input"
+      ],
       "properties": {
         "description": {
           "type": "string",
@@ -1650,40 +1657,6 @@
       },
       "description": "The StreamingEndpoint list result.",
       "title": "StreamingEndpointListResult"
-    },
-    "ODataError": {
-      "properties": {
-        "code": {
-          "type": "string",
-          "description": "A language-independent error name."
-        },
-        "message": {
-          "type": "string",
-          "description": "The error message."
-        },
-        "target": {
-          "type": "string",
-          "description": "The target of the error (for example, the name of the property in error)."
-        },
-        "details": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ODataError"
-          },
-          "description": "The error details."
-        }
-      },
-      "description": "Information about an error."
-    },
-    "ApiError": {
-      "properties": {
-        "error": {
-          "$ref": "#/definitions/ODataError",
-          "description": "The error properties.",
-          "title": "ApiError"
-        }
-      },
-      "description": "The API error."
     }
   },
   "parameters": {

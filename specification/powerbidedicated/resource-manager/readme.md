@@ -1,5 +1,5 @@
 # PowerBIDedicated
-    
+
 > see https://aka.ms/autorest
 
 This is the AutoRest configuration file for PowerBIDedicated.
@@ -7,7 +7,7 @@ This is the AutoRest configuration file for PowerBIDedicated.
 
 
 ---
-## Getting Started 
+## Getting Started
 To build the SDK for PowerBIDedicated, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
 
 > `autorest`
@@ -21,7 +21,7 @@ To see additional help and options, run:
 
 
 
-### Basic Information 
+### Basic Information
 These are the global settings for the PowerBIDedicated API.
 
 ``` yaml
@@ -50,10 +50,17 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
+  - repo: azure-sdk-for-net
   - repo: azure-sdk-for-go
+  - repo: azure-sdk-for-js
+  - repo: azure-sdk-for-node
+  - repo: azure-sdk-for-python
+  - repo: azure-resource-manager-schemas
+    after_scripts:
+      - node sdkauto_afterscript.js powerbidedicated/resource-manager
 ```
 
-## C# 
+## C#
 
 These settings apply only when `--csharp` is specified on the command line.
 Please also specify `--csharp-sdks-folder=<path to "SDKs" directory of your azure-sdk-for-net clone>`.
@@ -63,37 +70,13 @@ csharp:
   azure-arm: true
   license-header: MICROSOFT_MIT_NO_VERSION
   namespace: Microsoft.Azure.Management.PowerBIDedicated
-  output-folder: $(csharp-sdks-folder)/PowerBIDedicated/Management.PowerBIDedicated/Generated
+  output-folder: $(csharp-sdks-folder)/powerbidedicated/Microsoft.Azure.Management.PowerBIDedicated/src/Generated
   clear-output-folder: true
 ```
 
 ## Go
 
-These settings apply only when `--go` is specified on the command line.
-
-``` yaml $(go)
-go:
-  license-header: MICROSOFT_APACHE_NO_VERSION
-  clear-output-folder: true
-  namespace: powerbidedicated
-```
-
-### Go multi-api
-
-``` yaml $(go) && $(multiapi)
-batch:
-  - tag: package-2017-10-01
-```
-
-### Tag: package-2017-10-01 and go
-
-These settings apply only when `--tag=package-2017-10-01 --go` is specified on the command line.
-Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
-
-``` yaml $(tag)=='package-2017-10-01' && $(go)
-output-folder: $(go-sdk-folder)/services/powerbidedicated/mgmt/2017-10-01/powerbidedicated
-```
-
+See configuration in [readme.go.md](./readme.go.md)
 
 ## Java
 
@@ -101,11 +84,41 @@ These settings apply only when `--java` is specified on the command line.
 Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-libraries-for-java clone>`.
 
 ``` yaml $(java)
-java:
-  azure-arm: true
-  fluent: true
-  namespace: com.microsoft.azure.management.powerbidedicated
-  license-header: MICROSOFT_MIT_NO_CODEGEN
-  payload-flattening-threshold: 1
-  output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-powerbidedicated
+azure-arm: true
+fluent: true
+namespace: com.microsoft.azure.management.powerbidedicated
+license-header: MICROSOFT_MIT_NO_CODEGEN
+payload-flattening-threshold: 1
+output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-powerbidedicated
 ```
+
+### Java multi-api
+
+``` yaml $(java) && $(multiapi)
+batch:
+  - tag: package-2017-10-01
+```
+
+### Tag: package-2017-10-01 and java
+
+These settings apply only when `--tag=package-2017-10-01 --java` is specified on the command line.
+Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-2017-10-01' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.powerbidedicated.v2017_10_01
+  output-folder: $(azure-libraries-for-java-folder)/sdk/powerbidedicated/mgmt-v2017_10_01
+regenerate-manager: true
+generate-interface: true
+```
+
+## Python
+
+See configuration in [readme.python.md](./readme.python.md)
+
+
+
+## AzureResourceSchema
+
+See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
+

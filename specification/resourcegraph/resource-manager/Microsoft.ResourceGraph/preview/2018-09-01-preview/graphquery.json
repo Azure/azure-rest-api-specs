@@ -1,0 +1,465 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Azure Resource Graph Query",
+    "description": "Azure Resource Graph Query API Reference",
+    "version": "2018-09-01-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ResourceGraph/queries": {
+      "get": {
+        "tags": [
+          "GraphQuery"
+        ],
+        "description": "Get all graph queries defined within a specified subscription and resource group.",
+        "operationId": "GraphQuery_List",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A list containing 0 or more graph queries.",
+            "schema": {
+              "$ref": "#/definitions/GraphQueryListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/GraphQueryError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Get a list of Graph Queries": {
+            "$ref": "./examples/GraphQueryList.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ResourceGraph/queries/{resourceName}": {
+      "get": {
+        "tags": [
+          "GraphQuery"
+        ],
+        "description": "Get a single graph query by its resourceName.",
+        "operationId": "GraphQuery_Get",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/GraphQueryResourceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A graph query definition.",
+            "schema": {
+              "$ref": "#/definitions/GraphQueryResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/GraphQueryError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Graph Query": {
+            "$ref": "./examples/GraphQueryGet.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "GraphQuery"
+        ],
+        "description": "Delete a graph query.",
+        "operationId": "GraphQuery_Delete",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/GraphQueryResourceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The graph query has been successfully deleted."
+          },
+          "204": {
+            "description": "The resource doesn't exist."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/GraphQueryError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete Graph Query": {
+            "$ref": "./examples/GraphQueryDelete.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "GraphQuery"
+        ],
+        "description": "Create a new graph query.",
+        "operationId": "GraphQuery_CreateOrUpdate",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/GraphQueryResourceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "properties",
+            "description": "Properties that need to be specified to create a new graph query.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/GraphQueryResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The newly created graph query.",
+            "schema": {
+              "$ref": "#/definitions/GraphQueryResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/GraphQueryError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create Graph Query": {
+            "$ref": "./examples/GraphQueryAdd.json"
+          }
+        }
+      },
+      "patch": {
+        "description": "Updates a graph query that has already been added.",
+        "operationId": "GraphQuery_Update",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/GraphQueryResourceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "body",
+            "description": "Properties that need to be specified to create a new graph query.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/GraphQueryUpdateParameters"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The graph query definition updated.",
+            "schema": {
+              "$ref": "#/definitions/GraphQueryResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/GraphQueryError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update Graph Query": {
+            "$ref": "./examples/GraphQueryUpdate.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Resource": {
+      "properties": {
+        "id": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Azure resource Id"
+        },
+        "name": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Azure resource name. This is GUID value. The display name should be assigned within properties field."
+        },
+        "location": {
+          "type": "string",
+          "readOnly": false,
+          "description": "The location of the resource"
+        },
+        "type": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Azure resource type"
+        },
+        "eTag": {
+          "type": "string",
+          "description": "This will be used to handle Optimistic Concurrency. If not present, it will always overwrite the existing resource without checking conflict."
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags"
+        }
+      },
+      "x-ms-azure-resource": true,
+      "description": "An azure resource object"
+    },
+    "GraphQueryListResult": {
+      "properties": {
+        "nextLink": {
+          "description": "URL to fetch the next set of queries.",
+          "type": "string"
+        },
+        "value": {
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/GraphQueryResource"
+          },
+          "description": "An array of graph queries."
+        }
+      },
+      "description": "Graph query list result."
+    },
+    "GraphQueryResource": {
+      "description": "Graph Query entity definition.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "Metadata describing a graph query for an Azure resource.",
+          "$ref": "#/definitions/GraphQueryProperties"
+        }
+      }
+    },
+    "GraphQueryProperties": {
+      "description": "Properties that contain a graph query.",
+      "required": [
+        "query"
+      ],
+      "properties": {
+        "timeModified": {
+          "type": "string",
+          "description": "Date and time in UTC of the last modification that was made to this graph query definition.",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "description": {
+          "type": "string",
+          "description": "The description of a graph query."
+        },
+        "query": {
+          "type": "string",
+          "description": "KQL query that will be graph."
+        },
+        "resultKind": {
+          "description": "Enum indicating a type of graph query.",
+          "readOnly": true,
+          "type": "string",
+          "enum": [
+            "basic"
+          ],
+          "x-ms-enum": {
+            "name": "ResultKind",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "GraphQueryUpdateParameters": {
+      "properties": {
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags"
+        },
+        "eTag": {
+          "type": "string",
+          "description": "This will be used to handle Optimistic Concurrency. If not present, it will always overwrite the existing resource without checking conflict."
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "Metadata describing a graph query for an Azure resource.",
+          "$ref": "#/definitions/GraphQueryPropertiesUpdateParameters"
+        }
+      },
+      "description": "The parameters that can be provided when updating workbook properties properties."
+    },
+    "GraphQueryPropertiesUpdateParameters": {
+      "description": "Properties that contain a workbook for PATCH operation.",
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "The description of a graph query."
+        },
+        "query": {
+          "type": "string",
+          "description": "KQL query that will be graph."
+        }
+      }
+    },
+    "ErrorFieldContract": {
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "Property level error code."
+        },
+        "message": {
+          "type": "string",
+          "description": "Human-readable representation of property-level error."
+        },
+        "target": {
+          "type": "string",
+          "description": "Property name."
+        }
+      },
+      "description": "Error Field contract."
+    },
+    "GraphQueryError": {
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "Service-defined error code. This code serves as a sub-status for the HTTP error code specified in the response."
+        },
+        "message": {
+          "type": "string",
+          "description": "Human-readable representation of the error."
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ErrorFieldContract"
+          },
+          "description": "The list of invalid fields send in request, in case of validation error."
+        }
+      },
+      "description": "Error message body that will indicate why the operation failed."
+    }
+  },
+  "parameters": {
+    "SubscriptionIdParameter": {
+      "name": "subscriptionId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The Azure subscription Id."
+    },
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "Client Api Version."
+    },
+    "ResourceGroupNameParameter": {
+      "name": "resourceGroupName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the resource group.",
+      "x-ms-parameter-location": "method"
+    },
+    "GraphQueryResourceNameParameter": {
+      "name": "resourceName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the Graph Query resource.",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}

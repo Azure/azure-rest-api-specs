@@ -215,7 +215,7 @@
           {
             "name": "deleteEmptyServerFarm",
             "in": "query",
-            "description": "Specify true if the App Service plan will be empty after app deletion and you want to delete the empty App Service plan. By default, the empty App Service plan is not deleted.",
+            "description": "Specify false if you want to keep empty App Service plan. By default, empty App Service plan is deleted.",
             "type": "boolean"
           },
           {
@@ -479,57 +479,6 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/backups/discover": {
-      "put": {
-        "tags": [
-          "WebApps"
-        ],
-        "summary": "Discovers an existing app backup that can be restored from a blob in Azure storage.",
-        "description": "Discovers an existing app backup that can be restored from a blob in Azure storage.",
-        "operationId": "WebApps_DiscoverRestore",
-        "parameters": [
-          {
-            "$ref": "#/parameters/resourceGroupNameParameter"
-          },
-          {
-            "name": "name",
-            "in": "path",
-            "description": "Name of the app.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "request",
-            "in": "body",
-            "description": "A RestoreRequest object that includes Azure storage URL and blog name for discovery of backup.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/RestoreRequest"
-            }
-          },
-          {
-            "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/RestoreRequest"
-            }
-          },
-          "default": {
-            "description": "App Service error response.",
-            "schema": {
-              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
-            }
-          }
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/backups/{backupId}": {
       "get": {
         "tags": [
@@ -612,7 +561,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Succesfully deleted web app backup item."
+            "description": "Successfully deleted web app backup item."
           },
           "404": {
             "description": "Web app backup item does not exist."
@@ -962,6 +911,99 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/config/azurestorageaccounts": {
+      "put": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Updates the Azure storage account configurations of an app.",
+        "description": "Updates the Azure storage account configurations of an app.",
+        "operationId": "WebApps_UpdateAzureStorageAccounts",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the app.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "azureStorageAccounts",
+            "in": "body",
+            "description": "Azure storage accounts of the app.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AzureStoragePropertyDictionaryResource"
+            }
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/AzureStoragePropertyDictionaryResource"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/config/azurestorageaccounts/list": {
+      "post": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Gets the Azure storage account configurations of an app.",
+        "description": "Gets the Azure storage account configurations of an app.",
+        "operationId": "WebApps_ListAzureStorageAccounts",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the app.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/AzureStoragePropertyDictionaryResource"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/config/backup": {
       "put": {
         "tags": [
@@ -1039,7 +1081,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Succesfully deleted backup configuration."
+            "description": "Successfully deleted backup configuration."
           }
         }
       }
@@ -2072,7 +2114,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Succesfully deleted continuous web job."
+            "description": "Successfully deleted continuous web job."
           },
           "204": {
             "description": "Continuous web job does not exist."
@@ -2349,7 +2391,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Succesfully deleted deployment."
+            "description": "Successfully deleted deployment."
           },
           "204": {
             "description": "Deployment does not exist."
@@ -2395,6 +2437,57 @@
             "description": "OK",
             "schema": {
               "$ref": "#/definitions/Deployment"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/discoverbackup": {
+      "post": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Discovers an existing app backup that can be restored from a blob in Azure storage. Use this to get information about the databases stored in a backup.",
+        "description": "Discovers an existing app backup that can be restored from a blob in Azure storage. Use this to get information about the databases stored in a backup.",
+        "operationId": "WebApps_DiscoverBackup",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the app.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "request",
+            "in": "body",
+            "description": "A RestoreRequest object that includes Azure storage URL and blog name for discovery of backup.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RestoreRequest"
+            }
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/RestoreRequest"
             }
           },
           "default": {
@@ -2589,10 +2682,10 @@
         ],
         "responses": {
           "200": {
-            "description": "Succesfully deleted domain ownership identifier."
+            "description": "Successfully deleted domain ownership identifier."
           },
           "204": {
-            "description": "Domain ownership identifider does not exist."
+            "description": "Domain ownership identifier does not exist."
           }
         }
       },
@@ -2906,7 +2999,7 @@
             }
           },
           "404": {
-            "description": "Function with an name of {functionName} is not running."
+            "description": "Function with a name of {functionName} does not exist."
           }
         }
       },
@@ -3009,6 +3102,174 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/functions/{functionName}/keys/{keyName}": {
+      "put": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Add or update a function secret.",
+        "description": "Add or update a function secret.",
+        "operationId": "WebApps_CreateOrUpdateFunctionSecret",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Site name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "functionName",
+            "in": "path",
+            "description": "The name of the function.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "keyName",
+            "in": "path",
+            "description": "The name of the key.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "key",
+            "in": "body",
+            "description": "The key to create or update",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/KeyInfo"
+            }
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Key was created.",
+            "schema": {
+              "$ref": "#/definitions/KeyInfo"
+            }
+          },
+          "200": {
+            "description": "Key was updated.",
+            "schema": {
+              "$ref": "#/definitions/KeyInfo"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Delete a function secret.",
+        "description": "Delete a function secret.",
+        "operationId": "WebApps_DeleteFunctionSecret",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Site name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "functionName",
+            "in": "path",
+            "description": "The name of the function.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "keyName",
+            "in": "path",
+            "description": "The name of the key.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "404": {
+            "description": "Key was not found."
+          },
+          "204": {
+            "description": "Key was deleted."
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/functions/{functionName}/listkeys": {
+      "post": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Get function keys for a function in a web site, or a deployment slot.",
+        "description": "Get function keys for a function in a web site, or a deployment slot.",
+        "operationId": "WebApps_ListFunctionKeys",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Site name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "functionName",
+            "in": "path",
+            "description": "Function name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Function keys returned.",
+            "schema": {
+              "$ref": "#/definitions/StringDictionary"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/functions/{functionName}/listsecrets": {
       "post": {
         "tags": [
@@ -3048,6 +3309,245 @@
             "schema": {
               "$ref": "#/definitions/FunctionSecrets"
             }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/host/default/listkeys": {
+      "post": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Get host secrets for a function app.",
+        "description": "Get host secrets for a function app.",
+        "operationId": "WebApps_ListHostKeys",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Site name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Host secrets returned.",
+            "schema": {
+              "$ref": "#/definitions/HostKeys"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/host/default/listsyncstatus": {
+      "post": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "This is to allow calling via powershell and ARM template.",
+        "description": "This is to allow calling via powershell and ARM template.",
+        "operationId": "WebApps_ListSyncStatus",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the app.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/host/default/sync": {
+      "post": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Syncs function trigger metadata to the management database",
+        "description": "Syncs function trigger metadata to the management database",
+        "operationId": "WebApps_SyncFunctions",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the app.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/host/default/{keyType}/{keyName}": {
+      "put": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Add or update a host level secret.",
+        "description": "Add or update a host level secret.",
+        "operationId": "WebApps_CreateOrUpdateHostSecret",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Site name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "keyType",
+            "in": "path",
+            "description": "The type of host key.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "keyName",
+            "in": "path",
+            "description": "The name of the key.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "key",
+            "in": "body",
+            "description": "The key to create or update",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/KeyInfo"
+            }
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Key was created.",
+            "schema": {
+              "$ref": "#/definitions/KeyInfo"
+            }
+          },
+          "200": {
+            "description": "Key was updated.",
+            "schema": {
+              "$ref": "#/definitions/KeyInfo"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Delete a host level secret.",
+        "description": "Delete a host level secret.",
+        "operationId": "WebApps_DeleteHostSecret",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Site name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "keyType",
+            "in": "path",
+            "description": "The type of host key.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "keyName",
+            "in": "path",
+            "description": "The name of the key.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "404": {
+            "description": "Key was not found."
+          },
+          "204": {
+            "description": "Key was deleted."
           },
           "default": {
             "description": "App Service error response.",
@@ -3241,7 +3741,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Succesfully deleted hostname binding."
+            "description": "Successfully deleted hostname binding."
           },
           "204": {
             "description": "Hostname binding does not exist."
@@ -3408,7 +3908,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Succesfully deleted hybrid connection."
+            "description": "Successfully deleted hybrid connection."
           },
           "404": {
             "description": "Hybrid connection does not exist."
@@ -3757,7 +4257,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Succesfully deleted relay service connection."
+            "description": "Successfully deleted relay service connection."
           },
           "404": {
             "description": "Relay service connection does not exist."
@@ -4607,7 +5107,7 @@
           {
             "name": "$filter",
             "in": "query",
-            "description": "Return only metrics specified in the filter (using OData syntax). For example: $filter=(name.value eq 'Metric1' or name.value eq 'Metric2') and startTime eq '2014-01-01T00:00:00Z' and endTime eq '2014-12-31T23:59:59Z' and timeGrain eq duration'[Hour|Minute|Day]'.",
+            "description": "Return only metrics specified in the filter (using OData syntax). For example: $filter=(name.value eq 'Metric1' or name.value eq 'Metric2') and startTime eq 2014-01-01T00:00:00Z and endTime eq 2014-12-31T23:59:59Z and timeGrain eq duration'[Hour|Minute|Day]'.",
             "type": "string",
             "x-ms-skip-url-encoding": true
           },
@@ -4790,6 +5290,180 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/networkConfig/virtualNetwork": {
+      "get": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Gets a Swift Virtual Network connection.",
+        "description": "Gets a Swift Virtual Network connection.",
+        "operationId": "WebApps_GetSwiftVirtualNetworkConnection",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the app.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/SwiftVirtualNetwork"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Integrates this Web App with a Virtual Network. This requires that 1) \"swiftSupported\" is true when doing a GET against this resource, and 2) that the target Subnet has already been delegated, and is not\r\nin use by another App Service Plan other than the one this App is in.",
+        "description": "Integrates this Web App with a Virtual Network. This requires that 1) \"swiftSupported\" is true when doing a GET against this resource, and 2) that the target Subnet has already been delegated, and is not\nin use by another App Service Plan other than the one this App is in.",
+        "operationId": "WebApps_CreateOrUpdateSwiftVirtualNetworkConnection",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the app.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "connectionEnvelope",
+            "in": "body",
+            "description": "Properties of the Virtual Network connection. See example.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SwiftVirtualNetwork"
+            }
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SwiftVirtualNetwork"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Deletes a Swift Virtual Network connection from an app (or deployment slot).",
+        "description": "Deletes a Swift Virtual Network connection from an app (or deployment slot).",
+        "operationId": "WebApps_DeleteSwiftVirtualNetwork",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the app.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully deleted virtual network."
+          },
+          "404": {
+            "description": "Virtual network does not exist."
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Integrates this Web App with a Virtual Network. This requires that 1) \"swiftSupported\" is true when doing a GET against this resource, and 2) that the target Subnet has already been delegated, and is not\r\nin use by another App Service Plan other than the one this App is in.",
+        "description": "Integrates this Web App with a Virtual Network. This requires that 1) \"swiftSupported\" is true when doing a GET against this resource, and 2) that the target Subnet has already been delegated, and is not\nin use by another App Service Plan other than the one this App is in.",
+        "operationId": "WebApps_UpdateSwiftVirtualNetworkConnection",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the app.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "connectionEnvelope",
+            "in": "body",
+            "description": "Properties of the Virtual Network connection. See example.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SwiftVirtualNetwork"
+            }
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SwiftVirtualNetwork"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/networkFeatures/{view}": {
       "get": {
         "tags": [
@@ -4836,13 +5510,79 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/networkTrace/operationresults/{operationId}": {
+      "get": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Gets a named operation for a network trace capturing (or deployment slot, if specified).",
+        "description": "Gets a named operation for a network trace capturing (or deployment slot, if specified).",
+        "operationId": "WebApps_GetNetworkTraceOperation",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the app.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "operationId",
+            "in": "path",
+            "description": "GUID of the operation.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/NetworkTrace"
+              }
+            }
+          },
+          "202": {
+            "description": "Operation is in progress.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/NetworkTrace"
+              }
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get the current status of a network trace operation for a site": {
+            "$ref": "./examples/GetWebSiteNetworkTraceOperation.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/networkTrace/start": {
       "post": {
         "tags": [
           "WebApps"
         ],
-        "summary": "Start capturing network packets for the site.",
-        "description": "Start capturing network packets for the site.",
+        "summary": "Start capturing network packets for the site (To be deprecated).",
+        "description": "Start capturing network packets for the site (To be deprecated).",
         "operationId": "WebApps_StartWebSiteNetworkTrace",
         "parameters": [
           {
@@ -4884,7 +5624,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK.",
+            "description": "OK",
             "schema": {
               "type": "string"
             }
@@ -4896,6 +5636,86 @@
             }
           }
         }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/networkTrace/startOperation": {
+      "post": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Start capturing network packets for the site.",
+        "description": "Start capturing network packets for the site.",
+        "operationId": "WebApps_StartWebSiteNetworkTraceOperation",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "The name of the web app.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "durationInSeconds",
+            "in": "query",
+            "description": "The duration to keep capturing in seconds.",
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "maxFrameLength",
+            "in": "query",
+            "description": "The maximum frame length in bytes (Optional).",
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "sasUrl",
+            "in": "query",
+            "description": "The Blob URL to store capture file.",
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/NetworkTrace"
+              }
+            }
+          },
+          "202": {
+            "description": "Operation is in progress.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/NetworkTrace"
+              }
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Start a new network trace operation for a site": {
+            "$ref": "./examples/StartWebSiteNetworkTraceOperation.json"
+          }
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/networkTrace/stop": {
@@ -4926,9 +5746,60 @@
         ],
         "responses": {
           "200": {
-            "description": "OK.",
+            "description": "Stopped."
+          },
+          "204": {
+            "description": "Stopped."
+          }
+        },
+        "x-ms-examples": {
+          "Stop a currently running network trace operation for a site": {
+            "$ref": "./examples/StopWebSiteNetworkTrace.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/networkTrace/{operationId}": {
+      "get": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Gets a named operation for a network trace capturing (or deployment slot, if specified).",
+        "description": "Gets a named operation for a network trace capturing (or deployment slot, if specified).",
+        "operationId": "WebApps_GetNetworkTraces",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the app.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "operationId",
+            "in": "path",
+            "description": "GUID of the operation.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
             "schema": {
-              "type": "string"
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/NetworkTrace"
+              }
             }
           },
           "default": {
@@ -4936,6 +5807,134 @@
             "schema": {
               "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Get NetworkTraces for a site": {
+            "$ref": "./examples/GetWebSiteNetworkTraces.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/networkTraces/current/operationresults/{operationId}": {
+      "get": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Gets a named operation for a network trace capturing (or deployment slot, if specified).",
+        "description": "Gets a named operation for a network trace capturing (or deployment slot, if specified).",
+        "operationId": "WebApps_GetNetworkTraceOperationV2",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the app.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "operationId",
+            "in": "path",
+            "description": "GUID of the operation.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/NetworkTrace"
+              }
+            }
+          },
+          "202": {
+            "description": "Operation is in progress.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/NetworkTrace"
+              }
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get the current status of a network trace operation for a site": {
+            "$ref": "./examples/GetWebSiteNetworkTraceOperation.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/networkTraces/{operationId}": {
+      "get": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Gets a named operation for a network trace capturing (or deployment slot, if specified).",
+        "description": "Gets a named operation for a network trace capturing (or deployment slot, if specified).",
+        "operationId": "WebApps_GetNetworkTracesV2",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the app.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "operationId",
+            "in": "path",
+            "description": "GUID of the operation.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/NetworkTrace"
+              }
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get NetworkTraces for a site": {
+            "$ref": "./examples/GetWebSiteNetworkTraces.json"
           }
         }
       }
@@ -4998,7 +5997,7 @@
           {
             "name": "$filter",
             "in": "query",
-            "description": "Return only usages/metrics specified in the filter. Filter conforms to odata syntax. Example: $filter=(startTime eq '2014-01-01T00:00:00Z' and endTime eq '2014-12-31T23:59:59Z' and timeGrain eq duration'[Hour|Minute|Day]'.",
+            "description": "Return only usages/metrics specified in the filter. Filter conforms to odata syntax. Example: $filter=(startTime eq 2014-01-01T00:00:00Z and endTime eq 2014-12-31T23:59:59Z and timeGrain eq duration'[Hour|Minute|Day]'.",
             "type": "string",
             "x-ms-skip-url-encoding": true
           },
@@ -5250,7 +6249,63 @@
         ],
         "responses": {
           "200": {
-            "description": "Succesfully deleted premier add-on."
+            "description": "Successfully deleted premier add-on."
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Updates a named add-on of an app.",
+        "description": "Updates a named add-on of an app.",
+        "operationId": "WebApps_UpdatePremierAddOn",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the app.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "premierAddOnName",
+            "in": "path",
+            "description": "Add-on name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "premierAddOn",
+            "in": "body",
+            "description": "A JSON representation of the edited premier add-on.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PremierAddOnPatchResource"
+            }
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/PremierAddOn"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
           }
         }
       }
@@ -5908,7 +6963,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Succesfully deleted hostname binding."
+            "description": "Successfully deleted hostname binding."
           },
           "204": {
             "description": "Hostname binding does not exist."
@@ -6852,64 +7907,6 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/backups/discover": {
-      "put": {
-        "tags": [
-          "WebApps"
-        ],
-        "summary": "Discovers an existing app backup that can be restored from a blob in Azure storage.",
-        "description": "Discovers an existing app backup that can be restored from a blob in Azure storage.",
-        "operationId": "WebApps_DiscoverRestoreSlot",
-        "parameters": [
-          {
-            "$ref": "#/parameters/resourceGroupNameParameter"
-          },
-          {
-            "name": "name",
-            "in": "path",
-            "description": "Name of the app.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "request",
-            "in": "body",
-            "description": "A RestoreRequest object that includes Azure storage URL and blog name for discovery of backup.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/RestoreRequest"
-            }
-          },
-          {
-            "name": "slot",
-            "in": "path",
-            "description": "Name of the deployment slot. If a slot is not specified, the API will perform discovery for the production slot.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/RestoreRequest"
-            }
-          },
-          "default": {
-            "description": "App Service error response.",
-            "schema": {
-              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
-            }
-          }
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/backups/{backupId}": {
       "get": {
         "tags": [
@@ -7006,7 +8003,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Succesfully deleted web app backup item."
+            "description": "Successfully deleted web app backup item."
           },
           "404": {
             "description": "Web app backup item does not exist."
@@ -7405,6 +8402,113 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/config/azurestorageaccounts": {
+      "put": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Updates the Azure storage account configurations of an app.",
+        "description": "Updates the Azure storage account configurations of an app.",
+        "operationId": "WebApps_UpdateAzureStorageAccountsSlot",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the app.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "azureStorageAccounts",
+            "in": "body",
+            "description": "Azure storage accounts of the app.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AzureStoragePropertyDictionaryResource"
+            }
+          },
+          {
+            "name": "slot",
+            "in": "path",
+            "description": "Name of the deployment slot. If a slot is not specified, the API will update the Azure storage account configurations for the production slot.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/AzureStoragePropertyDictionaryResource"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/config/azurestorageaccounts/list": {
+      "post": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Gets the Azure storage account configurations of an app.",
+        "description": "Gets the Azure storage account configurations of an app.",
+        "operationId": "WebApps_ListAzureStorageAccountsSlot",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the app.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "slot",
+            "in": "path",
+            "description": "Name of the deployment slot. If a slot is not specified, the API will update the Azure storage account configurations for the production slot.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/AzureStoragePropertyDictionaryResource"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/config/backup": {
       "put": {
         "tags": [
@@ -7496,7 +8600,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Succesfully deleted backup configuration."
+            "description": "Successfully deleted backup configuration."
           }
         }
       }
@@ -8585,7 +9689,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Succesfully deleted continuous web job."
+            "description": "Successfully deleted continuous web job."
           },
           "204": {
             "description": "Continuous web job does not exist."
@@ -8904,7 +10008,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Succesfully deleted deployment."
+            "description": "Successfully deleted deployment."
           },
           "204": {
             "description": "Deployment does not exist."
@@ -8957,6 +10061,64 @@
             "description": "OK",
             "schema": {
               "$ref": "#/definitions/Deployment"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/discoverbackup": {
+      "post": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Discovers an existing app backup that can be restored from a blob in Azure storage. Use this to get information about the databases stored in a backup.",
+        "description": "Discovers an existing app backup that can be restored from a blob in Azure storage. Use this to get information about the databases stored in a backup.",
+        "operationId": "WebApps_DiscoverBackupSlot",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the app.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "request",
+            "in": "body",
+            "description": "A RestoreRequest object that includes Azure storage URL and blog name for discovery of backup.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RestoreRequest"
+            }
+          },
+          {
+            "name": "slot",
+            "in": "path",
+            "description": "Name of the deployment slot. If a slot is not specified, the API will perform discovery for the production slot.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/RestoreRequest"
             }
           },
           "default": {
@@ -9179,10 +10341,10 @@
         ],
         "responses": {
           "200": {
-            "description": "Succesfully deleted domain ownership identifier."
+            "description": "Successfully deleted domain ownership identifier."
           },
           "204": {
-            "description": "Domain ownership identifider does not exist."
+            "description": "Domain ownership identifier does not exist."
           }
         }
       },
@@ -9421,7 +10583,7 @@
           {
             "name": "slot",
             "in": "path",
-            "description": "Name of the deployment slot. If a slot is not specified, the API deletes a deployment for the production slot.",
+            "description": "Name of the deployment slot.",
             "required": true,
             "type": "string"
           },
@@ -9526,7 +10688,7 @@
           {
             "name": "slot",
             "in": "path",
-            "description": "Name of the deployment slot. If a slot is not specified, the API deletes a deployment for the production slot.",
+            "description": "Name of the deployment slot.",
             "required": true,
             "type": "string"
           },
@@ -9545,7 +10707,7 @@
             }
           },
           "404": {
-            "description": "Function with an name of {functionName} is not running."
+            "description": "Function with a name of {functionName} does not exist."
           }
         }
       },
@@ -9577,7 +10739,7 @@
           {
             "name": "slot",
             "in": "path",
-            "description": "Name of the deployment slot. If a slot is not specified, the API deletes a deployment for the production slot.",
+            "description": "Name of the deployment slot.",
             "required": true,
             "type": "string"
           },
@@ -9641,7 +10803,7 @@
           {
             "name": "slot",
             "in": "path",
-            "description": "Name of the deployment slot. If a slot is not specified, the API deletes a deployment for the production slot.",
+            "description": "Name of the deployment slot.",
             "required": true,
             "type": "string"
           },
@@ -9658,6 +10820,195 @@
           },
           "404": {
             "description": "Function does not exist."
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/functions/{functionName}/keys/{keyName}": {
+      "put": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Add or update a function secret.",
+        "description": "Add or update a function secret.",
+        "operationId": "WebApps_CreateOrUpdateFunctionSecretSlot",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Site name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "functionName",
+            "in": "path",
+            "description": "The name of the function.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "keyName",
+            "in": "path",
+            "description": "The name of the key.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "slot",
+            "in": "path",
+            "description": "Name of the deployment slot.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "key",
+            "in": "body",
+            "description": "The key to create or update",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/KeyInfo"
+            }
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Key was created.",
+            "schema": {
+              "$ref": "#/definitions/KeyInfo"
+            }
+          },
+          "200": {
+            "description": "Key was updated.",
+            "schema": {
+              "$ref": "#/definitions/KeyInfo"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Delete a function secret.",
+        "description": "Delete a function secret.",
+        "operationId": "WebApps_DeleteFunctionSecretSlot",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Site name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "functionName",
+            "in": "path",
+            "description": "The name of the function.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "keyName",
+            "in": "path",
+            "description": "The name of the key.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "slot",
+            "in": "path",
+            "description": "Name of the deployment slot.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "404": {
+            "description": "Key was not found."
+          },
+          "204": {
+            "description": "Key was deleted."
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/functions/{functionName}/listkeys": {
+      "post": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Get function keys for a function in a web site, or a deployment slot.",
+        "description": "Get function keys for a function in a web site, or a deployment slot.",
+        "operationId": "WebApps_ListFunctionKeysSlot",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Site name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "functionName",
+            "in": "path",
+            "description": "Function name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "slot",
+            "in": "path",
+            "description": "Name of the deployment slot.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Function keys returned.",
+            "schema": {
+              "$ref": "#/definitions/StringDictionary"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
           }
         }
       }
@@ -9691,7 +11042,7 @@
           {
             "name": "slot",
             "in": "path",
-            "description": "Name of the deployment slot. If a slot is not specified, the API deletes a deployment for the production slot.",
+            "description": "Name of the deployment slot.",
             "required": true,
             "type": "string"
           },
@@ -9708,6 +11059,286 @@
             "schema": {
               "$ref": "#/definitions/FunctionSecrets"
             }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/host/default/listkeys": {
+      "post": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Get host secrets for a function app.",
+        "description": "Get host secrets for a function app.",
+        "operationId": "WebApps_ListHostKeysSlot",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Site name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "slot",
+            "in": "path",
+            "description": "Name of the deployment slot.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Host secrets returned.",
+            "schema": {
+              "$ref": "#/definitions/HostKeys"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/host/default/listsyncstatus": {
+      "post": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "This is to allow calling via powershell and ARM template.",
+        "description": "This is to allow calling via powershell and ARM template.",
+        "operationId": "WebApps_ListSyncStatusSlot",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the app.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "slot",
+            "in": "path",
+            "description": "Name of the deployment slot.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/host/default/sync": {
+      "post": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Syncs function trigger metadata to the management database",
+        "description": "Syncs function trigger metadata to the management database",
+        "operationId": "WebApps_SyncFunctionsSlot",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the app.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "slot",
+            "in": "path",
+            "description": "Name of the deployment slot.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/host/default/{keyType}/{keyName}": {
+      "put": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Add or update a host level secret.",
+        "description": "Add or update a host level secret.",
+        "operationId": "WebApps_CreateOrUpdateHostSecretSlot",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Site name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "keyType",
+            "in": "path",
+            "description": "The type of host key.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "keyName",
+            "in": "path",
+            "description": "The name of the key.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "slot",
+            "in": "path",
+            "description": "Name of the deployment slot.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "key",
+            "in": "body",
+            "description": "The key to create or update",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/KeyInfo"
+            }
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Key was created.",
+            "schema": {
+              "$ref": "#/definitions/KeyInfo"
+            }
+          },
+          "200": {
+            "description": "Key was updated.",
+            "schema": {
+              "$ref": "#/definitions/KeyInfo"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Delete a host level secret.",
+        "description": "Delete a host level secret.",
+        "operationId": "WebApps_DeleteHostSecretSlot",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Site name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "keyType",
+            "in": "path",
+            "description": "The type of host key.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "keyName",
+            "in": "path",
+            "description": "The name of the key.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "slot",
+            "in": "path",
+            "description": "Name of the deployment slot.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "404": {
+            "description": "Key was not found."
+          },
+          "204": {
+            "description": "Key was deleted."
           },
           "default": {
             "description": "App Service error response.",
@@ -9929,7 +11560,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Succesfully deleted hostname binding."
+            "description": "Successfully deleted hostname binding."
           },
           "204": {
             "description": "Hostname binding does not exist."
@@ -10117,7 +11748,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Succesfully deleted hybrid connection."
+            "description": "Successfully deleted hybrid connection."
           },
           "404": {
             "description": "Hybrid connection does not exist."
@@ -10515,7 +12146,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Succesfully deleted relay service connection."
+            "description": "Successfully deleted relay service connection."
           },
           "404": {
             "description": "Relay service connection does not exist."
@@ -11370,7 +13001,7 @@
           {
             "name": "slot",
             "in": "path",
-            "description": "Name of the deployment slot. If a slot is not specified, the API will restore a backup of the production slot.",
+            "description": "Name of the deployment slot.",
             "required": true,
             "type": "string"
           },
@@ -11484,7 +13115,7 @@
           {
             "name": "$filter",
             "in": "query",
-            "description": "Return only metrics specified in the filter (using OData syntax). For example: $filter=(name.value eq 'Metric1' or name.value eq 'Metric2') and startTime eq '2014-01-01T00:00:00Z' and endTime eq '2014-12-31T23:59:59Z' and timeGrain eq duration'[Hour|Minute|Day]'.",
+            "description": "Return only metrics specified in the filter (using OData syntax). For example: $filter=(name.value eq 'Metric1' or name.value eq 'Metric2') and startTime eq 2014-01-01T00:00:00Z and endTime eq 2014-12-31T23:59:59Z and timeGrain eq duration'[Hour|Minute|Day]'.",
             "type": "string",
             "x-ms-skip-url-encoding": true
           },
@@ -11563,6 +13194,208 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/networkConfig/virtualNetwork": {
+      "get": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Gets a Swift Virtual Network connection.",
+        "description": "Gets a Swift Virtual Network connection.",
+        "operationId": "WebApps_GetSwiftVirtualNetworkConnectionSlot",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the app.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "slot",
+            "in": "path",
+            "description": "Name of the deployment slot. If a slot is not specified, the API will get a gateway for the production slot's Virtual Network.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/SwiftVirtualNetwork"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Integrates this Web App with a Virtual Network. This requires that 1) \"swiftSupported\" is true when doing a GET against this resource, and 2) that the target Subnet has already been delegated, and is not\r\nin use by another App Service Plan other than the one this App is in.",
+        "description": "Integrates this Web App with a Virtual Network. This requires that 1) \"swiftSupported\" is true when doing a GET against this resource, and 2) that the target Subnet has already been delegated, and is not\nin use by another App Service Plan other than the one this App is in.",
+        "operationId": "WebApps_CreateOrUpdateSwiftVirtualNetworkConnectionSlot",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the app.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "connectionEnvelope",
+            "in": "body",
+            "description": "Properties of the Virtual Network connection. See example.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SwiftVirtualNetwork"
+            }
+          },
+          {
+            "name": "slot",
+            "in": "path",
+            "description": "Name of the deployment slot. If a slot is not specified, the API will add or update connections for the production slot.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SwiftVirtualNetwork"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Deletes a Swift Virtual Network connection from an app (or deployment slot).",
+        "description": "Deletes a Swift Virtual Network connection from an app (or deployment slot).",
+        "operationId": "WebApps_DeleteSwiftVirtualNetworkSlot",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the app.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "slot",
+            "in": "path",
+            "description": "Name of the deployment slot. If a slot is not specified, the API will delete the connection for the production slot.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully deleted virtual network."
+          },
+          "404": {
+            "description": "Virtual network does not exist."
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Integrates this Web App with a Virtual Network. This requires that 1) \"swiftSupported\" is true when doing a GET against this resource, and 2) that the target Subnet has already been delegated, and is not\r\nin use by another App Service Plan other than the one this App is in.",
+        "description": "Integrates this Web App with a Virtual Network. This requires that 1) \"swiftSupported\" is true when doing a GET against this resource, and 2) that the target Subnet has already been delegated, and is not\nin use by another App Service Plan other than the one this App is in.",
+        "operationId": "WebApps_UpdateSwiftVirtualNetworkConnectionSlot",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the app.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "connectionEnvelope",
+            "in": "body",
+            "description": "Properties of the Virtual Network connection. See example.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SwiftVirtualNetwork"
+            }
+          },
+          {
+            "name": "slot",
+            "in": "path",
+            "description": "Name of the deployment slot. If a slot is not specified, the API will add or update connections for the production slot.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SwiftVirtualNetwork"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/networkFeatures/{view}": {
       "get": {
         "tags": [
@@ -11616,13 +13449,86 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/networkTrace/operationresults/{operationId}": {
+      "get": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Gets a named operation for a network trace capturing (or deployment slot, if specified).",
+        "description": "Gets a named operation for a network trace capturing (or deployment slot, if specified).",
+        "operationId": "WebApps_GetNetworkTraceOperationSlot",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the app.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "operationId",
+            "in": "path",
+            "description": "GUID of the operation.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "slot",
+            "in": "path",
+            "description": "Name of the deployment slot. If a slot is not specified, the API will get an operation for the production slot.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/NetworkTrace"
+              }
+            }
+          },
+          "202": {
+            "description": "Operation is in progress.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/NetworkTrace"
+              }
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get the current status of a network trace operation for a site": {
+            "$ref": "./examples/GetWebSiteNetworkTraceOperation.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/networkTrace/start": {
       "post": {
         "tags": [
           "WebApps"
         ],
-        "summary": "Start capturing network packets for the site.",
-        "description": "Start capturing network packets for the site.",
+        "summary": "Start capturing network packets for the site (To be deprecated).",
+        "description": "Start capturing network packets for the site (To be deprecated).",
         "operationId": "WebApps_StartWebSiteNetworkTraceSlot",
         "parameters": [
           {
@@ -11671,7 +13577,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK.",
+            "description": "OK",
             "schema": {
               "type": "string"
             }
@@ -11683,6 +13589,93 @@
             }
           }
         }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/networkTrace/startOperation": {
+      "post": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Start capturing network packets for the site.",
+        "description": "Start capturing network packets for the site.",
+        "operationId": "WebApps_StartWebSiteNetworkTraceOperationSlot",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "The name of the web app.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "durationInSeconds",
+            "in": "query",
+            "description": "The duration to keep capturing in seconds.",
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "slot",
+            "in": "path",
+            "description": "The name of the slot for this web app.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "maxFrameLength",
+            "in": "query",
+            "description": "The maximum frame length in bytes (Optional).",
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "sasUrl",
+            "in": "query",
+            "description": "The Blob URL to store capture file.",
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/NetworkTrace"
+              }
+            }
+          },
+          "202": {
+            "description": "Operation is in progress.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/NetworkTrace"
+              }
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Start a new network trace operation for a site": {
+            "$ref": "./examples/StartWebSiteNetworkTraceOperation.json"
+          }
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/networkTrace/stop": {
@@ -11720,9 +13713,67 @@
         ],
         "responses": {
           "200": {
-            "description": "OK.",
+            "description": "Stopped."
+          },
+          "204": {
+            "description": "Stopped."
+          }
+        },
+        "x-ms-examples": {
+          "Stop a currently running network trace operation for a site": {
+            "$ref": "./examples/StopWebSiteNetworkTrace.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/networkTrace/{operationId}": {
+      "get": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Gets a named operation for a network trace capturing (or deployment slot, if specified).",
+        "description": "Gets a named operation for a network trace capturing (or deployment slot, if specified).",
+        "operationId": "WebApps_GetNetworkTracesSlot",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the app.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "operationId",
+            "in": "path",
+            "description": "GUID of the operation.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "slot",
+            "in": "path",
+            "description": "Name of the deployment slot. If a slot is not specified, the API will get an operation for the production slot.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
             "schema": {
-              "type": "string"
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/NetworkTrace"
+              }
             }
           },
           "default": {
@@ -11730,6 +13781,148 @@
             "schema": {
               "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Get NetworkTraces for a site": {
+            "$ref": "./examples/GetWebSiteNetworkTraces.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/networkTraces/current/operationresults/{operationId}": {
+      "get": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Gets a named operation for a network trace capturing (or deployment slot, if specified).",
+        "description": "Gets a named operation for a network trace capturing (or deployment slot, if specified).",
+        "operationId": "WebApps_GetNetworkTraceOperationSlotV2",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the app.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "operationId",
+            "in": "path",
+            "description": "GUID of the operation.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "slot",
+            "in": "path",
+            "description": "Name of the deployment slot. If a slot is not specified, the API will get an operation for the production slot.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/NetworkTrace"
+              }
+            }
+          },
+          "202": {
+            "description": "Operation is in progress.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/NetworkTrace"
+              }
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get the current status of a network trace operation for a site": {
+            "$ref": "./examples/GetWebSiteNetworkTraceOperation.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/networkTraces/{operationId}": {
+      "get": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Gets a named operation for a network trace capturing (or deployment slot, if specified).",
+        "description": "Gets a named operation for a network trace capturing (or deployment slot, if specified).",
+        "operationId": "WebApps_GetNetworkTracesSlotV2",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the app.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "operationId",
+            "in": "path",
+            "description": "GUID of the operation.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "slot",
+            "in": "path",
+            "description": "Name of the deployment slot. If a slot is not specified, the API will get an operation for the production slot.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/NetworkTrace"
+              }
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get NetworkTraces for a site": {
+            "$ref": "./examples/GetWebSiteNetworkTraces.json"
           }
         }
       }
@@ -11806,7 +13999,7 @@
           {
             "name": "$filter",
             "in": "query",
-            "description": "Return only usages/metrics specified in the filter. Filter conforms to odata syntax. Example: $filter=(startTime eq '2014-01-01T00:00:00Z' and endTime eq '2014-12-31T23:59:59Z' and timeGrain eq duration'[Hour|Minute|Day]'.",
+            "description": "Return only usages/metrics specified in the filter. Filter conforms to odata syntax. Example: $filter=(startTime eq 2014-01-01T00:00:00Z and endTime eq 2014-12-31T23:59:59Z and timeGrain eq duration'[Hour|Minute|Day]'.",
             "type": "string",
             "x-ms-skip-url-encoding": true
           },
@@ -12093,7 +14286,70 @@
         ],
         "responses": {
           "200": {
-            "description": "Succesfully deleted premier add-on."
+            "description": "Successfully deleted premier add-on."
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Updates a named add-on of an app.",
+        "description": "Updates a named add-on of an app.",
+        "operationId": "WebApps_UpdatePremierAddOnSlot",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the app.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "premierAddOnName",
+            "in": "path",
+            "description": "Add-on name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "premierAddOn",
+            "in": "body",
+            "description": "A JSON representation of the edited premier add-on.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PremierAddOnPatchResource"
+            }
+          },
+          {
+            "name": "slot",
+            "in": "path",
+            "description": "Name of the deployment slot. If a slot is not specified, the API will update the named add-on for the production slot.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/PremierAddOn"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
           }
         }
       }
@@ -12849,7 +15105,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Succesfully deleted hostname binding."
+            "description": "Successfully deleted hostname binding."
           },
           "204": {
             "description": "Hostname binding does not exist."
@@ -13543,6 +15799,58 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/snapshotsdr": {
+      "get": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Returns all Snapshots to the user from DRSecondary endpoint.",
+        "description": "Returns all Snapshots to the user from DRSecondary endpoint.",
+        "operationId": "WebApps_ListSnapshotsFromDRSecondarySlot",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Website Name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "slot",
+            "in": "path",
+            "description": "Website Slot.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SnapshotCollection"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/sourcecontrols/web": {
       "get": {
         "tags": [
@@ -13706,16 +16014,10 @@
         ],
         "responses": {
           "200": {
-            "description": "Succesfully deleted source control for web app.",
-            "schema": {
-              "type": "object"
-            }
+            "description": "Successfully deleted source control for web app."
           },
           "202": {
-            "description": "Source control delete operation in progress.",
-            "schema": {
-              "type": "object"
-            }
+            "description": "Source control delete operation in progress."
           },
           "404": {
             "description": "Source control does not exist."
@@ -13765,12 +16067,18 @@
         ],
         "responses": {
           "200": {
-            "description": "Succesfully created or updated source control for web app.",
+            "description": "Successfully created or updated source control for web app.",
             "schema": {
               "$ref": "#/definitions/SiteSourceControl"
             }
           },
           "201": {
+            "description": "Create or update source control for web app in progress.",
+            "schema": {
+              "$ref": "#/definitions/SiteSourceControl"
+            }
+          },
+          "202": {
             "description": "Create or update source control for web app in progress.",
             "schema": {
               "$ref": "#/definitions/SiteSourceControl"
@@ -13825,6 +16133,93 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/startNetworkTrace": {
+      "post": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Start capturing network packets for the site.",
+        "description": "Start capturing network packets for the site.",
+        "operationId": "WebApps_StartNetworkTraceSlot",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "The name of the web app.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "durationInSeconds",
+            "in": "query",
+            "description": "The duration to keep capturing in seconds.",
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "slot",
+            "in": "path",
+            "description": "The name of the slot for this web app.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "maxFrameLength",
+            "in": "query",
+            "description": "The maximum frame length in bytes (Optional).",
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "sasUrl",
+            "in": "query",
+            "description": "The Blob URL to store capture file.",
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/NetworkTrace"
+              }
+            }
+          },
+          "202": {
+            "description": "Operation is in progress.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/NetworkTrace"
+              }
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Start a new network trace operation for a site": {
+            "$ref": "./examples/StartWebSiteNetworkTraceOperation.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/stop": {
       "post": {
         "tags": [
@@ -13865,6 +16260,54 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/stopNetworkTrace": {
+      "post": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Stop ongoing capturing network packets for the site.",
+        "description": "Stop ongoing capturing network packets for the site.",
+        "operationId": "WebApps_StopNetworkTraceSlot",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "The name of the web app.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "slot",
+            "in": "path",
+            "description": "The name of the slot for this web app.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Stopped."
+          },
+          "204": {
+            "description": "Stopped."
+          }
+        },
+        "x-ms-examples": {
+          "Stop a currently running network trace operation for a site": {
+            "$ref": "./examples/StopWebSiteNetworkTrace.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/sync": {
       "post": {
         "tags": [
@@ -13900,7 +16343,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Successfully sync sourcecontrol."
+            "description": "Successfully sync source control."
           }
         }
       }
@@ -13910,8 +16353,8 @@
         "tags": [
           "WebApps"
         ],
-        "summary": "Syncs function trigger metadata to the scale controller",
-        "description": "Syncs function trigger metadata to the scale controller",
+        "summary": "Syncs function trigger metadata to the management database",
+        "description": "Syncs function trigger metadata to the management database",
         "operationId": "WebApps_SyncFunctionTriggersSlot",
         "parameters": [
           {
@@ -13927,7 +16370,7 @@
           {
             "name": "slot",
             "in": "path",
-            "description": "Name of the deployment slot. If a slot is not specified, the API will restore a backup of the production slot.",
+            "description": "Name of the deployment slot.",
             "required": true,
             "type": "string"
           },
@@ -14090,7 +16533,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Succesfully deleted continuous web job."
+            "description": "Successfully deleted continuous web job."
           },
           "204": {
             "description": "Triggered web job does not exist."
@@ -14293,7 +16736,7 @@
           {
             "name": "$filter",
             "in": "query",
-            "description": "Return only information specified in the filter (using OData syntax). For example: $filter=(name.value eq 'Metric1' or name.value eq 'Metric2') and startTime eq '2014-01-01T00:00:00Z' and endTime eq '2014-12-31T23:59:59Z' and timeGrain eq duration'[Hour|Minute|Day]'.",
+            "description": "Return only information specified in the filter (using OData syntax). For example: $filter=(name.value eq 'Metric1' or name.value eq 'Metric2') and startTime eq 2014-01-01T00:00:00Z and endTime eq 2014-12-31T23:59:59Z and timeGrain eq duration'[Hour|Minute|Day]'.",
             "type": "string",
             "x-ms-skip-url-encoding": true
           },
@@ -14534,7 +16977,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Succesfully deleted virtual network."
+            "description": "Successfully deleted virtual network."
           },
           "404": {
             "description": "Virtual network does not exist."
@@ -15058,6 +17501,51 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/snapshotsdr": {
+      "get": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Returns all Snapshots to the user from DRSecondary endpoint.",
+        "description": "Returns all Snapshots to the user from DRSecondary endpoint.",
+        "operationId": "WebApps_ListSnapshotsFromDRSecondary",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Website Name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SnapshotCollection"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/sourcecontrols/web": {
       "get": {
         "tags": [
@@ -15164,7 +17652,7 @@
               "$ref": "#/definitions/SiteSourceControl"
             }
           },
-	  "default": {
+          "default": {
             "description": "App Service error response.",
             "schema": {
               "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
@@ -15200,16 +17688,10 @@
         ],
         "responses": {
           "200": {
-            "description": "Succesfully deleted source control for web app.",
-            "schema": {
-              "type": "object"
-            }
+            "description": "Successfully deleted source control for web app."
           },
           "202": {
-            "description": "Source control delete operation in progress.",
-            "schema": {
-              "type": "object"
-            }
+            "description": "Source control delete operation in progress."
           },
           "404": {
             "description": "Source control does not exist."
@@ -15252,12 +17734,18 @@
         ],
         "responses": {
           "200": {
-            "description": "Succesfully created or updated source control for web app.",
+            "description": "Successfully created or updated source control for web app.",
             "schema": {
               "$ref": "#/definitions/SiteSourceControl"
             }
           },
           "201": {
+            "description": "Create or update source control for web app in progress.",
+            "schema": {
+              "$ref": "#/definitions/SiteSourceControl"
+            }
+          },
+          "202": {
             "description": "Create or update source control for web app in progress.",
             "schema": {
               "$ref": "#/definitions/SiteSourceControl"
@@ -15305,6 +17793,86 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/startNetworkTrace": {
+      "post": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Start capturing network packets for the site.",
+        "description": "Start capturing network packets for the site.",
+        "operationId": "WebApps_StartNetworkTrace",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "The name of the web app.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "durationInSeconds",
+            "in": "query",
+            "description": "The duration to keep capturing in seconds.",
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "maxFrameLength",
+            "in": "query",
+            "description": "The maximum frame length in bytes (Optional).",
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "sasUrl",
+            "in": "query",
+            "description": "The Blob URL to store capture file.",
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/NetworkTrace"
+              }
+            }
+          },
+          "202": {
+            "description": "Operation is in progress.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/NetworkTrace"
+              }
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Start a new network trace operation for a site": {
+            "$ref": "./examples/StartWebSiteNetworkTraceOperation.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/stop": {
       "post": {
         "tags": [
@@ -15338,6 +17906,47 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/stopNetworkTrace": {
+      "post": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Stop ongoing capturing network packets for the site.",
+        "description": "Stop ongoing capturing network packets for the site.",
+        "operationId": "WebApps_StopNetworkTrace",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "The name of the web app.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Stopped."
+          },
+          "204": {
+            "description": "Stopped."
+          }
+        },
+        "x-ms-examples": {
+          "Stop a currently running network trace operation for a site": {
+            "$ref": "./examples/StopWebSiteNetworkTrace.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/sync": {
       "post": {
         "tags": [
@@ -15366,7 +17975,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Successfully sync sourcecontrol."
+            "description": "Successfully sync source control."
           }
         }
       }
@@ -15376,8 +17985,8 @@
         "tags": [
           "WebApps"
         ],
-        "summary": "Syncs function trigger metadata to the scale controller",
-        "description": "Syncs function trigger metadata to the scale controller",
+        "summary": "Syncs function trigger metadata to the management database",
+        "description": "Syncs function trigger metadata to the management database",
         "operationId": "WebApps_SyncFunctionTriggers",
         "parameters": [
           {
@@ -15528,7 +18137,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Succesfully deleted continuous web job."
+            "description": "Successfully deleted continuous web job."
           },
           "204": {
             "description": "Triggered web job does not exist."
@@ -15703,7 +18312,7 @@
           {
             "name": "$filter",
             "in": "query",
-            "description": "Return only information specified in the filter (using OData syntax). For example: $filter=(name.value eq 'Metric1' or name.value eq 'Metric2') and startTime eq '2014-01-01T00:00:00Z' and endTime eq '2014-12-31T23:59:59Z' and timeGrain eq duration'[Hour|Minute|Day]'.",
+            "description": "Return only information specified in the filter (using OData syntax). For example: $filter=(name.value eq 'Metric1' or name.value eq 'Metric2') and startTime eq 2014-01-01T00:00:00Z and endTime eq 2014-12-31T23:59:59Z and timeGrain eq duration'[Hour|Minute|Day]'.",
             "type": "string",
             "x-ms-skip-url-encoding": true
           },
@@ -15916,7 +18525,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Succesfully deleted virtual network."
+            "description": "Successfully deleted virtual network."
           },
           "404": {
             "description": "Virtual network does not exist."
@@ -16322,6 +18931,25 @@
         }
       }
     },
+    "AzureStoragePropertyDictionaryResource": {
+      "description": "AzureStorageInfo dictionary resource.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "./CommonDefinitions.json#/definitions/ProxyOnlyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "Azure storage accounts.",
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "./CommonDefinitions.json#/definitions/AzureStorageInfoValue"
+          },
+          "x-ms-client-flatten": true
+        }
+      }
+    },
     "AzureTableStorageApplicationLogsConfig": {
       "description": "Application logs to Azure table storage configuration.",
       "required": [
@@ -16499,6 +19127,10 @@
             "storageAccountUrl"
           ],
           "properties": {
+            "backupName": {
+              "description": "Name of the backup.",
+              "type": "string"
+            },
             "enabled": {
               "description": "True if the backup schedule is enabled (must be included in that case), false if the backup schedule should be disabled.",
               "type": "boolean"
@@ -16746,6 +19378,10 @@
             "name": "PublishingProfileFormat",
             "modelAsString": true
           }
+        },
+        "includeDisasterRecoveryEndpoints": {
+          "description": "Include the DisasterRecover endpoint if true",
+          "type": "boolean"
         }
       }
     },
@@ -16809,7 +19445,7 @@
               "readOnly": true
             },
             "hasConflictAcrossSubscription": {
-              "description": "<code>true</code> if htere is a conflict across subscriptions; otherwise, <code>false</code>.",
+              "description": "<code>true</code> if there is a conflict across subscriptions; otherwise, <code>false</code>.",
               "type": "boolean",
               "readOnly": true
             },
@@ -16915,6 +19551,10 @@
             "snapshotTime": {
               "description": "Point in time to restore the deleted app from, formatted as a DateTime string. \nIf unspecified, default value is the time that the app was deleted.",
               "type": "string"
+            },
+            "useDRSecondary": {
+              "description": "If true, the snapshot is retrieved from DRSecondary endpoint.",
+              "type": "boolean"
             }
           },
           "x-ms-client-flatten": true
@@ -16922,7 +19562,7 @@
       }
     },
     "Deployment": {
-      "description": "User crendentials used for publishing activity.",
+      "description": "User credentials used for publishing activity.",
       "type": "object",
       "allOf": [
         {
@@ -17053,7 +19693,7 @@
       }
     },
     "FunctionEnvelope": {
-      "description": "Web Job Information.",
+      "description": "Function information.",
       "type": "object",
       "allOf": [
         {
@@ -17080,6 +19720,10 @@
               "description": "Config URI.",
               "type": "string"
             },
+            "test_data_href": {
+              "description": "Test data URI.",
+              "type": "string"
+            },
             "secrets_file_href": {
               "description": "Secrets file URI.",
               "type": "string"
@@ -17102,6 +19746,18 @@
             "test_data": {
               "description": "Test data used when testing via the Azure Portal.",
               "type": "string"
+            },
+            "invoke_url_template": {
+              "description": "The invocation URL",
+              "type": "string"
+            },
+            "language": {
+              "description": "The function language",
+              "type": "string"
+            },
+            "isDisabled": {
+              "description": "Value indicating whether the function is disabled",
+              "type": "boolean"
             }
           },
           "x-ms-client-flatten": true
@@ -17151,6 +19807,30 @@
             }
           },
           "x-ms-client-flatten": true
+        }
+      }
+    },
+    "HostKeys": {
+      "description": "Functions host level keys.",
+      "type": "object",
+      "properties": {
+        "masterKey": {
+          "description": "Secret key.",
+          "type": "string"
+        },
+        "functionKeys": {
+          "description": "Host level function keys.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "systemKeys": {
+          "description": "System keys.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
         }
       }
     },
@@ -17305,6 +19985,20 @@
         "azureBlobStorage": {
           "$ref": "#/definitions/AzureBlobStorageHttpLogsConfig",
           "description": "Http logs to azure blob storage configuration."
+        }
+      }
+    },
+    "KeyInfo": {
+      "description": "Function key info.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Key name",
+          "type": "string"
+        },
+        "value": {
+          "description": "Key value",
+          "type": "string"
         }
       }
     },
@@ -17604,6 +20298,24 @@
         }
       }
     },
+    "NetworkTrace": {
+      "description": "Network trace",
+      "type": "object",
+      "properties": {
+        "path": {
+          "description": "Local file path for the captured network trace file.",
+          "type": "string"
+        },
+        "status": {
+          "description": "Current status of the network trace operation, same as Operation.Status (InProgress/Succeeded/Failed).",
+          "type": "string"
+        },
+        "message": {
+          "description": "Detailed message of a network trace operation, e.g. error message in case of failure.",
+          "type": "string"
+        }
+      }
+    },
     "PerfMonCounterCollection": {
       "description": "Collection of performance monitor counters.",
       "required": [
@@ -17705,6 +20417,43 @@
       "properties": {
         "properties": {
           "description": "PremierAddOn resource specific properties",
+          "properties": {
+            "sku": {
+              "description": "Premier add on SKU.",
+              "type": "string"
+            },
+            "product": {
+              "description": "Premier add on Product.",
+              "type": "string"
+            },
+            "vendor": {
+              "description": "Premier add on Vendor.",
+              "type": "string"
+            },
+            "marketplacePublisher": {
+              "description": "Premier add on Marketplace publisher.",
+              "type": "string"
+            },
+            "marketplaceOffer": {
+              "description": "Premier add on Marketplace offer.",
+              "type": "string"
+            }
+          },
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "PremierAddOnPatchResource": {
+      "description": "ARM resource for a PremierAddOn.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "./CommonDefinitions.json#/definitions/ProxyOnlyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "PremierAddOnPatchResource resource specific properties",
           "properties": {
             "sku": {
               "description": "Premier add on SKU.",
@@ -18155,7 +20904,7 @@
               "type": "string"
             },
             "priviledged_processor_time": {
-              "description": "Priviledged processor time.",
+              "description": "Privileged processor time.",
               "type": "string"
             },
             "state": {
@@ -18443,6 +21192,10 @@
             },
             "clientSecret": {
               "description": "The Client Secret of this relying party application (in Azure Active Directory, this is also referred to as the Key).\nThis setting is optional. If no client secret is configured, the OpenID Connect implicit auth flow is used to authenticate end users.\nOtherwise, the OpenID Connect Authorization Code Flow is used to authenticate end users.\nMore information on OpenID Connect: http://openid.net/specs/openid-connect-core-1_0.html",
+              "type": "string"
+            },
+            "clientSecretCertificateThumbprint": {
+              "description": "An alternative to the client secret, that is the thumbprint of a certificate used for signing purposes. This property acts as\na replacement for the Client Secret. It is also optional.",
               "type": "string"
             },
             "issuer": {
@@ -18942,6 +21695,15 @@
               ]
             },
             "isXenon": {
+              "description": "Obsolete: Hyper-V sandbox.",
+              "default": false,
+              "type": "boolean",
+              "x-ms-mutability": [
+                "create",
+                "read"
+              ]
+            },
+            "hyperV": {
               "description": "Hyper-V sandbox.",
               "default": false,
               "type": "boolean",
@@ -18994,6 +21756,10 @@
               "description": "<code>true</code> to enable client certificate authentication (TLS mutual authentication); otherwise, <code>false</code>. Default is <code>false</code>.",
               "type": "boolean"
             },
+            "clientCertExclusionPaths": {
+              "description": "client certificate authentication comma-separated exclusion paths",
+              "type": "string"
+            },
             "hostNamesDisabled": {
               "description": "<code>true</code> to disable the public hostnames of the app; otherwise, <code>false</code>.\n If <code>true</code>, the app is only accessible via API management process.",
               "type": "boolean"
@@ -19037,13 +21803,6 @@
                 "create"
               ]
             },
-            "snapshotInfo": {
-              "$ref": "./CommonDefinitions.json#/definitions/SnapshotRecoveryRequest",
-              "description": "If specified during app creation, the app is created from a previous snapshot.",
-              "x-ms-mutability": [
-                "create"
-              ]
-            },
             "resourceGroup": {
               "description": "Name of the resource group the app belongs to. Read-only.",
               "type": "string",
@@ -19067,9 +21826,41 @@
             "httpsOnly": {
               "description": "HttpsOnly: configures a web site to accept only https requests. Issues redirect for\nhttp requests",
               "type": "boolean"
+            },
+            "redundancyMode": {
+              "description": "Site redundancy mode",
+              "enum": [
+                "None",
+                "Manual",
+                "Failover",
+                "ActiveActive",
+                "GeoRedundant"
+              ],
+              "type": "string",
+              "x-ms-enum": {
+                "name": "RedundancyMode",
+                "modelAsString": false
+              }
+            },
+            "inProgressOperationId": {
+              "format": "uuid",
+              "description": "Specifies an operation id if this site has a pending operation.",
+              "type": "string",
+              "readOnly": true,
+              "example": "00000000-0000-0000-0000-000000000000"
+            },
+            "geoDistributions": {
+              "description": "GeoDistributions for this site",
+              "type": "array",
+              "items": {
+                "$ref": "./CommonDefinitions.json#/definitions/GeoDistribution"
+              }
             }
           },
           "x-ms-client-flatten": true
+        },
+        "identity": {
+          "$ref": "./CommonDefinitions.json#/definitions/ManagedServiceIdentity"
         }
       }
     },
@@ -19164,7 +21955,7 @@
       }
     },
     "SlotConfigNames": {
-      "description": "Names for connection strings and application settings to be marked as sticky to the deployment slot and not moved during a swap operation.\nThis is valid for all deployment slots in an app.",
+      "description": "Names for connection strings, application settings, and external Azure storage account configuration\nidentifiers to be marked as sticky to the deployment slot and not moved during a swap operation.\nThis is valid for all deployment slots in an app.",
       "type": "object",
       "properties": {
         "connectionStringNames": {
@@ -19176,6 +21967,13 @@
         },
         "appSettingNames": {
           "description": "List of application settings names.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "azureStorageConfigNames": {
+          "description": "List of external Azure storage account identifiers.",
           "type": "array",
           "items": {
             "type": "string"
@@ -19272,28 +22070,6 @@
         }
       }
     },
-    "Snapshot": {
-      "description": "A snapshot of an app.",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "./CommonDefinitions.json#/definitions/ProxyOnlyResource"
-        }
-      ],
-      "properties": {
-        "properties": {
-          "description": "Snapshot resource specific properties",
-          "properties": {
-            "time": {
-              "description": "The time the snapshot was taken.",
-              "type": "string",
-              "readOnly": true
-            }
-          },
-          "x-ms-client-flatten": true
-        }
-      }
-    },
     "SnapshotCollection": {
       "description": "Collection of snapshots which can be used to revert an app to a previous time.",
       "required": [
@@ -19305,7 +22081,7 @@
           "description": "Collection of resources.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/Snapshot"
+            "$ref": "./CommonDefinitions.json#/definitions/Snapshot"
           }
         },
         "nextLink": {
@@ -19362,6 +22138,10 @@
             },
             "ignoreConflictingHostNames": {
               "description": "If true, custom hostname conflicts will be ignored when recovering to a target web app.\nThis setting is only necessary when RecoverConfiguration is enabled.",
+              "type": "boolean"
+            },
+            "useDRSecondary": {
+              "description": "If true, the snapshot is retrieved from DRSecondary endpoint.",
               "type": "boolean"
             }
           },
@@ -19456,6 +22236,31 @@
           "type": "object",
           "additionalProperties": {
             "type": "string"
+          },
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "SwiftVirtualNetwork": {
+      "description": "Swift Virtual Network Contract. This is used to enable the new Swift way of doing virtual network integration.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "./CommonDefinitions.json#/definitions/ProxyOnlyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "SwiftVirtualNetwork resource specific properties",
+          "properties": {
+            "subnetResourceId": {
+              "description": "The Virtual Network subnet's resource ID. This is the subnet that this Web App will join. This subnet must have a delegation to Microsoft.Web/serverFarms defined first.",
+              "type": "string"
+            },
+            "swiftSupported": {
+              "description": "A flag that specifies if the scale unit this Web App is on supports Swift integration.",
+              "type": "boolean"
+            }
           },
           "x-ms-client-flatten": true
         }

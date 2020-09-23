@@ -4,10 +4,10 @@
 
 This is the AutoRest configuration file for ContainerInstance.
 
-
-
 ---
+
 ## Getting Started
+
 To build the SDK for ContainerInstance, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
 
 > `autorest`
@@ -15,18 +15,46 @@ To build the SDK for ContainerInstance, simply [Install AutoRest](https://aka.ms
 To see additional help and options, run:
 
 > `autorest --help`
+
 ---
 
 ## Configuration
 
-
-
 ### Basic Information
+
 These are the global settings for the ContainerInstance API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2018-06
+tag: package-2019-12
+```
+
+
+### Tag: package-2019-12
+
+These settings apply only when `--tag=package-2019-12` is specified on the command line.
+
+```yaml $(tag) == 'package-2019-12'
+input-file:
+  - Microsoft.ContainerInstance/stable/2019-12-01/containerInstance.json
+```
+
+### Tag: package-2018-10
+
+These settings apply only when `--tag=package-2018-10` is specified on the command line.
+
+``` yaml $(tag) == 'package-2018-10'
+input-file:
+- Microsoft.ContainerInstance/stable/2018-10-01/containerInstance.json
+```
+
+### Tag: package-2018-09
+
+These settings apply only when `--tag=package-2018-09` is specified on the command line.
+
+``` yaml $(tag) == 'package-2018-09'
+input-file:
+- Microsoft.ContainerInstance/stable/2018-09-01/containerInstance.json
 ```
 
 ### Tag: package-2018-06
@@ -65,7 +93,6 @@ input-file:
 - Microsoft.ContainerInstance/preview/2017-12-01-preview/containerInstance.json
 ```
 
-
 ### Tag: package-2017-10-preview
 
 These settings apply only when `--tag=package-2017-10-preview` is specified on the command line.
@@ -74,7 +101,6 @@ These settings apply only when `--tag=package-2017-10-preview` is specified on t
 input-file:
 - Microsoft.ContainerInstance/preview/2017-10-01-preview/containerInstance.json
 ```
-
 
 ### Tag: package-2017-08-preview
 
@@ -85,10 +111,18 @@ input-file:
 - Microsoft.ContainerInstance/preview/2017-08-01-preview/containerInstance.json
 ```
 
+## Suppression
+
+``` yaml
+directive:
+  - suppress: UniqueResourcePaths
+    from: containerInstance.json
+    reason: false positive, see https://github.com/Azure/azure-openapi-validator/issues/176
+```
 
 ---
-# Code Generation
 
+# Code Generation
 
 ## Swagger to SDK
 
@@ -97,150 +131,50 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
+  - repo: azure-sdk-for-net
   - repo: azure-sdk-for-python
-  - repo: azure-libraries-for-java
+  - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
+  - repo: azure-sdk-for-js
   - repo: azure-sdk-for-node
   - repo: azure-sdk-for-ruby
     after_scripts:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_container_instance']
+  - repo: azure-resource-manager-schemas
+    after_scripts:
+      - node sdkauto_afterscript.js containerinstance/resource-manager
 ```
-
 
 ## C#
 
-These settings apply only when `--csharp` is specified on the command line.
-Please also specify `--csharp-sdks-folder=<path to "SDKs" directory of your azure-sdk-for-net clone>`.
-
-``` yaml $(csharp)
-csharp:
-  azure-arm: true
-  license-header: MICROSOFT_MIT_NO_VERSION
-  namespace: Microsoft.Azure.Management.ContainerInstance
-  payload-flattening-threshold: 1
-  output-folder: $(csharp-sdks-folder)/ContainerInstance/Management.ContainerInstance/Generated
-  clear-output-folder: true
-```
-
-
-## Python
-
-These settings apply only when `--python` is specified on the command line.
-Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
-Use `--python-mode=update` if you already have a setup.py and just want to update the code itself.
-
-``` yaml $(python)
-python-mode: create
-python:
-  azure-arm: true
-  license-header: MICROSOFT_MIT_NO_VERSION
-  payload-flattening-threshold: 2
-  namespace: azure.mgmt.containerinstance
-  package-name: azure-mgmt-containerinstance
-  package-version: 0.4.0
-  clear-output-folder: true
-```
-``` yaml $(python) && $(python-mode) == 'update'
-python:
-  no-namespace-folders: true
-  output-folder: $(python-sdks-folder)/azure-mgmt-containerinstance/azure/mgmt/containerinstance
-```
-``` yaml $(python) && $(python-mode) == 'create'
-python:
-  basic-setup-py: true
-  output-folder: $(python-sdks-folder)/azure-mgmt-containerinstance
-```
-
+See configuration in [readme.csharp.md](./readme.csharp.md)
 
 ## Go
 
-These settings apply only when `--go` is specified on the command line.
-
-``` yaml $(go)
-go:
-  license-header: MICROSOFT_APACHE_NO_VERSION
-  namespace: containerinstance
-  clear-output-folder: true
-```
-
-### Go multi-api
-
-``` yaml $(go) && $(multiapi)
-batch:
-  - tag: package-2018-06
-  - tag: package-2018-04
-  - tag: package-2018-02-preview
-  - tag: package-2017-12-preview
-  - tag: package-2017-10-preview
-  - tag: package-2017-08-preview
-```
-
-### Tag: package-2018-06 and go
-
-These settings apply only when `--tag=package-2018-06 --go` is specified on the command line.
-Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
-
-``` yaml $(tag) == 'package-2018-04' && $(go)
-output-folder: $(go-sdk-folder)/services/containerinstance/mgmt/2018-06-01/containerinstance
-```
-
-### Tag: package-2018-04 and go
-
-These settings apply only when `--tag=package-2018-04 --go` is specified on the command line.
-Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
-
-``` yaml $(tag) == 'package-2018-04' && $(go)
-output-folder: $(go-sdk-folder)/services/containerinstance/mgmt/2018-04-01/containerinstance
-```
-
-### Tag: package-2018-02-preview and go
-
-These settings apply only when `--tag=package-2018-02-preview --go` is specified on the command line.
-Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
-
-``` yaml $(tag) == 'package-2018-02-preview' && $(go)
-output-folder: $(go-sdk-folder)/services/preview/containerinstance/mgmt/2018-02-01-preview/containerinstance
-```
-
-### Tag: package-2017-12-preview and go
-
-These settings apply only when `--tag=package-2017-12-preview --go` is specified on the command line.
-Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
-
-``` yaml $(tag) == 'package-2017-12-preview' && $(go)
-output-folder: $(go-sdk-folder)/services/preview/containerinstance/mgmt/2017-12-01-preview/containerinstance
-```
-
-### Tag: package-2017-10-preview and go
-
-These settings apply only when `--tag=package-2017-10-preview --go` is specified on the command line.
-Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
-
-``` yaml $(tag) == 'package-2017-10-preview' && $(go)
-output-folder: $(go-sdk-folder)/services/preview/containerinstance/mgmt/2017-10-01-preview/containerinstance
-```
-
-### Tag: package-2017-08-preview and go
-
-These settings apply only when `--tag=package-2017-08-preview --go` is specified on the command line.
-Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
-
-``` yaml $(tag) == 'package-2017-08-preview' && $(go)
-output-folder: $(go-sdk-folder)/services/preview/containerinstance/mgmt/2017-08-01-preview/containerinstance
-```
-
+See configuration in [readme.go.md](./readme.go.md)
 
 ## Java
 
-These settings apply only when `--java` is specified on the command line.
-Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-libraries-for-java clone>`.
+See configuration in [readme.java.md](./readme.java.md)
 
-``` yaml $(java)
-java:
-  azure-arm: true
-  fluent: true
-  namespace: com.microsoft.azure.management.containerinstance
-  license-header: MICROSOFT_MIT_NO_CODEGEN
-  payload-flattening-threshold: 1
-  output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-containerinstance
-```
+## Node.js
+
+See configuration in [readme.nodejs.md](./readme.nodejs.md)
+
+## Python
+
+See configuration in [readme.python.md](./readme.python.md)
+
+## Ruby
+
+See configuration in [readme.ruby.md](./readme.ruby.md)
+
+## TypeScript
+
+See configuration in [readme.typescript.md](./readme.typescript.md)
+
+
+## AzureResourceSchema
+
+See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
+

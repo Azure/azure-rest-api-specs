@@ -65,7 +65,7 @@
         },
         "x-ms-examples": {
           "Create a new vault or update an existing vault": {
-            "$ref": "./examples//createVault.json"
+            "$ref": "./examples/createVault.json"
           }
         },
         "produces": [
@@ -129,7 +129,7 @@
         },
         "x-ms-examples": {
           "Update an existing vault": {
-            "$ref": "./examples//updateVault.json"
+            "$ref": "./examples/updateVault.json"
           }
         },
         "produces": [
@@ -170,11 +170,14 @@
         "responses": {
           "200": {
             "description": "OK Response."
+          },
+          "204": {
+            "description": "No Content."
           }
         },
         "x-ms-examples": {
           "Delete a vault": {
-            "$ref": "./examples//deleteVault.json"
+            "$ref": "./examples/deleteVault.json"
           }
         },
         "produces": [
@@ -222,7 +225,7 @@
         },
         "x-ms-examples": {
           "Retrieve a vault": {
-            "$ref": "./examples//getVault.json"
+            "$ref": "./examples/getVault.json"
           }
         },
         "produces": [
@@ -304,7 +307,7 @@
         },
         "x-ms-examples": {
           "Add an access policy, or update an access policy with new permissions": {
-            "$ref": "./examples//updateAccessPoliciesAdd.json"
+            "$ref": "./examples/updateAccessPoliciesAdd.json"
           }
         },
         "produces": [
@@ -357,7 +360,7 @@
         },
         "x-ms-examples": {
           "List vaults in the specified resource group": {
-            "$ref": "./examples//listVaultByResourceGroup.json"
+            "$ref": "./examples/listVaultByResourceGroup.json"
           }
         },
         "produces": [
@@ -403,7 +406,7 @@
         },
         "x-ms-examples": {
           "List vaults in the specified subscription": {
-            "$ref": "./examples//listVaultBySubscription.json"
+            "$ref": "./examples/listVaultBySubscription.json"
           }
         },
         "produces": [
@@ -442,7 +445,7 @@
         },
         "x-ms-examples": {
           "List deleted vaults in the specified subscription": {
-            "$ref": "./examples//listDeletedVaults.json"
+            "$ref": "./examples/listDeletedVaults.json"
           }
         },
         "produces": [
@@ -492,7 +495,7 @@
         },
         "x-ms-examples": {
           "Retrieve a deleted vault": {
-            "$ref": "./examples//getDeletedVault.json"
+            "$ref": "./examples/getDeletedVault.json"
           }
         },
         "produces": [
@@ -543,7 +546,7 @@
         },
         "x-ms-examples": {
           "Purge a deleted vault": {
-            "$ref": "./examples//purgeDeletedVault.json"
+            "$ref": "./examples/purgeDeletedVault.json"
           }
         },
         "produces": [
@@ -583,6 +586,7 @@
             "name": "api-version",
             "in": "query",
             "required": true,
+            "x-ms-api-version": false,
             "type": "string",
             "enum": [
               "2015-11-01"
@@ -606,7 +610,7 @@
         },
         "x-ms-examples": {
           "List vaults in the specified subscription": {
-            "$ref": "./examples//listVault.json"
+            "$ref": "./examples/listVault.json"
           }
         },
         "produces": [
@@ -651,7 +655,7 @@
         },
         "x-ms-examples": {
           "Validate a vault name": {
-            "$ref": "./examples//checkVaultNameAvailability.json"
+            "$ref": "./examples/checkVaultNameAvailability.json"
           }
         },
         "produces": [
@@ -849,7 +853,7 @@
           "items": {
             "$ref": "#/definitions/AccessPolicyEntry"
           },
-          "description": "An array of 0 to 16 identities that have access to the key vault. All identities in the array must use the same tenant ID as the key vault's tenant ID."
+          "description": "An array of 0 to 16 identities that have access to the key vault. All identities in the array must use the same tenant ID as the key vault's tenant ID. When `createMode` is set to `recover`, access policies are not required. Otherwise, access policies are required."
         },
         "vaultUri": {
           "type": "string",
@@ -884,7 +888,7 @@
           }
         },
         "enablePurgeProtection": {
-		  "type": "boolean",
+          "type": "boolean",
           "description": "Property specifying whether protection against purge is enabled for this vault. Setting this property to true activates protection against purge for this vault and its content - only the Key Vault service may initiate a hard, irrecoverable deletion. The setting is effective only if soft delete is also enabled. Enabling this functionality is irreversible - that is, the property does not accept false as its value."
         }
       },
@@ -941,7 +945,7 @@
           }
         },
         "enablePurgeProtection": {
-		  "type": "boolean",
+          "type": "boolean",
           "description": "Property specifying whether protection against purge is enabled for this vault; it is only effective if soft delete is also enabled. Once activated, the property may no longer be reset to false."
         }
       },
@@ -1040,26 +1044,26 @@
       "x-ms-azure-resource": true
     },
     "VaultAccessPolicyParameters": {
-      "properties": {          
-          "id": {
+      "properties": {
+        "id": {
           "readOnly": true,
           "type": "string",
           "description": "The resource id of the access policy."
         },
-          "name": {
+        "name": {
           "readOnly": true,
           "type": "string",
           "description": "The resource name of the access policy."
         },
-          "type": {
+        "type": {
           "readOnly": true,
           "type": "string",
           "description": "The resource name of the access policy."
         },
-          "location": {
+        "location": {
           "readOnly": true,
           "type": "string",
-          "description": "The resource type of the the access policy."
+          "description": "The resource type of the access policy."
         },
         "properties": {
           "$ref": "#/definitions/VaultAccessPolicyProperties",
@@ -1218,7 +1222,7 @@
         "name",
         "type"
       ],
-      "description": "The parameters used to check the availabity of the vault name."
+      "description": "The parameters used to check the availability of the vault name."
     },
     "CheckNameAvailabilityResult": {
       "properties": {

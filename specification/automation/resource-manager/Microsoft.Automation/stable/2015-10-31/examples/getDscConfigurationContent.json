@@ -1,15 +1,17 @@
 {
-    "parameters": {
-        "subscriptionId": "subid",
-        "resourceGroupName": "rg",
-        "automationAccountName": "myAutomationAccount33",
-        "configurationName": "TemplateBasic",
-        "api-version": "2015-10-31"
-    },
-    "responses": {
-        "200": {
-            "headers": {},
-            "body": "\tconfiguration TemplateWithConfigData{\r\n    <#\r\n        .DESCRIPTION\r\n        DSC Coniguration that uses ConfigData file\r\n\r\n        .EXAMPLE\r\n        TemplateWithConfigData -outpath c:\\dsc\\\r\n\r\n        .NOTES\r\n        This configuration requires the corresponding configdata file\r\n    #>\r\n\r\n    Import-DscResource -ModuleName 'PSDesiredStateConfiguration', @{ModuleName='xPSDesiredStateConfiguration';ModuleVersion='5.0.0.0'\r\n                    }\r\n    \r\n    Node $AllNodes.NodeName{\r\n        # WindowsOptionalFeature is compatible with the Nano Server installation option\r\n        File testfile{\r\n            Ensure          = 'Present'\r\n            DestinationPath = $Data.Path\r\n            Contents        = $Data.Contents\r\n                        }\r\n        xArchive testarchive{\r\n            Ensure          = 'Present'\r\n            Destination     = $Data.Destination\r\n            Path            = (Get-ChildItem $Data.Path).ParentFolder\r\n                        }\r\n                    }\r\n                }\r\n\r\nconfiguration TemplateBasic{\r\n    <#\r\n        .DESCRIPTION\r\n        Basic configuration template\r\n\r\n        .EXAMPLE\r\n        TemplateBasic -outpath c:\\dsc\\\r\n\r\n        .NOTES\r\n        This is the most basic configuration and does not take parameters or configdata\r\n    #>\r\n\r\n    Import-DscResource -module 'PSDesiredStateConfiguration'\r\n    \r\n    Node localhost{\r\n        # WindowsOptionalFeature is compatible with the Nano Server installation option\r\n        File testfile{\r\n            Ensure          = 'Present'\r\n            DestinationPath = 'c:\\filetoo.txt'\r\n            Contents        = 'this is some text too'\r\n                        }\r\n                    }\r\n                }"
-        }
+  "parameters": {
+    "subscriptionId": "subid",
+    "resourceGroupName": "rg",
+    "automationAccountName": "myAutomationAccount33",
+    "configurationName": "ConfigName",
+    "api-version": "2015-10-31"
+  },
+  "responses": {
+    "200": {
+      "headers": {
+        "Content-Type": "text/powershell"
+      },
+      "body": "Configuration ConfigName {\r\n    Node localhost {\r\n                               WindowsFeature IIS {\r\n                               Name = \"Web-Server\";\r\n            Ensure = \"Present\"\r\n        }\r\n    }\r\n}"
     }
+  }
 }

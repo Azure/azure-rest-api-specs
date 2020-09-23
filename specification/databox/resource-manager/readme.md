@@ -26,14 +26,36 @@ These are the global settings for the DataBox API.
 
 ``` yaml
 openapi-type: arm
-
-input-file:
-- Microsoft.DataBox\preview\2018-01-01\databox.json
-directive:
-  - suppress:
-    - R2016 #to suppress (PatchBodyParametersSchema/R2016/RPCViolation)
-    - R2062 #to suppress (XmsResourceInPutResponse/R2062/RPCViolation)
+tag: package-2020-04
 ```
+
+### Tag: package-2020-04
+
+These settings apply only when `--tag=package-2020-04` is specified on the command line.
+
+``` yaml $(tag) == 'package-2020-04'
+input-file:
+- Microsoft.DataBox/stable/2020-04-01/databox.json
+```
+
+### Tag: package-2019-09
+
+These settings apply only when `--tag=package-2019-09` is specified on the command line.
+
+``` yaml $(tag) == 'package-2019-09'
+input-file:
+- Microsoft.DataBox/stable/2019-09-01/databox.json
+```
+
+### Tag: package-2018-01
+
+These settings apply only when `--tag=package-2018-01` is specified on the command line.
+
+``` yaml $(tag) == 'package-2018-01'
+input-file:
+- Microsoft.DataBox/stable/2018-01-01/databox.json
+```
+
 ---
 # Code Generation
 
@@ -45,10 +67,22 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
-  - repo: azure-sdk-for-go
+  - repo: azure-sdk-for-net
+  - repo: azure-sdk-for-python
+    after_scripts:
+      - python ./scripts/multiapi_init_gen.py azure-mgmt-databox
+  - repo: azure-sdk-for-js
   - repo: azure-sdk-for-node
+  - repo: azure-sdk-for-go
+  - repo: azure-sdk-for-java
+  - repo: azure-sdk-for-ruby
+    after_scripts:
+      - bundle install && rake arm:regen_all_profiles['azure_mgmt_databox']
+  - repo: azure-cli-extensions
+  - repo: azure-resource-manager-schemas
+    after_scripts:
+      - node sdkauto_afterscript.js databox/resource-manager
 ```
-
 
 ## C#
 
@@ -60,35 +94,22 @@ csharp:
   azure-arm: true
   license-header: MICROSOFT_MIT_NO_VERSION
   namespace: Microsoft.Azure.Management.DataBox
-  output-folder: $(csharp-sdks-folder)/DataBox/Management.DataBox/Generated
+  payload-flattening-threshold: 2
+  output-folder: $(csharp-sdks-folder)/databox/Microsoft.Azure.Management.DataBox/src/Generated
   clear-output-folder: true
 ```
 
+## Python
+
+See configuration in [readme.python.md](./readme.python.md)
+
+## Ruby
+
+See configuration in [readme.ruby.md](./readme.ruby.md)
 
 ## Go
 
-These settings apply only when `--go` is specified on the command line.
-
-``` yaml $(go)
-go:
-  license-header: MICROSOFT_APACHE_NO_VERSION
-  namespace: databox
-  clear-output-folder: true
-```
-
-### Go multi-api
-
-``` yaml $(go) && $(multiapi)
-```
-
-### Tag: package-2017-06 and go
-
-Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
-
-``` yaml $(go)
-output-folder: $(go-sdk-folder)/services/databox/mgmt/2018-01-01/databox
-```
-
+See configuration in [readme.go.md](./readme.go.md)
 
 ## Java
 
@@ -102,5 +123,57 @@ java:
   namespace: com.microsoft.azure.management.databox
   license-header: MICROSOFT_MIT_NO_CODEGEN
   payload-flattening-threshold: 1
-  output-folder: $(azure-libraries-for-java-folder)/databox
+  output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-databox
 ```
+
+### Java multi-api
+
+``` yaml $(java) && $(multiapi)
+batch:
+  - tag: package-2018-01
+  - tag: package-2019-09
+  - tag: package-2020-04
+```
+
+### Tag: package-2018-01 and java
+
+These settings apply only when `--tag=package-2018-01 --java` is specified on the command line.
+Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-2018-01' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.databox.v2018_01_01
+  output-folder: $(azure-libraries-for-java-folder)/sdk/databox/mgmt-v2018_01_01
+regenerate-manager: true
+generate-interface: true
+```
+
+### Tag: package-2019-09 and java
+
+These settings apply only when `--tag=package-2019-09-java` is specified on the command line.
+Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-2019-09' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.databox.v2019_09-01
+  output-folder: $(azure-libraries-for-java-folder)/sdk/databox/mgmt-v2019_09_01
+regenerate-manager: true
+generate-interface: true
+```
+
+### Tag: package-2020-04 and java
+
+These settings apply only when `--tag=package-2020-04-java` is specified on the command line.
+Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-2020-04' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.databox.v2020_04-01
+  output-folder: $(azure-libraries-for-java-folder)/sdk/databox/mgmt-v2020_04_01
+regenerate-manager: true
+generate-interface: true
+```
+## AzureResourceSchema
+
+See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
+

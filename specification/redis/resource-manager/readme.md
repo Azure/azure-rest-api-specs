@@ -4,10 +4,10 @@
 
 This is the AutoRest configuration file for Redis.
 
-
-
 ---
+
 ## Getting Started
+
 To build the SDK for Redis, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
 
 > `autorest`
@@ -15,18 +15,28 @@ To build the SDK for Redis, simply [Install AutoRest](https://aka.ms/autorest/in
 To see additional help and options, run:
 
 > `autorest --help`
+
 ---
 
 ## Configuration
 
-
-
 ### Basic Information
+
 These are the global settings for the Redis API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2018-03
+tag: package-2019-07-preview
+```
+
+
+### Tag: package-2019-07-preview
+
+These settings apply only when `--tag=package-2019-07-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2019-07-preview'
+input-file:
+  - Microsoft.Cache/preview/2019-07-01/redis.json
 ```
 
 ### Tag: package-2018-03
@@ -38,7 +48,6 @@ input-file:
 - Microsoft.Cache/stable/2018-03-01/redis.json
 ```
 
-
 ### Tag: package-2017-10
 
 These settings apply only when `--tag=package-2017-10` is specified on the command line.
@@ -48,7 +57,6 @@ input-file:
 - Microsoft.Cache/stable/2017-10-01/redis.json
 ```
 
-
 ### Tag: package-2017-02
 
 These settings apply only when `--tag=package-2017-02` is specified on the command line.
@@ -57,7 +65,6 @@ These settings apply only when `--tag=package-2017-02` is specified on the comma
 input-file:
 - Microsoft.Cache/stable/2017-02-01/redis.json
 ```
-
 
 ### Tag: package-2016-04
 
@@ -77,10 +84,9 @@ input-file:
 - Microsoft.Cache/stable/2015-08-01/redis.json
 ```
 
-
 ---
-# Code Generation
 
+# Code Generation
 
 ## Swagger to SDK
 
@@ -89,15 +95,19 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
+  - repo: azure-sdk-for-net
   - repo: azure-sdk-for-python
-  - repo: azure-libraries-for-java
+  - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
+  - repo: azure-sdk-for-js
   - repo: azure-sdk-for-node
   - repo: azure-sdk-for-ruby
     after_scripts:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_redis']
+  - repo: azure-resource-manager-schemas
+    after_scripts:
+      - node sdkauto_afterscript.js redis/resource-manager
 ```
-
 
 ## C#
 
@@ -110,7 +120,7 @@ csharp:
   azure-arm: true
   license-header: MICROSOFT_MIT_NO_VERSION
   namespace: Microsoft.Azure.Management.Redis
-  output-folder: $(csharp-sdks-folder)/RedisCache/Management.Redis/Generated
+  output-folder: $(csharp-sdks-folder)/redis/Microsoft.Azure.Management.Redis/src/Generated
   clear-output-folder: true
 ```
 
@@ -131,87 +141,22 @@ python:
   package-version: 5.0.0
   clear-output-folder: true
 ```
+
 ``` yaml $(python) && $(python-mode) == 'update'
 python:
   no-namespace-folders: true
-  output-folder: $(python-sdks-folder)/azure-mgmt-redis/azure/mgmt/redis
+  output-folder: $(python-sdks-folder)/redis/azure-mgmt-redis/azure/mgmt/redis
 ```
+
 ``` yaml $(python) && $(python-mode) == 'create'
 python:
   basic-setup-py: true
-  output-folder: $(python-sdks-folder)/azure-mgmt-redis
+  output-folder: $(python-sdks-folder)/redis/azure-mgmt-redis
 ```
-
 
 ## Go
 
-These settings apply only when `--go` is specified on the command line.
-
-``` yaml $(go)
-go:
-  license-header: MICROSOFT_APACHE_NO_VERSION
-  namespace: redis
-  clear-output-folder: true
-```
-
-### Go multi-api
-
-``` yaml $(go) && $(multiapi)
-batch:
-  - tag: package-2018-03
-  - tag: package-2017-10
-  - tag: package-2017-02
-  - tag: package-2016-04
-  - tag: package-2015-08
-```
-
-### Tag: package-2018-03 and go
-
-These settings apply only when `--tag=package-2018-03 --go` is specified on the command line.
-Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
-
-``` yaml $(tag) == 'package-2018-03' && $(go)
-output-folder: $(go-sdk-folder)/services/redis/mgmt/2018-03-01/redis
-```
-
-
-### Tag: package-2017-10 and go
-
-These settings apply only when `--tag=package-2017-10 --go` is specified on the command line.
-Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
-
-``` yaml $(tag) == 'package-2017-10' && $(go)
-output-folder: $(go-sdk-folder)/services/redis/mgmt/2017-10-01/redis
-```
-
-
-### Tag: package-2017-02 and go
-
-These settings apply only when `--tag=package-2017-02 --go` is specified on the command line.
-Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
-
-``` yaml $(tag) == 'package-2017-02' && $(go)
-output-folder: $(go-sdk-folder)/services/redis/mgmt/2017-02-01/redis
-```
-
-### Tag: package-2016-04 and go
-
-These settings apply only when `--tag=package-2016-04 --go` is specified on the command line.
-Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
-
-``` yaml $(tag) == 'package-2016-04' && $(go)
-output-folder: $(go-sdk-folder)/services/redis/mgmt/2016-04-01/redis
-```
-
-### Tag: package-2015-08 and go
-
-These settings apply only when `--tag=package-2015-08 --go` is specified on the command line.
-Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
-
-``` yaml $(tag) == 'package-2015-08' && $(go)
-output-folder: $(go-sdk-folder)/services/redis/mgmt/2015-08-01/redis
-```
-
+See configuration in [readme.go.md](./readme.go.md)
 
 ## Java
 
@@ -219,13 +164,46 @@ These settings apply only when `--java` is specified on the command line.
 Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-libraries-for-java clone>`.
 
 ``` yaml $(java)
+azure-arm: true
+fluent: true
+namespace: com.microsoft.azure.management.redis
+license-header: MICROSOFT_MIT_NO_CODEGEN
+payload-flattening-threshold: 1
+output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-redis
+```
+
+### Java multi-api
+
+``` yaml $(java) && $(multiapi)
+batch:
+  - tag: package-2018-03
+  - tag: package-2017-10
+```
+
+### Tag: package-2018-03 and java
+
+These settings apply only when `--tag=package-2018-03 --java` is specified on the command line.
+Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-2018-03' && $(java) && $(multiapi)
 java:
-  azure-arm: true
-  fluent: true
-  namespace: com.microsoft.azure.management.redis
-  license-header: MICROSOFT_MIT_NO_CODEGEN
-  payload-flattening-threshold: 1
-  output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-redis
+  namespace: com.microsoft.azure.management.redis.v2018_03_01
+  output-folder: $(azure-libraries-for-java-folder)/sdk/redis/mgmt-v2018_03_01
+regenerate-manager: true
+generate-interface: true
+```
+
+### Tag: package-2017-10 and java
+
+These settings apply only when `--tag=package-2017-10 --java` is specified on the command line.
+Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-2017-10' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.redis.v2017_10_01
+  output-folder: $(azure-libraries-for-java-folder)/sdk/redis/mgmt-v2017_10_01
+regenerate-manager: true
+generate-interface: true
 ```
 
 # Validation
@@ -257,3 +235,8 @@ directive:
     from: redis.json
     reason: This is false positive, 'linkedServers' is not a tracked resource.
 ```
+
+## AzureResourceSchema
+
+See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
+

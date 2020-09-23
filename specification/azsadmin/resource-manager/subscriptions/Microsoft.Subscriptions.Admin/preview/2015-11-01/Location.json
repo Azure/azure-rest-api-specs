@@ -1,225 +1,337 @@
 {
-    "swagger": "2.0",
-    "info": {
-        "version": "2015-11-01",
-        "title": "SubscriptionsManagementClient",
-        "description": "The Admin Subscriptions Management Client."
-    },
-    "host": "adminmanagement.local.azurestack.external",
-    "schemes": [
-        "https"
-    ],
-    "produces": [
-        "application/json"
-    ],
-    "consumes": [
-        "application/json"
-    ],
-    "paths": {
-        "/subscriptions/{subscriptionId}/providers/Microsoft.Subscriptions.Admin/locations": {
-            "get": {
-                "x-ms-examples": {
-                    "Get a list of all AzureStack location.": {
-                        "$ref": "./examples/Location/List.json"
-                    }
-                },
-                "description": "Get a list of all AzureStack location.",
-                "tags": [
-                    "Locations"
-                ],
-                "operationId": "Locations_List",
-                "parameters": [
-                    {
-                        "$ref": "Subscriptions.json#/parameters/SubscriptionIdParameter"
-                    },
-                    {
-                        "$ref": "Subscriptions.json#/parameters/ApiVersionParameter"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "$ref": "#/definitions/LocationList"
-                        }
-                    }
-               },
-               "x-ms-pageable": {
-                   "nextLinkName": "nextLink"
-               }               
-            }
+  "swagger": "2.0",
+  "info": {
+    "version": "2015-11-01",
+    "title": "SubscriptionsManagementClient",
+    "description": "The Admin Subscriptions Management Client."
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Subscriptions.Admin/locations": {
+      "get": {
+        "x-ms-examples": {
+          "Get a list of all AzureStack location.": {
+            "$ref": "./examples/Location/List.json"
+          }
         },
-        "/subscriptions/{subscriptionId}/providers/Microsoft.Subscriptions.Admin/locations/{location}": {
-            "get": {
-                "x-ms-examples": {
-                    "Get the specified location.": {
-                        "$ref": "./examples/Location/Get.json"
-                    }
-                },
-                "description": "Get the specified location.",
-                "tags": [
-                    "Locations"
-                ],
-                "operationId": "Locations_Get",
-                "parameters": [
-                    {
-                        "$ref": "Subscriptions.json#/parameters/SubscriptionIdParameter"
-                    },
-                    {
-                        "$ref": "Subscriptions.json#/parameters/LocationParameter"
-                    },
-                    {
-                        "$ref": "Subscriptions.json#/parameters/ApiVersionParameter"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "$ref": "#/definitions/Location"
-                        }
-                    }
-                }
-            },
-            "put": {
-                "x-ms-examples": {
-                    "Updates the specified location.": {
-                        "$ref": "./examples/Location/Put.json"
-                    }
-                },
-                "description": "Updates the specified location.",
-                "tags": [
-                    "Locations"
-                ],
-                "operationId": "Locations_CreateOrUpdate",
-                "parameters": [
-                    {
-                        "$ref": "Subscriptions.json#/parameters/SubscriptionIdParameter"
-                    },
-                    {
-                        "$ref": "Subscriptions.json#/parameters/LocationParameter"
-                    },
-                    {
-                        "$ref": "Subscriptions.json#/parameters/ApiVersionParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/NewLocationParameter"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "$ref": "#/definitions/Location"
-                        }
-                    }
-                }
-            },
-            "delete": {
-                "x-ms-examples": {
-                    "Deletes the specified location.": {
-                        "$ref": "./examples/Location/Delete.json"
-                    }
-                },
-                "description": "Deletes the specified location.",
-                "tags": [
-                    "Locations"
-                ],
-                "operationId": "Locations_Delete",
-                "parameters": [
-                    {
-                        "$ref": "Subscriptions.json#/parameters/SubscriptionIdParameter"
-                    },
-                    {
-                        "$ref": "Subscriptions.json#/parameters/LocationParameter"
-                    },
-                    {
-                        "$ref": "Subscriptions.json#/parameters/ApiVersionParameter"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK"
-                    },
-                    "204": {
-                        "description": "No Content"
-                    }                   
-                }
-            }
-        }
-    },
-    "definitions": {
-        "Location": {
-            "description": "Contains information about a geographical location where resource providers can be deployed.",
-            "type": "object",
-            "properties": {
-                "displayName": {
-                    "description": "Display name of the location.",
-                    "type": "string"
-                },
-                "id": {
-                    "description": "Location identifier.",
-                    "type": "string"
-                },
-                "latitude": {
-                    "description": "Latitude of the location.",
-                    "type": "string"
-                },
-                "longitude": {
-                    "description": "Longitude of the location.",
-                    "type": "string"
-                },
-                "name": {
-                    "description": "Location name.",
-                    "type": "string"
-                }
-            }
-        },
-        "LocationList": {
-            "description": "List of locations.",
-            "properties": {
-                "value": {
-                    "description": "List of locations.",
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/Location"
-                    }
-                },
-                "nextLink": {
-                    "description": "URI to next page.",
-                    "type": "string"
-                }
-            }
-        }
-    },
-    "parameters": {
-        "NewLocationParameter": {
-            "description": "The new location",
-            "name": "newLocation",
-            "required": true,
-            "in": "body",
+        "description": "Get a list of all AzureStack location.",
+        "tags": [
+          "Locations"
+        ],
+        "operationId": "Locations_List",
+        "parameters": [
+          {
+            "$ref": "Subscriptions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "Subscriptions.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
             "schema": {
-                "$ref": "#/definitions/Location"
-            },
-            "x-ms-parameter-location": "method"
-        }
-    },
-    "securityDefinitions": {
-        "azure_auth": {
-            "type": "oauth2",
-            "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
-            "flow": "implicit",
-            "description": "Azure Active Directory OAuth2 flow",
-            "scopes": {
-                "user_impersonation": "impersonate your user account"
+              "$ref": "#/definitions/LocationList"
             }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
+      }
     },
-    "security": [
-        {
-            "azure_auth": [
-                "user_impersonation"
-            ]
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Subscriptions.Admin/locations/{location}": {
+      "get": {
+        "x-ms-examples": {
+          "Get the specified location.": {
+            "$ref": "./examples/Location/Get.json"
+          }
+        },
+        "description": "Get the specified location.",
+        "tags": [
+          "Locations"
+        ],
+        "operationId": "Locations_Get",
+        "parameters": [
+          {
+            "$ref": "Subscriptions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "Subscriptions.json#/parameters/LocationParameter"
+          },
+          {
+            "$ref": "Subscriptions.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Location"
+            }
+          }
         }
-    ]
+      },
+      "put": {
+        "x-ms-examples": {
+          "Updates the specified location.": {
+            "$ref": "./examples/Location/Put.json"
+          }
+        },
+        "description": "Updates the specified location.",
+        "tags": [
+          "Locations"
+        ],
+        "operationId": "Locations_CreateOrUpdate",
+        "parameters": [
+          {
+            "$ref": "Subscriptions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "Subscriptions.json#/parameters/LocationParameter"
+          },
+          {
+            "$ref": "Subscriptions.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/NewLocationParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Location"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Subscriptions.Admin/locations/{location}/operationsStatus/{operationsStatusName}": {
+      "get": {
+        "x-ms-examples": {
+          "Get the specified operation status.": {
+            "$ref": "./examples/Location/GetOperationsStatus.json"
+          }
+        },
+        "description": "Get the operation status.",
+        "tags": [
+          "Locations"
+        ],
+        "operationId": "Locations_GetOperationsStatus",
+        "parameters": [
+          {
+            "$ref": "Subscriptions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "Subscriptions.json#/parameters/LocationParameter"
+          },
+          {
+            "$ref": "Subscriptions.json#/parameters/OperationsStatusParameter"
+          },
+          {
+            "$ref": "Subscriptions.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/OperationsStatus"
+            }
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "204": {
+            "description": "Not Content"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Location": {
+      "description": "Contains information about a geographical location where resource providers can be deployed.",
+      "type": "object",
+      "properties": {
+        "displayName": {
+          "description": "Display name of the location.",
+          "type": "string"
+        },
+        "id": {
+          "description": "Location identifier.",
+          "type": "string"
+        },
+        "latitude": {
+          "description": "Latitude of the location.",
+          "type": "string"
+        },
+        "longitude": {
+          "description": "Longitude of the location.",
+          "type": "string"
+        },
+        "name": {
+          "description": "Location name.",
+          "type": "string"
+        }
+      }
+    },
+    "LocationList": {
+      "description": "List of locations.",
+      "properties": {
+        "value": {
+          "description": "List of locations.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Location"
+          }
+        },
+        "nextLink": {
+          "description": "URI to next page.",
+          "type": "string"
+        }
+      }
+    },
+    "OperationsStatus": {
+      "description": "A long running operation status.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "The operation status identifier.",
+          "$ref": "#/definitions/OperationsStatusIdentifier"
+        },
+        "status": {
+          "description": "The status of the operation.",
+          "type": "string"
+        },
+        "startTime": {
+          "description": "The start time of the operation.",
+          "type": "string",
+          "format": "date-time"
+        },
+        "endTime": {
+          "description": "The end time of the operation.",
+          "type": "string",
+          "format": "date-time"
+        },
+        "percentComplete": {
+          "description": "The completion percentage of the operation.",
+          "type": "number"
+        },
+        "properties": {
+          "description": "The internal operation properties.",
+          "type": "object"
+        },
+        "error": {
+          "description": "The operation error.",
+          "$ref": "#/definitions/ExtendedErrorInfo"
+        },
+        "retryAfter": {
+          "description": "The amount of time clients should wait..",
+          "type": "string"
+        },
+        "terminalHttpStatusCode": {
+          "description": "The terminal http status code for the operation.",
+          "type": "string"
+        },
+        "responseContent": {
+          "description": "The content of the response.",
+          "type": "object"
+        }
+      }
+    },
+    "OperationsStatusIdentifier": {
+      "description": "The admin offer identifier for the location wide SubscriptionsAdminResourceTypes.OperationsStatus resource type.",
+      "properties": {
+        "location": {
+          "description": "The location of the operations status.",
+          "type": "string"
+        },
+        "name": {
+          "description": "The name of the operations status.",
+          "type": "string"
+        },
+        "subscriptionId": {
+          "description": "The subscription identifier..",
+          "type": "string"
+        }
+      }
+    },
+    "ExtendedErrorInfo": {
+      "description": "The extended error information.",
+      "properties": {
+        "code": {
+          "description": "The error code.",
+          "type": "string"
+        },
+        "message": {
+          "description": "The error message.",
+          "type": "string"
+        },
+        "details": {
+          "description": "The detailed error message details.",
+          "$ref": "#/definitions/ExtendedErrorInfoList"
+        }
+      }
+    },
+    "ExtendedErrorInfoList": {
+      "description": "List of the extended error information.",
+      "properties": {
+        "value": {
+          "description": "List of the extended error information.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ExtendedErrorInfo"
+          }
+        },
+        "nextLink": {
+          "description": "URI to next page.",
+          "type": "string"
+        }
+      }
+    }
+  },
+  "parameters": {
+    "NewLocationParameter": {
+      "description": "The new location",
+      "name": "newLocation",
+      "required": true,
+      "in": "body",
+      "schema": {
+        "$ref": "#/definitions/Location"
+      },
+      "x-ms-parameter-location": "method"
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ]
 }

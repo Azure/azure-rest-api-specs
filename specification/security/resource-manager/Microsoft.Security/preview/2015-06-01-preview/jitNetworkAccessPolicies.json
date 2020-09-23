@@ -1,0 +1,770 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Security Center",
+    "description": "API spec for Microsoft.Security (Azure Security Center) resource provider",
+    "version": "2015-06-01-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Security/jitNetworkAccessPolicies": {
+      "get": {
+        "x-ms-examples": {
+          "Get JIT network access policies on a subscription": {
+            "$ref": "./examples/JitNetworkAccessPolicies/GetJitNetworkAccessPoliciesSubscription_example.json"
+          }
+        },
+        "tags": [
+          "JitNetworkAccessPolicies"
+        ],
+        "description": "Policies for protecting resources using Just-in-Time access control.",
+        "operationId": "JitNetworkAccessPolicies_List",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/JitNetworkAccessPoliciesList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Security/locations/{ascLocation}/jitNetworkAccessPolicies": {
+      "get": {
+        "x-ms-examples": {
+          "Get JIT network access policies on a subscription from a security data location": {
+            "$ref": "./examples/JitNetworkAccessPolicies/GetJitNetworkAccessPoliciesSubscriptionLocation_example.json"
+          }
+        },
+        "tags": [
+          "JitNetworkAccessPolicies"
+        ],
+        "description": "Policies for protecting resources using Just-in-Time access control for the subscription, location",
+        "operationId": "JitNetworkAccessPolicies_ListByRegion",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/AscLocation"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/JitNetworkAccessPoliciesList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/jitNetworkAccessPolicies": {
+      "get": {
+        "x-ms-examples": {
+          "Get JIT network access policies on a resource group": {
+            "$ref": "./examples/JitNetworkAccessPolicies/GetJitNetworkAccessPoliciesResourceGroup_example.json"
+          }
+        },
+        "tags": [
+          "JitNetworkAccessPolicies"
+        ],
+        "description": "Policies for protecting resources using Just-in-Time access control for the subscription, location",
+        "operationId": "JitNetworkAccessPolicies_ListByResourceGroup",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/JitNetworkAccessPoliciesList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/locations/{ascLocation}/jitNetworkAccessPolicies": {
+      "get": {
+        "x-ms-examples": {
+          "Get JIT network access policies on a resource group from a security data location": {
+            "$ref": "./examples/JitNetworkAccessPolicies/GetJitNetworkAccessPoliciesResourceGroupLocation_example.json"
+          }
+        },
+        "tags": [
+          "JitNetworkAccessPolicies"
+        ],
+        "description": "Policies for protecting resources using Just-in-Time access control for the subscription, location",
+        "operationId": "JitNetworkAccessPolicies_ListByResourceGroupAndRegion",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/AscLocation"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/JitNetworkAccessPoliciesList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/locations/{ascLocation}/jitNetworkAccessPolicies/{jitNetworkAccessPolicyName}": {
+      "get": {
+        "x-ms-examples": {
+          "Get JIT network access policy": {
+            "$ref": "./examples/JitNetworkAccessPolicies/GetJitNetworkAccessPolicy_example.json"
+          }
+        },
+        "tags": [
+          "JitNetworkAccessPolicies"
+        ],
+        "description": "Policies for protecting resources using Just-in-Time access control for the subscription, location",
+        "operationId": "JitNetworkAccessPolicies_Get",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/AscLocation"
+          },
+          {
+            "$ref": "#/parameters/JitNetworkAccessPolicyName"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/JitNetworkAccessPolicy"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "put": {
+        "x-ms-examples": {
+          "Create JIT network access policy": {
+            "$ref": "./examples/JitNetworkAccessPolicies/CreateJitNetworkAccessPolicy_example.json"
+          }
+        },
+        "tags": [
+          "JitNetworkAccessPolicies"
+        ],
+        "description": "Create a policy for protecting resources using Just-in-Time access control",
+        "operationId": "JitNetworkAccessPolicies_CreateOrUpdate",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/AscLocation"
+          },
+          {
+            "$ref": "#/parameters/JitNetworkAccessPolicyName"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/JitNetworkAccessPolicy"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/JitNetworkAccessPolicy"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "delete": {
+        "x-ms-examples": {
+          "Delete a JIT network access policy": {
+            "$ref": "./examples/JitNetworkAccessPolicies/DeleteJitNetworkAccessPolicy_example.json"
+          }
+        },
+        "tags": [
+          "JitNetworkAccessPolicies"
+        ],
+        "description": "Delete a Just-in-Time access control policy.",
+        "operationId": "JitNetworkAccessPolicies_Delete",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/AscLocation"
+          },
+          {
+            "$ref": "#/parameters/JitNetworkAccessPolicyName"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - Resource was deleted"
+          },
+          "204": {
+            "description": "No Content - Resource does not exist"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/locations/{ascLocation}/jitNetworkAccessPolicies/{jitNetworkAccessPolicyName}/{jitNetworkAccessPolicyInitiateType}": {
+      "post": {
+        "x-ms-examples": {
+          "Initiate an action on a JIT network access policy": {
+            "$ref": "./examples/JitNetworkAccessPolicies/InitiateJitNetworkAccessPolicy_example.json"
+          }
+        },
+        "tags": [
+          "JitNetworkAccessPolicies"
+        ],
+        "description": "Initiate a JIT access from a specific Just-in-Time policy configuration.",
+        "operationId": "JitNetworkAccessPolicies_Initiate",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/AscLocation"
+          },
+          {
+            "$ref": "#/parameters/JitNetworkAccessPolicyName"
+          },
+          {
+            "$ref": "#/parameters/JitNetworkAccessPolicyInitiateType"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/JitNetworkAccessPolicyInitiateRequest"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted",
+            "schema": {
+              "$ref": "#/definitions/JitNetworkAccessRequest"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "JitNetworkAccessPoliciesList": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/JitNetworkAccessPolicy"
+          }
+        },
+        "nextLink": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The URI to fetch the next page."
+        }
+      }
+    },
+    "JitNetworkAccessPolicy": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/JitNetworkAccessPolicyProperties"
+        }
+      },
+      "required": [
+        "properties"
+      ],
+      "allOf": [
+        {
+          "$ref": "../../../common/v1/types.json#/definitions/Resource"
+        },
+        {
+          "$ref": "../../../common/v1/types.json#/definitions/Kind"
+        },
+        {
+          "$ref": "../../../common/v1/types.json#/definitions/Location"
+        }
+      ]
+    },
+    "JitNetworkAccessPolicyProperties": {
+      "type": "object",
+      "properties": {
+        "virtualMachines": {
+          "type": "array",
+          "description": "Configurations for Microsoft.Compute/virtualMachines resource type.",
+          "items": {
+            "$ref": "#/definitions/JitNetworkAccessPolicyVirtualMachine"
+          }
+        },
+        "requests": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/JitNetworkAccessRequest"
+          }
+        },
+        "provisioningState": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Gets the provisioning state of the Just-in-Time policy."
+        }
+      },
+      "required": [
+        "virtualMachines"
+      ]
+    },
+    "JitNetworkAccessPolicyVirtualMachine": {
+      "type": "object",
+      "required": [
+        "id",
+        "ports"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Resource ID of the virtual machine that is linked to this policy"
+        },
+        "ports": {
+          "type": "array",
+          "description": "Port configurations for the virtual machine",
+          "items": {
+            "$ref": "#/definitions/JitNetworkAccessPortRule"
+          }
+        },
+        "publicIpAddress": {
+          "type": "string",
+          "description": "Public IP address of the Azure Firewall that is linked to this policy, if applicable"
+        }
+      }
+    },
+    "JitNetworkAccessPortRule": {
+      "type": "object",
+      "properties": {
+        "number": {
+          "$ref": "#/definitions/PortNumber"
+        },
+        "protocol": {
+          "type": "string",
+          "enum": [
+            "TCP",
+            "UDP",
+            "*"
+          ],
+          "x-ms-enum": {
+            "name": "protocol",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "TCP"
+              },
+              {
+                "value": "UDP"
+              },
+              {
+                "value": "*",
+                "name": "All"
+              }
+            ]
+          }
+        },
+        "allowedSourceAddressPrefix": {
+          "type": "string",
+          "description": "Mutually exclusive with the \"allowedSourceAddressPrefixes\" parameter. Should be an IP address or CIDR, for example \"192.168.0.3\" or \"192.168.0.0/16\"."
+        },
+        "allowedSourceAddressPrefixes": {
+          "type": "array",
+          "description": "Mutually exclusive with the \"allowedSourceAddressPrefix\" parameter.",
+          "items": {
+            "type": "string",
+            "description": "IP address or CIDR, for example \"192.168.0.3\" or \"192.168.0.0/16\"."
+          }
+        },
+        "maxRequestAccessDuration": {
+          "type": "string",
+          "description": "Maximum duration requests can be made for. In ISO 8601 duration format. Minimum 5 minutes, maximum 1 day"
+        }
+      },
+      "required": [
+        "maxRequestAccessDuration",
+        "number",
+        "protocol"
+      ]
+    },
+    "JitNetworkAccessRequest": {
+      "type": "object",
+      "properties": {
+        "virtualMachines": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/JitNetworkAccessRequestVirtualMachine"
+          }
+        },
+        "startTimeUtc": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The start time of the request in UTC"
+        },
+        "requestor": {
+          "type": "string",
+          "description": "The identity of the person who made the request"
+        },
+        "justification": {
+          "type": "string",
+          "description": "The justification for making the initiate request"
+        }
+      },
+      "required": [
+        "requestor",
+        "startTimeUtc",
+        "virtualMachines"
+      ]
+    },
+    "JitNetworkAccessRequestVirtualMachine": {
+      "type": "object",
+      "required": [
+        "id",
+        "ports"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Resource ID of the virtual machine that is linked to this policy"
+        },
+        "ports": {
+          "type": "array",
+          "description": "The ports that were opened for the virtual machine",
+          "items": {
+            "$ref": "#/definitions/JitNetworkAccessRequestPort"
+          }
+        }
+      }
+    },
+    "JitNetworkAccessRequestPort": {
+      "type": "object",
+      "properties": {
+        "number": {
+          "$ref": "#/definitions/PortNumber"
+        },
+        "allowedSourceAddressPrefix": {
+          "type": "string",
+          "description": "Mutually exclusive with the \"allowedSourceAddressPrefixes\" parameter. Should be an IP address or CIDR, for example \"192.168.0.3\" or \"192.168.0.0/16\"."
+        },
+        "allowedSourceAddressPrefixes": {
+          "type": "array",
+          "description": "Mutually exclusive with the \"allowedSourceAddressPrefix\" parameter.",
+          "items": {
+            "description": "IP address or CIDR, for example \"192.168.0.3\" or \"192.168.0.0/16\".",
+            "type": "string"
+          }
+        },
+        "endTimeUtc": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The date & time at which the request ends in UTC"
+        },
+        "status": {
+          "type": "string",
+          "description": "The status of the port",
+          "enum": [
+            "Revoked",
+            "Initiated"
+          ],
+          "x-ms-enum": {
+            "name": "status",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Revoked"
+              },
+              {
+                "value": "Initiated"
+              }
+            ]
+          }
+        },
+        "statusReason": {
+          "type": "string",
+          "description": "A description of why the `status` has its value",
+          "enum": [
+            "Expired",
+            "UserRequested",
+            "NewerRequestInitiated"
+          ],
+          "x-ms-enum": {
+            "name": "statusReason",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Expired"
+              },
+              {
+                "value": "UserRequested"
+              },
+              {
+                "value": "NewerRequestInitiated"
+              }
+            ]
+          }
+        },
+        "mappedPort": {
+          "type": "integer",
+          "description": "The port which is mapped to this port's `number` in the Azure Firewall, if applicable"
+        }
+      },
+      "required": [
+        "endTimeUtc",
+        "number",
+        "status",
+        "statusReason"
+      ]
+    },
+    "JitNetworkAccessPolicyInitiateRequest": {
+      "type": "object",
+      "properties": {
+        "virtualMachines": {
+          "type": "array",
+          "description": "A list of virtual machines & ports to open access for",
+          "items": {
+            "$ref": "#/definitions/JitNetworkAccessPolicyInitiateVirtualMachine"
+          }
+        },
+        "justification": {
+          "type": "string",
+          "description": "The justification for making the initiate request"
+        }
+      },
+      "required": [
+        "virtualMachines"
+      ]
+    },
+    "JitNetworkAccessPolicyInitiateVirtualMachine": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Resource ID of the virtual machine that is linked to this policy"
+        },
+        "ports": {
+          "type": "array",
+          "description": "The ports to open for the resource with the `id`",
+          "items": {
+            "$ref": "#/definitions/JitNetworkAccessPolicyInitiatePort"
+          }
+        }
+      },
+      "required": [
+        "id",
+        "ports"
+      ]
+    },
+    "JitNetworkAccessPolicyInitiatePort": {
+      "type": "object",
+      "properties": {
+        "number": {
+          "$ref": "#/definitions/PortNumber"
+        },
+        "allowedSourceAddressPrefix": {
+          "type": "string",
+          "description": "Source of the allowed traffic. If omitted, the request will be for the source IP address of the initiate request."
+        },
+        "endTimeUtc": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time to close the request in UTC"
+        }
+      },
+      "required": [
+        "endTimeUtc",
+        "number"
+      ]
+    },
+    "PortNumber": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 65535
+    }
+  },
+  "parameters": {
+    "JitNetworkAccessPolicyName": {
+      "name": "jitNetworkAccessPolicyName",
+      "type": "string",
+      "in": "path",
+      "required": true,
+      "description": "Name of a Just-in-Time access configuration policy.",
+      "x-ms-parameter-location": "method"
+    },
+    "JitNetworkAccessPolicyInitiateType": {
+      "name": "jitNetworkAccessPolicyInitiateType",
+      "type": "string",
+      "in": "path",
+      "required": true,
+      "description": "Type of the action to do on the Just-in-Time access policy.",
+      "enum": [
+        "initiate"
+      ],
+      "x-ms-parameter-location": "method"
+    },
+    "JitNetworkAccessPolicyInitiateRequest": {
+      "name": "body",
+      "in": "body",
+      "required": true,
+      "schema": {
+        "$ref": "#/definitions/JitNetworkAccessPolicyInitiateRequest"
+      },
+      "x-ms-parameter-location": "method"
+    },
+    "JitNetworkAccessPolicy": {
+      "name": "body",
+      "in": "body",
+      "required": true,
+      "schema": {
+        "$ref": "#/definitions/JitNetworkAccessPolicy"
+      },
+      "x-ms-parameter-location": "method"
+    }
+  }
+}

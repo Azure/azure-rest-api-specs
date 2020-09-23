@@ -4,7 +4,7 @@
 
 The underlying APIs are available to users who would like to write their own REST calls. These APIs would allow the user to accept the terms at a subscription, offer and SKU level. These apis are invoked in the context of azure subscription.
 
-----
+---
 ***GetAzureRmMarketplaceTerms***
 
 **Request**
@@ -73,12 +73,17 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
+  - repo: azure-sdk-for-net
   - repo: azure-sdk-for-python
   - repo: azure-sdk-for-go
+  - repo: azure-sdk-for-js
   - repo: azure-sdk-for-node
   - repo: azure-sdk-for-ruby
     after_scripts:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_marketplace_ordering']
+  - repo: azure-resource-manager-schemas
+    after_scripts:
+      - node sdkauto_afterscript.js marketplaceordering/resource-manager
 ```
 
 
@@ -92,7 +97,7 @@ csharp:
   azure-arm: true
   license-header: MICROSOFT_MIT_NO_VERSION
   namespace: Microsoft.Azure.Management.MarketplaceOrdering
-  output-folder: $(csharp-sdks-folder)/Management.MarketplaceOrdering/Generated
+  output-folder: $(csharp-sdks-folder)/marketplaceordering/Microsoft.Azure.Management.MarketplaceOrdering/src/Generated
   clear-output-folder: true
 ```
 
@@ -117,12 +122,12 @@ python:
 ``` yaml $(python) && $(python-mode) == 'update'
 python:
   no-namespace-folders: true
-  output-folder: $(python-sdks-folder)/azure-mgmt-marketplaceordering/azure/mgmt/marketplaceordering
+  output-folder: $(python-sdks-folder)/marketplaceordering/azure-mgmt-marketplaceordering/azure/mgmt/marketplaceordering
 ```
 ``` yaml $(python) && $(python-mode) == 'create'
 python:
   basic-setup-py: true
-  output-folder: $(python-sdks-folder)/azure-mgmt-marketplaceordering
+  output-folder: $(python-sdks-folder)/marketplaceordering/azure-mgmt-marketplaceordering
 ```
 
 Workaround invalid date-time returned by the server.
@@ -154,31 +159,7 @@ directive:
 
 ## Go
 
-These settings apply only when `--go` is specified on the command line.
-
-``` yaml $(go)
-go:
-  license-header: MICROSOFT_APACHE_NO_VERSION
-  namespace: marketplaceordering
-  clear-output-folder: true
-```
-
-### Go multi-api
-
-``` yaml $(go) && $(multiapi)
-batch:
-  - tag: package-2015-06-01
-```
-
-### Tag: package-2015-06-01 and go
-
-These settings apply only when `--tag=package-2015-06-01 --go` is specified on the command line.
-Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
-
-``` yaml $(tag) == 'package-2015-06-01' && $(go)
-output-folder: $(go-sdk-folder)/services/marketplaceordering/mgmt/2015-06-01/marketplaceordering
-```
-
+See configuration in [readme.go.md](./readme.go.md)
 
 ## Java
 
@@ -186,11 +167,37 @@ These settings apply only when `--java` is specified on the command line.
 Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-libraries-for-java clone>`.
 
 ``` yaml $(java)
-java:
-  azure-arm: true
-  fluent: true
-  namespace: com.microsoft.azure.management.marketplaceordering
-  license-header: MICROSOFT_MIT_NO_CODEGEN
-  payload-flattening-threshold: 1
-  output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-marketplaceordering
+azure-arm: true
+fluent: true
+namespace: com.microsoft.azure.management.marketplaceordering
+license-header: MICROSOFT_MIT_NO_CODEGEN
+payload-flattening-threshold: 1
+output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-marketplaceordering
 ```
+
+### Java multi-api
+
+``` yaml $(java) && $(multiapi)
+batch:
+  - tag: package-2015-06-01
+```
+
+### Tag: package-2015-06-01 and java
+
+These settings apply only when `--tag=package-2015-06-01 --java` is specified on the command line.
+Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-2015-06-01' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.marketplaceagreementsapi.v2015_06_01
+  output-folder: $(azure-libraries-for-java-folder)/sdk/marketplaceagreementsapi/mgmt-v2015_06_01
+regenerate-manager: true
+generate-interface: true
+```
+
+
+
+## AzureResourceSchema
+
+See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
+

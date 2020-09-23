@@ -26,9 +26,33 @@ These are the global settings for the ServiceBus API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2017-04
+tag: package-2018-01-preview
 ```
 
+### Tag: package-2018-01-preview
+
+These settings apply only when `--tag=package-2018-01-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2018-01-preview'
+input-file:
+- Microsoft.ServiceBus/preview/2018-01-01-preview/IPFilterRules-preview.json
+- Microsoft.ServiceBus/preview/2018-01-01-preview/namespace-preview.json
+- Microsoft.ServiceBus/preview/2018-01-01-preview/NetworkRuleSet-preview.json
+- Microsoft.ServiceBus/preview/2018-01-01-preview/VirtualNetworkRules-preview.json
+- Microsoft.ServiceBus/preview/2018-01-01-preview/operationlist-preview.json
+- Microsoft.ServiceBus/stable/2017-04-01/AuthorizationRules.json
+- Microsoft.ServiceBus/stable/2017-04-01/CheckNameAvailability.json
+- Microsoft.ServiceBus/stable/2017-04-01/DisasterRecoveryConfig.json
+- Microsoft.ServiceBus/stable/2017-04-01/eventhubs.json
+- Microsoft.ServiceBus/stable/2017-04-01/migrate.json
+- Microsoft.ServiceBus/stable/2017-04-01/migrationconfigs.json
+- Microsoft.ServiceBus/stable/2017-04-01/PremiumMessagingRegions.json
+- Microsoft.ServiceBus/stable/2017-04-01/Queue.json
+- Microsoft.ServiceBus/stable/2017-04-01/sku.json
+- Microsoft.ServiceBus/stable/2017-04-01/subscriptions.json
+- Microsoft.ServiceBus/stable/2017-04-01/topics.json
+- Microsoft.ServiceBus/stable/2017-04-01/Rules.json
+```
 
 ### Tag: package-2017-04
 
@@ -37,7 +61,21 @@ These settings apply only when `--tag=package-2017-04` is specified on the comma
 
 ``` yaml $(tag) == 'package-2017-04'
 input-file:
-- Microsoft.ServiceBus/stable/2017-04-01/servicebus.json
+- Microsoft.ServiceBus/stable/2017-04-01/AuthorizationRules.json
+- Microsoft.ServiceBus/stable/2017-04-01/CheckNameAvailability.json
+- Microsoft.ServiceBus/stable/2017-04-01/DisasterRecoveryConfig.json
+- Microsoft.ServiceBus/stable/2017-04-01/eventhubs.json
+- Microsoft.ServiceBus/stable/2017-04-01/migrate.json
+- Microsoft.ServiceBus/stable/2017-04-01/migrationconfigs.json
+- Microsoft.ServiceBus/stable/2017-04-01/namespaces.json
+- Microsoft.ServiceBus/stable/2017-04-01/networksets.json
+- Microsoft.ServiceBus/stable/2017-04-01/operations.json
+- Microsoft.ServiceBus/stable/2017-04-01/PremiumMessagingRegions.json
+- Microsoft.ServiceBus/stable/2017-04-01/Queue.json
+- Microsoft.ServiceBus/stable/2017-04-01/Rules.json
+- Microsoft.ServiceBus/stable/2017-04-01/sku.json
+- Microsoft.ServiceBus/stable/2017-04-01/subscriptions.json
+- Microsoft.ServiceBus/stable/2017-04-01/topics.json
 ```
 
 Important notes:
@@ -54,7 +92,6 @@ input-file:
 - Microsoft.ServiceBus/stable/2015-08-01/servicebus.json
 ```
 
-
 ---
 # Code Generation
 
@@ -66,13 +103,18 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
+  - repo: azure-sdk-for-net
   - repo: azure-sdk-for-python
-  - repo: azure-libraries-for-java
+  - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
+  - repo: azure-sdk-for-js
   - repo: azure-sdk-for-node
   - repo: azure-sdk-for-ruby
     after_scripts:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_service_bus']
+  - repo: azure-resource-manager-schemas
+    after_scripts:
+      - node sdkauto_afterscript.js servicebus/resource-manager
 ```
 
 
@@ -86,7 +128,7 @@ csharp:
   azure-arm: true
   license-header: MICROSOFT_MIT_NO_VERSION
   namespace: Microsoft.Azure.Management.ServiceBus
-  output-folder: $(csharp-sdks-folder)/ServiceBus/Management.ServiceBus/Generated
+  output-folder: $(csharp-sdks-folder)/servicebus/Microsoft.Azure.Management.ServiceBus/src/Generated
   clear-output-folder: true
 ```
 
@@ -110,65 +152,23 @@ python:
 ``` yaml $(python) && $(python-mode) == 'update'
 python:
   no-namespace-folders: true
-  output-folder: $(python-sdks-folder)/azure-mgmt-servicebus/azure/mgmt/servicebus
+  output-folder: $(python-sdks-folder)/servicebus/azure-mgmt-servicebus/azure/mgmt/servicebus
 ```
 ``` yaml $(python) && $(python-mode) == 'create'
 python:
   basic-setup-py: true
-  output-folder: $(python-sdks-folder)/azure-mgmt-servicebus
+  output-folder: $(python-sdks-folder)/servicebus/azure-mgmt-servicebus
 ```
-
-
 
 ## Go
 
-These settings apply only when `--go` is specified on the command line.
-
-``` yaml $(go)
-go:
-  license-header: MICROSOFT_APACHE_NO_VERSION
-  namespace: servicebus
-  clear-output-folder: true
-```
-
-### Go multi-api
-
-``` yaml $(go) && $(multiapi)
-batch:
-  - tag: package-2017-04
-  - tag: package-2015-08
-```
-
-### Tag: package-2017-04 and go
-
-These settings apply only when `--tag=package-2017-04 --go` is specified on the command line.
-Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
-
-``` yaml $(tag) == 'package-2017-04' && $(go)
-output-folder: $(go-sdk-folder)/services/servicebus/mgmt/2017-04-01/servicebus
-```
-
-### Tag: package-2015-08 and go
-
-These settings apply only when `--tag=package-2015-08 --go` is specified on the command line.
-Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
-
-``` yaml $(tag) == 'package-2015-08' && $(go)
-output-folder: $(go-sdk-folder)/services/servicebus/mgmt/2015-08-01/servicebus
-```
-
+See configuration in [readme.go.md](./readme.go.md)
 
 ## Java
 
-These settings apply only when `--java` is specified on the command line.
-Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-libraries-for-java clone>`.
+See configuration in [readme.java.md](./readme.java.md)
 
-``` yaml $(java)
-java:
-  azure-arm: true
-  fluent: true
-  namespace: com.microsoft.azure.management.servicebus
-  license-header: MICROSOFT_MIT_NO_CODEGEN
-  payload-flattening-threshold: 1
-  output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-servicebus
-```
+## AzureResourceSchema
+
+See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
+

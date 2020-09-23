@@ -1,0 +1,66 @@
+{
+  "parameters": {
+    "subscriptionId": "12345678-1234-1234-1234-123456789101",
+    "resourceGroupName": "rg-example",
+    "ruleName": "webtest-name-example",
+    "api-version": "2018-03-01",
+    "parameters": {
+      "location": "global",
+      "tags": {
+        "hidden-link:/subscriptions/12345678-1234-1234-1234-123456789101/resourcegroups/rg-example/providers/microsoft.insights/components/webtest-name-example": "Resource",
+        "hidden-link:/subscriptions/12345678-1234-1234-1234-123456789101/resourcegroups/rg-example/providers/microsoft.insights/webtests/component-example": "Resource"
+      },
+      "properties": {
+        "description": "Automatically created alert rule for availability test \"component-example\" a",
+        "enabled": true,
+        "severity": 4,
+        "windowSize": "PT15M",
+        "evaluationFrequency": "PT1M",
+        "criteria": {
+          "failedLocationCount": 2,
+          "webTestId": "/subscriptions/12345678-1234-1234-1234-123456789101/resourcegroups/rg-example/providers/microsoft.insights/webtests/component-example",
+          "componentId": "/subscriptions/12345678-1234-1234-1234-123456789101/resourcegroups/rg-example/providers/microsoft.insights/components/webtest-name-example",
+          "odata.type": "Microsoft.Azure.Monitor.WebtestLocationAvailabilityCriteria"
+        },
+        "actions": [],
+        "scopes": [
+          "/subscriptions/12345678-1234-1234-1234-123456789101/resourcegroups/rg-example/providers/microsoft.insights/webtests/component-example",
+          "/subscriptions/12345678-1234-1234-1234-123456789101/resourcegroups/rg-example/providers/microsoft.insights/components/webtest-name-example"
+        ]
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "body": {
+        "location": "global",
+        "type": "Microsoft.Insights/metricAlerts",
+        "name": "webtest-name-example",
+        "id": "/subscriptions/12345678-1234-1234-1234-123456789101/resourcegroups/rg-example/providers/microsoft.insights/metricalerts/webtest-name-example",
+        "tags": {
+          "hidden-link:/subscriptions/12345678-1234-1234-1234-123456789101/resourcegroups/rg-example/providers/microsoft.insights/components/component-example": "Resource",
+          "hidden-link:/subscriptions/12345678-1234-1234-1234-123456789101/resourcegroups/rg-example/providers/microsoft.insights/webtests/webtest-name-example": "Resource"
+        },
+        "properties": {
+          "description": "Automatically created alert rule for availability test \"webtest-name-example\" a",
+          "severity": 4,
+          "enabled": true,
+          "scopes": [
+            "/subscriptions/12345678-1234-1234-1234-123456789101/resourcegroups/rg-example/providers/microsoft.insights/webtests/webtest-name-example",
+            "/subscriptions/12345678-1234-1234-1234-123456789101/resourcegroups/rg-example/providers/microsoft.insights/components/component-example"
+          ],
+          "evaluationFrequency": "PT1M",
+          "windowSize": "PT15M",
+          "criteria": {
+            "webTestId": "/subscriptions/12345678-1234-1234-1234-123456789101/resourcegroups/rg-example/providers/microsoft.insights/webtests/webtest-name-example",
+            "componentId": "/subscriptions/12345678-1234-1234-1234-123456789101/resourcegroups/rg-example/providers/microsoft.insights/components/component-example",
+            "failedLocationCount": 2,
+            "odata.type": "Microsoft.Azure.Monitor.WebtestLocationAvailabilityCriteria"
+          },
+          "actions": []
+        }
+      }
+    }
+  }
+}

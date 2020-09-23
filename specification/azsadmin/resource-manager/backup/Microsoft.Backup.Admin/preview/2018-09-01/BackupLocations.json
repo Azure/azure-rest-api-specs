@@ -1,0 +1,331 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2018-09-01",
+    "title": "BackupManagementClient",
+    "description": "The Admin Backup Management Client."
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Backup.Admin/backupLocations": {
+      "get": {
+        "x-ms-examples": {
+          "Returns the list of backup locations.": {
+            "$ref": "./examples/BackupLocations/List.json"
+          }
+        },
+        "description": "Returns the list of backup locations.",
+        "tags": [
+          "BackupLocations"
+        ],
+        "operationId": "BackupLocations_List",
+        "parameters": [
+          {
+            "$ref": "Backup.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "Backup.json#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "Backup.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "Backup.json#/parameters/TopParameter"
+          },
+          {
+            "$ref": "Backup.json#/parameters/SkipParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/BackupLocationList"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Backup.Admin/backupLocations/{location}": {
+      "get": {
+        "x-ms-examples": {
+          "Returns a specific backup location based on name.": {
+            "$ref": "./examples/BackupLocations/Get.json"
+          }
+        },
+        "description": "Returns a specific backup location based on name.",
+        "tags": [
+          "BackupLocations"
+        ],
+        "operationId": "BackupLocations_Get",
+        "parameters": [
+          {
+            "$ref": "Backup.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "Backup.json#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/BackupLocationParameter"
+          },
+          {
+            "$ref": "Backup.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/BackupLocation"
+            }
+          }
+        }
+      },
+      "put": {
+        "x-ms-examples": {
+          "Update new backup location.": {
+            "$ref": "./examples/BackupLocations/Update.json"
+          }
+        },
+        "description": "Update a backup location.",
+        "tags": [
+          "BackupLocations"
+        ],
+        "operationId": "BackupLocations_Update",
+        "parameters": [
+          {
+            "$ref": "Backup.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "Backup.json#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/BackupLocationParameter"
+          },
+          {
+            "$ref": "Backup.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/BackupLocationObjectParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/BackupLocation"
+            }
+          },
+          "202": {
+            "description": "ACCEPTED",
+            "schema": {
+              "$ref": "#/definitions/BackupLocation"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Backup.Admin/backupLocations/{location}/createBackup": {
+      "post": {
+        "x-ms-examples": {
+          "Back up a specific location.": {
+            "$ref": "./examples/BackupLocations/Backup.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "description": "Back up a specific location.",
+        "tags": [
+          "BackupLocations"
+        ],
+        "operationId": "BackupLocations_CreateBackup",
+        "parameters": [
+          {
+            "$ref": "Backup.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "Backup.json#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/BackupLocationParameter"
+          },
+          {
+            "$ref": "Backup.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "Backups.json#/definitions/Backup"
+            }
+          },
+          "202": {
+            "description": "ACCEPTED",
+            "schema": {
+              "$ref": "Backups.json#/definitions/Backup"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "BackupLocation": {
+      "description": "Information about the backup location.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "description": "Properties of a backup location.",
+          "$ref": "#/definitions/BackupLocationModel",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "Backup.json#/definitions/Resource"
+        }
+      ]
+    },
+    "BackupLocationModel": {
+      "type": "object",
+      "description": "Properties of a backup location.",
+      "properties": {
+        "externalStoreDefault": {
+          "description": "Information about an external storage location.",
+          "$ref": "#/definitions/ExternalStore",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "ExternalStore": {
+      "type": "object",
+      "description": "Information about an external storage location.",
+      "properties": {
+        "path": {
+          "description": "Path to the update location",
+          "type": "string"
+        },
+        "userName": {
+          "description": "Username to access the location.",
+          "type": "string"
+        },
+        "password": {
+          "description": "Password to access the location.",
+          "type": "string"
+        },
+        "encryptionCertBase64": {
+          "description": "The base64 raw data for the backup encryption certificate.",
+          "type": "string"
+        },
+        "encryptionCertThumbprint": {
+          "description": "The thumbprint of the encryption certificate.",
+          "type": "string",
+          "readOnly": true
+        },
+        "backupFrequencyInHours": {
+          "description": "The interval, in hours, for the frequency that the scheduler takes a backup.",
+          "type": "integer"
+        },
+        "availableCapacity": {
+          "description": "Free space at the backup location.",
+          "type": "string",
+          "readOnly": true
+        },
+        "isBackupSchedulerEnabled": {
+          "description": "True if the backup scheduler is enabled.",
+          "type": "boolean"
+        },
+        "nextBackupTime": {
+          "description": "The scheduled time of the next backup.",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "lastBackupTime": {
+          "description": "Time of backup.",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "backupRetentionPeriodInDays": {
+          "description": "The retention period, in days, for backs in the storage location.",
+          "type": "integer"
+        }
+      }
+    },
+    "BackupLocationList": {
+      "type": "object",
+      "description": "List of backup locations.",
+      "properties": {
+        "value": {
+          "description": "List of backup locations.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/BackupLocation"
+          }
+        },
+        "nextLink": {
+          "description": "URI to the next page.",
+          "type": "string"
+        }
+      }
+    }
+  },
+  "parameters": {
+    "BackupLocationParameter": {
+      "name": "location",
+      "in": "path",
+      "description": "Name of the backup location.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "BackupLocationObjectParameter": {
+      "name": "backup",
+      "in": "body",
+      "description": "Backup location object.",
+      "required": true,
+      "schema": {
+        "$ref": "#/definitions/BackupLocation"
+      },
+      "x-ms-parameter-location": "method"
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Authorization uses an Azure Active Directory OAuth2 flow.",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ]
+}
