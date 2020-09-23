@@ -539,6 +539,7 @@
           ]
         }
       },
+      "x-ms-discriminator-value": "mediaType",
       "allOf": [
         {
           "$ref": "#/definitions/LabelingJobMediaProperties"
@@ -565,6 +566,7 @@
           ]
         }
       },
+      "x-ms-discriminator-value": "mediaType",
       "allOf": [
         {
           "$ref": "#/definitions/LabelingJobMediaProperties"
@@ -703,12 +705,7 @@
         },
         "labelingJobMediaProperties": {
           "description": "Media specific properties in a labeling job.",
-          "x-ms-discriminator-value": "mediaType",
-          "allOf": [
-            {
-              "$ref": "#/definitions/LabelingJobMediaProperties"
-            }
-          ],
+          "$ref": "#/definitions/LabelingJobMediaProperties",
           "x-ms-mutability": [
             "create",
             "read"
