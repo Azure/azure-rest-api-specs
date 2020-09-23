@@ -52,6 +52,14 @@ directive:
     from: iotSensors.json
     where: '$.paths["/{scope}/providers/Microsoft.Security/iotSensors/{iotSensorName}"].get'
     reason: The list returns limited number of items
+  - suppress: PageableOperation
+    from: onPremiseIotSensors.json
+    where: '$.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Security/onPremiseIotSensors"].get'
+    reason: The list returns limited number of items
+  - suppress: TopLevelResourcesListByResourceGroup
+    from: onPremiseIotSensors.json
+    where: $.definitions.OnPremiseIotSensor
+    reason: The resource is managed in a subscription level (instead of inside a resource group)
 ```
 
 ### Basic Information
@@ -195,6 +203,7 @@ input-file:
 - Microsoft.Security/preview/2020-01-01-preview/connectors.json
 - Microsoft.Security/preview/2020-08-06-preview/iotDefenderSettings.json
 - Microsoft.Security/preview/2020-08-06-preview/iotSensors.json
+- Microsoft.Security/preview/2020-08-06-preview/onPremiseIotSensors.json
 
 # Needed when there is more than one input file
 override-info:
@@ -380,6 +389,7 @@ These settings apply only when `--tag=package-2020-08-preview-only` is specified
 input-file:
 - Microsoft.Security/preview/2020-08-06-preview/iotDefenderSettings.json
 - Microsoft.Security/preview/2020-08-06-preview/iotSensors.json
+- Microsoft.Security/preview/2020-08-06-preview/onPremiseIotSensors.json
 
 # Needed when there is more than one input file
 override-info:
