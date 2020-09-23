@@ -1,0 +1,804 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Azure Maps Feature State Service",
+    "version": "1.0",
+    "description": "APIs for managing the dynamic feature states in Azure Maps."
+  },
+  "host": "atlas.microsoft.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [],
+  "produces": [
+    "application/json"
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "These are the [Azure Active Directory OAuth2](https://docs.microsoft.com/en-us/azure/active-directory/develop/v1-overview)  Flows. When paired with [Azure Role Based Access](https://docs.microsoft.com/en-us/azure/role-based-access-control/overview)  control it can be used to control access to Azure Maps REST APIs. Azure Role based access controls are used to designate access to one or more Azure Maps resource account or sub-resources. Any user, group, or service principal can be granted access via a  built in role or a custom role composed of one or more permissions to Azure Maps REST APIs.\n\nTo implement scenarios we recommend viewing [authentication concepts](https://aka.ms/amauth). In summary, this security definition provides a solution  for modeling application(s) via objects capable of access control on specific APIs and scopes.\n\n#### Note\n* This security definition **requires** the use of the `x-ms-client-id` header to indicate which Azure Maps resource the application is requesting access to.  This can be acquired from the [Maps management API](https://aka.ms/amauthdetails).\n* The `Authorization URL` is specific to the Azure public cloud instance. Sovereign clouds have unique Authorization URLs and Azure Active directory configurations. \n* The Azure role based access control is configured from the [Azure management plane](https://aka.ms/amrbac) via Azure portal, Powershell, CLI, Azure SDKs, or REST APIs.\n* Usage of the [Azure Maps Web SDK](https://aka.ms/amaadmc) allows for configuration based setup of an application for multiple use cases.\n* Currently Azure Active Directory [v1.0](https://docs.microsoft.com/en-us/azure/active-directory/develop/azure-ad-endpoint-comparison) tokens are supported.",
+      "scopes": {
+        "user_impersonation": "Impersonates a user's Azure Active Directory account."
+      }
+    },
+    "apiKeyQuery": {
+      "type": "apiKey",
+      "description": "This is a shared key which is provisioned when creating an [Azure Maps resource](https://aka.ms/amauth) through the Azure management plane  via Azure portal, Powershell, CLI, Azure SDKs, or REST APIs. With this key, any application is authorized to access  all REST APIs. In other words, these can currently be treated as master keys to the account which they are issued for.  For publicly exposed applications our recommendation is to use server to server access of Azure Maps REST APIs where this key can be  securely stored.",
+      "name": "subscription-key",
+      "in": "query"
+    }
+  },
+  "security": [
+    {
+      "azure_auth": []
+    },
+    {
+      "apiKeyQuery": []
+    }
+  ],
+  "responses": {
+    "400": {
+      "description": "Bad request: one or more parameters were incorrectly specified or are mutually exclusive.",
+      "schema": {
+        "$ref": "#/definitions/ODataErrorResponse"
+      }
+    },
+    "401": {
+      "description": "Access denied due to invalid subscription key or invalid Azure Active Directory bearer token.  Make sure to provide a valid key for an active Azure subscription and Maps resource.  Otherwise, verify the [WWW-Authenticate](https://tools.ietf.org/html/rfc6750#section-3.1) header for error code and description of the provided AAD bearer token.",
+      "schema": {
+        "$ref": "#/definitions/ODataErrorResponse"
+      },
+      "headers": {
+        "WWW-Authenticate": {
+          "type": "string",
+          "description": "Bearer realm=\"https://atlas.microsoft.com/\", error=\"invalid_token\", error_description=\"The access token expired\""
+        }
+      }
+    },
+    "403": {
+      "description": "Permission, capacity, or authentication issues.",
+      "schema": {
+        "$ref": "#/definitions/ODataErrorResponse"
+      }
+    },
+    "404": {
+      "description": "Not Found: the requested resource could not be found, but it may be available again in the future.",
+      "schema": {
+        "$ref": "#/definitions/ODataErrorResponse"
+      }
+    },
+    "409": {
+      "description": "The request could not be completed due to a conflict with the current state of the resource. Likely caused by a parallel update to the same resource.",
+      "schema": {
+        "$ref": "#/definitions/ODataErrorResponse"
+      }
+    },
+    "500": {
+      "description": "An error occurred while processing the request. Please try again later.",
+      "schema": {
+        "$ref": "#/definitions/ODataErrorResponse"
+      }
+    }
+  },
+  "parameters": {
+    "SubscriptionKey": {
+      "name": "subscription-key",
+      "description": "One of the Azure Maps keys provided from an Azure Map Account. Please refer to this [article](https://docs.microsoft.com/azure/azure-maps/how-to-manage-authentication) for details on how to manage authentication.",
+      "type": "string",
+      "in": "query",
+      "required": false,
+      "x-ms-parameter-location": "client"
+    },
+    "ApiVersion": {
+      "name": "api-version",
+      "description": "Version number of Azure Maps API. Current version is 1.0",
+      "type": "string",
+      "in": "query",
+      "required": true,
+      "default": "1.0",
+      "x-ms-parameter-location": "client"
+    },
+    "DatasetIdForCreate": {
+      "name": "datasetId",
+      "description": "The datasetId must have been obtained from a successful [Dataset Create API](https://review.docs.microsoft.com/en-us/rest-staging/api/maps-master/dataset/createpreview?branch=lbs) call.",
+      "type": "string",
+      "in": "query",
+      "required": true,
+      "x-ms-parameter-location": "method"
+    },
+    "StatesetId": {
+      "name": "statesetId",
+      "description": "The stateset id that was created.",
+      "type": "string",
+      "in": "query",
+      "required": true,
+      "x-ms-parameter-location": "method"
+    },
+    "StatesetIdInPath": {
+      "name": "statesetId",
+      "description": "The stateset id that was created.",
+      "type": "string",
+      "in": "path",
+      "required": true,
+      "x-ms-parameter-location": "method"
+    },
+    "FeatureIdSet": {
+      "name": "featureId",
+      "description": "The id of a feature in the given dataset. If the featureId is not present in the dataset, Bad Request response will be returned.",
+      "type": "string",
+      "in": "query",
+      "required": true,
+      "x-ms-parameter-location": "method"
+    },
+    "FeatureIdGet": {
+      "name": "featureId",
+      "description": "The id of a feature in the given stateset. If no state was set for the featureId in the stateset earlier, Bad Request response will be returned.",
+      "type": "string",
+      "in": "query",
+      "required": true,
+      "x-ms-parameter-location": "method"
+    },
+    "FeatureIdDelete": {
+      "name": "featureId",
+      "description": "The id of a feature in the given stateset. If no state was set for the featureId in the stateset earlier, Bad Request response will be returned.",
+      "type": "string",
+      "in": "query",
+      "required": true,
+      "x-ms-parameter-location": "method"
+    },
+    "StateKeyNameDelete": {
+      "name": "stateKeyName",
+      "description": "The Name of the state to be deleted.",
+      "type": "string",
+      "in": "query",
+      "required": true,
+      "x-ms-parameter-location": "method"
+    }
+  },
+  "paths": {
+    "/featureState/stateset/{statesetId}": {
+      "get": {
+        "x-publish": true,
+        "description": "**Applies to:** S1 pricing tier.\n<br>\n\nThis GET API allows the user to get the stateset Information.\n\nThe stateset Information includes the datasetId associated to the stateset, and the styles of that stateset.",
+        "operationId": "FeatureState_GetStatesetPreview",
+        "x-ms-examples": {
+          "Get stateset information with a statesetId": {
+            "$ref": "./examples/GetStateset.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionKey"
+          },
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/StatesetIdInPath"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Get request completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/StatesetGetResponse"
+            }
+          },
+          "400": {
+            "$ref": "#/responses/400"
+          },
+          "401": {
+            "$ref": "#/responses/401"
+          },
+          "403": {
+            "$ref": "#/responses/403"
+          },
+          "404": {
+            "$ref": "#/responses/404"
+          },
+          "500": {
+            "$ref": "#/responses/500"
+          }
+        }
+      },
+      "delete": {
+        "x-publish": true,
+        "description": "**Applies to:** S1 pricing tier. <br> This DELETE API allows the user to delete the stateset and the associated data.",
+        "operationId": "FeatureState_DeleteStatesetPreview",
+        "x-ms-examples": {
+          "Delete an existing stateset": {
+            "$ref": "./examples/DeleteStateset.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionKey"
+          },
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/StatesetIdInPath"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Stateset Deleted."
+          },
+          "400": {
+            "$ref": "#/responses/400"
+          },
+          "401": {
+            "$ref": "#/responses/401"
+          },
+          "403": {
+            "$ref": "#/responses/403"
+          },
+          "404": {
+            "$ref": "#/responses/404"
+          },
+          "500": {
+            "$ref": "#/responses/500"
+          }
+        }
+      },
+      "put": {
+        "x-publish": true,
+        "description": "**Applies to:** S1 pricing tier.\n<br>\n\nThis PUT API allows the user to update the stateset style rules.",
+        "operationId": "FeatureState_PutStatesetPreview",
+        "x-ms-examples": {
+          "Update stateset style rules with a statesetId": {
+            "$ref": "./examples/UpdateStateset.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionKey"
+          },
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/StatesetIdInPath"
+          },
+          {
+            "name": "statesetStyleUpdateRequestBody",
+            "in": "body",
+            "description": "The stateset style JSON data. Only style rules are allowed to be updated, update on keyname and type is not allowed.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/StylesObject"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Stateset styles are updated successfully."
+          },
+          "400": {
+            "$ref": "#/responses/400"
+          },
+          "401": {
+            "$ref": "#/responses/401"
+          },
+          "403": {
+            "$ref": "#/responses/403"
+          },
+          "404": {
+            "$ref": "#/responses/404"
+          },
+          "500": {
+            "$ref": "#/responses/500"
+          }
+        }
+      }
+    },
+    "/featureState/stateset": {
+      "post": {
+        "x-publish": true,
+        "description": "**Applies to:** S1 pricing tier.\n<br>\n\nThis POST API allows the user to create a new Stateset and define stateset style using request body.\n\nCreator makes it possible to develop applications based on your private indoor map data using Azure Maps API and SDK. The Feature State API is part of Creator. \n\nThe Feature State service allows the user to update the states of a feature and query them to be used in other services. The dynamic properties of a feature that don't belong to the dataset are referred to as *states* here.\n\nThis Feature State service pivot on the Stateset. Like Tileset, Stateset encapsulates the storage mechanism for feature states for a dataset.\n\nOnce the stateset is created, users can use that statesetId to post feature state updates and retrieve the current feature states. A feature can have any number of states. \n\nFeature state is defined by the key name, value and the timestamp. When a feature state update is posted to Azure Maps, the state value gets updated only if the provided state’s timestamp is later than the stored timestamp. \n\nAzure Maps MapControl provides a way to use these feature states to style the features. Please refer to the State Tile documentation for more information.",
+        "operationId": "FeatureState_CreateStatesetPreview",
+        "x-ms-examples": {
+          "Create a new stateset with a datasetId": {
+            "$ref": "./examples/CreateStateset.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionKey"
+          },
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/DatasetIdForCreate"
+          },
+          {
+            "name": "statesetCreateRequestBody",
+            "in": "body",
+            "description": "The stateset style JSON data.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/StylesObject"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Stateset created.",
+            "schema": {
+              "$ref": "#/definitions/StatesetCreatedResponse"
+            }
+          },
+          "400": {
+            "$ref": "#/responses/400"
+          },
+          "401": {
+            "$ref": "#/responses/401"
+          },
+          "403": {
+            "$ref": "#/responses/403"
+          },
+          "404": {
+            "$ref": "#/responses/404"
+          },
+          "500": {
+            "$ref": "#/responses/500"
+          }
+        }
+      },
+      "get": {
+        "x-publish": true,
+        "description": "**Applies to:** S1 pricing tier. <br> This API allows the caller to fetch a list of all previously successfully created statesets.",
+        "operationId": "FeatureState_ListStatesetPreview",
+        "x-ms-examples": {
+          "List all the previously created statesets": {
+            "$ref": "./examples/Stateset_List.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionKey"
+          },
+          {
+            "$ref": "#/parameters/ApiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The list stateset request completed successfully. The response body contains a list of all the previously created statesets.",
+            "schema": {
+              "$ref": "#/definitions/StatesetListResponse"
+            }
+          },
+          "400": {
+            "$ref": "#/responses/400"
+          },
+          "401": {
+            "$ref": "#/responses/401"
+          },
+          "403": {
+            "$ref": "#/responses/403"
+          },
+          "404": {
+            "$ref": "#/responses/404"
+          },
+          "500": {
+            "$ref": "#/responses/500"
+          }
+        }
+      }
+    },
+    "/featureState/state": {
+      "get": {
+        "x-publish": true,
+        "operationId": "FeatureState_GetStatesPreview",
+        "description": "**Applies to:** S1 pricing tier. <br> This API returns the current state information associated with the given feature in the given stateset.",
+        "x-ms-examples": {
+          "Get the current states of a feature": {
+            "$ref": "./examples/GetStates.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionKey"
+          },
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/StatesetId"
+          },
+          {
+            "$ref": "#/parameters/FeatureIdGet"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Get request completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/FeatureStatesStructure"
+            }
+          },
+          "400": {
+            "$ref": "#/responses/400"
+          },
+          "401": {
+            "$ref": "#/responses/401"
+          },
+          "403": {
+            "$ref": "#/responses/403"
+          },
+          "404": {
+            "$ref": "#/responses/404"
+          },
+          "500": {
+            "$ref": "#/responses/500"
+          }
+        }
+      },
+      "post": {
+        "x-publish": true,
+        "operationId": "FeatureState_UpdateStatesPreview",
+        "description": "**Applies to:** S1 pricing tier. <br>\nThis POST API allows the user to update the state of the given feature in the given stateset.",
+        "x-ms-examples": {
+          "Update the states of a feature": {
+            "$ref": "./examples/UpdateStates.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionKey"
+          },
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/StatesetId"
+          },
+          {
+            "$ref": "#/parameters/FeatureIdSet"
+          },
+          {
+            "name": "featureStateUpdateRequestBody",
+            "in": "body",
+            "description": "The feature state JSON data. A feature can have only one state at a given point in time. The specified state keyname must have been defined during the stateset creation.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/FeatureStatesStructure"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Feature states are updated successfully."
+          },
+          "400": {
+            "$ref": "#/responses/400"
+          },
+          "401": {
+            "$ref": "#/responses/401"
+          },
+          "403": {
+            "$ref": "#/responses/403"
+          },
+          "404": {
+            "$ref": "#/responses/404"
+          },
+          "500": {
+            "$ref": "#/responses/500"
+          }
+        }
+      },
+      "delete": {
+        "x-publish": true,
+        "operationId": "FeatureState_DeleteStatePreview",
+        "description": "**Applies to:** S1 pricing tier. <br> This API deletes the state information identified by the StateKeyName parameter for the feature identified by the FeatureId parameter in the the stateset.",
+        "x-ms-examples": {
+          "Delete the given feature state": {
+            "$ref": "./examples/DeleteFeatureState.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionKey"
+          },
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/StatesetId"
+          },
+          {
+            "$ref": "#/parameters/FeatureIdDelete"
+          },
+          {
+            "$ref": "#/parameters/StateKeyNameDelete"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Feature states deleted successfully."
+          },
+          "400": {
+            "$ref": "#/responses/400"
+          },
+          "401": {
+            "$ref": "#/responses/401"
+          },
+          "403": {
+            "$ref": "#/responses/403"
+          },
+          "404": {
+            "$ref": "#/responses/404"
+          },
+          "409": {
+            "$ref": "#/responses/409"
+          },
+          "500": {
+            "$ref": "#/responses/500"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ODataErrorResponse": {
+      "type": "object",
+      "description": "This response object is returned when an error occurs in the Maps API.",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/ODataError"
+        }
+      }
+    },
+    "ODataError": {
+      "type": "object",
+      "description": "This object is returned when an error occurs in the Maps API.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The ODataError code."
+        },
+        "message": {
+          "type": "string",
+          "readOnly": true,
+          "description": "If available, a human readable description of the error."
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ODataError"
+          }
+        },
+        "target": {
+          "type": "string",
+          "readOnly": true,
+          "description": "If available, the target causing the error."
+        }
+      }
+    },
+    "StatesetGetResponse": {
+      "description": "The response model for the successful Stateset Get API.",
+      "type": "object",
+      "properties": {
+        "datasetIdList": {
+          "description": "Dataset ID associated with the stateset.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "statesetStyle": {
+          "$ref": "#/definitions/StylesObject"
+        }
+      }
+    },
+    "StatesetListResponse": {
+      "description": "The response model for the successful Stateset List API.",
+      "type": "object",
+      "properties": {
+        "statesetDetailList": {
+          "description": "A list of statesets information.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/StatesetInfoObject"
+          }
+        }
+      }
+    },
+    "StatesetInfoObject": {
+      "description": "The stateset information detail.",
+      "type": "object",
+      "properties": {
+        "statesetId": {
+          "description": "The stateset ID of this stateset.",
+          "type": "string"
+        },
+        "datasetIdList": {
+          "description": "Dataset ID associated with the stateset.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "statesetStyle": {
+          "$ref": "#/definitions/StylesObject"
+        }
+      }
+    },
+    "StatesetCreatedResponse": {
+      "description": "The response model for the successful Stateset Create API.",
+      "type": "object",
+      "properties": {
+        "statesetId": {
+          "description": "The ID for the new stateset created.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "FeatureStatesStructure": {
+      "description": "The feature states model for a feature.",
+      "type": "object",
+      "properties": {
+        "states": {
+          "description": "The feature states array.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/FeatureStateObject"
+          }
+        }
+      }
+    },
+    "FeatureStateObject": {
+      "description": "Single feature state model.",
+      "type": "object",
+      "properties": {
+        "keyName": {
+          "description": "Feature state Keyname.",
+          "type": "string"
+        },
+        "value": {
+          "description": "Value for the feature state.",
+          "type": "object"
+        },
+        "eventTimestamp": {
+          "description": "Timestamp when the feature state was captured.",
+          "type": "string"
+        }
+      }
+    },
+    "StylesObject": {
+      "description": "The styles model.",
+      "type": "object",
+      "properties": {
+        "styles": {
+          "description": "An array of stateset styles.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/StyleObject"
+          }
+        }
+      }
+    },
+    "StyleObject": {
+      "description": "The stateset style model. The style rule could be a numeric type style rule or a boolean type style rule.  Refer to NumberRuleObject and BooleanRuleObject definition.",
+      "type": "object"
+    },
+    "NumberRuleObject": {
+      "description": "The numeric rule",
+      "type": "object",
+      "properties": {
+        "range": {
+          "$ref": "#/definitions/RangeObject"
+        },
+        "color": {
+          "description": "Color is a JSON string in a variety of permitted formats, HTML-style hex values, RGB (\"#ff0\", \"#ffff00\", \"rgb(255, 255, 0)\"), RGBA (\"rgba(255, 255, 0, 1)\"), HSL(\"hsl(100, 50%, 50%)\"), and HSLA(\"hsla(100, 50%, 50%, 1)\"). Predefined HTML colors names, like yellow and blue, are also permitted.",
+          "type": "string"
+        }
+      }
+    },
+    "RangeObject": {
+      "description": "The numeric value range for this style rule, If the value is in the range, all the conditions must hold true.",
+      "type": "object",
+      "properties": {
+        "minimum": {
+          "description": "All the number x that x ≥ minimum.",
+          "type": "number",
+          "format": "double"
+        },
+        "maximum": {
+          "description": "All the number x that x ≤ maximum.",
+          "type": "number",
+          "format": "double"
+        },
+        "exclusiveMinimum": {
+          "description": "All the number x that x > exclusiveMinimum.",
+          "type": "number",
+          "format": "double"
+        },
+        "exclusiveMaximum": {
+          "description": "All the number x that x < exclusiveMaximum.",
+          "type": "number",
+          "format": "double"
+        }
+      }
+    },
+    "BooleanRuleObject": {
+      "description": "the boolean rule",
+      "type": "object",
+      "properties": {
+        "true": {
+          "description": "The color when value is true",
+          "type": "string"
+        },
+        "false": {
+          "description": "The color when value is false",
+          "type": "string"
+        }
+      }
+    },
+    "StyleRuleBase": {
+      "description": "contains common properties for numeric style rules and boolean style rules.",
+      "discriminator": "type",
+      "required": [
+        "keyName",
+        "type"
+      ],
+      "properties": {
+        "keyName": {
+          "description": "Stateset style key name. Key names are random strings but they should be unique inside style array.",
+          "type": "string"
+        },
+        "type": {
+          "description": "The type of stateset style.",
+          "type": "string",
+          "enum": [
+            "number",
+            "boolean"
+          ]
+        }
+      }
+    },
+    "BooleanTypeStyleRule": {
+      "description": "the boolean type style rule object.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/StyleRuleBase"
+        }
+      ],
+      "properties": {
+        "rules": {
+          "description": "Boolean style rules.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/BooleanRuleObject"
+          }
+        }
+      }
+    },
+    "NumberTypeStyleRule": {
+      "description": "The numeric type style rule object.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/StyleRuleBase"
+        }
+      ],
+      "properties": {
+        "rules": {
+          "description": "Numeric style rules.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/NumberRuleObject"
+          }
+        }
+      }
+    }
+  }
+}
