@@ -26,15 +26,15 @@ These are the global settings for the Storage Sync API.
 
 ``` yaml
 openapi-type: arm
-tag: package-preview-2020-09
+tag: package-preview-2020-09-01
 ```
 
 
-### Tag: package-preview-2020-09
+### Tag: package-preview-2020-09-01
 
-These settings apply only when `--tag=package-preview-2020-09` is specified on the command line.
+These settings apply only when `--tag=package-preview-2020-09-01` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2020-09'
+```yaml $(tag) == 'package-preview-2020-09-01'
 input-file:
   - Microsoft.StorageSync/preview/2020-09-01/storagesync.json
 ```
