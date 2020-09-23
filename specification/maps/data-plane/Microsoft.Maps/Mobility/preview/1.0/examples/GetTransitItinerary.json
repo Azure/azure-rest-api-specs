@@ -1,0 +1,203 @@
+{
+  "parameters": {
+    "api-version": "1.0",
+    "format": "json",
+    "query": "68fa6e31-d1a4-4457-a15b-8f5036a76a78---201909167EB6D19458C443BFAD897246FD28DAD4:0---121",
+    "detailType": [
+      "geometry"
+    ]
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "departureTime": "2019-09-16T18:04:53Z",
+        "arrivalTime": "2019-09-16T18:08:07Z",
+        "legs": [
+          {
+            "legType": "Bicycle",
+            "legStartTime": "2019-09-16T18:04:53Z",
+            "legEndTime": "2019-09-16T18:08:07Z",
+            "steps": [
+              {
+                "direction": {
+                  "relativeDirection": "depart"
+                },
+                "streetName": "3rd Avenue"
+              },
+              {
+                "direction": {
+                  "relativeDirection": "right"
+                },
+                "streetName": "Dean Street"
+              },
+              {
+                "direction": {
+                  "relativeDirection": "right"
+                },
+                "streetName": "5th Avenue"
+              }
+            ],
+            "origin": {
+              "position": {
+                "latitude": 40.680903,
+                "longitude": -73.983723
+              }
+            },
+            "destination": {
+              "position": {
+                "latitude": 40.682051,
+                "longitude": -73.976702
+              }
+            },
+            "geometry": {
+              "type": "LineString",
+              "coordinates": [
+                [
+                  -73.98373,
+                  40.6809
+                ],
+                [
+                  -73.98371,
+                  40.68089
+                ],
+                [
+                  -73.98328,
+                  40.68152
+                ],
+                [
+                  -73.9831,
+                  40.68179
+                ],
+                [
+                  -73.98303,
+                  40.68189
+                ],
+                [
+                  -73.98302,
+                  40.68191
+                ],
+                [
+                  -73.9829,
+                  40.68208
+                ],
+                [
+                  -73.98286,
+                  40.68214
+                ],
+                [
+                  -73.9828,
+                  40.68223
+                ],
+                [
+                  -73.98243,
+                  40.68278
+                ],
+                [
+                  -73.98199,
+                  40.68342
+                ],
+                [
+                  -73.98161,
+                  40.68398
+                ],
+                [
+                  -73.98157,
+                  40.68405
+                ],
+                [
+                  -73.9812,
+                  40.6839
+                ],
+                [
+                  -73.97984,
+                  40.68338
+                ],
+                [
+                  -73.9794,
+                  40.6832
+                ],
+                [
+                  -73.97924,
+                  40.68314
+                ],
+                [
+                  -73.97912,
+                  40.68309
+                ],
+                [
+                  -73.97899,
+                  40.68304
+                ],
+                [
+                  -73.97675,
+                  40.68217
+                ],
+                [
+                  -73.97659,
+                  40.68211
+                ],
+                [
+                  -73.97665,
+                  40.68203
+                ],
+                [
+                  -73.97665,
+                  40.68203
+                ],
+                [
+                  -73.97671,
+                  40.68205
+                ]
+              ]
+            }
+          }
+        ]
+      }
+    },
+    "400": {
+      "headers": {},
+      "body": {
+        "error": {
+          "code": "400 BadRequest",
+          "message": "Bad request: one or more parameters were incorrectly specified or are mutually exclusive."
+        }
+      }
+    },
+    "401": {
+      "headers": {},
+      "body": {
+        "error": {
+          "code": "401 Unauthorized",
+          "message": "Access denied due to invalid subscription key. Make sure to provide a valid key for an active subscription."
+        }
+      }
+    },
+    "403": {
+      "headers": {},
+      "body": {
+        "error": {
+          "code": "403 Forbidden",
+          "message": "Permission, capacity, or authentication issues."
+        }
+      }
+    },
+    "404": {
+      "headers": {},
+      "body": {
+        "error": {
+          "code": "404 NotFound",
+          "message": "Not Found: the requested resource could not be found, but it may be available again in the future."
+        }
+      }
+    },
+    "500": {
+      "headers": {},
+      "body": {
+        "error": {
+          "code": "500 InternalServerError",
+          "message": "An error occurred while processing the request. Please try again later."
+        }
+      }
+    }
+  }
+}

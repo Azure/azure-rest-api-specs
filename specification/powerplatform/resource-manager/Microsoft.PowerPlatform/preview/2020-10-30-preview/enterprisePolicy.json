@@ -394,43 +394,30 @@
   },
   "definitions": {
     "EnterprisePolicy": {
+      "type": "object",
+      "description": "Definition of the EnterprisePolicy.",
+      "allOf": [
+        {
+          "description": "The resource model definition for a ARM tracked top level resource.",
+          "$ref": "../../common/v1/definitions.json#/definitions/TrackedResource"
+        }
+      ],
       "properties": {
         "identity": {
           "$ref": "#/definitions/EnterprisePolicyIdentity",
           "description": "The identity of the EnterprisePolicy."
+        },
+        "properties": {
+          "$ref": "#/definitions/Properties",
+          "description": "The properties that define configuration for the enterprise policy",
+          "x-ms-client-flatten": true
         }
-      },
-      "allOf": [
-        {
-          "$ref": "../../common/v1/definitions.json#/definitions/TrackedResource"
-        }
-      ],
-      "description": "Definition of the EnterprisePolicy."
+      }
     },
-    "EnterprisePolicyIdentity": {
+    "Properties": {
+      "type": "object",
+      "description": "The properties that define configuration for the enterprise policy.",
       "properties": {
-        "systemAssignedIdentityPrincipalId": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The principal id of EnterprisePolicy identity."
-        },
-        "tenantId": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The tenant id associated with the EnterprisePolicy."
-        },
-        "type": {
-          "type": "string",
-          "description": "The type of identity used for the EnterprisePolicy. Currently, the only supported type is 'SystemAssigned', which implicitly creates an identity.",
-          "enum": [
-            "SystemAssigned",
-            "None"
-          ],
-          "x-ms-enum": {
-            "name": "ResourceIdentityType",
-            "modelAsString": false
-          }
-        },
         "lockbox": {
           "type": "object",
           "description": "Settings concerning lockbox.",
@@ -453,10 +440,37 @@
         },
         "systemData": {
           "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
-          "description": "Metadata for the enterprisePolicy."
+          "description": "Metadata pertaining to creation and last modification of the resource."
         }
-      },
-      "description": "Identity for the EnterprisePolicy."
+      }
+    },
+    "EnterprisePolicyIdentity": {
+      "type": "object",
+      "description": "The identity of the EnterprisePolicy.",
+      "properties": {
+        "systemAssignedIdentityPrincipalId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The principal id of EnterprisePolicy identity."
+        },
+        "tenantId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The tenant id associated with the EnterprisePolicy."
+        },
+        "type": {
+          "type": "string",
+          "description": "The type of identity used for the EnterprisePolicy. Currently, the only supported type is 'SystemAssigned', which implicitly creates an identity.",
+          "enum": [
+            "SystemAssigned",
+            "None"
+          ],
+          "x-ms-enum": {
+            "name": "ResourceIdentityType",
+            "modelAsString": false
+          }
+        }
+      }
     },
     "status": {
       "type": "string",
