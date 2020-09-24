@@ -1,0 +1,144 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "NetworkManagementClient",
+    "description": "The Microsoft Azure Network management API provides a RESTful set of web services that interact with Microsoft Azure Networks service to manage your network resources. The API has entities that capture the relationship between an end user and the Microsoft Azure Networks service.",
+    "version": "2020-06-01"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Network/AzureWebCategories": {
+      "get": {
+        "tags": [
+          "AzureWebCategories"
+        ],
+        "operationId": "AzureWebCategories_ListAll",
+        "description": "Gets all the Azure Web Categorys in a subscription.",
+        "parameters": [
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success. The operation returns a list of Azure Web Category resources.",
+            "schema": {
+              "$ref": "#/definitions/AzureWebCategoryListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List all Azure Web Categorys for a given subscription": {
+            "$ref": "./examples/AzureWebCategoriesListBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    }
+  },
+  "definitions": {
+    "AzureWebCategoryPropertiesFormat": {
+      "properties": {
+        "provisioningState": {
+          "readOnly": true,
+          "$ref": "./network.json#/definitions/ProvisioningState",
+          "description": "The provisioning state of the Azure Web Category resource."
+        },
+        "group": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The name of the group that the category belongs to."
+        }
+      },
+      "description": "Azure Web Category Properties."
+    },
+    "AzureWebCategory": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/AzureWebCategoryPropertiesFormat",
+          "description": "Properties of the Azure Web Category."
+        },
+        "name": {
+         "type": "string",
+         "description": "Name of the Azure Web Category."
+       },
+       "id": {
+         "type": "string",
+         "readOnly": true,
+         "description": "The ID of the Azure Web Category."
+       },
+       "etag": {
+         "readOnly": true,
+         "type": "string",
+         "description": "A unique read-only string that changes whenever the resource is updated."
+       },
+       "type": {
+         "readOnly": true,
+         "type": "string",
+         "description": "Type of the resource."
+       }
+      },
+      "allOf": [
+        {
+          "$ref": "./network.json#/definitions/Resource"
+        }
+      ],
+      "description": "Azure Web Category Resource."
+    },
+    "AzureWebCategoryListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AzureWebCategory"
+          },
+          "description": "List of Azure Web Categorys for a given Subscription."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "URL to get the next set of results."
+        }
+      },
+      "description": "Response for ListAzureWebCategories API service call."
+    }
+  }
+}
