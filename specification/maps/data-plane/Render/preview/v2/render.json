@@ -121,7 +121,12 @@
         "microsoft.imagery",
         "microsoft.weather.radar.main",
         "microsoft.weather.infrared.main",
-        "microsoft.dem"
+        "microsoft.dem",
+        "microsoft.traffic.absolute.main",
+        "microsoft.traffic.relative.main",
+        "microsoft.traffic.relative.dark",
+        "microsoft.traffic.delay.main",
+        "microsoft.traffic.reduced.main"
       ],
       "x-ms-enum": {
         "name": "TilesetID",
@@ -173,7 +178,27 @@
           },
           {
             "value": "microsoft.dem",
-            "description": "Digital elevation model tiles. The imagery tile in tiff format including the elevation data of the surface of earth.\nSupports zoom level 17 only. Format: raster (tiff)."
+            "description": "Digital elevation model tiles. The imagery tile in tiff format including the elevation data of the surface of earth.\nSupports zoom level 13 only. Format: raster (tiff)."
+          },
+          {
+            "value": "microsoft.traffic.absolute.main",
+            "description": "Traffic flow tiles. Latest images showing absolute traffic speed.<br>\n\nSupports zoom levels 0 through 22. Format: raster (png)."
+          },
+          {
+            "value": "microsoft.traffic.relative.main",
+            "description": "Traffic flow tiles. This is the speed relative to free-flow, highlighting areas of congestion.<br>\n\nSupports zoom levels 0 through 22. Format: raster (png)."
+          },
+          {
+            "value": "microsoft.traffic.relative.dark",
+            "description": "Traffic flow tiles. This is the speed relative to free-flow, highlighting areas of congestion in dark color theme.<br>\n\nSupports zoom levels 0 through 22. Format: raster (png)."
+          },
+          {
+            "value": "microsoft.traffic.delay.main",
+            "description": "Traffic flow tiles. displays relative speeds only where they are different from the free-flow speeds.<br>\n\nSupports zoom levels 0 through 22. Format: raster (png)."
+          },
+          {
+            "value": "microsoft.traffic.reduced.main",
+            "description": "Traffic flow tiles. displays relative speeds but larger difference from free-flow (depending on FRC) is required for segment to change the color.<br>\n\nSupports zoom levels 0 through 22. Format: raster (png)."
           }
         ]
       },

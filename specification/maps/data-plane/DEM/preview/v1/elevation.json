@@ -109,10 +109,10 @@
       "get": {
         "x-publish": true,
         "description": "**Applies to**: S1 pricing tier.\n\nThe Get Data for Lat/Lon Coordinates API provides elevation data for one or more points.  A point is defined in lat/long coordinate format.  ",
-        "operationId": "Elevation_GetDataForLatLongCoordinates",
+        "operationId": "Elevation_GetDataForPoints",
         "x-ms-examples": {
-          "GetDataForLatLongCoordinates": {
-            "$ref": "./examples/GetDataForLatLongCoordinates.json"
+          "GetDataForPoints": {
+            "$ref": "./examples/GetDataForPoints.json"
           }
         },
         "parameters": [
@@ -165,10 +165,10 @@
       "get": {
         "x-publish": true,
         "description": "**Applies to**: S1 pricing tier.\n\nThe Get Data for Polyline API provides elevation data along a polyline. A polyline is defined by  passing in between 2 and N endpoint coordinates separated by a pipe ('|') character. In addition  to passing in endpoints, customers can specify number of sample points that will be used to divide  polyline into equally spaced segments. Elevation data at both start and end points and equally spaced  points along the polyline will be returned. A line between two endpoints is a straight Cartesian line, the  shortest line between those two points in the coordinate reference system. Note that the point is  chosen based on Euclidean distance and may markedly differ from the geodesic path along the curved  surface of the reference ellipsoid.",
-        "operationId": "Elevation_GetDataForPolyLine",
+        "operationId": "Elevation_GetDataForPolyline",
         "x-ms-examples": {
           "GetDataForPolyLine": {
-            "$ref": "./examples/GetDataForPolyLine.json"
+            "$ref": "./examples/GetDataForPolyline.json"
           }
         },
         "parameters": [
@@ -191,7 +191,7 @@
           {
             "name": "samples",
             "in": "query",
-            "description": "The samples parameter specifies the number of equally spaced points at which elevation values  should be provided along a polyline path. The number of samples should not exceed 2,000.",
+            "description": "The samples parameter specifies the number of equally spaced points at which elevation values  should be provided along a polyline path. The number of samples should not exceed 2,000. Default value is 10 if not provided.",
             "type": "number",
             "minimum": 0,
             "maximum": 2000,
