@@ -138,6 +138,7 @@ go:
 ``` yaml $(go) && $(multiapi)
 batch:
   - tag: package-2020-01-13-preview
+  - tag: package-2018-08-31-preview
 ```
 
 ### Tag: package-2018-08-31-preview and go
@@ -178,6 +179,7 @@ output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-workloadmonitor
 ``` yaml $(java) && $(multiapi)
 batch:
   - tag: package-2020-01-13-preview
+  - tag: package-2018-08-31-preview
 ```
 
 ### Tag: package-2018-08-31-preview and java
