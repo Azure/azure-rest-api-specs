@@ -1,0 +1,474 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Azure Maps Conversion Service",
+    "version": "1.0",
+    "description": "APIs for converting DWG Packages in Azure Maps."
+  },
+  "host": "atlas.microsoft.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [],
+  "produces": [
+    "application/json"
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "These are the [Azure Active Directory OAuth2](https://docs.microsoft.com/en-us/azure/active-directory/develop/v1-overview)  Flows. When paired with [Azure Role Based Access](https://docs.microsoft.com/en-us/azure/role-based-access-control/overview)  control it can be used to control access to Azure Maps REST APIs. Azure Role based access controls are used to designate access to one or more Azure Maps resource account or sub-resources. Any user, group, or service principal can be granted access via a  built in role or a custom role composed of one or more permissions to Azure Maps REST APIs.\n\nTo implement scenarios we recommend viewing [authentication concepts](https://aka.ms/amauth). In summary, this security definition provides a solution  for modeling application(s) via objects capable of access control on specific APIs and scopes.\n\n#### Note\n* This security definition **requires** the use of the `x-ms-client-id` header to indicate which Azure Maps resource the application is requesting access to.  This can be acquired from the [Maps management API](https://aka.ms/amauthdetails).\n* The `Authorization URL` is specific to the Azure public cloud instance. Sovereign clouds have unique Authorization URLs and Azure Active directory configurations. \n* The Azure role based access control is configured from the [Azure management plane](https://aka.ms/amrbac) via Azure portal, Powershell, CLI, Azure SDKs, or REST APIs.\n* Usage of the [Azure Maps Web SDK](https://aka.ms/amaadmc) allows for configuration based setup of an application for multiple use cases.\n* Currently Azure Active Directory [v1.0](https://docs.microsoft.com/en-us/azure/active-directory/develop/azure-ad-endpoint-comparison) tokens are supported.",
+      "scopes": {
+        "user_impersonation": "Impersonates a user's Azure Active Directory account."
+      }
+    },
+    "apiKeyQuery": {
+      "type": "apiKey",
+      "description": "This is a shared key which is provisioned when creating an [Azure Maps resource](https://aka.ms/amauth) through the Azure management plane  via Azure portal, Powershell, CLI, Azure SDKs, or REST APIs. With this key, any application is authorized to access  all REST APIs. In other words, these can currently be treated as master keys to the account which they are issued for.  For publicly exposed applications our recommendation is to use server to server access of Azure Maps REST APIs where this key can be  securely stored.",
+      "name": "subscription-key",
+      "in": "query"
+    }
+  },
+  "security": [
+    {
+      "azure_auth": []
+    },
+    {
+      "apiKeyQuery": []
+    }
+  ],
+  "responses": {
+    "400": {
+      "description": "Bad request: one or more parameters were incorrectly specified or are mutually exclusive.",
+      "schema": {
+        "$ref": "#/definitions/ODataErrorResponse"
+      }
+    },
+    "401": {
+      "description": "Access denied due to invalid subscription key or invalid Azure Active Directory bearer token.  Make sure to provide a valid key for an active Azure subscription and Maps resource.  Otherwise, verify the [WWW-Authenticate](https://tools.ietf.org/html/rfc6750#section-3.1) header for error code and description of the provided AAD bearer token.",
+      "schema": {
+        "$ref": "#/definitions/ODataErrorResponse"
+      },
+      "headers": {
+        "WWW-Authenticate": {
+          "type": "string",
+          "description": "Bearer realm=\"https://atlas.microsoft.com/\", error=\"invalid_token\", error_description=\"The access token expired\""
+        }
+      }
+    },
+    "403": {
+      "description": "Permission, capacity, or authentication issues.",
+      "schema": {
+        "$ref": "#/definitions/ODataErrorResponse"
+      }
+    },
+    "404": {
+      "description": "Not Found: the requested resource could not be found, but it may be available again in the future.",
+      "schema": {
+        "$ref": "#/definitions/ODataErrorResponse"
+      }
+    },
+    "500": {
+      "description": "An error occurred while processing the request. Please try again later.",
+      "schema": {
+        "$ref": "#/definitions/ODataErrorResponse"
+      }
+    },
+    "201Async": {
+      "description": "The resource has been created successfully.",
+      "schema": {
+        "$ref": "#/definitions/LongRunningOperationResult"
+      },
+      "headers": {
+        "Location": {
+          "type": "string",
+          "description": "A URI where details on the newly created resource can be found."
+        }
+      }
+    },
+    "202Async": {
+      "description": "**Supported only for async request.**\nRequest Accepted: The request has been accepted for processing. Please use the URL in the Location Header to retry or access the results.",
+      "headers": {
+        "Location": {
+          "type": "string",
+          "description": "New URL to check for the results of the long running process."
+        }
+      }
+    }
+  },
+  "parameters": {
+    "ClientId": {
+      "name": "x-ms-client-id",
+      "description": "Specifies which account is intended for usage in conjunction with the Azure AD security model.  It represents a unique ID for the Azure Maps account and can be retrieved from Azure Maps management  plane Account API. To use Azure AD security in Azure Maps see the following [articles](https://aka.ms/amauthdetails) for guidance.",
+      "type": "string",
+      "in": "header",
+      "required": false,
+      "x-ms-parameter-location": "client"
+    },
+    "SubscriptionKey": {
+      "name": "subscription-key",
+      "description": "One of the Azure Maps keys provided from an Azure Map Account. Please refer to this [article](https://docs.microsoft.com/azure/azure-maps/how-to-manage-authentication) for details on how to manage authentication.",
+      "type": "string",
+      "in": "query",
+      "required": false,
+      "x-ms-parameter-location": "client"
+    },
+    "ApiVersion": {
+      "name": "api-version",
+      "description": "Version number of Azure Maps API. Current version is 1.0",
+      "type": "string",
+      "in": "query",
+      "required": true,
+      "default": "1.0",
+      "x-ms-parameter-location": "client"
+    },
+    "UdidQuery": {
+      "name": "udid",
+      "description": "The unique data id for the content. The `udid` must have been obtained from a successful [Data Upload API](https://docs.microsoft.com/en-us/rest/api/maps/data/uploadpreview) call.",
+      "type": "string",
+      "in": "query",
+      "required": true,
+      "x-ms-parameter-location": "method"
+    },
+    "ConversionId": {
+      "name": "conversionId",
+      "description": "The conversion id for the content. The `conversionId` must have been obtained from a successful [Conversion API](https://docs.microsoft.com/en-us/rest/api/maps/conversion/convertpreview) call.",
+      "type": "string",
+      "in": "path",
+      "required": true,
+      "x-ms-parameter-location": "method"
+    },
+    "ConversionInputType": {
+      "name": "inputType",
+      "description": "Input type of the content being converted. Currently, only `DWG` type is supported.",
+      "type": "string",
+      "in": "query",
+      "required": true,
+      "enum": [
+        "DWG"
+      ],
+      "x-ms-enum": {
+        "name": "ConversionInputType",
+        "modelAsString": false,
+        "values": [
+          {
+            "value": "DWG",
+            "description": "DWG file format."
+          }
+        ]
+      },
+      "x-ms-parameter-location": "method"
+    },
+    "DescriptionDwgConversion": {
+      "name": "description",
+      "description": "User provided description of the content being converted.",
+      "type": "string",
+      "in": "query",
+      "required": false,
+      "x-ms-parameter-location": "method"
+    }
+  },
+  "paths": {
+    "/conversion/convert": {
+      "post": {
+        "x-publish": true,
+        "description": "**Conversion Create API**\n\n**Applies to:** S1 pricing tier.<br>\n\nCreator makes it possible to develop applications based on your private indoor map data using Azure Maps API and \nSDK. The Conversion API is part of Creator.<br>\n\nThe Conversion API lets the caller import a set of DWG design files as a zipped [Drawing Package](https://aka.ms/am-drawing-package) into Azure Maps. The [Drawing Package](https://aka.ms/am-drawing-package) should first be \nuploaded using the [Azure Maps Data Service](https://docs.microsoft.com/rest/api/maps/data). Once uploaded, use the \n`udid` returned by the [Data Upload API](https://docs.microsoft.com/rest/api/maps/data/uploadpreview) to call \nthis Conversion API.\n\n## Convert DWG package\n\nThe Conversion API performs a \n[long-running request](https://aka.ms/am-creator-lrt).\n\n## Debug DWG package issues\n\n\nDuring the Conversion process, if there are any issues with the DWG package [errors and warnings](https://aka.ms/am-conversion-errors) are provided in the response along with a *diagnostic package* to visualize \nand diagnose these issues. In case any issues are encountered with your DWG package, the Conversion operation status process as detailed \n[here](https://aka.ms/am-creator-lrt) returns the location of the *diagnostic\npackage* that can be downloaded by the caller to help them visualize and diagnose these issues. The *diagnostic package* location\ncan be found in the properties section of the conversion operation status response and looks like the following:\n\n```json\n{\n    \"properties\": {\n        \"diagnosticPackageLocation\": \"https://atlas.microsoft.com/mapdata/{DiagnosticPackageId}?api-version=1.0\"                \n    }            \n}\n```\n\nThe *diagnostic package* can be downloaded by executing a `HTTP GET` request on the `diagnosticPackageLocation`.\nFor more details on how to use the tool to visualize and diagnose all the errors and warnings see [Drawing Error Visualizer](https://aka.ms/am-drawing-errors-visualizer). <br>\n\nA conversion operation will be marked as *success* if there are zero or more warnings but will be marked as *failed* if any errors are encountered. ",
+        "operationId": "Conversion_ConvertPreview",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "Convert previously uploaded DWG Package": {
+            "$ref": "./examples/Conversion.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ClientId"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionKey"
+          },
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/UdidQuery"
+          },
+          {
+            "$ref": "#/parameters/ConversionInputType"
+          },
+          {
+            "$ref": "#/parameters/DescriptionDwgConversion"
+          }
+        ],
+        "responses": {
+          "201": {
+            "$ref": "#/responses/201Async"
+          },
+          "202": {
+            "$ref": "#/responses/202Async"
+          },
+          "400": {
+            "$ref": "#/responses/400"
+          },
+          "401": {
+            "$ref": "#/responses/401"
+          },
+          "403": {
+            "$ref": "#/responses/403"
+          },
+          "404": {
+            "$ref": "#/responses/404"
+          },
+          "500": {
+            "$ref": "#/responses/500"
+          }
+        }
+      }
+    },
+    "/conversion": {
+      "get": {
+        "x-publish": true,
+        "description": "**Conversion List API**\n\n**Applies to:** S1 pricing tier.<br>\n\nCreator makes it possible to develop applications based on your private indoor map data using Azure Maps API and SDK. The Conversion API is part of Creator.<br>\n\nThis API allows the caller to fetch a list of all successful data conversions submitted previously using the [Conversion API](https://docs.microsoft.com/en-us/rest/api/maps/conversion/convertpreview).   \n\n### Submit List Request\n\nTo list all successful conversions you will issue a `GET` request with no additional parameters.\n\n### List Data Response\n\nThe Conversion List API returns the complete list of all conversion details in `json` format.<br>\n\nHere is a sample response returning the details of two successful conversion requests:  \n\n<br>\n\n```json\n{\n    \"conversions\": \n    [\n        {\n            \"conversionId\": \"54398242-ea6c-1f31-4fa6-79b1ae0fc24d\",\n            \"udid\": \"31838736-8b84-11ea-bc55-0242ac130003\",\n            \"created\": \"5/19/2020 9:00:00 AM +00:00\",\n            \"description\": \"User provided description.\",\n            \"featureCounts\": {\n                \"DIR\": 1,\n                \"LVL\": 3,\n                \"FCL\": 1,\n                \"UNIT\": 150,\n                \"CTG\": 8,\n                \"AEL\": 0,\n                \"OPN\": 10\n            }\n        },\n        {\n            \"conversionId\": \"2acf7d32-8b84-11ea-bc55-0242ac130003\",\n            \"udid\": \"1214bc58-8b84-11ea-bc55-0242ac1300039\",\n            \"created\": \"5/19/2020 9:00:00 AM +00:00\",\n            \"description\": \"User provided description.\",\n            \"featureCounts\": {\n                \"DIR\": 1,\n                \"LVL\": 3,\n                \"FCL\": 1,\n                \"UNIT\": 150,\n                \"CTG\": 8,\n                \"AEL\": 0,\n                \"OPN\": 10\n            }\n        }\n    ]\n}\n```\n\n<br>",
+        "operationId": "Conversion_ListPreview",
+        "x-ms-examples": {
+          "Returns a list of all the data processed by the Conversion Service for the account": {
+            "$ref": "./examples/List.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ClientId"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionKey"
+          },
+          {
+            "$ref": "#/parameters/ApiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List request completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ConversionListResponse"
+            }
+          },
+          "400": {
+            "$ref": "#/responses/400"
+          },
+          "401": {
+            "$ref": "#/responses/401"
+          },
+          "403": {
+            "$ref": "#/responses/403"
+          },
+          "404": {
+            "$ref": "#/responses/404"
+          },
+          "500": {
+            "$ref": "#/responses/500"
+          }
+        }
+      }
+    },
+    "/conversion/{conversionId}": {
+      "delete": {
+        "x-publish": true,
+        "description": "**Conversion Delete API**\n\n**Applies to:** S1 pricing tier.<br>\n\nCreator makes it possible to develop applications based on your private indoor map data using Azure Maps API and SDK. The Delete API is part of Creator.<br>\n\nThis API allows the caller to delete any data conversions created previously using the [Conversion API](https://docs.microsoft.com/en-us/rest/api/maps/conversion/convertpreview).\n\n### Submit Delete Request\n\nTo delete your conversion data you will issue a `DELETE` request where the path will contain the `conversionId` of the data to delete.\n\n### Conversion Delete Response\n\nThe Conversion Delete API returns a HTTP `204 No Content` response with an empty body, if the converted data resources were deleted successfully.<br>    \nA HTTP `400 Bad Request` error response will be returned if no resource associated with the passed-in `conversionId` is found.    ",
+        "operationId": "Conversion_DeletePreview",
+        "x-ms-examples": {
+          "Delete previously converted content": {
+            "$ref": "./examples/Delete.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ClientId"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionKey"
+          },
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/ConversionId"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Conversion delete request completed successfully. The content for `conversionId` was deleted on the server.",
+            "schema": {
+              "$ref": "#/definitions/ConversionDeleteResponse"
+            }
+          },
+          "400": {
+            "$ref": "#/responses/400"
+          },
+          "401": {
+            "$ref": "#/responses/401"
+          },
+          "403": {
+            "$ref": "#/responses/403"
+          },
+          "404": {
+            "$ref": "#/responses/404"
+          },
+          "500": {
+            "$ref": "#/responses/500"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ODataErrorResponse": {
+      "type": "object",
+      "description": "This response object is returned when an error occurs in the Maps API.",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/ODataError"
+        }
+      }
+    },
+    "ODataError": {
+      "type": "object",
+      "description": "This object is returned when an error occurs in the Maps API.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The ODataError code."
+        },
+        "message": {
+          "type": "string",
+          "readOnly": true,
+          "description": "If available, a human readable description of the error."
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ODataError"
+          }
+        },
+        "target": {
+          "type": "string",
+          "readOnly": true,
+          "description": "If available, the target causing the error."
+        }
+      }
+    },
+    "LongRunningOperationResult": {
+      "description": "The response model for a Long-Running Operations API.",
+      "type": "object",
+      "properties": {
+        "operationId": {
+          "description": "The Id for this long-running operation.",
+          "type": "string"
+        },
+        "status": {
+          "description": "The status state of the request.",
+          "type": "string",
+          "enum": [
+            "NotStarted",
+            "Running",
+            "Failed",
+            "Succeeded"
+          ],
+          "x-ms-enum": {
+            "name": "type",
+            "modelAsString": false,
+            "values": [
+              {
+                "value": "NotStarted",
+                "description": "The request has not started processing yet."
+              },
+              {
+                "value": "Running",
+                "description": "The request has started processing."
+              },
+              {
+                "value": "Failed",
+                "description": "The request has one or more failures."
+              },
+              {
+                "value": "Succeeded",
+                "description": "The request has successfully completed."
+              }
+            ]
+          },
+          "readOnly": true
+        },
+        "created": {
+          "description": "The created timestamp.",
+          "type": "string",
+          "readOnly": true
+        },
+        "resourceLocation": {
+          "description": "The location URI for details about the created resource. This is only provided when the request was successfully completed.",
+          "type": "string",
+          "readOnly": true
+        },
+        "error": {
+          "$ref": "#/definitions/ODataError"
+        },
+        "warning": {
+          "$ref": "#/definitions/ODataError"
+        }
+      }
+    },
+    "ConversionListResponse": {
+      "description": "The response model for the Conversion List API.",
+      "type": "object",
+      "properties": {
+        "conversions": {
+          "description": "A list of all the previously submitted conversion requests.",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/ConversionListDetailInfo"
+          }
+        }
+      }
+    },
+    "ConversionListDetailInfo": {
+      "description": "Detail information for the conversion requests.",
+      "type": "object",
+      "properties": {
+        "conversionId": {
+          "description": "A unique id that represents the artifact of a _successfully_ completed conversion process.",
+          "type": "string",
+          "readOnly": true
+        },
+        "udid": {
+          "description": "The unique id of the content provided to create this conversion.",
+          "type": "string",
+          "readOnly": true
+        },
+        "created": {
+          "description": "The date and time of this conversion.",
+          "type": "string",
+          "readOnly": true
+        },
+        "description": {
+          "description": "User provided description of the content being converted.",
+          "type": "string",
+          "readOnly": true
+        },
+        "featureCounts": {
+          "description": "A summary of feature counts in this conversion.",
+          "type": "object",
+          "readOnly": true
+        }
+      }
+    },
+    "ConversionDeleteResponse": {
+      "description": "The response model for the Conversion Delete API. The response body will be empty signifying there's no content available for the `conversionId` anymore.",
+      "type": "object"
+    }
+  }
+}

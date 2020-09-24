@@ -81,4 +81,4 @@ See configuration in [readme.csharp.md](https://github.com/Azure/azure-rest-api-
 
 ## AzureResourceSchema
 
-See configuration in [readme.csharp.md](https://github.com/Azure/azure-rest-api-specs/blob/master/documentation/samplefiles/readme.azureresourceschema.md)
+See configuration in [readme.azureresourceschema.md](https://github.com/Azure/azure-rest-api-specs/blob/master/documentation/samplefiles/readme.azureresourceschema.md)
