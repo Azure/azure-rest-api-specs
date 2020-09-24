@@ -67,6 +67,12 @@
           },
           {
             "in": "query",
+            "name": "isDefault",
+            "description": "Filter down to the workspace default datastore.",
+            "type": "boolean"
+          },
+          {
+            "in": "query",
             "name": "names",
             "description": "Names of datastores to return.",
             "type": "array",
@@ -321,94 +327,6 @@
         "x-ms-examples": {
           "Get datastore secrets.": {
             "$ref": "./examples/listDatastoreSecrets.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/datastores/{name}/setAzureMLDefault": {
-      "post": {
-        "tags": [
-          "Datastore"
-        ],
-        "summary": "Set default datastore.",
-        "operationId": "Datastores_SetAzureMLDefault",
-        "parameters": [
-          {
-            "$ref": "machineLearningServices.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "machineLearningServices.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
-          },
-          {
-            "$ref": "machineLearningServices.json#/parameters/APIVersionParameter"
-          },
-          {
-            "in": "path",
-            "name": "name",
-            "description": "Datastore name.",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "default": {
-            "description": "Error",
-            "schema": {
-              "$ref": "machineLearningServices.json#/definitions/MachineLearningServiceError"
-            }
-          },
-          "200": {
-            "description": "Success"
-          }
-        },
-        "x-ms-examples": {
-          "Set default datastore.": {
-            "$ref": "./examples/setDefaultDatastore.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/datastores/azuremldefault": {
-      "get": {
-        "tags": [
-          "Datastore"
-        ],
-        "summary": "Get default datastore.",
-        "operationId": "Datastores_GetDefault",
-        "parameters": [
-          {
-            "$ref": "machineLearningServices.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "machineLearningServices.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
-          },
-          {
-            "$ref": "machineLearningServices.json#/parameters/APIVersionParameter"
-          }
-        ],
-        "responses": {
-          "default": {
-            "description": "Error",
-            "schema": {
-              "$ref": "machineLearningServices.json#/definitions/MachineLearningServiceError"
-            }
-          },
-          "200": {
-            "description": "Success",
-            "schema": {
-              "$ref": "#/definitions/DatastorePropertiesResource"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Delete default datastore.": {
-            "$ref": "./examples/getDefaultDatastore.json"
           }
         }
       }
@@ -1543,8 +1461,7 @@
         },
         "isDefault": {
           "description": "Whether this datastore is the default for the workspace.",
-          "type": "boolean",
-          "readOnly": true
+          "type": "boolean"
         },
         "linkedInfo": {
           "description": "Information about the datastore origin, if linked.",
