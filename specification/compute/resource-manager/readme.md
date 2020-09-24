@@ -271,11 +271,11 @@ input-file:
 - Microsoft.ContainerService/stable/2017-01-31/containerService.json
 ```
 
-### Tag: package-2020-06-01-hybrid-profile
+### Tag: package-2020-09-01-hybrid-profile
 
-These settings apply only when `--tag=package-2020-06-01-hybrid-profile` is specified on the command line.
+These settings apply only when `--tag=package-2020-09-01-hybrid-profile` is specified on the command line.
 
-``` yaml $(tag) == 'package-2020-06-01-hybrid-profile'
+``` yaml $(tag) == 'package-2020-09-01-hybrid-profile'
 input-file:
 - Microsoft.Compute/stable/2020-06-01/compute.json
 - Microsoft.Compute/stable/2019-07-01/disk.json
