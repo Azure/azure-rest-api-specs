@@ -709,11 +709,8 @@
         },
         "labelingJobMediaProperties": {
           "description": "Media specific properties in a labeling job.",
-          "allOf": [
-            {
-              "$ref": "#/definitions/LabelingJobMediaProperties"
-            }
-          ],
+          "$ref": "#/definitions/LabelingJobImageProperties",
+          "additionalProperties": true,
           "x-ms-mutability": [
             "create",
             "read"
