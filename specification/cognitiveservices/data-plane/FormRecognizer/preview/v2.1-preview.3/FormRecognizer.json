@@ -1743,7 +1743,7 @@
           "$ref": "#/definitions/Confidence"
         },
         "appearance": {
-          "description": "Style and its confidence value.",
+          "description": "Text appearance properties.",
           "$ref": "#/definitions/Appearance"
         }
       }
@@ -2155,7 +2155,7 @@
       "x-nullable": false
     },
     "Appearance": {
-      "description": "Information about style of extracted text.",
+      "description": "The appearance of extracted text.",
       "type": "object",
       "required": [
         "style",
@@ -2163,14 +2163,14 @@
       ],
       "properties": {
         "style": {
-          "description": "Extracted text can have one of following listed styles.",
+          "description": "Style of the extracted text: handwriting or printed.",
           "enum": [
             "handwriting",
             "printed"
           ],
           "type": "string",
           "x-ms-enum": {
-            "name": "style",
+            "name": "textStyle",
             "modelAsString": false
           },
           "x-nullable": false
