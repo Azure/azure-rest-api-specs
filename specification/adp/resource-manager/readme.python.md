@@ -8,14 +8,28 @@ python:
   azure-arm: true
   license-header: MICROSOFT_MIT_NO_VERSION
   payload-flattening-threshold: 2
-  namespace: Microsoft.AutonomousDevelopmentPlatform
   package-name: adp
-  package-version: 2020-07-01-preview
   clear-output-folder: true
+  no-namespace-folders: true
 ```
 
-```yaml $(python)
+```yaml $(multiapi)
+clear-output-folder: true
+batch:
+  - tag: package-2020-07-01-preview
+  - multiapiscript: true
+```
+
+``` yaml $(multiapiscript)
+output-folder: $(python-sdks-folder)/adp/azure-mgmt-adp/azure/mgmt/adp/
+clear-output-folder: false
+perform-load: false
+```
+
+``` yaml $(tag) == 'package-2020-07-01-preview'
+namespace: azure.mgmt.adp.v2020_07_01_preview
+output-folder: $(python-sdks-folder)/adp/azure-mgmt-adp/azure/mgmt/adp/v2020_07_01_preview
 python:
-  no-namespace-folders: true
-  output-folder: $(python-sdks-folder)/azure-mgmt/adp
+  namespace: azure.mgmt.adp.v2020_07_01_preview
+  output-folder: $(python-sdks-folder)/adp/azure-mgmt-adp/azure/mgmt/adp/v2020_07_01_preview
 ```

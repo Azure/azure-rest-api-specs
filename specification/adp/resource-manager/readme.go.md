@@ -5,6 +5,7 @@ These settings apply only when `--go` is specified on the command line.
 ```yaml $(go)
 go:
   license-header: MICROSOFT_APACHE_NO_VERSION
+  namespace: adp
   clear-output-folder: true
 ```
 
@@ -14,6 +15,5 @@ These settings apply only when `--tag=package-2020-07-01-preview --go` is specif
 Please also specify `--go-sdks-folder=<path to the root directory of your azure-sdk-for-go clone>`.
 
 ```yaml $(tag) == 'package-2020-07-01-preview' && $(go)
-namespace: Microsoft.AutonomousDevelopmentPlatform
-output-folder: $(go-sdks-folder)/adp/Generated
+output-folder: $(go-sdk-folder)/services/preview/adp/mgmt/2019-07-01-preview
 ```
