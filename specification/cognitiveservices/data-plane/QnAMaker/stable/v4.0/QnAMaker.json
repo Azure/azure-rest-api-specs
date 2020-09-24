@@ -696,18 +696,10 @@
           ]
         },
         "metadata": {
-          "description": "List of metadata associated with the answer to be updated.",
+          "description": "List of metadata associated with the answer to be updated",
           "allOf": [
             {
               "$ref": "#/definitions/UpdateMetadataDTO"
-            }
-          ]
-        },
-        "alternateQuestionClusters": {
-          "description": "List of alternate questions clusters associated with the answer to be deleted.",
-          "allOf": [
-            {
-              "$ref": "#/definitions/UpdateAlternateQuestionClustersDTO"
             }
           ]
         },
@@ -763,21 +755,6 @@
           "maxLength": 100,
           "items": {
             "$ref": "#/definitions/MetadataDTO"
-          }
-        }
-      }
-    },
-    "UpdateAlternateQuestionClustersDTO": {
-      "type": "object",
-      "description": "PATCH Body schema to represent list of alternate questions clusters to be deleted.",
-      "additionalProperties": false,
-      "properties": {
-        "delete": {
-          "type": "array",
-          "description": "List of alternate questions to be deleted.",
-          "maxLength": 100,
-          "items": {
-            "type": "string"
           }
         }
       }
@@ -957,10 +934,10 @@
       "description": "Post body schema for Replace KB operation.",
       "additionalProperties": false,
       "required": [
-        "qnaList"
+        "qnAList"
       ],
       "properties": {
-        "qnaList": {
+        "qnAList": {
           "type": "array",
           "description": "List of Q-A (QnADTO) to be added to the knowledgebase. Q-A Ids are assigned by the service and should be omitted.",
           "items": {
