@@ -177,16 +177,19 @@
             }
           },
           "200": {
-            "description": "Success"
+            "description": "OK. The resource was deleted successfully."
           },
           "202": {
-            "description": "Accepted",
+            "description": "Accepted. The request was well-formed and received properly.",
             "headers": {
               "Azure-AsyncOperation": {
                 "description": "URI to poll for asynchronous operation status.",
                 "type": "string"
               }
             }
+          },
+          "204": {
+            "description": "The resource does not exist and the request was well formed."
           }
         }
       }
