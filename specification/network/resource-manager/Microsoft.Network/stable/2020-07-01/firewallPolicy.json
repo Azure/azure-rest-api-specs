@@ -634,6 +634,10 @@
         "transportSecurity": {
           "description": "TLS Configuration definition.",
           "$ref": "#/definitions/FirewallPolicyTransportSecurity"
+        },
+        "sku": {
+          "description": "The Firewall Policy SKU.",
+          "$ref": "#/definitions/FirewallPolicySku"
         }
       },
       "description": "Firewall Policy definition."
@@ -1285,5 +1289,22 @@
       },
       "description": "Trusted Root certificates properties for tls."
     }
+  },
+  "FirewallPolicySku": {
+    "properties": {
+      "tier": {
+        "type": "string",
+        "description": "Tier of Firewall Policy.",
+        "enum": [
+          "Standard",
+          "Premium"
+        ],
+        "x-ms-enum": {
+          "name": "FirewallPolicySkuTier",
+          "modelAsString": true
+        }
+      }
+    },
+    "description": "SKU of Firewall policy."
   }
 }
