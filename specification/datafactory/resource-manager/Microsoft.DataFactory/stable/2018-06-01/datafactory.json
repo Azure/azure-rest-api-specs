@@ -4079,6 +4079,208 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/credentials": {
+      "get": {
+        "tags": [
+          "credentials"
+        ],
+        "operationId": "CredentialOperations_ListByFactory",
+        "x-ms-examples": {
+          "Credentials_ListByFactory": {
+            "$ref": "./examples/Credentials_ListByFactory.json"
+          }
+        },
+        "description": "List credentials.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/factoryName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/CredentialListResponse"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Azure Data Factory service.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/credentials/{credentialName}": {
+      "put": {
+        "tags": [
+          "credentials"
+        ],
+        "operationId": "CredentialOperations_CreateOrUpdate",
+        "x-ms-examples": {
+          "Credentials_Create": {
+            "$ref": "./examples/Credentials_Create.json"
+          }
+        },
+        "description": "Creates or updates a credential.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/factoryName"
+          },
+          {
+            "$ref": "#/parameters/credentialName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "name": "If-Match",
+            "in": "header",
+            "required": false,
+            "type": "string",
+            "description": "ETag of the credential entity. Should only be specified for update, for which it should match existing entity or can be * for unconditional update."
+          },
+          {
+            "name": "credential",
+            "description": "Credential resource definition.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CredentialResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/CredentialResource"
+            }
+          },
+          "default": {
+            "description": "An error response received from PUT credential operation.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "credentials"
+        ],
+        "operationId": "CredentialOperations_Get",
+        "x-ms-examples": {
+          "Credentials_Get": {
+            "$ref": "./examples/Credentials_Get.json"
+          }
+        },
+        "description": "Gets a credential.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/factoryName"
+          },
+          {
+            "$ref": "#/parameters/credentialName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "name": "If-None-Match",
+            "in": "header",
+            "required": false,
+            "type": "string",
+            "description": "ETag of the credential entity. Should only be specified for get. If the ETag matches the existing entity tag, or if * was provided, then no content will be returned."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/CredentialResource"
+            }
+          },
+          "304": {
+            "description": "Not modified."
+          },
+          "default": {
+            "description": "An error response received from GET credential operation.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "credentials"
+        ],
+        "operationId": "CredentialOperations_Delete",
+        "x-ms-examples": {
+          "Credentials_Delete": {
+            "$ref": "./examples/Credentials_Delete.json"
+          }
+        },
+        "description": "Deletes a credential.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/factoryName"
+          },
+          {
+            "$ref": "#/parameters/credentialName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK."
+          },
+          "204": {
+            "description": "No Content."
+          },
+          "default": {
+            "description": "An error response received from DELETE credential operation.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -6379,6 +6581,66 @@
       "required": [
         "properties"
       ]
+    },
+    "CredentialReference": {
+      "description": "Credential reference type.",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "Credential reference type.",
+          "enum": [
+            "CredentialReference"
+          ]
+        },
+        "referenceName": {
+          "type": "string",
+          "description": "Reference credential name."
+        }
+      },
+      "additionalProperties": {
+        "type": "object"
+      },
+      "required": [
+        "type",
+        "referenceName"
+      ]
+    },
+    "CredentialResource": {
+      "description": "Credential resource type.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/SubResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "./entityTypes/Credential.json#/definitions/Credential",
+          "description": "Properties of credentials."
+        }
+      },
+      "required": [
+        "properties"
+      ]
+    },
+    "CredentialListResponse": {
+      "description": "A list of credential resources.",
+      "type": "object",
+      "required": [
+        "value"
+      ],
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "List of credentials.",
+          "items": {
+            "$ref": "#/definitions/CredentialResource"
+          }
+        },
+        "nextLink": {
+          "description": "The link to the next page of results, if any remaining results exist.",
+          "type": "string"
+        }
+      }
     }
   },
   "parameters": {
@@ -6502,6 +6764,17 @@
       "pattern": "^[A-Za-z0-9_][^<>*#.%&:\\\\+?/]*$",
       "minLength": 1,
       "maxLength": 260,
+      "x-ms-parameter-location": "method"
+    },
+    "credentialName": {
+      "name": "credentialName",
+      "description": "Credential name",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "pattern": "^[A-Za-z0-9_][^<>*#.%&:\\\\+?/]*$",
+      "minLength": 1,
+      "maxLength": 127,
       "x-ms-parameter-location": "method"
     },
     "managedVirtualNetworkName": {
