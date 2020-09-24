@@ -13,7 +13,7 @@ go:
 
 ``` yaml $(go) && $(multiapi)
 batch:
-  - tag: package-2020-07
+  - tag: package--[[Version]]-[[ReleaseState]]
 ```
 
 ### Tag: package-[[Version]]-[[ReleaseState]] and go
