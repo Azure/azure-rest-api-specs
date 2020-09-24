@@ -932,7 +932,7 @@
           "200": {
             "description": "The request was successful; the request was well-formed and received properly."
           },
-          "202": {
+          "204": {
             "description": "Compute deletion initiated.",
             "headers": {
               "Azure-AsyncOperation": {
@@ -2709,7 +2709,7 @@
       },
       "description": "The List WorkspaceQuotasByVMFamily operation response."
     },
-    "Identity": {
+    "AMLIdentity": {
       "properties": {
         "principalId": {
           "readOnly": true,
@@ -2784,7 +2784,7 @@
           "readOnly": true
         },
         "identity": {
-          "$ref": "#/definitions/Identity",
+          "$ref": "#/definitions/AMLIdentity",
           "description": "The identity of the resource."
         },
         "location": {
@@ -4299,7 +4299,7 @@
           "type": "string"
         },
         "identity": {
-          "$ref": "#/definitions/Identity"
+          "$ref": "#/definitions/AMLIdentity"
         },
         "properties": {
           "$ref": "#/definitions/LinkedServiceProps"
@@ -4319,7 +4319,7 @@
           "type": "string"
         },
         "identity": {
-          "$ref": "#/definitions/Identity"
+          "$ref": "#/definitions/AMLIdentity"
         },
         "properties": {
           "$ref": "#/definitions/LinkedServiceProps"
