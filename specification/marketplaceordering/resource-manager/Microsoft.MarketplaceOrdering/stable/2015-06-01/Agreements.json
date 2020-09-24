@@ -18,7 +18,7 @@
 				"operationId": "agreement_Sign",
 				"description": "Sign marketplace terms.",
 				"x-ms-examples": {
-					"SetMarketplaceTerms": {
+					"SignMarketplaceTerms": {
 						"$ref": "./examples/SignMarketplaceTerms.json"
 					}
 				},
@@ -69,6 +69,12 @@
 						"schema": {
 							"type": "object"
 						}
+					},
+					"default": {
+						"description": "Microsoft.MarketplaceOrdering error response describing why the operation failed.",
+						"schema": {
+							"$ref": "#/definitions/ErrorResponse"
+						}
 					}
 				}
 			}
@@ -81,7 +87,7 @@
 				"operationId": "agreement_Cancel",
 				"description": "Cancel marketplace terms.",
 				"x-ms-examples": {
-					"SetMarketplaceTerms": {
+					"CancelMarketplaceTerms": {
 						"$ref": "./examples/CancelMarketplaceTerms.json"
 					}
 				},
@@ -132,6 +138,12 @@
 						"schema": {
 							"type": "object"
 						}
+					},
+					"default": {
+						"description": "Microsoft.MarketplaceOrdering error response describing why the operation failed.",
+						"schema": {
+							"$ref": "#/definitions/ErrorResponse"
+						}
 					}
 				}
 			}
@@ -144,7 +156,7 @@
 				"operationId": "agreement_GetAgreement",
 				"description": "Get marketplace agreement.",
 				"x-ms-examples": {
-					"SetMarketplaceTerms": {
+					"GetAgreementMarketplaceTerms": {
 						"$ref": "./examples/GetAgreementMarketplaceTerms.json"
 					}
 				},
@@ -194,6 +206,12 @@
 						"description": "OK",
 						"schema": {
 							"type": "object"
+						}
+					},
+					"default": {
+						"description": "Microsoft.MarketplaceOrdering error response describing why the operation failed.",
+						"schema": {
+							"$ref": "#/definitions/ErrorResponse"
 						}
 					}
 				}
@@ -252,6 +270,12 @@
 						"schema": {
 							"type": "object"
 						}
+					},
+					"default": {
+						"description": "Microsoft.MarketplaceOrdering error response describing why the operation failed.",
+						"schema": {
+							"$ref": "#/definitions/ErrorResponse"
+						}
 					}
 				}
 			}
@@ -307,6 +331,12 @@
 						"description": "OK",
 						"schema": {
 							"type": "object"
+						}
+					},
+					"default": {
+						"description": "Microsoft.MarketplaceOrdering error response describing why the operation failed.",
+						"schema": {
+							"$ref": "#/definitions/ErrorResponse"
 						}
 					}
 				}
@@ -364,6 +394,12 @@
 						"schema": {
 							"type": "object"
 						}
+					},
+					"default": {
+						"description": "Microsoft.MarketplaceOrdering error response describing why the operation failed.",
+						"schema": {
+							"$ref": "#/definitions/ErrorResponse"
+						}
 					}
 				}
 			}
@@ -376,7 +412,7 @@
 				"operationId": "agreement_GetAgreements",
 				"description": "List marketplace agreements in the subscription.",
 				"x-ms-examples": {
-					"SetMarketplaceTerms": {
+					"ListMarketplaceTerms": {
 						"$ref": "./examples/ListMarketplaceTerms.json"
 					}
 				},
@@ -408,6 +444,12 @@
 						"description": "OK",
 						"schema": {
 							"type": "object"
+						}
+					},
+					"default": {
+						"description": "Microsoft.MarketplaceOrdering error response describing why the operation failed.",
+						"schema": {
+							"$ref": "#/definitions/ErrorResponse"
 						}
 					}
 				}
@@ -485,6 +527,12 @@
 						"description": "OK",
 						"schema": {
 							"type": "object"
+						}
+					},
+					"default": {
+						"description": "Microsoft.MarketplaceOrdering error response describing why the operation failed.",
+						"schema": {
+							"$ref": "#/definitions/ErrorResponse"
 						}
 					}
 				}
@@ -567,6 +615,12 @@
 						"schema": {
 							"type": "object"
 						}
+					},
+					"default": {
+						"description": "Microsoft.MarketplaceOrdering error response describing why the operation failed.",
+						"schema": {
+							"$ref": "#/definitions/ErrorResponse"
+						}
 					}
 				}
 			}
@@ -600,6 +654,12 @@
 						"description": "OK",
 						"schema": {
 							"type": "object"
+						}
+					},
+					"default": {
+						"description": "Microsoft.MarketplaceOrdering error response describing why the operation failed.",
+						"schema": {
+							"$ref": "#/definitions/ErrorResponse"
 						}
 					}
 				},
@@ -654,6 +714,27 @@
 				},
 				"Accepted": {
 					"type": "boolean"
+				}
+			}
+		},
+		"ErrorResponse": {
+			"description": "Error response indicates Microsoft.MarketplaceOrdering service is not able to process the incoming request. The reason is provided in the error message.",
+			"type": "object",
+			"properties": {
+				"error": {
+					"description": "The details of the error.",
+					"properties": {
+						"code": {
+							"description": "Error code.",
+							"type": "string",
+							"readOnly": true
+						},
+						"message": {
+							"description": "Error message indicating why the operation failed.",
+							"type": "string",
+							"readOnly": true
+						}
+					}
 				}
 			}
 		}
