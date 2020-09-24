@@ -511,7 +511,7 @@
             "LessThanOrEqual"
           ],
           "x-ms-enum": {
-            "name": "Operator",
+            "name": "conditionOperator",
             "modelAsString": true
           },
           "description": "The criteria operator."
@@ -526,11 +526,15 @@
           "description": "The minimum number of violations required within the selected lookback time window required to raise an alert.",
           "properties": {
             "numberOfEvaluationPeriods": {
-              "type": "number",
+              "type": "integer",
+              "format": "int64",
+              "default": 1,
               "description": "The number of aggregated lookback points. The lookback time window is calculated based on the aggregation granularity (windowSize) and the selected number of aggregated points. Default value is 1"
             },
             "minFailingPeriodsToAlert": {
-              "type": "number",
+              "type": "integer",
+              "format": "int64",
+              "default": 1,
               "description": "The number of violations to trigger an alert. Should be smaller or equal to numberOfEvaluationPeriods. Default value is 1"
             }
           }
@@ -558,7 +562,7 @@
             "Exclude"
           ],
           "x-ms-enum": {
-            "name": "operator",
+            "name": "dimensionOperator",
             "modelAsString": true
           }
         },
