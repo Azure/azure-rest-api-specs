@@ -9,10 +9,9 @@ batch:
   - tag: schema-[[ServiceName]]-[[Version]]
 ```
 
-
-### Tag: schema-[[Version]] and azureresourceschema
-
 Please also specify `--azureresourceschema-folder=<path to the root directory of your azure-resource-manager-schemas clone>`.
+
+### Tag: schema-[[ServiceName]]-[[Version]] and azureresourceschema
 
 ```yaml
   output-folder: $(azureresourceschema-folder)/schemas
