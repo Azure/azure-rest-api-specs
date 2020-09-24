@@ -34,7 +34,64 @@
     }
   },
   "paths": {
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Network/AzureWebCategories": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/azureWebCategories/{azureWebCategoryName}": {
+      "get": {
+        "tags": [
+          "AzureWebCategories"
+        ],
+        "operationId": "AzureWebCategories_Get",
+        "description": "Gets the specified Azure Web Category.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "azureWebCategoryName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the azureWebCategory."
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "Expands resourceIds back referenced by the azureWebCategory resource."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. The operation returns the resulting azureWebCategory resource.",
+            "schema": {
+              "$ref": "#/definitions/AzureWebCategory"
+            }
+          },
+          "default": {
+            "description": "Unexpected error.",
+            "schema": {
+              "$ref": "./network.json#/definitions/Error"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get_azureWebCategory": {
+            "$ref": "./examples/azureWebCategoryGet.json"
+          }
+        }
+     }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Network/azureWebCategories": {
       "get": {
         "tags": [
           "AzureWebCategories"
