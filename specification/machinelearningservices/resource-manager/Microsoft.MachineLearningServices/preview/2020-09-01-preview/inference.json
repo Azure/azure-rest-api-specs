@@ -920,14 +920,14 @@
           "type": "object",
           "description": "Configuration to setup Vnet. (ACI only)",
           "items": {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/VnetConfiguration"
+            "$ref": "machineLearningServices.json#/definitions/VnetConfiguration"
           }
         },
         "encryptionProperties": {
           "type": "object",
           "description": "Properties to setup Encryption. (ACI only)",
           "items": {
-            "$ref": "#/definitions/EncryptionProperties"
+            "$ref": "machineLearningServices.json#/definitions/EncryptionProperties"
           }
         }
       }
@@ -969,24 +969,6 @@
         "cName": {
           "type": "string",
           "description": "Name of CName used in certificate."
-        }
-      }
-    },
-    "EncryptionProperties": {
-      "type": "object",
-      "description": "Encryption Properties.",
-      "properties": {
-        "vaultBaseUrl": {
-          "type": "string",
-          "description": "Base URL for encryption."
-        },
-        "keyName": {
-          "type": "string",
-          "description": "Key Name."
-        },
-        "keyVersion": {
-          "type": "string",
-          "description": "Key Version."
         }
       }
     },
