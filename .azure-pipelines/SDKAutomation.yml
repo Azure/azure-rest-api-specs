@@ -13,12 +13,9 @@ variables:
 
 jobs:
 - job: "SDKAutomation"
-  displayName: SDK Automation
+  displayName: SDK
   pool:
-    vmImage: 'Ubuntu 16.04'
-  container:
-    image: sdkautomation.azurecr.io/openapi-sdk-automation:ppe
-    endpoint: sdkautomationv2-registry
+    vmImage: 'Ubuntu 18.04'
   timeoutInMinutes: 180
 
   variables:
