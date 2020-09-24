@@ -142,17 +142,26 @@
           "$ref": "#/definitions/AzureWebCategoryPropertiesFormat",
           "description": "Properties of the Azure Web Category."
         },
+        "id": {
+         "type": "string",
+         "description": "Resource ID."
+       },
+       "name": {
+         "readOnly": true,
+         "type": "string",
+         "description": "Resource name."
+       },
+       "type": {
+         "readOnly": true,
+         "type": "string",
+         "description": "Resource type."
+       },
        "etag": {
          "readOnly": true,
          "type": "string",
          "description": "A unique read-only string that changes whenever the resource is updated."
        }
       },
-      "allOf": [
-        {
-          "$ref": "./network.json#/definitions/Resource"
-        }
-      ],
       "description": "Azure Web Category Resource."
     },
     "AzureWebCategoryListResult": {
