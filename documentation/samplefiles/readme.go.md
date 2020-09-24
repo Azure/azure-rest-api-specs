@@ -5,7 +5,6 @@ These settings apply only when `--go` is specified on the command line.
 ```yaml $(go)
 go:
   license-header: MICROSOFT_APACHE_NO_VERSION
-  namespace: [[ServiceName]]
   clear-output-folder: true
 ```
 
@@ -22,6 +21,6 @@ These settings apply only when `--tag=package-[[Version]] --go` is specified on 
 Please also specify `--go-sdks-folder=<path to the root directory of your azure-sdk-for-go clone>`.
 
 ```yaml $(tag) == 'package-[[Version]]-[[ReleaseState]]' && $(go)
-namespace: [[ResourceProviderName]]
+namespace: [[ServiceName]]
 output-folder: $(go-sdk-folder)/services/[[ReleaseState]]/$(namespace)/mgmt/[[Version]]-[[ReleaseState]]/$(namespace)
 ```
