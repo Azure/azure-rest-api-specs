@@ -1,506 +1,679 @@
 {
-  "swagger": "2.0",
-  "info": {
-    "title": "MarketplaceOrdering.Agreements",
-    "description": "REST API for MarketplaceOrdering Agreements.",
-    "version": "2015-06-01"
-  },
-  "host": "management.azure.com",
-  "schemes": [
-    "https"
-  ],
-  "consumes": [
-    "application/json"
-  ],
-  "produces": [
-    "application/json"
-  ],
-  "security": [
-    {
-      "azure_auth": [
-        "user_impersonation"
-      ]
-    }
-  ],
-  "securityDefinitions": {
-    "azure_auth": {
-      "type": "oauth2",
-      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
-      "flow": "implicit",
-      "description": "Azure Active Directory OAuth2 Flow.",
-      "scopes": {
-        "user_impersonation": "impersonate your user account"
-      }
-    }
-  },
-  "paths": {
-    "/subscriptions/{subscriptionId}/providers/Microsoft.MarketplaceOrdering/offerTypes/{offerType}/publishers/{publisherId}/offers/{offerId}/plans/{planId}/agreements/current": {
-      "get": {
-        "operationId": "MarketplaceAgreements_Get",
-        "x-ms-examples": {
-          "GetMarketplaceTerms": {
-            "$ref": "./examples/GetMarketplaceTerms.json"
-          }
-        },
-        "description": "Get marketplace terms.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/OfferTypeParameter"
-          },
-          {
-            "$ref": "#/parameters/PublishersParameter"
-          },
-          {
-            "$ref": "#/parameters/OffersParameter"
-          },
-          {
-            "$ref": "#/parameters/PlansParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Terms returned successfully",
-            "schema": {
-              "$ref": "#/definitions/AgreementTerms"
-            }
-          }
-        }
-      },
-      "put": {
-        "operationId": "MarketplaceAgreements_Create",
-        "description": "Save marketplace terms.",
-        "x-ms-examples": {
-          "SetMarketplaceTerms": {
-            "$ref": "./examples/SetMarketplaceTerms.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/OfferTypeParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/PublishersParameter"
-          },
-          {
-            "$ref": "#/parameters/OffersParameter"
-          },
-          {
-            "$ref": "#/parameters/PlansParameter"
-          },
-          {
-            "name": "parameters",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/AgreementTerms"
-            },
-            "description": "Parameters supplied to the Create Marketplace Terms operation."
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK. The request was successfully processed and the terms were accepted or acceptance revoked as per the request body.",
-            "schema": {
-              "$ref": "#/definitions/AgreementTerms"
-            }
-          },
-          "default": {
-            "description": "Microsoft.MarketplaceOrdering error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        }
-      }
-    },
-    "/providers/Microsoft.MarketplaceOrdering/operations": {
-      "get": {
-        "tags": [
-          "Operations"
-        ],
-        "description": "Lists all of the available Microsoft.MarketplaceOrdering REST API operations.",
-        "operationId": "Operations_List",
-        "parameters": [
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK. The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/OperationListResult"
-            }
-          },
-          "default": {
-            "description": "Microsoft.MarketplaceOrdering error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.MarketplaceOrdering/agreements/{publisherId}/offers/{offerId}/plans/{planId}/sign": {
-      "post": {
-        "operationId": "MarketplaceAgreements_Sign",
-        "description": "Sign marketplace terms.",
-        "x-ms-examples": {
-          "SetMarketplaceTerms": {
-            "$ref": "./examples/SignMarketplaceTerms.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/PublishersParameter"
-          },
-          {
-            "$ref": "#/parameters/OffersParameter"
-          },
-          {
-            "$ref": "#/parameters/PlansParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK. The request was successfully processed and the terms were accepted.",
-            "schema": {
-              "$ref": "#/definitions/AgreementTerms"
-            }
-          },
-          "default": {
-            "description": "Microsoft.MarketplaceOrdering error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.MarketplaceOrdering/agreements/{publisherId}/offers/{offerId}/plans/{planId}/cancel": {
-      "post": {
-        "operationId": "MarketplaceAgreements_Cancel",
-        "description": "Cancel marketplace terms.",
-        "x-ms-examples": {
-          "SetMarketplaceTerms": {
-            "$ref": "./examples/CancelMarketplaceTerms.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/PublishersParameter"
-          },
-          {
-            "$ref": "#/parameters/OffersParameter"
-          },
-          {
-            "$ref": "#/parameters/PlansParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK. The request was successfully processed and the terms were rejected.",
-            "schema": {
-              "$ref": "#/definitions/AgreementTerms"
-            }
-          },
-          "default": {
-            "description": "Microsoft.MarketplaceOrdering error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.MarketplaceOrdering/agreements/{publisherId}/offers/{offerId}/plans/{planId}": {
-      "get": {
-        "operationId": "MarketplaceAgreements_GetAgreement",
-        "description": "Get marketplace agreement.",
-        "x-ms-examples": {
-          "SetMarketplaceTerms": {
-            "$ref": "./examples/GetAgreementMarketplaceTerms.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/PublishersParameter"
-          },
-          {
-            "$ref": "#/parameters/OffersParameter"
-          },
-          {
-            "$ref": "#/parameters/PlansParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Terms returned successfully",
-            "schema": {
-              "$ref": "#/definitions/AgreementTerms"
-            }
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.MarketplaceOrdering/agreements": {
-      "get": {
-        "operationId": "MarketplaceAgreements_List",
-        "description": "List marketplace agreements in the subscription.",
-        "x-ms-examples": {
-          "SetMarketplaceTerms": {
-            "$ref": "./examples/ListMarketplaceTerms.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Terms returned successfully",
-            "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/AgreementTerms"
-              }
-            }
-          }
-        }
-      }
-    }
-  },
-  "parameters": {
-    "SubscriptionIdParameter": {
-      "name": "subscriptionId",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "The subscription ID that identifies an Azure subscription."
-    },
-    "OfferTypeParameter": {
-      "name": "offerType",
-      "in": "path",
-      "required": true,
-      "description": "Offer Type, currently only virtualmachine type is supported.",
-      "x-ms-parameter-location": "method",
-      "enum": [
-        "virtualmachine"
-      ],
-      "type": "string",
-      "x-ms-enum": {
-        "name": "OfferType",
-        "modelAsString": true
-      }
-    },
-    "ApiVersionParameter": {
-      "name": "api-version",
-      "in": "query",
-      "required": true,
-      "type": "string",
-      "description": "The API version to use for the request."
-    },
-    "PublishersParameter": {
-      "name": "publisherId",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "x-ms-parameter-location": "method",
-      "description": "Publisher identifier string of image being deployed."
-    },
-    "OffersParameter": {
-      "name": "offerId",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "x-ms-parameter-location": "method",
-      "description": "Offer identifier string of image being deployed."
-    },
-    "PlansParameter": {
-      "name": "planId",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "x-ms-parameter-location": "method",
-      "description": "Plan identifier string of image being deployed."
-    }
-  },
-  "definitions": {
-    "AgreementTerms": {
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/AgreementProperties",
-          "description": "Represents the properties of the resource.",
-          "x-ms-client-flatten": true
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/Resource"
-        }
-      ],
-      "description": "Terms properties for provided Publisher/Offer/Plan tuple"
-    },
-    "AgreementProperties": {
-      "properties": {
-        "publisher": {
-          "type": "string",
-          "description": "Publisher identifier string of image being deployed."
-        },
-        "product": {
-          "type": "string",
-          "description": "Offer identifier string of image being deployed."
-        },
-        "plan": {
-          "type": "string",
-          "description": "Plan identifier string of image being deployed."
-        },
-        "licenseTextLink": {
-          "type": "string",
-          "description": "Link to HTML with Microsoft and Publisher terms."
-        },
-        "privacyPolicyLink": {
-          "type": "string",
-          "description": "Link to the privacy policy of the publisher."
-        },
-        "retrieveDatetime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Date and time in UTC of when the terms were accepted. This is empty if Accepted is false."
-        },
-        "signature": {
-          "type": "string",
-          "description": "Terms signature."
-        },
-        "accepted": {
-          "type": "boolean",
-          "description": "If any version of the terms have been accepted, otherwise false."
-        }
-      },
-      "description": "Agreement Terms definition"
-    },
-    "ErrorResponse": {
-      "description": "Error response indicates Microsoft.MarketplaceOrdering service is not able to process the incoming request. The reason is provided in the error message.",
-      "type": "object",
-      "properties": {
-        "error": {
-          "description": "The details of the error.",
-          "properties": {
-            "code": {
-              "description": "Error code.",
-              "type": "string",
-              "readOnly": true
-            },
-            "message": {
-              "description": "Error message indicating why the operation failed.",
-              "type": "string",
-              "readOnly": true
-            }
-          }
-        }
-      }
-    },
-    "Operation": {
-      "description": "Microsoft.MarketplaceOrdering REST API operation",
-      "type": "object",
-      "properties": {
-        "name": {
-          "description": "Operation name: {provider}/{resource}/{operation}",
-          "type": "string"
-        },
-        "display": {
-          "description": "The object that represents the operation.",
-          "properties": {
-            "provider": {
-              "description": "Service provider: Microsoft.MarketplaceOrdering",
-              "type": "string"
-            },
-            "resource": {
-              "description": "Resource on which the operation is performed: Agreement, virtualmachine, etc.",
-              "type": "string"
-            },
-            "operation": {
-              "description": "Operation type: Get Agreement, Sign Agreement, Cancel Agreement etc.",
-              "type": "string"
-            }
-          }
-        }
-      }
-    },
-    "OperationListResult": {
-      "description": "Result of the request to list MarketplaceOrdering operations. It contains a list of operations and a URL link to get the next set of results.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Operation"
-          },
-          "description": "List of Microsoft.MarketplaceOrdering operations supported by the Microsoft.MarketplaceOrdering resource provider."
-        },
-        "nextLink": {
-          "type": "string",
-          "description": "URL to get the next set of operation list results if there are any.",
-          "readOnly": true
-        }
-      }
-    },
-    "Resource": {
-      "description": "ARM resource.",
-      "properties": {
-        "id": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Resource ID."
-        },
-        "name": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Resource name."
-        },
-        "type": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Resource type."
-        }
-      },
-      "x-ms-azure-resource": true
-    }
-  }
+	"swagger": "2.0",
+	"info": {
+		"version": "2015-06-01",
+		"title": "Microsoft.MarketplaceOrdering.Agreements",
+		"description": "REST API for MarketplaceOrdering Agreements."
+	},
+	"host": "marketplacecommerce-preview.azure.com",
+	"schemes": [
+		"https"
+	],
+	"paths": {
+		"/subscriptions/{subscriptionId}/providers/Microsoft.MarketplaceOrdering/agreements/{publisherId}/offers/{offerId}/plans/{planId}/sign": {
+			"post": {
+				"tags": [
+					"agreement"
+				],
+				"operationId": "agreement_Sign",
+				"description": "Sign marketplace terms.",
+				"x-ms-examples": {
+					"SetMarketplaceTerms": {
+						"$ref": "./examples/SignMarketplaceTerms.json"
+					}
+				},
+				"consumes": [],
+				"produces": [
+					"application/json",
+					"text/json",
+					"application/xml",
+					"text/xml"
+				],
+				"parameters": [
+					{
+						"name": "subscriptionId",
+						"in": "path",
+						"required": true,
+						"type": "string",
+						"format": "uuid"
+					},
+					{
+						"name": "publisherId",
+						"in": "path",
+						"required": true,
+						"type": "string"
+					},
+					{
+						"name": "offerId",
+						"in": "path",
+						"required": true,
+						"type": "string"
+					},
+					{
+						"name": "planId",
+						"in": "path",
+						"required": true,
+						"type": "string"
+					},
+					{
+						"name": "api-version",
+						"in": "query",
+						"required": true,
+						"type": "string",
+						"default": "2015-06-01"
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "OK",
+						"schema": {
+							"type": "object"
+						}
+					}
+				}
+			}
+		},
+		"/subscriptions/{subscriptionId}/providers/Microsoft.MarketplaceOrdering/agreements/{publisherId}/offers/{offerId}/plans/{planId}/cancel": {
+			"post": {
+				"tags": [
+					"agreement"
+				],
+				"operationId": "agreement_Cancel",
+				"description": "Cancel marketplace terms.",
+				"x-ms-examples": {
+					"SetMarketplaceTerms": {
+						"$ref": "./examples/CancelMarketplaceTerms.json"
+					}
+				},
+				"consumes": [],
+				"produces": [
+					"application/json",
+					"text/json",
+					"application/xml",
+					"text/xml"
+				],
+				"parameters": [
+					{
+						"name": "subscriptionId",
+						"in": "path",
+						"required": true,
+						"type": "string",
+						"format": "uuid"
+					},
+					{
+						"name": "publisherId",
+						"in": "path",
+						"required": true,
+						"type": "string"
+					},
+					{
+						"name": "offerId",
+						"in": "path",
+						"required": true,
+						"type": "string"
+					},
+					{
+						"name": "planId",
+						"in": "path",
+						"required": true,
+						"type": "string"
+					},
+					{
+						"name": "api-version",
+						"in": "query",
+						"required": true,
+						"type": "string",
+						"default": "2015-06-01"
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "OK",
+						"schema": {
+							"type": "object"
+						}
+					}
+				}
+			}
+		},
+		"/subscriptions/{subscriptionId}/providers/Microsoft.MarketplaceOrdering/agreements/{publisherId}/offers/{offerId}/plans/{planId}": {
+			"get": {
+				"tags": [
+					"agreement"
+				],
+				"operationId": "agreement_GetAgreement",
+				"description": "Get marketplace agreement.",
+				"x-ms-examples": {
+					"SetMarketplaceTerms": {
+						"$ref": "./examples/GetAgreementMarketplaceTerms.json"
+					}
+				},
+				"consumes": [],
+				"produces": [
+					"application/json",
+					"text/json",
+					"application/xml",
+					"text/xml"
+				],
+				"parameters": [
+					{
+						"name": "subscriptionId",
+						"in": "path",
+						"required": true,
+						"type": "string",
+						"format": "uuid"
+					},
+					{
+						"name": "publisherId",
+						"in": "path",
+						"required": true,
+						"type": "string"
+					},
+					{
+						"name": "offerId",
+						"in": "path",
+						"required": true,
+						"type": "string"
+					},
+					{
+						"name": "planId",
+						"in": "path",
+						"required": true,
+						"type": "string"
+					},
+					{
+						"name": "api-version",
+						"in": "query",
+						"required": true,
+						"type": "string",
+						"default": "2015-06-01"
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "OK",
+						"schema": {
+							"type": "object"
+						}
+					}
+				}
+			}
+		},
+		"/providers/Microsoft.MarketplaceOrdering/agreements/{publisherId}/offers/{offerId}/plans/{planId}": {
+			"get": {
+				"tags": [
+					"agreement"
+				],
+				"operationId": "agreement_GetAgreementTenant",
+				"description": "Get marketplace agreement.",
+				"consumes": [],
+				"produces": [
+					"application/json",
+					"text/json",
+					"application/xml",
+					"text/xml"
+				],
+				"parameters": [
+					{
+						"name": "publisherId",
+						"in": "path",
+						"required": true,
+						"type": "string"
+					},
+					{
+						"name": "offerId",
+						"in": "path",
+						"required": true,
+						"type": "string"
+					},
+					{
+						"name": "planId",
+						"in": "path",
+						"required": true,
+						"type": "string"
+					},
+					{
+						"name": "market",
+						"in": "query",
+						"required": false,
+						"type": "string"
+					},
+					{
+						"name": "api-version",
+						"in": "query",
+						"required": true,
+						"type": "string",
+						"default": "2015-06-01"
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "OK",
+						"schema": {
+							"type": "object"
+						}
+					}
+				}
+			}
+		},
+		"/providers/Microsoft.MarketplaceOrdering/agreements/{publisherId}/offers/{offerId}/plans/{planId}/sign": {
+			"post": {
+				"tags": [
+					"agreement"
+				],
+				"operationId": "agreement_SignAgreementTenant",
+				"consumes": [],
+				"produces": [
+					"application/json",
+					"text/json",
+					"application/xml",
+					"text/xml"
+				],
+				"parameters": [
+					{
+						"name": "publisherId",
+						"in": "path",
+						"required": true,
+						"type": "string"
+					},
+					{
+						"name": "offerId",
+						"in": "path",
+						"required": true,
+						"type": "string"
+					},
+					{
+						"name": "planId",
+						"in": "path",
+						"required": true,
+						"type": "string"
+					},
+					{
+						"name": "market",
+						"in": "query",
+						"required": false,
+						"type": "string"
+					},
+					{
+						"name": "api-version",
+						"in": "query",
+						"required": true,
+						"type": "string",
+						"default": "2015-06-01"
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "OK",
+						"schema": {
+							"type": "object"
+						}
+					}
+				}
+			}
+		},
+		"/providers/Microsoft.MarketplaceOrdering/agreements/{publisherId}/offers/{offerId}/plans/{planId}/cancel": {
+			"post": {
+				"tags": [
+					"agreement"
+				],
+				"operationId": "agreement_CancelAgreementTenant",
+				"consumes": [],
+				"produces": [
+					"application/json",
+					"text/json",
+					"application/xml",
+					"text/xml"
+				],
+				"parameters": [
+					{
+						"name": "publisherId",
+						"in": "path",
+						"required": true,
+						"type": "string"
+					},
+					{
+						"name": "offerId",
+						"in": "path",
+						"required": true,
+						"type": "string"
+					},
+					{
+						"name": "planId",
+						"in": "path",
+						"required": true,
+						"type": "string"
+					},
+					{
+						"name": "market",
+						"in": "query",
+						"required": false,
+						"type": "string"
+					},
+					{
+						"name": "api-version",
+						"in": "query",
+						"required": true,
+						"type": "string",
+						"default": "2015-06-01"
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "OK",
+						"schema": {
+							"type": "object"
+						}
+					}
+				}
+			}
+		},
+		"/subscriptions/{subscriptionId}/providers/Microsoft.MarketplaceOrdering/agreements": {
+			"get": {
+				"tags": [
+					"agreement"
+				],
+				"operationId": "agreement_GetAgreements",
+				"description": "List marketplace agreements in the subscription.",
+				"x-ms-examples": {
+					"SetMarketplaceTerms": {
+						"$ref": "./examples/ListMarketplaceTerms.json"
+					}
+				},
+				"consumes": [],
+				"produces": [
+					"application/json",
+					"text/json",
+					"application/xml",
+					"text/xml"
+				],
+				"parameters": [
+					{
+						"name": "subscriptionId",
+						"in": "path",
+						"required": true,
+						"type": "string",
+						"format": "uuid"
+					},
+					{
+						"name": "api-version",
+						"in": "query",
+						"required": true,
+						"type": "string",
+						"default": "2015-06-01"
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "OK",
+						"schema": {
+							"type": "object"
+						}
+					}
+				}
+			}
+		},
+		"/subscriptions/{subscriptionId}/providers/Microsoft.MarketplaceOrdering/offerTypes/{offerType}/publishers/{publisherId}/offers/{offerId}/plans/{planId}/agreements/current": {
+			"get": {
+				"tags": [
+					"OfferAgreement"
+				],
+				"operationId": "OfferAgreement_GetAgreement",
+				"x-ms-examples": {
+					"GetMarketplaceTerms": {
+						"$ref": "./examples/GetMarketplaceTerms.json"
+					}
+				},
+				"description": "Get marketplace terms.",
+				"consumes": [],
+				"produces": [
+					"application/json",
+					"text/json",
+					"application/xml",
+					"text/xml"
+				],
+				"parameters": [
+					{
+						"name": "offerType",
+						"in": "path",
+						"required": true,
+						"type": "integer",
+						"format": "int32",
+						"enum": [
+							0,
+							1,
+							3,
+							4,
+							5
+						]
+					},
+					{
+						"name": "subscriptionId",
+						"in": "path",
+						"required": true,
+						"type": "string",
+						"format": "uuid"
+					},
+					{
+						"name": "publisherId",
+						"in": "path",
+						"required": true,
+						"type": "string"
+					},
+					{
+						"name": "offerId",
+						"in": "path",
+						"required": true,
+						"type": "string"
+					},
+					{
+						"name": "planId",
+						"in": "path",
+						"required": true,
+						"type": "string"
+					},
+					{
+						"name": "api-version",
+						"in": "query",
+						"required": true,
+						"type": "string",
+						"default": "2015-06-01"
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "OK",
+						"schema": {
+							"type": "object"
+						}
+					}
+				}
+			},
+			"put": {
+				"tags": [
+					"OfferAgreement"
+				],
+				"operationId": "OfferAgreement_SetAgreement",
+				"description": "Save marketplace terms.",
+				"x-ms-examples": {
+					"SetMarketplaceTerms": {
+						"$ref": "./examples/SetMarketplaceTerms.json"
+					}
+				},
+				"consumes": [
+					"application/json",
+					"text/json",
+					"application/xml",
+					"text/xml",
+					"application/x-www-form-urlencoded"
+				],
+				"produces": [
+					"application/json",
+					"text/json",
+					"application/xml",
+					"text/xml"
+				],
+				"parameters": [
+					{
+						"name": "subscriptionId",
+						"in": "path",
+						"required": true,
+						"type": "string",
+						"format": "uuid"
+					},
+					{
+						"name": "publisherId",
+						"in": "path",
+						"required": true,
+						"type": "string"
+					},
+					{
+						"name": "offerId",
+						"in": "path",
+						"required": true,
+						"type": "string"
+					},
+					{
+						"name": "planId",
+						"in": "path",
+						"required": true,
+						"type": "string"
+					},
+					{
+						"name": "terms",
+						"in": "body",
+						"required": true,
+						"schema": {
+							"$ref": "#/definitions/AgreementDefinition"
+						}
+					},
+					{
+						"name": "offerType",
+						"in": "path",
+						"required": true,
+						"type": "string"
+					},
+					{
+						"name": "api-version",
+						"in": "query",
+						"required": true,
+						"type": "string",
+						"default": "2015-06-01"
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "OK",
+						"schema": {
+							"type": "object"
+						}
+					}
+				}
+			}
+		},
+		"/providers/Microsoft.MarketplaceOrdering/operations": {
+			"get": {
+				"tags": [
+					"operations"
+				],
+				"operationId": "operations_GetOperations",
+				"description": "Lists all of the available Microsoft.MarketplaceOrdering REST API operations.",
+				"operationId": "Operations_List",
+				"consumes": [],
+				"produces": [
+					"application/json",
+					"text/json",
+					"application/xml",
+					"text/xml"
+				],
+				"parameters": [
+					{
+						"name": "api-version",
+						"in": "query",
+						"required": true,
+						"type": "string",
+						"default": "2015-06-01"
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "OK",
+						"schema": {
+							"type": "object"
+						}
+					}
+				},
+				"x-ms-pageable": {
+					"nextLinkName": "nextLink"
+				}
+			}
+		}
+	},
+	"definitions": {
+		"AgreementDefinition": {
+			"type": "object",
+			"properties": {
+				"Id": {
+					"type": "string"
+				},
+				"Name": {
+					"type": "string"
+				},
+				"Type": {
+					"type": "string"
+				},
+				"Properties": {
+					"$ref": "#/definitions/AgreementProperties"
+				}
+			}
+		},
+		"AgreementProperties": {
+			"type": "object",
+			"properties": {
+				"Publisher": {
+					"type": "string"
+				},
+				"Product": {
+					"type": "string"
+				},
+				"Plan": {
+					"type": "string"
+				},
+				"LicenseTextLink": {
+					"type": "string"
+				},
+				"PrivacyPolicyLink": {
+					"type": "string"
+				},
+				"RetrieveDatetime": {
+					"format": "date-time",
+					"type": "string"
+				},
+				"Signature": {
+					"type": "string"
+				},
+				"Accepted": {
+					"type": "boolean"
+				}
+			}
+		}
+	},
+	"security": [
+		{
+			"azure_auth": [
+				"user_impersonation"
+			]
+		}
+	],
+	"securityDefinitions": {
+		"azure_auth": {
+			"type": "oauth2",
+			"description": "Azure Active Directory OAuth2 Flow.",
+			"flow": "implicit",
+			"authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+			"scopes": {
+				"user_impersonation": "impersonate your user account"
+			}
+		}
+	}
 }
