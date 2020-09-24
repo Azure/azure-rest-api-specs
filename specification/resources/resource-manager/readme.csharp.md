@@ -802,8 +802,8 @@ namespace: Microsoft.Azure.Management.Profiles.$(csharp-profile).ResourceManager
 output-folder: $(csharp-sdks-folder)/$(csharp-profile)/Resource/Management.ResourceManager/Generated
 
 batch:
+ - tag: package-resources-2019-10
  - tag: package-policy-2016-12
  - tag: package-locks-2016-09
- - tag: package-subscriptions-2016-06
- - tag: package-resources-2019-10
+# - tag: package-subscriptions-2016-06
  ```
