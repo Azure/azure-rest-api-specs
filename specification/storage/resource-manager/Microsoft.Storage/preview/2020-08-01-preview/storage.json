@@ -1979,6 +1979,19 @@
       ],
       "description": "The encryption settings on the storage account."
     },
+    "ResourceAccessRule": {
+      "properties": {
+        "tenantId": {
+          "type": "string",
+          "description": "Tenant Id"
+        },
+        "resourceId": {
+          "type": "string",
+          "description": "Resource Id"
+        }
+      },
+      "description": "Resource Access Rule."
+    },
     "VirtualNetworkRule": {
       "properties": {
         "id": {
@@ -2061,6 +2074,13 @@
           "x-ms-client-name": "Bypass",
           "default": "AzureServices",
           "description": "Specifies whether traffic is bypassed for Logging/Metrics/AzureServices. Possible values are any combination of Logging|Metrics|AzureServices (For example, \"Logging, Metrics\"), or None to bypass none of those traffics."
+        },
+        "resourceAccessRules": {
+          "type": "array",
+          "items": {
+            "description": "Resource Access Rules.",
+            "$ref": "#/definitions/ResourceAccessRule"
+          }
         },
         "virtualNetworkRules": {
           "type": "array",
