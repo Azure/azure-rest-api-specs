@@ -438,8 +438,7 @@
         },
         "Locations": {
           "type": "array",
-          "description":
-            "A list of where to physically run the tests from to give global coverage for accessibility of your application.",
+          "description": "A list of where to physically run the tests from to give global coverage for accessibility of your application.",
           "items": {
             "$ref": "#/definitions/WebTestGeolocation"
           }
@@ -469,7 +468,10 @@
             },
             "Headers": {
               "type": "array",
-              "description": "List of headers and their values to add to the webtest call."
+              "description": "List of headers and their values to add to the webtest call.",
+              "items": {
+                "$ref": "#/definitions/HeaderItem"
+              }
             },
             "HttpVerb": {
               "type": "string",
@@ -507,24 +509,24 @@
             }
           }
         },
-          "SSLCheck": {
-            "type": "boolean",
-            "description": "Checks to see if the SSL cert is still valid."
-          },
-          "SSLCertRemainingLifetimeCheck": {
-            "type": "integer",
-            "format": "int32",
-            "description": "A number of days to check still remain before the the existing SSL cert expires."
-          },
-          "ExpectedHttpStatusCode": {
-            "type": "integer",
-            "format": "int32",
-            "description": "Validate that the webtest returns the http status code provided."
-          },
-          "IgnoreHttpsStatusCode": {
-            "type": "boolean",
-            "description": "When set, validation will ignore the status code."
-          }
+        "SSLCheck": {
+          "type": "boolean",
+          "description": "Checks to see if the SSL cert is still valid."
+        },
+        "SSLCertRemainingLifetimeCheck": {
+          "type": "integer",
+          "format": "int32",
+          "description": "A number of days to check still remain before the the existing SSL cert expires."
+        },
+        "ExpectedHttpStatusCode": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Validate that the webtest returns the http status code provided."
+        },
+        "IgnoreHttpsStatusCode": {
+          "type": "boolean",
+          "description": "When set, validation will ignore the status code."
+        }
       }
     },
     "WebTestGeolocation": {
@@ -536,6 +538,23 @@
           "type": "string",
           "description": "Location ID for the webtest to run from."
         }
+      }
+    },
+    "HeaderFields": {
+      "description": "Geo-physical location to run a web test from. You must specify one or more locations for the test to run from.",
+      "type": "object",
+      "properties": {
+        "key": {
+          "x-ms-client-name": "name",
+          "type": "string",
+          "description": "the name of the header."
+        },
+        "value": {
+          "x-ms-client-name": "value",
+          "type": "string",
+          "description": "the value of the header."
+        }
+
       }
     }
   },
