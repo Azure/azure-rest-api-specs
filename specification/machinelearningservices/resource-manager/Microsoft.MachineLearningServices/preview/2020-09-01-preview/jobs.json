@@ -176,6 +176,9 @@
               "$ref": "#/definitions/MachineLearningServiceError"
             }
           },
+          "200": {
+            "description": "Success"
+          },
           "202": {
             "description": "Accepted",
             "headers": {
@@ -586,36 +589,24 @@
           "format": "int64",
           "description": "The total datapoint count.",
           "type": "integer",
-          "x-ms-mutability": [
-            "read"
-          ],
           "readOnly": true
         },
         "completedDatapointCount": {
           "format": "int64",
           "description": "The completed datapoint count.",
           "type": "integer",
-          "x-ms-mutability": [
-            "read"
-          ],
           "readOnly": true
         },
         "skippedDatapointCount": {
           "format": "int64",
           "description": "The skipped datapoint count.",
           "type": "integer",
-          "x-ms-mutability": [
-            "read"
-          ],
           "readOnly": true
         },
         "incrementalDatasetLastRefreshTime": {
           "format": "date-time",
           "description": "The time of last successful incremental dataset refresh in UTC.",
           "type": "string",
-          "x-ms-mutability": [
-            "read"
-          ],
           "readOnly": true
         }
       }
@@ -636,34 +627,22 @@
             "name": "StatusMessageLevel",
             "modelAsString": true
           },
-          "x-ms-mutability": [
-            "read"
-          ],
           "readOnly": true
         },
         "code": {
           "description": "Service-defined message code.",
           "type": "string",
-          "x-ms-mutability": [
-            "read"
-          ],
           "readOnly": true
         },
         "message": {
           "description": "A human-readable representation of the message code.",
           "type": "string",
-          "x-ms-mutability": [
-            "read"
-          ],
           "readOnly": true
         },
         "createdTimeUtc": {
           "format": "date-time",
           "description": "Time in UTC at which the message was created.",
           "type": "string",
-          "x-ms-mutability": [
-            "read"
-          ],
           "readOnly": true
         }
       }
@@ -720,25 +699,16 @@
           "format": "uuid",
           "description": "Internal id of the job(Previously called project).",
           "type": "string",
-          "x-ms-mutability": [
-            "read"
-          ],
           "readOnly": true
         },
         "status": {
           "description": "Status of the job.",
           "$ref": "#/definitions/JobStatus",
-          "x-ms-mutability": [
-            "read"
-          ],
           "readOnly": true
         },
         "progressMetrics": {
           "description": "Progress metrics of the job.",
           "$ref": "#/definitions/ProgressMetrics",
-          "x-ms-mutability": [
-            "read"
-          ],
           "readOnly": true
         },
         "statusMessages": {
@@ -747,26 +717,17 @@
           "items": {
             "$ref": "#/definitions/StatusMessage"
           },
-          "x-ms-mutability": [
-            "read"
-          ],
           "readOnly": true
         },
         "createdTimeUtc": {
           "format": "date-time",
           "description": "Created time of the job in UTC timezone.",
           "type": "string",
-          "x-ms-mutability": [
-            "read"
-          ],
           "readOnly": true
         },
         "id": {
           "description": "Name and identifier for a job.",
           "type": "string",
-          "x-ms-mutability": [
-            "read"
-          ],
           "readOnly": true
         },
         "properties": {
