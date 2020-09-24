@@ -26,7 +26,7 @@ These are the global settings for the [[ServiceName]].
 
 ```yaml
 openapi-type: [[OpenApiType]]
-tag: package-YYYY-MM-DD	tag: package-[[Version]]
+tag: package-[[Version]]
 ```
 
 ### Tag: package-[[Version]]
@@ -58,7 +58,7 @@ swagger-to-sdk:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_[[ServiceName]]']
   - repo: azure-sdk-for-azureresourceschema
     after_scripts:
-      - bundle install && rake arm:regen_all_profiles['azure_mgmt_[[ServiceName]]']
+      - node sdkauto_afterscript.js [[ServiceName]]/resource-manager
 ```
 
 ## Go
