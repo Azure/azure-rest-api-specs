@@ -1,0 +1,1336 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Azure Machine Learning Workspaces",
+    "description": "These APIs allow end users to operate on Azure Machine Learning Workspace resources.",
+    "version": "2020-09-01-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/onlineEndpoints": {
+      "get": {
+        "tags": [
+          "MachineLearningOnlineEndpoints"
+        ],
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "operationId": "MachineLearningOnlineEndpoints_ListOnlineEndpoints",
+        "description": "Gets Online Endpoints.",
+        "x-ms-examples": {
+          "Get Endpoints": {
+            "$ref": "./examples/inference/getOnlineEndpoints.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "machineLearningServices.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/APIVersionParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/PaginationParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The response includes a paginated array of Machine Learning Online Endpoints.",
+            "schema": {
+              "$ref": "#/definitions/PaginatedOnlineEndpointsList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the request failed.",
+            "schema": {
+              "$ref": "machineLearningServices.json#/definitions/MachineLearningServiceError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/onlineEndpoints/{onlineEndpointName}": {
+      "get": {
+        "tags": [
+          "MachineLearningOnlineEndpoints"
+        ],
+        "operationId": "MachineLearningOnlineEndpoints_Get",
+        "description": "Gets Details in specified Online Endpoint.",
+        "x-ms-examples": {
+          "Get ACI Endpoint": {
+            "$ref": "./examples/inference/getACIOnlineEndpoint.json"
+          },
+          "Get AKS Endpoint": {
+            "$ref": "./examples/inference/getAKSOnlineEndpoint.json"
+          },
+          "Get AMLCompute Endpoint": {
+            "$ref": "./examples/inference/getAMLComputeOnlineEndpoint.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "machineLearningServices.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/APIVersionParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/PaginationParameter"
+          },
+          {
+            "$ref": "#/parameters/OnlineEndpointNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The response includes a Machine Learning Online Endpoint based on OnlineEndpointName, if any.",
+            "schema": {
+              "$ref": "#/definitions/OnlineEndpointResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the request failed.",
+            "schema": {
+              "$ref": "machineLearningServices.json#/definitions/MachineLearningServiceError"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "MachineLearningOnlineEndpoints"
+        ],
+        "operationId": "MachineLearningOnlineEndpoints_Delete",
+        "description": "Delete a specific Online Endpoint.",
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Delete Endpoint": {
+            "$ref": "./examples/inference/deleteOnlineEndpoint.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "machineLearningServices.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/APIVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/OnlineEndpointNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The resource exists and was deleted successfully."
+          },
+          "202": {
+            "description": "The delete operation has been accepted and is deleting the resource.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "description": "URI to poll for asynchronous operation status.",
+                "type": "string"
+              }
+            }
+          },
+          "204": {
+            "description": "The resource does not exist and the request was well formed."
+          },
+          "default": {
+            "description": "Error response describing why the request failed.",
+            "schema": {
+              "$ref": "machineLearningServices.json#/definitions/MachineLearningServiceError"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "MachineLearningOnlineEndpoints"
+        ],
+        "description": "Creates or updates an Online Endpoint. This call will update an Online Endpoint if it exists. This is a nonrecoverable operation. If your intent is to create a new Online Endpoint, do a GET first to verify that it does not exist yet.",
+        "operationId": "MachineLearningOnlineEndpoints_CreateOrUpdate",
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Create or Update ACI Endpoint": {
+            "$ref": "./examples/inference/createOrUpdateACIOnlineEndpoint.json"
+          },
+          "Create or Update AKS Endpoint": {
+            "$ref": "./examples/inference/createOrUpdateAKSOnlineEndpoint.json"
+          },
+          "Create or Update AMLCompute Endpoint": {
+            "$ref": "./examples/inference/createOrUpdateAMLComputeOnlineEndpoint.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "machineLearningServices.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/APIVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/OnlineEndpointNameParameter"
+          },
+          {
+            "in": "body",
+            "name": "properties",
+            "description": "The payload that is used to create or update the Online Endpoint.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/OnlineEndpointResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Online Endpoint creation or update initiated.",
+            "schema": {
+              "$ref": "#/definitions/OnlineEndpointResource"
+            }
+          },
+          "202": {
+            "description": "Online Endpoint creation or update initiated.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "description": "URI to poll for asynchronous operation status.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "machineLearningServices.json#/definitions/MachineLearningServiceError"
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "MachineLearningOnlineEndpoints"
+        ],
+        "description": "Updates an Online Endpoint. This call will update an Online Endpoint if it exists.",
+        "operationId": "MachineLearningOnlineEndpoints_Update",
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Update ACI Endpoint": {
+            "$ref": "./examples/inference/updateACIOnlineEndpoint.json"
+          },
+          "Update AKS Endpoint": {
+            "$ref": "./examples/inference/updateAKSOnlineEndpoint.json"
+          },
+          "Update AMLCompute Endpoint": {
+            "$ref": "./examples/inference/updateAMLComputeOnlineEndpoint.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "machineLearningServices.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/APIVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/OnlineEndpointNameParameter"
+          },
+          {
+            "in": "body",
+            "name": "properties",
+            "description": "The payload that is used to update the Online Endpoint.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/OnlineEndpointResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Online Endpoint update initiated.",
+            "schema": {
+              "$ref": "#/definitions/OnlineEndpointResource"
+            }
+          },
+          "202": {
+            "description": "Online Endpoint update initiated.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "description": "URI to poll for asynchronous operation status.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "machineLearningServices.json#/definitions/MachineLearningServiceError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/onlineEndpoints/locations/{locationName}/checkNameAvailability": {
+      "post": {
+        "tags": [
+          "MachineLearningOnlineEndpoints"
+        ],
+        "x-ms-examples": {
+          "Check Endpoint Name": {
+            "$ref": "./examples/inference/checkOnlineEndpointName.json"
+          }
+        },
+        "operationId": "MachineLearningOnlineEndpoints_CheckNameAvailability",
+        "description": "Checks that the online endpoint name is valid and is not already in use.",
+        "parameters": [
+          {
+            "$ref": "machineLearningServices.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/LocationNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/APIVersionParameter"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/OnlineEndpointCheckNameAvailabilityParameter"
+            },
+            "description": "The name of the endpoint within the specified resource group."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK -- Operation to check the endpoint name availability was successful.",
+            "schema": {
+              "$ref": "#/definitions/CheckNameAvailabilityResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "machineLearningServices.json#/definitions/MachineLearningServiceError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/onlineEndpoints/{onlineEndpointName}/deployments": {
+      "get": {
+        "tags": [
+          "MachineLearningOnlineEndpointDeployments"
+        ],
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "operationId": "MachineLearningOnlineEndpointDeployments_ListByOnlineEndpoint",
+        "description": "Gets Online Deployments.",
+        "x-ms-examples": {
+          "Get Deployments": {
+            "$ref": "./examples/inference/getOnlineEndpointDeployments.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "machineLearningServices.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/APIVersionParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/PaginationParameter"
+          },
+          {
+            "$ref": "#/parameters/OnlineEndpointNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The response includes a paginated array of Machine Learning Online Deployments.",
+            "schema": {
+              "$ref": "#/definitions/PaginatedOnlineEndpointDeploymentsList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the request failed.",
+            "schema": {
+              "$ref": "machineLearningServices.json#/definitions/MachineLearningServiceError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/onlineEndpoints/{onlineEndpointName}/deployments/{deploymentName}": {
+      "get": {
+        "tags": [
+          "MachineLearningOnlineEndpointDeployments"
+        ],
+        "operationId": "MachineLearningOnlineEndpointDeployments_Get",
+        "description": "Get an Online Deployment by name.",
+        "x-ms-examples": {
+          "Get ACI Endpoint Deployment": {
+            "$ref": "./examples/inference/getACIOnlineEndpointDeployment.json"
+          },
+          "Get AKS Endpoint Deployment": {
+            "$ref": "./examples/inference/getAKSOnlineEndpointDeployment.json"
+          },
+          "Get AMLCompute Endpoint Deployment": {
+            "$ref": "./examples/inference/getAMLComputeOnlineEndpointDeployment.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "machineLearningServices.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/APIVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/OnlineEndpointNameParameter"
+          },
+          {
+            "$ref": "#/parameters/OnlineEndpointDeploymentNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/OnlineEndpointDeploymentResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the request failed.",
+            "schema": {
+              "$ref": "machineLearningServices.json#/definitions/MachineLearningServiceError"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "MachineLearningOnlineEndpointDeployments"
+        ],
+        "operationId": "MachineLearningOnlineEndpointDeployments_Delete",
+        "description": "Delete a specific Online Deployment.",
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Delete Deployment": {
+            "$ref": "./examples/inference/deleteDeployment.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "machineLearningServices.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/APIVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/OnlineEndpointNameParameter"
+          },
+          {
+            "$ref": "#/parameters/OnlineEndpointDeploymentNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The resource exists and was deleted successfully."
+          },
+          "202": {
+            "description": "The delete operation has been accepted and is deleting the resource.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "description": "URI to poll for asynchronous operation status.",
+                "type": "string"
+              }
+            }
+          },
+          "204": {
+            "description": "The resource does not exist and the request was well formed."
+          },
+          "default": {
+            "description": "Error response describing why the request failed.",
+            "schema": {
+              "$ref": "machineLearningServices.json#/definitions/MachineLearningServiceError"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "MachineLearningOnlineEndpointDeployments"
+        ],
+        "description": "Creates or updates an Online Deployment. This call will update an Online Deployment if it exists. This is a nonrecoverable operation. If your intent is to create a new Online Deployment, do a GET first to verify that it does not exist yet.",
+        "operationId": "MachineLearningOnlineEndpointDeployments_CreateOrUpdate",
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Create or Update ACI Endpoint Deployment": {
+            "$ref": "./examples/inference/createOrUpdateACIOnlineEndpointDeployment.json"
+          },
+          "Create or Update AKS Endpoint Deployment": {
+            "$ref": "./examples/inference/createOrUpdateAKSOnlineEndpointDeployment.json"
+          },
+          "Create or Update AMLCompute Endpoint Deployment": {
+            "$ref": "./examples/inference/createOrUpdateAMLComputeOnlineEndpointDeployment.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "machineLearningServices.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/APIVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/OnlineEndpointNameParameter"
+          },
+          {
+            "$ref": "#/parameters/OnlineEndpointDeploymentNameParameter"
+          },
+          {
+            "in": "body",
+            "name": "properties",
+            "description": "The payload that is used to create or update the Online Deployment.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/OnlineEndpointDeploymentResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Online Deployment creation or update initiated.",
+            "schema": {
+              "$ref": "#/definitions/OnlineEndpointDeploymentResource"
+            }
+          },
+          "202": {
+            "description": "Online Deployment creation or update initiated.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "description": "URI to poll for asynchronous operation status.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "machineLearningServices.json#/definitions/MachineLearningServiceError"
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "MachineLearningOnlineEndpointDeployments"
+        ],
+        "description": "Updates an Online Deployment. This call will update an Online Deployment if it exists.",
+        "operationId": "MachineLearningOnlineEndpointDeployments_Update",
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Update ACI Endpoint Deployment": {
+            "$ref": "./examples/inference/updateACIOnlineEndpointDeployment.json"
+          },
+          "Update AKS Endpoint Deployment": {
+            "$ref": "./examples/inference/updateAKSOnlineEndpointDeployment.json"
+          },
+          "Update AMLCompute Endpoint Deployment": {
+            "$ref": "./examples/inference/updateAMLComputeOnlineEndpointDeployment.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "machineLearningServices.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/APIVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/OnlineEndpointNameParameter"
+          },
+          {
+            "$ref": "#/parameters/OnlineEndpointDeploymentNameParameter"
+          },
+          {
+            "in": "body",
+            "name": "properties",
+            "description": "The payload that is used to update the Online Deployment.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/OnlineEndpointDeploymentResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Online Deployment update initiated.",
+            "schema": {
+              "$ref": "#/definitions/OnlineEndpointDeploymentResource"
+            }
+          },
+          "202": {
+            "description": "Online Deployment update initiated.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "description": "URI to poll for asynchronous operation status.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "machineLearningServices.json#/definitions/MachineLearningServiceError"
+            }
+          }
+        }
+      }
+    }
+  },
+  "parameters": {
+    "LocationNameParameter": {
+      "name": "locationName",
+      "description": "location of Azure Machine Learning workspace.",
+      "in": "path",
+      "type": "string",
+      "required": true,
+      "x-ms-parameter-location": "method"
+    },
+    "OnlineEndpointNameParameter": {
+      "name": "onlineEndpointName",
+      "description": "Name of the Azure Machine Learning endpoint.",
+      "in": "path",
+      "type": "string",
+      "required": true,
+      "x-ms-parameter-location": "method"
+    },
+    "OnlineEndpointDeploymentNameParameter": {
+      "name": "deploymentName",
+      "description": "Name of the Azure Machine Learning Online Deployment.",
+      "in": "path",
+      "type": "string",
+      "required": true,
+      "x-ms-parameter-location": "method"
+    }
+  },
+  "definitions": {
+    "OnlineEndpointCheckNameAvailabilityParameter": {
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string",
+          "default": "Microsoft.MachineLearningServices/workspaces/onlineEndpoints"
+        }
+      },
+      "required": [
+        "name"
+      ],
+      "description": "The parameters used to check the availability of the endpoint name."
+    },
+    "OnlineEndpointDeploymentCheckNameAvailabilityParameter": {
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string",
+          "default": "Microsoft.MachineLearningServices/workspaces/onlineEndpoints/deployments"
+        }
+      },
+      "required": [
+        "name"
+      ],
+      "description": "The parameters used to check the availability of the deployment name."
+    },
+    "CheckNameAvailabilityResult": {
+      "properties": {
+        "nameAvailable": {
+          "type": "boolean",
+          "description": "Boolean value that indicates whether the name is available for you to use. If true, the name is available. If false, the name has already been taken or is invalid and cannot be used."
+        },
+        "reason": {
+          "type": "string",
+          "description": "The reason that a name could not be used. The Reason element is only returned if NameAvailable is false.",
+          "enum": [
+            "AccountNameInvalid",
+            "AlreadyExists",
+            "None"
+          ],
+          "x-ms-enum": {
+            "name": "Reason",
+            "modelAsString": false
+          }
+        },
+        "message": {
+          "type": "string",
+          "description": "The error message explaining the Reason value in more detail."
+        }
+      },
+      "description": "The CheckNameAvailability operation response."
+    },
+    "PaginatedOnlineEndpointsList": {
+      "type": "object",
+      "description": "Paginated list of Machine Learning Online Endpoint objects wrapped in ARM resource envelope.",
+      "properties": {
+        "value": {
+          "readOnly": true,
+          "type": "array",
+          "description": "An array of Machine Learning Online Endpoint objects wrapped in ARM resource envelope.",
+          "items": {
+            "$ref": "#/definitions/OnlineEndpointResource"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "A continuation link (absolute URI) to the next page of results in the list."
+        }
+      }
+    },
+    "OnlineEndpointResource": {
+      "type": "object",
+      "description": "Machine Learning Online Endpoint object wrapped into ARM resource envelope.",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/TrackedResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "Online Endpoint properties.",
+          "$ref": "#/definitions/OnlineEndpointProperties",
+          "x-ms-client-flatten": true
+        },
+        "identity": {
+          "$ref": "machineLearningServices.json#/definitions/Identity",
+          "description": "The identity of the resource."
+        },
+        "kind": {
+          "type": "string",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ],
+          "enum": [
+            "ACI",
+            "AKS",
+            "AMLCompute"
+          ],
+          "x-ms-enum": {
+            "name": "ComputeTypes",
+            "modelAsString": true
+          },
+          "description": "Metadata used by portal/tooling/etc to render different UX experiences for resources of the same type; e.g. ApiApps are a kind of Microsoft.Web/sites type.  If supported, the resource provider must validate and persist this value."
+        }
+      }
+    },
+    "OnlineEndpointProperties": {
+      "type": "object",
+      "description": "Base definition properties of an online endpoint.",
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "Description of online endpoint."
+        },
+        "properties": {
+          "description": "Properties of the endpoint.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "trafficRules": {
+          "description": "Traffic rules for the endpoint.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "computeConfiguration": {
+          "type": "object",
+          "description": "Compute Configuration of the endpoint.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/ComputeConfiguration"
+            }
+          ]
+        },
+        "provisioningState": {
+          "type": "string",
+          "enum": [
+            "Creating",
+            "Deleting",
+            "Succeeded",
+            "Failed"
+          ],
+          "x-ms-enum": {
+            "name": "EndpointProvisioningState",
+            "modelAsString": true
+          },
+          "readOnly": true,
+          "description": "The current provisioning state of the Online Endpoint resource."
+        },
+        "endpoint": {
+          "type": "string",
+          "description": "URI of the endpoint."
+        },
+        "swaggerEndpoint": {
+          "type": "string",
+          "description": "URI of the swagger for the endpoint."
+        },
+        "authMode": {
+          "type": "string",
+          "enum": [
+            "AMLTokenAuth",
+            "KeyAuth"
+          ],
+          "x-ms-enum": {
+            "name": "AuthMode",
+            "modelAsString": true
+          },
+          "description": "Authentication mode configured on the Online Endpoint for online requests."
+        }
+      }
+    },
+    "ComputeConfiguration": {
+      "description": "Compute Configuration of the endpoint.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AciComputeConfiguration"
+        },
+        {
+          "$ref": "#/definitions/AksComputeConfiguration"
+        },
+        {
+          "$ref": "#/definitions/MirComputeConfiguration"
+        }
+      ],
+      "properties": {
+        "computeType": {
+          "type": "string",
+          "enum": [
+            "ACI",
+            "AKS",
+            "AMLCompute"
+          ],
+          "x-ms-enum": {
+            "name": "ComputeConfigurationTypes",
+            "modelAsString": true
+          },
+          "description": "Compute Type of the inference endpoint"
+        }
+      }
+    },
+    "AciComputeConfiguration": {
+      "type": "object",
+      "description": "ACI configuration.",
+      "properties": {
+        "sslConfiguration": {
+          "type": "object",
+          "description": "Configuration to setup Ssl. (ACI only)",
+          "items": {
+            "$ref": "#/definitions/SslConfiguration"
+          }
+        },
+        "vnetConfiguration": {
+          "type": "object",
+          "description": "Configuration to setup Vnet. (ACI only)",
+          "items": {
+            "$ref": "#/definitions/VnetConfiguration"
+          }
+        },
+        "encryptionProperties": {
+          "type": "object",
+          "description": "Properties to setup Encryption. (ACI only)",
+          "items": {
+            "$ref": "#/definitions/EncryptionProperties"
+          }
+        }
+      }
+    },
+    "AksComputeConfiguration": {
+      "type": "object",
+      "description": "AKS Configuration",
+      "properties": {
+        "namespace": {
+          "type": "string",
+          "description": "Kubernetes Namespace for deployment. (AKS only)"
+        },
+        "computeName": {
+          "type": "string",
+          "description": "Name of AKS Compute. (AKS only)"
+        }
+      }
+    },
+    "MirComputeConfiguration": {
+      "type": "object",
+      "description": "MIR Configuration"
+    },
+    "SslConfiguration": {
+      "type": "object",
+      "description": "Ssl Configuration",
+      "properties": {
+        "sslEnabled": {
+          "type": "boolean",
+          "description": "True if Ssl is enabled."
+        },
+        "sslCertificate": {
+          "type": "string",
+          "description": "Name of Ssl certificate for authentication."
+        },
+        "sslKey": {
+          "type": "string",
+          "description": "Key of Ssl certificate."
+        },
+        "cName": {
+          "type": "string",
+          "description": "Name of CName used in certificate."
+        }
+      }
+    },
+    "VnetConfiguration": {
+      "type": "object",
+      "description": "Vnet Configuration",
+      "properties": {
+        "vnetName": {
+          "type": "string",
+          "description": "Name of Vnet."
+        },
+        "subnetName": {
+          "type": "string",
+          "description": "Name of Subnet."
+        }
+      }
+    },
+    "EncryptionProperties": {
+      "type": "object",
+      "description": "Encryption Properties.",
+      "properties": {
+        "vaultBaseUrl": {
+          "type": "string",
+          "description": "Base URL for encryption."
+        },
+        "keyName": {
+          "type": "string",
+          "description": "Key Name."
+        },
+        "keyVersion": {
+          "type": "string",
+          "description": "Key Version."
+        }
+      }
+    },
+    "PaginatedOnlineEndpointDeploymentsList": {
+      "type": "object",
+      "description": "Paginated list of Machine Learning Online Deployment objects wrapped in ARM resource envelope.",
+      "properties": {
+        "value": {
+          "readOnly": true,
+          "type": "array",
+          "description": "An array of Machine Learning Online Deployment  objects wrapped in ARM resource envelope.",
+          "items": {
+            "$ref": "#/definitions/OnlineEndpointDeploymentResource"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "A continuation link (absolute URI) to the next page of results in the list."
+        }
+      }
+    },
+    "OnlineEndpointDeploymentResource": {
+      "type": "object",
+      "description": "Machine Learning Online Endpoint Deployment object wrapped into ARM resource envelope.",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/TrackedResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "type": "object",
+          "description": "Online Endpoint Deployment properties.",
+          "$ref": "#/definitions/OnlineEndpointDeploymentProperties"
+        },
+        "kind": {
+          "type": "string",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ],
+          "enum": [
+            "ACI",
+            "AKS",
+            "AMLCompute"
+          ],
+          "x-ms-enum": {
+            "name": "ComputeTypes",
+            "modelAsString": true
+          },
+          "description": "Metadata used by portal/tooling/etc to render different UX experiences for resources of the same type; e.g. ApiApps are a kind of Microsoft.Web/sites type.  If supported, the resource provider must validate and persist this value."
+        },
+        "sku": {
+          "type": "object",
+          "description": "Sku for the deployment.",
+          "allOf": [
+            {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/Sku"
+            }
+          ]
+        }
+      }
+    },
+    "OnlineEndpointDeploymentProperties": {
+      "type": "object",
+      "description": "Properties of the online endpoint deployment.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/EndpointDeploymentBase"
+        }
+      ],
+      "properties": {
+        "skuScaleSettings": {
+          "type": "object",
+          "allOf": [
+            {
+              "$ref": "#/definitions/SkuScaleSettings"
+            }
+          ]
+        },
+        "environmentOverrides": {
+          "type": "object",
+          "allOf": [
+            {
+              "$ref": "#/definitions/EnvironmentOverrides"
+            }
+          ]
+        },
+        "deploymentConfiguration": {
+          "type": "object",
+          "allOf": [
+            {
+              "$ref": "#/definitions/DeploymentConfiguration"
+            }
+          ]
+        }
+      }
+    },
+    "EndpointDeploymentBase": {
+      "type": "object",
+      "description": "Base definition of Endpoint Deployment.",
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "Description of the deployment."
+        },
+        "properties": {
+          "description": "Properties of the deployment.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "modelId": {
+          "type": "string",
+          "description": "Model Id of the deployment."
+        },
+        "codeConfiguration": {
+          "type": "object",
+          "description": "Code Configuration of the deployment.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/CodeConfiguration"
+            }
+          ]
+        },
+        "environmentId": {
+          "type": "string",
+          "description": "Environment Id of the deployment."
+        },
+        "provisioningState": {
+          "type": "string",
+          "enum": [
+            "Creating",
+            "Deleting",
+            "Scaling",
+            "Updating",
+            "Succeeded",
+            "Failed"
+          ],
+          "x-ms-enum": {
+            "name": "DeploymentProvisioningState",
+            "modelAsString": true
+          },
+          "readOnly": true,
+          "description": "The current provisioning state of the deployment resource."
+        }
+      }
+    },
+    "DeploymentConfiguration": {
+      "description": "Compute Configuration of the endpoint.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AciDeploymentConfiguration"
+        },
+        {
+          "$ref": "#/definitions/AksDeploymentConfiguration"
+        },
+        {
+          "$ref": "#/definitions/MirDeploymentConfiguration"
+        }
+      ],
+      "properties": {
+        "computeType": {
+          "type": "string",
+          "enum": [
+            "ACI",
+            "AKS",
+            "AMLCompute"
+          ],
+          "x-ms-enum": {
+            "name": "ComputeConfigurationTypes",
+            "modelAsString": true
+          },
+          "description": "Compute Type of the inference endpoint"
+        },
+        "appInsightsEnabled": {
+          "type": "boolean",
+          "description": "True if Application Insights is enabled for this deployment."
+        },
+        "modelDataCollection": {
+          "type": "object",
+          "description": "Model data collection configuration for the deployment. (ACI and AKS only)",
+          "allOf": [
+            {
+              "$ref": "machineLearningServices.json#/definitions/ModelDataCollection"
+            }
+          ]
+        },
+        "containerResourceRequirements": {
+          "type": "object",
+          "description": "Container Resource requirements for the deployment. (ACI and AKS only)",
+          "allOf": [
+            {
+              "$ref": "machineLearningServices.json#/definitions/ContainerResourceRequirements"
+            }
+          ]
+        }
+      }
+    },
+    "AciDeploymentConfiguration": {
+      "type": "object",
+      "description": "ACI deployment configuration."
+    },
+    "AksDeploymentConfiguration": {
+      "type": "object",
+      "description": "AKS deployment configuration.",
+      "properties": {
+        "maxConcurrentRequestsPerContainer": {
+          "type": "integer",
+          "description": "Max concurrent requests per container. (AKS only)",
+          "format": "int32",
+          "minimum": 0
+        },
+        "maxQueueWaitMs": {
+          "type": "integer",
+          "description": "Max wait time in milliseconds for request in queue. (AKS only)",
+          "format": "int32",
+          "minimum": 0
+        },
+        "scoringTimeoutMs": {
+          "type": "integer",
+          "description": "Max wait time in milliseconds for scoring timeout. (AKS only)",
+          "format": "int32",
+          "minimum": 0
+        },
+        "livenessProbeRequirements": {
+          "type": "object",
+          "description": "Requirements for the liveness probe. (AKS only)",
+          "allOf": [
+            {
+              "$ref": "machineLearningServices.json#/definitions/LivenessProbeRequirements"
+            }
+          ]
+        },
+        "scalingConfiguration": {
+          "type": "object",
+          "description": "Autoscaler configuration. (AKS only)",
+          "allOf": [
+            {
+              "$ref": "machineLearningServices.json#/definitions/AutoScaler"
+            }
+          ]
+        }
+      }
+    },
+    "MirDeploymentConfiguration": {
+      "type": "object",
+      "description": "MIR deployment configuration."
+    },
+    "CodeConfiguration": {
+      "type": "object",
+      "description": "Code configuration of the deployment.",
+      "properties": {
+        "codeArtifactId": {
+          "type": "string",
+          "description": "code artifact id for the deployment."
+        },
+        "command": {
+          "type": "array",
+          "description": "list of commands for the deployment to run at startup.",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "SkuScaleSettings": {
+      "description": "Description of the Deployment scale options.",
+      "type": "object",
+      "required": [
+        "minimum",
+        "maximum"
+      ],
+      "properties": {
+        "minimum": {
+          "description": "Minimum number of instances for this deployment.",
+          "type": "integer",
+          "format": "int32",
+          "minimum": 1
+        },
+        "maximum": {
+          "description": "Maximum number of instances for this deployment.",
+          "type": "integer",
+          "format": "int32"
+        },
+        "default": {
+          "description": "Default/Initial number of instances for this deployment.",
+          "type": "integer",
+          "format": "int32"
+        },
+        "scaleType": {
+          "description": "Available scale configurations for this Deployment.",
+          "type": "string",
+          "enum": [
+            "automatic",
+            "manual",
+            "none"
+          ]
+        }
+      }
+    },
+    "EnvironmentOverrides": {
+      "type": "object",
+      "description": "Environment variables that override any default environment variables in the container.",
+      "properties": {
+        "environmentVariables": {
+          "description": "Contains environment variables defined as key/value pairs.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}

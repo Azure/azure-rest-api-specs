@@ -1,0 +1,96 @@
+{
+  "parameters": {
+    "subscriptionId": "34adfa4f-cedf-4dc0-ba29-b6d1a69ab345",
+    "resourceGroupName": "testrg123",
+    "workspaceName": "workspaces123",
+    "api-version": "2020-09-01-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/testrg123/providers/Microsoft.MachineLearningServices/workspaces/workspaces123/onlineEndpoints/testendpoint",
+            "type": "Microsoft.MachineLearningServices/workspaces/onlineEndpoints",
+            "name": "testendpoint",
+            "identity": {},
+            "location": "westus2euap",
+            "tags": {},
+            "kind": "AMLCompute",
+            "properties": {
+              "description": "This is a test endpoint",
+              "trafficRules": {},
+              "computeConfiguration": {
+                "computeType": "AMLCompute"
+              },
+              "provisioningState": "Succeeded",
+              "endpoint": "testendpointUri",
+              "swaggerEndpoint": "testSwaggerEndpointUri",
+              "authMode": "KeyAuth"
+            }
+          },
+          {
+            "id": "subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/testrg123/providers/Microsoft.MachineLearningServices/workspaces/workspaces123/onlineEndpoints/testendpoint",
+            "type": "Microsoft.MachineLearningServices/workspaces/onlineEndpoints",
+            "name": "testendpoint",
+            "identity": {},
+            "location": "westus2euap",
+            "tags": {},
+            "kind": "AKS",
+            "properties": {
+              "description": "This is a test endpoint",
+              "properties": {},
+              "trafficRules": {},
+              "computeConfiguration": {
+                "computeType": "AKS",
+                "namespace": "testAKSNamespace",
+                "computeName": "testAKSComputeName"
+              },
+              "provisioningState": "Succeeded",
+              "endpoint": "testendpointUri",
+              "swaggerEndpoint": "testSwaggerEndpointUri",
+              "authMode": "KeyAuth"
+            }
+          },
+          {
+            "id": "subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/testrg123/providers/Microsoft.MachineLearningServices/workspaces/workspaces123/onlineEndpoints/testendpoint",
+            "type": "Microsoft.MachineLearningServices/workspaces/onlineEndpoints",
+            "name": "testendpoint",
+            "identity": {},
+            "location": "westus2euap",
+            "tags": {},
+            "kind": "ACI",
+            "properties": {
+              "description": "This is a test endpoint",
+              "properties": {},
+              "trafficRules": {},
+              "computeConfiguration": {
+                "computeType": "ACI",
+                "sslConfiguration": {
+                  "sslEnabled": false,
+                  "sslCertificate": "",
+                  "sslKey": "",
+                  "cName": ""
+                },
+                "vnetConfiguration": {
+                  "vnetName": "testVnet",
+                  "subnetName": "testSubnet"
+                },
+                "encryptionProperties": {
+                  "vaultBaseUrl": "testVaultUri",
+                  "keyName": "testKeyValue",
+                  "keyVersion": "testKeyVersion"
+                }
+              },
+              "provisioningState": "Succeeded",
+              "endpoint": "testendpointUri",
+              "swaggerEndpoint": "testSwaggerEndpointUri",
+              "authMode": "KeyAuth"
+            }
+          }
+        ],
+        "nextLink": "nextLink"
+      }
+    }
+  }
+}
