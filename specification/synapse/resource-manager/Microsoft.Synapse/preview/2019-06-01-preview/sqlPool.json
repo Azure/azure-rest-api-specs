@@ -5011,7 +5011,7 @@
         },
         "queryExecutionTimeout": {
           "format": "int32",
-          "description": "The workload group query execution timeout.",
+          "description": "The workload group query execution timeout in seconds.",
           "type": "integer"
         }
       }
@@ -5072,14 +5072,16 @@
         },
         "startTime": {
           "description": "The workload classifier start time for classification.",
-          "type": "string"
+          "type": "string",
+          "format": "datetime"
         },
         "endTime": {
           "description": "The workload classifier end time for classification.",
-          "type": "string"
+          "type": "string",
+          "format": "datetime"
         },
         "importance": {
-          "description": "The workload classifier importance.",
+          "description": "The workload classifier importance. There are five levels of importance: low, below_normal, normal, above_normal, and high.",
           "type": "string"
         }
       }
