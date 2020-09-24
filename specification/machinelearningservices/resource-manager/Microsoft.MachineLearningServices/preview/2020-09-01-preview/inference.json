@@ -296,7 +296,7 @@
             "description": "The payload that is used to update the Online Endpoint.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/OnlineEndpointResource"
+              "$ref": "#/definitions/OnlineEndpointUpdateRequest"
             }
           }
         ],
@@ -653,7 +653,7 @@
             "description": "The payload that is used to update the Online Deployment.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/OnlineEndpointDeploymentResource"
+              "$ref": "#/definitions/OnlineEndpointDeploymentUpdateRequest"
             }
           }
         ],
@@ -724,21 +724,6 @@
         "name"
       ],
       "description": "The parameters used to check the availability of the endpoint name."
-    },
-    "OnlineEndpointDeploymentCheckNameAvailabilityParameter": {
-      "properties": {
-        "name": {
-          "type": "string"
-        },
-        "type": {
-          "type": "string",
-          "default": "Microsoft.MachineLearningServices/workspaces/onlineEndpoints/deployments"
-        }
-      },
-      "required": [
-        "name"
-      ],
-      "description": "The parameters used to check the availability of the deployment name."
     },
     "CheckNameAvailabilityResult": {
       "properties": {
@@ -1329,6 +1314,32 @@
           "additionalProperties": {
             "type": "string"
           }
+        }
+      }
+    },
+    "OnlineEndpointUpdateRequest": {
+      "type": "object",
+      "description": "Request to update existing online endpoint.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags."
+        }
+      }
+    },
+    "OnlineEndpointDeploymentUpdateRequest": {
+      "type": "object",
+      "description": "Request to update existing online endpoint deployment.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags."
         }
       }
     }

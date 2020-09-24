@@ -459,6 +459,12 @@
             "schema": {
               "$ref": "#/definitions/ListUsagesResult"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/MachineLearningServiceError"
+            }
           }
         },
         "x-ms-pageable": {
@@ -499,6 +505,12 @@
             "description": "OK",
             "schema": {
               "$ref": "#/definitions/VirtualMachineSizeListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/MachineLearningServiceError"
             }
           }
         },
@@ -562,7 +574,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.MachineLearningServices/locations/{location}/Quotas": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.MachineLearningServices/locations/{location}/quotas": {
       "get": {
         "tags": [
           "Quota"
@@ -590,6 +602,12 @@
             "description": "OK",
             "schema": {
               "$ref": "#/definitions/ListWorkspaceQuotas"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/MachineLearningServiceError"
             }
           }
         },
@@ -1234,7 +1252,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/MachineLearningServiceError"
             }
           }
         }
@@ -1286,7 +1304,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/MachineLearningServiceError"
             }
           }
         }
@@ -1329,7 +1347,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/MachineLearningServiceError"
             }
           }
         }
@@ -1366,6 +1384,12 @@
             "description": "Successfully retrieved private link resources.",
             "schema": {
               "$ref": "#/definitions/PrivateLinkResourceListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/MachineLearningServiceError"
             }
           }
         }
@@ -2707,7 +2731,7 @@
             "None"
           ],
           "x-ms-enum": {
-            "name": "ResourceIdentityType",
+            "name": "AMLResourceIdentityType",
             "modelAsString": false
           }
         },
