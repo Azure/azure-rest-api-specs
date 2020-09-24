@@ -6,6 +6,7 @@ This is the AutoRest configuration file for Azure Synapse Analytics.
 
 
 
+
 ---
 ## Getting Started
 To build the SDK for Azure Synapse Analytics, [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
