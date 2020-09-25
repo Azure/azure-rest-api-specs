@@ -1608,6 +1608,7 @@
         },
         "osType": {
           "type": "string",
+          "readOnly": true,
           "description": "The Operating System type.",
           "enum": [
             "Windows",
@@ -1620,6 +1621,7 @@
         },
         "hyperVGeneration": {
           "type": "string",
+          "readOnly": true,
           "description": "The hypervisor generation of the Virtual Machine. Applicable to OS disks only.",
           "enum": [
             "V1",
@@ -1734,7 +1736,7 @@
           ],
           "x-ms-enum": {
             "name": "OperatingSystemTypes",
-            "modelAsString": false
+            "modelAsString": true
           }
         },
         "hyperVGeneration": {
@@ -2739,8 +2741,10 @@
           "description": "unique incarnation id of the source disk",
           "readOnly": true
         },
-        "diskEncryptionSet": {
-          "$ref": "#/definitions/DiskEncryptionSet"
+        "encryption": {
+          "$ref": "#/definitions/Encryption",
+          "description": "Encryption property can be used to encrypt data at rest with customer managed keys or platform managed keys.",
+          "readOnly": true
         }
       },
       "description": "Properties of an incremental disk restore point"
