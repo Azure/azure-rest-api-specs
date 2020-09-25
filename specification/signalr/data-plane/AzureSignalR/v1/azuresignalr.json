@@ -12,16 +12,9 @@
         ],
         "summary": "Get service health status.",
         "operationId": "HealthApi_GetHealthStatus",
-        "produces": [
-          "text/plain"
-        ],
         "responses": {
           "200": {
-            "description": "The service is healthy",
-            "schema": {
-              "type": "string",
-              "example": "OK"
-            }
+            "description": "The service is healthy"
           },
           "default": {
             "description": "Error response",
@@ -126,15 +119,12 @@
           }
         }
       },
-      "get": {
+      "head": {
         "tags": [
           "signalr.v1"
         ],
         "summary": "Check if there are any client connections connected for the given user",
         "operationId": "ServiceApi_CheckUserExistence",
-        "produces": [
-          "text/plain"
-        ],
         "parameters": [
           {
             "in": "path",
@@ -154,11 +144,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success",
-            "schema": {
-              "type": "string",
-              "example": "OK"
-            }
+            "description": "Success"
           },
           "404": {
             "description": "Not Found"
@@ -216,15 +202,12 @@
           }
         }
       },
-      "get": {
+      "head": {
         "tags": [
           "signalr.v1"
         ],
         "summary": "Check if the connection with the given connectionId exists",
         "operationId": "ServiceApi_CheckConnectionExistence",
-        "produces": [
-          "text/plain"
-        ],
         "parameters": [
           {
             "in": "path",
@@ -244,11 +227,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success",
-            "schema": {
-              "type": "string",
-              "example": "OK"
-            }
+            "description": "Success"
           },
           "404": {
             "description": "Not Found"
@@ -355,15 +334,12 @@
           }
         }
       },
-      "get": {
+      "head": {
         "tags": [
           "signalr.v1"
         ],
         "summary": "Check if there are any client connections inside the given group",
         "operationId": "ServiceApi_CheckGroupExistence",
-        "produces": [
-          "text/plain"
-        ],
         "parameters": [
           {
             "in": "path",
@@ -383,11 +359,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success",
-            "schema": {
-              "type": "string",
-              "example": "OK"
-            }
+            "description": "Success"
           },
           "404": {
             "description": "Not Found"
@@ -502,15 +474,12 @@
       }
     },
     "/api/v1/hubs/{hub}/groups/{group}/users/{user}": {
-      "get": {
+      "head": {
         "tags": [
           "signalr.v1"
         ],
         "summary": "Check whether a user exists in the target group.",
         "operationId": "ServiceApi_CheckUserExistenceInGroup",
-        "produces": [
-          "text/plain"
-        ],
         "parameters": [
           {
             "in": "path",
@@ -537,11 +506,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success",
-            "schema": {
-              "type": "string",
-              "example": "OK"
-            }
+            "description": "Success"
           },
           "404": {
             "description": "Not Found"
