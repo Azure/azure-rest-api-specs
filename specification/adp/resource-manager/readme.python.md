@@ -7,7 +7,6 @@ Please also specify `--python-sdks-folder=<path to the root directory of your az
 python:
   azure-arm: true
   license-header: MICROSOFT_MIT_NO_VERSION
-  payload-flattening-threshold: 2
   package-name: adp
   clear-output-folder: true
   no-namespace-folders: true
