@@ -395,7 +395,7 @@
           "readOnly": true,
           "description": "Resource guid."
         },
-        "state": {
+        "provisioningState": {
           "type": "string",
           "enum": [
             "Deleting",
@@ -410,26 +410,15 @@
           "readOnly": true,
           "description": "The current state of dnc controller resource."
         },
-        "controllerProperties": {
-          "readOnly": true,
-          "description": "DNC controller Properties",
-          "$ref": "#/definitions/DncProperties"
-        }
-      }
-    },
-    "DncProperties": {
-      "type": "object",
-      "description": "DNC properties",
-      "properties": {
         "dncAppId": {
           "type": "string",
           "readOnly": true,
-          "description": "The current state of dnc controller resource."
+          "description": "dnc appid will be used by customers to authenticate with dnc gateway."
         },
         "dncTenantId": {
           "type": "string",
           "readOnly": true,
-          "description": "The current state of dnc controller resource."
+          "description": "tenantid of dnc appid"
         },
         "dncEndpoint": {
           "type": "string",

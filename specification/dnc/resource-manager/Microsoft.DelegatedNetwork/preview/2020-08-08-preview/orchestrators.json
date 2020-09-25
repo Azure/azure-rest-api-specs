@@ -34,12 +34,12 @@
     }
   },
   "paths": {
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DelegatedNetwork/orchestratorInstances/{resourceName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DelegatedNetwork/orchestrators/{resourceName}": {
       "get": {
         "description": "Gets details about the orchestrator instance.",
         "x-ms-examples": {
           "Get details of a orchestratorInstance": {
-            "$ref": "./examples/getOrchestratorInstance.json"
+            "$ref": "./examples/getOrchestrator.json"
           }
         },
         "tags": [
@@ -64,7 +64,7 @@
           "200": {
             "description": "OK. The operation was successful.",
             "schema": {
-              "$ref": "#/definitions/OrchestratorInstance"
+              "$ref": "#/definitions/Orchestrator"
             }
           },
           "default": {
@@ -79,7 +79,7 @@
         "description": "Create a orchestrator instance",
         "x-ms-examples": {
           "Create orchestrator instance": {
-            "$ref": "./examples/putOrchestratorInstance.json"
+            "$ref": "./examples/putOrchestrator.json"
           }
         },
         "tags": [
@@ -104,7 +104,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/OrchestratorInstance"
+              "$ref": "#/definitions/Orchestrator"
             },
             "description": "OrchestratorInstance type parameters"
           }
@@ -113,13 +113,13 @@
           "200": {
             "description": "OK. The operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/OrchestratorInstance"
+              "$ref": "#/definitions/Orchestrator"
             }
           },
           "201": {
             "description": "InProgress. The operation is still in progress.",
             "schema": {
-              "$ref": "#/definitions/OrchestratorInstance"
+              "$ref": "#/definitions/Orchestrator"
             }
           },
           "default": {
@@ -135,7 +135,7 @@
         "description": "Deletes the Orchestrator Instance",
         "x-ms-examples": {
           "Delete Orchestrator Instance": {
-            "$ref": "./examples/deleteOrchestratorInstance.json"
+            "$ref": "./examples/deleteOrchestrator.json"
           }
         },
         "tags": [
@@ -179,7 +179,7 @@
         "description": "Update Orchestrator Instance",
         "x-ms-examples": {
           "update Orchestrator Instance": {
-            "$ref": "./examples/patchOrchestratorInstance.json"
+            "$ref": "./examples/patchOrchestrator.json"
           }
         },
         "tags": [
@@ -213,13 +213,13 @@
           "200": {
             "description": "OK. The operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/OrchestratorInstance"
+              "$ref": "#/definitions/Orchestrator"
             }
           },
           "201": {
             "description": "InProgress. The operation is still in progress.",
             "schema": {
-              "$ref": "#/definitions/OrchestratorInstance"
+              "$ref": "#/definitions/Orchestrator"
             }
           },
           "default": {
@@ -231,13 +231,13 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.DelegatedNetwork/orchestratorInstanceList": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.DelegatedNetwork/orchestrators": {
       "get": {
         "tags": [
           "OrchestratorInstanceList"
         ],
         "description": "Get all the orchestratorInstance resources in a subscription.",
-        "operationId": "oOrchestratorInstanceService_ListBySubscription",
+        "operationId": "OrchestratorInstanceService_ListBySubscription",
         "x-ms-examples": {
           "Get orchestratorInstance resources by subscription": {
             "$ref": "./examples/orchestratorInstanceListBySub.json"
@@ -255,7 +255,7 @@
           "200": {
             "description": "This is a synchronous operation. The body contains a JSON-serialized array of the metadata from all the orchestratorInstance in the subscription.",
             "schema": {
-              "$ref": "#/definitions/OrchestratorInstances"
+              "$ref": "#/definitions/Orchestrators"
             }
           },
           "default": {
@@ -267,7 +267,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DelegatedNetwork/orchestratorInstanceList": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DelegatedNetwork/orchestrators": {
       "get": {
         "tags": [
           "OrchestratorInstanceList"
@@ -294,7 +294,7 @@
           "200": {
             "description": "This is a synchronous operation. The body contains a JSON-serialized array of the metadata from all the orchestratorInstances in the resource group.",
             "schema": {
-              "$ref": "#/definitions/OrchestratorInstances"
+              "$ref": "#/definitions/Orchestrators"
             }
           },
           "default": {
@@ -331,6 +331,17 @@
           "type": "string",
           "description": "Location of the resource."
         },
+        "kind": {
+          "type": "string",
+          "description": "The kind of workbook. Choices are user and shared.",
+          "enum": [
+            "Kubernetes"
+          ],
+          "x-ms-enum": {
+            "name": "OrchestratorKind",
+            "modelAsString": true
+          }
+        },
         "tags": {
           "type": "object",
           "additionalProperties": {
@@ -339,6 +350,9 @@
           "description": "The resource tags."
         }
       },
+      "required": [
+        "kind"
+      ],
       "x-ms-azure-resource": true
     },
     "ResourceUpdateParameters": {
@@ -353,14 +367,14 @@
         }
       }
     },
-    "OrchestratorInstances": {
+    "Orchestrators": {
       "description": "An array of OrchestratorInstance resources.",
       "type": "object",
       "properties": {
         "value": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/OrchestratorInstance"
+            "$ref": "#/definitions/Orchestrator"
           },
           "description": "An array of OrchestratorInstance resources."
         }
@@ -369,7 +383,7 @@
         "value"
       ]
     },
-    "OrchestratorInstance": {
+    "Orchestrator": {
       "description": "Represents an instance of a orchestrator.",
       "type": "object",
       "allOf": [
@@ -380,7 +394,6 @@
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
-          "readOnly": true,
           "$ref": "#/definitions/OrchestratorResourceProperties",
           "description": "Properties of the provision operation request."
         }
@@ -395,7 +408,7 @@
           "readOnly": true,
           "description": "Resource guid."
         },
-        "state": {
+        "provisioningState": {
           "type": "string",
           "enum": [
             "Deleting",
@@ -410,56 +423,58 @@
           "readOnly": true,
           "description": "The current state of orchestratorInstance resource."
         },
-        "orchestratorInstanceDetails": {
-          "description": "orchestrator details",
-          "$ref": "#/definitions/OrchestratorInstanceDetails"
-        },
-        "controllerDetails": {
-          "description": "controller details",
-          "$ref": "#/definitions/ControllerDetails"
-        }
-      }
-    },
-    "OrchestratorInstanceDetails": {
-      "description": "Properties of orchestrator",
-      "type": "object",
-      "properties": {
-        "orchestratorType": {
-          "description": "Orchestrator Type",
-          "type": "string",
-          "enum": [
-            "Kubernetes"
-          ],
-          "x-ms-enum": {
-            "name": "OrchestratorType",
-            "modelAsString": true
-          }
-        },
-        "properties": {
-          "description": "orchestrator instance properties",
-          "$ref": "#/definitions/OrchestratorInstanceProperties"
-        }
-      }
-    },
-    "OrchestratorInstanceProperties": {
-      "description": "controller details",
-      "type": "object",
-      "properties": {
-        "orchestratorAppID": {
+        "orchestratorAppId": {
           "description": "AAD ID used with apiserver",
           "type": "string"
         },
-        "orchestratorTenantID": {
+        "orchestratorTenantId": {
           "description": "TenantID of server App ID",
           "type": "string"
         },
         "clusterRootCA": {
-          "description": "RootCA certificate of kubernetes cluster",
+          "description": "RootCA certificate of kubernetes cluster base64 encoded",
           "type": "string"
         },
         "apiServerEndpoint": {
           "description": "K8s APIServer url",
           "type": "string"
+        },
+        "controllerDetails": {
+          "description": "controller details",
+          "$ref": "#/definitions/ControllerDetails"
+        },
+        "identity": {
+          "$ref": "#/definitions/OrchestratorIdentity",
+          "description": "The identity of the orchestrator"
+        }
+      },
+      "required": [
+        "controllerDetails"
+      ]
+    },
+    "OrchestratorIdentity": {
+      "properties": {
+        "principalId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The principal id of the system assigned identity which is used by orchestrator."
+        },
+        "tenantId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The tenant id of the system assigned identity which is used by orchestrator."
+        },
+        "type": {
+          "type": "string",
+          "description": "The type of identity used for orchestrator cluster. Type 'SystemAssigned' will use an implicitly created identity orchestrator clusters",
+          "enum": [
+            "SystemAssigned",
+            "None"
+          ],
+          "x-ms-enum": {
+            "name": "ResourceIdentityType",
+            "modelAsString": false
+          }
         }
       }
     },
