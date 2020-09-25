@@ -665,6 +665,22 @@
           "description": "The account's data-plane ID",
           "type": "string",
           "readOnly": true
+        },
+        "provisioningState": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Gets the status of the account at the time the operation was called.",
+          "enum": [
+            "Succeeded",
+            "Failed",
+            "Canceled",
+            "Provisioning",
+            "Deleting"
+          ],
+          "x-ms-enum": {
+            "name": "ProvisioningState",
+            "modelAsString": false
+          }
         }
       }
     },
@@ -725,11 +741,28 @@
           "type": "string",
           "readOnly": true
         },
+        "provisioningState": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Gets the status of the data pool at the time the operation was called.",
+          "enum": [
+            "Succeeded",
+            "Failed",
+            "Canceled",
+            "Provisioning",
+            "Deleting"
+          ],
+          "x-ms-enum": {
+            "name": "ProvisioningState",
+            "modelAsString": false
+          }
+        },
         "locations": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/DataPoolLocation"
           },
+          "minItems": 1,
           "description": "Gets or sets the collection of locations where Data Pool resources should be created."
         }
       }
