@@ -3,13 +3,14 @@
 These settings apply only when `--python` is specified on the command line.
 Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
 
-```yaml $(python)
-python:
-  azure-arm: true
-  license-header: MICROSOFT_MIT_NO_VERSION
-  package-name: adp
-  clear-output-folder: true
-  no-namespace-folders: true
+```yaml $(track2)
+azure-arm: true
+license-header: MICROSOFT_MIT_NO_VERSION
+package-name: azure-mgmt-adp
+clear-output-folder: true
+no-namespace-folders: true
+modelerfour:
+  lenient-model-deduplication: true
 ```
 
 ```yaml $(multiapi)
