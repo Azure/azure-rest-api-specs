@@ -5,7 +5,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Azure Media Services",
-    "description": "Streaming resource management client for Azure Media Services",
+    "description": "Live streaming APIs",
     "version": "2020-05-01"
   },
   "host": "management.azure.com",
@@ -33,7 +33,7 @@
           "LiveEvents"
         ],
         "summary": "List Live Events",
-        "description": "Lists the Live Events in the account.",
+        "description": "Lists all the live events in the account.",
         "operationId": "LiveEvents_List",
         "parameters": [
           {
@@ -79,7 +79,7 @@
           "LiveEvents"
         ],
         "summary": "Get Live Event",
-        "description": "Gets a Live Event.",
+        "description": "Gets a live event.",
         "operationId": "LiveEvents_Get",
         "parameters": [
           {
@@ -126,7 +126,7 @@
           "LiveEvents"
         ],
         "summary": "Create Live Event",
-        "description": "Creates a Live Event.",
+        "description": "Creates a new live event.",
         "operationId": "LiveEvents_Create",
         "parameters": [
           {
@@ -149,7 +149,7 @@
           },
           {
             "name": "parameters",
-            "description": "Live Event properties needed for creation.",
+            "description": "Live event properties needed for creation.",
             "in": "body",
             "required": true,
             "schema": {
@@ -164,8 +164,8 @@
               "$ref": "#/definitions/LiveEvent"
             }
           },
-          "202": {
-            "description": "Accepted. The request has been accepted for processing and the operation will complete asynchronously. See https://go.microsoft.com/fwlink/?linkid=2087017 for details on the monitoring asynchronous Azure Operations.",
+          "201": {
+            "description": "Created. The request has been accepted for processing and the operation will complete asynchronously. See https://go.microsoft.com/fwlink/?linkid=2087017 for details on monitoring asynchronous Azure operations using the Azure-AsyncOperation response header.",
             "schema": {
               "$ref": "#/definitions/LiveEvent"
             }
@@ -188,7 +188,7 @@
         "tags": [
           "LiveEvents"
         ],
-        "description": "Updates a existing Live Event.",
+        "description": "Updates settings on an existing live event.",
         "operationId": "LiveEvents_Update",
         "parameters": [
           {
@@ -208,7 +208,7 @@
           },
           {
             "name": "parameters",
-            "description": "Live Event properties needed for creation.",
+            "description": "Live event properties needed for patch.",
             "in": "body",
             "required": true,
             "schema": {
@@ -248,7 +248,7 @@
           "LiveEvents"
         ],
         "summary": "Delete Live Event",
-        "description": "Deletes a Live Event.",
+        "description": "Deletes a live event.",
         "operationId": "LiveEvents_Delete",
         "parameters": [
           {
@@ -275,7 +275,7 @@
             "description": "Accepted. The request has been accepted for processing and the operation will complete asynchronously. See https://go.microsoft.com/fwlink/?linkid=2087017 for details on the monitoring asynchronous Azure Operations."
           },
           "204": {
-            "description": "No content. The request has been accepted but the Live Event was not found."
+            "description": "No content. The request has been accepted but the live event was not found."
           },
           "default": {
             "description": "The streaming error response describing why the operation failed.",
@@ -292,13 +292,60 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Media/mediaservices/{accountName}/liveEvents/{liveEventName}/allocate": {
+      "post": {
+        "tags": [
+          "LiveEvents"
+        ],
+        "summary": "Allocate resources for a live event",
+        "description": "A live event is in StandBy state after allocation completes, and is ready to start.",
+        "operationId": "LiveEvents_Allocate",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/MediaServicesAccountName"
+          },
+          {
+            "$ref": "#/parameters/LiveEventName"
+          },
+          {
+            "$ref": "#/parameters/ApiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded."
+          },
+          "202": {
+            "description": "Accepted. The request has been accepted for processing and the operation will complete asynchronously. See https://go.microsoft.com/fwlink/?linkid=2087017 for details on the monitoring asynchronous Azure Operations."
+          },
+          "default": {
+            "description": "The streaming error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./Common.json#/definitions/ApiError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Allocate a LiveEvent": {
+            "$ref": "examples/liveevent-allocate.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Media/mediaservices/{accountName}/liveEvents/{liveEventName}/start": {
       "post": {
         "tags": [
           "LiveEvents"
         ],
         "summary": "Start Live Event",
-        "description": "Starts an existing Live Event.",
+        "description": "A live event in Stopped or StandBy state will be in Running state after the start operation completes.",
         "operationId": "LiveEvents_Start",
         "parameters": [
           {
@@ -345,7 +392,7 @@
           "LiveEvents"
         ],
         "summary": "Stop Live Event",
-        "description": "Stops an existing Live Event.",
+        "description": "Stops a running live event.",
         "operationId": "LiveEvents_Stop",
         "parameters": [
           {
@@ -401,7 +448,7 @@
           "LiveEvents"
         ],
         "summary": "Reset Live Event",
-        "description": "Resets an existing Live Event.",
+        "description": "Resets an existing live event.",
         "operationId": "LiveEvents_Reset",
         "parameters": [
           {
@@ -448,7 +495,7 @@
           "LiveOutputs"
         ],
         "summary": "List Live Outputs",
-        "description": "Lists the Live Outputs in the Live Event.",
+        "description": "Lists the live outputs of a live event.",
         "operationId": "LiveOutputs_List",
         "parameters": [
           {
@@ -497,7 +544,7 @@
           "LiveOutputs"
         ],
         "summary": "Get Live Output",
-        "description": "Gets a Live Output.",
+        "description": "Gets a live output.",
         "operationId": "LiveOutputs_Get",
         "parameters": [
           {
@@ -547,7 +594,7 @@
           "LiveOutputs"
         ],
         "summary": "Create Live Output",
-        "description": "Creates a Live Output.",
+        "description": "Creates a new live output.",
         "operationId": "LiveOutputs_Create",
         "parameters": [
           {
@@ -585,8 +632,8 @@
               "$ref": "#/definitions/LiveOutput"
             }
           },
-          "202": {
-            "description": "Accepted. The request has been accepted for processing and the operation will complete asynchronously. See https://go.microsoft.com/fwlink/?linkid=2087017 for details on the monitoring asynchronous Azure Operations.",
+          "201": {
+            "description": "Created. The request has been accepted for processing and the operation will complete asynchronously. See https://go.microsoft.com/fwlink/?linkid=2087017 for details on monitoring asynchronous Azure operations using the Azure-AsyncOperation response header.",
             "schema": {
               "$ref": "#/definitions/LiveOutput"
             }
@@ -610,7 +657,7 @@
           "LiveOutputs"
         ],
         "summary": "Delete Live Output",
-        "description": "Deletes a Live Output.",
+        "description": "Deletes a live output. Deleting a live output does not delete the asset the live output is writing to.",
         "operationId": "LiveOutputs_Delete",
         "parameters": [
           {
@@ -640,7 +687,7 @@
             "description": "Accepted. The request has been accepted for processing and the operation will complete asynchronously. See https://go.microsoft.com/fwlink/?linkid=2087017 for details on the monitoring asynchronous Azure Operations."
           },
           "204": {
-            "description": "No content. The request has been accepted but the Live Output was not found."
+            "description": "No content. The request has been accepted but the live output was not found."
           },
           "default": {
             "description": "The streaming error response describing why the operation failed.",
@@ -663,7 +710,7 @@
           "StreamingEndpoints"
         ],
         "summary": "List StreamingEndpoints",
-        "description": "Lists the StreamingEndpoints in the account.",
+        "description": "Lists the streaming endpoints in the account.",
         "operationId": "StreamingEndpoints_List",
         "parameters": [
           {
@@ -697,7 +744,7 @@
           "nextLinkName": "@odata.nextLink"
         },
         "x-ms-examples": {
-          "List all StreamingEndpoints": {
+          "List all streaming endpoints": {
             "$ref": "examples/streamingendpoint-list-all.json"
           }
         }
@@ -709,7 +756,7 @@
           "StreamingEndpoints"
         ],
         "summary": "Get StreamingEndpoint",
-        "description": "Gets a StreamingEndpoint.",
+        "description": "Gets a streaming endpoint.",
         "operationId": "StreamingEndpoints_Get",
         "parameters": [
           {
@@ -746,7 +793,7 @@
           }
         },
         "x-ms-examples": {
-          "Get a StreamingEndpoint by name": {
+          "Get a streaming endpoint by name": {
             "$ref": "examples/streamingendpoint-list-by-name.json"
           }
         }
@@ -756,7 +803,7 @@
           "StreamingEndpoints"
         ],
         "summary": "Create StreamingEndpoint",
-        "description": "Creates a StreamingEndpoint.",
+        "description": "Creates a streaming endpoint.",
         "operationId": "StreamingEndpoints_Create",
         "parameters": [
           {
@@ -779,7 +826,7 @@
           },
           {
             "name": "parameters",
-            "description": "StreamingEndpoint properties needed for creation.",
+            "description": "Streaming endpoint properties needed for creation.",
             "in": "body",
             "required": true,
             "schema": {
@@ -794,8 +841,8 @@
               "$ref": "#/definitions/StreamingEndpoint"
             }
           },
-          "202": {
-            "description": "Accepted. The request has been accepted for processing and the operation will complete asynchronously. See https://go.microsoft.com/fwlink/?linkid=2087017 for details on the monitoring asynchronous Azure Operations.",
+          "201": {
+            "description": "Created. The request has been accepted for processing and the operation will complete asynchronously. See https://go.microsoft.com/fwlink/?linkid=2087017 for details on monitoring asynchronous Azure operations using the Azure-AsyncOperation response header.",
             "schema": {
               "$ref": "#/definitions/StreamingEndpoint"
             }
@@ -809,7 +856,7 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
-          "Create a StreamingEndpoint": {
+          "Create a streaming endpoint": {
             "$ref": "examples/streamingendpoint-create.json"
           }
         }
@@ -819,7 +866,7 @@
           "StreamingEndpoint"
         ],
         "summary": "Update StreamingEndpoint",
-        "description": "Updates a existing StreamingEndpoint.",
+        "description": "Updates a existing streaming endpoint.",
         "operationId": "StreamingEndpoints_Update",
         "parameters": [
           {
@@ -839,7 +886,7 @@
           },
           {
             "name": "parameters",
-            "description": "StreamingEndpoint properties needed for creation.",
+            "description": "Streaming endpoint properties needed for creation.",
             "in": "body",
             "required": true,
             "schema": {
@@ -869,7 +916,7 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
-          "Update a StreamingEndpoint": {
+          "Update a streaming endpoint": {
             "$ref": "examples/streamingendpoint-update.json"
           }
         }
@@ -879,7 +926,7 @@
           "StreamingEndpoints"
         ],
         "summary": "Delete StreamingEndpoint",
-        "description": "Deletes a StreamingEndpoint.",
+        "description": "Deletes a streaming endpoint.",
         "operationId": "StreamingEndpoints_Delete",
         "parameters": [
           {
@@ -917,7 +964,7 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
-          "Delete a StreamingEndpoint": {
+          "Delete a streaming endpoint": {
             "$ref": "examples/streamingendpoint-delete.json"
           }
         }
@@ -929,7 +976,7 @@
           "StreamingEndpoints"
         ],
         "summary": "Start StreamingEndpoint",
-        "description": "Starts an existing StreamingEndpoint.",
+        "description": "Starts an existing streaming endpoint.",
         "operationId": "StreamingEndpoints_Start",
         "parameters": [
           {
@@ -964,7 +1011,7 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
-          "Start a StreamingEndpoint": {
+          "Start a streaming endpoint": {
             "$ref": "examples/streamingendpoint-start.json"
           }
         }
@@ -976,7 +1023,7 @@
           "StreamingEndpoints"
         ],
         "summary": "Stop StreamingEndpoint",
-        "description": "Stops an existing StreamingEndpoint.",
+        "description": "Stops an existing streaming endpoint.",
         "operationId": "StreamingEndpoints_Stop",
         "parameters": [
           {
@@ -1011,7 +1058,7 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
-          "Stop a StreamingEndpoint": {
+          "Stop a streaming endpoint": {
             "$ref": "examples/streamingendpoint-stop.json"
           }
         }
@@ -1023,7 +1070,7 @@
           "StreamingEndpoints"
         ],
         "summary": "Scale StreamingEndpoint",
-        "description": "Scales an existing StreamingEndpoint.",
+        "description": "Scales an existing streaming endpoint.",
         "operationId": "StreamingEndpoints_Scale",
         "parameters": [
           {
@@ -1043,7 +1090,7 @@
           },
           {
             "name": "parameters",
-            "description": "StreamingEndpoint scale parameters",
+            "description": "Streaming endpoint scale parameters",
             "in": "body",
             "required": true,
             "schema": {
@@ -1080,10 +1127,10 @@
         "fragmentsPerTsSegment": {
           "format": "int32",
           "type": "integer",
-          "description": "The amount of fragments per HTTP Live Streaming (HLS) segment."
+          "description": "The number of fragments in an HTTP Live Streaming (HLS) segment in the output of the live event."
         }
       },
-      "description": "The HLS configuration."
+      "description": "HTTP Live Streaming (HLS) packing setting for the live output."
     },
     "LiveOutputProperties": {
       "required": [
@@ -1093,50 +1140,50 @@
       "properties": {
         "description": {
           "type": "string",
-          "description": "The description of the Live Output."
+          "description": "The description of the live output."
         },
         "assetName": {
           "type": "string",
-          "description": "The asset name."
+          "description": "The asset that the live output will write to."
         },
         "archiveWindowLength": {
           "format": "duration",
           "type": "string",
-          "description": "ISO 8601 timespan duration of the archive window length. This is duration that customer want to retain the recorded content."
+          "description": "ISO 8601 timespan duration of the archive window length. This is the maximum content length that can be archived in the asset for this live output, also the maximum content length for the rewind window."
         },
         "manifestName": {
           "type": "string",
-          "description": "The manifest file name.  If not provided, the service will generate one automatically."
+          "description": "The manifest file name. If not provided, the service will generate one automatically."
         },
         "hls": {
           "type": "object",
           "$ref": "#/definitions/Hls",
-          "description": "The HLS configuration."
+          "description": "HTTP Live Streaming (HLS) packing setting for the live output."
         },
         "outputSnapTime": {
           "type": "integer",
           "format": "int64",
-          "description": "The output snapshot time."
+          "description": "The initial timestamp that the live output will start at, any content before this value will not be archived."
         },
         "created": {
           "readOnly": true,
           "format": "date-time",
           "type": "string",
-          "description": "The exact time the Live Output was created."
+          "description": "The creation time the live output."
         },
         "lastModified": {
           "readOnly": true,
           "format": "date-time",
           "type": "string",
-          "description": "The exact time the Live Output was last modified."
+          "description": "The time the live output was last modified."
         },
         "provisioningState": {
           "readOnly": true,
           "type": "string",
-          "description": "The provisioning state of the Live Output."
+          "description": "The provisioning state of the live output."
         },
         "resourceState": {
-          "description": "The resource state of the Live Output.",
+          "description": "The resource state of the live output.",
           "readOnly": true,
           "type": "string",
           "enum": [
@@ -1146,18 +1193,32 @@
           ],
           "x-ms-enum": {
             "name": "LiveOutputResourceState",
+            "values": [
+              {
+                "value": "Creating",
+                "description": "Live output is being created. No content is archived in the asset until the live output is in running state."
+              },
+              {
+                "value": "Running",
+                "description": "Live output is running and archiving live streaming content to the asset if there is valid input from a contribution encoder."
+              },
+              {
+                "value": "Deleting",
+                "description": "Live output is being deleted. The live asset is being converted from live to on-demand asset. Any streaming URLs created on the live output asset continue to work."
+              }
+            ],
             "modelAsString": true
           }
         }
       },
-      "description": "The JSON object that contains the properties required to create a Live Output."
+      "description": "The JSON object that contains the properties required to create a LiveOutput."
     },
     "LiveOutput": {
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/LiveOutputProperties",
-          "description": "The Live Output properties."
+          "description": "Live output properties."
         }
       },
       "allOf": [
@@ -1174,7 +1235,7 @@
           "items": {
             "$ref": "#/definitions/LiveOutput"
           },
-          "description": "The result of the List Live Output operation."
+          "description": "The result of the List LiveOutput operation."
         },
         "@odata.count": {
           "type": "integer",
@@ -1183,7 +1244,7 @@
         },
         "@odata.nextLink": {
           "type": "string",
-          "description": "Th link to the next set of results. Not empty if value contains incomplete list of Live Outputs."
+          "description": "The link to the next set of results. Not empty if value contains incomplete list of live outputs."
         }
       },
       "description": "The LiveOutput list result.",
@@ -1200,7 +1261,7 @@
           "description": "The endpoint URL."
         }
       },
-      "description": "The Live Event endpoint."
+      "description": "The live event endpoint."
     },
     "LiveEventInputAccessControl": {
       "properties": {
@@ -1210,7 +1271,7 @@
           "description": "The IP access control properties."
         }
       },
-      "description": "The IP access control for Live Event Input."
+      "description": "The IP access control for live event input."
     },
     "LiveEventInput": {
       "required": [
@@ -1219,38 +1280,48 @@
       "properties": {
         "streamingProtocol": {
           "type": "string",
-          "description": "The streaming protocol for the Live Event.  This is specified at creation time and cannot be updated.",
+          "description": "The input protocol for the live event. This is specified at creation time and cannot be updated.",
           "enum": [
             "FragmentedMP4",
             "RTMP"
           ],
           "x-ms-enum": {
             "name": "LiveEventInputProtocol",
+            "values": [
+              {
+                "value": "FragmentedMP4",
+                "description": "Smooth streaming input will be sent by the contribution encoder to the live event."
+              },
+              {
+                "value": "RTMP",
+                "description": "RTMP input will be sent by the contribution encoder to the live event."
+              }
+            ],
             "modelAsString": true
           }
         },
         "accessControl": {
           "type": "object",
           "$ref": "#/definitions/LiveEventInputAccessControl",
-          "description": "The access control for LiveEvent Input."
+          "description": "Access control for live event input."
         },
         "keyFrameIntervalDuration": {
           "type": "string",
-          "description": "ISO 8601 timespan duration of the key frame interval duration."
+          "description": "ISO 8601 timespan duration of the key frame interval duration of the input. This value sets the EXT-X-TARGETDURATION property in the HLS output."
         },
         "accessToken": {
           "type": "string",
-          "description": "A UUID in string form to uniquely identify the stream. This can be specified at creation time but cannot be updated.  If omitted, the service will generate a unique value."
+          "description": "A UUID in string form to uniquely identify the stream. This can be specified at creation time but cannot be updated. If omitted, the service will generate a unique value."
         },
         "endpoints": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/LiveEventEndpoint"
           },
-          "description": "The input endpoints for the Live Event."
+          "description": "The input endpoints for the live event."
         }
       },
-      "description": "The Live Event input."
+      "description": "The live event input."
     },
     "IPRange": {
       "properties": {
@@ -1290,7 +1361,7 @@
           "description": "The IP access control properties."
         }
       },
-      "description": "The IP access control for Live Event preview."
+      "description": "The IP access control for the live event preview endpoint."
     },
     "LiveEventPreview": {
       "properties": {
@@ -1308,15 +1379,15 @@
         },
         "previewLocator": {
           "type": "string",
-          "description": "The identifier of the preview locator in Guid format.  Specifying this at creation time allows the caller to know the preview locator url before the event is created.  If omitted, the service will generate a random identifier.  This value cannot be updated once the live event is created."
+          "description": "The identifier of the preview locator in Guid format. Specifying this at creation time allows the caller to know the preview locator url before the event is created. If omitted, the service will generate a random identifier. This value cannot be updated once the live event is created."
         },
         "streamingPolicyName": {
           "type": "string",
-          "description": "The name of streaming policy used for the LiveEvent preview.  This value is specified at creation time and cannot be updated."
+          "description": "The name of streaming policy used for the LiveEvent preview. This value is specified at creation time and cannot be updated."
         },
         "alternativeMediaId": {
           "type": "string",
-          "description": "An Alternative Media Identifier associated with the StreamingLocator created for the preview.  This value is specified at creation time and cannot be updated.  The identifier can be used in the CustomLicenseAcquisitionUrlTemplate or the CustomKeyAcquisitionUrlTemplate of the StreamingPolicy specified in the StreamingPolicyName field."
+          "description": "An Alternative Media Identifier associated with the StreamingLocator created for the preview. This value is specified at creation time and cannot be updated. The identifier can be used in the CustomLicenseAcquisitionUrlTemplate or the CustomKeyAcquisitionUrlTemplate of the StreamingPolicy specified in the StreamingPolicyName field."
         }
       },
       "description": "The Live Event preview."
@@ -1325,24 +1396,119 @@
       "properties": {
         "encodingType": {
           "type": "string",
-          "description": "The encoding type for Live Event. This value is specified at creation time and cannot be updated. When encodingType is set to None, the service simply passes through the incoming video and audio layer(s) to the output. When encodingType is set to Standard or Premium1080p, a live encoder transcodes the incoming stream into multiple bit rates or layers. See https://go.microsoft.com/fwlink/?linkid=2095101 for more information. The encodingType of Basic is obsolete – if specified, the service will treat this as a Standard Live Event.",
+          "description": "Live event type. When encodingType is set to None, the service simply passes through the incoming video and audio layer(s) to the output. When encodingType is set to Standard or Premium1080p, a live encoder transcodes the incoming stream into multiple bitrates or layers. See https://go.microsoft.com/fwlink/?linkid=2095101 for more information. This property cannot be modified after the live event is created.",
           "enum": [
             "None",
-            "Basic",
             "Standard",
             "Premium1080p"
           ],
           "x-ms-enum": {
             "name": "LiveEventEncodingType",
+            "values": [
+              {
+                "value": "None",
+                "description": "A contribution live encoder sends a multiple bitrate stream. The ingested stream passes through the live event without any further processing. It is also called the pass-through mode."
+              },
+              {
+                "value": "Standard",
+                "description": "A contribution live encoder sends a single bitrate stream to the live event and Media Services creates multiple bitrate streams. The output cannot exceed 720p in resolution."
+              },
+              {
+                "value": "Premium1080p",
+                "description": "A contribution live encoder sends a single bitrate stream to the live event and Media Services creates multiple bitrate streams. The output cannot exceed 1080p in resolution."
+              }
+            ],
             "modelAsString": true
           }
         },
         "presetName": {
           "type": "string",
           "description": "The optional encoding preset name, used when encodingType is not None. This value is specified at creation time and cannot be updated. If the encodingType is set to Standard, then the default preset name is ‘Default720p’. Else if the encodingType is set to Premium1080p, the default preset is ‘Default1080p’."
+        },
+        "stretchMode": {
+          "type": "string",
+          "enum": [
+            "None",
+            "AutoSize",
+            "AutoFit"
+          ],
+          "x-ms-enum": {
+            "name": "StretchMode",
+            "values": [
+              {
+                "value": "None",
+                "description": "Strictly respects the output resolution specified in the encoding preset without considering the pixel aspect ratio or display aspect ratio of the input video."
+              },
+              {
+                "value": "AutoSize",
+                "description": "Override the output resolution, and change it to match the display aspect ratio of the input, without padding. For example, if the input is 1920x1080 and the encoding preset asks for 1280x1280, then the value in the preset is overridden, and the output will be at 1280x720, which maintains the input aspect ratio of 16:9."
+              },
+              {
+                "value": "AutoFit",
+                "description": "Pad the output (with either letterbox or pillar box) to honor the output resolution, while ensuring that the active video region in the output has the same aspect ratio as the input. For example, if the input is 1920x1080 and the encoding preset asks for 1280x1280, then the output will be at 1280x1280, which contains an inner rectangle of 1280x720 at aspect ratio of 16:9, and pillar box regions 280 pixels wide at the left and right."
+              }
+            ],
+            "modelAsString": true
+          },
+          "description": "Specifies how the input video will be resized to fit the desired output resolution(s). Default is None"
+        },
+        "keyFrameInterval": {
+          "type": "string",
+          "format": "duration",
+          "description": "Specifies the output fragment length for both video and audio tracks. For the video track it also defines the key frame interval, or the length of a GoP (group of pictures). The value should be a non-zero integer in the range of [0.5, 20] seconds, specified in the ISO 8601 format. If this value is not set, output fragment lengths will be the same as input."
         }
       },
-      "description": "The Live Event encoding."
+      "description": "Specifies the live event type and optional encoding settings for encoding live events.."
+    },
+    "LiveEventInputTrackSelection": {
+      "properties": {
+        "property": {
+          "type": "string",
+          "description": "Property name to select. This property is reserved for future use, any value set on this property will be ignored."
+        },
+        "operation": {
+          "type": "string",
+          "description": "Comparing operation. This property is reserved for future use, any value set on this property will be ignored."
+        },
+        "value": {
+          "type": "string",
+          "description": "Property value to select. This property is reserved for future use, any value set on this property will be ignored."
+        }
+      },
+      "description": "A track selection condition. This property is reserved for future use, any value set on this property will be ignored."
+    },
+    "LiveEventOutputTranscriptionTrack": {
+      "required": [
+        "trackName"
+      ],
+      "properties": {
+        "trackName": {
+          "type": "string",
+          "description": "The output track name. This property is reserved for future use, any value set on this property will be ignored."
+        }
+      },
+      "description": "Describes a transcription track in the output of a live event, generated using speech-to-text transcription. This property is reserved for future use, any value set on this property will be ignored."
+    },
+    "LiveEventTranscription": {
+      "properties": {
+        "language": {
+          "type": "string",
+          "description": "Specifies the language (locale) to be used for speech-to-text transcription – it should match the spoken language in the audio track. The value should be in BCP-47 format (e.g: 'en-US'). See https://go.microsoft.com/fwlink/?linkid=2133742 for more information about the live transcription feature and the list of supported languages."
+        },
+        "inputTrackSelection": {
+          "type": "array",
+          "description": "Provides a mechanism to select the audio track in the input live feed, to which speech-to-text transcription is applied. This property is reserved for future use, any value set on this property will be ignored.",
+          "items": {
+            "$ref": "#/definitions/LiveEventInputTrackSelection"
+          }
+        },
+        "outputTranscriptionTrack": {
+          "type": "object",
+          "$ref": "#/definitions/LiveEventOutputTranscriptionTrack",
+          "description": "Describes a transcription track in the output of a live event, generated using speech-to-text transcription. This property is reserved for future use, any value set on this property will be ignored."
+        }
+      },
+      "description": "Describes the transcription tracks in the output of a live event, generated using speech-to-text transcription. This property is reserved for future use, any value set on this property will be ignored."
     },
     "CrossSiteAccessPolicies": {
       "properties": {
@@ -1361,7 +1527,7 @@
       "properties": {
         "removeOutputsOnStop": {
           "type": "boolean",
-          "description": "The flag indicates if remove LiveOutputs on Stop."
+          "description": "The flag indicates whether live outputs are automatically deleted when live event is being stopped. Deleting live outputs do not delete the underlying assets."
         }
       },
       "description": "The LiveEvent action input parameter definition."
@@ -1373,34 +1539,43 @@
       "properties": {
         "description": {
           "type": "string",
-          "description": "The Live Event description."
+          "description": "A description for the live event."
         },
         "input": {
           "type": "object",
           "$ref": "#/definitions/LiveEventInput",
-          "description": "The Live Event input."
+          "description": "Live event input settings. It defines how the live event receives input from a contribution encoder."
         },
         "preview": {
           "type": "object",
           "$ref": "#/definitions/LiveEventPreview",
-          "description": "The Live Event preview."
+          "description": "Live event preview settings. Preview allows live event producers to preview the live streaming content without creating any live output."
         },
         "encoding": {
           "type": "object",
           "$ref": "#/definitions/LiveEventEncoding",
-          "description": "The Live Event encoding."
+          "description": "Encoding settings for the live event. It configures whether a live encoder is used for the live event and settings for the live encoder if it is used."
+        },
+        "transcriptions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/LiveEventTranscription"
+          },
+          "description": "Live transcription settings for the live event. See https://go.microsoft.com/fwlink/?linkid=2133742 for more information about the live transcription feature."
         },
         "provisioningState": {
           "readOnly": true,
           "type": "string",
-          "description": "The provisioning state of the Live Event."
+          "description": "The provisioning state of the live event."
         },
         "resourceState": {
           "readOnly": true,
           "type": "string",
-          "description": "The resource state of the Live Event.",
+          "description": "The resource state of the live event. See https://go.microsoft.com/fwlink/?linkid=2139012 for more information.",
           "enum": [
             "Stopped",
+            "Allocating",
+            "StandBy",
             "Starting",
             "Running",
             "Stopping",
@@ -1408,17 +1583,51 @@
           ],
           "x-ms-enum": {
             "name": "LiveEventResourceState",
+            "values": [
+              {
+                "value": "Stopped",
+                "description": "This is the initial state of the live event after creation (unless autostart was set to true.) No billing occurs in this state. In this state, the live event properties can be updated but streaming is not allowed."
+              },
+              {
+                "value": "Allocating",
+                "description": "Allocate action was called on the live event and resources are being provisioned for this live event. Once allocation completes successfully, the live event will transition to StandBy state."
+              },
+              {
+                "value": "StandBy",
+                "description": "Live event resources have been provisioned and is ready to start. Billing occurs in this state. Most properties can still be updated, however ingest or streaming is not allowed during this state."
+              },
+              {
+                "value": "Starting",
+                "description": "The live event is being started and resources are being allocated. No billing occurs in this state. Updates or streaming are not allowed during this state. If an error occurs, the live event returns to the Stopped state."
+              },
+              {
+                "value": "Running",
+                "description": "The live event resources have been allocated, ingest and preview URLs have been generated, and it is capable of receiving live streams. At this point, billing is active. You must explicitly call Stop on the live event resource to halt further billing."
+              },
+              {
+                "value": "Stopping",
+                "description": "The live event is being stopped and resources are being de-provisioned. No billing occurs in this transient state. Updates or streaming are not allowed during this state."
+              },
+              {
+                "value": "Deleting",
+                "description": "The live event is being deleted. No billing occurs in this transient state. Updates or streaming are not allowed during this state."
+              }
+            ],
             "modelAsString": true
           }
         },
         "crossSiteAccessPolicies": {
           "type": "object",
           "$ref": "#/definitions/CrossSiteAccessPolicies",
-          "description": "The Live Event access policies."
+          "description": "Live event cross site access policies."
         },
         "useStaticHostname": {
           "type": "boolean",
-          "description": "Specifies whether to use a vanity url with the Live Event.  This value is specified at creation time and cannot be updated."
+          "description": "Specifies whether a static hostname would be assigned to the live event preview and ingest endpoints. This value can only be updated if the live event is in Standby state"
+        },
+        "hostnamePrefix": {
+          "type": "string",
+          "description": "When useStaticHostname is set to true, the hostnamePrefix specifies the first part of the hostname assigned to the live event preview and ingest endpoints. The final hostname would be a combination of this prefix, the media service account name and a short code for the Azure Media Services data center."
         },
         "streamOptions": {
           "type": "array",
@@ -1430,32 +1639,42 @@
             ],
             "x-ms-enum": {
               "name": "StreamOptionsFlag",
+              "values": [
+                {
+                  "value": "Default",
+                  "description": "Live streaming with no special latency optimizations."
+                },
+                {
+                  "value": "LowLatency",
+                  "description": "The live event provides lower end to end latency by reducing its internal buffers. This could result in more client buffering during playback if network bandwidth is low."
+                }
+              ],
               "modelAsString": true
             }
           },
-          "description": "The options to use for the LiveEvent.  This value is specified at creation time and cannot be updated. The valid values for the array entry values are 'Default' and 'LowLatency'."
+          "description": "The options to use for the LiveEvent. This value is specified at creation time and cannot be updated. The valid values for the array entry values are 'Default' and 'LowLatency'."
         },
         "created": {
           "readOnly": true,
           "format": "date-time",
           "type": "string",
-          "description": "The exact time the Live Event was created."
+          "description": "The creation time for the live event"
         },
         "lastModified": {
           "readOnly": true,
           "format": "date-time",
           "type": "string",
-          "description": "The exact time the Live Event was last modified."
+          "description": "The last modified time of the live event."
         }
       },
-      "description": "The Live Event properties."
+      "description": "The live event properties."
     },
     "LiveEvent": {
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/LiveEventProperties",
-          "description": "The Live Event properties."
+          "description": "The live event properties."
         }
       },
       "allOf": [
@@ -1463,7 +1682,7 @@
           "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/TrackedResource"
         }
       ],
-      "description": "The Live Event."
+      "description": "The live event."
     },
     "LiveEventListResult": {
       "properties": {
@@ -1527,17 +1746,17 @@
         "ip": {
           "type": "object",
           "$ref": "#/definitions/IPAccessControl",
-          "description": "The IP access control of the StreamingEndpoint."
+          "description": "The IP access control of the streaming endpoint."
         }
       },
-      "description": "StreamingEndpoint access control definition."
+      "description": "Streaming endpoint access control definition."
     },
     "StreamingEntityScaleUnit": {
       "properties": {
         "scaleUnit": {
           "type": "integer",
           "format": "int32",
-          "description": "The scale unit number of the StreamingEndpoint."
+          "description": "The scale unit number of the streaming endpoint."
         }
       },
       "description": "scale units definition"
@@ -1549,21 +1768,21 @@
       "properties": {
         "description": {
           "type": "string",
-          "description": "The StreamingEndpoint description."
+          "description": "The streaming endpoint description."
         },
         "scaleUnits": {
           "type": "integer",
           "format": "int32",
-          "description": "The number of scale units.  Use the Scale operation to adjust this value."
+          "description": "The number of scale units. Use the Scale operation to adjust this value."
         },
         "availabilitySetName": {
           "type": "string",
-          "description": "The name of the AvailabilitySet used with this StreamingEndpoint for high availability streaming.  This value can only be set at creation time."
+          "description": "The name of the AvailabilitySet used with this streaming endpoint for high availability streaming. This value can only be set at creation time. This feature is not available everywhere, please contact Azure Support for more information."
         },
         "accessControl": {
           "type": "object",
           "$ref": "#/definitions/StreamingEndpointAccessControl",
-          "description": "The access control definition of the StreamingEndpoint."
+          "description": "The access control definition of the streaming endpoint."
         },
         "maxCacheAge": {
           "type": "integer",
@@ -1576,12 +1795,12 @@
             "type": "string",
             "description": "custom host name"
           },
-          "description": "The custom host names of the StreamingEndpoint"
+          "description": "The custom host names of the streaming endpoint"
         },
         "hostName": {
           "readOnly": true,
           "type": "string",
-          "description": "The StreamingEndpoint host name."
+          "description": "The streaming endpoint host name."
         },
         "cdnEnabled": {
           "type": "boolean",
@@ -1598,12 +1817,12 @@
         "provisioningState": {
           "readOnly": true,
           "type": "string",
-          "description": "The provisioning state of the StreamingEndpoint."
+          "description": "The provisioning state of the streaming endpoint."
         },
         "resourceState": {
           "readOnly": true,
           "type": "string",
-          "description": "The resource state of the StreamingEndpoint.",
+          "description": "The resource state of the streaming endpoint.",
           "enum": [
             "Stopped",
             "Starting",
@@ -1614,13 +1833,39 @@
           ],
           "x-ms-enum": {
             "name": "StreamingEndpointResourceState",
+            "values": [
+              {
+                "value": "Stopped",
+                "description": "The initial state of a streaming endpoint after creation. Content is not ready to be streamed from this endpoint."
+              },
+              {
+                "value": "Starting",
+                "description": "The streaming endpoint is transitioning to the running state."
+              },
+              {
+                "value": "Running",
+                "description": "The streaming endpoint is running. It is able to stream content to clients"
+              },
+              {
+                "value": "Stopping",
+                "description": "The streaming endpoint is transitioning to the stopped state."
+              },
+              {
+                "value": "Deleting",
+                "description": "The streaming endpoint is being deleted."
+              },
+              {
+                "value": "Scaling",
+                "description": "The streaming endpoint is increasing or decreasing scale units."
+              }
+            ],
             "modelAsString": true
           }
         },
         "crossSiteAccessPolicies": {
           "type": "object",
           "$ref": "#/definitions/CrossSiteAccessPolicies",
-          "description": "The StreamingEndpoint access policies."
+          "description": "The streaming endpoint access policies."
         },
         "freeTrialEndTime": {
           "readOnly": true,
@@ -1632,23 +1877,23 @@
           "readOnly": true,
           "format": "date-time",
           "type": "string",
-          "description": "The exact time the StreamingEndpoint was created."
+          "description": "The exact time the streaming endpoint was created."
         },
         "lastModified": {
           "readOnly": true,
           "format": "date-time",
           "type": "string",
-          "description": "The exact time the StreamingEndpoint was last modified."
+          "description": "The exact time the streaming endpoint was last modified."
         }
       },
-      "description": "The StreamingEndpoint properties."
+      "description": "The streaming endpoint properties."
     },
     "StreamingEndpoint": {
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/StreamingEndpointProperties",
-          "description": "The StreamingEndpoint properties."
+          "description": "The streaming endpoint properties."
         }
       },
       "allOf": [
@@ -1656,7 +1901,7 @@
           "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/TrackedResource"
         }
       ],
-      "description": "The StreamingEndpoint."
+      "description": "The streaming endpoint."
     },
     "StreamingEndpointListResult": {
       "properties": {
@@ -1677,7 +1922,7 @@
           "description": "Th link to the next set of results. Not empty if value contains incomplete list of StreamingEndpoints."
         }
       },
-      "description": "The StreamingEndpoint list result.",
+      "description": "The streaming endpoint list result.",
       "title": "StreamingEndpointListResult"
     }
   },
@@ -1691,7 +1936,7 @@
     },
     "ApiVersion": {
       "name": "api-version",
-      "description": "The Version of the API to be used with the client request.",
+      "description": "The version of the API to be used with the client request.",
       "in": "query",
       "required": true,
       "type": "string"
@@ -1714,7 +1959,7 @@
     },
     "LiveEventName": {
       "name": "liveEventName",
-      "description": "The name of the Live Event.",
+      "description": "The name of the live event, maximum length is 32.",
       "in": "path",
       "required": true,
       "type": "string",
@@ -1733,7 +1978,7 @@
     },
     "LiveOutputName": {
       "name": "liveOutputName",
-      "description": "The name of the Live Output.",
+      "description": "The name of the live output.",
       "in": "path",
       "required": true,
       "type": "string",
@@ -1744,7 +1989,7 @@
     },
     "StreamingEndpointName": {
       "name": "streamingEndpointName",
-      "description": "The name of the StreamingEndpoint.",
+      "description": "The name of the streaming endpoint, maximum length is 24.",
       "in": "path",
       "required": true,
       "type": "string",
