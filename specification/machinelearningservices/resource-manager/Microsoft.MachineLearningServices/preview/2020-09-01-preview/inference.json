@@ -790,8 +790,7 @@
         "kind": {
           "type": "string",
           "x-ms-mutability": [
-            "read",
-            "create"
+            "read"
           ],
           "enum": [
             "ACI",
@@ -878,17 +877,10 @@
     "ComputeConfiguration": {
       "description": "Compute Configuration of the endpoint.",
       "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/AciComputeConfiguration"
-        },
-        {
-          "$ref": "#/definitions/AksComputeConfiguration"
-        },
-        {
-          "$ref": "#/definitions/MirComputeConfiguration"
-        }
+      "required": [
+        "computeType"
       ],
+      "discriminator": "computeType",
       "properties": {
         "computeType": {
           "type": "string",
@@ -908,6 +900,11 @@
     "AciComputeConfiguration": {
       "type": "object",
       "description": "ACI configuration.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ComputeConfiguration"
+        }
+      ],
       "properties": {
         "sslConfiguration": {
           "type": "object",
@@ -935,6 +932,11 @@
     "AksComputeConfiguration": {
       "type": "object",
       "description": "AKS Configuration",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ComputeConfiguration"
+        }
+      ],
       "properties": {
         "namespace": {
           "type": "string",
@@ -948,7 +950,12 @@
     },
     "MirComputeConfiguration": {
       "type": "object",
-      "description": "MIR Configuration"
+      "description": "MIR Configuration",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ComputeConfiguration"
+        }
+      ]
     },
     "SslConfiguration": {
       "type": "object",
@@ -1020,15 +1027,6 @@
             "modelAsString": true
           },
           "description": "Metadata used by portal/tooling/etc to render different UX experiences for resources of the same type; e.g. ApiApps are a kind of Microsoft.Web/sites type.  If supported, the resource provider must validate and persist this value."
-        },
-        "sku": {
-          "type": "object",
-          "description": "Sku for the deployment.",
-          "allOf": [
-            {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/Sku"
-            }
-          ]
         }
       }
     },
@@ -1121,17 +1119,10 @@
     "DeploymentConfiguration": {
       "description": "Compute Configuration of the endpoint.",
       "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/AciDeploymentConfiguration"
-        },
-        {
-          "$ref": "#/definitions/AksDeploymentConfiguration"
-        },
-        {
-          "$ref": "#/definitions/MirDeploymentConfiguration"
-        }
+      "required": [
+        "computeType"
       ],
+      "discriminator": "computeType",
       "properties": {
         "computeType": {
           "type": "string",
@@ -1172,11 +1163,21 @@
     },
     "AciDeploymentConfiguration": {
       "type": "object",
-      "description": "ACI deployment configuration."
+      "description": "ACI deployment configuration.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DeploymentConfiguration"
+        }
+      ]
     },
     "AksDeploymentConfiguration": {
       "type": "object",
       "description": "AKS deployment configuration.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DeploymentConfiguration"
+        }
+      ],
       "properties": {
         "maxConcurrentRequestsPerContainer": {
           "type": "integer",
@@ -1218,7 +1219,12 @@
     },
     "MirDeploymentConfiguration": {
       "type": "object",
-      "description": "MIR deployment configuration."
+      "description": "MIR deployment configuration.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DeploymentConfiguration"
+        }
+      ]
     },
     "CodeConfiguration": {
       "type": "object",
