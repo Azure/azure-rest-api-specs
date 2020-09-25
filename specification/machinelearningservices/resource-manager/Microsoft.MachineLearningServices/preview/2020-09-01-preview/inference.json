@@ -831,11 +831,7 @@
         "computeConfiguration": {
           "type": "object",
           "description": "Compute Configuration of the endpoint.",
-          "allOf": [
-            {
-              "$ref": "#/definitions/ComputeConfiguration"
-            }
-          ]
+          "$ref": "#/definitions/ComputeConfiguration"
         },
         "provisioningState": {
           "type": "string",
@@ -880,26 +876,27 @@
       "required": [
         "computeType"
       ],
-      "discriminator": "computeType",
       "properties": {
         "computeType": {
-          "type": "string",
           "enum": [
             "ACI",
             "AKS",
             "AMLCompute"
           ],
+          "type": "string",
           "x-ms-enum": {
-            "name": "ComputeConfigurationTypes",
+            "name": "ComputeConfigurationType",
             "modelAsString": true
           },
-          "description": "Compute Type of the inference endpoint"
+          "description": "Compute Configuration type such as ACI, AKS, or AMLCompute"
         }
-      }
+      },
+      "discriminator": "computeType"
     },
     "AciComputeConfiguration": {
       "type": "object",
       "description": "ACI configuration.",
+      "x-ms-discriminator-value": "ACI",
       "allOf": [
         {
           "$ref": "#/definitions/ComputeConfiguration"
@@ -932,6 +929,7 @@
     "AksComputeConfiguration": {
       "type": "object",
       "description": "AKS Configuration",
+      "x-ms-discriminator-value": "AKS",
       "allOf": [
         {
           "$ref": "#/definitions/ComputeConfiguration"
@@ -951,6 +949,7 @@
     "MirComputeConfiguration": {
       "type": "object",
       "description": "MIR Configuration",
+      "x-ms-discriminator-value": "AMLCompute",
       "allOf": [
         {
           "$ref": "#/definitions/ComputeConfiguration"
@@ -986,7 +985,7 @@
         "value": {
           "readOnly": true,
           "type": "array",
-          "description": "An array of Machine Learning Online Deployment  objects wrapped in ARM resource envelope.",
+          "description": "An array of Machine Learning Online Deployment objects wrapped in ARM resource envelope.",
           "items": {
             "$ref": "#/definitions/OnlineEndpointDeploymentResource"
           }
@@ -1041,27 +1040,15 @@
       "properties": {
         "skuScaleSettings": {
           "type": "object",
-          "allOf": [
-            {
-              "$ref": "#/definitions/SkuScaleSettings"
-            }
-          ]
+          "$ref": "#/definitions/SkuScaleSettings"
         },
         "environmentOverrides": {
           "type": "object",
-          "allOf": [
-            {
-              "$ref": "#/definitions/EnvironmentOverrides"
-            }
-          ]
+          "$ref": "#/definitions/EnvironmentOverrides"
         },
         "deploymentConfiguration": {
           "type": "object",
-          "allOf": [
-            {
-              "$ref": "#/definitions/DeploymentConfiguration"
-            }
-          ]
+          "$ref": "#/definitions/DeploymentConfiguration"
         }
       }
     },
@@ -1087,11 +1074,7 @@
         "codeConfiguration": {
           "type": "object",
           "description": "Code Configuration of the deployment.",
-          "allOf": [
-            {
-              "$ref": "#/definitions/CodeConfiguration"
-            }
-          ]
+          "$ref": "#/definitions/CodeConfiguration"
         },
         "environmentId": {
           "type": "string",
@@ -1122,7 +1105,6 @@
       "required": [
         "computeType"
       ],
-      "discriminator": "computeType",
       "properties": {
         "computeType": {
           "type": "string",
@@ -1132,7 +1114,7 @@
             "AMLCompute"
           ],
           "x-ms-enum": {
-            "name": "ComputeConfigurationTypes",
+            "name": "DeploymentConfigurationTypes",
             "modelAsString": true
           },
           "description": "Compute Type of the inference endpoint"
@@ -1144,22 +1126,15 @@
         "modelDataCollection": {
           "type": "object",
           "description": "Model data collection configuration for the deployment. (ACI and AKS only)",
-          "allOf": [
-            {
-              "$ref": "machineLearningServices.json#/definitions/ModelDataCollection"
-            }
-          ]
+          "$ref": "machineLearningServices.json#/definitions/ModelDataCollection"
         },
         "containerResourceRequirements": {
           "type": "object",
           "description": "Container Resource requirements for the deployment. (ACI and AKS only)",
-          "allOf": [
-            {
-              "$ref": "machineLearningServices.json#/definitions/ContainerResourceRequirements"
-            }
-          ]
+          "$ref": "machineLearningServices.json#/definitions/ContainerResourceRequirements"
         }
-      }
+      },
+      "discriminator": "computeType"
     },
     "AciDeploymentConfiguration": {
       "type": "object",
@@ -1168,11 +1143,13 @@
         {
           "$ref": "#/definitions/DeploymentConfiguration"
         }
-      ]
+      ],
+      "x-ms-discriminator-value": "ACI"
     },
     "AksDeploymentConfiguration": {
       "type": "object",
       "description": "AKS deployment configuration.",
+      "x-ms-discriminator-value": "AKS",
       "allOf": [
         {
           "$ref": "#/definitions/DeploymentConfiguration"
@@ -1220,6 +1197,7 @@
     "MirDeploymentConfiguration": {
       "type": "object",
       "description": "MIR deployment configuration.",
+      "x-ms-discriminator-value": "AMLCompute",
       "allOf": [
         {
           "$ref": "#/definitions/DeploymentConfiguration"
