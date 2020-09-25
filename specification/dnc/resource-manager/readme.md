@@ -37,7 +37,7 @@ These settings apply only when `--tag=package-2020-08-08-preview` is specified o
 ``` yaml $(tag) == 'package-2020-08-08-preview'
 input-file:
 - Microsoft.DelegatedNetwork/preview/2020-08-08-preview/controller.json
-- Microsoft.DelegatedNetwork/preview/2020-08-08-preview/orchestratorInstances.json
+- Microsoft.DelegatedNetwork/preview/2020-08-08-preview/orchestrators.json
 - Microsoft.DelegatedNetwork/preview/2020-08-08-preview/delegatedSubnets.json
 - Microsoft.DelegatedNetwork/preview/2020-08-08-preview/operations.json
 ```
