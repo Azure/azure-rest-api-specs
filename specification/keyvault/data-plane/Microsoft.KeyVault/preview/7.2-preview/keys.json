@@ -1279,9 +1279,8 @@
           "description": "True if the key's lifetime is managed by key vault. If this is a key backing a certificate, then managed will be true."
         },
         "release_policy": {
-          "description": "Blob encoding the policy rules under which the key can be exported.",
-          "type": "string",
-          "format": "base64url"
+          "$ref": "#/definitions/KeyReleasePolicy",
+          "description": "The policy rules under which the key can be exported."
         }
       },
       "description": "A KeyBundle consisting of a WebKey plus its attributes."
@@ -1310,6 +1309,20 @@
         }
       },
       "description": "The key item containing key metadata."
+    },
+    "KeyReleasePolicy": {
+      "properties": {
+        "contentType": {
+          "description": "Content type and version of key release policy",
+          "type": "string",
+          "default": "application/json; version=1.0"
+        },
+        "data": {
+          "description": "Blob encoding the policy rules under which the key can be exported.",
+          "type": "string",
+          "format": "base64url"
+        }
+      }
     },
     "DeletedKeyBundle": {
       "allOf": [
@@ -1490,9 +1503,8 @@
           }
         },
         "release_policy": {
-          "description": "Blob encoding the policy rules under which the key can be exported.",
-          "type": "string",
-          "format": "base64url"
+          "$ref": "#/definitions/KeyReleasePolicy",
+          "description": "The policy rules under which the key can be exported."
         }
       },
       "description": "The key create parameters.",
@@ -1523,9 +1535,8 @@
           "description": "Application specific metadata in the form of key-value pairs."
         },
         "release_policy": {
-          "description": "Blob encoding the policy rules under which the key can be exported.",
-          "type": "string",
-          "format": "base64url"
+          "$ref": "#/definitions/KeyReleasePolicy",
+          "description": "The policy rules under which the key can be exported."
         }
       },
       "description": "The key import parameters.",
@@ -1764,9 +1775,8 @@
           "description": "Application specific metadata in the form of key-value pairs."
         },
         "release_policy": {
-          "description": "Blob encoding the policy rules under which the key can be exported.",
-          "type": "string",
-          "format": "base64url"
+          "$ref": "#/definitions/KeyReleasePolicy",
+          "description": "The policy rules under which the key can be exported."
         }
       },
       "description": "The key update parameters."
