@@ -2042,6 +2042,43 @@
         "databaseName"
       ]
     },
+    "MongoDbAtlasLinkedService": {
+      "x-ms-discriminator-value": "MongoDbAtlas",
+      "description": "Linked service for MongoDB Atlas data source.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/LinkedService"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "MongoDB Atlas linked service properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/MongoDbAtlasLinkedServiceTypeProperties"
+        }
+      },
+      "required": [
+        "typeProperties"
+      ]
+    },
+    "MongoDbAtlasLinkedServiceTypeProperties": {
+      "description": "MongoDB Atlas linked service properties.",
+      "properties": {
+        "connectionString": {
+          "description": "The MongoDB Atlas connection string. Type: string, SecureString or AzureKeyVaultSecretReference. Type: string, SecureString or AzureKeyVaultSecretReference.",
+          "type": "object"
+        },
+        "database": {
+          "type": "object",
+          "description": "The name of the MongoDB Atlas database that you want to access. Type: string (or Expression with resultType string)."
+        }
+      },
+      "required": [
+        "connectionString",
+        "database"
+      ]
+    },
     "MongoDbV2LinkedService": {
       "x-ms-discriminator-value": "MongoDbV2",
       "description": "Linked service for MongoDB data source.",
