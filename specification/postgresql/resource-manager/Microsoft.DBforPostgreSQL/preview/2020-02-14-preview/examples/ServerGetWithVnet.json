@@ -1,0 +1,42 @@
+{
+  "parameters": {
+    "serverName": "pgtestsvc1",
+    "resourceGroupName": "testrg",
+    "api-version": "2020-02-14-preview",
+    "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "sku": {
+          "tier": "GeneralPurpose",
+          "name": "Standard_D4s_v3"
+        },
+        "properties": {
+          "administratorLogin": "cloudsa",
+          "version": "12",
+          "state": "Ready",
+          "haState": "NotEnabled",
+          "fullyQualifiedDomainName": "pgtestsvc4.postgres.database.azure.com",
+          "displayName": "demosingleserver",
+          "publicNetworkAccess": "Disabled",
+          "delegatedSubnetArguments": {
+            "subnetArmResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.Network/virtualNetworks/test-vnet/subnets/test-vnet-subnet"
+          },
+          "storageProfile": {
+            "storageMB": 524288,
+            "backupRetentionDays": 7
+          },
+          "availabilityZone": "1"
+        },
+        "location": "westus",
+        "tags": {
+          "ElasticServer": "1"
+        },
+        "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.DBforPostgreSQL/flexibleServers/pgtestsvc1",
+        "name": "pgtestsvc1",
+        "type": "Microsoft.DBforPostgreSQL/flexibleServers"
+      }
+    }
+  }
+}
