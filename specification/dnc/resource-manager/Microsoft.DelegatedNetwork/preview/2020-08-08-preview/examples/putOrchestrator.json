@@ -7,6 +7,9 @@
     "parameters": {
       "location": "West US",
       "kind": "Kubernetes",
+      "identity": {
+        "type": "SystemAssigned"
+      },
       "properties": {
         "orchestratorAppId": "546192d7-503f-477a-9cfe-4efc3ee2b6e1",
         "orchestratorTenantId": "da6192d7-503f-477a-9cfe-4efc3ee2b6c3",
@@ -14,9 +17,6 @@
         "apiServerEndpoint": "https://testk8s.cloudapp.net",
         "controllerDetails": {
           "id": "/subscriptions/613192d7-503f-477a-9cfe-4efc3ee2bd60/resourceGroups/TestRG/providers/Microsoft.DelegatedNetwork/controller/testcontroller"
-        },
-        "identity": {
-          "type": "SystemAssigned"
         }
       }
     }
@@ -30,6 +30,11 @@
         "name": "testk8s1",
         "type": "Microsoft.DelegatedNetwork/orchestrators",
         "kind": "Kubernetes",
+        "identity": {
+          "principalId": "7a2192d7-503f-477a-9cfe-4efc3ee2bd60",
+          "tenantId": "3e2192d7-503f-477a-9cfe-4efc3ee2bd60",
+          "type": "SystemAssigned"
+        },
         "properties": {
           "provisioningState": "Succeeded",
           "resourceGuid": "1b2192d7-503f-477a-9cfe-4efc3ee2bd60",
@@ -39,11 +44,6 @@
           "apiServerEndpoint": "https://testk8s.cloudapp.net",
           "controllerDetails": {
             "id": "/subscriptions/613192d7-503f-477a-9cfe-4efc3ee2bd60/resourceGroups/TestRG/providers/Microsoft.DelegatedNetwork/controller/testcontroller"
-          },
-          "identity": {
-            "principalId": "7a2192d7-503f-477a-9cfe-4efc3ee2bd60",
-            "tenantId": "3e2192d7-503f-477a-9cfe-4efc3ee2bd60",
-            "type": "SystemAssigned"
           }
         }
       }

@@ -216,12 +216,6 @@
               "$ref": "#/definitions/DelegatedController"
             }
           },
-          "201": {
-            "description": "InProgress. The operation is still in progress.",
-            "schema": {
-              "$ref": "#/definitions/DelegatedController"
-            }
-          },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
@@ -231,7 +225,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.DelegatedNetwork/delegatedControllers": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.DelegatedNetwork/controllers": {
       "get": {
         "tags": [
           "DelegatedControllers"
@@ -242,6 +236,9 @@
           "Get DelegatedController resources by subscription": {
             "$ref": "./examples/controllerListBySub.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         },
         "parameters": [
           {
@@ -267,7 +264,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DelegatedNetwork/delegatedControllers": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DelegatedNetwork/controllers": {
       "get": {
         "tags": [
           "DelegatedControllers"
@@ -278,6 +275,9 @@
           "Get DelegatedNetwork resources by resource group": {
             "$ref": "./examples/controllerListByRG.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         },
         "parameters": [
           {

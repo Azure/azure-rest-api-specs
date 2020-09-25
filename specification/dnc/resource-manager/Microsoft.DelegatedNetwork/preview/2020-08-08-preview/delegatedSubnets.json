@@ -172,12 +172,6 @@
               "$ref": "#/definitions/DelegatedSubnet"
             }
           },
-          "201": {
-            "description": "InProgress. The operation is still in progress",
-            "schema": {
-              "$ref": "#/definitions/DelegatedSubnet"
-            }
-          },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
@@ -244,6 +238,9 @@
             "$ref": "./examples/delegatedSubnetListBySub.json"
           }
         },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -279,6 +276,9 @@
           "Get DelegatedSubnets resources by resource group": {
             "$ref": "./examples/delegatedSubnetListByRG.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         },
         "parameters": [
           {
