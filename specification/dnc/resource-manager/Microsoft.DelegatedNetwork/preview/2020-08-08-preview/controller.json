@@ -204,7 +204,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/ResourceUpdateParameters"
+              "$ref": "#/definitions/ControllerResourceUpdateParameters"
             },
             "description": "controller type parameters"
           }
@@ -308,7 +308,7 @@
     }
   },
   "definitions": {
-    "Resource": {
+    "ControllerResource": {
       "description": "Represents an instance of a resource.",
       "type": "object",
       "properties": {
@@ -341,7 +341,7 @@
       },
       "x-ms-azure-resource": true
     },
-    "ResourceUpdateParameters": {
+    "ControllerResourceUpdateParameters": {
       "description": "Parameters for updating a resource.",
       "properties": {
         "tags": {
@@ -374,7 +374,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/Resource"
+          "$ref": "#/definitions/ControllerResource"
         }
       ],
       "properties": {

@@ -204,7 +204,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/ResourceUpdateParameters"
+              "$ref": "#/definitions/OrchestratorResourceUpdateParameters"
             },
             "description": "OrchestratorInstance update parameters"
           }
@@ -308,7 +308,7 @@
     }
   },
   "definitions": {
-    "Resource": {
+    "OrchestratorResource": {
       "description": "Represents an instance of a resource.",
       "type": "object",
       "properties": {
@@ -355,7 +355,7 @@
       ],
       "x-ms-azure-resource": true
     },
-    "ResourceUpdateParameters": {
+    "OrchestratorResourceUpdateParameters": {
       "description": "Parameters for updating a resource.",
       "properties": {
         "tags": {
@@ -388,7 +388,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/Resource"
+          "$ref": "#/definitions/OrchestratorResource"
         }
       ],
       "properties": {
