@@ -1391,6 +1391,51 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/restorePointCollections/{restorePointCollectionName}/restorePoints/{vmRestorePointName}/diskRestorePoints": {
+      "get": {
+        "tags": [
+          "IncrementalRestorePoints"
+        ],
+        "operationId": "DiskRestorePoint_ListByRestorePoint",
+        "description": "Lists diskRestorePoints under a vmRestorePoint.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/RestorePointCollectionNameParameter"
+          },
+          {
+            "$ref": "#/parameters/VmRestorePointNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/DiskRestorePointList"
+            },
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get an incremental disk restorePoint resource.": {
+            "$ref": "./examples/ListDiskRestorePointInVmRestorePoint.json"
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -1441,6 +1486,11 @@
           "readOnly": true,
           "type": "string",
           "description": "Resource name"
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource type"
         }
       }
     },
@@ -2693,6 +2743,25 @@
       ],
       "description": "Properties of disk restore point"
     },
+    "DiskRestorePointList": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DiskRestorePoint"
+          },
+          "description": "A list of disk restore points."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The uri to fetch the next page of disk restore points. Call ListNext() with this to fetch the next page of disk restore points."
+        }
+      },
+      "required": [
+        "value"
+      ],
+      "description": "The List Disk Restore Points operation response."
+    },
     "DiskRestorePointProperties": {
       "properties": {
         "timeCreated": {
@@ -2708,6 +2777,7 @@
         },
         "osType": {
           "type": "string",
+          "readOnly": true,
           "description": "The Operating System type.",
           "enum": [
             "Windows",
