@@ -18,7 +18,7 @@ batch:
 ### Tag: package-[[Version]]-[[ReleaseState]] and go
 
 These settings apply only when `--tag=package-[[Version]] --go` is specified on the command line.
-Please also specify `--go-sdks-folder=<path to the root directory of your azure-sdk-for-go clone>`.
+Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
 
 ```yaml $(tag) == 'package-[[Version]]-[[ReleaseState]]' && $(go)
 namespace: [[ServiceName]]
