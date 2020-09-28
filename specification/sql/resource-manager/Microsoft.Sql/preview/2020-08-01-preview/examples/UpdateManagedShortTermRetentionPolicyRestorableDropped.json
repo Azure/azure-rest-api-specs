@@ -1,0 +1,29 @@
+{
+  "parameters": {
+    "subscriptionId": "00000000-1111-2222-3333-444444444444",
+    "resourceGroupName": "resourceGroup",
+    "managedInstanceName": "testsvr",
+    "restorableDroppedDatabaseId": "testdb,131403269876900000",
+    "policyName": "default",
+    "api-version": "2020-08-01-preview",
+    "parameters": {
+      "properties": {
+        "retentionDays": 14,
+        "diffBackupIntervalInHours": 24
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/resourceGroup/providers/Microsoft.Sql/managedInstances/testsvr/restorableDroppedDatabases/testdb,131403269876900000/backupShortTermRetentionPolicies/default",
+        "name": "default",
+        "type": "Microsoft.Sql/managedInstances/restorableDroppedDatabases/backupShortTermRetentionPolicies",
+        "properties": {
+          "retentionDays": 14
+        }
+      }
+    },
+    "202": {}
+  }
+}

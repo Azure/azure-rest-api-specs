@@ -1,0 +1,343 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2020-08-01-preview",
+    "title": "SqlManagementClient",
+    "description": "The Azure SQL Database management API provides a RESTful set of web APIs that interact with Azure SQL Database services to manage your databases. The API enables users to create, retrieve, update, and delete databases, servers, and other entities."
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/replicationLinks": {
+      "get": {
+        "tags": [
+          "ReplicationLinks"
+        ],
+        "description": "Gets a list of replication links on database.",
+        "operationId": "ReplicationLinks_ListByDatabase",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "serverName",
+            "in": "path",
+            "description": "The name of the server containing the replication link.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "databaseName",
+            "in": "path",
+            "description": "The name of the database containing the replication link.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the list of replication links.",
+            "schema": {
+              "$ref": "#/definitions/ReplicationLinksListResult"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 ReplicationLinksReplicationLinkNameIsInvalid - Replication link name should be a valid guid.\n\n * 400 ReplicationLinksDeleteIsNotSupported - This action is not yet available, please use 2014-04-01 for this action.\n\n * 404 ResourceNotFound - The requested resource was not found."
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List replication links on server on database.": {
+            "$ref": "./examples/ReplicationLinkListByDatabase.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/replicationLinks/{replicationLinkName}": {
+      "get": {
+        "tags": [
+          "ReplicationLinks"
+        ],
+        "description": "Gets a replication link.",
+        "operationId": "ReplicationLinks_Get",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "serverName",
+            "in": "path",
+            "description": "The name of the server containing the replication link.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "databaseName",
+            "in": "path",
+            "description": "The name of the database containing the replication link.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "replicationLinkName",
+            "in": "path",
+            "description": "The name of the replication link.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the specified replication link.",
+            "schema": {
+              "$ref": "#/definitions/ReplicationLink"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 ReplicationLinksReplicationLinkNameIsInvalid - Replication link name should be a valid guid.\n\n * 400 ReplicationLinksDeleteIsNotSupported - This action is not yet available, please use 2014-04-01 for this action.\n\n * 404 ResourceNotFound - The requested resource was not found."
+          }
+        },
+        "x-ms-examples": {
+          "Gets the replication link.": {
+            "$ref": "./examples/ReplicationLinkGet.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "ReplicationLinks"
+        ],
+        "description": "Deletes the replication link.",
+        "operationId": "ReplicationLinks_Delete",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DatabaseNameParameter"
+          },
+          {
+            "name": "replicationLinkName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully deleted the replication link."
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 ReplicationLinksReplicationLinkNameIsInvalid - Replication link name should be a valid guid.\n\n * 400 ReplicationLinksDeleteIsNotSupported - This action is not yet available, please use 2014-04-01 for this action.\n\n * 404 ResourceNotFound - The requested resource was not found."
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/replicationLinks": {
+      "get": {
+        "tags": [
+          "ReplicationLinks"
+        ],
+        "description": "Gets a list of replication links.",
+        "operationId": "ReplicationLinks_ListByServer",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "serverName",
+            "in": "path",
+            "description": "The name of the server containing the replication link.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the list of replication links.",
+            "schema": {
+              "$ref": "#/definitions/ReplicationLinksListResult"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 ReplicationLinksReplicationLinkNameIsInvalid - Replication link name should be a valid guid.\n\n * 400 ReplicationLinksDeleteIsNotSupported - This action is not yet available, please use 2014-04-01 for this action.\n\n * 404 ResourceNotFound - The requested resource was not found."
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List replication links on server": {
+            "$ref": "./examples/ReplicationLinkListByServer.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ReplicationLinksListResult": {
+      "description": "A list of replication links.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Array of results.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ReplicationLink"
+          },
+          "readOnly": true
+        },
+        "nextLink": {
+          "description": "Link to retrieve next page of results.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "ReplicationLinkProperties": {
+      "description": "Properties of a replication link.",
+      "type": "object",
+      "properties": {
+        "partnerServer": {
+          "description": "Resource partner server.",
+          "type": "string",
+          "readOnly": true
+        },
+        "partnerDatabase": {
+          "description": "Resource partner database.",
+          "type": "string",
+          "readOnly": true
+        },
+        "partnerLocation": {
+          "description": "Resource partner location.",
+          "type": "string",
+          "readOnly": true
+        },
+        "role": {
+          "description": "Local replication role.",
+          "type": "string",
+          "readOnly": true
+        },
+        "partnerRole": {
+          "description": "Partner replication role.",
+          "type": "string",
+          "readOnly": true
+        },
+        "replicationMode": {
+          "description": "Replication mode.",
+          "type": "string",
+          "readOnly": true
+        },
+        "startTime": {
+          "format": "date-time",
+          "description": "Time at which the link was created.",
+          "type": "string",
+          "readOnly": true
+        },
+        "percentComplete": {
+          "format": "int32",
+          "description": "Seeding completion percentage for the link.",
+          "type": "integer",
+          "readOnly": true
+        },
+        "replicationState": {
+          "description": "Replication state (PENDING, SEEDING, CATCHUP, SUSPENDED).",
+          "type": "string",
+          "readOnly": true
+        },
+        "isTerminationAllowed": {
+          "description": "Whether the user is currently allowed to terminate the link.",
+          "type": "boolean",
+          "readOnly": true
+        },
+        "linkType": {
+          "description": "Link type (GEO, NAMED).",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "ReplicationLink": {
+      "description": "A replication link.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ReplicationLinkProperties",
+          "description": "Resource properties.",
+          "x-ms-client-flatten": true
+        }
+      }
+    }
+  },
+  "parameters": {
+    "ServerNameParameter": {
+      "name": "serverName",
+      "in": "path",
+      "description": "The name of the server.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "DatabaseNameParameter": {
+      "name": "databaseName",
+      "in": "path",
+      "description": "The name of the database.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  }
+}

@@ -1,0 +1,40 @@
+{
+  "parameters": {
+    "subscriptionId": "00000000-1111-2222-3333-444444444444",
+    "resourceGroupName": "myRG",
+    "serverName": "myServer",
+    "databaseName": "myDatabase",
+    "api-version": "2020-08-01-preview",
+    "parameters": {
+      "operations": [
+        {
+          "properties": {
+            "op": "enable",
+            "Schema": "dbo",
+            "Table": "table1",
+            "Column": "column1"
+          }
+        },
+        {
+          "properties": {
+            "op": "enable",
+            "Schema": "dbo",
+            "Table": "table2",
+            "Column": "column2"
+          }
+        },
+        {
+          "properties": {
+            "op": "disable",
+            "Schema": "dbo",
+            "Table": "table1",
+            "Column": "column3"
+          }
+        }
+      ]
+    }
+  },
+  "responses": {
+    "200": {}
+  }
+}

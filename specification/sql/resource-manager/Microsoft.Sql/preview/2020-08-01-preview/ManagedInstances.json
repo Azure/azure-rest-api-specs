@@ -1,0 +1,1583 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2020-08-01-preview",
+    "title": "SqlManagementClient",
+    "description": "The Azure SQL Database management API provides a RESTful set of web APIs that interact with Azure SQL Database services to manage your databases. The API enables users to create, retrieve, update, and delete databases, servers, and other entities."
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/metricDefinitions": {
+      "get": {
+        "tags": [
+          "ManagedInstances"
+        ],
+        "description": "Gets a list of managed instance metric definitions.",
+        "operationId": "ManagedInstances_ListMetricDefinitions",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ManagedInstanceNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the list of metric definitions for managed instance.",
+            "schema": {
+              "$ref": "#/definitions/MetricDefinitionListResult"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 InvalidParameterValue - An invalid value was given to a parameter.\n\n * 404 ServerNotFound - The requested server was not found.\n\n * 405 ManagementServiceFeatureDisabled - User attempted to use a feature which is disabled.\n\n * 429 SubscriptionTooManyCreateUpdateRequests - Requests beyond max requests that can be processed by available resources.\n\n * 429 SubscriptionTooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 503 TooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 504 RequestTimeout - Service request exceeded the allowed timeout."
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List metric definitions by managed instance": {
+            "$ref": "./examples/ManagedInstancesListMetricDefinitions.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/metrics": {
+      "get": {
+        "tags": [
+          "ManagedInstances"
+        ],
+        "description": "Gets a list of managed instance metrics.",
+        "operationId": "ManagedInstances_ListMetrics",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ManagedInstanceNameParameter"
+          },
+          {
+            "name": "metric",
+            "in": "query",
+            "description": "Name of the metrics to get.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "timespan",
+            "in": "query",
+            "description": "The timespan for the metric.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "aggregation",
+            "in": "query",
+            "description": "The aggregation type to use.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "interval",
+            "in": "query",
+            "description": "The time step to be used to summarize the metric values.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the list of databases.",
+            "schema": {
+              "$ref": "#/definitions/MetricListResult"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 InvalidParameterValue - An invalid value was given to a parameter.\n\n * 404 ServerNotFound - The requested server was not found.\n\n * 405 ManagementServiceFeatureDisabled - User attempted to use a feature which is disabled.\n\n * 429 SubscriptionTooManyCreateUpdateRequests - Requests beyond max requests that can be processed by available resources.\n\n * 429 SubscriptionTooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 503 TooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 504 RequestTimeout - Service request exceeded the allowed timeout."
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List metrics by managed instance": {
+            "$ref": "./examples/ManagedInstancesListMetrics.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/topqueries": {
+      "get": {
+        "tags": [
+          "ManagedInstances"
+        ],
+        "description": "Get top resource consuming queries of a managed instance.",
+        "operationId": "ManagedInstances_ListByManagedInstance",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ManagedInstanceNameParameter"
+          },
+          {
+            "name": "numberOfQueries",
+            "in": "query",
+            "description": "How many 'top queries' to return. Default is 5.",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "databases",
+            "in": "query",
+            "description": "Comma separated list of databases to be included into search. All DB's are included if this parameter is not specified.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "startTime",
+            "in": "query",
+            "description": "Start time for observed period.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "endTime",
+            "in": "query",
+            "description": "End time for observed period.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "interval",
+            "in": "query",
+            "description": "The time step to be used to summarize the metric values. Default value is PT1H",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "PT1H",
+              "P1D"
+            ],
+            "x-ms-enum": {
+              "name": "QueryTimeGrainType",
+              "modelAsString": true
+            }
+          },
+          {
+            "name": "aggregationFunction",
+            "in": "query",
+            "description": "Aggregation function to be used, default value is 'sum'",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "avg",
+              "min",
+              "max",
+              "stdev",
+              "sum"
+            ],
+            "x-ms-enum": {
+              "name": "AggregationFunctionType",
+              "modelAsString": true
+            }
+          },
+          {
+            "name": "observationMetric",
+            "in": "query",
+            "description": "Metric to be used for ranking top queries. Default is 'cpu'",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "cpu",
+              "io",
+              "logIo",
+              "duration",
+              "dtu"
+            ],
+            "x-ms-enum": {
+              "name": "MetricType",
+              "modelAsString": true
+            }
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved top queries for managed instance.",
+            "schema": {
+              "$ref": "#/definitions/TopQueriesListResult"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription.\n\n * 404 ResourceNotFound - The requested resource was not found."
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Obtain list of instance's top resource consuming queries. Minimal request and response.": {
+            "$ref": "./examples/ManagedInstanceTopQueriesListMin.json"
+          },
+          "Obtain list of instance's top resource consuming queries.": {
+            "$ref": "./examples/ManagedInstanceTopQueriesList.json"
+          },
+          "Obtain list of instance's top resource consuming queries. Full-blown request and response.": {
+            "$ref": "./examples/ManagedInstanceTopQueriesListMax.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/failover": {
+      "post": {
+        "tags": [
+          "ManagedInstances"
+        ],
+        "description": "Failovers a managed instance.",
+        "operationId": "ManagedInstances_Failover",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "managedInstanceName",
+            "in": "path",
+            "description": "The name of the managed instance to failover.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "replicaType",
+            "in": "query",
+            "description": "The type of replica to be failed over.",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "Primary",
+              "ReadableSecondary"
+            ],
+            "x-ms-enum": {
+              "name": "ReplicaType",
+              "modelAsString": true
+            }
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully completed managed instance failover."
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 ManagedInstanceFailoverThrottled - There was a recent failover on the managed instance.\n\n * 400 ManagedInstanceFailoverNotSupportedOnSKU - This type of customer initiated failover is not supported on the given SKU.\n\n * 403 ManagedInstanceFailoverFullBackupMissing - Automated backup needs to complete the first full backup for a new database.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription.\n\n * 409 ManagedInstanceNotInStateToFailover - The managed instance is currently in a state such that failover cannot be issued."
+          },
+          "202": {
+            "description": "Managed instance failover is in progress."
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Failover a managed instance.": {
+            "$ref": "./examples/FailoverManagedInstance.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/instancePools/{instancePoolName}/managedInstances": {
+      "get": {
+        "tags": [
+          "ManagedInstances"
+        ],
+        "description": "Gets a list of all managed instances in an instance pool.",
+        "operationId": "ManagedInstances_ListByInstancePool",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "instancePoolName",
+            "in": "path",
+            "description": "The instance pool name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the list of managed instances.",
+            "schema": {
+              "$ref": "#/definitions/ManagedInstanceListResult"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 404 InstancePoolNotFound - An instance pool cannot be found"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List managed instances by instance pool": {
+            "$ref": "./examples/ManagedInstanceListByInstancePool.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/export": {
+      "post": {
+        "tags": [
+          "ManagedInstances"
+        ],
+        "description": "Exports a managed instance.",
+        "operationId": "ManagedInstances_Export",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ManagedInstanceNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "The managed instance export request parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ExportManagedInstanceDefinition"
+            }
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully exported the instance."
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 InvalidOperationType - Provide a valid operation type.\n\n * 400 FeatureDisabledOnSelectedEdition - User attempted to use a feature which is disabled on current database edition.\n\n * 404 ResourceNotFound - Invalid request specifying a non-existent resource.\n\n * 404 ImportExportOperationIdNotFound - The operation Id for import or export cannot be found.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription.\n\n * 409 ImportExportOperationInProgress - There is an import or export operation in progress on the database."
+          },
+          "202": {
+            "description": "Exporting the instance is in progress."
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Export a managed instance.": {
+            "$ref": "./examples/ExportManagedInstance.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances": {
+      "get": {
+        "tags": [
+          "ManagedInstances"
+        ],
+        "description": "Gets a list of managed instances in a resource group.",
+        "operationId": "ManagedInstances_ListByResourceGroup",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the list of managed instances.",
+            "schema": {
+              "$ref": "#/definitions/ManagedInstanceListResult"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 SubscriptionNotFound - The requested subscription was not found.\n\n * 400 MiGeoRestoreWithWrongBackupStorageRedundancy - Geo-Restore is not allowed for managed instances with LRS/ZRS backup storage redundancy.\n\n * 400 ProvisioningDisabled - Displays error message from resources operation authorizer as is, without changes\n\n * 400 ManagementServiceFeatureDisabled - User attempted to use a feature which is disabled.\n\n * 404 ServerNotInSubscription - Specified server does not exist on the specified subscription.\n\n * 404 ManagedInstanceNotInSubscriptionResourceGroup - Specified managed instance does not exist in the specified resource group and subscription.\n\n * 404 ResourceNotFound - The requested resource was not found.\n\n * 409 ConflictingManagedInstanceOperation - An operation is currently in progress for the managed instance.\n\n * 409 MiDropFailedOnAuthLocks - User tried to drop last Managed Instance in subnet that has Lock applied on resource(s).\n\n * 409 MiCreateFailedNonDelegatedSubnet - User tried to deploy Managed Instance or Managed Instance pool in subnet that is not delegated to Microsoft.Sql/managedInstances.\n\n * 429 SubscriptionTooManyCreateUpdateRequests - Requests beyond max requests that can be processed by available resources.\n\n * 429 SubscriptionTooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 429 SubscriptionTooManyCreateUpdateRequests - Requests beyond max requests that can be processed by available resources.\n\n * 429 SubscriptionTooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 429 ConflictingSubscriptionOperation - An operation is currently in progress for the subscription.\n\n * 503 TooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 503 TooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 504 RequestTimeout - Service request exceeded the allowed timeout.\n\n * 504 RequestTimeout - Service request exceeded the allowed timeout."
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List managed instances by resource group": {
+            "$ref": "./examples/ManagedInstanceListByResourceGroup.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}": {
+      "get": {
+        "tags": [
+          "ManagedInstances"
+        ],
+        "description": "Gets a managed instance.",
+        "operationId": "ManagedInstances_Get",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ManagedInstanceNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the specified managed instance.",
+            "schema": {
+              "$ref": "#/definitions/ManagedInstance"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 SubscriptionNotFound - The requested subscription was not found.\n\n * 400 MiGeoRestoreWithWrongBackupStorageRedundancy - Geo-Restore is not allowed for managed instances with LRS/ZRS backup storage redundancy.\n\n * 400 ProvisioningDisabled - Displays error message from resources operation authorizer as is, without changes\n\n * 400 ManagementServiceFeatureDisabled - User attempted to use a feature which is disabled.\n\n * 404 ServerNotInSubscription - Specified server does not exist on the specified subscription.\n\n * 404 ManagedInstanceNotInSubscriptionResourceGroup - Specified managed instance does not exist in the specified resource group and subscription.\n\n * 404 ResourceNotFound - The requested resource was not found.\n\n * 409 ConflictingManagedInstanceOperation - An operation is currently in progress for the managed instance.\n\n * 409 MiDropFailedOnAuthLocks - User tried to drop last Managed Instance in subnet that has Lock applied on resource(s).\n\n * 409 MiCreateFailedNonDelegatedSubnet - User tried to deploy Managed Instance or Managed Instance pool in subnet that is not delegated to Microsoft.Sql/managedInstances.\n\n * 429 SubscriptionTooManyCreateUpdateRequests - Requests beyond max requests that can be processed by available resources.\n\n * 429 SubscriptionTooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 429 SubscriptionTooManyCreateUpdateRequests - Requests beyond max requests that can be processed by available resources.\n\n * 429 SubscriptionTooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 429 ConflictingSubscriptionOperation - An operation is currently in progress for the subscription.\n\n * 503 TooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 503 TooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 504 RequestTimeout - Service request exceeded the allowed timeout.\n\n * 504 RequestTimeout - Service request exceeded the allowed timeout."
+          }
+        },
+        "x-ms-examples": {
+          "Get managed instance": {
+            "$ref": "./examples/ManagedInstanceGet.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "ManagedInstances"
+        ],
+        "description": "Creates or updates a managed instance.",
+        "operationId": "ManagedInstances_CreateOrUpdate",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ManagedInstanceNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "The requested managed instance resource state.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ManagedInstance"
+            }
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully updated the managed instance.",
+            "schema": {
+              "$ref": "#/definitions/ManagedInstance"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 SubscriptionNotFound - The requested subscription was not found.\n\n * 400 HkCannotSwitchToInactive - The database cannot proceed with pricing-tier update as it has memory-optimized objects. Please drop such objects and try again.\n\n * 400 ManagedInstanceInvalidStorageSizeLessThenCurrentSizeUsed - Invalid storage size: Storage size limit ({0} GB) is less that current storage used ({1} GB). Please specify higher storage size limit.\n\n * 400 InstanceTimezoneUpdateNotSupported - Instance timezone update not supported.\n\n * 400 CreateManagedInstanceWithNonDefaultTimezoneNotSupported - Create Managed Instance with non-default timezone not supported.\n\n * 400 ManagedInstanceIpAddressRangeLimit - Cannot create a Managed Instance as there are not enough available ip addresses in the selected subnet\n\n * 400 VnetDelegationNotAllowed - User tried to inject Managed Server to subnet which is delegated.\n\n * 400 SubnetHasResourcesOfDifferentType - User tried to create MI in subnet that has resources of different type.\n\n * 400 UpdateManagedServerWithMaintenanceWindowNotAllowed - Update of Managed Instance with maintenance window settings is not allowed.\n\n * 400 VnetPrepareNIPFailed - User tried to prepare subnet that has a conflict with NetworkIntentPolicy.\n\n * 400 InvalidUsername - Supplied user name contains invalid characters.\n\n * 400 ManagedInstanceDeprecatedHardwareFamily - Changing the hardware generation to deprecated {0} generation is not possible.\n\n * 400 ManagedInstanceBackupStorageTypeNotSupported - Backup storage type parameter is not allowed in the instance update operation.\n\n * 400 InvalidParameterValue - An invalid value was given to a parameter.\n\n * 400 ManagedInstanceUpdateWithZoneRedudancyNotSupported - Property with name zoneRedundant is specified but not supported in managed instance update operation. Please remove it from operation request and submit operation again.\n\n * 400 ManagedInstanceCreateWithZoneRedudancyNotSupported - Property with name zoneRedundant is specified but not supported in managed instance create operation. Please remove it from operation request and submit operation again.\n\n * 400 InstancePoolNotEnoughCapacity - An instance pool does not have enough capacity\n\n * 400 ServerNotFound - The requested server was not found.\n\n * 400 TokenTooLong - The provided token is too long.\n\n * 400 ManagedInstanceSloUpdateFailed - SLO '{0}' operation cannot succeed as the memory usage of '{1}' exceeds the quota.\n\n * 400 ManagedInstanceLocalStorageUpdateSloDisabled - Update SLO for managed instances with local storage is not supported yet.\n\n * 400 InvalidLoginName - The provided login name is invalid.\n\n * 400 RegionDoesNotSupportVersion - A user attempted to create a server of a specified version in a location where that server version isn't supported.\n\n * 400 PasswordTooShort - The provided password is too short\n\n * 400 PasswordTooLong - The provided password is too long.\n\n * 400 PasswordNotComplex - The provided password is not complex enough.\n\n * 400 GatewayInvalidEdition - '{0}' is not a valid database edition in this version of SQL Server.\n\n * 400 InvalidSubnetResourceId - The provided subnet resource ID for the managed instance create or update is invalid.\n\n * 400 SubscriptionNotFound - The requested subscription was not found.\n\n * 400 InvalidLocation - An invalid location was specified.\n\n * 400 VnetInWrongRegion - Virtual network is in wrong region.\n\n * 400 InvalidServerName - Invalid server name specified.\n\n * 400 VnetAddressRangeError - Virtual network address range is invalid.\n\n * 400 VnetConfigIsNotAllowed - Virtual network configuration is not allowed.\n\n * 400 InvalidCollation - Invalid collation.\n\n * 400 InvalidIdentifier - The identifier contains NULL or an invalid unicode character.\n\n * 400 ManagedInstanceClassicVnetNotSupported - Managed Instance cannot be joined to a classic virtual network.\n\n * 400 AlterDbDeactivatedNotSupported - Database Operation failed for Server '{0}', Database '{1}' due to unexpected delay. Please try again.\n\n * 400 RegionDoesNotAllowProvisioning - The selected location is not accepting new Windows Azure SQL Database servers. This may change at a later time.\n\n * 400 VnetConfigHasNsg - User tried to inject Managed Server subnet with Network Security Groups.\n\n * 400 VnetConfigHasNoUdr - User tried to inject Managed Server subnet without default User Defined Route Table.\n\n * 400 VnetConfigHasInvalidUdr - User tried to inject Managed Server subnet with invalid User Defined Route Table.\n\n * 400 VnetConfigHasInvalidDns - User tried to inject Managed Server subnet with invalid custom DNS.\n\n * 400 VnetConfigHasServiceEndpoints - User tried to inject Managed Server subnet with service endpoints.\n\n * 400 VnetSubnetIsInUse - User tried to inject Managed Server subnet that is not empty.\n\n * 400 VnetSubnetIsLocked - User tried to inject Managed Server subnet that is in locked scope.\n\n * 400 VnetSubnetIsGateway - User tried to inject Managed Server subnet that is Gateway subnet.\n\n * 400 VnetSubnetIsUnknown - User tried to inject Managed Server subnet that does not exist.\n\n * 400 VnetSubnetConflictWithIntendedPolicy - User tried to inject Managed Server subnet that has a conflict with IntendedPolicy.\n\n * 400 NameAlreadyExists - The provided name already exists.\n\n * 400 ManagedInstanceInvalidEditionForSku - The specified edition {0} is not consistent with the specified SKU {1}.\n\n * 400 ProvisioningDisabled - Displays error message from resources operation authorizer as is, without changes\n\n * 400 ManagedInstanceInvalidLicenseType - The specified license type {0} is not valid.\n\n * 400 ManagedInstanceUpdateSloInProgress - \"The operation could not be completed because a service tier change is in progress for managed instance '{0}.' Please wait for the operation in progress to complete and try again.\"\n\n * 400 VnetResourceNotFound - Resource not found: '{0}'.\n\n * 400 InvalidTimezone - Invalid timezone.\n\n * 400 UnableToResolveRemoteServer - The remote partner server name could not be resolved due to an invalid server name or DNS connectivity issues.\n\n * 400 InstanceCollationUpdateNotSupported - User cannot change instance collation on Managed Instance.\n\n * 400 CreateManagedInstanceWithNonDefaultCollationNotSupported - User can create a Managed Instance only with collation 'SQL_Latin1_General_CP1_CI_AS'.\n\n * 400 ManagedInstanceOperationInProgress - The operation could not be completed because {0} operation is in progress. Please wait for the operation in progress to complete and try again.\n\n * 400 ManagedInstanceExceedMaxAzureStorage - The operation could not be completed because total allocated storage size for General Purpose instance would exceed {0}. Please reduce the number of database files and retry operation.\n\n * 400 ManagedInstanceHasGeoReplica - The operation could not be completed because instance has configured geo replicated secondary instance.\n\n * 400 InvalidManagedServerDnsZonePartner - The resource URI of the geo-primary managed instance specified in the create request is invalid. Please ensure that the property is of the format /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/managedInstances/{managedInstanceName}\n\n * 400 MiGeoRestoreWithWrongBackupStorageRedundancy - Geo-Restore is not allowed for managed instances with LRS/ZRS backup storage redundancy.\n\n * 400 ProvisioningDisabled - Displays error message from resources operation authorizer as is, without changes\n\n * 400 ManagementServiceFeatureDisabled - User attempted to use a feature which is disabled.\n\n * 400 MismatchingResourceGroupNameWithUrl - The provided resource group name did not match the name in the Url.\n\n * 400 MismatchingSubscriptionWithUrl - The provided subscription did not match the subscription in the Url.\n\n * 400 InvalidMinimalTlsVersion - Invalid minimal TLS version.\n\n * 400 InvalidResourceId - Invalid resource identifier.\n\n * 400 InvalidMaintenanceWindowSettings - Invalid maintenance window settings.\n\n * 400 InvalidMaintenanceWindowProperty - Invalid maintenance window property was specified.\n\n * 400 InvalidMaintenanceWindowPropertyNull - Invalid maintenance window with required properties null.\n\n * 400 InvalidMaintenanceWindowTypeWithPropertySpecified - Maintenance window type must not have certain properties specified.\n\n * 404 ServerNotInSubscription - Specified server does not exist on the specified subscription.\n\n * 404 ManagedInstanceNotInSubscriptionResourceGroup - Specified managed instance does not exist in the specified resource group and subscription.\n\n * 404 OperationIdNotFound - The operation with Id does not exist.\n\n * 404 ResourceDoesNotExist - Resource with the name '{0}' does not exist. To continue, specify a valid resource name.\n\n * 404 ResourceNotFound - The requested resource was not found.\n\n * 405 InvalidVcoreValue - vCore value {0} is not valid. Please specify a valid vCore value.\n\n * 405 InvalidHardwareGenerationValue - HardwareGeneration {0} is not valid. Please specify a valid HardwareGeneration value.\n\n * 405 InvalidStorageSizeValue - \"Invalid storage size: {0} GB. Storage size must be specified between {1} and {2} gigabytes, in increments of {3} GB.\n\n * 409 OperationCancelled - The operation has been cancelled by user.\n\n * 409 OperationInterrupted - The operation on the resource could not be completed because it was interrupted by another operation on the same resource.\n\n * 409 ConflictingServerOperation - An operation is currently in progress for the server.\n\n * 409 SubscriptionDisabled - Subscription is disabled.\n\n * 409 ServerAlreadyExists - Duplicate server name.\n\n * 409 ServerOverridePreconditionFailed - Failed to apply server override on category '{0}', because physical db or instance '{1}' in server '{2}' is currently not in 'Ready' or 'Deactivated' state.\n\n * 409 ServerDisabled - Server is disabled.\n\n * 409 ManagedInstanceIsBusy - The server '{0}' is currently busy.  Please wait a few minutes before trying again.\n\n * 409 ServerQuotaExceeded - Server cannot be added to a subscription because it will exceed quota.\n\n * 409 ConflictingManagedInstanceOperation - An operation is currently in progress for the managed instance.\n\n * 409 MiDropFailedOnAuthLocks - User tried to drop last Managed Instance in subnet that has Lock applied on resource(s).\n\n * 409 MiCreateFailedNonDelegatedSubnet - User tried to deploy Managed Instance or Managed Instance pool in subnet that is not delegated to Microsoft.Sql/managedInstances.\n\n * 429 SubscriptionTooManyCreateUpdateRequests - Requests beyond max requests that can be processed by available resources.\n\n * 429 SubscriptionTooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 429 ConflictingSubscriptionOperation - An operation is currently in progress for the subscription.\n\n * 429 SubscriptionTooManyCreateUpdateRequests - Requests beyond max requests that can be processed by available resources.\n\n * 429 SubscriptionTooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 429 SubscriptionTooManyCreateUpdateRequests - Requests beyond max requests that can be processed by available resources.\n\n * 429 SubscriptionTooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 429 ConflictingSubscriptionOperation - An operation is currently in progress for the subscription.\n\n * 500 OperationTimedOut - The operation timed out and automatically rolled back. Please retry the operation.\n\n * 500 GatewayInternalServerError - The server encountered an unexpected exception.\n\n * 503 TooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 503 TooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 503 TooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 504 RequestTimeout - Service request exceeded the allowed timeout.\n\n * 504 RequestTimeout - Service request exceeded the allowed timeout.\n\n * 504 RequestTimeout - Service request exceeded the allowed timeout."
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "201": {
+            "description": "Successfully created the managed instance.",
+            "schema": {
+              "$ref": "#/definitions/ManagedInstance"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Create managed instance with minimal properties": {
+            "$ref": "./examples/ManagedInstanceCreateMin.json"
+          },
+          "Create managed instance with all properties": {
+            "$ref": "./examples/ManagedInstanceCreateMax.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "ManagedInstances"
+        ],
+        "description": "Deletes a managed instance.",
+        "operationId": "ManagedInstances_Delete",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ManagedInstanceNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully deleted the managed instance."
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 SubscriptionNotFound - The requested subscription was not found.\n\n * 400 MiGeoRestoreWithWrongBackupStorageRedundancy - Geo-Restore is not allowed for managed instances with LRS/ZRS backup storage redundancy.\n\n * 400 ProvisioningDisabled - Displays error message from resources operation authorizer as is, without changes\n\n * 400 ManagementServiceFeatureDisabled - User attempted to use a feature which is disabled.\n\n * 404 ServerNotInSubscription - Specified server does not exist on the specified subscription.\n\n * 404 ManagedInstanceNotInSubscriptionResourceGroup - Specified managed instance does not exist in the specified resource group and subscription.\n\n * 404 OperationIdNotFound - The operation with Id does not exist.\n\n * 404 ResourceNotFound - The requested resource was not found.\n\n * 409 ConflictingManagedInstanceOperation - An operation is currently in progress for the managed instance.\n\n * 409 MiDropFailedOnAuthLocks - User tried to drop last Managed Instance in subnet that has Lock applied on resource(s).\n\n * 409 MiCreateFailedNonDelegatedSubnet - User tried to deploy Managed Instance or Managed Instance pool in subnet that is not delegated to Microsoft.Sql/managedInstances.\n\n * 409 OperationCancelled - The operation has been cancelled by user.\n\n * 409 OperationInterrupted - The operation on the resource could not be completed because it was interrupted by another operation on the same resource.\n\n * 429 SubscriptionTooManyCreateUpdateRequests - Requests beyond max requests that can be processed by available resources.\n\n * 429 SubscriptionTooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 429 SubscriptionTooManyCreateUpdateRequests - Requests beyond max requests that can be processed by available resources.\n\n * 429 SubscriptionTooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 429 ConflictingSubscriptionOperation - An operation is currently in progress for the subscription.\n\n * 500 OperationTimedOut - The operation timed out and automatically rolled back. Please retry the operation.\n\n * 503 TooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 503 TooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 504 RequestTimeout - Service request exceeded the allowed timeout.\n\n * 504 RequestTimeout - Service request exceeded the allowed timeout."
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "204": {
+            "description": "The specified managed instance does not exist."
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Delete managed instance": {
+            "$ref": "./examples/ManagedInstanceDelete.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "ManagedInstances"
+        ],
+        "description": "Updates a managed instance.",
+        "operationId": "ManagedInstances_Update",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ManagedInstanceNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "The requested managed instance resource state.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ManagedInstanceUpdate"
+            }
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully updated the managed instance.",
+            "schema": {
+              "$ref": "#/definitions/ManagedInstance"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 SubscriptionNotFound - The requested subscription was not found.\n\n * 400 HkCannotSwitchToInactive - The database cannot proceed with pricing-tier update as it has memory-optimized objects. Please drop such objects and try again.\n\n * 400 ManagedInstanceInvalidStorageSizeLessThenCurrentSizeUsed - Invalid storage size: Storage size limit ({0} GB) is less that current storage used ({1} GB). Please specify higher storage size limit.\n\n * 400 InstanceTimezoneUpdateNotSupported - Instance timezone update not supported.\n\n * 400 CreateManagedInstanceWithNonDefaultTimezoneNotSupported - Create Managed Instance with non-default timezone not supported.\n\n * 400 ManagedInstanceIpAddressRangeLimit - Cannot create a Managed Instance as there are not enough available ip addresses in the selected subnet\n\n * 400 VnetDelegationNotAllowed - User tried to inject Managed Server to subnet which is delegated.\n\n * 400 SubnetHasResourcesOfDifferentType - User tried to create MI in subnet that has resources of different type.\n\n * 400 UpdateManagedServerWithMaintenanceWindowNotAllowed - Update of Managed Instance with maintenance window settings is not allowed.\n\n * 400 VnetPrepareNIPFailed - User tried to prepare subnet that has a conflict with NetworkIntentPolicy.\n\n * 400 InvalidUsername - Supplied user name contains invalid characters.\n\n * 400 ManagedInstanceDeprecatedHardwareFamily - Changing the hardware generation to deprecated {0} generation is not possible.\n\n * 400 ManagedInstanceBackupStorageTypeNotSupported - Backup storage type parameter is not allowed in the instance update operation.\n\n * 400 InvalidParameterValue - An invalid value was given to a parameter.\n\n * 400 ManagedInstanceUpdateWithZoneRedudancyNotSupported - Property with name zoneRedundant is specified but not supported in managed instance update operation. Please remove it from operation request and submit operation again.\n\n * 400 ManagedInstanceCreateWithZoneRedudancyNotSupported - Property with name zoneRedundant is specified but not supported in managed instance create operation. Please remove it from operation request and submit operation again.\n\n * 400 InstancePoolNotEnoughCapacity - An instance pool does not have enough capacity\n\n * 400 ServerNotFound - The requested server was not found.\n\n * 400 TokenTooLong - The provided token is too long.\n\n * 400 ManagedInstanceSloUpdateFailed - SLO '{0}' operation cannot succeed as the memory usage of '{1}' exceeds the quota.\n\n * 400 ManagedInstanceLocalStorageUpdateSloDisabled - Update SLO for managed instances with local storage is not supported yet.\n\n * 400 InvalidLoginName - The provided login name is invalid.\n\n * 400 RegionDoesNotSupportVersion - A user attempted to create a server of a specified version in a location where that server version isn't supported.\n\n * 400 PasswordTooShort - The provided password is too short\n\n * 400 PasswordTooLong - The provided password is too long.\n\n * 400 PasswordNotComplex - The provided password is not complex enough.\n\n * 400 GatewayInvalidEdition - '{0}' is not a valid database edition in this version of SQL Server.\n\n * 400 InvalidSubnetResourceId - The provided subnet resource ID for the managed instance create or update is invalid.\n\n * 400 SubscriptionNotFound - The requested subscription was not found.\n\n * 400 InvalidLocation - An invalid location was specified.\n\n * 400 VnetInWrongRegion - Virtual network is in wrong region.\n\n * 400 InvalidServerName - Invalid server name specified.\n\n * 400 VnetAddressRangeError - Virtual network address range is invalid.\n\n * 400 VnetConfigIsNotAllowed - Virtual network configuration is not allowed.\n\n * 400 InvalidCollation - Invalid collation.\n\n * 400 InvalidIdentifier - The identifier contains NULL or an invalid unicode character.\n\n * 400 ManagedInstanceClassicVnetNotSupported - Managed Instance cannot be joined to a classic virtual network.\n\n * 400 AlterDbDeactivatedNotSupported - Database Operation failed for Server '{0}', Database '{1}' due to unexpected delay. Please try again.\n\n * 400 RegionDoesNotAllowProvisioning - The selected location is not accepting new Windows Azure SQL Database servers. This may change at a later time.\n\n * 400 VnetConfigHasNsg - User tried to inject Managed Server subnet with Network Security Groups.\n\n * 400 VnetConfigHasNoUdr - User tried to inject Managed Server subnet without default User Defined Route Table.\n\n * 400 VnetConfigHasInvalidUdr - User tried to inject Managed Server subnet with invalid User Defined Route Table.\n\n * 400 VnetConfigHasInvalidDns - User tried to inject Managed Server subnet with invalid custom DNS.\n\n * 400 VnetConfigHasServiceEndpoints - User tried to inject Managed Server subnet with service endpoints.\n\n * 400 VnetSubnetIsInUse - User tried to inject Managed Server subnet that is not empty.\n\n * 400 VnetSubnetIsLocked - User tried to inject Managed Server subnet that is in locked scope.\n\n * 400 VnetSubnetIsGateway - User tried to inject Managed Server subnet that is Gateway subnet.\n\n * 400 VnetSubnetIsUnknown - User tried to inject Managed Server subnet that does not exist.\n\n * 400 VnetSubnetConflictWithIntendedPolicy - User tried to inject Managed Server subnet that has a conflict with IntendedPolicy.\n\n * 400 NameAlreadyExists - The provided name already exists.\n\n * 400 ManagedInstanceInvalidEditionForSku - The specified edition {0} is not consistent with the specified SKU {1}.\n\n * 400 ProvisioningDisabled - Displays error message from resources operation authorizer as is, without changes\n\n * 400 ManagedInstanceInvalidLicenseType - The specified license type {0} is not valid.\n\n * 400 ManagedInstanceUpdateSloInProgress - \"The operation could not be completed because a service tier change is in progress for managed instance '{0}.' Please wait for the operation in progress to complete and try again.\"\n\n * 400 VnetResourceNotFound - Resource not found: '{0}'.\n\n * 400 InvalidTimezone - Invalid timezone.\n\n * 400 UnableToResolveRemoteServer - The remote partner server name could not be resolved due to an invalid server name or DNS connectivity issues.\n\n * 400 InstanceCollationUpdateNotSupported - User cannot change instance collation on Managed Instance.\n\n * 400 CreateManagedInstanceWithNonDefaultCollationNotSupported - User can create a Managed Instance only with collation 'SQL_Latin1_General_CP1_CI_AS'.\n\n * 400 ManagedInstanceOperationInProgress - The operation could not be completed because {0} operation is in progress. Please wait for the operation in progress to complete and try again.\n\n * 400 ManagedInstanceExceedMaxAzureStorage - The operation could not be completed because total allocated storage size for General Purpose instance would exceed {0}. Please reduce the number of database files and retry operation.\n\n * 400 ManagedInstanceHasGeoReplica - The operation could not be completed because instance has configured geo replicated secondary instance.\n\n * 400 MiGeoRestoreWithWrongBackupStorageRedundancy - Geo-Restore is not allowed for managed instances with LRS/ZRS backup storage redundancy.\n\n * 400 ProvisioningDisabled - Displays error message from resources operation authorizer as is, without changes\n\n * 400 ManagementServiceFeatureDisabled - User attempted to use a feature which is disabled.\n\n * 400 MismatchingResourceGroupNameWithUrl - The provided resource group name did not match the name in the Url.\n\n * 400 MismatchingSubscriptionWithUrl - The provided subscription did not match the subscription in the Url.\n\n * 400 InvalidMinimalTlsVersion - Invalid minimal TLS version.\n\n * 400 InvalidResourceId - Invalid resource identifier.\n\n * 400 InvalidMaintenanceWindowSettings - Invalid maintenance window settings.\n\n * 400 InvalidMaintenanceWindowProperty - Invalid maintenance window property was specified.\n\n * 400 InvalidMaintenanceWindowPropertyNull - Invalid maintenance window with required properties null.\n\n * 400 InvalidMaintenanceWindowTypeWithPropertySpecified - Maintenance window type must not have certain properties specified.\n\n * 404 ServerNotInSubscription - Specified server does not exist on the specified subscription.\n\n * 404 ManagedInstanceNotInSubscriptionResourceGroup - Specified managed instance does not exist in the specified resource group and subscription.\n\n * 404 OperationIdNotFound - The operation with Id does not exist.\n\n * 404 ResourceDoesNotExist - Resource with the name '{0}' does not exist. To continue, specify a valid resource name.\n\n * 404 ResourceNotFound - The requested resource was not found.\n\n * 405 InvalidVcoreValue - vCore value {0} is not valid. Please specify a valid vCore value.\n\n * 405 InvalidHardwareGenerationValue - HardwareGeneration {0} is not valid. Please specify a valid HardwareGeneration value.\n\n * 405 InvalidStorageSizeValue - \"Invalid storage size: {0} GB. Storage size must be specified between {1} and {2} gigabytes, in increments of {3} GB.\n\n * 409 OperationCancelled - The operation has been cancelled by user.\n\n * 409 OperationInterrupted - The operation on the resource could not be completed because it was interrupted by another operation on the same resource.\n\n * 409 ConflictingServerOperation - An operation is currently in progress for the server.\n\n * 409 SubscriptionDisabled - Subscription is disabled.\n\n * 409 ServerAlreadyExists - Duplicate server name.\n\n * 409 ServerOverridePreconditionFailed - Failed to apply server override on category '{0}', because physical db or instance '{1}' in server '{2}' is currently not in 'Ready' or 'Deactivated' state.\n\n * 409 ServerDisabled - Server is disabled.\n\n * 409 ManagedInstanceIsBusy - The server '{0}' is currently busy.  Please wait a few minutes before trying again.\n\n * 409 ServerQuotaExceeded - Server cannot be added to a subscription because it will exceed quota.\n\n * 409 ConflictingManagedInstanceOperation - An operation is currently in progress for the managed instance.\n\n * 409 MiDropFailedOnAuthLocks - User tried to drop last Managed Instance in subnet that has Lock applied on resource(s).\n\n * 409 MiCreateFailedNonDelegatedSubnet - User tried to deploy Managed Instance or Managed Instance pool in subnet that is not delegated to Microsoft.Sql/managedInstances.\n\n * 429 SubscriptionTooManyCreateUpdateRequests - Requests beyond max requests that can be processed by available resources.\n\n * 429 SubscriptionTooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 429 ConflictingSubscriptionOperation - An operation is currently in progress for the subscription.\n\n * 429 SubscriptionTooManyCreateUpdateRequests - Requests beyond max requests that can be processed by available resources.\n\n * 429 SubscriptionTooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 429 SubscriptionTooManyCreateUpdateRequests - Requests beyond max requests that can be processed by available resources.\n\n * 429 SubscriptionTooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 429 ConflictingSubscriptionOperation - An operation is currently in progress for the subscription.\n\n * 500 OperationTimedOut - The operation timed out and automatically rolled back. Please retry the operation.\n\n * 500 GatewayInternalServerError - The server encountered an unexpected exception.\n\n * 503 TooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 503 TooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 503 TooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 504 RequestTimeout - Service request exceeded the allowed timeout.\n\n * 504 RequestTimeout - Service request exceeded the allowed timeout.\n\n * 504 RequestTimeout - Service request exceeded the allowed timeout."
+          },
+          "202": {
+            "description": "Accepted"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Update managed instance with minimal properties": {
+            "$ref": "./examples/ManagedInstanceUpdateMin.json"
+          },
+          "Update managed instance with all properties": {
+            "$ref": "./examples/ManagedInstanceUpdateMax.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Sql/managedInstances": {
+      "get": {
+        "tags": [
+          "ManagedInstances"
+        ],
+        "description": "Gets a list of all managed instances in the subscription.",
+        "operationId": "ManagedInstances_List",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the list of managed instances.",
+            "schema": {
+              "$ref": "#/definitions/ManagedInstanceListResult"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List managed instances": {
+            "$ref": "./examples/ManagedInstanceList.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "MetricDefinitionListResult": {
+      "description": "A list of metric definition resources.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Array of results.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MetricDefinition"
+          },
+          "readOnly": true
+        },
+        "nextLink": {
+          "description": "Link to retrieve next page of results.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "MetricDefinition": {
+      "description": "A metric definition resource.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "$ref": "#/definitions/MetricName",
+          "description": "Name of the metric.",
+          "readOnly": true
+        },
+        "unit": {
+          "description": "The unit of the metric.",
+          "enum": [
+            "Count",
+            "Bytes",
+            "Seconds",
+            "Percent",
+            "CountPerSecond",
+            "BytesPerSecond"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "UnitType",
+            "modelAsString": true
+          }
+        },
+        "resourceId": {
+          "description": "The uri of the resource that the metric describes.",
+          "type": "string",
+          "readOnly": true
+        },
+        "primaryAggregationType": {
+          "description": "The primary aggregation type defining how metric values are displayed.",
+          "enum": [
+            "None",
+            "Average",
+            "Count",
+            "Minimum",
+            "Maximum",
+            "Total"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "PrimaryAggregationType",
+            "modelAsString": true
+          }
+        },
+        "supportedAggregationTypes": {
+          "description": "The supported aggregation types defining how metric values are displayed.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "metricAvailabilities": {
+          "description": "The list of metric availabilities for the metric.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MetricAvailability"
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "MetricName": {
+      "description": "A managed instance metric name.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "The name of the database metric.",
+          "type": "string",
+          "readOnly": true
+        },
+        "localizedValue": {
+          "description": "The friendly name of the database metric.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "MetricAvailability": {
+      "description": "A metric availability value.",
+      "type": "object",
+      "properties": {
+        "timeGrain": {
+          "description": "The granularity of the database metric.",
+          "enum": [
+            "PT5M",
+            "PT1H",
+            "P1D"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "TimeGrainType",
+            "modelAsString": true
+          }
+        },
+        "retention": {
+          "description": "The length of retention for the database metric.",
+          "enum": [
+            "P14D"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "RetentionType",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "MetricListResult": {
+      "description": "A list of metric resources.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Array of results.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Metric"
+          },
+          "readOnly": true
+        },
+        "nextLink": {
+          "description": "Link to retrieve next page of results.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "Metric": {
+      "description": "A metric resource.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "$ref": "#/definitions/MetricName",
+          "description": "The name information for the metric.",
+          "readOnly": true
+        },
+        "unit": {
+          "description": "The unit of the metric.",
+          "enum": [
+            "Count",
+            "Bytes",
+            "Seconds",
+            "Percent",
+            "CountPerSecond",
+            "BytesPerSecond"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "UnitType",
+            "modelAsString": true
+          }
+        },
+        "timeGrain": {
+          "description": "The time step to be used to summarize the metric values.",
+          "enum": [
+            "PT5M",
+            "PT1H",
+            "P1D"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "TimeGrainType",
+            "modelAsString": true
+          }
+        },
+        "startTime": {
+          "description": "The start time for the metric (ISO-8601 format).",
+          "type": "string",
+          "readOnly": true
+        },
+        "endTime": {
+          "description": "The end time for the metric (ISO-8601 format).",
+          "type": "string",
+          "readOnly": true
+        },
+        "timeseries": {
+          "description": "The metric timeseries for the specified time window and timestep.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MetricTimeseries"
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "MetricTimeseries": {
+      "description": "A metric timeseries.",
+      "type": "object",
+      "properties": {
+        "data": {
+          "description": "The metric values for the specified time window and timestep.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MetricValue"
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "MetricValue": {
+      "description": "A metric value.",
+      "type": "object",
+      "properties": {
+        "timeStamp": {
+          "format": "date-time",
+          "description": "The metric timestamp (ISO-8601 format).",
+          "type": "string",
+          "readOnly": true
+        },
+        "average": {
+          "format": "double",
+          "description": "The average value of the metric.",
+          "type": "number",
+          "readOnly": true
+        },
+        "minimum": {
+          "format": "double",
+          "description": "The min value of the metric.",
+          "type": "number",
+          "readOnly": true
+        },
+        "maximum": {
+          "format": "double",
+          "description": "The max value of the metric.",
+          "type": "number",
+          "readOnly": true
+        },
+        "total": {
+          "format": "double",
+          "description": "The total value of the metric.",
+          "type": "number",
+          "readOnly": true
+        },
+        "count": {
+          "format": "int32",
+          "description": "The number of values for the metric.",
+          "type": "integer",
+          "readOnly": true
+        }
+      }
+    },
+    "TopQueriesListResult": {
+      "description": "A list of top resource consuming queries on managed instance",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Array of results.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TopQueries"
+          },
+          "readOnly": true
+        },
+        "nextLink": {
+          "description": "Link to retrieve next page of results.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "TopQueries": {
+      "type": "object",
+      "properties": {
+        "numberOfQueries": {
+          "format": "int32",
+          "description": "Requested number of top queries.",
+          "type": "integer",
+          "readOnly": true
+        },
+        "aggregationFunction": {
+          "description": "Aggregation function used to calculate query metrics.",
+          "type": "string",
+          "readOnly": true
+        },
+        "observationMetric": {
+          "description": "Metric used to rank queries.",
+          "type": "string",
+          "readOnly": true
+        },
+        "intervalType": {
+          "description": "Interval type (length).",
+          "enum": [
+            "PT1H",
+            "P1D"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "QueryTimeGrainType",
+            "modelAsString": true
+          }
+        },
+        "startTime": {
+          "description": "The start time for the metric (ISO-8601 format).",
+          "type": "string",
+          "readOnly": true
+        },
+        "endTime": {
+          "description": "The end time for the metric (ISO-8601 format).",
+          "type": "string",
+          "readOnly": true
+        },
+        "queries": {
+          "description": "List of top resource consuming queries with appropriate metric data",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/QueryStatisticsProperties"
+          }
+        }
+      }
+    },
+    "QueryStatisticsProperties": {
+      "description": "Properties of a query execution statistics.",
+      "type": "object",
+      "properties": {
+        "databaseName": {
+          "description": "Database name of the database in which this query was executed.",
+          "type": "string",
+          "readOnly": true
+        },
+        "queryId": {
+          "description": "Unique query id (unique within one database).",
+          "type": "string",
+          "readOnly": true
+        },
+        "startTime": {
+          "description": "The start time for the metric (ISO-8601 format).",
+          "type": "string",
+          "readOnly": true
+        },
+        "endTime": {
+          "description": "The end time for the metric (ISO-8601 format).",
+          "type": "string",
+          "readOnly": true
+        },
+        "intervals": {
+          "description": "List of intervals with appropriate metric data",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/QueryMetricInterval"
+          }
+        }
+      }
+    },
+    "QueryMetricInterval": {
+      "description": "Properties of a query metrics interval.",
+      "type": "object",
+      "properties": {
+        "intervalStartTime": {
+          "description": "The start time for the metric interval (ISO-8601 format).",
+          "type": "string",
+          "readOnly": true
+        },
+        "intervalType": {
+          "description": "Interval type (length).",
+          "enum": [
+            "PT1H",
+            "P1D"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "QueryTimeGrainType",
+            "modelAsString": true
+          }
+        },
+        "executionCount": {
+          "format": "int64",
+          "description": "Execution count of a query in this interval.",
+          "type": "integer",
+          "readOnly": true
+        },
+        "metrics": {
+          "description": "List of metric objects for this interval",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/QueryMetricProperties"
+          }
+        }
+      }
+    },
+    "QueryMetricProperties": {
+      "description": "Properties of a topquery metric in one interval.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "The name information for the metric.",
+          "type": "string",
+          "readOnly": true
+        },
+        "displayName": {
+          "description": "The UI appropriate name for the metric.",
+          "type": "string",
+          "readOnly": true
+        },
+        "unit": {
+          "description": "The unit of the metric.",
+          "enum": [
+            "percentage",
+            "KB",
+            "microseconds",
+            "count"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "QueryMetricUnitType",
+            "modelAsString": true
+          }
+        },
+        "value": {
+          "format": "double",
+          "description": "The value of the metric.",
+          "type": "number",
+          "readOnly": true
+        },
+        "min": {
+          "format": "double",
+          "description": "Metric value when min() aggregate function is used over the interval.",
+          "type": "number",
+          "readOnly": true
+        },
+        "max": {
+          "format": "double",
+          "description": "Metric value when max() aggregate function is used over the interval.",
+          "type": "number",
+          "readOnly": true
+        },
+        "avg": {
+          "format": "double",
+          "description": "Metric value when avg() aggregate function is used over the interval.",
+          "type": "number",
+          "readOnly": true
+        },
+        "sum": {
+          "format": "double",
+          "description": "Metric value when sum() aggregate function is used over the interval.",
+          "type": "number",
+          "readOnly": true
+        },
+        "stdev": {
+          "format": "double",
+          "description": "Metric value when stdev aggregate function is used over the interval.",
+          "type": "number",
+          "readOnly": true
+        }
+      }
+    },
+    "ManagedInstanceListResult": {
+      "description": "A list of managed instances.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Array of results.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ManagedInstance"
+          },
+          "readOnly": true
+        },
+        "nextLink": {
+          "description": "Link to retrieve next page of results.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "ResourceIdentity": {
+      "description": "Azure Active Directory identity configuration for a resource.",
+      "type": "object",
+      "properties": {
+        "principalId": {
+          "format": "uuid",
+          "description": "The Azure Active Directory principal id.",
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "description": "The identity type. Set this to 'SystemAssigned' in order to automatically create and assign an Azure Active Directory principal for the resource.",
+          "enum": [
+            "None",
+            "SystemAssigned"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "IdentityTypeWithNone",
+            "modelAsString": true
+          }
+        },
+        "tenantId": {
+          "format": "uuid",
+          "description": "The Azure Active Directory tenant id.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "ManagedInstanceProperties": {
+      "description": "The properties of a managed instance.",
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "enum": [
+            "Creating",
+            "Deleting",
+            "Updating",
+            "Unknown",
+            "Succeeded",
+            "Failed"
+          ],
+          "type": "string",
+          "readOnly": true
+        },
+        "managedInstanceCreateMode": {
+          "description": "Specifies the mode of database creation.\r\n\r\nDefault: Regular instance creation.\r\n\r\nRestore: Creates an instance by restoring a set of backups to specific point in time. RestorePointInTime and SourceManagedInstanceId must be specified.",
+          "enum": [
+            "Default",
+            "PointInTimeRestore"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "ManagedServerCreateMode",
+            "modelAsString": true
+          },
+          "x-ms-mutability": [
+            "create"
+          ]
+        },
+        "fullyQualifiedDomainName": {
+          "description": "The fully qualified domain name of the managed instance.",
+          "type": "string",
+          "readOnly": true
+        },
+        "administratorLogin": {
+          "description": "Administrator username for the managed instance. Can only be specified when the managed instance is being created (and is required for creation).",
+          "type": "string",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "administratorLoginPassword": {
+          "description": "The administrator login password (required for managed instance creation).",
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "update"
+          ]
+        },
+        "subnetId": {
+          "description": "Subnet resource ID for the managed instance.",
+          "type": "string"
+        },
+        "state": {
+          "description": "The state of the managed instance.",
+          "type": "string",
+          "readOnly": true
+        },
+        "licenseType": {
+          "description": "The license type. Possible values are 'LicenseIncluded' (regular price inclusive of a new SQL license) and 'BasePrice' (discounted AHB price for bringing your own SQL licenses).",
+          "enum": [
+            "LicenseIncluded",
+            "BasePrice"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "ManagedInstanceLicenseType",
+            "modelAsString": true
+          }
+        },
+        "vCores": {
+          "format": "int32",
+          "description": "The number of vCores. Allowed values: 8, 16, 24, 32, 40, 64, 80.",
+          "type": "integer"
+        },
+        "storageSizeInGB": {
+          "format": "int32",
+          "description": "Storage size in GB. Minimum value: 32. Maximum value: 8192. Increments of 32 GB allowed only.",
+          "type": "integer"
+        },
+        "collation": {
+          "description": "Collation of the managed instance.",
+          "type": "string",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "dnsZone": {
+          "description": "The Dns Zone that the managed instance is in.",
+          "type": "string",
+          "readOnly": true
+        },
+        "dnsZonePartner": {
+          "description": "The resource id of another managed instance whose DNS zone this managed instance will share after creation.",
+          "type": "string",
+          "x-ms-mutability": [
+            "create"
+          ]
+        },
+        "publicDataEndpointEnabled": {
+          "description": "Whether or not the public data endpoint is enabled.",
+          "type": "boolean"
+        },
+        "sourceManagedInstanceId": {
+          "description": "The resource identifier of the source managed instance associated with create operation of this instance.",
+          "type": "string",
+          "x-ms-mutability": [
+            "create"
+          ]
+        },
+        "restorePointInTime": {
+          "format": "date-time",
+          "description": "Specifies the point in time (ISO8601 format) of the source database that will be restored to create the new database.",
+          "type": "string",
+          "x-ms-mutability": [
+            "create"
+          ]
+        },
+        "proxyOverride": {
+          "description": "Connection type used for connecting to the instance.",
+          "enum": [
+            "Proxy",
+            "Redirect",
+            "Default"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "ManagedInstanceProxyOverride",
+            "modelAsString": true
+          }
+        },
+        "timezoneId": {
+          "description": "Id of the timezone. Allowed values are timezones supported by Windows.\r\nWindows keeps details on supported timezones, including the id, in registry under\r\nKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Time Zones.\r\nYou can get those registry values via SQL Server by querying SELECT name AS timezone_id FROM sys.time_zone_info.\r\nList of Ids can also be obtained by executing [System.TimeZoneInfo]::GetSystemTimeZones() in PowerShell.\r\nAn example of valid timezone id is \"Pacific Standard Time\" or \"W. Europe Standard Time\".",
+          "type": "string",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "instancePoolId": {
+          "description": "The Id of the instance pool this managed server belongs to.",
+          "type": "string"
+        },
+        "maintenanceConfigurationId": {
+          "description": "Specifies maintenance configuration id to apply to this managed instance.",
+          "type": "string"
+        },
+        "privateEndpointConnections": {
+          "description": "List of private endpoint connections on a managed instance.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ManagedInstancePecProperty"
+          },
+          "readOnly": true
+        },
+        "minimalTlsVersion": {
+          "description": "Minimal TLS version. Allowed values: 'None', '1.0', '1.1', '1.2'",
+          "type": "string"
+        },
+        "storageAccountType": {
+          "description": "The storage account type used to store backups for this instance. The options are LRS (LocallyRedundantStorage), ZRS (ZoneRedundantStorage) and GRS (GeoRedundantStorage)",
+          "enum": [
+            "GRS",
+            "LRS",
+            "ZRS"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "StorageAccountType",
+            "modelAsString": true
+          },
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "zoneRedundant": {
+          "description": "Whether or not the multi-az is enabled.",
+          "type": "boolean"
+        }
+      }
+    },
+    "ManagedInstancePecProperty": {
+      "description": "A private endpoint connection under a managed instance",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "Resource ID.",
+          "type": "string",
+          "readOnly": true
+        },
+        "properties": {
+          "$ref": "#/definitions/ManagedInstancePrivateEndpointConnectionProperties",
+          "description": "Private endpoint connection properties",
+          "readOnly": true
+        }
+      }
+    },
+    "ManagedInstancePrivateEndpointConnectionProperties": {
+      "description": "Properties of a private endpoint connection.",
+      "type": "object",
+      "properties": {
+        "privateEndpoint": {
+          "$ref": "#/definitions/ManagedInstancePrivateEndpointProperty",
+          "description": "Private endpoint which the connection belongs to."
+        },
+        "privateLinkServiceConnectionState": {
+          "$ref": "#/definitions/ManagedInstancePrivateLinkServiceConnectionStateProperty",
+          "description": "Connection State of the Private Endpoint Connection."
+        },
+        "provisioningState": {
+          "description": "State of the Private Endpoint Connection.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "ManagedInstancePrivateEndpointProperty": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "Resource id of the private endpoint.",
+          "type": "string"
+        }
+      }
+    },
+    "ManagedInstancePrivateLinkServiceConnectionStateProperty": {
+      "required": [
+        "status",
+        "description"
+      ],
+      "type": "object",
+      "properties": {
+        "status": {
+          "description": "The private link service connection status.",
+          "type": "string"
+        },
+        "description": {
+          "description": "The private link service connection description.",
+          "type": "string"
+        },
+        "actionsRequired": {
+          "description": "The private link service connection description.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "ManagedInstance": {
+      "description": "An Azure SQL managed instance.",
+      "required": [
+        "location"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/TrackedResource"
+        }
+      ],
+      "properties": {
+        "identity": {
+          "$ref": "#/definitions/ResourceIdentity",
+          "description": "The Azure Active Directory identity of the managed instance.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "sku": {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/Sku",
+          "description": "Managed instance SKU. Allowed values for sku.name: GP_Gen4, GP_Gen5, BC_Gen4, BC_Gen5"
+        },
+        "properties": {
+          "$ref": "#/definitions/ManagedInstanceProperties",
+          "description": "Resource properties.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "ExportManagedInstanceDefinition": {
+      "required": [
+        "storageContainerSasToken",
+        "storageContainerUri"
+      ],
+      "type": "object",
+      "properties": {
+        "exportUserDatabases": {
+          "description": "The flag which value is used to either export user databases or not.",
+          "type": "boolean",
+          "x-ms-mutability": [
+            "create"
+          ]
+        },
+        "storageContainerSasToken": {
+          "description": "Tha storage container SAS token.",
+          "type": "string",
+          "x-ms-mutability": [
+            "create"
+          ]
+        },
+        "storageContainerUri": {
+          "description": "The URL of storage container.",
+          "type": "string",
+          "x-ms-mutability": [
+            "create"
+          ]
+        },
+        "readOnlyMode": {
+          "description": "The export read only mode to use.",
+          "enum": [
+            "None",
+            "ReadOnly",
+            "DenyAllConnections"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "ReadOnlyMode",
+            "modelAsString": true
+          },
+          "x-ms-mutability": [
+            "create"
+          ]
+        }
+      }
+    },
+    "ManagedInstanceUpdate": {
+      "description": "An update request for an Azure SQL Database managed instance.",
+      "type": "object",
+      "properties": {
+        "sku": {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/Sku",
+          "description": "Managed instance sku"
+        },
+        "identity": {
+          "$ref": "#/definitions/ResourceIdentity",
+          "description": "Managed instance identity"
+        },
+        "properties": {
+          "$ref": "#/definitions/ManagedInstanceProperties",
+          "description": "Resource properties.",
+          "x-ms-client-flatten": true
+        },
+        "tags": {
+          "description": "Resource tags.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  },
+  "parameters": {
+    "ManagedInstanceNameParameter": {
+      "name": "managedInstanceName",
+      "in": "path",
+      "description": "The name of the managed instance.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  }
+}

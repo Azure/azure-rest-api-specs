@@ -1,0 +1,133 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2020-08-01-preview",
+    "title": "SqlManagementClient",
+    "description": "The Azure SQL Database management API provides a RESTful set of web APIs that interact with Azure SQL Database services to manage your databases. The API enables users to create, retrieve, update, and delete databases, servers, and other entities."
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/tdeCertificates": {
+      "post": {
+        "tags": [
+          "ManagedInstanceTdeCertificates"
+        ],
+        "description": "Creates a TDE certificate for a given server.",
+        "operationId": "ManagedInstanceTdeCertificates_Create",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ManagedInstanceNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "The requested TDE certificate to be created or updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/TdeCertificate"
+            }
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully created the TDE certificate."
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 MissingPrivateBlob - The private blob is missing.\n\n * 400 InvalidPrivateBlobOrPassword - Invalid private blob or password specified.\n\n * 400 PrivateBlobWithoutPrivateKey - The provided blob does not contain private key.\n\n * 400 InvalidResourceRequestBody - The resource or resource properties in the request body is empty or invalid.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription.\n\n * 404 ResourceNotFound - The requested resource was not found."
+          },
+          "202": {
+            "description": "Accepted"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Upload a TDE certificate": {
+            "$ref": "./examples/ManagedInstanceTdeCertificate.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "TdeCertificateProperties": {
+      "description": "Properties of a TDE certificate.",
+      "required": [
+        "privateBlob"
+      ],
+      "type": "object",
+      "properties": {
+        "privateBlob": {
+          "description": "The base64 encoded certificate private blob.",
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "update"
+          ]
+        },
+        "certPassword": {
+          "description": "The certificate password.",
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "update"
+          ]
+        }
+      }
+    },
+    "TdeCertificate": {
+      "description": "A TDE certificate that can be uploaded into a server.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/TdeCertificateProperties",
+          "description": "Resource properties.",
+          "x-ms-client-flatten": true
+        }
+      }
+    }
+  },
+  "parameters": {
+    "ManagedInstanceNameParameter": {
+      "name": "managedInstanceName",
+      "in": "path",
+      "description": "The name of the managed instance.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  }
+}

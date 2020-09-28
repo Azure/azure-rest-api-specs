@@ -1,0 +1,331 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2020-08-01-preview",
+    "title": "SqlManagementClient",
+    "description": "The Azure SQL Database management API provides a RESTful set of web APIs that interact with Azure SQL Database services to manage your databases. The API enables users to create, retrieve, update, and delete databases, servers, and other entities."
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/administrators": {
+      "get": {
+        "tags": [
+          "ManagedInstanceAdministrators"
+        ],
+        "description": "Gets a list of managed instance administrators.",
+        "operationId": "ManagedInstanceAdministrators_ListByInstance",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ManagedInstanceNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the list of managed instance administrators.",
+            "schema": {
+              "$ref": "#/definitions/ManagedInstanceAdministratorListResult"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 SubscriptionNotFound - The requested subscription was not found.\n\n * 404 ServerNotInSubscription - Specified server does not exist on the specified subscription.\n\n * 404 ManagedInstanceNotInSubscriptionResourceGroup - Specified managed instance does not exist in the specified resource group and subscription.\n\n * 404 ResourceNotFound - The requested resource was not found.\n\n * 429 SubscriptionTooManyCreateUpdateRequests - Requests beyond max requests that can be processed by available resources.\n\n * 429 SubscriptionTooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 503 TooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 504 RequestTimeout - Service request exceeded the allowed timeout."
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List administrators of managed instance": {
+            "$ref": "./examples/ManagedInstanceAdministratorListByInstance.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/administrators/{administratorName}": {
+      "get": {
+        "tags": [
+          "ManagedInstanceAdministrators"
+        ],
+        "description": "Gets a managed instance administrator.",
+        "operationId": "ManagedInstanceAdministrators_Get",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ManagedInstanceNameParameter"
+          },
+          {
+            "name": "administratorName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "ActiveDirectory"
+            ],
+            "x-ms-enum": {
+              "name": "AdministratorName",
+              "modelAsString": true
+            }
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the the specified managed instance administrator.",
+            "schema": {
+              "$ref": "#/definitions/ManagedInstanceAdministrator"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 SubscriptionNotFound - The requested subscription was not found.\n\n * 400 InvalidManagedServerAdministratorType - Invalid administrator type specified in properties.\n\n * 400 InvalidResourceRequestBody - The resource or resource properties in the request body is empty or invalid.\n\n * 400 InvalidManagedServerAzureADAdminDeleteOperation - User tried to delete managed server Azure Active Azure admin when AzureADOnlyAuthentication is set, please use azureADOnlyAuthentications API first.\n\n * 400 InvalidManagedServerAADOnlyAuthTypePropertyName - Managed Server Azure Active Directory only authentication type should be Default\n\n * 404 ServerNotInSubscription - Specified server does not exist on the specified subscription.\n\n * 404 ManagedInstanceNotInSubscriptionResourceGroup - Specified managed instance does not exist in the specified resource group and subscription.\n\n * 404 ResourceNotFound - The requested resource was not found.\n\n * 429 SubscriptionTooManyCreateUpdateRequests - Requests beyond max requests that can be processed by available resources.\n\n * 429 SubscriptionTooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 503 TooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 504 RequestTimeout - Service request exceeded the allowed timeout."
+          }
+        },
+        "x-ms-examples": {
+          "Get administrator of managed instance": {
+            "$ref": "./examples/ManagedInstanceAdministratorGet.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "ManagedInstanceAdministrators"
+        ],
+        "description": "Creates or updates a managed instance administrator.",
+        "operationId": "ManagedInstanceAdministrators_CreateOrUpdate",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ManagedInstanceNameParameter"
+          },
+          {
+            "name": "administratorName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "ActiveDirectory"
+            ],
+            "x-ms-enum": {
+              "name": "AdministratorName",
+              "modelAsString": true
+            }
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "The requested administrator parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ManagedInstanceAdministrator"
+            }
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully updated the managed instance administrator.",
+            "schema": {
+              "$ref": "#/definitions/ManagedInstanceAdministrator"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 SubscriptionNotFound - The requested subscription was not found.\n\n * 400 InvalidManagedServerAdministratorType - Invalid administrator type specified in properties.\n\n * 400 InvalidResourceRequestBody - The resource or resource properties in the request body is empty or invalid.\n\n * 400 InvalidManagedServerAzureADAdminDeleteOperation - User tried to delete managed server Azure Active Azure admin when AzureADOnlyAuthentication is set, please use azureADOnlyAuthentications API first.\n\n * 400 InvalidManagedServerAADOnlyAuthTypePropertyName - Managed Server Azure Active Directory only authentication type should be Default\n\n * 400 InvalidParameterValue - An invalid value was given to a parameter.\n\n * 400 InvalidLoginName - The provided login name is invalid.\n\n * 400 PrincipalNotFoundInTenant - AzureAD Lookup returned no results for this name.\n\n * 400 ServerPrincipalHasDuplicateDisplayNameInAad - AzureAD Lookup returned multiple results for this name.\n\n * 400 ManagedInstanceIsBusy - Managed Instance is busy with another request.\n\n * 400 InvalidPrincipalType - This principal type is not supported in Windows Azure SQL Database.\n\n * 400 ServicePrincipalLookupInAadFailed - AzureAD Lookup failed due to service infrastructure errors.\n\n * 400 TenantNotFoundInActiveDirectory - Tenant is not available in active directory.\n\n * 400 InvalidUsername - Supplied user name contains invalid characters.\n\n * 400 ManagedInstanceHasNoPermissionsToAccessAad - Attempt to perform operation, which involves a non-existing login or login on which executing principal has no permissions.\n\n * 404 ServerNotInSubscription - Specified server does not exist on the specified subscription.\n\n * 404 ManagedInstanceNotInSubscriptionResourceGroup - Specified managed instance does not exist in the specified resource group and subscription.\n\n * 404 OperationIdNotFound - The operation with Id does not exist.\n\n * 404 ResourceNotFound - The requested resource was not found.\n\n * 409 OperationCancelled - The operation has been cancelled by user.\n\n * 409 OperationInterrupted - The operation on the resource could not be completed because it was interrupted by another operation on the same resource.\n\n * 409 ServerPrincipalAlreadyExists - Attempt to create server principal with non-unique name.\n\n * 409 ServerPrincipalCurrentlyLoggedIn - Self-explanatory.\n\n * 409 ServerPrincipalOwnsJobs - Attempt to remove a login when it has active jobs.\n\n * 409 ServerPrincipalIsGrantorOfPermissions - Attempt to drop a server principal, which is a grantor of permissions.\n\n * 409 ServerPrincipalOwnsDatabase - Change the owner of the database(s) before dropping the login.\n\n * 409 ServerPrincipalUsedInTriggerOrEventNotification - Attempt to drop login, which is used as an execution context of a trigger or event notification.\n\n * 409 ServerPrincipalOwnsObjects - Attempt to drop a login, which owns objects.\n\n * 429 SubscriptionTooManyCreateUpdateRequests - Requests beyond max requests that can be processed by available resources.\n\n * 429 SubscriptionTooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 500 OperationTimedOut - The operation timed out and automatically rolled back. Please retry the operation.\n\n * 500 ActiveDirectoryLookupTimedOut - The operation could not be completed at this time. Please try again later.\n\n * 503 TooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 504 RequestTimeout - Service request exceeded the allowed timeout."
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "201": {
+            "description": "Successfully created the managed instance administrator.",
+            "schema": {
+              "$ref": "#/definitions/ManagedInstanceAdministrator"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Create administrator of managed instance": {
+            "$ref": "./examples/ManagedInstanceAdministratorCreate.json"
+          },
+          "Update administrator of managed instance": {
+            "$ref": "./examples/ManagedInstanceAdministratorUpdate.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "ManagedInstanceAdministrators"
+        ],
+        "description": "Deletes a managed instance administrator.",
+        "operationId": "ManagedInstanceAdministrators_Delete",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ManagedInstanceNameParameter"
+          },
+          {
+            "name": "administratorName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "ActiveDirectory"
+            ],
+            "x-ms-enum": {
+              "name": "AdministratorName",
+              "modelAsString": true
+            }
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully deleted the managed instance administrator."
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 SubscriptionNotFound - The requested subscription was not found.\n\n * 400 InvalidManagedServerAdministratorType - Invalid administrator type specified in properties.\n\n * 400 InvalidResourceRequestBody - The resource or resource properties in the request body is empty or invalid.\n\n * 400 InvalidManagedServerAzureADAdminDeleteOperation - User tried to delete managed server Azure Active Azure admin when AzureADOnlyAuthentication is set, please use azureADOnlyAuthentications API first.\n\n * 400 InvalidManagedServerAADOnlyAuthTypePropertyName - Managed Server Azure Active Directory only authentication type should be Default\n\n * 400 InvalidParameterValue - An invalid value was given to a parameter.\n\n * 400 InvalidLoginName - The provided login name is invalid.\n\n * 400 PrincipalNotFoundInTenant - AzureAD Lookup returned no results for this name.\n\n * 400 ServerPrincipalHasDuplicateDisplayNameInAad - AzureAD Lookup returned multiple results for this name.\n\n * 400 ManagedInstanceIsBusy - Managed Instance is busy with another request.\n\n * 400 InvalidPrincipalType - This principal type is not supported in Windows Azure SQL Database.\n\n * 400 ServicePrincipalLookupInAadFailed - AzureAD Lookup failed due to service infrastructure errors.\n\n * 400 TenantNotFoundInActiveDirectory - Tenant is not available in active directory.\n\n * 400 InvalidUsername - Supplied user name contains invalid characters.\n\n * 400 ManagedInstanceHasNoPermissionsToAccessAad - Attempt to perform operation, which involves a non-existing login or login on which executing principal has no permissions.\n\n * 404 ServerNotInSubscription - Specified server does not exist on the specified subscription.\n\n * 404 ManagedInstanceNotInSubscriptionResourceGroup - Specified managed instance does not exist in the specified resource group and subscription.\n\n * 404 OperationIdNotFound - The operation with Id does not exist.\n\n * 404 ResourceNotFound - The requested resource was not found.\n\n * 409 OperationCancelled - The operation has been cancelled by user.\n\n * 409 OperationInterrupted - The operation on the resource could not be completed because it was interrupted by another operation on the same resource.\n\n * 409 ServerPrincipalAlreadyExists - Attempt to create server principal with non-unique name.\n\n * 409 ServerPrincipalCurrentlyLoggedIn - Self-explanatory.\n\n * 409 ServerPrincipalOwnsJobs - Attempt to remove a login when it has active jobs.\n\n * 409 ServerPrincipalIsGrantorOfPermissions - Attempt to drop a server principal, which is a grantor of permissions.\n\n * 409 ServerPrincipalOwnsDatabase - Change the owner of the database(s) before dropping the login.\n\n * 409 ServerPrincipalUsedInTriggerOrEventNotification - Attempt to drop login, which is used as an execution context of a trigger or event notification.\n\n * 409 ServerPrincipalOwnsObjects - Attempt to drop a login, which owns objects.\n\n * 429 SubscriptionTooManyCreateUpdateRequests - Requests beyond max requests that can be processed by available resources.\n\n * 429 SubscriptionTooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 500 OperationTimedOut - The operation timed out and automatically rolled back. Please retry the operation.\n\n * 500 ActiveDirectoryLookupTimedOut - The operation could not be completed at this time. Please try again later.\n\n * 503 TooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 504 RequestTimeout - Service request exceeded the allowed timeout."
+          },
+          "202": {
+            "description": "Accepted"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Delete administrator of managed instance": {
+            "$ref": "./examples/ManagedInstanceAdministratorDelete.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ManagedInstanceAdministratorListResult": {
+      "description": "A list of managed instance administrators.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Array of results.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ManagedInstanceAdministrator"
+          },
+          "readOnly": true
+        },
+        "nextLink": {
+          "description": "Link to retrieve next page of results.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "ManagedInstanceAdministratorProperties": {
+      "description": "The properties of a managed instance administrator.",
+      "required": [
+        "administratorType",
+        "login",
+        "sid"
+      ],
+      "type": "object",
+      "properties": {
+        "administratorType": {
+          "description": "Type of the managed instance administrator.",
+          "enum": [
+            "ActiveDirectory"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "ManagedInstanceAdministratorType",
+            "modelAsString": true
+          }
+        },
+        "login": {
+          "description": "Login name of the managed instance administrator.",
+          "type": "string"
+        },
+        "sid": {
+          "format": "uuid",
+          "description": "SID (object ID) of the managed instance administrator.",
+          "type": "string"
+        },
+        "tenantId": {
+          "format": "uuid",
+          "description": "Tenant ID of the managed instance administrator.",
+          "type": "string"
+        }
+      }
+    },
+    "ManagedInstanceAdministrator": {
+      "description": "An Azure SQL managed instance administrator.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ManagedInstanceAdministratorProperties",
+          "description": "Resource properties.",
+          "x-ms-client-flatten": true
+        }
+      }
+    }
+  },
+  "parameters": {
+    "ManagedInstanceNameParameter": {
+      "name": "managedInstanceName",
+      "in": "path",
+      "description": "The name of the managed instance.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  }
+}

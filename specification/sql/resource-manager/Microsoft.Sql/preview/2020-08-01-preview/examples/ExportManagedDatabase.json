@@ -1,0 +1,33 @@
+{
+  "parameters": {
+    "subscriptionId": "00000000-1111-2222-3333-444444444444",
+    "resourceGroupeName": "group1",
+    "managedInstanceName": "testInstance",
+    "databaseName": "testDatabase",
+    "api-version": "2020-08-01-preview",
+    "parameters": {
+      "StorageContainerSasToken": "st=2020-03-13T12%3A28%3A45Z&se=2020-03-14T12%3A28%3A00Z&sp=racwdl&sv=2018-03-28&sr=c&sig=XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
+      "StorageContainerUri": "https://test.blob.core.windows.net/test/test.bak"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "requestId": "9d9a794a-5cec-4f23-af70-d29511b522a4",
+          "requestType": "Export",
+          "queuedTime": "1/1/2020 8:33:27 PM",
+          "lastModifiedTime": "1/1/2020 8:34:47 PM",
+          "StorageContainerUri": "https://test.blob.core.windows.net/test/test.bak",
+          "managedInstanceName": "testInstance",
+          "databaseName": "testDatabase",
+          "status": "Completed"
+        }
+      },
+      "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/group1/providers/Microsoft.Sql/managedInstances/testinstance/databases/testdatabase/export",
+      "name": "9d9a794a-5cec-4f23-af70-d29511b522a4",
+      "type": "Microsoft.Sql/managedInstances"
+    },
+    "202": {}
+  }
+}

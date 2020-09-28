@@ -1,0 +1,309 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2020-08-01-preview",
+    "title": "SqlManagementClient",
+    "description": "The Azure SQL Database management API provides a RESTful set of web APIs that interact with Azure SQL Database services to manage your databases. The API enables users to create, retrieve, update, and delete databases, servers, and other entities."
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/interfaceEndpointProfiles/{interfaceEndpointProfileName}": {
+      "get": {
+        "tags": [
+          "InterfaceEndpointProfiles"
+        ],
+        "description": "Gets a interface endpoint profile.",
+        "operationId": "InterfaceEndpointProfiles_Get",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          },
+          {
+            "name": "interfaceEndpointProfileName",
+            "in": "path",
+            "description": "The name of the interface endpoint profile.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved a specified interface endpoint profile.",
+            "schema": {
+              "$ref": "#/definitions/InterfaceEndpointProfile"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 InvalidResourceId - Invalid resource identifier.\n\n * 400 MismatchingSubscriptionWithUrl - The provided subscription did not match the subscription in the Url.\n\n * 400 MismatchingResourceGroupNameWithUrl - The provided resource group name did not match the name in the Url.\n\n * 400 MismatchingServerNameWithUrl - The provided server name did not match the name in the Url.\n\n * 400 NullInterfaceEndpointProfileRequest - Interface endpoint Profile Request is Null\n\n * 400 NullInterfaceEndpointProfileRequestParameters - Interface endpoint Profile Request Parameters are Null\n\n * 400 NullVnetNetworkSubnetId - Virtual Network subnet id is Null\n\n * 400 InterfaceEndpointProfileUserErrorBadRequest - Azure SQL Server Interface Endpoint Profile encountered an user error\n\n * 403 InterfaceEndpointProfileResourceAccessDenied - Azure SQL Server Interface Endpoint Profile encountered permission error\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription.\n\n * 404 ResourceNotFound - The requested resource was not found.\n\n * 404 InterfaceEndpointProfileFeatureNotEnabled - Azure SQL Server Interface Endpoint Profiles feature is not enabled\n\n * 404 InterfaceEndpointProfileResourceNotFound - Azure SQL Server Interface Endpoint Profile encountered a resource not found error\n\n * 404 InterfaceEndpointProfileSubscriptionNotFound - Azure SQL Server Interface Endpoint Profiles subscription id not found\n\n * 404 InterfaceEndpointProfileOnlyOneAllowed - Only one Interface endpoint profile is allowed.\n\n * 504 InterfaceEndpointProfileResourceTimedOut - Azure SQL Server Interface Endpoint Profile encountered a timeout"
+          }
+        },
+        "x-ms-examples": {
+          "Gets interface endpoint profiles on server.": {
+            "$ref": "./examples/InterfaceEndpointProfileGet.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "InterfaceEndpointProfiles"
+        ],
+        "description": "Creates or updates a interface endpoint profile.",
+        "operationId": "InterfaceEndpointProfiles_CreateOrUpdate",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          },
+          {
+            "name": "interfaceEndpointProfileName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/InterfaceEndpointProfile"
+            }
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully updated a interface endpoint profile.",
+            "schema": {
+              "$ref": "#/definitions/InterfaceEndpointProfile"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 InvalidResourceId - Invalid resource identifier.\n\n * 400 MismatchingSubscriptionWithUrl - The provided subscription did not match the subscription in the Url.\n\n * 400 MismatchingResourceGroupNameWithUrl - The provided resource group name did not match the name in the Url.\n\n * 400 MismatchingServerNameWithUrl - The provided server name did not match the name in the Url.\n\n * 400 NullInterfaceEndpointProfileRequest - Interface endpoint Profile Request is Null\n\n * 400 NullInterfaceEndpointProfileRequestParameters - Interface endpoint Profile Request Parameters are Null\n\n * 400 NullVnetNetworkSubnetId - Virtual Network subnet id is Null\n\n * 400 InterfaceEndpointProfileUserErrorBadRequest - Azure SQL Server Interface Endpoint Profile encountered an user error\n\n * 403 InterfaceEndpointProfileResourceAccessDenied - Azure SQL Server Interface Endpoint Profile encountered permission error\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription.\n\n * 404 ResourceNotFound - The requested resource was not found.\n\n * 404 InterfaceEndpointProfileFeatureNotEnabled - Azure SQL Server Interface Endpoint Profiles feature is not enabled\n\n * 404 InterfaceEndpointProfileResourceNotFound - Azure SQL Server Interface Endpoint Profile encountered a resource not found error\n\n * 404 InterfaceEndpointProfileSubscriptionNotFound - Azure SQL Server Interface Endpoint Profiles subscription id not found\n\n * 404 InterfaceEndpointProfileOnlyOneAllowed - Only one Interface endpoint profile is allowed.\n\n * 504 InterfaceEndpointProfileResourceTimedOut - Azure SQL Server Interface Endpoint Profile encountered a timeout"
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "201": {
+            "description": "Successfully created a interface endpoint profile.",
+            "schema": {
+              "$ref": "#/definitions/InterfaceEndpointProfile"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Creates or updates interface endpoint profile.": {
+            "$ref": "./examples/InterfaceEndpointProfileCreateOrUpdate.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "InterfaceEndpointProfiles"
+        ],
+        "description": "Deletes the interface endpoint profile with the given name.",
+        "operationId": "InterfaceEndpointProfiles_Delete",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          },
+          {
+            "name": "interfaceEndpointProfileName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully deleted the interface endpoint profile."
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 InvalidResourceId - Invalid resource identifier.\n\n * 400 MismatchingSubscriptionWithUrl - The provided subscription did not match the subscription in the Url.\n\n * 400 MismatchingResourceGroupNameWithUrl - The provided resource group name did not match the name in the Url.\n\n * 400 MismatchingServerNameWithUrl - The provided server name did not match the name in the Url.\n\n * 400 NullInterfaceEndpointProfileRequest - Interface endpoint Profile Request is Null\n\n * 400 NullInterfaceEndpointProfileRequestParameters - Interface endpoint Profile Request Parameters are Null\n\n * 400 NullVnetNetworkSubnetId - Virtual Network subnet id is Null\n\n * 400 InterfaceEndpointProfileUserErrorBadRequest - Azure SQL Server Interface Endpoint Profile encountered an user error\n\n * 403 InterfaceEndpointProfileResourceAccessDenied - Azure SQL Server Interface Endpoint Profile encountered permission error\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription.\n\n * 404 OperationIdNotFound - The operation with Id does not exist.\n\n * 404 InterfaceEndpointProfileFeatureNotEnabled - Azure SQL Server Interface Endpoint Profiles feature is not enabled\n\n * 404 InterfaceEndpointProfileResourceNotFound - Azure SQL Server Interface Endpoint Profile encountered a resource not found error\n\n * 404 InterfaceEndpointProfileSubscriptionNotFound - Azure SQL Server Interface Endpoint Profiles subscription id not found\n\n * 404 InterfaceEndpointProfileOnlyOneAllowed - Only one Interface endpoint profile is allowed.\n\n * 409 OperationCancelled - The operation has been cancelled by user.\n\n * 409 OperationInterrupted - The operation on the resource could not be completed because it was interrupted by another operation on the same resource.\n\n * 500 OperationTimedOut - The operation timed out and automatically rolled back. Please retry the operation.\n\n * 504 InterfaceEndpointProfileResourceTimedOut - Azure SQL Server Interface Endpoint Profile encountered a timeout"
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "204": {
+            "description": "The specified interface endpoint profile does not exist."
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Deletes interface endpoint profile.": {
+            "$ref": "./examples/InterfaceEndpointProfileDelete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/interfaceEndpointProfiles": {
+      "get": {
+        "tags": [
+          "InterfaceEndpointProfiles"
+        ],
+        "description": "Gets a list of interface endpoint profiles attached to a server.",
+        "operationId": "InterfaceEndpointProfiles_ListByServer",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the list of interface endpoint profiles.",
+            "schema": {
+              "$ref": "#/definitions/InterfaceEndpointProfilesListResult"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 InvalidResourceId - Invalid resource identifier.\n\n * 400 MismatchingSubscriptionWithUrl - The provided subscription did not match the subscription in the Url.\n\n * 400 MismatchingResourceGroupNameWithUrl - The provided resource group name did not match the name in the Url.\n\n * 400 MismatchingServerNameWithUrl - The provided server name did not match the name in the Url.\n\n * 400 NullInterfaceEndpointProfileRequest - Interface endpoint Profile Request is Null\n\n * 400 NullInterfaceEndpointProfileRequestParameters - Interface endpoint Profile Request Parameters are Null\n\n * 400 NullVnetNetworkSubnetId - Virtual Network subnet id is Null\n\n * 400 InterfaceEndpointProfileUserErrorBadRequest - Azure SQL Server Interface Endpoint Profile encountered an user error\n\n * 403 InterfaceEndpointProfileResourceAccessDenied - Azure SQL Server Interface Endpoint Profile encountered permission error\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription.\n\n * 404 ResourceNotFound - The requested resource was not found.\n\n * 404 InterfaceEndpointProfileFeatureNotEnabled - Azure SQL Server Interface Endpoint Profiles feature is not enabled\n\n * 404 InterfaceEndpointProfileResourceNotFound - Azure SQL Server Interface Endpoint Profile encountered a resource not found error\n\n * 404 InterfaceEndpointProfileSubscriptionNotFound - Azure SQL Server Interface Endpoint Profiles subscription id not found\n\n * 404 InterfaceEndpointProfileOnlyOneAllowed - Only one Interface endpoint profile is allowed.\n\n * 504 InterfaceEndpointProfileResourceTimedOut - Azure SQL Server Interface Endpoint Profile encountered a timeout"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List of interface endpoint profiles on server.": {
+            "$ref": "./examples/InterfaceEndpointProfileListByServer.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "InterfaceEndpointProfileProperties": {
+      "description": "The properties of a interface endpoint profile.",
+      "required": [
+        "virtualNetworkSubnetId"
+      ],
+      "type": "object",
+      "properties": {
+        "virtualNetworkSubnetId": {
+          "description": "The ARM resource id of the virtual network subnet.",
+          "type": "string"
+        },
+        "privateIp": {
+          "description": "The Private ip associated with the interface endpoint profile",
+          "type": "string",
+          "readOnly": true
+        },
+        "state": {
+          "description": "State of the interface endpoint profile.",
+          "enum": [
+            "Initializing",
+            "InProgress",
+            "Ready",
+            "Failed",
+            "Deleting",
+            "Unknown"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "InterfaceEndpointProfileStateType",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "InterfaceEndpointProfile": {
+      "description": "A interface endpoint profile resource.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/InterfaceEndpointProfileProperties",
+          "description": "Resource properties.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "InterfaceEndpointProfilesListResult": {
+      "description": "A list of interface endpoint profiles.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Array of results.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/InterfaceEndpointProfile"
+          },
+          "readOnly": true
+        },
+        "nextLink": {
+          "description": "Link to retrieve next page of results.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    }
+  },
+  "parameters": {
+    "ServerNameParameter": {
+      "name": "serverName",
+      "in": "path",
+      "description": "The name of the server.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  }
+}

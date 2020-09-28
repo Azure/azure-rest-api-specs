@@ -1,0 +1,623 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2020-08-01-preview",
+    "title": "SqlManagementClient",
+    "description": "The Azure SQL Database management API provides a RESTful set of web APIs that interact with Azure SQL Database services to manage your databases. The API enables users to create, retrieve, update, and delete databases, servers, and other entities."
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/jobAgents/{jobAgentName}/jobs/{jobName}/versions/{jobVersion}/steps": {
+      "get": {
+        "tags": [
+          "JobSteps"
+        ],
+        "description": "Gets all job steps in the specified job version.",
+        "operationId": "JobSteps_ListByVersion",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          },
+          {
+            "name": "jobAgentName",
+            "in": "path",
+            "description": "The name of the job agent.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "jobName",
+            "in": "path",
+            "description": "The name of the job to get.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "jobVersion",
+            "in": "path",
+            "description": "The version of the job to get.",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the list of job steps.",
+            "schema": {
+              "$ref": "#/definitions/JobStepListResult"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 404 JobAgentNotFound - Specified job agent does not exist in the specified logical server.\n\n * 404 ResourceNotFound - The requested resource was not found.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription."
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List job steps for the specified version of a job.": {
+            "$ref": "./examples/ListJobStepsByVersion.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/jobAgents/{jobAgentName}/jobs/{jobName}/versions/{jobVersion}/steps/{stepName}": {
+      "get": {
+        "tags": [
+          "JobSteps"
+        ],
+        "description": "Gets the specified version of a job step.",
+        "operationId": "JobSteps_GetByVersion",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          },
+          {
+            "name": "jobAgentName",
+            "in": "path",
+            "description": "The name of the job agent.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "jobName",
+            "in": "path",
+            "description": "The name of the job.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "jobVersion",
+            "in": "path",
+            "description": "The version of the job to get.",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "stepName",
+            "in": "path",
+            "description": "The name of the job step.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the job step.",
+            "schema": {
+              "$ref": "#/definitions/JobStep"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 404 JobAgentNotFound - Specified job agent does not exist in the specified logical server.\n\n * 404 ResourceNotFound - The requested resource was not found.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription."
+          }
+        },
+        "x-ms-examples": {
+          "Get the specified version of a job step.": {
+            "$ref": "./examples/GetJobStepByVersion.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/jobAgents/{jobAgentName}/jobs/{jobName}/steps": {
+      "get": {
+        "tags": [
+          "JobSteps"
+        ],
+        "description": "Gets all job steps for a job's current version.",
+        "operationId": "JobSteps_ListByJob",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          },
+          {
+            "name": "jobAgentName",
+            "in": "path",
+            "description": "The name of the job agent.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "jobName",
+            "in": "path",
+            "description": "The name of the job to get.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the list of job steps.",
+            "schema": {
+              "$ref": "#/definitions/JobStepListResult"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 404 JobAgentNotFound - Specified job agent does not exist in the specified logical server.\n\n * 404 ResourceNotFound - The requested resource was not found.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription."
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List job steps for the latest version of a job.": {
+            "$ref": "./examples/ListJobStepsByJob.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/jobAgents/{jobAgentName}/jobs/{jobName}/steps/{stepName}": {
+      "get": {
+        "tags": [
+          "JobSteps"
+        ],
+        "description": "Gets a job step in a job's current version.",
+        "operationId": "JobSteps_Get",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          },
+          {
+            "name": "jobAgentName",
+            "in": "path",
+            "description": "The name of the job agent.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "jobName",
+            "in": "path",
+            "description": "The name of the job.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "stepName",
+            "in": "path",
+            "description": "The name of the job step.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the job step.",
+            "schema": {
+              "$ref": "#/definitions/JobStep"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 404 JobAgentNotFound - Specified job agent does not exist in the specified logical server.\n\n * 404 ResourceNotFound - The requested resource was not found.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription."
+          }
+        },
+        "x-ms-examples": {
+          "Get the latest version of a job step.": {
+            "$ref": "./examples/GetJobStepByJob.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "JobSteps"
+        ],
+        "description": "Creates or updates a job step. This will implicitly create a new job version.",
+        "operationId": "JobSteps_CreateOrUpdate",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          },
+          {
+            "name": "jobAgentName",
+            "in": "path",
+            "description": "The name of the job agent.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "jobName",
+            "in": "path",
+            "description": "The name of the job.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "stepName",
+            "in": "path",
+            "description": "The name of the job step.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "The requested state of the job step.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/JobStep"
+            }
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully updated the job step.",
+            "schema": {
+              "$ref": "#/definitions/JobStep"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 JobStepIdMismatch - Step Id in the specified Job Step URI does not match step id in provided Job Step Resource.\n\n * 400 InvalidResourceRequestBody - The resource or resource properties in the request body is empty or invalid.\n\n * 400 InvalidResourceId - Invalid resource identifier.\n\n * 400 MismatchingSubscriptionWithUrl - The provided subscription did not match the subscription in the Url.\n\n * 400 MismatchingResourceGroupNameWithUrl - The provided resource group name did not match the name in the Url.\n\n * 400 MismatchingServerNameWithUrl - The provided server name did not match the name in the Url.\n\n * 400 MismatchingJobAccountNameWithUrl - The provided job account name did not match the name in the Url.\n\n * 400 ElasticJobsOperationFailed - Elastic jobs management operation failed.\n\n * 400 ElasticJobsOperationFailed - Elastic jobs management operation failed.\n\n * 404 JobAgentNotFound - Specified job agent does not exist in the specified logical server.\n\n * 404 ResourceNotFound - The requested resource was not found.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription."
+          },
+          "201": {
+            "description": "Successfully added the job step.",
+            "schema": {
+              "$ref": "#/definitions/JobStep"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create or update a job step with minimal properties specified.": {
+            "$ref": "./examples/CreateOrUpdateJobStepMin.json"
+          },
+          "Create or update a job step with all properties specified.": {
+            "$ref": "./examples/CreateOrUpdateJobStepMax.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "JobSteps"
+        ],
+        "description": "Deletes a job step. This will implicitly create a new job version.",
+        "operationId": "JobSteps_Delete",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          },
+          {
+            "name": "jobAgentName",
+            "in": "path",
+            "description": "The name of the job agent.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "jobName",
+            "in": "path",
+            "description": "The name of the job.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "stepName",
+            "in": "path",
+            "description": "The name of the job step to delete.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully deleted the job step."
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 ElasticJobsOperationFailed - Elastic jobs management operation failed.\n\n * 400 ElasticJobsOperationFailed - Elastic jobs management operation failed.\n\n * 404 JobAgentNotFound - Specified job agent does not exist in the specified logical server.\n\n * 404 ResourceNotFound - The requested resource was not found.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription.\n\n * 404 ResourceNotFound - The requested resource was not found."
+          },
+          "204": {
+            "description": "The specified job step does not exist."
+          }
+        },
+        "x-ms-examples": {
+          "Delete a job step.": {
+            "$ref": "./examples/DeleteJobStep.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "JobStepListResult": {
+      "description": "A list of job steps.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Array of results.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/JobStep"
+          },
+          "readOnly": true
+        },
+        "nextLink": {
+          "description": "Link to retrieve next page of results.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "JobStepProperties": {
+      "description": "Properties of a job step.",
+      "required": [
+        "targetGroup",
+        "credential",
+        "action"
+      ],
+      "type": "object",
+      "properties": {
+        "stepId": {
+          "format": "int32",
+          "description": "The job step's index within the job. If not specified when creating the job step, it will be created as the last step. If not specified when updating the job step, the step id is not modified.",
+          "type": "integer"
+        },
+        "targetGroup": {
+          "description": "The resource ID of the target group that the job step will be executed on.",
+          "type": "string"
+        },
+        "credential": {
+          "description": "The resource ID of the job credential that will be used to connect to the targets.",
+          "type": "string"
+        },
+        "action": {
+          "$ref": "#/definitions/JobStepAction",
+          "description": "The action payload of the job step."
+        },
+        "output": {
+          "$ref": "#/definitions/JobStepOutput",
+          "description": "Output destination properties of the job step."
+        },
+        "executionOptions": {
+          "$ref": "#/definitions/JobStepExecutionOptions",
+          "description": "Execution options for the job step."
+        }
+      }
+    },
+    "JobStepAction": {
+      "description": "The action to be executed by a job step.",
+      "required": [
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "type": {
+          "description": "Type of action being executed by the job step.",
+          "default": "TSql",
+          "enum": [
+            "TSql"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "JobStepActionType",
+            "modelAsString": true
+          }
+        },
+        "source": {
+          "description": "The source of the action to execute.",
+          "default": "Inline",
+          "enum": [
+            "Inline"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "JobStepActionSource",
+            "modelAsString": true
+          }
+        },
+        "value": {
+          "description": "The action value, for example the text of the T-SQL script to execute.",
+          "type": "string"
+        }
+      }
+    },
+    "JobStepOutput": {
+      "description": "The output configuration of a job step.",
+      "required": [
+        "serverName",
+        "databaseName",
+        "tableName",
+        "credential"
+      ],
+      "type": "object",
+      "properties": {
+        "type": {
+          "description": "The output destination type.",
+          "default": "SqlDatabase",
+          "enum": [
+            "SqlDatabase"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "JobStepOutputType",
+            "modelAsString": true
+          }
+        },
+        "subscriptionId": {
+          "format": "uuid",
+          "description": "The output destination subscription id.",
+          "type": "string"
+        },
+        "resourceGroupName": {
+          "description": "The output destination resource group.",
+          "type": "string"
+        },
+        "serverName": {
+          "description": "The output destination server name.",
+          "type": "string"
+        },
+        "databaseName": {
+          "description": "The output destination database.",
+          "type": "string"
+        },
+        "schemaName": {
+          "description": "The output destination schema.",
+          "default": "dbo",
+          "type": "string"
+        },
+        "tableName": {
+          "description": "The output destination table.",
+          "type": "string"
+        },
+        "credential": {
+          "description": "The resource ID of the credential to use to connect to the output destination.",
+          "type": "string"
+        }
+      }
+    },
+    "JobStepExecutionOptions": {
+      "description": "The execution options of a job step.",
+      "type": "object",
+      "properties": {
+        "timeoutSeconds": {
+          "format": "int32",
+          "description": "Execution timeout for the job step.",
+          "default": 43200,
+          "type": "integer"
+        },
+        "retryAttempts": {
+          "format": "int32",
+          "description": "Maximum number of times the job step will be reattempted if the first attempt fails.",
+          "default": 10,
+          "type": "integer"
+        },
+        "initialRetryIntervalSeconds": {
+          "format": "int32",
+          "description": "Initial delay between retries for job step execution.",
+          "default": 1,
+          "type": "integer"
+        },
+        "maximumRetryIntervalSeconds": {
+          "format": "int32",
+          "description": "The maximum amount of time to wait between retries for job step execution.",
+          "default": 120,
+          "type": "integer"
+        },
+        "retryIntervalBackoffMultiplier": {
+          "format": "float",
+          "description": "The backoff multiplier for the time between retries.",
+          "default": 2.0,
+          "type": "number"
+        }
+      }
+    },
+    "JobStep": {
+      "description": "A job step.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/JobStepProperties",
+          "description": "Resource properties.",
+          "x-ms-client-flatten": true
+        }
+      }
+    }
+  },
+  "parameters": {
+    "ServerNameParameter": {
+      "name": "serverName",
+      "in": "path",
+      "description": "The name of the server.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  }
+}

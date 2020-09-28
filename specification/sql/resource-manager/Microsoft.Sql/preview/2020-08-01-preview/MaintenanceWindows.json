@@ -1,0 +1,211 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2020-08-01-preview",
+    "title": "SqlManagementClient",
+    "description": "The Azure SQL Database management API provides a RESTful set of web APIs that interact with Azure SQL Database services to manage your databases. The API enables users to create, retrieve, update, and delete databases, servers, and other entities."
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/maintenanceWindows/current": {
+      "get": {
+        "tags": [
+          "MaintenanceWindows"
+        ],
+        "description": "Gets maintenance windows settings for a database.",
+        "operationId": "MaintenanceWindows_Get",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          },
+          {
+            "name": "databaseName",
+            "in": "path",
+            "description": "The name of the database to get maintenance windows for.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "maintenanceWindowName",
+            "in": "query",
+            "description": "Maintenance window name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved maintenance windows settings.",
+            "schema": {
+              "$ref": "#/definitions/MaintenanceWindows"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***"
+          }
+        },
+        "x-ms-examples": {
+          "Gets maintenance window settings for a selected database.": {
+            "$ref": "./examples/GetMaintenanceWindows.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "MaintenanceWindows"
+        ],
+        "description": "Sets maintenance windows settings for a database.",
+        "operationId": "MaintenanceWindows_CreateOrUpdate",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          },
+          {
+            "name": "databaseName",
+            "in": "path",
+            "description": "The name of the database to set maintenance windows for.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "maintenanceWindowName",
+            "in": "query",
+            "description": "Maintenance window name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/MaintenanceWindows"
+            }
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully set maintenance windows settings."
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 InvalidMaintenanceWindowSelection - Invalid maintenance window selection."
+          }
+        },
+        "x-ms-examples": {
+          "Sets maintenance window settings for a selected database.": {
+            "$ref": "./examples/CreateOrUpdateMaintenanceWindows.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "MaintenanceWindowsProperties": {
+      "description": "Maintenance windows resource properties.",
+      "type": "object",
+      "properties": {
+        "timeRanges": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MaintenanceWindowTimeRange"
+          }
+        }
+      }
+    },
+    "MaintenanceWindowTimeRange": {
+      "description": "Maintenance window time range.",
+      "type": "object",
+      "properties": {
+        "dayOfWeek": {
+          "description": "Day of maintenance window.",
+          "enum": [
+            "Sunday",
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday",
+            "Saturday"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "DayOfWeek",
+            "modelAsString": true
+          }
+        },
+        "startTime": {
+          "description": "Start time minutes offset from 12am.",
+          "type": "string"
+        },
+        "duration": {
+          "description": "Duration of maintenance window in minutes.",
+          "type": "string"
+        }
+      }
+    },
+    "MaintenanceWindows": {
+      "description": "Maintenance windows.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/MaintenanceWindowsProperties",
+          "description": "Resource properties.",
+          "x-ms-client-flatten": true
+        }
+      }
+    }
+  },
+  "parameters": {
+    "ServerNameParameter": {
+      "name": "serverName",
+      "in": "path",
+      "description": "The name of the server.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  }
+}

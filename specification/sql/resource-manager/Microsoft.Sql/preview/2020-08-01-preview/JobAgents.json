@@ -1,0 +1,387 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2020-08-01-preview",
+    "title": "SqlManagementClient",
+    "description": "The Azure SQL Database management API provides a RESTful set of web APIs that interact with Azure SQL Database services to manage your databases. The API enables users to create, retrieve, update, and delete databases, servers, and other entities."
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/jobAgents": {
+      "get": {
+        "tags": [
+          "JobAgents"
+        ],
+        "description": "Gets a list of job agents in a server.",
+        "operationId": "JobAgents_ListByServer",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the list of job agents.",
+            "schema": {
+              "$ref": "#/definitions/JobAgentListResult"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription.\n\n * 409 ServerDisabled - Server is disabled."
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List job agents in a server": {
+            "$ref": "./examples/ListJobAgentsByServer.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/jobAgents/{jobAgentName}": {
+      "get": {
+        "tags": [
+          "JobAgents"
+        ],
+        "description": "Gets a job agent.",
+        "operationId": "JobAgents_Get",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          },
+          {
+            "name": "jobAgentName",
+            "in": "path",
+            "description": "The name of the job agent to be retrieved.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the specified job agent.",
+            "schema": {
+              "$ref": "#/definitions/JobAgent"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription.\n\n * 404 JobAgentNotFound - Specified job agent does not exist in the specified logical server.\n\n * 409 ServerDisabled - Server is disabled."
+          }
+        },
+        "x-ms-examples": {
+          "Get a job agent": {
+            "$ref": "./examples/GetJobAgent.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "JobAgents"
+        ],
+        "description": "Creates or updates a job agent.",
+        "operationId": "JobAgents_CreateOrUpdate",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          },
+          {
+            "name": "jobAgentName",
+            "in": "path",
+            "description": "The name of the job agent to be created or updated.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "The requested job agent resource state.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/JobAgent"
+            }
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully updated the job agent.",
+            "schema": {
+              "$ref": "#/definitions/JobAgent"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 InvalidResourceRequestBody - The resource or resource properties in the request body is empty or invalid.\n\n * 400 MissingSkuName - Sku name is required.\n\n * 400 InvalidDatabaseResourceId - Invalid database resource identifier.\n\n * 400 MismatchingSubscriptionWithUrl - The provided subscription did not match the subscription in the Url.\n\n * 400 MismatchingResourceGroupNameWithUrl - The provided resource group name did not match the name in the Url.\n\n * 400 MismatchingServerNameWithUrl - The provided server name did not match the name in the Url.\n\n * 400 JobAgentDatabaseEditionUnsupported - The specified database's service level objective is not supported for use as a job agent database.\n\n * 400 JobAgentDatabaseSecondary - A job agent cannot be linked to a geo-secondary database.\n\n * 400 JobAgentDatabaseAlreadyLinked - The specified database is already linked to another job agent.\n\n * 400 DatabaseDoesNotExist - The requested database was not found\n\n * 400 CannotUseReservedDatabaseName - Cannot use reserved database name in this operation.\n\n * 400 JobAgentExceededQuota - Could not create job agent because it would exceed the quota.\n\n * 400 JobAgentAlreadyExists - The job agent already exists on the server.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription.\n\n * 404 PropertyChangeUnsupported - Property cannot be modified.\n\n * 404 SubscriptionNotFound - The requested subscription was not found.\n\n * 409 ServerDisabled - Server is disabled."
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "201": {
+            "description": "Successfully created the job agent.",
+            "schema": {
+              "$ref": "#/definitions/JobAgent"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Create or update a job agent": {
+            "$ref": "./examples/CreateOrUpdateJobAgent.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "JobAgents"
+        ],
+        "description": "Deletes a job agent.",
+        "operationId": "JobAgents_Delete",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          },
+          {
+            "name": "jobAgentName",
+            "in": "path",
+            "description": "The name of the job agent to be deleted.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully deleted the job agent."
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription.\n\n * 404 JobAgentNotFound - Specified job agent does not exist in the specified logical server.\n\n * 409 ServerDisabled - Server is disabled."
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "204": {
+            "description": "The specified job agent does not exist."
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Delete a job agent": {
+            "$ref": "./examples/DeleteJobAgent.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "JobAgents"
+        ],
+        "description": "Updates a job agent.",
+        "operationId": "JobAgents_Update",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          },
+          {
+            "name": "jobAgentName",
+            "in": "path",
+            "description": "The name of the job agent to be updated.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "The update to the job agent.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/JobAgentUpdate"
+            }
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully updated the job agent.",
+            "schema": {
+              "$ref": "#/definitions/JobAgent"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 InvalidResourceRequestBody - The resource or resource properties in the request body is empty or invalid.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription.\n\n * 404 PropertyChangeUnsupported - Property cannot be modified.\n\n * 404 JobAgentNotFound - Specified job agent does not exist in the specified logical server.\n\n * 409 ServerDisabled - Server is disabled."
+          },
+          "202": {
+            "description": "Accepted"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Update a job agent's tags.": {
+            "$ref": "./examples/UpdateJobAgent.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "JobAgentListResult": {
+      "description": "A list of Azure SQL job agents.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Array of results.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/JobAgent"
+          },
+          "readOnly": true
+        },
+        "nextLink": {
+          "description": "Link to retrieve next page of results.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "JobAgentProperties": {
+      "description": "Properties of a job agent.",
+      "required": [
+        "databaseId"
+      ],
+      "type": "object",
+      "properties": {
+        "databaseId": {
+          "description": "Resource ID of the database to store job metadata in.",
+          "type": "string",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "state": {
+          "description": "The state of the job agent.",
+          "enum": [
+            "Creating",
+            "Ready",
+            "Updating",
+            "Deleting",
+            "Disabled"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "JobAgentState",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "JobAgent": {
+      "description": "An Azure SQL job agent.",
+      "required": [
+        "location"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/TrackedResource"
+        }
+      ],
+      "properties": {
+        "sku": {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/Sku",
+          "description": "The name and tier of the SKU."
+        },
+        "properties": {
+          "$ref": "#/definitions/JobAgentProperties",
+          "description": "Resource properties.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "JobAgentUpdate": {
+      "description": "An update to an Azure SQL job agent.",
+      "type": "object",
+      "properties": {
+        "tags": {
+          "description": "Resource tags.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  },
+  "parameters": {
+    "ServerNameParameter": {
+      "name": "serverName",
+      "in": "path",
+      "description": "The name of the server.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  }
+}
