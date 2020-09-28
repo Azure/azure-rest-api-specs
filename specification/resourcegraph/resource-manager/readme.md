@@ -40,7 +40,7 @@ semantic-validator: true
 model-validator: true
 message-format: json
 ```
-### Tag: package-preview-2020-04
+### Tag: package-preview-2020-09
 
 These settings apply only when `--tag=package-preview-2020-09` is specified on the command line.
 
