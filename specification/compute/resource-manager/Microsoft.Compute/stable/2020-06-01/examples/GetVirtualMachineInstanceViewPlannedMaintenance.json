@@ -1,0 +1,85 @@
+{
+  "platformUpdateDomain": 0,
+  "platformFaultDomain": 0,
+  "computerName": "myVM",
+  "osName": "Windows Server 2019 Datacenter",
+  "osVersion": "Microsoft Windows NT 10.0.17763.0",
+  "vmAgent": {
+    "vmAgentVersion": "2.7.41491.993",
+    "statuses": [
+      {
+        "code": "ProvisioningState/succeeded",
+        "level": "Info",
+        "displayStatus": "Ready",
+        "message": "GuestAgent is running and processing the extensions.",
+        "time": "2020-09-17T16:02:22-07:00"
+      }
+    ],
+    "extensionHandlers": [
+      {
+        "type": "Microsoft.EnterpriseCloud.Monitoring.MicrosoftMonitoringAgent",
+        "typeHandlerVersion": "1.0.18038.1",
+        "status": {
+          "code": "ProvisioningState/succeeded",
+          "level": "Info",
+          "displayStatus": "Ready",
+          "message": "This virtual machine has successfully connected to Azure Log Analytics."
+        }
+      }
+    ]
+  },
+  "maintenanceRedeployStatus": {
+    "isCustomerInitiatedMaintenanceAllowed": true,
+    "preMaintenanceWindowStartTime": "2020-08-31T17:00:00-07:00",
+    "preMaintenanceWindowEndTime": "2020-09-30T17:00:00-07:00",
+    "maintenanceWindowStartTime": "2020-10-01T17:05:00-07:00",
+    "maintenanceWindowEndTime": "2020-10-02T17:00:00-07:00",
+    "lastOperationResultCode": "None"
+  },
+  "disks": [
+    {
+      "name": "myOsDisk",
+      "statuses": [
+        {
+          "code": "ProvisioningState/succeeded",
+          "level": "Info",
+          "displayStatus": "Provisioning succeeded",
+          "time": "2020-08-06T15:55:17.5559179-07:00"
+        }
+      ]
+    }
+  ],
+  "bootDiagnostics": {
+          "consoleScreenshotBlobUri": "https://{myStorageAccount}.blob.core.windows.net/bootdiagnostics-myOsDisk/myOsDisk.screenshot.bmp",
+          "serialConsoleLogBlobUri": "https://{myStorageAccount}.blob.core.windows.net/bootdiagnostics-myOsDisk/myOsDisk.serialconsole.log"
+		  },
+  "extensions": [
+    {
+      "name": "MicrosoftMonitoringAgent",
+      "type": "Microsoft.EnterpriseCloud.Monitoring.MicrosoftMonitoringAgent",
+      "typeHandlerVersion": "1.0.18038.1",
+      "statuses": [
+        {
+          "code": "ProvisioningState/succeeded",
+          "level": "Info",
+          "displayStatus": "Provisioning succeeded",
+          "message": "Latest configuration has been applied to the Microsoft Monitoring Agent."
+        }
+      ]
+    }
+  ],
+  "hyperVGeneration": "V1",
+  "statuses": [
+    {
+      "code": "ProvisioningState/succeeded",
+      "level": "Info",
+      "displayStatus": "Provisioning succeeded",
+      "time": "2020-08-12T11:43:35.8559975-07:00"
+    },
+    {
+      "code": "PowerState/running",
+      "level": "Info",
+      "displayStatus": "VM running"
+    }
+  ]
+}
