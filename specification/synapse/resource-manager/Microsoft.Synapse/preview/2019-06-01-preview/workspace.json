@@ -706,6 +706,28 @@
         }
       }
     },
+    "ManagedVirtualNetworkSettings": {
+      "description": "Managed Virtual Network Settings",
+      "type": "object",
+      "properties": {
+        "PreventDataExfiltration": {
+          "description": "Prevent Data Exfiltration",
+          "type": "boolean"
+        },
+        "LinkedAccessCheckOnTargetResource": {
+          "description": "Linked Access Check On Target Resource",
+          "type": "boolean"
+        },
+        "AllowedAadTenantIdsForLinking": {
+          "description": "Allowed Aad Tenant Ids For Linking",
+          "type": "array",
+          "items": {
+            "type": "string",
+            "description": "Tenant Id."
+          }
+        }
+      }
+    },
     "WorkspaceAadAdminInfo": {
       "description": "Workspace active directory administrator",
       "type": "object",
@@ -797,6 +819,10 @@
           },
           "type": "object",
           "readOnly": true
+        },
+        "ManagedVirtualNetworkSettings": {
+          "description": "Managed Virtual Network Settings",
+          "$ref": "#/definitions/ManagedVirtualNetworkSettings"
         }
       }
     },
@@ -814,6 +840,28 @@
         "identity": {
           "description": "The identity of the workspace",
           "$ref": "#/definitions/ManagedIdentity"
+        },
+        "ManagedVirtualNetworkSettings": {
+          "description": "Managed Virtual Network Settings",
+          "type": "object",
+          "properties": {
+            "PreventDataExfiltration": {
+              "description": "Prevent Data Exfiltration",
+              "type": "boolean"
+            },
+            "LinkedAccessCheckOnTargetResource": {
+              "description": "Linked Access Check On Target Resource",
+              "type": "boolean"
+            },
+            "AllowedAadTenantIdsForLinking": {
+              "description": "Allowed Aad Tenant Ids For Linking",
+              "type": "array",
+              "items": {
+                "type": "string",
+                "description": "Tenant Id."
+              }
+            }
+          }
         },
         "properties": {
           "description": "Workspace patch properties",
