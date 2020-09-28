@@ -36,7 +36,7 @@ If the configured language is not found here, generation for this readme.md will
 
 8. Calculate __PR diff__ and related `readme.md`. If __generationCallMode__ is __one-for-all-configs__ then run ___one pass for the rest steps___, else (__one-per-configs__) ___loop the rest steps___ with each `readme.md`.
 
-9. Launch __generateScript__ defined in [SwaggerToSdkConfig](#swaggertosdkconfig) with [generateInput.json](#generateinput). It should produce [generateOutput.json](#generateoutput) if __parseGenerateOutput__ is true.
+9. Launch __generateScript__ defined in [SwaggerToSdkConfig](#swaggertosdkconfig) with [generateInput.json](#generateinput). The script should produce [generateOutput.json](#generateoutput) if __parseGenerateOutput__ is true. If dryRun is set to true then first run of __generateScript__ will be used to collect package information , then loop each package info and checkout package related branch and launch __generateScript__ with package related readmeMd and dryRun set to false.
 
 10. Get generated package. If __packageFolderFromFileSearch__ is defined with file search then package folder is detected based on git diff in SDK repository and algorithm described in [SwaggerToSdkConfig Schema](#swaggertosdkconfig-schema). Else package folder is from [generateOutput.json](#generateoutput). For each package ___loop the rest steps___.
 
@@ -193,7 +193,7 @@ This is type of file `./specificationRepositoryConfiguration.json` in swagger sp
 
 ### SwaggerToSdkConfig
 This is type of file `./swagger_to_sdk_config.json` in sdk repo.
-The running environment of these scripts would be expected to be __Ubuntu 18.04__ on Azure Pipeline. All the running script should be executable.
+The running environment of these scripts would be expected to be __Ubuntu 18.04__ on Azure Pipeline. This may change in the future. All the running script should be executable.
 The working folder of all the scripts is the __root folder of sdk repo__.
 
 #### SwaggerToSdkConfig Example
@@ -247,9 +247,9 @@ The working folder of all the scripts is the __root folder of sdk repo__.
     }
   },
   "artifactOptions": {
-    // Param: <path_to_install_instructionInput.json> <path_to_installInstructionOutput.md> <lite|full>
+    // Param: <path_to_installInstructionInput.json> <path_to_installInstructionOutput.json>
     // installInstructionInput.json: See #InstallInstructionScriptInput .
-    // installInstructionOutput.md: Install instruction in markdown.
+    // installInstructionOutput.json: See #InstallInstructionScriptOutput .
     "installInstructionScript": {
       "path": "./eng/tools/sdk_install_instruction"
     }
@@ -311,6 +311,13 @@ The working folder of all the scripts is the __root folder of sdk repo__.
           // generateOutput.json: See #GenerateOutput
           "$ref": "#/definitions/RunOptions"
         },
+        "preprocessDryRunGetPackageName": {
+          // If this options is set to true, generateScript will first run with
+          // "dryRun": true to get package name and related readme.md,
+          // then for each package, checkout the expected branch and launch generateScript.
+          "type": "boolean",
+          "default": false
+        },
         "parseGenerateOutput": {
           // Will this script output to generateOutput.json.
           // If not, default behavior will be applied that outcome will be
@@ -357,7 +364,7 @@ The working folder of all the scripts is the __root folder of sdk repo__.
               ]
             },
             {
-              // If this option is set to false, then package folder will be from generate_output.json.
+              // If this option is set to false, then package folder will be from generateOutput.json.
               "const": false
             }
           ],
@@ -413,18 +420,12 @@ The working folder of all the scripts is the __root folder of sdk repo__.
       "installInstructionScript": {
         // Generate install instruction that could be shown in spec PR comment (lite version)
         //  or in generated SDK PR (full version).
-        // If generate_output.json contains install_instruction then this could be skipped.
-        // Param: <path_to_installInstructionInput.json> <path_to_installInstructionOutput.md> <lite|full>
+        // If generateOutput.json contains installInstruction then this could be skipped.
+        // Param: <path_to_installInstructionInput.json> <path_to_installInstructionOutput.json>
         // installInstructionInput.json: See #InstallInstructionScriptInput .
-        // installInstructionOutput.md: Install instruction in markdown.
+        // installInstructionOutput.json: See #InstallInstructionScriptInput .
         "allOf": {
           "$ref": "#/definitions/RunOptions"
-        },
-        "properties": {
-          "enableLiteInstallInstruction": {
-            "type": "boolean",
-            "default": false
-          }
         }
       }
     }
@@ -512,10 +513,10 @@ Input file for generate script.
 
 ```jsonc
 {
+  "dryRun": false,
   "specFolder": "/z/work/azure-rest-api-specs",
   "headSha": "fce3400431eff281bddd04bed9727e63765b8da0",
   "headRef": "refs/pull/1234/merge",
-  "repoGitUrl": "git@github.com:Azure/azure-rest-api-specs.git",
   "repoHttpsUrl": "https://github.com/Azure/azure-rest-api-specs.git",
   "trigger": "pull_request",
   "changedFiles": [
@@ -533,6 +534,12 @@ Input file for generate script.
 {
   "type": "object",
   "properties": {
+    "dryRun": {
+      // If dryRun is true, generateScript is expected to parse readme.md
+      // and output the package list with package name and related readme.md.
+      // Should not run codegen at this time.
+      "type": "boolean"
+    },
     "specFolder": {
       // Path to local spec folder.
       "type": "string"
@@ -544,10 +551,6 @@ Input file for generate script.
     "headRef": {
       // Git head ref.
       // Format will be "refs/pull/<number>/merge" or "refs/heads/<branch>".
-      "type": "string"
-    },
-    "repoGitUrl": {
-      // Spec repo url in git without auth.
       "type": "string"
     },
     "repoHttpsUrl": {
@@ -582,7 +585,7 @@ Input file for generate script.
     }
   },
   "required": [
-    "specFolder", "headSha", "headRef", "repoGitUrl", "repoHttpsUrl",
+    "specFolder", "headSha", "headRef", "repoHttpsUrl",
     "trigger", "changedFiles", "relatedReadmeMdFiles"
   ]
 }
@@ -601,6 +604,9 @@ Output file for generate script.
       "packageName": "Microsoft.Cdn",
       "path": [
         "sdk/cdn"
+      ],
+      "readmeMd": [
+        "specification/cdn/something/readme.md"
       ],
       "changelog": {
         "content": "Feature: something \n Breaking Changes: something\n",
@@ -653,6 +659,14 @@ Output file for generate script.
             "type": "string"
           }
         },
+        "readmeMd": {
+          // List of related readmeMd of this package.
+          // Must provide this field if dryRun is true.
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
         "changelog": {
           "type": "object",
           "properties": {
@@ -676,18 +690,8 @@ Output file for generate script.
           }
         },
         "installInstructions": {
-          "type": "object",
-          "properties": {
-            "full": {
-              "type": "string"
-            },
-            "lite": {
-              "type": "string"
-            }
-          },
-          "required": [
-            "full"
-          ]
+          // See #InstallInstructionScriptOutput
+          "$ref": "#/definitions/InstallInstructionScriptOutput"
         },
       },
       "required": [
@@ -725,11 +729,11 @@ Input of install instruction script.
   "type": "object",
   "properties": {
     "packageName": {
-      // The package name
+      // The package name. May be skipped if sdk automation don't know the info yet.
       "type": "string"
     },
     "artifacts": {
-      // List of artifact's path
+      // List of artifact's path. May be skipped if sdk automation don't know the info yet.
       "type": "array",
       "items": {
         "type": "string"
@@ -758,5 +762,40 @@ Input of install instruction script.
       ]
     }
   }
+}
+```
+
+### InstallInstructionScriptOutput
+
+Output of install instruction script.
+
+#### InstallInstructionScriptOutput Example
+
+```jsonc
+{
+  "full": "To install something...",
+}
+```
+
+#### InstallInstructionScriptInput Schema
+
+```jsonc
+{
+  "type": "object",
+  "properties": {
+    "full": {
+      // Full version of install instruction will be shown in generated SDK PR.
+      // Should be in markdown format.
+      "type": "string"
+    },
+    "lite": {
+      // Lite version of install instruction will be shown in generated SDK PR.
+      // Should be in markdown format.
+      "type": "string"
+    }
+  },
+  "required": [
+    "full"
+  ]
 }
 ```
