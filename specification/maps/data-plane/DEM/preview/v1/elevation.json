@@ -3,7 +3,7 @@
   "info": {
     "title": "Azure Maps Elevation API",
     "version": "1.0",
-    "description": "The Azure Maps Elevation API provides an HTTP interface to query elevation data on the  surface of the Earth. Elevation data can be retrieved at specific locations by sending  lat/lon coodinates, by defining an ordered set of vertices that form a polyline and a  number of sample points along the length of a polyline, or by defining a bounding box  that consists of equally spaced vertices as rows and columns. The vertical datum is EPSG:3855.  This datum uses the EGM2008 geoid model applied to the WGS84 ellipsoid as its zero height  reference surface. The vertical unit is measured in meters, the spatial resolution of the  elevation data is 0.8 arc-second for global coverage (~24 meters)."
+    "description": "The Azure Maps Elevation API provides an HTTP interface to query elevation data on the  surface of the Earth. Elevation data can be retrieved at specific locations by sending  lat/lon coodinates, by defining an ordered set of vertices that form a Polyline and a  number of sample points along the length of a Polyline, or by defining a bounding box  that consists of equally spaced vertices as rows and columns. The vertical datum is EPSG:3855.  This datum uses the EGM2008 geoid model applied to the WGS84 ellipsoid as its zero height  reference surface. The vertical unit is measured in meters, the spatial resolution of the  elevation data is 0.8 arc-second for global coverage (~24 meters)."
   },
   "host": "atlas.microsoft.com",
   "schemes": [
@@ -108,7 +108,7 @@
     "/elevation/point": {
       "get": {
         "x-publish": true,
-        "description": "**Applies to**: S1 pricing tier.\n\nThe Get Data for Lat/Lon Coordinates API provides elevation data for one or more points.  A point is defined in lat/long coordinate format.  ",
+        "description": "**Applies to**: S1 pricing tier.\n\nThe Get Data for Points API provides elevation data for one or more points.  A point is defined in lat/long coordinate format.  ",
         "operationId": "Elevation_GetDataForPoints",
         "x-ms-examples": {
           "GetDataForPoints": {
@@ -230,7 +230,7 @@
     "/elevation/lattice": {
       "get": {
         "x-publish": true,
-        "description": "**Applies to**: S1 pricing tier.\n\nThe Get Data for Bounding Box API provides elevation data at equally-spaced locations within a bounding box.  A bounding box is defined by the coordinates for two corners (southwest, northeast) and then subsequently  divided into rows and columns. Elevations are returned for the vertices of the grid created by the rows and  columns. Up to 2000 elevations can be returned in a single request.",
+        "description": "**Applies to**: S1 pricing tier.\n\nThe Get Data for Bounding Box API provides elevation data at equally-spaced locations within a bounding box.  A bounding box is defined by the coordinates for two corners (southwest, northeast) and then subsequently  divided into rows and columns. Elevations are returned for the vertices of the grid created by the rows and  columns. Up to 2000 elevations can be returned in a single request. The returned elevation values are ordered,  starting at the southwest corner, and then proceeding west to east along the row. At the end of the row,  it moves north to the next row, and repeats the process until it reaches the far northeast corner.",
         "operationId": "Elevation_GetDataForBoundingBox",
         "x-ms-examples": {
           "GetDataForBoundingBox": {
@@ -397,7 +397,7 @@
     },
     "PointsResult": {
       "type": "object",
-      "description": "The response from a successful Get Data for Lat/Lon Coordinates request.",
+      "description": "The response from a successful Get Data for Points request.",
       "properties": {
         "data": {
           "$ref": "#/definitions/ElevationPointResponse"
