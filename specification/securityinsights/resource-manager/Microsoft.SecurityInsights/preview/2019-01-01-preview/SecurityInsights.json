@@ -3331,7 +3331,7 @@
         "tags": [
           "Watchlists"
         ],
-        "description": "Gets all watchlists.",
+        "description": "Gets all watchlists, without watchlist items.",
         "operationId": "Watchlists_List",
         "parameters": [
           {
@@ -3369,51 +3369,6 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/{operationalInsightsResourceProvider}/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/watchlists": {
-      "get": {
-        "x-ms-examples": {
-          "Get all watchlists.": {
-            "$ref": "./examples/watchlists/GetWatchlists.json"
-          }
-        },
-        "tags": [
-          "Watchlists"
-        ],
-        "description": "Gets all watchlists in a subscription.",
-        "operationId": "Watchlists_ListBySubscription",
-        "parameters": [
-          {
-            "$ref": "#/parameters/ApiVersion"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionId"
-          },
-          {
-            "$ref": "#/parameters/OperationalInsightsResourceProvider"
-          },
-          {
-            "$ref": "#/parameters/WorkspaceName"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/WatchlistList"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{operationalInsightsResourceProvider}/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/watchlists/{watchlistAlias}": {
       "get": {
         "x-ms-examples": {
@@ -3424,7 +3379,7 @@
         "tags": [
           "Watchlists"
         ],
-        "description": "Gets a watchlist.",
+        "description": "Gets a watchlist, without its watchlist items.",
         "operationId": "Watchlists_Get",
         "parameters": [
           {
@@ -3516,7 +3471,7 @@
         "tags": [
           "Watchlists"
         ],
-        "description": "Creates a watchlist",
+        "description": "Creates a watchlist and its watchlist items (bulk creation, e.g. through csv file content). A watchlist can have one or more watchlist items, and a watchlist item does not exist without a watchlist.",
         "operationId": "Watchlists_Create",
         "parameters": [
           {
@@ -8639,22 +8594,16 @@
     "WatchlistProperties": {
       "description": "Describes watchlist properties",
       "properties": {
-        "createdTimeUtc": {
-          "description": "The time the watchlist was created",
-          "format": "date-time",
+        "watchlistId": {
+          "description": "The id (a Guid) of the watchlist",
           "type": "string"
-        },
-        "createdBy": {
-          "$ref": "#/definitions/UserInfo",
-          "description": "Describes a user that created the watchlist",
-          "type": "object"
         },
         "displayName": {
           "description": "The display name of the watchlist",
           "type": "string"
         },
-        "watchlistType": {
-          "description": "The type of the watchlist",
+        "provider": {
+          "description": "The provider of the watchlist",
           "type": "string"
         },
         "source": {
@@ -8669,82 +8618,16 @@
             "name": "source"
           }
         },
-        "provider": {
-          "description": "The provider of the watchlist",
+        "created": {
+          "description": "The time the watchlist was created",
+          "format": "date-time",
           "type": "string"
         },
-        "description": {
-          "description": "A description of the watchlist",
-          "type": "string"
-        },
-        "tenantId": {
-          "description": "The tenantId where the watchlist belongs to.",
-          "type": "string"
-        },
-        "workspaceId": {
-          "description": "The workspaceId where the watchlist belongs to.",
-          "type": "string"
-        },
-        "labels": {
-          "description": "List of labels relevant to this watchlist",
-          "items": {
-            "$ref": "#/definitions/Label"
-          },
-          "type": "array"
-        },
-        "notes": {
-          "description": "The notes of the watchlist",
-          "type": "string"
-        },
-        "lastUpdatedTimeUtc": {
+        "updated": {
           "description": "The last time the watchlist was updated",
           "format": "date-time",
           "type": "string"
         },
-        "updatedBy": {
-          "$ref": "#/definitions/UserInfo",
-          "description": "Describes a user that updated the watchlist",
-          "type": "object"
-        },
-        "defaultDuration": {
-          "description": "The default duration of a watchlist (in ISO 8601 duration format)",
-          "format": "duration",
-          "type": "string"
-        },
-        "watchlistItems": {
-          "description": "List of watchlist items.",
-          "items": {
-            "$ref": "#/definitions/WatchlistItem"
-          },
-          "type": "array"
-        }
-      },
-      "required": [
-        "displayName",
-        "source",
-        "provider"
-      ],
-      "type": "object"
-    },
-    "WatchlistItem": {
-      "allOf": [
-        {
-          "$ref": "#/definitions/Resource"
-        }
-      ],
-      "description": "Represents a Watchlist Item in Azure Security Insights.",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/WatchlistItemProperties",
-          "description": "Watchlist item properties",
-          "x-ms-client-flatten": true
-        }
-      },
-      "type": "object"
-    },
-    "WatchlistItemProperties": {
-      "description": "Describes watchlist item properties",
-      "properties": {
         "createdBy": {
           "$ref": "#/definitions/UserInfo",
           "description": "Describes a user that created the watchlist",
@@ -8755,49 +8638,55 @@
           "description": "Describes a user that updated the watchlist",
           "type": "object"
         },
-        "watchlistItemName": {
-          "description": "Name of the watchlist item",
+        "description": {
+          "description": "A description of the watchlist",
           "type": "string"
         },
-        "watchlistItemPair": {
-          "description": "A key-value pair for a watchlist item",
-          "type": "object"
+        "watchlistType": {
+          "description": "The type of the watchlist",
+          "type": "string"
         },
-        "entityMapping": {
-          "description": "A key-value pair for a watchlist item entity mapping",
-          "type": "object"
+        "watchlistAlias": {
+          "description": "The alias of the watchlist",
+          "type": "string"
+        },
+        "isDeleted": {
+          "description": "A flag that indicates if the watchlist is deleted or not",
+          "type": "boolean"
+        },
+        "labels": {
+          "description": "List of labels relevant to this watchlist",
+          "items": {
+            "$ref": "#/definitions/Label"
+          },
+          "type": "array"
+        },
+        "defaultDuration": {
+          "description": "The default duration of a watchlist (in ISO 8601 duration format)",
+          "format": "duration",
+          "type": "string"
         },
         "tenantId": {
-          "description": "The tenantId to which this watchlist item belongs to",
+          "description": "The tenantId where the watchlist belongs to",
           "type": "string"
         },
-        "createdTimeUtc": {
-          "description": "The time the watchlist item was created",
-          "format": "date-time",
+        "numberOfLinesToSkip": {
+          "description": "The number of lines in a csv/tsv content to skip before the header",
           "type": "string"
         },
-        "lastUpdatedTimeUtc": {
-          "description": "The last time the watchlist item was updated",
-          "format": "date-time",
+        "rawContent": {
+          "description": "The raw content that represents to watchlist items to create. In case of csv/tsv content type, it's the content of the file that will parsed by the endpoint",
           "type": "string"
         },
-        "timeToLiveUtc": {
-          "description": "The time to live for the watchlist item",
-          "format": "date-time",
-          "type": "string"
-        },
-        "watchlistItemType": {
-          "description": "The type of the watchlist item",
-          "type": "string"
-        },
-        "watchlistId": {
-          "description": "The watchlist id of the parent of this watchlist item",
+        "contentType": {
+          "description": "The content type of the raw content. Example : text/csv or text/tsv ",
           "type": "string"
         }
       },
       "required": [
-        "watchlistId",
-        "watchlistItemPair"
+        "displayName",
+        "source",
+        "provider"
       ],
       "type": "object"
     }
