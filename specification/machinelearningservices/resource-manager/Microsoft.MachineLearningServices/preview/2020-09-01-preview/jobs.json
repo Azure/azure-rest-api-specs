@@ -79,7 +79,13 @@
             }
           },
           "200": {
-            "description": "Success",
+            "description": "The resource was updated successfully.",
+            "schema": {
+              "$ref": "#/definitions/LabelingJobResource"
+            }
+          },
+          "201": {
+            "description": "The resource was created successfully.",
             "schema": {
               "$ref": "#/definitions/LabelingJobResource"
             }
@@ -178,15 +184,6 @@
           },
           "200": {
             "description": "OK. The resource was deleted successfully."
-          },
-          "202": {
-            "description": "Accepted. The request was well-formed and received properly.",
-            "headers": {
-              "Azure-AsyncOperation": {
-                "description": "URI to poll for asynchronous operation status.",
-                "type": "string"
-              }
-            }
           },
           "204": {
             "description": "The resource does not exist and the request was well formed."
@@ -728,11 +725,6 @@
           "type": "string",
           "readOnly": true
         },
-        "id": {
-          "description": "Name and identifier for a job.",
-          "type": "string",
-          "readOnly": true
-        },
         "properties": {
           "description": "The job property dictionary. Properties can be added, but not removed or altered.",
           "type": "object",
@@ -785,7 +777,7 @@
       },
       "allOf": [
         {
-          "$ref": "machineLearningServices.json#/definitions/Resource"
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ProxyResource"
         }
       ]
     },
@@ -798,10 +790,6 @@
           "items": {
             "$ref": "#/definitions/LabelingJobResource"
           },
-          "readOnly": true
-        },
-        "continuationToken": {
-          "type": "string",
           "readOnly": true
         },
         "nextLink": {
