@@ -2300,25 +2300,6 @@
         }
       }
     },
-    "AzureWorkloadPointInTimeRecoveryPoint": {
-      "description": "Recovery point specific to PointInTime",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/AzureWorkloadRecoveryPoint"
-        }
-      ],
-      "properties": {
-        "timeRanges": {
-          "description": "List of log ranges",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/PointInTimeRange"
-          }
-        }
-      },
-      "x-ms-discriminator-value": "AzureWorkloadPointInTimeRecoveryPoint"
-    },
     "AzureWorkloadPointInTimeRestoreRequest": {
       "description": "AzureWorkload SAP Hana -specific restore. Specifically for PointInTime/Log restore",
       "type": "object",
@@ -2335,39 +2316,6 @@
         }
       },
       "x-ms-discriminator-value": "AzureWorkloadPointInTimeRestoreRequest"
-    },
-    "AzureWorkloadRecoveryPoint": {
-      "description": "Workload specific recovery point, specifically encapsulates full/diff recovery point",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/RecoveryPoint"
-        }
-      ],
-      "properties": {
-        "recoveryPointTimeInUTC": {
-          "format": "date-time",
-          "description": "UTC time at which recovery point was created",
-          "type": "string",
-          "readOnly": true
-        },
-        "type": {
-          "description": "Type of restore point",
-          "enum": [
-            "Invalid",
-            "Full",
-            "Log",
-            "Differential"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "RestorePointType",
-            "modelAsString": true
-          },
-          "readOnly": true
-        }
-      },
-      "x-ms-discriminator-value": "AzureWorkloadRecoveryPoint"
     },
     "AzureWorkloadRestoreRequest": {
       "description": "AzureWorkload-specific restore.",
@@ -2424,16 +2372,6 @@
       },
       "x-ms-discriminator-value": "AzureWorkloadRestoreRequest"
     },
-    "AzureWorkloadSAPHanaPointInTimeRecoveryPoint": {
-      "description": "Recovery point specific to PointInTime in SAPHana",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/AzureWorkloadPointInTimeRecoveryPoint"
-        }
-      ],
-      "x-ms-discriminator-value": "AzureWorkloadSAPHanaPointInTimeRecoveryPoint"
-    },
     "AzureWorkloadSAPHanaPointInTimeRestoreRequest": {
       "description": "AzureWorkload SAP Hana -specific restore. Specifically for PointInTime/Log restore",
       "type": "object",
@@ -2451,16 +2389,6 @@
       },
       "x-ms-discriminator-value": "AzureWorkloadSAPHanaPointInTimeRestoreRequest"
     },
-    "AzureWorkloadSAPHanaRecoveryPoint": {
-      "description": "SAPHana specific recoverypoint, specifically encapsulates full/diff recoverypoints",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/AzureWorkloadRecoveryPoint"
-        }
-      ],
-      "x-ms-discriminator-value": "AzureWorkloadSAPHanaRecoveryPoint"
-    },
     "AzureWorkloadSAPHanaRestoreRequest": {
       "description": "AzureWorkload SAP Hana-specific restore.",
       "type": "object",
@@ -2470,25 +2398,6 @@
         }
       ],
       "x-ms-discriminator-value": "AzureWorkloadSAPHanaRestoreRequest"
-    },
-    "AzureWorkloadSQLPointInTimeRecoveryPoint": {
-      "description": "Recovery point specific to PointInTime",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/AzureWorkloadSQLRecoveryPoint"
-        }
-      ],
-      "properties": {
-        "timeRanges": {
-          "description": "List of log ranges",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/PointInTimeRange"
-          }
-        }
-      },
-      "x-ms-discriminator-value": "AzureWorkloadSQLPointInTimeRecoveryPoint"
     },
     "AzureWorkloadSQLPointInTimeRestoreRequest": {
       "description": "AzureWorkload SQL -specific restore. Specifically for PointInTime/Log restore",
@@ -2506,22 +2415,6 @@
         }
       },
       "x-ms-discriminator-value": "AzureWorkloadSQLPointInTimeRestoreRequest"
-    },
-    "AzureWorkloadSQLRecoveryPoint": {
-      "description": "SQL specific recoverypoint, specifically encapsulates full/diff recoverypoint along with extended info",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/AzureWorkloadRecoveryPoint"
-        }
-      ],
-      "properties": {
-        "extendedInfo": {
-          "$ref": "#/definitions/AzureWorkloadSQLRecoveryPointExtendedInfo",
-          "description": "Extended Info that provides data directory details. Will be populated in two cases:\r\nWhen a specific recovery point is accessed using GetRecoveryPoint\r\nOr when ListRecoveryPoints is called for Log RP only with ExtendedInfo query filter"
-        }
-      },
-      "x-ms-discriminator-value": "AzureWorkloadSQLRecoveryPoint"
     },
     "AzureWorkloadSQLRecoveryPointExtendedInfo": {
       "description": "Extended info class details",
@@ -2592,7 +2485,9 @@
           "enum": [
             "Invalid",
             "GeoRedundant",
-            "LocallyRedundant"
+            "LocallyRedundant",
+            "ZoneRedundant",
+            "ReadAccessGeoZoneRedundant"
           ],
           "type": "string",
           "x-ms-enum": {
@@ -2695,7 +2590,8 @@
             "Log",
             "Differential",
             "FullAndDifferential",
-            "All"
+            "All",
+            "Incremental"
           ],
           "type": "string",
           "x-ms-enum": {
@@ -4772,7 +4668,8 @@
             "Full",
             "Differential",
             "Log",
-            "CopyOnlyFull"
+            "CopyOnlyFull",
+            "Incremental"
           ],
           "type": "string",
           "x-ms-enum": {

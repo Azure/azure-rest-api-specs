@@ -608,72 +608,6 @@
         }
       }
     },
-    "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupFabrics/{fabricName}/protectionContainers/{containerName}/protectedItems/{protectedItemName}/backup": {
-      "post": {
-        "tags": [
-          "Backups"
-        ],
-        "description": "Triggers backup for specified backed up item. This is an asynchronous operation. To know the status of the\r\noperation, call GetProtectedItemOperationResult API.",
-        "operationId": "Backups_Trigger",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "$ref": "#/parameters/ApiVersion"
-          },
-          {
-            "$ref": "#/parameters/VaultName"
-          },
-          {
-            "$ref": "#/parameters/ResourceGroupName"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionId"
-          },
-          {
-            "name": "fabricName",
-            "in": "path",
-            "description": "Fabric name associated with the backup item.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "containerName",
-            "in": "path",
-            "description": "Container name associated with the backup item.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "protectedItemName",
-            "in": "path",
-            "description": "Backup item for which backup needs to be triggered.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "parameters",
-            "in": "body",
-            "description": "resource backup request",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/BackupRequestResource"
-            }
-          }
-        ],
-        "responses": {
-          "202": {
-            "description": "Accepted"
-          }
-        },
-        "x-ms-examples": {
-          "Trigger Backup": {
-            "$ref": "./examples/Common/TriggerBackup_Post.json"
-          }
-        }
-      }
-    },
     "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupFabrics/{fabricName}/protectionContainers/{containerName}/protectedItems/{protectedItemName}/operationsStatus/{operationId}": {
       "get": {
         "tags": [
@@ -1024,52 +958,6 @@
         }
       }
     },
-    "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupPolicies/{policyName}": {
-      "delete": {
-        "tags": [
-          "ProtectionPolicies"
-        ],
-        "description": "Deletes specified backup policy from your Recovery Services Vault. This is an asynchronous operation. Status of the\r\noperation can be fetched using GetPolicyOperationResult API.",
-        "operationId": "ProtectionPolicies_Delete",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "$ref": "#/parameters/ApiVersion"
-          },
-          {
-            "$ref": "#/parameters/VaultName"
-          },
-          {
-            "$ref": "#/parameters/ResourceGroupName"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionId"
-          },
-          {
-            "name": "policyName",
-            "in": "path",
-            "description": "Backup policy to be deleted.",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "204": {
-            "description": "NoContent"
-          }
-        },
-        "x-ms-examples": {
-          "Delete Azure Vm Protection Policy": {
-            "$ref": "./examples/AzureIaasVm/ProtectionPolicies_Delete.json"
-          }
-        }
-      }
-    },
     "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupPolicies/{policyName}/operations/{operationId}": {
       "get": {
         "tags": [
@@ -1268,131 +1156,7 @@
           }
         }
       }
-    },
-    "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupstorageconfig/vaultstorageconfig": {
-      "get": {
-        "tags": [
-          "BackupResourceStorageConfigs"
-        ],
-        "description": "Fetches resource storage config.",
-        "operationId": "BackupResourceStorageConfigs_Get",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "$ref": "#/parameters/ApiVersion"
-          },
-          {
-            "$ref": "#/parameters/VaultName"
-          },
-          {
-            "$ref": "#/parameters/ResourceGroupName"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionId"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/BackupResourceConfigResource"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Get Vault Storage Configuration": {
-            "$ref": "./examples/Common/BackupStorageConfig_Get.json"
-          }
-        }
-      },
-      "put": {
-        "tags": [
-          "BackupResourceStorageConfigs"
-        ],
-        "description": "Updates vault storage model type.",
-        "operationId": "BackupResourceStorageConfigs_Update",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "$ref": "#/parameters/ApiVersion"
-          },
-          {
-            "$ref": "#/parameters/VaultName"
-          },
-          {
-            "$ref": "#/parameters/ResourceGroupName"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionId"
-          },
-          {
-            "name": "parameters",
-            "in": "body",
-            "description": "Vault storage config request",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/BackupResourceConfigResource"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/BackupResourceConfigResource"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Update Vault Storage Configuration": {
-            "$ref": "./examples/Common/BackupStorageConfig_Put.json"
-          }
-        }
-      },
-      "patch": {
-        "tags": [
-          "BackupResourceStorageConfigs"
-        ],
-        "description": "Updates vault storage model type.",
-        "operationId": "BackupResourceStorageConfigs_Patch",
-        "parameters": [
-          {
-            "$ref": "#/parameters/ApiVersion"
-          },
-          {
-            "$ref": "#/parameters/VaultName"
-          },
-          {
-            "$ref": "#/parameters/ResourceGroupName"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionId"
-          },
-          {
-            "name": "parameters",
-            "in": "body",
-            "description": "Vault storage config request",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/BackupResourceConfigResource"
-            }
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "NoContent"
-          }
-        },
-        "x-ms-examples": {
-          "Update Vault Storage Configuration": {
-            "$ref": "./examples/Common/BackupStorageConfig_Patch.json"
-          }
-        }
-      }
+    
     }
   },
   "definitions": {
@@ -1814,42 +1578,6 @@
       },
       "x-ms-discriminator-value": "SQLInstance"
     },
-    "AzureWorkloadBackupRequest": {
-      "description": "AzureWorkload workload-specific backup request.",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/BackupRequest"
-        }
-      ],
-      "properties": {
-        "backupType": {
-          "description": "Type of backup, viz. Full, Differential, Log or CopyOnlyFull",
-          "enum": [
-            "Invalid",
-            "Full",
-            "Differential",
-            "Log",
-            "CopyOnlyFull"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "backupType",
-            "modelAsString": true
-          }
-        },
-        "enableCompression": {
-          "description": "Bool for Compression setting",
-          "type": "boolean"
-        },
-        "recoveryPointExpiryTimeInUTC": {
-          "format": "date-time",
-          "description": "Backup copy will expire after the time specified (UTC).",
-          "type": "string"
-        }
-      },
-      "x-ms-discriminator-value": "AzureWorkloadBackupRequest"
-    },
     "AzureWorkloadContainer": {
       "description": "Container for the workloads running inside Azure Compute or Classic Compute.",
       "type": "object",
@@ -1937,6 +1665,9 @@
     "BackupEngineBase": {
       "description": "The base backup engine class. All workload specific backup engines derive from this class.",
       "type": "object",
+      "required": [
+        "backupEngineType"
+      ],
       "properties": {
         "friendlyName": {
           "description": "Friendly name of the backup engine.",
@@ -2119,65 +1850,6 @@
         "properties": {
           "$ref": "#/definitions/BackupRequest",
           "description": "BackupRequestResource properties"
-        }
-      }
-    },
-    "BackupResourceConfig": {
-      "description": "The resource storage details.",
-      "type": "object",
-      "properties": {
-        "storageModelType": {
-          "description": "Storage type",
-          "enum": [
-            "Invalid",
-            "GeoRedundant",
-            "LocallyRedundant"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "StorageType",
-            "modelAsString": true
-          }
-        },
-        "storageType": {
-          "description": "Storage type.",
-          "enum": [
-            "Invalid",
-            "GeoRedundant",
-            "LocallyRedundant"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "StorageType",
-            "modelAsString": true
-          }
-        },
-        "storageTypeState": {
-          "description": "Locked or Unlocked. Once a machine is registered against a resource, the storageTypeState is always Locked.",
-          "enum": [
-            "Invalid",
-            "Locked",
-            "Unlocked"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "StorageTypeState",
-            "modelAsString": true
-          }
-        }
-      }
-    },
-    "BackupResourceConfigResource": {
-      "description": "The resource storage details.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/Resource"
-        }
-      ],
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/BackupResourceConfig",
-          "description": "BackupResourceConfigResource properties"
         }
       }
     },
@@ -3162,6 +2834,9 @@
     },
     "ProtectableContainer": {
       "description": "Protectable Container Class.",
+      "required": [
+        "protectableContainerType"
+      ],
       "type": "object",
       "properties": {
         "friendlyName": {
@@ -3258,6 +2933,9 @@
     },
     "ProtectionContainer": {
       "description": "Base class for container with backup items. Containers with specific workloads are derived from this class.",
+      "required": [
+        "containerType"
+      ],
       "type": "object",
       "properties": {
         "friendlyName": {
@@ -3479,6 +3157,9 @@
     },
     "WorkloadItem": {
       "description": "Base class for backup item. Workload-specific backup items are derived from this class.",
+      "required": [
+        "workloadItemType"
+      ],
       "type": "object",
       "properties": {
         "backupManagementType": {
@@ -3549,6 +3230,9 @@
     },
     "WorkloadProtectableItem": {
       "description": "Base class for backup item. Workload-specific backup items are derived from this class.",
+      "required": [
+        "protectableItemType"
+      ],
       "type": "object",
       "properties": {
         "backupManagementType": {
