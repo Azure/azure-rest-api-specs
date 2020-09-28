@@ -17,7 +17,7 @@ If any further question about AME onboarding or validation tools, please view th
 - [ ] If you are blocked on ARM review and want to get the PR merged with urgency, please get the ARM oncall for reviews (*RP Manifest Approvers* team under <ins>Azure Resource Manager service</ins>) from IcM and reach out to them. 
 
 ### Breaking Change Review Checklist 
-If there are following updates in the PR, ensure to request an approval from API Review Board as defined in the [Breaking Change Policy](http://aka.ms/bcforapi). 
+If there are following updates in the PR, ensure to request an approval from API Review Board as defined in the [Breaking Change Policy](http://aka.ms/AzBreakingChangesPolicy). 
 
 - [ ] Removing API(s) in stable version
 - [ ] Removing properties in stable version
