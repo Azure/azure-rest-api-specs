@@ -27,7 +27,7 @@ These are the global settings for the ResourceGraph API.
 ``` yaml
 title: ResourceGraphClient
 openapi-type: arm
-tag: package-preview-2020-04
+tag: package-preview-2020-09
 ```
 
 ### Validations
