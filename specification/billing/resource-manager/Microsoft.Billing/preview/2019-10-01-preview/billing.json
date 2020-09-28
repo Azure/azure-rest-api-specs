@@ -1989,7 +1989,7 @@
         "tags": [
           "BillingSubscriptions"
         ],
-        "operationId": "BillingSubscriptions_ListByBillingAccount",
+        "operationId": "BillingSubscriptions_ListByEnrollmentAccount",
         "description": "Lists the subscriptions for a billing account. The operation is supported for billing accounts with agreement type Enterprise Agreement.",
         "externalDocs": {
           "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
@@ -2035,7 +2035,7 @@
         "tags": [
           "BillingSubscriptions"
         ],
-        "operationId": "BillingSubscriptions_ListByBillingAccount",
+        "operationId": "BillingSubscriptions_ListByDepartments",
         "description": "Lists the subscriptions for a billing account. The operation is supported for billing accounts with agreement type Enterprise Agreement.",
         "externalDocs": {
           "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
@@ -2077,12 +2077,11 @@
       }
     },
     "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingSubscriptions/{billingSubscriptionName}": {
-      "patch": {
+      "put": {
         "tags": [
           "BillingSubscriptions"
         ],
         "operationId": "BillingSubscriptions_Update",
-        "x-ms-long-running-operation": true,
         "description": "Updates subscriptions. Currently, only cost center can be updated. The operation is supported only for billing accounts with agreement type Enterprise Agreement.",
         "x-ms-examples": {
           "UpdateBillingSubscriptions": {
@@ -7806,8 +7805,7 @@
         },
         "costCenter": {
           "description": "The cost center of the subscription. This field is available only for the Enterprise Agreement Type.",
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         },
         "lastMonthCharges": {
           "description": "The last month charges. This field is not available for the Enterprise Agreement Type.",
