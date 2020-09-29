@@ -37,6 +37,14 @@ input-file:
 - Microsoft.Datadog/preview/2020-02-01-preview/datadog.json
 ```
 
+## Suppression
+``` yaml
+directive:
+  - suppress: OperationsApiResponseSchema
+    from: datadog.json
+    reason: Property isDataAction is not included in get operation reponse body
+```
+
 # Code Generation
 
 ## Swagger to SDK
