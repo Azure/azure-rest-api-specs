@@ -37,14 +37,6 @@ input-file:
 - Microsoft.Datadog/preview/2020-02-01-preview/datadog.json
 ```
 
-## Suppression
-``` yaml
-directive:
-  - suppress: OperationsApiResponseSchema
-    from: datadog.json
-    reason: Property isDataAction is not included in get operation reponse body
-```
-
 # Code Generation
 
 ## Swagger to SDK
@@ -63,6 +55,7 @@ swagger-to-sdk:
   - repo: azure-sdk-for-ruby
     after_scripts:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_datadog']
+  - repo: azure-cli-extensions
   - repo: azure-resource-manager-schemas
     after_scripts:
       - node sdkauto_afterscript.js datadog/resource-manager
