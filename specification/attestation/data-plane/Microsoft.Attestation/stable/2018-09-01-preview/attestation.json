@@ -323,7 +323,7 @@
           {
             "name": "policyCertificateToAdd",
             "in": "body",
-            "description": "An RFC7519 JSON Web Token containing a claim named \"maa-policyCertificate\" whose value is an RFC7517 JSON Web Key which specifies a new key to add. The RFC7519 JWT must be signed with one of the existing signing certificates",
+            "description": "An RFC7519 JSON Web Token containing a claim named \"aas-policyCertificate\" whose value is an RFC7517 JSON Web Key which specifies a new key to add. The RFC7519 JWT must be signed with one of the existing signing certificates",
             "required": true,
             "schema": {
               "type": "string"
@@ -375,7 +375,7 @@
           {
             "name": "policyCertificateToRemove",
             "in": "body",
-            "description": "An RFC7519 JSON Web Token containing a claim named \"maa-policyCertificate\" whose value is an RFC7517 JSON Web Key which specifies a new key to update. The RFC7519 JWT must be signed with one of the existing signing certificates",
+            "description": "An RFC7519 JSON Web Token containing a claim named \"aas-policyCertificate\" whose value is an RFC7517 JSON Web Key which specifies a new key to update. The RFC7519 JWT must be signed with one of the existing signing certificates",
             "required": true,
             "schema": {
               "type": "string"
@@ -420,8 +420,8 @@
         "tags": [
           "Attestation Provider"
         ],
-        "summary": "Retrieves the attestation signing keys in use by the attestation service",
-        "description": "Retrieves metadata signing certificates in use by the attestation service",
+        "summary": "Retrieves the OpenID Configuration data for the Azure Attestation Service",
+        "description": "Retrieves attestation signing keys in use by the attestation service",
         "operationId": "SigningCertificates_Get",
         "responses": {
           "200": {
@@ -456,7 +456,7 @@
           "Attestation Provider"
         ],
         "summary": "Retrieves the OpenID Configuration data for the Azure Attestation Service",
-        "description": "Retrieves metadata about the attestation signing keys in use by the attestation service",
+        "description": "Retrieves metadata about the attestation signing keys in use by the  attestation service",
         "operationId": "MetadataConfiguration_Get",
         "responses": {
           "200": {
@@ -513,17 +513,8 @@
     "AttestationPolicy": {
       "type": "object",
       "properties": {
-        "Policy": {
-          "description": "JSON Web Token whose body is an AttestationPolicyRequest definition.",
-          "type": "string"
-        }
-      }
-    },
-    "AttestationPolicyRequest": {
-      "type": "object",
-      "properties": {
-        "AttestationPolicy": {
-          "description": "Base64Url encoded policy text to set.",
+        "policy": {
+          "description": "String-encoded attestation policy document.",
           "type": "string"
         }
       }
@@ -578,4 +569,3 @@
     }
   }
 }
-

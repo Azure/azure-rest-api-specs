@@ -7,13 +7,13 @@
   },
   "host": "management.azure.com",
   "schemes": [
-    "https" 
+    "https"
   ],
   "consumes": [
-    "application/json" 
+    "application/json"
   ],
   "produces": [
-    "application/json" 
+    "application/json"
   ],
   "securityDefinitions": {
     "azure_auth": {
@@ -107,7 +107,7 @@
       },
       "put": {
         "tags": [
-          "AttestationProviders" 
+          "AttestationProviders"
         ],
         "operationId": "AttestationProviders_Create",
         "description": "Creates or updates the Attestation Provider.",
@@ -128,7 +128,7 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "Name of the attestation service instance."
+            "description": "Name of the attestation service"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -167,7 +167,7 @@
       },
       "patch": {
         "tags": [
-          "AttestationProviders" 
+          "AttestationProviders"
         ],
         "operationId": "AttestationProviders_Update",
         "description": "Updates the Attestation Provider.",
@@ -188,7 +188,7 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "Name of the attestation service instance."
+            "description": "Name of the attestation service"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -270,7 +270,7 @@
     "/subscriptions/{subscriptionId}/providers/Microsoft.Attestation/attestationProviders": {
       "get": {
         "tags": [
-          "AttestationProviders" 
+          "AttestationProviders"
         ],
         "operationId": "AttestationProviders_List",
         "description": "Returns a list of attestation providers in a subscription.",
@@ -505,7 +505,7 @@
           "enum": [
             "Ready",
             "NotReady",
-            "Error" 
+            "Error"
           ],
           "x-ms-enum": {
             "name": "AttestationServiceStatus",
@@ -570,7 +570,7 @@
       "description": "Parameters for creating an attestation service instance",
       "required": [
         "location",
-        "properties" 
+        "properties"
       ],
       "x-ms-azure-resource": true,
       "properties": {
@@ -613,9 +613,8 @@
       "type": "string",
       "description": "Client API version.",
       "enum": [
-        "2018-09-01-preview" 
+        "2018-09-01-preview"
       ]
     }
   }
 }
-
