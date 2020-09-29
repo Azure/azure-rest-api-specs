@@ -516,7 +516,6 @@
         "description": "Processes attestation evidence from a VBS enclave, producing an attestation result. The attestation result produced is dependent upon the attestation policy.",
         "operationId": "AttestVbsEnclave",
         "consumes": ["application/json"],
-        "security": [{ "azure_auth": ["read"] }],
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -542,6 +541,12 @@
             "description": "Bad request",
             "schema": {
               "$ref": "#/definitions/CloudError"
+            }
+          },
+          "401": {
+            "description": "Request is unauthorized",
+            "schema": {
+              "type": "string"
             }
           },
           "429": {
