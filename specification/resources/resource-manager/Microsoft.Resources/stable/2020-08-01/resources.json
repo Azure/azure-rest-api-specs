@@ -2225,6 +2225,51 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/providers/{resourceProviderNamespace}/resourceTypes": {
+      "get": {
+        "tags": [
+          "Providers"
+        ],
+        "operationId": "ProviderResourceTypes_List",
+        "description": "List the resource types for a specified resource provider.",
+        "parameters": [
+          {
+            "name": "$expand",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "The $expand query parameter. For example, to include property aliases in response, use $expand=resourceTypes/aliases."
+          },
+          {
+            "name": "resourceProviderNamespace",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The namespace of the resource provider."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - Returns resource types information for the resource provider.",
+            "schema": {
+              "$ref": "#/definitions/ProviderResourceTypeListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
     "/providers/{resourceProviderNamespace}": {
       "get": {
         "tags": [
@@ -4796,6 +4841,26 @@
       },
       "description": "The alias type. "
     },
+    "ProviderExtendedLocation": {
+      "properties": {
+        "location": {
+          "type": "string",
+          "description": "The azure location."
+        },
+        "type": {
+          "type": "string",
+          "description": "The extended location type."
+        },
+        "extendedLocations": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "The extended locations for the azure location."
+        }
+      },
+      "description": "The provider extended location. "
+    },
     "ProviderResourceType": {
       "properties": {
         "resourceType": {
@@ -4808,6 +4873,13 @@
             "type": "string"
           },
           "description": "The collection of locations where this resource type can be created."
+        },
+        "locationMappings": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ProviderExtendedLocation"
+          },
+          "description": "The location mappings that are supported by this resource type."
         },
         "aliases": {
           "type": "array",
@@ -5195,6 +5267,23 @@
         }
       },
       "description": "List of resource providers."
+    },
+    "ProviderResourceTypeListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ProviderResourceType"
+          },
+          "description": "An array of resource types."
+        },
+        "nextLink": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The URL to use for getting the next set of results."
+        }
+      },
+      "description": "List of resource types of a resource provider."
     },
     "GenericResource": {
       "properties": {
