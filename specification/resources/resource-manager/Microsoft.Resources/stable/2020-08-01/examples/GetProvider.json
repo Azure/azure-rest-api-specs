@@ -1,0 +1,51 @@
+{
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceProviderNamespace": "Microsoft.TestRP1",
+    "api-version": "2020-08-01"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.TestRP1",
+        "namespace": "Microsoft.TestRP1",
+        "registrationState": "Registering",
+        "registrationPolicy": "RegistrationRequired",
+        "resourceTypes": [
+          {
+            "resourceType": "TestResourceType",
+            "locations": [
+              "West US"
+            ],
+            "apiVersions": [
+              "2018-01-01",
+              "2015-05-01"
+            ],
+            "locationMappings": [
+              {
+                "location": "West US",
+                "type": "EdgeZone",
+                "extendedLocations": [
+                  "LosAngeles",
+                  "LosAngeles2"
+                ]
+              }
+            ],
+            "capabilities": "CrossResourceGroupResourceMove, CrossSubscriptionResourceMove, SupportsTags, SupportsLocation"
+          },
+          {
+            "resourceType": "TestResourceTypeSibling",
+            "locations": [
+              "West US"
+            ],
+            "apiVersions": [
+              "2018-01-01",
+              "2015-05-01"
+            ],
+            "capabilities": "CrossResourceGroupResourceMove, CrossSubscriptionResourceMove, SupportsTags, SupportsLocation"
+          }
+        ]
+      }
+    }
+  }
+} 
