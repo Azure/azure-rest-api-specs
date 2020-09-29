@@ -35,7 +35,16 @@ These settings apply only when `--tag=package-2018-09-preview` is specified on t
 
 ``` yaml $(tag) == 'package-2018-09-preview'
 input-file:
-- Microsoft.Attestation/preview/2018-09-01-preview/attestation.json
+- Microsoft.Attestation/stable/2018-09-01-preview/attestation.json
+```
+
+### Tag: package-2020-10-01
+
+These settings apply only when `--tag=package-2020-10-01` is specified on the command line.
+
+``` yaml $(tag) == 'package-2020-10-01'
+input-file:
+- Microsoft.Attestation/stable/2020-10-01/attestation.json
 ```
 
 ---
