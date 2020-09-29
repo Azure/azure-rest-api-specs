@@ -826,7 +826,7 @@
         "description": "The Enqueue operation adds a new message to the back of the message queue. A visibility timeout can also be specified to make the message invisible until the visibility timeout expires. A message must be in a format that can be included in an XML request with UTF-8 encoding. The encoded message can be up to 64 KB in size for versions 2011-08-18 and newer, or 8 KB in size for previous versions.",
         "parameters": [
           {
-            "$ref": "#/parameters/QueueMessage"
+            "$ref": "#/parameters/RequiredQueueMessage"
           },
           {
             "$ref": "#/parameters/VisibilityTimeout"
@@ -1797,6 +1797,16 @@
       "x-ms-parameter-location": "method"
     },
     "QueueMessage": {
+      "name": "QueueMessage",
+      "in": "body",
+      "required": false,
+      "schema": {
+        "$ref": "#/definitions/QueueMessage"
+      },
+      "x-ms-parameter-location": "method",
+      "description": "A Message object which can be stored in a Queue"
+    },
+    "RequiredQueueMessage": {
       "name": "QueueMessage",
       "in": "body",
       "required": true,

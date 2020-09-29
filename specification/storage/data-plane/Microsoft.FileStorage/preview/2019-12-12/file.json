@@ -4568,6 +4568,19 @@
                 }
             }
         },
+        "SmbMultichannel": {
+            "description": "Settings for SMB multichannel",
+            "type": "object",
+            "properties": {
+                "Enabled": {
+                    "type": "boolean",
+                    "description": "If SMB multichannel is enabled."
+                }
+            },
+            "xml": {
+                "name": "Multichannel"
+            }
+        },
         "Range": {
             "description": "An Azure Storage file range.",
             "type": "object",
@@ -4589,6 +4602,19 @@
             },
             "xml": {
                 "name": "Range"
+            }
+        },
+        "ProtocolSettings": {
+            "description": "Protocol settings",
+            "type": "object",
+            "properties": {
+                "SmbSettings": {
+                    "description": "Settings for SMB protocol.",
+                    "$ref": "#/definitions/SmbSettings",
+                    "xml": {
+                        "name": "SMB"
+                    }
+                }
             }
         },
         "RangeList": {
@@ -4756,6 +4782,16 @@
                 "name": "SignedIdentifiers"
             }
         },
+        "SmbSettings": {
+            "description": "Settings for SMB protocol.",
+            "type": "object",
+            "properties": {
+                "Multichannel": {
+                    "description": "Settings for SMB Multichannel.",
+                    "$ref": "#/definitions/SmbMultichannel"
+                }
+            }
+        },
         "StorageServiceProperties": {
             "description": "Storage service properties.",
             "type": "object",
@@ -4777,6 +4813,10 @@
                     "xml": {
                         "wrapped": true
                     }
+                },
+                "ProtocolSettings": {
+                    "description": "Protocol settings",
+                    "$ref":"#/definitions/ProtocolSettings"
                 }
             }
         },
