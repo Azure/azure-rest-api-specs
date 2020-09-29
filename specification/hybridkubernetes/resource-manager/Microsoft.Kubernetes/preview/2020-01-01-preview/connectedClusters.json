@@ -630,8 +630,7 @@
           "type": "string",
           "description": "The mode of client authentication.",
           "enum": [
-            "Token",
-            "ClientCertificate"
+            "Token"
           ],
           "x-ms-enum": {
             "name": "AuthenticationMethod",
@@ -644,28 +643,8 @@
             "token": {
               "type": "string",
               "description": "Authentication token."
-            },
-            "clientCertificate": {
-              "$ref": "#/definitions/AuthenticationCertificateDetails"
             }
           }
-        }
-      }
-    },
-    "AuthenticationCertificateDetails": {
-      "type": "object",
-      "required": [
-        "certificateData",
-        "keyData"
-      ],
-      "properties": {
-        "certificateData": {
-          "type": "string",
-          "description": "Base64 encoded client certificate data."
-        },
-        "keyData": {
-          "type": "string",
-          "description": "Base64 encoded key data."
         }
       }
     },

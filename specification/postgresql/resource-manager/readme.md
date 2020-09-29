@@ -30,6 +30,16 @@ description: The Microsoft Azure management API provides create, read, update, a
 openapi-type: arm
 tag: package-2020-01-01
 ```
+### Tag: package-2020-02-14-preview
+
+These settings apply only when `--tag=package-2020-02-14-preview` is specified on the command line.
+
+
+``` yaml $(tag) == 'package-2020-02-14-preview'
+input-file:
+- Microsoft.DBforPostgreSQL/preview/2020-02-14-preview/postgresql.json
+```
+
 
 ### Tag: package-2020-02-14-privatepreview
 
@@ -154,7 +164,7 @@ csharp:
   azure-arm: true
   license-header: MICROSOFT_MIT_NO_VERSION
   namespace: Microsoft.Azure.Management.PostgreSQL
-  output-folder: $(csharp-sdks-folder)/postgresql/Microsoft.Azure.Management.PostgreSQL/src/Generated
+  output-folder: $(csharp-sdks-folder)/postgresql/Microsoft.Azure.Management.PostgreSQL/src/postgresql/Generated
   clear-output-folder: true
 ```
 
@@ -186,6 +196,7 @@ require: $(this-folder)/../../../profiles/readme.md
 
 # all the input files across all versions
 input-file:
+  - $(this-folder)/Microsoft.DBforPostgreSQL/preview/2020-02-14-preview/postgresql.json
   - $(this-folder)/Microsoft.DBforPostgreSQL/preview/2020-02-14-privatepreview/postgresql.json
   - $(this-folder)/Microsoft.DBforPostgreSQL/preview/2020-01-01-privatepreview/DataEncryptionKeys.json
   - $(this-folder)/Microsoft.DBforPostgreSQL/stable/2017-12-01/postgresql.json

@@ -5779,14 +5779,253 @@
           "description": "The maximum number of items in a single batch that can fail indexing for the batch to still be considered successful. -1 means no limit. Default is 0."
         },
         "configuration": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "object"
-          },
-          "description": "A dictionary of indexer-specific configuration properties. Each name is the name of a specific property. Each value must be of a primitive type."
+          "$ref": "#/definitions/IndexingParametersConfiguration"
         }
       },
-      "description": "Represents parameters for indexer execution."
+      "description": "Represents parameters for indexer execution.",
+      "externalDocs": {
+        "url": "https://docs.microsoft.com/rest/api/searchservice/create-indexer#parameters"
+      }
+    },
+    "IndexingParametersConfiguration": {
+      "type": "object",
+      "properties": {
+        "parsingMode": {
+          "$ref": "#/definitions/ParsingMode"
+        },
+        "excludedFileNameExtensions": {
+          "type": "string",
+          "default": "",
+          "description": "Comma-delimited list of filename extensions to ignore when processing from Azure blob storage.  For example, you could exclude \".png, .mp4\" to skip over those files during indexing."
+        },
+        "indexedFileNameExtensions": {
+          "type": "string",
+          "default": "",
+          "description": "Comma-delimited list of filename extensions to select when processing from Azure blob storage.  For example, you could focus indexing on specific application files \".docx, .pptx, .msg\" to specifically include those file types."
+        },
+        "failOnUnsupportedContentType": {
+          "type": "boolean",
+          "default": false,
+          "description": "For Azure blobs, set to false if you want to continue indexing when an unsupported content type is encountered, and you don't know all the content types (file extensions) in advance."
+        },
+        "failOnUnprocessableDocument": {
+          "type": "boolean",
+          "default": false,
+          "description": "For Azure blobs, set to false if you want to continue indexing if a document fails indexing."
+        },
+        "indexStorageMetadataOnlyForOversizedDocuments": {
+          "type": "boolean",
+          "default": false,
+          "description": "For Azure blobs, set this property to true to still index storage metadata for blob content that is too large to process. Oversized blobs are treated as errors by default. For limits on blob size, see https://docs.microsoft.com/azure/search/search-limits-quotas-capacity."
+        },
+        "delimitedTextHeaders": {
+          "type": "string",
+          "description": "For CSV blobs, specifies a comma-delimited list of column headers, useful for mapping source fields to destination fields in an index."
+        },
+        "delimitedTextDelimiter": {
+          "type": "string",
+          "description": "For CSV blobs, specifies the end-of-line single-character delimiter for CSV files where each line starts a new document (for example, \"|\")."
+        },
+        "firstLineContainsHeaders": {
+          "type": "boolean",
+          "default": true,
+          "description": "For CSV blobs, indicates that the first (non-blank) line of each blob contains headers."
+        },
+        "documentRoot": {
+          "type": "string",
+          "description": "For JSON arrays, given a structured or semi-structured document, you can specify a path to the array using this property."
+        },
+        "dataToExtract": {
+          "$ref": "#/definitions/DataToExtract"
+        },
+        "imageAction": {
+          "$ref": "#/definitions/ImageAction"
+        },
+        "allowSkillsetToReadFileData": {
+          "type": "boolean",
+          "default": false,
+          "description": "If true, will create a path //document//file_data that is an object representing the original file data downloaded from your blob data source.  This allows you to pass the original file data to a custom skill for processing within the enrichment pipeline, or to the Document Extraction skill."
+        },
+        "pdfTextRotationAlgorithm": {
+          "$ref": "#/definitions/PdfTextRotationAlgorithm"
+        },
+        "executionEnvironment": {
+          "$ref": "#/definitions/ExecutionEnvironment"
+        },
+        "queryTimeout": {
+          "type": "string",
+          "default": "00:05:00",
+          "description": "Increases the timeout beyond the 5-minute default for Azure SQL database data sources, specified in the format \"hh:mm:ss\"."
+        }
+      },
+      "additionalProperties": {
+        "type": "object"
+      },
+      "description": "A dictionary of indexer-specific configuration properties. Each name is the name of a specific property. Each value must be of a primitive type.",
+      "externalDocs": {
+        "url": "https://docs.microsoft.com/rest/api/searchservice/create-indexer#parameters"
+      }
+    },
+    "ParsingMode": {
+      "type": "string",
+      "enum": [
+        "default",
+        "text",
+        "delimitedText",
+        "json",
+        "jsonArray",
+        "jsonLines"
+      ],
+      "x-ms-enum": {
+        "name": "BlobIndexerParsingMode",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "default",
+            "name": "Default",
+            "description": "Set to default for normal file processing."
+          },
+          {
+            "value": "text",
+            "name": "Text",
+            "description": "Set to text to improve indexing performance on plain text files in blob storage."
+          },
+          {
+            "value": "delimitedText",
+            "name": "DelimitedText",
+            "description": "Set to delimitedText when blobs are plain CSV files."
+          },
+          {
+            "value": "json",
+            "name": "Json",
+            "description": "Set to json to extract structured content from JSON files."
+          },
+          {
+            "value": "jsonArray",
+            "name": "JsonArray",
+            "description": "Set to jsonArray to extract individual elements of a JSON array as separate documents in Azure Cognitive Search."
+          },
+          {
+            "value": "jsonLines",
+            "name": "JsonLines",
+            "description": "Set to jsonLines to extract individual JSON entities, separated by a new line, as separate documents in Azure Cognitive Search."
+          }
+        ]
+      },
+      "default": "default",
+      "description": "Represents the parsing mode for indexing from an Azure blob data source."
+    },
+    "DataToExtract": {
+      "type": "string",
+      "enum": [
+        "storageMetadata",
+        "allMetadata",
+        "contentAndMetadata"
+      ],
+      "x-ms-enum": {
+        "name": "BlobIndexerDataToExtract",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "storageMetadata",
+            "name": "StorageMetadata",
+            "description": "Indexes just the standard blob properties and user-specified metadata."
+          },
+          {
+            "value": "allMetadata",
+            "name": "AllMetadata",
+            "description": "Extracts metadata provided by the Azure blob storage subsystem and the content-type specific metadata (for example, metadata unique to just .png files are indexed)."
+          },
+          {
+            "value": "contentAndMetadata",
+            "name": "ContentAndMetadata",
+            "description": "Extracts all metadata and textual content from each blob."
+          }
+        ]
+      },
+      "default": "contentAndMetadata",
+      "description": "Specifies the data to extract from Azure blob storage and tells the indexer which data to extract from image content when \"imageAction\" is set to a value other than \"none\".  This applies to embedded image content in a .PDF or other application, or image files such as .jpg and .png, in Azure blobs."
+    },
+    "ImageAction": {
+      "type": "string",
+      "enum": [
+        "none",
+        "generateNormalizedImages",
+        "generateNormalizedImagePerPage"
+      ],
+      "x-ms-enum": {
+        "name": "BlobIndexerImageAction",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "none",
+            "name": "None",
+            "description": "Ignores embedded images or image files in the data set.  This is the default."
+          },
+          {
+            "value": "generateNormalizedImages",
+            "name": "GenerateNormalizedImages",
+            "description": "Extracts text from images (for example, the word \"STOP\" from a traffic stop sign), and embeds it into the content field.  This action requires that \"dataToExtract\" is set to \"contentAndMetadata\".  A normalized image refers to additional processing resulting in uniform image output, sized and rotated to promote consistent rendering when you include images in visual search results. This information is generated for each image when you use this option."
+          },
+          {
+            "value": "generateNormalizedImagePerPage",
+            "name": "GenerateNormalizedImagePerPage",
+            "description": "Extracts text from images (for example, the word \"STOP\" from a traffic stop sign), and embeds it into the content field, but treats PDF files differently in that each page will be rendered as an image and normalized accordingly, instead of extracting embedded images.  Non-PDF file types will be treated the same as if \"generateNormalizedImages\" was set."
+          }
+        ]
+      },
+      "default": "none",
+      "description": "Determines how to process embedded images and image files in Azure blob storage.  Setting the \"imageAction\" configuration to any value other than \"none\" requires that a skillset also be attached to that indexer."
+    },
+    "PdfTextRotationAlgorithm": {
+      "type": "string",
+      "enum": [
+        "none",
+        "detectAngles"
+      ],
+      "x-ms-enum": {
+        "name": "BlobIndexerPDFTextRotationAlgorithm",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "none",
+            "name": "None",
+            "description": "Leverages normal text extraction.  This is the default."
+          },
+          {
+            "value": "detectAngles",
+            "name": "DetectAngles",
+            "description": "May produce better and more readable text extraction from PDF files that have rotated text within them.  Note that there may be a small performance speed impact when this parameter is used.  This parameter only applies to PDF files, and only to PDFs with embedded text.  If the rotated text appears within an embedded image in the PDF, this parameter does not apply."
+          }
+        ]
+      },
+      "default": "none",
+      "description": "Determines algorithm for text extraction from PDF files in Azure blob storage."
+    },
+    "ExecutionEnvironment": {
+      "type": "string",
+      "enum": [
+        "standard",
+        "private"
+      ],
+      "x-ms-enum": {
+        "name": "IndexerExecutionEnvironment",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "standard",
+            "name": "standard",
+            "description": "Indicates that Azure Cognitive Search can determine where the indexer should execute. This is the default environment when nothing is specified and is the recommended value."
+          },
+          {
+            "value": "private",
+            "name": "private",
+            "description": "Indicates that the indexer should run with the environment provisioned specifically for the search service. This should only be specified as the execution environment if the indexer needs to access resources securely over shared private link resources."
+          }
+        ]
+      },
+      "default": "standard",
+      "description": "Specifies the environment in which the indexer should execute."
     },
     "FieldMappingFunction": {
       "properties": {

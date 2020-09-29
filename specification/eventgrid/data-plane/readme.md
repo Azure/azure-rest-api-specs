@@ -59,6 +59,7 @@ input-file:
 - Microsoft.MachineLearningServices/stable/2018-01-01/MachineLearningServices.json
 - Microsoft.Cache/stable/2018-01-01/RedisCache.json
 - Microsoft.Web/stable/2018-01-01/Web.json
+- Microsoft.Communication/stable/2018-01-01/AzureCommunicationServices.json
 ```
 
 ### Suppression
@@ -150,6 +151,7 @@ input-file:
   - $(this-folder)/Microsoft.MachineLearningServices/stable/2018-01-01/MachineLearningServices.json
   - $(this-folder)/Microsoft.Cache/stable/2018-01-01/RedisCache.json
   - $(this-folder)/Microsoft.Web/stable/2018-01-01/Web.json
+  - $(this-folder)/Microsoft.Communication/stable/2018-01-01/AzureCommunicationServices.json
 
 ```
 
