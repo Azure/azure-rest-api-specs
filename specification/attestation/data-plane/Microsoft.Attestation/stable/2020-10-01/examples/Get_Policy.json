@@ -1,13 +1,14 @@
 {
   "parameters": {
     "tenantBaseUrl": "'https://mytest.attest.azure.net'",
-    "api-version": "2018-09-01-preview",
-    "tee": "SgxEnclave",
-    "newAttestationPolicy": "newAttestationPolicyname"
+    "api-version": "2020-10-01",
+    "tee": "SgxEnclave"
   },
   "responses": {
     "200": {
-      "description": "Success"
+      "body": {
+        "policy": "testpolicy"
+      }
     },
     "400": {
       "body": {
