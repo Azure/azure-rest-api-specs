@@ -3107,6 +3107,10 @@
         "details": {
           "$ref": "#/definitions/StorageSyncErrorDetails",
           "description": "Error details of the given entry."
+        },
+        "innerError": {
+          "$ref": "#/definitions/StorageSyncInnerErrorDetails",
+          "description": "Inner error details of the given entry."
         }
       }
     },
@@ -3125,6 +3129,48 @@
         "target": {
           "type": "string",
           "description": "Target of the given entry."
+        },
+        "requestUri": {
+          "type": "string",
+          "description": "Request URI of the given entry."
+        },
+        "exceptionType": {
+          "type": "string",
+          "description": "Exception type of the given entry."
+        },
+        "httpMethod": {
+          "type": "string",
+          "description": "HTTP method of the given entry."
+        },
+        "hashedMessage": {
+          "type": "string",
+          "description": "Hashed message of the given entry."
+        },
+        "httpErrorCode": {
+          "type": "string",
+          "description": "HTTP error code of the given entry."
+        }
+      }
+    },
+    "StorageSyncInnerErrorDetails": {
+      "type": "object",
+      "description": "Error Details object.",
+      "properties": {
+        "callStack": {
+          "type": "string",
+          "description": "Call stack of the error."
+        },
+        "message": {
+          "type": "string",
+          "description": "Error message of the error."
+        },
+        "innerException": {
+          "type": "string",
+          "description": "Exception of the inner error."
+        },
+        "innerExceptionCallStack": {
+          "type": "string",
+          "description": "Call stack of the inner error."
         }
       }
     },
@@ -3578,6 +3624,10 @@
         "origin": {
           "type": "string",
           "description": "The origin."
+        },
+        "properties": {
+          "$ref": "#/definitions/OperationProperties",
+          "description": "Properties of the operations resource."
         }
       }
     },
@@ -3622,6 +3672,84 @@
         "description": {
           "type": "string",
           "description": "Operation Display Resource Description."
+        }
+      }
+    },
+    "OperationProperties": {
+      "type": "object",
+      "description": "Properties of the operations resource.",
+      "properties": {
+        "serviceSpecification": {
+          "$ref": "#/definitions/OperationResourceServiceSpecification",
+          "description": "Service specification for the operations resource."
+        }
+      }
+    },
+    "OperationResourceServiceSpecification": {
+      "type": "object",
+      "description": "Service specification.",
+      "properties": {
+        "metricSpecifications": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/OperationResourceMetricSpecification"
+          },
+          "description": "List of metric specifications."
+        }
+      }
+    },
+    "OperationResourceMetricSpecification": {
+      "type": "object",
+      "description": "Operation Display Resource object.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the metric."
+        },
+        "displayName": {
+          "type": "string",
+          "description": "Display name for the metric."
+        },
+        "displayDescription": {
+          "type": "string",
+          "description": "Display description for the metric."
+        },
+        "unit": {
+          "type": "string",
+          "description": "Unit for the metric."
+        },
+        "aggregationType": {
+          "type": "string",
+          "description": "Aggregation type for the metric."
+        },
+        "fillGapWithZero": {
+          "type": "boolean",
+          "description": "Fill gaps in the metric with zero."
+        },
+        "dimensions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/OperationResourceMetricSpecificationDimension"
+          },
+          "description": "Dimensions for the metric specification."
+        }
+      }
+    },
+    "OperationResourceMetricSpecificationDimension": {
+      "type": "object",
+      "description": "OperationResourceMetricSpecificationDimension object.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the dimension."
+        },
+        "displayName": {
+          "type": "string",
+          "description": "Display name of the dimentions."
+        },
+        "toBeExportedForShoebox": {
+          "type": "boolean",
+          "description": "Indicates metric should be exported for Shoebox."
         }
       }
     },
@@ -3969,24 +4097,47 @@
       "properties": {
         "lastStepName": {
           "type": "string",
-          "description": "last step name"
+          "description": "last step name",
+          "readOnly": true
         },
         "status": {
           "$ref": "#/definitions/WorkflowStatus",
-          "description": "workflow status."
+          "description": "workflow status.",
+          "readOnly": true
         },
         "operation": {
           "$ref": "#/definitions/OperationDirection",
-          "description": "operation direction."
+          "description": "operation direction.",
+          "readOnly": true
         },
         "steps": {
           "type": "string",
-          "description": "workflow steps"
+          "description": "workflow steps",
+          "readOnly": true
         },
         "lastOperationId": {
           "type": "string",
-          "description": "workflow last operation identifier."
+          "description": "workflow last operation identifier.",
+          "readOnly": true
+        },
+        "commandName": {
+          "type": "string",
+          "description": "workflow command name.",
+          "readOnly": true
+        },
+        "createdTimestamp": {
+          "type": "string",
+          "format": "date-time",
+          "description": "workflow created timestamp.",
+          "readOnly": true
+        },
+        "lastStatusTimestamp": {
+          "type": "string",
+          "format": "date-time",
+          "description": "workflow last status timestamp.",
+          "readOnly": true
         }
+
       }
     },
     "SyncGroupProperties": {
@@ -4017,61 +4168,85 @@
           "type": "string",
           "description": "Registered Server Agent Version"
         },
+        "agentVersionStatus": {
+          "$ref": "#/definitions/RegisteredServerAgentVersionStatus",
+          "description": "Registered Server Agent Version Status",
+          "readOnly": true
+        },
+        "agentVersionExpirationDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Registered Server Agent Version Expiration Date",
+          "readOnly": true
+        },
         "serverOSVersion": {
           "type": "string",
           "description": "Registered Server OS Version"
         },
         "serverManagementErrorCode": {
           "type": "integer",
-          "description": "Registered Server Management Error Code"
+          "description": "Registered Server Management Error Code",
+          "readOnly": true
         },
         "lastHeartBeat": {
           "type": "string",
+          "format": "date-time",
           "description": "Registered Server last heart beat"
         },
         "provisioningState": {
           "type": "string",
-          "description": "Registered Server Provisioning State"
+          "description": "Registered Server Provisioning State",
+          "readOnly": true
         },
         "serverRole": {
           "type": "string",
-          "description": "Registered Server serverRole"
+          "description": "Registered Server serverRole",
+          "readOnly": true
         },
         "clusterId": {
           "type": "string",
-          "description": "Registered Server clusterId"
+          "description": "Registered Server clusterId",
+          "readOnly": true
         },
         "clusterName": {
           "type": "string",
-          "description": "Registered Server clusterName"
+          "description": "Registered Server clusterName",
+          "readOnly": true
         },
         "serverId": {
           "type": "string",
-          "description": "Registered Server serverId"
+          "description": "Registered Server serverId",
+          "readOnly": true
         },
         "storageSyncServiceUid": {
           "type": "string",
-          "description": "Registered Server storageSyncServiceUid"
+          "description": "Registered Server storageSyncServiceUid",
+          "readOnly": true
         },
         "lastWorkflowId": {
           "type": "string",
-          "description": "Registered Server lastWorkflowId"
+          "description": "Registered Server lastWorkflowId",
+          "readOnly": true
         },
         "lastOperationName": {
           "type": "string",
-          "description": "Resource Last Operation Name"
+          "description": "Resource Last Operation Name",
+          "readOnly": true
         },
         "discoveryEndpointUri": {
           "type": "string",
-          "description": "Resource discoveryEndpointUri"
+          "description": "Resource discoveryEndpointUri",
+          "readOnly": true
         },
         "resourceLocation": {
           "type": "string",
-          "description": "Resource Location"
+          "description": "Resource Location",
+          "readOnly": true
         },
         "serviceLocation": {
           "type": "string",
-          "description": "Service Location"
+          "description": "Service Location",
+          "readOnly": true
         },
         "friendlyName": {
           "type": "string",
@@ -4079,15 +4254,18 @@
         },
         "managementEndpointUri": {
           "type": "string",
-          "description": "Management Endpoint Uri"
+          "description": "Management Endpoint Uri",
+          "readOnly": true
         },
         "monitoringEndpointUri": {
           "type": "string",
-          "description": "Telemetry Endpoint Uri"
+          "description": "Telemetry Endpoint Uri",
+          "readOnly": true
         },
         "monitoringConfiguration": {
           "type": "string",
-          "description": "Monitoring Configuration"
+          "description": "Monitoring Configuration",
+          "readOnly": true
         }
       }
     },
@@ -4266,17 +4444,17 @@
       "description": "Server Endpoint sync status",
       "properties": {
         "downloadHealth": {
-          "$ref": "#/definitions/ServerEndpointSyncHealthState",
+          "$ref": "#/definitions/ServerEndpointHealthState",
           "description": "Download Health Status.",
           "readOnly": true
         },
         "uploadHealth": {
-          "$ref": "#/definitions/ServerEndpointSyncHealthState",
+          "$ref": "#/definitions/ServerEndpointHealthState",
           "description": "Upload Health Status.",
           "readOnly": true
         },
         "combinedHealth": {
-          "$ref": "#/definitions/ServerEndpointSyncHealthState",
+          "$ref": "#/definitions/ServerEndpointHealthState",
           "description": "Combined Health Status.",
           "readOnly": true
         },
@@ -4321,6 +4499,11 @@
         "offlineDataTransferStatus": {
           "$ref": "#/definitions/ServerEndpointOfflineDataTransferState",
           "description": "Offline Data Transfer State",
+          "readOnly": true
+        },
+        "backgroundDataDownloadActivity": {
+          "$ref": "#/definitions/ServerEndpointBackgroundDataDownloadActivity",
+          "description": "Background data download activity",
           "readOnly": true
         }
       }
@@ -4375,6 +4558,11 @@
           },
           "description": "Array of per-item errors coming from the last sync session.",
           "readOnly": true
+        },
+        "lastSyncMode": {
+          "$ref": "#/definitions/ServerEndpointSyncMode",
+          "description": "Sync mode",
+          "readOnly": true
         }
       }
     },
@@ -4422,6 +4610,11 @@
           "minimum": 0,
           "description": "Total bytes (if available)",
           "readOnly": true
+        },
+        "syncMode": {
+          "$ref": "#/definitions/ServerEndpointSyncMode",
+          "description": "Sync mode",
+          "readOnly": true
         }
       }
     },
@@ -4447,6 +4640,33 @@
           "format": "int64",
           "minimum": 0,
           "description": "Count of transient files not syncing with the specified error code",
+          "readOnly": true
+        }
+      }
+    },
+    "ServerEndpointBackgroundDataDownloadActivity": {
+      "type": "object",
+      "description": "Background data download activity object",
+      "properties": {
+        "timestamp": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Timestamp when properties were updated",
+          "readOnly": true
+        },
+        "percentProgress": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0,
+          "maximum": 100,
+          "description": "Progress percentage",
+          "readOnly": true
+        },
+        "downloadedBytes": {
+          "type": "integer",
+          "format": "int64",
+          "minimum": 0,
+          "description": "Running count of bytes downloaded",
           "readOnly": true
         }
       }
@@ -4512,18 +4732,16 @@
         "modelAsString": true
       }
     },
-    "ServerEndpointSyncHealthState": {
+    "ServerEndpointHealthState": {
       "type": "string",
-      "description": "Type of the sync health state",
+      "description": "Type of the server endpoint health state",
       "enum": [
+        "Unavailable",
         "Healthy",
-        "Error",
-        "SyncBlockedForRestore",
-        "SyncBlockedForChangeDetectionPostRestore",
-        "NoActivity"
+        "Error"
       ],
       "x-ms-enum": {
-        "name": "ServerEndpointSyncHealthState",
+        "name": "ServerEndpointHealthState",
         "modelAsString": true
       }
     },
@@ -4641,7 +4859,7 @@
           "readOnly": true
         },
         "health": {
-          "$ref": "#/definitions/ServerEndpointCloudTieringHealthState",
+          "$ref": "#/definitions/ServerEndpointHealthState",
           "description": "Cloud tiering health state.",
           "readOnly": true
         },
@@ -4688,18 +4906,6 @@
           "description": "Status of the date policy",
           "readOnly": true
         }
-      }
-    },
-    "ServerEndpointCloudTieringHealthState": {
-      "type": "string",
-      "description": "Type of the cloud tiering health state",
-      "enum": [
-        "Healthy",
-        "Error"
-      ],
-      "x-ms-enum": {
-        "name": "ServerEndpointCloudTieringHealthState",
-        "modelAsString": true
       }
     },
     "CloudTieringSpaceSavings": {
@@ -4921,6 +5127,20 @@
           "readOnly": true
         }
       }
+    },
+    "RegisteredServerAgentVersionStatus":{
+      "type": "string",
+        "description": "Type of the registered server agent version status",
+        "enum": [
+          "Ok",
+          "NearExpiry",
+          "Expired",
+          "Blocked"
+        ],
+        "x-ms-enum": {
+          "name": "RegisteredServerAgentVersionStatus",
+          "modelAsString": true
+        }
     }
   },
   "parameters": {
