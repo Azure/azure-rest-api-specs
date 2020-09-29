@@ -1,0 +1,61 @@
+{
+  "parameters": {
+    "api-version": "2020-02-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "myResourceGroup",
+    "monitorName": "myMonitor"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "vm1",
+            "aliases": [
+              "vm1",
+              "65f2dd83-95ae-4f56-b6aa-a5dafc05f4cd"
+            ],
+            "apps": [
+              "ntp",
+              "agent"
+            ],
+            "meta": {
+              "agentVersion": "7.19.2",
+              "installMethod": {
+                "tool": "install_script",
+                "toolVersion": "install_script",
+                "installVersion": "install_script-1.0.0"
+              },
+              "logsAgent": {
+                "transport": ""
+              }
+            }
+          },
+          {
+            "name": "vm2",
+            "aliases": [
+              "vm2",
+              "df631d9a-8178-4580-bf60-c697a5e8df4d"
+            ],
+            "apps": [
+              "infra",
+              "agent"
+            ],
+            "meta": {
+              "agentVersion": "7.18.1",
+              "installMethod": {
+                "tool": "install_script",
+                "toolVersion": "install_script",
+                "installVersion": "install_script-1.0.0"
+              },
+              "logsAgent": {
+                "transport": "HTTP"
+              }
+            }
+          }
+        ],
+        "nextLink": null
+      }
+    }
+  }
+}

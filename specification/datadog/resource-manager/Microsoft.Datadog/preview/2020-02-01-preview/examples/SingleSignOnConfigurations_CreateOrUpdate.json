@@ -1,0 +1,42 @@
+{
+  "parameters": {
+    "api-version": "2020-02-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "myResourceGroup",
+    "monitorName": "myMonitor",
+    "configurationName": "default",
+    "requestBody": {
+      "properties": {
+        "singleSignOnState": "Enable",
+        "metadataXML": "<xml>some long string......</xml>",
+        "enterpriseAppId": "00000000-0000-0000-0000-000000000000"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "default",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.Datadog/monitors/myMonitor/singleSignOnConfigurations/default",
+        "properties": {
+          "singleSignOnState": "Enable",
+          "metadataXML": null,
+          "enterpriseAppId": "00000000-0000-0000-0000-000000000000",
+          "singleSignOnUrl": null
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "default",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.Datadog/monitors/myMonitor/singleSignOnConfigurations/default",
+        "properties": {
+          "singleSignOnState": "Enable",
+          "metadataXML": null,
+          "enterpriseAppId": "00000000-0000-0000-0000-000000000000",
+          "singleSignOnUrl": null
+        }
+      }
+    }
+  }
+}
