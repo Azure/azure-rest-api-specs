@@ -36,7 +36,7 @@ These settings apply only when `--tag=package-2018-09-preview` is specified on t
 
 ``` yaml $(tag) == 'package-2018-09-preview'
 input-file:
-- Microsoft.Attestation/stable/2018-09-01-preview/attestation.json
+- Microsoft.Attestation/preview/2018-09-01-preview/attestation.json
 ```
 
 ---
@@ -89,7 +89,7 @@ require: $(this-folder)/../../../profiles/readme.md
 
 # all the input files across all versions
 input-file:
-  - $(this-folder)/Microsoft.Attestation/stable/2018-09-01-preview/attestation.json
+  - $(this-folder)/Microsoft.Attestation/preview/2018-09-01-preview/attestation.json
 
 ```
 
