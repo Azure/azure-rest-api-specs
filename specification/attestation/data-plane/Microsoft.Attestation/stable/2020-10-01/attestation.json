@@ -417,7 +417,9 @@
     },
     "/attest/OpenEnclave": {
       "post": {
-        "tags": ["attestation"],
+        "tags": [
+          "attestation"
+        ],
         "summary": "Attest to an SGX enclave.",
         "description": "Processes an OpenEnclave report , producing an artifact. The type of artifact produced is dependent upon attestation policy.",
         "operationId": "AttestOpenEnclave",
@@ -464,7 +466,9 @@
     },
     "/attest/SgxEnclave": {
       "post": {
-        "tags": ["attestation"],
+        "tags": [
+          "attestation"
+        ],
         "summary": "Attest to an SGX enclave.",
         "description": "Processes an SGX enclave quote, producing an artifact. The type of artifact produced is dependent upon attestation policy.",
         "operationId": "AttestSgxEnclave",
@@ -511,11 +515,15 @@
     },
     "/attest/VbsEnclave": {
       "post": {
-        "tags": ["attestation"],
+        "tags": [
+          "attestation"
+        ],
         "summary": "Attest a Virtualization-based Security (VBS) enclave.",
         "description": "Processes attestation evidence from a VBS enclave, producing an attestation result. The attestation result produced is dependent upon the attestation policy.",
         "operationId": "AttestVbsEnclave",
-        "consumes": ["application/json"],
+        "consumes": [
+          "application/json"
+        ],
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -564,51 +572,53 @@
       }
     },
     "/attest/SevSnpVm": {
-        "post": {
-            "tags": ["attestation"],
-            "summary": "Attest to an SEV SNP Virtual Machine.",
-            "description": "Processes a SEV SNP Boot chain. The type of artifact produced is dependent upon attestation policy.",
-            "operationId": "AttestSevSnpVm",
-            "parameters": [
-                {
-                    "$ref": "#/parameters/ApiVersionParameter"
-                },
-                {
-                    "name": "request",
-                    "in": "body",
-                    "description": "Request object containing the quote",
-                    "required": true,
-                    "schema": {
-                        "$ref": "#/definitions/AttestSevSnpVmRequest"
-                    }
-                }
-            ],
-            "responses": {
-                "200": {
-                    "description": "Success",
-                    "schema": {
-                        "type": "string"
-                    }
-                },
-                "400": {
-                    "description": "The input is not valid",
-                    "schema": {
-                        "$ref": "#/definitions/CloudError"
-                    }
-                },
-                "401": {
-                    "description": "Request is unauthorized",
-                    "schema": {
-                        "type": "string"
-                    }
-                }
-            },
-            "x-ms-examples": {
-              "Attest SevSnpVm": {
-                "$ref": "./examples/AttestSevSnpVm.json"
-              }
+      "post": {
+        "tags": [
+          "attestation"
+        ],
+        "summary": "Attest to an SEV SNP Virtual Machine.",
+        "description": "Processes a SEV SNP Boot chain. The type of artifact produced is dependent upon attestation policy.",
+        "operationId": "AttestSevSnpVm",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "request",
+            "in": "body",
+            "description": "Request object containing the quote",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AttestSevSnpVmRequest"
             }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "400": {
+            "description": "The input is not valid",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          },
+          "401": {
+            "description": "Request is unauthorized",
+            "schema": {
+              "type": "string"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Attest SevSnpVm": {
+            "$ref": "./examples/AttestSevSnpVm.json"
+          }
         }
+      }
     },
     "/certs": {
       "get": {
@@ -706,77 +716,77 @@
       "description": "An error response from Attestation."
     },
     "AttestSgxEnclaveRequest": {
-        "type": "object",
-        "description": "Attestation request for Intel SGX enclaves",
-        "properties": {
-            "quote": {
-                "description": "Quote of the enclave to be attested",
-                "type": "string"
-            },
-            "enclaveHeldData": {
-                "description": "Enclave-held data corresponding to quote",
-                "type": "string"
-            },
-            "draftPolicyForAttestation": {
-                "description": "Attest against the provided draft policy. Note that the resulting token cannot be validated.",
-                "type": "string"
-            },
-            "disableSignatureValidation": {
-                "description": "Disables validation of signature in quote response, valid for localhost clients only.",
-                "type": "boolean"
-            }
+      "type": "object",
+      "description": "Attestation request for Intel SGX enclaves",
+      "properties": {
+        "quote": {
+          "description": "Quote of the enclave to be attested",
+          "type": "string"
+        },
+        "enclaveHeldData": {
+          "description": "Enclave-held data corresponding to quote",
+          "type": "string"
+        },
+        "draftPolicyForAttestation": {
+          "description": "Attest against the provided draft policy. Note that the resulting token cannot be validated.",
+          "type": "string"
+        },
+        "disableSignatureValidation": {
+          "description": "Disables validation of signature in quote response, valid for localhost clients only.",
+          "type": "boolean"
         }
+      }
     },
     "VbsAttestationRequest": {
-        "type": "object",
-        "description": "Attestation request for Virtualization-based Security (VBS) enclaves",
-        "properties": {
-            "data": {
-                "description": "Protocol data containing artifacts for attestation.",
-                "type": "string"
-            }
+      "type": "object",
+      "description": "Attestation request for Virtualization-based Security (VBS) enclaves",
+      "properties": {
+        "data": {
+          "description": "Protocol data containing artifacts for attestation.",
+          "type": "string"
         }
+      }
     },
     "VbsAttestationResponse": {
-        "type": "object",
-        "description": "Attestation response for Virtualization-based Security (VBS) enclaves",
-        "properties": {
-            "data": {
-                "description": "Protocol data containing attestation service response.",
-                "type": "string"
-            }
+      "type": "object",
+      "description": "Attestation response for Virtualization-based Security (VBS) enclaves",
+      "properties": {
+        "data": {
+          "description": "Protocol data containing attestation service response.",
+          "type": "string"
         }
+      }
     },
     "AttestSevSnpVmRequest": {
-        "type": "object",
-        "description": "Attestation request for AMD SEV SNP Virtual Machine",
-        "properties": {
-            "reportType": {
-                "description": "Type of the report payload",
-                "type": "string",
-                "x-ms-enum": {
-                    "name": "SevSnpReportType",
-                    "modelAsString": false,
-                    "values": [
-                    {
-                        "value": "HclHyperV",
-                        "description": "SEV SNP report generated by HCL running on HyperV platform"
-                    }
-                    ]
-                },
-                "enum": [
-                         "HclHyperV"
-                        ]
-            },
-            "report": {
-                "description": "Hardware rooted report of the virtual machine being attested",
-                "type": "string"
-            },
-            "draftPolicyForAttestation": {
-                "description": "Attest against the provided draft policy. Note that the resulting token cannot be validated.",
-                "type": "string"
-            }
+      "type": "object",
+      "description": "Attestation request for AMD SEV SNP Virtual Machine",
+      "properties": {
+        "reportType": {
+          "description": "Type of the report payload",
+          "type": "string",
+          "x-ms-enum": {
+            "name": "SevSnpReportType",
+            "modelAsString": false,
+            "values": [
+              {
+                "value": "HclHyperV",
+                "description": "SEV SNP report generated by HCL running on HyperV platform"
+              }
+            ]
+          },
+          "enum": [
+            "HclHyperV"
+          ]
+        },
+        "report": {
+          "description": "Hardware rooted report of the virtual machine being attested",
+          "type": "string"
+        },
+        "draftPolicyForAttestation": {
+          "description": "Attest against the provided draft policy. Note that the resulting token cannot be validated.",
+          "type": "string"
         }
+      }
     },
     "AttestationPolicy": {
       "type": "object",
@@ -807,22 +817,22 @@
         "name": "TeeKind",
         "modelAsString": true,
         "values": [
-        {
-          "value": "SgxEnclave",
-          "description": "Intel Software Guard eXtensions"
-        },
-        {
-          "value": "OpenEnclave",
-          "description": "OpenEnclave extensions to SGX"
-        },
-        {
-          "value": "SevSnpVm",
-          "description": "AMD SEV SNP Virtual Machine"
-        },
-        {
-          "value": "VBSEnclave",
-          "description": "VBS Virtualization Based Security"
-        }
+          {
+            "value": "SgxEnclave",
+            "description": "Intel Software Guard eXtensions"
+          },
+          {
+            "value": "OpenEnclave",
+            "description": "OpenEnclave extensions to SGX"
+          },
+          {
+            "value": "SevSnpVm",
+            "description": "AMD SEV SNP Virtual Machine"
+          },
+          {
+            "value": "VBSEnclave",
+            "description": "VBS Virtualization Based Security"
+          }
         ]
       },
       "enum": [
@@ -834,4 +844,3 @@
     }
   }
 }
-
