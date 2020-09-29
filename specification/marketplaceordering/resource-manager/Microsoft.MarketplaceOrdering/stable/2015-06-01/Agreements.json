@@ -1,759 +1,730 @@
 {
-	"swagger": "2.0",
-	"info": {
-		"version": "2015-06-01",
-		"title": "Microsoft.MarketplaceOrdering.Agreements",
-		"description": "REST API for MarketplaceOrdering Agreements."
-	},
-	"host": "marketplacecommerce-preview.azure.com",
-	"schemes": [
-		"https"
-	],
-	"paths": {
-		"/subscriptions/{subscriptionId}/providers/Microsoft.MarketplaceOrdering/agreements/{publisherId}/offers/{offerId}/plans/{planId}/sign": {
-			"post": {
-				"tags": [
-					"agreement"
-				],
-				"operationId": "agreement_Sign",
-				"description": "Sign marketplace terms.",
-				"x-ms-examples": {
-					"SignMarketplaceTerms": {
-						"$ref": "./examples/SignMarketplaceTerms.json"
-					}
-				},
-				"consumes": [],
-				"produces": [
-					"application/json",
-					"text/json",
-					"application/xml",
-					"text/xml"
-				],
-				"parameters": [
-					{
-						"name": "subscriptionId",
-						"in": "path",
-						"required": true,
-						"type": "string",
-						"format": "uuid"
-					},
-					{
-						"name": "publisherId",
-						"in": "path",
-						"required": true,
-						"type": "string"
-					},
-					{
-						"name": "offerId",
-						"in": "path",
-						"required": true,
-						"type": "string"
-					},
-					{
-						"name": "planId",
-						"in": "path",
-						"required": true,
-						"type": "string"
-					},
-					{
-						"name": "api-version",
-						"in": "query",
-						"required": true,
-						"type": "string",
-						"default": "2015-06-01"
-					}
-				],
-				"responses": {
-					"200": {
-						"description": "OK",
-						"schema": {
-							"type": "object"
-						}
-					},
-					"default": {
-						"description": "Microsoft.MarketplaceOrdering error response describing why the operation failed.",
-						"schema": {
-							"$ref": "#/definitions/ErrorResponse"
-						}
-					}
-				}
-			}
-		},
-		"/subscriptions/{subscriptionId}/providers/Microsoft.MarketplaceOrdering/agreements/{publisherId}/offers/{offerId}/plans/{planId}/cancel": {
-			"post": {
-				"tags": [
-					"agreement"
-				],
-				"operationId": "agreement_Cancel",
-				"description": "Cancel marketplace terms.",
-				"x-ms-examples": {
-					"CancelMarketplaceTerms": {
-						"$ref": "./examples/CancelMarketplaceTerms.json"
-					}
-				},
-				"consumes": [],
-				"produces": [
-					"application/json",
-					"text/json",
-					"application/xml",
-					"text/xml"
-				],
-				"parameters": [
-					{
-						"name": "subscriptionId",
-						"in": "path",
-						"required": true,
-						"type": "string",
-						"format": "uuid"
-					},
-					{
-						"name": "publisherId",
-						"in": "path",
-						"required": true,
-						"type": "string"
-					},
-					{
-						"name": "offerId",
-						"in": "path",
-						"required": true,
-						"type": "string"
-					},
-					{
-						"name": "planId",
-						"in": "path",
-						"required": true,
-						"type": "string"
-					},
-					{
-						"name": "api-version",
-						"in": "query",
-						"required": true,
-						"type": "string",
-						"default": "2015-06-01"
-					}
-				],
-				"responses": {
-					"200": {
-						"description": "OK",
-						"schema": {
-							"type": "object"
-						}
-					},
-					"default": {
-						"description": "Microsoft.MarketplaceOrdering error response describing why the operation failed.",
-						"schema": {
-							"$ref": "#/definitions/ErrorResponse"
-						}
-					}
-				}
-			}
-		},
-		"/subscriptions/{subscriptionId}/providers/Microsoft.MarketplaceOrdering/agreements/{publisherId}/offers/{offerId}/plans/{planId}": {
-			"get": {
-				"tags": [
-					"agreement"
-				],
-				"operationId": "agreement_GetAgreement",
-				"description": "Get marketplace agreement.",
-				"x-ms-examples": {
-					"GetAgreementMarketplaceTerms": {
-						"$ref": "./examples/GetAgreementMarketplaceTerms.json"
-					}
-				},
-				"consumes": [],
-				"produces": [
-					"application/json",
-					"text/json",
-					"application/xml",
-					"text/xml"
-				],
-				"parameters": [
-					{
-						"name": "subscriptionId",
-						"in": "path",
-						"required": true,
-						"type": "string",
-						"format": "uuid"
-					},
-					{
-						"name": "publisherId",
-						"in": "path",
-						"required": true,
-						"type": "string"
-					},
-					{
-						"name": "offerId",
-						"in": "path",
-						"required": true,
-						"type": "string"
-					},
-					{
-						"name": "planId",
-						"in": "path",
-						"required": true,
-						"type": "string"
-					},
-					{
-						"name": "api-version",
-						"in": "query",
-						"required": true,
-						"type": "string",
-						"default": "2015-06-01"
-					}
-				],
-				"responses": {
-					"200": {
-						"description": "OK",
-						"schema": {
-							"type": "object"
-						}
-					},
-					"default": {
-						"description": "Microsoft.MarketplaceOrdering error response describing why the operation failed.",
-						"schema": {
-							"$ref": "#/definitions/ErrorResponse"
-						}
-					}
-				}
-			}
-		},
-		"/providers/Microsoft.MarketplaceOrdering/agreements/{publisherId}/offers/{offerId}/plans/{planId}": {
-			"get": {
-				"tags": [
-					"agreement"
-				],
-				"operationId": "agreement_GetAgreementTenant",
-				"description": "Get marketplace agreement.",
-				"consumes": [],
-				"produces": [
-					"application/json",
-					"text/json",
-					"application/xml",
-					"text/xml"
-				],
-				"parameters": [
-					{
-						"name": "publisherId",
-						"in": "path",
-						"required": true,
-						"type": "string"
-					},
-					{
-						"name": "offerId",
-						"in": "path",
-						"required": true,
-						"type": "string"
-					},
-					{
-						"name": "planId",
-						"in": "path",
-						"required": true,
-						"type": "string"
-					},
-					{
-						"name": "market",
-						"in": "query",
-						"required": false,
-						"type": "string"
-					},
-					{
-						"name": "api-version",
-						"in": "query",
-						"required": true,
-						"type": "string",
-						"default": "2015-06-01"
-					}
-				],
-				"responses": {
-					"200": {
-						"description": "OK",
-						"schema": {
-							"type": "object"
-						}
-					},
-					"default": {
-						"description": "Microsoft.MarketplaceOrdering error response describing why the operation failed.",
-						"schema": {
-							"$ref": "#/definitions/ErrorResponse"
-						}
-					}
-				}
-			}
-		},
-		"/providers/Microsoft.MarketplaceOrdering/agreements/{publisherId}/offers/{offerId}/plans/{planId}/sign": {
-			"post": {
-				"tags": [
-					"agreement"
-				],
-				"operationId": "agreement_SignAgreementTenant",
-				"consumes": [],
-				"produces": [
-					"application/json",
-					"text/json",
-					"application/xml",
-					"text/xml"
-				],
-				"parameters": [
-					{
-						"name": "publisherId",
-						"in": "path",
-						"required": true,
-						"type": "string"
-					},
-					{
-						"name": "offerId",
-						"in": "path",
-						"required": true,
-						"type": "string"
-					},
-					{
-						"name": "planId",
-						"in": "path",
-						"required": true,
-						"type": "string"
-					},
-					{
-						"name": "market",
-						"in": "query",
-						"required": false,
-						"type": "string"
-					},
-					{
-						"name": "api-version",
-						"in": "query",
-						"required": true,
-						"type": "string",
-						"default": "2015-06-01"
-					}
-				],
-				"responses": {
-					"200": {
-						"description": "OK",
-						"schema": {
-							"type": "object"
-						}
-					},
-					"default": {
-						"description": "Microsoft.MarketplaceOrdering error response describing why the operation failed.",
-						"schema": {
-							"$ref": "#/definitions/ErrorResponse"
-						}
-					}
-				}
-			}
-		},
-		"/providers/Microsoft.MarketplaceOrdering/agreements/{publisherId}/offers/{offerId}/plans/{planId}/cancel": {
-			"post": {
-				"tags": [
-					"agreement"
-				],
-				"operationId": "agreement_CancelAgreementTenant",
-				"consumes": [],
-				"produces": [
-					"application/json",
-					"text/json",
-					"application/xml",
-					"text/xml"
-				],
-				"parameters": [
-					{
-						"name": "publisherId",
-						"in": "path",
-						"required": true,
-						"type": "string"
-					},
-					{
-						"name": "offerId",
-						"in": "path",
-						"required": true,
-						"type": "string"
-					},
-					{
-						"name": "planId",
-						"in": "path",
-						"required": true,
-						"type": "string"
-					},
-					{
-						"name": "market",
-						"in": "query",
-						"required": false,
-						"type": "string"
-					},
-					{
-						"name": "api-version",
-						"in": "query",
-						"required": true,
-						"type": "string",
-						"default": "2015-06-01"
-					}
-				],
-				"responses": {
-					"200": {
-						"description": "OK",
-						"schema": {
-							"type": "object"
-						}
-					},
-					"default": {
-						"description": "Microsoft.MarketplaceOrdering error response describing why the operation failed.",
-						"schema": {
-							"$ref": "#/definitions/ErrorResponse"
-						}
-					}
-				}
-			}
-		},
-		"/subscriptions/{subscriptionId}/providers/Microsoft.MarketplaceOrdering/agreements": {
-			"get": {
-				"tags": [
-					"agreement"
-				],
-				"operationId": "agreement_GetAgreements",
-				"description": "List marketplace agreements in the subscription.",
-				"x-ms-examples": {
-					"ListMarketplaceTerms": {
-						"$ref": "./examples/ListMarketplaceTerms.json"
-					}
-				},
-				"consumes": [],
-				"produces": [
-					"application/json",
-					"text/json",
-					"application/xml",
-					"text/xml"
-				],
-				"parameters": [
-					{
-						"name": "subscriptionId",
-						"in": "path",
-						"required": true,
-						"type": "string",
-						"format": "uuid"
-					},
-					{
-						"name": "api-version",
-						"in": "query",
-						"required": true,
-						"type": "string",
-						"default": "2015-06-01"
-					}
-				],
-				"responses": {
-					"200": {
-						"description": "OK",
-						"schema": {
-							"type": "object"
-						}
-					},
-					"default": {
-						"description": "Microsoft.MarketplaceOrdering error response describing why the operation failed.",
-						"schema": {
-							"$ref": "#/definitions/ErrorResponse"
-						}
-					}
-				}
-			}
-		},
-		"/subscriptions/{subscriptionId}/providers/Microsoft.MarketplaceOrdering/offerTypes/{offerType}/publishers/{publisherId}/offers/{offerId}/plans/{planId}/agreements/current": {
-			"get": {
-				"tags": [
-					"OfferAgreement"
-				],
-				"operationId": "OfferAgreement_GetAgreement",
-				"x-ms-examples": {
-					"GetMarketplaceTerms": {
-						"$ref": "./examples/GetMarketplaceTerms.json"
-					}
-				},
-				"description": "Get marketplace terms.",
-				"consumes": [],
-				"produces": [
-					"application/json",
-					"text/json",
-					"application/xml",
-					"text/xml"
-				],
-				"parameters": [
-					{
-						"name": "offerType",
-						"in": "path",
-						"required": true,
-						"type": "integer",
-						"format": "int32",
-						"enum": [
-							0,
-							1,
-							3,
-							4,
-							5
-						]
-					},
-					{
-						"name": "subscriptionId",
-						"in": "path",
-						"required": true,
-						"type": "string",
-						"format": "uuid"
-					},
-					{
-						"name": "publisherId",
-						"in": "path",
-						"required": true,
-						"type": "string"
-					},
-					{
-						"name": "offerId",
-						"in": "path",
-						"required": true,
-						"type": "string"
-					},
-					{
-						"name": "planId",
-						"in": "path",
-						"required": true,
-						"type": "string"
-					},
-					{
-						"name": "api-version",
-						"in": "query",
-						"required": true,
-						"type": "string",
-						"default": "2015-06-01"
-					}
-				],
-				"responses": {
-					"200": {
-						"description": "OK",
-						"schema": {
-							"type": "object"
-						}
-					},
-					"default": {
-						"description": "Microsoft.MarketplaceOrdering error response describing why the operation failed.",
-						"schema": {
-							"$ref": "#/definitions/ErrorResponse"
-						}
-					}
-				}
-			},
-			"put": {
-				"tags": [
-					"OfferAgreement"
-				],
-				"operationId": "OfferAgreement_SetAgreement",
-				"description": "Save marketplace terms.",
-				"x-ms-examples": {
-					"SetMarketplaceTerms": {
-						"$ref": "./examples/SetMarketplaceTerms.json"
-					}
-				},
-				"consumes": [
-					"application/json",
-					"text/json",
-					"application/xml",
-					"text/xml",
-					"application/x-www-form-urlencoded"
-				],
-				"produces": [
-					"application/json",
-					"text/json",
-					"application/xml",
-					"text/xml"
-				],
-				"parameters": [
-					{
-						"name": "subscriptionId",
-						"in": "path",
-						"required": true,
-						"type": "string",
-						"format": "uuid"
-					},
-					{
-						"name": "publisherId",
-						"in": "path",
-						"required": true,
-						"type": "string"
-					},
-					{
-						"name": "offerId",
-						"in": "path",
-						"required": true,
-						"type": "string"
-					},
-					{
-						"name": "planId",
-						"in": "path",
-						"required": true,
-						"type": "string"
-					},
-					{
-						"name": "terms",
-						"in": "body",
-						"required": true,
-						"schema": {
-							"$ref": "#/definitions/AgreementDefinition"
-						}
-					},
-					{
-						"name": "offerType",
-						"in": "path",
-						"required": true,
-						"type": "string"
-					},
-					{
-						"name": "api-version",
-						"in": "query",
-						"required": true,
-						"type": "string",
-						"default": "2015-06-01"
-					}
-				],
-				"responses": {
-					"200": {
-						"description": "OK",
-						"schema": {
-							"type": "object"
-						}
-					},
-					"default": {
-						"description": "Microsoft.MarketplaceOrdering error response describing why the operation failed.",
-						"schema": {
-							"$ref": "#/definitions/ErrorResponse"
-						}
-					}
-				}
-			}
-		},
-		"/providers/Microsoft.MarketplaceOrdering/operations": {
-			"get": {
-				"tags": [
-					"operations"
-				],
-				"operationId": "operations_GetOperations",
-				"description": "Lists all of the available Microsoft.MarketplaceOrdering REST API operations.",
-				"consumes": [],
-				"produces": [
-					"application/json",
-					"text/json",
-					"application/xml",
-					"text/xml"
-				],
-				"parameters": [
-					{
-						"name": "api-version",
-						"in": "query",
-						"required": true,
-						"type": "string",
-						"default": "2015-06-01"
-					}
-				],
-				"responses": {
-					"200": {
-						"description": "OK",
-						"schema": {
-							"type": "object"
-						}
-					},
-					"default": {
-						"description": "Microsoft.MarketplaceOrdering error response describing why the operation failed.",
-						"schema": {
-							"$ref": "#/definitions/ErrorResponse"
-						}
-					}
-				},
-				"x-ms-pageable": {
-					"nextLinkName": "nextLink"
-				}
-			}
-		}
-	},
-	"definitions": {
-		"AgreementDefinition": {
-			"type": "object",
-			"properties": {
-				"Id": {
-					"type": "string"
-				},
-				"Name": {
-					"type": "string"
-				},
-				"Type": {
-					"type": "string"
-				},
-				"Properties": {
-					"$ref": "#/definitions/AgreementProperties"
-				}
-			}
-		},
-		"AgreementProperties": {
-			"type": "object",
-			"properties": {
-				"Publisher": {
-					"type": "string"
-				},
-				"Product": {
-					"type": "string"
-				},
-				"Plan": {
-					"type": "string"
-				},
-				"LicenseTextLink": {
-					"type": "string"
-				},
-				"PrivacyPolicyLink": {
-					"type": "string"
-				},
-				"RetrieveDatetime": {
-					"format": "date-time",
-					"type": "string"
-				},
-				"Signature": {
-					"type": "string"
-				},
-				"Accepted": {
-					"type": "boolean"
-				}
-			}
-		},
-		"ErrorResponse": {
-			"description": "Error response indicates Microsoft.MarketplaceOrdering service is not able to process the incoming request. The reason is provided in the error message.",
-			"type": "object",
-			"properties": {
-				"error": {
-					"description": "The details of the error.",
-					"properties": {
-						"code": {
-							"description": "Error code.",
-							"type": "string",
-							"readOnly": true
-						},
-						"message": {
-							"description": "Error message indicating why the operation failed.",
-							"type": "string",
-							"readOnly": true
-						}
-					}
-				}
-			}
-		}
-	},
-	"security": [
-		{
-			"azure_auth": [
-				"user_impersonation"
-			]
-		}
-	],
-	"securityDefinitions": {
-		"azure_auth": {
-			"type": "oauth2",
-			"description": "Azure Active Directory OAuth2 Flow.",
-			"flow": "implicit",
-			"authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
-			"scopes": {
-				"user_impersonation": "impersonate your user account"
-			}
-		}
-	}
+  "swagger": "2.0",
+  "info": {
+    "version": "2015-06-01",
+    "title": "Microsoft.MarketplaceOrdering.Agreements",
+    "description": "REST API for MarketplaceOrdering Agreements."
+  },
+  "host": "management.azure.com",
+  "schemes": ["https"],
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.MarketplaceOrdering/agreements/{publisherId}/offers/{offerId}/plans/{planId}/sign": {
+      "post": {
+        "tags": ["agreement"],
+        "operationId": "agreement_Sign",
+        "description": "Sign marketplace terms.",
+        "x-ms-examples": {
+          "SignMarketplaceTerms": {
+            "$ref": "./examples/SignMarketplaceTerms.json"
+          }
+        },
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "name": "publisherId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "offerId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "planId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "default": "2015-06-01"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object"
+            }
+          },
+          "default": {
+            "description": "Microsoft.MarketplaceOrdering error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.MarketplaceOrdering/agreements/{publisherId}/offers/{offerId}/plans/{planId}/cancel": {
+      "post": {
+        "tags": ["agreement"],
+        "operationId": "agreement_Cancel",
+        "description": "Cancel marketplace terms.",
+        "x-ms-examples": {
+          "CancelMarketplaceTerms": {
+            "$ref": "./examples/CancelMarketplaceTerms.json"
+          }
+        },
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "name": "publisherId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "offerId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "planId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "default": "2015-06-01"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object"
+            }
+          },
+          "default": {
+            "description": "Microsoft.MarketplaceOrdering error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.MarketplaceOrdering/agreements/{publisherId}/offers/{offerId}/plans/{planId}": {
+      "get": {
+        "tags": ["agreement"],
+        "operationId": "agreement_GetAgreement",
+        "description": "Get marketplace agreement.",
+        "x-ms-examples": {
+          "GetAgreementMarketplaceTerms": {
+            "$ref": "./examples/GetAgreementMarketplaceTerms.json"
+          }
+        },
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "name": "publisherId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "offerId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "planId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "default": "2015-06-01"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object"
+            }
+          },
+          "default": {
+            "description": "Microsoft.MarketplaceOrdering error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.MarketplaceOrdering/agreements/{publisherId}/offers/{offerId}/plans/{planId}": {
+      "get": {
+        "tags": ["agreement"],
+        "operationId": "agreement_GetAgreementTenant",
+        "description": "Get marketplace agreement.",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "publisherId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "offerId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "planId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "market",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "default": "2015-06-01"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object"
+            }
+          },
+          "default": {
+            "description": "Microsoft.MarketplaceOrdering error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.MarketplaceOrdering/agreements/{publisherId}/offers/{offerId}/plans/{planId}/sign": {
+      "post": {
+        "tags": ["agreement"],
+        "operationId": "agreement_SignAgreementTenant",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "publisherId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "offerId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "planId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "market",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "default": "2015-06-01"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object"
+            }
+          },
+          "default": {
+            "description": "Microsoft.MarketplaceOrdering error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.MarketplaceOrdering/agreements/{publisherId}/offers/{offerId}/plans/{planId}/cancel": {
+      "post": {
+        "tags": ["agreement"],
+        "operationId": "agreement_CancelAgreementTenant",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "publisherId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "offerId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "planId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "market",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "default": "2015-06-01"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object"
+            }
+          },
+          "default": {
+            "description": "Microsoft.MarketplaceOrdering error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.MarketplaceOrdering/agreements": {
+      "get": {
+        "tags": ["agreement"],
+        "operationId": "agreement_GetAgreements",
+        "description": "List marketplace agreements in the subscription.",
+        "x-ms-examples": {
+          "ListMarketplaceTerms": {
+            "$ref": "./examples/ListMarketplaceTerms.json"
+          }
+        },
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "default": "2015-06-01"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object"
+            }
+          },
+          "default": {
+            "description": "Microsoft.MarketplaceOrdering error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.MarketplaceOrdering/offerTypes/{offerType}/publishers/{publisherId}/offers/{offerId}/plans/{planId}/agreements/current": {
+      "get": {
+        "tags": ["OfferAgreement"],
+        "operationId": "OfferAgreement_GetAgreement",
+        "x-ms-examples": {
+          "GetMarketplaceTerms": {
+            "$ref": "./examples/GetMarketplaceTerms.json"
+          }
+        },
+        "description": "Get marketplace terms.",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "offerType",
+            "in": "path",
+            "required": true,
+            "type": "integer",
+            "format": "int32",
+            "enum": [0, 1, 3, 4, 5]
+          },
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "name": "publisherId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "offerId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "planId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "default": "2015-06-01"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object"
+            }
+          },
+          "default": {
+            "description": "Microsoft.MarketplaceOrdering error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": ["OfferAgreement"],
+        "operationId": "OfferAgreement_SetAgreement",
+        "description": "Save marketplace terms.",
+        "x-ms-examples": {
+          "SetMarketplaceTerms": {
+            "$ref": "./examples/SetMarketplaceTerms.json"
+          }
+        },
+        "consumes": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml",
+          "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "name": "publisherId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "offerId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "planId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "terms",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AgreementDefinition"
+            }
+          },
+          {
+            "name": "offerType",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "default": "2015-06-01"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object"
+            }
+          },
+          "default": {
+            "description": "Microsoft.MarketplaceOrdering error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.MarketplaceOrdering/operations": {
+      "get": {
+        "tags": ["operations"],
+        "operationId": "operations_GetOperations",
+        "description": "Lists all of the available Microsoft.MarketplaceOrdering REST API operations.",
+        "operationId": "Operations_List",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "default": "2015-06-01"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object"
+            }
+          },
+          "default": {
+            "description": "Microsoft.MarketplaceOrdering error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    }
+  },
+  "definitions": {
+    "AgreementDefinition": {
+      "type": "object",
+      "properties": {
+        "Id": {
+          "type": "string"
+        },
+        "Name": {
+          "type": "string"
+        },
+        "Type": {
+          "type": "string"
+        },
+        "Properties": {
+          "$ref": "#/definitions/AgreementProperties"
+        }
+      }
+    },
+    "AgreementProperties": {
+      "type": "object",
+      "properties": {
+        "Publisher": {
+          "type": "string"
+        },
+        "Product": {
+          "type": "string"
+        },
+        "Plan": {
+          "type": "string"
+        },
+        "LicenseTextLink": {
+          "type": "string"
+        },
+        "PrivacyPolicyLink": {
+          "type": "string"
+        },
+        "RetrieveDatetime": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "Signature": {
+          "type": "string"
+        },
+        "Accepted": {
+          "type": "boolean"
+        }
+      }
+    },
+    "ErrorResponse": {
+      "description": "Error response indicates Microsoft.MarketplaceOrdering service is not able to process the incoming request. The reason is provided in the error message.",
+      "type": "object",
+      "properties": {
+        "error": {
+          "description": "The details of the error.",
+          "properties": {
+            "code": {
+              "description": "Error code.",
+              "type": "string",
+              "readOnly": true
+            },
+            "message": {
+              "description": "Error message indicating why the operation failed.",
+              "type": "string",
+              "readOnly": true
+            }
+          }
+        }
+      }
+    }
+  },
+  "security": [
+    {
+      "azure_auth": ["user_impersonation"]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  }
 }
