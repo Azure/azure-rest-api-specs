@@ -1,0 +1,824 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "AttestationClient",
+    "description": "Describes the interface for the per-tenant enclave service.",
+    "version": "2020-10-01"
+  },
+  "x-ms-parameterized-host": {
+    "hostTemplate": "{tenantBaseUrl}",
+    "useSchemePrefix": false,
+    "parameters": [
+      {
+        "name": "tenantBaseUrl",
+        "x-ms-parameter-location": "client",
+        "description": "The tenant name, for example https://mytenant.attest.azure.net.",
+        "required": true,
+        "type": "string",
+        "in": "path",
+        "x-ms-skip-url-encoding": true
+      }
+    ]
+  },
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/operations/policy/updatepolicy": {
+      "post": {
+        "tags": [
+          "Policy"
+        ],
+        "summary": "Accepts a new policy document and returns a JWT which expresses  used in preparation to set attestation policy.",
+        "operationId": "Policy_PrepareToSet",
+        "consumes": [
+          "text/plain"
+        ],
+        "produces": [
+          "text/plain",
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/TeeKind"
+          },
+          {
+            "name": "PolicyJws",
+            "in": "body",
+            "description": "JSON Web Signature (See RFC7515) expressing the new policy",
+            "required": true,
+            "x-ms-client-flatten": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success - Returns a JWT signed by the metadata signing key that contains the hash of the supplied policy to be set.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          },
+          "401": {
+            "description": "Request is unauthorized",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "UpdatePolicy": {
+            "$ref": "./examples/UpdatePolicy.json"
+          }
+        }
+      }
+    },
+    "/operations/policy/current": {
+      "get": {
+        "tags": [
+          "Policy"
+        ],
+        "summary": "Retrieves the current policy for a given kind of TEE.",
+        "operationId": "Policy_Get",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/TeeKind"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/AttestationPolicy"
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          },
+          "401": {
+            "description": "Request is unauthorized",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Policy": {
+            "$ref": "./examples/Get_Policy.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Policy"
+        ],
+        "summary": "Sets the policy for a given kind of TEE.",
+        "operationId": "Policy_Set",
+        "consumes": [
+          "text/plain"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/TeeKind"
+          },
+          {
+            "name": "newAttestationPolicy",
+            "in": "body",
+            "description": "JWT Expressing the new policy",
+            "required": true,
+            "x-ms-client-flatten": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          },
+          "401": {
+            "description": "Request is unauthorized",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Set Policy": {
+            "$ref": "./examples/Set_Policy.json"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Policy"
+        ],
+        "summary": "Resets the attestation policy for the specified tenant and reverts to the default policy.",
+        "operationId": "Policy_Reset",
+        "consumes": [
+          "text/plain"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/TeeKind"
+          },
+          {
+            "name": "PolicyJws",
+            "in": "body",
+            "description": "JSON Web Signature with an empty policy document",
+            "required": true,
+            "x-ms-client-flatten": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success - Returns a JWT signed by the metadata signing key that contains the hash of the supplied policy to be set.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          },
+          "401": {
+            "description": "Request is unauthorized",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Reset Policy": {
+            "$ref": "./examples/Reset_Policy.json"
+          }
+        }
+      }
+    },
+    "/operations/policy/certificates": {
+      "get": {
+        "tags": [
+          "Policy Management Certificates"
+        ],
+        "summary": "Retrieves the set of certificates used to express policy for the current tenant.",
+        "operationId": "PolicyCertificates_Get",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "An RFC7519 JSON Web Token structure containing an RFC7517 JsonWebKeySet which contains the certificates used to validate policy changes",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          },
+          "401": {
+            "description": "Request is unauthorized",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get PolicyCertificates": {
+            "$ref": "./examples/Get_PolicyCertificates.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Policy Management Certificates"
+        ],
+        "summary": "Adds a new attestation policy certificate to the set of policy management certificates.",
+        "operationId": "PolicyCertificates_Add",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "policyCertificateToAdd",
+            "in": "body",
+            "description": "An RFC7519 JSON Web Token containing a claim named \"maa-policyCertificate\" whose value is an RFC7517 JSON Web Key which specifies a new key to add. The RFC7519 JWT must be signed with one of the existing signing certificates",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "An RFC7519 JSON Web Token structure containing an RFC7517 JsonWebKeySet which contains the certificates used to validate policy changes",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          },
+          "401": {
+            "description": "Request is unauthorized",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Add PolicyCertificate": {
+            "$ref": "./examples/Add_PolicyCertificate.json"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Policy Management Certificates"
+        ],
+        "summary": "Removes the specified policy management certificate. Note that the final policy management certificate cannot be removed.",
+        "operationId": "PolicyCertificates_Remove",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "policyCertificateToRemove",
+            "in": "body",
+            "description": "An RFC7519 JSON Web Token containing a claim named \"maa-policyCertificate\" whose value is an RFC7517 JSON Web Key which specifies a new key to update. The RFC7519 JWT must be signed with one of the existing signing certificates",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "An RFC7519 JSON Web Token structure containing an RFC7517 JsonWebKeySet which contains the certificates used to validate policy changes",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          },
+          "401": {
+            "description": "Request is unauthorized",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Remove PolicyCertificate": {
+            "$ref": "./examples/Remove_PolicyCertificate.json"
+          }
+        }
+      }
+    },
+    "/attest/OpenEnclave": {
+      "post": {
+        "tags": ["attestation"],
+        "summary": "Attest to an SGX enclave.",
+        "description": "Processes an OpenEnclave report , producing an artifact. The type of artifact produced is dependent upon attestation policy.",
+        "operationId": "AttestOpenEnclave",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "request",
+            "in": "body",
+            "description": "Request object containing the quote",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AttestSgxEnclaveRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "400": {
+            "description": "The input is not valid",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          },
+          "401": {
+            "description": "Request is unauthorized",
+            "schema": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "/attest/SgxEnclave": {
+      "post": {
+        "tags": ["attestation"],
+        "summary": "Attest to an SGX enclave.",
+        "description": "Processes an SGX enclave quote, producing an artifact. The type of artifact produced is dependent upon attestation policy.",
+        "operationId": "AttestSgxEnclave",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "request",
+            "in": "body",
+            "description": "Request object containing the quote",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AttestSgxEnclaveRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "400": {
+            "description": "The input is not valid",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          },
+          "401": {
+            "description": "Request is unauthorized",
+            "schema": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "/attest/VbsEnclave": {
+      "post": {
+        "tags": ["attestation"],
+        "summary": "Attest a Virtualization-based Security (VBS) enclave.",
+        "description": "Processes attestation evidence from a VBS enclave, producing an attestation result. The attestation result produced is dependent upon the attestation policy.",
+        "operationId": "AttestVbsEnclave",
+        "consumes": ["application/json"],
+        "security": [{ "azure_auth": ["read"] }],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ClientRequestIDParameter"
+          },
+          {
+            "name": "request",
+            "in": "body",
+            "description": "Request object",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/VbsAttestationRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/VbsAttestationResponse"
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          },
+          "429": {
+            "description": "Retry",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/attest/SevSnpVm": {
+        "post": {
+            "tags": ["attestation"],
+            "summary": "Attest to an SEV SNP Virtual Machine.",
+            "description": "Processes a SEV SNP Boot chain. The type of artifact produced is dependent upon attestation policy.",
+            "operationId": "AttestSevSnpVm",
+            "parameters": [
+                {
+                    "$ref": "#/parameters/ApiVersionParameter"
+                },
+                {
+                    "name": "request",
+                    "in": "body",
+                    "description": "Request object containing the quote",
+                    "required": true,
+                    "schema": {
+                        "$ref": "#/definitions/AttestSevSnpVmRequest"
+                    }
+                }
+            ],
+            "responses": {
+                "200": {
+                    "description": "Success",
+                    "schema": {
+                        "type": "string"
+                    }
+                },
+                "400": {
+                    "description": "The input is not valid",
+                    "schema": {
+                        "$ref": "#/definitions/CloudError"
+                    }
+                },
+                "401": {
+                    "description": "Request is unauthorized",
+                    "schema": {
+                        "type": "string"
+                    }
+                }
+            }
+        }
+    },
+    "/certs": {
+      "get": {
+        "tags": [
+          "Attestation Provider"
+        ],
+        "summary": "Retrieves the attestation signing keys in use by the attestation service",
+        "description": "Retrieves metadata signing certificates in use by the attestation service",
+        "operationId": "SigningCertificates_Get",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "type": "object"
+            }
+          },
+          "400": {
+            "description": "Error processing the request",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Reset Policy": {
+            "$ref": "./examples/Get_Certs.json"
+          }
+        }
+      }
+    },
+    "/.well-known/openid-configuration": {
+      "get": {
+        "tags": [
+          "Attestation Provider"
+        ],
+        "summary": "Retrieves the OpenID Configuration data for the Azure Attestation Service",
+        "description": "Retrieves metadata about the attestation signing keys in use by the attestation service",
+        "operationId": "MetadataConfiguration_Get",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "type": "object"
+            }
+          },
+          "400": {
+            "description": "Error processing the request",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Reset Policy": {
+            "$ref": "./examples/Get_MetadataConfiguration.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "CloudError": {
+      "x-ms-external": true,
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/CloudErrorBody"
+        }
+      },
+      "description": "An error response from Attestation."
+    },
+    "CloudErrorBody": {
+      "x-ms-external": true,
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "An identifier for the error. Codes are invariant and are intended to be consumed programmatically."
+        },
+        "message": {
+          "type": "string",
+          "description": "A message describing the error, intended to be suitable for displaying in a user interface."
+        }
+      },
+      "description": "An error response from Attestation."
+    },
+    "AttestSgxEnclaveRequest": {
+        "type": "object",
+        "description": "Attestation request for Intel SGX enclaves",
+        "properties": {
+            "Quote": {
+                "description": "Quote of the enclave to be attested",
+                "type": "string"
+            },
+            "EnclaveHeldData": {
+                "description": "Enclave-held data corresponding to quote",
+                "type": "string"
+            },
+            "DraftPolicyForAttestation": {
+                "description": "Attest against the provided draft policy. Note that the resulting token cannot be validated.",
+                "type": "string"
+            },
+            "DisableSignatureValidation": {
+                "description": "Disables validation of signature in quote response, valid for localhost clients only.",
+                "type": "boolean"
+            }
+        }
+    },
+    "VbsAttestationRequest": {
+        "type": "object",
+        "description": "Attestation request for Virtualization-based Security (VBS) enclaves",
+        "properties": {
+            "data": {
+                "description": "Protocol data containing artifacts for attestation.",
+                "type": "string"
+            }
+        }
+    },
+    "VbsAttestationResponse": {
+        "type": "object",
+        "description": "Attestation response for Virtualization-based Security (VBS) enclaves",
+        "properties": {
+            "data": {
+                "description": "Protocol data containing attestation service response.",
+                "type": "string"
+            }
+        }
+    },
+    "AttestSevSnpVmRequest": {
+        "type": "object",
+        "description": "Attestation request for AMD SEV SNP Virtual Machine",
+        "properties": {
+            "ReportType": {
+                "description": "Type of the report payload",
+                "type": "string",
+                "x-ms-enum": {
+                    "name": "SevSnpReportType",
+                    "modelAsString": false,
+                    "values": [
+                    {
+                        "value": "HclHyperV",
+                        "description": "SEV SNP report generated by HCL running on HyperV platform"
+                    }
+                    ]
+                },
+                "enum": [
+                         "HclHyperV"
+                        ]
+            },
+            "Report": {
+                "description": "Hardware rooted report of the virtual machine being attested",
+                "type": "string"
+            },
+            "DraftPolicyForAttestation": {
+                "description": "Attest against the provided draft policy. Note that the resulting token cannot be validated.",
+                "type": "string"
+            }
+        }
+    },
+    "AttestationPolicy": {
+      "type": "object",
+      "properties": {
+        "Policy": {
+          "description": "JSON Web Token whose body is an AttestationPolicyRequest definition.",
+          "type": "string"
+        }
+      }
+    },
+    "AttestationPolicyRequest": {
+      "type": "object",
+      "properties": {
+        "AttestationPolicy": {
+          "description": "Base64Url encoded policy text to set.",
+          "type": "string"
+        }
+      }
+    }
+  },
+  "parameters": {
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "Client API version. Current version is 2010-10-01"
+    },
+    "TeeKind": {
+      "description": "Specifies the trusted execution environment to be used to validate the evidence",
+      "name": "tee",
+      "in": "query",
+      "type": "string",
+      "required": true,
+      "x-ms-parameter-location": "method",
+      "x-ms-enum": {
+        "name": "TeeKind",
+        "modelAsString": true,
+        "values": [
+        {
+          "value": "SgxEnclave",
+          "description": "Intel Software Guard eXtensions"
+        },
+        {
+          "value": "OpenEnclave",
+          "description": "OpenEnclave extensions to SGX"
+        },
+        {
+          "value": "SevSnpVm",
+          "description": "AMD SEV SNP Virtual Machine"
+        },
+        {
+          "value": "VBSEnclave",
+          "description": "VBS Virtualization Based Security"
+        }
+        ]
+      },
+      "enum": [
+        "SgxEnclave",
+        "OpenEnclave",
+        "SevSnpVm",
+        "VBSEnclave"
+      ]
+    }
+  }
+}
+
