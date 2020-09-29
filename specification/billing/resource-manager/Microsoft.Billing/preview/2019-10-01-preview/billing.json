@@ -2074,7 +2074,7 @@
         }
       }
     },
-    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingSubscriptions/{billingSubscriptionName}": {
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingSubscriptions/{billingSubscriptionName}/{costCenterName}": {
       "put": {
         "tags": [
           "BillingSubscriptions"
@@ -2097,13 +2097,7 @@
             "$ref": "#/parameters/billingSubscriptionNameParameter"
           },
           {
-            "name": "parameters",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/BillingSubscription"
-            },
-            "description": "Request parameters that are provided to the update billing subscription operation."
+            "$ref": "#/parameters/costCenterNameParameter"
           }
         ],
         "responses": {
@@ -7771,41 +7765,6 @@
             "modelAsString": true
           }
         },
-        "subscriptionEnrollmentAccountStatus": {
-          "description": "The current enrollment account status of the subscription. This field is available only for the Enterprise Agreement Type. ",
-          "type": "string",
-          "readOnly": true,
-          "enum": [
-            "Active",
-            "Cancelled",
-            "Expired",
-            "Deleted",
-            "TransferredOut"
-          ],
-          "x-ms-enum": {
-            "name": "BillingEnrollmentAccountSubscriptionStatusType",
-            "modelAsString": true
-          }
-        },
-        "enrollmentAccountId": {
-          "description": "The enrollment Account ID associated with the subscription. This field is available only for the Enterprise Agreement Type.",
-          "type": "string",
-          "readOnly": true
-        },
-        "enrollmentAccountName": {
-          "description": "The enrollment Account name associated with the subscription. This field is available only for the Enterprise Agreement Type.",
-          "type": "string",
-          "readOnly": true
-        },
-        "enrollmentAccountStartDate": {
-          "description": "The enrollment Account and the subscription association start date. This field is available only for the Enterprise Agreement Type.",
-          "type": "string",
-          "readOnly": true
-        },
-        "costCenter": {
-          "description": "The cost center of the subscription. This field is available only for the Enterprise Agreement Type.",
-          "type": "string"
-        },
         "lastMonthCharges": {
           "description": "The last month charges. This field is not available for the Enterprise Agreement Type.",
           "readOnly": true,
@@ -7857,6 +7816,52 @@
         },
         "skuDescription": {
           "description": "The sku description of the Azure plan for the subscription. ",
+          "type": "string",
+          "readOnly": true
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/EnrollmentAccountSubscriptionProperties",
+          "title": "Enrollment Account Subscription properties.This field is available only for the Enterprise Agreement Type."
+        }
+      }
+    },
+    "EnrollmentAccountSubscriptionProperties": {
+      "description": "The billing properties that can be modified. available only for the Enterprise Agreement Type.",
+      "properties": {
+        "subscriptionEnrollmentAccountStatus": {
+          "description": "The current enrollment account status of the subscription. This field is available only for the Enterprise Agreement Type. ",
+          "type": "string",
+          "readOnly": true,
+          "enum": [
+            "Active",
+            "Cancelled",
+            "Expired",
+            "Deleted",
+            "TransferredOut"
+          ],
+          "x-ms-enum": {
+            "name": "BillingEnrollmentAccountSubscriptionStatusType",
+            "modelAsString": true
+          }
+        },
+        "enrollmentAccountId": {
+          "description": "The enrollment Account ID associated with the subscription. This field is available only for the Enterprise Agreement Type.",
+          "type": "string",
+          "readOnly": true
+        },
+        "enrollmentAccountName": {
+          "description": "The enrollment Account name associated with the subscription. This field is available only for the Enterprise Agreement Type.",
+          "type": "string",
+          "readOnly": true
+        },
+        "enrollmentAccountStartDate": {
+          "description": "The enrollment Account and the subscription association start date. This field is available only for the Enterprise Agreement Type.",
+          "type": "string",
+          "readOnly": true
+        },
+        "costCenter": {
+          "description": "The cost center of the subscription. This field is available only for the Enterprise Agreement Type.",
           "type": "string",
           "readOnly": true
         }
@@ -8925,6 +8930,14 @@
       "schema": {
         "$ref": "#/definitions/UpdateAutoRenewRequest"
       }
+    },
+    "costCenterNameParameter": {
+      "name": "costCenterName",
+      "x-ms-parameter-location": "method",
+      "in": "path",
+      "required": true,
+      "description": "Request parameters that are provided to the update cost center operation.",
+      "type": "string"
     },
     "customerNameParameter": {
       "name": "customerName",

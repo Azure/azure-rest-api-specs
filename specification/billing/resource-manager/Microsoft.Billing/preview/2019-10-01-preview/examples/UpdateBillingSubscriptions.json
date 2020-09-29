@@ -3,11 +3,7 @@
     "api-version": "2019-10-01-preview",
     "billingAccountName": "{billingAccountName}",
     "billingSubscriptionName": "{billingSubscriptionName}",
-    "parameters": {
-      "properties": {
-        "costCenter": "123"
-      }
-    }
+    "costCenterName": "123"
   },
   "responses": {
     "202": {
@@ -22,7 +18,9 @@
         "name": "{billingSubscriptionName}",
         "type": "Microsoft.Billing/billingAccounts/billingSubscriptions",
         "properties": {
-          "costCenter": "123"
+          "properties": {
+            "costCenter": "123"
+          }
         }
       }
     }
