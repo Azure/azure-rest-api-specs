@@ -687,19 +687,19 @@
         "type": "object",
         "description": "Attestation request for Intel SGX enclaves",
         "properties": {
-            "Quote": {
+            "quote": {
                 "description": "Quote of the enclave to be attested",
                 "type": "string"
             },
-            "EnclaveHeldData": {
+            "enclaveHeldData": {
                 "description": "Enclave-held data corresponding to quote",
                 "type": "string"
             },
-            "DraftPolicyForAttestation": {
+            "draftPolicyForAttestation": {
                 "description": "Attest against the provided draft policy. Note that the resulting token cannot be validated.",
                 "type": "string"
             },
-            "DisableSignatureValidation": {
+            "disableSignatureValidation": {
                 "description": "Disables validation of signature in quote response, valid for localhost clients only.",
                 "type": "boolean"
             }
@@ -729,7 +729,7 @@
         "type": "object",
         "description": "Attestation request for AMD SEV SNP Virtual Machine",
         "properties": {
-            "ReportType": {
+            "reportType": {
                 "description": "Type of the report payload",
                 "type": "string",
                 "x-ms-enum": {
@@ -746,11 +746,11 @@
                          "HclHyperV"
                         ]
             },
-            "Report": {
+            "report": {
                 "description": "Hardware rooted report of the virtual machine being attested",
                 "type": "string"
             },
-            "DraftPolicyForAttestation": {
+            "draftPolicyForAttestation": {
                 "description": "Attest against the provided draft policy. Note that the resulting token cannot be validated.",
                 "type": "string"
             }
@@ -759,7 +759,7 @@
     "AttestationPolicy": {
       "type": "object",
       "properties": {
-        "Policy": {
+        "policy": {
           "description": "JSON Web Token whose body is an AttestationPolicyRequest definition.",
           "type": "string"
         }
@@ -768,7 +768,7 @@
     "AttestationPolicyRequest": {
       "type": "object",
       "properties": {
-        "AttestationPolicy": {
+        "attestationPolicy": {
           "description": "Base64Url encoded policy text to set.",
           "type": "string"
         }
