@@ -1,0 +1,55 @@
+{
+  "parameters": {
+    "subscriptionId": "50016170-c839-41ba-a724-51e9df440b9e",
+    "resourceGroupName": "resRg",
+    "resourceName": "myDigitalTwinsService",
+    "api-version": "2020-12-01",
+    "digitalTwinsCreate": {
+      "location": "WestUS",
+      "identity": {
+        "type": "SystemAssigned"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/50016170-c839-41ba-a724-51e9df440b9e/resourcegroups/resRg/providers/Microsoft.DigitalTwins/DigitalTwinsInstance/myDigitalTwinsService",
+        "location": "westus",
+        "type": "Microsoft.DigitalTwins/digitalTwinsInstances",
+        "name": "myDigitalTwinsService",
+        "tags": {
+          "purpose": "dev"
+        },
+        "identity": {
+          "type": "SystemAssigned",
+          "principalId": "544215a9-21d8-4fb5-8094-8efbcc311dd0",
+          "tenantId": "544215a9-21d8-4fb5-8094-8efbcc311dd0"
+        },
+        "properties": {
+          "createdTime": "2019-11-19T12:55:05.229Z",
+          "lastUpdatedTime": "2019-12-06T12:21:58.610Z",
+          "provisioningState": "Succeeded",
+          "hostName": "https://myDigitalTwinsService.api.wus2.ss.azuredigitaltwins-test.net"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "id": "/subscriptions/50016170-c839-41ba-a724-51e9df440b9e/resourcegroups/resRg/providers/Microsoft.DigitalTwins/DigitalTwinsInstance/myDigitalTwinsService",
+        "location": "westus",
+        "type": "Microsoft.DigitalTwins/digitalTwinsInstances",
+        "name": "myDigitalTwinsService",
+        "identity": {
+          "type": "SystemAssigned"
+        },
+        "properties": {
+          "createdTime": "2019-11-19T12:55:05.229Z",
+          "lastUpdatedTime": "2019-11-19T12:55:05.229Z",
+          "provisioningState": "Provisioning",
+          "hostName": null
+        }
+      }
+    }
+  }
+}
