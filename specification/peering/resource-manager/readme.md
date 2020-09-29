@@ -26,6 +26,14 @@ These are the global settings for the Peering API.
 title: PeeringManagementClient
 description: Peering Client
 openapi-type: arm
+tag: package-2020-10-01
+```
+or
+
+``` yaml
+title: PeeringManagementClient
+description: Peering Client
+openapi-type: arm
 tag: package-2020-04-01
 ```
 or
