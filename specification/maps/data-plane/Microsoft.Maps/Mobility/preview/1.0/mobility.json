@@ -144,7 +144,7 @@
       "get": {
         "x-publish": true,
         "operationId": "Mobility_GetMetroAreaPreview",
-        "description": "**Metro Area API**\n\n**Applies to**: S1 pricing tier.\n\nService allows to request metro areas in which the Azure Maps Mobility Service is available. The service supports filtering results by country or coordinate location. Information returned includes Metro Area  details such as metro Id, name and a representation of the metro area geometry in GeoJSON format.",
+        "description": "**Metro Area API**\n\n**Applies to**: S1 pricing tier.\n\nService allows users to request metro areas in which the Azure Maps Mobility Service is available. The service supports filtering results by country or coordinate location. Information returned includes Metro Area  details such as metro Id, name and a representation of the metro area geometry in GeoJSON format.",
         "x-ms-examples": {
           "MetroArea": {
             "$ref": "./examples/GetMetroArea.json"
@@ -230,7 +230,7 @@
       "get": {
         "x-publish": true,
         "operationId": "Mobility_GetMetroAreaInfoPreview",
-        "description": "**Metro Area Info API**\n\n**Applies to**: S1 pricing tier.\n\nService allows to request additional information for metro areas in which the Azure Maps Mobility Service is available. Information such as supported transit types, transit agencies and active alerts is available, depending on the options selected.",
+        "description": "**Metro Area Info API**\n\n**Applies to**: S1 pricing tier.\n\nService allows users to request additional information for metro areas in which the Azure Maps Mobility services are available. Information such as supported transit types, transit agencies and active alerts is available, depending on the options selected. Also, the service returns information if the public transit fare information is available for the requested metro area.",
         "x-ms-examples": {
           "MetroAreaInfo": {
             "$ref": "./examples/GetMetroAreaInfo.json"
@@ -649,7 +649,7 @@
       "get": {
         "x-publish": true,
         "operationId": "Mobility_GetTransitRoutePreview",
-        "description": "**Transit Route API**\n\n**Applies to**: S1 pricing tier.\n\nGet Transit Route API will allow trip planning returning the best possible route options between an origin and destination by using multi-modal search. Service provides a variety of travel modes, including walk, bike, and public transit.  The API supports parameters to request one or multiple public transit types such as bus, tram and subway, and prefer a specific transit agency operating in the area. Also, service provides options to choose optimal route with least walk or transfers and specify arrival or departure times when user need to be at a specific destination by a certain time.",
+        "description": "**Transit Route API**\n\n**Applies to**: S1 pricing tier.\n\nGet Transit Route API will allow trip planning returning the best possible route options between an origin and destination by using multi-modal search. Service provides a variety of travel modes, including walk, bike, and public transit.  The API supports parameters to request one or multiple public transit types such as bus, tram and subway, and prefer a specific transit agency operating in the area. Also, service provides transit fare details and options to choose optimal route with least walk or transfers and specify arrival or departure times when user need to be at a specific destination by a certain time.",
         "x-ms-examples": {
           "TransitRoute": {
             "$ref": "./examples/GetTransitRoute.json"
@@ -994,7 +994,7 @@
       "get": {
         "x-publish": true,
         "operationId": "Mobility_GetTransitItineraryPreview",
-        "description": "**Transit Itinerary API**\n\n**Applies to**: S1 pricing tier.\n\nReturns data according to an itinerary Id previously returned by [Transit Route API](https://aka.ms/AzureMapsMobilityTransitRoute). The basic info contains data as to the various legs comprising  the itinerary, including the locations, public transit lines, start and end times. User can request additional routing information such as the  shape of the itinerary and detailed itinerary schedules is also available, depending on the options selected. An itinerary is available up to 24  hours following a search request.",
+        "description": "**Transit Itinerary API**\n\n**Applies to**: S1 pricing tier.\n\nReturns data according to an itinerary Id previously returned by [Transit Route API](https://aka.ms/AzureMapsMobilityTransitRoute). The basic info contains data as to the various legs comprising  the itinerary, including the locations, public transit lines, start and end times and fare information. Users can request additional routing information such as the  shape of the itinerary and detailed itinerary schedules is also available, depending on the options selected. An itinerary is available up to 24  hours following a search request.",
         "x-ms-examples": {
           "TransitItinerary": {
             "$ref": "./examples/GetTransitItinerary.json"
@@ -1521,12 +1521,16 @@
       }
     },
     "MetroAreaInfoResponse": {
-      "description": "This object is returned from a successful Metro Area call.",
+      "description": "This object is returned from a successful Metro Area Info call.",
       "type": "object",
       "properties": {
         "metroName": {
           "type": "string",
           "description": "The name of the metro area."
+        },
+        "isFaresSupported": {
+          "type": "string",
+          "description": "Indicates if public transit fares information is available in the metro area. Fare information is available through [Get Transit Route API](https://aka.ms/AzureMapsMobilityTransitRoute) and [Get Transit Itinerary APIs](https://aka.ms/AzureMapsMobilityTransitItinerary)."
         },
         "transitTypes": {
           "type": "array",
@@ -1604,6 +1608,10 @@
         },
         "legs": {
           "$ref": "#/definitions/ItinerarySummary"
+        },
+        "itineraryFare": {
+          "description": "Itinerary level transit fare information. Returned only if fare information is available for the entire itinerary. [Get Metro Area Info API](https://aka.ms/AzureMapsMobilityMetroAreaInfo) can be requested to confirm if fare information is available in the metro area.",
+          "$ref": "#/definitions/ItineraryFare"
         }
       }
     },
@@ -1852,7 +1860,7 @@
       }
     },
     "Alert": {
-      "description": "Basic information associated with the active alert.",
+      "description": "Basic information associated with the active alert. Returned if specified in the request and there is an active alert in the metro area.",
       "type": "object",
       "properties": {
         "alertSummary": {
@@ -1941,6 +1949,10 @@
         "legs": {
           "description": "An array summarizing the legs of this itinerary.",
           "$ref": "#/definitions/RouteItinerarySummary"
+        },
+        "itineraryFare": {
+          "description": "Itinerary level transit fare information. Returned only if fare information is available for the entire itinerary. [Get Metro Area Info API](https://aka.ms/AzureMapsMobilityMetroAreaInfo) can be requested to confirm if fare information is available in the metro area.",
+          "$ref": "#/definitions/ItineraryFare"
         }
       }
     },
@@ -1956,6 +1968,10 @@
         "legType": {
           "description": "The travel mode of the leg.",
           "$ref": "#/definitions/LegType"
+        },
+        "legFare": {
+          "description": "Leg level public transit fare information. Returned only if fare information is available for the entire itinerary.",
+          "$ref": "#/definitions/LegFare"
         },
         "legStartTime": {
           "description": "Start time for the leg in ISO 8601 format, e.g. 1996-12-19T19:39:57-08:00.",
@@ -2030,6 +2046,10 @@
         "departures": {
           "description": "Relevant for Public Transit and Wait legs only",
           "$ref": "#/definitions/Departures"
+        },
+        "legFare": {
+          "description": "Leg level public transit fare information. Returned only if fare information is available for the entire itinerary.",
+          "$ref": "#/definitions/LegFare"
         },
         "waitOnVehicle": {
           "description": "Indicates whether it’s necessary to wait for the next leg on the same vehicle (i.e. the bus will only change its line number).",
@@ -2111,6 +2131,76 @@
             "description": "It’s necessary to wait for the next leg on the same vehicle (i.e. the bus will only change its line number)"
           }
         ]
+      }
+    },
+    "ItineraryFare": {
+      "description": "Itinerary level transit fare information.",
+      "type": "object",
+      "properties": {
+        "price": {
+          "description": "The total price for all tickets a user is expected to purchase in order to complete this itinerary.",
+          "$ref": "#/definitions/Price"
+        },
+        "tickets": {
+          "description": "An array describing the individual prices of each of the tickets that the user is expected to purchase throughout this itinerary. The list isn’t ordered.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Tickets"
+          }
+        }
+      }
+    },
+    "Tickets": {
+      "description": "An array describing the individual prices of each of the tickets that the user is expected to purchase throughout this itinerary. The list isn’t ordered.",
+      "type": "object",
+      "properties": {
+        "amount": {
+          "description": "Price of the ticket in cents. For example, $5.00 is returned as ‘500’.",
+          "type": "integer"
+        },
+        "currencyCode": {
+          "description": "Currency code, for example for US dollars “USD”.",
+          "type": "string"
+        }
+      }
+    },
+    "LegFare": {
+      "description": "Leg level public transit fare information. Returned only if fare information is available for the entire itinerary level and supported by the local transit agency.",
+      "type": "object",
+      "properties": {
+        "fares": {
+          "description": "Detailed fare information for the leg.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Fares"
+          }
+        }
+      }
+    },
+    "Fares": {
+      "description": "Detailed fare information for the leg.",
+      "type": "object",
+      "properties": {
+        "price": {
+          "$ref": "#/definitions/Price"
+        },
+        "usage": {
+          "description": "Supported values are:\n\n  * pay – user is expected to pay for this ticket in order to consume the current leg\n  * transfer – user can use a ticket purchased in a previous leg in order to consume the current leg. In general, when transfer is specified, the number of transfers is counted, and has a limit.\n  * continue – user can use a ticket purchased in a previous leg in order to consume the current leg. In general, when continue is specified, the number of transfers isn’t incremented for this leg.\n  * upgrade – user is expected to upgrade a ticket purchased in a previous leg in order to consume the current leg.",
+          "type": "string"
+        }
+      }
+    },
+    "Price": {
+      "type": "object",
+      "properties": {
+        "amount": {
+          "description": "Price of the ticket in cents. For example, $5.00 is returned as ‘500’.",
+          "type": "integer"
+        },
+        "currencyCode": {
+          "description": "Currency code, for example for US dollars “USD”.",
+          "type": "string"
+        }
       }
     },
     "LegPoint": {
@@ -2332,7 +2422,7 @@
       "type": "object",
       "properties": {
         "transitType": {
-          "description": "Supported public transit type.",
+          "description": "Supported public transit type. Returned if specified in the request.",
           "$ref": "#/definitions/TransitType"
         },
         "captionOverride": {
@@ -2343,7 +2433,7 @@
     },
     "Agency": {
       "type": "object",
-      "description": "Details of the agency.",
+      "description": "Details of the agency. Returned if specified in the request.",
       "properties": {
         "agencyId": {
           "description": "The Id of the relevant transit agency, for example, '5872'",
