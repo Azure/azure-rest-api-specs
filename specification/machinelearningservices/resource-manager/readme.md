@@ -367,7 +367,7 @@ java:
   output-folder: $(azure-libraries-for-java-folder)/sdk/machinelearningservices/mgmt-v2020_09_01_preview.2
 regenerate-manager: true
 generate-interface: true
-``
+```
 
 ### Tag: package-2020-05-01-preview and java
 
