@@ -31,7 +31,7 @@
     "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Kubernetes/connectedClusters/{clusterName}": {
       "put": {
         "summary": "Register a new Kubernetes cluster with Azure Resource Manager.",
-        "operationId": "ConnectedCluster_Create",
+        "operationId": "ConnectedClusters_Create",
         "description": "API to register a new Kubernetes cluster and create a tracked resource in Azure Resource Manager (ARM).",
         "consumes": [
           "application/json"
@@ -46,13 +46,13 @@
         },
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/ClusterNamePathParam"
@@ -83,7 +83,7 @@
           "default": {
             "description": "Resource Provider error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -94,7 +94,7 @@
       },
       "patch": {
         "summary": "Updates a connected cluster.",
-        "operationId": "ConnectedCluster_Update",
+        "operationId": "ConnectedClusters_Update",
         "description": "API to update certain properties of the connected cluster resource",
         "consumes": [
           "application/json"
@@ -109,13 +109,13 @@
         },
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/ClusterNamePathParam"
@@ -140,14 +140,14 @@
           "default": {
             "description": "Resource Provider error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         }
       },
       "get": {
         "summary": "Get the properties of the specified connected cluster.",
-        "operationId": "ConnectedCluster_Get",
+        "operationId": "ConnectedClusters_Get",
         "description": "Returns the properties of the specified connected cluster, including name, identity, properties, and additional cluster details.",
         "produces": [
           "application/json"
@@ -159,13 +159,13 @@
         },
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/ClusterNamePathParam"
@@ -181,14 +181,14 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         }
       },
       "delete": {
         "summary": "Delete a connected cluster.",
-        "operationId": "ConnectedCluster_Delete",
+        "operationId": "ConnectedClusters_Delete",
         "description": "Delete a connected cluster, removing the tracked resource in Azure Resource Manager (ARM).",
         "produces": [
           "application/json"
@@ -200,13 +200,13 @@
         },
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/ClusterNamePathParam"
@@ -225,7 +225,7 @@
           "default": {
             "description": "Resource Provider error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -238,7 +238,7 @@
     "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Kubernetes/connectedClusters/{clusterName}/listClusterUserCredentials": {
       "post": {
         "summary": "Gets cluster user credentials of a connected cluster",
-        "operationId": "ConnectedCluster_ListClusterUserCredentials",
+        "operationId": "ConnectedClusters_ListClusterUserCredentials",
         "description": "Gets cluster user credentials of the connected cluster with a specified resource group and name.",
         "produces": [
           "application/json"
@@ -253,13 +253,13 @@
         },
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/ClusterNamePathParam"
@@ -284,7 +284,7 @@
           "default": {
             "description": "Resource Provider error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -293,7 +293,7 @@
     "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Kubernetes/connectedClusters": {
       "get": {
         "summary": "Lists all connected clusters",
-        "operationId": "ConnectedCluster_ListByResourceGroup",
+        "operationId": "ConnectedClusters_ListByResourceGroup",
         "description": "API to enumerate registered connected K8s clusters under a Resource Group",
         "produces": [
           "application/json"
@@ -305,13 +305,13 @@
         },
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           }
         ],
         "responses": {
@@ -324,7 +324,7 @@
           "default": {
             "description": "Resource Provider error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -336,7 +336,7 @@
     "/subscriptions/{subscriptionId}/providers/Microsoft.Kubernetes/connectedClusters": {
       "get": {
         "summary": "Lists all connected clusters",
-        "operationId": "ConnectedCluster_ListBySubscription",
+        "operationId": "ConnectedClusters_ListBySubscription",
         "description": "API to enumerate registered connected K8s clusters under a Subscription",
         "produces": [
           "application/json"
@@ -348,10 +348,10 @@
         },
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -364,7 +364,7 @@
           "default": {
             "description": "Resource Provider error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -376,13 +376,13 @@
     "/providers/Microsoft.Kubernetes/operations": {
       "get": {
         "description": "Lists all of the available API operations for Connected Cluster resource.",
-        "operationId": "Operations_Get",
+        "operationId": "Operations_List",
         "produces": [
           "application/json"
         ],
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -395,7 +395,7 @@
           "default": {
             "description": "Resource Provider error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -497,7 +497,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/TrackedResource"
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/TrackedResource"
         }
       ],
       "description": "Represents a connected cluster."
@@ -545,7 +545,8 @@
           "description": "Base64 encoded public certificate used by the agent to do the initial handshake to the backend services in Azure."
         },
         "aadProfile": {
-          "$ref": "#/definitions/ConnectedClusterAADProfile"
+          "$ref": "#/definitions/ConnectedClusterAADProfile",
+          "description": "AAD profile of the connected cluster."
         },
         "kubernetesVersion": {
           "readOnly": true,
@@ -563,9 +564,11 @@
           "description": "Version of the agent running on the connected cluster resource"
         },
         "provisioningState": {
-          "$ref": "#/definitions/ConnectedClusterProvisioningState"
+          "$ref": "#/definitions/ConnectedClusterProvisioningState",
+          "description": "Provisioning state of the connected cluster resource."
         }
-      }
+      },
+      "description": "Properties of the connected cluster."
     },
     "CredentialResults": {
       "properties": {
@@ -617,7 +620,8 @@
           "type": "string",
           "description": "The server app id to access AD server"
         }
-      }
+      },
+      "description": "AAD profile of the connected cluster"
     },
     "AuthenticationDetails": {
       "type": "object",
@@ -644,9 +648,11 @@
               "type": "string",
               "description": "Authentication token."
             }
-          }
+          },
+          "description": "Authentication token value."
         }
-      }
+      },
+      "description": "Authentication details of the user"
     },
     "ConnectedClusterProvisioningState": {
       "type": "string",
@@ -690,32 +696,8 @@
           "type": "string",
           "description": "Base64 encoded public certificate used by the agent to do the initial handshake to the backend services in Azure."
         }
-      }
-    },
-    "ErrorResponse": {
-      "description": "The error response that indicates why an operation has failed.",
-      "type": "object",
-      "properties": {
-        "error": {
-          "$ref": "#/definitions/ErrorDetails"
-        }
-      }
-    },
-    "ErrorDetails": {
-      "description": "The error response details containing error code and error message",
-      "type": "object",
-      "properties": {
-        "code": {
-          "description": "The error code.",
-          "type": "string",
-          "readOnly": true
-        },
-        "message": {
-          "description": "The error message.",
-          "type": "string",
-          "readOnly": true
-        }
-      }
+      },
+      "description": "Properties which can be patched on the connected cluster resource."
     }
   },
   "parameters": {
