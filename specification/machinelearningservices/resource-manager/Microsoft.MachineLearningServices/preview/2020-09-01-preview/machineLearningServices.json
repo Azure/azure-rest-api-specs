@@ -2065,7 +2065,7 @@
       "description": "An object that represents a machine learning workspace.",
       "allOf": [
         {
-          "$ref": "#/definitions/AMLResource"
+          "$ref": "#/definitions/Resource"
         }
       ],
       "properties": {
@@ -2194,7 +2194,7 @@
           }
         },
         "sku": {
-          "$ref": "#/definitions/AMLSku",
+          "$ref": "#/definitions/Sku",
           "description": "The sku of the workspace."
         },
         "properties": {
@@ -2712,7 +2712,7 @@
       },
       "description": "The List WorkspaceQuotasByVMFamily operation response."
     },
-    "AMLIdentity": {
+    "Identity": {
       "properties": {
         "principalId": {
           "readOnly": true,
@@ -2734,7 +2734,7 @@
             "None"
           ],
           "x-ms-enum": {
-            "name": "AMLResourceIdentityType",
+            "name": "ResourceIdentityType",
             "modelAsString": false
           }
         },
@@ -2772,8 +2772,8 @@
         }
       }
     },
-    "AMLResource": {
-      "description": "Azure Resource Manager resource envelope.",
+    "ResourceBase": {
+      "description": "Azure Resource Manager resource base envelope.",
       "x-ms-azure-resource": true,
       "properties": {
         "id": {
@@ -2786,18 +2786,29 @@
           "type": "string",
           "readOnly": true
         },
+        "type": {
+          "description": "Specifies the type of the resource.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "Resource": {
+      "description": "Azure Resource Manager resource envelope.",
+      "x-ms-azure-resource": true,
+      "allOf": [
+        {
+          "$ref": "#/definitions/ResourceBase"
+        }
+      ],
+      "properties": {
         "identity": {
-          "$ref": "#/definitions/AMLIdentity",
+          "$ref": "#/definitions/Identity",
           "description": "The identity of the resource."
         },
         "location": {
           "description": "Specifies the location of the resource.",
           "type": "string"
-        },
-        "type": {
-          "description": "Specifies the type of the resource.",
-          "type": "string",
-          "readOnly": true
         },
         "tags": {
           "description": "Contains resource tags defined as key/value pairs.",
@@ -2807,7 +2818,7 @@
           }
         },
         "sku": {
-          "$ref": "#/definitions/AMLSku",
+          "$ref": "#/definitions/Sku",
           "description": "The sku of the workspace."
         }
       }
@@ -2900,7 +2911,7 @@
       "description": "Machine Learning compute object wrapped into ARM resource envelope.",
       "allOf": [
         {
-          "$ref": "#/definitions/AMLResource"
+          "$ref": "#/definitions/Resource"
         },
         {
           "type": "object",
@@ -3019,7 +3030,7 @@
                 },
                 "sslConfiguration": {
                   "description": "SSL configuration",
-                  "$ref": "#/definitions/AMLSslConfiguration"
+                  "$ref": "#/definitions/SslConfiguration"
                 },
                 "aksNetworkingConfiguration": {
                   "description": "AKS networking configuration for vnet",
@@ -3437,7 +3448,7 @@
         }
       }
     },
-    "AMLSslConfiguration": {
+    "SslConfiguration": {
       "type": "object",
       "description": "The ssl configuration for scoring",
       "properties": {
@@ -4039,7 +4050,7 @@
         }
       }
     },
-    "AMLSku": {
+    "Sku": {
       "description": "Sku of the resource",
       "type": "object",
       "properties": {
@@ -4063,7 +4074,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/AMLResource"
+          "$ref": "#/definitions/Resource"
         }
       ],
       "description": "The Private Endpoint Connection resource."
@@ -4167,7 +4178,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/AMLResource"
+          "$ref": "#/definitions/Resource"
         }
       ],
       "description": "A private link resource"
@@ -4302,7 +4313,7 @@
           "type": "string"
         },
         "identity": {
-          "$ref": "#/definitions/AMLIdentity"
+          "$ref": "#/definitions/Identity"
         },
         "properties": {
           "$ref": "#/definitions/LinkedServiceProps"
@@ -4322,7 +4333,7 @@
           "type": "string"
         },
         "identity": {
-          "$ref": "#/definitions/AMLIdentity"
+          "$ref": "#/definitions/Identity"
         },
         "properties": {
           "$ref": "#/definitions/LinkedServiceProps"
@@ -4382,7 +4393,7 @@
       "description": "Machine Learning service object wrapped into ARM resource envelope.",
       "allOf": [
         {
-          "$ref": "#/definitions/AMLResource"
+          "$ref": "#/definitions/Resource"
         },
         {
           "type": "object",

@@ -774,7 +774,7 @@
       "description": "Machine Learning Online Endpoint object wrapped into ARM resource envelope.",
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/TrackedResource"
+          "$ref": "machineLearningServices.json#/definitions/ResourceBase"
         }
       ],
       "properties": {
@@ -783,8 +783,19 @@
           "$ref": "#/definitions/OnlineEndpointProperties",
           "x-ms-client-flatten": true
         },
+        "location": {
+          "description": "Specifies the location of the resource.",
+          "type": "string"
+        },
+        "tags": {
+          "description": "Contains resource tags defined as key/value pairs.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
         "identity": {
-          "$ref": "machineLearningServices.json#/definitions/AMLIdentity",
+          "$ref": "machineLearningServices.json#/definitions/Identity",
           "description": "The identity of the resource."
         },
         "kind": {
@@ -904,7 +915,7 @@
           "type": "object",
           "description": "Configuration to setup Ssl. (ACI only)",
           "items": {
-            "$ref": "#/definitions/SslConfiguration"
+            "$ref": "#/definitions/AciSslConfiguration"
           }
         },
         "vnetConfiguration": {
@@ -953,7 +964,7 @@
         }
       ]
     },
-    "SslConfiguration": {
+    "AciSslConfiguration": {
       "type": "object",
       "description": "Ssl Configuration",
       "properties": {
@@ -998,7 +1009,7 @@
       "description": "Machine Learning Online Endpoint Deployment object wrapped into ARM resource envelope.",
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/TrackedResource"
+          "$ref": "machineLearningServices.json#/definitions/ResourceBase"
         }
       ],
       "properties": {
@@ -1006,6 +1017,17 @@
           "type": "object",
           "description": "Online Endpoint Deployment properties.",
           "$ref": "#/definitions/OnlineEndpointDeploymentProperties"
+        },
+        "location": {
+          "description": "Specifies the location of the resource.",
+          "type": "string"
+        },
+        "tags": {
+          "description": "Contains resource tags defined as key/value pairs.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
         },
         "kind": {
           "type": "string",
