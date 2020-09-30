@@ -1,0 +1,79 @@
+{
+  "parameters": {
+    "subscriptionId": "34adfa4f-cedf-4dc0-ba29-b6d1a69ab345",
+    "resourceGroupName": "testrg123",
+    "workspaceName": "workspaces123",
+    "onlineEndpointName": "testendpoint",
+    "deploymentName": "testdeployment",
+    "api-version": "2020-09-01-preview.2",
+    "properties": {
+      "location": "westus2euap",
+      "tags": {},
+      "properties": {
+        "description": "This is a test deployment",
+        "properties": {},
+        "modelId": "modelURL",
+        "codeConfiguration": {
+          "codeArtifactId": "testCodeArtifactId",
+          "command": [
+            "testCommand"
+          ]
+        },
+        "environmentId": "testEnvironmentId",
+        "skuScaleSettings": {
+          "minimum": 1,
+          "maximum": 5
+        },
+        "environmentOverrides": {
+          "environmentVariables": {
+            "envKey": "envValue"
+          }
+        },
+        "deploymentConfiguration": {
+          "computeType": "AMLCompute"
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/testrg123/providers/Microsoft.MachineLearningServices/workspaces/workspaces123/onlineEndpoints/testendpoint/deployments/testdeployment",
+        "name": "testdeployment",
+        "type": "Microsoft.MachineLearningServices/workspaces/onlineEndpoints/deployments",
+        "location": "westus2euap",
+        "tags": {},
+        "kind": "AMLCompute",
+        "properties": {
+          "description": "This is a test deployment",
+          "modelId": "modelURL",
+          "codeConfiguration": {
+            "codeArtifactId": "testCodeArtifactId",
+            "command": [
+              "testCommand"
+            ]
+          },
+          "provisioningState": "Succeeded",
+          "environmentId": "testEnvironmentId",
+          "skuScaleSettings": {
+            "minimum": 1,
+            "maximum": 5
+          },
+          "environmentOverrides": {
+            "environmentVariables": {
+              "envKey": "envValue"
+            }
+          },
+          "deploymentConfiguration": {
+            "computeType": "AMLCompute"
+          }
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/...pathToOperationStatus..."
+      }
+    }
+  }
+}

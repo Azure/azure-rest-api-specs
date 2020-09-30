@@ -3,7 +3,7 @@
   "info": {
     "title": "Azure Machine Learning Workspaces",
     "description": "These APIs allow end users to operate on Azure Machine Learning Workspace resources.",
-    "version": "2020-09-01-preview"
+    "version": "2020-10-01-preview"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -459,6 +459,12 @@
             "schema": {
               "$ref": "#/definitions/ListUsagesResult"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/MachineLearningServiceError"
+            }
           }
         },
         "x-ms-pageable": {
@@ -499,6 +505,12 @@
             "description": "OK",
             "schema": {
               "$ref": "#/definitions/VirtualMachineSizeListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/MachineLearningServiceError"
             }
           }
         },
@@ -562,7 +574,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.MachineLearningServices/locations/{location}/Quotas": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.MachineLearningServices/locations/{location}/quotas": {
       "get": {
         "tags": [
           "Quota"
@@ -590,6 +602,12 @@
             "description": "OK",
             "schema": {
               "$ref": "#/definitions/ListWorkspaceQuotas"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/MachineLearningServiceError"
             }
           }
         },
@@ -914,6 +932,9 @@
           "200": {
             "description": "The request was successful; the request was well-formed and received properly."
           },
+          "204": {
+            "description": "The resource does not exist and the request was well formed."
+          },
           "202": {
             "description": "Compute deletion initiated.",
             "headers": {
@@ -1234,7 +1255,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/MachineLearningServiceError"
             }
           }
         }
@@ -1286,7 +1307,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/MachineLearningServiceError"
             }
           }
         }
@@ -1329,7 +1350,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/MachineLearningServiceError"
             }
           }
         }
@@ -1366,6 +1387,12 @@
             "description": "Successfully retrieved private link resources.",
             "schema": {
               "$ref": "#/definitions/PrivateLinkResourceListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/MachineLearningServiceError"
             }
           }
         }
@@ -2745,8 +2772,8 @@
         }
       }
     },
-    "Resource": {
-      "description": "Azure Resource Manager resource envelope.",
+    "ResourceBase": {
+      "description": "Azure Resource Manager resource base envelope.",
       "x-ms-azure-resource": true,
       "properties": {
         "id": {
@@ -2759,6 +2786,22 @@
           "type": "string",
           "readOnly": true
         },
+        "type": {
+          "description": "Specifies the type of the resource.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "Resource": {
+      "description": "Azure Resource Manager resource envelope.",
+      "x-ms-azure-resource": true,
+      "allOf": [
+        {
+          "$ref": "#/definitions/ResourceBase"
+        }
+      ],
+      "properties": {
         "identity": {
           "$ref": "#/definitions/Identity",
           "description": "The identity of the resource."
@@ -2766,11 +2809,6 @@
         "location": {
           "description": "Specifies the location of the resource.",
           "type": "string"
-        },
-        "type": {
-          "description": "Specifies the type of the resource.",
-          "type": "string",
-          "readOnly": true
         },
         "tags": {
           "description": "Contains resource tags defined as key/value pairs.",

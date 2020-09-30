@@ -1,0 +1,51 @@
+{
+  "parameters": {
+    "subscriptionId": "34adfa4f-cedf-4dc0-ba29-b6d1a69ab345",
+    "resourceGroupName": "testrg123",
+    "workspaceName": "workspaces123",
+    "onlineEndpointName": "testendpoint",
+    "api-version": "2020-09-01-preview.2",
+    "properties": {
+      "location": "westus2euap",
+      "tags": {},
+      "properties": {
+        "description": "This is a test endpoint",
+        "properties": {},
+        "trafficRules": {},
+        "computeConfiguration": {
+          "computeType": "AMLCompute"
+        },
+        "authMode": "KeyAuth"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/testrg123/providers/Microsoft.MachineLearningServices/workspaces/workspaces123/onlineEndpoints/testendpoint",
+        "type": "Microsoft.MachineLearningServices/workspaces/onlineEndpoints",
+        "name": "testendpoint",
+        "identity": {},
+        "location": "westus2euap",
+        "tags": {},
+        "kind": "AMLCompute",
+        "properties": {
+          "description": "This is a test endpoint",
+          "trafficRules": {},
+          "computeConfiguration": {
+            "computeType": "AMLCompute"
+          },
+          "provisioningState": "Succeeded",
+          "endpoint": "testendpointUri",
+          "swaggerEndpoint": "testSwaggerEndpointUri",
+          "authMode": "KeyAuth"
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/...pathToOperationStatus..."
+      }
+    }
+  }
+}
