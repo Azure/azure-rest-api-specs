@@ -23,6 +23,9 @@ directive:
   - rename-operation:
       from: IntegrationRuntimeStatus_Get
       to: IntegrationRuntimeStatusOperation_Get
+  - rename-model:
+      from: SubResource
+      to: EntityResource
 ```
 
 ### Java multi-api
