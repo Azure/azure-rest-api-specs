@@ -5085,6 +5085,7 @@
         "type": {
           "type": "string",
           "description": "The identity type.",
+          "default": "SystemAssigned",
           "enum": [
             "SystemAssigned",
             "UserAssigned",
@@ -5092,7 +5093,7 @@
           ],
           "x-ms-enum": {
             "name": "FactoryIdentityType",
-            "modelAsString": false
+            "modelAsString": true
           }
         },
         "principalId": {
@@ -5111,10 +5112,7 @@
           "$ref": "#/definitions/UserAssignedIdentitiesDefinitionSpecification",
           "description": "List of user assigned identities for the factory."
         }
-      },
-      "required": [
-        "type"
-      ]
+      }
     },
     "UserAssignedIdentitiesDefinitionSpecification": {
       "description": "Definition of all user assigned identities for a factory.",
