@@ -5,6 +5,8 @@ These settings apply only when `--go` is specified on the command line.
 ```yaml $(go)
 go:
   license-header: MICROSOFT_APACHE_NO_VERSION
+  namespace: falcon
+  output-folder: $(go-sdks-folder)/services/preview/$(namespace)/mgmt/2020-09-02-preview/$(namespace)
   clear-output-folder: true
 ```
 
@@ -14,6 +16,5 @@ These settings apply only when `--tag=package-2020-01-20-preview --go` is specif
 Please also specify `--go-sdks-folder=<path to the root directory of your azure-sdk-for-go clone>`.
 
 ```yaml $(tag) == 'package-2020-01-20-preview' && $(go)
-namespace: falcon
 output-folder: $(go-sdks-folder)/services/preview/$(namespace)/mgmt/2020-01-20-preview/$(namespace)
 ```

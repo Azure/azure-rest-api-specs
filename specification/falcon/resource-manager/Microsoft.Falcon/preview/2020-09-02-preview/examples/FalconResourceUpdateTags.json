@@ -1,0 +1,31 @@
+{
+  "parameters": {
+    "api-version": "2020-09-02-preview",
+    "subscriptionId": "subid",
+    "resourceGroupName": "rg1",
+    "resourceName": "sampleResource",
+    "parameters": {
+      "tags": {
+        "tag1": "value1",
+        "tag2": "value2"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Falcon/resources/sampleResource",
+        "name": "sampleResource",
+        "location": "West US",
+        "tags": {
+          "tag1": "value1",
+          "tag2": "value2"
+        },
+        "properties": {
+          "namespaceName": "sampleNamespaceName",
+		  "serviceName": "sampleServiceName"			
+        }
+      }
+    }
+  }
+}
