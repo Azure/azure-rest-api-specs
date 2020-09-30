@@ -1979,6 +1979,19 @@
       ],
       "description": "The encryption settings on the storage account."
     },
+    "ResourceAccessRule": {
+      "properties": {
+        "tenantId": {
+          "type": "string",
+          "description": "Tenant Id"
+        },
+        "resourceId": {
+          "type": "string",
+          "description": "Resource Id"
+        }
+      },
+      "description": "Resource Access Rule."
+    },
     "VirtualNetworkRule": {
       "properties": {
         "id": {
@@ -2061,6 +2074,13 @@
           "x-ms-client-name": "Bypass",
           "default": "AzureServices",
           "description": "Specifies whether traffic is bypassed for Logging/Metrics/AzureServices. Possible values are any combination of Logging|Metrics|AzureServices (For example, \"Logging, Metrics\"), or None to bypass none of those traffics."
+        },
+        "resourceAccessRules": {
+          "type": "array",
+          "items": {
+            "description": "Resource Access Rules.",
+            "$ref": "#/definitions/ResourceAccessRule"
+          }
         },
         "virtualNetworkRules": {
           "type": "array",
@@ -2267,6 +2287,30 @@
       ],
       "description": "Identity for the resource."
     },
+    "ExtendedLocationType": {
+      "type": "string",
+      "description": "The type of extendedLocation.",
+      "enum": [
+        "EdgeZone"
+      ],
+      "x-ms-enum": {
+        "name": "ExtendedLocationTypes",
+        "modelAsString": true
+      }
+    },
+    "ExtendedLocation": {
+      "description": "The complex type of the extended location.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the extended location."
+        },
+        "type": {
+          "$ref": "#/definitions/ExtendedLocationType",
+          "description": "The type of the extended location."
+        }
+      }
+    },
     "StorageAccountCreateParameters": {
       "properties": {
         "sku": {
@@ -2291,6 +2335,10 @@
         "location": {
           "type": "string",
           "description": "Required. Gets or sets the location of the resource. This will be one of the supported and registered Azure Geo Regions (e.g. West US, East US, Southeast Asia, etc.). The geo region of a resource cannot be changed once it is created, but if an identical geo region is specified on update, the request will succeed."
+        },
+        "extendedLocation": {
+          "$ref": "#/definitions/ExtendedLocation",
+          "description": "Optional. Set the extended location of the resource. If not set, the storage account will be created in Azure main region. Otherwise it will be created in the specified extended location"
         },
         "tags": {
           "type": "object",
@@ -2761,6 +2809,10 @@
         "identity": {
           "$ref": "#/definitions/Identity",
           "description": "The identity of the resource."
+        },
+        "extendedLocation": {
+          "$ref": "#/definitions/ExtendedLocation",
+          "description": "The extendedLocation of the resource."
         },
         "properties": {
           "x-ms-client-flatten": true,

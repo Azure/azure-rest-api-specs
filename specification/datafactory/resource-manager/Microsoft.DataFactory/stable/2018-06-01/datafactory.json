@@ -4890,6 +4890,18 @@
         "encryption": {
           "$ref": "#/definitions/EncryptionConfiguration",
           "description": "Properties to enable Customer Managed Key for the factory."
+        },
+        "publicNetworkAccess": {
+          "description": "Whether or not public network access is allowed for the data factory.",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "PublicNetworkAccess",
+            "modelAsString": true
+          }
         }
       }
     },

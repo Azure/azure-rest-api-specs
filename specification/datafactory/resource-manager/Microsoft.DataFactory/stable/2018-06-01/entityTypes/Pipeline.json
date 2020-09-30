@@ -2203,13 +2203,9 @@
           "type": "object",
           "description": "The time to await before sending next request, in milliseconds "
         },
-        "compressionType": {
+        "httpCompressionType": {
           "type": "object",
-          "description": "Compression Type to Send data in compressed format with Optimal Compression Level, Default is None. And The Only Supported option is Gzip. "
-        },
-        "wrapRequestJsonInAnObject": {
-          "type": "object",
-          "description": "Wraps Request Array Json into an Object before calling the rest endpoint , Default is false. ex: if true request content sample format is { rows:[]} else the format is []"
+          "description": "Http Compression Type to Send data in compressed format with Optimal Compression Level, Default is None. And The Only Supported option is Gzip. "
         }
       }
     },
@@ -2764,6 +2760,40 @@
         "query": {
           "type": "object",
           "description": "Database query. Should be a SQL-92 query expression. Type: string (or Expression with resultType string)."
+        },
+        "additionalColumns": {
+          "type": "array",
+          "description": "Specifies the additional columns to be added to source data. Type: array of objects (or Expression with resultType array of objects).",
+          "items": {
+            "$ref": "#/definitions/AdditionalColumns"
+          }
+        }
+      }
+    },
+    "MongoDbAtlasSource": {
+      "description": "A copy activity source for a MongoDB Atlas database.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CopySource"
+        }
+      ],
+      "properties": {
+        "filter": {
+          "type": "object",
+          "description": "Specifies selection filter using query operators. To return all documents in a collection, omit this parameter or pass an empty document ({}). Type: string (or Expression with resultType string)."
+        },
+        "cursorMethods": {
+          "description": "Cursor methods for Mongodb query",
+          "$ref": "#/definitions/MongoDbCursorMethodsProperties"
+        },
+        "batchSize": {
+          "type": "object",
+          "description": "Specifies the number of documents to return in each batch of the response from MongoDB Atlas instance. In most cases, modifying the batch size will not affect the user or the application. This property's main purpose is to avoid hit the limitation of response size. Type: integer (or Expression with resultType integer)."
+        },
+        "queryTimeout": {
+          "type": "object",
+          "description": "Query timeout. Type: string (or Expression with resultType string), pattern: ((\\d+)\\.)?(\\d\\d):(60|([0-5][0-9])):(60|([0-5][0-9]))."
         },
         "additionalColumns": {
           "type": "array",
