@@ -38,17 +38,11 @@
   "paths": {
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.insights/activityLogAlerts/{activityLogAlertName}": {
       "put": {
-        "description": "Create a new Activity Log Alert rule or update an existing one.",
+        "description": "Create a new activity log alert or update an existing one.",
         "operationId": "ActivityLogAlerts_CreateOrUpdate",
         "x-ms-examples": {
-          "Create or update an Activity Log Alert rule": {
+          "Create or update an activity log alert": {
             "$ref": "./examples/createOrUpdateActivityLogAlert.json"
-          },
-          "Create or update an Activity Log Alert rule with 'anyOf' condition": {
-            "$ref": "./examples/createOrUpdateActivityLogAlertRuleWithAnyOfCondition.json"
-          },
-          "Create or update an Activity Log Alert rule with 'containsAny'": {
-            "$ref": "./examples/createOrUpdateActivityLogAlertRuleWithContainsAny.json"
           }
         },
         "parameters": [
@@ -66,29 +60,29 @@
           },
           {
             "name": "activityLogAlert",
-            "description": "The Activity Log Alert rule to create or use for the update.",
             "in": "body",
             "required": true,
             "schema": {
               "$ref": "#/definitions/ActivityLogAlertResource"
-            }
+            },
+            "description": "The activity log alert to create or use for the update."
           }
         ],
         "responses": {
           "200": {
-            "description": "An existing Activity Log Alert rule was successfully updated.",
+            "description": "An existing activity log alert was successfully updated.",
             "schema": {
               "$ref": "#/definitions/ActivityLogAlertResource"
             }
           },
           "201": {
-            "description": "A new Activity Log Alert rule was successfully created.",
+            "description": "A new activity log alert was successfully created.",
             "schema": {
               "$ref": "#/definitions/ActivityLogAlertResource"
             }
           },
           "default": {
-            "description": "An error occurred and the Activity Log Alert rule could not be created or updated.",
+            "description": "An error occurred and the activity log alert could not be created or updated.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
@@ -96,7 +90,7 @@
         }
       },
       "get": {
-        "description": "Get an Activity Log Alert rule.",
+        "description": "Get an activity log alert.",
         "operationId": "ActivityLogAlerts_Get",
         "x-ms-examples": {
           "Get an activity log alert": {
@@ -125,7 +119,7 @@
             }
           },
           "default": {
-            "description": "An error occurred and the Activity Log Alert rule could not be retrieved.",
+            "description": "An error occurred and the activity log alert could not be retrieved.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
@@ -133,7 +127,7 @@
         }
       },
       "delete": {
-        "description": "Delete an Activity Log Alert rule.",
+        "description": "Delete an activity log alert.",
         "operationId": "ActivityLogAlerts_Delete",
         "x-ms-examples": {
           "Delete an activity log alert": {
@@ -156,13 +150,13 @@
         ],
         "responses": {
           "200": {
-            "description": "The Activity Log Alert rule was successfully deleted."
+            "description": "The activity log alert was successfully deleted."
           },
           "204": {
-            "description": "The Activity Log Alert rule does not exist. It may have already been deleted."
+            "description": "The activity log alert does not exist. It may have already been deleted."
           },
           "default": {
-            "description": "An error occurred and the Activity Log Alert rule could not be deleted.",
+            "description": "An error occurred and the activity log alert could not be deleted.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
@@ -203,7 +197,7 @@
             }
           },
           "200": {
-            "description": "An existing Activity Log Alert rule was successfully updated.",
+            "description": "An existing activity log alert was successfully updated.",
             "schema": {
               "$ref": "#/definitions/ActivityLogAlertResource"
             }
@@ -218,7 +212,7 @@
     },
     "/subscriptions/{subscriptionId}/providers/microsoft.insights/activityLogAlerts": {
       "get": {
-        "description": "Get a list of all Activity Log Alert rules in a subscription.",
+        "description": "Get a list of all activity log alerts in a subscription.",
         "operationId": "ActivityLogAlerts_ListBySubscriptionId",
         "x-ms-examples": {
           "List activity log alerts": {
@@ -244,7 +238,7 @@
             }
           },
           "default": {
-            "description": "An error occurred and the list of Activity Log Alert rules could not be retrieved.",
+            "description": "An error occurred and the list of activity log alerts could not be retrieved.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
@@ -254,7 +248,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.insights/activityLogAlerts": {
       "get": {
-        "description": "Get a list of all Activity Log Alert rules in a resource group.",
+        "description": "Get a list of all activity log alerts in a resource group.",
         "operationId": "ActivityLogAlerts_ListByResourceGroup",
         "x-ms-examples": {
           "List activity log alerts": {
@@ -283,7 +277,7 @@
             }
           },
           "default": {
-            "description": "An error occurred and the list of Activity Log Alert rules could not be retrieved.",
+            "description": "An error occurred and the list of activity log alerts could not be retrieved.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
@@ -332,7 +326,7 @@
       "description": "An azure resource object"
     },
     "ActivityLogAlertResource": {
-      "description": "An Activity Log Alert rule resource.",
+      "description": "An activity log alert resource.",
       "allOf": [
         {
           "$ref": "#/definitions/Resource"
@@ -342,19 +336,19 @@
         "properties": {
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/ActivityLogAlert",
-          "description": "The Activity Log Alert rule properties of the resource."
+          "description": "The activity log alert properties of the resource."
         }
       }
     },
     "ActivityLogAlertList": {
-      "description": "A list of Activity Log Alert rules.",
+      "description": "A list of activity log alerts.",
       "properties": {
         "value": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/ActivityLogAlertResource"
           },
-          "description": "The list of Activity Log Alert rules."
+          "description": "The list of activity log alerts."
         },
         "nextLink": {
           "type": "string",
@@ -363,7 +357,7 @@
       }
     },
     "ActivityLogAlert": {
-      "description": "An Azure Activity Log Alert rule.",
+      "description": "An Azure activity log alert.",
       "properties": {
         "scopes": {
           "type": "array",
@@ -375,7 +369,7 @@
         "enabled": {
           "type": "boolean",
           "default": true,
-          "description": "Indicates whether this Activity Log Alert rule is enabled. If an Activity Log Alert rule is not enabled, then none of its actions will be activated."
+          "description": "Indicates whether this activity log alert is enabled. If an activity log alert is not enabled, then none of its actions will be activated."
         },
         "condition": {
           "$ref": "#/definitions/ActivityLogAlertAllOfCondition",
@@ -387,7 +381,7 @@
         },
         "description": {
           "type": "string",
-          "description": "A description of this Activity Log Alert rule."
+          "description": "A description of this activity log alert."
         }
       },
       "required": [
@@ -397,95 +391,46 @@
       ]
     },
     "ActivityLogAlertAllOfCondition": {
-      "description": "An Activity Log Alert rule condition that is met when all its member conditions are met.",
-      "type": "object",
       "properties": {
         "allOf": {
-          "description": "The list of Activity Log Alert rule conditions.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/ActivityLogAlertAnyOfOrLeafCondition"
-          }
+            "$ref": "#/definitions/ActivityLogAlertLeafCondition"
+          },
+          "description": "The list of activity log alert conditions."
         }
       },
+      "description": "An Activity Log alert condition that is met when all its member conditions are met.",
       "required": [
         "allOf"
       ]
     },
-    "ActivityLogAlertAnyOfOrLeafCondition": {
-      "description": "An Activity Log Alert rule condition that is met when all its member conditions are met.",
-      "type": "object",
-      "discriminator": "odata.type",
-      "properties": {
-        "odata.type": {
-          "type": "string",
-          "default": null
-        }
-      }
-    },
-    "ActivityLogAlertAnyOfCondition": {
-      "description": "An Activity Log Alert rule condition that is met when at least one of its member conditions are met.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/ActivityLogAlertAnyOfOrLeafCondition"
-        },
-        {
-          "type": "object",
-          "properties": {
-            "anyOf": {
-              "description": "The list of Activity Log Alert rule conditions.",
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/ActivityLogAlertLeafCondition"
-              }
-            }
-          },
-          "required": [
-            "anyOf"
-          ]
-        }
-      ]      
-    },
     "ActivityLogAlertLeafCondition": {
-      "description": "An Activity Log Alert rule condition that is met by comparing an activity log field and value.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/ActivityLogAlertAnyOfOrLeafCondition"
+      "properties": {
+        "field": {
+          "type": "string",
+          "description": "The name of the field that this condition will examine. The possible values for this field are (case-insensitive): 'resourceId', 'category', 'caller', 'level', 'operationName', 'resourceGroup', 'resourceProvider', 'status', 'subStatus', 'resourceType', or anything beginning with 'properties.'."
         },
-        {
-          "type": "object",
-          "properties": {
-            "field": {
-              "description": "The name of the field that this condition will examine. The possible values for this field are (case-insensitive): 'resourceId', 'category', 'caller', 'level', 'operationName', 'resourceGroup', 'resourceProvider', 'status', 'subStatus', 'resourceType', or anything beginning with 'properties'.",
-              "type": "string"
-            },
-            "equals": {
-              "description": "The field value will be compared to this value (case-insensitive) to determine if the condition is met.",
-              "type": "string"
-            },
-            "containsAny": {
-              "description": "The field value will be compared to the values in this array (case-insensitive) to determine if the condition is met.",
-              "type": "array",
-              "items": {
-                "type": "string"
-              }
-            }
-          },
-          "required": [
-            "field"
-          ]
+        "equals": {
+          "type": "string",
+          "description": "The field value will be compared to this value (case-insensitive) to determine if the condition is met."
         }
+      },
+      "description": "An Activity Log alert condition that is met by comparing an activity log field and value.",
+      "required": [
+        "field",
+        "equals"
       ]
     },
     "ActivityLogAlertActionList": {
-      "description": "A list of Activity Log Alert rule actions.",
+      "description": "A list of activity log alert actions.",
       "properties": {
         "actionGroups": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/ActivityLogAlertActionGroup"
           },
-          "description": "The list of the Action Groups."
+          "description": "The list of activity log alerts."
         }
       }
     },
@@ -543,7 +488,7 @@
         "enabled": {
           "type": "boolean",
           "default": true,
-          "description": "Indicates whether this Activity Log Alert rule is enabled. If an Activity Log Alert rule is not enabled, then none of its actions will be activated."
+          "description": "Indicates whether this activity log alert is enabled. If an activity log alert is not enabled, then none of its actions will be activated."
         }
       }
     }
@@ -554,7 +499,7 @@
       "in": "path",
       "required": true,
       "type": "string",
-      "description": "The subscription Id."
+      "description": "The Azure subscription Id."
     },
     "ResourceGroupNameParameter": {
       "name": "resourceGroupName",
@@ -569,7 +514,7 @@
       "in": "path",
       "required": true,
       "type": "string",
-      "description": "The name of the Activity Log Alert rule.",
+      "description": "The name of the activity log alert.",
       "x-ms-parameter-location": "method"
     },
     "ApiVersionParameter": {
