@@ -117,8 +117,18 @@ These settings apply only when `--tag=package-2020-09-01-preview` is specified o
 ``` yaml $(tag) == 'package-2020-09-01-preview'
 input-file:
 - Microsoft.MachineLearningServices/preview/2020-09-01-preview/machineLearningServices.json
-- Microsoft.MachineLearningServices/preview/2020-09-01-preview/inference.json
 ```
+
+### Tag: package-2020-09-01-preview.2
+
+These settings apply only when `--tag=package-2020-09-01-preview.2` is specified on the command line.
+
+``` yaml $(tag) == 'package-2020-09-01-preview.2'
+input-file:
+- Microsoft.MachineLearningServices/preview/2020-09-01-preview.2/machineLearningServices.json
+- Microsoft.MachineLearningServices/preview/2020-09-01-preview.2/inference.json
+```
+
 
 ### Tag: package-2020-05-01-preview
 
@@ -223,6 +233,7 @@ batch:
   - tag: package-2019-05-01
   - tag: package-2018-11-19
   - tag: package-2020-09-01-preview
+  - tag: package-2020-09-01-preview.2
   - tag: package-2020-05-01-preview
   - tag: package-2020-04-01-preview
   - tag: package-2020-02-18-preview
@@ -344,6 +355,19 @@ java:
 regenerate-manager: true
 generate-interface: true
 ```
+
+### Tag: package-2020-09-01-preview.2 and java
+
+These settings apply only when `--tag=package-2020-09-01-preview.2 --java` is specified on the command line.
+Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-2020-09-01-preview.2' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.machinelearningservices.v2020_09_01_preview.2
+  output-folder: $(azure-libraries-for-java-folder)/sdk/machinelearningservices/mgmt-v2020_09_01_preview.2
+regenerate-manager: true
+generate-interface: true
+``
 
 ### Tag: package-2020-05-01-preview and java
 
