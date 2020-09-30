@@ -5596,6 +5596,314 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Logic/integrationAccounts/{integrationAccountName}/usageConfigurations": {
+      "get": {
+        "tags": [
+          "IntegrationAccountUsageConfigurations"
+        ],
+        "operationId": "IntegrationAccountUsageConfigurations_List",
+        "description": "Gets a list of integration account usage configurations.",
+        "x-ms-examples": {
+          "Get usage configurations by integration account name": {
+            "$ref": "./examples/IntegrationAccountUsageConfigurations_List.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "name": "resourceGroupName",
+            "description": "The resource group name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "integrationAccountName",
+            "description": "The integration account name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "name": "$top",
+            "description": "The number of items to be included in the result.",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/IntegrationAccountUsageConfigurationListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Logic/integrationAccounts/{integrationAccountName}/usageConfigurations/{usageConfigurationName}": {
+      "get": {
+        "tags": [
+          "IntegrationAccountUsageConfigurations"
+        ],
+        "operationId": "IntegrationAccountUsageConfigurations_Get",
+        "description": "Gets an integration account usage configuration.",
+        "x-ms-examples": {
+          "Get usage configuration by name": {
+            "$ref": "./examples/IntegrationAccountUsageConfigurations_Get.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "name": "resourceGroupName",
+            "description": "The resource group name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "integrationAccountName",
+            "description": "The integration account name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "usageConfigurationName",
+            "description": "The integration account usage configuration name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/IntegrationAccountUsageConfiguration"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "IntegrationAccountUsageConfigurations"
+        ],
+        "operationId": "IntegrationAccountUsageConfigurations_CreateOrUpdate",
+        "description": "Creates or updates an integration account usage configuration.",
+        "x-ms-examples": {
+          "Create or update usage configuration": {
+            "$ref": "./examples/IntegrationAccountUsageConfigurations_CreateOrUpdate.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "name": "resourceGroupName",
+            "description": "The resource group name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "integrationAccountName",
+            "description": "The integration account name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "usageConfigurationName",
+            "description": "The integration account usage configuration name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "name": "usageConfiguration",
+            "description": "The integration account usage configuration.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/IntegrationAccountUsageConfiguration"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/IntegrationAccountUsageConfiguration"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/IntegrationAccountUsageConfiguration"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "IntegrationAccountUsageConfigurations"
+        ],
+        "operationId": "IntegrationAccountUsageConfigurations_Delete",
+        "description": "Deletes an integration account usage configuration.",
+        "x-ms-examples": {
+          "Delete a usage configuration by name": {
+            "$ref": "./examples/IntegrationAccountUsageConfigurations_Delete.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "name": "resourceGroupName",
+            "description": "The resource group name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "integrationAccountName",
+            "description": "The integration account name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "usageConfigurationName",
+            "description": "The integration account usage configuration name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Logic/integrationAccounts/{integrationAccountName}/usageConfigurations/{usageConfigurationName}/listCallbackUrl": {
+      "post": {
+        "tags": [
+          "IntegrationAccountUsageConfigurations"
+        ],
+        "operationId": "IntegrationAccountUsageConfigurations_ListCallbackUrl",
+        "description": "Get the callback url.",
+        "x-ms-examples": {
+          "Get the callback url": {
+            "$ref": "./examples/IntegrationAccountUsageConfigurations_ListCallbackUrl.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "name": "resourceGroupName",
+            "description": "The resource group name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "integrationAccountName",
+            "description": "The integration account name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "usageConfigurationName",
+            "description": "The integration account usage configuration name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "name": "listCallbackUrl",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/GetCallbackUrlParameters"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/WorkflowTriggerCallbackUrl"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Logic/integrationServiceEnvironments": {
       "get": {
         "tags": [
@@ -9160,7 +9468,8 @@
         "NotSpecified",
         "Free",
         "Basic",
-        "Standard"
+        "Standard",
+        "Virtual"
       ],
       "x-ms-enum": {
         "name": "IntegrationAccountSkuName",
@@ -9490,6 +9799,103 @@
         }
       },
       "description": "The integration account sku."
+    },
+    "IntegrationAccountUsageConfigurationListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/IntegrationAccountUsageConfiguration"
+          },
+          "description": "The list of integration account usage configurations."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The URL to get the next set of results."
+        }
+      },
+      "description": "The list of integration account usage configurations."
+    },
+    "IntegrationAccountUsageConfiguration": {
+      "type": "object",
+      "required": [
+        "properties"
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/IntegrationAccountUsageConfigurationProperties",
+          "description": "The integration account usage configuration properties."
+        }
+      },
+      "description": "The integration account usage configuration.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ]
+    },
+    "IntegrationAccountUsageConfigurationProperties": {
+      "type": "object",
+      "properties": {
+        "disableOverride": {
+          "type": "boolean",
+          "description": "Whether to disable runtime override of the usage configuration."
+        },
+        "throttles": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/UsageConfigurationThrottle"
+          },
+          "description": "The usage configuration throttles."
+        }
+      },
+      "description": "The integration account usage configuration properties."
+    },
+    "UsageConfigurationThrottle": {
+      "type": "object",
+      "properties": {
+        "threshold": {
+          "type": "number",
+          "description": "The number of operations to throttle at."
+        },
+        "period": {
+          "type": "object",
+          "$ref": "#/definitions/UsageConfigurationThrottlePeriod",
+          "description": "The usage configuration throttle period"
+        },
+        "triggerStatuses": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/WorkflowStatus"
+          },
+          "description": "The trigger statuses to throttle"
+        },
+        "actionStatuses": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/WorkflowStatus"
+          },
+          "description": "The action statuses to throttle"
+        }
+      },
+      "description": "The usage configuration throttle."
+    },
+    "UsageConfigurationThrottlePeriod": {
+      "type": "object",
+      "properties": {
+        "interval": {
+          "type": "number",
+          "description": "The throttle period interval."
+        },
+        "frequency": {
+          "type": "object",
+          "$ref": "#/definitions/RecurrenceFrequency",
+          "description": "The throttle frequency"
+        }
+      },
+      "description": "The usage configuration throttle period."
     },
     "IntegrationAccountPartnerListResult": {
       "type": "object",
