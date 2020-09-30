@@ -2607,6 +2607,39 @@
         }
       }
     },
+    "/providers/Microsoft.AppPlatform/runtimeVersions": {
+      "get": {
+        "tags": [
+          "AppPlatform"
+        ],
+        "description": "Lists all of the available runtime versions supported by Microsoft.AppPlatform provider.",
+        "operationId": "RuntimeVersions_ListRuntimeVersions",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success. The response describes the details of all supported deployment runtime versions.",
+            "schema": {
+              "$ref": "#/definitions/AvailableRuntimeVersions"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "RuntimeVersions_ListRuntimeVersions": {
+            "$ref": "./examples/RuntimeVersions_ListRuntimeVersions.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.AppPlatform/skus": {
       "get": {
         "tags": [
@@ -2918,6 +2951,21 @@
         "appNetworkResourceGroup": {
           "description": "Name of the resource group containing network resources of Azure Spring Cloud Apps",
           "type": "string"
+        },
+        "outboundIPs": {
+          "description": "Desired outbound IP resources for Azure Spring Cloud instance.",
+          "type": "object",
+          "readOnly": true,
+          "properties": {
+            "publicIPs": {
+              "type": "array",
+              "readOnly": true,
+              "items": {
+                "type": "string"
+              },
+              "description": "A list of public IP addresses."
+            }
+          }
         }
       }
     },
@@ -3667,6 +3715,7 @@
           "description": "Type of the source uploaded",
           "enum": [
             "Jar",
+            "NetCoreZip",
             "Source"
           ],
           "type": "string",
@@ -3709,6 +3758,10 @@
           "description": "JVM parameter",
           "type": "string"
         },
+        "netCoreMainEntryPath": {
+          "description": "The path to the .NET executable relative to zip root",
+          "type": "string"
+        },
         "environmentVariables": {
           "description": "Collection of environment variables",
           "type": "object",
@@ -3720,7 +3773,8 @@
           "description": "Runtime version",
           "enum": [
             "Java_8",
-            "Java_11"
+            "Java_11",
+            "NetCore_31"
           ],
           "type": "string",
           "x-ms-enum": {
@@ -3751,6 +3805,11 @@
         },
         "discoveryStatus": {
           "description": "Discovery status of the deployment instance",
+          "type": "string",
+          "readOnly": true
+        },
+        "startTime": {
+          "description": "Start time of the deployment instance",
           "type": "string",
           "readOnly": true
         }
@@ -4253,6 +4312,57 @@
         }
       },
       "x-ms-external": true
+    },
+    "AvailableRuntimeVersions": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "A list of all supported runtime versions.",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SupportedRuntimeVersion"
+          },
+          "readOnly": true
+        }
+      },
+      "readOnly": true
+    },
+    "SupportedRuntimeVersion": {
+      "description": "Supported deployment runtime version descriptor.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "The raw value which could be passed to deployment CRUD operations.",
+          "enum": [
+            "Java_8",
+            "Java_11",
+            "NetCore_31"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "SupportedRuntimeValue",
+            "modelAsString": true
+          }
+        },
+        "platform": {
+          "description": "The platform of this runtime version (possible values: \"Java\" or \".NET\").",
+          "enum": [
+            "Java",
+            ".NET Core"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "SupportedRuntimePlatform",
+            "modelAsString": true
+          }
+        },
+        "version": {
+          "description": "The detailed version (major.minor) of the platform.",
+          "type": "string"
+        }
+      },
+      "readOnly": true
     }
   },
   "parameters": {
