@@ -1363,8 +1363,8 @@
             "endpointType": {
               "description": "The type of Digital Twins endpoint",
               "enum": [
-                "EventHub",
-                "ServiceBus"
+                "EventHubWithIdentity",
+                "ServiceBusWithIdentity"
               ],
               "x-ms-enum": {
                 "name": "EndpointTypeWithIdentity",
@@ -1416,7 +1416,7 @@
         "endpointUri",
         "entityPath"
       ],
-      "x-ms-discriminator-value": "ServiceBus",
+      "x-ms-discriminator-value": "ServiceBusWithIdentity",
       "allOf": [
         {
           "$ref": "#/definitions/DigitalTwinsEndpointResourcePropertiesWithIdentity"
@@ -1473,7 +1473,7 @@
         "endpointUri",
         "entityPath"
       ],
-      "x-ms-discriminator-value": "EventHub",
+      "x-ms-discriminator-value": "EventHubWithIdentity",
       "allOf": [
         {
           "$ref": "#/definitions/DigitalTwinsEndpointResourcePropertiesWithIdentity"
