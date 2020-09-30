@@ -4,10 +4,7 @@
     "resourceGroupName": "testrg123",
     "workspaceName": "workspaces123",
     "onlineEndpointName": "testendpoint",
-    "api-version": "2020-10-01-preview",
-    "properties": {
-      "tags": {}
-    }
+    "api-version": "2020-12-01-preview"
   },
   "responses": {
     "200": {
@@ -18,25 +15,33 @@
         "identity": {},
         "location": "westus2euap",
         "tags": {},
-        "kind": "AKS",
+        "kind": "ACI",
         "properties": {
           "description": "This is a test endpoint",
           "trafficRules": {},
           "computeConfiguration": {
-            "computeType": "AKS",
-            "namespace": "testAKSNamespace",
-            "computeName": "testAKSComputeName"
+            "computeType": "ACI",
+            "sslConfiguration": {
+              "sslEnabled": false,
+              "sslCertificate": "",
+              "sslKey": "",
+              "cName": ""
+            },
+            "vnetConfiguration": {
+              "vnetName": "testVnet",
+              "subnetName": "testSubnet"
+            },
+            "encryptionProperties": {
+              "vaultBaseUrl": "testVaultUri",
+              "keyName": "testKeyValue",
+              "keyVersion": "testKeyVersion"
+            }
           },
           "provisioningState": "Succeeded",
           "endpoint": "testendpointUri",
           "swaggerEndpoint": "testSwaggerEndpointUri",
           "authMode": "KeyAuth"
         }
-      }
-    },
-    "202": {
-      "headers": {
-        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/...pathToOperationStatus..."
       }
     }
   }

@@ -5,7 +5,41 @@
     "workspaceName": "workspaces123",
     "onlineEndpointName": "testendpoint",
     "deploymentName": "testdeployment",
-    "api-version": "2020-10-01-preview"
+    "api-version": "2020-12-01-preview",
+    "properties": {
+      "location": "westus2euap",
+      "tags": {},
+      "properties": {
+        "description": "This is a test deployment",
+        "properties": {},
+        "modelId": "modelURL",
+        "codeConfiguration": {
+          "codeArtifactId": "testCodeArtifactId",
+          "command": [
+            "testCommand"
+          ]
+        },
+        "environmentId": "testEnvironmentId",
+        "environmentOverrides": {
+          "environmentVariables": {
+            "envKey": "envValue"
+          }
+        },
+        "deploymentConfiguration": {
+          "computeType": "ACI",
+          "modelDataCollection": {
+            "eventHubEnabled": false,
+            "storageEnabled": false
+          },
+          "containerResourceRequirements": {
+            "cpu": 1,
+            "memoryInGB": 1,
+            "gpu": 0,
+            "fpga": 0
+          }
+        }
+      }
+    }
   },
   "responses": {
     "200": {
@@ -46,6 +80,11 @@
             }
           }
         }
+      }
+    },
+    "202": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/...pathToOperationStatus..."
       }
     }
   }

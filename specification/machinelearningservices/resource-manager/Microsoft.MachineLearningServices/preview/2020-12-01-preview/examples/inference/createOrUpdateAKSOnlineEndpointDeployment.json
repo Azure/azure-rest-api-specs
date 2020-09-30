@@ -5,7 +5,7 @@
     "workspaceName": "workspaces123",
     "onlineEndpointName": "testendpoint",
     "deploymentName": "testdeployment",
-    "api-version": "2020-10-01-preview",
+    "api-version": "2020-12-01-preview",
     "properties": {
       "location": "westus2euap",
       "tags": {},
@@ -20,13 +20,27 @@
           ]
         },
         "environmentId": "testEnvironmentId",
+        "skuScaleSettings": {
+          "minimum": 1,
+          "maximum": 5
+        },
         "environmentOverrides": {
           "environmentVariables": {
             "envKey": "envValue"
           }
         },
         "deploymentConfiguration": {
-          "computeType": "ACI",
+          "computeType": "AKS",
+          "maxConcurrentRequestsPerContainer": 1,
+          "maxQueueWaitMs": 100,
+          "scoringTimeoutMs": 100,
+          "livenessProbeRequirements": {
+            "failureThreshold": 100,
+            "successThreshold": 10,
+            "timeoutSeconds": 1,
+            "periodSeconds": 1,
+            "initialDelaySeconds": 1
+          },
           "modelDataCollection": {
             "eventHubEnabled": false,
             "storageEnabled": false
@@ -36,6 +50,9 @@
             "memoryInGB": 1,
             "gpu": 0,
             "fpga": 0
+          },
+          "scalingConfiguration": {
+            "autoscaleEnabled": false
           }
         }
       }
@@ -49,7 +66,7 @@
         "type": "Microsoft.MachineLearningServices/workspaces/onlineEndpoints/deployments",
         "location": "westus2euap",
         "tags": {},
-        "kind": "ACI",
+        "kind": "AKS",
         "properties": {
           "description": "This is a test deployment",
           "modelId": "modelURL",
@@ -61,13 +78,27 @@
           },
           "provisioningState": "Succeeded",
           "environmentId": "testEnvironmentId",
+          "skuScaleSettings": {
+            "minimum": 1,
+            "maximum": 5
+          },
           "environmentOverrides": {
             "environmentVariables": {
               "envKey": "envValue"
             }
           },
           "deploymentConfiguration": {
-            "computeType": "ACI",
+            "computeType": "AKS",
+            "maxConcurrentRequestsPerContainer": 1,
+            "maxQueueWaitMs": 100,
+            "scoringTimeoutMs": 100,
+            "livenessProbeRequirements": {
+              "failureThreshold": 100,
+              "successThreshold": 10,
+              "timeoutSeconds": 1,
+              "periodSeconds": 1,
+              "initialDelaySeconds": 1
+            },
             "modelDataCollection": {
               "eventHubEnabled": false,
               "storageEnabled": false
@@ -77,6 +108,9 @@
               "memoryInGB": 1,
               "gpu": 0,
               "fpga": 0
+            },
+            "scalingConfiguration": {
+              "autoscaleEnabled": false
             }
           }
         }

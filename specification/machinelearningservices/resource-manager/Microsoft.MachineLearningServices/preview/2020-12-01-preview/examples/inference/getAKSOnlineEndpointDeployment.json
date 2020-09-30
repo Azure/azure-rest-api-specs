@@ -5,58 +5,7 @@
     "workspaceName": "workspaces123",
     "onlineEndpointName": "testendpoint",
     "deploymentName": "testdeployment",
-    "api-version": "2020-10-01-preview",
-    "properties": {
-      "location": "westus2euap",
-      "tags": {},
-      "properties": {
-        "description": "This is a test deployment",
-        "properties": {},
-        "modelId": "modelURL",
-        "codeConfiguration": {
-          "codeArtifactId": "testCodeArtifactId",
-          "command": [
-            "testCommand"
-          ]
-        },
-        "environmentId": "testEnvironmentId",
-        "skuScaleSettings": {
-          "minimum": 1,
-          "maximum": 5
-        },
-        "environmentOverrides": {
-          "environmentVariables": {
-            "envKey": "envValue"
-          }
-        },
-        "deploymentConfiguration": {
-          "computeType": "AKS",
-          "maxConcurrentRequestsPerContainer": 1,
-          "maxQueueWaitMs": 100,
-          "scoringTimeoutMs": 100,
-          "livenessProbeRequirements": {
-            "failureThreshold": 100,
-            "successThreshold": 10,
-            "timeoutSeconds": 1,
-            "periodSeconds": 1,
-            "initialDelaySeconds": 1
-          },
-          "modelDataCollection": {
-            "eventHubEnabled": false,
-            "storageEnabled": false
-          },
-          "containerResourceRequirements": {
-            "cpu": 1,
-            "memoryInGB": 1,
-            "gpu": 0,
-            "fpga": 0
-          },
-          "scalingConfiguration": {
-            "autoscaleEnabled": false
-          }
-        }
-      }
-    }
+    "api-version": "2020-12-01-preview"
   },
   "responses": {
     "200": {
@@ -114,11 +63,6 @@
             }
           }
         }
-      }
-    },
-    "202": {
-      "headers": {
-        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/...pathToOperationStatus..."
       }
     }
   }

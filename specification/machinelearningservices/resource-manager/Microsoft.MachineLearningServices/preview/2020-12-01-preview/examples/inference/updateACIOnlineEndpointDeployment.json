@@ -5,7 +5,7 @@
     "workspaceName": "workspaces123",
     "onlineEndpointName": "testendpoint",
     "deploymentName": "testdeployment",
-    "api-version": "2020-10-01-preview",
+    "api-version": "2020-12-01-preview",
     "properties": {
       "tags": {}
     }
@@ -18,7 +18,7 @@
         "type": "Microsoft.MachineLearningServices/workspaces/onlineEndpoints/deployments",
         "location": "westus2euap",
         "tags": {},
-        "kind": "AKS",
+        "kind": "ACI",
         "properties": {
           "description": "This is a test deployment",
           "modelId": "modelURL",
@@ -40,17 +40,7 @@
             }
           },
           "deploymentConfiguration": {
-            "computeType": "AKS",
-            "maxConcurrentRequestsPerContainer": 1,
-            "maxQueueWaitMs": 100,
-            "scoringTimeoutMs": 100,
-            "livenessProbeRequirements": {
-              "failureThreshold": 100,
-              "successThreshold": 10,
-              "timeoutSeconds": 1,
-              "periodSeconds": 1,
-              "initialDelaySeconds": 1
-            },
+            "computeType": "ACI",
             "modelDataCollection": {
               "eventHubEnabled": false,
               "storageEnabled": false
@@ -60,9 +50,6 @@
               "memoryInGB": 1,
               "gpu": 0,
               "fpga": 0
-            },
-            "scalingConfiguration": {
-              "autoscaleEnabled": false
             }
           }
         }

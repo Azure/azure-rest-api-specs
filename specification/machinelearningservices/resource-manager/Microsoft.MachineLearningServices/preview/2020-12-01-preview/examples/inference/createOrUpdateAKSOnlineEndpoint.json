@@ -4,7 +4,22 @@
     "resourceGroupName": "testrg123",
     "workspaceName": "workspaces123",
     "onlineEndpointName": "testendpoint",
-    "api-version": "2020-10-01-preview"
+    "api-version": "2020-12-01-preview",
+    "properties": {
+      "location": "westus2euap",
+      "tags": {},
+      "properties": {
+        "description": "This is a test endpoint",
+        "properties": {},
+        "trafficRules": {},
+        "computeConfiguration": {
+          "computeType": "AKS",
+          "namespace": "testAKSNamespace",
+          "computeName": "testAKSComputeName"
+        },
+        "authMode": "KeyAuth"
+      }
+    }
   },
   "responses": {
     "200": {
@@ -29,6 +44,11 @@
           "swaggerEndpoint": "testSwaggerEndpointUri",
           "authMode": "KeyAuth"
         }
+      }
+    },
+    "202": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/...pathToOperationStatus..."
       }
     }
   }
