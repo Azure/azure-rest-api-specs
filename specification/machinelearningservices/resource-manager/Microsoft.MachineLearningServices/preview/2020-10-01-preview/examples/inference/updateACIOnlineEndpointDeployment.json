@@ -5,7 +5,10 @@
     "workspaceName": "workspaces123",
     "onlineEndpointName": "testendpoint",
     "deploymentName": "testdeployment",
-    "api-version": "2020-09-01-preview.2"
+    "api-version": "2020-10-01-preview",
+    "properties": {
+      "tags": {}
+    }
   },
   "responses": {
     "200": {
@@ -15,7 +18,7 @@
         "type": "Microsoft.MachineLearningServices/workspaces/onlineEndpoints/deployments",
         "location": "westus2euap",
         "tags": {},
-        "kind": "AMLCompute",
+        "kind": "ACI",
         "properties": {
           "description": "This is a test deployment",
           "modelId": "modelURL",
@@ -37,9 +40,24 @@
             }
           },
           "deploymentConfiguration": {
-            "computeType": "AMLCompute"
+            "computeType": "ACI",
+            "modelDataCollection": {
+              "eventHubEnabled": false,
+              "storageEnabled": false
+            },
+            "containerResourceRequirements": {
+              "cpu": 1,
+              "memoryInGB": 1,
+              "gpu": 0,
+              "fpga": 0
+            }
           }
         }
+      }
+    },
+    "202": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/...pathToOperationStatus..."
       }
     }
   }

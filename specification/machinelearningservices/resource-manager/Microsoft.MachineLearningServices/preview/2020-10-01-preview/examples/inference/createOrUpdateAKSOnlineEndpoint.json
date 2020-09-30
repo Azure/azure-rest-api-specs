@@ -4,7 +4,7 @@
     "resourceGroupName": "testrg123",
     "workspaceName": "workspaces123",
     "onlineEndpointName": "testendpoint",
-    "api-version": "2020-09-01-preview.2",
+    "api-version": "2020-10-01-preview",
     "properties": {
       "location": "westus2euap",
       "tags": {},
@@ -13,7 +13,9 @@
         "properties": {},
         "trafficRules": {},
         "computeConfiguration": {
-          "computeType": "AMLCompute"
+          "computeType": "AKS",
+          "namespace": "testAKSNamespace",
+          "computeName": "testAKSComputeName"
         },
         "authMode": "KeyAuth"
       }
@@ -28,12 +30,14 @@
         "identity": {},
         "location": "westus2euap",
         "tags": {},
-        "kind": "AMLCompute",
+        "kind": "AKS",
         "properties": {
           "description": "This is a test endpoint",
           "trafficRules": {},
           "computeConfiguration": {
-            "computeType": "AMLCompute"
+            "computeType": "AKS",
+            "namespace": "testAKSNamespace",
+            "computeName": "testAKSComputeName"
           },
           "provisioningState": "Succeeded",
           "endpoint": "testendpointUri",

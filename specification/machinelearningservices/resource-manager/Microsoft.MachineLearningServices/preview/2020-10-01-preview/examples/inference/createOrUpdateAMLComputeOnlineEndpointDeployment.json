@@ -5,9 +5,34 @@
     "workspaceName": "workspaces123",
     "onlineEndpointName": "testendpoint",
     "deploymentName": "testdeployment",
-    "api-version": "2020-09-01-preview.2",
+    "api-version": "2020-10-01-preview",
     "properties": {
-      "tags": {}
+      "location": "westus2euap",
+      "tags": {},
+      "properties": {
+        "description": "This is a test deployment",
+        "properties": {},
+        "modelId": "modelURL",
+        "codeConfiguration": {
+          "codeArtifactId": "testCodeArtifactId",
+          "command": [
+            "testCommand"
+          ]
+        },
+        "environmentId": "testEnvironmentId",
+        "skuScaleSettings": {
+          "minimum": 1,
+          "maximum": 5
+        },
+        "environmentOverrides": {
+          "environmentVariables": {
+            "envKey": "envValue"
+          }
+        },
+        "deploymentConfiguration": {
+          "computeType": "AMLCompute"
+        }
+      }
     }
   },
   "responses": {
@@ -18,7 +43,7 @@
         "type": "Microsoft.MachineLearningServices/workspaces/onlineEndpoints/deployments",
         "location": "westus2euap",
         "tags": {},
-        "kind": "ACI",
+        "kind": "AMLCompute",
         "properties": {
           "description": "This is a test deployment",
           "modelId": "modelURL",
@@ -40,17 +65,7 @@
             }
           },
           "deploymentConfiguration": {
-            "computeType": "ACI",
-            "modelDataCollection": {
-              "eventHubEnabled": false,
-              "storageEnabled": false
-            },
-            "containerResourceRequirements": {
-              "cpu": 1,
-              "memoryInGB": 1,
-              "gpu": 0,
-              "fpga": 0
-            }
+            "computeType": "AMLCompute"
           }
         }
       }

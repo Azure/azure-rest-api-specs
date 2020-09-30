@@ -4,7 +4,7 @@
     "resourceGroupName": "testrg123",
     "workspaceName": "workspaces123",
     "onlineEndpointName": "testendpoint",
-    "api-version": "2020-09-01-preview.2"
+    "api-version": "2020-10-01-preview"
   },
   "responses": {
     "200": {
@@ -15,12 +15,27 @@
         "identity": {},
         "location": "westus2euap",
         "tags": {},
-        "kind": "AMLCompute",
+        "kind": "ACI",
         "properties": {
           "description": "This is a test endpoint",
           "trafficRules": {},
           "computeConfiguration": {
-            "computeType": "AMLCompute"
+            "computeType": "ACI",
+            "sslConfiguration": {
+              "sslEnabled": false,
+              "sslCertificate": "",
+              "sslKey": "",
+              "cName": ""
+            },
+            "vnetConfiguration": {
+              "vnetName": "testVnet",
+              "subnetName": "testSubnet"
+            },
+            "encryptionProperties": {
+              "vaultBaseUrl": "testVaultUri",
+              "keyName": "testKeyValue",
+              "keyVersion": "testKeyVersion"
+            }
           },
           "provisioningState": "Succeeded",
           "endpoint": "testendpointUri",
