@@ -1324,7 +1324,7 @@
     },
     "DigitalTwinsEndpointResourcePropertiesWithKeys": {
       "description": "Properties related to Digital Twins Endpoint with key-based authentication.",
-      "x-ms-discriminator-value": "DigitalTwinsEndpointResourcePropertiesWithKeys",
+      "x-ms-discriminator-value": "DigitalTwinsEndpointResourcePropertiesType",
       "allOf": [
         {
           "$ref": "#/definitions/DigitalTwinsEndpointResourceProperties"
@@ -1344,7 +1344,7 @@
     },
     "DigitalTwinsEndpointResourcePropertiesWithIdentity": {
       "description": "Properties related to Digital Twins Endpoint with identity-based authentication.",
-      "x-ms-discriminator-value": "DigitalTwinsEndpointResourcePropertiesWithIdentity",
+      "x-ms-discriminator-value": "DigitalTwinsEndpointResourcePropertiesType",
       "allOf": [
         {
           "$ref": "#/definitions/DigitalTwinsEndpointResourceProperties"
@@ -1366,7 +1366,7 @@
       "required": [
         "primaryConnectionString"
       ],
-      "x-ms-discriminator-value": "ServiceBus",
+      "x-ms-discriminator-value": "DigitalTwinsEndpointResourcePropertiesWithKeysType",
       "allOf": [
         {
           "$ref": "#/definitions/DigitalTwinsEndpointResourcePropertiesWithKeys"
@@ -1396,7 +1396,7 @@
         "endpointUri",
         "entityPath"
       ],
-      "x-ms-discriminator-value": "ServiceBusWithIdentity",
+      "x-ms-discriminator-value": "DigitalTwinsEndpointResourcePropertiesWithIdentityType",
       "allOf": [
         {
           "$ref": "#/definitions/DigitalTwinsEndpointResourcePropertiesWithIdentity"
@@ -1423,7 +1423,7 @@
       "required": [
         "connectionStringPrimaryKey"
       ],
-      "x-ms-discriminator-value": "EventHub",
+      "x-ms-discriminator-value": "DigitalTwinsEndpointResourcePropertiesWithKeysType",
       "allOf": [
         {
           "$ref": "#/definitions/DigitalTwinsEndpointResourcePropertiesWithKeys"
@@ -1453,7 +1453,7 @@
         "endpointUri",
         "entityPath"
       ],
-      "x-ms-discriminator-value": "EventHubWithIdentity",
+      "x-ms-discriminator-value": "DigitalTwinsEndpointResourcePropertiesWithIdentityType",
       "allOf": [
         {
           "$ref": "#/definitions/DigitalTwinsEndpointResourcePropertiesWithIdentity"
@@ -1481,7 +1481,7 @@
         "TopicEndpoint",
         "accessKey1"
       ],
-      "x-ms-discriminator-value": "EventGrid",
+      "x-ms-discriminator-value": "DigitalTwinsEndpointResourcePropertiesWithKeysType",
       "allOf": [
         {
           "$ref": "#/definitions/DigitalTwinsEndpointResourcePropertiesWithKeys"
