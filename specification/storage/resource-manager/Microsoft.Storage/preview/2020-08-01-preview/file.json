@@ -67,6 +67,9 @@
         "x-ms-examples": {
           "PutFileServices": {
             "$ref": "./examples/FileServicesPut.json"
+          },
+          "PutFileServices_EnableSMBMultichannel": {
+            "$ref": "./examples/FileServicesPut_EnableSMBMultichannel.json"
           }
         },
         "description": "Sets the properties of file services in storage accounts, including CORS (Cross-Origin Resource Sharing) rules. ",
@@ -526,6 +529,10 @@
             "shareDeleteRetentionPolicy": {
               "$ref": "./common.json#/definitions/DeleteRetentionPolicy",
               "description": "The file service properties for share soft delete."
+            },
+            "protocolSettings": {
+              "$ref": "#/definitions/ProtocolSettings",
+              "description": "Protocol settings for file service"
             }
           },
           "x-ms-client-flatten": true,
@@ -544,6 +551,30 @@
         }
       ],
       "description": "The properties of File services in storage account."
+    },
+    "ProtocolSettings": {
+      "properties": {
+        "smb": {
+          "$ref": "#/definitions/SmbSetting",
+          "description": "Setting for SMB protocol"
+        }
+      }
+    },
+    "SmbSetting": {
+      "properties": {
+        "multichannel": {
+          "$ref": "#/definitions/Multichannel",
+          "description": "Multichannel setting. Applies to Premium FileStorage only."
+        }
+      }
+    },
+    "Multichannel": {
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "description": "Indicates whether multichannel is enabled"
+        }
+      }
     },
     "FileShare": {
       "properties": {
