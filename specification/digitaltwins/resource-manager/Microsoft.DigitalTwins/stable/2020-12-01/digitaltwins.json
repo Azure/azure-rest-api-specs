@@ -1260,24 +1260,11 @@
     },
     "DigitalTwinsEndpointResourceProperties": {
       "description": "Properties related to Digital Twins Endpoint",
-      "discriminator": "endpointType",
+      "discriminator": "authenticationType",
       "required": [
-        "endpointType"
+        "authenticationType"
       ],
       "properties": {
-        "endpointType": {
-          "description": "The type of Digital Twins endpoint",
-          "enum": [
-            "EventHub",
-            "EventGrid",
-            "ServiceBus"
-          ],
-          "x-ms-enum": {
-            "name": "endpointType",
-            "modelAsString": true
-          },
-          "type": "string"
-        },
         "provisioningState": {
           "description": "The provisioning state.",
           "enum": [
@@ -1324,7 +1311,11 @@
     },
     "DigitalTwinsEndpointResourcePropertiesWithKeys": {
       "description": "Properties related to Digital Twins Endpoint with key-based authentication.",
-      "x-ms-discriminator-value": "DigitalTwinsEndpointResourcePropertiesType",
+      "x-ms-discriminator-value": "KeyBased",
+      "discriminator": "endpointType",
+      "required": [
+        "endpointType"
+      ],
       "allOf": [
         {
           "$ref": "#/definitions/DigitalTwinsEndpointResourceProperties"
@@ -1332,6 +1323,19 @@
         {
           "type": "object",
           "properties": {
+            "endpointType": {
+              "description": "The type of Digital Twins endpoint",
+              "enum": [
+                "EventHub",
+                "EventGrid",
+                "ServiceBus"
+              ],
+              "x-ms-enum": {
+                "name": "endpointType",
+                "modelAsString": true
+              },
+              "type": "string"
+            },
             "deadLetterSecret": {
               "x-ms-secret": true,
               "description": "Dead letter storage secret for key-based authentication. Will be obfuscated during read.",
@@ -1344,7 +1348,11 @@
     },
     "DigitalTwinsEndpointResourcePropertiesWithIdentity": {
       "description": "Properties related to Digital Twins Endpoint with identity-based authentication.",
-      "x-ms-discriminator-value": "DigitalTwinsEndpointResourcePropertiesType",
+      "x-ms-discriminator-value": "IdentityBased",
+      "discriminator": "endpointType",
+      "required": [
+        "endpointType"
+      ],
       "allOf": [
         {
           "$ref": "#/definitions/DigitalTwinsEndpointResourceProperties"
@@ -1352,6 +1360,18 @@
         {
           "type": "object",
           "properties": {
+            "endpointType": {
+              "description": "The type of Digital Twins endpoint",
+              "enum": [
+                "EventHub",
+                "ServiceBus"
+              ],
+              "x-ms-enum": {
+                "name": "EndpointTypeWithIdentity",
+                "modelAsString": true
+              },
+              "type": "string"
+            },
             "deadLetterUri": {
               "description": "Dead letter storage URL for identity-based authentication.",
               "type": "string",
@@ -1366,7 +1386,7 @@
       "required": [
         "primaryConnectionString"
       ],
-      "x-ms-discriminator-value": "DigitalTwinsEndpointResourcePropertiesWithKeysType",
+      "x-ms-discriminator-value": "ServiceBus",
       "allOf": [
         {
           "$ref": "#/definitions/DigitalTwinsEndpointResourcePropertiesWithKeys"
@@ -1396,7 +1416,7 @@
         "endpointUri",
         "entityPath"
       ],
-      "x-ms-discriminator-value": "DigitalTwinsEndpointResourcePropertiesWithIdentityType",
+      "x-ms-discriminator-value": "ServiceBus",
       "allOf": [
         {
           "$ref": "#/definitions/DigitalTwinsEndpointResourcePropertiesWithIdentity"
@@ -1423,7 +1443,7 @@
       "required": [
         "connectionStringPrimaryKey"
       ],
-      "x-ms-discriminator-value": "DigitalTwinsEndpointResourcePropertiesWithKeysType",
+      "x-ms-discriminator-value": "EventHub",
       "allOf": [
         {
           "$ref": "#/definitions/DigitalTwinsEndpointResourcePropertiesWithKeys"
@@ -1453,7 +1473,7 @@
         "endpointUri",
         "entityPath"
       ],
-      "x-ms-discriminator-value": "DigitalTwinsEndpointResourcePropertiesWithIdentityType",
+      "x-ms-discriminator-value": "EventHub",
       "allOf": [
         {
           "$ref": "#/definitions/DigitalTwinsEndpointResourcePropertiesWithIdentity"
@@ -1481,7 +1501,7 @@
         "TopicEndpoint",
         "accessKey1"
       ],
-      "x-ms-discriminator-value": "DigitalTwinsEndpointResourcePropertiesWithKeysType",
+      "x-ms-discriminator-value": "EventGrid",
       "allOf": [
         {
           "$ref": "#/definitions/DigitalTwinsEndpointResourcePropertiesWithKeys"
