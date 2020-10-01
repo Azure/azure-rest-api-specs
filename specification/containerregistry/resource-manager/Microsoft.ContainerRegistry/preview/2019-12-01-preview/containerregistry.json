@@ -1805,6 +1805,10 @@
         }
       ],
       "properties": {
+        "location": {
+          "description": "The location of the export pipeline.",
+          "type": "string"
+        },
         "identity": {
           "$ref": "#/definitions/IdentityProperties",
           "description": "The identity of the export pipeline."
@@ -2037,6 +2041,10 @@
         }
       ],
       "properties": {
+        "location": {
+          "description": "The location of the import pipeline.",
+          "type": "string"
+        },
         "identity": {
           "$ref": "#/definitions/IdentityProperties",
           "description": "The identity of the import pipeline."
@@ -3376,6 +3384,11 @@
           "$ref": "#/definitions/Status",
           "description": "The status of the replication at the time the operation was called.",
           "readOnly": true
+        },
+        "regionEndpointEnabled": {
+          "description": "Specifies whether the replication's regional endpoint is enabled. Requests will not be routed to a replication whose regional endpoint is disabled, however its data will continue to be synced with other replications.",
+          "default": true,
+          "type": "boolean"
         }
       }
     },
@@ -3389,6 +3402,20 @@
           "additionalProperties": {
             "type": "string"
           }
+        },
+        "properties": {
+          "$ref": "#/definitions/ReplicationUpdateParametersProperties",
+          "description": "The parameters for updating a replication's properties",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "ReplicationUpdateParametersProperties": {
+      "type": "object",
+      "properties": {
+        "regionEndpointEnabled": {
+          "description": "Specifies whether the replication's regional endpoint is enabled. Requests will not be routed to a replication whose regional endpoint is disabled, however its data will continue to be synced with other replications.",
+          "type": "boolean"
         }
       }
     },

@@ -37,7 +37,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventHub/clusters": {
       "get": {
         "tags": [
-          "Event Hubs Clusters"
+          "EventHubs Clusters"
         ],
         "operationId": "Clusters_ListByResourceGroup",
         "x-ms-examples": {
@@ -48,13 +48,13 @@
         "description": "Lists the available Event Hubs Clusters within an ARM resource group",
         "parameters": [
           {
-            "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../common/v1/definitions.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -67,7 +67,7 @@
           "default": {
             "description": "Event Hub Cluster error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../common/v1/definitions.json#/definitions/ErrorResponse"
+              "$ref": "../../../common/v1/definitions.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -79,7 +79,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventHub/clusters/{clusterName}": {
       "get": {
         "tags": [
-          "Event Hubs Cluster"
+          "EventHubs Clusters"
         ],
         "operationId": "Clusters_Get",
         "x-ms-examples": {
@@ -90,16 +90,16 @@
         "description": "Gets the resource description of the specified Event Hubs Cluster.",
         "parameters": [
           {
-            "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "../../common/v1/definitions.json#/parameters/ClusterNameParameter"
+            "$ref": "../../../common/v1/definitions.json#/parameters/ClusterNameParameter"
           },
           {
-            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../common/v1/definitions.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -112,16 +112,16 @@
           "default": {
             "description": "Event Hubs Cluster error response describing why the cluster description get operation failed.",
             "schema": {
-              "$ref": "../../common/v1/definitions.json#/definitions/ErrorResponse"
+              "$ref": "../../../common/v1/definitions.json#/definitions/ErrorResponse"
             }
           }
         }
       },
       "put": {
         "tags": [
-          "Event Hubs Cluster"
+          "EventHubs Clusters"
         ],
-        "operationId": "Clusters_Put",
+        "operationId": "Clusters_CreateOrUpdate",
         "x-ms-examples": {
           "ClusterPut": {
             "$ref": "./examples/Clusters/ClusterPut.json"
@@ -130,16 +130,28 @@
         "description": "Creates or updates an instance of an Event Hubs Cluster.",
         "parameters": [
           {
-            "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "../../common/v1/definitions.json#/parameters/ClusterNameParameter"
+            "$ref": "../../../common/v1/definitions.json#/parameters/ClusterNameParameter"
           },
           {
-            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Cluster",
+              "required": [
+                "location"
+              ]
+            },
+            "description": "Parameters for creating a eventhub cluster resource."
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -161,7 +173,7 @@
           "default": {
             "description": "Event Hubs error response detailing why the Event Hubs Cluster create or update operation failed.",
             "schema": {
-              "$ref": "../../common/v1/definitions.json#/definitions/ErrorResponse"
+              "$ref": "../../../common/v1/definitions.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -169,9 +181,9 @@
       },
       "patch": {
         "tags": [
-          "Event Hubs Cluster"
+          "EventHubs Clusters"
         ],
-        "operationId": "Clusters_Patch",
+        "operationId": "Clusters_Update",
         "x-ms-examples": {
           "ClusterPatch": {
             "$ref": "./examples/Clusters/ClusterPatch.json"
@@ -180,16 +192,16 @@
         "description": "Modifies mutable properties on the Event Hubs Cluster. This operation is idempotent.",
         "parameters": [
           {
-            "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "../../common/v1/definitions.json#/parameters/ClusterNameParameter"
+            "$ref": "../../../common/v1/definitions.json#/parameters/ClusterNameParameter"
           },
           {
-            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../common/v1/definitions.json#/parameters/ApiVersionParameter"
           },
           {
             "name": "parameters",
@@ -220,7 +232,7 @@
           "default": {
             "description": "Event Hubs error response detailing why the Event Hubs Cluster update operation failed.",
             "schema": {
-              "$ref": "../../common/v1/definitions.json#/definitions/ErrorResponse"
+              "$ref": "../../../common/v1/definitions.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -228,7 +240,7 @@
       },
       "delete": {
         "tags": [
-          "Event Hubs Cluster"
+          "EventHubs Clusters"
         ],
         "operationId": "Clusters_Delete",
         "x-ms-examples": {
@@ -239,16 +251,16 @@
         "description": "Deletes an existing Event Hubs Cluster. This operation is idempotent.",
         "parameters": [
           {
-            "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "../../common/v1/definitions.json#/parameters/ClusterNameParameter"
+            "$ref": "../../../common/v1/definitions.json#/parameters/ClusterNameParameter"
           },
           {
-            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../common/v1/definitions.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -264,7 +276,7 @@
           "default": {
             "description": "Event Hubs error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../common/v1/definitions.json#/definitions/ErrorResponse"
+              "$ref": "../../../common/v1/definitions.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -274,21 +286,21 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventHub/clusters/{clusterName}/namespaces": {
       "get": {
         "tags": [
-          "Event Hubs Namespace Enumeration in Cluster"
+          "EventHubs Clusters Namespace"
         ],
         "operationId": "Clusters_ListNamespaces",
         "parameters": [
           {
-            "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "../../common/v1/definitions.json#/parameters/ClusterNameParameter"
+            "$ref": "../../../common/v1/definitions.json#/parameters/ClusterNameParameter"
           },
           {
-            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../common/v1/definitions.json#/parameters/ApiVersionParameter"
           }
         ],
         "description": "List all Event Hubs Namespace IDs in an Event Hubs Dedicated Cluster.",
@@ -307,7 +319,7 @@
           "default": {
             "description": "Event Hubs Cluster error response detailing why this operation failed.",
             "schema": {
-              "$ref": "../../common/v1/definitions.json#/definitions/ErrorResponse"
+              "$ref": "../../../common/v1/definitions.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -324,12 +336,12 @@
         "properties": {
           "x-ms-client-flatten": true,
           "properties": {
-            "created": {
+            "createdAt": {
               "readOnly": true,
               "type": "string",
               "description": "The UTC time when the Event Hubs Cluster was created."
             },
-            "updated": {
+            "updatedAt": {
               "readOnly": true,
               "type": "string",
               "description": "The UTC time when the Event Hubs Cluster was last updated."
@@ -350,7 +362,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../common/v1/definitions.json#/definitions/TrackedResource"
+          "$ref": "../../../common/v1/definitions.json#/definitions/TrackedResource"
         }
       ],
       "description": "Single Event Hubs Cluster resource in List or Get operations."

@@ -47,6 +47,7 @@ cli:
     - name: DataBoxEdgeDeviceGetByResourceGroup
     - name: DataBoxEdgeDeviceGetBySubscription
     - name: ListSkus
+    - name: ListAvailableSkus
     - name: OperationsGet
     - name: ContainerRefresh
     - name: CreateOrUpdateSecuritySettings
