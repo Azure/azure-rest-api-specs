@@ -35,6 +35,22 @@ These settings apply only when `--tag=package-2020-07-20-preview1` is specified 
 
 ```yaml $(tag) == 'package-2020-07-20-preview1'
 input-file:
+  - Microsoft.CommunicationServicesSms/preview/2020-07-20-preview1/communicationservicesadministration.json
+title:
+  Azure Communication Services
+```
+
+```yaml
+openapi-type: data-plane
+tag: package-2020-07-20-preview1
+```
+
+### Tag: package-2020-07-20-preview1
+
+These settings apply only when `--tag=package-2020-07-20-preview1` is specified on the command line.
+
+```yaml $(tag) == 'package-2020-07-20-preview1'
+input-file:
   - Microsoft.CommunicationServicesSms/preview/2020-07-20-preview1/communicationservicessms.json
 title:
   Azure Communication Services
