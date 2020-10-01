@@ -3290,6 +3290,12 @@
               "description": "The health of the Fusion Group",
               "$ref": "#/definitions/HealthStatus",
               "readOnly": true
+            },
+            "allowance": {
+              "title": "Allowance",
+              "description": "The remaining allowance for the company associated with the Fusion Group",
+              "$ref": "#/definitions/Allowance",
+              "readOnly": true
             }
           }
         },
@@ -3814,6 +3820,12 @@
           "title": "KerberosConfiguration",
           "description": "The configuration properties for authenticating to the source filesystem",
           "$ref": "#/definitions/KerberosConfiguration"
+        },
+        "allowance": {
+          "title": "Allowance",
+          "description": "The remaining allowance for the company associated with the Migrator",
+          "$ref": "#/definitions/Allowance",
+          "readOnly": true
         }
       }
     },
@@ -4526,6 +4538,17 @@
           "items": {
             "$ref": "#/definitions/ErrorDefinition"
           }
+        }
+      }
+    },
+    "Allowance": {
+      "description": "The remaining allowance included as part of any plan for a resource",
+      "properties": {
+        "remainingData": {
+          "description": "The number of MBs remaining",
+          "type": "integer",
+          "format": "int64",
+          "readOnly": true
         }
       }
     },
