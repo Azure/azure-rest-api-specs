@@ -5,7 +5,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Azure Media Services",
-    "description": "Live streaming APIs",
+    "description": "Live event and streaming endpoint management APIs",
     "version": "2020-05-01"
   },
   "host": "management.azure.com",
@@ -448,7 +448,7 @@
           "LiveEvents"
         ],
         "summary": "Reset Live Event",
-        "description": "Resets an existing live event.",
+        "description": "Resets an existing live event. All live outputs for the live event are deleted and the live event is stopped and will be started again. All assets used by the live outputs and streaming locators created on these assets are unaffected. ",
         "operationId": "LiveEvents_Reset",
         "parameters": [
           {
@@ -1127,7 +1127,7 @@
         "fragmentsPerTsSegment": {
           "format": "int32",
           "type": "integer",
-          "description": "The number of fragments in an HTTP Live Streaming (HLS) TS segment in the output of the live event."
+          "description": "The number of fragments in an HTTP Live Streaming (HLS) TS segment in the output of the live event. This value does not affect the packing ratio for HLS CMAF output."
         }
       },
       "description": "HTTP Live Streaming (HLS) packing setting for the live output."
@@ -1149,7 +1149,7 @@
         "archiveWindowLength": {
           "format": "duration",
           "type": "string",
-          "description": "ISO 8601 timespan duration of the archive window length. This is the maximum content length that can be archived in the asset for this live output, also the maximum content length for the rewind window."
+          "description": "ISO 8601 timespan between one minute to 25 hours to indicate the maximum content length that can be archived in the asset for this live output. This also sets the maximum content length for the rewind window. For example, use PT1H30M to indicate 1 hour and 30 minutes of archive window."
         },
         "manifestName": {
           "type": "string",
@@ -1211,7 +1211,7 @@
           }
         }
       },
-      "description": "The JSON object that contains the properties required to create a LiveOutput."
+      "description": "The JSON object that contains the properties required to create a live output."
     },
     "LiveOutput": {
       "properties": {
@@ -1290,7 +1290,7 @@
             "values": [
               {
                 "value": "FragmentedMP4",
-                "description": "Smooth streaming input will be sent by the contribution encoder to the live event."
+                "description": "Smooth Streaming input will be sent by the contribution encoder to the live event."
               },
               {
                 "value": "RTMP",
@@ -1307,7 +1307,7 @@
         },
         "keyFrameIntervalDuration": {
           "type": "string",
-          "description": "ISO 8601 timespan duration of the key frame interval duration of the input. This value sets the EXT-X-TARGETDURATION property in the HLS output."
+          "description": "ISO 8601 timespan duration of the key frame interval duration of the input. This value sets the EXT-X-TARGETDURATION property in the HLS output. For example, use PT2S to indicate 2 seconds. Leave the value empty for encoding live events."
         },
         "accessToken": {
           "type": "string",
@@ -1370,7 +1370,7 @@
           "items": {
             "$ref": "#/definitions/LiveEventEndpoint"
           },
-          "description": "The endpoints for preview."
+          "description": "The endpoints for preview. Do not share the preview URL with the live event audience."
         },
         "accessControl": {
           "type": "object",
@@ -1387,7 +1387,7 @@
         },
         "alternativeMediaId": {
           "type": "string",
-          "description": "An Alternative Media Identifier associated with the StreamingLocator created for the preview. This value is specified at creation time and cannot be updated. The identifier can be used in the CustomLicenseAcquisitionUrlTemplate or the CustomKeyAcquisitionUrlTemplate of the StreamingPolicy specified in the StreamingPolicyName field."
+          "description": "An alternative media identifier associated with the streaming locator created for the preview. This value is specified at creation time and cannot be updated. The identifier can be used in the CustomLicenseAcquisitionUrlTemplate or the CustomKeyAcquisitionUrlTemplate of the StreamingPolicy specified in the StreamingPolicyName field."
         }
       },
       "description": "The Live Event preview."
@@ -1455,10 +1455,10 @@
         "keyFrameInterval": {
           "type": "string",
           "format": "duration",
-          "description": "Specifies the output fragment length for both video and audio tracks. For the video track it also defines the key frame interval, or the length of a GoP (group of pictures). The value should be a non-zero integer in the range of [0.5, 20] seconds, specified in the ISO 8601 format. If this value is not set, output fragment lengths will be the same as input."
+          "description": "Use an ISO 8601 timespan value between 0.5 to 20 seconds to specify the output fragment length for the video and audio tracks of an encoding live event. For example, use PT2S to indicate 2 seconds. For the video track it also defines the key frame interval, or the length of a GoP (group of pictures).   If this value is not set for an encoding live event, the fragment duration defaults to 2 seconds. The value cannot be set for pass-through live events."
         }
       },
-      "description": "Specifies the live event type and optional encoding settings for encoding live events.."
+      "description": "Specifies the live event type and optional encoding settings for encoding live events."
     },
     "LiveEventInputTrackSelection": {
       "properties": {
@@ -1700,7 +1700,7 @@
         },
         "@odata.nextLink": {
           "type": "string",
-          "description": "Th link to the next set of results. Not empty if value contains incomplete list of Live Outputs."
+          "description": "The link to the next set of results. Not empty if value contains incomplete list of live outputs."
         }
       },
       "description": "The LiveEvent list result.",
@@ -1919,7 +1919,7 @@
         },
         "@odata.nextLink": {
           "type": "string",
-          "description": "Th link to the next set of results. Not empty if value contains incomplete list of StreamingEndpoints."
+          "description": "The link to the next set of results. Not empty if value contains incomplete list of streaming enpdoints."
         }
       },
       "description": "The streaming endpoint list result.",
