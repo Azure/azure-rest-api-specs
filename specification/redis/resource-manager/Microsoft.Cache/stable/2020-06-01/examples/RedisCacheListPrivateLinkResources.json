@@ -1,31 +1,30 @@
 {
-    "parameters": {
-      "subscriptionId": "{subscription-id}",
-      "resourceGroupName": "rgtest01",
-      "cacheName": "cacheTest01",
-      "api-version": "2020-06-01"
-    },
-    "responses": {
-      "200": {
-        "body": {
-          "value": [
-            {
-              "id": "/subscriptions/{subscription-id}/resourceGroups/rgtest01/providers/Microsoft.Cache/Redis/cacheTest01/privateLinkResources/redisCache",
-              "name": "redisCache",
-              "type": "Microsoft.Cache/Redis/privateLinkResources",
-              "properties": {
-                "groupId": "redisCache",
-                "requiredMembers": [
-                  "redisCache"
-                ],
-                "requiredZoneNames": [
-                  "privatelink.redis.cache.windows.net"
-                ]
-              }
+  "parameters": {
+    "subscriptionId": "{subscription-id}",
+    "resourceGroupName": "rgtest01",
+    "cacheName": "cacheTest01",
+    "api-version": "2020-06-01"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/{subscription-id}/resourceGroups/rgtest01/providers/Microsoft.Cache/Redis/cacheTest01/privateLinkResources/redisCache",
+            "name": "redisCache",
+            "type": "Microsoft.Cache/Redis/privateLinkResources",
+            "properties": {
+              "groupId": "redisCache",
+              "requiredMembers": [
+                "redisCache"
+              ],
+              "requiredZoneNames": [
+                "privatelink.redis.cache.windows.net"
+              ]
             }
-          ]
-        }
+          }
+        ]
       }
     }
   }
-  
+}

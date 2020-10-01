@@ -1,37 +1,37 @@
 {
-    "parameters": {
-        "subscriptionId": "{subscriptionId}",
-        "resourceGroupName": "rgtest01",
-        "cacheName": "cachetest01",
-        "privateEndpointConnectionName": "pectest01",
-        "api-version": "2020-06-01",
-        "properties": {
-            "properties": {
-                "privateLinkServiceConnectionState": {
-                    "status": "Approved",
-                    "description": "Auto-Approved"
-                }
-            }
+  "parameters": {
+    "subscriptionId": "{subscriptionId}",
+    "resourceGroupName": "rgtest01",
+    "cacheName": "cachetest01",
+    "privateEndpointConnectionName": "pectest01",
+    "api-version": "2020-06-01",
+    "properties": {
+      "properties": {
+        "privateLinkServiceConnectionState": {
+          "status": "Approved",
+          "description": "Auto-Approved"
         }
-    },
-    "responses": {
-        "201": {
-            "body": {
-                "id": "/subscriptions/{subscriptionId}/resourceGroups/rgtest01/providers/Microsoft.Cache/Redis/cachetest01/privateEndpointConnections/pectest01",
-                "name": "pectest01",
-                "type": "Microsoft.Cache/Redis/privateEndpointConnections",
-                "properties": {
-                    "provisioningState": "Succeeded",
-                    "privateEndpoint": {
-                        "id": "/subscriptions/{subscriptionId}/resourceGroups/rgtest01/providers/Microsoft.Network/privateEndpoints/petest01"
-                    },
-                    "privateLinkServiceConnectionState": {
-                        "status": "Approved",
-                        "description": "Auto-Approved",
-                        "actionsRequired": "None"
-                    }
-                }
-            }
-        }
+      }
     }
+  },
+  "responses": {
+    "201": {
+      "body": {
+        "id": "/subscriptions/{subscriptionId}/resourceGroups/rgtest01/providers/Microsoft.Cache/Redis/cachetest01/privateEndpointConnections/pectest01",
+        "name": "pectest01",
+        "type": "Microsoft.Cache/Redis/privateEndpointConnections",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "privateEndpoint": {
+            "id": "/subscriptions/{subscriptionId}/resourceGroups/rgtest01/providers/Microsoft.Network/privateEndpoints/petest01"
+          },
+          "privateLinkServiceConnectionState": {
+            "status": "Approved",
+            "description": "Auto-Approved",
+            "actionsRequired": "None"
+          }
+        }
+      }
+    }
+  }
 }
