@@ -1533,6 +1533,7 @@
           "description": "Indicates if public transit fares information is available in the metro area. Fare information is available through [Get Transit Route API](https://aka.ms/AzureMapsMobilityTransitRoute) and [Get Transit Itinerary APIs](https://aka.ms/AzureMapsMobilityTransitItinerary)."
         },
         "transitTypes": {
+          "description": "Supported transit types in the metro area. Returned if specified in the request.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/TransitTypeResult"
@@ -2169,7 +2170,6 @@
       "type": "object",
       "properties": {
         "fares": {
-          "description": "Detailed fare information for the leg.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/Fares"
@@ -2182,6 +2182,7 @@
       "type": "object",
       "properties": {
         "price": {
+          "description": "The price of the ticket when purchased for the individual leg, not for the entire route at once.",
           "$ref": "#/definitions/Price"
         },
         "usage": {
