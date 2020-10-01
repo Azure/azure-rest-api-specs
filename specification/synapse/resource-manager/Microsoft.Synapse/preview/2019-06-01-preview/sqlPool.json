@@ -1665,6 +1665,90 @@
             "$ref": "./examples/DeleteSqlPoolColumnSensitivityLabel.json"
           }
         }
+      },
+      "get": {
+        "tags": [
+          "SqlPools, SensitivityLabels"
+        ],
+        "description": "Gets the sensitivity label of a given column",
+        "operationId": "SqlPoolSensitivityLabels_Get",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./workspace.json#/parameters/workspaceNameParameter"
+          },
+          {
+            "type": "string",
+            "in": "path",
+            "name": "sqlPoolName",
+            "description": "SQL pool name",
+            "required": true
+          },
+          {
+            "name": "schemaName",
+            "in": "path",
+            "description": "The name of the schema.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "tableName",
+            "in": "path",
+            "description": "The name of the table.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "columnName",
+            "in": "path",
+            "description": "The name of the column.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "sensitivityLabelSource",
+            "in": "path",
+            "description": "The source of the sensitivity label.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "current",
+              "recommended"
+            ],
+            "x-ms-enum": {
+              "name": "SensitivityLabelSource",
+              "modelAsString": false
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the sensitivity label.",
+            "schema": {
+              "$ref": "#/definitions/SensitivityLabel"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 DatawarehouseDatabaseIsDeactivated - Could not execute Data Classification operation because the database is paused. Please resume it.\n\n * 400 SensitivityLabelSourceNameNotSupported - The specified sensitivity label source is not valid\n\n * 404 SensitivityLabelsColumnNotFound - The specified schema/table/column could not be found\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 DatabaseDoesNotExist - User has specified a database name that does not exist on this server instance.\n\n * 404 SensitivityLabelsLabelNotFound - The specified sensitivity label could not be found\n\n * 501 SensitivityLabelRecommendedSourceNameNotSupported - 'Recommended' sensitivity label source is not supported yet"
+          }
+        },
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-examples": {
+          "Gets the sensitivity label of a given column": {
+            "$ref": "./examples/GetSqlPoolColumnSensitivityLabelGet.json"
+          }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces/{workspaceName}/sqlPools/{sqlPoolName}/schemas/{schemaName}/tables/{tableName}/columns/{columnName}/sensitivityLabels/{sensitivityLabelSource}/enable": {
@@ -3079,6 +3163,250 @@
           "List extended auditing settings of a database": {
             "$ref": "./examples/SqlPoolExtendedAuditingSettingsList.json"
           }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces/{workspaceName}/sqlPools/{sqlPoolName}/dataMaskingPolicies/{dataMaskingPolicyName}": {
+      "put": {
+        "tags": [
+          "SqlPools, DataMaskingPolicies"
+        ],
+        "operationId": "DataMaskingPolicies_CreateOrUpdate",
+        "description": "Creates or updates a Sql pool data masking policy",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./workspace.json#/parameters/workspaceNameParameter"
+          },
+          {
+            "type": "string",
+            "in": "path",
+            "name": "sqlPoolName",
+            "description": "SQL pool name",
+            "required": true
+          },
+          {
+            "$ref": "#/parameters/DataMaskingPolicyNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DataMaskingPolicy"
+            },
+            "description": "Parameters for creating or updating a data masking policy."
+          }
+        ],
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-examples": {
+          "Create or update data masking policy max": {
+            "$ref": "./examples/DataMaskingPolicyCreateOrUpdateMax.json"
+          },
+          "Create or update data masking policy min": {
+            "$ref": "./examples/DataMaskingPolicyCreateOrUpdateMin.json"
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/DataMaskingPolicy"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "SqlPools, DataMaskingPolicies"
+        ],
+        "operationId": "DataMaskingPolicies_Get",
+        "description": "Gets a Sql pool data masking policy.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./workspace.json#/parameters/workspaceNameParameter"
+          },
+          {
+            "type": "string",
+            "in": "path",
+            "name": "sqlPoolName",
+            "description": "SQL pool name",
+            "required": true
+          },
+          {
+            "$ref": "#/parameters/DataMaskingPolicyNameParameter"
+          }
+        ],
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-examples": {
+          "Get data masking policy": {
+            "$ref": "./examples/DataMaskingPolicyGet.json"
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/DataMaskingPolicy"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces/{workspaceName}/sqlPools/{sqlPoolName}/dataMaskingPolicies/{dataMaskingPolicyName}/rules/{dataMaskingRuleName}": {
+      "put": {
+        "tags": [
+          "SqlPools, DataMaskingRules"
+        ],
+        "operationId": "DataMaskingRules_CreateOrUpdate",
+        "description": "Creates or updates a Sql pool data masking rule.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./workspace.json#/parameters/workspaceNameParameter"
+          },
+          {
+            "type": "string",
+            "in": "path",
+            "name": "sqlPoolName",
+            "description": "SQL pool name",
+            "required": true
+          },
+          {
+            "$ref": "#/parameters/DataMaskingPolicyNameParameter"
+          },
+          {
+            "name": "dataMaskingRuleName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the data masking rule."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DataMaskingRule"
+            },
+            "description": "The required parameters for creating or updating a data masking rule."
+          }
+        ],
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-examples": {
+          "Create/Update data masking rule for text": {
+            "$ref": "./examples/DataMaskingRuleCreateOrUpdateText.json"
+          },
+          "Create/Update data masking rule for numbers": {
+            "$ref": "./examples/DataMaskingRuleCreateOrUpdateNumber.json"
+          },
+          "Create/Update data masking rule for default min": {
+            "$ref": "./examples/DataMaskingRuleCreateOrUpdateDefaultMin.json"
+          },
+          "Create/Update data masking rule for default max": {
+            "$ref": "./examples/DataMaskingRuleCreateOrUpdateDefaultMax.json"
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/DataMaskingRule"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/DataMaskingRule"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces/{workspaceName}/sqlPools/{sqlPoolName}/dataMaskingPolicies/{dataMaskingPolicyName}/rules": {
+      "get": {
+        "tags": [
+          "DataMaskingRules"
+        ],
+        "operationId": "DataMaskingRules_ListBySqlPool",
+        "description": "Gets a list of Sql pool data masking rules.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./workspace.json#/parameters/workspaceNameParameter"
+          },
+          {
+            "type": "string",
+            "in": "path",
+            "name": "sqlPoolName",
+            "description": "SQL pool name",
+            "required": true
+          },
+          {
+            "$ref": "#/parameters/DataMaskingPolicyNameParameter"
+          }
+        ],
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-examples": {
+          "List data masking rules": {
+            "$ref": "./examples/DataMaskingRuleList.json"
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/DataMaskingRuleListResult"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
         }
       }
     }
@@ -4760,6 +5088,199 @@
           "readOnly": true
         }
       }
+    },
+    "DataMaskingPolicy": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/DataMaskingPolicyProperties",
+          "description": "The properties of the data masking policy."
+        },
+        "location": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The location of the data masking policy."
+        },
+        "kind": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The kind of data masking policy. Metadata, used for Azure portal."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "description": "Represents a database data masking policy."
+    },
+    "DataMaskingPolicyProperties": {
+      "properties": {
+        "dataMaskingState": {
+          "type": "string",
+          "description": "The state of the data masking policy.",
+          "enum": [
+            "Disabled",
+            "Enabled"
+          ],
+          "x-ms-enum": {
+            "modelAsString": false,
+            "name": "DataMaskingState"
+          }
+        },
+        "exemptPrincipals": {
+          "type": "string",
+          "description": "The list of the exempt principals. Specifies the semicolon-separated list of database users for which the data masking policy does not apply. The specified users receive data results without masking for all of the database queries."
+        },
+        "applicationPrincipals": {
+          "type": "string",
+          "description": "The list of the application principals. This is a legacy parameter and is no longer used.",
+          "readOnly": true
+        },
+        "maskingLevel": {
+          "type": "string",
+          "description": "The masking level. This is a legacy parameter and is no longer used.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "dataMaskingState"
+      ],
+      "description": "The properties of a database data masking policy."
+    },
+    "DataMaskingRule": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/DataMaskingRuleProperties",
+          "description": "The properties of the resource."
+        },
+        "location": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The location of the data masking rule."
+        },
+        "kind": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The kind of Data Masking Rule. Metadata, used for Azure portal."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "description": "Represents a Sql pool data masking rule."
+    },
+    "DataMaskingRuleProperties": {
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The rule Id.",
+          "readOnly": true
+        },
+        "aliasName": {
+          "type": "string",
+          "description": "The alias name. This is a legacy parameter and is no longer used."
+        },
+        "ruleState": {
+          "type": "string",
+          "description": "The rule state. Used to delete a rule. To delete an existing rule, specify the schemaName, tableName, columnName, maskingFunction, and specify ruleState as disabled. However, if the rule doesn't already exist, the rule will be created with ruleState set to enabled, regardless of the provided value of ruleState.",
+          "enum": [
+            "Disabled",
+            "Enabled"
+          ],
+          "x-ms-enum": {
+            "modelAsString": false,
+            "name": "DataMaskingRuleState"
+          }
+        },
+        "schemaName": {
+          "type": "string",
+          "description": "The schema name on which the data masking rule is applied."
+        },
+        "tableName": {
+          "type": "string",
+          "description": "The table name on which the data masking rule is applied."
+        },
+        "columnName": {
+          "type": "string",
+          "description": "The column name on which the data masking rule is applied."
+        },
+        "maskingFunction": {
+          "type": "string",
+          "description": "The masking function that is used for the data masking rule.",
+          "enum": [
+            "Default",
+            "CCN",
+            "Email",
+            "Number",
+            "SSN",
+            "Text"
+          ],
+          "x-ms-enum": {
+            "modelAsString": false,
+            "name": "DataMaskingFunction"
+          }
+        },
+        "numberFrom": {
+          "type": "string",
+          "description": "The numberFrom property of the masking rule. Required if maskingFunction is set to Number, otherwise this parameter will be ignored."
+        },
+        "numberTo": {
+          "type": "string",
+          "description": "The numberTo property of the data masking rule. Required if maskingFunction is set to Number, otherwise this parameter will be ignored."
+        },
+        "prefixSize": {
+          "type": "string",
+          "description": "If maskingFunction is set to Text, the number of characters to show unmasked in the beginning of the string. Otherwise, this parameter will be ignored."
+        },
+        "suffixSize": {
+          "type": "string",
+          "description": "If maskingFunction is set to Text, the number of characters to show unmasked at the end of the string. Otherwise, this parameter will be ignored."
+        },
+        "replacementString": {
+          "type": "string",
+          "description": "If maskingFunction is set to Text, the character to use for masking the unexposed part of the string. Otherwise, this parameter will be ignored."
+        }
+      },
+      "required": [
+        "maskingFunction",
+        "schemaName",
+        "tableName",
+        "columnName"
+      ],
+      "description": "The properties of a Sql pool data masking rule."
+    },
+    "DataMaskingRuleListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DataMaskingRule"
+          },
+          "description": "The list of Sql pool data masking rules."
+        }
+      },
+      "description": "The response to a list data masking rules request."
+    }
+  },
+  "parameters": {
+    "DataMaskingPolicyNameParameter": {
+      "name": "dataMaskingPolicyName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "enum": [
+        "Default"
+      ],
+      "x-ms-enum": {
+        "modelAsString": false,
+        "name": "DataMaskingPolicyName"
+      },
+      "description": "The name of the data masking policy for which the masking rule applies.",
+      "x-ms-parameter-location": "method"
     }
   }
 }
