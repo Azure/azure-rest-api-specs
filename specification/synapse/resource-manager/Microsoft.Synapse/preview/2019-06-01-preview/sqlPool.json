@@ -3360,7 +3360,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces/{workspaceName}/sqlPools/{sqlPoolName}/dataMaskingPolicies/{dataMaskingPolicyName}/rules": {
       "get": {
         "tags": [
-          "DataMaskingRules"
+          "SqlPools, DataMaskingRules"
         ],
         "operationId": "DataMaskingRules_ListBySqlPool",
         "description": "Gets a list of Sql pool data masking rules.",
@@ -3407,6 +3407,55 @@
         },
         "x-ms-pageable": {
           "nextLinkName": null
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces/{workspaceName}/sqlPools/{sqlPoolName}/auditingSettings": {
+      "get": {
+        "tags": [
+          "SqlPools, BlobAuditing"
+        ],
+        "description": "Lists auditing settings of a Sql pool.",
+        "operationId": "SqlPoolBlobAuditingPolicies_ListBySqlPool",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./workspace.json#/parameters/workspaceNameParameter"
+          },
+          {
+            "type": "string",
+            "in": "path",
+            "name": "sqlPoolName",
+            "description": "SQL pool name",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved Sql pool auditing settings.",
+            "schema": {
+              "$ref": "#/definitions/SqlPoolBlobAuditingPolicyListResult"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 BlobAuditingIsNotSupportedOnResourceType - Blob Auditing is currently not supported for this resource type.\n\n * 404 SourceDatabaseNotFound - The source database does not exist.\n\n * 404 DatabaseDoesNotExist - User has specified a database name that does not exist on this server instance.\n\n * 500 DatabaseIsUnavailable - Loading failed. Please try again later."
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List audit settings of a database": {
+            "$ref": "./examples/SqlPoolAuditingSettingsList.json"
+          }
         }
       }
     }
@@ -5264,6 +5313,25 @@
         }
       },
       "description": "The response to a list data masking rules request."
+    },
+    "SqlPoolBlobAuditingPolicyListResult": {
+      "description": "A list of Sql pool auditing settings.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Array of results.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SqlPoolBlobAuditingPolicy"
+          },
+          "readOnly": true
+        },
+        "nextLink": {
+          "description": "Link to retrieve next page of results.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
     }
   },
   "parameters": {
