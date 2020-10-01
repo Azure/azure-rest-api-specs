@@ -1,0 +1,205 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "title": "Security Center",
+        "description": "API spec for Microsoft.Security (Azure Security Center) resource provider",
+        "version": "2020-08-06-preview"
+    },
+    "host": "management.azure.com",
+    "schemes": [
+        "https"
+    ],
+    "consumes": [
+        "application/json"
+    ],
+    "produces": [
+        "application/json"
+    ],
+    "security": [{
+            "azure_auth": [
+                "user_impersonation"
+            ]
+        }
+    ],
+    "securityDefinitions": {
+        "azure_auth": {
+            "type": "oauth2",
+            "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+            "flow": "implicit",
+            "description": "Azure Active Directory OAuth2 Flow",
+            "scopes": {
+                "user_impersonation": "impersonate your user account"
+            }
+        }
+    },
+    "paths": {
+        "/{resourceId}/providers/Microsoft.Security/Insights": {
+            "get": {
+                "x-ms-examples": {
+                    "List insights of an Azure storage resource": {
+                        "$ref": "./examples/Insights/ListStorageInsights_example.json"
+                    }
+                },
+                "tags": [
+                    "Insights"
+                ],
+                "description": "Insights list of a specific resource",
+                "operationId": "Insights_List",
+                "parameters": [{
+                        "$ref": "#/parameters/ResourceId"
+                    },{
+                        "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/InsightsList"
+                        }
+                    },
+                    "default": {
+                        "description": "Error response describing why the operation failed.",
+                        "schema": {
+                            "$ref": "../../../common/v1/types.json#/definitions/CloudError"
+                        }
+                    }
+                },
+                "x-ms-pageable": {
+                    "nextLinkName": "nextLink"
+                }
+            }
+        },
+        "/{resourceId}/providers/Microsoft.Security/Insights/{insightName}": {
+            "get": {
+                "x-ms-examples": {
+                    "Get sensitivity insights of an Azure storage resource": {
+                        "$ref": "./examples/Insights/GetStorageSensitivityInsights_example.json"
+                    }
+                },
+                "tags": [
+                    "Insights"
+                ],
+                "description": "Insights of a specific resource",
+                "operationId": "Insights_Get",
+                "parameters": [{
+                        "$ref": "#/parameters/ResourceId"
+                    },{
+                        "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+                    }, {
+                        "$ref": "#/parameters/InsightName"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/InsightsModel"
+                        }
+                    },
+                    "default": {
+                        "description": "Error response describing why the operation failed.",
+                        "schema": {
+                            "$ref": "../../../common/v1/types.json#/definitions/CloudError"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "InsightsList": {
+            "type": "object",
+            "readOnly": true,
+            "description": "Insights list response.",
+            "properties": {
+                "value": {
+                    "type": "array",
+                    "description": "List of insights.",
+                    "items": {
+                        "$ref": "#/definitions/InsightsModel"
+                    }
+                },
+                "nextLink": {
+                    "readOnly": true,
+                    "type": "string",
+                    "description": "The URI to fetch the next page."
+                }
+            }
+        },
+        "InsightsModel": {
+            "type": "object",
+            "description": "Insights of a specific resource.",
+            "properties": {
+                "properties": {
+                    "x-ms-client-flatten": true,
+                    "description": "Insights details data",
+                    "$ref": "#/definitions/InsightsProperties"
+                }
+            },
+            "allOf": [{
+                    "$ref": "../../../common/v1/types.json#/definitions/Resource"
+                }
+            ]
+        },
+        "InsightsProperties": {
+            "type": "object",
+            "description": "Describes properties of resource insights.",
+            "properties": {
+                "associatedResource": {
+                    "type": "string",
+                    "description": "Azure resource ID of the associated resource."
+                },
+                "insights": {
+                    "type": "object",
+                    "description": "A bag of objects which provides the insights information",
+                    "example": {
+                        "classifications":
+                        [{
+                                "name": "Credit Card",
+                                "count": 10
+                            }, {
+                                "name": "Email Address",
+                                "nount": 3
+                            }
+                        ],
+                        "labels":
+                        [{
+                                "name": "Highly Confidential",
+                                "count": 5,
+                                "id": "AA76CB22-2DBC-45DA-938B-2932F2E3B463",
+                                "order": 2
+                            }, {
+                                "name": "Public",
+                                "count": 5,
+                                "id": "45DB71F4-D56D-4C8F-9FBA-833F2CB9CC62",
+                                "order": 9
+                            }
+                        ]
+                    }
+                }
+            }
+        }
+    },
+    "parameters": {
+        "InsightName": {
+            "name": "insightName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "enum": [
+                "sensitivity"
+            ],
+            "description": "Name of the insight.",
+            "x-ms-parameter-location": "method"
+        },
+        "ResourceId": {
+            "name": "resourceId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The fully qualified ID of the resource, including the resource name and resource type. Use the format, /subscriptions/{guid}/resourceGroups/{resource-group-name}/{resource-provider-namespace}/{resource-type}/{resource-name}",
+            "x-ms-parameter-location": "method"
+        }
+    }
+}

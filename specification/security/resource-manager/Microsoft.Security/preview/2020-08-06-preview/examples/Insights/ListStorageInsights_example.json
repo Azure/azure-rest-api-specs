@@ -1,0 +1,45 @@
+{
+    "parameters": {
+        "resourceId": "/subscriptions/59f7daca-1093-445b-a28e-8681f2ab0c5c/resourceGroups/myRg1/providers/Microsoft.Storage/storageAccounts/testStorage1",
+        "api-version": "2020-08-06-preview",
+    },
+    "responses": {
+        "200": {
+            "body": {
+                "value": [{
+                        "id": "/subscriptions/59f7daca-1093-445b-a28e-8681f2ab0c5c/resourceGroups/myRg1/providers/Microsoft.Storage/storageAccounts/testStorage1/providers/Microsoft.Security/Insights/sensitivity",
+                        "name": "sensitivity",
+                        "type": "Microsoft.Security/insights",
+                        "properties": {
+                            "associatedResource": "/subscriptions/59f7daca-1093-445b-a28e-8681f2ab0c5c/resourceGroups/myRg1/providers/Microsoft.Storage/storageAccounts/testStorage1",
+                            "insights": {
+                                "classifications":
+                                [{
+                                        "name": "Credit Card",
+                                        "count": 10
+                                    }, {
+                                        "name": "Email Address",
+                                        "count": 3
+                                    }
+                                ],
+                                "labels":
+                                [{
+                                        "name": "Highly Confidential",
+                                        "count": 5,
+                                        "id": "AA76CB22-2DBC-45DA-938B-2932F2E3B463",
+                                        "order": 2
+                                    }, {
+                                        "name": "Public",
+                                        "count": 5,
+                                        "id": "45DB71F4-D56D-4C8F-9FBA-833F2CB9CC62",
+                                        "order": 9
+                                    }
+                                ]
+                            }
+                        }
+                    }
+                ]
+            }
+        }
+    }
+}
