@@ -1,0 +1,249 @@
+{
+  "parameters": {
+    "format": "json",
+    "api-version": "1.0",
+    "query": "burger",
+    "maxDetourTime": 1000,
+    "limit": 2,
+    "subscription-key": "[subscription-key]",
+    "searchAlongRouteRequestBody": {
+      "route": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -122.143035,
+            47.653536
+          ],
+          [
+            -122.187164,
+            47.617556
+          ],
+          [
+            -122.114981,
+            47.570599
+          ],
+          [
+            -122.132756,
+            47.654009
+          ]
+        ]
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "summary": {
+          "query": "burger",
+          "queryType": "NON_NEAR",
+          "queryTime": 394,
+          "numResults": 2,
+          "offset": 0,
+          "totalResults": 2,
+          "fuzzyLevel": 1
+        },
+        "results": [
+          {
+            "type": "POI",
+            "id": "US/POI/p0/8596348",
+            "score": 3.104,
+            "dist": 1754.9604168059973,
+            "info": "search:ta:840531000465150-US",
+            "poi": {
+              "name": "BURGER KING",
+              "phone": "+(1)-(425)-7467508",
+              "brands": [
+                {
+                  "name": "BURGER KING"
+                }
+              ],
+              "categorySet": [
+                {
+                  "id": 7315015
+                }
+              ],
+              "url": "www.burgerking.com",
+              "classifications": [
+                {
+                  "code": "RESTAURANT",
+                  "names": [
+                    {
+                      "nameLocale": "en-US",
+                      "name": "restaurant"
+                    },
+                    {
+                      "nameLocale": "en-US",
+                      "name": "fast food"
+                    }
+                  ]
+                }
+              ]
+            },
+            "address": {
+              "streetNumber": "14620",
+              "streetName": "NE 24th St",
+              "municipalitySubdivision": "Crossroads, Bellevue",
+              "municipality": "Bellevue",
+              "countrySecondarySubdivision": "King",
+              "countryTertiarySubdivision": "Seattle East",
+              "countrySubdivision": "WA",
+              "postalCode": "98007",
+              "countryCode": "US",
+              "country": "United States",
+              "countryCodeISO3": "USA",
+              "freeformAddress": "14620 NE 24th St, Bellevue, WA 98007",
+              "localName": "Bellevue",
+              "countrySubdivisionName": "Washington"
+            },
+            "position": {
+              "lat": 47.63188,
+              "lon": -122.14462
+            },
+            "viewport": {
+              "topLeftPoint": {
+                "lat": 47.63278,
+                "lon": -122.14595
+              },
+              "btmRightPoint": {
+                "lat": 47.63098,
+                "lon": -122.14329
+              }
+            },
+            "entryPoints": [
+              {
+                "type": "main",
+                "position": {
+                  "lat": 47.63155,
+                  "lon": -122.14462
+                }
+              }
+            ],
+            "detourTime": -55
+          },
+          {
+            "type": "POI",
+            "id": "US/POI/p0/8596112",
+            "score": 3.111,
+            "dist": 161.17565489389224,
+            "info": "search:ta:840531000465149-US",
+            "poi": {
+              "name": "BURGER KING",
+              "phone": "+(1)-(425)-4535775",
+              "brands": [
+                {
+                  "name": "BURGER KING"
+                }
+              ],
+              "categorySet": [
+                {
+                  "id": 7315015
+                }
+              ],
+              "url": "www.burgerking.com",
+              "classifications": [
+                {
+                  "code": "RESTAURANT",
+                  "names": [
+                    {
+                      "nameLocale": "en-US",
+                      "name": "restaurant"
+                    },
+                    {
+                      "nameLocale": "en-US",
+                      "name": "fast food"
+                    }
+                  ]
+                }
+              ]
+            },
+            "address": {
+              "streetNumber": "11723",
+              "streetName": "NE 8th St",
+              "municipalitySubdivision": "Willburton, Bellevue",
+              "municipality": "Bellevue",
+              "countrySecondarySubdivision": "King",
+              "countryTertiarySubdivision": "Seattle East",
+              "countrySubdivision": "WA",
+              "postalCode": "98005",
+              "countryCode": "US",
+              "country": "United States",
+              "countryCodeISO3": "USA",
+              "freeformAddress": "11723 NE 8th St, Bellevue, WA 98005",
+              "localName": "Bellevue",
+              "countrySubdivisionName": "Washington"
+            },
+            "position": {
+              "lat": 47.61683,
+              "lon": -122.18338
+            },
+            "viewport": {
+              "topLeftPoint": {
+                "lat": 47.61773,
+                "lon": -122.18471
+              },
+              "btmRightPoint": {
+                "lat": 47.61593,
+                "lon": -122.18205
+              }
+            },
+            "entryPoints": [
+              {
+                "type": "main",
+                "position": {
+                  "lat": 47.61723,
+                  "lon": -122.1834
+                }
+              }
+            ],
+            "detourTime": 12
+          }
+        ]
+      }
+    },
+    "400": {
+      "headers": {},
+      "body": {
+        "error": {
+          "code": "400 BadRequest",
+          "message": "Bad request: one or more parameters were incorrectly specified or are mutually exclusive."
+        }
+      }
+    },
+    "401": {
+      "headers": {},
+      "body": {
+        "error": {
+          "code": "401 Unauthorized",
+          "message": "Access denied due to invalid subscription key. Make sure to provide a valid key for an active subscription."
+        }
+      }
+    },
+    "403": {
+      "headers": {},
+      "body": {
+        "error": {
+          "code": "403 Forbidden",
+          "message": "Permission, capacity, or authentication issues."
+        }
+      }
+    },
+    "404": {
+      "headers": {},
+      "body": {
+        "error": {
+          "code": "404 NotFound",
+          "message": "Not Found: the requested resource could not be found, but it may be available again in the future."
+        }
+      }
+    },
+    "500": {
+      "headers": {},
+      "body": {
+        "error": {
+          "code": "500 InternalServerError",
+          "message": "An error occurred while processing the request. Please try again later."
+        }
+      }
+    }
+  }
+}

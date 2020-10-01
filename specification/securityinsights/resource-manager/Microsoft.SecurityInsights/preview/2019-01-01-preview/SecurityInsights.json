@@ -1729,6 +1729,9 @@
           },
           "Get a MDATP data connector": {
             "$ref": "./examples/dataConnectors/GetMicrosoftDefenderAdvancedThreatProtectionById.json"
+          },
+          "Get a Office ATP data connector": {
+            "$ref": "./examples/dataConnectors/GetOffice365AdvancedThreatProtectionById.json"
           }
         },
         "tags": [
@@ -1899,6 +1902,9 @@
           },
           "Check requirements for Mdatp.": {
             "$ref": "./examples/dataConnectors/CheckRequirementsMdatp.json"
+          },
+          "Check requirements for OfficeATP.": {
+            "$ref": "./examples/dataConnectors/CheckRequirementsOfficeATP.json"
           }
         },
         "tags": [
@@ -2932,6 +2938,102 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{operationalInsightsResourceProvider}/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/incidents/{incidentId}/alerts": {
+      "post": {
+        "x-ms-examples": {
+          "Get all incident alerts.": {
+            "$ref": "./examples/incidents/GetAllIncidentAlerts.json"
+          }
+        },
+        "tags": [
+          "IncidentAlerts"
+        ],
+        "description": "Gets all incident alerts.",
+        "operationId": "Incidents_ListOfAlerts",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/OperationalInsightsResourceProvider"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "#/parameters/IncidentId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/IncidentAlertList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{operationalInsightsResourceProvider}/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/incidents/{incidentId}/bookmarks": {
+      "post": {
+        "x-ms-examples": {
+          "Get all incident bookmarks.": {
+            "$ref": "./examples/incidents/GetAllIncidentBookmarks.json"
+          }
+        },
+        "tags": [
+          "IncidentBookmarks"
+        ],
+        "description": "Gets all incident bookmarks.",
+        "operationId": "Incidents_ListOfBookmarks",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/OperationalInsightsResourceProvider"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "#/parameters/IncidentId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/IncidentBookmarkList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{operationalInsightsResourceProvider}/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/incidents/{incidentId}/comments": {
       "get": {
         "x-ms-examples": {
@@ -3088,6 +3190,54 @@
             "description": "Created",
             "schema": {
               "$ref": "#/definitions/IncidentComment"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{operationalInsightsResourceProvider}/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/incidents/{incidentId}/entities": {
+      "post": {
+        "x-ms-examples": {
+          "Gets all incident related entities": {
+            "$ref": "./examples/incidents/entities/GetAllIncidentEntities.json"
+          }
+        },
+        "tags": [
+          "IncidentEntities"
+        ],
+        "description": "Gets all incident related entities.",
+        "operationId": "Incidents_ListOfEntities",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/OperationalInsightsResourceProvider"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "#/parameters/IncidentId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/IncidentEntitiesResponse"
             }
           },
           "default": {
@@ -5669,6 +5819,7 @@
             "ThreatIntelligence",
             "ThreatIntelligenceTaxii",
             "Office365",
+            "OfficeATP",
             "AmazonWebServicesCloudTrail",
             "AzureAdvancedThreatProtection",
             "MicrosoftDefenderAdvancedThreatProtection"
@@ -5695,6 +5846,9 @@
               },
               {
                 "value": "Office365"
+              },
+              {
+                "value": "OfficeATP"
               },
               {
                 "value": "AmazonWebServicesCloudTrail"
@@ -6629,6 +6783,91 @@
       },
       "type": "object"
     },
+    "HuntingBookmark": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/Entity"
+        }
+      ],
+      "description": "Represents a Hunting bookmark entity.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/HuntingBookmarkProperties",
+          "description": "HuntingBookmark entity properties",
+          "x-ms-client-flatten": true
+        }
+      },
+      "type": "object",
+      "x-ms-discriminator-value": "Bookmark"
+    },
+    "HuntingBookmarkProperties": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/EntityCommonProperties"
+        }
+      ],
+      "description": "Describes bookmark properties",
+      "properties": {
+        "created": {
+          "description": "The time the bookmark was created",
+          "format": "date-time",
+          "type": "string"
+        },
+        "createdBy": {
+          "$ref": "#/definitions/UserInfo",
+          "description": "Describes a user that created the bookmark",
+          "type": "object"
+        },
+        "displayName": {
+          "description": "The display name of the bookmark",
+          "type": "string"
+        },
+        "eventTime": {
+          "description": "The time of the event",
+          "format": "date-time",
+          "type": "string"
+        },
+        "labels": {
+          "description": "List of labels relevant to this bookmark",
+          "items": {
+            "$ref": "#/definitions/Label"
+          },
+          "type": "array"
+        },
+        "notes": {
+          "description": "The notes of the bookmark",
+          "type": "string"
+        },
+        "query": {
+          "description": "The query of the bookmark.",
+          "type": "string"
+        },
+        "queryResult": {
+          "description": "The query result of the bookmark.",
+          "type": "string"
+        },
+        "updated": {
+          "description": "The last time the bookmark was updated",
+          "format": "date-time",
+          "type": "string"
+        },
+        "updatedBy": {
+          "$ref": "#/definitions/UserInfo",
+          "description": "Describes a user that updated the bookmark",
+          "type": "object"
+        },
+        "incidentInfo": {
+          "$ref": "#/definitions/IncidentInfo",
+          "description": "Describes an incident that relates to bookmark",
+          "type": "object"
+        }
+      },
+      "required": [
+        "displayName",
+        "query"
+      ],
+      "type": "object"
+    },
     "IncidentAdditionalData": {
       "description": "Incident additional data property bag.",
       "properties": {
@@ -6666,6 +6905,36 @@
         }
       },
       "type": "object"
+    },
+    "IncidentAlertList": {
+      "description": "List of incident alerts.",
+      "properties": {
+        "value": {
+          "description": "Array of incident alerts.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SecurityAlert"
+          }
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "IncidentBookmarkList": {
+      "description": "List of incident bookmarks.",
+      "properties": {
+        "value": {
+          "description": "Array of incident bookmarks.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/HuntingBookmark"
+          }
+        }
+      },
+      "required": [
+        "value"
+      ]
     },
     "IncidentComment": {
       "allOf": [
@@ -6725,6 +6994,44 @@
       },
       "required": [
         "message"
+      ],
+      "type": "object"
+    },
+    "IncidentEntitiesResponse": {
+      "description": "The incident related entities response.",
+      "properties": {
+        "entities": {
+          "description": "Array of the incident related entities.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Entity"
+          }
+        },
+        "metaData": {
+          "description": "The metadata from the incident related entities results.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/IncidentEntitiesResultsMetadata"
+          }
+        }
+      }
+    },
+    "IncidentEntitiesResultsMetadata": {
+      "description": "Information of a specific aggregation in the incident related entities result.",
+      "properties": {
+        "count": {
+          "description": "Total number of aggregations of the given kind in the incident related entities result.",
+          "type": "integer",
+          "format": "int32"
+        },
+        "entityKind": {
+          "$ref": "#/definitions/EntityInnerKind",
+          "description": "The kind of the aggregated entity."
+        }
+      },
+      "required": [
+        "entityKind",
+        "count"
       ],
       "type": "object"
     },
@@ -7381,6 +7688,61 @@
       },
       "type": "object",
       "x-ms-discriminator-value": "MicrosoftSecurityIncidentCreation"
+    },
+    "OfficeATPDataConnector": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataConnector"
+        }
+      ],
+      "description": "Represents OfficeATP (Office 365 Advanced Threat Protection) data connector.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/OfficeATPDataConnectorProperties",
+          "description": "OfficeATP (Office 365 Advanced Threat Protection) data connector properties.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "type": "object",
+      "x-ms-discriminator-value": "OfficeATP"
+    },
+    "OfficeATPDataConnectorProperties": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataConnectorTenantId"
+        },
+        {
+          "$ref": "#/definitions/DataConnectorWithAlertsProperties"
+        }
+      ],
+      "description": "OfficeATP (Office 365 Advanced Threat Protection) data connector properties.",
+      "type": "object"
+    },
+    "OfficeATPCheckRequirements": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataConnectorsCheckRequirements"
+        }
+      ],
+      "description": "Represents OfficeATP (Office 365 Advanced Threat Protection) requirements check request.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/OfficeATPCheckRequirementsProperties",
+          "description": "OfficeATP (Office 365 Advanced Threat Protection) requirements check properties.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "type": "object",
+      "x-ms-discriminator-value": "OfficeATP"
+    },
+    "OfficeATPCheckRequirementsProperties": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataConnectorTenantId"
+        }
+      ],
+      "description": "OfficeATP (Office 365 Advanced Threat Protection) requirements check properties.",
+      "type": "object"
     },
     "OfficeConsent": {
       "allOf": [
