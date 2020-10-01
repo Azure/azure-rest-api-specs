@@ -1316,35 +1316,33 @@
       "required": [
         "endpointType"
       ],
+      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/DigitalTwinsEndpointResourceProperties"
-        },
-        {
-          "type": "object",
-          "properties": {
-            "endpointType": {
-              "description": "The type of Digital Twins endpoint",
-              "enum": [
-                "EventHub",
-                "EventGrid",
-                "ServiceBus"
-              ],
-              "x-ms-enum": {
-                "name": "endpointType",
-                "modelAsString": true
-              },
-              "type": "string"
-            },
-            "deadLetterSecret": {
-              "x-ms-secret": true,
-              "description": "Dead letter storage secret for key-based authentication. Will be obfuscated during read.",
-              "type": "string",
-              "x-nullable": true
-            }
-          }
         }
-      ]
+      ],
+      "properties": {
+        "endpointType": {
+          "description": "The type of Digital Twins endpoint",
+          "enum": [
+            "EventHub",
+            "EventGrid",
+            "ServiceBus"
+          ],
+          "x-ms-enum": {
+            "name": "endpointType",
+            "modelAsString": true
+          },
+          "type": "string"
+        },
+        "deadLetterSecret": {
+          "x-ms-secret": true,
+          "description": "Dead letter storage secret for key-based authentication. Will be obfuscated during read.",
+          "type": "string",
+          "x-nullable": true
+        }
+      }
     },
     "DigitalTwinsEndpointResourcePropertiesWithIdentity": {
       "description": "Properties related to Digital Twins Endpoint with identity-based authentication.",
@@ -1353,62 +1351,58 @@
       "required": [
         "endpointType"
       ],
+      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/DigitalTwinsEndpointResourceProperties"
-        },
-        {
-          "type": "object",
-          "properties": {
-            "endpointType": {
-              "description": "The type of Digital Twins endpoint",
-              "enum": [
-                "EventHubWithIdentity",
-                "ServiceBusWithIdentity"
-              ],
-              "x-ms-enum": {
-                "name": "EndpointTypeWithIdentity",
-                "modelAsString": true
-              },
-              "type": "string"
-            },
-            "deadLetterUri": {
-              "description": "Dead letter storage URL for identity-based authentication.",
-              "type": "string",
-              "x-nullable": true
-            }
-          }
         }
-      ]
+      ],
+      "properties": {
+        "endpointType": {
+          "description": "The type of Digital Twins endpoint",
+          "enum": [
+            "EventHubWithIdentity",
+            "ServiceBusWithIdentity"
+          ],
+          "x-ms-enum": {
+            "name": "EndpointTypeWithIdentity",
+            "modelAsString": true
+          },
+          "type": "string"
+        },
+        "deadLetterUri": {
+          "description": "Dead letter storage URL for identity-based authentication.",
+          "type": "string",
+          "x-nullable": true
+        }
+      }
     },
     "ServiceBus": {
       "description": "Properties related to ServiceBus with key-based authentication.",
       "required": [
         "primaryConnectionString"
       ],
+      "type": "object",
       "x-ms-discriminator-value": "ServiceBus",
       "allOf": [
         {
           "$ref": "#/definitions/DigitalTwinsEndpointResourcePropertiesWithKeys"
-        },
-        {
-          "type": "object",
-          "properties": {
-            "primaryConnectionString": {
-              "x-ms-secret": true,
-              "description": "PrimaryConnectionString of the endpoint. Will be obfuscated during read.",
-              "type": "string",
-              "x-nullable": true
-            },
-            "secondaryConnectionString": {
-              "x-ms-secret": true,
-              "description": "SecondaryConnectionString of the endpoint. Will be obfuscated during read.",
-              "type": "string",
-              "x-nullable": true
-            }
-          }
         }
-      ]
+      ],
+      "properties": {
+        "primaryConnectionString": {
+          "x-ms-secret": true,
+          "description": "PrimaryConnectionString of the endpoint. Will be obfuscated during read.",
+          "type": "string",
+          "x-nullable": true
+        },
+        "secondaryConnectionString": {
+          "x-ms-secret": true,
+          "description": "SecondaryConnectionString of the endpoint. Will be obfuscated during read.",
+          "type": "string",
+          "x-nullable": true
+        }
+      }
     },
     "ServiceBusWithIdentity": {
       "description": "Properties related to ServiceBus with identity-based authentication.",
@@ -1416,56 +1410,52 @@
         "endpointUri",
         "entityPath"
       ],
+      "type": "object",
       "x-ms-discriminator-value": "ServiceBusWithIdentity",
       "allOf": [
         {
           "$ref": "#/definitions/DigitalTwinsEndpointResourcePropertiesWithIdentity"
-        },
-        {
-          "type": "object",
-          "properties": {
-            "endpointUri": {
-              "description": "The URL of the ServiceBus namespace. It must include the protocol sb://",
-              "type": "string",
-              "x-nullable": true
-            },
-            "entityPath": {
-              "description": "The ServiceBus Topic name",
-              "type": "string",
-              "x-nullable": true
-            }
-          }
         }
-      ]
+      ],
+      "properties": {
+        "endpointUri": {
+          "description": "The URL of the ServiceBus namespace. It must include the protocol sb://",
+          "type": "string",
+          "x-nullable": true
+        },
+        "entityPath": {
+          "description": "The ServiceBus Topic name",
+          "type": "string",
+          "x-nullable": true
+        }
+      }
     },
     "EventHub": {
       "description": "Properties related to EventHub with key-based authentication.",
       "required": [
         "connectionStringPrimaryKey"
       ],
+      "type": "object",
       "x-ms-discriminator-value": "EventHub",
       "allOf": [
         {
           "$ref": "#/definitions/DigitalTwinsEndpointResourcePropertiesWithKeys"
-        },
-        {
-          "type": "object",
-          "properties": {
-            "connectionStringPrimaryKey": {
-              "x-ms-secret": true,
-              "description": "PrimaryConnectionString of the endpoint. Will be obfuscated during read.",
-              "type": "string",
-              "x-nullable": true
-            },
-            "connectionStringSecondaryKey": {
-              "x-ms-secret": true,
-              "description": "SecondaryConnectionString of the endpoint. Will be obfuscated during read.",
-              "type": "string",
-              "x-nullable": true
-            }
-          }
         }
-      ]
+      ],
+      "properties": {
+        "connectionStringPrimaryKey": {
+          "x-ms-secret": true,
+          "description": "PrimaryConnectionString of the endpoint. Will be obfuscated during read.",
+          "type": "string",
+          "x-nullable": true
+        },
+        "connectionStringSecondaryKey": {
+          "x-ms-secret": true,
+          "description": "SecondaryConnectionString of the endpoint. Will be obfuscated during read.",
+          "type": "string",
+          "x-nullable": true
+        }
+      }
     },
     "EventHubWithIdentity": {
       "description": "Properties related to EventHub with identity-based authentication.",
@@ -1473,27 +1463,25 @@
         "endpointUri",
         "entityPath"
       ],
+      "type": "object",
       "x-ms-discriminator-value": "EventHubWithIdentity",
       "allOf": [
         {
           "$ref": "#/definitions/DigitalTwinsEndpointResourcePropertiesWithIdentity"
-        },
-        {
-          "type": "object",
-          "properties": {
-            "endpointUri": {
-              "description": "The URL of the EventHub namespace. It must include the protocol sb://",
-              "type": "string",
-              "x-nullable": true
-            },
-            "entityPath": {
-              "description": "The EventHub name in the EventHub namespace",
-              "type": "string",
-              "x-nullable": true
-            }
-          }
         }
-      ]
+      ],
+      "properties": {
+        "endpointUri": {
+          "description": "The URL of the EventHub namespace. It must include the protocol sb://",
+          "type": "string",
+          "x-nullable": true
+        },
+        "entityPath": {
+          "description": "The EventHub name in the EventHub namespace",
+          "type": "string",
+          "x-nullable": true
+        }
+      }
     },
     "EventGrid": {
       "description": "Properties related to EventGrid.",
@@ -1501,33 +1489,31 @@
         "TopicEndpoint",
         "accessKey1"
       ],
+      "type": "object",
       "x-ms-discriminator-value": "EventGrid",
       "allOf": [
         {
           "$ref": "#/definitions/DigitalTwinsEndpointResourcePropertiesWithKeys"
-        },
-        {
-          "type": "object",
-          "properties": {
-            "TopicEndpoint": {
-              "description": "EventGrid Topic Endpoint",
-              "type": "string"
-            },
-            "accessKey1": {
-              "x-ms-secret": true,
-              "description": "EventGrid secondary accesskey. Will be obfuscated during read.",
-              "type": "string",
-              "x-nullable": true
-            },
-            "accessKey2": {
-              "x-ms-secret": true,
-              "description": "EventGrid secondary accesskey. Will be obfuscated during read.",
-              "type": "string",
-              "x-nullable": true
-            }
-          }
         }
-      ]
+      ],
+      "properties": {
+        "TopicEndpoint": {
+          "description": "EventGrid Topic Endpoint",
+          "type": "string"
+        },
+        "accessKey1": {
+          "x-ms-secret": true,
+          "description": "EventGrid secondary accesskey. Will be obfuscated during read.",
+          "type": "string",
+          "x-nullable": true
+        },
+        "accessKey2": {
+          "x-ms-secret": true,
+          "description": "EventGrid secondary accesskey. Will be obfuscated during read.",
+          "type": "string",
+          "x-nullable": true
+        }
+      }
     },
     "DigitalTwinsEndpointResourceListResult": {
       "description": "A list of DigitalTwinsInstance Endpoints with a next link.",
