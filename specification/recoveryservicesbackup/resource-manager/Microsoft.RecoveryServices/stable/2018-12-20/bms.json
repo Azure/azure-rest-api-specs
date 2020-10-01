@@ -103,10 +103,10 @@
     "/Subscriptions/{subscriptionId}/providers/Microsoft.RecoveryServices/locations/{azureRegion}/backupCrrJob": {
       "post": {
         "tags": [
-          "BackupCrrJobs"
+          "CrrJobDetails"
         ],
         "summary": "Get CRR job details from target region.",
-        "operationId": "BackupCrrJobs_Get",
+        "operationId": "BackupCrrJobDetails_Get",
         "produces": [
           "application/json"
         ],
@@ -341,7 +341,7 @@
           {
             "name": "recoveryPointId",
             "in": "path",
-            "description": "RecoveryPointId",
+            "description": "Recovery Point Id",
             "required": true,
             "type": "string"
           },
@@ -661,6 +661,76 @@
         }
       }
     },
+    "AzureFileshareProtectedItem": {
+      "description": "Azure File Share workload-specific backup item.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProtectedItem"
+        }
+      ],
+      "properties": {
+        "friendlyName": {
+          "description": "Friendly name of the fileshare represented by this backup item.",
+          "type": "string"
+        },
+        "protectionStatus": {
+          "description": "Backup status of this backup item.",
+          "type": "string"
+        },
+        "protectionState": {
+          "description": "Backup state of this backup item.",
+          "enum": [
+            "Invalid",
+            "IRPending",
+            "Protected",
+            "ProtectionError",
+            "ProtectionStopped",
+            "ProtectionPaused"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "ProtectionState",
+            "modelAsString": true
+          }
+        },
+        "healthStatus": {
+          "description": "backups running status for this backup item.",
+          "enum": [
+            "Passed",
+            "ActionRequired",
+            "ActionSuggested",
+            "Invalid"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "HealthStatus",
+            "modelAsString": true
+          }
+        },
+        "lastBackupStatus": {
+          "description": "Last backup operation status. Possible values: Healthy, Unhealthy.",
+          "type": "string"
+        },
+        "lastBackupTime": {
+          "format": "date-time",
+          "description": "Timestamp of the last backup operation on this backup item.",
+          "type": "string"
+        },
+        "kpisHealths": {
+          "description": "Health details of different KPIs",
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/KPIResourceHealthDetails"
+          }
+        },
+        "extendedInfo": {
+          "$ref": "#/definitions/AzureFileshareProtectedItemExtendedInfo",
+          "description": "Additional information with this backup item."
+        }
+      },
+      "x-ms-discriminator-value": "AzureFileShareProtectedItem"
+    },
     "AzureFileshareProtectedItemExtendedInfo": {
       "description": "Additional information about Azure File Share backup item.",
       "type": "object",
@@ -796,6 +866,26 @@
       },
       "x-ms-discriminator-value": "AzureFileShareRestoreRequest"
     },
+    "AzureIaaSClassicComputeVMProtectedItem": {
+      "description": "IaaS VM workload-specific backup item representing the Classic Compute VM.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AzureIaaSVMProtectedItem"
+        }
+      ],
+      "x-ms-discriminator-value": "Microsoft.ClassicCompute/virtualMachines"
+    },
+    "AzureIaaSComputeVMProtectedItem": {
+      "description": "IaaS VM workload-specific backup item representing the Azure Resource Manager VM.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AzureIaaSVMProtectedItem"
+        }
+      ],
+      "x-ms-discriminator-value": "Microsoft.Compute/virtualMachines"
+    },
     "AzureIaaSVMErrorInfo": {
       "description": "Azure IaaS VM workload-specific error information.",
       "type": "object",
@@ -825,6 +915,15 @@
           "readOnly": true
         }
       }
+    },
+     "AzureIaaSVMHealthDetails": {
+      "description": "Azure IaaS VM workload-specific Health Details.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ResourceHealthDetails"
+        }
+      ]
     },
     "AzureIaaSVMJob": {
       "description": "Azure IaaS VM workload-specific job object.",
@@ -914,6 +1013,65 @@
         }
       }
     },
+    "KPIResourceHealthDetails": {
+      "description": "KPI Resource Health Details",
+      "type": "object",
+      "properties": {
+        "resourceHealthStatus": {
+          "description": "Resource Health Status",
+          "enum": [
+            "Healthy",
+            "TransientDegraded",
+            "PersistentDegraded",
+            "TransientUnhealthy",
+            "PersistentUnhealthy",
+            "Invalid"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "ResourceHealthStatus",
+            "modelAsString": true
+          }
+        },
+        "resourceHealthDetails": {
+          "description": "Resource Health Status",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ResourceHealthDetails"
+          }
+        }
+      }
+    },
+    "ResourceHealthDetails": {
+      "description": "Health Details for backup items.",
+      "type": "object",
+      "properties": {
+        "code": {
+          "format": "int32",
+          "description": "Health Code",
+          "type": "integer",
+          "readOnly": true
+        },
+        "title": {
+          "description": "Health Title",
+          "type": "string",
+          "readOnly": true
+        },
+        "message": {
+          "description": "Health Message",
+          "type": "string",
+          "readOnly": true
+        },
+        "recommendations": {
+          "description": "Health Recommended Actions",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        }
+      }
+    },
     "AzureIaaSVMJobTaskDetails": {
       "description": "Azure IaaS VM workload-specific job task details.",
       "type": "object",
@@ -955,6 +1113,94 @@
           "type": "string"
         }
       }
+    },
+    "AzureIaaSVMProtectedItem": {
+      "description": "IaaS VM workload-specific backup item.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProtectedItem"
+        }
+      ],
+      "properties": {
+        "friendlyName": {
+          "description": "Friendly name of the VM represented by this backup item.",
+          "type": "string"
+        },
+        "virtualMachineId": {
+          "description": "Fully qualified ARM ID of the virtual machine represented by this item.",
+          "type": "string"
+        },
+        "protectionStatus": {
+          "description": "Backup status of this backup item.",
+          "type": "string"
+        },
+        "protectionState": {
+          "description": "Backup state of this backup item.",
+          "enum": [
+            "Invalid",
+            "IRPending",
+            "Protected",
+            "ProtectionError",
+            "ProtectionStopped",
+            "ProtectionPaused"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "ProtectionState",
+            "modelAsString": true
+          }
+        },
+        "healthStatus": {
+          "description": "Health status of protected item.",
+          "enum": [
+            "Passed",
+            "ActionRequired",
+            "ActionSuggested",
+            "Invalid"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "HealthStatus",
+            "modelAsString": true
+          }
+        },
+        "healthDetails": {
+          "description": "Health details on this backup item.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AzureIaaSVMHealthDetails"
+          }
+        },
+        "kpisHealths": {
+          "description": "Health details of different KPIs",
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/KPIResourceHealthDetails"
+          }
+        },
+        "lastBackupStatus": {
+          "description": "Last backup operation status.",
+          "type": "string"
+        },
+        "lastBackupTime": {
+          "format": "date-time",
+          "description": "Timestamp of the last backup operation on this backup item.",
+          "type": "string"
+        },
+        "protectedItemDataId": {
+          "description": "Data ID of the protected item.",
+          "type": "string"
+        },
+        "extendedInfo": {
+          "$ref": "#/definitions/AzureIaaSVMProtectedItemExtendedInfo",
+          "description": "Additional information for this backup item."
+        },
+        "extendedProperties": {
+          "$ref": "#/definitions/ExtendedProperties"
+        }
+      },
+      "x-ms-discriminator-value": "AzureIaaSVMProtectedItem"
     },
     "AzureIaaSVMProtectedItemExtendedInfo": {
       "description": "Additional information on Azure IaaS VM specific backup item.",
@@ -1144,6 +1390,107 @@
         }
       }
     },
+    "AzureVmWorkloadProtectedItem": {
+      "description": "Azure VM workload-specific protected item.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProtectedItem"
+        }
+      ],
+      "properties": {
+        "friendlyName": {
+          "description": "Friendly name of the DB represented by this backup item.",
+          "type": "string"
+        },
+        "serverName": {
+          "description": "Host/Cluster Name for instance or AG",
+          "type": "string"
+        },
+        "parentName": {
+          "description": "Parent name of the DB such as Instance or Availability Group.",
+          "type": "string"
+        },
+        "parentType": {
+          "description": "Parent type of protected item, example: for a DB, standalone server or distributed",
+          "type": "string"
+        },
+        "protectionStatus": {
+          "description": "Backup status of this backup item.",
+          "type": "string"
+        },
+        "protectionState": {
+          "description": "Backup state of this backup item.",
+          "enum": [
+            "Invalid",
+            "IRPending",
+            "Protected",
+            "ProtectionError",
+            "ProtectionStopped",
+            "ProtectionPaused"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "ProtectionState",
+            "modelAsString": true
+          }
+        },
+        "lastBackupStatus": {
+          "description": "Last backup operation status. Possible values: Healthy, Unhealthy.",
+          "enum": [
+            "Invalid",
+            "Healthy",
+            "Unhealthy",
+            "IRPending"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "LastBackupStatus",
+            "modelAsString": true
+          }
+        },
+        "lastBackupTime": {
+          "format": "date-time",
+          "description": "Timestamp of the last backup operation on this backup item.",
+          "type": "string"
+        },
+        "lastBackupErrorDetail": {
+          "$ref": "#/definitions/ErrorDetail",
+          "description": "Error details in last backup"
+        },
+        "protectedItemDataSourceId": {
+          "description": "Data ID of the protected item.",
+          "type": "string"
+        },
+        "protectedItemHealthStatus": {
+          "description": "Health status of the backup item, evaluated based on last heartbeat received",
+          "enum": [
+            "Invalid",
+            "Healthy",
+            "Unhealthy",
+            "NotReachable",
+            "IRPending"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "ProtectedItemHealthStatus",
+            "modelAsString": true
+          }
+        },
+        "extendedInfo": {
+          "$ref": "#/definitions/AzureVmWorkloadProtectedItemExtendedInfo",
+          "description": "Additional information for this backup item."
+        },
+        "kpisHealths": {
+          "description": "Health details of different KPIs",
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/KPIResourceHealthDetails"
+          }
+        }
+      },
+      "x-ms-discriminator-value": "AzureVmWorkloadProtectedItem"
+    },
     "AzureVmWorkloadProtectedItemExtendedInfo": {
       "description": "Additional information on Azure Workload for SQL specific backup item.",
       "type": "object",
@@ -1163,6 +1510,36 @@
           "type": "string"
         }
       }
+    },
+    "AzureVmWorkloadSAPAseDatabaseProtectedItem": {
+      "description": "Azure VM workload-specific protected item representing SAP ASE Database.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AzureVmWorkloadProtectedItem"
+        }
+      ],
+      "x-ms-discriminator-value": "AzureVmWorkloadSAPAseDatabase"
+    },
+    "AzureVmWorkloadSAPHanaDatabaseProtectedItem": {
+      "description": "Azure VM workload-specific protected item representing SAP HANA Database.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AzureVmWorkloadProtectedItem"
+        }
+      ],
+      "x-ms-discriminator-value": "AzureVmWorkloadSAPHanaDatabase"
+    },
+    "AzureVmWorkloadSQLDatabaseProtectedItem": {
+      "description": "Azure VM workload-specific protected item representing SQL Database.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AzureVmWorkloadProtectedItem"
+        }
+      ],
+      "x-ms-discriminator-value": "AzureVmWorkloadSQLDatabase"
     },
     "AzureWorkloadErrorInfo": {
       "description": "Azure storage specific error information",
@@ -1299,6 +1676,23 @@
       },
       "x-ms-discriminator-value": "AzureWorkloadPointInTimeRecoveryPoint"
     },
+    "AzureWorkloadPointInTimeRestoreRequest": {
+      "description": "AzureWorkload SAP Hana -specific restore. Specifically for PointInTime/Log restore",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AzureWorkloadRestoreRequest"
+        }
+      ],
+      "properties": {
+        "pointInTime": {
+          "format": "date-time",
+          "description": "PointInTime value",
+          "type": "string"
+        }
+      },
+      "x-ms-discriminator-value": "AzureWorkloadPointInTimeRestoreRequest"
+    },
     "AzureWorkloadRecoveryPoint": {
       "description": "Workload specific recovery point, specifically encapsulates full/diff recovery point",
       "type": "object",
@@ -1333,6 +1727,61 @@
       },
       "x-ms-discriminator-value": "AzureWorkloadRecoveryPoint"
     },
+    "AzureWorkloadRestoreRequest": {
+      "description": "AzureWorkload-specific restore.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/RestoreRequest"
+        }
+      ],
+      "properties": {
+        "recoveryType": {
+          "description": "Type of this recovery.",
+          "enum": [
+            "Invalid",
+            "OriginalLocation",
+            "AlternateLocation",
+            "RestoreDisks",
+            "Offline"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "RecoveryType",
+            "modelAsString": true
+          }
+        },
+        "sourceResourceId": {
+          "description": "Fully qualified ARM ID of the VM on which workload that was running is being recovered.",
+          "type": "string"
+        },
+        "propertyBag": {
+          "description": "Workload specific property bag.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "targetInfo": {
+          "$ref": "#/definitions/TargetRestoreInfo",
+          "description": "Details of target database"
+        },
+        "recoveryMode": {
+          "description": "Defines whether the current recovery mode is file restore or database restore",
+          "enum": [
+            "Invalid",
+            "FileRecovery",
+            "WorkloadRecovery"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "RecoveryMode",
+            "modelAsString": true
+          }
+        }
+      },
+      "x-ms-discriminator-value": "AzureWorkloadRestoreRequest"
+    },
     "AzureWorkloadSAPHanaPointInTimeRecoveryPoint": {
       "description": "Recovery point specific to PointInTime in SAPHana",
       "type": "object",
@@ -1343,6 +1792,23 @@
       ],
       "x-ms-discriminator-value": "AzureWorkloadSAPHanaPointInTimeRecoveryPoint"
     },
+    "AzureWorkloadSAPHanaPointInTimeRestoreRequest": {
+      "description": "AzureWorkload SAP Hana -specific restore. Specifically for PointInTime/Log restore",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AzureWorkloadSAPHanaRestoreRequest"
+        }
+      ],
+      "properties": {
+        "pointInTime": {
+          "format": "date-time",
+          "description": "PointInTime value",
+          "type": "string"
+        }
+      },
+      "x-ms-discriminator-value": "AzureWorkloadSAPHanaPointInTimeRestoreRequest"
+    },
     "AzureWorkloadSAPHanaRecoveryPoint": {
       "description": "SAPHana specific recoverypoint, specifically encapsulates full/diff recoverypoints",
       "type": "object",
@@ -1352,6 +1818,16 @@
         }
       ],
       "x-ms-discriminator-value": "AzureWorkloadSAPHanaRecoveryPoint"
+    },
+    "AzureWorkloadSAPHanaRestoreRequest": {
+      "description": "AzureWorkload SAP Hana-specific restore.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AzureWorkloadRestoreRequest"
+        }
+      ],
+      "x-ms-discriminator-value": "AzureWorkloadSAPHanaRestoreRequest"
     },
     "AzureWorkloadSQLPointInTimeRecoveryPoint": {
       "description": "Recovery point specific to PointInTime",
@@ -1372,81 +1848,22 @@
       },
       "x-ms-discriminator-value": "AzureWorkloadSQLPointInTimeRecoveryPoint"
     },
-    "JobQueryObject": {
-      "description": "Filters to list the jobs.",
+    "AzureWorkloadSQLPointInTimeRestoreRequest": {
+      "description": "AzureWorkload SQL -specific restore. Specifically for PointInTime/Log restore",
       "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AzureWorkloadSQLRestoreRequest"
+        }
+      ],
       "properties": {
-        "status": {
-          "description": "Status of the job.",
-          "enum": [
-            "Invalid",
-            "InProgress",
-            "Completed",
-            "Failed",
-            "CompletedWithWarnings",
-            "Cancelled",
-            "Cancelling"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "JobStatus",
-            "modelAsString": true
-          }
-        },
-        "backupManagementType": {
-          "description": "Type of backup management for the job.",
-          "enum": [
-            "Invalid",
-            "AzureIaasVM",
-            "MAB",
-            "DPM",
-            "AzureBackupServer",
-            "AzureSql",
-            "AzureStorage",
-            "AzureWorkload",
-            "DefaultBackup"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "BackupManagementType",
-            "modelAsString": true
-          }
-        },
-        "operation": {
-          "description": "Type of operation.",
-          "enum": [
-            "Invalid",
-            "Register",
-            "UnRegister",
-            "ConfigureBackup",
-            "Backup",
-            "Restore",
-            "DisableBackup",
-            "DeleteBackupData",
-            "CrossRegionRestore",
-            "Undelete"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "JobOperationType",
-            "modelAsString": true
-          }
-        },
-        "jobId": {
-          "description": "JobID represents the job uniquely.",
-          "type": "string"
-        },
-        "startTime": {
+        "pointInTime": {
           "format": "date-time",
-          "description": "Job has started at this time. Value is in UTC.",
-          "type": "string"
-        },
-        "endTime": {
-          "format": "date-time",
-          "description": "Job has ended at this time. Value is in UTC.",
+          "description": "PointInTime value",
           "type": "string"
         }
-      }
+      },
+      "x-ms-discriminator-value": "AzureWorkloadSQLPointInTimeRestoreRequest"
     },
     "AzureWorkloadSQLRecoveryPoint": {
       "description": "SQL specific recoverypoint, specifically encapsulates full/diff recoverypoint along with extended info",
@@ -1483,6 +1900,33 @@
           "readOnly": true
         }
       }
+    },
+    "AzureWorkloadSQLRestoreRequest": {
+      "description": "AzureWorkload SQL -specific restore. Specifically for full/diff restore",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AzureWorkloadRestoreRequest"
+        }
+      ],
+      "properties": {
+        "shouldUseAlternateTargetLocation": {
+          "description": "Default option set to true. If this is set to false, alternate data directory must be provided",
+          "type": "boolean"
+        },
+        "isNonRecoverable": {
+          "description": "SQL specific property where user can chose to set no-recovery when restore operation is tried",
+          "type": "boolean"
+        },
+        "alternateDirectoryPaths": {
+          "description": "Data directory details",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SQLDataDirectoryMapping"
+          }
+        }
+      },
+      "x-ms-discriminator-value": "AzureWorkloadSQLRestoreRequest"
     },
     "BEKDetails": {
       "description": "BEK is bitlocker encryption key.",
@@ -1539,45 +1983,6 @@
         }
       }
     },
-    "ClientScriptForConnect": {
-      "description": "Client script details for file / folder restore.",
-      "type": "object",
-      "properties": {
-        "scriptContent": {
-          "description": "File content of the client script for file / folder restore.",
-          "type": "string"
-        },
-        "scriptExtension": {
-          "description": "File extension of the client script for file / folder restore - .ps1 , .sh , etc.",
-          "type": "string"
-        },
-        "osType": {
-          "description": "OS type - Windows, Linux etc. for which this file / folder restore client script works.",
-          "type": "string"
-        },
-        "url": {
-          "description": "URL of Executable from where to source the content. If this is not null then ScriptContent should not be used",
-          "type": "string"
-        },
-        "scriptNameSuffix": {
-          "description": "Mandatory suffix that should be added to the name of script that is given for download to user.\r\nIf its null or empty then , ignore it.",
-          "type": "string"
-        }
-      }
-    },
-    "CrossRegionRestoreRequest": {
-      "type": "object",
-      "properties": {
-        "crossRegionRestoreAccessDetails": {
-          "$ref": "#/definitions/CrrAccessToken",
-          "description": "Access details for cross region restore"
-        },
-        "restoreRequest": {
-          "$ref": "#/definitions/RestoreRequest",
-          "description": "Request object for triggering restore"
-        }
-      }
-    },
     "BackupResourceConfig": {
       "description": "The resource storage details.",
       "type": "object",
@@ -1631,6 +2036,34 @@
         }
       }
     },
+    "CrrJobRequest": {
+      "description": "Request object for fetching CRR jobs.",
+      "type": "object",
+      "properties": {
+        "resourceId": {
+          "description": "Entire ARM resource id of the resource",
+          "type": "string"
+        },
+        "jobName": {
+          "description": "Job Name of the job to be fetched",
+          "type": "string"
+        }
+      }
+    },
+    "CrrJobRequestResource": {
+      "description": "Request object for fetching CRR jobs.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/CrrJobRequest",
+          "description": "CrrJobRequestResource properties"
+        }
+      }
+    },
     "BackupResourceConfigResource": {
       "description": "The resource storage details.",
       "allOf": [
@@ -1642,6 +2075,45 @@
         "properties": {
           "$ref": "#/definitions/BackupResourceConfig",
           "description": "BackupResourceConfigResource properties"
+        }
+      }
+    },
+    "ClientScriptForConnect": {
+      "description": "Client script details for file / folder restore.",
+      "type": "object",
+      "properties": {
+        "scriptContent": {
+          "description": "File content of the client script for file / folder restore.",
+          "type": "string"
+        },
+        "scriptExtension": {
+          "description": "File extension of the client script for file / folder restore - .ps1 , .sh , etc.",
+          "type": "string"
+        },
+        "osType": {
+          "description": "OS type - Windows, Linux etc. for which this file / folder restore client script works.",
+          "type": "string"
+        },
+        "url": {
+          "description": "URL of Executable from where to source the content. If this is not null then ScriptContent should not be used",
+          "type": "string"
+        },
+        "scriptNameSuffix": {
+          "description": "Mandatory suffix that should be added to the name of script that is given for download to user.\r\nIf its null or empty then , ignore it.",
+          "type": "string"
+        }
+      }
+    },
+    "CrossRegionRestoreRequest": {
+      "type": "object",
+      "properties": {
+        "crossRegionRestoreAccessDetails": {
+          "$ref": "#/definitions/CrrAccessToken",
+          "description": "Access details for cross region restore"
+        },
+        "restoreRequest": {
+          "$ref": "#/definitions/RestoreRequest",
+          "description": "Request object for triggering restore"
         }
       }
     },
@@ -1751,34 +2223,6 @@
         "properties": {
           "$ref": "#/definitions/CrrAccessToken",
           "description": "CrrAccessTokenResource properties"
-        }
-      }
-    },
-    "CrrJobRequest": {
-      "description": "Request object for fetching CRR jobs.",
-      "type": "object",
-      "properties": {
-        "resourceId": {
-          "description": "Entire ARM resource id of the resource",
-          "type": "string"
-        },
-        "jobName": {
-          "description": "Job Name of the job to be fetched",
-          "type": "string"
-        }
-      }
-    },
-    "CrrJobRequestResource": {
-      "description": "Request object for fetching CRR jobs.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/Resource"
-        }
-      ],
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/CrrJobRequest",
-          "description": "CrrJobRequestResource properties"
         }
       }
     },
@@ -2425,6 +2869,82 @@
         }
       },
       "discriminator": "jobType"
+    },
+    "JobQueryObject": {
+      "description": "Filters to list the jobs.",
+      "type": "object",
+      "properties": {
+        "status": {
+          "description": "Status of the job.",
+          "enum": [
+            "Invalid",
+            "InProgress",
+            "Completed",
+            "Failed",
+            "CompletedWithWarnings",
+            "Cancelled",
+            "Cancelling"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "JobStatus",
+            "modelAsString": true
+          }
+        },
+        "backupManagementType": {
+          "description": "Type of backup management for the job.",
+          "enum": [
+            "Invalid",
+            "AzureIaasVM",
+            "MAB",
+            "DPM",
+            "AzureBackupServer",
+            "AzureSql",
+            "AzureStorage",
+            "AzureWorkload",
+            "DefaultBackup"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "BackupManagementType",
+            "modelAsString": true
+          }
+        },
+        "operation": {
+          "description": "Type of operation.",
+          "enum": [
+            "Invalid",
+            "Register",
+            "UnRegister",
+            "ConfigureBackup",
+            "Backup",
+            "Restore",
+            "DisableBackup",
+            "DeleteBackupData",
+            "CrossRegionRestore",
+            "Undelete"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "JobOperationType",
+            "modelAsString": true
+          }
+        },
+        "jobId": {
+          "description": "JobID represents the job uniquely.",
+          "type": "string"
+        },
+        "startTime": {
+          "format": "date-time",
+          "description": "Job has started at this time. Value is in UTC.",
+          "type": "string"
+        },
+        "endTime": {
+          "format": "date-time",
+          "description": "Job has ended at this time. Value is in UTC.",
+          "type": "string"
+        }
+      }
     },
     "JobResource": {
       "description": "Defines workload agnostic properties for a job.",
@@ -3384,64 +3904,95 @@
           "type": "string"
         }
       }
-    }
-  },
-  "parameters": {
-    "SubscriptionId": {
-      "name": "subscriptionId",
-      "in": "path",
-      "description": "The subscription Id.",
-      "required": true,
-      "type": "string"
     },
-    "AzureRegion": {
-      "name": "azureRegion",
-      "in": "path",
-      "description": "Azure region to hit Api",
-      "required": true,
-      "type": "string",
-      "x-ms-parameter-location": "method"
-    },
-    "ApiVersion": {
-      "name": "api-version",
-      "in": "query",
-      "description": "Client Api Version.",
-      "required": true,
-      "type": "string"
-    },
-    "ResourceGroupName": {
-      "name": "resourceGroupName",
-      "in": "path",
-      "description": "The name of the resource group where the recovery services vault is present.",
-      "required": true,
-      "type": "string",
-      "x-ms-parameter-location": "method"
-    },
-    "VaultName": {
-      "name": "vaultName",
-      "in": "path",
-      "description": "The name of the recovery services vault.",
-      "required": true,
-      "type": "string",
-      "x-ms-parameter-location": "method"
-    }
-  },
-  "securityDefinitions": {
-    "azure_auth": {
-      "type": "oauth2",
-      "description": "Azure Active Directory OAuth2 Flow",
-      "flow": "implicit",
-      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
-      "scopes": {
-        "user_impersonation": "impersonate your user account."
+    "TargetRestoreInfo": {
+      "description": "Details about target workload during restore operation.",
+      "type": "object",
+      "properties": {
+        "overwriteOption": {
+          "description": "Can Overwrite if Target DataBase already exists",
+          "enum": [
+            "Invalid",
+            "FailOnConflict",
+            "Overwrite"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "OverwriteOptions",
+            "modelAsString": true
+          }
+        },
+        "containerId": {
+          "description": "Resource Id name of the container in which Target DataBase resides",
+          "type": "string"
+        },
+        "databaseName": {
+          "description": "Database name InstanceName/DataBaseName for SQL or System/DbName for SAP Hana",
+          "type": "string"
+        },
+        "targetDirectoryForFileRestore": {
+          "description": "Target directory location for restore as files.",
+          "type": "string"
+        }
       }
     }
   },
-  "security": [
-    {
-      "azure_auth": [
-        "user_impersonation"
-      ]
-    }
-  ]
-}
+ "parameters": {
+      "SubscriptionId": {
+        "name": "subscriptionId",
+        "in": "path",
+        "description": "The subscription Id.",
+        "required": true,
+        "type": "string"
+      },
+      "AzureRegion": {
+        "name": "azureRegion",
+        "in": "path",
+        "description": "Azure region to hit Api",
+        "required": true,
+        "type": "string",
+        "x-ms-parameter-location": "method"
+      },
+      "ApiVersion": {
+        "name": "api-version",
+        "in": "query",
+        "description": "Client Api Version.",
+        "required": true,
+        "type": "string"
+      },
+      "ResourceGroupName": {
+        "name": "resourceGroupName",
+        "in": "path",
+        "description": "The name of the resource group where the recovery services vault is present.",
+        "required": true,
+        "type": "string",
+        "x-ms-parameter-location": "method"
+      },
+      "VaultName": {
+        "description": "The name of the recovery services vault.",
+        "in": "path",
+        "name": "vaultName",
+        "required": true,
+        "type": "string",
+        "x-ms-parameter-location": "method"
+      }
+    },
+    "securityDefinitions": {
+      "azure_auth": {
+        "type": "oauth2",
+        "description": "Azure Active Directory OAuth2 Flow",
+        "flow": "implicit",
+        "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+        "scopes": {
+          "user_impersonation": "impersonate your user account."
+        }
+      }
+    },
+    "security": [
+      {
+        "azure_auth": [
+          "user_impersonation"
+        ]
+      }
+    ]
+  }
