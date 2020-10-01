@@ -32,7 +32,7 @@
         "tags": [
           "LiveEvents"
         ],
-        "summary": "List Live Events",
+        "summary": "List live events",
         "description": "Lists all the live events in the account.",
         "operationId": "LiveEvents_List",
         "parameters": [
@@ -79,7 +79,7 @@
           "LiveEvents"
         ],
         "summary": "Get Live Event",
-        "description": "Gets a live event.",
+        "description": "Gets properties of a live event.",
         "operationId": "LiveEvents_Get",
         "parameters": [
           {
@@ -1149,7 +1149,7 @@
         "archiveWindowLength": {
           "format": "duration",
           "type": "string",
-          "description": "ISO 8601 timespan between one minute to 25 hours to indicate the maximum content length that can be archived in the asset for this live output. This also sets the maximum content length for the rewind window. For example, use PT1H30M to indicate 1 hour and 30 minutes of archive window."
+          "description": "ISO 8601 time between 1 minute to 25 hours to indicate the maximum content length that can be archived in the asset for this live output. This also sets the maximum content length for the rewind window. For example, use PT1H30M to indicate 1 hour and 30 minutes of archive window."
         },
         "manifestName": {
           "type": "string",
@@ -1307,7 +1307,7 @@
         },
         "keyFrameIntervalDuration": {
           "type": "string",
-          "description": "ISO 8601 timespan duration of the key frame interval duration of the input. This value sets the EXT-X-TARGETDURATION property in the HLS output. For example, use PT2S to indicate 2 seconds. Leave the value empty for encoding live events."
+          "description": "ISO 8601 time duration of the key frame interval duration of the input. This value sets the EXT-X-TARGETDURATION property in the HLS output. For example, use PT2S to indicate 2 seconds. Leave the value empty for encoding live events."
         },
         "accessToken": {
           "type": "string",
@@ -1375,7 +1375,7 @@
         "accessControl": {
           "type": "object",
           "$ref": "#/definitions/LiveEventPreviewAccessControl",
-          "description": "The access control for LiveEvent preview."
+          "description": "The access control for live event preview."
         },
         "previewLocator": {
           "type": "string",
@@ -1383,14 +1383,14 @@
         },
         "streamingPolicyName": {
           "type": "string",
-          "description": "The name of streaming policy used for the LiveEvent preview. This value is specified at creation time and cannot be updated."
+          "description": "The name of streaming policy used for the live event preview. This value is specified at creation time and cannot be updated."
         },
         "alternativeMediaId": {
           "type": "string",
           "description": "An alternative media identifier associated with the streaming locator created for the preview. This value is specified at creation time and cannot be updated. The identifier can be used in the CustomLicenseAcquisitionUrlTemplate or the CustomKeyAcquisitionUrlTemplate of the StreamingPolicy specified in the StreamingPolicyName field."
         }
       },
-      "description": "The Live Event preview."
+      "description": "Live event preview settings."
     },
     "LiveEventEncoding": {
       "properties": {
@@ -1777,7 +1777,7 @@
         },
         "availabilitySetName": {
           "type": "string",
-          "description": "The name of the AvailabilitySet used with this streaming endpoint for high availability streaming. This value can only be set at creation time. This feature is not available everywhere, please contact Azure Support for more information."
+          "description": "This feature is deprecated, do not set a value for this property."
         },
         "accessControl": {
           "type": "object",
