@@ -112,7 +112,7 @@
         ],
         "responses": {
           "200": {
-            "description": "This is returned as a response to the status polling request for the create or update operation. The body contains the resource representation that indicates a transitional provisioning state.",
+            "description": "This is returned as a response if the operation has completed. The body contains the resource representation that indicates a terminal provisioning state.",
             "schema": {
               "$ref": "#/definitions/DigitalTwinsDescription"
             }
@@ -168,13 +168,10 @@
         ],
         "responses": {
           "200": {
-            "description": "This is returned as a response to the status polling request for the create or update operation. The body contains the resource representation that indicates a transitional provisioning state.",
+            "description": "This is returned as a response to the patch operation.",
             "schema": {
               "$ref": "#/definitions/DigitalTwinsDescription"
             }
-          },
-          "201": {
-            "description": "Accepted - Put request accepted; the operation will complete asynchronously."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -212,7 +209,10 @@
         ],
         "responses": {
           "200": {
-            "description": "This is returned as a response to the status polling request for the delete operation. The body contains the resource representation that indicates a transitional provisioning state."
+            "description": "This is returned as a response whenever the asynchronous delete operation has completed. The body contains the resource representation that indicates a terminal provisioning state.",
+            "schema": {
+              "$ref": "#/definitions/DigitalTwinsDescription"
+            }
           },
           "202": {
             "description": "Accepted - Delete request accepted; the operation will complete asynchronously.",
@@ -361,7 +361,7 @@
         ],
         "responses": {
           "200": {
-            "description": "This is returned as a response to the status polling request for the create or update operation. The body contains the resource representation that indicates a transitional provisioning state.",
+            "description": "This is returned as a response to the asynchronous operation having completed. The body contains the resource representation that indicates a terminal provisioning state.",
             "schema": {
               "$ref": "#/definitions/DigitalTwinsEndpointResource"
             }
@@ -411,7 +411,10 @@
         ],
         "responses": {
           "200": {
-            "description": "This is returned as a response to the status polling request for the delete operation. The body contains the resource representation that indicates a transitional provisioning state."
+            "description": "This is returned as a response when the asynchronous operation has finished, but the resource has failed to deprovision. The body contains the resource representation that indicates a terminal provisioning state.",
+            "schema": {
+              "$ref": "#/definitions/DigitalTwinsEndpointResource"
+            }
           },
           "202": {
             "description": "Accepted - Delete request accepted; the operation will complete asynchronously.",
@@ -671,6 +674,9 @@
         {
           "$ref": "#/definitions/DigitalTwinsResource"
         }
+      ],
+      "required": [
+        "properties"
       ]
     },
     "DigitalTwinsPatchDescription": {
@@ -718,7 +724,8 @@
           "additionalProperties": {
             "type": "string"
           },
-          "description": "The resource tags."
+          "description": "The resource tags.",
+          "x-nullable": true
         },
         "sku": {
           "description": "This property is reserved for future use, and will be ignored/omitted",
@@ -870,10 +877,6 @@
           "type": "boolean",
           "description": "Specifies a Boolean value that indicates if the name is available."
         },
-        "name": {
-          "type": "string",
-          "description": "The name that was checked."
-        },
         "message": {
           "type": "string",
           "description": "Message indicating an unavailable name due to a conflict, or a description of the naming rules that are violated."
@@ -881,8 +884,9 @@
         "reason": {
           "type": "string",
           "enum": [
-            "Invalid",
-            "AlreadyExists"
+            "NameIsAvailable",
+            "NameConflict",
+            "InvalidName"
           ],
           "x-ms-enum": {
             "name": "reason",
@@ -928,7 +932,10 @@
           "description": "DigitalTwinsInstance endpoint resource properties.",
           "$ref": "#/definitions/DigitalTwinsEndpointResourceProperties"
         }
-      }
+      },
+      "required": [
+        "properties"
+      ]
     },
     "DigitalTwinsEndpointResourceProperties": {
       "description": "Properties related to Digital Twins Endpoint",
@@ -977,15 +984,15 @@
           "additionalProperties": {
             "type": "string"
           },
-          "description": "The resource tags."
+          "description": "The resource tags.",
+          "x-nullable": true
         }
       }
     },
     "ServiceBus": {
       "description": "properties related to servicebus.",
       "required": [
-        "primaryConnectionString",
-        "secondaryConnectionString"
+        "primaryConnectionString"
       ],
       "x-ms-discriminator-value": "ServiceBus",
       "allOf": [
@@ -1010,8 +1017,7 @@
     "EventHub": {
       "description": "properties related to eventhub.",
       "required": [
-        "connectionString-PrimaryKey",
-        "connectionString-SecondaryKey"
+        "connectionString-PrimaryKey"
       ],
       "x-ms-discriminator-value": "EventHub",
       "allOf": [
@@ -1036,8 +1042,8 @@
     "EventGrid": {
       "description": "properties related to eventgrid.",
       "required": [
-        "accessKey1",
-        "accessKey2"
+        "TopicEndpoint",
+        "accessKey1"
       ],
       "x-ms-discriminator-value": "EventGrid",
       "allOf": [
@@ -1117,8 +1123,9 @@
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method",
-      "minLength": 1,
-      "maxLength": 64
+      "pattern": "^(?!-)[A-Za-z0-9-]{3,63}(?<!-)$",
+      "minLength": 3,
+      "maxLength": 63
     },
     "location": {
       "name": "location",
@@ -1136,9 +1143,9 @@
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method",
-      "pattern": "^[A-Za-z0-9-._]{1,64}$",
-      "minLength": 1,
-      "maxLength": 64
+      "pattern": "^(?![0-9]+$)(?!-)[a-zA-Z0-9-]{2,49}[a-zA-Z0-9]$",
+      "minLength": 2,
+      "maxLength": 49
     }
   }
 }
