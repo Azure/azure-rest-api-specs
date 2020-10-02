@@ -1562,6 +1562,24 @@
               "$ref": "#/definitions/EnrollmentAccount"
             }
           },
+          "400": {
+            "description": "The specified input is Invalid",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "403": {
+            "description": "User does not have permissions to perform the specified operation",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "419": {
+            "description": "The specified account name or user account already exists",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
@@ -1717,6 +1735,18 @@
               "$ref": "#/definitions/EnrollmentAccount"
             }
           },
+          "400": {
+            "description": "The specified input is Invalid",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "403": {
+            "description": "User does not have permissions to perform the specified operation",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
@@ -1752,6 +1782,21 @@
             "description": "The specified enrollment account is deleted",
             "schema": {
               "$ref": "#/definitions/EnrollmentAccount"
+            }
+          },
+          "204": {
+            "description": "The specified enrollment account is deleted"
+          },
+          "400": {
+            "description": "The specified input is Invalid",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "403": {
+            "description": "User does not have permissions to perform the specified operation",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
             }
           },
           "default": {
