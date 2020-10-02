@@ -57,6 +57,14 @@ description: Peering Client
 openapi-type: arm
 tag: package-2019-08-01-preview
 ```
+### Tag: package-2020-10-01
+
+These settings apply only when `--tag=package-2020-10-01` is specified on the command line.
+
+``` yaml $(tag) == 'package-2020-10-01'
+input-file:
+- Microsoft.Peering/stable/2020-10-01/peering.json
+```
 
 ### Tag: package-2020-04-01
 
