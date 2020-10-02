@@ -1,0 +1,62 @@
+{
+  "parameters": {
+    "resourceGroupName": "Default-NotificationHubs-AustraliaEast",
+    "namespaceName": "sdk-Namespace-716",
+    "eventHubName": "sdk-EventHub-10",
+    "api-version": "2018-01-01-preview",
+    "subscriptionId": "e2f361f0-3b27-4503-a9cc-21cfba380093",
+    "parameters": {
+      "properties": {
+        "messageRetentionInDays": 5,
+        "partitionCount": 4,
+        "status": "Active",
+        "captureDescription": {
+          "enabled": true,
+          "encoding": "Avro",
+          "intervalInSeconds": 130,
+          "sizeLimitInBytes": 10485900,
+          "destination": {
+            "name": "EventHubArchive.AzureBlockBlob",
+            "properties": {
+              "storageAccountResourceId": "/subscriptions/e2f361f0-3b27-4503-a9cc-21cfba380093/resourceGroups/Default-Storage-SouthCentralUS/providers/Microsoft.ClassicStorage/storageAccounts/arjunteststorage",
+              "blobContainer": "container",
+              "archiveNameFormat": "{Namespace}/{EventHub}/{PartitionId}/{Year}/{Month}/{Day}/{Hour}/{Minute}/{Second}"
+            }
+          }
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/e2f361f0-3b27-4503-a9cc-21cfba380093/resourceGroups/Default-NotificationHubs-AustraliaEast/providers/Microsoft.EventHub/namespaces/sdk-Namespace-716/eventhubs/sdk-EventHub-10",
+        "name": "sdk-EventHub-10",
+        "type": "Microsoft.EventHub/Namespaces/EventHubs",
+        "location": "Australia East",
+        "properties": {
+          "messageRetentionInDays": 5,
+          "partitionCount": 4,
+          "status": "Active",
+          "createdAt": "0001-01-01T00:00:00",
+          "updatedAt": "0001-01-01T00:00:00",
+          "partitionIds": [],
+          "captureDescription": {
+            "enabled": true,
+            "encoding": "Avro",
+            "destination": {
+              "name": "EventHubArchive.AzureBlockBlob",
+              "properties": {
+                "storageAccountResourceId": "/subscriptions/e2f361f0-3b27-4503-a9cc-21cfba380093/resourceGroups/Default-Storage-SouthCentralUS/providers/Microsoft.ClassicStorage/storageAccounts/arjunteststorage",
+                "blobContainer": "container",
+                "archiveNameFormat": "{Namespace}/{EventHub}/{PartitionId}/{Year}/{Month}/{Day}/{Hour}/{Minute}/{Second}"
+              }
+            },
+            "intervalInSeconds": 130,
+            "sizeLimitInBytes": 10485900
+          }
+        }
+      }
+    }
+  }
+}
