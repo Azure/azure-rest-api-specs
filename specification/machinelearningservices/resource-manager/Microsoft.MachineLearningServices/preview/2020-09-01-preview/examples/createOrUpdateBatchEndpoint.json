@@ -1,0 +1,72 @@
+{
+  "parameters": {
+    "subscriptionId": "00000000-1111-2222-3333-444444444444",
+    "resourceGroupName": "resourceGroup-1234",
+    "workspaceName": "testworkspace",
+    "api-version": "2020-09-01-preview",
+    "endpointName": "testBatchEndpoint",
+    "body": {
+      "location": "westus2euap",
+      "tags": {},
+      "properties": {
+        "name": "test9301",
+        "description": "Testing pipeline endpoint creation",
+        "authMode": "AMLTokenAuth",
+        "trafficRoute": "{'testDeployment1': 100, 'testDeployment2': 0}",
+        "computeConfiguration": {
+          "computeType": "AMLCompute"
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/resourceGroup-1234/providers/Microsoft.MachineLearningServices/workspaces/testworkspace/batchEndpoints/testEndpointName",
+        "name": "testBatchEndpoint",
+        "type": "Microsoft.MachineLearningServices/workspaces/batchEndpoints",
+        "location": "westus2euap",
+        "tags": {},
+        "properties": {
+          "status": "NotStarted",
+          "authMode": "AMLTokenAuth",
+          "provisioningState": "Succeeded",
+          "trafficRoute": {
+            "testDeployment1": 100,
+            "testDeployment2": 0
+          },
+          "computeConfiguration": {
+            "computeType": "AMLCompute"
+          },
+          "properties": {
+            "description": "Testing pipeline endpoint creation"
+          }
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/resourceGroup-1234/providers/Microsoft.MachineLearningServices/workspaces/testworkspace/batchEndpoints/testEndpointName",
+        "name": "testBatchEndpoint",
+        "type": "Microsoft.MachineLearningServices/workspaces/batchEndpoints",
+        "location": "westus2euap",
+        "tags": {},
+        "properties": {
+          "status": "NotStarted",
+          "authMode": "AMLTokenAuth",
+          "provisioningState": "Succeeded",
+          "trafficRoute": {
+            "testDeployment1": 100,
+            "testDeployment2": 0
+          },
+          "computeConfiguration": {
+            "computeType": "AMLCompute"
+          },
+          "properties": {
+            "description": "Testing pipeline endpoint creation"
+          }
+        }
+      }
+    }
+  }
+}

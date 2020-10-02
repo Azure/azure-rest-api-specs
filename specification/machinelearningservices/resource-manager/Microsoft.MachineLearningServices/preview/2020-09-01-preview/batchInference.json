@@ -1,0 +1,790 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Azure Machine Learning Workspaces",
+    "description": "These APIs allow end users to operate on Azure Machine Learning Workspace resources.",
+    "version": "2020-12-01-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/mferp/managementfrontend/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/batchEndpoints/{endpointName}/deployments/{deploymentId}": {
+      "put": {
+        "tags": [
+          "BatchDeployment"
+        ],
+        "summary": "Creates a batch inference deployment.",
+        "operationId": "BatchDeployments_CreateOrUpdate",
+        "x-ms-examples": {
+          "Create or update BatchDeployment": {
+            "$ref": "./examples/createOrUpdateBatchDeployment.json"
+          }
+        },
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "machineLearningServices.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/APIVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/EndpointNameParameter"
+          },
+          {
+            "$ref": "#/parameters/EndpointDeploymentIdParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Batch inference deployment definition object.",
+            "schema": {
+              "$ref": "#/definitions/BatchDeploymentResource"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/BatchDeploymentResource"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/BatchDeploymentResource"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "BatchDeployment"
+        ],
+        "summary": "Gets a batch inference deployment by id.",
+        "operationId": "BatchDeployments_Get",
+        "produces": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/EndpointNameParameter"
+          },
+          {
+            "$ref": "#/parameters/EndpointDeploymentIdParameter"
+          },
+          {
+            "in": "query",
+            "name": "api-version",
+            "description": "Version of Azure Machine Learning resource provider API.",
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "subscriptionId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "resourceGroupName",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "workspaceName",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/BatchDeploymentResource"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "BatchDeployment"
+        ],
+        "summary": "Delete Batch Inference deployment.",
+        "operationId": "BatchDeployments_Delete",
+        "produces": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/EndpointNameParameter"
+          },
+          {
+            "$ref": "#/parameters/EndpointDeploymentIdParameter"
+          },
+          {
+            "in": "query",
+            "name": "api-version",
+            "description": "API version.",
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "subscriptionId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "resourceGroupName",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "workspaceName",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/mferp/managementfrontend/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/batchEndpoints/{endpointName}/deployments": {
+      "get": {
+        "tags": [
+          "BatchDeployment"
+        ],
+        "summary": "Lists Batch inference deployments in the workspace.",
+        "operationId": "BatchDeployments_List",
+        "x-ms-examples": {
+          "Get BatchDeployment": {
+            "$ref": "./examples/getBatchDeployment.json"
+          }
+        },
+        "produces": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "machineLearningServices.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/APIVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/EndpointNameParameter"
+          },
+          {
+            "in": "query",
+            "name": "api-version",
+            "description": "Version of Azure Machine Learning resource provider API.",
+            "type": "string"
+          },
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/BatchDeploymentResourcePaginatedResult"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/mferp/managementfrontend/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/batchEndpoints/{endpointName}": {
+      "put": {
+        "tags": [
+          "BatchEndpoint"
+        ],
+        "summary": "Creates a batch inference endpoint.",
+        "operationId": "BatchEndpoints_CreateOrUpdate",
+        "x-ms-examples": {
+          "Create or update BatchEndpoint": {
+            "$ref": "./examples/createOrUpdateBatchEndpoint.json"
+          }
+        },
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "machineLearningServices.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/APIVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/EndpointNameParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Batch inference endpoint definition object.",
+            "schema": {
+              "$ref": "#/definitions/BatchEndpointResource"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/BatchEndpointResource"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/BatchEndpointResource"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "BatchEndpoint"
+        ],
+        "summary": "Gets a batch inference endpoint by name.",
+        "operationId": "BatchEndpoints_Get",
+        "produces": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/EndpointNameParameter"
+          },
+          {
+            "in": "query",
+            "name": "api-version",
+            "description": "Version of Azure Machine Learning resource provider API.",
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "subscriptionId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "resourceGroupName",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "workspaceName",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/BatchEndpointResource"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "BatchEndpoint"
+        ],
+        "summary": "Delete Batch Inference Endpoint.",
+        "operationId": "BatchEndpoints_Delete",
+        "produces": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/EndpointNameParameter"
+          },
+          {
+            "in": "query",
+            "name": "api-version",
+            "description": "API version.",
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "subscriptionId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "resourceGroupName",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "workspaceName",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/mferp/managementfrontend/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/batchEndpoints": {
+      "get": {
+        "tags": [
+          "BatchEndpoint"
+        ],
+        "summary": "Lists Batch inference endpoint in the workspace.",
+        "operationId": "BatchEndpoints_List",
+        "x-ms-examples": {
+          "Get BatchEndpoint": {
+            "$ref": "./examples/getBatchEndpoint.json"
+          }
+        },
+        "produces": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "machineLearningServices.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/APIVersionParameter"
+          },
+          {
+            "in": "query",
+            "name": "$skipToken",
+            "description": "Continuation token for pagination.",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/BatchEndpointResourcePaginatedResult"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/mferp/managementfrontend/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/batchEndpoints/{endpointName}/listkeys": {
+      "post": {
+        "tags": [
+          "BatchEndpoint"
+        ],
+        "summary": "Lists batch Inference Endpoint keys.",
+        "operationId": "BatchEndpoints_ListKeys",
+        "x-ms-examples": {
+          "List Keys": {
+            "$ref": "./examples/listKeysBatchEndpoint.json"
+          }
+        },
+        "produces": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "machineLearningServices.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/APIVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/EndpointNameParameter"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/InferenceEndpointKeysResource"
+            }
+          }
+        }
+      }
+    }
+  },
+  "parameters": {
+    "LocationNameParameter": {
+      "name": "locationName",
+      "description": "location of Azure Machine Learning workspace.",
+      "in": "path",
+      "type": "string",
+      "required": true,
+      "x-ms-parameter-location": "method"
+    },
+    "EndpointNameParameter": {
+      "name": "endpointName",
+      "description": "Name of the Azure Machine Learning Batch Inference endpoint.",
+      "in": "path",
+      "type": "string",
+      "required": true,
+      "x-ms-parameter-location": "method"
+    },
+    "EndpointDeploymentIdParameter": {
+      "name": "deploymentId",
+      "description": "Identifier of the Azure Machine Learning Batch Inference Deployment.",
+      "in": "path",
+      "type": "string",
+      "required": true,
+      "x-ms-parameter-location": "method"
+    }
+  },
+  "definitions": {
+    "BatchDeploymentResource": {
+      "description": "Azure Resource Manager resource Envelope",
+      "required": [
+        "properties"
+      ],
+      "type": "object",
+      "x-ms-azure-resource": true,
+      "properties": {
+        "id": {
+          "description": "The resource URL of the entity (not URL encoded).",
+          "type": "string",
+          "readOnly": true
+        },
+        "name": {
+          "description": "The name of the resource entity.",
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "description": "The resource provider and type.",
+          "type": "string",
+          "readOnly": true
+        },
+        "properties": {
+          "$ref": "#/definitions/BatchDeployment"
+        },
+        "systemData": {
+          "$ref": "#/definitions/SystemData"
+        },
+        "allOf": [
+          {
+            "$ref": "types.json#/definitions/TrackedResource"
+          }
+        ]        
+      }
+    },
+    "BatchDeploymentResourcePaginatedResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/BatchDeploymentResource"
+          }
+        },
+        "continuationToken": {
+          "type": "string"
+        },
+        "nextLink": {
+          "type": "string"
+        }
+      }
+    },
+    "BatchEndpointResource": {
+      "description": "Azure Resource Manager resource Envelope",
+      "required": [
+        "properties"
+      ],
+      "type": "object",
+      "x-ms-azure-resource": true,
+      "properties": {
+        "id": {
+          "description": "The resource URL of the entity (not URL encoded).",
+          "type": "string",
+          "readOnly": true
+        },
+        "name": {
+          "description": "The name of the resource entity.",
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "description": "The resource provider and type.",
+          "type": "string",
+          "readOnly": true
+        },
+        "properties": {
+          "$ref": "#/definitions/BatchEndpoint"
+        },
+        "systemData": {
+          "$ref": "#/definitions/SystemData"
+        },
+        "allOf": [
+          {
+            "$ref": "types.json#/definitions/TrackedResource"
+          }
+        ]
+      }
+    },
+    "BatchEndpointResourcePaginatedResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/BatchEndpointResource"
+          }
+        },
+        "continuationToken": {
+          "type": "string"
+        },
+        "nextLink": {
+          "type": "string"
+        }
+      }
+    },
+    "BatchRetrySettings": {
+      "description": "Retry settings for a batch inference operation.",
+      "type": "object",
+      "properties": {
+        "maximumRetries": {
+          "format": "int32",
+          "description": "Maximum retry count for a mini-batch",
+          "type": "integer"
+        },
+        "timeoutInSeconds": {
+          "format": "int32",
+          "description": "Invocation timeout for a mini-batch, in seconds.",
+          "type": "integer"
+        }
+      }
+    },
+    "BatchPartitioningScheme": {
+      "description": "Partitioning scheme for batch inference operation.",
+      "type": "object",
+      "properties": {
+        "partitioningKey": {
+          "description": "Partition key used for Named partitioning.",
+          "type": "string"
+        },
+        "miniBatchSize": {
+          "format": "int64",
+          "description": "Size of the mini-batch passed to each batch invocation.\r\nFor FileDataset, this is the number of files per mini-batch.\r\nFor TabularDataset, this is the size of the records in bytes, per mini-batch.",
+          "type": "integer"
+        }
+      }
+    },
+    "BatchLoggingLevel": {
+      "description": "Log verbosity for batch inferencing.\r\nIncreasing verbosity order for logging is : Warning, Info and Debug\r\nDefault value is Info.",
+      "enum": [
+        "Info",
+        "Warning",
+        "Debug"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "BatchLoggingLevel",
+        "modelAsString": false
+      }
+    },
+    "BatchOutputAction": {
+      "description": "Enum to determine how batch inferencing will handle output",
+      "enum": [
+        "SummaryOnly",
+        "AppendRow"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "BatchOutputAction",
+        "modelAsString": false
+      }
+    },
+    "BatchOutputConfiguration": {
+      "description": "Batch inference output configuration.",
+      "type": "object",
+      "properties": {
+        "outputAction": {
+          "$ref": "#/definitions/BatchOutputAction"
+        },
+        "appendRowFileName": {
+          "description": "Customized output file name for append_row output action.",
+          "type": "string"
+        }
+      }
+    },
+    "BatchDeploymentSettings": {
+      "description": "Batch inference specific settings per deployment.",
+      "type": "object",
+      "properties": {
+        "computeId": {
+          "description": "Compute artifact Identifier",
+          "type": "string"
+        },
+        "errorThreshold": {
+          "format": "int32",
+          "description": "Error threshold, if the error count for the entire input goes above this value,\r\nthe batch inference will be aborted. Range is [-1, int.MaxValue]\r\n-1 value indicates, ignore all failures during batch inference\r\nFor FileDataset count of file failures\r\nFor TabularDataset, this is the count of record failures",
+          "type": "integer"
+        },
+        "retrySettings": {
+          "$ref": "#/definitions/BatchRetrySettings"
+        },
+        "partitioningScheme": {
+          "$ref": "#/definitions/BatchPartitioningScheme"
+        },
+        "loggingLevel": {
+          "$ref": "#/definitions/BatchLoggingLevel"
+        },
+        "outputConfiguration": {
+          "$ref": "#/definitions/BatchOutputConfiguration"
+        }
+      }
+    }
+  }
+}
