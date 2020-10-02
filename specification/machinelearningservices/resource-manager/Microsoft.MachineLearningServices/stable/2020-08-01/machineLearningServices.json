@@ -1350,7 +1350,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/MachineLearningServiceError"
             }
           }
         }
@@ -1402,7 +1402,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/MachineLearningServiceError"
             }
           }
         }
@@ -1413,6 +1413,7 @@
         ],
         "operationId": "PrivateEndpointConnections_Delete",
         "description": "Deletes the specified private endpoint connection associated with the workspace.",
+        "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "WorkspaceDeletePrivateEndpointConnection": {
             "$ref": "./examples/workspaceDeletePrivateEndpointConnection.json"
@@ -1439,13 +1440,16 @@
           "200": {
             "description": "OK -- Delete the private endpoint connection successfully."
           },
+          "202": {
+            "description": "The request was successful; the request was well-formed and received properly."
+          },
           "204": {
             "description": "No Content -- The private endpoint connection does not exist."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/MachineLearningServiceError"
             }
           }
         }
@@ -2507,7 +2511,7 @@
           "enum": [
             "SystemAssigned",
             "UserAssigned",
-            "SystemAssigned, UserAssigned",
+            "SystemAssigned,UserAssigned",
             "None"
           ],
           "x-ms-enum": {
@@ -3650,6 +3654,24 @@
       "description": "Describes The zonal capabilities of a SKU."
     },
     "WorkspaceSku": {
+      "type": "object",
+      "description": "AML workspace sku information",
+      "properties": {
+        "resourceType": {
+          "readOnly": true,
+          "type": "string"
+        },
+        "skus": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SkuSettings"
+          },
+          "description": "The list of workspace sku settings"
+        }
+      }
+    },
+    "SkuSettings": {
       "description": "Describes Workspace Sku details and features",
       "type": "object",
       "properties": {
@@ -3763,19 +3785,31 @@
       }
     },
     "PrivateEndpointConnection": {
+      "x-ms-azure-resource": true,
+      "description": "The Private Endpoint Connection resource.",
+      "type": "object",
       "properties": {
+        "id": {
+          "type": "string",
+          "description": "ResourceId of the private endpoint connection.",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "description": "Friendly name of the private endpoint connection.",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "description": "Resource type of private endpoint connection.",
+          "readOnly": true
+        },
         "properties": {
           "$ref": "#/definitions/PrivateEndpointConnectionProperties",
           "x-ms-client-flatten": true,
           "description": "Resource properties."
         }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/Resource"
-        }
-      ],
-      "description": "The Private Endpoint Connection resource."
+      }
     },
     "PrivateEndpointConnectionProperties": {
       "properties": {
