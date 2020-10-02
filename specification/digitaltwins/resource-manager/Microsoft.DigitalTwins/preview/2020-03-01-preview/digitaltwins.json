@@ -816,6 +816,17 @@
         "display": {
           "description": "Operation properties display",
           "$ref": "#/definitions/OperationDisplay"
+        },
+        "origin": {
+          "readOnly": true,
+          "type": "string",
+          "x-nullable": true,
+          "description": "The intended executor of the operation."
+        },
+        "isDataAction": {
+          "readOnly": true,
+          "type": "boolean",
+          "description": "If the operation is a data action (for data plane rbac)."
         }
       }
     },
