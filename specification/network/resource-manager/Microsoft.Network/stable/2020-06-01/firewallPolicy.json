@@ -3,7 +3,7 @@
   "info": {
     "title": "NetworkManagementClient",
     "description": "The Microsoft Azure Network management API provides a RESTful set of web services that interact with Microsoft Azure Networks service to manage your network resources. The API has entities that capture the relationship between an end user and the Microsoft Azure Networks service.",
-    "version": "2020-06-01"
+    "version": "2020-08-01"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -416,6 +416,9 @@
           },
           "Get FirewallPolicyRuleCollectionGroup With IpGroups": {
             "$ref": "./examples/FirewallPolicyRuleCollectionGroupWithIpGroupsGet.json"
+          },
+          "Get FirewallPolicyRuleCollectionGroup With Web Categories": {
+            "$ref": "./examples/FirewallPolicyRuleCollectionGroupWithWebCategoriesGet.json"
           }
         }
       },
@@ -489,6 +492,9 @@
           },
           "Create FirewallPolicyRuleCollectionGroup With IpGroups": {
             "$ref": "./examples/FirewallPolicyRuleCollectionGroupWithIpGroupsPut.json"
+          },
+          "Create FirewallPolicyRuleCollectionGroup With Web Categories": {
+            "$ref": "./examples/FirewallPolicyRuleCollectionGroupWithWebCategoriesPut.json"
           }
         },
         "x-ms-long-running-operation": true,
@@ -546,6 +552,9 @@
           },
           "List all FirewallPolicyRuleCollectionGroups with IpGroups for a given FirewallPolicy": {
             "$ref": "./examples/FirewallPolicyRuleCollectionGroupWithIpGroupsList.json"
+          },
+          "List all FirewallPolicyRuleCollectionGroup With Web Categories": {
+            "$ref": "./examples/FirewallPolicyRuleCollectionGroupWithWebCategoriesList.json"
           }
         },
         "x-ms-pageable": {
@@ -835,6 +844,13 @@
         "sourceIpGroups": {
           "type": "array",
           "description": "List of source IpGroups for this rule.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "webCategories": {
+          "type": "array",
+          "description": "List of destination azure web categories.",
           "items": {
             "type": "string"
           }
