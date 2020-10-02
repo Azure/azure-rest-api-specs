@@ -3460,6 +3460,150 @@
         }
       }
     },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/createBillingRoleAssignment": {
+      "post": {
+        "tags": [
+          "BillingRoleAssignments"
+        ],
+        "operationId": "BillingRoleAssignments_AddByBillingAccount",
+        "description": "Adds a role assignment on a billing account. The operation is supported for billing accounts with agreement type Microsoft Customer Agreement.",
+        "x-ms-examples": {
+          "AddRoleAssignmentToBillingAccount": {
+            "$ref": "./examples/AddRoleAssignmentToBillingAccount.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/billingAccountNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/BillingRoleAssignmentRequestProperties"
+            },
+            "description": "Request parameters that are provided to the create billing role assignment operation."
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Role assignment is successfully created",
+            "schema": {
+              "$ref": "#/definitions/BillingRoleAssignment"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/invoiceSections/{invoiceSectionName}/createBillingRoleAssignment": {
+      "post": {
+        "tags": [
+          "BillingRoleAssignments"
+        ],
+        "operationId": "BillingRoleAssignments_AddByInvoiceSection",
+        "description": "Adds a role assignment on an invoice section. The operation is supported for billing accounts with agreement type Microsoft Customer Agreement.",
+        "x-ms-examples": {
+          "AddRoleAssignmentToInvoiceSection": {
+            "$ref": "./examples/AddRoleAssignmentToInvoiceSection.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/billingAccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/billingProfileNameParameter"
+          },
+          {
+            "$ref": "#/parameters/invoiceSectionNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/BillingRoleAssignmentRequestProperties"
+            },
+            "description": "Request parameters that are provided to the create billing role assignment operation."
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Role assignment is successfully created",
+            "schema": {
+              "$ref": "#/definitions/BillingRoleAssignment"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/createBillingRoleAssignment": {
+      "post": {
+        "tags": [
+          "BillingRoleAssignments"
+        ],
+        "operationId": "BillingRoleAssignments_AddByBillingProfile",
+        "description": "Adds a role assignment on a billing profile. The operation is supported for billing accounts with agreement type Microsoft Customer Agreement.",
+        "x-ms-examples": {
+          "AddRoleAssignmentToBillingProfile": {
+            "$ref": "./examples/AddRoleAssignmentToBillingProfile.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/billingAccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/billingProfileNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/BillingRoleAssignmentRequestProperties"
+            },
+            "description": "Request parameters that are provided to the create billing role assignment operation."
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Role assignment is successfully created",
+            "schema": {
+              "$ref": "#/definitions/BillingRoleAssignment"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
     "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/agreements": {
       "get": {
         "tags": [
@@ -6022,6 +6166,19 @@
         },
         "userEmailAddress": {
           "description": "The email address of the user.",
+          "type": "string"
+        }
+      }
+    },
+    "BillingRoleAssignmentRequestProperties": {
+      "description": "The request parameters to add the role assignment on a scope",
+      "properties": {
+        "principalId": {
+          "description": "The user's principal id that the role gets assigned to",
+          "type": "string"
+        },
+        "billingRoleDefinitionId": {
+          "description": "The role definition id",
           "type": "string"
         }
       }
