@@ -42,7 +42,7 @@
           "Operations"
         ],
         "summary": "List available operations.",
-        "description": "List the available operations supported by the Microsoft.EventGrid resource provider.",
+        "description": "List the available operations supported by the resource provider.",
         "operationId": "Operations_List",
         "consumes": [],
         "produces": [
@@ -93,7 +93,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "../2020-03-01-preview/componentLinkedStorageAccounts_API.json#/definitions/ErrorResponse"
             }
           },
           "200": {
@@ -117,20 +117,6 @@
     }
   },
   "definitions": {
-    "ErrorResponse": {
-      "description": "Describes the format of an error response.",
-      "type": "object",
-      "properties": {
-        "code": {
-          "description": "Error code",
-          "type": "string"
-        },
-        "message": {
-          "description": "Error message indicating why the operation failed.",
-          "type": "string"
-        }
-      }
-    },
     "LiveTokenResponse": {
       "type": "object",
       "properties": {
@@ -150,7 +136,7 @@
           "description": "A collection of operations",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/Operation"
+            "$ref": "#/definitions/OperationLive"
           }
         },
         "nextLink": {
@@ -159,7 +145,7 @@
         }
       }
     },
-    "Operation": {
+    "OperationLive": {
       "description": "Represents an operation returned by the GetOperations request",
       "type": "object",
       "properties": {

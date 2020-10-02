@@ -276,6 +276,45 @@
             }
           },
           {
+            "name": "scoringStatistics",
+            "in": "query",
+            "type": "string",
+            "enum": [
+              "local",
+              "global"
+            ],
+            "x-ms-enum": {
+              "name": "ScoringStatistics",
+              "modelAsString": false,
+              "values": [
+                {
+                  "value": "local",
+                  "name": "Local",
+                  "description": "The scoring statistics will be calculated locally for lower latency."
+                },
+                {
+                  "value": "global",
+                  "name": "Global",
+                  "description": "The scoring statistics will be calculated globally for more consistent scoring."
+                }
+              ]
+            },
+            "x-nullable": false,
+            "description": "A value that specifies whether we want to calculate scoring statistics (such as document frequency) globally for more consistent scoring, or locally, for lower latency.",
+            "x-ms-parameter-grouping": {
+              "name": "SearchOptions"
+            }
+          },
+          {
+            "name": "sessionId",
+            "in": "query",
+            "type": "string",
+            "description": "A value to be used to create a sticky session, which can help to get more consistent results. As long as the same sessionId is used, a best-effort attempt will be made to target the same replica set. Be wary that reusing the same sessionID values repeatedly can interfere with the load balancing of the requests across replicas and adversely affect the performance of the search service. The value used as sessionId cannot start with a '_' character.",
+            "x-ms-parameter-grouping": {
+              "name": "SearchOptions"
+            }
+          },
+          {
             "name": "$select",
             "in": "query",
             "type": "array",
@@ -1196,6 +1235,30 @@
       },
       "description": "Specifies the syntax of the search query. The default is 'simple'. Use 'full' if your query uses the Lucene query syntax."
     },
+    "ScoringStatistics": {
+      "type": "string",
+      "enum": [
+        "local",
+        "global"
+      ],
+      "x-ms-enum": {
+        "name": "ScoringStatistics",
+        "modelAsString": false,
+        "values": [
+          {
+            "value": "local",
+            "name": "Local",
+            "description": "The scoring statistics will be calculated locally for lower latency."
+          },
+          {
+            "value": "global",
+            "name": "Global",
+            "description": "The scoring statistics will be calculated globally for more consistent scoring."
+          }
+        ]
+      },
+      "description": "A value that specifies whether we want to calculate scoring statistics (such as document frequency) globally for more consistent scoring, or locally, for lower latency. The default is 'local'. Use 'global' to aggregate scoring statistics globally before scoring. Using global scoring statistics can increase latency of search queries."
+    },
     "AutocompleteMode": {
       "type": "string",
       "enum": [
@@ -1276,6 +1339,14 @@
         "queryType": {
           "$ref": "#/definitions/QueryType",
           "description": "A value that specifies the syntax of the search query. The default is 'simple'. Use 'full' if your query uses the Lucene query syntax."
+        },
+        "scoringStatistics": {
+          "$ref": "#/definitions/ScoringStatistics",
+          "description": "A value that specifies whether we want to calculate scoring statistics (such as document frequency) globally for more consistent scoring, or locally, for lower latency. The default is 'local'. Use 'global' to aggregate scoring statistics globally before scoring. Using global scoring statistics can increase latency of search queries."
+        },
+        "sessionId": {
+          "type": "string",
+          "description": "A value to be used to create a sticky session, which can help getting more consistent results. As long as the same sessionId is used, a best-effort attempt will be made to target the same replica set. Be wary that reusing the same sessionID values repeatedly can interfere with the load balancing of the requests across replicas and adversely affect the performance of the search service. The value used as sessionId cannot start with a '_' character."
         },
         "scoringParameters": {
           "type": "array",

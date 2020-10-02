@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "TimeSeriesInsightsClient",
-    "description": "Time Series Insights environment data plane client for PAYG (Preview L1 SKU) environments.",
+    "description": "Time Series Insights environment data plane client for Gen2 (Preview L1 SKU) environments.",
     "version": "2018-11-01-preview"
   },
   "x-ms-parameterized-host": {
@@ -188,7 +188,7 @@
           "ModelSettings"
         ],
         "operationId": "ModelSettings_Get",
-        "description": "Returns the model settings which includes model display name, Time Series ID properties and default type ID. Every pay-as-you-go environment has a model that is automatically created.",
+        "description": "Returns the model settings which includes model display name, Time Series ID properties and default type ID. Every Gen2 environment has a model that is automatically created.",
         "x-ms-examples": {
           "ModelSettingsGet": {
             "$ref": "./examples/ModelSettingsGet.json"
@@ -1530,7 +1530,7 @@
           }
         },
         "instanceFields": {
-          "description": "Set of key-value pairs that contain user-defined instance properties. May be null.",
+          "description": "Set of key-value pairs that contain user-defined instance properties. It may be null. Supported property value types are: bool, string, long, double and it cannot be nested or null.",
           "type": "object",
           "additionalProperties": {}
         }
@@ -1556,14 +1556,14 @@
           }
         },
         "update": {
-          "description": "Time series instances to be updated onlRequest to perform a single operation on a batch of instances. y. If instance does not exist, an error is returned.",
+          "description": "Time series instance to be updated. If instance does not exist, an error is returned.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/TimeSeriesInstance"
           }
         },
         "delete": {
-          "description": "Time series IDs or names of time series instances to delete.",
+          "description": "Time series instances to be deleted. Time series ID or name may be specified.",
           "$ref": "#/definitions/InstancesRequestBatchGetOrDelete"
         }
       }
