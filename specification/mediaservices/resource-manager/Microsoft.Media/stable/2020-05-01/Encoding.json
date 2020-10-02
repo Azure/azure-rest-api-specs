@@ -125,133 +125,31 @@
       "type": "object",
       "description": "Describes Advanced Audio Codec (AAC) audio encoding settings."
     },
-    "FaceDetectorPreset": {
-      "x-ms-discriminator-value": "#Microsoft.Media.FaceDetectorPreset",
-      "allOf": [
-        {
-          "$ref": "#/definitions/Preset"
-        }
-      ],
-      "properties": {
-        "resolution": {
-          "type": "string",
-          "enum": [
-            "SourceResolution",
-            "StandardDefinition"
-          ],
-          "x-ms-enum": {
-            "name": "AnalysisResolution",
-            "values": [
-              {
-                "value": "SourceResolution"
-              },
-              {
-                "value": "StandardDefinition"
-              }
-            ],
-            "modelAsString": true
-          },
-          "description": "Specifies the maximum resolution at which your video is analyzed. The default behavior is \"SourceResolution,\" which will keep the input video at its original resolution when analyzed. Using \"StandardDefinition\" will resize input videos to standard definition while preserving the appropriate aspect ratio. It will only resize if the video is of higher resolution. For example, a 1920x1080 input would be scaled to 640x360 before processing. Switching to \"StandardDefinition\" will reduce the time it takes to process high resolution video. It may also reduce the cost of using this component (see https://azure.microsoft.com/en-us/pricing/details/media-services/#analytics for details). However, faces that end up being too small in the resized video may not be detected."
-        },
-        "experimentalOptions": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "description": "Dictionary containing key value pairs for parameters not exposed in the preset itself"
-        }
-      },
-      "type": "object",
-      "description": "Describes all the settings to be used when analyzing a video in order to detect all the faces present."
-    },
-    "AudioAnalyzerPreset": {
-      "x-ms-discriminator-value": "#Microsoft.Media.AudioAnalyzerPreset",
-      "allOf": [
-        {
-          "$ref": "#/definitions/Preset"
-        }
-      ],
-      "properties": {
-        "audioLanguage": {
-          "type": "string",
-          "description": "The language for the audio payload in the input using the BCP-47 format of 'language tag-region' (e.g: 'en-US').  If you know the language of your content, it is recommended that you specify it. If the language isn't specified or set to null, automatic language detection will choose the first language detected and process with the selected language for the duration of the file. It does not currently support dynamically switching between languages after the first language is detected. The automatic detection works best with audio recordings with clearly discernable speech. If automatic detection fails to find the language, transcription would fallback to 'en-US'.\" The list of supported languages is available here: https://go.microsoft.com/fwlink/?linkid=2109463"
-        },
-        "experimentalOptions": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "description": "Dictionary containing key value pairs for parameters not exposed in the preset itself"
-        }
-      },
-      "type": "object",
-      "description": "The Audio Analyzer preset applies a pre-defined set of AI-based analysis operations, including speech transcription. Currently, the preset supports processing of content with a single audio track."
-    },
-    "Overlay": {
+    "Layer": {
       "discriminator": "@odata.type",
       "properties": {
         "@odata.type": {
           "type": "string",
           "description": "The discriminator for derived types."
         },
-        "inputLabel": {
+        "width": {
           "type": "string",
-          "description": "The label of the job input which is to be used as an overlay. The Input must specify exactly one file. You can specify an image file in JPG or PNG formats, or an audio file (such as a WAV, MP3, WMA or M4A file), or a video file. See https://aka.ms/mesformats for the complete list of supported audio and video file formats."
+          "description": "The width of the output video for this layer. The value can be absolute (in pixels) or relative (in percentage). For example 50% means the output video has half as many pixels in width as the input."
         },
-        "start": {
+        "height": {
           "type": "string",
-          "format": "duration",
-          "description": "The start position, with reference to the input video, at which the overlay starts. The value should be in ISO 8601 format. For example, PT05S to start the overlay at 5 seconds in to the input video. If not specified the overlay starts from the beginning of the input video."
+          "description": "The height of the output video for this layer. The value can be absolute (in pixels) or relative (in percentage). For example 50% means the output video has half as many pixels in height as the input."
         },
-        "end": {
+        "label": {
           "type": "string",
-          "format": "duration",
-          "description": "The position in the input video at which the overlay ends. The value should be in ISO 8601 duration format. For example, PT30S to end the overlay at 30 seconds in to the input video. If not specified the overlay will be applied until the end of the input video if inputLoop is true. Else, if inputLoop is false, then overlay will last as long as the duration of the overlay media."
-        },
-        "fadeInDuration": {
-          "type": "string",
-          "format": "duration",
-          "description": "The duration over which the overlay fades in onto the input video. The value should be in ISO 8601 duration format. If not specified the default behavior is to have no fade in (same as PT0S)."
-        },
-        "fadeOutDuration": {
-          "type": "string",
-          "format": "duration",
-          "description": "The duration over which the overlay fades out of the input video. The value should be in ISO 8601 duration format. If not specified the default behavior is to have no fade out (same as PT0S)."
-        },
-        "audioGainLevel": {
-          "type": "number",
-          "format": "double",
-          "description": "The gain level of audio in the overlay. The value should be in the range [0, 1.0]. The default is 1.0."
+          "description": "The alphanumeric label for this layer, which can be used in multiplexing different video and audio layers, or in naming the output file."
         }
       },
       "type": "object",
       "required": [
-        "@odata.type",
-        "inputLabel"
+        "@odata.type"
       ],
-      "description": "Base type for all overlays - image, audio or video."
-    },
-    "AudioOverlay": {
-      "x-ms-discriminator-value": "#Microsoft.Media.AudioOverlay",
-      "allOf": [
-        {
-          "$ref": "#/definitions/Overlay"
-        }
-      ],
-      "properties": {},
-      "type": "object",
-      "description": "Describes the properties of an audio overlay."
-    },
-    "CopyVideo": {
-      "x-ms-discriminator-value": "#Microsoft.Media.CopyVideo",
-      "allOf": [
-        {
-          "$ref": "#/definitions/Codec"
-        }
-      ],
-      "properties": {},
-      "type": "object",
-      "description": "A codec flag, which tells the encoder to copy the input video bitstream without re-encoding."
+      "description": "The encoder can be configured to produce video and/or images (thumbnails) at different resolutions, by specifying a layer for each desired resolution. A layer represents the properties for the video or image at a resolution."
     },
     "Video": {
       "x-ms-discriminator-value": "#Microsoft.Media.Video",
@@ -329,6 +227,156 @@
       "type": "object",
       "description": "Describes the basic properties for encoding the input video."
     },
+    "FaceDetectorPreset": {
+      "x-ms-discriminator-value": "#Microsoft.Media.FaceDetectorPreset",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Preset"
+        }
+      ],
+      "properties": {
+        "resolution": {
+          "type": "string",
+          "enum": [
+            "SourceResolution",
+            "StandardDefinition"
+          ],
+          "x-ms-enum": {
+            "name": "AnalysisResolution",
+            "values": [
+              {
+                "value": "SourceResolution"
+              },
+              {
+                "value": "StandardDefinition"
+              }
+            ],
+            "modelAsString": true
+          },
+          "description": "Specifies the maximum resolution at which your video is analyzed. The default behavior is \"SourceResolution,\" which will keep the input video at its original resolution when analyzed. Using \"StandardDefinition\" will resize input videos to standard definition while preserving the appropriate aspect ratio. It will only resize if the video is of higher resolution. For example, a 1920x1080 input would be scaled to 640x360 before processing. Switching to \"StandardDefinition\" will reduce the time it takes to process high resolution video. It may also reduce the cost of using this component (see https://azure.microsoft.com/en-us/pricing/details/media-services/#analytics for details). However, faces that end up being too small in the resized video may not be detected."
+        },
+        "experimentalOptions": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Dictionary containing key value pairs for parameters not exposed in the preset itself"
+        }
+      },
+      "type": "object",
+      "description": "Describes all the settings to be used when analyzing a video in order to detect all the faces present."
+    },
+    "AudioAnalyzerPreset": {
+      "x-ms-discriminator-value": "#Microsoft.Media.AudioAnalyzerPreset",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Preset"
+        }
+      ],
+      "properties": {
+        "audioLanguage": {
+          "type": "string",
+          "description": "The language for the audio payload in the input using the BCP-47 format of 'language tag-region' (e.g: 'en-US').  If you know the language of your content, it is recommended that you specify it. The language must be specified explicitly for AudioAnalysisMode::Basic, since automatic language detection is not included in basic mode. If the language isn't specified or set to null, automatic language detection will choose the first language detected and process with the selected language for the duration of the file. It does not currently support dynamically switching between languages after the first language is detected. The automatic detection works best with audio recordings with clearly discernable speech. If automatic detection fails to find the language, transcription would fallback to 'en-US'.\" The list of supported languages is available here: https://go.microsoft.com/fwlink/?linkid=2109463"
+        },
+        "mode": {
+          "type": "string",
+          "enum": [
+            "Standard",
+            "Basic"
+          ],
+          "x-ms-enum": {
+            "name": "AudioAnalysisMode",
+            "values": [
+              {
+                "value": "Standard",
+                "description": "Performs all operations included in the Basic mode, additionally performing language detection and speaker diarization."
+              },
+              {
+                "value": "Basic",
+                "description": "This mode performs speech-to-text transcription and generation of a VTT subtitle/caption file. The output of this mode includes an Insights JSON file including only the keywords, transcription,and timing information. Automatic language detection and speaker diarization are not included in this mode."
+              }
+            ],
+            "modelAsString": true
+          },
+          "description": "Determines the set of audio analysis operations to be performed. If unspecified, the Standard AudioAnalysisMode would be chosen."
+        },
+        "experimentalOptions": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Dictionary containing key value pairs for parameters not exposed in the preset itself"
+        }
+      },
+      "type": "object",
+      "description": "The Audio Analyzer preset applies a pre-defined set of AI-based analysis operations, including speech transcription. Currently, the preset supports processing of content with a single audio track."
+    },
+    "Overlay": {
+      "discriminator": "@odata.type",
+      "properties": {
+        "@odata.type": {
+          "type": "string",
+          "description": "The discriminator for derived types."
+        },
+        "inputLabel": {
+          "type": "string",
+          "description": "The label of the job input which is to be used as an overlay. The Input must specify exactly one file. You can specify an image file in JPG or PNG formats, or an audio file (such as a WAV, MP3, WMA or M4A file), or a video file. See https://aka.ms/mesformats for the complete list of supported audio and video file formats."
+        },
+        "start": {
+          "type": "string",
+          "format": "duration",
+          "description": "The start position, with reference to the input video, at which the overlay starts. The value should be in ISO 8601 format. For example, PT05S to start the overlay at 5 seconds into the input video. If not specified the overlay starts from the beginning of the input video."
+        },
+        "end": {
+          "type": "string",
+          "format": "duration",
+          "description": "The end position, with reference to the input video, at which the overlay ends. The value should be in ISO 8601 format. For example, PT30S to end the overlay at 30 seconds into the input video. If not specified or the value is greater than the input video duration, the overlay will be applied until the end of the input video if the overlay media duration is greater than the input video duration, else the overlay will last as long as the overlay media duration."
+        },
+        "fadeInDuration": {
+          "type": "string",
+          "format": "duration",
+          "description": "The duration over which the overlay fades in onto the input video. The value should be in ISO 8601 duration format. If not specified the default behavior is to have no fade in (same as PT0S)."
+        },
+        "fadeOutDuration": {
+          "type": "string",
+          "format": "duration",
+          "description": "The duration over which the overlay fades out of the input video. The value should be in ISO 8601 duration format. If not specified the default behavior is to have no fade out (same as PT0S)."
+        },
+        "audioGainLevel": {
+          "type": "number",
+          "format": "double",
+          "description": "The gain level of audio in the overlay. The value should be in the range [0, 1.0]. The default is 1.0."
+        }
+      },
+      "type": "object",
+      "required": [
+        "@odata.type",
+        "inputLabel"
+      ],
+      "description": "Base type for all overlays - image, audio or video."
+    },
+    "AudioOverlay": {
+      "x-ms-discriminator-value": "#Microsoft.Media.AudioOverlay",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Overlay"
+        }
+      ],
+      "properties": {},
+      "type": "object",
+      "description": "Describes the properties of an audio overlay."
+    },
+    "CopyVideo": {
+      "x-ms-discriminator-value": "#Microsoft.Media.CopyVideo",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Codec"
+        }
+      ],
+      "properties": {},
+      "type": "object",
+      "description": "A codec flag, which tells the encoder to copy the input video bitstream without re-encoding."
+    },
     "Image": {
       "x-ms-discriminator-value": "#Microsoft.Media.Image",
       "allOf": [
@@ -339,15 +387,15 @@
       "properties": {
         "start": {
           "type": "string",
-          "description": "The position in the input video from where to start generating thumbnails. The value can be in absolute timestamp (ISO 8601, e.g: PT05S), or a frame count (For example, 10 for the 10th frame), or a relative value (For example, 1%). Also supports a macro {Best}, which tells the encoder to select the best thumbnail from the first few seconds of the video."
+          "description": "The position in the input video from where to start generating thumbnails. The value can be in ISO 8601 format (For example, PT05S to start at 5 seconds), or a frame count (For example, 10 to start at the 10th frame), or a relative value to stream duration (For example, 10% to start at 10% of stream duration). Also supports a macro {Best}, which tells the encoder to select the best thumbnail from the first few seconds of the video and will only produce one thumbnail, no matter what other settings are for Step and Range. The default value is macro {Best}."
         },
         "step": {
           "type": "string",
-          "description": "The intervals at which thumbnails are generated. The value can be in absolute timestamp (ISO 8601, e.g: PT05S for one image every 5 seconds), or a frame count (For example, 30 for every 30 frames), or a relative value (For example, 1%)."
+          "description": "The intervals at which thumbnails are generated. The value can be in ISO 8601 format (For example, PT05S for one image every 5 seconds), or a frame count (For example, 30 for one image every 30 frames), or a relative value to stream duration (For example, 10% for one image every 10% of stream duration). Note: Step value will affect the first generated thumbnail, which may not be exactly the one specified at transform preset start time. This is due to the encoder, which tries to select the best thumbnail between start time and Step position from start time as the first output. As the default value is 10%, it means if stream has long duration, the first generated thumbnail might be far away from the one specified at start time. Try to select reasonable value for Step if the first thumbnail is expected close to start time, or set Range value at 1 if only one thumbnail is needed at start time."
         },
         "range": {
           "type": "string",
-          "description": "The position in the input video at which to stop generating thumbnails. The value can be in absolute timestamp (ISO 8601, e.g: PT5M30S to stop at 5 minutes and 30 seconds), or a frame count (For example, 300 to stop at the 300th frame), or a relative value (For example, 100%)."
+          "description": "The position relative to transform preset start time in the input video at which to stop generating thumbnails. The value can be in ISO 8601 format (For example, PT5M30S to stop at 5 minutes and 30 seconds from start time), or a frame count (For example, 300 to stop at the 300th frame from the frame at start time. If this value is 1, it means only producing one thumbnail at start time), or a relative value to the stream duration (For example, 50% to stop at half of stream duration from start time). The default value is 100%, which means to stop at the end of the stream."
         }
       },
       "type": "object",
@@ -365,7 +413,7 @@
         },
         "filenamePattern": {
           "type": "string",
-          "description": "The pattern of the file names for the generated output files. The following macros are supported in the file name: {Basename} - The base name of the input video {Extension} - The appropriate extension for this format. {Label} - The label assigned to the codec/layer. {Index} - A unique index for thumbnails. Only applicable to thumbnails. {Bitrate} - The audio/video bitrate. Not applicable to thumbnails. {Codec} - The type of the audio/video codec. Any unsubstituted macros will be collapsed and removed from the filename."
+          "description": "The pattern of the file names for the generated output files. The following macros are supported in the file name: {Basename} - An expansion macro that will use the name of the input video file. If the base name(the file suffix is not included) of the input video file is less than 32 characters long, the base name of input video files will be used. If the length of base name of the input video file exceeds 32 characters, the base name is truncated to the first 32 characters in total length. {Extension} - The appropriate extension for this format. {Label} - The label assigned to the codec/layer. {Index} - A unique index for thumbnails. Only applicable to thumbnails. {Bitrate} - The audio/video bitrate. Not applicable to thumbnails. {Codec} - The type of the audio/video codec. Any unsubstituted macros will be collapsed and removed from the filename."
         }
       },
       "type": "object",
@@ -558,32 +606,6 @@
       },
       "type": "object",
       "description": "Describes all the filtering operations, such as de-interlacing, rotation etc. that are to be applied to the input media before encoding."
-    },
-    "Layer": {
-      "discriminator": "@odata.type",
-      "properties": {
-        "@odata.type": {
-          "type": "string",
-          "description": "The discriminator for derived types."
-        },
-        "width": {
-          "type": "string",
-          "description": "The width of the output video for this layer. The value can be absolute (in pixels) or relative (in percentage). For example 50% means the output video has half as many pixels in width as the input."
-        },
-        "height": {
-          "type": "string",
-          "description": "The height of the output video for this layer. The value can be absolute (in pixels) or relative (in percentage). For example 50% means the output video has half as many pixels in height as the input."
-        },
-        "label": {
-          "type": "string",
-          "description": "The alphanumeric label for this layer, which can be used in multiplexing different video and audio layers, or in naming the output file."
-        }
-      },
-      "type": "object",
-      "required": [
-        "@odata.type"
-      ],
-      "description": "The encoder can be configured to produce video and/or images (thumbnails) at different resolutions, by specifying a layer for each desired resolution. A layer represents the properties for the video or image at a resolution."
     },
     "VideoLayer": {
       "x-ms-discriminator-value": "#Microsoft.Media.VideoLayer",
@@ -782,6 +804,11 @@
             "$ref": "#/definitions/JpgLayer"
           },
           "description": "A collection of output JPEG image layers to be produced by the encoder."
+        },
+        "spriteColumn": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Sets the number of columns used in thumbnail sprite image.  The number of rows are automatically calculated and a VTT file is generated with the coordinate mappings for each thumbnail in the sprite. Note: this value should be a positive integer and a proper value is recommended so that the output image resolution will not go beyond JPEG maximum pixel resolution limit 65535x65535."
         }
       },
       "type": "object",
@@ -898,6 +925,7 @@
             "AACGoodQualityAudio",
             "ContentAwareEncodingExperimental",
             "ContentAwareEncoding",
+            "CopyAllBitrateNonInterleaved",
             "H264MultipleBitrate1080p",
             "H264MultipleBitrate720p",
             "H264MultipleBitrateSD"
@@ -919,7 +947,7 @@
               },
               {
                 "value": "AdaptiveStreaming",
-                "description": "Produces a set of GOP aligned MP4 files with H.264 video and stereo AAC audio. Auto-generates a bitrate ladder based on the input resolution and bitrate. The auto-generated preset will never exceed the input resolution and bitrate. For example, if the input is 720p at 3 Mbps, output will remain 720p at best, and will start at rates lower than 3 Mbps. The output will have video and audio in separate MP4 files, which is optimal for adaptive streaming."
+                "description": "Produces a set of GOP aligned MP4 files with H.264 video and stereo AAC audio. Auto-generates a bitrate ladder based on the input resolution, bitrate and frame rate. The auto-generated preset will never exceed the input resolution. For example, if the input is 720p, output will remain 720p at best."
               },
               {
                 "value": "AACGoodQualityAudio",
@@ -932,6 +960,10 @@
               {
                 "value": "ContentAwareEncoding",
                 "description": "Produces a set of GOP-aligned MP4s by using content-aware encoding. Given any input content, the service performs an initial lightweight analysis of the input content, and uses the results to determine the optimal number of layers, appropriate bitrate and resolution settings for delivery by adaptive streaming. This preset is particularly effective for low and medium complexity videos, where the output files will be at lower bitrates but at a quality that still delivers a good experience to viewers. The output will contain MP4 files with video and audio interleaved."
+              },
+              {
+                "value": "CopyAllBitrateNonInterleaved",
+                "description": "Copy all video and audio streams from the input asset as non-interleaved video and audio output files. This preset can be used to clip an existing asset or convert a group of key frame (GOP) aligned MP4 files as an asset that can be streamed."
               },
               {
                 "value": "H264MultipleBitrate1080p",
@@ -1256,6 +1288,26 @@
         "time"
       ],
       "description": "Specifies the clip time as an absolute time position in the media file.  The absolute time can point to a different position depending on whether the media file starts from a timestamp of zero or not."
+    },
+    "UtcClipTime": {
+      "x-ms-discriminator-value": "#Microsoft.Media.UtcClipTime",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ClipTime"
+        }
+      ],
+      "properties": {
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time position on the timeline of the input media based on Utc time."
+        }
+      },
+      "type": "object",
+      "required": [
+        "time"
+      ],
+      "description": "Specifies the clip time as a Utc time position in the media file.  The Utc time can point to a different position depending on whether the media file starts from a timestamp of zero or not."
     },
     "JobInputs": {
       "x-ms-discriminator-value": "#Microsoft.Media.JobInputs",
@@ -1585,7 +1637,7 @@
         "created": {
           "type": "string",
           "format": "date-time",
-          "description": "The UTC date and time when the Job was created, in 'YYYY-MM-DDThh:mm:ssZ' format.",
+          "description": "The UTC date and time when the customer has created the Job, in 'YYYY-MM-DDThh:mm:ssZ' format.",
           "readOnly": true,
           "x-nullable": false
         },
@@ -1649,7 +1701,7 @@
         "lastModified": {
           "type": "string",
           "format": "date-time",
-          "description": "The UTC date and time when the Job was last updated, in 'YYYY-MM-DDThh:mm:ssZ' format.",
+          "description": "The UTC date and time when the customer has last updated the Job, in 'YYYY-MM-DDThh:mm:ssZ' format.",
           "readOnly": true,
           "x-nullable": false
         },
@@ -2439,7 +2491,7 @@
       "in": "query",
       "required": true,
       "type": "string",
-      "description": "The Version of the API to be used with the client request."
+      "description": "The version of the API to be used with the client request."
     }
   }
 }
