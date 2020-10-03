@@ -58,6 +58,10 @@ directive:
     where: $.definitions.ThreatIntelligenceResource
     reason: Our API is designed based on per region per workspace concept. There is no use case of our customers to get all indicators in multiple workspaces.
     approved-by: "@cheggert"
+  - suppress: R4017
+    from: Microsoft.SecurityInsights/preview/2019-01-01-preview/SecurityInsights.json
+    where: $.definitions.Watchlist
+    reason: The Watchlist does not support list by subscription. It's not a top-level resource. To get the Watchlist, we should have a subscription as well as a resource group and Log Analytics workspace. 
 ```
 
 ---
