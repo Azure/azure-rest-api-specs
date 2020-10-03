@@ -2,7 +2,7 @@
   "parameters": {
     "firewallPolicyName": "firewallPolicy",
     "resourceGroupName": "rg1",
-    "api-version": "2020-06-01",
+    "api-version": "2020-08-01",
     "subscriptionId": "e747cc13-97d4-4a79-b463-42d7f4e558f2"
   },
   "responses": {
@@ -26,22 +26,22 @@
                   },
                   "rules": [
                     {
-                     "ruleType": "ApplicationRule",
-                     "name": "rule1",
-                     "description": "Deny inbound rule",
-                     "protocols": [
-                       {
-                         "protocolType": "Https",
-                         "port": 443
-                       }
-                     ],
-                     "sourceAddresses": [
+                      "ruleType": "ApplicationRule",
+                      "name": "rule1",
+                      "description": "Deny inbound rule",
+                      "protocols": [
+                        {
+                          "protocolType": "Https",
+                          "port": 443
+                        }
+                      ],
+                      "sourceAddresses": [
                         "216.58.216.164",
                         "10.0.0.0/24"
                       ],
-                     "destinationWebCategories": [
+                      "webCategories": [
                         "Hacking"
-                     ]
+                      ]
                     }
                   ]
                 }
