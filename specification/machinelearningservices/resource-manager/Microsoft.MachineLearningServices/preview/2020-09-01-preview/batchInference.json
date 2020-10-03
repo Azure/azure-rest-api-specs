@@ -86,7 +86,7 @@
           "default": {
             "description": "Error",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "machineLearningServices.json#/definitions/MachineLearningServiceError"
             }
           },
           "200": {
@@ -150,7 +150,7 @@
           "default": {
             "description": "Error",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "machineLearningServices.json#/definitions/MachineLearningServiceError"
             }
           },
           "200": {
@@ -213,7 +213,7 @@
           "default": {
             "description": "Error",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "machineLearningServices.json#/definitions/MachineLearningServiceError"
             }
           },
           "200": {
@@ -266,7 +266,7 @@
           "default": {
             "description": "Error",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "machineLearningServices.json#/definitions/MachineLearningServiceError"
             }
           },
           "200": {
@@ -330,7 +330,7 @@
           "default": {
             "description": "Error",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "machineLearningServices.json#/definitions/MachineLearningServiceError"
             }
           },
           "200": {
@@ -391,7 +391,7 @@
           "default": {
             "description": "Error",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "machineLearningServices.json#/definitions/MachineLearningServiceError"
             }
           },
           "200": {
@@ -451,7 +451,7 @@
           "default": {
             "description": "Error",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "machineLearningServices.json#/definitions/MachineLearningServiceError"
             }
           },
           "200": {
@@ -501,7 +501,7 @@
           "default": {
             "description": "Error",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "machineLearningServices.json#/definitions/MachineLearningServiceError"
             }
           },
           "200": {
@@ -554,7 +554,7 @@
           "default": {
             "description": "Error",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "machineLearningServices.json#/definitions/MachineLearningServiceError"
             }
           },
           "200": {
@@ -621,7 +621,7 @@
           "$ref": "#/definitions/BatchDeployment"
         },
         "systemData": {
-          "$ref": "#/definitions/SystemData"
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
         }
       }
     },
@@ -669,7 +669,7 @@
           "$ref": "#/definitions/BatchEndpoint"
         },
         "systemData": {
-          "$ref": "#/definitions/SystemData"
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
         }
       }
     },
@@ -756,6 +756,231 @@
         "appendRowFileName": {
           "description": "Customized output file name for append_row output action.",
           "type": "string"
+        }
+      }
+    },
+    "InferenceEndpointKeysResource": {
+      "description": "Inference endpoint keys.",
+      "type": "object",
+      "properties": {
+        "primaryKey": {
+          "description": "Primary key.",
+          "type": "string"
+        },
+        "secondaryKey": {
+          "description": "Secondary key.",
+          "type": "string"
+        }
+      }
+    },
+    "DeploymentScaleSettings": {
+      "type": "object",
+      "properties": {
+        "nodeCount": {
+          "format": "int32",
+          "description": "Number of Compute nodes to be used for running the deployment",
+          "type": "integer"
+        }
+      }
+    },
+    "DeploymentProvisioningState": {
+      "enum": [
+        "Creating",
+        "Deleting",
+        "Scaling",
+        "Updating",
+        "Succeeded",
+        "Failed"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "DeploymentProvisioningState",
+        "modelAsString": false
+      }
+    },
+    "EndpointProvisioningState": {
+      "description": "State of endpoint provisioning.",
+      "enum": [
+        "Creating",
+        "Deleting",
+        "Succeeded",
+        "Failed"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "EndpointProvisioningState",
+        "modelAsString": false
+      }
+    },
+    "EndpointAuthModeType": {
+      "enum": [
+        "AMLTokenAuth",
+        "KeyAuth"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "EndpointAuthModeType",
+        "modelAsString": false
+      }
+    },
+    "BatchDeployment": {
+      "description": "Batch inference settings per deployment.",
+      "type": "object",
+      "properties": {
+        "scaleSettings": {
+          "$ref": "#/definitions/DeploymentScaleSettings"
+        },
+        "batchSettings": {
+          "$ref": "#/definitions/BatchDeploymentSettings"
+        },
+        "tags": {
+          "description": "Tag dictionary. Tags can be added, removed, and updated.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "x-ms-mutability": [
+            "create",
+            "read",
+            "update"
+          ]
+        },
+        "description": {
+          "description": "Description of the endpoint deployment.",
+          "type": "string"
+        },
+        "properties": {
+          "description": "Property dictionary. Properties can be added, but not removed or altered.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "modelId": {
+          "description": "Model identifier.",
+          "type": "string"
+        },
+        "codeConfiguration": {
+          "$ref": "#/definitions/CodeConfiguration"
+        },
+        "environmentId": {
+          "description": "Environment specification for the endpoint deployment.",
+          "type": "string"
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/DeploymentProvisioningState"
+        }
+      }
+    },
+    "CommandType": {
+      "enum": [
+        "Command",
+        "Python"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "CommandType",
+        "modelAsString": false
+      }
+    },
+    "BatchEndpoint": {
+      "description": "Batch endpoint configuration",
+      "type": "object",
+      "properties": {
+        "tags": {
+          "description": "Tag dictionary. Tags can be added, removed, and updated.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "x-ms-mutability": [
+            "create",
+            "read",
+            "update"
+          ]
+        },
+        "description": {
+          "description": "Description of the inference endpoint.",
+          "type": "string"
+        },
+        "properties": {
+          "description": "Property dictionary. Properties can be added, but not removed or altered.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "trafficRules": {
+          "description": "Traffic rules on how the traffic will be routed across deployments.",
+          "type": "object",
+          "additionalProperties": {
+            "format": "int32",
+            "type": "integer"
+          }
+        },
+        "computeConfiguration": {
+          "$ref": "#/definitions/ComputeConfiguration"
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/EndpointProvisioningState"
+        },
+        "endpoint": {
+          "format": "uri",
+          "description": "Endpoint URI",
+          "type": "string",
+          "readOnly": true
+        },
+        "swaggerEndpoint": {
+          "format": "uri",
+          "description": "Endpoint Swagger URI",
+          "type": "string",
+          "readOnly": true
+        },
+        "authMode": {
+          "$ref": "#/definitions/EndpointAuthModeType"
+        }
+      }
+    },
+    "CodeConfiguration": {
+      "required": [
+        "command"
+      ],
+      "type": "object",
+      "properties": {
+        "commandType": {
+          "$ref": "#/definitions/CommandType"
+        },
+        "codeArtifactId": {
+          "description": "The ID of the code asset.",
+          "type": "string"
+        },
+        "command": {
+          "description": "The command to execute on startup of the job.",
+          "minLength": 1,
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "ComputeType": {
+      "enum": [
+        "AMLCompute",
+        "AKS",
+        "ACI"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "ComputeType",
+        "modelAsString": false
+      }
+    },
+    "ComputeConfiguration": {
+      "type": "object",
+      "properties": {
+        "computeType": {
+          "$ref": "#/definitions/ComputeType"
         }
       }
     },
