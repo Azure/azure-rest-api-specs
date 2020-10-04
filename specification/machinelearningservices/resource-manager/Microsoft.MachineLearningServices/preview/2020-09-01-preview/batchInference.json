@@ -109,6 +109,11 @@
         ],
         "summary": "Gets a batch inference deployment by id.",
         "operationId": "BatchDeployments_Get",
+        "x-ms-examples": {
+          "Create or update BatchDeployment": {
+            "$ref": "./examples/getBatchDeployment.json"
+          }
+        },
         "produces": [
           "text/plain",
           "application/json",
@@ -116,34 +121,22 @@
         ],
         "parameters": [
           {
-            "$ref": "#/parameters/EndpointNameParameter"
-          },
-          {
             "$ref": "#/parameters/EndpointDeploymentIdParameter"
           },
           {
-            "in": "query",
-            "name": "api-version",
-            "description": "Version of Azure Machine Learning resource provider API.",
-            "type": "string"
+            "$ref": "machineLearningServices.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "in": "path",
-            "name": "subscriptionId",
-            "required": true,
-            "type": "string"
+            "$ref": "machineLearningServices.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "in": "path",
-            "name": "resourceGroupName",
-            "required": true,
-            "type": "string"
+            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
           },
           {
-            "in": "path",
-            "name": "workspaceName",
-            "required": true,
-            "type": "string"
+            "$ref": "machineLearningServices.json#/parameters/APIVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/EndpointNameParameter"
           }
         ],
         "responses": {
@@ -179,34 +172,22 @@
         ],
         "parameters": [
           {
-            "$ref": "#/parameters/EndpointNameParameter"
-          },
-          {
             "$ref": "#/parameters/EndpointDeploymentIdParameter"
           },
           {
-            "in": "query",
-            "name": "api-version",
-            "description": "API version.",
-            "type": "string"
+            "$ref": "machineLearningServices.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "in": "path",
-            "name": "subscriptionId",
-            "required": true,
-            "type": "string"
+            "$ref": "machineLearningServices.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "in": "path",
-            "name": "resourceGroupName",
-            "required": true,
-            "type": "string"
+            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
           },
           {
-            "in": "path",
-            "name": "workspaceName",
-            "required": true,
-            "type": "string"
+            "$ref": "machineLearningServices.json#/parameters/APIVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/EndpointNameParameter"
           }
         ],
         "responses": {
@@ -257,12 +238,6 @@
           },
           {
             "$ref": "#/parameters/EndpointNameParameter"
-          },
-          {
-            "in": "query",
-            "name": "api-version",
-            "description": "Version of Azure Machine Learning resource provider API.",
-            "type": "string"
           }
         ],
         "responses": {
@@ -368,31 +343,19 @@
         ],
         "parameters": [
           {
+            "$ref": "machineLearningServices.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/APIVersionParameter"
+          },
+          {
             "$ref": "#/parameters/EndpointNameParameter"
-          },
-          {
-            "in": "query",
-            "name": "api-version",
-            "description": "Version of Azure Machine Learning resource provider API.",
-            "type": "string"
-          },
-          {
-            "in": "path",
-            "name": "subscriptionId",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "path",
-            "name": "resourceGroupName",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "path",
-            "name": "workspaceName",
-            "required": true,
-            "type": "string"
           }
         ],
         "responses": {
@@ -428,31 +391,19 @@
         ],
         "parameters": [
           {
+            "$ref": "machineLearningServices.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/APIVersionParameter"
+          },
+          {
             "$ref": "#/parameters/EndpointNameParameter"
-          },
-          {
-            "in": "query",
-            "name": "api-version",
-            "description": "API version.",
-            "type": "string"
-          },
-          {
-            "in": "path",
-            "name": "subscriptionId",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "path",
-            "name": "resourceGroupName",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "path",
-            "name": "workspaceName",
-            "required": true,
-            "type": "string"
           }
         ],
         "responses": {
@@ -646,9 +597,6 @@
           "additionalProperties": {
             "type": "string"
           }
-        },
-        "systemData": {
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
         }
       }
     },
@@ -710,9 +658,6 @@
           "additionalProperties": {
             "type": "string"
           }
-        },
-        "systemData": {
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
         }
       }
     },
@@ -968,13 +913,11 @@
           "$ref": "#/definitions/EndpointProvisioningState"
         },
         "endpoint": {
-          "format": "uri",
           "description": "Endpoint URI",
           "type": "string",
           "readOnly": true
         },
         "swaggerEndpoint": {
-          "format": "uri",
           "description": "Endpoint Swagger URI",
           "type": "string",
           "readOnly": true
