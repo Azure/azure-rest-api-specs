@@ -674,6 +674,11 @@
       "required": [
         "properties"
       ],
+      "allOf": [
+        {
+          "$ref": "machineLearningServices.json#/definitions/Resource"
+        }
+      ],
       "type": "object",
       "x-ms-azure-resource": true,
       "properties": {
@@ -694,6 +699,17 @@
         },
         "properties": {
           "$ref": "#/definitions/BatchEndpoint"
+        },
+        "location": {
+          "description": "Specifies the location of the resource.",
+          "type": "string"
+        },
+        "tags": {
+          "description": "Contains resource tags defined as key/value pairs.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
         },
         "systemData": {
           "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
@@ -991,25 +1007,28 @@
         }
       }
     },
-    "ComputeType": {
-      "enum": [
-        "AMLCompute",
-        "AKS",
-        "ACI"
-      ],
-      "type": "string",
-      "x-ms-enum": {
-        "name": "ComputeType",
-        "modelAsString": false
-      }
-    },
     "ComputeConfiguration": {
+      "description": "Compute Configuration of the endpoint.",
       "type": "object",
+      "required": [
+        "computeType"
+      ],
       "properties": {
         "computeType": {
-          "$ref": "#/definitions/ComputeType"
+          "enum": [
+            "ACI",
+            "AKS",
+            "AMLCompute"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "ComputeConfigurationType",
+            "modelAsString": true
+          },
+          "description": "Compute Configuration type such as ACI, AKS, or AMLCompute"
         }
-      }
+      },
+      "discriminator": "computeType"
     },
     "BatchDeploymentSettings": {
       "description": "Batch inference specific settings per deployment.",
