@@ -6,7 +6,7 @@
     "api-version": "2020-09-01-preview",
     "endpointName": "testEndpointName",
     "deploymentId": "testBatchDeployment",
-    "body": {
+    "properties": {
       "location": "westus2euap",
       "tags": {},
       "properties": {
@@ -27,8 +27,7 @@
           }
         },
         "codeConfiguration": {
-          "codeArtifactId": "some code artifact",
-          "startupCommand": "batch_scoring.py"
+          "command": ["batch_scoring.py"]
         },
         "environmentId": "some environment",
         "properties": {

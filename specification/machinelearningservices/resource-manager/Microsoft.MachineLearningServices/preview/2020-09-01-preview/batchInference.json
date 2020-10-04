@@ -168,7 +168,7 @@
         "summary": "Delete Batch Inference deployment.",
         "operationId": "BatchDeployments_Delete",
         "x-ms-examples": {
-          "Get BatchDeployment": {
+          "Delete BatchDeployment": {
             "$ref": "./examples/deleteBatchDeployment.json"
           }
         },
@@ -218,6 +218,9 @@
           },
           "200": {
             "description": "Success"
+          },
+          "204": {
+            "description": "Success"
           }
         }
       }
@@ -230,8 +233,8 @@
         "summary": "Lists Batch inference deployments in the workspace.",
         "operationId": "BatchDeployments_List",
         "x-ms-examples": {
-          "Get BatchDeployment": {
-            "$ref": "./examples/getBatchDeployment.json"
+          "Get BatchDeployments": {
+            "$ref": "./examples/getBatchDeployments.json"
           }
         },
         "produces": [
@@ -353,6 +356,11 @@
         ],
         "summary": "Gets a batch inference endpoint by name.",
         "operationId": "BatchEndpoints_Get",
+        "x-ms-examples": {
+          "Get BatchEndpoint": {
+            "$ref": "./examples/getBatchEndpoint.json"
+          }
+        },
         "produces": [
           "text/plain",
           "application/json",
@@ -409,7 +417,7 @@
         "summary": "Delete Batch Inference Endpoint.",
         "operationId": "BatchEndpoints_Delete",
         "x-ms-examples": {
-          "Get BatchDeployment": {
+          "Delete BatchEndpoint": {
             "$ref": "./examples/deleteBatchEndpoint.json"
           }
         },
@@ -456,6 +464,9 @@
           },
           "200": {
             "description": "Success"
+          },
+          "204": {
+            "description": "Success"
           }
         }
       }
@@ -468,8 +479,8 @@
         "summary": "Lists Batch inference endpoint in the workspace.",
         "operationId": "BatchEndpoints_List",
         "x-ms-examples": {
-          "Get BatchEndpoint": {
-            "$ref": "./examples/getBatchEndpoint.json"
+          "Get BatchEndpoints": {
+            "$ref": "./examples/getBatchEndpoints.json"
           }
         },
         "produces": [
@@ -599,6 +610,11 @@
       "required": [
         "properties"
       ],
+      "allOf": [
+        {
+          "$ref": "machineLearningServices.json#/definitions/Resource"
+        }
+      ],
       "type": "object",
       "x-ms-azure-resource": true,
       "properties": {
@@ -619,6 +635,17 @@
         },
         "properties": {
           "$ref": "#/definitions/BatchDeployment"
+        },
+        "location": {
+          "description": "Specifies the location of the resource.",
+          "type": "string"
+        },
+        "tags": {
+          "description": "Contains resource tags defined as key/value pairs.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
         },
         "systemData": {
           "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
