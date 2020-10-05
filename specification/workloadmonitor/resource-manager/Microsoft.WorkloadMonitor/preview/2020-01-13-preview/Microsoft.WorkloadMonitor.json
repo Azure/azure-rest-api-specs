@@ -52,7 +52,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceNamespace}/{resourceType}/{resourceName}/providers/Microsoft.WorkloadMonitor/monitors": {
       "get": {
         "summary": "Get list of a monitors of a resource (with optional filter).",
-        "operationId": "Monitors_List",
+        "operationId": "Monitors_ListMonitors",
         "produces": [
           "application/json"
         ],
@@ -115,7 +115,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceNamespace}/{resourceType}/{resourceName}/providers/Microsoft.WorkloadMonitor/monitors/{monitorId}": {
       "get": {
         "summary": "Get the current status of a monitor of a resource.",
-        "operationId": "MonitorInfo_Get",
+        "operationId": "Monitors_GetMonitor",
         "produces": [
           "application/json"
         ],
@@ -172,7 +172,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceNamespace}/{resourceType}/{resourceName}/providers/Microsoft.WorkloadMonitor/monitors/{monitorId}/history": {
       "get": {
         "summary": "Get history of a monitor of a resource (with optional filter).",
-        "operationId": "MonitorStateChanges_List",
+        "operationId": "MonitorHistory_ListStateChanges",
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         },
@@ -254,7 +254,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceNamespace}/{resourceType}/{resourceName}/providers/Microsoft.WorkloadMonitor/monitors/{monitorId}/history/{timestampUnix}": {
       "get": {
         "summary": "Get the status of a monitor at a specific timestamp in history.",
-        "operationId": "MonitorHistoricalStateChange_Get",
+        "operationId": "MonitorHistory_GetStateChange",
         "produces": [
           "application/json"
         ],
@@ -442,104 +442,114 @@
     "Monitor": {
       "title": "Monitor Status",
       "description": "Information about a monitor.",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/MonitorProperties"
+        }     
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/MonitorResource"
+        }
+      ]
+    },
+    "MonitorResource": {
+      "description": "The resource model definition for the ARM proxy resource, 'microsoft.workloadmonitor/monitors'.",
       "type": "object",
-      "readOnly": true,
-      "required": [
-        "id",
-        "name",
-        "type",
-        "properties"
-      ],
       "properties": {
         "id": {
+          "readOnly": true,
           "title": "Arm ID",
           "description": "Arm ID of this monitor.",
           "type": "string",
           "example": "/subscriptions/bc27da3b-3ba2-4e00-a6ec-1fde64aa1e21/resourceGroups/tugamidiAlerts/providers/Microsoft.Compute/virtualMachines/linuxEUS/providers/Microsoft.WorkloadMonitor/monitors/logical-disks|C@3A"
         },
         "name": {
+          "readOnly": true,
           "title": "Url-encoded monitor name",
           "description": "Url-encoded monitor name.",
           "type": "string",
           "example": "logical-disks|C@3A"
         },
         "type": {
+          "readOnly": true,
           "title": "Resource type",
           "description": "Type of ARM resource.",
           "type": "string",
           "example": "Microsoft.WorkloadMonitor/monitors"
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "MonitorProperties": {
+      "title": "Monitor Properties",
+      "description": "Properties of the monitor.",
+      "type": "object",
+      "properties": {
+        "monitorName": {
+          "title": "Monitor Name",
+          "description": "Human-readable name of this monitor.",
+          "type": "string",
+          "example": "logical-disks|C:"
         },
-        "properties": {
-          "title": "Monitor Properties",
-          "description": "Properties of the monitor.",
-          "type": "object",
-          "x-ms-client-flatten": true,
-          "properties": {
-            "monitorName": {
-              "title": "Monitor Name",
-              "description": "Human-readable name of this monitor.",
-              "type": "string",
-              "example": "logical-disks|C:"
-            },
-            "monitorType": {
-              "title": "Monitor Type",
-              "description": "Type of this monitor.",
-              "type": "string",
-              "example": "logical-disks|*"
-            },
-            "monitoredObject": {
-              "title": "Monitored Object",
-              "description": "Dynamic monitored object of this monitor.",
-              "type": "string",
-              "example": "C:"
-            },
-            "parentMonitorName": {
-              "title": "Parent Monitor Name",
-              "description": "Name of this monitor's parent.",
-              "type": "string",
-              "example": "logical-disks"
-            },
-            "previousMonitorState": {
-              "title": "Health State",
-              "description": "Current health state of this monitor.",
-              "$ref": "#/definitions/HealthState",
-              "example": "Healthy"
-            },
-            "currentMonitorState": {
-              "title": "Health State",
-              "description": "Current health state of this monitor.",
-              "$ref": "#/definitions/HealthState",
-              "example": "Healthy"
-            },
-            "evaluationTimestamp": {
-              "title": "Last Evaluated",
-              "description": "Timestamp that this monitor was last evaluated.",
-              "type": "string",
-              "example": "2020-02-15T20:20:18.5765757Z"
-            },
-            "currentStateFirstObservedTimestamp": {
-              "title": "Last State Change",
-              "description": "Timestamp of this monitor's last state change.",
-              "type": "string",
-              "example": "2020-02-15T20:20:1.5765757Z"
-            },
-            "lastReportedTimestamp": {
-              "title": "Last Reported",
-              "description": "Timestamp of this monitor's last reported state.",
-              "type": "string",
-              "example": "2020-02-15T20:20:1.5765757Z"
-            },
-            "evidence": {
-              "title": "Evidence",
-              "description": "Evidence of this monitor's last state change.",
-              "type": "object"
-            },
-            "monitorConfiguration": {
-              "title": "Configuration",
-              "description": "Configuration settings at the time of this monitor's last state change.",
-              "type": "object"
-            }
-          }
+        "monitorType": {
+          "title": "Monitor Type",
+          "description": "Type of this monitor.",
+          "type": "string",
+          "example": "logical-disks|*"
+        },
+        "monitoredObject": {
+          "title": "Monitored Object",
+          "description": "Dynamic monitored object of this monitor.",
+          "type": "string",
+          "example": "C:"
+        },
+        "parentMonitorName": {
+          "title": "Parent Monitor Name",
+          "description": "Name of this monitor's parent.",
+          "type": "string",
+          "example": "logical-disks"
+        },
+        "previousMonitorState": {
+          "title": "Health State",
+          "description": "Current health state of this monitor.",
+          "$ref": "#/definitions/HealthState",
+          "example": "Healthy"
+        },
+        "currentMonitorState": {
+          "title": "Health State",
+          "description": "Current health state of this monitor.",
+          "$ref": "#/definitions/HealthState",
+          "example": "Healthy"
+        },
+        "evaluationTimestamp": {
+          "title": "Last Evaluated",
+          "description": "Timestamp that this monitor was last evaluated.",
+          "type": "string",
+          "example": "2020-02-15T20:20:18.5765757Z"
+        },
+        "currentStateFirstObservedTimestamp": {
+          "title": "Last State Change",
+          "description": "Timestamp of this monitor's last state change.",
+          "type": "string",
+          "example": "2020-02-15T20:20:1.5765757Z"
+        },
+        "lastReportedTimestamp": {
+          "title": "Last Reported",
+          "description": "Timestamp of this monitor's last reported state.",
+          "type": "string",
+          "example": "2020-02-15T20:20:1.5765757Z"
+        },
+        "evidence": {
+          "title": "Evidence",
+          "description": "Evidence of this monitor's last state change.",
+          "type": "object"
+        },
+        "monitorConfiguration": {
+          "title": "Configuration",
+          "description": "Configuration settings at the time of this monitor's last state change.",
+          "type": "object"
         }
       }
     },
@@ -547,91 +557,74 @@
       "title": "Monitor State Change",
       "description": "Information about a state transition of a monitor.",
       "type": "object",
-      "readOnly": true,
-      "required": [
-        "id",
-        "name",
-        "type",
-        "properties"
-      ],
       "properties": {
-        "id": {
-          "title": "Arm ID",
-          "description": "Arm ID of this monitor.",
-          "type": "string",
-          "example": "/subscriptions/bc27da3b-3ba2-4e00-a6ec-1fde64aa1e21/resourceGroups/tugamidiAlerts/providers/Microsoft.Compute/virtualMachines/linuxEUS/providers/Microsoft.WorkloadMonitor/monitors/logical-disks|C@3A/history/1584316800"
-        },
-        "name": {
-          "title": "Name of resource",
-          "description": "Timestamp of state change (in unix).",
-          "type": "string",
-          "example": "1584316800"
-        },
-        "type": {
-          "title": "Resource type",
-          "description": "Type of ARM resource.",
-          "type": "string",
-          "example": "Microsoft.WorkloadMonitor/monitors/history"
-        },
         "properties": {
-          "title": "Monitor Properties",
-          "description": "Properties of the monitor.",
-          "type": "object",
           "x-ms-client-flatten": true,
-          "properties": {
-            "monitorName": {
-              "title": "Monitor Name",
-              "description": "Human-readable name of this monitor.",
-              "type": "string",
-              "example": "logical-disks|C:"
-            },
-            "monitorType": {
-              "title": "Monitor Type",
-              "description": "Type of this monitor.",
-              "type": "string",
-              "example": "logical-disks|*"
-            },
-            "monitoredObject": {
-              "title": "Monitored Object",
-              "description": "Dynamic monitored object of this monitor.",
-              "type": "string",
-              "example": "C:"
-            },
-            "evaluationTimestamp": {
-              "title": "Timestamp",
-              "description": "Timestamp of that this event ocurred.",
-              "type": "string",
-              "example": "2020-01-08T20:20:18.5765757Z"
-            },
-            "currentStateFirstObservedTimestamp": {
-              "title": "Timestamp",
-              "description": "Timestamp of that this health state first ocurred.",
-              "type": "string",
-              "example": "2020-01-08T20:20:18.5765757Z"
-            },
-            "previousMonitorState": {
-              "title": "Previous Health State",
-              "description": "Previous health state.",
-              "$ref": "#/definitions/HealthState",
-              "example": "Healthy"
-            },
-            "currentMonitorState": {
-              "title": "New Health State",
-              "description": "New health state.",
-              "$ref": "#/definitions/HealthState",
-              "example": "Critical"
-            },
-            "evidence": {
-              "title": "Evidence",
-              "description": "Evidence of this monitor's last state change.",
-              "type": "object"
-            },
-            "monitorConfiguration": {
-              "title": "Configuration",
-              "description": "Configuration settings at the time of this monitor's last state change.",
-              "type": "object"
-            }
-          }
+          "$ref": "#/definitions/MonitorStateChangeProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/MonitorResource"
+        }
+      ]
+    },
+    "MonitorStateChangeProperties": {
+      "title": "Monitor Properties",
+      "description": "Properties of the monitor.",
+      "type": "object",
+      "properties": {
+        "monitorName": {
+          "title": "Monitor Name",
+          "description": "Human-readable name of this monitor.",
+          "type": "string",
+          "example": "logical-disks|C:"
+        },
+        "monitorType": {
+          "title": "Monitor Type",
+          "description": "Type of this monitor.",
+          "type": "string",
+          "example": "logical-disks|*"
+        },
+        "monitoredObject": {
+          "title": "Monitored Object",
+          "description": "Dynamic monitored object of this monitor.",
+          "type": "string",
+          "example": "C:"
+        },
+        "evaluationTimestamp": {
+          "title": "Timestamp",
+          "description": "Timestamp of that this event ocurred.",
+          "type": "string",
+          "example": "2020-01-08T20:20:18.5765757Z"
+        },
+        "currentStateFirstObservedTimestamp": {
+          "title": "Timestamp",
+          "description": "Timestamp of that this health state first ocurred.",
+          "type": "string",
+          "example": "2020-01-08T20:20:18.5765757Z"
+        },
+        "previousMonitorState": {
+          "title": "Previous Health State",
+          "description": "Previous health state.",
+          "$ref": "#/definitions/HealthState",
+          "example": "Healthy"
+        },
+        "currentMonitorState": {
+          "title": "New Health State",
+          "description": "New health state.",
+          "$ref": "#/definitions/HealthState",
+          "example": "Critical"
+        },
+        "evidence": {
+          "title": "Evidence",
+          "description": "Evidence of this monitor's last state change.",
+          "type": "object"
+        },
+        "monitorConfiguration": {
+          "title": "Configuration",
+          "description": "Configuration settings at the time of this monitor's last state change.",
+          "type": "object"
         }
       }
     },
