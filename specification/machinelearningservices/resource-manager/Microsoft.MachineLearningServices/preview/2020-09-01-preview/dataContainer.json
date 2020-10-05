@@ -1,0 +1,351 @@
+{
+    "swagger": "2.0",
+    "info": {
+      "title": "Azure Machine Learning Workspaces",
+      "description": "These APIs allow end users to operate on Azure Machine Learning Workspace resources.",
+      "version": "2020-09-01-preview"
+    },
+    "host": "management.azure.com",
+    "schemes": [
+      "https"
+    ],
+    "consumes": [
+      "application/json"
+    ],
+    "produces": [
+      "application/json"
+    ],
+    "security": [
+      {
+        "azure_auth": [
+          "user_impersonation"
+        ]
+      }
+    ],
+    "securityDefinitions": {
+      "azure_auth": {
+        "type": "oauth2",
+        "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+        "flow": "implicit",
+        "description": "Azure Active Directory OAuth2 Flow.",
+        "scopes": {
+          "user_impersonation": "impersonate your user account"
+        }
+      }
+    },
+    "paths": {
+      "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/data": {
+        "get": {
+          "tags": [
+            "DataContainer"
+          ],
+          "x-ms-examples": {
+            "List DataContainers": {
+              "$ref": "./examples/listDataContainers.json"
+            }
+          },
+          "x-ms-pageable": {
+            "nextLinkName": "nextLink"
+          },
+          "description": "Lists Data Containers in the workspace.",
+          "operationId": "DataContainers_List",
+          "parameters": [
+            {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+            },
+            {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+            },
+            {
+              "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
+            },
+            {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+            },
+            {
+              "$ref": "machineLearningServices.json#/parameters/PaginationParameter"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Success",
+              "schema": {
+                "$ref": "#/definitions/AssetContainerResourcePaginatedResult"
+              }
+            },
+            "default": {
+              "description": "Error",
+              "schema": {
+                "$ref": "machineLearningServices.json#/definitions/MachineLearningServiceError"
+              }
+            }
+          }
+        }
+      },
+      "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/codes/{name}": {
+        "delete": {
+          "tags": [
+            "DataContainer"
+          ],
+          "x-ms-examples": {
+            "Delete DataContainer": {
+              "$ref": "./examples/deleteDataContainer.json"
+            }
+          },
+          "description": "Delete Data Container entity.",
+          "operationId": "DataContainers_Delete",
+          "parameters": [
+            {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+            },
+            {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+            },
+            {
+              "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
+            },
+            {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+            },
+            {
+              "$ref": "#/parameters/DataContainerNameParameter"
+            }
+          ],
+          "responses": {
+            "default": {
+              "description": "Error",
+              "schema": {
+                "$ref": "machineLearningServices.json#/definitions/MachineLearningServiceError"
+              }
+            },
+            "200": {
+              "description": "Success"
+            },
+            "204": {
+              "description": "No Content"
+            }
+          }
+        },
+        "get": {
+          "tags": [
+            "DataContainer"
+          ],
+          "x-ms-examples": {
+            "Get DataContainer": {
+              "$ref": "./examples/getDataContainer.json"
+            }
+          },
+          "description": "Get Data Container.",
+          "operationId": "DataContainers_Get",
+          "parameters": [
+            {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+            },
+            {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+            },
+            {
+              "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
+            },
+            {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+            },
+            {
+              "$ref": "#/parameters/DataContainerNameParameter"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Success",
+              "schema": {
+                "$ref": "#/definitions/AssetContainerResource"
+              }
+            },
+            "default": {
+              "description": "Error",
+              "schema": {
+                "$ref": "machineLearningServices.json#/definitions/MachineLearningServiceError"
+              }
+            }
+          }
+        },
+        "put": {
+          "tags": [
+            "DataContainer"
+          ],
+          "x-ms-examples": {
+            "Create or update code container": {
+              "$ref": "./examples/createOrUpdateDataContainer.json"
+            }
+          },
+          "description": "Create or update Data Container.",
+          "operationId": "DataContainers_CreateOrUpdate",
+          "parameters": [
+            {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+            },
+            {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+            },
+            {
+              "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
+            },
+            {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+            },
+            {
+              "$ref": "#/parameters/DataContainerNameParameter"
+            },
+            {
+              "in": "body",
+              "name": "body",
+              "description": "Data Version entity to create or update.",
+              "schema": {
+                "$ref": "#/definitions/AssetContainerResourceRequest"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Success",
+              "schema": {
+                "$ref": "#/definitions/AssetContainerResource"
+              }
+            },
+            "default": {
+              "description": "Error",
+              "schema": {
+                "$ref": "machineLearningServices.json#/definitions/MachineLearningServiceError"
+              }
+            }
+          }
+        }
+      }
+    },
+    "parameters": {
+      "DataContainerNameParameter": {
+        "in": "path",
+        "name": "name",
+        "type": "string",
+        "description": "Data Container identifier.",
+        "required": true,
+        "x-ms-parameter-location": "method"
+      }
+    },
+    "definitions": {
+      "AssetContainerResource": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "The resource URL of the entity (not URL encoded).",
+            "readOnly": true
+          },
+          "name": {
+            "type": "string",
+            "description": "The name of the resource entity.",
+            "readOnly": true
+          },
+          "type": {
+            "type": "string",
+            "description": "The resource provider and type.",
+            "readOnly": true
+          },
+          "properties": {
+            "$ref": "#/definitions/DataContainer"
+          },
+          "systemData": {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
+          }
+        },
+        "additionalProperties": false,
+        "description": "Azure Resource Manager resource Envelope",
+        "x-ms-azure-resource": true
+      },
+      "AssetContainerResourcePaginatedResult": {
+        "type": "object",
+        "properties": {
+          "value": {
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/AssetContainerResource"
+            }
+          },
+          "nextLink": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      },
+      "AssetContainer": {
+        "description": "Details of an Data Version",
+        "type": "object",
+        "properties": {
+          "description": {
+            "description": "The asset description text.",
+            "type": "string"
+          },
+          "datastoreId": {
+            "description": "The asset datastoreId",
+            "type": "string"
+          },
+          "tags": {
+            "description": "The asset tag dictionary.",
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            }
+          },
+          "properties": {
+            "description": "The asset property dictionary.",
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            }
+          },
+          "assetPaths": {
+            "description": "Details of asset paths in the datastore.",
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/AssetPath"
+            }
+          },
+          "linkedResourceIds": {
+            "description": "Associated ARM resources. Key is the link type, value is a list of ARM IDs.",
+            "type": "object",
+            "additionalProperties": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      },
+      "AssetPath": {
+        "description": "Details of an AssetUri.",
+        "type": "object",
+        "properties": {
+            "path": {
+                "description": "The path of file/directory.",
+                "type": "string"
+            },
+            "isDirectory": {
+                "description": "Whether the path defines a directory or a single file.",
+                "type": "boolean"
+            }
+        },
+        "additionalProperties": false
+      },
+      "AssetContainerResourceRequest": {
+          "description": "Azure Resource Management create resource envelope.",
+        "type": "object",
+        "properties": {
+          "properties": {
+            "$ref": "#/definitions/DataContainer"
+          }
+        },
+        "additionalProperties": false
+      }
+    }
+  }
