@@ -1,0 +1,29 @@
+{
+  "parameters": {
+    "subscriptionId": "subid",
+    "resourceGroupName": "testRG",
+    "workspaceName": "Workspace1",
+    "api-version": "2020-11-01-preview",
+    "tagUpdatePayload": {
+      "tags": {
+        "tagKey": "tagValue"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "Workspace1",
+        "id": "/subscriptions/subid/resourceGroups/testRG/providers/Microsoft.HealthcareApis/workspaces/Workspace1",
+        "type": "Microsoft.HealthcareApis/workspaces",
+        "location": "West US 2",
+        "tags": {
+          "tagKey": "tagValue"
+        },
+        "properties": {
+            "provisioningState": "Creating"
+        }
+      }
+    }
+  }
+}

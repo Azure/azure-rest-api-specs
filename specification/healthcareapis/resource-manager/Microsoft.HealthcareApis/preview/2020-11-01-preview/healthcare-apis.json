@@ -1,0 +1,1104 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2020-11-01-preview",
+    "title": "HealthcareApisClient",
+    "description": "Use this API to manage Microsoft HealthcareApis services in your Azure subscription."
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.HealthcareApis/workspaces": {
+      "get": {
+        "tags": [
+          "Collection"
+        ],
+        "description": "Lists all the available workspaces under the specified subscription.",
+        "operationId": "Workspaces_ListBySubscription",
+        "x-ms-examples": {
+          "Get workspaces": {
+            "$ref": "./examples/workspaces/Workspaces_ListBySubscription.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersion"
+          },
+          {
+            "$ref": "#/parameters/subscriptionId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "This is a synchronous operation. The body contains a JSON-serialized array of the metadata from all the workspaces in the subscription.",
+            "schema": {
+              "$ref": "#/definitions/WorkspaceList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          }
+        },
+        "deprecated": false,
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HealthcareApis/workspaces": {
+      "get": {
+        "tags": [
+          "Collection"
+        ],
+        "description": "Lists all the available workspaces under the specified resource group.",
+        "operationId": "Workspaces_ListByResourceGroup",
+        "x-ms-examples": {
+          "Get workspaces": {
+            "$ref": "./examples/workspaces/Workspaces_ListByResourceGroup.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersion"
+          },
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "This is a synchronous operation. The body contains a JSON-serialized array of the metadata from all the workspaces in the resource group.",
+            "schema": {
+              "$ref": "#/definitions/WorkspaceList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          }
+        },
+        "deprecated": false,
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HealthcareApis/workspaces/{workspaceName}": {
+      "get": {
+        "tags": [
+          "Workspaces"
+        ],
+        "description": "Gets the properties of the specified workspace.",
+        "operationId": "Workspaces_Get",
+        "x-ms-examples": {
+          "Get workspace": {
+            "$ref": "./examples/workspaces/Workspaces_Get.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/apiVersion"
+          },
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/workspaceName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "#/definitions/Workspace"
+            }
+          },
+          "404": {
+            "description": "Not found."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Workspaces"
+        ],
+        "description": "Creates or updates a workspace resource with the specified parameters.",
+        "operationId": "Workspaces_CreateOrUpdate",
+        "x-ms-examples": {
+          "Create or update a workspace": {
+            "$ref": "./examples/workspaces/Workspaces_Create.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/apiVersion"
+          },
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/workspaceName"
+          },
+          {
+            "name": "workspace",
+            "description": "The parameters for creating or updating a healthcare workspace.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Workspace"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "#/definitions/Workspace"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Workspaces"
+        ],
+        "description": "Update workspace details.",
+        "operationId": "Workspaces_Update",
+        "x-ms-examples": {
+          "Update a workspace": {
+            "$ref": "./examples/workspaces/Workspaces_Update.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/apiVersion"
+          },
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/workspaceName"
+          },
+          {
+            "name": "workspacePatchResource",
+            "description": "The parameters for updating a specified workspace.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/WorkspacePatchResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "#/definitions/Workspace"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Workspaces"
+        ],
+        "description": "Deletes a specified workspace.",
+        "operationId": "Workspace_Delete",
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Delete a workspace": {
+            "$ref": "./examples/workspaces/Workspaces_Delete.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersion"
+          },
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/workspaceName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly."
+          },
+          "204": {
+            "description": "The workspace does not exist in the subscription."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HealthcareApis/workspaces/{workspaceName}/dicomServices": {
+      "get": {
+        "tags": [
+          "Collection"
+        ],
+        "description": "Lists all dicomServices for the given workspace",
+        "operationId": "DicomServices_List",
+        "x-ms-examples": {
+          "List dicomServices": {
+            "$ref": "./examples/dicomServices/DicomServices_List.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/apiVersion"
+          },
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/workspaceName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of dicomServices.",
+            "schema": {
+              "$ref": "#/definitions/DicomServiceCollection"
+            }
+          },
+          "404": {
+            "description": "Not found."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HealthcareApis/workspaces/{workspaceName}/dicomServices/{dicomServiceName}": {
+      "get": {
+        "tags": [
+          "DicomServices"
+        ],
+        "description": "Gets the properties of the specified dicomService.",
+        "operationId": "DicomServices_Get",
+        "x-ms-examples": {
+          "Get a dicomService": {
+            "$ref": "./examples/dicomServices/DicomServices_Get.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/apiVersion"
+          },
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/workspaceName"
+          },
+          {
+            "$ref": "#/parameters/dicomServiceName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "#/definitions/DicomService"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "DicomServices"
+        ],
+        "description": "Creates or updates a dicomService resource with the specified parameters.",
+        "operationId": "DicomServices_CreateOrUpdate",
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Create or update a dicomService": {
+            "$ref": "./examples/dicomServices/DicomServices_Create.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/apiVersion"
+          },
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/workspaceName"
+          },
+          {
+            "$ref": "#/parameters/dicomServiceName"
+          },
+          {
+            "name": "dicomService",
+            "description": "The parameters for creating or updating a dicomService resource.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DicomService"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Asynchronous operation is in progress.",
+            "schema": {
+              "$ref": "#/definitions/DicomService"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "DicomServices"
+        ],
+        "description": "Update dicomService details.",
+        "operationId": "DicomServices_Update",
+        "x-ms-examples": {
+          "Update a dicomService": {
+            "$ref": "./examples/dicomServices/DicomServices_Update.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/apiVersion"
+          },
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/dicomServiceName"
+          },
+          {
+            "$ref": "#/parameters/workspaceName"
+          },
+          {
+            "name": "dicomServicePatchResource",
+            "description": "The parameters for updating a dicomService.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DicomServicePatchResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "#/definitions/DicomService"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "DicomServices"
+        ],
+        "description": "Deletes a dicomService.",
+        "operationId": "DicomServices_Delete",
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Delete a dicomService": {
+            "$ref": "./examples/dicomServices/DicomServices_Delete.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersion"
+          },
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/dicomServiceName"
+          },
+          {
+            "$ref": "#/parameters/workspaceName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly."
+          },
+          "204": {
+            "description": "DicomService does not exists."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.HealthcareApis/operations": {
+      "get": {
+        "tags": [
+          "Proxy"
+        ],
+        "description": "Lists all of the available operations supported by Microsoft Healthcare resource provider.",
+        "operationId": "Operations_List",
+        "x-ms-examples": {
+          "List operations": {
+            "$ref": "./examples/OperationsList.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "DefaultErrorResponse",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.HealthcareApis/checkNameAvailability": {
+      "post": {
+        "tags": [
+          "Proxy"
+        ],
+        "description": "Check if the resource name is available.",
+        "operationId": "Workspaces_CheckNameAvailability",
+        "x-ms-examples": {
+          "Check name availability": {
+            "$ref": "./examples/CheckNameAvailabilityPost.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersion"
+          },
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "name": "checkNameAvailabilityInputs",
+            "in": "body",
+            "description": "Set the name parameter in the CheckNameAvailabilityParameters structure to the name of the service instance to check.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CheckNameAvailabilityParameters"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "This is a synchronous operation. The body contains a JSON-serialized response that specifies whether the service name is available. If the name is not available, the body contains the reason.",
+            "schema": {
+              "$ref": "#/definitions/ResourceNameAvailabilityInfo"
+            }
+          },
+          "default": {
+            "description": "DefaultErrorResponse",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.HealthcareApis/locations/{locationName}/operationresults/{operationResultId}": {
+      "get": {
+        "tags": [
+          "Proxy"
+        ],
+        "description": "Get the operation result for a long running operation.",
+        "operationId": "OperationResults_Get",
+        "x-ms-examples": {
+          "Get operation result": {
+            "$ref": "./examples/OperationResultsGet.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersion"
+          },
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/locationName"
+          },
+          {
+            "$ref": "#/parameters/operationResultId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The body contains all of the properties of the operation result.",
+            "schema": {
+              "$ref": "#/definitions/OperationResultsDescription"
+            }
+          },
+          "404": {
+            "description": "No operation result was found matching operationResultId.",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          },
+          "default": {
+            "description": "Default error response",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          }
+        },
+        "deprecated": false
+      }
+    }
+  },
+  "definitions": {
+    "ServiceAuthenticationConfigurationInfo": {
+      "description": "Authentication configuration information",
+      "type": "object",
+      "properties": {
+        "authority": {
+          "type": "string",
+          "description": "The authority url for the service",
+          "readOnly": false
+        },
+        "audience": {
+          "type": "string",
+          "description": "The audience url for the service",
+          "readOnly": false
+        },
+        "smartProxyEnabled": {
+          "type": "boolean",
+          "description": "If the SMART on FHIR proxy is enabled",
+          "readOnly": false
+        }
+      }
+    },
+    "ErrorDetails": {
+      "description": "Error details.",
+      "type": "object",
+      "properties": {
+        "error": {
+          "description": "Object containing error details.",
+          "$ref": "#/definitions/ErrorDetailsInternal"
+        }
+      }
+    },
+    "ErrorDetailsInternal": {
+      "description": "Error details.",
+      "type": "object",
+      "properties": {
+        "code": {
+          "description": "The error code.",
+          "type": "string",
+          "readOnly": true
+        },
+        "message": {
+          "description": "The error message.",
+          "type": "string",
+          "readOnly": true
+        },
+        "target": {
+          "description": "The target of the particular error.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "OperationListResult": {
+      "description": "A list of service operations. It contains a list of operations and a URL link to get the next set of results.",
+      "type": "object",
+      "properties": {
+        "nextLink": {
+          "description": "The link used to get the next page of workspace operation objects.",
+          "type": "string"
+        },
+        "value": {
+          "description": "A list of workspace operations supported by the Microsoft.HealthcareApis resource provider.",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/Operation"
+          }
+        }
+      }
+    },
+    "Operation": {
+      "description": "Workspace REST API operation.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Operation name: {provider}/{resource}/{read | write | action | delete}"
+        },
+        "origin": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Default value is 'user,system'."
+        },
+        "display": {
+          "description": "The information displayed about the operation.",
+          "$ref": "#/definitions/OperationDisplay"
+        }
+      }
+    },
+    "OperationDisplay": {
+      "description": "The object that represents the operation.",
+      "type": "object",
+      "properties": {
+        "provider": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Service provider: Microsoft.HealthcareApis"
+        },
+        "resource": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource Type: Workspaces, dicomServices"
+        },
+        "operation": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Name of the operation"
+        },
+        "description": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Friendly description for the operation,"
+        }
+      }
+    },
+    "CheckNameAvailabilityParameters": {
+      "description": "Input values.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "The name of the resource instance to check.",
+          "type": "string"
+        },
+        "type": {
+          "description": "The fully qualified resource type which includes provider namespace.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "name",
+        "type"
+      ]
+    },
+    "ResourceNameAvailabilityInfo": {
+      "description": "The properties indicating whether a given service name is available.",
+      "type": "object",
+      "properties": {
+        "nameAvailable": {
+          "description": "The value which indicates whether the provided name is available.",
+          "type": "boolean",
+          "readOnly": true
+        },
+        "reason": {
+          "description": "The reason for unavailability.",
+          "enum": [
+            "Invalid",
+            "AlreadyExists"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "ServiceNameUnavailabilityReason",
+            "modelAsString": false
+          }
+        },
+        "message": {
+          "description": "The detailed reason message.",
+          "type": "string"
+        }
+      }
+    },
+    "OperationResultsDescription": {
+      "description": "The properties indicating the operation result of an operation on a service.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "The ID of the operation returned.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "name": {
+          "description": "The name of the operation result.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "status": {
+          "description": "The status of the operation being performed.",
+          "enum": [
+            "Canceled",
+            "Succeeded",
+            "Failed",
+            "Requested",
+            "Running"
+          ],
+          "readOnly": true,
+          "type": "string",
+          "x-ms-enum": {
+            "name": "OperationResultStatus",
+            "modelAsString": true
+          }
+        },
+        "startTime": {
+          "description": "The time that the operation was started.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "properties": {
+          "x-ms-client-flatten": false,
+          "description": "Additional properties of the operation result."
+        }
+      }
+    },
+    "ProvisioningState": {
+      "description": "The provisioning state.",
+      "enum": [
+        "Deleting",
+        "Succeeded",
+        "Creating",
+        "Accepted",
+        "Verifying",
+        "Updating",
+        "Failed",
+        "Canceled",
+        "Deprovisioned"
+      ],
+      "type": "string",
+      "readOnly": true,
+      "x-ms-enum": {
+        "name": "ProvisioningState",
+        "modelAsString": true
+      }
+    },
+    "Resource": {
+      "description": "The common properties of a service.",
+      "properties": {
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The resource identifier."
+        },
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The resource name.",
+          "pattern": "^[a-z0-9][a-z0-9-]{1,21}[a-z0-9]$"
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The resource type."
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "Workspace": {
+      "type": "object",
+      "description": "Workspace resource",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": false,
+          "description": "Workspaces resource specific properties",
+          "type": "object",
+          "x-ms-azure-resource": true,
+          "properties": {
+            "provisioningState": {
+              "$ref": "#/definitions/ProvisioningState",
+              "description": "The provisioning state."
+            }
+          }
+        }
+      }
+    },
+    "WorkspacePatchResource": {
+      "type": "object",
+      "description": "workspace patch properties",
+      "properties": {
+        "tags": {
+          "description": "List of key value pairs that describe the resource. This will overwrite the existing tags.",
+          "type": "object",
+          "readOnly": false,
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "WorkspaceList": {
+      "description": "Collection of workspace object with a next link",
+      "type": "object",
+      "properties": {
+        "nextLink": {
+          "description": "The link used to get the next page.",
+          "type": "string"
+        },
+        "value": {
+          "description": "Collection of resources.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Workspace"
+          }
+        }
+      }
+    },
+    "DicomService": {
+      "type": "object",
+      "description": "The description of dicomService",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "required": [ "properties" ],
+      "properties": {
+        "properties": {
+          "description": "The common properties of a dicomService.",
+          "$ref": "#/definitions/DicomServiceProperties"
+        }
+      }
+    },
+    "DicomServicePatchResource": {
+      "type": "object",
+      "description": "DicomService patch properties",
+      "properties": {
+        "tags": {
+          "description": "List of key value pairs that describe the resource. This will overwrite the existing tags.",
+          "type": "object",
+          "readOnly": false,
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "DicomServiceCollection": {
+      "description": "The collection of dicomServices.",
+      "type": "object",
+      "properties": {
+        "nextLink": {
+          "description": "The link used to get the next page of dicomServices.",
+          "type": "string"
+        },
+        "value": {
+          "description": "The list of dicomServices.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DicomService"
+          }
+        }
+      }
+    },
+    "DicomServiceProperties": {
+      "description": "DicomService properties.",
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The provisioning state."
+        },
+        "authenticationConfiguration": {
+          "$ref": "#/definitions/ServiceAuthenticationConfigurationInfo",
+          "description": "The authentication configuration for the service instance."
+        }
+      }
+    }
+  },
+  "parameters": {
+    "subscriptionId": {
+      "name": "subscriptionId",
+      "in": "path",
+      "description": "The subscription identifier.",
+      "required": true,
+      "type": "string"
+    },
+    "apiVersion": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "Client Api Version."
+    },
+    "resourceGroupName": {
+      "name": "resourceGroupName",
+      "in": "path",
+      "description": "The name of the resource group that contains the service instance.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "pattern": "^[-\\w\\._\\(\\)]+$",
+      "minLength": 1,
+      "maxLength": 90
+    },
+    "locationName": {
+      "name": "locationName",
+      "in": "path",
+      "description": "The location of the operation.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "operationResultId": {
+      "name": "operationResultId",
+      "in": "path",
+      "description": "The ID of the operation result to get.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "workspaceName": {
+      "name": "workspaceName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of workspace resource.",
+      "x-ms-parameter-location": "method",
+      "minLength": 3,
+      "maxLength": 24
+    },
+    "dicomServiceName": {
+      "name": "dicomServiceName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of dicomService resource.",
+      "x-ms-parameter-location": "method",
+      "minLength": 3,
+      "maxLength": 24
+    }
+  }
+}
