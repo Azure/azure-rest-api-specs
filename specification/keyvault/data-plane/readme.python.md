@@ -20,6 +20,9 @@ Generate all API versions currently shipped for this package
 
 ```yaml $(multiapi)
 batch:
+- tag: package-2016-10
+- tag: package-7.0
+- tag: package-7.1
 - tag: package-7.2-preview
 - multiapiscript: true
 ```
@@ -30,36 +33,36 @@ clear-output-folder: false
 perform-load: false
 ```
 
-### Tag: package-7.2-preview and python
+### Tag: package-7.2-preview
 
-These settings apply only when `--tag=package-7.2-preview --python` is specified on the command line.
+These settings apply only when `--tag=package-7.2-preview` is specified on the command line.
 
 ``` yaml $(tag) == 'package-7.2-preview'
 namespace: azure.keyvault.v7_2
 output-folder: $(python-sdks-folder)/keyvault/azure-keyvault/azure/keyvault/v7_2_preview
 ```
 
-### Tag: package-7.1 and python
+### Tag: package-7.1
 
-These settings apply only when `--tag=package-7.1 --python` is specified on the command line.
+These settings apply only when `--tag=package-7.1` is specified on the command line.
 
 ``` yaml $(tag) == 'package-7.1'
 namespace: azure.keyvault.v7_1
-output-folder: $(python-sdks-folder)/keyvault/azure-keyvault/azure/keyvault/v7_1_preview
+output-folder: $(python-sdks-folder)/keyvault/azure-keyvault/azure/keyvault/v7_1
 ```
 
-### Tag: package-7.0 and python
+### Tag: package-7.0
 
-These settings apply only when `--tag=package-7.0 --python` is specified on the command line.
+These settings apply only when `--tag=package-7.0` is specified on the command line.
 
 ``` yaml $(tag) == 'package-7.0'
   namespace: azure.keyvault.v7_0
   output-folder: $(python-sdks-folder)/keyvault/azure-keyvault/azure/keyvault/v7_0
 ```
 
-### Tag: package-2016-10 and python
+### Tag: package-2016-10
 
-These settings apply only when `--tag=package-2016-10 --python` is specified on the command line.
+These settings apply only when `--tag=package-2016-10` is specified on the command line.
 
 ``` yaml $(tag) == 'package-2016-10'
   namespace: azure.keyvault.v2016_10_01
