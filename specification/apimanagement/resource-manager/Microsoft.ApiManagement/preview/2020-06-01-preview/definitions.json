@@ -1697,6 +1697,54 @@
       ],
       "description": "Parameters supplied to the CreateOrUpdate certificate operation."
     },
+    "DataMasking": {
+      "properties": {
+        "queryParams": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DataMaskingEntity"
+          },
+          "description": "Masking settings for Url query parameters"
+        },
+        "headers": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DataMaskingEntity"
+          },
+          "description": "Masking settings for headers"
+        }
+      }
+    },
+    "DataMaskingEntity": {
+      "properties": {
+        "value": {
+          "type": "string",
+          "description": "The name of an entity to mask (e.g. a name of a header or a query parameter)."
+        },
+        "mode": {
+          "type": "string",
+          "enum": [
+            "Mask",
+            "Hide"
+          ],
+          "x-ms-enum": {
+            "name": "DataMaskingMode",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Mask",
+                "description": "Mask the value of an entity."
+              },
+              {
+                "value": "Hide",
+                "description": "Hide the presence of an entity."
+              }
+            ]
+          },
+          "description": "Data masking mode."
+        }
+      }
+    },
     "DeployConfigurationParameters": {
       "properties": {
         "properties": {
@@ -3264,6 +3312,10 @@
         "response": {
           "$ref": "#/definitions/HttpMessageDiagnostic",
           "description": "Diagnostic settings for response."
+        },
+        "dataMasking": {
+          "$ref": "#/definitions/DataMasking",
+          "description": "Data masking settings."
         }
       },
       "description": "Diagnostic settings for incoming/outgoing HTTP messages to the Gateway."
