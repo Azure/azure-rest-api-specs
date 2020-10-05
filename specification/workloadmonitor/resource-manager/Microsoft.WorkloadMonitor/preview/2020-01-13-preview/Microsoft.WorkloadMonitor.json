@@ -87,9 +87,21 @@
         ],
         "responses": {
           "200": {
-            "description": "search results matching criteria",
+            "description": "Search results matching criteria",
             "schema": {
               "$ref": "#/definitions/MonitorList"
+            }
+          },
+          "400": {
+            "description": "Bad request.",
+            "schema": {
+              "$ref": "#/definitions/DefaultError"
+            }
+          },
+          "401": {
+            "description": "Unauthorized.",
+            "schema": {
+              "$ref": "#/definitions/DefaultError"
             }
           },
           "default": {
@@ -150,6 +162,18 @@
             "description": "search results matching criteria",
             "schema": {
               "$ref": "#/definitions/Monitor"
+            }
+          },
+          "400": {
+            "description": "Bad request.",
+            "schema": {
+              "$ref": "#/definitions/DefaultError"
+            }
+          },
+          "401": {
+            "description": "Unauthorized.",
+            "schema": {
+              "$ref": "#/definitions/DefaultError"
             }
           },
           "default": {
@@ -231,6 +255,18 @@
               "$ref": "#/definitions/MonitorStateChangeList"
             }
           },
+          "400": {
+            "description": "Bad request.",
+            "schema": {
+              "$ref": "#/definitions/DefaultError"
+            }
+          },
+          "401": {
+            "description": "Unauthorized.",
+            "schema": {
+              "$ref": "#/definitions/DefaultError"
+            }
+          },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
@@ -292,6 +328,18 @@
             "description": "search results matching criteria",
             "schema": {
               "$ref": "#/definitions/MonitorStateChange"
+            }
+          },
+          "400": {
+            "description": "Bad request.",
+            "schema": {
+              "$ref": "#/definitions/DefaultError"
+            }
+          },
+          "401": {
+            "description": "Unauthorized.",
+            "schema": {
+              "$ref": "#/definitions/DefaultError"
             }
           },
           "default": {
@@ -751,6 +799,20 @@
             "message": {
               "description": "Human-readable representation of the error.",
               "type": "string"
+            },
+            "details": {
+              "description": "Details of the error.",
+              "type": "array",
+              "items": {
+                "code": {
+                  "description": "Property level error code.",
+                  "type": "string"
+                },
+                "message": {
+                  "description": "Human-readable representation of property-level error.",
+                  "type": "string"
+                }
+              }
             }
           }
         }
