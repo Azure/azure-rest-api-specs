@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "2020-04-01",
+    "version": "2020-10-01",
     "title": "PeeringManagementClient",
     "description": "APIs to manage Peering resources through the Azure Resource Manager."
   },
@@ -16,6 +16,52 @@
     "application/json"
   ],
   "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Peering/cdnPeeringPrefixes": {
+      "get": {
+        "tags": [
+          "CdnPeeringPrefixes"
+        ],
+        "description": "Lists all of the advertised prefixes for the specified peering location",
+        "operationId": "CdnPeeringPrefixes_List",
+        "parameters": [
+          {
+            "name": "peeringLocation",
+            "in": "query",
+            "description": "The peering location.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/CdnPeeringPrefixListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation has failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List all the cdn peering prefixes advertised at a particular peering location": {
+            "$ref": "./examples/ListCdnPeeringPrefixes.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Peering/CheckServiceProviderAvailability": {
       "post": {
         "tags": [
@@ -1958,6 +2004,70 @@
     }
   },
   "definitions": {
+    "CdnPeeringPrefixListResult": {
+      "description": "The paginated list of CDN peering prefixes.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "The list of CDN peering prefixes.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CdnPeeringPrefix"
+          }
+        },
+        "nextLink": {
+          "description": "The link to fetch the next page of CDN peering prefixes.",
+          "type": "string"
+        }
+      }
+    },
+    "CdnPeeringPrefix": {
+      "description": "The CDN peering prefix",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/CdnPeeringPrefixProperties",
+          "description": "The properties that define a cdn peering prefix.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "CdnPeeringPrefixProperties": {
+      "description": "The properties that define a CDN peering prefix",
+      "type": "object",
+      "properties": {
+        "prefix": {
+          "description": "The prefix.",
+          "type": "string",
+          "readOnly": true
+        },
+        "azureRegion": {
+          "description": "The Azure region.",
+          "type": "string",
+          "readOnly": true
+        },
+        "azureService": {
+          "description": "The Azure service.",
+          "type": "string",
+          "readOnly": true
+        },
+        "isPrimaryRegion": {
+          "description": "The flag that indicates whether or not this is the primary region.",
+          "type": "boolean",
+          "readOnly": true
+        },
+        "bgpCommunity": {
+          "description": "The BGP Community",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
     "CheckServiceProviderAvailabilityInput": {
       "description": "Class for CheckServiceProviderAvailabilityInput",
       "type": "object",
@@ -2206,6 +2316,11 @@
         "useForPeeringService": {
           "description": "The flag that indicates whether or not the connection is used for peering service.",
           "type": "boolean"
+        },
+        "microsoftTrackingId": {
+          "description": "The ID used within Microsoft's peering provisioning system to track the connection",
+          "type": "string",
+          "readOnly": true
         },
         "peeringDBFacilityId": {
           "format": "int32",
@@ -3330,7 +3445,8 @@
       "properties": {
         "error": {
           "$ref": "#/definitions/ErrorDetail",
-          "description": "The error detail that describes why an operation has failed."
+          "description": "The error detail that describes why an operation has failed.",
+          "readOnly": true
         }
       }
     },
