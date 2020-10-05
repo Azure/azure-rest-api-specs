@@ -209,6 +209,30 @@ directive:
       - ACS service is deprecated so a PATCH endpoint won't be implemented
 
 ```
+### Tag: package-2020-12-01
+
+These settings apply only when `--tag=package-2020-12-01` is specified on the command line.
+
+``` yaml $(tag) == 'package-2020-12-01'
+input-file:
+- Microsoft.Compute/stable/2020-12-01/compute.json
+- Microsoft.Compute/stable/2020-12-01/runCommands.json
+- Microsoft.Compute/stable/2019-04-01/skus.json
+- Microsoft.Compute/stable/2020-06-30/disk.json
+- Microsoft.Compute/stable/2019-12-01/gallery.json
+- Microsoft.ContainerService/stable/2017-01-31/containerService.json
+```
+
+### Tag: package-2020-12-01-only
+
+These settings apply only when `--tag=package-2020-12-01-only` is specified on the command line.
+
+``` yaml $(tag) == 'package-2020-12-01-only'
+input-file:
+- Microsoft.Compute/stable/2020-12-01/compute.json
+- Microsoft.Compute/stable/2020-12-01/runCommands.json
+```
+
 ### Tag: package-2020-06-30
 
 These settings apply only when `--tag=package-2020-06-30` is specified on the command line.
