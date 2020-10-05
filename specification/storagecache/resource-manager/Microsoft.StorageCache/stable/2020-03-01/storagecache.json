@@ -1486,18 +1486,15 @@
       "allOf": [
         {
           "$ref": "#/definitions/StorageTargetResource"
-        },
-        {
-          "type": "object",
-          "properties": {
-            "properties": {
-              "x-ms-client-flatten": true,
-              "description": "StorageTarget properties",
-              "$ref": "#/definitions/StorageTargetProperties"
-            }
-          }
         }
-      ]
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "StorageTarget properties",
+          "$ref": "#/definitions/StorageTargetProperties"
+        }
+      }
     },
     "StorageTargetResource": {
       "description": "Resource used by a Cache.",
@@ -1523,12 +1520,11 @@
     "StorageTargetProperties": {
       "type": "object",
       "description": "Properties of the Storage Target.",
-      "discriminator": "targetBaseType",
+      "discriminator": "targetType",
+      "required": [
+        "targetType"
+      ],
       "properties": {
-        "targetBaseType": {
-          "description": "Type of the Storage Target.",
-          "$ref": "#/definitions/StorageTargetType"
-        },
         "junctions": {
           "description": "List of Cache namespace junctions to target for namespace associations.",
           "type": "array",
@@ -1538,6 +1534,15 @@
         },
         "targetType": {
           "description": "Type of the Storage Target.",
+          "enum": [
+            "nfs3",
+            "clfs",
+            "unknown"
+          ],
+          "x-ms-enum": {
+            "name": "StorageTargetType",
+            "modelAsString": true
+          },
           "type": "string"
         },
         "provisioningState": {
@@ -1568,22 +1573,6 @@
           "description": "Properties when targetType is unknown.",
           "$ref": "#/definitions/UnknownTarget"
         }
-      },
-      "required": [
-        "targetBaseType"
-      ]
-    },
-    "StorageTargetType": {
-      "type": "string",
-      "description": "Type of the Storage Target.",
-      "enum": [
-        "nfs3",
-        "clfs",
-        "unknown"
-      ],
-      "x-ms-enum": {
-        "name": "StorageTargetType",
-        "modelAsString": true
       }
     },
     "Nfs3TargetProperties": {
