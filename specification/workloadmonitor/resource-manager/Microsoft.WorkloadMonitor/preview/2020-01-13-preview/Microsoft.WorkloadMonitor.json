@@ -804,17 +804,25 @@
               "description": "Details of the error.",
               "type": "array",
               "items": {
-                "code": {
-                  "description": "Property level error code.",
-                  "type": "string"
-                },
-                "message": {
-                  "description": "Human-readable representation of property-level error.",
-                  "type": "string"
-                }
+                "$ref": "#/definitions/ErrorDetails"
               }
             }
           }
+        }
+      }
+    },
+    "ErrorDetails": {
+      "title": "Error Details",
+      "description": "Error details of the error body contract.",
+      "type": "object",
+      "properties": {
+        "code": {
+          "description": "Property level error code.",
+          "type": "string"
+        },
+        "message": {
+          "description": "Human-readable representation of property-level error.",
+          "type": "string"
         }
       }
     }
