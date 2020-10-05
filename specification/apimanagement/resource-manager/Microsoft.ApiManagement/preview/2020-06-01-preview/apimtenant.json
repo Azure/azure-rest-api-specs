@@ -34,6 +34,52 @@
     }
   },
   "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/tenant": {
+      "get": {
+        "tags": [
+          "TenantAccess"
+        ],
+        "operationId": "TenantAccess_ListByService",
+        "description": "Returns empty list.",
+        "x-ms-examples": {
+          "ApiManagementListTenantAccess": {
+            "$ref": "./examples/ApiManagementListTenantAccess.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "./apimanagement.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Lists a collection of TenantAccessInfo entities.",
+            "schema": {
+              "$ref": "./definitions.json#/definitions/AccessInformationCollection"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./apimanagement.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-odata": "./definitions.json#/definitions/AccessInformationContract"
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/tenant/{accessName}": {
       "head": {
         "tags": [
@@ -112,6 +158,67 @@
         "responses": {
           "200": {
             "description": "Tenant Access information.",
+            "schema": {
+              "$ref": "./definitions.json#/definitions/AccessInformationContract"
+            },
+            "headers": {
+              "ETag": {
+                "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./apimanagement.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "TenantAccess"
+        ],
+        "operationId": "TenantAccess_Create",
+        "description": "Update tenant access information details.",
+        "x-ms-examples": {
+          "ApiManagementCreateTenantAccess": {
+            "$ref": "./examples/ApiManagementCreateTenantAccess.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "./apimanagement.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "./definitions.json#/definitions/AccessInformationUpdateParameters"
+            },
+            "description": "Parameters supplied to retrieve the Tenant Access Information."
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/AccessParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/IfMatchRequiredParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Tenant Access information was updated successfully.",
             "schema": {
               "$ref": "./definitions.json#/definitions/AccessInformationContract"
             },
@@ -327,57 +434,6 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/tenant/{accessName}/git": {
-      "get": {
-        "tags": [
-          "TenantAccessGit"
-        ],
-        "operationId": "TenantAccessGit_Get",
-        "description": "Gets the Git access configuration for the tenant. Without secrets.",
-        "x-ms-examples": {
-          "ApiManagementGetTenantAccess": {
-            "$ref": "./examples/ApiManagementGetTenantAccess.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "./apimanagement.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
-          },
-          {
-            "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "./apimanagement.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "./apimanagement.json#/parameters/AccessParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Git Access Information for the Service.",
-            "schema": {
-              "$ref": "./definitions.json#/definitions/AccessInformationContract"
-            },
-            "headers": {
-              "ETag": {
-                "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
-                "type": "string"
-              }
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "./apimanagement.json#/definitions/ErrorResponse"
-            }
-          }
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/tenant/{accessName}/git/regeneratePrimaryKey": {
       "post": {
         "tags": [
@@ -452,57 +508,6 @@
         "responses": {
           "204": {
             "description": "The secondary key was successfully regenerated."
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "./apimanagement.json#/definitions/ErrorResponse"
-            }
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/tenant/{accessName}/git/listSecrets": {
-      "post": {
-        "tags": [
-          "TenantAccessGit"
-        ],
-        "operationId": "TenantAccessGit_ListSecrets",
-        "description": "Gets the Git access configuration for the tenant.",
-        "x-ms-examples": {
-          "ApiManagementListSecretsTenantAccess": {
-            "$ref": "./examples/ApiManagementListSecretsTenantAccess.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "./apimanagement.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
-          },
-          {
-            "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "./apimanagement.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "./apimanagement.json#/parameters/AccessParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Git Access Information for the Service.",
-            "schema": {
-              "$ref": "./definitions.json#/definitions/AccessInformationContract"
-            },
-            "headers": {
-              "ETag": {
-                "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
-                "type": "string"
-              }
-            }
           },
           "default": {
             "description": "Error response describing why the operation failed.",

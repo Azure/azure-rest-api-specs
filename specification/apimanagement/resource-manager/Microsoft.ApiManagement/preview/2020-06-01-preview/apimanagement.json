@@ -150,13 +150,29 @@
       "required": true,
       "type": "string",
       "enum": [
-        "access"
+        "access",
+        "getAccess"
       ],
       "x-ms-enum": {
         "modelAsString": true,
         "name": "AccessIdName"
       },
       "description": "The identifier of the Access configuration.",
+      "x-ms-parameter-location": "method"
+    },
+    "SettingsParameter": {
+      "name": "settingsType",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "enum": [
+        "public"
+      ],
+      "x-ms-enum": {
+        "modelAsString": true,
+        "name": "settingsTypeName"
+      },
+      "description": "The identifier of the settings.",
       "x-ms-parameter-location": "method"
     },
     "ApiIdParameter": {

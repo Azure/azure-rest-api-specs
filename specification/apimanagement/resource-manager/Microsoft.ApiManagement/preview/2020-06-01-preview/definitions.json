@@ -35,11 +35,33 @@
   },
   "paths": {},
   "definitions": {
+    "AccessInformationCollection": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AccessInformationContract"
+          },
+          "description": "Page values.",
+          "readOnly": true
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Next page link if any.",
+          "readOnly": true
+        }
+      },
+      "description": "Paged AccessInformation list representation."
+    },
     "AccessInformationContract": {
       "properties": {
         "id": {
           "type": "string",
-          "description": "Identifier."
+          "description": "Access Information type ('access' or 'gitAccess')"
+        },
+        "principalId": {
+          "type": "string",
+          "description": "Principal (User) Identifier."
         },
         "primaryKey": {
           "type": "string",
@@ -74,6 +96,51 @@
         }
       },
       "description": "Tenant access information update parameters of the API Management service"
+    },
+    "TenantSettingsCollection": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TenantSettingsContract"
+          },
+          "description": "Page values.",
+          "readOnly": true
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Next page link if any.",
+          "readOnly": true
+        }
+      },
+      "description": "Paged AccessInformation list representation."
+    },
+    "TenantSettingsContract": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/TenantSettingsContractProperties",
+          "description": "TenantSettings entity contract properties."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./apimanagement.json#/definitions/Resource"
+        }
+      ],
+      "description": "Tenant Settings."
+    },
+    "TenantSettingsContractProperties": {
+      "properties": {
+        "settings": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Settings"
+        }
+      },
+      "description": "Tenant access information contract of the API Management service."
     },
     "ApiCollection": {
       "properties": {
@@ -1171,7 +1238,6 @@
     "AuthorizationServerSecretsContract": {
       "properties": {
         "clientSecret": {
-          "x-ms-secret": true,
           "type": "string",
           "description": "oAuth Authorization Server Secrets."
         },
@@ -1180,7 +1246,6 @@
           "description": "Can be optionally specified when resource owner password grant type is supported by this authorization server. Default resource owner username."
         },
         "resourceOwnerPassword": {
-          "x-ms-secret": true,
           "type": "string",
           "description": "Can be optionally specified when resource owner password grant type is supported by this authorization server. Default resource owner password."
         }
