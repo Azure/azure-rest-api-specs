@@ -437,7 +437,7 @@
           "description": "An array containing detected facet errors with details.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/ErrorResponse"
+            "$ref": "#/definitions/ErrorDetails"
           }
         }
       },
@@ -451,61 +451,65 @@
       ]
     },
     "ErrorResponse": {
+      "title": "Error response.",
+      "type": "object",
+      "description": "An error response from the API.",
       "properties": {
         "error": {
-          "type": "object",
-          "description": "The error object.",
-          "properties": {
-            "code": {
-              "readOnly": true,
-              "type": "string",
-              "description": "The error code."
-            },
-            "message": {
-              "readOnly": true,
-              "type": "string",
-              "description": "The error message."
-            },
-            "target": {
-              "readOnly": true,
-              "type": "string",
-              "description": "The error target."
-            },
-            "details": {
-              "readOnly": true,
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/ErrorResponse"
-              },
-              "description": "The error details."
-            },
-            "additionalInfo": {
-              "readOnly": true,
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/ErrorAdditionalInfo"
-              },
-              "description": "The error additional info."
-            }
+          "$ref": "#/definitions/Error",
+          "description": "Error information."
+        }
+      },
+      "required": [
+        "error"
+      ]
+    },
+    "Error": {
+      "title": "Error info.",
+      "type": "object",
+      "description": "Error details.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "Error code identifying the specific error."
+        },
+        "message": {
+          "type": "string",
+          "description": "A human readable error message."
+        },
+        "details": {
+          "type": "array",
+          "description": "Error details",
+          "items": {
+            "$ref": "#/definitions/ErrorDetails"
           }
         }
       },
-      "description": "The resource management error response."
+      "required": [
+        "code",
+        "message"
+      ]
     },
-    "ErrorAdditionalInfo": {
+    "ErrorDetails": {
+      "title": "Error details.",
+      "type": "object",
       "properties": {
-        "type": {
-          "readOnly": true,
+        "code": {
           "type": "string",
-          "description": "The additional info type."
+          "description": "Error code identifying the specific error."
         },
-        "info": {
-          "readOnly": true,
-          "type": "object",
-          "description": "The additional info."
+        "message": {
+          "type": "string",
+          "description": "A human readable error message."
         }
       },
-      "description": "The resource management error additional info."
+      "additionalProperties": {
+        "type": "object"
+      },
+      "required": [
+        "code",
+        "message"
+      ]
     },
     "OperationListResult": {
       "description": "Result of the request to list Resource Graph operations. It contains a list of operations and a URL link to get the next set of results.",
