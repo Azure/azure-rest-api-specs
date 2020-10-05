@@ -336,65 +336,61 @@
       ]
     },
     "ErrorResponse": {
-      "title": "Error response.",
-      "type": "object",
-      "description": "An error response from the API.",
       "properties": {
         "error": {
-          "$ref": "#/definitions/Error",
-          "description": "Error information."
-        }
-      },
-      "required": [
-        "error"
-      ]
-    },
-    "Error": {
-      "title": "Error info.",
-      "type": "object",
-      "description": "Error details.",
-      "properties": {
-        "code": {
-          "type": "string",
-          "description": "Error code identifying the specific error."
-        },
-        "message": {
-          "type": "string",
-          "description": "A human readable error message."
-        },
-        "details": {
-          "type": "array",
-          "description": "Error details",
-          "items": {
-            "$ref": "#/definitions/ErrorDetails"
+          "type": "object",
+          "description": "The error object.",
+          "properties": {
+            "code": {
+              "readOnly": true,
+              "type": "string",
+              "description": "The error code."
+            },
+            "message": {
+              "readOnly": true,
+              "type": "string",
+              "description": "The error message."
+            },
+            "target": {
+              "readOnly": true,
+              "type": "string",
+              "description": "The error target."
+            },
+            "details": {
+              "readOnly": true,
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/ErrorResponse"
+              },
+              "description": "The error details."
+            },
+            "additionalInfo": {
+              "readOnly": true,
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/ErrorAdditionalInfo"
+              },
+              "description": "The error additional info."
+            }
           }
         }
       },
-      "required": [
-        "code",
-        "message"
-      ]
+      "description": "The resource management error response."
     },
-    "ErrorDetails": {
-      "title": "Error details.",
-      "type": "object",
+    "ErrorAdditionalInfo": {
       "properties": {
-        "code": {
+        "type": {
+          "readOnly": true,
           "type": "string",
-          "description": "Error code identifying the specific error."
+          "description": "The additional info type."
         },
-        "message": {
-          "type": "string",
-          "description": "A human readable error message."
+        "info": {
+          "readOnly": true,
+          "type": "object",
+          "description": "The additional info."
         }
       },
-      "additionalProperties": {
-        "type": "object"
-      },
-      "required": [
-        "code",
-        "message"
-      ]
+      "description": "The resource management error additional info."
     }
   },
   "parameters": {
