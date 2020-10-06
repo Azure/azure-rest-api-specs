@@ -1716,6 +1716,12 @@
               "$ref": "#/definitions/WorkloadNetworkSegment"
             }
           },
+          "201": {
+            "description": "accepted operation",
+            "schema": {
+              "$ref": "#/definitions/WorkloadNetworkSegment"
+            }
+          },
           "default": {
             "description": "Error response describing why the operation failed",
             "schema": {
@@ -1763,11 +1769,8 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "successful operation",
-            "schema": {
-              "$ref": "#/definitions/WorkloadNetworkSegment"
-            }
+          "202": {
+            "description": "Accepted. The patch will complete asynchronously"
           },
           "default": {
             "description": "Error response describing why the operation failed",
@@ -1807,8 +1810,8 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "OK. The delete has succeeded"
+          "202": {
+            "description": "Accepted. The delete will complete asynchronously"
           },
           "204": {
             "description": "No Content. No segment to delete"
@@ -1956,6 +1959,12 @@
               "$ref": "#/definitions/WorkloadNetworkDhcp"
             }
           },
+          "201": {
+            "description": "accepted operation",
+            "schema": {
+              "$ref": "#/definitions/WorkloadNetworkDhcp"
+            }
+          },
           "default": {
             "description": "Error response describing why the operation failed",
             "schema": {
@@ -2003,11 +2012,8 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "successful operation",
-            "schema": {
-              "$ref": "#/definitions/WorkloadNetworkDhcp"
-            }
+          "202": {
+            "description": "Accepted. The patch will complete asynchronously"
           },
           "default": {
             "description": "Error response describing why the operation failed",
@@ -2047,8 +2053,8 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "OK. The delete has succeeded"
+          "202": {
+            "description": "Accepted. The delete will complete asynchronously"
           },
           "204": {
             "description": "No Content. No DHCP configuration to delete"
@@ -2241,6 +2247,12 @@
               "$ref": "#/definitions/WorkloadNetworkPortMirroring"
             }
           },
+          "201": {
+            "description": "accepted operation",
+            "schema": {
+              "$ref": "#/definitions/WorkloadNetworkPortMirroring"
+            }
+          },
           "default": {
             "description": "Error response describing why the operation failed",
             "schema": {
@@ -2288,11 +2300,8 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "successful operation",
-            "schema": {
-              "$ref": "#/definitions/WorkloadNetworkPortMirroring"
-            }
+          "202": {
+            "description": "Accepted. The patch will complete asynchronously"
           },
           "default": {
             "description": "Error response describing why the operation failed",
@@ -2332,8 +2341,8 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "OK. The delete has succeeded"
+          "202": {
+            "description": "Accepted. The delete will complete asynchronously"
           },
           "204": {
             "description": "No Content. No port mirroring profile to delete"
@@ -2481,6 +2490,12 @@
               "$ref": "#/definitions/WorkloadNetworkVMGroup"
             }
           },
+          "201": {
+            "description": "accepted operation",
+            "schema": {
+              "$ref": "#/definitions/WorkloadNetworkVMGroup"
+            }
+          },
           "default": {
             "description": "Error response describing why the operation failed",
             "schema": {
@@ -2528,11 +2543,8 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "successful operation",
-            "schema": {
-              "$ref": "#/definitions/WorkloadNetworkVMGroup"
-            }
+          "202": {
+            "description": "Accepted. The patch will complete asynchronously"
           },
           "default": {
             "description": "Error response describing why the operation failed",
@@ -2572,8 +2584,8 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "OK. The delete has succeeded"
+          "202": {
+            "description": "Accepted. The delete will complete asynchronously"
           },
           "204": {
             "description": "No Content. No VM group to delete"
@@ -3898,16 +3910,11 @@
     "WorkloadNetworkVirtualMachineProperties": {
       "description": "NSX Virtual Machine Properties",
       "properties": {
-        "id": {
-          "description": "Resource Id.",
-          "type": "string",
-          "readOnly": true
-        },
-        "name": {
-          "description": "Resource Name.",
+        "displayName": {
+          "description": "Display name of the VM.",
           "type": "string"
         },
-        "type": {
+        "vmType": {
           "description": "Virtual machine type.",
           "type": "string",
           "enum": [
