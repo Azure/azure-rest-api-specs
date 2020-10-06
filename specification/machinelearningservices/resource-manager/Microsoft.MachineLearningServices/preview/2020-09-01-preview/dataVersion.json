@@ -1,384 +1,384 @@
 {
-    "swagger": "2.0",
-    "info": {
-      "title": "Azure Machine Learning Workspaces",
-      "description": "These APIs allow end users to operate on Azure Machine Learning Workspace resources.",
-      "version": "2020-09-01-preview"
-    },
-    "host": "management.azure.com",
-    "schemes": [
-      "https"
-    ],
-    "consumes": [
-      "application/json"
-    ],
-    "produces": [
-      "application/json"
-    ],
-    "security": [
-      {
-        "azure_auth": [
-          "user_impersonation"
-        ]
+  "swagger": "2.0",
+  "info": {
+    "title": "Azure Machine Learning Workspaces",
+    "description": "These APIs allow end users to operate on Azure Machine Learning Workspace resources.",
+    "version": "2020-09-01-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
       }
-    ],
-    "securityDefinitions": {
-      "azure_auth": {
-        "type": "oauth2",
-        "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
-        "flow": "implicit",
-        "description": "Azure Active Directory OAuth2 Flow.",
-        "scopes": {
-          "user_impersonation": "impersonate your user account"
-        }
-      }
-    },
-    "paths": {
-      "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/data": {
-        "get": {
-          "tags": [
-            "DataVersion"
-          ],
-          "x-ms-examples": {
-            "List DataVersions": {
-              "$ref": "./examples/listDataVersions.json"
-            }
-          },
-          "x-ms-pageable": {
-            "nextLinkName": "nextLink"
-          },
-          "description": "Lists Data Versions in the workspace.",
-          "operationId": "DataVersions_List",
-          "parameters": [
-            {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
-            },
-            {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
-            },
-            {
-              "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
-            },
-            {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
-            },
-            {
-              "$ref": "machineLearningServices.json#/parameters/PaginationParameter"
-            }
-          ],
-          "responses": {
-            "200": {
-              "description": "Success",
-              "schema": {
-                "$ref": "#/definitions/DataVersionResourcePaginatedResult"
-              }
-            },
-            "default": {
-              "description": "Error",
-              "schema": {
-                "$ref": "machineLearningServices.json#/definitions/MachineLearningServiceError"
-              }
-            }
-          }
-        }
-      },
-      "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/codes/{name}": {
-        "delete": {
-          "tags": [
-            "DataVersion"
-          ],
-          "x-ms-examples": {
-            "Delete DataVersion": {
-              "$ref": "./examples/deleteDataVersion.json"
-            }
-          },
-          "description": "Delete Data Versions entity.",
-          "operationId": "DataVersions_Delete",
-          "parameters": [
-            {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
-            },
-            {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
-            },
-            {
-              "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
-            },
-            {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
-            },
-            {
-              "$ref": "#/parameters/DataVersionNameParameter"
-            },
-            {
-              "$ref": "#/parameters/DataVersionVersionsParameter"
-            }
-          ],
-          "responses": {
-            "default": {
-              "description": "Error",
-              "schema": {
-                "$ref": "machineLearningServices.json#/definitions/MachineLearningServiceError"
-              }
-            },
-            "200": {
-              "description": "Success"
-            },
-            "204": {
-              "description": "No Content"
-            }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/data": {
+      "get": {
+        "tags": [
+          "DataVersion"
+        ],
+        "x-ms-examples": {
+          "List DataVersions": {
+            "$ref": "./examples/listDataVersions.json"
           }
         },
-        "get": {
-          "tags": [
-            "DataVersion"
-          ],
-          "x-ms-examples": {
-            "Get DataVersion": {
-              "$ref": "./examples/getDataVersion.json"
-            }
-          },
-          "description": "Get code container.",
-          "operationId": "DataVersions_Get",
-          "parameters": [
-            {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
-            },
-            {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
-            },
-            {
-              "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
-            },
-            {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
-            },
-            {
-              "$ref": "#/parameters/DataVersionNameParameter"
-            },
-            {
-              "$ref": "#/parameters/DataVersionVersionsParameter"
-            }
-          ],
-          "responses": {
-            "200": {
-              "description": "Success",
-              "schema": {
-                "$ref": "#/definitions/DataVersionResource"
-              }
-            },
-            "default": {
-              "description": "Error",
-              "schema": {
-                "$ref": "machineLearningServices.json#/definitions/MachineLearningServiceError"
-              }
-            }
-          }
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         },
-        "put": {
-          "tags": [
-            "DataVersion"
-          ],
-          "x-ms-examples": {
-            "Create or update code container": {
-              "$ref": "./examples/createOrUpdateDataVersion.json"
+        "description": "Lists Data Versions in the workspace.",
+        "operationId": "DataVersions_List",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/PaginationParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/DataVersionResourcePaginatedResult"
             }
           },
-          "description": "Create or update Data Version.",
-          "operationId": "DataVersions_CreateOrUpdate",
-          "parameters": [
-            {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
-            },
-            {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
-            },
-            {
-              "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
-            },
-            {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
-            },
-            {
-              "$ref": "#/parameters/DataVersionNameParameter"
-            },
-            {
-              "$ref": "#/parameters/DataVersionVersionsParameter"
-            },
-            {
-              "in": "body",
-              "name": "body",
-              "description": "Data Version entity to create or update.",
-              "schema": {
-                "$ref": "#/definitions/DataVersionResourceRequest"
-              }
-            }
-          ],
-          "responses": {
-            "200": {
-              "description": "Success",
-              "schema": {
-                "$ref": "#/definitions/DataVersionResource"
-              }
-            },
-            "201": {
-              "description": "Success",
-              "schema": {
-                "$ref": "#/definitions/DataVersionResource"
-              }
-            },
-            "default": {
-              "description": "Error",
-              "schema": {
-                "$ref": "machineLearningServices.json#/definitions/MachineLearningServiceError"
-              }
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "machineLearningServices.json#/definitions/MachineLearningServiceError"
             }
           }
         }
       }
     },
-    "parameters": {
-      "DataVersionNameParameter": {
-        "in": "path",
-        "name": "name",
-        "type": "string",
-        "description": "Data Version identifier.",
-        "required": true,
-        "x-ms-parameter-location": "method"
-      },
-      "DataVersionVersionsParameter": {
-        "in": "path",
-        "name": "name",
-        "type": "string",
-        "description": "Data Version identifier.",
-        "required": true,
-        "x-ms-parameter-location": "method"
-      }
-    },
-    "definitions": {
-      "DataVersionResource": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "string",
-            "description": "The resource URL of the entity (not URL encoded).",
-            "readOnly": true
-          },
-          "name": {
-            "type": "string",
-            "description": "The name of the resource entity.",
-            "readOnly": true
-          },
-          "type": {
-            "type": "string",
-            "description": "The resource provider and type.",
-            "readOnly": true
-          },
-          "properties": {
-            "$ref": "#/definitions/DataVersion"
-          },
-          "systemData": {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/codes/{name}": {
+      "delete": {
+        "tags": [
+          "DataVersion"
+        ],
+        "x-ms-examples": {
+          "Delete DataVersion": {
+            "$ref": "./examples/deleteDataVersion.json"
           }
         },
-        "additionalProperties": false,
-        "description": "Azure Resource Manager resource Envelope",
-        "x-ms-azure-resource": true
+        "description": "Delete Data Versions entity.",
+        "operationId": "DataVersions_Delete",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/DataVersionNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DataVersionVersionsParameter"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "machineLearningServices.json#/definitions/MachineLearningServiceError"
+            }
+          },
+          "200": {
+            "description": "Success"
+          },
+          "204": {
+            "description": "No Content"
+          }
+        }
       },
-      "DataVersionResourcePaginatedResult": {
-        "type": "object",
-        "properties": {
-          "value": {
-            "type": "array",
-            "items": {
+      "get": {
+        "tags": [
+          "DataVersion"
+        ],
+        "x-ms-examples": {
+          "Get DataVersion": {
+            "$ref": "./examples/getDataVersion.json"
+          }
+        },
+        "description": "Get code container.",
+        "operationId": "DataVersions_Get",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/DataVersionNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DataVersionVersionsParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
               "$ref": "#/definitions/DataVersionResource"
             }
           },
-          "nextLink": {
-            "type": "string"
-          }
-        },
-        "additionalProperties": false
-      },
-      "DataVersion": {
-        "description": "Details of an Data Version",
-        "type": "object",
-        "properties": {
-          "datasetType": {
-            "$ref": "#/definitions/DatasetType"
-          },
-          "description": {
-            "description": "The asset description text.",
-            "type": "string"
-          },
-          "datastoreId": {
-            "description": "The asset datastoreId",
-            "type": "string"
-          },
-          "tags": {
-            "description": "The asset tag dictionary.",
-            "type": "object",
-            "additionalProperties": {
-              "type": "string"
-            }
-          },
-          "properties": {
-            "description": "The asset property dictionary.",
-            "type": "object",
-            "additionalProperties": {
-              "type": "string"
-            }
-          },
-          "assetPaths": {
-            "description": "Details of asset paths in the datastore.",
-            "type": "array",
-            "items": {
-              "$ref": "#/definitions/AssetPath"
-            }
-          },
-          "linkedResourceIds": {
-            "description": "Associated ARM resources. Key is the link type, value is a list of ARM IDs.",
-            "type": "object",
-            "additionalProperties": {
-              "type": "array",
-              "items": {
-                "type": "string"
-              }
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "machineLearningServices.json#/definitions/MachineLearningServiceError"
             }
           }
         }
       },
-      "DatasetType": {
-        "enum": [
-            "Simple",
-            "Dataflow"
+      "put": {
+        "tags": [
+          "DataVersion"
         ],
-        "type": "string"
-      },
-      "AssetPath": {
-        "description": "Details of an AssetUri.",
-        "type": "object",
-        "properties": {
-            "path": {
-                "description": "The path of file/directory.",
-                "type": "string"
-            },
-            "isDirectory": {
-                "description": "Whether the path defines a directory or a single file.",
-                "type": "boolean"
-            }
-        },
-        "additionalProperties": false
-      },
-      "DataVersionResourceRequest": {
-          "description": "Azure Resource Management create resource envelope.",
-        "type": "object",
-        "properties": {
-          "properties": {
-            "$ref": "#/definitions/DataVersion"
+        "x-ms-examples": {
+          "Create or update code container": {
+            "$ref": "./examples/createOrUpdateDataVersion.json"
           }
         },
-        "additionalProperties": false
+        "description": "Create or update Data Version.",
+        "operationId": "DataVersions_CreateOrUpdate",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/DataVersionNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DataVersionVersionsParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Data Version entity to create or update.",
+            "schema": {
+              "$ref": "#/definitions/DataVersionResourceRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/DataVersionResource"
+            }
+          },
+          "201": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/DataVersionResource"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "machineLearningServices.json#/definitions/MachineLearningServiceError"
+            }
+          }
+        }
       }
     }
+  },
+  "parameters": {
+    "DataVersionNameParameter": {
+      "in": "path",
+      "name": "name",
+      "type": "string",
+      "description": "Data Version identifier.",
+      "required": true,
+      "x-ms-parameter-location": "method"
+    },
+    "DataVersionVersionsParameter": {
+      "in": "path",
+      "name": "name",
+      "type": "string",
+      "description": "Data Version identifier.",
+      "required": true,
+      "x-ms-parameter-location": "method"
+    }
+  },
+  "definitions": {
+    "DataVersionResource": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The resource URL of the entity (not URL encoded).",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the resource entity.",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "description": "The resource provider and type.",
+          "readOnly": true
+        },
+        "properties": {
+          "$ref": "#/definitions/DataVersion"
+        },
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
+        }
+      },
+      "additionalProperties": false,
+      "description": "Azure Resource Manager resource Envelope",
+      "x-ms-azure-resource": true
+    },
+    "DataVersionResourcePaginatedResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DataVersionResource"
+          }
+        },
+        "nextLink": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "DataVersion": {
+      "description": "Details of an Data Version",
+      "type": "object",
+      "properties": {
+        "datasetType": {
+          "$ref": "#/definitions/DatasetType"
+        },
+        "description": {
+          "description": "The asset description text.",
+          "type": "string"
+        },
+        "datastoreId": {
+          "description": "The asset datastoreId",
+          "type": "string"
+        },
+        "tags": {
+          "description": "The asset tag dictionary.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "properties": {
+          "description": "The asset property dictionary.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "assetPaths": {
+          "description": "Details of asset paths in the datastore.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AssetPath"
+          }
+        },
+        "linkedResourceIds": {
+          "description": "Associated ARM resources. Key is the link type, value is a list of ARM IDs.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "DatasetType": {
+      "enum": [
+        "Simple",
+        "Dataflow"
+      ],
+      "type": "string"
+    },
+    "AssetPath": {
+      "description": "Details of an AssetUri.",
+      "type": "object",
+      "properties": {
+        "path": {
+          "description": "The path of file/directory.",
+          "type": "string"
+        },
+        "isDirectory": {
+          "description": "Whether the path defines a directory or a single file.",
+          "type": "boolean"
+        }
+      },
+      "additionalProperties": false
+    },
+    "DataVersionResourceRequest": {
+      "description": "Azure Resource Management create resource envelope.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/DataVersion"
+        }
+      },
+      "additionalProperties": false
+    }
   }
+}
