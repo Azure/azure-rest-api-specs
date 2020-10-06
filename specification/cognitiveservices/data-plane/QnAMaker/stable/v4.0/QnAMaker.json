@@ -567,6 +567,9 @@
           },
           {
             "$ref": "#/parameters/source"
+          },
+          {
+            "$ref": "#/parameters/changedsince"
           }
         ],
         "consumes": [
@@ -1424,7 +1427,16 @@
       "in": "query",
       "required": false,
       "x-nullable": false,
-      "description": "The source property filter to apply. Sample value: Editorial.",
+      "description": "The source property filter to apply. Sample value: Editorial, smartLight%20FAQ.tsv .",
+      "x-ms-parameter-location": "method"
+    },
+    "changedsince": {
+      "type": "string",
+      "name": "changedsince",
+      "in": "query",
+      "required": false,
+      "x-nullable": false,
+      "description": "The changedsince property filter to apply. Sample value: 1d 1m 1h 1s.",
       "x-ms-parameter-location": "method"
     },
     "OperationId": {
