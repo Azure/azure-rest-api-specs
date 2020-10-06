@@ -469,7 +469,7 @@
           "200": {
             "description": "The request was successful; the request was well-formed and received properly.",
             "schema": {
-              "$ref": "#/definitions/PrivateEndpointConnectionListResult"
+              "$ref": "../../../../../common-types/resource-management/v1/privatelinks.json#/definitions/PrivateEndpointConnectionListResult"
             }
           },
           "default": {
@@ -510,18 +510,14 @@
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "name": "privateEndpointConnectionName",
-            "in": "path",
-            "description": "Private endpoint connection name",
-            "required": true,
-            "type": "string"
+            "$ref": "../../../../../common-types/resource-management/v1/privatelinks.json#/parameters/PrivateEndpointConnectionName"
           }
         ],
         "responses": {
           "200": {
             "description": "The request was successful; the request was well-formed and received properly.",
             "schema": {
-              "$ref": "#/definitions/PrivateEndpointConnection"
+              "$ref": "../../../../../common-types/resource-management/v1/privatelinks.json#/definitions/PrivateEndpointConnection"
             }
           },
           "default": {
@@ -557,27 +553,23 @@
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "name": "privateEndpointConnectionName",
-            "in": "path",
-            "description": "Private endpoint connection name",
-            "required": true,
-            "type": "string"
+            "$ref": "../../../../../common-types/resource-management/v1/privatelinks.json#/parameters/PrivateEndpointConnectionName"
           },
           {
-            "name": "privateEndpointConnection",
+            "name": "properties",
             "in": "body",
-            "description": "The private endpoint connection properties.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/PrivateEndpointConnection"
-            }
+              "$ref": "../../../../../common-types/resource-management/v1/privatelinks.json#/definitions/PrivateEndpointConnection"
+            },
+            "description": "The private endpoint connection properties."
           }
         ],
         "responses": {
           "200": {
             "description": "The request was successful; the request was well-formed and received properly.",
             "schema": {
-              "$ref": "#/definitions/PrivateEndpointConnection"
+              "$ref": "../../../../../common-types/resource-management/v1/privatelinks.json#/definitions/PrivateEndpointConnection"
             }
           },
           "default": {
@@ -614,11 +606,7 @@
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "name": "privateEndpointConnectionName",
-            "in": "path",
-            "description": "Private endpoint connection name",
-            "required": true,
-            "type": "string"
+            "$ref": "../../../../../common-types/resource-management/v1/privatelinks.json#/parameters/PrivateEndpointConnectionName"
           }
         ],
         "responses": {
@@ -629,7 +617,7 @@
             "description": "The request was successful; the operation will complete asynchronously."
           },
           "204": {
-            "description": "No Content - the specified resource was not found."
+            "description": "No Content - The private endpoint connection does not exist."
           },
           "default": {
             "description": "DefaultErrorResponse",
@@ -671,7 +659,7 @@
           "200": {
             "description": "The request was successful; the request was well-formed and received properly.",
             "schema": {
-              "$ref": "#/definitions/PrivateLinkResourceListResult"
+              "$ref": "../../../../../common-types/resource-management/v1/privatelinks.json#/definitions/PrivateLinkResourceListResult"
             }
           },
           "default": {
@@ -723,7 +711,7 @@
           "200": {
             "description": "The request was successful; the request was well-formed and received properly.",
             "schema": {
-              "$ref": "#/definitions/PrivateLinkResource"
+              "$ref": "../../../../../common-types/resource-management/v1/privatelinks.json#/definitions/PrivateLinkResource"
             }
           },
           "default": {
@@ -790,7 +778,7 @@
           "description": "The list of private endpoint connections that are set up for this resource.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/PrivateEndpointConnectionReference"
+            "$ref": "../../../../../common-types/resource-management/v1/privatelinks.json#/definitions/PrivateEndpointConnection"
           }
         },
         "publicNetworkAccess": {
@@ -931,210 +919,6 @@
     "ServiceCorsConfigurationMethodEntry": {
       "description": "A method for CORS.",
       "type": "string"
-    },
-    "PrivateEndpointConnectionReference": {
-      "type": "object",
-      "description": "A reference to a related private endpoint connection.",
-      "properties": {
-        "id": {
-          "description": "The resource ID.",
-          "type": "string",
-          "readOnly": true
-        },
-        "name": {
-          "description": "The name of the resource.",
-          "type": "string",
-          "readOnly": true
-        },
-        "type": {
-          "description": "The type of the resource.",
-          "type": "string",
-          "readOnly": true
-        },
-        "properties": {
-          "$ref": "#/definitions/PrivateEndpointConnectionProperties",
-          "description": "The properties of a private endpoint connection.",
-          "x-ms-client-flatten": true
-        }
-      }
-    },
-    "PrivateEndpointConnectionListResult": {
-        "type": "object",
-        "description": "A list of private endpoint connections",
-        "properties": {
-          "value": {
-            "description": "The collection value.",
-            "type": "array",
-            "items": {
-              "$ref": "#/definitions/PrivateEndpointConnection"
-            }
-          },
-          "nextLink": {
-            "description": "The URI that can be used to request the next set of paged results.",
-            "type": "string"
-          }
-        }
-    },
-    "PrivateEndpointConnection": {
-      "description": "A private endpoint connection",
-      "type": "object",
-      "properties": {
-        "id": {
-          "description": "The resource ID.",
-          "type": "string",
-          "readOnly": true
-        },
-        "name": {
-          "description": "The name of the resource.",
-          "type": "string",
-          "readOnly": true
-        },
-        "type": {
-          "description": "The type of the resource.",
-          "type": "string",
-          "readOnly": true
-        },
-        "properties": {
-          "$ref": "#/definitions/PrivateEndpointConnectionProperties",
-          "description": "The properties of a private endpoint.",
-          "x-ms-client-flatten": true
-        }
-      },
-      "x-ms-azure-resource": true
-    },
-    "PrivateEndpointConnectionProperties": {
-      "type": "object",
-      "description": "Properties of a private endpoint connection.",
-      "properties": {
-        "privateEndpoint": {
-          "$ref": "#/definitions/PrivateEndpoint",
-          "description": "The resource of private endpoint."
-        },
-        "privateLinkServiceConnectionState": {
-          "$ref": "#/definitions/PrivateLinkServiceConnectionState",
-          "description": "A collection of information about the state of the connection between service consumer and provider."
-        }
-      },
-      "required": [
-        "privateLinkServiceConnectionState"
-      ]
-    },
-    "PrivateEndpoint": {
-      "type": "object",
-      "description": "Private endpoint which a connection belongs to.",
-      "properties": {
-        "id": {
-          "description": "The resource Id for private endpoint",
-          "type": "string"
-        }
-      }
-    },
-    "PrivateLinkServiceConnectionState": {
-      "description": "The state of a private link service connection.",
-      "type": "object",
-      "properties": {
-        "status": {
-          "enum": [
-            "Pending",
-            "Approved",
-            "Rejected",
-            "Disconnected"
-          ],
-          "type": "string",
-          "description": "The private link service connection status.",
-          "x-ms-enum": {
-            "name": "Status",
-            "modelAsString": true
-          }
-        },
-        "description": {
-          "type": "string",
-          "description": "The private link service connection description."
-        },
-        "actionsRequired": {
-          "enum": [
-            "None",
-            "Recreate"
-          ],
-          "type": "string",
-          "readOnly": true,
-          "description": "Any action that is required beyond basic workflow (approve/ reject/ disconnect)",
-          "x-ms-enum": {
-            "name": "ActionsRequired",
-            "modelAsString": true
-          }
-        }
-      }
-    },
-    "PrivateLinkResourceListResult": {
-      "type": "object",
-      "description": "A list of private link resources.",
-      "properties": {
-        "value": {
-          "description": "The collection value.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/PrivateLinkResource"
-          }
-        },
-        "nextLink": {
-          "description": "The URI that can be used to request the next set of paged results.",
-          "type": "string"
-        }
-      }
-    },
-    "PrivateLinkResource": {
-      "type": "object",
-      "description": "A resource that supports private link capabilities.",
-      "properties": {
-        "id": {
-          "description": "The resource ID.",
-          "type": "string",
-          "readOnly": true
-        },
-        "name": {
-          "description": "The name of the resource.",
-          "type": "string",
-          "readOnly": true
-        },
-        "type": {
-          "description": "The type of the resource.",
-          "type": "string",
-          "readOnly": true
-        },
-        "properties": {
-          "$ref": "#/definitions/PrivateLinkResourceProperties",
-          "description": "Private link resource properties.",
-          "x-ms-client-flatten": true
-        }
-      }
-    },
-    "PrivateLinkResourceProperties": {
-      "type": "object",
-      "properties": {
-        "groupId": {
-          "description": "The private link resource group id.",
-          "type": "string",
-          "readOnly": true
-        },
-        "requiredMembers": {
-          "description": "The private link resource required member names.",
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "readOnly": true
-        },
-        "requiredZoneNames": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "readOnly": true,
-          "description": "The list of required DNS zone names of the private link resource."
-        }
-      },
-      "description": "Properties of a private link resource."
     },
     "ServicesDescription": {
       "description": "The description of the service.",
