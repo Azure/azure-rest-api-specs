@@ -55,6 +55,38 @@
     },
     "AccessInformationContract": {
       "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/AccessInformationContractProperties",
+          "description": "AccessInformation entity contract properties."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./apimanagement.json#/definitions/Resource"
+        }
+      ],
+      "description": "Tenant Settings."
+    },
+    "AccessInformationContractProperties": {
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Access Information type ('access' or 'gitAccess')"
+        },
+        "principalId": {
+          "type": "string",
+          "description": "Principal (User) Identifier."
+        },
+        "enabled": {
+          "type": "boolean",
+          "description": "Determines whether direct access is enabled."
+        }
+      },
+      "description": "Tenant access information contract of the API Management service."
+    },
+    "AccessInformationSecretsContract": {
+      "properties": {
         "id": {
           "type": "string",
           "description": "Access Information type ('access' or 'gitAccess')"
@@ -137,7 +169,7 @@
           "additionalProperties": {
             "type": "string"
           },
-          "description": "Settings"
+          "description": "Tenant settings"
         }
       },
       "description": "Tenant access information contract of the API Management service."
