@@ -282,44 +282,6 @@
     }
   },
   "definitions": {
-    "SystemData": {
-      "description": "Top level metadata https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/common-api-contracts.md#system-metadata-for-all-azure-resources",
-      "type": "object",
-      "properties": {
-        "createdBy": {
-          "description": "A string identifier for the identity that created the resource",
-          "type": "string",
-          "readOnly": true
-        },
-        "createdByType": {
-          "description": "The type of identity that created the resource: user, application, managedIdentity, key",
-          "type": "string",
-          "readOnly": true
-        },
-        "createdAt": {
-          "format": "date-time",
-          "description": "The timestamp of resource creation (UTC)",
-          "type": "string",
-          "readOnly": true
-        },
-        "lastModifiedBy": {
-          "description": "A string identifier for the identity that last modified the resource",
-          "type": "string",
-          "readOnly": true
-        },
-        "lastModifiedByType": {
-          "description": "The type of identity that last modified the resource: user, application, managedIdentity, key",
-          "type": "string",
-          "readOnly": true
-        },
-        "lastModifiedAt": {
-          "format": "date-time",
-          "description": "The timestamp of resource last modification (UTC)",
-          "type": "string",
-          "readOnly": true
-        }
-      }
-    },
     "Resource": {
       "description": "The Resource model definition.",
       "type": "object",
@@ -338,10 +300,6 @@
           "readOnly": true,
           "type": "string",
           "description": "Resource type"
-        },
-        "systemData": {
-          "description": "Top level metadata https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/common-api-contracts.md#system-metadata-for-all-azure-resources",
-          "$ref": "#/definitions/SystemData"
         }
       },
       "x-ms-azure-resource": true
@@ -376,21 +334,24 @@
     },
     "ErrorDefinition": {
       "description": "Error definition.",
-      "readOnly": true,
-      "required": [
-        "message",
-        "code"
-      ],
       "properties": {
         "code": {
           "description": "Service specific error code which serves as the substatus for the HTTP error code.",
           "type": "string",
-          "minimum": 100,
-          "maximum": 600
+          "readOnly": true
         },
         "message": {
           "description": "Description of the error.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
+        },
+        "details": {
+          "description": "Internal error details.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ErrorDefinition"
+          },
+          "readOnly": true
         }
       }
     },
@@ -401,19 +362,8 @@
       "properties": {
         "complianceState": {
           "description": "The compliance state of the configuration.",
-          "type": "string",
-          "readOnly": true,
-          "x-ms-enum": {
-            "name": "ComplianceStateType",
-            "modelAsString": true
-          },
-          "enum": [
-            "Pending",
-            "Compliant",
-            "Noncompliant",
-            "Installed",
-            "Failed"
-          ]
+          "$ref": "#/definitions/ComplianceState",
+          "readOnly": true
         },
         "lastConfigApplied": {
           "description": "Datetime the configuration was last applied.",
@@ -433,11 +383,27 @@
             "Information"
           ],
           "x-ms-enum": {
-            "name": "MessageLevelType",
+            "name": "messageLevel",
             "modelAsString": true
           }
         }
       }
+    },
+    "ComplianceState": {
+      "description": "The compliance state of the configuration.",
+      "type": "string",
+      "readOnly": true,
+      "x-ms-enum": {
+        "name": "complianceState",
+        "modelAsString": true
+      },
+      "enum": [
+        "Pending",
+        "Compliant",
+        "Noncompliant",
+        "Installed",
+        "Failed"
+      ]
     },
     "ChartVersion": {
       "description": "Version of the operator Helm chart.",
@@ -467,42 +433,6 @@
         "type": "string"
       }
     },
-    "OperatorTypeDefinition": {
-      "description": "Type of the operator",
-      "type": "string",
-      "enum": [
-        "Flux"
-      ],
-      "x-ms-enum": {
-        "name": "OperatorType",
-        "modelAsString": true
-      }
-    },
-    "OperatorScopeDefinition": {
-      "description": "Scope at which the operator will be installed.",
-      "type": "string",
-      "enum": [
-        "cluster",
-        "namespace"
-      ],
-      "default": "cluster",
-      "x-ms-enum": {
-        "name": "OperatorScopeType",
-        "modelAsString": true
-      }
-    },
-    "EnableHelmOperatorDefinition": {
-      "description": "Option to enable Helm Operator for this git configuration.",
-      "type": "boolean",
-      "enum": [
-        "true",
-        "false"
-      ],
-      "x-ms-enum": {
-        "name": "EnableHelmOperatorType",
-        "modelAsString": true
-      }
-    },
     "SourceControlConfiguration": {
       "description": "The SourceControl Configuration object returned in Get & Put response.",
       "properties": {
@@ -526,7 +456,14 @@
             },
             "operatorType": {
               "description": "Type of the operator",
-              "$ref": "#/definitions/OperatorTypeDefinition"
+              "type": "string",
+              "enum": [
+                "Flux"
+              ],
+              "x-ms-enum": {
+                "name": "operatorType",
+                "modelAsString": true
+              }
             },
             "operatorParams": {
               "description": "Any Parameters for the Operator instance in string format.",
@@ -534,7 +471,16 @@
             },
             "operatorScope": {
               "description": "Scope at which the operator will be installed.",
-              "$ref": "#/definitions/OperatorScopeDefinition"
+              "type": "string",
+              "enum": [
+                "cluster",
+                "namespace"
+              ],
+              "default": "cluster",
+              "x-ms-enum": {
+                "name": "operatorScope",
+                "modelAsString": true
+              }
             },
             "repositoryPublicKey": {
               "description": "Public Key associated with this SourceControl configuration (either generated within the cluster or provided by the user).",
@@ -547,7 +493,15 @@
             },
             "enableHelmOperator": {
               "description": "Option to enable Helm Operator for this git configuration.",
-              "$ref": "#/definitions/EnableHelmOperatorDefinition"
+              "type": "string",
+              "enum": [
+                "true",
+                "false"
+              ],
+              "x-ms-enum": {
+                "name": "enableHelmOperator",
+                "modelAsString": true
+              }
             },
             "helmOperatorProperties": {
               "description": "Properties for Helm operator.",
@@ -560,7 +514,7 @@
               "readOnly": true,
               "x-ms-enum": {
                 "modelAsString": true,
-                "name": "ProvisioningStateType"
+                "name": "ProvisioningState"
               },
               "enum": [
                 "Accepted",
@@ -575,16 +529,6 @@
               "description": "Compliance Status of the Configuration",
               "readOnly": true,
               "$ref": "#/definitions/ComplianceStatus"
-            },
-            "creationTime": {
-              "type": "string",
-              "description": "DateLiteral (per ISO8601) noting the time the resource was created by the client (user).",
-              "readOnly": true
-            },
-            "lastModifiedTime": {
-              "type": "string",
-              "description": "DateLiteral (per ISO8601) noting the time the resource was modified by the client (user).",
-              "readOnly": true
             }
           }
         }
