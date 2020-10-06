@@ -57,7 +57,7 @@
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/TeeKind"
+            "$ref": "#/parameters/AttestationType"
           },
           {
             "name": "PolicyJws",
@@ -73,18 +73,6 @@
         "responses": {
           "200": {
             "description": "Success - Returns a JWT signed by the metadata signing key that contains the hash of the supplied policy to be set.",
-            "schema": {
-              "type": "string"
-            }
-          },
-          "400": {
-            "description": "Bad request",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          },
-          "401": {
-            "description": "Request is unauthorized",
             "schema": {
               "type": "string"
             }
@@ -108,14 +96,14 @@
         "tags": [
           "Policy"
         ],
-        "summary": "Retrieves the current policy for a given kind of TEE.",
+        "summary": "Retrieves the current policy for an attestation type.",
         "operationId": "Policy_Get",
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/TeeKind"
+            "$ref": "#/parameters/AttestationType"
           }
         ],
         "responses": {
@@ -123,18 +111,6 @@
             "description": "Success",
             "schema": {
               "$ref": "#/definitions/AttestationPolicy"
-            }
-          },
-          "400": {
-            "description": "Bad request",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          },
-          "401": {
-            "description": "Request is unauthorized",
-            "schema": {
-              "type": "string"
             }
           },
           "default": {
@@ -154,7 +130,7 @@
         "tags": [
           "Policy"
         ],
-        "summary": "Sets the policy for a given kind of TEE.",
+        "summary": "Sets the policy for a given attestation type.",
         "operationId": "Policy_Set",
         "consumes": [
           "text/plain"
@@ -164,7 +140,7 @@
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/TeeKind"
+            "$ref": "#/parameters/AttestationType"
           },
           {
             "name": "newAttestationPolicy",
@@ -180,18 +156,6 @@
         "responses": {
           "200": {
             "description": "Success"
-          },
-          "400": {
-            "description": "Bad request",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          },
-          "401": {
-            "description": "Request is unauthorized",
-            "schema": {
-              "type": "string"
-            }
           },
           "default": {
             "description": "Error response describing why the operation failed",
@@ -220,7 +184,7 @@
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/TeeKind"
+            "$ref": "#/parameters/AttestationType"
           },
           {
             "name": "PolicyJws",
@@ -236,18 +200,6 @@
         "responses": {
           "200": {
             "description": "Success - Returns a JWT signed by the metadata signing key that contains the hash of the supplied policy to be set.",
-            "schema": {
-              "type": "string"
-            }
-          },
-          "400": {
-            "description": "Bad request",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          },
-          "401": {
-            "description": "Request is unauthorized",
             "schema": {
               "type": "string"
             }
@@ -281,18 +233,6 @@
         "responses": {
           "200": {
             "description": "An RFC7519 JSON Web Token structure containing an RFC7517 JsonWebKeySet which contains the certificates used to validate policy changes",
-            "schema": {
-              "type": "string"
-            }
-          },
-          "400": {
-            "description": "Bad request",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          },
-          "401": {
-            "description": "Request is unauthorized",
             "schema": {
               "type": "string"
             }
@@ -337,18 +277,6 @@
               "type": "string"
             }
           },
-          "400": {
-            "description": "Bad request",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          },
-          "401": {
-            "description": "Request is unauthorized",
-            "schema": {
-              "type": "string"
-            }
-          },
           "default": {
             "description": "Error response describing why the operation failed",
             "schema": {
@@ -389,18 +317,6 @@
               "type": "string"
             }
           },
-          "400": {
-            "description": "Bad request",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          },
-          "401": {
-            "description": "Request is unauthorized",
-            "schema": {
-              "type": "string"
-            }
-          },
           "default": {
             "description": "Error response describing why the operation failed",
             "schema": {
@@ -422,7 +338,7 @@
         ],
         "summary": "Attest to an SGX enclave.",
         "description": "Processes an OpenEnclave report , producing an artifact. The type of artifact produced is dependent upon attestation policy.",
-        "operationId": "AttestOpenEnclave",
+        "operationId": "Attestation_AttestOpenEnclave",
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -433,7 +349,7 @@
             "description": "Request object containing the quote",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/AttestSgxEnclaveRequest"
+              "$ref": "#/definitions/AttestOpenEnclaveRequest"
             }
           }
         ],
@@ -444,16 +360,10 @@
               "type": "string"
             }
           },
-          "400": {
-            "description": "The input is not valid",
+          "default": {
+            "description": "Error response describing why the operation failed",
             "schema": {
               "$ref": "#/definitions/CloudError"
-            }
-          },
-          "401": {
-            "description": "Request is unauthorized",
-            "schema": {
-              "type": "string"
             }
           }
         },
@@ -471,7 +381,7 @@
         ],
         "summary": "Attest to an SGX enclave.",
         "description": "Processes an SGX enclave quote, producing an artifact. The type of artifact produced is dependent upon attestation policy.",
-        "operationId": "AttestSgxEnclave",
+        "operationId": "Attestation_AttestSgxEnclave",
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -493,16 +403,10 @@
               "type": "string"
             }
           },
-          "400": {
-            "description": "The input is not valid",
+          "default": {
+            "description": "Error response describing why the operation failed",
             "schema": {
               "$ref": "#/definitions/CloudError"
-            }
-          },
-          "401": {
-            "description": "Request is unauthorized",
-            "schema": {
-              "type": "string"
             }
           }
         },
@@ -520,7 +424,7 @@
         ],
         "summary": "Attest a Virtualization-based Security (VBS) enclave.",
         "description": "Processes attestation evidence from a VBS enclave, producing an attestation result. The attestation result produced is dependent upon the attestation policy.",
-        "operationId": "AttestVbsEnclave",
+        "operationId": "Attestation_AttestVbsEnclave",
         "consumes": [
           "application/json"
         ],
@@ -545,20 +449,8 @@
               "$ref": "#/definitions/VbsAttestationResponse"
             }
           },
-          "400": {
-            "description": "Bad request",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          },
-          "401": {
-            "description": "Request is unauthorized",
-            "schema": {
-              "type": "string"
-            }
-          },
-          "429": {
-            "description": "Retry",
+          "default": {
+            "description": "Error response describing why the operation failed",
             "schema": {
               "$ref": "#/definitions/CloudError"
             }
@@ -578,7 +470,7 @@
         ],
         "summary": "Attest to an SEV SNP Virtual Machine.",
         "description": "Processes a SEV SNP Boot chain. The type of artifact produced is dependent upon attestation policy.",
-        "operationId": "AttestSevSnpVm",
+        "operationId": "Attestation_AttestSevSnpVm",
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -600,16 +492,10 @@
               "type": "string"
             }
           },
-          "400": {
-            "description": "The input is not valid",
+          "default": {
+            "description": "Error response describing why the operation failed",
             "schema": {
               "$ref": "#/definitions/CloudError"
-            }
-          },
-          "401": {
-            "description": "Request is unauthorized",
-            "schema": {
-              "type": "string"
             }
           }
         },
@@ -633,12 +519,6 @@
             "description": "Success",
             "schema": {
               "type": "object"
-            }
-          },
-          "400": {
-            "description": "Error processing the request",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
             }
           },
           "default": {
@@ -668,12 +548,6 @@
             "description": "Success",
             "schema": {
               "type": "object"
-            }
-          },
-          "400": {
-            "description": "Error processing the request",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
             }
           },
           "default": {
@@ -715,6 +589,66 @@
       },
       "description": "An error response from Attestation."
     },
+    "AttestationCertificateManagementBody": {
+      "type": "object",
+      "description": "The body of the JWT used for the PolicyCertificates APIs",
+      "properties": {
+        "policyCertificate": {
+          "description": "RFC 7517 Json Web Key describign the certificate.",
+          "$ref": "../../../../../common-types/rfcs/rfc7517.json#/definitions/JSONWebKey"
+        }
+      }
+    },
+    "DataType": {
+      "description": "Specifies the type of the data encoded contained within the \"data\" field of a \"RuntimeData\" or \"InittimeData\" object",
+      "type": "string",
+      "enum": [
+        "Binary",
+        "JSON"
+      ],
+      "x-ms-enum": {
+        "name": "DataType",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "Binary",
+            "description": "The contents of the field should be treated as binary and not interpreted by MAA."
+          },
+          {
+            "value": "JSON",
+            "description": "The contents of the field should be treated as a JSON object and may be further interpreted by MAA."
+          }
+        ]
+      }
+    },
+    "RuntimeData": {
+      "type": "object",
+      "description": "Defines the \"runtime data\" provided by the attestation target for use by the MAA",
+      "properties": {
+        "data": {
+          "description": "Base64Url encoded Runtime Data generated by the trusted environment",
+          "type": "string"
+        },
+        "dataType": {
+          "description": "The type of data contained within the \"data\" field",
+          "$ref": "#/definitions/DataType"
+        }
+      }
+    },
+    "InittimeData": {
+      "type": "object",
+      "description": "Defines the \"inittime data\" used to provision the attestation target for use by the MAA",
+      "properties": {
+        "data": {
+          "description": "Initialization Data passed into the trusted environment when it is created.",
+          "type": "string"
+        },
+        "dataType": {
+          "description": "The type of data contained within the \"data\" field",
+          "$ref": "#/definitions/DataType"
+        }
+      }
+    },
     "AttestSgxEnclaveRequest": {
       "type": "object",
       "description": "Attestation request for Intel SGX enclaves",
@@ -723,17 +657,39 @@
           "description": "Quote of the enclave to be attested",
           "type": "string"
         },
-        "enclaveHeldData": {
-          "description": "Enclave-held data corresponding to quote",
-          "type": "string"
+        "runtimeData": {
+          "description": "Base64Url encoded \"runtime data\". The MAA will verify that the first 32 bytes of the report_data field of the quote contains the SHA256 hash of the decoded runtime data.",
+          "$ref": "#/definitions/RuntimeData"
+        },
+        "inittimeData": {
+          "description": "Base64Url encoded \"inittime data\". The MAA will verify that the init data was known to the enclave. Note that inittimeData is invalid for Coffeelake processors.",
+          "$ref": "#/definitions/InittimeData"
         },
         "draftPolicyForAttestation": {
           "description": "Attest against the provided draft policy. Note that the resulting token cannot be validated.",
           "type": "string"
+        }
+      }
+    },
+    "AttestOpenEnclaveRequest": {
+      "type": "object",
+      "description": "Attestation request for Intel SGX enclaves",
+      "properties": {
+        "report": {
+          "description": "OpenEnclave report from the enclave to be attested",
+          "type": "string"
         },
-        "disableSignatureValidation": {
-          "description": "Disables validation of signature in quote response, valid for localhost clients only.",
-          "type": "boolean"
+        "runtimeData": {
+          "description": "Base64Url encoded \"runtime claims\". The MAA will verify that the first 32 bytes of the report_data field of the report contains the SHA256 hash of the decoded runtime data.",
+          "$ref": "#/definitions/RuntimeData"
+        },
+        "inittimeData": {
+          "description": "Base64Url encoded \"inittime data\". The MAA will verify that the init data was known to the enclave. Note that inittimeData is invalid for Coffeelake processors.",
+          "$ref": "#/definitions/InittimeData"
+        },
+        "draftPolicyForAttestation": {
+          "description": "Attest against the provided draft policy. Note that the resulting token cannot be validated.",
+          "type": "string"
         }
       }
     },
@@ -766,7 +722,7 @@
           "type": "string",
           "x-ms-enum": {
             "name": "SevSnpReportType",
-            "modelAsString": false,
+            "modelAsString": true,
             "values": [
               {
                 "value": "HclHyperV",
@@ -781,6 +737,14 @@
         "report": {
           "description": "Hardware rooted report of the virtual machine being attested",
           "type": "string"
+        },
+        "runtimeData": {
+          "description": "Base64Url encoded \"runtime claims\". The MAA will verify that the runtime data originated from the enclave.",
+          "$ref": "#/definitions/RuntimeData"
+        },
+        "inittimeData": {
+          "description": "Base64Url encoded \"inittime data\". The MAA will verify that the init data was used when provisioning to the enclave.",
+          "$ref": "#/definitions/InittimeData"
         },
         "draftPolicyForAttestation": {
           "description": "Attest against the provided draft policy. Note that the resulting token cannot be validated.",
@@ -806,15 +770,15 @@
       "type": "string",
       "description": "Client API version. Current version is 2010-10-01"
     },
-    "TeeKind": {
+    "AttestationType": {
       "description": "Specifies the trusted execution environment to be used to validate the evidence",
-      "name": "tee",
+      "name": "attestationType",
       "in": "query",
       "type": "string",
       "required": true,
       "x-ms-parameter-location": "method",
       "x-ms-enum": {
-        "name": "TeeKind",
+        "name": "AttestationType",
         "modelAsString": true,
         "values": [
           {
