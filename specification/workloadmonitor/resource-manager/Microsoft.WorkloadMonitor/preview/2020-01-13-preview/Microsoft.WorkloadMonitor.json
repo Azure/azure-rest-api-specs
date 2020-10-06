@@ -52,7 +52,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceNamespace}/{resourceType}/{resourceName}/providers/Microsoft.WorkloadMonitor/monitors": {
       "get": {
         "summary": "Get list of a monitors of a resource (with optional filter).",
-        "operationId": "Monitors_ListMonitors",
+        "operationId": "Monitors_List",
         "produces": [
           "application/json"
         ],
@@ -115,7 +115,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceNamespace}/{resourceType}/{resourceName}/providers/Microsoft.WorkloadMonitor/monitors/{monitorId}": {
       "get": {
         "summary": "Get the current status of a monitor of a resource.",
-        "operationId": "Monitors_GetMonitor",
+        "operationId": "Monitors_Get",
         "produces": [
           "application/json"
         ],
@@ -172,7 +172,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceNamespace}/{resourceType}/{resourceName}/providers/Microsoft.WorkloadMonitor/monitors/{monitorId}/history": {
       "get": {
         "summary": "Get history of a monitor of a resource (with optional filter).",
-        "operationId": "MonitorHistory_ListStateChanges",
+        "operationId": "Monitors_ListStateChanges",
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         },
@@ -254,7 +254,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceNamespace}/{resourceType}/{resourceName}/providers/Microsoft.WorkloadMonitor/monitors/{monitorId}/history/{timestampUnix}": {
       "get": {
         "summary": "Get the status of a monitor at a specific timestamp in history.",
-        "operationId": "MonitorHistory_GetStateChange",
+        "operationId": "Monitors_GetStateChange",
         "produces": [
           "application/json"
         ],
