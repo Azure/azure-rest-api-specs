@@ -1072,6 +1072,12 @@
             "schema": {
               "$ref": "#/definitions/ListBlobInventoryPolicy"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-pageable": {
@@ -3974,10 +3980,11 @@
           "items": {
             "$ref": "#/definitions/BlobInventoryPolicy"
           },
-          "description": "List of blob inventory policies returned.",
+          "description": "List of blob inventory policies.",
           "readOnly": true
         }
-      }
+      },
+      "description": "List of blob inventory policies returned."
     },
     "BlobInventoryPolicy": {
       "properties": {
@@ -3985,6 +3992,9 @@
           "$ref": "#/definitions/BlobInventoryPolicyProperties",
           "x-ms-client-flatten": true,
           "description": "Returns the storage account blob inventory policy rules."
+        },
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
         }
       },
       "allOf": [
