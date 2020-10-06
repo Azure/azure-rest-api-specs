@@ -6,45 +6,55 @@ These settings apply only when `--azureresourceschema` is specified on the comma
 
 ``` yaml $(azureresourceschema) && $(multiapi)
 batch:
-  - tag: package-preview-2019-07-19
-  - tag: package-preview-2019-04
-  - tag: package-2018-06
-  - tag: package-2017-11
+  - tag: schema-capacity-2019-07-19
+  - tag: schema-capacity-2019-04-01
+  - tag: schema-capacity-2018-06-01
+  - tag: schema-capacity-2017-11-01
+
 ```
 
-### Tag: package-preview-2019-07-19 and azureresourceschema
-
-These settings apply only when `--tag=package-preview-2019-07-19 --azureresourceschema` is specified on the command line.
 Please also specify `--azureresourceschema-folder=<path to the root directory of your azure-resource-manager-schemas clone>`.
 
-``` yaml $(tag) == 'package-preview-2019-07-19' && $(azureresourceschema)
+### Tag: schema-capacity-2019-07-19 and azureresourceschema
+
+``` yaml $(tag) == 'schema-capacity-2019-07-19' && $(azureresourceschema)
 output-folder: $(azureresourceschema-folder)/schemas
+
+# all the input files in this apiVersion
+input-file:
+  - Microsoft.Capacity/preview/2019-07-19/quota.json
+
 ```
 
-### Tag: package-preview-2019-04 and azureresourceschema
+### Tag: schema-capacity-2019-04-01 and azureresourceschema
 
-These settings apply only when `--tag=package-preview-2019-04 --azureresourceschema` is specified on the command line.
-Please also specify `--azureresourceschema-folder=<path to the root directory of your azure-resource-manager-schemas clone>`.
-
-``` yaml $(tag) == 'package-preview-2019-04' && $(azureresourceschema)
+``` yaml $(tag) == 'schema-capacity-2019-04-01' && $(azureresourceschema)
 output-folder: $(azureresourceschema-folder)/schemas
+
+# all the input files in this apiVersion
+input-file:
+  - Microsoft.Capacity/preview/2019-04-01/reservations.json
+
 ```
 
-### Tag: package-2018-06 and azureresourceschema
+### Tag: schema-capacity-2018-06-01 and azureresourceschema
 
-These settings apply only when `--tag=package-2018-06 --azureresourceschema` is specified on the command line.
-Please also specify `--azureresourceschema-folder=<path to the root directory of your azure-resource-manager-schemas clone>`.
-
-``` yaml $(tag) == 'package-2018-06' && $(azureresourceschema)
+``` yaml $(tag) == 'schema-capacity-2018-06-01' && $(azureresourceschema)
 output-folder: $(azureresourceschema-folder)/schemas
+
+# all the input files in this apiVersion
+input-file:
+  - Microsoft.Capacity/preview/2018-06-01/reservations.json
+
 ```
 
-### Tag: package-2017-11 and azureresourceschema
+### Tag: schema-capacity-2017-11-01 and azureresourceschema
 
-These settings apply only when `--tag=package-2017-11 --azureresourceschema` is specified on the command line.
-Please also specify `--azureresourceschema-folder=<path to the root directory of your azure-resource-manager-schemas clone>`.
-
-``` yaml $(tag) == 'package-2017-11' && $(azureresourceschema)
+``` yaml $(tag) == 'schema-capacity-2017-11-01' && $(azureresourceschema)
 output-folder: $(azureresourceschema-folder)/schemas
-```
 
+# all the input files in this apiVersion
+input-file:
+  - Microsoft.Capacity/stable/2017-11-01/reservations.json
+
+```

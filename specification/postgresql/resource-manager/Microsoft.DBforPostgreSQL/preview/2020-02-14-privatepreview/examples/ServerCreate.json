@@ -8,23 +8,21 @@
       "location": "westus",
       "sku": {
         "tier": "GeneralPurpose",
-        "capacity": 4,
         "name": "Standard_D4s_v3"
       },
       "properties": {
         "administratorLogin": "cloudsa",
         "administratorLoginPassword": "password",
         "version": "12",
-        "standbyCount": 0,
-        "vnetInjArgs": {
-          "delegatedSubnetName": "test-subnet",
-          "delegatedVnetID": "6ed504a3-24b8-4ba8-ac1f-7a1780195437",
-          "delegatedVnetName": "test-vnet"
+        "haEnabled": "Enabled",
+        "delegatedSubnetArguments": {
+          "subnetArmResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.Network/virtualNetworks/test-vnet/subnets/test-vnet-subnet"
         },
         "storageProfile": {
           "storageMB": 524288,
           "backupRetentionDays": 7
-        }
+        },
+        "availabilityZone": "1"
       },
       "tags": {
         "ElasticServer": "1"
@@ -36,7 +34,6 @@
       "body": {
         "sku": {
           "tier": "GeneralPurpose",
-          "capacity": 4,
           "name": "Standard_D4s_v3"
         },
         "properties": {
@@ -47,15 +44,21 @@
           "fullyQualifiedDomainName": "pgtestsvc4.postgres.database.azure.com",
           "displayName": "demosingleserver",
           "publicNetworkAccess": "Enabled",
-          "standbyCount": 0,
-          "vnetInjArgs": {
-            "delegatedSubnetName": "test-subnet",
-            "delegatedVnetID": "6ed504a3-24b8-4ba8-ac1f-7a1780195437",
-            "delegatedVnetName": "test-vnet"
+          "haEnabled": "Enabled",
+          "delegatedSubnetArguments": {
+            "subnetArmResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.Network/virtualNetworks/test-vnet/subnets/test-vnet-subnet"
           },
           "storageProfile": {
             "storageMB": 524288,
             "backupRetentionDays": 7
+          },
+          "availabilityZone": "1",
+          "standbyAvailabilityZone": "2",
+          "maintenanceWindow": {
+            "dayOfWeek": 0,
+            "startHour": 0,
+            "startMinute": 0,
+            "customWindow": "Disabled"
           }
         },
         "location": "westus",
@@ -71,7 +74,6 @@
       "body": {
         "sku": {
           "tier": "GeneralPurpose",
-          "capacity": 4,
           "name": "Standard_D4s_v3"
         },
         "properties": {
@@ -82,15 +84,21 @@
           "fullyQualifiedDomainName": "pgtestsvc4.postgres.database.azure.com",
           "displayName": "demosingleserver",
           "publicNetworkAccess": "Enabled",
-          "standbyCount": 0,
-          "vnetInjArgs": {
-            "delegatedSubnetName": "test-subnet",
-            "delegatedVnetID": "6ed504a3-24b8-4ba8-ac1f-7a1780195437",
-            "delegatedVnetName": "test-vnet"
+          "haEnabled": "Enabled",
+          "delegatedSubnetArguments": {
+            "subnetArmResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.Network/virtualNetworks/test-vnet/subnets/test-vnet-subnet"
           },
           "storageProfile": {
             "storageMB": 524288,
             "backupRetentionDays": 7
+          },
+          "availabilityZone": "1",
+          "standbyAvailabilityZone": "2",
+          "maintenanceWindow": {
+            "dayOfWeek": 0,
+            "startHour": 0,
+            "startMinute": 0,
+            "customWindow": "Disabled"
           }
         },
         "location": "westus",
