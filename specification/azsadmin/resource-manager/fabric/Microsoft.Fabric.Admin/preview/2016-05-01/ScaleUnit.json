@@ -59,6 +59,49 @@
         "x-ms-long-running-operation": true
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fabric.Admin/fabricLocations/{location}/scaleUnits/{scaleUnit}/setGpuPartitionSize": {
+      "post": {
+        "x-ms-examples": {
+          "Set GPU partition size.": {
+            "$ref": "./examples/ScaleUnit/SetGpuPartitionSize.json"
+          }
+        },
+        "tags": [
+          "ScaleUnits"
+        ],
+        "description": "Set GPU partition size.",
+        "operationId": "ScaleUnits_SetGPUPartitionSize",
+        "parameters": [
+          {
+            "$ref": "Fabric.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "Fabric.json#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "Fabric.json#/parameters/LocationParameter"
+          },
+          {
+            "$ref": "#/parameters/ScaleUnitParameter"
+          },
+          {
+            "$ref": "#/parameters/GpuPartitionSizeParameter"
+          },
+          {
+            "$ref": "Fabric.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "202": {
+            "description": "ACCEPTED"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fabric.Admin/fabricLocations/{location}/scaleUnits/{scaleUnit}/createFromJson": {
       "post": {
         "x-ms-examples": {
@@ -280,6 +323,27 @@
         "isMultiNode": {
           "description": "Denotes if more than one node in cluster.",
           "type": "boolean"
+        },
+        "gpuEnabled": {
+          "description": "Denotes if GPU is enabled in the cluster.",
+          "type": "boolean"
+        },
+        "gpuPartitionSize": {
+          "description": "GPU partition size.",
+          "type": "int32"
+        },
+        "gpuType": {
+          "description": "Type of GPU.",
+          "enum": [
+            "GPUP",
+            "DDA",
+            "None"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "GpuType"
+          }
         }
       }
     },
@@ -420,6 +484,14 @@
       "in": "path",
       "required": true,
       "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "GpuPartitionSizeParameter": {
+      "name": "gpuPartitionSize",
+      "description": "Number of GPU partitions.",
+      "in": "path",
+      "required": true,
+      "type": "int32",
       "x-ms-parameter-location": "method"
     },
     "ScaleOutScaleUnitParametersInBody": {

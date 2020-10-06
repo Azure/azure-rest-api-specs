@@ -470,9 +470,51 @@
         "capacity": {
           "description": "Capacity of the physical machine.",
           "$ref": "ScaleUnit.json#/definitions/ScaleUnitCapacity"
+        },
+        "gpus": {
+          "description": "GPU list of the physical machine.",
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/GpuModel"
+          }
         }
       }
     },
+    "GpuModel": {
+      "description": "The physical server in a cluster.",
+      "type": "object",
+      "properties": {
+        "hostDriverVersion": {
+          "description": "GPU host driver version.",
+          "type": "string"
+        },
+        "name": {
+          "description": "GPU name.",
+          "type": "string"
+        },
+        "partitionSize": {
+          "description": "GPU partition size.",
+          "type": "int32"
+        },
+        "slotLocation": {
+          "description": "GPU slot location.",
+          "type": "string"
+        },
+        "type": {
+          "description": "Type of GPU.",
+          "enum": [
+            "GPUP",
+            "DDA",
+            "None"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "GpuType"
+          }
+        }
+      },
     "ScaleUnitNodeList": {
       "description": "A pageable list of scale unit nodes.",
       "type": "object",
