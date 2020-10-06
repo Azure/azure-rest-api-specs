@@ -11,12 +11,7 @@ python:
   namespace: azure.mgmt.digitaltwins
   package-name: azure-mgmt-digitaltwins
   clear-output-folder: true
-```
-
-```yaml $(python)
-python:
   no-namespace-folders: true
-  output-folder: $(python-sdks-folder)/digitaltwins/azure-mgmt-digitaltwins/azure/mgmt/digitaltwins
 ```
 
 ### Python multi-api
@@ -37,7 +32,7 @@ Please also specify `--python-sdks-folder=<path to the root directory of your az
 ``` yaml $(tag) == 'package-2020-10' && $(python)
 python:
   namespace: azure.mgmt.digitaltwins.v2020_10_31
-  output-folder: $(python-sdks-folder)/digitaltwins/azure-mgmt-digitaltwins/azure/mgmt/digitaltwins/v2020_10_31_preview
+  output-folder: $(python-sdks-folder)/digitaltwins/azure-mgmt-digitaltwins/azure/mgmt/digitaltwins/v2020_10_31
 ```
 
 ### Tag: package-2020-03-01-preview and python
