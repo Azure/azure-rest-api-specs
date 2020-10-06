@@ -410,11 +410,19 @@
         "firewalls": {
           "type": "array",
           "readOnly": true,
-          "description": "List of references to Azure resources that this IpGroups is associated with.",
+          "description": "List of references to Firewall resources that this IpGroups is associated with.",
           "items": {
             "$ref": "./network.json#/definitions/SubResource"
           }
-        }
+        },
+        "firewallPolicies": {
+         "type": "array",
+         "readOnly": true,
+         "description": "List of references to Firewall Policies resources that this IpGroups is associated with.",
+         "items": {
+           "$ref": "./network.json#/definitions/SubResource"
+         }
+       }
       },
       "description": "The IpGroups property information."
     }
