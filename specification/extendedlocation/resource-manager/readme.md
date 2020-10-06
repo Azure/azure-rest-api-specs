@@ -26,6 +26,7 @@ These are the global settings for the extendedLocation.
 
 ```yaml
 openapi-type: arm
+openapi-subtype: rpaas
 tag: package-2020-10-01-privatepreview
 ```
 
