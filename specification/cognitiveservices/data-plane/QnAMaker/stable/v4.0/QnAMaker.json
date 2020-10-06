@@ -566,11 +566,7 @@
             "$ref": "#/parameters/Environment"
           },
           {
-            "name": "source",
-            "in": "query",
-            "description": "The source property filter to apply. Sample value: Editorial.",
-            "required": false,
-            "type": "string"
+            "$ref": "#/parameters/source"
           }
         ],
         "consumes": [
@@ -1422,6 +1418,15 @@
       "description": "Knowledgebase id.",
       "x-ms-parameter-location": "method"
     },
+    "source": {
+      "type": "string",
+      "name": "source",
+      "in": "query",
+      "required": false,
+      "x-nullable": false,
+      "description": "The source property filter to apply. Sample value: Editorial.",
+      "x-ms-parameter-location": "method"
+    },
     "OperationId": {
       "type": "string",
       "name": "operationId",
@@ -1472,4 +1477,4 @@
       "x-ms-parameter-location": "method"
     }
   }
-}
+  }
