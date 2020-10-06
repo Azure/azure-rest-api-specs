@@ -39,6 +39,14 @@ These settings apply only when `--tag=package-netapp-2020-06-01` is specified on
 input-file:
 - Microsoft.NetApp/stable/2020-06-01/netapp.json
 ```
+### Tag: package-netapp-2020-03-01
+
+These settings apply only when `--tag=package-netapp-2020-03-01` is specified on the command line.
+
+``` yaml $(tag) == 'package-netapp-2020-03-01'
+input-file:
+- Microsoft.NetApp/stable/2020-03-01/netapp.json
+```
 
 ### Tag: package-netapp-2020-02-01
 
