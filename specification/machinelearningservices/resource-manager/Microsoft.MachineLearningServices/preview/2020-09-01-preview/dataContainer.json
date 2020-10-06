@@ -34,7 +34,7 @@
     }
   },
   "paths": {
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/data": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/datacontainers": {
       "get": {
         "tags": [
           "DataContainer"
@@ -51,16 +51,16 @@
         "operationId": "DataContainers_List",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "machineLearningServices.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "machineLearningServices.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+            "$ref": "machineLearningServices.json#/parameters/APIVersionParameter"
           },
           {
             "$ref": "machineLearningServices.json#/parameters/PaginationParameter"
@@ -82,7 +82,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/codes/{name}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/datacontainers/{name}": {
       "delete": {
         "tags": [
           "DataContainer"
@@ -96,16 +96,16 @@
         "operationId": "DataContainers_Delete",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "machineLearningServices.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "machineLearningServices.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+            "$ref": "machineLearningServices.json#/parameters/APIVersionParameter"
           },
           {
             "$ref": "#/parameters/DataContainerNameParameter"
@@ -139,16 +139,16 @@
         "operationId": "DataContainers_Get",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "machineLearningServices.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "machineLearningServices.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+            "$ref": "machineLearningServices.json#/parameters/APIVersionParameter"
           },
           {
             "$ref": "#/parameters/DataContainerNameParameter"
@@ -174,7 +174,7 @@
           "DataContainer"
         ],
         "x-ms-examples": {
-          "Create or update code container": {
+          "Create or update Data Container": {
             "$ref": "./examples/createOrUpdateDataContainer.json"
           }
         },
@@ -182,16 +182,16 @@
         "operationId": "DataContainers_CreateOrUpdate",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "machineLearningServices.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "machineLearningServices.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+            "$ref": "machineLearningServices.json#/parameters/APIVersionParameter"
           },
           {
             "$ref": "#/parameters/DataContainerNameParameter"
@@ -199,7 +199,7 @@
           {
             "in": "body",
             "name": "body",
-            "description": "Data Version entity to create or update.",
+            "description": "Data Container entity to create or update.",
             "schema": {
               "$ref": "#/definitions/AssetContainerResourceRequest"
             }
@@ -252,7 +252,7 @@
           "readOnly": true
         },
         "properties": {
-          "$ref": "#/definitions/DataContainer"
+          "$ref": "#/definitions/AssetContainer"
         },
         "systemData": {
           "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
@@ -278,7 +278,7 @@
       "additionalProperties": false
     },
     "AssetContainer": {
-      "description": "Details of an Data Version",
+      "description": "Details of an Asset Container",
       "type": "object",
       "properties": {
         "description": {
@@ -342,7 +342,7 @@
       "type": "object",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/DataContainer"
+          "$ref": "#/definitions/AssetContainer"
         }
       },
       "additionalProperties": false

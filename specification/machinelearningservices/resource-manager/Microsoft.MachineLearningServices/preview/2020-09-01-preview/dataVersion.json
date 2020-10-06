@@ -40,7 +40,7 @@
           "DataVersion"
         ],
         "x-ms-examples": {
-          "List DataVersions": {
+          "List Data Versions": {
             "$ref": "./examples/listDataVersions.json"
           }
         },
@@ -51,16 +51,16 @@
         "operationId": "DataVersions_List",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "machineLearningServices.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "machineLearningServices.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+            "$ref": "machineLearningServices.json#/parameters/APIVersionParameter"
           },
           {
             "$ref": "machineLearningServices.json#/parameters/PaginationParameter"
@@ -82,7 +82,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/codes/{name}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/data/{name}/versions/{version}": {
       "delete": {
         "tags": [
           "DataVersion"
@@ -92,20 +92,20 @@
             "$ref": "./examples/deleteDataVersion.json"
           }
         },
-        "description": "Delete Data Versions entity.",
+        "description": "Delete Data Version entity.",
         "operationId": "DataVersions_Delete",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "machineLearningServices.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "machineLearningServices.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+            "$ref": "machineLearningServices.json#/parameters/APIVersionParameter"
           },
           {
             "$ref": "#/parameters/DataVersionNameParameter"
@@ -138,20 +138,20 @@
             "$ref": "./examples/getDataVersion.json"
           }
         },
-        "description": "Get code container.",
+        "description": "Get Data Version container.",
         "operationId": "DataVersions_Get",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "machineLearningServices.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "machineLearningServices.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+            "$ref": "machineLearningServices.json#/parameters/APIVersionParameter"
           },
           {
             "$ref": "#/parameters/DataVersionNameParameter"
@@ -180,7 +180,7 @@
           "DataVersion"
         ],
         "x-ms-examples": {
-          "Create or update code container": {
+          "Create or update Data Version": {
             "$ref": "./examples/createOrUpdateDataVersion.json"
           }
         },
@@ -188,16 +188,16 @@
         "operationId": "DataVersions_CreateOrUpdate",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "machineLearningServices.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "machineLearningServices.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+            "$ref": "machineLearningServices.json#/parameters/APIVersionParameter"
           },
           {
             "$ref": "#/parameters/DataVersionNameParameter"
@@ -242,15 +242,15 @@
       "in": "path",
       "name": "name",
       "type": "string",
-      "description": "Data Version identifier.",
+      "description": "Data Version Name identifier.",
       "required": true,
       "x-ms-parameter-location": "method"
     },
     "DataVersionVersionsParameter": {
       "in": "path",
-      "name": "name",
+      "name": "version",
       "type": "string",
-      "description": "Data Version identifier.",
+      "description": "Data Version Version identifier.",
       "required": true,
       "x-ms-parameter-location": "method"
     }
