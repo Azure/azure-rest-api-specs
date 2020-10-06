@@ -1071,14 +1071,11 @@
             "description": "OK -- Get the blob inventory policies successfully.",
             "schema": {
               "$ref": "#/definitions/ListBlobInventoryPolicy"
-            },
-            "default": {
-              "description": "Error response describing why the operation failed.",
-              "schema": {
-                "$ref": "#/definitions/ErrorResponse"
-              }
             }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
         }
       }
     },
@@ -3977,7 +3974,7 @@
           "items": {
             "$ref": "#/definitions/BlobInventoryPolicy"
           },
-          "description": "List of blob inventory polcies returned.",
+          "description": "List of blob inventory policies returned.",
           "readOnly": true
         }
       }
