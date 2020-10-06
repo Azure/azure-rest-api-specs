@@ -7,31 +7,33 @@
     "api-version": "2020-08-01-preview",
     "monitor": "true",
     "properties": {
-      "policy": {
-        "enabled": true,
-        "type": "Inventory",
-        "destination": "containerName",
-        "rules": [
-          {
-            "enabled": true,
-            "name": "inventoryPolicyRule1",
-            "definition": {
-              "filters": {
-                "blobTypes": [
-                  "blockBlob",
-                  "appendBlob",
-                  "pageBlob"
-                ],
-                "prefixMatch": [
-                  "inventoryprefix1",
-                  "inventoryprefix2"
-                ],
-                "includeSnapshots": true,
-                "includeBlobVersions": true
+      "properties": {
+        "policy": {
+          "enabled": true,
+          "type": "Inventory",
+          "destination": "containerName",
+          "rules": [
+            {
+              "enabled": true,
+              "name": "inventoryPolicyRule1",
+              "definition": {
+                "filters": {
+                  "blobTypes": [
+                    "blockBlob",
+                    "appendBlob",
+                    "pageBlob"
+                  ],
+                  "prefixMatch": [
+                    "inventoryprefix1",
+                    "inventoryprefix2"
+                  ],
+                  "includeSnapshots": true,
+                  "includeBlobVersions": true
+                }
               }
             }
-          }
-        ]
+          ]
+        }
       }
     }
   },
