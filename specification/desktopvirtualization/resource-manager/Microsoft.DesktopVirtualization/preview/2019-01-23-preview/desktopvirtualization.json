@@ -1302,6 +1302,303 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/hostpools/{hostPoolName}/msixPackages/{msixPackageFullName}": {
+      "get": {
+        "tags": [
+          "MSIXPackage"
+        ],
+        "operationId": "MSIXPackages_Get",
+        "description": "Get a msixpackage.",
+        "x-ms-examples": {
+          "MSIXPackage_Get": {
+            "$ref": "./examples/MSIXPackage_Get.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/HostPoolNameParameter"
+          },
+          {
+            "$ref": "#/parameters/MSIXPackageFullNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved MSIX Package.",
+            "schema": {
+              "$ref": "#/definitions/MSIXPackage"
+            }
+          },
+          "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "MSIXPackage"
+        ],
+        "operationId": "MSIXPackages_CreateOrUpdate",
+        "description": "Create or update a MSIX package.",
+        "x-ms-examples": {
+          "MSIXPackage_Create": {
+            "$ref": "./examples/MSIXPackage_Create.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/HostPoolNameParameter"
+          },
+          {
+            "$ref": "#/parameters/MSIXPackageFullNameParameter"
+          },
+          {
+            "name": "msixPackage",
+            "description": "Object containing  MSIX Package definitions.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/MSIXPackage"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully updated  MSIX Package.",
+            "schema": {
+              "$ref": "#/definitions/MSIXPackage"
+            }
+          },
+          "201": {
+            "description": "Successfully created  MSIX Package.",
+            "schema": {
+              "$ref": "#/definitions/MSIXPackage"
+            }
+          },
+          "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "MSIXPackage"
+        ],
+        "operationId": "MSIXPackages_Delete",
+        "description": "Remove an MSIX Package.",
+        "x-ms-examples": {
+          "MSIXPackage_Delete": {
+            "$ref": "./examples/MSIXPackage_Delete.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/HostPoolNameParameter"
+          },
+          {
+            "$ref": "#/parameters/MSIXPackageFullNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully removed MSIX Package."
+          },
+          "204": {
+            "description": "MSIX Package does not exist."
+          },
+          "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "MSIXPackage"
+        ],
+        "operationId": "MSIXPackages_Update",
+        "description": "Update an  MSIX Package.",
+        "x-ms-examples": {
+          "MSIXPackage_Update": {
+            "$ref": "./examples/MSIXPackage_Update.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/HostPoolNameParameter"
+          },
+          {
+            "$ref": "#/parameters/MSIXPackageFullNameParameter"
+          },
+          {
+            "name": "msixPackage",
+            "description": "Object containing MSIX Package definitions.",
+            "in": "body",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/MSIXPackagePatch"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully updated MSIX Package.",
+            "schema": {
+              "$ref": "#/definitions/MSIXPackage"
+            }
+          },
+          "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/hostpools/{hostPoolName}/msixPackages": {
+      "get": {
+        "tags": [
+          "MSIXPackage"
+        ],
+        "operationId": "MSIXPackages_List",
+        "description": "List MSIX packages in hostpool.",
+        "x-ms-examples": {
+          "MSIXPackage_List": {
+            "$ref": "./examples/MSIXPackage_List.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/HostPoolNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved MSIX Packages in hostpool.",
+            "schema": {
+              "$ref": "#/definitions/MSIXPackageList"
+            }
+          },
+          "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/hostpools/{hostPoolName}/expandMsixImage": {
+      "post": {
+        "tags": [
+          "MsixImage"
+        ],
+        "operationId": "MsixImages_Expand",
+        "description": "Expands and Lists MSIX packages in an Image, given the Image Path.",
+        "x-ms-examples": {
+          "MsixImage_Expand": {
+            "$ref": "./examples/MsixImage_Expand_Post.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/HostPoolNameParameter"
+          },
+          {
+            "name": "msixImageURI",
+            "description": "Object containing URI to MSIX Image",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/MSIXImageURI"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved MSIX packages in specified Image Path.",
+            "schema": {
+              "$ref": "#/definitions/ExpandMsixImageList"
+            }
+          },
+          "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/hostPools/{hostPoolName}/userSessions": {
       "get": {
         "tags": [
@@ -2345,6 +2642,208 @@
         }
       }
     },
+    "MSIXPackage": {
+      "description": "Schema for MSIX Package properties.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/Resource"
+        }
+      ],
+      "required": [
+        "properties"
+      ],
+      "properties": {
+        "properties": {
+          "description": "Detailed properties for MSIX Package",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/MSIXPackageProperties",
+          "x-nullable": false
+        }
+      }
+    },
+    "MSIXPackageProperties": {
+      "description": "Schema for MSIX Package properties.",
+      "type": "object",
+      "properties": {
+        "imagePath": {
+          "type": "string",
+          "description": "VHD/CIM image path on Network Share.",
+          "x-nullable": false
+        },
+        "packageName": {
+          "type": "string",
+          "description": "Package Name from appxmanifest.xml. ",
+          "x-nullable": false
+        },
+        "packageFamilyName": {
+          "type": "string",
+          "description": "Package Family Name from appxmanifest.xml. Contains Package Name and Publisher name. ",
+          "x-nullable": false
+        },
+        "displayName": {
+          "type": "string",
+          "description": "User friendly Name to be displayed in the portal. ",
+          "x-nullable": true
+        },
+        "packageRelativePath": {
+          "type": "string",
+          "description": "Relative Path to the package inside the image. ",
+          "x-nullable": false
+        },
+        "isRegularRegistration": {
+          "type": "boolean",
+          "description": "Specifies how to register Package in feed.",
+          "x-nullable": false
+        },
+        "isActive": {
+          "type": "boolean",
+          "description": "Make this version of the package the active one across the hostpool. ",
+          "x-nullable": false
+        },
+        "packageDependencies": {
+          "type": "array",
+          "description": "List of package dependencies. ",
+          "items": {
+            "$ref": "#/definitions/MsixPackageDependencies"
+          }
+        },
+        "version": {
+          "type": "string",
+          "description": "Package Version found in the appxmanifest.xml. ",
+          "x-nullable": false
+        },
+        "lastUpdated": {
+          "format": "date-time",
+          "type": "string",
+          "description": "Date Package was last updated, found in the appxmanifest.xml. ",
+          "x-nullable": false
+        },
+        "packageApplications": {
+          "type": "array",
+          "description": "List of package applications. ",
+          "items": {
+            "$ref": "#/definitions/MsixPackageApplications"
+          },
+          "x-nullable": false
+        }
+      }
+    },
+    "MSIXPackagePatch": {
+      "type": "object",
+      "description": "MSIX Package properties that can be patched.",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "Detailed properties for MSIX Package",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/MSIXPackagePatchProperties"
+        }
+      }
+    },
+    "MSIXPackagePatchProperties": {
+      "description": "MSIX Package properties that can be patched.",
+      "type": "object",
+      "properties": {
+        "isActive": {
+          "type": "boolean",
+          "description": "Set a version of the package to be active across hostpool. "
+        },
+        "isRegularRegistration": {
+          "type": "boolean",
+          "description": "Set Registration mode. Regular or Delayed."
+        },
+        "displayName": {
+          "type": "string",
+          "description": "Display name for MSIX Package."
+        }
+      }
+    },
+    "MsixPackageApplications": {
+      "description": "Schema for MSIX Package Application properties.",
+      "type": "object",
+      "properties": {
+        "appId": {
+          "type": "string",
+          "description": "Package Application Id, found in appxmanifest.xml.",
+          "x-nullable": false
+        },
+        "description": {
+          "type": "string",
+          "description": "Description of Package Application.",
+          "x-nullable": false
+        },
+        "appUserModelID": {
+          "type": "string",
+          "description": "Used to activate Package Application. Consists of Package Name and ApplicationID. Found in appxmanifest.xml.",
+          "x-nullable": false
+        },
+        "friendlyName": {
+          "type": "string",
+          "description": "User friendly name.",
+          "x-nullable": false
+        },
+        "iconImageName": {
+          "type": "string",
+          "description": "User friendly name.",
+          "x-nullable": false
+        },
+        "rawIcon": {
+          "type": "string",
+          "format": "byte",
+          "description": "the icon a 64 bit string as a byte array."
+        },
+        "rawPng": {
+          "type": "string",
+          "format": "byte",
+          "description": "the icon a 64 bit string as a byte array."
+        }
+      }
+    },
+    "MsixPackageDependencies": {
+      "description": "Schema for MSIX Package Dependencies properties.",
+      "type": "object",
+      "properties": {
+        "dependencyName": {
+          "type": "string",
+          "description": "Name of package dependency.",
+          "x-nullable": false
+        },
+        "publisher": {
+          "type": "string",
+          "description": "Name of dependency publisher.",
+          "x-nullable": false
+        },
+        "minVersion": {
+          "type": "string",
+          "description": "Dependency version required.",
+          "x-nullable": false
+        }
+      }
+    },
+    "MSIXPackageList": {
+      "type": "object",
+      "title": "MsixPackageList",
+      "description": "List of MSIX Package definitions.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "List of MSIX Package definitions.",
+          "items": {
+            "$ref": "#/definitions/MSIXPackage"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Link to the next page of results."
+        }
+      }
+    },
     "Application": {
       "description": "Schema for Application properties.",
       "type": "object",
@@ -2382,6 +2881,28 @@
         "filePath": {
           "type": "string",
           "description": "Specifies a path for the executable file for the application."
+        },
+        "msixPackageFamilyName": {
+          "type": "string",
+          "description": "Specifies the package Family name for MSIX applications",
+          "x-nullable": true
+        },
+        "msixPackageApplicationId": {
+          "type": "string",
+          "description": "Specifies the package application Id for MSIX applications",
+          "x-nullable": true
+        },
+        "applicationType": {
+          "enum": [
+            "InBuilt",
+            "MsixApplication"
+          ],
+          "x-ms-enum": {
+            "name": "ApplicationType",
+            "modelAsString": true
+          },
+          "type": "string",
+          "description": "Resource Type of Application."
         },
         "commandLineSetting": {
           "enum": [
@@ -2661,6 +3182,128 @@
         }
       }
     },
+    "ExpandMsixImageProperties": {
+      "description": "Schema for Expand MSIX Image properties.",
+      "type": "object",
+      "properties": {
+        "packageAlias": {
+          "type": "string",
+          "description": "Alias of MSIX Package."
+        },
+        "imagePath": {
+          "type": "string",
+          "description": "VHD/CIM image path on Network Share.",
+          "x-nullable": false
+        },
+        "packageName": {
+          "type": "string",
+          "description": "Package Name from appxmanifest.xml. ",
+          "x-nullable": false
+        },
+        "packageFamilyName": {
+          "type": "string",
+          "description": "Package Family Name from appxmanifest.xml. Contains Package Name and Publisher name. ",
+          "x-nullable": false
+        },
+        "packageFullName": {
+          "type": "string",
+          "description": "Package Full Name from appxmanifest.xml. ",
+          "x-nullable": false
+        },
+        "displayName": {
+          "type": "string",
+          "description": "User friendly Name to be displayed in the portal. ",
+          "x-nullable": true
+        },
+        "packageRelativePath": {
+          "type": "string",
+          "description": "Relative Path to the package inside the image. ",
+          "x-nullable": false
+        },
+        "isRegularRegistration": {
+          "type": "boolean",
+          "description": "Specifies how to register Package in feed.",
+          "x-nullable": false
+        },
+        "isActive": {
+          "type": "boolean",
+          "description": "Make this version of the package the active one across the hostpool. ",
+          "x-nullable": false
+        },
+        "packageDependencies": {
+          "type": "array",
+          "description": "List of package dependencies. ",
+          "items": {
+            "$ref": "#/definitions/MsixPackageDependencies"
+          },
+          "x-nullable": true
+        },
+        "version": {
+          "type": "string",
+          "description": "Package Version found in the appxmanifest.xml. ",
+          "x-nullable": false
+        },
+        "lastUpdated": {
+          "format": "date-time",
+          "type": "string",
+          "description": "Date Package was last updated, found in the appxmanifest.xml. ",
+          "x-nullable": false
+        },
+        "packageApplications": {
+          "type": "array",
+          "description": "List of package applications. ",
+          "items": {
+            "$ref": "#/definitions/MsixPackageApplications"
+          },
+          "x-nullable": false
+        }
+      }
+    },
+    "ExpandMsixImage": {
+      "type": "object",
+      "description": "Represents the definition of contents retrieved after expanding the MSIX Image. ",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "Detailed properties for ExpandMsixImage",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ExpandMsixImageProperties"
+        }
+      }
+    },
+    "ExpandMsixImageList": {
+      "type": "object",
+      "title": "ExpandMsixImageList",
+      "description": "List of MSIX package properties retrieved from MSIX Image expansion.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "List of MSIX package properties from give MSIX Image.",
+          "items": {
+            "$ref": "#/definitions/ExpandMsixImage"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Link to the next page of results."
+        }
+      }
+    },
+    "MSIXImageURI": {
+      "description": "Represents URI referring to MSIX Image",
+      "type": "object",
+      "properties": {
+        "uri": {
+          "type": "string",
+          "description": "URI to Image"
+        }
+      }
+    },
     "SessionHost": {
       "type": "object",
       "description": "Represents a SessionHost definition.",
@@ -2912,6 +3555,16 @@
       "minLength": 3,
       "x-ms-parameter-location": "method"
     },
+    "MSIXPackageFullNameParameter": {
+      "name": "msixPackageFullName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The version specific package full name of the MSIX package within specific hostpool",
+      "maxLength": 100,
+      "minLength": 3,
+      "x-ms-parameter-location": "method"
+    },
     "ApplicationGroupNameParameter": {
       "name": "applicationGroupName",
       "in": "path",
@@ -2979,6 +3632,16 @@
       "type": "string",
       "description": "The name of the start menu item within the specified host pool",
       "maxLength": 24,
+      "minLength": 3,
+      "x-ms-parameter-location": "method"
+    },
+    "MSIXImageURIParameter": {
+      "name": "msixImageURI",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "URI to the MSIX Image (VHD/CIM).",
+      "maxLength": 100,
       "minLength": 3,
       "x-ms-parameter-location": "method"
     }
