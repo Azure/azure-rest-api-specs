@@ -31,7 +31,7 @@
     "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Kubernetes/connectedClusters/{clusterName}": {
       "put": {
         "summary": "Register a new Kubernetes cluster with Azure Resource Manager.",
-        "operationId": "ConnectedClusters_Create",
+        "operationId": "ConnectedCluster_Create",
         "description": "API to register a new Kubernetes cluster and create a tracked resource in Azure Resource Manager (ARM).",
         "consumes": [
           "application/json"
@@ -94,7 +94,7 @@
       },
       "patch": {
         "summary": "Updates a connected cluster.",
-        "operationId": "ConnectedClusters_Update",
+        "operationId": "ConnectedCluster_Update",
         "description": "API to update certain properties of the connected cluster resource",
         "consumes": [
           "application/json"
@@ -147,7 +147,7 @@
       },
       "get": {
         "summary": "Get the properties of the specified connected cluster.",
-        "operationId": "ConnectedClusters_Get",
+        "operationId": "ConnectedCluster_Get",
         "description": "Returns the properties of the specified connected cluster, including name, identity, properties, and additional cluster details.",
         "produces": [
           "application/json"
@@ -188,7 +188,7 @@
       },
       "delete": {
         "summary": "Delete a connected cluster.",
-        "operationId": "ConnectedClusters_Delete",
+        "operationId": "ConnectedCluster_Delete",
         "description": "Delete a connected cluster, removing the tracked resource in Azure Resource Manager (ARM).",
         "produces": [
           "application/json"
@@ -238,7 +238,7 @@
     "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Kubernetes/connectedClusters/{clusterName}/listClusterUserCredentials": {
       "post": {
         "summary": "Gets cluster user credentials of a connected cluster",
-        "operationId": "ConnectedClusters_ListClusterUserCredentials",
+        "operationId": "ConnectedCluster_ListClusterUserCredentials",
         "description": "Gets cluster user credentials of the connected cluster with a specified resource group and name.",
         "produces": [
           "application/json"
@@ -293,7 +293,7 @@
     "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Kubernetes/connectedClusters": {
       "get": {
         "summary": "Lists all connected clusters",
-        "operationId": "ConnectedClusters_ListByResourceGroup",
+        "operationId": "ConnectedCluster_ListByResourceGroup",
         "description": "API to enumerate registered connected K8s clusters under a Resource Group",
         "produces": [
           "application/json"
@@ -336,7 +336,7 @@
     "/subscriptions/{subscriptionId}/providers/Microsoft.Kubernetes/connectedClusters": {
       "get": {
         "summary": "Lists all connected clusters",
-        "operationId": "ConnectedClusters_ListBySubscription",
+        "operationId": "ConnectedCluster_ListBySubscription",
         "description": "API to enumerate registered connected K8s clusters under a Subscription",
         "produces": [
           "application/json"
@@ -376,7 +376,7 @@
     "/providers/Microsoft.Kubernetes/operations": {
       "get": {
         "description": "Lists all of the available API operations for Connected Cluster resource.",
-        "operationId": "Operations_List",
+        "operationId": "Operations_Get",
         "produces": [
           "application/json"
         ],
