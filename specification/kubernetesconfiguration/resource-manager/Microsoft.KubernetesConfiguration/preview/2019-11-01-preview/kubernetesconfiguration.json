@@ -562,7 +562,14 @@
             },
             "operatorType": {
               "description": "Type of the operator",
-              "$ref": "#/definitions/OperatorTypeDefinition"
+              "type": "string",
+              "enum": [
+                "Flux"
+              ],
+              "x-ms-enum": {
+                "name": "operatorType",
+                "modelAsString": true
+              }
             },
             "operatorParams": {
               "description": "Any Parameters for the Operator instance in string format.",
@@ -575,7 +582,16 @@
             },
             "operatorScope": {
               "description": "Scope at which the operator will be installed.",
-              "$ref": "#/definitions/OperatorScopeDefinition"
+              "type": "string",
+              "enum": [
+                "cluster",
+                "namespace"
+              ],
+              "default": "cluster",
+              "x-ms-enum": {
+                "name": "operatorScope",
+                "modelAsString": true
+              }
             },
             "repositoryPublicKey": {
               "description": "Public Key associated with this SourceControl configuration (either generated within the cluster or provided by the user).",
@@ -588,7 +604,15 @@
             },
             "enableHelmOperator": {
               "description": "Option to enable Helm Operator for this git configuration.",
-              "$ref": "#/definitions/EnableHelmOperatorDefinition"
+              "type": "string",
+              "enum": [
+                "true",
+                "false"
+              ],
+              "x-ms-enum": {
+                "name": "enableHelmOperator",
+                "modelAsString": true
+              }
             },
             "helmOperatorProperties": {
               "description": "Properties for Helm operator.",
