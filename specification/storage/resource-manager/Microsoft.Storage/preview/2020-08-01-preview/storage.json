@@ -934,6 +934,12 @@
             "description": "OK -- Get the blob inventory policy successfully.",
             "schema": {
               "$ref": "#/definitions/BlobInventoryPolicy"
+            },
+            "default": {
+              "description": "Error response describing why the operation failed.",
+              "schema": {
+                "$ref": "#/definitions/ErrorResponse"
+              }
             }
           }
         }
@@ -981,6 +987,12 @@
             "schema": {
               "$ref": "#/definitions/BlobInventoryPolicy"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         }
       },
@@ -1018,6 +1030,54 @@
           },
           "204": {
             "description": "No Content -- The blob inventory policy does not exist."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/inventoryPolicies": {
+      "get": {
+        "tags": [
+          "BlobInventoryPolicies"
+        ],
+        "operationId": "BlobInventoryPolicies_List",
+        "description": "Gets the blob inventory policy associated with the specified storage account.",
+        "x-ms-examples": {
+          "StorageAccountGetBlobInventoryPolicy": {
+            "$ref": "./examples/StorageAccountListBlobInventoryPolicy.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/StorageAccountName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK -- Get the blob inventory policies successfully.",
+            "schema": {
+              "$ref": "#/definitions/ListBlobInventoryPolicy"
+            },
+            "default": {
+              "description": "Error response describing why the operation failed.",
+              "schema": {
+                "$ref": "#/definitions/ErrorResponse"
+              }
+            }
           }
         }
       }
@@ -3909,6 +3969,18 @@
         }
       },
       "description": "Filters limit replication to a subset of blobs within the storage account. A logical OR is performed on values in the filter. If multiple filters are defined, a logical AND is performed on all filters."
+    },
+    "ListBlobInventoryPolicy": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/BlobInventoryPolicy"
+          },
+          "description": "List of blob inventory polcies returned.",
+          "readOnly": true
+        }
+      }
     },
     "BlobInventoryPolicy": {
       "properties": {
