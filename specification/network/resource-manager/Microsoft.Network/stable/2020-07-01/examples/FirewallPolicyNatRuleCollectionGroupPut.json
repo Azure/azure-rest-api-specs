@@ -10,27 +10,31 @@
         "priority": 100,
         "ruleCollections": [
           {
-            "ruleCollectionType": "FirewallPolicyFilterRuleCollection",
-            "name": "Example-Filter-Rule-Collection",
+            "ruleCollectionType": "FirewallPolicyNatRuleCollection",
             "priority": 100,
+            "name": "Example-Nat-Rule-Collection",
             "action": {
-              "type": "Deny"
+              "type": "DNAT"
             },
             "rules": [
               {
-                "ruleType": "NetworkRule",
-                "name": "network-rule1",
-                "sourceAddresses": [
-                  "10.1.25.0/24"
-                ],
-                "destinationAddresses": [
-                  "*"
-                ],
+                "ruleType": "NatRule",
+                "name": "nat-rule1",
+                "translatedFqdn": "internalhttp.server.net",
+                "translatedPort": "8080",
                 "ipProtocols": [
-                  "TCP"
+                  "TCP",
+                  "UDP"
+                ],
+                "sourceAddresses": [
+                  "2.2.2.2"
+                ],
+                "sourceIpGroups": [],
+                "destinationAddresses": [
+                  "152.23.32.23"
                 ],
                 "destinationPorts": [
-                  "*"
+                  "8080"
                 ]
               }
             ]
@@ -50,27 +54,31 @@
           "priority": 100,
           "ruleCollections": [
             {
-              "ruleCollectionType": "FirewallPolicyFilterRuleCollection",
-              "name": "Example-Filter-Rule-Collection",
+              "ruleCollectionType": "FirewallPolicyNatRuleCollection",
+              "name": "Example-Nat-Rule-Collection",
               "priority": 100,
               "action": {
-                "type": "Deny"
+                "type": "DNAT"
               },
               "rules": [
                 {
-                  "ruleType": "NetworkRule",
-                  "name": "network-rule1",
-                  "sourceAddresses": [
-                    "10.1.25.0/24"
-                  ],
-                  "destinationAddresses": [
-                    "*"
-                  ],
+                  "ruleType": "NatRule",
+                  "name": "nat-rule1",
+                  "translatedFqdn": "internalhttp.server.net",
+                  "translatedPort": "8080",
                   "ipProtocols": [
-                    "TCP"
+                    "TCP",
+                    "UDP"
+                  ],
+                  "sourceAddresses": [
+                    "2.2.2.2"
+                  ],
+                  "sourceIpGroups": [],
+                  "destinationAddresses": [
+                    "152.23.32.23"
                   ],
                   "destinationPorts": [
-                    "*"
+                    "8080"
                   ]
                 }
               ]
@@ -86,30 +94,33 @@
         "etag": "w/\\00000000-0000-0000-0000-000000000000\\",
         "properties": {
           "provisioningState": "Succeeded",
-          "priority": 100,
           "ruleCollections": [
             {
-              "ruleCollectionType": "FirewallPolicyFilterRuleCollection",
-              "name": "Example-Filter-Rule-Collection",
+              "ruleCollectionType": "FirewallPolicyNatRuleCollection",
+              "name": "Example-Nat-Rule-Collection",
               "priority": 100,
               "action": {
-                "type": "Deny"
+                "type": "DNAT"
               },
               "rules": [
                 {
-                  "ruleType": "NetworkRule",
-                  "name": "network-rule1",
-                  "sourceAddresses": [
-                    "10.1.25.0/24"
-                  ],
-                  "destinationAddresses": [
-                    "*"
-                  ],
+                  "ruleType": "NatRule",
+                  "name": "nat-rule1",
+                  "translatedFqdn": "internalhttp.server.net",
+                  "translatedPort": "8080",
                   "ipProtocols": [
-                    "TCP"
+                    "TCP",
+                    "UDP"
+                  ],
+                  "sourceAddresses": [
+                    "2.2.2.2"
+                  ],
+                  "sourceIpGroups": [],
+                  "destinationAddresses": [
+                    "152.23.32.23"
                   ],
                   "destinationPorts": [
-                    "*"
+                    "8080"
                   ]
                 }
               ]

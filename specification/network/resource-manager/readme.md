@@ -44,6 +44,7 @@ input-file:
   - Microsoft.Network/stable/2020-07-01/availableServiceAliases.json
   - Microsoft.Network/stable/2020-07-01/azureFirewall.json
   - Microsoft.Network/stable/2020-07-01/azureFirewallFqdnTag.json
+  - Microsoft.Network/stable/2020-07-01/azureWebCategory.json
   - Microsoft.Network/stable/2020-07-01/bastionHost.json
   - Microsoft.Network/stable/2020-07-01/checkDnsAvailability.json
   - Microsoft.Network/stable/2020-07-01/customIpPrefix.json
