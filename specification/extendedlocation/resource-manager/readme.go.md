@@ -18,7 +18,7 @@ batch:
 ### Tag: package-2020-10-01-privatepreview and go
 
 These settings apply only when `--tag=package-2020-10-01-privatepreview --go` is specified on the command line.
-Please also specify `--go-sdks-folder=<path to the root directory of your azure-sdk-for-go clone>`.
+Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
 
 ```yaml $(tag) == 'package-2020-10-01-privatepreview' && $(go)
 namespace: extendedlocation
