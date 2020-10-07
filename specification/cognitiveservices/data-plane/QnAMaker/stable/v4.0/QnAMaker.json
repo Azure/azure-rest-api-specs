@@ -176,7 +176,12 @@
         "operationId": "Alterations_Get",
         "parameters": [
         {
+          "schema": {
             "$ref": "#/parameters/AlterationsKbId"
+          },
+          "required": false,
+          "in": "path",
+          "name": "kbId"
         }
       ],
         "consumes": [
@@ -1592,7 +1597,7 @@
           "description": "Answer span object of QnA with respect to user's question.",
           "allOf": [
             {
-              "$ref": "#definitions/AnswerSpanResponseDTO"
+              "$ref": "#/definitions/AnswerSpanResponseDTO"
             }
           ]
         }
