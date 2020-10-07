@@ -18,7 +18,7 @@
     }
   ],
   "x-ms-parameterized-host": {
-    "hostTemplate": "{RuntimeEndpoint}/qnamaker/v5.0-preview.1",
+    "hostTemplate": "{RuntimeEndpoint}/qnamaker",
     "useSchemePrefix": false,
     "parameters": [
       {
@@ -379,14 +379,6 @@
             "AND",
             "OR"
           ]
-        },
-        "answerSpanRequest": {
-          "description": "To enable/configure answer span prediction.",
-          "allOf": [
-            {
-              "$ref": "#/definitions/AnswerSpanRequestDTO"
-            }
-          ]
         }
       }
     },
@@ -501,24 +493,6 @@
           "format": "int32"
         }
       }
-    },
-    "AnswerSpanRequestDTO": {
-      "type": "object",
-      "description": "To use Answer Span prediction feature.",
-      "additionalProperties": false,
-      "properties": {
-        "Enable": {
-          "type": "boolean",
-          "description": "To enable Answer Span prediction feature."
-        },
-        "TopAnswersWithSpan": {
-          "type": "integer",
-          "description": "Number of top answers where span needs to be predicted",
-          "format": "int32",
-          "maximum": 10,
-          "minimum": 1
-        }
-      }
     }
   },
   "parameters": {
@@ -531,22 +505,14 @@
       "description": "Knowledgebase id.",
       "x-ms-parameter-location": "method"
     },
-    "Environment": {
-      "type": "string",
-      "name": "environment",
-      "in": "path",
+    "RuntimeEndpoint": {
+      "name": "RuntimeEndpoint",
+      "description": "QnA Maker App Service endpoint (for example: https://{qnaservice-hostname}.azurewebsites.net).",
+      "x-ms-parameter-location": "client",
       "required": true,
-      "x-nullable": false,
-      "description": "Specifies whether environment is Test or Prod.",
-      "x-ms-enum": {
-        "name": "EnvironmentType",
-        "modelAsString": true
-      },
-      "enum": [
-        "Prod",
-        "Test"
-      ],
-      "x-ms-parameter-location": "method"
+      "type": "string",
+      "in": "path",
+      "x-ms-skip-url-encoding": true
     },
     "GenerateAnswerPayload": {
       "name": "generateAnswerPayload",
