@@ -1,0 +1,46 @@
+{
+  "parameters": {
+    "endpoint": "exampleWorkspace.dev.azuresynapse.net",
+    "api-version": "2020-01-01-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg/providers/Microsoft.Synapse/workspaces/exampleWorkspace",
+        "location": "southeastasia",
+        "name": "exampleWorkspace",
+        "type": "Microsoft.Synapse/workspaces",
+        "identity": {
+          "type": "SystemAssigned",
+          "principalId": "00000000-0000-0000-0000-000000000000",
+          "tenantId": "00000000-0000-0000-0000-000000000000"
+        },
+        "tags": {},
+        "properties": {
+          "connectivityEndpoints": {
+            "web": "https://web.azuresynapse.net?workspace=%2fsubscriptions%2f00000000-0000-0000-0000-000000000000%2fresourceGroups%2frg%2fproviders%2fMicrosoft.Synapse%2fworkspaces%2fexampleWorkspace",
+            "sql": "exampleWorkspace.sql.azuresynapse.net",
+            "dev": "https://exampleWorkspace.dev.azuresynapse.net",
+            "sqlOnDemand": "exampleWorkspace-ondemand.sql.azuresynapse.net"
+          },
+          "managedResourceGroupName": "workspacemanagedrg-1a992746-f580-4fce-a696-b0373bc6959a",
+          "defaultDataLakeStorage": {
+            "accountUrl": "https://exampleWorkspacedfs.dfs.core.windows.net",
+            "filesystem": "synapse"
+          },
+          "sqlAdministratorLogin": "sqladminuser",
+          "privateEndpointConnections": [],
+          "provisioningState": "Succeeded"
+        }
+      }
+    },
+    "default": {
+      "body": {
+        "error": {
+          "code": "Error code",
+          "message": "Error message"
+        }
+      }
+    }
+  }
+}

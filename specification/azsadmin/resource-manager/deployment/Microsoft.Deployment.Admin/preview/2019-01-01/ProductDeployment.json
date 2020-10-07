@@ -42,6 +42,12 @@
             "schema": {
               "$ref": "#/definitions/ProductDeploymentsList"
             }
+          },
+          "default": {
+            "description": "Default Response.",
+            "schema": {
+              "$ref": "Deployment.json#/definitions/ExtendedErrorInfo"
+            }
           }
         },
         "x-ms-pageable": {
@@ -79,8 +85,11 @@
               "$ref": "#/definitions/ProductDeploymentResourceEntity"
             }
           },
-          "404": {
-            "description": "NOT FOUND"
+          "default": {
+            "description": "Default Response.",
+            "schema": {
+              "$ref": "Deployment.json#/definitions/ExtendedErrorInfo"
+            }
           }
         }
       }
@@ -96,7 +105,7 @@
         "tags": [
           "ProductDeployments"
         ],
-        "operationId": "ProductDeployments_BootStrap",
+        "operationId": "BootstrapAction_Product",
         "parameters": [
           {
             "$ref": "Deployment.json#/parameters/SubscriptionIdParameter"
@@ -117,6 +126,12 @@
           },
           "202": {
             "description": "ACCEPTED"
+          },
+          "default": {
+            "description": "Default Response.",
+            "schema": {
+              "$ref": "Deployment.json#/definitions/ExtendedErrorInfo"
+            }
           }
         },
         "x-ms-long-running-operation": true
@@ -133,7 +148,7 @@
         "tags": [
           "ProductDeployments"
         ],
-        "operationId": "ProductDeployments_Deploy",
+        "operationId": "DeployAction_Product",
         "parameters": [
           {
             "$ref": "Deployment.json#/parameters/SubscriptionIdParameter"
@@ -154,6 +169,12 @@
           },
           "202": {
             "description": "ACCEPTED"
+          },
+          "default": {
+            "description": "Default Response.",
+            "schema": {
+              "$ref": "Deployment.json#/definitions/ExtendedErrorInfo"
+            }
           }
         },
         "x-ms-long-running-operation": true
@@ -170,7 +191,7 @@
         "tags": [
           "ProductDeployments"
         ],
-        "operationId": "ProductDeployments_Remove",
+        "operationId": "RemoveAction_Product",
         "parameters": [
           {
             "$ref": "Deployment.json#/parameters/SubscriptionIdParameter"
@@ -188,6 +209,15 @@
           },
           "202": {
             "description": "ACCEPTED"
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Default Response.",
+            "schema": {
+              "$ref": "Deployment.json#/definitions/ExtendedErrorInfo"
+            }
           }
         },
         "x-ms-long-running-operation": true
@@ -204,7 +234,7 @@
         "tags": [
           "ProductDeployments"
         ],
-        "operationId": "ProductDeployments_RotateSecrets",
+        "operationId": "RotateSecretsAction_Product",
         "parameters": [
           {
             "$ref": "Deployment.json#/parameters/SubscriptionIdParameter"
@@ -222,56 +252,29 @@
           },
           "202": {
             "description": "ACCEPTED"
+          },
+          "default": {
+            "description": "Default Response.",
+            "schema": {
+              "$ref": "Deployment.json#/definitions/ExtendedErrorInfo"
+            }
           }
         },
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Deployment.Admin/locations/global/productDeployments/{productId}/unlock": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Deployment.Admin/locations/global/productDeployments/{productId}/executeRunner": {
       "post": {
         "x-ms-examples": {
-          "Unlocks the product subscription": {
-            "$ref": "./examples/ProductDeployment/Unlock.json"
+          "Invokes rotate secrets action on the product deployment": {
+            "$ref": "./examples/ProductDeployment/ExecuteRunner.json"
           }
         },
-        "description": "Unlocks the product subscription",
+        "description": "Invokes execute runner action on the product deployment",
         "tags": [
           "ProductDeployments"
         ],
-        "operationId": "ProductDeployments_Unlock",
-        "parameters": [
-          {
-            "$ref": "Deployment.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "Deployment.json#/parameters/ProductIdParameter"
-          },
-          {
-            "$ref": "ProductDeployment.json#/parameters/UnlockActionParameter"
-          },
-          {
-            "$ref": "Deployment.json#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Deployment.Admin/locations/global/productDeployments/{productId}/lock": {
-      "post": {
-        "x-ms-examples": {
-          "locks the product subscription": {
-            "$ref": "./examples/ProductDeployment/Lock.json"
-          }
-        },
-        "description": "locks the product subscription",
-        "tags": [
-          "ProductDeployments"
-        ],
-        "operationId": "ProductDeployments_Lock",
+        "operationId": "ExecuteRunnerAction_Product",
         "parameters": [
           {
             "$ref": "Deployment.json#/parameters/SubscriptionIdParameter"
@@ -281,13 +284,26 @@
           },
           {
             "$ref": "Deployment.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ExecuteRunnerActionParameter"
           }
         ],
         "responses": {
           "200": {
             "description": "OK"
+          },
+          "202": {
+            "description": "ACCEPTED"
+          },
+          "default": {
+            "description": "Default Response.",
+            "schema": {
+              "$ref": "Deployment.json#/definitions/ExtendedErrorInfo"
+            }
           }
-        }
+        },
+        "x-ms-long-running-operation": true
       }
     }
   },
@@ -479,7 +495,7 @@
         },
         "parameters": {
           "description": "Deployment parameters, value in JToken",
-          "type": "string"
+          "type": "object"
         }
       }
     },
@@ -493,13 +509,13 @@
         }
       }
     },
-    "UnlockActionParameters": {
-      "description": "Parameters for bootstrap action",
+    "ExecuteRunnerActionParameters": {
+      "description": "Parameters for execute runner action",
       "type": "object",
       "properties": {
-        "duration": {
-          "description": "Duration in TimeSpan format(Define which ISO format)",
-          "type": "string"
+        "parameters": {
+          "description": "Execute Runner parameters, value in JToken",
+          "type": "object"
         }
       }
     }
@@ -523,16 +539,6 @@
       },
       "x-ms-parameter-location": "method"
     },
-    "UnlockActionParameter": {
-      "description": "Represents bootstrap action parameter",
-      "name": "unlockActionParameter",
-      "in": "body",
-      "required": true,
-      "schema": {
-        "$ref": "#/definitions/UnlockActionParameters"
-      },
-      "x-ms-parameter-location": "method"
-    },
     "DeployActionParameter": {
       "description": "Represents bootstrap action parameter",
       "name": "deployActionParameter",
@@ -540,6 +546,16 @@
       "required": true,
       "schema": {
         "$ref": "#/definitions/DeployActionParameters"
+      },
+      "x-ms-parameter-location": "method"
+    },
+    "ExecuteRunnerActionParameter": {
+      "description": "Represents execute runner action parameter",
+      "name": "executeRunnerActionParameter",
+      "in": "body",
+      "required": true,
+      "schema": {
+        "$ref": "#/definitions/ExecuteRunnerActionParameters"
       },
       "x-ms-parameter-location": "method"
     }

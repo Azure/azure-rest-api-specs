@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "KubernetesConnectRPClient",
+    "title": "ConnectedKubernetesClient",
     "version": "2020-01-01-preview",
     "description": "Azure Connected Cluster Resource Provider API for adopting any Kubernetes Cluster"
   },
@@ -246,6 +246,9 @@
         "x-ms-examples": {
           "ListClusterUserCredentialsExample": {
             "$ref": "./examples/ConnectedClustersListClusterCredentialsResult.json"
+          },
+          "ListClusterUserCredentialsNonAadExample": {
+            "$ref": "./examples/ConnectedClustersListClusterCredentialsResultNonAad.json"
           }
         },
         "parameters": [
@@ -260,6 +263,15 @@
           },
           {
             "$ref": "#/parameters/ClusterNamePathParam"
+          },
+          {
+            "in": "body",
+            "required": false,
+            "name": "ClientAuthenticationDetails",
+            "schema": {
+              "$ref": "#/definitions/AuthenticationDetails"
+            },
+            "description": "Authentication parameters supplied by the user to fetch credentials for accessing the cluster."
           }
         ],
         "responses": {
@@ -604,6 +616,35 @@
         "serverAppId": {
           "type": "string",
           "description": "The server app id to access AD server"
+        }
+      }
+    },
+    "AuthenticationDetails": {
+      "type": "object",
+      "required": [
+        "authenticationMethod",
+        "value"
+      ],
+      "properties": {
+        "authenticationMethod": {
+          "type": "string",
+          "description": "The mode of client authentication.",
+          "enum": [
+            "Token"
+          ],
+          "x-ms-enum": {
+            "name": "AuthenticationMethod",
+            "modelAsString": true
+          }
+        },
+        "value": {
+          "type": "object",
+          "properties": {
+            "token": {
+              "type": "string",
+              "description": "Authentication token."
+            }
+          }
         }
       }
     },

@@ -251,7 +251,7 @@
             "in": "query",
             "required": false,
             "type": "string",
-            "description": "The expand expression to apply to the operation."
+            "description": "The expand expression to apply to the operation. Allowed values are 'instanceView'."
           }
         ],
         "responses": {
@@ -4877,7 +4877,7 @@
           "VirtualMachineScaleSets"
         ],
         "operationId": "VirtualMachineScaleSets_ConvertToSinglePlacementGroup",
-        "description": "Converts SinglePlacementGroup property to false for a existing virtual machine scale set.",
+        "description": "Converts SinglePlacementGroup property to true for a existing virtual machine scale set.",
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -4901,6 +4901,9 @@
               "$ref": "#/definitions/VMScaleSetConvertToSinglePlacementGroupInput"
             },
             "description": "The input object for ConvertToSinglePlacementGroup API."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -5704,21 +5707,21 @@
             "in": "query",
             "required": false,
             "type": "string",
-            "description": "The filter to apply to the operation."
+            "description": "The filter to apply to the operation. Allowed values are 'startswith(instanceView/statuses/code, 'PowerState') eq true', 'properties/latestModelApplied eq true', 'properties/latestModelApplied eq false'."
           },
           {
             "name": "$select",
             "in": "query",
             "required": false,
             "type": "string",
-            "description": "The list parameters."
+            "description": "The list parameters. Allowed values are 'instanceView', 'instanceView/statuses'."
           },
           {
             "name": "$expand",
             "in": "query",
             "required": false,
             "type": "string",
-            "description": "The expand expression to apply to the operation."
+            "description": "The expand expression to apply to the operation. Allowed values are 'instanceView'."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -8453,7 +8456,7 @@
         },
         "evictionPolicy": {
           "$ref": "#/definitions/evictionPolicy",
-          "description": "Specifies the eviction policy for the Azure Spot virtual machine and Azure Spot scale set. <br><br>For Azure Spot virtual machines, the only supported value is 'Deallocate' and the minimum api-version is 2019-03-01. <br><br>For Azure Spot scale sets, both 'Deallocate' and 'Delete' are supported and the minimum api-version is 2017-10-30-preview."
+          "description": "Specifies the eviction policy for the Azure Spot virtual machine and Azure Spot scale set. <br><br>For Azure Spot virtual machines, both 'Deallocate' and 'Delete' are supported and the minimum api-version is 2019-03-01. <br><br>For Azure Spot scale sets, both 'Deallocate' and 'Delete' are supported and the minimum api-version is 2017-10-30-preview."
         },
         "billingProfile": {
           "$ref": "#/definitions/BillingProfile",
@@ -9233,14 +9236,14 @@
           "items": {
             "$ref": "#/definitions/SubResource"
           },
-          "description": "Specifies an array of references to backend address pools of load balancers. A scale set can reference backend address pools of one public and one internal load balancer. Multiple scale sets cannot use the same load balancer."
+          "description": "Specifies an array of references to backend address pools of load balancers. A scale set can reference backend address pools of one public and one internal load balancer. Multiple scale sets cannot use the same basic sku load balancer."
         },
         "loadBalancerInboundNatPools": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/SubResource"
           },
-          "description": "Specifies an array of references to inbound Nat pools of the load balancers. A scale set can reference inbound nat pools of one public and one internal load balancer. Multiple scale sets cannot use the same load balancer"
+          "description": "Specifies an array of references to inbound Nat pools of the load balancers. A scale set can reference inbound nat pools of one public and one internal load balancer. Multiple scale sets cannot use the same basic sku load balancer."
         }
       },
       "description": "Describes a virtual machine scale set network profile's IP configuration properties."
@@ -9751,7 +9754,7 @@
         },
         "evictionPolicy": {
           "$ref": "#/definitions/evictionPolicy",
-          "description": "Specifies the eviction policy for the Azure Spot virtual machine and Azure Spot scale set. <br><br>For Azure Spot virtual machines, the only supported value is 'Deallocate' and the minimum api-version is 2019-03-01. <br><br>For Azure Spot scale sets, both 'Deallocate' and 'Delete' are supported and the minimum api-version is 2017-10-30-preview."
+          "description": "Specifies the eviction policy for the Azure Spot virtual machine and Azure Spot scale set. <br><br>For Azure Spot virtual machines, both 'Deallocate' and 'Delete' are supported and the minimum api-version is 2019-03-01. <br><br>For Azure Spot scale sets, both 'Deallocate' and 'Delete' are supported and the minimum api-version is 2017-10-30-preview."
         },
         "billingProfile": {
           "$ref": "#/definitions/BillingProfile",
