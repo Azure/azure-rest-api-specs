@@ -1,0 +1,156 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Azure Machine Learning Workspaces",
+    "description": "These APIs allow end users to operate on Azure Machine Learning Workspace resources.",
+    "version": "2020-09-01-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/environments": {
+      "get": {
+        "tags": [
+          "EnvironmentContainer"
+        ],
+        "operationId": "EnvironmentContainers_List",
+        "x-ms-examples": {
+          "List Environment Specifications.": {
+            "$ref": "./examples/listEnvironmentContainers.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "parameters": [
+          {
+            "$ref": "machineLearningServices.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/APIVersionParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/PaginationParameter"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "machineLearningServices.json#/definitions/MachineLearningServiceError"
+            }
+          },
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/EnvironmentContainerResourceArmPaginatedResult"
+            }
+          }
+        }
+      }
+    }
+  },
+  "parameters": {},
+  "definitions": {
+    "EnvironmentContainer": {
+      "type": "object",
+      "properties": {
+        "description": {
+          "description": "The asset container description text.",
+          "type": "string"
+        },
+        "tags": {
+          "description": "The asset tag dictionary. Tags can be added, removed, and updated.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "latestVersions": {
+          "description": "Latest Versions for all assets",
+          "type": "array",
+          "items": {
+            "$ref": "environmentSpecification.json#/definitions/EnvironmentSpecificationVersionResource"
+          }
+        }
+      }
+    },
+    "EnvironmentContainerResource": {
+      "description": "Azure Resource Manager resource Envelope",
+      "required": [
+        "properties"
+      ],
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "The resource URL of the entity (not URL encoded).",
+          "type": "string",
+          "readOnly": true
+        },
+        "name": {
+          "description": "The name of the resource entity.",
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "description": "The resource provider and type.",
+          "type": "string",
+          "readOnly": true
+        },
+        "properties": {
+          "$ref": "#/definitions/EnvironmentContainer"
+        },
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "EnvironmentContainerResourceArmPaginatedResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/EnvironmentContainerResource"
+          }
+        },
+        "nextLink": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}
