@@ -1639,13 +1639,18 @@
       "description": "To use Answer Span prediction feature.",
       "additionalProperties": false,
       "properties": {
-        "Enable": {
+        "enable": {
           "type": "boolean",
           "description": "To enable Answer Span prediction feature."
         },
-        "TopAnswersWithSpan": {
+        "scoreThreshold": {
+          "type": "number",
+          "format": "double",
+          "description": "Threshold for answer returned based on score."
+        },
+        "topAnswersWithSpan": {
           "type": "integer",
-          "description": "Number of top answers where span needs to be predicted",
+          "description": "Number of top answers where span needs to be predicted.",
           "format": "int32",
           "maximum": 10,
           "minimum": 1
