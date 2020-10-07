@@ -64,11 +64,19 @@
               }
             }
           },
-          "default": {
-            "description": "Response entity accompanying non-successful responses containing additional details about the error.",
+          "400": {
+            "description": "Bad Request.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
-            }
+            },
+            "x-ms-error-response": true
+          },
+          "500": {
+            "description": "Internal error response",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            },
+            "x-ms-error-response": true
           }
         },
         "x-ms-examples": {
@@ -121,11 +129,19 @@
               "$ref": "#/definitions/AnalyzeJobState"
             }
           },
-          "default": {
-            "description": "Response entity accompanying non-successful responses containing additional details about the error.",
+          "404": {
+            "description": "Job ID not found.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
-            }
+            },
+            "x-ms-error-response": true
+          },
+          "500": {
+            "description": "Internal error response",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            },
+            "x-ms-error-response": true
           }
         },
         "x-ms-examples": {
@@ -278,11 +294,19 @@
               }
             }
           },
-          "default": {
-            "description": "Response entity accompanying non-successful responses containing additional details about the error.",
+          "400": {
+            "description": "Bad Request.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
-            }
+            },
+            "x-ms-error-response": true
+          },
+          "500": {
+            "description": "Internal error response",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            },
+            "x-ms-error-response": true
           }
         },
         "x-ms-examples": {

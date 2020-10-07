@@ -30,6 +30,10 @@ A preview release `release_2_1_preview` is also available.
 ``` yaml
 tag: release_2_1
 add-credentials: true
+
+directive:
+  - suppress: LongRunningResponseStatusCode
+    reason: The validation tools do not properly recognize 202 as a supported response code.
 ```
 
 ### Release 2.0
