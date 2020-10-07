@@ -1029,7 +1029,7 @@
         "tags": [
           "ProtectionPolicies"
         ],
-        "description": "Deletes specified backup policy from your Recovery Services Vault. This is an asynchronous operation. Status of the\r\noperation can be fetched using GetPolicyOperationResult API.",
+        "description": "Deletes specified backup policy from your Recovery Services Vault. This is an asynchronous operation. Status of the\r\noperation can be fetched using GetProtectionPolicyOperationResults API.",
         "operationId": "ProtectionPolicies_Delete",
         "produces": [
           "application/json"
@@ -1063,6 +1063,7 @@
             "description": "NoContent"
           }
         },
+        "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "Delete Azure Vm Protection Policy": {
             "$ref": "./examples/AzureIaasVm/ProtectionPolicies_Delete.json"
@@ -3097,7 +3098,7 @@
             "GenericContainer"
           ],
           "type": "string",
-          "readOnly": true,
+          "readOnly": false,
           "x-ms-enum": {
             "name": "ContainerType",
             "modelAsString": false
