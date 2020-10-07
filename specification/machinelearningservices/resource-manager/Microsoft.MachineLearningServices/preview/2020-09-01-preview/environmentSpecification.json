@@ -1,0 +1,311 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Azure Machine Learning Workspaces",
+    "description": "These APIs allow end users to operate on Azure Machine Learning Workspace resources.",
+    "version": "2020-09-01-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/environments/{environmentName}": {
+      "put": {
+        "tags": [
+          "EnvironmentSpecification"
+        ],
+        "operationId": "EnvironmentSpecifications_CreateOrUpdate",
+        "x-ms-examples": {
+          "Create or update Environment Specification.": {
+            "$ref": "./examples/createOrUpdateEnvironmentSpecification.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "machineLearningServices.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/APIVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/EnvironmentNameParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/EnvironmentSpecificationVersion"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "machineLearningServices.json#/definitions/MachineLearningServiceError"
+            }
+          },
+          "201": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/EnvironmentSpecificationVersionResource"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "EnvironmentSpecification"
+        ],
+        "operationId": "EnvironmentSpecifications_Get",
+        "x-ms-examples": {
+          "Get Environment Specification.": {
+            "$ref": "./examples/getEnvironmentSpecification.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "machineLearningServices.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/APIVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/EnvironmentNameParameter"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "machineLearningServices.json#/definitions/MachineLearningServiceError"
+            }
+          },
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/EnvironmentSpecificationVersionResource"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/environments/{environmentName}/versions/{environmentVersion}": {
+      "get": {
+        "tags": [
+          "EnvironmentSpecification"
+        ],
+        "operationId": "EnvironmentSpecificationVersions_Get",
+        "x-ms-examples": {
+          "Get Environment Specification Version.": {
+            "$ref": "./examples/getEnvironmentSpecificationVersion.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "machineLearningServices.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/APIVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/EnvironmentNameParameter"
+          },
+          {
+            "$ref": "#/parameters/EnvironmentVersionParameter"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "machineLearningServices.json#/definitions/MachineLearningServiceError"
+            }
+          },
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/EnvironmentSpecificationVersionResource"
+            }
+          }
+        }
+      }
+    }
+  },
+  "parameters": {
+    "EnvironmentNameParameter": {
+      "in": "path",
+      "name": "environmentName",
+      "type": "string",
+      "description": "Environment Name identifier.",
+      "required": true,
+      "x-ms-parameter-location": "method"
+    },
+    "EnvironmentVersionParameter": {
+      "in": "path",
+      "name": "environmentVersion",
+      "type": "string",
+      "description": "Environment Version identifier.",
+      "required": true,
+      "x-ms-parameter-location": "method"
+    }
+  },
+  "definitions": {
+    "AssetPath": {
+      "description": "Details of an AssetUri.",
+      "required": [
+        "path"
+      ],
+      "type": "object",
+      "properties": {
+        "path": {
+          "description": "The path of file/directory.",
+          "pattern": "\\w",
+          "type": "string"
+        },
+        "isDirectory": {
+          "description": "Whether the path defines a directory or a single file.",
+          "type": "boolean"
+        }
+      }
+    },
+    "EnvironmentSpecificationVersion": {
+      "description": "Data Transfer Object (DTO) for an Execution Environment Specification. Name and\r\nversion should default to the AzureML-Minimal environment version tested with the\r\ncurrent SDK client version as this is a main use-case. Only supported properties\r\nlisted in EnvironmentSpecificationProperties are allowed. For specification types\r\nthat support additional context, AssetPaths may contain a single Blob URI entry\r\npointing to a snapshot of that context.",
+      "type": "object",
+      "properties": {
+        "specificationType": {
+          "description": "Must be either a Curated Environment, which is the default, or one of the\r\nAzure ML supported community-standard specification file types. SetupFile must\r\nmatch the SpecificationType. For example \"Conda\" type must have a corresponding\r\nenvironment.yml file, \"Pip\" type must have requirements.txt or pipfile, \"Docker\"\r\ntype must have a Dockerfile and so on.",
+          "enum": [
+            "Curated",
+            "Conda",
+            "Python",
+            "Pipfile",
+            "Docker",
+            "DockerImage",
+            "Spark",
+            "R",
+            "VisualStudioDevContainer"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "EnvironmentSpecificationType",
+            "modelAsString": false
+          }
+        },
+        "description": {
+          "description": "The asset description text.",
+          "type": "string"
+        },
+        "datastoreId": {
+          "description": "The asset datastoreId",
+          "type": "string"
+        },
+        "tags": {
+          "description": "The asset tag dictionary.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "properties": {
+          "description": "The asset property dictionary.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "assetPaths": {
+          "description": "Details of asset paths in the datastore.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AssetPath"
+          }
+        },
+        "linkedResourceIds": {
+          "description": "Associated ARM resources. Key is the link type, value is a list of ARM IDs.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "EnvironmentSpecificationVersionResource": {
+      "description": "Azure Resource Manager resource Envelope",
+      "required": [
+        "properties"
+      ],
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "The resource URL of the entity (not URL encoded).",
+          "type": "string",
+          "readOnly": true
+        },
+        "name": {
+          "description": "The name of the resource entity.",
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "description": "The resource provider and type.",
+          "type": "string",
+          "readOnly": true
+        },
+        "properties": {
+          "$ref": "#/definitions/EnvironmentSpecificationVersion"
+        },
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
+        }
+      },
+      "x-ms-azure-resource": true
+    }
+  }
+}
