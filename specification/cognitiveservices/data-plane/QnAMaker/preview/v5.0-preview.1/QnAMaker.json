@@ -1,0 +1,1833 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "v5.0-preview.1",
+    "title": "QnAMaker Client",
+    "description": "An API for QnAMaker Service"
+  },
+  "securityDefinitions": {
+    "apim_key": {
+      "type": "apiKey",
+      "name": "Ocp-Apim-Subscription-Key",
+      "in": "header"
+    }
+  },
+  "security": [
+    {
+      "apim_key": []
+    }
+  ],
+  "x-ms-parameterized-host": {
+    "hostTemplate": "{Endpoint}/qnamaker/v5.0-preview.1",
+    "useSchemePrefix": false,
+    "parameters": [
+      {
+        "$ref": "#/parameters/Endpoint"
+      }
+    ]
+  },
+  "paths": {
+    "/endpointSettings": {
+      "get": {
+        "summary": "Gets endpoint settings for an endpoint.",
+        "operationId": "EndpointSettings_GetSettings",
+        "parameters": [],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Response with endpoint settings info in it.",
+            "schema": {
+              "$ref": "#/definitions/EndpointSettingsDTO"
+            },
+            "x-nullable": true
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful query": {
+            "$ref": "./examples/SuccessfulGetEpSettings.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "EndpointKeys"
+        ],
+        "summary": "Updates endpoint settings for an endpoint.",
+        "operationId": "EndpointSettings_UpdateSettings",
+        "parameters": [
+          {
+            "$ref": "#/parameters/EndpointSettingsPayload"
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "204": {
+            "description": "HTTP 204 No Content."
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful query": {
+            "$ref": "./examples/SuccessfulSetEpSettings.json"
+          }
+        }
+      }
+    },
+    "/endpointkeys": {
+      "get": {
+        "summary": "Gets endpoint keys for an endpoint",
+        "operationId": "EndpointKeys_GetKeys",
+        "parameters": [],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Response with endpoint info in it.",
+            "schema": {
+              "$ref": "#/definitions/EndpointKeysDTO"
+            },
+            "x-nullable": true
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful query": {
+            "$ref": "./examples/SuccessfulGetEpKeys.json"
+          }
+        }
+      }
+    },
+    "/endpointkeys/{keyType}": {
+      "patch": {
+        "tags": [
+          "EndpointKeys"
+        ],
+        "summary": "Re-generates an endpoint key.",
+        "operationId": "EndpointKeys_RefreshKeys",
+        "parameters": [
+          {
+            "$ref": "#/parameters/KeyType"
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Details of the endpoint keys generated.",
+            "schema": {
+              "$ref": "#/definitions/EndpointKeysDTO"
+            },
+            "x-nullable": true
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful query": {
+            "$ref": "./examples/SuccessfulSetEpKeys.json"
+          }
+        }
+      }
+    },
+    "/alterations/{kbId}": {
+      "get": {
+        "tags": [
+          "Alterations"
+        ],
+        "summary": "Download alterations from runtime or use kbId parameter (for QnAMakerV2 resource only) to download alterations for a specific knowledgebase.",
+        "operationId": "Alterations_Get",
+        "parameters": [
+        {
+          "schema": {
+            "$ref": "#/parameters/AlterationsKbId"
+          },
+          "required": false,
+          "in": "path",
+          "name": "kbId"
+        }
+      ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Alterations data.",
+            "schema": {
+              "$ref": "#/definitions/WordAlterationsDTO"
+            },
+            "x-nullable": true
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful query": {
+            "$ref": "./examples/SuccessfulGetAlts.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Alterations"
+        ],
+        "summary": "Replace alterations data or use kbId parameter to replace alterations of a specific knowledgebase.",
+        "operationId": "Alterations_Replace",
+        "parameters": [
+          {
+            "$ref": "#/parameters/AlterationsKbId"
+          },
+          {
+            "$ref": "#/parameters/WordAlterations"
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "204": {
+            "description": "HTTP 204 No Content."
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful query": {
+            "$ref": "./examples/SuccessfulSetAlts.json"
+          }
+        }
+      }
+    },
+    "/knowledgebases": {
+      "get": {
+        "tags": [
+          "Knowledgebases"
+        ],
+        "summary": "Gets all knowledgebases for a user.",
+        "operationId": "Knowledgebase_ListAll",
+        "parameters": [],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Collection of knowledgebases.",
+            "schema": {
+              "$ref": "#/definitions/KnowledgebasesDTO"
+            },
+            "x-nullable": true
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful query": {
+            "$ref": "./examples/SuccessfulKbsResponse.json"
+          }
+        }
+      }
+    },
+    "/operations/{operationId}": {
+      "get": {
+        "tags": [
+          "Operations"
+        ],
+        "summary": "Gets details of a specific long running operation.",
+        "operationId": "Operations_GetDetails",
+        "parameters": [
+          {
+            "$ref": "#/parameters/OperationId"
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Details of the long running operation.",
+            "schema": {
+              "$ref": "#/definitions/Operation"
+            },
+            "x-nullable": true,
+            "headers": {
+              "RetryAfter": {
+                "type": "integer",
+                "description": "Indicates how long the client should wait before sending a follow up request. The header will be present only if the operation is running or has not started yet."
+              }
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful query": {
+            "$ref": "./examples/SuccessfulGetOps.json"
+          }
+        }
+      }
+    },
+    "/knowledgebases/{kbId}": {
+      "get": {
+        "tags": [
+          "Knowledgebases"
+        ],
+        "summary": "Gets details of a specific knowledgebase.",
+        "operationId": "Knowledgebase_GetDetails",
+        "parameters": [
+          {
+            "$ref": "#/parameters/KbId"
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Details of the knowledgebase.",
+            "schema": {
+              "$ref": "#/definitions/KnowledgebaseDTO"
+            },
+            "x-nullable": true
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful query": {
+            "$ref": "./examples/SuccessfulGetKb.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Knowledgebases"
+        ],
+        "summary": "Deletes the knowledgebase and all its data.",
+        "operationId": "Knowledgebase_Delete",
+        "parameters": [
+          {
+            "$ref": "#/parameters/KbId"
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "204": {
+            "description": "HTTP 204 No content."
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful query": {
+            "$ref": "./examples/SuccessfulDelKb.json"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Knowledgebases"
+        ],
+        "summary": "Publishes all changes in test index of a knowledgebase to its prod index.",
+        "operationId": "Knowledgebase_Publish",
+        "parameters": [
+          {
+            "$ref": "#/parameters/KbId"
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "204": {
+            "description": "HTTP 204 No content."
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful query": {
+            "$ref": "./examples/SuccessfulPubKb.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Knowledgebases"
+        ],
+        "summary": "Replace knowledgebase contents.",
+        "operationId": "Knowledgebase_Replace",
+        "parameters": [
+          {
+            "$ref": "#/parameters/KbId"
+          },
+          {
+            "$ref": "#/parameters/ReplaceKb"
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "204": {
+            "description": "HTTP 204 No content."
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful query": {
+            "$ref": "./examples/SuccessfulRepKb.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Knowledgebases"
+        ],
+        "summary": "Asynchronous operation to modify a knowledgebase.",
+        "operationId": "Knowledgebase_Update",
+        "parameters": [
+          {
+            "$ref": "#/parameters/KbId"
+          },
+          {
+            "$ref": "#/parameters/UpdateKb"
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "202": {
+            "description": "Details of the asynchronous operation.",
+            "schema": {
+              "$ref": "#/definitions/Operation"
+            },
+            "x-nullable": true,
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "Relative URI to the target location of the asynchronous operation. Client should poll this resource to get status of the operation."
+              }
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful query": {
+            "$ref": "./examples/SuccessfulUpdKb.json"
+          }
+        }
+      }
+    },
+    "/knowledgebases/create": {
+      "post": {
+        "tags": [
+          "Knowledgebases"
+        ],
+        "summary": "Asynchronous operation to create a new knowledgebase.",
+        "operationId": "Knowledgebase_Create",
+        "parameters": [
+          {
+            "$ref": "#/parameters/CreateKbPayload"
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "202": {
+            "description": "Details of the asynchronous operation.",
+            "schema": {
+              "$ref": "#/definitions/Operation"
+            },
+            "x-nullable": true
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful query": {
+            "$ref": "./examples/SuccessfulCreateKb.json"
+          }
+        }
+      }
+    },
+    "/knowledgebases/{kbId}/{environment}/qna": {
+      "get": {
+        "tags": [
+          "Knowledgebases"
+        ],
+        "summary": "Download the knowledgebase.",
+        "operationId": "Knowledgebase_Download",
+        "parameters": [
+          {
+            "$ref": "#/parameters/KbId"
+          },
+          {
+            "$ref": "#/parameters/Environment"
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Collection of all Q-A in the knowledgebase.",
+            "schema": {
+              "$ref": "#/definitions/QnADocumentsDTO"
+            },
+            "x-nullable": true
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful query": {
+            "$ref": "./examples/SuccessfulDownloadKb.json"
+          }
+        }
+      }
+    },
+    "/knowledgebases/{kbId}/generateAnswer": {
+      "post": {
+        "tags": [
+          "Knowledgebases"
+        ],
+        "summary": "GenerateAnswer call to query the knowledgebase created on QnAMaker V2 - Private Preview Azure Cognitive Service resource.",
+        "operationId": "Runtime_GenerateAnswer",
+        "parameters": [
+          {
+            "$ref": "#/parameters/KbId"
+          },
+          {
+            "$ref": "#/parameters/GenerateAnswerPayload"
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "GenerateAnswer call response.",
+            "schema": {
+              "$ref": "#/definitions/QnASearchResultList"
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful query": {
+            "$ref": "./examples/SuccessfulGenAns.json"
+          }
+        }
+      }
+    },
+    "/knowledgebases/{kbId}/train": {
+      "post": {
+        "tags": [
+          "Knowledgebases"
+        ],
+        "summary": "Train call to add suggestions to the knowledgebase  created on QnAMaker V2 - Private Preview Azure Cognitive Service resource.",
+        "operationId": "Runtime_Train",
+        "parameters": [
+          {
+            "$ref": "#/parameters/KbId"
+          },
+          {
+            "$ref": "#/parameters/TrainPayload"
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "204": {
+            "description": "HTTP 204 No Content."
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful query": {
+            "$ref": "./examples/SuccessfulTrain.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "UpdateKbOperationDTO": {
+      "type": "object",
+      "description": "Contains list of QnAs to be updated",
+      "additionalProperties": false,
+      "properties": {
+        "add": {
+          "description": "An instance of CreateKbInputDTO for add operation",
+          "allOf": [
+            {
+              "$ref": "#/definitions/CreateKbInputDTO"
+            }
+          ]
+        },
+        "delete": {
+          "description": "An instance of DeleteKbContentsDTO for delete Operation",
+          "allOf": [
+            {
+              "$ref": "#/definitions/DeleteKbContentsDTO"
+            }
+          ]
+        },
+        "update": {
+          "description": "An instance of UpdateKbContentsDTO for Update Operation",
+          "allOf": [
+            {
+              "$ref": "#/definitions/UpdateKbContentsDTO"
+            }
+          ]
+        },
+        "enableHierarchicalExtraction": {
+          "type": "boolean",
+          "description": "Enable hierarchical extraction of Q-A from files and urls. The value set during KB creation will be used if this field is not present."
+        },
+        "defaultAnswerUsedForExtraction": {
+          "type": "string",
+          "description": "Text string to be used as the answer in any Q-A which has no extracted answer from the document but has a hierarchy. Required when EnableHierarchicalExtraction field is set to True.",
+          "maxLength": 300,
+          "minLength": 1
+        }
+      }
+    },
+    "UpdateKbContentsDTO": {
+      "type": "object",
+      "description": "PATCH body schema for Update operation in Update Kb",
+      "additionalProperties": false,
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Friendly name for the knowledgebase."
+        },
+        "qnaList": {
+          "type": "array",
+          "description": "List of Q-A (UpdateQnaDTO) to be added to the knowledgebase.",
+          "items": {
+            "$ref": "#/definitions/UpdateQnaDTO"
+          }
+        },
+        "urls": {
+          "type": "array",
+          "description": "List of existing URLs to be refreshed. The content will be extracted again and re-indexed.",
+          "maxLength": 10,
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "UpdateQnaDTO": {
+      "type": "object",
+      "description": "PATCH Body schema for Update Qna List",
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "type": "integer",
+          "description": "Unique id for the Q-A",
+          "format": "int32",
+          "maximum": 2147483647,
+          "minimum": 0
+        },
+        "answer": {
+          "type": "string",
+          "description": "Answer text"
+        },
+        "source": {
+          "type": "string",
+          "description": "Source from which Q-A was indexed. eg. https://docs.microsoft.com/en-us/azure/cognitive-services/QnAMaker/FAQs",
+          "maxLength": 300
+        },
+        "questions": {
+          "description": "List of questions associated with the answer.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/UpdateQuestionsDTO"
+            }
+          ]
+        },
+        "metadata": {
+          "description": "List of metadata associated with the answer to be updated",
+          "allOf": [
+            {
+              "$ref": "#/definitions/UpdateMetadataDTO"
+            }
+          ]
+        },
+        "context": {
+          "description": "Context associated with Qna to be updated.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/UpdateContextDTO"
+            }
+          ]
+        }
+      }
+    },
+    "UpdateQuestionsDTO": {
+      "type": "object",
+      "description": "PATCH Body schema for Update Kb which contains list of questions to be added and deleted",
+      "additionalProperties": false,
+      "properties": {
+        "add": {
+          "type": "array",
+          "description": "List of questions to be added",
+          "maxLength": 100,
+          "items": {
+            "type": "string"
+          }
+        },
+        "delete": {
+          "type": "array",
+          "description": "List of questions to be deleted.",
+          "maxLength": 100,
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "UpdateMetadataDTO": {
+      "type": "object",
+      "description": "PATCH Body schema to represent list of Metadata to be updated",
+      "additionalProperties": false,
+      "properties": {
+        "delete": {
+          "type": "array",
+          "description": "List of Metadata associated with answer to be deleted",
+          "maxLength": 100,
+          "items": {
+            "$ref": "#/definitions/MetadataDTO"
+          }
+        },
+        "add": {
+          "type": "array",
+          "description": "List of metadata associated with answer to be added",
+          "maxLength": 100,
+          "items": {
+            "$ref": "#/definitions/MetadataDTO"
+          }
+        }
+      }
+    },
+    "UpdateContextDTO": {
+      "type": "object",
+      "description": "Update Body schema to represent context to be updated",
+      "properties": {
+        "promptsToDelete": {
+          "type": "array",
+          "description": "List of prompts associated with qna to be deleted",
+          "items": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "promptsToAdd": {
+          "type": "array",
+          "description": "List of prompts to be added to the qna.",
+          "items": {
+            "$ref": "#/definitions/PromptDTO"
+          }
+        },
+        "isContextOnly": {
+          "type": "boolean",
+          "description": "To mark if a prompt is relevant only with a previous question or not.\ntrue - Do not include this QnA as search result for queries without context\nfalse - ignores context and includes this QnA in search result"
+        }
+      }
+    },
+    "DeleteKbContentsDTO": {
+      "type": "object",
+      "description": "PATCH body schema of Delete Operation in UpdateKb",
+      "additionalProperties": false,
+      "properties": {
+        "ids": {
+          "type": "array",
+          "description": "List of Qna Ids to be deleted",
+          "items": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "sources": {
+          "type": "array",
+          "description": "List of sources to be deleted from knowledgebase.",
+          "maxLength": 300,
+          "minLength": 1,
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "CreateKbInputDTO": {
+      "type": "object",
+      "description": "Input to create KB.",
+      "additionalProperties": false,
+      "properties": {
+        "qnaList": {
+          "type": "array",
+          "description": "List of QNA to be added to the index. Ids are generated by the service and should be omitted.",
+          "items": {
+            "$ref": "#/definitions/QnADTO"
+          }
+        },
+        "urls": {
+          "type": "array",
+          "description": "List of URLs to be added to knowledgebase.",
+          "maxLength": 10,
+          "items": {
+            "type": "string"
+          }
+        },
+        "files": {
+          "type": "array",
+          "description": "List of files to be added to knowledgebase.",
+          "maxLength": 10,
+          "items": {
+            "$ref": "#/definitions/FileDTO"
+          }
+        }
+      }
+    },
+    "QnADocumentsDTO": {
+      "type": "object",
+      "description": "List of QnADTO",
+      "additionalProperties": false,
+      "properties": {
+        "qnaDocuments": {
+          "type": "array",
+          "description": "List of answers.",
+          "items": {
+            "$ref": "#/definitions/QnADTO"
+          }
+        }
+      }
+    },
+    "CreateKbDTO": {
+      "type": "object",
+      "description": "Post body schema for CreateKb operation.",
+      "additionalProperties": false,
+      "required": [
+        "name"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Friendly name for the knowledgebase.",
+          "maxLength": 100,
+          "minLength": 1
+        },
+        "qnaList": {
+          "type": "array",
+          "description": "List of Q-A (QnADTO) to be added to the knowledgebase. Q-A Ids are assigned by the service and should be omitted.",
+          "maxLength": 1000,
+          "items": {
+            "$ref": "#/definitions/QnADTO"
+          }
+        },
+        "urls": {
+          "type": "array",
+          "description": "List of URLs to be used for extracting Q-A.",
+          "maxLength": 10,
+          "items": {
+            "type": "string"
+          }
+        },
+        "files": {
+          "type": "array",
+          "description": "List of files from which to Extract Q-A.",
+          "maxLength": 10,
+          "items": {
+            "$ref": "#/definitions/FileDTO"
+          }
+        },
+        "enableHierarchicalExtraction": {
+          "type": "boolean",
+          "description": "Enable hierarchical extraction of Q-A from files and urls. Value to be considered False if this field is not present."
+        },
+        "defaultAnswerUsedForExtraction": {
+          "type": "string",
+          "description": "Text string to be used as the answer in any Q-A which has no extracted answer from the document but has a hierarchy. Required when EnableHierarchicalExtraction field is set to True.",
+          "maxLength": 300,
+          "minLength": 1
+        },
+        "language": {
+          "type": "string",
+          "description": "Language of the knowledgebase. Please find the list of supported languages <a href=\"https://aka.ms/qnamaker-languages#languages-supported\" target=\"_blank\">here</a>.",
+          "maxLength": 100,
+          "minLength": 1
+        }
+      }
+    },
+    "FileDTO": {
+      "type": "object",
+      "description": "DTO to hold details of uploaded files.",
+      "additionalProperties": false,
+      "required": [
+        "fileName",
+        "fileUri"
+      ],
+      "properties": {
+        "fileName": {
+          "type": "string",
+          "description": "File name. Supported file types are \".tsv\", \".pdf\", \".txt\", \".docx\", \".xlsx\".",
+          "maxLength": 200,
+          "minLength": 1
+        },
+        "fileUri": {
+          "type": "string",
+          "description": "Public URI of the file."
+        }
+      }
+    },
+    "ReplaceKbDTO": {
+      "type": "object",
+      "description": "Post body schema for Replace KB operation.",
+      "additionalProperties": false,
+      "required": [
+        "qnAList"
+      ],
+      "properties": {
+        "qnAList": {
+          "type": "array",
+          "description": "List of Q-A (QnADTO) to be added to the knowledgebase. Q-A Ids are assigned by the service and should be omitted.",
+          "items": {
+            "$ref": "#/definitions/QnADTO"
+          }
+        }
+      }
+    },
+    "QnADTO": {
+      "type": "object",
+      "description": "Q-A object.",
+      "additionalProperties": false,
+      "required": [
+        "answer",
+        "questions"
+      ],
+      "properties": {
+        "id": {
+          "type": "integer",
+          "description": "Unique id for the Q-A.",
+          "format": "int32"
+        },
+        "answer": {
+          "type": "string",
+          "description": "Answer text",
+          "maxLength": 25000,
+          "minLength": 1
+        },
+        "source": {
+          "type": "string",
+          "description": "Source from which Q-A was indexed. eg. https://docs.microsoft.com/en-us/azure/cognitive-services/QnAMaker/FAQs",
+          "maxLength": 300
+        },
+        "questions": {
+          "type": "array",
+          "description": "List of questions associated with the answer.",
+          "maxLength": 100,
+          "minLength": 1,
+          "items": {
+            "type": "string"
+          }
+        },
+        "metadata": {
+          "type": "array",
+          "description": "List of metadata associated with the answer.",
+          "maxLength": 10,
+          "items": {
+            "$ref": "#/definitions/MetadataDTO"
+          }
+        },
+        "context": {
+          "description": "Context of a QnA",
+          "allOf": [
+            {
+              "$ref": "#/definitions/ContextDTO"
+            }
+          ]
+        }
+      }
+    },
+    "ContextDTO": {
+      "type": "object",
+      "description": "Context associated with Qna.",
+      "properties": {
+        "isContextOnly": {
+          "type": "boolean",
+          "description": "To mark if a prompt is relevant only with a previous question or not.\ntrue - Do not include this QnA as search result for queries without context\nfalse - ignores context and includes this QnA in search result"
+        },
+        "prompts": {
+          "type": "array",
+          "description": "List of prompts associated with the answer.",
+          "maxItems": 20,
+          "items": {
+            "$ref": "#/definitions/PromptDTO"
+          }
+        }
+      }
+    },
+    "PromptDTO": {
+      "type": "object",
+      "description": "Prompt for an answer.",
+      "properties": {
+        "displayOrder": {
+          "type": "integer",
+          "description": "Index of the prompt - used in ordering of the prompts",
+          "format": "int32"
+        },
+        "qnaId": {
+          "type": "integer",
+          "description": "Qna id corresponding to the prompt - if QnaId is present, QnADTO object is ignored.",
+          "format": "int32"
+        },
+        "qna": {
+          "description": "QnADTO - Either QnaId or QnADTO needs to be present in a PromptDTO object",
+          "allOf": [
+            {
+              "$ref": "#/definitions/QnADTO"
+            }
+          ]
+        },
+        "displayText": {
+          "type": "string",
+          "description": "Text displayed to represent a follow up question prompt",
+          "maxLength": 200
+        }
+      }
+    },
+    "MetadataDTO": {
+      "type": "object",
+      "description": "Name - value pair of metadata.",
+      "additionalProperties": false,
+      "required": [
+        "name",
+        "value"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Metadata name.",
+          "maxLength": 100,
+          "minLength": 1
+        },
+        "value": {
+          "type": "string",
+          "description": "Metadata value.",
+          "maxLength": 500,
+          "minLength": 1
+        }
+      }
+    },
+    "ErrorResponse": {
+      "type": "object",
+      "description": "Error response. As per Microsoft One API guidelines - https://github.com/Microsoft/api-guidelines/blob/vNext/Guidelines.md#7102-error-condition-responses.",
+      "additionalProperties": false,
+      "properties": {
+        "error": {
+          "description": "The error object.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/Error"
+            }
+          ]
+        }
+      }
+    },
+    "Error": {
+      "type": "object",
+      "description": "The error object. As per Microsoft One API guidelines - https://github.com/Microsoft/api-guidelines/blob/vNext/Guidelines.md#7102-error-condition-responses.",
+      "additionalProperties": false,
+      "required": [
+        "code"
+      ],
+      "properties": {
+        "code": {
+          "description": "One of a server-defined set of error codes.",
+          "$ref": "#/definitions/ErrorCode"
+        },
+        "message": {
+          "type": "string",
+          "description": "A human-readable representation of the error."
+        },
+        "target": {
+          "type": "string",
+          "description": "The target of the error."
+        },
+        "details": {
+          "type": "array",
+          "description": "An array of details about specific errors that led to this reported error.",
+          "items": {
+            "$ref": "#/definitions/Error"
+          }
+        },
+        "innerError": {
+          "description": "An object containing more specific information than the current object about the error.",
+          "$ref": "#/definitions/InnerErrorModel"
+        }
+      }
+    },
+    "ErrorCode": {
+      "type": "string",
+      "description": "Human readable error code.",
+      "x-ms-enum": {
+        "name": "ErrorCodeType",
+        "modelAsString": true
+      },
+      "enum": [
+        "BadArgument",
+        "Forbidden",
+        "NotFound",
+        "KbNotFound",
+        "Unauthorized",
+        "Unspecified",
+        "EndpointKeysError",
+        "QuotaExceeded",
+        "QnaRuntimeError",
+        "SKULimitExceeded",
+        "OperationNotFound",
+        "ServiceError",
+        "ValidationFailure",
+        "ExtractionFailure"
+      ]
+    },
+    "InnerErrorModel": {
+      "type": "object",
+      "description": "An object containing more specific information about the error. As per Microsoft One API guidelines - https://github.com/Microsoft/api-guidelines/blob/vNext/Guidelines.md#7102-error-condition-responses.",
+      "additionalProperties": false,
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "A more specific error code than was provided by the containing error."
+        },
+        "innerError": {
+          "description": "An object containing more specific information than the current object about the error.",
+          "$ref": "#/definitions/InnerErrorModel"
+        }
+      }
+    },
+    "Operation": {
+      "type": "object",
+      "description": "Record to track long running operation.",
+      "additionalProperties": false,
+      "properties": {
+        "operationState": {
+          "description": "Operation state.",
+          "$ref": "#/definitions/OperationState"
+        },
+        "createdTimestamp": {
+          "type": "string",
+          "description": "Timestamp when the operation was created."
+        },
+        "lastActionTimestamp": {
+          "type": "string",
+          "description": "Timestamp when the current state was entered."
+        },
+        "resourceLocation": {
+          "type": "string",
+          "description": "Relative URI to the target resource location for completed resources."
+        },
+        "userId": {
+          "type": "string",
+          "description": "User Id"
+        },
+        "operationId": {
+          "type": "string",
+          "description": "Operation Id."
+        },
+        "errorResponse": {
+          "description": "Error details in case of failures.",
+          "$ref": "#/definitions/ErrorResponse"
+        }
+      }
+    },
+    "OperationState": {
+      "type": "string",
+      "description": "Enumeration of operation states.",
+      "x-ms-enum": {
+        "name": "OperationStateType",
+        "modelAsString": true
+      },
+      "enum": [
+        "Failed",
+        "NotStarted",
+        "Running",
+        "Succeeded"
+      ]
+    },
+    "KnowledgebasesDTO": {
+      "type": "object",
+      "description": "Collection of knowledgebases owned by a user.",
+      "additionalProperties": false,
+      "properties": {
+        "knowledgebases": {
+          "type": "array",
+          "description": "Collection of knowledgebase records.",
+          "items": {
+            "$ref": "#/definitions/KnowledgebaseDTO"
+          }
+        }
+      }
+    },
+    "KnowledgebaseDTO": {
+      "type": "object",
+      "description": "Response schema for CreateKb operation.",
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique id that identifies a knowledgebase."
+        },
+        "hostName": {
+          "type": "string",
+          "description": "URL host name at which the knowledgebase is hosted."
+        },
+        "lastAccessedTimestamp": {
+          "type": "string",
+          "description": "Time stamp at which the knowledgebase was last accessed (UTC)."
+        },
+        "lastChangedTimestamp": {
+          "type": "string",
+          "description": "Time stamp at which the knowledgebase was last modified (UTC)."
+        },
+        "lastPublishedTimestamp": {
+          "type": "string",
+          "description": "Time stamp at which the knowledgebase was last published (UTC)."
+        },
+        "name": {
+          "type": "string",
+          "description": "Friendly name of the knowledgebase."
+        },
+        "userId": {
+          "type": "string",
+          "description": "User who created / owns the knowledgebase."
+        },
+        "urls": {
+          "type": "array",
+          "description": "URL sources from which Q-A were extracted and added to the knowledgebase.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "sources": {
+          "type": "array",
+          "description": "Custom sources from which Q-A were extracted or explicitly added to the knowledgebase.",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "EndpointSettingsDTO": {
+      "type": "object",
+      "description": "Endpoint settings.",
+      "additionalProperties": false,
+      "properties": {
+        "activeLearning": {
+          "description": "Active Learning settings of the endpoint.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/ActiveLearningSettingsDTO"
+            }
+          ]
+        }
+      }
+    },
+    "ActiveLearningSettingsDTO": {
+      "type": "object",
+      "description": "Active Learning settings of the endpoint.",
+      "additionalProperties": false,
+      "properties": {
+        "enable": {
+          "type": "string",
+          "description": "True/False string providing Active Learning"
+        }
+      }
+    },
+    "WordAlterationsDTO": {
+      "type": "object",
+      "description": "Collection of word alterations.",
+      "additionalProperties": false,
+      "required": [
+        "wordAlterations"
+      ],
+      "properties": {
+        "wordAlterations": {
+          "type": "array",
+          "description": "Collection of word alterations.",
+          "maxLength": 10000,
+          "items": {
+            "$ref": "#/definitions/AlterationsDTO"
+          }
+        }
+      }
+    },
+    "AlterationsDTO": {
+      "type": "object",
+      "description": "Collection of words that are synonyms.",
+      "additionalProperties": false,
+      "required": [
+        "alterations"
+      ],
+      "properties": {
+        "alterations": {
+          "type": "array",
+          "description": "Words that are synonymous with each other.",
+          "maxLength": 20,
+          "minLength": 1,
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "EndpointKeysDTO": {
+      "type": "object",
+      "description": "Schema for EndpointKeys generate/refresh operations.",
+      "additionalProperties": false,
+      "properties": {
+        "primaryEndpointKey": {
+          "type": "string",
+          "description": "Primary Access Key."
+        },
+        "secondaryEndpointKey": {
+          "type": "string",
+          "description": "Secondary Access Key."
+        },
+        "installedVersion": {
+          "type": "string",
+          "description": "Current version of runtime."
+        },
+        "lastStableVersion": {
+          "type": "string",
+          "description": "Latest version of runtime."
+        },
+        "language": {
+          "type": "string",
+          "description": "Language setting of runtime."
+        }
+      }
+    },
+    "QueryDTO": {
+      "type": "object",
+      "description": "POST body schema to query the knowledgebase.",
+      "additionalProperties": false,
+      "properties": {
+        "qnaId": {
+          "type": "string",
+          "description": "Exact qnaId to fetch from the knowledgebase, this field takes priority over question."
+        },
+        "question": {
+          "type": "string",
+          "description": "User question to query against the knowledge base."
+        },
+        "top": {
+          "type": "integer",
+          "description": "Max number of answers to be returned for the question.",
+          "format": "int32"
+        },
+        "userId": {
+          "type": "string",
+          "description": "Unique identifier for the user."
+        },
+        "isTest": {
+          "type": "boolean",
+          "description": "Query against the test index."
+        },
+        "scoreThreshold": {
+          "type": "number",
+          "description": "Threshold for answers returned based on score."
+        },
+        "context": {
+          "description": "Context object with previous QnA's information.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/QueryContextDTO"
+            }
+          ]
+        },
+        "rankerType": {
+          "type": "string",
+          "description": "Optional field. Set to 'QuestionOnly' for using a question only Ranker."
+        },
+        "strictFilters": {
+          "type": "array",
+          "description": "Find only answers that contain these metadata.",
+          "items": {
+            "$ref": "#/definitions/MetadataDTO"
+          }
+        },
+        "strictFiltersCompoundOperationType": {
+          "type": "string",
+          "description": "Optional field. Set to  for using OR as Operation for Strict Filters.",
+          "x-ms-enum": {
+            "name": "StrictFiltersCompoundOperationType",
+            "modelAsString": true
+          },
+          "enum": [
+            "AND",
+            "OR"
+          ]
+        },
+        "answerSpanRequest": {
+          "description": "To enable/configure answer span prediction.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/AnswerSpanRequestDTO"
+            }
+          ]
+        }
+      }
+    },
+    "QueryContextDTO": {
+      "type": "object",
+      "description": "Context object with previous QnA's information.",
+      "additionalProperties": false,
+      "properties": {
+        "previousQnaId": {
+          "type": "string",
+          "description": "Previous QnA Id - qnaId of the top result."
+        },
+        "previousUserQuery": {
+          "type": "string",
+          "description": "Previous user query."
+        }
+      }
+    },
+    "QnASearchResultList": {
+      "type": "object",
+      "description": "Represents List of Question Answers.",
+      "additionalProperties": false,
+      "properties": {
+        "answers": {
+          "type": "array",
+          "description": "Represents Search Result list.",
+          "items": {
+            "$ref": "#/definitions/QnASearchResult"
+          }
+        }
+      }
+    },
+    "QnASearchResult": {
+      "type": "object",
+      "description": "Represents Search Result.",
+      "additionalProperties": false,
+      "properties": {
+        "questions": {
+          "type": "array",
+          "description": "List of questions.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "answer": {
+          "type": "string",
+          "description": "Answer."
+        },
+        "score": {
+          "type": "number",
+          "description": "Search result score."
+        },
+        "id": {
+          "type": "integer",
+          "description": "Id of the QnA result.",
+          "format": "int32"
+        },
+        "source": {
+          "type": "string",
+          "description": "Source of QnA result."
+        },
+        "metadata": {
+          "type": "array",
+          "description": "List of metadata.",
+          "items": {
+            "$ref": "#/definitions/MetadataDTO"
+          }
+        },
+        "context": {
+          "type": "object",
+          "description": "Context object of the QnA",
+          "allOf": [
+            {
+              "$ref": "#/definitions/ContextDTO"
+            }
+          ]
+        },
+        "answerSpan": {
+          "type": "object",
+          "description": "Answer span object of QnA with respect to user's question.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/AnswerSpanResponseDTO"
+            }
+          ]
+        }
+      }
+    },
+    "FeedbackRecordsDTO": {
+      "type": "object",
+      "description": "Active learning feedback records.",
+      "additionalProperties": false,
+      "properties": {
+        "feedbackRecords": {
+          "type": "array",
+          "description": "List of feedback records.",
+          "maxLength": 1000,
+          "items": {
+            "$ref": "#/definitions/FeedbackRecordDTO"
+          }
+        }
+      }
+    },
+    "FeedbackRecordDTO": {
+      "type": "object",
+      "description": "Active learning feedback record.",
+      "additionalProperties": false,
+      "properties": {
+        "userId": {
+          "type": "string",
+          "description": "Unique identifier for the user."
+        },
+        "userQuestion": {
+          "type": "string",
+          "description": "The suggested question being provided as feedback.",
+          "maxLength": 1000
+        },
+        "qnaId": {
+          "type": "integer",
+          "description": "The qnaId for which the suggested question is provided as feedback.",
+          "format": "int32"
+        }
+      }
+    },
+    "AnswerSpanRequestDTO": {
+      "type": "object",
+      "description": "To use Answer Span prediction feature.",
+      "additionalProperties": false,
+      "properties": {
+        "enable": {
+          "type": "boolean",
+          "description": "To enable Answer Span prediction feature."
+        },
+        "scoreThreshold": {
+          "type": "number",
+          "format": "double",
+          "description": "Threshold for answer returned based on score."
+        },
+        "topAnswersWithSpan": {
+          "type": "integer",
+          "description": "Number of top answers where span needs to be predicted.",
+          "format": "int32",
+          "maximum": 10,
+          "minimum": 1
+        }
+      }
+    },
+    "AnswerSpanResponseDTO": {
+      "type": "object",
+      "description": "Answer span object of QnA.",
+      "additionalProperties": false,
+      "properties": {
+          "text": {
+            "type": "string",
+            "description": "Predicted text of answer span."
+          },
+          "score": {
+            "type": "integer",
+            "description": "Predicted score of answer span.",
+            "format":"int32"
+          },
+          "startIndex": {
+            "type": "integer",
+            "description": "Start index of answer span in answer.",
+            "format":"int32"
+          },
+          "endIndex": {
+            "type": "integer",
+            "description": "End index of answer span in answer.",
+            "format":"int32"
+          }
+      }
+    }
+  },
+  "parameters": {
+    "Environment": {
+      "type": "string",
+      "name": "environment",
+      "in": "path",
+      "required": true,
+      "x-nullable": false,
+      "description": "Specifies whether environment is Test or Prod.",
+      "x-ms-enum": {
+        "name": "EnvironmentType",
+        "modelAsString": true
+      },
+      "enum": [
+        "Prod",
+        "Test"
+      ],
+      "x-ms-parameter-location": "method"
+    },
+    "CreateKbPayload": {
+      "name": "createKbPayload",
+      "in": "body",
+      "required": true,
+      "schema": {
+        "$ref": "#/definitions/CreateKbDTO"
+      },
+      "x-nullable": true,
+      "description": "Post body of the request.",
+      "x-ms-parameter-location": "method"
+    },
+    "UpdateKb": {
+      "name": "updateKb",
+      "in": "body",
+      "required": true,
+      "schema": {
+        "$ref": "#/definitions/UpdateKbOperationDTO"
+      },
+      "x-nullable": true,
+      "description": "Post body of the request.",
+      "x-ms-parameter-location": "method"
+    },
+    "ReplaceKb": {
+      "name": "replaceKb",
+      "in": "body",
+      "required": true,
+      "schema": {
+        "$ref": "#/definitions/ReplaceKbDTO"
+      },
+      "x-nullable": true,
+      "description": "An instance of ReplaceKbDTO which contains list of qnas to be uploaded",
+      "x-ms-parameter-location": "method"
+    },
+    "KbId": {
+      "type": "string",
+      "name": "kbId",
+      "in": "path",
+      "required": true,
+      "x-nullable": false,
+      "description": "Knowledgebase id.",
+      "x-ms-parameter-location": "method"
+    },
+    "AlterationsKbId": {
+      "type": "string",
+      "name": "kbId",
+      "in": "path",
+      "required": false,
+      "x-nullable": false,
+      "description": "Knowledgebase id. This parameter is required for alterations operations on QnAMakerV2 resources.",
+      "x-ms-parameter-location": "method"
+    },
+    "OperationId": {
+      "type": "string",
+      "name": "operationId",
+      "in": "path",
+      "required": true,
+      "x-nullable": false,
+      "description": "Operation id.",
+      "x-ms-parameter-location": "method"
+    },
+    "WordAlterations": {
+      "name": "wordAlterations",
+      "in": "body",
+      "required": true,
+      "schema": {
+        "$ref": "#/definitions/WordAlterationsDTO"
+      },
+      "x-nullable": true,
+      "description": "New alterations data.",
+      "x-ms-parameter-location": "method"
+    },
+    "KeyType": {
+      "type": "string",
+      "name": "keyType",
+      "in": "path",
+      "required": true,
+      "x-nullable": false,
+      "description": "Type of Key",
+      "x-ms-parameter-location": "method"
+    },
+    "GenerateAnswerPayload": {
+      "name": "generateAnswerPayload",
+      "in": "body",
+      "required": true,
+      "schema": {
+        "$ref": "#/definitions/QueryDTO"
+      },
+      "x-nullable": true,
+      "description": "Post body of the request.",
+      "x-ms-parameter-location": "method"
+    },
+    "TrainPayload": {
+      "name": "trainPayload",
+      "in": "body",
+      "required": true,
+      "schema": {
+        "$ref": "#/definitions/FeedbackRecordsDTO"
+      },
+      "x-nullable": true,
+      "description": "Post body of the request.",
+      "x-ms-parameter-location": "method"
+    },
+    "Endpoint": {
+      "name": "Endpoint",
+      "description": "Supported Cognitive Services endpoints (protocol and hostname, for example: https://<qnamaker-resource-name>.api.cognitive.microsoft.com).",
+      "x-ms-parameter-location": "client",
+      "required": true,
+      "type": "string",
+      "in": "path",
+      "x-ms-skip-url-encoding": true
+    },
+    "EndpointSettingsPayload": {
+      "name": "endpointSettingsPayload",
+      "in": "body",
+      "required": true,
+      "schema": {
+        "$ref": "#/definitions/EndpointSettingsDTO"
+      },
+      "x-nullable": true,
+      "description": "Post body of the request.",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}
