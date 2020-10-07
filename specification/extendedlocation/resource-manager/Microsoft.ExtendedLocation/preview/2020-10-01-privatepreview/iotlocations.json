@@ -732,18 +732,22 @@
     "patchableIotLocations": {
       "description": "The Iot Locations patchable resource definition.",
       "type": "object",
+      "x-ms-azure-resource": true,
+      "x-ms-client-flatten": true,
       "properties": {
         "properties": {
           "$ref": "#/definitions/iotLocationPatchableProperties",
           "description": "The Iot Locations patchable properties.",
           "x-ms-client-flatten": true
+        },
+        "tags": {
+          "description": "Resource tags",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
         }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/Resource"
-        }
-      ]
+      }
     }
   }
 }
