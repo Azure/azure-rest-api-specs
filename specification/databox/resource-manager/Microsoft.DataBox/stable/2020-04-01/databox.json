@@ -512,6 +512,12 @@
           },
           "JobsCreateExport": {
             "$ref": "./examples/JobsCreateExport.json"
+          },
+          "JobsCreateDoubleEncryption": {
+            "$ref": "./examples/JobsCreateDoubleEncryption.json"
+          },
+          "JobsCreateWithUserAssignedIdentity": {
+            "$ref": "./examples/JobsCreateWithUserAssignedIdentity.json"
           }
         }
       },
@@ -630,6 +636,9 @@
           },
           "JobsPatchCmk": {
             "$ref": "./examples/JobsPatchCmk.json"
+          },
+          "JobsPatchSystemAssignedToUserAssigned": {
+            "$ref": "./examples/JobsPatchSystemAssignedToUserAssigned.json"
           }
         }
       }
@@ -2323,6 +2332,34 @@
         }
       }
     },
+    "EncryptionPreferences": {
+      "description": "Preferences related to the Encryption.",
+      "type": "object",
+      "properties": {
+        "doubleEncryption": {
+          "description": "Defines secondary layer of software-based encryption enablement.",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "DoubleEncryption",
+            "modelAsExtensible": true,
+            "values": [
+              {
+                "value": "Enabled",
+                "description": "Software-based encryption is enabled."
+              },
+              {
+                "value": "Disabled",
+                "description": "Software-based encryption is disabled."
+              }
+            ]
+          }
+        }
+      }
+    },
     "ErrorDetail": {
       "required": [
         "code",
@@ -2397,6 +2434,20 @@
       ],
       "properties": {},
       "x-ms-discriminator-value": "DataBoxHeavy"
+    },
+    "IdentityProperties": {
+      "description": "Managed identity properties.",
+      "type": "object",
+      "properties": {
+        "type": {
+          "description": "Managed service identity type.",
+          "type": "string"
+        },
+        "userAssigned": {
+          "$ref": "#/definitions/UserAssignedProperties",
+          "description": "User assigned identity properties."
+        }
+      }
     },
     "JobDeliveryInfo": {
       "description": "Additional delivery info.",
@@ -3036,6 +3087,10 @@
             ]
           }
         },
+        "identityProperties": {
+          "$ref": "#/definitions/IdentityProperties",
+          "description": "Managed identity properties used for key encryption."
+        },
         "kekUrl": {
           "description": "Key encryption key. It is required in case of Customer managed KekType.",
           "type": "string"
@@ -3238,6 +3293,10 @@
         "transportPreferences": {
           "$ref": "#/definitions/TransportPreferences",
           "description": "Preferences related to the shipment logistics of the sku."
+        },
+        "encryptionPreferences": {
+          "$ref": "#/definitions/EncryptionPreferences",
+          "description": "Preferences related to the Encryption."
         }
       }
     },
@@ -3412,6 +3471,13 @@
           "description": "Home Tenant Id",
           "type": "string",
           "readOnly": true
+        },
+        "userAssignedIdentities": {
+          "description": "User Assigned Identities",
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/UserAssignedIdentity"
+          }
         }
       }
     },
@@ -3612,8 +3678,7 @@
       "description": "Shipping address where customer wishes to receive the device.",
       "required": [
         "streetAddress1",
-        "country",
-        "postalCode"
+        "country"
       ],
       "type": "object",
       "properties": {
@@ -4371,6 +4436,32 @@
         "details": {
           "$ref": "#/definitions/UpdateJobDetails",
           "description": "Details of a job to be updated."
+        }
+      }
+    },
+    "UserAssignedIdentity": {
+      "description": "Class defining User assigned identity details.",
+      "type": "object",
+      "properties": {
+        "principalId": {
+          "description": "The principal id of user assigned identity.",
+          "type": "string",
+          "readOnly": true
+        },
+        "clientId": {
+          "description": "The client id of user assigned identity.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "UserAssignedProperties": {
+      "description": "User assigned identity properties.",
+      "type": "object",
+      "properties": {
+        "resourceId": {
+          "description": "Arm resource id for user assigned identity to be used to fetch MSI token.",
+          "type": "string"
         }
       }
     },
