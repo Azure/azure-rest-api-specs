@@ -5,6 +5,8 @@
 Configuration for generating QnAMaker SDK.
 
 The current release is `release_4_0`.
+A preview release `release_5_0_preview.1` is also available.
+
 
 ``` yaml
 
@@ -26,6 +28,19 @@ tag: runtime_release_4_0
 add-credentials: true
 openapi-type: data-plane
 ```
+
+### Release 5.0-preview.1
+These settings apply only when `--tag=release_5_0_preview.1` is specified on the command line.
+
+``` yaml $(tag) == 'release_4_0'
+input-file: preview/v5.0-preview.1/QnAMaker.json
+```
+
+``` yaml
+tag: runtime_release_5_0_preview.1
+add-credentials: true
+openapi-type: data-plane
+```
 # Runtime Releases
 
 ### Runtime Release 4.0
@@ -40,6 +55,19 @@ batch:
   - tag: release_4_0
   - tag: runtime_release_4_0
 ```
+### Runtime Release 5.0-preview.1
+These settings apply only when `--tag=runtime_release_5_0_preview.1` is specified on the command line.
+
+``` yaml $(tag) == 'runtime_release_5_0-preview.1'
+input-file: preview/v5.0-preview.1/QnAMakerRuntime.json
+```
+
+``` yaml
+batch:
+  - tag: release_5_0_preview.1
+  - tag: runtime_release_5_0_preview.1
+```
+
 
 ## Swagger to SDK
 
