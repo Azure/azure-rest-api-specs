@@ -25,9 +25,7 @@
           "application/json"
         ],
         "produces": [
-          "text/plain",
-          "application/json",
-          "text/json"
+          "application/json"
         ],
         "parameters": [
           {
@@ -81,41 +79,23 @@
           }
         },
         "produces": [
-          "text/plain",
-          "application/json",
-          "text/json"
+          "application/json"
         ],
         "parameters": [
           {
-            "in": "path",
-            "name": "id",
-            "description": "The name and identifier for the Job.",
-            "required": true,
-            "type": "string"
+            "$ref": "machineLearningServices.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "in": "query",
-            "name": "api-version",
-            "description": "Version of Azure Machine Learning resource provider API.",
-            "type": "string"
+            "$ref": "machineLearningServices.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "in": "path",
-            "name": "subscriptionId",
-            "required": true,
-            "type": "string"
+            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
           },
           {
-            "in": "path",
-            "name": "resourceGroupName",
-            "required": true,
-            "type": "string"
+            "$ref": "machineLearningServices.json#/parameters/APIVersionParameter"
           },
           {
-            "in": "path",
-            "name": "workspaceName",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/JobIdParameter"
           }
         ],
         "responses": {
@@ -140,35 +120,19 @@
         "summary": "Deletes a Job.",
         "parameters": [
           {
-            "in": "path",
-            "name": "id",
-            "description": "The name and identifier for the Job.",
-            "required": true,
-            "type": "string"
+            "$ref": "machineLearningServices.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "in": "query",
-            "name": "api-version",
-            "description": "Version of Azure Machine Learning resource provider API.",
-            "type": "string"
+            "$ref": "machineLearningServices.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "in": "path",
-            "name": "subscriptionId",
-            "required": true,
-            "type": "string"
+            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
           },
           {
-            "in": "path",
-            "name": "resourceGroupName",
-            "required": true,
-            "type": "string"
+            "$ref": "machineLearningServices.json#/parameters/APIVersionParameter"
           },
           {
-            "in": "path",
-            "name": "workspaceName",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/JobIdParameter"
           }
         ],
         "responses": {
@@ -200,9 +164,7 @@
           }
         },
         "produces": [
-          "text/plain",
-          "application/json",
-          "text/json"
+          "application/json"
         ],
         "parameters": [
           {
@@ -397,11 +359,13 @@
           "properties": {
             "workerCount": {
               "description": "The number of workers.",
+              "format": "int32",
               "type": "integer",
               "default": 1
             },
             "parameterServerCount": {
               "description": "The number of parameter servers.",
+              "format": "int32",
               "type": "integer",
               "default": 1
             }
@@ -421,11 +385,13 @@
           "properties": {
             "processCountPerNode": {
               "description": "The number of process in each node.",
+              "format": "int32",
               "type": "integer",
               "default": 1
             },
             "nodeCount": {
               "description": "The number nodes.",
+              "format": "int32",
               "type": "integer"
             }
           }
@@ -456,6 +422,7 @@
             },
             "nodeCount": {
               "description": "The number nodes.",
+              "format": "int32",
               "type": "integer"
             }
           }
