@@ -1,0 +1,58 @@
+{
+  "parameters": {
+    "api-version": "2019-01-01-preview",
+    "subscriptionId": "d0cfe6b2-9ac0-4464-9919-dccaee2e48c0",
+    "resourceGroupName": "myRg",
+    "workspaceName": "myWorkspace",
+    "operationalInsightsResourceProvider": "Microsoft.OperationalIinsights",
+    "entityId": "e1d3d618-e11f-478b-98e3-bb381539a8e1",
+    "parameters": {
+      "numberOfBucket": 4,
+      "startTime": "2019-04-25T00:00:00.000Z",
+      "endTime": "2019-05-26T00:00:00.000Z"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "queryKind": "SecurityAlert",
+            "id": "4467341f-fb73-4f99-a9b3-29473532cf5a_bf7c3a2f-b743-6410-3ff0-ec64b5995d50",
+            "productName": "Azure Sentinel",
+            "alertDisplayName": "ShayUS2019-15-04",
+            "severity": "Medium",
+            "endTimeUtc": "2020-08-29T23:31:28.02Z",
+            "startTimeUtc": "2020-08-28T23:32:28.01Z",
+            "timeGenerated": "2020-08-29T23:37:25.8136594Z",
+            "alertType": "4467341f-fb73-4f99-a9b3-29473532cf5a_c93bf33e-055e-4972-9e7d-f84fe3fb61ae"
+          },
+          {
+            "queryKind": "Activity",
+            "queryId": "e0459780-ac9d-4b72-8bd4-fecf6b46a0a1",
+            "bucketStartTimeUTC": "2020-08-29T21:31:28.02Z",
+            "bucketEndTimeUTC": "2020-08-29T23:31:28.02Z",
+            "firstActivityTimeUTC": "2020-08-29T21:35:28.02Z",
+            "lastActivityTimeUTC": "2020-08-29T21:35:28.02Z",
+            "content": "he user has deleted the account 5 time(s)",
+            "title": "The user has deleted an account"
+          }
+        ],
+        "metaData": {
+          "totalCount": 6,
+          "queryErrors": [
+            {
+              "queryKind": "Activity",
+              "queryId": "11067f9f-d6a7-4488-887f-0ba564268879",
+              "errorMessage": "syntax error"
+            },
+            {
+              "queryKind": "SecurityAlert",
+              "errorMessage": "internal server error"
+            }
+          ]
+        }
+      }
+    }
+  }
+}
