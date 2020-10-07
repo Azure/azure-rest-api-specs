@@ -12,16 +12,16 @@ python:
   payload-flattening-threshold: 2
   namespace: azure.mgmt.confluent
   package-name: azure-mgmt-confluent
-  package-version: 1.0.0
+  package-version: 2020-03-01-preview
   clear-output-folder: true
 ```
 ``` yaml $(python) && $(python-mode) == 'update'
 python:
   no-namespace-folders: true
-  output-folder: $(python-sdks-folder)/confluent/azure-mgmt-confluent/azure/mgmt/confluent
+  output-folder: $(python-sdks-folder)/azure-mgmt-confluent/azure/mgmt/confluent
 ```
 ``` yaml $(python) && $(python-mode) == 'create'
 python:
   basic-setup-py: true
-  output-folder: $(python-sdks-folder)/confluent/azure-mgmt-confluent
+  output-folder: $(python-sdks-folder)/azure-mgmt-confluent
 ```
