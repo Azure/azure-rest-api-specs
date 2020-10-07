@@ -1,0 +1,117 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "ApplicationInsightsManagementClient",
+    "description": "Azure Application Insights client for web test locations.",
+    "version": "2015-05-01"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Insights/components/{resourceName}/syntheticmonitorlocations": {
+      "get": {
+        "description": "Gets a list of web test locations available to this Application Insights component.",
+        "operationId": "webTestLocations_List",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A list containing 0 or more web test location names available to the Application Insights component.",
+            "schema": {
+              "$ref": "#/definitions/ApplicationInsightsWebTestLocationsListResult"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "WebTestLocationsList": {
+            "$ref": "./examples/WebTestLocationsList.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ApplicationInsightsWebTestLocationsListResult": {
+      "description": "Describes the list of web test locations available to an Application Insights Component.",
+      "required": [
+        "value"
+      ],
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "List of web test locations.",
+          "items": {
+            "$ref": "#/definitions/ApplicationInsightsComponentWebTestLocation"
+          }
+        }
+      }
+    },
+    "ApplicationInsightsComponentWebTestLocation": {
+      "description": "Properties that define a web test location available to an Application Insights Component.",
+      "type": "object",
+      "properties": {
+        "DisplayName": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The display name of the web test location."
+        },
+        "Tag": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Internally defined geographic location tag."
+        }
+      }
+    }
+  },
+  "parameters": {
+    "ResourceNameParameter": {
+      "name": "resourceName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the Application Insights component resource.",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}
