@@ -389,6 +389,10 @@
           "$ref": "#/definitions/ClusterPatchProperties",
           "description": "Log Analytics cluster properties."
         },
+        "identity": {
+          "$ref": "#/definitions/Identity",
+          "description": "The identity of the resource."
+        },
         "sku": {
           "$ref": "#/definitions/ClusterSku",
           "description": "The sku properties."
@@ -500,14 +504,22 @@
         },
         "type": {
           "type": "string",
-          "description": "The identity type.",
+          "description": "The type of identity used for the resource. The type 'SystemAssigned, UserAssigned' includes both an implicitly created identity and a set of user assigned identities.",
           "enum": [
             "SystemAssigned",
+            "UserAssigned",
             "None"
           ],
           "x-ms-enum": {
             "name": "IdentityType",
             "modelAsString": false
+          }
+        },
+        "userAssignedIdentities": {
+          "description": "The list of user identities associated with the resource. The user identity \r\ndictionary key references will be ARM resource ids in the form: \r\n'/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/\r\n    providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}'.",
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/UserIdentityProperties"
           }
         }
       },
@@ -515,6 +527,21 @@
         "type"
       ],
       "description": "Identity for the resource."
+    },
+    "UserIdentityProperties": {
+      "type": "object",
+      "properties": {
+        "principalId": {
+          "readOnly": true,
+          "description": "The principal id of user assigned identity.",
+          "type": "string"
+        },
+        "clientId": {
+          "readOnly": true,
+          "description": "The client id of user assigned identity.",
+          "type": "string"
+        }
+      }
     }
   },
   "parameters": {}
