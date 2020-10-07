@@ -2746,7 +2746,7 @@
           "type": "string",
           "enum": [
             "Running",
-            "Succeeded",
+            "Completed",
             "Failed"
           ],
           "x-ms-enum": {
@@ -2777,6 +2777,10 @@
         "reportUrl": {
           "description": "The URL to download the generated report.",
           "type": "string"
+        },
+        "validuntil": {
+          "description": "The time at which report URL becomes invalid.",
+          "type": "date-time"
         }
       }
     },
