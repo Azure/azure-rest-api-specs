@@ -7821,13 +7821,13 @@
         },
         "properties": {
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/EnrollmentAccountSubscriptionProperties",
-          "title": "Enrollment Account Subscription properties.This field is available only for the Enterprise Agreement Type.",
+          "$ref": "#/definitions/EnrollmentAccountSubscriptionDetails",
+          "title": "Enrollment Account Subscription details.This field is available only for the Enterprise Agreement Type.",
           "readOnly": true
         }
       }
     },
-    "EnrollmentAccountSubscriptionProperties": {
+    "EnrollmentAccountSubscriptionDetails": {
       "description": "The billing properties that can be modified. available only for the Enterprise Agreement Type.",
       "properties": {
         "subscriptionEnrollmentAccountStatus": {
@@ -7839,7 +7839,8 @@
             "Cancelled",
             "Expired",
             "Deleted",
-            "TransferredOut"
+            "TransferredOut",
+            "Transferring"
           ],
           "x-ms-enum": {
             "name": "BillingEnrollmentAccountSubscriptionStatusType",
