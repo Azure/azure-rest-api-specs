@@ -441,7 +441,7 @@
       }
     },
     "EventHubConfiguration": {
-      "description": "Iot Locations definition.",
+      "description": "Eventhub configuration definition.",
       "required": [
         "eventHubConnectionString"
       ],
@@ -453,8 +453,26 @@
         }
       }
     },
+    "HydrationInformation": {
+      "description": "Hydration information definition.",
+      "type": "object",
+      "properties": {
+        "destinationResourceGroupId": {
+          "description": "The fully qualified id for destination resource group.",
+          "type": "string"
+        },
+        "location": {
+          "description": "The location.",
+          "type": "string"
+        },
+        "providerNameSpace": {
+          "description": "The provider namespace.",
+          "type": "string"
+        }
+      }
+    },
     "IotHubConfiguration": {
-      "description": "Iot Locations definition.",
+      "description": "Iothub configuration definition.",
       "required": [
         "iotHubConnectionString"
       ],
@@ -675,6 +693,11 @@
           "description": "The eventhub configuration.",
           "x-ms-client-flatten": true
         },
+        "hydrationInformation": {
+          "$ref": "#/definitions/HydrationInformation",
+          "description": "The hydration information.",
+          "x-ms-client-flatten": true
+        },
         "iotHubConfiguration": {
           "$ref": "#/definitions/IotHubConfiguration",
           "description": "The iothub configuration.",
@@ -694,6 +717,11 @@
           "description": "The eventhub configuration.",
           "x-ms-client-flatten": true
         },
+        "hydrationInformation": {
+          "$ref": "#/definitions/HydrationInformation",
+          "description": "The hydration information.",
+          "x-ms-client-flatten": true
+        },
         "iotHubConfiguration": {
           "$ref": "#/definitions/IotHubConfiguration",
           "description": "The iothub configuration.",
@@ -704,22 +732,18 @@
     "patchableIotLocations": {
       "description": "The Iot Locations patchable resource definition.",
       "type": "object",
-      "x-ms-azure-resource": true,
-      "x-ms-client-flatten": true,
       "properties": {
         "properties": {
           "$ref": "#/definitions/iotLocationPatchableProperties",
           "description": "The Iot Locations patchable properties.",
           "x-ms-client-flatten": true
-        },
-        "tags": {
-          "description": "Resource tags",
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          }
         }
-      }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ]
     }
   }
 }
