@@ -1,0 +1,892 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Azure Machine Learning ManagementFrontEnd Service",
+    "version": "1.0.0"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/jobs/{id}": {
+      "put": {
+        "tags": [
+          "Job"
+        ],
+        "summary": "Creates and executes a Job.",
+        "operationId": "Jobs_CreateOrUpdate",
+        "x-ms-examples": {
+          "Create Or Update CommandJob": {
+            "$ref": "./examples/createOrUpdateCommandJob.json"
+          }
+        },
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+              "$ref": "machineLearningServices.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+              "$ref": "machineLearningServices.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+              "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+              "$ref": "machineLearningServices.json#/parameters/APIVersionParameter"
+          },
+          {
+              "$ref": "#/parameters/JobIdParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Job definition object.",
+            "schema": {
+              "$ref": "#/definitions/JobBaseResource"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+                "$ref": "machineLearningServices.json#/definitions/MachineLearningServiceError"
+            }
+          },
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/JobBaseResource"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Job"
+        ],
+        "summary": "Gets a Job by name/id.",
+        "operationId": "Jobs_Get",
+        "x-ms-examples": {
+          "Get CommandJob": {
+            "$ref": "./examples/getCommandJob.json"
+          }
+        },
+        "produces": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "description": "The name and identifier for the Job.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "api-version",
+            "description": "Version of Azure Machine Learning resource provider API.",
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "subscriptionId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "resourceGroupName",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "workspaceName",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+                "$ref": "machineLearningServices.json#/definitions/MachineLearningServiceError"
+            }
+          },
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/JobBaseResource"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Job"
+        ],
+        "summary": "Deletes a Job.",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "description": "The name and identifier for the Job.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "api-version",
+            "description": "Version of Azure Machine Learning resource provider API.",
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "subscriptionId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "resourceGroupName",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "workspaceName",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+            "default": {
+              "description": "Error",
+              "schema": {
+                  "$ref": "machineLearningServices.json#/definitions/MachineLearningServiceError"
+              }
+            },
+          "200": {
+            "description": "Success"
+          },
+          "204": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/jobs": {
+      "get": {
+        "tags": [
+          "Job"
+        ],
+        "summary": "Lists Jobs in the workspace.",
+        "operationId": "Jobs_List",
+        "x-ms-examples": {
+          "List Jobs": {
+            "$ref": "./examples/listJobs.json"
+          }
+        },
+        "produces": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+            {
+                "$ref": "machineLearningServices.json#/parameters/SubscriptionIdParameter"
+            },
+            {
+                "$ref": "machineLearningServices.json#/parameters/ResourceGroupNameParameter"
+            },
+            {
+                "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
+            },
+            {
+                "$ref": "machineLearningServices.json#/parameters/APIVersionParameter"
+            },
+            {
+              "$ref": "machineLearningServices.json#/parameters/PaginationParameter"
+            }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+                "$ref": "machineLearningServices.json#/definitions/MachineLearningServiceError"
+            }
+          },
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/JobBaseResourceArmPaginatedResult"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/jobs/{id}/cancel": {
+      "post": {
+        "tags": [
+          "Job"
+        ],
+        "summary": "Cancels a Job.",
+        "parameters": [
+            {
+                "$ref": "machineLearningServices.json#/parameters/SubscriptionIdParameter"
+            },
+            {
+                "$ref": "machineLearningServices.json#/parameters/ResourceGroupNameParameter"
+            },
+            {
+                "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
+            },
+            {
+                "$ref": "machineLearningServices.json#/parameters/APIVersionParameter"
+            },
+            {
+                "$ref": "#/parameters/JobIdParameter"
+            }
+        ],
+        "responses": {
+            "default": {
+              "description": "Error",
+              "schema": {
+                  "$ref": "machineLearningServices.json#/definitions/MachineLearningServiceError"
+              }
+            },
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    }
+  },
+  "parameters": {
+    "JobIdParameter": {
+      "in": "path",
+      "name": "id",
+      "type": "string",
+      "description": "Name and identifier for Job.",
+      "required": true,
+      "x-ms-parameter-location": "method"
+    }
+  },
+  "definitions": {
+    "CodeConfiguration": {
+      "required": [
+        "command"
+      ],
+      "type": "object",
+      "properties": {
+        "commandType": {
+          "description": "Specifies the type of command.",
+          "enum": [
+            "Command",
+            "Python"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "CommandType",
+            "modelAsString": false
+          }
+        },
+        "codeArtifactId": {
+          "description": "The ID of the code asset.",
+          "type": "string"
+        },
+        "command": {
+          "description": "The command to execute on startup of the job.",
+          "minLength": 1,
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "ComputeConfiguration": {
+      "type": "object",
+      "properties": {
+        "computeType": {
+          "enum": [
+            "AMLCompute",
+            "AKS",
+            "ACI"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "ComputeType",
+            "modelAsString": false
+          }
+        }
+      }
+    },
+    "DataBinding": {
+      "description": "Data binding definition.",
+      "type": "object",
+      "properties": {
+        "sourceDataReference": {
+          "description": "Reference to source data artifact.",
+          "type": "string"
+        },
+        "localReference": {
+          "description": "Location of data inside the container process.",
+          "type": "string"
+        },
+        "mode": {
+          "description": "Describes how the data should be attached to the container.",
+          "enum": [
+            "Mount",
+            "Download",
+            "Upload"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "DataBindingMode",
+            "modelAsString": false
+          }
+        }
+      }
+    },
+    "DistributionConfiguration": {
+      "type": "object",
+      "discriminator": "distributionType",
+      "required": [
+        "distributionType"
+      ],
+      "properties": {
+        "distributionType": {
+          "description": "Specifies the type of distibution framework.",
+          "enum": [
+            "PyTorch",
+            "Tensorflow",
+            "Mpi"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "DistributionType",
+            "modelAsString": false
+          }
+        }
+      }
+    },
+    "Tensorflow": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DistributionConfiguration"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "workerCount": {
+              "description": "The number of workers.",
+              "type": "integer",
+              "default": 1
+            },
+            "parameterServerCount": {
+              "description": "The number of parameter servers.",
+              "type": "integer",
+              "default": 1
+            }
+          }
+        }
+      ],
+      "x-ms-discriminator-value": "Tensorflow"
+    },
+    "Mpi": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DistributionConfiguration"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "processCountPerNode": {
+              "description": "The number of process in each node.",
+              "type": "integer",
+              "default": 1
+            },
+            "nodeCount": {
+              "description": "The number nodes.",
+              "type": "integer"
+            }
+          }
+        }
+      ],
+      "x-ms-discriminator-value": "Mpi"
+    },
+    "Pytorch": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DistributionConfiguration"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "communicatorBackend": {
+              "description": "Specifies the communicator backend.",
+              "enum": [
+                "Nccl",
+                "Gloo"
+              ],
+              "type": "string",
+              "x-ms-enum": {
+                "name": "CommunicatorBackend",
+                "modelAsString": false
+              }
+            },
+            "nodeCount": {
+              "description": "The number nodes.",
+              "type": "integer"
+            }
+          }
+        }
+      ],
+      "x-ms-discriminator-value": "Pytorch"
+    },
+    "ComputeBinding": {
+      "description": "Compute binding definition.",
+      "required": [
+        "computeId"
+      ],
+      "type": "object",
+      "properties": {
+        "computeId": {
+          "description": "ID of the compute resource.",
+          "pattern": "\\w",
+          "type": "string"
+        },
+        "nodeCount": {
+          "format": "int32",
+          "description": "Number of nodes.",
+          "type": "integer"
+        }
+      }
+    },
+    "CodeJob": {
+      "description": "Code Job definition",
+      "required": [
+        "codeConfiguration",
+        "computeBinding",
+        "jobType"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/JobBase"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "status": {
+              "description": "Status of the job.",
+              "enum": [
+                "NotStarted",
+                "Starting",
+                "Provisioning",
+                "Preparing",
+                "Queued",
+                "Running",
+                "Finalizing",
+                "CancelRequested",
+                "Completed",
+                "Failed",
+                "Canceled",
+                "NotResponding",
+                "Paused"
+              ],
+              "type": "string",
+              "readOnly": true,
+              "x-ms-enum": {
+                "name": "JobStatus",
+                "modelAsString": false
+              },
+              "x-ms-mutability": [
+                "read"
+              ]
+            },
+            "maxRunDurationSeconds": {
+              "format": "int64",
+              "description": "The max run duration in seconds, ater which the job will be cancelled.",
+              "type": "integer",
+              "x-ms-mutability": [
+                "create",
+                "read"
+              ]
+            },
+            "codeConfiguration": {
+              "$ref": "#/definitions/CodeConfiguration"
+            },
+            "environmentId": {
+              "description": "Environment specification of the job.",
+              "type": "string",
+              "x-ms-mutability": [
+                "create",
+                "read"
+              ]
+            },
+            "dataBindings": {
+              "description": "Mapping of data bindings used in the job.",
+              "type": "object",
+              "additionalProperties": {
+                "$ref": "#/definitions/DataBinding"
+              },
+              "x-ms-mutability": [
+                "create",
+                "read"
+              ]
+            },
+            "distributionConfiguration": {
+              "$ref": "#/definitions/DistributionConfiguration"
+            },
+            "studioEndpoint": {
+              "format": "uri",
+              "type": "string",
+              "readOnly": true,
+              "x-ms-mutability": [
+                "read"
+              ]
+            },
+            "trackingEndpoint": {
+              "format": "uri",
+              "type": "string",
+              "readOnly": true,
+              "x-ms-mutability": [
+                "read"
+              ]
+            },
+            "experimentName": {
+              "description": "The name of the experiment the job belongs to. If not set, the job is placed in the \"Default\" experiment.",
+              "type": "string",
+              "x-ms-mutability": [
+                "create",
+                "read"
+              ]
+            },
+            "computeBinding": {
+              "$ref": "#/definitions/ComputeBinding"
+            }
+          }
+        }
+      ],
+      "x-ms-discriminator-value": "Command"
+    },
+    "JobBase": {
+      "description": "Job base definition",
+      "type": "object",
+      "required": [
+        "jobType"
+      ],
+      "discriminator": "jobType",
+      "properties": {
+        "jobType": {
+          "description": "Specifies the type of job.",
+          "enum": [
+            "Command",
+            "Sweep",
+            "Labeling",
+            "Pipeline",
+            "Data",
+            "AutoML"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "JobType",
+            "modelAsString": false
+          }
+        },
+        "id": {
+          "description": "Name and identifier for a job.",
+          "type": "string",
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ]
+        },
+        "properties": {
+          "description": "The job property dictionary. Properties can be added, but not removed or altered.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "x-ms-mutability": [
+            "create",
+            "read",
+            "update"
+          ]
+        },
+        "tags": {
+          "description": "The job tag dictionary. Tags can be added, removed, and updated.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "x-ms-mutability": [
+            "create",
+            "read",
+            "update"
+          ]
+        }
+      }
+    },
+    "JobBaseResource": {
+      "description": "Azure Resource Manager resource Envelope",
+      "x-ms-azure-resource": true,
+      "required": [
+        "properties"
+      ],
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "The resource URL of the entity (not URL encoded).",
+          "type": "string",
+          "readOnly": true
+        },
+        "name": {
+          "description": "The name of the resource entity.",
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "description": "The resource provider and type.",
+          "type": "string",
+          "readOnly": true
+        },
+        "properties": {
+          "$ref": "#/definitions/JobBase"
+        },
+        "systemData": {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
+        }
+      }
+    },
+    "JobBaseResourceArmPaginatedResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/JobBaseResource"
+          }
+        },
+        "nextLink": {
+          "type": "string"
+        }
+      }
+    },
+    "ParameterSamplingConfiguration": {
+      "description": "class for all hyperparameter sampling algorithms",
+      "type": "object",
+      "properties": {
+        "parameterSpace": {
+          "description": "A dictionary containing each parameter and its distribution. The dictionary key is the name of the parameter",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "properties": {
+          "description": "A dictionary with additional properties for the algorithm.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "samplingType": {
+          "description": "Type of the hyperparameter sampling algorithms",
+          "enum": [
+            "Grid",
+            "Random",
+            "Bayesian"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "ParameterSamplingType",
+            "modelAsString": false
+          }
+        }
+      }
+    },
+    "EarlyTerminationPolicyConfiguration": {
+      "description": "Early termination policies enable canceling poor-performing runs before they complete",
+      "type": "object",
+      "properties": {
+        "policyType": {
+          "description": "Name of policy configuration",
+          "enum": [
+            "Bandit",
+            "MedianStopping",
+            "TruncationSelection"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "EarlyTerminationPolicyType",
+            "modelAsString": false
+          }
+        },
+        "evaluationInterval": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "delayEvaluation": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "properties": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "TerminationConfiguration": {
+      "type": "object",
+      "properties": {
+        "maxTotalRuns": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "maxConcurrentRuns": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "maxDurationMinutes": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "earlyTerminationPolicyConfiguration": {
+          "$ref": "#/definitions/EarlyTerminationPolicyConfiguration"
+        }
+      }
+    },
+    "EvaluationConfiguration": {
+      "type": "object",
+      "properties": {
+        "primaryMetricName": {
+          "type": "string"
+        },
+        "primaryMetricGoal": {
+          "description": "Defines supported metric goals for hyperparameter tuning",
+          "enum": [
+            "Minimize",
+            "Maximize"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "PrimaryMetricGoal",
+            "modelAsString": false
+          }
+        }
+      }
+    },
+    "TrialJob": {
+      "type": "object",
+      "properties": {
+        "codeConfiguration": {
+          "$ref": "#/definitions/CodeConfiguration"
+        },
+        "environmentId": {
+          "description": "Environment id of the job.",
+          "type": "string"
+        },
+        "parentRunId": {
+          "description": "Run ID of the parent job.",
+          "type": "string"
+        },
+        "snapshotId": {
+          "format": "uuid",
+          "description": "Snapshot of the parent run.",
+          "type": "string"
+        },
+        "user": {
+          "description": "User creating job",
+          "type": "string"
+        }
+      }
+    },
+    "SweepJob": {
+      "required": [
+        "computeBinding",
+        "jobType"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/JobBase"
+        },
+        {    
+          "type": "object",
+          "properties": {
+            "status": {
+              "description": "The status of a job.",
+              "enum": [
+                "NotStarted",
+                "Starting",
+                "Provisioning",
+                "Preparing",
+                "Queued",
+                "Running",
+                "Finalizing",
+                "CancelRequested",
+                "Completed",
+                "Failed",
+                "Canceled",
+                "NotResponding",
+                "Paused"
+              ],
+              "type": "string",
+              "x-ms-enum": {
+                "name": "JobStatus",
+                "modelAsString": false
+              }
+            },
+            "parameterSamplingConfiguration": {
+              "$ref": "#/definitions/ParameterSamplingConfiguration"
+            },
+            "terminationConfiguration": {
+              "$ref": "#/definitions/TerminationConfiguration"
+            },
+            "evaluationConfiguration": {
+              "$ref": "#/definitions/EvaluationConfiguration"
+            },
+            "trialJob": {
+              "$ref": "#/definitions/TrialJob"
+            },
+            "experimentName": {
+              "description": "The name of the experiment the job belongs to. If not set, the job is placed in the \"Default\" experiment.",
+              "type": "string",
+              "x-ms-mutability": [
+                "create",
+                "read"
+              ]
+            },
+            "computeBinding": {
+              "$ref": "#/definitions/ComputeBinding"
+            }
+          }
+        }
+      ],
+      "x-ms-discriminator-value": "Sweep"
+    }
+  }
+}
