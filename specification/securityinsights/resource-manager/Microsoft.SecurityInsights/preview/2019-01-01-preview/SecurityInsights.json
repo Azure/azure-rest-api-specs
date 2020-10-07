@@ -2151,7 +2151,7 @@
           "Entities"
         ],
         "description": "Timeline for an entity.",
-        "operationId": "Entities_Timeline",
+        "operationId": "EntitiesTimeline_List",
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersion"
@@ -6489,7 +6489,8 @@
         },
         "count": {
           "description": "Total number of aggregations of the given kind (and aggregationType if given) in the expansion result.",
-          "type": "integer"
+          "type": "integer",
+          "format": "int32"
         },
         "displayName": {
           "description": "The display name of the aggregation by type.",
@@ -6524,7 +6525,8 @@
       "properties": {
         "totalCount": {
           "description": "the total items found for the timeline request",
-          "type": "integer"
+          "type": "integer",
+          "format": "int32"
         },
         "queryErrors": {
           "description": "information about the failure queries",
