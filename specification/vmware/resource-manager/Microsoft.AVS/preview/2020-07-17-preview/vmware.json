@@ -59,10 +59,6 @@
       "description": ""
     },
     {
-      "name": "Arc",
-      "description": ""
-    },
-    {
       "name": "GlobalReachConnections",
       "description": ""
     },
@@ -1285,104 +1281,6 @@
         "x-ms-examples": {
           "Authorizations_Delete": {
             "$ref": "./examples/Authorizations_Delete.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/arc": {
-      "get": {
-        "operationId": "Arc_Get",
-        "tags": [
-          "Arc"
-        ],
-        "summary": "Get arc details associated with a private cloud, if configured",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/privateCloudName"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "successful operation",
-            "schema": {
-              "$ref": "#/definitions/Arc"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Arc_Get": {
-            "$ref": "./examples/Arc_Get.json"
-          }
-        }
-      },
-      "put": {
-        "operationId": "Arc_CreateOrUpdate",
-        "x-ms-long-running-operation": true,
-        "tags": [
-          "Arc"
-        ],
-        "summary": "Create or update arc in a private cloud",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/privateCloudName"
-          },
-          {
-            "name": "arcConfig",
-            "description": "The arc configuration",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/Arc"
-            }
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "successful operation",
-            "schema": {
-              "$ref": "#/definitions/Arc"
-            }
-          },
-          "201": {
-            "description": "accepted operation",
-            "schema": {
-              "$ref": "#/definitions/Arc"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Arc_CreateOrUpdate": {
-            "$ref": "./examples/Arc_CreateOrUpdate.json"
           }
         }
       }
@@ -3442,76 +3340,6 @@
             "name": "HcxEnterpriseSiteStatus",
             "modelAsString": true
           }
-        }
-      }
-    },
-    "Arc": {
-      "description": "An Arc configuration resource",
-      "allOf": [
-        {
-          "$ref": "#/definitions/Resource"
-        }
-      ],
-      "properties": {
-        "properties": {
-          "description": "The properties of an Arc resource",
-          "$ref": "#/definitions/ArcProperties",
-          "x-ms-client-flatten": true
-        }
-      }
-    },
-    "ArcProperties": {
-      "description": "The properties of an Arc resource",
-      "properties": {
-        "erAuthTokenName": {
-          "description": "Name of the Express route authentication token",
-          "type": "string"
-        },
-        "arcResourceGroupName": {
-          "description": "Name of resource group for deploying Arc fabric resources",
-          "type": "string"
-        },
-        "vnetAddrBlock": {
-          "description": "CIDR block for deploying Arc machinery. The address block should be unique across VNet in your subscription as well as on-premise. Make sure the CIDR format is conformed to (A.B.C.D/X) where A,B,C,D are between 0 and 255, and X is between 0 and 26",
-          "type": "string"
-        },
-        "location": {
-          "description": "Optionally, set the Arc fabric resources deployment location. Defaults to the private cloud location",
-          "type": "string"
-        },
-        "arcSubscriptionId": {
-          "description": "Optionally, set ID of the Arc fabric resources deployment Subscription. Defaults to the private cloud subscription",
-          "type": "string"
-        },
-        "provisioningState": {
-          "description": "The status of the Arc configuration",
-          "type": "string",
-          "readOnly": true,
-          "enum": [
-            "Succeeded",
-            "Failed",
-            "Cancelled",
-            "Running"
-          ],
-          "x-ms-enum": {
-            "name": "ArcConfigurationState",
-            "modelAsString": true
-          }
-        },
-        "infraResourceGroupName": {
-          "description": "Name of the Arc infrastructure resource group for a private cloud",
-          "type": "string",
-          "readOnly": true
-        },
-        "aksClusterId": {
-          "description": "ARM ID of the AKS cluster resource deployed in infra resource group",
-          "type": "string",
-          "readOnly": true
-        },
-        "arcZoneId": {
-          "description": "ARM ID of the ArcZone resource deployed in arc resource group",
-          "type": "string",
-          "readOnly": true
         }
       }
     },
