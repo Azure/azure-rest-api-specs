@@ -6,13 +6,13 @@
     "version": "2020-10-01"
   },
   "x-ms-parameterized-host": {
-    "hostTemplate": "{tenantBaseUrl}",
+    "hostTemplate": "{instanceUrl}",
     "useSchemePrefix": false,
     "parameters": [
       {
-        "name": "tenantBaseUrl",
+        "name": "instanceUrl",
         "x-ms-parameter-location": "client",
-        "description": "The tenant name, for example https://mytenant.attest.azure.net.",
+        "description": "The attestation instance base URI, for example https://mytenant.attest.azure.net.",
         "required": true,
         "type": "string",
         "in": "path",
@@ -66,7 +66,7 @@
             "required": true,
             "x-ms-client-flatten": true,
             "schema": {
-              "type": "string"
+              "$ref": "#/definitions/JsonWebToken"
             }
           }
         ],
@@ -74,7 +74,7 @@
           "200": {
             "description": "Success - Returns a JWT signed by the metadata signing key that contains the hash of the supplied policy to be set.",
             "schema": {
-              "type": "string"
+              "$ref": "#/definitions/JsonWebToken"
             }
           },
           "default": {
@@ -149,7 +149,7 @@
             "required": true,
             "x-ms-client-flatten": true,
             "schema": {
-              "type": "string"
+              "$ref": "#/definitions/JsonWebToken"
             }
           }
         ],
@@ -193,7 +193,7 @@
             "required": true,
             "x-ms-client-flatten": true,
             "schema": {
-              "type": "string"
+              "$ref": "#/definitions/JsonWebToken"
             }
           }
         ],
@@ -201,7 +201,7 @@
           "200": {
             "description": "Success - Returns a JWT signed by the metadata signing key that contains the hash of the supplied policy to be set.",
             "schema": {
-              "type": "string"
+              "$ref": "#/definitions/JsonWebToken"
             }
           },
           "default": {
@@ -234,7 +234,7 @@
           "200": {
             "description": "An RFC7519 JSON Web Token structure containing an RFC7517 JsonWebKeySet which contains the certificates used to validate policy changes",
             "schema": {
-              "type": "string"
+              "$ref": "#/definitions/JsonWebToken"
             }
           },
           "default": {
@@ -263,10 +263,10 @@
           {
             "name": "policyCertificateToAdd",
             "in": "body",
-            "description": "An RFC7519 JSON Web Token containing a claim named \"maa-policyCertificate\" whose value is an RFC7517 JSON Web Key which specifies a new key to add. The RFC7519 JWT must be signed with one of the existing signing certificates",
+            "description": "An RFC7519 JSON Web Token whose body is an AttestationCertificateManagementBody object. The RFC7519 JWT must be signed with one of the existing signing certificates",
             "required": true,
             "schema": {
-              "type": "string"
+              "$ref": "#/definitions/JsonWebToken"
             }
           }
         ],
@@ -274,7 +274,7 @@
           "200": {
             "description": "An RFC7519 JSON Web Token structure containing an RFC7517 JsonWebKeySet which contains the certificates used to validate policy changes",
             "schema": {
-              "type": "string"
+              "$ref": "#/definitions/JsonWebToken"
             }
           },
           "default": {
@@ -303,10 +303,10 @@
           {
             "name": "policyCertificateToRemove",
             "in": "body",
-            "description": "An RFC7519 JSON Web Token containing a claim named \"maa-policyCertificate\" whose value is an RFC7517 JSON Web Key which specifies a new key to update. The RFC7519 JWT must be signed with one of the existing signing certificates",
+            "description": "An RFC7519 JSON Web Token whose body is an AttestationCertificateManagementBody object. The RFC7519 JWT must be signed with one of the existing signing certificates",
             "required": true,
             "schema": {
-              "type": "string"
+              "$ref": "#/definitions/JsonWebToken"
             }
           }
         ],
@@ -314,7 +314,7 @@
           "200": {
             "description": "An RFC7519 JSON Web Token structure containing an RFC7517 JsonWebKeySet which contains the certificates used to validate policy changes",
             "schema": {
-              "type": "string"
+              "$ref": "#/definitions/JsonWebToken"
             }
           },
           "default": {
@@ -334,7 +334,7 @@
     "/attest/OpenEnclave": {
       "post": {
         "tags": [
-          "attestation"
+          "Attestation"
         ],
         "summary": "Attest to an SGX enclave.",
         "description": "Processes an OpenEnclave report , producing an artifact. The type of artifact produced is dependent upon attestation policy.",
@@ -357,7 +357,7 @@
           "200": {
             "description": "Success",
             "schema": {
-              "type": "string"
+              "$ref": "#/definitions/AttestationResult"
             }
           },
           "default": {
@@ -377,7 +377,7 @@
     "/attest/SgxEnclave": {
       "post": {
         "tags": [
-          "attestation"
+          "Attestation"
         ],
         "summary": "Attest to an SGX enclave.",
         "description": "Processes an SGX enclave quote, producing an artifact. The type of artifact produced is dependent upon attestation policy.",
@@ -400,7 +400,7 @@
           "200": {
             "description": "Success",
             "schema": {
-              "type": "string"
+              "$ref": "#/definitions/AttestationResult"
             }
           },
           "default": {
@@ -417,14 +417,14 @@
         }
       }
     },
-    "/attest/VbsEnclave": {
+    "/attest/Tpm": {
       "post": {
         "tags": [
-          "attestation"
+          "Attestation"
         ],
         "summary": "Attest a Virtualization-based Security (VBS) enclave.",
         "description": "Processes attestation evidence from a VBS enclave, producing an attestation result. The attestation result produced is dependent upon the attestation policy.",
-        "operationId": "Attestation_AttestVbsEnclave",
+        "operationId": "Attestation_AttestTpm",
         "consumes": [
           "application/json"
         ],
@@ -457,7 +457,7 @@
           }
         },
         "x-ms-examples": {
-          "Attest VbsEnclave": {
+          "Attest EdgeTpm": {
             "$ref": "./examples/AttestVbsEnclave.json"
           }
         }
@@ -489,7 +489,7 @@
           "200": {
             "description": "Success",
             "schema": {
-              "type": "string"
+              "$ref": "#/definitions/AttestationResult"
             }
           },
           "default": {
@@ -509,7 +509,10 @@
     "/certs": {
       "get": {
         "tags": [
-          "Attestation Provider"
+          "OpenID Metadata Discovery"
+        ],
+        "produces": [
+          "application/json"
         ],
         "summary": "Retrieves the attestation signing keys in use by the attestation service",
         "description": "Retrieves metadata signing certificates in use by the attestation service",
@@ -518,7 +521,7 @@
           "200": {
             "description": "Success",
             "schema": {
-              "type": "object"
+              "$ref": "../../../../../common-types/rfcs/rfc7517.json#/definitions/JSONWebKeySet"
             }
           },
           "default": {
@@ -529,7 +532,7 @@
           }
         },
         "x-ms-examples": {
-          "Reset Policy": {
+          "Get Token Signing Certificates": {
             "$ref": "./examples/Get_Certs.json"
           }
         }
@@ -538,7 +541,7 @@
     "/.well-known/openid-configuration": {
       "get": {
         "tags": [
-          "Attestation Provider"
+          "OpenID Metadata Discovery"
         ],
         "summary": "Retrieves the OpenID Configuration data for the Azure Attestation Service",
         "description": "Retrieves metadata about the attestation signing keys in use by the attestation service",
@@ -558,7 +561,7 @@
           }
         },
         "x-ms-examples": {
-          "Reset Policy": {
+          "Get OpenID Metadata": {
             "$ref": "./examples/Get_MetadataConfiguration.json"
           }
         }
@@ -589,6 +592,15 @@
       },
       "description": "An error response from Attestation."
     },
+    "JsonWebToken": {
+      "description": "An RFC 7519 Json Web Token",
+      "type": "string",
+      "pattern": "[A-Za-z0-9_-]+\\.[A-Za-z0-9_-]*\\.[A-Za-z0-9_-]*",
+      "externalDocs": {
+        "description": "JSON Web Token RFC",
+        "url": "https://tools.ietf.org/html/rfc7519"
+      }
+    },
     "AttestationCertificateManagementBody": {
       "type": "object",
       "description": "The body of the JWT used for the PolicyCertificates APIs",
@@ -596,6 +608,16 @@
         "policyCertificate": {
           "description": "RFC 7517 Json Web Key describing the certificate.",
           "$ref": "../../../../../common-types/rfcs/rfc7517.json#/definitions/JSONWebKey"
+        }
+      }
+    },
+    "AttestationResult": {
+      "type": "object",
+      "description": "The result of an attestation operation",
+      "properties": {
+        "token": {
+          "description": "An RFC 7519 JSON Web Token",
+          "$ref": "#/definitions/JsonWebToken"
         }
       }
     },
@@ -626,8 +648,9 @@
       "description": "Defines the \"run time data\" provided by the attestation target for use by the MAA",
       "properties": {
         "data": {
-          "description": "Base64Url encoded Runtime Data generated by the trusted environment",
-          "type": "string"
+          "description": "UTF-8 encoded Runtime Data generated by the trusted environment",
+          "type": "string",
+          "format": "base64url"
         },
         "dataType": {
           "description": "The type of data contained within the \"data\" field",
@@ -640,8 +663,9 @@
       "description": "Defines the \"initialization time data\" used to provision the attestation target for use by the MAA",
       "properties": {
         "data": {
-          "description": "Initialization Data passed into the trusted environment when it is created.",
-          "type": "string"
+          "description": "UTF-8 encoded Initialization Data passed into the trusted environment when it is created.",
+          "type": "string",
+          "format": "base64url"
         },
         "dataType": {
           "description": "The type of data contained within the \"data\" field",
@@ -655,14 +679,15 @@
       "properties": {
         "quote": {
           "description": "Quote of the enclave to be attested",
-          "type": "string"
+          "type": "string",
+          "format": "base64url"
         },
         "runtimeData": {
-          "description": "Base64Url encoded \"RunTime data\". The MAA will verify that the first 32 bytes of the report_data field of the quote contains the SHA256 hash of the decoded runtime data.",
+          "description": "Runtime data provided by the enclave at the time of quote generation. The MAA will verify that the first 32 bytes of the report_data field of the quote contains the SHA256 hash of the decoded \"data\" field of the runtime data.",
           "$ref": "#/definitions/RuntimeData"
         },
         "initTimeData": {
-          "description": "Base64Url encoded \"InitTime data\". The MAA will verify that the init data was known to the enclave. Note that InitTimeData is invalid for CoffeeLake processors.",
+          "description": "Initialization data provided when the enclave is created. MAA will verify that the init data was known to the enclave. Note that InitTimeData is invalid for CoffeeLake processors.",
           "$ref": "#/definitions/InitTimeData"
         },
         "draftPolicyForAttestation": {
@@ -677,10 +702,11 @@
       "properties": {
         "report": {
           "description": "OpenEnclave report from the enclave to be attested",
-          "type": "string"
+          "type": "string",
+          "format": "base64url"
         },
         "runtimeData": {
-          "description": "Base64Url encoded \"RunTime claims\". The MAA will verify that the first 32 bytes of the report_data field of the report contains the SHA256 hash of the decoded runtime data.",
+          "description": "Runtime data provided by the enclave at the time of report generation. The MAA will verify that the first 32 bytes of the report_data field of the quote contains the SHA256 hash of the decoded \"data\" field of the runtime data.",
           "$ref": "#/definitions/RuntimeData"
         },
         "initTimeData": {
@@ -699,7 +725,8 @@
       "properties": {
         "data": {
           "description": "Protocol data containing artifacts for attestation.",
-          "type": "string"
+          "type": "string",
+          "format": "base64url"
         }
       }
     },
@@ -709,7 +736,8 @@
       "properties": {
         "data": {
           "description": "Protocol data containing attestation service response.",
-          "type": "string"
+          "type": "string",
+          "format": "base64url"
         }
       }
     },
@@ -739,11 +767,11 @@
           "type": "string"
         },
         "runtimeData": {
-          "description": "Base64Url encoded \"RunTime claims\". The MAA will verify that the runtime data originated from the enclave.",
+          "description": "Runtime data provided by the enclave at the time of report generation. The MAA will verify that the run time data is known to the attestation target.",
           "$ref": "#/definitions/RuntimeData"
         },
         "initTimeData": {
-          "description": "Base64Url encoded \"InitTime data\". The MAA will verify that the init data was used when provisioning to the enclave.",
+          "description": "Initialization data provided by the enclave at the time of report generation. The MAA will verify that the init time data is known to the attestation target.",
           "$ref": "#/definitions/InitTimeData"
         },
         "draftPolicyForAttestation": {
@@ -758,6 +786,16 @@
         "policy": {
           "description": "JSON Web Token whose body is a JSON object with a single field named \"AttestationPolicy\" and whose value is the Base64Url of the policy document to set.",
           "type": "string"
+        }
+      }
+    },
+    "AttestationPolicyRequest": {
+      "type": "object",
+      "properties": {
+        "AttestationPolicy": {
+          "description": "Policy text to set as a sequence of UTF-8 encoded octets.",
+          "type": "string",
+          "format": "base64url"
         }
       }
     }
@@ -794,8 +832,8 @@
             "description": "AMD SEV SNP Virtual Machine"
           },
           {
-            "value": "VBSEnclave",
-            "description": "VBS Virtualization Based Security"
+            "value": "Tpm",
+            "description": "Edge TPM Virtualization Based Security"
           }
         ]
       },
@@ -803,7 +841,7 @@
         "SgxEnclave",
         "OpenEnclave",
         "SevSnpVm",
-        "VBSEnclave"
+        "Tpm"
       ]
     }
   }
