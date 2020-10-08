@@ -21,6 +21,13 @@ output-folder: $(azureresourceschema-folder)/schemas
 # all the input files in this apiVersion
 input-file:
   - Microsoft.DataFactory/stable/2018-06-01/datafactory.json
+  - Microsoft.DataFactory/stable/2018-06-01/entityTypes/DataFlow.json
+  - Microsoft.DataFactory/stable/2018-06-01/entityTypes/Dataset.json
+  - Microsoft.DataFactory/stable/2018-06-01/entityTypes/IntegrationRuntime.json
+  - Microsoft.DataFactory/stable/2018-06-01/entityTypes/LinkedService.json
+  - Microsoft.DataFactory/stable/2018-06-01/entityTypes/ManagedPrivateEndpoint.json
+  - Microsoft.DataFactory/stable/2018-06-01/entityTypes/Pipeline.json
+  - Microsoft.DataFactory/stable/2018-06-01/entityTypes/Trigger.json
 
 ```
 

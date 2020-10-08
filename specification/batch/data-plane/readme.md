@@ -26,7 +26,16 @@ These are the global settings for the Batch API.
 
 ``` yaml
 openapi-type: data-plane
-tag: package-2020-03.11.0
+tag: package-2020-09.12.0
+```
+
+### Tag: package-2020-09.12.0
+
+These settings apply only when `--tag=package-2020-09.12.0` is specified on the command line.
+
+``` yaml $(tag) == 'package-2020-09.12.0'
+input-file:
+- Microsoft.Batch/stable/2020-09-01.12.0/BatchService.json
 ```
 
 ### Tag: package-2020-03.11.0
@@ -360,6 +369,7 @@ require: $(this-folder)/../../../profiles/readme.md
 
 # all the input files across all versions
 input-file:
+  - $(this-folder)/Microsoft.Batch/stable/2020-09-01.12.0/BatchService.json
   - $(this-folder)/Microsoft.Batch/stable/2020-03-01.11.0/BatchService.json
   - $(this-folder)/Microsoft.Batch/stable/2019-08-01.10.0/BatchService.json
   - $(this-folder)/Microsoft.Batch/stable/2019-06-01.9.0/BatchService.json
