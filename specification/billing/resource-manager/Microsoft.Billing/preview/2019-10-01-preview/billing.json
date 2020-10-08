@@ -6365,6 +6365,11 @@
             "$ref": "#/definitions/EnrollmentAccount"
           }
         },
+        "isTransitioned": {
+          "description": "Specifies if the billing account has transitioned from agreement type Microsoft Online Service Program to agreement type Microsoft Customer Agreement.",
+          "type": "boolean",
+          "readOnly": true
+        },
         "organizationId": {
           "description": "Organization id.",
           "type": "string",
@@ -6866,6 +6871,11 @@
         "invoiceDay": {
           "description": "The day of the month when the invoice for the billing profile is generated.",
           "type": "integer",
+          "readOnly": true
+        },
+        "isTransitioned": {
+          "description": "Specifies if the billing profile was created during transition of the billing account from agreement type Microsoft Online Service Program to agreement type Microsoft Customer Agreement.",
+          "type": "boolean",
           "readOnly": true
         },
         "currency": {
