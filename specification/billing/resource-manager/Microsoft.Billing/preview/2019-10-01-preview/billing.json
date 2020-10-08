@@ -1524,6 +1524,132 @@
             }
           }
         }
+      },
+      "delete": {
+        "tags": [
+          "Departments"
+        ],
+        "x-ms-examples": {
+          "DepartmentDelete": {
+            "$ref": "./examples/DepartmentDelete.json"
+          }
+        },
+        "operationId": "Departments_Delete",
+        "description": "Delete a department by ID. The operation is supported only for billing accounts with agreement type Enterprise Agreement.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/billingAccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/departmentNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Department"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Departments"
+        ],
+        "x-ms-examples": {
+          "DepartmentUpdate": {
+            "$ref": "./examples/DepartmentUpdate.json"
+          }
+        },
+        "operationId": "Departments_Put",
+        "description": "Update a department by ID. The operation is supported only for billing accounts with agreement type Enterprise Agreement.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/billingAccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/departmentNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Department"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Department"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/department": {
+      "post": {
+        "tags": [
+          "Departments"
+        ],
+        "x-ms-examples": {
+          "DepartmentAdd": {
+            "$ref": "./examples/DepartmentAdd.json"
+          }
+        },
+        "operationId": "Departments_Add",
+        "description": "Create a department, The operation is supported only for billing accounts with agreement type Enterprise Agreement.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/billingAccountNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Department"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Department"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
       }
     },
     "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/enrollmentAccounts": {
