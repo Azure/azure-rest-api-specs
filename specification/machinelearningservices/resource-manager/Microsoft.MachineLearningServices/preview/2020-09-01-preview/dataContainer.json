@@ -259,8 +259,12 @@
         }
       },
       "additionalProperties": false,
-      "description": "Azure Resource Manager resource Envelope",
-      "x-ms-azure-resource": true
+      "description": "Asset Container Azure Resource.",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource"
+        }
+      ]
     },
     "AssetContainerResourcePaginatedResult": {
       "type": "object",

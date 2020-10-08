@@ -182,6 +182,7 @@
         "tags": [
           "DataVersion"
         ],
+        "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "Create or update Data Version": {
             "$ref": "./examples/createOrUpdateDataVersion.json"
@@ -285,8 +286,12 @@
         }
       },
       "additionalProperties": false,
-      "description": "Azure Resource Manager resource Envelope",
-      "x-ms-azure-resource": true
+      "description": "Data Version Azure Resource.",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource"
+        }
+      ]
     },
     "DataVersionResourcePaginatedResult": {
       "type": "object",
@@ -352,11 +357,26 @@
       }
     },
     "DatasetType": {
+      "type": "string",
+      "description": "The type of Dataset referenced in the asset path.",
       "enum": [
         "Simple",
         "Dataflow"
       ],
-      "type": "string"
+      "x-ms-enum": {
+        "name": "DatasetType",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "Simple",
+            "description": "Asset type is either tabular or file."
+          },
+          {
+            "value": "Dataflow",
+            "description": "Asset type is a Dataflow json."
+          }
+        ]
+      }
     },
     "AssetPath": {
       "description": "Details of an AssetUri.",
