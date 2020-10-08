@@ -416,6 +416,9 @@
           },
           "Get FirewallPolicyRuleCollectionGroup With IpGroups": {
             "$ref": "./examples/FirewallPolicyRuleCollectionGroupWithIpGroupsGet.json"
+          },
+          "Get FirewallPolicyNatRuleCollectionGroup": {
+            "$ref": "./examples/FirewallPolicyNatRuleCollectionGroupGet.json"
           }
         }
       },
@@ -489,6 +492,9 @@
           },
           "Create FirewallPolicyRuleCollectionGroup With IpGroups": {
             "$ref": "./examples/FirewallPolicyRuleCollectionGroupWithIpGroupsPut.json"
+          },
+          "Create FirewallPolicyNatRuleCollectionGroup": {
+            "$ref": "./examples/FirewallPolicyNatRuleCollectionGroupPut.json"
           }
         },
         "x-ms-long-running-operation": true,
@@ -634,6 +640,10 @@
         "transportSecurity": {
           "description": "TLS Configuration definition.",
           "$ref": "#/definitions/FirewallPolicyTransportSecurity"
+        },
+        "sku": {
+          "description": "The Firewall Policy SKU.",
+          "$ref": "#/definitions/FirewallPolicySku"
         }
       },
       "description": "Firewall Policy definition."
@@ -916,6 +926,10 @@
           "items": {
             "type": "string"
           }
+        },
+        "translatedFqdn": {
+          "type": "string",
+          "description": "The translated FQDN for this NAT rule."
         }
       }
     },
@@ -1187,7 +1201,7 @@
       "properties": {
         "id": {
           "type": "string",
-          "description": "Signature id"
+          "description": "Signature id."
         },
         "mode": {
           "$ref": "#/definitions/FirewallPolicyIntrusionDetectionStateOptions",
@@ -1284,6 +1298,23 @@
         }
       },
       "description": "Trusted Root certificates properties for tls."
+    },
+    "FirewallPolicySku": {
+      "properties": {
+        "tier": {
+          "type": "string",
+          "description": "Tier of Firewall Policy.",
+          "enum": [
+            "Standard",
+            "Premium"
+          ],
+          "x-ms-enum": {
+            "name": "FirewallPolicySkuTier",
+            "modelAsString": true
+          }
+        }
+      },
+      "description": "SKU of Firewall policy."
     }
   }
 }
