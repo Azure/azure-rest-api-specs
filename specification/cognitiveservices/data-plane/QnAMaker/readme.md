@@ -29,18 +29,25 @@ add-credentials: true
 openapi-type: data-plane
 ```
 
+``` yaml
+tag: release_5_0_preview.1
+add-credentials: true
+openapi-type: data-plane
+```
+# Releases
+
 ### Release 5.0-preview.1
 These settings apply only when `--tag=release_5_0_preview.1` is specified on the command line.
 
-``` yaml $(tag) == 'release_4_0'
+``` yaml $(tag) == 'release_5_0_preview.1'
 input-file: preview/v5.0-preview.1/QnAMaker.json
 ```
 
 ``` yaml
-tag: runtime_release_5_0_preview.1
-add-credentials: true
-openapi-type: data-plane
+batch:
+  - tag: release_5_0_preview.1
 ```
+
 # Runtime Releases
 
 ### Runtime Release 4.0
@@ -50,24 +57,21 @@ These settings apply only when `--tag=runtime_release_4_0` is specified on the c
 input-file: stable/v4.0/QnAMakerRuntime.json
 ```
 
-``` yaml
-batch:
-  - tag: release_4_0
-  - tag: runtime_release_4_0
-```
-### Runtime Release 5.0-preview.1
-These settings apply only when `--tag=runtime_release_5_0_preview.1` is specified on the command line.
 
-``` yaml $(tag) == 'runtime_release_5_0-preview.1'
+### Runtime Release 5.0-preview.1
+These settings apply only when `--tag=runtime_release_5_0-preview.1` is specified on the command line.
+
+``` yaml $(tag) == 'runtime_release_5_0_preview.1'
 input-file: preview/v5.0-preview.1/QnAMakerRuntime.json
 ```
 
 ``` yaml
 batch:
+  - tag: release_4_0
+  - tag: runtime_release_4_0
   - tag: release_5_0_preview.1
   - tag: runtime_release_5_0_preview.1
 ```
-
 
 ## Swagger to SDK
 
