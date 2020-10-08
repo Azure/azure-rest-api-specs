@@ -3,7 +3,7 @@
   "info": {
     "description": "Scale unit operation endpoints and objects.",
     "title": "FabricAdminClient",
-    "version": "2016-05-01"
+    "version": "2020-10-01"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -30,13 +30,13 @@
         "operationId": "ScaleUnits_ScaleOut",
         "parameters": [
           {
-            "$ref": "Fabric.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../2016-05-01/Fabric.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "Fabric.json#/parameters/ResourceGroupParameter"
+            "$ref": "../2016-05-01/Fabric.json#/parameters/ResourceGroupParameter"
           },
           {
-            "$ref": "Fabric.json#/parameters/LocationParameter"
+            "$ref": "../2016-05-01/Fabric.json#/parameters/LocationParameter"
           },
           {
             "$ref": "#/parameters/ScaleUnitParameter"
@@ -45,7 +45,50 @@
             "$ref": "#/parameters/ScaleOutScaleUnitParametersInBody"
           },
           {
-            "$ref": "Fabric.json#/parameters/ApiVersionParameter"
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "202": {
+            "description": "ACCEPTED"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fabric.Admin/fabricLocations/{location}/scaleUnits/{scaleUnit}/setGpuPartitionSize": {
+      "post": {
+        "x-ms-examples": {
+          "Set GPU partition size.": {
+            "$ref": "./examples/ScaleUnit/SetGpuPartitionSize.json"
+          }
+        },
+        "tags": [
+          "ScaleUnits"
+        ],
+        "description": "Set GPU partition size.",
+        "operationId": "ScaleUnits_SetGPUPartitionSize",
+        "parameters": [
+          {
+            "$ref": "../2016-05-01/Fabric.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../2016-05-01/Fabric.json#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "../2016-05-01/Fabric.json#/parameters/LocationParameter"
+          },
+          {
+            "$ref": "#/parameters/ScaleUnitParameter"
+          },
+          {
+            "$ref": "#/parameters/GpuPartitionSizeParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -73,13 +116,13 @@
         "operationId": "ScaleUnits_CreateFromJson",
         "parameters": [
           {
-            "$ref": "Fabric.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../2016-05-01/Fabric.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "Fabric.json#/parameters/ResourceGroupParameter"
+            "$ref": "../2016-05-01/Fabric.json#/parameters/ResourceGroupParameter"
           },
           {
-            "$ref": "Fabric.json#/parameters/LocationParameter"
+            "$ref": "../2016-05-01/Fabric.json#/parameters/LocationParameter"
           },
           {
             "$ref": "#/parameters/ScaleUnitParameter"
@@ -88,7 +131,7 @@
             "$ref": "#/parameters/CreateFromJsonScaleUnitParametersInBody"
           },
           {
-            "$ref": "Fabric.json#/parameters/ApiVersionParameter"
+            "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -116,19 +159,19 @@
         "operationId": "ScaleUnits_Get",
         "parameters": [
           {
-            "$ref": "Fabric.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../2016-05-01/Fabric.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "Fabric.json#/parameters/ResourceGroupParameter"
+            "$ref": "../2016-05-01/Fabric.json#/parameters/ResourceGroupParameter"
           },
           {
-            "$ref": "Fabric.json#/parameters/LocationParameter"
+            "$ref": "../2016-05-01/Fabric.json#/parameters/LocationParameter"
           },
           {
             "$ref": "#/parameters/ScaleUnitParameter"
           },
           {
-            "$ref": "Fabric.json#/parameters/ApiVersionParameter"
+            "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -158,19 +201,19 @@
         "operationId": "ScaleUnits_List",
         "parameters": [
           {
-            "$ref": "Fabric.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../2016-05-01/Fabric.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "Fabric.json#/parameters/ResourceGroupParameter"
+            "$ref": "../2016-05-01/Fabric.json#/parameters/ResourceGroupParameter"
           },
           {
-            "$ref": "Fabric.json#/parameters/LocationParameter"
+            "$ref": "../2016-05-01/Fabric.json#/parameters/LocationParameter"
           },
           {
-            "$ref": "Fabric.json#/parameters/ApiVersionParameter"
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "Fabric.json#/parameters/FilterParameter"
+            "$ref": "../2016-05-01/Fabric.json#/parameters/FilterParameter"
           }
         ],
         "responses": {
@@ -220,7 +263,7 @@
       },
       "allOf": [
         {
-          "$ref": "Fabric.json#/definitions/Resource"
+          "$ref": "../2016-05-01/Fabric.json#/definitions/Resource"
         }
       ]
     },
@@ -280,6 +323,28 @@
         "isMultiNode": {
           "description": "Denotes if more than one node in cluster.",
           "type": "boolean"
+        },
+        "isGpuAvailable": {
+          "description": "Denotes if GPU resource is available in the cluster.",
+          "type": "boolean"
+        },
+        "gpuPartitionSize": {
+          "description": "GPU partition size.",
+          "type": "integer",
+          "format": "int32"
+        },
+        "gpuType": {
+          "description": "Type of GPU.",
+          "enum": [
+            "GPUP",
+            "DDA",
+            "None"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "GpuType"
+          }
         }
       }
     },
@@ -297,6 +362,18 @@
         "nextLink": {
           "description": "URI to the next page.",
           "type": "string"
+        }
+      }
+    },
+    "SetGpuPartitionSizeParameter": {
+      "description": "Input data for setting GPU partitions.",
+      "type": "object",
+      "properties": {
+        "gpuPartitionSize": {
+          "x-ms-client-name": "GpuPartitionSize",
+          "description": "Number of GPU partitions",
+          "type": "integer",
+          "format": "int32"
         }
       }
     },
@@ -414,12 +491,30 @@
     }
   },
   "parameters": {
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "description": "Client API Version.",
+      "required": true,
+      "type": "string",
+      "default": "2020-10-01"
+    },
     "ScaleUnitParameter": {
       "name": "scaleUnit",
       "description": "Name of the scale units.",
       "in": "path",
       "required": true,
       "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "GpuPartitionSizeParameter": {
+      "name": "gpuPartitionSize",
+      "description": "Number of GPU partitions.",
+      "in": "body",
+      "required": true,
+      "schema": {
+        "$ref": "#/definitions/GpuPartitionSize"
+      },
       "x-ms-parameter-location": "method"
     },
     "ScaleOutScaleUnitParametersInBody": {
