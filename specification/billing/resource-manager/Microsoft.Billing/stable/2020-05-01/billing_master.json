@@ -2673,9 +2673,6 @@
         "x-ms-examples": {
           "BillingAccountPermissionsList": {
             "$ref": "./examples/BillingAccountPermissionsList.json"
-          },
-          "BillingAccountEaPermissionsList": {
-            "$ref": "./examples/BillingAccountEaPermissionsList.json"
           }
         },
         "operationId": "BillingPermissions_ListByBillingAccount",
@@ -2782,90 +2779,6 @@
           },
           {
             "$ref": "#/parameters/billingProfileNameParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK. The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/BillingPermissionsListResult"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/departments/{departmentName}/billingPermissions": {
-      "get": {
-        "tags": [
-          "BillingPermissions"
-        ],
-        "x-ms-examples": {
-          "DepartmentPermissionsList": {
-            "$ref": "./examples/DepartmentPermissionsList.json"
-          }
-        },
-        "operationId": "BillingPermissions_ListByDepartment",
-        "description": "Lists the billing permissions the caller has on a department.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/billingAccountNameParameter"
-          },
-          {
-            "$ref": "#/parameters/departmentNameParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK. The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/BillingPermissionsListResult"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/enrollmentAccounts/{enrollmentAccountName}/billingPermissions": {
-      "get": {
-        "tags": [
-          "BillingPermissions"
-        ],
-        "x-ms-examples": {
-          "EnrollmentAccountPermissionsList": {
-            "$ref": "./examples/EnrollmentAccountPermissionsList.json"
-          }
-        },
-        "operationId": "BillingPermissions_ListByEnrollmentAccount",
-        "description": "Lists the billing permissions the caller has on an enrollment account.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/billingAccountNameParameter"
-          },
-          {
-            "$ref": "#/parameters/enrollmentAccountNameParameter"
           }
         ],
         "responses": {
@@ -3165,13 +3078,10 @@
         "x-ms-examples": {
           "BillingAccountRoleAssignment": {
             "$ref": "./examples/BillingAccountRoleAssignment.json"
-          },
-          "BillingAccountEaRoleAssignment": {
-            "$ref": "./examples/BillingAccountEaRoleAssignment.json"
           }
         },
         "operationId": "BillingRoleAssignments_GetByBillingAccount",
-        "description": "Gets a role assignment for the caller on a billing account. The operation is supported for billing accounts with agreement type Microsoft Partner Agreement, Microsoft Customer Agreement or Enterprise Agreement.",
+        "description": "Gets a role assignment for the caller on a billing account. The operation is supported for billing accounts with agreement type Microsoft Partner Agreement or Microsoft Customer Agreement.",
         "externalDocs": {
           "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
         },
@@ -3208,9 +3118,6 @@
         "x-ms-examples": {
           "BillingAccountRoleAssignmentDelete": {
             "$ref": "./examples/BillingAccountRoleAssignmentDelete.json"
-          },
-          "BillingAccountEaRoleAssignmentDelete": {
-            "$ref": "./examples/BillingAccountEaRoleAssignmentDelete.json"
           }
         },
         "operationId": "BillingRoleAssignments_DeleteByBillingAccount",
@@ -3224,52 +3131,6 @@
           },
           {
             "$ref": "#/parameters/billingRoleAssignmentNameParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK. The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/BillingRoleAssignment"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        }
-      },
-      "put": {
-        "tags": [
-          "BillingRoleAssignments"
-        ],
-        "operationId": "RoleAssignments_Put",
-        "description": "Create or update a billing role assignment.",
-        "x-ms-examples": {
-          "PutEnrollmentAdministratorRoleAssignment": {
-            "$ref": "./examples/PutAdministratorRoleAssignment.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/billingAccountNameParameter"
-          },
-          {
-            "$ref": "#/parameters/billingRoleAssignmentNameParameter"
-          },
-          {
-            "name": "parameters",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/BillingRoleAssignment"
-            },
-            "description": "The new or updated billing role assignment."
           }
         ],
         "responses": {
@@ -3464,268 +3325,6 @@
         }
       }
     },
-    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/departments/{departmentName}/billingRoleAssignments/{billingRoleAssignmentName}": {
-      "get": {
-        "tags": [
-          "BillingRoleAssignments"
-        ],
-        "x-ms-examples": {
-          "DepartmentRoleAssignment": {
-            "$ref": "./examples/DepartmentRoleAssignment.json"
-          }
-        },
-        "operationId": "BillingRoleAssignments_GetByDepartment",
-        "description": "Gets a role assignment for the caller on a department. The operation is supported only for billing accounts with agreement type Enterprise Agreement.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/billingAccountNameParameter"
-          },
-          {
-            "$ref": "#/parameters/departmentNameParameter"
-          },
-          {
-            "$ref": "#/parameters/billingRoleAssignmentNameParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK. The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/BillingRoleAssignment"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        }
-      },
-      "delete": {
-        "tags": [
-          "BillingRoleAssignments"
-        ],
-        "x-ms-examples": {
-          "DepartmentRoleAssignmentDelete": {
-            "$ref": "./examples/DepartmentRoleAssignmentDelete.json"
-          }
-        },
-        "operationId": "BillingRoleAssignments_DeleteByDepartment",
-        "description": "Deletes a role assignment for the caller on a department. The operation is supported only for billing accounts with agreement type Enterprise Agreement.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/billingAccountNameParameter"
-          },
-          {
-            "$ref": "#/parameters/departmentNameParameter"
-          },
-          {
-            "$ref": "#/parameters/billingRoleAssignmentNameParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK. The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/BillingRoleAssignment"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        }
-      },
-      "put": {
-        "tags": [
-          "BillingRoleAssignments"
-        ],
-        "operationId": "EnrollmentDepartmentRoleAssignments_Put",
-        "description": "Create or update a billing role assignment.",
-        "x-ms-examples": {
-          "PutEnrollmentDepartmentAdministratorRoleAssignment": {
-            "$ref": "./examples/PutEnrollmentDepartmentAdministratorRoleAssignment.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/billingAccountNameParameter"
-          },
-          {
-            "$ref": "#/parameters/departmentNameParameter"
-          },
-          {
-            "$ref": "#/parameters/billingRoleAssignmentNameParameter"
-          },
-          {
-            "name": "parameters",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/BillingRoleAssignment"
-            },
-            "description": "The new or updated billing role assignment."
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK. The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/BillingRoleAssignment"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        }
-      }
-    },
-    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/enrollmentAccounts/{enrollmentAccountName}/billingRoleAssignments/{billingRoleAssignmentName}": {
-      "get": {
-        "tags": [
-          "BillingRoleAssignments"
-        ],
-        "x-ms-examples": {
-          "EnrollmentAccountRoleAssignment": {
-            "$ref": "./examples/EnrollmentAccountRoleAssignment.json"
-          }
-        },
-        "operationId": "BillingRoleAssignments_GetByEnrollmentAccount",
-        "description": "Gets a role assignment for the caller on a enrollment Account. The operation is supported only for billing accounts with agreement type Enterprise Agreement.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/billingAccountNameParameter"
-          },
-          {
-            "$ref": "#/parameters/enrollmentAccountNameParameter"
-          },
-          {
-            "$ref": "#/parameters/billingRoleAssignmentNameParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK. The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/BillingRoleAssignment"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        }
-      },
-      "delete": {
-        "tags": [
-          "BillingRoleAssignments"
-        ],
-        "x-ms-examples": {
-          "EnrollmentAccountRoleAssignmentDelete": {
-            "$ref": "./examples/EnrollmentAccountRoleAssignmentDelete.json"
-          }
-        },
-        "operationId": "BillingRoleAssignments_DeleteByEnrollmentAccount",
-        "description": "Deletes a role assignment for the caller on a enrollment Account. The operation is supported only for billing accounts with agreement type Enterprise Agreement.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/billingAccountNameParameter"
-          },
-          {
-            "$ref": "#/parameters/enrollmentAccountNameParameter"
-          },
-          {
-            "$ref": "#/parameters/billingRoleAssignmentNameParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK. The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/BillingRoleAssignment"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        }
-      },
-      "put": {
-        "tags": [
-          "BillingRoleAssignments"
-        ],
-        "operationId": "EnrollmentAccountRoleAssignments_Put",
-        "description": "Create or update a billing role assignment.",
-        "x-ms-examples": {
-          "PutEnrollmentAccountSubscriptionCreatorRoleAssignment": {
-            "$ref": "./examples/PutEnrollmentAccountSubscriptionCreatorRoleAssignment.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/billingAccountNameParameter"
-          },
-          {
-            "$ref": "#/parameters/enrollmentAccountNameParameter"
-          },
-          {
-            "$ref": "#/parameters/billingRoleAssignmentNameParameter"
-          },
-          {
-            "name": "parameters",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/BillingRoleAssignment"
-            },
-            "description": "The new or updated billing role assignment."
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK. The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/BillingRoleAssignment"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        }
-      }
-    },
     "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingRoleAssignments": {
       "get": {
         "tags": [
@@ -3734,13 +3333,10 @@
         "x-ms-examples": {
           "BillingAccountRoleAssignmentList": {
             "$ref": "./examples/BillingAccountRoleAssignmentList.json"
-          },
-          "BillingAccountEaRoleAssignmentList": {
-            "$ref": "./examples/BillingAccountEaRoleAssignmentList.json"
           }
         },
         "operationId": "BillingRoleAssignments_ListByBillingAccount",
-        "description": "Lists the role assignments for the caller on a billing account. The operation is supported for billing accounts with agreement type Microsoft Partner Agreement, Microsoft Customer Agreement or Enterprise Agreement.",
+        "description": "Lists the role assignments for the caller on a billing account. The operation is supported for billing accounts with agreement type Microsoft Partner Agreement or Microsoft Customer Agreement.",
         "externalDocs": {
           "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
         },
@@ -3843,90 +3439,6 @@
           },
           {
             "$ref": "#/parameters/billingProfileNameParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK. The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/BillingRoleAssignmentListResult"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/enrollmentAccounts/{enrollmentAccountName}/billingRoleAssignments": {
-      "get": {
-        "tags": [
-          "BillingRoleAssignments"
-        ],
-        "x-ms-examples": {
-          "EnrollmentAccountRoleAssignmentList": {
-            "$ref": "./examples/EnrollmentAccountRoleAssignmentList.json"
-          }
-        },
-        "operationId": "BillingRoleAssignments_ListByEnrollmentAccount",
-        "description": "Lists the role assignments for the caller on a billing profile. The operation is supported for billing accounts of type Enterprise Agreement.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/billingAccountNameParameter"
-          },
-          {
-            "$ref": "#/parameters/enrollmentAccountNameParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK. The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/BillingRoleAssignmentListResult"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/departments/{departmentName}/billingRoleAssignments": {
-      "get": {
-        "tags": [
-          "BillingRoleAssignments"
-        ],
-        "x-ms-examples": {
-          "DepartmentRoleAssignmentList": {
-            "$ref": "./examples/DepartmentRoleAssignmentList.json"
-          }
-        },
-        "operationId": "BillingRoleAssignments_ListByDepartment",
-        "description": "Lists the role assignments for the caller on a billing profile. The operation is supported for billing accounts of type Enterprise Agreement.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/billingAccountNameParameter"
-          },
-          {
-            "$ref": "#/parameters/departmentNameParameter"
           }
         ],
         "responses": {
