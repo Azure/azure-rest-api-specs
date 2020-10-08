@@ -24,7 +24,7 @@ These are the global settings for the Sql API.
 title: SqlManagementClient
 description: 'The Azure SQL Database management API provides a RESTful set of web services that interact with Azure SQL Database services to manage your databases. The API enables you to create, retrieve, update, and delete databases.'
 openapi-type: arm
-tag: package-composite-v4
+tag: package-composite-v3
 ```
 
 ## Composite packages
@@ -46,6 +46,8 @@ Differences in v4 (compared to v3):
   * `-2020-08-01/databases.json`
 
   * `-2020-08-01/elasticPools.json`
+
+* Failover API for elastic pools was integrated into elasticPools
 
 ``` yaml $(tag) == 'package-composite-v4'
 input-file:
