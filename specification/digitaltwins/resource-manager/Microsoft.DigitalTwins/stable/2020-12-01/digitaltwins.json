@@ -47,6 +47,9 @@
           },
           "Get a DigitalTwinsInstance resource with identity": {
             "$ref": "./examples/DigitalTwinsGet_WithIdentity_example.json"
+          },
+          "Get a DigitalTwinsInstance resource with a private endpoint connection":  {
+            "$ref": "./examples/DigitalTwinsGet_WithPrivateEndpointConnection_example.json"
           }
         },
         "parameters": [
@@ -636,6 +639,11 @@
         ],
         "description": "List private link resources for given Digital Twin.",
         "operationId": "GetPrivateLinkResources",
+        "x-ms-examples": {
+          "List private link resources for given Digital Twin": {
+            "$ref": "./examples/PrivateLinkResourcesList_example.json"
+          }
+        },
         "parameters": [
           {
             "$ref": "#/parameters/api-version"
@@ -654,7 +662,6 @@
           "200": {
             "description": "The body contains the list of private link resources.",
             "schema": {
-              "type": "array",
               "items": {
                 "$ref": "#/definitions/GroupIdInformationResponse"
               }
@@ -676,6 +683,11 @@
         ],
         "description": "Get the specified private link resource for the given Digital Twin.",
         "operationId": "GetPrivateLinkResourceByResourceId",
+        "x-ms-examples": {
+          "Get the specified private link resource for the given Digital Twin": {
+            "$ref": "./examples/PrivateLinkResourcesByGroupId_example.json"
+          }
+        },
         "parameters": [
           {
             "$ref": "#/parameters/api-version"
@@ -716,6 +728,11 @@
         ],
         "description": "List private endpoint connection properties.",
         "operationId": "GetPrivateEndpointConnections",
+        "x-ms-examples": {
+          "List private endpoint connection properties": {
+            "$ref": "./examples/PrivateEndpointConnectionsList_example.json"
+          }
+        },
         "parameters": [
           {
             "$ref": "#/parameters/api-version"
@@ -734,9 +751,8 @@
           "200": {
             "description": "The body contains the list of private endpoint connection properties.",
             "schema": {
-              "type": "array",
               "items": {
-                "$ref": "#/definitions/PrivateEndpointConnection"
+                "$ref": "#/definitions/PrivateEndpointConnectionsResponse"
               }
             }
           },
@@ -756,6 +772,11 @@
         ],
         "description": "Get private endpoint connection properties for the given private endpoint.",
         "operationId": "GetPrivateEndpointConnectionByName",
+        "x-ms-examples": {
+          "Get private endpoint connection properties for the given private endpoint": {
+            "$ref": "./examples/PrivateEndpointConnectionByConnectionName_example.json"
+          }
+        },
         "parameters": [
           {
             "$ref": "#/parameters/api-version"
@@ -795,6 +816,11 @@
         "description": "Delete private endpoint connection with the specified name.",
         "operationId": "DeletePrivateEndpointConnection",
         "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Delete private endpoint connection with the specified name": {
+            "$ref": "./examples/PrivateEndpointConnectionDelete_example.json"
+          }
+        },
         "parameters": [
           {
             "$ref": "#/parameters/api-version"
@@ -834,6 +860,11 @@
         "description": "Update the status of a private endpoint connection with the given name.",
         "operationId": "PutPrivateEndpointConnection",
         "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Update the status of a private endpoint connection with the given name": {
+            "$ref": "./examples/PrivateEndpointConnectionPut_example.json"
+          }
+        },
         "parameters": [
           {
             "$ref": "#/parameters/api-version"
@@ -1512,6 +1543,19 @@
         "properties"
       ]
     },
+    "PrivateEndpointConnectionsResponse": {
+      "description": "The available private link connections for a Digital Twin.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "The list of available private link connections for a Digital Twin.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PrivateEndpointConnection"
+          }
+        }
+      }
+    },
     "GroupIdInformationResponse": {
       "description": "The available private link resources for a Digital Twin.",
       "type": "object",
@@ -1568,14 +1612,49 @@
         }
       }
     },
+    "GroupId": {
+      "readOnly": true,
+      "description": "The private endpoint group id of a private endpoint connection.",
+      "type": "string"
+    },
+    "PrivateEndpointConnectionProvisioningState": {
+      "description": "The provisioning state.",
+      "enum": [
+        "Pending",
+        "Approved",
+        "Rejected",
+        "Disconnected"
+      ],
+      "type": "string",
+      "x-nullable": true,
+      "readOnly": true,
+      "x-ms-enum": {
+        "name": "PrivateEndpointConnectionProvisioningState",
+        "modelAsString": true
+      }
+    },
     "ConnectionProperties": {
       "description": "The properties of a private endpoint connection.",
       "type": "object",
       "properties": {
+        "provisioningState": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/PrivateEndpointConnectionProvisioningState"
+            }
+          ]
+        },
         "privateEndpoint": {
           "allOf": [
             {
               "$ref": "#/definitions/PrivateEndpoint"
+            }
+          ]
+        },
+        "groupIds": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/GroupId"
             }
           ]
         },
@@ -1594,20 +1673,8 @@
       "type": "object",
       "properties": {
         "id": {
-          "readOnly": true,
           "type": "string",
           "description": "The resource identifier."
-        },
-        "name": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The resource name.",
-          "pattern": "^(?![0-9]+$)(?!-)[a-zA-Z0-9-]{2,49}[a-zA-Z0-9]$"
-        },
-        "type": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The resource type."
         },
         "properties": {
           "allOf": [
