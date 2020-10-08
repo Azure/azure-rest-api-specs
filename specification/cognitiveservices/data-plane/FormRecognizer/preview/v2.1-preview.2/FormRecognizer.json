@@ -1688,7 +1688,8 @@
       "required": [
         "rows",
         "columns",
-        "cells"
+        "cells",
+        "boundingBox"
       ],
       "properties": {
         "rows": {
@@ -1709,6 +1710,10 @@
           "items": {
             "$ref": "#/definitions/DataTableCell"
           }
+        },
+        "boundingBox": {
+          "description": "Bounding box of the table.",
+          "$ref": "#/definitions/BoundingBox"
         }
       }
     },
