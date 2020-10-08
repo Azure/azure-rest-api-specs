@@ -167,23 +167,13 @@
         }
       }
     },
-    "/alterations/{kbId}": {
+    "/alterations": {
       "get": {
         "tags": [
           "Alterations"
         ],
-        "summary": "Download alterations from runtime or use kbId parameter (for QnAMakerV2 resource only) to download alterations for a specific knowledgebase.",
+        "summary": "Download alterations from runtime.",
         "operationId": "Alterations_Get",
-        "parameters": [
-        {
-          "schema": {
-            "$ref": "#/parameters/AlterationsKbId"
-          },
-          "required": false,
-          "in": "path",
-          "name": "kbId"
-        }
-      ],
         "consumes": [
           "application/json"
         ],
@@ -215,7 +205,81 @@
         "tags": [
           "Alterations"
         ],
-        "summary": "Replace alterations data or use kbId parameter to replace alterations of a specific knowledgebase.",
+        "summary": "Replace alterations data.",
+        "operationId": "Alterations_Replace",
+        "parameters": [
+          {
+            "$ref": "#/parameters/WordAlterations"
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "204": {
+            "description": "HTTP 204 No Content."
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful query": {
+            "$ref": "./examples/SuccessfulSetAlts.json"
+          }
+        }
+      }
+    },
+    "/alterations/{kbId}": {
+      "get": {
+        "tags": [
+          "Alterations"
+        ],
+        "summary": "Download alterations per Knowledgebase (QnAMaker Managed).",
+        "operationId": "Alterations_Get",
+        "parameters": [
+          {
+            "$ref": "#/parameters/AlterationsKbId"
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Alterations data.",
+            "schema": {
+              "$ref": "#/definitions/WordAlterationsDTO"
+            },
+            "x-nullable": true
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful query": {
+            "$ref": "./examples/SuccessfulGetAltsManaged.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Alterations"
+        ],
+        "summary": "Replace alterations data per Knowledgebase (QnAMaker Managed).",
         "operationId": "Alterations_Replace",
         "parameters": [
           {
@@ -244,7 +308,7 @@
         },
         "x-ms-examples": {
           "Successful query": {
-            "$ref": "./examples/SuccessfulSetAlts.json"
+            "$ref": "./examples/SuccessfulSetAltsManaged.json"
           }
         }
       }
@@ -576,6 +640,20 @@
           },
           {
             "$ref": "#/parameters/Environment"
+          },
+          {
+            "name": "source",
+            "in": "query",
+            "description": "The source property filter to apply.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "changedSince",
+            "in": "query",
+            "description": "The last changed status property filter to apply.",
+            "required": false,
+            "type": "string"
           }
         ],
         "consumes": [
@@ -611,7 +689,7 @@
         "tags": [
           "Knowledgebases"
         ],
-        "summary": "GenerateAnswer call to query the knowledgebase created on QnAMaker V2 - Private Preview Azure Cognitive Service resource.",
+        "summary": "GenerateAnswer call to query knowledgebase (QnA Maker Managed).",
         "operationId": "Runtime_GenerateAnswer",
         "parameters": [
           {
@@ -643,7 +721,7 @@
         },
         "x-ms-examples": {
           "Successful query": {
-            "$ref": "./examples/SuccessfulGenAns.json"
+            "$ref": "./examples/SuccessfulGenAnsManaged.json"
           }
         }
       }
@@ -653,7 +731,7 @@
         "tags": [
           "Knowledgebases"
         ],
-        "summary": "Train call to add suggestions to the knowledgebase  created on QnAMaker V2 - Private Preview Azure Cognitive Service resource.",
+        "summary": "Train call to add suggestions to knowledgebase (QnAMaker Managed).",
         "operationId": "Runtime_Train",
         "parameters": [
           {
@@ -682,7 +760,7 @@
         },
         "x-ms-examples": {
           "Successful query": {
-            "$ref": "./examples/SuccessfulTrain.json"
+            "$ref": "./examples/SuccessfulTrainManaged.json"
           }
         }
       }
@@ -1085,7 +1163,13 @@
               "$ref": "#/definitions/ContextDTO"
             }
           ]
+        },
+        "changedTimeStamp": {
+          "type": "string",
+          "description": "Timestamp when the operation was created.",
+          "maxLength": 300
         }
+
       }
     },
     "ContextDTO": {
@@ -1475,7 +1559,7 @@
         },
         "scoreThreshold": {
           "type": "number",
-          "description": "Threshold for answers returned based on score."
+          "description": "Minimum threshold score for answers."
         },
         "context": {
           "description": "Context object with previous QnA's information.",
@@ -1491,14 +1575,14 @@
         },
         "strictFilters": {
           "type": "array",
-          "description": "Find only answers that contain these metadata.",
+          "description": "Find QnAs that are associated with the given list of metadata.",
           "items": {
             "$ref": "#/definitions/MetadataDTO"
           }
         },
         "strictFiltersCompoundOperationType": {
           "type": "string",
-          "description": "Optional field. Set to  for using OR as Operation for Strict Filters.",
+          "description": "Optional field. Set to 'OR' for using OR operation for strict filters.",
           "x-ms-enum": {
             "name": "StrictFiltersCompoundOperationType",
             "modelAsString": true
@@ -1509,7 +1593,7 @@
           ]
         },
         "answerSpanRequest": {
-          "description": "To enable/configure answer span prediction.",
+          "description": "To configure Answer span prediction feature.",
           "allOf": [
             {
               "$ref": "#/definitions/AnswerSpanRequestDTO"
@@ -1641,21 +1725,21 @@
     },
     "AnswerSpanRequestDTO": {
       "type": "object",
-      "description": "To use Answer Span prediction feature.",
+      "description": "To configure Answer span prediction feature.",
       "additionalProperties": false,
       "properties": {
         "enable": {
           "type": "boolean",
-          "description": "To enable Answer Span prediction feature."
+          "description": "Enable or Disable Answer Span prediction."
         },
         "scoreThreshold": {
           "type": "number",
           "format": "double",
-          "description": "Threshold for answer returned based on score."
+          "description": "Minimum threshold score required to include an answer span."
         },
         "topAnswersWithSpan": {
           "type": "integer",
-          "description": "Number of top answers where span needs to be predicted.",
+          "description": "Number of Top answers to be considered for span prediction.",
           "format": "int32",
           "maximum": 10,
           "minimum": 1
@@ -1753,9 +1837,9 @@
       "type": "string",
       "name": "kbId",
       "in": "path",
-      "required": false,
+      "required": true,
       "x-nullable": false,
-      "description": "Knowledgebase id. This parameter is required for alterations operations on QnAMakerV2 resources.",
+      "description": "Knowledgebase ID required for alterations operations on QnAMaker Managed.",
       "x-ms-parameter-location": "method"
     },
     "OperationId": {
@@ -1811,7 +1895,7 @@
     },
     "Endpoint": {
       "name": "Endpoint",
-      "description": "Supported Cognitive Services endpoints (protocol and hostname, for example: https://<qnamaker-resource-name>.api.cognitive.microsoft.com).",
+      "description": "Supported Cognitive Services endpoint (e.g., https://< qnamaker-resource-name >.api.cognitiveservices.azure.com).",
       "x-ms-parameter-location": "client",
       "required": true,
       "type": "string",

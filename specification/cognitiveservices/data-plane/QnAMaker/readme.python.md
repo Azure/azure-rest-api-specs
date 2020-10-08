@@ -16,7 +16,18 @@ clear-output-folder: true
 namespace: azure.cognitiveservices.knowledge.qnamaker.authoring
 output-folder: $(python-sdks-folder)/cognitiveservices/azure-cognitiveservices-knowledge-qnamaker/azure/cognitiveservices/knowledge/qnamaker/authoring
 ```
+
+``` yaml $(tag) == 'release_5_0_preview.1'
+namespace: azure.cognitiveservices.knowledge.qnamaker.authoring
+output-folder: $(python-sdks-folder)/cognitiveservices/azure-cognitiveservices-knowledge-qnamaker/azure/cognitiveservices/knowledge/qnamaker/authoring/preview/v5.0-preview.1
+```
+
 ``` yaml $(tag) == 'runtime_release_4_0'
 namespace: azure.cognitiveservices.knowledge.qnamaker.runtime
 output-folder: $(python-sdks-folder)/cognitiveservices/azure-cognitiveservices-knowledge-qnamaker/azure/cognitiveservices/knowledge/qnamaker/runtime
+```
+
+``` yaml $(tag) == 'runtime_release_5_0-preview.1'
+namespace: azure.cognitiveservices.knowledge.qnamaker.runtime
+output-folder: $(python-sdks-folder)/cognitiveservices/azure-cognitiveservices-knowledge-qnamaker/azure/cognitiveservices/knowledge/qnamaker/runtime/preview/v5.0-preview.1
 ```
