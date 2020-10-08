@@ -1,0 +1,59 @@
+{
+  "parameters": {
+    "Endpoint": "{Endpoint}",
+    "Ocp-Apim-Subscription-Key": "{Primary/Secondary EndpointKey}",
+    "Content-Type": "application/json",
+    "kbId": "9d091697-fb8c-4ed5-9ac0-35bf8273bfff",
+    "generateAnswerPayload": {
+      "question": "How much time it takes to complete quickstart guide?",
+      "top": 6,
+      "isTest": true,
+      "context": {
+        "previousQnAId": 9,
+        "previousUserQuery": "Where are QnA Maker quickstarts?"
+      },
+      "scoreThreshold": 20,
+      "strictFilters": [
+        {
+          "name": "category",
+          "value": "api"
+        }
+      ],
+      "answerSpanRequest": {
+        "enable": true,
+        "scoreThreshold": 80,
+        "topAnswersWithSpan": 1
+      },
+      "userId": "sd53lsY="
+    }
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "body": {
+        "answers": [
+          {
+            "questions": [
+              "Complete a quickstart"
+            ],
+            "answer": "We offer quickstarts in most popular programming languages, each designed to teach you basic design patterns, and have you running code in less than 10 minutes. See the following list for the quickstart for each feature.\n\n*   [Get started with the LUIS client library](https://docs.microsoft.com/en-us/azure/cognitive-services/qnamaker/quickstarts/quickstart-sdk)\n\n*   [Get started with the LUIS portal](https://docs.microsoft.com/en-us/azure/cognitive-services/qnamaker/quickstarts/create-publish-knowledge-base)\n\n*   [Get started with the LUIS REST APis](https://docs.microsoft.com/en-us/azure/cognitive-services/qnamaker/quickstarts/quickstart-rest-curl)",
+            "score": 46.11,
+            "id": 9,
+            "source": "Editorial",
+            "metadata": [],
+            "context": {
+              "isContextOnly": false,
+              "prompts": []
+            },
+            "answerSpan": {
+              "text": "less than 10 minutes",
+              "score": 54.92,
+              "startIndex": 139,
+              "endIndex": 159
+            }
+          }
+        ]
+      }
+    }
+  }
+}

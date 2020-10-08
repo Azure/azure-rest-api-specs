@@ -271,7 +271,7 @@
         },
         "x-ms-examples": {
           "Successful query": {
-            "$ref": "./examples/SuccessfulGetAltsV2.json"
+            "$ref": "./examples/SuccessfulGetAltsManaged.json"
           }
         }
       },
@@ -308,7 +308,7 @@
         },
         "x-ms-examples": {
           "Successful query": {
-            "$ref": "./examples/SuccessfulSetAltsV2.json"
+            "$ref": "./examples/SuccessfulSetAltsManaged.json"
           }
         }
       }
@@ -640,6 +640,20 @@
           },
           {
             "$ref": "#/parameters/Environment"
+          },
+          {
+            "name": "source",
+            "in": "query",
+            "description": "The source property filter to apply.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "changedSince",
+            "in": "query",
+            "description": "The last changed status property filter to apply.",
+            "required": false,
+            "type": "string"
           }
         ],
         "consumes": [
@@ -707,7 +721,7 @@
         },
         "x-ms-examples": {
           "Successful query": {
-            "$ref": "./examples/SuccessfulGenAnsV2.json"
+            "$ref": "./examples/SuccessfulGenAnsManaged.json"
           }
         }
       }
@@ -746,7 +760,7 @@
         },
         "x-ms-examples": {
           "Successful query": {
-            "$ref": "./examples/SuccessfulTrainV2.json"
+            "$ref": "./examples/SuccessfulTrainManaged.json"
           }
         }
       }
@@ -1149,7 +1163,13 @@
               "$ref": "#/definitions/ContextDTO"
             }
           ]
+        },
+        "changedTimeStamp": {
+          "type": "string",
+          "description": "Timestamp when the operation was created.",
+          "maxLength": 300
         }
+
       }
     },
     "ContextDTO": {
