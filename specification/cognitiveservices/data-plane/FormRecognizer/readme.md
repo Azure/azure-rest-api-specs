@@ -127,3 +127,12 @@ uncomment the  `exclude-file` section below and add the file paths.
 #exclude-file: 
 #  - $(this-folder)/Microsoft.Example/stable/2010-01-01/somefile.json
 ```
+### Tag: package-preview-v2.1-preview.2
+
+These settings apply only when `--tag=package-preview-v2.1-preview.2` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-v2.1-preview.2'
+input-file:
+  - preview/v2.1-preview.2/FormRecognizer.json
+```
+
