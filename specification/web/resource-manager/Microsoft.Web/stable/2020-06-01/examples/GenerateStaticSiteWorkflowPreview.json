@@ -4,12 +4,14 @@
     "location": "West US 2",
     "api-version": "2020-06-01",
     "staticSitesWorkflowPreviewRequest": {
-      "repositoryUrl": "https://github.com/username/RepoName",
-      "branch": "master",
-      "buildProperties": {
-        "appLocation": "app",
-        "apiLocation": "api",
-        "appArtifactLocation": "build"
+      "properties":{
+        "repositoryUrl": "https://github.com/username/RepoName",
+        "branch": "master",
+        "buildProperties": {
+          "appLocation": "app",
+          "apiLocation": "api",
+          "appArtifactLocation": "build"
+        }
       }
     }
   },
@@ -17,8 +19,10 @@
     "200": {
       "headers": {},
       "body": {
-        "path": ".github/workflows/azure-static-web-apps-<generated_hostname>.yml",
-        "contents": "base64encodedworkflowcontentspreview"
+        "properties": {
+          "path": ".github/workflows/azure-static-web-apps-<generated_hostname>.yml",
+          "contents": "base64encodedworkflowcontentspreview"
+        }
       }
     }
   }
