@@ -1,0 +1,48 @@
+{
+  "parameters": {
+    "subscriptionId": "00000000-1111-2222-3333-444444444444",
+    "resourceGroupName": "wsg-7398",
+    "workspaceName": "testWorkspace",
+    "serverKeyName": "someVault_someKey_01234567890123456789012345678901",
+    "api-version": "2019-06-01-preview",
+    "parameters": {
+      "properties": {
+        "serverKeyType": "AzureKeyVault",
+        "uri": "https://someVault.vault.azure.net/keys/someKey/01234567890123456789012345678901"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/wsg-7398/providers/Microsoft.Synapse/workspaces/testWorkspace/serverKeys/someVault_someKey_01234567890123456789012345678901",
+        "name": "testWorkspace",
+        "type": "Microsoft.Synapse/workspaces/serverKeys",
+        "location": "West US 2",
+        "kind": "azurekeyvault",
+        "properties": {
+          "serverKeyType": "AzureKeyVault",
+          "uri": "https://someVault.vault.azure.net/keys/someKey/01234567890123456789012345678901",
+          "thumbprint": "00112233445566778899AABBCCDDEEFFAABBCCDD",
+          "creationDate": "2017-05-01T00:00:00.0Z"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/wsg-7398/providers/Microsoft.Synapse/workspaces/testWorkspace/serverKeys/someVault_someKey_01234567890123456789012345678901",
+        "name": "testWorkspace",
+        "type": "Microsoft.Synapse/workspaces/serverKeys",
+        "location": "West US 2",
+        "kind": "azurekeyvault",
+        "properties": {
+          "serverKeyType": "AzureKeyVault",
+          "uri": "https://someVault.vault.azure.net/keys/someKey/01234567890123456789012345678901",
+          "thumbprint": "00112233445566778899AABBCCDDEEFFAABBCCDD",
+          "creationDate": "2017-05-01T00:00:00.0Z"
+        }
+      }
+    },
+    "202": {}
+  }
+}

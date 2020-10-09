@@ -1,0 +1,49 @@
+{
+  "parameters": {
+    "subscriptionId": "00000000-1111-2222-3333-444444444444",
+    "resourceGroupName": "wsg-7398",
+    "workspaceName": "testWorkspace",
+    "securityAlertPolicyName": "Default",
+    "api-version": "2019-06-01-preview",
+    "parameters": {
+      "properties": {
+        "state": "Enabled",
+        "emailAccountAdmins": true,
+        "emailAddresses": [
+          "testSecurityAlert@microsoft.com"
+        ],
+        "disabledAlerts": [
+          "Access_Anomaly",
+          "Usage_Anomaly"
+        ],
+        "retentionDays": 5,
+        "storageAccountAccessKey": "sdlfkjabc+sdlfkjsdlkfsjdfLDKFTERLKFDFKLjsdfksjdflsdkfD2342309432849328476458/3RSD==",
+        "storageEndpoint": "https://mystorage.blob.core.windows.net"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/wsg-7398/providers/Microsoft.Synapse/workspaces/testWorkspace/securityAlertPolicies/Default",
+        "name": "Default",
+        "type": "Microsoft.Synapse/workspaces/securityAlertPolicies",
+        "properties": {
+          "state": "Enabled",
+          "emailAccountAdmins": true,
+          "emailAddresses": [
+            "testSecurityAlert@microsoft.com"
+          ],
+          "disabledAlerts": [
+            "Access_Anomaly",
+            "Usage_Anomaly"
+          ],
+          "retentionDays": 5,
+          "storageAccountAccessKey": "",
+          "storageEndpoint": "https://mystorage.blob.core.windows.net"
+        }
+      }
+    },
+    "202": {}
+  }
+}

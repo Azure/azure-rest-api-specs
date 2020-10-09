@@ -1,0 +1,1699 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2019-06-01-preview",
+    "title": "SynapseManagementClient",
+    "description": "The Azure Synapse SQL management API provides a RESTful set of web APIs that interact with Azure Synapse SQL services to manage your resources. The API enables users to create, retrieve, update, and delete SqlServers sub resources."
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "type": "oauth2",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      },
+      "description": "Azure Active Directory OAuth2 Flow"
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces/{workspaceName}/auditingSettings/{blobAuditingPolicyName}": {
+      "get": {
+        "operationId": "WorkspaceManagedSqlServerBlobAuditingPolicies_Get",
+        "summary": "Get a workspace managed sql server's blob auditing policy.",
+        "description": "Get a workspace managed sql server's blob auditing policy.",
+        "tags": [
+          "WorkspaceManagedSqlServer, BlobAuditing"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./workspace.json#/parameters/workspaceNameParameter"
+          },
+          {
+            "name": "blobAuditingPolicyName",
+            "in": "path",
+            "description": "The name of the blob auditing policy.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "default"
+            ],
+            "x-ms-enum": {
+              "name": "BlobAuditingPolicyName",
+              "modelAsString": true
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved workspace managed sql server's blob auditing policy.",
+            "schema": {
+              "$ref": "#/definitions/ServerBlobAuditingPolicy"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found.\n\n * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription.\n\n * 409 UnsupportedWorkspaceType - Unsupported operation for the workspace type.\n\n * 500 InternalServerError - Something went wrong."
+          }
+        },
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-examples": {
+          "Get blob auditing setting of workspace managed sql Server": {
+            "$ref": "./examples/GetWorkspaceManagedSqlServerBlobAuditingSettings.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "WorkspaceSManagedqlServerBlobAuditingPolicies_CreateOrUpdate",
+        "summary": "Create or Update a workspace managed sql server's blob auditing policy.",
+        "description": "Create or Update a workspace managed sql server's blob auditing policy.",
+        "tags": [
+          "WorkspaceManagedSqlServer, BlobAuditing"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./workspace.json#/parameters/workspaceNameParameter"
+          },
+          {
+            "name": "blobAuditingPolicyName",
+            "in": "path",
+            "description": "The name of the blob auditing policy.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "default"
+            ],
+            "x-ms-enum": {
+              "name": "BlobAuditingPolicyName",
+              "modelAsString": true
+            }
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "Properties of extended blob auditing policy.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ServerBlobAuditingPolicy"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully updated the auditing settings.",
+            "schema": {
+              "$ref": "#/definitions/ServerBlobAuditingPolicy"
+            }
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 InvalidServerBlobAuditingPolicyCreateRequest - The create server blob auditing policy request does not exist or has no properties object.\n\n * 400 InvalidBlobAuditActionsAndGroups - Invalid audit actions or action groups.\n\n * 400 DataSecurityInvalidUserSuppliedParameter - An invalid parameter value was provided by the client.\n\n * 400 BlobAuditingInvalidStorageAccountCredentials - The provided storage account or access key is not valid.\n\n * 400 InvalidBlobAuditActionsAndGroups - Invalid audit actions or action groups.\n\n * 400 InsufficientDiskSpaceForAuditing - Insufficient disk space to save auditing metadata in the database\n\n 400 InvalidBlobAuditActions - Invalid audit action.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription.\n\n * 409 UnsupportedWorkspaceType - Unsupported operation for the workspace type.\n\n * 500 InternalServerError - Something went wrong."
+          }
+        },
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Create or update blob auditing policy of workspace managed Sql Server with minimal parameters": {
+            "$ref": "./examples/CreateWorkspaceManagedSqlServerBlobAuditingSettingsWithMinParameters.json"
+          },
+          "Create or update blob auditing policy of workspace SQL Server with all parameters": {
+            "$ref": "./examples/CreateWorkspaceManagedSqlServerBlobAuditingSettingsWithAllParameters.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces/{workspaceName}/auditingSettings": {
+      "get": {
+        "operationId": "WorkspaceManagedSqlServerBlobAuditingPolicies_ListByWorkspace",
+        "summary": "List workspace managed sql server's blob auditing policies.",
+        "description": "List workspace managed sql server's blob auditing policies.",
+        "tags": [
+          "WorkspaceManagedSqlServer, BlobAuditing"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./workspace.json#/parameters/workspaceNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved auditing settings.",
+            "schema": {
+              "$ref": "#/definitions/ServerBlobAuditingPolicyListResult"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found.\n\n * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription.\n\n * 409 UnsupportedWorkspaceType - Unsupported operation for the workspace type.\n\n * 500 InternalServerError - Something went wrong."
+          }
+        },
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Get blob auditing policy of workspace manged sql Server": {
+            "$ref": "./examples/ListWorkspaceManagedSqlServerBlobAuditingSettings.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces/{workspaceName}/extendedAuditingSettings/{blobAuditingPolicyName}": {
+      "get": {
+        "operationId": "WorkspaceManagedSqlServerExtendedBlobAuditingPolicies_Get",
+        "summary": "Get a workspace managed sql server's extended blob auditing policy.",
+        "description": "Get a workspace SQL server's extended blob auditing policy.",
+        "tags": [
+          "WorkspaceManagedSqlServer, BlobAuditing"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./workspace.json#/parameters/workspaceNameParameter"
+          },
+          {
+            "name": "blobAuditingPolicyName",
+            "in": "path",
+            "description": "The name of the blob auditing policy.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "default"
+            ],
+            "x-ms-enum": {
+              "name": "BlobAuditingPolicyName",
+              "modelAsString": true
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved extended auditing settings.",
+            "schema": {
+              "$ref": "#/definitions/ExtendedServerBlobAuditingPolicy"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription.\n\n * 409 UnsupportedWorkspaceType - Unsupported operation for the workspace type.\n\n * 500 InternalServerError - Something went wrong."
+          }
+        },
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-examples": {
+          "Get workspace managed sql servers' extended blob auditing settings": {
+            "$ref": "./examples/GetWorkspaceManagedSqlExtendedServerBlobAuditingSettings.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "WorkspaceManagedSqlServerExtendedBlobAuditingPolicies_CreateOrUpdate",
+        "summary": "Create or Update a workspace managed sql server's extended blob auditing policy.",
+        "description": "Create or Update a workspace managed sql server's extended blob auditing policy.",
+        "tags": [
+          "WorkspaceManagedSqlServer, BlobAuditing"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./workspace.json#/parameters/workspaceNameParameter"
+          },
+          {
+            "name": "blobAuditingPolicyName",
+            "in": "path",
+            "description": "The name of the blob auditing policy.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "default"
+            ],
+            "x-ms-enum": {
+              "name": "BlobAuditingPolicyName",
+              "modelAsString": true
+            }
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "Properties of extended blob auditing policy.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ExtendedServerBlobAuditingPolicy"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully updated the extended auditing settings.",
+            "schema": {
+              "$ref": "#/definitions/ExtendedServerBlobAuditingPolicy"
+            }
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 InvalidServerBlobAuditingPolicyCreateRequest - The create server blob auditing policy request does not exist or has no properties object.\n\n * 400 InvalidBlobAuditActionsAndGroups - Invalid audit actions or action groups.\n\n * 400 DataSecurityInvalidUserSuppliedParameter - An invalid parameter value was provided by the client.\n\n * 400 BlobAuditingPredicateExpressionEmpty - Invalid parameter 'predicateExpression', value can not be empty.\n\n * 400 BlobAuditingInvalidStorageAccountCredentials - The provided storage account or access key is not valid.\n\n * 400 InvalidBlobAuditActionsAndGroups - Invalid audit actions or action groups.\n\n * 400 InsufficientDiskSpaceForAuditing - Insufficient disk space to save auditing metadata in the database\n\n * 400 InvalidBlobAuditActions - Invalid audit action\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription.\n\n * 409 ServerBlobAuditingPolicyInProgress - Set server blob auditing is already in progress.\n\n * 409 UnsupportedWorkspaceType - Unsupported operation for the workspace type.\n\n * 500 InternalServerError - Something went wrong."
+          }
+        },
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Create or update workspace managed sql server's extended blob auditing policy of with minimal parameters": {
+            "$ref": "./examples/CreateWorkspaceManagedSqlServerExetendedBlobAuditingSettingsWithMinParameters.json"
+          },
+          "Create or update workspace managed sql server's extended blob auditing policy of with all parameters": {
+            "$ref": "./examples/CreateWorkspaceManagedSqlServerExtendedBlobAuditingSettingsWithAllParameters.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces/{workspaceName}/extendedAuditingSettings": {
+      "get": {
+        "operationId": "WorkspaceManagedSqlServerExtendedBlobAuditingPolicies_ListByWorkspace",
+        "summary": "List workspace managed sql server's extended blob auditing policies.",
+        "description": "List workspace managed sql server's extended blob auditing policies.",
+        "tags": [
+          "WorkspaceManagedSqlServer, BlobAuditing"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./workspace.json#/parameters/workspaceNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved extended auditing settings.",
+            "schema": {
+              "$ref": "#/definitions/ExtendedServerBlobAuditingPolicyListResult"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription.\n\n * 409 UnsupportedWorkspaceType - Unsupported operation for the workspace type.n\n * 500 InternalServerError - Something went wrong."
+          }
+        },
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Get workspace managed sql server's extended blob auditing settings": {
+            "$ref": "./examples/ListWorkspaceManagedSqlServerExtendedBlobAuditingSettings.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces/{workspaceName}/securityAlertPolicies/{securityAlertPolicyName}": {
+      "get": {
+        "operationId": "WorkspaceManagedSqlServerSecurityAlertPolicy_Get",
+        "summary": "Get a workspace managed sql server's security alert policy.",
+        "description": "Get a workspace managed sql server's security alert policy.",
+        "tags": [
+          "WorkspaceManagedSqlServer, SecurityAlertPolicies"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./workspace.json#/parameters/workspaceNameParameter"
+          },
+          {
+            "name": "securityAlertPolicyName",
+            "in": "path",
+            "description": "The name of the security alert policy.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "Default"
+            ],
+            "x-ms-enum": {
+              "name": "SecurityAlertPolicyName",
+              "modelAsString": true
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved security alert policy.",
+            "schema": {
+              "$ref": "#/definitions/ServerSecurityAlertPolicy"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 SecurityAlertPoliciesInvalidStorageAccountName - The provided storage account is not valid or does not exist.\n\n * 400 SecurityAlertPoliciesInvalidStorageAccountCredentials - The provided storage account access key is not valid.\n\n * 400 InvalidServerSecurityAlertPolicyCreateRequest - The create server Threat Detection security alert policy request does not exist or has no properties object.\n\n * 400 DataSecurityInvalidUserSuppliedParameter - An invalid parameter value was provided by the client.\n\n * 400 UpsertServerSecurityAlertPolicyFailed - An error has occurred while saving Threat detection settings, please try again later\n\n * 400 UpsertServerSecurityAlertPolicyFailed - An error has occurred while saving Threat detection settings, please try again later\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 UpsertServerSecurityAlertPolicyFailed - An error has occurred while saving Threat detection settings, please try again later\n\n * 409 ServerSecurityAlertPolicyInProgress - Set server security alert policy is already in progress\n\n * 409 UpsertServerSecurityAlertPolicyFailed - An error has occurred while saving Threat detection settings, please try again later\n\n * 409 UnsupportedWorkspaceType - Unsupported operation for the workspace type.n\n * 500 DatabaseIsUnavailable - Loading failed. Please try again later.\n\n  * 500 UpsertServerSecurityAlertPolicyFailed - An error has occurred while saving Threat detection settings, please try again later\n\n * 500 GetServerSecurityAlertPolicyFailed - Failed to get Threat Detection settings\n\n * 500 InternalServerError - Something went wrong."
+          }
+        },
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-examples": {
+          "Get workspace managed sql Server's security alert policy": {
+            "$ref": "./examples/GetWorkspaceManagedSqlServerSecurityAlertPolicy.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "WorkspaceManagedSqlServerSecurityAlertPolicy_CreateOrUpdate",
+        "summary": "Create or Update a workspace managed sql server's threat detection policy.",
+        "description": "Create or Update a workspace managed sql server's threat detection policy.",
+        "tags": [
+          "WorkspaceManagedSqlServer, SecurityAlertPolicies"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./workspace.json#/parameters/workspaceNameParameter"
+          },
+          {
+            "name": "securityAlertPolicyName",
+            "in": "path",
+            "description": "The name of the security alert policy.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "Default"
+            ],
+            "x-ms-enum": {
+              "name": "SecurityAlertPolicyName",
+              "modelAsString": true
+            }
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "The workspace managed sql server security alert policy.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ServerSecurityAlertPolicy"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully updated threat detection policy.",
+            "schema": {
+              "$ref": "#/definitions/ServerSecurityAlertPolicy"
+            }
+          },
+          "202": {
+            "description": "Acepted."
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 SecurityAlertPoliciesInvalidStorageAccountName - The provided storage account is not valid or does not exist.\n\n * 400 SecurityAlertPoliciesInvalidStorageAccountCredentials - The provided storage account access key is not valid.\n\n * 400 InvalidServerSecurityAlertPolicyCreateRequest - The create server Threat Detection security alert policy request does not exist or has no properties object.\n\n * 400 DataSecurityInvalidUserSuppliedParameter - An invalid parameter value was provided by the client.\n\n * 400 UpsertServerSecurityAlertPolicyFailed - An error has occurred while saving Threat detection settings, please try again later\n\n * 400 UpsertServerSecurityAlertPolicyFailed - An error has occurred while saving Threat detection settings, please try again later\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 UpsertServerSecurityAlertPolicyFailed - An error has occurred while saving Threat detection settings, please try again later\n\n * 409 ServerSecurityAlertPolicyInProgress - Set server security alert policy is already in progress\n\n * 409 UpsertServerSecurityAlertPolicyFailed - An error has occurred while saving Threat detection settings, please try again later\n\n * 409 UnsupportedWorkspaceType - Unsupported operation for the workspace type.n\n * 500 DatabaseIsUnavailable - Loading failed. Please try again later.\n\n * 500 UpsertServerSecurityAlertPolicyFailed - An error has occurred while saving Threat detection settings, please try again later\n\n * 500 UpsertServerSecurityAlertPolicyFailed - An error has occurred while saving Threat detection settings, please try again later\n\n * 500 InternalServerError - Something went wrong."
+          }
+        },
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Update a workspace managed sql server's threat detection policy with minimal parameters": {
+            "$ref": "./examples/WorkspaceManagedSqlServerSecurityAlertCreateWithMinParameters.json"
+          },
+          "Update a workspace managed sql server's threat detection policy with all parameters": {
+            "$ref": "./examples/WorkspaceManagedSqlServerSecurityAlertWithAllParameters.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces/{workspaceName}/securityAlertPolicies": {
+      "get": {
+        "operationId": "WorkspaceManagedSqlServerSecurityAlertPolicy_List",
+        "summary": "Get workspace managed sql server's threat detection policies.",
+        "description": "Get workspace managed sql server's threat detection policies.",
+        "tags": [
+          "WorkspaceManagedSqlServer, SecurityAlertPolicies"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./workspace.json#/parameters/workspaceNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved threat detection policies.",
+            "schema": {
+              "$ref": "#/definitions/ServerSecurityAlertPolicyListResult"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 SecurityAlertPoliciesInvalidStorageAccountName - The provided storage account is not valid or does not exist.\n\n * 400 SecurityAlertPoliciesInvalidStorageAccountCredentials - The provided storage account access key is not valid.\n\n * 400 InvalidServerSecurityAlertPolicyCreateRequest - The create server Threat Detection security alert policy request does not exist or has no properties object.\n\n * 400 DataSecurityInvalidUserSuppliedParameter - An invalid parameter value was provided by the client.\n\n * 400 UpsertServerSecurityAlertPolicyFailed - An error has occurred while saving Threat detection settings, please try again later\n\n * 400 UpsertServerSecurityAlertPolicyFailed - An error has occurred while saving Threat detection settings, please try again later\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 UpsertServerSecurityAlertPolicyFailed - An error has occurred while saving Threat detection settings, please try again later\n\n * 409 ServerSecurityAlertPolicyInProgress - Set server security alert policy is already in progress\n\n * 409 UpsertServerSecurityAlertPolicyFailed - An error has occurred while saving Threat detection settings, please try again later\n\n * 409 UnsupportedWorkspaceType - Unsupported operation for the workspace type.\n\n * 500 DatabaseIsUnavailable - Loading failed. Please try again later.\n\n * 500 UpsertServerSecurityAlertPolicyFailed - An error has occurred while saving Threat detection settings, please try again later\n\n * 500 GetServerSecurityAlertPolicyFailed - Failed to get Threat Detection settings\n\n * 500 InternalServerError - Something went wrong."
+          }
+        },
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Get workspace managed sql server's security alert policy": {
+            "$ref": "./examples/ListWorkspaceManagedSqlServerSecurityAlertPolicies.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces/{workspaceName}/vulnerabilityAssessments/{vulnerabilityAssessmentName}": {
+      "get": {
+        "operationId": "WorkspaceManagedSqlServerVulnerabilityAssessments_Get",
+        "summary": "Get workspace managed sql server's vulnerability assessment.",
+        "description": "Get workspace managed sql server's vulnerability assessment.",
+        "tags": [
+          "WorkspaceManagedSqlServer, ServerVulnerabilityAssessments"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./workspace.json#/parameters/workspaceNameParameter"
+          },
+          {
+            "name": "vulnerabilityAssessmentName",
+            "in": "path",
+            "description": "The name of the vulnerability assessment.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "default"
+            ],
+            "x-ms-enum": {
+              "name": "VulnerabilityAssessmentName",
+              "modelAsString": true
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved vulnerability assessment.",
+            "schema": {
+              "$ref": "#/definitions/ServerVulnerabilityAssessment"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 InvalidStorageAccountName - The provided storage account is not valid or does not exist.\n\n * 400 InvalidStorageAccountCredentials - The provided storage account shared access signature or account storage key is not valid.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 409 UnsupportedWorkspaceType - Unsupported operation for the workspace type.\n\n * 500 InternalServerError - Something went wrong."
+          }
+        },
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-examples": {
+          "Get workspace managed sql Server's vulnerability assessment": {
+            "$ref": "./examples/GetWorkspaceManagedSqlServerVulnerabilityAssessment.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "WorkspaceManagedSqlServerVulnerabilityAssessments_CreateOrUpdate",
+        "summary": "Create or Update workspace managed sql server's vulnerability assessment.",
+        "description": "Create or Update workspace managed sql server's vulnerability assessment.",
+        "tags": [
+          "WorkspaceManagedSqlServer, ServerVulnerabilityAssessments"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./workspace.json#/parameters/workspaceNameParameter"
+          },
+          {
+            "name": "vulnerabilityAssessmentName",
+            "in": "path",
+            "description": "The name of the vulnerability assessment.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "default"
+            ],
+            "x-ms-enum": {
+              "name": "VulnerabilityAssessmentName",
+              "modelAsString": true
+            }
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "Properties for vulnerability assessment.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ServerVulnerabilityAssessment"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully created vulnerability assessment.",
+            "schema": {
+              "$ref": "#/definitions/ServerVulnerabilityAssessment"
+            }
+          },
+          "201": {
+            "description": "Successfully created the vulnerability assessment.",
+            "schema": {
+              "$ref": "#/definitions/ServerVulnerabilityAssessment"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 InvalidStorageAccountName - The provided storage account is not valid or does not exist.\n\n * 400 InvalidStorageAccountCredentials - The provided storage account shared access signature or account storage key is not valid.\n\n * 400 InvalidVulnerabilityAssessmentOperationRequest - The vulnerability assessment operation request does not exist or has no properties object.\n\n * 400 DataSecurityInvalidUserSuppliedParameter - An invalid parameter value was provided by the client.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 409 UnsupportedWorkspaceType - Unsupported oepration for the workspace type.\n\n * 500 InternalServerError - Something went wrong."
+          }
+        },
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-examples": {
+          "Create or Update a workspace managed sql server's vulnerability assessment with minimal parameters, when storageContainerSasKey is specified": {
+            "$ref": "./examples/PutWorkspaceMangedSqlServerVulnerabilityAssessmentCreateContainerSasKeyMin.json"
+          },
+          "Create or Update a workspace managed sql server's vulnerability assessment with minimal parameters, when storageAccountAccessKey is specified": {
+            "$ref": "./examples/PutWorkspaceMangedSqlServerVulnerabilityAssessmentCreateStorageAccessKeyMin.json"
+          },
+          "Create or Update a workspace managed sql server's vulnerability assessment with all parameters": {
+            "$ref": "./examples/PutWorkspaceManagedSqlServerVulnerabilityAssessmentWithAllParameters.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "WorkspaceManagedSqlServerVulnerabilityAssessments_Delete",
+        "summary": "Remove workspace managed sql server's vulnerability assessment.",
+        "description": "Remove workspace managed sql server's vulnerability assessment.",
+        "tags": [
+          "WorkspaceManagedSqlServer, ServerVulnerabilityAssessments"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./workspace.json#/parameters/workspaceNameParameter"
+          },
+          {
+            "name": "vulnerabilityAssessmentName",
+            "in": "path",
+            "description": "The name of the vulnerability assessment.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "default"
+            ],
+            "x-ms-enum": {
+              "name": "VulnerabilityAssessmentName",
+              "modelAsString": true
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully removed vulnerability assessment."
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 InvalidStorageAccountName - The provided storage account is not valid or does not exist.\n\n * 400 InvalidStorageAccountCredentials - The provided storage account shared access signature or account storage key is not valid.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 409 UnsupportedWorkspaceType - Unsupported operation for the workspace type.\n\n * 500 InternalServerError - Something went wrong."
+          }
+        },
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-examples": {
+          "Remove workspace managed sql Server's vulnerability assessment": {
+            "$ref": "./examples/DeleteWorkspaceManagedSqlServerVulnerabilityAssessment.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces/{workspaceName}/vulnerabilityAssessments": {
+      "get": {
+        "operationId": "WorkspaceManagedSqlServerVulnerabilityAssessments_List",
+        "summary": "Lists the vulnerability assessment policies associated with a workspace managed sql server.",
+        "description": "Lists the vulnerability assessment policies associated with a workspace managed sql server.",
+        "tags": [
+          "WorkspaceManagedSqlServer, ServerVulnerabilityAssessments"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./workspace.json#/parameters/workspaceNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved vulnerability assessment policies.",
+            "schema": {
+              "$ref": "#/definitions/ServerVulnerabilityAssessmentListResult"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 InvalidStorageAccountName - The provided storage account is not valid or does not exist.\n\n * 400 InvalidStorageAccountCredentials - The provided storage account shared access signature or account storage key is not valid.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 409 UnsupportedWorkspaceType - Unsupported operaiton for the workspace type.\n\n * 500 InternalServerError - Something went wrong."
+          }
+        },
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Get workspace managed sql Server's vulnerability assessment policies": {
+            "$ref": "./examples/ListWorkspaceManagedSqlServerVulnerabilityAssessmentPolicies.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces/{workspaceName}/encryptionProtector/{encryptionProtectorName}": {
+      "get": {
+        "operationId": "WorkspaceManagedSqlServerEncryptionProtector_Get",
+        "summary": "Get workspace managed sql server's encryption protector.",
+        "description": "Get workspace managed sql server's encryption protector.",
+        "tags": [
+          "WorkspaceManagedSqlServer, ServerEncryptionProtector"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./workspace.json#/parameters/workspaceNameParameter"
+          },
+          {
+            "name": "encryptionProtectorName",
+            "in": "path",
+            "description": "The name of the encryption protector.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "current"
+            ],
+            "x-ms-enum": {
+              "name": "EncryptionProtectorName",
+              "modelAsString": true
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved encryption protector.",
+            "schema": {
+              "$ref": "#/definitions/EncryptionProtector"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 InvalidKeyName - An invalid value was given for the server key name.\n\n * 400 InvalidKeyType - The create server key type is not supported.\n\n * 400 InvalidUpsertKeyType - Service Managed type keys are managed by Azure SQL. This key type does not support create or update by the user.\n\n * 400 InvalidKeyUpsertRequest - The create server key request does not exist or has no properties object.\n\n * 400 InvalidEncryptionProtectorName - The encryption protector key name is not supported.\n\n * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 ResourceNotFound - The requested resource was not found.\n\n * 409 UnsupportedWorkspaceType - Unsupported operation for the workspace type.\n\n * 500 InternalServerError - Something went wrong."
+          }
+        },
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-examples": {
+          "Get workspace managed sql Server's encryption protector": {
+            "$ref": "./examples/GetWorkspaceManagedSqlServerEncryptionProtector.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "WorkspaceManagedSqlServerEncryptionProtector_CreateOrUpdate",
+        "summary": "Updates workspace managed sql server's encryption protector.",
+        "description": "Updates workspace managed sql server's encryption protector.",
+        "tags": [
+          "WorkspaceManagedSqlServer, ServerEncryptionProtector"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./workspace.json#/parameters/workspaceNameParameter"
+          },
+          {
+            "name": "encryptionProtectorName",
+            "in": "path",
+            "description": "The name of the encryption protector.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "current"
+            ],
+            "x-ms-enum": {
+              "name": "EncryptionProtectorName",
+              "modelAsString": true
+            }
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "The requested encryption protector resource state.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/EncryptionProtector"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved encryption protector.",
+            "schema": {
+              "$ref": "#/definitions/EncryptionProtector"
+            }
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 InvalidKeyName - An invalid value was given for the server key name.\n\n * 400 InvalidKeyType - The create server key type is not supported.\n\n * 400 InvalidUpsertKeyType - Service Managed type keys are managed by Azure SQL. This key type does not support create or update by the user.\n\n * 400 InvalidKeyUpsertRequest - The create server key request does not exist or has no properties object.\n\n * 400 InvalidEncryptionProtectorName - The encryption protector key name is not supported.\n\n * 400 SecurityAzureKeyVaultGeoChainError - Creating secondary of secondary (a process known as chaining) is not supported when enabling Transparent Data Encryption using Azure Key Vault (BYOK).\n\n * 400 AzureKeyVaultInvalidExpirationDate - The operation could not be completed because the Azure Key Vault key expiration date is invalid.\n\n * 400 SecurityAzureKeyVaultUrlNullOrEmpty - The operation could not be completed because the Azure Key Vault Uri is null or empty.\n\n * 400 AzureKeyVaultInvalidUri - An invalid response from Azure Key Vault. Please use a valid Azure Key Vault URI.\n\n * 400 SecurityAzureKeyVaultInvalidKeyName - The operation could not be completed because of an invalid Server Key name.\n\n * 400 AzureKeyVaultMalformedVaultUri - The provided Key Vault uri is not valid.\n\n * 400 SecurityAdalPrincipalCertExpiredError - The operation could not be completed because the Azure Key Vault principal certificate has expired.\n\n * 400 SecurityInvalidAzureKeyVaultRecoveryLevel - The provided Key Vault uri is not valid.\n\n * 400 KeyMaterialNotFoundOnRemoteServer - Remote server does not have access to key material used as a TDE protector.\n\n * 400 AzureKeyVaultMismatchError - Unexpected Key Vault region found in the http response.\n\n * 400 AzureKeyVaultRsaKeyNotSupported - The provided key vault uses unsupported RSA Key Size or Key Type. The supported RSA key size is 2048 and Key Type is RSA.\n\n * 401 AzureKeyVaultKeyDisabled - The operation could not be completed on the server because the Azure Key Vault key is disabled.\n\n * 401 AzureKeyVaultNoServerIdentity - The server identity is not correctly configured.\n\n * 401 AzureKeyVaultMissingPermissions - The server is missing required permissions on the Azure Key Vault. \n\n * 401 AdalGenericError - The operation could not be completed because an Azure Active Directory error was encountered.\n\n * 401 AdalServicePrincipalNotFound - The operation could not be completed because an Azure Active Directory library Service Principal not found error was encountered.\n\n * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 ResourceNotFound - The requested resource was not found.\n\n * 404 ServerKeyNotFound - The requested server key was not found on the current subscription.\n\n * 409 ServerKeyNameAlreadyExists - The server key already exists on the server.\n\n * 409 ServerKeyUriAlreadyExists - The server key URI already exists on the server.\n\n * 409 ServerKeyDoesNotExists - The server key does not exist.\n\n * 409 AzureKeyVaultKeyNameNotFound - The operation could not be completed because the Azure Key Vault Key name does not exist.\n\n * 409 AzureKeyVaultKeyInUse - The key is currently being used by the server.\n\n * 409 UnsupportedWorkspaceType - Unsupported operation for the workspace type.\n\n * 500 InternalServerError - Something went wrong.\n\n * 503 AzureKeyVaultConnectionFailed - The operation could not be completed on the server because attempts to connect to Azure Key Vault have failed\n\n * 503 AzureKeyVaultGenericConnectionError - The operation could not be completed because an error was encountered when attempting to retrieve Key Vault information."
+          }
+        },
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Update the encryption protector to key vault": {
+            "$ref": "./examples/WorkspaceManagedSqlServerEncryptionProtectorCreateOrUpdateKeyVault.json"
+          },
+          "Update the encryption protector to service managed": {
+            "$ref": "./examples/WorkspaceManagedSqlServerEncryptionProtectorCreateOrUpdateServiceManaged.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces/{workspaceName}/encryptionProtector": {
+      "get": {
+        "operationId": "WorkspaceManagedSqlServerEncryptionProtector_List",
+        "summary": "Get list of encryption protectors for workspace managed sql server.",
+        "description": "Get list of encryption protectors for workspace managed sql server.",
+        "tags": [
+          "WorkspaceManagedSqlServer, ServerEncryptionProtector"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./workspace.json#/parameters/workspaceNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved encryption protectors.",
+            "schema": {
+              "$ref": "#/definitions/EncryptionProtectorListResult"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 InvalidKeyName - An invalid value was given for the server key name.\n\n * 400 InvalidKeyType - The create server key type is not supported.\n\n * 400 InvalidUpsertKeyType - Service Managed type keys are managed by Azure SQL. This key type does not support create or update by the user.\n\n * 400 InvalidKeyUpsertRequest - The create server key request does not exist or has no properties object.\n\n * 400 InvalidEncryptionProtectorName - The encryption protector key name is not supported.\n\n * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found.\n\n * 409 UnsupportedWorkspaceType - Unsupported operation for the workspace type.\n\n * 500 InternalServerError - Something went wrong."
+          }
+        },
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Get workspace managed sql Server's encryption protectors": {
+            "$ref": "./examples/GetWorkspaceManagedSqlServerEncryptionProtectorList.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces/{workspaceName}/encryptionProtector/{encryptionProtectorName}/revalidate": {
+      "post": {
+        "operationId": "WorkspaceManagedSqlServerEncryptionProtector_Revalidate",
+        "summary": "Revalidates workspace managed sql server's existing encryption protector.",
+        "description": "Revalidates workspace managed sql server's existing encryption protector.",
+        "tags": [
+          "WorkspaceManagedSqlServer, ServerEncryptionProtector"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./workspace.json#/parameters/workspaceNameParameter"
+          },
+          {
+            "name": "encryptionProtectorName",
+            "in": "path",
+            "description": "The name of the encryption protector.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "current"
+            ],
+            "x-ms-enum": {
+              "name": "EncryptionProtectorName",
+              "modelAsString": true
+            }
+          }
+        ],
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully revalidated the encryption protector."
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 InvalidKeyName - An invalid value was given for the server key name.\n\n * 400 InvalidKeyType - The create server key type is not supported.\n\n * 400 InvalidUpsertKeyType - Service Managed type keys are managed by Azure SQL. This key type does not support create or update by the user.\n\n * 400 InvalidKeyUpsertRequest - The create server key request does not exist or has no properties object.\n\n * 400 InvalidEncryptionProtectorName - The encryption protector key name is not supported.\n\n * 400 SecurityAzureKeyVaultGeoChainError - Creating secondary of secondary (a process known as chaining) is not supported when enabling Transparent Data Encryption using Azure Key Vault (BYOK).\n\n * 400 AzureKeyVaultInvalidExpirationDate - The operation could not be completed because the Azure Key Vault key expiration date is invalid.\n\n * 400 SecurityAzureKeyVaultUrlNullOrEmpty - The operation could not be completed because the Azure Key Vault Uri is null or empty.\n\n * 400 AzureKeyVaultInvalidUri - An invalid response from Azure Key Vault. Please use a valid Azure Key Vault URI.\n\n * 400 SecurityAzureKeyVaultInvalidKeyName - The operation could not be completed because of an invalid Server Key name.\n\n * 400 AzureKeyVaultMalformedVaultUri - The provided Key Vault uri is not valid.\n\n * 400 SecurityAdalPrincipalCertExpiredError - The operation could not be completed because the Azure Key Vault principal certificate has expired.\n\n * 400 SecurityInvalidAzureKeyVaultRecoveryLevel - The provided Key Vault uri is not valid.\n\n * 400 KeyMaterialNotFoundOnRemoteServer - Remote server does not have access to key material used as a TDE protector.\n\n * 400 AzureKeyVaultMismatchError - Unexpected Key Vault region found in the http response.\n\n * 400 AzureKeyVaultRsaKeyNotSupported - The provided key vault uses unsupported RSA Key Size or Key Type. The supported RSA key size is 2048 and Key Type is RSA.\n\n * 401 AzureKeyVaultKeyDisabled - The operation could not be completed on the server because the Azure Key Vault key is disabled.\n\n * 401 AzureKeyVaultNoServerIdentity - The server identity is not correctly configured.\n\n * 401 AzureKeyVaultMissingPermissions - The server is missing required permissions on the Azure Key Vault. \n\n * 401 AdalGenericError - The operation could not be completed because an Azure Active Directory error was encountered.\n\n * 401 AdalServicePrincipalNotFound - The operation could not be completed because an Azure Active Directory library Service Principal not found error was encountered.\n\n * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 ResourceNotFound - The requested resource was not found.\n\n * 404 ServerKeyNotFound - The requested server key was not found on the current subscription.\n\n * 409 ServerKeyNameAlreadyExists - The server key already exists on the server.\n\n * 409 ServerKeyUriAlreadyExists - The server key URI already exists on the server.\n\n * 409 ServerKeyDoesNotExists - The server key does not exist.\n\n * 409 AzureKeyVaultKeyNameNotFound - The operation could not be completed because the Azure Key Vault Key name does not exist.\n\n * 409 AzureKeyVaultKeyInUse - The key is currently being used by the server.\n\n * 409 UnsupportedWorkspaceType - Unsupported operation for the workspace type.\n\n * 500 InternalServerError - Something went wrong.\n\n * 503 AzureKeyVaultConnectionFailed - The operation could not be completed on the server because attempts to connect to Azure Key Vault have failed\n\n * 503 AzureKeyVaultGenericConnectionError - The operation could not be completed because an error was encountered when attempting to retrieve Key Vault information ."
+          },
+          "202": {
+            "description": "Accepted"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Revalidates the encryption protector": {
+            "$ref": "./examples/WorkspaceManagedSqlServerEncryptionProtectorRevalidate.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces/{workspaceName}/serverKeys/{serverKeyName}": {
+      "put": {
+        "operationId": "WorkspaceManagedSqlServerKeys_CreateOrUpdate",
+        "summary": "Create or updates workspace managed sql server's server key.",
+        "description": "Create or updates workspace managed sql server's server key.",
+        "tags": [
+          "WorkspaceManagedSqlServer, ServerKeys"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./workspace.json#/parameters/workspaceNameParameter"
+          },
+          {
+            "name": "serverKeyName",
+            "in": "path",
+            "description": "The name of the server key to be operated on (updated or created). The key name is required to be in the format of 'vault_key_version'. For example, if the keyId is https://YourVaultName.vault.azure.net/keys/YourKeyName/01234567890123456789012345678901, then the server key name should be formatted as: YourVaultName_YourKeyName_01234567890123456789012345678901",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "The requested server key resource state.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ServerKey"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully udated server key.",
+            "schema": {
+              "$ref": "#/definitions/ServerKey"
+            }
+          },
+          "201": {
+            "description": "Successfully created the server key.",
+            "schema": {
+              "$ref": "#/definitions/ServerKey"
+            }
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 InvalidKeyName - An invalid value was given for the server key name.\n\n * 400 InvalidKeyType - The create server key type is not supported.\n\n * 400 InvalidKeyUpsertRequest - The create server key request does not exist or has no properties object.\n\n * 400 AzureKeyVaultInvalidExpirationDate - The operation could not be completed because the Azure Key Vault key expiration date is invalid.\n\n * 400 AzureKeyVaultInvalidUri - An invalid response from Azure Key Vault. Please use a valid Azure Key Vault URI.\n\n * 400 AzureKeyVaultMalformedVaultUri - The provided Key Vault uri is not valid.\n\n * 400 AzureKeyVaultInvalidExpirationDate - The operation could not be completed because the Azure Key Vault key expiration date is invalid.\n\n * 400 AzureKeyVaultInvalidUri - An invalid response from Azure Key Vault. Please use a valid Azure Key Vault URI.\n\n * 400 AzureKeyVaultMalformedVaultUri - The provided Key Vault uri is not valid.\n\n * 401 AzureKeyVaultKeyDisabled - The operation could not be completed on the server because the Azure Key Vault key is disabled.\n\n * 401 AzureKeyVaultNoServerIdentity - The server identity is not correctly configured on server. Please contact support.\n\n * 401 AzureKeyVaultMissingPermissions - The server is missing required permissions on the Azure Key Vault. \n\n * 401 AdalGenericError - The operation could not be completed because an Azure Active Directory error was encountered.\n\n * 401 AdalServicePrincipalNotFound - The operation could not be completed because an Azure Active Directory library Service Principal not found error was encountered.\n\n * 401 AzureKeyVaultKeyDisabled - The operation could not be completed on the server because the Azure Key Vault key is disabled.\n\n * 401 AzureKeyVaultNoServerIdentity - The server identity is not correctly configured on server. Please contact support.\n\n * 401 AzureKeyVaultMissingPermissions - The server is missing required permissions on the Azure Key Vault. \n\n * 401 AdalGenericError - The operation could not be completed because an Azure Active Directory error was encountered.\n\n * 401 AdalServicePrincipalNotFound - The operation could not be completed because an Azure Active Directory library Service Principal not found error was encountered.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 ResourceNotFound - The requested resource was not found.\n\n * 409 ServerKeyUriAlreadyExists - The server key URI already exists on the server.\n\n * 409 ServerKeyDoesNotExists - The server key does not exist.\n\n * 409 AzureKeyVaultKeyNameNotFound - The operation could not be completed because the Azure Key Vault Key name does not exist.\n\n * 409 AzureKeyVaultKeyInUse - The key is currently being used by the server.\n\n * 409 ServerKeyNameAlreadyExists - The server key already exists on the server.\n\n * 409 ServerKeyUriAlreadyExists - The server key URI already exists on the server.\n\n * 409 ServerKeyDoesNotExists - The server key does not exist.\n\n * 409 AzureKeyVaultKeyNameNotFound - The operation could not be completed because the Azure Key Vault Key name does not exist.\n\n * 409 AzureKeyVaultKeyInUse - The key is currently being used by the server.\n\n * 409 ServerKeyNameAlreadyExists - The server key already exists on the server.\n\n * 409 UnsupportedWorkspaceType - Unsupported operation for the workspace type.\n\n * 500 InternalServerError - Something went wrong.\n\n * 503 AzureKeyVaultConnectionFailed - The operation could not be completed on the server because attempts to connect to Azure Key Vault have failed\n\n * 503 AzureKeyVaultGenericConnectionError - The operation could not be completed because an error was encountered when attempting to retrieve Key Vault information .\n\n * 503 AzureKeyVaultConnectionFailed - The operation could not be completed on the server because attempts to connect to Azure Key Vault have failed\n\n * 503 AzureKeyVaultGenericConnectionError - The operation could not be completed because an error was encountered when attempting to retrieve Key Vault information ."
+          }
+        },
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Creates or updates a server key": {
+            "$ref": "./examples/WorkspaceManagedSqlServerKeyCreateOrUpdate.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "WorkspaceManagedSqlServerKeys_Delete",
+        "summary": "Deletes workspace managed sql server's server key with the given name.",
+        "description": "Deletes workspace managed sql server's server key with the given name.",
+        "tags": [
+          "WorkspaceManagedSqlServer, ServerKeys"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./workspace.json#/parameters/workspaceNameParameter"
+          },
+          {
+            "name": "serverKeyName",
+            "in": "path",
+            "description": "The name of the server key to be operated on (updated or created). The key name is required to be in the format of 'vault_key_version'. For example, if the keyId is https://YourVaultName.vault.azure.net/keys/YourKeyName/01234567890123456789012345678901, then the server key name should be formatted as: YourVaultName_YourKeyName_01234567890123456789012345678901",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully deleted the server key."
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "204": {
+            "description": "The specified server key does not exist."
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 InvalidKeyName - An invalid value was given for the server key name.\n\n * 400 InvalidKeyType - The create server key type is not supported.\n\n * 400 InvalidKeyUpsertRequest - The create server key request does not exist or has no properties object.\n\n * 400 AzureKeyVaultInvalidExpirationDate - The operation could not be completed because the Azure Key Vault key expiration date is invalid.\n\n * 400 AzureKeyVaultInvalidUri - An invalid response from Azure Key Vault. Please use a valid Azure Key Vault URI.\n\n * 400 AzureKeyVaultMalformedVaultUri - The provided Key Vault uri is not valid.\n\n * 401 AzureKeyVaultKeyDisabled - The operation could not be completed on the server because the Azure Key Vault key is disabled.\n\n * 401 AzureKeyVaultNoServerIdentity - The server identity is not correctly configured on server. Please contact support.\n\n * 401 AzureKeyVaultMissingPermissions - The server is missing required permissions on the Azure Key Vault. \n\n * 401 AdalGenericError - The operation could not be completed because an Azure Active Directory error was encountered.\n\n * 401 AdalServicePrincipalNotFound - The operation could not be completed because an Azure Active Directory library Service Principal not found error was encountered.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 ResourceNotFound - The requested resource was not found.\n\n * 409 ServerKeyUriAlreadyExists - The server key URI already exists on the server.\n\n * 409 ServerKeyDoesNotExists - The server key does not exist.\n\n * 409 AzureKeyVaultKeyNameNotFound - The operation could not be completed because the Azure Key Vault Key name does not exist.\n\n * 409 AzureKeyVaultKeyInUse - The key is currently being used by the server.\n\n * 409 ServerKeyNameAlreadyExists - The server key already exists on the server.\n\n * 409 UnsupportedWorkspaceType - Unsupported operation for the workspace type.\n\n * 500 InternalServerError - Something went wrong.\n\n * 503 AzureKeyVaultConnectionFailed - The operation could not be completed on the server because attempts to connect to Azure Key Vault have failed\n\n * 503 AzureKeyVaultGenericConnectionError - The operation could not be completed because an error was encountered when attempting to retrieve Key Vault information."
+          }
+        },
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Delete the server key": {
+            "$ref": "./examples/WorkspaceManagedSqlServerKeyDelete.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ServerBlobAuditingPolicyProperties": {
+      "description": "Properties of a server blob auditing policy.",
+      "required": [
+        "state"
+      ],
+      "type": "object",
+      "properties": {
+        "state": {
+          "description": "Specifies the state of the policy. If state is Enabled, storageEndpoint or isAzureMonitorTargetEnabled are required.",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "BlobAuditingPolicyState",
+            "modelAsString": false
+          }
+        },
+        "storageEndpoint": {
+          "description": "Specifies the blob storage endpoint (e.g. https://MyAccount.blob.core.windows.net). If state is Enabled, storageEndpoint or isAzureMonitorTargetEnabled is required.",
+          "type": "string"
+        },
+        "storageAccountAccessKey": {
+          "description": "Specifies the identifier key of the auditing storage account. \r\nIf state is Enabled and storageEndpoint is specified, not specifying the storageAccountAccessKey will use SQL server system-assigned managed identity to access the storage.\r\nPrerequisites for using managed identity authentication:\r\n1. Assign SQL Server a system-assigned managed identity in Azure Active Directory (AAD).\r\n2. Grant SQL Server identity access to the storage account by adding 'Storage Blob Data Contributor' RBAC role to the server identity.\r\nFor more information, see [Auditing to storage using Managed Identity authentication](https://go.microsoft.com/fwlink/?linkid=2114355)",
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "update"
+          ]
+        },
+        "retentionDays": {
+          "format": "int32",
+          "description": "Specifies the number of days to keep in the audit logs in the storage account.",
+          "type": "integer"
+        },
+        "auditActionsAndGroups": {
+          "description": "Specifies the Actions-Groups and Actions to audit.\r\n\r\nThe recommended set of action groups to use is the following combination - this will audit all the queries and stored procedures executed against the database, as well as successful and failed logins:\r\n\r\nBATCH_COMPLETED_GROUP,\r\nSUCCESSFUL_DATABASE_AUTHENTICATION_GROUP,\r\nFAILED_DATABASE_AUTHENTICATION_GROUP.\r\n\r\nThis above combination is also the set that is configured by default when enabling auditing from the Azure portal.\r\n\r\nThe supported action groups to audit are (note: choose only specific groups that cover your auditing needs. Using unnecessary groups could lead to very large quantities of audit records):\r\n\r\nAPPLICATION_ROLE_CHANGE_PASSWORD_GROUP\r\nBACKUP_RESTORE_GROUP\r\nDATABASE_LOGOUT_GROUP\r\nDATABASE_OBJECT_CHANGE_GROUP\r\nDATABASE_OBJECT_OWNERSHIP_CHANGE_GROUP\r\nDATABASE_OBJECT_PERMISSION_CHANGE_GROUP\r\nDATABASE_OPERATION_GROUP\r\nDATABASE_PERMISSION_CHANGE_GROUP\r\nDATABASE_PRINCIPAL_CHANGE_GROUP\r\nDATABASE_PRINCIPAL_IMPERSONATION_GROUP\r\nDATABASE_ROLE_MEMBER_CHANGE_GROUP\r\nFAILED_DATABASE_AUTHENTICATION_GROUP\r\nSCHEMA_OBJECT_ACCESS_GROUP\r\nSCHEMA_OBJECT_CHANGE_GROUP\r\nSCHEMA_OBJECT_OWNERSHIP_CHANGE_GROUP\r\nSCHEMA_OBJECT_PERMISSION_CHANGE_GROUP\r\nSUCCESSFUL_DATABASE_AUTHENTICATION_GROUP\r\nUSER_CHANGE_PASSWORD_GROUP\r\nBATCH_STARTED_GROUP\r\nBATCH_COMPLETED_GROUP\r\n\r\nThese are groups that cover all sql statements and stored procedures executed against the database, and should not be used in combination with other groups as this will result in duplicate audit logs.\r\n\r\nFor more information, see [Database-Level Audit Action Groups](https://docs.microsoft.com/en-us/sql/relational-databases/security/auditing/sql-server-audit-action-groups-and-actions#database-level-audit-action-groups).\r\n\r\nFor Database auditing policy, specific Actions can also be specified (note that Actions cannot be specified for Server auditing policy). The supported actions to audit are:\r\nSELECT\r\nUPDATE\r\nINSERT\r\nDELETE\r\nEXECUTE\r\nRECEIVE\r\nREFERENCES\r\n\r\nThe general form for defining an action to be audited is:\r\n{action} ON {object} BY {principal}\r\n\r\nNote that <object> in the above format can refer to an object like a table, view, or stored procedure, or an entire database or schema. For the latter cases, the forms DATABASE::{db_name} and SCHEMA::{schema_name} are used, respectively.\r\n\r\nFor example:\r\nSELECT on dbo.myTable by public\r\nSELECT on DATABASE::myDatabase by public\r\nSELECT on SCHEMA::mySchema by public\r\n\r\nFor more information, see [Database-Level Audit Actions](https://docs.microsoft.com/en-us/sql/relational-databases/security/auditing/sql-server-audit-action-groups-and-actions#database-level-audit-actions)",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "storageAccountSubscriptionId": {
+          "format": "uuid",
+          "description": "Specifies the blob storage subscription Id.",
+          "type": "string"
+        },
+        "isStorageSecondaryKeyInUse": {
+          "description": "Specifies whether storageAccountAccessKey value is the storage's secondary key.",
+          "type": "boolean"
+        },
+        "isAzureMonitorTargetEnabled": {
+          "description": "Specifies whether audit events are sent to Azure Monitor. \r\nIn order to send the events to Azure Monitor, specify 'state' as 'Enabled' and 'isAzureMonitorTargetEnabled' as true.\r\n\r\nWhen using REST API to configure auditing, Diagnostic Settings with 'SQLSecurityAuditEvents' diagnostic logs category on the database should be also created.\r\nNote that for server level audit you should use the 'master' database as {databaseName}.\r\n\r\nDiagnostic Settings URI format:\r\nPUT https://management.azure.com/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/providers/microsoft.insights/diagnosticSettings/{settingsName}?api-version=2017-05-01-preview\r\n\r\nFor more information, see [Diagnostic Settings REST API](https://go.microsoft.com/fwlink/?linkid=2033207)\r\nor [Diagnostic Settings PowerShell](https://go.microsoft.com/fwlink/?linkid=2033043)\r\n",
+          "type": "boolean"
+        },
+        "queueDelayMs": {
+          "format": "int32",
+          "description": "Specifies the amount of time in milliseconds that can elapse before audit actions are forced to be processed.\r\nThe default minimum value is 1000 (1 second). The maximum is 2,147,483,647.",
+          "type": "integer"
+        }
+      }
+    },
+    "ServerBlobAuditingPolicy": {
+      "description": "A server blob auditing policy.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ServerBlobAuditingPolicyProperties",
+          "description": "Resource properties.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "ServerBlobAuditingPolicyListResult": {
+      "description": "A list of server auditing settings.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Array of results.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ServerBlobAuditingPolicy"
+          },
+          "readOnly": true
+        },
+        "nextLink": {
+          "description": "Link to retrieve next page of results.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "ExtendedServerBlobAuditingPolicyProperties": {
+      "description": "Properties of an extended server blob auditing policy.",
+      "required": [
+        "state"
+      ],
+      "type": "object",
+      "properties": {
+        "predicateExpression": {
+          "description": "Specifies condition of where clause when creating an audit.",
+          "type": "string"
+        },
+        "state": {
+          "description": "Specifies the state of the policy. If state is Enabled, storageEndpoint or isAzureMonitorTargetEnabled are required.",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "BlobAuditingPolicyState",
+            "modelAsString": false
+          }
+        },
+        "storageEndpoint": {
+          "description": "Specifies the blob storage endpoint (e.g. https://MyAccount.blob.core.windows.net). If state is Enabled, storageEndpoint or isAzureMonitorTargetEnabled is required.",
+          "type": "string"
+        },
+        "storageAccountAccessKey": {
+          "description": "Specifies the identifier key of the auditing storage account. \r\nIf state is Enabled and storageEndpoint is specified, not specifying the storageAccountAccessKey will use SQL server system-assigned managed identity to access the storage.\r\nPrerequisites for using managed identity authentication:\r\n1. Assign SQL Server a system-assigned managed identity in Azure Active Directory (AAD).\r\n2. Grant SQL Server identity access to the storage account by adding 'Storage Blob Data Contributor' RBAC role to the server identity.\r\nFor more information, see [Auditing to storage using Managed Identity authentication](https://go.microsoft.com/fwlink/?linkid=2114355)",
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "update"
+          ]
+        },
+        "retentionDays": {
+          "format": "int32",
+          "description": "Specifies the number of days to keep in the audit logs in the storage account.",
+          "type": "integer"
+        },
+        "auditActionsAndGroups": {
+          "description": "Specifies the Actions-Groups and Actions to audit.\r\n\r\nThe recommended set of action groups to use is the following combination - this will audit all the queries and stored procedures executed against the database, as well as successful and failed logins:\r\n\r\nBATCH_COMPLETED_GROUP,\r\nSUCCESSFUL_DATABASE_AUTHENTICATION_GROUP,\r\nFAILED_DATABASE_AUTHENTICATION_GROUP.\r\n\r\nThis above combination is also the set that is configured by default when enabling auditing from the Azure portal.\r\n\r\nThe supported action groups to audit are (note: choose only specific groups that cover your auditing needs. Using unnecessary groups could lead to very large quantities of audit records):\r\n\r\nAPPLICATION_ROLE_CHANGE_PASSWORD_GROUP\r\nBACKUP_RESTORE_GROUP\r\nDATABASE_LOGOUT_GROUP\r\nDATABASE_OBJECT_CHANGE_GROUP\r\nDATABASE_OBJECT_OWNERSHIP_CHANGE_GROUP\r\nDATABASE_OBJECT_PERMISSION_CHANGE_GROUP\r\nDATABASE_OPERATION_GROUP\r\nDATABASE_PERMISSION_CHANGE_GROUP\r\nDATABASE_PRINCIPAL_CHANGE_GROUP\r\nDATABASE_PRINCIPAL_IMPERSONATION_GROUP\r\nDATABASE_ROLE_MEMBER_CHANGE_GROUP\r\nFAILED_DATABASE_AUTHENTICATION_GROUP\r\nSCHEMA_OBJECT_ACCESS_GROUP\r\nSCHEMA_OBJECT_CHANGE_GROUP\r\nSCHEMA_OBJECT_OWNERSHIP_CHANGE_GROUP\r\nSCHEMA_OBJECT_PERMISSION_CHANGE_GROUP\r\nSUCCESSFUL_DATABASE_AUTHENTICATION_GROUP\r\nUSER_CHANGE_PASSWORD_GROUP\r\nBATCH_STARTED_GROUP\r\nBATCH_COMPLETED_GROUP\r\n\r\nThese are groups that cover all sql statements and stored procedures executed against the database, and should not be used in combination with other groups as this will result in duplicate audit logs.\r\n\r\nFor more information, see [Database-Level Audit Action Groups](https://docs.microsoft.com/en-us/sql/relational-databases/security/auditing/sql-server-audit-action-groups-and-actions#database-level-audit-action-groups).\r\n\r\nFor Database auditing policy, specific Actions can also be specified (note that Actions cannot be specified for Server auditing policy). The supported actions to audit are:\r\nSELECT\r\nUPDATE\r\nINSERT\r\nDELETE\r\nEXECUTE\r\nRECEIVE\r\nREFERENCES\r\n\r\nThe general form for defining an action to be audited is:\r\n{action} ON {object} BY {principal}\r\n\r\nNote that <object> in the above format can refer to an object like a table, view, or stored procedure, or an entire database or schema. For the latter cases, the forms DATABASE::{db_name} and SCHEMA::{schema_name} are used, respectively.\r\n\r\nFor example:\r\nSELECT on dbo.myTable by public\r\nSELECT on DATABASE::myDatabase by public\r\nSELECT on SCHEMA::mySchema by public\r\n\r\nFor more information, see [Database-Level Audit Actions](https://docs.microsoft.com/en-us/sql/relational-databases/security/auditing/sql-server-audit-action-groups-and-actions#database-level-audit-actions)",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "storageAccountSubscriptionId": {
+          "format": "uuid",
+          "description": "Specifies the blob storage subscription Id.",
+          "type": "string"
+        },
+        "isStorageSecondaryKeyInUse": {
+          "description": "Specifies whether storageAccountAccessKey value is the storage's secondary key.",
+          "type": "boolean"
+        },
+        "isAzureMonitorTargetEnabled": {
+          "description": "Specifies whether audit events are sent to Azure Monitor. \r\nIn order to send the events to Azure Monitor, specify 'state' as 'Enabled' and 'isAzureMonitorTargetEnabled' as true.\r\n\r\nWhen using REST API to configure auditing, Diagnostic Settings with 'SQLSecurityAuditEvents' diagnostic logs category on the database should be also created.\r\nNote that for server level audit you should use the 'master' database as {databaseName}.\r\n\r\nDiagnostic Settings URI format:\r\nPUT https://management.azure.com/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/providers/microsoft.insights/diagnosticSettings/{settingsName}?api-version=2017-05-01-preview\r\n\r\nFor more information, see [Diagnostic Settings REST API](https://go.microsoft.com/fwlink/?linkid=2033207)\r\nor [Diagnostic Settings PowerShell](https://go.microsoft.com/fwlink/?linkid=2033043)\r\n",
+          "type": "boolean"
+        },
+        "queueDelayMs": {
+          "format": "int32",
+          "description": "Specifies the amount of time in milliseconds that can elapse before audit actions are forced to be processed.\r\nThe default minimum value is 1000 (1 second). The maximum is 2,147,483,647.",
+          "type": "integer"
+        }
+      }
+    },
+    "ExtendedServerBlobAuditingPolicy": {
+      "description": "An extended server blob auditing policy.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ExtendedServerBlobAuditingPolicyProperties",
+          "description": "Resource properties.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "ExtendedServerBlobAuditingPolicyListResult": {
+      "description": "A list of server extended auditing settings.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Array of results.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ExtendedServerBlobAuditingPolicy"
+          },
+          "readOnly": true
+        },
+        "nextLink": {
+          "description": "Link to retrieve next page of results.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "SecurityAlertPolicyProperties": {
+      "description": "Properties of a security alert policy.",
+      "required": [
+        "state"
+      ],
+      "type": "object",
+      "properties": {
+        "state": {
+          "description": "Specifies the state of the policy, whether it is enabled or disabled or a policy has not been applied yet on the specific database.",
+          "enum": [
+            "New",
+            "Enabled",
+            "Disabled"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "SecurityAlertPolicyState",
+            "modelAsString": false
+          }
+        },
+        "disabledAlerts": {
+          "description": "Specifies an array of alerts that are disabled. Allowed values are: Sql_Injection, Sql_Injection_Vulnerability, Access_Anomaly, Data_Exfiltration, Unsafe_Action",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "emailAddresses": {
+          "description": "Specifies an array of e-mail addresses to which the alert is sent.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "emailAccountAdmins": {
+          "description": "Specifies that the alert is sent to the account administrators.",
+          "type": "boolean"
+        },
+        "storageEndpoint": {
+          "description": "Specifies the blob storage endpoint (e.g. https://MyAccount.blob.core.windows.net). This blob storage will hold all Threat Detection audit logs.",
+          "type": "string"
+        },
+        "storageAccountAccessKey": {
+          "description": "Specifies the identifier key of the Threat Detection audit storage account.",
+          "type": "string"
+        },
+        "retentionDays": {
+          "format": "int32",
+          "description": "Specifies the number of days to keep in the Threat Detection audit logs.",
+          "type": "integer"
+        },
+        "creationTime": {
+          "format": "date-time",
+          "description": "Specifies the UTC creation time of the policy.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "ServerSecurityAlertPolicy": {
+      "description": "Workspace managed Sql server security alert policy.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/SecurityAlertPolicyProperties",
+          "description": "Resource properties.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "ServerSecurityAlertPolicyListResult": {
+      "description": "A list of the workspace managed sql server's security alert policies.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Array of results.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ServerSecurityAlertPolicy"
+          },
+          "readOnly": true
+        },
+        "nextLink": {
+          "description": "Link to retrieve next page of results.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "ServerVulnerabilityAssessmentProperties": {
+      "description": "Properties of a server Vulnerability Assessment.",
+      "required": [
+        "storageContainerPath"
+      ],
+      "type": "object",
+      "properties": {
+        "storageContainerPath": {
+          "description": "A blob storage container path to hold the scan results (e.g. https://myStorage.blob.core.windows.net/VaScans/).",
+          "type": "string"
+        },
+        "storageContainerSasKey": {
+          "description": "A shared access signature (SAS Key) that has read and write access to the blob container specified in 'storageContainerPath' parameter. If 'storageAccountAccessKey' isn't specified, StorageContainerSasKey is required.",
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "update"
+          ]
+        },
+        "storageAccountAccessKey": {
+          "description": "Specifies the identifier key of the storage account for vulnerability assessment scan results. If 'StorageContainerSasKey' isn't specified, storageAccountAccessKey is required.",
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "update"
+          ]
+        },
+        "recurringScans": {
+          "$ref": "#/definitions/VulnerabilityAssessmentRecurringScansProperties",
+          "description": "The recurring scans settings"
+        }
+      }
+    },
+    "VulnerabilityAssessmentRecurringScansProperties": {
+      "description": "Properties of a Vulnerability Assessment recurring scans.",
+      "type": "object",
+      "properties": {
+        "isEnabled": {
+          "description": "Recurring scans state.",
+          "type": "boolean"
+        },
+        "emailSubscriptionAdmins": {
+          "description": "Specifies that the schedule scan notification will be is sent to the subscription administrators.",
+          "default": true,
+          "type": "boolean"
+        },
+        "emails": {
+          "description": "Specifies an array of e-mail addresses to which the scan notification is sent.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "ServerVulnerabilityAssessment": {
+      "description": "A server vulnerability assessment.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ServerVulnerabilityAssessmentProperties",
+          "description": "Resource properties.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "ServerVulnerabilityAssessmentListResult": {
+      "description": "A list of the server's vulnerability assessments.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Array of results.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ServerVulnerabilityAssessment"
+          },
+          "readOnly": true
+        },
+        "nextLink": {
+          "description": "Link to retrieve next page of results.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "EncryptionProtectorListResult": {
+      "description": "A list of server encryption protectors.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Array of results.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/EncryptionProtector"
+          },
+          "readOnly": true
+        },
+        "nextLink": {
+          "description": "Link to retrieve next page of results.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "EncryptionProtectorProperties": {
+      "description": "Properties for an encryption protector execution.",
+      "required": [
+        "serverKeyType"
+      ],
+      "type": "object",
+      "properties": {
+        "subregion": {
+          "description": "Subregion of the encryption protector.",
+          "type": "string",
+          "readOnly": true
+        },
+        "serverKeyName": {
+          "description": "The name of the server key.",
+          "type": "string"
+        },
+        "serverKeyType": {
+          "description": "The encryption protector type like 'ServiceManaged', 'AzureKeyVault'.",
+          "enum": [
+            "ServiceManaged",
+            "AzureKeyVault"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "ServerKeyType",
+            "modelAsString": true
+          }
+        },
+        "uri": {
+          "description": "The URI of the server key.",
+          "type": "string",
+          "readOnly": true
+        },
+        "thumbprint": {
+          "description": "Thumbprint of the server key.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "EncryptionProtector": {
+      "description": "The server encryption protector.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "kind": {
+          "description": "Kind of encryption protector. This is metadata used for the Azure portal experience.",
+          "type": "string",
+          "readOnly": true
+        },
+        "location": {
+          "description": "Resource location.",
+          "type": "string",
+          "readOnly": true
+        },
+        "properties": {
+          "$ref": "#/definitions/EncryptionProtectorProperties",
+          "description": "Resource properties.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "ServerKeyProperties": {
+      "description": "Properties for a server key execution.",
+      "required": [
+        "serverKeyType"
+      ],
+      "type": "object",
+      "properties": {
+        "subregion": {
+          "description": "Subregion of the server key.",
+          "type": "string",
+          "readOnly": true
+        },
+        "serverKeyType": {
+          "description": "The server key type like 'ServiceManaged', 'AzureKeyVault'.",
+          "enum": [
+            "ServiceManaged",
+            "AzureKeyVault"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "ServerKeyType",
+            "modelAsString": true
+          }
+        },
+        "uri": {
+          "description": "The URI of the server key.",
+          "type": "string"
+        },
+        "thumbprint": {
+          "description": "Thumbprint of the server key.",
+          "type": "string"
+        },
+        "creationDate": {
+          "format": "date-time",
+          "description": "The server key creation date.",
+          "type": "string"
+        }
+      }
+    },
+    "ServerKey": {
+      "description": "A server key.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "kind": {
+          "description": "Kind of encryption protector. This is metadata used for the Azure portal experience.",
+          "type": "string"
+        },
+        "location": {
+          "description": "Resource location.",
+          "type": "string",
+          "readOnly": true
+        },
+        "properties": {
+          "$ref": "#/definitions/ServerKeyProperties",
+          "description": "Resource properties.",
+          "x-ms-client-flatten": true
+        }
+      }
+    }
+  }
+}
