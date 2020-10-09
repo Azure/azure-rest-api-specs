@@ -15,7 +15,7 @@ Please also specify `--go-sdks-folder=<path to the root directory of your azure-
 
 ```yaml $(tag) == 'package-2020-06-10-privatepreview' && $(go)
 namespace: Microsoft.IntelligentITDigitalTwin
-output-folder: $(go-sdk-folder)/services/preview/$(namespace)/mgmt/2020-06-10-privatepreview/$(namespace)
+output-folder: $(go-sdk-folder)/services/preview/azureiidt/mgmt/2020-06-10-privatepreview/azureiidt
 ```
 
 ### Tag: package-2020-07-15 and go
@@ -25,5 +25,5 @@ Please also specify `--go-sdks-folder=<path to the root directory of your azure-
 
 ```yaml $(tag) == 'package-2020-07-15-privatepreview' && $(go)
 namespace: Microsoft.IntelligentITDigitalTwin
-output-folder: $(go-sdk-folder)/services/preview/$(namespace)/mgmt/2020-07-15-privatepreview/$(namespace)
+output-folder: $(go-sdk-folder)/services/preview/azureiidt/mgmt/2020-07-15-privatepreview/azureiidt
 ```
