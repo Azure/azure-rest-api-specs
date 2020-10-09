@@ -1,20 +1,24 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "2020-03-01-preview",
-    "title": "confluent",
-    "description": "Description of the new service",
-    "x-ms-code-generation-settings": {
-      "name": "confluentClient"
-    }
+    "title": "Microsoft.Confluent",
+    "version": "2020-03-01-preview"
   },
   "host": "management.azure.com",
-  "schemes": ["https"],
-  "consumes": ["application/json"],
-  "produces": ["application/json"],
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
   "security": [
     {
-      "azure_auth": ["user_impersonation"]
+      "azure_auth": [
+        "user_impersonation"
+      ]
     }
   ],
   "securityDefinitions": {
@@ -22,111 +26,694 @@
       "type": "oauth2",
       "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
       "flow": "implicit",
-      "description": "Azure Active Directory OAuth2 Flow",
+      "description": "Azure Active Directory OAuth2 Flow.",
       "scopes": {
         "user_impersonation": "impersonate your user account"
       }
     }
   },
   "paths": {
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Confluent/operations": {
+    "/providers/Microsoft.Confluent/operations": {
       "get": {
-        "tags": ["Tag1"],
-        "operationId": "OperationGroup_Get",
-        "x-ms-examples": {
-          "BatchAccountDelete": { "$ref": "./examples/OperationGroupGet.json" }
-        },
-        "description": "This is a sample get operation, please see guidelines in azure-rest-api-specs repository for more info",
+        "tags": [
+          "Organization"
+        ],
+        "summary": "List all operations provided by Microsoft.Confluent.",
+        "operationId": "OrganizationOperations_List",
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
+            "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
           "200": {
-            "description": "Describe the result of a successful operation.",
+            "description": "Success",
             "schema": {
-              "$ref": "#/definitions/Result"
+              "$ref": "#/definitions/OperationListResult"
             }
           },
           "default": {
-            "description": "Error response describing why the operation failed.",
+            "description": "Default error response.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ResourceProviderDefaultErrorResponse"
             }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "OrganizationOperations_List": {
+            "$ref": "./examples/OrganizationOperations_List.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Confluent/organizations": {
+      "get": {
+        "tags": [
+          "Organization"
+        ],
+        "summary": "List all organizations under the specified subscription.",
+        "operationId": "Organization_ListBySubscription",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/OrganizationResourceListResult"
+            }
+          },
+          "default": {
+            "description": "Default error response.",
+            "schema": {
+              "$ref": "#/definitions/ResourceProviderDefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Organization_ListBySubscription": {
+            "$ref": "./examples/Organization_ListBySubscription.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Confluent/organizations": {
+      "get": {
+        "tags": [
+          "Organization"
+        ],
+        "summary": "List all Organizations under the specified resource group.",
+        "operationId": "Organization_ListByResourceGroup",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/OrganizationResourceListResult"
+            }
+          },
+          "default": {
+            "description": "Default error response.",
+            "schema": {
+              "$ref": "#/definitions/ResourceProviderDefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Organization_ListByResourceGroup": {
+            "$ref": "./examples/Organization_ListByResourceGroup.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Confluent/organizations/{organizationName}": {
+      "get": {
+        "tags": [
+          "Organization"
+        ],
+        "summary": "Get the properties of a specific Organization resource.",
+        "operationId": "Organization_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/OrganizationResourceNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/OrganizationResource"
+            }
+          },
+          "default": {
+            "description": "Default error response.",
+            "schema": {
+              "$ref": "#/definitions/ResourceProviderDefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Organization_Get": {
+            "$ref": "./examples/Organization_Get.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Organization"
+        ],
+        "summary": "Create Organization resource",
+        "operationId": "Organization_Create",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/OrganizationResourceNameParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Organization resource model",
+            "schema": {
+              "$ref": "#/definitions/OrganizationResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/OrganizationResource"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/OrganizationResource"
+            }
+          },
+          "default": {
+            "description": "Default error response.",
+            "schema": {
+              "$ref": "#/definitions/ResourceProviderDefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "Organization_Create": {
+            "$ref": "./examples/Organization_Create.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Organization"
+        ],
+        "summary": "Update Organization resource",
+        "operationId": "Organization_Update",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/OrganizationResourceNameParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Updated Organization resource",
+            "schema": {
+              "$ref": "#/definitions/OrganizationResourceUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/OrganizationResource"
+            }
+          },
+          "default": {
+            "description": "Default error response.",
+            "schema": {
+              "$ref": "#/definitions/ResourceProviderDefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Confluent_Update": {
+            "$ref": "./examples/Organization_Update.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Organization"
+        ],
+        "summary": "Delete Organization resource",
+        "operationId": "Organization_Delete",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/OrganizationResourceNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "204": {
+            "description": "The specified confluent resource does not exist in the subscription."
+          },
+          "default": {
+            "description": "Default error response.",
+            "schema": {
+              "$ref": "#/definitions/ResourceProviderDefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "Confluent_Delete": {
+            "$ref": "./examples/Organization_Delete.json"
           }
         }
       }
     }
   },
   "definitions": {
-    "Result": {
-      "description": "Sample result definition",
+    "OperationDisplay": {
+      "description": "The object that represents the operation.",
+      "type": "object",
       "properties": {
-        "sampleProperty": {
-          "type": "string",
-          "description": "Sample property of type string"
+        "provider": {
+          "description": "Service provider: Microsoft.Confluent",
+          "type": "string"
+        },
+        "resource": {
+          "description": "Type on which the operation is performed, e.g., 'clusters'.",
+          "type": "string"
+        },
+        "operation": {
+          "description": "Operation type, e.g., read, write, delete, etc.",
+          "type": "string"
+        },
+        "description": {
+          "description": "Description of the operation, e.g., 'Write confluent'.",
+          "type": "string"
         }
       }
     },
-    "ErrorResponse": {
-      "description": "Error response.",
+    "OperationResult": {
+      "description": "An Confluent REST API operation.",
+      "type": "object",
       "properties": {
-        "error": {
-          "$ref": "#/definitions/ErrorDefinition",
-          "description": "The error details."
+        "name": {
+          "description": "Operation name: {provider}/{resource}/{operation}",
+          "type": "string"
+        },
+        "display": {
+          "description": "The object that represents the operation.",
+          "$ref": "#/definitions/OperationDisplay"
         }
       }
     },
-    "ErrorDefinition": {
-      "description": "Error definition.",
+    "OperationListResult": {
+      "description": "Result of GET request to list Confluent operations.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "List of Confluent operations supported by the Microsoft.Confluent provider.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/OperationResult"
+          }
+        },
+        "nextLink": {
+          "description": "URL to get the next set of operation list results if there are any.",
+          "type": "string"
+        }
+      }
+    },
+    "ErrorResponseBody": {
+      "description": "Response body of Error",
+      "title": "ErrorResponseBody",
+      "type": "object",
       "properties": {
         "code": {
-          "description": "Service specific error code which serves as the substatus for the HTTP error code.",
+          "description": "Error code",
           "type": "string",
           "readOnly": true
         },
         "message": {
-          "description": "Description of the error.",
+          "description": "Error message",
+          "type": "string",
+          "readOnly": true
+        },
+        "target": {
+          "description": "Error target",
           "type": "string",
           "readOnly": true
         },
         "details": {
-          "description": "Internal error details.",
+          "description": "Error detail",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/ErrorResponseBody"
+          }
+        }
+      }
+    },
+    "ResourceProviderDefaultErrorResponse": {
+      "type": "object",
+      "description": "Default error response for resource provider",
+      "title": "ResourceProviderDefaultErrorResponse",
+      "properties": {
+        "error": {
+          "description": "Response body of Error",
+          "readOnly": true,
+          "$ref": "#/definitions/ErrorResponseBody"
+        }
+      }
+    },
+    "ProvisioningState": {
+      "enum": [
+        "Accepted",
+        "Creating",
+        "Updating",
+        "Deleting",
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Deleted",
+        "NotSpecified"
+      ],
+      "type": "string",
+      "description": "Provision states for confluent RP",
+      "title": "ProvisioningState",
+      "x-ms-enum": {
+        "name": "ProvisionState",
+        "modelAsString": true
+      }
+    },
+    "SaaSOfferStatus": {
+      "enum": [
+        "Started",
+        "PendingFulfillmentStart",
+        "InProgress",
+        "Subscribed",
+        "Suspended",
+        "Reinstated",
+        "Succeeded",
+        "Failed",
+        "Unsubscribed",
+        "Updating"
+      ],
+      "type": "string",
+      "description": "SaaS Offer Status for confluent RP",
+      "title": "SaaSOfferStatus",
+      "x-ms-enum": {
+        "modelAsString": true,
+        "name": "SaaSOfferStatus"
+      }
+    },
+    "OfferDetail": {
+      "description": "Confluent Offer detail",
+      "type": "object",
+      "properties": {
+        "publisherId": {
+          "description": "Publisher Id",
+          "maxLength": 50,
+          "type": "string"
+        },
+        "id": {
+          "description": "Offer Id",
+          "maxLength": 50,
+          "type": "string"
+        },
+        "planId": {
+          "description": "Offer Plan Id",
+          "maxLength": 50,
+          "type": "string"
+        },
+        "planName": {
+          "description": "Offer Plan Name",
+          "maxLength": 50,
+          "type": "string"
+        },
+        "termUnit": {
+          "description": "Offer Plan Term unit",
+          "maxLength": 25,
+          "type": "string"
+        },
+        "status": {
+          "description": "SaaS Offer Status",
+          "$ref": "#/definitions/SaaSOfferStatus"
+        }
+      }
+    },
+    "UserDetail": {
+      "description": "Subscriber detail",
+      "type": "object",
+      "properties": {
+        "firstName": {
+          "description": "First name",
+          "maxLength": 50,
+          "type": "string"
+        },
+        "lastName": {
+          "description": "Last name",
+          "maxLength": 50,
+          "type": "string"
+        },
+        "emailAddress": {
+          "description": "Email address",
+          "pattern": "^[\\w\\.\\-+!%\"\\s]+@[a-zA-Z_]+?\\.[a-zA-Z]{2,3}$",
+          "type": "string"
+        }
+      }
+    },
+    "OrganizationResourceProperties": {
+      "description": "Organization resource property",
+      "type": "object",
+      "properties": {
+        "createdTime": {
+          "format": "date-time",
+          "description": "The creation time of the resource.",
+          "type": "string",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "description": "Provision states for confluent RP",
+          "$ref": "#/definitions/ProvisioningState"
+        },
+        "organizationId": {
+          "description": "Id of the Confluent organization.",
+          "type": "string",
+          "readOnly": true
+        },
+        "ssoUrl": {
+          "description": "SSO url for the Confluent organization.",
+          "type": "string",
+          "readOnly": true
+        },
+        "offerDetail": {
+          "description": "Confluent offer detail",
+          "allOf": [
+            {
+              "$ref": "#/definitions/OfferDetail"
+            }
+          ]
+        },
+        "userDetail": {
+          "description": "Subscriber detail",
+          "allOf": [
+            {
+              "$ref": "#/definitions/UserDetail"
+            }
+          ]
+        }
+      }
+    },
+    "OrganizationResource": {
+      "description": "Organization resource.",
+      "type": "object",
+      "x-ms-azure-resource": true,
+      "properties": {
+        "id": {
+          "description": "The ARM id of the resource.",
+          "type": "string",
+          "readOnly": true
+        },
+        "name": {
+          "description": "The name of the resource.",
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "description": "The type of the resource.",
+          "type": "string",
+          "readOnly": true
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "Organization resource properties",
+          "allOf": [
+            {
+              "$ref": "#/definitions/OrganizationResourceProperties"
+            }
+          ]
+        },
+        "tags": {
+          "type": "object",
+          "description": "Organization resource tags",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "location": {
+          "description": "Location of Organization resource",
+          "type": "string"
+        }
+      }
+    },
+    "OrganizationResourceListResult": {
+      "description": "The response of a list operation.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Result of a list operation.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/ErrorDefinition"
-          },
-          "readOnly": true
+            "$ref": "#/definitions/OrganizationResource"
+          }
+        },
+        "nextLink": {
+          "description": "Link to the next set of results, if any.",
+          "type": "string"
+        }
+      }
+    },
+    "OrganizationResourceUpdate": {
+      "description": "Organization Resource update",
+      "type": "object",
+      "properties": {
+        "tags": {
+          "description": "ARM resource tags",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
         }
       }
     }
   },
   "parameters": {
-    "SubscriptionIdParameter": {
-      "name": "subscriptionId",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "The Azure subscription ID. This is a GUID-formatted string (e.g. 00000000-0000-0000-0000-000000000000)"
-    },
-    "ResourceGroupNameParameter": {
-      "name": "resourceGroupName",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "The name of the resource group.",
-      "x-ms-parameter-location": "method"
-    },
     "ApiVersionParameter": {
       "name": "api-version",
       "in": "query",
+      "description": "Client Api Version.",
       "required": true,
       "type": "string",
-      "description": "The API version to be used with the HTTP request."
+      "enum": [
+        "2020-03-01-preview"
+      ]
+    },
+    "SubscriptionIdParameter": {
+      "in": "path",
+      "name": "subscriptionId",
+      "description": "Microsoft Azure subscription id",
+      "required": true,
+      "type": "string"
+    },
+    "ResourceGroupParameter": {
+      "in": "path",
+      "name": "resourceGroupName",
+      "description": "Resource group name",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "OrganizationResourceNameParameter": {
+      "in": "path",
+      "name": "organizationName",
+      "description": "Organization resource name",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
     }
   }
 }
