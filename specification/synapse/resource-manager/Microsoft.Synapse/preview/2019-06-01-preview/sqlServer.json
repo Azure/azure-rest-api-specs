@@ -1362,7 +1362,7 @@
         }
       }
     },
-    "SecurityAlertPolicyProperties": {
+    "ServerSecurityAlertPolicyProperties": {
       "description": "Properties of a security alert policy.",
       "required": [
         "state"
@@ -1370,7 +1370,7 @@
       "type": "object",
       "properties": {
         "state": {
-          "description": "Specifies the state of the policy, whether it is enabled or disabled or a policy has not been applied yet on the specific database.",
+          "description": "Specifies the state of the policy, whether it is enabled or disabled or a policy has not been applied yet on the specific server",
           "enum": [
             "New",
             "Enabled",
@@ -1431,7 +1431,7 @@
       ],
       "properties": {
         "properties": {
-          "$ref": "#/definitions/SecurityAlertPolicyProperties",
+          "$ref": "#/definitions/ServerSecurityAlertPolicyProperties",
           "description": "Resource properties.",
           "x-ms-client-flatten": true
         }
