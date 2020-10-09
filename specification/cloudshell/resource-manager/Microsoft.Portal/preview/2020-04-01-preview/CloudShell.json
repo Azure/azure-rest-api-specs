@@ -1,0 +1,1039 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2018-10-01",
+    "title": "CloudShellClient"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "Impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/providers/Microsoft.Portal/locations/{location}/userSettings/{userSettingsName}": {
+      "get": {
+        "operationId": "getUserSettingsWithLocation",
+        "x-ms-examples": {
+          "GetUserSettings": {
+            "$ref": "./examples/GetUserSettings_Location.json"
+          }
+        },
+        "summary": "Get user settings.",
+        "description": "Get current user settings for current signed in user. This operation returns settings for the user's cloud shell preferences including preferred location, storage profile, shell type, font and size settings.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/UserSettingsNameParameter"
+          },
+          {
+            "$ref": "#/parameters/LocationParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/UserSettingsResponse"
+            },
+            "headers": {
+              "x-ms-console-required-location-code": {
+                "type": "string",
+                "description": "normalized required location code"
+              },
+              "x-ms-console-preview-user": {
+                "type": "boolean",
+                "description": "indicates whether user is a previous usr."
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "patch": {
+        "operationId": "patchUserSettingsWithLocation",
+        "summary": "patch user settings.",
+        "description": "Patch cloud shell settings for current signed in user",
+        "x-ms-examples": {
+          "PatchUserSettings": {
+            "$ref": "./examples/PatchUserSettings_Location.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/UserSettingsNameParameter"
+          },
+          {
+            "$ref": "#/parameters/LocationParameter"
+          },
+          {
+            "name": "parameters",
+            "description": "The properties of the user settings to be updated.",
+            "required": true,
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/CloudShellPatchUserSettings"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/UserSettingsResponse"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "operationId": "deleteUserSettingsWithLocation",
+        "summary": "delete user settings.",
+        "x-ms-examples": {
+          "DeleteUserSettings": {
+            "$ref": "./examples/DeleteUserSettings_Location.json"
+          }
+        },
+        "description": "Delete cloud shell settings for current signed in user",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/UserSettingsNameParameter"
+          },
+          {
+            "$ref": "#/parameters/LocationParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "operationId": "putUserSettingsWithLocation",
+        "summary": "put user settings.",
+        "x-ms-examples": {
+          "PutUserSettings": {
+            "$ref": "./examples/PutUserSettings_Location.json"
+          }
+        },
+        "description": "Create or update cloud shell settings for current signed in user",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/UserSettingsNameParameter"
+          },
+          {
+            "$ref": "#/parameters/LocationParameter"
+          },
+          {
+            "name": "parameters",
+            "description": "The properties of the user settings to be created or updated.",
+            "required": true,
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/CloudShellUserSettings"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/UserSettingsResponse"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Portal/locations/{location}/consoles/{consoleName}": {
+      "get": {
+        "operationId": "getConsoleWithLocation",
+        "summary": "Get console",
+        "x-ms-examples": {
+          "GetConsole": {
+            "$ref": "./examples/GetConsole_Location.json"
+          }
+        },
+        "description": "Gets the console for the user.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ConsoleNameParameter"
+          },
+          {
+            "$ref": "#/parameters/LocationParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/CloudShellConsole"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "operationId": "putConsoleWithLocation",
+        "summary": "Put console",
+        "x-ms-examples": {
+          "PutConsole": {
+            "$ref": "./examples/PutConsole_Location.json"
+          }
+        },
+        "description": "Puts a request for a console",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ConsoleNameParameter"
+          },
+          {
+            "$ref": "#/parameters/LocationParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/CloudShellConsole"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/CloudShellConsole"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "operationId": "deleteConsoleWithLocation",
+        "summary": "Delete console",
+        "x-ms-examples": {
+          "DeleteConsole": {
+            "$ref": "./examples/DeleteConsole_Location.json"
+          }
+        },
+        "description": "Deletes the console",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ConsoleNameParameter"
+          },
+          {
+            "$ref": "#/parameters/LocationParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Portal/locations/{location}/consoles/{consoleName}/keepAlive": {
+      "post": {
+        "operationId": "keepAliveWithLocation",
+        "x-ms-examples": {
+          "GetUserSettings": {
+            "$ref": "./examples/KeepAlive_Location.json"
+          }
+        },
+        "summary": "Keep alive",
+        "description": "Keep console alive",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ConsoleNameParameter"
+          },
+          {
+            "$ref": "#/parameters/LocationParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "headers": {
+              "x-ms-console-remaining-seconds": {
+                "type": "integer",
+                "format": "int32",
+                "description": "Remaining time left in session, in seconds."
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Portal/userSettings/{userSettingsName}": {
+      "get": {
+        "operationId": "GetUserSettings",
+        "x-ms-examples": {
+          "GetUserSettings": {
+            "$ref": "./examples/GetUserSettings.json"
+          }
+        },
+        "summary": "Get user settings.",
+        "description": "Get current user settings for current signed in user. This operation returns settings for the user's cloud shell preferences including preferred location, storage profile, shell type, font and size settings.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/UserSettingsNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/UserSettingsResponse"
+            },
+            "headers": {
+              "x-ms-console-required-location-code": {
+                "type": "string",
+                "description": "normalized required location code"
+              },
+              "x-ms-console-preview-user": {
+                "type": "boolean",
+                "description": "indicates whether user is a previous usr."
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "patch": {
+        "operationId": "PatchUserSettings",
+        "summary": "patch user settings.",
+        "description": "Patch cloud shell settings for current signed in user",
+        "x-ms-examples": {
+          "PatchUserSettings": {
+            "$ref": "./examples/PatchUserSettings.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/UserSettingsNameParameter"
+          },
+          {
+            "name": "parameters",
+            "description": "The properties of the user settings to be updated.",
+            "required": true,
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/CloudShellPatchUserSettings"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/UserSettingsResponse"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "operationId": "DeleteUserSettings",
+        "x-ms-examples": {
+          "DeleteUserSettings": {
+            "$ref": "./examples/DeleteUserSettings.json"
+          }
+        },
+        "summary": "delete user settings.",
+        "description": "Delete cloud shell settings for current signed in user",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/UserSettingsNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "operationId": "PutUserSettings",
+        "x-ms-examples": {
+          "PutUserSettings": {
+            "$ref": "./examples/PutUserSettings.json"
+          }
+        },
+        "summary": "put user settings.",
+        "description": "Create or update cloud shell settings for current signed in user",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/UserSettingsNameParameter"
+          },
+          {
+            "name": "parameters",
+            "description": "The properties of the user settings to be created or updated.",
+            "required": true,
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/CloudShellUserSettings"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/UserSettingsResponse"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Portal/consoles/{consoleName}": {
+      "get": {
+        "operationId": "GetConsole",
+        "x-ms-examples": {
+          "GetConsole": {
+            "$ref": "./examples/GetConsole.json"
+          }
+        },
+        "summary": "Get console",
+        "description": "Gets the console for the user.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ConsoleNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/CloudShellConsole"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "operationId": "PutConsole",
+        "x-ms-examples": {
+          "PutConsole": {
+            "$ref": "./examples/PutConsole.json"
+          }
+        },
+        "summary": "Put console",
+        "description": "Puts a request for a console",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ConsoleNameParameter"
+          },
+          {
+            "name": "parameters",
+            "description": "The console definition.",
+            "required": true,
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/ConsoleDefinition"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/CloudShellConsole"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/CloudShellConsole"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "operationId": "DeleteConsole",
+        "x-ms-examples": {
+          "DeleteConsole": {
+            "$ref": "./examples/DeleteConsole.json"
+          }
+        },
+        "summary": "Delete console",
+        "description": "Deletes the console",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ConsoleNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Portal/consoles/{consoleName}/keepAlive": {
+      "post": {
+        "operationId": "KeepAlive",
+        "x-ms-examples": {
+          "KeepAlive": {
+            "$ref": "./examples/KeepAlive.json"
+          }
+        },
+        "summary": "Keep alive",
+        "description": "Keep console alive",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ConsoleNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "headers": {
+              "x-ms-console-remaining-seconds": {
+                "type": "integer",
+                "format": "int32",
+                "description": "Remaining time left in session, in seconds."
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "CloudShellConsole": {
+      "description": "Cloud shell console",
+      "type": "object",
+      "required": [
+        "properties"
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ConsoleProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ]
+    },
+    "ConsoleProperties": {
+      "description": "Cloud shell console properties.",
+      "type": "object",
+      "required": [
+        "osType",
+        "provisioningState",
+        "uri"
+      ],
+      "properties": {
+        "osType": {
+          "description": "The operating system type of the cloud shell.",
+          "type": "string",
+          "enum": [
+            "Linux",
+            "Windows"
+          ],
+          "x-ms-enum": {
+            "name": "osType",
+            "modelAsString": true
+          }
+        },
+        "provisioningState": {
+          "description": "Provisioning state of the console.",
+          "type": "string",
+          "enum": [
+            "NotSpecified",
+            "Accepted",
+            "Pending",
+            "Updating",
+            "Creating",
+            "Repairing",
+            "Failed",
+            "Canceled",
+            "Succeeded"
+          ],
+          "x-ms-enum": {
+            "name": "provisioningState",
+            "modelAsString": true
+          }
+        },
+        "uri": {
+          "description": "Uri of the console.",
+          "type": "string"
+        }
+      }
+    },
+    "ConsoleCreateProperties": {
+      "description": "Cloud shell properties for creating a console.",
+      "type": "object",
+      "required": [
+        "osType"
+      ],
+      "properties": {
+        "osType": {
+          "description": "The operating system type of the cloud shell.",
+          "type": "string",
+          "enum": [
+            "Linux",
+            "Windows"
+          ],
+          "x-ms-enum": {
+            "name": "osType",
+            "modelAsString": true
+          }
+        },
+        "provisioningState": {
+          "description": "Provisioning state of the console.",
+          "type": "string",
+          "enum": [
+            "NotSpecified",
+            "Accepted",
+            "Pending",
+            "Updating",
+            "Creating",
+            "Repairing",
+            "Failed",
+            "Canceled",
+            "Succeeded"
+          ],
+          "x-ms-enum": {
+            "name": "provisioningState",
+            "modelAsString": true
+          }
+        },
+        "uri": {
+          "description": "Uri of the console.",
+          "type": "string"
+        }
+      }
+    },
+    "ConsoleDefinition": {
+      "description": "Console definition",
+      "type": "object",
+      "required": [
+        "properties"
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ConsoleCreateProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ]
+    },
+    "Resource": {
+      "description": "The Resource model definition.",
+      "x-ms-azure-resource": true
+    },
+    "UserSettingsResponse": {
+      "description": "Response to get user settings",
+      "type": "object",
+      "required": [
+        "properties"
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/UserProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ]
+    },
+    "CloudShellUserSettings": {
+      "description": "Cloud shell user settings.",
+      "type": "object",
+      "required": [
+        "properties"
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/UserProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ]
+    },
+    "CloudShellPatchUserSettings": {
+      "description": "Cloud shell patch operation user settings.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/UserProperties"
+        }
+      }
+    },
+    "UserProperties": {
+      "description": "The cloud shell user settings properties.",
+      "type": "object",
+      "required": [
+        "preferredOsType",
+        "networkType",
+        "preferredLocation",
+        "storageProfile",
+        "terminalSettings",
+        "preferredShellType"
+      ],
+      "properties": {
+        "networkType": {
+          "description": "The network type of the cloud shell.",
+          "type": "string",
+          "enum": [
+            "Isolated",
+            "Default"
+          ],
+          "x-ms-enum": {
+            "name": "networkType",
+            "modelAsString": true
+          }
+        },
+        "preferredOsType": {
+          "description": "The operating system type of the cloud shell. Deprecated, use preferredShellType.",
+          "type": "string",
+          "enum": [
+            "Windows",
+            "Linux"
+          ],
+          "x-ms-enum": {
+            "name": "osType",
+            "modelAsString": true
+          }
+        },
+        "preferredLocation": {
+          "description": "The preferred location of the cloud shell.",
+          "type": "string"
+        },
+        "storageProfile": {
+          "$ref": "#/definitions/StorageProfile"
+        },
+        "terminalSettings": {
+          "$ref": "#/definitions/TerminalSettings"
+        },
+        "vnetSettings": {
+          "$ref": "#/definitions/VnetSettings"
+        },
+        "preferredShellType": {
+          "description": "The shell type of the cloud shell.",
+          "type": "string",
+          "enum": [
+            "bash",
+            "pwsh",
+            "powershell"
+          ],
+          "x-ms-enum": {
+            "name": "shellType",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "StorageProfile": {
+      "description": "The storage profile of the user settings.",
+      "type": "object",
+      "properties": {
+        "storageAccountResourceId": {
+          "type": "string",
+          "description": "Full resource ID of storage account."
+        },
+        "fileShareName": {
+          "type": "string",
+          "description": "Name of the mounted file share. 63 characters or less, lowercase alphabet, numbers, and -"
+        },
+        "diskSizeInGB": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Size of file share"
+        }
+      }
+    },
+    "TerminalSettings": {
+      "description": "Settings for terminal appearance.",
+      "type": "object",
+      "properties": {
+        "fontSize": {
+          "type": "string",
+          "description": "Size of terminal font.",
+          "enum": [
+            "NotSpecified",
+            "Small",
+            "Medium",
+            "Large"
+          ],
+          "x-ms-enum": {
+            "name": "fontSize",
+            "modelAsString": true
+          }
+        },
+        "fontStyle": {
+          "type": "string",
+          "description": "Style of terminal font.",
+          "enum": [
+            "NotSpecified",
+            "Monospace",
+            "Courier"
+          ],
+          "x-ms-enum": {
+            "name": "fontStyle",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "VnetSettings": {
+      "description": "Settings for virtual network setup.",
+      "type": "object",
+      "properties": {
+        "isolatedStorageProfile": {
+          "$ref": "#/definitions/StorageProfile"
+        },
+        "location": {
+          "type": "string",
+          "description": "Location of virtual network."
+        },
+        "networkProfileResourceId": {
+          "type": "string",
+          "description": "Resource id of network profile."
+        },
+        "relayNamespaceResourceId": {
+          "type": "string",
+          "description": "Resource id of relay namespace."
+        }
+      }
+    },
+    "ErrorResponse": {
+      "title": "ErrorResponse",
+      "description": "Contains details when the response code indicates an error.",
+      "type": "object",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/ErrorDetail"
+        }
+      },
+      "required": [
+        "error"
+      ]
+    },
+    "ErrorDetail": {
+      "title": "ErrorDetail",
+      "type": "object",
+      "properties": {
+        "code": {
+          "description": "The error's code.",
+          "type": "string"
+        },
+        "message": {
+          "description": "A human readable error message.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "code",
+        "message"
+      ]
+    }
+  },
+  "parameters": {
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "Client API version",
+      "x-ms-parameter-location": "client"
+    },
+    "ConsoleNameParameter": {
+      "name": "consoleName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the console",
+      "x-ms-parameter-location": "client"
+    },
+    "LocationParameter": {
+      "name": "location",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The provider location",
+      "x-ms-parameter-location": "method"
+    },
+    "UserSettingsNameParameter": {
+      "name": "userSettingsName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the user settings",
+      "x-ms-parameter-location": "client"
+    }
+  }
+}
