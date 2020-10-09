@@ -34,5 +34,5 @@ Please also specify `--ruby-sdks-folder=<path to the root directory of your azur
 
 ``` yaml $(tag) == 'release_5_0_preview.1' && $(ruby)
 namespace: "Azure::CognitiveServices::Qnamaker::V5_0_preview_1"
-output-folder: $(ruby-sdks-folder)/data/azure_cognitiveservices_qnamaker/preview/lib/
+output-folder: $(ruby-sdks-folder)/data/azure_cognitiveservices_qnamaker/lib
 ```
