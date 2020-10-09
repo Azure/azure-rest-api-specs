@@ -16,7 +16,7 @@ nodejs:
 These settings apply only when `--nodejs --tag=release_5_0-preview.1` is specified on the command line.
 Please also specify `--node-sdks-folder=<path to root folder of your azure-sdk-for-node clone>`.
 
-``` yaml $(tag) == 'release_5_0-preview.1' && $(nodejs)
+``` yaml $(tag) == 'release_5_0_preview.1' && $(nodejs)
 nodejs:
   package-name: azure-cognitiveservices-qnamaker-preview
   output-folder: $(node-sdks-folder)/lib/services/cognitiveServicesQnAMaker/preview
