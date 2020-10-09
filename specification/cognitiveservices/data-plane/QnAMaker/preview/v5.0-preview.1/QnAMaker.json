@@ -1169,7 +1169,6 @@
           "description": "Timestamp when the QnA was last updated.",
           "maxLength": 300
         }
-
       }
     },
     "ContextDTO": {
@@ -1608,7 +1607,7 @@
       "additionalProperties": false,
       "properties": {
         "previousQnaId": {
-          "type": "string",
+          "type": "integer",
           "description": "Previous QnA Id - qnaId of the top result."
         },
         "previousUserQuery": {
@@ -1751,25 +1750,25 @@
       "description": "Answer span object of QnA.",
       "additionalProperties": false,
       "properties": {
-          "text": {
-            "type": "string",
-            "description": "Predicted text of answer span."
-          },
-          "score": {
-            "type": "number",
-            "description": "Predicted score of answer span.",
-            "format":"double"
-          },
-          "startIndex": {
-            "type": "integer",
-            "description": "Start index of answer span in answer.",
-            "format":"int32"
-          },
-          "endIndex": {
-            "type": "integer",
-            "description": "End index of answer span in answer.",
-            "format":"int32"
-          }
+        "text": {
+          "type": "string",
+          "description": "Predicted text of answer span."
+        },
+        "score": {
+          "type": "number",
+          "description": "Predicted score of answer span.",
+          "format": "double"
+        },
+        "startIndex": {
+          "type": "integer",
+          "description": "Start index of answer span in answer.",
+          "format": "int32"
+        },
+        "endIndex": {
+          "type": "integer",
+          "description": "End index of answer span in answer.",
+          "format": "int32"
+        }
       }
     }
   },
