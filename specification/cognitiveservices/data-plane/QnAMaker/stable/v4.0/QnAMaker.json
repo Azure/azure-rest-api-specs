@@ -564,6 +564,12 @@
           },
           {
             "$ref": "#/parameters/Environment"
+          },
+          {
+            "$ref": "#/parameters/source"
+          },
+          {
+            "$ref": "#/parameters/changedSince"
           }
         ],
         "consumes": [
@@ -1413,6 +1419,24 @@
       "required": true,
       "x-nullable": false,
       "description": "Knowledgebase id.",
+      "x-ms-parameter-location": "method"
+    },
+    "source": {
+      "type": "string",
+      "name": "source",
+      "in": "query",
+      "required": false,
+      "x-nullable": false,
+      "description": "The source property filter to apply. Sample value: Editorial, smartLight%20FAQ.tsv .",
+      "x-ms-parameter-location": "method"
+    },
+    "changedSince": {
+      "type": "string",
+      "name": "changedSince",
+      "in": "query",
+      "required": false,
+      "x-nullable": false,
+      "description": "changedSince property is used to return all QnAs created or updated after a specific time duration. The user can filter QnAs by seconds (s), minutes (m), hours (h) and days (d). The user may use any integral value along with the suffix for time. For instance, the value of 5m returns all QnA pairs updated or created in the last 5 minutes.",
       "x-ms-parameter-location": "method"
     },
     "OperationId": {
