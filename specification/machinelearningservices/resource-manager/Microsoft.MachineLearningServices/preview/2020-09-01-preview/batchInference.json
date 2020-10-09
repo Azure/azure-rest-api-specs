@@ -41,6 +41,7 @@
         ],
         "summary": "Creates a batch inference deployment.",
         "operationId": "BatchDeployments_CreateOrUpdate",
+        "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "Create or update BatchDeployment": {
             "$ref": "./examples/createOrUpdateBatchDeployment.json"
@@ -266,6 +267,7 @@
         ],
         "summary": "Creates a batch inference endpoint.",
         "operationId": "BatchEndpoints_CreateOrUpdate",
+        "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "Create or update BatchEndpoint": {
             "$ref": "./examples/createOrUpdateBatchEndpoint.json"
@@ -821,18 +823,6 @@
         "batchSettings": {
           "$ref": "#/definitions/BatchDeploymentSettings"
         },
-        "tags": {
-          "description": "Tag dictionary. Tags can be added, removed, and updated.",
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "x-ms-mutability": [
-            "create",
-            "read",
-            "update"
-          ]
-        },
         "description": {
           "description": "Description of the endpoint deployment.",
           "type": "string"
@@ -875,18 +865,6 @@
       "description": "Batch endpoint configuration",
       "type": "object",
       "properties": {
-        "tags": {
-          "description": "Tag dictionary. Tags can be added, removed, and updated.",
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "x-ms-mutability": [
-            "create",
-            "read",
-            "update"
-          ]
-        },
         "description": {
           "description": "Description of the inference endpoint.",
           "type": "string"
