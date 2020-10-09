@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "4.0",
+    "version": "v5.0-preview.1",
     "title": "QnAMaker Client",
     "description": "An API for QnAMaker Service"
   },
@@ -18,7 +18,7 @@
     }
   ],
   "x-ms-parameterized-host": {
-    "hostTemplate": "{Endpoint}/qnamaker/v4.0",
+    "hostTemplate": "{Endpoint}/qnamaker/v5.0-preview.1",
     "useSchemePrefix": false,
     "parameters": [
       {
@@ -174,7 +174,6 @@
         ],
         "summary": "Download alterations from runtime.",
         "operationId": "Alterations_Get",
-        "parameters": [],
         "consumes": [
           "application/json"
         ],
@@ -233,6 +232,83 @@
         "x-ms-examples": {
           "Successful query": {
             "$ref": "./examples/SuccessfulSetAlts.json"
+          }
+        }
+      }
+    },
+    "/alterations/{kbId}": {
+      "get": {
+        "tags": [
+          "Alterations"
+        ],
+        "summary": "Download alterations per Knowledgebase (QnAMaker Managed).",
+        "operationId": "Alterations_GetAlterationsForKb",
+        "parameters": [
+          {
+            "$ref": "#/parameters/KbId"
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Alterations data.",
+            "schema": {
+              "$ref": "#/definitions/WordAlterationsDTO"
+            },
+            "x-nullable": true
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful query": {
+            "$ref": "./examples/SuccessfulGetAltsForKb.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Alterations"
+        ],
+        "summary": "Replace alterations data per Knowledgebase (QnAMaker Managed).",
+        "operationId": "Alterations_ReplaceAlterationsForKb",
+        "parameters": [
+          {
+            "$ref": "#/parameters/KbId"
+          },
+          {
+            "$ref": "#/parameters/WordAlterations"
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "204": {
+            "description": "HTTP 204 No Content."
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful query": {
+            "$ref": "./examples/SuccessfulSetAltsForKb.json"
           }
         }
       }
@@ -566,10 +642,18 @@
             "$ref": "#/parameters/Environment"
           },
           {
-            "$ref": "#/parameters/source"
+            "name": "source",
+            "in": "query",
+            "description": "The source property filter to apply.",
+            "required": false,
+            "type": "string"
           },
           {
-            "$ref": "#/parameters/changedSince"
+            "name": "changedSince",
+            "in": "query",
+            "description": "The last changed status property filter to apply.",
+            "required": false,
+            "type": "string"
           }
         ],
         "consumes": [
@@ -596,6 +680,87 @@
         "x-ms-examples": {
           "Successful query": {
             "$ref": "./examples/SuccessfulDownloadKb.json"
+          }
+        }
+      }
+    },
+    "/knowledgebases/{kbId}/generateAnswer": {
+      "post": {
+        "tags": [
+          "Knowledgebases"
+        ],
+        "summary": "GenerateAnswer call to query knowledgebase (QnA Maker Managed).",
+        "operationId": "Knowledgebase_GenerateAnswer",
+        "parameters": [
+          {
+            "$ref": "#/parameters/KbId"
+          },
+          {
+            "$ref": "#/parameters/GenerateAnswerPayload"
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "GenerateAnswer call response.",
+            "schema": {
+              "$ref": "#/definitions/QnASearchResultList"
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful query": {
+            "$ref": "./examples/SuccessfulGenAns.json"
+          }
+        }
+      }
+    },
+    "/knowledgebases/{kbId}/train": {
+      "post": {
+        "tags": [
+          "Knowledgebases"
+        ],
+        "summary": "Train call to add suggestions to knowledgebase (QnAMaker Managed).",
+        "operationId": "Knowledgebase_Train",
+        "parameters": [
+          {
+            "$ref": "#/parameters/KbId"
+          },
+          {
+            "$ref": "#/parameters/TrainPayload"
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "204": {
+            "description": "HTTP 204 No Content."
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful query": {
+            "$ref": "./examples/SuccessfulTrain.json"
           }
         }
       }
@@ -998,6 +1163,11 @@
               "$ref": "#/definitions/ContextDTO"
             }
           ]
+        },
+        "lastUpdatedTimestamp": {
+          "type": "string",
+          "description": "Timestamp when the QnA was last updated.",
+          "maxLength": 300
         }
       }
     },
@@ -1359,6 +1529,247 @@
           "description": "Language setting of runtime."
         }
       }
+    },
+    "QueryDTO": {
+      "type": "object",
+      "description": "POST body schema to query the knowledgebase.",
+      "additionalProperties": false,
+      "properties": {
+        "qnaId": {
+          "type": "string",
+          "description": "Exact qnaId to fetch from the knowledgebase, this field takes priority over question."
+        },
+        "question": {
+          "type": "string",
+          "description": "User question to query against the knowledge base."
+        },
+        "top": {
+          "type": "integer",
+          "description": "Max number of answers to be returned for the question.",
+          "format": "int32"
+        },
+        "userId": {
+          "type": "string",
+          "description": "Unique identifier for the user."
+        },
+        "isTest": {
+          "type": "boolean",
+          "description": "Query against the test index."
+        },
+        "scoreThreshold": {
+          "type": "number",
+          "description": "Minimum threshold score for answers."
+        },
+        "context": {
+          "description": "Context object with previous QnA's information.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/QueryContextDTO"
+            }
+          ]
+        },
+        "rankerType": {
+          "type": "string",
+          "description": "Optional field. Set to 'QuestionOnly' for using a question only Ranker."
+        },
+        "strictFilters": {
+          "type": "array",
+          "description": "Find QnAs that are associated with the given list of metadata.",
+          "items": {
+            "$ref": "#/definitions/MetadataDTO"
+          }
+        },
+        "strictFiltersCompoundOperationType": {
+          "type": "string",
+          "description": "Optional field. Set to 'OR' for using OR operation for strict filters.",
+          "x-ms-enum": {
+            "name": "StrictFiltersCompoundOperationType",
+            "modelAsString": true
+          },
+          "enum": [
+            "AND",
+            "OR"
+          ]
+        },
+        "answerSpanRequest": {
+          "description": "To configure Answer span prediction feature.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/AnswerSpanRequestDTO"
+            }
+          ]
+        }
+      }
+    },
+    "QueryContextDTO": {
+      "type": "object",
+      "description": "Context object with previous QnA's information.",
+      "additionalProperties": false,
+      "properties": {
+        "previousQnaId": {
+          "type": "integer",
+          "description": "Previous QnA Id - qnaId of the top result."
+        },
+        "previousUserQuery": {
+          "type": "string",
+          "description": "Previous user query."
+        }
+      }
+    },
+    "QnASearchResultList": {
+      "type": "object",
+      "description": "Represents List of Question Answers.",
+      "additionalProperties": false,
+      "properties": {
+        "answers": {
+          "type": "array",
+          "description": "Represents Search Result list.",
+          "items": {
+            "$ref": "#/definitions/QnASearchResult"
+          }
+        }
+      }
+    },
+    "QnASearchResult": {
+      "type": "object",
+      "description": "Represents Search Result.",
+      "additionalProperties": false,
+      "properties": {
+        "questions": {
+          "type": "array",
+          "description": "List of questions.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "answer": {
+          "type": "string",
+          "description": "Answer."
+        },
+        "score": {
+          "type": "number",
+          "description": "Search result score."
+        },
+        "id": {
+          "type": "integer",
+          "description": "Id of the QnA result.",
+          "format": "int32"
+        },
+        "source": {
+          "type": "string",
+          "description": "Source of QnA result."
+        },
+        "metadata": {
+          "type": "array",
+          "description": "List of metadata.",
+          "items": {
+            "$ref": "#/definitions/MetadataDTO"
+          }
+        },
+        "context": {
+          "type": "object",
+          "description": "Context object of the QnA",
+          "allOf": [
+            {
+              "$ref": "#/definitions/ContextDTO"
+            }
+          ]
+        },
+        "answerSpan": {
+          "type": "object",
+          "description": "Answer span object of QnA with respect to user's question.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/AnswerSpanResponseDTO"
+            }
+          ]
+        }
+      }
+    },
+    "FeedbackRecordsDTO": {
+      "type": "object",
+      "description": "Active learning feedback records.",
+      "additionalProperties": false,
+      "properties": {
+        "feedbackRecords": {
+          "type": "array",
+          "description": "List of feedback records.",
+          "maxLength": 1000,
+          "items": {
+            "$ref": "#/definitions/FeedbackRecordDTO"
+          }
+        }
+      }
+    },
+    "FeedbackRecordDTO": {
+      "type": "object",
+      "description": "Active learning feedback record.",
+      "additionalProperties": false,
+      "properties": {
+        "userId": {
+          "type": "string",
+          "description": "Unique identifier for the user."
+        },
+        "userQuestion": {
+          "type": "string",
+          "description": "The suggested question being provided as feedback.",
+          "maxLength": 1000
+        },
+        "qnaId": {
+          "type": "integer",
+          "description": "The qnaId for which the suggested question is provided as feedback.",
+          "format": "int32"
+        }
+      }
+    },
+    "AnswerSpanRequestDTO": {
+      "type": "object",
+      "description": "To configure Answer span prediction feature.",
+      "additionalProperties": false,
+      "properties": {
+        "enable": {
+          "type": "boolean",
+          "description": "Enable or Disable Answer Span prediction."
+        },
+        "scoreThreshold": {
+          "type": "number",
+          "format": "double",
+          "description": "Minimum threshold score required to include an answer span."
+        },
+        "topAnswersWithSpan": {
+          "type": "integer",
+          "description": "Number of Top answers to be considered for span prediction.",
+          "format": "int32",
+          "maximum": 10,
+          "minimum": 1
+        }
+      }
+    },
+    "AnswerSpanResponseDTO": {
+      "type": "object",
+      "description": "Answer span object of QnA.",
+      "additionalProperties": false,
+      "properties": {
+        "text": {
+          "type": "string",
+          "description": "Predicted text of answer span."
+        },
+        "score": {
+          "type": "number",
+          "description": "Predicted score of answer span.",
+          "format": "double"
+        },
+        "startIndex": {
+          "type": "integer",
+          "description": "Start index of answer span in answer.",
+          "format": "int32"
+        },
+        "endIndex": {
+          "type": "integer",
+          "description": "End index of answer span in answer.",
+          "format": "int32"
+        }
+      }
     }
   },
   "parameters": {
@@ -1421,24 +1832,6 @@
       "description": "Knowledgebase id.",
       "x-ms-parameter-location": "method"
     },
-    "source": {
-      "type": "string",
-      "name": "source",
-      "in": "query",
-      "required": false,
-      "x-nullable": false,
-      "description": "The source property filter to apply. Sample value: Editorial, smartLight%20FAQ.tsv .",
-      "x-ms-parameter-location": "method"
-    },
-    "changedSince": {
-      "type": "string",
-      "name": "changedSince",
-      "in": "query",
-      "required": false,
-      "x-nullable": false,
-      "description": "changedSince property is used to return all QnAs created or updated after a specific time duration. The user can filter QnAs by seconds (s), minutes (m), hours (h) and days (d). The user may use any integral value along with the suffix for time. For instance, the value of 5m returns all QnA pairs updated or created in the last 5 minutes.",
-      "x-ms-parameter-location": "method"
-    },
     "OperationId": {
       "type": "string",
       "name": "operationId",
@@ -1468,9 +1861,31 @@
       "description": "Type of Key",
       "x-ms-parameter-location": "method"
     },
+    "GenerateAnswerPayload": {
+      "name": "generateAnswerPayload",
+      "in": "body",
+      "required": true,
+      "schema": {
+        "$ref": "#/definitions/QueryDTO"
+      },
+      "x-nullable": true,
+      "description": "Post body of the request.",
+      "x-ms-parameter-location": "method"
+    },
+    "TrainPayload": {
+      "name": "trainPayload",
+      "in": "body",
+      "required": true,
+      "schema": {
+        "$ref": "#/definitions/FeedbackRecordsDTO"
+      },
+      "x-nullable": true,
+      "description": "Post body of the request.",
+      "x-ms-parameter-location": "method"
+    },
     "Endpoint": {
       "name": "Endpoint",
-      "description": "Supported Cognitive Services endpoint (e.g., https://< qnamaker-resource-name> .api.cognitiveservices.azure.com).",
+      "description": "Supported Cognitive Services endpoint (e.g., https://< qnamaker-resource-name >.api.cognitiveservices.azure.com).",
       "x-ms-parameter-location": "client",
       "required": true,
       "type": "string",
