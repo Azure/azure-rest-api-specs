@@ -4175,20 +4175,7 @@
       "userAssignedIdentities": {
         "type": "object",
         "additionalProperties": {
-          "$ref": "#/definitions/ArmUserIdentity"
-        }
-      }
-    },
-    "ArmUserIdentity": {
-      "type": "object",
-      "properties": {
-        "principalId": {
-          "type": "string",
-          "readOnly": true
-        },
-        "clientId": {
-          "type": "string",
-          "readOnly": true
+          "$ref": "#/components/schemas/ArmUserIdentity"
         }
       }
     },
@@ -4230,6 +4217,23 @@
         "userAssignedIdentity": {
           "type": "string",
           "description": "The user assigned identity."
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "ArmUserIdentity": {
+        "type": "object",
+        "properties": {
+          "principalId": {
+            "type": "string",
+            "readOnly": true
+          },
+          "clientId": {
+            "type": "string",
+            "readOnly": true
+          }
         }
       }
     }
