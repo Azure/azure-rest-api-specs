@@ -44,5 +44,5 @@ Please also specify `--go-sdk-folder=<path to the root directory of your azure-s
 
 ``` yaml $(tag) == 'release_5_0_preview.1' && $(go)
 namespace: qnamaker
-output-folder: $(go-sdk-folder)/services/cognitiveservices/v5.0-preview.1/$(namespace)
+output-folder: $(go-sdk-folder)/services/preview/$(namespace)/cognitiveservices/v5.0-preview.1/$(namespace)
 ```
