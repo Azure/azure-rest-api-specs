@@ -120,7 +120,7 @@
             "schema": {
               "$ref": "#/definitions/ITDigitalTwin"
             },
-            "description": "Parameters supplied to the Update IT Digial Twin operation."
+            "description": "Parameters supplied to the Update IT Digital Twin operation."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -326,7 +326,7 @@
         },
         "x-ms-examples": {
           "List all it digital twins in a subscription.": {
-            "$ref": "./examples/ListSubscriptionITDigialTwins.json"
+            "$ref": "./examples/ListSubscriptionITDigitalTwins.json"
           }
         }
       }
@@ -421,7 +421,13 @@
         },
         "provisioningState": {
           "description": "The provisioning state.",
-          "enum": [ "Succeeded", "Created", "Configured", "Deployed", "Failed" ],
+          "enum": [
+            "Succeeded",
+            "Created",
+            "Configured",
+            "Deployed",
+            "Failed"
+          ],
           "type": "string",
           "readOnly": true,
           "x-ms-enum": {
@@ -431,6 +437,10 @@
         },
         "adlsId": {
           "description": "Link to the ADLS account.",
+          "type": "string"
+        },
+        "configuration": {
+          "description": "configuration for the digital twin project.",
           "type": "string"
         }
       },
