@@ -4175,61 +4175,64 @@
       "userAssignedIdentities": {
         "type": "object",
         "additionalProperties": {
-          "properties": {
-            "principalId": {
-              "type": "string",
-              "readOnly": true
-            },
-            "clientId": {
-              "type": "string",
-              "readOnly": true
+          "$ref": "#/definitions/ArmUserIdentity"
+        }
+      }
+    },
+    "ArmUserIdentity": {
+      "type": "object",
+      "properties": {
+        "principalId": {
+          "type": "string",
+          "readOnly": true
+        },
+        "clientId": {
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "EncryptionPropertiesDescription": {
+        "description": "The encryption properties for the IoT hub.",
+        "type": "object",
+        "properties": {
+          "keySource": {
+            "description": "The source of the key.",
+            "type": "string"
+          },
+          "keyVaultProperties": {
+            "description": "The properties of the KeyVault key.",
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/KeyVaultKeyProperties"
             }
           }
         }
-      }
-    },
-    "EncryptionPropertiesDescription": {
-      "description": "The encryption properties for the IoT hub.",
-      "type": "object",
-      "properties": {
-        "keySource": {
-          "description": "The source of the key.",
-          "type": "string"
-        },
-        "keyVaultProperties": {
-          "description": "The properties of the KeyVault key.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/KeyVaultKeyProperties"
+      },
+      "KeyVaultKeyProperties": {
+        "description": "The properties of the KeyVault key.",
+        "type": "object",
+        "properties": {
+          "keyIdentifier": {
+            "type": "string",
+            "description": "The identifier of the key."
+          },
+          "Identity": {
+            "description": "The identity.",
+            "$ref": "#/definitions/KEKIdentity"
+          }
+        }
+      },
+      "KEKIdentity": {
+        "description": "The properties of the KeyVault key.",
+        "type": "object",
+        "properties": {
+          "userAssignedIdentity": {
+            "type": "string",
+            "description": "The user assigned identity."
           }
         }
       }
     },
-    "KeyVaultKeyProperties": {
-      "description": "The properties of the KeyVault key.",
-      "type": "object",
-      "properties": {
-        "keyIdentifier": {
-          "type": "string",
-          "description": "The identifier of the key."
-        },
-        "Identity": {
-          "description": "The identity.",
-          "$ref": "#/definitions/KEKIdentity"
-        }
-      }
-    },
-    "KEKIdentity": {
-      "description": "The properties of the KeyVault key.",
-      "type": "object",
-      "properties": {
-        "userAssignedIdentity": {
-          "type": "string",
-          "description": "The user assigned identity."
-        }
-      }
-    }
-  },
   "parameters": {
     "subscriptionId": {
       "name": "subscriptionId",
