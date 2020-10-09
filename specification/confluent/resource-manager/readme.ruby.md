@@ -2,18 +2,25 @@
 
 These settings apply only when `--ruby` is specified on the command line.
 
-```yaml
+``` yaml
 package-name: azure_mgmt_confluent
-package-version: 2030-03-01-preview
+package-version: 2020-03-01-preview
 azure-arm: true
 ```
 
-### Tag: package-2030-03-01-preview and ruby
+### Ruby multi-api
 
-These settings apply only when `--tag=package-2030-03-01-preview --ruby` is specified on the command line.
+``` yaml $(ruby) && $(multiapi)
+batch:
+  - tag: package-2020-03-01-preview
+```
+
+### Tag: package-2020-03-01-preview and ruby
+
+These settings apply only when `--tag=package-2020-03-01-preview --ruby` is specified on the command line.
 Please also specify `--ruby-sdks-folder=<path to the root directory of your azure-sdk-for-ruby clone>`.
 
-```yaml $(tag) == 'package-2030-03-01-preview' && $(ruby)
+```yaml $(tag) == 'package-2020-03-01-preview' && $(ruby)
 namespace: Microsoft.Confluent
 output-folder: $(ruby-sdks-folder)/confluent
 ```
