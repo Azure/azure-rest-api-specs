@@ -53,6 +53,7 @@ swagger-to-sdk:
   - repo: azure-sdk-for-python
   - repo: azure-sdk-for-python-track2
   - repo: azure-sdk-for-go
+  - repo: azure-sdk-for-js
     after_scripts:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_vsonline']
 ```
@@ -68,3 +69,7 @@ See configuration in [readme.python.md](./readme.python.md)
 ## Go
 
 See configuration in [readme.go.md](./readme.go.md)
+
+## Typescript
+
+See configuration in [readme.typescript.md](./readme.typescript.md)
