@@ -56,19 +56,11 @@ These settings apply only when `--tag=release_5_0_preview.1` is specified on the
 input-file: preview/v5.0-preview.1/QnAMaker.json
 ```
 
-### Runtime Release 5.0-preview.1
-These settings apply only when `--tag=runtime_release_5_0-preview.1` is specified on the command line.
-
-``` yaml $(tag) == 'runtime_release_5_0_preview.1'
-input-file: preview/v5.0-preview.1/QnAMakerRuntime.json
-```
-
 ``` yaml
 batch:
   - tag: release_4_0
   - tag: runtime_release_4_0
   - tag: release_5_0_preview.1
-  - tag: runtime_release_5_0_preview.1
 ```
 
 ## Swagger to SDK
@@ -122,16 +114,6 @@ csharp:
   azure-arm: false
   namespace: Microsoft.Azure.CognitiveServices.Knowledge.QnAMaker
   output-folder: $(csharp-sdks-folder)/CognitiveServices/Knowledge.QnAMaker/preview/src/Generated
-  clear-output-folder: true
-```
-
-``` yaml $(csharp) && $(tag) == 'runtime_release_5_0_preview.1'
-csharp:
-  sync-methods: None
-  license-header: MICROSOFT_MIT_NO_VERSION
-  azure-arm: false
-  namespace: Microsoft.Azure.CognitiveServices.Knowledge.QnAMaker
-  output-folder: $(csharp-sdks-folder)/CognitiveServices/Knowledge.QnAMaker/preview/src/Runtime/Generated
   clear-output-folder: true
 ```
 
@@ -189,7 +171,6 @@ input-file:
   - $(this-folder)/stable/v4.0/QnAMaker.json
   - $(this-folder)/stable/v4.0/QnAMakerRuntime.json
   - $(this-folder)/stable/v5.0-preview.1/QnAMaker.json
-  - $(this-folder)/stable/v5.0-preview.1/QnAMakerRuntime.js
 ```
 
 If there are files that should not be in the `all-api-versions` set, 

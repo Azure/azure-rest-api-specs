@@ -242,10 +242,10 @@
           "Alterations"
         ],
         "summary": "Download alterations per Knowledgebase (QnAMaker Managed).",
-        "operationId": "Alterations_Get",
+        "operationId": "Alterations_GetKb",
         "parameters": [
           {
-            "$ref": "#/parameters/AlterationsKbId"
+            "$ref": "#/parameters/KbId"
           }
         ],
         "consumes": [
@@ -280,10 +280,10 @@
           "Alterations"
         ],
         "summary": "Replace alterations data per Knowledgebase (QnAMaker Managed).",
-        "operationId": "Alterations_Replace",
+        "operationId": "Alterations_ReplaceKb",
         "parameters": [
           {
-            "$ref": "#/parameters/AlterationsKbId"
+            "$ref": "#/parameters/KbId"
           },
           {
             "$ref": "#/parameters/WordAlterations"
@@ -1831,15 +1831,6 @@
       "required": true,
       "x-nullable": false,
       "description": "Knowledgebase id.",
-      "x-ms-parameter-location": "method"
-    },
-    "AlterationsKbId": {
-      "type": "string",
-      "name": "kbId",
-      "in": "path",
-      "required": true,
-      "x-nullable": false,
-      "description": "Knowledgebase ID required for alterations operations on QnAMaker Managed.",
       "x-ms-parameter-location": "method"
     },
     "OperationId": {
