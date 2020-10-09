@@ -170,7 +170,7 @@ require: $(this-folder)/../../../../profiles/readme.md
 input-file:
   - $(this-folder)/stable/v4.0/QnAMaker.json
   - $(this-folder)/stable/v4.0/QnAMakerRuntime.json
-  - $(this-folder)/stable/v5.0-preview.1/QnAMaker.json
+  - $(this-folder)/preview/v5.0-preview.1/QnAMaker.json
 ```
 
 If there are files that should not be in the `all-api-versions` set, 
