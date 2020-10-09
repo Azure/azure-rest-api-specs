@@ -662,9 +662,7 @@
           "200": {
             "description": "The body contains the list of private link resources.",
             "schema": {
-              "items": {
-                "$ref": "#/definitions/GroupIdInformationResponse"
-              }
+              "$ref": "#/definitions/GroupIdInformationResponse"
             }
           },
           "default": {
@@ -751,9 +749,7 @@
           "200": {
             "description": "The body contains the list of private endpoint connection properties.",
             "schema": {
-              "items": {
-                "$ref": "#/definitions/PrivateEndpointConnectionsResponse"
-              }
+              "$ref": "#/definitions/PrivateEndpointConnectionsResponse"
             }
           },
           "default": {
@@ -1616,33 +1612,26 @@
       "readOnly": true,
       "description": "The private endpoint group id of a private endpoint connection.",
       "type": "string"
-    },
-    "PrivateEndpointConnectionProvisioningState": {
-      "description": "The provisioning state.",
-      "enum": [
-        "Pending",
-        "Approved",
-        "Rejected",
-        "Disconnected"
-      ],
-      "type": "string",
-      "x-nullable": true,
-      "readOnly": true,
-      "x-ms-enum": {
-        "name": "PrivateEndpointConnectionProvisioningState",
-        "modelAsString": true
-      }
-    },
+    },    
     "ConnectionProperties": {
       "description": "The properties of a private endpoint connection.",
       "type": "object",
       "properties": {
         "provisioningState": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/PrivateEndpointConnectionProvisioningState"
-            }
-          ]
+          "description": "The provisioning state.",
+          "enum": [
+            "Pending",
+            "Approved",
+            "Rejected",
+            "Disconnected"
+          ],
+          "type": "string",
+          "x-nullable": true,
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "ConnectionPropertiesProvisioningState",
+            "modelAsString": true
+          }
         },
         "privateEndpoint": {
           "allOf": [
@@ -1652,11 +1641,11 @@
           ]
         },
         "groupIds": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/GroupId"
-            }
-          ]
+          "description": "The list of group ids for the private endpoint connection.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/GroupId"
+          }
         },
         "privateLinkServiceConnectionState": {
           "allOf": [
