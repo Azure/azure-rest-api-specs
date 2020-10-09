@@ -7206,92 +7206,6 @@
       },
       "description": "Base type for skills."
     },
-    "CustomEntity": {
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "The top-level entity descriptor. Matches in the skill output will be grouped by this name, and it should represent the \"normalized\" form of the text being found."
-        },
-        "description": {
-          "type": "string",
-          "description": "This field can be used as a passthrough for custom metadata about the matched text(s). The value of this field will appear with every match of its entity in the skill output."
-        },
-        "type": {
-          "type": "string",
-          "description": "This field can be used as a passthrough for custom metadata about the matched text(s). The value of this field will appear with every match of its entity in the skill output."
-        },
-        "subtype": {
-          "type": "string",
-          "description": "This field can be used as a passthrough for custom metadata about the matched text(s). The value of this field will appear with every match of its entity in the skill output."
-        },
-        "id": {
-          "type": "string",
-          "description": "This field can be used as a passthrough for custom metadata about the matched text(s). The value of this field will appear with every match of its entity in the skill output."
-        },
-        "caseSensitive": {
-          "type": "boolean",
-          "description": "Defaults to false. Boolean value denoting whether comparisons with the entity name should be sensitive to character casing. Sample case insensitive matches of \"Microsoft\" could be: microsoft, microSoft, MICROSOFT."
-        },
-        "accentSensitive": {
-          "type": "boolean",
-          "description": "Defaults to false. Boolean value denoting whether comparisons with the entity name should be sensitive to accent."
-        },
-        "fuzzyEditDistance": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Defaults to 0. Maximum value of 5. Denotes the acceptable number of divergent characters that would still constitute a match with the entity name. The smallest possible fuzziness for any given match is returned. For instance, if the edit distance is set to 3, \"Windows10\" would still match \"Windows\", \"Windows10\" and \"Windows 7\". When case sensitivity is set to false, case differences do NOT count towards fuzziness tolerance, but otherwise do."
-        },
-        "defaultCaseSensitive": {
-          "type": "boolean",
-          "description": "Changes the default case sensitivity value for this entity. It be used to change the default value of all aliases caseSensitive values."
-        },
-        "defaultAccentSensitive": {
-          "type": "boolean",
-          "description": "Changes the default accent sensitivity value for this entity. It be used to change the default value of all aliases accentSensitive values."
-        },
-        "defaultFuzzyEditDistance": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Changes the default fuzzy edit distance value for this entity. It can be used to change the default value of all aliases fuzzyEditDistance values."
-        },
-        "aliases": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/CustomEntityAlias"
-          },
-          "description": "An array of complex objects that can be used to specify alternative spellings or synonyms to the root entity name."
-        }
-      },
-      "required": [
-        "name"
-      ],
-      "description": "An object that contains information about the matches that were found, and related metadata."
-    },
-    "CustomEntityAlias": {
-      "properties": {
-        "text": {
-          "type": "string",
-          "description": "The text of the alias."
-        },
-        "caseSensitive": {
-          "type": "boolean",
-          "description": "Determine if the alias is case sensitive."
-        },
-        "accentSensitive": {
-          "type": "boolean",
-          "description": "Determine if the alias is accent sensitive."
-        },
-        "fuzzyEditDistance": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Determine the fuzzy edit distance of the alias."
-        }
-      },
-      "required": [
-        "text"
-      ],
-      "description": "A complex object that can be used to specify alternative spellings or synonyms to the root entity name."
-    },
     "InputFieldMappingEntry": {
       "properties": {
         "name": {
@@ -7563,48 +7477,6 @@
         "url": "https://docs.microsoft.com/azure/search/cognitive-search-skill-textsplit"
       },
       "description": "A skill to split a string into chunks of text."
-    },
-    "CustomEntityLookupSkill": {
-      "x-ms-discriminator-value": "#Microsoft.Skills.Text.CustomEntityLookupSkill",
-      "allOf": [
-        {
-          "$ref": "#/definitions/SearchIndexerSkill"
-        }
-      ],
-      "properties": {
-        "defaultLanguageCode": {
-          "$ref": "#/definitions/CustomEntityLookupSkillLanguage",
-          "description": "A value indicating which language code to use. Default is en."
-        },
-        "entitiesDefinitionUri": {
-          "type": "string",
-          "description": "Path to a JSON or CSV file containing all the target text to match against. This entity definition is read at the beginning of an indexer run. Any updates to this file during an indexer run will not take effect until subsequent runs. This config must be accessible over HTTPS."
-        },
-        "inlineEntitiesDefinition": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/CustomEntity"
-          },
-          "description": "The inline CustomEntity definition."
-        },
-        "globalDefaultCaseSensitive": {
-          "type": "boolean",
-          "description": "A global flag for CaseSensitive. If CaseSensitive is not set in CustomEntity, this value will be the default value."
-        },
-        "globalDefaultAccentSensitive": {
-          "type": "boolean",
-          "description": "A global flag for AccentSensitive. If AccentSensitive is not set in CustomEntity, this value will be the default value."
-        },
-        "globalDefaultFuzzyEditDistance": {
-          "type": "integer",
-          "format": "int32",
-          "description": "A global flag for FuzzyEditDistance. If FuzzyEditDistance is not set in CustomEntity, this value will be the default value."
-        }
-      },
-      "externalDocs": {
-        "url": "https://docs.microsoft.com/en-us/azure/search/cognitive-search-skill-custom-entity-lookup"
-      },
-      "description": "A skill looks for text from a custom, user-defined list of words and phrases."
     },
     "TextTranslationSkill": {
       "x-ms-discriminator-value": "#Microsoft.Skills.Text.TranslationSkill",
@@ -8239,63 +8111,6 @@
         ]
       },
       "description": "The language codes supported for input text by SplitSkill."
-    },
-    "CustomEntityLookupSkillLanguage": {
-      "type": "string",
-      "enum": [
-        "da",
-        "de",
-        "en",
-        "es",
-        "fi",
-        "fr",
-        "it",
-        "ko",
-        "pt"
-      ],
-      "x-ms-enum": {
-        "name": "CustomEntityLookupSkillLanguage",
-        "modelAsString": true,
-        "values": [
-          {
-            "value": "da",
-            "description": "Danish"
-          },
-          {
-            "value": "de",
-            "description": "German"
-          },
-          {
-            "value": "en",
-            "description": "English"
-          },
-          {
-            "value": "es",
-            "description": "Spanish"
-          },
-          {
-            "value": "fi",
-            "description": "Finnish"
-          },
-          {
-            "value": "fr",
-            "description": "French"
-          },
-          {
-            "value": "it",
-            "description": "Italian"
-          },
-          {
-            "value": "ko",
-            "description": "Korean"
-          },
-          {
-            "value": "pt",
-            "description": "Portuguese"
-          }
-        ]
-      },
-      "description": "The language codes supported for input text by CustomEntityLookupSkill."
     },
     "EntityRecognitionSkillLanguage": {
       "type": "string",
