@@ -1595,6 +1595,11 @@
           "description": "Runtime connection string to cache",
           "maxLength": 300
         },
+        "useFromLocation": {
+          "type": "string",
+          "description": "Location identifier to use cache from (should be either 'default' or valid Azure region identifier)",
+          "maxLength": 256
+        },
         "resourceId": {
           "type": "string",
           "description": "Original uri of entity in external system cache points to",
@@ -1602,7 +1607,8 @@
         }
       },
       "required": [
-        "connectionString"
+        "connectionString",
+        "useFromLocation"
       ],
       "description": "Properties of the Cache contract."
     },
@@ -1627,6 +1633,11 @@
           "type": "string",
           "description": "Runtime connection string to cache",
           "maxLength": 300
+        },
+        "useFromLocation": {
+          "type": "string",
+          "description": "Location identifier to use cache from (should be either 'default' or valid Azure region identifier)",
+          "maxLength": 256
         },
         "resourceId": {
           "type": "string",
