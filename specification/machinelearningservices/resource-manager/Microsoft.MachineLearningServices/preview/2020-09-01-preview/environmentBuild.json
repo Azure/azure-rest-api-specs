@@ -1,0 +1,637 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Azure Machine Learning Workspaces",
+    "description": "These APIs allow end users to operate on Azure Machine Learning Workspace resources.",
+    "version": "2020-09-01-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/mferp/managementfrontend/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/environments/{environmentName}/builds": {
+      "put": {
+        "tags": [
+          "EnvironmentBuild"
+        ],
+        "operationId": "EnvironmentBuilds_Create",
+        "x-ms-examples": {
+          "Create an Environment Build.": {
+            "$ref": "./examples/createEnvironmentBuild.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "machineLearningServices.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/APIVersionParameter"
+          },
+          {
+            "$ref": "environmentSpecification.json#/parameters/EnvironmentNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ComputeTargetParameter"
+          },
+          {
+            "$ref": "#/parameters/RebuildParameter"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "machineLearningServices.json#/definitions/MachineLearningServiceError"
+            }
+          },
+          "201": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/EnvironmentBuildResource"
+            }
+          },
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/EnvironmentBuildResource"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "EnvironmentBuild"
+        ],
+        "operationId": "EnvironmentBuilds_List",
+        "x-ms-examples": {
+          "List Environment Builds.": {
+            "$ref": "./examples/listEnvironmentBuilds.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "parameters": [
+          {
+            "$ref": "machineLearningServices.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/APIVersionParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/PaginationParameter"
+          },
+          {
+            "$ref": "environmentSpecification.json#/parameters/EnvironmentNameParameter"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "machineLearningServices.json#/definitions/MachineLearningServiceError"
+            }
+          },
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/EnvironmentBuildResourceArmPaginatedResult"
+            }
+          }
+        }
+      }
+    },
+    "/mferp/managementfrontend/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/environments/{environmentName}/versions/{environmentVersion}/builds": {
+      "put": {
+        "tags": [
+          "EnvironmentBuild"
+        ],
+        "operationId": "EnvironmentBuilds_CreateByVersion",
+        "x-ms-examples": {
+          "Create an Environment Build.": {
+            "$ref": "./examples/createEnvironmentBuildByVersion.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "machineLearningServices.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/APIVersionParameter"
+          },
+          {
+            "$ref": "environmentSpecification.json#/parameters/EnvironmentNameParameter"
+          },
+          {
+            "$ref": "environmentSpecification.json#/parameters/EnvironmentVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ComputeTargetParameter"
+          },
+          {
+            "$ref": "#/parameters/RebuildParameter"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "machineLearningServices.json#/definitions/MachineLearningServiceError"
+            }
+          },
+          "201": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/EnvironmentBuildResource"
+            }
+          },
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/EnvironmentBuildResource"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "EnvironmentBuild"
+        ],
+        "operationId": "EnvironmentBuilds_ListByVersion",
+        "x-ms-examples": {
+          "List Environment Builds.": {
+            "$ref": "./examples/listEnvironmentBuildsByVersion.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "parameters": [
+          {
+            "$ref": "machineLearningServices.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/APIVersionParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/PaginationParameter"
+          },
+          {
+            "$ref": "environmentSpecification.json#/parameters/EnvironmentNameParameter"
+          },
+          {
+            "$ref": "environmentSpecification.json#/parameters/EnvironmentVersionParameter"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "machineLearningServices.json#/definitions/MachineLearningServiceError"
+            }
+          },
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/EnvironmentBuildResourceArmPaginatedResult"
+            }
+          }
+        }
+      }
+    },
+    "/mferp/managementfrontend/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/environments/{environmentName}/builds/{id}": {
+      "get": {
+        "tags": [
+          "EnvironmentBuild"
+        ],
+        "operationId": "EnvironmentBuilds_Get",
+        "x-ms-examples": {
+          "Get an Environment Build.": {
+            "$ref": "./examples/getEnvironmentBuild.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "machineLearningServices.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/APIVersionParameter"
+          },
+          {
+            "$ref": "environmentSpecification.json#/parameters/EnvironmentNameParameter"
+          },
+          {
+            "$ref": "#/parameters/BuildIdParameter"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "machineLearningServices.json#/definitions/MachineLearningServiceError"
+            }
+          },
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/EnvironmentBuildResource"
+            }
+          }
+        }
+      }
+    },
+    "/mferp/managementfrontend/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/environments/{environmentName}/versions/{environmentVersion}/builds/{id}": {
+      "get": {
+        "tags": [
+          "EnvironmentBuild"
+        ],
+        "operationId": "EnvironmentBuilds_GetByVersion",
+        "x-ms-examples": {
+          "Get an Environment Build.": {
+            "$ref": "./examples/getEnvironmentBuildByVersion.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "machineLearningServices.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/APIVersionParameter"
+          },
+          {
+            "$ref": "environmentSpecification.json#/parameters/EnvironmentNameParameter"
+          },
+          {
+            "$ref": "environmentSpecification.json#/parameters/EnvironmentVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/BuildIdParameter"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "machineLearningServices.json#/definitions/MachineLearningServiceError"
+            }
+          },
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/EnvironmentBuildResource"
+            }
+          }
+        }
+      }
+    }
+  },
+  "parameters": {
+    "BuildIdParameter": {
+      "in": "path",
+      "name": "id",
+      "type": "string",
+      "description": "Build identifier.",
+      "required": true,
+      "x-ms-parameter-location": "method"
+    },
+    "ComputeTargetParameter": {
+      "in": "query",
+      "name": "compute-target",
+      "type": "string",
+      "description": "Compute Target identifier.",
+      "required": false,
+      "x-ms-parameter-location": "method"
+    },
+    "RebuildParameter": {
+      "in": "query",
+      "name": "rebuild",
+      "type": "boolean",
+      "description": "Rebuild flag.",
+      "default": false,
+      "x-ms-parameter-location": "method"
+    }
+  },
+  "definitions": {
+    "EnvironmentDefinition": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "version": {
+          "type": "string"
+        },
+        "python": {
+          "$ref": "machineLearningServices.json#/definitions/ModelPythonSection"
+        },
+        "environmentVariables": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "docker": {
+          "$ref": "#/definitions/DockerSection"
+        },
+        "spark": {
+          "$ref": "machineLearningServices.json#/definitions/ModelSparkSection"
+        },
+        "r": {
+          "$ref": "#/definitions/RSection"
+        },
+        "inferencingStackVersion": {
+          "type": "string"
+        }
+      }
+    },
+    "PythonEnvironmentMetadata": {
+      "type": "object",
+      "properties": {
+        "interpreterPath": {
+          "type": "string"
+        },
+        "condaEnvironmentName": {
+          "type": "string"
+        },
+        "condaEnvironmentPath": {
+          "type": "string"
+        }
+      }
+    },
+    "DockerEnvironmentMetadata": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "registry": {
+          "$ref": "machineLearningServices.json#/definitions/ContainerRegistry"
+        }
+      }
+    },
+    "EnvironmentMetadata": {
+      "type": "object",
+      "properties": {
+        "pythonEnvironment": {
+          "$ref": "#/definitions/PythonEnvironmentMetadata"
+        },
+        "dockerImage": {
+          "$ref": "#/definitions/DockerEnvironmentMetadata"
+        },
+        "warnings": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "EnvironmentBuild": {
+      "description": "The environment build is the materialized environment on which a training job,\r\nworkflow or deployment runs. Producing this build may require a compute process\r\nthat outputs a container image, may involve registration of that image or\r\ndeployment to a compute cluster and may include a record of the exact dependency\r\nversions used, the runtime and the target OS Platform.\r\nTODO: Cleanup Frankenstein of ImageBuild, EnvironmentMetadata and EnvironmentDefinition",
+      "type": "object",
+      "properties": {
+        "type": {
+          "description": "The type of action and output required. Default is to build a Docker image.",
+          "enum": [
+            "Docker",
+            "Local",
+            "Spark"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "EnvironmentBuildType",
+            "modelAsString": false
+          },
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "status": {
+          "description": "The current state of the build.",
+          "enum": [
+            "None",
+            "Queued",
+            "Running",
+            "Succeeded",
+            "Canceled",
+            "Failed"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "EnvironmentBuildStatus",
+            "modelAsString": false
+          },
+          "x-ms-mutability": [
+            "read"
+          ]
+        },
+        "logUrl": {
+          "description": "Location from which build logs can be streamed or downloaded. The value\r\nwill be null for user managed runs.",
+          "type": "string",
+          "x-ms-mutability": [
+            "read"
+          ]
+        },
+        "metadata": {
+          "$ref": "#/definitions/EnvironmentMetadata"
+        },
+        "definition": {
+          "$ref": "#/definitions/EnvironmentDefinition"
+        }
+      }
+    },
+    "EnvironmentBuildResource": {
+      "description": "Azure Resource Manager resource Envelope",
+      "required": [
+        "properties"
+      ],
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "The resource URL of the entity (not URL encoded).",
+          "type": "string",
+          "readOnly": true
+        },
+        "name": {
+          "description": "The name of the resource entity.",
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "description": "The resource provider and type.",
+          "type": "string",
+          "readOnly": true
+        },
+        "properties": {
+          "$ref": "#/definitions/EnvironmentBuild"
+        },
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "EnvironmentBuildResourceArmPaginatedResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/EnvironmentBuildResource"
+          }
+        },
+        "nextLink": {
+          "type": "string"
+        }
+      }
+    },
+    "DockerImagePlatform": {
+      "type": "object",
+      "properties": {
+        "os": {
+          "type": "string"
+        },
+        "architecture": {
+          "type": "string"
+        }
+      }
+    },
+    "DockerSection": {
+      "type": "object",
+      "properties": {
+        "baseImage": {
+          "type": "string"
+        },
+        "platform": {
+          "$ref": "#/definitions/DockerImagePlatform"
+        },
+        "baseDockerfile": {
+          "type": "string"
+        },
+        "baseImageRegistry": {
+          "$ref": "machineLearningServices.json#/definitions/ContainerRegistry"
+        },
+        "enabled": {
+          "type": "boolean"
+        },
+        "sharedVolumes": {
+          "default": true,
+          "type": "boolean"
+        },
+        "shmSize": {
+          "default": "2g",
+          "type": "string"
+        },
+        "arguments": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "RSection": {
+      "type": "object",
+      "properties": {
+        "rVersion": {
+          "type": "string"
+        },
+        "userManaged": {
+          "type": "boolean"
+        },
+        "rscriptPath": {
+          "type": "string"
+        },
+        "snapshotDate": {
+          "type": "string"
+        },
+        "cranPackages": {
+          "type": "array",
+          "items": {
+            "$ref": "machineLearningServices.json#/definitions/RCranPackage"
+          }
+        },
+        "gitHubPackages": {
+          "type": "array",
+          "items": {
+            "$ref": "machineLearningServices.json#/definitions/RGitHubPackage"
+          }
+        },
+        "customUrlPackages": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "bioConductorPackages": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}

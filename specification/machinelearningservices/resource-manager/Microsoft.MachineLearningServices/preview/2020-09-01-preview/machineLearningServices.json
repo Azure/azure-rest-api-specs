@@ -5039,6 +5039,17 @@
         }
       }
     },
+    "RegistryIdentity": {
+      "type": "object",
+      "properties": {
+        "resourceId": {
+          "type": "string"
+        },
+        "clientId": {
+          "type": "string"
+        }
+      }
+    },
     "ContainerRegistry": {
       "type": "object",
       "properties": {
@@ -5052,6 +5063,10 @@
         "password": {
           "type": "string",
           "x-ms-secret": true
+        },
+        "registryIdentity": {
+          "description": "Settings for a RegistryIdentity.",
+          "$ref": "#/definitions/RegistryIdentity"
         }
       }
     },
@@ -5151,6 +5166,10 @@
       "properties": {
         "name": {
           "description": "The package name.",
+          "type": "string"
+        },
+        "version": {
+          "description": "The package version",
           "type": "string"
         },
         "repository": {
