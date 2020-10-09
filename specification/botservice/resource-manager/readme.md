@@ -99,6 +99,7 @@ swagger-to-sdk:
   - repo: azure-resource-manager-schemas
     after_scripts:
       - node sdkauto_afterscript.js botservice/resource-manager
+  - repo: azure-sdk-for-js
 ```
 
 ## C#
