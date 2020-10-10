@@ -693,6 +693,9 @@
           }
         },
         "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -705,6 +708,9 @@
           "Exchange"
         ],
         "responses": {
+          "200": {
+            "description": "The request is completed."
+          },
           "202": {
             "description": "The request is accepted and is being processed.",
             "headers": {
@@ -738,6 +744,9 @@
           }
         },
         "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -750,6 +759,9 @@
           "Exchange"
         ],
         "responses": {
+          "200": {
+            "description": "The request is completed."
+          },
           "202": {
             "description": "The request is accepted and is being processed.",
             "headers": {
