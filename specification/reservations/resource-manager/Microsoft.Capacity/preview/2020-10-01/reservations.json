@@ -3,7 +3,7 @@
   "info": {
     "title": "Azure Reservation API",
     "description": "This API describe Azure Reservation",
-    "version": "2019-04-01"
+    "version": "2020-10-01"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -59,7 +59,7 @@
           "200": {
             "description": "List of `Subscription`s created after the filter.",
             "schema": {
-              "$ref": "#/definitions/Properties"
+              "$ref": "#/definitions/AvailableScopeProperties"
             }
           },
           "default": {
@@ -633,6 +633,25 @@
     }
   },
   "definitions": {
+    "AvailableScopeRequest": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/AvailableScopeRequestProperties"
+        }
+      }
+    },
+    "AvailableScopeRequestProperties": {
+      "type": "object",
+      "properties": {
+        "scopes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
     "ReservationStatusCode": {
       "type": "string",
       "enum": [
@@ -1567,7 +1586,7 @@
       "format": "int32",
       "description": "Quantity of the SKUs that are part of the Reservation. Must be greater than zero."
     },
-    "Properties": {
+    "AvailableScopeProperties": {
       "type": "object",
       "properties": {
         "properties": {
@@ -1648,10 +1667,7 @@
       "in": "body",
       "required": true,
       "schema": {
-        "type": "array",
-        "items": {
-          "type": "string"
-        }
+        "$ref": "#/definitions/AvailableScopeRequest"
       }
     },
     "PurchaseParameter": {
@@ -1705,7 +1721,7 @@
     "ApiVersionParameter": {
       "name": "api-version",
       "in": "query",
-      "description": "Supported version for this document is 2019-04-01",
+      "description": "Supported version for this document is 2020-10-01",
       "required": true,
       "type": "string"
     },
