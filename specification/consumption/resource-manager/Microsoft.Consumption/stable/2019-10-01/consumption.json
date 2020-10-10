@@ -1099,6 +1099,9 @@
               "$ref": "#/definitions/ReservationRecommendationsListResult"
             }
           },
+          "204": {
+            "description": "An empty response is sent when there are no recommendations."
+          },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
@@ -3553,7 +3556,7 @@
       "x-ms-discriminator-value": "Modern",
       "allOf": [
         {
-          "$ref": "#/definitions/Resource"
+          "$ref": "#/definitions/ReservationTransactionDiscriminator"
         }
       ],
       "properties": {
@@ -3570,6 +3573,7 @@
     "LegacyReservationTransaction": {
       "description": "Legacy Reservation transaction resource.",
       "type": "object",
+      "x-ms-discriminator-value": "Legacy",
       "allOf": [
         {
           "$ref": "#/definitions/ReservationTransaction"
@@ -3698,18 +3702,29 @@
     "ReservationTransaction": {
       "description": "Reservation transaction resource.",
       "type": "object",
+      "discriminator": "kind",
       "allOf": [
         {
           "$ref": "#/definitions/Resource"
         }
       ],
       "properties": {
-        "properties": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/LegacyReservationTransactionProperties",
-          "title": "Reservation Transaction properties"
+        "kind": {
+          "type": "string",
+          "description": "Specifies the kind of reservation transaction.",
+          "enum": [
+            "Legacy",
+            "Modern"
+          ],
+          "x-ms-enum": {
+            "name": "ReservationTransactionKind",
+            "modelAsString": true
+          }
         }
-      }
+      },
+      "required": [
+        "kind"
+      ]
     },
     "ReservationTransactionsListResult": {
       "description": "Result of listing reservation recommendations.",
