@@ -38,7 +38,7 @@ These settings apply only when `--tag=package-2020-09` is specified on the comma
 input-file:
   - Microsoft.Devices/stable/2020-09-19/iothub.json
 ```
-### Tag: package-2020-09
+### Tag: package-2020-08
 
 These settings apply only when `--tag=package-2020-08` is specified on the command line.
 
