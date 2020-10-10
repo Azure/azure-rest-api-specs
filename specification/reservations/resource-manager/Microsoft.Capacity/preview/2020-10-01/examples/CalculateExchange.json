@@ -1,0 +1,51 @@
+{
+  "parameters": {
+    "api-version": "2020-10-01",
+    "body": {
+      "properties": {
+        "reservationsToPurchase": [
+          {
+            "sku": {
+              "name": "Standard_B1ls"
+            },
+            "location": "westus",
+            "properties": {
+              "reservedResourceType": "VirtualMachines",
+              "billingScopeId": "/subscriptions/ed3a1871-612d-abcd-a849-c2542a68be83",
+              "term": "P1Y",
+              "billingPlan": "Upfront",
+              "quantity": 1,
+              "displayName": "testDisplayName",
+              "appliedScopeType": "Shared",
+              "appliedScopes": null,
+              "renew": false,
+              "reservedResourceProperties": {
+                "instanceFlexibility": "On"
+              }
+            }
+          }
+        ],
+        "reservationsToExchange": [
+          {
+            "id": "/providers/microsoft.capacity/reservationOrders/1f14354c-dc12-4c8d-8090-6f295a3a34aa",
+            "properties": {
+              "scope": "Reservation",
+              "reservationToReturn": {
+                "reservationId": "/providers/microsoft.capacity/reservationOrders/1f14354c-dc12-4c8d-8090-6f295a3a34aa/reservations/c8c926bd-fc5d-4e29-9d43-b68340ac23a6",
+                "quantity": 1
+              }
+            }
+          }
+        ]
+      }
+    }
+  },
+  "responses": {
+    "202": {
+      "headers": {
+        "Location": "https://management.azure.com/Microsoft.Capacity/operationResults/8d542218-8bfe-4fd2-b909-0656c610281c?api-version=2019-04-01",
+        "Retry-After": 5
+      }
+    }
+  }
+}
