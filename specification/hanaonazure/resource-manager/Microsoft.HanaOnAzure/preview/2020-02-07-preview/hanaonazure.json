@@ -27,6 +27,48 @@
     }
   },
   "paths": {
+    "/providers/Microsoft.HanaOnAzure/operations": {
+      "get": {
+        "tags": [
+          "HanaOnAzure"
+        ],
+        "operationId": "Operations_List",
+        "description": "Gets a list of SAP HANA management operations.",
+        "x-ms-examples": {
+          "List all HANA management operations supported by HANA RP": {
+            "$ref": "./examples/HanaOperations_List.json"
+          }
+        },
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/OperationList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.HanaOnAzure/sapMonitors": {
       "get": {
         "tags": [
@@ -354,7 +396,7 @@
         "tags": [
           "HanaOnAzure"
         ],
-        "operationId": "ProviderInstance_Create",
+        "operationId": "ProviderInstances_Create",
         "x-ms-long-running-operation": true,
         "summary": "Creates a provider instance.",
         "description": "Creates a provider instance for the specified subscription, resource group, SapMonitor name, and resource name.",
@@ -408,7 +450,7 @@
         "tags": [
           "HanaOnAzure"
         ],
-        "operationId": "ProviderInstance_Delete",
+        "operationId": "ProviderInstances_Delete",
         "x-ms-long-running-operation": true,
         "summary": "Deletes a provider instance.",
         "description": "Deletes a provider instance for the specified subscription, resource group, SapMonitor name, and resource name.",
@@ -455,64 +497,64 @@
     }
   },
   "definitions": {
-    "Resource": {
-      "description": "The core properties of ARM resources",
+    "OperationList": {
+      "type": "object",
       "properties": {
-        "id": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Fully qualified resource Id for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/trafficManagerProfiles/{resourceName}"
-        },
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Operation"
+          },
+          "description": "List of HANA operations"
+        }
+      },
+      "description": "List of HANA operations"
+    },
+    "Operation": {
+      "type": "object",
+      "properties": {
         "name": {
           "readOnly": true,
           "type": "string",
-          "description": "The name of the resource"
+          "description": "The name of the operation being performed on this particular object. This name should match the action name that appears in RBAC / the event service."
         },
-        "type": {
+        "display": {
+          "$ref": "#/definitions/Display",
+          "description": "Displayed HANA operation information"
+        }
+      },
+      "description": "HANA operation information"
+    },
+    "Display": {
+      "type": "object",
+      "properties": {
+        "provider": {
           "readOnly": true,
           "type": "string",
-          "description": "The type of the resource. Ex- Microsoft.Network/trafficManagerProfiles."
-        }
-      },
-      "x-ms-azure-resource": true
-    },
-    "TrackedResource": {
-      "description": "The resource model definition for a ARM tracked top level resource",
-      "properties": {
-        "tags": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "x-ms-mutability": [
-            "read",
-            "create",
-            "update"
-          ],
-          "description": "Resource tags."
+          "description": "The localized friendly form of the resource provider name. This form is also expected to include the publisher/company responsible. Use Title Casing. Begin with \"Microsoft\" for 1st party services."
         },
-        "location": {
+        "resource": {
+          "readOnly": true,
           "type": "string",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ],
-          "description": "The Azure Region where the resource lives"
+          "description": "The localized friendly form of the resource type related to this action/operation. This form should match the public documentation for the resource provider. Use Title Casing. For examples, refer to the “name” section."
+        },
+        "operation": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The localized friendly name for the operation as shown to the user. This name should be concise (to fit in drop downs), but clear (self-documenting). Use Title Casing and include the entity/resource to which it applies."
+        },
+        "description": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The localized friendly description for the operation as shown to the user. This description should be thorough, yet concise. It will be used in tool-tips and detailed views."
+        },
+        "origin": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The intended executor of the operation; governs the display of the operation in the RBAC UX and the audit logs UX. Default value is 'user,system'"
         }
       },
-      "allOf": [
-        {
-          "$ref": "#/definitions/Resource"
-        }
-      ]
-    },
-    "ProxyResource": {
-      "description": "The resource model definition for a ARM proxy resource. It will have everything other than required location and tags",
-      "allOf": [
-        {
-          "$ref": "#/definitions/Resource"
-        }
-      ]
+      "description": "Detailed HANA operation information"
     },
     "ErrorResponse": {
       "description": "Describes the format of Error response.",
@@ -567,7 +609,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/TrackedResource"
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/TrackedResource"
         }
       ],
       "description": "SAP monitor info on Azure (ARM properties and SAP monitor properties)"
@@ -617,6 +659,10 @@
           "readOnly": true,
           "type": "string",
           "description": "The version of the payload running in the Collector VM"
+        },
+        "monitorSubnet": {
+          "type": "string",
+          "description": "The subnet which the SAP monitor will be deployed in"
         }
       },
       "description": "Describes the properties of a SAP monitor."
@@ -643,6 +689,28 @@
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/ProviderInstanceProperties",
           "description": "Provider Instance properties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "description": "A provider instance associated with a SAP monitor."
+    },
+    "ProviderInstanceProperties": {
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "The type of provider instance."
+        },
+        "properties": {
+          "type": "string",
+          "description": "A JSON string containing the properties of the provider instance."
+        },
+        "metadata": {
+          "type": "string",
+          "description": "A JSON string containing metadata of the provider instance."
         },
         "provisioningState": {
           "readOnly": true,
@@ -661,24 +729,6 @@
             "modelAsString": true
           },
           "description": "State of provisioning of the provider instance"
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/ProxyResource"
-        }
-      ],
-      "description": "A provider instance associated with a SAP monitor."
-    },
-    "ProviderInstanceProperties": {
-      "properties": {
-        "type": {
-          "type": "string",
-          "description": "The type of provider instance."
-        },
-        "properties": {
-          "type": "string",
-          "description": "A JSON string containing the properties of the provider instance."
         }
       },
       "description": "Describes the properties of a provider instance."

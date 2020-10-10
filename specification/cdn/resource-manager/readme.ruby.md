@@ -21,6 +21,16 @@ batch:
   - tag: package-2015-06
 ```
 
+### Tag: package-2020-04 and ruby
+
+These settings apply only when `--tag=package-2020-04 --ruby` is specified on the command line.
+Please also specify `--ruby-sdks-folder=<path to the root directory of your azure-sdk-for-ruby clone>`.
+
+``` yaml $(tag) == 'package-2020-04' && $(ruby)
+namespace: "Azure::CDN::Mgmt::V2020_04_15"
+output-folder: $(ruby-sdks-folder)/management/azure_mgmt_cdn/lib
+```
+
 ### Tag: package-2019-06 and ruby
 
 These settings apply only when `--tag=package-2019-06 --ruby` is specified on the command line.

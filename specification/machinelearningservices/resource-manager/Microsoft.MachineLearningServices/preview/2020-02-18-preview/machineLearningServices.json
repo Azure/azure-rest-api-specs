@@ -179,6 +179,7 @@
             "$ref": "./examples/deleteWorkspace.json"
           }
         },
+        "x-ms-long-running-operation": true,
         "parameters": [
           {
             "$ref": "#/parameters/APIVersionParameter"
@@ -196,6 +197,9 @@
         "responses": {
           "200": {
             "description": "The request was successful; the request was well-formed and received properly."
+          },
+          "202": {
+            "description": "The request was accepted; the request was well-formed and received properly."
           },
           "204": {
             "description": "The machine learning workspace does not exist in the subscription."
@@ -2081,7 +2085,6 @@
         },
         "identity": {
           "$ref": "#/definitions/Identity",
-          "readOnly": true,
           "description": "The identity of the resource."
         },
         "location": {
@@ -2529,6 +2532,24 @@
                   "description": "The current state of this ComputeInstance.",
                   "$ref": "#/definitions/ComputeInstanceState",
                   "readOnly": true
+                },
+                "computeInstanceAuthorizationType": {
+                  "type": "string",
+                  "title": "Compute Instance Authorization type.",
+                  "description": "The Compute Instance Authorization type. Available values are personal (default).",
+                  "default": "personal",
+                  "enum": [
+                    "personal"
+                  ],
+                  "x-ms-enum": {
+                    "name": "ComputeInstanceAuthorizationType",
+                    "modelAsString": true
+                  }
+                },
+                "personalComputeInstanceSettings": {
+                  "title": "Personal Compute Instance settings.",
+                  "description": "Settings for a personal compute instance.",
+                  "$ref": "#/definitions/PersonalComputeInstanceSettings"
                 }
               }
             }
@@ -3599,6 +3620,35 @@
           "description": "Uniquely identifies the user within his/her organization."
         }
       }
+    },
+    "PersonalComputeInstanceSettings": {
+      "type": "object",
+      "properties": {
+        "assignedUser": {
+          "$ref": "#/definitions/AssignedUser",
+          "title": "Assigned User.",
+          "description": "A user explicitly assigned to a personal compute instance."
+        }
+      },
+      "description": "Settings for a personal compute instance."
+    },
+    "AssignedUser": {
+      "type": "object",
+      "description": "A user that can be assigned to a compute instance.",
+      "properties": {
+        "objectId": {
+          "type": "string",
+          "description": "User’s AAD Object Id."
+        },
+        "tenantId": {
+          "type": "string",
+          "description": "User’s AAD Tenant Id."
+        }
+      },
+      "required": [
+        "objectId",
+        "tenantId"
+      ]
     }
   }
 }

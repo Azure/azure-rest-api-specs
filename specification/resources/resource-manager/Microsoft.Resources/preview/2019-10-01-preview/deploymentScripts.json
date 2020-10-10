@@ -48,6 +48,12 @@
           },
           "DeploymentScriptsCreate_MinCreate": {
             "$ref": "./examples/DeploymentScripts_Min_Create.json"
+          },
+          "DeploymentScriptsCreate_UsingCustomACIName": {
+            "$ref": "./examples/DeploymentScripts_Create_Using_Custom_Aci_Name.json"
+          },
+          "DeploymentScriptsCreate_UsingExistingStorageAccount": {
+            "$ref": "./examples/DeploymentScripts_Create_Using_Existing_StorageAccount.json"
           }
         },
         "parameters": [
@@ -614,6 +620,11 @@
           "description": "Container settings.",
           "$ref": "#/definitions/ContainerConfiguration"
         },
+        "storageAccountSettings": {
+          "type": "object",
+          "description": "Storage Account settings.",
+          "$ref": "#/definitions/StorageAccountConfiguration"
+        },
         "cleanupPreference": {
           "type": "string",
           "description": "The clean up preference when the script execution gets in a terminal state. Default setting is 'Always'.",
@@ -673,6 +684,21 @@
         }
       }
     },
+    "StorageAccountConfiguration": {
+      "type": "object",
+      "description": "Settings to use an existing storage account. Valid storage account kinds are: Storage, StorageV2 and FileStorage",
+      "properties": {
+        "storageAccountName": {
+          "type": "string",
+          "description": "The storage account name."
+        },
+        "storageAccountKey": {
+          "type": "string",
+          "description": "The storage account access key.",
+          "x-ms-secret": true
+        }
+      }
+    },
     "ScriptStatus": {
       "type": "object",
       "description": "Generic object modeling results of script execution.",
@@ -726,6 +752,10 @@
             "modelAsString": true
           }
         },
+        "tenantId": {
+          "type": "string",
+          "description": "ID of the Azure Active Directory."
+        },
         "userAssignedIdentities": {
           "type": "object",
           "description": "The list of user-assigned managed identities associated with the resource. Key is the Azure resource Id of the managed identity.",
@@ -764,7 +794,8 @@
         },
         "secureValue": {
           "type": "string",
-          "description": "The value of the secure environment variable."
+          "description": "The value of the secure environment variable.",
+          "x-ms-secret": true
         }
       },
       "required": [

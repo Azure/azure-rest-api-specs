@@ -10,6 +10,22 @@ namespace: com.microsoft.azure.management.synapse
 license-header: MICROSOFT_MIT_NO_CODEGEN
 payload-flattening-threshold: 1
 output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-synapse
+directive:
+  - rename-operation:
+      from: IntegrationRuntimeNodeIpAddress_Get
+      to: IntegrationRuntimeNodeIpAddressOperation_Get
+  - rename-operation:
+      from: IntegrationRuntimeAuthKeys_Regenerate
+      to: IntegrationRuntimeAuthKeysOperation_Regenerate
+  - rename-operation:
+      from: IntegrationRuntimeAuthKeys_List
+      to: IntegrationRuntimeAuthKeysOperation_List
+  - rename-operation:
+      from: IntegrationRuntimeStatus_Get
+      to: IntegrationRuntimeStatusOperation_Get
+  - rename-model:
+      from: SubResource
+      to: EntityResource
 ```
 
 ### Java multi-api

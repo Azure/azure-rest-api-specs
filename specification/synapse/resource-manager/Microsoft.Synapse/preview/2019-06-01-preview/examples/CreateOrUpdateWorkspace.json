@@ -14,7 +14,9 @@
           "filesystem": "default"
         },
         "sqlAdministratorLogin": "login",
-        "sqlAdministratorLoginPassword": "password"
+        "sqlAdministratorLoginPassword": "password",
+        "managedVirtualNetwork": "default",
+        "managedResourceGroupName": "workspaceManagedResourceGroupUnique"
       },
       "location": "East US",
       "tags": {
@@ -45,8 +47,27 @@
           },
           "sqlAdministratorLogin": "login",
           "sqlAdministratorLoginPassword": "password",
-          "managedResourceGroupName": "resourceGroup2",
-          "provisioningState": "Succeeded"
+          "managedResourceGroupName": "workspaceManagedResourceGroupUnique",
+          "managedVirtualNetwork": "default",
+          "provisioningState": "Succeeded",
+          "privateEndpointConnections": [
+            {
+              "id": "/subscriptions/01234567-89ab-4def-0123-456789abcdef/resourceGroups/ExampleResourceGroup/providers/Microsoft.Synapse/workspaces/ExampleWorkspace/privateEndpointConnections/ExamplePrivateEndpointConnection",
+              "name": "sql",
+              "type": "Microsoft.Synapse/workspaces/privateEndpointConnections",
+              "properties": {
+                "provisioningState": "Succeeded",
+                "privateEndpoint": {
+                  "id": "/subscriptions/01234567-89ab-4def-0123-456789abcdef/resourceGroups/ExampleResourceGroup/providers/Microsoft.Network/privateEndpoints/ExamplePrivateEndpoint"
+                },
+                "privateLinkServiceConnectionState": {
+                  "status": "Approved",
+                  "description": "Auto-approved",
+                  "actionsRequired": "None"
+                }
+              }
+            }
+          ]
         },
         "tags": {
           "key": "value"
@@ -70,7 +91,8 @@
           },
           "sqlAdministratorLogin": "login",
           "sqlAdministratorLoginPassword": "password",
-          "managedResourceGroupName": "resourceGroup2",
+          "managedResourceGroupName": "workspaceManagedResourceGroupUnique",
+          "managedVirtualNetwork": "default",
           "provisioningState": "Provisioning"
         },
         "tags": {
