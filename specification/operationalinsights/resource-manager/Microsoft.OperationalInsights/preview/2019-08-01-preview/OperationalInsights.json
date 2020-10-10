@@ -278,7 +278,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/LinkedStorageAccounts"
+              "$ref": "#/definitions/LinkedStorageAccountList"
             },
             "description": "The parameters required to create or update linked storage accounts."
           },
@@ -293,7 +293,7 @@
           "200": {
             "description": "OK response definition.",
             "schema": {
-              "$ref": "#/definitions/LinkedStorageAccounts"
+              "$ref": "#/definitions/LinkedStorageAccountList"
             }
           }
         }
@@ -372,7 +372,7 @@
           "200": {
             "description": "OK response definition.",
             "schema": {
-              "$ref": "#/definitions/LinkedStorageAccounts"
+              "$ref": "#/definitions/LinkedStorageAccountList"
             }
           }
         }
@@ -599,7 +599,7 @@
         }
       }
     },
-    "LinkedStorageAccounts": {
+    "LinkedStorageAccountList": {
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
@@ -623,7 +623,7 @@
         "value": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/LinkedStorageAccounts"
+            "$ref": "#/definitions/LinkedStorageAccountList"
           },
           "description": "A list of linked storage accounts instances."
         }
