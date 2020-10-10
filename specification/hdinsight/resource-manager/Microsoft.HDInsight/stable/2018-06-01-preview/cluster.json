@@ -1011,6 +1011,35 @@
       },
       "description": "The storage profile."
     },
+    "NetworkProperties": {
+      "description": "The network properties.",
+      "properties": {
+        "resourceProviderConnection": {
+          "type": "string",
+          "description": "The direction for the resource provider connection.",
+          "enum": [
+            "Inbound",
+            "Outbound"
+          ],
+          "x-ms-enum": {
+            "name": "ResourceProviderConnection",
+            "modelAsString": true
+          }
+        },
+        "privateLink": {
+          "type": "string",
+          "description": "Indicates whether or not private link is enabled.",
+          "enum": [
+            "Disabled",
+            "Enabled"
+          ],
+          "x-ms-enum": {
+            "name": "PrivateLink",
+            "modelAsString": true
+          }
+        }
+      }
+    },
     "ClusterCreateProperties": {
       "description": "The cluster create parameters.",
       "properties": {
@@ -1073,6 +1102,10 @@
         "minSupportedTlsVersion": {
           "type": "string",
           "description": "The minimal supported tls version."
+        },
+        "networkProperties": {
+          "$ref": "#/definitions/NetworkProperties",
+          "description": "The network properties."
         }
       }
     },
@@ -1189,6 +1222,10 @@
             "modelAsString": false
           }
         },
+        "clusterId": {
+          "type": "string",
+          "description": "The cluster id."
+        },
         "clusterDefinition": {
           "$ref": "#/definitions/ClusterDefinition",
           "description": "The cluster definition."
@@ -1257,6 +1294,10 @@
         "minSupportedTlsVersion": {
           "type": "string",
           "description": "The minimal supported tls version."
+        },
+        "networkProperties": {
+          "$ref": "#/definitions/NetworkProperties",
+          "description": "The network properties."
         }
       },
       "required": [
