@@ -630,6 +630,57 @@
           }
         }
       }
+    },
+    "/providers/Microsoft.Capacity/operationResults/{operationResultId}": {
+      "get": {
+        "summary": "Get OperationResult",
+        "description": "Get operationResult.",
+        "operationId": "OperationResults_Get",
+        "x-ms-examples": {
+          "GetOperationResult": {
+            "$ref": "./examples/GetOperationResult.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "parameters": [
+          {
+            "$ref": "#/parameters/OperationResultIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "tags": [
+          "OperationResult"
+        ],
+        "responses": {
+          "200": {
+            "description": "Operation is completed.",
+            "schema": {
+              "$ref": "#/definitions/OperationResultResponse"
+            }
+          },
+          "202": {
+            "description": "Operation is still in progress.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "URL to query for the status of the operation."
+              },
+              "Retry-after": {
+                "type": "string",
+                "description": "Clients should wait for the Retry-After interval before polling again"
+              }
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -1539,6 +1590,9 @@
         }
       }
     },
+    "OperationResultResponse": {
+      "type": "object"
+    },
     "InstanceFlexibility": {
       "type": "string",
       "description": "Turning this on will apply the reservation discount to other VMs in the same VM size group. Only specify for VirtualMachines reserved resource type.",
@@ -1764,6 +1818,14 @@
       "required": true,
       "type": "string",
       "description": "Order Id of the reservation"
+    },
+    "OperationResultIdParameter": {
+      "name": "operationResultId",
+      "x-ms-parameter-location": "method",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "OperationResult identifier"
     }
   }
 }
