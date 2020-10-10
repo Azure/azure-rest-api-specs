@@ -2179,6 +2179,33 @@
           "type": "string",
           "description": "Path to keyvault containing ssoContext secret."
         },
+        "sSOADFSAuthority": {
+          "type": "string",
+          "description": "URL to customer ADFS server for signing WVD SSO certificates."
+        },
+        "sSOClientId": {
+          "type": "string",
+          "description": "ClientId for the registered Relying Party used to issue WVD SSO certificates."
+        },
+        "sSOClientSecretKeyVaultPath": {
+          "type": "string",
+          "description": "Path to Azure KeyVault storing the secret used for communication to ADFS."
+        },
+        "sSOSecretType": {
+          "enum": [
+            "SharedKey",
+            "Certificate",
+            "SharedKeyInKeyVault",
+            "CertificateInKeyVault"
+          ],
+          "x-ms-enum": {
+            "name": "SSOSecretType",
+            "modelAsString": true
+          },
+          "type": "string",
+          "description": "The type of single sign on Secret Type.",
+          "x-nullable": false
+        },
         "preferredAppGroupType": {
           "enum": [
             "None",
@@ -2282,6 +2309,33 @@
         "ssoContext": {
           "type": "string",
           "description": "Path to keyvault containing ssoContext secret."
+        },
+        "sSOADFSAuthority": {
+          "type": "string",
+          "description": "URL to customer ADFS server for signing WVD SSO certificates."
+        },
+        "sSOClientId": {
+          "type": "string",
+          "description": "ClientId for the registered Relying Party used to issue WVD SSO certificates."
+        },
+        "sSOClientSecretKeyVaultPath": {
+          "type": "string",
+          "description": "Path to Azure KeyVault storing the secret used for communication to ADFS."
+        },
+        "sSOSecretType": {
+          "enum": [
+            "SharedKey",
+            "Certificate",
+            "SharedKeyInKeyVault",
+            "CertificateInKeyVault"
+          ],
+          "x-ms-enum": {
+            "name": "SSOSecretType",
+            "modelAsString": true
+          },
+          "type": "string",
+          "description": "The type of single sign on Secret Type.",
+          "x-nullable": false
         },
         "preferredAppGroupType": {
           "enum": [
