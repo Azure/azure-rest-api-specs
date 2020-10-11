@@ -351,25 +351,6 @@
             "ProvisioningAccount",
             "Updating"
           ],
-          "IsDoubleEncryptionEnabled": {
-            "type": "boolean",
-            "readOnly": false,
-            "description": "Configures whether cluster will use double encryption. This Property can not be modified after cluster creation. Default value is 'true'"
-          },
-          "IsAvailabilityZonesEnabled": {
-            "type": "boolean",
-            "readOnly": false,
-            "description": "Sets whether the cluster will support availabilty zones. This can be set as true only in regions where Azure Data Explorer support Availability Zones. This Property can not be modified after cluster creation. Default value is 'true' if region supports Availability Zones."
-          },
-          "BillingType": {
-            "type": "string",
-            "readOnly": false,
-            "description": "Configures whether billing will be only on the cluster or each workspace will be billed by its proportional use. This does not change the overall billing, only how it will be distributed. Default value is 'Cluster'",
-            "enum": [
-              "Cluster",
-              "Workspaces"
-            ]
-          },
           "x-ms-enum": {
             "name": "ClusterEntityStatus",
             "modelAsString": true
