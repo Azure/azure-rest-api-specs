@@ -786,7 +786,8 @@
             "Standard",
             "Premium",
             "Basic",
-            "Consumption"
+            "Consumption",
+            "Isolated"
           ],
           "x-ms-enum": {
             "name": "SkuType",
@@ -811,6 +812,10 @@
               {
                 "value": "Consumption",
                 "description": "Consumption SKU of Api Management."
+              },
+              {
+                "value": "Isolated",
+                "description": "Isolated SKU of Api Management."
               }
             ]
           }
@@ -970,7 +975,7 @@
             "type": "string"
           },
           "readOnly": true,
-          "description": "Public Static Load Balanced IP addresses of the API Management service in the additional location. Available only for Basic, Standard and Premium SKU."
+          "description": "Public Static Load Balanced IP addresses of the API Management service in the additional location. Available only for Basic, Standard, Premium and Isolated SKU."
         },
         "privateIPAddresses": {
           "type": "array",
@@ -978,7 +983,7 @@
             "type": "string"
           },
           "readOnly": true,
-          "description": "Private Static Load Balanced IP addresses of the API Management service which is deployed in an Internal Virtual Network in a particular additional location. Available only for Basic, Standard and Premium SKU."
+          "description": "Private Static Load Balanced IP addresses of the API Management service which is deployed in an Internal Virtual Network in a particular additional location. Available only for Basic, Standard, Premium and Isolated SKU."
         },
         "virtualNetworkConfiguration": {
           "$ref": "#/definitions/VirtualNetworkConfiguration",
@@ -1138,7 +1143,7 @@
             "type": "string"
           },
           "readOnly": true,
-          "description": "Public Static Load Balanced IP addresses of the API Management service in Primary region. Available only for Basic, Standard and Premium SKU."
+          "description": "Public Static Load Balanced IP addresses of the API Management service in Primary region. Available only for Basic, Standard, Premium and Isolated SKU."
         },
         "privateIPAddresses": {
           "type": "array",
@@ -1146,7 +1151,7 @@
             "type": "string"
           },
           "readOnly": true,
-          "description": "Private Static Load Balanced IP addresses of the API Management service in Primary region which is deployed in an Internal Virtual Network. Available only for Basic, Standard and Premium SKU."
+          "description": "Private Static Load Balanced IP addresses of the API Management service in Primary region which is deployed in an Internal Virtual Network. Available only for Basic, Standard, Premium and Isolated SKU."
         },
         "virtualNetworkConfiguration": {
           "$ref": "#/definitions/VirtualNetworkConfiguration",
@@ -1246,7 +1251,8 @@
             "Standard",
             "Premium",
             "Basic",
-            "Consumption"
+            "Consumption",
+            "Isolated"
           ],
           "x-ms-enum": {
             "name": "SkuType",
@@ -1271,6 +1277,10 @@
               {
                 "value": "Consumption",
                 "description": "Consumption SKU of Api Management."
+              },
+              {
+                "value": "Isolated",
+                "description": "Isolated SKU of Api Management."
               }
             ]
           }
