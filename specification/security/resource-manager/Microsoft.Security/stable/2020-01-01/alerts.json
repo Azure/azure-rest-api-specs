@@ -531,6 +531,45 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Security/locations/{ascLocation}/alerts/default/simulate": {
+      "post": {
+        "x-ms-examples": {
+          "Simulate security alerts on a subscription": {
+            "$ref": "./examples/Alerts/SimulateAlerts_example.json"
+          }
+        },
+        "tags": [
+          "Alerts"
+        ],
+        "description": "Simulate security alerts",
+        "operationId": "Alerts_SimulateAlerts",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/AscLocation"
+          },
+          {
+            "$ref": "#/parameters/AlertSimulatorRequest"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
+            }
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -951,7 +990,93 @@
           }
         }
       }
-    }
+    },
+    "AlertSimulatorRequest": {
+      "type": "object",
+      "description": "Alert Simulator request body.",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "Alert Simulator request body data.",
+          "$ref": "#/definitions/AlertSimulatorRequestProperties"
+        }
+      }
+    },
+    "AlertSimulatorRequestProperties": {
+      "type": "object",
+      "description": "Alert Simulation request properties.",
+      "discriminator": "kind",
+      "required": [
+        "kind"
+      ],
+      "properties": {
+        "kind": {
+          "type": "string",
+          "description": "The kind of alert simulation.",
+          "enum": [
+            "Bundles"
+          ],
+          "x-ms-enum": {
+            "name": "SimulationKind",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Bundles"
+              }
+            ]
+          }
+        }
+      }
+    },
+    "AlertSimulatorBundlesRequestProperties": {
+      "type": "array",
+      "description": "Simulate alerts according to this bundles.",
+      "x-ms-discriminator-value": "Bundles",
+      "items": {
+        "$ref": "#/definitions/BundleType"
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/AlertSimulatorRequestProperties"
+        }
+      ]
+    },
+    "BundleType" : {
+      "type": "string",
+          "description": "Alert Simulator supported bundles.",
+          "enum": [
+            "AppServices",
+            "KeyVaults",
+            "KubernetesService",
+            "SqlServers",
+            "StorageAccounts",
+            "VirtualMachines"
+          ],
+          "x-ms-enum": {
+            "name": "BundleType",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "AppServices"
+              },
+              {
+                "value": "KeyVaults"
+              },
+              {
+                "value": "KubernetesService"
+              },
+              {
+                "value": "SqlServers"
+              },
+              {
+                "value": "StorageAccounts"
+              },
+              {
+                "value": "VirtualMachines"
+              }
+            ]
+          }
+        }
   },
   "parameters": {
     "AlertName": {
@@ -960,6 +1085,16 @@
       "required": true,
       "type": "string",
       "description": "Name of the alert object",
+      "x-ms-parameter-location": "method"
+    },
+    "AlertSimulatorRequest": {
+      "name": "alertSimulatorRequest",
+      "in": "body",
+      "required": true,
+      "description": "Alert Simulator Request Properties",
+      "schema": {
+        "$ref": "#/definitions/AlertSimulatorRequest"
+      },
       "x-ms-parameter-location": "method"
     }
   }
