@@ -6409,7 +6409,7 @@
             "value": "Activity"
           },
           {
-            "description": "bookmarks.",
+            "description": "bookmarks",
             "value": "Bookmark"
           },
           {
@@ -6761,7 +6761,7 @@
       ],
       "description": "Represents security alert timeline item.",
       "properties": {
-        "id": {
+        "alertId": {
           "type": "string",
           "description": "The alert id."
         },
@@ -6769,7 +6769,7 @@
           "type": "string",
           "description": "The alert product name."
         },
-        "alertDisplayName": {
+        "displayName": {
           "type": "string",
           "description": "The alert name."
         },
@@ -6798,9 +6798,9 @@
         }
       },
       "required": [
-        "id",
+        "alertId",
         "productName",
-        "alertDisplayName",
+        "displayName",
         "severity",
         "endTimeUtc",
         "startTimeUtc",
@@ -6818,9 +6818,9 @@
       ],
       "description": "Represents bookmark timeline item.",
       "properties": {
-        "bookmarkId": {
+        "azureResourceId": {
           "type": "string",
-          "description": "The bookmark id."
+          "description": "The bookmark azure resource id."
         },
         "displayName": {
           "type": "string",
@@ -6859,12 +6859,12 @@
         }
       },
       "required": [
-        "bookmarkId",
+        "azureResourceId",
         "displayName",
         "notes",
         "endTimeUtc",
         "startTimeUtc",
-        "eventTime",
+        "createdBy",
         "labels"
       ],
       "type": "object",
