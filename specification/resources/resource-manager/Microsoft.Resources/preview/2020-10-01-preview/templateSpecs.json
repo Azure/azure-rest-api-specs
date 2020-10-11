@@ -1,0 +1,867 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "TemplateSpecsClient",
+    "description": "The APIs listed in this specification can be used to manage Template Spec resources through the Azure Resource Manager.",
+    "version": "2020-10-01-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Resources/templateSpecs/{templateSpecName}": {
+      "put": {
+        "tags": [
+          "TemplateSpecs"
+        ],
+        "operationId": "TemplateSpecs_CreateOrUpdate",
+        "description": "Creates or updates a Template Spec.",
+        "x-ms-examples": {
+          "TemplateSpecsCreateUpdate": {
+            "$ref": "./examples/TemplateSpecsCreate.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/TemplateSpecNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "templateSpec",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/TemplateSpec"
+            },
+            "description": "Template Spec supplied to the operation."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - The Template Spec update request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/TemplateSpec"
+            }
+          },
+          "201": {
+            "description": "Template Spec created.",
+            "schema": {
+              "$ref": "#/definitions/TemplateSpec"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/TemplateSpecsError"
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "TemplateSpecs"
+        ],
+        "operationId": "TemplateSpecs_Update",
+        "description": "Updates Template Spec tags with specified values.",
+        "x-ms-examples": {
+          "TemplateSpecsPatch": {
+            "$ref": "./examples/TemplateSpecsPatch.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/TemplateSpecNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "templateSpec",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/TemplateSpecUpdateModel"
+            },
+            "description": "Template Spec resource with the tags to be updated."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK -- Template Spec tags are updated.",
+            "schema": {
+              "$ref": "#/definitions/TemplateSpec"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/TemplateSpecsError"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "TemplateSpecs"
+        ],
+        "operationId": "TemplateSpecs_Get",
+        "description": "Gets a Template Spec with a given name.",
+        "x-ms-examples": {
+          "TemplateSpecsGet": {
+            "$ref": "./examples/TemplateSpecsGet.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/TemplateSpecNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - Returns information about the Template Spec.",
+            "schema": {
+              "$ref": "#/definitions/TemplateSpec"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/TemplateSpecsError"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "TemplateSpecs"
+        ],
+        "operationId": "TemplateSpecs_Delete",
+        "description": "Deletes a Template Spec by name. When operation completes, status code 200 returned without content.",
+        "x-ms-examples": {
+          "TemplateSpecsDelete": {
+            "$ref": "./examples/TemplateSpecsDelete.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/TemplateSpecNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - Template Spec deleted."
+          },
+          "204": {
+            "description": "Template Spec does not exist."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/TemplateSpecsError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Resources/templateSpecs/": {
+      "get": {
+        "tags": [
+          "TemplateSpecs"
+        ],
+        "operationId": "TemplateSpecs_ListBySubscription",
+        "description": "Lists all the Template Specs within the specified subscriptions.",
+        "x-ms-examples": {
+          "TemplatesSpecsListBySubscription": {
+            "$ref": "./examples/TemplateSpecsListBySubscription.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - Returns an array of Template Specs.",
+            "schema": {
+              "$ref": "#/definitions/TemplateSpecsListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/TemplateSpecsError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Resources/templateSpecs/": {
+      "get": {
+        "tags": [
+          "TemplateSpecs"
+        ],
+        "operationId": "TemplateSpecs_ListByResourceGroup",
+        "description": "Lists all the Template Specs within the specified resource group.",
+        "x-ms-examples": {
+          "TemplateSpecsListByResourceGroup": {
+            "$ref": "./examples/TemplateSpecsListByResourceGroup.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - Returns an array of Template Specs.",
+            "schema": {
+              "$ref": "#/definitions/TemplateSpecsListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/TemplateSpecsError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Resources/templateSpecs/{templateSpecName}/versions/{templateSpecVersion}": {
+      "put": {
+        "tags": [
+          "TemplateSpecVersions"
+        ],
+        "operationId": "TemplateSpecVersions_CreateOrUpdate",
+        "description": "Creates or updates a Template Spec version.",
+        "x-ms-examples": {
+          "TemplateSpecVersionsCreateUpdate": {
+            "$ref": "./examples/TemplateSpecVersionsCreate.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/TemplateSpecNameParameter"
+          },
+          {
+            "$ref": "#/parameters/TemplateSpecVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "templateSpecVersionModel",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/TemplateSpecVersion"
+            },
+            "description": "Template Spec Version supplied to the operation."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - The Template Spec Version has been successfully updated.",
+            "schema": {
+              "$ref": "#/definitions/TemplateSpecVersion"
+            }
+          },
+          "201": {
+            "description": "Template Spec Version created.",
+            "schema": {
+              "$ref": "#/definitions/TemplateSpecVersion"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/TemplateSpecsError"
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "TemplateSpecVersions"
+        ],
+        "operationId": "TemplateSpecVersions_Update",
+        "description": "Updates Template Spec Version tags with specified values.",
+        "x-ms-examples": {
+          "TemplateSpecsPatch": {
+            "$ref": "./examples/TemplateSpecVersionsPatch.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/TemplateSpecNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/TemplateSpecVersionParameter"
+          },
+          {
+            "name": "templateSpecVersionUpdateModel",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/TemplateSpecVersionUpdateModel"
+            },
+            "description": "Template Spec Version resource with the tags to be updated."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK -- Template Spec Version tags are updated.",
+            "schema": {
+              "$ref": "#/definitions/TemplateSpecVersion"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/TemplateSpecsError"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "TemplateSpecVersions"
+        ],
+        "operationId": "TemplateSpecVersions_Get",
+        "description": "Gets a Template Spec version from a specific Template Spec.",
+        "x-ms-examples": {
+          "TemplateSpecVersionsGet": {
+            "$ref": "./examples/TemplateSpecVersionsGet.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/TemplateSpecNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/TemplateSpecVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - Returns information about the Template Spec version.",
+            "schema": {
+              "$ref": "#/definitions/TemplateSpecVersion"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/TemplateSpecsError"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "TemplateSpecVersions"
+        ],
+        "operationId": "TemplateSpecVersions_Delete",
+        "description": "Deletes a specific version from a Template Spec. When operation completes, status code 200 returned without content.",
+        "x-ms-examples": {
+          "TemplateSpecVersionsDelete": {
+            "$ref": "./examples/TemplateSpecVersionsDelete.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/TemplateSpecNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/TemplateSpecVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - Template Spec Version deleted."
+          },
+          "204": {
+            "description": "Template Spec Version does not exist."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/TemplateSpecsError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Resources/templateSpecs/{templateSpecName}/versions": {
+      "get": {
+        "tags": [
+          "TemplateSpecVersions"
+        ],
+        "operationId": "TemplateSpecVersions_List",
+        "description": "Lists all the Template Spec versions in the specified Template Spec.",
+        "x-ms-examples": {
+          "TemplateSpecVersions_List": {
+            "$ref": "./examples/TemplateSpecVersionsList.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/TemplateSpecNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - Returns an array of Template Spec versions.",
+            "schema": {
+              "$ref": "#/definitions/TemplateSpecVersionsListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/TemplateSpecsError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    }
+  },
+  "definitions": {
+    "TemplateSpec": {
+      "required": [
+        "location"
+      ],
+      "type": "object",
+      "description": "Template Spec object.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AzureResourceBase"
+        }
+      ],
+      "properties": {
+        "location": {
+          "type": "string",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ],
+          "description": "The location of the Template Spec. It cannot be changed after Template Spec creation. It must be one of the supported Azure locations."
+        },
+        "properties": {
+          "description": "Template Spec properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/TemplateSpecProperties"
+        },
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "TemplateSpecProperties": {
+      "type": "object",
+      "description": "Template Spec properties.",
+      "properties": {
+        "description": {
+          "type": "string",
+          "maxLength": 4096,
+          "description": "Template Spec description."
+        },
+        "displayName": {
+          "type": "string",
+          "maxLength": 64,
+          "description": "Template Spec display name."
+        }
+      }
+    },
+    "TemplateSpecsListResult": {
+      "description": "List of Template Specs.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TemplateSpec"
+          },
+          "description": "An array of Template Specs."
+        },
+        "nextLink": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The URL to use for getting the next set of results."
+        }
+      }
+    },
+    "TemplateSpecUpdateModel": {
+      "type": "object",
+      "description": "Template Spec properties to be updated (only tags are currently supported).",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/AzureResourceBase"
+        }
+      ]
+    },
+    "TemplateSpecVersionUpdateModel": {
+      "type": "object",
+      "description": "Template Spec Version properties to be updated (only tags are currently supported).",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/AzureResourceBase"
+        }
+      ]
+    },
+    "AzureResourceBase": {
+      "x-ms-azure-resource": true,
+      "type": "object",
+      "description": "Common properties for all Azure resources.",
+      "properties": {
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "String Id used to locate any resource on Azure."
+        },
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Name of this resource."
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Type of this resource."
+        },
+        "systemData": {
+          "readOnly": true,
+          "type": "object",
+          "description": "Azure Resource Manager metadata containing createdBy and modifiedBy information.",
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/systemData"
+        }
+      }
+    },
+    "TemplateSpecVersion": {
+      "required": [
+        "properties",
+        "location"
+      ],
+      "type": "object",
+      "description": "Template Spec Version object.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AzureResourceBase"
+        }
+      ],
+      "properties": {
+        "location": {
+          "type": "string",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ],
+          "description": "The location of the Template Spec Version. It must match the location of the parent Template Spec."
+        },
+        "properties": {
+          "description": "Template Spec Version properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/TemplateSpecVersionProperties"
+        },
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "TemplateSpecVersionProperties": {
+      "type": "object",
+      "description": "Template Spec Version properties.",
+      "properties": {
+        "artifacts": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TemplateSpecArtifact"
+          },
+          "description": "An array of Template Spec artifacts."
+        },
+        "description": {
+          "type": "string",
+          "maxLength": 4096,
+          "description": "Template Spec version description."
+        },
+        "template": {
+          "type": "object",
+          "description": "The Azure Resource Manager template content."
+        },
+        "uiDefinition": {
+          "type": "object",
+          "description": "The Azure Resource Manager template UI definition content"
+        }
+      }
+    },
+    "TemplateSpecVersionsListResult": {
+      "description": "List of Template Specs versions",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TemplateSpecVersion"
+          },
+          "description": "An array of Template Spec versions."
+        },
+        "nextLink": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The URL to use for getting the next set of results."
+        }
+      }
+    },
+    "TemplateSpecArtifact": {
+      "type": "object",
+      "discriminator": "kind",
+      "description": "Represents a Template Spec artifact.",
+      "properties": {
+        "path": {
+          "type": "string",
+          "description": "A filesystem safe relative path of the artifact."
+        },
+        "kind": {
+          "type": "string",
+          "description": "The kind of artifact.",
+          "enum": [
+            "template"
+          ],
+          "x-ms-enum": {
+            "name": "TemplateSpecArtifactKind",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "template",
+                "description": "The artifact represents an embedded Azure Resource Manager template."
+              }
+            ]
+          }
+        }
+      },
+      "required": [
+        "kind",
+        "path"
+      ]
+    },
+    "TemplateSpecTemplateArtifact": {
+      "type": "object",
+      "x-ms-discriminator-value": "template",
+      "description": "Represents a Template Spec artifact containing an embedded Azure Resource Manager template.",
+      "properties": {
+        "template": {
+          "type": "object",
+          "description": "The Azure Resource Manager template."
+        }
+      },
+      "required": [
+        "template"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/TemplateSpecArtifact"
+        }
+      ]
+    },
+    "TemplateSpecsError": {
+      "properties": {
+        "error": {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ErrorResponse"
+        }
+      },
+      "description": "Template Specs error response."
+    }
+  },
+  "parameters": {
+    "SubscriptionIdParameter": {
+      "name": "subscriptionId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "client",
+      "description": "Subscription Id which forms part of the URI for every service call."
+    },
+    "ResourceGroupNameParameter": {
+      "name": "resourceGroupName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the resource group. The name is case insensitive.",
+      "pattern": "^[-\\w\\._\\(\\)]+$",
+      "minLength": 1,
+      "maxLength": 90,
+      "x-ms-parameter-location": "method"
+    },
+    "TemplateSpecNameParameter": {
+      "name": "templateSpecName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "pattern": "^[-\\w\\._\\(\\)]+$",
+      "description": "Name of the Template Spec.",
+      "minLength": 1,
+      "maxLength": 90,
+      "x-ms-parameter-location": "method"
+    },
+    "TemplateSpecVersionParameter": {
+      "name": "templateSpecVersion",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "pattern": "^[-\\w\\._\\(\\)]+$",
+      "description": "The version of the Template Spec.",
+      "minLength": 1,
+      "maxLength": 90,
+      "x-ms-parameter-location": "method"
+    },
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "client",
+      "description": "Client Api version."
+    }
+  }
+}
