@@ -3,7 +3,7 @@
   "info": {
     "title": "NetworkManagementClient",
     "description": "The Microsoft Azure Network management API provides a RESTful set of web services that interact with Microsoft Azure Networks service to manage your network resources. The API has entities that capture the relationship between an end user and the Microsoft Azure Networks service.",
-    "version": "2020-06-01"
+    "version": "2020-07-01"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -78,7 +78,7 @@
           }
         },
         "x-ms-examples": {
-          "Get_azureWebCategory": {
+          "Get Azure Web Category by name": {
             "$ref": "./examples/azureWebCategoryGet.json"
           }
         }
@@ -89,7 +89,7 @@
         "tags": [
           "AzureWebCategories"
         ],
-        "operationId": "AzureWebCategories_ListAll",
+        "operationId": "AzureWebCategories_ListBySubscription",
         "description": "Gets all the Azure Web Categorys in a subscription.",
         "parameters": [
           {
@@ -109,7 +109,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "./network.json#/definitions/CloudError"
+              "$ref": "./network.json#/definitions/Error"
             }
           }
         },
