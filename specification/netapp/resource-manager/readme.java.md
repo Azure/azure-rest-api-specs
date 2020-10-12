@@ -17,6 +17,7 @@ output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-netapp
 ``` yaml $(java) && $(multiapi)
 batch:
   - tag: package-netapp-2020-06-01
+  - tag: package-netapp-2020-05-01    
   - tag: package-netapp-2020-03-01  
   - tag: package-netapp-2020-02-01
   - tag: package-netapp-2019-11-01
@@ -36,6 +37,19 @@ Please also specify the `--azure-libraries-for-java-folder=<path to the root dir
 java:
   namespace: com.microsoft.azure.management.netapp.v2020_06_01
   output-folder: $(azure-libraries-for-java-folder)/sdk/netapp/mgmt-v2020_06_01
+regenerate-manager: true
+generate-interface: true
+```
+
+### Tag: package-netapp-2020-05-01 and java
+
+These settings apply only when `--tag=package-netapp-2020-05-01 --java` is specified on the command line.
+Please also specify the `--azure-libraries-for-java-folder=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-netapp-2020-05-01' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.netapp.v2020_05_01
+  output-folder: $(azure-libraries-for-java-folder)/sdk/netapp/mgmt-v2020_05_01
 regenerate-manager: true
 generate-interface: true
 ```
