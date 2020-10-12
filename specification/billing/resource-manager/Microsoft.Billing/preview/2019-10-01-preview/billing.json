@@ -5599,6 +5599,174 @@
           }
         }
       }
+    },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/reservationsOrders/{reservationOrderId}": {
+      "get": {
+        "tags": [
+          "Reservations"
+        ],
+        "x-ms-examples": {
+          "ReservationOrderByBillingAccount": {
+            "$ref": "./examples/ReservationOrderByBillingAccount.json"
+          }
+        },
+        "operationId": "Reservations_GetReservationOrderByBillingAccount",
+        "description": "Gets a reservation order for a billing account.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/billingAccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/reservationOrderIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ReservationOrder"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/reservationsOrders/{reservationOrderId}": {
+      "get": {
+        "tags": [
+          "Reservations"
+        ],
+        "x-ms-examples": {
+          "ReservationOrderByBillingProfile": {
+            "$ref": "./examples/ReservationOrderByBillingProfile.json"
+          }
+        },
+        "operationId": "Reservations_GetReservationOrderByBillingProfile",
+        "description": "Gets a reservation order for a billing profile.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/billingAccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/billingProfileNameParameter"
+          },
+          {
+            "$ref": "#/parameters/reservationOrderIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ReservationOrder"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/reservationsOrders/{reservationOrderId}/reservations/{reservationId}": {
+      "get": {
+        "tags": [
+          "Reservations"
+        ],
+        "x-ms-examples": {
+          "ReservationByBillingAccount": {
+            "$ref": "./examples/ReservationByBillingAccount.json"
+          }
+        },
+        "operationId": "Reservations_GetReservationByBillingAccount",
+        "description": "Gets a reservation for a billing account and reservatino order.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/billingAccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/reservationOrderIdParameter"
+          },
+          {
+            "$ref": "#/parameters/reservationIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ReservationResponse"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/reservationsOrders/{reservationOrderId}/reservations/{reservationId}": {
+      "get": {
+        "tags": [
+          "Reservations"
+        ],
+        "x-ms-examples": {
+          "ReservationByBillingProfile": {
+            "$ref": "./examples/ReservationByBillingProfile.json"
+          }
+        },
+        "operationId": "Reservations_GetReservationByBillingProfile",
+        "description": "Gets a reservation order for a billing profile.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/billingAccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/billingProfileNameParameter"
+          },
+          {
+            "$ref": "#/parameters/reservationOrderIdParameter"
+          },
+          {
+            "$ref": "#/parameters/reservationIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ReservationResponse"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -7252,6 +7420,156 @@
         }
       }
     },
+    "ReservationTerm": {
+      "type": "string",
+      "description": "Represent the term of Reservation.",
+      "enum": [
+        "P1Y",
+        "P3Y",
+        "P5Y"
+      ],
+      "x-ms-enum": {
+        "name": "ReservationTerm",
+        "modelAsString": true
+      }
+    },
+    "ReservationOrder": {
+      "type": "object",
+      "x-ms-azure-resource": true,
+      "properties": {
+        "etag": {
+          "type": "integer"
+        },
+        "id": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Identifier of the reservation order"
+        },
+        "name": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Name of the reservation order"
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ReservationOrderProperties"
+        },
+        "type": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Type of resource. \"Microsoft.Capacity/reservations\""
+        }
+      }
+    },
+    "ReservationOrderProperties": {
+      "description": "Reservation order properties.",
+      "properties": {
+        "productType": {
+          "description": "The product type.",
+          "type": "string",
+          "readOnly": true
+        },
+        "tenantId": {
+          "description": "The id of the tenant in which the product is used.",
+          "type": "string",
+          "readOnly": true
+        },
+        "effectiveDate": {
+          "description": "The date from which the reservation is effective.",
+          "type": "string",
+          "readOnly": true
+        },
+        "requestPurchaseTime": {
+          "description": "The date and time of the purchase.",
+          "type": "string",
+          "readOnly": true
+        },
+        "expiryDate": {
+          "description": "The date when the reservation will expire.",
+          "type": "string",
+          "readOnly": true
+        },
+        "reviewDate": {
+          "description": "The review date.",
+          "type": "string",
+          "readOnly": true
+        },
+        "endDate": {
+          "description": "The date when the reservation will end.",
+          "type": "string",
+          "readOnly": true
+        },
+        "term": {
+          "description": "The term length of the reservation.",
+          "type": "string",
+          "enum": [
+            "None",
+            "P1Y",
+            "P3Y",
+            "P5Y"
+          ],
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "ReservationTerm",
+            "modelAsString": true
+          }
+        },
+        "reservationName": {
+          "description": "The name of the reservation.",
+          "type": "string",
+          "readOnly": true
+        },
+        "billingScope": {
+          "description": "The billing scope.",
+          "type": "string",
+          "readOnly": true
+        },
+        "billingPlanDetails": {
+          "description": "The details of the billing plan.",
+          "type": "string",
+          "readOnly": true
+        },
+        "state": {
+          "description": "The state of the reservation order.",
+          "type": "string",
+          "readOnly": true
+        },
+        "subState": {
+          "description": "The substate of the reservation order.",
+          "type": "string",
+          "readOnly": true
+        },
+        "reservations": {
+          "description": "The list of reservations in the order.",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "type": "string"
+          }
+        },
+        "enrollmentId": {
+          "description": "The enrollment ID.",
+          "type": "string",
+          "readOnly": true
+        },
+        "originalQuantity": {
+          "description": "The original quantity of reservations.",
+          "type": "integer",
+          "format": "int32",
+          "readOnly": true
+        },
+        "extendedErrorInformation": {
+          "description": "The extended error information.",
+          "type": "object",
+          "readOnly": true
+        },
+        "benefitScopeBillingAliasId": {
+          "description": "The benefit scope billing alias ID.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
     "Reseller": {
       "description": "Details of the reseller.",
       "properties": {
@@ -7264,6 +7582,233 @@
           "description": "The name of the reseller.",
           "type": "string",
           "readOnly": true
+        }
+      }
+    },
+    "SkuName": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        }
+      }
+    },
+    "AppliedScopes": {
+      "type": "array",
+      "description": "List of the subscriptions that the benefit will be applied. Do not specify if AppliedScopeType is Shared.",
+      "items": {
+        "type": "string",
+        "minItems": 1,
+        "maxItems": 1
+      }
+    },
+    "AppliedScopeType": {
+      "type": "string",
+      "description": "Type of the Applied Scope.",
+      "enum": [
+        "Single",
+        "Shared"
+      ],
+      "x-ms-enum": {
+        "name": "AppliedScopeType",
+        "modelAsString": true
+      }
+    },
+    "ReservationResponse": {
+      "type": "object",
+      "x-ms-azure-resource": true,
+      "properties": {
+        "location": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The Azure Region where the reserved resource lives."
+        },
+        "etag": {
+          "type": "integer"
+        },
+        "id": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Identifier of the reservation"
+        },
+        "name": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Name of the reservation"
+        },
+        "sku": {
+          "$ref": "#/definitions/SkuName"
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ReservationProperties"
+        },
+        "type": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Type of resource. \"Microsoft.Capacity/reservationOrders/reservations\""
+        }
+      }
+    },
+    "ReservedResourceType": {
+      "type": "string",
+      "description": "The type of the resource that is being reserved.",
+      "enum": [
+        "VirtualMachines",
+        "SqlDatabases",
+        "SuseLinux",
+        "CosmosDb",
+        "RedHat",
+        "SqlDataWarehouse",
+        "VMwareCloudSimple",
+        "RedHatOsa",
+        "Databricks",
+        "AppService",
+        "ManagedDisk",
+        "BlockBlob",
+        "RedisCache",
+        "AzureDataExplorer",
+        "MySql",
+        "MariaDb",
+        "PostgreSql",
+        "DedicatedHost",
+        "SapHana",
+        "SqlAzureHybridBenefit",
+        "AVS"
+      ],
+      "x-ms-enum": {
+        "name": "ReservedResourceType",
+        "modelAsString": true
+      }
+    },
+    "ReservationProperties": {
+      "type": "object",
+      "properties": {
+        "displayName": {
+          "type": "string",
+          "description": "Friendly name for user to easily identify the reservation"
+        },
+        "appliedScopes": {
+          "$ref": "#/definitions/AppliedScopes"
+        },
+        "appliedScopeType": {
+          "$ref": "#/definitions/AppliedScopeType"
+        },
+        "reservedResourceType": {
+          "$ref": "#/definitions/ReservedResourceType"
+        },
+        "quantity": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Quantity of the SKUs that are part of the Reservation."
+        },
+        "provisioningState": {
+          "type": "string",
+          "description": "Current state of the reservation."
+        },
+        "expiryDate": {
+          "type": "string",
+          "format": "date",
+          "description": "This is the date when the Reservation will expire."
+        },
+        "reviewDate": {
+          "description": "The review date.",
+          "type": "string",
+          "readOnly": true
+        },
+        "provisioningSubState": {
+          "type": "string",
+          "description": "Current sub state of the reservation."
+        },
+        "displayProvisioningState": {
+          "type": "string",
+          "description": "Provisioning state shown in UI."
+        },
+        "userFriendlyRenewState": {
+          "type": "string",
+          "description": "User friendly renew state."
+        },
+        "userFriendlyAppliedScopeType": {
+          "type": "string",
+          "description": "User friendly applied scope type."
+        },
+        "effectiveDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "DateTime of the Reservation starting when this version is effective from."
+        },
+        "skuDescription": {
+          "type": "string",
+          "description": "SKU description."
+        },
+        "term": {
+          "description": "The term length of the reservation.",
+          "type": "string",
+          "enum": [
+            "None",
+            "P1Y",
+            "P3Y",
+            "P5Y"
+          ],
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "ReservationTerm",
+            "modelAsString": true
+          }
+        },
+        "renew": {
+          "type": "boolean",
+          "description": "Is reservation set to auto-renew."
+        },
+        "renewSource": {
+          "type": "string",
+          "description": "Reservation Id of the reservation from which this reservation is renewed."
+        },
+        "utilization": {
+          "$ref": "#/definitions/Utilization"
+        }
+      }
+    },
+    "UtilizationAggregate": {
+      "description": "Aggregate utilization data.",
+      "properties": {
+        "grain": {
+          "readOnly": true,
+          "type": "number",
+          "description": "Grain value of the aggregate data."
+        },
+        "grainUnit": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Unit of the grain value."
+        },
+        "value": {
+          "readOnly": true,
+          "type": "number",
+          "description": "Utilization value."
+        },
+        "valueUnit": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Unit of the utilization value."
+        }
+      }
+    },
+    "Utilization": {
+      "description": "Utilization data for the reservation.",
+      "properties": {
+        "trend": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Represents the 7-day trend for a reservation"
+        },
+        "aggregates": {
+          "description": "The list of utilization aggregates.",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/UtilizationAggregate"
+          }
         }
       }
     },
@@ -8982,6 +9527,22 @@
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method"
+    },
+    "reservationOrderIdParameter": {
+      "name": "reservationOrderId",
+      "x-ms-parameter-location": "method",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Order Id of the reservation"
+    },
+    "reservationIdParameter": {
+      "name": "reservationId",
+      "x-ms-parameter-location": "method",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Reservation Id of the resevation"
     }
   },
   "security": [
