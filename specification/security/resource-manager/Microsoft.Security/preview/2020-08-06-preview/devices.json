@@ -67,6 +67,21 @@
             "required": false,
             "type": "string",
             "description": "Skip token used for pagination"
+          },
+          {
+            "in": "query",
+            "name": "$managedType",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "Managed",
+              "Unmanaged"
+            ],
+            "description": "Get devices only from specific type, Managed or Unmanaged.",
+            "x-ms-enum": {
+              "name": "ManagementState",
+              "modelAsString": true
+            }
           }
         ],
         "responses": {
@@ -121,6 +136,21 @@
             "required": false,
             "type": "string",
             "description": "Skip token used for pagination"
+          },
+          {
+            "in": "query",
+            "name": "$managedType",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "Managed",
+              "Unmanaged"
+            ],
+            "description": "Get devices only from specific type, Managed or Unmanaged.",
+            "x-ms-enum": {
+              "name": "ManagementState",
+              "modelAsString": true
+            }
           }
         ],
         "responses": {
@@ -389,6 +419,29 @@
           "type": "string",
           "format": "date-time",
           "description": "last time the device was scanning."
+        },
+        "riskScore": {
+          "readOnly": true,
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0,
+          "maximum": 100,
+          "description": "risk score of the device."
+        },
+        "sensorName": {
+          "readOnly": true,
+          "type": "string",
+          "description": "When the device is unmanaged, the sensor that scanned this device."
+        },
+        "siteName": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The sensor site name."
+        },
+        "zoneName": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The sensor zone name."
         }
       }
     },
