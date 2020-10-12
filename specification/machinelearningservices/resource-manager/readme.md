@@ -128,7 +128,6 @@ input-file:
 - Microsoft.MachineLearningServices/preview/2020-09-01-preview/machineLearningServices.json
 - Microsoft.MachineLearningServices/preview/2020-09-01-preview/environmentContainer.json
 - Microsoft.MachineLearningServices/preview/2020-09-01-preview/environmentSpecification.json
-- Microsoft.MachineLearningServices/preview/2020-09-01-preview/environmentBuild.json
 ```
 
 ### Tag: package-2020-05-01-preview
