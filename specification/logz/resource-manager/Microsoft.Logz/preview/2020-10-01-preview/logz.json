@@ -1,0 +1,1433 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Microsoft.Logz",
+    "version": "2020-10-01-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Logz/monitors/{monitorName}/listApiKeys": {
+      "post": {
+        "tags": [
+          "Monitors"
+        ],
+        "summary": "List the api keys for a given monitor resource.",
+        "operationId": "Monitors_ListApiKeys",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/MonitorNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/LogzApiKeyListResponse"
+            }
+          },
+          "default": {
+            "description": "Default error response.",
+            "schema": {
+              "$ref": "#/definitions/ResourceProviderDefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "ApiKeys_List": {
+            "$ref": "./examples/ApiKeys_List.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Logz/monitors/{monitorName}/listMonitoredResources": {
+      "post": {
+        "tags": [
+          "Monitors"
+        ],
+        "summary": "List the resources currently being monitored by the Logz monitor resource.",
+        "operationId": "Monitors_ListMonitoredResources",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/MonitorNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/MonitoredResourceListResponse"
+            }
+          },
+          "default": {
+            "description": "Default error response.",
+            "schema": {
+              "$ref": "#/definitions/ResourceProviderDefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "MonitoredResources_List": {
+            "$ref": "./examples/MonitoredResources_List.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Logz/operations": {
+      "get": {
+        "tags": [
+          "Operations"
+        ],
+        "summary": "List all operations provided by Microsoft.Logz.",
+        "operationId": "Operations_List",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "Default error response.",
+            "schema": {
+              "$ref": "#/definitions/ResourceProviderDefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Operations_List": {
+            "$ref": "./examples/Operations_List.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Logz/monitors": {
+      "get": {
+        "tags": [
+          "Monitors"
+        ],
+        "summary": "List all monitors under the specified subscription.",
+        "operationId": "Monitors_ListBySubscription",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/LogzMonitorResourceListResponse"
+            }
+          },
+          "default": {
+            "description": "Default error response.",
+            "schema": {
+              "$ref": "#/definitions/ResourceProviderDefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Monitors_List": {
+            "$ref": "./examples/Monitors_List.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Logz/monitors": {
+      "get": {
+        "tags": [
+          "Monitors"
+        ],
+        "summary": "List all monitors under the specified resource group.",
+        "operationId": "Monitors_ListByResourceGroup",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/LogzMonitorResourceListResponse"
+            }
+          },
+          "default": {
+            "description": "Default error response.",
+            "schema": {
+              "$ref": "#/definitions/ResourceProviderDefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Monitors_ListByResourceGroup": {
+            "$ref": "./examples/Monitors_ListByResourceGroup.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Logz/monitors/{monitorName}": {
+      "get": {
+        "tags": [
+          "Monitors"
+        ],
+        "summary": "Get the properties of a specific monitor resource.",
+        "operationId": "Monitors_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/MonitorNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/LogzMonitorResource"
+            }
+          },
+          "default": {
+            "description": "Default error response.",
+            "schema": {
+              "$ref": "#/definitions/ResourceProviderDefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Monitors_Get": {
+            "$ref": "./examples/Monitors_Get.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Monitors"
+        ],
+        "summary": "Create a monitor resource.",
+        "operationId": "Monitors_Create",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options" : {
+          "final-state-via" : "azure-async-operation"
+        },
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/MonitorNameParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/LogzMonitorResource"
+            }
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/LogzMonitorResource"
+            }
+          },
+          "201": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/LogzMonitorResource"
+            }
+          },
+          "default": {
+            "description": "Default error response.",
+            "schema": {
+              "$ref": "#/definitions/ResourceProviderDefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Monitors_Create": {
+            "$ref": "./examples/Monitors_Create.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Monitors"
+        ],
+        "summary": "Update a monitor resource.",
+        "operationId": "Monitors_Update",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/MonitorNameParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/LogzMonitorResourceUpdateParameters"
+            }
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/LogzMonitorResource"
+            }
+          },
+          "default": {
+            "description": "Default error response.",
+            "schema": {
+              "$ref": "#/definitions/ResourceProviderDefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Monitors_Update": {
+            "$ref": "./examples/Monitors_Update.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Monitors"
+        ],
+        "summary": "Delete a monitor resource.",
+        "operationId": "Monitors_Delete",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/MonitorNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "202": {
+            "description": "Success"
+          },
+          "204": {
+            "description": "Success"
+          },
+          "default": {
+            "description": "Default error response.",
+            "schema": {
+              "$ref": "#/definitions/ResourceProviderDefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Monitors_Delete": {
+            "$ref": "./examples/Monitors_Delete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Logz/monitors/{monitorName}/tagRules": {
+      "get": {
+        "tags": [
+          "TagRules"
+        ],
+        "summary": "List the tag rules for a given monitor resource.",
+        "operationId": "TagRules_List",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/MonitorNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/MonitoringTagRulesListResponse"
+            }
+          },
+          "default": {
+            "description": "Default error response.",
+            "schema": {
+              "$ref": "#/definitions/ResourceProviderDefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "TagRules_List": {
+            "$ref": "./examples/TagRules_List.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Logz/monitors/{monitorName}/tagRules/{ruleSetName}": {
+      "put": {
+        "tags": [
+          "TagRules"
+        ],
+        "summary": "Create or update a tag rule set for a given monitor resource.",
+        "operationId": "TagRules_CreateOrUpdate",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options" : {
+          "final-state-via" : "azure-async-operation"
+        },
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/MonitorNameParameter"
+          },
+          {
+            "in": "path",
+            "name": "ruleSetName",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/MonitoringTagRules"
+            }
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/MonitoringTagRules"
+            }
+          },
+          "default": {
+            "description": "Default error response.",
+            "schema": {
+              "$ref": "#/definitions/ResourceProviderDefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "TagRules_CreateOrUpdate": {
+            "$ref": "./examples/TagRules_CreateOrUpdate.json"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "TagRules"
+        ],
+        "summary": "Get a tag rule set for a given monitor resource.",
+        "operationId": "TagRules_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/MonitorNameParameter"
+          },
+          {
+            "in": "path",
+            "name": "ruleSetName",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/MonitoringTagRules"
+            }
+          },
+          "default": {
+            "description": "Default error response.",
+            "schema": {
+              "$ref": "#/definitions/ResourceProviderDefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "TagRules_Get": {
+            "$ref": "./examples/TagRules_Get.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Logz/monitors/{monitorName}/singleSignOnConfigurations": {
+      "get": {
+        "tags": [
+          "SingleSignOn"
+        ],
+        "summary": "List the single sign-on configurations for a given monitor resource.",
+        "operationId": "SingleSignOn_List",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/MonitorNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/LogzSingleSignOnResourceListResponse"
+            }
+          },
+          "default": {
+            "description": "Default error response.",
+            "schema": {
+              "$ref": "#/definitions/ResourceProviderDefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "SingleSignOnConfigurations_List": {
+            "$ref": "./examples/SingleSignOnConfigurations_List.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Logz/monitors/{monitorName}/singleSignOnConfigurations/{configurationName}": {
+      "put": {
+        "tags": [
+          "SingleSignOn"
+        ],
+        "summary": "Configures single-sign-on for this resource.",
+        "operationId": "SingleSignOn_CreateOrUpdate",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options" : {
+          "final-state-via" : "azure-async-operation"
+        },
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/MonitorNameParameter"
+          },
+          {
+            "in": "path",
+            "name": "configurationName",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/LogzSingleSignOnResource"
+            }
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/LogzSingleSignOnResource"
+            }
+          },
+          "201": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/LogzSingleSignOnResource"
+            }
+          },
+          "default": {
+            "description": "Default error response.",
+            "schema": {
+              "$ref": "#/definitions/ResourceProviderDefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SingleSignOnConfigurations_CreateOrUpdate": {
+            "$ref": "./examples/SingleSignOnConfigurations_CreateOrUpdate.json"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "SingleSignOn"
+        ],
+        "summary": "Gets the Logz single sign-on resource for the given Monitor.",
+        "operationId": "SingleSignOn_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/MonitorNameParameter"
+          },
+          {
+            "in": "path",
+            "name": "configurationName",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/LogzSingleSignOnResource"
+            }
+          },
+          "default": {
+            "description": "Default error response.",
+            "schema": {
+              "$ref": "#/definitions/ResourceProviderDefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SingleSignOnConfigurations_Get": {
+            "$ref": "./examples/SingleSignOnConfigurations_Get.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "LogzApiKey": {
+      "required": [
+        "key"
+      ],
+      "type": "object",
+      "properties": {
+        "createdBy": {
+          "description": "The user that created the API key.",
+          "type": "string"
+        },
+        "name": {
+          "description": "The name of the API key.",
+          "type": "string"
+        },
+        "key": {
+          "description": "The value of the API key.",
+          "type": "string"
+        },
+        "created": {
+          "description": "The time of creation of the API key.",
+          "type": "string"
+        }
+      }
+    },
+    "LogzApiKeyListResponse": {
+      "description": "Response of a list operation.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Results of a list operation.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/LogzApiKey"
+          }
+        },
+        "nextLink": {
+          "description": "Link to the next set of results, if any.",
+          "type": "string"
+        }
+      }
+    },
+    "ErrorResponseBody": {
+      "x-ms-external": true,
+      "properties": {
+        "error": {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ErrorResponse"
+        }
+      },
+      "description": "An error response from the service."
+    },
+    "ResourceProviderDefaultErrorResponse": {
+      "type": "object",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/ErrorResponseBody"
+        }
+      }
+    },
+    "MonitoredResource": {
+      "description": "The properties of a resource currently being monitored by the Logz monitor resource.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "The ARM id of the resource.",
+          "type": "string"
+        },
+        "sendingMetrics": {
+          "description": "Flag indicating if resource is sending metrics to Logz.",
+          "type": "boolean"
+        },
+        "reasonForMetricsStatus": {
+          "description": "Reason for why the resource is sending metrics (or why it is not sending).",
+          "type": "string"
+        },
+        "sendingLogs": {
+          "description": "Flag indicating if resource is sending logs to Logz.",
+          "type": "boolean"
+        },
+        "reasonForLogsStatus": {
+          "description": "Reason for why the resource is sending logs (or why it is not sending).",
+          "type": "string"
+        }
+      }
+    },
+    "MonitoredResourceListResponse": {
+      "description": "Response of a list operation.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Results of a list operation.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MonitoredResource"
+          }
+        },
+        "nextLink": {
+          "description": "Link to the next set of results, if any.",
+          "type": "string"
+        }
+      }
+    },
+    "OperationDisplay": {
+      "description": "The object that represents the operation.",
+      "type": "object",
+      "properties": {
+        "provider": {
+          "description": "Service provider, i.e., Microsoft.Logz.",
+          "type": "string"
+        },
+        "resource": {
+          "description": "Type on which the operation is performed, e.g., 'monitors'.",
+          "type": "string"
+        },
+        "operation": {
+          "description": "Operation type, e.g., read, write, delete, etc.",
+          "type": "string"
+        },
+        "description": {
+          "description": "Description of the operation, e.g., 'Write monitors'.",
+          "type": "string"
+        }
+      }
+    },
+    "OperationResult": {
+      "description": "A Microsoft.Logz REST API operation.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Operation name, i.e., {provider}/{resource}/{operation}.",
+          "type": "string"
+        },
+        "display": {
+          "$ref": "#/definitions/OperationDisplay"
+        }
+      }
+    },
+    "OperationListResult": {
+      "description": "Result of GET request to list the Microsoft.Logz operations.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "List of operations supported by the Microsoft.Logz provider.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/OperationResult"
+          }
+        },
+        "nextLink": {
+          "description": "URL to get the next set of operation list results if there are any.",
+          "type": "string"
+        }
+      }
+    },
+    "ResourceSku": {
+      "required": [
+        "name"
+      ],
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Name of the SKU.",
+          "type": "string"
+        }
+      }
+    },
+    "ProvisioningState": {
+      "enum": [
+        "Accepted",
+        "Creating",
+        "Updating",
+        "Deleting",
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Deleted",
+        "NotSpecified"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "modelAsString": true,
+        "name": "ProvisioningState"
+      }
+    },
+    "MonitoringStatus": {
+      "description": "Flag specifying if the resource monitoring is enabled or disabled.",
+      "enum": [
+        "Enabled",
+        "Disabled"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "modelAsString": true,
+        "name": "MonitoringStatus"
+      }
+    },
+    "MarketplaceSubscriptionStatus": {
+      "description": "Flag specifying the Marketplace Subscription Status of the resource. If payment is not made in time, the resource will go in Suspended state.",
+      "enum": [
+        "Active",
+        "Suspended"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "modelAsString": true,
+        "name": "MarketplaceSubscriptionStatus"
+      }
+    },
+    "LogzOrganizationProperties": {
+      "type": "object",
+      "properties": {
+        "companyName": {
+          "description": "Name of the Logz organization.",
+          "type": "string",
+          "readOnly": true
+        },
+        "id": {
+          "description": "Id of the Logz organization.",
+          "type": "string",
+          "readOnly": true
+        },
+        "apiKey": {
+          "description": "Api key associated to the Logz organization.",
+          "type": "string",
+          "x-ms-mutability": [
+            "create"
+          ]
+        },
+        "enterpriseAppId": {
+          "description": "The Id of the Enterprise App used for Single sign on.",
+          "type": "string",
+          "x-ms-mutability": [
+            "create"
+          ]
+        }
+      }
+    },
+    "UserInfo": {
+      "type": "object",
+      "properties": {
+        "firstName": {
+          "description": "Name of the user",
+          "maxLength": 50,
+          "type": "string"
+        },
+        "lastName": {
+          "description": "Name of the user",
+          "maxLength": 50,
+          "type": "string"
+        },
+        "emailAddress": {
+          "description": "Email of the user used by Logz for contacting them if needed",
+          "pattern": "^[A-Za-z0-9._%+-]+@(?:[A-Za-z0-9-]+\\.)+[A-Za-z]{2,}$",
+          "type": "string"
+        },
+        "phoneNumber": {
+          "description": "Phone number of the user used by Logz for contacting them if needed",
+          "maxLength": 40,
+          "type": "string"
+        }
+      }
+    },
+    "PlanData": {
+      "type": "object",
+      "properties": {
+        "usageType": {
+          "description": "different usage type like PAYG/COMMITTED. this could be enum",
+          "maxLength": 50,
+          "type": "string"
+        },
+        "billingCycle": {
+          "description": "different billing cycles like MONTHLY/WEEKLY. this could be enum",
+          "maxLength": 50,
+          "type": "string"
+        },
+        "planDetails": {
+          "description": "plan id as published by Logz",
+          "maxLength": 50,
+          "type": "string"
+        },
+        "effectiveDate": {
+          "format": "date-time",
+          "description": "date when plan was applied",
+          "type": "string"
+        }
+      }
+    },
+    "LiftrResourceCategories": {
+      "enum": [
+        "Unknown",
+        "MonitorLogs"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "modelAsString": true,
+        "name": "LiftrResourceCategories"
+      },
+      "readOnly": true
+    },
+    "MonitorProperties": {
+      "description": "Properties specific to the monitor resource.",
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState"
+        },
+        "monitoringStatus": {
+          "$ref": "#/definitions/MonitoringStatus"
+        },
+        "marketplaceSubscriptionStatus": {
+          "$ref": "#/definitions/MarketplaceSubscriptionStatus"
+        },
+        "logzOrganizationProperties": {
+          "$ref": "#/definitions/LogzOrganizationProperties"
+        },
+        "userInfo": {
+          "$ref": "#/definitions/UserInfo"
+        },
+        "planData": {
+          "$ref": "#/definitions/PlanData"
+        },
+        "liftrResourceCategory": {
+          "$ref": "#/definitions/LiftrResourceCategories"
+        },
+        "liftrResourcePreference": {
+          "description": "The priority of the resource.",
+          "format": "int32",
+          "type": "integer",
+          "readOnly": true
+        }
+      }
+    },
+    "ManagedIdentityTypes": {
+      "enum": [
+        "SystemAssigned",
+        "UserAssigned"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "modelAsString": true,
+        "name": "ManagedIdentityTypes"
+      }
+    },
+    "IdentityProperties": {
+      "type": "object",
+      "properties": {
+        "principalId": {
+          "description": "The identity ID.",
+          "type": "string",
+          "readOnly": true
+        },
+        "tenantId": {
+          "description": "The tenant ID of resource.",
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "$ref": "#/definitions/ManagedIdentityTypes"
+        }
+      }
+    },
+    "LogzMonitorResource": {
+      "required": [
+        "location"
+      ],
+      "type": "object",
+      "x-ms-azure-resource": true,
+      "properties": {
+        "id": {
+          "description": "ARM id of the monitor resource.",
+          "type": "string",
+          "readOnly": true
+        },
+        "name": {
+          "description": "Name of the monitor resource.",
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "description": "The type of the monitor resource.",
+          "type": "string",
+          "readOnly": true
+        },
+        "sku": {
+          "$ref": "#/definitions/ResourceSku"
+        },
+        "properties": {
+          "$ref": "#/definitions/MonitorProperties"
+        },
+        "identity": {
+          "$ref": "#/definitions/IdentityProperties"
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "location": {
+          "type": "string"
+        }
+      }
+    },
+    "LogzMonitorResourceListResponse": {
+      "description": "Response of a list operation.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Results of a list operation.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/LogzMonitorResource"
+          }
+        },
+        "nextLink": {
+          "description": "Link to the next set of results, if any.",
+          "type": "string"
+        }
+      }
+    },
+    "MonitorUpdateProperties": {
+      "description": "The set of properties that can be update in a PATCH request to a monitor resource.",
+      "type": "object",
+      "properties": {
+        "monitoringStatus": {
+          "$ref": "#/definitions/MonitoringStatus"
+        }
+      }
+    },
+    "LogzMonitorResourceUpdateParameters": {
+      "description": "The parameters for a PATCH request to a monitor resource.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/MonitorUpdateProperties"
+        },
+        "tags": {
+          "description": "The new tags of the monitor resource.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "TagAction": {
+      "description": "Valid actions for a filtering tag. Exclusion takes priority over inclusion.",
+      "enum": [
+        "Include",
+        "Exclude"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "modelAsString": true,
+        "name": "TagAction"
+      }
+    },
+    "FilteringTag": {
+      "description": "The definition of a filtering tag. Filtering tags are used for capturing resources and include/exclude them from being monitored.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "The name (also known as the key) of the tag.",
+          "type": "string"
+        },
+        "value": {
+          "description": "The value of the tag.",
+          "type": "string"
+        },
+        "action": {
+          "$ref": "#/definitions/TagAction"
+        }
+      }
+    },
+    "LogRules": {
+      "description": "Set of rules for sending logs for the Monitor resource.",
+      "type": "object",
+      "properties": {
+        "sendAadLogs": {
+          "description": "Flag specifying if AAD logs should be sent for the Monitor resource.",
+          "type": "boolean"
+        },
+        "sendSubscriptionLogs": {
+          "description": "Flag specifying if subscription logs should be sent for the Monitor resource.",
+          "type": "boolean"
+        },
+        "sendActivityLogs": {
+          "description": "Flag specifying if activity logs from Azure resources should be sent for the Monitor resource.",
+          "type": "boolean"
+        },
+        "filteringTags": {
+          "description": "List of filtering tags to be used for capturing logs. This only takes effect if SendActivityLogs flag is enabled. If empty, all resources will be captured. If only Exclude action is specified, the rules will apply to the list of all available resources. If Include actions are specified, the rules will only include resources with the associated tags.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/FilteringTag"
+          }
+        }
+      }
+    },
+    "MetricRules": {
+      "description": "Set of rules for sending metrics for the Monitor resource.",
+      "type": "object",
+      "properties": {
+        "filteringTags": {
+          "description": "List of filtering tags to be used for capturing metrics. If empty, all resources will be captured. If only Exclude action is specified, the rules will apply to the list of all available resources. If Include actions are specified, the rules will only include resources with the associated tags.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/FilteringTag"
+          }
+        }
+      }
+    },
+    "MonitoringTagRulesProperties": {
+      "description": "Definition of the properties for a TagRules resource.",
+      "type": "object",
+      "properties": {
+        "logRules": {
+          "$ref": "#/definitions/LogRules"
+        },
+        "metricRules": {
+          "$ref": "#/definitions/MetricRules"
+        }
+      }
+    },
+    "MonitoringTagRules": {
+      "description": "Capture logs and metrics of Azure resources based on ARM tags.",
+      "type": "object",
+      "x-ms-azure-resource": true,
+      "properties": {
+        "name": {
+          "description": "Name of the rule set.",
+          "type": "string",
+          "readOnly": true
+        },
+        "id": {
+          "description": "The id of the rule set.",
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "description": "The type of the rule set.",
+          "type": "string",
+          "readOnly": true
+        },
+        "properties": {
+          "$ref": "#/definitions/MonitoringTagRulesProperties"
+        }
+      }
+    },
+    "MonitoringTagRulesListResponse": {
+      "description": "Response of a list operation.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Results of a list operation.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MonitoringTagRules"
+          }
+        },
+        "nextLink": {
+          "description": "Link to the next set of results, if any.",
+          "type": "string"
+        }
+      }
+    },
+    "SingleSignOnStates": {
+      "description": "Various states of the SSO resource",
+      "enum": [
+        "Initial",
+        "Enable",
+        "Disable",
+        "Exisiting"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "modelAsString": true,
+        "name": "SingleSignOnStates"
+      }
+    },
+    "LogzSingleSignOnProperties": {
+      "type": "object",
+      "properties": {
+        "singleSignOnState": {
+          "$ref": "#/definitions/SingleSignOnStates"
+        },
+        "enterpriseAppId": {
+          "description": "The Id of the Enterprise App used for Single sign-on.",
+          "type": "string"
+        },
+        "singleSignOnUrl": {
+          "description": "The login URL specific to this Logz Organization.",
+          "type": "string"
+        }
+      }
+    },
+    "LogzSingleSignOnResource": {
+      "type": "object",
+      "x-ms-azure-resource": true,
+      "properties": {
+        "id": {
+          "description": "ARM id of the resource.",
+          "type": "string",
+          "readOnly": true
+        },
+        "name": {
+          "description": "Name of the configuration.",
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "description": "The type of the resource.",
+          "type": "string",
+          "readOnly": true
+        },
+        "properties": {
+          "$ref": "#/definitions/LogzSingleSignOnProperties"
+        }
+      }
+    },
+    "LogzSingleSignOnResourceListResponse": {
+      "description": "Response of a list operation.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Results of a list operation.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/LogzSingleSignOnResource"
+          }
+        },
+        "nextLink": {
+          "description": "Link to the next set of results, if any.",
+          "type": "string"
+        }
+      }
+    }
+  },
+  "parameters": {
+    "MonitorNameParameter": {
+      "in": "path",
+      "name": "monitorName",
+      "description": "Monitor resource name",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}
