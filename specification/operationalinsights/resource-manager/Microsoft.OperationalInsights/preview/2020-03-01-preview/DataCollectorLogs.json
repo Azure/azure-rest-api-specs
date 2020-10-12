@@ -45,7 +45,7 @@
           }
         },
         "operationId": "DataCollectorLogs_Delete",
-        "description": "Deletes a specify data collector log table.",
+        "description": "Deletes a specify Data Collector API log table.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
@@ -61,7 +61,7 @@
             "pattern": "^[A-Za-z0-9]+[A-Za-z0-9]_CL$",
             "minLength": 4,
             "maxLength": 63,
-            "description": "DataCollector table name."
+            "description": "Data Collector API table name."
           },
           {
             "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
@@ -95,7 +95,7 @@
           }
         },
         "operationId": "DataCollectorLogs_Get",
-        "description": "Retrieves a specify data collector log table.",
+        "description": "Retrieves a specific Data Collector API log table.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
@@ -111,7 +111,7 @@
             "pattern": "^[A-Za-z0-9]+[A-Za-z0-9]_CL$",
             "minLength": 4,
             "maxLength": 63,
-            "description": "DataCollector table name."
+            "description": "Data Collector API table name."
           },
           {
             "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
@@ -144,7 +144,7 @@
         "tags": [
           "DataCollectorLogs"
         ],
-        "description": "Listing all data collector log tables, being created via data collector endpoint and scoped to the specified workspace",
+        "description": "Lists all Data Collector API log tables scoped to the specified workspace",
         "operationId": "DataCollectorLogs_ListByWorkspace",
         "parameters": [
           {
@@ -187,7 +187,7 @@
   },
   "definitions": {
     "DataCollectorLogProperties": {
-      "description": "Data collector log properties.",
+      "description": "Data Collector API log properties.",
       "type": "object",
       "properties": {
         "name": {
@@ -201,7 +201,7 @@
         "properties": {
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/DataCollectorLogProperties",
-          "description": "Data collector log properties."
+          "description": "Data Collector API log properties."
         }
       },
       "allOf": [
@@ -218,10 +218,10 @@
           "items": {
             "$ref": "#/definitions/DataCollectorLog"
           },
-          "description": "data collector log collection."
+          "description": "Data Collector API log collection."
         }
       },
-      "description": "Data collector log tables collection, all tables are scoped to the specified workspace."
+      "description": "Data Collector API log tables collection, all tables are scoped to the specified workspace."
     },
     "ErrorContract": {
       "properties": {
@@ -230,7 +230,7 @@
           "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ErrorResponse"
         }
       },
-      "description": "Contains details when the response code indicates an error."
+      "description": "Error details when response code indicates an error."
     }
   },
   "parameters": {
