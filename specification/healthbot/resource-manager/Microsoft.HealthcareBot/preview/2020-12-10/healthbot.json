@@ -3,7 +3,7 @@
   "info": {
     "version": "2020-12-10",
     "title": "healthbot",
-    "description": "Description of the new service",
+    "description": "Microsoft Healthcare Bot is a cloud platform that empowers developers in Healthcare organizations to build and deploy their compliant, AI-powered virtual health assistants and health bots, that help them improve processes and reduce costs.",
     "x-ms-code-generation-settings": {
       "name": "healthbotClient"
     }
@@ -29,33 +29,56 @@
     }
   },
   "paths": {
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HealthcareBot/operations": {
-      "get": {
-        "tags": ["Tag1"],
-        "operationId": "OperationGroup_Get",
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HealthcareBot/{resourceName}/ResourceCreationValidate": {
+      "post": {
+        "operationId": "Bot_Name_Validate",
         "x-ms-examples": {
           "BatchAccountDelete": { "$ref": "./examples/OperationGroupGet.json" }
         },
-        "description": "This is a sample get operation, please see guidelines in azure-rest-api-specs repository for more info",
+        "description": "Validates a name of a new Healthcare Bot. Name must not collide with names of bot registrations.",
         "parameters": [
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "#/parameters/subscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Bot"
+            },
+            "description": "The parameters to provide for the created bot."
           }
         ],
         "responses": {
           "200": {
-            "description": "Describe the result of a successful operation.",
+            "description": "If resource name passes validation, the service should return 200 (OK).",
             "schema": {
-              "$ref": "#/definitions/Result"
+              "$ref": "#/definitions/ValidationResult"
             }
           },
-          "default": {
-            "description": "Error response describing why the operation failed.",
+          "400": {
+            "description": "If resource name contains illegal characters, the service should return 400 (Bad Request).",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ValidationResult"
+            }
+          },
+          "409": {
+            "description": "If resource name collide with another bot under Bot Service namespace, the service should return 409 (Conflict).",
+            "schema": {
+              "$ref": "#/definitions/ValidationResult"
+            }
+          },
+          "500": {
+            "description": "If an internal error occurs, the service should return 500 (Internal Server Error).",
+            "schema": {
+              "$ref": "#/definitions/ValidationResult"
             }
           }
         }
@@ -63,70 +86,91 @@
     }
   },
   "definitions": {
-    "Result": {
-      "description": "Sample result definition",
+    "Bot": {
+      "type": "object",
+      "description": "Bot resource definition",
       "properties": {
-        "sampleProperty": {
+        "properties": {
+          "$ref": "#/definitions/BotProperties",
+          "description": "The set of properties specific to healthcare bot resource."
+        }
+      }
+    },
+    "BotProperties": {
+      "properties": {
+        "displayName": {
           "type": "string",
-          "description": "Sample property of type string"
+          "description": "The display name of the bot."
+        },
+        "planId": {
+          "type": "string",
+          "description": "The plan ID of the bot."
+        },
+        "offerId": {
+          "type": "string",
+          "description": "The offer ID of the bot."
         }
       }
     },
-    "ErrorResponse": {
-      "description": "Error response.",
+    "ValidationResult": {
       "properties": {
+        "status": {
+          "type": "string",
+          "description": "The status code of the response validation."
+        },
         "error": {
-          "$ref": "#/definitions/ErrorDefinition",
-          "description": "The error details."
+          "$ref": "#/definitions/ErrorBody",
+          "description": "The error body."
         }
       }
     },
-    "ErrorDefinition": {
-      "description": "Error definition.",
+    "ErrorBody": {
       "properties": {
         "code": {
-          "description": "Service specific error code which serves as the substatus for the HTTP error code.",
           "type": "string",
-          "readOnly": true
+          "description": "error code"
         },
         "message": {
-          "description": "Description of the error.",
           "type": "string",
-          "readOnly": true
-        },
-        "details": {
-          "description": "Internal error details.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ErrorDefinition"
-          },
-          "readOnly": true
+          "description": "error message"
         }
-      }
+      },
+      "description": "Validation error body.",
+      "required": [
+        "code",
+        "message"
+      ]
     }
   },
   "parameters": {
-    "SubscriptionIdParameter": {
+    "resourceGroupNameParameter": {
+      "name": "resourceGroupName",
+      "x-ms-parameter-location": "method",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "maxLength": 64,
+      "minLength": 2,
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$",
+      "description": "The name of the Bot resource group in the user subscription."
+    },
+    "resourceNameParameter": {
+      "name": "resourceName",
+      "x-ms-parameter-location": "method",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "maxLength": 64,
+      "minLength": 2,
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$",
+      "description": "The name of the Bot resource."
+    },
+    "subscriptionIdParameter": {
       "name": "subscriptionId",
       "in": "path",
+      "description": "Azure Subscription ID.",
       "required": true,
-      "type": "string",
-      "description": "The Azure subscription ID. This is a GUID-formatted string (e.g. 00000000-0000-0000-0000-000000000000)"
-    },
-    "ResourceGroupNameParameter": {
-      "name": "resourceGroupName",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "The name of the resource group.",
-      "x-ms-parameter-location": "method"
-    },
-    "ApiVersionParameter": {
-      "name": "api-version",
-      "in": "query",
-      "required": true,
-      "type": "string",
-      "description": "The API version to be used with the HTTP request."
+      "type": "string"
     }
   }
 }
