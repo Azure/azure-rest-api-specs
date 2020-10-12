@@ -41,7 +41,8 @@
       "required": [
         "name",
         "location",
-        "virtualNetwork"
+        "virtualNetwork",
+        "workerPools"
       ],
       "type": "object",
       "properties": {
@@ -106,7 +107,7 @@
             "None",
             "Web",
             "Publishing",
-            "Web, Publishing"
+            "Web,Publishing"
           ],
           "type": "string",
           "x-ms-enum": {
@@ -446,16 +447,6 @@
         }
       }
     },
-    "ArmIdWrapper": {
-      "description": "A wrapper for an ARM resource id",
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "string",
-          "readOnly": true
-        }
-      }
-    },
     "AutoHealActions": {
       "description": "Actions which to take by the auto-heal module when a rule is triggered.",
       "type": "object",
@@ -534,54 +525,6 @@
         "slowRequests": {
           "$ref": "#/definitions/SlowRequestsBasedTrigger",
           "description": "A rule based on request execution time."
-        }
-      }
-    },
-    "AzureStorageInfoValue": {
-      "description": "Azure Files or Blob Storage access information value for dictionary storage.",
-      "type": "object",
-      "properties": {
-        "type": {
-          "description": "Type of storage.",
-          "enum": [
-            "AzureFiles",
-            "AzureBlob"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "AzureStorageType",
-            "modelAsString": false
-          }
-        },
-        "accountName": {
-          "description": "Name of the storage account.",
-          "type": "string"
-        },
-        "shareName": {
-          "description": "Name of the file share (container name, for Blob storage).",
-          "type": "string"
-        },
-        "accessKey": {
-          "description": "Access key for the storage account.",
-          "type": "string"
-        },
-        "mountPath": {
-          "description": "Path to mount the storage within the site's runtime environment.",
-          "type": "string"
-        },
-        "state": {
-          "description": "State of the storage account.",
-          "enum": [
-            "Ok",
-            "InvalidCredentials",
-            "InvalidShare"
-          ],
-          "type": "string",
-          "readOnly": true,
-          "x-ms-enum": {
-            "name": "AzureStorageState",
-            "modelAsString": false
-          }
         }
       }
     },
@@ -829,51 +772,6 @@
         }
       }
     },
-    "DataTableResponseColumn": {
-      "description": "Column definition",
-      "type": "object",
-      "properties": {
-        "columnName": {
-          "description": "Name of the column",
-          "type": "string"
-        },
-        "dataType": {
-          "description": "Data type which looks like 'String' or 'Int32'.",
-          "type": "string"
-        },
-        "columnType": {
-          "description": "Column Type",
-          "type": "string"
-        }
-      }
-    },
-    "DataTableResponseObject": {
-      "description": "Data Table which defines columns and raw row values",
-      "type": "object",
-      "properties": {
-        "tableName": {
-          "description": "Name of the table",
-          "type": "string"
-        },
-        "columns": {
-          "description": "List of columns with data types",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/DataTableResponseColumn"
-          }
-        },
-        "rows": {
-          "description": "Raw row values",
-          "type": "array",
-          "items": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
-          }
-        }
-      }
-    },
     "DefaultErrorResponse": {
       "description": "App Service error response.",
       "type": "object",
@@ -986,95 +884,6 @@
             }
           },
           "x-ms-client-flatten": true
-        }
-      }
-    },
-    "DetectorInfo": {
-      "description": "Definition of Detector",
-      "type": "object",
-      "properties": {
-        "description": {
-          "description": "Short description of the detector and its purpose",
-          "type": "string",
-          "readOnly": true
-        },
-        "category": {
-          "description": "Support Category",
-          "type": "string",
-          "readOnly": true
-        },
-        "subCategory": {
-          "description": "Support Sub Category",
-          "type": "string",
-          "readOnly": true
-        },
-        "supportTopicId": {
-          "description": "Support Topic Id",
-          "type": "string",
-          "readOnly": true
-        }
-      }
-    },
-    "DetectorResponse": {
-      "description": "Class representing Response from Detector",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/ProxyOnlyResource"
-        }
-      ],
-      "properties": {
-        "properties": {
-          "description": "DetectorResponse resource specific properties",
-          "properties": {
-            "metadata": {
-              "$ref": "#/definitions/DetectorInfo",
-              "description": "metadata for the detector"
-            },
-            "dataset": {
-              "description": "Data Set",
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/DiagnosticData"
-              }
-            }
-          },
-          "x-ms-client-flatten": true
-        }
-      }
-    },
-    "DetectorResponseCollection": {
-      "description": "Collection of detector responses",
-      "required": [
-        "value"
-      ],
-      "type": "object",
-      "properties": {
-        "value": {
-          "description": "Collection of resources.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/DetectorResponse"
-          }
-        },
-        "nextLink": {
-          "description": "Link to next page of resources.",
-          "type": "string",
-          "readOnly": true
-        }
-      }
-    },
-    "DiagnosticData": {
-      "description": "Set of data with rendering instructions",
-      "type": "object",
-      "properties": {
-        "table": {
-          "$ref": "#/definitions/DataTableResponseObject",
-          "description": "Data in table form"
-        },
-        "renderingProperties": {
-          "$ref": "#/definitions/Rendering",
-          "description": "Properties that describe how the table should be rendered"
         }
       }
     },
@@ -1673,133 +1482,6 @@
         }
       }
     },
-    "PrivateEndpointConnectionResource": {
-      "description": "Private Endpoint Connection ARM resource.",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/ProxyOnlyResource"
-        }
-      ],
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/RemotePrivateEndpointConnection",
-          "description": "Core resource properties",
-          "x-ms-client-flatten": true
-        }
-      }
-    },
-    "PrivateLinkConnectionApprovalRequest": {
-      "description": "A request to approve or reject a private endpoint connection",
-      "type": "object",
-      "properties": {
-        "privateLinkServiceConnectionState": {
-          "$ref": "#/definitions/PrivateLinkConnectionState"
-        }
-      }
-    },
-    "PrivateLinkConnectionApprovalRequestResource": {
-      "description": "Private Endpoint Connection Approval ARM resource.",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/ProxyOnlyResource"
-        }
-      ],
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/PrivateLinkConnectionApprovalRequest",
-          "description": "Core resource properties",
-          "x-ms-client-flatten": true
-        }
-      }
-    },
-    "PrivateLinkConnectionState": {
-      "description": "The state of a private link connection",
-      "type": "object",
-      "properties": {
-        "status": {
-          "description": "Status of a private link connection",
-          "type": "string"
-        },
-        "description": {
-          "description": "Description of a private link connection",
-          "type": "string"
-        },
-        "actionsRequired": {
-          "description": "ActionsRequired for a private link connection",
-          "type": "string"
-        }
-      }
-    },
-    "PrivateLinkResource": {
-      "description": "A private link resource",
-      "required": [
-        "id",
-        "name",
-        "type",
-        "properties"
-      ],
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "string"
-        },
-        "name": {
-          "description": "Name of a private link resource",
-          "type": "string"
-        },
-        "type": {
-          "type": "string"
-        },
-        "properties": {
-          "$ref": "#/definitions/PrivateLinkResourceProperties",
-          "description": "Properties of a private link resource"
-        }
-      }
-    },
-    "PrivateLinkResourceProperties": {
-      "description": "Properties of a private link resource",
-      "type": "object",
-      "properties": {
-        "groupId": {
-          "description": "GroupId of a private link resource",
-          "type": "string",
-          "readOnly": true
-        },
-        "requiredMembers": {
-          "description": "RequiredMembers of a private link resource",
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "readOnly": true
-        },
-        "requiredZoneNames": {
-          "description": "RequiredZoneNames of a private link resource",
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "readOnly": true
-        }
-      }
-    },
-    "PrivateLinkResourcesWrapper": {
-      "description": "Wrapper for a collection of private link resources",
-      "required": [
-        "value"
-      ],
-      "type": "object",
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/PrivateLinkResource"
-          }
-        }
-      }
-    },
     "ProxyOnlyResource": {
       "description": "Azure proxy only resource. This resource is not tracked by Azure Resource Manager.",
       "properties": {
@@ -1900,58 +1582,6 @@
         },
         "name": {
           "description": "Name of the routing rule. The recommended name would be to point to the slot which will receive the traffic in the experiment.",
-          "type": "string"
-        }
-      }
-    },
-    "RemotePrivateEndpointConnection": {
-      "description": "A remote private endpoint connection",
-      "type": "object",
-      "properties": {
-        "provisioningState": {
-          "type": "string",
-          "readOnly": true
-        },
-        "privateEndpoint": {
-          "$ref": "#/definitions/ArmIdWrapper",
-          "description": "PrivateEndpoint of a remote private endpoint connection"
-        },
-        "privateLinkServiceConnectionState": {
-          "$ref": "#/definitions/PrivateLinkConnectionState"
-        },
-        "ipAddresses": {
-          "description": "Private IPAddresses mapped to the remote private endpoint",
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        }
-      }
-    },
-    "Rendering": {
-      "description": "Instructions for rendering the data",
-      "type": "object",
-      "properties": {
-        "type": {
-          "description": "Rendering Type",
-          "enum": [
-            "NoGraph",
-            "Table",
-            "TimeSeries",
-            "TimeSeriesPerInstance"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "RenderingType",
-            "modelAsString": false
-          }
-        },
-        "title": {
-          "description": "Title of data",
-          "type": "string"
-        },
-        "description": {
-          "description": "Description of the data that will help it be interpreted",
           "type": "string"
         }
       }
@@ -2382,13 +2012,6 @@
             "$ref": "#/definitions/NameValuePair"
           }
         },
-        "azureStorageAccounts": {
-          "description": "AzureStorageAccounts.",
-          "type": "object",
-          "additionalProperties": {
-            "$ref": "#/definitions/AzureStorageInfoValue"
-          }
-        },
         "connectionStrings": {
           "description": "Connection strings.",
           "type": "array",
@@ -2526,7 +2149,7 @@
             "read"
           ]
         },
-        "vnetRouteAllEnabled": {
+		"vnetRouteAllEnabled": {
           "description": "Virtual Network Route All enabled. This causes all traffic to have Virtual Network NSGs and UDRs applied.",
           "type": "boolean"
         },
@@ -2639,30 +2262,9 @@
           "minimum": 0,
           "type": "integer"
         },
-        "functionAppScaleLimit": {
-          "format": "int32",
-          "description": "Maximum number of workers that a site can scale out to.\nThis setting only applies to the Consumption and Elastic Premium Plans",
-          "minimum": 0,
-          "type": "integer"
-        },
         "healthCheckPath": {
           "description": "Health check path",
           "type": "string"
-        },
-        "functionsRuntimeScaleMonitoringEnabled": {
-          "description": "Gets or sets a value indicating whether functions runtime scale monitoring is enabled. When enabled,\nthe ScaleController will not monitor event sources directly, but will instead call to the\nruntime to get scale status.",
-          "type": "boolean"
-        },
-        "websiteTimeZone": {
-          "description": "Sets the time zone a site uses for generating timestamps. Compatible with Linux and Windows App Service. Setting the WEBSITE_TIME_ZONE app setting takes precedence over this config. For Linux, expects tz database values https://www.iana.org/time-zones (for a quick reference see https://en.wikipedia.org/wiki/List_of_tz_database_time_zones). For Windows, expects one of the time zones listed under HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Time Zones",
-          "type": "string"
-        },
-        "minimumElasticInstanceCount": {
-          "format": "int32",
-          "description": "Number of minimum instance count for a site\nThis setting only applies to the Elastic Plans",
-          "maximum": 20,
-          "minimum": 0,
-          "type": "integer"
         }
       }
     },
@@ -2721,11 +2323,6 @@
         "maximum": {
           "format": "int32",
           "description": "Maximum number of workers for this App Service plan SKU.",
-          "type": "integer"
-        },
-        "elasticMaximum": {
-          "format": "int32",
-          "description": "Maximum number of Elastic workers for this App Service plan SKU.",
           "type": "integer"
         },
         "default": {
@@ -2891,11 +2488,7 @@
             "D1",
             "D2",
             "D3",
-            "SmallV3",
-            "MediumV3",
-            "LargeV3",
             "NestedSmall",
-            "NestedSmallLinux",
             "Default"
           ],
           "type": "string",
