@@ -32,6 +32,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HealthcareBot/{resourceName}/ResourceCreationValidate": {
       "post": {
         "operationId": "Bot_Name_Validate",
+        "x-ms-examples": {
+          "BatchAccountDelete": { "$ref": "./examples/ResourceCreationValidatePost.json" }
+        },
         "description": "Validates a name of a new Healthcare Bot. Name must not collide with names of bot registrations.",
         "parameters": [
           {
@@ -55,33 +58,29 @@
         ],
         "responses": {
           "200": {
-            "description": "If resource name passes validation, the service should return 200 (OK).",
+            "description": "If resource name passes or fails the validation, the service should return 200.",
             "schema": {
               "$ref": "#/definitions/ValidationResult"
             }
           },
-          "400": {
-            "description": "If resource name contains illegal characters, the service should return 400 (Bad Request).",
+          "default": {
+            "description": "Error response describing why the operation failed",
             "schema": {
-              "$ref": "#/definitions/ValidationResult"
-            }
-          },
-          "409": {
-            "description": "If resource name collide with another bot under Bot Service namespace, the service should return 409 (Conflict).",
-            "schema": {
-              "$ref": "#/definitions/ValidationResult"
-            }
-          },
-          "500": {
-            "description": "If an internal error occurs, the service should return 500 (Internal Server Error).",
-            "schema": {
-              "$ref": "#/definitions/ValidationResult"
+              "$ref": "#/definitions/Error"
             }
           }
         }
       }
     }
   },
+
+
+
+
+
+
+
+
   "definitions": {
     "Bot": {
       "type": "object",
@@ -114,31 +113,43 @@
         "status": {
           "type": "string",
           "description": "The status code of the response validation."
+        }
+      }
+    },
+    "Error": {
+      "properties": {
+        "status": {
+          "type": "string",
+          "description": "The status code of the response validation."
         },
         "error": {
           "$ref": "#/definitions/ErrorBody",
           "description": "The error body."
         }
-      }
+      },
+      "description": "Bot error object."
     },
     "ErrorBody": {
       "properties": {
         "code": {
           "type": "string",
-          "description": "error code"
+          "description": "error code."
         },
         "message": {
           "type": "string",
-          "description": "error message"
+          "description": "error message."
         }
-      },
-      "description": "Validation error body.",
-      "required": [
-        "code",
-        "message"
-      ]
-    }
-  },
+      }
+    },
+
+
+
+
+
+
+
+
+
   "parameters": {
     "resourceGroupNameParameter": {
       "name": "resourceGroupName",
