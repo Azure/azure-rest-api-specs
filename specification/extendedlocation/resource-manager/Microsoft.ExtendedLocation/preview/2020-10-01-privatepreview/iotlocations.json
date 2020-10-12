@@ -180,7 +180,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/iotLocationResponse"
+              "$ref": "#/definitions/iotLocation"
             }
           },
           "default": {
@@ -230,13 +230,13 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/iotLocationResponse"
+              "$ref": "#/definitions/iotLocation"
             }
           },
           "201": {
             "description": "Created",
             "schema": {
-              "$ref": "#/definitions/iotLocationResponse"
+              "$ref": "#/definitions/iotLocation"
             }
           },
           "default": {
@@ -338,7 +338,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/iotLocationResponse"
+              "$ref": "#/definitions/iotLocation"
             }
           },
           "default": {
@@ -610,7 +610,7 @@
           "type": "array",
           "readOnly": true,
           "items": {
-            "$ref": "#/definitions/iotLocationResponse"
+            "$ref": "#/definitions/iotLocation"
           }
         }
       }
@@ -725,55 +725,6 @@
         "iotHubConfiguration": {
           "$ref": "#/definitions/IotHubConfiguration",
           "description": "The iothub configuration.",
-          "x-ms-client-flatten": true
-        },
-        "provisioningState": {
-          "description": "Provisioning state (Accepted, etc...).",
-          "type": "string",
-          "enum": [
-            "NotSpecified",
-            "Accepted",
-            "Creating",
-            "Created",
-            "Deleting",
-            "Deleted",
-            "Failed",
-            "Succeeded",
-            "Updating"
-          ],
-          "x-ms-enum": {
-            "name": "ProvisioningState",
-            "modelAsString": true
-          }
-        }
-      }
-    },
-    "iotLocationResponse": {
-      "description": "Iot Locations definition.",
-      "required": [
-        "properties"
-      ],
-      "type": "object",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/iotLocationResponseProperties",
-          "description": "The set of response properties specific to a Iot Location",
-          "x-ms-client-flatten": true
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/Resource"
-        }
-      ]
-    },
-    "iotLocationResponseProperties": {
-      "description": "Response properties for iot location.",
-      "type": "object",
-      "properties": {
-        "hydrationInformation": {
-          "$ref": "#/definitions/HydrationInformation",
-          "description": "The hydration information.",
           "x-ms-client-flatten": true
         },
         "provisioningState": {
