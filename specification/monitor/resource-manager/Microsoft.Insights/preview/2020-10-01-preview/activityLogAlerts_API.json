@@ -535,15 +535,25 @@
         }
       },
       "ErrorResponse": {
-        "description": "Describes the format of Error response.",
+        "description": "The error response.",
+        "type": "object",
+        "properties": {
+          "error": {
+            "description": "The error object.",
+            "$ref": "#/definitions/ErrorObject"
+          }
+        }
+      },
+      "ErrorObject": {
+        "description": "The error object.",
         "type": "object",
         "properties": {
           "code": {
-            "description": "Error code",
+            "description": "The error code",
             "type": "string"
           },
           "message": {
-            "description": "Error message indicating why the operation failed.",
+            "description": "The error message indicating why the operation failed.",
             "type": "string"
           }
         }
