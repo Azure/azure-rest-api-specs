@@ -1,34 +1,31 @@
 {
   "parameters": {
     "subscriptionId": "187f412d-1758-44d9-b052-169e2564721d",
-    "resourceGroupName": "Default-ActivityLogAlerts",
+    "resourceGroupName": "MyResourceGroup",
     "activityLogAlertName": "SampleActivityLogAlertRuleWithAnyOfCondition",
-    "api-version": "2017-04-01",
-    "activityLogAlert": {
+    "api-version": "2020-10-01-preview",
+    "activityLogAlertRule": {
       "location": "Global",
       "tags": {},
       "properties": {
         "scopes": [
           "subscriptions/187f412d-1758-44d9-b052-169e2564721d"
         ],
-        "enabled": true,
         "condition": {
           "allOf": [
             {
-              "field": "Category",
+              "field": "category",
               "equals": "ServiceHealth"
             },
             {
               "anyOf": [
                 {
                   "field": "properties.incidentType",
-                  "equals": "Incident",
-                  "containsAny": null
+                  "equals": "Incident"
                 },
                 {
                   "field": "properties.incidentType",
-                  "equals": "Maintenance",
-                  "containsAny": null
+                  "equals": "Maintenance"
                 }
               ]
             }
@@ -37,14 +34,15 @@
         "actions": {
           "actionGroups": [
             {
-              "actionGroupId": "/subscriptions/187f412d-1758-44d9-b052-169e2564721d/resourceGroups/Default-ActionGroups/providers/microsoft.insights/actionGroups/SampleActionGroup",
+              "actionGroupId": "/subscriptions/187f412d-1758-44d9-b052-169e2564721d/resourceGroups/MyResourceGroup/providers/Microsoft.Insights/actionGroups/SampleActionGroup",
               "webhookProperties": {
-                "sampleWebhookProperty": "samplePropertyValue"
+                "sampleWebhookProperty": "SamplePropertyValue"
               }
             }
           ]
         },
-        "description": "Descirption of sample Activity Log Alert rule with 'anyOf' condition."
+        "enabled": true,
+        "description": "Description of sample Activity Log Alert rule with 'anyOf' condition."
       }
     }
   },
@@ -52,7 +50,7 @@
     "200": {
       "headers": {},
       "body": {
-        "id": "/subscriptions/187f412d-1758-44d9-b052-169e2564721d/resourceGroups/Default-ActivityLogAlerts/providers/microsoft.insights/activityLogAlerts/SampleActivityLogAlertRuleWithAnyOfCondition",
+        "id": "/subscriptions/187f412d-1758-44d9-b052-169e2564721d/resourceGroups/MyResourceGroup/providers/microsoft.insights/activityLogAlerts/SampleActivityLogAlertRuleWithAnyOfCondition",
         "type": "Microsoft.Insights/ActivityLogAlerts",
         "name": "SampleActivityLogAlertRuleWithAnyOfCondition",
         "location": "Global",
@@ -61,24 +59,21 @@
           "scopes": [
             "subscriptions/187f412d-1758-44d9-b052-169e2564721d"
           ],
-          "enabled": true,
           "condition": {
             "allOf": [
               {
-                "field": "Category",
+                "field": "category",
                 "equals": "ServiceHealth"
               },
               {
                 "anyOf": [
                   {
                     "field": "properties.incidentType",
-                    "equals": "Incident",
-                    "containsAny": null
+                    "equals": "Incident"
                   },
                   {
                     "field": "properties.incidentType",
-                    "equals": "Maintenance",
-                    "containsAny": null
+                    "equals": "Maintenance"
                   }
                 ]
               }
@@ -87,21 +82,22 @@
           "actions": {
             "actionGroups": [
               {
-                "actionGroupId": "/subscriptions/187f412d-1758-44d9-b052-169e2564721d/resourceGroups/Default-ActionGroups/providers/microsoft.insights/actionGroups/SampleActionGroup",
+                "actionGroupId": "/subscriptions/187f412d-1758-44d9-b052-169e2564721d/resourceGroups/MyResourceGroup/providers/Microsoft.Insights/actionGroups/SampleActionGroup",
                 "webhookProperties": {
-                  "sampleWebhookProperty": "samplePropertyValue"
+                  "sampleWebhookProperty": "SamplePropertyValue"
                 }
               }
             ]
           },
-          "description": "Descirption of sample Activity Log Alert rule with 'anyOf' condition."
+          "enabled": true,
+          "description": "Description of sample Activity Log Alert rule with 'anyOf' condition."
         }
       }
     },
     "201": {
       "headers": {},
       "body": {
-        "id": "/subscriptions/187f412d-1758-44d9-b052-169e2564721d/resourceGroups/Default-ActivityLogAlerts/providers/microsoft.insights/activityLogAlerts/SampleActivityLogAlertRuleWithAnyOfCondition",
+        "id": "/subscriptions/187f412d-1758-44d9-b052-169e2564721d/resourceGroups/MyResourceGroup/providers/microsoft.insights/activityLogAlerts/SampleActivityLogAlertRuleWithAnyOfCondition",
         "type": "Microsoft.Insights/ActivityLogAlerts",
         "name": "SampleActivityLogAlertRuleWithAnyOfCondition",
         "location": "Global",
@@ -110,24 +106,21 @@
           "scopes": [
             "subscriptions/187f412d-1758-44d9-b052-169e2564721d"
           ],
-          "enabled": true,
           "condition": {
             "allOf": [
               {
-                "field": "Category",
+                "field": "category",
                 "equals": "ServiceHealth"
               },
               {
                 "anyOf": [
                   {
                     "field": "properties.incidentType",
-                    "equals": "Incident",
-                    "containsAny": null
+                    "equals": "Incident"
                   },
                   {
                     "field": "properties.incidentType",
-                    "equals": "Maintenance",
-                    "containsAny": null
+                    "equals": "Maintenance"
                   }
                 ]
               }
@@ -136,14 +129,15 @@
           "actions": {
             "actionGroups": [
               {
-                "actionGroupId": "/subscriptions/187f412d-1758-44d9-b052-169e2564721d/resourceGroups/Default-ActionGroups/providers/microsoft.insights/actionGroups/SampleActionGroup",
+                "actionGroupId": "/subscriptions/187f412d-1758-44d9-b052-169e2564721d/resourceGroups/MyResourceGroup/providers/Microsoft.Insights/actionGroups/SampleActionGroup",
                 "webhookProperties": {
-                  "sampleWebhookProperty": "samplePropertyValue"
+                  "sampleWebhookProperty": "SamplePropertyValue"
                 }
               }
             ]
           },
-          "description": "Descirption of sample Activity Log Alert rule with 'anyOf' condition."
+          "enabled": true,
+          "description": "Description of sample Activity Log Alert rule with 'anyOf' condition."
         }
       }
     }

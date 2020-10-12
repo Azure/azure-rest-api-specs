@@ -1,0 +1,86 @@
+{
+  "parameters": {
+    "subscriptionId": "187f412d-1758-44d9-b052-169e2564721d",
+    "resourceGroupName": "MyResourceGroup",
+    "api-version": "2020-10-01-preview"
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/187f412d-1758-44d9-b052-169e2564721d/resourceGroups/MyResourceGroup/providers/microsoft.insights/activityLogAlerts/SampleActivityLogAlertRule1",
+            "type": "Microsoft.Insights/ActivityLogAlerts",
+            "name": "SampleActivityLogAlertRule1",
+            "location": "Global",
+            "tags": {},
+            "properties": {
+              "scopes": [
+                "subscriptions/187f412d-1758-44d9-b052-169e2564721d"
+              ],
+              "condition": {
+                "allOf": [
+                  {
+                    "field": "category",
+                    "equals": "Administrative"
+                  },
+                  {
+                    "field": "level",
+                    "equals": "Error"
+                  }
+                ]
+              },
+              "actions": {
+                "actionGroups": [
+                  {
+                    "actionGroupId": "/subscriptions/187f412d-1758-44d9-b052-169e2564721d/resourceGroups/MyResourceGroup/providers/microsoft.insights/actionGroups/SampleActionGroup",
+                    "webhookProperties": {
+                      "sampleWebhookProperty": "SamplePropertyValue"
+                    }
+                  }
+                ]
+              },
+              "enabled": true,
+              "description": "Description of sample Activity Log Alert rule."
+            }
+          },
+          {
+            "id": "/subscriptions/187f412d-1758-44d9-b052-169e2564721d/resourceGroups/MyResourceGroup/providers/microsoft.insights/activityLogAlerts/SampleActivityLogAlertRule2",
+            "type": "Microsoft.Insights/ActivityLogAlerts",
+            "name": "SampleActivityLogAlertRule2",
+            "location": "Global",
+            "tags": {},
+            "properties": {
+              "scopes": [
+                "subscriptions/187f412d-1758-44d9-b052-169e2564721d/resourceGroups/MyResourceGroup"
+              ],
+              "condition": {
+                "allOf": [
+                  {
+                    "field": "category",
+                    "equals": "Administrative"
+                  },
+                  {
+                    "field": "status",
+                    "equals": "Succeeded"
+                  }
+                ]
+              },
+              "actions": {
+                "actionGroups": [
+                  {
+                    "actionGroupId": "/subscriptions/187f412d-1758-44d9-b052-169e2564721d/resourceGroups/MyResourceGroup/providers/microsoft.insights/actionGroups/SampleActionGroup",
+                    "webhookProperties": {}
+                  }
+                ]
+              },
+              "enabled": true,
+              "description": "Description of sample Activity Log Alert rule."
+            }
+          }
+        ]
+      }
+    }
+  }
+}

@@ -1,8 +1,7 @@
 {
   "parameters": {
     "subscriptionId": "187f412d-1758-44d9-b052-169e2564721d",
-    "resourceGroupName": "Default-ActivityLogAlerts",
-    "api-version": "2017-04-01"
+    "api-version": "2020-10-01-preview"
   },
   "responses": {
     "200": {
@@ -10,24 +9,23 @@
       "body": {
         "value": [
           {
-            "id": "/subscriptions/187f412d-1758-44d9-b052-169e2564721d/resourceGroups/Default-ActivityLogAlerts/providers/microsoft.insights/activityLogAlerts/SampleActivityLogAlert",
+            "id": "/subscriptions/187f412d-1758-44d9-b052-169e2564721d/resourceGroups/MyResourceGroup1/providers/microsoft.insights/activityLogAlerts/SampleActivityLogAlertRule1",
             "type": "Microsoft.Insights/ActivityLogAlerts",
-            "name": "SampleActivityLogAlert",
+            "name": "SampleActivityLogAlertRule1",
             "location": "Global",
             "tags": {},
             "properties": {
               "scopes": [
                 "subscriptions/187f412d-1758-44d9-b052-169e2564721d"
               ],
-              "enabled": true,
               "condition": {
                 "allOf": [
                   {
-                    "field": "Category",
+                    "field": "category",
                     "equals": "Administrative"
                   },
                   {
-                    "field": "Level",
+                    "field": "level",
                     "equals": "Error"
                   }
                 ]
@@ -35,43 +33,49 @@
               "actions": {
                 "actionGroups": [
                   {
-                    "actionGroupId": "/subscriptions/187f412d-1758-44d9-b052-169e2564721d/resourceGroups/Default-ActionGroups/providers/microsoft.insights/actionGroups/SampleActionGroup",
+                    "actionGroupId": "/subscriptions/187f412d-1758-44d9-b052-169e2564721d/resourceGroups/MyResourceGroup1/providers/microsoft.insights/actionGroups/SampleActionGroup",
                     "webhookProperties": {
-                      "sampleWebhookProperty": "samplePropertyValue"
+                      "sampleWebhookProperty": "SamplePropertyValue"
                     }
                   }
                 ]
               },
-              "description": "Sample activity log alert description"
+              "enabled": true,
+              "description": "Description of sample Activity Log Alert rule."
             }
           },
           {
-            "id": "/subscriptions/187f412d-1758-44d9-b052-169e2564721d/resourceGroups/Default-ActivityLogAlerts/providers/microsoft.insights/activityLogAlerts/SampleActivityLogAlert2",
+            "id": "/subscriptions/187f412d-1758-44d9-b052-169e2564721d/resourceGroups/MyResourceGroup2/providers/microsoft.insights/activityLogAlerts/SampleActivityLogAlertRule2",
             "type": "Microsoft.Insights/ActivityLogAlerts",
-            "name": "SampleActivityLogAlert2",
+            "name": "SampleActivityLogAlertRule2",
             "location": "Global",
             "tags": {},
             "properties": {
               "scopes": [
-                "subscriptions/187f412d-1758-44d9-b052-169e2564721d/resourceGroups/Default-ActivityLogAlerts"
+                "subscriptions/187f412d-1758-44d9-b052-169e2564721d/resourceGroups/MyResourceGroup2"
               ],
-              "enabled": true,
               "condition": {
                 "allOf": [
                   {
-                    "field": "Category",
+                    "field": "category",
                     "equals": "Administrative"
+                  },
+                  {
+                    "field": "status",
+                    "equals": "Succeeded"
                   }
                 ]
               },
               "actions": {
                 "actionGroups": [
                   {
-                    "actionGroupId": "/subscriptions/187f412d-1758-44d9-b052-169e2564721d/resourceGroups/Default-ActionGroups/providers/microsoft.insights/actionGroups/SampleActionGroup",
+                    "actionGroupId": "/subscriptions/187f412d-1758-44d9-b052-169e2564721d/resourceGroups/MyResourceGroup2/providers/microsoft.insights/actionGroups/SampleActionGroup",
                     "webhookProperties": {}
                   }
                 ]
-              }
+              },
+              "enabled": true,
+              "description": "Description of sample Activity Log Alert rule."
             }
           }
         ]

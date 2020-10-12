@@ -66,7 +66,7 @@
               "$ref": "#/parameters/ApiVersionParameter"
             },
             {
-              "name": "activityLogAlert",
+              "name": "activityLogAlertRule",
               "description": "The Activity Log Alert rule to create or use for the update.",
               "in": "body",
               "required": true,
@@ -171,8 +171,13 @@
           }
         },
         "patch": {
-          "description": "Updates an existing AlertRuleResource's tags. To update other fields use the CreateOrUpdate method.",
+          "description": "Update an existing Activity Log Alert rule. This method is used to update the resource tags of an Alert rule or for enabling / disabling an Alert rule. To update other fields use the CreateOrUpdate method.",
           "operationId": "ActivityLogAlerts_Update",
+          "x-ms-examples": {
+            "Patch an Activity Log Alert rule": {
+              "$ref": "./examples/ActivityLogAlertRule_Patch.json"
+            }
+          },
           "parameters": [
             {
               "$ref": "#/parameters/SubscriptionIdParameter"
@@ -187,32 +192,27 @@
               "$ref": "#/parameters/ApiVersionParameter"
             },
             {
-              "name": "activityLogAlertPatch",
+              "name": "activityLogAlertRulePatch",
               "in": "body",
               "required": true,
               "schema": {
-                "$ref": "#/definitions/ActivityLogAlertPatchBody"
+                "$ref": "#/definitions/AlertRulePatchObject"
               },
               "description": "Parameters supplied to the operation."
             }
           ],
           "responses": {
-            "default": {
-              "description": "Error response describing why the operation failed.",
-              "schema": {
-                "$ref": "#/definitions/ErrorResponse"
-              }
-            },
             "200": {
               "description": "An existing Activity Log Alert rule was successfully updated.",
               "schema": {
                 "$ref": "#/definitions/AlertRuleResource"
               }
-            }
-          },
-          "x-ms-examples": {
-            "Patch an activity log alert": {
-              "$ref": "./examples/patchActivityLogAlert.json"
+            },
+            "default": {
+              "description": "Error response describing why the operation failed.",
+              "schema": {
+                "$ref": "#/definitions/ErrorResponse"
+              }
             }
           }
         }
@@ -223,7 +223,7 @@
           "operationId": "ActivityLogAlertRule_GetListBySubscriptionId",
           "x-ms-examples": {
             "Get list of all Activity Log Alert rules under a subscription": {
-              "$ref": "./examples/ActivityLogAlertRule_GetListBySubscriptionIdOrResourceGroupName.json"
+              "$ref": "./examples/ActivityLogAlertRule_GetListBySubscriptionId.json"
             }
           },
           "x-ms-pageable": {
@@ -259,7 +259,7 @@
           "operationId": "ActivityLogAlertRule_GetListByResourceGroup",
           "x-ms-examples": {
             "List activity log alerts": {
-              "$ref": "./examples/ActivityLogAlertRule_GetListBySubscriptionIdOrResourceGroupName.json"
+              "$ref": "./examples/ActivityLogAlertRule_GetListByResourceGroupName.json"
             }
           },
           "x-ms-pageable": {
@@ -508,29 +508,29 @@
           "actionGroupId"
         ]
       },
-      "ActivityLogAlertPatchBody": {
-        "description": "An activity log alert object for the body of patch operations.",
+      "AlertRulePatchObject": {
+        "description": "An Activity Log Alert rule object for the body of patch operations.",
         "properties": {
           "tags": {
+            "description": "The resource tags",
             "additionalProperties": {
               "type": "string"
-            },
-            "description": "Resource tags"
+            }            
           },
           "properties": {
             "x-ms-client-flatten": true,
-            "$ref": "#/definitions/ActivityLogAlertPatch",
+            "$ref": "#/definitions/AlertRulePatchProperties",
             "description": "The activity log alert settings for an update operation."
           }
         }
       },
-      "ActivityLogAlertPatch": {
-        "description": "An Azure activity log alert for patch operations.",
+      "AlertRulePatchProperties": {
+        "description": "An Activity Log Alert rule properties for patch operations.",
         "properties": {
           "enabled": {
+            "description": "Indicates whether this Activity Log Alert rule is enabled. If an Activity Log Alert rule is not enabled, then none of its actions will be activated.",
             "type": "boolean",
-            "default": true,
-            "description": "Indicates whether this Activity Log Alert rule is enabled. If an Activity Log Alert rule is not enabled, then none of its actions will be activated."
+            "default": true
           }
         }
       },

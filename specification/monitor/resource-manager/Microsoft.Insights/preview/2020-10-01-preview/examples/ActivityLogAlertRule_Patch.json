@@ -1,10 +1,10 @@
 {
   "parameters": {
     "subscriptionId": "187f412d-1758-44d9-b052-169e2564721d",
-    "resourceGroupName": "Default-ActivityLogAlerts",
-    "activityLogAlertName": "SampleActivityLogAlert",
-    "api-version": "2017-03-01-preview",
-    "activityLogAlertPatch": {
+    "resourceGroupName": "MyResourceGroup",
+    "activityLogAlertName": "SampleActivityLogAlertRule",
+    "api-version": "2020-10-01-preview",
+    "activityLogAlertRulePatch": {
       "tags": {
         "key1": "value1",
         "key2": "value2"
@@ -18,9 +18,9 @@
     "200": {
       "headers": {},
       "body": {
-        "id": "/subscriptions/187f412d-1758-44d9-b052-169e2564721d/resourceGroups/Default-ActivityLogAlerts/providers/microsoft.insights/activityLogAlerts/SampleActivityLogAlert",
+        "id": "/subscriptions/187f412d-1758-44d9-b052-169e2564721d/resourceGroups/MyResourceGroup/providers/microsoft.insights/activityLogAlerts/SampleActivityLogAlertRule",
         "type": "Microsoft.Insights/ActivityLogAlerts",
-        "name": "SampleActivityLogAlert",
+        "name": "SampleActivityLogAlertRule",
         "location": "Global",
         "tags": {
           "key1": "value1",
@@ -30,15 +30,14 @@
           "scopes": [
             "/subscriptions/187f412d-1758-44d9-b052-169e2564721d"
           ],
-          "enabled": false,
           "condition": {
             "allOf": [
               {
-                "field": "Category",
+                "field": "category",
                 "equals": "Administrative"
               },
               {
-                "field": "Level",
+                "field": "level",
                 "equals": "Error"
               }
             ]
@@ -46,14 +45,15 @@
           "actions": {
             "actionGroups": [
               {
-                "actionGroupId": "/subscriptions/187f412d-1758-44d9-b052-169e2564721d/resourceGroups/Default-ActionGroups/providers/microsoft.insights/actionGroups/SampleActionGroup",
+                "actionGroupId": "/subscriptions/187f412d-1758-44d9-b052-169e2564721d/resourceGroups/MyResourceGroup/providers/microsoft.insights/actionGroups/SampleActionGroup",
                 "webhookProperties": {
-                  "sampleWebhookProperty": "samplePropertyValue"
+                  "sampleWebhookProperty": "SamplePropertyValue"
                 }
               }
             ]
           },
-          "description": "Sample activity log alert description"
+          "enabled": false,
+          "description": "Description of sample Activity Log Alert rule."
         }
       }
     }

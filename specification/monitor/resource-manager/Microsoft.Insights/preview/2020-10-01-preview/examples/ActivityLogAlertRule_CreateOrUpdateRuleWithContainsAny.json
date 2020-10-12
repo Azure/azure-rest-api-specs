@@ -1,21 +1,20 @@
 {
   "parameters": {
     "subscriptionId": "187f412d-1758-44d9-b052-169e2564721d",
-    "resourceGroupName": "Default-ActivityLogAlerts",
+    "resourceGroupName": "MyResourceGroup",
     "activityLogAlertName": "SampleActivityLogAlertRuleWithContainsAny",
-    "api-version": "2017-04-01",
-    "activityLogAlert": {
+    "api-version": "2020-10-01-preview",
+    "activityLogAlertRule": {
       "location": "Global",
       "tags": {},
       "properties": {
         "scopes": [
           "subscriptions/187f412d-1758-44d9-b052-169e2564721d"
         ],
-        "enabled": true,
         "condition": {
           "allOf": [
             {
-              "field": "Category",
+              "field": "category",
               "equals": "ServiceHealth"
             },
             {
@@ -30,14 +29,15 @@
         "actions": {
           "actionGroups": [
             {
-              "actionGroupId": "/subscriptions/187f412d-1758-44d9-b052-169e2564721d/resourceGroups/Default-ActionGroups/providers/microsoft.insights/actionGroups/SampleActionGroup",
+              "actionGroupId": "/subscriptions/187f412d-1758-44d9-b052-169e2564721d/resourceGroups/MyResourceGroup/providers/Microsoft.Insights/actionGroups/SampleActionGroup",
               "webhookProperties": {
-                "sampleWebhookProperty": "samplePropertyValue"
+                "sampleWebhookProperty": "SamplePropertyValue"
               }
             }
           ]
         },
-        "description": "Descirption of sample Activity Log Alert rule with 'containsAny'."
+        "enabled": true,
+        "description": "Description of sample Activity Log Alert rule with 'containsAny'."
       }
     }
   },
@@ -45,7 +45,7 @@
     "200": {
       "headers": {},
       "body": {
-        "id": "/subscriptions/187f412d-1758-44d9-b052-169e2564721d/resourceGroups/Default-ActivityLogAlerts/providers/microsoft.insights/activityLogAlerts/SampleActivityLogAlertRuleWithContainsAny",
+        "id": "/subscriptions/187f412d-1758-44d9-b052-169e2564721d/resourceGroups/MyResourceGroup/providers/microsoft.insights/activityLogAlerts/SampleActivityLogAlertRuleWithContainsAny",
         "type": "Microsoft.Insights/ActivityLogAlerts",
         "name": "SampleActivityLogAlertRuleWithContainsAny",
         "location": "Global",
@@ -54,11 +54,10 @@
           "scopes": [
             "subscriptions/187f412d-1758-44d9-b052-169e2564721d"
           ],
-          "enabled": true,
           "condition": {
             "allOf": [
               {
-                "field": "Category",
+                "field": "category",
                 "equals": "ServiceHealth"
               },
               {
@@ -73,21 +72,22 @@
           "actions": {
             "actionGroups": [
               {
-                "actionGroupId": "/subscriptions/187f412d-1758-44d9-b052-169e2564721d/resourceGroups/Default-ActionGroups/providers/microsoft.insights/actionGroups/SampleActionGroup",
+                "actionGroupId": "/subscriptions/187f412d-1758-44d9-b052-169e2564721d/resourceGroups/MyResourceGroup/providers/Microsoft.Insights/actionGroups/SampleActionGroup",
                 "webhookProperties": {
-                  "sampleWebhookProperty": "samplePropertyValue"
+                  "sampleWebhookProperty": "SamplePropertyValue"
                 }
               }
             ]
           },
-          "description": "Descirption of sample Activity Log Alert rule with 'containsAny'."
+          "enabled": true,
+          "description": "Description of sample Activity Log Alert rule with 'containsAny'."
         }
       }
     },
     "201": {
       "headers": {},
       "body": {
-        "id": "/subscriptions/187f412d-1758-44d9-b052-169e2564721d/resourceGroups/Default-ActivityLogAlerts/providers/microsoft.insights/activityLogAlerts/SampleActivityLogAlertRuleWithContainsAny",
+        "id": "/subscriptions/187f412d-1758-44d9-b052-169e2564721d/resourceGroups/MyResourceGroup/providers/microsoft.insights/activityLogAlerts/SampleActivityLogAlertRuleWithContainsAny",
         "type": "Microsoft.Insights/ActivityLogAlerts",
         "name": "SampleActivityLogAlertRuleWithContainsAny",
         "location": "Global",
@@ -96,11 +96,10 @@
           "scopes": [
             "subscriptions/187f412d-1758-44d9-b052-169e2564721d"
           ],
-          "enabled": true,
           "condition": {
             "allOf": [
               {
-                "field": "Category",
+                "field": "category",
                 "equals": "ServiceHealth"
               },
               {
@@ -115,14 +114,15 @@
           "actions": {
             "actionGroups": [
               {
-                "actionGroupId": "/subscriptions/187f412d-1758-44d9-b052-169e2564721d/resourceGroups/Default-ActionGroups/providers/microsoft.insights/actionGroups/SampleActionGroup",
+                "actionGroupId": "/subscriptions/187f412d-1758-44d9-b052-169e2564721d/resourceGroups/MyResourceGroup/providers/Microsoft.Insights/actionGroups/SampleActionGroup",
                 "webhookProperties": {
-                  "sampleWebhookProperty": "samplePropertyValue"
+                  "sampleWebhookProperty": "SamplePropertyValue"
                 }
               }
             ]
           },
-          "description": "Descirption of sample Activity Log Alert rule with 'containsAny'."
+          "enabled": true,
+          "description": "Description of sample Activity Log Alert rule with 'containsAny'."
         }
       }
     }
