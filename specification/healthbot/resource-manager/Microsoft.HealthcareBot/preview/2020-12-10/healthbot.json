@@ -9,12 +9,20 @@
     }
   },
   "host": "management.azure.com",
-  "schemes": ["https"],
-  "consumes": ["application/json"],
-  "produces": ["application/json"],
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
   "security": [
     {
-      "azure_auth": ["user_impersonation"]
+      "azure_auth": [
+        "user_impersonation"
+      ]
     }
   ],
   "securityDefinitions": {
@@ -33,7 +41,9 @@
       "post": {
         "operationId": "Bot_Name_Validate",
         "x-ms-examples": {
-          "BatchAccountDelete": { "$ref": "./examples/ResourceCreationValidatePost.json" }
+          "BatchAccountDelete": {
+            "$ref": "./examples/ResourceCreationValidatePost.json"
+          }
         },
         "description": "Validates a name of a new Healthcare Bot. Name must not collide with names of bot registrations.",
         "parameters": [
@@ -73,14 +83,6 @@
       }
     }
   },
-
-
-
-
-
-
-
-
   "definitions": {
     "Bot": {
       "type": "object",
@@ -140,16 +142,8 @@
           "description": "error message."
         }
       }
-    },
-
-
-
-
-
-
-
-
-
+    }
+  },
   "parameters": {
     "resourceGroupNameParameter": {
       "name": "resourceGroupName",
