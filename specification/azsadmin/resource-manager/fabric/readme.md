@@ -115,6 +115,8 @@ input-file:
     - "Microsoft.Fabric.Admin/preview/2019-05-01/Drive.json"
     - "Microsoft.Fabric.Admin/preview/2019-05-01/Volume.json"
     - "Microsoft.Fabric.Admin/preview/2019-05-01/NasCluster.json"
+    - $(this-folder)/Microsoft.Fabric.Admin/preview/2020-10-01/ScaleUnit.json
+    - $(this-folder)/Microsoft.Fabric.Admin/preview/2020-10-01/ScaleUnitNode.json
 ```
 
 ## Suppression
@@ -187,6 +189,8 @@ input-file:
   - $(this-folder)/Microsoft.Fabric.Admin/preview/2019-05-01/Drive.json
   - $(this-folder)/Microsoft.Fabric.Admin/preview/2019-05-01/Volume.json
   - $(this-folder)/Microsoft.Fabric.Admin/preview/2019-05-01/NasCluster.json
+  - $(this-folder)/Microsoft.Fabric.Admin/preview/2020-10-01/ScaleUnit.json
+  - $(this-folder)/Microsoft.Fabric.Admin/preview/2020-10-01/ScaleUnitNode.json
 
 ```
 
