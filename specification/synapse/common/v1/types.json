@@ -84,6 +84,35 @@
         }
       },
       "x-ms-azure-resource": true
+    },
+    "CloudError": {
+      "x-ms-external": true,
+      "type": "object",
+      "description": "Error response structure.",
+      "properties": {
+        "error": {
+          "x-ms-client-flatten": true,
+          "description": "Error data",
+          "$ref": "#/definitions/CloudErrorBody"
+        }
+      }
+    },
+    "CloudErrorBody": {
+      "x-ms-external": true,
+      "type": "object",
+      "description": "Error details.",
+      "properties": {
+        "code": {
+          "readOnly": true,
+          "type": "string",
+          "description": "An identifier for the error. Codes are invariant and are intended to be consumed programmatically."
+        },
+        "message": {
+          "readOnly": true,
+          "type": "string",
+          "description": "A message describing the error, intended to be suitable for display in a user interface."
+        }
+      }
     }
   },
   "parameters": {
