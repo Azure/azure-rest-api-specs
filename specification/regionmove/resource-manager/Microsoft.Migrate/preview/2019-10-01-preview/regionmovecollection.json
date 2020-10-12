@@ -1275,6 +1275,21 @@
         }
       }
     },
+    "SummaryItem": {
+      "description": "Summary item.",
+      "type": "object",
+      "properties": {
+        "count": {
+          "format": "int32",
+          "description": "Gets the count.",
+          "type": "integer"
+        },
+        "item": {
+          "description": "Gets the item.",
+          "type": "string"
+        }
+      }
+    },
     "MoveCollectionProperties": {
       "description": "Defines the move collection properties.",
       "type": "object",
@@ -1502,6 +1517,13 @@
         "nextLink": {
           "description": "Gets the value of  next link.",
           "type": "string"
+        },
+        "summary": {
+          "description": "Gets or the list of summary items.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SummaryItem"
+          }
         }
       }
     },
