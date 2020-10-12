@@ -122,7 +122,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/SourceControlConfigurationForCreate"
+              "$ref": "#/definitions/SourceControlConfiguration"
             },
             "description": "Properties necessary to Create KubernetesConfiguration."
           }
@@ -532,6 +532,11 @@
               "description": "Any Parameters for the Operator instance in string format.",
               "type": "string"
             },
+            "configurationProtectedSettings": {
+              "description": "Name-value pairs of protected configuration settings for the configuration",
+              "type": "object",
+              "$ref": "#/definitions/ConfigurationProtectedSettings"
+            },
             "operatorScope": {
               "description": "Scope at which the operator will be installed.",
               "$ref": "#/definitions/OperatorScopeDefinition"
@@ -575,81 +580,6 @@
               "description": "Compliance Status of the Configuration",
               "readOnly": true,
               "$ref": "#/definitions/ComplianceStatus"
-            },
-            "creationTime": {
-              "type": "string",
-              "description": "DateLiteral (per ISO8601) noting the time the resource was created by the client (user).",
-              "readOnly": true
-            },
-            "lastModifiedTime": {
-              "type": "string",
-              "description": "DateLiteral (per ISO8601) noting the time the resource was modified by the client (user).",
-              "readOnly": true
-            }
-          }
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/ProxyResource"
-        }
-      ]
-    },
-    "SourceControlConfigurationForCreate": {
-      "description": "The SourceControl Configuration object to create a new configuration.",
-      "properties": {
-        "properties": {
-          "type": "object",
-          "x-ms-client-flatten": true,
-          "description": "Properties to create a Source Control Configuration resource",
-          "properties": {
-            "repositoryUrl": {
-              "type": "string",
-              "description": "Url of the SourceControl Repository."
-            },
-            "operatorNamespace": {
-              "description": "The namespace to which this operator is installed to. Maximum of 253 lower case alphanumeric characters, hyphen and period only.",
-              "type": "string",
-              "default": "default"
-            },
-            "operatorInstanceName": {
-              "description": "Instance name of the operator - identifying the specific configuration.",
-              "type": "string"
-            },
-            "operatorType": {
-              "description": "Type of the operator",
-              "$ref": "#/definitions/OperatorTypeDefinition"
-            },
-            "operatorParams": {
-              "description": "Any Parameters for the Operator instance in string format.",
-              "type": "string"
-            },
-            "configurationProtectedSettings": {
-              "description": "Name-value pairs of protected configuration settings for the configuration",
-              "type": "object",
-              "$ref": "#/definitions/ConfigurationProtectedSettings"
-            },
-            "operatorScope": {
-              "description": "Scope at which the operator will be installed.",
-              "$ref": "#/definitions/OperatorScopeDefinition"
-            },
-            "repositoryPublicKey": {
-              "description": "Public Key associated with this SourceControl configuration (either generated within the cluster or provided by the user).",
-              "type": "string",
-              "readOnly": true
-            },
-            "sshKnownHostsContents": {
-              "description": "Base64-encoded known_hosts contents containing public SSH keys required to access private Git instances",
-              "type": "string"
-            },
-            "enableHelmOperator": {
-              "description": "Option to enable Helm Operator for this git configuration.",
-              "$ref": "#/definitions/EnableHelmOperatorDefinition"
-            },
-            "helmOperatorProperties": {
-              "description": "Properties for Helm operator.",
-              "type": "object",
-              "$ref": "#/definitions/HelmOperatorProperties"
             }
           }
         }
