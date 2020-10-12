@@ -1,0 +1,82 @@
+{
+  "parameters": {
+    "resourceId": "subscriptions/59f7daca-1093-445b-a28e-8681f2ab0c5c/resourceGroups/myRg1/providers/Microsoft.Storage/storageAccounts/testStorage1",
+    "api-version": "2020-08-06-preview",
+    "insightName": "classification"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/59f7daca-1093-445b-a28e-8681f2ab0c5c/resourceGroups/myRg1/providers/Microsoft.Storage/storageAccounts/testStorage1/providers/Microsoft.Security/Insights/classification",
+        "name": "classification",
+        "type": "Microsoft.Security/insights",
+        "properties": {
+          "associatedResource": "/subscriptions/59f7daca-1093-445b-a28e-8681f2ab0c5c/resourceGroups/myRg1/providers/Microsoft.Storage/storageAccounts/testStorage1",
+          "insightDescription": "Resource classification information...",
+          "insightProperties": {
+            "catalogs": [
+              {
+                "lastScanTimeUtc": "2020-09-21T18:09:19.2767629Z",
+                "lastScanId": "91073cf2-49bf-42f2-afc3-afbae7bb808c",
+                "catalogId": "ef924b02-53a4-42fb-9a2c-096506f43d82",
+                "sensitivity": {
+                  "classifications": [
+                    {
+                      "name": "Credit Card",
+                      "count": 10
+                    },
+                    {
+                      "name": "Email Address",
+                      "count": 3
+                    }
+                  ],
+                  "labels": [
+                    {
+                      "id": "a1fdfc6a-35bf-48a4-baf7-8c0d45cc7e34",
+                      "order": 2,
+                      "name": "Highly Confidential",
+                      "count": 5
+                    },
+                    {
+                      "id": "f2d8f202-88ea-4766-b7df-1d0905246d1d",
+                      "order": 9,
+                      "name": "Public",
+                      "count": 5
+                    }
+                  ]
+                }
+              },
+              {
+                "lastScanTimeUtc": "2020-09-22T15:21:34.2767629Z",
+                "lastScanId": "91073cf2-49bf-42f2-afc3-afbae7bb809d",
+                "catalogId": "ef924b02-53a4-42fb-9a2c-096506f43d93",
+                "sensitivity": {
+                  "classifications": [
+                    {
+                      "name": "Email Address",
+                      "count": 3
+                    }
+                  ],
+                  "labels": [
+                    {
+                      "id": "a1fdfc6a-35bf-48a4-baf7-8c0d45cc7e34",
+                      "order": 2,
+                      "name": "Highly Confidential",
+                      "count": 5
+                    },
+                    {
+                      "id": "f2d8f202-88ea-4766-b7df-1d0905246d1d",
+                      "order": 9,
+                      "name": "Public",
+                      "count": 5
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        }
+      }
+    }
+  }
+}
