@@ -436,15 +436,7 @@
                             "x-ms-enabled-protocols": {
                                 "x-ms-client-name": "EnabledProtocols",
                                 "description": "The protocols that have been enabled on the share.",
-                                "type": "string",
-                                "enum": [
-                                    "SMB",
-                                    "NFS"
-                                ],
-                                "x-ms-enum": {
-                                    "name": "ShareEnabledProtocols",
-                                    "modelAsString": false
-                                }
+                                "type": "string"
                             },
                             "x-ms-root-squash": {
                                 "x-ms-client-name": "RootSquash",
@@ -5625,14 +5617,6 @@
         },
         "ShareEnabledProtocols": {
             "type": "string",
-            "enum": [
-                "SMB",
-                "NFS"
-            ],
-            "x-ms-enum": {
-                "name": "ShareEnabledProtocols",
-                "modelAsString": false
-            }
         },
         "ShareRootSquash": {
             "type": "string",
@@ -6292,23 +6276,17 @@
         },
         "ShareEnabledProtocols": {
             "name": "x-ms-enabled-protocols",
-            "x-ms-client-name": "shareEnabledProtocols",
+            "description": "Protocols to enable on the share.",
+            "x-ms-client-name": "enabledProtocols",
             "in": "header",
             "required": false,
             "type": "string",
-            "enum": [
-                "SMB",
-                "NFS"
-            ],
-            "x-ms-enum": {
-                "name": "ShareEnabledProtocols",
-                "modelAsString": false
-            },
             "x-ms-parameter-location": "method"
         },
         "ShareRootSquash": {
             "name": "x-ms-root-squash",
-            "x-ms-client-name": "shareRootSquash",
+            "description": "Root squash to set on the share.  Only valid for NFS shares.",
+            "x-ms-client-name": "rootSquash",
             "in": "header",
             "required": false,
             "type": "string",
