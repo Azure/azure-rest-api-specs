@@ -3646,7 +3646,7 @@
             "$ref": "#/parameters/WorkspaceName"
           },
           {
-            "$ref": "#/parameters/ThreatIntelligencePropertiesForUpsert"
+            "$ref": "#/parameters/ThreatIntelligenceProperties"
           }
         ],
         "responses": {
@@ -3781,7 +3781,7 @@
       "put": {
         "x-ms-examples": {
           "Update a threat Intelligence indicator": {
-            "$ref": "./examples/threatintelligence/UpsertThreatIntelligence.json"
+            "$ref": "./examples/threatintelligence/UpdateThreatIntelligence.json"
           }
         },
         "tags": [
@@ -3809,7 +3809,7 @@
             "$ref": "#/parameters/ThreatIntelligenceName"
           },
           {
-            "$ref": "#/parameters/ThreatIntelligencePropertiesForUpsert"
+            "$ref": "#/parameters/ThreatIntelligenceProperties"
           }
         ],
         "responses": {
@@ -10362,10 +10362,10 @@
       "type": "string",
       "x-ms-parameter-location": "method"
     },
-    "ThreatIntelligencePropertiesForUpsert": {
-      "description": "Properties of threat intelligence indicators to upsert.",
+    "ThreatIntelligenceProperties": {
+      "description": "Properties of threat intelligence indicators to create and update.",
       "in": "body",
-      "name": "ThreatIntelligencePropertiesForUpsert",
+      "name": "ThreatIntelligenceProperties",
       "required": true,
       "schema": {
         "$ref": "#/definitions/ThreatIntelligenceIndicatorModelForRequestBody"
