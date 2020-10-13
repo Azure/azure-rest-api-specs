@@ -17,6 +17,8 @@ azure-arm: true
 license-header: MICROSOFT_MIT_NO_VERSION
 package-name: azure-mgmt-storage
 no-namespace-folders: true
+modelerfour:
+  lenient-model-deduplication: true
 ```
 
 ### Python multi-api
@@ -25,6 +27,7 @@ Generate all API versions currently shipped for this package
 
 ```yaml $(multiapi) && !$(track2)
 batch:
+  - tag: package-2020-08-preview
   - tag: package-2019-06
   - tag: package-2019-04
   - tag: package-2018-11
@@ -41,6 +44,7 @@ batch:
 ```yaml $(multiapi) && $(track2)
 clear-output-folder: true
 batch:
+  - tag: package-2020-08-preview
   - tag: package-2019-06
   - tag: package-2019-04
   - tag: package-2018-11
@@ -61,6 +65,18 @@ clear-output-folder: false
 perform-load: false
 ```
 
+### Tag: package-2020-08-preview and python
+
+These settings apply only when `--tag=package-2020-08-preview --python` is specified on the command line.
+Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
+
+``` yaml $(tag) == 'package-2020-08-preview'
+namespace: azure.mgmt.storage.v2020_08_01_preview
+output-folder: $(python-sdks-folder)/storage/azure-mgmt-storage/azure/mgmt/storage/v2020_08_01_preview
+python:
+  namespace: azure.mgmt.storage.v2020_08_01_preview
+  output-folder: $(python-sdks-folder)/storage/azure-mgmt-storage/azure/mgmt/storage/v2020_08_01_preview
+```
 ### Tag: package-2019-06 and python
 
 These settings apply only when `--tag=package-2019-06 --python` is specified on the command line.

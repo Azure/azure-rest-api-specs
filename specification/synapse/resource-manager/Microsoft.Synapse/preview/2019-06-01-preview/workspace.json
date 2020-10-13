@@ -706,6 +706,28 @@
         }
       }
     },
+    "ManagedVirtualNetworkSettings": {
+      "description": "Managed Virtual Network Settings",
+      "type": "object",
+      "properties": {
+        "preventDataExfiltration": {
+          "description": "Prevent Data Exfiltration",
+          "type": "boolean"
+        },
+        "linkedAccessCheckOnTargetResource": {
+          "description": "Linked Access Check On Target Resource",
+          "type": "boolean"
+        },
+        "allowedAadTenantIdsForLinking": {
+          "description": "Allowed Aad Tenant Ids For Linking",
+          "type": "array",
+          "items": {
+            "type": "string",
+            "description": "Tenant Id"
+          }
+        }
+      }
+    },
     "WorkspaceAadAdminInfo": {
       "description": "Workspace active directory administrator",
       "type": "object",
@@ -789,6 +811,18 @@
           "items": {
             "$ref": "./privateEndpointConnections.json#/definitions/PrivateEndpointConnection"
           }
+        },
+        "extraProperties": {
+          "description": "Workspace level configs and feature flags",
+          "additionalProperties": {
+            "type": "object"
+          },
+          "type": "object",
+          "readOnly": true
+        },
+        "managedVirtualNetworkSettings": {
+          "description": "Managed Virtual Network Settings",
+          "$ref": "#/definitions/ManagedVirtualNetworkSettings"
         }
       }
     },
@@ -806,6 +840,28 @@
         "identity": {
           "description": "The identity of the workspace",
           "$ref": "#/definitions/ManagedIdentity"
+        },
+        "managedVirtualNetworkSettings": {
+          "description": "Managed Virtual Network Settings",
+          "type": "object",
+          "properties": {
+            "preventDataExfiltration": {
+              "description": "Prevent Data Exfiltration",
+              "type": "boolean"
+            },
+            "linkedAccessCheckOnTargetResource": {
+              "description": "Linked Access Check On Target Resource",
+              "type": "boolean"
+            },
+            "allowedAadTenantIdsForLinking": {
+              "description": "Allowed Aad Tenant Ids For Linking",
+              "type": "array",
+              "items": {
+                "type": "string",
+                "description": "Tenant Id"
+              }
+            }
+          }
         },
         "properties": {
           "description": "Workspace patch properties",

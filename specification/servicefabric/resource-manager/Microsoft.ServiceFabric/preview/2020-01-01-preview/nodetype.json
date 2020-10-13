@@ -540,9 +540,6 @@
     "NodeType": {
       "allOf": [
         {
-          "description": "The node type definition"
-        },
-        {
           "$ref": "#/definitions/ManagedProxyResource"
         }
       ],
@@ -578,7 +575,7 @@
       "required": [
         "isPrimary",
         "vmInstanceCount",
-        "diskSizeInGB"
+        "dataDiskSizeGB"
       ],
       "properties": {
         "isPrimary": {
@@ -588,11 +585,11 @@
         "vmInstanceCount": {
           "type": "integer",
           "format": "int32",
-          "description": "The number of nodes in the node type. This count should match the capacity property in the corresponding VirtualMachineScaleSet resource.",
+          "description": "The number of nodes in the node type.",
           "minimum": 1,
           "maximum": 2147483647
         },
-        "diskSizeInGB": {
+        "dataDiskSizeGB": {
           "type": "integer",
           "format": "int32",
           "description": "Disk size for each vm in the node type in GBs."
