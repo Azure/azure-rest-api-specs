@@ -432,6 +432,33 @@
                                 "x-ms-client-name": "AccessTierTransitionState",
                                 "type": "string",
                                 "description": "Returns the transition state betweeen access tiers, when present."
+                            },
+                            "x-ms-enabled-protocols": {
+                                "x-ms-client-name": "EnabledProtocols",
+                                "description": "The protocols that have been enabled on the share.",
+                                "type": "string",
+                                "enum": [
+                                    "SMB",
+                                    "NFS"
+                                ],
+                                "x-ms-enum": {
+                                    "name": "ShareEnableProtocols",
+                                    "modelAsString": false
+                                }
+                            },
+                            "x-ms-root-squash": {
+                                "x-ms-client-name": "RootSquash",
+                                "description": "Valid for NFS shares only.",
+                                "type": "string",
+                                "enum": [
+                                    "NoRootSquash",
+                                    "RootSquash",
+                                    "AllSquash"
+                                ],
+                                "x-ms-enum": {
+                                    "name": "ShareRootSquash",
+                                    "modelAsString": false
+                                }
                             }
                         }
                     },
@@ -5489,6 +5516,12 @@
                 },
                 "LeaseDuration": {
                     "$ref": "#/definitions/LeaseDuration"
+                },
+                "EnabledProtocols": {
+                    "$ref": "#/definitions/ShareEnabledProtocols"
+                },
+                "RootSquash": {
+                    "$ref": "#/definitions/ShareRootSquash"
                 }
             }
         },
@@ -5588,6 +5621,29 @@
                     "type": "string",
                     "description": "The permission in the Security Descriptor Definition Language (SDDL)."
                 }
+            }
+        },
+        "ShareEnabledProtocols": {
+            "type": "string",
+            "enum": [
+                "SMB",
+                "NFS"
+            ],
+            "x-ms-enum": {
+                "name": "ShareEnableProtocols",
+                "modelAsString": false
+            }
+        },
+        "ShareRootSquash": {
+            "type": "string",
+            "enum": [
+                "NoRootSquash",
+                "RootSquash",
+                "AllSquash"
+            ],
+            "x-ms-enum": {
+                "name": "ShareRootSquash",
+                "modelAsString": false
             }
         }
     },
