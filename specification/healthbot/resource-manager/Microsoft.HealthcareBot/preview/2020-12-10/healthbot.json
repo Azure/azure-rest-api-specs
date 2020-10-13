@@ -37,9 +37,9 @@
     }
   },
   "paths": {
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HealthcareBot/HealthcareBots/{resourceName}/ResourceCreationValidate": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HealthcareBot/healthcareBots/{resourceName}/ResourceCreationValidate": {
       "post": {
-        "operationId": "resourcecreationvalidate",
+        "operationId": "resource_creationValidate",
         "x-ms-examples": {
           "BatchAccountDelete": {
             "$ref": "./examples/ResourceCreationValidatePost.json"
@@ -82,7 +82,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HealthcareBot/HealthcareBots/{resourceName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HealthcareBot/healthcareBots/{resourceName}": {
       "put": {
         "operationId": "create_bot",
         "x-ms-examples": {
@@ -127,9 +127,9 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HealthcareBot/HealthcareBots/{resourceName}/ResourceCreationCompleted": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HealthcareBot/healthcareBots/{resourceName}/ResourceCreationCompleted": {
       "post": {
-        "operationId": "resourcecreationcompleted",
+        "operationId": "resource_creationCompleted",
         "x-ms-examples": {
           "BatchAccountDelete": {
             "$ref": "./examples/ResourceCreationCompletedPost.json"
@@ -194,6 +194,12 @@
             "description": "OK.",
             "schema": {
               "$ref": "#/definitions/OperationEntityListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "#/definitions/Error"
             }
           }
         },
