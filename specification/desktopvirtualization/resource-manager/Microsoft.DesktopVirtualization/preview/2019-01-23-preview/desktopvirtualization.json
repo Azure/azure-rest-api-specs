@@ -3025,6 +3025,28 @@
         "iconIndex": {
           "type": "integer",
           "description": "Index of the icon."
+        },
+        "msixPackageFamilyName": {
+          "type": "string",
+          "description": "Specifies the package family name for MSIX applications",
+          "x-nullable": true
+        },
+        "msixPackageApplicationId": {
+          "type": "string",
+          "description": "Specifies the package application Id for MSIX applications",
+          "x-nullable": true
+        },
+        "applicationType": {
+          "enum": [
+            "InBuilt",
+            "MsixApplication"
+          ],
+          "x-ms-enum": {
+            "name": "ApplicationType",
+            "modelAsString": true
+          },
+          "type": "string",
+          "description": "Resource Type of Application."
         }
       }
     },
