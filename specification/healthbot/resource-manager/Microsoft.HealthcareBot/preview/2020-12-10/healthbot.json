@@ -197,6 +197,28 @@
           }
         }
       }
+    },
+    "OperationEntity": {
+      "description": "The operations supported by Bot Service Management.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Operation name: {provider}/{resource}/{operation}.",
+          "type": "string"
+        },
+        "display": {
+          "$ref": "#/definitions/OperationDisplayInfo",
+          "description": "The operation supported by Bot Service Management."
+        },
+        "origin": {
+          "description": "The origin of the operation.",
+          "type": "string"
+        },
+        "properties": {
+          "description": "Additional properties.",
+          "type": "object"
+        }
+      }
     }
   },
   "parameters": {
