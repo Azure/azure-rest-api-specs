@@ -10,21 +10,29 @@
       "body": {
         "value": [
           {
-            "id": "/subscriptions/subid/providers/Microsoft.HybridNetwork/locations/eastus/vendors/testVendor/virtualNetworkFunctions/testServiceKey",
+            "id": "/subscriptions/subid/providers/Microsoft.HybridNetwork/locations/eastus/vendors/testVendor/networkFunctions/testServiceKey",
             "name": "TestServiceKey",
-            "type": "Microsoft.HybridNetwork/locations/vendors/virtualNetworkFunctions",
-            "location": "eastus",
+            "type": "Microsoft.HybridNetwork/locations/vendors/networkFunctions",
             "properties": {
               "provisioningState": "Succeeded",
               "vendorProvisioningState": "Provisioning",
               "skuName": "testSku",
               "skuType": "SDWAN",
-              "virtualNetworkFunctionVendorConfigurations": [
+              "networkFunctionVendorConfigurations": [
                 {
                   "roleName": "testRole",
                   "osProfile": {
                     "adminUsername": "dummyuser",
-                    "sshPublicKey": null,
+                    "linuxConfiguration": {
+                      "ssh": {
+                        "publicKeys": [
+                          {
+                            "path": "home/user/.ssh/authorized_keys",
+                            "keyData": "ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAgEAwrr66r8n6B8Y0zMF3dOpXEapIQD9DiYQ6D6/zwor9o39jSkHNiMMER/GETBbzP83LOcekm02aRjo55ArO7gPPVvCXbrirJu9pkm4AC4BBre5xSLS= user@constoso-DSH"
+                          }
+                        ]
+                      }
+                    },
                     "customData": "base-64 encoded string of custom data"
                   },
                   "userDataParameters": {},

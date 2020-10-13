@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "HybridNetworkManagementClient",
-    "description": "The resources in this swagger specification will be used by vendors to on-board offerings and manage vendor virtual network function.",
+    "description": "The resources in this swagger specification will be used to manage the vendor network function deployment in the Microsoft.HybridNetwork resource provider.",
     "version": "2020-01-01-preview"
   },
   "host": "management.azure.com",
@@ -34,20 +34,20 @@
     }
   },
   "paths": {
-    "/subscriptions/{subscriptionId}/providers/Microsoft.HybridNetwork/locations/{locationName}/vendors/{vendorName}/virtualNetworkFunctions/{serviceKey}": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.HybridNetwork/locations/{locationName}/vendors/{vendorName}/networkFunctions/{serviceKey}": {
       "get": {
         "tags": [
-          "VendorVirtualNetworkFunctions"
+          "VendorNetworkFunctions"
         ],
-        "operationId": "VendorVirtualNetworkFunctions_Get",
-        "description": "Gets information about the specified vendor virtual network function.",
+        "operationId": "VendorNetworkFunctions_Get",
+        "description": "Gets information about the specified vendor network function.",
         "parameters": [
           {
             "name": "locationName",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The Azure region where the virtual network function sub resource was created by the customer."
+            "description": "The Azure region where the network function resource was created by the customer."
           },
           {
             "name": "vendorName",
@@ -61,48 +61,48 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The GUID for the vendor virtual network function."
+            "description": "The GUID for the vendor network function."
           },
           {
-            "$ref": "./common.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "./common.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
           "200": {
-            "description": "Request is successful. The operation returns the resulting vendor virtual network function sub resource.",
+            "description": "Request is successful. The operation returns the resulting vendor network function sub resource.",
             "schema": {
-              "$ref": "#/definitions/VendorVirtualNetworkFunction"
+              "$ref": "#/definitions/VendorNetworkFunction"
             }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "./common.json#/definitions/ErrorDetails"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
         "x-ms-examples": {
-          "Get vendor virtual network function sub resource by service key of virtual network function.": {
-            "$ref": "./examples/VendorVnfGet.json"
+          "Get vendor network function sub resource by service key of network function.": {
+            "$ref": "./examples/VendorNfGet.json"
           }
         }
       },
       "put": {
         "tags": [
-          "VendorVirtualNetworkFunctions"
+          "VendorNetworkFunctions"
         ],
-        "operationId": "VendorVirtualNetworkFunctions_CreateOrUpdate",
-        "description": "Creates or updates a vendor virtual network function.",
+        "operationId": "VendorNetworkFunctions_CreateOrUpdate",
+        "description": "Creates or updates a vendor network function.",
         "parameters": [
           {
             "name": "locationName",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The Azure region where the virtual network function resource was created by the customer."
+            "description": "The Azure region where the network function resource was created by the customer."
           },
           {
             "name": "vendorName",
@@ -116,47 +116,47 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The GUID for the vendor virtual network function."
+            "description": "The GUID for the vendor network function."
           },
           {
             "name": "parameters",
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/VendorVirtualNetworkFunction"
+              "$ref": "#/definitions/VendorNetworkFunction"
             },
-            "description": "Parameters supplied to the create or update vendor virtual network function operation."
+            "description": "Parameters supplied to the create or update vendor network function operation."
           },
           {
-            "$ref": "./common.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "./common.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
           "200": {
-            "description": "Creation or update is successful. The operation returns the resulting vendor virtual network function sub resource.",
+            "description": "Creation or update is successful. The operation returns the resulting vendor network function sub resource.",
             "schema": {
-              "$ref": "#/definitions/VendorVirtualNetworkFunction"
+              "$ref": "#/definitions/VendorNetworkFunction"
             }
           },
           "201": {
-            "description": "Created. The operation returns the resulting vendor virtual network function sub resource.",
+            "description": "Created. The operation returns the resulting vendor network function sub resource.",
             "schema": {
-              "$ref": "#/definitions/VendorVirtualNetworkFunction"
+              "$ref": "#/definitions/VendorNetworkFunction"
             }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "./common.json#/definitions/ErrorDetails"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
         "x-ms-examples": {
-          "Create or update vendor virtual network function sub resource": {
-            "$ref": "./examples/VendorVnfCreate.json"
+          "Create or update vendor network function sub resource": {
+            "$ref": "./examples/VendorNfCreate.json"
           }
         },
         "x-ms-long-running-operation": true,
@@ -165,20 +165,20 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.HybridNetwork/locations/{locationName}/vendors/{vendorName}/virtualNetworkFunctions/{serviceKey}/roleInstances/{roleInstanceName}/start": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.HybridNetwork/locations/{locationName}/vendors/{vendorName}/networkFunctions/{serviceKey}/roleInstances/{roleInstanceName}/start": {
       "post": {
         "tags": [
           "RoleInstances"
         ],
         "operationId": "RoleInstances_Start",
-        "description": "Starts a role instance of a vendor virtual network function.",
+        "description": "Starts a role instance of a vendor network function.",
         "parameters": [
           {
             "name": "locationName",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The Azure region where the virtual network function resource was created by customer."
+            "description": "The Azure region where the network function resource was created by customer."
           },
           {
             "name": "vendorName",
@@ -192,20 +192,20 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The GUID for the vendor virtual network function."
+            "description": "The GUID for the vendor network function."
           },
           {
             "name": "roleInstanceName",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the role instance of the vendor virtual network function."
+            "description": "The name of the role instance of the vendor network function."
           },
           {
-            "$ref": "./common.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "./common.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -218,12 +218,12 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "./common.json#/definitions/ErrorDetails"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
         "x-ms-examples": {
-          "Start a role instance of a vendor virtual network function": {
+          "Start a role instance of a vendor network function": {
             "$ref": "./examples/RoleInstanceStart.json"
           }
         },
@@ -233,20 +233,20 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.HybridNetwork/locations/{locationName}/vendors/{vendorName}/virtualNetworkFunctions/{serviceKey}/roleInstances/{roleInstanceName}/stop": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.HybridNetwork/locations/{locationName}/vendors/{vendorName}/networkFunctions/{serviceKey}/roleInstances/{roleInstanceName}/stop": {
       "post": {
         "tags": [
           "RoleInstances"
         ],
         "operationId": "RoleInstances_Stop",
-        "description": "Powers off (stop) a role instance of a vendor virtual network function.",
+        "description": "Powers off (stop) a role instance of a vendor network function.",
         "parameters": [
           {
             "name": "locationName",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The Azure region where the virtual network function resource was created by customer."
+            "description": "The Azure region where the network function resource was created by customer."
           },
           {
             "name": "vendorName",
@@ -260,20 +260,20 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The GUID for the vendor virtual network function."
+            "description": "The GUID for the vendor network function."
           },
           {
             "name": "roleInstanceName",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the role instance of the vendor virtual network function."
+            "description": "The name of the role instance of the vendor network function."
           },
           {
-            "$ref": "./common.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "./common.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -286,12 +286,12 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "./common.json#/definitions/ErrorDetails"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
         "x-ms-examples": {
-          "Stop a role instance of a vendor virtual network function": {
+          "Stop a role instance of a vendor network function": {
             "$ref": "./examples/RoleInstanceStop.json"
           }
         },
@@ -301,20 +301,20 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.HybridNetwork/locations/{locationName}/vendors/{vendorName}/virtualNetworkFunctions/{serviceKey}/roleInstances/{roleInstanceName}/restart": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.HybridNetwork/locations/{locationName}/vendors/{vendorName}/networkFunctions/{serviceKey}/roleInstances/{roleInstanceName}/restart": {
       "post": {
         "tags": [
           "RoleInstances"
         ],
         "operationId": "RoleInstances_Restart",
-        "description": "Restarts a role instance of a vendor virtual network function.",
+        "description": "Restarts a role instance of a vendor network function.",
         "parameters": [
           {
             "name": "locationName",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The Azure region where the virtual network function resource was created by customer."
+            "description": "The Azure region where the network function resource was created by customer."
           },
           {
             "name": "vendorName",
@@ -328,20 +328,20 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The GUID for the vendor virtual network function."
+            "description": "The GUID for the vendor network function."
           },
           {
             "name": "roleInstanceName",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the role instance of the vendor virtual network function."
+            "description": "The name of the role instance of the vendor network function."
           },
           {
-            "$ref": "./common.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "./common.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -354,12 +354,12 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "./common.json#/definitions/ErrorDetails"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
         "x-ms-examples": {
-          "Restart a role instance of a vendor virtual network function": {
+          "Restart a role instance of a vendor network function": {
             "$ref": "./examples/RoleInstanceRestart.json"
           }
         },
@@ -369,20 +369,20 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.HybridNetwork/locations/{locationName}/vendors/{vendorName}/virtualNetworkFunctions/{serviceKey}/roleInstances/{roleInstanceName}": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.HybridNetwork/locations/{locationName}/vendors/{vendorName}/networkFunctions/{serviceKey}/roleInstances/{roleInstanceName}": {
       "get": {
         "tags": [
           "RoleInstances"
         ],
         "operationId": "RoleInstances_Get",
-        "description": "Gets the information of role instance of vendor virtual network function.",
+        "description": "Gets the information of role instance of vendor network function.",
         "parameters": [
           {
             "name": "locationName",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The Azure region where the virtual network function resource was created by customer."
+            "description": "The Azure region where the network function resource was created by customer."
           },
           {
             "name": "vendorName",
@@ -396,20 +396,20 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The GUID for the vendor virtual network function."
+            "description": "The GUID for the vendor network function."
           },
           {
             "name": "roleInstanceName",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the role instance of the vendor virtual network function."
+            "description": "The name of the role instance of the vendor network function."
           },
           {
-            "$ref": "./common.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "./common.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -422,31 +422,31 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "./common.json#/definitions/ErrorDetails"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
         "x-ms-examples": {
-          "Get the operational state of role instance of vendor virtual network function": {
+          "Get the operational state of role instance of vendor network function": {
             "$ref": "./examples/RoleInstanceGet.json"
           }
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.HybridNetwork/locations/{locationName}/vendors/{vendorName}/virtualNetworkFunctions": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.HybridNetwork/locations/{locationName}/vendors/{vendorName}/networkFunctions": {
       "get": {
         "tags": [
-          "VendorVirtualNetworkFunctions"
+          "VendorNetworkFunctions"
         ],
-        "operationId": "VendorVirtualNetworkFunctions_List",
-        "description": "Lists all the vendor virtual network function sub resources in an Azure region, filtered by skuType, skuName, vendorProvisioningState.",
+        "operationId": "VendorNetworkFunctions_List",
+        "description": "Lists all the vendor network function sub resources in an Azure region, filtered by skuType, skuName, vendorProvisioningState.",
         "parameters": [
           {
             "name": "locationName",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The Azure region where the virtual network function resource was created by the customer."
+            "description": "The Azure region where the network function resource was created by the customer."
           },
           {
             "name": "vendorName",
@@ -463,29 +463,29 @@
             "description": "The filter to apply on the operation. The properties you can use for eq (equals) are: skuType, skuName and vendorProvisioningState."
           },
           {
-            "$ref": "./common.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "./common.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
           "200": {
-            "description": "Request is successful. The operation returns the resulting hybrid network vendor virtual network function sub resource.",
+            "description": "Request is successful. The operation returns the resulting vendor network function sub resource.",
             "schema": {
-              "$ref": "#/definitions/VendorVirtualNetworkFunctionListResult"
+              "$ref": "#/definitions/VendorNetworkFunctionListResult"
             }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "./common.json#/definitions/ErrorDetails"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
         "x-ms-examples": {
-          "List all vnfs of vendor resource": {
-            "$ref": "./examples/VendorVnfListByVendor.json"
+          "List all nfs of vendor resource": {
+            "$ref": "./examples/VendorNfListByVendor.json"
           }
         },
         "x-ms-pageable": {
@@ -493,21 +493,20 @@
         }
       }
     },
-
-    "/subscriptions/{subscriptionId}/providers/Microsoft.HybridNetwork/locations/{locationName}/vendors/{vendorName}/virtualNetworkFunctions/{serviceKey}/roleInstances": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.HybridNetwork/locations/{locationName}/vendors/{vendorName}/networkFunctions/{serviceKey}/roleInstances": {
       "get": {
         "tags": [
           "RoleInstances"
         ],
         "operationId": "RoleInstances_List",
-        "description": "Lists the information of role instances of vendor virtual network function.",
+        "description": "Lists the information of role instances of vendor network function.",
         "parameters": [
           {
             "name": "locationName",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The Azure region where the virtual network function resource was created by customer."
+            "description": "The Azure region where the network function resource was created by customer."
           },
           {
             "name": "vendorName",
@@ -521,32 +520,32 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The GUID for the vendor virtual network function."
+            "description": "The GUID for the vendor network function."
           },
           {
-            "$ref": "./common.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "./common.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
           "200": {
             "description": "OK.",
             "schema": {
-              "$ref": "#/definitions/VirtualNetworkFunctionRoleInstanceListResult"
+              "$ref": "#/definitions/NetworkFunctionRoleInstanceListResult"
             }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "./common.json#/definitions/ErrorDetails"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
         "x-ms-examples": {
-          "List all role instances of vendor virtual network function": {
-            "$ref": "./examples/RoleInstanceListByVendorVirtualNetworkFunction.json"
+          "List all role instances of vendor network function": {
+            "$ref": "./examples/RoleInstanceListByVendorNetworkFunction.json"
           }
         },
         "x-ms-pageable": {
@@ -556,14 +555,14 @@
     }
   },
   "definitions": {
-    "VendorVirtualNetworkFunctionListResult": {
+    "VendorNetworkFunctionListResult": {
       "properties": {
         "value": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/VendorVirtualNetworkFunction"
+            "$ref": "#/definitions/VendorNetworkFunction"
           },
-          "description": "A list of vendor virtual network functions."
+          "description": "A list of vendor network functions."
         },
         "nextLink": {
           "readOnly": true,
@@ -573,32 +572,32 @@
       },
       "description": "Response for vendors API service call."
     },
-    "VendorVirtualNetworkFunction": {
+    "VendorNetworkFunction": {
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/VendorVirtualNetworkFunctionPropertiesFormat",
-          "description": "Virtual network function details."
+          "$ref": "#/definitions/VendorNetworkFunctionPropertiesFormat",
+          "description": "Network function details."
         }
       },
       "allOf": [
         {
-          "$ref": "./common.json#/definitions/Resource"
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource"
         }
       ],
-      "description": "Vendor virtual network function sub resource."
+      "description": "Vendor network function sub resource."
     },
-    "VendorVirtualNetworkFunctionPropertiesFormat": {
-      "description": "Vendor virtual network function properties.",
+    "VendorNetworkFunctionPropertiesFormat": {
+      "description": "Vendor network function properties.",
       "properties": {
         "provisioningState": {
           "readOnly": true,
           "$ref": "./common.json#/definitions/ProvisioningState",
-          "description": "The provisioning state of the vendor virtual network function sub resource."
+          "description": "The provisioning state of the vendor network function sub resource."
         },
         "vendorProvisioningState": {
           "$ref": "./common.json#/definitions/VendorProvisioningState",
-          "description": "The vendor controlled provisioning state of the vendor virtual network function."
+          "description": "The vendor controlled provisioning state of the vendor network function."
         },
         "skuName": {
           "readOnly": true,
@@ -610,20 +609,20 @@
           "description": "The sku type.",
           "readOnly": true
         },
-        "virtualNetworkFunctionVendorConfigurations": {
+        "networkFunctionVendorConfigurations": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/VirtualNetworkFunctionVendorConfiguration"
+            "$ref": "#/definitions/NetworkFunctionVendorConfiguration"
           },
-          "description": "An array of virtual network function vendor configurations."
+          "description": "An array of network function vendor configurations."
         }
       }
     },
-    "VirtualNetworkFunctionVendorConfiguration": {
+    "NetworkFunctionVendorConfiguration": {
       "properties": {
         "roleName": {
           "type": "string",
-          "description": "The name of the vendor virtual network function role."
+          "description": "The name of the vendor network function role."
         },
         "osProfile": {
           "description": "Specifies the operating system settings for the role instance.",
@@ -642,10 +641,10 @@
           "description": "The network interface configurations."
         }
       },
-      "description": "Virtual network function vendor configuration."
+      "description": "Network function vendor configuration."
     },
-    "VirtualNetworkFunctionRoleInstanceListResult": {
-      "description": "List of role instances of vendor virtual network function.",
+    "NetworkFunctionRoleInstanceListResult": {
+      "description": "List of role instances of vendor network function.",
       "properties": {
         "value": {
           "readOnly": true,
@@ -703,7 +702,7 @@
           }
         }
       },
-      "description": "The role instance properties of the virtual network function."
+      "description": "The role instance properties of the network function."
     }
   }
 }

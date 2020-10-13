@@ -2,33 +2,38 @@
   "parameters": {
     "api-version": "2020-01-01-preview",
     "subscriptionId": "subid",
-    "resourceGroupName": "rg",
-    "virtualNetworkFunctionName": "testVnf"
+    "locationName": "eastus",
+    "vendorName": "testVendor",
+    "serviceKey": "testServiceKey"
   },
   "responses": {
     "200": {
       "body": {
-        "id": "/subscriptions/subid/resourcegroups/rg/providers/Microsoft.HybridNetwork/virtualNetworkFunctions/testVnf",
-        "name": "testVnf",
-        "type": "Microsoft.HybridNetwork/virtualNetworkFunctions",
-        "location": "eastus",
+        "id": "/subscriptions/subid/providers/Microsoft.HybridNetwork/locations/eastus/vendors/testVendor/networkFunctions/testServiceKey",
+        "name": "testServiceKey",
+        "type": "Microsoft.HybridNetwork/locations/vendors/networkFunctions",
         "properties": {
           "provisioningState": "Succeeded",
-          "device": {
-            "id": "/subscriptions/subid/resourcegroups/rg/providers/Microsoft.HybridNetwork/devices/testDevice"
-          },
+          "vendorProvisioningState": "Provisioning",
           "skuName": "testSku",
           "skuType": "SDWAN",
-          "vendorName": "testVendor",
-          "serviceKey": "testServiceKey",
-          "vendorProvisioningState": "NotProvisioned",
-          "managedApplication": {
-            "id": "/subscriptions/subid/resourceGroups/rg/providers/Microsoft.Solutions/applications/testServiceKey"
-          },
-          "managedApplicationParameters": {},
-          "virtualNetworkFunctionUserConfigurations": [
+          "networkFunctionVendorConfigurations": [
             {
               "roleName": "testRole",
+              "osProfile": {
+                "adminUsername": "dummyuser",
+                "linuxConfiguration": {
+                  "ssh": {
+                    "publicKeys": [
+                      {
+                        "path": "home/user/.ssh/authorized_keys",
+                        "keyData": "ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAgEAwrr66r8n6B8Y0zMF3dOpXEapIQD9DiYQ6D6/zwor9o39jSkHNiMMER/GETBbzP83LOcekm02aRjo55ArO7gPPVvCXbrirJu9pkm4AC4BBre5xSLS= user@constoso-DSH"
+                      }
+                    ]
+                  }
+                },
+                "customData": "base-64 encoded string of custom data"
+              },
               "userDataParameters": {},
               "networkInterfaces": [
                 {

@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "HybridNetworkManagementClient",
-    "description": "The resources in this swagger specification will be used to manage the Hybrid Network device.",
+    "description": "The resources in this swagger specification will be used to manage the network function deployment in a Hybrid Network resource provider.",
     "version": "2020-01-01-preview"
   },
   "host": "management.azure.com",
@@ -34,23 +34,23 @@
     }
   },
   "paths": {
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridNetwork/devices/{deviceName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridNetwork/networkFunctions/{networkFunctionName}": {
       "delete": {
         "tags": [
-          "Devices"
+          "NetworkFunctions"
         ],
-        "operationId": "Devices_Delete",
-        "description": "Deletes the specified device.",
+        "operationId": "NetworkFunctions_Delete",
+        "description": "Deletes the specified network function resource.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "deviceName",
+            "name": "networkFunctionName",
+            "description": "The name of the network function.",
             "in": "path",
             "required": true,
-            "type": "string",
-            "description": "The name of the device resource."
+            "type": "string"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
@@ -61,10 +61,10 @@
         ],
         "responses": {
           "200": {
-            "description": "The operation is successful."
+            "description": "The operation is completed successfully."
           },
           "202": {
-            "description": "Accepted. Sets the provisioningState to 'Deleting' until the operation is completed. Returns an operation URI that can be queried to find the current state of the operation."
+            "description": "Accepted. The header contains 'Azure-AsyncOperation' header pointing to an operations resource. The operation URI can be queried to find the current state of the operation."
           },
           "204": {
             "description": "Request is successful. Resource with the specified name does not exist."
@@ -77,8 +77,8 @@
           }
         },
         "x-ms-examples": {
-          "Delete device resource": {
-            "$ref": "./examples/DeviceDelete.json"
+          "Delete network function resource": {
+            "$ref": "./examples/NetworkFunctionDelete.json"
           }
         },
         "x-ms-long-running-operation": true,
@@ -88,20 +88,20 @@
       },
       "get": {
         "tags": [
-          "Devices"
+          "NetworkFunctions"
         ],
-        "operationId": "Devices_Get",
-        "description": "Gets information about the specified device.",
+        "operationId": "NetworkFunctions_Get",
+        "description": "Gets information about the specified network function resource.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "deviceName",
+            "name": "networkFunctionName",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the device resource."
+            "description": "The name of the network function resource."
           },
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
@@ -112,9 +112,9 @@
         ],
         "responses": {
           "200": {
-            "description": "Request is successful. The operation returns the resulting device resource.",
+            "description": "Operation is successful. The operation returns the resulting network function resource.",
             "schema": {
-              "$ref": "#/definitions/Device"
+              "$ref": "#/definitions/NetworkFunction"
             }
           },
           "default": {
@@ -125,36 +125,36 @@
           }
         },
         "x-ms-examples": {
-          "Get  device resource": {
-            "$ref": "./examples/DeviceGet.json"
+          "Get network function resource": {
+            "$ref": "./examples/NetworkFunctionGet.json"
           }
         }
       },
       "put": {
         "tags": [
-          "Devices"
+          "NetworkFunctions"
         ],
-        "operationId": "Devices_CreateOrUpdate",
-        "description": "Creates or updates a device.",
+        "operationId": "NetworkFunctions_CreateOrUpdate",
+        "description": "Creates or updates a network function resource.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "deviceName",
+            "name": "networkFunctionName",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "Resource name for the device resource."
+            "description": "Resource name for the network function resource."
           },
           {
             "name": "parameters",
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/Device"
+              "$ref": "#/definitions/NetworkFunction"
             },
-            "description": "Parameters supplied to the create or update device operation."
+            "description": "Parameters supplied in the body to the create or update network function operation."
           },
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
@@ -165,15 +165,15 @@
         ],
         "responses": {
           "200": {
-            "description": "Creation or update is successful.",
+            "description": "The operation is completed successfully.",
             "schema": {
-              "$ref": "#/definitions/Device"
+              "$ref": "#/definitions/NetworkFunction"
             }
           },
           "201": {
-            "description": "Creation or update is successful. The header contains 'Azure-AsyncOperation' header pointing to an operations resource. The operation URI can be queried to find the current state of the operation.",
+            "description": "Created or Updated. The header contains 'Azure-AsyncOperation' header pointing to an operation resource. The operation URI can be queried to find the current state of the operation.",
             "schema": {
-              "$ref": "#/definitions/Device"
+              "$ref": "#/definitions/NetworkFunction"
             }
           },
           "default": {
@@ -184,8 +184,8 @@
           }
         },
         "x-ms-examples": {
-          "Create or update device": {
-            "$ref": "./examples/DeviceCreate.json"
+          "Create network function resource": {
+            "$ref": "./examples/NetworkFunctionCreate.json"
           }
         },
         "x-ms-long-running-operation": true,
@@ -195,20 +195,20 @@
       },
       "patch": {
         "tags": [
-          "Devices"
+          "NetworkFunctions"
         ],
-        "operationId": "Devices_UpdateTags",
-        "description": "Updates device tags.",
+        "operationId": "NetworkFunctions_UpdateTags",
+        "description": "Updates the tags for the network function resource.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "deviceName",
+            "name": "networkFunctionName",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the device resource."
+            "description": "Resource name for the network function resource."
           },
           {
             "name": "parameters",
@@ -217,7 +217,7 @@
             "schema": {
               "$ref": "./common.json#/definitions/TagsObject"
             },
-            "description": "Parameters supplied to the update device tags operation."
+            "description": "Parameters supplied to the update network function tags operation."
           },
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
@@ -228,9 +228,9 @@
         ],
         "responses": {
           "200": {
-            "description": "Update is successful. The operation returns the resulting device resource.",
+            "description": "Update is completed successfully. The operation returns the resulting network function resource.",
             "schema": {
-              "$ref": "#/definitions/Device"
+              "$ref": "#/definitions/NetworkFunction"
             }
           },
           "default": {
@@ -241,19 +241,16 @@
           }
         },
         "x-ms-examples": {
-          "Update hybrid network device tags": {
-            "$ref": "./examples/DeviceUpdateTags.json"
+          "Update tags for network function resource": {
+            "$ref": "./examples/NetworkFunctionUpdateTags.json"
           }
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.HybridNetwork/devices": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.HybridNetwork/networkFunctions": {
       "get": {
-        "tags": [
-          "Devices"
-        ],
-        "operationId": "Devices_ListBySubscription",
-        "description": "Lists all the devices in a subscription.",
+        "description": "Lists all the network functions in a subscription.",
+        "operationId": "NetworkFunctions_ListBySubscription",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
@@ -264,9 +261,9 @@
         ],
         "responses": {
           "200": {
-            "description": "Request is successful. The operation returns a list of device resources.",
+            "description": "Request is successful. The operation returns a list of network function resources.",
             "schema": {
-              "$ref": "#/definitions/DeviceListResult"
+              "$ref": "#/definitions/NetworkFunctionListResult"
             }
           },
           "default": {
@@ -276,9 +273,12 @@
             }
           }
         },
+        "tags": [
+          "NetworkFunctions"
+        ],
         "x-ms-examples": {
-          "List all devices in a subscription.": {
-            "$ref": "./examples/DeviceListBySubscription.json"
+          "List all network function resources in subscription.": {
+            "$ref": "./examples/NetworkFunctionListBySubscription.json"
           }
         },
         "x-ms-pageable": {
@@ -286,13 +286,13 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridNetwork/devices": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridNetwork/networkFunctions": {
       "get": {
         "tags": [
-          "Devices"
+          "NetworkFunctions"
         ],
-        "operationId": "Devices_ListByResourceGroup",
-        "description": "Lists all the device resource in a resource group.",
+        "operationId": "NetworkFunctions_ListByResourceGroup",
+        "description": "Lists all the network function resources in a resource group.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
@@ -306,9 +306,9 @@
         ],
         "responses": {
           "200": {
-            "description": "Request is successful. The operation returns a list of device resources.",
+            "description": "Request is successful. The operation returns a list of network function resources.",
             "schema": {
-              "$ref": "#/definitions/DeviceListResult"
+              "$ref": "#/definitions/NetworkFunctionListResult"
             }
           },
           "default": {
@@ -319,69 +319,27 @@
           }
         },
         "x-ms-examples": {
-          "List all devices in resource group": {
-            "$ref": "./examples/DeviceListByResourceGroup.json"
+          "List network function in resource group": {
+            "$ref": "./examples/NetworkFunctionListByResourceGroup.json"
           }
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridNetwork/devices/{deviceName}/listRegistrationKey": {
-      "post": {
-        "tags": [
-          "Devices"
-        ],
-        "operationId": "Devices_ListRegistrationKey",
-        "description": "List the registration key for the device.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "deviceName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the device resource."
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The registration key information for the device.",
-            "schema": {
-              "$ref": "#/definitions/DeviceRegistrationKey"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Get device registration key": {
-            "$ref": "./examples/DeviceListRegistrationKey.json"
-          }
         }
       }
     }
   },
   "definitions": {
-    "Device": {
+    "NetworkFunction": {
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/DevicePropertiesFormat",
-          "description": "Device properties."
+          "$ref": "#/definitions/NetworkFunctionPropertiesFormat",
+          "description": "Network function properties."
+        },
+        "etag": {
+          "type": "string",
+          "description": "A unique read-only string that changes whenever the resource is updated."
         }
       },
       "allOf": [
@@ -389,80 +347,69 @@
           "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/TrackedResource"
         }
       ],
-      "description": "Device resource."
+      "description": "Network function resource response."
     },
-    "DevicePropertiesFormat": {
-      "description": "Device properties.",
-      "required": [
-        "deviceType"
-      ],
-      "discriminator": "deviceType",
+    "NetworkFunctionPropertiesFormat": {
+      "description": "Network function properties.",
       "properties": {
-        "status": {
-          "type": "string",
-          "readOnly": true,
-          "description": "The current device status.",
-          "enum": [
-            "Unknown",
-            "NotRegistered",
-            "Registered",
-            "Deleted"
-          ],
-          "x-ms-enum": {
-            "name": "Status",
-            "modelAsString": true
-          }
-        },
         "provisioningState": {
           "readOnly": true,
           "$ref": "./common.json#/definitions/ProvisioningState",
-          "description": "The provisioning state of the device resource."
+          "description": "The provisioning state of the network function resource."
         },
-        "deviceType": {
-          "type": "string",
-          "description": "The type of the device.",
-          "enum": [
-            "Unknown",
-            "AzureStackEdge"
-          ],
-          "x-ms-enum": {
-            "name": "DeviceType",
-            "modelAsString": true
-          }
-        },
-        "azureStackEdge": {
-          "x-ms-discriminator-value": "AzureStackEdge",
+        "device": {
           "$ref": "./common.json#/definitions/SubResource",
-          "description": "The reference to the Azure stack edge device."
+          "description": "The reference to the device resource."
         },
-        "networkFunctions": {
+        "skuName": {
+          "type": "string",
+          "description": "The sku name for the network function."
+        },
+        "skuType": {
           "readOnly": true,
+          "$ref": "./common.json#/definitions/SkuType",
+          "description": "The sku type for the network function."
+        },
+        "vendorName": {
+          "type": "string",
+          "description": "The vendor name for the network function."
+        },
+        "serviceKey": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The service key for the network function resource."
+        },
+        "vendorProvisioningState": {
+          "readOnly": true,
+          "$ref": "./common.json#/definitions/VendorProvisioningState",
+          "description": "The vendor provisioning state for the network function resource."
+        },
+        "managedApplication": {
+          "readOnly": true,
+          "$ref": "./common.json#/definitions/SubResource",
+          "description": "The resource URI of the managed application."
+        },
+        "managedApplicationParameters": {
+          "$ref": "./common.json#/definitions/ManagedApplicationParameters",
+          "description": "The parameters for the managed application."
+        },
+        "networkFunctionUserConfigurations": {
           "type": "array",
           "items": {
-            "$ref": "./common.json#/definitions/SubResource"
+            "$ref": "#/definitions/NetworkFunctionUserConfiguration"
           },
-          "description": "The list of network functions deployed on the device."
+          "description": "The network function configurations from the user."
         }
       }
     },
-    "DeviceRegistrationKey": {
-      "description": "The device registration key.",
-      "properties": {
-        "registrationKey": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The registration key for the device."
-        }
-      }
-    },
-    "DeviceListResult": {
+    "NetworkFunctionListResult": {
       "properties": {
         "value": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/Device"
+            "$ref": "#/definitions/NetworkFunction"
           },
-          "description": "A list of devices."
+          "description": "A list of network function resources in a subscription or resource group."
         },
         "nextLink": {
           "type": "string",
@@ -470,7 +417,36 @@
           "description": "The URL to get the next set of results."
         }
       },
-      "description": "Response for devices API service call."
+      "description": "Response for network function API service call."
+    },
+    "NetworkFunctionUserConfiguration": {
+      "properties": {
+        "roleName": {
+          "type": "string",
+          "description": "The name of the network function role."
+        },
+        "userDataParameters": {
+          "$ref": "./common.json#/definitions/UserDataParameters",
+          "description": "The user data parameters from the customer."
+        },
+        "networkInterfaces": {
+          "type": "array",
+          "items": {
+            "$ref": "./common.json#/definitions/NetworkInterface"
+          },
+          "description": "The network interface configuration."
+        },
+        "osProfile": {
+          "properties": {
+            "customData": {
+              "type": "string",
+              "description": "Specifies a base-64 encoded string of custom data. The base-64 encoded string is decoded to a binary array that is saved as a file on the virtual machine. The maximum length of the binary array is 65535 bytes. <br><br> **Note: Do not pass any secrets or passwords in customData property** <br><br> This property cannot be updated after the VM is created. <br><br> customData is passed to the VM to be saved as a file. For more information see [Custom Data on Azure VMs](https://azure.microsoft.com/en-us/blog/custom-data-and-cloud-init-on-windows-azure/) <br><br> For using cloud-init for your Linux VM, see [Using cloud-init to customize a Linux VM during creation](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-linux-using-cloud-init?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json)"
+            }
+          },
+          "description": "Specifies the operating system settings for the role instance."
+        }
+      },
+      "description": "The network function user configuration."
     }
   }
 }

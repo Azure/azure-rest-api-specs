@@ -9,8 +9,8 @@
         "deploymentMode": "PrivateEdgeZone",
         "preview": true,
         "managedApplicationTemplate": {},
-        "virtualNetworkFunctionTemplate": {
-          "virtualNetworkFunctionRoleConfigurations": [
+        "networkFunctionTemplate": {
+          "networkFunctionRoleConfigurations": [
             {
               "roleName": "test",
               "roleType": "VirtualMachine",
@@ -25,8 +25,10 @@
                 "osDisk": {
                   "osType": "Linux",
                   "name": "vhdName",
-                  "vhdUri": "https://<yourstorage>.blob.core.windows.net/<yourcontainer>/<yourfile>?sp=rl&st=st>Z&se=<se>Z&sv=<sv>&sr=b&sig=<signature>",
-                  "diskSizeGB": 30
+                  "diskSizeGB": 30,
+                  "vhd": {
+                    "uri": "https://contoso.net/link/vnd.vhd?sp=rl&st=2020-10-08T20:38:19Z&se=2020-12-09T19:38:00Z&sv=2019-12-12&sr=b&sig=7BM2f4yOw%3D"
+                  }
                 },
                 "dataDisks": [
                   {
@@ -38,9 +40,17 @@
               },
               "osProfile": {
                 "adminUsername": "dummyuser",
-                "adminPassword": "dummypassword",
-                "sshPublicKey": null,
-                "customData": null
+                "linuxConfiguration": {
+                  "ssh": {
+                    "publicKeys": [
+                      {
+                        "path": "home/user/.ssh/authorized_keys",
+                        "keyData": "ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAgEAwrr66r8n6B8Y0zMF3dOpXEapIQD9DiYQ6D6/zwor9o39jSkHNiMMER/GETBbzP83LOcekm02aRjo55ArO7gPPVvCXbrirJu9pkm4AC4BBre5xSLS= user@constoso-DSH"
+                      }
+                    ]
+                  }
+                },
+                "customData": "base-64 encoded string of custom data"
               },
               "customProfile": {
                 "metadataConfigurationPath": "/var/logs/network.cfg"
@@ -94,8 +104,8 @@
           "preview": true,
           "provisioningState": "Succeeded",
           "managedApplicationTemplate": {},
-          "virtualNetworkFunctionTemplate": {
-            "virtualNetworkFunctionRoleConfigurations": [
+          "networkFunctionTemplate": {
+            "networkFunctionRoleConfigurations": [
               {
                 "roleName": "test",
                 "roleType": "VirtualMachine",
@@ -110,7 +120,8 @@
                   "osDisk": {
                     "osType": "Linux",
                     "name": "vhdName",
-                    "diskSizeGB": 30
+                    "diskSizeGB": 30,
+                    "vhd": {}
                   },
                   "dataDisks": [
                     {
@@ -122,8 +133,17 @@
                 },
                 "osProfile": {
                   "adminUsername": "dummyuser",
-                  "sshPublicKey": null,
-                  "customData": null
+                  "linuxConfiguration": {
+                    "ssh": {
+                      "publicKeys": [
+                        {
+                          "path": "home/user/.ssh/authorized_keys",
+                          "keyData": "ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAgEAwrr66r8n6B8Y0zMF3dOpXEapIQD9DiYQ6D6/zwor9o39jSkHNiMMER/GETBbzP83LOcekm02aRjo55ArO7gPPVvCXbrirJu9pkm4AC4BBre5xSLS= user@constoso-DSH"
+                        }
+                      ]
+                    }
+                  },
+                  "customData": "base-64 encoded string of custom data"
                 },
                 "customProfile": {
                   "metadataConfigurationPath": "/var/logs/network.cfg"
@@ -176,8 +196,8 @@
           "preview": true,
           "provisioningState": "Accepted",
           "managedApplicationTemplate": {},
-          "virtualNetworkFunctionTemplate": {
-            "virtualNetworkFunctionRoleConfigurations": [
+          "networkFunctionTemplate": {
+            "networkFunctionRoleConfigurations": [
               {
                 "roleName": "test",
                 "roleType": "VirtualMachine",
@@ -192,7 +212,8 @@
                   "osDisk": {
                     "osType": "Linux",
                     "name": "vhdName",
-                    "diskSizeGB": 30
+                    "diskSizeGB": 30,
+                    "vhd": {}
                   },
                   "dataDisks": [
                     {
@@ -204,8 +225,17 @@
                 },
                 "osProfile": {
                   "adminUsername": "dummyuser",
-                  "sshPublicKey": null,
-                  "customData": null
+                  "linuxConfiguration": {
+                    "ssh": {
+                      "publicKeys": [
+                        {
+                          "path": "home/user/.ssh/authorized_keys",
+                          "keyData": "ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAgEAwrr66r8n6B8Y0zMF3dOpXEapIQD9DiYQ6D6/zwor9o39jSkHNiMMER/GETBbzP83LOcekm02aRjo55ArO7gPPVvCXbrirJu9pkm4AC4BBre5xSLS= user@constoso-DSH"
+                        }
+                      ]
+                    }
+                  },
+                  "customData": "base-64 encoded string of custom data"
                 },
                 "customProfile": {
                   "metadataConfigurationPath": "/var/logs/network.cfg"
