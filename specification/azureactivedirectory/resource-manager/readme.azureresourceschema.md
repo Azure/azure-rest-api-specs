@@ -6,25 +6,44 @@ These settings apply only when `--azureresourceschema` is specified on the comma
 
 ``` yaml $(azureresourceschema) && $(multiapi)
 batch:
-  - tag: package-preview-2020-07
-  - tag: package-2017-04-01
+  - tag: schema-aadiam-2020-07-01-preview
+  - tag: schema-aadiam-2020-03-01-preview
+  - tag: schema-aadiam-2017-04-01
+
 ```
 
-### Tag: package-preview-2020-07 and azureresourceschema
-
-These settings apply only when `--tag=package-preview-2020-07 --azureresourceschema` is specified on the command line.
 Please also specify `--azureresourceschema-folder=<path to the root directory of your azure-resource-manager-schemas clone>`.
 
-``` yaml $(tag) == 'package-preview-2020-07' && $(azureresourceschema)
+### Tag: schema-aadiam-2020-07-01-preview and azureresourceschema
+
+``` yaml $(tag) == 'schema-aadiam-2020-07-01-preview' && $(azureresourceschema)
 output-folder: $(azureresourceschema-folder)/schemas
+
+# all the input files in this apiVersion
+input-file:
+  - Microsoft.Aadiam/preview/2020-07-01-preview/azureADMetrics.json
+
 ```
 
-### Tag: package-2017-04-01 and azureresourceschema
+### Tag: schema-aadiam-2020-03-01-preview and azureresourceschema
 
-These settings apply only when `--tag=package-2017-04-01 --azureresourceschema` is specified on the command line.
-Please also specify `--azureresourceschema-folder=<path to the root directory of your azure-resource-manager-schemas clone>`.
-
-``` yaml $(tag) == 'package-2017-04-01' && $(azureresourceschema)
+``` yaml $(tag) == 'schema-aadiam-2020-03-01-preview' && $(azureresourceschema)
 output-folder: $(azureresourceschema-folder)/schemas
+
+# all the input files in this apiVersion
+input-file:
+  - Microsoft.Aadiam/preview/2020-03-01-preview/privateLinkForAzureAD.json
+  - Microsoft.Aadiam/preview/2020-03-01-preview/privateLinkResources.json
+
 ```
 
+### Tag: schema-aadiam-2017-04-01 and azureresourceschema
+
+``` yaml $(tag) == 'schema-aadiam-2017-04-01' && $(azureresourceschema)
+output-folder: $(azureresourceschema-folder)/schemas
+
+# all the input files in this apiVersion
+input-file:
+  - Microsoft.Aadiam/stable/2017-04-01/azureactivedirectory.json
+
+```

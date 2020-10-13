@@ -535,8 +535,8 @@
           "description": "Minimal TLS version. Allowed values: 'None', '1.0', '1.1', '1.2'",
           "type": "string"
         },
-        "backupStorageRedundancy": {
-          "description": "The backup storage redundancy used to store backups for this instance. The options are LRS (LocallyRedundantStorage), ZRS (ZoneRedundantStorage) and GRS (GeoRedundantStorage)",
+        "storageAccountType": {
+          "description": "The storage account type used to store backups for this instance. The options are LRS (LocallyRedundantStorage), ZRS (ZoneRedundantStorage) and GRS (GeoRedundantStorage)",
           "enum": [
             "GRS",
             "LRS",
@@ -548,22 +548,9 @@
             "modelAsString": true
           },
           "x-ms-mutability": [
+            "read",
             "create"
           ]
-        },
-        "currentBackupStorageRedundancy": {
-          "description": "The current backup storage redundancy used to store backups for this instance. The options are LRS (LocallyRedundantStorage), ZRS (ZoneRedundantStorage) and GRS (GeoRedundantStorage)",
-          "enum": [
-            "GRS",
-            "LRS",
-            "ZRS"
-          ],
-          "type": "string",
-          "readOnly": true,
-          "x-ms-enum": {
-            "name": "StorageAccountType",
-            "modelAsString": true
-          }
         }
       }
     },

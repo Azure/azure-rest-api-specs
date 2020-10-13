@@ -1,0 +1,1162 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2020-10-31",
+    "title": "AzureDigitalTwinsManagementClient",
+    "description": "Azure Digital Twins Client for managing DigitalTwinsInstance"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DigitalTwins/digitalTwinsInstances/{resourceName}": {
+      "get": {
+        "tags": [
+          "DigitalTwinsInstance"
+        ],
+        "description": "Get DigitalTwinsInstances resource.",
+        "operationId": "DigitalTwins_Get",
+        "x-ms-examples": {
+          "Get a DigitalTwinsInstance resource": {
+            "$ref": "./examples/DigitalTwinsGet_example.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/resourceName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The body contains all the non-security properties of the DigitalTwinsInstance. Security-related properties are set to null.",
+            "schema": {
+              "$ref": "#/definitions/DigitalTwinsDescription"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "DigitalTwinsInstance"
+        ],
+        "description": "Create or update the metadata of a DigitalTwinsInstance. The usual pattern to modify a property is to retrieve the DigitalTwinsInstance and security metadata, and then combine them with the modified values in a new body to update the DigitalTwinsInstance.",
+        "operationId": "DigitalTwins_CreateOrUpdate",
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Put a DigitalTwinsInstance resource": {
+            "$ref": "./examples/DigitalTwinsPut_example.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/resourceName"
+          },
+          {
+            "name": "digitalTwinsCreate",
+            "in": "body",
+            "description": "The DigitalTwinsInstance and security metadata.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DigitalTwinsDescription"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "This is returned as a response when the resource already exists and was updated successfully.",
+            "schema": {
+              "$ref": "#/definitions/DigitalTwinsDescription"
+            }
+          },
+          "201": {
+            "description": "Created - Put request accepted; the operation will complete asynchronously.",
+            "schema": {
+              "$ref": "#/definitions/DigitalTwinsDescription"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "DigitalTwinsInstance"
+        ],
+        "description": "Update metadata of DigitalTwinsInstance.",
+        "operationId": "DigitalTwins_Update",
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Patch a DigitalTwinsInstance resource": {
+            "$ref": "./examples/DigitalTwinsPatch_example.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/resourceName"
+          },
+          {
+            "name": "digitalTwinsPatchDescription",
+            "in": "body",
+            "description": "The DigitalTwinsInstance and security metadata.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DigitalTwinsPatchDescription"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "This is returned as a response to the status polling request for the create or update operation. The body contains the resource representation that indicates a transitional provisioning state.",
+            "schema": {
+              "$ref": "#/definitions/DigitalTwinsDescription"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "DigitalTwinsInstance"
+        ],
+        "description": "Delete a DigitalTwinsInstance.",
+        "operationId": "DigitalTwins_Delete",
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Delete a DigitalTwinsInstance resource": {
+            "$ref": "./examples/DigitalTwinsDelete_example.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/resourceName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returned if the operation was canceled or failed.",
+            "schema": {
+              "$ref": "#/definitions/DigitalTwinsDescription"
+            }
+          },
+          "202": {
+            "description": "Accepted - Delete request accepted; the operation will complete asynchronously.",
+            "schema": {
+              "$ref": "#/definitions/DigitalTwinsDescription"
+            }
+          },
+          "204": {
+            "description": "Returned when the long running delete operation has finished, or the Digital Twins instance does not exist."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DigitalTwins/digitalTwinsInstances/{resourceName}/endpoints": {
+      "get": {
+        "tags": [
+          "Endpoints"
+        ],
+        "description": "Get DigitalTwinsInstance Endpoints.",
+        "operationId": "DigitalTwinsEndpoint_List",
+        "x-ms-examples": {
+          "Get a DigitalTwinsInstance endpoints": {
+            "$ref": "./examples/DigitalTwinsEndpointsGet_example.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/resourceName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The body contains all the non-security properties of the DigitalTwinsInstance. Security-related properties are set to null.",
+            "schema": {
+              "$ref": "#/definitions/DigitalTwinsEndpointResourceListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DigitalTwins/digitalTwinsInstances/{resourceName}/endpoints/{endpointName}": {
+      "get": {
+        "tags": [
+          "Endpoints"
+        ],
+        "description": "Get DigitalTwinsInstances Endpoint.",
+        "operationId": "DigitalTwinsEndpoint_Get",
+        "x-ms-examples": {
+          "Get a DigitalTwinsInstance endpoint": {
+            "$ref": "./examples/DigitalTwinsEndpointGet_example.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/resourceName"
+          },
+          {
+            "$ref": "#/parameters/endpointName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The body contains all the non-security properties of the DigitalTwinsInstance. Security-related properties are set to null.",
+            "schema": {
+              "$ref": "#/definitions/DigitalTwinsEndpointResource"
+            }
+          },
+          "default": {
+            "description": "Default error response",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Endpoints"
+        ],
+        "description": "Create or update DigitalTwinsInstance endpoint.",
+        "operationId": "DigitalTwinsEndpoint_CreateOrUpdate",
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Put a DigitalTwinsInstance resource": {
+            "$ref": "./examples/DigitalTwinsEndpointPut_example.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/resourceName"
+          },
+          {
+            "$ref": "#/parameters/endpointName"
+          },
+          {
+            "name": "endpointDescription",
+            "in": "body",
+            "description": "The DigitalTwinsInstance endpoint metadata and security metadata.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DigitalTwinsEndpointResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "This is returned as a response to the status polling request for the create or update operation. The body contains the resource representation that indicates a transitional provisioning state.",
+            "schema": {
+              "$ref": "#/definitions/DigitalTwinsEndpointResource"
+            }
+          },
+          "201": {
+            "description": "Created - Put request accepted; the operation will complete asynchronously.",
+            "schema": {
+              "$ref": "#/definitions/DigitalTwinsEndpointResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Endpoints"
+        ],
+        "description": "Delete a DigitalTwinsInstance endpoint.",
+        "operationId": "DigitalTwinsEndpoint_Delete",
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Delete a DigitalTwinsInstance endpoint": {
+            "$ref": "./examples/DigitalTwinsEndpointDelete_example.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/resourceName"
+          },
+          {
+            "$ref": "#/parameters/endpointName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returned if the operation was canceled or failed.",
+            "schema": {
+              "$ref": "#/definitions/DigitalTwinsEndpointResource"
+            }
+          },
+          "202": {
+            "description": "Accepted - Delete request accepted; the operation will complete asynchronously.",
+            "schema": {
+              "$ref": "#/definitions/DigitalTwinsEndpointResource"
+            }
+          },
+          "204": {
+            "description": "Returned when the long running delete operation has finished, or the egress endpoint does not exist."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.DigitalTwins/digitalTwinsInstances": {
+      "get": {
+        "tags": [
+          "DigitalTwinsInstance"
+        ],
+        "description": "Get all the DigitalTwinsInstances in a subscription.",
+        "operationId": "DigitalTwins_List",
+        "x-ms-examples": {
+          "Get DigitalTwinsInstance resources by subscription": {
+            "$ref": "./examples/DigitalTwinsList_example.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "$ref": "#/parameters/subscriptionId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "This is a synchronous operation. The body contains a JSON-serialized array of the metadata from all the DigitalTwinsInstances in the subscription.",
+            "schema": {
+              "$ref": "#/definitions/DigitalTwinsDescriptionListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DigitalTwins/digitalTwinsInstances": {
+      "get": {
+        "tags": [
+          "DigitalTwinsInstance"
+        ],
+        "description": "Get all the DigitalTwinsInstances in a resource group.",
+        "operationId": "DigitalTwins_ListByResourceGroup",
+        "x-ms-examples": {
+          "Get DigitalTwinsInstance resources by resource group": {
+            "$ref": "./examples/DigitalTwinsListByResourceGroup_example.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "This is a synchronous operation. The body contains a JSON-serialized array of the metadata from all the DigitalTwinsInstances in the resource group. If more data is available, the body will contain a link to the next page of items (nextLink).",
+            "schema": {
+              "$ref": "#/definitions/DigitalTwinsDescriptionListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.DigitalTwins/operations": {
+      "get": {
+        "tags": [
+          "Operations"
+        ],
+        "description": "Lists all of the available DigitalTwins service REST API operations.",
+        "operationId": "Operations_List",
+        "x-ms-examples": {
+          "Get available operations": {
+            "$ref": "./examples/DigitalTwinsOperationsList_example.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.DigitalTwins/locations/{location}/checkNameAvailability": {
+      "post": {
+        "tags": [
+          "CheckNameAvailability"
+        ],
+        "description": "Check if a DigitalTwinsInstance name is available.",
+        "operationId": "DigitalTwins_CheckNameAvailability",
+        "x-ms-examples": {
+          "Check name Availability": {
+            "$ref": "./examples/DigitalTwinsCheckNameAvailability_example.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/location"
+          },
+          {
+            "name": "digitalTwinsInstanceCheckName",
+            "in": "body",
+            "description": "Set the name parameter in the DigitalTwinsInstanceCheckName structure to the name of the DigitalTwinsInstance to check.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CheckNameRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "This is a synchronous operation. The body contains a JSON-serialized response that specifies whether the DigitalTwins service name is available. If the name is not available, the body contains the reason.",
+            "schema": {
+              "$ref": "#/definitions/CheckNameResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "DigitalTwinsProperties": {
+      "description": "The properties of a DigitalTwinsInstance.",
+      "type": "object",
+      "properties": {
+        "createdTime": {
+          "description": "Time when DigitalTwinsInstance was created.",
+          "readOnly": true,
+          "type": "string",
+          "format": "date-time"
+        },
+        "lastUpdatedTime": {
+          "description": "Time when DigitalTwinsInstance was updated.",
+          "readOnly": true,
+          "type": "string",
+          "format": "date-time"
+        },
+        "provisioningState": {
+          "description": "The provisioning state.",
+          "enum": [
+            "Provisioning",
+            "Deleting",
+            "Succeeded",
+            "Failed",
+            "Canceled",
+            "Deleted",
+            "Warning",
+            "Suspending",
+            "Restoring",
+            "Moving"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "provisioningState",
+            "modelAsString": true
+          }
+        },
+        "hostName": {
+          "description": "Api endpoint to work with DigitalTwinsInstance.",
+          "type": "string",
+          "x-nullable": true,
+          "readOnly": true
+        }
+      }
+    },
+    "DigitalTwinsDescription": {
+      "description": "The description of the DigitalTwins service.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "DigitalTwins instance properties.",
+          "$ref": "#/definitions/DigitalTwinsProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/DigitalTwinsResource"
+        }
+      ]
+    },
+    "DigitalTwinsPatchDescription": {
+      "description": "The description of the DigitalTwins service.",
+      "type": "object",
+      "properties": {
+        "tags": {
+          "description": "Instance tags",
+          "type": "object",
+          "x-nullable": true,
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "DigitalTwinsResource": {
+      "description": "The common properties of a DigitalTwinsInstance.",
+      "properties": {
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The resource identifier."
+        },
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The resource name.",
+          "pattern": "^(?!-)[A-Za-z0-9-]{3,63}(?<!-)$"
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The resource type."
+        },
+        "location": {
+          "type": "string",
+          "description": "The resource location.",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "tags": {
+          "type": "object",
+          "x-nullable": true,
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "The resource tags."
+        }
+      },
+      "x-ms-azure-resource": true,
+      "required": [
+        "location"
+      ]
+    },
+    "ErrorResponse": {
+      "description": "Error response.",
+      "properties": {
+        "error": {
+          "description": "Error description",
+          "$ref": "#/definitions/ErrorDefinition"
+        }
+      }
+    },
+    "ErrorDefinition": {
+      "description": "Error definition.",
+      "properties": {
+        "code": {
+          "description": "Service specific error code which serves as the substatus for the HTTP error code.",
+          "type": "string",
+          "readOnly": true
+        },
+        "message": {
+          "description": "Description of the error.",
+          "type": "string",
+          "readOnly": true
+        },
+        "details": {
+          "description": "Internal error details.",
+          "type": "array",
+          "x-nullable": true,
+          "items": {
+            "$ref": "#/definitions/ErrorDefinition"
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "DigitalTwinsDescriptionListResult": {
+      "description": "A list of DigitalTwins description objects with a next link.",
+      "type": "object",
+      "properties": {
+        "nextLink": {
+          "description": "The link used to get the next page of DigitalTwins description objects.",
+          "type": "string",
+          "x-nullable": true
+        },
+        "value": {
+          "description": "A list of DigitalTwins description objects.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DigitalTwinsDescription"
+          }
+        }
+      }
+    },
+    "OperationListResult": {
+      "description": "A list of DigitalTwins service operations. It contains a list of operations and a URL link to get the next set of results.",
+      "type": "object",
+      "properties": {
+        "nextLink": {
+          "description": "The link used to get the next page of DigitalTwins description objects.",
+          "type": "string",
+          "x-nullable": true
+        },
+        "value": {
+          "description": "A list of DigitalTwins operations supported by the Microsoft.DigitalTwins resource provider.",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/Operation"
+          }
+        }
+      }
+    },
+    "Operation": {
+      "description": "DigitalTwins service REST API operation",
+      "type": "object",
+      "properties": {
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Operation name: {provider}/{resource}/{read | write | action | delete}"
+        },
+        "display": {
+          "description": "Operation properties display",
+          "$ref": "#/definitions/OperationDisplay"
+        },
+        "origin": {
+          "readOnly": true,
+          "type": "string",
+          "x-nullable": true,
+          "description": "The intended executor of the operation."
+        },
+        "isDataAction": {
+          "readOnly": true,
+          "type": "boolean",
+          "description": "If the operation is a data action (for data plane rbac)."
+        }
+      }
+    },
+    "OperationDisplay": {
+      "description": "The object that represents the operation.",
+      "type": "object",
+      "properties": {
+        "provider": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Service provider: Microsoft DigitalTwins"
+        },
+        "resource": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource Type: DigitalTwinsInstances"
+        },
+        "operation": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Name of the operation"
+        },
+        "description": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Friendly description for the operation,"
+        }
+      }
+    },
+    "CheckNameRequest": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Resource name."
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "Microsoft.DigitalTwins/digitalTwinsInstances"
+          ],
+          "x-ms-enum": {
+            "name": "Type",
+            "modelAsString": false
+          },
+          "description": "The type of resource, for instance Microsoft.DigitalTwins/digitalTwinsInstances."
+        }
+      },
+      "required": [
+        "name",
+        "type"
+      ],
+      "description": "The result returned from a database check name availability request."
+    },
+    "CheckNameResult": {
+      "type": "object",
+      "properties": {
+        "nameAvailable": {
+          "type": "boolean",
+          "description": "Specifies a Boolean value that indicates if the name is available."
+        },
+        "message": {
+          "type": "string",
+          "x-nullable": true,
+          "description": "Message indicating an unavailable name due to a conflict, or a description of the naming rules that are violated."
+        },
+        "reason": {
+          "type": "string",
+          "x-nullable": true,
+          "enum": [
+            "Invalid",
+            "AlreadyExists"
+          ],
+          "x-ms-enum": {
+            "name": "reason",
+            "modelAsString": true
+          },
+          "description": "Message providing the reason why the given name is invalid."
+        }
+      },
+      "description": "The result returned from a check name availability request."
+    },
+    "ExternalResource": {
+      "description": "Definition of a resource.",
+      "type": "object",
+      "x-ms-azure-resource": true,
+      "properties": {
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The resource identifier."
+        },
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Extension resource name.",
+          "pattern": "^(?![0-9]+$)(?!-)[a-zA-Z0-9-]{2,49}[a-zA-Z0-9]$"
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The resource type."
+        }
+      }
+    },
+    "DigitalTwinsEndpointResource": {
+      "description": "DigitalTwinsInstance endpoint resource.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ExternalResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "DigitalTwinsInstance endpoint resource properties.",
+          "$ref": "#/definitions/DigitalTwinsEndpointResourceProperties"
+        }
+      }
+    },
+    "DigitalTwinsEndpointResourceProperties": {
+      "description": "Properties related to Digital Twins Endpoint",
+      "discriminator": "endpointType",
+      "required": [
+        "endpointType"
+      ],
+      "properties": {
+        "endpointType": {
+          "description": "The type of Digital Twins endpoint",
+          "enum": [
+            "EventHub",
+            "EventGrid",
+            "ServiceBus"
+          ],
+          "x-ms-enum": {
+            "name": "endpointType",
+            "modelAsString": true
+          },
+          "type": "string"
+        },
+        "provisioningState": {
+          "description": "The provisioning state.",
+          "enum": [
+            "Provisioning",
+            "Deleting",
+            "Succeeded",
+            "Failed",
+            "Canceled",
+            "Deleted",
+            "Warning",
+            "Suspending",
+            "Restoring",
+            "Moving",
+            "Disabled"
+          ],
+          "type": "string",
+          "x-nullable": true,
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "EndpointProvisioningState",
+            "modelAsString": true
+          }
+        },
+        "createdTime": {
+          "description": "Time when the Endpoint was added to DigitalTwinsInstance.",
+          "type": "string",
+          "x-nullable": true,
+          "format": "date-time",
+          "readOnly": true
+        },
+        "deadLetterSecret": {
+          "x-ms-secret": true,
+          "description": "Dead letter storage secret. Will be obfuscated during read.",
+          "type": "string",
+          "x-nullable": true
+        }
+      }
+    },
+    "ServiceBus": {
+      "description": "Properties related to ServiceBus.",
+      "required": [
+        "primaryConnectionString"
+      ],
+      "x-ms-discriminator-value": "ServiceBus",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DigitalTwinsEndpointResourceProperties"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "primaryConnectionString": {
+              "x-ms-secret": true,
+              "description": "PrimaryConnectionString of the endpoint. Will be obfuscated during read.",
+              "type": "string",
+              "x-nullable": true
+            },
+            "secondaryConnectionString": {
+              "x-ms-secret": true,
+              "description": "SecondaryConnectionString of the endpoint. Will be obfuscated during read.",
+              "type": "string",
+              "x-nullable": true
+            }
+          }
+        }
+      ]
+    },
+    "EventHub": {
+      "description": "Properties related to EventHub.",
+      "required": [
+        "connectionStringPrimaryKey"
+      ],
+      "x-ms-discriminator-value": "EventHub",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DigitalTwinsEndpointResourceProperties"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "connectionStringPrimaryKey": {
+              "x-ms-secret": true,
+              "description": "PrimaryConnectionString of the endpoint. Will be obfuscated during read.",
+              "type": "string",
+              "x-nullable": true
+            },
+            "connectionStringSecondaryKey": {
+              "x-ms-secret": true,
+              "description": "SecondaryConnectionString of the endpoint. Will be obfuscated during read.",
+              "type": "string",
+              "x-nullable": true
+            }
+          }
+        }
+      ]
+    },
+    "EventGrid": {
+      "description": "Properties related to EventGrid.",
+      "required": [
+        "TopicEndpoint",
+        "accessKey1"
+      ],
+      "x-ms-discriminator-value": "EventGrid",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DigitalTwinsEndpointResourceProperties"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "TopicEndpoint": {
+              "description": "EventGrid Topic Endpoint",
+              "type": "string"
+            },
+            "accessKey1": {
+              "x-ms-secret": true,
+              "description": "EventGrid secondary accesskey. Will be obfuscated during read.",
+              "type": "string",
+              "x-nullable": true
+            },
+            "accessKey2": {
+              "x-ms-secret": true,
+              "description": "EventGrid secondary accesskey. Will be obfuscated during read.",
+              "type": "string",
+              "x-nullable": true
+            }
+          }
+        }
+      ]
+    },
+    "DigitalTwinsEndpointResourceListResult": {
+      "description": "A list of DigitalTwinsInstance Endpoints with a next link.",
+      "type": "object",
+      "properties": {
+        "nextLink": {
+          "description": "The link used to get the next page of DigitalTwinsInstance Endpoints.",
+          "type": "string",
+          "x-nullable": true
+        },
+        "value": {
+          "description": "A list of DigitalTwinsInstance Endpoints.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DigitalTwinsEndpointResource"
+          }
+        }
+      }
+    }
+  },
+  "parameters": {
+    "subscriptionId": {
+      "name": "subscriptionId",
+      "in": "path",
+      "description": "The subscription identifier.",
+      "required": true,
+      "type": "string"
+    },
+    "api-version": {
+      "name": "api-version",
+      "enum": [
+        "2020-10-31"
+      ],
+      "in": "query",
+      "description": "Version of the DigitalTwinsInstance Management API.",
+      "required": true,
+      "type": "string",
+      "minLength": 10
+    },
+    "resourceGroupName": {
+      "name": "resourceGroupName",
+      "in": "path",
+      "description": "The name of the resource group that contains the DigitalTwinsInstance.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "minLength": 1,
+      "maxLength": 64
+    },
+    "resourceName": {
+      "name": "resourceName",
+      "in": "path",
+      "description": "The name of the DigitalTwinsInstance.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "pattern": "^(?!-)[A-Za-z0-9-]{3,63}(?<!-)$",
+      "minLength": 3,
+      "maxLength": 63
+    },
+    "location": {
+      "name": "location",
+      "in": "path",
+      "description": "Location of DigitalTwinsInstance.",
+      "x-ms-parameter-location": "method",
+      "required": true,
+      "type": "string",
+      "minLength": 3
+    },
+    "endpointName": {
+      "name": "endpointName",
+      "in": "path",
+      "description": "Name of Endpoint Resource.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "pattern": "^(?![0-9]+$)(?!-)[a-zA-Z0-9-]{2,49}[a-zA-Z0-9]$",
+      "minLength": 2,
+      "maxLength": 49
+    }
+  }
+}

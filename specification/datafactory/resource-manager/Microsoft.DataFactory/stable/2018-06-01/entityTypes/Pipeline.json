@@ -4,6 +4,17 @@
     "title": "DataFactoryManagementClient",
     "version": "2018-06-01"
   },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
   "paths": {},
   "definitions": {
     "Pipeline": {
@@ -923,6 +934,36 @@
         }
       }
     },
+    "TarReadSettings": {
+      "description": "The Tar compression read settings.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CompressionReadSettings"
+        }
+      ],
+      "properties": {
+        "preserveCompressionFileNameAsFolder": {
+          "description": "Preserve the compression file name as folder path. Type: boolean (or Expression with resultType boolean).",
+          "type": "object"
+        }
+      }
+    },
+    "TarGZipReadSettings": {
+      "description": "The TarGZip compression read settings.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CompressionReadSettings"
+        }
+      ],
+      "properties": {
+        "preserveCompressionFileNameAsFolder": {
+          "description": "Preserve the compression file name as folder path. Type: boolean (or Expression with resultType boolean).",
+          "type": "object"
+        }
+      }
+    },
     "DelimitedTextReadSettings": {
       "description": "Delimited text read settings.",
       "type": "object",
@@ -1036,6 +1077,52 @@
         "recordNamespace": {
           "type": "string",
           "description": "Record namespace in the write result."
+        },
+        "maxRowsPerFile": {
+          "type": "object",
+          "description": "Limit the written file's row count to be smaller than or equal to the specified count. Type: integer (or Expression with resultType integer)."
+        },
+        "fileNamePrefix": {
+          "type": "object",
+          "description": "Specifies the file name pattern <fileNamePrefix>_<fileIndex>.<fileExtension> when copy from non-file based store without partitionOptions. Type: string (or Expression with resultType string)."
+        }
+      }
+    },
+    "OrcWriteSettings": {
+      "description": "Orc write settings.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/FormatWriteSettings"
+        }
+      ],
+      "properties": {
+        "maxRowsPerFile": {
+          "type": "object",
+          "description": "Limit the written file's row count to be smaller than or equal to the specified count. Type: integer (or Expression with resultType integer)."
+        },
+        "fileNamePrefix": {
+          "type": "object",
+          "description": "Specifies the file name pattern <fileNamePrefix>_<fileIndex>.<fileExtension> when copy from non-file based store without partitionOptions. Type: string (or Expression with resultType string)."
+        }
+      }
+    },
+    "ParquetWriteSettings": {
+      "description": "Parquet write settings.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/FormatWriteSettings"
+        }
+      ],
+      "properties": {
+        "maxRowsPerFile": {
+          "type": "object",
+          "description": "Limit the written file's row count to be smaller than or equal to the specified count. Type: integer (or Expression with resultType integer)."
+        },
+        "fileNamePrefix": {
+          "type": "object",
+          "description": "Specifies the file name pattern <fileNamePrefix>_<fileIndex>.<fileExtension> when copy from non-file based store without partitionOptions. Type: string (or Expression with resultType string)."
         }
       }
     },
@@ -1055,6 +1142,14 @@
         "fileExtension": {
           "type": "object",
           "description": "The file extension used to create the files. Type: string (or Expression with resultType string)."
+        },
+        "maxRowsPerFile": {
+          "type": "object",
+          "description": "Limit the written file's row count to be smaller than or equal to the specified count. Type: integer (or Expression with resultType integer)."
+        },
+        "fileNamePrefix": {
+          "type": "object",
+          "description": "Specifies the file name pattern <fileNamePrefix>_<fileIndex>.<fileExtension> when copy from non-file based store without partitionOptions. Type: string (or Expression with resultType string)."
         }
       },
       "required": [
@@ -1300,6 +1395,10 @@
         "storeSettings": {
           "$ref": "#/definitions/StoreWriteSettings",
           "description": "ORC store settings."
+        },
+        "formatSettings": {
+          "$ref": "#/definitions/OrcWriteSettings",
+          "description": "ORC format settings."
         }
       }
     },
@@ -2104,13 +2203,9 @@
           "type": "object",
           "description": "The time to await before sending next request, in milliseconds "
         },
-        "compressionType": {
+        "httpCompressionType": {
           "type": "object",
-          "description": "Compression Type to Send data in compressed format with Optimal Compression Level, Default is None. And The Only Supported option is Gzip. "
-        },
-        "wrapRequestJsonInAnObject": {
-          "type": "object",
-          "description": "Wraps Request Array Json into an Object before calling the rest endpoint , Default is false. ex: if true request content sample format is { rows:[]} else the format is []"
+          "description": "Http Compression Type to Send data in compressed format with Optimal Compression Level, Default is None. And The Only Supported option is Gzip. "
         }
       }
     },
@@ -2665,6 +2760,40 @@
         "query": {
           "type": "object",
           "description": "Database query. Should be a SQL-92 query expression. Type: string (or Expression with resultType string)."
+        },
+        "additionalColumns": {
+          "type": "array",
+          "description": "Specifies the additional columns to be added to source data. Type: array of objects (or Expression with resultType array of objects).",
+          "items": {
+            "$ref": "#/definitions/AdditionalColumns"
+          }
+        }
+      }
+    },
+    "MongoDbAtlasSource": {
+      "description": "A copy activity source for a MongoDB Atlas database.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CopySource"
+        }
+      ],
+      "properties": {
+        "filter": {
+          "type": "object",
+          "description": "Specifies selection filter using query operators. To return all documents in a collection, omit this parameter or pass an empty document ({}). Type: string (or Expression with resultType string)."
+        },
+        "cursorMethods": {
+          "description": "Cursor methods for Mongodb query",
+          "$ref": "#/definitions/MongoDbCursorMethodsProperties"
+        },
+        "batchSize": {
+          "type": "object",
+          "description": "Specifies the number of documents to return in each batch of the response from MongoDB Atlas instance. In most cases, modifying the batch size will not affect the user or the application. This property's main purpose is to avoid hit the limitation of response size. Type: integer (or Expression with resultType integer)."
+        },
+        "queryTimeout": {
+          "type": "object",
+          "description": "Query timeout. Type: string (or Expression with resultType string), pattern: ((\\d+)\\.)?(\\d\\d):(60|([0-5][0-9])):(60|([0-5][0-9]))."
         },
         "additionalColumns": {
           "type": "array",
@@ -3533,6 +3662,82 @@
         }
       }
     },
+    "AzureDatabricksDeltaLakeSource": {
+      "description": "A copy activity Azure Databricks Delta Lake source.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CopySource"
+        }
+      ],
+      "properties": {
+        "query": {
+          "type": "object",
+          "description": "Azure Databricks Delta Lake Sql query. Type: string (or Expression with resultType string)."
+        },
+        "exportSettings": {
+          "$ref": "#/definitions/AzureDatabricksDeltaLakeExportCommand",
+          "description": "Azure Databricks Delta Lake export settings."
+        }
+      }
+    },
+    "AzureDatabricksDeltaLakeExportCommand": {
+      "description": "Azure Databricks Delta Lake export command settings.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ExportSettings"
+        }
+      ],
+      "properties": {
+        "dateFormat": {
+          "type": "object",
+          "description": "Specify the date format for the csv in Azure Databricks Delta Lake Copy. Type: string (or Expression with resultType string)."
+        },
+        "timestampFormat": {
+          "type": "object",
+          "description": "Specify the timestamp format for the csv in Azure Databricks Delta Lake Copy. Type: string (or Expression with resultType string)."
+        }
+      }
+    },
+    "AzureDatabricksDeltaLakeSink": {
+      "description": "A copy activity Azure Databricks Delta Lake sink.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CopySink"
+        }
+      ],
+      "properties": {
+        "preCopyScript": {
+          "type": "object",
+          "description": "SQL pre-copy script. Type: string (or Expression with resultType string)."
+        },
+        "importSettings": {
+          "$ref": "#/definitions/AzureDatabricksDeltaLakeImportCommand",
+          "description": "Azure Databricks Delta Lake import settings."
+        }
+      }
+    },
+    "AzureDatabricksDeltaLakeImportCommand": {
+      "description": "Azure Databricks Delta Lake import command settings.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ImportSettings"
+        }
+      ],
+      "properties": {
+        "dateFormat": {
+          "type": "object",
+          "description": "Specify the date format for csv in Azure Databricks Delta Lake Copy. Type: string (or Expression with resultType string)."
+        },
+        "timestampFormat": {
+          "type": "object",
+          "description": "Specify the timestamp format for csv in Azure Databricks Delta Lake Copy. Type: string (or Expression with resultType string)."
+        }
+      }
+    },
     "StoredProcedureParameter": {
       "description": "SQL stored procedure parameter.",
       "type": "object",
@@ -3709,6 +3914,10 @@
         "storeSettings": {
           "$ref": "#/definitions/StoreWriteSettings",
           "description": "Parquet store settings."
+        },
+        "formatSettings": {
+          "$ref": "#/definitions/ParquetWriteSettings",
+          "description": "Parquet format settings."
         }
       }
     },
@@ -4133,6 +4342,14 @@
         "path": {
           "type": "object",
           "description": "The path to storage for storing detailed logs of activity execution. Type: string (or Expression with resultType string)."
+        },
+        "logLevel": {
+          "type": "object",
+          "description": "Gets or sets the log level, support: Info, Warning. Type: string (or Expression with resultType string)."
+        },
+        "enableReliableLogging": {
+          "type": "object",
+          "description": "Specifies whether to enable reliable logging. Type: boolean (or Expression with resultType boolean)."
         }
       },
       "additionalProperties": {
@@ -4331,6 +4548,17 @@
         }
       }
     },
+    "DynamicsSinkWriteBehavior": {
+      "description": "Defines values for DynamicsSinkWriteBehavior.",
+      "type": "string",
+      "enum": [
+        "Upsert"
+      ],
+      "x-ms-enum": {
+        "name": "DynamicsSinkWriteBehavior",
+        "modelAsString": true
+      }
+    },
     "DynamicsSink": {
       "description": "A copy activity Dynamics sink.",
       "type": "object",
@@ -4342,14 +4570,7 @@
       "properties": {
         "writeBehavior": {
           "description": "The write behavior for the operation.",
-          "type": "string",
-          "enum": [
-            "Upsert"
-          ],
-          "x-ms-enum": {
-            "name": "DynamicsSinkWriteBehavior",
-            "modelAsString": true
-          }
+          "$ref": "#/definitions/DynamicsSinkWriteBehavior"
         },
         "ignoreNullValues": {
           "type": "object",
@@ -4375,14 +4596,7 @@
       "properties": {
         "writeBehavior": {
           "description": "The write behavior for the operation.",
-          "type": "string",
-          "enum": [
-            "Upsert"
-          ],
-          "x-ms-enum": {
-            "name": "DynamicsSinkWriteBehavior",
-            "modelAsString": true
-          }
+          "$ref": "#/definitions/DynamicsSinkWriteBehavior"
         },
         "ignoreNullValues": {
           "type": "object",
@@ -4408,14 +4622,7 @@
       "properties": {
         "writeBehavior": {
           "description": "The write behavior for the operation.",
-          "type": "string",
-          "enum": [
-            "Upsert"
-          ],
-          "x-ms-enum": {
-            "name": "DynamicsSinkWriteBehavior",
-            "modelAsString": true
-          }
+          "$ref": "#/definitions/DynamicsSinkWriteBehavior"
         },
         "ignoreNullValues": {
           "type": "object",

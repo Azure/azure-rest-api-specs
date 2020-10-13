@@ -50,7 +50,9 @@ These settings apply only when `--tag=package-2019-06-preview` is specified on t
 
 ```yaml $(tag) == 'package-2019-06-preview'
 input-file:
+  - Microsoft.AlertsManagement/preview/2019-05-05-preview/ActionRules.json
   - Microsoft.AlertsManagement/preview/2019-05-05-preview/AlertsManagement.json
+  - Microsoft.AlertsManagement/preview/2019-05-05-preview/SmartGroups.json
   - Microsoft.AlertsManagement/stable/2019-06-01/SmartDetectorAlertRulesApi.json
 ```
 
@@ -80,7 +82,9 @@ These settings apply only when `--tag=package-preview-2019-05` is specified on t
 
 ``` yaml $(tag) == 'package-preview-2019-05'
 input-file:
+  - Microsoft.AlertsManagement/preview/2019-05-05-preview/ActionRules.json
   - Microsoft.AlertsManagement/preview/2019-05-05-preview/AlertsManagement.json
+  - Microsoft.AlertsManagement/preview/2019-05-05-preview/SmartGroups.json
 ```
 
 ### Tag: package-2018-05
@@ -125,6 +129,7 @@ swagger-to-sdk:
   - repo: azure-sdk-for-python
   - repo: azure-libraries-for-java
   - repo: azure-sdk-for-go
+  - repo: azure-sdk-for-trenton
   - repo: azure-resource-manager-schemas
     after_scripts:
       - node sdkauto_afterscript.js alertsmanagement/resource-manager
@@ -215,3 +220,4 @@ uncomment the  `exclude-file` section below and add the file paths.
 #  - $(this-folder)/Microsoft.Example/stable/2010-01-01/somefile.json
 ```
 
+=======
