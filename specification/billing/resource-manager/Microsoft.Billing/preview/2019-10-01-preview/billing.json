@@ -7420,6 +7420,51 @@
         }
       }
     },
+    "DisplayProvisioningState": {
+      "type": "string",
+      "description": "Provisioning state shown in UI.",
+      "enum": [
+        "Succeeded",
+        "Expiring",
+        "Expired",
+        "Pending",
+        "Cancelled",
+        "Failed"
+      ],
+      "x-ms-enum": {
+        "name": "DisplayProvisioningState",
+        "modelAsString": true
+      }
+    },
+    "UserFriendlyRenewState": {
+      "type": "string",
+      "description": "User friendly renew state.",
+      "enum": [
+        "On",
+        "Off",
+        "Renewed",
+        "NotRenewed",
+        "NotApplicable"
+      ],
+      "x-ms-enum": {
+        "name": "UserFriendlyRenewState",
+        "modelAsString": true
+      }
+    },
+    "UserFriendlyAppliedScopeType": {
+      "type": "string",
+      "description": "User friendly applied scope type.",
+      "enum": [
+        "None",
+        "Shared",
+        "Single",
+        "ResourceGroup"
+      ],
+      "x-ms-enum": {
+        "name": "UserFriendlyAppliedScopeType",
+        "modelAsString": true
+      }
+    },
     "ReservationTerm": {
       "type": "string",
       "description": "Represent the term of Reservation.",
@@ -7722,15 +7767,51 @@
         },
         "displayProvisioningState": {
           "type": "string",
-          "description": "Provisioning state shown in UI."
+          "description": "Provisioning state shown in UI.",
+          "enum": [
+            "Succeeded",
+            "Expiring",
+            "Expired",
+            "Pending",
+            "Cancelled",
+            "Failed"
+          ],
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "DisplayProvisioningState",
+            "modelAsString": true
+          }
         },
         "userFriendlyRenewState": {
           "type": "string",
-          "description": "User friendly renew state."
+          "description": "User friendly renew state.",
+          "enum": [
+            "On",
+            "Off",
+            "Renewed",
+            "NotRenewed",
+            "NotApplicable"
+          ],
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "UserFriendlyRenewState",
+            "modelAsString": true
+          }
         },
         "userFriendlyAppliedScopeType": {
           "type": "string",
-          "description": "User friendly applied scope type."
+          "description": "User friendly applied scope type.",
+          "enum": [
+            "None",
+            "Shared",
+            "Single",
+            "ResourceGroup"
+          ],
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "UserFriendlyAppliedScopeType",
+            "modelAsString": true
+          }
         },
         "effectiveDateTime": {
           "type": "string",
