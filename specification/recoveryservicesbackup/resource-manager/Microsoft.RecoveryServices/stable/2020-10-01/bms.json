@@ -1,0 +1,259 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2020-10-01",
+    "title": "RecoveryServicesBackupClient",
+    "x-ms-code-generation-settings": {
+      "internalConstructors": false
+    }
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupEncryptionConfigs/backupResourceEncryptionConfig": {
+      "get": {
+        "tags": [
+          "BackupResourceEncryptionConfigs"
+        ],
+        "description": "Fetches Vault Encryption config.",
+        "operationId": "BackupResourceEncryptionConfigs_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/VaultName"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/BackupResourceEncryptionConfigResource"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Vault Encryption Configuration": {
+            "$ref": "./examples/BackupResourceEncryptionConfig_Get.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "BackupResourceEncryptionConfigs"
+        ],
+        "description": "Updates Vault encryption config.",
+        "operationId": "BackupResourceEncryptionConfigs_Update",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/VaultName"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "Vault encryption input config request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/BackupResourceEncryptionConfigResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "x-ms-examples": {
+          "Update Vault Encryption Configuration": {
+            "$ref": "./examples/BackupResourceEncryptionConfig_Put.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "BackupResourceEncryptionConfig": {
+      "type": "object",
+      "properties": {
+        "encryptionAtRestType": {
+          "description": "Encryption At Rest Type",
+          "enum": [
+            "Invalid",
+            "MicrosoftManaged",
+            "CustomerManaged"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "EncryptionAtRestType",
+            "modelAsString": true
+          }
+        },
+        "keyUri": {
+          "description": "Key Vault Key URI",
+          "type": "string"
+        },
+        "subscriptionId": {
+          "description": "Key Vault Subscription Id",
+          "type": "string"
+        },
+        "lastUpdateStatus": {
+          "enum": [
+            "Invalid",
+            "NotEnabled",
+            "PartiallySucceeded",
+            "PartiallyFailed",
+            "Failed",
+            "Succeeded"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "LastUpdateStatus",
+            "modelAsString": true
+          }
+        },
+        "infrastructureEncryptionState": {
+          "enum": [
+            "Invalid",
+            "Disabled",
+            "Enabled"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "InfrastructureEncryptionState",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "BackupResourceEncryptionConfigResource": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/BackupResourceEncryptionConfig",
+          "description": "BackupResourceEncryptionConfigResource properties"
+        }
+      }
+    },
+    "Resource": {
+      "description": "ARM Resource.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "Resource Id represents the complete path to the resource.",
+          "type": "string",
+          "readOnly": true
+        },
+        "name": {
+          "description": "Resource name associated with the resource.",
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "description": "Resource type represents the complete path of the form Namespace/ResourceType/ResourceType/...",
+          "type": "string",
+          "readOnly": true
+        },
+        "location": {
+          "description": "Resource location.",
+          "type": "string"
+        },
+        "tags": {
+          "description": "Resource tags.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "eTag": {
+          "description": "Optional ETag.",
+          "type": "string"
+        }
+      },
+      "x-ms-azure-resource": true
+    }
+  },
+  "parameters": {
+    "SubscriptionId": {
+      "name": "subscriptionId",
+      "in": "path",
+      "description": "The subscription Id.",
+      "required": true,
+      "type": "string"
+    },
+    "ResourceGroupName": {
+      "name": "resourceGroupName",
+      "in": "path",
+      "description": "The name of the resource group where the recovery services vault is present.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "VaultName": {
+      "name": "vaultName",
+      "in": "path",
+      "description": "The name of the recovery services vault.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "ApiVersion": {
+      "name": "api-version",
+      "in": "query",
+      "description": "Client Api Version.",
+      "required": true,
+      "type": "string"
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account."
+      }
+    }
+  },
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ]
+}
