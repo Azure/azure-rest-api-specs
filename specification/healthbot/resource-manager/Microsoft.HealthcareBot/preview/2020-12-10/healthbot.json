@@ -37,7 +37,7 @@
     }
   },
   "paths": {
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HealthcareBot/{resourceName}/ResourceCreationValidate": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HealthcareBot/HealthcareBots/{resourceName}/ResourceCreationValidate": {
       "post": {
         "operationId": "resourcecreationvalidate",
         "x-ms-examples": {
@@ -69,6 +69,96 @@
         "responses": {
           "200": {
             "description": "If resource name passes or fails the validation, the service should return 200.",
+            "schema": {
+              "$ref": "#/definitions/ValidationResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HealthcareBot/HealthcareBots/{resourceName}": {
+      "put": {
+        "operationId": "create_bot",
+        "x-ms-examples": {
+          "BatchAccountDelete": {
+            "$ref": "./examples/ResourceCreationPut.json"
+          }
+        },
+        "description": "Create a new Healthcare Bot.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Bot"
+            },
+            "description": "The parameters to provide for the created bot."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "If resource is created successfully, the service should return 200.",
+            "schema": {
+              "$ref": "#/definitions/Bot"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HealthcareBot/HealthcareBots/{resourceName}/ResourceCreationCompleted": {
+      "post": {
+        "operationId": "resourcecreationcompleted",
+        "x-ms-examples": {
+          "BatchAccountDelete": {
+            "$ref": "./examples/ResourceCreationCompletedPost.json"
+          }
+        },
+        "description": "Complete Healthcare bot creation",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Bot"
+            },
+            "description": "The parameters to provide for the created bot."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "If resource creation was successful, the service should return 200.",
             "schema": {
               "$ref": "#/definitions/ValidationResult"
             }
@@ -115,9 +205,39 @@
     }
   },
   "definitions": {
+    "Resource": {
+      "description": "Azure resource",
+      "x-ms-azure-resource": true,
+      "properties": {
+        "id": {
+          "description": "Specifies the resource ID.",
+          "type": "string",
+          "readOnly": true
+        },
+        "name": {
+          "description": "Specifies the name of the resource.",
+          "type": "string",
+          "readOnly": true
+        },
+        "location": {
+          "description": "Specifies the location of the resource.",
+          "type": "string"
+        },
+        "type": {
+          "description": "Specifies the type of the resource.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
     "Bot": {
       "type": "object",
       "description": "Bot resource definition",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
       "properties": {
         "properties": {
           "$ref": "#/definitions/BotProperties",
