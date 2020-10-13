@@ -39,7 +39,7 @@
   "paths": {
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HealthcareBot/{resourceName}/ResourceCreationValidate": {
       "post": {
-        "operationId": "Bot_Name_Validate",
+        "operationId": "resourcecreationvalidate",
         "x-ms-examples": {
           "BatchAccountDelete": {
             "$ref": "./examples/ResourceCreationValidatePost.json"
@@ -81,6 +81,37 @@
           }
         }
       }
+    },
+    "/providers/Microsoft.HealthcareBot/operations": {
+      "get": {
+        "tags": [
+          "Operations"
+        ],
+        "description": "Lists all the available HealthcareBot operations.",
+        "operationId": "Operations_List",
+        "x-ms-examples": {
+          "Get Operations": {
+            "$ref": "./examples/GetOperations.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/OperationEntityListResult"
+            }
+          }
+        },
+        "deprecated": false,
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
     }
   },
   "definitions": {
@@ -95,6 +126,8 @@
       }
     },
     "BotProperties": {
+      "title": "BotProperties",
+      "description": "The properties provided for bot creation",
       "properties": {
         "displayName": {
           "type": "string",
@@ -111,6 +144,8 @@
       }
     },
     "ValidationResult": {
+      "title": "ValidationResult",
+      "description": "The response returned from validation process",
       "properties": {
         "status": {
           "type": "string",
@@ -119,6 +154,8 @@
       }
     },
     "Error": {
+      "title": "Error",
+      "description": "Bot error object.",
       "properties": {
         "status": {
           "type": "string",
@@ -128,10 +165,11 @@
           "$ref": "#/definitions/ErrorBody",
           "description": "The error body."
         }
-      },
-      "description": "Bot error object."
+      }
     },
     "ErrorBody": {
+      "title": "ErrorBody",
+      "description": "Error structure.",
       "properties": {
         "code": {
           "type": "string",
@@ -140,6 +178,23 @@
         "message": {
           "type": "string",
           "description": "error message."
+        }
+      }
+    },
+    "OperationEntityListResult": {
+      "description": "The list of healthcare bot operation response.",
+      "type": "object",
+      "properties": {
+        "nextLink": {
+          "description": "The link used to get the next page of operations.",
+          "type": "string"
+        },
+        "value": {
+          "description": "The list of operations.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/OperationEntity"
+          }
         }
       }
     }
@@ -173,6 +228,13 @@
       "description": "Azure Subscription ID.",
       "required": true,
       "type": "string"
+    },
+    "apiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "Version of the API to be used with the client request."
     }
   }
 }
