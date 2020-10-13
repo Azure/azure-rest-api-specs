@@ -1514,7 +1514,7 @@
           "200": {
             "description": "OK. The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/Department"
+              "$ref": "#/definitions/DepartmentDetails"
             }
           },
           "default": {
@@ -1551,7 +1551,7 @@
           "200": {
             "description": "OK. The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/Department"
+              "$ref": "#/definitions/DepartmentDetails"
             }
           },
           "default": {
@@ -1567,8 +1567,8 @@
           "Departments"
         ],
         "x-ms-examples": {
-          "DepartmentUpdate": {
-            "$ref": "./examples/DepartmentUpdate.json"
+          "DepartmentUpsert": {
+            "$ref": "./examples/DepartmentUpsert.json"
           }
         },
         "operationId": "Departments_Put",
@@ -1588,7 +1588,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/Department"
+              "$ref": "#/definitions/DepartmentDetails"
             }
           }
         ],
@@ -1596,51 +1596,7 @@
           "200": {
             "description": "OK. The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/Department"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        }
-      }
-    },
-    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/department": {
-      "post": {
-        "tags": [
-          "Departments"
-        ],
-        "x-ms-examples": {
-          "DepartmentAdd": {
-            "$ref": "./examples/DepartmentAdd.json"
-          }
-        },
-        "operationId": "Departments_Add",
-        "description": "Create a department, The operation is supported only for billing accounts with agreement type Enterprise Agreement.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/billingAccountNameParameter"
-          },
-          {
-            "name": "parameters",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/Department"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK. The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/Department"
+              "$ref": "#/definitions/DepartmentDetails"
             }
           },
           "default": {
@@ -6758,6 +6714,125 @@
           "items": {
             "$ref": "#/definitions/EnrollmentAccount"
           }
+        }
+      }
+    },
+    "DepartmentDetails": {
+      "description": "A department.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "A department details.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/DepartmentAllProperties"
+        }
+      }
+    },
+    "DepartmentAllProperties": {
+      "description": "The properties of a department.",
+      "properties": {
+        "departmentName": {
+          "description": "The name of the department.",
+          "type": "string"
+        },
+        "costCenter": {
+          "description": "The cost center associated with the department.",
+          "type": "string"
+        },
+        "status": {
+          "description": "The status of the department.",
+          "type": "string"
+        },
+        "enrollmentAccounts": {
+          "description": "Associated enrollment accounts. By default this is not populated, unless it's specified in $expand.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/EnrollmentAccount"
+          }
+        },
+        "isMSP": {
+          "description": "Boolean value to define if department is department MSP or not",
+          "type": "boolean"
+        },
+        "primaryContactInfo": {
+          "description": "Primary Contact Info for department",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ContactInformation"
+          }
+        },
+        "technicalContactInfo": {
+          "description": "Technical Contact Info for department",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ContactInformation"
+          }
+        },
+        "chargeCode": {
+          "description": "Details about Charge Code",
+          "type": "string"
+        },
+        "contractId": {
+          "description": "Contract Id associated with Department",
+          "type": "string"
+        },
+        "description": {
+          "description": "Description about Account and Application information",
+          "type": "string"
+        }
+      }
+    },
+    "ContactInformation": {
+      "description": "Contact Information associated with Primary and Technical Contact",
+      "properties": {
+        "firstName": {
+          "description": "First Name of Contact",
+          "type": "string"
+        },
+        "lastName": {
+          "description": "Last Name of Contact",
+          "type": "string"
+        },
+        "email": {
+          "description": "Email Id of Contact",
+          "type": "string"
+        },
+        "phone": {
+          "description": "Phone number of Contact",
+          "type": "string"
+        },
+        "fax": {
+          "description": "Fax number of Contact",
+          "type": "string"
+        },
+        "emergencyNumber": {
+          "description": "Emergency number of Contact",
+          "type": "string"
+        },
+        "state": {
+          "description": "State/Province name of Contact",
+          "type": "string"
+        },
+        "postalCode": {
+          "description": "PostalCode of Contact",
+          "type": "string"
+        },
+        "city": {
+          "description": "City name of Contact",
+          "type": "string"
+        },
+        "street": {
+          "description": "Street name of Contact",
+          "type": "string"
+        },
+        "country": {
+          "description": "Country of Contact",
+          "type": "string"
         }
       }
     },
