@@ -52,6 +52,9 @@
             }
           }
         },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
         "x-ms-examples": {
           "Get list of Tenant configurations": {
             "$ref": "examples/TenantConfiguration/GetListOfTenantConfigurations.json"
@@ -177,6 +180,42 @@
           }
         }
       }
+    },
+    "/providers/Microsoft.Portal/listTenantConfigurationViolations": {
+      "post": {
+        "tags": [
+          "listTenantConfigurationViolations"
+        ],
+        "operationId": "ListTenantConfigurationViolations_List",
+        "description": "Gets list of items that violate tenant's configuration.",
+        "parameters": [
+          {
+            "$ref": "portal.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. Returns the list of items that violate tenant's configuration.",
+            "schema": {
+              "$ref": "#/definitions/ViolationsList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "portal.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Get list of of items that violate tenant's configuration": {
+            "$ref": "examples/TenantConfiguration/GetListOfTenantConfigurationViolations.json"
+          }
+        }
+      }
     }
   },
   "parameters": {
@@ -205,7 +244,7 @@
           "items": {
             "$ref": "#/definitions/Configuration"
           },
-          "description": "The array of custom resource provider manifests."
+          "description": "The array of tenant configurations."
         },
         "nextLink": {
           "type": "string",
@@ -238,6 +277,44 @@
         "enforcePrivateMarkdownStorage": {
           "type": "boolean",
           "description": "When flag is set to true Markdown tile will require external storage configuration (URI). The inline content configuration will be prohibited."
+        }
+      }
+    },
+    "ViolationsList": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Violation"
+          },
+          "description": "The array of violations."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The URL to use for getting the next set of results."
+        }
+      },
+      "description": "List of list of items that violate tenant's configuration."
+    },
+    "Violation": {
+      "type": "object",
+      "description": "Violation information.",
+      "properties": {
+        "id": {
+          "description": "Id of the item that violates tenant configuration.",
+          "type": "string",
+          "readOnly": true
+        },
+        "userId": {
+          "description": "Id of the user who owns violated item.",
+          "type": "string",
+          "readOnly": true
+        },
+        "errorMessage": {
+          "description": "Error message.",
+          "type": "string",
+          "readOnly": true
         }
       }
     }
