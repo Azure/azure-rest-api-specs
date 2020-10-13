@@ -242,6 +242,12 @@
                     },
                     {
                         "$ref": "#/parameters/ApiVersionParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ShareEnableProtocols"
+                    },
+                    {
+                        "$ref": "#/parameters/ShareRootSquash"
                     }
                 ],
                 "responses": {
@@ -1344,6 +1350,9 @@
                     },
                     {
                         "$ref": "#/parameters/LeaseIdOptional"
+                    },
+                    {
+                        "$ref": "#/parameters/ShareRootSquash"
                     }
                 ],
                 "responses": {
@@ -6222,6 +6231,39 @@
             "required": true,
             "schema": {
                 "$ref": "#/definitions/SharePermission"
+            },
+            "x-ms-parameter-location": "method"
+        },
+        "ShareEnableProtocols": {
+            "name": "x-ms-enabled-protocols",
+            "x-ms-client-name": "shareEnableProtocols",
+            "in": "header",
+            "required": false,
+            "type": "string",
+            "enum": [
+                "SMB",
+                "NFS"
+            ],
+            "x-ms-enum": {
+                "name": "ShareEnableProtocols",
+                "modelAsString": false
+            },
+            "x-ms-parameter-location": "method"
+        },
+        "ShareRootSquash": {
+            "name": "x-ms-root-squash",
+            "x-ms-client-name": "shareRootSquash",
+            "in": "header",
+            "required": false,
+            "type": "string",
+            "enum": [
+                "NoRootSquash",
+                "RootSquash",
+                "AllSquash"
+            ],
+            "x-ms-enum": {
+                "name": "ShareRootSquash",
+                "modelAsString": false
             },
             "x-ms-parameter-location": "method"
         }
