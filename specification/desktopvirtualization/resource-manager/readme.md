@@ -32,7 +32,7 @@ These settings apply only when `--tag=package-2019-12-10-preview` is specified o
 
 ``` yaml $(tag) == 'package-2019-12-10-preview'
 input-file:
-- Microsoft.DesktopVirtualization/preview/package-2019-12-10-preview/desktopvirtualization.json
+- Microsoft.DesktopVirtualization/preview/2019-12-10-preview/desktopvirtualization.json
 ```
 
 ### Tag: package-2019-01-23-preview
