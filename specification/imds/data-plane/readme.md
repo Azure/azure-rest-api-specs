@@ -106,6 +106,14 @@ These settings apply only when `--tag=package-2019-11-01` is specified on the co
 input-file:
 - Microsoft.InstanceMetadataService/stable/2019-11-01/imds.json
 ```
+### Tag: package-2020-06-01
+
+These settings apply only when `--tag=package-2020-06-01` is specified on the command line.
+
+```yaml $(tag) == 'package-2020-06-01'
+input-file:
+- Microsoft.InstanceMetadataService/stable/2020-06-01/imds.json
+```
 
 ## Suppression
  ``` yaml
@@ -247,6 +255,22 @@ input-file:
    - suppress: DefinitionsPropertiesNamesCamelCase
      reason: The following properties follow the Oath2 spec, which does not use camelCase.
      from: Microsoft.InstanceMetadataService/stable/2019-11-01/imds.json
+     where:
+       - $.definitions.IdentityTokenResponse.properties.access_token
+       - $.definitions.IdentityTokenResponse.properties.expires_in
+       - $.definitions.IdentityTokenResponse.properties.expires_on
+       - $.definitions.IdentityTokenResponse.properties.ext_expires_in
+       - $.definitions.IdentityTokenResponse.properties.not_before
+       - $.definitions.IdentityTokenResponse.properties.resource
+       - $.definitions.IdentityTokenResponse.properties.token_type
+       - $.definitions.IdentityTokenResponse.properties.client_id
+       - $.definitions.IdentityTokenResponse.properties.object_id
+       - $.definitions.IdentityTokenResponse.properties.msi_res_id
+       - $.definitions.IdentityErrorResponse.properties.error_description
+   
+   - suppress: DefinitionsPropertiesNamesCamelCase
+     reason: The following properties follow the Oath2 spec, which does not use camelCase.
+     from: Microsoft.InstanceMetadataService/stable/2020-06-01/imds.json
      where:
        - $.definitions.IdentityTokenResponse.properties.access_token
        - $.definitions.IdentityTokenResponse.properties.expires_in

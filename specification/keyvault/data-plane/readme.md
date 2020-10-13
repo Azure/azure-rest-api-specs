@@ -174,6 +174,12 @@ input-file:
   - $(this-folder)/Microsoft.KeyVault/preview/7.2-preview/secrets.json
   - $(this-folder)/Microsoft.KeyVault/preview/7.2-preview/storage.json
   - $(this-folder)/Microsoft.KeyVault/preview/7.2-preview/backuprestore.json
+  - $(this-folder)/Microsoft.KeyVault/preview/7.2-preview/securitydomain.json
+  - $(this-folder)/Microsoft.KeyVault/stable/7.1/certificates.json
+  - $(this-folder)/Microsoft.KeyVault/stable/7.1/common.json
+  - $(this-folder)/Microsoft.KeyVault/stable/7.1/keys.json
+  - $(this-folder)/Microsoft.KeyVault/stable/7.1/secrets.json
+  - $(this-folder)/Microsoft.KeyVault/stable/7.1/storage.json
   - $(this-folder)/Microsoft.KeyVault/preview/7.1/certificates.json
   - $(this-folder)/Microsoft.KeyVault/preview/7.1/common.json
   - $(this-folder)/Microsoft.KeyVault/preview/7.1/keys.json
