@@ -29,6 +29,15 @@ openapi-type: arm
 tag: package-2018-10-01
 ```
 
+### Tag: package-2020-04-01-preview
+
+These settings apply only when `--tag=package-2020-04-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2020-04-01-preview'
+input-file:
+  - Microsoft.Portal/preview/2020-04-01-preview/CloudShell.json
+```
+
 ### Tag: package-2018-10-01
 
 These settings apply only when `--tag=package-2018-10-01` is specified on the command line.
@@ -36,15 +45,6 @@ These settings apply only when `--tag=package-2018-10-01` is specified on the co
 ```yaml $(tag) == 'package-2018-10-01'
 input-file:
   - Microsoft.Portal/stable/2018-10-01/CloudShell.json
-```
-
-### Tag: package-2020-04-01-preview
-
-These settings apply only when `--tag=package-2020-04-01-preview` is specified on the command line.
-
-```yaml $(tag) == 'package-2018-10-01'
-input-file:
-  - Microsoft.Portal/preview/2020-04-01-preview/CloudShell.json
 ```
 
 ---
