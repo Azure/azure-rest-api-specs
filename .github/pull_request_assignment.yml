@@ -1,5 +1,12 @@
 ---
 - rule:
+    # eventgrid data-plane PR
+    paths:
+      - "specification/eventgrid/data-plane/**"
+    reviewers:
+      - lmazuel
+
+- rule:
     # data-plane PR
     paths:
       - "specification/**/data-plane/**"
@@ -8,6 +15,7 @@
       - jhendrixMSFT
       - lmazuel
       - tjprescott
+      
 
 - rule:
     paths:
@@ -22,6 +30,11 @@
     reviewers:
       - MyronFanQiu
 
+- rule:
+    paths: "specification/@(resources|powerplatform)/**"
+    reviewers:
+      - raych1
+      
 - rule:
     paths: "specification/compute/**"
     reviewers:
@@ -68,11 +81,11 @@
       - qianwens
       - Juliehzl
 
-- rule:
-    paths: "specification/mediaservices/**"
-    reviewers:
-      - allenjzhang
 
+- rule:	
+    paths: "specification/mediaservices/**"	
+    reviewers:	
+      - allenjzhang
 - rule:
     paths:
       - "specification/@(keyvault|notificationhubs)/**"
@@ -124,6 +137,24 @@
     reviewers:
       - akning-ms
       - PhoenixHe-msft
+      
+- rule:	
+    paths:	
+      - "documentation/**"	
+    reviewers:	
+      - josefree	
+      - akning-ms	
+
+- rule:	
+    paths:	
+      - "**/package.json"	
+      - ".github/**"	
+      - "**/azure-pipelines.yml"	
+      - ".azure-pipelines/**"	
+      - ".azure-pipelines-preproduction/**"	
+    reviewers:	
+      - akning-ms	
+      - PhoenixHe-msft	
       - raych1
 
 - rule:
@@ -138,11 +169,12 @@
       - weidongxu-microsoft
       - ArcturusZhang
       - xccc-msft
+      - raych1
       - ChenTanyi
       - fengzhou-msft
       - njuCZ
       - akning-ms
-      - markcowl
       - leni-msft
       - qianwens
       - ruowan
+      - jianyexi
