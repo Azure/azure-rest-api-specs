@@ -72,6 +72,10 @@ directive:
     reason: |-
       1) changing this is a braking change
       2) We add entities / fields / properties on a weekly bases this allows us to support forward compatibility 
+  - suppress: OBJECT_ADDITIONAL_PROPERTIES
+    where: $.definitions.AccountEntity
+    from: alerts.json
+    reason: Changing this will mean braking change
 ```
 
 ### Basic Information
