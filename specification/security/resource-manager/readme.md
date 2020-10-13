@@ -60,6 +60,12 @@ directive:
     from: onPremiseIotSensors.json
     where: $.definitions.OnPremiseIotSensor
     reason: The resource is managed in a subscription level (instead of inside a resource group)
+  - suppress: OBJECT_ADDITIONAL_PROPERTIES
+    where: $.definitions.IPEntity
+    from: alerts.json
+    reason: |-
+      1) changing this is a braking change
+      2) We add entities / fields / properties on a weekly bases this allows us to support forward compatibility 
 ```
 
 ### Basic Information
@@ -76,7 +82,6 @@ tag: package-composite-v3
 ## Composite packages
 
 The following packages may be composed from multiple api-versions.
-
 
 ### Tag: package-composite-v1
 
@@ -444,4 +449,3 @@ See configuration in [readme.ruby.md](./readme.ruby.md)
 ## AzureResourceSchema
 
 See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
-
