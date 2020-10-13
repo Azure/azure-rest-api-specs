@@ -128,6 +128,7 @@ input-file:
   - $(this-folder)/Microsoft.DesktopVirtualization/preview/2019-01-23-preview/desktopvirtualization.json
   - $(this-folder)/Microsoft.DesktopVirtualization/preview/2019-09-24-preview/desktopvirtualization.json
   - $(this-folder)/Microsoft.DesktopVirtualization/preview/2019-12-10-preview/desktopvirtualization.json
+  - $(this-folder)/Microsoft.DesktopVirtualization/preview/2020-09-21-preview/desktopvirtualization.json
 
 ```
 
