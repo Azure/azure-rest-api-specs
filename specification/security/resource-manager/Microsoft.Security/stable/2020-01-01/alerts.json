@@ -556,11 +556,595 @@
         "type": "object"
       },
       "description": "Changing set of properties depending on the entity type.",
+      "discriminator": "type",
       "properties": {
         "type": {
           "readOnly": true,
           "type": "string",
           "description": "Type of entity"
+        }
+      },
+      "required": [
+        "type"
+      ]
+    },
+    "AccountEntity": {
+      "x-ms-discriminator-value": "account",
+      "description": "Represents an account. The account can be either a domain account, a local account, or an AAD account.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AlertEntity"
+        }
+      ],
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the account."
+        },
+        "ntDomain": {
+          "type": "string",
+          "description": "The NETBIOS domain name – domain\\username."
+        },
+        "dnsDomain": {
+          "type": "string",
+          "description": "The fully qualified DNS name."
+        },
+        "upnSuffix": {
+          "type": "string",
+          "description": "The user principal name suffix for the account. In some cases it is also the domain name."
+        },
+        "sid": {
+          "type": "string",
+          "description": "The account security identifier."
+        },
+        "aadTenantId": {
+          "type": "string",
+          "description": "The Azure Active Directory tenant ID."
+        },
+        "aadUserId": {
+          "type": "string",
+          "description": "The Azure Active Directory user ID."
+        },
+        "puid": {
+          "type": "string",
+          "description": " The Azure Active Directory passport user ID."
+        },
+        "displayName": {
+          "type": "string",
+          "description": "The display name of the account."
+        },
+        "isDomainJoined": {
+          "type": "boolean",
+          "description": "Determines whether this is a domain account."
+        },
+        "objectGuid": {
+          "type": "string",
+          "description": "The objectGUID attribute is a single-value attribute that is the unique identifier for the object, assigned by Active Directory."
+        },
+        "host": {
+          "$ref": "#/definitions/HostEntity"
+        }
+      }
+    },
+    "AlertsEntity": { 
+      "x-ms-discriminator-value": "alerts",
+      "description": "Represents alerts that are related to a given alert.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AlertEntity"
+        }
+      ],
+      "type": "object",
+      "properties": {
+        "displayName": {
+          "type": "string",
+          "description": "The display name for the related alert."
+        },
+        "compromisedEntity": {
+          "type": "string",
+          "description": "The display name of the compromised entity for the alert."
+        },
+        "count": {
+          "type": "integer",
+          "description": "The number of related alerts grouped into the incident."
+        },
+        "severity": {
+          "type": "string",
+          "description": "The related alert severity."
+        },
+        "alertType": {
+          "type": "string",
+          "description": "The related alert type."
+        },
+        "vendorName": {
+          "type": "string",
+          "description": "The related alert vendor name."
+        },
+        "systemAlertIds": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "description": "A related alert identifier."
+          },
+          "description": "The related alerts identifiers."
+        }
+      }
+    },
+    "CloudApplicationEntity": { 
+      "x-ms-discriminator-value": "cloud-application",
+      "description": "Represents a cloud application such as Microsoft 365, Salesforce etc.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AlertEntity"
+        }
+      ],
+      "type": "object",
+      "properties": {
+        "appId": {
+          "type": "integer",
+          "description": "The technical identifier of the application."
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the related cloud application."
+        },
+        "instanceName": {
+          "type": "string",
+          "description": "The user defined instance name of the cloud application."
+        }
+      }
+    },
+    "DnsEntity": { 
+      "x-ms-discriminator-value": "dns",
+      "description": "Represents DNS resolution query results.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AlertEntity"
+        }
+      ],
+      "type": "object",
+      "properties": {
+        "domainName": {
+          "type": "string",
+          "description": "The name of the DNS record associated with the alert."
+        },
+        "ipAdresses": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/IPEntity"
+          },
+          "description": "Entities of type ‘ip’ for the resolved IP address."
+        },
+        "DnsServerIp": {
+          "$ref": "#/definitions/IPEntity"
+        },
+        "HostIpAddress": {
+          "$ref": "#/definitions/IPEntity"
+        }
+      }
+    },
+    "FileEntity": { 
+      "x-ms-discriminator-value": "file",
+      "description": "Represents a file that is reported as part of the security detection alert.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AlertEntity"
+        }
+      ],
+      "type": "object",
+      "properties": {
+        "fullPath": {
+          "type": "string",
+          "description": "The file's full path, combining both directory and name."
+        },
+        "directory": {
+          "type": "string",
+          "description": "The full path to the file’s directory."
+        },
+        "name": {
+          "type": "string",
+          "description": "The file name without the path."
+        },
+        "host": {
+          "$ref": "#/definitions/HostEntity"
+        },
+        "fileHashes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/FileHashEntity"
+          },
+          "description": "The file hashes associated with this file."
+        }
+      }
+    },
+    "FileHashEntity": { 
+      "description": "Represents a file hash value that is reported as part of the security detection alert, usually in relation to some file entity instance.",
+      "x-ms-discriminator-value": "filehash",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AlertEntity"
+        }
+      ],
+      "type": "object",
+      "properties": {
+        "fileHashAlgorithm": {
+          "type": "string",
+          "description": "The hash algorithm type."
+        },
+        "value": {
+          "type": "string",
+          "description": "The hash value."
+        }
+      }
+    },
+    "HostEntity": { 
+      "x-ms-discriminator-value": "host",
+      "description": "Represents a host that is reported as part of the alert.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AlertEntity"
+        }
+      ],
+      "type": "object",
+      "properties": {
+        "dnsDomain": {
+          "type": "string",
+          "description": "The DNS domain to which this computer belongs."
+        },
+        "ntDomain": {
+          "type": "string",
+          "description": "The NT domain to which this computer belongs."
+        },
+        "hostName": {
+          "type": "string",
+          "description": "The NT domain to which this computer belongs."
+        },
+        "netBiosName": {
+          "type": "string",
+          "description": "The computer name (pre-windows2000)."
+        },
+        "azureID": {
+          "type": "string",
+          "description": "The Azure resource ID of the VM, if known."
+        },
+        "omsAgentID": {
+          "type": "string",
+          "description": "The OMS agent ID, if the computer has OMS agent installed."
+        },
+        "osFamily": {
+          "type": "string",
+          "description": "The computer operating system."
+        },
+        "osVersion": {
+          "type": "string",
+          "description": "The computer operating system specific version. This is a free form textual representation of the OS."
+        },
+        "iotDevice": {
+          "$ref": "#/definitions/IoTDeviceEntity"
+        }
+      }
+    },
+    "HostLogonSessionEntity": { 
+      "x-ms-discriminator-value": "host-logon-session",
+      "description": "Represents a logon session to a host by an account.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AlertEntity"
+        }
+      ],
+      "type": "object",
+      "properties": {
+        "sessionId": {
+          "type": "string",
+          "description": "The session ID for the account reported in the alert."
+        },
+        "host": {
+          "$ref": "#/definitions/HostEntity"
+        },
+        "account": {
+          "$ref": "#/definitions/AccountEntity"
+        }
+      }
+    },
+    "IoTDeviceEntity": { 
+      "x-ms-discriminator-value": "iotdevice",
+      "description": "Represents an IoT Device that is reported as part of the alert.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AlertEntity"
+        }
+      ],
+      "type": "object",
+      "properties": {
+        "azureResource": {
+          "type": "object",
+          "description": "ARM ID of for connected IoT Hub",
+          "properties": {
+            "ResourceId": {
+              "type": "string"
+            }
+          }
+        },
+        "deviceId": {
+          "type": "string",
+          "description": "The ID of the IoT Device in the IoT Hub."
+        },
+        "deviceName": {
+          "type": "string",
+          "description": "The friendly name of the device"
+        },
+        "manufacturer": {
+          "type": "string",
+          "description": "The manufacturer of the device"
+        },
+        "model": {
+          "type": "string",
+          "description": "The model of the IoT device"
+        },
+        "firmwareVersion": {
+          "type": "string",
+          "description": "The firmware version that the device is running"
+        },
+        "operatingSystem": {
+          "type": "string",
+          "description": "The operating system that the device is running"
+        },
+        "ipAddress": {
+          "$ref": "#/definitions/IPEntity"
+        },
+        "macAddress": {
+          "type": "string",
+          "description": "The MAC address of the device"
+        },
+        "protocols": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "The communication protocols the device is using"
+        },
+        "serialNumber": {
+          "type": "string",
+          "description": "The serial number of the device"
+        },
+        "source": {
+          "type": "string",
+          "description": "The source of the device entity"
+        },
+        "sourceRef": {
+          "type": "string",
+          "description": "URL reference to the source item where the device is managed"
+        },
+        "iotSecurityAgentId": {
+          "type": "string",
+          "description": "The ID of the security agent running on the device"
+        },
+        "deviceType": {
+          "type": "string",
+          "description": "The type of the device"
+        }
+      }
+    },
+    "IPEntity": { 
+      "x-ms-discriminator-value": "ip",
+      "description": "Represents an IP endpoint entity",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AlertEntity"
+        }
+      ],
+      "type": "object",
+      "properties": {
+        "address": {
+          "type": "string",
+          "description": "The IP address as string"
+        }
+      }
+    },
+    "MailboxEntity": { 
+      "x-ms-discriminator-value": "mailbox",
+      "description": "Represents an impacted mailbox",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AlertEntity"
+        }
+      ],
+      "type": "object",
+      "properties": {
+        "mailboxPrimaryAddress": {
+          "type": "string",
+          "description": "Primary email of the mailbox"
+        },
+        "displayName": {
+          "type": "string",
+          "description": "Display name of the mailbox"
+        },
+        "upn": {
+          "type": "string",
+          "description": "UPN of the mailbox"
+        },
+        "externalDirectoryObjectId": {
+          "type": "string",
+          "description": "External directory object identifier of the mailbox"
+        },
+        "riskLevel": {
+          "type": "string",
+          "description": "The risk level of this mailbox like Low, Medium, High"
+        }
+      }
+    },
+    "MalwareEntity": { 
+      "x-ms-discriminator-value": "malware",
+      "description": "Represents a malware that is reported as part of the security alert",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AlertEntity"
+        }
+      ],
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The malware name by the vendor, e.g. Win32/Toga!rfn"
+        },
+        "category": {
+          "type": "string",
+          "description": "The malware category by the vendor, e.g. Trojan"
+        },
+        "files": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/FileEntity"
+          },
+          "description": "Holds list of File entities which relate to this Malware entity instance"
+        },
+        "processes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ProcessEntity"
+          },
+          "description": "Holds list of Process entities which relate to this Malware entity instance"
+        }
+      }
+    },
+    "NetworkConnectionEntity": { 
+      "x-ms-discriminator-value": "network-connection",
+      "description": "",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AlertEntity"
+        }
+      ],
+      "type": "object",
+      "properties": {
+        "sourceAddress": {
+          "$ref": "#/definitions/IPEntity"
+        },
+        "sourcePort": {
+          "type": "integer",
+          "description": "The source port number"
+        },
+        "destinationAddress": {
+          "$ref": "#/definitions/IPEntity"
+        },
+        "destinationPort": {
+          "type": "integer",
+          "description": "The destination port number"
+        },
+        "protocol": {
+          "type": "string",
+          "description": "The protocol type of the network connection (i.e. TCP, UDP)"
+        }
+      }
+    },
+    "ProcessEntity": { 
+      "x-ms-discriminator-value": "process",
+      "description": "Represents a process running on a host",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AlertEntity"
+        }
+      ],
+      "type": "object",
+      "properties": {
+        "processId": {
+          "type": "string",
+          "description": "The process ID"
+        },
+        "commandLine": {
+          "type": "string",
+          "description": "The command line used to create the process"
+        },
+        "elevationToken": {
+          "type": "string",
+          "description": "The elevation token associated with the process"
+        },
+        "creationTimeUtc": {
+          "type": "string",
+          "description": "The time when the process started to run"
+        },
+        "imageFile": {
+          "$ref": "#/definitions/FileEntity"
+        },
+        "account": {
+          "$ref": "#/definitions/AccountEntity"
+        },
+        "logonSession": {
+          "$ref": "#/definitions/HostLogonSessionEntity"
+        },
+        "parentProcess": {
+          "$ref": "#/definitions/ProcessEntity"
+        },
+        "host": {
+          "$ref": "#/definitions/HostEntity"
+        }
+      }
+    },
+    "RegistryKeyEntity": { 
+      "x-ms-discriminator-value": "registry-key",
+      "description": "Represents a registry key entity",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AlertEntity"
+        }
+      ],
+      "type": "object",
+      "properties": {
+        "hive": {
+          "type": "string",
+          "description": "The hive that holds the registry key"
+        },
+        "key": {
+          "type": "string",
+          "description": "The registry key path"
+        }
+      }
+    },
+    "RegistryValueEntity": { 
+      "x-ms-discriminator-value": "registry-value",
+      "description": "Represents a registry value entity",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AlertEntity"
+        }
+      ],
+      "type": "object",
+      "properties": {
+        "key": {
+          "$ref": "#/definitions/RegistryKeyEntity"
+        },
+        "name": {
+          "type": "string",
+          "description": "The registry key entity"
+        },
+        "value": {
+          "type": "string",
+          "description": "The registry value name"
+        }
+      }
+    },
+    "SecurityGroupEntity": { 
+      "x-ms-discriminator-value": "security-group",
+      "description": "Represents a security group that is reported as part of the security detection alert. The security group in most cases would be a domain group, local group, AAD group or other",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AlertEntity"
+        }
+      ],
+      "type": "object",
+      "properties": {
+        "distinguishedName": {
+          "type": "string",
+          "description": "The group distinguished name"
+        },
+        "sid": {
+          "type": "string",
+          "description": "The SID attribute is a single-value attribute that specifies the security identifier (SID) of the group"
+        },
+        "objectGuid": {
+          "type": "string",
+          "description": "The objectGUID attribute is a single-value attribute that is the unique identifier for the object, assigned by Active Directory"
         }
       }
     },
@@ -689,7 +1273,7 @@
               },
               {
                 "value": "PreAttack",
-                "description": "PreAttack could be either an attempt to access a certain resource regardless of a malicious intent, or a failed attempt to gain access to a target system to gather information prior to exploitation. This step is usually detected as an attempt, originating from outside the network, to scan the target system and find a way in.  Further details on the PreAttack stage can be read in [MITRE Pre-Att&ck matrix](https://attack.mitre.org/matrices/pre/)."
+                "description": "PreAttack could be either an attempt to access a certain resource regardless of a malicious intent, or a failed attempt to gain access to a target system to gather information prior to exploitation. This step is usually detected as an attempt, originating from outside the network, to scan the target system and find a way in. Further details on the PreAttack stage can be read in [MITRE Pre-Att&ck matrix](https://attack.mitre.org/matrices/pre/)."
               },
               {
                 "value": "InitialAccess",
@@ -774,7 +1358,7 @@
         "remediationSteps": {
           "readOnly": true,
           "type": "array",
-          "description": "Manual action items to take to remediate the alert.",
+          "description": "Manual actions to take to remediate the alert.",
           "items": {
             "readOnly": true,
             "type": "string"
@@ -811,7 +1395,7 @@
               }
             ]
           },
-          "description": "The life cycle status of the alert."
+          "description": "The lifecycle status of the alert."
         },
         "extendedLinks": {
           "readOnly": true,
@@ -824,7 +1408,7 @@
         "alertUri": {
           "readOnly": true,
           "type": "string",
-          "description": "A direct link to the alert page in Azure Portal."
+          "description": "A direct link to the alert page in the Azure portal."
         },
         "timeGeneratedUtc": {
           "readOnly": true,
@@ -835,7 +1419,7 @@
         "productName": {
           "readOnly": true,
           "type": "string",
-          "description": "The name of the product which published this alert (Azure Security Center, Azure ATP, Microsoft Defender ATP, O365 ATP, MCAS, and so on)."
+          "description": "The name of the product which published this alert (Azure Security Center, Microsoft Defender for Identity, Microsoft Defender for Endpoint, Microsoft Defender for Office 365, MCAS, and so on)."
         },
         "processingEndTimeUtc": {
           "readOnly": true,
@@ -859,7 +1443,7 @@
         "correlationKey": {
           "readOnly": true,
           "type": "string",
-          "description": "Key for corelating related alerts. Alerts with the same correlation key considered to be related."
+          "description": "Key for correlating related alerts. Alerts with the same correlation key are considered as related."
         },
         "extendedProperties": {
           "$ref": "#/definitions/AlertExtendedProperties",
@@ -902,23 +1486,23 @@
         "workspaceId": {
           "readOnly": true,
           "type": "string",
-          "description": "The LogAnalytics workspace id that stores this alert."
+          "description": "The Log Analytics workspace ID that stores this alert."
         },
         "workspaceSubscriptionId": {
           "readOnly": true,
           "type": "string",
-          "description": "The azure subscription id for the LogAnalytics workspace storing this alert.",
+          "description": "The Azure subscription ID for the Log Analytics workspace storing this alert.",
           "pattern": "^[0-9A-Fa-f]{8}-([0-9A-Fa-f]{4}-){3}[0-9A-Fa-f]{12}$"
         },
         "workspaceResourceGroup": {
           "readOnly": true,
           "type": "string",
-          "description": "The azure resource group for the LogAnalytics workspace storing this alert"
+          "description": "The Azure resource group for the Log Analytics workspace storing this alert"
         },
         "agentId": {
           "readOnly": true,
           "type": "string",
-          "description": "(optional) The LogAnalytics agent id reporting the event that this alert is based on."
+          "description": "(optional) The Log Analytics agent ID reporting the event that this alert is based on."
         }
       }
     },
@@ -932,7 +1516,7 @@
       "properties": {
         "type": {
           "type": "string",
-          "description": "There can be multiple identifiers of different type per alert, this field specify the identifier type.",
+          "description": "There can be multiple identifiers of different type per alert, this field specifies the identifier type.",
           "enum": [
             "AzureResource",
             "LogAnalytics"
