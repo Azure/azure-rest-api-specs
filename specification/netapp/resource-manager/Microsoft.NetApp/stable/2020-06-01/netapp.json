@@ -4128,13 +4128,19 @@
       }
     },
     "snapshotPolicyVolumeList": {
-      "description": "List of volumes",
-      "type": "array",
-      "readOnly": true,
-      "items": {                            
-        
-          "$ref": "#/definitions/volume"
+      "description": "Volumes associated with snapshot policy",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "List of volumes",
+          "type": "array",
+          "items": {
+            "type": "object",
+            "readOnly": true,
+            "description": "Associated volume resource Id"
+          }
         }
+      }
     },
     "hourlySchedule": {
       "description": "Hourly Schedule properties",
