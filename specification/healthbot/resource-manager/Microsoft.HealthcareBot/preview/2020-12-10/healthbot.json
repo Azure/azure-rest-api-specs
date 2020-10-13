@@ -199,7 +199,7 @@
       }
     },
     "OperationEntity": {
-      "description": "The operations supported by Bot Service Management.",
+      "description": "The operations supported by HealthcareBot Management.",
       "type": "object",
       "properties": {
         "name": {
@@ -208,7 +208,7 @@
         },
         "display": {
           "$ref": "#/definitions/OperationDisplayInfo",
-          "description": "The operation supported by Bot Service Management."
+          "description": "The operation supported by HealthcareBot Management."
         },
         "origin": {
           "description": "The origin of the operation.",
@@ -217,6 +217,28 @@
         "properties": {
           "description": "Additional properties.",
           "type": "object"
+        }
+      }
+    },
+    "OperationDisplayInfo": {
+      "description": "The operation supported by Healthcare Bot Management.",
+      "type": "object",
+      "properties": {
+        "description": {
+          "description": "The description of the operation.",
+          "type": "string"
+        },
+        "operation": {
+          "description": "The action that users can perform, based on their permission level.",
+          "type": "string"
+        },
+        "provider": {
+          "description": "Service provider: Microsoft Healthcare Bot.",
+          "type": "string"
+        },
+        "resource": {
+          "description": "Resource on which the operation is performed.",
+          "type": "string"
         }
       }
     }
