@@ -100,7 +100,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/Setting"
+              "$ref": "#/definitions/SettingResource"
             }
           },
           "default": {
@@ -140,7 +140,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/Setting"
+              "$ref": "#/definitions/SettingResource"
             }
           },
           "default": {
@@ -162,7 +162,7 @@
           "type": "array",
           "description": "The settings list.",
           "items": {
-            "$ref": "#/definitions/Setting"
+            "$ref": "#/definitions/SettingResource"
           }
         },
         "nextLink": {
@@ -171,16 +171,6 @@
           "description": "The URI to fetch the next page."
         }
       }
-    },
-    "Setting": {
-      "type": "object",
-      "description": "Represents a security setting in Azure Security Center.",
-      "properties": {},
-      "allOf": [
-        {
-          "$ref": "#/definitions/SettingResource"
-        }
-      ]
     },
     "DataExportSettings": {
       "type": "object",
@@ -194,7 +184,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/Setting"
+          "$ref": "#/definitions/SettingResource"
         }
       ],
       "x-ms-discriminator-value": "DataExportSettings"
@@ -267,7 +257,7 @@
       "required": true,
       "description": "Setting object",
       "schema": {
-        "$ref": "#/definitions/Setting"
+        "$ref": "#/definitions/SettingResource"
       },
       "x-ms-parameter-location": "method"
     }
