@@ -137,6 +137,50 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/environments/{environmentName}/versions": {
+      "get": {
+        "tags": [
+          "EnvironmentSpecification"
+        ],
+        "operationId": "EnvironmentSpecificationVersions_List",
+        "x-ms-examples": {
+          "List Environment Specification Version.": {
+            "$ref": "./examples/listEnvironmentSpecificationVersions.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "machineLearningServices.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/APIVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/EnvironmentNameParameter"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "machineLearningServices.json#/definitions/MachineLearningServiceError"
+            }
+          },
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/EnvironmentSpecificationVersionResourceArmPaginatedResult"
+            }
+          }
+        }
+      }
     }
   },
   "parameters": {
@@ -270,6 +314,20 @@
         }
       },
       "x-ms-azure-resource": true
+    },
+    "EnvironmentSpecificationVersionResourceArmPaginatedResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/EnvironmentSpecificationVersionResource"
+          }
+        },
+        "nextLink": {
+          "type": "string"
+        }
+      }
     }
   }
 }
