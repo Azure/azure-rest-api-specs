@@ -29,8 +29,8 @@ Please also specify `--azure-libraries-for-java=<path to the root directory of y
 
 ``` yaml $(tag) == 'package-2020-10' && $(java) && $(multiapi)
 java:
-  namespace: com.microsoft.azure.management.azurestackhci.v2020-10-01
-  output-folder: $(azure-libraries-for-java-folder)/sdk/azurestackhci/mgmt-v2020-10-01
+  namespace: com.microsoft.azure.management.azurestackhci.v2020_10_01
+  output-folder: $(azure-libraries-for-java-folder)/sdk/azurestackhci/mgmt-v2020_10_01
 regenerate-manager: true
 generate-interface: true
 ```
