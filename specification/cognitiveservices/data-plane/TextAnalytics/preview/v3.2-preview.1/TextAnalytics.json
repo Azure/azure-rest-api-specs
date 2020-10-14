@@ -824,18 +824,6 @@
         }
       }
     },
-    "TextAnalyticsTask": {
-      "type": "object",
-      "required": [
-        "enable"
-      ],
-      "properties": {
-        "enable": {
-          "default": false,
-          "type": "boolean"
-        }
-      }
-    },
     "TextAnalyticsWarning": {
       "type": "object",
       "required": [
@@ -866,60 +854,46 @@
       }
     },
     "PiiTask": {
-      "allOf": [
-        {
-          "$ref": "#/definitions/TextAnalyticsTask"
-        },
-        {
+      "properties": {
+        "parameters": {
           "properties": {
-            "parameters": {
-              "properties": {
-                "domain": {
-                  "default": "none",
-                  "enum": [
-                    "phi",
-                    "none"
-                  ],
-                  "type": "string"
-                },
-                "model-version": {
-                  "default": "latest",
-                  "type": "string"
-                },
-                "stringIndexType": {
-                  "$ref": "#/definitions/StringIndexType"
-                }
-              },
-              "type": "object"
+            "domain": {
+              "default": "none",
+              "enum": [
+                "phi",
+                "none"
+              ],
+              "type": "string"
+            },
+            "model-version": {
+              "default": "latest",
+              "type": "string"
+            },
+            "stringIndexType": {
+              "$ref": "#/definitions/StringIndexType"
             }
           },
           "type": "object"
         }
-      ]
+      },
+      "type": "object"
     },
     "EntitiesTask": {
-      "allOf": [
-        {
-          "$ref": "#/definitions/TextAnalyticsTask"
-        },
-        {
+      "properties": {
+        "parameters": {
           "properties": {
-            "parameters": {
-              "properties": {
-                "model-version": {
-                  "default": "latest",
-                  "type": "string"
-                },
-                "stringIndexType": {
-                  "$ref": "#/definitions/StringIndexType"
-                }
-              },
-              "type": "object"
+            "model-version": {
+              "default": "latest",
+              "type": "string"
+            },
+            "stringIndexType": {
+              "$ref": "#/definitions/StringIndexType"
             }
           },
           "type": "object"
         }
-      ]
+      },
+      "type": "object"
     },
     "InnerError": {
       "type": "object",
@@ -1048,32 +1022,25 @@
       }
     },
     "SentimentTask": {
-      "allOf": [
-        {
-          "$ref": "#/definitions/TextAnalyticsTask"
-        },
-        {
+      "properties": {
+        "parameters": {
           "properties": {
-            "parameters": {
-              "properties": {
-                "model-version": {
-                  "default": "latest",
-                  "type": "string"
-                },
-                "opinionMining": {
-                  "default": false,
-                  "type": "boolean"
-                },
-                "stringIndexType": {
-                  "$ref": "#/definitions/StringIndexType"
-                }
-              },
-              "type": "object"
+            "model-version": {
+              "default": "latest",
+              "type": "string"
+            },
+            "opinionMining": {
+              "default": false,
+              "type": "boolean"
+            },
+            "stringIndexType": {
+              "$ref": "#/definitions/StringIndexType"
             }
           },
           "type": "object"
         }
-      ]
+      },
+      "type": "object"
     },
     "TaskState": {
       "properties": {
@@ -1766,28 +1733,21 @@
       }
     },
     "EntityLinkingTask": {
-      "allOf": [
-        {
-          "$ref": "#/definitions/TextAnalyticsTask"
-        },
-        {
+      "properties": {
+        "parameters": {
           "properties": {
-            "parameters": {
-              "properties": {
-                "model-version": {
-                  "default": "latest",
-                  "type": "string"
-                },
-                "stringIndexType": {
-                  "$ref": "#/definitions/StringIndexType"
-                }
-              },
-              "type": "object"
+            "model-version": {
+              "default": "latest",
+              "type": "string"
+            },
+            "stringIndexType": {
+              "$ref": "#/definitions/StringIndexType"
             }
           },
           "type": "object"
         }
-      ]
+      },
+      "type": "object"
     },
     "HealthcareJobState": {
       "allOf": [
@@ -2139,25 +2099,18 @@
       }
     },
     "KeyPhrasesTask": {
-      "allOf": [
-        {
-          "$ref": "#/definitions/TextAnalyticsTask"
-        },
-        {
+      "properties": {
+        "parameters": {
           "properties": {
-            "parameters": {
-              "properties": {
-                "model-version": {
-                  "default": "latest",
-                  "type": "string"
-                }
-              },
-              "type": "object"
+            "model-version": {
+              "default": "latest",
+              "type": "string"
             }
           },
           "type": "object"
         }
-      ]
+      },
+      "type": "object"
     },
     "LanguageBatchInput": {
       "type": "object",
