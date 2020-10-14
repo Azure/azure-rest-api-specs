@@ -129,7 +129,7 @@
     "/elevation/point/{format}": {
       "get": {
         "x-publish": true,
-        "description": "**Applies to**: S1 pricing tier.\nThe Get Data for Points API provides elevation data for one or more points.  A point is defined in lat/long coordinate format.  ",
+        "description": "**Applies to**: S1 pricing tier.\nThe Get Data for Points API provides elevation data for one or more points.  A point is defined in lat/long coordinate format. Due to the URL character  length limit of 2048, it's not possible to pass more than 100 coordinates  as a pipeline delimited string in a URL GET request. If you intend to pass  more than 100 coordinates as a pipeline delimited string, use the [POST Data\n For Points](https://docs.microsoft.com/en-us/rest/api/maps/elevation/postdataforpoints).",
         "operationId": "Elevation_GetDataForPoints",
         "x-ms-examples": {
           "GetDataForPoints": {
@@ -186,7 +186,7 @@
       },
       "post": {
         "x-publish": true,
-        "description": "**Applies to**: S1 pricing tier.\nThe Post Data for Points API provides elevation data for multiple points.  A point is defined in lat/lon coordinate format.",
+        "description": "**Applies to**: S1 pricing tier.\nThe Post Data for Points API provides elevation data for multiple points.  A point is defined in lat/lon coordinate format. Use the POST endpoint only  if you intend to pass multiple points in the request. If you intend to pass  a single coordinate into the API, use the [GET Data For Points API](https://docs.microsoft.com/en-us/rest/api/maps/elevation/getdataforlatlongcoordinates)",
         "operationId": "Elevation_PostDataForPoints",
         "x-ms-examples": {
           "PostDataForPoints": {
