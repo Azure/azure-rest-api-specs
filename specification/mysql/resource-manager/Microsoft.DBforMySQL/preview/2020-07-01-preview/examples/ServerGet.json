@@ -1,0 +1,55 @@
+{
+  "parameters": {
+    "serverName": "mysqltestsvc4",
+    "resourceGroupName": "testrg",
+    "api-version": "2020-07-01-preview",
+    "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "sku": {
+          "name": "Standard_D14_v2",
+          "tier": "GeneralPurpose"
+        },
+        "properties": {
+          "administratorLogin": "cloudsa",
+          "storageProfile": {
+            "storageMB": 128000,
+            "storageIops": 200,
+            "backupRetentionDays": 7
+          },
+          "version": "5.7",
+          "sslEnforcement": "Enabled",
+          "state": "Ready",
+          "fullyQualifiedDomainName": "mysqltestsvc4.mysql.database.azure.com",
+          "earliestRestoreDate": "2020-03-14T18:02:41.577+00:00",
+          "replicationRole": "None",
+          "sourceServerId": "",
+          "replicaCapacity": 5,
+          "publicNetworkAccess": "Enabled",
+          "haEnabled": "Enabled",
+          "haState": "Healthy",
+          "availabilityZone": "1",
+          "standbyAvailabilityZone": "2",
+          "maintenanceWindow": {
+            "dayOfWeek": 0,
+            "startHour": 0,
+            "startMinute": 0,
+            "customWindow": "Disabled"
+          },
+          "delegatedSubnetArguments": {
+            "subnetArmResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.Network/virtualNetworks/test-vnet/subnets/test-vnet-subnet"
+          }
+        },
+        "location": "westus",
+        "tags": {
+          "ElasticServer": "1"
+        },
+        "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.DBforMySQL/flexibleServers/mysqltestsvc4",
+        "name": "mysqltestsvc4",
+        "type": "Microsoft.DBforMySQL/flexibleServers"
+      }
+    }
+  }
+}
