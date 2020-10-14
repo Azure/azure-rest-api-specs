@@ -89,48 +89,6 @@
             }
           }
         }
-      },
-      "get": {
-        "tags": [
-          "EnvironmentSpecification"
-        ],
-        "operationId": "EnvironmentSpecifications_Get",
-        "x-ms-examples": {
-          "Get Environment Specification.": {
-            "$ref": "./examples/getEnvironmentSpecification.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "machineLearningServices.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "machineLearningServices.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
-          },
-          {
-            "$ref": "machineLearningServices.json#/parameters/APIVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/EnvironmentNameParameter"
-          }
-        ],
-        "responses": {
-          "default": {
-            "description": "Error",
-            "schema": {
-              "$ref": "machineLearningServices.json#/definitions/MachineLearningServiceError"
-            }
-          },
-          "200": {
-            "description": "Success",
-            "schema": {
-              "$ref": "#/definitions/EnvironmentSpecificationVersionResource"
-            }
-          }
-        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/environments/{environmentName}/versions/{environmentVersion}": {
