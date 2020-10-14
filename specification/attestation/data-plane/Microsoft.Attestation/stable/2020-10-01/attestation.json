@@ -38,60 +38,7 @@
     }
   },
   "paths": {
-    "/operations/policy/updatepolicy": {
-      "post": {
-        "tags": [
-          "Policy"
-        ],
-        "summary": "Accepts a new policy document and returns a JWT which expresses  used in preparation to set attestation policy.",
-        "operationId": "Policy_PrepareToSet",
-        "consumes": [
-          "text/plain"
-        ],
-        "produces": [
-          "text/plain",
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/AttestationType"
-          },
-          {
-            "name": "PolicyJws",
-            "in": "body",
-            "description": "JSON Web Signature (See RFC7515) expressing the new policy",
-            "required": true,
-            "x-ms-client-flatten": true,
-            "schema": {
-              "$ref": "#/definitions/JsonWebToken"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success - Returns a JWT signed by the metadata signing key that contains the hash of the supplied policy to be set.",
-            "schema": {
-              "$ref": "#/definitions/JsonWebToken"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "UpdatePolicy": {
-            "$ref": "./examples/UpdatePolicy.json"
-          }
-        }
-      }
-    },
-    "/operations/policy/current": {
+    "/policies/{attestationType}": {
       "get": {
         "tags": [
           "Policy"
@@ -110,7 +57,7 @@
           "200": {
             "description": "Success",
             "schema": {
-              "$ref": "#/definitions/AttestationPolicy"
+              "$ref": "#/definitions/PolicyResponse"
             }
           },
           "default": {
@@ -145,7 +92,7 @@
           {
             "name": "newAttestationPolicy",
             "in": "body",
-            "description": "JWT Expressing the new policy",
+            "description": "JWT Expressing the new policy whose body is a StoredAttestationPolicy object.",
             "required": true,
             "x-ms-client-flatten": true,
             "schema": {
@@ -155,7 +102,10 @@
         ],
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/PolicyResponse"
+            }
           },
           "default": {
             "description": "Error response describing why the operation failed",
@@ -169,7 +119,9 @@
             "$ref": "./examples/Set_Policy.json"
           }
         }
-      },
+      }
+    },
+    "/policies/{attestationType}:reset": {
       "post": {
         "tags": [
           "Policy"
@@ -201,7 +153,7 @@
           "200": {
             "description": "Success - Returns a JWT signed by the metadata signing key that contains the hash of the supplied policy to be set.",
             "schema": {
-              "$ref": "#/definitions/JsonWebToken"
+              "$ref": "#/definitions/PolicyResponse"
             }
           },
           "default": {
@@ -218,7 +170,7 @@
         }
       }
     },
-    "/operations/policy/certificates": {
+    "/certificates": {
       "get": {
         "tags": [
           "Policy Management Certificates"
@@ -234,7 +186,7 @@
           "200": {
             "description": "An RFC7519 JSON Web Token structure containing an RFC7517 JsonWebKeySet which contains the certificates used to validate policy changes",
             "schema": {
-              "$ref": "#/definitions/JsonWebToken"
+              "$ref": "#/definitions/PolicyCertificatesResponse"
             }
           },
           "default": {
@@ -249,8 +201,10 @@
             "$ref": "./examples/Get_PolicyCertificates.json"
           }
         }
-      },
-      "put": {
+      }
+    },
+    "/certificates:insert": {
+      "post": {
         "tags": [
           "Policy Management Certificates"
         ],
@@ -263,7 +217,7 @@
           {
             "name": "policyCertificateToAdd",
             "in": "body",
-            "description": "An RFC7519 JSON Web Token whose body is an AttestationCertificateManagementBody object. The RFC7519 JWT must be signed with one of the existing signing certificates",
+            "description": "An RFC7519 JSON Web Token whose body is an RFC7517 JSON Web Key object. The RFC7519 JWT must be signed with one of the existing signing certificates",
             "required": true,
             "schema": {
               "$ref": "#/definitions/JsonWebToken"
@@ -274,7 +228,7 @@
           "200": {
             "description": "An RFC7519 JSON Web Token structure containing an RFC7517 JsonWebKeySet which contains the certificates used to validate policy changes",
             "schema": {
-              "$ref": "#/definitions/JsonWebToken"
+              "$ref": "#/definitions/PolicyCertificatesModifyResponse"
             }
           },
           "default": {
@@ -289,7 +243,9 @@
             "$ref": "./examples/Add_PolicyCertificate.json"
           }
         }
-      },
+      }
+    },
+    "/certificates:remove": {
       "post": {
         "tags": [
           "Policy Management Certificates"
@@ -314,7 +270,7 @@
           "200": {
             "description": "An RFC7519 JSON Web Token structure containing an RFC7517 JsonWebKeySet which contains the certificates used to validate policy changes",
             "schema": {
-              "$ref": "#/definitions/JsonWebToken"
+              "$ref": "#/definitions/PolicyCertificatesModifyResponse"
             }
           },
           "default": {
@@ -438,7 +394,7 @@
             "description": "Request object",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/VbsAttestationRequest"
+              "$ref": "#/definitions/TpmAttestationRequest"
             }
           }
         ],
@@ -446,7 +402,7 @@
           "200": {
             "description": "Success",
             "schema": {
-              "$ref": "#/definitions/VbsAttestationResponse"
+              "$ref": "#/definitions/TpmAttestationResponse"
             }
           },
           "default": {
@@ -512,6 +468,7 @@
           "OpenID Metadata Discovery"
         ],
         "produces": [
+          "application/jwk+json",
           "application/json"
         ],
         "summary": "Retrieves the attestation signing keys in use by the attestation service",
@@ -608,6 +565,131 @@
         "policyCertificate": {
           "description": "RFC 7517 Json Web Key describing the certificate.",
           "$ref": "../../../../../common-types/rfcs/rfc7517.json#/definitions/JSONWebKey"
+        }
+      }
+    },
+    "PolicyCertificatesResponse": {
+      "type": "object",
+      "description": "The response to an attestation policy management API",
+      "properties": {
+        "token": {
+          "description": "An RFC7519 JSON Web Token structure containing a PolicyCertificatesResults object which contains the certificates used to validate policy changes",
+          "$ref": "#/definitions/JsonWebToken"
+        }
+      }
+    },
+    "PolicyCertificatesResult": {
+      "type": "object",
+      "description": "The result of a call to retrieve policy certificates.",
+      "properties": {
+        "x-ms-policy-certificates": {
+          "description": "SHA256 Hash of the binary representation certificate which was added or removed",
+          "$ref": "../../../../../common-types/rfcs/rfc7517.json#/definitions/JSONWebKeySet",
+          "x-ms-client-name": "PolicyCertificates"
+        }
+      }
+    },
+    "PolicyCertificatesModifyResponse": {
+      "type": "object",
+      "description": "The response to an attestation policy management API",
+      "properties": {
+        "token": {
+          "description": "An RFC7519 JSON Web Token structure whose body is a PolicyCertificatesModificationResult object.",
+          "$ref": "#/definitions/JsonWebToken"
+        }
+      }
+    },
+    "PolicyCertificatesModificationResult": {
+      "type": "object",
+      "description": "The result of a policy certificate modification",
+      "properties": {
+        "x-ms-certificate-thumbprint": {
+          "description": "Hex encoded SHA1 Hash of the binary representation certificate which was added or removed",
+          "type": "string",
+          "x-ms-client-name": "CertificateThumbprint"
+        },
+        "x-ms-policycertificates-result": {
+          "description": "The result of the operation",
+          "type": "string",
+          "x-ms-client-name": "CertificateResolution",
+          "enum": [
+            "IsPresent",
+            "IsAbsent"
+          ],
+          "x-ms-enum": {
+            "name": "CertificateModification",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "IsPresent",
+                "description": "After the operation was performed, the certificate is in the set of certificates."
+              },
+              {
+                "value": "IsAbsent",
+                "description": "After the operatoin was performed, the certificate is no longer present in the set of certificates."
+              }
+            ]
+          }
+        }
+      }
+    },
+    "StoredAttestationPolicy": {
+      "type": "object",
+      "properties": {
+        "AttestationPolicy": {
+          "description": "Policy text to set as a sequence of UTF-8 encoded octets.",
+          "type": "string",
+          "format": "base64url"
+        }
+      }
+    },
+    "PolicyResponse": {
+      "type": "object",
+      "description": "The response to an attestation policy operation",
+      "properties": {
+        "token": {
+          "description": "An RFC7519 JSON Web Token structure whose body is an PolicyResult object.",
+          "$ref": "#/definitions/JsonWebToken"
+        }
+      }
+    },
+    "PolicyResult": {
+      "type": "object",
+      "description": "The result of a policy certificate modification",
+      "properties": {
+        "x-ms-policy-result": {
+          "description": "The result of the operation",
+          "type": "string",
+          "x-ms-client-name": "PolicyResolution",
+          "enum": [
+            "Updated",
+            "Removed"
+          ],
+          "x-ms-enum": {
+            "name": "PolicyModification",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Updated",
+                "description": "The specified policy object was updated."
+              },
+              {
+                "value": "Removed",
+                "description": "The specified policy object was removed."
+              }
+            ]
+          }
+        },
+        "x-ms-policy-token-hash": {
+          "description": "The SHA256 hash of the policy object modified",
+          "x-ms-client-name": "PolicyTokenHash",
+          "type": "string",
+          "format": "base64url"
+        },
+        "x-ms-policy": {
+          "description": "A JSON Web Token containing a StoredAttestationPolicy object with the attestation policy",
+          "x-ms-client-name": "Policy",
+          "$ref": "#/definitions/JsonWebToken"
         }
       }
     },
@@ -719,9 +801,9 @@
         }
       }
     },
-    "VbsAttestationRequest": {
+    "TpmAttestationRequest": {
       "type": "object",
-      "description": "Attestation request for Virtualization-based Security (VBS) enclaves",
+      "description": "Attestation request for Trusted Platform Module (TPM) attestation.",
       "properties": {
         "data": {
           "description": "Protocol data containing artifacts for attestation.",
@@ -730,9 +812,9 @@
         }
       }
     },
-    "VbsAttestationResponse": {
+    "TpmAttestationResponse": {
       "type": "object",
-      "description": "Attestation response for Virtualization-based Security (VBS) enclaves",
+      "description": "Attestation response for Trusted Platform Module (TPM) attestation.",
       "properties": {
         "data": {
           "description": "Protocol data containing attestation service response.",
@@ -779,25 +861,6 @@
           "type": "string"
         }
       }
-    },
-    "AttestationPolicy": {
-      "type": "object",
-      "properties": {
-        "policy": {
-          "description": "JSON Web Token whose body is a JSON object with a single field named \"AttestationPolicy\" and whose value is the Base64Url of the policy document to set.",
-          "type": "string"
-        }
-      }
-    },
-    "AttestationPolicyRequest": {
-      "type": "object",
-      "properties": {
-        "AttestationPolicy": {
-          "description": "Policy text to set as a sequence of UTF-8 encoded octets.",
-          "type": "string",
-          "format": "base64url"
-        }
-      }
     }
   },
   "parameters": {
@@ -811,7 +874,7 @@
     "AttestationType": {
       "description": "Specifies the trusted execution environment to be used to validate the evidence",
       "name": "attestationType",
-      "in": "query",
+      "in": "path",
       "type": "string",
       "required": true,
       "x-ms-parameter-location": "method",
