@@ -1692,6 +1692,10 @@
           "type": "string",
           "format": "date-time",
           "description": "Expiration date of the certificate. The date conforms to the following format: `yyyy-MM-ddTHH:mm:ssZ` as specified by the ISO 8601 standard.\n"
+        },
+        "keyVault": {
+          "$ref": "#/definitions/KeyVaultContractProperties",
+          "description": "KeyVault location details of the certificate."
         }
       },
       "required": [
@@ -1720,11 +1724,12 @@
         "password": {
           "type": "string",
           "description": "Password for the Certificate"
+        },
+        "keyVault": {
+          "$ref": "#/definitions/KeyVaultContractCreateProperties",
+          "description": "KeyVault location details of the certificate."
         }
       },
-      "required": [
-        "data"
-      ],
       "description": "Parameters supplied to the CreateOrUpdate certificate operation."
     },
     "DataMasking": {
