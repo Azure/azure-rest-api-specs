@@ -2889,12 +2889,14 @@
         "msixPackageFamilyName": {
           "type": "string",
           "description": "Specifies the package family name for MSIX applications",
-          "x-nullable": true
+          "x-nullable": true,
+          "x-ms-mutability": ["create", "read"]
         },
         "msixPackageApplicationId": {
           "type": "string",
           "description": "Specifies the package application Id for MSIX applications",
-          "x-nullable": true
+          "x-nullable": true,
+          "x-ms-mutability": ["create", "read"]
         },
         "applicationType": {
           "enum": [
@@ -2906,7 +2908,8 @@
             "modelAsString": true
           },
           "type": "string",
-          "description": "Resource Type of Application."
+          "description": "Resource Type of Application.",
+          "x-ms-mutability": ["create", "read"]
         },
         "commandLineSetting": {
           "enum": [

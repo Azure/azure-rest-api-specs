@@ -22,10 +22,13 @@ To see additional help and options, run:
 ### Basic Information
 These are the global settings for the DesktopVirtualizationClient API.
 
+### Tag: package-2020-09-21-preview
+
 ``` yaml
 openapi-type: arm
 tag: package-2020-09-21-preview
 ```
+
 ### Tag: package-2019-12-10-preview
 
 These settings apply only when `--tag=package-2019-12-10-preview` is specified on the command line.
