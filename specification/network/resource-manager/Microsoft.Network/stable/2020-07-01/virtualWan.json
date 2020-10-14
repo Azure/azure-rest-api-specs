@@ -5252,10 +5252,10 @@
             "type": "string"
           }
         },
-        "enableVirtualRouterRoutePropogation": {
+        "allowBranchToBranchTraffic": {
           "type": "boolean",
           "readOnly": false,
-          "description": "Flag to control route propogation for VirtualRouter hub."
+          "description": "Flag to control transit for VirtualRouter hub."
         }
       },
       "description": "Parameters for VirtualHub."
@@ -6883,6 +6883,10 @@
         "enableInternetSecurity": {
           "type": "boolean",
           "description": "Enable internet security."
+        },
+        "expressRouteGatewayBypass": {
+          "type": "boolean",
+          "description": "Enable FastPath to vWan Firewall hub."
         },
         "routingConfiguration": {
           "$ref": "#/definitions/RoutingConfiguration",

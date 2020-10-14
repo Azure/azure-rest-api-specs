@@ -372,6 +372,18 @@
             "name": "PublicIPPrefixSkuName",
             "modelAsString": true
           }
+        },
+        "tier": {
+          "type": "string",
+          "description": "Tier of a public IP prefix SKU.",
+          "enum": [
+            "Regional",
+            "Global"
+          ],
+          "x-ms-enum": {
+            "name": "PublicIPPrefixSkuTier",
+            "modelAsString": true
+          }
         }
       },
       "description": "SKU of a public IP prefix."
@@ -431,6 +443,10 @@
     },
     "PublicIPPrefix": {
       "properties": {
+        "extendedLocation": {
+          "$ref": "./network.json#/definitions/ExtendedLocation",
+          "description": "The extended location of the public ip address."
+        },
         "sku": {
           "$ref": "#/definitions/PublicIPPrefixSku",
           "description": "The public IP prefix SKU."
