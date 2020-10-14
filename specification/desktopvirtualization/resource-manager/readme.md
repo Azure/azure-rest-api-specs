@@ -22,11 +22,14 @@ To see additional help and options, run:
 ### Basic Information
 These are the global settings for the DesktopVirtualizationClient API.
 
+``` yaml
+openapi-type: arm
+tag: package-2020-09-21-preview
+```
+
 ### Tag: package-2020-09-21-preview
 
 ``` yaml $(tag) == 'package-2020-09-21-preview'
-openapi-type: arm
-tag: package-2020-09-21-preview
 input-file:
 - Microsoft.DesktopVirtualization/preview/2020-09-21-preview/desktopvirtualization.json
 ```
