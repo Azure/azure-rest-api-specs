@@ -3388,10 +3388,6 @@
             "format": "int32",
             "type": "integer"
           }
-        },
-        "diskEncryptionSetId": {
-          "description": "DiskEncryptionSet's ID - needed if the VM needs to be encrypted at rest during restore with customer managed key.",
-          "type": "string"
         }
       },
       "x-ms-discriminator-value": "IaasVMRestoreRequest"
@@ -3507,8 +3503,7 @@
             "DisableBackup",
             "DeleteBackupData",
             "CrossRegionRestore",
-            "Undelete",
-            "UpdateCustomerManagedKey"
+            "Undelete"
           ],
           "type": "string",
           "x-ms-enum": {
@@ -5100,85 +5095,6 @@
         "retentionDuration": {
           "$ref": "#/definitions/RetentionDuration",
           "description": "Retention duration of retention Policy."
-        }
-      }
-    },
-    "VaultJob": {
-      "description": "Vault level Job",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/Job"
-        }
-      ],
-      "properties": {
-        "duration": {
-          "format": "duration",
-          "description": "Time elapsed during the execution of this job.",
-          "type": "string"
-        },
-        "actionsInfo": {
-          "description": "Gets or sets the state/actions applicable on this job like cancel/retry.",
-          "type": "array",
-          "items": {
-            "enum": [
-              "Invalid",
-              "Cancellable",
-              "Retriable"
-            ],
-            "type": "string",
-            "x-ms-enum": {
-              "name": "JobSupportedAction",
-              "modelAsString": false
-            }
-          }
-        },
-        "errorDetails": {
-          "description": "Error details on execution of this job.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/VaultJobErrorInfo"
-          }
-        },
-        "extendedInfo": {
-          "$ref": "#/definitions/VaultJobExtendedInfo",
-          "description": "Additional information about the job."
-        }
-      },
-      "x-ms-discriminator-value": "VaultJob"
-    },
-    "VaultJobErrorInfo": {
-      "description": "Vault Job specific error information",
-      "type": "object",
-      "properties": {
-        "errorCode": {
-          "format": "int32",
-          "description": "Error code.",
-          "type": "integer"
-        },
-        "errorString": {
-          "description": "Localized error string.",
-          "type": "string"
-        },
-        "recommendations": {
-          "description": "List of localized recommendations for above error code.",
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        }
-      }
-    },
-    "VaultJobExtendedInfo": {
-      "description": "Vault Job for CMK - has CMK specific info.",
-      "type": "object",
-      "properties": {
-        "propertyBag": {
-          "description": "Job properties.",
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          }
         }
       }
     }
