@@ -1,0 +1,2383 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Resource Mover Service API",
+    "description": "A first party Azure service orchestrating the move of Azure resources from one Azure region to another or between zones within a region.",
+    "version": "2019-10-01-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/moveCollections/{moveCollectionName}": {
+      "put": {
+        "tags": [
+          "MoveCollections"
+        ],
+        "operationId": "MoveCollections_Create",
+        "description": "Creates or updates a move collection.",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/moveCollectionName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/MoveCollection"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/MoveCollection"
+            }
+          },
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/MoveCollection"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "MoveCollections_Create": {
+            "$ref": "./examples/MoveCollections_Create.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "MoveCollections"
+        ],
+        "operationId": "MoveCollections_Update",
+        "description": "Updates a move collection.",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/moveCollectionName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/UpdateMoveCollectionRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/MoveCollection"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "MoveCollections_Update": {
+            "$ref": "./examples/MoveCollections_Update.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "MoveCollections"
+        ],
+        "operationId": "MoveCollections_Delete",
+        "description": "Deletes a move collection.",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/moveCollectionName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/OperationStatus"
+            }
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "204": {
+            "description": "NoContent"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "MoveCollections_Delete": {
+            "$ref": "./examples/MoveCollections_Delete.json"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "MoveCollections"
+        ],
+        "operationId": "MoveCollections_Get",
+        "description": "Gets the move collection.",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/moveCollectionName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/MoveCollection"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "MoveCollections_Get": {
+            "$ref": "./examples/MoveCollections_Get.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/moveCollections/{moveCollectionName}/prepare": {
+      "post": {
+        "tags": [
+          "MoveCollections"
+        ],
+        "operationId": "MoveCollections_Prepare",
+        "description": "Initiates prepare for the set of resources included in the request body. The prepare operation is on the moveResources that are in the moveState 'PreparePending' or 'PrepareFailed', on a successful completion the moveResource moveState do a transition to MovePending. To aid the user to prerequisite the operation the client can call operation with validateOnly property set to true.",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/moveCollectionName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/PrepareRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/OperationStatus"
+            }
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "MoveCollections_Prepare": {
+            "$ref": "./examples/MoveCollections_Prepare.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/moveCollections/{moveCollectionName}/initiateMove": {
+      "post": {
+        "tags": [
+          "MoveCollections"
+        ],
+        "operationId": "MoveCollections_InitiateMove",
+        "description": "Moves the set of resources included in the request body. The move operation is triggered after the moveResources are in the moveState 'MovePending' or 'MoveFailed', on a successful completion the moveResource moveState do a transition to CommitPending. To aid the user to prerequisite the operation the client can call operation with validateOnly property set to true.",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/moveCollectionName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/ResourceMoveRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/OperationStatus"
+            }
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "MoveCollections_InitiateMove": {
+            "$ref": "./examples/MoveCollections_InitiateMove.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/moveCollections/{moveCollectionName}/commit": {
+      "post": {
+        "tags": [
+          "MoveCollections"
+        ],
+        "operationId": "MoveCollections_Commit",
+        "description": "Commits the set of resources included in the request body. The commit operation is triggered on the moveResources in the moveState 'CommitPending' or 'CommitFailed', on a successful completion the moveResource moveState do a transition to Committed. To aid the user to prerequisite the operation the client can call operation with validateOnly property set to true.",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/moveCollectionName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/CommitRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/OperationStatus"
+            }
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "MoveCollections_Commit": {
+            "$ref": "./examples/MoveCollections_Commit.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/moveCollections/{moveCollectionName}/discard": {
+      "post": {
+        "tags": [
+          "MoveCollections"
+        ],
+        "operationId": "MoveCollections_Discard",
+        "description": "Discards the set of resources included in the request body. The discard operation is triggered on the moveResources in the moveState 'CommitPending' or 'DiscardFailed', on a successful completion the moveResource moveState do a transition to MovePending. To aid the user to prerequisite the operation the client can call operation with validateOnly property set to true.",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/moveCollectionName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/DiscardRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/OperationStatus"
+            }
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "MoveCollections_Discard": {
+            "$ref": "./examples/MoveCollections_Discard.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/moveCollections/{moveCollectionName}/resolveDependencies": {
+      "post": {
+        "tags": [
+          "MoveCollections"
+        ],
+        "operationId": "MoveCollections_ResolveDependencies",
+        "description": "Computes, resolves and validate the dependencies of the moveResources in the move collection.",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/moveCollectionName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/OperationStatus"
+            }
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "MoveCollections_ResolveDependencies": {
+            "$ref": "./examples/MoveCollections_ResolveDependencies.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/moveCollections/{moveCollectionName}/moveResources": {
+      "get": {
+        "tags": [
+          "MoveCollections"
+        ],
+        "operationId": "MoveResources_List",
+        "description": "Lists the Move Resources in the move collection.",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/moveCollectionName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "The filter to apply on the operation. For example, you can use $filter=Properties/ProvisioningState eq 'Succeeded'."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/MoveResourceCollection"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-odata": "#/definitions/MoveResourceFilter",
+        "x-ms-examples": {
+          "MoveResources_List": {
+            "$ref": "./examples/MoveResources_List.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/moveCollections/{moveCollectionName}/unresolvedDependencies": {
+      "get": {
+        "tags": [
+          "MoveCollections"
+        ],
+        "operationId": "UnresolvedDependencies_Get",
+        "description": "Gets a list of unresolved dependencies.",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/moveCollectionName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/UnresolvedDependencyCollection"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "UnresolvedDependencies_Get": {
+            "$ref": "./examples/UnresolvedDependencies_Get.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/moveCollections/{moveCollectionName}/bulkRemove": {
+      "post": {
+        "tags": [
+          "MoveCollections"
+        ],
+        "operationId": "MoveCollections_BulkRemove",
+        "description": "Removes the set of move resources included in the request body from move collection. The orchestration is done by service. To aid the user to prerequisite the operation the client can call operation with validateOnly property set to true.",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "in": "path",
+            "name": "resourceGroupName",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "moveCollectionName",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/BulkRemoveRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/OperationStatus"
+            }
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "MoveCollections_BulkRemove": {
+            "$ref": "./examples/MoveCollections_BulkRemove.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/moveCollections/{moveCollectionName}/moveResources/{moveResourceName}": {
+      "put": {
+        "tags": [
+          "MoveResources"
+        ],
+        "operationId": "MoveResources_Create",
+        "description": "Creates or updates a Move Resource in the move collection.",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/moveCollectionName"
+          },
+          {
+            "$ref": "#/parameters/moveResourceName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/MoveResource"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted"
+          },
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/MoveResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "MoveResources_Create": {
+            "$ref": "./examples/MoveResources_Create.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "MoveResources"
+        ],
+        "operationId": "MoveResources_Delete",
+        "description": "Deletes a Move Resource from the move collection.",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/moveCollectionName"
+          },
+          {
+            "$ref": "#/parameters/moveResourceName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/OperationStatus"
+            }
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "204": {
+            "description": "NoContent"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "MoveResources_Delete": {
+            "$ref": "./examples/MoveResources_Delete.json"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "MoveResources"
+        ],
+        "operationId": "MoveResources_Get",
+        "description": "Gets the Move Resource.",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/moveCollectionName"
+          },
+          {
+            "$ref": "#/parameters/moveResourceName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/MoveResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "MoveResources_Get": {
+            "$ref": "./examples/MoveResources_Get.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Migrate/operations": {
+      "get": {
+        "tags": [
+          "OperationsDiscovery"
+        ],
+        "operationId": "OperationsDiscovery_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/OperationsDiscoveryCollection"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "OperationsDiscovery_Get": {
+            "$ref": "./examples/OperationsDiscovery_Get.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Migrate/moveCollections": {
+      "get": {
+        "summary": "Get all Move Collections.",
+        "description": "Get all the Move Collections in the subscription.",
+        "operationId": "MoveCollections_ListMoveCollectionsBySubscription",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/MoveCollectionResultList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "MoveCollections_ListMoveCollectionsBySubscription": {
+            "$ref": "./examples/MoveCollections_ListMoveCollectionsBySubscription.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/moveCollections": {
+      "get": {
+        "summary": "Get all Move Collections.",
+        "description": "Get all the Move Collections in the resource group.",
+        "operationId": "MoveCollections_ListMoveCollectionsByResourceGroup",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/MoveCollectionResultList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "MoveCollections_ListMoveCollectionsByResourceGroup": {
+            "$ref": "./examples/MoveCollections_ListMoveCollectionsByResourceGroup.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ResourceIdentityType": {
+      "description": "The type of identity used for the resource mover service.",
+      "enum": [
+        "None",
+        "SystemAssigned",
+        "UserAssigned"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "ResourceIdentityType",
+        "modelAsString": true
+      }
+    },
+    "Identity": {
+      "description": "Defines the MSI properties of the Move Collection.",
+      "type": "object",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/ResourceIdentityType"
+        },
+        "principalId": {
+          "description": "Gets or sets the principal id.",
+          "type": "string"
+        },
+        "tenantId": {
+          "description": "Gets or sets the tenant id.",
+          "type": "string"
+        }
+      }
+    },
+    "MoveState": {
+      "description": "Defines the MoveResource states.",
+      "enum": [
+        "AssignmentPending",
+        "PreparePending",
+        "PrepareInProgress",
+        "PrepareFailed",
+        "MovePending",
+        "MoveInProgress",
+        "MoveFailed",
+        "DiscardInProgress",
+        "DiscardFailed",
+        "CommitPending",
+        "CommitInProgress",
+        "CommitFailed",
+        "Committed"
+      ],
+      "type": "string",
+      "readOnly": true,
+      "x-ms-enum": {
+        "name": "MoveState",
+        "modelAsString": true
+      }
+    },
+    "MoveResourceInputType": {
+      "description": "Defines the move resource input type.",
+      "type": "string",
+      "enum": [
+        "MoveResourceId",
+        "MoveResourceSourceId"
+      ],
+      "x-ms-enum": {
+        "name": "MoveResourceInputType",
+        "modelAsString": true
+      }
+    },
+    "ProvisioningState": {
+      "description": "Defines the provisioning states.",
+      "enum": [
+        "Succeeded",
+        "Updating",
+        "Creating",
+        "Failed"
+      ],
+      "type": "string",
+      "readOnly": true,
+      "x-ms-enum": {
+        "name": "ProvisioningState",
+        "modelAsString": true
+      }
+    },
+    "JobName": {
+      "description": "Defines the job name.",
+      "enum": [
+        "InitialSync"
+      ],
+      "type": "string",
+      "readOnly": true,
+      "x-ms-enum": {
+        "name": "JobName",
+        "modelAsString": true
+      }
+    },
+    "JobStatus": {
+      "description": "Defines the job status.",
+      "type": "object",
+      "properties": {
+        "jobName": {
+          "$ref": "#/definitions/JobName"
+        },
+        "jobProgress": {
+          "description": "Gets or sets the monitoring job percentage.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "MoveResourceStatus": {
+      "description": "Defines the move resource status.",
+      "type": "object",
+      "properties": {
+        "moveState": {
+          "$ref": "#/definitions/MoveState"
+        },
+        "jobStatus": {
+          "$ref": "#/definitions/JobStatus"
+        },
+        "errors": {
+          "$ref": "#/definitions/MoveResourceError"
+        },
+        "targetId": {
+          "description": "Gets the Target ARM Id of the resource.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "ResolutionType": {
+      "description": "Defines the resolution type.",
+      "enum": [
+        "Manual",
+        "Automatic"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "ResolutionType",
+        "modelAsString": true
+      }
+    },
+    "DependencyType": {
+      "description": "Defines the dependency type.",
+      "enum": [
+        "RequiredForPrepare",
+        "RequiredForMove"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "DependencyType",
+        "modelAsString": true
+      }
+    },
+    "MoveResourceDependency": {
+      "description": "Defines the dependency of the move resource.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "Gets the source ARM ID of the dependent resource.",
+          "type": "string"
+        },
+        "resolutionStatus": {
+          "description": "Gets the dependency resolution status.",
+          "type": "string"
+        },
+        "resolutionType": {
+          "$ref": "#/definitions/ResolutionType"
+        },
+        "dependencyType": {
+          "$ref": "#/definitions/DependencyType"
+        },
+        "manualResolution": {
+          "$ref": "#/definitions/ManualResolutionProperties"
+        },
+        "automaticResolution": {
+          "$ref": "#/definitions/AutomaticResolutionProperties"
+        },
+        "isOptional": {
+          "description": "Gets or sets a value indicating whether the dependency is optional.",
+          "type": "string"
+        }
+      }
+    },
+    "MoveResourceDependencyOverride": {
+      "description": "Defines the dependency override of the move resource.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "Gets or sets the ARM ID of the dependent resource.",
+          "type": "string"
+        },
+        "targetId": {
+          "description": "Gets or sets the resource ARM id of either the MoveResource or the resource ARM ID of\r\nthe dependent resource.",
+          "type": "string"
+        }
+      }
+    },
+    "ManualResolutionProperties": {
+      "description": "Defines the properties for manual resolution.",
+      "type": "object",
+      "properties": {
+        "targetId": {
+          "description": "Gets or sets the target resource ARM ID of the dependent resource if the resource type is Manual.",
+          "type": "string"
+        }
+      }
+    },
+    "AutomaticResolutionProperties": {
+      "description": "Defines the properties for automatic resolution.",
+      "type": "object",
+      "properties": {
+        "moveResourceId": {
+          "description": "Gets the MoveResource ARM ID of\r\nthe dependent resource if the resolution type is Automatic.",
+          "type": "string"
+        }
+      }
+    },
+    "MoveResourceProperties": {
+      "description": "Defines the move resource properties.",
+      "type": "object",
+      "required": [
+        "sourceId"
+      ],
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState"
+        },
+        "sourceId": {
+          "description": "Gets or sets the Source ARM Id of the resource.",
+          "type": "string"
+        },
+        "targetId": {
+          "description": "Gets or sets the Target ARM Id of the resource.",
+          "type": "string",
+          "readOnly": true
+        },
+        "existingTargetId": {
+          "description": "Gets or sets the existing target ARM Id of the resource.",
+          "type": "string"
+        },
+        "resourceSettings": {
+          "description": "Gets or sets the resource settings.",
+          "$ref": "#/definitions/ResourceSettings"
+        },
+        "sourceResourceSettings": {
+          "description": "Gets or sets the source resource settings.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/ResourceSettings"
+            }
+          ],
+          "readOnly": true
+        },
+        "moveStatus": {
+          "description": "Defines the move resource status.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/MoveResourceStatus"
+            }
+          ],
+          "readOnly": true
+        },
+        "dependsOn": {
+          "description": "Gets or sets the move resource dependencies.",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/MoveResourceDependency"
+          }
+        },
+        "dependsOnOverrides": {
+          "description": "Gets or sets the move resource dependencies overrides.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MoveResourceDependencyOverride"
+          }
+        },
+        "errors": {
+          "description": "Defines the move resource errors.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/MoveResourceError"
+            }
+          ],
+          "readOnly": true
+        }
+      }
+    },
+    "MoveResource": {
+      "description": "Defines the move resource.",
+      "type": "object",
+      "x-ms-azure-resource": true,
+      "properties": {
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Fully qualified resource Id for the resource."
+        },
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The name of the resource"
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The type of the resource."
+        },
+        "properties": {
+          "$ref": "#/definitions/MoveResourceProperties"
+        }
+      }
+    },
+    "SummaryItem": {
+      "description": "Summary item.",
+      "type": "object",
+      "properties": {
+        "count": {
+          "format": "int32",
+          "description": "Gets the count.",
+          "type": "integer"
+        },
+        "item": {
+          "description": "Gets the item.",
+          "type": "string"
+        }
+      }
+    },
+    "MoveCollectionProperties": {
+      "description": "Defines the move collection properties.",
+      "type": "object",
+      "required": [
+        "sourceRegion",
+        "targetRegion"
+      ],
+      "properties": {
+        "sourceRegion": {
+          "description": "Gets or sets the source region.",
+          "type": "string"
+        },
+        "targetRegion": {
+          "description": "Gets or sets the target region.",
+          "type": "string"
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState"
+        }
+      }
+    },
+    "MoveCollection": {
+      "description": "Define the move collection.",
+      "type": "object",
+      "x-ms-azure-resource": true,
+      "properties": {
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Fully qualified resource Id for the resource."
+        },
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The name of the resource"
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The type of the resource."
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "x-ms-mutability": [
+            "read",
+            "create",
+            "update"
+          ],
+          "description": "Resource tags."
+        },
+        "location": {
+          "type": "string",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ],
+          "description": "The geo-location where the resource lives."
+        },
+        "identity": {
+          "$ref": "#/definitions/Identity"
+        },
+        "properties": {
+          "$ref": "#/definitions/MoveCollectionProperties"
+        }
+      }
+    },
+    "UpdateMoveCollectionRequest": {
+      "description": "Defines the request body for updating move collection.",
+      "type": "object",
+      "properties": {
+        "tags": {
+          "description": "Gets or sets the Resource tags.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "identity": {
+          "$ref": "#/definitions/Identity"
+        }
+      }
+    },
+    "PrepareRequest": {
+      "description": "Defines the request body for initiate prepare operation.",
+      "type": "object",
+      "required": [
+        "moveResources"
+      ],
+      "properties": {
+        "validateOnly": {
+          "description": "Gets or sets a value indicating whether the operation needs to only run pre-requisite.",
+          "type": "boolean"
+        },
+        "moveResources": {
+          "description": "Gets or sets the list of resource Id's, by default it accepts move resource id's unless the input type is switched via moveResourceInputType property.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "moveResourceInputType": {
+          "$ref": "#/definitions/MoveResourceInputType"
+        }
+      }
+    },
+    "ResourceMoveRequest": {
+      "description": "Defines the request body for resource move operation.",
+      "type": "object",
+      "required": [
+        "moveResources"
+      ],
+      "properties": {
+        "validateOnly": {
+          "description": "Gets or sets a value indicating whether the operation needs to only run pre-requisite.",
+          "type": "boolean"
+        },
+        "moveResources": {
+          "description": "Gets or sets the list of resource Id's, by default it accepts move resource id's unless the input type is switched via moveResourceInputType property.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "moveResourceInputType": {
+          "$ref": "#/definitions/MoveResourceInputType"
+        }
+      }
+    },
+    "CommitRequest": {
+      "description": "Defines the request body for commit operation.",
+      "type": "object",
+      "required": [
+        "moveResources"
+      ],
+      "properties": {
+        "validateOnly": {
+          "description": "Gets or sets a value indicating whether the operation needs to only run pre-requisite.",
+          "type": "boolean"
+        },
+        "moveResources": {
+          "description": "Gets or sets the list of resource Id's, by default it accepts move resource id's unless the input type is switched via moveResourceInputType property.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "moveResourceInputType": {
+          "$ref": "#/definitions/MoveResourceInputType"
+        }
+      }
+    },
+    "DiscardRequest": {
+      "description": "Defines the request body for discard operation.",
+      "type": "object",
+      "required": [
+        "moveResources"
+      ],
+      "properties": {
+        "validateOnly": {
+          "description": "Gets or sets a value indicating whether the operation needs to only run pre-requisite.",
+          "type": "boolean"
+        },
+        "moveResources": {
+          "description": "Gets or sets the list of resource Id's, by default it accepts move resource id's unless the input type is switched via moveResourceInputType property.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "moveResourceInputType": {
+          "$ref": "#/definitions/MoveResourceInputType"
+        }
+      }
+    },
+    "BulkRemoveRequest": {
+      "description": "Defines the request body for bulk remove of move resources operation.",
+      "type": "object",
+      "properties": {
+        "validateOnly": {
+          "description": "Gets or sets a value indicating whether the operation needs to only run pre-requisite.",
+          "type": "boolean"
+        },
+        "moveResources": {
+          "description": "Gets or sets the list of resource Id's, by default it accepts move resource id's unless the input type is switched via moveResourceInputType property.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "moveResourceInputType": {
+          "$ref": "#/definitions/MoveResourceInputType"
+        }
+      }
+    },
+    "MoveResourceFilter": {
+      "description": "Move resource filter.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/MoveResourceFilterProperties"
+        }
+      }
+    },
+    "MoveResourceFilterProperties": {
+      "properties": {
+        "provisioningState": {
+          "type": "string",
+          "description": "The provisioning state."
+        }
+      }
+    },
+    "MoveResourceCollection": {
+      "description": "Defines the collection of move resources.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Gets the list of move resources.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MoveResource"
+          }
+        },
+        "nextLink": {
+          "description": "Gets the value of  next link.",
+          "type": "string"
+        },
+        "summary": {
+          "description": "Gets or the list of summary items.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SummaryItem"
+          }
+        }
+      }
+    },
+    "MoveCollectionResultList": {
+      "description": "Defines the collection of move collections.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Gets the list of move collections.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MoveCollection"
+          }
+        },
+        "nextLink": {
+          "description": "Gets the value of  next link.",
+          "type": "string"
+        }
+      }
+    },
+    "UnresolvedDependency": {
+      "description": "Unresolved dependency.",
+      "type": "object",
+      "properties": {
+        "count": {
+          "format": "int32",
+          "description": "Gets or sets the count.",
+          "type": "integer"
+        },
+        "id": {
+          "description": "Gets or sets the arm id of the dependency.",
+          "type": "string"
+        }
+      }
+    },
+    "UnresolvedDependencyCollection": {
+      "description": "Unresolved dependency collection.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Gets or sets the list of unresolved dependencies.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/UnresolvedDependency"
+          }
+        },
+        "nextLink": {
+          "description": "Gets or sets the value of  next link.",
+          "type": "string"
+        }
+      }
+    },
+    "Display": {
+      "description": "Contains the localized display information for this particular operation / action. These\r\nvalue will be used by several clients for\r\n(1) custom role definitions for RBAC;\r\n(2) complex query filters for the event service; and\r\n(3) audit history / records for management operations.",
+      "type": "object",
+      "properties": {
+        "provider": {
+          "description": "Gets or sets the provider.\r\nThe localized friendly form of the resource provider name – it is expected to also\r\ninclude the publisher/company responsible.\r\nIt should use Title Casing and begin with \"Microsoft\" for 1st party services.\r\ne.g. \"Microsoft Monitoring Insights\" or \"Microsoft Compute.\".",
+          "type": "string"
+        },
+        "resource": {
+          "description": "Gets or sets the resource.\r\nThe localized friendly form of the resource related to this action/operation – it\r\nshould match the public documentation for the resource provider.\r\nIt should use Title Casing.\r\nThis value should be unique for a particular URL type (e.g. nested types should *not*\r\nreuse their parent’s display.resource field)\r\ne.g. \"Virtual Machines\" or \"Scheduler Job Collections\", or \"Virtual Machine VM Sizes\"\r\nor \"Scheduler Jobs\".",
+          "type": "string"
+        },
+        "operation": {
+          "description": "Gets or sets the operation.\r\nThe localized friendly name for the operation, as it should be shown to the user.\r\nIt should be concise (to fit in drop downs) but clear (i.e. self-documenting).\r\nIt should use Title Casing.\r\nPrescriptive guidance: Read Create or Update Delete 'ActionName'.",
+          "type": "string"
+        },
+        "description": {
+          "description": "Gets or sets the description.\r\nThe localized friendly description for the operation, as it should be shown to the\r\nuser.\r\nIt should be thorough, yet concise – it will be used in tool tips and detailed views.\r\nPrescriptive guidance for namespace:\r\nRead any 'display.provider'  resource\r\nCreate or Update any  'display.provider'  resource\r\nDelete any  'display.provider'  resource\r\nPerform any other action on any  'display.provider'  resource\r\nPrescriptive guidance for namespace:\r\nRead any 'display.resource' Create or Update any  'display.resource' Delete any\r\n 'display.resource' 'ActionName' any 'display.resources'.",
+          "type": "string"
+        }
+      }
+    },
+    "OperationsDiscoveryProperties": {
+      "description": "ClientDiscovery properties.",
+      "type": "object"
+    },
+    "OperationsDiscovery": {
+      "description": "Operations discovery class.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Gets or sets Name of the API.\r\nThe name of the operation being performed on this particular object. It should\r\nmatch the action name that appears in RBAC / the event service.\r\nExamples of operations include:\r\n* Microsoft.Compute/virtualMachine/capture/action\r\n* Microsoft.Compute/virtualMachine/restart/action\r\n* Microsoft.Compute/virtualMachine/write\r\n* Microsoft.Compute/virtualMachine/read\r\n* Microsoft.Compute/virtualMachine/delete\r\nEach action should include, in order:\r\n(1) Resource Provider Namespace\r\n(2) Type hierarchy for which the action applies (e.g. server/databases for a SQL\r\nAzure database)\r\n(3) Read, Write, Action or Delete indicating which type applies. If it is a PUT/PATCH\r\non a collection or named value, Write should be used.\r\nIf it is a GET, Read should be used. If it is a DELETE, Delete should be used. If it\r\nis a POST, Action should be used.\r\nAs a note: all resource providers would need to include the \"{Resource Provider\r\nNamespace}/register/action\" operation in their response.\r\nThis API is used to register for their service, and should include details about the\r\noperation (e.g. a localized name for the resource provider + any special\r\nconsiderations like PII release).",
+          "type": "string"
+        },
+        "display": {
+          "$ref": "#/definitions/Display"
+        },
+        "origin": {
+          "description": "Gets or sets Origin.\r\nThe intended executor of the operation; governs the display of the operation in the\r\nRBAC UX and the audit logs UX.\r\nDefault value is \"user,system\".",
+          "type": "string"
+        },
+        "properties": {
+          "$ref": "#/definitions/OperationsDiscoveryProperties"
+        }
+      }
+    },
+    "OperationsDiscoveryCollection": {
+      "description": "Collection of ClientDiscovery details.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Gets or sets the ClientDiscovery details.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/OperationsDiscovery"
+          }
+        },
+        "nextLink": {
+          "description": "Gets or sets the value of next link.",
+          "type": "string"
+        }
+      }
+    },
+    "MoveResourceError": {
+      "properties": {
+        "properties": {
+          "type": "object",
+          "description": "The move resource error body.",
+          "$ref": "#/definitions/MoveResourceErrorBody"
+        }
+      },
+      "description": "An error response from the azure resource mover service."
+    },
+    "MoveResourceErrorBody": {
+      "properties": {
+        "code": {
+          "type": "string",
+          "readOnly": true,
+          "description": "An identifier for the error. Codes are invariant and are intended to be consumed programmatically."
+        },
+        "message": {
+          "type": "string",
+          "readOnly": true,
+          "description": "A message describing the error, intended to be suitable for display in a user interface."
+        },
+        "target": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The target of the particular error. For example, the name of the property in error."
+        },
+        "details": {
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/MoveResourceErrorBody"
+          },
+          "description": "A list of additional details about the error."
+        }
+      },
+      "description": "An error response from the Azure Migrate service."
+    },
+    "ResourceSettings": {
+      "description": "Gets or sets the resource settings.",
+      "type": "object",
+      "required": [
+        "resourceType",
+        "targetResourceName"
+      ],
+      "properties": {
+        "resourceType": {
+          "description": "The resource type. For example, the value can be Microsoft.Compute/virtualMachines.",
+          "type": "string"
+        },
+        "targetResourceName": {
+          "description": "Gets or sets the target Resource name.",
+          "type": "string"
+        }
+      },
+      "discriminator": "resourceType"
+    },
+    "VirtualMachineResourceSettings": {
+      "description": "Gets or sets the virtual machine resource settings.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ResourceSettings"
+        }
+      ],
+      "properties": {
+        "targetAvailabilityZone": {
+          "description": "Gets or sets the target availability zone.",
+          "type": "string",
+          "enum": [
+            "1",
+            "2",
+            "3",
+            "NA"
+          ],
+          "x-ms-enum": {
+            "name": "TargetAvailabilityZone",
+            "modelAsString": true
+          }
+        },
+        "targetVmSize": {
+          "description": "Gets or sets the target virtual machine size.",
+          "type": "string"
+        },
+        "targetAvailabilitySetId": {
+          "description": "Gets or sets the target availability set id for virtual machines not in an availability set at source.",
+          "type": "string"
+        }
+      },
+      "x-ms-discriminator-value": "Microsoft.Compute/virtualMachines"
+    },
+    "AvailabilitySetResourceSettings": {
+      "description": "Gets or sets the availability set resource settings.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ResourceSettings"
+        }
+      ],
+      "properties": {
+        "faultDomain": {
+          "description": "Gets or sets the target fault domain.",
+          "type": "integer",
+          "format": "int32",
+          "minimum": 1,
+          "x-nullable": true
+        },
+        "updateDomain": {
+          "description": "Gets or sets the target update domain.",
+          "type": "integer",
+          "format": "int32",
+          "minimum": 1,
+          "maximum": 20,
+          "x-nullable": true
+        }
+      },
+      "x-ms-discriminator-value": "Microsoft.Compute/availabilitySets"
+    },
+    "SubnetResourceSettings": {
+      "description": "Defines the virtual network subnets resource settings.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Gets or sets the Subnet name.",
+          "type": "string"
+        },
+        "addressPrefix": {
+          "description": "Gets or sets address prefix for the subnet.",
+          "type": "string"
+        }
+      }
+    },
+    "VirtualNetworkResourceSettings": {
+      "description": "Defines the virtual network resource settings.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ResourceSettings"
+        }
+      ],
+      "properties": {
+        "enableDdosProtection": {
+          "description": "Gets or sets a value indicating whether gets or sets whether the\r\nDDOS protection should be switched on.",
+          "type": "boolean",
+          "x-nullable": true
+        },
+        "addressSpace": {
+          "description": "Gets or sets the address prefixes for the virtual network.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "dnsServers": {
+          "description": "Gets or sets DHCPOptions that contains an array of DNS servers available to VMs\r\ndeployed in the virtual network.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "subnets": {
+          "description": "Gets or sets List of subnets in a VirtualNetwork.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SubnetResourceSettings"
+          }
+        }
+      },
+      "x-ms-discriminator-value": "Microsoft.Network/virtualNetworks"
+    },
+    "AzureResourceReference": {
+      "description": "Defines reference to an Azure resource.",
+      "required": [
+        "sourceArmResourceId"
+      ],
+      "type": "object",
+      "properties": {
+        "sourceArmResourceId": {
+          "description": "Gets the ARM resource ID of the tracked resource being referenced.",
+          "type": "string"
+        }
+      }
+    },
+    "ProxyResourceReference": {
+      "description": "Defines reference to a proxy resource.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AzureResourceReference"
+        }
+      ],
+      "properties": {
+        "name": {
+          "description": "Gets the name of the proxy resource on the target side.",
+          "type": "string"
+        }
+      }
+    },
+    "NetworkInterfaceResourceSettings": {
+      "description": "Defines the network interface resource settings.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ResourceSettings"
+        }
+      ],
+      "properties": {
+        "ipConfigurations": {
+          "description": "Gets or sets the IP configurations of the NIC.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/NicIpConfigurationResourceSettings"
+          }
+        },
+        "enableAcceleratedNetworking": {
+          "description": "Gets or sets a value indicating whether accelerated networking is enabled.",
+          "type": "boolean",
+          "x-nullable": true
+        }
+      },
+      "x-ms-discriminator-value": "Microsoft.Network/networkInterfaces"
+    },
+    "SubnetReference": {
+      "description": "Defines reference to subnet.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyResourceReference"
+        }
+      ],
+      "properties": {}
+    },
+    "LoadBalancerBackendAddressPoolReference": {
+      "description": "Defines reference to load balancer backend address pools.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyResourceReference"
+        }
+      ],
+      "properties": {}
+    },
+    "LoadBalancerNatRuleReference": {
+      "description": "Defines reference to load balancer NAT rules.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyResourceReference"
+        }
+      ],
+      "properties": {}
+    },
+    "NicIpConfigurationResourceSettings": {
+      "description": "Defines NIC IP configuration properties.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Gets or sets the IP configuration name.",
+          "type": "string"
+        },
+        "privateIpAddress": {
+          "description": "Gets or sets the private IP address of the network interface IP Configuration.",
+          "type": "string"
+        },
+        "privateIpAllocationMethod": {
+          "description": "Gets or sets the private IP address allocation method.",
+          "type": "string"
+        },
+        "subnet": {
+          "$ref": "#/definitions/SubnetReference"
+        },
+        "primary": {
+          "description": "Gets or sets a value indicating whether this IP configuration is the primary.",
+          "type": "boolean"
+        },
+        "loadBalancerBackendAddressPools": {
+          "description": "Gets or sets the references of the load balancer backend address pools.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/LoadBalancerBackendAddressPoolReference"
+          }
+        }
+      }
+    },
+    "NsgSecurityRule": {
+      "description": "Security Rule data model for Network Security Groups.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Gets or sets the Security rule name.",
+          "type": "string"
+        },
+        "access": {
+          "description": "Gets or sets whether network traffic is allowed or denied.\r\nPossible values are “Allow” and “Deny”.",
+          "type": "string"
+        },
+        "description": {
+          "description": "Gets or sets a description for this rule. Restricted to 140 chars.",
+          "type": "string"
+        },
+        "destinationAddressPrefix": {
+          "description": "Gets or sets destination address prefix. CIDR or source IP range.\r\n A “*” can also be used to match all source IPs. Default tags such\r\nas ‘VirtualNetwork’, ‘AzureLoadBalancer’ and ‘Internet’ can also be used.",
+          "type": "string"
+        },
+        "destinationPortRange": {
+          "description": "Gets or sets Destination Port or Range. Integer or range between\r\n0 and 65535. A “*” can also be used to match all ports.",
+          "type": "string"
+        },
+        "direction": {
+          "description": "Gets or sets the direction of the rule.InBound or Outbound. The\r\ndirection specifies if rule will be evaluated on incoming or outgoing traffic.",
+          "type": "string"
+        },
+        "priority": {
+          "format": "int32",
+          "description": "Gets or sets the priority of the rule. The value can be between\r\n100 and 4096. The priority number must be unique for each rule in the collection.\r\nThe lower the priority number, the higher the priority of the rule.",
+          "type": "integer"
+        },
+        "protocol": {
+          "description": "Gets or sets Network protocol this rule applies to. Can be Tcp, Udp or All(*).",
+          "type": "string"
+        },
+        "sourceAddressPrefix": {
+          "description": "Gets or sets source address prefix. CIDR or source IP range. A\r\n“*” can also be used to match all source IPs.  Default tags such as ‘VirtualNetwork’,\r\n‘AzureLoadBalancer’ and ‘Internet’ can also be used. If this is an ingress\r\nrule, specifies where network traffic originates from.",
+          "type": "string"
+        },
+        "sourcePortRange": {
+          "description": "Gets or sets Source Port or Range. Integer or range between 0 and\r\n65535. A “*” can also be used to match all ports.",
+          "type": "string"
+        }
+      }
+    },
+    "NetworkSecurityGroupResourceSettings": {
+      "description": "Defines the NSG resource settings.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ResourceSettings"
+        }
+      ],
+      "properties": {
+        "securityRules": {
+          "description": "Gets or sets Security rules of network security group.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/NsgSecurityRule"
+          }
+        }
+      },
+      "x-ms-discriminator-value": "Microsoft.Network/networkSecurityGroups"
+    },
+    "LBFrontendIPConfigurationResourceSettings": {
+      "description": "Defines load balancer frontend IP configuration properties.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Gets or sets the frontend IP configuration name.",
+          "type": "string"
+        },
+        "privateIpAddress": {
+          "description": "Gets or sets the IP address of the Load Balancer.This is only specified if a specific\r\nprivate IP address shall be allocated from the subnet specified in subnetRef.",
+          "type": "string"
+        },
+        "privateIpAllocationMethod": {
+          "description": "Gets or sets PrivateIP allocation method (Static/Dynamic).",
+          "type": "string"
+        },
+        "subnet": {
+          "$ref": "#/definitions/SubnetReference"
+        },
+        "zones": {
+          "description": "Gets or sets the csv list of zones.",
+          "type": "string"
+        }
+      }
+    },
+    "LBBackendAddressPoolResourceSettings": {
+      "description": "Defines load balancer backend address pool properties.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Gets or sets the backend address pool name.",
+          "type": "string"
+        }
+      }
+    },
+    "LoadBalancerResourceSettings": {
+      "description": "Defines the load balancer resource settings.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ResourceSettings"
+        }
+      ],
+      "properties": {
+        "sku": {
+          "description": "Gets or sets load balancer sku (Basic/Standard).",
+          "type": "string"
+        },
+        "frontendIPConfigurations": {
+          "description": "Gets or sets the frontend IP configurations of the load balancer.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/LBFrontendIPConfigurationResourceSettings"
+          }
+        },
+        "backendAddressPools": {
+          "description": "Gets or sets the backend address pools of the load balancer.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/LBBackendAddressPoolResourceSettings"
+          }
+        },
+        "zones": {
+          "description": "Gets or sets the csv list of zones common for all frontend IP configurations. Note this is given\r\n precedence only if frontend IP configurations settings are not present.",
+          "type": "string"
+        }
+      },
+      "x-ms-discriminator-value": "Microsoft.Network/loadBalancers"
+    },
+    "SqlServerResourceSettings": {
+      "description": "Defines the SQL Server resource settings.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ResourceSettings"
+        }
+      ],
+      "properties": {},
+      "x-ms-discriminator-value": "Microsoft.Sql/servers"
+    },
+    "ZoneRedundant": {
+      "description": "Defines the zone redundant resource setting.",
+      "enum": [
+        "Enable",
+        "Disable"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "ZoneRedundant",
+        "modelAsString": true
+      }
+    },
+    "SqlElasticPoolResourceSettings": {
+      "description": "Defines the Sql ElasticPool resource settings.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ResourceSettings"
+        }
+      ],
+      "properties": {
+        "zoneRedundant": {
+          "$ref": "#/definitions/ZoneRedundant"
+        }
+      },
+      "x-ms-discriminator-value": "Microsoft.Sql/servers/elasticPools"
+    },
+    "SqlDatabaseResourceSettings": {
+      "description": "Defines the Sql Database resource settings.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ResourceSettings"
+        }
+      ],
+      "properties": {
+        "zoneRedundant": {
+          "$ref": "#/definitions/ZoneRedundant"
+        }
+      },
+      "x-ms-discriminator-value": "Microsoft.Sql/servers/databases"
+    },
+    "ResourceGroupResourceSettings": {
+      "description": "Defines the resource group resource settings.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ResourceSettings"
+        }
+      ],
+      "properties": {},
+      "x-ms-discriminator-value": "resourceGroups"
+    },
+    "PublicIPAddressResourceSettings": {
+      "description": "Defines the public IP address resource settings.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ResourceSettings"
+        }
+      ],
+      "properties": {
+        "domainNameLabel": {
+          "description": "Gets or sets the domain name label.",
+          "type": "string"
+        },
+        "fQDN": {
+          "description": "Gets or sets the fully qualified domain name.",
+          "type": "string"
+        },
+        "publicIpAllocationMethod": {
+          "description": "Gets or sets public IP allocation method.",
+          "type": "string"
+        },
+        "sku": {
+          "description": "Gets or sets public IP sku.",
+          "type": "string"
+        },
+        "zones": {
+          "description": "Gets or sets public IP zones.",
+          "type": "string"
+        }
+      },
+      "x-ms-discriminator-value": "Microsoft.Network/publicIPAddresses"
+    },
+    "CloudError": {
+      "x-ms-external": true,
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/CloudErrorBody",
+          "description": "Cloud error body."
+        }
+      },
+      "description": "An error response from the service."
+    },
+    "CloudErrorBody": {
+      "x-ms-external": true,
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "An identifier for the error. Codes are invariant and are intended to be consumed programmatically."
+        },
+        "message": {
+          "type": "string",
+          "description": "A message describing the error, intended to be suitable for display in a user interface."
+        },
+        "target": {
+          "type": "string",
+          "description": "The target of the particular error. For example, the name of the property in error."
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CloudErrorBody"
+          },
+          "description": "A list of additional details about the error."
+        }
+      },
+      "description": "An error response from the service."
+    },
+    "OperationStatus": {
+      "description": "Operation status REST resource.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "Resource Id.",
+          "type": "string",
+          "readOnly": true
+        },
+        "name": {
+          "description": "Operation name.",
+          "type": "string",
+          "readOnly": true
+        },
+        "status": {
+          "description": "Status of the operation. ARM expects the terminal status to be one of Succeeded/ Failed/ Canceled. All other values imply that the operation is still running.",
+          "type": "string",
+          "readOnly": true
+        },
+        "startTime": {
+          "description": "Start time.",
+          "type": "string",
+          "readOnly": true
+        },
+        "endTime": {
+          "description": "End time.",
+          "type": "string",
+          "readOnly": true
+        },
+        "error": {
+          "$ref": "#/definitions/OperationStatusError",
+          "description": "Error stating all error details for the operation.",
+          "readOnly": true
+        },
+        "properties": {
+          "$ref": "#/definitions/OperationStatusProperties",
+          "description": "Custom data.",
+          "readOnly": true
+        }
+      }
+    },
+    "OperationStatusError": {
+      "description": "Class for operation status errors.",
+      "type": "object",
+      "properties": {
+        "code": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The error code."
+        },
+        "message": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The error message."
+        },
+        "details": {
+          "readOnly": true,
+          "type": "array",
+          "description": "The error details.",
+          "items": {
+            "$ref": "#/definitions/OperationStatusError"
+          }
+        },
+        "additionalInfo": {
+          "readOnly": true,
+          "type": "array",
+          "description": "The additional info.",
+          "items": {
+            "$ref": "#/definitions/OperationErrorAdditionalInfo"
+          }
+        }
+      }
+    },
+    "OperationStatusProperties": {
+      "description": "Class for operation result properties.",
+      "type": "object",
+      "properties": {}
+    },
+    "OperationErrorAdditionalInfo": {
+      "description": "The operation error info.",
+      "type": "object",
+      "properties": {
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The error type."
+        },
+        "info": {
+          "readOnly": true,
+          "$ref": "#/definitions/MoveErrorInfo",
+          "description": "The operation error info."
+        }
+      }
+    },
+    "MoveErrorInfo": {
+      "description": "The move custom error info.",
+      "type": "object",
+      "properties": {
+        "moveResources": {
+          "readOnly": true,
+          "type": "array",
+          "description": "The affected move resources.",
+          "items": {
+            "$ref": "#/definitions/AffectedMoveResource"
+          }
+        }
+      }
+    },
+    "AffectedMoveResource": {
+      "description": "The RP custom operation error info.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The affected move resource id."
+        },
+        "sourceId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The affected move resource source id."
+        },
+        "moveResources": {
+          "readOnly": true,
+          "type": "array",
+          "description": "The affected move resources.",
+          "items": {
+            "$ref": "#/definitions/AffectedMoveResource"
+          }
+        }
+      }
+    }
+  },
+  "parameters": {
+    "subscriptionId": {
+      "in": "path",
+      "name": "subscriptionId",
+      "description": "The Subscription ID.",
+      "required": true,
+      "type": "string"
+    },
+    "api-version": {
+      "in": "query",
+      "name": "api-version",
+      "description": "Client Api Version.",
+      "required": true,
+      "type": "string"
+    },
+    "resourceGroupName": {
+      "in": "path",
+      "name": "resourceGroupName",
+      "description": "The Resource Group Name.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "moveCollectionName": {
+      "in": "path",
+      "name": "moveCollectionName",
+      "description": "The Move Collection Name.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "moveResourceName": {
+      "in": "path",
+      "name": "moveResourceName",
+      "description": "The Move Resource Name.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,66 @@
+{
+  "parameters": {
+    "api-version": "1.0",
+    "subscription-key": "[subscription-key]",
+    "statesetId": "b24bdb73-1305-3212-1909-a428d937b64",
+    "featureId": "SPC4709",
+    "stateKeyName": "keyName1"
+  },
+  "responses": {
+    "200": {},
+    "400": {
+      "headers": {},
+      "body": {
+        "error": {
+          "code": "400 BadRequest",
+          "message": "Bad request: one or more parameters were incorrectly specified or are mutually exclusive."
+        }
+      }
+    },
+    "401": {
+      "headers": {},
+      "body": {
+        "error": {
+          "code": "401 Unauthorized",
+          "message": "Access denied due to invalid subscription key. Make sure to provide a valid key for an active subscription."
+        }
+      }
+    },
+    "403": {
+      "headers": {},
+      "body": {
+        "error": {
+          "code": "403 Forbidden",
+          "message": "Permission, capacity, or authentication issues."
+        }
+      }
+    },
+    "404": {
+      "headers": {},
+      "body": {
+        "error": {
+          "code": "404 NotFound",
+          "message": "Not Found: the requested resource could not be found, but it may be available again in the future."
+        }
+      }
+    },
+    "409": {
+      "headers": {},
+      "body": {
+        "error": {
+          "code": "409 Conflict",
+          "message": "The request could not be completed due to a conflict with the current state of the resource."
+        }
+      }
+    },
+    "500": {
+      "headers": {},
+      "body": {
+        "error": {
+          "code": "500 InternalServerError",
+          "message": "An error occurred while processing the request. Please try again later."
+        }
+      }
+    }
+  }
+}

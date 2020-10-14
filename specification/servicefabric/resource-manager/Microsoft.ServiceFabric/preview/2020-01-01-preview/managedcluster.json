@@ -377,7 +377,7 @@
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.ServiceFabric/managedclusters/locations/{location}/osType/{osType}/clusterVersions": {
       "get": {
-        "operationId": "ClusterVersions_ListByOS",
+        "operationId": "ManagedClusterVersions_ListByOS",
         "summary": "Gets the list of Service Fabric cluster code versions available for the specified OS type.",
         "description": "Gets all available code versions for Service Fabric cluster resources by OS type.",
         "parameters": [
@@ -396,11 +396,11 @@
         ],
         "x-ms-examples": {
           "List cluster versions by OS": {
-            "$ref": "./examples/ClusterVersionsListByOS_example.json"
+            "$ref": "./examples/ManagedClusterVersionsListByOS_example.json"
           }
         },
         "tags": [
-          "ClusterVersion"
+          "ManagedClusterVersion"
         ],
         "responses": {
           "200": {
@@ -460,7 +460,7 @@
         },
         "issuerThumbprint": {
           "type": "string",
-          "description": "Issuer thumbprint for the certificate. Its only use ehn CommonName is used."
+          "description": "Issuer thumbprint for the certificate. Its only use CommonName is used."
         }
       },
       "description": "Client Certificate definition."
@@ -566,9 +566,6 @@
       "type": "object",
       "description": "The manged cluster resource\n",
       "allOf": [
-        {
-          "description": "The managed cluster resource properties"
-        },
         {
           "$ref": "#/definitions/Resource"
         },
@@ -680,10 +677,6 @@
           },
           "description": "The list of custom fabric settings to configure the cluster."
         },
-        "useTestExtension": {
-          "type": "boolean",
-          "description": "Use service fabric test vm extension, by default it's false."
-        },
         "provisioningState": {
           "$ref": "#/definitions/ManagedResourceProvisioningState",
           "description": "The provisioning state of the managed cluster resource.",
@@ -700,11 +693,6 @@
         "clusterUpgradeDescription": {
           "$ref": "#/definitions/ClusterUpgradePolicy",
           "description": "Describes the policy used when upgrading the cluster."
-        },
-        "reverseProxyEndpointPort": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The endpoint used by reverse proxy."
         }
       },
       "description": "Describes the managed cluster resource properties."
@@ -757,11 +745,6 @@
         "clusterUpgradeDescription": {
           "$ref": "#/definitions/ClusterUpgradePolicy",
           "description": "Describes the policy used when upgrading the cluster."
-        },
-        "reverseProxyEndpointPort": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The endpoint used by reverse proxy."
         }
       },
       "description": "Describes the managed cluster resource properties."
@@ -790,7 +773,7 @@
       "properties": {
         "name": {
           "$ref": "#/definitions/SkuName",
-          "description": "Sku Name. Basic will hav a minimum of 3 seed nodes and Standard a minimum of 5. Basic only allows 1 node type."
+          "description": "Sku Name. Basic will have a minimum of 3 seed nodes and Standard a minimum of 5. Basic only allows 1 node type."
         }
       },
       "description": "Sku definition"

@@ -1,0 +1,74 @@
+{
+  "parameters": {
+    "api-version": "2020-08-01",
+    "subscriptionId": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+    "resourceGroupName": "myResourceGroup",
+    "jobName": "myExportJob",
+    "body": {
+      "properties": {
+        "state": "",
+        "logLevel": "Verbose",
+        "backupDriveManifest": true
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "storageAccountId": "/subscriptions/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/resourceGroups/myResourceGroup/providers/Microsoft.ClassicStorage/storageAccounts/test",
+          "jobType": "Export",
+          "returnAddress": {
+            "recipientName": "Test",
+            "streetAddress1": "Street1",
+            "streetAddress2": "street2",
+            "city": "Redmond",
+            "stateOrProvince": "wa",
+            "postalCode": "98007",
+            "countryOrRegion": "USA",
+            "phone": "4250000000",
+            "email": "Test@contoso.com"
+          },
+          "returnShipping": {
+            "carrierName": "FedEx",
+            "carrierAccountNumber": "989ffff"
+          },
+          "shippingInformation": {
+            "recipientName": "Microsoft Azure Import/Export Service",
+            "streetAddress1": "2045 Lafayette Street",
+            "streetAddress2": "",
+            "city": "Santa Clara",
+            "stateOrProvince": "CA",
+            "postalCode": "95050",
+            "countryOrRegion": "USA",
+            "phone": "408 352 7600",
+            "additionalInformation": ""
+          },
+          "diagnosticsPath": "waimportexport",
+          "logLevel": "Verbose",
+          "backupDriveManifest": true,
+          "cancelRequested": false,
+          "state": "Creating",
+          "export": {
+            "blobList": {
+              "blobPathPrefix": [
+                "/"
+              ]
+            }
+          },
+          "provisioningState": "Succeeded",
+          "encryptionKey": {
+            "kekType": "MicrosoftManaged"
+          }
+        },
+        "identity": {
+          "type": "None"
+        },
+        "id": "/subscriptions/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/resourceGroups/myResourceGroup/providers/Microsoft.ImportExport/jobs/myExportJob",
+        "name": "myExportJob",
+        "type": "Microsoft.ImportExport/jobs",
+        "location": "West US"
+      }
+    }
+  }
+}
