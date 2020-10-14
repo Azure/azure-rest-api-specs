@@ -1,0 +1,68 @@
+{
+    "parameters": {
+        "Ocp-Apim-Subscription-Key": "{API key}",
+        "Endpoint": "{Endpoint}",
+        "jobId": "{Job ID}",
+        "input": {
+            "displayName": "Extracting Location & US Region",
+            "analysisInput": {
+              "documents": [
+                {
+                    "id": "1",
+                    "language": "en",
+                    "text": "I had a wonderful trip to Seattle last week."
+                },
+                {
+                    "id": "2",
+                    "language": "en",
+                    "text": "I'm flying to NYC tomorrow. See you there."
+                }
+              ]
+            },
+            "tasks": {
+                "entityRecognitionTasks": [{ 
+                  "enable": true,
+                  "parameters": {
+                    "model-version": "latest"
+                  }
+                }],
+                "customClassificationTasks": [{
+                  "enable": true,
+                  "parameters": {
+                      "appId": "71baed8c-a832-489d-8f38-e3b44685785f",
+                      "slotName": "USRegionClassifier"
+                  }
+                }]
+            }
+        }
+    },
+    "responses": {
+        "202": {
+            "headers": {
+                "Operation-Location": "{endpoint}/text/analytics/v3.2-preview.1/analyze/jobs/{jobId}"
+            }
+        },
+        "400": {
+            "headers": {},
+            "body": {
+              "error": {
+                "code": "InvalidRequest",
+                "message": "Invalid Request.",
+                "innererror": {
+                  "code": "MissingInputRecords",
+                  "message": "Missing input records."
+                }
+              }
+            }
+          },
+          "500": {
+            "headers": {},
+            "body": {
+              "error": {
+                "code": "InternalServerError",
+                "message": "Internal Server Error"
+              }
+            }
+          }
+    }
+}
