@@ -3,20 +3,13 @@
     "clusterName": "cluster1",
     "resourceGroupName": "rg1",
     "api-version": "2015-03-01-preview",
-    "subscriptionId": "subid",
+    "subscriptionId": "subId",
     "parameters": {
-      "tags": {
-        "key1": "val1"
-      },
       "properties": {
-        "clusterVersion": "3.5",
+        "clusterVersion": "3.6",
         "osType": "Linux",
-        "tier": "Standard",
         "clusterDefinition": {
-          "kind": "Spark",
-          "componentVersion": {
-            "Spark": "2.0"
-          },
+          "kind": "hadoop",
           "configurations": {
             "gateway": {
               "restAuthCredential.isEnabled": true,
@@ -31,7 +24,7 @@
               "name": "mystorage",
               "isDefault": true,
               "container": "containername",
-              "key": "storageapikey*"
+              "key": "storage account key"
             }
           ]
         },
@@ -39,33 +32,57 @@
           "roles": [
             {
               "name": "headnode",
-              "minInstanceCount": 1,
               "targetInstanceCount": 2,
               "hardwareProfile": {
-                "vmSize": "Standard_D12_V2"
+                "vmSize": "standard_d3"
               },
               "osProfile": {
                 "linuxOperatingSystemProfile": {
                   "username": "sshuser",
-                  "password": "**********"
+                  "password": "**********",
+                  "sshProfile": {
+                    "publicKeys": [
+                      {
+                        "certificateData": "**********"
+                      }
+                    ]
+                  }
                 }
+              },
+              "virtualNetworkProfile": {
+                "id": "/subscriptions/subId/resourceGroups/rg/providers/Microsoft.Network/virtualNetworks/vnetname",
+                "subnet": "/subscriptions/subId/resourceGroups/rg/providers/Microsoft.Network/virtualNetworks/vnetname/subnets/vnetsubnet"
               }
             },
             {
               "name": "workernode",
-              "minInstanceCount": 1,
-              "targetInstanceCount": 4,
+              "targetInstanceCount": 2,
               "hardwareProfile": {
-                "vmSize": "Standard_D4_V2"
+                "vmSize": "standard_d3"
               },
               "osProfile": {
                 "linuxOperatingSystemProfile": {
                   "username": "sshuser",
-                  "password": "**********"
+                  "password": "**********",
+                  "sshProfile": {
+                    "publicKeys": [
+                      {
+                        "certificateData": "**********"
+                      }
+                    ]
+                  }
                 }
+              },
+              "virtualNetworkProfile": {
+                "id": "/subscriptions/subId/resourceGroups/rg/providers/Microsoft.Network/virtualNetworks/vnetname",
+                "subnet": "/subscriptions/subId/resourceGroups/rg/providers/Microsoft.Network/virtualNetworks/vnetname/subnets/vnetsubnet"
               }
             }
           ]
+        },
+        "networkProperties": {
+          "resourceProviderConnection": "Outbound",
+          "privateLink": "Enabled"
         }
       }
     }
@@ -79,17 +96,16 @@
         "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.HDInsight/clusters/cluster1",
         "name": "cluster1",
         "type": "Microsoft.HDInsight/clusters",
-        "location": "East US",
+        "location": "South Central US",
         "etag": "fdf2a6e8-ce83-42cc-8c2d-0ceb11a370ff",
+        "tags": null,
         "properties": {
-          "clusterVersion": "4.0.1000.1",
+          "clusterVersion": "3.6.1000.67",
           "osType": "Linux",
+          "clusterId": "8186508b6234470e9d16c9e8e13bd821",
           "clusterDefinition": {
-            "blueprint": "https://blueprints.azurehdinsight.net/hadoop-4.0.1000.1.1910270459.json",
-            "kind": "SPARK",
-            "componentVersion": {
-              "Hadoop": "3.1"
-            }
+            "blueprint": "https://blueprints.azurehdinsight.net/hadoop-3.6.1000.67.2005040905.json",
+            "kind": "hadoop"
           },
           "computeProfile": {
             "roles": [
@@ -97,60 +113,46 @@
                 "name": "headnode",
                 "targetInstanceCount": 2,
                 "hardwareProfile": {
-                  "vmSize": "standard_d12_v2"
+                  "vmSize": "standard_d3"
                 },
                 "osProfile": {
                   "linuxOperatingSystemProfile": {
                     "username": "sshuser"
                   }
+                },
+                "virtualNetworkProfile": {
+                  "id": "/subscriptions/subId/resourceGroups/rg/providers/Microsoft.Network/virtualNetworks/vnetname",
+                  "subnet": "/subscriptions/subId/resourceGroups/rg/providers/Microsoft.Network/virtualNetworks/vnetname/subnets/vnetsubnet"
                 }
               },
               {
                 "name": "workernode",
-                "targetInstanceCount": 4,
+                "targetInstanceCount": 2,
                 "hardwareProfile": {
-                  "vmSize": "standard_d4_v2"
+                  "vmSize": "standard_d3"
                 },
                 "osProfile": {
                   "linuxOperatingSystemProfile": {
                     "username": "sshuser"
                   }
-                }
-              },
-              {
-                "name": "zookeepernode",
-                "targetInstanceCount": 3,
-                "hardwareProfile": {
-                  "vmSize": "standard_a2_v2"
                 },
-                "osProfile": {
-                  "linuxOperatingSystemProfile": {
-                    "username": "sshuser"
-                  }
+                "virtualNetworkProfile": {
+                  "id": "/subscriptions/subId/resourceGroups/rg/providers/Microsoft.Network/virtualNetworks/vnetname",
+                  "subnet": "/subscriptions/subId/resourceGroups/rg/providers/Microsoft.Network/virtualNetworks/vnetname/subnets/vnetsubnet"
                 }
               }
             ]
           },
+          "networkProperties": {
+            "resourceProviderConnection": "Outbound",
+            "privateLink": "Enabled"
+          },
           "provisioningState": "Succeeded",
           "clusterState": "Running",
-          "createdDate": "2019-11-18T12:25:43.48",
+          "createdDate": "2020-06-09T12:25:43.48",
           "quotaInfo": {
-            "coresUsed": 40
+            "coresUsed": 16
           },
-          "connectivityEndpoints": [
-            {
-              "name": "SSH",
-              "protocol": "TCP",
-              "location": "cluster1-ssh.azurehdinsight.net",
-              "port": 22
-            },
-            {
-              "name": "HTTPS",
-              "protocol": "TCP",
-              "location": "cluster1.azurehdinsight.net",
-              "port": 443
-            }
-          ],
           "tier": "Standard"
         }
       }
