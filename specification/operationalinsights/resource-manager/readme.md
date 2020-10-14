@@ -98,6 +98,7 @@ These settings apply only when `--tag=package-2020-10-preview` is specified on t
 ``` yaml $(tag) == 'package-2020-10-preview'
 input-file:
 - Microsoft.OperationalInsights/preview/2020-10-01-preview/Clusters.json
+- Microsoft.OperationalInsights/preview/2020-10-01-preview/Operations.json
 ```
 
 ### Tag: package-2020-08
