@@ -31,8 +31,6 @@ openapi-type: arm
 tag: package-2020-03-30
 azure-arm: true
 ```
-
-
 ### Tag: package-2020-03-30
 
 These settings apply only when `--tag=package-2020-03-30` is specified on the command line.
@@ -41,6 +39,7 @@ These settings apply only when `--tag=package-2020-03-30` is specified on the co
 input-file:
   - Microsoft.HealthcareApis/stable/2020-03-30/healthcare-apis.json
 ```
+
 ### Tag: package-2020-03-15
 
 These settings apply only when `--tag=package-2020-03-15` is specified on the command line.
@@ -49,7 +48,6 @@ These settings apply only when `--tag=package-2020-03-15` is specified on the co
 input-file:
   - Microsoft.HealthcareApis/stable/2020-03-15/healthcare-apis.json
 ```
-
 ### Tag: package-2019-09
 
 These settings apply only when `--tag=package-2019-09` is specified on the command line.
@@ -116,51 +114,7 @@ See configuration in [readme.go.md](./readme.go.md)
 
 ## Java
 
-These settings apply only when `--java` is specified on the command line.
-Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-libraries-for-java clone>`.
-
-``` yaml $(java)
-azure-arm: true
-fluent: true
-namespace: com.microsoft.azure.management.healthcareapis
-license-header: MICROSOFT_MIT_NO_CODEGEN
-payload-flattening-threshold: 1
-output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-healthcareapis
-```
-
-### Java multi-api
-
-``` yaml $(java) && $(multiapi)
-batch:
-  - tag: package-2019-09
-  - tag: package-2018-08-preview
-```
-
-### Tag: package-2019-09 and java
-
-These settings apply only when `--tag=package-2019-09 --java` is specified on the command line.
-Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
-
-``` yaml $(tag) == 'package-2019-09' && $(java) && $(multiapi)
-java:
-  namespace: com.microsoft.azure.management.healthcareapis.v2019-09-16
-  output-folder: $(azure-libraries-for-java-folder)/sdk/healthcareapis/mgmt-v2019-09-16
-regenerate-manager: true
-generate-interface: true
-```
-
-### Tag: package-2018-08-preview and java
-
-These settings apply only when `--tag=package-2018-08-preview --java` is specified on the command line.
-Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
-
-``` yaml $(tag) == 'package-2018-08-preview' && $(java) && $(multiapi)
-java:
-  namespace: com.microsoft.azure.management.healthcareapis.v2018_08_20_preview
-  output-folder: $(azure-libraries-for-java-folder)/sdk/healthcareapis/mgmt-v2018_08_20_preview
-regenerate-manager: true
-generate-interface: true
-```
+See configuration in [readme.java.md](./readme.java.md)
 
 ## AzureResourceSchema
 
