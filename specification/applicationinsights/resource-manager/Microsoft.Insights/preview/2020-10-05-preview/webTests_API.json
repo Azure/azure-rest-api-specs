@@ -34,6 +34,44 @@
     }
   },
   "paths": {
+    "/providers/microsoft.insights/operations": {
+      "get": {
+        "tags": [
+          "Operations"
+        ],
+        "summary": "List available operations.",
+        "description": "List the available operations supported by the Microsoft.EventGrid resource provider.",
+        "operationId": "Operations_List",
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/OperationsListResult"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 Bad Request.\n\n * 500 Internal Server Error."
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Operations_List": {
+            "$ref": "./examples/Operations_List.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Insights/webtests": {
       "get": {
         "description": "Get all Application Insights web tests defined within a specified resource group.",
@@ -554,7 +592,68 @@
           "type": "string",
           "description": "The value of the header."
         }
-
+      }
+    },
+    "OperationsListResult": {
+      "description": "Result of the List Operations operation",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "A collection of operations",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Operation"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "URL to get the next set of operation list results if there are any."
+        }
+      }
+    },
+    "Operation": {
+      "description": "Represents an operation returned by the GetOperations request",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Name of the operation",
+          "type": "string"
+        },
+        "display": {
+          "$ref": "#/definitions/OperationInfo",
+          "description": "Display name of the operation"
+        },
+        "origin": {
+          "description": "Origin of the operation",
+          "type": "string"
+        },
+        "properties": {
+          "description": "Properties of the operation",
+          "type": "object",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "OperationInfo": {
+      "description": "Information about an operation",
+      "type": "object",
+      "properties": {
+        "provider": {
+          "description": "Name of the provider",
+          "type": "string"
+        },
+        "resource": {
+          "description": "Name of the resource type",
+          "type": "string"
+        },
+        "operation": {
+          "description": "Name of the operation",
+          "type": "string"
+        },
+        "description": {
+          "description": "Description of the operation",
+          "type": "string"
+        }
       }
     }
   },
