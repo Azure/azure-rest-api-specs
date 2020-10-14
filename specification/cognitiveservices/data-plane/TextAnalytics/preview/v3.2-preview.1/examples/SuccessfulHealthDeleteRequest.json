@@ -1,36 +1,36 @@
 {
-    "parameters": {
-        "Ocp-Apim-Subscription-Key": "{API key}",
-        "Endpoint": "{Endpoint}",
-        "jobId": "{Job ID}"
+  "parameters": {
+    "Ocp-Apim-Subscription-Key": "{API key}",
+    "Endpoint": "{Endpoint}",
+    "jobId": "{Job ID}"
+  },
+  "responses": {
+    "202": {
+      "headers": {
+        "Operation-Location": "{endpoint}/text/analytics/v3.2-preview.1/entities/healthcare/jobs/{jobId}"
+      }
     },
-    "responses": {
-        "204": {
-            "headers": {
-                "Operation-Location": "{endpoint}/text/analytics/v3.2-preview.1/entities/healthcare/jobs/{jobId}"
-            }
-        },
-        "404": {
-            "headers": {},
-            "body": {
-                "error": {
-                    "code": "NotFound",
-                    "message": "Not Found",
-                    "innererror": {
-                        "code": "JobIdNotFound",
-                        "message": "Job ID not found."
-                    }
-                }
-            }
-        },
-        "500": {
-            "headers": {},
-            "body": {
-                "error": {
-                    "code": "InternalServerError",
-                    "message": "Internal Server Error"
-                }
-            }
+    "404": {
+      "headers": {},
+      "body": {
+        "error": {
+          "code": "NotFound",
+          "message": "Not Found",
+          "innererror": {
+            "code": "JobIdNotFound",
+            "message": "Job ID not found."
+          }
         }
+      }
+    },
+    "500": {
+      "headers": {},
+      "body": {
+        "error": {
+          "code": "InternalServerError",
+          "message": "Internal Server Error"
+        }
+      }
     }
+  }
 }
