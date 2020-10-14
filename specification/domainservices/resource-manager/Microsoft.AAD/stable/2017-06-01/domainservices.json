@@ -177,6 +177,12 @@
             "schema": {
               "$ref": "#/definitions/DomainService"
             }
+          },
+          "default": {
+            "description": "Domain Service error response.",
+            "schema": {
+              "$ref": "#/definitions/DefaultErrorResponse"
+            }
           }
         },
         "x-ms-long-running-operation": true,
@@ -248,6 +254,12 @@
           },
           "204": {
             "description": "HTTP 204 (Not Content) should be used if the resource does not exist and the request is well formed."
+          },
+          "default": {
+            "description": "Domain Service error response.",
+            "schema": {
+              "$ref": "#/definitions/DefaultErrorResponse"
+            }
           }
         },
         "x-ms-long-running-operation": true,
@@ -298,6 +310,12 @@
             "description": "HTTP 202 (Accepted) if the operation was successfully started and will complete asynchronously.",
             "schema": {
               "$ref": "#/definitions/DomainService"
+            }
+          },
+          "default": {
+            "description": "Domain Service error response.",
+            "schema": {
+              "$ref": "#/definitions/DefaultErrorResponse"
             }
           }
         },
@@ -386,14 +404,24 @@
     "DomainServiceProperties": {
       "description": "Properties of the Domain Service.",
       "properties": {
+        "version": {
+          "readOnly": true,
+          "type": "integer",
+          "description": "Data Model Version"
+        },
         "tenantId": {
           "readOnly": true,
           "type": "string",
-          "description": "Azure Active Directory tenant id"
+          "description": "Azure Active Directory Tenant Id"
         },
         "domainName": {
           "type": "string",
           "description": "The name of the Azure domain that the user would like to deploy Domain Services to."
+        },
+        "deploymentId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Deployment Id"
         },
         "vnetSiteId": {
           "readOnly": true,
@@ -411,7 +439,6 @@
         "healthLastEvaluated": {
           "readOnly": true,
           "type": "string",
-          "format": "date-time",
           "description": "Last domain evaluation run DateTime"
         },
         "healthMonitors": {
@@ -726,6 +753,63 @@
         "resource": {
           "description": "Resource on which the operation is performed.",
           "type": "string"
+        }
+      }
+    },
+    "DefaultErrorResponse": {
+      "description": "Domain Service error response.",
+      "type": "object",
+      "properties": {
+        "error": {
+          "description": "Error model.",
+          "type": "object",
+          "properties": {
+            "code": {
+              "description": "Standardized string to programmatically identify the error.",
+              "type": "string",
+              "readOnly": true
+            },
+            "message": {
+              "description": "Detailed error description and debugging information.",
+              "type": "string",
+              "readOnly": true
+            },
+            "target": {
+              "description": "Detailed error description and debugging information.",
+              "type": "string",
+              "readOnly": true
+            },
+            "details": {
+              "type": "array",
+              "items": {
+                "description": "Detailed errors.",
+                "properties": {
+                  "code": {
+                    "description": "Standardized string to programmatically identify the error.",
+                    "type": "string",
+                    "readOnly": true
+                  },
+                  "message": {
+                    "description": "Detailed error description and debugging information.",
+                    "type": "string",
+                    "readOnly": true
+                  },
+                  "target": {
+                    "description": "Detailed error description and debugging information.",
+                    "type": "string",
+                    "readOnly": true
+                  }
+                },
+                "readOnly": true
+              }
+            },
+            "innererror": {
+              "description": "More information to debug error.",
+              "type": "string",
+              "readOnly": true
+            }
+          },
+          "readOnly": true
         }
       }
     }
