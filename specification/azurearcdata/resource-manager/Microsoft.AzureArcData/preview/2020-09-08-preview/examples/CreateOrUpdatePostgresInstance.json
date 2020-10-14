@@ -1,0 +1,133 @@
+{
+  "parameters": {
+    "subscriptionId": "00000000-1111-2222-3333-444444444444",
+    "resourceGroupName": "testrg",
+    "postgresInstanceName": "testpostgresInstance",
+    "api-version": "2020-12-08-preview",
+    "location": "northeurope",
+    "tags": {
+      "mytag": "myval"
+    },
+    "resource": {
+      "location": "eastus",
+      "properties": {
+        "dataControllerId": "dataControllerId",
+        "admin": "admin",
+        "k8sRaw": {
+          "apiVersion": "apiVersion",
+          "kind": "postgresql-12",
+          "metadata": {
+            "creationTimestamp": "2020-08-25T14:55:10Z",
+            "generation": 1,
+            "name": "pg1",
+            "namespace": "test",
+            "resourceVersion": "527780",
+            "selfLink": "/apis/arcdata.microsoft.com/v1alpha1/namespaces/test/postgresql-12s/pg1",
+            "uid": "1111aaaa-ffff-ffff-ffff-99999aaaaaaa"
+          },
+          "spec": {
+            "backups": {
+              "deltaMinutes": 3,
+              "fullMinutes": 10,
+              "tiers": [
+                {
+                  "retention": {
+                    "maximums": [
+                      "6",
+                      "512MB"
+                    ],
+                    "minimums": [
+                      "3"
+                    ]
+                  },
+                  "storage": {
+                    "volumeSize": "1Gi"
+                  }
+                }
+              ]
+            },
+            "engine": {
+              "extensions": [
+                {
+                  "name": "citus"
+                }
+              ]
+            },
+            "scale": {
+              "shards": 3
+            },
+            "scheduling": {
+              "default": {
+                "resources": {
+                  "requests": {
+                    "memory": "256Mi"
+                  }
+                }
+              }
+            },
+            "service": {
+              "type": "NodePort"
+            },
+            "storage": {
+              "data": {
+                "className": "local-storage",
+                "size": "5Gi"
+              },
+              "logs": {
+                "className": "local-storage",
+                "size": "5Gi"
+              }
+            }
+          },
+          "status": {
+            "externalEndpoint": null,
+            "readyPods": "4/4",
+            "state": "Ready"
+          }
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {},
+        "location": "northeurope",
+        "systemData": {
+          "createdBy": "user1",
+          "createdByType": "user",
+          "createdAt": "2020-01-01T17:18:19.1234567Z",
+          "lastModifiedBy": "user2",
+          "lastModifiedByType": "user",
+          "lastModifiedAt": "2020-01-02T17:18:19.1234567Z"
+        },
+        "tags": {
+          "mytag": "myval"
+        },
+        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg/providers/Microsoft.AzureArcData/PostgresInstance/testpostgresInstance",
+        "name": "testpostgresInstance",
+        "type": "Microsoft.AzureArcData/PostgresInstance"
+      }
+    },
+    "201": {
+      "body": {
+        "properties": {},
+        "location": "northeurope",
+        "systemData": {
+          "createdBy": "user1",
+          "createdByType": "user",
+          "createdAt": "2020-01-01T17:18:19.1234567Z",
+          "lastModifiedBy": "user2",
+          "lastModifiedByType": "user",
+          "lastModifiedAt": "2020-01-02T17:18:19.1234567Z"
+        },
+        "tags": {
+          "mytag": "myval"
+        },
+        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg/providers/Microsoft.AzureArcData/PostgresInstance/testpostgresInstance",
+        "name": "testsqlregistration",
+        "type": "Microsoft.AzureArcData/PostgresInstance"
+      }
+    }
+  }
+}
