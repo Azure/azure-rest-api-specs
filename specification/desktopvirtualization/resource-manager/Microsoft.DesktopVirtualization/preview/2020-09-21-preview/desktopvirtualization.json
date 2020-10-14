@@ -2094,6 +2094,15 @@
   },
   "definitions": {
     "CloudError": {
+      "x-ms-external": true,
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/CloudErrorProperties"
+        },
+        "description": "An error response from the Storage service."
+      }
+    },
+    "CloudErrorProperties": {
       "type": "object",
       "properties": {
         "code": {
@@ -2105,10 +2114,6 @@
           "type": "string"
         }
       },
-      "required": [
-        "code",
-        "message"
-      ],
       "description": "Error response of an operation failure"
     },
     "ResourceProviderOperationList": {
