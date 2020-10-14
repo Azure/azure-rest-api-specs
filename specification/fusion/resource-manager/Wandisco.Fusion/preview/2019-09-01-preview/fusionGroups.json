@@ -2762,6 +2762,46 @@
       }
     },
     "/providers/Wandisco.Fusion/locations/{locationName}/operationStatuses/{operationStatusId}": {
+      "get": {
+        "tags": [
+          "operationStatus"
+        ],
+        "description": "Return the given operationStatus.",
+        "operationId": "OperationStatuses_Get",
+        "parameters": [
+          {
+            "$ref": "#/parameters/LocationNameParameter"
+          },
+          {
+            "$ref": "#/parameters/OperationStatusIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+          ],
+        "responses": {
+          "200": {
+            "description": "operationStatus details.",
+            "schema": {
+              "$ref": "#/definitions/OperationStatus"
+            }
+          },
+          "default": {
+            "description": "Error response describing the reason for operation failure.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful get": {
+            "$ref": "./examples/FusionGroup/OperationStatusGet.json"
+          },
+          "Successful get of failed operation": {
+            "$ref": "./examples/FusionGroup/OperationStatusGetError.json"
+          }
+        }
+      },
       "patch": {
         "tags": [
           "operationStatus"
@@ -3249,6 +3289,12 @@
               "title": "HealthStatus",
               "description": "The health of the Fusion Group",
               "$ref": "#/definitions/HealthStatus",
+              "readOnly": true
+            },
+            "allowance": {
+              "title": "Allowance",
+              "description": "The remaining allowance for the company associated with the Fusion Group",
+              "$ref": "#/definitions/Allowance",
               "readOnly": true
             }
           }
@@ -3774,6 +3820,12 @@
           "title": "KerberosConfiguration",
           "description": "The configuration properties for authenticating to the source filesystem",
           "$ref": "#/definitions/KerberosConfiguration"
+        },
+        "allowance": {
+          "title": "Allowance",
+          "description": "The remaining allowance for the company associated with the Migrator",
+          "$ref": "#/definitions/Allowance",
+          "readOnly": true
         }
       }
     },
@@ -4103,15 +4155,31 @@
       "type": "object",
       "properties": {
         "id": {
-          "description": "Operation Id",
+          "description": "Full Operation Id",
           "type": "string"
+        },
+        "name": {
+          "description": "Just the name part",
+          "type": "string"
+        },
+        "properties": {
+          "description": "Some details (unspecified)",
+          "type": "object"
         },
         "status": {
           "description": "Operation Status",
           "type": "string"
         },
+        "resourceId": {
+          "description": "ResourceId to which this operation applied",
+          "type": "string"
+        },
+        "startTime": {
+          "description": "When operation started",
+          "type": "string"
+        },
         "error": {
-          "description": "Hdi cluster with Fusion client installed",
+          "description": "If present, details of the error.",
           "type": "object",
           "$ref": "#/definitions/OperationStatusError"
         }
@@ -4348,6 +4416,12 @@
           "type": "string",
           "description": "Migration path on the source file system"
         },
+        "provisioningState": {
+          "title": "ProvisioningState",
+          "description": "Provisioning State of resource",
+          "$ref": "#/definitions/ProvisioningState",
+          "readOnly": true
+        },
         "targetId": {
           "type": "string",
           "description": "ID of the target file system"
@@ -4464,6 +4538,17 @@
           "items": {
             "$ref": "#/definitions/ErrorDefinition"
           }
+        }
+      }
+    },
+    "Allowance": {
+      "description": "The remaining allowance included as part of any plan for a resource",
+      "properties": {
+        "remainingData": {
+          "description": "The number of MBs remaining",
+          "type": "integer",
+          "format": "int64",
+          "readOnly": true
         }
       }
     },

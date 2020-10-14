@@ -1,0 +1,40 @@
+{
+  "parameters": {
+    "api-version": "2020-10-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "myResourceGroup"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/monitors/myMonitor",
+            "name": "myMonitor",
+            "type": "Microsoft.Logz/monitors",
+            "sku": {
+              "name": "free_Monthly"
+            },
+            "properties": {
+              "provisioningState": "Succeeded",
+              "monitoringStatus": "Enabled",
+              "logzOrganizationProperties": {
+                "companyName": "myOrg",
+                "id": "myOrg123",
+                "apiKey": null,
+                "enterpriseAppId": null
+              },
+              "liftrResourceCategory": "MonitorLogs",
+              "liftrResourcePreference": 1
+            },
+            "tags": {
+              "Environment": "Dev"
+            },
+            "location": "West US"
+          }
+        ],
+        "nextLink": null
+      }
+    }
+  }
+}

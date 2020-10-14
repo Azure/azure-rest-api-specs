@@ -1,0 +1,499 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2020-09-02-preview",
+    "title": "Falcon ResourceProvider",
+    "description": "Falcon resource provider",
+    "x-ms-code-generation-settings": {
+      "name": "falconClient"
+    }
+  },
+  "host": "management.azure.com",
+  "schemes": ["https"],
+  "consumes": ["application/json"],
+  "produces": ["application/json"],
+  "security": [
+    {
+      "azure_auth": ["user_impersonation"]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths" : {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Falcon/resources/{resourceName}" : {
+      "get" : {
+        "tags" : [ "FalconResources" ],
+        "description" : "Returns Falcon resource for a given name.",
+        "operationId" : "Resources_Get",
+        "parameters" : [ {
+            "$ref": "#/parameters/ApiVersionParameter"
+        }, {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+        }, {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+        }, {
+            "$ref": "#/parameters/FalconResourceParameter"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Falcon resource details.",
+            "schema" : {
+              "$ref" : "#/definitions/FalconResource"
+            }
+          },
+          "default" : {
+            "description" : "Resource Provider error response describing why the operation failed.",
+            "schema" : {
+              "$ref" : "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples" : {
+          "FalconResourceGet" : {
+            "$ref" : "./examples/FalconResourceGet.json"
+          }
+        }
+      },
+      "put" : {
+        "tags" : [ "FalconResources" ],
+        "description" : "Create or update Falcon resource.",
+        "operationId" : "FalconResources_CreateAndUpdate",
+        "parameters" : [ {
+            "$ref": "#/parameters/ApiVersionParameter"
+        }, {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+        }, {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+        }, {
+            "$ref": "#/parameters/FalconResourceParameter"
+        }, {
+          "in" : "body",
+          "name" : "resourceParameters",
+          "description" : "Resource details.",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/FalconResource"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Successful.",
+            "schema" : {
+              "$ref" : "#/definitions/FalconResource"
+            }
+          },
+          "default" : {
+            "description" : "Resource Provider error response describing why the operation failed.",
+            "schema" : {
+              "$ref" : "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples" : {
+          "FalconResourcePut" : {
+            "$ref" : "./examples/FalconResourcePut.json"
+          }
+        }
+      },
+      "delete" : {
+        "tags" : [ "FalconResources" ],
+        "description" : "Deletes an existing Azure Falcon resource",
+        "operationId" : "FalconResources_Delete",
+        "parameters" : [ {
+            "$ref": "#/parameters/ApiVersionParameter"
+        }, {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+        }, {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+        }, {
+            "$ref": "#/parameters/FalconResourceParameter"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Successful"
+          },
+          "202" : {
+            "description" : "Falcon Resource delete operation will complete asynchronously"
+          },
+          "204" : {
+            "description" : "The specified Falcon resource does not exist in the subscription."
+          },
+          "default" : {
+            "description" : "Resource Provider error response describing why the operation failed.",
+            "schema" : {
+              "$ref" : "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+		},
+        "x-ms-examples" : {
+          "FalconResourceDelete" : {
+            "$ref" : "./examples/FalconResourceDelete.json"
+          }
+        }
+      },
+      "patch" : {
+        "tags" : [ "FalconResources" ],
+        "description" : "Updates the specified resource tags.",
+        "operationId" : "FalconResources_UpdateTags",
+        "parameters" : [ {
+            "$ref": "#/parameters/ApiVersionParameter"
+        }, {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+        }, {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+        }, {
+            "$ref": "#/parameters/FalconResourceParameter"
+        }, {
+          "in" : "body",
+          "name" : "parameters",
+          "description" : "Parameters supplied to update resource tags.",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/TagsObject"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Update successful.",
+            "schema" : {
+              "$ref" : "#/definitions/FalconResource"
+            }
+          },
+          "default" : {
+            "description" : "Resource Provider error response describing why the operation failed.",
+            "schema" : {
+              "$ref" : "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples" : {
+          "Update resource tags" : {
+            "$ref" : "./examples/FalconResourceUpdateTags.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Falcon/resources" : {
+      "get" : {
+        "tags" : [ "FalconResources" ],
+        "description" : "Lists all the Falcon resources under the given resource group.",
+        "operationId" : "FalconResources_ListByResourceGroup",
+        "parameters" : [ {
+            "$ref": "#/parameters/ApiVersionParameter"
+        }, {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+        }, {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "$ref" : "#/definitions/FalconResourceListResult"
+            }
+          },
+          "default" : {
+            "description" : "Error response describing why the operation has failed.",
+            "schema" : {
+              "$ref" : "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples" : {
+          "List resources in a resource group" : {
+            "$ref" : "./examples/ListByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable" : {
+          "nextLinkName" : "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Falcon/resources" : {
+      "get" : {
+        "tags" : [ "FalconResources" ],
+        "description" : "Lists all of the Falcon resources under the given subscription.",
+        "operationId" : "FalconResources_ListBySubscription",
+        "parameters" : [ {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+        }, {
+          "name" : "api-version",
+          "in" : "query",
+          "description" : "Client Api Version.",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "$ref" : "#/definitions/FalconResourceListResult"
+            }
+          },
+          "default" : {
+            "description" : "Error response describing why the operation has failed.",
+            "schema" : {
+              "$ref" : "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples" : {
+          "List resources in a subscription" : {
+            "$ref" : "./examples/ListBySubscription.json"
+          }
+        },
+        "x-ms-pageable" : {
+          "nextLinkName" : "nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.Falcon/operations" : {
+      "get" : {
+        "tags" : [ "Operations" ],
+        "description" : "Lists all of the available API operations for Falcon resources.",
+        "operationId" : "Operations_List",
+        "parameters" : [ {
+          "name" : "api-version",
+          "in" : "query",
+          "description" : "Client Api Version.",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK. The request has succeeded.",
+            "schema" : {
+              "$ref" : "#/definitions/OperationListResult"
+            }
+          },
+          "default" : {
+            "description" : "Resource Provider error response describing why the operation failed.",
+            "schema" : {
+              "$ref" : "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples" : {
+          "List Falcon operations" : {
+            "$ref" : "./examples/ListFalconOperations.json"
+          }
+        },
+        "x-ms-pageable" : {
+          "nextLinkName" : "nextLink"
+        }
+      }
+    }
+  },
+  "definitions" : {
+    "Resource" : {
+      "description" : "An Azure resource.",
+      "properties" : {
+        "id" : {
+          "type" : "string",
+          "description" : "Azure resource Id.",
+          "readOnly" : true
+        },
+        "name" : {
+          "type" : "string",
+          "description" : "Azure resource name. Preferably as a <namespace>-<service>",
+          "readOnly" : true
+        },
+        "type" : {
+          "type" : "string",
+          "description" : "Azure resource type.",
+          "readOnly" : true
+        },
+        "location" : {
+          "type" : "string",
+          "description" : "Location of the resource."
+        },
+        "tags" : {
+          "type" : "object",
+          "description" : "resource tags.",
+          "additionalProperties" : {
+            "type" : "string"
+          }
+        }
+      },
+      "x-ms-azure-resource" : true
+    },
+    "FalconResource": {
+      "type": "object",
+      "description": "Falcon resource details",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "required": [
+        "properties"
+      ],
+      "properties": {
+        "properties": {
+          "type": "object",
+          "required": [
+            "namespaceName"
+          ],
+          "properties": {
+            "namespaceName": {
+              "type": "string",
+              "description": "Namespace in Falcon"
+            },
+            "serviceName": {
+              "type": "string",
+              "description": "Service in Falcon"
+            }			
+          }
+        }
+      }
+    },
+    "FalconResourceListResult" : {
+      "type" : "object",
+      "properties" : {
+        "value" : {
+          "type" : "array",
+          "description" : "The list of Falcon resources",
+          "items" : {
+            "$ref" : "#/definitions/FalconResource"
+          }
+        },
+        "nextLink" : {
+          "type" : "string",
+          "description" : "The link to fetch the next page of Falcon resources"
+        }
+      },
+      "description" : "The paginated list of Falcon resources"
+    },
+    "TagsObject" : {
+      "properties" : {
+        "tags" : {
+          "type" : "object",
+          "description" : "Resource tags.",
+          "additionalProperties" : {
+            "type" : "string"
+          }
+        }
+      },
+      "description" : "Tags object for patch operations."
+    },
+    "Operation" : {
+      "type" : "object",
+      "properties" : {
+        "name" : {
+          "type" : "string",
+          "description" : "Operation name: {Microsoft.Falcon}/{resource}/{operation}",
+          "readOnly" : true
+        },
+        "display" : {
+          "$ref" : "#/definitions/Operation_display"
+        }
+      },
+      "description" : "The Falcon API operation"
+    },
+    "OperationListResult" : {
+      "properties" : {
+        "value" : {
+          "type" : "array",
+          "description" : "The list of Falcon API operations.",
+          "readOnly" : true,
+          "items" : {
+            "$ref" : "#/definitions/Operation"
+          }
+        },
+        "nextLink" : {
+          "type" : "string",
+          "description" : "The link to fetch the next page of Falcon API operations."
+        }
+      },
+      "description" : "The paginated list of Falcon API operations."
+    },
+    "ErrorResponse" : {
+      "type" : "object",
+      "properties" : {
+		"error" : {
+		  "type" : "object",
+		  "properties" : {
+			"code" : {
+			  "type" : "string",
+			  "description" : "The error code.",
+			  "readOnly" : true
+			},
+			"message" : {
+			  "type" : "string",
+			  "description" : "The error message.",
+			  "readOnly" : true
+			}
+		  }
+		}
+      },
+      "description" : "The error response that indicates why an operation has failed."
+    },
+    "Operation_display" : {
+      "type" : "object",
+      "properties" : {
+        "provider" : {
+          "type" : "string",
+          "description" : "Service provider: Microsoft.Falcon"
+        },
+        "resource" : {
+          "type" : "string",
+          "description" : "Falcon Resource on which the operation is performed"
+        },
+        "operation" : {
+          "type" : "string",
+          "description" : "Operation type: Read, write, delete, etc."
+        },
+        "description" : {
+          "type" : "string",
+          "description" : "Description of the operation."
+        }
+      },
+      "description" : "The object that represents the operation."
+    }
+  },
+  "parameters" : {
+    "SubscriptionIdParameter" : {
+      "name" : "subscriptionId",
+      "in" : "path",
+      "description" : "The Azure subscription ID.",
+      "required" : true,
+      "type" : "string"
+    },
+    "ApiVersionParameter" : {
+      "name" : "api-version",
+      "in" : "query",
+      "description" : "Client Api Version.",
+      "required" : true,
+      "type" : "string"
+    },
+    "ResourceGroupNameParameter" : {
+      "name" : "resourceGroupName",
+      "in" : "path",
+      "description" : "The name of the resource group.",
+      "required" : true,
+      "type" : "string",
+      "x-ms-parameter-location" : "method"
+    },
+    "FalconResourceParameter" : {
+      "name" : "resourceName",
+      "in" : "path",
+      "description" : "The Falcon resource.",
+      "required" : true,
+      "type" : "string",
+      "x-ms-parameter-location" : "method"
+    }
+  }
+}

@@ -1,0 +1,535 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "title": "Contoso",
+        "description": "The Microsoft.Contoso Rest API spec.",
+        "version": "2020-01-01-preview",
+        "x-ms-code-generation-settings": {
+            "name": "ContosoClient"
+        }
+    },
+    "securityDefinitions": {
+        "azure_auth": {
+            "type": "oauth2",
+            "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+            "flow": "implicit",
+            "description": "Azure Active Directory OAuth2 Flow",
+            "scopes": {
+                "user_impersonation": "impersonate your user account"
+            }
+        }
+    },
+    "host": "management.azure.com",
+    "schemes": [
+        "https"
+    ],
+    "consumes": [
+        "application/json"
+    ],
+    "produces": [
+        "application/json"
+    ],
+    "paths": {
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Contoso/towers/{towersName}": {
+            "get": {
+                "operationId": "Towers_Get",
+                "x-ms-examples": {
+                    "Gets the tower resource": {
+                        "$ref": "examples/getTower.json"
+                    }
+                },
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ResourceGroupNameParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/towersNameParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Retrieves the towers resource.",
+                        "schema": {
+                            "$ref": "#/definitions/towers"
+                        }
+                    },
+                    "default": {
+                        "description": "Error response describing why the operation failed.",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorResponse"
+                        }
+                    }
+                }
+            },
+            "put": {
+                "operationId": "Towers_CreateOrUpdate",
+                "x-ms-examples": {
+                    "Creates or updates the tower resource": {
+                        "$ref": "examples/createOrUpdateTower.json"
+                    }
+                },
+                "x-ms-long-running-operation": true,
+                "x-ms-long-running-operation-options": {
+                    "final-state-via": "azure-async-operation"
+                },
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ResourceGroupNameParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/towersNameParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    },
+                    {
+                        "name": "towers",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/towers"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Updates the towers resource.",
+                        "schema": {
+                            "$ref": "#/definitions/towers"
+                        }
+                    },
+                    "201": {
+                        "description": "Creates the towers resource.",
+                        "schema": {
+                            "$ref": "#/definitions/towers"
+                        }
+                    },
+                    "default": {
+                        "description": "Error response describing why the operation failed.",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorResponse"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "operationId": "Towers_Delete",
+                "x-ms-examples": {
+                    "Deletes the tower resource": {
+                        "$ref": "examples/deleteTower.json"
+                    }
+                },
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ResourceGroupNameParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/towersNameParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Deletes the towers resource."
+                    },
+                    "default": {
+                        "description": "Error response describing why the operation failed.",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorResponse"
+                        }
+                    }
+                }
+            },
+            "patch": {
+                "operationId": "Towers_Update",
+                "x-ms-examples": {
+                    "Updates the tower resource": {
+                        "$ref": "examples/updateTower.json"
+                    }
+                },
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ResourceGroupNameParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/towersNameParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    },
+                    {
+                        "name": "towers",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/towersPatch"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Updates the towers resource.",
+                        "schema": {
+                            "$ref": "#/definitions/towers"
+                        }
+                    },
+                    "default": {
+                        "description": "Error response describing why the operation failed.",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Contoso/towers": {
+            "get": {
+                "operationId": "Towers_ListByResourceGroup",
+                "x-ms-examples": {
+                    "List the towers in the resourceGroup": {
+                        "$ref": "examples/listTowerByResourceGroup.json"
+                    }
+                },
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ResourceGroupNameParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Lists all towers under the resouce group.",
+                        "schema": {
+                            "$ref": "#/definitions/towersListResult"
+                        }
+                    },
+                    "default": {
+                        "description": "Error response describing why the operation failed.",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorResponse"
+                        }
+                    }
+                },
+                "x-ms-pageable": {
+                    "nextLinkName": "nextLink"
+                }
+            }
+        },
+        "/subscriptions/{subscriptionId}/providers/Microsoft.Contoso/towers": {
+            "get": {
+                "operationId": "Towers_ListBySubscription",
+                "x-ms-examples": {
+                    "List the towers in the subscription": {
+                        "$ref": "examples/listTowerBySubscription.json"
+                    }
+                },
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Lists all towers under the subscription.",
+                        "schema": {
+                            "$ref": "#/definitions/towersListResult"
+                        }
+                    },
+                    "default": {
+                        "description": "Error response describing why the operation failed.",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorResponse"
+                        }
+                    }
+                },
+                "x-ms-pageable": {
+                    "nextLinkName": "nextLink"
+                }
+            }
+        },
+        "/providers/Microsoft.Contoso/operations": {
+            "get": {
+                "operationId": "Operations_List",
+                "x-ms-examples": {
+                    "List the operations": {
+                        "$ref": "examples/operationsList.json"
+                    }
+                },
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Describe the result of a successful operation.",
+                        "schema": {
+                            "$ref": "#/definitions/ResourceProviderOperationList"
+                        }
+                    },
+                    "default": {
+                        "description": "Error response describing why the operation failed.",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorResponse"
+                        }
+                    }
+                },
+                "x-ms-pageable": {
+                    "nextLinkName": "nextLink"
+                }
+            }
+        }
+    },
+    "definitions": {
+        "towerProperties": {
+            "properties": {
+                "deploymentType": {
+                    "type": "string"
+                },
+                "ingressType": {
+                    "type": "string"
+                },
+                "hostname": {
+                    "type": "string"
+                },
+                "secretKey": {
+                    "x-ms-secret": true,
+                    "type": "string"
+                },
+                "user": {
+                    "type": "string"
+                },
+                "email": {
+                    "type": "string"
+                },
+                "password": {
+                    "x-ms-secret": true,
+                    "type": "string"
+                },
+                "provisioningState": {
+                    "type": "string"
+                }
+            }
+        },
+        "towers": {
+            "x-ms-azure-resource": true,
+            "type": "object",
+            "properties": {
+                "properties": {
+                    "$ref": "#/definitions/towerProperties"
+                },
+                "id": {
+                    "type": "string",
+                    "readOnly": true,
+                    "description": "Resource Id"
+                },
+                "name": {
+                    "type": "string",
+                    "readOnly": true,
+                    "description": "Resource Name"
+                },
+                "type": {
+                    "type": "string",
+                    "readOnly": true,
+                    "description": "Resource Type"
+                },
+                "location": {
+                    "type": "string",
+                    "description": "The resource location"
+                },
+                "tags": {
+                    "type": "object",
+                    "additionalProperties": {
+                        "type": "string"
+                    },
+                    "description": "Resource tags"
+                },
+                "extendedLocation": {
+                    "type": "object",
+                    "properties": {
+                        "type": {
+                            "type": "string",
+                            "description": "The extended location type."
+                        },
+                        "name": {
+                            "type": "string",
+                            "description": "The extended location name."
+                        }
+                    }
+                }
+            },
+            "required": [
+                "location"
+            ],
+            "description": "The towers resource definition."
+        },
+        "towersPatch": {
+            "type": "object",
+            "properties": {
+                "tags": {
+                    "type": "object",
+                    "additionalProperties": {
+                        "type": "string"
+                    },
+                    "description": "Resource tags"
+                }
+            },
+            "description": "The towers resource patch definition."
+        },
+        "towersListResult": {
+            "type": "object",
+            "properties": {
+                "value": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/towers"
+                    }
+                },
+                "nextLink": {
+                    "type": "string"
+                }
+            }
+        },
+        "ResourceProviderOperationList": {
+            "type": "object",
+            "properties": {
+                "value": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/ResourceProviderOperation"
+                    }
+                },
+                "nextLink": {
+                    "type": "string"
+                }
+            },
+            "description": "Results of the request to list operations."
+        },
+        "ResourceProviderOperation": {
+            "type": "object",
+            "properties": {
+                "isDataAction": {
+                    "type": "boolean",
+                    "description": "Indicates whether the operation applies to data-plane."
+                },
+                "name": {
+                    "type": "string",
+                    "description": "Operation name, in format of {provider}/{resource}/{operation}"
+                },
+                "display": {
+                    "type": "object",
+                    "properties": {
+                        "provider": {
+                            "type": "string",
+                            "description": "The resource provider."
+                        },
+                        "resource": {
+                            "type": "string",
+                            "description": "Resource on which the operation is performed."
+                        },
+                        "operation": {
+                            "type": "string",
+                            "description": "Type of operation: get, read, delete, etc."
+                        },
+                        "description": {
+                            "type": "string",
+                            "description": "Description of this operation."
+                        }
+                    },
+                    "description": "Display metadata associated with the operation."
+                }
+            },
+            "description": "Results of the request to list operations."
+        },
+        "ErrorResponse": {
+            "description": "Error response.",
+            "properties": {
+                "error": {
+                    "$ref": "#/definitions/ErrorDefinition",
+                    "description": "The error details."
+                }
+            }
+        },
+        "ErrorDefinition": {
+            "description": "Error definition.",
+            "properties": {
+                "code": {
+                    "description": "Service specific error code which serves as the substatus for the HTTP error code.",
+                    "type": "string",
+                    "readOnly": true
+                },
+                "message": {
+                    "description": "Description of the error.",
+                    "type": "string",
+                    "readOnly": true
+                },
+                "details": {
+                    "description": "Internal error details.",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/ErrorDefinition"
+                    },
+                    "readOnly": true
+                }
+            }
+        }
+    },
+    "parameters": {
+        "towersNameParameter": {
+            "x-ms-parameter-location": "client",
+            "name": "towersName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "maxLength": 64,
+            "minLength": 3
+        },
+        "SubscriptionIdParameter": {
+            "name": "subscriptionId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The Azure subscription ID. This is a GUID-formatted string (e.g. 00000000-0000-0000-0000-000000000000)"
+        },
+        "ResourceGroupNameParameter": {
+            "x-ms-parameter-location": "client",
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+        },
+        "ApiVersionParameter": {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": "The API version to be used with the HTTP request (e.g. YYYY-MM-DD)."
+        }
+    }
+}
