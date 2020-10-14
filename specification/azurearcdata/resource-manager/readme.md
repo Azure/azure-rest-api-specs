@@ -26,6 +26,7 @@ These are the global settings for the azurearcdata.
 
 ``` yaml
 openapi-type: arm
+openapi-subtype: rpsaas
 tag: package-preview-2020-12-08
 ```
 
