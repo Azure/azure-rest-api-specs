@@ -112,20 +112,7 @@ These settings apply only when `--tag=package-preview-2020-10` is specified on t
 
 ```yaml $(tag) == 'package-preview-2020-10'
 input-file:
-  - Microsoft.Insights/preview/2020-10-05-preview/aiOperations_API.json
-  - Microsoft.Insights/preview/2020-10-05-preview/analyticsItems_API.json
-  - Microsoft.Insights/preview/2020-10-05-preview/componentAnnotations_API.json
-  - Microsoft.Insights/preview/2020-10-05-preview/componentApiKeys_API.json
-  - Microsoft.Insights/preview/2020-10-05-preview/componentContinuousExport_API.json
-  - Microsoft.Insights/preview/2020-10-05-preview/componentFeaturesAndPricing_API.json
-  - Microsoft.Insights/preview/2020-10-05-preview/componentProactiveDetection_API.json
-  - Microsoft.Insights/preview/2020-10-05-preview/componentWorkItemConfigs_API.json
-  - Microsoft.Insights/preview/2020-10-05-preview/components_API.json
-  - Microsoft.Insights/preview/2020-10-05-preview/favorites_API.json
-  - Microsoft.Insights/preview/2020-10-05-preview/myworkbooks_API.json
-  - Microsoft.Insights/preview/2020-10-05-preview/webTestLocations_API.json
   - Microsoft.Insights/preview/2020-10-05-preview/webTests_API.json
-  - Microsoft.Insights/preview/2020-10-05-preview/workbooks_API.json
 ```
 ### Tag: package-preview-2020-06-only
 
