@@ -1,12 +1,30 @@
 {
+  "parameters": {
+    "api-version": "2020-07-01",
+    "ruleCollectionName": "rule1",
+    "subscriptionId": "subid",
+    "resourceGroupName": "rg1",
+    "networkVirtualApplianceName": "nva",
     "parameters": {
-      "api-version": "2020-07-01",
-      "ruleCollectionName": "rule1",
-      "subscriptionId": "subid",
-      "resourceGroupName": "rg1",
-      "networkVirtualApplianceName": "nva",
-      "parameters": {
+      "properties": {
+        "rules": [
+          {
+            "protocol": "TCP",
+            "sourceAddressPrefix": "50.20.121.5/32",
+            "destinationPortRange": 22
+          }
+        ]
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "rule1",
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/networkVirtualAppliances/nva/InboundSecurityRules/rule1",
+        "etag": "W/\"72090554-7e3b-43f2-80ad-99a9020dcb11\"",
         "properties": {
+          "provisioningState": "Succeeded",
           "rules": [
             {
               "protocol": "TCP",
@@ -17,40 +35,22 @@
         }
       }
     },
-    "responses": {
-      "200": {
-        "body": {
-          "name": "rule1",
-          "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/networkVirtualAppliances/nva/InboundSecurityRules/rule1",
-          "etag": "W/\"72090554-7e3b-43f2-80ad-99a9020dcb11\"",
-          "properties": {
-            "provisioningState": "Succeeded",
-            "rules": [
-              {
-                "protocol": "TCP",
-                "sourceAddressPrefix": "50.20.121.5/32",
-                "destinationPortRange": 22
-              }
-            ]
-          }
-        }
-      },
-      "201": {
-        "body": {
-          "name": "rule1",
-          "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/networkVirtualAppliances/nva/InboundSecurityRules/rule1",
-          "etag": "W/\"72090554-7e3b-43f2-80ad-99a9020dcb11\"",
-          "properties": {
-            "provisioningState": "Succeeded",
-            "rules": [
-              {
-                "protocol": "TCP",
-                "sourceAddressPrefix": "50.20.121.5/32",
-                "destinationPortRange": 22
-              }
-            ]
-          }
+    "201": {
+      "body": {
+        "name": "rule1",
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/networkVirtualAppliances/nva/InboundSecurityRules/rule1",
+        "etag": "W/\"72090554-7e3b-43f2-80ad-99a9020dcb11\"",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "rules": [
+            {
+              "protocol": "TCP",
+              "sourceAddressPrefix": "50.20.121.5/32",
+              "destinationPortRange": 22
+            }
+          ]
         }
       }
     }
   }
+}
