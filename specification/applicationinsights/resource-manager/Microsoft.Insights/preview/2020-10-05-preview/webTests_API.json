@@ -332,26 +332,26 @@
       "description": "A container holding only the Tags for a resource, allowing the user to update the tags on a WebTest instance."
     },
     "webTestListResult": {
-      "description": "A list of 0 or more Application Insights web test definitions.",
+      "description": "A list of 0 or more Application Insights WebTest definitions.",
       "required": [
         "value"
       ],
       "properties": {
         "value": {
           "type": "array",
-          "description": "Set of Application Insights web test definitions.",
+          "description": "Set of Application Insights WebTest definitions.",
           "items": {
             "$ref": "#/definitions/WebTest"
           }
         },
         "nextLink": {
           "type": "string",
-          "description": "The link to get the next part of the returned list of web tests, should the return set be too large for a single request. May be null."
+          "description": "The link to get the next part of the returned list of WebTest, should the return set be too large for a single request. May be null."
         }
       }
     },
     "WebTest": {
-      "description": "An Application Insights web test definition.",
+      "description": "An Application Insights WebTest definition.",
       "allOf": [
         {
           "$ref": "#/definitions/WebtestsResource"
@@ -360,7 +360,7 @@
       "properties": {
         "kind": {
           "type": "string",
-          "description": "The kind of web test that this web test watches. Choices are ping and multistep.",
+          "description": "The kind of WebTest that this web test watches. Choices are ping and multistep.",
           "default": "ping",
           "enum": [
             "ping",
@@ -398,7 +398,7 @@
         },
         "Description": {
           "type": "string",
-          "description": "Purpose/user defined descriptive test for this WebTest."
+          "description": "User defined description for this WebTest."
         },
         "Enabled": {
           "type": "boolean",
@@ -460,7 +460,7 @@
         },
         "Request": {
           "type": "object",
-          "description": "the collection of request properties",
+          "description": "The collection of request properties",
           "properties": {
             "RequestUrl": {
               "type": "string",
@@ -468,7 +468,7 @@
             },
             "Headers": {
               "type": "array",
-              "description": "List of headers and their values to add to the webtest call.",
+              "description": "List of headers and their values to add to the WebTest call.",
               "items": {
                 "$ref": "#/definitions/HeaderField"
               }
@@ -483,7 +483,7 @@
             },
             "ParseDependentRequests": {
               "type": "boolean",
-              "description": "Parse Dependent request for this webtest."
+              "description": "Parse Dependent request for this WebTest."
             },
             "FollowRedirects": {
               "type": "boolean",
@@ -493,11 +493,11 @@
         },
         "ContentValidation": {
           "type": "object",
-          "description": "the collection of content validation properties",
+          "description": "The collection of content validation properties",
           "properties": {
             "ContentMatch": {
               "type": "string",
-              "description": "content to look for in the return of the webtest."
+              "description": "Content to look for in the return of the WebTest."
             },
             "IgnoreCase": {
               "type": "boolean",
@@ -521,7 +521,7 @@
         "ExpectedHttpStatusCode": {
           "type": "integer",
           "format": "int32",
-          "description": "Validate that the webtest returns the http status code provided."
+          "description": "Validate that the WebTest returns the http status code provided."
         },
         "IgnoreHttpsStatusCode": {
           "type": "boolean",
@@ -530,29 +530,29 @@
       }
     },
     "WebTestGeolocation": {
-      "description": "Geo-physical location to run a web test from. You must specify one or more locations for the test to run from.",
+      "description": "Geo-physical location to run a WebTest from. You must specify one or more locations for the test to run from.",
       "type": "object",
       "properties": {
         "Id": {
           "x-ms-client-name": "location",
           "type": "string",
-          "description": "Location ID for the webtest to run from."
+          "description": "Location ID for the WebTest to run from."
         }
       }
     },
     "HeaderField": {
-      "description": "Geo-physical location to run a web test from. You must specify one or more locations for the test to run from.",
+      "description": "A header to add to the WebTest.",
       "type": "object",
       "properties": {
         "key": {
           "x-ms-client-name": "headerFieldName",
           "type": "string",
-          "description": "the name of the header."
+          "description": "The name of the header."
         },
         "value": {
           "x-ms-client-name": "headerFieldValue",
           "type": "string",
-          "description": "the value of the header."
+          "description": "The value of the header."
         }
 
       }
@@ -572,7 +572,7 @@
       "in": "path",
       "required": true,
       "type": "string",
-      "description": "The name of the Application Insights webtest resource.",
+      "description": "The name of the Application Insights WebTest resource.",
       "x-ms-parameter-location": "method"
     }
   }
