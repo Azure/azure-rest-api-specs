@@ -26,16 +26,16 @@ These are the global settings for the azurearcdata.
 
 ``` yaml
 openapi-type: arm
-tag: package-preview-2020-09-08
+tag: package-preview-2020-12-08
 ```
 
-### Tag: package-preview-2020-09-08
+### Tag: package-preview-2020-12-08
 
-These settings apply only when `--tag=package-preview-2020-09-08` is specified on the command line.
+These settings apply only when `--tag=package-preview-2020-12-08` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2020-09-08'
+```yaml $(tag) == 'package-preview-2020-12-08'
 input-file:
-  - Microsoft.AzureArcData/preview/2020-09-08-preview/azurearcdata.json
+  - Microsoft.AzureArcData/preview/2020-12-08-preview/azurearcdata.json
 ```
 
 ---
