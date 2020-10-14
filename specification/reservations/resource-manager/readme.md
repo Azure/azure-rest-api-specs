@@ -29,6 +29,16 @@ openapi-type: arm
 tag: package-preview-2019-07-19
 ```
 
+### Tag: package-2020-10-25
+
+These settings apply only when `--tag=package-2020-10-25` is specified on the command line.
+
+``` yaml $(tag) == 'package-2020-10-25'
+input-file:
+  - Microsoft.Capacity/stable/2017-11-01/reservations.json
+  - Microsoft.Capacity/stable/2020-10-25/quota.json
+```
+
 ### Tag: package-preview-2019-07-19
 
 These settings apply only when `--tag=package-preview-2019-07-19` is specified on the command line.
