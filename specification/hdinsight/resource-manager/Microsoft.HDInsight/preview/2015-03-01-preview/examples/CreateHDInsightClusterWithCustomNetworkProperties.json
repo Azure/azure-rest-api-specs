@@ -80,9 +80,9 @@
             }
           ]
         },
-        "networkSettings": {
-          "publicNetworkAccess": "OutboundOnly",
-          "outboundOnlyPublicNetworkAccessType": "PublicLoadBalancer"
+        "networkProperties": {
+          "resourceProviderConnection": "Outbound",
+          "privateLink": "Enabled"
         }
       }
     }
@@ -96,12 +96,13 @@
         "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.HDInsight/clusters/cluster1",
         "name": "cluster1",
         "type": "Microsoft.HDInsight/clusters",
-        "location": "East US",
+        "location": "South Central US",
         "etag": "fdf2a6e8-ce83-42cc-8c2d-0ceb11a370ff",
         "tags": null,
         "properties": {
           "clusterVersion": "3.6.1000.67",
           "osType": "Linux",
+          "clusterId": "8186508b6234470e9d16c9e8e13bd821",
           "clusterDefinition": {
             "blueprint": "https://blueprints.azurehdinsight.net/hadoop-3.6.1000.67.2005040905.json",
             "kind": "hadoop"
@@ -142,9 +143,9 @@
               }
             ]
           },
-          "networkSettings": {
-            "publicNetworkAccess": "OutboundOnly",
-            "outboundOnlyPublicNetworkAccessType": "PublicLoadBalancer"
+          "networkProperties": {
+            "resourceProviderConnection": "Outbound",
+            "privateLink": "Enabled"
           },
           "provisioningState": "Succeeded",
           "clusterState": "Running",
