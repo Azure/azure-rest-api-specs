@@ -214,7 +214,7 @@
             "name": "body",
             "description": "Data Version entity to create or update.",
             "schema": {
-              "$ref": "#/definitions/DataVersionResourceRequest"
+              "$ref": "#/definitions/DataVersionResource"
             }
           }
         ],
@@ -261,32 +261,24 @@
   },
   "definitions": {
     "DataVersionResource": {
+      "description": "Azure Resource Manager resource Envelope",
+      "required": [
+        "properties"
+      ],
       "type": "object",
       "properties": {
-        "id": {
-          "type": "string",
-          "description": "The resource URL of the entity (not URL encoded).",
-          "readOnly": true
-        },
-        "name": {
-          "type": "string",
-          "description": "The name of the resource entity.",
-          "readOnly": true
-        },
-        "type": {
-          "type": "string",
-          "description": "The resource provider and type.",
-          "readOnly": true
-        },
         "properties": {
-          "$ref": "#/definitions/DataVersion"
+          "description": "Additional attributes of the entity.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/DataVersion"
+            }
+          ]
         },
         "systemData": {
           "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
         }
       },
-      "additionalProperties": false,
-      "description": "Data Version Azure Resource.",
       "allOf": [
         {
           "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource"
@@ -311,31 +303,24 @@
     "DataVersion": {
       "description": "Details of an Data Version",
       "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Asset"
+        }
+      ],
       "properties": {
         "datasetType": {
           "$ref": "#/definitions/DatasetType"
-        },
-        "description": {
-          "description": "The asset description text.",
-          "type": "string"
-        },
+        }
+      }
+    },
+    "Asset": {
+      "description": "Details of an Asset Container",
+      "type": "object",
+      "properties": {
         "datastoreId": {
           "description": "The asset datastoreId",
           "type": "string"
-        },
-        "tags": {
-          "description": "The asset tag dictionary.",
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "properties": {
-          "description": "The asset property dictionary.",
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          }
         },
         "assetPaths": {
           "description": "Details of asset paths in the datastore.",
@@ -352,6 +337,35 @@
             "items": {
               "type": "string"
             }
+          }
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ResourceBase"
+        }
+      ]
+    },
+    "ResourceBase": {
+      "description": "Details of an Resource Base",
+      "type": "object",
+      "properties": {
+        "description": {
+          "description": "The resource base description text.",
+          "type": "string"
+        },
+        "tags": {
+          "description": "The resource base tag dictionary.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "properties": {
+          "description": "The resource base property dictionary.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
           }
         }
       }
@@ -389,16 +403,6 @@
         "isDirectory": {
           "description": "Whether the path defines a directory or a single file.",
           "type": "boolean"
-        }
-      },
-      "additionalProperties": false
-    },
-    "DataVersionResourceRequest": {
-      "description": "Azure Resource Management create resource envelope.",
-      "type": "object",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/DataVersion"
         }
       },
       "additionalProperties": false

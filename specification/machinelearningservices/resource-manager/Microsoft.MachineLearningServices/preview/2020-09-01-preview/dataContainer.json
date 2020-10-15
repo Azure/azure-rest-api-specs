@@ -201,7 +201,7 @@
             "name": "body",
             "description": "Data Container entity to create or update.",
             "schema": {
-              "$ref": "#/definitions/AssetContainerResourceRequest"
+              "$ref": "#/definitions/AssetContainerResource"
             }
           }
         ],
@@ -234,32 +234,24 @@
   },
   "definitions": {
     "AssetContainerResource": {
+      "description": "Azure Resource Manager resource Envelope",
+      "required": [
+        "properties"
+      ],
       "type": "object",
       "properties": {
-        "id": {
-          "type": "string",
-          "description": "The resource URL of the entity (not URL encoded).",
-          "readOnly": true
-        },
-        "name": {
-          "type": "string",
-          "description": "The name of the resource entity.",
-          "readOnly": true
-        },
-        "type": {
-          "type": "string",
-          "description": "The resource provider and type.",
-          "readOnly": true
-        },
         "properties": {
-          "$ref": "#/definitions/AssetContainer"
+          "description": "Additional attributes of the entity.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/AssetContainer"
+            }
+          ]
         },
         "systemData": {
           "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
         }
       },
-      "additionalProperties": false,
-      "description": "Asset Container Azure Resource.",
       "allOf": [
         {
           "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource"
@@ -284,72 +276,35 @@
     "AssetContainer": {
       "description": "Details of an Asset Container",
       "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ResourceBase"
+        }
+      ]
+    },
+    "ResourceBase": {
+      "description": "Details of an Resource Base",
+      "type": "object",
       "properties": {
         "description": {
-          "description": "The asset description text.",
-          "type": "string"
-        },
-        "datastoreId": {
-          "description": "The asset datastoreId",
+          "description": "The resource base description text.",
           "type": "string"
         },
         "tags": {
-          "description": "The asset tag dictionary.",
+          "description": "The resource base tag dictionary.",
           "type": "object",
           "additionalProperties": {
             "type": "string"
           }
         },
         "properties": {
-          "description": "The asset property dictionary.",
+          "description": "The resource base property dictionary.",
           "type": "object",
           "additionalProperties": {
             "type": "string"
-          }
-        },
-        "assetPaths": {
-          "description": "Details of asset paths in the datastore.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/AssetPath"
-          }
-        },
-        "linkedResourceIds": {
-          "description": "Associated ARM resources. Key is the link type, value is a list of ARM IDs.",
-          "type": "object",
-          "additionalProperties": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
           }
         }
       }
-    },
-    "AssetPath": {
-      "description": "Details of an AssetUri.",
-      "type": "object",
-      "properties": {
-        "path": {
-          "description": "The path of file/directory.",
-          "type": "string"
-        },
-        "isDirectory": {
-          "description": "Whether the path defines a directory or a single file.",
-          "type": "boolean"
-        }
-      },
-      "additionalProperties": false
-    },
-    "AssetContainerResourceRequest": {
-      "description": "Azure Resource Management create resource envelope.",
-      "type": "object",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/AssetContainer"
-        }
-      },
-      "additionalProperties": false
     }
   }
 }
