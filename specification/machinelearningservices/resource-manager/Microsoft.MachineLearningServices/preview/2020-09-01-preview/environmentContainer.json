@@ -108,21 +108,23 @@
       }
     },
     "EnvironmentContainerResource": {
-      "required": [
-        "properties"
-      ],
-      "type": "object",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/EnvironmentContainer"
-        },
-        "systemData": {
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
-        }
-      },
       "allOf": [
         {
-          "$ref": "machineLearningServices.json#/definitions/ResourceBase"
+          "required": [
+            "properties"
+          ],
+          "type": "object",
+          "properties": {
+            "properties": {
+              "$ref": "#/definitions/EnvironmentContainer"
+            },
+            "systemData": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
+            }
+          }
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/Resource"
         }
       ]
     },
