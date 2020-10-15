@@ -384,21 +384,6 @@
       ],
       "type": "object",
       "properties": {
-        "id": {
-          "description": "The resource URL of the entity (not URL encoded).",
-          "type": "string",
-          "readOnly": true
-        },
-        "name": {
-          "description": "The name of the resource entity.",
-          "type": "string",
-          "readOnly": true
-        },
-        "type": {
-          "description": "The resource provider and type.",
-          "type": "string",
-          "readOnly": true
-        },
         "properties": {
           "$ref": "#/definitions/EnvironmentSpecificationVersion"
         },
@@ -406,7 +391,11 @@
           "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
         }
       },
-      "x-ms-azure-resource": true
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/Resource"
+        }
+      ]
     },
     "EnvironmentSpecificationVersionResourceArmPaginatedResult": {
       "type": "object",
