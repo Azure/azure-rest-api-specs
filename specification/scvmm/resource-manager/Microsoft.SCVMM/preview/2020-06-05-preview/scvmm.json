@@ -145,7 +145,10 @@
             }
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
       },
       "delete": {
         "tags": [
@@ -283,7 +286,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Lists all VmmServers under the resouce group.",
+            "description": "Lists all VmmServers under the resource group.",
             "schema": {
               "$ref": "#/definitions/VMMServerListResult"
             }
@@ -487,7 +490,10 @@
             }
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
       },
       "delete": {
         "tags": [
@@ -625,7 +631,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Lists all Clouds under the resouce group.",
+            "description": "Lists all Clouds under the resource group.",
             "schema": {
               "$ref": "#/definitions/CloudListResult"
             }
@@ -793,7 +799,10 @@
             }
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
       },
       "delete": {
         "tags": [
@@ -931,7 +940,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Lists all VirtualNetworks under the resouce group.",
+            "description": "Lists all VirtualNetworks under the resource group.",
             "schema": {
               "$ref": "#/definitions/VirtualNetworkListResult"
             }
@@ -1099,7 +1108,10 @@
             }
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
       },
       "delete": {
         "tags": [
@@ -1410,7 +1422,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Lists all VirtualMachines under the resouce group.",
+            "description": "Lists all VirtualMachines under the resource group.",
             "schema": {
               "$ref": "#/definitions/VirtualMachineListResult"
             }
@@ -1578,7 +1590,10 @@
             }
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
       },
       "delete": {
         "tags": [
@@ -1716,7 +1731,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Lists all VirtualMachineTemplates under the resouce group.",
+            "description": "Lists all VirtualMachineTemplates under the resource group.",
             "schema": {
               "$ref": "#/definitions/VirtualMachineTemplateListResult"
             }
@@ -2173,7 +2188,6 @@
     "VirtualMachineProperties": {
       "description": "Defines the resource properties.",
       "required": [
-        "vmmServerId",
         "cloudId"
       ],
       "properties": {

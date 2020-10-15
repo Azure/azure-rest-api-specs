@@ -14,6 +14,6 @@ These settings apply only when `--tag=package-2020-06-05-preview --go` is specif
 Please also specify `--go-sdks-folder=<path to the root directory of your azure-sdk-for-go clone>`.
 
 ```yaml $(tag) == 'package-2020-06-05-preview' && $(go)
-namespace: Microsoft.SCVMM
-output-folder: $(go-sdk-folder)/services/preview/$(namespace)/management/2020-06-05-preview/$(namespace)
+namespace: scvmm
+output-folder: $(go-sdk-folder)/services/preview/$(namespace)/mgmt/2020-06-05-preview/$(namespace)
 ```

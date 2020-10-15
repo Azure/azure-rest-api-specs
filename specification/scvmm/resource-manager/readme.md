@@ -26,6 +26,7 @@ These are the global settings for the scvmm.
 
 ```yaml
 openapi-type: arm
+openapi-subtype: rpaas
 tag: package-2020-06-05-preview
 ```
 
@@ -35,7 +36,7 @@ These settings apply only when `--tag=package-2020-06-05-preview` is specified o
 
 ```yaml $(tag) == 'package-2020-06-05-preview'
 input-file:
-  - Microsoft.SCVMM\preview\2020-06-05-preview\scvmm.json
+  - Microsoft.SCVMM/preview/2020-06-05-preview/scvmm.json
 ```
 
 ---
