@@ -73,6 +73,13 @@ directive:
     reason: Does not apply to sqlPool and bigDataPool as they are nested tracked resources
   - suppress: TrackedResourceListBySubscription
     reason: Does not apply to sqlPool and bigDataPool as they are nested tracked resources
+  - from: Microsoft.Synapse/preview/2019-06-01-preview/sqlPool.json
+    where: 
+        - $.definitions.SqlPoolVulnerabilityAssessmentRuleBaseline
+        - $.definitions.DataMaskingPolicy
+    suppress: 
+        - R4015
+    reason: SQL doesn't support 'list' operation everywhere, so we cannot support List for certain Sql pool operations
 ```
 
 ---
