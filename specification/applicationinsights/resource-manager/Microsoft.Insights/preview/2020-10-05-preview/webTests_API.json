@@ -3,7 +3,7 @@
   "info": {
     "title": "ApplicationInsightsManagementClient",
     "description": "Azure Application Insights client for web test based alerting.",
-    "version": "2015-05-01"
+    "version": "2020-10-05-preview"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -34,6 +34,44 @@
     }
   },
   "paths": {
+    "/providers/Microsoft.Insights/operations": {
+      "get": {
+        "tags": [
+          "Operations"
+        ],
+        "summary": "List available operations.",
+        "description": "List the available operations supported by the Microsoft.EventGrid resource provider.",
+        "operationId": "Operations_List",
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/OperationsListResult"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 Bad Request.\n\n * 500 Internal Server Error."
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Operations_List": {
+            "$ref": "./examples/Operations_List.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Insights/webtests": {
       "get": {
         "description": "Get all Application Insights web tests defined within a specified resource group.",
@@ -332,26 +370,26 @@
       "description": "A container holding only the Tags for a resource, allowing the user to update the tags on a WebTest instance."
     },
     "webTestListResult": {
-      "description": "A list of 0 or more Application Insights web test definitions.",
+      "description": "A list of 0 or more Application Insights WebTest definitions.",
       "required": [
         "value"
       ],
       "properties": {
         "value": {
           "type": "array",
-          "description": "Set of Application Insights web test definitions.",
+          "description": "Set of Application Insights WebTest definitions.",
           "items": {
             "$ref": "#/definitions/WebTest"
           }
         },
         "nextLink": {
           "type": "string",
-          "description": "The link to get the next part of the returned list of web tests, should the return set be too large for a single request. May be null."
+          "description": "The link to get the next part of the returned list of WebTest, should the return set be too large for a single request. May be null."
         }
       }
     },
     "WebTest": {
-      "description": "An Application Insights web test definition.",
+      "description": "An Application Insights WebTest definition.",
       "allOf": [
         {
           "$ref": "#/definitions/WebtestsResource"
@@ -360,7 +398,7 @@
       "properties": {
         "kind": {
           "type": "string",
-          "description": "The kind of web test that this web test watches. Choices are ping and multistep.",
+          "description": "The kind of WebTest that this web test watches. Choices are ping and multistep.",
           "default": "ping",
           "enum": [
             "ping",
@@ -398,7 +436,7 @@
         },
         "Description": {
           "type": "string",
-          "description": "Purpose/user defined descriptive test for this WebTest."
+          "description": "User defined description for this WebTest."
         },
         "Enabled": {
           "type": "boolean",
@@ -419,14 +457,16 @@
         "Kind": {
           "x-ms-client-name": "WebTestKind",
           "type": "string",
-          "description": "The kind of web test this is, valid choices are ping and multistep.",
+          "description": "The kind of web test this is, valid choices are ping, multistep, basic, and standard.",
           "default": "ping",
           "enum": [
             "ping",
-            "multistep"
+            "multistep",
+            "basic",
+            "standard"
           ],
           "x-ms-enum": {
-            "name": "WebTestKind",
+            "name": "WebTestKindEnum",
             "modelAsString": false
           }
         },
@@ -455,17 +495,164 @@
           "type": "string",
           "description": "Current state of this component, whether or not is has been provisioned within the resource group it is defined. Users cannot change this value but are able to read from it. Values will include Succeeded, Deploying, Canceled, and Failed.",
           "readOnly": true
+        },
+        "Request": {
+          "type": "object",
+          "description": "The collection of request properties",
+          "properties": {
+            "RequestUrl": {
+              "type": "string",
+              "description": "Url location to test."
+            },
+            "Headers": {
+              "type": "array",
+              "description": "List of headers and their values to add to the WebTest call.",
+              "items": {
+                "$ref": "#/definitions/HeaderField"
+              }
+            },
+            "HttpVerb": {
+              "type": "string",
+              "description": "Http verb to use for this web test."
+            },
+            "RequestBody": {
+              "type": "string",
+              "description": "Base64 encoded string body to send with this web test."
+            },
+            "ParseDependentRequests": {
+              "type": "boolean",
+              "description": "Parse Dependent request for this WebTest."
+            },
+            "FollowRedirects": {
+              "type": "boolean",
+              "description": "Follow redirects for this web test."
+            }
+          }
+        },
+        "ContentValidation": {
+          "type": "object",
+          "description": "The collection of content validation properties",
+          "properties": {
+            "ContentMatch": {
+              "type": "string",
+              "description": "Content to look for in the return of the WebTest."
+            },
+            "IgnoreCase": {
+              "type": "boolean",
+              "description": "When set, this value makes the ContentMatch validation case insensitive."
+            },
+            "PassIfTextFound": {
+              "type": "boolean",
+              "description": "When true, validation will pass if there is a match for the ContentMatch string.  If false, validation will fail if there is a match"
+            }
+          }
+        },
+        "SSLCheck": {
+          "type": "boolean",
+          "description": "Checks to see if the SSL cert is still valid."
+        },
+        "SSLCertRemainingLifetimeCheck": {
+          "type": "integer",
+          "format": "int32",
+          "description": "A number of days to check still remain before the the existing SSL cert expires."
+        },
+        "ExpectedHttpStatusCode": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Validate that the WebTest returns the http status code provided."
+        },
+        "IgnoreHttpsStatusCode": {
+          "type": "boolean",
+          "description": "When set, validation will ignore the status code."
         }
       }
     },
     "WebTestGeolocation": {
-      "description": "Geo-physical location to run a web test from. You must specify one or more locations for the test to run from.",
+      "description": "Geo-physical location to run a WebTest from. You must specify one or more locations for the test to run from.",
       "type": "object",
       "properties": {
         "Id": {
           "x-ms-client-name": "location",
           "type": "string",
-          "description": "Location ID for the webtest to run from."
+          "description": "Location ID for the WebTest to run from."
+        }
+      }
+    },
+    "HeaderField": {
+      "description": "A header to add to the WebTest.",
+      "type": "object",
+      "properties": {
+        "key": {
+          "x-ms-client-name": "headerFieldName",
+          "type": "string",
+          "description": "The name of the header."
+        },
+        "value": {
+          "x-ms-client-name": "headerFieldValue",
+          "type": "string",
+          "description": "The value of the header."
+        }
+      }
+    },
+    "OperationsListResult": {
+      "description": "Result of the List Operations operation",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "A collection of operations",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Operation"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "URL to get the next set of operation list results if there are any."
+        }
+      }
+    },
+    "Operation": {
+      "description": "Represents an operation returned by the GetOperations request",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Name of the operation",
+          "type": "string"
+        },
+        "display": {
+          "$ref": "#/definitions/OperationInfo",
+          "description": "Display name of the operation"
+        },
+        "origin": {
+          "description": "Origin of the operation",
+          "type": "string"
+        },
+        "properties": {
+          "description": "Properties of the operation",
+          "type": "object",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "OperationInfo": {
+      "description": "Information about an operation",
+      "type": "object",
+      "properties": {
+        "provider": {
+          "description": "Name of the provider",
+          "type": "string"
+        },
+        "resource": {
+          "description": "Name of the resource type",
+          "type": "string"
+        },
+        "operation": {
+          "description": "Name of the operation",
+          "type": "string"
+        },
+        "description": {
+          "description": "Description of the operation",
+          "type": "string"
         }
       }
     }
@@ -484,7 +671,7 @@
       "in": "path",
       "required": true,
       "type": "string",
-      "description": "The name of the Application Insights webtest resource.",
+      "description": "The name of the Application Insights WebTest resource.",
       "x-ms-parameter-location": "method"
     }
   }
