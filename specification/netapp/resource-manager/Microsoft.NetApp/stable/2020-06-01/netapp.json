@@ -4366,6 +4366,16 @@
       "description": "Backup properties",
       "type": "object",
       "properties": {
+        "backupId": {
+          "title": "backupId",
+          "type": "string",
+          "readOnly": true,
+          "description": "UUID v4 used to identify the Backup",
+          "pattern": "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$",
+          "maxLength": 36,
+          "minLength": 36,
+          "example": "9760acf5-4638-11e7-9bdb-020073ca3333"
+        },
         "creationDate": {
           "title": "name",
           "type": "string",
