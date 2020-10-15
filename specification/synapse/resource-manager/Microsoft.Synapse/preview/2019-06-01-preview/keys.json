@@ -136,6 +136,15 @@
             },
             {
               "$ref": "#/parameters/keyNameParameter"
+            },
+            {
+              "schema": {
+                "$ref": "#/definitions/KeyProperties"
+              },
+              "in": "body",
+              "name": "keyProperties",
+              "required": true,
+              "description": "Key put request properties"
             }
           ],
           "responses": {
@@ -190,7 +199,10 @@
           ],
           "responses": {
             "200": {
-              "description": "OK"
+              "description": "OK",
+              "schema": {
+                "$ref": "#/definitions/Key"
+              }
             },
             "204": {
               "description": "Keys resource not found."
@@ -210,6 +222,63 @@
             "Delete a workspace key": {
               "$ref": "./examples/DeleteKey.json"
             }
+          }
+        }
+      },
+      "patch": {
+        "operationId": "Keys_Patch",
+        "description": "Patch a workspace key",
+        "tags": [
+          "Keys"
+        ],
+        "deprecated": false,
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./workspace.json#/parameters/workspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/keyNameParameter"
+          },
+          {
+            "schema": {
+              "$ref": "#/definitions/KeyProperties"
+            },
+            "in": "body",
+            "name": "keyProperties",
+            "required": true,
+            "description": "Key patch request properties"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Key"
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/ErrorContract"
+            },
+            "description": "*** Error Responses: ***\n\n * 500 InternalServerError- Some error occurred while deleting Workspace Key."
+          }
+        },
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-examples": {
+          "Patch a workspace key": {
+            "$ref": "./examples/UpdateKey.json"
           }
         }
       }
