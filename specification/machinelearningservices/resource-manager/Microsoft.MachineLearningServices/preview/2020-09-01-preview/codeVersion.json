@@ -326,21 +326,6 @@
     "CodeVersionResource": {
       "type": "object",
       "properties": {
-        "id": {
-          "type": "string",
-          "description": "The resource URL of the entity (not URL encoded).",
-          "readOnly": true
-        },
-        "name": {
-          "type": "string",
-          "description": "The name of the resource entity.",
-          "readOnly": true
-        },
-        "type": {
-          "type": "string",
-          "description": "The resource provider and type.",
-          "readOnly": true
-        },
         "properties": {
           "$ref": "#/definitions/CodeVersion"
         },
@@ -348,9 +333,13 @@
           "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
         }
       },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/Resource"
+        }
+      ],
       "additionalProperties": false,
-      "description": "Azure Resource Manager resource Envelope",
-      "x-ms-azure-resource": true
+      "description": "Azure Resource Manager resource Envelope"
     },
     "CodeVersionResourcePaginatedResult": {
       "type": "object",
