@@ -2745,8 +2745,8 @@
         }
       }
     },
-    "Resource": {
-      "description": "Azure Resource Manager resource envelope.",
+    "ResourceBase": {
+      "description": "Azure Resource Manager resource base envelope.",
       "x-ms-azure-resource": true,
       "properties": {
         "id": {
@@ -2759,6 +2759,22 @@
           "type": "string",
           "readOnly": true
         },
+        "type": {
+          "description": "Specifies the type of the resource.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "Resource": {
+      "description": "Azure Resource Manager resource envelope.",
+      "x-ms-azure-resource": true,
+      "allOf": [
+        {
+          "$ref": "#/definitions/ResourceBase"
+        }
+      ],
+      "properties": {
         "identity": {
           "$ref": "#/definitions/Identity",
           "description": "The identity of the resource."
@@ -2766,11 +2782,6 @@
         "location": {
           "description": "Specifies the location of the resource.",
           "type": "string"
-        },
-        "type": {
-          "description": "Specifies the type of the resource.",
-          "type": "string",
-          "readOnly": true
         },
         "tags": {
           "description": "Contains resource tags defined as key/value pairs.",
