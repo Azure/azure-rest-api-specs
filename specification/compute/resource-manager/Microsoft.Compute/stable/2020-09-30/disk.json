@@ -1681,6 +1681,10 @@
             "modelAsString": true
           }
         },
+        "purchasePlan": {
+          "$ref": "#/definitions/PurchasePlan",
+          "description": "Purchase Plan Information of the Virtual Machine persisted on the Disk."
+        },
         "creationData": {
           "$ref": "#/definitions/CreationData",
           "description": "Disk source information. CreationData information cannot be changed after the disk has been created."
@@ -1799,6 +1803,10 @@
             "name": "HyperVGeneration",
             "modelAsString": true
           }
+        },
+        "purchasePlan": {
+          "$ref": "#/definitions/PurchasePlan",
+          "description": "Purchase Plan Information of the Virtual Machine persisted on the Disk."
         },
         "creationData": {
           "$ref": "#/definitions/CreationData",
@@ -2318,6 +2326,32 @@
       ],
       "description": "The source image used for creating the disk."
     },
+    "PurchasePlan": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name is the Purchase Plan Id."
+        },
+        "publisher": {
+          "type": "string",
+          "description": "The VM Image Publisher Id."
+        },
+        "product": {
+          "type": "string",
+          "description": "Specifies the product of the image from the marketplace. This is the same value as Offer under the imageReference element."
+        },
+        "promotionCode": {
+          "type": "string",
+          "description": "The Offer Promotion Code."
+        }
+      },
+      "required": [
+        "name",
+        "publisher",
+        "product"
+      ],
+      "description": "Specifies information about the marketplace image used to create the virtual machine."
+    },
     "GrantAccessData": {
       "properties": {
         "access": {
@@ -2799,6 +2833,10 @@
             "name": "HyperVGeneration",
             "modelAsString": true
           }
+        },
+        "purchasePlan": {
+          "$ref": "#/definitions/PurchasePlan",
+          "description": "Purchase Plan Information of the Virtual Machine persisted on the Disk."
         },
         "familyId": {
           "type": "string",
