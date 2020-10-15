@@ -34,7 +34,7 @@
     }
   },
   "paths": {
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/environments/{environmentName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/environments/{environmentName}/versions/{environmentVersion}": {
       "put": {
         "tags": [
           "EnvironmentSpecification"
@@ -60,6 +60,9 @@
           },
           {
             "$ref": "#/parameters/EnvironmentNameParameter"
+          },
+          {
+            "$ref": "#/parameters/EnvironmentVersionParameter"
           },
           {
             "in": "body",
@@ -89,9 +92,7 @@
             }
           }
         }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/environments/{environmentName}/versions/{environmentVersion}": {
+      },
       "get": {
         "tags": [
           "EnvironmentSpecification"
@@ -138,6 +139,50 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/environments/{environmentName}/versions/latest": {
+      "get": {
+        "tags": [
+          "EnvironmentSpecification"
+        ],
+        "operationId": "EnvironmentSpecifications_Get",
+        "x-ms-examples": {
+          "Get Environment Specification Version.": {
+            "$ref": "./examples/getEnvironmentSpecification.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "machineLearningServices.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/APIVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/EnvironmentNameParameter"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "machineLearningServices.json#/definitions/MachineLearningServiceError"
+            }
+          },
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/EnvironmentSpecificationVersionResource"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/environments/{environmentName}/versions": {
       "get": {
         "tags": [
@@ -148,6 +193,9 @@
           "List Environment Specification Version.": {
             "$ref": "./examples/listEnvironmentSpecificationVersions.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         },
         "parameters": [
           {
