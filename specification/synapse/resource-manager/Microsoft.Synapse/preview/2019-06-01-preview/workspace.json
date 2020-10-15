@@ -493,6 +493,9 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces/{workspaceName}/sqlAdministrators/activeDirectory": {
+      "$ref": "#/paths/~1subscriptions~1%7BsubscriptionId%7D~1resourceGroups~1%7BresourceGroupName%7D~1providers~1Microsoft.Synapse~1workspaces~1%7BworkspaceName%7D~1administrators~1activeDirectory"
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces/{workspaceName}/managedIdentitySqlControlSettings/default": {
       "get": {
         "operationId": "WorkspaceManagedIdentitySqlControlSettings_Get",
@@ -512,8 +515,7 @@
           }
         ],
         "responses": {
-          "200": {
-            "schema": {
+          "200": {"schema": {
               "$ref": "#/definitions/ManagedIdentitySqlControlSettingsModel"
             },
             "description": "OK"
@@ -580,6 +582,177 @@
         "x-ms-examples": {
           "Create or update managed identity sql control settings": {
             "$ref": "./examples/CreateOrUpdateManagedIdentitySqlControlSettings.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Synapse/workspaces/{workspaceName}/scopePools/{scopePoolName}": {
+      "delete": {
+        "operationId": "ScopePools_Delete",
+        "description": "Deletes a scope pool",
+        "tags": [
+          "ScopePools"
+        ],
+        "deprecated": false,
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/workspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/scopePoolNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "type": "object"
+            },
+            "description": "OK"
+          },
+          "202": {
+            "schema": {
+              "type": "object"
+            },
+            "description": ""
+          },
+          "204": {
+            "description": ""
+          },
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/ErrorContract"
+            },
+            "description": ""
+          }
+        },
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "Delete scope pool in workspace": {
+            "$ref": "./examples/DeleteScopePool.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Synapse/workspaces/{workspaceName}/privateEndpointConnections/{privateEndpointConnectionName}": {
+      "get": {
+        "operationId": "GetPrivateEndpointConnectionInWorkspace",
+        "description": "Get PrivateEndpointConnection by name in workspace",
+        "tags": [
+          "Workspace",
+          "PrivateEndpointConnection"
+        ],
+        "deprecated": false,
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/workspaceNameParameter"
+          },
+          {
+            "$ref": "../../../../common/v1/privateEndpintConnection.json#/parameters/PrivateEndpointConnectionNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "../../../../common/v1/privateEndpintConnection.json#/definitions/PrivateEndpointConnection"
+            },
+            "description": "OK"
+          },
+          "404": {
+            "description": "Not found"
+          },
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/ErrorContract"
+            },
+            "description": ""
+          }
+        },
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-examples": {
+          "Delete a workspace": {
+            "$ref": "./examples/GetPrivateEndpointConnectionInWorkspace.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Synapse/workspaces/{workspaceName}/privateEndpointConnectionProxies/{privateEndpointConnectionProxyName}": {
+      "get": {
+        "operationId": "GetPrivateEndpointConnectionProxyInWorkspace",
+        "description": "Get PrivateEndpointConnectionProxy by name in workspace",
+        "tags": [
+          "Workspace",
+          "PrivateEndpointConnectionProxy"
+        ],
+        "deprecated": false,
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/workspaceNameParameter"
+          },
+          {
+            "$ref": "../../../../common/v1/privateEndpintConnection.json#/parameters/PrivateEndpointConnectionProxyNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "../../../../common/v1/privateEndpintConnection.json#/definitions/PrivateEndpointConnectionProxy"
+            },
+            "description": "OK"
+          },
+          "404": {
+            "description": "Not found"
+          },
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/ErrorContract"
+            },
+            "description": ""
+          }
+        },
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-examples": {
+          "Get PrivateEndpointConnectionProxy by name in workspace": {
+            "$ref": "./examples/GetPrivateEndpointConnectionProxyInWorkspace.json"
           }
         }
       }
@@ -937,7 +1110,15 @@
       "in": "path",
       "required": true,
       "type": "string",
-      "description": "The name of the workspace",
+      "description": "Name of the workspace",
+      "x-ms-parameter-location": "method"
+    },
+    "scopePoolNameParameter": {
+      "name": "scopePoolName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Name of the scope pool",
       "x-ms-parameter-location": "method"
     }
   }

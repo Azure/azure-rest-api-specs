@@ -315,6 +315,105 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Synapse/privateLinkHubs/{privateLinkHubName}/privateEndpointConnectionProxies/{privateEndpointConnectionProxyName}": {
+      "get": {
+        "operationId": "GetPrivateLinkHubPrivateEndpointConnectionProxies",
+        "description": "Get PrivateEndpointConnectionProxy by name in the PrivateLinkHub",
+        "tags": [
+          "PrivateLinkHubs",
+          "PrivateEndpointConnectionProxy"
+        ],
+        "deprecated": false,
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/privateLinkHubNameParameter"
+          },
+          {
+            "$ref": "#/parameters/privateEndpointConnectionProxyNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointConnectionForPrivateLinkHubProxy"
+            },
+            "description": "PrivateEndpointConnectionProxy resource details"
+          },
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/ErrorContract"
+            },
+            "description": ""
+          }
+        },
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-examples": {
+          "Get PrivateEndpointConnectionProxy by name in the PrivateLinkHub": {
+            "$ref": "./examples/GetPrivateLinkHubPrivateEndpointConnectionProxies.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Synapse/privateLinkHubs/{privateLinkHubName}/privateEndpointConnections": {
+      "get": {
+        "operationId": "GetAllPrivateEndpointConnectionsPrivateLinkHub",
+        "description": "Get all PrivateEndpointConnections in the PrivateLinkHub",
+        "tags": [
+          "PrivateLinkHubs",
+          "PrivateEndpointConnections"
+        ],
+        "deprecated": false,
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/privateLinkHubNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "../../../../common/v1/privateEndpintConnection.json#/definitions/PrivateEndpointConnectionForPrivateLinkHub_ResourceCollectionResponse"
+            },
+            "description": "List of PrivateEndpointConnections in PrivateLinkHub"
+          },
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/ErrorContract"
+            },
+            "description": ""
+          }
+        },
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-examples": {
+          "Get a privateLinkHub": {
+            "$ref": "./examples/GetAllPrivateEndpointConnectionsPrivateLinkHub.json"
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -415,7 +514,15 @@
       "in": "path",
       "required": true,
       "type": "string",
-      "description": "The name of the privateLinkHub",
+      "description": "Name of the privateLinkHub",
+      "x-ms-parameter-location": "method"
+    },
+    "privateEndpointConnectionProxyNameParameter": {
+      "name": "privateEndpointConnectionProxyName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Name of the PrivateEndpointConnectionProxy",
       "x-ms-parameter-location": "method"
     }
   }

@@ -17,6 +17,46 @@
         }
       }
     },
+    "ErrorDetail": {
+      "properties": {
+        "code": {
+          "type": "string"
+        },
+        "message": {
+          "type": "string"
+        },
+        "target": {
+          "type": "string"
+        }
+      }
+    },
+    "ErrorResponse": {
+      "properties": {
+        "code": {
+          "type": "string"
+        },
+        "message": {
+          "type": "string"
+        },
+        "target": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/ErrorDetail"
+          }
+        }
+      }
+    },
+    "WorkspaceSubResource": {
+      "allOf": [
+        {
+          "$ref": "../../../common-types/resource-management/v1/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
     "Sku": {
       "description": "An ARM Resource SKU.",
       "required": [
@@ -107,6 +147,14 @@
       "name": "sqlDatabaseName",
       "in": "path",
       "description": "The name of the sql database.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "KeyNameParameter": {
+      "name": "keyName",
+      "in": "path",
+      "description": "Name of the key.",
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method"
