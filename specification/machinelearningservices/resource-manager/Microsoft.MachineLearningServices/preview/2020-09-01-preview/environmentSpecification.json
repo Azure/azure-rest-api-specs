@@ -378,23 +378,21 @@
       }
     },
     "EnvironmentSpecificationVersionResource": {
+      "required": [
+        "properties"
+      ],
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/EnvironmentSpecificationVersion"
+        },
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
+        }
+      },
       "allOf": [
         {
-          "required": [
-            "properties"
-          ],
-          "type": "object",
-          "properties": {
-            "properties": {
-              "$ref": "#/definitions/EnvironmentSpecificationVersion"
-            },
-            "systemData": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
-            }
-          }
-        },
-        {
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/Resource"
+          "$ref": "machineLearningServices.json#/definitions/ResourceBase"
         }
       ]
     },
