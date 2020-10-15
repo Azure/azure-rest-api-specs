@@ -126,6 +126,7 @@
       "name": "metroId",
       "description": "The unique id of the metro area. Can be retrieved via [Get Metro Area API](https://aka.ms/AzureMapsMobilityMetro).",
       "type": "integer",
+      "format": "int32",
       "in": "query",
       "required": false,
       "x-ms-parameter-location": "method"
@@ -254,7 +255,8 @@
             "description": "metroId. The unique id of the metro area. Required parameter specifying the required metro area to search in. Can be retrieved via [Get Metro Area API](https://aka.ms/AzureMapsMobilityTransitRoute).",
             "in": "query",
             "required": true,
-            "type": "integer"
+            "type": "integer",
+            "format": "int32"
           },
           {
             "name": "detailType",
@@ -362,14 +364,16 @@
             "description": "Maximum number of responses that will be returned. Default is 3, minimum 1 and maximum 100. Sort order is based on distance from input location.",
             "in": "query",
             "required": false,
-            "type": "integer"
+            "type": "integer",
+            "format": "int32"
           },
           {
             "name": "radius",
             "description": "Specifies the search area to constrain a search. The radius in meters  to for the results to be constrained to the defined area. Default value is 30 meters, minimum 1 meter and maximum 5000 meters (5km).",
             "in": "query",
             "required": false,
-            "type": "integer"
+            "type": "integer",
+            "format": "int32"
           },
           {
             "name": "objectType",
@@ -1180,13 +1184,15 @@
             "description": "The maximum arrivals to return. If not specified, the system default will be used. For stops max number of arrivals per stop. For lines max arrivals per stop on the line. For everything else max arrivals overall.",
             "in": "query",
             "required": false,
-            "type": "integer"
+            "type": "integer",
+            "format": "int32"
           },
           {
             "name": "maxMinutesInFuture",
             "description": "The maximum time (in minutes) in the future to return arrivals for. If not specified, the system default (30 minutes) will be used.  The minimum value is 0 and maximum value is 60 minutes.",
             "required": false,
             "type": "integer",
+            "format": "int32",
             "in": "query"
           },
           {
@@ -1295,7 +1301,8 @@
             "description": "Time in seconds within which if the provider doesn’t respond, end point will return static data.",
             "in": "query",
             "required": false,
-            "type": "integer"
+            "type": "integer",
+            "format": "int32"
           },
           {
             "$ref": "#/parameters/MobilityLanguage"
@@ -1667,7 +1674,8 @@
       "properties": {
         "metroId": {
           "description": "The metro area's Id for use with other API calls.",
-          "type": "integer"
+          "type": "integer",
+          "format": "int32"
         },
         "metroName": {
           "description": "The main display name of the metro.",
@@ -1941,11 +1949,13 @@
         },
         "travelTimeInSeconds": {
           "description": "Estimated travel time in seconds.",
-          "type": "integer"
+          "type": "integer",
+          "format": "int32"
         },
         "numberOfLegs": {
           "description": "Number of legs.",
-          "type": "integer"
+          "type": "integer",
+          "format": "int32"
         },
         "legs": {
           "description": "An array summarizing the legs of this itinerary.",
@@ -1988,7 +1998,8 @@
         },
         "lengthInMeters": {
           "description": "The total distance of the leg in meters.",
-          "type": "integer"
+          "type": "integer",
+          "format": "int32"
         }
       }
     },
@@ -2157,7 +2168,8 @@
       "properties": {
         "amount": {
           "description": "Price of the ticket in cents. For example, $5.00 is returned as ‘500’.",
-          "type": "integer"
+          "type": "integer",
+          "format": "int32"
         },
         "currencyCode": {
           "description": "Currency code, for example for US dollars “USD”.",
@@ -2196,7 +2208,8 @@
       "properties": {
         "amount": {
           "description": "Price of the ticket in cents. For example, $5.00 is returned as ‘500’.",
-          "type": "integer"
+          "type": "integer",
+          "format": "int32"
         },
         "currencyCode": {
           "description": "Currency code, for example for US dollars “USD”.",
@@ -2528,7 +2541,8 @@
       "properties": {
         "arrivalMinutes": {
           "description": "The estimated time of arrival in minutes.",
-          "type": "integer"
+          "type": "integer",
+          "format": "int32"
         },
         "scheduleType": {
           "description": "Whether the result is based on real-time or static data.",
