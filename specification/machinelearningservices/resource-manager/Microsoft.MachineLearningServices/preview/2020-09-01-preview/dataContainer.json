@@ -234,19 +234,13 @@
   },
   "definitions": {
     "AssetContainerResource": {
-      "description": "Asset Container Resource Envelope.",
       "required": [
         "properties"
       ],
       "type": "object",
       "properties": {
         "properties": {
-          "description": "Additional attributes of the entity.",
-          "allOf": [
-            {
-              "$ref": "#/definitions/AssetContainer"
-            }
-          ]
+          "$ref": "#/definitions/AssetContainer"
         },
         "systemData": {
           "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
@@ -276,29 +270,20 @@
     "AssetContainer": {
       "description": "Details of an Asset Container",
       "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/ResourceBase"
-        }
-      ]
-    },
-    "ResourceBase": {
-      "description": "Details of an Resource Base",
-      "type": "object",
       "properties": {
         "description": {
-          "description": "The resource base description text.",
+          "description": "Asset Container description text.",
           "type": "string"
         },
         "tags": {
-          "description": "The resource base tag dictionary.",
+          "description": "Asset Container tag dictionary.",
           "type": "object",
           "additionalProperties": {
             "type": "string"
           }
         },
         "properties": {
-          "description": "The resource base property dictionary.",
+          "description": "Asset Container property dictionary.",
           "type": "object",
           "additionalProperties": {
             "type": "string"

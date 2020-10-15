@@ -261,19 +261,13 @@
   },
   "definitions": {
     "DataVersionResource": {
-      "description": "Data Version Resource Envelope.",
       "required": [
         "properties"
       ],
       "type": "object",
       "properties": {
         "properties": {
-          "description": "Additional attributes of the entity.",
-          "allOf": [
-            {
-              "$ref": "#/definitions/DataVersion"
-            }
-          ]
+          "$ref": "#/definitions/DataVersion"
         },
         "systemData": {
           "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
@@ -303,21 +297,10 @@
     "DataVersion": {
       "description": "Details of an Data Version.",
       "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/Asset"
-        }
-      ],
       "properties": {
         "datasetType": {
           "$ref": "#/definitions/DatasetType"
-        }
-      }
-    },
-    "Asset": {
-      "description": "Details of an Asset.",
-      "type": "object",
-      "properties": {
+        },
         "datastoreId": {
           "description": "The asset datastoreId",
           "type": "string"
@@ -329,6 +312,24 @@
             "$ref": "#/definitions/AssetPath"
           }
         },
+        "description": {
+          "description": "The asset description text.",
+          "type": "string"
+        },
+        "tags": {
+          "description": "The asset tag dictionary.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "properties": {
+          "description": "The asset property dictionary.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
         "linkedResourceIds": {
           "description": "Associated ARM resources. Key is the link type, value is a list of ARM IDs.",
           "type": "object",
@@ -337,35 +338,6 @@
             "items": {
               "type": "string"
             }
-          }
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/ResourceBase"
-        }
-      ]
-    },
-    "ResourceBase": {
-      "description": "Details of an Resource Base.",
-      "type": "object",
-      "properties": {
-        "description": {
-          "description": "The resource base description text.",
-          "type": "string"
-        },
-        "tags": {
-          "description": "The resource base tag dictionary.",
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "properties": {
-          "description": "The resource base property dictionary.",
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
           }
         }
       }
