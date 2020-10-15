@@ -50,9 +50,6 @@
           },
           "Get a DigitalTwinsInstance resource with a private endpoint connection":  {
             "$ref": "./examples/DigitalTwinsGet_WithPrivateEndpointConnection_example.json"
-          },
-          "Get a DigitalTwinsInstance resource with a private link": {
-            "$ref": "./examples/DigitalTwinsWithPrivateLinkGet_example.json"
           }
         },
         "parameters": [
@@ -962,6 +959,18 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/PrivateEndpointConnection"
+          }
+        },
+        "publicNetworkAccess": {
+          "description": "Public network access for the DigitalTwinsInstance.",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "publicNetworkAccess",
+            "modelAsString": true
           }
         }
       }
