@@ -78,7 +78,7 @@ directive:
         - $.definitions.SqlPoolVulnerabilityAssessmentRuleBaseline
         - $.definitions.DataMaskingPolicy
     suppress: 
-        - NestedResourcesMustHaveListOperation
+        - R4015
     reason: SQL doesn't support 'list' operation everywhere, so we cannot support List for certain Sql pool operations
 ```
 
