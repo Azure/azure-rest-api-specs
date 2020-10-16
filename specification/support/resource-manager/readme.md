@@ -1,12 +1,13 @@
 # Support
-    
+
 > see https://aka.ms/autorest
 
 This is the AutoRest configuration file for Support.
 
-
 ---
-## Getting Started 
+
+## Getting Started
+
 To build the SDK for Support, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
 
 > `autorest`
@@ -14,12 +15,13 @@ To build the SDK for Support, simply [Install AutoRest](https://aka.ms/autorest/
 To see additional help and options, run:
 
 > `autorest --help`
+
 ---
 
 ## Configuration
 
+### Basic Information
 
-### Basic Information 
 These are the global settings for the Support API.
 
 ``` yaml
@@ -31,7 +33,7 @@ tag: package-2020-04
 
 These settings apply only when `--tag=package-2020-04` is specified on the command line.
 
-```yaml $(tag) == 'package-2020-04'
+``` yaml $(tag) == 'package-2020-04'
 input-file:
   - Microsoft.Support/stable/2020-04-01/support.json
 ```
@@ -46,8 +48,8 @@ input-file:
 ```
 
 ---
-# Code Generation
 
+# Code Generation
 
 ## Swagger to SDK
 
@@ -69,7 +71,7 @@ swagger-to-sdk:
       - node sdkauto_afterscript.js support/resource-manager
 ```
 
-## C# 
+## C#
 
 See configuration in [readme.csharp.md](./readme.csharp.md)
 
@@ -97,3 +99,12 @@ See configuration in [readme.ruby.md](./readme.ruby.md)
 
 See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
 
+## Suppression
+
+``` yaml
+directive:
+  - suppress: EnumInsteadOfBoolean
+    where: $.definitions.SupportTicketDetailsProperties.properties.require24X7Response
+    from: support.json
+    reason: It will be a breaking change.
+```
