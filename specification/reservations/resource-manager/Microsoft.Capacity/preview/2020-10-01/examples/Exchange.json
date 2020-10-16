@@ -3,46 +3,79 @@
     "api-version": "2020-10-01",
     "body": {
       "properties": {
-        "sessionId": "ec0c4da3-8e6e-42d6-86c8-5b2b2bf0f06a",
-        "reservationsToPurchase": [
-          {
-            "sku": {
-              "name": "Standard_B1ls"
-            },
-            "location": "westus",
-            "properties": {
-              "reservedResourceType": "VirtualMachines",
-              "billingScopeId": "/subscriptions/ed3a1871-612d-abcd-a849-c2542a68be83",
-              "term": "P1Y",
-              "billingPlan": "Upfront",
-              "quantity": 1,
-              "displayName": "testDisplayName",
-              "appliedScopeType": "Shared",
-              "appliedScopes": null,
-              "renew": false,
-              "reservedResourceProperties": {
-                "instanceFlexibility": "On"
-              }
-            }
-          }
-        ],
-        "reservationsToExchange": [
-          {
-            "id": "/providers/microsoft.capacity/reservationOrders/1f14354c-dc12-4c8d-8090-6f295a3a34aa",
-            "properties": {
-              "scope": "Reservation",
-              "reservationToReturn": {
-                "reservationId": "/providers/microsoft.capacity/reservationOrders/1f14354c-dc12-4c8d-8090-6f295a3a34aa/reservations/c8c926bd-fc5d-4e29-9d43-b68340ac23a6",
-                "quantity": 1
-              }
-            }
-          }
-        ]
+        "sessionId": "66e2ac8f-439e-4345-8235-6fef07608081"
       }
     }
   },
   "responses": {
-    "200": {},
+    "200": {
+      "body": {
+        "id": "/providers/microsoft.capacity/operationResults/4e2ffff7-b331-4fcb-ab11-b5fa49368188",
+        "name": "4e2ffff7-b331-4fcb-ab11-b5fa49368188",
+        "status": "PendingRefunds",
+        "properties": {
+          "sessionId": "66e2ac8f-439e-4345-8235-6fef07608081",
+          "netPayable": {
+            "currencyCode": "EUR",
+            "amount": -688.11
+          },
+          "refundsTotal": {
+            "currencyCode": "EUR",
+            "amount": 2938.11
+          },
+          "purchasesTotal": {
+            "currencyCode": "EUR",
+            "amount": 2250.0
+          },
+          "reservationsToPurchase": [
+            {
+              "properties": {
+                "reservationOrderId": "/providers/microsoft.capacity/reservationOrders/1e85c519-b815-4169-8d79-62fc460c608f",
+                "purchaseTotal": {
+                  "currencyCode": "EUR",
+                  "amount": 2250.0
+                }
+              }
+            }
+          ],
+          "reservationsToExchange": [
+            {
+              "id": "/providers/Microsoft.Capacity/reservationorders/1f14354c-dc12-4c8d-8090-6f295a3a34aa",
+              "properties": {
+                "quantity": 1,
+                "billingRefundAmount": {
+                  "currencyCode": "EUR",
+                  "amount": 34.17
+                },
+                "billingInformation": {
+                  "billingCurrencyTotalPaidAmount": {
+                    "currencyCode": "EUR",
+                    "amount": 170.82
+                  },
+                  "billingCurrencyProratedAmount": {
+                    "currencyCode": "EUR",
+                    "amount": 136.65
+                  },
+                  "billingCurrencyRemainingCommitmentAmount": {
+                    "currencyCode": "EUR",
+                    "amount": 2903.94
+                  }
+                }
+              }
+            }
+          ],
+          "policyResult": {
+            "policyErrors": [
+              {
+                "code": "RefundsLessThanPurchase",
+                "message": "New purchase amount should be greater than the total refunds."
+              }
+            ]
+          }
+        },
+        "error": null
+      }
+    },
     "202": {
       "headers": {
         "Location": "https://management.azure.com/Microsoft.Capacity/operationResults/8d542218-8bfe-4fd2-b909-0656c610281c?api-version=2019-04-01",

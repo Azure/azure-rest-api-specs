@@ -671,7 +671,8 @@
                 "description": "URL to query for the status of the operation."
               },
               "Retry-After": {
-                "type": "string",
+                "type": "integer",
+                "format": "int32",
                 "description": "Clients should wait for the Retry-After interval before polling again"
               }
             }
@@ -725,7 +726,8 @@
                 "description": "URL to query for the status of the operation."
               },
               "Retry-After": {
-                "type": "string",
+                "type": "integer",
+                "format": "int32",
                 "description": "Clients should wait for the Retry-After interval before polling again"
               }
             }
@@ -956,7 +958,9 @@
           "enum": [
             "Succeeded",
             "Failed",
-            "Cancelled"
+            "Cancelled",
+            "PendingRefunds",
+            "PendingPurchases"
           ],
           "x-ms-enum": {
             "name": "OperationResultStatus",
@@ -988,7 +992,9 @@
           "enum": [
             "Succeeded",
             "Failed",
-            "Cancelled"
+            "Cancelled",
+            "PendingRefunds",
+            "PendingPurchases"
           ],
           "x-ms-enum": {
             "name": "OperationResultStatus",
@@ -1005,6 +1011,7 @@
     },
     "OperationResultError": {
       "type": "object",
+      "description": "Required if status == failed or status == canceled.",
       "properties": {
         "code": {
           "type": "string",
@@ -1130,6 +1137,23 @@
           "description": "Quantity to be returned"
         },
         "billingRefundAmount": {
+          "$ref": "#/definitions/Price"
+        },
+        "billingInformation": {
+          "$ref": "#/definitions/BillingInformation"
+        }
+      }
+    },
+    "BillingInformation": {
+      "type": "object",
+      "properties": {
+        "billingCurrencyTotalPaidAmount": {
+          "$ref": "#/definitions/Price"
+        },
+        "billingCurrencyProratedAmount": {
+          "$ref": "#/definitions/Price"
+        },
+        "billingCurrencyRemainingCommitmentAmount": {
           "$ref": "#/definitions/Price"
         }
       }
