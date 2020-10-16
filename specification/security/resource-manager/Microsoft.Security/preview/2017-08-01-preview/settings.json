@@ -100,7 +100,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/SettingResource"
+              "$ref": "#/definitions/Setting"
             }
           },
           "default": {
@@ -140,7 +140,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/SettingResource"
+              "$ref": "#/definitions/Setting"
             }
           },
           "default": {
@@ -162,7 +162,7 @@
           "type": "array",
           "description": "The settings list.",
           "items": {
-            "$ref": "#/definitions/SettingResource"
+            "$ref": "#/definitions/Setting"
           }
         },
         "nextLink": {
@@ -185,11 +185,11 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/SettingResource"
+          "$ref": "#/definitions/Setting"
         }
       ]
     },
-    "SettingResource": {
+    "Setting": {
       "type": "object",
       "description": "The kind of the security setting",
       "properties": {
@@ -257,7 +257,7 @@
       "required": true,
       "description": "Setting object",
       "schema": {
-        "$ref": "#/definitions/SettingResource"
+        "$ref": "#/definitions/Setting"
       },
       "x-ms-parameter-location": "method"
     }
