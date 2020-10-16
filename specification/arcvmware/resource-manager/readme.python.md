@@ -33,6 +33,7 @@ Please also specify `--python-sdks-folder=<path to the root directory of your az
 python:
   namespace: azure.mgmt.vmware.v2020-10-01-preview
   output-folder: $(python-sdks-folder)/vmware/azure-mgmt-vmware/azure/mgmt/vmware/v2020-10-01-preview
+```
 
 ### Tag: package-2019-12-20-privatepreview and python
 
