@@ -2247,10 +2247,13 @@
         }
       }
     },
-    "CrrAccessToken": {
-      "description": "Container level access token for CRR",
+   "CrrAccessToken": {
       "type": "object",
       "properties": {
+        "objectType": {
+          "description": "Type of the specific object - used for deserializing",
+          "type": "string"
+        },
         "accessTokenString": {
           "description": "Access token used for authentication",
           "type": "string"
@@ -2270,6 +2273,11 @@
         "resourceId": {
           "description": "Resource Id of the source vault",
           "type": "string"
+        },
+        "protectionContainerId": {
+          "format": "int64",
+          "description": "Protected item container id",
+          "type": "integer"
         },
         "recoveryPointId": {
           "description": "Recovery Point Id",
@@ -2326,11 +2334,33 @@
         "tokenExtendedInformation": {
           "description": "Extended Information about the token like FileSpec etc.",
           "type": "string"
+        },
+        "rpTierInformation": {
+          "description": "Recovery point Tier Information",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "rpOriginalSAOption": {
+          "description": "Recovery point information: Original SA option",
+          "type": "boolean"
+        },
+        "rpIsManagedVirtualMachine": {
+          "description": "Recovery point information: Managed virtual machine",
+          "type": "boolean"
+        },
+        "rpVMSizeDescription": {
+          "description": "Recovery point information: VM size description",
+          "type": "string"
+        },
+        "bMSActiveRegion": {
+          "description": "Active region name of BMS Stamp",
+          "type": "string"
         }
       }
     },
     "CrrAccessTokenResource": {
-      "description": "Container level access token for CRR",
       "allOf": [
         {
           "$ref": "#/definitions/Resource"
@@ -2911,6 +2941,14 @@
             "format": "int32",
             "type": "integer"
           }
+        },
+        "restoreWithManagedDisks": {
+          "description": "Flag to denote of an Unmanaged disk VM should be restored with Managed disks.",
+          "type": "boolean"
+        },
+        "diskEncryptionSetId": {
+          "description": "DiskEncryptionSet's ID - needed if the VM needs to be encrypted at rest during restore with customer managed key.",
+          "type": "string"
         }
       },
       "x-ms-discriminator-value": "IaasVMRestoreRequest"
@@ -3039,7 +3077,8 @@
             "DisableBackup",
             "DeleteBackupData",
             "CrossRegionRestore",
-            "Undelete"
+            "Undelete",
+            "UpdateCustomerManagedKey"
           ],
           "type": "string",
           "x-ms-enum": {
@@ -3404,6 +3443,10 @@
         "error": {
           "$ref": "#/definitions/OperationStatusError",
           "description": "Error information related to this operation."
+        },
+        "properties": {
+          "$ref": "#/definitions/OperationStatusExtendedInfo",
+          "description": "Additional information associated with this operation."
         }
       }
     },

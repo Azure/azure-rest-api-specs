@@ -1029,7 +1029,7 @@
         "tags": [
           "ProtectionPolicies"
         ],
-        "description": "Deletes specified backup policy from your Recovery Services Vault. This is an asynchronous operation. Status of the\r\noperation can be fetched using GetProtectionPolicyOperationResults API.",
+        "description": "Deletes specified backup policy from your Recovery Services Vault. This is an asynchronous operation. Status of the\r\noperation can be fetched using GetPolicyOperationResult API.",
         "operationId": "ProtectionPolicies_Delete",
         "produces": [
           "application/json"
@@ -1063,7 +1063,6 @@
             "description": "NoContent"
           }
         },
-        "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "Delete Azure Vm Protection Policy": {
             "$ref": "./examples/AzureIaasVm/ProtectionPolicies_Delete.json"
@@ -1266,6 +1265,131 @@
         "x-ms-examples": {
           "Get Vault Security Pin": {
             "$ref": "./examples/Common/BackupSecurityPin_Get.json"
+          }
+        }
+      }
+    },
+    "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupstorageconfig/vaultstorageconfig": {
+      "get": {
+        "tags": [
+          "BackupResourceStorageConfigs"
+        ],
+        "description": "Fetches resource storage config.",
+        "operationId": "BackupResourceStorageConfigs_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/VaultName"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/BackupResourceConfigResource"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Vault Storage Configuration": {
+            "$ref": "./examples/Common/BackupStorageConfig_Get.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "BackupResourceStorageConfigs"
+        ],
+        "description": "Updates vault storage model type.",
+        "operationId": "BackupResourceStorageConfigs_Update",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/VaultName"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "Vault storage config request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/BackupResourceConfigResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/BackupResourceConfigResource"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update Vault Storage Configuration": {
+            "$ref": "./examples/Common/BackupStorageConfig_Put.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "BackupResourceStorageConfigs"
+        ],
+        "description": "Updates vault storage model type.",
+        "operationId": "BackupResourceStorageConfigs_Patch",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/VaultName"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "Vault storage config request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/BackupResourceConfigResource"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "NoContent"
+          }
+        },
+        "x-ms-examples": {
+          "Update Vault Storage Configuration": {
+            "$ref": "./examples/Common/BackupStorageConfig_Patch.json"
           }
         }
       }
@@ -1706,8 +1830,7 @@
             "Full",
             "Differential",
             "Log",
-            "CopyOnlyFull",
-            "Incremental"
+            "CopyOnlyFull"
           ],
           "type": "string",
           "x-ms-enum": {
@@ -1814,9 +1937,6 @@
     "BackupEngineBase": {
       "description": "The base backup engine class. All workload specific backup engines derive from this class.",
       "type": "object",
-      "required": [
-        "backupEngineType"
-      ],
       "properties": {
         "friendlyName": {
           "description": "Friendly name of the backup engine.",
@@ -2011,9 +2131,7 @@
           "enum": [
             "Invalid",
             "GeoRedundant",
-            "LocallyRedundant",
-            "ZoneRedundant",
-            "ReadAccessGeoZoneRedundant"
+            "LocallyRedundant"
           ],
           "type": "string",
           "x-ms-enum": {
@@ -2026,9 +2144,7 @@
           "enum": [
             "Invalid",
             "GeoRedundant",
-            "LocallyRedundant",
-            "ZoneRedundant",
-            "ReadAccessGeoZoneRedundant"
+            "LocallyRedundant"
           ],
           "type": "string",
           "x-ms-enum": {
@@ -2048,10 +2164,6 @@
             "name": "StorageTypeState",
             "modelAsString": true
           }
-        },
-        "crossRegionRestoreFlag": {
-          "description": "Opt in details of Cross Region Restore feature.",
-          "type": "boolean"
         }
       }
     },
@@ -3051,9 +3163,6 @@
     "ProtectableContainer": {
       "description": "Protectable Container Class.",
       "type": "object",
-      "required": [
-        "protectableContainerType"
-      ],
       "properties": {
         "friendlyName": {
           "description": "Friendly name of the container.",
@@ -3098,7 +3207,7 @@
             "GenericContainer"
           ],
           "type": "string",
-          "readOnly": false,
+          "readOnly": true,
           "x-ms-enum": {
             "name": "ContainerType",
             "modelAsString": false
@@ -3150,9 +3259,6 @@
     "ProtectionContainer": {
       "description": "Base class for container with backup items. Containers with specific workloads are derived from this class.",
       "type": "object",
-      "required": [
-        "containerType"
-      ],
       "properties": {
         "friendlyName": {
           "description": "Friendly name of the container.",
@@ -3374,9 +3480,6 @@
     "WorkloadItem": {
       "description": "Base class for backup item. Workload-specific backup items are derived from this class.",
       "type": "object",
-      "required": [
-        "workloadItemType"
-      ],
       "properties": {
         "backupManagementType": {
           "description": "Type of backup management to backup an item.",
@@ -3447,9 +3550,6 @@
     "WorkloadProtectableItem": {
       "description": "Base class for backup item. Workload-specific backup items are derived from this class.",
       "type": "object",
-      "required": [
-        "protectableItemType"
-      ],
       "properties": {
         "backupManagementType": {
           "description": "Type of backup management to backup an item.",
