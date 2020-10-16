@@ -590,6 +590,7 @@
             "name": "api-version",
             "in": "query",
             "required": true,
+            "x-ms-api-version": false,
             "type": "string",
             "enum": [
               "2015-11-01"
@@ -982,6 +983,7 @@
           "items": {
             "type": "string",
             "enum": [
+              "all",
               "encrypt",
               "decrypt",
               "wrapKey",
@@ -1011,6 +1013,7 @@
           "items": {
             "type": "string",
             "enum": [
+              "all",
               "get",
               "list",
               "set",
@@ -1032,6 +1035,7 @@
           "items": {
             "type": "string",
             "enum": [
+              "all",
               "get",
               "list",
               "delete",
@@ -1061,6 +1065,7 @@
           "items": {
             "type": "string",
             "enum": [
+              "all",
               "get",
               "list",
               "delete",
@@ -1102,7 +1107,7 @@
           "items": {
             "$ref": "#/definitions/AccessPolicyEntry"
           },
-          "description": "An array of 0 to 16 identities that have access to the key vault. All identities in the array must use the same tenant ID as the key vault's tenant ID. When `createMode` is set to `recover`, access policies are not required. Otherwise, access policies are required."
+          "description": "An array of 0 to 1024 identities that have access to the key vault. All identities in the array must use the same tenant ID as the key vault's tenant ID. When `createMode` is set to `recover`, access policies are not required. Otherwise, access policies are required."
         },
         "vaultUri": {
           "type": "string",
@@ -1123,7 +1128,7 @@
         "enableSoftDelete": {
           "type": "boolean",
           "default": true,
-          "description": "Property to specify whether the 'soft delete' functionality is enabled for this key vault. If it's not set to any value(true or false) when creating new key vault, it will be set to true by default. Once it's been set to true value, it can NOT be reverted to false."
+          "description": "Property to specify whether the 'soft delete' functionality is enabled for this key vault. If it's not set to any value(true or false) when creating new key vault, it will be set to true by default. Once set to true, it cannot be reverted to false."
         },
         "softDeleteRetentionInDays": {
           "type": "integer",
@@ -1203,17 +1208,16 @@
         },
         "enableSoftDelete": {
           "type": "boolean",
-          "default": false,
-          "description": "Property to specify whether the 'soft delete' functionality is enabled for this key vault. If omitted, assume false as default value when patching an existing vault. Once set to true, cannot be reverted to false."
+          "description": "Property to specify whether the 'soft delete' functionality is enabled for this key vault. Once set to true, it cannot be reverted to false."
+        },
+        "enableRbacAuthorization": {
+          "type": "boolean",
+          "description": "Property that controls how data actions are authorized. When true, the key vault will use Role Based Access Control (RBAC) for authorization of data actions, and the access policies specified in vault properties will be  ignored (warning: this is a preview feature). When false, the key vault will use the access policies specified in vault properties, and any policy stored on Azure Resource Manager will be ignored. If null or not specified, the value of this property will not change."
         },
         "softDeleteRetentionInDays": {
           "type": "integer",
           "format": "int32",
           "description": "softDelete data retention days. It accepts >=7 and <=90."
-        },
-        "enableRbacAuthorization": {
-          "type": "boolean",
-          "description": "Property that controls how data actions are authorized. When true, the key vault will use Role Based Access Control (RBAC) for authorization of data actions, and the access policies specified in vault properties will be  ignored (warning: this is a preview feature). When false, the key vault will use the access policies specified in vault properties, and any policy stored on Azure Resource Manager will be ignored. If null or not specified, the value of this property will not change."
         },
         "createMode": {
           "type": "string",

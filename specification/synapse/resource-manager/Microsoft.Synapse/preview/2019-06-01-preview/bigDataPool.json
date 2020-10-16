@@ -406,6 +406,10 @@
           "$ref": "#/definitions/AutoPauseProperties",
           "description": "Auto-pausing properties"
         },
+        "isComputeIsolationEnabled": {
+          "type": "boolean",
+          "description": "Whether compute isolation is required or not."
+        },
         "sparkEventsFolder": {
           "type": "string",
           "description": "The Spark events folder"
@@ -413,13 +417,15 @@
         "nodeCount": {
           "type": "integer",
           "format": "int32",
-          "minimum": 3,
-          "maximum": 200,
           "description": "The number of nodes in the Big Data pool."
         },
         "libraryRequirements": {
           "$ref": "#/definitions/LibraryRequirements",
           "description": "Library version requirements"
+        },
+        "sparkConfigProperties": {
+          "$ref": "#/definitions/LibraryRequirements",
+          "description": "Spark configuration file to specify additional properties"
         },
         "sparkVersion": {
           "type": "string",
@@ -434,7 +440,10 @@
             "None",
             "Small",
             "Medium",
-            "Large"
+            "Large",
+            "XLarge",
+            "XXLarge",
+            "XXXLarge"
           ],
           "type": "string",
           "description": "The level of compute power that each node in the Big Data pool has.",

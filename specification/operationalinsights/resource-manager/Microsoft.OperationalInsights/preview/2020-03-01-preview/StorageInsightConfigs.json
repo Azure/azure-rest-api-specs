@@ -1,0 +1,340 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Azure Log Analytics",
+    "description": "Azure Log Analytics API reference.",
+    "version": "2020-03-01-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/storageInsightConfigs/{storageInsightName}": {
+      "put": {
+        "tags": [
+          "StorageInsights"
+        ],
+        "x-ms-examples": {
+          "StorageInsightsCreate": {
+            "$ref": "./examples/StorageInsightsCreateOrUpdate.json"
+          }
+        },
+        "operationId": "StorageInsightConfigs_CreateOrUpdate",
+        "description": "Create or update a storage insight.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "name": "storageInsightName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Name of the storageInsightsConfigs resource"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/StorageInsight"
+            },
+            "description": "The parameters required to create or update a storage insight."
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created response definition.",
+            "schema": {
+              "$ref": "#/definitions/StorageInsight"
+            }
+          },
+          "200": {
+            "description": "OK response definition.",
+            "schema": {
+              "$ref": "#/definitions/StorageInsight"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "StorageInsights"
+        ],
+        "x-ms-examples": {
+          "StorageInsightsGet": {
+            "$ref": "./examples/StorageInsightsGet.json"
+          }
+        },
+        "operationId": "StorageInsightConfigs_Get",
+        "description": "Gets a storage insight instance.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "name": "storageInsightName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Name of the storageInsightsConfigs resource"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK response definition.",
+            "schema": {
+              "$ref": "#/definitions/StorageInsight"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "StorageInsights"
+        ],
+        "x-ms-examples": {
+          "StorageInsightsDelete": {
+            "$ref": "./examples/StorageInsightsDelete.json"
+          }
+        },
+        "operationId": "StorageInsightConfigs_Delete",
+        "description": "Deletes a storageInsightsConfigs resource",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "name": "storageInsightName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Name of the storageInsightsConfigs resource"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK response definition."
+          },
+          "204": {
+            "description": "NoContent response definition."
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/storageInsightConfigs": {
+      "get": {
+        "tags": [
+          "StorageInsights"
+        ],
+        "x-ms-examples": {
+          "StorageInsightsList": {
+            "$ref": "./examples/StorageInsightsListByWorkspace.json"
+          }
+        },
+        "operationId": "StorageInsightConfigs_ListByWorkspace",
+        "description": "Lists the storage insight instances within a workspace",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK response definition.",
+            "schema": {
+              "$ref": "#/definitions/StorageInsightListResult"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "@odata.nextLink"
+        }
+      }
+    }
+  },
+  "definitions": {
+    "StorageAccount": {
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The Azure Resource Manager ID of the storage account resource."
+        },
+        "key": {
+          "type": "string",
+          "description": "The storage account key."
+        }
+      },
+      "required": [
+        "id",
+        "key"
+      ],
+      "description": "Describes a storage account connection."
+    },
+    "StorageInsightStatus": {
+      "properties": {
+        "state": {
+          "type": "string",
+          "description": "The state of the storage insight connection to the workspace",
+          "enum": [
+            "OK",
+            "ERROR"
+          ],
+          "x-ms-enum": {
+            "name": "StorageInsightState",
+            "modelAsString": true
+          }
+        },
+        "description": {
+          "type": "string",
+          "description": "Description of the state of the storage insight."
+        }
+      },
+      "required": [
+        "state"
+      ],
+      "description": "The status of the storage insight."
+    },
+    "StorageInsightProperties": {
+      "properties": {
+        "containers": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "The names of the blob containers that the workspace should read"
+        },
+        "tables": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "The names of the Azure tables that the workspace should read"
+        },
+        "storageAccount": {
+          "$ref": "#/definitions/StorageAccount",
+          "description": "The storage account connection details"
+        },
+        "status": {
+          "$ref": "#/definitions/StorageInsightStatus",
+          "description": "The status of the storage insight",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "storageAccount"
+      ],
+      "description": "Storage insight properties."
+    },
+    "StorageInsight": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/StorageInsightProperties",
+          "description": "Storage insight properties."
+        },
+        "eTag": {
+          "type": "string",
+          "description": "The ETag of the storage insight."
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "x-ms-mutability": [
+            "read",
+            "create",
+            "update"
+          ],
+          "description": "Resource tags."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "description": "The top level storage insight resource container."
+    },
+    "StorageInsightListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/StorageInsight"
+          },
+          "description": "A list of storage insight items."
+        },
+        "@odata.nextLink": {
+          "type": "string",
+          "description": "The link (url) to the next page of results.",
+          "x-ms-client-name": "odataNextLink"
+        }
+      },
+      "description": "The list storage insights operation response."
+    }
+  },
+  "parameters": {}
+}

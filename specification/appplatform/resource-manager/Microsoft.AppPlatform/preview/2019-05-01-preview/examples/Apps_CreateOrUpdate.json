@@ -4,6 +4,8 @@
       "properties": {
         "public": true,
         "activeDeploymentName": "mydeployment1",
+        "fqdn": "myapp.mydomain.com",
+        "httpsOnly": false,
         "temporaryDisk": {
           "sizeInGB": 2,
           "mountPath": "mytemporarydisk"
@@ -12,7 +14,9 @@
           "sizeInGB": 2,
           "mountPath": "mypersistentdisk"
         }
-      }
+      },
+      "identity": null,
+      "location": "eastus"
     },
     "api-version": "2019-05-01-preview",
     "subscriptionId": "00000000-0000-0000-0000-000000000000",
@@ -28,6 +32,8 @@
           "url": "myapp.myservice.azuremicroservices.io",
           "provisioningState": "Succeeded",
           "activeDeploymentName": "mydeployment1",
+          "fqdn": "myapp.mydomain.com",
+          "httpsOnly": false,
           "temporaryDisk": {
             "sizeInGB": 2,
             "mountPath": "mytemporarydisk"
@@ -39,6 +45,12 @@
           }
         },
         "type": "Microsoft.AppPlatform/Spring/apps",
+        "identity": {
+          "type": "SystemAssigned",
+          "principalId": "principalid",
+          "tenantId": "tenantid"
+        },
+        "location": "eastus",
         "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.AppPlatform/Spring/myservice/apps/myapp",
         "name": "myapp"
       }
@@ -50,6 +62,8 @@
           "url": "myapp.myservice.azuremicroservices.io",
           "provisioningState": "Creating",
           "activeDeploymentName": "mydeployment1",
+          "fqdn": "myapp.mydomain.com",
+          "httpsOnly": false,
           "temporaryDisk": {
             "sizeInGB": 2,
             "mountPath": "mytemporarydisk"
@@ -61,6 +75,12 @@
           }
         },
         "type": "Microsoft.AppPlatform/Spring/apps",
+        "identity": {
+          "type": "SystemAssigned",
+          "principalId": "principalid",
+          "tenantId": "tenantid"
+        },
+        "location": "eastus",
         "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.AppPlatform/Spring/myservice/apps/myapp",
         "name": "myapp"
       }

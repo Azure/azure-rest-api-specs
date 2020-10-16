@@ -70,7 +70,7 @@
           "default": {
             "description": "Default error response",
             "schema": {
-              "$ref": "#/definitions/ErrorDetails"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -130,7 +130,7 @@
           "default": {
             "description": "DefaultErrorResponse",
             "schema": {
-              "$ref": "#/definitions/ErrorDetails"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -184,7 +184,7 @@
           "default": {
             "description": "DefaultErrorResponse",
             "schema": {
-              "$ref": "#/definitions/ErrorDetails"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -229,7 +229,7 @@
           "default": {
             "description": "DefaultErrorResponse",
             "schema": {
-              "$ref": "#/definitions/ErrorDetails"
+              "$ref": "#/definitions/CloudError"
             }
           }
         }
@@ -268,7 +268,7 @@
           "default": {
             "description": "DefaultErrorResponse",
             "schema": {
-              "$ref": "#/definitions/ErrorDetails"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -311,7 +311,7 @@
           "default": {
             "description": "DefaultErrorResponse",
             "schema": {
-              "$ref": "#/definitions/ErrorDetails"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -357,7 +357,7 @@
           "default": {
             "description": "DefaultErrorResponse",
             "schema": {
-              "$ref": "#/definitions/ErrorDetails"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -403,7 +403,7 @@
           "default": {
             "description": "DefaultErrorResponse",
             "schema": {
-              "$ref": "#/definitions/ErrorDetails"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -443,7 +443,7 @@
           "default": {
             "description": "DefaultErrorResponse",
             "schema": {
-              "$ref": "#/definitions/ErrorDetails"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -480,7 +480,7 @@
           "default": {
             "description": "DefaultErrorResponse",
             "schema": {
-              "$ref": "#/definitions/ErrorDetails"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -500,13 +500,11 @@
         },
         "displayName": {
           "description": "The display name of the application.",
-          "type": "string",
-          "pattern": "^.{1,200}$"
+          "type": "string"
         },
         "subdomain": {
           "description": "The subdomain of the application.",
-          "type": "string",
-          "pattern": "^[a-z0-9-]{1,63}$"
+          "type": "string"
         },
         "template": {
           "description": "The ID of the application template, which is a blueprint that defines the characteristics and behaviors of an application. Optional; if not specified, defaults to a blank blueprint and allows the application to be defined from scratch.",
@@ -576,6 +574,10 @@
             "type": "string"
           }
         },
+        "sku": {
+          "description": "A valid instance SKU.",
+          "$ref": "#/definitions/AppSkuInfo"
+        },
         "properties": {
           "description": "The common properties of an IoT Central application.",
           "x-ms-client-flatten": true,
@@ -624,17 +626,18 @@
         "location"
       ]
     },
-    "ErrorDetails": {
+    "CloudError": {
       "description": "Error details.",
+      "x-ms-external": true,
       "properties": {
         "error": {
           "description": "Error response body.",
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/ErrorResponseBody"
+          "$ref": "#/definitions/CloudErrorBody"
         }
       }
     },
-    "ErrorResponseBody": {
+    "CloudErrorBody": {
       "description": "Details of error response.",
       "type": "object",
       "properties": {
@@ -657,7 +660,7 @@
           "type": "array",
           "description": "A list of additional details about the error.",
           "items": {
-            "$ref": "#/definitions/ErrorResponseBody"
+            "$ref": "#/definitions/CloudErrorBody"
           }
         }
       }
@@ -744,8 +747,7 @@
       "properties": {
         "name": {
           "description": "The name of the IoT Central application instance to check.",
-          "type": "string",
-          "pattern": "^[a-z0-9-]{1,63}$"
+          "type": "string"
         },
         "type": {
           "description": "The type of the IoT Central resource to query.",

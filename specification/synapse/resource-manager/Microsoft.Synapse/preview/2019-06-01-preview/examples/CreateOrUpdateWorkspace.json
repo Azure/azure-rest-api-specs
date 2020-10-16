@@ -13,8 +13,17 @@
           "accountUrl": "https://accountname.dfs.core.windows.net",
           "filesystem": "default"
         },
+        "managedVirtualNetworkSettings": {
+          "preventDataExfiltration": false,
+          "linkedAccessCheckOnTargetResource": false,
+          "allowedAadTenantIdsForLinking": [
+            "740239CE-A25B-485B-86A0-262F29F6EBDB"
+          ]
+        },
         "sqlAdministratorLogin": "login",
-        "sqlAdministratorLoginPassword": "password"
+        "sqlAdministratorLoginPassword": "password",
+        "managedVirtualNetwork": "default",
+        "managedResourceGroupName": "workspaceManagedResourceGroupUnique"
       },
       "location": "East US",
       "tags": {
@@ -43,10 +52,36 @@
             "dev": "workspace1.dev.projectarcadia.net",
             "sql": "workspace1.sql.projectarcadia.net"
           },
+          "managedVirtualNetworkSettings": {
+            "preventDataExfiltration": false,
+            "linkedAccessCheckOnTargetResource": false,
+            "allowedAadTenantIdsForLinking": [
+              "740239CE-A25B-485B-86A0-262F29F6EBDB"
+            ]
+          },
           "sqlAdministratorLogin": "login",
           "sqlAdministratorLoginPassword": "password",
-          "managedResourceGroupName": "resourceGroup2",
-          "provisioningState": "Succeeded"
+          "managedResourceGroupName": "workspaceManagedResourceGroupUnique",
+          "managedVirtualNetwork": "default",
+          "provisioningState": "Succeeded",
+          "privateEndpointConnections": [
+            {
+              "id": "/subscriptions/01234567-89ab-4def-0123-456789abcdef/resourceGroups/ExampleResourceGroup/providers/Microsoft.Synapse/workspaces/ExampleWorkspace/privateEndpointConnections/ExamplePrivateEndpointConnection",
+              "name": "sql",
+              "type": "Microsoft.Synapse/workspaces/privateEndpointConnections",
+              "properties": {
+                "provisioningState": "Succeeded",
+                "privateEndpoint": {
+                  "id": "/subscriptions/01234567-89ab-4def-0123-456789abcdef/resourceGroups/ExampleResourceGroup/providers/Microsoft.Network/privateEndpoints/ExamplePrivateEndpoint"
+                },
+                "privateLinkServiceConnectionState": {
+                  "status": "Approved",
+                  "description": "Auto-approved",
+                  "actionsRequired": "None"
+                }
+              }
+            }
+          ]
         },
         "tags": {
           "key": "value"
@@ -64,13 +99,21 @@
             "accountUrl": "https://accountname.dfs.core.windows.net",
             "filesystem": "default"
           },
+          "managedVirtualNetworkSettings": {
+            "preventDataExfiltration": false,
+            "linkedAccessCheckOnTargetResource": false,
+            "allowedAadTenantIdsForLinking": [
+              "740239CE-A25B-485B-86A0-262F29F6EBDB"
+            ]
+          },
           "connectivityEndpoints": {
             "dev": "workspace1.dev.projectarcadia.net",
             "sql": "workspace1.sql.projectarcadia.net"
           },
           "sqlAdministratorLogin": "login",
           "sqlAdministratorLoginPassword": "password",
-          "managedResourceGroupName": "resourceGroup2",
+          "managedResourceGroupName": "workspaceManagedResourceGroupUnique",
+          "managedVirtualNetwork": "default",
           "provisioningState": "Provisioning"
         },
         "tags": {

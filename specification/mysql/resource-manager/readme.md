@@ -28,7 +28,7 @@ These are the global settings for the MySql API.
 title: MySQLManagementClient
 description: The Microsoft Azure management API provides create, read, update, and delete functionality for Azure MySQL resources including servers, databases, firewall rules, VNET rules, log files and configurations with new business model.
 openapi-type: arm
-tag: package-2018-06-01
+tag: package-2020-01-01
 ```
 
 
@@ -49,6 +49,7 @@ These settings apply only when `--tag=package-2017-12-01` is specified on the co
 ``` yaml $(tag) == 'package-2017-12-01'
 input-file:
 - Microsoft.DBforMySQL/stable/2017-12-01/mysql.json
+- Microsoft.DBforMySQL/stable/2017-12-01/ServerSecurityAlertPolicies.json
 ```
 
 
@@ -71,6 +72,7 @@ These settings apply only when `--tag=package-2018-06-01` is specified on the co
 ``` yaml $(tag) == 'package-2018-06-01'
 input-file:
 - Microsoft.DBforMySQL/stable/2017-12-01/mysql.json
+- Microsoft.DBforMySQL/stable/2017-12-01/ServerSecurityAlertPolicies.json
 - Microsoft.DBforMySQL/stable/2018-06-01/QueryPerformanceInsights.json
 - Microsoft.DBforMySQL/stable/2018-06-01/PerformanceRecommendations.json
 - Microsoft.DBforMySQL/stable/2018-06-01/PrivateEndpointConnections.json
@@ -82,10 +84,48 @@ input-file:
 
 These settings apply only when `--tag=package-2020-01-01-privatepreview` is specified on the command line.
 
-
 ``` yaml $(tag) == 'package-2020-01-01-privatepreview'
 input-file:
 - Microsoft.DBforMySQL/preview/2020-01-01-privatepreview/DataEncryptionKeys.json
+```
+
+### Tag: package-2020-01-01
+
+These settings apply only when `--tag=package-2020-01-01` is specified on the command line.
+
+``` yaml $(tag) == 'package-2020-01-01'
+input-file:
+- Microsoft.DBforMySQL/stable/2017-12-01/mysql.json
+- Microsoft.DBforMySQL/stable/2017-12-01/ServerSecurityAlertPolicies.json
+- Microsoft.DBforMySQL/stable/2018-06-01/QueryPerformanceInsights.json
+- Microsoft.DBforMySQL/stable/2018-06-01/PerformanceRecommendations.json
+- Microsoft.DBforMySQL/stable/2018-06-01/PrivateEndpointConnections.json
+- Microsoft.DBforMySQL/stable/2018-06-01/PrivateLinkResources.json
+- Microsoft.DBforMySQL/stable/2020-01-01/DataEncryptionKeys.json
+- Microsoft.DBforMySQL/stable/2020-01-01/Servers.json
+```
+
+### Tag: package-2020-07-01-privatepreview
+
+These settings apply only when `--tag=package-2020-07-01-privatepreview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2020-07-01-privatepreview'
+input-file:
+- Microsoft.DBforMySQL/preview/2020-07-01-privatepreview/mysql.json
+```
+
+## Suppression
+``` yaml
+directive:
+  - suppress: PathResourceProviderNamePascalCase
+    from: ServerSecurityAlertPolicies.json
+    reason: The name of the provider is Microsoft.DBforMySQL
+  - suppress: PathResourceProviderNamePascalCase
+    from: Servers.json
+    reason: The name of the provider is Microsoft.DBforMySQL
+  - suppress: OperationsApiResponseSchema
+    from: mysql.json
+    reason: Property isDataAction is not included in get operation reponse body
 ```
 
 ---
@@ -105,6 +145,9 @@ swagger-to-sdk:
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-node
+  - repo: azure-resource-manager-schemas
+    after_scripts:
+      - node sdkauto_afterscript.js mysql/resource-manager
 ```
 
 
@@ -118,37 +161,13 @@ csharp:
   azure-arm: true
   license-header: MICROSOFT_MIT_NO_VERSION
   namespace: Microsoft.Azure.Management.MySQL
-  output-folder: $(csharp-sdks-folder)/mysql/Microsoft.Azure.Management.MySQL/src/Generated
+  output-folder: $(csharp-sdks-folder)/mysql/Microsoft.Azure.Management.MySQL/src/mysql/Generated
   clear-output-folder: true
 ```
-
 
 ## Python
 
-These settings apply only when `--python` is specified on the command line.
-Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
-Use `--python-mode=update` if you already have a setup.py and just want to update the code itself.
-
-``` yaml $(python)
-python-mode: create
-python:
-  azure-arm: true
-  license-header: MICROSOFT_MIT_NO_VERSION
-  payload-flattening-threshold: 2
-  namespace: azure.mgmt.rdbms.mysql
-  package-name: azure-mgmt-rdbms
-  clear-output-folder: true
-```
-``` yaml $(python) && $(python-mode) == 'update'
-python:
-  no-namespace-folders: true
-  output-folder: $(python-sdks-folder)/rdbms/azure-mgmt-rdbms/azure/mgmt/rdbms/mysql
-```
-``` yaml $(python) && $(python-mode) == 'create'
-python:
-  basic-setup-py: true
-  output-folder: $(python-sdks-folder)/rdbms/azure-mgmt-rdbms
-```
+See configuration in [readme.python.md](./readme.python.md)
 
 ## Go
 
@@ -158,35 +177,7 @@ See configuration in [readme.go.md](./readme.go.md)
 
 See configuration in [readme.java.md](./readme.java.md)
 
-## Multi-API/Profile support for AutoRest v3 generators
+## AzureResourceSchema
 
-AutoRest V3 generators require the use of `--tag=all-api-versions` to select api files.
+See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
 
-This block is updated by an automatic script. Edits may be lost!
-
-``` yaml $(tag) == 'all-api-versions' /* autogenerated */
-# include the azure profile definitions from the standard location
-require: $(this-folder)/../../../profiles/readme.md
-
-# all the input files across all versions
-input-file:
-  - $(this-folder)/Microsoft.DBforMySQL/preview/2017-12-01-preview/mysql.json
-  - $(this-folder)/Microsoft.DBforMySQL/stable/2017-12-01/mysql.json
-  - $(this-folder)/Microsoft.DBforMySQL/preview/2018-06-01-privatepreview/mysql.json
-  - $(this-folder)/Microsoft.DBforMySQL/preview/2018-06-01-privatepreview/PrivateEndpointConnections.json
-  - $(this-folder)/Microsoft.DBforMySQL/preview/2018-06-01-privatepreview/PrivateLinkResources.json
-  - $(this-folder)/Microsoft.DBforMySQL/stable/2018-06-01/QueryPerformanceInsights.json
-  - $(this-folder)/Microsoft.DBforMySQL/stable/2018-06-01/PerformanceRecommendations.json
-  - $(this-folder)/Microsoft.DBforMySQL/stable/2018-06-01/PrivateEndpointConnections.json
-  - $(this-folder)/Microsoft.DBforMySQL/stable/2018-06-01/PrivateLinkResources.json
-  - $(this-folder)/Microsoft.DBforMySQL/preview/2020-01-01-privatepreview/DataEncryptionKeys.json
-
-```
-
-If there are files that should not be in the `all-api-versions` set,
-uncomment the  `exclude-file` section below and add the file paths.
-
-``` yaml $(tag) == 'all-api-versions'
-#exclude-file:
-#  - $(this-folder)/Microsoft.Example/stable/2010-01-01/somefile.json
-```

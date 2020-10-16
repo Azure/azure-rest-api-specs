@@ -1,0 +1,27 @@
+{
+  "title": "Set device attestation - Symmetric key",
+  "description": "Creates or updates the symmetric key attestation for a device.",
+  "parameters": {
+    "centralDnsSuffixInPath": "azureiotcentral.com",
+    "subdomain": "appsubdomain",
+    "device_id": "CheckoutThermostat",
+    "body": {
+      "type": "SymmetricKeyAttestation",
+      "symmetricKey": {
+        "primaryKey": "<primary key>",
+        "secondaryKey": "<secondary key>"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "type": "SymmetricKeyAttestation",
+        "symmetricKey": {
+          "primaryKey": "<primary key>",
+          "secondaryKey": "<secondary key>"
+        }
+      }
+    }
+  }
+}

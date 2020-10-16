@@ -34,7 +34,7 @@
     }
   },
   "paths": {
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforMariaDB/servers/{serverName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBForMariaDB/servers/{serverName}": {
       "put": {
         "tags": [
           "Servers"
@@ -93,6 +93,12 @@
           },
           "202": {
             "description": "Accepted"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         },
         "x-ms-long-running-operation": true
@@ -140,6 +146,12 @@
           },
           "202": {
             "description": "Accepted"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         },
         "x-ms-long-running-operation": true
@@ -178,6 +190,12 @@
           },
           "204": {
             "description": "NoContent"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         },
         "x-ms-long-running-operation": true
@@ -213,11 +231,17 @@
             "schema": {
               "$ref": "#/definitions/Server"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforMariaDB/servers": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBForMariaDB/servers": {
       "get": {
         "tags": [
           "Servers"
@@ -246,6 +270,12 @@
             "schema": {
               "$ref": "#/definitions/ServerListResult"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         },
         "x-ms-pageable": {
@@ -253,7 +283,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.DBforMariaDB/servers": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.DBForMariaDB/servers": {
       "get": {
         "tags": [
           "Servers"
@@ -279,6 +309,12 @@
             "schema": {
               "$ref": "#/definitions/ServerListResult"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         },
         "x-ms-pageable": {
@@ -286,7 +322,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforMariaDB/servers/{serverName}/restart": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBForMariaDB/servers/{serverName}/restart": {
       "post": {
         "tags": [
           "ServerRestart"
@@ -329,7 +365,7 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforMariaDB/servers/{serverName}/replicas": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBForMariaDB/servers/{serverName}/replicas": {
       "get": {
         "tags": [
           "Replicas"
@@ -361,6 +397,12 @@
             "schema": {
               "$ref": "#/definitions/ServerListResult"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         },
         "x-ms-pageable": {
@@ -368,7 +410,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforMariaDB/servers/{serverName}/firewallRules/{firewallRuleName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBForMariaDB/servers/{serverName}/firewallRules/{firewallRuleName}": {
       "put": {
         "tags": [
           "FirewallRules"
@@ -421,6 +463,12 @@
           },
           "202": {
             "description": "Accepted"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         },
         "x-ms-long-running-operation": true
@@ -462,6 +510,12 @@
           },
           "204": {
             "description": "NoContent"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         },
         "x-ms-long-running-operation": true
@@ -500,11 +554,17 @@
             "schema": {
               "$ref": "#/definitions/FirewallRule"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforMariaDB/servers/{serverName}/firewallRules": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBForMariaDB/servers/{serverName}/firewallRules": {
       "get": {
         "tags": [
           "FirewallRules"
@@ -536,6 +596,12 @@
             "schema": {
               "$ref": "#/definitions/FirewallRuleListResult"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         },
         "x-ms-pageable": {
@@ -543,7 +609,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforMariaDB/servers/{serverName}/virtualNetworkRules/{virtualNetworkRuleName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBForMariaDB/servers/{serverName}/virtualNetworkRules/{virtualNetworkRuleName}": {
       "get": {
         "tags": [
           "VirtualNetworkRules"
@@ -688,7 +754,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforMariaDB/servers/{serverName}/virtualNetworkRules": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBForMariaDB/servers/{serverName}/virtualNetworkRules": {
       "get": {
         "tags": [
           "VirtualNetworkRules"
@@ -730,7 +796,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforMariaDB/servers/{serverName}/databases/{databaseName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBForMariaDB/servers/{serverName}/databases/{databaseName}": {
       "put": {
         "tags": [
           "Databases"
@@ -783,6 +849,12 @@
           },
           "202": {
             "description": "Accepted"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         },
         "x-ms-long-running-operation": true
@@ -824,6 +896,12 @@
           },
           "204": {
             "description": "NoContent"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         },
         "x-ms-long-running-operation": true
@@ -862,11 +940,17 @@
             "schema": {
               "$ref": "#/definitions/Database"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforMariaDB/servers/{serverName}/databases": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBForMariaDB/servers/{serverName}/databases": {
       "get": {
         "tags": [
           "Databases"
@@ -898,6 +982,12 @@
             "schema": {
               "$ref": "#/definitions/DatabaseListResult"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         },
         "x-ms-pageable": {
@@ -905,7 +995,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforMariaDB/servers/{serverName}/configurations/{configurationName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBForMariaDB/servers/{serverName}/configurations/{configurationName}": {
       "put": {
         "tags": [
           "Configurations"
@@ -952,6 +1042,12 @@
           },
           "202": {
             "description": "Accepted"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         },
         "x-ms-long-running-operation": true
@@ -990,11 +1086,17 @@
             "schema": {
               "$ref": "#/definitions/Configuration"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforMariaDB/servers/{serverName}/configurations": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBForMariaDB/servers/{serverName}/configurations": {
       "get": {
         "tags": [
           "Configurations"
@@ -1026,6 +1128,12 @@
             "schema": {
               "$ref": "#/definitions/ConfigurationListResult"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         },
         "x-ms-pageable": {
@@ -1033,7 +1141,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforMariaDB/servers/{serverName}/logFiles": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBForMariaDB/servers/{serverName}/logFiles": {
       "get": {
         "tags": [
           "LogFiles"
@@ -1065,6 +1173,12 @@
             "schema": {
               "$ref": "#/definitions/LogFileListResult"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         },
         "x-ms-pageable": {
@@ -1072,7 +1186,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.DBforMariaDB/locations/{locationName}/performanceTiers": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.DBForMariaDB/locations/{locationName}/performanceTiers": {
       "get": {
         "tags": [
           "LocationBasedPerformanceTier"
@@ -1101,6 +1215,12 @@
             "schema": {
               "$ref": "#/definitions/PerformanceTierListResult"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         },
         "x-ms-pageable": {
@@ -1108,7 +1228,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.DBforMariaDB/checkNameAvailability": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.DBForMariaDB/checkNameAvailability": {
       "post": {
         "tags": [
           "CheckNameAvailability"
@@ -1143,131 +1263,17 @@
             "schema": {
               "$ref": "#/definitions/NameAvailability"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforMariaDB/servers/{serverName}/securityAlertPolicies/{securityAlertPolicyName}": {
-      "get": {
-        "tags": [
-          "ServerSecurityAlertPolicies"
-        ],
-        "description": "Get a server's security alert policy.",
-        "operationId": "ServerSecurityAlertPolicies_Get",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/ServerNameParameter"
-          },
-          {
-            "name": "securityAlertPolicyName",
-            "in": "path",
-            "description": "The name of the security alert policy.",
-            "required": true,
-            "type": "string",
-            "enum": [
-              "Default"
-            ],
-            "x-ms-enum": {
-              "name": "SecurityAlertPolicyName",
-              "modelAsString": true
-            }
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successfully retrieved the server threat detection policy.",
-            "schema": {
-              "$ref": "#/definitions/ServerSecurityAlertPolicy"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation of getting security alert policies failed."
-          }
-        },
-        "x-ms-examples": {
-          "Get a server's threat detection policy": {
-            "$ref": "./examples/ServerSecurityAlertsGet.json"
-          }
-        }
-      },
-      "put": {
-        "tags": [
-          "ServerSecurityAlertPolicies"
-        ],
-        "description": "Creates or updates a threat detection policy.",
-        "operationId": "ServerSecurityAlertPolicies_CreateOrUpdate",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/ServerNameParameter"
-          },
-          {
-            "name": "securityAlertPolicyName",
-            "in": "path",
-            "description": "The name of the threat detection policy.",
-            "required": true,
-            "type": "string",
-            "enum": [
-              "Default"
-            ],
-            "x-ms-enum": {
-              "name": "SecurityAlertPolicyName",
-              "modelAsString": true
-            }
-          },
-          {
-            "name": "parameters",
-            "in": "body",
-            "description": "The server security alert policy.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/ServerSecurityAlertPolicy"
-            }
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successfully updated the threat detection policy.",
-            "schema": {
-              "$ref": "#/definitions/ServerSecurityAlertPolicy"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation of setting security alert policies failed."
-          },
-          "202": {
-            "description": "Created request to set the server threat detection policy."
-          }
-        },
-        "x-ms-long-running-operation": true,
-        "x-ms-examples": {
-          "Update a server's threat detection policy with all parameters": {
-            "$ref": "./examples/ServerSecurityAlertsCreateMax.json"
-          },
-          "Update a server's threat detection policy with minimal parameters": {
-            "$ref": "./examples/ServerSecurityAlertsCreateMin.json"
-          }
-        }
-      }
-    },
-    "/providers/Microsoft.DBforMariaDB/operations": {
+    "/providers/Microsoft.DBForMariaDB/operations": {
       "get": {
         "tags": [
           "Operations"
@@ -1289,6 +1295,12 @@
             "description": "OK",
             "schema": {
               "$ref": "#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
             }
           }
         }
@@ -1320,33 +1332,112 @@
         "modelAsString": false
       }
     },
-    "TrackedResource": {
-      "description": "Resource properties including location and tags for track resources.",
+    "PublicNetworkAccess": {
+      "type": "string",
+      "description": "Whether or not public network access is allowed for this server. Value is optional but if passed in, must be 'Enabled' or 'Disabled'",
+      "enum": [
+        "Enabled",
+        "Disabled"
+      ],
+      "x-ms-enum": {
+        "name": "PublicNetworkAccessEnum",
+        "modelAsString": true
+      }
+    },
+    "ServerPrivateEndpointConnection": {
+      "description": "A private endpoint connection under a server",
+      "type": "object",
       "properties": {
-        "location": {
+        "id": {
+          "description": "Resource Id of the private endpoint connection.",
           "type": "string",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ],
-          "description": "The location the resource resides in."
+          "readOnly": true
         },
-        "tags": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "description": "Application-specific metadata in the form of key-value pairs."
+        "properties": {
+          "$ref": "#/definitions/ServerPrivateEndpointConnectionProperties",
+          "description": "Private endpoint connection properties",
+          "readOnly": true
+        }
+      }
+    },
+    "ServerPrivateEndpointConnectionProperties": {
+      "description": "Properties of a private endpoint connection.",
+      "type": "object",
+      "properties": {
+        "privateEndpoint": {
+          "$ref": "#/definitions/PrivateEndpointProperty",
+          "description": "Private endpoint which the connection belongs to."
+        },
+        "privateLinkServiceConnectionState": {
+          "$ref": "#/definitions/ServerPrivateLinkServiceConnectionStateProperty",
+          "description": "Connection state of the private endpoint connection."
+        },
+        "provisioningState": {
+          "description": "State of the private endpoint connection.",
+          "enum": [
+            "Approving",
+            "Ready",
+            "Dropping",
+            "Failed",
+            "Rejecting"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "PrivateEndpointProvisioningState",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "PrivateEndpointProperty": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "Resource id of the private endpoint.",
+          "type": "string"
         }
       },
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ProxyResource"
-        }
-      ],
+      "x-ms-azure-resource": true
+    },
+    "ServerPrivateLinkServiceConnectionStateProperty": {
       "required": [
-        "location"
-      ]
+        "status",
+        "description"
+      ],
+      "type": "object",
+      "properties": {
+        "status": {
+          "description": "The private link service connection status.",
+          "enum": [
+            "Approved",
+            "Pending",
+            "Rejected",
+            "Disconnected"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "PrivateLinkServiceConnectionStateStatus",
+            "modelAsString": true
+          }
+        },
+        "description": {
+          "description": "The private link service connection description.",
+          "type": "string"
+        },
+        "actionsRequired": {
+          "description": "The actions required for private link service connection.",
+          "enum": [
+            "None"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "PrivateLinkServiceConnectionStateActionsRequire",
+            "modelAsString": true
+          }
+        }
+      }
     },
     "ServerProperties": {
       "properties": {
@@ -1401,6 +1492,18 @@
           "format": "int32",
           "minimum": 0,
           "description": "The maximum number of replicas that a master server can have."
+        },
+        "publicNetworkAccess": {
+          "$ref": "#/definitions/PublicNetworkAccess",
+          "description": "Whether or not public network access is allowed for this server. Value is optional but if passed in, must be 'Enabled' or 'Disabled'"
+        },
+        "privateEndpointConnections": {
+          "description": "List of private endpoint connections on a server",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ServerPrivateEndpointConnection"
+          },
+          "readOnly": true
         }
       },
       "description": "The properties of a server."
@@ -1409,6 +1512,7 @@
       "properties": {
         "backupRetentionDays": {
           "type": "integer",
+          "format": "int32",
           "description": "Backup retention days for the server."
         },
         "geoRedundantBackup": {
@@ -1456,6 +1560,10 @@
         "sslEnforcement": {
           "$ref": "#/definitions/SslEnforcement",
           "description": "Enable ssl enforcement or not when connect to server."
+        },
+        "publicNetworkAccess": {
+          "$ref": "#/definitions/PublicNetworkAccess",
+          "description": "Whether or not public network access is allowed for this server. Value is optional but if passed in, must be 'Enabled' or 'Disabled'"
         },
         "storageProfile": {
           "$ref": "#/definitions/StorageProfile",
@@ -1596,6 +1704,9 @@
           "description": "The family of hardware."
         }
       },
+      "required": [
+        "name"
+      ],
       "description": "Billing information related properties of a server."
     },
     "Server": {
@@ -1612,7 +1723,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/TrackedResource"
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/TrackedResource"
         }
       ],
       "description": "Represents a server."
@@ -1670,6 +1781,10 @@
             "sslEnforcement": {
               "$ref": "#/definitions/SslEnforcement",
               "description": "Enable ssl enforcement or not when connect to server."
+            },
+            "publicNetworkAccess": {
+              "$ref": "#/definitions/PublicNetworkAccess",
+              "description": "Whether or not public network access is allowed for this server. Value is optional but if passed in, must be 'Enabled' or 'Disabled'"
             },
             "replicationRole": {
               "type": "string",
@@ -2068,6 +2183,7 @@
         },
         "vCore": {
           "type": "integer",
+          "format": "int32",
           "description": "vCore associated with the service level objective"
         },
         "hardwareGeneration": {
@@ -2076,10 +2192,12 @@
         },
         "maxBackupRetentionDays": {
           "type": "integer",
+          "format": "int32",
           "description": "Maximum Backup retention in days for the performance tier edition"
         },
         "minBackupRetentionDays": {
           "type": "integer",
+          "format": "int32",
           "description": "Minimum Backup retention in days for the performance tier edition"
         },
         "maxStorageMB": {
@@ -2156,74 +2274,6 @@
       },
       "description": "Represents a resource name availability."
     },
-    "SecurityAlertPolicyProperties": {
-      "description": "Properties of a security alert policy.",
-      "required": [
-        "state"
-      ],
-      "type": "object",
-      "properties": {
-        "state": {
-          "description": "Specifies the state of the policy, whether it is enabled or disabled.",
-          "enum": [
-            "Enabled",
-            "Disabled"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "ServerSecurityAlertPolicyState",
-            "modelAsString": false
-          }
-        },
-        "disabledAlerts": {
-          "description": "Specifies an array of alerts that are disabled. Allowed values are: Sql_Injection, Sql_Injection_Vulnerability, Access_Anomaly",
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
-        "emailAddresses": {
-          "description": "Specifies an array of e-mail addresses to which the alert is sent.",
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
-        "emailAccountAdmins": {
-          "description": "Specifies that the alert is sent to the account administrators.",
-          "type": "boolean"
-        },
-        "storageEndpoint": {
-          "description": "Specifies the blob storage endpoint (e.g. https://MyAccount.blob.core.windows.net). This blob storage will hold all Threat Detection audit logs.",
-          "type": "string"
-        },
-        "storageAccountAccessKey": {
-          "description": "Specifies the identifier key of the Threat Detection audit storage account.",
-          "type": "string"
-        },
-        "retentionDays": {
-          "format": "int32",
-          "description": "Specifies the number of days to keep in the Threat Detection audit logs.",
-          "type": "integer"
-        }
-      }
-    },
-    "ServerSecurityAlertPolicy": {
-      "description": "A server security alert policy.",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ProxyResource"
-        }
-      ],
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/SecurityAlertPolicyProperties",
-          "description": "Resource properties.",
-          "x-ms-client-flatten": true
-        }
-      }
-    },
     "CloudError": {
       "x-ms-external": true,
       "properties": {
@@ -2281,17 +2331,6 @@
       "required": true,
       "type": "string",
       "description": "The name of the location.",
-      "x-ms-parameter-location": "method"
-    },
-    "SecurityAlertPolicyNameParameter": {
-      "name": "securityAlertPolicyName",
-      "in": "path",
-      "description": "The name of the security alert policy.",
-      "required": true,
-      "type": "string",
-      "enum": [
-        "default"
-      ],
       "x-ms-parameter-location": "method"
     }
   }
