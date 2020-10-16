@@ -206,6 +206,45 @@
         }
       }
     },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingActivityEventCategory": {
+      "get": {
+        "tags": [
+          "BillingActivity"
+        ],
+        "x-ms-examples": {
+          "BillingActivityEventCategory": {
+            "$ref": "./examples/BillingActivityEventCategory.json"
+          }
+        },
+        "operationId": "BillingActivityTypesList_Get",
+        "description": "Gets billing activity types at enrollment scope.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/billingAccountNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/BillingActivityEventCategoryListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
     "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/listInvoiceSectionsWithCreateSubscriptionPermission": {
       "post": {
         "tags": [
@@ -5734,6 +5773,67 @@
           "description": "Value of the activity event property.",
           "readOnly": true,
           "type": "string"
+        }
+      }
+    },
+    "BillingActivityEventCategoryListResult": {
+      "description": "The list of activity categories.",
+      "properties": {
+        "value": {
+          "description": "The list of activity categories.",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/BillingActivityEventCategory"
+          }
+        },
+        "nextLink": {
+          "description": "The link (url) to the next page of results.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "BillingActivityEventCategory": {
+      "description": "The properties of an activity event category.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "The properties of an activity event category.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/BillingActivityEventCategoryProperties"
+        }
+      }
+    },
+    "BillingActivityEventCategoryProperties": {
+      "description": "The properties of an activity event category.",
+      "properties": {
+        "name": {
+          "description": "The event category name",
+          "type": "string",
+          "readOnly": true
+        },
+        "relatedProperties": {
+          "description": "The related specific properties for an event.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/BillingActivityEventProperties"
+          }
+        }
+      }
+    },
+    "BillingActivityEventProperties": {
+      "description": "The additional specific properties for an event.",
+      "properties": {
+        "name": {
+          "description": "Name of the additional property for an event.",
+          "type": "string",
+          "readOnly": true
         }
       }
     },
