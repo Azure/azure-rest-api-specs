@@ -24,6 +24,7 @@ Please also specify `--ruby-sdks-folder=<path to the root directory of your azur
 ```yaml $(tag) == 'package-2020-10-01-preview' && $(ruby)
 namespace: "Azure::VMware::Mgmt::V2020-10-01-preview"
 output-folder: $(ruby-sdks-folder)/management/azure_mgmt_vmware/lib
+```
 
 ### Tag: package-2019-12-20-privatepreview and ruby
 
