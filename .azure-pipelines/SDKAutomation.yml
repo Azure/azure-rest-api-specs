@@ -79,6 +79,7 @@ jobs:
         -e AZURE_DEVOPS_EXT_PAT \
         -e BUILD_ID \
         sdk-automation:latest npm start
+    condition: or(ne(variables['SDK_REPO_NAME'], 'azure-resource-manager-schemas'), endsWith(variables['SPEC_REPO'], '/azure-rest-api-specs'))
     env:
       BLOB_STORAGE_NAME: $(blob-storage-name)
       BLOB_STORAGE_KEY: $(blob-storage-key)

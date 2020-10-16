@@ -21,7 +21,11 @@ output-folder: $(azureresourceschema-folder)/schemas
 
 # all the input files in this apiVersion
 input-file:
-  - Microsoft.ServiceBus/preview/2018-01-01-preview/servicebus-preview.json
+  - Microsoft.ServiceBus/preview/2018-01-01-preview/IPFilterRules-preview.json
+  - Microsoft.ServiceBus/preview/2018-01-01-preview/namespace-preview.json
+  - Microsoft.ServiceBus/preview/2018-01-01-preview/NetworkRuleSet-preview.json
+  - Microsoft.ServiceBus/preview/2018-01-01-preview/VirtualNetworkRules-preview.json
+  - Microsoft.ServiceBus/preview/2018-01-01-preview/operationlist-preview.json
 
 ```
 
@@ -32,7 +36,21 @@ output-folder: $(azureresourceschema-folder)/schemas
 
 # all the input files in this apiVersion
 input-file:
-  - Microsoft.ServiceBus/stable/2017-04-01/servicebus.json
+  - Microsoft.ServiceBus/stable/2017-04-01/AuthorizationRules.json
+  - Microsoft.ServiceBus/stable/2017-04-01/CheckNameAvailability.json
+  - Microsoft.ServiceBus/stable/2017-04-01/DisasterRecoveryConfig.json
+  - Microsoft.ServiceBus/stable/2017-04-01/eventhubs.json
+  - Microsoft.ServiceBus/stable/2017-04-01/migrate.json
+  - Microsoft.ServiceBus/stable/2017-04-01/migrationconfigs.json
+  - Microsoft.ServiceBus/stable/2017-04-01/PremiumMessagingRegions.json
+  - Microsoft.ServiceBus/stable/2017-04-01/Queue.json
+  - Microsoft.ServiceBus/stable/2017-04-01/sku.json
+  - Microsoft.ServiceBus/stable/2017-04-01/subscriptions.json
+  - Microsoft.ServiceBus/stable/2017-04-01/topics.json
+  - Microsoft.ServiceBus/stable/2017-04-01/Rules.json
+  - Microsoft.ServiceBus/stable/2017-04-01/namespaces.json
+  - Microsoft.ServiceBus/stable/2017-04-01/networksets.json
+  - Microsoft.ServiceBus/stable/2017-04-01/operations.json
 
 ```
 
