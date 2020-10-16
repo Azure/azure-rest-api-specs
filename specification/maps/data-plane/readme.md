@@ -52,6 +52,7 @@ input-file:
   - Microsoft.Maps/Geolocation/preview/1.0/geolocation.json
   - Microsoft.Maps/Mobility/preview/1.0/mobility.json
   - Microsoft.Maps/Render/preview/1.0/render.json
+  - Microsoft.Maps/Render/preview/2.0/render.json
   - Microsoft.Maps/Route/preview/1.0/route.json
   - Microsoft.Maps/Search/preview/1.0/search.json
   - Microsoft.Maps/Spatial/preview/1.0/spatial.json
