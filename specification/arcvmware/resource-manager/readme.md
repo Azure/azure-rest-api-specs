@@ -27,7 +27,7 @@ These are the global settings for the vmware.
 ```yaml
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-2019-12-20-privatepreview
+tag: package-2020-10-01-preview
 ```
 
 ### Tag: package-2019-12-20-privatepreview
@@ -36,7 +36,16 @@ These settings apply only when `--tag=package-2019-12-20-privatepreview` is spec
 
 ```yaml $(tag) == 'package-2019-12-20-privatepreview'
 input-file:
-  - Microsoft.VMware\preview\2019-12-20-privatepreview\arcvmware.json
+  - Microsoft.VMware/preview/2019-12-20-privatepreview/arcvmware.json
+```
+
+### Tag: package-2020-10-01-preview
+
+These settings apply only when `--tag=package-2020-10-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2020-10-01-preview'
+input-file:
+  - Microsoft.VMware/preview/2020-10-01-preview/arcvmware.json
 ```
 
 ---

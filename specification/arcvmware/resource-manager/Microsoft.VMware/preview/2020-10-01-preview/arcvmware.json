@@ -1,0 +1,3392 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Azure Arc VMware Management Service API",
+    "description": "Self service experience for VMware.",
+    "version": "2020-10-01-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/providers/Microsoft.VMware/operations": {
+      "get": {
+        "description": "Returns list of all operations.",
+        "operationId": "Operations_List",
+        "x-ms-examples": {
+          "ListOperations": {
+            "$ref": "./examples/ListOperations.json"
+          }
+        },
+        "tags": [
+          "Operations"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Operation details.",
+            "schema": {
+              "$ref": "#/definitions/operationsList"
+            }
+          }
+        },
+        "deprecated": false,
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.VMware/ResourcePools/{resourcePoolName}": {
+      "put": {
+        "tags": [
+          "ResourcePools"
+        ],
+        "operationId": "ResourcePools_Create",
+        "description": "Create Or Update resourcePool.",
+        "summary": "Implements resourcePool PUT method.",
+        "x-ms-examples": {
+          "CreateResourcePool": {
+            "$ref": "./examples/CreateResourcePool.json"
+          }
+        },
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "in": "path",
+            "name": "resourcePoolName",
+            "required": true,
+            "type": "string",
+            "description": "Name of the resourcePool."
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Request payload.",
+            "schema": {
+              "$ref": "#/definitions/ResourcePool"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ResourcePool"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/ResourcePool"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "description": "Tracking URL for long running operation.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      },
+      "get": {
+        "tags": [
+          "ResourcePools"
+        ],
+        "operationId": "ResourcePools_Get",
+        "summary": "Gets a resourcePool.",
+        "description": "Implements resourcePool GET method.",
+        "x-ms-examples": {
+          "GetResourcePool": {
+            "$ref": "./examples/GetResourcePool.json"
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "in": "path",
+            "name": "resourcePoolName",
+            "description": "Name of the resourcePool.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ResourcePool"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "ResourcePools"
+        ],
+        "operationId": "ResourcePools_Update",
+        "summary": "Updates a resourcePool.",
+        "description": "API to update certain properties of the resourcePool resource.",
+        "x-ms-examples": {
+          "UpdateResourcePool": {
+            "$ref": "./examples/UpdateResourcePool.json"
+          }
+        },
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "in": "path",
+            "name": "resourcePoolName",
+            "required": true,
+            "type": "string",
+            "description": "Name of the resourcePool."
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Resource properties to update.",
+            "schema": {
+              "$ref": "#/definitions/ResourcePatch"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ResourcePool"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "ResourcePools"
+        ],
+        "operationId": "ResourcePools_Delete",
+        "summary": "Deletes an resourcePool.",
+        "description": "Implements resourcePool DELETE method.",
+        "x-ms-examples": {
+          "DeleteResourcePool": {
+            "$ref": "./examples/DeleteResourcePool.json"
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "in": "path",
+            "name": "resourcePoolName",
+            "description": "Name of the resourcePool.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "in": "query",
+            "name": "force",
+            "description": "Whether force delete was specified.",
+            "required": false,
+            "type": "boolean"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "description": "Tracking URL for long running operation.",
+                "type": "string"
+              }
+            }
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.VMware/ResourcePools": {
+      "get": {
+        "tags": [
+          "ResourcePools"
+        ],
+        "operationId": "ResourcePools_List",
+        "summary": "Implements GET resourcePools in a subscription.",
+        "description": "List of resourcePools in a subscription.",
+        "x-ms-examples": {
+          "ListResourcePools": {
+            "$ref": "./examples/ListResourcePools.json"
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ResourcePoolsList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.VMware/ResourcePools": {
+      "get": {
+        "tags": [
+          "ResourcePools"
+        ],
+        "operationId": "ResourcePools_ListByResourceGroup",
+        "summary": "Implements GET resourcePools in a resource group.",
+        "description": "List of resourcePools in a resource group.",
+        "x-ms-examples": {
+          "ListResourcePoolsByResourceGroup": {
+            "$ref": "./examples/ListResourcePoolsByResourceGroup.json"
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ResourcePoolsList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.VMware/VCenters/{vCenterName}": {
+      "put": {
+        "tags": [
+          "VCenters"
+        ],
+        "operationId": "VCenters_Create",
+        "description": "Create Or Update vCenter.",
+        "summary": "Implements vCenter PUT method.",
+        "x-ms-examples": {
+          "CreateVCenter": {
+            "$ref": "./examples/CreateVCenter.json"
+          }
+        },
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "in": "path",
+            "name": "vCenterName",
+            "required": true,
+            "type": "string",
+            "description": "Name of the vCenter."
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Request payload.",
+            "schema": {
+              "$ref": "#/definitions/VCenter"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/VCenter"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/VCenter"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "description": "Tracking URL for long running operation.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      },
+      "get": {
+        "tags": [
+          "VCenters"
+        ],
+        "operationId": "VCenters_Get",
+        "summary": "Gets a vCenter.",
+        "description": "Implements vCenter GET method.",
+        "x-ms-examples": {
+          "GetVCenter": {
+            "$ref": "./examples/GetVCenter.json"
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "in": "path",
+            "name": "vCenterName",
+            "required": true,
+            "type": "string",
+            "description": "Name of the vCenter."
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/VCenter"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "VCenters"
+        ],
+        "operationId": "VCenters_Update",
+        "summary": "Updates a vCenter.",
+        "description": "API to update certain properties of the vCenter resource.",
+        "x-ms-examples": {
+          "UpdateVCenter": {
+            "$ref": "./examples/UpdateVCenter.json"
+          }
+        },
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "in": "path",
+            "name": "vCenterName",
+            "required": true,
+            "type": "string",
+            "description": "Name of the vCenter."
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Resource properties to update.",
+            "schema": {
+              "$ref": "#/definitions/ResourcePatch"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/VCenter"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "VCenters"
+        ],
+        "operationId": "VCenters_Delete",
+        "summary": "Deletes an vCenter.",
+        "description": "Implements vCenter DELETE method.",
+        "x-ms-examples": {
+          "DeleteVCenter": {
+            "$ref": "./examples/DeleteVCenter.json"
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "in": "path",
+            "name": "vCenterName",
+            "required": true,
+            "type": "string",
+            "description": "Name of the vCenter."
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "in": "query",
+            "name": "force",
+            "description": "Whether force delete was specified.",
+            "required": false,
+            "type": "boolean"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "description": "Tracking URL for long running operation.",
+                "type": "string"
+              }
+            }
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.VMware/VCenters": {
+      "get": {
+        "tags": [
+          "VCenters"
+        ],
+        "operationId": "VCenters_List",
+        "summary": "Implements GET vCenters in a subscription.",
+        "description": "List of vCenters in a subscription.",
+        "x-ms-examples": {
+          "ListVCenters": {
+            "$ref": "./examples/ListVCenters.json"
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/VCentersList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.VMware/VCenters": {
+      "get": {
+        "tags": [
+          "VCenters"
+        ],
+        "operationId": "VCenters_ListByResourceGroup",
+        "summary": "Implements GET vCenters in a resource group.",
+        "description": "List of vCenters in a resource group.",
+        "x-ms-examples": {
+          "ListVCentersByResourceGroup": {
+            "$ref": "./examples/ListVCentersByResourceGroup.json"
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/VCentersList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.VMware/VirtualMachines/{virtualMachineName}": {
+      "put": {
+        "tags": [
+          "VirtualMachines"
+        ],
+        "operationId": "VirtualMachines_Create",
+        "description": "Create Or Update virtual machine.",
+        "summary": "Implements virtual machine PUT method.",
+        "x-ms-examples": {
+          "CreateVirtualMachine": {
+            "$ref": "./examples/CreateVirtualMachine.json"
+          }
+        },
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "in": "path",
+            "name": "virtualMachineName",
+            "required": true,
+            "type": "string",
+            "description": "Name of the virtual machine resource."
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Request payload.",
+            "schema": {
+              "$ref": "#/definitions/VirtualMachine"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/VirtualMachine"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/VirtualMachine"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "description": "Tracking URL for long running operation.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      },
+      "get": {
+        "tags": [
+          "VirtualMachines"
+        ],
+        "operationId": "VirtualMachines_Get",
+        "summary": "Gets a virtual machine.",
+        "description": "Implements virtual machine GET method.",
+        "x-ms-examples": {
+          "GetVirtualMachine": {
+            "$ref": "./examples/GetVirtualMachine.json"
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "in": "path",
+            "name": "virtualMachineName",
+            "required": true,
+            "type": "string",
+            "description": "Name of the virtual machine resource."
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/VirtualMachine"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "VirtualMachines"
+        ],
+        "operationId": "VirtualMachines_Update",
+        "summary": "Updates a virtual machine.",
+        "description": "API to update certain properties of the virtual machine resource.",
+        "x-ms-examples": {
+          "UpdateVirtualMachine": {
+            "$ref": "./examples/UpdateVirtualMachine.json"
+          }
+        },
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "in": "path",
+            "name": "virtualMachineName",
+            "required": true,
+            "type": "string",
+            "description": "Name of the virtual machine resource."
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Resource properties to update.",
+            "schema": {
+              "$ref": "#/definitions/VirtualMachineUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/VirtualMachine"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/VirtualMachine"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "description": "Tracking URL for long running operation.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "tags": [
+          "VirtualMachines"
+        ],
+        "operationId": "VirtualMachines_Delete",
+        "summary": "Deletes an virtual machine.",
+        "description": "Implements virtual machine DELETE method.",
+        "x-ms-examples": {
+          "DeleteVirtualMachine": {
+            "$ref": "./examples/DeleteVirtualMachine.json"
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "in": "path",
+            "name": "virtualMachineName",
+            "description": "Name of the virtual machine resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "in": "query",
+            "name": "force",
+            "description": "Whether force delete was specified.",
+            "required": false,
+            "type": "boolean"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "description": "Tracking URL for long running operation.",
+                "type": "string"
+              }
+            }
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.VMware/virtualMachines/{virtualMachineName}/stop": {
+      "post": {
+        "tags": [
+          "VirtualMachines"
+        ],
+        "operationId": "VirtualMachines_Stop",
+        "description": "Stop virtual machine.",
+        "summary": "Implements the operation to stop a virtual machine.",
+        "x-ms-examples": {
+          "StopVirtualMachine": {
+            "$ref": "./examples/StopVirtualMachine.json"
+          }
+        },
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "in": "path",
+            "name": "virtualMachineName",
+            "description": "Name of the virtual machine resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Virtualmachine stop action payload.",
+            "schema": {
+              "$ref": "#/definitions/StopVirtualMachineOptions"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "description": "Tracking URL for long running operation.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.VMware/virtualMachines/{virtualMachineName}/start": {
+      "post": {
+        "tags": [
+          "VirtualMachines"
+        ],
+        "operationId": "VirtualMachines_Start",
+        "description": "Start virtual machine.",
+        "summary": "Implements the operation to start a virtual machine.",
+        "x-ms-examples": {
+          "StartVirtualMachine": {
+            "$ref": "./examples/StartVirtualMachine.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "in": "path",
+            "name": "virtualMachineName",
+            "description": "Name of the virtual machine resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "description": "Tracking URL for long running operation.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.VMware/virtualMachines/{virtualMachineName}/restart": {
+      "post": {
+        "tags": [
+          "VirtualMachines"
+        ],
+        "operationId": "VirtualMachines_Restart",
+        "description": "Restart virtual machine.",
+        "summary": "Implements the operation to restart a virtual machine.",
+        "x-ms-examples": {
+          "RestartVirtualMachine": {
+            "$ref": "./examples/RestartVirtualMachine.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "in": "path",
+            "name": "virtualMachineName",
+            "description": "Name of the virtual machine resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "description": "Tracking URL for long running operation.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.VMware/VirtualMachines": {
+      "get": {
+        "tags": [
+          "VirtualMachines"
+        ],
+        "operationId": "VirtualMachines_List",
+        "summary": "Implements GET virtualMachines in a subscription.",
+        "description": "List of virtualMachines in a subscription.",
+        "x-ms-examples": {
+          "ListVirtualMachines": {
+            "$ref": "./examples/ListVirtualMachines.json"
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/VirtualMachinesList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.VMware/VirtualMachines": {
+      "get": {
+        "tags": [
+          "VirtualMachines"
+        ],
+        "operationId": "VirtualMachines_ListByResourceGroup",
+        "summary": "Implements GET virtualMachines in a resource group.",
+        "description": "List of virtualMachines in a resource group.",
+        "x-ms-examples": {
+          "ListVirtualMachinesByResourceGroup": {
+            "$ref": "./examples/ListVirtualMachinesByResourceGroup.json"
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/VirtualMachinesList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.VMware/VirtualMachineTemplates/{virtualMachineTemplateName}": {
+      "put": {
+        "tags": [
+          "VirtualMachineTemplates"
+        ],
+        "operationId": "VirtualMachineTemplates_Create",
+        "description": "Create Or Update virtual machine template.",
+        "x-ms-examples": {
+          "CreateVirtualMachineTemplate": {
+            "$ref": "./examples/CreateVirtualMachineTemplate.json"
+          }
+        },
+        "summary": "Implements virtual machine template PUT method.",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "in": "path",
+            "name": "virtualMachineTemplateName",
+            "description": "Name of the virtual machine template resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Request payload.",
+            "schema": {
+              "$ref": "#/definitions/VirtualMachineTemplate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/VirtualMachineTemplate"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/VirtualMachineTemplate"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "description": "Tracking URL for long running operation.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      },
+      "get": {
+        "tags": [
+          "VirtualMachineTemplates"
+        ],
+        "operationId": "VirtualMachineTemplates_Get",
+        "summary": "Gets a virtual machine template.",
+        "description": "Implements virtual machine template GET method.",
+        "x-ms-examples": {
+          "GetVirtualMachineTemplate": {
+            "$ref": "./examples/GetVirtualMachineTemplate.json"
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "in": "path",
+            "name": "virtualMachineTemplateName",
+            "description": "Name of the virtual machine template resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/VirtualMachineTemplate"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "VirtualMachineTemplates"
+        ],
+        "operationId": "VirtualMachineTemplates_Update",
+        "summary": "Updates a virtual machine template.",
+        "description": "API to update certain properties of the virtual machine template resource.",
+        "x-ms-examples": {
+          "UpdateVirtualMachineTemplate": {
+            "$ref": "./examples/UpdateVirtualMachineTemplate.json"
+          }
+        },
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "in": "path",
+            "name": "virtualMachineTemplateName",
+            "required": true,
+            "type": "string",
+            "description": "Name of the virtual machine template resource."
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Resource properties to update.",
+            "schema": {
+              "$ref": "#/definitions/ResourcePatch"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/VirtualMachineTemplate"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "VirtualMachineTemplates"
+        ],
+        "operationId": "VirtualMachineTemplates_Delete",
+        "summary": "Deletes an virtual machine template.",
+        "description": "Implements virtual machine template DELETE method.",
+        "x-ms-examples": {
+          "DeleteVirtualMachineTemplate": {
+            "$ref": "./examples/DeleteVirtualMachineTemplate.json"
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "in": "path",
+            "name": "virtualMachineTemplateName",
+            "required": true,
+            "type": "string",
+            "description": "Name of the virtual machine template resource."
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "in": "query",
+            "name": "force",
+            "description": "Whether force delete was specified.",
+            "required": false,
+            "type": "boolean"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "description": "Tracking URL for long running operation.",
+                "type": "string"
+              }
+            }
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.VMware/VirtualMachineTemplates": {
+      "get": {
+        "tags": [
+          "VirtualMachineTemplates"
+        ],
+        "operationId": "VirtualMachineTemplates_List",
+        "summary": "Implements GET virtualMachineTemplates in a subscription.",
+        "description": "List of virtualMachineTemplates in a subscription.",
+        "x-ms-examples": {
+          "ListVirtualMachineTemplates": {
+            "$ref": "./examples/ListVirtualMachineTemplates.json"
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/VirtualMachineTemplatesList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.VMware/VirtualMachineTemplates": {
+      "get": {
+        "tags": [
+          "VirtualMachineTemplates"
+        ],
+        "operationId": "VirtualMachineTemplates_ListByResourceGroup",
+        "summary": "Implements GET virtualMachineTemplates in a resource group.",
+        "description": "List of virtualMachineTemplates in a resource group.",
+        "x-ms-examples": {
+          "ListVirtualMachineTemplatesByResourceGroup": {
+            "$ref": "./examples/ListVirtualMachineTemplatesByResourceGroup.json"
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/VirtualMachineTemplatesList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.VMware/VirtualNetworks/{virtualNetworkName}": {
+      "put": {
+        "tags": [
+          "VirtualNetworks"
+        ],
+        "operationId": "VirtualNetworks_Create",
+        "description": "Create Or Update virtual network.",
+        "summary": "Implements virtual network PUT method.",
+        "x-ms-examples": {
+          "CreateVirtualNetwork": {
+            "$ref": "./examples/CreateVirtualNetwork.json"
+          }
+        },
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "in": "path",
+            "name": "virtualNetworkName",
+            "description": "Name of the virtual network resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Request payload.",
+            "schema": {
+              "$ref": "#/definitions/VirtualNetwork"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/VirtualNetwork"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/VirtualNetwork"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "description": "Tracking URL for long running operation.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      },
+      "get": {
+        "tags": [
+          "VirtualNetworks"
+        ],
+        "operationId": "VirtualNetworks_Get",
+        "summary": "Gets a virtual network.",
+        "description": "Implements virtual network GET method.",
+        "x-ms-examples": {
+          "GetVirtualNetwork": {
+            "$ref": "./examples/GetVirtualNetwork.json"
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "in": "path",
+            "name": "virtualNetworkName",
+            "required": true,
+            "type": "string",
+            "description": "Name of the virtual network resource."
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/VirtualNetwork"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "VirtualNetworks"
+        ],
+        "operationId": "VirtualNetworks_Update",
+        "summary": "Updates a virtual network.",
+        "description": "API to update certain properties of the virtual network resource.",
+        "x-ms-examples": {
+          "UpdateVirtualNetwork": {
+            "$ref": "./examples/UpdateVirtualNetwork.json"
+          }
+        },
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "in": "path",
+            "name": "virtualNetworkName",
+            "description": "Name of the virtual network resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Resource properties to update.",
+            "schema": {
+              "$ref": "#/definitions/ResourcePatch"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/VirtualNetwork"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "VirtualNetworks"
+        ],
+        "operationId": "VirtualNetworks_Delete",
+        "summary": "Deletes an virtual network.",
+        "description": "Implements virtual network DELETE method.",
+        "x-ms-examples": {
+          "DeleteVirtualNetwork": {
+            "$ref": "./examples/DeleteVirtualNetwork.json"
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "in": "path",
+            "name": "virtualNetworkName",
+            "description": "Name of the virtual network resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "in": "query",
+            "name": "force",
+            "description": "Whether force delete was specified.",
+            "required": false,
+            "type": "boolean"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "description": "Tracking URL for long running operation.",
+                "type": "string"
+              }
+            }
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.VMware/VirtualNetworks": {
+      "get": {
+        "tags": [
+          "VirtualNetworks"
+        ],
+        "operationId": "VirtualNetworks_List",
+        "summary": "Implements GET virtualNetworks in a subscription.",
+        "description": "List of virtualNetworks in a subscription.",
+        "x-ms-examples": {
+          "ListVirtualNetworks": {
+            "$ref": "./examples/ListVirtualNetworks.json"
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/VirtualNetworksList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.VMware/VirtualNetworks": {
+      "get": {
+        "tags": [
+          "VirtualNetworks"
+        ],
+        "operationId": "VirtualNetworks_ListByResourceGroup",
+        "summary": "Implements GET virtualNetworks in a resource group.",
+        "description": "List of virtualNetworks in a resource group.",
+        "x-ms-examples": {
+          "ListVirtualNetworksByResourceGroup": {
+            "$ref": "./examples/ListVirtualNetworksByResourceGroup.json"
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/VirtualNetworksList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ResourcePatch": {
+      "type": "object",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags."
+        }
+      },
+      "description": "Object containing updates for patch operations."
+    },
+    "ResourcePoolProperties": {
+      "description": "Defines the resource properties.",
+      "required": [
+        "moRefId",
+        "vCenterId"
+      ],
+      "type": "object",
+      "properties": {
+        "uuid": {
+          "description": "Gets or sets a unique identifier for this resource.",
+          "type": "string",
+          "readOnly": true
+        },
+        "vCenterId": {
+          "description": "Gets or sets the ARM Id of the vCenter resource in which this resource pool resides.",
+          "type": "string"
+        },
+        "moRefId": {
+          "description": "Gets or sets the vCenter MoRef (Managed Object Reference) ID for the resource pool.",
+          "type": "string"
+        },
+        "moName": {
+          "description": "Gets or sets the vCenter Managed Object name for the resource pool.",
+          "type": "string",
+          "readOnly": true
+        },
+        "cpuSharesLevel": {
+          "description": "Gets or sets CPUSharesLevel which specifies the CPU allocation level for this pool.\r\nThis property is used in relative allocation between resource consumers.",
+          "type": "string",
+          "readOnly": true
+        },
+        "cpuReservationMHz": {
+          "format": "int64",
+          "description": "Gets or sets CPUReservationMHz which specifies the CPU size in MHz that is guaranteed\r\nto be available.",
+          "type": "integer",
+          "readOnly": true
+        },
+        "cpuLimitMHz": {
+          "format": "int64",
+          "description": "Gets or sets CPULimitMHz which specifies a CPU usage limit in MHz.\r\nUtilization will not exceed this limit even if there are available resources.",
+          "type": "integer",
+          "readOnly": true
+        },
+        "memSharesLevel": {
+          "description": "Gets or sets CPUSharesLevel which specifies the memory allocation level for this pool.\r\nThis property is used in relative allocation between resource consumers.",
+          "type": "string",
+          "readOnly": true
+        },
+        "memReservationMB": {
+          "format": "int64",
+          "description": "Gets or sets MemReservationMB which specifies the guaranteed available memory in\r\nmegabytes.",
+          "type": "integer",
+          "readOnly": true
+        },
+        "memLimitMB": {
+          "format": "int64",
+          "description": "Gets or sets MemLimitMB specifies a memory usage limit in megabytes.\r\nUtilization will not exceed the specified limit even if there are available resources.",
+          "type": "integer",
+          "readOnly": true
+        },
+        "customResourceName": {
+          "description": "Gets the name of the corresponding resource in Kubernetes.",
+          "type": "string",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "description": "Gets or sets the provisioning state.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "ResourcePool": {
+      "description": "Define the resourcePool.",
+      "required": [
+        "location",
+        "properties",
+        "extendedLocation"
+      ],
+      "type": "object",
+      "x-ms-azure-resource": true,
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "Resource properties.",
+          "$ref": "#/definitions/ResourcePoolProperties"
+        },
+        "location": {
+          "description": "Gets or sets the location.",
+          "type": "string",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "extendedLocation": {
+          "$ref": "#/definitions/ExtendedLocation",
+          "description": "Gets or sets the extended location."
+        },
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "description": "The system data."
+        },
+        "tags": {
+          "description": "Gets or sets the Resource tags.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "name": {
+          "description": "Gets or sets the name.",
+          "type": "string",
+          "readOnly": true
+        },
+        "id": {
+          "description": "Gets or sets the Id.",
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "description": "Gets or sets the type of the resource.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "ResourcePoolsList": {
+      "description": "List of ResourcePools.",
+      "properties": {
+        "nextLink": {
+          "description": "Url to follow for getting next page of ResourcePools.",
+          "type": "string"
+        },
+        "value": {
+          "description": "Array of ResourcePools",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ResourcePool"
+          }
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "VICredential": {
+      "description": "Username / Password Credentials to connect to vcenter.",
+      "type": "object",
+      "properties": {
+        "username": {
+          "description": "Gets or sets username to connect with the vCenter.",
+          "type": "string"
+        },
+        "password": {
+          "description": "Gets or sets the password to connect with the vCenter.",
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "update"
+          ],
+          "x-ms-secret": true
+        }
+      }
+    },
+    "VCenterProperties": {
+      "description": "Defines the resource properties.",
+      "required": [
+        "fqdn",
+		"credentials"		
+      ],
+      "type": "object",
+      "properties": {
+        "uuid": {
+          "description": "Gets or sets a unique identifier for this resource.",
+          "type": "string",
+          "readOnly": true
+        },
+        "fqdn": {
+          "description": "Gets or sets the FQDN/IPAddress of the vCenter.",
+          "type": "string"
+        },
+        "port": {
+          "format": "int32",
+          "description": "Gets or sets the port of the vCenter.",
+          "maximum": 65535,
+          "minimum": 1,
+          "type": "integer"
+        },
+        "version": {
+          "description": "Gets or sets the version of the vCenter.",
+          "type": "string",
+          "readOnly": true
+        },
+        "instanceUuid": {
+          "description": "Gets or sets the instance UUID of the vCenter.",
+          "type": "string",
+          "readOnly": true
+        },
+        "connectionStatus": {
+          "description": "Gets or sets the connection status to the vCenter.",
+          "type": "string",
+          "readOnly": true
+        },
+        "customResourceName": {
+          "description": "Gets the name of the corresponding resource in Kubernetes.",
+          "type": "string",
+          "readOnly": true
+        },
+        "credentials": {
+          "description": "Username / Password Credentials to connect to vcenter.",
+          "$ref": "#/definitions/VICredential"
+        },
+        "conditions": {
+          "description": "Defines a list of readiness conditions for the vcenter.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Condition"
+          },
+          "readOnly": true
+        },
+        "provisioningState": {
+          "description": "Gets or sets the provisioning state.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "VirtualDiskUpdate": {
+      "description": "Defines the virtual disk update.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Gets or sets the name of the virtual disk.",
+          "type": "string"
+        },
+        "diskSizeGB": {
+          "format": "int32",
+          "description": "Gets or sets the disk total size.",
+          "type": "integer"
+        },
+        "deviceKey": {
+          "format": "int32",
+          "description": "Gets or sets the device key value.",
+          "type": "integer"
+        },
+        "diskMode": {
+          "description": "Gets or sets the disk mode.",
+          "$ref": "#/definitions/DiskMode"
+        },
+        "controllerKey": {
+          "description": "Gets or sets the controller id.",
+          "format": "int32",
+          "type": "integer"
+        },
+        "unitNumber": {
+          "description": "Gets or sets the unit number of the disk on the controller.",
+          "format": "int32",
+          "type": "integer"
+        }
+      }
+    },
+    "VirtualDisk": {
+      "description": "Virtual disk model",
+      "properties": {
+        "name": {
+          "description": "Gets or sets the name of the virtual disk.",
+          "type": "string"
+        },
+        "label": {
+          "description": "Gets or sets the label of the virtual disk in vCenter.",
+          "type": "string",
+          "readOnly": true
+        },
+        "diskObjectId": {
+          "description": "Gets or sets the disk object id.",
+          "type": "string",
+          "readOnly": true
+        },
+        "diskSizeGB": {
+          "format": "int32",
+          "description": "Gets or sets the disk total size.",
+          "type": "integer"
+        },
+        "deviceKey": {
+          "format": "int32",
+          "description": "Gets or sets the device key value.",
+          "type": "integer"
+        },
+        "diskMode": {
+          "description": "Gets or sets the disk mode.",
+          "$ref": "#/definitions/DiskMode"
+        },
+        "controllerKey": {
+          "description": "Gets or sets the controller id.",
+          "format": "int32",
+          "type": "integer"
+        },
+        "unitNumber": {
+          "description": "Gets or sets the unit number of the disk on the controller.",
+          "format": "int32",
+          "type": "integer"
+        }
+      }
+    },
+    "Condition": {
+      "description": "Condition defines an extension to status.",
+      "properties": {
+        "type": {
+          "description": "Type of condition.",
+          "type": "string",
+          "readOnly": true
+        },
+        "status": {
+          "description": "Status of the condition.",
+          "type": "string",
+          "readOnly": true
+        },
+        "reason": {
+          "description": "The reason for the condition's status.",
+          "type": "string",
+          "readOnly": true
+        },
+        "message": {
+          "description": "A human readable message indicating details about the status.",
+          "type": "string",
+          "readOnly": true
+        },
+        "severity": {
+          "description": "Severity with which to treat failures of this type of condition.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "VCenter": {
+      "description": "Defines the vCenter.",
+      "required": [
+        "location",
+        "properties",
+        "extendedLocation"
+      ],
+      "type": "object",
+      "x-ms-azure-resource": true,
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "Resource properties.",
+          "$ref": "#/definitions/VCenterProperties"
+        },
+        "location": {
+          "description": "Gets or sets the location.",
+          "type": "string",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "extendedLocation": {
+          "$ref": "#/definitions/ExtendedLocation",
+          "description": "Gets or sets the extended location."
+        },
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "description": "The system data."
+        },
+        "tags": {
+          "description": "Gets or sets the Resource tags.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "name": {
+          "description": "Gets or sets the name.",
+          "type": "string",
+          "readOnly": true
+        },
+        "id": {
+          "description": "Gets or sets the Id.",
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "description": "Gets or sets the type of the resource.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "VCentersList": {
+      "description": "List of VCenters.",
+      "properties": {
+        "nextLink": {
+          "description": "Url to follow for getting next page of VCenters.",
+          "type": "string"
+        },
+        "value": {
+          "description": "Array of VCenters",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VCenter"
+          }
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "OsType": {
+      "description": "Defines the different types of VM guest operating systems.",
+      "readOnly": true,
+      "enum": [
+        "Windows",
+        "Linux",
+        "Other"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "modelAsString": true,
+        "name": "OsType"
+      }
+    },
+    "OsProfile": {
+      "description": "Defines the resource properties.",
+      "type": "object",
+      "properties": {
+        "computerName": {
+          "description": "Gets or sets computer name.",
+          "type": "string"
+        },
+        "adminUsername": {
+          "description": "Gets or sets administrator username.",
+          "type": "string"
+        },
+        "adminPassword": {
+          "description": "Gets or sets administrator password.",
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "update"
+          ],
+          "x-ms-secret": true
+        },
+        "osType": {
+          "description": "Gets or sets the type of the os.",
+          "$ref": "#/definitions/OsType",
+          "readOnly": true
+        },
+        "osName": {
+          "description": "Gets or sets os name.",
+          "type": "string",
+          "readOnly": true
+        },
+        "toolsRunningStatus": {
+          "description": "Gets or sets the current running status of VMware Tools running in the guest operating system.",
+          "type": "string",
+          "readOnly": true
+        },
+        "toolsVersionStatus": {
+          "description": "Gets or sets the current version status of VMware Tools installed in the guest operating system.",
+          "type": "string",
+          "readOnly": true
+        },
+        "toolsVersion": {
+          "description": "Gets or sets the current version of VMware Tools.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "HardwareProfile": {
+      "description": "Defines the resource properties.",
+      "type": "object",
+      "properties": {
+        "memorySizeMB": {
+          "format": "int32",
+          "description": "Gets or sets memory size in MBs for the vm.",
+          "type": "integer"
+        },
+        "numCPUs": {
+          "format": "int32",
+          "description": "Gets or sets the number of vCPUs for the vm.",
+          "type": "integer"
+        },
+        "numCoresPerSocket": {
+          "format": "int32",
+          "description": "Gets or sets the number of cores per socket for the vm. Defaults to 1 if unspecified.",
+          "type": "integer"
+        },
+        "cpuHotAddEnabled": {
+          "description": "Gets or sets a value indicating whether virtual processors can be added while this virtual machine is running.",
+          "type": "boolean",
+          "readOnly": true
+        },
+        "cpuHotRemoveEnabled": {
+          "description": "Gets or sets a value indicating whether virtual processors can be removed while this virtual machine is running.",
+          "type": "boolean",
+          "readOnly": true
+        },
+        "memoryHotAddEnabled": {
+          "description": "Gets or sets a value indicating whether memory can be added while this virtual machine is running.",
+          "type": "boolean",
+          "readOnly": true
+        }
+      }
+    },
+    "NetworkProfileUpdate": {
+      "description": "Defines the update resource properties.",
+      "type": "object",
+      "properties": {
+        "networkInterfaces": {
+          "description": "Gets or sets the list of network interfaces associated with the virtual machine.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/NetworkInterfaceUpdate"
+          }
+        }
+      }
+    },
+    "NetworkProfile": {
+      "description": "Defines the resource properties.",
+      "type": "object",
+      "properties": {
+        "networkInterfaces": {
+          "description": "Gets or sets the list of network interfaces associated with the virtual machine.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/NetworkInterface"
+          }
+        }
+      }
+    },
+    "SCSIControllerType": {
+      "description": "Defines the different types of SCSI controllers.",
+      "enum": [
+        "lsilogic",
+        "buslogic",
+        "pvscsi",
+        "lsilogicsas"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "modelAsString": true,
+        "name": "SCSIControllerType"
+      }
+    },
+    "VirtualSCSISharing": {
+      "description": "Defines the sharing mode for sharing the SCSI bus.",
+      "enum": [
+        "noSharing",
+        "physicalSharing",
+        "virtualSharing"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "modelAsString": true,
+        "name": "VirtualSCSISharing"
+      }
+    },
+    "VirtualSCSIController": {
+      "description": "This data object type contains the properties of a SCSI controller device attached to a virtual machine that is reported by the controller.",
+      "type": "object",
+      "properties": {
+        "type": {
+          "description": "Gets or sets the controller type.",
+          "$ref": "#/definitions/SCSIControllerType"
+        },
+        "controllerKey": {
+          "format": "int32",
+          "description": "Gets or sets the key of the controller.",
+          "type": "integer"
+        },
+        "busNumber": {
+          "format": "int32",
+          "description": "Gets or sets the bus number of the controller.",
+          "type": "integer"
+        },
+        "scsiCtlrUnitNumber": {
+          "format": "int32",
+          "description": "Gets or sets the SCSI controller unit number.",
+          "type": "integer"
+        },
+        "sharing": {
+          "description": "Gets or sets the sharing mode.",
+          "$ref": "#/definitions/VirtualSCSISharing"
+        }
+      }
+    },
+    "StorageProfile": {
+      "description": "Defines the resource properties.",
+      "type": "object",
+      "properties": {
+        "disks": {
+          "description": "Gets or sets the list of virtual disks associated with the virtual machine.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VirtualDisk"
+          }
+        },
+        "scsiControllers": {
+          "description": "Gets or sets the list of virtual SCSI controllers associated with the virtual machine.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VirtualSCSIController"
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "StorageProfileUpdate": {
+      "description": "Defines the resource update properties.",
+      "type": "object",
+      "properties": {
+        "disks": {
+          "description": "Gets or sets the list of virtual disks associated with the virtual machine.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VirtualDiskUpdate"
+          }
+        }
+      }
+    },
+    "ExtendedLocation": {
+      "type": "object",
+      "description": "The extended location.",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "The extended location type."
+        },
+        "name": {
+          "type": "string",
+          "description": "The extended location name."
+        }
+      }
+    },
+    "VirtualMachineProperties": {
+      "description": "Defines the resource properties.",
+      "required": [
+        "resourcePoolId",
+        "templateId"
+      ],
+      "type": "object",
+      "properties": {
+        "uuid": {
+          "description": "Gets or sets a unique identifier for this resource.",
+          "type": "string",
+          "readOnly": true
+        },
+        "resourcePoolId": {
+          "description": "Gets or sets the ARM Id of the resourcePool resource on which this virtual machine will\r\ndeploy.",
+          "type": "string"
+        },
+        "templateId": {
+          "description": "Gets or sets the ARM Id of the template resource to deploy the virtual machine.",
+          "type": "string"
+        },
+        "vCenterId": {
+          "description": "Gets or sets the ARM Id of the vCenter resource in which this resource pool resides.",
+          "type": "string"
+        },
+        "osProfile": {
+          "description": "OS properties.",
+          "$ref": "#/definitions/OsProfile"
+        },
+        "hardwareProfile": {
+          "description": "Hardware properties.",
+          "$ref": "#/definitions/HardwareProfile"
+        },
+        "networkProfile": {
+          "description": "Network properties.",
+          "$ref": "#/definitions/NetworkProfile"
+        },
+        "storageProfile": {
+          "description": "Storage properties.",
+          "$ref": "#/definitions/StorageProfile"
+        },
+        "moRefId": {
+          "description": "Gets or sets the vCenter MoRef (Managed Object Reference) ID for the virtual machine.",
+          "type": "string"
+        },
+        "moName": {
+          "description": "Gets or sets the vCenter Managed Object name for the virtual machine.",
+          "type": "string",
+          "readOnly": true
+        },
+        "folderPath": {
+          "description": "Gets or sets the folder path of the vm.",
+          "type": "string",
+          "readOnly": true
+        },
+        "instanceUuid": {
+          "description": "Gets or sets the instance uuid of the vm.",
+          "type": "string",
+          "readOnly": true
+        },
+        "powerState": {
+          "description": "Gets the power state of the virtual machine.",
+          "type": "string",
+          "readOnly": true
+        },
+        "customResourceName": {
+          "description": "Gets the name of the corresponding resource in Kubernetes.",
+          "type": "string",
+          "readOnly": true
+        },
+        "conditions": {
+          "description": "Defines a list of readiness conditions for the vm.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Condition"
+          },
+          "readOnly": true
+        },
+        "provisioningState": {
+          "description": "Gets or sets the provisioning state.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "VirtualMachine": {
+      "description": "Define the virtualMachine.",
+      "required": [
+        "location",
+        "properties",
+        "extendedLocation"
+      ],
+      "type": "object",
+      "x-ms-azure-resource": true,
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "Resource properties.",
+          "$ref": "#/definitions/VirtualMachineProperties"
+        },
+        "location": {
+          "description": "Gets or sets the location.",
+          "type": "string",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "extendedLocation": {
+          "$ref": "#/definitions/ExtendedLocation",
+          "description": "Gets or sets the extended location."
+        },
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "description": "The system data."
+        },
+        "tags": {
+          "description": "Gets or sets the Resource tags.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "name": {
+          "description": "Gets or sets the name.",
+          "type": "string",
+          "readOnly": true
+        },
+        "id": {
+          "description": "Gets or sets the Id.",
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "description": "Gets or sets the type of the resource.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "VirtualMachineUpdateProperties": {
+      "description": "Defines the resource properties.",
+      "type": "object",
+      "properties": {
+        "hardwareProfile": {
+          "$ref": "#/definitions/HardwareProfile"
+        },
+        "storageProfile": {
+          "$ref": "#/definitions/StorageProfileUpdate"
+        },
+        "networkProfile": {
+          "$ref": "#/definitions/NetworkProfileUpdate"
+        }
+      }
+    },
+    "VirtualMachineUpdate": {
+      "description": "Defines the virtualMachineUpdate.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/VirtualMachineUpdateProperties"
+        },
+        "tags": {
+          "description": "Gets or sets the Resource tags.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "VirtualMachinesList": {
+      "description": "List of VirtualMachines.",
+      "properties": {
+        "nextLink": {
+          "description": "Url to follow for getting next page of VirtualMachines.",
+          "type": "string"
+        },
+        "value": {
+          "description": "Array of VirtualMachines",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VirtualMachine"
+          }
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "StopVirtualMachineOptions": {
+      "description": "Defines the stop action properties.",
+      "type": "object",
+      "properties": {
+        "skipShutdown": {
+          "description": "Gets or sets a value indicating whether to request non-graceful VM shutdown. True value for this flag indicates non-graceful shutdown whereas false indicates otherwise. Defaults to false.",
+          "type": "boolean",
+          "default": false
+        }
+      }
+    },
+    "VirtualMachineTemplateProperties": {
+      "description": "Defines the resource properties.",
+      "required": [
+        "moRefId",
+        "vCenterId"
+      ],
+      "type": "object",
+      "properties": {
+        "uuid": {
+          "description": "Gets or sets a unique identifier for this resource.",
+          "type": "string",
+          "readOnly": true
+        },
+        "vCenterId": {
+          "description": "Gets or sets the ARM Id of the vCenter resource in which this template resides.",
+          "type": "string"
+        },
+        "moRefId": {
+          "description": "Gets or sets the vCenter MoRef (Managed Object Reference) ID for the virtual machine\r\ntemplate.",
+          "type": "string"
+        },
+        "moName": {
+          "description": "Gets or sets the vCenter Managed Object name for the virtual machine template.",
+          "type": "string",
+          "readOnly": true
+        },
+        "memorySizeMB": {
+          "format": "int32",
+          "description": "Gets or sets memory size in MBs for the template.",
+          "type": "integer",
+          "readOnly": true
+        },
+        "numCPUs": {
+          "format": "int32",
+          "description": "Gets or sets the number of vCPUs for the template.",
+          "type": "integer",
+          "readOnly": true
+        },
+        "numCoresPerSocket": {
+          "format": "int32",
+          "description": "Gets or sets the number of cores per socket for the template.\r\nDefaults to 1 if unspecified.",
+          "type": "integer",
+          "readOnly": true
+        },
+        "osType": {
+          "description": "Gets or sets the type of the os.",
+          "$ref": "#/definitions/OsType",
+          "readOnly": true
+        },
+        "osName": {
+          "description": "Gets or sets os name.",
+          "type": "string",
+          "readOnly": true
+        },
+        "folderPath": {
+          "description": "Gets or sets the folder path of the template.",
+          "type": "string",
+          "readOnly": true
+        },
+        "networkInterfaces": {
+          "description": "Gets or sets the network interfaces of the template.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/NetworkInterface"
+          },
+          "readOnly": true
+        },
+        "disks": {
+          "description": "Gets or sets the disks the template.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VirtualDisk"
+          },
+          "readOnly": true
+        },
+        "customResourceName": {
+          "description": "Gets the name of the corresponding resource in Kubernetes.",
+          "type": "string",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "description": "Gets or sets the provisioning state.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "VirtualMachineTemplate": {
+      "description": "Define the virtualMachineTemplate.",
+      "required": [
+        "location",
+        "properties",
+        "extendedLocation"
+      ],
+      "type": "object",
+      "x-ms-azure-resource": true,
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "Resource properties.",
+          "$ref": "#/definitions/VirtualMachineTemplateProperties"
+        },
+        "location": {
+          "description": "Gets or sets the location.",
+          "type": "string",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "extendedLocation": {
+          "$ref": "#/definitions/ExtendedLocation",
+          "description": "Gets or sets the extended location."
+        },
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "description": "The system data."
+        },
+        "tags": {
+          "description": "Gets or sets the Resource tags.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "name": {
+          "description": "Gets or sets the name.",
+          "type": "string",
+          "readOnly": true
+        },
+        "id": {
+          "description": "Gets or sets the Id.",
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "description": "Gets or sets the type of the resource.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "VirtualMachineTemplatesList": {
+      "description": "List of VirtualMachineTemplates.",
+      "properties": {
+        "nextLink": {
+          "description": "Url to follow for getting next page of VirtualMachineTemplates.",
+          "type": "string"
+        },
+        "value": {
+          "description": "Array of VirtualMachineTemplates",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VirtualMachineTemplate"
+          }
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "VirtualNetworkProperties": {
+      "description": "Defines the resource properties.",
+      "required": [
+        "moRefId",
+        "vCenterId"
+      ],
+      "type": "object",
+      "properties": {
+        "uuid": {
+          "description": "Gets or sets a unique identifier for this resource.",
+          "type": "string",
+          "readOnly": true
+        },
+        "vCenterId": {
+          "description": "Gets or sets the ARM Id of the vCenter resource in which this template resides.",
+          "type": "string"
+        },
+        "moRefId": {
+          "description": "Gets or sets the vCenter MoRef (Managed Object Reference) ID for the virtual network.",
+          "type": "string"
+        },
+        "moName": {
+          "description": "Gets or sets the vCenter Managed Object name for the virtual network.",
+          "type": "string",
+          "readOnly": true
+        },
+        "customResourceName": {
+          "description": "Gets the name of the corresponding resource in Kubernetes.",
+          "type": "string",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "description": "Gets or sets the provisioning state.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "VirtualNetwork": {
+      "description": "Define the virtualNetwork.",
+      "required": [
+        "location",
+        "properties",
+        "extendedLocation"
+      ],
+      "type": "object",
+      "x-ms-azure-resource": true,
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "Resource properties.",
+          "$ref": "#/definitions/VirtualNetworkProperties"
+        },
+        "location": {
+          "description": "Gets or sets the location.",
+          "type": "string",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "extendedLocation": {
+          "$ref": "#/definitions/ExtendedLocation",
+          "description": "Gets or sets the extended location."
+        },
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "description": "The system data."
+        },
+        "tags": {
+          "description": "Gets or sets the Resource tags.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "name": {
+          "description": "Gets or sets the name.",
+          "type": "string",
+          "readOnly": true
+        },
+        "id": {
+          "description": "Gets or sets the Id.",
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "description": "Gets or sets the type of the resource.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "VirtualNetworksList": {
+      "description": "List of VirtualNetworks.",
+      "properties": {
+        "nextLink": {
+          "description": "Url to follow for getting next page of VirtualNetworks.",
+          "type": "string"
+        },
+        "value": {
+          "description": "Array of VirtualNetworks",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VirtualNetwork"
+          }
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "NetworkInterfaceUpdate": {
+      "description": "Defines the network interface update.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Gets or sets the name of the network interface.",
+          "type": "string"
+        },
+        "networkId": {
+          "description": "Gets or sets the ARM Id of the network resource to connect the virtual machine.",
+          "type": "string"
+        },
+        "nicType": {
+          "description": "NIC type",
+          "$ref": "#/definitions/NICType"
+        },
+        "powerOnBoot": {
+          "description": "Gets or sets the power on boot.",
+          "$ref": "#/definitions/PowerOnBootOption"
+        },
+        "deviceKey": {
+          "format": "int32",
+          "description": "Gets or sets the device key value.",
+          "type": "integer"
+        }
+      }
+    },
+    "NetworkInterface": {
+      "description": "Network Interface model",
+      "properties": {
+        "name": {
+          "description": "Gets or sets the name of the network interface.",
+          "type": "string"
+        },
+        "label": {
+          "description": "Gets or sets the label of the virtual network in vCenter that the nic is connected to.",
+          "type": "string",
+          "readOnly": true
+        },
+        "ipAddresses": {
+          "description": "Gets or sets the nic ip addresses.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "macAddress": {
+          "description": "Gets or sets the NIC MAC address.",
+          "type": "string",
+          "readOnly": true
+        },
+        "networkId": {
+          "description": "Gets or sets the ARM Id of the network resource to connect the virtual machine.",
+          "type": "string"
+        },
+        "nicType": {
+          "description": "NIC type",
+          "$ref": "#/definitions/NICType"
+        },
+        "powerOnBoot": {
+          "description": "Gets or sets the power on boot.",
+          "$ref": "#/definitions/PowerOnBootOption"
+        },
+        "networkMoRefId": {
+          "description": "Gets or sets the vCenter MoRef (Managed Object Reference) ID of the virtual network\r\nthat the nic is connected to.",
+          "type": "string",
+          "readOnly": true
+        },
+        "networkMoName": {
+          "description": "Gets or sets the name of the virtual network in vCenter that the nic is connected to.",
+          "type": "string",
+          "readOnly": true
+        },
+        "deviceKey": {
+          "format": "int32",
+          "description": "Gets or sets the device key value.",
+          "type": "integer"
+        },
+        "ipSettings": {
+          "description": "Gets or sets the ipsettings.",
+          "$ref": "#/definitions/NicIPSettings"
+        }
+      }
+    },
+    "PowerOnBootOption": {
+      "description": "Defines the options for power on boot.",
+      "enum": [
+        "enabled",
+        "disabled"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "modelAsString": true,
+        "name": "PowerOnBootOption"
+      }
+    },
+    "DiskMode": {
+      "description": "Defines the different types of disk modes.",
+      "enum": [
+        "persistent",
+        "independent_persistent",
+        "independent_nonpersistent"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "modelAsString": true,
+        "name": "DiskMode"
+      }
+    },
+    "NICType": {
+      "description": "NIC type",
+      "type": "string",
+      "enum": [
+        "vmxnet3",
+        "vmxnet2",
+        "vmxnet",
+        "e1000",
+        "e1000e",
+        "pcnet32"
+      ],
+      "x-ms-enum": {
+        "modelAsString": true,
+        "name": "NICType"
+      }
+    },
+    "IPAddressAllocationMethod": {
+      "description": "IP address allocation method.",
+      "enum": [
+        "unset",
+        "dynamic",
+        "static",
+        "linklayer",
+        "random",
+        "other"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "modelAsString": true,
+        "name": "IPAddressAllocationMethod"
+      }
+    },
+    "NicIPAddressSettings": {
+      "description": "IP address information for a virtual network adapter reported by the fabric.",
+      "type": "object",
+      "properties": {
+        "allocationMethod": {
+          "description": "Gets the ip address allocation method.",
+          "type": "string",
+          "readOnly": true
+        },
+        "ipAddress": {
+          "description": "Gets the ip address for the nic.",
+          "type": "string",
+          "readOnly": true
+        },
+        "subnetMask": {
+          "description": "Gets the mask.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "NicIPSettings": {
+      "description": "Defines the network interface ip settings.",
+      "type": "object",
+      "properties": {
+        "allocationMethod": {
+          "description": "Gets or sets the nic allocation method.",
+          "$ref": "#/definitions/IPAddressAllocationMethod"
+        },
+        "dnsServers": {
+          "description": "Gets or sets the dns servers.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "gateway": {
+          "description": "Gets or sets the gateway.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "ipAddress": {
+          "description": "Gets or sets the ip address for the nic.",
+          "type": "string"
+        },
+        "subnetMask": {
+          "description": "Gets or sets the mask.",
+          "type": "string"
+        },
+        "primaryWinsServer": {
+          "description": "Gets or sets the primary server.",
+          "type": "string",
+          "readOnly": true
+        },
+        "secondaryWinsServer": {
+          "description": "Gets or sets the secondary server.",
+          "type": "string",
+          "readOnly": true
+        },
+        "ipAddressInfo": {
+          "description": "Gets or sets the IP address information being reported for this NIC. This contains the same IPv4 information above plus IPV6 information.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/NicIPAddressSettings"
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "operation": {
+      "description": "Operation provided by provider",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the operation"
+        },
+        "display": {
+          "type": "object",
+          "description": "Properties of the operation",
+          "properties": {
+            "provider": {
+              "type": "string",
+              "description": "Provider name"
+            },
+            "resource": {
+              "type": "string",
+              "description": "Resource name"
+            },
+            "operation": {
+              "type": "string",
+              "description": "Operation name"
+            },
+            "description": {
+              "type": "string",
+              "description": "Description of the operation"
+            }
+          }
+        }
+      }
+    },
+    "operationsList": {
+      "description": "Lists the operations available.",
+      "properties": {
+        "nextLink": {
+          "description": "Url to follow for getting next page of operations.",
+          "type": "string"
+        },
+        "value": {
+          "description": "Array of operations",
+          "type": "array",
+          "items": {
+            "description": "Operation.",
+            "$ref": "#/definitions/operation"
+          }
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "ErrorResponse": {
+      "description": "Error response.",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/ErrorDefinition",
+          "description": "The error details."
+        }
+      }
+    },
+    "ErrorDefinition": {
+      "description": "Error definition.",
+      "properties": {
+        "code": {
+          "description": "Service specific error code which serves as the substatus for the HTTP error code.",
+          "type": "string",
+          "readOnly": true
+        },
+        "message": {
+          "description": "Description of the error.",
+          "type": "string",
+          "readOnly": true
+        },
+        "details": {
+          "description": "Internal error details.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ErrorDefinition"
+          },
+          "readOnly": true
+        }
+      }
+    }
+  },
+  "parameters": {
+    "subscriptionId": {
+      "in": "path",
+      "name": "subscriptionId",
+      "description": "The Subscription ID.",
+      "required": true,
+      "type": "string"
+    },
+    "api-version": {
+      "in": "query",
+      "name": "api-version",
+      "description": "Client Api Version.",
+      "required": true,
+      "type": "string"
+    },
+    "resourceGroupName": {
+      "in": "path",
+      "name": "resourceGroupName",
+      "description": "The Resource Group Name.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}
