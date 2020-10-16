@@ -297,7 +297,7 @@
           "$ref": "#/definitions/BoundingBox"
         },
         "appearance": {
-          "description": "Style and styleConfidence of the text line.",
+          "description": "Appearance of the text line.",
           "type": "object",
           "$ref": "#/definitions/Appearance"
         },
@@ -347,22 +347,36 @@
       }
     },
     "Appearance": {
-      "description": "An object representing the style and styleConfidence.",
+      "description": "An object representing the appearance of the text line.",
       "type": "object",
       "required": [
-        "style",
-        "styleConfidence"
+        "style"
       ],
       "properties": {
         "style": {
-          "description": "The text line style.",
+          "description": "An object representing the Style of the text line.",
+          "type": "object",
+          "$ref": "#/definitions/Style"
+        }
+      }
+    },
+    "Style": {
+      "description": "An object representing the style of the text line.",
+      "type": "object",
+      "required": [
+        "name",
+        "confidence"
+      ],
+      "properties": {
+        "name": {
+          "description": "The text line style name.",
           "type": "string",
           "enum": [
             "handwriting",
-            "print"
+            "other"
           ]
         },
-        "styleConfidence": {
+        "confidence": {
           "description": "The confidence of text line style.",
           "type": "number",
           "format": "float"
