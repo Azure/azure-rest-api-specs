@@ -631,57 +631,6 @@
         }
       }
     },
-    "/providers/Microsoft.Capacity/operationResults/{operationResultId}": {
-      "get": {
-        "summary": "Get OperationResult",
-        "description": "Get operationResult.",
-        "operationId": "OperationResults_Get",
-        "x-ms-examples": {
-          "GetOperationResult": {
-            "$ref": "./examples/GetOperationResult.json"
-          }
-        },
-        "x-ms-long-running-operation": true,
-        "parameters": [
-          {
-            "$ref": "#/parameters/OperationResultIdParameter"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          }
-        ],
-        "tags": [
-          "OperationResult"
-        ],
-        "responses": {
-          "200": {
-            "description": "Operation is completed.",
-            "schema": {
-              "$ref": "#/definitions/OperationResultResponse"
-            }
-          },
-          "202": {
-            "description": "Operation is still in progress.",
-            "headers": {
-              "Location": {
-                "type": "string",
-                "description": "URL to query for the status of the operation."
-              },
-              "Retry-after": {
-                "type": "string",
-                "description": "Clients should wait for the Retry-After interval before polling again"
-              }
-            }
-          },
-          "default": {
-            "description": "Unexpected error",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            }
-          }
-        }
-      }
-    },
     "/providers/Microsoft.Capacity/calculateExchange": {
       "post": {
         "summary": "Calculates the refund amounts and price of the new purchases.",
@@ -709,7 +658,10 @@
         ],
         "responses": {
           "200": {
-            "description": "The request is completed."
+            "description": "The request is completed.",
+            "schema": {
+              "$ref": "#/definitions/CalculateExchangeOperationResultResponse"
+            }
           },
           "202": {
             "description": "The request is accepted and is being processed.",
@@ -718,7 +670,7 @@
                 "type": "string",
                 "description": "URL to query for the status of the operation."
               },
-              "Retry-after": {
+              "Retry-After": {
                 "type": "string",
                 "description": "Clients should wait for the Retry-After interval before polling again"
               }
@@ -760,7 +712,10 @@
         ],
         "responses": {
           "200": {
-            "description": "The request is completed."
+            "description": "The request is completed.",
+            "schema": {
+              "$ref": "#/definitions/ExchangeOperationResultResponse"
+            }
           },
           "202": {
             "description": "The request is accepted and is being processed.",
@@ -769,7 +724,7 @@
                 "type": "string",
                 "description": "URL to query for the status of the operation."
               },
-              "Retry-after": {
+              "Retry-After": {
                 "type": "string",
                 "description": "Clients should wait for the Retry-After interval before polling again"
               }
@@ -846,20 +801,6 @@
         "sessionId": {
           "type": "string",
           "description": "SessionId that was returned by CalculateExchange API."
-        },
-        "reservationsToPurchase": {
-          "type": "array",
-          "description": "List of reservations that are being purchased in this exchange.",
-          "items": {
-            "$ref": "#/definitions/PurchaseRequest"
-          }
-        },
-        "reservationsToExchange": {
-          "type": "array",
-          "description": "List of reservations that are being returned in this exchange.",
-          "items": {
-            "$ref": "#/definitions/ReturnRequest"
-          }
         }
       }
     },
@@ -904,7 +845,7 @@
         "quantity": {
           "type": "integer",
           "format": "int32",
-          "description": "Quantity to be returned"
+          "description": "Quantity to be returned. Must be greater than zero."
         }
       }
     },
@@ -995,6 +936,239 @@
       "properties": {
         "name": {
           "type": "string"
+        }
+      }
+    },
+    "CalculateExchangeOperationResultResponse": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "It should match what is used to GET the operation result."
+        },
+        "name": {
+          "type": "string",
+          "description": "It must match the last segment of the id field, and will typically be a GUID / system generated value."
+        },
+        "status": {
+          "type": "string",
+          "description": "Status of the operation.",
+          "enum": [
+            "Succeeded",
+            "Failed",
+            "Cancelled"
+          ],
+          "x-ms-enum": {
+            "name": "OperationResultStatus",
+            "modelAsString": true
+          }
+        },
+        "properties": {
+          "$ref": "#/definitions/CalculateExchangeResposeProperties"
+        },
+        "error": {
+          "$ref": "#/definitions/OperationResultError"
+        }
+      }
+    },
+    "ExchangeOperationResultResponse": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "It should match what is used to GET the operation result."
+        },
+        "name": {
+          "type": "string",
+          "description": "It must match the last segment of the id field, and will typically be a GUID / system generated value."
+        },
+        "status": {
+          "type": "string",
+          "description": "Status of the operation.",
+          "enum": [
+            "Succeeded",
+            "Failed",
+            "Cancelled"
+          ],
+          "x-ms-enum": {
+            "name": "OperationResultStatus",
+            "modelAsString": true
+          }
+        },
+        "properties": {
+          "$ref": "#/definitions/ExchangeResposeProperties"
+        },
+        "error": {
+          "$ref": "#/definitions/OperationResultError"
+        }
+      }
+    },
+    "OperationResultError": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "Required if status == failed or status == cancelled. If status == failed, provide an invariant error code used for error troubleshooting, aggregation, and analysis."
+        },
+        "message": {
+          "type": "string",
+          "description": "Required if status == failed. Localized. If status == failed, provide an actionable error message indicating what error occurred, and what the user can do to address the issue."
+        }
+      }
+    },
+    "CalculateExchangeResposeProperties": {
+      "type": "object",
+      "properties": {
+        "sessionId": {
+          "type": "string",
+          "description": "Exchange session identifier"
+        },
+        "netPayable": {
+          "$ref": "#/definitions/Price"
+        },
+        "refundsTotal": {
+          "$ref": "#/definitions/Price"
+        },
+        "purchasesTotal": {
+          "$ref": "#/definitions/Price"
+        },
+        "reservationsToPurchase": {
+          "type": "array",
+          "description": "Purchase details",
+          "items": {
+            "$ref": "#/definitions/CalculateExchangePriceDetails"
+          }
+        },
+        "reservationsToExchange": {
+          "type": "array",
+          "description": "Refund details",
+          "items": {
+            "$ref": "#/definitions/ReturnResponse"
+          }
+        },
+        "policyResult": {
+          "$ref": "#/definitions/ExchangePolicyErrors"
+        }
+      }
+    },
+    "ExchangeResposeProperties": {
+      "type": "object",
+      "properties": {
+        "sessionId": {
+          "type": "string",
+          "description": "Exchange session identifier"
+        },
+        "netPayable": {
+          "$ref": "#/definitions/Price"
+        },
+        "refundsTotal": {
+          "$ref": "#/definitions/Price"
+        },
+        "purchasesTotal": {
+          "$ref": "#/definitions/Price"
+        },
+        "reservationsToPurchase": {
+          "type": "array",
+          "description": "Purchase details",
+          "items": {
+            "$ref": "#/definitions/ExchangePriceDetails"
+          }
+        },
+        "reservationsToExchange": {
+          "type": "array",
+          "description": "Refund details",
+          "items": {
+            "$ref": "#/definitions/ReturnResponse"
+          }
+        },
+        "policyResult": {
+          "$ref": "#/definitions/ExchangePolicyErrors"
+        }
+      }
+    },
+    "ExchangePolicyErrors": {
+      "type": "object",
+      "properties": {
+        "policyErrors": {
+          "type": "array",
+          "description": "Returns any Exchange Policy errors",
+          "items": {
+            "$ref": "#/definitions/ExchangePolicyError"
+          }
+        }
+      }
+    },
+    "ExchangePolicyError": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string"
+        },
+        "message": {
+          "type": "string"
+        }
+      }
+    },
+    "ReturnResponse": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Fully qualified id of the ReservationOrder being returned."
+        },
+        "properties": {
+          "$ref": "#/definitions/ReturnResponseProperties"
+        }
+      }
+    },
+    "ReturnResponseProperties": {
+      "type": "object",
+      "properties": {
+        "quantity": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Quantity to be returned"
+        },
+        "billingRefundAmount": {
+          "$ref": "#/definitions/Price"
+        }
+      }
+    },
+    "CalculateExchangePriceDetails": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/CalculateExchangePriceDetailsProperties"
+        }
+      }
+    },
+    "ExchangePriceDetails": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ExchangePriceDetailsProperties"
+        }
+      }
+    },
+    "CalculateExchangePriceDetailsProperties": {
+      "type": "object",
+      "description": "Estimated purchase total",
+      "properties": {
+        "purchaseTotal": {
+          "$ref": "#/definitions/Price"
+        }
+      }
+    },
+    "ExchangePriceDetailsProperties": {
+      "type": "object",
+      "description": "Estimated purchase total",
+      "properties": {
+        "reservationOrderId": {
+          "type": "string",
+          "description": "Fully qualified id of the ReservationOrder being purchased"
+        },
+        "purchaseTotal": {
+          "$ref": "#/definitions/Price"
         }
       }
     },
@@ -1795,9 +1969,6 @@
         }
       }
     },
-    "OperationResultResponse": {
-      "type": "object"
-    },
     "InstanceFlexibility": {
       "type": "string",
       "description": "Turning this on will apply the reservation discount to other VMs in the same VM size group. Only specify for VirtualMachines reserved resource type.",
@@ -1925,7 +2096,7 @@
       "x-ms-parameter-location": "method",
       "in": "body",
       "required": true,
-      "description": "Request containing the refunds and purchases that need to be executed.",
+      "description": "Request containing purchases and refunds that need to be executed.",
       "schema": {
         "$ref": "#/definitions/CalculateExchangeRequest"
       }
