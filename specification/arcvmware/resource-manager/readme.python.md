@@ -10,7 +10,7 @@ python:
   payload-flattening-threshold: 2
   namespace: Microsoft.VMware
   package-name: vmware
-  package-version: 2019-12-20-privatepreview
+  package-version: 2020-10-01-preview
   clear-output-folder: true
 ```
 
