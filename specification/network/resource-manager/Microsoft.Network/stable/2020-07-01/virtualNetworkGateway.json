@@ -2759,29 +2759,33 @@
       },
       "description": "Gateway routing details."
     },
+    "ExtendedLocationType": {
+      "type": "string",
+      "description": "The supported ExtendedLocation types. Currently only EdgeZone is supported in Microsoft.Network resources.",
+      "enum": [
+        "EdgeZone"
+      ],
+      "x-ms-enum": {
+        "name": "ExtendedLocationTypes",
+        "modelAsString": true
+      }
+    },
     "ExtendedLocation": {
+      "description": "ExtendedLocation complex type.",
       "properties": {
         "name": {
           "type": "string",
           "description": "The name of the extended location."
         },
         "type": {
-          "type": "string",
-          "description": "The type of the extended location.",
-          "enum": [
-            "EdgeZone"
-          ],
-          "x-ms-enum": {
-            "name": "ExtendedLocationType",
-            "modelAsString": true
-          }
+          "$ref": "#/definitions/ExtendedLocationType",
+          "description": "The type of the extended location."
         }
       },
       "required": [
         "name",
         "type"
-      ],
-      "description": "ExtendedLocation complex type."
+      ]
     },
     "VirtualNetworkGateway": {
       "properties": {
