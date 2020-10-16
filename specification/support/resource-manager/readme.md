@@ -111,4 +111,8 @@ directive:
     where: $.definitions.SupportTicketDetailsProperties.properties.require24X7Response
     from: support.json
     reason: It will be a breaking change.
+  - suppress: EnumInsteadOfBoolean
+    where: $.definitions.CheckNameAvailabilityOutput.properties.nameAvailable
+    from: support.json
+    reason: It will be a breaking change.
 ```
