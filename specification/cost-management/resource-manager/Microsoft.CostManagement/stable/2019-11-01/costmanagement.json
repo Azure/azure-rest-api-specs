@@ -1132,6 +1132,12 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "Request processing completed.",
+            "schema": {
+              "$ref": "#/definitions/OperationStatus"
+            }
+          },
           "202": {
             "description": "Accepted. Request will be processed. Use the Location header to check the status.",
             "headers": {
@@ -1143,12 +1149,6 @@
                 "description": "The amount of delay to use while the status of the operation is checked. The value is expressed in seconds.",
                 "type": "integer"
               }
-            }
-          },
-          "200": {
-            "description": "Request processing completed.",
-            "schema": {
-              "$ref": "#/definitions/OperationStatus"
             }
           },
           "default": {
@@ -1197,6 +1197,12 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "Request processing completed.",
+            "schema": {
+              "$ref": "#/definitions/OperationStatus"
+            }
+          },
           "202": {
             "description": "Accepted. Request will be processed. Use the Location header to check the status.",
             "headers": {
@@ -1208,12 +1214,6 @@
                 "description": "The amount of delay to use while the status of the operation is checked. The value is expressed in seconds.",
                 "type": "integer"
               }
-            }
-          },
-          "200": {
-            "description": "Request processing completed.",
-            "schema": {
-              "$ref": "#/definitions/OperationStatus"
             }
           },
           "default": {
@@ -2436,7 +2436,8 @@
         },
         "validuntil": {
           "description": "The time at which report URL becomes invalid.",
-          "type": "date-time"
+          "type": "string",
+          "format": "date-time"
         }
       }
     },
