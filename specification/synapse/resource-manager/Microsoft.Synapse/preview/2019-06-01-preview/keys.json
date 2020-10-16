@@ -255,7 +255,7 @@
             },
             {
               "schema": {
-                "$ref": "#/definitions/Key"
+                "$ref": "#/definitions/KeyPatchInfo"
               },
               "in": "body",
               "name": "keyProperties",
@@ -349,6 +349,19 @@
             "description": "Keys resource properties",
             "$ref": "#/definitions/KeyProperties",
             "x-ms-client-flatten": true
+          }
+        }
+      },
+      "KeyPatchInfo": {
+        "description": "KeyInfo patch details",
+        "type": "object",
+        "properties": {
+          "tags": {
+            "description": "Resource tags",
+            "additionalProperties": {
+              "type": "string"
+            },
+            "type": "object"
           }
         }
       },
