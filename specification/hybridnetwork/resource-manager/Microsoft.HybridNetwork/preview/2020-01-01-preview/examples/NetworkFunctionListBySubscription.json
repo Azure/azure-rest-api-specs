@@ -1,32 +1,34 @@
 {
   "parameters": {
     "api-version": "2020-01-01-preview",
-    "subscriptionId": "subid",
-    "locationName": "eastus",
-    "vendorName": "testVendor"
+    "subscriptionId": "subid"
   },
   "responses": {
     "200": {
       "body": {
         "value": [
           {
-            "id": "/subscriptions/subid/providers/Microsoft.HybridNetwork/locations/eastus/vendors/testVendor/virtualNetworkFunctions/testServiceKey",
-            "name": "TestServiceKey",
-            "type": "Microsoft.HybridNetwork/locations/vendors/virtualNetworkFunctions",
+            "id": "/subscriptions/subid/resourcegroups/rg/providers/Microsoft.HybridNetwork/networkFunctions/testNf",
+            "name": "testNf",
+            "type": "Microsoft.HybridNetwork/networkFunctions",
             "location": "eastus",
             "properties": {
               "provisioningState": "Succeeded",
-              "vendorProvisioningState": "Provisioning",
+              "device": {
+                "id": "/subscriptions/subid/resourcegroups/rg/providers/Microsoft.HybridNetwork/devices/testDevice"
+              },
               "skuName": "testSku",
               "skuType": "SDWAN",
-              "virtualNetworkFunctionVendorConfigurations": [
+              "vendorName": "testVendor",
+              "serviceKey": "testServiceKey",
+              "vendorProvisioningState": "NotProvisioned",
+              "managedApplication": {
+                "id": "/subscriptions/subid/resourceGroups/rg/providers/Microsoft.Solutions/applications/testServiceKey"
+              },
+              "managedApplicationParameters": {},
+              "networkFunctionUserConfigurations": [
                 {
                   "roleName": "testRole",
-                  "customData": "base-64 encoded string of custom data",
-                  "osProfile": {
-                    "adminUsername": "dummyuser",
-                    "sshPublicKey": null
-                  },
                   "userDataParameters": {},
                   "networkInterfaces": [
                     {

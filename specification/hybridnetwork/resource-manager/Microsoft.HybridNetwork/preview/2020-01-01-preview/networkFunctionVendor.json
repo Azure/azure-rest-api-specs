@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "HybridNetworkManagementClient",
-    "description": "The resources in this swagger specification will be used to manage the virtual network function vendor in a hybrid network resource provider.",
+    "description": "The resources in this swagger specification will be used to manage the network function vendor in a Hybrid Network resource provider.",
     "version": "2020-01-01-preview"
   },
   "host": "management.azure.com",
@@ -34,38 +34,38 @@
     }
   },
   "paths": {
-    "/subscriptions/{subscriptionId}/providers/Microsoft.HybridNetwork/virtualNetworkFunctionVendors": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.HybridNetwork/networkFunctionVendors": {
       "get": {
         "tags": [
-          "virtualNetworkFunctionVendors"
+          "networkFunctionVendors"
         ],
-        "operationId": "virtualNetworkFunctionVendors_List",
-        "description": "List all the available vendor and sku information in hybrid network.",
+        "operationId": "networkFunctionVendors_List",
+        "description": "Lists all the available vendor and sku information.",
         "parameters": [
           {
-            "$ref": "./common.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "./common.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
           "200": {
-            "description": "Request successful. The operation returns a list of hybrid network vendors with available sku information.",
+            "description": "Request is successful. The operation returns a list of vendors with available sku information.",
             "schema": {
-              "$ref": "#/definitions/VirtualNetworkFunctionVendorListResult"
+              "$ref": "#/definitions/NetworkFunctionVendorListResult"
             }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "./common.json#/definitions/ErrorDetails"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
         "x-ms-examples": {
-          "List hybrid network vendors and skus.": {
-            "$ref": "./examples/VirtualNetworkFunctionVendorAndSkuList.json"
+          "List vendors and skus.": {
+            "$ref": "./examples/NetworkFunctionVendorAndSkuListBySubscription.json"
           }
         },
         "x-ms-pageable": {
@@ -73,45 +73,45 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.HybridNetwork/virtualNetworkFunctionVendors/{vendorName}/vendorSkus": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.HybridNetwork/networkFunctionVendors/{vendorName}/vendorSkus": {
       "get": {
         "tags": [
-          "virtualNetworkFunctionVendors"
+          "networkFunctionVendors"
         ],
-        "operationId": "VirtualNetworkFunctionVendorSkus_ListByVendor",
-        "description": "List all virtual network function vendor sku details in a vendor",
+        "operationId": "NetworkFunctionVendorSkus_ListByVendor",
+        "description": "Lists all network function vendor sku details in a vendor.",
         "parameters": [
           {
             "name": "vendorName",
-            "description": "The name of the hybrid network virtual network function vendor.",
+            "description": "The name of the network function vendor.",
             "in": "path",
             "required": true,
             "type": "string"
           },
           {
-            "$ref": "./common.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "./common.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
           "200": {
-            "description": "Request successful. The operation returns a list of virtual network function vendor skus",
+            "description": "Request is successful. The operation returns a list of network function vendor skus.",
             "schema": {
-              "$ref": "#/definitions/VirtualNetworkFunctionSkuListResult"
+              "$ref": "#/definitions/NetworkFunctionSkuListResult"
             }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "./common.json#/definitions/ErrorDetails"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
         "x-ms-examples": {
-          "List hybrid network vendors and skus.": {
-            "$ref": "./examples/VirtualNetworkFunctionSkuList.json"
+          "List vendors and skus.": {
+            "$ref": "./examples/NetworkFunctionSkuListByVendor.json"
           }
         },
         "x-ms-pageable": {
@@ -119,52 +119,52 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.HybridNetwork/virtualNetworkFunctionVendors/{vendorName}/vendorSkus/{vendorSkuName}": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.HybridNetwork/networkFunctionVendors/{vendorName}/vendorSkus/{vendorSkuName}": {
       "get": {
         "tags": [
-          "virtualNetworkFunctionVendors"
+          "networkFunctionVendors"
         ],
-        "operationId": "virtualNetworkFunctionVendorSkus_List",
-        "description": "Gets information about hybrid network virtual network function vendor sku details",
+        "operationId": "networkFunctionVendorSkus_ListBySku",
+        "description": "Lists information about network function vendor sku details.",
         "parameters": [
           {
             "name": "vendorName",
-            "description": "The name of the hybrid network virtual network function vendor.",
+            "description": "The name of the network function vendor.",
             "in": "path",
             "required": true,
             "type": "string"
           },
           {
             "name": "vendorSkuName",
-            "description": "The name of the hybrid network virtual network function sku.",
+            "description": "The name of the network function sku.",
             "in": "path",
             "required": true,
             "type": "string"
           },
           {
-            "$ref": "./common.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "./common.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
           "200": {
-            "description": "Request successful. The operation returns the resulting hybrid network virtual network function vendor sku details.",
+            "description": "Request is successful. The operation returns the resulting network function vendor sku details.",
             "schema": {
-              "$ref": "#/definitions/VirtualNetworkFunctionSkuDetails"
+              "$ref": "#/definitions/NetworkFunctionSkuDetails"
             }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "./common.json#/definitions/ErrorDetails"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
         "x-ms-examples": {
-          "Get virtual network function sku details": {
-            "$ref": "./examples/VirtualNetworkFunctionGetSkuDetails.json"
+          "Get network function sku details": {
+            "$ref": "./examples/NetworkFunctionSkuDetailsGet.json"
           }
         },
         "x-ms-pageable": {
@@ -185,20 +185,20 @@
           "description": "The vendor sku type."
         }
       },
-      "description": "The virtual network function sku overview."
+      "description": "The network function sku overview."
     },
-    "VirtualNetworkFunctionSkuDetails": {
+    "NetworkFunctionSkuDetails": {
       "properties": {
         "skuType": {
           "$ref": "./common.json#/definitions/SkuType",
-          "description": "The virtual network function sku type."
+          "description": "The network function sku type."
         },
         "value": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/VirtualNetworkFunctionSkuRoleDetails"
+            "$ref": "#/definitions/NetworkFunctionSkuRoleDetails"
           },
-          "description": "The virtual network function sku role details."
+          "description": "The network function sku role details."
         },
         "nextLink": {
           "type": "string",
@@ -206,42 +206,42 @@
           "description": "The URL to get the next set of results."
         }
       },
-      "description": "The virtual network function sku details."
+      "description": "The network function sku details."
     },
     "VendorDetails": {
       "properties": {
         "vendorName": {
           "type": "string",
-          "description": "The virtual network function vendor name."
+          "description": "The network function vendor name."
         },
         "skuList": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/SkuOverview"
           },
-          "description": "The virtual network function sku list."
+          "description": "The network function sku list."
         }
       },
-      "description": "The virtual network function vendor details."
+      "description": "The network function vendor details."
     },
-    "VirtualNetworkFunctionVendor": {
+    "NetworkFunctionVendor": {
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/VendorDetails",
-          "description": "Vendors of the hybrid network service provider."
+          "description": "Vendors of Hybrid Network service provider."
         }
       },
-      "description": "The virtual network function vendor."
+      "description": "The network function vendor."
     },
-    "VirtualNetworkFunctionVendorListResult": {
+    "NetworkFunctionVendorListResult": {
       "properties": {
         "value": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/VirtualNetworkFunctionVendor"
+            "$ref": "#/definitions/NetworkFunctionVendor"
           },
-          "description": "A list of available hybrid network virtual network function vendors and skus."
+          "description": "A list of available network function vendors and skus."
         },
         "nextLink": {
           "type": "string",
@@ -249,13 +249,13 @@
           "description": "The URL to get the next set of results."
         }
       },
-      "description": "The virtual network function vendor list result."
+      "description": "The network function vendor list result."
     },
-    "VirtualNetworkFunctionSkuRoleDetails": {
+    "NetworkFunctionSkuRoleDetails": {
       "properties": {
         "roleName": {
           "type": "string",
-          "description": "The name of the virtual network function role."
+          "description": "The name of the network function role."
         },
         "userDataTemplate": {
           "$ref": "./common.json#/definitions/UserDataTemplate",
@@ -273,16 +273,16 @@
           "description": "The network interface configuration."
         }
       },
-      "description": "The virtual network function user configuration."
+      "description": "The network function user configuration."
     },
-    "VirtualNetworkFunctionSkuListResult": {
+    "NetworkFunctionSkuListResult": {
       "properties": {
         "value": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/SkuOverview"
           },
-          "description": "The virtual network function vendor sku overview properties."
+          "description": "The network function vendor sku overview properties."
         },
         "nextLink": {
           "type": "string",
@@ -290,7 +290,7 @@
           "description": "The URL to get the next set of results."
         }
       },
-      "description": "A list of available hybrid network virtual network function skus."
+      "description": "A list of available network function skus."
     }
   }
 }
