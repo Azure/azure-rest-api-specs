@@ -9,7 +9,7 @@ csharp:
   license-header: MICROSOFT_MIT_NO_VERSION
   payload-flattening-threshold: 1
   clear-output-folder: true
-  client-side-validation: false
-  namespace: Microsoft.Quantum
+  client-side-validation: true
+  namespace: Microsoft.Azure.Quantum.Client
   output-folder: $(csharp-sdks-folder)/quantum/management/Microsoft.Quantum/GeneratedProtocol
 ```
