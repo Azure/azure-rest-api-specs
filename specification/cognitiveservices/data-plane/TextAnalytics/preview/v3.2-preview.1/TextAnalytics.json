@@ -1,14 +1,14 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "v3.1-preview.2",
+    "version": "v3.2-preview.1",
     "contact": {
       "name": "Microsoft Cognitive Services",
       "url": "https://azure.microsoft.com/en-us/services/cognitive-services/text-analytics/",
       "email": "mlapi@microsoft.com"
     },
     "title": "Text Analytics Client",
-    "description": "The Text Analytics API is a suite of text analytics web services built with best-in-class Microsoft machine learning algorithms. The API can be used to analyze unstructured text for tasks such as sentiment analysis, key phrase extraction and language detection. No training data is needed to use this API; just bring your text data. This API uses advanced natural language processing techniques to deliver best in class predictions. Further documentation can be found in https://docs.microsoft.com/en-us/azure/cognitive-services/text-analytics/overview"
+    "description": "The Text Analytics API is a suite of natural language processing (NLP)  services built with best-in-class Microsoft machine learning algorithms.  The API can be used to analyze unstructured text for tasks such as sentiment analysis,  key phrase extraction and language detection. Further documentation can be found in <a href=\"https://docs.microsoft.com/en-us/azure/cognitive-services/text-analytics/overview\">https://docs.microsoft.com/en-us/azure/cognitive-services/text-analytics/overview</a>"
   },
   "securityDefinitions": {
     "apim_key": {
@@ -23,7 +23,7 @@
     }
   ],
   "x-ms-parameterized-host": {
-    "hostTemplate": "{Endpoint}/text/analytics/v3.1-preview.2",
+    "hostTemplate": "{Endpoint}/text/analytics/v3.2-preview.1",
     "useSchemePrefix": false,
     "parameters": [
       {
@@ -32,6 +32,292 @@
     ]
   },
   "paths": {
+    "/analyze": {
+      "post": {
+        "consumes": [
+          "application/json",
+          "text/json"
+        ],
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "description": "Submit a collection of text documents for analysis. Specify one or more unique tasks to be executed.",
+        "operationId": "Analyze",
+        "summary": "Submit analysis job",
+        "parameters": [
+          {
+            "description": "Collection of documents to analyze and tasks to execute.",
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/AnalyzeBatchInput"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "A successful call results with an Operation-Location header used to check the status of the analysis job.",
+            "headers": {
+              "Operation-Location": {
+                "type": "string"
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            },
+            "x-ms-error-response": true
+          },
+          "500": {
+            "description": "Internal error response",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            },
+            "x-ms-error-response": true
+          }
+        },
+        "x-ms-examples": {
+          "Successful Submit analysis job request": {
+            "$ref": ".//examples//SuccessfulAnalyzeRequest.json"
+          }
+        },
+        "deprecated": false,
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/analyze/jobs/{jobId}": {
+      "get": {
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "description": "Get the status of an analysis job.  A job may consist of one or more tasks.  Once all tasks are completed, the job will transition to the completed state and results will be available for each task.",
+        "operationId": "AnalyzeStatus",
+        "summary": "Get analysis status and results",
+        "parameters": [
+          {
+            "$ref": "#/parameters/JobId"
+          },
+          {
+            "$ref": "#/parameters/ShowStats"
+          },
+          {
+            "default": 20,
+            "description": "(Optional) Set the maximum number of results per task. When both $top and $skip are specified, $skip is applied first.",
+            "in": "query",
+            "maximum": 50,
+            "minimum": 1,
+            "name": "$top",
+            "type": "integer"
+          },
+          {
+            "default": 0,
+            "description": "(Optional) Set the number of elements to offset in the response. When both $top and $skip are specified, $skip is applied first.",
+            "in": "query",
+            "minimum": 0,
+            "name": "$skip",
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Analysis job status and metadata.",
+            "schema": {
+              "$ref": "#/definitions/AnalyzeJobState"
+            }
+          },
+          "404": {
+            "description": "Job ID not found.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            },
+            "x-ms-error-response": true
+          },
+          "500": {
+            "description": "Internal error response",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            },
+            "x-ms-error-response": true
+          }
+        },
+        "x-ms-examples": {
+          "Successful Get Analysis job status request": {
+            "$ref": ".//examples//SuccessfulAnalyzeStatusRequest.json"
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/entities/health/jobs/{jobId}": {
+      "get": {
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "description": "Get details of the healthcare prediction job specified by the jobId.",
+        "operationId": "HealthStatus",
+        "summary": "Get healthcare analysis job status and results",
+        "parameters": [
+          {
+            "$ref": "#/parameters/JobId"
+          },
+          {
+            "default": 20,
+            "description": "(Optional) Set the maximum number of results per task. When both $top and $skip are specified, $skip is applied first.",
+            "in": "query",
+            "maximum": 50,
+            "minimum": 1,
+            "name": "$top",
+            "type": "integer"
+          },
+          {
+            "default": 0,
+            "description": "(Optional) Set the number of elements to offset in the response. When both $top and $skip are specified, $skip is applied first.",
+            "in": "query",
+            "minimum": 0,
+            "name": "$skip",
+            "type": "integer"
+          },
+          {
+            "$ref": "#/parameters/ShowStats"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/HealthcareJobState"
+            }
+          },
+          "404": {
+            "description": "Job ID not found.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            },
+            "x-ms-error-response": true
+          },
+          "500": {
+            "description": "Internal error response",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            },
+            "x-ms-error-response": true
+          }
+        },
+        "x-ms-examples": {
+          "Successful Health request": {
+            "$ref": ".//examples//SuccessfulHealthStatusRequest.json"
+          }
+        },
+        "deprecated": false
+      },
+      "delete": {
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "description": "Cancel healthcare prediction job.",
+        "operationId": "CancelHealthJob",
+        "summary": "Cancel healthcare prediction job",
+        "parameters": [
+          {
+            "$ref": "#/parameters/JobId"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Cancel Job request has been received.",
+            "headers": {
+              "Operation-Location": {
+                "type": "string"
+              }
+            }
+          },
+          "404": {
+            "description": "Job ID not found.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            },
+            "x-ms-error-response": true
+          },
+          "500": {
+            "description": "Internal error response",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            },
+            "x-ms-error-response": true
+          }
+        },
+        "x-ms-examples": {
+          "Successful Health request": {
+            "$ref": ".//examples//SuccessfulHealthDeleteRequest.json"
+          }
+        },
+        "deprecated": false,
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/entities/health/jobs": {
+      "post": {
+        "summary": "Submit healthcare analysis job",
+        "description": "Start a healthcare analysis job to recognize healthcare related entities (drugs, conditions, symptoms, etc) and their relations.",
+        "operationId": "Health",
+        "consumes": [
+          "application/json",
+          "text/json"
+        ],
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ModelVersion"
+          },
+          {
+            "$ref": "#/parameters/StringIndexType"
+          },
+          {
+            "$ref": "#/parameters/MultiLanguageInput"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted - call results in a link where the status of the submitted job can be checked via the GET operation.",
+            "headers": {
+              "Operation-Location": {
+                "type": "string"
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            },
+            "x-ms-error-response": true
+          },
+          "500": {
+            "description": "Internal error response",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            },
+            "x-ms-error-response": true
+          }
+        },
+        "x-ms-examples": {
+          "Successful Health request": {
+            "$ref": ".//examples//SuccessfulHealthRequest.json"
+          }
+        },
+        "deprecated": false,
+        "x-ms-long-running-operation": true
+      }
+    },
     "/entities/recognition/general": {
       "post": {
         "summary": "Named Entity Recognition",
@@ -53,10 +339,10 @@
             "$ref": "#/parameters/ShowStats"
           },
           {
-            "$ref": "#/parameters/MultiLanguageInput"
+            "$ref": "#/parameters/StringIndexType"
           },
           {
-            "$ref": "#/parameters/StringIndexType"
+            "$ref": "#/parameters/MultiLanguageInput"
           }
         ],
         "responses": {
@@ -66,11 +352,19 @@
               "$ref": "#/definitions/EntitiesResult"
             }
           },
-          "default": {
-            "description": "Error Response",
+          "400": {
+            "description": "Bad Request.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
-            }
+            },
+            "x-ms-error-response": true
+          },
+          "500": {
+            "description": "Internal error response",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            },
+            "x-ms-error-response": true
           }
         },
         "x-ms-examples": {
@@ -104,28 +398,36 @@
           {
             "name": "domain",
             "in": "query",
-            "description": "(Optional) if set to 'PHI', response will contain only PHI entities.",
+            "description": "(Optional) if specified, will set the PII domain to include only a subset of the entity categories. Possible values include: 'PHI', 'none'.",
             "type": "string"
           },
           {
-            "$ref": "#/parameters/MultiLanguageInput"
+            "$ref": "#/parameters/StringIndexType"
           },
           {
-            "$ref": "#/parameters/StringIndexType"
+            "$ref": "#/parameters/MultiLanguageInput"
           }
         ],
         "responses": {
           "200": {
             "description": "A successful call results in a list of entities containing personal information returned for each valid document",
             "schema": {
-              "$ref": "#/definitions/PiiEntitiesResult"
+              "$ref": "#/definitions/PiiResult"
             }
           },
-          "default": {
-            "description": "Error Response",
+          "400": {
+            "description": "Bad Request.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
-            }
+            },
+            "x-ms-error-response": true
+          },
+          "500": {
+            "description": "Internal error response",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            },
+            "x-ms-error-response": true
           }
         },
         "x-ms-examples": {
@@ -157,10 +459,10 @@
             "$ref": "#/parameters/ShowStats"
           },
           {
-            "$ref": "#/parameters/MultiLanguageInput"
+            "$ref": "#/parameters/StringIndexType"
           },
           {
-            "$ref": "#/parameters/StringIndexType"
+            "$ref": "#/parameters/MultiLanguageInput"
           }
         ],
         "responses": {
@@ -170,11 +472,19 @@
               "$ref": "#/definitions/EntityLinkingResult"
             }
           },
-          "default": {
-            "description": "Error Response",
+          "400": {
+            "description": "Bad Request.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
-            }
+            },
+            "x-ms-error-response": true
+          },
+          "500": {
+            "description": "Internal error response",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            },
+            "x-ms-error-response": true
           }
         },
         "x-ms-examples": {
@@ -216,11 +526,19 @@
               "$ref": "#/definitions/KeyPhraseResult"
             }
           },
-          "default": {
-            "description": "Error Response",
+          "400": {
+            "description": "Bad Request.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
-            }
+            },
+            "x-ms-error-response": true
+          },
+          "500": {
+            "description": "Internal error response",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            },
+            "x-ms-error-response": true
           }
         },
         "x-ms-examples": {
@@ -262,11 +580,19 @@
               "$ref": "#/definitions/LanguageResult"
             }
           },
-          "default": {
-            "description": "Error Response",
+          "400": {
+            "description": "Bad Request.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
-            }
+            },
+            "x-ms-error-response": true
+          },
+          "500": {
+            "description": "Internal error response",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            },
+            "x-ms-error-response": true
           }
         },
         "x-ms-examples": {
@@ -304,10 +630,10 @@
             "type": "boolean"
           },
           {
-            "$ref": "#/parameters/MultiLanguageInput"
+            "$ref": "#/parameters/StringIndexType"
           },
           {
-            "$ref": "#/parameters/StringIndexType"
+            "$ref": "#/parameters/MultiLanguageInput"
           }
         ],
         "responses": {
@@ -317,11 +643,19 @@
               "$ref": "#/definitions/SentimentResponse"
             }
           },
-          "default": {
-            "description": "Error Response",
+          "400": {
+            "description": "Bad Request.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
-            }
+            },
+            "x-ms-error-response": true
+          },
+          "500": {
+            "description": "Internal error response",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            },
+            "x-ms-error-response": true
           }
         },
         "x-ms-examples": {
@@ -334,6 +668,50 @@
     }
   },
   "definitions": {
+    "JobManifest": {
+      "properties": {
+        "tasks": {
+          "description": "The set of tasks to execute on the input documents. Cannot specify the same task more than once.",
+          "properties": {
+            "entityRecognitionTasks": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/EntitiesTask"
+              }
+            },
+            "entityRecognitionPiiTasks": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/PiiTask"
+              }
+            },
+            "entityLinkingTasks": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/EntityLinkingTask"
+              }
+            },
+            "keyPhraseExtractionTasks": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/KeyPhrasesTask"
+              }
+            },
+            "sentimentAnalysisTasks": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/SentimentTask"
+              }
+            }
+          },
+          "type": "object"
+        }
+      },
+      "required": [
+        "tasks"
+      ],
+      "type": "object"
+    },
     "MultiLanguageBatchInput": {
       "type": "object",
       "required": [
@@ -416,11 +794,12 @@
             "InvalidRequest",
             "InvalidArgument",
             "InternalServerError",
-            "ServiceUnavailable"
+            "ServiceUnavailable",
+            "NotFound"
           ],
           "x-ms-enum": {
             "name": "ErrorCodeValue",
-            "modelAsString": true
+            "modelAsString": false
           },
           "description": "Error code."
         },
@@ -474,6 +853,48 @@
         }
       }
     },
+    "PiiTask": {
+      "properties": {
+        "parameters": {
+          "properties": {
+            "domain": {
+              "default": "none",
+              "enum": [
+                "phi",
+                "none"
+              ],
+              "type": "string"
+            },
+            "model-version": {
+              "default": "latest",
+              "type": "string"
+            },
+            "stringIndexType": {
+              "$ref": "#/definitions/StringIndexType"
+            }
+          },
+          "type": "object"
+        }
+      },
+      "type": "object"
+    },
+    "EntitiesTask": {
+      "properties": {
+        "parameters": {
+          "properties": {
+            "model-version": {
+              "default": "latest",
+              "type": "string"
+            },
+            "stringIndexType": {
+              "$ref": "#/definitions/StringIndexType"
+            }
+          },
+          "type": "object"
+        }
+      },
+      "type": "object"
+    },
     "InnerError": {
       "type": "object",
       "required": [
@@ -521,6 +942,54 @@
         }
       }
     },
+    "AnalyzeBatchInput": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/JobDescriptor"
+        },
+        {
+          "type": "object",
+          "required": [
+            "analysisInput"
+          ],
+          "properties": {
+            "analysisInput": {
+              "$ref": "#/definitions/MultiLanguageBatchInput"
+            }
+          }
+        },
+        {
+          "$ref": "#/definitions/JobManifest"
+        }
+      ]
+    },
+    "AnalyzeJobState": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/JobMetadata"
+        },
+        {
+          "$ref": "#/definitions/TasksState"
+        },
+        {
+          "properties": {
+            "errors": {
+              "items": {
+                "$ref": "#/definitions/TextAnalyticsError"
+              },
+              "type": "array"
+            },
+            "statistics": {
+              "$ref": "#/definitions/RequestStatistics"
+            }
+          },
+          "type": "object"
+        },
+        {
+          "$ref": "#/definitions/Pagination"
+        }
+      ]
+    },
     "SentimentResponse": {
       "type": "object",
       "required": [
@@ -551,6 +1020,190 @@
           "description": "This field indicates which model is used for scoring."
         }
       }
+    },
+    "SentimentTask": {
+      "properties": {
+        "parameters": {
+          "properties": {
+            "model-version": {
+              "default": "latest",
+              "type": "string"
+            },
+            "opinionMining": {
+              "default": false,
+              "type": "boolean"
+            },
+            "stringIndexType": {
+              "$ref": "#/definitions/StringIndexType"
+            }
+          },
+          "type": "object"
+        }
+      },
+      "type": "object"
+    },
+    "TaskState": {
+      "properties": {
+        "lastUpdateDateTime": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "status": {
+          "enum": [
+            "notstarted",
+            "running",
+            "succeeded",
+            "failed",
+            "cancelled",
+            "cancelling"
+          ],
+          "x-ms-enum": {
+            "modelAsString": false,
+            "name": "State"
+          }
+        }
+      },
+      "required": [
+        "name",
+        "status",
+        "lastUpdateDateTime"
+      ],
+      "type": "object"
+    },
+    "TasksState": {
+      "properties": {
+        "tasks": {
+          "properties": {
+            "details": {
+              "items": {
+                "$ref": "#/definitions/TaskState"
+              },
+              "type": "array"
+            },
+            "completed": {
+              "type": "integer"
+            },
+            "failed": {
+              "type": "integer"
+            },
+            "inProgress": {
+              "type": "integer"
+            },
+            "total": {
+              "type": "integer"
+            },
+            "entityRecognitionTasks": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "allOf": [
+                  {
+                    "$ref": "#/definitions/TaskState"
+                  },
+                  {
+                    "type": "object",
+                    "properties": {
+                      "results": {
+                        "$ref": "#/definitions/EntitiesResult"
+                      }
+                    }
+                  }
+                ]
+              }
+            },
+            "entityRecognitionPiiTasks": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "allOf": [
+                  {
+                    "$ref": "#/definitions/TaskState"
+                  },
+                  {
+                    "type": "object",
+                    "properties": {
+                      "results": {
+                        "$ref": "#/definitions/PiiResult"
+                      }
+                    }
+                  }
+                ]
+              }
+            },
+            "entityLinkingTasks": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "allOf": [
+                  {
+                    "$ref": "#/definitions/TaskState"
+                  },
+                  {
+                    "type": "object",
+                    "properties": {
+                      "results": {
+                        "$ref": "#/definitions/EntityLinkingResult"
+                      }
+                    }
+                  }
+                ]
+              }
+            },
+            "keyPhraseExtractionTasks": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "allOf": [
+                  {
+                    "$ref": "#/definitions/TaskState"
+                  },
+                  {
+                    "type": "object",
+                    "properties": {
+                      "results": {
+                        "$ref": "#/definitions/KeyPhraseResult"
+                      }
+                    }
+                  }
+                ]
+              }
+            },
+            "sentimentAnalysisTasks": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "allOf": [
+                  {
+                    "$ref": "#/definitions/TaskState"
+                  },
+                  {
+                    "type": "object",
+                    "properties": {
+                      "results": {
+                        "$ref": "#/definitions/SentimentResponse"
+                      }
+                    }
+                  }
+                ]
+              }
+            }
+          },
+          "required": [
+            "total",
+            "completed",
+            "failed",
+            "inProgress"
+          ],
+          "type": "object"
+        }
+      },
+      "required": [
+        "tasks"
+      ],
+      "type": "object"
     },
     "DocumentSentiment": {
       "type": "object",
@@ -908,37 +1561,6 @@
         }
       }
     },
-    "PiiEntitiesResult": {
-      "type": "object",
-      "required": [
-        "documents",
-        "errors",
-        "modelVersion"
-      ],
-      "properties": {
-        "documents": {
-          "type": "array",
-          "description": "Response by document",
-          "items": {
-            "$ref": "#/definitions/PiiDocumentEntities"
-          }
-        },
-        "errors": {
-          "type": "array",
-          "description": "Errors by document id.",
-          "items": {
-            "$ref": "#/definitions/DocumentError"
-          }
-        },
-        "statistics": {
-          "$ref": "#/definitions/RequestStatistics"
-        },
-        "modelVersion": {
-          "type": "string",
-          "description": "This field indicates which model is used for scoring."
-        }
-      }
-    },
     "DocumentEntities": {
       "type": "object",
       "required": [
@@ -1024,21 +1646,21 @@
         },
         "category": {
           "type": "string",
-          "description": "Entity type, such as Person/Location/Org/SSN etc"
+          "description": "Entity type."
         },
         "subcategory": {
           "type": "string",
-          "description": "Entity sub type, such as Age/Year/TimeRange etc"
+          "description": "(Optional) Entity sub type."
         },
         "offset": {
           "type": "integer",
           "format": "int32",
-          "description": "Start position for the entity text."
+          "description": "Start position for the entity text. Use of different 'stringIndexType' values can affect the offset returned."
         },
         "length": {
           "type": "integer",
           "format": "int32",
-          "description": "Length for the entity text."
+          "description": "Length for the entity text. Use of different 'stringIndexType' values can affect the length returned."
         },
         "confidenceScore": {
           "type": "number",
@@ -1110,6 +1732,181 @@
         }
       }
     },
+    "EntityLinkingTask": {
+      "properties": {
+        "parameters": {
+          "properties": {
+            "model-version": {
+              "default": "latest",
+              "type": "string"
+            },
+            "stringIndexType": {
+              "$ref": "#/definitions/StringIndexType"
+            }
+          },
+          "type": "object"
+        }
+      },
+      "type": "object"
+    },
+    "HealthcareJobState": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/JobMetadata"
+        },
+        {
+          "properties": {
+            "results": {
+              "$ref": "#/definitions/HealthcareResult"
+            }
+          },
+          "type": "object"
+        },
+        {
+          "$ref": "#/definitions/Pagination"
+        }
+      ]
+    },
+    "HealthcareResult": {
+      "type": "object",
+      "required": [
+        "documents",
+        "errors",
+        "modelVersion"
+      ],
+      "properties": {
+        "documents": {
+          "type": "array",
+          "description": "Response by document",
+          "items": {
+            "$ref": "#/definitions/DocumentHealthcareEntities"
+          }
+        },
+        "errors": {
+          "type": "array",
+          "description": "Errors by document id.",
+          "items": {
+            "$ref": "#/definitions/DocumentError"
+          }
+        },
+        "statistics": {
+          "$ref": "#/definitions/RequestStatistics"
+        },
+        "modelVersion": {
+          "type": "string",
+          "description": "This field indicates which model is used for scoring."
+        }
+      }
+    },
+    "DocumentHealthcareEntities": {
+      "type": "object",
+      "required": [
+        "id",
+        "entities",
+        "relations",
+        "warnings"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique, non-empty document identifier."
+        },
+        "entities": {
+          "description": "Healthcare entities.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/HealthcareEntity"
+          }
+        },
+        "relations": {
+          "type": "array",
+          "description": "Healthcare entity relations.",
+          "items": {
+            "$ref": "#/definitions/HealthcareRelation"
+          }
+        },
+        "warnings": {
+          "type": "array",
+          "description": "Warnings encountered while processing document.",
+          "items": {
+            "$ref": "#/definitions/TextAnalyticsWarning"
+          }
+        },
+        "statistics": {
+          "description": "if showStats=true was specified in the request this field will contain information about the document payload.",
+          "$ref": "#/definitions/DocumentStatistics"
+        }
+      }
+    },
+    "HealthcareEntity": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Entity"
+        },
+        {
+          "required": [
+            "isNegated"
+          ],
+          "properties": {
+            "isNegated": {
+              "type": "boolean"
+            },
+            "links": {
+              "description": "Entity references in known data sources.",
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/HealthcareEntityLink"
+              }
+            }
+          }
+        }
+      ]
+    },
+    "HealthcareRelation": {
+      "type": "object",
+      "required": [
+        "relationType",
+        "bidirectional",
+        "source",
+        "target"
+      ],
+      "properties": {
+        "relationType": {
+          "description": "Type of relation. Examples include: `DosageOfMedication` or 'FrequencyOfMedication', etc.",
+          "type": "string"
+        },
+        "bidirectional": {
+          "description": "If true the relation between the entities is bidirectional, otherwise directionality is source to target.",
+          "type": "boolean"
+        },
+        "source": {
+          "description": "Reference link to the source entity.",
+          "type": "string"
+        },
+        "target": {
+          "description": "Reference link to the target entity.",
+          "type": "string"
+        }
+      }
+    },
+    "HealthcareEntityLink": {
+      "type": "object",
+      "required": [
+        "dataSource",
+        "id"
+      ],
+      "properties": {
+        "dataSource": {
+          "description": "Entity Catalog. Examples include: UMLS, CHV, MSH, etc.",
+          "type": "string"
+        },
+        "id": {
+          "description": "Entity id in the given source catalog.",
+          "type": "string"
+        }
+      }
+    },
     "LinkedEntity": {
       "type": "object",
       "required": [
@@ -1149,7 +1946,7 @@
         },
         "bingId": {
           "type": "string",
-          "description": "Bing unique identifier of the recognized entity. Use in conjunction with the Bing Entity Search API to fetch additional relevant information."
+          "description": "Bing Entity Search API unique identifier of the recognized entity."
         }
       }
     },
@@ -1182,6 +1979,61 @@
           "description": "Length for the entity match text."
         }
       }
+    },
+    "JobDescriptor": {
+      "properties": {
+        "displayName": {
+          "description": "Optional display name for the analysis job.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "JobMetadata": {
+      "properties": {
+        "createdDateTime": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "displayName": {
+          "type": "string"
+        },
+        "expirationDateTime": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "jobId": {
+          "format": "uuid",
+          "type": "string"
+        },
+        "lastUpdateDateTime": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "status": {
+          "enum": [
+            "notstarted",
+            "running",
+            "succeeded",
+            "failed",
+            "cancelled",
+            "cancelling",
+            "partiallycompleted"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "modelAsString": false,
+            "name": "State"
+          }
+        }
+      },
+      "required": [
+        "jobId",
+        "lastUpdateDateTime",
+        "createdDateTime",
+        "status"
+      ],
+      "type": "object"
     },
     "KeyPhraseResult": {
       "type": "object",
@@ -1246,6 +2098,20 @@
         }
       }
     },
+    "KeyPhrasesTask": {
+      "properties": {
+        "parameters": {
+          "properties": {
+            "model-version": {
+              "default": "latest",
+              "type": "string"
+            }
+          },
+          "type": "object"
+        }
+      },
+      "type": "object"
+    },
     "LanguageBatchInput": {
       "type": "object",
       "required": [
@@ -1276,6 +2142,45 @@
         },
         "countryHint": {
           "type": "string"
+        }
+      }
+    },
+    "Pagination": {
+      "properties": {
+        "@nextLink": {
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "PiiResult": {
+      "type": "object",
+      "required": [
+        "documents",
+        "errors",
+        "modelVersion"
+      ],
+      "properties": {
+        "documents": {
+          "type": "array",
+          "description": "Response by document",
+          "items": {
+            "$ref": "#/definitions/PiiDocumentEntities"
+          }
+        },
+        "errors": {
+          "type": "array",
+          "description": "Errors by document id.",
+          "items": {
+            "$ref": "#/definitions/DocumentError"
+          }
+        },
+        "statistics": {
+          "$ref": "#/definitions/RequestStatistics"
+        },
+        "modelVersion": {
+          "type": "string",
+          "description": "This field indicates which model is used for scoring."
         }
       }
     },
@@ -1361,6 +2266,33 @@
           "description": "A confidence score between 0 and 1. Scores close to 1 indicate 100% certainty that the identified language is true."
         }
       }
+    },
+    "StringIndexType": {
+      "default": "TextElements_v8",
+      "enum": [
+        "TextElements_v8",
+        "UnicodeCodePoint",
+        "Utf16CodeUnit"
+      ],
+      "x-ms-enum": {
+        "name": "StringIndexTypeResponse",
+        "modelAsString": false,
+        "values": [
+          {
+            "value": "TextElements_v8",
+            "description": "Returned offset and length values will correspond to TextElements (Graphemes and Grapheme clusters) confirming to the Unicode 8.0.0 standard. Use this option if your application is written in .Net Framework or .Net Core and you will be using StringInfo."
+          },
+          {
+            "value": "UnicodeCodePoint",
+            "description": "Returned offset and length values will correspond to Unicode code points. Use this option if your application is written in a language that support Unicode, for example Python."
+          },
+          {
+            "value": "Utf16CodeUnit",
+            "description": "Returned offset and length values will correspond to UTF-16 code units. Use this option if your application is written in a language that support Unicode, for example Java, JavaScript."
+          }
+        ]
+      },
+      "type": "string"
     }
   },
   "parameters": {
@@ -1402,6 +2334,15 @@
           }
         ]
       },
+      "x-ms-parameter-location": "method"
+    },
+    "JobId": {
+      "description": "Job ID",
+      "format": "uuid",
+      "in": "path",
+      "name": "jobId",
+      "required": true,
+      "type": "string",
       "x-ms-parameter-location": "method"
     },
     "ShowStats": {
