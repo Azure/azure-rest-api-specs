@@ -1214,7 +1214,7 @@
           "200": {
             "description": "OK. The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/LegacyReservationTransactionsListResult"
+              "$ref": "#/definitions/ReservationTransactionsListResult"
             }
           },
           "default": {
@@ -1266,7 +1266,7 @@
           "200": {
             "description": "OK. The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/ModernReservationTransactionsListResult"
+              "$ref": "#/definitions/ReservationTransactionsListResult"
             }
           },
           "default": {
@@ -3565,6 +3565,7 @@
     "ModernReservationTransaction": {
       "description": "Modern Reservation transaction resource.",
       "type": "object",
+      "x-ms-discriminator-value": "Modern",
       "allOf": [
         {
           "$ref": "#/definitions/ReservationTransactionResource"
@@ -3584,6 +3585,7 @@
     "LegacyReservationTransaction": {
       "description": "Legacy Reservation transaction resource.",
       "type": "object",
+      "x-ms-discriminator-value": "Legacy",
       "allOf": [
         {
           "$ref": "#/definitions/ReservationTransactionResource"
@@ -3736,7 +3738,7 @@
         "kind"
       ]
     },
-    "LegacyReservationTransactionsListResult": {
+    "ReservationTransactionsListResult": {
       "description": "Result of listing reservation recommendations.",
       "properties": {
         "value": {
@@ -3744,25 +3746,7 @@
           "type": "array",
           "readOnly": true,
           "items": {
-            "$ref": "#/definitions/LegacyReservationTransaction"
-          }
-        },
-        "nextLink": {
-          "description": "The link (url) to the next page of results.",
-          "type": "string",
-          "readOnly": true
-        }
-      }
-    },
-    "ModernReservationTransactionsListResult": {
-      "description": "Result of listing reservation recommendations.",
-      "properties": {
-        "value": {
-          "description": "The list of reservation recommendations.",
-          "type": "array",
-          "readOnly": true,
-          "items": {
-            "$ref": "#/definitions/ModernReservationTransaction"
+            "$ref": "#/definitions/ReservationTransaction"
           }
         },
         "nextLink": {
