@@ -26,7 +26,6 @@
         "operationId": "GetWorkspaceKeyByName",
         "description": "Get key by name in the workspace",
         "tags": [
-          "Workspaces",
           "Keys"
         ],
         "deprecated": false,
@@ -68,12 +67,73 @@
         "produces": [
           "application/json"
         ],
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
         "x-ms-examples": {
           "Get key by name in the workspace": {
             "$ref": "./examples/GetWorkspaceKeyByName.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "CreateOrUpdateWorkspaceKey",
+        "description": "Create or update key by name in the workspace",
+        "tags": [
+          "Keys"
+        ],
+        "deprecated": false,
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../common/v1/types.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "../../../../common/v1/types.json#/parameters/KeyNameParameter"
+          },
+          {
+            "in": "body",
+            "name": "keyInfo",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/WorkspaceKeyInfo"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/WorkspaceKeyInfo"
+            },
+            "description": ""
+          },
+          "400": {
+            "description": "Malformed request or key sub-resource not available in region."
+          },
+          "404": {
+            "description": "Not found."
+          },
+          "default": {
+            "schema": {
+              "$ref": "../../../../common/v1/types.json#/definitions/ErrorResponse"
+            },
+            "description": ""
+          }
+        },
+        "consumes": [
+          "appliction/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-examples": {
+          "Create or update key by name in the workspace": {
+            "$ref": "./examples/CreateOrUpdateWorkspaceKey.json"
           }
         }
       }

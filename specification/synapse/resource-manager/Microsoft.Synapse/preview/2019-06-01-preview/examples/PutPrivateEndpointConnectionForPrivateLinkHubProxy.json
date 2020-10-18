@@ -1,0 +1,62 @@
+{
+  "parameters": {
+    "subscriptionId": "8713da51-f7cc-486d-b4ba-41446b3cd3fb",
+    "resourceGroupName": "PrivateLinkHubRG",
+    "workspaceName": "TestPrivateLinkHub",
+    "privateEndpointConnectionProxyName": "TestPECProxy",
+    "request": {
+      "id": null,
+      "name": null,
+      "type": "Microsoft.Synapse/workspaces/privateEndpointConnectionProxies",
+      "location": null,
+      "remotePrivateEndpoint": {
+        "privateLinkServiceProxies": [
+          {
+            "groupConnectivityInformation": [
+              {
+                "groupId": "Web",
+                "memberName": "Web",
+                "customerVisibleFqdns": null,
+                "internalFqdn": null,
+                "redirectMapId": null,
+                "privateLinkServiceArmRegion": null
+              }
+            ],
+            "id": "/subscriptions/af65004a-29bc-4c52-b534-317077e5a678/resourceGroups/NetworkRG/providers/Microsoft.Network/privateEndpoints/PrivateEndpoint/privateLinkServiceProxies/TestPLSProxy",
+            "remotePrivateLinkServiceConnectionState": null,
+            "remotePrivateEndpointConnection": null
+          }
+        ],
+        "id": "/subscriptions/af65004a-29bc-4c52-b534-317077e5a678/resourceGroups/NetworkRG/providers/Microsoft.Network/privateEndpoints/PrivateEndpoint",
+        "location": "PrivateEndpointLocation",
+        "immutableSubscriptionId": "3bec1aeb-b3c2-4090-870e-bac6eb048088",
+        "immutableResourceId": "c924d8ab-0cfb-469d-aeab-98f5d73164b9",
+        "manualPrivateLinkServiceConnections": [
+          {
+            "name": "TestPLSConnection",
+            "groupIds": [
+              "Web"
+            ],
+            "requestMessage": "Please approve my connection"
+          }
+        ],
+        "privateLinkServiceConnections": null,
+        "connectionDetails": [
+          {
+            "groupId": "Web",
+            "memberName": "Web",
+            "id": "id76",
+            "privateIpAddress": "10.0.0.76",
+            "linkIdentifier": "76"
+          }
+        ]
+      }
+    },
+    "api-version": "2019-06-01-preview"
+  },
+  "responses": {
+    "202": {
+      "status": "InProgress"
+    }
+  }
+}

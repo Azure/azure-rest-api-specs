@@ -1,0 +1,512 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2019-06-01-preview",
+    "title": "SynapseManagementClient",
+    "description": "Azure Synapse Analytics APIs"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "type": "oauth2",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      },
+      "description": "Azure Active Directory OAuth2 Flow"
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Synapse/workspaces/{workspaceName}/privateEndpointConnectionProxies/{privateEndpointConnectionProxyName}/validate": {
+      "post": {
+        "operationId": "ValidatePrivateEndpointConnectionProxyForWorskpace",
+        "description": "Validate PrivateEndpointConnectionProxy for workspace",
+        "tags": [
+          "PrivateEndpointConnectionProxy"
+        ],
+        "deprecated": false,
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../common/v1/types.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/PrivateEndpointConnectionProxyNameParameter"
+          },
+          {
+            "in": "body",
+            "name": "request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ValidatePrivateEndpointConnectionProxyRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointConnectionProxy"
+            },
+            "description": "OK"
+          },
+          "400": {
+            "schema": {
+              "$ref": "../../../../common/v1/types.json#/definitions/ErrorContract"
+            },
+            "description": "Bad request"
+          },
+          "404": {
+            "description": "Workspace not found."
+          },
+          "409": {
+            "description": "Authentication error."
+          },
+          "default": {
+            "schema": {
+              "$ref": "../../../../common/v1/types.json#/definitions/ErrorContract"
+            },
+            "description": ""
+          }
+        },
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-examples": {
+          "Validate PrivateEndPointConnectionProxy object": {
+            "$ref": "./examples/ValidatePrivateEndpointConnectionProxyForWorskpace.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Synapse/workspaces/{workspaceName}/privateEndpointConnectionProxies/{privateEndpointConnectionProxyName}": {
+      "put": {
+        "operationId": "PutPrivateEndpointConnectionProxy",
+        "description": "Put PrivateEndpointConnectionProxy",
+        "tags": [
+          "PrivateEndpointConnectionProxy"
+        ],
+        "deprecated": false,
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../common/v1/types.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/PrivateEndpointConnectionProxyNameParameter"
+          },
+          {
+            "in": "body",
+            "name": "request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointConnectionProxy"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointConnectionProxy"
+            },
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad request."
+          },
+          "404": {
+            "description": "Workspace not found."
+          },
+          "409": {
+            "description": "Authrntication error."
+          },
+          "default": {
+            "schema": {
+              "$ref": "../../../../common/v1/types.json#/definitions/ErrorContract"
+            },
+            "description": ""
+          }
+        },
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-examples": {
+          "Create PrivateEndPointConnectionProxy in workspace": {
+            "$ref": "./examples/PutPrivateEndpointConnectionProxy.json"
+          }
+        }
+      },
+      "get": {
+        "operationId": "GetPrivateEndpointConnectionProxyByName",
+        "description": "Get PrivateEndpointConnectionProxy by name in the workspace",
+        "tags": [
+          "PrivateEndpointConnectionProxy"
+        ],
+        "deprecated": false,
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../common/v1/types.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/PrivateEndpointConnectionProxyNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointConnectionProxy"
+            },
+            "description": "Managed identity by name in workspace."
+          },
+          "404": {
+            "description": "Workspace or PrivateEndpointConnectionProxy not found"
+          },
+          "409": {
+            "description": "Authorization error"
+          },
+          "default": {
+            "schema": {
+              "$ref": "../../../../common/v1/types.json#/definitions/ErrorContract"
+            },
+            "description": ""
+          }
+        },
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-examples": {
+          "Get managed identity by name in the workspace": {
+            "$ref": "./examples/GetPrivateEndpointConnectionProxyByName.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Synapse/privateLinkHubs/{privateLinkHubName}/privateEndpointConnectionProxies/{privateEndpointConnectionProxyName}/validate": {
+      "post": {
+        "operationId": "ValidatePrivateEndpointConnectionForPrivateLinkHubProxy",
+        "description": "Validate PrivateEndpointConnectionProxy for PrivateLinkHub",
+        "tags": [
+          "PrivateEndpointConnectionProxy"
+        ],
+        "deprecated": false,
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../common/v1/types.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/PrivateEndpointConnectionProxyNameParameter"
+          },
+          {
+            "in": "body",
+            "name": "request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ValidatePrivateEndpointConnectionForPrivateLinkHubProxyRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/ValidatePrivateEndpointConnectionForPrivateLinkHubProxyResponse"
+            },
+            "description": "OK"
+          },
+          "404": {
+            "schema": {
+              "$ref": "../../../../common/v1/types.json#/definitions/ErrorContract"
+            },
+            "description": "Bad request"
+          },
+          "409": {
+            "description": "Not authenticated"
+          },
+          "default": {
+            "schema": {
+              "$ref": "../../../../common/v1/types.json#/definitions/ErrorContract"
+            },
+            "description": ""
+          }
+        },
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-examples": {
+          "Validate PrivateEndPointConnectionProxy object": {
+            "$ref": "./examples/ValidatePrivateEndpointConnectionForPrivateLinkHubProxy.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Synapse/privateLinkHubs/{privateLinkHubName}/privateEndpointConnectionProxies/{privateEndpointConnectionProxyName}": {
+      "delete": {
+        "operationId": "DeletePrivateEndpointConnectionForPrivateLinkHubProxy",
+        "description": "Delete PrivateEndpointConnectionProxy for PrivateLinkHub",
+        "tags": [
+          "PrivateEndpointConnectionProxy"
+        ],
+        "deprecated": false,
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../common/v1/types.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/PrivateEndpointConnectionProxyNameParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted",
+            "schema": {
+              "$ref": "../../../../common/v1/types.json#/definitions/OperationResource"
+            }
+          },
+          "204": {
+            "description": ""
+          },
+          "409": {
+            "description": "Authroization failed"
+          },
+          "default": {
+            "schema": {
+              "$ref": "../../../../common/v1/types.json#/definitions/ErrorContract"
+            },
+            "description": ""
+          }
+        },
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "Create PrivateEndPointConnectionProxy in PrivateLinkHub": {
+            "$ref": "./examples/DeletePrivateEndpointConnectionForPrivateLinkHubProxy.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "PutPrivateEndpointConnectionForPrivateLinkHubProxy",
+        "description": "Put PrivateEndpointConnection for PrivateLinkHubProxy",
+        "tags": [
+          "PrivateEndpointConnectionProxy"
+        ],
+        "deprecated": false,
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../common/v1/types.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/PrivateEndpointConnectionProxyNameParameter"
+          },
+          {
+            "in": "body",
+            "name": "request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointConnectionForPrivateLinkHubProxy"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted",
+            "schema": {
+              "$ref": "../../../../common/v1/types.json#/definitions/OperationResource"
+            }
+          },
+          "400": {
+            "description": "Bad request."
+          },
+          "404": {
+            "description": "PrivateLinkHub not found."
+          },
+          "409": {
+            "description": "Authentication error"
+          },
+          "default": {
+            "schema": {
+              "$ref": "../../../../common/v1/types.json#/definitions/ErrorContract"
+            },
+            "description": ""
+          }
+        },
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "Create PrivateEndPointConnectionProxy in PrivateLinkHub": {
+            "$ref": "./examples/PutPrivateEndpointConnectionForPrivateLinkHubProxy.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "PrivateEndpointConnectionProxyBase": {
+      "allOf": [
+        {
+          "$ref": "../../../common-types/resource-management/v1/types.json#/definitions/Resource"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "location": {
+              "type": "string"
+            },
+            "remotePrivateEndpoint": {
+              "type": "object",
+              "$ref": "../../../../common/v1/privateEndpintConnection.json#/definitions/RemotePrivateEndpoint"
+            }
+          }
+        }
+      ]
+    },
+    "PrivateEndpointConnectionProxy": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/PrivateEndpointConnectionProxyBase"
+        }
+      ]
+    },
+    "ValidatePrivateEndpointConnectionProxy": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/PrivateEndpointConnectionProxy"
+        }
+      ]
+    },
+    "ValidatePrivateEndpointConnectionProxyRequest": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/ValidatePrivateEndpointConnectionProxy"
+        }
+      ]
+    },
+    "PrivateEndpointConnectionForPrivateLinkHubProxyBase": {
+      "allOf": [
+        {
+          "$ref": "../../../common-types/resource-management/v1/types.json#/definitions/Resource"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "location": {
+              "type": "string"
+            },
+            "remotePrivateEndpoint": {
+              "type": "object",
+              "$ref": "../../../../common/v1/privateEndpintConnection.json#/definitions/RemotePrivateEndpoint"
+            }
+          }
+        }
+      ]
+    },
+    "PrivateEndpointConnectionForPrivateLinkHubProxy": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/PrivateEndpointConnectionForPrivateLinkHubProxyBase"
+        }
+      ]
+    },
+    "ValidatePrivateEndpointConnectionForPrivateLinkHubProxyRequest": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/PrivateEndpointConnectionForPrivateLinkHubProxy"
+        }
+      ]
+    },
+    "ValidatePrivateEndpointConnectionForPrivateLinkHubProxyResponse": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/PrivateEndpointConnectionForPrivateLinkHubProxy"
+        }
+      ]
+    }
+  },
+  "parameters": {
+    "PrivateEndpointConnectionProxyNameParameter": {
+      "name": "privateEndpointConnectionProxyName",
+      "in": "path",
+      "description": "The name of the privateEndpointConnectionProxy.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}

@@ -496,10 +496,14 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces/{workspaceName}/sqlAdministrators/activeDirectory": {
       "$ref": "#/paths/~1subscriptions~1%7BsubscriptionId%7D~1resourceGroups~1%7BresourceGroupName%7D~1providers~1Microsoft.Synapse~1workspaces~1%7BworkspaceName%7D~1administrators~1activeDirectory"
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces/{workspaceName}/managedIdentitySqlControlSettings/default": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Synapse/workspaces/{workspaceName}/scopePools/{scopePoolName}": {
       "get": {
-        "operationId": "WorkspaceManagedIdentitySqlControlSettings_Get",
-        "summary": "Get Managed Identity Sql Control Settings",
+        "operationId": "GetScopePool",
+        "description": "Get scope pool by name",
+        "tags": [
+          "ScopePools"
+        ],
+        "deprecated": false,
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
@@ -511,84 +515,125 @@
             "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "./workspace.json#/parameters/workspaceNameParameter"
-          }
-        ],
-        "responses": {
-          "200": {"schema": {
-              "$ref": "#/definitions/ManagedIdentitySqlControlSettingsModel"
-            },
-            "description": "OK"
-          },
-          "default": {
-            "schema": {
-              "$ref": "./workspace.json#/definitions/ErrorContract"
-            },
-            "description": "Error"
-          }
-        },
-        "produces": [
-          "application/json"
-        ],
-        "x-ms-examples": {
-          "Get managed identity sql control settings": {
-            "$ref": "./examples/GetManagedIdentitySqlControlSettings.json"
-          }
-        }
-      },
-      "put": {
-        "operationId": "WorkspaceManagedIdentitySqlControlSettings_CreateOrUpdate",
-        "summary": "Create or update Managed Identity Sql Control Settings",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+            "$ref": "#/parameters/workspaceNameParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "./workspace.json#/parameters/workspaceNameParameter"
-          },
-          {
-            "description": "Managed Identity Sql Control Settings",
-            "schema": {
-              "$ref": "#/definitions/ManagedIdentitySqlControlSettingsModel"
-            },
-            "in": "body",
-            "name": "managedIdentitySqlControlSettings",
-            "required": true
+            "$ref": "#/parameters/scopePoolNameParameter"
           }
         ],
         "responses": {
           "200": {
             "schema": {
-              "$ref": "#/definitions/ManagedIdentitySqlControlSettingsModel"
+              "type": "object",
+              "$ref": "#/definitions/ScopePoolResourceInfo"
             },
             "description": "OK"
           },
+          "403": {
+            "description": "User susbscription or tenent not allowed"
+          },
+          "404": {
+            "description": "Not found"
+          },
           "default": {
             "schema": {
-              "$ref": "./workspace.json#/definitions/ErrorContract"
+              "$ref": "#/definitions/ErrorContract"
             },
-            "description": "Error"
+            "description": ""
           }
         },
+        "consumes": [],
         "produces": [
           "application/json"
         ],
         "x-ms-examples": {
-          "Create or update managed identity sql control settings": {
-            "$ref": "./examples/CreateOrUpdateManagedIdentitySqlControlSettings.json"
+          "Get scope pool by name": {
+            "$ref": "./examples/GetScopePool.json"
           }
         }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Synapse/workspaces/{workspaceName}/scopePools/{scopePoolName}": {
+      },
+      "put": {
+        "operationId": "CreateOrUpdateScopePool",
+        "description": "Create or update scope pool in workspace",
+        "tags": [
+          "ScopePools"
+        ],
+        "deprecated": false,
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../common/v1/types.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/scopePoolNameParameter"
+          },
+          {
+            "in": "body",
+            "name": "scopePoolInfo",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ScopePoolResourceInfo"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "schema": {
+              "$ref": "#/definitions/ScopePoolResourceInfo"
+            },
+            "description": ""
+          },
+          "400": {
+            "description": "Malformed request or key sub-resource not available in region"
+          },
+          "403": {
+            "description": "Forbidden or scope pool limit reached",
+            "schema": {
+              "$ref": "../../../../common/v1/types.json#/definitions/ErrorResponse"
+            }
+          },
+          "404": {
+            "description": "Workspace not found"
+          },
+          "409": {
+            "description": "Scope pool with same name already exists in non-final state",
+            "schema": {
+              "$ref": "../../../../common/v1/types.json#/definitions/ErrorResponse"
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": "../../../../common/v1/types.json#/definitions/ErrorResponse"
+            },
+            "description": ""
+          }
+        },
+        "consumes": [
+          "appliction/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "Create or update scope pool by name in the workspace": {
+            "$ref": "./examples/CreateOrUpdateScopePool.json"
+          }
+        }
+      },
       "delete": {
-        "operationId": "ScopePools_Delete",
+        "operationId": "DeleteScopePool",
         "description": "Deletes a scope pool",
         "tags": [
           "ScopePools"
@@ -647,6 +692,127 @@
             "$ref": "./examples/DeleteScopePool.json"
           }
         }
+      },
+      "patch": {
+        "operationId": "PatchScopePool",
+        "description": "Update scope pool in workspace",
+        "tags": [
+          "ScopePools"
+        ],
+        "deprecated": false,
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../common/v1/types.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/scopePoolNameParameter"
+          },
+          {
+            "in": "body",
+            "name": "scopePoolInfo",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ScopePoolPatchInfo"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "schema": {
+              "$ref": "#/definitions/ScopePoolResourceInfo"
+            },
+            "description": ""
+          },
+          "403": {
+            "description": "Not allowed"
+          },
+          "409": {
+            "schema": {
+              "$ref": "../../../../common/v1/types.json#/definitions/ErrorResponse"
+            },
+            "description": ""
+          },
+          "default": {
+            "schema": {
+              "$ref": "../../../../common/v1/types.json#/definitions/ErrorResponse"
+            },
+            "description": ""
+          }
+        },
+        "consumes": [
+          "appliction/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-examples": {
+          "Update scope pool by name in the workspace": {
+            "$ref": "./examples/PatchScopePool.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Synapse/workspaces/{workspaceName}/scopePools": {
+      "get": {
+        "operationId": "GetScopePoolsInWorkspace",
+        "description": "Get all scope pools in workspace",
+        "tags": [
+          "ScopePools"
+        ],
+        "deprecated": false,
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/workspaceNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "type": "object",
+              "$ref": "#/definitions/ResourceCollectionResponse_ScopePoolResourceInfo"
+            },
+            "description": "OK"
+          },
+          "403": {
+            "description": "User susbscription or tenent not allowed"
+          },
+          "404": {
+            "description": "Not found"
+          },
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/ErrorContract"
+            },
+            "description": ""
+          }
+        },
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-examples": {
+          "Get scope pool by name": {
+            "$ref": "./examples/GetScopePoolsInWorkspace.json"
+          }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Synapse/workspaces/{workspaceName}/privateEndpointConnections/{privateEndpointConnectionName}": {
@@ -697,62 +863,8 @@
           "application/json"
         ],
         "x-ms-examples": {
-          "Delete a workspace": {
+          "Get PrivateEndpointConnection by name in workspace": {
             "$ref": "./examples/GetPrivateEndpointConnectionInWorkspace.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Synapse/workspaces/{workspaceName}/privateEndpointConnectionProxies/{privateEndpointConnectionProxyName}": {
-      "get": {
-        "operationId": "GetPrivateEndpointConnectionProxyInWorkspace",
-        "description": "Get PrivateEndpointConnectionProxy by name in workspace",
-        "tags": [
-          "Workspace",
-          "PrivateEndpointConnectionProxy"
-        ],
-        "deprecated": false,
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/workspaceNameParameter"
-          },
-          {
-            "$ref": "../../../../common/v1/privateEndpintConnection.json#/parameters/PrivateEndpointConnectionProxyNameParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "schema": {
-              "$ref": "../../../../common/v1/privateEndpintConnection.json#/definitions/PrivateEndpointConnectionProxy"
-            },
-            "description": "OK"
-          },
-          "404": {
-            "description": "Not found"
-          },
-          "default": {
-            "schema": {
-              "$ref": "#/definitions/ErrorContract"
-            },
-            "description": ""
-          }
-        },
-        "consumes": [],
-        "produces": [
-          "application/json"
-        ],
-        "x-ms-examples": {
-          "Get PrivateEndpointConnectionProxy by name in workspace": {
-            "$ref": "./examples/GetPrivateEndpointConnectionProxyInWorkspace.json"
           }
         }
       }
@@ -1100,6 +1212,72 @@
             }
           },
           "x-ms-client-flatten": true
+        }
+      }
+    },
+    "ScopePoolResourceProperties": {
+      "allOf": [
+        {
+          "$ref": "../../../../common/v1/types.json#/definitions/ResourcePropertiesBase"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "creationDate": {
+              "type": "string",
+              "format": "date-time "
+            },
+            "maxQueuedJobs": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "maxRunningJobs": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "extendedProperties": {
+              "type": "string"
+            }
+          }
+        }
+      ]
+    },
+    "ScopePoolResourceInfo": {
+      "allOf": [
+        {
+          "$ref": "../../../../common/v1/types.json#/definitions/WorkspaceSubResource"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "properties": {
+              "type": "object",
+              "$ref": "#/definitions/ScopePoolResourceProperties"
+            }
+          }
+        }
+      ]
+    },
+    "ResourceCollectionResponse_ScopePoolResourceInfo": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ScopePoolResourceInfo"
+          }
+        },
+        "nextLink": {
+          "type": "string"
+        }
+      }
+    },
+    "ScopePoolPatchInfo": {
+      "properties": {
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
         }
       }
     }

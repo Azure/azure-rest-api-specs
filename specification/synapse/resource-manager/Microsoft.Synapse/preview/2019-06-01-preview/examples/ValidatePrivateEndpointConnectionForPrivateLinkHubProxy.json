@@ -1,0 +1,51 @@
+{
+  "parameters": {
+    "subscriptionId": "48b08652-d7a1-4d52-b13f-5a2471dce57b",
+    "resourceGroup": "gh-res-grp",
+    "privateLinkHubName": "plh0",
+    "privateEndpointConnectionProxyName": "pecProxy0"
+  },
+  "responses": {
+    "200": {
+      "remotePrivateEndpoint": {
+        "privateLinkServiceProxies": [
+          {
+            "groupConnectivityInformation": [
+              {
+                "groupId": "Web",
+                "memberName": "Web"
+              }
+            ],
+            "id": "id"
+          }
+        ],
+        "id": "remotePrivateEndpointId",
+        "location": "remotePrivateEndpointLocation",
+        "immutableSubscriptionId": "remotePrivateEndpointImmutableSubscriptionId",
+        "immutableResourceId": "remotePrivateEndpointImmutableResourceId",
+        "manualPrivateLinkServiceConnections": [
+          {
+            "name": "connectionName",
+            "groupIds": [
+              "Web"
+            ],
+            "requestMessage": "requestMessage"
+          }
+        ]
+      }
+    },
+    "404": {
+      "error": {
+        "code": "PrivateEndpointConnectionForPrivateLinkHubProxyValidationFailed",
+        "message": "Private Endpoint Connection Proxy validation failed, check error details for more information",
+        "details": [
+          {
+            "code": "PrivateLinkServiceConnectionNotProvided",
+            "message": "Private Link Service Connection not provided"
+          }
+        ]
+      }
+    },
+    "409": ""
+  }
+}

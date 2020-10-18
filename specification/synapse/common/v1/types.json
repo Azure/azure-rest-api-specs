@@ -124,6 +124,35 @@
         }
       },
       "x-ms-azure-resource": true
+    },
+    "ResourcePropertiesBase": {
+      "properties": {
+        "provisioningState": {
+          "type": "string"
+        }
+      }
+    },
+    "AsyncOperationState": {
+      "type": "string",
+      "enum": [
+        "None",
+        "InProgress",
+        "Succeeded",
+        "Failed",
+        "Canceled"
+      ]
+    },
+    "OperationResource": {
+      "properties": {
+        "status": {
+          "type": "string",
+          "$ref": "#/definitions/AsyncOperationState"
+        },
+        "error": {
+          "type": "object",
+          "$ref": "#/definitions/ErrorDetail"
+        }
+      }
     }
   },
   "parameters": {
