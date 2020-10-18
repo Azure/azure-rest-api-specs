@@ -78,11 +78,19 @@
           },
 		  {
             "in": "query",
-            "name": "isManaged",
+            "name": "deviceManagementType",
             "required": false,
             "type": "string",
-            "description": "Filter by managed/unmanaged device"
-          },
+            "enum": [
+              "Managed",
+              "Unmanaged"
+            ],
+            "description": "Get devices only from specific type, Managed or Unmanaged.",
+            "x-ms-enum": {
+              "name": "ManagementState",
+              "modelAsString": true
+            }
+          }
           {
             "in": "query",
             "name": "compromisedEntity",
@@ -125,7 +133,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/iotSecuritySolutions/{solutionName}/iotAlerts/{iotAlertId}": {
+    "/{scope}/providers/Microsoft.Security/iotAlerts/{iotAlertId}": {
       "get": {
         "x-ms-examples": {
           "Get IoT Alert": {
@@ -142,13 +150,7 @@
             "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
           },
           {
-            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
-          },
-          {
-            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupName"
-          },
-          {
-            "$ref": "#/parameters/SolutionName"
+            "$ref": "#/parameters/IotAlertScope"
           },
           {
             "in": "path",
@@ -176,6 +178,15 @@
     }
   },
   "definitions": {
+	"IotAlertScope": {
+      "name": "scope",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Scope of the query: Subscription (i.e. /subscriptions/{subscriptionId}) or IoT Hub (i.e. /subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Devices/iotHubs/{iotHubName})",
+      "x-ms-parameter-location": "method",
+      "x-ms-skip-url-encoding": true
+    },
     "IotAlertList": {
       "description": "List of IoT alerts",
       "type": "object",
@@ -272,16 +283,6 @@
           }
         }
       }
-    }
-  },
-  "parameters": {
-    "SolutionName": {
-      "name": "solutionName",
-      "in": "path",
-      "required": true,
-      "description": "The name of the IoT Security solution.",
-      "type": "string",
-      "x-ms-parameter-location": "method"
     }
   }
 }
