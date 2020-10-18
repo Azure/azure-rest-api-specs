@@ -70,7 +70,7 @@
           },
           {
             "in": "query",
-            "name": "$managedType",
+            "name": "managedType",
             "required": false,
             "type": "string",
             "enum": [
@@ -139,7 +139,7 @@
           },
           {
             "in": "query",
-            "name": "$managedType",
+            "name": "managedType",
             "required": false,
             "type": "string",
             "enum": [
@@ -368,14 +368,6 @@
             "$ref": "#/definitions/Firmware"
           }
         },
-        "vlans": {
-          "readOnly": true,
-          "type": "array",
-          "description": "List of device vlans.",
-          "items": {
-            "type": "string"
-          }
-        },
         "discoveryTime": {
           "readOnly": true,
           "type": "string",
@@ -442,6 +434,19 @@
           "readOnly": true,
           "type": "string",
           "description": "The sensor zone name."
+        },
+        "deviceStatus": {
+          "readOnly": true,
+          "type": "string",
+          "enum": [
+            "Active",
+            "Removed"
+          ],
+          "x-ms-enum": {
+            "name": "DeviceStatus",
+            "modelAsString": true
+          },
+          "description": "Device status."
         }
       }
     },
@@ -454,6 +459,14 @@
         },
         "macAddress": {
           "$ref": "#/definitions/MacAddress"
+        },
+        "vlans": {
+          "readOnly": true,
+          "type": "array",
+          "description": "List of device vlans.",
+          "items": {
+            "type": "string"
+          }
         }
       }
     },
