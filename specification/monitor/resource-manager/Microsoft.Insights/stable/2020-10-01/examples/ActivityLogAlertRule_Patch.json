@@ -3,7 +3,16 @@
     "subscriptionId": "187f412d-1758-44d9-b052-169e2564721d",
     "resourceGroupName": "MyResourceGroup",
     "activityLogAlertName": "SampleActivityLogAlertRule",
-    "api-version": "2020-10-01-preview"
+    "api-version": "2020-10-01",
+    "activityLogAlertRulePatch": {
+      "tags": {
+        "key1": "value1",
+        "key2": "value2"
+      },
+      "properties": {
+        "enabled": false
+      }
+    }
   },
   "responses": {
     "200": {
@@ -13,10 +22,13 @@
         "type": "Microsoft.Insights/ActivityLogAlerts",
         "name": "SampleActivityLogAlertRule",
         "location": "Global",
-        "tags": {},
+        "tags": {
+          "key1": "value1",
+          "key2": "value2"
+        },
         "properties": {
           "scopes": [
-            "subscriptions/187f412d-1758-44d9-b052-169e2564721d"
+            "/subscriptions/187f412d-1758-44d9-b052-169e2564721d"
           ],
           "condition": {
             "allOf": [
@@ -40,7 +52,7 @@
               }
             ]
           },
-          "enabled": true,
+          "enabled": false,
           "description": "Description of sample Activity Log Alert rule."
         }
       }

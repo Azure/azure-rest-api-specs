@@ -2,8 +2,8 @@
   "parameters": {
     "subscriptionId": "187f412d-1758-44d9-b052-169e2564721d",
     "resourceGroupName": "MyResourceGroup",
-    "activityLogAlertName": "SampleActivityLogAlertRuleWithContainsAny",
-    "api-version": "2020-10-01-preview",
+    "activityLogAlertName": "SampleActivityLogAlertRuleWithAnyOfCondition",
+    "api-version": "2020-10-01",
     "activityLogAlertRule": {
       "location": "Global",
       "tags": {},
@@ -18,10 +18,15 @@
               "equals": "ServiceHealth"
             },
             {
-              "field": "properties.impactedServices[*].ImpactedRegions[*].RegionName",
-              "containsAny": [
-                "North Europe",
-                "West Europe"
+              "anyOf": [
+                {
+                  "field": "properties.incidentType",
+                  "equals": "Incident"
+                },
+                {
+                  "field": "properties.incidentType",
+                  "equals": "Maintenance"
+                }
               ]
             }
           ]
@@ -37,7 +42,7 @@
           ]
         },
         "enabled": true,
-        "description": "Description of sample Activity Log Alert rule with 'containsAny'."
+        "description": "Description of sample Activity Log Alert rule with 'anyOf' condition."
       }
     }
   },
@@ -45,9 +50,9 @@
     "200": {
       "headers": {},
       "body": {
-        "id": "/subscriptions/187f412d-1758-44d9-b052-169e2564721d/resourceGroups/MyResourceGroup/providers/microsoft.insights/activityLogAlerts/SampleActivityLogAlertRuleWithContainsAny",
+        "id": "/subscriptions/187f412d-1758-44d9-b052-169e2564721d/resourceGroups/MyResourceGroup/providers/microsoft.insights/activityLogAlerts/SampleActivityLogAlertRuleWithAnyOfCondition",
         "type": "Microsoft.Insights/ActivityLogAlerts",
-        "name": "SampleActivityLogAlertRuleWithContainsAny",
+        "name": "SampleActivityLogAlertRuleWithAnyOfCondition",
         "location": "Global",
         "tags": {},
         "properties": {
@@ -61,10 +66,15 @@
                 "equals": "ServiceHealth"
               },
               {
-                "field": "properties.impactedServices[*].ImpactedRegions[*].RegionName",
-                "containsAny": [
-                  "North Europe",
-                  "West Europe"
+                "anyOf": [
+                  {
+                    "field": "properties.incidentType",
+                    "equals": "Incident"
+                  },
+                  {
+                    "field": "properties.incidentType",
+                    "equals": "Maintenance"
+                  }
                 ]
               }
             ]
@@ -80,16 +90,16 @@
             ]
           },
           "enabled": true,
-          "description": "Description of sample Activity Log Alert rule with 'containsAny'."
+          "description": "Description of sample Activity Log Alert rule with 'anyOf' condition."
         }
       }
     },
     "201": {
       "headers": {},
       "body": {
-        "id": "/subscriptions/187f412d-1758-44d9-b052-169e2564721d/resourceGroups/MyResourceGroup/providers/microsoft.insights/activityLogAlerts/SampleActivityLogAlertRuleWithContainsAny",
+        "id": "/subscriptions/187f412d-1758-44d9-b052-169e2564721d/resourceGroups/MyResourceGroup/providers/microsoft.insights/activityLogAlerts/SampleActivityLogAlertRuleWithAnyOfCondition",
         "type": "Microsoft.Insights/ActivityLogAlerts",
-        "name": "SampleActivityLogAlertRuleWithContainsAny",
+        "name": "SampleActivityLogAlertRuleWithAnyOfCondition",
         "location": "Global",
         "tags": {},
         "properties": {
@@ -103,10 +113,15 @@
                 "equals": "ServiceHealth"
               },
               {
-                "field": "properties.impactedServices[*].ImpactedRegions[*].RegionName",
-                "containsAny": [
-                  "North Europe",
-                  "West Europe"
+                "anyOf": [
+                  {
+                    "field": "properties.incidentType",
+                    "equals": "Incident"
+                  },
+                  {
+                    "field": "properties.incidentType",
+                    "equals": "Maintenance"
+                  }
                 ]
               }
             ]
@@ -122,7 +137,7 @@
             ]
           },
           "enabled": true,
-          "description": "Description of sample Activity Log Alert rule with 'containsAny'."
+          "description": "Description of sample Activity Log Alert rule with 'anyOf' condition."
         }
       }
     }
