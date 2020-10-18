@@ -3928,6 +3928,10 @@
             "type": "string"
           }
         ],
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
         "responses": {
           "200": {
             "description": "Successfully returned the restore point.",
@@ -3979,10 +3983,6 @@
             "type": "string"
           }
         ],
-        "consumes": [],
-        "produces": [
-          "application/json"
-        ],
         "responses": {
           "200": {
             "description": "Successfully deleted the restore point."
@@ -3991,6 +3991,10 @@
             "description": "*** Error Responses: ***\n\n * 400 FeatureDisabledOnSelectedEdition - User attempted to use a feature which is disabled on current database edition.\n\n * 400 BackupNotAllowedOnDeactivatedDatabase - Cannot create restore point on a deactivated database.\n\n * 400 RestorePointLimitReached - A restore point cannot be created because database would exceed the allowed quota of restore points.\n\n * 400 RestorePointAttemptToDeleteSystemBackup - Cannot delete system restore point.\n\n * 404 DatabaseRestorePointNotFound - Can not find database restore point.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 DatabaseDoesNotExist - User has specified a database name that does not exist on this server instance.\n\n * 408 DatabaseRestorePointTimedOut - Create database restore point failed."
           }
         },
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
         "x-ms-examples": {
           "Deletes a restore point.": {
             "$ref": "./examples/SqlPoolRestorePointsDelete.json"
