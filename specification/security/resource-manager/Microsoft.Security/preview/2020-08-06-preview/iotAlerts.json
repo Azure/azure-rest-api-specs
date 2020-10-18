@@ -1,0 +1,287 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Security Center",
+    "description": "API spec for Microsoft.Security (Azure Security Center) resource provider",
+    "version": "2020-08-06-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+	"/{scope}/providers/Microsoft.Security/iotAlerts": {
+      "get": {
+        "x-ms-examples": {
+          "List IoT Alerts": {
+            "$ref": "./examples/IotAlerts/GetIoTAlertList.json"
+          }
+        },
+        "tags": [
+          "IoT Security Alerts"
+        ],
+        "description": "List IoT alerts",
+        "operationId": "IotAlerts_List",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/IotAlertScope"
+          }
+          {
+            "in": "query",
+            "name": "startTimeUtc>",
+            "x-ms-client-name": "minStartTimeUtc",
+            "required": false,
+            "type": "string",
+            "description": "Filter by minimum startTimeUtc (ISO 8601 format)"
+          },
+          {
+            "in": "query",
+            "name": "startTimeUtc<",
+            "x-ms-client-name": "maxStartTimeUtc",
+            "required": false,
+            "type": "string",
+            "description": "Filter by maximum startTimeUtc (ISO 8601 format)"
+          },
+          {
+            "in": "query",
+            "name": "alertType",
+            "required": false,
+            "type": "string",
+            "description": "Filter by alert type"
+          },
+		  {
+            "in": "query",
+            "name": "isManaged",
+            "required": false,
+            "type": "string",
+            "description": "Filter by managed/unmanaged device"
+          },
+          {
+            "in": "query",
+            "name": "compromisedEntity",
+            "required": false,
+            "type": "string",
+            "description": "Filter by compromised device"
+          },
+          {
+            "in": "query",
+            "name": "$limit",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "description": "Limit the number of items returned in a single page"
+          },
+          {
+            "in": "query",
+            "name": "$skipToken",
+            "required": false,
+            "type": "string",
+            "description": "Skip token used for pagination"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/IotAlertList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/iotSecuritySolutions/{solutionName}/iotAlerts/{iotAlertId}": {
+      "get": {
+        "x-ms-examples": {
+          "Get IoT Alert": {
+            "$ref": "./examples/IotAlerts/GetIoTAlert.json"
+          }
+        },
+        "tags": [
+          "IoT Security Alerts"
+        ],
+        "operationId": "IotAlerts_Get",
+        "description": "Get IoT alert",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/SolutionName"
+          },
+          {
+            "in": "path",
+            "name": "iotAlertId",
+            "required": true,
+            "type": "string",
+            "description": "Id of the alert"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "IoT alert",
+            "schema": {
+              "$ref": "#/definitions/IotAlert"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "IotAlertList": {
+      "description": "List of IoT alerts",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "List data",
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/IotAlert"
+          }
+        },
+        "nextLink": {
+          "readOnly": true,
+          "type": "string",
+          "description": "When available, follow the URI to get the next page of data"
+        },
+        "totalCount": {
+          "readOnly": true,
+          "format": "int32",
+          "type": "integer",
+          "description": "Total count of alerts that conforms with the given filter options (not affected by page size)"
+        }
+      }
+    },
+    "IotAlert": {
+      "type": "object",
+      "description": "IoT alert",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "Alert properties",
+          "$ref": "#/definitions/IotAlertProperties"
+        }
+      }
+    },
+    "IotAlertProperties": {
+      "type": "object",
+      "description": "IoT alert properties",
+      "properties": {
+        "systemAlertId": {
+          "description": "Holds the product canonical identifier of the alert within the scope of a product",
+          "readOnly": true,
+          "type": "string",
+          "example": "903e76ff-17eb-4bac-ac8a-2bc31ab68fd8"
+        },
+        "compromisedEntity": {
+          "description": "Display name of the main entity being reported on",
+          "readOnly": true,
+          "type": "string",
+          "example": "device-1"
+        },
+        "alertType": {
+          "description": "The type name of the alert",
+          "readOnly": true,
+          "type": "string",
+          "example": "IoT_PrivilegedContainer"
+        },
+        "startTimeUtc": {
+          "description": "The impact start time of the alert (the time of the first event or activity included in the alert)",
+          "readOnly": true,
+          "type": "string",
+          "example": "2020-05-13T06:32:25Z"
+        },
+        "endTimeUtc": {
+          "description": "The impact end time of the alert (the time of the last event or activity included in the alert)",
+          "readOnly": true,
+          "type": "string",
+          "example": "2020-05-13T06:32:25Z"
+        },
+        "entities": {
+          "description": "A list of entities related to the alert",
+          "type": "array",
+          "items": {
+            "type": "object"
+          },
+          "example": [
+            {
+              "$id": "1",
+              "CommandLine": "docker run --privileged",
+              "Type": "process"
+            }
+          ]
+        },
+        "extendedProperties": {
+          "type": "object",
+          "description": "A bag of fields which extends the alert information",
+          "example": {
+            "CommandLine": "docker run --privileged",
+            "User Name": "aUser",
+            "UserId": "",
+            "ParentProcessId": 1593,
+            "DeviceId": "device-1"
+          }
+        }
+      }
+    }
+  },
+  "parameters": {
+    "SolutionName": {
+      "name": "solutionName",
+      "in": "path",
+      "required": true,
+      "description": "The name of the IoT Security solution.",
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}
