@@ -198,7 +198,7 @@ input-file:
 - Microsoft.Security/stable/2020-01-01/discoveredSecuritySolutions.json
 - Microsoft.Security/stable/2020-01-01/securitySolutionsReferenceData.json
 - Microsoft.Security/stable/2020-01-01/externalSecuritySolutions.json
-- Microsoft.Security/preview/2020-01-01/secureScore.json
+- Microsoft.Security/stable/2020-01-01/secureScore.json
 - Microsoft.Security/stable/2020-01-01/SecuritySolutions.json
 - Microsoft.Security/preview/2020-01-01-preview/connectors.json
 - Microsoft.Security/preview/2020-08-06-preview/iotDefenderSettings.json
@@ -375,7 +375,7 @@ input-file:
 - Microsoft.Security/stable/2020-01-01/jitNetworkAccessPolicies.json
 - Microsoft.Security/stable/2020-01-01/serverVulnerabilityAssessments.json	
 - Microsoft.Security/stable/2020-01-01/topologies.json
-- Microsoft.Security/preview/2020-01-01/secureScore.json
+- Microsoft.Security/stable/2020-01-01/secureScore.json
 
 # Needed when there is more than one input file
 override-info:
