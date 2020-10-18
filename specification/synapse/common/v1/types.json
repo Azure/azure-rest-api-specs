@@ -53,7 +53,20 @@
     "WorkspaceSubResource": {
       "allOf": [
         {
-          "$ref": "../../../common-types/resource-management/v1/types.json#/definitions/TrackedResource"
+          "$ref": "../../../common-types/resource-management/v1/types.json#/definitions/Resource"
+        },
+        {
+          "properties": {
+            "location": {
+              "type": "string"
+            },
+            "tags": {
+              "type": "object",
+              "additionalProperties": {
+                "type": "string"
+              }
+            }
+          }
         }
       ]
     },

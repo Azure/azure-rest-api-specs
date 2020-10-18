@@ -657,12 +657,6 @@
           }
         ],
         "responses": {
-          "200": {
-            "schema": {
-              "type": "object"
-            },
-            "description": "OK"
-          },
           "202": {
             "schema": {
               "type": "object"
@@ -670,7 +664,13 @@
             "description": ""
           },
           "204": {
-            "description": ""
+            "description": "No content"
+          },
+          "403": {
+            "schema": {
+              "$ref": "#/definitions/ErrorContract"
+            },
+            "description": "Not allowed to operate on this tenant and subscription"
           },
           "default": {
             "schema": {

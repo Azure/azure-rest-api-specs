@@ -8,42 +8,48 @@
   },
   "responses": {
     "200": {
-      "remotePrivateEndpoint": {
-        "privateLinkServiceProxies": [
-          {
-            "groupConnectivityInformation": [
-              {
-                "groupId": "Dev",
-                "memberName": "Dev"
-              }
-            ],
-            "id": "id"
-          }
-        ],
-        "id": "remotePrivateEndpointId",
-        "manualPrivateLinkServiceConnections": [
-          {
-            "name": "connectionName",
-            "groupIds": [
-              "Dev"
-            ],
-            "requestMessage": "requestMessage"
-          }
-        ]
+      "body": {
+        "remotePrivateEndpoint": {
+          "privateLinkServiceProxies": [
+            {
+              "groupConnectivityInformation": [
+                {
+                  "groupId": "Dev",
+                  "memberName": "Dev"
+                }
+              ],
+              "id": "id"
+            }
+          ],
+          "id": "remotePrivateEndpointId",
+          "manualPrivateLinkServiceConnections": [
+            {
+              "name": "connectionName",
+              "groupIds": [
+                "Dev"
+              ],
+              "requestMessage": "requestMessage"
+            }
+          ]
+        }
       }
     },
     "400": {
-      "error": {
-        "code": "PrivateEndpointConnectionProxyValidationFailed",
-        "message": "Private Endpoint Connection Proxy validation failed, check error details for more information",
-        "details": [
-          {
-            "code": "PrivateLinkServiceConnectionNotProvided",
-            "message": "Private Link Service Connection not provided"
-          }
-        ]
+      "body": {
+        "error": {
+          "code": "PrivateEndpointConnectionProxyValidationFailed",
+          "message": "Private Endpoint Connection Proxy validation failed, check error details for more information",
+          "details": [
+            {
+              "code": "PrivateLinkServiceConnectionNotProvided",
+              "message": "Private Link Service Connection not provided"
+            }
+          ]
+        }
       }
     },
-    "409": ""
+    "409": {
+      "body": ""
+    }
   }
 }

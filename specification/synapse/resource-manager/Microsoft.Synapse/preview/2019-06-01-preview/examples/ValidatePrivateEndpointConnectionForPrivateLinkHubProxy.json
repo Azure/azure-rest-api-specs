@@ -7,45 +7,51 @@
   },
   "responses": {
     "200": {
-      "remotePrivateEndpoint": {
-        "privateLinkServiceProxies": [
-          {
-            "groupConnectivityInformation": [
-              {
-                "groupId": "Web",
-                "memberName": "Web"
-              }
-            ],
-            "id": "id"
-          }
-        ],
-        "id": "remotePrivateEndpointId",
-        "location": "remotePrivateEndpointLocation",
-        "immutableSubscriptionId": "remotePrivateEndpointImmutableSubscriptionId",
-        "immutableResourceId": "remotePrivateEndpointImmutableResourceId",
-        "manualPrivateLinkServiceConnections": [
-          {
-            "name": "connectionName",
-            "groupIds": [
-              "Web"
-            ],
-            "requestMessage": "requestMessage"
-          }
-        ]
+      "body": {
+        "remotePrivateEndpoint": {
+          "privateLinkServiceProxies": [
+            {
+              "groupConnectivityInformation": [
+                {
+                  "groupId": "Web",
+                  "memberName": "Web"
+                }
+              ],
+              "id": "id"
+            }
+          ],
+          "id": "remotePrivateEndpointId",
+          "location": "remotePrivateEndpointLocation",
+          "immutableSubscriptionId": "remotePrivateEndpointImmutableSubscriptionId",
+          "immutableResourceId": "remotePrivateEndpointImmutableResourceId",
+          "manualPrivateLinkServiceConnections": [
+            {
+              "name": "connectionName",
+              "groupIds": [
+                "Web"
+              ],
+              "requestMessage": "requestMessage"
+            }
+          ]
+        }
       }
     },
     "404": {
-      "error": {
-        "code": "PrivateEndpointConnectionForPrivateLinkHubProxyValidationFailed",
-        "message": "Private Endpoint Connection Proxy validation failed, check error details for more information",
-        "details": [
-          {
-            "code": "PrivateLinkServiceConnectionNotProvided",
-            "message": "Private Link Service Connection not provided"
-          }
-        ]
+      "body": {
+        "error": {
+          "code": "PrivateEndpointConnectionForPrivateLinkHubProxyValidationFailed",
+          "message": "Private Endpoint Connection Proxy validation failed, check error details for more information",
+          "details": [
+            {
+              "code": "PrivateLinkServiceConnectionNotProvided",
+              "message": "Private Link Service Connection not provided"
+            }
+          ]
+        }
       }
     },
-    "409": ""
+    "409": {
+      "body": ""
+    }
   }
 }
