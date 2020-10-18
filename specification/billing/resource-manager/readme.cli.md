@@ -32,7 +32,7 @@ cli:
       - where:
           operationGroup: BillingSubscriptions
         name: subscription
-      # Should appear in accounts command group
+      # Shouldn't appear in accounts command group, the responses is not related to BollingAccount
       - where:
           group: BillingAccounts
           op: ListInvoiceSectionsByCreateSubscriptionPermission
