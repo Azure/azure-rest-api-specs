@@ -21,7 +21,24 @@
     }
   },
   "paths": {
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Synapse/workspaces/{workspaceName}/managedIdentitySqlControlSettings/{settingName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces/{workspaceName}/managedIdentitySqlControlSettings/{settingName}": {
+      "parameters": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+        },
+        {
+          "$ref": "../../../../common/v1/types.json#/parameters/WorkspaceNameParameter"
+        },
+        {
+          "$ref": "#/parameters/SettingNameParameter"
+        }
+      ],
       "get": {
         "operationId": "GetWorkspaceManagedIdentity",
         "description": "Get managed identity by name in the workspace",
@@ -29,23 +46,6 @@
           "ManagedIdentity"
         ],
         "deprecated": false,
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "../../../../common/v1/types.json#/parameters/WorkspaceNameParameter"
-          },
-          {
-            "$ref": "#/parameters/SettingNameParameter"
-          }
-        ],
         "responses": {
           "200": {
             "schema": {
@@ -78,21 +78,6 @@
         ],
         "deprecated": false,
         "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "../../../../common/v1/types.json#/parameters/WorkspaceNameParameter"
-          },
-          {
-            "$ref": "#/parameters/SettingNameParameter"
-          },
           {
             "in": "body",
             "name": "managedIdentitySqlControlSettings",
@@ -137,7 +122,7 @@
           "final-state-via": "location"
         },
         "x-ms-examples": {
-          "Get managed identity by name in the workspace": {
+          "Create managed identity by name in the workspace": {
             "$ref": "./examples/PutManagedIdentitySqlControlSettings.json"
           }
         }

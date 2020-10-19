@@ -22,6 +22,17 @@
   },
   "paths": {
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/privateLinkHub": {
+      "parameters": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+        }
+      ],
       "get": {
         "operationId": "PrivateLinkHubs_ListByResourceGroup",
         "description": "Returns a list of privateLinkHubs in a resource group",
@@ -29,17 +40,6 @@
           "PrivateLinkHubs"
         ],
         "deprecated": false,
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
-          }
-        ],
         "responses": {
           "200": {
             "schema": {
@@ -63,6 +63,20 @@
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/privateLinkHubs/{privateLinkHubName}": {
+      "parameters": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+        },
+        {
+          "$ref": "#/parameters/privateLinkHubNameParameter"
+        }
+      ],
       "get": {
         "operationId": "PrivateLinkHubs_Get",
         "description": "Gets a privateLinkHub",
@@ -70,20 +84,6 @@
           "PrivateLinkHubs"
         ],
         "deprecated": false,
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/privateLinkHubNameParameter"
-          }
-        ],
         "responses": {
           "200": {
             "schema": {
@@ -116,18 +116,6 @@
         ],
         "deprecated": false,
         "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/privateLinkHubNameParameter"
-          },
           {
             "schema": {
               "$ref": "#/definitions/PrivateLinkHubPatchInfo"
@@ -179,18 +167,6 @@
         "deprecated": false,
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/privateLinkHubNameParameter"
-          },
-          {
             "description": "PrivateLinkHub create or update request properties",
             "schema": {
               "$ref": "#/definitions/PrivateLinkHub"
@@ -239,20 +215,6 @@
           "PrivateLinkHubs"
         ],
         "deprecated": false,
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/privateLinkHubNameParameter"
-          }
-        ],
         "responses": {
           "200": {
             "description": "OK"
@@ -316,58 +278,21 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Synapse/privateLinkHubs/{privateLinkHubName}/privateEndpointConnectionProxies/{privateEndpointConnectionProxyName}": {
-      "get": {
-        "operationId": "GetPrivateLinkHubPrivateEndpointConnectionProxies",
-        "description": "Get PrivateEndpointConnectionProxy by name in the PrivateLinkHub",
-        "tags": [
-          "PrivateLinkHubs",
-          "PrivateEndpointConnectionProxy"
-        ],
-        "deprecated": false,
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/privateLinkHubNameParameter"
-          },
-          {
-            "$ref": "#/parameters/PrivateEndpointConnectionProxyNameParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "schema": {
-              "$ref": "#/definitions/PrivateEndpointConnectionForPrivateLinkHubProxy"
-            },
-            "description": "PrivateEndpointConnectionProxy resource details"
-          },
-          "default": {
-            "schema": {
-              "$ref": "#/definitions/ErrorContract"
-            },
-            "description": ""
-          }
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/privateLinkHubs/{privateLinkHubName}/privateEndpointConnections": {
+      "parameters": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
         },
-        "consumes": [],
-        "produces": [
-          "application/json"
-        ],
-        "x-ms-examples": {
-          "Get PrivateEndpointConnectionProxy by name in the PrivateLinkHub": {
-            "$ref": "./examples/GetPrivateLinkHubPrivateEndpointConnectionProxies.json"
-          }
+        {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+        },
+        {
+          "$ref": "#/parameters/privateLinkHubNameParameter"
         }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Synapse/privateLinkHubs/{privateLinkHubName}/privateEndpointConnections": {
+      ],
       "get": {
         "operationId": "GetAllPrivateEndpointConnectionsPrivateLinkHub",
         "description": "Get all PrivateEndpointConnections in the PrivateLinkHub",
@@ -376,20 +301,6 @@
           "PrivateEndpointConnections"
         ],
         "deprecated": false,
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/privateLinkHubNameParameter"
-          }
-        ],
         "responses": {
           "200": {
             "schema": {

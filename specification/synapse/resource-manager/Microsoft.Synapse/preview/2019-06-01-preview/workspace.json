@@ -496,7 +496,24 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces/{workspaceName}/sqlAdministrators/activeDirectory": {
       "$ref": "#/paths/~1subscriptions~1%7BsubscriptionId%7D~1resourceGroups~1%7BresourceGroupName%7D~1providers~1Microsoft.Synapse~1workspaces~1%7BworkspaceName%7D~1administrators~1activeDirectory"
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Synapse/workspaces/{workspaceName}/scopePools/{scopePoolName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces/{workspaceName}/scopePools/{scopePoolName}": {
+      "parameters": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+        },
+        {
+          "$ref": "#/parameters/workspaceNameParameter"
+        },
+        {
+          "$ref": "#/parameters/scopePoolNameParameter"
+        }
+      ],
       "get": {
         "operationId": "GetScopePool",
         "description": "Get scope pool by name",
@@ -504,23 +521,6 @@
           "ScopePools"
         ],
         "deprecated": false,
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/workspaceNameParameter"
-          },
-          {
-            "$ref": "#/parameters/scopePoolNameParameter"
-          }
-        ],
         "responses": {
           "200": {
             "schema": {
@@ -560,21 +560,6 @@
         ],
         "deprecated": false,
         "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "../../../../common/v1/types.json#/parameters/WorkspaceNameParameter"
-          },
-          {
-            "$ref": "#/parameters/scopePoolNameParameter"
-          },
           {
             "in": "body",
             "name": "scopePoolInfo",
@@ -762,6 +747,20 @@
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Synapse/workspaces/{workspaceName}/scopePools": {
+      "parameters": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+        },
+        {
+          "$ref": "#/parameters/workspaceNameParameter"
+        }
+      ],
       "get": {
         "operationId": "GetScopePoolsInWorkspace",
         "description": "Get all scope pools in workspace",
@@ -769,20 +768,6 @@
           "ScopePools"
         ],
         "deprecated": false,
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/workspaceNameParameter"
-          }
-        ],
         "responses": {
           "200": {
             "schema": {
@@ -816,6 +801,23 @@
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Synapse/workspaces/{workspaceName}/privateEndpointConnections/{privateEndpointConnectionName}": {
+      "parameters": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+        },
+        {
+          "$ref": "#/parameters/workspaceNameParameter"
+        },
+        {
+          "$ref": "../../../../common/v1/privateEndpintConnection.json#/parameters/PrivateEndpointConnectionNameParameter"
+        }
+      ],
       "get": {
         "operationId": "GetPrivateEndpointConnectionInWorkspace",
         "description": "Get PrivateEndpointConnection by name in workspace",
@@ -824,23 +826,6 @@
           "PrivateEndpointConnection"
         ],
         "deprecated": false,
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/workspaceNameParameter"
-          },
-          {
-            "$ref": "../../../../common/v1/privateEndpintConnection.json#/parameters/PrivateEndpointConnectionNameParameter"
-          }
-        ],
         "responses": {
           "200": {
             "schema": {

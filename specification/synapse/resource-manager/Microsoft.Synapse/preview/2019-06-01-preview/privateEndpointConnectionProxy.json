@@ -21,7 +21,24 @@
     }
   },
   "paths": {
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Synapse/workspaces/{workspaceName}/privateEndpointConnectionProxies/{privateEndpointConnectionProxyName}/validate": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces/{workspaceName}/privateEndpointConnectionProxies/{privateEndpointConnectionProxyName}/validate": {
+      "parameters": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+        },
+        {
+          "$ref": "../../../../common/v1/types.json#/parameters/WorkspaceNameParameter"
+        },
+        {
+          "$ref": "#/parameters/PrivateEndpointConnectionProxyNameParameter"
+        }
+      ],
       "post": {
         "operationId": "ValidatePrivateEndpointConnectionProxyForWorskpace",
         "description": "Validate PrivateEndpointConnectionProxy for workspace",
@@ -30,21 +47,6 @@
         ],
         "deprecated": false,
         "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "../../../../common/v1/types.json#/parameters/WorkspaceNameParameter"
-          },
-          {
-            "$ref": "#/parameters/PrivateEndpointConnectionProxyNameParameter"
-          },
           {
             "in": "body",
             "name": "request",
@@ -93,7 +95,24 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Synapse/workspaces/{workspaceName}/privateEndpointConnectionProxies/{privateEndpointConnectionProxyName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces/{workspaceName}/privateEndpointConnectionProxies/{privateEndpointConnectionProxyName}": {
+      "parameters": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+        },
+        {
+          "$ref": "../../../../common/v1/types.json#/parameters/WorkspaceNameParameter"
+        },
+        {
+          "$ref": "#/parameters/PrivateEndpointConnectionProxyNameParameter"
+        }
+      ],
       "put": {
         "operationId": "PutPrivateEndpointConnectionProxy",
         "description": "Put PrivateEndpointConnectionProxy",
@@ -102,21 +121,6 @@
         ],
         "deprecated": false,
         "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "../../../../common/v1/types.json#/parameters/WorkspaceNameParameter"
-          },
-          {
-            "$ref": "#/parameters/PrivateEndpointConnectionProxyNameParameter"
-          },
           {
             "in": "body",
             "name": "request",
@@ -168,23 +172,6 @@
           "PrivateEndpointConnectionProxy"
         ],
         "deprecated": false,
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "../../../../common/v1/types.json#/parameters/WorkspaceNameParameter"
-          },
-          {
-            "$ref": "#/parameters/PrivateEndpointConnectionProxyNameParameter"
-          }
-        ],
         "responses": {
           "200": {
             "schema": {
@@ -216,7 +203,24 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Synapse/privateLinkHubs/{privateLinkHubName}/privateEndpointConnectionProxies/{privateEndpointConnectionProxyName}/validate": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/privateLinkHubs/{privateLinkHubName}/privateEndpointConnectionProxies/{privateEndpointConnectionProxyName}/validate": {
+      "parameters": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+        },
+        {
+          "$ref": "../../../../common/v1/types.json#/parameters/PrivateLinkHubNameParameter"
+        },
+        {
+          "$ref": "#/parameters/PrivateEndpointConnectionProxyNameParameter"
+        }
+      ],
       "post": {
         "operationId": "ValidatePrivateEndpointConnectionForPrivateLinkHubProxy",
         "description": "Validate PrivateEndpointConnectionProxy for PrivateLinkHub",
@@ -225,21 +229,6 @@
         ],
         "deprecated": false,
         "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "../../../../common/v1/types.json#/parameters/WorkspaceNameParameter"
-          },
-          {
-            "$ref": "#/parameters/PrivateEndpointConnectionProxyNameParameter"
-          },
           {
             "in": "body",
             "name": "request",
@@ -285,7 +274,24 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Synapse/privateLinkHubs/{privateLinkHubName}/privateEndpointConnectionProxies/{privateEndpointConnectionProxyName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/privateLinkHubs/{privateLinkHubName}/privateEndpointConnectionProxies/{privateEndpointConnectionProxyName}": {
+      "parameters": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+        },
+        {
+          "$ref": "../../../../common/v1/types.json#/parameters/PrivateLinkHubNameParameter"
+        },
+        {
+          "$ref": "#/parameters/PrivateEndpointConnectionProxyNameParameter"
+        }
+      ],
       "delete": {
         "operationId": "DeletePrivateEndpointConnectionForPrivateLinkHubProxy",
         "description": "Delete PrivateEndpointConnectionProxy for PrivateLinkHub",
@@ -293,23 +299,6 @@
           "PrivateEndpointConnectionProxy"
         ],
         "deprecated": false,
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "../../../../common/v1/types.json#/parameters/WorkspaceNameParameter"
-          },
-          {
-            "$ref": "#/parameters/PrivateEndpointConnectionProxyNameParameter"
-          }
-        ],
         "responses": {
           "202": {
             "description": "Accepted",
@@ -352,21 +341,6 @@
         ],
         "deprecated": false,
         "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "../../../../common/v1/types.json#/parameters/WorkspaceNameParameter"
-          },
-          {
-            "$ref": "#/parameters/PrivateEndpointConnectionProxyNameParameter"
-          },
           {
             "in": "body",
             "name": "request",
