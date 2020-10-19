@@ -21,9 +21,17 @@ directive:
     set:
       parameter-name: name
   - where: 
-      command: machine 
+      command: machine delete 
     set:
-      command:
+      command: delete
+  - where: 
+      command: machine list 
+    set:
+      command: list
+  - where: 
+      command: machine show 
+    set:
+      command: show
   - where: 
       command: machine-extension
     set:
