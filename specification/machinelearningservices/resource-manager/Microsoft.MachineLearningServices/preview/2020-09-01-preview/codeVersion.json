@@ -73,7 +73,7 @@
           "200": {
             "description": "Success",
             "schema": {
-              "$ref": "#/definitions/CodeVersionResourcePaginatedResult"
+              "$ref": "#/definitions/CodeVersionResourceArmPaginatedResult"
             }
           },
           "default": {
@@ -213,7 +213,7 @@
             "name": "body",
             "description": "Code entity to create or update.",
             "schema": {
-              "$ref": "#/definitions/CodeVersionResourceRequest"
+              "$ref": "#/definitions/CodeVersionResource"
             }
           }
         ],
@@ -279,6 +279,7 @@
         "assetPaths"
       ],
       "type": "object",
+      "description": "Details of an RegisteredCode",
       "properties": {
         "description": {
           "type": "string",
@@ -320,11 +321,14 @@
           "description": "Associated ARM resources. Key is the link type, value is a list of ARM IDs."
         }
       },
-      "additionalProperties": false,
-      "description": "Details of an RegisteredCode"
+      "additionalProperties": false
     },
     "CodeVersionResource": {
       "type": "object",
+      "description": "Azure Resource Manager resource Envelope",
+      "required": [
+        "properties"
+      ],
       "properties": {
         "properties": {
           "$ref": "#/definitions/CodeVersion"
@@ -338,10 +342,9 @@
           "$ref": "machineLearningServices.json#/definitions/ResourceBase"
         }
       ],
-      "additionalProperties": false,
-      "description": "Azure Resource Manager resource Envelope"
+      "additionalProperties": false
     },
-    "CodeVersionResourcePaginatedResult": {
+    "CodeVersionResourceArmPaginatedResult": {
       "type": "object",
       "properties": {
         "value": {
@@ -352,16 +355,6 @@
         },
         "nextLink": {
           "type": "string"
-        }
-      },
-      "additionalProperties": false
-    },
-    "CodeVersionResourceRequest": {
-      "description": "Azure Resource Management create resource envelope.",
-      "type": "object",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/CodeVersion"
         }
       },
       "additionalProperties": false
