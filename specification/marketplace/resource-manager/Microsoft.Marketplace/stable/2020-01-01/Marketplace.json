@@ -313,6 +313,12 @@
             "schema": {
               "$ref": "#/definitions/PrivateStoreList"
             }
+          },
+          "default":{
+            "description":"Microsoft.Marketplace error response describing why the operation failed.",
+            "schema":{
+              "$ref":"#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-pageable": {
@@ -567,13 +573,41 @@
             "name": "Availability",
             "modelAsString": true
           }
-        },
+        },     
         "privateStoreId": {
           "description": "Private Store id",
           "type": "string"
         },
         "eTag": {
           "description": "Identifier for purposes of race condition",
+          "type": "string"
+        },
+        "privateStoreName": {
+          "description": "Private Store Name",
+          "type": "string"
+        },
+        "tenantTag": {
+          "description": "Tenant Tag",
+          "type": "string"
+        },
+        "tenantIds": {
+            "description": "Tenant ids",
+            "type": "array"
+        },
+        "customerTag": {
+          "description": "Customer tag",
+            "type": "array"
+        },
+        "hasCommercialAssociation": {
+          "description": "Indicating whether private store has association with Commercial's Billing Account (through billing account's customer tag retrieved from GSM for a subscription",
+          "type": "string"
+        },
+        "hasMultiTenantAssociation": {
+          "description": "Indicating whether private store has association with multiple tenants (through tenant's tag retrieved from AAD",
+          "type": "string"
+        }, 
+        "isGov": {
+          "description": "",
           "type": "string"
         }
       }
@@ -636,14 +670,14 @@
           "description": "Private store unique id",
           "type": "string"
         },
-        "createdBy": {
+        "createdAt": {
           "readOnly": true,
-          "description": "Private store offer creator name",
+          "description": "Private store offer creation date",
           "type": "string"
         },
-        "createdDate": {
+        "modifiedAt": {
           "readOnly": true,
-          "description": "Private store offer created date",
+          "description": "Private store offer modification date",
           "type": "string"
         },
         "specificPlanIdsLimitation": {
@@ -652,6 +686,42 @@
           "items": {
             "type": "string"
           }
+        },
+        "UpdateSuppressedDueIdempotence": {
+          "description": "Indicating whether the offer was not updated to db (true = not updated). If the allow list is identical to the existed one in db, the offer would not be updated.",
+          "type": "string"
+        }, 
+        "iconFileUris": {
+          "description": "",
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/icon"
+          }
+        }
+      }
+    },
+    "icon": {
+      "type": "object",
+      "properties": {
+        "IconKind": {
+          "description": "Icon size",
+          "type": "string",
+          "enum": [
+            "Small",
+            "Medium",
+            "Large",
+            "Wide",
+            "Hero"
+          ],
+          "x-ms-enum": {
+            "name": "IconKind",
+            "modelAsString": true
+          }
+        },
+        "Uri":{
+          "description": "Icon uri",
+          "type": "string"
         }
       }
     },
