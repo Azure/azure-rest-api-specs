@@ -37,7 +37,7 @@ These settings apply only when `--tag=package-2020-10` is specified on the comma
 
 ```yaml $(tag) == 'package-2020-10'
 input-file:
-- Microsoft.Insights/preview/2020-10-01/activityLogAlerts_API.json
+- Microsoft.Insights/stable/2020-10-01/activityLogAlerts_API.json
 ```
 
 ### Tag: package-2020-05-preview
