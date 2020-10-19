@@ -52,7 +52,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceNamespace}/{resourceType}/{resourceName}/providers/Microsoft.WorkloadMonitor/monitors": {
       "get": {
         "summary": "Get list of a monitors of a resource (with optional filter).",
-        "operationId": "Monitors_List",
+        "operationId": "HealthMonitors_List",
         "produces": [
           "application/json"
         ],
@@ -89,7 +89,7 @@
           "200": {
             "description": "Search results matching criteria",
             "schema": {
-              "$ref": "#/definitions/MonitorList"
+              "$ref": "#/definitions/HealthMonitorList"
             }
           },
           "default": {
@@ -115,7 +115,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceNamespace}/{resourceType}/{resourceName}/providers/Microsoft.WorkloadMonitor/monitors/{monitorId}": {
       "get": {
         "summary": "Get the current status of a monitor of a resource.",
-        "operationId": "Monitors_Get",
+        "operationId": "HealthMonitors_Get",
         "produces": [
           "application/json"
         ],
@@ -149,7 +149,7 @@
           "200": {
             "description": "search results matching criteria",
             "schema": {
-              "$ref": "#/definitions/Monitor"
+              "$ref": "#/definitions/HealthMonitor"
             }
           },
           "default": {
@@ -172,7 +172,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceNamespace}/{resourceType}/{resourceName}/providers/Microsoft.WorkloadMonitor/monitors/{monitorId}/history": {
       "get": {
         "summary": "Get history of a monitor of a resource (with optional filter).",
-        "operationId": "Monitors_ListStateChanges",
+        "operationId": "HealthMonitors_ListStateChanges",
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         },
@@ -254,7 +254,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceNamespace}/{resourceType}/{resourceName}/providers/Microsoft.WorkloadMonitor/monitors/{monitorId}/history/{timestampUnix}": {
       "get": {
         "summary": "Get the status of a monitor at a specific timestamp in history.",
-        "operationId": "Monitors_GetStateChange",
+        "operationId": "HealthMonitors_GetStateChange",
         "produces": [
           "application/json"
         ],
@@ -418,7 +418,7 @@
         }
       }
     },
-    "MonitorList": {
+    "HealthMonitorList": {
       "title": "Monitor List",
       "description": "Basic information about the current status of a monitor.",
       "type": "object",
@@ -429,7 +429,7 @@
           "description": "Array of monitors.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/Monitor"
+            "$ref": "#/definitions/HealthMonitor"
           }
         },
         "nextLink": {
@@ -439,13 +439,14 @@
         }
       }
     },
-    "Monitor": {
+    "HealthMonitor": {
       "title": "Monitor Status",
       "description": "Information about a monitor.",
       "properties": {
         "properties": {
+          "description": "Properties of the monitor's health status.",
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/MonitorProperties"
+          "$ref": "#/definitions/HealthMonitorProperties"
         }
       },
       "allOf": [
@@ -482,7 +483,7 @@
       },
       "x-ms-azure-resource": true
     },
-    "MonitorProperties": {
+    "HealthMonitorProperties": {
       "title": "Monitor Properties",
       "description": "Properties of the monitor.",
       "type": "object",
@@ -559,6 +560,7 @@
       "type": "object",
       "properties": {
         "properties": {
+          "description": "Properties of the monitor's state change.",
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/MonitorStateChangeProperties"
         }
