@@ -6,6 +6,7 @@ These settings apply only when `--azureresourceschema` is specified on the comma
 
 ``` yaml $(azureresourceschema) && $(multiapi)
 batch:
+  - tag: schema-containerservice-2020-09-01
   - tag: schema-containerservice-2020-07-01
   - tag: schema-containerservice-2020-06-01
   - tag: schema-containerservice-2020-04-01
@@ -34,6 +35,17 @@ batch:
 ```
 
 Please also specify `--azureresourceschema-folder=<path to the root directory of your azure-resource-manager-schemas clone>`.
+
+### Tag: schema-containerservice-2020-09-01 and azureresourceschema
+
+``` yaml $(tag) == 'schema-containerservice-2020-09-01' && $(azureresourceschema)
+output-folder: $(azureresourceschema-folder)/schemas
+
+# all the input files in this apiVersion
+input-file:
+  - Microsoft.ContainerService/stable/2020-09-01/managedClusters.json
+
+```
 
 ### Tag: schema-containerservice-2020-07-01 and azureresourceschema
 
