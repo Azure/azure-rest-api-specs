@@ -414,86 +414,6 @@
         }
       }
     },
-    "Resource": {
-      "description": "The Resource model definition.",
-      "required": [
-        "location"
-      ],
-      "x-ms-azure-resource": true,
-      "properties": {
-        "id": {
-          "description": "Specifies the resource ID.",
-          "type": "string",
-          "readOnly": true
-        },
-        "location": {
-          "description": "Specifies the location of the resource.",
-          "type": "string",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        },
-        "name": {
-          "description": "Specifies the name of the resource.",
-          "type": "string",
-          "readOnly": true
-        },
-        "systemData": {
-          "$ref": "#/definitions/SystemData"
-        },
-        "tags": {
-          "description": "Contains resource tags defined as key/value pairs.",
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "type": {
-          "description": "Specifies the type of the resource.",
-          "type": "string",
-          "readOnly": true
-        }
-      }
-    },
-    "SystemData": {
-      "description": "Top level metadata https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/common-api-contracts.md#system-metadata-for-all-azure-resources",
-      "type": "object",
-      "properties": {
-        "createdAt": {
-          "description": "The timestamp of resource creation (UTC)",
-          "type": "string",
-          "readOnly": true,
-          "format": "date-time"
-        },
-        "createdBy": {
-          "description": "A string identifier for the identity that created the resource",
-          "type": "string",
-          "readOnly": true
-        },
-        "createdByType": {
-          "description": "The type of identity that created the resource: user, application, managedIdentity, key",
-          "type": "string",
-          "readOnly": true
-        },
-        "lastModifiedAt": {
-          "description": "The timestamp of resource last modification (UTC)",
-          "type": "string",
-          "readOnly": true,
-          "format": "date-time"
-        },
-        "lastModifiedBy": {
-          "description": "A string identifier for the identity that last modified the resource",
-          "type": "string",
-          "readOnly": true
-        },
-        "lastModifiedByType": {
-          "description": "The type of identity that last modified the resource: user, application, managedIdentity, key",
-          "type": "string",
-          "readOnly": true
-        }
-      }
-    },
     "iotLocation": {
       "description": "Iot Locations definition.",
       "required": [
@@ -509,7 +429,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/Resource"
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/TrackedResource"
         }
       ]
     },
