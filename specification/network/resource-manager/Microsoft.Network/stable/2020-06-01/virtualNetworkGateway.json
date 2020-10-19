@@ -2291,8 +2291,7 @@
           "description": "The type of this virtual network gateway.",
           "enum": [
             "Vpn",
-            "ExpressRoute",
-            "LocalGateway"
+            "ExpressRoute"
           ],
           "x-ms-enum": {
             "name": "VirtualNetworkGatewayType",
@@ -2374,14 +2373,6 @@
           "type": "string",
           "readOnly": true,
           "description": "The IP address allocated by the gateway to which dns requests can be sent."
-        },
-        "virtualNetworkExtendedLocationResourceId": {
-          "type": "string",
-          "description": "MAS FIJI customer vnet resource id. VirtualNetworkGateway of type local gateway is associated with the customer vnet."
-        },
-        "extendedLocation": {
-          "description": "The extended location of type local virtual network gateway.",
-          "$ref": "#/definitions/ExtendedLocation"
         }
       },
       "description": "VirtualNetworkGateway properties."
@@ -2758,30 +2749,6 @@
         }
       },
       "description": "Gateway routing details."
-    },
-    "ExtendedLocation": {
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "Name of extended location."
-        },
-        "type": {
-          "type": "string",
-          "description": "Type of extended location.",
-          "enum": [
-            "EdgeZone"
-          ],
-          "x-ms-enum": {
-            "name": "ExtendedLocationType",
-            "modelAsString": true
-          }
-        }
-      },
-      "required": [
-        "name",
-        "type"
-      ],
-      "description": "The extended location of type local virtual network gateway."
     },
     "VirtualNetworkGateway": {
       "properties": {
