@@ -87,7 +87,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/IotRecommendationList"
+              "$ref": "#/definitions/IotRecommendationListModel"
             }
           },
           "default": {
@@ -133,7 +133,7 @@
           "200": {
             "description": "IoT recommendation",
             "schema": {
-              "$ref": "#/definitions/IotRecommendation"
+              "$ref": "#/definitions/IotRecommendationModel"
             }
           },
           "default": {
@@ -147,7 +147,7 @@
     }
   },
   "definitions": {	
-    "IotRecommendationList": {
+    "IotRecommendationListModel": {
       "description": "List of IoT recommendations",
       "type": "object",
       "properties": {
@@ -156,7 +156,7 @@
           "readOnly": true,
           "type": "array",
           "items": {
-            "$ref": "#/definitions/IotRecommendation"
+            "$ref": "#/definitions/IotRecommendationModel"
           }
         },
         "nextLink": {
@@ -166,14 +166,14 @@
         }
       }
     },
-    "IotRecommendation": {
+    "IotRecommendationModel": {
       "type": "object",
       "description": "IoT recommendation",
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
           "description": "Recommendation properties",
-          "$ref": "#/definitions/IotRecommendationProperties"
+          "$ref": "#/definitions/IotRecommendationPropertiesModel"
         }
       },
       "allOf": [
@@ -182,7 +182,7 @@
         }
       ]
     },
-    "IotRecommendationProperties": {
+    "IotRecommendationPropertiesModel": {
       "type": "object",
       "description": "IoT recommendation properties",
       "properties": {

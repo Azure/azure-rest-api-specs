@@ -118,7 +118,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/IotAlertList"
+              "$ref": "#/definitions/IotAlertListModel"
             }
           },
           "default": {
@@ -164,7 +164,7 @@
           "200": {
             "description": "IoT alert",
             "schema": {
-              "$ref": "#/definitions/IotAlert"
+              "$ref": "#/definitions/IotAlertModel"
             }
           },
           "default": {
@@ -178,7 +178,7 @@
     }
   },
   "definitions": {	
-    "IotAlertList": {
+    "IotAlertListModel": {
       "description": "List of IoT alerts",
       "type": "object",
       "properties": {
@@ -187,7 +187,7 @@
           "readOnly": true,
           "type": "array",
           "items": {
-            "$ref": "#/definitions/IotAlert"
+            "$ref": "#/definitions/IotAlertModel"
           }
         },
         "nextLink": {
@@ -197,18 +197,18 @@
         }
       }
     },
-    "IotAlert": {
+    "IotAlertModel": {
       "type": "object",
       "description": "IoT alert",
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
           "description": "Alert properties",
-          "$ref": "#/definitions/IotAlertProperties"
+          "$ref": "#/definitions/IotAlertPropertiesModel"
         }
       }
     },
-    "IotAlertProperties": {
+    "IotAlertPropertiesModel": {
       "type": "object",
       "description": "IoT alert properties",
       "properties": {
