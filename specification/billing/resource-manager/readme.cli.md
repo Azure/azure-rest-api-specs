@@ -13,8 +13,20 @@ directive:
       group: billing invoice-section
     set:
       group: billing invoice section
+
 cli:
     cli-directive:
+      # rename billing account globally
+      - where:
+          param: billingAccountName
+        name: account_name
+      # shortnen the name in billing account command group
+      - where:
+          group: billingAccounts
+          param: billingAccountName
+        alias:
+          - name
+          - n
       - select: 'property'
         where:
             objectSchema: 'billingProfileCreationRequest'
@@ -29,9 +41,6 @@ cli:
       - where:
           operationGroup: BillingAccounts
         name: account
-      - where:
-          operationGroup: BillingSubscriptions
-        name: subscription
       # Shouldn't appear in accounts command group, the responses is not related to BollingAccount
       - where:
           group: BillingAccounts
@@ -40,6 +49,9 @@ cli:
       - where:
           operationGroup: BillingProfiles
         name: profile
+      - where:
+          operationGroup: BillingSubscriptions
+        name: subscription
       - select: 'property'
         where:
             objectSchema: 'BillingProfileProperties'
