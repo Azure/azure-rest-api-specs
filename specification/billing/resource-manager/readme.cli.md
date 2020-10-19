@@ -16,7 +16,7 @@ directive:
 
 cli:
     cli-directive:
-      # rename billing account globally
+      # rename --billing-account-name to --account-name globally
       - where:
           param: billingAccountName
         name: account_name
@@ -24,6 +24,16 @@ cli:
       - where:
           group: billingAccounts
           param: billingAccountName
+        alias:
+          - name
+          - n
+      # rename --billing-profile-name to --profile-name
+      - where:
+          param: billingProfileName
+        name: profile_name
+      - where:
+          group: billingProfiles
+          param: billingProfileName
         alias:
           - name
           - n
