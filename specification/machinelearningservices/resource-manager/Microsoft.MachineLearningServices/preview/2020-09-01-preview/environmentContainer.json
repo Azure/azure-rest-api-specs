@@ -41,7 +41,7 @@
         ],
         "operationId": "EnvironmentContainers_List",
         "x-ms-examples": {
-          "List Environment Specifications.": {
+          "List Environment Containers.": {
             "$ref": "./examples/listEnvironmentContainers.json"
           }
         },
@@ -76,6 +76,53 @@
             "description": "Success",
             "schema": {
               "$ref": "#/definitions/EnvironmentContainerResourceArmPaginatedResult"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/environments/{environmentName}": {
+      "get": {
+        "tags": [
+          "EnvironmentContainer"
+        ],
+        "operationId": "EnvironmentContainers_Get",
+        "x-ms-examples": {
+          "Get Environment Container.": {
+            "$ref": "./examples/getEnvironmentContainer.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "machineLearningServices.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/APIVersionParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/PaginationParameter"
+          },
+          {
+            "$ref": "environmentSpecification.json#/parameters/EnvironmentNameParameter"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "machineLearningServices.json#/definitions/MachineLearningServiceError"
+            }
+          },
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/EnvironmentContainerResource"
             }
           }
         }
