@@ -354,7 +354,7 @@
       ],
       "properties": {
         "style": {
-          "description": "An object representing the Style of the text line.",
+          "description": "An object representing the style of the text line.",
           "type": "object",
           "$ref": "#/definitions/Style"
         }
@@ -369,8 +369,12 @@
       ],
       "properties": {
         "name": {
-          "description": "The text line style name.",
+          "description": "The text line style name, inlcuding handwriting and other.",
           "type": "string",
+          "x-ms-enum": {
+            "name": "name",
+            "modelAsString": true
+          },
           "enum": [
             "handwriting",
             "other"
