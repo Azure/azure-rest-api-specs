@@ -592,23 +592,26 @@
         },
         "tenantIds": {
             "description": "Tenant ids",
-            "type": "array"
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
         },
         "customerTag": {
           "description": "Customer tag",
-            "type": "array"
+            "type": "string"
         },
         "hasCommercialAssociation": {
           "description": "Indicating whether private store has association with Commercial's Billing Account (through billing account's customer tag retrieved from GSM for a subscription",
-          "type": "string"
+          "type": "boolean"
         },
         "hasMultiTenantAssociation": {
           "description": "Indicating whether private store has association with multiple tenants (through tenant's tag retrieved from AAD",
-          "type": "string"
+          "type": "boolean"
         }, 
         "isGov": {
           "description": "",
-          "type": "string"
+          "type": "boolean"
         }
       }
     },
