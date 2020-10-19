@@ -70,7 +70,7 @@
           "200": {
             "description": "Success",
             "schema": {
-              "$ref": "#/definitions/CodeContainerResourcePaginatedResult"
+              "$ref": "#/definitions/CodeContainerResourceArmPaginatedResult"
             }
           },
           "default": {
@@ -201,7 +201,7 @@
             "name": "body",
             "description": "Code container entity to create or update.",
             "schema": {
-              "$ref": "#/definitions/CodeContainerResourceRequest"
+              "$ref": "#/definitions/CodeContainerResource"
             }
           }
         ],
@@ -241,6 +241,10 @@
   "definitions": {
     "CodeContainerResource": {
       "type": "object",
+      "description": "Azure Resource Manager resource Envelope",
+      "required": [
+        "properties"
+      ],
       "properties": {
         "properties": {
           "$ref": "#/definitions/CodeContainer"
@@ -254,10 +258,9 @@
           "$ref": "machineLearningServices.json#/definitions/ResourceBase"
         }
       ],
-      "additionalProperties": false,
-      "description": "Azure Resource Manager resource Envelope"
+      "additionalProperties": false
     },
-    "CodeContainerResourcePaginatedResult": {
+    "CodeContainerResourceArmPaginatedResult": {
       "type": "object",
       "properties": {
         "value": {
@@ -269,42 +272,27 @@
         "nextLink": {
           "type": "string"
         }
-      },
-      "additionalProperties": false
+      }
     },
     "CodeContainer": {
       "type": "object",
       "properties": {
-        "description": {
-          "type": "string",
-          "description": "The asset container description text."
+        "properties": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
         },
         "tags": {
           "type": "object",
           "additionalProperties": {
             "type": "string"
-          },
-          "description": "The asset tag dictionary. Tags can be added, removed, and updated."
+          }
         },
-        "latestVersions": {
-          "type": "array",
-          "items": {
-            "$ref": "codeVersion.json#/definitions/CodeVersionResource"
-          },
-          "description": "Latest Versions for all assets"
+        "description": {
+          "type": "string"
         }
-      },
-      "additionalProperties": false
-    },
-    "CodeContainerResourceRequest": {
-      "description": "Azure Resource Management create resource envelope.",
-      "type": "object",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/CodeContainer"
-        }
-      },
-      "additionalProperties": false
+      }
     }
   }
 }
