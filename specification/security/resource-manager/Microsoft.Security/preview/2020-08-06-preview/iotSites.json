@@ -34,31 +34,31 @@
     }
   },
   "paths": {
-    "/{scope}/providers/Microsoft.Security/iotSensors": {
+    "/{scope}/providers/Microsoft.Security/iotSites": {
       "get": {
         "x-ms-examples": {
-          "List IoT sensors": {
-            "$ref": "./examples/IotSensors/List.json"
+          "List IoT sites": {
+            "$ref": "./examples/IotSites/List.json"
           }
         },
         "tags": [
-          "IoT Sensors"
+          "IoT Sites"
         ],
-        "description": "List IoT sensors",
-        "operationId": "IotSensors_List",
+        "description": "List IoT sites",
+        "operationId": "IotSites_List",
         "parameters": [
           {
             "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
           },
           {
-            "$ref": "#/parameters/IotSensorScope"
+            "$ref": "#/parameters/IotSiteScope"
           }
         ],
         "responses": {
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/IotSensorsList"
+              "$ref": "#/definitions/IotSitesList"
             }
           },
           "default": {
@@ -70,34 +70,31 @@
         }
       }
     },
-    "/{scope}/providers/Microsoft.Security/iotSensors/{iotSensorName}": {
+    "/{scope}/providers/Microsoft.Security/iotSites/default": {
       "get": {
         "x-ms-examples": {
-          "Get IoT sensor": {
-            "$ref": "./examples/IotSensors/Get.json"
+          "Get IoT site": {
+            "$ref": "./examples/IotSites/Get.json"
           }
         },
         "tags": [
-          "IoT Sensors"
+          "IoT Sites"
         ],
-        "operationId": "IotSensors_Get",
-        "description": "Get IoT sensor",
+        "operationId": "IotSites_Get",
+        "description": "Get IoT site",
         "parameters": [
           {
             "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
           },
           {
-            "$ref": "#/parameters/IotSensorScope"
-          },
-          {
-            "$ref": "#/parameters/IotSensorName"
+            "$ref": "#/parameters/IotSiteScope"
           }
         ],
         "responses": {
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/IotSensorsModel"
+              "$ref": "#/definitions/IotSitesModel"
             }
           },
           "default": {
@@ -110,40 +107,37 @@
       },
       "put": {
         "x-ms-examples": {
-          "Create or update IoT sensor": {
-            "$ref": "./examples/IotSensors/Put.json"
+          "Create or update IoT site": {
+            "$ref": "./examples/IotSites/Put.json"
           }
         },
         "tags": [
-          "IoT Sensors"
+          "IoT Sites"
         ],
-        "operationId": "IotSensors_CreateOrUpdate",
-        "description": "Create or update IoT sensor",
+        "operationId": "IotSites_CreateOrUpdate",
+        "description": "Create or update IoT site",
         "parameters": [
           {
             "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
           },
           {
-            "$ref": "#/parameters/IotSensorScope"
+            "$ref": "#/parameters/IotSiteScope"
           },
           {
-            "$ref": "#/parameters/IotSensorName"
-          },
-          {
-            "$ref": "#/parameters/IotSensorsModel"
+            "$ref": "#/parameters/IotSitesModel"
           }
         ],
         "responses": {
           "200": {
-            "description": "Updated IoT sensor",
+            "description": "Updated IoT site",
             "schema": {
-              "$ref": "#/definitions/IotSensorsModel"
+              "$ref": "#/definitions/IotSitesModel"
             }
           },
           "201": {
-            "description": "Created IoT sensor",
+            "description": "Created IoT site",
             "schema": {
-              "$ref": "#/definitions/IotSensorsModel"
+              "$ref": "#/definitions/IotSitesModel"
             }
           },
           "default": {
@@ -156,75 +150,29 @@
       },
       "delete": {
         "x-ms-examples": {
-          "Delete IoT sensor": {
-            "$ref": "./examples/IotSensors/Delete.json"
+          "Delete IoT site": {
+            "$ref": "./examples/IotSites/Delete.json"
           }
         },
         "tags": [
-          "IoT Sensors"
+          "IoT Sites"
         ],
-        "operationId": "IotSensors_Delete",
-        "description": "Delete IoT sensor",
+        "operationId": "IotSites_Delete",
+        "description": "Delete IoT site",
         "parameters": [
           {
             "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
           },
           {
-            "$ref": "#/parameters/IotSensorScope"
-          },
-          {
-            "$ref": "#/parameters/IotSensorName"
+            "$ref": "#/parameters/IotSiteScope"
           }
         ],
         "responses": {
           "200": {
-            "description": "Deleted IoT sensor"
+            "description": "Deleted IoT site"
           },
           "204": {
-            "description": "IoT sensor does not exist"
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
-            }
-          }
-        }
-      }
-    },
-    "/{scope}/providers/Microsoft.Security/iotSensors/{iotSensorName}/downloadActivation": {
-      "post": {
-        "x-ms-examples": {
-          "Download activation file": {
-            "$ref": "./examples/IotSensors/DownloadActivation.json"
-          }
-        },
-        "tags": [
-          "IoT Sensors"
-        ],
-        "operationId": "IotSensors_DownloadActivation",
-        "description": "Download sensor activation file",
-        "produces": [
-          "application/zip"
-        ],
-        "parameters": [
-          {
-            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
-          },
-          {
-            "$ref": "#/parameters/IotSensorScope"
-          },
-          {
-            "$ref": "#/parameters/IotSensorName"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Downloaded activation file",
-            "schema": {
-              "type": "object",
-              "format": "file"
-            }
+            "description": "IoT site does not exist"
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -237,8 +185,8 @@
     }
   },
   "definitions": {
-    "IotSensorsList": {
-      "description": "List of IoT sensors",
+    "IotSitesList": {
+      "description": "List of IoT sites",
       "type": "object",
       "properties": {
         "value": {
@@ -246,19 +194,19 @@
           "readOnly": true,
           "type": "array",
           "items": {
-            "$ref": "#/definitions/IotSensorsModel"
+            "$ref": "#/definitions/IotSitesModel"
           }
         }
       }
     },
-    "IotSensorsModel": {
+    "IotSitesModel": {
       "type": "object",
-      "description": "IoT sensor model",
+      "description": "IoT site model",
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
-          "description": "IoT sensor properties",
-          "$ref": "#/definitions/IotSensorProperties"
+          "description": "IoT site properties",
+          "$ref": "#/definitions/IotSiteProperties"
         }
       },
       "allOf": [
@@ -267,19 +215,30 @@
         }
       ]
     },
-    "IotSensorProperties": {
+    "IotSiteProperties": {
       "type": "object",
-      "description": "IoT sensor properties",
+      "description": "IoT site properties",
       "properties": {
-        "zone": {
+        "siteDisplayName": {
           "type": "string",
-          "description": "Display name of the IoT zone"
+          "description": "Display name of the IoT site"
+        },
+        "tags": {
+          "type": "object",
+          "description": "Tags of the IoT site",
+          "additionalProperties": {
+            "type": "string"
+          }
         }
-      }
+      },
+      "required": [
+        "siteDisplayName",
+        "tags"
+      ]
     }
   },
   "parameters": {
-    "IotSensorScope": {
+    "IotSiteScope": {
       "name": "scope",
       "in": "path",
       "required": true,
@@ -288,21 +247,13 @@
       "x-ms-parameter-location": "method",
       "x-ms-skip-url-encoding": true
     },
-    "IotSensorName": {
-      "name": "iotSensorName",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "Name of the IoT sensor",
-      "x-ms-parameter-location": "method"
-    },
-    "IotSensorsModel": {
-      "name": "iotSensorsModel",
+    "IotSitesModel": {
+      "name": "iotSitesModel",
       "in": "body",
       "required": true,
-      "description": "The IoT sensor model",
+      "description": "The IoT sites model",
       "schema": {
-        "$ref": "#/definitions/IotSensorsModel"
+        "$ref": "#/definitions/IotSitesModel"
       },
       "x-ms-parameter-location": "method"
     }

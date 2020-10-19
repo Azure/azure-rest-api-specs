@@ -204,6 +204,7 @@ input-file:
 - Microsoft.Security/preview/2020-08-06-preview/iotDefenderSettings.json
 - Microsoft.Security/preview/2020-08-06-preview/iotSensors.json
 - Microsoft.Security/preview/2020-08-06-preview/onPremiseIotSensors.json
+- Microsoft.Security/preview/2020-08-06-preview/iotSites.json
 
 # Needed when there is more than one input file
 override-info:
@@ -390,6 +391,7 @@ input-file:
 - Microsoft.Security/preview/2020-08-06-preview/iotDefenderSettings.json
 - Microsoft.Security/preview/2020-08-06-preview/iotSensors.json
 - Microsoft.Security/preview/2020-08-06-preview/onPremiseIotSensors.json
+- Microsoft.Security/preview/2020-08-06-preview/iotSites.json
 
 # Needed when there is more than one input file
 override-info:
