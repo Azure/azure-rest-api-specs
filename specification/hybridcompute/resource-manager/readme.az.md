@@ -20,4 +20,8 @@ directive:
       parameter-name: extension-name
     set:
       parameter-name: name
+  - where: 
+      command: connectedmachine machine 
+    set:
+      command: connectedmachine
 ```
