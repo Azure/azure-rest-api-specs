@@ -21,15 +21,44 @@
   },
   "responses": {
     "200": {
-      "properties": {
-        "grantSqlControlToManagedIdentity": {
-          "desiredState": "Enabled",
-          "actualState": "Disabled"
+      "body": {
+        "properties": {
+          "grantSqlControlToManagedIdentity": {
+            "desiredState": "Enabled",
+            "actualState": "Disabled"
+          }
+        },
+        "id": "subscriptions//resourceGroups//providers/Microsoft.Synapse/workspaces//managedIdentitySqlControlSettings/default",
+        "name": "default",
+        "type": "Microsoft.Synapse/workspaces/managedIdentitySqlControlSettings"
+      }
+    },
+    "201": {
+      "body": {
+        "properties": {
+          "grantSqlControlToManagedIdentity": {
+            "desiredState": "Enabled",
+            "actualState": "Disabled"
+          }
+        },
+        "id": "subscriptions//resourceGroups//providers/Microsoft.Synapse/workspaces//managedIdentitySqlControlSettings/default",
+        "name": "default",
+        "type": "Microsoft.Synapse/workspaces/managedIdentitySqlControlSettings"
+      }
+    },
+    "400": {
+      "body": {
+        "error": {
+          "code": "ValidationFailed",
+          "message": "Update managed identity SQL control settings validation failed",
+          "details": [
+            {
+              "code": "InvalidDesiredStateSpecified",
+              "message": "Desired state specified invalidState is invalid. Valid desired states: [Enabled,Disabled]"
+            }
+          ]
         }
-      },
-      "id": "subscriptions//resourceGroups//providers/Microsoft.Synapse/workspaces//managedIdentitySqlControlSettings/default",
-      "name": "default",
-      "type": "Microsoft.Synapse/workspaces/managedIdentitySqlControlSettings"
+      }
     }
   }
 }
