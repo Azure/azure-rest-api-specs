@@ -121,8 +121,8 @@
           }
         },
         "x-ms-examples": {
-          "MoveCollection_Update": {
-            "$ref": "./examples/MoveCollection_Update.json"
+          "MoveCollections_Update": {
+            "$ref": "./examples/MoveCollections_Update.json"
           }
         }
       },
@@ -608,6 +608,71 @@
         "x-ms-examples": {
           "UnresolvedDependencies_Get": {
             "$ref": "./examples/UnresolvedDependencies_Get.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/moveCollections/{moveCollectionName}/bulkRemove": {
+      "post": {
+        "tags": [
+          "MoveCollections"
+        ],
+        "operationId": "MoveCollections_BulkRemove",
+        "description": "Removes the set of move resources included in the request body from move collection. The orchestration is done by service. To aid the user to prerequisite the operation the client can call operation with validateOnly property set to true.",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "in": "path",
+            "name": "resourceGroupName",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "moveCollectionName",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/BulkRemoveRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/OperationStatus"
+            }
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "MoveCollections_BulkRemove": {
+            "$ref": "./examples/MoveCollections_BulkRemove.json"
           }
         }
       }
@@ -1210,6 +1275,21 @@
         }
       }
     },
+    "SummaryItem": {
+      "description": "Summary item.",
+      "type": "object",
+      "properties": {
+        "count": {
+          "format": "int32",
+          "description": "Gets the count.",
+          "type": "integer"
+        },
+        "item": {
+          "description": "Gets the item.",
+          "type": "string"
+        }
+      }
+    },
     "MoveCollectionProperties": {
       "description": "Defines the move collection properties.",
       "type": "object",
@@ -1387,6 +1467,26 @@
         }
       }
     },
+    "BulkRemoveRequest": {
+      "description": "Defines the request body for bulk remove of move resources operation.",
+      "type": "object",
+      "properties": {
+        "validateOnly": {
+          "description": "Gets or sets a value indicating whether the operation needs to only run pre-requisite.",
+          "type": "boolean"
+        },
+        "moveResources": {
+          "description": "Gets or sets the list of resource Id's, by default it accepts move resource id's unless the input type is switched via moveResourceInputType property.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "moveResourceInputType": {
+          "$ref": "#/definitions/MoveResourceInputType"
+        }
+      }
+    },
     "MoveResourceFilter": {
       "description": "Move resource filter.",
       "properties": {
@@ -1417,6 +1517,13 @@
         "nextLink": {
           "description": "Gets the value of  next link.",
           "type": "string"
+        },
+        "summary": {
+          "description": "Gets or the list of summary items.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SummaryItem"
+          }
         }
       }
     },

@@ -109,7 +109,7 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/subscriptionGuidParameter"
+            "$ref": "#/parameters/subscriptionIdParameter"
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
@@ -171,7 +171,7 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/subscriptionGuidParameter"
+            "$ref": "#/parameters/subscriptionIdParameter"
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
@@ -322,6 +322,11 @@
           "description": "The target of the particular error.",
           "type": "string",
           "readOnly": true
+        },
+        "details": {
+          "description": "The sub details of the error.",
+          "readOnly": true,
+          "$ref": "#/definitions/ErrorSubDetails"
         }
       }
     },
@@ -332,6 +337,29 @@
         "error": {
           "description": "The details of the error.",
           "$ref": "#/definitions/ErrorDetails"
+        }
+      }
+    },
+    "ErrorSubDetails": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "description": "Error code.",
+            "type": "string",
+            "readOnly": true
+          },
+          "message": {
+            "description": "Error message indicating why the operation failed.",
+            "type": "string",
+            "readOnly": true
+          },
+          "target": {
+            "description": "The target of the particular error.",
+            "type": "string",
+            "readOnly": true
+          }
         }
       }
     },
@@ -365,10 +393,10 @@
       "type": "string",
       "description": "Version of the API to be used with the client request. The current version is 2018-03-01-preview."
     },
-    "subscriptionGuidParameter": {
+    "subscriptionIdParameter": {
       "name": "subscriptionId",
       "in": "path",
-      "description": "Azure Subscription ID.",
+      "description": "The ID that uniquely identifies an Azure subscription.",
       "required": true,
       "type": "string"
     }
