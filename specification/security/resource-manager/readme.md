@@ -182,7 +182,6 @@ input-file:
 - Microsoft.Security/preview/2017-08-01-preview/securityContacts.json
 - Microsoft.Security/preview/2017-08-01-preview/workspaceSettings.json
 - Microsoft.Security/preview/2019-01-01-preview/regulatoryCompliance.json
-
 - Microsoft.Security/preview/2019-01-01-preview/subAssessments.json
 - Microsoft.Security/preview/2019-01-01-preview/automations.json
 - Microsoft.Security/preview/2019-01-01-preview/alertsSuppressionRules.json
@@ -204,6 +203,10 @@ input-file:
 - Microsoft.Security/preview/2020-08-06-preview/iotDefenderSettings.json
 - Microsoft.Security/preview/2020-08-06-preview/iotSensors.json
 - Microsoft.Security/preview/2020-08-06-preview/onPremiseIotSensors.json
+- Microsoft.Security/preview/2020-08-06-preview/iotAlerts.json
+- Microsoft.Security/preview/2020-08-06-preview/iotAlertTypes.json
+- Microsoft.Security/preview/2020-08-06-preview/iotRecommendations.json
+- Microsoft.Security/preview/2020-08-06-preview/iotRecommendationTypes.json
 
 # Needed when there is more than one input file
 override-info:
@@ -390,6 +393,10 @@ input-file:
 - Microsoft.Security/preview/2020-08-06-preview/iotDefenderSettings.json
 - Microsoft.Security/preview/2020-08-06-preview/iotSensors.json
 - Microsoft.Security/preview/2020-08-06-preview/onPremiseIotSensors.json
+- Microsoft.Security/preview/2020-08-06-preview/iotAlerts.json
+- Microsoft.Security/preview/2020-08-06-preview/iotAlertTypes.json
+- Microsoft.Security/preview/2020-08-06-preview/iotRecommendations.json
+- Microsoft.Security/preview/2020-08-06-preview/iotRecommendationTypes.json
 
 # Needed when there is more than one input file
 override-info:
