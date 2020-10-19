@@ -269,6 +269,10 @@
   "definitions": {
     "Resource": {
       "properties": {
+        "identity": {
+          "description": "Identity used for BYOS",
+          "$ref": "#/definitions/WorkbookIdentity"
+        },
         "id": {
           "type": "string",
           "readOnly": true,
@@ -485,6 +489,13 @@
         }
       },
       "description": "Error message body that will indicate why the operation failed."
+    },
+    "WorkbookIdentity": {
+      "properties": {
+        "type": "string",
+        "principalId": "string",
+        "tenantId": "string"
+      }
     }
   },
   "parameters": {
