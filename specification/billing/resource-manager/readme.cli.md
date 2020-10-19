@@ -62,6 +62,9 @@ cli:
       - where:
           operationGroup: BillingSubscriptions
         name: subscription
+      - where:
+          operationGroup: BillingProperty
+        name: property
       - select: 'property'
         where:
             objectSchema: 'BillingProfileProperties'
