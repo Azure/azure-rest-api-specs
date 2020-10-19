@@ -74,7 +74,7 @@
           "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
         },
         {
-          "$ref": "#/parameters/privateLinkHubNameParameter"
+          "$ref": "../../../../common/v1/types.json#/parameters/PrivateLinkHubNameParameter"
         }
       ],
       "get": {
@@ -93,7 +93,7 @@
           },
           "default": {
             "schema": {
-              "$ref": "#/definitions/ErrorContract"
+              "$ref": "../../../../common/v1/types.json#/definitions/ErrorContract"
             },
             "description": "*** Error Responses: ***\n\n * 500 InternalServerError- Some error occurred while trying to get details for PrivateLinkHub."
           }
@@ -141,7 +141,7 @@
           },
           "default": {
             "schema": {
-              "$ref": "#/definitions/ErrorContract"
+              "$ref": "../../../../common/v1/types.json#/definitions/ErrorContract"
             },
             "description": "*** Error Responses: ***\n\n * 400 BadRequest - Invalid request to create a PrivateLinkHub.\n\n * 500 InternalServerError- Some error occurred while creating PrivateLinkHub."
           }
@@ -191,7 +191,7 @@
           },
           "default": {
             "schema": {
-              "$ref": "#/definitions/ErrorContract"
+              "$ref": "../../../../common/v1/types.json#/definitions/ErrorContract"
             },
             "description": "*** Error Responses: ***\n\n * 400 BadRequest - Invalid request to create a PrivateLinkHub.\n\n * 500 InternalServerError- Some error occurred while creating PrivateLinkHub."
           }
@@ -224,7 +224,7 @@
           },
           "default": {
             "schema": {
-              "$ref": "#/definitions/ErrorContract"
+              "$ref": "../../../../common/v1/types.json#/definitions/ErrorContract"
             },
             "description": "*** Error Responses: ***\n\n * 500 InternalServerError- Some error occurred while deleting PrivateLinkHub."
           }
@@ -290,7 +290,7 @@
           "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
         },
         {
-          "$ref": "#/parameters/privateLinkHubNameParameter"
+          "$ref": "../../../../common/v1/types.json#/parameters/PrivateLinkHubNameParameter"
         }
       ],
       "get": {
@@ -310,7 +310,7 @@
           },
           "default": {
             "schema": {
-              "$ref": "#/definitions/ErrorContract"
+              "$ref": "../../../../common/v1/types.json#/definitions/ErrorContract"
             },
             "description": ""
           }
@@ -328,35 +328,6 @@
     }
   },
   "definitions": {
-    "ErrorDetail": {
-      "description": "Error details",
-      "type": "object",
-      "properties": {
-        "message": {
-          "description": "Error message",
-          "type": "string"
-        },
-        "code": {
-          "description": "Error code",
-          "type": "string"
-        },
-        "target": {
-          "description": "Error target",
-          "type": "string"
-        }
-      }
-    },
-    "ErrorContract": {
-      "title": "Error details.",
-      "description": "Contains details when the response code indicates an error.",
-      "type": "object",
-      "properties": {
-        "error": {
-          "description": "The error details.",
-          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ErrorResponse"
-        }
-      }
-    },
     "PrivateLinkHubInfoListResult": {
       "description": "List of privateLinkHubs",
       "type": "object",
@@ -420,14 +391,6 @@
     }
   },
   "parameters": {
-    "privateLinkHubNameParameter": {
-      "name": "privateLinkHubName",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "Name of the privateLinkHub",
-      "x-ms-parameter-location": "method"
-    },
     "PrivateEndpointConnectionProxyNameParameter": {
       "name": "privateEndpointConnectionProxyName",
       "in": "path",
