@@ -24,4 +24,9 @@ directive:
       command: connectedmachine machine 
     set:
       command: connectedmachine
+  - where: 
+      command: connectedmachine machine-extension
+    set:
+      command: connectedmachine extension
+
 ```
