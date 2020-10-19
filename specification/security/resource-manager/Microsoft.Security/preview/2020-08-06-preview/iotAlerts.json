@@ -177,16 +177,7 @@
       }
     }
   },
-  "definitions": {
-	"IotAlertScope": {
-      "name": "scope",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "Scope of the query: Subscription (i.e. /subscriptions/{subscriptionId}) or IoT Hub (i.e. /subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Devices/iotHubs/{iotHubName})",
-      "x-ms-parameter-location": "method",
-      "x-ms-skip-url-encoding": true
-    },
+  "definitions": {	
     "IotAlertList": {
       "description": "List of IoT alerts",
       "type": "object",
@@ -277,6 +268,17 @@
           }
         }
       }
+    }
+  },
+  "parameters": {
+	"IotAlertScope": {
+      "name": "scope",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Scope of the query: Subscription (i.e. /subscriptions/{subscriptionId}) or IoT Hub (i.e. /subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Devices/iotHubs/{iotHubName})",
+      "x-ms-parameter-location": "method",
+      "x-ms-skip-url-encoding": true
     }
   }
 }
