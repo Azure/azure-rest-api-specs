@@ -6971,7 +6971,7 @@
         },
         "accentSensitive": {
           "type": "boolean",
-          "description": "Defaults to false. Boolean value denoting whether comparisons with the entity name should be sensitive to accent."
+          "description": "Defaults to false. Boolean value denoting whether comparisons with the entity name should considers accented and unaccented letters such as 'é' and 'e' to be identical."
         },
         "fuzzyEditDistance": {
           "type": "integer",
@@ -6980,7 +6980,7 @@
         },
         "defaultCaseSensitive": {
           "type": "boolean",
-          "description": "Changes the default case sensitivity value for this entity. It be used to change the default value of all aliases caseSensitive values."
+          "description": "Changes the default case sensitivity value for this entity. It can be used to change the default value of all aliases caseSensitive values."
         },
         "defaultAccentSensitive": {
           "type": "boolean",
@@ -6996,7 +6996,7 @@
           "items": {
             "$ref": "#/definitions/CustomEntityAlias"
           },
-          "description": "An array of complex objects that can be used to specify alternative spellings or synonyms to the root entity name."
+          "description": "An array of CustomEntityAlias that can be used to specify alternative spellings or synonyms to the root entity name."
         }
       },
       "required": [
