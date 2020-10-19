@@ -419,6 +419,9 @@
           },
           "Get FirewallPolicyNatRuleCollectionGroup": {
             "$ref": "./examples/FirewallPolicyNatRuleCollectionGroupGet.json"
+          },
+          "Get FirewallPolicyRuleCollectionGroup With Web Categories": {
+            "$ref": "./examples/FirewallPolicyRuleCollectionGroupWithWebCategoriesGet.json"
           }
         }
       },
@@ -495,6 +498,9 @@
           },
           "Create FirewallPolicyNatRuleCollectionGroup": {
             "$ref": "./examples/FirewallPolicyNatRuleCollectionGroupPut.json"
+          },
+          "Create FirewallPolicyRuleCollectionGroup With Web Categories": {
+            "$ref": "./examples/FirewallPolicyRuleCollectionGroupWithWebCategoriesPut.json"
           }
         },
         "x-ms-long-running-operation": true,
@@ -552,6 +558,9 @@
           },
           "List all FirewallPolicyRuleCollectionGroups with IpGroups for a given FirewallPolicy": {
             "$ref": "./examples/FirewallPolicyRuleCollectionGroupWithIpGroupsList.json"
+          },
+          "List all FirewallPolicyRuleCollectionGroup With Web Categories": {
+            "$ref": "./examples/FirewallPolicyRuleCollectionGroupWithWebCategoriesList.json"
           }
         },
         "x-ms-pageable": {
@@ -871,6 +880,13 @@
         "terminateTLS": {
           "type": "boolean",
           "description": "Terminate TLS connections for this rule."
+        },
+        "webCategories": {
+          "type": "array",
+          "description": "List of destination azure web categories.",
+          "items": {
+            "type": "string"
+          }
         }
       },
       "description": "Rule of type application."

@@ -11,6 +11,7 @@
         "allowForwardedTraffic": true,
         "allowGatewayTransit": false,
         "useRemoteGateways": false,
+        "syncRemoteAddressSpace": true,
         "remoteVirtualNetwork": {
           "id": "/subscriptions/subid/resourceGroups/peerTest/providers/Microsoft.Network/virtualNetworks/vnet2"
         }
@@ -35,12 +36,18 @@
               "12.0.0.0/8"
             ]
           },
+          "remoteVirtualNetworkAddressSpace": {
+            "addressPrefixes": [
+              "12.0.0.0/8"
+            ]
+          },
           "remoteBgpCommunities": {
             "virtualNetworkCommunity": "12076:20002",
             "regionalCommunity": "12076:50004"
           },
           "peeringState": "Initiated",
-          "provisioningState": "Succeeded"
+          "provisioningState": "Succeeded",
+          "peeringSyncLevel": "FullySynced"
         }
       }
     },
@@ -61,12 +68,18 @@
               "12.0.0.0/8"
             ]
           },
+          "remoteVirtualNetworkAddressSpace": {
+            "addressPrefixes": [
+              "12.0.0.0/8"
+            ]
+          },
           "remoteBgpCommunities": {
             "virtualNetworkCommunity": "12076:20002",
             "regionalCommunity": "12076:50004"
           },
           "peeringState": "Initiated",
-          "provisioningState": "Succeeded"
+          "provisioningState": "Succeeded",
+          "peeringSyncLevel": "FullySynced"
         }
       }
     }

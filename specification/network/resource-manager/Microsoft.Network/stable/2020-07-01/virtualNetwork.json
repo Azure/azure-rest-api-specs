@@ -1550,7 +1550,11 @@
         },
         "remoteAddressSpace": {
           "$ref": "#/definitions/AddressSpace",
-          "description": "The reference to the remote virtual network address space."
+          "description": "The reference to the address space peered with the remote virtual network."
+        },
+        "remoteVirtualNetworkAddressSpace": {
+          "$ref": "#/definitions/AddressSpace",
+          "description": "The reference to the current address space of the remote virtual network."
         },
         "remoteBgpCommunities": {
           "$ref": "#/definitions/VirtualNetworkBgpCommunities",
@@ -1569,6 +1573,25 @@
             "name": "VirtualNetworkPeeringState",
             "modelAsString": true
           }
+        },
+        "peeringSyncLevel": {
+          "type": "string",
+          "description": "The peering sync status of the virtual network peering.",
+          "enum": [
+            "FullySynced",
+            "RemoteUnsynced",
+            "LocalUnsynced",
+            "LocalAndRemoteUnsynced"
+          ],
+          "x-ms-enum": {
+            "name": "VirtualNetworkPeeringLevel",
+            "modelAsString": true
+          }
+        },
+        "syncRemoteAddressSpace": {
+          "type": "boolean",
+          "default": false,
+          "description": "Provided when user wants to sync the peering with address space on the remote virtual network after the address space is updated."
         },
         "provisioningState": {
           "readOnly": true,
