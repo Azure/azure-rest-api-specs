@@ -1,0 +1,29 @@
+{
+  "parameters": {
+    "api-version": "2020-08-06-preview",
+    "subscriptionId": "20ff7fc3-e762-44dd-bd96-b71116dcdc23",
+    "iotAlertTypeName": "IoT_PrivilegedContainer"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/providers/Microsoft.Security/iotAlertTypes/IoT_PrivilegedContainer",
+        "name": "IoT_PrivilegedContainer",
+        "type": "Microsoft.Security/iotAlertTypes",
+        "properties": {
+          "alertDisplayName": "Privileged container detected",
+          "severity": "Medium",
+          "description": "Machine logs indicate that a privileged Docker container is running. A privileged container has full access to host  resources. If compromised, a malicious actor can use the privileged container to gain access to the host machine.",
+          "providerName": "IoTSecurity",
+          "remediationSteps": [
+            "If the container doesn't need to run in privileged mode, remove the privileges from the container."
+          ],
+          "intent": "Exploitation,Execution",
+          "vendorName": "Microsoft",
+          "productName": "Azure Security Center for IoT",
+          "productComponentName": "IoT Hub"
+        }
+      }
+    }
+  }
+}
