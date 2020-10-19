@@ -1225,6 +1225,63 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/getikesas": {
+      "post": {
+        "tags": [
+          "VirtualNetworkGateways"
+        ],
+        "operationId": "VirtualNetworkGateways_GetIkeSas",
+        "description": "Lists IKE Security Associations for the virtual network gateway in the specified resource group.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "virtualNetworkGatewayName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the virtual network gateway."
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted and the operation will complete asynchronously."
+          },
+          "200": {
+            "description": "Request successful. The operation getikesas completed on virtual network gateway.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/Error"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Stop packet capture on virtual network gateway": {
+            "$ref": "./examples/VirtualNetworkGatewayGetIkeSas.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/connections/{virtualNetworkGatewayConnectionName}": {
       "put": {
         "tags": [
@@ -1817,6 +1874,63 @@
         "x-ms-examples": {
           "Stop packet capture on virtual network gateway connection": {
             "$ref": "./examples/VirtualNetworkGatewayConnectionStopPacketCapture.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/connections/{virtualNetworkGatewayConnectionName}/getikesas": {
+      "post": {
+        "tags": [
+          "VirtualNetworkGatewayConnections"
+        ],
+        "operationId": "VirtualNetworkGatewayConnections_GetIkeSas",
+        "description": "Lists IKE Security Associations for the virtual network gateway connection in the specified resource group.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "virtualNetworkGatewayConnectionName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the virtual network gateway Connection."
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted and the operation will complete asynchronously."
+          },
+          "200": {
+            "description": "Request successful. The operation getikesas completed on virtual network gateway connection.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/Error"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Stop packet capture on virtual network gateway connection": {
+            "$ref": "./examples/VirtualNetworkGatewayConnectionGetIkeSas.json"
           }
         },
         "x-ms-long-running-operation": true,
@@ -3212,6 +3326,156 @@
         "pfsGroup"
       ],
       "description": "An IPSec parameters for a virtual network gateway P2S connection."
+    },
+    "QuickModeSaPropertiesFormat": {
+      "localEndpoint": {
+        "type": "string",
+        "description": "The local endpoint."
+      },
+      "remoteEndpoint": {
+        "type": "string",
+        "description": "The remote endpoint."
+      },
+      "encryption": {
+        "type": "string",
+        "$ref": "#/definitions/IpsecEncryption",
+        "description": "The IPSec encryption algorithm (IKE phase 2)."
+      },
+      "integrity": {
+        "type": "string",
+        "$ref": "#/definitions/IpsecIntegrity",
+        "description": "The IPSec integrity algorithm (IKE phase 2)."
+      },
+      "pfsGroupId": {
+        "type": "string",
+        "$ref": "#/definitions/PfsGroup",
+        "description": "The PFS Group"
+      },
+      "inboundSPI": {
+        "type": "integer",
+        "format": "int32",
+        "description": "The Inbound SPI SA"
+      },
+      "outboundSPI": {
+        "type": "integer",
+        "format": "int32",
+        "description": "The Outbound SPI SA"
+      },
+      "localTrafficSelectors": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        },
+        "description": "The local traffic selectors."
+      },
+      "remoteTrafficSelectors": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        },
+        "description": "The remote traffic selectors."
+      },
+      "lifetimeKilobytes": {
+        "type": "integer",
+        "format": "int64",
+        "minimum": 1024,
+        "maximum": 102400000,
+        "description": "The QM SA Lifetime KBytes."
+      },
+      "lifeTimeSeconds": {
+        "type": "integer",
+        "format": "int64",
+        "minimum": 300,
+        "maximum": 27000,
+        "description": "The QM SA Lifetime Seconds."
+      },
+      "isSaInitiator": {
+        "type": "boolean",
+        "description": "Flag to check if SA Initiator or not."
+      },
+      "elapsedTimeInseconds": {
+        "type": "integer",
+        "format": "int32",
+        "description": "The time elapsed in seconds."
+      }
+    },
+    "MainModeSaPropertiesFormat": {
+      "localEndpoint": {
+        "type": "string",
+        "description": "The local endpoint."
+      },
+      "remoteEndpoint": {
+        "type": "string",
+        "description": "The remote endpoint."
+      },
+      "initiatorCookie": {
+        "type": "integer",
+        "format": "int64",
+        "description": "The initiator cookie."
+      },
+      "responderCookie": {
+        "type": "integer",
+        "format": "int64",
+        "description": "The responder cookie."
+      },
+      "localUdpEncapsulationPort": {
+        "type": "integer",
+        "format": "int32",
+        "description": "The local UDP encapsulation port."
+      },
+      "remoteUdpEncapsulationPort": {
+        "type": "integer",
+        "format": "int32",
+        "description": "The remote UDP encapsulation port."
+      },
+      "encryption": {
+        "type": "string",
+        "$ref": "#/definitions/IkeEncryption",
+        "description": "The IKE encryption algorithm (IKE phase 1)."
+      },
+      "integrity": {
+        "type": "string",
+        "$ref": "#/definitions/IkeIntegrity",
+        "description": "The IKE integrity algorithm (IKE phase 1)."
+      },
+      "dhGroup": {
+        "type": "string",
+        "$ref": "#/definitions/DhGroup",
+        "description": "The DH Group."
+      },
+      "lifeTimeSeconds": {
+        "type": "integer",
+        "format": "int32",
+        "description": "The MM SA Lifetime in seconds."
+      },
+      "isSaInitiator": {
+        "type": "boolean",
+        "description": "Flag to check if SA Initiator or not."
+      },
+      "elapsedTimeInseconds": {
+        "type": "integer",
+        "format": "int32",
+        "description": "The time elapsed in seconds."
+      },
+      "QuickModeSa": {
+        "properties": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/QuickModeSaPropertiesFormat"
+          },
+          "description": "A list of quick mode security associations"
+        }
+      }
+    },
+    "IkeSaParameters": {
+      "properties": {
+        "type": "array",
+        "items": {
+          "$ref": "#/definitions/MainModeSaPropertiesFormat"
+        },
+        "description": "A list of main mode security associations"
+      },
+      "description": "IKE security association parameters for virtual network gateway and virtual network gateway connection. Response for GetIkeSas API service call."
     },
     "LocalNetworkGatewayPropertiesFormat": {
       "properties": {
