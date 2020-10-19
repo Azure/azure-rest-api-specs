@@ -5599,6 +5599,151 @@
           }
         }
       }
+    },
+    "/providers/Microsoft.Billing/promotions/{promotionId}": {
+      "put": {
+        "summary": "Activate promotion",
+        "description": "Activate promotion and create resource promotion resource.",
+        "operationId": "Activate_Promotion",
+        "x-ms-examples": {
+          "ActivatePromotion": {
+            "$ref": "./examples/Activatepromotion.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/PromotionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "tags": [
+          "Promotion, Activate"
+        ],
+        "responses": {
+          "200": {
+            "description": "The resource has been created",
+            "schema": {
+              "$ref": "#/definitions/PromotionResponse"
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "get": {
+        "summary": "Get a specific Promotion.",
+        "description": "Get the details of the `Promotion`.",
+        "operationId": "Promotion_Get",
+        "x-ms-examples": {
+          "GetPromotion": {
+            "$ref": "./examples/PromotionDetails.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/PromotionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "tags": [
+          "Promotion"
+        ],
+        "responses": {
+          "200": {
+            "description": "Get the details of the `Promotion`.",
+            "schema": {
+              "$ref": "#/definitions/PromotionResponse"
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/promotions": {
+      "get": {
+        "summary": "Get all `Promotion`s.",
+        "description": "List of all the `Promotion`s that the user has access.",
+        "operationId": "Promotions_List",
+        "x-ms-examples": {
+          "PromotionList": {
+            "$ref": "./examples/GetPromotions.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "tags": [
+          "Promotion"
+        ],
+        "responses": {
+          "200": {
+            "description": "List of `Promotion`s",
+            "schema": {
+              "$ref": "#/definitions/PromotionList"
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Billing/promotions/checkeligibility": {
+      "get": {
+        "tags": [
+          "Promotion_CheckEligibility"
+        ],
+        "operationId": "Promotion_CheckEligibility_get",
+        "description": "Checks the eligibility of a subscription for all active promotions.",
+        "x-ms-examples": {
+          "PromotionCheckEligibility": {
+            "$ref": "./examples/PromotionCheckEligibility.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/PromotionCheckEligibilityResponseList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -8828,6 +8973,128 @@
       "description": "The set of actions that the caller is not allowed to perform.",
       "type": "string",
       "readOnly": true
+    },
+    "PromotionList": {
+      "description": "The list of promotions.",
+      "properties": {
+        "value": {
+          "description": "The list of promotions.",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/PromotionResponse"
+          }
+        },
+        "nextLink": {
+          "description": "The link (url) to the next page of results.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "PromotionResponse": {
+      "type": "object",
+      "x-ms-azure-resource": true,
+      "properties": {
+        "etag": {
+          "type": "integer"
+        },
+        "id": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Identifier of the promotion"
+        },
+        "name": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Name of the promotion"
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/PromotionResponseProperties"
+        },
+        "type": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Type of resource. \"Microsoft.Billing/Promotions\""
+        }
+      }
+    },
+    "PromotionResponseProperties": {
+      "type": "object",
+      "properties": {
+        "displayName": {
+          "type": "string",
+          "description": "Friendly name for user to easily identified the promotion."
+        },
+        "effectiveDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "This is the DateTime when the promotion would come in effect"
+        },
+        "lastUpdatedDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Last update time of the promotion resource."
+        },
+        "expiryDate": {
+          "type": "string",
+          "format": "date",
+          "description": "This is the date when the Reservation will expire."
+        },
+        "provisioningState": {
+          "type": "string",
+          "description": "Current state of the promotion."
+        },
+        "appliedScopes": {
+          "$ref": "#/definitions/AppliedScopes",
+          "description": "List of subscriptions getting the benefit of the promotion."
+        }
+      }
+    },
+    "AppliedScopes": {
+      "type": "array",
+      "description": "List of the subscriptions that the benefit will be applied.",
+      "items": {
+        "type": "string",
+        "minItems": 1,
+        "maxItems": 1
+      }
+    },
+    "PromotionCheckEligibilityResponseList": {
+      "description": "The list of promotions.",
+      "properties": {
+        "value": {
+          "description": "The list of promotions.",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/PromotionCheckEligibilityResponseProperties"
+          }
+        },
+        "nextLink": {
+          "description": "The link (url) to the next page of results.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "PromotionCheckEligibilityResponseProperties": {
+      "type": "object",
+      "properties": {
+        "promotion": {
+          "type": "string",
+          "description": "Name of the promotion"
+        },
+        "eligible": {
+          "type": "boolean",
+          "description": "Specifies whether the subscription is eligible for the promotion"
+        },
+        "reason": {
+          "type": "string",
+          "description": "Reason in case the subscription is not eligible for promotion."
+        }
+      }
     }
   },
   "parameters": {
@@ -8982,6 +9249,14 @@
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method"
+    },
+    "PromotionIdParameter": {
+      "name": "promotionId",
+      "x-ms-parameter-location": "method",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Promotion Id"
     }
   },
   "security": [
