@@ -6,15 +6,19 @@ These settings apply only when `--azureresourceschema` is specified on the comma
 
 ``` yaml $(azureresourceschema) && $(multiapi)
 batch:
-  - tag: package-2016-10
+  - tag: schema-storsimple-2016-10-01
+
 ```
 
-### Tag: package-2016-10 and azureresourceschema
-
-These settings apply only when `--tag=package-2016-10 --azureresourceschema` is specified on the command line.
 Please also specify `--azureresourceschema-folder=<path to the root directory of your azure-resource-manager-schemas clone>`.
 
-``` yaml $(tag) == 'package-2016-10' && $(azureresourceschema)
-output-folder: $(azureresourceschema-folder)/schemas
-```
+### Tag: schema-storsimple-2016-10-01 and azureresourceschema
 
+``` yaml $(tag) == 'schema-storsimple-2016-10-01' && $(azureresourceschema)
+output-folder: $(azureresourceschema-folder)/schemas
+
+# all the input files in this apiVersion
+input-file:
+  - Microsoft.StorSimple/stable/2016-10-01/StorSimple.json
+
+```

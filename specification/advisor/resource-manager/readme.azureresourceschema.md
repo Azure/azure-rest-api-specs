@@ -6,55 +6,67 @@ These settings apply only when `--azureresourceschema` is specified on the comma
 
 ``` yaml $(azureresourceschema) && $(multiapi)
 batch:
-  - tag: package-2020-07-preview
-  - tag: package-2020-01
-  - tag: package-2017-04
-  - tag: package-2017-03
-  - tag: package-2016-07-preview
+  - tag: schema-advisor-2020-07-01-preview
+  - tag: schema-advisor-2020-01-01
+  - tag: schema-advisor-2017-04-19
+  - tag: schema-advisor-2017-03-31
+  - tag: schema-advisor-2016-07-12-preview
+
 ```
 
-### Tag: package-2020-07-preview and azureresourceschema
-
-These settings apply only when `--tag=package-2020-07-preview --azureresourceschema` is specified on the command line.
 Please also specify `--azureresourceschema-folder=<path to the root directory of your azure-resource-manager-schemas clone>`.
 
-``` yaml $(tag) == 'package-2020-07-preview' && $(azureresourceschema)
+### Tag: schema-advisor-2020-07-01-preview and azureresourceschema
+
+``` yaml $(tag) == 'schema-advisor-2020-07-01-preview' && $(azureresourceschema)
 output-folder: $(azureresourceschema-folder)/schemas
+
+# all the input files in this apiVersion
+input-file:
+  - Microsoft.Advisor/preview/2020-07-01-preview/advisor.json
+
 ```
 
-### Tag: package-2020-01 and azureresourceschema
+### Tag: schema-advisor-2020-01-01 and azureresourceschema
 
-These settings apply only when `--tag=package-2020-01 --azureresourceschema` is specified on the command line.
-Please also specify `--azureresourceschema-folder=<path to the root directory of your azure-resource-manager-schemas clone>`.
-
-``` yaml $(tag) == 'package-2020-01' && $(azureresourceschema)
+``` yaml $(tag) == 'schema-advisor-2020-01-01' && $(azureresourceschema)
 output-folder: $(azureresourceschema-folder)/schemas
+
+# all the input files in this apiVersion
+input-file:
+  - Microsoft.Advisor/stable/2020-01-01/advisor.json
+
 ```
 
-### Tag: package-2017-04 and azureresourceschema
+### Tag: schema-advisor-2017-04-19 and azureresourceschema
 
-These settings apply only when `--tag=package-2017-04 --azureresourceschema` is specified on the command line.
-Please also specify `--azureresourceschema-folder=<path to the root directory of your azure-resource-manager-schemas clone>`.
-
-``` yaml $(tag) == 'package-2017-04' && $(azureresourceschema)
+``` yaml $(tag) == 'schema-advisor-2017-04-19' && $(azureresourceschema)
 output-folder: $(azureresourceschema-folder)/schemas
+
+# all the input files in this apiVersion
+input-file:
+  - Microsoft.Advisor/stable/2017-04-19/advisor.json
+
 ```
 
-### Tag: package-2017-03 and azureresourceschema
+### Tag: schema-advisor-2017-03-31 and azureresourceschema
 
-These settings apply only when `--tag=package-2017-03 --azureresourceschema` is specified on the command line.
-Please also specify `--azureresourceschema-folder=<path to the root directory of your azure-resource-manager-schemas clone>`.
-
-``` yaml $(tag) == 'package-2017-03' && $(azureresourceschema)
+``` yaml $(tag) == 'schema-advisor-2017-03-31' && $(azureresourceschema)
 output-folder: $(azureresourceschema-folder)/schemas
+
+# all the input files in this apiVersion
+input-file:
+  - Microsoft.Advisor/stable/2017-03-31/advisor.json
+
 ```
 
-### Tag: package-2016-07-preview and azureresourceschema
+### Tag: schema-advisor-2016-07-12-preview and azureresourceschema
 
-These settings apply only when `--tag=package-2016-07-preview --azureresourceschema` is specified on the command line.
-Please also specify `--azureresourceschema-folder=<path to the root directory of your azure-resource-manager-schemas clone>`.
-
-``` yaml $(tag) == 'package-2016-07-preview' && $(azureresourceschema)
+``` yaml $(tag) == 'schema-advisor-2016-07-12-preview' && $(azureresourceschema)
 output-folder: $(azureresourceschema-folder)/schemas
-```
 
+# all the input files in this apiVersion
+input-file:
+  - Microsoft.Advisor/preview/2016-07-12-preview/advisor.json
+
+```

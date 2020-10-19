@@ -641,6 +641,48 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/privateEndpointConnections": {
+      "get": {
+        "tags": [
+          "PrivateEndpointConnections"
+        ],
+        "operationId": "PrivateEndpointConnections_List",
+        "description": "Gets the private endpoint connections associated with the Cognitive Services account.",
+        "x-ms-examples": {
+          "GetPrivateEndpointConnection": {
+            "$ref": "./examples/ListPrivateEndpointConnections.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved private endpoint connections.",
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointConnectionListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/privateEndpointConnections/{privateEndpointConnectionName}": {
       "get": {
         "tags": [
@@ -1009,6 +1051,26 @@
           "description": "(Personalization Only) The storage account connection string.",
           "pattern": "^(( *)DefaultEndpointsProtocol=(http|https)( *);( *))?AccountName=(.*)AccountKey=(.*)EndpointSuffix=(.*)$",
           "maxLength": 1000
+        },
+        "aadClientId": {
+          "type": "string",
+          "description": "(Metrics Advisor Only) The Azure AD Client Id (Application Id).",
+          "maxLength": 500
+        },
+        "aadTenantId": {
+          "type": "string",
+          "description": "(Metrics Advisor Only) The Azure AD Tenant Id.",
+          "maxLength": 500
+        },
+        "superUser": {
+          "type": "string",
+          "description": "(Metrics Advisor Only) The super user of Metrics Advisor.",
+          "maxLength": 500
+        },
+        "websiteName": {
+          "type": "string",
+          "description": "(Metrics Advisor Only) The website name of Metrics Advisor.",
+          "maxLength": 500
         }
       },
       "description": "The api properties for special APIs."
@@ -1657,6 +1719,18 @@
         }
       },
       "description": "The user owned storage for Cognitive Services account."
+    },
+    "PrivateEndpointConnectionListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "Array of private endpoint connections",
+          "items": {
+            "$ref": "#/definitions/PrivateEndpointConnection"
+          }
+        }
+      },
+      "description": "A list of private endpoint connections"
     },
     "PrivateEndpointConnection": {
       "properties": {

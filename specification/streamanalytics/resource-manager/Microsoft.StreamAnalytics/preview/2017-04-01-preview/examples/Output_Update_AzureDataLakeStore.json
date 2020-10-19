@@ -1,0 +1,59 @@
+{
+  "parameters": {
+    "api-version": "2017-04-01-preview",
+    "subscriptionId": "56b5e0a9-b645-407d-99b0-c64f86013e3d",
+    "resourceGroupName": "sjrg",
+    "jobName": "sj3310",
+    "outputName": "output5195",
+    "output": {
+      "properties": {
+        "datasource": {
+          "type": "Microsoft.DataLake/Accounts",
+          "properties": {
+            "accountName": "differentaccount"
+          }
+        },
+        "serialization": {
+          "type": "Json",
+          "properties": {
+            "encoding": "UTF8",
+            "format": "LineSeparated"
+          }
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "headers": {
+        "ETag": "5020de6b-5bb3-4b88-8606-f11fb3c46185"
+      },
+      "body": {
+        "id": "/subscriptions/56b5e0a9-b645-407d-99b0-c64f86013e3d/resourceGroups/sjrg/providers/Microsoft.StreamAnalytics/streamingjobs/sj3310/outputs/output5195",
+        "name": "output5195",
+        "type": "Microsoft.StreamAnalytics/streamingjobs/outputs",
+        "properties": {
+          "datasource": {
+            "type": "Microsoft.DataLake/Accounts",
+            "properties": {
+              "accountName": "differentaccount",
+              "tenantId": "cea4e98b-c798-49e7-8c40-4a2b3beb47dd",
+              "tokenUserPrincipalName": "bobsmith@contoso.com",
+              "tokenUserDisplayName": "Bob Smith",
+              "filePathPrefix": "{date}/{time}",
+              "dateFormat": "yyyy/MM/dd",
+              "timeFormat": "HH"
+            }
+          },
+          "serialization": {
+            "type": "Json",
+            "properties": {
+              "encoding": "UTF8",
+              "format": "LineSeparated"
+            }
+          }
+        }
+      }
+    }
+  }
+}
