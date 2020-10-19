@@ -65,15 +65,6 @@ input-file:
 
 ### Tag: package-2016-08
 
-These settings apply only when `--tag=package-2018-01` is specified on the command line.
-
-``` yaml $(tag) == 'package-2018-01'
-input-file:
-- Microsoft.RecoveryServices/stable/2018-01-10/service.json
-```
-
-### Tag: package-2016-08
-
 These settings apply only when `--tag=package-2016-08` is specified on the command line.
 
 ``` yaml $(tag) == 'package-2016-08'
