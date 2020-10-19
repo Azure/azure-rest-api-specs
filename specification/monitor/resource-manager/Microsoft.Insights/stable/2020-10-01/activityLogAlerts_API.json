@@ -37,35 +37,6 @@
       }
     },
     "paths": {
-      "/providers/Microsoft.Insights/operations": {
-        "get": {
-          "tags": [
-              "Operations"
-          ],
-          "description": "Lists all of the available Microsoft.Insights operations.",
-          "operationId": "Operations_List",
-          "parameters": [{
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
-          }],
-          "responses": {
-              "200": {
-                  "description": "OK. The request has succeeded.",
-                  "schema": {
-                      "$ref": "#/definitions/OperationListResult"
-                  }
-              },
-              "default": {
-                  "description": "Microsoft.Insights error response describing why the operation failed.",
-                  "schema": {
-                      "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
-                  }
-              }
-          },
-          "x-ms-pageable": {
-              "nextLinkName": "nextLink"
-          }
-        }
-      },
       "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Insights/activityLogAlerts/{alertRuleName}": {
         "put": {
           "description": "Create a new Activity Log Alert rule or update an existing one.",
