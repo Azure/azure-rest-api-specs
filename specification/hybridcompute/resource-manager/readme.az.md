@@ -21,12 +21,12 @@ directive:
     set:
       parameter-name: name
   - where: 
-      command: connectedmachine machine 
+      command: machine 
     set:
-      command: connectedmachine
+      command:
   - where: 
-      command: connectedmachine machine-extension
+      command: machine-extension
     set:
-      command: connectedmachine extension
+      command: extension
 
 ```
