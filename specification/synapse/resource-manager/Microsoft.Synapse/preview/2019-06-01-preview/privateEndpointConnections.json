@@ -22,33 +22,33 @@
   },
   "paths": {
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces/{workspaceName}/privateEndpointConnections/{privateEndpointConnectionName}": {
+      "parameters": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+        },
+        {
+          "$ref": "../../../../common/v1/types.json#/parameters/WorkspaceNameParameter"
+        },
+        {
+          "name": "privateEndpointConnectionName",
+          "in": "path",
+          "description": "The name of the private endpoint connection.",
+          "required": true,
+          "type": "string"
+        }
+      ],
       "get": {
         "tags": [
           "PrivateEndpointConnections"
         ],
         "description": "Gets a private endpoint connection.",
         "operationId": "PrivateEndpointConnections_Get",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "./workspace.json#/parameters/workspaceNameParameter"
-          },
-          {
-            "name": "privateEndpointConnectionName",
-            "in": "path",
-            "description": "The name of the private endpoint connection.",
-            "required": true,
-            "type": "string"
-          }
-        ],
         "consumes": [],
         "produces": [
           "application/json"
@@ -81,23 +81,13 @@
         "operationId": "PrivateEndpointConnections_Create",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "./workspace.json#/parameters/workspaceNameParameter"
-          },
-          {
-            "name": "privateEndpointConnectionName",
-            "in": "path",
-            "description": "The name of the private endpoint connection.",
+            "name": "request",
+            "in": "body",
+            "description": "Request body of private endpoint connecion to create.",
             "required": true,
-            "type": "string"
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointConnection"
+            }
           }
         ],
         "consumes": [
@@ -139,27 +129,6 @@
         ],
         "description": "Delete a private endpoint connection.",
         "operationId": "PrivateEndpointConnections_Delete",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "./workspace.json#/parameters/workspaceNameParameter"
-          },
-          {
-            "name": "privateEndpointConnectionName",
-            "in": "path",
-            "description": "The name of the private endpoint connection.",
-            "required": true,
-            "type": "string"
-          }
-        ],
         "consumes": [
           "application/json"
         ],
@@ -209,7 +178,7 @@
             "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "./workspace.json#/parameters/workspaceNameParameter"
+            "$ref": "../../../../common/v1/types.json#/parameters/WorkspaceNameParameter"
           }
         ],
         "consumes": [],
