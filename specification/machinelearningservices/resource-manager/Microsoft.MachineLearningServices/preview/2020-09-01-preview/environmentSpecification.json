@@ -184,50 +184,6 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/environments/{environmentName}/versions/latest": {
-      "get": {
-        "tags": [
-          "EnvironmentSpecification"
-        ],
-        "operationId": "EnvironmentSpecificationVersions_GetLatest",
-        "x-ms-examples": {
-          "Get Latest Environment Specification Version.": {
-            "$ref": "./examples/getLatestEnvironmentSpecificationVersion.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "machineLearningServices.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "machineLearningServices.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
-          },
-          {
-            "$ref": "machineLearningServices.json#/parameters/APIVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/EnvironmentNameParameter"
-          }
-        ],
-        "responses": {
-          "default": {
-            "description": "Error",
-            "schema": {
-              "$ref": "machineLearningServices.json#/definitions/MachineLearningServiceError"
-            }
-          },
-          "200": {
-            "description": "Success",
-            "schema": {
-              "$ref": "#/definitions/EnvironmentSpecificationVersionResource"
-            }
-          }
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/environments/{environmentName}/versions": {
       "get": {
         "tags": [
@@ -257,6 +213,9 @@
           },
           {
             "$ref": "#/parameters/EnvironmentNameParameter"
+          },
+          {
+            "$ref": "#/parameters/LatestParameter"
           }
         ],
         "responses": {
@@ -291,6 +250,14 @@
       "type": "string",
       "description": "Environment Version identifier.",
       "required": true,
+      "x-ms-parameter-location": "method"
+    },
+    "LatestParameter": {
+      "in": "query",
+      "name": "latest",
+      "type": "boolean",
+      "description": "Get latest flag.",
+      "required": false,
       "x-ms-parameter-location": "method"
     }
   },
