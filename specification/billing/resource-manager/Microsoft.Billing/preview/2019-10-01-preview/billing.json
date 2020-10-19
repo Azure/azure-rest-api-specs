@@ -5393,12 +5393,12 @@
         }
       }
     },
-    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/invoices/{invoiceName}/initiatePayNow": {
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/initiatePayNow": {
       "post": {
         "tags": [
           "PayNow"
         ],
-        "summary": "Initiates a pay now request.",
+        "summary": "Initiates a pay now request. The operation is supported only for billing accounts with agreement type Enterprise Agreement.",
         "operationId": "payNow_Initiate",
         "x-ms-examples": {
           "InitiateTransfer": {
@@ -5407,10 +5407,10 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/billingAccountNameParameter"
+            "$ref": "#/parameters/apiVersionParameter"
           },
           {
-            "$ref": "#/parameters/invoiceNameParameter"
+            "$ref": "#/parameters/billingAccountNameParameter"
           },
           {
             "name": "parameters",
@@ -5438,12 +5438,12 @@
         }
       }
     },
-    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/invoices/{invoiceName}/payNows/{payNowName}": {
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/payNow/{payNowName}": {
       "get": {
         "tags": [
           "PayNow"
         ],
-        "description": "Gets a pay now request by ID. The operation is supported only for billing accounts with agreement type Enterprise Agreement..",
+        "description": "Gets a pay now request by ID. The operation is supported only for billing accounts with agreement type Enterprise Agreement.",
         "operationId": "PayNow_Get",
         "x-ms-examples": {
           "PayNowGet": {
@@ -5452,10 +5452,10 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/billingAccountNameParameter"
+            "$ref": "#/parameters/apiVersionParameter"
           },
           {
-            "$ref": "#/parameters/invoiceNameParameter"
+            "$ref": "#/parameters/billingAccountNameParameter"
           },
           {
             "$ref": "#/parameters/payNowNameParameter"
@@ -5477,7 +5477,7 @@
         }
       }
     },
-   "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/paynows": {
+   "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/payNow": {
       "get": {
         "tags": [
           "PayNow"
@@ -5487,7 +5487,7 @@
             "$ref": "./examples/PayNowListByBillingAccount.json"
           }
         },
-        "operationId": "PayNows_ListByBillingAccount",
+        "operationId": "PayNow_ListByBillingAccount",
         "description": "Lists the pay nows that are initiated for the billing account. The operation is supported only for billing accounts with agreement type Enterprise Agreement..",
         "parameters": [
           {
@@ -5527,6 +5527,51 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/payableOverage": {
+      "get": {
+        "tags": [
+          "PayNow"
+        ],
+        "description": "Get the payable overage amount for payNow. The operation is supported only for billing accounts with agreement type Enterprise Agreement.",
+        "operationId": "PayNow_GetPayableOverage",
+        "x-ms-examples": {
+          "PayNowGet": {
+            "$ref": "./examples/GetPayableOverage.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/billingAccountNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/InitiatePayNowRequest"
+            },
+            "description": "Request parameters that are provided to the initiated pay now operation."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The payable overage amount for payNow.",
+            "schema": {
+              "$ref": "#/definitions/PayableOverage"
+            }
+          },
+          "default": {
+            "description": "Unexpected error.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
         }
       }
     }
@@ -8746,13 +8791,17 @@
       "type": "object",
       "description": "Request parameters to initiate pay now.",
       "properties": {
-        "sourceBillingAccountName": {
+        "invoiceName": {
           "type": "string",
-          "description": "The billing account to choose payoff balance."
+          "description": "The ID that uniquely identifies an invoice which is being paid off."
         },
-        "sourcePayoffDate": {
+        "payOffBillingAccountName": {
           "type": "string",
-          "description": "The payoff date to get balance from source enrollment. The date should be specified in MM-DD-YYYY format."
+          "description": "The ID of the billing account whose pre-payment balance will be used to pay off the overage.. Currently only within billing account pay-off is supported."
+        },
+        "payOffDate": {
+          "type": "string",
+          "description": "The date used to get the pre-payment balance from pay off billing account. The date should be specified in MM-DD-YYYY format."
         }
       }
     },
@@ -8779,26 +8828,47 @@
         },
         "errorCode": {
           "description": "The error code for failed pay now.",
+          "readOnly": true,
           "type": "string"
         },
         "errorMessage": {
           "description": "The error message for failed pay now.",
+          "readOnly": true,
           "type": "string"
         },
         "id": {
           "description": "The pay now operation id for the initated pay now.",
+          "readOnly": true,
           "type": "string"
         },
-        "invoiceNumber": {
+        "initiatorEmailAddress": {
+          "description": "The email ID of the user who intitated the pay now request.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "invoiceName": {
           "description": "The invoice number being paid off.",
+          "readOnly": true,
           "type": "string"
         },
         "overageAmount": {
           "description": "The total pre-payment eligible overage amount.",
-          "type": "string"
+          "readOnly": true,
+          "$ref": "#/definitions/Amount"
+        },
+        "payOffBillingAccountName": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The ID of the billing account whose pre-payment balance will be used to pay off the overage."
+        },
+        "payOffDate": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The effective date used to get the pre-payment balance from pay off billing account."
         },
         "percentComplete": {
           "description": "The percent of operation completed.",
+          "readOnly": true,
           "type": "string"
         },
         "lastModifiedTime": {
@@ -8811,8 +8881,9 @@
           "description": "Identifies the state of the pay now operation.",
           "type": "string",
           "enum": [
-            "NotStarted",
-            "Running",
+            "Accepted",
+            "Initiated",
+            "Processing",
             "Succeeded",
             "Failed"
           ],
@@ -8839,6 +8910,32 @@
           "description": "The link (url) to the next page of results.",
           "type": "string",
           "readOnly": true
+        }
+      }
+    },
+    "PayableOverage": {
+      "description": "The latest Azure payable overage amount for pay now.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/PayableOverageProperties",
+          "title": "Available payable overage properties"
+        }
+      }
+    },
+    "PayableOverageProperties": {
+      "description": "The properties of payable overage.",
+      "properties": {
+        "amount": {
+          "description": "Overage amount.",
+          "readOnly": true,
+          "$ref": "#/definitions/Amount"
         }
       }
     }
