@@ -37,6 +37,35 @@
       }
     },
     "paths": {
+      "/providers/Microsoft.Insights/operations": {
+        "get": {
+          "tags": [
+              "Operations"
+          ],
+          "description": "Lists all of the available Microsoft.Insights operations.",
+          "operationId": "Operations_List",
+          "parameters": [{
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }],
+          "responses": {
+              "200": {
+                  "description": "OK. The request has succeeded.",
+                  "schema": {
+                      "$ref": "#/definitions/OperationListResult"
+                  }
+              },
+              "default": {
+                  "description": "Microsoft.Insights error response describing why the operation failed.",
+                  "schema": {
+                      "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+                  }
+              }
+          },
+          "x-ms-pageable": {
+              "nextLinkName": "nextLink"
+          }
+        }
+      },
       "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Insights/activityLogAlerts/{alertRuleName}": {
         "put": {
           "description": "Create a new Activity Log Alert rule or update an existing one.",
@@ -172,10 +201,10 @@
         },
         "patch": {
           "description": "Update an existing Activity Log Alert rule. This method is used to update the resource tags of an Alert rule or for enabling / disabling an Alert rule. To update other fields use the CreateOrUpdate method.",
-          "operationId": "ActivityLogAlertRule_Patch",
+          "operationId": "ActivityLogAlertRule_Update",
           "x-ms-examples": {
             "Patch an Activity Log Alert rule": {
-              "$ref": "./examples/ActivityLogAlertRule_Patch.json"
+              "$ref": "./examples/ActivityLogAlertRule_Update.json"
             }
           },
           "parameters": [
@@ -294,43 +323,6 @@
       }
     },
     "definitions": {
-      "AzureResource": {
-        "description": "An Azure resource object.",
-        "x-ms-azure-resource": true,
-        "type": "object",
-        "properties": {
-          "id": {
-            "description": "The resource Id.",
-            "type": "string",
-            "readOnly": true
-          },
-          "name": {
-            "description": "The resource name.",
-            "type": "string",
-            "readOnly": true
-          },
-          "type": {
-            "description": "The resource type.",
-            "type": "string",
-            "readOnly": true
-          },
-          "location": {
-            "description": "The resource location.",
-            "type": "string",
-            "default": "global",
-            "x-ms-mutability": [
-              "create",
-              "read"
-            ]
-          },
-          "tags": {
-            "description": "The resource tags.",
-            "additionalProperties": {
-              "type": "string"
-            }
-          }
-        }
-      },
       "AlertRuleResource": {
         "description": "An Activity Log Alert rule resource.",
         "allOf": [
@@ -419,8 +411,8 @@
         "discriminator": "odata.type",
         "properties": {
           "odata.type": {
-            "type": "string",
-            "default": null
+            "description": "Should always be null.",
+            "type": "string"
           }
         }
       },
@@ -533,48 +525,9 @@
             "default": true
           }
         }
-      },
-      "ErrorResponse": {
-        "description": "The error response.",
-        "type": "object",
-        "properties": {
-          "error": {
-            "description": "The error object.",
-            "$ref": "#/definitions/ErrorObject"
-          }
-        }
-      },
-      "ErrorObject": {
-        "description": "The error object.",
-        "type": "object",
-        "properties": {
-          "code": {
-            "description": "The error code",
-            "type": "string"
-          },
-          "message": {
-            "description": "The error message indicating why the operation failed.",
-            "type": "string"
-          }
-        }
       }
     },
     "parameters": {
-      "SubscriptionIdParameter": {
-        "name": "subscriptionId",
-        "in": "path",
-        "required": true,
-        "type": "string",
-        "description": "The subscription Id."
-      },
-      "ResourceGroupNameParameter": {
-        "name": "resourceGroupName",
-        "in": "path",
-        "required": true,
-        "type": "string",
-        "description": "The name of the resource group.",
-        "x-ms-parameter-location": "method"
-      },
       "AlertRuleNameParameter": {
         "name": "alertRuleName",
         "in": "path",
@@ -582,13 +535,6 @@
         "type": "string",
         "description": "The name of the Activity Log Alert rule.",
         "x-ms-parameter-location": "method"
-      },
-      "ApiVersionParameter": {
-        "name": "api-version",
-        "in": "query",
-        "required": true,
-        "type": "string",
-        "description": "Client Api Version."
       }
     }
   }
