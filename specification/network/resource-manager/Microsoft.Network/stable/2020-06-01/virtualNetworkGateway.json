@@ -2381,7 +2381,7 @@
         },
         "extendedLocation": {
           "description": "The extended location of type local virtual network gateway.",
-          "$ref": "#/definitions/ExtendedLocation"
+          "$ref": "./network.json#/definitions/ExtendedLocation"
         }
       },
       "description": "VirtualNetworkGateway properties."
@@ -2758,34 +2758,6 @@
         }
       },
       "description": "Gateway routing details."
-    },
-    "ExtendedLocationType": {
-      "type": "string",
-      "description": "The supported ExtendedLocation types. Currently only EdgeZone is supported in Microsoft.Network resources.",
-      "enum": [
-        "EdgeZone"
-      ],
-      "x-ms-enum": {
-        "name": "ExtendedLocationTypes",
-        "modelAsString": true
-      }
-    },
-    "ExtendedLocation": {
-      "description": "ExtendedLocation complex type.",
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "The name of the extended location."
-        },
-        "type": {
-          "$ref": "#/definitions/ExtendedLocationType",
-          "description": "The type of the extended location."
-        }
-      },
-      "required": [
-        "name",
-        "type"
-      ]
     },
     "VirtualNetworkGateway": {
       "properties": {
