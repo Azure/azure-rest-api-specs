@@ -3,25 +3,15 @@
     "api-version": "2020-01-01-preview",
     "subscriptionId": "subid",
     "resourceGroupName": "rg",
-    "virtualNetworkFunctionName": "testVnf",
-    "parameters": {
-      "tags": {
-        "tag1": "value1",
-        "tag2": "value2"
-      }
-    }
+    "networkFunctionName": "testNf"
   },
   "responses": {
     "200": {
       "body": {
-        "id": "/subscriptions/subid/resourcegroups/rg/providers/Microsoft.HybridNetwork/virtualNetworkFunctions/testVnf",
-        "name": "testVnf",
-        "type": "Microsoft.HybridNetwork/virtualNetworkFunctions",
+        "id": "/subscriptions/subid/resourcegroups/rg/providers/Microsoft.HybridNetwork/networkFunctions/testNf",
+        "name": "testNf",
+        "type": "Microsoft.HybridNetwork/networkFunctions",
         "location": "eastus",
-        "tags": {
-          "tag1": "value1",
-          "tag2": "value2"
-        },
         "properties": {
           "provisioningState": "Succeeded",
           "device": {
@@ -36,7 +26,7 @@
             "id": "/subscriptions/subid/resourceGroups/rg/providers/Microsoft.Solutions/applications/testServiceKey"
           },
           "managedApplicationParameters": {},
-          "virtualNetworkFunctionUserConfigurations": [
+          "networkFunctionUserConfigurations": [
             {
               "roleName": "testRole",
               "userDataParameters": {},
