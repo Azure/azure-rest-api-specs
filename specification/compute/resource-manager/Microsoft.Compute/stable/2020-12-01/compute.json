@@ -2191,6 +2191,12 @@
             "schema": {
               "$ref": "#/definitions/VirtualMachineImage"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         }
       }
@@ -2250,13 +2256,15 @@
             "in": "query",
             "required": false,
             "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "description": "An integer value specifying the number of images to return that matches supplied values."
           },
           {
             "name": "$orderby",
             "in": "query",
             "required": false,
-            "type": "string"
+            "type": "string",
+            "description": "Specifies the order of the results returned. Formatted as an OData query."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -2273,6 +2281,12 @@
               "items": {
                 "$ref": "#/definitions/VirtualMachineImageResource"
               }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
             }
           }
         }
@@ -2323,6 +2337,12 @@
                 "$ref": "#/definitions/VirtualMachineImageResource"
               }
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         }
       }
@@ -2364,6 +2384,12 @@
               "items": {
                 "$ref": "#/definitions/VirtualMachineImageResource"
               }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
             }
           }
         }
@@ -2420,6 +2446,12 @@
               "items": {
                 "$ref": "#/definitions/VirtualMachineImageResource"
               }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
             }
           }
         }
