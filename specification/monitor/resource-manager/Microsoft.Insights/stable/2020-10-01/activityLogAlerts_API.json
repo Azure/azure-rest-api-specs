@@ -294,11 +294,49 @@
       }
     },
     "definitions": {
+      "AzureResource": {
+        "description": "An Azure resource object.",
+        "x-ms-azure-resource": true,
+        "type": "object",
+        "properties": {
+          "id": {
+            "description": "The resource Id.",
+            "type": "string",
+            "readOnly": true
+          },
+          "name": {
+            "description": "The name of the resource.",
+            "type": "string",
+            "readOnly": true
+          },
+          "type": {
+            "description": "The type of the resource.",
+            "type": "string",
+            "readOnly": true
+          },
+          "location": {
+            "description": "The location of the resource. Since Azure Activity Log Alerts is a global service, the location of the rules should always be 'global'.",
+            "type": "string",
+            "default": "global",
+            "x-ms-mutability": [
+              "read",
+              "create"
+            ]
+          },
+          "tags": {
+            "description": "The tags of the resource.",
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            }
+          }
+        }
+      },
       "AlertRuleResource": {
         "description": "An Activity Log Alert rule resource.",
         "allOf": [
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/TrackedResource"
+            "$ref": "#/definitions/AzureResource"
           }
         ],
         "properties": {
@@ -396,7 +434,7 @@
         }
       },
       "AlertRuleLeafCondition": {
-        "description": "An Activity Log Alert rule condition that is met by comparing an activity log field and value.",
+        "description": "An Activity Log Alert rule condition that is met by comparing the field and value of an Activity Log event.\nThis condition must contain 'field' and either 'equals' or 'containsAny'.",
         "type": "object",
         "properties": {
           "field": {
