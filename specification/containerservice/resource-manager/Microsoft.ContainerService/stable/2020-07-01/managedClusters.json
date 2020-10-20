@@ -2333,9 +2333,11 @@
         "identityProfile": {
           "additionalProperties": {
             "readOnly": true,
+            "x-ms-client-name": "managedClusterPropertiesIdentityProfileValue",
             "allOf": [
               {
-                "$ref": "#/definitions/UserAssignedIdentity"
+                "$ref": "#/definitions/UserAssignedIdentity",
+                "x-ms-client-name": "managedClusterPropertiesIdentityProfileValue"
               }
             ]
           },
@@ -2389,6 +2391,7 @@
           "type": "object",
           "additionalProperties": {
             "type": "object",
+            "x-ms-client-name": "ManagedClusterIdentityUserAssignedIdentitiesValue",
             "properties": {
               "principalId": {
                 "readOnly": true,
