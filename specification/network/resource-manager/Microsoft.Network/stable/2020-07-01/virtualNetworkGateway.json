@@ -1225,63 +1225,6 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/getikesas": {
-      "post": {
-        "tags": [
-          "VirtualNetworkGateways"
-        ],
-        "operationId": "VirtualNetworkGateways_GetIkeSas",
-        "description": "Lists IKE Security Associations for the virtual network gateway in the specified resource group.",
-        "parameters": [
-          {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group."
-          },
-          {
-            "name": "virtualNetworkGatewayName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the virtual network gateway."
-          },
-          {
-            "$ref": "./network.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "202": {
-            "description": "Accepted and the operation will complete asynchronously."
-          },
-          "200": {
-            "description": "Request successful. The operation getikesas completed on virtual network gateway.",
-            "schema": {
-              "type": "string"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "./network.json#/definitions/Error"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Stop packet capture on virtual network gateway": {
-            "$ref": "./examples/VirtualNetworkGatewayGetIkeSas.json"
-          }
-        },
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/connections/{virtualNetworkGatewayConnectionName}": {
       "put": {
         "tags": [
