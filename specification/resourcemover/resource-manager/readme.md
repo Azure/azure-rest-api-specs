@@ -35,7 +35,7 @@ These settings apply only when `--tag=package-2019-10-01-preview` is specified o
 
 ```yaml $(tag) == 'package-2019-10-01-preview'
 input-file:
-  - Microsoft.Migrate/preview/2019-10-01-preview/regionmovecollection.json
+  - Microsoft.Migrate/preview/2019-10-01-preview/resourcemovercollection.json
 ```
 
 ---

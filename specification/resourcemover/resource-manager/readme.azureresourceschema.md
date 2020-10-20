@@ -19,6 +19,6 @@ output-folder: $(azureresourceschema-folder)/schemas
 
 # all the input files in this apiVersion
 input-file:
-  - Microsoft.Migrate/preview/2019-10-01-preview/regionmovecollection.json
+  - Microsoft.Migrate/preview/2019-10-01-preview/resourcemovercollection.json
 
 ```
