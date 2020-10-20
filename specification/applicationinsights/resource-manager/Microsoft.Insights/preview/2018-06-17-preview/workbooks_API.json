@@ -270,7 +270,6 @@
     "Resource": {
       "properties": {
         "identity": {
-          "type": "object",
           "description": "Identity used for BYOS",
           "$ref": "#/definitions/WorkbookIdentity"
         },
@@ -493,9 +492,17 @@
     },
     "WorkbookIdentity": {
       "properties": {
-        "type": "string",
-        "principalId": "string",
-        "tenantId": "string"
+        "type": {
+          "type": "string",
+          "description": "identity type"
+        },
+        "principalId": {
+          "type": "string",
+          "description": "principalId"
+        },
+        "tenantId": {
+          "type": "string",
+          "description": "tenantId"
       }
     }
   },
