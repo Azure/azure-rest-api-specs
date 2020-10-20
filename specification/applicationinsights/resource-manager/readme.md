@@ -105,6 +105,15 @@ directive:
     reason: 'delete API returns empty response and is already part of the previous api, cannot change it'
 ```
 
+### Tag: package-2020-10-20
+
+These settings apply only when `--tag=package-2020-10-20` is specified on the command line.
+
+``` yaml $(tag) == 'package-2020-10-20'
+input-file:
+  - Microsoft.Insights/stable/2020-10-20/workbooks_API.json
+```
+
 ### Tag: package-preview-2020-06-only
 
 These settings apply only when `--tag=package-preview-2020-06-only` is specified on the command line.
