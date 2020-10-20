@@ -1,0 +1,74 @@
+{
+  "parameters": {
+    "subscriptionId": "00000000-1111-2222-3333-444444444444",
+    "resourceGroupName": "testrg",
+    "dataControllerName": "testdataController",
+    "api-version": "2020-12-08-preview",
+    "dataControllerResource": {
+      "location": "northeurope",
+      "tags": {
+        "mytag": "myval"
+      },
+      "properties": {
+        "onPremiseProperty": {
+          "id": "12345678-1234-1234-ab12-1a2b3c4d5e6f",
+          "publicSigningKey": "publicOnPremSigningKey"
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "onPremiseProperty": {
+            "id": "12345678-1234-1234-ab12-1a2b3c4d5e6f",
+            "publicSigningKey": "publicOnPremSigningKey",
+            "signingCertificateThumbprint": "Unique thumbprint returned to customer to verify the certificate being uploaded"
+          }
+        },
+        "systemData": {
+          "createdBy": "user1",
+          "createdByType": "User",
+          "createdAt": "2020-01-01T17:18:19.1234567Z",
+          "lastModifiedBy": "user2",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2020-01-02T17:18:19.1234567Z"
+        },
+        "location": "northeurope",
+        "tags": {
+          "mytag": "myval"
+        },
+        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg/providers/Microsoft.AzureArcData/dataControllers/testdataController",
+        "name": "testdataController",
+        "type": "Microsoft.AzureArcData/dataControllers"
+      }
+    },
+    "201": {
+      "body": {
+        "properties": {
+          "onPremiseProperty": {
+            "id": "12345678-1234-1234-ab12-1a2b3c4d5e6f",
+            "publicSigningKey": "publicOnPremSigningKey",
+            "signingCertificateThumbprint": "Unique thumbprint returned to customer to verify the certificate being uploaded"
+          }
+        },
+        "location": "northeurope",
+        "systemData": {
+          "createdBy": "user1",
+          "createdByType": "User",
+          "createdAt": "2020-01-01T17:18:19.1234567Z",
+          "lastModifiedBy": "user2",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2020-01-02T17:18:19.1234567Z"
+        },
+        "tags": {
+          "mytag": "myval"
+        },
+        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg/providers/Microsoft.AzureArcData/dataControllers/testdataController",
+        "name": "testdataController",
+        "type": "Microsoft.AzureArcData/dataControllers"
+      }
+    }
+  }
+}
