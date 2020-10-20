@@ -73,7 +73,6 @@ swagger-to-sdk:
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-node
-  - repo: azure-sdk-for-trenton
 ```
 
 ## CSharp Settings
@@ -94,10 +93,6 @@ csharp:
 ## Go
 
 See configuration in [readme.go.md](./readme.go.md)
-
-## Trenton
-
-See configuration in [readme.trenton.md](./readme.trenton.md)
 
 ## Multi-API/Profile support for AutoRest v3 generators 
 
