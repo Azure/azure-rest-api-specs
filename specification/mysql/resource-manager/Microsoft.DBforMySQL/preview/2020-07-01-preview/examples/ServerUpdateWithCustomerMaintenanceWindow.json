@@ -1,0 +1,59 @@
+{
+  "parameters": {
+    "serverName": "mysqltestsvc4",
+    "resourceGroupName": "testrg",
+    "api-version": "2020-07-01-preview",
+    "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff",
+    "parameters": {
+      "properties": {
+        "maintenanceWindow": {
+          "customWindow": "Enabled",
+          "dayOfWeek": 0,
+          "startHour": 8,
+          "startMinute": 0
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "sku": {
+          "name": "Standard_D12_v2",
+          "tier": "GeneralPurpose"
+        },
+        "properties": {
+          "administratorLogin": "cloudsa",
+          "storageProfile": {
+            "storageMB": 128000,
+            "backupRetentionDays": 7
+          },
+          "version": "5.7",
+          "sslEnforcement": "Disabled",
+          "publicNetworkAccess": "Enabled",
+          "state": "Ready",
+          "fullyQualifiedDomainName": "mysqltestsvc4.mysql.database.azure.com",
+          "haEnabled": "Disabled",
+          "haState": "NotEnabled",
+          "availabilityZone": "1",
+          "standbyAvailabilityZone": null,
+          "maintenanceWindow": {
+            "dayOfWeek": 0,
+            "startHour": 8,
+            "startMinute": 0,
+            "customWindow": "Enabled"
+          },
+          "delegatedSubnetArguments": {}
+        },
+        "location": "westus",
+        "tags": {
+          "ElasticServer": "1"
+        },
+        "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.DBforMySQL/flexibleServers/mysqltestsvc4",
+        "name": "mysqltestsvc4",
+        "type": "Microsoft.DBforMySQL/flexibleServers"
+      }
+    },
+    "202": {}
+  }
+}
