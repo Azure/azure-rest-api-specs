@@ -3,7 +3,7 @@
   "info": {
     "title": "ApplicationInsightsManagementClient",
     "description": "Azure Application Insights workbook type.",
-    "version": "2018-06-17-preview"
+    "version": "2020-10-20"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -269,6 +269,10 @@
   "definitions": {
     "Resource": {
       "properties": {
+        "identity": {
+          "description": "Identity used for BYOS",
+          "$ref": "#/definitions/ManagedIdentity"
+        },
         "id": {
           "type": "string",
           "readOnly": true,
@@ -389,6 +393,10 @@
         "sourceId": {
           "type": "string",
           "description": "ResourceId for a source resource."
+        },
+        "storageUri": {
+          "type": "string",
+          "description": "BYOS Storage Account URI"
         }
       }
     },
@@ -481,6 +489,23 @@
         }
       },
       "description": "Error message body that will indicate why the operation failed."
+    },
+    "ManagedIdentity": {
+      "descriptions": "Customer Managed Identity",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "identity type: \"systemAssigned\", \"userAssigned\", \"systemAssigned,userAssigned\", or \"None\""
+        },
+        "principalId": {
+          "type": "string",
+          "description": "principalId used for the managed identity"
+        },
+        "tenantId": {
+          "type": "string",
+          "description": "tenantId used for the managed identity"
+        }
+      }
     }
   },
   "parameters": {
