@@ -1,0 +1,61 @@
+{
+  "parameters": {
+    "resourceGroupName": "testrg",
+    "api-version": "2020-07-01-privatepreview",
+    "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "sku": {
+              "name": "Standard_D12_v2",
+              "tier": "GeneralPurpose"
+            },
+            "properties": {
+              "administratorLogin": "testuser",
+              "storageProfile": {
+                "storageMB": 5120,
+                "storageIops": 200,
+                "backupRetentionDays": 7
+              },
+              "version": "5.7",
+              "sslEnforcement": "Enabled",
+              "state": "Ready",
+              "fullyQualifiedDomainName": "mysqltestsvc1.mysql.database.azure.com",
+              "publicNetworkAccess": "Enabled"
+            },
+            "location": "westus",
+            "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.DBforMySQL/flexibleServers/mysqltestsvc1",
+            "name": "mysqltestsvc1",
+            "type": "Microsoft.DBforMySQL/flexibleServers"
+          },
+          {
+            "sku": {
+              "name": "Standard_D13_v2",
+              "tier": "GeneralPurpose"
+            },
+            "properties": {
+              "administratorLogin": "testuser",
+              "storageProfile": {
+                "storageMB": 5120,
+                "storageIops": 200,
+                "backupRetentionDays": 7
+              },
+              "version": "5.7",
+              "sslEnforcement": "Enabled",
+              "state": "Ready",
+              "fullyQualifiedDomainName": "mysqltstsvc2.mysql.database.azure.com",
+              "publicNetworkAccess": "Enabled"
+            },
+            "location": "westus",
+            "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.DBforMySQL/flexibleServers/mysqltstsvc2",
+            "name": "mysqltstsvc2",
+            "type": "Microsoft.DBforMySQL/flexibleServers"
+          }
+        ]
+      }
+    }
+  }
+}

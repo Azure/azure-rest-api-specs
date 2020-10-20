@@ -24,7 +24,7 @@ These are the global settings for the API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2018-08-31-preview
+tag: package-2020-01-13-preview
 ```
 
 
@@ -35,6 +35,21 @@ These settings apply only when `--tag=package-2018-08-31-preview` is specified o
 ``` yaml $(tag) == 'package-2018-08-31-preview'
 input-file:
 - Microsoft.WorkloadMonitor/preview/2018-08-31-preview/Microsoft.WorkloadMonitor.json
+```
+
+``` yaml
+directive:
+- suppress:
+    - R3026 # Create/Update/Delete operations are not exposed.
+```
+
+### Tag: package-2020-01-13-preview
+
+These settings apply only when `--tag=package-2020-01-13-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2020-01-13-preview'
+input-file:
+- Microsoft.WorkloadMonitor/preview/2020-01-13-preview/Microsoft.WorkloadMonitor.json
 ```
 
 ``` yaml
@@ -59,6 +74,9 @@ swagger-to-sdk:
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-node
+  - repo: azure-resource-manager-schemas
+    after_scripts:
+      - node sdkauto_afterscript.js workloadmonitor/resource-manager
 ```
 
 
@@ -106,31 +124,7 @@ python:
 
 ## Go
 
-These settings apply only when `--go` is specified on the command line.
-
-``` yaml $(go)
-go:
-  license-header: MICROSOFT_APACHE_NO_VERSION
-  namespace: workloadmonitor
-  clear-output-folder: true
-```
-
-### Go multi-api
-
-``` yaml $(go) && $(multiapi)
-batch:
-  - tag: package-2018-08-31-preview
-```
-
-### Tag: package-2018-08-31-preview and go
-
-These settings apply only when `--tag=package-2018-08-31-preview --go` is specified on the command line.
-Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
-
-``` yaml $(tag) == 'package-2018-08-31-preview' && $(go)
-output-folder: $(go-sdk-folder)/services/preview/workloadmonitor/mgmt/2018-08-31-preview/workloadmonitor
-```
-
+See configuration in [readme.go.md](./readme.go.md)
 
 ## Java
 
@@ -150,6 +144,7 @@ output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-workloadmonitor
 
 ``` yaml $(java) && $(multiapi)
 batch:
+  - tag: package-2020-01-13-preview
   - tag: package-2018-08-31-preview
 ```
 
@@ -166,6 +161,23 @@ regenerate-manager: true
 generate-interface: true
 ```
 
+### Tag: package-2020-01-13-preview and java
+
+These settings apply only when `--tag=package-2020-01-13-preview --java` is specified on the command line.
+Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-2020-01-13-preview' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.workloadmonitor.v2020-01-13-preview
+  output-folder: $(azure-libraries-for-java-folder)/sdk/workloadmonitor/mgmt-v2020-01-13-preview
+regenerate-manager: true
+generate-interface: true
+```
+
+## AzureResourceSchema
+
+See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
+
 ## Multi-API/Profile support for AutoRest v3 generators 
 
 AutoRest V3 generators require the use of `--tag=all-api-versions` to select api files.
@@ -179,6 +191,7 @@ require: $(this-folder)/../../../profiles/readme.md
 # all the input files across all versions
 input-file:
   - $(this-folder)/Microsoft.WorkloadMonitor/preview/2018-08-31-preview/Microsoft.WorkloadMonitor.json
+  - $(this-folder)/Microsoft.WorkloadMonitor/preview/2020-01-13-preview/Microsoft.WorkloadMonitor.json
 
 ```
 
@@ -189,4 +202,3 @@ uncomment the  `exclude-file` section below and add the file paths.
 #exclude-file: 
 #  - $(this-folder)/Microsoft.Example/stable/2010-01-01/somefile.json
 ```
-
