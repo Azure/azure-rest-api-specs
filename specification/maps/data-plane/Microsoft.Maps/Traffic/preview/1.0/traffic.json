@@ -212,6 +212,7 @@
       "description": "Zoom level for the desired tile. Zoom value must be in the range: 0-22 (inclusive).\nPlease see [Zoom Levels and Tile Grid](https://docs.microsoft.com/en-us/azure/location-based-services/zoom-levels-and-tile-grid) for details.",
       "required": true,
       "type": "integer",
+      "format": "int32",
       "x-ms-parameter-location": "method"
     },
     "RasterVectorZoom": {
@@ -220,6 +221,7 @@
       "description": "Zoom level for the desired tile. For _raster_ tiles, value must be in the range: 0-22 (inclusive). For _vector_ tiles, value must be in the range: 0-22 (inclusive).\nPlease see [Zoom Levels and Tile Grid](https://docs.microsoft.com/en-us/azure/location-based-services/zoom-levels-and-tile-grid) for details.",
       "required": true,
       "type": "integer",
+      "format": "int32",
       "x-ms-parameter-location": "method"
     },
     "xTileIndex": {
@@ -229,6 +231,7 @@
       "description": "X coordinate of the tile on zoom grid. Value must be in the range [0, 2<sup>`zoom`</sup> -1].\n\nPlease see [Zoom Levels and Tile Grid](https://docs.microsoft.com/en-us/azure/location-based-services/zoom-levels-and-tile-grid) for details.",
       "required": true,
       "type": "integer",
+      "format": "int32",
       "x-ms-parameter-location": "method"
     },
     "yTileIndex": {
@@ -238,6 +241,7 @@
       "description": "Y coordinate of the tile on zoom grid. Value must be in the range [0, 2<sup>`zoom`</sup> -1].\n\nPlease see [Zoom Levels and Tile Grid](https://docs.microsoft.com/en-us/azure/location-based-services/zoom-levels-and-tile-grid) for details.",
       "required": true,
       "type": "integer",
+      "format": "int32",
       "x-ms-parameter-location": "method"
     }
   },
@@ -315,6 +319,7 @@
             "description": "The value of the width of the line representing traffic. This value is a multiplier and the accepted values range from 1 - 20. The default value is 10. This parameter is not valid when format is pbf.",
             "required": false,
             "type": "integer",
+            "format": "int32",
             "minimum": 1,
             "maximum": 20,
             "default": 10
@@ -429,6 +434,7 @@
             "description": "The value of the width of the line representing traffic. This value is a multiplier and the accepted values range from 1 - 20. The default value is 10.",
             "required": false,
             "type": "integer",
+            "format": "int32",
             "default": 10,
             "minimum": 1,
             "maximum": 20
@@ -643,6 +649,7 @@
             "description": "Zoom level for desired tile. 0 to 22 for raster tiles, 0 through 22 for vector tiles",
             "required": true,
             "type": "integer",
+            "format": "int32",
             "minimum": 0,
             "maximum": 22
           },
@@ -774,6 +781,7 @@
             "description": "Zoom level of the map viewport. Used to determine whether the view can be zoomed in.",
             "required": true,
             "type": "integer",
+            "format": "int32",
             "minimum": 0,
             "maximum": 22
           },
@@ -790,6 +798,7 @@
             "description": "Zoom level of the overview map. If there is no mini map, use the same zoom level as boundingZoom.",
             "required": true,
             "type": "integer",
+            "format": "int32",
             "minimum": 0,
             "maximum": 22
           },
@@ -906,21 +915,25 @@
             "currentSpeed": {
               "description": "The current average speed at the selected point, in the units requested. This is calculated from the currentTravelTime and the length of the selected segment.",
               "type": "integer",
+              "format": "int32",
               "readOnly": true
             },
             "freeFlowSpeed": {
               "description": "The free flow speed expected under ideal conditions, expressed in the units requested. This is related to the freeFlowTravelTime.",
               "type": "integer",
+              "format": "int32",
               "readOnly": true
             },
             "currentTravelTime": {
               "description": "Current travel time in seconds based on fused real-time measurements between the defined locations in the specified direction.",
               "type": "integer",
+              "format": "int32",
               "readOnly": true
             },
             "freeFlowTravelTime": {
               "description": "The travel time in seconds which would be expected under ideal free flow conditions.",
               "type": "integer",
+              "format": "int32",
               "readOnly": true
             },
             "confidence": {
@@ -1022,11 +1035,13 @@
         "ic": {
           "description": "The icon category associated with this incident. Values are numbers in the range 0-13, with the following meanings -- 0: Unknown, 1: Accident, 2: Fog, 3: Dangerous Conditions, 4: Rain, 5: Ice, 6: Jam, 7: Lane Closed, 8: Road Closed, 9: Road Works, 10: Wind, 11: Flooding, 12: Detour, 13: Cluster",
           "type": "integer",
+          "format": "int32",
           "readOnly": true
         },
         "ty": {
           "description": "The magnitude of delay associated with incident. These values correspond to incident colors in the traffic tiles",
           "type": "integer",
+          "format": "int32",
           "readOnly": true
         },
         "cbl": {
@@ -1066,11 +1081,13 @@
         "cs": {
           "description": "Cluster size: the number of incidents in the cluster",
           "type": "integer",
+          "format": "int32",
           "readOnly": true
         },
         "l": {
           "description": "Length of the incident in meters",
           "type": "integer",
+          "format": "int32",
           "readOnly": true
         },
         "r": {
@@ -1081,6 +1098,7 @@
         "dl": {
           "description": "Delay caused by the incident in seconds (except in road closures)",
           "type": "integer",
+          "format": "int32",
           "readOnly": true
         },
         "t": {
@@ -1122,6 +1140,7 @@
                 "@trafficAge": {
                   "description": "@Traffic Age property",
                   "type": "integer",
+                  "format": "int32",
                   "readOnly": true
                 },
                 "@trafficModelId": {

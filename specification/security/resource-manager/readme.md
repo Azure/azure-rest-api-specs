@@ -203,6 +203,7 @@ input-file:
 - Microsoft.Security/preview/2020-01-01-preview/connectors.json
 - Microsoft.Security/preview/2020-08-06-preview/iotDefenderSettings.json
 - Microsoft.Security/preview/2020-08-06-preview/iotSensors.json
+- Microsoft.Security/preview/2020-08-06-preview/devices.json
 - Microsoft.Security/preview/2020-08-06-preview/onPremiseIotSensors.json
 
 # Needed when there is more than one input file
@@ -389,6 +390,7 @@ These settings apply only when `--tag=package-2020-08-preview-only` is specified
 input-file:
 - Microsoft.Security/preview/2020-08-06-preview/iotDefenderSettings.json
 - Microsoft.Security/preview/2020-08-06-preview/iotSensors.json
+- Microsoft.Security/preview/2020-08-06-preview/devices.json
 - Microsoft.Security/preview/2020-08-06-preview/onPremiseIotSensors.json
 
 # Needed when there is more than one input file
