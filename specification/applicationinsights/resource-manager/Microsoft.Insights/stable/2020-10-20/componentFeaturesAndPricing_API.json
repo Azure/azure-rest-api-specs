@@ -1,0 +1,484 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "ApplicationInsightsManagementClient",
+    "description": "Azure Application Insights client for selecting pricing plans and options.",
+    "version": "2015-05-01"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Insights/components/{resourceName}/currentbillingfeatures": {
+      "get": {
+        "description": "Returns current billing features for an Application Insights component.",
+        "operationId": "ComponentCurrentBillingFeatures_Get",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "An Application Insights component billing features definition.",
+            "schema": {
+              "$ref": "#/definitions/ApplicationInsightsComponentBillingFeatures"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ComponentCurrentBillingFeaturesGet": {
+            "$ref": "./examples/CurrentBillingFeaturesGet.json"
+          }
+        }
+      },
+      "put": {
+        "description": "Update current billing features for an Application Insights component.",
+        "operationId": "ComponentCurrentBillingFeatures_Update",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceNameParameter"
+          },
+          {
+            "name": "BillingFeaturesProperties",
+            "description": "Properties that need to be specified to update billing features for an Application Insights component.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ApplicationInsightsComponentBillingFeatures"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful request when updating billing features for an Application Insights component. The updated current billing features are returned.",
+            "schema": {
+              "$ref": "#/definitions/ApplicationInsightsComponentBillingFeatures"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ComponentCurrentBillingFeaturesUpdate": {
+            "$ref": "./examples/CurrentBillingFeaturesUpdate.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Insights/components/{resourceName}/quotastatus": {
+      "get": {
+        "description": "Returns daily data volume cap (quota) status for an Application Insights component.",
+        "operationId": "ComponentQuotaStatus_Get",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "An Application Insights component daily data volume cap status definition.",
+            "schema": {
+              "$ref": "#/definitions/ApplicationInsightsComponentQuotaStatus"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ComponentCurrentBillingFeaturesGet": {
+            "$ref": "./examples/QuotaStatusGet.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Insights/components/{resourceName}/featurecapabilities": {
+      "get": {
+        "description": "Returns feature capabilities of the application insights component.",
+        "operationId": "ComponentFeatureCapabilities_Get",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "An Application Insights component feature capabilities definition.",
+            "schema": {
+              "$ref": "#/definitions/ApplicationInsightsComponentFeatureCapabilities"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ComponentCurrentBillingFeaturesGet": {
+            "$ref": "./examples/FeatureCapabilitiesGet.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Insights/components/{resourceName}/getavailablebillingfeatures": {
+      "get": {
+        "description": "Returns all available features of the application insights component.",
+        "operationId": "ComponentAvailableFeatures_Get",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "An Application Insights component available features definition.",
+            "schema": {
+              "$ref": "#/definitions/ApplicationInsightsComponentAvailableFeatures"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ComponentCurrentBillingFeaturesGet": {
+            "$ref": "./examples/AvailableBillingFeaturesGet.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ApplicationInsightsComponentBillingFeatures": {
+      "type": "object",
+      "description": "An Application Insights component billing features",
+      "properties": {
+        "DataVolumeCap": {
+          "description": "An Application Insights component daily data volume cap",
+          "$ref": "#/definitions/ApplicationInsightsComponentDataVolumeCap"
+        },
+        "CurrentBillingFeatures": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Current enabled pricing plan. When the component is in the Enterprise plan, this will list both 'Basic' and 'Application Insights Enterprise'."
+        }
+      }
+    },
+    "ApplicationInsightsComponentDataVolumeCap": {
+      "type": "object",
+      "description": "An Application Insights component daily data volume cap",
+      "properties": {
+        "Cap": {
+          "type": "number",
+          "description": "Daily data volume cap in GB."
+        },
+        "ResetTime": {
+          "type": "integer",
+          "readOnly": true,
+          "description": "Daily data volume cap UTC reset hour."
+        },
+        "WarningThreshold": {
+          "type": "integer",
+          "description": "Reserved, not used for now."
+        },
+        "StopSendNotificationWhenHitThreshold": {
+          "type": "boolean",
+          "description": "Reserved, not used for now."
+        },
+        "StopSendNotificationWhenHitCap": {
+          "type": "boolean",
+          "description": "Do not send a notification email when the daily data volume cap is met."
+        },
+        "MaxHistoryCap": {
+          "type": "number",
+          "readOnly": true,
+          "description": "Maximum daily data volume cap that the user can set for this component."
+        }
+      }
+    },
+    "ApplicationInsightsComponentQuotaStatus": {
+      "type": "object",
+      "description": "An Application Insights component daily data volume cap status",
+      "properties": {
+        "AppId": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The Application ID for the Application Insights component."
+        },
+        "ShouldBeThrottled": {
+          "type": "boolean",
+          "readOnly": true,
+          "description": "The daily data volume cap is met, and data ingestion will be stopped."
+        },
+        "ExpirationTime": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Date and time when the daily data volume cap will be reset, and data ingestion will resume."
+        }
+      }
+    },
+    "ApplicationInsightsComponentFeatureCapabilities": {
+      "type": "object",
+      "description": "An Application Insights component feature capabilities",
+      "properties": {
+        "SupportExportData": {
+          "type": "boolean",
+          "readOnly": true,
+          "description": "Whether allow to use continuous export feature."
+        },
+        "BurstThrottlePolicy": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Reserved, not used now."
+        },
+        "MetadataClass": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Reserved, not used now."
+        },
+        "LiveStreamMetrics": {
+          "type": "boolean",
+          "readOnly": true,
+          "description": "Reserved, not used now."
+        },
+        "ApplicationMap": {
+          "type": "boolean",
+          "readOnly": true,
+          "description": "Reserved, not used now."
+        },
+        "WorkItemIntegration": {
+          "type": "boolean",
+          "readOnly": true,
+          "description": "Whether allow to use work item integration feature."
+        },
+        "PowerBIIntegration": {
+          "type": "boolean",
+          "readOnly": true,
+          "description": "Reserved, not used now."
+        },
+        "OpenSchema": {
+          "type": "boolean",
+          "readOnly": true,
+          "description": "Reserved, not used now."
+        },
+        "ProactiveDetection": {
+          "type": "boolean",
+          "readOnly": true,
+          "description": "Reserved, not used now."
+        },
+        "AnalyticsIntegration": {
+          "type": "boolean",
+          "readOnly": true,
+          "description": "Reserved, not used now."
+        },
+        "MultipleStepWebTest": {
+          "type": "boolean",
+          "readOnly": true,
+          "description": "Whether allow to use multiple steps web test feature."
+        },
+        "ApiAccessLevel": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Reserved, not used now."
+        },
+        "TrackingType": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The application insights component used tracking type."
+        },
+        "DailyCap": {
+          "type": "number",
+          "readOnly": true,
+          "description": "Daily data volume cap in GB."
+        },
+        "DailyCapResetTime": {
+          "type": "number",
+          "readOnly": true,
+          "description": "Daily data volume cap UTC reset hour."
+        },
+        "ThrottleRate": {
+          "type": "number",
+          "readOnly": true,
+          "description": "Reserved, not used now."
+        }
+      }
+    },
+    "ApplicationInsightsComponentAvailableFeatures": {
+      "type": "object",
+      "description": "An Application Insights component available features.",
+      "properties": {
+        "Result": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/ApplicationInsightsComponentFeature"
+          },
+          "readOnly": true,
+          "description": "A list of Application Insights component feature."
+        }
+      }
+    },
+    "ApplicationInsightsComponentFeature": {
+      "type": "object",
+      "description": "An Application Insights component daily data volume cap status",
+      "properties": {
+        "FeatureName": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The pricing feature name."
+        },
+        "MeterId": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The meter id used for the feature."
+        },
+        "MeterRateFrequency": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The meter rate for the feature's meter."
+        },
+        "ResouceId": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Reserved, not used now."
+        },
+        "IsHidden": {
+          "type": "boolean",
+          "readOnly": true,
+          "description": "Reserved, not used now."
+        },
+        "Capabilities": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/ApplicationInsightsComponentFeatureCapability"
+          },
+          "readOnly": true,
+          "description": "A list of Application Insights component feature capability."
+        },
+        "Title": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Display name of the feature."
+        },
+        "IsMainFeature": {
+          "type": "boolean",
+          "readOnly": true,
+          "description": "Whether can apply addon feature on to it."
+        },
+        "SupportedAddonFeatures": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The add on features on main feature."
+        }
+      }
+    },
+    "ApplicationInsightsComponentFeatureCapability": {
+      "type": "object",
+      "description": "An Application Insights component feature capability",
+      "properties": {
+        "Name": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The name of the capability."
+        },
+        "Description": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The description of the capability."
+        },
+        "Value": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The value of the capability."
+        },
+        "Unit": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The unit of the capability."
+        },
+        "MeterId": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The meter used for the capability."
+        },
+        "MeterRateFrequency": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The meter rate of the meter."
+        }
+      }
+    }
+  },
+  "parameters": {
+    "ResourceNameParameter": {
+      "name": "resourceName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the Application Insights component resource.",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}
