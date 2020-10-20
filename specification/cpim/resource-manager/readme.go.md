@@ -8,12 +8,20 @@ go:
   clear-output-folder: true
 ```
 
+### Tag: package-2019-01-01-preview and go
+
+These settings apply only when `--tag=package-2019-01-01-preview --go` is specified on the command line.
+Please also specify `--go-sdks-folder=<path to the root directory of your azure-sdk-for-go clone>`.
+
+```yaml $(tag) == 'package-2019-01-01-preview' && $(go)
+
 ### Tag: package-2020-05-01-preview and go
 
 These settings apply only when `--tag=package-2020-05-01-preview --go` is specified on the command line.
 Please also specify `--go-sdks-folder=<path to the root directory of your azure-sdk-for-go clone>`.
 
 ```yaml $(tag) == 'package-2020-05-01-preview' && $(go)
+
 namespace: Microsoft.AzureActiveDirectory
 output-folder: $(go-sdks-folder)/cpim/Generated
 ```

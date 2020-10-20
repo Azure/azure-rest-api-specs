@@ -1,0 +1,40 @@
+{
+    "parameters": {
+        "subscriptionId": "34adfa4f-cedf-4dc0-ba29-b6d1a69ab345",
+        "api-version": "2019-01-01-preview",
+        "resourceGroupName": "contosoResourceGroup",
+        "resourceName": "contoso.onmicrosoft.com",
+        "updateTenantRequestBody":{
+          "sku": {
+              "name": "PremiumP1"
+          },
+          "properties": {
+              "billingConfig": {
+                  "billingType": "MAU" 
+              }
+          },
+          "tags": {"key":"value"}
+        }
+     },
+    "responses": {
+      "200":{
+        "body":{
+          "type": "Microsoft.AzureActiveDirectory/b2cDirectories",
+          "sku": {
+              "name": "PremiumP1",
+              "tier": "A0"
+          },
+          "properties": {
+              "billingConfig": {
+                  "billingType": "MAU"
+              },
+              "tenantId": "00000000-0000-0000-0000-000000000000"
+          },
+          "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/contosoResourceGroup/providers/Microsoft.AzureActiveDirectory/b2cDirectories/contoso.onmicrosoft.com",
+          "name": "contoso.onmicrosoft.com",
+          "location": "United States",
+          "tags": {"key":"value"}
+        }
+      }
+    }
+  }

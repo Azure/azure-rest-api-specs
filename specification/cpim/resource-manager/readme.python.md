@@ -10,6 +10,7 @@ python:
   payload-flattening-threshold: 2
   namespace: Microsoft.AzureActiveDirectory
   package-name: cpim
+  package-version: 2019-01-01-preview
   package-version: 2020-05-01-preview
   clear-output-folder: true
 ```
