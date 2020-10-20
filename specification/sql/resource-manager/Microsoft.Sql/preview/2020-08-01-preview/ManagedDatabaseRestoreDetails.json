@@ -25,7 +25,7 @@
         "operationId": "ManagedDatabaseRestoreDetails_Get",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/ManagedInstanceNameParameter"
@@ -48,10 +48,10 @@
             }
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -62,7 +62,7 @@
             }
           },
           "default": {
-            "description": "*** Error Responses: ***\n\n * 400 MissingThumbprint - Can not find server certificate.\n\n * 400 BackupSetNotFound - \"No backups were found to restore the database. Please contact support to restore the database.\n\n * 400 FullBackupNotFound - Full backup can not be found.\n\n * 400 RestoreFromStripedBackupsNotEnabled - Restoring from striped backups is not supported.\n\n * 400 BrokenRestorePlanNoFullBackup - The restore plan is broken because there is no full backup.\n\n * 400 BrokenRestorePlanWrongLogBackupLSN - The restore plan is broken because firstLsn of current log backup is not <= lastLsn of next log backup.\n\n * 400 BrokenRestorePlanWrongDiffBackupLSN - The restore plan is broken because firstLsn of diff backup is not >= firstLsn of full backup.\n\n * 400 BrokenRestorePlanGapInLogBackups - The restore plan is broken because firstLsn of current log backup is not equal to lastLsn of prev log backup.\n\n * 400 XtpInitializedDuringRestore - Memory-optimized filegroup must be empty in order to be restored on General Purpose tier of SQL Database Managed Instance.\n\n * 400 FullBackupMissingChecksum - Provided full backup is missing checksum.\n\n * 400 FullBackupDamaged - Provided full backup is damaged.\n\n * 400 PartiallyContainedDatabaseUnsupported - \"Backup for a partially contained database is not supported.\"\n\n * 400 RequiredBackupIsNotLastRestored - Migration cannot be completed because provided backup file name is not the name of the last backup file that is restored.\n\n * 400 ManagedInstanceStorageLimitHit - The managed instance has reached its storage limit.\n\n * 400 IncompatiblePhysicalLayoutTooFewDataFiles - Database backup contains incompatible physical layout. No data files are found in the backup.\n\n * 400 IncompatiblePhysicalLayoutNonOnlineDataFilesExist - Database backup contains incompatible physical layout. Non-online data files exist.\n\n * 400 IncompatiblePhysicalLayoutWrongNumberOfLogFiles - Database backup contains incompatible physical layout. Multiple log files are not supported.\n\n * 400 IncompatiblePhysicalLayoutNonOnlineLogFilesExist - Database backup contains incompatible physical layout. Non-online log files exist.\n\n * 400 IncompatiblePhysicalLayoutTooManyNonDataLogFiles - Database backup contains incompatible physical layout. Too many non-data/log files.\n\n * 400 ExternalBackupAlreadySignaledToComplete - The restore request has already been signaled to complete.\n\n * 400 ExternalBackupRestoreHasNotBeenStarted - The restore request can only be completed once the restore has started.\n\n * 400 ExternalBackupUpgradeInProgress - The restore request cannot be completed, since upgrade is in progress.\n\n * 400 IncompatiblePhysicalLayoutTooManyXTPFiles - Database backup contains incompatible physical layout. Multiple files found in the filegroup that contains MEMORY_OPTIMIZED_DATA.\n\n * 400 BlobStorageFailure - Blob storage failure has occurred.\n\n * 400 ManagedDatabaseNotInRestoringState - Managed database is not in Restoring state."
+            "description": "*** Error Responses: ***\n\n * 400 MissingThumbprint - Can not find server certificate.\n\n * 400 BlobStorageServerFailure - Blob storage server failure has occurred.\n\n * 400 BackupSetNotFound - No backups were found to restore the database. Please contact support to restore the database.\n\n * 400 FullBackupNotFound - Full backup can not be found.\n\n * 400 RestoreFromStripedBackupsNotEnabled - Restoring from striped backups is not supported.\n\n * 400 BrokenRestorePlanNoFullBackup - The restore plan is broken because there is no full backup.\n\n * 400 BrokenRestorePlanWrongLogBackupLSN - The restore plan is broken because firstLsn of current log backup is not <= lastLsn of next log backup.\n\n * 400 BrokenRestorePlanWrongDiffBackupLSN - The restore plan is broken because firstLsn of diff backup is not >= firstLsn of full backup.\n\n * 400 BrokenRestorePlanGapInLogBackups - The restore plan is broken because firstLsn of current log backup is not equal to lastLsn of prev log backup.\n\n * 400 XtpInitializedDuringRestore - Memory-optimized filegroup must be empty in order to be restored on General Purpose tier of SQL Database Managed Instance.\n\n * 400 FullBackupMissingChecksum - Provided full backup is missing checksum.\n\n * 400 FullBackupDamaged - Provided full backup is damaged.\n\n * 400 PartiallyContainedDatabaseUnsupported - \"Backup for a partially contained database is not supported.\"\n\n * 400 RequiredBackupIsNotLastRestored - Migration cannot be completed because provided backup file name is not the name of the last backup file that is restored.\n\n * 400 ManagedInstanceStorageLimitHit - The managed instance has reached its storage limit.\n\n * 400 IncompatiblePhysicalLayoutTooFewDataFiles - Database backup contains incompatible physical layout. No data files are found in the backup.\n\n * 400 IncompatiblePhysicalLayoutNonOnlineDataFilesExist - Database backup contains incompatible physical layout. Non-online data files exist.\n\n * 400 IncompatiblePhysicalLayoutWrongNumberOfLogFiles - Database backup contains incompatible physical layout. Multiple log files are not supported.\n\n * 400 IncompatiblePhysicalLayoutNonOnlineLogFilesExist - Database backup contains incompatible physical layout. Non-online log files exist.\n\n * 400 IncompatiblePhysicalLayoutTooManyNonDataLogFiles - Database backup contains incompatible physical layout. Too many non-data/log files.\n\n * 400 ExternalBackupAlreadySignaledToComplete - The restore request has already been signaled to complete.\n\n * 400 ExternalBackupRestoreHasNotBeenStarted - The restore request can only be completed once the restore has started.\n\n * 400 ExternalBackupUpgradeInProgress - The restore request cannot be completed, since upgrade is in progress.\n\n * 400 IncompatiblePhysicalLayoutTooManyXTPFiles - Database backup contains incompatible physical layout. Multiple files found in the filegroup that contains MEMORY_OPTIMIZED_DATA.\n\n * 400 BlobStorageFailure - Blob storage failure has occurred.\n\n * 400 ManagedDatabaseNotInRestoringState - Managed database is not in Restoring state."
           }
         },
         "x-ms-examples": {
@@ -142,7 +142,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ProxyResource"
+          "$ref": "../../../common/v1/types.json#/definitions/ProxyResource"
         }
       ],
       "properties": {

@@ -25,7 +25,7 @@
         "operationId": "Databases_Export",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/ServerNameParameter"
@@ -43,10 +43,10 @@
             }
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -57,7 +57,7 @@
             }
           },
           "default": {
-            "description": "*** Error Responses: ***\n\n * 400 MissingImportExportInputParameters - Missing ImportExport input parameters.\n\n * 400 PolybaseImportAuthenticationTypeNotSupported - Authentication type parameter is not support for PolybaseImport operation.\n\n * 400 FeatureDisabledOnSelectedEdition - User attempted to use a feature which is disabled on current database edition.\n\n * 400 InvalidOperationType - Provide a valid operation type.\n\n * 404 ResourceNotFound - Invalid request specifying a non-existent resource.\n\n * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription.\n\n * 404 ImportExportOperationIdNotFound - The operation Id for import or export cannot be found.\n\n * 404 ServerNotInSubscription - Specified server does not exist on the specified subscription.\n\n * 409 ImportExportOperationInProgress - There is an import or export operation in progress on the database."
+            "description": "*** Error Responses: ***\n\n * 400 MissingImportExportInputParameters - Missing ImportExport input parameters.\n\n * 400 PolybaseImportAuthenticationTypeNotSupported - Authentication type parameter is not support for PolybaseImport operation.\n\n * 400 DatabaseExtensionsMissingOperationMode - Missing operationMode parameter for database extension.\n\n * 400 FeatureDisabledOnSelectedEdition - User attempted to use a feature which is disabled on current database edition.\n\n * 400 InvalidOperationType - Provide a valid operation type.\n\n * 404 ResourceNotFound - Invalid request specifying a non-existent resource.\n\n * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription.\n\n * 404 ImportExportOperationIdNotFound - The operation Id for import or export cannot be found.\n\n * 404 ServerNotInSubscription - Specified server does not exist on the specified subscription.\n\n * 409 ImportExportOperationInProgress - There is an import or export operation in progress on the database."
           },
           "202": {
             "description": "Exporting the database is in progress."
@@ -83,7 +83,7 @@
         "operationId": "Databases_Import",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/ServerNameParameter"
@@ -101,10 +101,10 @@
             }
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -115,7 +115,7 @@
             }
           },
           "default": {
-            "description": "*** Error Responses: ***\n\n * 400 MissingImportExportInputParameters - Missing ImportExport input parameters.\n\n * 400 PolybaseImportAuthenticationTypeNotSupported - Authentication type parameter is not support for PolybaseImport operation.\n\n * 400 FeatureDisabledOnSelectedEdition - User attempted to use a feature which is disabled on current database edition.\n\n * 400 InvalidOperationType - Provide a valid operation type.\n\n * 404 ResourceNotFound - Invalid request specifying a non-existent resource.\n\n * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription.\n\n * 404 ImportExportOperationIdNotFound - The operation Id for import or export cannot be found.\n\n * 404 ServerNotInSubscription - Specified server does not exist on the specified subscription.\n\n * 409 ImportExportOperationInProgress - There is an import or export operation in progress on the database."
+            "description": "*** Error Responses: ***\n\n * 400 MissingImportExportInputParameters - Missing ImportExport input parameters.\n\n * 400 PolybaseImportAuthenticationTypeNotSupported - Authentication type parameter is not support for PolybaseImport operation.\n\n * 400 DatabaseExtensionsMissingOperationMode - Missing operationMode parameter for database extension.\n\n * 400 FeatureDisabledOnSelectedEdition - User attempted to use a feature which is disabled on current database edition.\n\n * 400 InvalidOperationType - Provide a valid operation type.\n\n * 404 ResourceNotFound - Invalid request specifying a non-existent resource.\n\n * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription.\n\n * 404 ImportExportOperationIdNotFound - The operation Id for import or export cannot be found.\n\n * 404 ServerNotInSubscription - Specified server does not exist on the specified subscription.\n\n * 409 ImportExportOperationInProgress - There is an import or export operation in progress on the database."
           },
           "202": {
             "description": "Importing the database is in progress."
@@ -141,7 +141,7 @@
         "operationId": "Servers_ImportDatabase",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/ServerNameParameter"
@@ -156,10 +156,10 @@
             }
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -170,7 +170,7 @@
             }
           },
           "default": {
-            "description": "*** Error Responses: ***\n\n * 400 MissingImportExportInputParameters - Missing ImportExport input parameters.\n\n * 400 PolybaseImportAuthenticationTypeNotSupported - Authentication type parameter is not support for PolybaseImport operation.\n\n * 400 FeatureDisabledOnSelectedEdition - User attempted to use a feature which is disabled on current database edition.\n\n * 400 InvalidOperationType - Provide a valid operation type.\n\n * 404 ResourceNotFound - Invalid request specifying a non-existent resource.\n\n * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription.\n\n * 404 ImportExportOperationIdNotFound - The operation Id for import or export cannot be found.\n\n * 404 ServerNotInSubscription - Specified server does not exist on the specified subscription.\n\n * 409 ImportExportOperationInProgress - There is an import or export operation in progress on the database."
+            "description": "*** Error Responses: ***\n\n * 400 MissingImportExportInputParameters - Missing ImportExport input parameters.\n\n * 400 PolybaseImportAuthenticationTypeNotSupported - Authentication type parameter is not support for PolybaseImport operation.\n\n * 400 DatabaseExtensionsMissingOperationMode - Missing operationMode parameter for database extension.\n\n * 400 FeatureDisabledOnSelectedEdition - User attempted to use a feature which is disabled on current database edition.\n\n * 400 InvalidOperationType - Provide a valid operation type.\n\n * 404 ResourceNotFound - Invalid request specifying a non-existent resource.\n\n * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription.\n\n * 404 ImportExportOperationIdNotFound - The operation Id for import or export cannot be found.\n\n * 404 ServerNotInSubscription - Specified server does not exist on the specified subscription.\n\n * 409 ImportExportOperationInProgress - There is an import or export operation in progress on the database."
           },
           "202": {
             "description": "Importing the database is in progress."
@@ -365,7 +365,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ProxyResource"
+          "$ref": "../../../common/v1/types.json#/definitions/ProxyResource"
         }
       ],
       "properties": {

@@ -25,16 +25,16 @@
         "operationId": "ManagedInstances_ListMetricDefinitions",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/ManagedInstanceNameParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -67,7 +67,7 @@
         "operationId": "ManagedInstances_ListMetrics",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/ManagedInstanceNameParameter"
@@ -101,10 +101,10 @@
             "type": "string"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -137,7 +137,7 @@
         "operationId": "ManagedInstances_ListByManagedInstance",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/ManagedInstanceNameParameter"
@@ -223,10 +223,10 @@
             }
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -265,7 +265,7 @@
         "operationId": "ManagedInstances_Failover",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "managedInstanceName",
@@ -290,10 +290,10 @@
             }
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -324,7 +324,7 @@
         "operationId": "ManagedInstances_ListByInstancePool",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "instancePoolName",
@@ -334,10 +334,10 @@
             "type": "string"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -361,55 +361,6 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/export": {
-      "post": {
-        "tags": [
-          "ManagedInstances"
-        ],
-        "description": "Exports a managed instance.",
-        "operationId": "ManagedInstances_Export",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/ManagedInstanceNameParameter"
-          },
-          {
-            "name": "parameters",
-            "in": "body",
-            "description": "The managed instance export request parameters.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/ExportManagedInstanceDefinition"
-            }
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successfully exported the instance."
-          },
-          "default": {
-            "description": "*** Error Responses: ***\n\n * 400 InvalidOperationType - Provide a valid operation type.\n\n * 400 FeatureDisabledOnSelectedEdition - User attempted to use a feature which is disabled on current database edition.\n\n * 404 ResourceNotFound - Invalid request specifying a non-existent resource.\n\n * 404 ImportExportOperationIdNotFound - The operation Id for import or export cannot be found.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription.\n\n * 409 ImportExportOperationInProgress - There is an import or export operation in progress on the database."
-          },
-          "202": {
-            "description": "Exporting the instance is in progress."
-          }
-        },
-        "x-ms-long-running-operation": true,
-        "x-ms-examples": {
-          "Export a managed instance.": {
-            "$ref": "./examples/ExportManagedInstance.json"
-          }
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances": {
       "get": {
         "tags": [
@@ -419,13 +370,13 @@
         "operationId": "ManagedInstances_ListByResourceGroup",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -458,16 +409,16 @@
         "operationId": "ManagedInstances_Get",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/ManagedInstanceNameParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -495,7 +446,7 @@
         "operationId": "ManagedInstances_CreateOrUpdate",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/ManagedInstanceNameParameter"
@@ -510,10 +461,10 @@
             }
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -524,7 +475,7 @@
             }
           },
           "default": {
-            "description": "*** Error Responses: ***\n\n * 400 SubscriptionNotFound - The requested subscription was not found.\n\n * 400 HkCannotSwitchToInactive - The database cannot proceed with pricing-tier update as it has memory-optimized objects. Please drop such objects and try again.\n\n * 400 ManagedInstanceInvalidStorageSizeLessThenCurrentSizeUsed - Invalid storage size: Storage size limit ({0} GB) is less that current storage used ({1} GB). Please specify higher storage size limit.\n\n * 400 InstanceTimezoneUpdateNotSupported - Instance timezone update not supported.\n\n * 400 CreateManagedInstanceWithNonDefaultTimezoneNotSupported - Create Managed Instance with non-default timezone not supported.\n\n * 400 ManagedInstanceIpAddressRangeLimit - Cannot create a Managed Instance as there are not enough available ip addresses in the selected subnet\n\n * 400 VnetDelegationNotAllowed - User tried to inject Managed Server to subnet which is delegated.\n\n * 400 SubnetHasResourcesOfDifferentType - User tried to create MI in subnet that has resources of different type.\n\n * 400 UpdateManagedServerWithMaintenanceWindowNotAllowed - Update of Managed Instance with maintenance window settings is not allowed.\n\n * 400 VnetPrepareNIPFailed - User tried to prepare subnet that has a conflict with NetworkIntentPolicy.\n\n * 400 InvalidUsername - Supplied user name contains invalid characters.\n\n * 400 ManagedInstanceDeprecatedHardwareFamily - Changing the hardware generation to deprecated {0} generation is not possible.\n\n * 400 ManagedInstanceBackupStorageTypeNotSupported - Backup storage type parameter is not allowed in the instance update operation.\n\n * 400 InvalidParameterValue - An invalid value was given to a parameter.\n\n * 400 ManagedInstanceUpdateWithZoneRedudancyNotSupported - Property with name zoneRedundant is specified but not supported in managed instance update operation. Please remove it from operation request and submit operation again.\n\n * 400 ManagedInstanceCreateWithZoneRedudancyNotSupported - Property with name zoneRedundant is specified but not supported in managed instance create operation. Please remove it from operation request and submit operation again.\n\n * 400 InstancePoolNotEnoughCapacity - An instance pool does not have enough capacity\n\n * 400 ServerNotFound - The requested server was not found.\n\n * 400 TokenTooLong - The provided token is too long.\n\n * 400 ManagedInstanceSloUpdateFailed - SLO '{0}' operation cannot succeed as the memory usage of '{1}' exceeds the quota.\n\n * 400 ManagedInstanceLocalStorageUpdateSloDisabled - Update SLO for managed instances with local storage is not supported yet.\n\n * 400 InvalidLoginName - The provided login name is invalid.\n\n * 400 RegionDoesNotSupportVersion - A user attempted to create a server of a specified version in a location where that server version isn't supported.\n\n * 400 PasswordTooShort - The provided password is too short\n\n * 400 PasswordTooLong - The provided password is too long.\n\n * 400 PasswordNotComplex - The provided password is not complex enough.\n\n * 400 GatewayInvalidEdition - '{0}' is not a valid database edition in this version of SQL Server.\n\n * 400 InvalidSubnetResourceId - The provided subnet resource ID for the managed instance create or update is invalid.\n\n * 400 SubscriptionNotFound - The requested subscription was not found.\n\n * 400 InvalidLocation - An invalid location was specified.\n\n * 400 VnetInWrongRegion - Virtual network is in wrong region.\n\n * 400 InvalidServerName - Invalid server name specified.\n\n * 400 VnetAddressRangeError - Virtual network address range is invalid.\n\n * 400 VnetConfigIsNotAllowed - Virtual network configuration is not allowed.\n\n * 400 InvalidCollation - Invalid collation.\n\n * 400 InvalidIdentifier - The identifier contains NULL or an invalid unicode character.\n\n * 400 ManagedInstanceClassicVnetNotSupported - Managed Instance cannot be joined to a classic virtual network.\n\n * 400 AlterDbDeactivatedNotSupported - Database Operation failed for Server '{0}', Database '{1}' due to unexpected delay. Please try again.\n\n * 400 RegionDoesNotAllowProvisioning - The selected location is not accepting new Windows Azure SQL Database servers. This may change at a later time.\n\n * 400 VnetConfigHasNsg - User tried to inject Managed Server subnet with Network Security Groups.\n\n * 400 VnetConfigHasNoUdr - User tried to inject Managed Server subnet without default User Defined Route Table.\n\n * 400 VnetConfigHasInvalidUdr - User tried to inject Managed Server subnet with invalid User Defined Route Table.\n\n * 400 VnetConfigHasInvalidDns - User tried to inject Managed Server subnet with invalid custom DNS.\n\n * 400 VnetConfigHasServiceEndpoints - User tried to inject Managed Server subnet with service endpoints.\n\n * 400 VnetSubnetIsInUse - User tried to inject Managed Server subnet that is not empty.\n\n * 400 VnetSubnetIsLocked - User tried to inject Managed Server subnet that is in locked scope.\n\n * 400 VnetSubnetIsGateway - User tried to inject Managed Server subnet that is Gateway subnet.\n\n * 400 VnetSubnetIsUnknown - User tried to inject Managed Server subnet that does not exist.\n\n * 400 VnetSubnetConflictWithIntendedPolicy - User tried to inject Managed Server subnet that has a conflict with IntendedPolicy.\n\n * 400 NameAlreadyExists - The provided name already exists.\n\n * 400 ManagedInstanceInvalidEditionForSku - The specified edition {0} is not consistent with the specified SKU {1}.\n\n * 400 ProvisioningDisabled - Displays error message from resources operation authorizer as is, without changes\n\n * 400 ManagedInstanceInvalidLicenseType - The specified license type {0} is not valid.\n\n * 400 ManagedInstanceUpdateSloInProgress - \"The operation could not be completed because a service tier change is in progress for managed instance '{0}.' Please wait for the operation in progress to complete and try again.\"\n\n * 400 VnetResourceNotFound - Resource not found: '{0}'.\n\n * 400 InvalidTimezone - Invalid timezone.\n\n * 400 UnableToResolveRemoteServer - The remote partner server name could not be resolved due to an invalid server name or DNS connectivity issues.\n\n * 400 InstanceCollationUpdateNotSupported - User cannot change instance collation on Managed Instance.\n\n * 400 CreateManagedInstanceWithNonDefaultCollationNotSupported - User can create a Managed Instance only with collation 'SQL_Latin1_General_CP1_CI_AS'.\n\n * 400 ManagedInstanceOperationInProgress - The operation could not be completed because {0} operation is in progress. Please wait for the operation in progress to complete and try again.\n\n * 400 ManagedInstanceExceedMaxAzureStorage - The operation could not be completed because total allocated storage size for General Purpose instance would exceed {0}. Please reduce the number of database files and retry operation.\n\n * 400 ManagedInstanceHasGeoReplica - The operation could not be completed because instance has configured geo replicated secondary instance.\n\n * 400 InvalidManagedServerDnsZonePartner - The resource URI of the geo-primary managed instance specified in the create request is invalid. Please ensure that the property is of the format /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/managedInstances/{managedInstanceName}\n\n * 400 MiGeoRestoreWithWrongBackupStorageRedundancy - Geo-Restore is not allowed for managed instances with LRS/ZRS backup storage redundancy.\n\n * 400 ProvisioningDisabled - Displays error message from resources operation authorizer as is, without changes\n\n * 400 ManagementServiceFeatureDisabled - User attempted to use a feature which is disabled.\n\n * 400 MismatchingResourceGroupNameWithUrl - The provided resource group name did not match the name in the Url.\n\n * 400 MismatchingSubscriptionWithUrl - The provided subscription did not match the subscription in the Url.\n\n * 400 InvalidMinimalTlsVersion - Invalid minimal TLS version.\n\n * 400 InvalidResourceId - Invalid resource identifier.\n\n * 400 InvalidMaintenanceWindowSettings - Invalid maintenance window settings.\n\n * 400 InvalidMaintenanceWindowProperty - Invalid maintenance window property was specified.\n\n * 400 InvalidMaintenanceWindowPropertyNull - Invalid maintenance window with required properties null.\n\n * 400 InvalidMaintenanceWindowTypeWithPropertySpecified - Maintenance window type must not have certain properties specified.\n\n * 404 ServerNotInSubscription - Specified server does not exist on the specified subscription.\n\n * 404 ManagedInstanceNotInSubscriptionResourceGroup - Specified managed instance does not exist in the specified resource group and subscription.\n\n * 404 OperationIdNotFound - The operation with Id does not exist.\n\n * 404 ResourceDoesNotExist - Resource with the name '{0}' does not exist. To continue, specify a valid resource name.\n\n * 404 ResourceNotFound - The requested resource was not found.\n\n * 405 InvalidVcoreValue - vCore value {0} is not valid. Please specify a valid vCore value.\n\n * 405 InvalidHardwareGenerationValue - HardwareGeneration {0} is not valid. Please specify a valid HardwareGeneration value.\n\n * 405 InvalidStorageSizeValue - \"Invalid storage size: {0} GB. Storage size must be specified between {1} and {2} gigabytes, in increments of {3} GB.\n\n * 409 OperationCancelled - The operation has been cancelled by user.\n\n * 409 OperationInterrupted - The operation on the resource could not be completed because it was interrupted by another operation on the same resource.\n\n * 409 ConflictingServerOperation - An operation is currently in progress for the server.\n\n * 409 SubscriptionDisabled - Subscription is disabled.\n\n * 409 ServerAlreadyExists - Duplicate server name.\n\n * 409 ServerOverridePreconditionFailed - Failed to apply server override on category '{0}', because physical db or instance '{1}' in server '{2}' is currently not in 'Ready' or 'Deactivated' state.\n\n * 409 ServerDisabled - Server is disabled.\n\n * 409 ManagedInstanceIsBusy - The server '{0}' is currently busy.  Please wait a few minutes before trying again.\n\n * 409 ServerQuotaExceeded - Server cannot be added to a subscription because it will exceed quota.\n\n * 409 ConflictingManagedInstanceOperation - An operation is currently in progress for the managed instance.\n\n * 409 MiDropFailedOnAuthLocks - User tried to drop last Managed Instance in subnet that has Lock applied on resource(s).\n\n * 409 MiCreateFailedNonDelegatedSubnet - User tried to deploy Managed Instance or Managed Instance pool in subnet that is not delegated to Microsoft.Sql/managedInstances.\n\n * 429 SubscriptionTooManyCreateUpdateRequests - Requests beyond max requests that can be processed by available resources.\n\n * 429 SubscriptionTooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 429 ConflictingSubscriptionOperation - An operation is currently in progress for the subscription.\n\n * 429 SubscriptionTooManyCreateUpdateRequests - Requests beyond max requests that can be processed by available resources.\n\n * 429 SubscriptionTooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 429 SubscriptionTooManyCreateUpdateRequests - Requests beyond max requests that can be processed by available resources.\n\n * 429 SubscriptionTooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 429 ConflictingSubscriptionOperation - An operation is currently in progress for the subscription.\n\n * 500 OperationTimedOut - The operation timed out and automatically rolled back. Please retry the operation.\n\n * 500 GatewayInternalServerError - The server encountered an unexpected exception.\n\n * 503 TooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 503 TooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 503 TooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 504 RequestTimeout - Service request exceeded the allowed timeout.\n\n * 504 RequestTimeout - Service request exceeded the allowed timeout.\n\n * 504 RequestTimeout - Service request exceeded the allowed timeout."
+            "description": "*** Error Responses: ***\n\n * 400 SubscriptionNotFound - The requested subscription was not found.\n\n * 400 HkCannotSwitchToInactive - The database cannot proceed with pricing-tier update as it has memory-optimized objects. Please drop such objects and try again.\n\n * 400 ManagedInstanceInvalidStorageSizeLessThenCurrentSizeUsed - Invalid storage size: Storage size limit ({0} GB) is less that current storage used ({1} GB). Please specify higher storage size limit.\n\n * 400 InstanceTimezoneUpdateNotSupported - Instance timezone update not supported.\n\n * 400 CreateManagedInstanceWithNonDefaultTimezoneNotSupported - Create Managed Instance with non-default timezone not supported.\n\n * 400 ManagedInstanceIpAddressRangeLimit - Cannot perform creation/scaling of the managed instance as there are not enough available IP addresses in the subnet for performing the operation.\n\n * 400 VnetDelegationNotAllowed - User tried to inject Managed Server to subnet which is delegated.\n\n * 400 SubnetHasResourcesOfDifferentType - User tried to create MI in subnet that has resources of different type.\n\n * 400 UpdateManagedServerWithMaintenanceWindowNotAllowed - Update of Managed Instance with maintenance window settings is not allowed.\n\n * 400 VnetPrepareNIPFailed - User tried to prepare subnet that has a conflict with NetworkIntentPolicy.\n\n * 400 InvalidUsername - Supplied user name contains invalid characters.\n\n * 400 ManagedInstanceDeprecatedHardwareFamily - Changing the hardware generation to deprecated {0} generation is not possible.\n\n * 400 ManagedInstanceBackupStorageTypeNotSupported - Backup storage type parameter is not allowed in the instance update operation.\n\n * 400 InvalidParameterValue - An invalid value was given to a parameter.\n\n * 400 ManagedInstanceUpdateWithZoneRedudancyNotSupported - Property with name zoneRedundant is specified but not supported in managed instance update operation. Please remove it from operation request and submit operation again.\n\n * 400 ManagedInstanceCreateWithZoneRedudancyNotSupported - Property with name zoneRedundant is specified but not supported in managed instance create operation. Please remove it from operation request and submit operation again.\n\n * 400 InstancePoolNotEnoughCapacity - An instance pool does not have enough capacity\n\n * 400 ServerNotFound - The requested server was not found.\n\n * 400 TokenTooLong - The provided token is too long.\n\n * 400 ManagedInstanceSloUpdateFailed - SLO '{0}' operation cannot succeed as the memory usage of '{1}' exceeds the quota.\n\n * 400 ManagedInstanceLocalStorageUpdateSloDisabled - Update SLO for managed instances with local storage is not supported yet.\n\n * 400 InvalidLoginName - The provided login name is invalid.\n\n * 400 RegionDoesNotSupportVersion - A user attempted to create a server of a specified version in a location where that server version isn't supported.\n\n * 400 PasswordTooShort - The provided password is too short\n\n * 400 PasswordTooLong - The provided password is too long.\n\n * 400 PasswordNotComplex - The provided password is not complex enough.\n\n * 400 GatewayInvalidEdition - '{0}' is not a valid database edition in this version of SQL Server.\n\n * 400 InvalidSubnetResourceId - The provided subnet resource ID for the managed instance create or update is invalid.\n\n * 400 SubscriptionNotFound - The requested subscription was not found.\n\n * 400 InvalidLocation - An invalid location was specified.\n\n * 400 VnetInWrongRegion - Virtual network is in wrong region.\n\n * 400 InvalidServerName - Invalid server name specified.\n\n * 400 VnetAddressRangeError - Virtual network address range is invalid.\n\n * 400 VnetConfigIsNotAllowed - Virtual network configuration is not allowed.\n\n * 400 InvalidCollation - Invalid collation.\n\n * 400 InvalidIdentifier - The identifier contains NULL or an invalid unicode character.\n\n * 400 ManagedInstanceClassicVnetNotSupported - Managed Instance cannot be joined to a classic virtual network.\n\n * 400 AlterDbDeactivatedNotSupported - Database Operation failed for Server '{0}', Database '{1}' due to unexpected delay. Please try again.\n\n * 400 RegionDoesNotAllowProvisioning - The selected location is not accepting new Windows Azure SQL Database servers. This may change at a later time.\n\n * 400 VnetConfigHasNsg - User tried to inject Managed Server subnet with Network Security Groups.\n\n * 400 VnetConfigHasNoUdr - User tried to inject Managed Server subnet without default User Defined Route Table.\n\n * 400 VnetConfigHasInvalidUdr - User tried to inject Managed Server subnet with invalid User Defined Route Table.\n\n * 400 VnetConfigHasInvalidDns - User tried to inject Managed Server subnet with invalid custom DNS.\n\n * 400 VnetConfigHasServiceEndpoints - User tried to inject Managed Server subnet with service endpoints.\n\n * 400 VnetSubnetIsInUse - User tried to inject Managed Server subnet that is not empty.\n\n * 400 VnetSubnetIsLocked - User tried to inject Managed Server subnet that is in locked scope.\n\n * 400 VnetSubnetIsGateway - User tried to inject Managed Server subnet that is Gateway subnet.\n\n * 400 VnetSubnetIsUnknown - User tried to inject Managed Server subnet that does not exist.\n\n * 400 VnetSubnetConflictWithIntendedPolicy - User tried to inject Managed Server subnet that has a conflict with IntendedPolicy.\n\n * 400 NameAlreadyExists - The provided name already exists.\n\n * 400 ManagedInstanceInvalidEditionForSku - The specified edition {0} is not consistent with the specified SKU {1}.\n\n * 400 ProvisioningDisabled - Displays error message from resources operation authorizer as is, without changes\n\n * 400 ManagedInstanceInvalidLicenseType - The specified license type {0} is not valid.\n\n * 400 ManagedInstanceUpdateSloInProgress - \"The operation could not be completed because a service tier change is in progress for managed instance '{0}.' Please wait for the operation in progress to complete and try again.\"\n\n * 400 VnetResourceNotFound - Resource not found: '{0}'.\n\n * 400 InvalidTimezone - Invalid timezone.\n\n * 400 UnableToResolveRemoteServer - The remote partner server name could not be resolved due to an invalid server name or DNS connectivity issues.\n\n * 400 InstanceCollationUpdateNotSupported - User cannot change instance collation on Managed Instance.\n\n * 400 CreateManagedInstanceWithNonDefaultCollationNotSupported - User can create a Managed Instance only with collation 'SQL_Latin1_General_CP1_CI_AS'.\n\n * 400 ManagedInstanceOperationInProgress - The operation could not be completed because {0} operation is in progress. Please wait for the operation in progress to complete and try again.\n\n * 400 ManagedInstanceExceedMaxAzureStorage - The operation could not be completed because total allocated storage size for General Purpose instance would exceed {0}. Please reduce the number of database files and retry operation.\n\n * 400 ManagedInstanceHasGeoReplica - The operation could not be completed because instance has configured geo replicated secondary instance.\n\n * 400 InvalidManagedServerDnsZonePartner - The resource URI of the geo-primary managed instance specified in the create request is invalid. Please ensure that the property is of the format /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/managedInstances/{managedInstanceName}\n\n * 400 MiGeoRestoreWithWrongBackupStorageRedundancy - Geo-Restore is not allowed for managed instances with LRS/ZRS backup storage redundancy.\n\n * 400 ProvisioningDisabled - Displays error message from resources operation authorizer as is, without changes\n\n * 400 ManagementServiceFeatureDisabled - User attempted to use a feature which is disabled.\n\n * 400 MismatchingResourceGroupNameWithUrl - The provided resource group name did not match the name in the Url.\n\n * 400 MismatchingSubscriptionWithUrl - The provided subscription did not match the subscription in the Url.\n\n * 400 InvalidMinimalTlsVersion - Invalid minimal TLS version.\n\n * 400 InvalidResourceId - Invalid resource identifier.\n\n * 400 InvalidParameterValue - An invalid value was given to a parameter.\n\n * 400 InvalidMaintenanceWindowSettings - Invalid maintenance window settings.\n\n * 400 InvalidMaintenanceWindowProperty - Invalid maintenance window property was specified.\n\n * 400 InvalidMaintenanceWindowPropertyNull - Invalid maintenance window with required properties null.\n\n * 400 InvalidMaintenanceWindowTypeWithPropertySpecified - Maintenance window type must not have certain properties specified.\n\n * 404 ServerNotInSubscription - Specified server does not exist on the specified subscription.\n\n * 404 ManagedInstanceNotInSubscriptionResourceGroup - Specified managed instance does not exist in the specified resource group and subscription.\n\n * 404 OperationIdNotFound - The operation with Id does not exist.\n\n * 404 ResourceDoesNotExist - Resource with the name '{0}' does not exist. To continue, specify a valid resource name.\n\n * 404 ResourceNotFound - The requested resource was not found.\n\n * 405 InvalidVcoreValue - vCore value {0} is not valid. Please specify a valid vCore value.\n\n * 405 InvalidHardwareGenerationValue - HardwareGeneration {0} is not valid. Please specify a valid HardwareGeneration value.\n\n * 405 InvalidStorageSizeValue - \"Invalid storage size: {0} GB. Storage size must be specified between {1} and {2} gigabytes, in increments of {3} GB.\n\n * 409 OperationCancelled - The operation has been cancelled by user.\n\n * 409 OperationInterrupted - The operation on the resource could not be completed because it was interrupted by another operation on the same resource.\n\n * 409 ConflictingServerOperation - An operation is currently in progress for the server.\n\n * 409 SubscriptionDisabled - Subscription is disabled.\n\n * 409 ServerAlreadyExists - Duplicate server name.\n\n * 409 ServerOverridePreconditionFailed - Failed to apply server override on category '{0}', because physical db or instance '{1}' in server '{2}' is currently not in 'Ready' or 'Deactivated' state.\n\n * 409 ServerDisabled - Server is disabled.\n\n * 409 ManagedInstanceIsBusy - The server '{0}' is currently busy.  Please wait a few minutes before trying again.\n\n * 409 ServerQuotaExceeded - Server cannot be added to a subscription because it will exceed quota.\n\n * 409 ConflictingManagedInstanceOperation - An operation is currently in progress for the managed instance.\n\n * 409 MiDropFailedOnAuthLocks - User tried to drop last Managed Instance in subnet that has Lock applied on resource(s).\n\n * 409 MiCreateFailedNonDelegatedSubnet - User tried to deploy Managed Instance or Managed Instance pool in subnet that is not delegated to Microsoft.Sql/managedInstances.\n\n * 429 SubscriptionTooManyCreateUpdateRequests - Requests beyond max requests that can be processed by available resources.\n\n * 429 SubscriptionTooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 429 ConflictingSubscriptionOperation - An operation is currently in progress for the subscription.\n\n * 429 SubscriptionTooManyCreateUpdateRequests - Requests beyond max requests that can be processed by available resources.\n\n * 429 SubscriptionTooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 429 SubscriptionTooManyCreateUpdateRequests - Requests beyond max requests that can be processed by available resources.\n\n * 429 SubscriptionTooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 429 ConflictingSubscriptionOperation - An operation is currently in progress for the subscription.\n\n * 500 OperationTimedOut - The operation timed out and automatically rolled back. Please retry the operation.\n\n * 500 GatewayInternalServerError - The server encountered an unexpected exception.\n\n * 503 TooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 503 TooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 503 TooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 504 RequestTimeout - Service request exceeded the allowed timeout.\n\n * 504 RequestTimeout - Service request exceeded the allowed timeout.\n\n * 504 RequestTimeout - Service request exceeded the allowed timeout."
           },
           "202": {
             "description": "Accepted"
@@ -554,16 +505,16 @@
         "operationId": "ManagedInstances_Delete",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/ManagedInstanceNameParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -595,7 +546,7 @@
         "operationId": "ManagedInstances_Update",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/ManagedInstanceNameParameter"
@@ -610,10 +561,10 @@
             }
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -624,7 +575,7 @@
             }
           },
           "default": {
-            "description": "*** Error Responses: ***\n\n * 400 SubscriptionNotFound - The requested subscription was not found.\n\n * 400 HkCannotSwitchToInactive - The database cannot proceed with pricing-tier update as it has memory-optimized objects. Please drop such objects and try again.\n\n * 400 ManagedInstanceInvalidStorageSizeLessThenCurrentSizeUsed - Invalid storage size: Storage size limit ({0} GB) is less that current storage used ({1} GB). Please specify higher storage size limit.\n\n * 400 InstanceTimezoneUpdateNotSupported - Instance timezone update not supported.\n\n * 400 CreateManagedInstanceWithNonDefaultTimezoneNotSupported - Create Managed Instance with non-default timezone not supported.\n\n * 400 ManagedInstanceIpAddressRangeLimit - Cannot create a Managed Instance as there are not enough available ip addresses in the selected subnet\n\n * 400 VnetDelegationNotAllowed - User tried to inject Managed Server to subnet which is delegated.\n\n * 400 SubnetHasResourcesOfDifferentType - User tried to create MI in subnet that has resources of different type.\n\n * 400 UpdateManagedServerWithMaintenanceWindowNotAllowed - Update of Managed Instance with maintenance window settings is not allowed.\n\n * 400 VnetPrepareNIPFailed - User tried to prepare subnet that has a conflict with NetworkIntentPolicy.\n\n * 400 InvalidUsername - Supplied user name contains invalid characters.\n\n * 400 ManagedInstanceDeprecatedHardwareFamily - Changing the hardware generation to deprecated {0} generation is not possible.\n\n * 400 ManagedInstanceBackupStorageTypeNotSupported - Backup storage type parameter is not allowed in the instance update operation.\n\n * 400 InvalidParameterValue - An invalid value was given to a parameter.\n\n * 400 ManagedInstanceUpdateWithZoneRedudancyNotSupported - Property with name zoneRedundant is specified but not supported in managed instance update operation. Please remove it from operation request and submit operation again.\n\n * 400 ManagedInstanceCreateWithZoneRedudancyNotSupported - Property with name zoneRedundant is specified but not supported in managed instance create operation. Please remove it from operation request and submit operation again.\n\n * 400 InstancePoolNotEnoughCapacity - An instance pool does not have enough capacity\n\n * 400 ServerNotFound - The requested server was not found.\n\n * 400 TokenTooLong - The provided token is too long.\n\n * 400 ManagedInstanceSloUpdateFailed - SLO '{0}' operation cannot succeed as the memory usage of '{1}' exceeds the quota.\n\n * 400 ManagedInstanceLocalStorageUpdateSloDisabled - Update SLO for managed instances with local storage is not supported yet.\n\n * 400 InvalidLoginName - The provided login name is invalid.\n\n * 400 RegionDoesNotSupportVersion - A user attempted to create a server of a specified version in a location where that server version isn't supported.\n\n * 400 PasswordTooShort - The provided password is too short\n\n * 400 PasswordTooLong - The provided password is too long.\n\n * 400 PasswordNotComplex - The provided password is not complex enough.\n\n * 400 GatewayInvalidEdition - '{0}' is not a valid database edition in this version of SQL Server.\n\n * 400 InvalidSubnetResourceId - The provided subnet resource ID for the managed instance create or update is invalid.\n\n * 400 SubscriptionNotFound - The requested subscription was not found.\n\n * 400 InvalidLocation - An invalid location was specified.\n\n * 400 VnetInWrongRegion - Virtual network is in wrong region.\n\n * 400 InvalidServerName - Invalid server name specified.\n\n * 400 VnetAddressRangeError - Virtual network address range is invalid.\n\n * 400 VnetConfigIsNotAllowed - Virtual network configuration is not allowed.\n\n * 400 InvalidCollation - Invalid collation.\n\n * 400 InvalidIdentifier - The identifier contains NULL or an invalid unicode character.\n\n * 400 ManagedInstanceClassicVnetNotSupported - Managed Instance cannot be joined to a classic virtual network.\n\n * 400 AlterDbDeactivatedNotSupported - Database Operation failed for Server '{0}', Database '{1}' due to unexpected delay. Please try again.\n\n * 400 RegionDoesNotAllowProvisioning - The selected location is not accepting new Windows Azure SQL Database servers. This may change at a later time.\n\n * 400 VnetConfigHasNsg - User tried to inject Managed Server subnet with Network Security Groups.\n\n * 400 VnetConfigHasNoUdr - User tried to inject Managed Server subnet without default User Defined Route Table.\n\n * 400 VnetConfigHasInvalidUdr - User tried to inject Managed Server subnet with invalid User Defined Route Table.\n\n * 400 VnetConfigHasInvalidDns - User tried to inject Managed Server subnet with invalid custom DNS.\n\n * 400 VnetConfigHasServiceEndpoints - User tried to inject Managed Server subnet with service endpoints.\n\n * 400 VnetSubnetIsInUse - User tried to inject Managed Server subnet that is not empty.\n\n * 400 VnetSubnetIsLocked - User tried to inject Managed Server subnet that is in locked scope.\n\n * 400 VnetSubnetIsGateway - User tried to inject Managed Server subnet that is Gateway subnet.\n\n * 400 VnetSubnetIsUnknown - User tried to inject Managed Server subnet that does not exist.\n\n * 400 VnetSubnetConflictWithIntendedPolicy - User tried to inject Managed Server subnet that has a conflict with IntendedPolicy.\n\n * 400 NameAlreadyExists - The provided name already exists.\n\n * 400 ManagedInstanceInvalidEditionForSku - The specified edition {0} is not consistent with the specified SKU {1}.\n\n * 400 ProvisioningDisabled - Displays error message from resources operation authorizer as is, without changes\n\n * 400 ManagedInstanceInvalidLicenseType - The specified license type {0} is not valid.\n\n * 400 ManagedInstanceUpdateSloInProgress - \"The operation could not be completed because a service tier change is in progress for managed instance '{0}.' Please wait for the operation in progress to complete and try again.\"\n\n * 400 VnetResourceNotFound - Resource not found: '{0}'.\n\n * 400 InvalidTimezone - Invalid timezone.\n\n * 400 UnableToResolveRemoteServer - The remote partner server name could not be resolved due to an invalid server name or DNS connectivity issues.\n\n * 400 InstanceCollationUpdateNotSupported - User cannot change instance collation on Managed Instance.\n\n * 400 CreateManagedInstanceWithNonDefaultCollationNotSupported - User can create a Managed Instance only with collation 'SQL_Latin1_General_CP1_CI_AS'.\n\n * 400 ManagedInstanceOperationInProgress - The operation could not be completed because {0} operation is in progress. Please wait for the operation in progress to complete and try again.\n\n * 400 ManagedInstanceExceedMaxAzureStorage - The operation could not be completed because total allocated storage size for General Purpose instance would exceed {0}. Please reduce the number of database files and retry operation.\n\n * 400 ManagedInstanceHasGeoReplica - The operation could not be completed because instance has configured geo replicated secondary instance.\n\n * 400 MiGeoRestoreWithWrongBackupStorageRedundancy - Geo-Restore is not allowed for managed instances with LRS/ZRS backup storage redundancy.\n\n * 400 ProvisioningDisabled - Displays error message from resources operation authorizer as is, without changes\n\n * 400 ManagementServiceFeatureDisabled - User attempted to use a feature which is disabled.\n\n * 400 MismatchingResourceGroupNameWithUrl - The provided resource group name did not match the name in the Url.\n\n * 400 MismatchingSubscriptionWithUrl - The provided subscription did not match the subscription in the Url.\n\n * 400 InvalidMinimalTlsVersion - Invalid minimal TLS version.\n\n * 400 InvalidResourceId - Invalid resource identifier.\n\n * 400 InvalidMaintenanceWindowSettings - Invalid maintenance window settings.\n\n * 400 InvalidMaintenanceWindowProperty - Invalid maintenance window property was specified.\n\n * 400 InvalidMaintenanceWindowPropertyNull - Invalid maintenance window with required properties null.\n\n * 400 InvalidMaintenanceWindowTypeWithPropertySpecified - Maintenance window type must not have certain properties specified.\n\n * 404 ServerNotInSubscription - Specified server does not exist on the specified subscription.\n\n * 404 ManagedInstanceNotInSubscriptionResourceGroup - Specified managed instance does not exist in the specified resource group and subscription.\n\n * 404 OperationIdNotFound - The operation with Id does not exist.\n\n * 404 ResourceDoesNotExist - Resource with the name '{0}' does not exist. To continue, specify a valid resource name.\n\n * 404 ResourceNotFound - The requested resource was not found.\n\n * 405 InvalidVcoreValue - vCore value {0} is not valid. Please specify a valid vCore value.\n\n * 405 InvalidHardwareGenerationValue - HardwareGeneration {0} is not valid. Please specify a valid HardwareGeneration value.\n\n * 405 InvalidStorageSizeValue - \"Invalid storage size: {0} GB. Storage size must be specified between {1} and {2} gigabytes, in increments of {3} GB.\n\n * 409 OperationCancelled - The operation has been cancelled by user.\n\n * 409 OperationInterrupted - The operation on the resource could not be completed because it was interrupted by another operation on the same resource.\n\n * 409 ConflictingServerOperation - An operation is currently in progress for the server.\n\n * 409 SubscriptionDisabled - Subscription is disabled.\n\n * 409 ServerAlreadyExists - Duplicate server name.\n\n * 409 ServerOverridePreconditionFailed - Failed to apply server override on category '{0}', because physical db or instance '{1}' in server '{2}' is currently not in 'Ready' or 'Deactivated' state.\n\n * 409 ServerDisabled - Server is disabled.\n\n * 409 ManagedInstanceIsBusy - The server '{0}' is currently busy.  Please wait a few minutes before trying again.\n\n * 409 ServerQuotaExceeded - Server cannot be added to a subscription because it will exceed quota.\n\n * 409 ConflictingManagedInstanceOperation - An operation is currently in progress for the managed instance.\n\n * 409 MiDropFailedOnAuthLocks - User tried to drop last Managed Instance in subnet that has Lock applied on resource(s).\n\n * 409 MiCreateFailedNonDelegatedSubnet - User tried to deploy Managed Instance or Managed Instance pool in subnet that is not delegated to Microsoft.Sql/managedInstances.\n\n * 429 SubscriptionTooManyCreateUpdateRequests - Requests beyond max requests that can be processed by available resources.\n\n * 429 SubscriptionTooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 429 ConflictingSubscriptionOperation - An operation is currently in progress for the subscription.\n\n * 429 SubscriptionTooManyCreateUpdateRequests - Requests beyond max requests that can be processed by available resources.\n\n * 429 SubscriptionTooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 429 SubscriptionTooManyCreateUpdateRequests - Requests beyond max requests that can be processed by available resources.\n\n * 429 SubscriptionTooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 429 ConflictingSubscriptionOperation - An operation is currently in progress for the subscription.\n\n * 500 OperationTimedOut - The operation timed out and automatically rolled back. Please retry the operation.\n\n * 500 GatewayInternalServerError - The server encountered an unexpected exception.\n\n * 503 TooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 503 TooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 503 TooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 504 RequestTimeout - Service request exceeded the allowed timeout.\n\n * 504 RequestTimeout - Service request exceeded the allowed timeout.\n\n * 504 RequestTimeout - Service request exceeded the allowed timeout."
+            "description": "*** Error Responses: ***\n\n * 400 SubscriptionNotFound - The requested subscription was not found.\n\n * 400 HkCannotSwitchToInactive - The database cannot proceed with pricing-tier update as it has memory-optimized objects. Please drop such objects and try again.\n\n * 400 ManagedInstanceInvalidStorageSizeLessThenCurrentSizeUsed - Invalid storage size: Storage size limit ({0} GB) is less that current storage used ({1} GB). Please specify higher storage size limit.\n\n * 400 InstanceTimezoneUpdateNotSupported - Instance timezone update not supported.\n\n * 400 CreateManagedInstanceWithNonDefaultTimezoneNotSupported - Create Managed Instance with non-default timezone not supported.\n\n * 400 ManagedInstanceIpAddressRangeLimit - Cannot perform creation/scaling of the managed instance as there are not enough available IP addresses in the subnet for performing the operation.\n\n * 400 VnetDelegationNotAllowed - User tried to inject Managed Server to subnet which is delegated.\n\n * 400 SubnetHasResourcesOfDifferentType - User tried to create MI in subnet that has resources of different type.\n\n * 400 UpdateManagedServerWithMaintenanceWindowNotAllowed - Update of Managed Instance with maintenance window settings is not allowed.\n\n * 400 VnetPrepareNIPFailed - User tried to prepare subnet that has a conflict with NetworkIntentPolicy.\n\n * 400 InvalidUsername - Supplied user name contains invalid characters.\n\n * 400 ManagedInstanceDeprecatedHardwareFamily - Changing the hardware generation to deprecated {0} generation is not possible.\n\n * 400 ManagedInstanceBackupStorageTypeNotSupported - Backup storage type parameter is not allowed in the instance update operation.\n\n * 400 InvalidParameterValue - An invalid value was given to a parameter.\n\n * 400 ManagedInstanceUpdateWithZoneRedudancyNotSupported - Property with name zoneRedundant is specified but not supported in managed instance update operation. Please remove it from operation request and submit operation again.\n\n * 400 ManagedInstanceCreateWithZoneRedudancyNotSupported - Property with name zoneRedundant is specified but not supported in managed instance create operation. Please remove it from operation request and submit operation again.\n\n * 400 InstancePoolNotEnoughCapacity - An instance pool does not have enough capacity\n\n * 400 ServerNotFound - The requested server was not found.\n\n * 400 TokenTooLong - The provided token is too long.\n\n * 400 ManagedInstanceSloUpdateFailed - SLO '{0}' operation cannot succeed as the memory usage of '{1}' exceeds the quota.\n\n * 400 ManagedInstanceLocalStorageUpdateSloDisabled - Update SLO for managed instances with local storage is not supported yet.\n\n * 400 InvalidLoginName - The provided login name is invalid.\n\n * 400 RegionDoesNotSupportVersion - A user attempted to create a server of a specified version in a location where that server version isn't supported.\n\n * 400 PasswordTooShort - The provided password is too short\n\n * 400 PasswordTooLong - The provided password is too long.\n\n * 400 PasswordNotComplex - The provided password is not complex enough.\n\n * 400 GatewayInvalidEdition - '{0}' is not a valid database edition in this version of SQL Server.\n\n * 400 InvalidSubnetResourceId - The provided subnet resource ID for the managed instance create or update is invalid.\n\n * 400 SubscriptionNotFound - The requested subscription was not found.\n\n * 400 InvalidLocation - An invalid location was specified.\n\n * 400 VnetInWrongRegion - Virtual network is in wrong region.\n\n * 400 InvalidServerName - Invalid server name specified.\n\n * 400 VnetAddressRangeError - Virtual network address range is invalid.\n\n * 400 VnetConfigIsNotAllowed - Virtual network configuration is not allowed.\n\n * 400 InvalidCollation - Invalid collation.\n\n * 400 InvalidIdentifier - The identifier contains NULL or an invalid unicode character.\n\n * 400 ManagedInstanceClassicVnetNotSupported - Managed Instance cannot be joined to a classic virtual network.\n\n * 400 AlterDbDeactivatedNotSupported - Database Operation failed for Server '{0}', Database '{1}' due to unexpected delay. Please try again.\n\n * 400 RegionDoesNotAllowProvisioning - The selected location is not accepting new Windows Azure SQL Database servers. This may change at a later time.\n\n * 400 VnetConfigHasNsg - User tried to inject Managed Server subnet with Network Security Groups.\n\n * 400 VnetConfigHasNoUdr - User tried to inject Managed Server subnet without default User Defined Route Table.\n\n * 400 VnetConfigHasInvalidUdr - User tried to inject Managed Server subnet with invalid User Defined Route Table.\n\n * 400 VnetConfigHasInvalidDns - User tried to inject Managed Server subnet with invalid custom DNS.\n\n * 400 VnetConfigHasServiceEndpoints - User tried to inject Managed Server subnet with service endpoints.\n\n * 400 VnetSubnetIsInUse - User tried to inject Managed Server subnet that is not empty.\n\n * 400 VnetSubnetIsLocked - User tried to inject Managed Server subnet that is in locked scope.\n\n * 400 VnetSubnetIsGateway - User tried to inject Managed Server subnet that is Gateway subnet.\n\n * 400 VnetSubnetIsUnknown - User tried to inject Managed Server subnet that does not exist.\n\n * 400 VnetSubnetConflictWithIntendedPolicy - User tried to inject Managed Server subnet that has a conflict with IntendedPolicy.\n\n * 400 NameAlreadyExists - The provided name already exists.\n\n * 400 ManagedInstanceInvalidEditionForSku - The specified edition {0} is not consistent with the specified SKU {1}.\n\n * 400 ProvisioningDisabled - Displays error message from resources operation authorizer as is, without changes\n\n * 400 ManagedInstanceInvalidLicenseType - The specified license type {0} is not valid.\n\n * 400 ManagedInstanceUpdateSloInProgress - \"The operation could not be completed because a service tier change is in progress for managed instance '{0}.' Please wait for the operation in progress to complete and try again.\"\n\n * 400 VnetResourceNotFound - Resource not found: '{0}'.\n\n * 400 InvalidTimezone - Invalid timezone.\n\n * 400 UnableToResolveRemoteServer - The remote partner server name could not be resolved due to an invalid server name or DNS connectivity issues.\n\n * 400 InstanceCollationUpdateNotSupported - User cannot change instance collation on Managed Instance.\n\n * 400 CreateManagedInstanceWithNonDefaultCollationNotSupported - User can create a Managed Instance only with collation 'SQL_Latin1_General_CP1_CI_AS'.\n\n * 400 ManagedInstanceOperationInProgress - The operation could not be completed because {0} operation is in progress. Please wait for the operation in progress to complete and try again.\n\n * 400 ManagedInstanceExceedMaxAzureStorage - The operation could not be completed because total allocated storage size for General Purpose instance would exceed {0}. Please reduce the number of database files and retry operation.\n\n * 400 ManagedInstanceHasGeoReplica - The operation could not be completed because instance has configured geo replicated secondary instance.\n\n * 400 MiGeoRestoreWithWrongBackupStorageRedundancy - Geo-Restore is not allowed for managed instances with LRS/ZRS backup storage redundancy.\n\n * 400 ProvisioningDisabled - Displays error message from resources operation authorizer as is, without changes\n\n * 400 ManagementServiceFeatureDisabled - User attempted to use a feature which is disabled.\n\n * 400 MismatchingResourceGroupNameWithUrl - The provided resource group name did not match the name in the Url.\n\n * 400 MismatchingSubscriptionWithUrl - The provided subscription did not match the subscription in the Url.\n\n * 400 InvalidMinimalTlsVersion - Invalid minimal TLS version.\n\n * 400 InvalidResourceId - Invalid resource identifier.\n\n * 400 InvalidParameterValue - An invalid value was given to a parameter.\n\n * 400 InvalidMaintenanceWindowSettings - Invalid maintenance window settings.\n\n * 400 InvalidMaintenanceWindowProperty - Invalid maintenance window property was specified.\n\n * 400 InvalidMaintenanceWindowPropertyNull - Invalid maintenance window with required properties null.\n\n * 400 InvalidMaintenanceWindowTypeWithPropertySpecified - Maintenance window type must not have certain properties specified.\n\n * 404 ServerNotInSubscription - Specified server does not exist on the specified subscription.\n\n * 404 ManagedInstanceNotInSubscriptionResourceGroup - Specified managed instance does not exist in the specified resource group and subscription.\n\n * 404 OperationIdNotFound - The operation with Id does not exist.\n\n * 404 ResourceDoesNotExist - Resource with the name '{0}' does not exist. To continue, specify a valid resource name.\n\n * 404 ResourceNotFound - The requested resource was not found.\n\n * 405 InvalidVcoreValue - vCore value {0} is not valid. Please specify a valid vCore value.\n\n * 405 InvalidHardwareGenerationValue - HardwareGeneration {0} is not valid. Please specify a valid HardwareGeneration value.\n\n * 405 InvalidStorageSizeValue - \"Invalid storage size: {0} GB. Storage size must be specified between {1} and {2} gigabytes, in increments of {3} GB.\n\n * 409 OperationCancelled - The operation has been cancelled by user.\n\n * 409 OperationInterrupted - The operation on the resource could not be completed because it was interrupted by another operation on the same resource.\n\n * 409 ConflictingServerOperation - An operation is currently in progress for the server.\n\n * 409 SubscriptionDisabled - Subscription is disabled.\n\n * 409 ServerAlreadyExists - Duplicate server name.\n\n * 409 ServerOverridePreconditionFailed - Failed to apply server override on category '{0}', because physical db or instance '{1}' in server '{2}' is currently not in 'Ready' or 'Deactivated' state.\n\n * 409 ServerDisabled - Server is disabled.\n\n * 409 ManagedInstanceIsBusy - The server '{0}' is currently busy.  Please wait a few minutes before trying again.\n\n * 409 ServerQuotaExceeded - Server cannot be added to a subscription because it will exceed quota.\n\n * 409 ConflictingManagedInstanceOperation - An operation is currently in progress for the managed instance.\n\n * 409 MiDropFailedOnAuthLocks - User tried to drop last Managed Instance in subnet that has Lock applied on resource(s).\n\n * 409 MiCreateFailedNonDelegatedSubnet - User tried to deploy Managed Instance or Managed Instance pool in subnet that is not delegated to Microsoft.Sql/managedInstances.\n\n * 429 SubscriptionTooManyCreateUpdateRequests - Requests beyond max requests that can be processed by available resources.\n\n * 429 SubscriptionTooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 429 ConflictingSubscriptionOperation - An operation is currently in progress for the subscription.\n\n * 429 SubscriptionTooManyCreateUpdateRequests - Requests beyond max requests that can be processed by available resources.\n\n * 429 SubscriptionTooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 429 SubscriptionTooManyCreateUpdateRequests - Requests beyond max requests that can be processed by available resources.\n\n * 429 SubscriptionTooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 429 ConflictingSubscriptionOperation - An operation is currently in progress for the subscription.\n\n * 500 OperationTimedOut - The operation timed out and automatically rolled back. Please retry the operation.\n\n * 500 GatewayInternalServerError - The server encountered an unexpected exception.\n\n * 503 TooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 503 TooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 503 TooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 504 RequestTimeout - Service request exceeded the allowed timeout.\n\n * 504 RequestTimeout - Service request exceeded the allowed timeout.\n\n * 504 RequestTimeout - Service request exceeded the allowed timeout."
           },
           "202": {
             "description": "Accepted"
@@ -650,10 +601,10 @@
         "operationId": "ManagedInstances_List",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -1463,7 +1414,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/TrackedResource"
+          "$ref": "../../../common/v1/types.json#/definitions/TrackedResource"
         }
       ],
       "properties": {
@@ -1476,7 +1427,7 @@
           ]
         },
         "sku": {
-          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/Sku",
+          "$ref": "../../../common/v1/types.json#/definitions/Sku",
           "description": "Managed instance SKU. Allowed values for sku.name: GP_Gen4, GP_Gen5, BC_Gen4, BC_Gen5"
         },
         "properties": {
@@ -1486,58 +1437,12 @@
         }
       }
     },
-    "ExportManagedInstanceDefinition": {
-      "required": [
-        "storageContainerSasToken",
-        "storageContainerUri"
-      ],
-      "type": "object",
-      "properties": {
-        "exportUserDatabases": {
-          "description": "The flag which value is used to either export user databases or not.",
-          "type": "boolean",
-          "x-ms-mutability": [
-            "create"
-          ]
-        },
-        "storageContainerSasToken": {
-          "description": "Tha storage container SAS token.",
-          "type": "string",
-          "x-ms-mutability": [
-            "create"
-          ]
-        },
-        "storageContainerUri": {
-          "description": "The URL of storage container.",
-          "type": "string",
-          "x-ms-mutability": [
-            "create"
-          ]
-        },
-        "readOnlyMode": {
-          "description": "The export read only mode to use.",
-          "enum": [
-            "None",
-            "ReadOnly",
-            "DenyAllConnections"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "ReadOnlyMode",
-            "modelAsString": true
-          },
-          "x-ms-mutability": [
-            "create"
-          ]
-        }
-      }
-    },
     "ManagedInstanceUpdate": {
       "description": "An update request for an Azure SQL Database managed instance.",
       "type": "object",
       "properties": {
         "sku": {
-          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/Sku",
+          "$ref": "../../../common/v1/types.json#/definitions/Sku",
           "description": "Managed instance sku"
         },
         "identity": {

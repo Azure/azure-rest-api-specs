@@ -606,6 +606,7 @@ input-file:
  - ./Microsoft.Sql/preview/2020-08-01-preview/DatabaseAdvisors.json
  - ./Microsoft.Sql/preview/2020-08-01-preview/DatabaseAutomaticTuning.json
  - ./Microsoft.Sql/preview/2020-08-01-preview/DatabaseColumns.json
+ - ./Microsoft.Sql/preview/2020-08-01-preview/DatabaseExtensions.json
  - ./Microsoft.Sql/preview/2020-08-01-preview/DatabaseOperations.json
  - ./Microsoft.Sql/preview/2020-08-01-preview/DatabaseRecommendedActions.json
  - ./Microsoft.Sql/preview/2020-08-01-preview/Databases.json
@@ -695,6 +696,7 @@ input-file:
  - ./Microsoft.Sql/preview/2020-08-01-preview/ServerOperations.json
  - ./Microsoft.Sql/preview/2020-08-01-preview/Servers.json
  - ./Microsoft.Sql/preview/2020-08-01-preview/ServerSecurityAlertPolicies.json
+ - ./Microsoft.Sql/preview/2020-08-01-preview/ServerTrustGroups.json
  - ./Microsoft.Sql/preview/2020-08-01-preview/ServerVulnerabilityAssessments.json
  - ./Microsoft.Sql/preview/2020-08-01-preview/SqlAgent.json
  - ./Microsoft.Sql/preview/2020-08-01-preview/SubscriptionUsages.json
