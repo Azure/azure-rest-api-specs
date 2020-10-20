@@ -1866,6 +1866,268 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/publishers/{publisherName}/artifacttypes/vmimage/offers/{offer}/skus/{skus}/versions/{version}": {
+      "get": {
+        "tags": [
+          "VirtualMachineImages"
+        ],
+        "operationId": "VirtualMachineImages_Get",
+        "description": "Gets a virtual machine image.",
+        "parameters": [
+          {
+            "name": "location",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of a supported Azure region."
+          },
+          {
+            "name": "publisherName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "A valid image publisher."
+          },
+          {
+            "name": "offer",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "A valid image publisher offer."
+          },
+          {
+            "name": "skus",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "A valid image SKU."
+          },
+          {
+            "name": "version",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "A valid image SKU version."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/VirtualMachineImage"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/publishers/{publisherName}/artifacttypes/vmimage/offers/{offer}/skus/{skus}/versions": {
+      "get": {
+        "tags": [
+          "VirtualMachineImages"
+        ],
+        "operationId": "VirtualMachineImages_List",
+        "description": "Gets a list of all virtual machine image versions for the specified location, publisher, offer, and SKU.",
+        "parameters": [
+          {
+            "name": "location",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of a supported Azure region."
+          },
+          {
+            "name": "publisherName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "A valid image publisher."
+          },
+          {
+            "name": "offer",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "A valid image publisher offer."
+          },
+          {
+            "name": "skus",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "A valid image SKU."
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "The expand expression to apply on the operation."
+          },
+          {
+            "name": "$top",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "$orderby",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/VirtualMachineImageResource"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/publishers/{publisherName}/artifacttypes/vmimage/offers": {
+      "get": {
+        "tags": [
+          "VirtualMachineImages"
+        ],
+        "operationId": "VirtualMachineImages_ListOffers",
+        "description": "Gets a list of virtual machine image offers for the specified location and publisher.",
+        "parameters": [
+          {
+            "name": "location",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of a supported Azure region."
+          },
+          {
+            "name": "publisherName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "A valid image publisher."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/VirtualMachineImageResource"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/publishers": {
+      "get": {
+        "tags": [
+          "VirtualMachineImages"
+        ],
+        "operationId": "VirtualMachineImages_ListPublishers",
+        "description": "Gets a list of virtual machine image publishers for the specified Azure location.",
+        "parameters": [
+          {
+            "name": "location",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of a supported Azure region."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/VirtualMachineImageResource"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/publishers/{publisherName}/artifacttypes/vmimage/offers/{offer}/skus": {
+      "get": {
+        "tags": [
+          "VirtualMachineImages"
+        ],
+        "operationId": "VirtualMachineImages_ListSkus",
+        "description": "Gets a list of virtual machine image SKUs for the specified location, publisher, and offer.",
+        "parameters": [
+          {
+            "name": "location",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of a supported Azure region."
+          },
+          {
+            "name": "publisherName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "A valid image publisher."
+          },
+          {
+            "name": "offer",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "A valid image publisher offer."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/VirtualMachineImageResource"
+              }
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/edgeZones/{edgeZone}/publishers/{publisherName}/artifacttypes/vmimage/offers/{offer}/skus/{skus}/versions/{version}": {
       "get": {
         "tags": [
