@@ -959,8 +959,7 @@
             "Succeeded",
             "Failed",
             "Cancelled",
-            "PendingRefunds",
-            "PendingPurchases"
+            "Pending"
           ],
           "x-ms-enum": {
             "name": "OperationResultStatus",
@@ -1041,16 +1040,16 @@
         },
         "reservationsToPurchase": {
           "type": "array",
-          "description": "Purchase details",
+          "description": "Details of the reservations being purchased",
           "items": {
-            "$ref": "#/definitions/CalculateExchangePriceDetails"
+            "$ref": "#/definitions/ReservationToPurchaseCalculateExchange"
           }
         },
         "reservationsToExchange": {
           "type": "array",
-          "description": "Refund details",
+          "description": "Details of the reservations being returned",
           "items": {
-            "$ref": "#/definitions/ReturnResponse"
+            "$ref": "#/definitions/ReservationToExchange"
           }
         },
         "policyResult": {
@@ -1076,16 +1075,16 @@
         },
         "reservationsToPurchase": {
           "type": "array",
-          "description": "Purchase details",
+          "description": "Details of the reservations being purchased",
           "items": {
-            "$ref": "#/definitions/ExchangePriceDetails"
+            "$ref": "#/definitions/ReservationToPurchaseExchange"
           }
         },
         "reservationsToExchange": {
           "type": "array",
-          "description": "Refund details",
+          "description": "Details of the reservations being returned",
           "items": {
-            "$ref": "#/definitions/ReturnResponse"
+            "$ref": "#/definitions/ReservationToExchange"
           }
         },
         "policyResult": {
@@ -1098,7 +1097,7 @@
       "properties": {
         "policyErrors": {
           "type": "array",
-          "description": "Returns any Exchange Policy errors",
+          "description": "Exchange Policy errors",
           "items": {
             "$ref": "#/definitions/ExchangePolicyError"
           }
@@ -1116,21 +1115,14 @@
         }
       }
     },
-    "ReturnResponse": {
+    "ReservationToExchange": {
       "type": "object",
+      "description": "Reservation refund details",
       "properties": {
-        "id": {
+        "reservationId": {
           "type": "string",
-          "description": "Fully qualified id of the ReservationOrder being returned."
+          "description": "Fully qualified id of the Reservation being returned."
         },
-        "properties": {
-          "$ref": "#/definitions/ReturnResponseProperties"
-        }
-      }
-    },
-    "ReturnResponseProperties": {
-      "type": "object",
-      "properties": {
         "quantity": {
           "type": "integer",
           "format": "int32",
@@ -1158,40 +1150,24 @@
         }
       }
     },
-    "CalculateExchangePriceDetails": {
+    "ReservationToPurchaseCalculateExchange": {
       "type": "object",
+      "description": "Reservation purchase details",
       "properties": {
-        "properties": {
-          "$ref": "#/definitions/CalculateExchangePriceDetailsProperties"
-        }
-      }
-    },
-    "ExchangePriceDetails": {
-      "type": "object",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/ExchangePriceDetailsProperties"
-        }
-      }
-    },
-    "CalculateExchangePriceDetailsProperties": {
-      "type": "object",
-      "description": "Estimated purchase total",
-      "properties": {
-        "purchaseTotal": {
+        "billingCurrencyTotal": {
           "$ref": "#/definitions/Price"
         }
       }
     },
-    "ExchangePriceDetailsProperties": {
+    "ReservationToPurchaseExchange": {
       "type": "object",
-      "description": "Estimated purchase total",
+      "description": "Reservation purchase details",
       "properties": {
         "reservationOrderId": {
           "type": "string",
           "description": "Fully qualified id of the ReservationOrder being purchased"
         },
-        "purchaseTotal": {
+        "billingCurrencyTotal": {
           "$ref": "#/definitions/Price"
         }
       }

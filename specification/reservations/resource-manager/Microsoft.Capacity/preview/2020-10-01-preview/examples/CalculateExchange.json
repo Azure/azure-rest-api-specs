@@ -45,7 +45,7 @@
       "body": {
         "id": "/providers/microsoft.capacity/operationResults/4e2ffff7-b331-4fcb-ab11-b5fa49368188",
         "name": "4e2ffff7-b331-4fcb-ab11-b5fa49368188",
-        "status": "Pending",
+        "status": "Succeeded",
         "properties": {
           "sessionId": "66e2ac8f-439e-4345-8235-6fef07608081",
           "netPayable": {
@@ -62,36 +62,32 @@
           },
           "reservationsToPurchase": [
             {
-              "properties": {
-                "purchaseTotal": {
-                  "currencyCode": "EUR",
-                  "amount": 2250.0
-                }
+              "billingCurrencyTotal": {
+                "currencyCode": "EUR",
+                "amount": 2250.0
               }
             }
           ],
           "reservationsToExchange": [
             {
-              "id": "/providers/Microsoft.Capacity/reservationorders/1f14354c-dc12-4c8d-8090-6f295a3a34aa",
-              "properties": {
-                "quantity": 1,
-                "billingRefundAmount": {
+              "reservationId": "/providers/microsoft.capacity/reservationOrders/1f14354c-dc12-4c8d-8090-6f295a3a34aa/reservations/c8c926bd-fc5d-4e29-9d43-b68340ac23a6",
+              "quantity": 1,
+              "billingRefundAmount": {
+                "currencyCode": "EUR",
+                "amount": 34.17
+              },
+              "billingInformation": {
+                "billingCurrencyTotalPaidAmount": {
                   "currencyCode": "EUR",
-                  "amount": 34.17
+                  "amount": 170.82
                 },
-                "billingInformation": {
-                  "billingCurrencyTotalPaidAmount": {
-                    "currencyCode": "EUR",
-                    "amount": 170.82
-                  },
-                  "billingCurrencyProratedAmount": {
-                    "currencyCode": "EUR",
-                    "amount": 136.65
-                  },
-                  "billingCurrencyRemainingCommitmentAmount": {
-                    "currencyCode": "EUR",
-                    "amount": 2903.94
-                  }
+                "billingCurrencyProratedAmount": {
+                  "currencyCode": "EUR",
+                  "amount": 136.65
+                },
+                "billingCurrencyRemainingCommitmentAmount": {
+                  "currencyCode": "EUR",
+                  "amount": 2903.94
                 }
               }
             }
