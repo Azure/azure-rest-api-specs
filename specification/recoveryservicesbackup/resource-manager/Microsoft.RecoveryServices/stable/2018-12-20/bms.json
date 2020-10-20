@@ -2247,7 +2247,7 @@
         }
       }
     },
-   "CrrAccessToken": {
+    "CrrAccessToken": {
       "type": "object",
       "properties": {
         "objectType": {
@@ -4095,6 +4095,47 @@
           "type": "string"
         }
       }
+    },
+    "WorkloadCrrAccessToken": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CrrAccessToken"
+        }
+      ],
+      "properties": {
+        "protectableObjectUniqueName": {
+          "type": "string"
+        },
+        "protectableObjectFriendlyName": {
+          "type": "string"
+        },
+        "protectableObjectWorkloadType": {
+          "type": "string"
+        },
+        "protectableObjectProtectionState": {
+          "type": "string"
+        },
+        "protectableObjectContainerHostOsName": {
+          "type": "string"
+        },
+        "protectableObjectParentLogicalContainerName": {
+          "type": "string"
+        },
+        "containerId": {
+          "description": "Container Id",
+          "type": "string"
+        },
+        "policyName": {
+          "description": "Policy Name",
+          "type": "string"
+        },
+        "policyId": {
+          "description": "Policy Id",
+          "type": "string"
+        }
+      },
+      "x-ms-discriminator-value": "WorkloadCrrAccessToken"
     }
   },
  "parameters": {
