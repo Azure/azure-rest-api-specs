@@ -745,6 +745,7 @@
   "definitions": {
     "AvailableScopeRequest": {
       "type": "object",
+      "description": "Available scope",
       "properties": {
         "properties": {
           "$ref": "#/definitions/AvailableScopeRequestProperties"
@@ -753,6 +754,7 @@
     },
     "AvailableScopeRequestProperties": {
       "type": "object",
+      "description": "Available scope request properties",
       "properties": {
         "scopes": {
           "type": "array",
@@ -764,6 +766,7 @@
     },
     "CalculateExchangeRequest": {
       "type": "object",
+      "description": "Calculate exchange request",
       "properties": {
         "properties": {
           "$ref": "#/definitions/CalculateExchangeRequestProperties"
@@ -772,6 +775,7 @@
     },
     "ExchangeRequest": {
       "type": "object",
+      "description": "Exchange request",
       "properties": {
         "properties": {
           "$ref": "#/definitions/ExchangeRequestProperties"
@@ -780,6 +784,7 @@
     },
     "CalculateExchangeRequestProperties": {
       "type": "object",
+      "description": "Calculate exchange request properties",
       "properties": {
         "reservationsToPurchase": {
           "type": "array",
@@ -799,6 +804,7 @@
     },
     "ExchangeRequestProperties": {
       "type": "object",
+      "description": "Exchange request properties",
       "properties": {
         "sessionId": {
           "type": "string",
@@ -808,6 +814,7 @@
     },
     "ReturnRequest": {
       "type": "object",
+      "description": "Return request",
       "properties": {
         "id": {
           "type": "string",
@@ -820,6 +827,7 @@
     },
     "ReturnRequestProperties": {
       "type": "object",
+      "description": "Return request properties",
       "properties": {
         "scope": {
           "$ref": "#/definitions/ReturnRequestScope"
@@ -943,6 +951,7 @@
     },
     "CalculateExchangeOperationResultResponse": {
       "type": "object",
+      "description": "CalculateExchange operation result",
       "properties": {
         "id": {
           "type": "string",
@@ -962,7 +971,7 @@
             "Pending"
           ],
           "x-ms-enum": {
-            "name": "OperationResultStatus",
+            "name": "CalculateExchangeOperationResultStatus",
             "modelAsString": true
           }
         },
@@ -976,6 +985,7 @@
     },
     "ExchangeOperationResultResponse": {
       "type": "object",
+      "description": "Exchange operation result",
       "properties": {
         "id": {
           "type": "string",
@@ -996,7 +1006,7 @@
             "PendingPurchases"
           ],
           "x-ms-enum": {
-            "name": "OperationResultStatus",
+            "name": "ExchangeOperationResultStatus",
             "modelAsString": true
           }
         },
@@ -1024,6 +1034,7 @@
     },
     "CalculateExchangeResponseProperties": {
       "type": "object",
+      "description": "CalculateExchange response properties",
       "properties": {
         "sessionId": {
           "type": "string",
@@ -1059,6 +1070,7 @@
     },
     "ExchangeResponseProperties": {
       "type": "object",
+      "description": "Exchange response properties",
       "properties": {
         "sessionId": {
           "type": "string",
@@ -1094,6 +1106,7 @@
     },
     "ExchangePolicyErrors": {
       "type": "object",
+      "description": "Exchange policy errors",
       "properties": {
         "policyErrors": {
           "type": "array",
@@ -1106,6 +1119,7 @@
     },
     "ExchangePolicyError": {
       "type": "object",
+      "description": "error details",
       "properties": {
         "code": {
           "type": "string"
@@ -1138,6 +1152,7 @@
     },
     "BillingInformation": {
       "type": "object",
+      "description": "billing information",
       "properties": {
         "billingCurrencyTotalPaidAmount": {
           "$ref": "#/definitions/Price"
