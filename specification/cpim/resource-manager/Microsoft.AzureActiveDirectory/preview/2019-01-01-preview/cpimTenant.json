@@ -80,9 +80,9 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureActiveDirectory/b2cDirectories":{
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureActiveDirectory/b2cDirectories": {
       "get": {
-        "description":"Get all the Azure AD B2C tenant resources in a resource group.",
+        "description": "Get all the Azure AD B2C tenant resources in a resource group.",
         "operationId": "B2CTenants_ListByResourceGroup",
         "tags": [
           "B2CTenants"
@@ -122,9 +122,9 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.AzureActiveDirectory/b2cDirectories":{
+    "/subscriptions/{subscriptionId}/providers/Microsoft.AzureActiveDirectory/b2cDirectories": {
       "get": {
-        "description":"Get all the Azure AD B2C tenant resources in a subscription.",
+        "description": "Get all the Azure AD B2C tenant resources in a subscription.",
         "operationId": "B2CTenants_ListBySubscription",
         "tags": [
           "B2CTenants"
@@ -163,7 +163,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureActiveDirectory/b2cDirectories/{resourceName}": {
       "get": {
-        "description":"Get the Azure AD B2C tenant resource.",
+        "description": "Get the Azure AD B2C tenant resource.",
         "operationId": "B2CTenants_Get",
         "tags": [
           "B2CTenants"
@@ -202,7 +202,7 @@
           }
         }
       },
-      "patch":{
+      "patch": {
         "description": "Update the Azure AD B2C tenant resource.",
         "operationId": "B2CTenants_Update",
         "tags": [
@@ -509,9 +509,9 @@
     "AsyncOperationStatus": {
       "description": "The async operation status.",
       "properties": {
-        "subscriptionId":{
-          "type":"string",
-          "description":"Subscription ID that the resource belongs to."
+        "subscriptionId": {
+          "type": "string",
+          "description": "Subscription ID that the resource belongs to."
         },
         "id": {
           "type": "string",
@@ -580,12 +580,12 @@
       "description": "Properties of the Azure AD B2C tenant Azure resource.",
       "type": "object",
       "properties": {
-        "billingConfig":{
+        "billingConfig": {
           "type": "object",
           "description": "The billing configuration for the tenant.",
-          "properties":{
-            "billingType":{
-              "type":"string", 
+          "properties": {
+            "billingType": {
+              "type": "string",
               "description": "The type of billing. Will be MAU for all new customers. If 'Auths', it can be updated to 'MAU'. Cannot be changed if value is 'MAU'. Learn more about Azure AD B2C billing at [aka.ms/b2cBilling](https://aka.ms/b2cbilling).",
               "enum": [
                 "MAU",
@@ -607,7 +607,7 @@
               }
             },
             "effectiveStartDateUtc": {
-              "type":"string",
+              "type": "string",
               "readOnly": true,
               "description": "The data from which the billing type took effect"
             }
@@ -616,7 +616,7 @@
         "tenantId": {
           "type": "string",
           "description": "An identifier of the B2C tenant."
-        }    
+        }
       }
     },
     "B2CResourceSKU": {
@@ -625,29 +625,29 @@
         "name": {
           "type": "string",
           "description": "The name of the SKU for the tenant.",
-              "enum": [
-                "Standard",
-                "PremiumP1",
-                "PremiumP2"
-              ],
-              "x-ms-enum": {
-                "name": "B2CResourceSKUName",
-                "modelAsString": false,
-                "values": [
-                  {
-                    "value": "Standard",
-                    "description": "Azure AD B2C usage is billed to a linked Azure subscription and uses a monthly active users (MAU) billing model."
-                  },
-                  {
-                    "value": "PremiumP1",
-                    "description": "Azure AD B2C usage is billed to a linked Azure subscription and uses number of authentications based billing."
-                  },
-                  {
-                    "value": "PremiumP2",
-                    "description": "Azure AD B2C usage is billed to a linked Azure subscription and uses number of authentications based billing."
-                  }
-                ]
+          "enum": [
+            "Standard",
+            "PremiumP1",
+            "PremiumP2"
+          ],
+          "x-ms-enum": {
+            "name": "B2CResourceSKUName",
+            "modelAsString": false,
+            "values": [
+              {
+                "value": "Standard",
+                "description": "Azure AD B2C usage is billed to a linked Azure subscription and uses a monthly active users (MAU) billing model."
+              },
+              {
+                "value": "PremiumP1",
+                "description": "Azure AD B2C usage is billed to a linked Azure subscription and uses number of authentications based billing."
+              },
+              {
+                "value": "PremiumP2",
+                "description": "Azure AD B2C usage is billed to a linked Azure subscription and uses number of authentications based billing."
               }
+            ]
+          }
         },
         "tier": {
           "type": "string",
@@ -708,7 +708,7 @@
     },
     "CheckNameAvailabilityRequestBody": {
       "type": "object",
-      "description":"The information required to check the availability of the name for the tenant.",
+      "description": "The information required to check the availability of the name for the tenant.",
       "required": [
         "name",
         "countryCode"
@@ -723,10 +723,10 @@
         }
       }
     },
-    "B2CTenantUpdateRequest":{
+    "B2CTenantUpdateRequest": {
       "type": "object",
-      "description":"The request body to update the Azure AD B2C tenant resource.",
-      "properties":{
+      "description": "The request body to update the Azure AD B2C tenant resource.",
+      "properties": {
         "sku": {
           "$ref": "#/definitions/B2CResourceSKU"
         },
@@ -791,7 +791,10 @@
         "location": {
           "type": "string",
           "description": "The location in which the resource is hosted and data resides. Refer to [this documentation](https://aka.ms/B2CDataResidency) to see valid data residency locations. Please choose one of 'United States', 'Europe', and 'Asia Pacific'.",
-          "x-ms-mutability": ["create", "read"]
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
         },
         "tags": {
           "type": "object",
@@ -802,7 +805,7 @@
         }
       }
     },
-    "B2CTenantResourceList":{
+    "B2CTenantResourceList": {
       "description": "The collection of Azure AD B2C tenant resources",
       "properties": {
         "value": {
@@ -817,7 +820,7 @@
     },
     "CreateTenantRequestBody": {
       "type": "object",
-      "description":"The information needed to create the Azure AD B2C tenant and corresponding Azure resource, which is used for billing purposes.",
+      "description": "The information needed to create the Azure AD B2C tenant and corresponding Azure resource, which is used for billing purposes.",
       "required": [
         "location",
         "sku",
@@ -830,9 +833,9 @@
           "description": "The location in which the resource is hosted and data resides. Refer to [this documentation](https://aka.ms/B2CDataResidency) to see valid data residency locations. Please choose one of 'United States', 'Europe', and 'Asia Pacific'."
         },
         "properties": {
-          "type":"object",
-          "properties":{
-            "createTenantProperties":{
+          "type": "object",
+          "properties": {
+            "createTenantProperties": {
               "x-ms-client-flatten": true,
               "$ref": "#/definitions/CreateTenantProperties"
             }
@@ -851,7 +854,7 @@
       }
     },
     "CreateTenantProperties": {
-      "type":"object",
+      "type": "object",
       "description": "These properties are used to create the Azure AD B2C tenant. These properties are not part of the Azure resource.",
       "properties": {
         "displayName": {
