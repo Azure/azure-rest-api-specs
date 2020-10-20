@@ -436,11 +436,6 @@
     },
     "PutAliasRequestProperties": {
       "description": "Put subscription properties.",
-      "required": [
-        "displayName",
-        "workload",
-        "billingScope"
-      ],
       "properties": {
         "displayName": {
           "description": "The friendly name of the subscription.",
@@ -464,6 +459,10 @@
         },
         "subscriptionId": {
           "description": "This parameter can be used to create alias for existing subscription Id",
+          "type": "string"
+        },
+        "resellerId": {
+          "description": "Reseller ID, basically MPN Id",
           "type": "string"
         }
       }

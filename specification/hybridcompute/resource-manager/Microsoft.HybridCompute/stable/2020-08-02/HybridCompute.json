@@ -266,7 +266,7 @@
           "machines"
         ],
         "operationId": "Machines_ListByResourceGroup",
-        "description": "Lists all the hybrid machines in the specified resource group. Use the nextLink property in the response to get the next page of hybrid machines.",
+        "description": "Lists all the hybrid machines in the specified resource group.",
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -312,7 +312,7 @@
           "machines"
         ],
         "operationId": "Machines_ListBySubscription",
-        "description": "Lists all the hybrid machines in the specified subscription. Use the nextLink property in the response to get the next page of hybrid machines.",
+        "description": "Lists all the hybrid machines in the specified subscription.",
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -413,7 +413,7 @@
           "MachineExtensions"
         ],
         "operationId": "MachineExtensions_Update",
-        "description": "The operation to create or update the extension.",
+        "description": "The operation to update the extension.",
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -567,7 +567,7 @@
           }
         },
         "x-ms-examples": {
-          "GET Machine Extension": {
+          "Get Machine Extension": {
             "$ref": "./examples/GETExtension.json"
           }
         }
@@ -621,7 +621,7 @@
           "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
-          "GET all Machine Extensions": {
+          "Get all Machine Extensions": {
             "$ref": "./examples/LISTExtension.json"
           }
         }
@@ -822,6 +822,7 @@
           "description": "Specifies the Arc Machine's unique SMBIOS ID"
         },
         "extensions": {
+          "readOnly": true,
           "type": "array",
           "items": {
             "$ref": "#/definitions/MachineExtensionInstanceView"
@@ -1128,24 +1129,29 @@
       "properties": {
         "name": {
           "type": "string",
+          "readOnly": true,
           "description": "The machine extension name."
         },
         "type": {
           "type": "string",
+          "readOnly": true,
           "description": "Specifies the type of the extension; an example is \"CustomScriptExtension\"."
         },
         "typeHandlerVersion": {
           "type": "string",
+          "readOnly": true,
           "description": "Specifies the version of the script handler."
         },
         "status": {
           "properties": {
             "code": {
               "type": "string",
+              "readOnly": true,
               "description": "The status code."
             },
             "level": {
               "type": "string",
+              "readOnly": true,
               "description": "The level code.",
               "enum": [
                 "Info",
@@ -1159,14 +1165,17 @@
             },
             "displayStatus": {
               "type": "string",
+              "readOnly": true,
               "description": "The short localizable label for the status."
             },
             "message": {
               "type": "string",
+              "readOnly": true,
               "description": "The detailed status message, including for alerts and error messages."
             },
             "time": {
               "type": "string",
+              "readOnly": true,
               "format": "date-time",
               "description": "The time of the status."
             }
