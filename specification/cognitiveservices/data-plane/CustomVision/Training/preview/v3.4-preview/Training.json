@@ -1,11 +1,11 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "3.3",
+    "version": "3.4-preview",
     "title": "Custom Vision Training Client"
   },
   "host": "southcentralus.api.cognitive.microsoft.com",
-  "basePath": "/customvision/v3.3/training",
+  "basePath": "/customvision/v3.4-preview/training",
   "schemes": [
     "https"
   ],
@@ -136,7 +136,12 @@
         ],
         "summary": "Create a project.",
         "operationId": "CreateProject",
-        "consumes": [],
+        "consumes": [
+          "application/json",
+          "application/xml",
+          "text/xml",
+          "application/x-www-form-urlencoded"
+        ],
         "produces": [
           "application/json",
           "application/xml",
@@ -189,10 +194,20 @@
                 "TensorFlow",
                 "DockerFile",
                 "ONNX",
-                "VAIDK"
+                "VAIDK",
+                "OpenVino"
               ]
             },
             "collectionFormat": "csv"
+          },
+          {
+            "name": "options",
+            "in": "body",
+            "description": "Additional project creation options.",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/CreateProjectOptions"
+            }
           }
         ],
         "responses": {
@@ -1045,14 +1060,13 @@
           {
             "name": "metadata",
             "in": "body",
-            "description": "The metadata to be updated to the specified images. Limited to 50 key-value pairs per image. The length of key is limited to 256. The length of value is limited to 512.",
+            "description": "The metadata to be updated to the specified images. Limited to 10 key-value pairs per image. The length of key is limited to 128. The length of value is limited to 256.",
             "required": true,
             "schema": {
               "type": "object",
               "additionalProperties": {
                 "type": "string"
-              },
-              "x-nullable":  true
+              }
             }
           }
         ],
@@ -2224,7 +2238,8 @@
               "TensorFlow",
               "DockerFile",
               "ONNX",
-              "VAIDK"
+              "VAIDK",
+              "OpenVino"
             ]
           },
           {
@@ -3444,6 +3459,47 @@
         }
       }
     },
+    "CreateProjectOptions": {
+      "description": "Options used for createProject.",
+      "type": "object",
+      "properties": {
+        "exportModelContainerUri": {
+          "description": "The uri to the Azure Storage container that will be used to store exported models.",
+          "type": "string",
+          "readOnly": false,
+          "x-nullable": false
+        },
+        "notificationQueueUri": {
+          "description": "The uri to the Azure Storage queue that will be used to send project-related notifications. See <a href=\"https://go.microsoft.com/fwlink/?linkid=2144149\">Storage notifications</a> documentation for setup and message format.",
+          "type": "string",
+          "readOnly": false,
+          "x-nullable": false
+        }
+      }
+    },
+    "CustomBaseModelInfo": {
+      "required": [
+        "projectId",
+        "iterationId"
+      ],
+      "type": "object",
+      "properties": {
+        "projectId": {
+          "format": "uuid",
+          "description": "Project Id of the previously trained project to be used for current iteration's training.",
+          "type": "string",
+          "readOnly": false,
+          "x-nullable": false
+        },
+        "iterationId": {
+          "format": "uuid",
+          "description": "Iteration Id of the previously trained project to be used for current iteration's training.",
+          "type": "string",
+          "readOnly": false,
+          "x-nullable": false
+        }
+      }
+    },
     "CustomVisionError": {
       "required": [
         "code",
@@ -3505,6 +3561,7 @@
             "BadRequestImageFormat",
             "BadRequestImageSizeBytes",
             "BadRequestImageDimensions",
+            "BadRequestImageAspectRatio",
             "BadRequestImageExceededCount",
             "BadRequestTrainingNotNeeded",
             "BadRequestTrainingNotNeededButTrainingPipelineUpdated",
@@ -3516,9 +3573,13 @@
             "BadRequestTrainingAlreadyInProgress",
             "BadRequestDetectionTrainingNotAllowNegativeTag",
             "BadRequestInvalidEmailAddress",
+            "BadRequestRetiredDomainNotSupportedForTraining",
             "BadRequestDomainNotSupportedForAdvancedTraining",
             "BadRequestExportPlatformNotSupportedForAdvancedTraining",
             "BadRequestReservedBudgetInHoursNotEnoughForAdvancedTraining",
+            "BadRequestCustomBaseModelIterationStatusNotCompleted",
+            "BadRequestCustomBaseModelDomainNotCompatible",
+            "BadRequestCustomBaseModelArchitectureRetired",
             "BadRequestExportValidationFailed",
             "BadRequestExportAlreadyInProgress",
             "BadRequestPredictionIdsMissing",
@@ -3534,6 +3595,7 @@
             "BadRequestOperationNotSupported",
             "BadRequestInvalidArtifactUri",
             "BadRequestCustomerManagedKeyRevoked",
+            "BadRequestInvalidUri",
             "BadRequestInvalid",
             "UnsupportedMediaType",
             "Forbidden",
@@ -3583,6 +3645,7 @@
             "ErrorPredictionStorage",
             "ErrorRegionProposal",
             "ErrorUnknownBaseModel",
+            "ErrorServerTimeOut",
             "ErrorInvalid"
           ],
           "type": "string",
@@ -3598,21 +3661,25 @@
       }
     },
     "Domain": {
+      "description": "Domains are used as the starting point for your project. Each domain is optimized for specific types of images. Domains with compact in their name can be exported. For more information visit the <a href=\"https://go.microsoft.com/fwlink/?linkid=2117014\">domain documentation</a>.",
       "type": "object",
       "properties": {
         "id": {
           "format": "uuid",
+          "description": "Domain id.",
           "type": "string",
           "readOnly": true,
           "example": "00000000-0000-0000-0000-000000000000",
           "x-nullable": false
         },
         "name": {
+          "description": "Name of the domain, describing the types of images used to train it.",
           "type": "string",
           "readOnly": true,
           "x-nullable": false
         },
         "type": {
+          "description": "Domain type: Classification or ObjectDetection.",
           "enum": [
             "Classification",
             "ObjectDetection"
@@ -3626,14 +3693,38 @@
           }
         },
         "exportable": {
+          "description": "Indicating if the domain is exportable.",
           "type": "boolean",
           "readOnly": true,
           "x-nullable": false
         },
         "enabled": {
+          "description": "Indicating if the domain is enabled.",
           "type": "boolean",
           "readOnly": true,
           "x-nullable": false
+        },
+        "exportablePlatforms": {
+          "description": "Platforms that the domain can be exported to.",
+          "type": "array",
+          "items": {
+            "enum": [
+              "CoreML",
+              "TensorFlow",
+              "DockerFile",
+              "ONNX",
+              "VAIDK",
+              "OpenVino"
+            ],
+            "type": "string",
+            "x-nullable": false
+          },
+          "readOnly": true
+        },
+        "modelInformation": {
+          "$ref": "#/definitions/ModelInformation",
+          "description": "Model information.",
+          "readOnly": true
         }
       }
     },
@@ -3647,7 +3738,8 @@
             "TensorFlow",
             "DockerFile",
             "ONNX",
-            "VAIDK"
+            "VAIDK",
+            "OpenVino"
           ],
           "type": "string",
           "readOnly": true,
@@ -3803,7 +3895,9 @@
             "ErrorTagLimitExceed",
             "ErrorRegionLimitExceed",
             "ErrorUnknown",
-            "ErrorNegativeAndRegularTagOnSameImage"
+            "ErrorNegativeAndRegularTagOnSameImage",
+            "ErrorImageDimensions",
+            "ErrorInvalidTag"
           ],
           "type": "string",
           "readOnly": true,
@@ -3862,7 +3956,7 @@
           "readOnly": false
         },
         "metadata": {
-          "description": "The metadata of image. Limited to 50 key-value pairs per image. The length of key is limited to 256. The length of value is limited to 512.",
+          "description": "The metadata of image. Limited to 10 key-value pairs per image. The length of key is limited to 128. The length of value is limited to 256.",
           "type": "object",
           "additionalProperties": {
             "type": "string"
@@ -3926,7 +4020,7 @@
           "readOnly": false
         },
         "metadata": {
-          "description": "The metadata of image. Limited to 50 key-value pairs per image. The length of key is limited to 256. The length of value is limited to 512.",
+          "description": "The metadata of image. Limited to 10 key-value pairs per image. The length of key is limited to 128. The length of value is limited to 256.",
           "type": "object",
           "additionalProperties": {
             "type": "string"
@@ -4035,37 +4129,44 @@
         },
         "id": {
           "format": "uuid",
+          "description": "Id of the image.",
           "type": "string",
           "readOnly": true,
           "x-nullable": false
         },
         "created": {
           "format": "date-time",
+          "description": "Date the image was created.",
           "type": "string",
           "readOnly": true,
           "x-nullable": false
         },
         "width": {
           "format": "int32",
+          "description": "Width of the image.",
           "type": "integer",
           "readOnly": true,
           "x-nullable": false
         },
         "height": {
           "format": "int32",
+          "description": "Height of the image.",
           "type": "integer",
           "readOnly": true,
           "x-nullable": false
         },
         "imageUri": {
+          "description": "The URI to the image used for training. If VNET feature is enabled this will be a relative path to be used with GetArtifact, otherwise this will be an absolute URI to the resource.",
           "type": "string",
           "readOnly": true
         },
         "thumbnailUri": {
+          "description": "The URI to the thumbnail of the original image. If VNET feature is enabled this will be a relative path to be used with GetArtifact, otherwise this will be an absolute URI to the resource.",
           "type": "string",
           "readOnly": true
         },
         "tags": {
+          "description": "Tags associated with this image.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/ImageTag"
@@ -4074,6 +4175,7 @@
           "x-nullable": true
         },
         "regions": {
+          "description": "Regions associated with this image.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/ImageRegion"
@@ -4521,7 +4623,7 @@
           "readOnly": false
         },
         "metadata": {
-          "description": "The metadata of image. Limited to 50 key-value pairs per image. The length of key is limited to 256. The length of value is limited to 512.",
+          "description": "The metadata of image. Limited to 10 key-value pairs per image. The length of key is limited to 128. The length of value is limited to 256.",
           "type": "object",
           "additionalProperties": {
             "type": "string"
@@ -4631,7 +4733,8 @@
               "TensorFlow",
               "DockerFile",
               "ONNX",
-              "VAIDK"
+              "VAIDK",
+              "OpenVino"
             ],
             "type": "string",
             "x-nullable": false
@@ -4698,6 +4801,16 @@
           "type": "string",
           "readOnly": true,
           "x-nullable": false
+        },
+        "customBaseModelInfo": {
+          "$ref": "#/definitions/CustomBaseModelInfo",
+          "description": "Information of the previously trained iteration which provides the base model for current iteration's training.\r\nDefault value of null specifies that no previously trained iteration will be used for incremental learning.",
+          "readOnly": true
+        },
+        "trainingErrorDetails": {
+          "description": "Training error details, when training fails.\r\nValue is null when training succeeds.",
+          "type": "string",
+          "readOnly": true
         }
       }
     },
@@ -4748,6 +4861,27 @@
           "type": "number",
           "readOnly": true,
           "x-nullable": true
+        }
+      }
+    },
+    "ModelInformation": {
+      "description": "Model information.",
+      "required": [
+        "description"
+      ],
+      "type": "object",
+      "properties": {
+        "estimatedModelSizeInMegabytes": {
+          "format": "int32",
+          "description": "Estimation of the exported FP32 Onnx model size (2 tags) in megabytes. This information is not present if the model cannot be exported.",
+          "type": "integer",
+          "readOnly": false
+        },
+        "description": {
+          "description": "Model description.",
+          "type": "string",
+          "readOnly": false,
+          "x-nullable": false
         }
       }
     },
@@ -5063,7 +5197,8 @@
               "TensorFlow",
               "DockerFile",
               "ONNX",
-              "VAIDK"
+              "VAIDK",
+              "OpenVino"
             ],
             "type": "string",
             "x-nullable": false
@@ -5086,6 +5221,18 @@
           "$ref": "#/definitions/ImageProcessingSettings",
           "description": "Gets or sets image preprocessing settings.",
           "readOnly": false
+        },
+        "exportModelContainerUri": {
+          "description": "The uri to the Azure Storage container that will be used to store exported models.",
+          "type": "string",
+          "readOnly": true,
+          "x-nullable": true
+        },
+        "notificationQueueUri": {
+          "description": "The uri to the Azure Storage queue that will be used to send project-related notifications. See <a href=\"https://go.microsoft.com/fwlink/?linkid=2144149\">Storage notifications</a> documentation for setup and message format.",
+          "type": "string",
+          "readOnly": true,
+          "x-nullable": true
         }
       }
     },
@@ -5567,6 +5714,11 @@
             "type": "string",
             "x-nullable": false
           },
+          "readOnly": false
+        },
+        "customBaseModelInfo": {
+          "$ref": "#/definitions/CustomBaseModelInfo",
+          "description": "Information of the previously trained iteration which provides the base model for current iteration's training.",
           "readOnly": false
         }
       }
