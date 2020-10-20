@@ -20,8 +20,4 @@ directive:
       parameter-name: extension-name
     set:
       parameter-name: name
-  - where:
-      command: machine-extension delete
-    set:
-      command: extension delete
 ```
