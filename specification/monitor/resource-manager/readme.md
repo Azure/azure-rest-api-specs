@@ -609,6 +609,10 @@ directive:
     where: $.definitions.AlertRuleProperties.properties.enabled
     from: activityLogAlerts_API.json
     reason: 'This property indicates whether the alert rule is enabled or not, there are only 2 options for this property, so it fits the boolean type.'
+  - suppress: EnumInsteadOfBoolean
+    where: $.definitions.AlertRulePatchProperties.properties.enabled
+    from: activityLogAlerts_API.json
+    reason: 'This property indicates whether the alert rule is enabled or not  - it has only ''true'' or ''false'' options, so it fits boolean type.'
 ```
 
 ### Tag: profile-hybrid-2019-03-01
