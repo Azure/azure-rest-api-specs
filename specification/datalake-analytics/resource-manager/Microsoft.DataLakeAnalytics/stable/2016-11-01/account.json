@@ -888,8 +888,11 @@
             "schema": {
               "$ref": "#/definitions/StorageContainerListResult"
             }
-          }
-        },
+          },          
+          "410":{
+              "description": "The resource referred by the Storage account  is gone."
+            }
+          }        },
         "x-ms-examples": {
           "Lists the Azure Storage containers": {
             "$ref": "./examples/StorageAccounts_ListStorageContainers.json"
@@ -1686,6 +1689,22 @@
             "$ref": "#/definitions/ComputePolicy"
           },
           "description": "The list of compute policies associated with this account."
+        },
+        "hiveMetastores":{
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/hiveMetastores"
+          },
+          "description": "The list of hiveMetastores associated with this account."
+        },
+        "virtualNetworkRules": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/virtualNetworkRules"
+          },
+          "description": "The list of virtualNetwork rules associated with this account."
         },
         "firewallRules": {
           "readOnly": true,
