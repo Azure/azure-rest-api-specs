@@ -1866,7 +1866,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/publishers/{publisherName}/artifacttypes/vmimage/offers/{offer}/skus/{skus}/versions/{version}": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/edgeZones/{edgeZone}/publishers/{publisherName}/artifacttypes/vmimage/offers/{offer}/skus/{skus}/versions/{version}": {
       "get": {
         "tags": [
           "VirtualMachineImages"
@@ -1880,6 +1880,13 @@
             "required": true,
             "type": "string",
             "description": "The name of a supported Azure region."
+          },
+          {
+            "name": "edgeZone",
+            "in": "path",
+            "required": false,
+            "type": "string",
+            "description": "The name of the edge zone."
           },
           {
             "name": "publisherName",
@@ -1926,7 +1933,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/publishers/{publisherName}/artifacttypes/vmimage/offers/{offer}/skus/{skus}/versions": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/edgeZones/{edgeZone}/publishers/{publisherName}/artifacttypes/vmimage/offers/{offer}/skus/{skus}/versions": {
       "get": {
         "tags": [
           "VirtualMachineImages"
@@ -1940,6 +1947,13 @@
             "required": true,
             "type": "string",
             "description": "The name of a supported Azure region."
+          },
+          {
+            "name": "edgeZone",
+            "in": "path",
+            "required": false,
+            "type": "string",
+            "description": "The name of the edge zone."
           },
           {
             "name": "publisherName",
@@ -2002,7 +2016,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/publishers/{publisherName}/artifacttypes/vmimage/offers": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/edgeZones/{edgeZone}/publishers/{publisherName}/artifacttypes/vmimage/offers": {
       "get": {
         "tags": [
           "VirtualMachineImages"
@@ -2016,6 +2030,13 @@
             "required": true,
             "type": "string",
             "description": "The name of a supported Azure region."
+          },
+          {
+            "name": "edgeZone",
+            "in": "path",
+            "required": false,
+            "type": "string",
+            "description": "The name of the edge zone."
           },
           {
             "name": "publisherName",
@@ -2044,7 +2065,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/publishers": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/edgeZones/{edgeZone}/publishers": {
       "get": {
         "tags": [
           "VirtualMachineImages"
@@ -2058,6 +2079,13 @@
             "required": true,
             "type": "string",
             "description": "The name of a supported Azure region."
+          },
+          {
+            "name": "edgeZone",
+            "in": "path",
+            "required": false,
+            "type": "string",
+            "description": "The name of the edge zone."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -2079,7 +2107,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/publishers/{publisherName}/artifacttypes/vmimage/offers/{offer}/skus": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/edgeZones/{edgeZone}/publishers/{publisherName}/artifacttypes/vmimage/offers/{offer}/skus": {
       "get": {
         "tags": [
           "VirtualMachineImages"
@@ -2093,6 +2121,13 @@
             "required": true,
             "type": "string",
             "description": "The name of a supported Azure region."
+          },
+          {
+            "name": "edgeZone",
+            "in": "path",
+            "required": false,
+            "type": "string",
+            "description": "The name of the edge zone."
           },
           {
             "name": "publisherName",
