@@ -18,7 +18,6 @@ batch:
   - tag: package-2020-09-21-preview
   - tag: package-2020-10-19-preview
 ```
-
 ### Tag: package-2020-10-19-preview and go
 
 These settings apply only when `--tag=package-2020-10-19-preview --go` is specified on the command line.
