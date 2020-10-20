@@ -1610,6 +1610,10 @@
           "description": "Gets or sets Name of the API.\r\nThe name of the operation being performed on this particular object. It should\r\nmatch the action name that appears in RBAC / the event service.\r\nExamples of operations include:\r\n* Microsoft.Compute/virtualMachine/capture/action\r\n* Microsoft.Compute/virtualMachine/restart/action\r\n* Microsoft.Compute/virtualMachine/write\r\n* Microsoft.Compute/virtualMachine/read\r\n* Microsoft.Compute/virtualMachine/delete\r\nEach action should include, in order:\r\n(1) Resource Provider Namespace\r\n(2) Type hierarchy for which the action applies (e.g. server/databases for a SQL\r\nAzure database)\r\n(3) Read, Write, Action or Delete indicating which type applies. If it is a PUT/PATCH\r\non a collection or named value, Write should be used.\r\nIf it is a GET, Read should be used. If it is a DELETE, Delete should be used. If it\r\nis a POST, Action should be used.\r\nAs a note: all resource providers would need to include the \"{Resource Provider\r\nNamespace}/register/action\" operation in their response.\r\nThis API is used to register for their service, and should include details about the\r\noperation (e.g. a localized name for the resource provider + any special\r\nconsiderations like PII release).",
           "type": "string"
         },
+        "isDataAction": {
+          "description": "Indicates whether the operation is a data action",
+          "type": "boolean"
+        },
         "display": {
           "$ref": "#/definitions/Display"
         },
