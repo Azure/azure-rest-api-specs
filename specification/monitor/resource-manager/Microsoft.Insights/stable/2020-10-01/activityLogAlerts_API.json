@@ -377,11 +377,11 @@
         ]
       },
       "AlertRuleAnyOfOrLeafCondition": {
-        "description": "An Activity Log Alert rule condition that is met when all its member conditions are met.",
+        "description": "An Activity Log Alert rule condition that is met when all its member conditions are met. This condition is valid only in the following: * If 'anyOf' has value, then 'field', 'equals' and 'containsAny' must not have values. * If 'anyOf' doesn't have value, then 'field' must have value, and exactly one of 'equals' or 'containsAny' should have value.",
         "type": "object",
         "properties": {
           "field": {
-            "description": "The name of the field that this condition will examine. The possible values for this field are (case-insensitive): 'resourceId', 'category', 'caller', 'level', 'operationName', 'resourceGroup', 'resourceProvider', 'status', 'subStatus', 'resourceType', or anything beginning with 'properties'.",
+            "description": "The name of the field that this condition will examine. If 'field' has value, then 'anyOf' should not have value, and exactly one of 'equals' and 'containsAny' should have value. The possible values for this field are (case-insensitive): 'resourceId', 'category', 'caller', 'level', 'operationName', 'resourceGroup', 'resourceProvider', 'status', 'subStatus', 'resourceType', or anything beginning with 'properties'.",
             "type": "string"
           },
           "equals": {
@@ -396,7 +396,7 @@
             }
           },
           "anyOf": {
-            "description": "The list of Activity Log Alert rule conditions.",
+            "description": "An Activity Log Alert rule condition that is met when at least one of its member leaf conditions are met.",
             "type": "array",
             "items": {
               "$ref": "#/definitions/AlertRuleLeafCondition"
