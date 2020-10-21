@@ -34,37 +34,6 @@
     }
   },
   "paths": {
-    "/providers/Microsoft.insights/operations": {
-      "get": {
-        "tags": [
-          "Operations"
-        ],
-        "description": "Lists all of the available Insights operations.",
-        "operationId": "ListInsightsOperations",
-        "parameters": [
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK. The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/OperationListResult"
-            }
-          },
-          "default": {
-            "description": "Resource Provider error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/WorkbookError"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.insights/workbooks": {
       "get": {
         "description": "Get all Workbooks defined within a specified resource group and category.",
@@ -535,22 +504,6 @@
         "tenantId": {
           "type": "string",
           "description": "tenantId used for the managed identity"
-        }
-      }
-    },
-    "OperationListResult": {
-      "description": "Result of the request to list Microsoft.Insights operations. It contains a list of operations and a URL link to get the next set of results.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Workbook"
-          },
-          "description": "List of Resource Provider operations supported by the Resource Provider resource provider."
-        },
-        "nextLink": {
-          "type": "string",
-          "description": "URL to get the next set of operation list results if there are any."
         }
       }
     }
