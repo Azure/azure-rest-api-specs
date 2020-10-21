@@ -53,6 +53,12 @@ directive:
     from: vmware.json
     where: $.definitions.Operation.properties.properties
     reason: x-ms-client-flatten not needed for Operation
+  - suppress: SECRET_PROPERTY
+    from: vmware.json
+    where:
+      - $.definitions.AdminCredentials.properties.nsxtPassword
+      - $.definitions.AdminCredentials.properties.vcenterPassword
+    reason: Secrets are OK to return in a POST response.
 ```
 
 ### Tag: package-2019-08-09-preview
