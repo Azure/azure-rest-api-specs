@@ -51,7 +51,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{providerName}/{resourceCollectionName}/{resourceName}/providers/Microsoft.WorkloadMonitor/monitors": {
       "get": {
-        "summary": "Get list of a monitors of a resource (with optional filter).",
+        "summary": "Get the current health status of all monitors of a virtual machine. Optional parameters: $expand (retrieve the monitor's evidence and configuration) and $filter (filter by monitor name).",
         "operationId": "HealthMonitors_List",
         "produces": [
           "application/json"
@@ -210,7 +210,7 @@
           {
             "in": "query",
             "name": "startTimestampUtc",
-            "description": "The start timestamp of the time window.",
+            "description": "The start of the time window.",
             "required": false,
             "type": "string",
             "format": "date-time"
@@ -218,7 +218,7 @@
           {
             "in": "query",
             "name": "endTimestampUtc",
-            "description": "The end timestamp of the time window.",
+            "description": "The end of the time window.",
             "required": false,
             "type": "string",
             "format": "date-time"

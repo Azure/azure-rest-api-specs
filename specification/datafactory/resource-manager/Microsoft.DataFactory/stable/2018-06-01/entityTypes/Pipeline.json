@@ -1475,8 +1475,12 @@
           "$ref": "#/definitions/RedirectIncompatibleRowSettings"
         },
         "logStorageSettings": {
-          "description": "Log storage settings customer need to provide when enabling session log.",
+          "description": "(Deprecated. Please use LogSettings) Log storage settings customer need to provide when enabling session log.",
           "$ref": "#/definitions/LogStorageSettings"
+        },
+        "logSettings": {
+          "description": "Log settings customer needs provide when enabling log.",
+          "$ref": "#/definitions/LogSettings"
         },
         "preserveRules": {
           "type": "array",
@@ -2760,6 +2764,40 @@
         "query": {
           "type": "object",
           "description": "Database query. Should be a SQL-92 query expression. Type: string (or Expression with resultType string)."
+        },
+        "additionalColumns": {
+          "type": "array",
+          "description": "Specifies the additional columns to be added to source data. Type: array of objects (or Expression with resultType array of objects).",
+          "items": {
+            "$ref": "#/definitions/AdditionalColumns"
+          }
+        }
+      }
+    },
+    "MongoDbAtlasSource": {
+      "description": "A copy activity source for a MongoDB Atlas database.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CopySource"
+        }
+      ],
+      "properties": {
+        "filter": {
+          "type": "object",
+          "description": "Specifies selection filter using query operators. To return all documents in a collection, omit this parameter or pass an empty document ({}). Type: string (or Expression with resultType string)."
+        },
+        "cursorMethods": {
+          "description": "Cursor methods for Mongodb query",
+          "$ref": "#/definitions/MongoDbCursorMethodsProperties"
+        },
+        "batchSize": {
+          "type": "object",
+          "description": "Specifies the number of documents to return in each batch of the response from MongoDB Atlas instance. In most cases, modifying the batch size will not affect the user or the application. This property's main purpose is to avoid hit the limitation of response size. Type: integer (or Expression with resultType integer)."
+        },
+        "queryTimeout": {
+          "type": "object",
+          "description": "Query timeout. Type: string (or Expression with resultType string), pattern: ((\\d+)\\.)?(\\d\\d):(60|([0-5][0-9])):(60|([0-5][0-9]))."
         },
         "additionalColumns": {
           "type": "array",
@@ -4298,7 +4336,7 @@
       }
     },
     "LogStorageSettings": {
-      "description": "Log storage settings.",
+      "description": "(Deprecated. Please use LogSettings) Log storage settings.",
       "type": "object",
       "properties": {
         "linkedServiceName": {
@@ -4324,6 +4362,58 @@
       "required": [
         "linkedServiceName"
       ]
+    },
+    "LogSettings": {
+      "description": "Log settings.",
+      "type": "object",
+      "properties": {
+        "enableCopyActivityLog": {
+          "type": "object",
+          "description": "Specifies whether to enable copy activity log. Type: boolean (or Expression with resultType boolean)."
+        },
+        "copyActivityLogSettings": {
+          "description": "Specifies settings for copy activity log.",
+          "$ref": "#/definitions/CopyActivityLogSettings"
+        },
+        "logLocationSettings": {
+          "description": "Log location settings customer needs to provide when enabling log.",
+          "$ref": "#/definitions/LogLocationSettings"
+        }
+      },
+      "required": [
+        "logLocationSettings"
+      ]
+    },
+    "LogLocationSettings": {
+      "description": "Log location settings.",
+      "type": "object",
+      "properties": {
+        "linkedServiceName": {
+          "description": "Log storage linked service reference.",
+          "$ref": "../datafactory.json#/definitions/LinkedServiceReference"
+        },
+        "path": {
+          "type": "object",
+          "description": "The path to storage for storing detailed logs of activity execution. Type: string (or Expression with resultType string)."
+        }
+      },
+      "required": [
+        "linkedServiceName"
+      ]
+    },
+    "CopyActivityLogSettings": {
+      "description": "Settings for copy activity log.",
+      "type": "object",
+      "properties": {
+        "logLevel": {
+          "type": "object",
+          "description": "Gets or sets the log level, support: Info, Warning. Type: string (or Expression with resultType string)."
+        },
+        "enableReliableLogging": {
+          "type": "object",
+          "description": "Specifies whether to enable reliable logging. Type: boolean (or Expression with resultType boolean)."
+        }
+      }
     },
     "StagingSettings": {
       "description": "Staging settings.",
