@@ -215,12 +215,16 @@
       ]
     },
     "PrivateEndpointConnectionForPrivateLinkHubProxy": {
-      "allOf": [
-        {
-          "$ref": "../../../common-types/resource-management/v1/types.json#/definitions/Resource"
-        }
-      ],
       "properties": {
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        },
         "location": {
           "type": "string"
         },
@@ -324,23 +328,24 @@
       ]
     },
     "PrivateEndpointConnectionProxyBase": {
-      "allOf": [
-        {
-          "$ref": "../../../common-types/resource-management/v1/types.json#/definitions/Resource"
+      "properties": {
+        "id": {
+          "type": "string"
         },
-        {
+        "name": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        },
+        "location": {
+          "type": "string"
+        },
+        "remotePrivateEndpoint": {
           "type": "object",
-          "properties": {
-            "location": {
-              "type": "string"
-            },
-            "remotePrivateEndpoint": {
-              "type": "object",
-              "$ref": "#/definitions/RemotePrivateEndpoint"
-            }
-          }
+          "$ref": "#/definitions/RemotePrivateEndpoint"
         }
-      ]
+      }
     },
     "PrivateEndpointConnectionProxy": {
       "allOf": [
@@ -348,6 +353,24 @@
           "$ref": "#/definitions/PrivateEndpointConnectionProxyBase"
         }
       ]
+    },
+    "PrivateEndpointConnectionForPrivateLinkHubProxyBase": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        },
+        "remotePrivateEndpoint": {
+          "type": "object",
+          "$ref": "#/definitions/RemotePrivateEndpointForPrivateLinkHub"
+        }
+      }
     }
   },
   "parameters": {

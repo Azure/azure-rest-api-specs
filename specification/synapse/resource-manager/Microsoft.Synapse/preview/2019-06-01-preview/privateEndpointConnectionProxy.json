@@ -386,40 +386,10 @@
     }
   },
   "definitions": {
-    "PrivateEndpointConnectionProxyBase": {
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "Fully qualified resource Id for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}"
-        },
-        "name": {
-          "type": "string",
-          "description": "The name of the resource"
-        },
-        "type": {
-          "type": "string",
-          "description": "The type of the resource. Ex- Microsoft.Compute/virtualMachines or Microsoft.Storage/storageAccounts."
-        },
-        "location": {
-          "type": "string"
-        },
-        "remotePrivateEndpoint": {
-          "type": "object",
-          "$ref": "../../../../common/v1/privateEndpointConnection.json#/definitions/RemotePrivateEndpoint"
-        }
-      }
-    },
-    "PrivateEndpointConnectionProxy": {
-      "allOf": [
-        {
-          "$ref": "#/definitions/PrivateEndpointConnectionProxyBase"
-        }
-      ]
-    },
     "ValidatePrivateEndpointConnectionProxy": {
       "allOf": [
         {
-          "$ref": "#/definitions/PrivateEndpointConnectionProxy"
+          "$ref": "../../../../common/v1/privateEndpointConnection.json#/definitions/PrivateEndpointConnectionProxy"
         }
       ]
     },
@@ -437,35 +407,10 @@
         }
       ]
     },
-    "PrivateEndpointConnectionForPrivateLinkHubProxyBase": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "string"
-        },
-        "name": {
-          "type": "string"
-        },
-        "type": {
-          "type": "string"
-        },
-        "remotePrivateEndpoint": {
-          "type": "object",
-          "$ref": "../../../../common/v1/privateEndpointConnection.json#/definitions/RemotePrivateEndpointForPrivateLinkHub"
-        }
-      }
-    },
-    "PrivateEndpointConnectionForPrivateLinkHubProxy": {
-      "allOf": [
-        {
-          "$ref": "#/definitions/PrivateEndpointConnectionForPrivateLinkHubProxyBase"
-        }
-      ]
-    },
     "ValidatePrivateEndpointConnectionForPrivateLinkHubProxyRequest": {
       "allOf": [
         {
-          "$ref": "#/definitions/PrivateEndpointConnectionForPrivateLinkHubProxy"
+          "$ref": "../../../../common/v1/privateEndpointConnection.json#/definitions/PrivateEndpointConnectionForPrivateLinkHubProxy"
         }
       ]
     },
