@@ -143,7 +143,7 @@ cli:
       - where:
           group: Policies
           op: GetByCustomer
-        name: show
+        hidden: true
       - where:
           group: Policies
           op: UpdateCustomer
