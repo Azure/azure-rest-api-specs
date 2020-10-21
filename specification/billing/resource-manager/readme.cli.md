@@ -16,6 +16,12 @@ directive:
 
 cli:
     cli-directive:
+# -------- DO NOT generate those command groups --------
+      - select: 'operationGroup'
+        where:
+          operationGroup: BillingPeriods|EnrollmentAccounts|Agreements|BillingPermissions|BillingRoleAssignments|BillingRoleDefinitions|Instructions|Address.*$
+        hidden: true
+
       # rename --billing-profile-name to --profile-name
       - where:
           param: billingProfileName
@@ -26,7 +32,7 @@ cli:
       - where:
           param: billingAccountName
         name: account_name
-      # shortnen the name in billing account command group
+      # shorten the name in billing account command group
       - where:
           group: billingAccounts
           param: billingAccountName
@@ -110,6 +116,13 @@ cli:
           group: Invoices
           op: GetBySubscriptionAndInvoiceId
         hidden: true
+      - where:
+          group: Invoices
+          param: invoiceName
+        name: name
+        alias:  # --invoice-name is unnecessary under "billing invoice" command group
+          - name
+          - n
 
 # -------- InvoiceSection --------
       - where:
@@ -167,10 +180,4 @@ cli:
           group: Transactions
         set:
           groupExtensionMode: preview
-
-
-      - select: 'operationGroup'
-        where:
-          operationGroup: BillingPeriods|EnrollmentAccounts|Agreements|BillingPermissions|BillingRoleAssignments|BillingRoleDefinitions|Instructions|Address.*$
-        hidden: true
 ```
