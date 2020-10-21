@@ -1,0 +1,54 @@
+{
+  "parameters": {
+    "api-version": "2020-10-01-preview",
+    "billingAccountName": "{billingAccountName}",
+    "departmentName": "{departmentName}"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/providers/Microsoft.Billing/billingAccounts/7898901/departments/97603/billingRoleDefinitions/fb2cf67f-be5b-42e7-8025-4683c668f840",
+            "name": "fb2cf67f-be5b-42e7-8025-4683c668f840",
+            "properties": {
+              "description": "The department administrator role gives the user read/write permissions including access management rights to an Enrollment Department and its accounts.",
+              "permissions": [
+                {
+                  "actions": [
+                    "Microsoft.Billing/billingAccounts/departments/read",
+                    "Microsoft.Billing/billingAccounts/departments/write",
+                    "Microsoft.Billing/billingAccounts/enrollmentAccounts/read",
+                    "Microsoft.Billing/billingAccounts/enrollmentAccounts/write",
+                    "Microsoft.Billing/billingAccounts/enrollmentAccounts/billingSubscriptions/read",
+                    "Microsoft.Billing/billingAccounts/enrollmentAccounts/billingSubscriptions/write"
+                  ]
+                }
+              ],
+              "roleName": "Department administrator"
+            },
+            "type": "Microsoft.Billing/billingAccounts/departments/billingRoleDefinitions"
+          },
+          {
+            "id": "/providers/Microsoft.Billing/billingAccounts/7898901/departments/97603/billingRoleDefinitions/db609904-a47f-4794-9be8-9bd86fbffd8a",
+            "name": "db609904-a47f-4794-9be8-9bd86fbffd8a",
+            "properties": {
+              "description": "The department reader role gives the user read-only permissions to an Enrollment Department and its accounts.",
+              "permissions": [
+                {
+                  "actions": [
+                    "Microsoft.Billing/billingAccounts/departments/read",
+                    "Microsoft.Billing/billingAccounts/enrollmentAccounts/read",
+                    "Microsoft.Billing/billingAccounts/enrollmentAccounts/billingSubscriptions/read"
+                  ]
+                }
+              ],
+              "roleName": "Department reader"
+            },
+            "type": "Microsoft.Billing/billingAccounts/departments/billingRoleDefinitions"
+          }
+        ]
+      }
+    }
+  }
+}

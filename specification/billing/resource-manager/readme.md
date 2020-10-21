@@ -39,6 +39,15 @@ input-file:
 - Microsoft.Billing/preview/2018-03-01-preview/billingV2.json
 ```
 
+### Tag: package-2020-10-preview
+
+These settings apply only when `--tag=package-2020-10-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2020-10-preview'
+input-file:
+- Microsoft.Billing/preview/2020-10-01-preview/billing.json
+```
+
 ### Tag: package-2019-10-preview
 
 These settings apply only when `--tag=package-2019-10-preview` is specified on the command line.

@@ -1,0 +1,24 @@
+{
+  "parameters": {
+    "api-version": "2020-10-01-preview",
+    "billingAccountName": "{billingAccountName}",
+    "billingProfileName": "{billingProfileName}",
+    "invoiceSectionName": "{invoiceSectionName}",
+    "billingSubscriptionName": "{billingSubscriptionName}",
+    "parameters": {
+      "destinationInvoiceSectionId": "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{newBillingProfileName}/invoiceSections/{newInvoiceSectionName}",
+      "destinationBillingProfileId": "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{newBillingProfileName}"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "isTransferEligible": false,
+        "errorDetails": {
+          "code": "SubscriptionNotActive",
+          "message": "Invoice Sections can only be changed for active subscriptions."
+        }
+      }
+    }
+  }
+}

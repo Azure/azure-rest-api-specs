@@ -1,0 +1,63 @@
+{
+  "parameters": {
+    "api-version": "2020-10-01-preview",
+    "billingAccountName": "{billingAccountName}",
+    "billingProfileName": "{billingProfileName}",
+    "reservationOrderId": "{reservationOrderId}",
+    "reservationId": "{reservationId}"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/reservationOrders/{reservationOrderId}/reservations/{reservationId}",
+        "type": "microsoft.billing/reservationOrders",
+        "name": "Reservation Name",
+        "location": "global",
+        "sku": {
+          "name": "sql_enterprise_licenses"
+        },
+        "properties": {
+          "appliedScopes": null,
+          "appliedScopeType": "Shared",
+          "reservedResourceType": "SqlAzureHybridBenefit",
+          "quantity": 1,
+          "provisioningState": "Succeeded",
+          "expiryDate": null,
+          "reviewDate": null,
+          "provisioningSubState": null,
+          "displayName": "SQL_Server_Enterprise_Edition",
+          "userFriendlyRenewState": "NotApplicable",
+          "userFriendlyAppliedScopeType": "Shared",
+          "effectiveDateTime": "2020-07-30T18:36:50.7939106Z",
+          "skuDescription": null,
+          "term": null,
+          "renew": false,
+          "renewSource": null,
+          "utilization": {
+            "trend": null,
+            "aggregates": [
+              {
+                "grain": 1.0,
+                "grainUnit": "days",
+                "value": null,
+                "valueUnit": "percentage"
+              },
+              {
+                "grain": 7.0,
+                "grainUnit": "days",
+                "value": null,
+                "valueUnit": "percentage"
+              },
+              {
+                "grain": 30.0,
+                "grainUnit": "days",
+                "value": null,
+                "valueUnit": "percentage"
+              }
+            ]
+          }
+        }
+      }
+    }
+  }
+}

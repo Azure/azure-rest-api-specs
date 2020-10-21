@@ -1,0 +1,28 @@
+{
+  "parameters": {
+    "api-version": "2020-10-01-preview",
+    "billingAccountName": "{billingAccountName}",
+    "billingProfileName": "{billingProfileName}",
+    "invoiceSectionName": "{invoiceSectionName}",
+    "billingSubscriptionName": "{billingSubscriptionName}",
+    "parameters": {
+      "destinationInvoiceSectionId": "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/invoiceSections/{newInvoiceSectionName}",
+      "destinationBillingProfileId": "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{newBillingProfileName}"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "billingSubscriptionName": "Test subscription"
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "Location": "https://management.azure.com/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/invoiceSections/{invoiceSectionName}/billingSubscriptions/{billingSubscriptionName}/transfer/operationResults/10000000-0000-0000-0000-000000000001?api-version=2020-10-01-preview",
+        "Retry-After": "30"
+      }
+    }
+  }
+}
