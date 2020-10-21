@@ -210,17 +210,24 @@
       ]
     },
     "PrivateLinkServiceProxyForPrivateLinkHub": {
-      "properties": {
-        "id": {
-          "type": "string"
+      "allOf": [
+        {
+          "$ref": "#/definitions/PrivateLinkServiceProxyBase"
         },
-        "groupConnectivityInformation": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/GroupConnectivityInformationForPrivateLinkHub"
+        {
+          "properties": {
+            "id": {
+              "type": "string"
+            },
+            "groupConnectivityInformation": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/GroupConnectivityInformationForPrivateLinkHub"
+              }
+            }
           }
         }
-      }
+      ]
     },
     "RemotePrivateEndpointBase": {
       "properties": {
