@@ -11,11 +11,13 @@
       "properties": {
         "publishingProfile": {
           "source": {
-            "mediaLink": "https://mystorageaccount.blob.core.windows.net/mycontainer/package.zip?{sasKey}"
+            "mediaLink": "https://mystorageaccount.blob.core.windows.net/mycontainer/package.zip?{sasKey}",
+            "defaultConfigurationLink": "https://mystorageaccount.blob.core.windows.net/mycontainer/configuration.ps1?{sasKey}"
           },
           "manageActions": {
-            "install": "powershell -command \"Expand-Archive -Path package.zip -DestinationPath C:\\package\"",
-            "remove": "del C:\\package "
+            "install": "powershell configuration.ps1 package.zip install",
+            "remove": "powershell configuration.ps1 package.zip remove",
+            "update": "powershell configuration.ps1 package.zip update"
           },
           "targetRegions": [
             {
@@ -41,11 +43,13 @@
         "properties": {
           "publishingProfile": {
             "source": {
-              "mediaLink": "https://mystorageaccount.blob.core.windows.net/mycontainer/package.zip?{sasKey}"
+              "mediaLink": "https://mystorageaccount.blob.core.windows.net/mycontainer/package.zip?{sasKey}",
+              "defaultConfigurationLink": "https://mystorageaccount.blob.core.windows.net/mycontainer/configuration.ps1?{sasKey}"
             },
             "manageActions": {
-              "install": "powershell -command \"Expand-Archive -Path package.zip -DestinationPath C:\\package\"",
-              "remove": "del C:\\package "
+              "install": "powershell configuration.ps1 package.zip install",
+              "remove": "powershell configuration.ps1 package.zip remove",
+              "update": "powershell configuration.ps1 package.zip update"
             },
             "enableHealthCheck": false,
             "targetRegions": [
@@ -74,11 +78,13 @@
         "properties": {
           "publishingProfile": {
             "source": {
-              "mediaLink": "https://mystorageaccount.blob.core.windows.net/mycontainer/package.zip?{sasKey}"
+              "mediaLink": "https://mystorageaccount.blob.core.windows.net/mycontainer/package.zip?{sasKey}",
+              "defaultConfigurationLink": "https://mystorageaccount.blob.core.windows.net/mycontainer/configuration.ps1?{sasKey}"
             },
             "manageActions": {
-              "install": "powershell -command \"Expand-Archive -Path package.zip -DestinationPath C:\\package\"",
-              "remove": "del C:\\package "
+              "install": "powershell configuration.ps1 package.zip install",
+              "remove": "powershell configuration.ps1 package.zip remove",
+              "update": "powershell configuration.ps1 package.zip update"
             },
             "enableHealthCheck": false,
             "targetRegions": [
@@ -107,11 +113,13 @@
         "properties": {
           "publishingProfile": {
             "source": {
-              "mediaLink": "https://mystorageaccount.blob.core.windows.net/mycontainer/package.zip?{sasKey}"
+              "mediaLink": "https://mystorageaccount.blob.core.windows.net/mycontainer/package.zip?{sasKey}",
+              "defaultConfigurationLink": "https://mystorageaccount.blob.core.windows.net/mycontainer/configuration.ps1?{sasKey}"
             },
             "manageActions": {
-              "install": "powershell -command \"Expand-Archive -Path package.zip -DestinationPath C:\\package\"",
-              "remove": "del C:\\package "
+              "install": "powershell configuration.ps1 package.zip install",
+              "remove": "powershell configuration.ps1 package.zip remove",
+              "update": "powershell configuration.ps1 package.zip update"
             },
             "enableHealthCheck": false,
             "targetRegions": [
