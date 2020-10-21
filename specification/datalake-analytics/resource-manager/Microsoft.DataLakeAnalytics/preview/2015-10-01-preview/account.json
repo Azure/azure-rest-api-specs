@@ -972,55 +972,6 @@
           }
         }
       },
-      "delete": {
-        "tags": [
-          "Account"
-        ],
-        "operationId": "Account_Delete",
-        "description": "Begins the delete process for the Data Lake Analytics account object specified by the account name.",
-        "parameters": [
-          {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the Azure resource group that contains the Data Lake Analytics account."
-          },
-          {
-            "name": "accountName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the Data Lake Analytics account to delete"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": ""
-          },
-          "202": {
-            "description": ""
-          },
-          "404": {
-            "description": ""
-          },
-          "204": {
-            "description": ""
-          },
-          "409": {
-            "description": ""
-          }
-        },
-        "x-ms-long-running-operation": true
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataLakeAnalytics/accounts/{name}": {
       "put": {
         "tags": [
           "Account"
@@ -1126,9 +1077,56 @@
           }
         },
         "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "tags": [
+          "Account"
+        ],
+        "operationId": "Account_Delete",
+        "description": "Begins the delete process for the Data Lake Analytics account object specified by the account name.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the Azure resource group that contains the Data Lake Analytics account."
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the Data Lake Analytics account to delete"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          },
+          "202": {
+            "description": ""
+          },
+          "404": {
+            "description": ""
+          },
+          "204": {
+            "description": ""
+          },
+          "409": {
+            "description": ""
+          }
+        },
+        "x-ms-long-running-operation": true
       }
     }
-  },
+  },   
   "definitions": {
     "StorageAccountProperties": {
       "required": [
