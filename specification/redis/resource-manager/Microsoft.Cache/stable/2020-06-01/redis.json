@@ -2073,7 +2073,15 @@
         },
         "redisVersion": {
           "type": "string",
-          "description": "Redis version."
+          "description": "Redis version. Valid values: (4, 6)",
+          "enum": [
+            "4",
+            "6"
+          ],
+          "x-ms-enum": {
+            "name": "RedisVersion",
+            "modelAsString": true
+          }
         },
         "zones": {
           "type": "array",
