@@ -198,11 +198,12 @@ input-file:
 - Microsoft.Security/stable/2020-01-01/discoveredSecuritySolutions.json
 - Microsoft.Security/stable/2020-01-01/securitySolutionsReferenceData.json
 - Microsoft.Security/stable/2020-01-01/externalSecuritySolutions.json
-- Microsoft.Security/preview/2020-01-01-preview/secureScore.json
+- Microsoft.Security/stable/2020-01-01/secureScore.json
 - Microsoft.Security/stable/2020-01-01/SecuritySolutions.json
 - Microsoft.Security/preview/2020-01-01-preview/connectors.json
 - Microsoft.Security/preview/2020-08-06-preview/iotDefenderSettings.json
 - Microsoft.Security/preview/2020-08-06-preview/iotSensors.json
+- Microsoft.Security/preview/2020-08-06-preview/devices.json
 - Microsoft.Security/preview/2020-08-06-preview/onPremiseIotSensors.json
 
 # Needed when there is more than one input file
@@ -375,6 +376,7 @@ input-file:
 - Microsoft.Security/stable/2020-01-01/jitNetworkAccessPolicies.json
 - Microsoft.Security/stable/2020-01-01/serverVulnerabilityAssessments.json	
 - Microsoft.Security/stable/2020-01-01/topologies.json
+- Microsoft.Security/stable/2020-01-01/secureScore.json
 
 # Needed when there is more than one input file
 override-info:
@@ -389,6 +391,7 @@ These settings apply only when `--tag=package-2020-08-preview-only` is specified
 input-file:
 - Microsoft.Security/preview/2020-08-06-preview/iotDefenderSettings.json
 - Microsoft.Security/preview/2020-08-06-preview/iotSensors.json
+- Microsoft.Security/preview/2020-08-06-preview/devices.json
 - Microsoft.Security/preview/2020-08-06-preview/onPremiseIotSensors.json
 
 # Needed when there is more than one input file
