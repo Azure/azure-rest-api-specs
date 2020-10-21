@@ -7006,6 +7006,7 @@
           "items": {
             "$ref": "#/definitions/CustomEntityAlias"
           },
+          "x-nullable": true,
           "description": "An array of complex objects that can be used to specify alternative spellings or synonyms to the root entity name."
         }
       },
@@ -7018,7 +7019,6 @@
       "properties": {
         "text": {
           "type": "string",
-          "x-nullable": true,
           "description": "The text of the alias."
         },
         "caseSensitive": {
@@ -7325,10 +7325,12 @@
       "properties": {
         "defaultLanguageCode": {
           "$ref": "#/definitions/CustomEntityLookupSkillLanguage",
+          "x-nullable": true,
           "description": "A value indicating which language code to use. Default is en."
         },
         "entitiesDefinitionUri": {
           "type": "string",
+          "x-nullable": true,
           "description": "Path to a JSON or CSV file containing all the target text to match against. This entity definition is read at the beginning of an indexer run. Any updates to this file during an indexer run will not take effect until subsequent runs. This config must be accessible over HTTPS."
         },
         "inlineEntitiesDefinition": {
@@ -7336,6 +7338,7 @@
           "items": {
             "$ref": "#/definitions/CustomEntity"
           },
+          "x-nullable": true,
           "description": "The inline CustomEntity definition."
         },
         "globalDefaultCaseSensitive": {
