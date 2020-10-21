@@ -26,7 +26,17 @@ These are the global settings for the Reservations API.
 
 ``` yaml
 openapi-type: arm
-tag: package-preview-2019-07-19
+tag: package-2020-10-preview
+```
+
+### Tag: package-2020-10-preview
+
+These settings apply only when `--tag=package-2020-10-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2020-10-preview'
+input-file:
+  - Microsoft.Capacity/preview/2019-07-19/quota.json
+  - Microsoft.Capacity/preview/2020-10-01-preview/reservations.json
 ```
 
 ### Tag: package-preview-2019-07-19
