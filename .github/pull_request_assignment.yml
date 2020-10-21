@@ -1,5 +1,12 @@
 ---
 - rule:
+    # eventgrid data-plane PR
+    paths:
+      - "specification/eventgrid/data-plane/**"
+    reviewers:
+      - lmazuel
+
+- rule:
     # data-plane PR
     paths:
       - "specification/**/data-plane/**"
@@ -8,13 +15,14 @@
       - jhendrixMSFT
       - lmazuel
       - tjprescott
+      
 
 - rule:
     paths:
       - "specification/network/**"
     reviewers:
+      - kairu-ms
       - lirenhe
-      - MyronFanQiu
 
 - rule:
     paths:
@@ -23,16 +31,16 @@
       - MyronFanQiu
 
 - rule:
+    paths: "specification/@(resources|powerplatform)/**"
+    reviewers:
+      - raych1
+      
+- rule:
     paths: "specification/compute/**"
     reviewers:
       - ArcturusZhang
       - fengzhou-msft
       - yungezz
-
-- rule:
-    paths: "specification/resources/**"
-    reviewers:
-      - raych1
 
 - rule:
     paths:
@@ -64,7 +72,7 @@
       - "specification/monitor/**"
     reviewers:
       - weidongxu-microsoft
-      - MyronFanQiu
+      - kairu-ms
 
 - rule:
     paths:
@@ -73,11 +81,11 @@
       - qianwens
       - Juliehzl
 
-- rule:
-    paths: "specification/mediaservices/**"
-    reviewers:
-      - allenjzhang
 
+- rule:	
+    paths: "specification/mediaservices/**"	
+    reviewers:	
+      - allenjzhang
 - rule:
     paths:
       - "specification/@(keyvault|notificationhubs)/**"
@@ -89,7 +97,7 @@
     paths:
       - "specification/@(containerservice|containerinstance)/**"
     reviewers:
-      - NullMDR
+      - PhoenixHe-msft
       - fengzhou-msft
       - yungezz
 
@@ -104,7 +112,7 @@
     paths:
       - "specification/portal/**"
     reviewers:
-      - NullMDR
+      - PhoenixHe-msft
 
 - rule:
     paths:
@@ -128,7 +136,25 @@
       - ".azure-pipelines-preproduction/**"
     reviewers:
       - akning-ms
-      - NullMDR
+      - PhoenixHe-msft
+      
+- rule:	
+    paths:	
+      - "documentation/**"	
+    reviewers:	
+      - josefree	
+      - akning-ms	
+
+- rule:	
+    paths:	
+      - "**/package.json"	
+      - ".github/**"	
+      - "**/azure-pipelines.yml"	
+      - ".azure-pipelines/**"	
+      - ".azure-pipelines-preproduction/**"	
+    reviewers:	
+      - akning-ms	
+      - PhoenixHe-msft	
       - raych1
 
 - rule:
@@ -138,17 +164,17 @@
     reviewers:
       - yungezz
       - erich-wang
-      - NullMDR
-      - raych1
+      - PhoenixHe-msft
       - lirenhe
       - weidongxu-microsoft
       - ArcturusZhang
       - xccc-msft
+      - raych1
       - ChenTanyi
       - fengzhou-msft
       - njuCZ
       - akning-ms
-      - markcowl
       - leni-msft
       - qianwens
       - ruowan
+      - jianyexi

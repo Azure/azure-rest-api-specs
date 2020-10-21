@@ -4,6 +4,17 @@
     "title": "DataFactoryManagementClient",
     "version": "2018-06-01"
   },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
   "paths": {},
   "definitions": {
     "Dataset": {
@@ -472,6 +483,33 @@
         }
       }
     },
+    "DatasetTarCompression": {
+      "x-ms-discriminator-value": "Tar",
+      "description": "The Tar archive method used on a dataset.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DatasetCompression"
+        }
+      ],
+      "properties": {}
+    },
+    "DatasetTarGZipCompression": {
+      "x-ms-discriminator-value": "TarGZip",
+      "description": "The TarGZip compression method used on a dataset.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DatasetCompression"
+        }
+      ],
+      "properties": {
+        "level": {
+          "description": "The TarGZip compression level.",
+          "$ref": "#/definitions/CompressionLevel"
+        }
+      }
+    },
     "CompressionLevel": {
       "title": "Microsoft.Azure.Management.DataFactories.Models.CompressionLevel",
       "description": "All available compression levels.",
@@ -729,7 +767,9 @@
             "deflate",
             "zipDeflate",
             "snappy",
-            "lz4"
+            "lz4",
+            "tar",
+            "tarGZip"
           ],
           "x-ms-enum": {
             "name": "compressionCodec",
@@ -868,7 +908,8 @@
           "enum": [
             "none",
             "zlib",
-            "snappy"
+            "snappy",
+            "lzo"
           ],
           "x-ms-enum": {
             "name": "orcCompressionCodec",
@@ -1478,6 +1519,38 @@
       },
       "required": [
         "collectionName"
+      ]
+    },
+    "MongoDbAtlasCollectionDataset": {
+      "x-ms-discriminator-value": "MongoDbAtlasCollection",
+      "description": "The MongoDB Atlas database dataset.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Dataset"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "MongoDB Atlas database dataset properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/MongoDbAtlasCollectionDatasetTypeProperties"
+        }
+      },
+      "required": [
+        "typeProperties"
+      ]
+    },
+    "MongoDbAtlasCollectionDatasetTypeProperties": {
+      "description": "MongoDB Atlas database dataset properties.",
+      "properties": {
+        "collection": {
+          "type": "object",
+          "description": "The collection name of the MongoDB Atlas database. Type: string (or Expression with resultType string)."
+        }
+      },
+      "required": [
+        "collection"
       ]
     },
     "MongoDbV2CollectionDataset": {
@@ -3218,6 +3291,36 @@
         "listName": {
           "type": "object",
           "description": "The name of the SharePoint Online list. Type: string (or Expression with resultType string)."
+        }
+      }
+    },
+    "AzureDatabricksDeltaLakeDataset": {
+      "x-ms-discriminator-value": "AzureDatabricksDeltaLakeDataset",
+      "description": "Azure Databricks Delta Lake dataset.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Dataset"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "Properties specific to this dataset type.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/AzureDatabricksDeltaLakeDatasetTypeProperties"
+        }
+      }
+    },
+    "AzureDatabricksDeltaLakeDatasetTypeProperties": {
+      "description": "Azure Databricks Delta Lake Dataset Properties",
+      "properties": {
+        "table": {
+          "type": "object",
+          "description": "The name of delta table. Type: string (or Expression with resultType string)."
+        },
+        "database": {
+          "type": "object",
+          "description": "The database name of delta table. Type: string (or Expression with resultType string)."
         }
       }
     }
