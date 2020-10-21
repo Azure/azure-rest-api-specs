@@ -1,10 +1,50 @@
 {
   "parameters": {
-    "subscriptionId": "12345678-1234-1234-1234-12345678abc",
-    "resourceGroupName": "exampleResourceGroup",
-    "workspaceName": "exampleWorkspace",
-    "integrationRuntimeName": "exampleManagedIntegrationRuntime",
-    "api-version": "2019-06-01-preview"
+    "subscriptionId": "f092f138-3be9-4ae2-bbaa-8e36f547ca97",
+    "resourceGroupName": "WorkspaceRG",
+    "workspaceName": "TestWorkspace",
+    "privateEndpointConnectionProxyName": "TestPECProxy",
+    "api-version": "2019-06-01-preview",
+    "request": {
+      "id": null,
+      "name": null,
+      "type": null,
+      "location": null,
+      "remotePrivateEndpoint": {
+        "privateLinkServiceProxies": [
+          {
+            "groupConnectivityInformation": [
+              {
+                "groupId": "Dev",
+                "memberName": "Dev",
+                "customerVisibleFqdns": null,
+                "internalFqdn": null,
+                "redirectMapId": null,
+                "privateLinkServiceArmRegion": null
+              }
+            ],
+            "id": "id",
+            "remotePrivateLinkServiceConnectionState": null,
+            "remotePrivateEndpointConnection": null
+          }
+        ],
+        "id": "remotePrivateEndpointId",
+        "location": null,
+        "immutableSubscriptionId": null,
+        "immutableResourceId": null,
+        "manualPrivateLinkServiceConnections": [
+          {
+            "name": "connectionName",
+            "groupIds": [
+              "Dev"
+            ],
+            "requestMessage": "requestMessage"
+          }
+        ],
+        "privateLinkServiceConnections": null,
+        "connectionDetails": null
+      }
+    }
   },
   "responses": {
     "200": {
@@ -21,7 +61,6 @@
               "id": "id"
             }
           ],
-          "id": "remotePrivateEndpointId",
           "manualPrivateLinkServiceConnections": [
             {
               "name": "connectionName",
@@ -49,10 +88,8 @@
       }
     },
     "404": {
-      "body": ""
     },
     "409": {
-      "body": ""
     }
   }
 }

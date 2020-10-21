@@ -4,7 +4,55 @@
     "resourceGroupName": "WorkspaceRG",
     "workspaceName": "WorkspaceRG",
     "privateEndpointConnectionProxyName": "TestPECProxy",
-    "api-version": "2019-06-01-preview"
+    "api-version": "2019-06-01-preview",
+    "request": {
+      "id": null,
+      "name": null,
+      "type": "Microsoft.Synapse/workspaces/privateEndpointConnectionProxies",
+      "location": null,
+      "remotePrivateEndpoint": {
+        "privateLinkServiceProxies": [
+          {
+            "groupConnectivityInformation": [
+              {
+                "groupId": "Web",
+                "memberName": "Web",
+                "customerVisibleFqdns": null,
+                "internalFqdn": null,
+                "redirectMapId": null,
+                "privateLinkServiceArmRegion": null
+              }
+            ],
+            "id": "/subscriptions/c1531030-f8ca-4225-8d57-77c511e76c70/resourceGroups/NetworkRG/providers/Microsoft.Network/privateEndpoints/PrivateEndpoint/privateLinkServiceProxies/TestPLSProxy",
+            "remotePrivateLinkServiceConnectionState": null,
+            "remotePrivateEndpointConnection": null
+          }
+        ],
+        "id": "/subscriptions/c1531030-f8ca-4225-8d57-77c511e76c70/resourceGroups/NetworkRG/providers/Microsoft.Network/privateEndpoints/PrivateEndpoint",
+        "location": "PrivateEndpointLocation",
+        "immutableSubscriptionId": "fb3a835e-4ce2-4a9c-bade-e5c4a343d093",
+        "immutableResourceId": "9e66d360-7132-4882-9316-1a988c968d21",
+        "manualPrivateLinkServiceConnections": [
+          {
+            "name": "TestPLSConnection",
+            "groupIds": [
+              "Web"
+            ],
+            "requestMessage": "Please approve my connection"
+          }
+        ],
+        "privateLinkServiceConnections": null,
+        "connectionDetails": [
+          {
+            "groupId": "Web",
+            "memberName": "Web",
+            "id": "id38",
+            "privateIpAddress": "10.0.0.38",
+            "linkIdentifier": "38"
+          }
+        ]
+      }
+    }
   },
   "responses": {
     "202": {
@@ -13,7 +61,6 @@
       }
     },
     "409": {
-      "body": ""
     }
   }
 }
