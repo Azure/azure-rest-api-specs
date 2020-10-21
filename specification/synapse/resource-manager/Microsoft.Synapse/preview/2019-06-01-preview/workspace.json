@@ -802,60 +802,6 @@
           }
         }
       }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces/{workspaceName}/privateEndpointConnections/{privateEndpointConnectionName}": {
-      "parameters": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
-        },
-        {
-          "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
-        },
-        {
-          "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
-        },
-        {
-          "$ref": "#/parameters/workspaceNameParameter"
-        },
-        {
-          "$ref": "../../../../common/v1/privateEndpointConnection.json#/parameters/PrivateEndpointConnectionNameParameter"
-        }
-      ],
-      "get": {
-        "operationId": "GetPrivateEndpointConnectionInWorkspace",
-        "description": "Get PrivateEndpointConnection by name in workspace",
-        "tags": [
-          "Workspace",
-          "PrivateEndpointConnection"
-        ],
-        "deprecated": false,
-        "responses": {
-          "200": {
-            "schema": {
-              "$ref": "../../../../common/v1/privateEndpointConnection.json#/definitions/PrivateEndpointConnection"
-            },
-            "description": "OK"
-          },
-          "404": {
-            "description": "Not found"
-          },
-          "default": {
-            "schema": {
-              "$ref": "#/definitions/ErrorContract"
-            },
-            "description": ""
-          }
-        },
-        "consumes": [],
-        "produces": [
-          "application/json"
-        ],
-        "x-ms-examples": {
-          "Get PrivateEndpointConnection by name in workspace": {
-            "$ref": "./examples/GetPrivateEndpointConnectionInWorkspace.json"
-          }
-        }
-      }
     }
   },
   "definitions": {
@@ -1276,7 +1222,7 @@
       "in": "path",
       "required": true,
       "type": "string",
-      "description": "Name of the workspace",
+      "description": "The name of the workspace",
       "x-ms-parameter-location": "method"
     },
     "scopePoolNameParameter": {
