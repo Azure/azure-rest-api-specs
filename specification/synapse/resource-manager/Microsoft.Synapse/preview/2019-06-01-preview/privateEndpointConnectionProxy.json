@@ -438,23 +438,22 @@
       ]
     },
     "PrivateEndpointConnectionForPrivateLinkHubProxyBase": {
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/Resource"
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
         },
-        {
+        "name": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        },
+        "remotePrivateEndpoint": {
           "type": "object",
-          "properties": {
-            "location": {
-              "type": "string"
-            },
-            "remotePrivateEndpoint": {
-              "type": "object",
-              "$ref": "../../../../common/v1/privateEndpointConnection.json#/definitions/RemotePrivateEndpointForPrivateLinkHub"
-            }
-          }
+          "$ref": "../../../../common/v1/privateEndpointConnection.json#/definitions/RemotePrivateEndpointForPrivateLinkHub"
         }
-      ]
+      }
     },
     "PrivateEndpointConnectionForPrivateLinkHubProxy": {
       "allOf": [
