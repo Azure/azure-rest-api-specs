@@ -56,7 +56,7 @@
         "responses": {
           "200": {
             "schema": {
-              "$ref": "#/definitions/PrivateEndpointConnection"
+              "$ref": "../../../../common/v1/privateEndpointConnection.json#/definitions/PrivateEndpointConnection"
             },
             "description": "Private endpoint connection"
           },
@@ -86,7 +86,7 @@
             "description": "Request body of private endpoint connection to create.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/PrivateEndpointConnection"
+              "$ref": "../../../../common/v1/privateEndpointConnection.json#/definitions/PrivateEndpointConnection"
             }
           }
         ],
@@ -100,13 +100,13 @@
         "responses": {
           "201": {
             "schema": {
-              "$ref": "#/definitions/PrivateEndpointConnection"
+              "$ref": "../../../../common/v1/privateEndpointConnection.json#/definitions/PrivateEndpointConnection"
             },
             "description": "Private endpoint connection"
           },
           "200": {
             "schema": {
-              "$ref": "#/definitions/PrivateEndpointConnection"
+              "$ref": "../../../../common/v1/privateEndpointConnection.json#/definitions/PrivateEndpointConnection"
             },
             "description": "Private endpoint connection"
           },
@@ -191,7 +191,7 @@
         "responses": {
           "200": {
             "schema": {
-              "$ref": "#/definitions/PrivateEndpointConnectionList"
+              "$ref": "../../../../common/v1/privateEndpointConnection.json#/definitions/PrivateEndpointConnectionList"
             },
             "description": "Private endpoint connection"
           },
@@ -211,96 +211,5 @@
     }
   },
   "definitions": {
-    "PrivateEndpointConnectionList": {
-      "description": "A list of private endpoint connections",
-      "type": "object",
-      "properties": {
-        "value": {
-          "description": "Array of results.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/PrivateEndpointConnection"
-          },
-          "readOnly": true
-        },
-        "nextLink": {
-          "description": "Link to retrieve next page of results.",
-          "type": "string",
-          "readOnly": true
-        }
-      }
-    },
-    "PrivateEndpointConnection": {
-      "description": "A private endpoint connection",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ProxyResource"
-        }
-      ],
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/PrivateEndpointConnectionProperties",
-          "description": "Private endpoint connection properties.",
-          "x-ms-client-flatten": true
-        }
-      }
-    },
-    "PrivateEndpointConnectionProperties": {
-      "description": "Properties of a private endpoint connection.",
-      "type": "object",
-      "properties": {
-        "privateEndpoint": {
-          "$ref": "#/definitions/PrivateEndpoint",
-          "description": "The private endpoint which the connection belongs to."
-        },
-        "privateLinkServiceConnectionState": {
-          "$ref": "#/definitions/PrivateLinkServiceConnectionState",
-          "description": "Connection state of the private endpoint connection."
-        },
-        "provisioningState": {
-          "description": "Provisioning state of the private endpoint connection.",
-          "type": "string",
-          "readOnly": true
-        }
-      }
-    },
-    "PrivateEndpoint": {
-      "description": "Private endpoint details",
-      "type": "object",
-      "properties": {
-        "id": {
-          "description": "Resource id of the private endpoint.",
-          "type": "string",
-          "readOnly": true
-        }
-      },
-      "x-ms-azure-resource": true
-    },
-    "PrivateLinkServiceConnectionState": {
-      "description": "Connection state details of the private endpoint",
-      "type": "object",
-      "properties": {
-        "status": {
-          "description": "The private link service connection status.",
-          "type": "string",
-          "enum": [
-            "Approved",
-            "Pending",
-            "Rejected",
-            "Disconnected"
-          ]
-        },
-        "description": {
-          "description": "The private link service connection description.",
-          "type": "string"
-        },
-        "actionsRequired": {
-          "description": "The actions required for private link service connection.",
-          "type": "string",
-          "readOnly": true
-        }
-      }
-    }
   }
 }
