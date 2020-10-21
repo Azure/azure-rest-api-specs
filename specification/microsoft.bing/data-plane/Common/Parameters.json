@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "2017-08-30",
+    "version": "2020-06-10",
     "title": "Common Referenced Parameters File",
     "description": "File containing commonly referenced parameters."
   },
@@ -9,49 +9,13 @@
   "parameters": {
     "GlobalEndpoint": {
       "name": "Endpoint",
-      "description": "Supported Microsoft.Bing endpoints (protocol and hostname, for example: \"https://westus.api.bing.microsoft.com\", \"https://api.bing.microsoft.com\").",
+      "description": "Supported Bing Search endpoints (protocol and hostname, for example: \"https://westus.api.bing.microsoft.com\", \"https://api.bing.microsoft.com\").",
       "x-ms-parameter-location": "client",
       "required": true,
       "type": "string",
       "in": "path",
       "x-ms-skip-url-encoding": true,
       "default": "https://api.bing.microsoft.com"
-    },
-    "ImageStream": {
-      "name": "Image",
-      "in": "body",
-      "required": true,
-      "x-ms-parameter-location": "method",
-      "description": "An image stream.",
-      "schema": {
-        "type": "object",
-        "format": "file"
-      }
-    },
-    "ImageUrl": {
-      "name": "ImageUrl",
-      "in": "body",
-      "required": true,
-      "x-ms-parameter-location": "method",
-      "x-ms-client-flatten": true,
-      "description": "A JSON document with a URL pointing to the image that is to be analyzed.",
-      "schema": {
-        "$ref": "#/definitions/ImageUrl"
-      }
-    }
-  },
-  "definitions": {
-    "ImageUrl": {
-      "type": "object",
-      "required": [
-        "url"
-      ],
-      "properties": {
-        "url": {
-          "description": "Publicly reachable URL of an image",
-          "type": "string"
-        }
-      }
     }
   }
 }
