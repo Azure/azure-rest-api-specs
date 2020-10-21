@@ -888,11 +888,11 @@
             "schema": {
               "$ref": "#/definitions/StorageContainerListResult"
             }
-          },          
-          "410":{
-              "description": "The resource referred by the Storage account  is gone."
-            }
           },
+          "410": {
+            "description": "The resource referred by the Storage account  is gone."
+          }
+        },
         "x-ms-examples": {
           "Lists the Azure Storage containers": {
             "$ref": "./examples/StorageAccounts_ListStorageContainers.json"
@@ -1690,11 +1690,11 @@
           },
           "description": "The list of compute policies associated with this account."
         },
-        "hiveMetastores":{
+        "hiveMetastores": {
           "readOnly": true,
           "type": "array",
           "items": {
-            "$ref": "#/definitions/hiveMetastores"
+            "$ref": "#/definitions/HiveMetastore"
           },
           "description": "The list of hiveMetastores associated with this account."
         },
@@ -1702,7 +1702,7 @@
           "readOnly": true,
           "type": "array",
           "items": {
-            "$ref": "#/definitions/virtualNetworkRules"
+            "$ref": "#/definitions/VirtualNetworkRule"
           },
           "description": "The list of virtualNetwork rules associated with this account."
         },
@@ -2197,6 +2197,151 @@
         }
       },
       "description": "Data Lake Analytics firewall rule list information."
+    },
+    "VirtualNetworkRuleState": {
+      "readOnly": true,
+      "type": "string",
+      "enum": [
+        "Active",
+        "NetworkSourceDeleted",
+        "Failed"
+      ],
+      "x-ms-enum": {
+        "name": "VirtualNetworkRuleState",
+        "modelAsString": false
+      },
+      "description": "The current state of the VirtualNetworkRule for this account."
+    },
+    "VirtualNetworkRule": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/SubResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "readOnly": true,
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/VirtualNetworkRuleProperties",
+          "description": "The  VirtualNetwork rule properties."
+        }
+      },
+      "description": "Data Lake Analytics  VirtualNetwork Rule information."
+    },
+    "VirtualNetworkRuleProperties": {
+      "properties": {
+        "subnetId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The resource identifier for the subnet"
+        },
+        "virtualNetworkRuleState": {
+          "readOnly": true,
+          "$ref": "#/definitions/VirtualNetworkRuleState",
+          "description": "The current state of the VirtualNetwork Rule"
+        }
+      },
+      "description": "The VirtualNetwork Rule properties."
+    },
+    "VirtualNetworkRuleListResult": {
+      "properties": {
+        "value": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VirtualNetworkRule"
+          },
+          "description": "The results of the list operation."
+        },
+        "nextLink": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The link (url) to the next page of results."
+        }
+      },
+      "description": "Data Lake Analytics VirtualNetwork rule list information."
+    },
+    "HiveMetastore":{
+    "allOf": [
+      {
+        "$ref": "#/definitions/SubResource"
+      }
+    ],
+    "properties": {
+      "properties": {
+        "readOnly": true,
+        "x-ms-client-flatten": true,
+        "$ref": "#/definitions/HiveMetastoreProperties",
+        "description": "The  HiveMetastoreProperties rule properties."
+      }
+    }
+    },
+    "HiveMetastoreProperties": {
+      "properties": {
+        "serverUri": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The serverUri for the Hive MetaStore"
+        },
+        "databaseName": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The databaseName for the Hive MetaStore"
+        },
+        "runtimeVersion": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The runtimeVersion for the Hive MetaStore"
+        },
+        "userName": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The userName for the Hive MetaStore"
+        },
+        "password": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The password for the Hive MetaStore"
+        },
+        "nestedResourceProvisioningState": {
+          "readOnly": true,
+          "$ref": "#/definitions/NestedResourceProvisioningState",
+          "description": "The current state of the NestedReource"
+        }
+      },
+      "description": "The HiveMetastore  properties."
+    },
+    "HiveMetastoreListResult": {
+      "properties": {
+        "value": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/HiveMetastore"
+          },
+          "description": "The results of the list operation."
+        },
+        "nextLink": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The link (url) to the next page of results."
+        }
+      },
+      "description": "Data Lake Analytics HiveMetastore list information."
+    },
+    "NestedResourceProvisioningState": {
+      "readOnly": true,
+      "type": "string",
+      "enum": [
+        "Succeeded",
+        "Canceled",
+        "Failed"
+      ],
+      "x-ms-enum": {
+        "name": "NestedResourceProvisioningState",
+        "modelAsString": false
+      },
+      "description": "The current state of the NestedResourceProvisioning for this account."
     },
     "Operation": {
       "properties": {
