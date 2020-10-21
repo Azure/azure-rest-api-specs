@@ -32,6 +32,31 @@
         "id": "/subscriptions/4818b6dc-c321-4a15-9f54-0b2fc35ee7bc/resourceGroups/myrg/providers/Microsoft.Synapse/workspaces/scopepoolws-5dbd25e4-b5a1-4537-ae19-7631c2cba51d/scopePools/",
         "type": "Microsoft.Synapse/workspaces/scopePools"
       }
+    },
+    "400": {
+      "body": {
+        "error": {
+          "code": "Error code",
+          "message": "Error message"
+        }
+      }
+    },
+    "403": {
+      "body": {
+        "error": {
+          "code": "ReachedPerWorkspaceScopePoolsLimit",
+          "message": "Reached the maximum number of scope pools allowed for Workspace: scopepoolws-5dbd25e4-b5a1-4537-ae19-7631c2cba51d. Please contact Microsoft support for more details."
+        }
+      }
+    },
+    "404": {},
+    "409": {
+      "body": {
+        "error": {
+          "code": "ResourceInUnupdatableState",
+          "message": "Target Scope pool is not in succeeded state. Current state: Provisioning"
+        }
+      }
     }
   }
 }

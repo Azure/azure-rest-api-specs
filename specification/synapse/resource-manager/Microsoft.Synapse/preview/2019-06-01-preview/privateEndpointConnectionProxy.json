@@ -59,7 +59,7 @@
         "responses": {
           "200": {
             "schema": {
-              "$ref": "#/definitions/PrivateEndpointConnectionProxy"
+              "$ref": "#/definitions/ValidatePrivateEndpointConnectionProxyResponse"
             },
             "description": "OK"
           },
@@ -191,7 +191,7 @@
           "application/json"
         ],
         "x-ms-examples": {
-          "Get managed identity by name in the workspace": {
+          "Get PrivateEndpointConnectionProxy by name in the workspace": {
             "$ref": "./examples/GetPrivateEndpointConnectionProxyByName.json"
           }
         }
@@ -387,23 +387,30 @@
   },
   "definitions": {
     "PrivateEndpointConnectionProxyBase": {
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/Resource"
+      "properties": {
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Fully qualified resource Id for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}"
         },
-        {
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The name of the resource"
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The type of the resource. Ex- Microsoft.Compute/virtualMachines or Microsoft.Storage/storageAccounts."
+        },
+        "location": {
+          "type": "string"
+        },
+        "remotePrivateEndpoint": {
           "type": "object",
-          "properties": {
-            "location": {
-              "type": "string"
-            },
-            "remotePrivateEndpoint": {
-              "type": "object",
-              "$ref": "../../../../common/v1/privateEndpointConnection.json#/definitions/RemotePrivateEndpoint"
-            }
-          }
+          "$ref": "../../../../common/v1/privateEndpointConnection.json#/definitions/RemotePrivateEndpoint"
         }
-      ]
+      }
     },
     "PrivateEndpointConnectionProxy": {
       "allOf": [
@@ -426,6 +433,13 @@
         }
       ]
     },
+    "ValidatePrivateEndpointConnectionProxyResponse": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/ValidatePrivateEndpointConnectionProxy"
+        }
+      ]
+    },
     "PrivateEndpointConnectionForPrivateLinkHubProxyBase": {
       "allOf": [
         {
@@ -439,7 +453,7 @@
             },
             "remotePrivateEndpoint": {
               "type": "object",
-              "$ref": "../../../../common/v1/privateEndpointConnection.json#/definitions/RemotePrivateEndpoint"
+              "$ref": "../../../../common/v1/privateEndpointConnection.json#/definitions/RemotePrivateEndpointForPrivateLinkHub"
             }
           }
         }
