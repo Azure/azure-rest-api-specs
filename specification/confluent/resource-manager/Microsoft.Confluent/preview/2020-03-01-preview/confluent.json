@@ -114,6 +114,39 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Confluent/organizations/agreements": {
+      "get": {
+        "operationId": "MarketplaceAgreements_List",
+        "description": "Get marketplace agreement in the subscription.",
+        "x-ms-examples": {
+          "SetMarketplaceTerms": {
+            "$ref": "./examples/Organization_GetAgreementMarketplaceTerms.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Terms returned successfully",
+            "schema": {
+              "$ref": "#/definitions/AgreementTerms"
+            }
+          },
+          "default": {
+            "description": "Microsoft.Confluent error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ResourceProviderDefaultErrorResponse"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Confluent/organizations": {
       "get": {
         "tags": [
@@ -350,9 +383,6 @@
           },
           "202": {
             "description": "Accepted"
-          },
-          "204": {
-            "description": "The specified confluent resource does not exist in the subscription."
           },
           "default": {
             "description": "Default error response.",
@@ -679,6 +709,80 @@
           }
         }
       }
+    },
+    "AgreementTerms": {
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/AgreementProperties",
+          "description": "Represents the properties of the resource.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "description": "Terms properties for provided Publisher/Offer/Plan tuple"
+    },
+    "AgreementProperties": {
+      "properties": {
+        "publisher": {
+          "type": "string",
+          "description": "Publisher identifier string of image being deployed."
+        },
+        "product": {
+          "type": "string",
+          "description": "Offer identifier string of image being deployed."
+        },
+        "plan": {
+          "type": "string",
+          "description": "Plan identifier string of image being deployed."
+        },
+        "licenseTextLink": {
+          "type": "string",
+          "description": "Link to HTML with Microsoft and Publisher terms."
+        },
+        "privacyPolicyLink": {
+          "type": "string",
+          "description": "Link to the privacy policy of the publisher."
+        },
+        "retrieveDatetime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Date and time in UTC of when the terms were accepted. This is empty if Accepted is false."
+        },
+        "signature": {
+          "type": "string",
+          "description": "Terms signature."
+        },
+        "accepted": {
+          "type": "boolean",
+          "description": "If any version of the terms have been accepted, otherwise false."
+        }
+      },
+      "description": "Agreement Terms definition"
+    },
+    "Resource": {
+      "description": "ARM resource.",
+      "properties": {
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource ID."
+        },
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource name."
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource type."
+        }
+      },
+      "x-ms-azure-resource": true
     }
   },
   "parameters": {
@@ -714,6 +818,30 @@
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method"
+    },
+    "PublishersParameter": {
+      "name": "publisherId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "description": "Publisher identifier string of image being deployed."
+    },
+    "OffersParameter": {
+      "name": "offerId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "description": "Offer identifier string of image being deployed."
+    },
+    "PlansParameter": {
+      "name": "planId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "description": "Plan identifier string of image being deployed."
     }
   }
 }
