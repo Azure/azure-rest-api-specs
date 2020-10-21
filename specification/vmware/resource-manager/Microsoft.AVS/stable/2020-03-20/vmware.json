@@ -1868,6 +1868,10 @@
         }
       ],
       "properties": {
+        "provisioningState": {
+          "description": "The state of the cluster provisioning",
+          "$ref": "#/definitions/ClusterProvisioningState"
+        },
         "clusterId": {
           "description": "The identity",
           "type": "integer",
@@ -1894,20 +1898,24 @@
       "properties": {
         "provisioningState": {
           "description": "The state of the cluster provisioning",
-          "type": "string",
-          "readOnly": true,
-          "enum": [
-            "Succeeded",
-            "Failed",
-            "Cancelled",
-            "Deleting",
-            "Updating"
-          ],
-          "x-ms-enum": {
-            "name": "ClusterProvisioningState",
-            "modelAsString": true
-          }
+          "$ref": "#/definitions/ClusterProvisioningState"
         }
+      }
+    },
+    "ClusterProvisioningState": {
+      "description": "The state of the cluster provisioning",
+      "type": "string",
+      "readOnly": true,
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Cancelled",
+        "Deleting",
+        "Updating"
+      ],
+      "x-ms-enum": {
+        "name": "ClusterProvisioningState",
+        "modelAsString": true
       }
     },
     "PrivateCloudList": {
