@@ -577,7 +577,10 @@
             "description": ""
           },
           "400": {
-            "description": "Malformed request or key sub-resource not available in region"
+            "description": "Malformed request or key sub-resource not available in region",
+            "schema": {
+              "$ref": "../../../../common/v1/types.json#/definitions/ErrorContract"
+            }
           },
           "403": {
             "description": "Forbidden or scope pool limit reached",
@@ -643,10 +646,7 @@
         ],
         "responses": {
           "202": {
-            "schema": {
-              "type": "object"
-            },
-            "description": ""
+            "description": "Accepted"
           },
           "204": {
             "description": "No content"
@@ -718,6 +718,9 @@
             "description": ""
           },
           "403": {
+            "schema": {
+              "$ref": "../../../../common/v1/types.json#/definitions/ErrorContract"
+            },
             "description": "Not allowed"
           },
           "409": {
@@ -777,10 +780,10 @@
             "description": "OK"
           },
           "403": {
-            "description": "User subscription or tenant not allowed"
-          },
-          "404": {
-            "description": "Not found"
+            "description": "User subscription or tenant not allowed",
+            "schema": {
+              "$ref": "#/definitions/ErrorContract"
+            }
           },
           "default": {
             "schema": {

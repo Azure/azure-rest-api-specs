@@ -8,20 +8,22 @@
   },
   "responses": {
     "200": {
-      "name": "TestPEC",
-      "type": "Microsoft.Synapse/workspaces/privateEndpointConnections",
-      "id": "/subscriptions/f0a230bd-f2d3-4921-9df8-77db5dbaf787/resourceGroups/WorkspaceRG/providers/Microsoft.Synapse/workspaces/TestWorkspace/privateEndpointConnections/TestPEC",
-      "properties": {
-        "provisioningState": "Provisioning",
-        "privateEndpoint": {
-          "id": "/subscriptions/b1f884b1-1b5c-4ee4-935b-d1c8d034439c/resourceGroups/NetworkRG/providers/Microsoft.Network/privateEndpoints/PrivateEndpoint"
-        },
-        "privateLinkServiceConnectionState": {
-          "status": "Approved",
-          "description": "Please approve my connection"
+      "body": {
+        "name": "TestPEC",
+        "type": "Microsoft.Synapse/workspaces/privateEndpointConnections",
+        "id": "/subscriptions/f0a230bd-f2d3-4921-9df8-77db5dbaf787/resourceGroups/WorkspaceRG/providers/Microsoft.Synapse/workspaces/TestWorkspace/privateEndpointConnections/TestPEC",
+        "properties": {
+          "provisioningState": "Provisioning",
+          "privateEndpoint": {
+            "id": "/subscriptions/b1f884b1-1b5c-4ee4-935b-d1c8d034439c/resourceGroups/NetworkRG/providers/Microsoft.Network/privateEndpoints/PrivateEndpoint"
+          },
+          "privateLinkServiceConnectionState": {
+            "status": "Approved",
+            "description": "Please approve my connection"
+          }
         }
       }
     },
-    "404": { }
+    "404": {}
   }
 }
