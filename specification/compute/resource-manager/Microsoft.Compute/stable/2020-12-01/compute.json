@@ -7521,6 +7521,10 @@
             "type": "string"
           },
           "description": "Specifies the tags that are assigned to the virtual machine. For more information about using tags, see [Using tags to organize your Azure resources](https://docs.microsoft.com/azure/azure-resource-manager/resource-group-using-tags.md)."
+        },
+        "extendedLocation": {
+          "$ref": "#/definitions/ExtendedLocation",
+          "description": "The extended location of the Virtual Machine."
         }
       },
       "required": [
@@ -11729,6 +11733,34 @@
         }
       },
       "x-ms-azure-resource": true
+    },
+    "ExtendedLocationType": {
+      "type": "string",
+      "description": "The supported ExtendedLocation types. Currently only EdgeZone is supported in Microsoft.Compute resources.",
+      "enum": [
+        "EdgeZone"
+      ],
+      "x-ms-enum": {
+        "name": "ExtendedLocationTypes",
+        "modelAsString": true
+      }
+    },
+    "ExtendedLocation": {
+      "description": "ExtendedLocation complex type.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the extended location."
+        },
+        "type": {
+          "$ref": "#/definitions/ExtendedLocationType",
+          "description": "The type of the extended location."
+        }
+      },
+      "required": [
+        "name",
+        "type"
+      ]
     },
     "RecoveryWalkResponse": {
       "properties": {
