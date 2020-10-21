@@ -41,6 +41,33 @@
     }
   },
   "paths": {
+    "/providers/Microsoft.DataLakeAnalytics/operations": {
+      "get": {
+        "tags": [
+          "Operations"
+        ],
+        "operationId": "Operations_List",
+        "description": "Lists all of the available Data Lake Analytics REST API operations.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully listed the available operations for Data Lake Analytics.",
+            "schema": {
+              "$ref": "#/definitions/OperationListResult"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Lists all of the available Data Lake Analytics REST API operations": {
+            "$ref": "./examples/Operations_List.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataLakeAnalytics/accounts/{accountName}/StorageAccounts/{storageAccountName}": {
       "get": {
         "tags": [
@@ -154,16 +181,7 @@
             "required": true,
             "type": "string",
             "description": "The Azure Storage account to modify"
-          },
-          {
-            "name": "parameters",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/AddStorageAccountParameters"
-            },
-            "description": "The parameters containing the access key and suffix to update the storage account with."
-          },
+          },         
           {
             "$ref": "#/parameters/ApiVersionParameter"
           },
@@ -1020,7 +1038,8 @@
             "description": "",
             "schema": {
               "$ref": "#/definitions/DataLakeAnalyticsAccount"
-            }
+            },
+            "x-ms-azure-resource": true
           }
         },
         "x-ms-long-running-operation": true
@@ -1429,6 +1448,7 @@
           "description": "the account regional location."
         },
         "name": {
+          "readOnly":true,
           "type": "string",
           "description": "the account name."
         },
