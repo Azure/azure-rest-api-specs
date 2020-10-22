@@ -1431,9 +1431,21 @@
           "description": "Operation name: {provider}/{resource}/{operation}.",
           "type": "string"
         },
+        "isDataAction": {
+          "description": "Indicates whether the operation is a data action",
+          "type": "boolean"
+        },
         "display": {
           "$ref": "#/definitions/OperationDefinitionDisplay",
           "description": "The display information for the configuration store operation."
+        },
+        "origin": {
+          "description": "Origin of the operation",
+          "type": "string"
+        },
+        "properties": {
+          "$ref": "#/definitions/OperationProperties",
+          "description": "Properties of the operation"
         }
       }
     },
@@ -1456,6 +1468,112 @@
         },
         "description": {
           "description": "The description for the operation.",
+          "type": "string"
+        }
+      }
+    },
+    "OperationProperties": {
+      "description": "Extra Operation properties",
+      "type": "object",
+      "properties": {
+        "serviceSpecification": {
+          "$ref": "#/definitions/ServiceSpecification",
+          "description": "Service specifications of the operation"
+        }
+      }
+    },
+    "ServiceSpecification": {
+      "description": "Service specification payload",
+      "type": "object",
+      "properties": {
+        "logSpecifications": {
+          "description": "Specifications of the Log for Azure Monitoring",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/LogSpecification"
+          }
+        },
+        "metricSpecifications": {
+          "description": "Specifications of the Metrics for Azure Monitoring",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MetricSpecification"
+          }
+        }
+      }
+    },
+    "LogSpecification": {
+      "description": "Specifications of the Log for Azure Monitoring",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Name of the log",
+          "type": "string"
+        },
+        "displayName": {
+          "description": "Localized friendly display name of the log",
+          "type": "string"
+        },
+        "blobDuration": {
+          "description": "Blob duration of the log",
+          "type": "string"
+        }
+      }
+    },
+    "MetricSpecification": {
+      "description": "Specifications of the Metrics for Azure Monitoring",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Name of the metric",
+          "type": "string"
+        },
+        "displayName": {
+          "description": "Localized friendly display name of the metric",
+          "type": "string"
+        },
+        "displayDescription": {
+          "description": "Localized friendly description of the metric",
+          "type": "string"
+        },
+        "unit": {
+          "description": "Unit that makes sense for the metric",
+          "type": "string"
+        },
+        "aggregationType": {
+          "description": "Only provide one value for this field. Valid values: Average, Minimum, Maximum, Total, Count.",
+          "type": "string"
+        },
+        "internalMetricName": {
+          "description": "Internal metric name.",
+          "type": "string"
+        },
+        "dimensions": {
+          "description": "Dimensions of the metric",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MetricDimension"
+          }
+        }
+      }
+    },
+    "MetricDimension": {
+      "description": "Specifications of the Dimension of metrics",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Name of the dimension",
+          "type": "string"
+        },
+        "displayName": {
+          "description": "Localized friendly display name of the dimension",
+          "type": "string"
+        },
+        "internalName": {
+          "description": "Internal name of the dimension.",
           "type": "string"
         }
       }
