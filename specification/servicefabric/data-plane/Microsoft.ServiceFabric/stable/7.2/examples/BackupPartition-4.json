@@ -1,0 +1,19 @@
+{
+  "operationId": "BackupPartition",
+  "description": "This example shows how to trigger backup of a partition now, and save the backup to a specific Dsms Azure blob storage location.",
+  "parameters": {
+    "api-version": "6.4",
+    "partitionId": "1daae3f5-7fd6-42e9-b1ba-8c05f873994d",
+    "BackupPartitionDescription": {
+      "BackupStorage": {
+        "StorageKind": "DsmsAzureBlobStore",
+        "StorageCredentialsSourceLocation": "https://sample-dsms.dsms.core.winows.net/dsms/samplecredentiallocation/storageaccounts/samplestorageac/servicefabricbackup/samplebackup",
+        "ContainerName": "BackupContainer"
+      }
+    }  
+  },
+  "responses": {
+    "202": {
+    }
+  }
+}
