@@ -3,7 +3,7 @@
   "info": {
     "title": "Cosmos DB",
     "description": "Azure Cosmos DB Database Service Resource Provider REST API",
-    "version": "2020-06-01-preview"
+    "version": "2020-09-01"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -115,9 +115,6 @@
           },
           "CosmosDBDatabaseAccountCreateMax": {
             "$ref": "./examples/CosmosDBDatabaseAccountCreateMax.json"
-          },
-          "CosmosDBRestoreDatabaseAccountCreateUpdate.json": {
-            "$ref": "./examples/CosmosDBRestoreDatabaseAccountCreateUpdate.json"
           }
         },
         "description": "Creates or updates an Azure Cosmos DB database account. The \"Update\" method is preferred when performing updates on an account.",
@@ -1683,6 +1680,98 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/sqlDatabases/{databaseName}/throughputSettings/default/migrateToAutoscale": {
+      "post": {
+        "operationId": "SqlResources_MigrateSqlDatabaseToAutoscale",
+        "x-ms-examples": {
+          "CosmosDBSqlDatabaseMigrateToAutoscale": {
+            "$ref": "./examples/CosmosDBSqlDatabaseMigrateToAutoscale.json"
+          }
+        },
+        "description": "Migrate an Azure Cosmos DB SQL database from manual throughput to autoscale",
+        "x-ms-long-running-operation": true,
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/databaseNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The SQL database migrate operation will complete asynchronously."
+          },
+          "200": {
+            "description": "The SQL database migrate operation was completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ThroughputSettingsGetResults"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseUpdatedFormat"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/sqlDatabases/{databaseName}/throughputSettings/default/migrateToManualThroughput": {
+      "post": {
+        "operationId": "SqlResources_MigrateSqlDatabaseToManualThroughput",
+        "x-ms-examples": {
+          "CosmosDBSqlDatabaseMigrateToManualThroughput": {
+            "$ref": "./examples/CosmosDBSqlDatabaseMigrateToManualThroughput.json"
+          }
+        },
+        "description": "Migrate an Azure Cosmos DB SQL database from autoscale to manual throughput",
+        "x-ms-long-running-operation": true,
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/databaseNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The SQL database migrate operation will complete asynchronously."
+          },
+          "200": {
+            "description": "The SQL database migrate operation was completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ThroughputSettingsGetResults"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseUpdatedFormat"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/sqlDatabases/{databaseName}/containers": {
       "get": {
         "operationId": "SqlResources_ListSqlContainers",
@@ -1938,6 +2027,104 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/sqlDatabases/{databaseName}/containers/{containerName}/throughputSettings/default/migrateToAutoscale": {
+      "post": {
+        "operationId": "SqlResources_MigrateSqlContainerToAutoscale",
+        "x-ms-examples": {
+          "CosmosDBSqlContainerMigrateToAutoscale": {
+            "$ref": "./examples/CosmosDBSqlContainerMigrateToAutoscale.json"
+          }
+        },
+        "description": "Migrate an Azure Cosmos DB SQL container from manual throughput to autoscale",
+        "x-ms-long-running-operation": true,
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/databaseNameParameter"
+          },
+          {
+            "$ref": "#/parameters/containerNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The SQL container migrate operation will complete asynchronously."
+          },
+          "200": {
+            "description": "The SQL container migrate operation was completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ThroughputSettingsGetResults"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseUpdatedFormat"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/sqlDatabases/{databaseName}/containers/{containerName}/throughputSettings/default/migrateToManualThroughput": {
+      "post": {
+        "operationId": "SqlResources_MigrateSqlContainerToManualThroughput",
+        "x-ms-examples": {
+          "CosmosDBSqlContainerMigrateToManualThroughput": {
+            "$ref": "./examples/CosmosDBSqlContainerMigrateToManualThroughput.json"
+          }
+        },
+        "description": "Migrate an Azure Cosmos DB SQL container from autoscale to manual throughput",
+        "x-ms-long-running-operation": true,
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/databaseNameParameter"
+          },
+          {
+            "$ref": "#/parameters/containerNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The SQL container migrate operation will complete asynchronously."
+          },
+          "200": {
+            "description": "The SQL container migrate operation was completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ThroughputSettingsGetResults"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseUpdatedFormat"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/sqlDatabases/{databaseName}/containers/{containerName}/storedProcedures": {
       "get": {
         "operationId": "SqlResources_ListSqlStoredProcedures",
@@ -1972,6 +2159,12 @@
             "description": "The SQL stored procedure properties were retrieved successfully.",
             "schema": {
               "$ref": "#/definitions/SqlStoredProcedureListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseUpdatedFormat"
             }
           }
         },
@@ -2705,6 +2898,104 @@
             "schema": {
               "$ref": "#/definitions/ThroughputSettingsGetResults"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseUpdatedFormat"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/mongodbDatabases/{databaseName}/throughputSettings/default/migrateToAutoscale": {
+      "post": {
+        "operationId": "MongoDBResources_MigrateMongoDBDatabaseToAutoscale",
+        "x-ms-examples": {
+          "CosmosDBMongoDBDatabaseMigrateToAutoscale": {
+            "$ref": "./examples/CosmosDBMongoDBDatabaseMigrateToAutoscale.json"
+          }
+        },
+        "description": "Migrate an Azure Cosmos DB MongoDB database from manual throughput to autoscale",
+        "x-ms-long-running-operation": true,
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/databaseNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The MongoDB database migrate operation will complete asynchronously."
+          },
+          "200": {
+            "description": "The MongoDB database migrate operation was completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ThroughputSettingsGetResults"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseUpdatedFormat"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/mongodbDatabases/{databaseName}/throughputSettings/default/migrateToManualThroughput": {
+      "post": {
+        "operationId": "MongoDBResources_MigrateMongoDBDatabaseToManualThroughput",
+        "x-ms-examples": {
+          "CosmosDBMongoDBDatabaseMigrateToManualThroughput": {
+            "$ref": "./examples/CosmosDBMongoDBDatabaseMigrateToManualThroughput.json"
+          }
+        },
+        "description": "Migrate an Azure Cosmos DB MongoDB database from autoscale to manual throughput",
+        "x-ms-long-running-operation": true,
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/databaseNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The MongoDB database migrate operation will complete asynchronously."
+          },
+          "200": {
+            "description": "The MongoDB database migrate operation was completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ThroughputSettingsGetResults"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseUpdatedFormat"
+            }
           }
         }
       }
@@ -2964,6 +3255,104 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/mongodbDatabases/{databaseName}/collections/{collectionName}/throughputSettings/default/migrateToAutoscale": {
+      "post": {
+        "operationId": "MongoDBResources_MigrateMongoDBCollectionToAutoscale",
+        "x-ms-examples": {
+          "CosmosDBMongoDBCollectionMigrateToAutoscale": {
+            "$ref": "./examples/CosmosDBMongoDBCollectionMigrateToAutoscale.json"
+          }
+        },
+        "description": "Migrate an Azure Cosmos DB MongoDB collection from manual throughput to autoscale",
+        "x-ms-long-running-operation": true,
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/databaseNameParameter"
+          },
+          {
+            "$ref": "#/parameters/collectionNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The MongoDB collection migrate operation will complete asynchronously."
+          },
+          "200": {
+            "description": "The MongoDB collection migrate operation was completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ThroughputSettingsGetResults"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseUpdatedFormat"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/mongodbDatabases/{databaseName}/collections/{collectionName}/throughputSettings/default/migrateToManualThroughput": {
+      "post": {
+        "operationId": "MongoDBResources_MigrateMongoDBCollectionToManualThroughput",
+        "x-ms-examples": {
+          "CosmosDBMongoDBCollectionMigrateToManualThroughput": {
+            "$ref": "./examples/CosmosDBMongoDBCollectionMigrateToManualThroughput.json"
+          }
+        },
+        "description": "Migrate an Azure Cosmos DB MongoDB collection from autoscale to manual throughput",
+        "x-ms-long-running-operation": true,
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/databaseNameParameter"
+          },
+          {
+            "$ref": "#/parameters/collectionNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The MongoDB collection migrate operation will complete asynchronously."
+          },
+          "200": {
+            "description": "The MongoDB collection migrate operation was completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ThroughputSettingsGetResults"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseUpdatedFormat"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/tables": {
       "get": {
         "operationId": "TableResources_ListTables",
@@ -3201,6 +3590,98 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/tables/{tableName}/throughputSettings/default/migrateToAutoscale": {
+      "post": {
+        "operationId": "TableResources_MigrateTableToAutoscale",
+        "x-ms-examples": {
+          "CosmosDBTableMigrateToAutoscale": {
+            "$ref": "./examples/CosmosDBTableMigrateToAutoscale.json"
+          }
+        },
+        "description": "Migrate an Azure Cosmos DB Table from manual throughput to autoscale",
+        "x-ms-long-running-operation": true,
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/tableNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The Table migrate operation will complete asynchronously."
+          },
+          "200": {
+            "description": "The Table migrate operation was completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ThroughputSettingsGetResults"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseUpdatedFormat"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/tables/{tableName}/throughputSettings/default/migrateToManualThroughput": {
+      "post": {
+        "operationId": "TableResources_MigrateTableToManualThroughput",
+        "x-ms-examples": {
+          "CosmosDBTableMigrateToManualThroughput": {
+            "$ref": "./examples/CosmosDBTableMigrateToManualThroughput.json"
+          }
+        },
+        "description": "Migrate an Azure Cosmos DB Table from autoscale to manual throughput",
+        "x-ms-long-running-operation": true,
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/tableNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The Table migrate operation will complete asynchronously."
+          },
+          "200": {
+            "description": "The Table migrate operation was completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ThroughputSettingsGetResults"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseUpdatedFormat"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/cassandraKeyspaces": {
       "get": {
         "operationId": "CassandraResources_ListCassandraKeyspaces",
@@ -3433,6 +3914,98 @@
             "description": "The RUs per second of the Cassandra Keyspace update operation was completed successfully.",
             "schema": {
               "$ref": "#/definitions/ThroughputSettingsGetResults"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/cassandraKeyspaces/{keyspaceName}/throughputSettings/default/migrateToAutoscale": {
+      "post": {
+        "operationId": "CassandraResources_MigrateCassandraKeyspaceToAutoscale",
+        "x-ms-examples": {
+          "CosmosDBCassandraKeyspaceMigrateToAutoscale": {
+            "$ref": "./examples/CosmosDBCassandraKeyspaceMigrateToAutoscale.json"
+          }
+        },
+        "description": "Migrate an Azure Cosmos DB Cassandra Keyspace from manual throughput to autoscale",
+        "x-ms-long-running-operation": true,
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/keyspaceNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The Cassandra Keyspace migrate operation will complete asynchronously."
+          },
+          "200": {
+            "description": "The Cassandra Keyspace migrate operation was completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ThroughputSettingsGetResults"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseUpdatedFormat"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/cassandraKeyspaces/{keyspaceName}/throughputSettings/default/migrateToManualThroughput": {
+      "post": {
+        "operationId": "CassandraResources_MigrateCassandraKeyspaceToManualThroughput",
+        "x-ms-examples": {
+          "CosmosDBCassandraKeyspaceMigrateToManualThroughput": {
+            "$ref": "./examples/CosmosDBCassandraKeyspaceMigrateToManualThroughput.json"
+          }
+        },
+        "description": "Migrate an Azure Cosmos DB Cassandra Keyspace from autoscale to manual throughput",
+        "x-ms-long-running-operation": true,
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/keyspaceNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The Cassandra Keyspace migrate operation will complete asynchronously."
+          },
+          "200": {
+            "description": "The Cassandra Keyspace migrate operation was completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ThroughputSettingsGetResults"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseUpdatedFormat"
             }
           }
         }
@@ -3693,6 +4266,104 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/cassandraKeyspaces/{keyspaceName}/tables/{tableName}/throughputSettings/default/migrateToAutoscale": {
+      "post": {
+        "operationId": "CassandraResources_MigrateCassandraTableToAutoscale",
+        "x-ms-examples": {
+          "CosmosDBCassandraTableMigrateToAutoscale": {
+            "$ref": "./examples/CosmosDBCassandraTableMigrateToAutoscale.json"
+          }
+        },
+        "description": "Migrate an Azure Cosmos DB Cassandra table from manual throughput to autoscale",
+        "x-ms-long-running-operation": true,
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/keyspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/tableNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The Cassandra table migrate operation will complete asynchronously."
+          },
+          "200": {
+            "description": "The Cassandra table migrate operation was completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ThroughputSettingsGetResults"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseUpdatedFormat"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/cassandraKeyspaces/{keyspaceName}/tables/{tableName}/throughputSettings/default/migrateToManualThroughput": {
+      "post": {
+        "operationId": "CassandraResources_MigrateCassandraTableToManualThroughput",
+        "x-ms-examples": {
+          "CosmosDBCassandraTableMigrateToManualThroughput": {
+            "$ref": "./examples/CosmosDBCassandraTableMigrateToManualThroughput.json"
+          }
+        },
+        "description": "Migrate an Azure Cosmos DB Cassandra table from autoscale to manual throughput",
+        "x-ms-long-running-operation": true,
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/keyspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/tableNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The Cassandra table migrate operation will complete asynchronously."
+          },
+          "200": {
+            "description": "The Cassandra table migrate operation was completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ThroughputSettingsGetResults"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseUpdatedFormat"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/gremlinDatabases": {
       "get": {
         "operationId": "GremlinResources_ListGremlinDatabases",
@@ -3925,6 +4596,98 @@
             "description": "The RUs per second of the Gremlin database update operation was completed successfully.",
             "schema": {
               "$ref": "#/definitions/ThroughputSettingsGetResults"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/gremlinDatabases/{databaseName}/throughputSettings/default/migrateToAutoscale": {
+      "post": {
+        "operationId": "GremlinResources_MigrateGremlinDatabaseToAutoscale",
+        "x-ms-examples": {
+          "CosmosDBGremlinDatabaseMigrateToAutoscale": {
+            "$ref": "./examples/CosmosDBGremlinDatabaseMigrateToAutoscale.json"
+          }
+        },
+        "description": "Migrate an Azure Cosmos DB Gremlin database from manual throughput to autoscale",
+        "x-ms-long-running-operation": true,
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/databaseNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The Gremlin database migrate operation will complete asynchronously."
+          },
+          "200": {
+            "description": "The Gremlin database migrate operation was completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ThroughputSettingsGetResults"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseUpdatedFormat"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/gremlinDatabases/{databaseName}/throughputSettings/default/migrateToManualThroughput": {
+      "post": {
+        "operationId": "GremlinResources_MigrateGremlinDatabaseToManualThroughput",
+        "x-ms-examples": {
+          "CosmosDBGremlinDatabaseMigrateToManualThroughput": {
+            "$ref": "./examples/CosmosDBGremlinDatabaseMigrateToManualThroughput.json"
+          }
+        },
+        "description": "Migrate an Azure Cosmos DB Gremlin database from autoscale to manual throughput",
+        "x-ms-long-running-operation": true,
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/databaseNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The Gremlin database migrate operation will complete asynchronously."
+          },
+          "200": {
+            "description": "The Gremlin database migrate operation was completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ThroughputSettingsGetResults"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseUpdatedFormat"
             }
           }
         }
@@ -4185,115 +4948,99 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.DocumentDB/locations/{location}/restorableDatabaseAccounts": {
-      "get": {
-        "operationId": "RestorableDatabaseAccounts_ListByLocation",
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/gremlinDatabases/{databaseName}/graphs/{graphName}/throughputSettings/default/migrateToAutoscale": {
+      "post": {
+        "operationId": "GremlinResources_MigrateGremlinGraphToAutoscale",
         "x-ms-examples": {
-          "CosmosDBDatabaseAccountList": {
-            "$ref": "./examples/CosmosDBRestorableDatabaseAccountList.json"
+          "CosmosDBGremlinGraphMigrateToAutoscale": {
+            "$ref": "./examples/CosmosDBGremlinGraphMigrateToAutoscale.json"
           }
         },
-        "description": "Lists all the restorable Azure Cosmos DB database accounts available under the subscription and in a region.",
+        "description": "Migrate an Azure Cosmos DB Gremlin graph from manual throughput to autoscale",
+        "x-ms-long-running-operation": true,
         "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
-          },
           {
             "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/locationParameter"
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/databaseNameParameter"
+          },
+          {
+            "$ref": "#/parameters/graphNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
+          "202": {
+            "description": "The Gremlin graph migrate operation will complete asynchronously."
+          },
           "200": {
-            "description": "The operation completed successfully.",
+            "description": "The Gremlin graph migrate operation was completed successfully.",
             "schema": {
-              "$ref": "#/definitions/RestorableDatabaseAccountsListResult"
+              "$ref": "#/definitions/ThroughputSettingsGetResults"
             }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/DefaultErrorResponse"
+              "$ref": "#/definitions/ErrorResponseUpdatedFormat"
             }
           }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": null
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.DocumentDB/restorableDatabaseAccounts": {
-      "get": {
-        "operationId": "RestorableDatabaseAccounts_List",
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/gremlinDatabases/{databaseName}/graphs/{graphName}/throughputSettings/default/migrateToManualThroughput": {
+      "post": {
+        "operationId": "GremlinResources_MigrateGremlinGraphToManualThroughput",
         "x-ms-examples": {
-          "CosmosDBDatabaseAccountList": {
-            "$ref": "./examples/CosmosDBRestorableDatabaseAccountNoLocationList.json"
+          "CosmosDBGremlinGraphMigrateToManualThroughput": {
+            "$ref": "./examples/CosmosDBGremlinGraphMigrateToManualThroughput.json"
           }
         },
-        "description": "Lists all the restorable Azure Cosmos DB database accounts available under the subscription.",
+        "description": "Migrate an Azure Cosmos DB Gremlin graph from autoscale to manual throughput",
+        "x-ms-long-running-operation": true,
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/databaseNameParameter"
+          },
+          {
+            "$ref": "#/parameters/graphNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
+          "202": {
+            "description": "The Gremlin graph migrate operation will complete asynchronously."
+          },
           "200": {
-            "description": "The operation completed successfully.",
+            "description": "The Gremlin graph migrate operation was completed successfully.",
             "schema": {
-              "$ref": "#/definitions/RestorableDatabaseAccountsListResult"
+              "$ref": "#/definitions/ThroughputSettingsGetResults"
             }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/DefaultErrorResponse"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": null
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.DocumentDB/locations/{location}/restorableDatabaseAccounts/{instanceId}": {
-      "get": {
-        "operationId": "RestorableDatabaseAccounts_GetByLocation",
-        "x-ms-examples": {
-          "CosmosDBDatabaseAccountGet": {
-            "$ref": "./examples/CosmosDBRestorableDatabaseAccountGet.json"
-          }
-        },
-        "description": "Retrieves the properties of an existing Azure Cosmos DB restorable database account.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/locationParameter"
-          },
-          {
-            "$ref": "#/parameters/instanceIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The restorable database account properties were retrieved successfully.",
-            "schema": {
-              "$ref": "#/definitions/RestorableDatabaseAccountGetResult"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/DefaultErrorResponse"
+              "$ref": "#/definitions/ErrorResponseUpdatedFormat"
             }
           }
         }
@@ -4483,11 +5230,11 @@
       },
       "description": "Error Response."
     },
-    "DefaultErrorResponse": {
+    "ErrorResponseUpdatedFormat": {
       "description": "An error response from the service.",
       "properties": {
         "error": {
-          "$ref": "#/definitions/ErrorResponse"
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ErrorResponse"
         }
       }
     },
@@ -4597,9 +5344,6 @@
         },
         "tags": {
           "$ref": "#/definitions/Tags"
-        },
-        "identity": {
-          "$ref": "#/definitions/ManagedServiceIdentity"
         }
       },
       "x-ms-azure-resource": true
@@ -4647,11 +5391,6 @@
         "properties": {
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/DatabaseAccountGetProperties"
-        },
-        "systemData": {
-          "readOnly": true,
-          "description": "The system meta data relating to this resource.",
-          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/systemData"
         }
       },
       "allOf": [
@@ -4670,6 +5409,7 @@
           "readOnly": true
         },
         "_ts": {
+          "type": "number",
           "description": "A system generated property that denotes the last updated timestamp of the resource.",
           "readOnly": true
         },
@@ -5363,22 +6103,6 @@
           "description": "Flag to indicate whether to enable storage analytics.",
           "type": "boolean"
         },
-        "instanceId": {
-          "description": "A unique identifier assigned to the database account",
-          "type": "string",
-          "readOnly": true
-        },
-        "createMode": {
-          "description": "Enum to indicate the mode of account creation.",
-          "type": "string",
-          "default": "Default",
-          "$ref": "#/definitions/CreateMode"
-        },
-        "restoreParameters": {
-          "description": "Parameters to indicate the information about the restore.",
-          "type": "object",
-          "$ref": "#/definitions/RestoreParameters"
-        },
         "backupPolicy": {
           "description": "The object representing the policy for taking backups on an account.",
           "type": "object",
@@ -5396,7 +6120,6 @@
     "DatabaseAccountCreateUpdateProperties": {
       "description": "Properties to create and update Azure Cosmos DB database accounts.",
       "type": "object",
-      "discriminator": "createMode",
       "properties": {
         "consistencyPolicy": {
           "description": "The consistency policy for the Cosmos DB account.",
@@ -5476,12 +6199,6 @@
           "description": "Flag to indicate whether to enable storage analytics.",
           "type": "boolean"
         },
-        "createMode": {
-          "description": "Enum to indicate the mode of account creation.",
-          "type": "string",
-          "default": "Default",
-          "$ref": "#/definitions/CreateMode"
-        },
         "backupPolicy": {
           "description": "The object representing the policy for taking backups on an account.",
           "type": "object",
@@ -5497,34 +6214,8 @@
       },
       "required": [
         "locations",
-        "databaseAccountOfferType",
-        "createMode"
+        "databaseAccountOfferType"
       ]
-    },
-    "DefaultRequestDatabaseAccountCreateUpdateProperties": {
-      "description": "Properties for non-restore Azure Cosmos DB database account requests.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/DatabaseAccountCreateUpdateProperties"
-        }
-      ],
-      "x-ms-discriminator-value": "Default"
-    },
-    "RestoreReqeustDatabaseAccountCreateUpdateProperties": {
-      "description": "Properties to restore Azure Cosmos DB database account.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/DatabaseAccountCreateUpdateProperties"
-        }
-      ],
-      "properties": {
-        "restoreParameters": {
-          "description": "Parameters to indicate the information about the restore.",
-          "type": "object",
-          "$ref": "#/definitions/RestoreParameters"
-        }
-      },
-      "x-ms-discriminator-value": "Restore"
     },
     "DatabaseAccountCreateUpdateParameters": {
       "description": "Parameters to create and update Cosmos DB database accounts.",
@@ -5545,6 +6236,7 @@
           }
         },
         "properties": {
+          "x-ms-client-flatten": true,
           "$ref": "#/definitions/DatabaseAccountCreateUpdateProperties"
         }
       },
@@ -5663,9 +6355,6 @@
         "properties": {
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/DatabaseAccountUpdateProperties"
-        },
-        "identity": {
-          "$ref": "#/definitions/ManagedServiceIdentity"
         }
       }
     },
@@ -5830,8 +6519,7 @@
         }
       },
       "required": [
-        "resource",
-        "options"
+        "resource"
       ]
     },
     "SqlContainerCreateUpdateParameters": {
@@ -5867,8 +6555,7 @@
         }
       },
       "required": [
-        "resource",
-        "options"
+        "resource"
       ]
     },
     "SqlStoredProcedureCreateUpdateParameters": {
@@ -5904,8 +6591,7 @@
         }
       },
       "required": [
-        "resource",
-        "options"
+        "resource"
       ]
     },
     "SqlUserDefinedFunctionCreateUpdateParameters": {
@@ -5941,8 +6627,7 @@
         }
       },
       "required": [
-        "resource",
-        "options"
+        "resource"
       ]
     },
     "SqlTriggerCreateUpdateParameters": {
@@ -5978,8 +6663,7 @@
         }
       },
       "required": [
-        "resource",
-        "options"
+        "resource"
       ]
     },
     "MongoDBDatabaseCreateUpdateParameters": {
@@ -6015,8 +6699,7 @@
         }
       },
       "required": [
-        "resource",
-        "options"
+        "resource"
       ]
     },
     "MongoDBCollectionCreateUpdateParameters": {
@@ -6052,8 +6735,7 @@
         }
       },
       "required": [
-        "resource",
-        "options"
+        "resource"
       ]
     },
     "TableCreateUpdateParameters": {
@@ -6089,8 +6771,7 @@
         }
       },
       "required": [
-        "resource",
-        "options"
+        "resource"
       ]
     },
     "CassandraKeyspaceCreateUpdateParameters": {
@@ -6126,8 +6807,7 @@
         }
       },
       "required": [
-        "resource",
-        "options"
+        "resource"
       ]
     },
     "CassandraTableCreateUpdateParameters": {
@@ -6163,8 +6843,7 @@
         }
       },
       "required": [
-        "resource",
-        "options"
+        "resource"
       ]
     },
     "GremlinDatabaseCreateUpdateParameters": {
@@ -6200,8 +6879,7 @@
         }
       },
       "required": [
-        "resource",
-        "options"
+        "resource"
       ]
     },
     "GremlinGraphCreateUpdateParameters": {
@@ -6237,8 +6915,7 @@
         }
       },
       "required": [
-        "resource",
-        "options"
+        "resource"
       ]
     },
     "ThroughputSettingsResource": {
@@ -6367,6 +7044,11 @@
         "conflictResolutionPolicy": {
           "$ref": "#/definitions/ConflictResolutionPolicy",
           "description": "The conflict resolution policy for the container."
+        },
+        "analyticalStorageTtl": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Analytical TTL."
         }
       },
       "required": [
@@ -7013,54 +7695,6 @@
       },
       "description": "Tags are a list of key-value pairs that describe the resource. These tags can be used in viewing and grouping this resource (across resource groups). A maximum of 15 tags can be provided for a resource. Each tag must have a key no greater than 128 characters and value no greater than 256 characters. For example, the default experience for a template type is set with \"defaultExperience\": \"Cassandra\". Current \"defaultExperience\" values also include \"Table\", \"Graph\", \"DocumentDB\", and \"MongoDB\"."
     },
-    "ManagedServiceIdentity": {
-      "properties": {
-        "principalId": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The principal id of the system assigned identity. This property will only be provided for a system assigned identity."
-        },
-        "tenantId": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The tenant id of the system assigned identity. This property will only be provided for a system assigned identity."
-        },
-        "type": {
-          "type": "string",
-          "description": "The type of identity used for the resource. The type 'SystemAssigned,UserAssigned' includes both an implicitly created identity and a set of user assigned identities. The type 'None' will remove any identities from the service.",
-          "enum": [
-            "SystemAssigned",
-            "UserAssigned",
-            "SystemAssigned,UserAssigned",
-            "None"
-          ],
-          "x-ms-enum": {
-            "name": "ResourceIdentityType",
-            "modelAsString": false
-          }
-        },
-        "userAssignedIdentities": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "object",
-            "properties": {
-              "principalId": {
-                "readOnly": true,
-                "type": "string",
-                "description": "The principal id of user assigned identity."
-              },
-              "clientId": {
-                "readOnly": true,
-                "type": "string",
-                "description": "The client id of user assigned identity."
-              }
-            }
-          },
-          "description": "The list of user identities associated with resource. The user identity dictionary key references will be ARM resource ids in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}'."
-        }
-      },
-      "description": "Identity for the resource."
-    },
     "ProvisioningState": {
       "type": "string",
       "readOnly": true,
@@ -7652,77 +8286,6 @@
         }
       }
     },
-    "CreateMode": {
-      "description": "Enum to indicate the mode of account creation.",
-      "type": "string",
-      "default": "Default",
-      "enum": [
-        "Default",
-        "Restore"
-      ],
-      "x-ms-enum": {
-        "name": "CreateMode",
-        "modelAsString": true
-      }
-    },
-    "RestoreParameters": {
-      "type": "object",
-      "description": "Parameters to indicate the information about the restore.",
-      "x-ms-mutability": [
-        "read",
-        "create"
-      ],
-      "properties": {
-        "restoreMode": {
-          "type": "string",
-          "enum": [
-            "PointInTime"
-          ],
-          "description": "Describes the mode of the restore.",
-          "x-ms-enum": {
-            "modelAsString": true,
-            "name": "RestoreMode"
-          }
-        },
-        "restoreSource": {
-          "type": "string",
-          "description": "The id of the restorable database account from which the restore has to be initiated. For example: /subscriptions/{subscriptionId}/providers/Microsoft.DocumentDB/locations/{location}/restorableDatabaseAccounts/{restorableDatabaseAccountName}"
-        },
-        "restoreTimestampInUtc": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Time to which the account has to be restored (ISO-8601 format)."
-        },
-        "databasesToRestore": {
-          "type": "array",
-          "description": "List of specific databases to restore.",
-          "items": {
-            "$ref": "#/definitions/DatabaseRestoreResource"
-          }
-        }
-      }
-    },
-    "DatabaseRestoreResource": {
-      "type": "object",
-      "description": "Specific Databases to restore.",
-      "properties": {
-        "databaseName": {
-          "type": "string",
-          "description": "The name of the database to restore."
-        },
-        "collectionNames": {
-          "type": "array",
-          "description": "The names of the collections to restore.",
-          "items": {
-            "$ref": "#/definitions/CollectionName"
-          }
-        }
-      }
-    },
-    "CollectionName": {
-      "type": "string",
-      "description": "The name of the collection."
-    },
     "BackupPolicy": {
       "type": "object",
       "description": "The object representing the policy for taking backups on an account.",
@@ -7730,20 +8293,24 @@
       "properties": {
         "type": {
           "type": "string",
-          "enum": [
-            "Periodic",
-            "Continuous"
-          ],
-          "description": "Describes the mode of backups.",
-          "x-ms-enum": {
-            "modelAsString": true,
-            "name": "BackupType"
-          }
+          "$ref": "#/definitions/BackupPolicyType"
         }
       },
       "required": [
         "type"
       ]
+    },
+    "BackupPolicyType": {
+      "description": "Describes the mode of backups.",
+      "type": "string",
+      "enum": [
+        "Periodic",
+        "Continuous"
+      ],
+      "x-ms-enum": {
+        "modelAsString": true,
+        "name": "BackupPolicyType"
+      }
     },
     "PeriodicModeBackupPolicy": {
       "description": "The object representing periodic mode backup policy.",
@@ -7787,56 +8354,6 @@
           "format": "int32",
           "minimum": 0,
           "description": "An integer representing the time (in hours) that each backup is retained"
-        }
-      }
-    },
-    "RestorableDatabaseAccountsListResult": {
-      "properties": {
-        "value": {
-          "readOnly": true,
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/RestorableDatabaseAccountGetResult"
-          },
-          "description": "List of restorable database accounts and their properties."
-        }
-      },
-      "description": "The List operation response, that contains the restorable database accounts and their properties."
-    },
-    "RestorableDatabaseAccountGetResult": {
-      "description": "A Azure Cosmos DB restorable database account.",
-      "type": "object",
-      "properties": {
-        "properties": {
-          "type": "object",
-          "x-ms-client-flatten": true,
-          "description": "The properties of a restorable database account.",
-          "$ref": "#/definitions/RestorableDatabaseAccountProperties"
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/ARMResourceProperties"
-        }
-      ]
-    },
-    "RestorableDatabaseAccountProperties": {
-      "type": "object",
-      "description": "The properties of a restorable database account.",
-      "properties": {
-        "accountName": {
-          "type": "string",
-          "description": "The name of the global database account"
-        },
-        "creationTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The creation time of the restorable database account (ISO-8601 format)."
-        },
-        "deletionTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The time at which the restorable database account has been deleted (ISO-8601 format)."
         }
       }
     }
@@ -7999,22 +8516,6 @@
       "type": "string",
       "x-ms-parameter-location": "method",
       "description": "Partition Key Range Id for which to get data."
-    },
-    "locationParameter": {
-      "name": "location",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "x-ms-parameter-location": "method",
-      "description": "Cosmos DB region, with spaces between words and each word capitalized."
-    },
-    "instanceIdParameter": {
-      "name": "instanceId",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "x-ms-parameter-location": "method",
-      "description": "The instanceId GUID of a restorable database account."
     }
   }
 }
