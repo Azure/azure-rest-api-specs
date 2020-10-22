@@ -67,5 +67,5 @@ output-folder: $(go-sdk-folder)/services/$(namespace)/7.0/$(namespace)
 These settings apply only when `--tag=7.2 --go` is specified on the command line.
 
 ``` yaml $(tag) == '7.2' && $(go)
-output-folder: $(go-sdk-folder)/services/$(namespace)/7.0/$(namespace)
+output-folder: $(go-sdk-folder)/services/$(namespace)/7.2/$(namespace)
 ```

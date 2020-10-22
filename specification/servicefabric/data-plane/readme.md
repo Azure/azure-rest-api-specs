@@ -125,6 +125,16 @@ input-file:
 
 ```
 
+### Tag: 7.2
+
+These settings apply only when `--tag=7.2` is specified on the command line.
+
+``` yaml $(tag) == '7.2'
+input-file:
+- Microsoft.ServiceFabric/stable/7.2/servicefabric.json
+
+```
+
 ---
 # Code Generation
 
@@ -179,7 +189,7 @@ input-file:
   - $(this-folder)/Microsoft.ServiceFabric/stable/6.5/servicefabric.json
   - $(this-folder)/Microsoft.ServiceFabric/stable/7.0/servicefabric.json
   - $(this-folder)/Microsoft.ServiceFabric/stable/7.1/servicefabric.json
-
+  - $(this-folder)/Microsoft.ServiceFabric/stable/7.2/servicefabric.json
 ```
 
 If there are files that should not be in the `all-api-versions` set, 
