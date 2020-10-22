@@ -64,8 +64,8 @@ directive:
 ``` yaml
 directive:
   - from: $(this-folder)/Microsoft.WorkloadMonitor/preview/2018-08-31-preview/Microsoft.WorkloadMonitor.json
-  suppress:
-    - R4017 # HealthMonitors only applied to top-level resources.
+    suppress:
+      - R4017 # HealthMonitors only applied to top-level resources.
     
 ```
 
