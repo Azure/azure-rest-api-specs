@@ -57,6 +57,12 @@
               "$ref": "#/definitions/SqlPool"
             },
             "description": "OK"
+          },
+          "default": {
+            "schema": {
+              "$ref": "./workspace.json#/definitions/ErrorContract"
+            },
+            "description": ""
           }
         },
         "consumes": [],
@@ -298,6 +304,12 @@
               "$ref": "#/definitions/SqlPoolInfoListResult"
             },
             "description": ""
+          },
+          "default": {
+            "schema": {
+              "$ref": "./workspace.json#/definitions/ErrorContract"
+            },
+            "description": ""
           }
         },
         "consumes": [],
@@ -356,6 +368,12 @@
           },
           "202": {
             "description": "Accepted"
+          },
+          "default": {
+            "schema": {
+              "$ref": "./workspace.json#/definitions/ErrorContract"
+            },
+            "description": ""
           }
         },
         "consumes": [],
@@ -652,6 +670,12 @@
               "type": "object"
             },
             "description": "OK"
+          },
+          "202": {
+            "schema": {
+              "type": "object"
+            },
+            "description": "Accepted"
           }
         },
         "consumes": [],
@@ -1018,6 +1042,12 @@
             "schema": {
               "$ref": "#/definitions/TransparentDataEncryption"
             }
+          },
+          "default": {
+            "schema": {
+              "$ref": "./workspace.json#/definitions/ErrorContract"
+            },
+            "description": ""
           }
         },
         "consumes": [],
@@ -3039,6 +3069,10 @@
             "enabled": {
               "type": "boolean",
               "description": "Indicates whether the metadata sync is enabled or disabled"
+            },
+            "syncIntervalInMinutes": {
+              "type": "integer",
+              "description": "The Sync Interval in minutes."
             }
           },
           "x-ms-client-flatten": true

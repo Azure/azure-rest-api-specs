@@ -365,6 +365,12 @@
               "$ref": "#/definitions/WorkspaceAadAdminInfo"
             },
             "description": "OK"
+          },
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/ErrorContract"
+            },
+            "description": ""
           }
         },
         "consumes": [],
@@ -567,6 +573,12 @@
             },
             "description": "OK"
           },
+          "201": {
+            "schema": {
+              "$ref": "#/definitions/ManagedIdentitySqlControlSettingsModel"
+            },
+            "description": "Created"
+          },
           "default": {
             "schema": {
               "$ref": "./workspace.json#/definitions/ErrorContract"
@@ -680,6 +692,7 @@
         "tenantId": {
           "description": "The tenant ID of the workspace managed identity",
           "type": "string",
+          "format": "uuid",
           "readOnly": true
         },
         "type": {
@@ -811,6 +824,11 @@
           "items": {
             "$ref": "./privateEndpointConnections.json#/definitions/PrivateEndpointConnection"
           }
+        },
+        "workspaceUID": {
+          "description": "Unique identifier for the Synapse Workspace",
+          "type": "string",
+          "format": "uuid"
         },
         "extraProperties": {
           "description": "Workspace level configs and feature flags",
