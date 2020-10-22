@@ -27,22 +27,6 @@ openapi-type: arm
 tag: package-2020-10-19-preview
 ```
 
-### Tag: package-2020-10-19-preview
-
-These settings apply only when `--tag=package-2020-10-19-preview` is specified on the command line.
-
-``` yaml $(tag) == 'package-2020-10-19-preview'
-input-file:
-- Microsoft.DesktopVirtualization/preview/2020-10-19-preview/desktopvirtualization.json
-```
-
-### Tag: package-2020-09-21-preview
-
-``` yaml $(tag) == 'package-2020-09-21-preview'
-input-file:
-- Microsoft.DesktopVirtualization/preview/2020-09-21-preview/desktopvirtualization.json
-```
-
 ### Tag: package-2019-01-23-preview
 
 These settings apply only when `--tag=package-2019-01-23-preview` is specified on the command line.
@@ -68,6 +52,24 @@ These settings apply only when `--tag=package-2019-12-10-preview` is specified o
 ``` yaml $(tag) == 'package-2019-12-10-preview'
 input-file:
 - Microsoft.DesktopVirtualization/preview/2019-12-10-preview/desktopvirtualization.json
+```
+
+### Tag: package-2020-09-21-preview
+
+These settings apply only when `--tag=package-2020-09-21-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2020-09-21-preview'
+input-file:
+- Microsoft.DesktopVirtualization/preview/2020-09-21-preview/desktopvirtualization.json
+```
+
+### Tag: package-2020-10-19-preview
+
+These settings apply only when `--tag=package-2020-10-19-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2020-10-19-preview'
+input-file:
+- Microsoft.DesktopVirtualization/preview/2020-10-19-preview/desktopvirtualization.json
 ```
 
 ---
