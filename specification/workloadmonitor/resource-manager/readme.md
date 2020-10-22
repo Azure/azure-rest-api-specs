@@ -60,7 +60,7 @@ directive:
 
 ---
 
-# Suppression:
+## Suppression:
 ``` yaml
 directive:
   - suppress:
