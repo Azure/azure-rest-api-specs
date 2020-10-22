@@ -43,10 +43,6 @@ Differences in v4 (compared to v3):
 
 * Added new API for databases and elastic pools
 
-  * `-2020-08-01/databases.json`
-
-  * `-2020-08-01/elasticPools.json`
-
 * Failover API for elastic pools was integrated into elasticPools
 
 ``` yaml $(tag) == 'package-composite-v4'
@@ -126,8 +122,6 @@ input-file:
 - Microsoft.Sql/preview/2020-02-02-preview/importexport.json
 - Microsoft.Sql/preview/2020-02-02-preview/ManagedInstanceAzureADOnlyAuthentications.json
 - Microsoft.Sql/preview/2020-02-02-preview/ServerTrustGroups.json
-- Microsoft.Sql/preview/2020-08-01-preview/databases.json
-- Microsoft.Sql/preview/2020-08-01-preview/elasticPools.json
 
 
 # Needed when there is more than one input file
