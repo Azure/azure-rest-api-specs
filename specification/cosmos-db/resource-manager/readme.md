@@ -4,10 +4,10 @@
 
 This is the AutoRest configuration file for Cosmos-DB.
 
-
-
 ---
+
 ## Getting Started
+
 To build the SDK for Cosmos-DB, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
 
 > `autorest`
@@ -15,21 +15,31 @@ To build the SDK for Cosmos-DB, simply [Install AutoRest](https://aka.ms/autores
 To see additional help and options, run:
 
 > `autorest --help`
+
 ---
 
 ## Configuration
 
-
-
 ### Basic Information
+
 These are the global settings for the Cosmos-DB API.
 
 ``` yaml
 title: CosmosDBManagementClient
 openapi-type: arm
-tag: package-2020-04
+tag: package-2020-09
 ```
 
+
+### Tag: package-2020-09
+
+These settings apply only when `--tag=package-2020-09` is specified on the command line.
+
+```yaml $(tag) == 'package-2020-09'
+input-file:
+  - Microsoft.DocumentDB/stable/2020-09-01/cosmos-db.json
+  - Microsoft.DocumentDB/stable/2020-09-01/notebook.json
+```
 ### Tag: package-2020-06-preview
 
 These settings apply only when `--tag=package-2020-06-preview` is specified on the command line.
@@ -147,6 +157,7 @@ input-file:
 ```
 
 ## Suppression
+
 ``` yaml
 directive:
   - suppress: TrackedResourceGetOperation
@@ -227,8 +238,8 @@ directive:
 ```
 
 ---
-# Code Generation
 
+# Code Generation
 
 ## Swagger to SDK
 
@@ -246,7 +257,6 @@ swagger-to-sdk:
     after_scripts:
       - node sdkauto_afterscript.js cosmos-db/resource-manager
 ```
-
 
 ## C#
 
@@ -273,6 +283,7 @@ See configuration in [readme.go.md](./readme.go.md)
 ## Java
 
 See configuration in [readme.java.md](./readme.java.md)
+
 ## AzureResourceSchema
 
 See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
