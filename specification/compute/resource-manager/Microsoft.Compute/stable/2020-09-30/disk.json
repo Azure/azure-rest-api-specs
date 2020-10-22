@@ -1519,6 +1519,10 @@
           },
           "description": "The Logical zone list for Disk."
         },
+        "extendedLocation": {
+          "$ref": "#/definitions/ExtendedLocation",
+          "description": "The extended location of the Disk."
+        },
         "properties": {
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/DiskProperties"
@@ -2364,6 +2368,10 @@
         "sku": {
           "$ref": "#/definitions/SnapshotSku"
         },
+        "extendedLocation": {
+          "$ref": "#/definitions/ExtendedLocation",
+          "description": "The extended location of the Snapshot."
+        },
         "properties": {
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/SnapshotProperties"
@@ -2896,6 +2904,30 @@
         }
       },
       "description": "Inner error details."
+    },
+    "ExtendedLocationType": {
+      "type": "string",
+      "description": "The type of extendedLocation.",
+      "enum": [
+        "EdgeZone"
+      ],
+      "x-ms-enum": {
+        "name": "ExtendedLocationTypes",
+        "modelAsString": true
+      }
+    },
+    "ExtendedLocation": {
+      "description": "The complex type of the extended location.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the extended location."
+        },
+        "type": {
+          "$ref": "#/definitions/ExtendedLocationType",
+          "description": "The type of the extended location."
+        }
+      }
     }
   },
   "parameters": {
