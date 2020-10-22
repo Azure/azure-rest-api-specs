@@ -5,13 +5,21 @@
     "version": "v1"
   },
   "paths": {
-    "/api/v1/health": {
+    "/api/health": {
       "head": {
         "tags": [
           "general"
         ],
         "summary": "Get service health status.",
         "operationId": "HealthApi_GetHealthStatus",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "api-version",
+            "type": "string",
+            "default": "2020-10-01"
+          }
+        ],
         "responses": {
           "200": {
             "description": "The service is healthy"
@@ -23,10 +31,10 @@
         }
       }
     },
-    "/api/v1/hubs/{hub}": {
+    "/api/hubs/{hub}/messages": {
       "post": {
         "tags": [
-          "signalr.v1"
+          "signalr"
         ],
         "summary": "Broadcast a message to all clients connected to target hub.",
         "operationId": "ServiceApi_Broadcast",
@@ -53,6 +61,12 @@
             "collectionFormat": "multi"
           },
           {
+            "in": "query",
+            "name": "api-version",
+            "type": "string",
+            "default": "2020-10-01"
+          },
+          {
             "in": "body",
             "name": "payloadMessage",
             "description": "The message body.",
@@ -73,10 +87,54 @@
         }
       }
     },
-    "/api/v1/hubs/{hub}/users/{user}": {
+    "/api/hubs/{hub}/users/{user}": {
+      "head": {
+        "tags": [
+          "signalr"
+        ],
+        "summary": "Check if there are any client connections connected for the given user",
+        "operationId": "ServiceApi_CheckUserExistence",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "hub",
+            "description": "Target hub name, which should start with alphabetic characters and only contain alpha-numeric characters or underscore.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z][A-Za-z0-9_`,.[\\]]{0,127}$"
+          },
+          {
+            "in": "path",
+            "name": "user",
+            "description": "The user Id.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "api-version",
+            "type": "string",
+            "default": "2020-10-01"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "default": {
+            "description": "Error response",
+            "x-ms-error-response": true
+          }
+        }
+      }
+    },
+    "/api/hubs/{hub}/users/{user}/messages": {
       "post": {
         "tags": [
-          "signalr.v1"
+          "signalr"
         ],
         "summary": "Broadcast a message to all clients belong to the target user.",
         "operationId": "ServiceApi_SendToUser",
@@ -100,6 +158,12 @@
             "type": "string"
           },
           {
+            "in": "query",
+            "name": "api-version",
+            "type": "string",
+            "default": "2020-10-01"
+          },
+          {
             "in": "body",
             "name": "payloadMessage",
             "description": "The message body.",
@@ -112,42 +176,6 @@
         "responses": {
           "202": {
             "description": "Success"
-          },
-          "default": {
-            "description": "Error response",
-            "x-ms-error-response": true
-          }
-        }
-      },
-      "head": {
-        "tags": [
-          "signalr.v1"
-        ],
-        "summary": "Check if there are any client connections connected for the given user",
-        "operationId": "ServiceApi_CheckUserExistence",
-        "parameters": [
-          {
-            "in": "path",
-            "name": "hub",
-            "description": "Target hub name, which should start with alphabetic characters and only contain alpha-numeric characters or underscore.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[A-Za-z][A-Za-z0-9_`,.[\\]]{0,127}$"
-          },
-          {
-            "in": "path",
-            "name": "user",
-            "description": "The user Id.",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success"
-          },
-          "404": {
-            "description": "Not Found"
           },
           "default": {
             "description": "Error response",
@@ -156,55 +184,10 @@
         }
       }
     },
-    "/api/v1/hubs/{hub}/connections/{connectionId}": {
-      "post": {
-        "tags": [
-          "signalr.v1"
-        ],
-        "summary": "Send message to the specific connection.",
-        "operationId": "ServiceApi_SendToConnection",
-        "consumes": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "in": "path",
-            "name": "hub",
-            "description": "Target hub name, which should start with alphabetic characters and only contain alpha-numeric characters or underscore.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[A-Za-z][A-Za-z0-9_`,.[\\]]{0,127}$"
-          },
-          {
-            "in": "path",
-            "name": "connectionId",
-            "description": "The connection Id.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "body",
-            "name": "payloadMessage",
-            "description": "The message body.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/PayloadMessage"
-            }
-          }
-        ],
-        "responses": {
-          "202": {
-            "description": "Success"
-          },
-          "default": {
-            "description": "Error response",
-            "x-ms-error-response": true
-          }
-        }
-      },
+    "/api/hubs/{hub}/connections/{connectionId}": {
       "head": {
         "tags": [
-          "signalr.v1"
+          "signalr"
         ],
         "summary": "Check if the connection with the given connectionId exists",
         "operationId": "ServiceApi_CheckConnectionExistence",
@@ -223,6 +206,12 @@
             "description": "The connection Id.",
             "required": true,
             "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "api-version",
+            "type": "string",
+            "default": "2020-10-01"
           }
         ],
         "responses": {
@@ -240,7 +229,7 @@
       },
       "delete": {
         "tags": [
-          "signalr.v1"
+          "signalr"
         ],
         "summary": "Close the client connection",
         "operationId": "ServiceApi_CloseClientConnection",
@@ -265,6 +254,12 @@
             "name": "reason",
             "description": "The reason of the connection close.",
             "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "api-version",
+            "type": "string",
+            "default": "2020-10-01"
           }
         ],
         "responses": {
@@ -278,10 +273,107 @@
         }
       }
     },
-    "/api/v1/hubs/{hub}/groups/{group}": {
+    "/api/hubs/{hub}/connections/{connectionId}/messages": {
       "post": {
         "tags": [
-          "signalr.v1"
+          "signalr"
+        ],
+        "summary": "Send message to the specific connection.",
+        "operationId": "ServiceApi_SendToConnection",
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "hub",
+            "description": "Target hub name, which should start with alphabetic characters and only contain alpha-numeric characters or underscore.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z][A-Za-z0-9_`,.[\\]]{0,127}$"
+          },
+          {
+            "in": "path",
+            "name": "connectionId",
+            "description": "The connection Id.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "api-version",
+            "type": "string",
+            "default": "2020-10-01"
+          },
+          {
+            "in": "body",
+            "name": "payloadMessage",
+            "description": "The message body.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PayloadMessage"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Success"
+          },
+          "default": {
+            "description": "Error response",
+            "x-ms-error-response": true
+          }
+        }
+      }
+    },
+    "/api/hubs/{hub}/groups/{group}": {
+      "head": {
+        "tags": [
+          "signalr"
+        ],
+        "summary": "Check if there are any client connections inside the given group",
+        "operationId": "ServiceApi_CheckGroupExistence",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "hub",
+            "description": "Target hub name, which should start with alphabetic characters and only contain alpha-numeric characters or underscore.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z][A-Za-z0-9_`,.[\\]]{0,127}$"
+          },
+          {
+            "in": "path",
+            "name": "group",
+            "description": "Target group name, which length should be greater than 0 and less than 1025.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "api-version",
+            "type": "string",
+            "default": "2020-10-01"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "default": {
+            "description": "Error response",
+            "x-ms-error-response": true
+          }
+        }
+      }
+    },
+    "/api/hubs/{hub}/groups/{group}/messages": {
+      "post": {
+        "tags": [
+          "signalr"
         ],
         "summary": "Broadcast a message to all clients within the target group.",
         "operationId": "ServiceApi_GroupBroadcast",
@@ -315,6 +407,12 @@
             "collectionFormat": "multi"
           },
           {
+            "in": "query",
+            "name": "api-version",
+            "type": "string",
+            "default": "2020-10-01"
+          },
+          {
             "in": "body",
             "name": "payloadMessage",
             "description": "The message body.",
@@ -333,13 +431,15 @@
             "x-ms-error-response": true
           }
         }
-      },
-      "head": {
+      }
+    },
+    "/api/hubs/{hub}/groups/{group}/connections/{connectionId}": {
+      "put": {
         "tags": [
-          "signalr.v1"
+          "signalr"
         ],
-        "summary": "Check if there are any client connections inside the given group",
-        "operationId": "ServiceApi_CheckGroupExistence",
+        "summary": "Add a connection to the target group.",
+        "operationId": "ServiceApi_AddConnectionToGroup",
         "parameters": [
           {
             "in": "path",
@@ -355,6 +455,68 @@
             "description": "Target group name, which length should be greater than 0 and less than 1025.",
             "required": true,
             "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "connectionId",
+            "description": "Target connection Id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "api-version",
+            "type": "string",
+            "default": "2020-10-01"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "default": {
+            "description": "Error response",
+            "x-ms-error-response": true
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "signalr"
+        ],
+        "summary": "Remove a connection from the target group.",
+        "operationId": "ServiceApi_RemoveConnectionFromGroup",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "hub",
+            "description": "Target hub name, which should start with alphabetic characters and only contain alpha-numeric characters or underscore.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z][A-Za-z0-9_`,.[\\]]{0,127}$"
+          },
+          {
+            "in": "path",
+            "name": "group",
+            "description": "Target group name, which length should be greater than 0 and less than 1025.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "connectionId",
+            "description": "Target connection Id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "api-version",
+            "type": "string",
+            "default": "2020-10-01"
           }
         ],
         "responses": {
@@ -371,112 +533,10 @@
         }
       }
     },
-    "/api/v1/hubs/{hub}/groups/{group}/connections/{connectionId}": {
-      "put": {
-        "tags": [
-          "signalr.v1"
-        ],
-        "summary": "Add a connection to the target group.",
-        "operationId": "ServiceApi_AddConnectionToGroup",
-        "produces": [
-          "text/plain"
-        ],
-        "parameters": [
-          {
-            "in": "path",
-            "name": "hub",
-            "description": "Target hub name, which should start with alphabetic characters and only contain alpha-numeric characters or underscore.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[A-Za-z][A-Za-z0-9_`,.[\\]]{0,127}$"
-          },
-          {
-            "in": "path",
-            "name": "group",
-            "description": "Target group name, which length should be greater than 0 and less than 1025.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "path",
-            "name": "connectionId",
-            "description": "Target connection Id",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success",
-            "schema": {
-              "type": "string",
-              "example": "OK"
-            }
-          },
-          "404": {
-            "description": "Not Found"
-          },
-          "default": {
-            "description": "Error response",
-            "x-ms-error-response": true
-          }
-        }
-      },
-      "delete": {
-        "tags": [
-          "signalr.v1"
-        ],
-        "summary": "Remove a connection from the target group.",
-        "operationId": "ServiceApi_RemoveConnectionFromGroup",
-        "produces": [
-          "text/plain"
-        ],
-        "parameters": [
-          {
-            "in": "path",
-            "name": "hub",
-            "description": "Target hub name, which should start with alphabetic characters and only contain alpha-numeric characters or underscore.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[A-Za-z][A-Za-z0-9_`,.[\\]]{0,127}$"
-          },
-          {
-            "in": "path",
-            "name": "group",
-            "description": "Target group name, which length should be greater than 0 and less than 1025.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "path",
-            "name": "connectionId",
-            "description": "Target connection Id",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success",
-            "schema": {
-              "type": "string",
-              "example": "OK"
-            }
-          },
-          "404": {
-            "description": "Not Found"
-          },
-          "default": {
-            "description": "Error response",
-            "x-ms-error-response": true
-          }
-        }
-      }
-    },
-    "/api/v1/hubs/{hub}/groups/{group}/users/{user}": {
+    "/api/hubs/{hub}/users/{user}/groups/{group}": {
       "head": {
         "tags": [
-          "signalr.v1"
+          "signalr"
         ],
         "summary": "Check whether a user exists in the target group.",
         "operationId": "ServiceApi_CheckUserExistenceInGroup",
@@ -502,6 +562,12 @@
             "description": "Target user Id",
             "required": true,
             "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "api-version",
+            "type": "string",
+            "default": "2020-10-01"
           }
         ],
         "responses": {
@@ -519,7 +585,7 @@
       },
       "put": {
         "tags": [
-          "signalr.v1"
+          "signalr"
         ],
         "summary": "Add a user to the target group.",
         "operationId": "ServiceApi_AddUserToGroup",
@@ -552,6 +618,12 @@
             "description": "Specifies the seconds that the user exists in the group. If not set, the user lives in the group forever.",
             "type": "integer",
             "format": "int32"
+          },
+          {
+            "in": "query",
+            "name": "api-version",
+            "type": "string",
+            "default": "2020-10-01"
           }
         ],
         "responses": {
@@ -566,7 +638,7 @@
       },
       "delete": {
         "tags": [
-          "signalr.v1"
+          "signalr"
         ],
         "summary": "Remove a user from the target group.",
         "operationId": "ServiceApi_RemoveUserFromGroup",
@@ -592,6 +664,12 @@
             "description": "Target user Id",
             "required": true,
             "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "api-version",
+            "type": "string",
+            "default": "2020-10-01"
           }
         ],
         "responses": {
@@ -605,16 +683,13 @@
         }
       }
     },
-    "/api/v1/hubs/{hub}/users/{user}/groups": {
+    "/api/hubs/{hub}/users/{user}/groups": {
       "delete": {
         "tags": [
-          "signalr.v1"
+          "signalr"
         ],
         "summary": "Remove a user from all groups.",
         "operationId": "ServiceApi_RemoveUserFromAllGroups",
-        "produces": [
-          "text/plain"
-        ],
         "parameters": [
           {
             "in": "path",
@@ -630,15 +705,17 @@
             "description": "Target user Id",
             "required": true,
             "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "api-version",
+            "type": "string",
+            "default": "2020-10-01"
           }
         ],
         "responses": {
           "200": {
-            "description": "The user is deleted",
-            "schema": {
-              "type": "string",
-              "example": "OK"
-            }
+            "description": "The user is deleted"
           },
           "202": {
             "description": "The delete request is accepted and service is handling the request int the background"
@@ -664,7 +741,7 @@
         "arguments": {
           "type": "array",
           "items": {
-            "type": "object"
+            "description": "It can be any type"
           }
         }
       }
