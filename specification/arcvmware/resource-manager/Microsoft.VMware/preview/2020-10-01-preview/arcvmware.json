@@ -2171,8 +2171,8 @@
         },
         "conditions": {
           "description": "Defines a list of readiness conditions for the vcenter.",
-          "type": "array",
-          "items": {
+          "type": "object",
+          "additionalProperties": {
             "$ref": "#/definitions/Condition"
           },
           "readOnly": true
@@ -2264,11 +2264,6 @@
     "Condition": {
       "description": "Condition defines an extension to status.",
       "properties": {
-        "type": {
-          "description": "Type of condition.",
-          "type": "string",
-          "readOnly": true
-        },
         "status": {
           "description": "Status of the condition.",
           "type": "string",
@@ -2665,8 +2660,8 @@
         },
         "conditions": {
           "description": "Defines a list of readiness conditions for the vm.",
-          "type": "array",
-          "items": {
+          "type": "object",
+          "additionalProperties": {
             "$ref": "#/definitions/Condition"
           },
           "readOnly": true
