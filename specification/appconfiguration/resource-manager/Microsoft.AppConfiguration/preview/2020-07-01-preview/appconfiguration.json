@@ -806,13 +806,65 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppConfiguration/configurationStores/{configStoreName}/keyValues" : {
+      "get": {
+        "tags": [
+          "KeyValues"
+        ],
+        "description": "Lists the key-values for a given configuration store.",
+        "operationId": "KeyValues_ListByConfigurationStore",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ConfigStoreNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "$skipToken",
+            "in": "query",
+            "description": "A skip token is used to continue retrieving items after an operation returns a partial result. If a previous response contains a nextLink element, the value of the nextLink element will include a skipToken parameter that specifies a starting point to use for subsequent calls.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "#/definitions/KeyValueListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "KeyValues_ListByConfigurationStore": {
+            "$ref": "./examples/ConfigurationStoresListKeyValues.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppConfiguration/configurationStores/{configStoreName}/keyValues/{keyValueName}": {
       "get": {
         "tags": [
           "KeyValues"
         ],
         "description": "Gets the properties of the specified key-value.",
-        "operationId": "ConfigurationStores_GetKeyValue",
+        "operationId": "KeyValues_Get",
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -849,7 +901,7 @@
           }
         },
         "x-ms-examples": {
-          "ConfigurationStores_GetKeyValue": {
+          "KeyValues_Get": {
             "$ref": "./examples/ConfigurationStoresGetKeyValue.json"
           }
         }
@@ -859,7 +911,7 @@
           "KeyValues"
         ],
         "description": "Creates a key-value.",
-        "operationId": "ConfigurationStores_CreateKeyValue",
+        "operationId": "KeyValues_CreateOrUpdate",
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -905,10 +957,61 @@
           }
         },
         "x-ms-examples": {
-          "ConfigurationStores_CreateKeyValue": {
+          "KeyValues_CreateOrUpdate": {
             "$ref": "./examples/ConfigurationStoresCreateKeyValue.json"
           }
         }
+      },
+      "delete": {
+        "tags": [
+          "KeyValues"
+        ],
+        "description": "Deletes a key-value.",
+        "operationId": "KeyValues_Delete",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ConfigStoreNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "keyValueName",
+            "in": "path",
+            "description": "Identifier of key and label combination. Key and label are joined by $ character. Label is optional.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly."
+          },
+          "202": {
+            "description": "The request was successful; the operation will complete asynchronously."
+          },
+          "204": {
+            "description": "No Content - the specified resource was not found."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "KeyValues_Delete": {
+            "$ref": "./examples/ConfigurationStoresDeleteKeyValue.json"
+          }
+        },
+        "x-ms-long-running-operation": true
       }
     }
   },
@@ -1212,8 +1315,25 @@
         }
       }
     },
+    "KeyValueListResult": {
+      "description": "The result of a request to list key-values.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "The collection value.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/KeyValue"
+          }
+        },
+        "nextLink": {
+          "description": "The URI that can be used to request the next set of paged results.",
+          "type": "string"
+        }
+      }
+    },
     "KeyValue": {
-      "description": "The key value resource along with all resource properties.",
+      "description": "The key-value resource along with all resource properties.",
       "type": "object",
       "properties": {
         "id": {
@@ -1233,14 +1353,14 @@
         },
         "properties": {
           "$ref": "#/definitions/KeyValueProperties",
-          "description": "All key value properties.",
+          "description": "All key-value properties.",
           "x-ms-client-flatten": true
         }
       },
       "x-ms-azure-resource": true
     },
     "KeyValueProperties": {
-      "description": "All key value properties.",
+      "description": "All key-value properties.",
       "type": "object",
       "properties": {
         "key": {
