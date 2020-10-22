@@ -1,0 +1,73 @@
+{
+  "parameters": {
+    "subscriptionId": "{subscriptionId}",
+    "api-version": "2020-07-13-preview"
+  },
+  "responses": {
+    "200": {
+      "description": "The Pipelines have been fetched successfully.",
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/{subscriptionId}/resourceGroups/myAspNetWebAppPipeline-rg/providers/Microsoft.DevOps/pipelines/myAspNetWebAppPipeline",
+            "name": "myAspNetWebAppPipeline",
+            "type": "Microsoft.DevOps/pipelines",
+            "location": "South India",
+            "properties": {
+              "pipelineType": "azurePipeline",
+              "organization": {
+                "name": "myAspNetWebAppPipeline-org"
+              },
+              "project": {
+                "name": "myAspNetWebAppPipeline-project"
+              },
+              "bootstrapConfiguration": {
+                "template": {
+                  "id": "ms.vss-continuous-delivery-pipeline-templates.aspnet-windowswebapp",
+                  "parameters": {
+                    "subscriptionId": "{subscriptionId}",
+                    "resourceGroup": "myAspNetWebAppPipeline-rg",
+                    "webAppName": "myAspNetWebApp",
+                    "location": "South India",
+                    "appServicePlan": "S1 Standard",
+                    "appInsightLocation": "South India",
+                    "azureAuth": null
+                  }
+                }
+              }
+            }
+          },
+          {
+            "id": "/subscriptions/{subscriptionId}/resourceGroups/myAspNetWebAppPipeline-rg1/providers/Microsoft.DevOps/pipelines/myAspNetWebAppPipeline1",
+            "name": "myAspNetWebAppPipeline1",
+            "type": "Microsoft.DevOps/pipelines",
+            "location": "South India",
+            "properties": {
+              "pipelineType": "azurePipeline",
+              "organization": {
+                "name": "myAspNetWebAppPipeline-org1"
+              },
+              "project": {
+                "name": "myAspNetWebAppPipeline-project1"
+              },
+              "bootstrapConfiguration": {
+                "template": {
+                  "id": "ms.vss-continuous-delivery-pipeline-templates.aspnet-windowswebapp",
+                  "parameters": {
+                    "subscriptionId": "{subscriptionId}",
+                    "resourceGroup": "myAspNetWebAppPipeline-rg",
+                    "webAppName": "myAspNetWebApp",
+                    "location": "South India",
+                    "appServicePlan": "S1 Standard",
+                    "appInsightLocation": "South India",
+                    "azureAuth": null
+                  }
+                }
+              }
+            }
+          }
+        ]
+      }
+    }
+  }
+}
