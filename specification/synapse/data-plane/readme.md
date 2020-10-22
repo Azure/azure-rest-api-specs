@@ -20,14 +20,89 @@ To see additional help and options, run:
 
 ## Configuration
 
-
-
 ### Basic Information
 These are the global settings for the Azure Synapse Analytics API.
 
 ``` yaml
 openapi-type: data-plane
-tag: package-2019-11-01-preview
+```
+
+``` yaml $(package-spark)
+tag: package-spark-2019-11-01-preview
+```
+
+``` yaml $(package-artifacts)
+tag: package-artifacts-2019-06-01-preview
+```
+
+``` yaml $(package-access-control)
+tag: package-access-control-2020-02-01-preview
+```
+
+``` yaml $(package-vnet)
+tag: package-vnet-2019-06-01-preview
+```
+
+``` yaml $(package-monitoring)
+tag: package-monitoring-2019-11-01-preview
+```
+
+### Tag: package-spark-2019-11-01-preview
+
+These settings apply only when `--tag=package-spark-2019-11-01-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-spark-2019-11-01-preview'
+input-file:
+- Microsoft.Synapse/preview/2019-11-01-preview/sparkJob.json
+```
+
+### Tag: package-artifacts-2019-06-01-preview
+
+These settings apply only when `--tag=package-artifacts-2019-06-01-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-artifacts-2019-06-01-preview'
+input-file:
+- Microsoft.Synapse/preview/2019-06-01-preview/artifacts.json
+- Microsoft.Synapse/preview/2019-06-01-preview/workspace.json
+- Microsoft.Synapse/preview/2019-06-01-preview/sqlPools.json
+- Microsoft.Synapse/preview/2019-06-01-preview/bigDataPools.json
+- Microsoft.Synapse/preview/2019-06-01-preview/integrationRuntimes.json
+- Microsoft.Synapse/preview/2019-06-01-preview/entityTypes/DataFlow.json
+- Microsoft.Synapse/preview/2019-06-01-preview/entityTypes/Dataset.json
+- Microsoft.Synapse/preview/2019-06-01-preview/entityTypes/LinkedService.json
+- Microsoft.Synapse/preview/2019-06-01-preview/entityTypes/Notebook.json
+- Microsoft.Synapse/preview/2019-06-01-preview/entityTypes/Pipeline.json
+- Microsoft.Synapse/preview/2019-06-01-preview/entityTypes/SparkJobDefinition.json
+- Microsoft.Synapse/preview/2019-06-01-preview/entityTypes/SqlScript.json
+- Microsoft.Synapse/preview/2019-06-01-preview/entityTypes/Trigger.json
+```
+
+### Tag: package-access-control-2020-02-01-preview
+
+These settings apply only when `--tag=package-access-control-2020-02-01-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-access-control-2020-02-01-preview'
+input-file:
+- Microsoft.Synapse/preview/2020-02-01-preview/roles.json
+- Microsoft.Synapse/preview/2020-02-01-preview/roleAssignments.json
+```
+
+### Tag: package-vnet-2019-06-01-preview
+
+These settings apply only when `--tag=package-vnet-2019-06-01-preview` is specified on the command line
+
+``` yaml $(tag) == 'package-vnet-2019-06-01-preview'
+input-file:
+- Microsoft.Synapse/preview/2019-06-01-preview/managedPrivateEndpoints.json
+```
+
+### Tag: package-monitoring-2019-11-01-preview
+
+These settings apply only when `--tag=package-monitoring-2019-11-01-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-monitoring-2019-11-01-preview'
+input-file:
+- Microsoft.Synapse/preview/2019-11-01-preview/monitoring.json
 ```
 
 ## Suppression
@@ -35,14 +110,14 @@ tag: package-2019-11-01-preview
 directive:
   - suppress: DefinitionsPropertiesNamesCamelCase
     reason: This would require a breaking change, and need to be consistent with the response from RP side.
-    from: Microsoft.Synapse/preview/2019-11-01-preview/sparkFrontend.json
+    from: sparkJob.json
     where:
-      - $.definitions.LivyStatementsResponseBody.properties.total_statements
-      - $.definitions.LivyStatementOutput.properties.execution_count
+      - $.definitions.SparkStatementCollection.properties.total_statements
+      - $.definitions.SparkStatementOutput.properties.execution_count
 
   - suppress: DefinitionsPropertiesNamesCamelCase
-    reason: These properties need to keep the same with jupyter notebook. Rp can't change these proeprties.
-    from: Microsoft.Synapse/preview/2019-11-01-preview/adf/entityTypes/NoteBook.json
+    reason: These properties need to keep the same with jupyter Notebook. Rp can't change these proeprties.
+    from: Notebook.json
     where:
       - $.definitions.NotebookCellOutputItem.properties.execution_count
       - $.definitions.NotebookCellOutputItem.properties.output_type
@@ -50,25 +125,11 @@ directive:
       - $.definitions.NotebookLanguageInfo.properties.codemirror_mode
       - $.definitions.NotebookKernelSpec.properties.display_name
       - $.definitions.NotebookMetadata.properties.language_info
-      - $.definitions.NoteBook.properties.nbformat_minor
-```
-
-### Tag: package-2019-11-01-preview
-
-These settings apply only when `--tag=package-2019-11-01-preview` is specified on the command line
-
-``` yaml $(tag) == 'package-2019-11-01-preview'
-input-file:
-- Microsoft.Synapse/preview/2019-11-01-preview/monitoring.json
-- Microsoft.Synapse/preview/2019-11-01-preview/sparkFrontend.json
-- Microsoft.Synapse/preview/2019-11-01-preview/roles.json
-- Microsoft.Synapse/preview/2019-11-01-preview/roleAssignments.json
-- Microsoft.Synapse/preview/2019-11-01-preview/adf/datafactory.json
+      - $.definitions.Notebook.properties.nbformat_minor
 ```
 
 ---
 # Code Generation
-
 
 ## Swagger to SDK
 
@@ -86,12 +147,21 @@ csharp:
   namespace: Microsoft.Azure.Synapse
   output-folder: $(csharp-sdks-folder)/synapse/Microsoft.Azure.Synapse/src/Generated
   clear-output-folder: true
+batch:
+  - package-spark: true
+  - package-artifacts: true
+  - package-access-control: true
 ```
 
 ## TypeScript
 
 See configuration in [readme.typescript.md](./readme.typescript.md)
-## Multi-API/Profile support for AutoRest v3 generators 
+
+## Go
+
+See configuration in [readme.go.md](./readme.go.md)
+
+## Multi-API/Profile support for AutoRest v3 generators
 
 AutoRest V3 generators require the use of `--tag=all-api-versions` to select api files.
 
@@ -103,19 +173,24 @@ require: $(this-folder)/../../../profiles/readme.md
 
 # all the input files across all versions
 input-file:
+  - $(this-folder)/Microsoft.Synapse/preview/2019-06-01-preview/workspace.json
+  - $(this-folder)/Microsoft.Synapse/preview/2019-06-01-preview/sqlPools.json
+  - $(this-folder)/Microsoft.Synapse/preview/2019-06-01-preview/bigDataPools.json
+  - $(this-folder)/Microsoft.Synapse/preview/2019-06-01-preview/integrationRuntimes.json
+  - $(this-folder)/Microsoft.Synapse/preview/2019-11-01-preview/sparkJob.json
+  - $(this-folder)/Microsoft.Synapse/preview/2019-06-01-preview/artifacts.json
+  - $(this-folder)/Microsoft.Synapse/preview/2020-02-01-preview/roles.json
+  - $(this-folder)/Microsoft.Synapse/preview/2020-02-01-preview/roleAssignments.json
+  - $(this-folder)/Microsoft.Synapse/preview/2019-06-01-preview/managedPrivateEndpoints.json
   - $(this-folder)/Microsoft.Synapse/preview/2019-11-01-preview/monitoring.json
-  - $(this-folder)/Microsoft.Synapse/preview/2019-11-01-preview/sparkFrontend.json
-  - $(this-folder)/Microsoft.Synapse/preview/2019-11-01-preview/roles.json
-  - $(this-folder)/Microsoft.Synapse/preview/2019-11-01-preview/roleAssignments.json
-  - $(this-folder)/Microsoft.Synapse/preview/2019-11-01-preview/adf/datafactory.json
 
 ```
 
-If there are files that should not be in the `all-api-versions` set, 
+If there are files that should not be in the `all-api-versions` set,
 uncomment the  `exclude-file` section below and add the file paths.
 
 ``` yaml $(tag) == 'all-api-versions'
-#exclude-file: 
+#exclude-file:
 #  - $(this-folder)/Microsoft.Example/stable/2010-01-01/somefile.json
 ```
 

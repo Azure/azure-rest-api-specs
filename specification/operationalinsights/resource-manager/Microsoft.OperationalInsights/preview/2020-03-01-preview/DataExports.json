@@ -143,10 +143,6 @@
               "$ref": "#/definitions/DataExportErrorResponse"
             }
           }
-        },
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
         }
       },
       "get": {
@@ -187,9 +183,6 @@
             "schema": {
               "$ref": "#/definitions/DataExport"
             }
-          },
-          "404": {
-            "description": "Not found the specific data export."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -282,10 +275,6 @@
         "dataExportId": {
           "type": "string",
           "description": "The data export rule ID."
-        },
-        "allTables": {
-          "type": "boolean",
-          "description": "When ‘true’, all workspace's tables are exported."
         },
         "tableNames": {
           "type": "array",

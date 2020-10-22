@@ -1,0 +1,124 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "StreamAnalyticsManagementClient",
+    "version": "2017-04-01-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/providers/Microsoft.StreamAnalytics/operations": {
+      "get": {
+        "tags": [
+          "Operations"
+        ],
+        "operationId": "Operations_List",
+        "description": "Lists all of the available Stream Analytics related operations.",
+        "x-ms-examples": {
+          "List available operations for the Stream Analytics resource provider": {
+            "$ref": "./examples/Operation_List.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully listed the available operations.",
+            "schema": {
+              "$ref": "#/definitions/OperationListResult"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    }
+  },
+  "definitions": {
+    "OperationListResult": {
+      "description": "Result of the request to list Stream Analytics operations. It contains a list of operations and a URL link to get the next set of results.",
+      "properties": {
+        "value": {
+          "description": "List of Stream Analytics operations supported by the Microsoft.StreamAnalytics resource provider.",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/Operation"
+          }
+        },
+        "nextLink": {
+          "description": "URL to get the next set of operation list results if there are any.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "Operation": {
+      "description": "A Stream Analytics REST API operation",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "The name of the operation being performed on this particular object.",
+          "type": "string",
+          "readOnly": true
+        },
+        "display": {
+          "description": "Contains the localized display information for this particular operation / action.",
+          "readOnly": true,
+          "properties": {
+            "provider": {
+              "description": "The localized friendly form of the resource provider name.",
+              "type": "string",
+              "readOnly": true
+            },
+            "resource": {
+              "description": "The localized friendly form of the resource type related to this action/operation.",
+              "type": "string",
+              "readOnly": true
+            },
+            "operation": {
+              "description": "The localized friendly name for the operation.",
+              "type": "string",
+              "readOnly": true
+            },
+            "description": {
+              "description": "The localized friendly description for the operation.",
+              "type": "string",
+              "readOnly": true
+            }
+          }
+        }
+      }
+    }
+  }
+}

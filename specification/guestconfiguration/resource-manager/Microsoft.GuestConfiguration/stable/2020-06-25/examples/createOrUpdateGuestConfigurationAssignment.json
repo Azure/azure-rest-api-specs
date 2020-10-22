@@ -1,0 +1,104 @@
+{
+  "parameters": {
+    "subscriptionId": "mySubscriptionId",
+    "resourceGroupName": "myResourceGroupName",
+    "vmName": "myVMName",
+    "guestConfigurationAssignmentName": "WhitelistedApplication",
+    "api-version": "2020-06-25",
+    "parameters": {
+      "location": "westcentralus",
+      "name": "WhitelistedApplication",
+      "properties": {
+        "context": "Azure policy",
+        "guestConfiguration": {
+          "name": "WhitelistedApplication",
+          "version": "1.*",
+          "configurationParameter": [
+            {
+              "name": "[InstalledApplication]bwhitelistedapp;Name",
+              "value": "NotePad,sql"
+            }
+          ],
+          "configurationSetting": {
+            "rebootIfNeeded": "False",
+            "actionAfterReboot": "ContinueConfiguration",
+            "configurationModeFrequencyMins": 15,
+            "configurationMode": "MonitorOnly"
+          }
+        }
+      }
+    }
+  },
+  "responses": {
+    "201": {
+      "headers": {},
+      "body": {
+        "location": "westcentralus",
+        "id": "/subscriptions/mysubscriptionid/resourceGroups/myResourceGroupName/providers/Microsoft.Compute/virtualMachines/myvm/providers/Microsoft.GuestConfiguration/guestConfigurationAssignments/WhitelistedApplication",
+        "name": "WhitelistedApplication",
+        "properties": {
+          "complianceStatus": "Pending",
+          "assignmentHash": null,
+          "latestReportId": null,
+          "lastComplianceStatusChecked": null,
+          "context": "Azure policy",
+          "guestConfiguration": {
+            "kind": null,
+            "name": "WhitelistedApplication",
+            "version": "1.0.0.3",
+            "contentUri": null,
+            "contentHash": null,
+            "configurationParameter": [
+              {
+                "name": "[InstalledApplication]bwhitelistedapp;Name",
+                "value": "NotePad,sql"
+              }
+            ],
+            "configurationSetting": {
+              "rebootIfNeeded": "False",
+              "actionAfterReboot": "ContinueConfiguration",
+              "configurationModeFrequencyMins": 15,
+              "configurationMode": "MonitorOnly"
+            }
+          },
+          "provisioningState": "Succeeded"
+        }
+      }
+    },
+    "200": {
+      "headers": {},
+      "body": {
+        "location": "westcentralus",
+        "id": "/subscriptions/mysubscriptionid/resourceGroups/myResourceGroupName/providers/Microsoft.Compute/virtualMachines/myvm/providers/Microsoft.GuestConfiguration/guestConfigurationAssignments/WhitelistedApplication",
+        "name": "WhitelistedApplication",
+        "properties": {
+          "complianceStatus": "Pending",
+          "assignmentHash": null,
+          "latestReportId": null,
+          "lastComplianceStatusChecked": null,
+          "context": "Azure policy",
+          "guestConfiguration": {
+            "kind": null,
+            "name": "WhitelistedApplication",
+            "version": "1.0.0.3",
+            "contentUri": null,
+            "contentHash": null,
+            "configurationParameter": [
+              {
+                "name": "[InstalledApplication]bwhitelistedapp;Name",
+                "value": "NotePad,sql"
+              }
+            ],
+            "configurationSetting": {
+              "rebootIfNeeded": "False",
+              "actionAfterReboot": "ContinueConfiguration",
+              "configurationModeFrequencyMins": 15,
+              "configurationMode": "MonitorOnly"
+            }
+          },
+          "provisioningState": "Succeeded"
+        }
+      }
+    }
+  }
+}

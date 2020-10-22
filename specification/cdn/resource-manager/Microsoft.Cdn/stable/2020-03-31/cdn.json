@@ -2697,7 +2697,9 @@
         "urlSigningKeys": {
           "description": "List of keys used to validate the signed URL hashes.",
           "type": "array",
-          "$ref": "#/definitions/UrlSigningKey"
+          "items": {
+            "$ref": "#/definitions/UrlSigningKey"
+          }
         },
         "deliveryPolicy": {
           "description": "A policy that specifies the delivery rules to be used for an endpoint.",
@@ -3052,7 +3054,6 @@
       "description": "Defines the parameters for RemoteAddress match conditions",
       "required": [
         "operator",
-        "matchValues",
         "@odata.type"
       ],
       "properties": {
@@ -3099,7 +3100,6 @@
       "description": "Defines the parameters for RequestMethod match conditions",
       "required": [
         "operator",
-        "matchValues",
         "@odata.type"
       ],
       "properties": {
@@ -3146,7 +3146,6 @@
       "description": "Defines the parameters for QueryString match conditions",
       "required": [
         "operator",
-        "matchValues",
         "@odata.type"
       ],
       "properties": {
@@ -3199,8 +3198,6 @@
       "description": "Defines the parameters for PostArgs match conditions",
       "required": [
         "operator",
-        "matchValues",
-        "selector",
         "@odata.type"
       ],
       "properties": {
@@ -3257,7 +3254,6 @@
       "description": "Defines the parameters for RequestUri match conditions",
       "required": [
         "operator",
-        "matchValues",
         "@odata.type"
       ],
       "properties": {
@@ -3310,8 +3306,6 @@
       "description": "Defines the parameters for RequestHeader match conditions",
       "required": [
         "operator",
-        "matchValues",
-        "selector",
         "@odata.type"
       ],
       "properties": {
@@ -3368,7 +3362,6 @@
       "description": "Defines the parameters for RequestBody match conditions",
       "required": [
         "operator",
-        "matchValues",
         "@odata.type"
       ],
       "properties": {
@@ -3421,7 +3414,6 @@
       "description": "Defines the parameters for RequestScheme match conditions ",
       "required": [
         "operator",
-        "matchValues",
         "@odata.type"
       ],
       "properties": {
@@ -3459,7 +3451,6 @@
       "description": "Defines the parameters for UrlPath match conditions",
       "required": [
         "operator",
-        "matchValues",
         "@odata.type"
       ],
       "properties": {
@@ -3513,7 +3504,6 @@
       "description": "Defines the parameters for UrlFileExtension match conditions",
       "required": [
         "operator",
-        "matchValues",
         "@odata.type"
       ],
       "properties": {
@@ -3566,7 +3556,6 @@
       "description": "Defines the parameters for UrlFilename match conditions",
       "required": [
         "operator",
-        "matchValues",
         "@odata.type"
       ],
       "properties": {
@@ -3619,7 +3608,6 @@
       "description": "Defines the parameters for HttpVersion match conditions",
       "required": [
         "operator",
-        "matchValues",
         "@odata.type"
       ],
       "properties": {
@@ -3657,8 +3645,6 @@
       "description": "Defines the parameters for Cookies match conditions",
       "required": [
         "operator",
-        "matchValues",
-        "selector",
         "@odata.type"
       ],
       "properties": {
@@ -3715,7 +3701,6 @@
       "description": "Defines the parameters for IsDevice match conditions",
       "required": [
         "operator",
-        "matchValues",
         "@odata.type"
       ],
       "properties": {
@@ -3862,12 +3847,36 @@
         }
       }
     },
+    "UrlSigningAction": {
+      "description": "Defines the url signing action for the delivery rule.",
+      "x-ms-discriminator-value": "UrlSigning",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DeliveryRuleAction"
+        }
+      ],
+      "required": [
+        "parameters"
+      ],
+      "properties": {
+        "parameters": {
+          "description": "Defines the parameters for the action.",
+          "$ref": "#/definitions/UrlSigningActionParameters"
+        }
+      }
+    },
     "UrlSigningActionParameters": {
       "description": "Defines the parameters for the Url Signing action.",
       "required": [
         "keyId"
       ],
       "properties": {
+        "@odata.type": {
+          "type": "string",
+          "enum": [
+            "#Microsoft.Azure.Cdn.Models.DeliveryRuleUrlSigningActionParameters"
+          ]
+        },
         "keyId": {
           "description": "Id reference of the key to be used to verify the hash and should be defined in UrlSigningKeys",
           "type": "string"
@@ -3906,9 +3915,9 @@
           "description": "Indicates the purpose of the parameter",
           "type": "string",
           "enum": [
-            "expires",
-            "keyId",
-            "signature"
+            "Expires",
+            "KeyId",
+            "Signature"
           ]
         },
         "paramName": {
@@ -4420,7 +4429,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/TrackedResource"
+          "$ref": "#/definitions/ProxyResource"
         }
       ],
       "properties": {
@@ -4466,13 +4475,6 @@
       "type": "object",
       "description": "Origin properties needed for origin update.",
       "properties": {
-        "tags": {
-          "description": "Origin tags.",
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
         "properties": {
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/OriginUpdatePropertiesParameters"
@@ -4963,7 +4965,6 @@
         "resourceGroupName",
         "vaultName",
         "secretName",
-        "secretVersion",
         "updateRule",
         "deleteRule"
       ],

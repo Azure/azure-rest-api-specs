@@ -47,6 +47,7 @@
                   "region": "WA",
                   "country": "US"
                 },
+                "billingRelationshipType": "Direct",
                 "currency": "USD",
                 "enabledAzurePlans": [
                   {
@@ -70,7 +71,8 @@
                     "name": "invoiceSectionId1",
                     "type": "Microsoft.Billing/billingAccounts/billingProfiles/invoiceSections",
                     "properties": {
-                      "displayName": "invoiceSectionName1"
+                      "displayName": "invoiceSectionName1",
+                      "state": "Active"
                     }
                   }
                 ]
@@ -94,6 +96,7 @@
                   "region": "WA",
                   "country": "US"
                 },
+                "billingRelationshipType": "IndirectCustomer",
                 "currency": "USD",
                 "enabledAzurePlans": [
                   {
@@ -105,6 +108,11 @@
                     "skuDescription": "Microsoft Azure Standard"
                   }
                 ],
+                "indirectRelationshipInfo": {
+                  "billingAccountName": "30000000-0000-0000-0000-000000000001_00000000-0000-0000-0000-000000000000",
+                  "billingProfileName": "33000000-0000-0000-0000-000000000001",
+                  "displayName": "Partner1"
+                },
                 "invoiceDay": 5,
                 "invoiceEmailOptIn": true,
                 "poNumber": "ABC12345",
@@ -116,7 +124,8 @@
                     "name": "invoiceSectionId2",
                     "type": "Microsoft.Billing/billingAccounts/billingProfiles/invoiceSections",
                     "properties": {
-                      "displayName": "invoiceSectionName2"
+                      "displayName": "invoiceSectionName2",
+                      "state": "Active"
                     }
                   }
                 ]

@@ -43,7 +43,7 @@
         "description": "List all the existing Smart Detector alert rules within the subscription.",
         "parameters": [
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "#/parameters/subscriptionId"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -56,7 +56,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/SmartDetectorErrorResponse"
             }
           },
           "200": {
@@ -85,7 +85,7 @@
         "description": "List all the existing Smart Detector alert rules within the subscription and resource group.",
         "parameters": [
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "#/parameters/subscriptionId"
           },
           {
             "$ref": "#/parameters/ResourceGroupNameParameter"
@@ -101,7 +101,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/SmartDetectorErrorResponse"
             }
           },
           "200": {
@@ -130,7 +130,7 @@
         "description": "Get a specific Smart Detector alert rule.",
         "parameters": [
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "#/parameters/subscriptionId"
           },
           {
             "$ref": "#/parameters/ResourceGroupNameParameter"
@@ -149,7 +149,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/SmartDetectorErrorResponse"
             }
           },
           "200": {
@@ -173,7 +173,7 @@
         "description": "Create or update a Smart Detector alert rule.",
         "parameters": [
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "#/parameters/subscriptionId"
           },
           {
             "$ref": "#/parameters/ResourceGroupNameParameter"
@@ -198,7 +198,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/SmartDetectorErrorResponse"
             }
           },
           "200": {
@@ -228,7 +228,7 @@
         "description": "Patch a specific Smart Detector alert rule.",
         "parameters": [
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "#/parameters/subscriptionId"
           },
           {
             "$ref": "#/parameters/ResourceGroupNameParameter"
@@ -253,7 +253,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/SmartDetectorErrorResponse"
             }
           },
           "200": {
@@ -277,7 +277,7 @@
         "description": "Delete an existing Smart Detector alert rule.",
         "parameters": [
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "#/parameters/subscriptionId"
           },
           {
             "$ref": "#/parameters/ResourceGroupNameParameter"
@@ -293,7 +293,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/SmartDetectorErrorResponse"
             }
           },
           "200": {
@@ -312,7 +312,7 @@
     }
   },
   "definitions": {
-    "ErrorResponse": {
+    "SmartDetectorErrorResponse": {
       "description": "Describe the format of an Error response.",
       "type": "object",
       "properties": {
@@ -611,7 +611,7 @@
     }
   },
   "parameters": {
-    "SubscriptionIdParameter": {
+    "subscriptionId": {
       "name": "subscriptionId",
       "in": "path",
       "required": true,
