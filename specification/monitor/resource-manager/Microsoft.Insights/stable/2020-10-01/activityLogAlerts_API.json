@@ -1,546 +1,545 @@
 {
-    "swagger": "2.0",
-    "info": {
-        "title": "Azure Activity Log Alerts API",
-        "description": "API for Azure Activity Log Alert rules CRUD operations.",
-        "version": "2020-10-01",
-        "x-ms-code-generation-settings": {
-          "name": "MonitorManagementClient"
-        }
-    },
-    "host": "management.azure.com",
-    "schemes": [
-      "https"
-    ],
-    "consumes": [
-      "application/json"
-    ],
-    "produces": [
-      "application/json"
-    ],
-    "security": [
-      {
-        "azure_auth": [
-          "user_impersonation"
-        ]
+  "swagger": "2.0",
+  "info": {
+    "title": "Azure Activity Log Alerts API",
+    "description": "API for Azure Activity Log Alert rules CRUD operations.",
+    "version": "2020-10-01",
+    "x-ms-code-generation-settings": {
+      "name": "MonitorManagementClient"
+    }
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
       }
-    ],
-    "securityDefinitions": {
-      "azure_auth": {
-        "type": "oauth2",
-        "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
-        "flow": "implicit",
-        "description": "Azure Active Directory OAuth2 Flow",
-        "scopes": {
-          "user_impersonation": "impersonate your user account"
-        }
-      }
-    },
-    "paths": {
-      "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Insights/activityLogAlerts/{alertRuleName}": {
-        "put": {
-          "description": "Create a new Activity Log Alert rule or update an existing one.",
-          "operationId": "ActivityLogAlertRule_CreateOrUpdate",
-          "x-ms-examples": {
-            "Create or update an Activity Log Alert rule": {
-              "$ref": "./examples/ActivityLogAlertRule_CreateOrUpdate.json"
-            },
-            "Create or update an Activity Log Alert rule with 'anyOf' condition": {
-              "$ref": "./examples/ActivityLogAlertRule_CreateOrUpdateRuleWithAnyOfCondition.json"
-            },
-            "Create or update an Activity Log Alert rule with 'containsAny'": {
-              "$ref": "./examples/ActivityLogAlertRule_CreateOrUpdateRuleWithContainsAny.json"
-            }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Insights/activityLogAlerts/{alertRuleName}": {
+      "put": {
+        "description": "Create a new Activity Log Alert rule or update an existing one.",
+        "operationId": "ActivityLogAlertRule_CreateOrUpdate",
+        "x-ms-examples": {
+          "Create or update an Activity Log Alert rule": {
+            "$ref": "./examples/ActivityLogAlertRule_CreateOrUpdate.json"
           },
-          "parameters": [
-            {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
-            },
-            {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
-            },
-            {
-              "$ref": "#/parameters/AlertRuleNameParameter"
-            },
-            {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
-            },
-            {
-              "name": "activityLogAlertRule",
-              "description": "The Activity Log Alert rule to create or use for the update.",
-              "in": "body",
-              "required": true,
-              "schema": {
-                "$ref": "#/definitions/AlertRuleResource"
-              }
-            }
-          ],
-          "responses": {
-            "200": {
-              "description": "An existing Activity Log Alert rule was successfully updated.",
-              "schema": {
-                "$ref": "#/definitions/AlertRuleResource"
-              }
-            },
-            "201": {
-              "description": "A new Activity Log Alert rule was successfully created.",
-              "schema": {
-                "$ref": "#/definitions/AlertRuleResource"
-              }
-            },
-            "default": {
-              "description": "An error occurred and the Activity Log Alert rule could not be created or updated.",
-              "schema": {
-                "$ref": "#/definitions/ErrorResponse"
-              }
-            }
+          "Create or update an Activity Log Alert rule with 'anyOf' condition": {
+            "$ref": "./examples/ActivityLogAlertRule_CreateOrUpdateRuleWithAnyOfCondition.json"
+          },
+          "Create or update an Activity Log Alert rule with 'containsAny'": {
+            "$ref": "./examples/ActivityLogAlertRule_CreateOrUpdateRuleWithContainsAny.json"
           }
         },
-        "get": {
-          "description": "Get an Activity Log Alert rule.",
-          "operationId": "ActivityLogAlertRule_Get",
-          "x-ms-examples": {
-            "Get an Activity Log Alert rule": {
-              "$ref": "./examples/ActivityLogAlertRule_Get.json"
-            }
-          },
-          "parameters": [
-            {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
-            },
-            {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
-            },
-            {
-              "$ref": "#/parameters/AlertRuleNameParameter"
-            },
-            {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
-            }
-          ],
-          "responses": {
-            "200": {
-              "description": "The request succeeded.",
-              "schema": {
-                "$ref": "#/definitions/AlertRuleResource"
-              }
-            },
-            "default": {
-              "description": "An error occurred and the Activity Log Alert rule could not be retrieved.",
-              "schema": {
-                "$ref": "#/definitions/ErrorResponse"
-              }
-            }
-          }
-        },
-        "delete": {
-          "description": "Delete an Activity Log Alert rule.",
-          "operationId": "ActivityLogAlertRule_Delete",
-          "x-ms-examples": {
-            "Delete an Activity Log Alert rule": {
-              "$ref": "./examples/ActivityLogAlertRule_Delete.json"
-            }
-          },
-          "parameters": [
-            {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
-            },
-            {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
-            },
-            {
-              "$ref": "#/parameters/AlertRuleNameParameter"
-            },
-            {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
-            }
-          ],
-          "responses": {
-            "200": {
-              "description": "The Activity Log Alert rule was successfully deleted."
-            },
-            "204": {
-              "description": "The Activity Log Alert rule does not exist. It may have already been deleted."
-            },
-            "default": {
-              "description": "An error occurred and the Activity Log Alert rule could not be deleted.",
-              "schema": {
-                "$ref": "#/definitions/ErrorResponse"
-              }
-            }
-          }
-        },
-        "patch": {
-          "description": "Updates 'tags' and 'enabled' fields in an existing Alert rule. This method is used to update the Alert rule tags, and to enable or disable the Alert rule. To update other fields use CreateOrUpdate operation.",
-          "operationId": "ActivityLogAlertRule_Update",
-          "x-ms-examples": {
-            "Patch an Activity Log Alert rule": {
-              "$ref": "./examples/ActivityLogAlertRule_Update.json"
-            }
-          },
-          "parameters": [
-            {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
-            },
-            {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
-            },
-            {
-              "$ref": "#/parameters/AlertRuleNameParameter"
-            },
-            {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
-            },
-            {
-              "name": "activityLogAlertRulePatch",
-              "in": "body",
-              "required": true,
-              "schema": {
-                "$ref": "#/definitions/AlertRulePatchObject"
-              },
-              "description": "Parameters supplied to the operation."
-            }
-          ],
-          "responses": {
-            "200": {
-              "description": "An existing Activity Log Alert rule was successfully updated.",
-              "schema": {
-                "$ref": "#/definitions/AlertRuleResource"
-              }
-            },
-            "default": {
-              "description": "Error response describing why the operation failed.",
-              "schema": {
-                "$ref": "#/definitions/ErrorResponse"
-              }
-            }
-          }
-        }
-      },
-      "/subscriptions/{subscriptionId}/providers/Microsoft.Insights/activityLogAlerts": {
-        "get": {
-          "description": "Get a list of all Activity Log Alert rules in a subscription.",
-          "operationId": "ActivityLogAlertRule_ListBySubscriptionId",
-          "x-ms-examples": {
-            "Get list of all Activity Log Alert rules under a subscription": {
-              "$ref": "./examples/ActivityLogAlertRule_ListBySubscriptionId.json"
-            }
-          },
-          "x-ms-pageable": {
-            "nextLinkName": "nextLink"
-          },
-          "parameters": [
-            {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
-            },
-            {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
-            }
-          ],
-          "responses": {
-            "200": {
-              "description": "The request succeeded.",
-              "schema": {
-                "$ref": "#/definitions/AlertRuleList"
-              }
-            },
-            "default": {
-              "description": "An error occurred and the list of Activity Log Alert rules could not be retrieved.",
-              "schema": {
-                "$ref": "#/definitions/ErrorResponse"
-              }
-            }
-          }
-        }
-      },
-      "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Insights/activityLogAlerts": {
-        "get": {
-          "description": "Get a list of all Activity Log Alert rules in a resource group.",
-          "operationId": "ActivityLogAlertRule_ListByResourceGroup",
-          "x-ms-examples": {
-            "List activity log alerts": {
-              "$ref": "./examples/ActivityLogAlertRule_ListByResourceGroupName.json"
-            }
-          },
-          "x-ms-pageable": {
-            "nextLinkName": "nextLink"
-          },
-          "parameters": [
-            {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
-            },
-            {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
-            },
-            {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
-            }
-          ],
-          "responses": {
-            "200": {
-              "description": "The request succeeded.",
-              "schema": {
-                "$ref": "#/definitions/AlertRuleList"
-              }
-            },
-            "default": {
-              "description": "An error occurred and the list of Activity Log Alert rules could not be retrieved.",
-              "schema": {
-                "$ref": "#/definitions/ErrorResponse"
-              }
-            }
-          }
-        }
-      }
-    },
-    "definitions": {
-      "AzureResource": {
-        "description": "An Azure resource object.",
-        "x-ms-azure-resource": true,
-        "type": "object",
-        "properties": {
-          "id": {
-            "description": "The resource Id.",
-            "type": "string",
-            "readOnly": true
-          },
-          "name": {
-            "description": "The name of the resource.",
-            "type": "string",
-            "readOnly": true
-          },
-          "type": {
-            "description": "The type of the resource.",
-            "type": "string",
-            "readOnly": true
-          },
-          "location": {
-            "description": "The location of the resource. Since Azure Activity Log Alerts is a global service, the location of the rules should always be 'global'.",
-            "type": "string",
-            "default": "global",
-            "x-ms-mutability": [
-              "read",
-              "create"
-            ]
-          },
-          "tags": {
-            "description": "The tags of the resource.",
-            "type": "object",
-            "additionalProperties": {
-              "type": "string"
-            }
-          }
-        }
-      },
-      "AlertRuleResource": {
-        "description": "An Activity Log Alert rule resource.",
-        "allOf": [
+        "parameters": [
           {
-            "$ref": "#/definitions/AzureResource"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AlertRuleNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "activityLogAlertRule",
+            "description": "The Activity Log Alert rule to create or use for the update.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AlertRuleResource"
+            }
           }
         ],
-        "properties": {
-          "properties": {
-            "description": "The Activity Log Alert rule properties of the resource.",
-            "x-ms-client-flatten": true,
-            "$ref": "#/definitions/AlertRuleProperties"
-          }
-        }
-      },
-      "AlertRuleList": {
-        "description": "A list of Activity Log Alert rules.",
-        "properties": {
-          "value": {
-            "description": "The list of Activity Log Alert rules.",
-            "type": "array",
-            "items": {
+        "responses": {
+          "200": {
+            "description": "An existing Activity Log Alert rule was successfully updated.",
+            "schema": {
               "$ref": "#/definitions/AlertRuleResource"
             }
           },
-          "nextLink": {
-            "description": "Provides the link to retrieve the next set of elements.",
-            "type": "string"
+          "201": {
+            "description": "A new Activity Log Alert rule was successfully created.",
+            "schema": {
+              "$ref": "#/definitions/AlertRuleResource"
+            }
+          },
+          "default": {
+            "description": "An error occurred and the Activity Log Alert rule could not be created or updated.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         }
       },
-      "AlertRuleProperties": {
-        "description": "An Azure Activity Log Alert rule.",
-        "type": "object",
-        "properties": {
-          "scopes": {
-            "description": "A list of resource IDs that will be used as prefixes. The alert will only apply to Activity Log events with resource IDs that fall under one of these prefixes. This list must include at least one item.",
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
-          },
-          "condition": {
-            "description": "The condition that will cause this alert to activate.",
-            "$ref": "#/definitions/AlertRuleAllOfCondition"
-          },
-          "actions": {
-            "description": "The actions that will activate when the condition is met.",
-            "$ref": "#/definitions/ActionList"
-          },
-          "enabled": {
-            "description": "Indicates whether this Activity Log Alert rule is enabled. If an Activity Log Alert rule is not enabled, then none of its actions will be activated.",
-            "type": "boolean",
-            "default": true
-          },
-          "description": {
-            "description": "A description of this Activity Log Alert rule.",
-            "type": "string"            
+      "get": {
+        "description": "Get an Activity Log Alert rule.",
+        "operationId": "ActivityLogAlertRule_Get",
+        "x-ms-examples": {
+          "Get an Activity Log Alert rule": {
+            "$ref": "./examples/ActivityLogAlertRule_Get.json"
           }
         },
-        "required": [
-          "scopes",
-          "condition",
-          "actions"
-        ]
-      },
-      "AlertRuleAllOfCondition": {
-        "description": "An Activity Log Alert rule condition that is met when all its member conditions are met.",
-        "type": "object",
-        "properties": {
-          "allOf": {
-            "description": "The list of Activity Log Alert rule conditions.",
-            "type": "array",
-            "items": {
-              "$ref": "#/definitions/AlertRuleAnyOfOrLeafCondition"
-            }
-          }
-        },
-        "required": [
-          "allOf"
-        ]
-      },
-      "AlertRuleAnyOfOrLeafCondition": {
-        "description": "An Activity Log Alert rule condition that is met when all its member conditions are met.\nEach condition can be of one of the following types:\n  * __Leaf Condition__ - must contain 'field' and either 'equals' or 'containsAny'.\n  _Please note, 'anyOf' should __not__ exist in a Leaf Condition._\n  * __AnyOf Condition__ - must contain 'anyOf' (which is an array of Leaf Conditions).\n  _Please note, 'field', 'equals' and 'containsAny' should __not__ exist in an AnyOf Condition._\n",
-        "type": "object",
-        "allOf": [
+        "parameters": [
           {
-            "$ref": "#/definitions/AlertRuleLeafCondition"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AlertRuleNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           }
         ],
-        "properties": {
-          "anyOf": {
-            "title": "An Activity Log Alert rule 'anyOf' condition.",
-            "description": "An Activity Log Alert rule condition that is met when at least one of its member leaf conditions are met.",
-            "type": "array",
-            "items": {
-              "$ref": "#/definitions/AlertRuleLeafCondition"
+        "responses": {
+          "200": {
+            "description": "The request succeeded.",
+            "schema": {
+              "$ref": "#/definitions/AlertRuleResource"
+            }
+          },
+          "default": {
+            "description": "An error occurred and the Activity Log Alert rule could not be retrieved.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         }
       },
-      "AlertRuleLeafCondition": {
-        "description": "An Activity Log Alert rule condition that is met by comparing the field and value of an Activity Log event.\nThis condition must contain 'field' and either 'equals' or 'containsAny'.",
-        "type": "object",
-        "properties": {
-          "field": {
-            "description": "The name of the Activity Log event's field that this condition will examine.\nThe possible values for this field are (case-insensitive): 'resourceId', 'category', 'caller', 'level', 'operationName', 'resourceGroup', 'resourceProvider', 'status', 'subStatus', 'resourceType', or anything beginning with 'properties'.",
-            "type": "string"
-          },
-          "equals": {
-            "description": "The value of the event's field will be compared to this value (case-insensitive) to determine if the condition is met.",
-            "type": "string"
-          },
-          "containsAny": {
-            "description": "The value of the event's field will be compared to the values in this array (case-insensitive) to determine if the condition is met.",
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
-          }
-        }
-      },
-      "ActionList": {
-        "description": "A list of Activity Log Alert rule actions.",
-        "properties": {
-          "actionGroups": {
-            "description": "The list of the Action Groups.",
-            "type": "array",
-            "items": {
-              "$ref": "#/definitions/ActionGroup"
-            }
-          }
-        }
-      },
-      "ActionGroup": {
-        "description": "A pointer to an Azure Action Group.",
-        "properties": {
-          "actionGroupId": {
-            "description": "The resource ID of the Action Group. This cannot be null or empty.",
-            "type": "string"
-          },
-          "webhookProperties": {
-            "description": "the dictionary of custom properties to include with the post operation. These data are appended to the webhook payload.",
-            "additionalProperties": {
-              "type": "string"
-            }
+      "delete": {
+        "description": "Delete an Activity Log Alert rule.",
+        "operationId": "ActivityLogAlertRule_Delete",
+        "x-ms-examples": {
+          "Delete an Activity Log Alert rule": {
+            "$ref": "./examples/ActivityLogAlertRule_Delete.json"
           }
         },
-        "required": [
-          "actionGroupId"
-        ]
-      },
-      "AlertRulePatchObject": {
-        "description": "An Activity Log Alert rule object for the body of patch operations.",
-        "properties": {
-          "tags": {
-            "description": "The resource tags",
-            "additionalProperties": {
-              "type": "string"
-            }            
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
           },
-          "properties": {
-            "x-ms-client-flatten": true,
-            "$ref": "#/definitions/AlertRulePatchProperties",
-            "description": "The activity log alert settings for an update operation."
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AlertRuleNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The Activity Log Alert rule was successfully deleted."
+          },
+          "204": {
+            "description": "The Activity Log Alert rule does not exist. It may have already been deleted."
+          },
+          "default": {
+            "description": "An error occurred and the Activity Log Alert rule could not be deleted.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         }
       },
-      "AlertRulePatchProperties": {
-        "description": "An Activity Log Alert rule properties for patch operations.",
-        "properties": {
-          "enabled": {
-            "description": "Indicates whether this Activity Log Alert rule is enabled. If an Activity Log Alert rule is not enabled, then none of its actions will be activated.",
-            "type": "boolean",
-            "default": true
+      "patch": {
+        "description": "Updates 'tags' and 'enabled' fields in an existing Alert rule. This method is used to update the Alert rule tags, and to enable or disable the Alert rule. To update other fields use CreateOrUpdate operation.",
+        "operationId": "ActivityLogAlertRule_Update",
+        "x-ms-examples": {
+          "Patch an Activity Log Alert rule": {
+            "$ref": "./examples/ActivityLogAlertRule_Update.json"
           }
-        }
-      },
-      "ErrorResponse": {
-        "description": "The error response.",
-        "properties": {
-          "error": {
-            "description": "The error object.",
-            "type": "object",
-            "properties": {
-              "code": {
-                "description": "The error code.",
-                "type": "string",
-                "readOnly": true
-              },
-              "message": {
-                "description": "The error message indicating why the operation failed.",
-                "type": "string",
-                "readOnly": true
-              }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AlertRuleNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "activityLogAlertRulePatch",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AlertRulePatchObject"
+            },
+            "description": "Parameters supplied to the operation."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "An existing Activity Log Alert rule was successfully updated.",
+            "schema": {
+              "$ref": "#/definitions/AlertRuleResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         }
       }
     },
-    "parameters": {
-      "AlertRuleNameParameter": {
-        "name": "alertRuleName",
-        "in": "path",
-        "required": true,
-        "type": "string",
-        "description": "The name of the Activity Log Alert rule.",
-        "x-ms-parameter-location": "method"
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Insights/activityLogAlerts": {
+      "get": {
+        "description": "Get a list of all Activity Log Alert rules in a subscription.",
+        "operationId": "ActivityLogAlertRule_ListBySubscriptionId",
+        "x-ms-examples": {
+          "Get list of all Activity Log Alert rules under a subscription": {
+            "$ref": "./examples/ActivityLogAlertRule_ListBySubscriptionId.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request succeeded.",
+            "schema": {
+              "$ref": "#/definitions/AlertRuleList"
+            }
+          },
+          "default": {
+            "description": "An error occurred and the list of Activity Log Alert rules could not be retrieved.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Insights/activityLogAlerts": {
+      "get": {
+        "description": "Get a list of all Activity Log Alert rules in a resource group.",
+        "operationId": "ActivityLogAlertRule_ListByResourceGroup",
+        "x-ms-examples": {
+          "List activity log alerts": {
+            "$ref": "./examples/ActivityLogAlertRule_ListByResourceGroupName.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request succeeded.",
+            "schema": {
+              "$ref": "#/definitions/AlertRuleList"
+            }
+          },
+          "default": {
+            "description": "An error occurred and the list of Activity Log Alert rules could not be retrieved.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
       }
     }
+  },
+  "definitions": {
+    "AzureResource": {
+      "description": "An Azure resource object.",
+      "x-ms-azure-resource": true,
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "The resource Id.",
+          "type": "string",
+          "readOnly": true
+        },
+        "name": {
+          "description": "The name of the resource.",
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "description": "The type of the resource.",
+          "type": "string",
+          "readOnly": true
+        },
+        "location": {
+          "description": "The location of the resource. Since Azure Activity Log Alerts is a global service, the location of the rules should always be 'global'.",
+          "type": "string",
+          "default": "global",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "tags": {
+          "description": "The tags of the resource.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "AlertRuleResource": {
+      "description": "An Activity Log Alert rule resource.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AzureResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "The Activity Log Alert rule properties of the resource.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/AlertRuleProperties"
+        }
+      }
+    },
+    "AlertRuleList": {
+      "description": "A list of Activity Log Alert rules.",
+      "properties": {
+        "value": {
+          "description": "The list of Activity Log Alert rules.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AlertRuleResource"
+          }
+        },
+        "nextLink": {
+          "description": "Provides the link to retrieve the next set of elements.",
+          "type": "string"
+        }
+      }
+    },
+    "AlertRuleProperties": {
+      "description": "An Azure Activity Log Alert rule.",
+      "type": "object",
+      "properties": {
+        "scopes": {
+          "description": "A list of resource IDs that will be used as prefixes. The alert will only apply to Activity Log events with resource IDs that fall under one of these prefixes. This list must include at least one item.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "condition": {
+          "description": "The condition that will cause this alert to activate.",
+          "$ref": "#/definitions/AlertRuleAllOfCondition"
+        },
+        "actions": {
+          "description": "The actions that will activate when the condition is met.",
+          "$ref": "#/definitions/ActionList"
+        },
+        "enabled": {
+          "description": "Indicates whether this Activity Log Alert rule is enabled. If an Activity Log Alert rule is not enabled, then none of its actions will be activated.",
+          "type": "boolean",
+          "default": true
+        },
+        "description": {
+          "description": "A description of this Activity Log Alert rule.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "scopes",
+        "condition",
+        "actions"
+      ]
+    },
+    "AlertRuleAllOfCondition": {
+      "description": "An Activity Log Alert rule condition that is met when all its member conditions are met.",
+      "type": "object",
+      "properties": {
+        "allOf": {
+          "description": "The list of Activity Log Alert rule conditions.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AlertRuleAnyOfOrLeafCondition"
+          }
+        }
+      },
+      "required": [
+        "allOf"
+      ]
+    },
+    "AlertRuleAnyOfOrLeafCondition": {
+      "description": "An Activity Log Alert rule condition that is met when all its member conditions are met.\nEach condition can be of one of the following types:\n  * __Leaf Condition__ - must contain 'field' and either 'equals' or 'containsAny'.\n  _Please note, 'anyOf' should __not__ exist in a Leaf Condition._\n  * __AnyOf Condition__ - must contain 'anyOf' (which is an array of Leaf Conditions).\n  _Please note, 'field', 'equals' and 'containsAny' should __not__ exist in an AnyOf Condition._\n",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AlertRuleLeafCondition"
+        }
+      ],
+      "properties": {
+        "anyOf": {
+          "title": "An Activity Log Alert rule 'anyOf' condition.",
+          "description": "An Activity Log Alert rule condition that is met when at least one of its member leaf conditions are met.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AlertRuleLeafCondition"
+          }
+        }
+      }
+    },
+    "AlertRuleLeafCondition": {
+      "description": "An Activity Log Alert rule condition that is met by comparing the field and value of an Activity Log event.\nThis condition must contain 'field' and either 'equals' or 'containsAny'.",
+      "type": "object",
+      "properties": {
+        "field": {
+          "description": "The name of the Activity Log event's field that this condition will examine.\nThe possible values for this field are (case-insensitive): 'resourceId', 'category', 'caller', 'level', 'operationName', 'resourceGroup', 'resourceProvider', 'status', 'subStatus', 'resourceType', or anything beginning with 'properties'.",
+          "type": "string"
+        },
+        "equals": {
+          "description": "The value of the event's field will be compared to this value (case-insensitive) to determine if the condition is met.",
+          "type": "string"
+        },
+        "containsAny": {
+          "description": "The value of the event's field will be compared to the values in this array (case-insensitive) to determine if the condition is met.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "ActionList": {
+      "description": "A list of Activity Log Alert rule actions.",
+      "properties": {
+        "actionGroups": {
+          "description": "The list of the Action Groups.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ActionGroup"
+          }
+        }
+      }
+    },
+    "ActionGroup": {
+      "description": "A pointer to an Azure Action Group.",
+      "properties": {
+        "actionGroupId": {
+          "description": "The resource ID of the Action Group. This cannot be null or empty.",
+          "type": "string"
+        },
+        "webhookProperties": {
+          "description": "the dictionary of custom properties to include with the post operation. These data are appended to the webhook payload.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "actionGroupId"
+      ]
+    },
+    "AlertRulePatchObject": {
+      "description": "An Activity Log Alert rule object for the body of patch operations.",
+      "properties": {
+        "tags": {
+          "description": "The resource tags",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/AlertRulePatchProperties",
+          "description": "The activity log alert settings for an update operation."
+        }
+      }
+    },
+    "AlertRulePatchProperties": {
+      "description": "An Activity Log Alert rule properties for patch operations.",
+      "properties": {
+        "enabled": {
+          "description": "Indicates whether this Activity Log Alert rule is enabled. If an Activity Log Alert rule is not enabled, then none of its actions will be activated.",
+          "type": "boolean",
+          "default": true
+        }
+      }
+    },
+    "ErrorResponse": {
+      "description": "The error response.",
+      "properties": {
+        "error": {
+          "description": "The error object.",
+          "type": "object",
+          "properties": {
+            "code": {
+              "description": "The error code.",
+              "type": "string",
+              "readOnly": true
+            },
+            "message": {
+              "description": "The error message indicating why the operation failed.",
+              "type": "string",
+              "readOnly": true
+            }
+          }
+        }
+      }
+    }
+  },
+  "parameters": {
+    "AlertRuleNameParameter": {
+      "name": "alertRuleName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the Activity Log Alert rule.",
+      "x-ms-parameter-location": "method"
+    }
   }
-  
+}
