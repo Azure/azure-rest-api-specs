@@ -2479,6 +2479,21 @@
         "appNetworkResourceGroup": {
           "description": "Name of the resource group containing network resources of Azure Spring Cloud Apps",
           "type": "string"
+        },
+        "outboundIPs": {
+          "description": "Desired outbound IP resources for Azure Spring Cloud instance.",
+          "type": "object",
+          "readOnly": true,
+          "properties": {
+            "publicIPs": {
+              "type": "array",
+              "readOnly": true,
+              "items": {
+                "type": "string"
+              },
+              "description": "A list of public IP addresses."
+            }
+          }
         }
       }
     },
@@ -3322,6 +3337,11 @@
           "description": "Discovery status of the deployment instance",
           "type": "string",
           "readOnly": true
+        },
+        "startTime": {
+          "description": "Start time of the deployment instance",
+          "type": "string",
+          "readOnly": true
         }
       }
     },
@@ -3845,7 +3865,7 @@
           ],
           "type": "string",
           "x-ms-enum": {
-            "name": "SupportedRuntimeVersion",
+            "name": "SupportedRuntimeValue",
             "modelAsString": true
           }
         },

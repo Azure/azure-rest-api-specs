@@ -6,25 +6,31 @@ These settings apply only when `--azureresourceschema` is specified on the comma
 
 ``` yaml $(azureresourceschema) && $(multiapi)
 batch:
-  - tag: package-preview-2019-07
-  - tag: package-2017-03-01-preview
+  - tag: schema-azuredata-2020-09-08-preview
+  - tag: schema-azuredata-2019-07-24-preview
+
 ```
 
-### Tag: package-preview-2019-07 and azureresourceschema
-
-These settings apply only when `--tag=package-preview-2019-07 --azureresourceschema` is specified on the command line.
 Please also specify `--azureresourceschema-folder=<path to the root directory of your azure-resource-manager-schemas clone>`.
 
-``` yaml $(tag) == 'package-preview-2019-07' && $(azureresourceschema)
+### Tag: schema-azuredata-2020-09-08-preview and azureresourceschema
+
+``` yaml $(tag) == 'schema-azuredata-2020-09-08-preview' && $(azureresourceschema)
 output-folder: $(azureresourceschema-folder)/schemas
+
+# all the input files in this apiVersion
+input-file:
+  - Microsoft.AzureData/preview/2020-09-08-preview/azuredata.json
+
 ```
 
-### Tag: package-2017-03-01-preview and azureresourceschema
+### Tag: schema-azuredata-2019-07-24-preview and azureresourceschema
 
-These settings apply only when `--tag=package-2017-03-01-preview --azureresourceschema` is specified on the command line.
-Please also specify `--azureresourceschema-folder=<path to the root directory of your azure-resource-manager-schemas clone>`.
-
-``` yaml $(tag) == 'package-2017-03-01-preview' && $(azureresourceschema)
+``` yaml $(tag) == 'schema-azuredata-2019-07-24-preview' && $(azureresourceschema)
 output-folder: $(azureresourceschema-folder)/schemas
-```
 
+# all the input files in this apiVersion
+input-file:
+  - Microsoft.AzureData/preview/2019-07-24-preview/azuredata.json
+
+```
