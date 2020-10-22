@@ -94,6 +94,17 @@ swagger-to-sdk:
       - node sdkauto_afterscript.js vmware/resource-manager
 ```
 
+## Suppression
+```
+directive:
+  - suppress: SECRET_PROPERTY
+    from: vmware.json
+    where:
+      - $.definitions.AdminCredentials.properties.nsxtPassword
+      - $.definitions.AdminCredentials.properties.vcenterPassword
+    reason: Secrets are OK to return in a POST response.
+```
+
 ## TypeScript
 
 See configuration in [readme.typescript.md](./readme.typescript.md)
