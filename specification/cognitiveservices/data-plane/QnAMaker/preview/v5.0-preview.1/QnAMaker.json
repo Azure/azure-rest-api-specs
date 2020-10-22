@@ -831,6 +831,12 @@
           "items": {
             "type": "string"
           }
+        },
+        "defaultAnswer": {
+          "type": "string",
+          "description": "Default answer sent to user if no good match is found in the KB.",
+          "maxLength": 300,
+          "minLength": 1
         }
       }
     },
@@ -1072,6 +1078,16 @@
           "type": "string",
           "description": "Language of the knowledgebase. Please find the list of supported languages <a href=\"https://aka.ms/qnamaker-languages#languages-supported\" target=\"_blank\">here</a>.",
           "maxLength": 100,
+          "minLength": 1
+        },
+        "enableMultipleLanguages": {
+          "type": "boolean",
+          "description": "Set to true to enable creating KBs in different languages for the same resource."
+        },
+        "defaultAnswer": {
+          "type": "string",
+          "description": "Default answer sent to user if no good match is found in the KB.",
+          "maxLength": 300,
           "minLength": 1
         }
       }
