@@ -61,7 +61,7 @@
           "nextLinkName": "nextLink"
         }
       }
-    },
+    },	
     "/linkedservices/{linkedServiceName}": {
       "put": {
         "tags": [
@@ -119,7 +119,7 @@
             }
           }
         }
-      },
+      },      
       "get": {
         "tags": [
           "linkedServices"
@@ -203,6 +203,43 @@
         }
       }
     },
+	"/linkedservices/{linkedServiceName}/rename": {
+      "put": {
+        "tags": [
+          "linkedServices"
+        ],
+        "operationId": "LinkedService_RenameLinkedService",
+        "x-ms-examples": {
+          "LinkedServices_Rename": {
+            "$ref": "./examples/LinkedServices_Rename.json"
+          }
+        },
+        "description": "Renames a linked service.",
+        "x-ms-long-running-operation": true,
+        "parameters": [
+          {
+            "$ref": "#/parameters/linkedServiceName"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/newName"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted."
+          },
+          "default": {
+            "description": "An error response received from the Azure Synapse service.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
     "/datasets": {
       "get": {
         "tags": [
@@ -238,7 +275,7 @@
           "nextLinkName": "nextLink"
         }
       }
-    },
+    },	
     "/datasets/{datasetName}": {
       "put": {
         "tags": [
@@ -380,6 +417,43 @@
         }
       }
     },
+	"/datasets/{datasetName}/rename": {
+      "put": {
+        "tags": [
+          "datasets"
+        ],
+        "operationId": "Dataset_RenameDataset",
+        "x-ms-examples": {
+          "Datasets_Rename": {
+            "$ref": "./examples/Datasets_Rename.json"
+          }
+        },
+        "description": "Renames a dataset.",
+        "x-ms-long-running-operation": true,
+        "parameters": [
+          {
+            "$ref": "#/parameters/datasetName"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/newName"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted."
+          },
+          "default": {
+            "description": "An error response received from the Azure Synapse service.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
     "/pipelines": {
       "get": {
         "tags": [
@@ -415,7 +489,7 @@
           "nextLinkName": "nextLink"
         }
       }
-    },
+    },	
     "/pipelines/{pipelineName}": {
       "put": {
         "tags": [
@@ -547,6 +621,43 @@
           },
           "204": {
             "description": "No Content."
+          },
+          "default": {
+            "description": "An error response received from the Azure Synapse service.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+	"/pipelines/{pipelineName}/rename": {
+      "put": {
+        "tags": [
+          "pipelines"
+        ],
+        "operationId": "Pipeline_RenamePipeline",
+        "x-ms-examples": {
+          "Pipelines_Rename": {
+            "$ref": "./examples/Pipelines_Rename.json"
+          }
+        },
+        "description": "Renames a pipeline.",
+        "x-ms-long-running-operation": true,
+        "parameters": [
+          {
+            "$ref": "#/parameters/pipelineName"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/newName"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted."
           },
           "default": {
             "description": "An error response received from the Azure Synapse service.",
@@ -1405,6 +1516,43 @@
         }
       }
     },
+	"/dataflows/{dataflowName}/rename": {
+      "put": {
+        "tags": [
+          "dataflows"
+        ],
+        "operationId": "DataFlow_RenameDataFlow",
+        "x-ms-examples": {
+          "DataFlows_Rename": {
+            "$ref": "./examples/DataFlows_Rename.json"
+          }
+        },
+        "description": "Renames a dataflow.",
+        "x-ms-long-running-operation": true,
+        "parameters": [
+          {
+            "$ref": "#/parameters/dataFlowName"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/newName"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted."
+          },
+          "default": {
+            "description": "An error response received from the Azure Synapse service.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
     "/dataflows": {
       "get": {
         "tags": [
@@ -1831,6 +1979,43 @@
         }
       }
     },
+	"/sqlScripts/{sqlScriptName}/rename": {
+      "put": {
+        "tags": [
+          "sqlScripts"
+        ],
+        "operationId": "SqlScript_RenameSqlScript",
+        "x-ms-examples": {
+          "SqlScripts_Rename": {
+            "$ref": "./examples/SqlScripts_Rename.json"
+          }
+        },
+        "description": "Renames a sqlScript.",
+        "x-ms-long-running-operation": true,
+        "parameters": [
+          {
+            "$ref": "#/parameters/sqlScriptName"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/newName"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted."
+          },
+          "default": {
+            "description": "An error response received from the Azure Synapse service.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
     "/sparkJobDefinitions": {
       "get": {
         "tags": [
@@ -2036,6 +2221,43 @@
             "schema": {
               "$ref": "../2019-11-01-preview/sparkJob.json#/definitions/SparkBatchJob"
             }
+          },
+          "default": {
+            "description": "An error response received from the Azure Synapse service.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+	"/sparkJobDefinitions/{sparkJobDefinitionName}/rename": {
+      "put": {
+        "tags": [
+          "sparkJobDefinitions"
+        ],
+        "operationId": "SparkJobDefinition_RenameSparkJobDefinition",
+        "x-ms-examples": {
+          "SparkJobDefinitions_Rename": {
+            "$ref": "./examples/SparkJobDefinitions_Rename.json"
+          }
+        },
+        "description": "Renames a sparkJobDefinition.",
+        "x-ms-long-running-operation": true,
+        "parameters": [
+          {
+            "$ref": "#/parameters/sparkJobDefinitionName"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/newName"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted."
           },
           "default": {
             "description": "An error response received from the Azure Synapse service.",
@@ -2301,6 +2523,43 @@
           },
           "204": {
             "description": "No Content."
+          },
+          "default": {
+            "description": "An error response received from the Azure Synapse service.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+	"/notebooks/{notebookName}/rename": {
+      "put": {
+        "tags": [
+          "notebooks"
+        ],
+        "operationId": "Notebook_RenameNotebook",
+        "x-ms-examples": {
+          "Notebooks_Rename": {
+            "$ref": "./examples/Notebooks_Rename.json"
+          }
+        },
+        "description": "Renames a notebook.",
+        "x-ms-long-running-operation": true,
+        "parameters": [
+          {
+            "$ref": "#/parameters/NotebookName"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/newName"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted."
           },
           "default": {
             "description": "An error response received from the Azure Synapse service.",
@@ -4336,6 +4595,13 @@
       "in": "path",
       "x-ms-skip-url-encoding": true,
       "x-ms-parameter-location": "client"
+    },
+    "newName": {
+      "name": "newName",
+      "in": "body",
+      "required": true,
+      "type": "string",
+      "description": "New Artifact name."
     }
   }
 }
