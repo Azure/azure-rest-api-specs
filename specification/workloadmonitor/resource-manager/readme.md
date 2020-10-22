@@ -59,6 +59,14 @@ directive:
 ```
 
 ---
+
+# Suppression:
+``` yaml
+directive:
+  - suppress:
+      - R4017 # HealthMonitors only applied to top-level resources.
+```
+
 # Code Generation
 
 
