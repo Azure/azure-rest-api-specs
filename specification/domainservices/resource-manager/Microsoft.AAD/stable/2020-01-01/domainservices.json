@@ -63,49 +63,6 @@
         }
       }
     },
-    "/providers/Microsoft.AAD/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AAD/domainServices/{domainServiceName}": {
-      "get": {
-        "tags": [
-          "DomainServices"
-        ],
-        "operationId": "DomainServices_GetByProvider",
-        "summary": "Get Domain Service",
-        "description": "The Get Domain Service operation retrieves a json representation of the Domain Service.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/DomainServiceNameParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "HTTP 200 (OK) if the operation was successful.",
-            "schema": {
-              "$ref": "#/definitions/DomainService"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Get Domain Service": {
-            "$ref": "./examples/GetDomainService.json"
-          }
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.AAD/domainServices": {
       "get": {
         "tags": [
