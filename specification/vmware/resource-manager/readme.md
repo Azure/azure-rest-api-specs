@@ -38,6 +38,21 @@ directive:
   - suppress: R3010
     from: vmware.json
     reason: list by immediate parent operations are defined
+  - suppress: R3027
+    from: vmware.json
+    reasons: the PrivateClouds_List operation is by resource group
+  - suppress: R3018
+    from: vmware.json
+    where: $.definitions.Operation.properties.isDataAction
+    reason: standard property for Operation
+  - suppress: R3018
+    from: vmware.json
+    where: $.definitions.MetricSpecification.properties.fillGapWithZero
+    reason: standard property for MetricSpecification
+  - suppress: R2001
+    from: vmware.json
+    where: $.definitions.Operation.properties.properties
+    reason: x-ms-client-flatten not needed for Operation
 ```
 
 ### Tag: package-2020-03-20
@@ -54,6 +69,21 @@ directive:
   - suppress: R3010
     from: vmware.json
     reason: list by immediate parent operations are defined
+  - suppress: R3027
+    from: vmware.json
+    reasons: the PrivateClouds_List operation is by resource group
+  - suppress: R3018
+    from: vmware.json
+    where: $.definitions.Operation.properties.isDataAction
+    reason: standard property for Operation
+  - suppress: R3018
+    from: vmware.json
+    where: $.definitions.MetricSpecification.properties.fillGapWithZero
+    reason: standard property for MetricSpecification
+  - suppress: R2001
+    from: vmware.json
+    where: $.definitions.Operation.properties.properties
+    reason: x-ms-client-flatten not needed for Operation
 ```
 
 ### Tag: package-2019-08-09-preview
@@ -93,6 +123,17 @@ swagger-to-sdk:
   - repo: azure-resource-manager-schemas
     after_scripts:
       - node sdkauto_afterscript.js vmware/resource-manager
+```
+
+## Suppression
+```
+directive:
+  - suppress: SECRET_PROPERTY
+    from: vmware.json
+    where:
+      - $.definitions.AdminCredentials.properties.nsxtPassword
+      - $.definitions.AdminCredentials.properties.vcenterPassword
+    reason: Secrets are OK to return in a POST response.
 ```
 
 ## TypeScript

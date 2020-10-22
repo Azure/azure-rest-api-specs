@@ -2672,18 +2672,22 @@
           "description": "Resource location"
         },
         "tags": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "x-ms-mutability": [
-            "read",
-            "create",
-            "update"
-          ],
-          "description": "Resource tags"
+          "description": "Resource tags",
+          "$ref": "#/definitions/ResourceTags"
         }
       }
+    },
+    "ResourceTags": {
+      "description": "Resource tags",
+      "type": "object",
+      "additionalProperties": {
+        "type": "string"
+      },
+      "x-ms-mutability": [
+        "read",
+        "create",
+        "update"
+      ]
     },
     "ProxyResource": {
       "description": "The resource model definition for a ARM proxy resource",
@@ -2756,6 +2760,152 @@
               "readOnly": true
             }
           }
+        },
+        "isDataAction": {
+          "description": "Gets or sets a value indicating whether the operation is a data action or not",
+          "type": "boolean"
+        },
+        "origin": {
+          "description": "Origin of the operation",
+          "type": "string"
+        },
+        "properties": {
+          "$ref": "#/definitions/OperationProperties",
+          "description": "Properties of the operation"
+        }
+      }
+    },
+    "OperationProperties": {
+      "description": "Extra Operation properties",
+      "type": "object",
+      "properties": {
+        "serviceSpecification": {
+          "$ref": "#/definitions/ServiceSpecification",
+          "description": "Service specifications of the operation"
+        }
+      }
+    },
+    "ServiceSpecification": {
+      "description": "Service specification payload",
+      "type": "object",
+      "properties": {
+        "logSpecifications": {
+          "description": "Specifications of the Log for Azure Monitoring",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/LogSpecification"
+          }
+        },
+        "metricSpecifications": {
+          "description": "Specifications of the Metrics for Azure Monitoring",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MetricSpecification"
+          }
+        }
+      }
+    },
+    "LogSpecification": {
+      "description": "Specifications of the Log for Azure Monitoring",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Name of the log",
+          "type": "string"
+        },
+        "displayName": {
+          "description": "Localized friendly display name of the log",
+          "type": "string"
+        },
+        "blobDuration": {
+          "description": "Blob duration of the log",
+          "type": "string"
+        }
+      }
+    },
+    "MetricSpecification": {
+      "description": "Specifications of the Metrics for Azure Monitoring",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Name of the metric",
+          "type": "string"
+        },
+        "displayName": {
+          "description": "Localized friendly display name of the metric",
+          "type": "string"
+        },
+        "displayDescription": {
+          "description": "Localized friendly description of the metric",
+          "type": "string"
+        },
+        "unit": {
+          "description": "Unit that makes sense for the metric",
+          "type": "string"
+        },
+        "category": {
+          "description": "Name of the metric category that the metric belongs to. A metric can only belong to a single category.",
+          "type": "string"
+        },
+        "aggregationType": {
+          "description": "Only provide one value for this field. Valid values: Average, Minimum, Maximum, Total, Count.",
+          "type": "string"
+        },
+        "supportedAggregationTypes": {
+          "description": "Supported aggregation types",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "supportedTimeGrainTypes": {
+          "description": "Supported time grain types",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "fillGapWithZero": {
+          "description": "Optional. If set to true, then zero will be returned for time duration where no metric is emitted/published.",
+          "type": "boolean"
+        },
+        "dimensions": {
+          "description": "Dimensions of the metric",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MetricDimension"
+          }
+        },
+        "enableRegionalMdmAccount": {
+          "description": "Whether or not the service is using regional MDM accounts.",
+          "type": "string"
+        },
+        "sourceMdmAccount": {
+          "description": "The name of the MDM account.",
+          "type": "string"
+        },
+        "sourceMdmNamespace": {
+          "description": "The name of the MDM namespace.",
+          "type": "string"
+        }
+      }
+    },
+    "MetricDimension": {
+      "description": "Specifications of the Dimension of metrics",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Name of the dimension",
+          "type": "string"
+        },
+        "displayName": {
+          "description": "Localized friendly display name of the dimension",
+          "type": "string"
         }
       }
     },
@@ -2946,6 +3096,10 @@
     "PrivateCloudUpdate": {
       "description": "An update to a private cloud resource",
       "properties": {
+        "tags": {
+          "description": "Resource tags",
+          "$ref": "#/definitions/ResourceTags"
+        },
         "properties": {
           "description": "The updatable properties of a private cloud resource",
           "$ref": "#/definitions/PrivateCloudUpdateProperties",
@@ -3221,7 +3375,8 @@
         "nsxtPassword": {
           "description": "NSX-T Manager password",
           "type": "string",
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-secret": true
         },
         "vcenterUsername": {
           "description": "vCenter admin username",
@@ -3231,7 +3386,8 @@
         "vcenterPassword": {
           "description": "vCenter admin password",
           "type": "string",
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-secret": true
         }
       }
     },
