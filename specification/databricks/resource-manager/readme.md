@@ -67,6 +67,7 @@ input-file:
 ``` yaml
 directive:
   - suppress: R3016
+    from: databricks.json 
     where: $.definitions.Encryption.properties.KeyName
     reason: Response from service is not camel case
 ```
