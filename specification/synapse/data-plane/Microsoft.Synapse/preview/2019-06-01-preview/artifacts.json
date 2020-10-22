@@ -224,7 +224,13 @@
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/newName"
+            "name": "request",
+            "description": "proposed new name.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RenameArtifactRequest"
+            }
           }
         ],
         "responses": {
@@ -438,7 +444,13 @@
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/newName"
+            "name": "request",
+            "description": "proposed new name.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RenameArtifactRequest"
+            }
           }
         ],
         "responses": {
@@ -652,7 +664,13 @@
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/newName"
+            "name": "request",
+            "description": "proposed new name.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RenameArtifactRequest"
+            }
           }
         ],
         "responses": {
@@ -1537,7 +1555,13 @@
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/newName"
+            "name": "request",
+            "description": "proposed new name.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RenameArtifactRequest"
+            }
           }
         ],
         "responses": {
@@ -2000,7 +2024,13 @@
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/newName"
+            "name": "request",
+            "description": "proposed new name.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RenameArtifactRequest"
+            }
           }
         ],
         "responses": {
@@ -2252,7 +2282,13 @@
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/newName"
+            "name": "request",
+            "description": "proposed new name.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RenameArtifactRequest"
+            }
           }
         ],
         "responses": {
@@ -2554,7 +2590,13 @@
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/newName"
+            "name": "request",
+            "description": "proposed new name.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RenameArtifactRequest"
+            }
           }
         ],
         "responses": {
@@ -4436,6 +4478,16 @@
         "type",
         "referenceName"
       ]
+    },
+	"ArtifactRenameRequest": {
+      "description": "Request body structure for rename artifact.",
+      "type": "object",
+      "properties": {
+        "newName": {
+          "description": "New name of the artifact.",
+          "type": "string"
+        }
+      }
     }
   },
   "parameters": {
@@ -4595,13 +4647,6 @@
       "in": "path",
       "x-ms-skip-url-encoding": true,
       "x-ms-parameter-location": "client"
-    },
-    "newName": {
-      "name": "newName",
-      "in": "body",
-      "required": true,
-      "type": "string",
-      "description": "New Artifact name."
     }
   }
 }
