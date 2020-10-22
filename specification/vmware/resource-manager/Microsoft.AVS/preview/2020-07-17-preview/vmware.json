@@ -2672,18 +2672,22 @@
           "description": "Resource location"
         },
         "tags": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "x-ms-mutability": [
-            "read",
-            "create",
-            "update"
-          ],
-          "description": "Resource tags"
+          "description": "Resource tags",
+          "$ref": "#/definitions/ResourceTags"
         }
       }
+    },
+    "ResourceTags": {
+      "description": "Resource tags",
+      "type": "object",
+      "additionalProperties": {
+        "type": "string"
+      },
+      "x-ms-mutability": [
+        "read",
+        "create",
+        "update"
+      ]
     },
     "ProxyResource": {
       "description": "The resource model definition for a ARM proxy resource",
@@ -3092,6 +3096,10 @@
     "PrivateCloudUpdate": {
       "description": "An update to a private cloud resource",
       "properties": {
+        "tags": {
+          "description": "Resource tags",
+          "$ref": "#/definitions/ResourceTags"
+        },
         "properties": {
           "description": "The updatable properties of a private cloud resource",
           "$ref": "#/definitions/PrivateCloudUpdateProperties",
