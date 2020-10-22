@@ -22,5 +22,5 @@ Please also specify `--go-sdk-folder=<path to the root directory of your azure-s
 
 ```yaml $(tag) == 'package-2020-10-01-privatepreview' && $(go)
 namespace: extendedlocation
-output-folder: $(go-sdk-folder)/services/$(namespace)/mgmt/2020-10-01-privatepreview/$(namespace)
+output-folder: $(go-sdk-folder)/services/preview/$(namespace)/mgmt/2020-10-01-privatepreview/$(namespace)
 ```
