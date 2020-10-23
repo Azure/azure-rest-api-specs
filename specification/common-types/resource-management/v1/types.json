@@ -7,6 +7,8 @@
   "paths": {},
   "definitions": {
     "Resource": {
+      "title": "Resource",
+      "description": "Commmon fields that are returned in the response for all Azure Resource Manager resources",
       "properties": {
         "id": {
           "readOnly": true,
@@ -28,7 +30,8 @@
     },
     "AzureEntityResource": {
       "x-ms-client-name": "AzureEntityResource",
-      "description": "The resource model definition for a Azure Resource Manager resource with an etag.",
+      "title": "Entity Resource",
+      "description": "The resource model definition for an Azure Resource Manager resource with an etag.",
       "properties": {
         "etag": {
           "type": "string",
@@ -43,7 +46,8 @@
       ]
     },
     "TrackedResource": {
-      "description": "The resource model definition for a ARM tracked top level resource",
+      "title": "Tracked Resource",
+      "description": "The resource model definition for an Azure Resource Manager tracked top level resource which has 'tags' and 'location' (required)",
       "properties": {
         "tags": {
           "type": "object",
@@ -76,7 +80,8 @@
       ]
     },
     "ProxyResource": {
-      "description": "The resource model definition for a ARM proxy resource. It will have everything other than required location and tags",
+      "title": "Proxy Resource",
+      "description": "The resource model definition for a Azure Resource Manager proxy resource. It will have everything other than required location and tags",
       "allOf": [
         {
           "$ref": "#/definitions/Resource"
@@ -270,6 +275,8 @@
       ]
     },
     "ErrorResponse": {
+      "title": "Error Response",
+      "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations. (This also follows the OData error response format.)",
       "properties": {
         "code": {
           "readOnly": true,
@@ -302,8 +309,7 @@
           },
           "description": "The error additional info."
         }
-      },
-      "description": "The resource management error response."
+      }
     },
     "ErrorAdditionalInfo": {
       "properties": {
