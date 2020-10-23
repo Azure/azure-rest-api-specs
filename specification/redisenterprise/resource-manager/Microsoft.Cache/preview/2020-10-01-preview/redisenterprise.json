@@ -1,20 +1,20 @@
 {
   "swagger": "2.0",
   "info": {
+    "title": "redisEnterprise",
+    "description": "REST API for managing Redis Enterprise resources in Azure.",
     "version": "2020-10-01-preview",
-    "title": "redisenterprise",
-    "description": "Description of the new service",
     "x-ms-code-generation-settings": {
       "name": "redisenterpriseClient"
     }
   },
   "host": "management.azure.com",
-  "schemes": ["https"],
-  "consumes": ["application/json"],
-  "produces": ["application/json"],
+  "schemes": [ "https" ],
+  "consumes": [ "application/json" ],
+  "produces": [ "application/json" ],
   "security": [
     {
-      "azure_auth": ["user_impersonation"]
+      "azure_auth": [ "user_impersonation" ]
     }
   ],
   "securityDefinitions": {
@@ -22,85 +22,1484 @@
       "type": "oauth2",
       "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
       "flow": "implicit",
-      "description": "Azure Active Directory OAuth2 Flow",
+      "description": "Azure Active Directory OAuth2 Flow.",
       "scopes": {
         "user_impersonation": "impersonate your user account"
       }
     }
   },
   "paths": {
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cache/operations": {
+    "/providers/Microsoft.Cache/operations": {
       "get": {
-        "tags": ["Tag1"],
-        "operationId": "OperationGroup_Get",
-        "x-ms-examples": {
-          "BatchAccountDelete": { "$ref": "./examples/OperationGroupGet.json" }
-        },
-        "description": "This is a sample get operation, please see guidelines in azure-rest-api-specs repository for more info",
+        "tags": [
+          "Operations"
+        ],
+        "description": "Lists all of the available REST API operations of the Microsoft.Cache provider.",
+        "operationId": "Operations_List",
         "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success. The response describes the list of operations.",
+            "schema": {
+              "$ref": "#/definitions/OperationListResult"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Cache/locations/{location}/operationsStatus/{operationId}": {
+      "get": {
+        "tags": [
+          "OperationStatus"
+        ],
+        "operationId": "Get_OperationStatus",
+        "x-ms-examples": {
+          "OperationStatusGet": {
+            "$ref": "./examples/OperationStatusGet.json"
+          }
+        },
+        "description": "Gets the status of operation.",
+        "parameters": [
+          {
+            "name": "location",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The region the operation is in."
+          },
+          {
+            "name": "operationId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The operation's unique identifier."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success. The detailed status of the operation is in the response.",
+            "schema": {
+              "$ref": "#/definitions/OperationStatus"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cache/redisEnterprise/{clusterName}": {
+      "put": {
+        "tags": [
+          "RedisEnterprise"
+        ],
+        "operationId": "RedisEnterprise_Create",
+        "x-ms-examples": {
+          "RedisEnterpriseCreate": {
+            "$ref": "./examples/RedisEnterpriseCreate.json"
+          }
+        },
+        "description": "Creates or updates an existing (overwrite/recreate, with potential downtime) cache cluster",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "original-uri"
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Cluster"
+            },
+            "description": "Parameters supplied to the Create RedisEnterprise operation."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "The cluster was/is being created. Check provisioningState to see detailed status.",
+            "schema": {
+              "$ref": "#/definitions/Cluster"
+            }
+          },
+          "200": {
+            "description": "The cluster was/is being updated. Check provisioningState to see detailed status.",
+            "schema": {
+              "$ref": "#/definitions/Cluster"
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "RedisEnterprise"
+        ],
+        "operationId": "RedisEnterprise_Update",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "RedisEnterpriseUpdate": {
+            "$ref": "./examples/RedisEnterpriseUpdate.json"
+          }
+        },
+        "description": "Updates an existing RedisEnterprise cluster",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ClusterUpdate"
+            },
+            "description": "Parameters supplied to the Update RedisEnterprise operation."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The cluster was/is being updated. Check provisioningState to see detailed status.",
+            "schema": {
+              "$ref": "#/definitions/Cluster"
+            }
+          },
+          "202": {
+            "description": "The cluster update operation was started. GET the URL in the Azure-AsyncOperation or Location headers to retrieve updated status."
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "RedisEnterprise"
+        ],
+        "operationId": "RedisEnterprise_Delete",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "RedisEnterpriseDelete": {
+            "$ref": "./examples/RedisEnterpriseDelete.json"
+          }
+        },
+        "description": "Deletes a RedisEnterprise cache cluster.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The cluster delete operation was successfully started. GET the URL in the Azure-AsyncOperation or Location headers to retrieve updated status."
+          },
+          "204": {
+            "description": "The cluster was successfully deleted."
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "RedisEnterprise"
+        ],
+        "operationId": "RedisEnterprise_Get",
+        "x-ms-examples": {
+          "RedisEnterpriseGet": {
+            "$ref": "./examples/RedisEnterpriseGet.json"
+          }
+        },
+        "description": "Gets information about a RedisEnterprise cluster",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request succeeded, response body contains the requested details.",
+            "schema": {
+              "$ref": "#/definitions/Cluster"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cache/redisEnterprise": {
+      "get": {
+        "tags": [
+          "RedisEnterprise"
+        ],
+        "operationId": "RedisEnterprise_ListByResourceGroup",
+        "x-ms-examples": {
+          "RedisEnterpriseListByResourceGroup": {
+            "$ref": "./examples/RedisEnterpriseListByResourceGroup.json"
+          }
+        },
+        "description": "Lists all RedisEnterprise clusters in a resource group.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The list of RedisEnterprise clusters",
+            "schema": {
+              "$ref": "#/definitions/ClusterList"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Cache/redisEnterprise": {
+      "get": {
+        "tags": [
+          "RedisEnterprise"
+        ],
+        "operationId": "RedisEnterprise_List",
+        "x-ms-examples": {
+          "RedisEnterpriseList": {
+            "$ref": "./examples/RedisEnterpriseList.json"
+          }
+        },
+        "description": "Gets all RedisEnterprise clusters in the specified subscription.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The list of RedisEnterprise clusters",
+            "schema": {
+              "$ref": "#/definitions/ClusterList"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cache/redisEnterprise/{clusterName}/databases": {
+      "get": {
+        "tags": [
+          "RedisEnterprise",
+          "Databases"
+        ],
+        "operationId": "Databases_ListByCluster",
+        "description": "Gets all databases in the specified RedisEnterprise cluster.",
+        "x-ms-examples": {
+          "RedisEnterpriseDatabasesList": {
+            "$ref": "./examples/RedisEnterpriseDatabasesList.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
             "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterNameParameter"
           }
         ],
         "responses": {
           "200": {
-            "description": "Describe the result of a successful operation.",
+            "description": "The list of databases",
             "schema": {
-              "$ref": "#/definitions/Result"
+              "$ref": "#/definitions/DatabaseList"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cache/redisEnterprise/{clusterName}/databases/{databaseName}": {
+      "put": {
+        "tags": [
+          "RedisEnterprise",
+          "Databases"
+        ],
+        "operationId": "Databases_Create",
+        "description": "Creates a database",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "original-uri"
+        },
+        "x-ms-examples": {
+          "RedisEnterpriseDatabaseCreate": {
+            "$ref": "./examples/RedisEnterpriseDatabasesCreate.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DatabaseNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Database"
+            },
+            "description": "Parameters supplied to the create or update database operation."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The database was/is being updated. Check provisioningState for detailed status.",
+            "schema": {
+              "$ref": "#/definitions/Database"
+            }
+          },
+          "201": {
+            "description": "The database was/is being created. Check provisioningState for detailed status.",
+            "schema": {
+              "$ref": "#/definitions/Database"
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "RedisEnterprise",
+          "Databases"
+        ],
+        "operationId": "Databases_Update",
+        "description": "Updates a database",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "RedisEnterpriseDatabasesUpdate": {
+            "$ref": "./examples/RedisEnterpriseDatabasesUpdate.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DatabaseNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DatabaseUpdate"
+            },
+            "description": "Parameters supplied to the create or update database operation."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The database was/is being updated. Check provisioningState for detailed status.",
+            "schema": {
+              "$ref": "#/definitions/Database"
+            }
+          },
+          "202": {
+            "description": "The database update operation was successfully started. GET the URL in the Azure-AsyncOperation or Location headers to retrieve updated status."
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "RedisEnterprise",
+          "Databases"
+        ],
+        "operationId": "Databases_Get",
+        "description": "Gets information about a database in a RedisEnterprise cluster.",
+        "x-ms-examples": {
+          "RedisEnterpriseDatabasesGet": {
+            "$ref": "./examples/RedisEnterpriseDatabasesGet.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DatabaseNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully found the database",
+            "schema": {
+              "$ref": "#/definitions/Database"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "RedisEnterprise",
+          "Databases"
+        ],
+        "operationId": "Databases_Delete",
+        "description": "Deletes a single database",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "RedisEnterpriseDatabasesDelete": {
+            "$ref": "./examples/RedisEnterpriseDatabasesDelete.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DatabaseNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The database delete operation started. GET the URL in the Azure-AsyncOperation or Location headers to retrieve updated status."
+          },
+          "204": {
+            "description": "Successfully deleted the database"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cache/redisEnterprise/{clusterName}/databases/{databaseName}/listKeys": {
+      "post": {
+        "tags": [
+          "RedisEnterprise",
+          "Databases"
+        ],
+        "operationId": "RedisEnterpriseDatabase_ListKeys",
+        "x-ms-examples": {
+          "RedisEnterpriseDatabaseListKeys": {
+            "$ref": "./examples/RedisEnterpriseDatabaseListKeys.json"
+          }
+        },
+        "description": "Retrieves the access keys for the RedisEnterprise database.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DatabaseNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The access keys for the specified database.",
+            "schema": {
+              "$ref": "#/definitions/AccessKeys"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cache/redisEnterprise/{clusterName}/databases/{databaseName}/regenerateKey": {
+      "post": {
+        "tags": [
+          "RedisEnterprise",
+          "Databases"
+        ],
+        "operationId": "RedisEnterpriseDatabase_RegenerateKey",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "RedisEnterpriseDatabaseRegenerateKey": {
+            "$ref": "./examples/RedisEnterpriseDatabaseRegenerateKey.json"
+          }
+        },
+        "description": "Regenerates the RedisEnterprise database's access keys.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DatabaseNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RegenerateKeyParameters"
+            },
+            "description": "Specifies which key to regenerate."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns the new access keys for the database",
+            "schema": {
+              "$ref": "#/definitions/AccessKeys"
+            }
+          },
+          "202": {
+            "description": "The cluster update operation was started. GET the URL in the Azure-AsyncOperation or Location headers to retrieve updated status."
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cache/redisEnterprise/{clusterName}/databases/{databaseName}/import": {
+      "post": {
+        "tags": [
+          "RedisEnterprise",
+          "Databases"
+        ],
+        "operationId": "RedisEnterpriseDatabase_Import",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "RedisEnterpriseImportCluster": {
+            "$ref": "./examples/RedisEnterpriseImportCluster.json"
+          }
+        },
+        "description": "Imports a database file to target database.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DatabaseNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ImportClusterParameters"
+            },
+            "description": "Storage information for importing into the cluster"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Import operation succeeded."
+          },
+          "202": {
+            "description": "The import operation was started. GET the URL in the Azure-AsyncOperation or Location headers to retrieve updated status."
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cache/redisEnterprise/{clusterName}/databases/{databaseName}/export": {
+      "post": {
+        "tags": [
+          "RedisEnterprise",
+          "Databases"
+        ],
+        "operationId": "RedisEnterpriseDatabase_Export",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "RedisEnterpriseExportCluster": {
+            "$ref": "./examples/RedisEnterpriseExportCluster.json"
+          }
+        },
+        "description": "Exports a database file from target database.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DatabaseNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ExportClusterParameters"
+            },
+            "description": "Storage information for exporting into the cluster"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Export operation succeeded."
+          },
+          "202": {
+            "description": "Export operation successfully enqueued; follow the Location header to poll for final outcome."
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cache/redisEnterprise/{clusterName}/privateEndpointConnections": {
+      "get": {
+        "tags": [
+          "PrivateEndpointConnections"
+        ],
+        "operationId": "PrivateEndpointConnections_List",
+        "description": "Lists all the private endpoint connections associated with the RedisEnterprise cluster.",
+        "x-ms-examples": {
+          "RedisEnterpriseListPrivateEndpointConnections": {
+            "$ref": "./examples/RedisEnterpriseListPrivateEndpointConnections.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK -- Successfully retrieved private endpoint connections.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v1/privatelinks.json#/definitions/PrivateEndpointConnectionListResult"
             }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cache/redisEnterprise/{clusterName}/privateEndpointConnections/{privateEndpointConnectionName}": {
+      "get": {
+        "tags": [
+          "PrivateEndpointConnections"
+        ],
+        "operationId": "PrivateEndpointConnections_Get",
+        "description": "Gets the specified private endpoint connection associated with the RedisEnterprise cluster.",
+        "x-ms-examples": {
+          "RedisEnterpriseGetPrivateEndpointConnection": {
+            "$ref": "./examples/RedisEnterpriseGetPrivateEndpointConnection.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/privatelinks.json#/parameters/PrivateEndpointConnectionName"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK -- Get the private endpoint connection properties successfully.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v1/privatelinks.json#/definitions/PrivateEndpointConnection"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "PrivateEndpointConnections"
+        ],
+        "operationId": "PrivateEndpointConnections_Put",
+        "description": "Updates the state of the specified private endpoint connection associated with the RedisEnterprise cluster.",
+        "x-ms-examples": {
+          "RedisEnterprisePutPrivateEndpointConnection": {
+            "$ref": "./examples/RedisEnterprisePutPrivateEndpointConnection.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/privatelinks.json#/parameters/PrivateEndpointConnectionName"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v1/privatelinks.json#/definitions/PrivateEndpointConnection"
+            },
+            "description": "The private endpoint connection properties."
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "OK -- Update the private endpoint connection properties successfully.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v1/privatelinks.json#/definitions/PrivateEndpointConnection"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "PrivateEndpointConnections"
+        ],
+        "operationId": "PrivateEndpointConnections_Delete",
+        "description": "Deletes the specified private endpoint connection associated with the RedisEnterprise cluster.",
+        "x-ms-examples": {
+          "RedisEnterpriseDeletePrivateEndpointConnection": {
+            "$ref": "./examples/RedisEnterpriseDeletePrivateEndpointConnection.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/privatelinks.json#/parameters/PrivateEndpointConnectionName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK -- Delete the private endpoint connection successfully."
+          },
+          "204": {
+            "description": "No Content -- The private endpoint connection does not exist."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cache/redisEnterprise/{clusterName}/privateLinkResources": {
+      "get": {
+        "tags": [
+          "PrivateLinkResources"
+        ],
+        "operationId": "PrivateLinkResources_ListByRedisEnterpriseCache",
+        "description": "Gets the private link resources that need to be created for a RedisEnterprise cluster.",
+        "x-ms-examples": {
+          "RedisEnterpriseListPrivateLinkResources": {
+            "$ref": "./examples/RedisEnterpriseListPrivateLinkResources.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved private link resources.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v1/privatelinks.json#/definitions/PrivateLinkResourceListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
         }
       }
     }
   },
   "definitions": {
-    "Result": {
-      "description": "Sample result definition",
+    "Sku": {
+      "description": "SKU parameters supplied to the create RedisEnterprise operation.",
       "properties": {
-        "sampleProperty": {
+        "name": {
           "type": "string",
-          "description": "Sample property of type string"
-        }
-      }
-    },
-    "ErrorResponse": {
-      "description": "Error response.",
-      "properties": {
-        "error": {
-          "$ref": "#/definitions/ErrorDefinition",
-          "description": "The error details."
-        }
-      }
-    },
-    "ErrorDefinition": {
-      "description": "Error definition.",
-      "properties": {
-        "code": {
-          "description": "Service specific error code which serves as the substatus for the HTTP error code.",
-          "type": "string",
-          "readOnly": true
+          "description": "The type of RedisEnterprise cluster to deploy. Possible values: (Enterprise_E1, EnterpriseFlash_F300 etc.)",
+          "enum": [
+            "Enterprise_E1",
+            "Enterprise_E10",
+            "Enterprise_E20",
+            "Enterprise_E50",
+            "Enterprise_E100",
+            "EnterpriseFlash_F300",
+            "EnterpriseFlash_F700",
+            "EnterpriseFlash_F1500"
+          ],
+          "x-ms-enum": {
+            "name": "SkuName",
+            "modelAsString": true
+          }
         },
-        "message": {
-          "description": "Description of the error.",
-          "type": "string",
-          "readOnly": true
+        "capacity": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The size of the RedisEnterprise cluster. Defaults to 1. Valid values are 1 or more (and may depend on SKU tier)."
+        }
+      },
+      "required": [
+        "name"
+      ]
+    },
+    "Cluster": {
+      "description": "Describes the RedisEnterprise cluster",
+      "properties": {
+        "sku": {
+          "$ref": "#/definitions/Sku",
+          "description": "The SKU to create, which affects price, performance, and features."
         },
-        "details": {
-          "description": "Internal error details.",
+        "zones": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/ErrorDefinition"
+            "type": "string"
           },
+          "description": "The zones where this cluster will be deployed."
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ClusterProperties",
+          "description": "Other properties of the cluster."
+        }
+      },
+      "required": [
+        "sku"
+      ],
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "ClusterUpdate": {
+      "description": "A partial update to the RedisEnterprise cluster",
+      "properties": {
+        "sku": {
+          "$ref": "#/definitions/Sku",
+          "description": "The SKU to create, which affects price, performance, and features."
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ClusterProperties",
+          "description": "Other properties of the cluster."
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "x-ms-mutability": [
+            "read",
+            "create",
+            "update"
+          ],
+          "description": "Resource tags."
+        }
+      }
+    },
+    "ClusterProperties": {
+      "title": "RedisEnterprise cluster properties",
+      "description": "Properties of RedisEnterprise clusters, as opposed to general resource properties like location, tags",
+      "properties": {
+        "minimumTlsVersion": {
+          "type": "string",
+          "description": "The minimum TLS version for the cluster to support, e.g. '1.2'"
+        },
+        "hostName": {
+          "type": "string",
+          "readOnly": true,
+          "description": "DNS name of the cluster endpoint"
+        },
+        "provisioningState": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Current status of the cluster",
+          "enum": [
+            "Succeeded",
+            "Failed",
+            "Creating",
+            "Updating",
+            "Deleting",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "ProvisioningState",
+            "modelAsString": true
+          }
+        },
+        "redisVersion": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Version of redis the cluster supports, e.g. '6'"
+        },
+        "privateEndpointConnections": {
+          "type": "array",
+          "readOnly": true,
+          "description": "List of private endpoint connections associated with the specified RedisEnterprise cluster",
+          "items": {
+            "$ref": "../../../../../common-types/resource-management/v1/privatelinks.json#/definitions/PrivateEndpointConnection"
+          }
+        }
+      }
+    },
+    "ClusterList": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Cluster"
+          },
+          "description": "List of clusters."
+        },
+        "nextLink": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The URI to fetch the next page of results."
+        }
+      },
+      "description": "The response of a list-all operation."
+    },
+    "Database": {
+      "description": "Describes a database on the RedisEnterprise cluster",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/DatabaseProperties",
+          "description": "Other properties of the database."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "DatabaseUpdate": {
+      "description": "A partial update to the RedisEnterprise database",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/DatabaseProperties",
+          "description": "Properties of the database."
+        }
+      }
+    },
+    "DatabaseProperties": {
+      "title": "RedisEnterprise database properties",
+      "description": "Properties of RedisEnterprise databases, as opposed to general resource properties like location, tags",
+      "properties": {
+        "clientProtocol": {
+          "type": "string",
+          "description": "Specifies whether redis clients can connect using TLS-encrypted or plaintext redis protocols. Default is TLS-encrypted.",
+          "enum": [
+            "Encrypted",
+            "Plaintext"
+          ],
+          "x-ms-enum": {
+            "name": "Protocol",
+            "modelAsString": true
+          }
+        },
+        "port": {
+          "type": "integer",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ],
+          "description": "TCP port of the database endpoint. Specified at create time. Defaults to an available port."
+        },
+        "provisioningState": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Current status of the database",
+          "enum": [
+            "Succeeded",
+            "Failed",
+            "Creating",
+            "Updating",
+            "Deleting",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "ProvisioningState",
+            "modelAsString": true
+          }
+        },
+        "evictionPolicy": {
+          "type": "string",
+          "description": "Redis eviction policy - default is VolatileLRU",
+          "enum": [
+            "AllKeysLFU",
+            "AllKeysLRU",
+            "AllKeysRandom",
+            "VolatileLRU",
+            "VolatileLFU",
+            "VolatileTTL",
+            "VolatileRandom",
+            "NoEviction"
+          ],
+          "x-ms-enum": {
+            "name": "EvictionPolicy",
+            "modelAsString": true
+          }
+        },
+        "persistence": {
+          "$ref": "#/definitions/Persistence",
+          "description": "Persistence settings"
+        },
+        "modules": {
+          "type": "array",
+          "description": "Optional set of redis modules to enable in this database - modules can only be added at creation time.",
+          "items": {
+            "$ref": "#/definitions/Module"
+          },
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      }
+    },
+    "DatabaseList": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Database"
+          },
+          "description": "List of databases"
+        },
+        "nextLink": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The URI to fetch the next page of results."
+        }
+      },
+      "description": "The response of a list-all operation."
+    },
+    "Persistence": {
+      "title": "Persistence settings",
+      "description": "Persistence-related configuration for the RedisEnterprise database",
+      "properties": {
+        "mode": {
+          "type": "string",
+          "description": "The kind of persistence enabled.",
+          "enum": [
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "PersistenceMode",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "Module": {
+      "title": "Module settings",
+      "description": "Specifies configuration of a redis module",
+      "properties": {
+        "name": {
+          "type": "string",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ],
+          "description": "The name of the module, e.g. 'RedisBloom', 'RediSearch', 'RedisTimeSeries'"
+        },
+        "args": {
+          "type": "string",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ],
+          "description": "Configuration options for the module, e.g. 'ERROR_RATE 0.00 INITIAL_SIZE 400'."
+        },
+        "version": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The version of the module, e.g. '1.0'."
+        }
+      },
+      "required": [
+        "name"
+      ]
+    },
+    "AccessKeys": {
+      "title": "Access keys",
+      "description": "The secret access keys used for authenticating connections to redis",
+      "type": "object",
+      "properties": {
+        "primaryKey": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The current primary key that clients can use to authenticate"
+        },
+        "secondaryKey": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The current secondary key that clients can use to authenticate"
+        }
+      }
+    },
+    "RegenerateKeyParameters": {
+      "title": "Regenerate access keys request",
+      "properties": {
+        "keyType": {
+          "type": "string",
+          "description": "Which access key to regenerate.",
+          "enum": [
+            "Primary",
+            "Secondary"
+          ],
+          "x-ms-enum": {
+            "name": "AccessKeyType",
+            "modelAsString": false
+          }
+        }
+      },
+      "required": [
+        "keyType"
+      ],
+      "description": "Specifies which access keys to reset to a new random value."
+    },
+    "ImportClusterParameters": {
+      "title": "Import an RDB file into a target database",
+      "properties": {
+        "sasUri": {
+          "type": "string",
+          "description": "SasUri for the target blob to import from"
+        }
+      },
+      "required": [
+        "sasUri"
+      ],
+      "description": "Parameters for a Redis Enterprise import operation."
+    },
+    "ExportClusterParameters": {
+      "title": "Export an RDB file into a target database",
+      "properties": {
+        "sasUri": {
+          "type": "string",
+          "description": "SasUri for the target directory to export to"
+        }
+      },
+      "required": [
+        "sasUri"
+      ],
+      "description": "Parameters for a Redis Enterprise export operation."
+    },
+    "OperationStatus": {
+      "description": "The status of a long-running operation.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The operation's unique id."
+        },
+        "name": {
+          "type": "string",
+          "description": "The operation's name."
+        },
+        "startTime": {
+          "type": "string",
+          "description": "The start time of the operation."
+        },
+        "endTime": {
+          "type": "string",
+          "description": "The end time of the operation."
+        },
+        "status": {
+          "type": "string",
+          "description": "The current status of the operation."
+        },
+        "error": {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse",
+          "description": "Error response describing why the operation failed."
+        }
+      }
+    },
+    "Operation": {
+      "title": "REST API Operation",
+      "description": "Details of a REST API operation, returned from the Resource Provider Operations API",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "The name of the operation being performed on this particular object. It should match the action name that appears in RBAC / the event service. Examples: \"Microsoft.Compute/virtualMachines/write\", \"Microsoft.Compute/virtualMachines/capture/action\"",
+          "type": "string",
           "readOnly": true
+        },
+        "isDataAction": {
+          "description": "Whether the operation applies to data-plane. This is \"true\" for data-plane operations and \"false\" for ARM/control-plane operations.",
+          "type": "boolean",
+          "readOnly": true
+        },
+        "display": {
+          "description": "Contains the localized display information for this particular operation / action.",
+          "properties": {
+            "provider": {
+              "description": "The localized friendly form of the resource provider name, e.g. Microsoft Monitoring Insights\" or \"Microsoft Compute\"",
+              "type": "string",
+              "readOnly": true
+            },
+            "resource": {
+              "description": "The localized friendly form of the resource type related to this action/operation. It should match the public documentation for the resource provider, e.g. \"Virtual Machines\" or \"Job Schedule Collections\"",
+              "type": "string",
+              "readOnly": true
+            },
+            "operation": {
+              "description": "Required.The localized friendly name for the operation, as it should be shown to the user. It should be concise (to fit in drop downs) but clear (i.e. self-documenting), e.g. \"Create or Update Virtual Machine\", \"Restart Virtual Machine\"",
+              "type": "string",
+              "readOnly": true
+            },
+            "description": {
+              "description": "Required.The localized friendly description for the operation, as it should be shown to the user. It should be thorough, yet concise. It will be used in tool tips and detailed views.",
+              "type": "string",
+              "readOnly": true
+            }
+          }
+        },
+        "origin": {
+          "description": "The intended executor of the operation; governs the display of the operation in the RBAC UX and the audit logs UX. Default value is \"user,system\"",
+          "type": "string",
+          "readOnly": true,
+          "enum": [
+            "user",
+            "system",
+            "user,system"
+          ],
+          "x-ms-enum": {
+            "name": "Origin",
+            "modelAsString": true
+          }
+        },
+        "actionType": {
+          "description": "Enum. Indicates the action type. \"Internal\" refers to actions that are for internal only APIs.",
+          "type": "string",
+          "readOnly": true,
+          "enum": [
+            "Internal"
+          ],
+          "x-ms-enum": {
+            "name": "ActionType",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "OperationListResult": {
+      "description": "A list of REST API operations supported by an Azure Resource Provider. It contains an URL link to get the next set of results.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Operation"
+          },
+          "description": "List of operations supported by the resource provider"
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "URL to get the next set of operation list results (if there are any)."
         }
       }
     }
@@ -111,7 +1510,14 @@
       "in": "path",
       "required": true,
       "type": "string",
-      "description": "The Azure subscription ID. This is a GUID-formatted string (e.g. 00000000-0000-0000-0000-000000000000)"
+      "description": "Gets subscription credentials which uniquely identify the Microsoft Azure subscription. The subscription ID forms part of the URI for every service call."
+    },
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "Client Api Version."
     },
     "ResourceGroupNameParameter": {
       "name": "resourceGroupName",
@@ -121,12 +1527,21 @@
       "description": "The name of the resource group.",
       "x-ms-parameter-location": "method"
     },
-    "ApiVersionParameter": {
-      "name": "api-version",
-      "in": "query",
+    "ClusterNameParameter": {
+      "name": "clusterName",
+      "in": "path",
       "required": true,
       "type": "string",
-      "description": "The API version to be used with the HTTP request."
+      "description": "The name of the RedisEnterprise cluster.",
+      "x-ms-parameter-location": "method"
+    },
+    "DatabaseNameParameter": {
+      "name": "databaseName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the database.",
+      "x-ms-parameter-location": "method"
     }
   }
 }

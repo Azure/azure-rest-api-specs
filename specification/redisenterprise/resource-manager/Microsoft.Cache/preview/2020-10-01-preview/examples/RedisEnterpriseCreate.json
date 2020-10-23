@@ -1,0 +1,80 @@
+{
+  "parameters": {
+    "clusterName": "cache1",
+    "resourceGroupName": "rg1",
+    "api-version": "2020-10-01-preview",
+    "subscriptionId": "subid",
+    "parameters": {
+      "location": "West US",
+      "sku": {
+        "name": "EnterpriseFlash_F300",
+        "capacity": 3
+      },
+      "zones": [
+        "1",
+        "2",
+        "3"
+      ],
+      "properties": {
+        "minimumTlsVersion": "1.2"
+      },
+      "tags": {
+        "tag1": "value1"
+      }
+    }
+  },
+  "responses": {
+    "201": {
+      "body": {
+        "name": "cache1",
+        "type": "Microsoft.Cache/redisEnterprise",
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Cache/redisEnterprise/cache1",
+        "location": "West US",
+        "sku": {
+          "name": "EnterpriseFlash_F300",
+          "capacity": 3
+        },
+        "zones": [
+          "1",
+          "2",
+          "3"
+        ],
+        "properties": {
+          "provisioningState": "Creating",
+          "hostName": "cache1.westus.something.azure.net",
+          "redisVersion": "5",
+          "minimumTlsVersion": "1.2"
+        },
+        "tags": {
+          "tag1": "value1"
+        }
+      }
+    },
+    "200": {
+      "body": {
+        "name": "cache1",
+        "type": "Microsoft.Cache/redisEnterprise",
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Cache/redisEnterprise/cache1",
+        "location": "West US",
+        "sku": {
+          "name": "EnterpriseFlash_F300",
+          "capacity": 3
+        },
+        "zones": [
+          "1",
+          "2",
+          "3"
+        ],
+        "properties": {
+          "provisioningState": "Succeeded",
+          "hostName": "cache1.westus.something.azure.net",
+          "redisVersion": "5",
+          "minimumTlsVersion": "1.2"
+        },
+        "tags": {
+          "tag1": "value1"
+        }
+      }
+    }
+  }
+}
