@@ -888,6 +888,7 @@
         "tenantId": {
           "description": "The tenant ID of the workspace managed identity",
           "type": "string",
+          "format": "uuid",
           "readOnly": true
         },
         "type": {
@@ -1019,6 +1020,11 @@
           "items": {
             "$ref": "../../../../common/v1/privateEndpointConnection.json#/definitions/PrivateEndpointConnection"
           }
+        },
+        "workspaceUID": {
+          "description": "Unique identifier for the Synapse Workspace",
+          "type": "string",
+          "format": "uuid"
         },
         "extraProperties": {
           "description": "Workspace level configs and feature flags",

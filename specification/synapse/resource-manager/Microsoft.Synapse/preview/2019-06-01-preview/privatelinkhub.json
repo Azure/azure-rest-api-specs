@@ -225,6 +225,9 @@
           "200": {
             "description": "OK"
           },
+          "202": {
+            "description": "Accepted"
+          },
           "204": {
             "description": "PrivateLinkHub resource not found."
           },
@@ -239,6 +242,7 @@
         "produces": [
           "application/json"
         ],
+        "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "Delete a privateLinkHub": {
             "$ref": "./examples/DeletePrivateLinkHub.json"
@@ -395,9 +399,33 @@
           "type": "string",
           "enum": [
             "Succeeded",
-            "Failed"
+            "Failed",
+            "Deleting"
           ],
           "readOnly": true
+        },
+        "privateEndpointConnections": {
+          "description": "List of private endpoint connections",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PrivateEndpointConnectionForPrivateLinkHubBasic"
+          }
+        }
+      }
+    },
+    "PrivateEndpointConnectionForPrivateLinkHubBasic": {
+      "description": "Private Endpoint Connection For Private Link Hub - Basic",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "identifier",
+          "type": "string",
+          "readOnly": true
+        },
+        "properties": {
+          "description": "",
+          "type": "object",
+          "$ref": "../../../../common/v1/privateEndpointConnection.json#/definitions/PrivateEndpointConnectionProperties"
         }
       }
     }
