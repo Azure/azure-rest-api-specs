@@ -256,6 +256,9 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "The cluster was successfully deleted."
+          },
           "202": {
             "description": "The cluster delete operation was successfully started. GET the URL in the Azure-AsyncOperation or Location headers to retrieve updated status."
           },
@@ -640,11 +643,14 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "Successfully deleted the database."
+          },
           "202": {
             "description": "The database delete operation started. GET the URL in the Azure-AsyncOperation or Location headers to retrieve updated status."
           },
           "204": {
-            "description": "Successfully deleted the database"
+            "description": "Successfully deleted the database."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
