@@ -326,6 +326,90 @@
       },
       "description": "The resource management error additional info."
     },
+    "Operation": {
+      "title": "REST API Operation",
+      "description": "Details of a REST API operation, returned from the Resource Provider Operations API",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "The name of the operation being performed on this particular object. It should match the action name that appears in RBAC / the event service. Examples: \"Microsoft.Compute/virtualMachines/write\", \"Microsoft.Compute/virtualMachines/capture/action\"",
+          "type": "string",
+          "readOnly": true
+        },
+        "isDataAction": {
+          "description": "Whether the operation applies to data-plane. This is \"true\" for data-plane operations and \"false\" for ARM/control-plane operations.",
+          "type": "boolean",
+          "readOnly": true
+        },
+        "display": {
+          "description": "Contains the localized display information for this particular operation / action.",
+          "properties": {
+            "provider": {
+              "description": "The localized friendly form of the resource provider name, e.g. Microsoft Monitoring Insights\" or \"Microsoft Compute\"",
+              "type": "string",
+              "readOnly": true
+            },
+            "resource": {
+              "description": "The localized friendly form of the resource type related to this action/operation � it should match the public documentation for the resource provider, e.g. \"Virtual Machines\" or \"Job Schedule Collections\"",
+              "type": "string",
+              "readOnly": true
+            },
+            "operation": {
+              "description": "Required.The localized friendly name for the operation, as it should be shown to the user. It should be concise (to fit in drop downs) but clear (i.e. self-documenting), e.g. \"Create or Update Virtual Machine\", \"Restart Virtual Machine\"",
+              "type": "string",
+              "readOnly": true
+            },
+            "description": {
+              "description": "Required.The localized friendly description for the operation, as it should be shown to the user. It should be thorough, yet concise � it will be used in tool tips and detailed views.",
+              "type": "string",
+              "readOnly": true
+            }
+          }
+        },
+        "origin": {
+          "description": "The intended executor of the operation; governs the display of the operation in the RBAC UX and the audit logs UX. Default value is \"user,system\"",
+          "type": "string",
+          "readOnly": true,
+          "enum": [
+            "user",
+            "system",
+            "user,system"
+          ],
+          "x-ms-enum": {
+            "name": "Origin",
+            "modelAsString": true
+          }
+        },
+        "actionType": {
+          "description": "Enum. Indicates the action type. \"Internal\" refers to actions that are for internal only APIs.",
+          "type": "string",
+          "readOnly": true,
+          "enum": [
+            "Internal"
+          ],
+          "x-ms-enum": {
+            "name": "ActionType",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "OperationListResult": {
+      "description": "A list of REST API operations supported by an Azure Resource Provider. It contains an URL link to get the next set of results.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Operation"
+          },
+          "description": "List of operations supported by the resource provider"
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "URL to get the next set of operation list results (if there are any)."
+        }
+      }
+    },
     "locationData": {
       "description": "Metadata pertaining to the geographic location of the resource.",
       "type": "object",
