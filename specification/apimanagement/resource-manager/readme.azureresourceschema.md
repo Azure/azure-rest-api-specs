@@ -6,9 +6,9 @@ These settings apply only when `--azureresourceschema` is specified on the comma
 
 ``` yaml $(azureresourceschema) && $(multiapi)
 batch:
-  # - tag: schema-apimanagement-2020-06-01-preview
+  - tag: schema-apimanagement-2020-06-01-preview
   - tag: schema-apimanagement-2019-12-01-preview
-  # - tag: schema-apimanagement-2019-12-01
+  - tag: schema-apimanagement-2019-12-01
   - tag: schema-apimanagement-2019-01-01
   - tag: schema-apimanagement-2018-06-01-preview
   - tag: schema-apimanagement-2018-01-01
