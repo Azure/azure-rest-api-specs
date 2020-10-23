@@ -4124,11 +4124,16 @@
       }
     },
     "snapshotPolicyVolumeList": {
-      "description": "List of volumes",
-      "type": "array",
-      "readOnly": true,
-      "items": {
-        "$ref": "#/definitions/volume"
+      "description": "List of volume resources",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "List of volumes",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/volume"
+          }
+        }
       }
     },
     "hourlySchedule": {
