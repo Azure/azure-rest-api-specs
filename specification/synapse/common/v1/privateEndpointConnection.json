@@ -1,0 +1,439 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "v1",
+    "title": "PrivateEndpointConnection types"
+  },
+  "definitions": {
+    "PrivateEndpointConnectionList": {
+      "description": "A list of private endpoint connections",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Array of results.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PrivateEndpointConnection"
+          },
+          "readOnly": true
+        },
+        "nextLink": {
+          "description": "Link to retrieve next page of results.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "PrivateEndpointConnection": {
+      "description": "A private endpoint connection",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../common-types/resource-management/v1/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/PrivateEndpointConnectionProperties",
+          "description": "Private endpoint connection properties.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "PrivateEndpointConnectionProperties": {
+      "description": "Properties of a private endpoint connection.",
+      "type": "object",
+      "properties": {
+        "privateEndpoint": {
+          "$ref": "#/definitions/PrivateEndpoint",
+          "description": "The private endpoint which the connection belongs to."
+        },
+        "privateLinkServiceConnectionState": {
+          "$ref": "#/definitions/PrivateLinkServiceConnectionState",
+          "description": "Connection state of the private endpoint connection."
+        },
+        "provisioningState": {
+          "description": "Provisioning state of the private endpoint connection.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "PrivateEndpoint": {
+      "description": "Private endpoint details",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "Resource id of the private endpoint.",
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "PrivateLinkServiceConnectionState": {
+      "description": "Connection state details of the private endpoint",
+      "type": "object",
+      "properties": {
+        "status": {
+          "description": "The private link service connection status.",
+          "type": "string",
+          "enum": [
+            "Approved",
+            "Pending",
+            "Rejected",
+            "Disconnected"
+          ]
+        },
+        "description": {
+          "description": "The private link service connection description.",
+          "type": "string"
+        },
+        "actionsRequired": {
+          "description": "The actions required for private link service connection.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "ConnectionDetail": {
+      "properties": {
+        "groupId": {
+          "type": "string"
+        },
+        "memberName": {
+          "type": "string"
+        },
+        "id": {
+          "type": "string"
+        },
+        "privateIpAddress": {
+          "type": "string"
+        },
+        "linkIdentifier": {
+          "type": "string"
+        }
+      }
+    },
+    "PrivateLinkServiceConnection": {
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "groupIds": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "requestMessage": {
+          "type": "string"
+        }
+      }
+    },
+    "RemotePrivateEndpointConnection": {
+      "properties": {
+        "id": {
+          "type": "string"
+        }
+      }
+    },
+    "PrivateLinkServiceProxyBase": {
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "remotePrivateLinkServiceConnectionState": {
+          "type": "object",
+          "$ref": "#/definitions/PrivateLinkServiceConnectionState"
+        },
+        "remotePrivateEndpointConnection": {
+          "type": "string",
+          "$ref": "#/definitions/RemotePrivateEndpointConnection"
+        }
+      }
+    },
+    "GroupConnectivityInformationBase": {
+      "properties": {
+        "groupId": {
+          "type": "string"
+        },
+        "memberName": {
+          "type": "string"
+        },
+        "customerVisibleFqdns": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "internalFqdn": {
+          "type": "string"
+        },
+        "redirectMapId": {
+          "type": "string"
+        },
+        "privateLinkServiceArmRegion": {
+          "type": "string"
+        }
+      }
+    },
+    "GroupConnectivityInformation": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/GroupConnectivityInformationBase"
+        }
+      ]
+    },
+    "GroupConnectivityInformationForPrivateLinkHub": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/GroupConnectivityInformationBase"
+        }
+      ]
+    },
+    "PrivateLinkServiceProxy": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/PrivateLinkServiceProxyBase"
+        },
+        {
+          "properties": {
+            "groupConnectivityInformation": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/GroupConnectivityInformation"
+              }
+            }
+          }
+        }
+      ]
+    },
+    "PrivateLinkServiceProxyForPrivateLinkHub": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/PrivateLinkServiceProxyBase"
+        },
+        {
+          "properties": {
+            "id": {
+              "type": "string"
+            },
+            "groupConnectivityInformation": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/GroupConnectivityInformationForPrivateLinkHub"
+              }
+            }
+          }
+        }
+      ]
+    },
+    "RemotePrivateEndpointBase": {
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "location": {
+          "type": "string"
+        },
+        "immutableSubscriptionId": {
+          "type": "string"
+        },
+        "immutableResourceId": {
+          "type": "string"
+        },
+        "manualPrivateLinkServiceConnections": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PrivateLinkServiceConnection"
+          }
+        },
+        "privateLinkServiceConnections": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PrivateLinkServiceConnection"
+          }
+        },
+        "connectionDetails": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ConnectionDetail"
+          }
+        }
+      }
+    },
+    "RemotePrivateEndpoint": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/RemotePrivateEndpointBase"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "privateLinkServiceProxies": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/PrivateLinkServiceProxy"
+              }
+            }
+          }
+        }
+      ]
+    },
+    "RemotePrivateEndpointForPrivateLinkHub": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/RemotePrivateEndpointBase"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "privateLinkServiceProxies": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/PrivateLinkServiceProxyForPrivateLinkHub"
+              }
+            }
+          }
+        }
+      ]
+    },
+    "PrivateEndpointConnectionForPrivateLinkHubProxy": {
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        },
+        "location": {
+          "type": "string"
+        },
+        "remotePrivateEndpoint": {
+          "type": "object",
+          "$ref": "#/definitions/RemotePrivateEndpointForPrivateLinkHub"
+        }
+      }
+    },
+    "PrivateEndpointConnectionForPrivateLinkHubBasic": {
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "properties": {
+          "type": "object",
+          "$ref": "#/definitions/PrivateEndpointConnectionProperties"
+        }
+      }
+    },
+    "PrivateEndpointConnectionForPrivateLinkHub": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/PrivateEndpointConnectionForPrivateLinkHubBasic"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "name": {
+              "type": "string"
+            },
+            "type": {
+              "type": "string"
+            }
+          }
+        }
+      ]
+    },
+    "PrivateEndpointConnectionForPrivateLinkHub_ResourceCollectionResponse": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PrivateEndpointConnectionForPrivateLinkHub"
+          }
+        },
+        "nextLink": {
+          "type": "string"
+        }
+      }
+    },
+    "PrivateEndpointConnectionBasic": {
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "properties": {
+          "type": "object",
+          "$ref": "#/definitions/PrivateEndpointConnectionProperties"
+        }
+      }
+    },
+    "PrivateEndpointConnectionProxyBase": {
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        },
+        "location": {
+          "type": "string"
+        },
+        "remotePrivateEndpoint": {
+          "type": "object",
+          "$ref": "#/definitions/RemotePrivateEndpoint"
+        }
+      }
+    },
+    "PrivateEndpointConnectionProxy": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/PrivateEndpointConnectionProxyBase"
+        }
+      ]
+    },
+    "PrivateEndpointConnectionForPrivateLinkHubProxyBase": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        },
+        "remotePrivateEndpoint": {
+          "type": "object",
+          "$ref": "#/definitions/RemotePrivateEndpointForPrivateLinkHub"
+        }
+      }
+    }
+  },
+  "parameters": {
+    "PrivateEndpointConnectionNameParameter": {
+      "name": "privateEndpointConnectionName",
+      "in": "path",
+      "description": "Name of the PrivateEndpointConnection",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "PrivateEndpointConnectionProxyNameParameter": {
+      "name": "privateEndpointConnectionProxyName",
+      "in": "path",
+      "description": "The name of the PrivateEndpointConnectionProxy",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}

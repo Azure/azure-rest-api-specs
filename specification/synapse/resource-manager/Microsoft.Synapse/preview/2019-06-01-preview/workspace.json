@@ -46,6 +46,12 @@
               "$ref": "#/definitions/WorkspaceInfoListResult"
             },
             "description": ""
+          },
+          "default": {
+            "schema": {
+              "$ref": "../../../../common/v1/types.json#/definitions/ErrorContract"
+            },
+            "description": ""
           }
         },
         "consumes": [],
@@ -93,7 +99,7 @@
           },
           "default": {
             "schema": {
-              "$ref": "#/definitions/ErrorContract"
+              "$ref": "../../../../common/v1/types.json#/definitions/ErrorContract"
             },
             "description": ""
           }
@@ -153,7 +159,7 @@
           },
           "default": {
             "schema": {
-              "$ref": "#/definitions/ErrorContract"
+              "$ref": "../../../../common/v1/types.json#/definitions/ErrorContract"
             },
             "description": ""
           }
@@ -219,7 +225,7 @@
           },
           "default": {
             "schema": {
-              "$ref": "#/definitions/ErrorContract"
+              "$ref": "../../../../common/v1/types.json#/definitions/ErrorContract"
             },
             "description": ""
           }
@@ -279,7 +285,7 @@
           },
           "default": {
             "schema": {
-              "$ref": "#/definitions/ErrorContract"
+              "$ref": "../../../../common/v1/types.json#/definitions/ErrorContract"
             },
             "description": ""
           }
@@ -319,6 +325,12 @@
           "200": {
             "schema": {
               "$ref": "#/definitions/WorkspaceInfoListResult"
+            },
+            "description": ""
+          },
+          "default": {
+            "schema": {
+              "$ref": "../../../../common/v1/types.json#/definitions/ErrorContract"
             },
             "description": ""
           }
@@ -368,7 +380,7 @@
           },
           "default": {
             "schema": {
-              "$ref": "#/definitions/ErrorContract"
+              "$ref": "../../../../common/v1/types.json#/definitions/ErrorContract"
             },
             "description": ""
           }
@@ -428,7 +440,7 @@
           },
           "default": {
             "schema": {
-              "$ref": "#/definitions/ErrorContract"
+              "$ref": "../../../../common/v1/types.json#/definitions/ErrorContract"
             },
             "description": ""
           }
@@ -479,7 +491,7 @@
           },
           "default": {
             "schema": {
-              "$ref": "#/definitions/ErrorContract"
+              "$ref": "../../../../common/v1/types.json#/definitions/ErrorContract"
             },
             "description": ""
           }
@@ -499,50 +511,140 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces/{workspaceName}/managedIdentitySqlControlSettings/default": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces/{workspaceName}/scopePools/{scopePoolName}": {
+      "parameters": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+        },
+        {
+          "$ref": "#/parameters/workspaceNameParameter"
+        },
+        {
+          "$ref": "#/parameters/scopePoolNameParameter"
+        }
+      ],
       "get": {
-        "operationId": "WorkspaceManagedIdentitySqlControlSettings_Get",
-        "summary": "Get Managed Identity Sql Control Settings",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "./workspace.json#/parameters/workspaceNameParameter"
-          }
+        "operationId": "GetScopePool",
+        "description": "Get scope pool by name",
+        "tags": [
+          "ScopePools"
         ],
+        "deprecated": false,
         "responses": {
           "200": {
             "schema": {
-              "$ref": "#/definitions/ManagedIdentitySqlControlSettingsModel"
+              "type": "object",
+              "$ref": "#/definitions/ScopePoolResourceInfo"
             },
             "description": "OK"
           },
+          "403": {
+            "schema": {
+              "$ref": "../../../../common/v1/types.json#/definitions/ErrorContract"
+            },
+            "description": "User subscription or tenant not allowed"
+          },
+          "404": {
+            "description": "Not found"
+          },
           "default": {
             "schema": {
-              "$ref": "./workspace.json#/definitions/ErrorContract"
+              "$ref": "../../../../common/v1/types.json#/definitions/ErrorContract"
             },
-            "description": "Error"
+            "description": ""
           }
         },
+        "consumes": [],
         "produces": [
           "application/json"
         ],
         "x-ms-examples": {
-          "Get managed identity sql control settings": {
-            "$ref": "./examples/GetManagedIdentitySqlControlSettings.json"
+          "Get scope pool by name": {
+            "$ref": "./examples/GetScopePool.json"
           }
         }
       },
       "put": {
-        "operationId": "WorkspaceManagedIdentitySqlControlSettings_CreateOrUpdate",
-        "summary": "Create or update Managed Identity Sql Control Settings",
+        "operationId": "CreateOrUpdateScopePool",
+        "description": "Create or update scope pool in workspace",
+        "tags": [
+          "ScopePools"
+        ],
+        "deprecated": false,
+        "parameters": [
+          {
+            "in": "body",
+            "name": "scopePoolInfo",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ScopePoolResourceInfo"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "schema": {
+              "$ref": "#/definitions/ScopePoolResourceInfo"
+            },
+            "description": ""
+          },
+          "400": {
+            "description": "Malformed request or key sub-resource not available in region",
+            "schema": {
+              "$ref": "../../../../common/v1/types.json../../../../common/v1/types.json#/definitions/ErrorContract"
+            }
+          },
+          "403": {
+            "description": "Forbidden or scope pool limit reached",
+            "schema": {
+              "$ref": "../../../../common/v1/types.json#/definitions/ErrorContract"
+            }
+          },
+          "404": {
+            "description": "Workspace not found"
+          },
+          "409": {
+            "description": "Scope pool with same name already exists in non-final state",
+            "schema": {
+              "$ref": "../../../../common/v1/types.json#/definitions/ErrorContract"
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": "../../../../common/v1/types.json#/definitions/ErrorContract"
+            },
+            "description": ""
+          }
+        },
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "Create or update scope pool by name in the workspace": {
+            "$ref": "./examples/CreateOrUpdateScopePool.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "DeleteScopePool",
+        "description": "Deletes a scope pool",
+        "tags": [
+          "ScopePools"
+        ],
+        "deprecated": false,
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
@@ -554,24 +656,96 @@
             "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "./workspace.json#/parameters/workspaceNameParameter"
+            "$ref": "#/parameters/workspaceNameParameter"
           },
           {
-            "description": "Managed Identity Sql Control Settings",
+            "$ref": "#/parameters/scopePoolNameParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted"
+          },
+          "204": {
+            "description": "No content"
+          },
+          "403": {
             "schema": {
-              "$ref": "#/definitions/ManagedIdentitySqlControlSettingsModel"
+              "$ref": "../../../../common/v1/types.json#/definitions/ErrorContract"
             },
+            "description": "Not allowed to operate on this tenant and subscription"
+          },
+          "default": {
+            "schema": {
+              "$ref": "../../../../common/v1/types.json#/definitions/ErrorContract"
+            },
+            "description": ""
+          }
+        },
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "Delete scope pool in workspace": {
+            "$ref": "./examples/DeleteScopePool.json"
+          }
+        }
+      },
+      "patch": {
+        "operationId": "PatchScopePool",
+        "description": "Update scope pool in workspace",
+        "tags": [
+          "ScopePools"
+        ],
+        "deprecated": false,
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../common/v1/types.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/scopePoolNameParameter"
+          },
+          {
             "in": "body",
-            "name": "managedIdentitySqlControlSettings",
-            "required": true
+            "name": "scopePoolInfo",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ScopePoolPatchInfo"
+            }
           }
         ],
         "responses": {
           "200": {
             "schema": {
-              "$ref": "#/definitions/ManagedIdentitySqlControlSettingsModel"
+              "$ref": "#/definitions/ScopePoolResourceInfo"
             },
-            "description": "OK"
+            "description": ""
+          },
+          "403": {
+            "schema": {
+              "$ref": "../../../../common/v1/types.json#/definitions/ErrorContract"
+            },
+            "description": "Not allowed"
+          },
+          "409": {
+            "schema": {
+              "$ref": "../../../../common/v1/types.json#/definitions/ErrorContract"
+            },
+            "description": ""
           },
           "201": {
             "schema": {
@@ -581,17 +755,20 @@
           },
           "default": {
             "schema": {
-              "$ref": "./workspace.json#/definitions/ErrorContract"
+              "$ref": "../../../../common/v1/types.json#/definitions/ErrorContract"
             },
-            "description": "Error"
+            "description": ""
           }
         },
+        "consumes": [
+          "application/json"
+        ],
         "produces": [
           "application/json"
         ],
         "x-ms-examples": {
-          "Create or update managed identity sql control settings": {
-            "$ref": "./examples/CreateOrUpdateManagedIdentitySqlControlSettings.json"
+          "Update scope pool by name in the workspace": {
+            "$ref": "./examples/PatchScopePool.json"
           }
         }
       }
@@ -697,38 +874,63 @@
           "nextLinkName": null
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces/{workspaceName}/scopePools": {
+      "parameters": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+        },
+        {
+          "$ref": "#/parameters/workspaceNameParameter"
+        }
+      ],
+      "get": {
+        "operationId": "GetScopePoolsInWorkspace",
+        "description": "Get all scope pools in workspace",
+        "tags": [
+          "ScopePools"
+        ],
+        "deprecated": false,
+        "responses": {
+          "200": {
+            "schema": {
+              "type": "object",
+              "$ref": "#/definitions/ResourceCollectionResponse_ScopePoolResourceInfo"
+            },
+            "description": "OK"
+          },
+          "403": {
+            "description": "User subscription or tenant not allowed",
+            "schema": {
+              "$ref": "../../../../common/v1/types.json#/definitions/ErrorContract"
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": "../../../../common/v1/types.json#/definitions/ErrorContract"
+            },
+            "description": ""
+          }
+        },
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-examples": {
+          "Get scope pool by name": {
+            "$ref": "./examples/GetScopePoolsInWorkspace.json"
+          }
+        }
+      }
     }
   },
   "definitions": {
-    "ErrorDetail": {
-      "description": "Error details",
-      "type": "object",
-      "properties": {
-        "message": {
-          "description": "Error message",
-          "type": "string"
-        },
-        "code": {
-          "description": "Error code",
-          "type": "string"
-        },
-        "target": {
-          "description": "Error target",
-          "type": "string"
-        }
-      }
-    },
-    "ErrorContract": {
-      "title": "Error details.",
-      "description": "Contains details when the response code indicates an error.",
-      "type": "object",
-      "properties": {
-        "error": {
-          "description": "The error details.",
-          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ErrorResponse"
-        }
-      }
-    },
     "AadAdminProperties": {
       "description": "Workspace active directory administrator properties",
       "type": "object",
@@ -978,7 +1180,7 @@
           "description": "Private endpoint connections to the workspace",
           "type": "array",
           "items": {
-            "$ref": "./privateEndpointConnections.json#/definitions/PrivateEndpointConnection"
+            "$ref": "../../../../common/v1/privateEndpointConnection.json#/definitions/PrivateEndpointConnection"
           }
         },
         "encryption": {
@@ -1181,6 +1383,72 @@
         "value"
       ],
       "description": "The response to a list restorable dropped Sql pools request"
+    },
+    "ScopePoolResourceProperties": {
+      "allOf": [
+        {
+          "$ref": "../../../../common/v1/types.json#/definitions/ResourcePropertiesBase"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "creationDate": {
+              "type": "string",
+              "format": "date-time "
+            },
+            "maxQueuedJobs": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "maxRunningJobs": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "extendedProperties": {
+              "type": "string"
+            }
+          }
+        }
+      ]
+    },
+    "ScopePoolResourceInfo": {
+      "allOf": [
+        {
+          "$ref": "../../../../common/v1/types.json#/definitions/WorkspaceSubResource"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "properties": {
+              "type": "object",
+              "$ref": "#/definitions/ScopePoolResourceProperties"
+            }
+          }
+        }
+      ]
+    },
+    "ResourceCollectionResponse_ScopePoolResourceInfo": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ScopePoolResourceInfo"
+          }
+        },
+        "nextLink": {
+          "type": "string"
+        }
+      }
+    },
+    "ScopePoolPatchInfo": {
+      "properties": {
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
     }
   },
   "parameters": {
@@ -1190,6 +1458,14 @@
       "required": true,
       "type": "string",
       "description": "The name of the workspace",
+      "x-ms-parameter-location": "method"
+    },
+    "scopePoolNameParameter": {
+      "name": "scopePoolName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Name of the scope pool",
       "x-ms-parameter-location": "method"
     }
   }

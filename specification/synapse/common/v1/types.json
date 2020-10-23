@@ -17,6 +17,44 @@
         }
       }
     },
+    "ErrorDetail": {
+      "description": "Error details",
+      "type": "object",
+      "properties": {
+        "message": {
+          "description": "Error message",
+          "type": "string"
+        },
+        "code": {
+          "description": "Error code",
+          "type": "string"
+        },
+        "target": {
+          "description": "Error target",
+          "type": "string"
+        }
+      }
+    },
+    "WorkspaceSubResource": {
+      "allOf": [
+        {
+          "$ref": "../../../common-types/resource-management/v1/types.json#/definitions/Resource"
+        },
+        {
+          "properties": {
+            "location": {
+              "type": "string"
+            },
+            "tags": {
+              "type": "object",
+              "additionalProperties": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      ]
+    },
     "Sku": {
       "description": "An ARM Resource SKU.",
       "required": [
@@ -84,6 +122,35 @@
         }
       },
       "x-ms-azure-resource": true
+    },
+    "ResourcePropertiesBase": {
+      "properties": {
+        "provisioningState": {
+          "type": "string"
+        }
+      }
+    },
+    "AsyncOperationState": {
+      "type": "string",
+      "enum": [
+        "None",
+        "InProgress",
+        "Succeeded",
+        "Failed",
+        "Canceled"
+      ]
+    },
+    "OperationResource_Common": {
+      "properties": {
+        "status": {
+          "type": "string",
+          "$ref": "#/definitions/AsyncOperationState"
+        },
+        "error": {
+          "type": "object",
+          "$ref": "#/definitions/ErrorDetail"
+        }
+      }
     }
   },
   "parameters": {
@@ -93,6 +160,14 @@
       "description": "The name of the workspace.",
       "required": true,
       "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "PrivateLinkHubNameParameter": {
+      "name": "privateLinkHubName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Name of the privateLinkHub",
       "x-ms-parameter-location": "method"
     },
     "SqlPoolNameParameter": {

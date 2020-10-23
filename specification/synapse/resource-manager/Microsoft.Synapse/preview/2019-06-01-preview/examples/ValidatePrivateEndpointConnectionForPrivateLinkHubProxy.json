@@ -1,0 +1,97 @@
+{
+  "parameters": {
+    "subscriptionId": "48b08652-d7a1-4d52-b13f-5a2471dce57b",
+    "resourceGroupName": "gh-res-grp",
+    "privateLinkHubName": "plh0",
+    "privateEndpointConnectionProxyName": "pecProxy0",
+    "api-version": "2019-06-01-preview",
+    "request": {
+      "id": null,
+      "name": null,
+      "type": null,
+      "location": null,
+      "remotePrivateEndpoint": {
+        "privateLinkServiceProxies": [
+          {
+            "groupConnectivityInformation": [
+              {
+                "groupId": "Web",
+                "memberName": "Web",
+                "customerVisibleFqdns": null,
+                "internalFqdn": null,
+                "redirectMapId": null,
+                "privateLinkServiceArmRegion": null
+              }
+            ],
+            "id": "id",
+            "remotePrivateLinkServiceConnectionState": null,
+            "remotePrivateEndpointConnection": null
+          }
+        ],
+        "id": "remotePrivateEndpointId",
+        "location": "remotePrivateEndpointLocation",
+        "immutableSubscriptionId": "remotePrivateEndpointImmutableSubscriptionId",
+        "immutableResourceId": "remotePrivateEndpointImmutableResourceId",
+        "manualPrivateLinkServiceConnections": [
+          {
+            "name": "connectionName",
+            "groupIds": [
+              "Web"
+            ],
+            "requestMessage": "requestMessage"
+          }
+        ],
+        "privateLinkServiceConnections": null,
+        "connectionDetails": null
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "remotePrivateEndpoint": {
+          "privateLinkServiceProxies": [
+            {
+              "groupConnectivityInformation": [
+                {
+                  "groupId": "Web",
+                  "memberName": "Web"
+                }
+              ],
+              "id": "id"
+            }
+          ],
+          "id": "remotePrivateEndpointId",
+          "location": "remotePrivateEndpointLocation",
+          "immutableSubscriptionId": "remotePrivateEndpointImmutableSubscriptionId",
+          "immutableResourceId": "remotePrivateEndpointImmutableResourceId",
+          "manualPrivateLinkServiceConnections": [
+            {
+              "name": "connectionName",
+              "groupIds": [
+                "Web"
+              ],
+              "requestMessage": "requestMessage"
+            }
+          ]
+        }
+      }
+    },
+    "404": {
+      "body": {
+        "error": {
+          "code": "PrivateEndpointConnectionForPrivateLinkHubProxyValidationFailed",
+          "message": "Private Endpoint Connection Proxy validation failed, check error details for more information",
+          "details": [
+            {
+              "code": "PrivateLinkServiceConnectionNotProvided",
+              "message": "Private Link Service Connection not provided"
+            }
+          ]
+        }
+      }
+    },
+    "409": {
+    }
+  }
+}

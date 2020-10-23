@@ -1,0 +1,178 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2019-06-01-preview",
+    "title": "SynapseManagementClient",
+    "description": "Azure Synapse Analytics APIs"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "type": "oauth2",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      },
+      "description": "Azure Active Directory OAuth2 Flow"
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces/{workspaceName}/managedIdentitySqlControlSettings/{settingName}": {
+      "parameters": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+        },
+        {
+          "$ref": "../../../../common/v1/types.json#/parameters/WorkspaceNameParameter"
+        },
+        {
+          "$ref": "#/parameters/SettingNameParameter"
+        }
+      ],
+      "get": {
+        "operationId": "GetWorkspaceManagedIdentity",
+        "description": "Get managed identity by name in the workspace",
+        "tags": [
+          "ManagedIdentity"
+        ],
+        "deprecated": false,
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/ManagedIdentitySqlControlSettingsInfo"
+            },
+            "description": "Managed identity by name in workspace."
+          },
+          "default": {
+            "schema": {
+              "$ref": "../../../../common/v1/types.json#/definitions/ErrorContract"
+            },
+            "description": ""
+          }
+        },
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-examples": {
+          "Get managed identity by name in the workspace": {
+            "$ref": "./examples/GetWorkspaceManagedIdentity.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "PutManagedIdentitySqlControlSettings",
+        "description": "Create or update managed identity by name in the workspace",
+        "tags": [
+          "ManagedIdentity"
+        ],
+        "deprecated": false,
+        "parameters": [
+          {
+            "in": "body",
+            "name": "managedIdentitySqlControlSettings",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ManagedIdentitySqlControlSettingsInfo"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/ManagedIdentitySqlControlSettingsInfo"
+            },
+            "description": "Created managed identity by name in workspace."
+          },
+          "201": {
+            "schema": {
+              "$ref": "#/definitions/ManagedIdentitySqlControlSettingsInfo"
+            },
+            "description": "Operation to create managed identity by name in workspace accepted."
+          },
+          "400": {
+            "schema": {
+              "$ref": "../../../../common/v1/types.json#/definitions/ErrorContract"
+            },
+            "description": ""
+          },
+          "default": {
+            "schema": {
+              "$ref": "../../../../common/v1/types.json#/definitions/ErrorContract"
+            },
+            "description": ""
+          }
+        },
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "Create managed identity by name in the workspace": {
+            "$ref": "./examples/PutManagedIdentitySqlControlSettings.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "GrantSqlControlToManagedIdentityProperties": {
+      "properties": {
+        "desiredState": {
+          "type": "string"
+        },
+        "actualState": {
+          "type": "string"
+        }
+      }
+    },
+    "ManagedIdentitySqlControlSettingsProperties": {
+      "properties": {
+        "grantSqlControlToManagedIdentity": {
+          "type": "object",
+          "$ref": "#/definitions/GrantSqlControlToManagedIdentityProperties"
+        }
+      }
+    },
+    "ManagedIdentitySqlControlSettingsInfo": {
+      "allOf": [
+        {
+          "$ref": "../../../../common/v1/types.json#/definitions/WorkspaceSubResource"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "properties": {
+              "type": "object",
+              "$ref": "#/definitions/ManagedIdentitySqlControlSettingsProperties"
+            }
+          }
+        }
+      ]
+    }
+  },
+  "parameters": {
+    "SettingNameParameter": {
+      "name": "settingName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Name of the setting",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}
