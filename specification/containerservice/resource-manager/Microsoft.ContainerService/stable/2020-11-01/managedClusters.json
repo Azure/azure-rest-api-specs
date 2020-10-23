@@ -2765,6 +2765,23 @@
       ],
       "description": "Control plane and agent pool upgrade profiles."
     },
+    "ManagedClusterAutoUpgradeProfile": {
+      "properties": {
+        "upgradeChannel": {
+          "type": "string",
+          "enum": [
+            "rapid",
+            "stable",
+            "patch"
+          ],
+          "x-ms-enum": {
+            "name": "upgradeChannel",
+            "modelAsString": true
+          },
+          "description": "upgrade channel for auto upgrade"
+        }
+      }
+    },
     "ManagedClusterAADProfile": {
       "properties": {
         "managed": {
