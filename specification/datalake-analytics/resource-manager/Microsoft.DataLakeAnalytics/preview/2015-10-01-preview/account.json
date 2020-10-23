@@ -181,7 +181,16 @@
             "required": true,
             "type": "string",
             "description": "The Azure Storage account to modify"
-          },         
+          },  
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AddStorageAccountParameters"
+            },
+            "description": "The parameters containing the access key and suffix to update the storage account with."
+          },       
           {
             "$ref": "#/parameters/ApiVersionParameter"
           },
