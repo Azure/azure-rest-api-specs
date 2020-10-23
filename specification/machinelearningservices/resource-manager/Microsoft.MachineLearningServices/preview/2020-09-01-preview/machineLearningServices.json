@@ -352,6 +352,48 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/listNotebookKeys": {
+      "post": {
+        "tags": [
+          "ProxyOperations"
+        ],
+        "operationId": "Notebooks_ListKeys",
+        "x-ms-examples": {
+          "List Workspace Keys": {
+            "$ref": "./examples/listNotebookKeys.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/APIVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "#/definitions/ListNotebookKeysResult",
+              "$ref": "#/definitions/ListNotebookKeysResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "#/definitions/MachineLearningServiceError"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces": {
       "get": {
         "tags": [
@@ -3118,6 +3160,19 @@
         "containerRegistryCredentials": {
           "readOnly": true,
           "$ref": "#/definitions/RegistryListCredentialsResult"
+        }
+      }
+    },
+    "ListNotebookKeysResult": {
+      "type": "object",
+      "properties": {
+        "PrimaryAccessKey": {
+          "readOnly": true,
+          "type": "string"
+        },
+        "SecondaryAccessKey": {
+          "readOnly": true,
+          "type":  "string"
         }
       }
     },
