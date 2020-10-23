@@ -3781,6 +3781,70 @@
           "final-state-via": "azure-async-operation"
         }
       },
+      "patch": {
+        "tags": [
+          "ExpressRouteGateways"
+        ],
+        "operationId": "ExpressRouteGateways_UpdateTags",
+        "x-ms-examples": {
+          "ExpressRouteGatewayUpdate": {
+            "$ref": "./examples/ExpressRouteGatewayUpdateTags.json"
+          }
+        },
+        "description": "Updates express route gateway tags.",
+        "parameters": [
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The resource group name of the ExpressRouteGateway."
+          },
+          {
+            "name": "expressRouteGatewayName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the gateway."
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "expressRouteGatewayParameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "./network.json#/definitions/TagsObject"
+            },
+            "description": "Parameters supplied to update a virtual wan express route gateway tags."
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted and the operation will complete asynchronously."
+          },
+          "200": {
+            "description": "Request successful. Returns the details of the updated gateway.",
+            "schema": {
+              "$ref": "#/definitions/ExpressRouteGateway"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      },
       "get": {
         "tags": [
           "ExpressRouteGateways"
