@@ -9043,11 +9043,11 @@
           "$ref": "#/definitions/DataConnector"
         }
       ],
-      "description": "Represents threat intelligence data connector.",
+      "description": "Data connector to pull threat intelligence data from TIP products.",
       "properties": {
         "properties": {
           "$ref": "#/definitions/TIDataConnectorProperties",
-          "description": "TI (Threat Intelligence) data connector properties.",
+          "description": "Threat Intelligence Platforms data connector properties.",
           "x-ms-client-flatten": true
         }
       },
@@ -9055,7 +9055,7 @@
       "x-ms-discriminator-value": "ThreatIntelligence"
     },
     "TIDataConnectorDataTypes": {
-      "description": "The available data types for TI (Threat Intelligence) data connector.",
+      "description": "The available data types for Threat Intelligence Platforms data connector.",
       "properties": {
         "indicators": {
           "allOf": [
@@ -9063,7 +9063,7 @@
               "$ref": "#/definitions/DataConnectorDataTypeCommon"
             }
           ],
-          "description": "Data type for indicators connection.",
+          "description": "Data type for Threat Intelligence Platforms data connector.",
           "type": "object"
         }
       },
@@ -9075,7 +9075,7 @@
           "$ref": "#/definitions/DataConnectorTenantId"
         }
       ],
-      "description": "TI (Threat Intelligence) data connector properties.",
+      "description": "Threat Intelligence Platforms data connector properties.",
       "properties": {
         "dataTypes": {
           "$ref": "#/definitions/TIDataConnectorDataTypes",
@@ -9090,11 +9090,11 @@
           "$ref": "#/definitions/DataConnectorsCheckRequirements"
         }
       ],
-      "description": "Represents threat intelligence requirements check request.",
+      "description": "Threat Intelligence Platforms data connector check requirements",
       "properties": {
         "properties": {
           "$ref": "#/definitions/TICheckRequirementsProperties",
-          "description": "TI (Threat Intelligence) requirements check properties.",
+          "description": "Threat Intelligence Platforms data connector check required properties",
           "x-ms-client-flatten": true
         }
       },
@@ -9107,7 +9107,7 @@
           "$ref": "#/definitions/DataConnectorTenantId"
         }
       ],
-      "description": "TI (Threat Intelligence) requirements check properties.",
+      "description": "Threat Intelligence Platforms data connector required properties.",
       "properties": {},
       "type": "object"
     },
@@ -9117,11 +9117,11 @@
           "$ref": "#/definitions/DataConnector"
         }
       ],
-      "description": "Represents threat intelligence taxii data connector.",
+      "description": "Data connector to pull Threat intelligence data from TAXII 2.0/2.1 server",
       "properties": {
         "properties": {
           "$ref": "#/definitions/TiTaxiiDataConnectorProperties",
-          "description": "Threat intelligence taxii client data connector properties.",
+          "description": "Threat intelligence TAXII data connector properties.",
           "x-ms-client-flatten": true
         }
       },
@@ -9129,7 +9129,7 @@
       "x-ms-discriminator-value": "ThreatIntelligenceTaxii"
     },
     "TiTaxiiDataConnectorDataTypes": {
-      "description": "The available data types for Threat Intelligence taxii client data connector.",
+      "description": "The available data types for Threat Intelligence TAXII data connector.",
       "properties": {
         "taxiiClient": {
           "allOf": [
@@ -9137,7 +9137,7 @@
               "$ref": "#/definitions/DataConnectorDataTypeCommon"
             }
           ],
-          "description": "Data type for taxii client.",
+          "description": "Data type for TAXII connector.",
           "type": "object"
         }
       },
@@ -9149,35 +9149,35 @@
           "$ref": "#/definitions/DataConnectorTenantId"
         }
       ],
-      "description": "Threat Intelligence taxii client data connector properties.",
+      "description": "Threat Intelligence TAXII data connector properties.",
       "properties": {
         "workspaceId": {
           "description": "The workspace id.",
           "type": "string"
         },
         "friendlyName": {
-          "description": "The friendly name for taxii client connector.",
+          "description": "The friendly name for the TAXII server.",
           "type": "string"
         },
         "taxiiServer": {
-          "description": "The API root server for taxii client.",
+          "description": "The API root for the TAXII server.",
           "type": "string"
         },
         "collectionId": {
-          "description": "The taxii collection id.",
+          "description": "The collection id of the TAXII server.",
           "type": "string"
         },
         "userName": {
-          "description": "The taxii server user name.",
+          "description": "The userName for the TAXII server.",
           "type": "string"
         },
         "password": {
-          "description": "The taxii server password.",
+          "description": "The password for the TAXII server.",
           "type": "string"
         },
         "dataTypes": {
           "$ref": "#/definitions/TiTaxiiDataConnectorDataTypes",
-          "description": "The available data types for the connector."
+          "description": "The available data types for Threat Intelligence TAXII data connector."
         }
       },
       "type": "object"
@@ -9188,11 +9188,11 @@
           "$ref": "#/definitions/DataConnectorsCheckRequirements"
         }
       ],
-      "description": "Represents threat intelligence requirements check request.",
+      "description": "Threat Intelligence TAXII data connector check requirements",
       "properties": {
         "properties": {
           "$ref": "#/definitions/TiTaxiiCheckRequirementsProperties",
-          "description": "Ti Taxii (Threat Intelligence Taxii) requirements check properties.",
+          "description": "Threat Intelligence TAXII check required properties.",
           "x-ms-client-flatten": true
         }
       },
@@ -9205,7 +9205,7 @@
           "$ref": "#/definitions/DataConnectorTenantId"
         }
       ],
-      "description": "Threat Intelligence taxii client data connector properties.",
+      "description": "Threat Intelligence TAXII data connector required properties.",
       "type": "object"
     },
     "ThreatIntelligence": {
