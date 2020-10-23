@@ -281,6 +281,10 @@
     "WebApplicationFirewallPolicyProperties": {
       "description": "Defines web application firewall policy properties.",
       "properties": {
+        "sku": {
+          "description": "The pricing tier of web application firewall policy.",
+          "$ref": "#/definitions/Sku"
+        },
         "policySettings": {
           "description": "Describes settings for the policy.",
           "$ref": "#/definitions/PolicySettings"
@@ -349,6 +353,25 @@
           "description": "URL to get the next set of WebApplicationFirewallPolicy objects if there are any."
         }
       }
+    },
+    "Sku": {
+      "description": "The pricing tier of the web application firewall policy.",
+      "properties": {
+        "name": {
+          "description": "Name of the pricing tier.",
+          "enum": [
+            "Classic_AzureFrontDoor",
+            "Standard_AzureFrontDoor",
+            "Premium_AzureFrontDoor"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "SkuName",
+            "modelAsString": true
+          }
+        }
+      },
+      "type": "object"
     },
     "PolicySettings": {
       "description": "Defines top-level WebApplicationFirewallPolicy configuration settings.",
