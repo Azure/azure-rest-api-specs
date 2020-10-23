@@ -777,7 +777,7 @@ Output of install instruction script.
 }
 ```
 
-#### InstallInstructionScriptInput Schema
+#### InstallInstructionScriptOutput Schema
 
 ```jsonc
 {

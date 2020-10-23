@@ -22,5 +22,5 @@ Please also specify `--go-sdks-folder=<path to the root directory of your azure-
 
 ```yaml $(tag) == 'package-2020-01-01-preview' && $(go)
 namespace: hybridnetwork
-output-folder: $(go-sdk-folder)/services/preview/management/2020-01-01-preview/$(namespace)
+output-folder: $(go-sdk-folder)/services/preview/$(namespace)/management/2020-01-01-preview/$(namespace)
 ```
