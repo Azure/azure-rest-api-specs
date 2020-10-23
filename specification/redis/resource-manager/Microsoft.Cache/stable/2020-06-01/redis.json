@@ -50,7 +50,7 @@
           "200": {
             "description": "Success. The response describes the list of operations.",
             "schema": {
-              "$ref": "#/definitions/OperationListResult"
+              "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/OperationListResult"
             }
           },
           "default": {
@@ -2560,54 +2560,6 @@
         "properties"
       ],
       "description": "Parameter required for creating a linked server to redis cache."
-    },
-    "Operation": {
-      "description": "REST API operation",
-      "type": "object",
-      "properties": {
-        "name": {
-          "description": "Operation name: {provider}/{resource}/{operation}",
-          "type": "string"
-        },
-        "display": {
-          "description": "The object that describes the operation.",
-          "properties": {
-            "provider": {
-              "description": "Friendly name of the resource provider",
-              "type": "string"
-            },
-            "operation": {
-              "description": "Operation type: read, write, delete, listKeys/action, etc.",
-              "type": "string"
-            },
-            "resource": {
-              "description": "Resource type on which the operation is performed.",
-              "type": "string"
-            },
-            "description": {
-              "description": "Friendly name of the operation",
-              "type": "string"
-            }
-          }
-        }
-      }
-    },
-    "OperationListResult": {
-      "description": "Result of the request to list REST API operations. It contains a list of operations and a URL nextLink to get the next set of results.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Operation"
-          },
-          "description": "List of operations supported by the resource provider."
-        },
-        "nextLink": {
-          "type": "string",
-          "readOnly": true,
-          "description": "URL to get the next set of operation list results if there are any."
-        }
-      }
     },
     "CheckNameAvailabilityParameters": {
       "description": "Parameters body to pass for resource name availability check.",
