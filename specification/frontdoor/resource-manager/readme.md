@@ -4,10 +4,10 @@
 
 This is the AutoRest configuration file for Network.
 
-
-
 ---
+
 ## Getting Started
+
 To build the SDK for FrontDoor, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
 
 > `autorest`
@@ -15,22 +15,33 @@ To build the SDK for FrontDoor, simply [Install AutoRest](https://aka.ms/autores
 To see additional help and options, run:
 
 > `autorest --help`
+
 ---
 
 ## Configuration
 
-
-
 ### Basic Information
+
 These are the global settings for the FrontDoor API.
 
 ``` yaml
 title: FrontDoorManagementClient
 description: FrontDoor Client
 openapi-type: arm
-tag: package-2020-05
+tag: package-2020-11
 ```
 
+
+### Tag: package-2020-11
+
+These settings apply only when `--tag=package-2020-11` is specified on the command line.
+
+```yaml $(tag) == 'package-2020-11'
+input-file:
+  - Microsoft.Network/stable/2020-11-01/frontdoor.json
+  - Microsoft.Network/stable/2020-11-01/network.json
+  - Microsoft.Network/stable/2020-11-01/webapplicationfirewall.json
+```
 ### Tag: package-2020-05
 
 These settings apply only when `--tag=package-2020-05` is specified on the command line.
@@ -47,7 +58,6 @@ directive:
     suppress:
       - OperationsAPIImplementation
 ```
-
 
 ### Tag: package-2020-04
 
@@ -66,7 +76,6 @@ directive:
       - OperationsAPIImplementation
 ```
 
-
 ### Tag: package-2020-01
 
 These settings apply only when `--tag=package-2020-01` is specified on the command line.
@@ -83,7 +92,6 @@ directive:
     suppress:
       - OperationsAPIImplementation
 ```
-
 
 ### Tag: package-2019-11
 
@@ -183,8 +191,8 @@ directive:
 ```
 
 ---
-# Code Generation
 
+# Code Generation
 
 ## Swagger to SDK
 
@@ -203,7 +211,6 @@ swagger-to-sdk:
     after_scripts:
       - node sdkauto_afterscript.js frontdoor/resource-manager
 ```
-
 
 ## C#
 
@@ -263,4 +270,3 @@ directive:
 ## AzureResourceSchema
 
 See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
-
