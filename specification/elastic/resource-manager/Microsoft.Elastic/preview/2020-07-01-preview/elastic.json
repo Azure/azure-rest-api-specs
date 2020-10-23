@@ -251,6 +251,9 @@
           }
         },
         "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
         "x-ms-examples": {
           "Monitors_Create": {
             "$ref": "./examples/Monitors_Create.json"
@@ -285,7 +288,7 @@
           {
             "in": "body",
             "name": "body",
-            "description": "Elastic reource model update parameters.",
+            "description": "Elastic resource model update parameters.",
             "schema": {
               "$ref": "#/definitions/ElasticMonitorResourceUpdateParameters"
             }
@@ -735,26 +738,6 @@
         "name": "ProvisioningState"
       }
     },
-    "ElasticOrganizationProperties": {
-      "description": "Elastic Resource Properties.",
-      "type": "object",
-      "properties": {
-        "name": {
-          "description": "Name of the Elastic organization.",
-          "type": "string",
-          "readOnly": true
-        },
-        "id": {
-          "description": "Id of the Elastic organization.",
-          "type": "string",
-          "readOnly": true
-        },
-        "template": {
-          "description": "Name of the template for Elastic cluster.",
-          "type": "string"
-        }
-      }
-    },
     "MonitoringStatus": {
       "description": "Flag specifying if the resource monitoring is enabled or disabled.",
       "enum": [
@@ -767,13 +750,84 @@
         "name": "MonitoringStatus"
       }
     },
+    "ElasticCloudUser": {
+      "description": "Details of the user's elastic account.",
+      "type": "object",
+      "properties": {
+        "emailAddress": {
+          "description": "Email of the Elastic User Account.",
+          "type": "string",
+          "readOnly": true
+        },
+        "id": {
+          "description": "User Id of the elastic account of the User.",
+          "type": "string",
+          "readOnly": true
+        },
+        "elasticCloudSsoDefaultUrl": {
+          "description": "Elastic cloud default dashboard sso URL of the Elastic user account.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "ElasticCloudDeployment": {
+      "description": "Details of the user's elastic deployment associated with the monitor resource.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Elastic deployment name",
+          "type": "string",
+          "readOnly": true
+        },
+        "azureSubscriptionId": {
+          "description": "Associated Azure subscription Id for the elastic deployment.",
+          "type": "string",
+          "readOnly": true
+        },
+        "elasticsearchRegion": {
+          "description": "Region where Deployment at Elastic side took place.",
+          "type": "string",
+          "readOnly": true
+        },
+        "elasticsearchServiceUrl": {
+          "description": "Elasticsearch ingestion endpoint of the Elastic deployment.",
+          "type": "string",
+          "readOnly": true
+        },
+        "kibanaServiceUrl": {
+          "description": "Kibana endpoint of the Elastic deployment.",
+          "type": "string",
+          "readOnly": true
+        },
+        "kibanaSsoUrl": {
+          "description": "Kibana dashboard sso URL of the Elastic deployment.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "ElasticProperties": {
+      "description": "Elastic Resource Properties.",
+      "type": "object",
+      "properties": {
+        "elasticCloudUser": {
+          "description": "Details of the user's elastic account.",
+          "$ref": "#/definitions/ElasticCloudUser"
+        },
+        "elasticCloudDeployment": {
+          "description": "Details of the elastic cloud deployment.",
+          "$ref": "#/definitions/ElasticCloudDeployment"
+        }
+      }
+    },
     "CompanyInfo": {
       "description": "Company information of the user to be passed to partners.",
       "type": "object",
       "properties": {
         "domain": {
           "description": "Domain of the company",
-          "pattern": "^[a-zA-Z_]+?\\.[a-zA-Z]{2,3}$",
+          "pattern": "^([a-zA-Z_]+?\\.){1,2}[a-zA-Z]{2,3}$",
           "maxLength": 50,
           "type": "string"
         },
@@ -794,7 +848,7 @@
           "type": "string"
         },
         "country": {
-          "description": "Country of the compnay location.",
+          "description": "Country of the company location.",
           "maxLength": 50,
           "type": "string"
         }
@@ -821,7 +875,7 @@
         },
         "emailAddress": {
           "description": "Email of the user used by Elastic for contacting them if needed",
-          "pattern": "^\\w+@[a-zA-Z_]+?\\.[a-zA-Z]{2,3}$",
+          "pattern": "^[A-Za-z0-9._%+-]+@(?:[A-Za-z0-9-]+\\.)+[A-Za-z]{2,}$",
           "type": "string"
         },
         "companyInfo": {
@@ -842,9 +896,9 @@
           "description": "Flag specifying if the resource monitoring is enabled or disabled.",
           "$ref": "#/definitions/MonitoringStatus"
         },
-        "elasticOrganizationProperties": {
-          "description": "Elastic organization properties.",
-          "$ref": "#/definitions/ElasticOrganizationProperties"
+        "elasticProperties": {
+          "description": "Elastic cloud properties.",
+          "$ref": "#/definitions/ElasticProperties"
         },
         "userInfo": {
           "description": "User information.",
@@ -957,7 +1011,7 @@
       }
     },
     "ElasticMonitorResourceUpdateParameters": {
-      "description": "Monitor resource update prameters.",
+      "description": "Monitor resource update parameters.",
       "type": "object",
       "properties": {
         "tags": {
