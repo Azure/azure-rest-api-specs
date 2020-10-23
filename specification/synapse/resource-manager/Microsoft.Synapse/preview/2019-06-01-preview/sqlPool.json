@@ -3834,65 +3834,6 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces/{workspaceName}/sqlPools/{sqlPoolName}/transparentDataEncryption/{transparentDataEncryptionName}/operationResults": {
-      "get": {
-        "tags": [
-          "SqlPools, TransparentDataEncryption"
-        ],
-        "operationId": "TransparentDataEncryptionActivities_ListByConfiguration",
-        "description": "Returns a SqlPool's transparent data encryption operation result.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "./workspace.json#/parameters/workspaceNameParameter"
-          },
-          {
-            "type": "string",
-            "in": "path",
-            "name": "sqlPoolName",
-            "description": "SQL pool name",
-            "required": true
-          },
-          {
-            "$ref": "#/parameters/TransparentDataEncryptionNameParameter"
-          }
-        ],
-        "consumes": [],
-        "produces": [
-          "application/json"
-        ],
-        "x-ms-examples": {
-          "List a Sql Pool's transparent data encryption activities": {
-            "$ref": "./examples/SqlPoolTransparentDataEncryptionActivityList.json"
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/TransparentDataEncryptionActivityListResult"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": null
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces/{workspaceName}/sqlPools/{sqlPoolName}/restorePoints/{restorePointName}": {
       "get": {
         "tags": [
@@ -5920,65 +5861,6 @@
         "code",
         "message"
       ]
-    },
-    "TransparentDataEncryptionActivityProperties": {
-      "properties": {
-        "status": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The status of the Sql Pool.",
-          "enum": [
-            "Encrypting",
-            "Decrypting"
-          ],
-          "x-ms-enum": {
-            "name": "TransparentDataEncryptionActivityStatus",
-            "modelAsString": true
-          }
-        },
-        "percentComplete": {
-          "readOnly": true,
-          "type": "number",
-          "format": "float",
-          "description": "The percent complete of the transparent data encryption scan for a Sql Pool."
-        }
-      },
-      "description": "Represents the properties of a Sql pool transparent data encryption Scan."
-    },
-    "TransparentDataEncryptionActivity": {
-      "properties": {
-        "location": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Resource location."
-        },
-        "properties": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/TransparentDataEncryptionActivityProperties",
-          "description": "Represents the properties of the resource."
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ProxyResource"
-        }
-      ],
-      "description": "Represents a database transparent data encryption Scan."
-    },
-    "TransparentDataEncryptionActivityListResult": {
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/TransparentDataEncryptionActivity"
-          },
-          "description": "The list of Sql pool transparent data encryption activities."
-        }
-      },
-      "required": [
-        "value"
-      ],
-      "description": "Represents the response to a list sql pool transparent data encryption activity request."
     }
   },
   "parameters": {
@@ -5995,21 +5877,6 @@
         "name": "DataMaskingPolicyName"
       },
       "description": "The name of the data masking policy for which the masking rule applies.",
-      "x-ms-parameter-location": "method"
-    },
-    "TransparentDataEncryptionNameParameter": {
-      "name": "transparentDataEncryptionName",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "enum": [
-        "current"
-      ],
-      "description": "The name of the transparent data encryption configuration.",
-      "x-ms-enum": {
-        "modelAsString": true,
-        "name": "TransparentDataEncryptionName"
-      },
       "x-ms-parameter-location": "method"
     }
   }
