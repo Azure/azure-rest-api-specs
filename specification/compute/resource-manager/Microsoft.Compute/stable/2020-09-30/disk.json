@@ -108,6 +108,9 @@
           },
           "Create an ultra managed disk with logicalSectorSize 512E": {
             "$ref": "./examples/CreateAManagedDiskWithLogicalSectorSize.json"
+          },
+          "Create an empty managed disk in extended location.": {
+            "$ref": "./examples/CreateAnEmptyManagedDiskInExtendedLocation.json"
           }
         },
         "x-ms-long-running-operation": true
@@ -1521,7 +1524,7 @@
         },
         "extendedLocation": {
           "$ref": "#/definitions/ExtendedLocation",
-          "description": "The extended location of the Disk."
+          "description": "The extended location where the disk will be created. Extended location cannot be changed."
         },
         "properties": {
           "x-ms-client-flatten": true,
@@ -2370,7 +2373,7 @@
         },
         "extendedLocation": {
           "$ref": "#/definitions/ExtendedLocation",
-          "description": "The extended location of the Snapshot."
+          "description": "The extended location where the snapshot will be created. Extended location cannot be changed."
         },
         "properties": {
           "x-ms-client-flatten": true,
