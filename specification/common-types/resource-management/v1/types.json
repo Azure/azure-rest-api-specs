@@ -13,7 +13,7 @@
         "id": {
           "readOnly": true,
           "type": "string",
-          "description": "Fully qualified resource Id for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}"
+          "description": "Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}"
         },
         "name": {
           "readOnly": true,
@@ -23,7 +23,7 @@
         "type": {
           "readOnly": true,
           "type": "string",
-          "description": "The type of the resource. Ex- Microsoft.Compute/virtualMachines or Microsoft.Storage/storageAccounts."
+          "description": "The type of the resource. E.g. \"Microsoft.Compute/virtualMachines\" or \"Microsoft.Storage/storageAccounts\""
         }
       },
       "x-ms-azure-resource": true
@@ -47,7 +47,7 @@
     },
     "TrackedResource": {
       "title": "Tracked Resource",
-      "description": "The resource model definition for an Azure Resource Manager tracked top level resource which has 'tags' and 'location' (required)",
+      "description": "The resource model definition for an Azure Resource Manager tracked top level resource which has 'tags' and a 'location'",
       "properties": {
         "tags": {
           "type": "object",
@@ -81,7 +81,7 @@
     },
     "ProxyResource": {
       "title": "Proxy Resource",
-      "description": "The resource model definition for a Azure Resource Manager proxy resource. It will have everything other than required location and tags",
+      "description": "The resource model definition for a Azure Resource Manager proxy resource. It will not have tags and a location",
       "allOf": [
         {
           "$ref": "#/definitions/Resource"
@@ -97,7 +97,7 @@
           "x-ms-mutability": [
             "read"
           ],
-          "description": "Fully qualified resource Id for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}"
+          "description": "Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}"
         },
         "name": {
           "readOnly": true,
@@ -110,7 +110,7 @@
           "x-ms-mutability": [
             "read"
           ],
-          "description": "The type of the resource. Ex- Microsoft.Compute/virtualMachines or Microsoft.Storage/storageAccounts.."
+          "description": "The type of the resource. E.g. \"Microsoft.Compute/virtualMachines\" or \"Microsoft.Storage/storageAccounts\""
         },
         "location": {
           "type": "string",
@@ -345,22 +345,22 @@
           "description": "Contains the localized display information for this particular operation / action.",
           "properties": {
             "provider": {
-              "description": "The localized friendly form of the resource provider name, e.g. Microsoft Monitoring Insights\" or \"Microsoft Compute\"",
+              "description": "The localized friendly form of the resource provider name, e.g. \"Microsoft Monitoring Insights\" or \"Microsoft Compute\".",
               "type": "string",
               "readOnly": true
             },
             "resource": {
-              "description": "The localized friendly form of the resource type related to this action/operation � it should match the public documentation for the resource provider, e.g. \"Virtual Machines\" or \"Job Schedule Collections\"",
+              "description": "The localized friendly name of the resource type related to this action/operation. It should match the public documentation for the resource provider, e.g. \"Virtual Machines\" or \"Job Schedule Collections\".",
               "type": "string",
               "readOnly": true
             },
             "operation": {
-              "description": "Required.The localized friendly name for the operation, as it should be shown to the user. It should be concise (to fit in drop downs) but clear (i.e. self-documenting), e.g. \"Create or Update Virtual Machine\", \"Restart Virtual Machine\"",
+              "description": "The localized friendly name for the operation. It should be concise (to fit in drop downs) but clear (i.e. self-documenting), e.g. \"Create or Update Virtual Machine\", \"Restart Virtual Machine\".",
               "type": "string",
               "readOnly": true
             },
             "description": {
-              "description": "Required.The localized friendly description for the operation, as it should be shown to the user. It should be thorough, yet concise � it will be used in tool tips and detailed views.",
+              "description": "The localized friendly description of the operation, as it should be shown to the user. It should be thorough, yet concise; it will be used in tool tips and detailed views.",
               "type": "string",
               "readOnly": true
             }
@@ -402,11 +402,13 @@
           "items": {
             "$ref": "#/definitions/Operation"
           },
-          "description": "List of operations supported by the resource provider"
+          "description": "List of operations supported by the resource provider",
+          "readOnly": true
         },
         "nextLink": {
           "type": "string",
-          "description": "URL to get the next set of operation list results (if there are any)."
+          "description": "URL to get the next set of operation list results (if there are any).",
+          "readOnly": true
         }
       }
     },
@@ -519,7 +521,7 @@
           "type": "string"
         },
         "identity": {
-          "description": "The client id of the identity which will be used to access key vault.",
+          "description": "The client ID of the identity which will be used to access key vault.",
           "type": "string"
         }
       }
