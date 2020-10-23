@@ -1781,10 +1781,10 @@
           "description": "The commitment tier in use for the current month."
         },
         "maxJobCount": {
-          "readOnly": true,
           "type": "integer",
           "format": "int32",
-          "minimum": 1,          
+          "minimum": 1,
+          "default": 3,
           "description": "The maximum supported jobs running under the account at the same time."
         },
         "systemMaxJobCount": {
@@ -1794,10 +1794,10 @@
           "description": "The system defined maximum supported jobs running under the account at the same time, which restricts the maximum number of running jobs the user can set for the account."
         },
         "maxDegreeOfParallelism": {
-          "readOnly": true,
           "type": "integer",
           "format": "int32",
-          "minimum": 1,          
+          "minimum": 1,
+          "default": 30,
           "description": "The maximum supported degree of parallelism for this account."
         },
         "systemMaxDegreeOfParallelism": {
@@ -1821,11 +1821,11 @@
           "description": "The minimum supported priority per job for this account."
         },
         "queryStoreRetention": {
-          "readOnly": true,
           "type": "integer",
           "format": "int32",
           "minimum": 1,
-          "maximum": 180,         
+          "maximum": 180,
+          "default": 30,
           "description": "The number of days that job metadata is retained."
         }
       },
