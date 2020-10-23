@@ -349,6 +349,48 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/getNotebookAccessToken": {
+      "post": {
+        "tags": [
+          "Workspaces"
+        ],
+        "description": "return notebook access token and refresh token",
+        "operationId": "Workspaces_GetNotebookAccessToken",
+        "x-ms-examples": {
+          "List Workspace Keys": {
+            "$ref": "./examples/getNotebookAccessToken.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/APIVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "#/definitions/NotebookAccessTokenResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "#/definitions/MachineLearningServiceError"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/listKeys": {
       "post": {
         "tags": [
@@ -2816,6 +2858,39 @@
         "containerRegistryCredentials": {
           "readOnly": true,
           "$ref": "#/definitions/RegistryListCredentialsResult"
+        }
+      }
+    },
+    "NotebookAccessTokenResult": {
+      "type": "object",
+      "properties": {
+        "notebookResourceId": {
+          "readOnly": true,
+          "type": "string"
+        },
+        "hostName": {
+          "readOnly": true,
+          "type": "string"
+        },
+        "publicDns": {
+          "readOnly": true,
+          "type": "string"
+        },
+        "access_token": {
+          "readOnly": true,
+          "type": "string"
+        },
+        "expires_in": {
+          "readOnly": true,
+          "type": "string"
+        },
+        "refresh_token": {
+          "readOnly": true,
+          "type": "string"
+        },
+        "scope": {
+          "readOnly": true,
+          "type": "string"
         }
       }
     },
