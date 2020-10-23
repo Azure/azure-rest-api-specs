@@ -1780,7 +1780,7 @@
           },
           "description": "The commitment tier in use for the current month."
         },
-        "maxJobCount": {         
+        "maxJobCount": {
           "type": "integer",
           "format": "int32",
           "minimum": 1,
@@ -1793,7 +1793,7 @@
           "format": "int32",
           "description": "The system defined maximum supported jobs running under the account at the same time, which restricts the maximum number of running jobs the user can set for the account."
         },
-        "maxDegreeOfParallelism": {         
+        "maxDegreeOfParallelism": {
           "type": "integer",
           "format": "int32",
           "minimum": 1,
@@ -1820,7 +1820,7 @@
           "minimum": 1,
           "description": "The minimum supported priority per job for this account."
         },
-        "queryStoreRetention": {         
+        "queryStoreRetention": {
           "type": "integer",
           "format": "int32",
           "minimum": 1,
@@ -2258,20 +2258,20 @@
       },
       "description": "Data Lake Analytics VirtualNetwork rule list information."
     },
-    "HiveMetastore":{
-    "allOf": [
-      {
-        "$ref": "#/definitions/SubResource"
-      }
-    ],
-    "properties": {
+    "HiveMetastore": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/SubResource"
+        }
+      ],
       "properties": {
-        "readOnly": true,
-        "x-ms-client-flatten": true,
-        "$ref": "#/definitions/HiveMetastoreProperties",
-        "description": "The  HiveMetastoreProperties rule properties."
+        "properties": {
+          "readOnly": true,
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/HiveMetastoreProperties",
+          "description": "The  HiveMetastoreProperties rule properties."
+        }
       }
-    }
     },
     "HiveMetastoreProperties": {
       "properties": {
