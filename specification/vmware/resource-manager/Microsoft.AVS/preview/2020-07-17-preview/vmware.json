@@ -139,6 +139,22 @@
       "type": "string",
       "description": "NSX VM Group identifier. Generally the same as the VM Group's display name",
       "x-ms-parameter-location": "method"
+    },
+    "virtualMachineId": {
+      "name": "virtualMachineId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "NSX Virtual Machine identifier.",
+      "x-ms-parameter-location": "method"
+    },
+    "gatewayId": {
+      "name": "gatewayId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "NSX Gateway identifier. Generally the same as the Gateway's display name",
+      "x-ms-parameter-location": "method"
     }
   },
   "paths": {
@@ -184,7 +200,7 @@
           "Locations"
         ],
         "description": "Lists all of the available storage policies",
-        "operationId": "DefaultStoragePolicies_List",
+        "operationId": "Locations_ListDefaultStoragePolicies",
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         },
@@ -2034,6 +2050,51 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/workloadNetworks/default/gateways/{gatewayId}": {
+      "get": {
+        "operationId": "WorkloadNetworks_GetGateway",
+        "tags": [
+          "WorkloadNetworks"
+        ],
+        "summary": "Get a gateway by id in a private cloud workload network.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/privateCloudName"
+          },
+          {
+            "$ref": "#/parameters/gatewayId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/WorkloadNetworkGateway"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "WorkloadNetworks_GetGateway": {
+            "$ref": "./examples/WorkloadNetworks_GetGateway.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/workloadNetworks/default/portMirroringProfiles": {
       "get": {
         "operationId": "WorkloadNetworks_ListPortMirroring",
@@ -2579,6 +2640,51 @@
         "x-ms-examples": {
           "WorkloadNetworks_ListVirtualMachines": {
             "$ref": "./examples/WorkloadNetworks_ListVirtualMachines.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/workloadNetworks/default/virtualMachines/{virtualMachineId}": {
+      "get": {
+        "operationId": "WorkloadNetworks_GetVirtualMachine",
+        "tags": [
+          "WorkloadNetworks"
+        ],
+        "summary": "Get a virtual machine by id in a private cloud workload network.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/privateCloudName"
+          },
+          {
+            "$ref": "#/parameters/virtualMachineId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/WorkloadNetworkVirtualMachine"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "WorkloadNetworks_GetVirtualMachine": {
+            "$ref": "./examples/WorkloadNetworks_GetVirtualMachine.json"
           }
         }
       }
@@ -3599,9 +3705,11 @@
           "type": "string"
         },
         "subnet": {
+          "description": "Subnet which to connect segment to.",
           "$ref": "#/definitions/WorkloadNetworkSegmentSubnet"
         },
         "portVif": {
+          "description": "Port Vif which segment is associated with.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/WorkloadNetworkSegmentPortVif"
@@ -3778,6 +3886,7 @@
       ],
       "properties": {
         "properties": {
+          "description": "DHCP properties.",
           "$ref": "#/definitions/WorkloadNetworkDhcpEntity",
           "x-ms-client-flatten": true
         }
@@ -3871,6 +3980,7 @@
       ],
       "properties": {
         "properties": {
+          "description": "Port Mirroring Properties.",
           "$ref": "#/definitions/WorkloadNetworkPortMirroringProperties",
           "x-ms-client-flatten": true
         }
@@ -3952,6 +4062,7 @@
       ],
       "properties": {
         "properties": {
+          "description": "VM Group properties.",
           "$ref": "#/definitions/WorkloadNetworkVMGroupProperties",
           "x-ms-client-flatten": true
         }
@@ -4005,6 +4116,7 @@
       ],
       "properties": {
         "properties": {
+          "description": "Virtual machine properties.",
           "$ref": "#/definitions/WorkloadNetworkVirtualMachineProperties",
           "x-ms-client-flatten": true
         }
@@ -4051,7 +4163,9 @@
       ],
       "properties": {
         "properties": {
-          "$ref": "#/definitions/WorkloadNetworkGatewayProperties"
+          "description": "Gateway properties.",
+          "$ref": "#/definitions/WorkloadNetworkGatewayProperties",
+          "x-ms-client-flatten": true
         }
       }
     },
