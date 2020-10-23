@@ -1730,6 +1730,9 @@
           "200": {
             "description": "Successfully deleted the sensitivity label."
           },
+          "204": {
+            "description": "No content"
+          },
           "default": {
             "description": "*** Error Responses: ***\n\n * 400 DatawarehouseDatabaseIsDeactivated - Could not execute Data Classification operation because the database is paused. Please resume it.\n\n * 400 SensitivityLabelSourceNameNotSupported - The specified sensitivity label source is not valid\n\n * 404 SensitivityLabelsColumnNotFound - The specified schema/table/column could not be found\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 DatabaseDoesNotExist - User has specified a database name that does not exist on this server instance.\n\n * 404 SensitivityLabelsLabelNotFound - The specified sensitivity label could not be found\n\n * 501 SensitivityLabelRecommendedSourceNameNotSupported - 'Recommended' sensitivity label source is not supported yet"
           }
@@ -2836,6 +2839,9 @@
           "200": {
             "description": "Successfully removed the database vulnerability assessment rule baseline."
           },
+          "204": {
+            "description": "No content"
+          },
           "default": {
             "description": "*** Error Responses: ***\n\n * 400 VulnerabilityAssessmentStorageAuthenticationFailed - Could not authenticate to storage account '{0}' .\n\n * 400 VulnerabilityAssessmentInvalidPolicy - Vulnerability Assessment settings don't exist or invalid storage specified in settings. \n\n * 400 VulnerabilityAssessmentDatawarehouseDatabaseIsDeactivated - Could not execute Vulnerability Assessment operation because the database is paused. Please resume it.\n\n * 400 InvalidVulnerabilityAssessmentOperationRequest - The vulnerability assessment operation request does not exist or has no properties object.\n\n * 400 DataSecurityInvalidUserSuppliedParameter - An invalid parameter value was provided by the client.\n\n * 404 VulnerabilityAssessmentInvalidStorageAccount - The storage account '{0}' that was defined in the policy is invalid.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 SourceDatabaseNotFound - The source database does not exist.\n\n * 404 DatabaseDoesNotExist - User has specified a database name that does not exist on this server instance.\n\n * 404 VulnerabilityAssessmentRuleDoesNotExists - Rule '{0}' does not exist.\n\n * 404 VulnerabilityAssessmentBaselineDoesNotExists - Baseline does not exist for rule '{0}'\n\n * 500 DatabaseIsUnavailable - Loading failed. Please try again later."
           }
@@ -3124,6 +3130,9 @@
         "responses": {
           "200": {
             "description": "Successfully removed the Sql pool vulnerability assessment."
+          },
+          "204": {
+            "description": "No content"
           },
           "default": {
             "description": "*** Error Responses: ***\n\n * 400 InvalidStorageAccountName - The provided storage account is not valid or does not exist.\n\n * 400 InvalidStorageAccountCredentials - The provided storage account shared access signature or account storage key is not valid.\n\n * 400 DatabaseVulnerabilityAssessmentMissingStorageContainerPath - Storage container path must be provided if it isn't set in server level policy\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 SourceDatabaseNotFound - The source database does not exist.\n\n * 404 DatabaseDoesNotExist - User has specified a database name that does not exist on this server instance.\n\n * 500 DatabaseIsUnavailable - Loading failed. Please try again later."
