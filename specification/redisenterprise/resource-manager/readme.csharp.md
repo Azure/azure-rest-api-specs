@@ -10,6 +10,6 @@ csharp:
   payload-flattening-threshold: 1
   clear-output-folder: true
   client-side-validation: false
-  namespace: Microsoft.Cache
-  output-folder: $(csharp-sdks-folder)/redisenterprise/management/Microsoft.Cache/GeneratedProtocol
+  namespace: Microsoft.Azure.Management.RedisEnterprise
+  output-folder: $(csharp-sdks-folder)/redisenterprise/Microsoft.Azure.Management.RedisEnterprise/src/Generated
 ```
