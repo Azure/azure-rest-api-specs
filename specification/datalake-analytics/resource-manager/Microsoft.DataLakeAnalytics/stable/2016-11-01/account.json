@@ -1781,6 +1781,7 @@
           "description": "The commitment tier in use for the current month."
         },
         "maxJobCount": {
+          "readOnly": true,
           "type": "integer",
           "format": "int32",
           "minimum": 1,
@@ -1797,6 +1798,8 @@
           "readOnly": true,
           "type": "integer",
           "format": "int32",
+          "minimum": 1,
+          "default": 30,
           "description": "The maximum supported degree of parallelism for this account."
         },
         "systemMaxDegreeOfParallelism": {
@@ -1820,6 +1823,7 @@
           "description": "The minimum supported priority per job for this account."
         },
         "queryStoreRetention": {
+          "readOnly": true,
           "type": "integer",
           "format": "int32",
           "minimum": 1,
