@@ -1,4 +1,4 @@
-# redisenterprise
+# RedisEnterprise
 
 > see https://aka.ms/autorest
 
@@ -22,7 +22,7 @@ For other options on installation see [Installing AutoRest](https://aka.ms/autor
 
 ### Basic Information
 
-These are the global settings for the redisenterprise.
+These are the global settings for the RedisEnterprise API.
 
 ```yaml
 openapi-type: arm
@@ -49,6 +49,7 @@ This is not used by Autorest itself.
 
 ```yaml $(swagger-to-sdk)
 swagger-to-sdk:
+  - repo: azure-sdk-for-net
   - repo: azure-sdk-for-python
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
