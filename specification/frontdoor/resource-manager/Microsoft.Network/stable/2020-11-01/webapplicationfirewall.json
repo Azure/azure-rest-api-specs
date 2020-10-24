@@ -270,8 +270,15 @@
         "etag": {
           "type": "string",
           "description": "Gets a unique read-only string that changes whenever the resource is updated."
+        },
+        "sku": {
+          "description": "The pricing tier of web application firewall policy.",
+          "$ref": "#/definitions/Sku"
         }
       },
+      "required": [
+        "sku"
+      ],
       "allOf": [
         {
           "$ref": "./network.json#/definitions/Resource"
@@ -281,10 +288,6 @@
     "WebApplicationFirewallPolicyProperties": {
       "description": "Defines web application firewall policy properties.",
       "properties": {
-        "sku": {
-          "description": "The pricing tier of web application firewall policy.",
-          "$ref": "#/definitions/Sku"
-        },
         "policySettings": {
           "description": "Describes settings for the policy.",
           "$ref": "#/definitions/PolicySettings"
