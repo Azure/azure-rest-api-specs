@@ -1880,6 +1880,10 @@
           "$ref": "#/definitions/Sku",
           "description": "The SKU of the Redis cache to deploy."
         },
+        "redisVersion": {
+          "type": "string",
+          "description": "Redis version. Valid values: (4, 6)"
+        },
         "subnetId": {
           "type": "string",
           "pattern": "^/subscriptions/[^/]*/resourceGroups/[^/]*/providers/Microsoft.(ClassicNetwork|Network)/virtualNetworks/[^/]*/subnets/[^/]*$",
@@ -1919,11 +1923,6 @@
     },
     "RedisProperties": {
       "properties": {
-        "redisVersion": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Redis version."
-        },
         "provisioningState": {
           "readOnly": true,
           "type": "string",
@@ -2070,18 +2069,6 @@
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/RedisCreateProperties",
           "description": "Redis cache properties."
-        },
-        "redisVersion": {
-          "type": "string",
-          "description": "Redis version. Valid values: (4, 6)",
-          "enum": [
-            "4",
-            "6"
-          ],
-          "x-ms-enum": {
-            "name": "RedisVersion",
-            "modelAsString": true
-          }
         },
         "zones": {
           "type": "array",
