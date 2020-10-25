@@ -2938,6 +2938,102 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{operationalInsightsResourceProvider}/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/incidents/{incidentId}/alerts": {
+      "post": {
+        "x-ms-examples": {
+          "Get all incident alerts.": {
+            "$ref": "./examples/incidents/GetAllIncidentAlerts.json"
+          }
+        },
+        "tags": [
+          "IncidentAlerts"
+        ],
+        "description": "Gets all incident alerts.",
+        "operationId": "Incidents_ListOfAlerts",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/OperationalInsightsResourceProvider"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "#/parameters/IncidentId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/IncidentAlertList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{operationalInsightsResourceProvider}/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/incidents/{incidentId}/bookmarks": {
+      "post": {
+        "x-ms-examples": {
+          "Get all incident bookmarks.": {
+            "$ref": "./examples/incidents/GetAllIncidentBookmarks.json"
+          }
+        },
+        "tags": [
+          "IncidentBookmarks"
+        ],
+        "description": "Gets all incident bookmarks.",
+        "operationId": "Incidents_ListOfBookmarks",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/OperationalInsightsResourceProvider"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "#/parameters/IncidentId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/IncidentBookmarkList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{operationalInsightsResourceProvider}/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/incidents/{incidentId}/comments": {
       "get": {
         "x-ms-examples": {
@@ -6687,6 +6783,91 @@
       },
       "type": "object"
     },
+    "HuntingBookmark": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/Entity"
+        }
+      ],
+      "description": "Represents a Hunting bookmark entity.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/HuntingBookmarkProperties",
+          "description": "HuntingBookmark entity properties",
+          "x-ms-client-flatten": true
+        }
+      },
+      "type": "object",
+      "x-ms-discriminator-value": "Bookmark"
+    },
+    "HuntingBookmarkProperties": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/EntityCommonProperties"
+        }
+      ],
+      "description": "Describes bookmark properties",
+      "properties": {
+        "created": {
+          "description": "The time the bookmark was created",
+          "format": "date-time",
+          "type": "string"
+        },
+        "createdBy": {
+          "$ref": "#/definitions/UserInfo",
+          "description": "Describes a user that created the bookmark",
+          "type": "object"
+        },
+        "displayName": {
+          "description": "The display name of the bookmark",
+          "type": "string"
+        },
+        "eventTime": {
+          "description": "The time of the event",
+          "format": "date-time",
+          "type": "string"
+        },
+        "labels": {
+          "description": "List of labels relevant to this bookmark",
+          "items": {
+            "$ref": "#/definitions/Label"
+          },
+          "type": "array"
+        },
+        "notes": {
+          "description": "The notes of the bookmark",
+          "type": "string"
+        },
+        "query": {
+          "description": "The query of the bookmark.",
+          "type": "string"
+        },
+        "queryResult": {
+          "description": "The query result of the bookmark.",
+          "type": "string"
+        },
+        "updated": {
+          "description": "The last time the bookmark was updated",
+          "format": "date-time",
+          "type": "string"
+        },
+        "updatedBy": {
+          "$ref": "#/definitions/UserInfo",
+          "description": "Describes a user that updated the bookmark",
+          "type": "object"
+        },
+        "incidentInfo": {
+          "$ref": "#/definitions/IncidentInfo",
+          "description": "Describes an incident that relates to bookmark",
+          "type": "object"
+        }
+      },
+      "required": [
+        "displayName",
+        "query"
+      ],
+      "type": "object"
+    },
     "IncidentAdditionalData": {
       "description": "Incident additional data property bag.",
       "properties": {
@@ -6724,6 +6905,36 @@
         }
       },
       "type": "object"
+    },
+    "IncidentAlertList": {
+      "description": "List of incident alerts.",
+      "properties": {
+        "value": {
+          "description": "Array of incident alerts.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SecurityAlert"
+          }
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "IncidentBookmarkList": {
+      "description": "List of incident bookmarks.",
+      "properties": {
+        "value": {
+          "description": "Array of incident bookmarks.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/HuntingBookmark"
+          }
+        }
+      },
+      "required": [
+        "value"
+      ]
     },
     "IncidentComment": {
       "allOf": [
@@ -7387,7 +7598,9 @@
             "Azure Security Center",
             "Azure Advanced Threat Protection",
             "Azure Active Directory Identity Protection",
-            "Azure Security Center for IoT"
+            "Azure Security Center for IoT",
+            "Office 365 Advanced Threat Protection",
+            "Microsoft Defender Advanced Threat Protection"
           ],
           "type": "string",
           "x-ms-enum": {
@@ -8830,11 +9043,11 @@
           "$ref": "#/definitions/DataConnector"
         }
       ],
-      "description": "Represents threat intelligence data connector.",
+      "description": "Data connector to pull threat intelligence data from TIP products.",
       "properties": {
         "properties": {
           "$ref": "#/definitions/TIDataConnectorProperties",
-          "description": "TI (Threat Intelligence) data connector properties.",
+          "description": "Threat Intelligence Platforms data connector properties.",
           "x-ms-client-flatten": true
         }
       },
@@ -8842,7 +9055,7 @@
       "x-ms-discriminator-value": "ThreatIntelligence"
     },
     "TIDataConnectorDataTypes": {
-      "description": "The available data types for TI (Threat Intelligence) data connector.",
+      "description": "The available data types for Threat Intelligence Platforms data connector.",
       "properties": {
         "indicators": {
           "allOf": [
@@ -8850,7 +9063,7 @@
               "$ref": "#/definitions/DataConnectorDataTypeCommon"
             }
           ],
-          "description": "Data type for indicators connection.",
+          "description": "Data type for Threat Intelligence Platforms data connector.",
           "type": "object"
         }
       },
@@ -8862,7 +9075,7 @@
           "$ref": "#/definitions/DataConnectorTenantId"
         }
       ],
-      "description": "TI (Threat Intelligence) data connector properties.",
+      "description": "Threat Intelligence Platforms data connector properties.",
       "properties": {
         "dataTypes": {
           "$ref": "#/definitions/TIDataConnectorDataTypes",
@@ -8877,11 +9090,11 @@
           "$ref": "#/definitions/DataConnectorsCheckRequirements"
         }
       ],
-      "description": "Represents threat intelligence requirements check request.",
+      "description": "Threat Intelligence Platforms data connector check requirements",
       "properties": {
         "properties": {
           "$ref": "#/definitions/TICheckRequirementsProperties",
-          "description": "TI (Threat Intelligence) requirements check properties.",
+          "description": "Threat Intelligence Platforms data connector check required properties",
           "x-ms-client-flatten": true
         }
       },
@@ -8894,7 +9107,7 @@
           "$ref": "#/definitions/DataConnectorTenantId"
         }
       ],
-      "description": "TI (Threat Intelligence) requirements check properties.",
+      "description": "Threat Intelligence Platforms data connector required properties.",
       "properties": {},
       "type": "object"
     },
@@ -8904,11 +9117,11 @@
           "$ref": "#/definitions/DataConnector"
         }
       ],
-      "description": "Represents threat intelligence taxii data connector.",
+      "description": "Data connector to pull Threat intelligence data from TAXII 2.0/2.1 server",
       "properties": {
         "properties": {
           "$ref": "#/definitions/TiTaxiiDataConnectorProperties",
-          "description": "Threat intelligence taxii client data connector properties.",
+          "description": "Threat intelligence TAXII data connector properties.",
           "x-ms-client-flatten": true
         }
       },
@@ -8916,7 +9129,7 @@
       "x-ms-discriminator-value": "ThreatIntelligenceTaxii"
     },
     "TiTaxiiDataConnectorDataTypes": {
-      "description": "The available data types for Threat Intelligence taxii client data connector.",
+      "description": "The available data types for Threat Intelligence TAXII data connector.",
       "properties": {
         "taxiiClient": {
           "allOf": [
@@ -8924,7 +9137,7 @@
               "$ref": "#/definitions/DataConnectorDataTypeCommon"
             }
           ],
-          "description": "Data type for taxii client.",
+          "description": "Data type for TAXII connector.",
           "type": "object"
         }
       },
@@ -8936,35 +9149,35 @@
           "$ref": "#/definitions/DataConnectorTenantId"
         }
       ],
-      "description": "Threat Intelligence taxii client data connector properties.",
+      "description": "Threat Intelligence TAXII data connector properties.",
       "properties": {
         "workspaceId": {
           "description": "The workspace id.",
           "type": "string"
         },
         "friendlyName": {
-          "description": "The friendly name for taxii client connector.",
+          "description": "The friendly name for the TAXII server.",
           "type": "string"
         },
         "taxiiServer": {
-          "description": "The API root server for taxii client.",
+          "description": "The API root for the TAXII server.",
           "type": "string"
         },
         "collectionId": {
-          "description": "The taxii collection id.",
+          "description": "The collection id of the TAXII server.",
           "type": "string"
         },
         "userName": {
-          "description": "The taxii server user name.",
+          "description": "The userName for the TAXII server.",
           "type": "string"
         },
         "password": {
-          "description": "The taxii server password.",
+          "description": "The password for the TAXII server.",
           "type": "string"
         },
         "dataTypes": {
           "$ref": "#/definitions/TiTaxiiDataConnectorDataTypes",
-          "description": "The available data types for the connector."
+          "description": "The available data types for Threat Intelligence TAXII data connector."
         }
       },
       "type": "object"
@@ -8975,11 +9188,11 @@
           "$ref": "#/definitions/DataConnectorsCheckRequirements"
         }
       ],
-      "description": "Represents threat intelligence requirements check request.",
+      "description": "Threat Intelligence TAXII data connector check requirements",
       "properties": {
         "properties": {
           "$ref": "#/definitions/TiTaxiiCheckRequirementsProperties",
-          "description": "Ti Taxii (Threat Intelligence Taxii) requirements check properties.",
+          "description": "Threat Intelligence TAXII check required properties.",
           "x-ms-client-flatten": true
         }
       },
@@ -8992,7 +9205,7 @@
           "$ref": "#/definitions/DataConnectorTenantId"
         }
       ],
-      "description": "Threat Intelligence taxii client data connector properties.",
+      "description": "Threat Intelligence TAXII data connector required properties.",
       "type": "object"
     },
     "ThreatIntelligence": {
