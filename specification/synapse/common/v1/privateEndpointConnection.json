@@ -180,6 +180,7 @@
       }
     },
     "GroupConnectivityInformation": {
+      "description": "Group connectivity information",
       "allOf": [
         {
           "$ref": "#/definitions/GroupConnectivityInformationBase"
@@ -187,6 +188,7 @@
       ]
     },
     "GroupConnectivityInformationForPrivateLinkHub": {
+      "description": "Group connectivity information for PrivateLinkHub",
       "allOf": [
         {
           "$ref": "#/definitions/GroupConnectivityInformationBase"
@@ -194,6 +196,7 @@
       ]
     },
     "PrivateLinkServiceProxy": {
+      "description": "PrivateLink service proxy",
       "allOf": [
         {
           "$ref": "#/definitions/PrivateLinkServiceProxyBase"
@@ -201,6 +204,7 @@
         {
           "properties": {
             "groupConnectivityInformation": {
+              "description": "Group connectivity information",
               "type": "array",
               "items": {
                 "$ref": "#/definitions/GroupConnectivityInformation"
@@ -211,6 +215,7 @@
       ]
     },
     "PrivateLinkServiceProxyForPrivateLinkHub": {
+      "description": "PrivateLink service proxy for PrivateLinkHub",
       "allOf": [
         {
           "$ref": "#/definitions/PrivateLinkServiceProxyBase"
@@ -218,9 +223,11 @@
         {
           "properties": {
             "id": {
+              "description": "PrivateLinkServiceProxyForPrivateLinkHub ID",
               "type": "string"
             },
             "groupConnectivityInformation": {
+              "description": "Group connectivity information",
               "type": "array",
               "items": {
                 "$ref": "#/definitions/GroupConnectivityInformationForPrivateLinkHub"
@@ -233,24 +240,30 @@
     "RemotePrivateEndpointBase": {
       "properties": {
         "id": {
+          "description": "Remote Private endpoint ID",
           "type": "string"
         },
         "location": {
+          "description": "Location (region) or remote private endpoint",
           "type": "string"
         },
         "immutableSubscriptionId": {
+          "description": "Immnutable subscription ID",
           "type": "string"
         },
         "immutableResourceId": {
+          "description": "Immnutable resource ID",
           "type": "string"
         },
         "manualPrivateLinkServiceConnections": {
+          "description": "Manual private link service connections",
           "type": "array",
           "items": {
             "$ref": "#/definitions/PrivateLinkServiceConnection"
           }
         },
         "privateLinkServiceConnections": {
+          "description": "Private link service connections",
           "type": "array",
           "items": {
             "$ref": "#/definitions/PrivateLinkServiceConnection"

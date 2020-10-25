@@ -90,6 +90,8 @@ directive:
     suppress:
         - R4011
     reason: SQL Pools APIs are proxy APIs that call SQL DB APIs. The SQL DB delete restore points API only supports return method 200, so we cannot support 204. It is not possible for the SQL DB team to add 204 support for delete restore points.
+  - suppress: DescriptionAndTitleMissing
+    reason: Temporary suppression in branch to reduce clutter in report.
 ```
 
 ---

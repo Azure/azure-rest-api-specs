@@ -81,6 +81,7 @@
           {
             "in": "body",
             "name": "managedIdentitySqlControlSettings",
+            "description": "ManagedIdentitySqlControlSettings as JSON request body",
             "required": true,
             "schema": {
               "$ref": "#/definitions/ManagedIdentitySqlControlSettingsInfo"
@@ -131,24 +132,30 @@
   },
   "definitions": {
     "GrantSqlControlToManagedIdentityProperties": {
+      "description": "Grant object properties",
       "properties": {
         "desiredState": {
+          "description": "Desired state",
           "type": "string"
         },
         "actualState": {
+          "description": "Actual state",
           "type": "string"
         }
       }
     },
     "ManagedIdentitySqlControlSettingsProperties": {
+      "description": "Managed identity poperties",
       "properties": {
         "grantSqlControlToManagedIdentity": {
+          "description": "Grant object properties",
           "type": "object",
           "$ref": "#/definitions/GrantSqlControlToManagedIdentityProperties"
         }
       }
     },
     "ManagedIdentitySqlControlSettingsInfo": {
+      "description": "Managed identity type passed between APIs",
       "allOf": [
         {
           "$ref": "../../../../common/v1/types.json#/definitions/WorkspaceSubResource"
@@ -157,6 +164,7 @@
           "type": "object",
           "properties": {
             "properties": {
+              "description": "Managed identity poperties",
               "type": "object",
               "$ref": "#/definitions/ManagedIdentitySqlControlSettingsProperties"
             }

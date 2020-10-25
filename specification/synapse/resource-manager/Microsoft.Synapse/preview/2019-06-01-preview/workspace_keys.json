@@ -99,6 +99,7 @@
           {
             "in": "body",
             "name": "keyInfo",
+            "description": "KeyInfo as JSON request body",
             "required": true,
             "schema": {
               "$ref": "#/definitions/WorkspaceKeyInfo"
@@ -141,16 +142,20 @@
   },
   "definitions": {
     "WorkspaceKeyProperties": {
+      "description": "Workspace key properties",
       "properties": {
         "keyVaultUrl": {
+          "description": "URL of key vault",
           "type": "string"
         },
         "isActiveCMK": {
+          "description": "Boolean flag for if key is active",
           "type": "boolean"
         }
       }
     },
     "WorkspaceKeyInfo": {
+      "description": "Workspace key passed between APIs",
       "allOf": [
         {
           "$ref": "../../../../common/v1/types.json#/definitions/WorkspaceSubResource"
@@ -159,6 +164,7 @@
           "type": "object",
           "properties": {
             "properties": {
+              "description": "Workspace key properties",
               "type": "object",
               "$ref": "#/definitions/WorkspaceKeyProperties"
             }
@@ -168,6 +174,7 @@
       "x-ms-azure-resource": true
     },
     "List_WorkspaceKeyInfo": {
+      "description": "List of workspace keys",
       "type": "array",
       "items": {
         "$ref": "#/definitions/WorkspaceKeyInfo"

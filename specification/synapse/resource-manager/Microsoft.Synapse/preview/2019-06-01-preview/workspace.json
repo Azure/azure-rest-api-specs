@@ -584,6 +584,7 @@
           {
             "in": "body",
             "name": "scopePoolInfo",
+            "description": "Scope pool as JSON request body",
             "required": true,
             "schema": {
               "$ref": "#/definitions/ScopePoolResourceInfo"
@@ -734,6 +735,7 @@
           {
             "in": "body",
             "name": "scopePoolInfo",
+            "description": "Scope pool as JSON request body",
             "required": true,
             "schema": {
               "$ref": "#/definitions/ScopePoolPatchInfo"
@@ -1409,23 +1411,28 @@
           "type": "object",
           "properties": {
             "creationDate": {
+              "description": "Creation date",
               "type": "string",
               "format": "date-time "
             },
             "maxQueuedJobs": {
+              "description": "The maximum numbers of jobs that can queue up. Beyond this the job submission will be rejected.",
               "type": "integer",
               "format": "int32"
             },
             "maxRunningJobs": {
+              "description": "The maximum number of jobs that can run simultaneously. Beyond this no job will be scheduled, even if there're still tokens and queued jobs.",
               "type": "integer",
               "format": "int32"
             },
             "extendedProperties": {
+              "description": "Will store json representation of hierarchical queue and other properties.",
               "type": "string"
             }
           }
         }
-      ]
+      ],
+      "description": "Properties of scope pool which control job creation and execution"
     },
     "ScopePoolResourceInfo": {
       "allOf": [
@@ -1437,11 +1444,13 @@
           "properties": {
             "properties": {
               "type": "object",
-              "$ref": "#/definitions/ScopePoolResourceProperties"
+              "$ref": "#/definitions/ScopePoolResourceProperties",
+              "description": "Scope pool properties"
             }
           }
         }
-      ]
+      ],
+      "description": "Scope pool as JSON passed between APIs"
     },
     "ResourceCollectionResponse_ScopePoolResourceInfo": {
       "properties": {
@@ -1449,22 +1458,27 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/ScopePoolResourceInfo"
-          }
+          },
+          "description": "List of scope pools"
         },
         "nextLink": {
-          "type": "string"
+          "type": "string",
+          "description": "Link to the next page of results"
         }
-      }
+      },
+      "description": "List of scope pools"
     },
     "ScopePoolPatchInfo": {
       "properties": {
         "tags": {
           "type": "object",
+          "description": "Resource tags",
           "additionalProperties": {
             "type": "string"
           }
         }
-      }
+      },
+      "description": "Scope pool update request"
     }
   },
   "parameters": {
