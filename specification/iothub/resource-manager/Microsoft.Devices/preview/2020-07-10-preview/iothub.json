@@ -3185,6 +3185,9 @@
         "sku": {
           "description": "IotHub SKU info",
           "$ref": "#/definitions/IotHubSkuInfo"
+        },
+        "identity": {
+          "$ref": "#/definitions/ArmIdentity"
         }
       },
       "allOf": [
@@ -4151,6 +4154,44 @@
             "name": "IotHubReplicaRoleType",
             "modelAsString": true
           }
+        }
+      }
+    },
+    "ArmIdentity": {
+      "type": "object",
+      "properties": {
+        "principalId": {
+          "description": "Principal Id",
+          "type": "string",
+          "readOnly": true
+        },
+        "tenantId": {
+          "description": "Tenant Id",
+          "type": "string",
+          "readOnly": true
+        },
+        "identityType": {
+          "description": "Identity type. Only allowed values are SystemAssigned and UserAssigned. Comma separated if both for ex: SystemAssigned,UserAssigned",
+          "type": "string"
+        },
+        "userAssignedIdentities": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/ArmUserIdentity"
+          }
+        }
+      }
+    },
+    "ArmUserIdentity": {
+      "type": "object",
+      "properties": {
+        "principalId": {
+          "type": "string",
+          "readOnly": true
+        },
+        "clientId": {
+          "type": "string",
+          "readOnly": true
         }
       }
     },
