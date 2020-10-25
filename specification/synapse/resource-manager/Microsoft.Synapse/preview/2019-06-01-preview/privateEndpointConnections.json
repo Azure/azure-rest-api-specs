@@ -96,15 +96,14 @@
         "produces": [
           "application/json"
         ],
-        "x-ms-long-running-operation": true,
         "responses": {
-          "201": {
+          "200": {
             "schema": {
               "$ref": "../../../../common/v1/privateEndpointConnection.json#/definitions/PrivateEndpointConnection"
             },
             "description": "Private endpoint connection"
           },
-          "200": {
+          "201": {
             "schema": {
               "$ref": "../../../../common/v1/privateEndpointConnection.json#/definitions/PrivateEndpointConnection"
             },
@@ -116,6 +115,10 @@
             },
             "description": ""
           }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
         },
         "x-ms-examples": {
           "Approve private endpoint connection": {
