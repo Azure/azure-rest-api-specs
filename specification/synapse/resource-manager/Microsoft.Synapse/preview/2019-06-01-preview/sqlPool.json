@@ -962,6 +962,68 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces/{workspaceName}/sqlPools/{sqlPoolName}/restorePoints/{restorePointName}": {
+      "get": {
+        "operationId": "SqlPoolRestorePoints_GetByname",
+        "summary": "Get SQL pool backup",
+        "description": "Get SQL pool backup information",
+        "tags": [
+          "SqlPools, Backup"
+        ],
+        "deprecated": false,
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./workspace.json#/parameters/workspaceNameParameter"
+          },
+          {
+            "type": "string",
+            "in": "path",
+            "name": "sqlPoolName",
+            "description": "SQL pool name",
+            "required": true
+          },
+          {
+            "name": "restorePointName",
+            "in": "path",
+            "description": "The name of the restore point.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/RestorePoint"
+            },
+            "description": "OK"
+          },
+          "default": {
+            "schema": {
+              "$ref": "../../../../common/v1/types.json#/definitions/ErrorContract"
+            },
+            "description": ""
+          }
+        },
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-examples": {
+          "Get a list of restore points of a SQL Analytics pool": {
+            "$ref": "./examples/SqlPoolRestorePoints_GetByname.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces/{workspaceName}/sqlPools/{sqlPoolName}/replicationLinks": {
       "get": {
         "operationId": "SqlPoolReplicationLinks_List",
@@ -1015,6 +1077,67 @@
         "x-ms-examples": {
           "Lists a Sql Analytic pool's replication links": {
             "$ref": "./examples/ListSqlPoolReplicationLinks.json"
+          }
+        }
+      }
+    },
+    "/subscripions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces/{workspaceName}/sqlPools/{sqlPoolName}/replicationLinks/{linkId}": {
+      "get": {
+        "operationId": "SqlPoolReplicationLinks_GetByName",
+        "summary": "Get SQL pool replication link by name",
+        "description": "Get SQL pool replication link by name.",
+        "tags": [
+          "SqlPools, ReplicationLinks"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./workspace.json#/parameters/workspaceNameParameter"
+          },
+          {
+            "type": "string",
+            "in": "path",
+            "name": "sqlPoolName",
+            "description": "SQL pool name",
+            "required": true
+          },
+          {
+            "name": "linkId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The ID of the replication link."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ReplicationLink"
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": "../../../../common/v1/types.json#/definitions/ErrorContract"
+            },
+            "description": ""
+          }
+        },
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-examples": {
+          "Lists a Sql Analytic pool's replication links": {
+            "$ref": "./examples/SqlPoolReplicationLinks_GetByName.json"
           }
         }
       }
