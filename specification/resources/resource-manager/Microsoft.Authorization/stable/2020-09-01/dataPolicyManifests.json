@@ -321,13 +321,11 @@
           "description": "The resource type name."
         },
         "aliases": {
-          "value": {
             "type": "array",
             "items": {
               "$ref": "#/definitions/Alias"
             },
             "description": "The aliases for property names."
-          }
         }
       },
       "description": "The resource type aliases definition."
@@ -351,13 +349,11 @@
           "description": "A value indicating whether policy mode is allowed only in built-in definitions."
         },
         "resourceTypeAliases": {
-          "value": {
             "type": "array",
             "items": {
               "$ref": "#/definitions/ResourceTypeAliases"
             },
             "description": "An array of resource type aliases."
-          }
         },
         "effects": {
           "x-ms-client-flatten": true,
@@ -382,6 +378,11 @@
     },
     "DataPolicyManifest": {
       "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/DataPolicyManifestProperties",
+          "description": "The data policy manifest properties."
+        },
         "id": {
           "readOnly": true,
           "type": "string",
@@ -396,11 +397,6 @@
           "readOnly": true,
           "type": "string",
           "description": "The type of the resource (Microsoft.Authorization/dataPolicyManifests)."
-        },
-        "properties": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/DataPolicyManifestProperties",
-          "description": "The data policy manifest properties."
         }
       },
       "description": "The data policy manifest.",
