@@ -1,0 +1,40 @@
+{
+  "parameters": {
+    "subscriptionId": "00000000-1111-2222-3333-444444444444",
+    "resourceGroupName": "workspace-1234",
+    "workspaceName": "testworkspace",
+    "eventGridFilterName": "testeventgridfilter",
+    "eventGridFilterDto": {
+      "properties": {
+        "labels": "singleEventSubscription",
+        "filter": {
+          "subjectBeginsWith": "subscription/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345",
+          "subjectEndsWith": "",
+          "includedEventTypes": [
+            "Microsoft.MachineLearningServices.ModelRegistered"
+          ]
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/testrg123/providers/Microsoft.MachineLearningServices/workspaces/workspaces123/eventGridFilters/eventgridfilter123",
+        "type": "Microsoft.MachineLearningServices/Workspaces/EventGridFilters",
+        "name": "eventgridfilter123",
+        "location": "eastus2",
+        "properties": {
+          "labels": "singleEventSubscription",
+          "filter": {
+            "subjectBeginsWith": "subscription/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345",
+            "subjectEndsWith": "",
+            "includedEventTypes": [
+              "Microsoft.MachineLearningServices.ModelRegistered"
+            ]
+          }
+        }
+      }
+    }
+  }
+}
