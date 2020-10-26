@@ -7,108 +7,106 @@
     "200": {
       "headers": {},
       "body": {
+        "id": "/providers/Microsoft.Authorization/dataPolicyManifests/Microsoft.KeyVault.Data",
+        "type": "Microsoft.Authorization/dataPolicyManifests",
+        "name": "Microsoft.KeyVault.Data",
         "properties": {
-          "id": "/providers/Microsoft.Authorization/dataPolicyManifests/Microsoft.KeyVault.Data",
-          "type": "Microsoft.Authorization/dataPolicyManifests",
-          "name": "Microsoft.KeyVault.Data",
-          "properties": {
-            "namespaces": "Microsoft.KeyVault",
-            "policyMode": "Microsoft.KeyVault.Data",
-            "isBuiltInOnly": false,
-            "resourceTypeAliases": [
-              {
-                "resourceType": "Microsoft.KeyVault",
-                "aliases": [
-                  {
-                    "name": "vault",
-                    "paths": [
-                      {
-                        "path": "Microsoft.KeyVault/vaults/enabledForDeployment",
-                        "apiVersions": [
-                          "2020-09-01"
-                        ]
-                      },
-                      {
-                        "path": "Microsoft.KeyVault/vaults/enabledForTemplateDeployment",
-                        "apiVersions": [
-                          "2020-09-01"
-                        ]
-                      },
-                      {
-                        "path": "Microsoft.Keyvault/vaults/accessPolicies",
-                        "apiVersions": [
-                          "2020-09-01"
-                        ]
-                      },
-                      {
-                        "path": "Microsoft.KeyVault/vaults/sku.family",
-                        "apiVersions": [
-                          "2020-09-01"
-                        ]
-                      },
-                      {
-                        "path": "Microsoft.KeyVault/vaults/enabledForDiskEncryption",
-                        "apiVersions": [
-                          "2020-09-01"
-                        ]
-                      },
-                      {
-                        "path": "Microsoft.Keyvault/vaults/vaultUri",
-                        "apiVersions": [
-                          "2020-09-01"
-                        ]
-                      },
-                      {
-                        "path": "Microsoft.Keyvault/vaults/tenantId",
-                        "apiVersions": [
-                          "2020-09-01"
-                        ]
-                      },
-                      {
-                        "path": "Microsoft.KeyVault/vaults/sku.name",
-                        "apiVersions": [
-                          "2020-09-01"
-                        ]
-                      },
-                      {
-                        "path": "Microsoft.Keyvault/vaults/sku",
-                        "apiVersions": [
-                          "2020-09-01"
-                        ]
-                      }
-                    ]
-                  }
-                ]
-              }
-            ],
-            "effects": [
-              {
-                "name": "Audit"
-              },
-              {
-                "name": "Deny"
-              }
-            ],
-            "fieldValues": [
-              "type"
-            ],
-            "resourceFunctions": {
-              "standard": [
-                "subscription",
-                "resourceGroup"
-              ],
-              "custom": [
+          "namespaces": "Microsoft.KeyVault",
+          "policyMode": "Microsoft.KeyVault.Data",
+          "isBuiltInOnly": false,
+          "resourceTypeAliases": [
+            {
+              "resourceType": "Microsoft.KeyVault",
+              "aliases": [
                 {
                   "name": "vault",
-                  "fullyQualifiedResourceType": "Microsoft.KeyVault/vaults",
-                  "defaultProperties": [
-                    "location",
-                    "tags"
-                  ],
-                  "allowCustomProperties": false
+                  "paths": [
+                    {
+                      "path": "Microsoft.KeyVault/vaults/enabledForDeployment",
+                      "apiVersions": [
+                        "2020-09-01"
+                      ]
+                    },
+                    {
+                      "path": "Microsoft.KeyVault/vaults/enabledForTemplateDeployment",
+                      "apiVersions": [
+                        "2020-09-01"
+                      ]
+                    },
+                    {
+                      "path": "Microsoft.Keyvault/vaults/accessPolicies",
+                      "apiVersions": [
+                        "2020-09-01"
+                      ]
+                    },
+                    {
+                      "path": "Microsoft.KeyVault/vaults/sku.family",
+                      "apiVersions": [
+                        "2020-09-01"
+                      ]
+                    },
+                    {
+                      "path": "Microsoft.KeyVault/vaults/enabledForDiskEncryption",
+                      "apiVersions": [
+                        "2020-09-01"
+                      ]
+                    },
+                    {
+                      "path": "Microsoft.Keyvault/vaults/vaultUri",
+                      "apiVersions": [
+                        "2020-09-01"
+                      ]
+                    },
+                    {
+                      "path": "Microsoft.Keyvault/vaults/tenantId",
+                      "apiVersions": [
+                        "2020-09-01"
+                      ]
+                    },
+                    {
+                      "path": "Microsoft.KeyVault/vaults/sku.name",
+                      "apiVersions": [
+                        "2020-09-01"
+                      ]
+                    },
+                    {
+                      "path": "Microsoft.Keyvault/vaults/sku",
+                      "apiVersions": [
+                        "2020-09-01"
+                      ]
+                    }
+                  ]
                 }
               ]
             }
+          ],
+          "effects": [
+            {
+              "name": "Audit"
+            },
+            {
+              "name": "Deny"
+            }
+          ],
+          "fieldValues": [
+            "type"
+          ],
+          "resourceFunctions": {
+            "standard": [
+              "subscription",
+              "resourceGroup"
+            ],
+            "custom": [
+              {
+                "name": "vault",
+                "fullyQualifiedResourceType": "Microsoft.KeyVault/vaults",
+                "defaultProperties": [
+                  "location",
+                  "tags"
+                ],
+                "allowCustomProperties": false
+              }
+            ]
           }
         }
       }
