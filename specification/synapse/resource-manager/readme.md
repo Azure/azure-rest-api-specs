@@ -116,6 +116,14 @@ directive:
   - suppress: IntegerTypeMustHaveFormat
     reason: Not available in upstream RP swagger
     from: Microsoft.Synapse/preview/2019-06-01-preview/integrationRuntime.json
+  - suppress: R2010
+    reason: x-ms-long-running-operation-options not available in datafactory swagger
+    from: Microsoft.Synapse/preview/2019-06-01-preview/integrationRuntime.json
+  - suppress: OperationIdNounConflictingModelNames
+    reason: Existing spec, does it really need changes
+    from: Microsoft.Synapse/preview/2019-06-01-preview/integrationRuntime.json
+  - suppress: GuidUsage
+    reason: GUIDs are everywhere
 ```
 
 ---
