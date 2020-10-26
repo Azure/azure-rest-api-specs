@@ -1159,6 +1159,24 @@
         "name"
       ]
     },
+    "ProvisioningState": {
+      "type": "string",
+      "readOnly": true,
+      "description": "Current status",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Creating",
+        "Updating",
+        "Deleting",
+        "DeleteFailed",
+        "Disabled"
+      ],
+      "x-ms-enum": {
+        "name": "ProvisioningState",
+        "modelAsString": true
+      }
+    },
     "Cluster": {
       "description": "Describes the RedisEnterprise cluster",
       "properties": {
@@ -1228,21 +1246,8 @@
           "description": "DNS name of the cluster endpoint"
         },
         "provisioningState": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Current status of the cluster",
-          "enum": [
-            "Succeeded",
-            "Failed",
-            "Creating",
-            "Updating",
-            "Deleting",
-            "Disabled"
-          ],
-          "x-ms-enum": {
-            "name": "ProvisioningState",
-            "modelAsString": true
-          }
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "Current status of the cluster"
         },
         "redisVersion": {
           "type": "string",
@@ -1327,22 +1332,8 @@
           "description": "TCP port of the database endpoint. Specified at create time. Defaults to an available port."
         },
         "provisioningState": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Current status of the database",
-          "enum": [
-            "Succeeded",
-            "Failed",
-            "Creating",
-            "Updating",
-            "Deleting",
-            "DeleteFailed",
-            "Disabled"
-          ],
-          "x-ms-enum": {
-            "name": "ProvisioningState",
-            "modelAsString": true
-          }
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "Current status of the database"
         },
         "clusteringPolicy": {
           "type": "string",
