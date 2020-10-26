@@ -124,6 +124,18 @@ directive:
     from: Microsoft.Synapse/preview/2019-06-01-preview/integrationRuntime.json
   - suppress: GuidUsage
     reason: GUIDs are everywhere
+  - suppress: AvoidNestedProperties
+    reason: Existing models
+    from: Microsoft.Synapse/preview/2019-06-01-preview/integrationRuntime.json
+    where:
+      - $.definitions.IntegrationRuntimeResource.properties.properties
+      - $.definitions.IntegrationRuntimeStatusResponse.properties.properties
+      - $.definitions.SsisObjectMetadataStatusResponse.properties.properties
+  - suppress: AvoidNestedProperties
+    reason: Existing models
+    from: Microsoft.Synapse/preview/2019-06-01-preview/privateLinkResources.json
+    where:
+      - $.definitions.PrivateLinkResource.properties.properties
 ```
 
 ---

@@ -423,60 +423,8 @@
         "properties": {
           "description": "Properties of private endpoint connection for private link hub",
           "type": "object",
-          "$ref": "#/definitions/PrivateEndpointConnectionProperties"
-        }
-      }
-    },
-    "PrivateEndpointConnectionProperties": {
-      "description": "Private Endpoint Connection Properties",
-      "type": "object",
-      "properties": {
-        "provisioningState": {
-          "description": "Provisioning state",
-          "type": "string",
-          "readOnly": true
-        },
-        "privateEndpoint": {
-          "description": "Private Endpoint",
-          "type": "object",
-          "$ref": "#/definitions/PrivateEndpoint"
-        },
-        "privateLinkServiceConnectionState": {
-          "description": "Private Link Service Connection State",
-          "type": "object",
-          "$ref": "#/definitions/PrivateLinkServiceConnectionState"
-        }
-      }
-    },
-    "PrivateLinkServiceConnectionState": {
-      "description": "Private Link Service Connection State",
-      "type": "object",
-      "properties": {
-        "status": {
-          "description": "Status of private link service connection state",
-          "type": "string",
-          "readOnly": true
-        },
-        "description": {
-          "description": "Description of private link service connection state",
-          "type": "string",
-          "readOnly": true
-        },
-        "actionsRequired": {
-          "description": "Actions Required",
-          "type": "string",
-          "readOnly": true
-        }
-      }
-    },
-    "PrivateEndpoint": {
-      "description": "Private Endpoint",
-      "type": "object",
-      "properties": {
-        "id": {
-          "description": "identifier",
-          "type": "string",
-          "readOnly": true
+          "$ref": "../../../../common/v1/privateEndpointConnection.json#/definitions/PrivateEndpointConnectionProperties",
+          "x-ms-client-flatten": true
         }
       }
     }
