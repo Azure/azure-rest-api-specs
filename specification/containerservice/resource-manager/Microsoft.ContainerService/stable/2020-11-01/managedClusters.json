@@ -2489,6 +2489,10 @@
           "$ref": "#/definitions/ManagedClusterAADProfile",
           "description": "Profile of Azure Active Directory configuration."
         },
+        "autoUpgradeProfile": {
+          "$ref": "#/definitions/ManagedClusterAutoUpgradeProfile",
+          "description": "Profile of auto upgrade configuration."
+        },
         "autoScalerProfile": {
           "type": "object",
           "properties": {
@@ -2764,6 +2768,24 @@
         "agentPoolProfiles"
       ],
       "description": "Control plane and agent pool upgrade profiles."
+    },
+    "ManagedClusterAutoUpgradeProfile": {
+      "properties": {
+        "upgradeChannel": {
+          "type": "string",
+          "enum": [
+            "rapid",
+            "stable",
+            "patch"
+          ],
+          "x-ms-enum": {
+            "name": "upgradeChannel",
+            "modelAsString": true
+          },
+          "description": "upgrade channel for auto upgrade."
+        }
+      },
+      "description": "Auto upgrade profile for a managed cluster."
     },
     "ManagedClusterAADProfile": {
       "properties": {
