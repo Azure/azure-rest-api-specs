@@ -4,20 +4,20 @@ These settings apply only when `--azureresourceschema` is specified on the comma
 
 ### AzureResourceSchema multi-api
 
-```yaml
+``` yaml $(azureresourceschema) && $(multiapi)
 batch:
   - tag: schema-[[ServiceName]]-[[Version]]
+  
 ```
-
-
-### Tag: schema-[[Version]] and azureresourceschema
 
 Please also specify `--azureresourceschema-folder=<path to the root directory of your azure-resource-manager-schemas clone>`.
 
-```yaml
-  output-folder: $(azureresourceschema-folder)/schemas
+### Tag: schema-[[ServiceName]]-[[Version]] and azureresourceschema
 
-  # all the input files in this apiVersion
-  input-file: 
-    - [[ResourceProviderName]]/[[ReleaseState]]/[[Version]]/[[ServiceName]].json
+``` yaml $(tag) == 'schema-[[ServiceName]]-[[Version]]' && $(azureresourceschema)
+output-folder: $(azureresourceschema-folder)/schemas
+
+# all the input files in this apiVersion
+input-file:
+  - [[ResourceProviderName]]/[[ReleaseState]]/[[Version]]/[[ServiceName]].json
 ```
