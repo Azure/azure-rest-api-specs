@@ -1,0 +1,408 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2019-06-01-preview",
+    "title": "SynapseManagementClient",
+    "description": "Azure Synapse Analytics APIs"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "type": "oauth2",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      },
+      "description": "Azure Active Directory OAuth2 Flow"
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces/{workspaceName}/scopePools/{scopePoolName}": {
+      "parameters": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+        },
+        {
+          "$ref": "../../../../common/v1/types.json#/parameters/WorkspaceNameParameter"
+        },
+        {
+          "$ref": "#/parameters/ScopePoolNameParameter"
+        }
+      ],
+      "get": {
+        "operationId": "GetScopePool",
+        "description": "Get scope pool by name",
+        "tags": [
+          "ScopePools"
+        ],
+        "deprecated": false,
+        "responses": {
+          "200": {
+            "schema": {
+              "type": "object",
+              "$ref": "#/definitions/ScopePoolResourceInfo"
+            },
+            "description": "OK"
+          },
+          "403": {
+            "schema": {
+              "$ref": "../../../../common/v1/types.json#/definitions/ErrorContract"
+            },
+            "description": "User subscription or tenant not allowed"
+          },
+          "404": {
+            "description": "Not found"
+          },
+          "default": {
+            "schema": {
+              "$ref": "../../../../common/v1/types.json#/definitions/ErrorContract"
+            },
+            "description": ""
+          }
+        },
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-examples": {
+          "Get scope pool by name": {
+            "$ref": "./examples/GetScopePool.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "CreateOrUpdateScopePool",
+        "description": "Create or update scope pool in workspace",
+        "tags": [
+          "ScopePools"
+        ],
+        "deprecated": false,
+        "parameters": [
+          {
+            "in": "body",
+            "name": "scopePoolInfo",
+            "description": "Scope pool as JSON request body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ScopePoolResourceInfo"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "TODO REMOVE THIS! Code doesn't return 200",
+            "schema": {
+              "$ref": "#/definitions/ScopePoolResourceInfo"
+            }
+          },
+          "202": {
+            "schema": {
+              "$ref": "#/definitions/ScopePoolResourceInfo"
+            },
+            "description": ""
+          },
+          "400": {
+            "description": "Malformed request or key sub-resource not available in region",
+            "schema": {
+              "$ref": "../../../../common/v1/types.json#/definitions/ErrorContract"
+            }
+          },
+          "403": {
+            "description": "Forbidden or scope pool limit reached",
+            "schema": {
+              "$ref": "../../../../common/v1/types.json#/definitions/ErrorContract"
+            }
+          },
+          "404": {
+            "description": "Workspace not found"
+          },
+          "409": {
+            "description": "Scope pool with same name already exists in non-final state",
+            "schema": {
+              "$ref": "../../../../common/v1/types.json#/definitions/ErrorContract"
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": "../../../../common/v1/types.json#/definitions/ErrorContract"
+            },
+            "description": ""
+          }
+        },
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "Create or update scope pool by name in the workspace": {
+            "$ref": "./examples/CreateOrUpdateScopePool.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "DeleteScopePool",
+        "description": "Deletes a scope pool",
+        "tags": [
+          "ScopePools"
+        ],
+        "deprecated": false,
+        "responses": {
+          "200": {
+            "description": "TODO REMOVE THIS! Code doesn't return 200"
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "204": {
+            "description": "No content"
+          },
+          "403": {
+            "schema": {
+              "$ref": "../../../../common/v1/types.json#/definitions/ErrorContract"
+            },
+            "description": "Not allowed to operate on this tenant and subscription"
+          },
+          "default": {
+            "schema": {
+              "$ref": "../../../../common/v1/types.json#/definitions/ErrorContract"
+            },
+            "description": ""
+          }
+        },
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "Delete scope pool in workspace": {
+            "$ref": "./examples/DeleteScopePool.json"
+          }
+        }
+      },
+      "patch": {
+        "operationId": "UpdateScopePool",
+        "description": "Update scope pool in workspace",
+        "tags": [
+          "ScopePools"
+        ],
+        "deprecated": false,
+        "parameters": [
+          {
+            "in": "body",
+            "name": "scopePoolInfo",
+            "description": "Scope pool as JSON request body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ScopePoolPatchInfo"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/ScopePoolResourceInfo"
+            },
+            "description": ""
+          },
+          "403": {
+            "schema": {
+              "$ref": "../../../../common/v1/types.json#/definitions/ErrorContract"
+            },
+            "description": "Not allowed"
+          },
+          "409": {
+            "schema": {
+              "$ref": "../../../../common/v1/types.json#/definitions/ErrorContract"
+            },
+            "description": ""
+          },
+          "default": {
+            "schema": {
+              "$ref": "../../../../common/v1/types.json#/definitions/ErrorContract"
+            },
+            "description": ""
+          }
+        },
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-examples": {
+          "Update scope pool by name in the workspace": {
+            "$ref": "./examples/UpdateScopePool.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces/{workspaceName}/scopePools": {
+      "parameters": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+        },
+        {
+          "$ref": "../../../../common/v1/types.json#/parameters/WorkspaceNameParameter"
+        }
+      ],
+      "get": {
+        "operationId": "ScopePoolsInWorkspace_List",
+        "description": "Get all scope pools in workspace",
+        "tags": [
+          "ScopePools"
+        ],
+        "deprecated": false,
+        "responses": {
+          "200": {
+            "schema": {
+              "type": "object",
+              "$ref": "#/definitions/ResourceCollectionResponse_ScopePoolResourceInfo"
+            },
+            "description": "OK"
+          },
+          "403": {
+            "description": "User subscription or tenant not allowed",
+            "schema": {
+              "$ref": "../../../../common/v1/types.json#/definitions/ErrorContract"
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": "../../../../common/v1/types.json#/definitions/ErrorContract"
+            },
+            "description": ""
+          }
+        },
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Get scope pool by name": {
+            "$ref": "./examples/ScopePoolsInWorkspace_List.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ScopePoolResourceProperties": {
+      "allOf": [
+        {
+          "$ref": "../../../../common/v1/types.json#/definitions/ResourcePropertiesBase"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "creationDate": {
+              "description": "Creation date",
+              "type": "string",
+              "format": "date-time "
+            },
+            "maxQueuedJobs": {
+              "description": "The maximum numbers of jobs that can queue up. Beyond this the job submission will be rejected.",
+              "type": "integer",
+              "format": "int32"
+            },
+            "maxRunningJobs": {
+              "description": "The maximum number of jobs that can run simultaneously. Beyond this no job will be scheduled, even if there're still tokens and queued jobs.",
+              "type": "integer",
+              "format": "int32"
+            },
+            "extendedProperties": {
+              "description": "Will store json representation of hierarchical queue and other properties.",
+              "type": "string"
+            }
+          }
+        }
+      ],
+      "description": "Properties of scope pool which control job creation and execution"
+    },
+    "ScopePoolResourceInfo": {
+      "allOf": [
+        {
+          "$ref": "../../../../common/v1/types.json#/definitions/WorkspaceSubResource"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "properties": {
+              "type": "object",
+              "$ref": "#/definitions/ScopePoolResourceProperties",
+              "description": "Scope pool properties",
+              "x-ms-client-flatten": true
+            }
+          }
+        }
+      ],
+      "description": "Scope pool as JSON passed between APIs"
+    },
+    "ResourceCollectionResponse_ScopePoolResourceInfo": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ScopePoolResourceInfo"
+          },
+          "description": "List of scope pools"
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Link to the next page of results"
+        }
+      },
+      "description": "List of scope pools"
+    },
+    "ScopePoolPatchInfo": {
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "description": "Scope pool update request"
+    }
+  },
+  "parameters": {
+    "ScopePoolNameParameter": {
+      "name": "scopePoolName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Name of the scope pool",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}
