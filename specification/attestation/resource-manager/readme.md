@@ -26,16 +26,16 @@ These are the global settings for the Attestation API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2018-09-preview
+tag: package-2018-09
 ```
 
-### Tag: package-2018-09-preview
+### Tag: package-2018-09
 
-These settings apply only when `--tag=package-2018-09-preview` is specified on the command line.
+These settings apply only when `--tag=package-2018-09` is specified on the command line.
 
-``` yaml $(tag) == 'package-2018-09-preview'
+``` yaml $(tag) == 'package-2018-09'
 input-file:
-- Microsoft.Attestation/stable/2018-09-01-preview/attestation.json
+- Microsoft.Attestation/stable/2018-09-01/attestation.json
 ```
 
 ### Tag: package-2020-10-01

@@ -30,9 +30,9 @@ openapi-type: data-plane
 tag: package-2018-09
 ```
 
-### Tag: package-2018-09-preview
+### Tag: package-2018-09
 
-These settings apply only when `--tag=package-2018-09-preview` is specified on the command line.
+These settings apply only when `--tag=package-2018-09` is specified on the command line.
 
 ``` yaml $(tag) == 'package-2018-09'
 input-file:
