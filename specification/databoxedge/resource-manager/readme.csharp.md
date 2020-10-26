@@ -2,7 +2,7 @@
 
 > see https://aka.ms/autorest
 
-This is the AutoRest configuration file for IotHub.
+This is the AutoRest configuration file for DataBoxEdge.
 
 These settings apply only when `--csharp` is specified on the command line.
 Please also specify `--csharp-sdks-folder=<path to "SDKs" directory of your azure-sdk-for-net clone>`.
@@ -28,7 +28,7 @@ These settings apply only when `--csharp-profile=hybrid_2020_09_01` is specified
 
 ``` yaml $(csharp-profile)=='hybrid_2020_09_01'
 namespace: Microsoft.Azure.Management.Profiles.$(csharp-profile).DataBoxEdge
-output-folder: $(csharp-sdks-folder)/$(csharp-profile)/IotHub/Management.DataBoxEdge/Generated
+output-folder: $(csharp-sdks-folder)/$(csharp-profile)/DataBoxEdge/Management.DataBoxEdge/Generated
 
 batch:
   - tag: profile-hybrid-2020-09-01
