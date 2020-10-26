@@ -1246,6 +1246,7 @@
         },
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
+          "readOnly": true,
           "description": "Current status of the cluster"
         },
         "redisVersion": {
@@ -1332,6 +1333,7 @@
         },
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
+          "readOnly": true,
           "description": "Current status of the database"
         },
         "clusteringPolicy": {
@@ -1344,7 +1346,11 @@
           "x-ms-enum": {
             "name": "ClusteringPolicy",
             "modelAsString": true
-          }
+          },
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         },
         "evictionPolicy": {
           "type": "string",
