@@ -103,6 +103,15 @@ directive:
   - suppress: DeleteOperationResponses
     from: myworkbooks_API.json
     reason: 'delete API returns empty response and is already part of the previous api, cannot change it'
+  - suppress: DefaultErrorResponseSchema
+    from: workbooks_API.json
+    reason: 'consistent with existing error response'
+  - suppress: RequiredDefaultResponse
+    reason: 'consistent with existing default response'
+  - suppress: DeleteOperationResponses
+    reason: 'consistent with existing delete response'
+  - suppress: PathResourceTypeNameCamelCase
+    reason: 'consistent with existing path'
 ```
 
 ### Tag: package-2020-10-20
