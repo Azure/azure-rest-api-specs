@@ -111,6 +111,45 @@
             "$ref": "./examples/ProfilerTokenGetAndPost.json"
           }
         }
+      },
+      "post": {
+        "tags": [
+          "ProfilerToken"
+        ],
+        "operationId": "profilertoken",
+        "description": "**Gets an read-write access token for application insights profiler data.**",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceUriParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../2020-03-01-preview/componentLinkedStorageAccounts_API.json#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "Successful response containing the application insights profiler token.",
+            "schema": {
+              "$ref": "#/definitions/ProfilerTokenResponse"
+            },
+            "examples": {
+              "application/json": {
+                "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c"
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get profiler token for resource": {
+            "$ref": "./examples/ProfilerTokenGetAndPost.json"
+          }
+        }
       }
     }
   },
