@@ -1620,7 +1620,7 @@
     },
     "ContainerServiceVnetSubnetID": {
       "type": "string",
-      "description": "VNet SubnetID specifies the VNet's subnet identifier."
+      "description": "specifies a subnet's resource id with subscription, resource group, vnet and subnet name"
     },
     "ContainerServiceVMSize": {
       "type": "string",
@@ -1897,7 +1897,11 @@
         },
         "vnetSubnetID": {
           "$ref": "#/definitions/ContainerServiceVnetSubnetID",
-          "description": "VNet SubnetID specifies the VNet's subnet identifier."
+          "description": "VNet SubnetID specifies the VNet's subnet identifier for nodes and maybe pods"
+        },
+        "podSubnetID": {
+          "$ref": "#/definitions/ContainerServiceVnetSubnetID",
+          "description": "Pod SubnetID specifies the VNet's subnet identifier for pods."
         },
         "maxPods": {
           "type": "integer",
