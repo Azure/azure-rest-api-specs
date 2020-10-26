@@ -53,7 +53,6 @@ swagger-to-sdk:
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-js
-  - repo: azure-sdk-for-ruby
     after_scripts:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_[[ServiceName]]']
   - repo: azure-resource-manager-schemas
@@ -68,10 +67,6 @@ See configuration in [readme.go.md](https://github.com/Azure/azure-rest-api-spec
 ## Python
 
 See configuration in [readme.python.md](https://github.com/Azure/azure-rest-api-specs/blob/master/documentation/samplefiles/readme.python.md)
-
-## Ruby
-
-See configuration in [readme.ruby.md](https://github.com/Azure/azure-rest-api-specs/blob/master/documentation/samplefiles/readme.ruby.md)
 
 ## TypeScript
 
