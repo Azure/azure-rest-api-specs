@@ -122,47 +122,215 @@
       "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse",
       "description": "An error response from a policy operation."
     },
-    "DataPolicyManifestListResult": {
+    "DataManifestCustomResourceFunctionDefinition": {
       "properties": {
-        "value": {
+        "name": {
+          "type": "string",
+          "description": "The function name as it will appear in the policy rule. eg - 'vault'."
+        },
+        "fullyQualifiedResourceType": {
+          "type": "string",
+          "description": "The fully qualified control plane resource type that this function represents. eg - 'Microsoft.KeyVault/vaults'."
+        },
+        "defaultProperties": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/DataPolicyManifest"
+            "type": "string",
+            "description": "A top-level property that can be selected on the function's output."
           },
-          "description": "An array of data policy manifests."
+          "description": "The top-level properties that can be selected on the function's output. eg - [ \"name\", \"location\" ] if vault().name and vault().location are supported"
         },
-        "nextLink": {
-          "type": "string",
-          "description": "The URL to use for getting the next set of results."
+        "allowCustomProperties": {
+          "type": "boolean",
+          "description": "A value indicating whether the custom properties within the property bag are allowed. Needs api-version to be specified in the policy rule eg - vault('2019-06-01')."
         }
       },
-      "description": "List of data policy manifests."
+      "description": "The custom resource function definition."
     },
-    "DataPolicyManifest": {
+    "DataManifestResourceFunctionsDefinition": {
       "properties": {
-        "id": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The ID of the data policy manifest."
+        "standard": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "description": "A standard resource function."
+          },
+          "description": "The standard resource functions (subscription and/or resourceGroup)."
         },
+        "custom": {
+          "value": {
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/DataManifestCustomResourceFunctionDefinition"
+            },
+            "description": "An array of data manifest custom resource definition."
+          }
+        }
+      },
+      "description": "The resource functions supported by a manifest"
+    },
+    "DataEffect": {
+      "properties": {
         "name": {
-          "readOnly": true,
           "type": "string",
-          "description": "The name of the data policy manifest (it's the same as the Policy Mode)."
+          "description": "The data effect definition."
+        },
+        "detailsSchema": {
+          "type": "object",
+          "description": "The data effect details schema."
+        }
+      },
+      "description": "The data effect definition."
+    },
+    "AliasPathMetadata": {
+      "properties": {
+        "type": {
+          "description": "The type of the token that is referred by an alias path.",
+          "type": "string",
+          "enum": [
+            "NotSpecified",
+            "Any",
+            "String",
+            "Object",
+            "Array",
+            "Integer",
+            "Number",
+            "Boolean"
+          ],
+          "x-ms-enum": {
+            "name": "aliasPathTokenType",
+            "modelAsString": true
+          }
+        },
+        "attributes": {
+          "description": "The attributes of an alias path.",
+          "type": "string",
+          "enum": [
+            "None",
+            "Modifiable"
+          ],
+          "x-ms-enum": {
+            "name": "aliasPathAttributes",
+            "modelAsString": true
+          }
+        }
+      },
+      "description": "The metadata of an alias."
+    },
+    "AliasPattern": {
+      "properties": {
+        "phrase": {
+          "type": "string",
+          "description": "The pattern phrase. This will be valid URI template ex. /subscriptions/{subscriptionId}/ModeType/{Mode}/PatternType/{Pattern}."
+        },
+        "variable": {
+          "type": "string",
+          "description": "The relevant variable in phrase. This will be a bound variable in the phrase template ex. Mode."
         },
         "type": {
-          "readOnly": true,
+          "description": "The alias pattern type.",
           "type": "string",
-          "description": "The type of the resource (Microsoft.Authorization/dataPolicyManifests)."
-        },
-        "properties": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/DataPolicyManifestProperties",
-          "description": "The data policy manifest properties."
+          "enum": [
+            "NotSpecified",
+            "Extract"
+          ],
+          "x-ms-enum": {
+            "name": "aliasPatternType",
+            "modelAsString": true
+          }
         }
       },
-      "description": "The data policy manifest.",
-      "x-ms-azure-resource": true
+      "description": "The alias pattern."
+    },
+    "AliasPath": {
+      "properties": {
+        "path": {
+          "type": "string",
+          "description": "The alias path."
+        },
+        "apiVersions": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "description": "An API version."
+          },
+          "description": "The API versions supported by this alias path."
+        },
+        "pattern": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/AliasPattern",
+          "description": "The alias pattern."
+        },
+        "metadata": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/AliasPathMetadata",
+          "description": "The alias path metadata."
+        }
+      },
+      "description": "The alias path."
+    },
+    "Alias": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The alias name."
+        },
+        "paths": {
+          "value": {
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/AliasPath"
+            },
+            "description": "An array of alias paths."
+          }
+        },
+        "defaultPath": {
+          "type": "string",
+          "description": "The default alias path."
+        },
+        "defaultPattern": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/AliasPattern",
+          "description": "The default alias pattern."
+        },
+        "defaultMetadata": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/AliasPathMetadata",
+          "description": "The default alias path metadata."
+        },
+        "type": {
+          "description": "The data type of the parameter.",
+          "type": "string",
+          "enum": [
+            "NotSpecified",
+            "PlainText",
+            "Mask"
+          ],
+          "x-ms-enum": {
+            "name": "aliasType",
+            "modelAsString": true
+          }
+        }
+      },
+      "description": "Represents the alias."
+    },
+    "ResourceTypeAliases": {
+      "properties": {
+        "resourceType": {
+          "type": "string",
+          "description": "The resource type name."
+        },
+        "aliases": {
+          "value": {
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/Alias"
+            },
+            "description": "The aliases for property names."
+          }
+        }
+      },
+      "description": "The resource type aliases definition."
     },
     "DataPolicyManifestProperties": {
       "properties": {
@@ -212,215 +380,47 @@
       },
       "description": "The properties of the data policy manifest."
     },
-    "ResourceTypeAliases": {
+    "DataPolicyManifest": {
       "properties": {
-        "resourceType": {
+        "id": {
+          "readOnly": true,
           "type": "string",
-          "description": "The resource type name."
+          "description": "The ID of the data policy manifest."
         },
-        "aliases": {
-          "value": {
-            "type": "array",
-            "items": {
-              "$ref": "#/definitions/Alias"
-            },
-            "description": "The aliases for property names."
-          }
-        }
-      },
-      "description": "The resource type aliases definition."
-    },
-    "Alias": {
-      "properties": {
         "name": {
+          "readOnly": true,
           "type": "string",
-          "description": "The alias name."
-        },
-        "paths": {
-          "value": {
-            "type": "array",
-            "items": {
-              "$ref": "#/definitions/AliasPath"
-            },
-            "description": "An array of alias paths."
-          }
-        },
-        "defaultPath": {
-          "type": "string",
-          "description": "The default alias path."
-        },
-        "defaultPattern": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/AliasPattern",
-          "description": "The default alias pattern."
-        },
-        "defaultMetadata": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/AliasPathMetadata",
-          "description": "The default alias path metadata."
+          "description": "The name of the data policy manifest (it's the same as the Policy Mode)."
         },
         "type": {
-          "description": "The data type of the parameter.",
+          "readOnly": true,
           "type": "string",
-          "enum": [
-            "NotSpecified",
-            "PlainText",
-            "Mask"
-          ],
-          "x-ms-enum": {
-            "name": "aliasType",
-            "modelAsString": true
-          }
-        }
-      },
-      "description": "Represents the alias."
-    },
-    "AliasPath": {
-      "properties": {
-        "path": {
-          "type": "string",
-          "description": "The alias path."
+          "description": "The type of the resource (Microsoft.Authorization/dataPolicyManifests)."
         },
-        "apiVersions": {
-          "type": "array",
-          "items": {
-            "type": "string",
-            "description": "An API version."
-          },
-          "description": "The API versions supported by this alias path."
-        },
-        "pattern": {
+        "properties": {
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/AliasPattern",
-          "description": "The alias pattern."
-        },
-        "metadata": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/AliasPathMetadata",
-          "description": "The alias path metadata."
+          "$ref": "#/definitions/DataPolicyManifestProperties",
+          "description": "The data policy manifest properties."
         }
       },
-      "description": "The alias path."
+      "description": "The data policy manifest.",
+      "x-ms-azure-resource": true
     },
-    "AliasPattern": {
+    "DataPolicyManifestListResult": {
       "properties": {
-        "phrase": {
-          "type": "string",
-          "description": "The pattern phrase. This will be valid URI template ex. /subscriptions/{subscriptionId}/ModeType/{Mode}/PatternType/{Pattern}."
-        },
-        "variable": {
-          "type": "string",
-          "description": "The relevant variable in phrase. This will be a bound variable in the phrase template ex. Mode."
-        },
-        "type": {
-          "description": "The alias pattern type.",
-          "type": "string",
-          "enum": [
-            "NotSpecified",
-            "Extract"
-          ],
-          "x-ms-enum": {
-            "name": "aliasPatternType",
-            "modelAsString": true
-          }
-        }
-      },
-      "description": "The alias pattern."
-    },
-    "AliasPathMetadata": {
-      "properties": {
-        "type": {
-          "description": "The type of the token that is referred by an alias path.",
-          "type": "string",
-          "enum": [
-            "NotSpecified",
-            "Any",
-            "String",
-            "Object",
-            "Array",
-            "Integer",
-            "Number",
-            "Boolean"
-          ],
-          "x-ms-enum": {
-            "name": "aliasPathTokenType",
-            "modelAsString": true
-          }
-        },
-        "attributes": {
-          "description": "The attributes of an alias path.",
-          "type": "string",
-          "enum": [
-            "None",
-            "Modifiable"
-          ],
-          "x-ms-enum": {
-            "name": "aliasPathAttributes",
-            "modelAsString": true
-          }
-        }
-      },
-      "description": "The metadata of an alias."
-    },
-    "DataEffect": {
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "The data effect definition."
-        },
-        "detailsSchema": {
-          "type": "object",
-          "description": "The data effect details schema."
-        }
-      },
-      "description": "The data effect definition."
-    },
-    "DataManifestResourceFunctionsDefinition": {
-      "properties": {
-        "standard": {
+        "value": {
           "type": "array",
           "items": {
-            "type": "string",
-            "description": "A standard resource function."
+            "$ref": "#/definitions/DataPolicyManifest"
           },
-          "description": "The standard resource functions (subscription and/or resourceGroup)."
+          "description": "An array of data policy manifests."
         },
-        "custom": {
-          "value": {
-            "type": "array",
-            "items": {
-              "$ref": "#/definitions/DataManifestCustomResourceFunctionDefinition"
-            },
-            "description": "An array of data manifest custom resource definition."
-          }
+        "nextLink": {
+          "type": "string",
+          "description": "The URL to use for getting the next set of results."
         }
       },
-      "description": "The resource functions supported by a manifest"
-    },
-    "DataManifestCustomResourceFunctionDefinition": {
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "The function name as it will appear in the policy rule. eg - 'vault'."
-        },
-        "fullyQualifiedResourceType": {
-          "type": "string",
-          "description": "The fully qualified control plane resource type that this function represents. eg - 'Microsoft.KeyVault/vaults'."
-        },
-        "defaultProperties": {
-          "type": "array",
-          "items": {
-            "type": "string",
-            "description": "A top-level property that can be selected on the function's output."
-          },
-          "description": "The top-level properties that can be selected on the function's output. eg - [ \"name\", \"location\" ] if vault().name and vault().location are supported"
-        },
-        "allowCustomProperties": {
-          "type": "boolean",
-          "description": "A value indicating whether the custom properties within the property bag are allowed. Needs api-version to be specified in the policy rule eg - vault('2019-06-01')."
-        }
-      },
-      "description": "The custom resource function definition."
+      "description": "List of data policy manifests."
     }
   },
   "parameters": {
