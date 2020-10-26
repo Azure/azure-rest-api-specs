@@ -1152,7 +1152,7 @@
         "capacity": {
           "type": "integer",
           "format": "int32",
-          "description": "The size of the RedisEnterprise cluster. Defaults to 1. Valid values are 1 or more (and may depend on SKU tier)."
+          "description": "The size of the RedisEnterprise cluster. Defaults to 2 or 3 depending on SKU. Valid values are (2, 4, 6, ...) for Enterprise SKUs and (3, 9, 15, ...) for Flash SKUs."
         }
       },
       "required": [
@@ -1336,10 +1336,23 @@
             "Creating",
             "Updating",
             "Deleting",
+            "DeleteFailed",
             "Disabled"
           ],
           "x-ms-enum": {
             "name": "ProvisioningState",
+            "modelAsString": true
+          }
+        },
+        "clusteringPolicy": {
+          "type": "string",
+          "description": "Clustering policy",
+          "enum": [
+            "EnterpriseCluster",
+            "OSSCluster"
+          ],
+          "x-ms-enum": {
+            "name": "ClusteringPolicy",
             "modelAsString": true
           }
         },
@@ -1360,10 +1373,6 @@
             "name": "EvictionPolicy",
             "modelAsString": true
           }
-        },
-        "persistence": {
-          "$ref": "#/definitions/Persistence",
-          "description": "Persistence settings"
         },
         "modules": {
           "type": "array",
@@ -1394,23 +1403,6 @@
         }
       },
       "description": "The response of a list-all operation."
-    },
-    "Persistence": {
-      "title": "Persistence settings",
-      "description": "Persistence-related configuration for the RedisEnterprise database",
-      "properties": {
-        "mode": {
-          "type": "string",
-          "description": "The kind of persistence enabled.",
-          "enum": [
-            "Disabled"
-          ],
-          "x-ms-enum": {
-            "name": "PersistenceMode",
-            "modelAsString": true
-          }
-        }
-      }
     },
     "Module": {
       "title": "Module settings",
@@ -1485,7 +1477,7 @@
       "properties": {
         "sasUri": {
           "type": "string",
-          "description": "SasUri for the target blob to import from"
+          "description": "SAS Uri for the target blob to import from"
         }
       },
       "required": [
@@ -1498,7 +1490,7 @@
       "properties": {
         "sasUri": {
           "type": "string",
-          "description": "SasUri for the target directory to export to"
+          "description": "SAS Uri for the target directory to export to"
         }
       },
       "required": [
