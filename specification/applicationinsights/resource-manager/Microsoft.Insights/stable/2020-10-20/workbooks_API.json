@@ -34,7 +34,7 @@
     }
   },
   "paths": {
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.insights/workbooks": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Insights/Workbooks": {
       "get": {
         "description": "Get all Workbooks defined within a specified resource group and category.",
         "operationId": "Workbooks_ListByResourceGroup",
@@ -81,11 +81,14 @@
         "x-ms-examples": {
           "WorkbooksList": {
             "$ref": "./examples/WorkbooksList.json"
+          },
+          "WorkbooksManagedList": {
+            "$ref": "./examples/WorkbooksManagedList.json"
           }
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.insights/workbooks/{resourceName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Insights/Workbooks/{resourceName}": {
       "get": {
         "description": "Get a single workbook by its resourceName.",
         "operationId": "Workbooks_Get",
@@ -120,6 +123,9 @@
         "x-ms-examples": {
           "WorkbookGet": {
             "$ref": "./examples/WorkbookGet.json"
+          },
+          "WorkbookManagedGet": {
+            "$ref": "./examples/WorkbookManagedGet.json"
           }
         }
       },
@@ -210,6 +216,9 @@
           }
         },
         "x-ms-examples": {
+          "WorkbookManagedAdd": {
+            "$ref": "./examples/WorkbookManagedAdd.json"
+          },
           "WorkbookAdd": {
             "$ref": "./examples/WorkbookAdd.json"
           }
@@ -259,6 +268,9 @@
           }
         },
         "x-ms-examples": {
+          "WorkbookManagedUpdate": {
+            "$ref": "./examples/WorkbookManagedUpdate.json"
+          },
           "WorkbookUpdate": {
             "$ref": "./examples/WorkbookUpdate.json"
           }
@@ -269,6 +281,10 @@
   "definitions": {
     "Resource": {
       "properties": {
+        "identity": {
+          "description": "Identity used for BYOS",
+          "$ref": "#/definitions/ManagedIdentity"
+        },
         "id": {
           "type": "string",
           "readOnly": true,
@@ -389,6 +405,10 @@
         "sourceId": {
           "type": "string",
           "description": "ResourceId for a source resource."
+        },
+        "storageUri": {
+          "type": "string",
+          "description": "BYOS Storage Account URI"
         }
       }
     },
@@ -463,6 +483,7 @@
       "description": "Error Field contract."
     },
     "WorkbookError": {
+      "description": "Error message body that will indicate why the operation failed.",
       "properties": {
         "code": {
           "type": "string",
@@ -479,8 +500,24 @@
           },
           "description": "The list of invalid fields send in request, in case of validation error."
         }
-      },
-      "description": "Error message body that will indicate why the operation failed."
+      }
+    },
+    "ManagedIdentity": {
+      "description": "Customer Managed Identity",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "identity type: \"systemAssigned\", \"userAssigned\", \"systemAssigned,userAssigned\", or \"None\""
+        },
+        "principalId": {
+          "type": "string",
+          "description": "principalId used for the managed identity"
+        },
+        "tenantId": {
+          "type": "string",
+          "description": "tenantId used for the managed identity"
+        }
+      }
     }
   },
   "parameters": {
@@ -515,7 +552,7 @@
       "in": "query",
       "required": true,
       "type": "string",
-      "description": "Azure Resource Id that will fetch all related workbooks.",
+      "description": "Azure Resource Id that will fetch all linked workbooks.",
       "x-ms-parameter-location": "method"
     },
     "CanFetchWorkbookContentParameter": {
