@@ -22,7 +22,7 @@ directive:
       parameter-name: name
   - where:
       subject: MachineExtension
-      parameter-name: type_properties_type
+      parameter-name: type-properties-type
     set:
       parameter-name: type
   - where:
