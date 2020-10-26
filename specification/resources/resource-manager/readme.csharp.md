@@ -792,3 +792,17 @@ batch:
  - tag: package-locks-2016-09
  - tag: package-resources-2018-05
  ```
+
+### Profile: hybrid_2020_09_01
+
+These settings apply only when `--csharp-profile=hybrid_2020_09_01` is specified on the command line.
+
+``` yaml $(csharp-profile)=='hybrid_2020_09_01'
+namespace: Microsoft.Azure.Management.Profiles.$(csharp-profile).ResourceManager  
+output-folder: $(csharp-sdks-folder)/$(csharp-profile)/Resource/Management.ResourceManager/Generated
+
+batch:
+ - tag: package-resources-2019-10
+ - tag: package-policy-2016-12
+ - tag: package-locks-2016-09
+ ```
