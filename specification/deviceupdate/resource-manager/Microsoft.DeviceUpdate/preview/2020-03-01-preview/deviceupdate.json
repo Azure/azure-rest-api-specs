@@ -767,7 +767,7 @@
         "resourceId": {
           "description": "IoTHub resource ID",
           "type": "string",
-          "pattern": "^\\/subscriptions\\/.+\\/resourceGroups\\/.+\\/providers\\/Microsoft\\.Devices\\/IotHubs\\/.+$",
+          "pattern": "^\/subscriptions\/(.+){36}\/resourceGroups\/.+\/providers\/Microsoft\\.Devices\/IotHubs\/.+$",
           "minLength": 108,
           "maxLength": 244
         },
@@ -932,14 +932,6 @@
       "pattern": "^[A-Za-z][A-Za-z0-9]+$",
       "minLength": 3,
       "maxLength": 36
-    },
-    "IotHubName": {
-      "name": "iotHubName",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "The Iot Hub Name",
-      "x-ms-parameter-location": "method"
     }
   }
 }
