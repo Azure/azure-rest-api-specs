@@ -124,7 +124,7 @@ input-file:
   - Microsoft.Insights/stable/2015-05-01/webTestLocations_API.json
   - Microsoft.Insights/stable/2015-05-01/webTests_API.json
   - Microsoft.Insights/stable/2020-10-20/workbooks_API.json
-  - Microsoft.Insights/stable/2020-10-20/workbookOperations_API.json
+  - Microsoft.Insights/stable/2020-10-20/aiOperations_API.json
 ```
 
 ### Tag: package-2020-10
