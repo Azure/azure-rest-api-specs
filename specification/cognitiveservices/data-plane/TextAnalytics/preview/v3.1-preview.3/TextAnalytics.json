@@ -696,12 +696,6 @@
               "items": {
                 "$ref": "#/definitions/KeyPhrasesTask"
               }
-            },
-            "sentimentAnalysisTasks": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/SentimentTask"
-              }
             }
           },
           "type": "object"
@@ -1165,25 +1159,6 @@
                     "properties": {
                       "results": {
                         "$ref": "#/definitions/KeyPhraseResult"
-                      }
-                    }
-                  }
-                ]
-              }
-            },
-            "sentimentAnalysisTasks": {
-              "type": "array",
-              "items": {
-                "type": "object",
-                "allOf": [
-                  {
-                    "$ref": "#/definitions/TaskState"
-                  },
-                  {
-                    "type": "object",
-                    "properties": {
-                      "results": {
-                        "$ref": "#/definitions/SentimentResponse"
                       }
                     }
                   }
