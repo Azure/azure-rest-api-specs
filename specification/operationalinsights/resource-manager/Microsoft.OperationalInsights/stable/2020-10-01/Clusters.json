@@ -329,10 +329,6 @@
   "definitions": {
     "ClusterProperties": {
       "properties": {
-        "nextLink": {
-          "description": "The link used to get the next page of recommendations.",
-          "type": "string"
-        },
         "clusterId": {
           "type": "string",
           "readOnly": true,
@@ -359,7 +355,8 @@
         "isDoubleEncryptionEnabled": {
           "type": "boolean",
           "readOnly": false,
-          "description": "Configures whether cluster will use double encryption. This Property can not be modified after cluster creation. Default value is 'true'"
+          "description": "Configures whether cluster will use double encryption. This Property can not be modified after cluster creation. Default value is 'true'",
+          "x-ms-mutability": ["create"]
         },
         "isAvailabilityZonesEnabled": {
           "type": "boolean",
@@ -373,7 +370,11 @@
           "enum": [
             "Cluster",
             "Workspaces"
-          ]
+          ],
+          "x-ms-enum": {
+            "name": "BillingType",
+            "modelAsString": true
+          }
         },
         "keyVaultProperties": {
           "$ref": "#/definitions/keyVaultProperties",
@@ -485,6 +486,12 @@
         "keyVersion": {
           "description": "The version of the key associated with the Log Analytics cluster.",
           "type": "string"
+        },
+        "rsaKeySize": {
+          "description": "Selected key minimum required key size.",
+          "type": "integer",
+          "format": "int32",
+          "x-ms-mutability": ["create"]
         }
       }
     },
@@ -534,7 +541,7 @@
           }
         },
         "userAssignedIdentities": {
-          "description": "The list of user identities associated with the resource. The user identity \r\ndictionary key references will be ARM resource ids in the form: \r\n'/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/\r\n    providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}'.",
+          "description": "The list of user identities associated with the resource. The user identity dictionary key references will be ARM resource ids in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}'.",
           "type": "object",
           "additionalProperties": {
             "$ref": "#/definitions/UserIdentityProperties"
