@@ -784,13 +784,8 @@
             "$ref": "#/parameters/FileStream"
           },
           {
-            "name": "pageRange",
-            "in": "query",
-            "description": "Specify page number or range of page numbers to process, e.g: 1, 5, 7, 9-10",
-            "required": false,
-            "type": "string",
-	    "pattern": "^\d+(-\d+)?$"
-          }	  
+            "$ref": "#/parameters/Pages"
+          }
         ],
         "responses": {
           "202": {
@@ -2052,34 +2047,48 @@
       "x-nullable": false
     },
     "Appearance": {
-      "description": "The appearance of extracted text.",
+      "description": "An object representing the appearance of the text line.",
       "type": "object",
       "required": [
-        "style",
-        "styleConfidence"
+        "style"
       ],
       "properties": {
         "style": {
-          "description": "Style of the extracted text: handwriting or printed.",
-          "enum": [
-            "handwriting",
-            "printed"
-          ],
+          "description": "An object representing the style of the text line.",
+          "type": "object",
+          "$ref": "#/definitions/Style"
+        }
+      }
+    },
+    "Style": {
+      "description": "An object representing the style of the text line.",
+      "type": "object",
+      "required": [
+        "name",
+        "confidence"
+      ],
+      "properties": {
+        "name": {
+          "description": "The text line style name, including handwriting and other.",
           "type": "string",
           "x-ms-enum": {
-            "name": "textStyle",
-            "modelAsString": false
+            "name": "TextStyle",
+            "modelAsString": true
           },
-          "x-nullable": false
+          "enum": [
+            "other",
+            "handwriting"
+          ]
         },
-        "styleConfidence": {
-          "description": "Confidence value of predicted style.",
-          "$ref": "#/definitions/Confidence"
+        "confidence": {
+          "description": "The confidence of text line style.",
+          "type": "number",
+          "format": "float"
         }
       }
     }
   },
-  "parameters": {
+ "parameters": {
     "Endpoint": {
       "name": "endpoint",
       "description": "Supported Cognitive Services endpoints (protocol and hostname, for example: https://westus2.api.cognitive.microsoft.com).",
@@ -2096,6 +2105,18 @@
       "in": "body",
       "schema": {
         "$ref": "#/definitions/SourcePath"
+      }
+    },
+    "Pages": {
+      "name": "Pages",
+      "in": "query",
+      "description": "Custom page numbers for multi-page documents(PDF/TIFF), input the number of the pages you want to get OCR result. For a range of pages, use a hyphen. Separate each page or range with a comma or space.",
+      "required": false,
+      "x-ms-parameter-location": "method",
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "(^[0-9]+-[0-9]+$)|(^[0-9]+$)"
       }
     }
   }
