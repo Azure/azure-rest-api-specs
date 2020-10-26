@@ -944,51 +944,6 @@
         }
       }
     },
-    "ManagedIdentitySqlControlSettingsModel": {
-      "type": "object",
-      "title": "Managed Identity Sql Control Settings",
-      "description": "Sql Control Settings for workspace managed identity",
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ProxyResource"
-        }
-      ],
-      "properties": {
-        "properties": {
-          "title": "Managed Identity Sql Control Settings",
-          "description": "Sql Control Settings for workspace managed identity",
-          "properties": {
-            "grantSqlControlToManagedIdentity": {
-              "type": "object",
-              "description": "Grant sql control to managed identity",
-              "properties": {
-                "desiredState": {
-                  "description": "Desired state",
-                  "type": "string",
-                  "enum": [
-                    "Enabled",
-                    "Disabled"
-                  ]
-                },
-                "actualState": {
-                  "description": "Actual state",
-                  "type": "string",
-                  "enum": [
-                    "Enabling",
-                    "Enabled",
-                    "Disabling",
-                    "Disabled",
-                    "Unknown"
-                  ],
-                  "readOnly": true
-                }
-              }
-            }
-          },
-          "x-ms-client-flatten": true
-        }
-      }
-    },
     "RestorableDroppedSqlPoolProperties": {
       "properties": {
         "databaseName": {
