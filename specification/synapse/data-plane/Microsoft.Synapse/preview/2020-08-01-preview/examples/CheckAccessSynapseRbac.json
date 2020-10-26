@@ -1,0 +1,63 @@
+{ 
+    "parameters": { 
+      "workspaceName": "exampleWorkspace",
+      "SynapseDnsSuffix": "azuresynapse.net",
+      "api-version": "2020-08-01-preview",
+       "request": { 
+            "subject": {
+                "principalId": "00000000-0000-0000-0000-000000000000",
+                "groupIds": [
+                    "00000000-0000-0000-0000-000000000000",
+                    "00000000-0000-0000-0000-000000000000"
+                ]
+            },            
+            "scope": "workspaces/exampleWorkspace",
+            "actions": [
+                {
+                    "id": "Action 1",
+                    "isDataAction": "true || false"
+                },
+                {
+                    "id": "Action 2",
+                    "isDataAction": "true || false"
+                }
+            ]
+        }
+    }, 
+    "responses": { 
+      "200": {
+        "body": [
+                  { 
+                    "accessDecision": "Allowed || NotAllowed",
+                    "actionId": "Action 1",
+                    "roleAssignment": { 
+                        "id": "00000000-0000-0000-0000-000000000000", 
+                        "roleDefinitionId": "00000000-0000-0000-0000-000000000000", 
+                        "principalId": "00000000-0000-0000-0000-000000000000",
+                        "scope": "workspaces/exampleWorkspace",
+                        "principleType": "User || Group || ServicePrincipal"
+                    }
+                  },
+                  { 
+                    "accessDecision": "Allowed || NotAllowed",
+                    "actionId": "Action 1",
+                    "roleAssignment": { 
+                        "id": "00000000-0000-0000-0000-000000000000", 
+                        "roleDefinitionId": "00000000-0000-0000-0000-000000000000", 
+                        "principalId": "00000000-0000-0000-0000-000000000000",
+                        "scope": "workspaces/exampleWorkspace",
+                        "principleType": "User || Group || ServicePrincipal"
+                    }
+                  }
+                ]
+      },
+      "default": {
+        "body": {
+          "error": {          
+            "code": "Error code",
+            "message": "Error message" 
+          }         
+        }
+      }
+    }
+}

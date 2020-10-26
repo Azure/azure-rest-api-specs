@@ -1,0 +1,41 @@
+{ 
+    "parameters": { 
+      "workspaceName": "exampleWorkspace",
+      "SynapseDnsSuffix": "azuresynapse.net",
+      "api-version": "2020-08-01-preview",
+      "roleId": "00000000-0000-0000-0000-000000000000",
+      "principalId": "00000000-0000-0000-0000-000000000000",
+      "scope": "workspaces/exampleWorkspace"      
+    }, 
+    "responses": { 
+      "200": {
+        "headers" : {
+            "x-ms-continuation" : null
+        },
+        "body": [
+          { 
+            "id": "00000000-0000-0000-0000-000000000000", 
+            "roleDefinitionId": "00000000-0000-0000-0000-000000000000", 
+            "principalId": "00000000-0000-0000-0000-000000000000",
+            "scope": "workspaces/exampleWorkspace",
+            "principleType": "User || Group || ServicePrincipal"
+          },
+          { 
+            "id": "00000000-0000-0000-0000-000000000000", 
+            "roleDefinitionId": "00000000-0000-0000-0000-000000000000", 
+            "principalId": "00000000-0000-0000-0000-000000000000",
+            "scope": "workspaces/exampleWorkspace",
+            "principleType": "User || Group || ServicePrincipal"
+          }
+        ]
+      },
+      "default": {
+        "body": {
+          "error": {
+            "code": "Error code",
+            "message": "Error message"
+            }
+          }
+        }
+      }
+}
