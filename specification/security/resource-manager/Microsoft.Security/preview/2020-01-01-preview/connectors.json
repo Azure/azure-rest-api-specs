@@ -37,7 +37,7 @@
     "/subscriptions/{subscriptionId}/providers/Microsoft.Security/connectors": {
       "get": {
         "x-ms-examples": {
-          "Get all Cloud accounts connectors of a subscription": {
+          "Get all cloud accounts connectors of a subscription": {
             "$ref": "./examples/Connectors/GetListConnectorSubscription_example.json"
           }
         },
@@ -233,7 +233,7 @@
     },
     "ConnectorSettingProperties": {
       "type": "object",
-      "description": "Describes properties of an connector setting",
+      "description": "Describes properties of a connector setting",
       "properties": {
         "hybridComputeSettings": {
           "description": "Settings for hybrid compute management. These settings are relevant only for Arc autoProvision (Hybrid Compute).",
@@ -292,11 +292,11 @@
             "values": [
               {
                 "value": "On",
-                "description": "Install missing Azure Arc agent on VMs automatically"
+                "description": "Install missing Azure Arc agents on machines automatically"
               },
               {
                 "value": "Off",
-                "description": "Do not install Azure Arc agent on the VMs automatically"
+                "description": "Do not install Azure Arc agent on the machines automatically"
               }
             ]
           }
@@ -334,7 +334,7 @@
       "properties": {
         "applicationId": {
           "type": "string",
-          "description": "Application id of service principal."
+          "description": "Application ID of service principal."
         },
         "secret": {
           "type": "string",
@@ -422,7 +422,7 @@
     },
     "AwsCredsAuthenticationDetailsProperties": {
       "type": "object",
-      "description": "AWS cloud account connector based credentials, the credentials is composed of access key id and secret key, for more details, refer to <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/id_users_create.html\">Creating an IAM User in Your AWS Account (write only)</a>",
+      "description": "AWS cloud account connector based credentials, the credentials is composed of access key ID and secret key, for more details, refer to <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/id_users_create.html\">Creating an IAM User in Your AWS Account (write only)</a>",
       "x-ms-discriminator-value": "awsCreds",
       "allOf": [
         {
