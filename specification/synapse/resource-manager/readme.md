@@ -81,6 +81,9 @@ directive:
     where: 
         - $.definitions.SqlPoolVulnerabilityAssessmentRuleBaseline
         - $.definitions.DataMaskingPolicy
+        - $.definitions.DataWarehouseUserActivities
+        - $.definitions.SqlPoolConnectionPolicy
+        - $.definitions.TransparentDataEncryption
     suppress: 
         - R4015
     reason: SQL doesn't support 'list' operation everywhere, so we cannot support List for certain Sql pool operations
@@ -97,6 +100,16 @@ directive:
     where:
       - $.definitions.DataMaskingRule
       - $.definitions.SqlPoolOperation
+  - suppress: R4015
+    reason: Needs implmentation
+    from: Microsoft.Synapse/preview/2019-06-01-preview/workspace_managedIdentity.json
+    where:
+      - $.definitions.ManagedIdentitySqlControlSettingsInfo
+  - suppress: GetCollectionResponseSchema
+    reason: Needs implmentation
+    from: Microsoft.Synapse/preview/2019-06-01-preview/workspace_keys.json
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces/{workspaceName}/keys"]
 ```
 
 ---
