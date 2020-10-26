@@ -1,0 +1,72 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Mixed Reality Cloud STS service",
+    "description": "Definition for the Mixed Reality Cloud STS service APIs.",
+    "version": "2019-02-28-preview"
+  },
+  "host": "sts.mixedreality.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "paths": {
+    "/Accounts/{accountId}/token": {
+      "get": {
+        "tags": [
+          "Accounts"
+        ],
+        "summary": "Gets an access token to be used with Mixed Reality services.",
+        "operationId": "GetToken",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "accountId",
+            "description": "The Mixed Reality account identifier.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "header",
+            "name": "X-MRC-CV",
+            "description": "The client request correlation vector, which should be set to a new value for each request.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/StsTokenReponseMessage"
+            },
+            "headers": {
+              "MS-CV": {
+                "description": "The service response correlation vector, which will be a new value for every response.",
+                "type": "string",
+                "format": ""
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "StsTokenReponseMessage": {
+      "description": "Represents a token response message from the STS service.",
+      "required": [
+        "AccessToken"
+      ],
+      "type": "object",
+      "properties": {
+        "AccessToken": {
+          "description": "An access token for the account.",
+          "type": "string"
+        }
+      }
+    }
+  }
+}
