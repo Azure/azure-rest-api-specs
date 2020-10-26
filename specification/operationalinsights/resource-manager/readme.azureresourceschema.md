@@ -53,8 +53,8 @@ output-folder: $(azureresourceschema-folder)/schemas
 
 # all the input files in this apiVersion
 input-file:
-  - Microsoft.OperationalInsights/preview/2020-10-01/Clusters.json
-  - Microsoft.OperationalInsights/preview/2020-10-01/Operations.json
+  - Microsoft.OperationalInsights/stable/2020-10-01/Clusters.json
+  - Microsoft.OperationalInsights/stable/2020-10-01/Operations.json
 
 ```
 
