@@ -207,7 +207,7 @@
         "capacity": {
           "type": "integer",
           "format": "int32",
-          "description": "If the SKU supports scale out/in then the capacity integer should be included. If scale out/in is not possible for the resource this may be omitted."
+          "description": "If the SKU supports scale out/in then the capacity integer indicates the current scaling-factor of the resource. If scale out/in is not possible for the resource this may be omitted."
         }
       },
       "required": [
@@ -332,7 +332,7 @@
       "type": "object",
       "properties": {
         "name": {
-          "description": "The name of the operation. It should match the action name that appears in RBAC / the event service. Examples: \"Microsoft.Compute/virtualMachines/write\", \"Microsoft.Compute/virtualMachines/capture/action\"",
+          "description": "The name of the operation, as per Resource-Based Access Control (RBAC). Examples: \"Microsoft.Compute/virtualMachines/write\", \"Microsoft.Compute/virtualMachines/capture/action\"",
           "type": "string",
           "readOnly": true
         },
@@ -350,24 +350,24 @@
               "readOnly": true
             },
             "resource": {
-              "description": "The localized friendly name of the resource type related to this operation. It should match the public documentation for the resource provider, e.g. \"Virtual Machines\" or \"Job Schedule Collections\".",
+              "description": "The localized friendly name of the resource type related to this operation. E.g. \"Virtual Machines\" or \"Job Schedule Collections\".",
               "type": "string",
               "readOnly": true
             },
             "operation": {
-              "description": "The localized friendly name for the operation. It should be concise (to fit in drop downs) but clear (i.e. self-documenting), e.g. \"Create or Update Virtual Machine\", \"Restart Virtual Machine\".",
+              "description": "The concise, localized friendly name for the operation; suitable for dropdowns. E.g. \"Create or Update Virtual Machine\", \"Restart Virtual Machine\".",
               "type": "string",
               "readOnly": true
             },
             "description": {
-              "description": "The localized friendly description of the operation, as it should be shown to the user. It should be thorough, yet concise; it will be used in tool tips and detailed views.",
+              "description": "The short, localized friendly description of the operation; suitable for tool tips and detailed views.",
               "type": "string",
               "readOnly": true
             }
           }
         },
         "origin": {
-          "description": "The intended executor of the operation; governs the display of the operation in the RBAC UX and the audit logs UX. Default value is \"user,system\"",
+          "description": "The intended executor of the operation; as in Resource Based Access Control (RBAC) and audit logs UX. Default value is \"user,system\"",
           "type": "string",
           "readOnly": true,
           "enum": [
