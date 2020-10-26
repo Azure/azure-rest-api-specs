@@ -28,7 +28,7 @@ These are the global settings for the ApplicationInsights API.
 title: ApplicationInsightsManagementClient
 description: Composite Swagger for Application Insights Management Client
 openapi-type: arm
-tag: package-preview-2020-10
+tag: package-2020-10
 ```
 
 ## Suppression
@@ -106,14 +106,24 @@ directive:
 ```
 
 
+### Tag: package-2020-10
+
+These settings apply only when `--tag=package-2020-10` is specified on the command line.
+
+```yaml $(tag) == 'package-2020-10'
+input-file:
+  - Microsoft.Insights/stable/2020-10-20/workbookOperations_API.json
+  - Microsoft.Insights/stable/2020-10-20/workbooks_API.json
+```
 ### Tag: package-preview-2020-10
 
 These settings apply only when `--tag=package-preview-2020-10` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2020-10'
+``` yaml $(tag) == 'package-preview-2020-10'
 input-file:
   - Microsoft.Insights/preview/2020-10-05-preview/webTests_API.json
 ```
+
 ### Tag: package-preview-2020-06-only
 
 These settings apply only when `--tag=package-preview-2020-06-only` is specified on the command line.
