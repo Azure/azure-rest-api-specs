@@ -410,6 +410,10 @@
           "type": "boolean",
           "description": "Whether compute isolation is required or not."
         },
+        "sessionLevelPackagesEnabled": {
+          "type": "boolean",
+          "description": "Whether session level library/package management is enabled or not."
+        },
         "sparkEventsFolder": {
           "type": "string",
           "description": "The Spark events folder"
@@ -422,6 +426,13 @@
         "libraryRequirements": {
           "$ref": "#/definitions/LibraryRequirements",
           "description": "Library version requirements"
+        },
+        "customLibraries": {
+          "description": "List of custom libraries/packages associated with the spark pool.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/LibraryInfo"
+          }
         },
         "sparkConfigProperties": {
           "$ref": "#/definitions/LibraryRequirements",
@@ -442,7 +453,8 @@
             "Medium",
             "Large",
             "XLarge",
-            "XXLarge"
+            "XXLarge",
+            "XXXLarge"
           ],
           "type": "string",
           "description": "The level of compute power that each node in the Big Data pool has.",
@@ -499,6 +511,34 @@
         "enabled": {
           "type": "boolean",
           "description": "Whether auto-pausing is enabled for the Big Data pool."
+        }
+      }
+    },
+    "LibraryInfo": {
+      "type": "object",
+      "description": "Library/package information of a Big Data pool powered by Apache Spark",
+      "title": "Information about a library/package created at the workspace level.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the library."
+        },
+        "path": {
+          "type": "string",
+          "description": "Storage blob path of library."
+        },
+        "containerName": {
+          "type": "string",
+          "description": "Storage blob container name."
+        },
+        "uploadedTimestamp": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The last update time of the library."
+        },
+        "type": {
+          "type": "string",
+          "description": "Type of the library."
         }
       }
     },
