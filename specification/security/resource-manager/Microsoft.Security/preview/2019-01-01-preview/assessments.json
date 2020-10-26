@@ -242,7 +242,7 @@
       "description": "Describes properties of an assessment.",
       "properties": {
         "resourceDetails": {
-          "$ref": "../../../common/v1/types.json#/definitions/ResourceDetails"
+          "$ref": "#/definitions/AssessmentResourceDetails"
         },
         "displayName": {
           "readOnly": true,
@@ -322,6 +322,115 @@
       },
       "required": [
         "code"
+      ]
+    },
+    "AssessmentAzureResourceDetails": {
+      "type": "object",
+      "description": "Details of the Azure resource that was assessed",
+      "x-ms-discriminator-value": "Azure",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AssessmentResourceDetails"
+        }
+      ],
+      "properties": {
+        "Id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Azure resource Id of the assessed resource"
+        }
+      }
+    },
+    "AssessmentAwsResourceDetails": {
+      "type": "object",
+      "description": "Details of the Aws resource that was assessed",
+      "x-ms-discriminator-value": "Aws",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AssessmentResourceDetails"
+        }
+      ],
+      "properties": {
+        "accountId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "AWS account Id of the assessed resource"
+        },
+        "awsResourceId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "AWS resource Id. can be ARN or other"
+        },
+        "region": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The region of the resource in AWS"
+        }
+      },
+      "required": [
+        "accountId",
+        "awsResourceId",
+        "region"
+      ]
+    },
+    "AssessmentGcpResourceDetails": {
+      "type": "object",
+      "description": "Details of the Gcp resource that was assessed",
+      "x-ms-discriminator-value": "Gcp",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AssessmentResourceDetails"
+        }
+      ],
+      "properties": {
+        "projectId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Gcp project Id"
+        },
+        "gcpResourceId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Gcp resource Id"
+        }
+      },
+      "required": [
+        "projectId",
+        "gcpResourceId"
+      ]
+    },
+    "AssessmentOnPremiseResourceDetails": {
+      "type": "object",
+      "description": "Details of the On Premise resource that was assessed",
+      "x-ms-discriminator-value": "OnPremise",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AssessmentResourceDetails"
+        }
+      ],
+      "properties": {
+        "workspaceId": {
+          "type": "string",
+          "description": "Azure resource Id of the workspace the machine is attached to"
+        },
+        "vmuuid": {
+          "type": "string",
+          "description": "The unique Id of the machine"
+        },
+        "sourceComputerId": {
+          "type": "string",
+          "description": "The oms agent Id installed on the machine"
+        },
+        "machineName": {
+          "type": "string",
+          "description": "The name of the machine"
+        }
+      },
+      "required": [
+        "workspaceId",
+        "vmuuid",
+        "sourceComputerId",
+        "machineName"
       ]
     }
   },
