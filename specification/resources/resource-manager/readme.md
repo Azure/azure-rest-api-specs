@@ -61,18 +61,29 @@ tag: package-deploymentscripts-2020-10
 ```
 
 ``` yaml $(package-templatespecs)
-tag: package-preview-2020-08
+tag: package-2020-09
 ```
 
 
+### Tag: package-2020-09
+
+These settings apply only when `--tag=package-2020-09` is specified on the command line.
+
+```yaml $(tag) == 'package-2020-09'
+input-file:
+  - Microsoft.Authorization/stable/2020-09-01/policyAssignments.json
+  - Microsoft.Authorization/stable/2020-09-01/policyDefinitions.json
+  - Microsoft.Authorization/stable/2020-09-01/policySetDefinitions.json
+```
 ### Tag: package-preview-2020-08
 
 These settings apply only when `--tag=package-preview-2020-08` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2020-08'
+``` yaml $(tag) == 'package-preview-2020-08'
 input-file:
   - Microsoft.Solutions/preview/2020-08-21-preview/managedapplications.json
 ```
+
 ### Tag: package-resources-2020-06
 
 These settings apply only when `--tag=package-resources-2020-06` is specified on the command line.
@@ -727,4 +738,3 @@ override-info:
 ## AzureResourceSchema
 
 See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
-
