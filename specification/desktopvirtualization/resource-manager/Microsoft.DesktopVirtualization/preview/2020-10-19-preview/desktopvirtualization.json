@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "2020-09-21-preview",
+    "version": "2020-10-19-preview",
     "title": "Desktop Virtualization API Client"
   },
   "schemes": [
@@ -2483,6 +2483,33 @@
           "type": "string",
           "description": "Path to keyvault containing ssoContext secret."
         },
+        "ssoadfsAuthority": {
+          "type": "string",
+          "description": "URL to customer ADFS server for signing WVD SSO certificates."
+        },
+        "ssoClientId": {
+          "type": "string",
+          "description": "ClientId for the registered Relying Party used to issue WVD SSO certificates."
+        },
+        "ssoClientSecretKeyVaultPath": {
+          "type": "string",
+          "description": "Path to Azure KeyVault storing the secret used for communication to ADFS."
+        },
+        "ssoSecretType": {
+          "enum": [
+            "SharedKey",
+            "Certificate",
+            "SharedKeyInKeyVault",
+            "CertificateInKeyVault"
+          ],
+          "x-ms-enum": {
+            "name": "SSOSecretType",
+            "modelAsString": true
+          },
+          "type": "string",
+          "description": "The type of single sign on Secret Type.",
+          "x-nullable": false
+        },
         "preferredAppGroupType": {
           "enum": [
             "None",
@@ -2579,9 +2606,40 @@
           "$ref": "#/definitions/RegistrationInfoPatch",
           "description": "The registration info of HostPool."
         },
+        "vmTemplate": {
+          "type": "string",
+          "description": "VM template for sessionhosts configuration within hostpool."
+        },
         "ssoContext": {
           "type": "string",
           "description": "Path to keyvault containing ssoContext secret."
+        },
+        "ssoadfsAuthority": {
+          "type": "string",
+          "description": "URL to customer ADFS server for signing WVD SSO certificates."
+        },
+        "ssoClientId": {
+          "type": "string",
+          "description": "ClientId for the registered Relying Party used to issue WVD SSO certificates."
+        },
+        "ssoClientSecretKeyVaultPath": {
+          "type": "string",
+          "description": "Path to Azure KeyVault storing the secret used for communication to ADFS."
+        },
+        "ssoSecretType": {
+          "enum": [
+            "SharedKey",
+            "Certificate",
+            "SharedKeyInKeyVault",
+            "CertificateInKeyVault"
+          ],
+          "x-ms-enum": {
+            "name": "SSOSecretType",
+            "modelAsString": true
+          },
+          "type": "string",
+          "description": "The type of single sign on Secret Type.",
+          "x-nullable": false
         },
         "preferredAppGroupType": {
           "enum": [
@@ -3492,6 +3550,11 @@
         "updateErrorMessage": {
           "type": "string",
           "description": "The error message."
+        },
+        "sessionHostHealthCheckResult": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The health check info of the sessionHost."
         }
       }
     },
