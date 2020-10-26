@@ -58,19 +58,19 @@ python:
   license-header: MICROSOFT_MIT_NO_VERSION
   add-credentials: true
   payload-flattening-threshold: 2
-  namespace: azure.bing.search.customimagesearch
-  package-name: azure-bing-search-customimagesearch
+  namespace: azure.bing.customimagesearch
+  package-name: azure-bing-customimagesearch
   clear-output-folder: true
 ```
 ``` yaml $(python) && $(python-mode) == 'update'
 python:
   no-namespace-folders: true
-  output-folder: $(python-sdks-folder)/bing/azure-bing-search-customimagesearch/azure/bing/search/customimagesearch
+  output-folder: $(python-sdks-folder)/bing/azure-bing-customimagesearch/azure/bing/search/customimagesearch
 ```
 ``` yaml $(python) && $(python-mode) == 'create'
 python:
   basic-setup-py: true
-  output-folder: $(python-sdks-folder)/bing/azure-bing-search-customimagesearch
+  output-folder: $(python-sdks-folder)/bing/azure-bing-customimagesearch
 ```
 
 ## Suppressions
@@ -93,10 +93,10 @@ Please also specify `--azure-libraries-for-java-folder=<path to the root directo
 ``` yaml $(java)
 java:
   azure-arm: true
-  namespace: com.microsoft.azure.bing.search.customimagesearch
+  namespace: com.microsoft.azure.bing.customimagesearch
   license-header: MICROSOFT_MIT_NO_CODEGEN
   payload-flattening-threshold: 1
-  output-folder: $(azure-libraries-for-java-folder)/bing/data-plane/search/bingcustomimagesearch
+  output-folder: $(azure-libraries-for-java-folder)/bing/data-plane/customimagesearch
   with-optional-parameters: true
   prefix-model-type: Bing
   with-single-async-method: true

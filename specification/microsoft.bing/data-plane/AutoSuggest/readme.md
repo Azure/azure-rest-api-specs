@@ -66,19 +66,19 @@ python:
   license-header: MICROSOFT_MIT_NO_VERSION
   add-credentials: true
   payload-flattening-threshold: 2
-  namespace: azure.Bing.search.autosuggest
-  package-name: azure-Bing-search-autosuggest
+  namespace: azure.Bing.autosuggest
+  package-name: azure-Bing-autosuggest
   clear-output-folder: true
 ```
 ``` yaml $(python) && $(python-mode) == 'update'
 python:
   no-namespace-folders: true
-  output-folder: $(python-sdks-folder)/Bing/azure-bing-search-autosuggest/azure/Bing/search/autosuggest
+  output-folder: $(python-sdks-folder)/Bing/azure-bing-autosuggest/azure/Bing/autosuggest
 ```
 ``` yaml $(python) && $(python-mode) == 'create'
 python:
   basic-setup-py: true
-  output-folder: $(python-sdks-folder)/Bing/azure-bing-search-autosuggest
+  output-folder: $(python-sdks-folder)/Bing/azure-bing-autosuggest
 ```
 
 ## Go
@@ -93,10 +93,10 @@ Please also specify `--azure-libraries-for-java-folder=<path to the root directo
 ``` yaml $(java)
 java:
   azure-arm: true
-  namespace: com.microsoft.azure.bing.search.autosuggest
+  namespace: com.microsoft.azure.bing.autosuggest
   license-header: MICROSOFT_MIT_NO_CODEGEN
   payload-flattening-threshold: 1
-  output-folder: $(azure-libraries-for-java-folder)/bing/data-plane/search/bingautosuggest
+  output-folder: $(azure-libraries-for-java-folder)/bing/data-plane/autosuggest
   with-optional-parameters: true
   prefix-model-type: Bing
   with-single-async-method: true

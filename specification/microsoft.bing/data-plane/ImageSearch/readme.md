@@ -44,7 +44,7 @@ These settings apply only when `--csharp` is specified on the command line.
 ``` yaml $(csharp)
 csharp:
   namespace: Microsoft.Azure.Bing.ImageSearch
-  output-folder: $(csharp-sdks-folder)/Bing/BingImageSearch/src/Generated
+  output-folder: $(csharp-sdks-folder)/Bing/ImageSearch/src/Generated
   sync-methods: none
 ```
 
@@ -60,19 +60,19 @@ python:
   license-header: MICROSOFT_MIT_NO_VERSION
   add-credentials: true
   payload-flattening-threshold: 2
-  namespace: azure.bing.search.imagesearch
-  package-name: azure-bing-search-imagesearch
+  namespace: azure.bing.imagesearch
+  package-name: azure-bing-imagesearch
   clear-output-folder: true
 ```
 ``` yaml $(python) && $(python-mode) == 'update'
 python:
   no-namespace-folders: true
-  output-folder: $(python-sdks-folder)/bing/azure-bing-search-imagesearch/azure/bing/search/imagesearch
+  output-folder: $(python-sdks-folder)/bing/azure-bing-imagesearch/azure/bing/imagesearch
 ```
 ``` yaml $(python) && $(python-mode) == 'create'
 python:
   basic-setup-py: true
-  output-folder: $(python-sdks-folder)/bing/azure-bing-search-imagesearch
+  output-folder: $(python-sdks-folder)/bing/azure-bing-imagesearch
 ```
 
 ## Suppressions
@@ -95,10 +95,10 @@ Please also specify `--azure-libraries-for-java-folder=<path to the root directo
 ``` yaml $(java)
 java:
   azure-arm: true
-  namespace: com.microsoft.azure.bing.search.imagesearch
+  namespace: com.microsoft.azure.bing.imagesearch
   license-header: MICROSOFT_MIT_NO_CODEGEN
   payload-flattening-threshold: 1
-  output-folder: $(azure-libraries-for-java-folder)/bing/data-plane/search/bingimagesearch
+  output-folder: $(azure-libraries-for-java-folder)/bing/data-plane/imagesearch
   with-optional-parameters: true
   prefix-model-type: Bing
   with-single-async-method: true

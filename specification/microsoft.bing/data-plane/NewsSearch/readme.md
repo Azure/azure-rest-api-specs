@@ -52,8 +52,8 @@ swagger-to-sdk:
 These settings apply only when `--csharp` is specified on the command line.
 ``` yaml $(csharp)
 csharp:
-  namespace: Microsoft.Azure.Bing.Search.NewsSearch
-  output-folder: $(csharp-sdks-folder)/Bing/Search.BingNewsSearch/src/Generated
+  namespace: Microsoft.Azure.Bing.NewsSearch
+  output-folder: $(csharp-sdks-folder)/Bing/NewsSearch/src/Generated
   sync-methods: none
 ```
 
@@ -69,19 +69,19 @@ python:
   license-header: MICROSOFT_MIT_NO_VERSION
   add-credentials: true
   payload-flattening-threshold: 2
-  namespace: azure.bing.search.newssearch
-  package-name: azure-bing-search-newssearch
+  namespace: azure.bing.newssearch
+  package-name: azure-bing-newssearch
   clear-output-folder: true
 ```
 ``` yaml $(python) && $(python-mode) == 'update'
 python:
   no-namespace-folders: true
-  output-folder: $(python-sdks-folder)/bing/azure-bing-search-newssearch/azure/bing/search/newssearch
+  output-folder: $(python-sdks-folder)/bing/azure-bing-newssearch/azure/bing/newssearch
 ```
 ``` yaml $(python) && $(python-mode) == 'create'
 python:
   basic-setup-py: true
-  output-folder: $(python-sdks-folder)/bing/azure-bing-search-newssearch
+  output-folder: $(python-sdks-folder)/bing/azure-bing-newssearch
 ```
 
 ## Go
@@ -96,10 +96,10 @@ Please also specify `--azure-libraries-for-java-folder=<path to the root directo
 ``` yaml $(java)
 java:
   azure-arm: true
-  namespace: com.microsoft.azure.bing.search.newssearch
+  namespace: com.microsoft.azure.bing.newssearch
   license-header: MICROSOFT_MIT_NO_CODEGEN
   payload-flattening-threshold: 1
-  output-folder: $(azure-libraries-for-java-folder)/bing/data-plane/search/bingnewssearch
+  output-folder: $(azure-libraries-for-java-folder)/bing/data-plane/newssearch
   with-optional-parameters: true
   prefix-model-type: Bing
   with-single-async-method: true

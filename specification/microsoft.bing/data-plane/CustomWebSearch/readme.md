@@ -44,8 +44,8 @@ swagger-to-sdk:
 These settings apply only when `--csharp` is specified on the command line.
 ``` yaml $(csharp)
 csharp:
-  namespace: Microsoft.Azure.Bing.Search.CustomSearch
-  output-folder: $(csharp-sdks-folder)/Bing/BingCustomSearch/src/Generated
+  namespace: Microsoft.Azure.Bing.CustomSearch
+  output-folder: $(csharp-sdks-folder)/Bing/CustomSearch/src/Generated
   sync-methods: none
 ```
 
@@ -69,10 +69,10 @@ Please also specify `--azure-libraries-for-java-folder=<path to the root directo
 ``` yaml $(java)
 java:
   azure-arm: true
-  namespace: com.microsoft.azure.bing.search.customsearch
+  namespace: com.microsoft.azure.bing.customsearch
   license-header: MICROSOFT_MIT_NO_CODEGEN
   payload-flattening-threshold: 1
-  output-folder: $(azure-libraries-for-java-folder)/bing/data-plane/search/bingcustomsearch
+  output-folder: $(azure-libraries-for-java-folder)/bing/data-plane/customsearch
   with-optional-parameters: true
   prefix-model-type: Bing
   with-single-async-method: true

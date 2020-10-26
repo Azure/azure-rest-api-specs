@@ -47,7 +47,7 @@ These settings apply only when `--csharp` is specified on the command line.
 ``` yaml $(csharp)
 csharp:
   namespace: Microsoft.Azure.Bing.VisualSearch
-  output-folder: $(csharp-sdks-folder)/Bing/BingVisualSearch/src/Generated
+  output-folder: $(csharp-sdks-folder)/Bing/VisualSearch/src/Generated
   sync-methods: none
 ```
 
@@ -63,19 +63,19 @@ python:
   license-header: MICROSOFT_MIT_NO_VERSION
   add-credentials: true
   payload-flattening-threshold: 2
-  namespace: azure.bing.search.visualsearch
-  package-name: azure-bing-search-visualsearch
+  namespace: azure.bing.visualsearch
+  package-name: azure-bing-visualsearch
   clear-output-folder: true
 ```
 ``` yaml $(python) && $(python-mode) == 'update'
 python:
   no-namespace-folders: true
-  output-folder: $(python-sdks-folder)/bing/azure-bing-search-visualsearch/azure/bing/search/visualsearch
+  output-folder: $(python-sdks-folder)/bing/azure-bing-visualsearch/azure/bing/visualsearch
 ```
 ``` yaml $(python) && $(python-mode) == 'create'
 python:
   basic-setup-py: true
-  output-folder: $(python-sdks-folder)/bing/azure-bing-search-visualsearch
+  output-folder: $(python-sdks-folder)/bing/azure-bing-visualsearch
 ```
 
 ## Go
@@ -90,10 +90,10 @@ Please also specify `--azure-libraries-for-java-folder=<path to the root directo
 ``` yaml $(java)
 java:
   azure-arm: true
-  namespace: com.microsoft.azure.bing.search.visualsearch
+  namespace: com.microsoft.azure.bing.visualsearch
   license-header: MICROSOFT_MIT_NO_CODEGEN
   payload-flattening-threshold: 1
-  output-folder: $(azure-libraries-for-java-folder)/bing/data-plane/search/bingvisualsearch
+  output-folder: $(azure-libraries-for-java-folder)/bing/data-plane/visualsearch
   with-optional-parameters: true
   prefix-model-type: Bing
   with-single-async-method: true
