@@ -2,21 +2,14 @@
   "swagger": "2.0",
   "info": {
     "version": "2019-06-01-preview",
-    "title": "VnetClient"
+    "title": "ManagedPrivateEndpointsClient"
   },
   "x-ms-parameterized-host": {
-    "hostTemplate": "{workspaceName}.{SynapseDnsSuffix}",
+    "hostTemplate": "{endpoint}",
+    "useSchemePrefix": false,
     "parameters": [
       {
-        "name": "workspaceName",
-        "description": "The name of the workspace to execute operations on.",
-        "required": true,
-        "type": "string",
-        "in": "path",
-        "x-ms-skip-url-encoding": true
-      },
-      {
-        "$ref": "#/parameters/SynapseDnsSuffixInPath"
+        "$ref": "#/parameters/Endpoint"
       }
     ]
   },
@@ -79,10 +72,19 @@
           },
           {
             "$ref": "#/parameters/ManagedPrivateEndpointNameParameter"
+          },
+          {
+            "name": "managedPrivateEndpoint",
+            "in": "body",
+            "required": true,
+            "description": "Managed private endpoint properties.",
+            "schema": {
+              "$ref": "#/definitions/ManagedPrivateEndpoint"
+            }
           }
         ],
         "responses": {
-          "202": {
+          "200": {
             "schema": {
               "$ref": "#/definitions/ManagedPrivateEndpoint"
             },
@@ -262,22 +264,21 @@
     }
   },
   "parameters": {
+    "Endpoint": {
+      "name": "endpoint",
+      "description": "The workspace development endpoint, for example https://myworkspace.dev.azuresynapse.net.",
+      "required": true,
+      "type": "string",
+      "in": "path",
+      "x-ms-skip-url-encoding": true,
+      "x-ms-parameter-location": "client"
+    },
     "ApiVersionParameter": {
       "name": "api-version",
       "in": "query",
       "required": true,
       "type": "string",
       "description": "The Synapse client API Version."
-    },
-    "SynapseDnsSuffixInPath": {
-      "name": "SynapseDnsSuffix",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "default": "dev.azuresynapse.net",
-      "x-ms-skip-url-encoding": true,
-      "description": "Gets the DNS suffix used as the base for all Synapse service requests.",
-      "x-ms-parameter-location": "client"
     },
     "ManagedVirtualNetworkNameParameter": {
       "name": "managedVirtualNetworkName",

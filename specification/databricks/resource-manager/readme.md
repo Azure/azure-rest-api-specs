@@ -61,6 +61,18 @@ input-file:
 - Microsoft.Databricks/stable/2018-04-01/databricks.json
 ```
 
+---
+# Suppressions
+
+``` yaml
+directive:
+  - suppress: R3016
+    from: databricks.json 
+    where: $.definitions.Encryption.properties.KeyName
+    reason: Response from service is not camel case
+```
+
+---
 # Code Generation
 
 ## Swagger to SDK
