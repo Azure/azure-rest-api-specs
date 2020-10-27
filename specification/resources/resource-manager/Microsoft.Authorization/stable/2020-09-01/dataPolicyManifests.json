@@ -34,35 +34,6 @@
     }
   },
   "paths": {
-    "/providers/Microsoft.Authorization/dataPolicyManifests/operations": {
-      "get": {
-        "tags": [
-            "Operations"
-        ],
-        "description": "Lists all of the available data policy manifest operations.",
-        "operationId": "ListDataPolicyManifestOperations",
-        "parameters": [{
-            "$ref": "#/parameters/ApiVersionParameter"
-        }],
-        "responses": {
-            "200": {
-                "description": "OK. The request has succeeded.",
-                "schema": {
-                    "$ref": "#/definitions/DataPolicyManifestOperationListResult"
-                }
-            },
-            "default": {
-                "description": "Error response describing why the operation failed.",
-                "schema": {
-                    "$ref": "#/definitions/CloudError"
-                }
-            }
-        },
-        "x-ms-pageable": {
-            "nextLinkName": "nextLink"
-        }
-    }
-    },
     "/providers/Microsoft.Authorization/dataPolicyManifests/{policyMode}": {
       "get": {
         "tags": [
@@ -437,49 +408,6 @@
         }
       },
       "description": "List of data policy manifests."
-    },
-    "DataPolicyManifestOperation": {
-      "description": "REST API operation",
-      "type": "object",
-      "properties": {
-        "name": {
-          "description": "Operation name: Microsoft.Authorization/dataPolicyManifests",
-          "type": "string"
-        },
-        "display": {
-          "description": "The object that represents a data policy manifest operation.",
-          "properties": {
-            "provider": {
-              "description": "Service provider eg. Microsoft.Authorization",
-              "type": "string"
-            },
-            "resource": {
-              "description": "Resource on which the operation is performed eg. dataPolicyManifests",
-              "type": "string"
-            },
-            "operation": {
-              "description": "Operation type eg. Get",
-              "type": "string"
-            }
-          }
-        }
-      }
-    },
-    "DataPolicyManifestOperationListResult": {
-      "description": "Result of the request to list data policy manifest operations. It contains a list of operations and a URL link to get the next set of results.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/DataPolicyManifestOperation"
-          },
-          "description": "List of data policy manifest operations supported by the Microsoft.Authorization resource provider."
-        },
-        "nextLink": {
-          "type": "string",
-          "description": "URL to get the next set of operation list results if there are any."
-        }
-      }
     }
   },
   "parameters": {
