@@ -1033,83 +1033,6 @@
     }
   },
   "definitions": {
-    "KeyReleaseCondition": {
-      "properties": {
-        "claim": {
-          "x-ms-client-name": "claimType",
-          "type": "string",
-          "minLength": 1,
-          "description": "claim type name"
-        },
-        "condition": {
-          "x-ms-client-name": "claimCondition",
-          "type": "string",
-          "minLength": 1,
-          "description": "condition to test",
-          "enum": [
-            "equals"
-          ],
-          "x-ms-enum": {
-            "name": "KeyReleaseConditionCondition",
-            "modelAsString": true,
-            "values": [
-              {
-                "value": "equals",
-                "description": "equals comparison."
-              }
-            ]
-          }
-        },
-        "value": {
-          "type": "string"
-        }
-      }
-    },
-    "KeyReleaseAuthority": {
-      "properties": {
-        "authority": {
-          "x-ms-client-name": "authorityURL",
-          "type": "string",
-          "minLength": 1,
-          "description": "Base URL of the attestation service."
-        },
-        "allOf": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/KeyReleaseCondition",
-            "description": "The set of claim conditions that must be met."
-          }
-        }
-      }
-    },
-    "KeyReleasePolicy": {
-      "properties": {
-        "version": {
-          "description": "key release policy version",
-          "type": "string",
-          "enum": [
-            "0.2"
-          ],
-          "x-ms-enum": {
-            "name": "KeyReleasePolicyVersion",
-            "modelAsString": true,
-            "values": [
-              {
-                "value": "0.2",
-                "description": "Schema version 0.2"
-              }
-            ]
-          }
-        },
-        "anyOf": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/KeyReleaseAuthority",
-            "description": "Authorities."
-          }
-        }
-      }
-    },
     "JsonWebKey": {
       "properties": {
         "kid": {
@@ -1386,6 +1309,20 @@
         }
       },
       "description": "The key item containing key metadata."
+    },
+    "KeyReleasePolicy": {
+      "properties": {
+        "contentType": {
+          "description": "Content type and version of key release policy",
+          "type": "string",
+          "default": "application/json; charset=utf-8; version=1.0"
+        },
+        "data": {
+          "description": "Blob encoding the policy rules under which the key can be exported.",
+          "type": "string",
+          "format": "base64url"
+        }
+      }
     },
     "DeletedKeyBundle": {
       "allOf": [
