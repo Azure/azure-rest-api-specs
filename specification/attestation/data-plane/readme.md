@@ -27,14 +27,14 @@ These are the global settings for the Attestation APIs.
 
 ``` yaml
 openapi-type: data-plane
-tag: package-2018-09
+tag: package-2018-09-01
 ```
 
-### Tag: package-2018-09
+### Tag: package-2018-09-01
 
-These settings apply only when `--tag=package-2018-09` is specified on the command line.
+These settings apply only when `--tag=package-2018-09-01` is specified on the command line.
 
-``` yaml $(tag) == 'package-2018-09'
+``` yaml $(tag) == 'package-2018-09-01'
 input-file:
 - Microsoft.Attestation/stable/2018-09-01/attestation.json
 ```
