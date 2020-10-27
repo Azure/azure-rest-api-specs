@@ -44,7 +44,7 @@ cli:
 # -------- DO NOT generate those command groups --------
       - select: 'operationGroup'
         where:
-          operationGroup: BillingPeriods|EnrollmentAccounts|BillingPermissions|BillingRoleAssignments|BillingRoleDefinitions|Instructions|Address.*$
+          operationGroup: BillingPeriods|EnrollmentAccounts|BillingRoleAssignments|BillingRoleDefinitions|Instructions|Address.*$
         hidden: true
 
       # rename --billing-profile-name to --profile-name
@@ -60,6 +60,17 @@ cli:
         alias:
           - name
           - n
+      - where:
+          group: Agreements
+        set:
+          groupExtensionMode: preview
+
+# -------- Permission --------
+      - where:
+          group: BillingPermissions
+        name: permission
+        set:
+          groupExtensionMode: preview
 
  # -------- BillingAccounts --------
       # rename --billing-account-name to --account-name globally
