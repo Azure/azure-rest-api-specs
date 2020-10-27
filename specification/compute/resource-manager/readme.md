@@ -216,7 +216,7 @@ These settings apply only when `--tag=package-2020-12-01` is specified on the co
 ``` yaml $(tag) == 'package-2020-12-01'
 input-file:
 - Microsoft.Compute/stable/2020-12-01/compute.json
-- Microsoft.Compute/stable/2020-12-01/runCommands.json
+- Microsoft.Compute/stable/2020-06-01/runCommands.json
 - Microsoft.Compute/stable/2019-04-01/skus.json
 - Microsoft.Compute/stable/2020-06-30/disk.json
 - Microsoft.Compute/stable/2019-12-01/gallery.json
@@ -230,7 +230,6 @@ These settings apply only when `--tag=package-2020-12-01-only` is specified on t
 ``` yaml $(tag) == 'package-2020-12-01-only'
 input-file:
 - Microsoft.Compute/stable/2020-12-01/compute.json
-- Microsoft.Compute/stable/2020-12-01/runCommands.json
 ```
 
 ### Tag: package-2020-06-30
@@ -858,7 +857,7 @@ input-file:
 
 See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
 
-## Multi-API/Profile support for AutoRest v3 generators 
+## Multi-API/Profile support for AutoRest v3 generators
 
 AutoRest V3 generators require the use of `--tag=all-api-versions` to select api files.
 
@@ -870,6 +869,7 @@ require: $(this-folder)/../../../profiles/readme.md
 
 # all the input files across all versions
 input-file:
+  - $(this-folder)/Microsoft.Compute/stable/2020-12-01/compute.json
   - $(this-folder)/Microsoft.Compute/stable/2020-06-01/compute.json
   - $(this-folder)/Microsoft.Compute/stable/2020-06-01/runCommands.json
   - $(this-folder)/Microsoft.Compute/stable/2019-04-01/skus.json
@@ -914,11 +914,10 @@ input-file:
 
 ```
 
-If there are files that should not be in the `all-api-versions` set, 
+If there are files that should not be in the `all-api-versions` set,
 uncomment the  `exclude-file` section below and add the file paths.
 
 ``` yaml $(tag) == 'all-api-versions'
-#exclude-file: 
+#exclude-file:
 #  - $(this-folder)/Microsoft.Example/stable/2010-01-01/somefile.json
 ```
-
