@@ -400,7 +400,7 @@
           "200": {
             "description": "Returns the primary and secondary keys of the endpoint",
             "schema": {
-              "$ref": "#/definitions/AuthKeys"
+              "$ref": "machineLearningServices.json#/definitions/AuthKeys"
             }
           },
           "default": {
@@ -967,26 +967,12 @@
           "description": "AuthKeys to set initially on Online Endpoint.",
           "allOf": [
             {
-              "$ref": "#/definitions/AuthKeys"
+              "$ref": "machineLearningServices.json#/definitions/AuthKeys"
             }
           ],
           "x-ms-mutability": [
             "create"
           ]
-        }
-      }
-    },
-    "AuthKeys": {
-      "description": "Authentication keys for Online.",
-      "type": "object",
-      "properties": {
-        "primaryKey": {
-          "description": "Primary Authentication Key.",
-          "type": "string"
-        },
-        "secondaryKey": {
-          "description": "Secondary Authentication Key.",
-          "type": "string"
         }
       }
     },
