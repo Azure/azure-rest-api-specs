@@ -514,6 +514,171 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces/{workspaceName}/sqlAdministrators/activeDirectory": {
+      "get": {
+        "operationId": "WorkspaceSqlAadAdmins_Get",
+        "description": "Gets a workspace SQL active directory admin",
+        "tags": [
+          "Workspaces"
+        ],
+        "deprecated": false,
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/workspaceNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/WorkspaceAadAdminInfo"
+            },
+            "description": "OK"
+          },
+          "default": {
+            "schema": {
+              "$ref": "../../../../common/v1/types.json#/definitions/ErrorContract"
+            },
+            "description": ""
+          }
+        },
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-examples": {
+          "Get workspace active directory admin": {
+            "$ref": "./examples/GetWorkspaceAadAdmin.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "WorkspaceSqlAadAdmins_CreateOrUpdate",
+        "description": "Creates or updates a workspace SQL active directory admin",
+        "tags": [
+          "Workspaces"
+        ],
+        "deprecated": false,
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/workspaceNameParameter"
+          },
+          {
+            "description": "Workspace active directory administrator properties",
+            "schema": {
+              "$ref": "#/definitions/WorkspaceAadAdminInfo"
+            },
+            "in": "body",
+            "name": "aadAdminInfo",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/WorkspaceAadAdminInfo"
+            }
+          },
+          "202": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/WorkspaceAadAdminInfo"
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": "../../../../common/v1/types.json#/definitions/ErrorContract"
+            },
+            "description": ""
+          }
+        },
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "Create or update workspace active directory admin": {
+            "$ref": "./examples/CreateOrUpdateWorkspaceAadAdmin.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "WorkspaceSqlAadAdmins_Delete",
+        "description": "Deletes a workspace SQL active directory admin",
+        "tags": [
+          "Workspaces"
+        ],
+        "deprecated": false,
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/workspaceNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          },
+          "204": {
+            "description": "Accepted"
+          },
+          "202": {
+            "description": ""
+          },
+          "default": {
+            "schema": {
+              "$ref": "../../../../common/v1/types.json#/definitions/ErrorContract"
+            },
+            "description": ""
+          }
+        },
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "Delete workspace active directory admin": {
+            "$ref": "./examples/DeleteWorkspaceAadAdmin.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces/{workspaceName}/restorableDroppedSqlPools/{restorableDroppedSqlPoolId}": {
       "get": {
         "tags": [
