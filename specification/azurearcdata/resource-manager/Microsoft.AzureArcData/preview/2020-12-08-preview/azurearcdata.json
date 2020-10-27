@@ -16,7 +16,1205 @@
     "application/json"
   ],
   "paths": {
-
+    "/providers/Microsoft.AzureArcData/operations": {
+      "get": {
+        "tags": [
+          "Operations"
+        ],
+        "description": "Lists all of the available Azure Data Services on Azure Arc API operations.",
+        "operationId": "Operations_List",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved operations.",
+            "schema": {
+              "$ref": "#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 InvalidParameterValue - An invalid value was given to parameter.\n\n * 400 InvalidCrossSubscriptionVmMove - Invalid cross subscription move of resource.\n\n * 400 RPGenericUser - User Failure when calling other Resource Provider.\n\n * 400 InvalidArgument - Invalid argument '{0}'.\n\n * 400 ArgumentNotInRange - Argument '{0}' not in range.\n\n * 400 ResourceNotProvisioned - As the resource: {0} is not in a provisioned state, the request cannot be proceeded forward\n\n * 400 InvalidRgResourceId - Invalid Resourcegroup resource id specified.\n\n * 403 AccessDenied - Access denied.\n\n * 404 ResourceNotFound - The requested resource was not found.\n\n * 404 SubscriptionDoesNotExist - Subscription id does not exist.\n\n * 404 ResourceDoesNotExist - Resource does not exist.\n\n * 404 OperationIdNotFound - Operation id could not be found.\n\n * 404 OperationTypeNotFound - Operation Type not found.\n\n * 409 ResourceAlreadyExists - Resource already exists.\n\n * 409 SqlExtensionNotInstalled - SQL extension not installed.\n\n * 409 MissingMoveResources - Cannot move resources(s) because some resources are missing in the request.\n\n * 409 OperationInProgress - Operation in progress on resource already.\n\n * 409 OperationCanceled - Operation Cancelled.\n\n * 500 RPGenericSystem - System Failure when calling other Resource Provider.\n\n * 500 UnExpectedErrorOccurred - Unexpected error occurred.\n\n * 500 OperationTimeout - Operation timed out.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Lists all of the available Azure Data Services on Azure Arc API operations.": {
+            "$ref": "./examples/ListOperation.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.AzureArcData/sqlManagedInstances": {
+      "get": {
+        "tags": [
+          "SqlManagedInstances"
+        ],
+        "operationId": "SqlManagedInstances_List",
+        "summary": "List sqlManagedInstance resources in the subscription",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/apiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SqlManagedInstanceListResult"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 InvalidParameterValue - An invalid value was given to parameter.\n\n * 400 InvalidCrossSubscriptionVmMove - Invalid cross subscription move of resource.\n\n * 404 ResourceNotFound - The requested resource was not found.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Gets all SQL Instance in a subscription.": {
+            "$ref": "./examples/ListSubscriptionSqlManagedInstance.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureArcData/sqlManagedInstances": {
+      "get": {
+        "tags": [
+          "SqlManagedInstances"
+        ],
+        "operationId": "SqlManagedInstances_ListByResourceGroup",
+        "description": "Gets all sqlManagedInstances in a resource group.",
+        "summary": "List sqlManagedInstance resources in the resource group",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/apiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SqlManagedInstanceListResult"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Gets all SQL Instance in a resource group.": {
+            "$ref": "./examples/ListByResourceGroupSqlManagedInstance.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureArcData/sqlManagedInstances/{sqlManagedInstanceName}": {
+      "get": {
+        "tags": [
+          "SqlManagedInstances"
+        ],
+        "operationId": "SqlManagedInstances_Get",
+        "description": "Retrieves a SQL Managed Instance resource",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "name": "sqlManagedInstanceName",
+            "description": "Name of SQL Managed Instance",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "x-ms-parameter-location": "method"
+          },
+          {
+            "$ref": "#/parameters/apiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SqlManagedInstance"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Updates a SQL Instance tags.": {
+            "$ref": "./examples/GetSqlManagedInstance.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "SqlManagedInstances"
+        ],
+        "operationId": "SqlManagedInstances_Create",
+        "description": "Creates or replaces a SQL Managed Instance resource",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "name": "sqlManagedInstanceName",
+            "description": "The name of SQL Managed Instances",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "x-ms-parameter-location": "method"
+          },
+          {
+            "name": "sqlManagedInstance",
+            "in": "body",
+            "description": "The SQL Managed Instance to be created or updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SqlManagedInstance"
+            }
+          },
+          {
+            "$ref": "#/parameters/apiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SqlManagedInstance"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/SqlManagedInstance"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create or update a SQL Managed Instance": {
+            "$ref": "./examples/CreateOrUpdateSqlManagedInstance.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      },
+      "delete": {
+        "tags": [
+          "SqlManagedInstances"
+        ],
+        "operationId": "SqlManagedInstances_Delete",
+        "description": "Deletes a SQL Managed Instance resource",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "name": "sqlManagedInstanceName",
+            "description": "The name of Sql Managed Instances",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "x-ms-parameter-location": "method"
+          },
+          {
+            "$ref": "#/parameters/apiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully deleted the SQL Managed Instance."
+          },
+          "default": {
+            "description": "*** Error Responses: ***",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          },
+          "204": {
+            "description": "The specified SQL Managed Instance does not exist."
+          }
+        },
+        "x-ms-examples": {
+          "Delete a SQL Instance.": {
+            "$ref": "./examples/DeleteSqlManagedInstance.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "SqlManagedInstances"
+        ],
+        "operationId": "SqlManagedInstances_Update",
+        "description": "Updates a SQL Managed Instance resource",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "name": "sqlManagedInstanceName",
+            "description": "Name of sqlManagedInstance",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "x-ms-parameter-location": "method"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "The SQL Managed Instance.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SqlManagedInstanceUpdate"
+            }
+          },
+          {
+            "$ref": "#/parameters/apiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SqlManagedInstance"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Updates a sql Instance tags.": {
+            "$ref": "./examples/UpdateSqlManagedInstance.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.AzureArcData/sqlServerInstances": {
+      "get": {
+        "tags": [
+          "SqlServerInstances"
+        ],
+        "operationId": "SqlServerInstances_List",
+        "summary": "List sqlServerInstance resources in the subscription",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/apiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SqlServerInstanceListResult"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 InvalidParameterValue - An invalid value was given to parameter.\n\n * 400 InvalidCrossSubscriptionVmMove - Invalid cross subscription move of resource.\n\n * 404 ResourceNotFound - The requested resource was not found.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Gets all SQL Server Instance in a subscription.": {
+            "$ref": "./examples/ListSubscriptionSqlServerInstance.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureArcData/sqlServerInstances": {
+      "get": {
+        "tags": [
+          "SqlServerInstances"
+        ],
+        "operationId": "SqlServerInstances_ListByResourceGroup",
+        "description": "Gets all sqlServerInstances in a resource group.",
+        "summary": "List sqlServerInstance resources in the resource group",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/apiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SqlServerInstanceListResult"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Gets all SQL Server Instance in a resource group.": {
+            "$ref": "./examples/ListByResourceGroupSqlServerInstance.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureArcData/sqlServerInstances/{sqlServerInstanceName}": {
+      "get": {
+        "tags": [
+          "SqlServerInstances"
+        ],
+        "operationId": "SqlServerInstances_Get",
+        "description": "Retrieves a SQL Server Instance resource",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "name": "sqlServerInstanceName",
+            "description": "Name of SQL Server Instance",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "x-ms-parameter-location": "method"
+          },
+          {
+            "$ref": "#/parameters/apiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SqlServerInstance"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Updates a SQL Server Instance tags.": {
+            "$ref": "./examples/GetSqlServerInstance.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "SqlServerInstances"
+        ],
+        "operationId": "SqlServerInstances_Create",
+        "description": "Creates or replaces a SQL Server Instance resource",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "name": "sqlServerInstanceName",
+            "description": "The name of SQL Server Instance",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "x-ms-parameter-location": "method"
+          },
+          {
+            "name": "sqlServerInstance",
+            "in": "body",
+            "description": "The SQL Server Instance to be created or updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SqlServerInstance"
+            }
+          },
+          {
+            "$ref": "#/parameters/apiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SqlServerInstance"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/SqlServerInstance"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Updates a SQL Server Instance tags.": {
+            "$ref": "./examples/CreateOrUpdateSqlServerInstance.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      },
+      "delete": {
+        "tags": [
+          "SqlServerInstances"
+        ],
+        "operationId": "SqlServerInstances_Delete",
+        "description": "Deletes a SQL Server Instance resource",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "name": "sqlServerInstanceName",
+            "description": "The name of SQL Server Instance",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "x-ms-parameter-location": "method"
+          },
+          {
+            "$ref": "#/parameters/apiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully deleted the SQL Server Instance."
+          },
+          "default": {
+            "description": "*** Error Responses: ***",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          },
+          "204": {
+            "description": "The specified SQL Server Instance does not exist."
+          }
+        },
+        "x-ms-examples": {
+          "Delete a SQL Server Instance.": {
+            "$ref": "./examples/DeleteSqlServerInstance.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "SqlServerInstances"
+        ],
+        "operationId": "SqlServerInstances_Update",
+        "description": "Updates a SQL Server Instance resource",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "name": "sqlServerInstanceName",
+            "description": "Name of sqlServerInstance",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "x-ms-parameter-location": "method"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "The SQL Server Instance.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SqlServerInstanceUpdate"
+            }
+          },
+          {
+            "$ref": "#/parameters/apiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SqlServerInstance"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Updates a SQL Server Instance tags.": {
+            "$ref": "./examples/UpdateSqlServerInstance.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.AzureArcData/postgresInstances": {
+      "get": {
+        "tags": [
+          "PostgresInstances"
+        ],
+        "operationId": "PostgresInstances_List",
+        "summary": "List postgres Instance resources in the subscription",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/apiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/PostgresInstanceListResult"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Gets all Postgres Instance in a subscription.": {
+            "$ref": "./examples/ListSubscriptionPostgresInstance.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureArcData/postgresInstances": {
+      "get": {
+        "tags": [
+          "PostgresInstances"
+        ],
+        "operationId": "PostgresInstances_ListByResourceGroup",
+        "description": "Get a postgres Instances list by Resource group name.",
+        "summary": "List postgres Instance resources in the resource group",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/apiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/PostgresInstanceListResult"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Gets all postgres Instances in a resource group.": {
+            "$ref": "./examples/ListByResourceGroupPostgresInstance.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureArcData/postgresInstances/{postgresInstanceName}": {
+      "get": {
+        "tags": [
+          "PostgresInstances"
+        ],
+        "operationId": "PostgresInstances_Get",
+        "description": "Retrieves a postgres Instance resource",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "name": "postgresInstanceName",
+            "description": "Name of Postgres Instance",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "x-ms-parameter-location": "method"
+          },
+          {
+            "$ref": "#/parameters/apiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/PostgresInstance"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Gets a postgres Instances.": {
+            "$ref": "./examples/GetPostgresInstance.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "PostgresInstances"
+        ],
+        "operationId": "PostgresInstances_Create",
+        "description": "Creates or replaces a postgres Instance resource",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "name": "postgresInstanceName",
+            "description": "Name of PostgresInstance",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "x-ms-parameter-location": "method"
+          },
+          {
+            "$ref": "#/parameters/apiVersion"
+          },
+          {
+            "name": "resource",
+            "description": "The postgres instance",
+            "required": true,
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/PostgresInstance"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/PostgresInstance"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/PostgresInstance"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create or update a Postgres Instance.": {
+            "$ref": "./examples/CreateOrUpdatePostgresInstance.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      },
+      "delete": {
+        "tags": [
+          "PostgresInstances"
+        ],
+        "operationId": "PostgresInstances_Delete",
+        "description": "Deletes a postgres Instance resource",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "name": "postgresInstanceName",
+            "description": "Name of Postgres Instance",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "x-ms-parameter-location": "method"
+          },
+          {
+            "$ref": "#/parameters/apiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully deleted the Postgres Instance."
+          },
+          "default": {
+            "description": "*** Error Responses: ***",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          },
+          "204": {
+            "description": "The specified Postgres Instance does not exist."
+          }
+        },
+        "x-ms-examples": {
+          "Deletes a PostgresInstances.": {
+            "$ref": "./examples/DeletePostgresInstance.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "PostgresInstances"
+        ],
+        "operationId": "PostgresInstances_Update",
+        "description": "Updates a postgres Instance resource",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "name": "postgresInstanceName",
+            "description": "Name of Postgres Instance",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "x-ms-parameter-location": "method"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "The Postgres Instance.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PostgresInstanceUpdate"
+            }
+          },
+          {
+            "$ref": "#/parameters/apiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/PostgresInstance"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Updates a postgres Instances tags.": {
+            "$ref": "./examples/UpdatePostgresInstance.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.AzureArcData/dataControllers": {
+      "get": {
+        "tags": [
+          "DataControllers"
+        ],
+        "operationId": "DataControllers_ListInSubscription",
+        "summary": "List dataController resources in the subscription",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/apiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/PageOfDataControllerResource"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Gets all dataControllers in a subscription.": {
+            "$ref": "./examples/ListSubscriptionDataController.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureArcData/dataControllers": {
+      "get": {
+        "tags": [
+          "DataControllers"
+        ],
+        "operationId": "DataControllers_ListInGroup",
+        "summary": "List dataController resources in the resource group",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/apiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/PageOfDataControllerResource"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Gets all dataControllers in a resource group.": {
+            "$ref": "./examples/ListByResourceGroupDataController.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureArcData/dataControllers/{dataControllerName}": {
+      "put": {
+        "tags": [
+          "DataControllers"
+        ],
+        "operationId": "DataControllers_PutDataController",
+        "description": "Creates or replaces a dataController resource",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "name": "dataControllerResource",
+            "description": "desc",
+            "required": true,
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/DataControllerResource"
+            }
+          },
+          {
+            "name": "dataControllerName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "x-ms-parameter-location": "method"
+          },
+          {
+            "$ref": "#/parameters/apiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/DataControllerResource"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/DataControllerResource"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create or update a Data Controller.": {
+            "$ref": "./examples/CreateOrUpdateDataController.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      },
+      "delete": {
+        "tags": [
+          "DataControllers"
+        ],
+        "operationId": "DataControllers_DeleteDataController",
+        "description": "Deletes a dataController resource",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "name": "dataControllerName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "x-ms-parameter-location": "method"
+          },
+          {
+            "$ref": "#/parameters/apiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully deleted the DataController."
+          },
+          "default": {
+            "description": "*** Error Responses: ***",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          },
+          "204": {
+            "description": "The specified DataController does not exist."
+          }
+        },
+        "x-ms-examples": {
+          "Delete a dataController.": {
+            "$ref": "./examples/DeleteDataController.json"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "DataControllers"
+        ],
+        "operationId": "DataControllers_GetDataController",
+        "description": "Retrieves a dataController resource",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "name": "dataControllerName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "x-ms-parameter-location": "method"
+          },
+          {
+            "$ref": "#/parameters/apiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/DataControllerResource"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get a data controller.": {
+            "$ref": "./examples/GetDataController.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "DataControllers"
+        ],
+        "operationId": "DataControllers_PatchDataController",
+        "description": "Updates a dataController resource",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "name": "dataControllerName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "x-ms-parameter-location": "method"
+          },
+          {
+            "$ref": "#/parameters/apiVersion"
+          },
+          {
+            "name": "dataControllerResource",
+            "description": "The update data controller resource",
+            "required": true,
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/DataControllerUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/DataControllerResource"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Updates a dataController tags.": {
+            "$ref": "./examples/UpdateDataController.json"
+          }
+        }
+      }
+    }
   },
   "definitions": {
     "Sku": {
@@ -289,7 +1487,7 @@
         "properties": {
           "$ref": "#/definitions/DataControllerProperties",
           "description": "The data controller's properties",
-          "x-ms-client-flatten": false
+          "x-ms-client-flatten": true
         }
       },
       "required": [
