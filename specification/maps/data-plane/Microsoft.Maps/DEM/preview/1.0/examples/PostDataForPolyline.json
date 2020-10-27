@@ -1,0 +1,100 @@
+{
+  "parameters": {
+    "format": "json",
+    "api-version": "1.0",
+    "linesRequestBody": [ 
+      { "lon": -121.66853362143818, "lat": 46.84646479863713 }, 
+      { "lon" : -121.67853362143818, "lat": 46.85646479863713 }
+    ],
+    "subscription-key": "[subscription-key]",
+    "samples": 5
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "data": [
+          {
+            "coordinate": {
+              "latitude": 46.846464798637129,
+              "longitude": -121.66853362143819
+            },
+            "elevationInMeter": 2298.6581875651746
+          },
+          {
+            "coordinate": {
+              "latitude": 46.848964798637127,
+              "longitude": -121.67103362143818
+            },
+            "elevationInMeter": 2466.4058976953679
+          },
+          {
+            "coordinate": {
+              "latitude": 46.851464798637124,
+              "longitude": -121.67353362143818
+            },
+            "elevationInMeter": 2504.8855800948654
+          },
+          {
+            "coordinate": {
+              "latitude": 46.853964798637129,
+              "longitude": -121.67603362143818
+            },
+            "elevationInMeter": 2477.8929009638578
+          },
+          {
+            "coordinate": {
+              "latitude": 46.856464798637127,
+              "longitude": -121.67853362143818
+            },
+            "elevationInMeter": 2394.5290079897059
+          }
+        ]
+      }
+    },
+    "400": {
+      "headers": {},
+      "body": {
+        "error": {
+          "code": "400 BadRequest",
+          "message": "Bad request: one or more parameters were incorrectly specified or are mutually exclusive."
+        }
+      }
+    },
+    "401": {
+      "headers": {},
+      "body": {
+        "error": {
+          "code": "401 Unauthorized",
+          "message": "Access denied due to invalid subscription key. Make sure to provide a valid key for an active subscription."
+        }
+      }
+    },
+    "403": {
+      "headers": {},
+      "body": {
+        "error": {
+          "code": "403 Forbidden",
+          "message": "Permission, capacity, or authentication issues."
+        }
+      }
+    },
+    "404": {
+      "headers": {},
+      "body": {
+        "error": {
+          "code": "404 NotFound",
+          "message": "Not Found: the requested resource could not be found, but it may be available again in the future."
+        }
+      }
+    },
+    "500": {
+      "headers": {},
+      "body": {
+        "error": {
+          "code": "500 InternalServerError",
+          "message": "An error occurred while processing the request. Please try again later."
+        }
+      }
+    }
+  }
+}

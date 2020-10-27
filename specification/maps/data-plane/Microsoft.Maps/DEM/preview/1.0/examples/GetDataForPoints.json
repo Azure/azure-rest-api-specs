@@ -1,13 +1,29 @@
 {
   "parameters": {
+    "format": "json",
     "api-version": "1.0",
+    "points": "-121.66853362143818, 46.84646479863713|-121.68853362143818, 46.856464798637127",
     "subscription-key": "[subscription-key]"
   },
   "responses": {
-    "201": {
-      "headers": {},
+    "200": {
       "body": {
-        "aliasId": "25084fb7-307a-4720-8f91-7952a0b91012"
+        "data": [
+            {
+                "coordinate": {
+                    "latitude": 46.846464798637129,
+                    "longitude": -121.66853362143819
+                },
+                "elevationInMeter": 2314.4534201722422
+            },
+            {
+                "coordinate": {
+                    "latitude": 46.856464798637127,
+                    "longitude": -121.68853362143818
+                },
+                "elevationInMeter": 2506.1430038793778
+            }
+        ]
       }
     },
     "400": {
@@ -15,7 +31,7 @@
       "body": {
         "error": {
           "code": "400 BadRequest",
-          "message": "Bad request - Error message."
+          "message": "Bad request: one or more parameters were incorrectly specified or are mutually exclusive."
         }
       }
     },
@@ -42,7 +58,7 @@
       "body": {
         "error": {
           "code": "404 NotFound",
-          "message": "Not Found - The requested resource could not be found, but it may be available again in the future."
+          "message": "Not Found: the requested resource could not be found, but it may be available again in the future."
         }
       }
     },
@@ -51,7 +67,7 @@
       "body": {
         "error": {
           "code": "500 InternalServerError",
-          "message": "Unknown error - An error occurred while processing the request. Please try again later."
+          "message": "An error occurred while processing the request. Please try again later."
         }
       }
     }

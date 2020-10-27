@@ -27,7 +27,7 @@ These are the global settings for MapsClient.
 ``` yaml
 title: MapsClient
 openapi-type: data-plane
-tag: package-preview-2020-12
+tag: package-1.0-preview
 ```
 
 ### Suppression
@@ -40,14 +40,6 @@ directive:
 
 ```
 
-
-### Tag: package-preview-2020-12
-
-These settings apply only when `--tag=package-preview-2020-12` is specified on the command line.
-
-```yaml $(tag) == 'package-preview-2020-12'
-input-file: []
-```
 ### Tag: package-1.0-preview
 
 These settings apply only when `--tag=package-1.0-preview` is specified on the command line.
@@ -57,6 +49,7 @@ input-file:
   - Microsoft.Maps/Alias/preview/1.0/alias.json
   - Microsoft.Maps/Data/preview/1.0/data.json
   - Microsoft.Maps/Dataset/preview/1.0/dataset.json
+  - Microsoft.Maps/DEM/preview/1.0/elevation.json
   - Microsoft.Maps/DwgConversion/preview/1.0/dwgconversion.json
   - Microsoft.Maps/FeatureState/preview/1.0/featurestate.json
   - Microsoft.Maps/Feedback/preview/1.0/feedback.json

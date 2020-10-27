@@ -1,0 +1,105 @@
+{
+  "parameters": {
+    "format": "json",
+    "api-version": "1.0",
+    "bounds": "-121.66853362143818, 46.84646479863713,-121.65853362143818, 46.85646479863713",
+    "subscription-key": "[subscription-key]",
+    "rows": 2,
+    "columns": 3
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "data": [
+            {
+                "coordinate": {
+                    "latitude": 46.846464798637129,
+                    "longitude": -121.66853362143819
+                },
+                "elevationInMeter": 2314.4534201722422
+            },
+            {
+                "coordinate": {
+                    "latitude": 46.846464798637129,
+                    "longitude": -121.66353362143818
+                },
+                "elevationInMeter": 2269.6199778812925
+            },
+            {
+                "coordinate": {
+                    "latitude": 46.846464798637129,
+                    "longitude": -121.65853362143818
+                },
+                "elevationInMeter": 2146.04531663472
+            },
+            {
+                "coordinate": {
+                    "latitude": 46.856464798637127,
+                    "longitude": -121.66853362143819
+                },
+                "elevationInMeter": 2319.0975721859922
+            },
+            {
+                "coordinate": {
+                    "latitude": 46.856464798637127,
+                    "longitude": -121.66353362143818
+                },
+                "elevationInMeter": 2109.324863225469
+            },
+            {
+                "coordinate": {
+                    "latitude": 46.856464798637127,
+                    "longitude": -121.65853362143818
+                },
+                "elevationInMeter": 1998.6391324692017
+            }
+        ]
+      }
+    },
+    "400": {
+      "headers": {},
+      "body": {
+        "error": {
+          "code": "400 BadRequest",
+          "message": "Bad request: one or more parameters were incorrectly specified or are mutually exclusive."
+        }
+      }
+    },
+    "401": {
+      "headers": {},
+      "body": {
+        "error": {
+          "code": "401 Unauthorized",
+          "message": "Access denied due to invalid subscription key. Make sure to provide a valid key for an active subscription."
+        }
+      }
+    },
+    "403": {
+      "headers": {},
+      "body": {
+        "error": {
+          "code": "403 Forbidden",
+          "message": "Permission, capacity, or authentication issues."
+        }
+      }
+    },
+    "404": {
+      "headers": {},
+      "body": {
+        "error": {
+          "code": "404 NotFound",
+          "message": "Not Found: the requested resource could not be found, but it may be available again in the future."
+        }
+      }
+    },
+    "500": {
+      "headers": {},
+      "body": {
+        "error": {
+          "code": "500 InternalServerError",
+          "message": "An error occurred while processing the request. Please try again later."
+        }
+      }
+    }
+  }
+}
