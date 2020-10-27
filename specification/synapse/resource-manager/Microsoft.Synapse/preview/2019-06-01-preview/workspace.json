@@ -706,6 +706,28 @@
         }
       }
     },
+    "ManagedVirtualNetworkSettings": {
+      "description": "Managed Virtual Network Settings",
+      "type": "object",
+      "properties": {
+        "preventDataExfiltration": {
+          "description": "Prevent Data Exfiltration",
+          "type": "boolean"
+        },
+        "linkedAccessCheckOnTargetResource": {
+          "description": "Linked Access Check On Target Resource",
+          "type": "boolean"
+        },
+        "allowedAadTenantIdsForLinking": {
+          "description": "Allowed Aad Tenant Ids For Linking",
+          "type": "array",
+          "items": {
+            "type": "string",
+            "description": "Tenant Id"
+          }
+        }
+      }
+    },
     "WorkspaceAadAdminInfo": {
       "description": "Workspace active directory administrator",
       "type": "object",
@@ -797,6 +819,10 @@
           },
           "type": "object",
           "readOnly": true
+        },
+        "managedVirtualNetworkSettings": {
+          "description": "Managed Virtual Network Settings",
+          "$ref": "#/definitions/ManagedVirtualNetworkSettings"
         }
       }
     },
@@ -829,6 +855,10 @@
         "sqlAdministratorLoginPassword": {
           "description": "SQL administrator login password",
           "type": "string"
+        },
+        "managedVirtualNetworkSettings": {
+          "description": "Managed Virtual Network Settings",
+          "$ref": "#/definitions/ManagedVirtualNetworkSettings"
         },
         "provisioningState": {
           "description": "Resource provisioning state",
