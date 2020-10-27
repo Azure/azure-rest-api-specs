@@ -572,6 +572,10 @@
         "sku": {
           "$ref": "#/definitions/Sku",
           "description": "The SKU of the resource."
+        },
+        "identity" : {
+          "$ref": "#/definitions/Identity",
+          "description": "The identity of the resource."
         }
       },
       "required": [
@@ -972,6 +976,10 @@
           "additionalProperties": {
             "type": "string"
           }
+        },
+        "identity": {
+          "$ref": "#/definitions/Identity",
+          "description": "The identity of the resource."
         }
       }
     },
@@ -1224,6 +1232,42 @@
         }
       },
       "description": "AddressSpace contains an array of IP address ranges that can be used by subnets of the virtual network."
+    },
+    "Identity": {
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "The type of identity for workspace. The type 'None' will remove any idenitites assigned to workspace",
+          "enum": [
+            "UserAssigned",
+            "None"
+          ],
+          "x-ms-enum": {
+            "name": "ResourceIdentityType",
+            "modelAsString": false
+          }
+        },
+        "userAssignedIdentities": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "object",
+            "properties": {
+              "principalId": {
+                "readOnly": true,
+                "type": "string",
+                "description": "The principal id of user assigned identity."
+              },
+              "clientId": {
+                "readOnly": true,
+                "type": "string",
+                "description": "The client id of user assigned identity."
+              }
+            }
+          },
+          "description": "The list of user identities associated with the resource. The user identity dictionary key references will be resource ids in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}'."
+        }
+      },
+      "description": "Identity for the resource."
     }
   },
   "parameters": {
