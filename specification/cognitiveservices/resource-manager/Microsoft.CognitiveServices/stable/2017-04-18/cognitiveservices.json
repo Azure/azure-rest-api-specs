@@ -860,7 +860,8 @@
           "enum": [
             "Free",
             "Standard",
-            "Premium"
+            "Premium",
+            "Enterprise"
           ],
           "x-ms-enum": {
             "name": "SkuTier",
@@ -984,6 +985,11 @@
             "$ref": "#/definitions/SkuCapability"
           },
           "description": "Gets the capabilities of the cognitive services account. Each item indicates the capability of a specific feature. The values are read-only and for reference only."
+        },
+        "dateCreated": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Gets the date of cognitive services account creation."
         },
         "customSubDomainName": {
           "type": "string",
