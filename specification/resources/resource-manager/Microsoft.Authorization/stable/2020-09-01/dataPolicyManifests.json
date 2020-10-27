@@ -67,7 +67,10 @@
             }
           },
           "404": {
-            "description": "Not found - the data policy manifest doesn't exist."
+            "description": "Not found - the data policy manifest doesn't exist.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -172,7 +175,7 @@
       "properties": {
         "name": {
           "type": "string",
-          "description": "The data effect definition."
+          "description": "The data effect name."
         },
         "detailsSchema": {
           "type": "object",
@@ -180,135 +183,6 @@
         }
       },
       "description": "The data effect definition."
-    },
-    "AliasPathMetadata": {
-      "properties": {
-        "type": {
-          "description": "The type of the token that is referred by an alias path.",
-          "type": "string",
-          "enum": [
-            "NotSpecified",
-            "Any",
-            "String",
-            "Object",
-            "Array",
-            "Integer",
-            "Number",
-            "Boolean"
-          ],
-          "x-ms-enum": {
-            "name": "aliasPathTokenType",
-            "modelAsString": true
-          }
-        },
-        "attributes": {
-          "description": "The attributes of an alias path.",
-          "type": "string",
-          "enum": [
-            "None",
-            "Modifiable"
-          ],
-          "x-ms-enum": {
-            "name": "aliasPathAttributes",
-            "modelAsString": true
-          }
-        }
-      },
-      "description": "The metadata of an alias."
-    },
-    "AliasPattern": {
-      "properties": {
-        "phrase": {
-          "type": "string",
-          "description": "The pattern phrase. This will be valid URI template ex. /subscriptions/{subscriptionId}/ModeType/{Mode}/PatternType/{Pattern}."
-        },
-        "variable": {
-          "type": "string",
-          "description": "The relevant variable in phrase. This will be a bound variable in the phrase template ex. Mode."
-        },
-        "type": {
-          "description": "The alias pattern type.",
-          "type": "string",
-          "enum": [
-            "NotSpecified",
-            "Extract"
-          ],
-          "x-ms-enum": {
-            "name": "aliasPatternType",
-            "modelAsString": true
-          }
-        }
-      },
-      "description": "The alias pattern."
-    },
-    "AliasPath": {
-      "properties": {
-        "path": {
-          "type": "string",
-          "description": "The alias path."
-        },
-        "apiVersions": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "description": "The API versions supported by this alias path."
-        },
-        "pattern": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/AliasPattern",
-          "description": "The alias pattern."
-        },
-        "metadata": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/AliasPathMetadata",
-          "description": "The alias path metadata."
-        }
-      },
-      "description": "The alias path."
-    },
-    "Alias": {
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "The alias name."
-        },
-        "paths": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/AliasPath"
-          },
-          "description": "An array of alias paths."
-        },
-        "defaultPath": {
-          "type": "string",
-          "description": "The default alias path."
-        },
-        "defaultPattern": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/AliasPattern",
-          "description": "The default alias pattern."
-        },
-        "defaultMetadata": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/AliasPathMetadata",
-          "description": "The default alias path metadata."
-        },
-        "type": {
-          "description": "The data type of the parameter.",
-          "type": "string",
-          "enum": [
-            "NotSpecified",
-            "PlainText",
-            "Mask"
-          ],
-          "x-ms-enum": {
-            "name": "aliasType",
-            "modelAsString": true
-          }
-        }
-      },
-      "description": "Represents the alias."
     },
     "ResourceTypeAliases": {
       "properties": {
@@ -319,7 +193,7 @@
         "aliases": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/Alias"
+            "$ref": "../../../Microsoft.Resources/stable/2020-06-01/resources.json#/definitions/Alias"
           },
           "description": "The aliases for property names."
         }
@@ -351,8 +225,10 @@
           "description": "An array of resource type aliases."
         },
         "effects": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/DataEffect",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DataEffect"
+          },
           "description": "The effect definition."
         },
         "fieldValues": {
@@ -422,7 +298,7 @@
       "in": "query",
       "required": false,
       "type": "string",
-      "description": "The filter to apply on the operation. Valid values for $filter are: 'namespace eq '{value}''. If $filter is not provided, no filtering is performed. If $filter=namespace is provided, the returned list only includes all data policy manifests that have a namespace matching the provided value.",
+      "description": "The filter to apply on the operation. Valid values for $filter are: \"namespace eq '{value}'\". If $filter is not provided, no filtering is performed. If $filter=namespace is provided, the returned list only includes all data policy manifests that have a namespace matching the provided value.",
       "x-ms-skip-url-encoding": true,
       "x-ms-parameter-location": "method"
     }
