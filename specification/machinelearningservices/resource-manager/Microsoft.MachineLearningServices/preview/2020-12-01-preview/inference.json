@@ -42,7 +42,7 @@
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         },
-        "operationId": "MachineLearningOnlineEndpoints_ListOnlineEndpoints",
+        "operationId": "OnlineEndpoints_List",
         "description": "Gets Online Endpoints.",
         "x-ms-examples": {
           "Get Endpoints": {
@@ -87,7 +87,7 @@
         "tags": [
           "MachineLearningOnlineEndpoints"
         ],
-        "operationId": "MachineLearningOnlineEndpoints_Get",
+        "operationId": "OnlineEndpoints_Get",
         "description": "Gets Details in specified Online Endpoint.",
         "x-ms-examples": {
           "Get ACI Endpoint": {
@@ -139,7 +139,7 @@
         "tags": [
           "MachineLearningOnlineEndpoints"
         ],
-        "operationId": "MachineLearningOnlineEndpoints_Delete",
+        "operationId": "OnlineEndpoints_Delete",
         "description": "Delete a specific Online Endpoint.",
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
@@ -193,7 +193,7 @@
           "MachineLearningOnlineEndpoints"
         ],
         "description": "Creates or updates an Online Endpoint. This call will update an Online Endpoint if it exists. This is a nonrecoverable operation. If your intent is to create a new Online Endpoint, do a GET first to verify that it does not exist yet.",
-        "operationId": "MachineLearningOnlineEndpoints_CreateOrUpdate",
+        "operationId": "OnlineEndpoints_CreateOrUpdate",
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "Create or Update ACI Endpoint": {
@@ -296,7 +296,7 @@
             "description": "The payload that is used to update the Online Endpoint.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/OnlineEndpointUpdateRequest"
+              "$ref": "#/definitions/OnlineEndpointResource"
             }
           }
         ],
@@ -314,6 +314,93 @@
                 "description": "URI to poll for asynchronous operation status.",
                 "type": "string"
               }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "machineLearningServices.json#/definitions/MachineLearningServiceError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/onlineEndpoints/{onlineEndpointName}/regenerateKeys": {
+      "post": {
+        "tags": [
+          "MachineLearningOnlineEndpoints"
+        ],
+        "x-ms-examples": {
+          "Check Endpoint Name": {
+            "$ref": "./examples/inference/regenerateEndpointKeys.json"
+          }
+        },
+        "operationId": "OnlineEndpoints_RegenerateKeys",
+        "description": "Regenerate auth keys for the endpoint.",
+        "parameters": [
+          {
+            "$ref": "machineLearningServices.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/APIVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/OnlineEndpointNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully regenerated keys. Use /listKeys to get the new keys."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "machineLearningServices.json#/definitions/MachineLearningServiceError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/onlineEndpoints/{onlineEndpointName}/listKeys": {
+      "post": {
+        "tags": [
+          "MachineLearningOnlineEndpoints"
+        ],
+        "x-ms-examples": {
+          "Check Endpoint Name": {
+            "$ref": "./examples/inference/getEndpointKeys.json"
+          }
+        },
+        "operationId": "OnlineEndpoints_ListKeys",
+        "description": "Get auth keys for the endpoint.",
+        "parameters": [
+          {
+            "$ref": "machineLearningServices.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/APIVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/OnlineEndpointNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns the primary and secondary keys of the endpoint",
+            "schema": {
+              "$ref": "#/definitions/AuthKeys"
             }
           },
           "default": {
@@ -387,7 +474,7 @@
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         },
-        "operationId": "MachineLearningOnlineEndpointDeployments_ListByOnlineEndpoint",
+        "operationId": "OnlineDeployments_ListByInferenceEndpoint",
         "description": "Gets Online Deployments.",
         "x-ms-examples": {
           "Get Deployments": {
@@ -435,7 +522,7 @@
         "tags": [
           "MachineLearningOnlineEndpointDeployments"
         ],
-        "operationId": "MachineLearningOnlineEndpointDeployments_Get",
+        "operationId": "OnlineDeployments_Get",
         "description": "Get an Online Deployment by name.",
         "x-ms-examples": {
           "Get ACI Endpoint Deployment": {
@@ -487,7 +574,7 @@
         "tags": [
           "MachineLearningOnlineEndpointDeployments"
         ],
-        "operationId": "MachineLearningOnlineEndpointDeployments_Delete",
+        "operationId": "OnlineDeployments_Delete",
         "description": "Delete a specific Online Deployment.",
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
@@ -544,7 +631,7 @@
           "MachineLearningOnlineEndpointDeployments"
         ],
         "description": "Creates or updates an Online Deployment. This call will update an Online Deployment if it exists. This is a nonrecoverable operation. If your intent is to create a new Online Deployment, do a GET first to verify that it does not exist yet.",
-        "operationId": "MachineLearningOnlineEndpointDeployments_CreateOrUpdate",
+        "operationId": "OnlineDeployments_CreateOrUpdate",
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "Create or Update ACI Endpoint Deployment": {
@@ -615,7 +702,7 @@
           "MachineLearningOnlineEndpointDeployments"
         ],
         "description": "Updates an Online Deployment. This call will update an Online Deployment if it exists.",
-        "operationId": "MachineLearningOnlineEndpointDeployments_Update",
+        "operationId": "OnlineDeployments_Update",
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "Update ACI Endpoint Deployment": {
@@ -653,7 +740,7 @@
             "description": "The payload that is used to update the Online Deployment.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/OnlineEndpointDeploymentUpdateRequest"
+              "$ref": "#/definitions/OnlineEndpointDeploymentResource"
             }
           }
         ],
@@ -875,6 +962,31 @@
             "modelAsString": true
           },
           "description": "Authentication mode configured on the Online Endpoint for online requests."
+        },
+        "keys": {
+          "description": "AuthKeys to set initially on Online Endpoint.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/AuthKeys"
+            }
+          ],
+          "x-ms-mutability": [
+            "create"
+          ]
+        }
+      }
+    },
+    "AuthKeys":{
+      "description": "Authentication keys for Online",
+      "type": "object",
+      "properties": {
+        "primaryKey": {
+          "description": "Primary Authentication Key",
+          "type": "string"
+        },
+        "secondaryKey": {
+          "description": "Secondary Authentication Key",
+          "type": "string"
         }
       }
     },
@@ -967,6 +1079,9 @@
     "AciSslConfiguration": {
       "type": "object",
       "description": "Ssl Configuration",
+      "required": [
+        "sslEnabled"
+      ],
       "properties": {
         "sslEnabled": {
           "type": "boolean",
@@ -1053,9 +1168,9 @@
         }
       ],
       "properties": {
-        "skuScaleSettings": {
+        "scaleSettings": {
           "type": "object",
-          "$ref": "#/definitions/SkuScaleSettings"
+          "$ref": "#/definitions/InferenceScaleSettings"
         },
         "environmentOverrides": {
           "type": "object",
@@ -1137,16 +1252,6 @@
         "appInsightsEnabled": {
           "type": "boolean",
           "description": "True if Application Insights is enabled for this deployment."
-        },
-        "modelDataCollection": {
-          "type": "object",
-          "description": "Model data collection configuration for the deployment. (ACI and AKS only)",
-          "$ref": "machineLearningServices.json#/definitions/ModelDataCollection"
-        },
-        "containerResourceRequirements": {
-          "type": "object",
-          "description": "Container Resource requirements for the deployment. (ACI and AKS only)",
-          "$ref": "machineLearningServices.json#/definitions/ContainerResourceRequirements"
         }
       },
       "discriminator": "computeType"
@@ -1159,6 +1264,18 @@
           "$ref": "#/definitions/DeploymentConfiguration"
         }
       ],
+      "properties": {
+        "modelDataCollection": {
+          "type": "object",
+          "description": "Model data collection configuration for the deployment.",
+          "$ref": "machineLearningServices.json#/definitions/ModelDataCollection"
+        },
+        "containerResourceRequirements": {
+          "type": "object",
+          "description": "Container Resource requirements for the deployment.",
+          "$ref": "machineLearningServices.json#/definitions/ContainerResourceRequirements"
+        }
+      },
       "x-ms-discriminator-value": "ACI"
     },
     "AksDeploymentConfiguration": {
@@ -1198,14 +1315,15 @@
             }
           ]
         },
-        "scalingConfiguration": {
+        "modelDataCollection": {
           "type": "object",
-          "description": "Autoscaler configuration. (AKS only)",
-          "allOf": [
-            {
-              "$ref": "machineLearningServices.json#/definitions/AutoScaler"
-            }
-          ]
+          "description": "Model data collection configuration for the deployment.",
+          "$ref": "machineLearningServices.json#/definitions/ModelDataCollection"
+        },
+        "containerResourceRequirements": {
+          "type": "object",
+          "description": "Container Resource requirements for the deployment.",
+          "$ref": "machineLearningServices.json#/definitions/ContainerResourceRequirements"
         }
       }
     },
@@ -1217,7 +1335,13 @@
         {
           "$ref": "#/definitions/DeploymentConfiguration"
         }
-      ]
+      ],
+      "properties": {
+        "instanceType": {
+          "description": "Instance type for Deployment.",
+          "type": "string"
+        }
+      }
     },
     "CodeConfiguration": {
       "type": "object",
@@ -1236,12 +1360,11 @@
         }
       }
     },
-    "SkuScaleSettings": {
+    "InferenceScaleSettings": {
       "description": "Description of the Deployment scale options.",
       "type": "object",
       "required": [
-        "minimum",
-        "maximum"
+        "scaleType"
       ],
       "properties": {
         "minimum": {
@@ -1255,18 +1378,19 @@
           "type": "integer",
           "format": "int32"
         },
-        "default": {
+        "instanceCount": {
           "description": "Default/Initial number of instances for this deployment.",
           "type": "integer",
-          "format": "int32"
+          "format": "int32",
+           "minimum": 0
         },
         "scaleType": {
           "description": "Available scale configurations for this Deployment.",
           "type": "string",
           "enum": [
-            "automatic",
-            "manual",
-            "none"
+            "Automatic",
+            "Manual",
+            "None"
           ]
         }
       }
@@ -1281,32 +1405,6 @@
           "additionalProperties": {
             "type": "string"
           }
-        }
-      }
-    },
-    "OnlineEndpointUpdateRequest": {
-      "type": "object",
-      "description": "Request to update existing online endpoint.",
-      "properties": {
-        "tags": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "description": "Resource tags."
-        }
-      }
-    },
-    "OnlineEndpointDeploymentUpdateRequest": {
-      "type": "object",
-      "description": "Request to update existing online endpoint deployment.",
-      "properties": {
-        "tags": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "description": "Resource tags."
         }
       }
     }
