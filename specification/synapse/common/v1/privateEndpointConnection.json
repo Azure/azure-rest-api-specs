@@ -307,26 +307,6 @@
         }
       ]
     },
-    "PrivateEndpointConnectionForPrivateLinkHubProxy": {
-      "properties": {
-        "id": {
-          "type": "string"
-        },
-        "name": {
-          "type": "string"
-        },
-        "type": {
-          "type": "string"
-        },
-        "location": {
-          "type": "string"
-        },
-        "remotePrivateEndpoint": {
-          "type": "object",
-          "$ref": "#/definitions/RemotePrivateEndpointForPrivateLinkHub"
-        }
-      }
-    },
     "PrivateEndpointConnectionForPrivateLinkHubBasic": {
       "properties": {
         "id": {
@@ -424,6 +404,13 @@
           "$ref": "#/definitions/RemotePrivateEndpointForPrivateLinkHub"
         }
       }
+    },
+    "PrivateEndpointConnectionForPrivateLinkHubProxy": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/PrivateEndpointConnectionForPrivateLinkHubProxyBase"
+        }
+      ]
     }
   },
   "parameters": {
