@@ -87,6 +87,17 @@ input-file:
 - Microsoft.Synapse/preview/2020-02-01-preview/roleAssignments.json
 ```
 
+### Tag: package-access-control-2020-08-01-preview
+
+These settings apply only when `--tag=package-access-control-2020-02-01-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-access-control-2020-08-01-preview'
+input-file:
+- Microsoft.Synapse/preview/2020-08-01-preview/checkAccessSynapseRbac.json
+- Microsoft.Synapse/preview/2020-08-01-preview/roleDefinitions.json
+- Microsoft.Synapse/preview/2020-08-01-preview/roleAssignments.json
+```
+
 ### Tag: package-vnet-2019-06-01-preview
 
 These settings apply only when `--tag=package-vnet-2019-06-01-preview` is specified on the command line

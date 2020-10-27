@@ -244,16 +244,6 @@
         "type": "string",
         "description": "The Synapse client API Version."
       },
-      "SynapseDnsSuffixInPath": {
-        "name": "SynapseDnsSuffix",
-        "in": "path",
-        "required": true,
-        "type": "string",
-        "default": "azuresynapse.net​",
-        "x-ms-skip-url-encoding": true,
-        "description": "Gets the DNS suffix used as the base for all Synapse service requests.",
-        "x-ms-parameter-location": "client"
-      },
       "RoleDefinitionIdParameter": {
         "name": "roleDefinitionId",
         "in": "path",
@@ -267,14 +257,16 @@
         "in": "query",
         "required": false,
         "type": "boolean",
-        "description": "Is a Synapse Built-In Role or not."
+        "description": "Is a Synapse Built-In Role or not.",
+        "x-ms-parameter-location": "method"
       },
       "ScopeParameter": {
         "name": "scope",
         "in": "query",
         "required": false,
         "type": "string",
-        "description": "Scope of the Synapse Built-in Role."
+        "description": "Scope of the Synapse Built-in Role.",
+        "x-ms-parameter-location": "method"
       }
     }
 }
