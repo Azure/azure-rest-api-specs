@@ -289,6 +289,47 @@
           "$ref": "../../../../common/v1/privateEndpointConnection.json#/parameters/PrivateEndpointConnectionProxyNameParameter"
         }
       ],
+      "get": {
+        "operationId": "GetPrivateEndpointConnectionProxyForPrivateLinkHub",
+        "description": "Get PrivateEndpointConnectionProxy for PrivateLinkHub",
+        "tags": [
+          "PrivateEndpointConnectionProxy"
+        ],
+        "deprecated": false,
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "../../../../common/v1/privateEndpointConnection.json#/definitions/PrivateEndpointConnectionForPrivateLinkHubProxy"
+            }
+          },
+          "409": {
+            "description": "Authorization failed"
+          },
+          "404": {
+            "description": "Not found"
+          },
+          "default": {
+            "schema": {
+              "$ref": "../../../../common/v1/types.json#/definitions/ErrorContract"
+            },
+            "description": ""
+          }
+        },
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "Create PrivateEndPointConnectionProxy in PrivateLinkHub": {
+            "$ref": "./examples/GetPrivateEndpointConnectionProxyForPrivateLinkHub.json"
+          }
+        }
+      },
       "delete": {
         "operationId": "DeletePrivateEndpointConnectionForPrivateLinkHubProxy",
         "description": "Delete PrivateEndpointConnectionProxy for PrivateLinkHub",
