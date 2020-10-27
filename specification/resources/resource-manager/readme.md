@@ -64,7 +64,6 @@ tag: package-deploymentscripts-2020-10
 tag: package-2020-09
 ```
 
-
 ### Tag: package-policy-2020-09
 
 These settings apply only when `--tag=package-policy-2020-09` is specified on the command line.
@@ -581,7 +580,7 @@ directive:
   - suppress: BodyTopLevelProperties
     from: resources.json
     where: $.definitions.GenericResourceExpanded.properties
-    reason: createdTime,changedTime & provisioningState are top-level properties
+    reason: 'createdTime,changedTime & provisioningState are top-level properties'
   - suppress: BodyTopLevelProperties
     from: resources.json
     where: $.definitions.TagDetails.properties
@@ -600,7 +599,7 @@ directive:
     reason: TagDetails will be deprecated soon
   - suppress: XmsResourceInPutResponse
     from: resources.json
-    where: $.paths["/subscriptions/{subscriptionId}/tagNames/{tagName}"].put
+    where: '$.paths["/subscriptions/{subscriptionId}/tagNames/{tagName}"].put'
     reason: TagDetails is not an Azure resource
   - suppress: BodyTopLevelProperties
     from: managedapplications.json
@@ -619,19 +618,19 @@ directive:
     where: $.definitions.GenericResource.properties
     reason: managedBy is a top level property
   - from: deploymentScripts.json
-    suppress: TrackedResourceGetOperation 
+    suppress: TrackedResourceGetOperation
     where: $.definitions.AzureCliScript
     reason: Tooling issue.
   - from: deploymentScripts.json
-    suppress: TrackedResourcePatchOperation 
+    suppress: TrackedResourcePatchOperation
     where: $.definitions.AzureCliScript
     reason: Tooling issue.
   - from: deploymentScripts.json
-    suppress: TrackedResourceGetOperation 
+    suppress: TrackedResourceGetOperation
     where: $.definitions.AzurePowerShellScript
     reason: Tooling issue
   - from: deploymentScripts.json
-    suppress: TrackedResourcePatchOperation 
+    suppress: TrackedResourcePatchOperation
     where: $.definitions.AzurePowerShellScript
     reason: Tooling issue
   - from: deploymentScripts.json
@@ -639,23 +638,23 @@ directive:
     where: $.paths
     reason: OperationsAPI will come from Resources
   - from: deploymentScripts.json
-    suppress: R3006 #BodyTopLevelProperties
-    where: 
-    - $.definitions.DeploymentScript.properties
-    - $.definitions.AzureCliScript.properties
-    - $.definitions.AzurePowerShellScript.properties
+    suppress: R3006
+    where:
+      - $.definitions.DeploymentScript.properties
+      - $.definitions.AzureCliScript.properties
+      - $.definitions.AzurePowerShellScript.properties
     reason: Currently systemData is not allowed
   - suppress: OperationsAPIImplementation
     from: templateSpecs.json
     where: $.paths
     reason: OperationsAPI will come from Resources
-  - suppress: R3006 #BodyTopLevelProperties
+  - suppress: R3006
     from: templateSpecs.json
-    where: 
-    - $.definitions.TemplateSpec.properties
-    - $.definitions.TemplateSpecVersion.properties
-    - $.definitions.TemplateSpecUpdateModel.properties
-    - $.definitions.TemplateSpecVersionUpdateModel.properties
+    where:
+      - $.definitions.TemplateSpec.properties
+      - $.definitions.TemplateSpecVersion.properties
+      - $.definitions.TemplateSpecUpdateModel.properties
+      - $.definitions.TemplateSpecVersionUpdateModel.properties
     reason: Currently systemData is not allowed
   - suppress: TrackedResourceListByImmediateParent
     from: templateSpecs.json
@@ -665,6 +664,10 @@ directive:
     from: templateSpecs.json
     where: $.definitions.TemplateSpecVersion
     reason: Tooling issue
+  - suppress: OperationsAPIImplementation
+    where: $.paths
+    from: dataPolicyManifests.json
+    reason: operation APIs for Microsoft.Authorization are to be defined in RBAC swagger
 ```
 
 ---
