@@ -72,12 +72,6 @@
               "$ref": "#/definitions/CognitiveServicesAccount"
             }
           },
-          "202": {
-            "description": "HTTP 202 (Accepted) if the operation was successfully started and will complete asynchronously.",
-            "schema": {
-              "$ref": "#/definitions/CognitiveServicesAccount"
-            }
-          },
           "default": {
             "description": "Error response describing why the operation failed",
             "schema": {
@@ -130,12 +124,6 @@
         "responses": {
           "200": {
             "description": "The resource provider should return 200 (OK) to indicate that the operation completed successfully. ",
-            "schema": {
-              "$ref": "#/definitions/CognitiveServicesAccount"
-            }
-          },
-          "202": {
-            "description": "HTTP 202 (Accepted) if the operation was successfully started and will complete asynchronously.",
             "schema": {
               "$ref": "#/definitions/CognitiveServicesAccount"
             }
@@ -592,8 +580,7 @@
           "enum": [
             "Free",
             "Standard",
-            "Premium",
-            "Enterprise"
+            "Premium"
           ],
           "x-ms-enum": {
             "name": "SkuTier",
@@ -675,7 +662,6 @@
           "description": "Gets the status of the cognitive services account at the time the operation was called.",
           "enum": [
             "Creating",
-            "Accepted",
             "ResolvingDNS",
             "Succeeded",
             "Failed"
@@ -688,11 +674,6 @@
         "endpoint": {
           "type": "string",
           "description": "Endpoint of the created account"
-        },
-        "internalId": {
-          "type": "string",
-          "description": "The internal identifier.",
-          "readOnly": true
         }
       }
     },
