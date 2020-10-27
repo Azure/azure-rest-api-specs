@@ -44,13 +44,22 @@ cli:
 # -------- DO NOT generate those command groups --------
       - select: 'operationGroup'
         where:
-          operationGroup: BillingPeriods|EnrollmentAccounts|Agreements|BillingPermissions|BillingRoleAssignments|BillingRoleDefinitions|Instructions|Address.*$
+          operationGroup: BillingPeriods|EnrollmentAccounts|BillingPermissions|BillingRoleAssignments|BillingRoleDefinitions|Instructions|Address.*$
         hidden: true
 
       # rename --billing-profile-name to --profile-name
       - where:
           param: billingProfileName
         name: profile_name
+
+# -------- Agreements --------
+      - where:
+          group: Agreements
+          param: agreementName
+        name: name
+        alias:
+          - name
+          - n
 
  # -------- BillingAccounts --------
       # rename --billing-account-name to --account-name globally
