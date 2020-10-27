@@ -47,6 +47,7 @@ input-file:
 - Microsoft.Attestation/stable/2020-10-01/attestation.json
 ```
 
+
 ---
 # Code Generation
 
