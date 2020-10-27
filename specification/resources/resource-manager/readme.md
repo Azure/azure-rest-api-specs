@@ -665,6 +665,10 @@ directive:
     where: $.definitions.DataManifestCustomResourceFunctionDefinition.properties.allowCustomProperties
     from: dataPolicyManifests.json
     reason: 'This property can only have two values. '
+  - suppress: EnumInsteadOfBoolean
+    where: $.definitions.DataPolicyManifestProperties.properties.isBuiltInOnly
+    from: dataPolicyManifests.json
+    reason: 'This property can only have two values. '
 ```
 
 ---
