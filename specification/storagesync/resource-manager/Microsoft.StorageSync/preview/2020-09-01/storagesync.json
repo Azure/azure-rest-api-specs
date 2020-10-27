@@ -3447,6 +3447,10 @@
         "localCacheMode": {
           "$ref": "#/definitions/LocalCacheMode",
           "description": "Policy for enabling follow-the-sun business models: link local cache to cloud behavior to pre-populate before local access."
+        },
+        "initialUploadPolicy": {
+          "$ref": "#/definitions/InitialUploadPolicy",
+          "description": "Policy for how the initial upload sync session is performed."
         }
       }
     },
@@ -4438,6 +4442,10 @@
           "$ref": "#/definitions/LocalCacheMode",
           "description": "Policy for enabling follow-the-sun business models: link local cache to cloud behavior to pre-populate before local access."
         },
+        "initialUploadPolicy": {
+          "$ref": "#/definitions/InitialUploadPolicy",
+          "description": "Policy for how the initial upload sync session is performed."
+        },
         "serverName": {
           "type": "string",
           "description": "Server name",
@@ -4750,6 +4758,18 @@
       ],
       "x-ms-enum": {
         "name": "InitialDownloadPolicy",
+        "modelAsString": true
+      }
+    },
+    "InitialUploadPolicy": {
+      "type": "string",
+      "description": "Policy for how the initial upload sync session is performed.",
+      "enum": [
+        "ServerAuthoritative",
+        "Merge"
+      ],
+      "x-ms-enum": {
+        "name": "InitialUploadPolicy",
         "modelAsString": true
       }
     },
