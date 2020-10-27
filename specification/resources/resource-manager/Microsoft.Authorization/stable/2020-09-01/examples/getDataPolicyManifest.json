@@ -11,68 +11,22 @@
         "type": "Microsoft.Authorization/dataPolicyManifests",
         "name": "Microsoft.KeyVault.Data",
         "properties": {
-          "namespaces": ["Microsoft.KeyVault"],
+          "namespaces": [
+            "Microsoft.KeyVault"
+          ],
           "policyMode": "Microsoft.KeyVault.Data",
-          "isBuiltInOnly": false,
+          "isBuiltInOnly": true,
           "resourceTypeAliases": [
             {
-              "resourceType": "Microsoft.KeyVault",
+              "resourceType": "vaults/certificates",
               "aliases": [
                 {
-                  "name": "vault",
+                  "name": "Microsoft.KeyVault.Data/vaults/certificates/keyProperties/keyType",
                   "paths": [
                     {
-                      "path": "Microsoft.KeyVault/vaults/enabledForDeployment",
+                      "path": "keyProperties.keyType",
                       "apiVersions": [
-                        "2020-09-01"
-                      ]
-                    },
-                    {
-                      "path": "Microsoft.KeyVault/vaults/enabledForTemplateDeployment",
-                      "apiVersions": [
-                        "2020-09-01"
-                      ]
-                    },
-                    {
-                      "path": "Microsoft.Keyvault/vaults/accessPolicies",
-                      "apiVersions": [
-                        "2020-09-01"
-                      ]
-                    },
-                    {
-                      "path": "Microsoft.KeyVault/vaults/sku.family",
-                      "apiVersions": [
-                        "2020-09-01"
-                      ]
-                    },
-                    {
-                      "path": "Microsoft.KeyVault/vaults/enabledForDiskEncryption",
-                      "apiVersions": [
-                        "2020-09-01"
-                      ]
-                    },
-                    {
-                      "path": "Microsoft.Keyvault/vaults/vaultUri",
-                      "apiVersions": [
-                        "2020-09-01"
-                      ]
-                    },
-                    {
-                      "path": "Microsoft.Keyvault/vaults/tenantId",
-                      "apiVersions": [
-                        "2020-09-01"
-                      ]
-                    },
-                    {
-                      "path": "Microsoft.KeyVault/vaults/sku.name",
-                      "apiVersions": [
-                        "2020-09-01"
-                      ]
-                    },
-                    {
-                      "path": "Microsoft.Keyvault/vaults/sku",
-                      "apiVersions": [
-                        "2020-09-01"
+                        "2019-01-01"
                       ]
                     }
                   ]
