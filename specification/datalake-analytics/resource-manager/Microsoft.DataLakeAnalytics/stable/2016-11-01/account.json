@@ -242,6 +242,15 @@
             "schema": {
               "$ref": "#/definitions/DataLakeAnalyticsAccount"
             }
+          },
+          "409": {
+            "description": "Account creation is not allowed in the current subscription"
+          },
+          "404": {
+            "description": "Resource does not exist."
+          },
+          "400": {
+            "description": "InvalidArgument"
           }
         },
         "x-ms-examples": {
@@ -719,6 +728,9 @@
         "responses": {
           "200": {
             "description": "Successfully added the specified Azure Storage account information to the specified Azure Data Lake Analytics account."
+          },
+          "400": {
+            "description": "The Storage account or its accessKey is invalid."
           }
         },
         "x-ms-examples": {
@@ -1827,6 +1839,20 @@
           "maximum": 180,
           "default": 30,
           "description": "The number of days that job metadata is retained."
+        },
+        "debugDataAccessLevel": {
+          "readOnly": true,
+          "type": "string",
+          "enum": [
+            "All",
+            "Customer",
+            "None"
+          ],
+          "x-ms-enum": {
+            "name": "DebugDataAccessLevel",
+            "modelAsString": false
+          },
+          "description": "The current state of the DebugDataAccessLevel for this account."
         }
       },
       "description": "The account specific properties that are associated with an underlying Data Lake Analytics account. Returned only when retrieving a specific account."
@@ -2352,6 +2378,11 @@
           "$ref": "#/definitions/OperationDisplay",
           "description": "The display information for the operation."
         },
+        "properties": {
+          "readOnly": true,
+          "$ref": "#/definitions/OperationMetaPropertyInfo",
+          "description": "The OperationMetaPropertyInfo for the operation."
+        },
         "origin": {
           "readOnly": true,
           "type": "string",
@@ -2411,6 +2442,87 @@
         }
       },
       "description": "The list of available operations for Data Lake Analytics."
+    },
+    "OperationMetaMetricAvailabilitiesSpecification": {
+      "properties": {
+        "timeGrain": {
+          "type": "string",
+          "description": "The timegrain for OperationMetaMetricAvailabilitiesSpecification."
+        },
+        "blobDuration": {
+          "type": "string",
+          "description": "The blobDuration for OperationMetaMetricAvailabilitiesSpecification."
+        }
+      }
+    },
+    "OperationMetaMetricSpecification": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name for OperationMetaMetricSpecification."
+        },
+        "displayName": {
+          "type": "string",
+          "description": "The displayName for OperationMetaMetricSpecification."
+        },
+        "unit": {
+          "type": "string",
+          "description": "The unit for OperationMetaMetricSpecification."
+        },
+        "aggregationType": {
+          "type": "string",
+          "description": "The aggregationType for OperationMetaMetricSpecification."
+        },
+        "availabilities": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/OperationMetaMetricAvailabilitiesSpecification"
+          },
+          "description": "The availabilities for OperationMetaMetricSpecification."
+        }
+      }
+    },
+    "OperationMetaLogSpecification": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name for OperationMetaLogSpecification."
+        },
+        "displayName": {
+          "type": "string",
+          "description": "The displayName for OperationMetaLogSpecification."
+        },
+        "blobDuration": {
+          "type": "string",
+          "description": "The blobDuration for OperationMetaLogSpecification."
+        }
+      }
+    },
+    "OperationMetaServiceSpecification": {
+      "properties": {
+        "metricSpecifications": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/OperationMetaMetricSpecification"
+          },
+          "description": "The metricSpecifications for OperationMetaServiceSpecification."
+        },
+        "logSpecifications": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/OperationMetaLogSpecification"
+          },
+          "description": "The logSpecifications for OperationMetaServiceSpecification."
+        }
+      }
+    },
+    "OperationMetaPropertyInfo": {
+      "properties": {
+        "serviceSpecification": {
+          "$ref": "#/definitions/OperationMetaServiceSpecification",
+          "description": "The operations OperationMetaServiceSpecification."
+        }
+      }
     },
     "CapabilityInformation": {
       "properties": {
