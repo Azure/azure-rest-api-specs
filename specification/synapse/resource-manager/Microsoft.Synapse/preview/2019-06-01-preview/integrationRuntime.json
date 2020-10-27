@@ -1316,11 +1316,13 @@
         "numberOfNodes": {
           "description": "The required number of nodes for managed integration runtime.",
           "type": "integer",
+          "format": "int32",
           "minimum": 1
         },
         "maxParallelExecutionsPerNode": {
           "description": "Maximum parallel executions count per node for managed integration runtime.",
           "type": "integer",
+          "format": "int32",
           "minimum": 1
         },
         "dataFlowProperties": {
@@ -1355,11 +1357,13 @@
         },
         "coreCount": {
           "description": "Core count of the cluster which will execute data flow job. Supported values are: 8, 16, 32, 48, 80, 144 and 272.",
-          "type": "integer"
+          "type": "integer",
+          "format": "int32"
         },
         "timeToLive": {
           "description": "Time to live (in minutes) setting of the cluster which will execute data flow job.",
           "type": "integer",
+          "format": "int32",
           "minimum": 0
         }
       },
@@ -2284,11 +2288,13 @@
         "concurrentJobsLimit": {
           "description": "Maximum concurrent jobs on the integration runtime node.",
           "type": "integer",
+          "format": "int32",
           "readOnly": true
         },
         "maxConcurrentJobs": {
           "description": "The maximum concurrent jobs in this integration runtime.",
           "type": "integer",
+          "format": "int32",
           "readOnly": true
         }
       },
@@ -2396,26 +2402,31 @@
         "availableMemoryInMB": {
           "description": "Available memory (MB) on the integration runtime node.",
           "type": "integer",
+          "format": "int32",
           "readOnly": true
         },
         "cpuUtilization": {
           "description": "CPU percentage on the integration runtime node.",
           "type": "integer",
+          "format": "int32",
           "readOnly": true
         },
         "concurrentJobsLimit": {
           "description": "Maximum concurrent jobs on the integration runtime node.",
           "type": "integer",
+          "format": "int32",
           "readOnly": true
         },
         "concurrentJobsRunning": {
           "description": "The number of jobs currently running on the integration runtime node.",
           "type": "integer",
+          "format": "int32",
           "readOnly": true
         },
         "maxConcurrentJobs": {
           "description": "The maximum concurrent jobs in this integration runtime.",
           "type": "integer",
+          "format": "int32",
           "readOnly": true
         },
         "sentBytes": {
@@ -2813,6 +2824,7 @@
         "concurrentJobsLimit": {
           "description": "The number of concurrent jobs permitted to run on the integration runtime node. Values between 1 and maxConcurrentJobs(inclusive) are allowed.",
           "type": "integer",
+          "format": "int32",
           "minimum": 1
         }
       }

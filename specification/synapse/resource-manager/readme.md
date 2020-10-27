@@ -111,12 +111,6 @@ directive:
     from: Microsoft.Synapse/preview/2019-06-01-preview/workspace_keys.json
     where:
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces/{workspaceName}/keys"]
-  - suppress: IntegerTypeMustHaveFormat
-    reason: Not available in upstream RP swagger
-    from: Microsoft.Synapse/preview/2019-06-01-preview/sqlPool.json
-  - suppress: IntegerTypeMustHaveFormat
-    reason: Not available in upstream RP swagger
-    from: Microsoft.Synapse/preview/2019-06-01-preview/integrationRuntime.json
   - suppress: R2010
     reason: x-ms-long-running-operation-options not available in datafactory swagger
     from: Microsoft.Synapse/preview/2019-06-01-preview/integrationRuntime.json
