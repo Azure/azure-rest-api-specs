@@ -3,7 +3,7 @@
   "info": {
     "title": "Azure Maps Elevation API",
     "version": "1.0",
-    "description": "The Azure Maps Elevation API provides an HTTP interface to query elevation data on the  surface of the Earth. Elevation data can be retrieved at specific locations by sending  lat/lon coodinates, by defining an ordered set of vertices that form a Polyline and a  number of sample points along the length of a Polyline, or by defining a bounding box  that consists of equally spaced vertices as rows and columns. The vertical datum is EPSG:3855.  This datum uses the EGM2008 geoid model applied to the WGS84 ellipsoid as its zero height  reference surface. The vertical unit is measured in meters, the spatial resolution of the  elevation data is 0.8 arc-second for global coverage (~24 meters)."
+    "description": "The Azure Maps Elevation API provides an HTTP interface to query elevation data on the  surface of the Earth. Elevation data can be retrieved at specific locations by sending  lat/lon coordinates, by defining an ordered set of vertices that form a Polyline and a  number of sample points along the length of a Polyline, or by defining a bounding box  that consists of equally spaced vertices as rows and columns. The vertical datum is EPSG:3855.  This datum uses the EGM2008 geoid model applied to the WGS84 ellipsoid as its zero height  reference surface. The vertical unit is measured in meters, the spatial resolution of the  elevation data is 0.8 arc-second for global coverage (~24 meters)."
   },
   "host": "atlas.microsoft.com",
   "schemes": [
@@ -207,7 +207,7 @@
             "$ref": "#/parameters/JsonFormat"
           },
           {
-            "name": "pointsReqeustBody",
+            "name": "pointsRequestBody",
             "in": "body",
             "description": "The string representation of a list of points. A point is defined in lat/lon WGS84 coordinate reference system format.  Each points in a list should be separated by the pipe ('|') character. The number of points that can be requested in  a POST request ranges from 2 to 2,000. The resolution of the elevation data will be the highest for a single point  and will decrease if multiple points are spread further apart. ",
             "required": true,
@@ -580,7 +580,7 @@
     },
     "LinesResult": {
       "type": "object",
-      "description": "The response from a successful Elevaion Polyline request.",
+      "description": "The response from a successful Elevation Polyline request.",
       "properties": {
         "data": {
           "$ref": "#/definitions/ElevationLineResponse"
