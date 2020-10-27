@@ -1098,6 +1098,135 @@
         }
       }
     },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/providers/Microsoft.CostManagement/generateReservationDetailsReport": {
+      "post": {
+        "tags": [
+          "ReservedInstances"
+        ],
+        "operationId": "GenerateReservationDetailsReport_ByBillingAccountId",
+        "description": "Generates the reservations details report for provided date range asynchronously based on enrollment id.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/costmanagement/"
+        },
+        "x-ms-examples": {
+          "ReservationDetails": {
+            "$ref": "./examples/GenerateReservationDetailsReportByBillingAccount.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/enrollmentIdParameter"
+          },
+          {
+            "$ref": "#/parameters/startDateParameter"
+          },
+          {
+            "$ref": "#/parameters/endDateParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request processing completed.",
+            "schema": {
+              "$ref": "#/definitions/OperationStatus"
+            }
+          },
+          "202": {
+            "description": "Accepted. Request will be processed. Use the location header to check the status.",
+            "headers": {
+              "Location": {
+                "description": "The URL to check the status of the asynchronous operation.",
+                "type": "string"
+              },
+              "Retry-After": {
+                "description": "The amount of delay to use while the status of the operation is checked. The value is expressed in seconds.",
+                "format": "int32",
+                "type": "integer"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingProfiles/{billingProfileId}/providers/Microsoft.CostManagement/generateReservationDetailsReport": {
+      "post": {
+        "tags": [
+          "ReservedInstances"
+        ],
+        "operationId": "GenerateReservationDetailsReport_ByBillingProfileId",
+        "description": "Generates the reservations details report for provided date range asynchronously by billing profile.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/costmanagement/"
+        },
+        "x-ms-examples": {
+          "ReservationDetails": {
+            "$ref": "./examples/GenerateReservationDetailsReportByBillingProfile.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/billingAccountIdParameter"
+          },
+          {
+            "$ref": "#/parameters/billingProfileIdParameter"
+          },
+          {
+            "$ref": "#/parameters/startDateParameter"
+          },
+          {
+            "$ref": "#/parameters/endDateParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request processing completed.",
+            "schema": {
+              "$ref": "#/definitions/OperationStatus"
+            }
+          },
+          "202": {
+            "description": "Accepted. Request will be processed. Use the Location header to check the status.",
+            "headers": {
+              "Location": {
+                "description": "The URL to check the status of the asynchronous operation.",
+                "type": "string"
+              },
+              "Retry-After": {
+                "description": "The amount of delay to use while the status of the operation is checked. The value is expressed in seconds.",
+                "format": "int32",
+                "type": "integer"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
     "/providers/Microsoft.CostManagement/operations": {
       "get": {
         "tags": [
@@ -2267,6 +2396,53 @@
         }
       }
     },
+    "Status": {
+      "description": "The status of the long running operation.",
+      "properties": {
+        "status": {
+          "description": "The status of the long running operation.",
+          "type": "string",
+          "enum": [
+            "Running",
+            "Completed",
+            "Failed"
+          ],
+          "x-ms-enum": {
+            "name": "OperationStatusType",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "OperationStatus": {
+      "description": "The status of the long running operation.",
+      "properties": {
+        "status": {
+          "description": "The status of the long running operation.",
+          "$ref": "#/definitions/Status"
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "type": "object",
+          "description": "The properties of the resource generated.",
+          "$ref": "#/definitions/ReportURL"
+        }
+      }
+    },
+    "ReportURL": {
+      "description": "The URL to download the generated report.",
+      "properties": {
+        "reportUrl": {
+          "description": "The URL to download the generated report.",
+          "type": "string"
+        },
+        "validUntil": {
+          "description": "The time at which report URL becomes invalid.",
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
     "QueryDatasetConfiguration": {
       "description": "The configuration of dataset in the query.",
       "properties": {
@@ -2474,10 +2650,42 @@
       "type": "string",
       "x-ms-parameter-location": "method"
     },
+    "startDateParameter": {
+      "name": "startDate",
+      "in": "query",
+      "description": "Start Date",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "endDateParameter": {
+      "name": "endDate",
+      "in": "query",
+      "description": "End Date",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "enrollmentIdParameter": {
+      "name": "billingAccountId",
+      "in": "path",
+      "description": "Enrollment ID (Legacy BillingAccount ID)",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
     "billingAccountIdParameter": {
       "name": "billingAccountId",
       "in": "path",
       "description": "BillingAccount ID",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "billingProfileIdParameter": {
+      "name": "billingProfileId",
+      "in": "path",
+      "description": "BillingProfile ID",
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method"
