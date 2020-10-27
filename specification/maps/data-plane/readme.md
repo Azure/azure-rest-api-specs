@@ -4,9 +4,10 @@
 
 This is the AutoRest configuration file for MapsClient
 
-
 ---
+
 ## Getting Started
+
 To build the SDK for Maps, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
 
 > `autorest`
@@ -14,17 +15,19 @@ To build the SDK for Maps, simply [Install AutoRest](https://aka.ms/autorest/ins
 To see additional help and options, run:
 
 > `autorest --help`
+
 ---
 
 ## Configuration
 
 ### Basic Information
+
 These are the global settings for MapsClient.
 
 ``` yaml
 title: MapsClient
 openapi-type: data-plane
-tag: package-1.0-preview
+tag: package-preview-2020-12
 ```
 
 ### Suppression
@@ -37,6 +40,14 @@ directive:
 
 ```
 
+
+### Tag: package-preview-2020-12
+
+These settings apply only when `--tag=package-preview-2020-12` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2020-12'
+input-file: []
+```
 ### Tag: package-1.0-preview
 
 These settings apply only when `--tag=package-1.0-preview` is specified on the command line.
