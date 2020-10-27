@@ -103,15 +103,96 @@ directive:
   - suppress: DeleteOperationResponses
     from: myworkbooks_API.json
     reason: 'delete API returns empty response and is already part of the previous api, cannot change it'
+  - suppress: DeleteOperationResponses
+    from: analyticsItems_API.json
+    reason: 'consistent with existing delete response | owned by another team'
+  - suppress: DeleteOperationResponses
+    from: componentAnnotations_API.json
+    reason: 'consistent with existing delete response | owned by another team'
+  - suppress: DeleteOperationResponses
+    from: componentApiKeys_API.json
+    reason: 'consistent with existing delete response | owned by another team'
+  - suppress: DeleteOperationResponses
+    from: componentContinuousExport_API.json
+    reason: 'consistent with existing delete response | owned by another team'
+  - suppress: DeleteOperationResponses
+    from: componentWorkItemConfigs_API.json
+    reason: 'consistent with existing delete response | owned by another team'
+  - suppress: DeleteOperationResponses
+    from: favorites_API.json
+    reason: 'consistent with existing delete response | owned by another team'
+  - suppress: DeleteOperationResponses
+    from: workbooks_API.json
+    reason: 'consistent with existing delete response'
+  - suppress: DefaultErrorResponseSchema
+    from: componentAnnotations_API.json
+    reason: 'consistent with existing default error response | owned by another team'
+  - suppress: DefaultErrorResponseSchema
+    from: componentWorkItemConfigs_API.json
+    reason: 'consistent with existing default error response | owned by another team'
   - suppress: DefaultErrorResponseSchema
     from: workbooks_API.json
-    reason: 'consistent with existing error response'
+    reason: 'consistent with existing default error response'
+  - suppress: DefaultErrorResponseSchema
+    from: workbookOperations_API.json
+    reason: 'consistent with existing default error response'
   - suppress: RequiredDefaultResponse
-    reason: 'consistent with existing default response'
-  - suppress: DeleteOperationResponses
-    reason: 'consistent with existing delete response'
+    from: analyticsItems_API.json
+    reason: 'consistent with existing default response | owned by another team'
+  - suppress: RequiredDefaultResponse
+    from: componentAnnotations_API.json
+    reason: 'consistent with existing default response | owned by another team'
+  - suppress: RequiredDefaultResponse
+    from: componentApiKeys_API.json
+    reason: 'consistent with existing default response | owned by another team'
+  - suppress: RequiredDefaultResponse
+    from: componentContinuousExport_API.json
+    reason: 'consistent with existing default response | owned by another team'
+  - suppress: RequiredDefaultResponse
+    from: componentFeaturesAndPricing_API.json
+    reason: 'consistent with existing default response | owned by another team'
+  - suppress: RequiredDefaultResponse
+    from: componentProactiveDetection_API.json
+    reason: 'consistent with existing default response | owned by another team'
+  - suppress: RequiredDefaultResponse
+    from: components_API.json
+    reason: 'consistent with existing default response | owned by another team'
+  - suppress: RequiredDefaultResponse
+    from: componentWorkItemConfigs_API.json
+    reason: 'consistent with existing default response | owned by another team'
+  - suppress: RequiredDefaultResponse
+    from: favorites_API.json
+    reason: 'consistent with existing default response | owned by another team'
+  - suppress: RequiredDefaultResponse
+    from: webTestLocations_API.json
+    reason: 'consistent with existing default response | owned by another team'
+  - suppress: RequiredDefaultResponse
+    from: webTestLocations_API.json
+    reason: 'consistent with existing default response | owned by another team'
   - suppress: PathResourceTypeNameCamelCase
-    reason: 'consistent with existing path'
+    from: componentAnnotations_API.json
+    reason: 'consistent with existing path | owned by another team'
+  - suppress: PathResourceTypeNameCamelCase
+    from: componentApiKeys_API.json
+    reason: 'consistent with existing path | owned by another team'
+  - suppress: PathResourceTypeNameCamelCase
+    from: componentProactiveDetection_API.json
+    reason: 'consistent with existing path | owned by another team'
+  - suppress: PathResourceTypeNameCamelCase
+    from: componentWorkItemConfigs_API.json
+    reason: 'consistent with existing path | owned by another team'
+  - suppress: PathResourceProviderNamePascalCase
+    from: analyticsItems_API.json
+    reason: 'consistent with existing path | owned by another team'
+  - suppress: GetCollectionResponseSchema
+    from: componentProactiveDetection_API.json
+    reason: 'consistent with existing response schema | owned by another team'
+  - suppress: IntegerTypeMustHaveFormat
+    from: componentFeaturesAndPricing_API.json
+    reason: 'consistent with existing format | owned by another team'
+  - suppress: IntegerTypeMustHaveFormat
+    from: components_API.json
+    reason: 'consistent with existing format | owned by another team'
 ```
 
 ### Tag: package-2020-10-20
