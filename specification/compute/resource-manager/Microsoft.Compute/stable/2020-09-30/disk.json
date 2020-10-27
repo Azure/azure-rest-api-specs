@@ -1647,6 +1647,10 @@
         "tier": {
           "type": "string",
           "description": "Performance tier of the disk (e.g, P4, S10) as described here: https://azure.microsoft.com/en-us/pricing/details/managed-disks/. Does not apply to Ultra disks."
+        },
+        "burstingEnabled": {
+          "type": "boolean",
+          "description": "Disk Bursting property can be used to enable support for burst beyond the provisioned perf target, up to 30K IOPS. Bursting is disabled by default. Does not apply to Ultra disks."
         }
       },
       "required": [
@@ -2002,6 +2006,10 @@
         "tier": {
           "type": "string",
           "description": "Performance tier of the disk (e.g, P4, S10) as described here: https://azure.microsoft.com/en-us/pricing/details/managed-disks/. Does not apply to Ultra disks."
+        },
+        "burstingEnabled": {
+          "type": "boolean",
+          "description": "Disk Bursting property can be used to enable support for burst beyond the provisioned perf target, up to 30K IOPS. Bursting is disabled by default. Does not apply to Ultra disks."
         }
       },
       "description": "Disk resource update properties."
