@@ -661,6 +661,14 @@ directive:
     where: $.paths
     from: dataPolicyManifests.json
     reason: operation APIs for Microsoft.Authorization are to be defined in RBAC swagger
+  - suppress: EnumInsteadOfBoolean
+    where: $.definitions.DataManifestCustomResourceFunctionDefinition.properties.allowCustomProperties
+    from: dataPolicyManifests.json
+    reason: 'This property can only have two values. '
+  - suppress: EnumInsteadOfBoolean
+    where: $.definitions.DataPolicyManifestProperties.properties.isBuiltInOnly
+    from: dataPolicyManifests.json
+    reason: 'This property can only have two values. '
 ```
 
 ---
