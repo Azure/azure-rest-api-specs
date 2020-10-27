@@ -15,5 +15,5 @@ Please also specify `--go-sdks-folder=<path to the root directory of your azure-
 
 ```yaml $(tag) == 'package-2020-03-01-preview' && $(go)
 namespace: deviceupdate
-output-folder: $(go-sdk-folder)/services/preview/$(namespace)/mgmt/2020-03-01-preview/$(namespace)
+output-folder: $(go-sdk-folder)/services/preview/$(namespace)/mgmt/yyyy-mm-dd-preview/$(namespace)
 ```
