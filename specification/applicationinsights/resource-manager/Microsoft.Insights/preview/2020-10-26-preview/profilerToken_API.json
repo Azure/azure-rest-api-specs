@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "ApplicationInsightsManagementClient",
-    "description": "Azure Application Insights client for web test based alerting.",
+    "description": "Azure Application Insights client for application insights profiler tokens.",
     "version": "2020-10-26-preview"
   },
   "host": "management.azure.com",
@@ -40,9 +40,11 @@
           "Operations"
         ],
         "summary": "List available operations.",
-        "description": "List the available operations supported by the Microsoft.EventGrid resource provider.",
+        "description": "Lists all of the available insights REST API operations.",
         "operationId": "Operations_List",
-        "consumes": [],
+        "consumes": [
+          "application/json"
+        ],
         "produces": [
           "application/json"
         ],
@@ -72,7 +74,7 @@
         }
       }
     },
-    "/{resourceUri}/providers/microsoft.insights/profilertoken": {
+    "/{resourceUri}/providers/Microsoft.Insights/profilertoken": {
       "get": {
         "tags": [
           "ProfilerToken"
