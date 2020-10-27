@@ -193,6 +193,9 @@ directive:
   - suppress: IntegerTypeMustHaveFormat
     from: components_API.json
     reason: 'consistent with existing format | owned by another team'
+  - suppress: TopLevelResourcesListBySubscription
+    from: workbooks_API.json
+    reason: 'get workbook list by subscription is not supported'
 ```
 
 ### Tag: package-2020-10-20
