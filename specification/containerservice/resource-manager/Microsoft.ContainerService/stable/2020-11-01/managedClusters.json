@@ -2473,6 +2473,10 @@
           },
           "description": "Profile of managed cluster add-on."
         },
+        "podIdentityProfile": {
+          "$ref": "#/definitions/ManagedClusterPodIdentityProfile",
+          "description": "Profile of managed cluster pod identity."
+        },
         "nodeResourceGroup": {
           "type": "string",
           "description": "Name of the resource group containing agent pool nodes."
@@ -2853,6 +2857,93 @@
         "enabled"
       ],
       "description": "A Kubernetes add-on profile for a managed cluster."
+    },
+    "ManagedClusterPodIdentity": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the pod identity."
+        },
+        "namespace": {
+          "type": "string",
+          "description": "Namespace of the pod identity."
+        },
+        "identity": {
+          "$ref": "#/definitions/UserAssignedIdentity",
+          "description": "Information of the user assigned identity."
+        },
+        "provisioningState": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The current provisioning state of the pod identity.",
+          "enum": [
+            "Assigned",
+            "Updating",
+            "Deleting",
+            "Failed"
+          ],
+          "x-ms-enum": {
+            "name": "ManagedClusterPodIdentityProvisioningState",
+            "modelAsString": true
+          }
+        },
+        "provisioningInfo": {
+          "readOnly": true,
+          "properties": {
+            "error": {
+              "$ref": "#/definitions/CloudError",
+              "description": "Pod identity assignment error (if any)."
+            }
+          }
+        }
+      },
+      "required": [
+        "name",
+        "namespace",
+        "identity"
+      ]
+    },
+    "ManagedClusterPodIdentityException": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the pod identity exception."
+        },
+        "namespace": {
+          "type": "string",
+          "description": "Namespace of the pod identity exception."
+        },
+        "podLabels": {
+          "type": "object",
+          "description": "Pod labels to match.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "name",
+        "namespace",
+        "podLabels"
+      ]
+    },
+    "ManagedClusterPodIdentityProfile": {
+      "properties": {
+        "userAssignedPodIdentities": {
+          "description": "User assigned pod identity settings.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ManagedClusterPodIdentity"
+          }
+        },
+        "userAssignedPodIdentityExceptions": {
+          "description": "User assigned pod identity exception settings.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ManagedClusterPodIdentityException"
+          }
+        }
+      }
     },
     "ManagedClusterUpgradeProfile": {
       "properties": {
