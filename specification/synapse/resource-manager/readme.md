@@ -28,6 +28,7 @@ description: Azure Synapse Analytics Management Client
 openapi-type: arm
 azure-arm: true
 tag: package-2019-06-01-preview
+generate-empty-classes: true
 ```
 
 ### Tag: package-2019-06-01-preview
