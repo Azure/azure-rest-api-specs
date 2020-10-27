@@ -37,7 +37,7 @@ tag: package-locks-2016-09
 ```
 
 ``` yaml $(package-policy)
-tag: package-policy-2020-03
+tag: package-policy-2020-09
 ```
 
 ``` yaml $(package-resources)
@@ -65,16 +65,22 @@ tag: package-2020-09
 ```
 
 
-### Tag: package-2020-09
+### Tag: package-policy-2020-09
 
-These settings apply only when `--tag=package-2020-09` is specified on the command line.
+These settings apply only when `--tag=package-policy-2020-09` is specified on the command line.
 
-```yaml $(tag) == 'package-2020-09'
+``` yaml $(tag) == 'package-policy-2020-09'
 input-file:
-  - Microsoft.Authorization/stable/2020-09-01/policyAssignments.json
-  - Microsoft.Authorization/stable/2020-09-01/policyDefinitions.json
-  - Microsoft.Authorization/stable/2020-09-01/policySetDefinitions.json
+- Microsoft.Authorization/stable/2020-09-01/policyAssignments.json
+- Microsoft.Authorization/stable/2020-09-01/policyDefinitions.json
+- Microsoft.Authorization/stable/2020-09-01/policySetDefinitions.json
+- Microsoft.Authorization/stable/2020-09-01/dataPolicyManifests.json
+
+# Needed when there is more than one input file
+override-info:
+  title: PolicyClient
 ```
+
 ### Tag: package-preview-2020-08
 
 These settings apply only when `--tag=package-preview-2020-08` is specified on the command line.
