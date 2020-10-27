@@ -500,7 +500,8 @@
                       "description": "The subtitle of the markdown part."
                     },
                     "markdownSource": {
-                      "type": "object",
+                      "type": "integer",
+                      "format": "int32",
                       "description": "The source of the content of the markdown part."
                     },
                     "markdownUri": {
@@ -530,11 +531,8 @@
         "parts": {
           "type": "array",
           "description": "The dashboard parts.",
-          "additionalProperties": {
-            "$ref": "#/definitions/DashboardParts"
-          },
           "items": {
-            "type": "object"
+            "$ref": "#/definitions/DashboardParts"
           }
         },
         "metadata": {
@@ -553,11 +551,8 @@
         "lenses": {
           "type": "array",
           "description": "The dashboard lenses.",
-          "additionalProperties": {
-            "$ref": "#/definitions/DashboardLens"
-          },
           "items": {
-            "type": "object"
+            "$ref": "#/definitions/DashboardLens"
           }
         },
         "metadata": {
