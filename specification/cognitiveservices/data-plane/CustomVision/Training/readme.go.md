@@ -21,6 +21,7 @@ batch:
   - tag: release_3_1
   - tag: release_3_2
   - tag: release_3_3
+  - tag: release_3_4_preview
 ```
 
 ### Tag: release_1_0 and go
@@ -84,4 +85,13 @@ Please also specify `--go-sdk-folder=<path to the root directory of your azure-s
 
 ``` yaml $(tag) == 'release_3_3' && $(go)
 output-folder: $(go-sdk-folder)/services/cognitiveservices/v3.3/customvision/$(namespace)
+```
+
+### Tag: release_3_4_preview and go
+
+These settings apply only when `--tag=release_3_4_preview --go` is specified on the command line.
+Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
+
+``` yaml $(tag) == 'release_3_4_preview' && $(go)
+output-folder: $(go-sdk-folder)/services/preview/cognitiveservices/v3.4-preview/customvision/$(namespace)
 ```
