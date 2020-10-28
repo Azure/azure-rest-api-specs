@@ -253,6 +253,7 @@ These settings apply only when `--tag=package-2020-09-30-only` is specified on t
 
 ``` yaml $(tag) == 'package-2020-09-30-only'
 input-file:
+- Microsoft.Compute/stable/2020-09-30/disk.json
 - Microsoft.Compute/preview/2020-09-30/gallery.json
 - Microsoft.Compute/preview/2020-09-30/sharedGallery.json
 ```
