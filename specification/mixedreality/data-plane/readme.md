@@ -27,5 +27,14 @@ These are the global settings for Azure Mixed Reality STS.
 ```yaml
 title: MixedRealityStsClient
 openapi-type: data-plane
-tag: package-2010-02-28-preview
+tag: package-2019-02-28-preview
+```
+
+### Tag: package-2019-02-28-preview
+
+These settings apply only when `--tag=package-2019-02-28-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2019-02-28-preview'
+input-file:
+- Microsoft.MixedReality/preview/2019-02-28-preview/mr-sts.json
 ```
