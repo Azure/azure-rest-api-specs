@@ -583,6 +583,108 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces/{workspaceName}/restorableDroppedSqlPools/{restorableDroppedSqlPoolId}": {
+      "get": {
+        "tags": [
+          "RestorableDroppedSqlPools"
+        ],
+        "operationId": "RestorableDroppedSqlPools_Get",
+        "description": "Gets a deleted sql pool that can be restored",
+        "x-ms-examples": {
+          "Get a restorable dropped Sql pool": {
+            "$ref": "./examples/RestorableDroppedSqlPoolGet.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/workspaceNameParameter"
+          },
+          {
+            "name": "restorableDroppedSqlPoolId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The id of the deleted Sql Pool in the form of sqlPoolName,deletionTimeInFileTimeFormat"
+          }
+        ],
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/RestorableDroppedSqlPool"
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": "./workspace.json#/definitions/ErrorContract"
+            },
+            "description": "Error"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces/{workspaceName}/restorableDroppedSqlPools": {
+      "get": {
+        "tags": [
+          "RestorableDroppedSqlPools"
+        ],
+        "operationId": "RestorableDroppedSqlPools_ListByWorkspace",
+        "description": "Gets a list of deleted Sql pools that can be restored",
+        "x-ms-examples": {
+          "Get list of restorable dropped Sql pools": {
+            "$ref": "./examples/RestorableDroppedSqlpoolList.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/workspaceNameParameter"
+          }
+        ],
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/RestorableDroppedSqlPoolListResult"
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": "./workspace.json#/definitions/ErrorContract"
+            },
+            "description": "Error"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
     }
   },
   "definitions": {
@@ -911,6 +1013,89 @@
           "x-ms-client-flatten": true
         }
       }
+    },
+    "RestorableDroppedSqlPoolProperties": {
+      "properties": {
+        "databaseName": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The name of the database"
+        },
+        "edition": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The edition of the database"
+        },
+        "maxSizeBytes": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The max size in bytes of the database"
+        },
+        "serviceLevelObjective": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The service level objective name of the database"
+        },
+        "elasticPoolName": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The elastic pool name of the database"
+        },
+        "creationDate": {
+          "readOnly": true,
+          "type": "string",
+          "format": "date-time",
+          "description": "The creation date of the database (ISO8601 format)"
+        },
+        "deletionDate": {
+          "readOnly": true,
+          "type": "string",
+          "format": "date-time",
+          "description": "The deletion date of the database (ISO8601 format)"
+        },
+        "earliestRestoreDate": {
+          "readOnly": true,
+          "type": "string",
+          "format": "date-time",
+          "description": "The earliest restore date of the database (ISO8601 format)"
+        }
+      },
+      "description": "The properties of a restorable dropped Sql pool"
+    },
+    "RestorableDroppedSqlPool": {
+      "properties": {
+        "location": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The geo-location where the resource lives"
+        },
+        "properties": {
+          "$ref": "#/definitions/RestorableDroppedSqlPoolProperties",
+          "description": "The properties of a restorable dropped Sql pool",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "description": "A restorable dropped Sql pool"
+    },
+    "RestorableDroppedSqlPoolListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RestorableDroppedSqlPool"
+          },
+          "description": "A list of restorable dropped Sql pools"
+        }
+      },
+      "required": [
+        "value"
+      ],
+      "description": "The response to a list restorable dropped Sql pools request"
     }
   },
   "parameters": {
