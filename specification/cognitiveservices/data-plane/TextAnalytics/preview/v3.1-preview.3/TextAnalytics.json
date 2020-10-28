@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "v3.2-preview.1",
+    "version": "v3.1-preview.3",
     "contact": {
       "name": "Microsoft Cognitive Services",
       "url": "https://azure.microsoft.com/en-us/services/cognitive-services/text-analytics/",
@@ -23,7 +23,7 @@
     }
   ],
   "x-ms-parameterized-host": {
-    "hostTemplate": "{Endpoint}/text/analytics/v3.2-preview.1",
+    "hostTemplate": "{Endpoint}/text/analytics/v3.1-preview.3",
     "useSchemePrefix": false,
     "parameters": [
       {
@@ -685,22 +685,10 @@
                 "$ref": "#/definitions/PiiTask"
               }
             },
-            "entityLinkingTasks": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/EntityLinkingTask"
-              }
-            },
             "keyPhraseExtractionTasks": {
               "type": "array",
               "items": {
                 "$ref": "#/definitions/KeyPhrasesTask"
-              }
-            },
-            "sentimentAnalysisTasks": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/SentimentTask"
               }
             }
           },
@@ -1021,27 +1009,6 @@
         }
       }
     },
-    "SentimentTask": {
-      "properties": {
-        "parameters": {
-          "properties": {
-            "model-version": {
-              "default": "latest",
-              "type": "string"
-            },
-            "opinionMining": {
-              "default": false,
-              "type": "boolean"
-            },
-            "stringIndexType": {
-              "$ref": "#/definitions/StringIndexType"
-            }
-          },
-          "type": "object"
-        }
-      },
-      "type": "object"
-    },
     "TaskState": {
       "properties": {
         "lastUpdateDateTime": {
@@ -1133,25 +1100,6 @@
                 ]
               }
             },
-            "entityLinkingTasks": {
-              "type": "array",
-              "items": {
-                "type": "object",
-                "allOf": [
-                  {
-                    "$ref": "#/definitions/TaskState"
-                  },
-                  {
-                    "type": "object",
-                    "properties": {
-                      "results": {
-                        "$ref": "#/definitions/EntityLinkingResult"
-                      }
-                    }
-                  }
-                ]
-              }
-            },
             "keyPhraseExtractionTasks": {
               "type": "array",
               "items": {
@@ -1165,25 +1113,6 @@
                     "properties": {
                       "results": {
                         "$ref": "#/definitions/KeyPhraseResult"
-                      }
-                    }
-                  }
-                ]
-              }
-            },
-            "sentimentAnalysisTasks": {
-              "type": "array",
-              "items": {
-                "type": "object",
-                "allOf": [
-                  {
-                    "$ref": "#/definitions/TaskState"
-                  },
-                  {
-                    "type": "object",
-                    "properties": {
-                      "results": {
-                        "$ref": "#/definitions/SentimentResponse"
                       }
                     }
                   }
@@ -1731,23 +1660,6 @@
           "$ref": "#/definitions/DocumentStatistics"
         }
       }
-    },
-    "EntityLinkingTask": {
-      "properties": {
-        "parameters": {
-          "properties": {
-            "model-version": {
-              "default": "latest",
-              "type": "string"
-            },
-            "stringIndexType": {
-              "$ref": "#/definitions/StringIndexType"
-            }
-          },
-          "type": "object"
-        }
-      },
-      "type": "object"
     },
     "HealthcareJobState": {
       "allOf": [
