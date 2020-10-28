@@ -541,6 +541,12 @@
             "schema": {
               "$ref": "#/definitions/SuppressionContract"
             }
+          },
+          "404": {
+            "description": "Suppression name is not specified or Suppression Id not found.",
+            "schema": {
+              "$ref": "#/definitions/ARMErrorResponseBody"
+            }
           }
         },
         "deprecated": false,
@@ -1188,6 +1194,12 @@
         },
         "ttl": {
           "description": "The duration for which the suppression is valid.",
+          "type": "string"
+        },
+        "expirationTimeStamp": {
+          "readOnly": true,
+          "format": "date-time",
+          "description": "Gets or sets the expiration time stamp.",
           "type": "string"
         }
       }
