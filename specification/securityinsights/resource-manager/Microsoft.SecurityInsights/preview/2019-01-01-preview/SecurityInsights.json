@@ -2151,7 +2151,7 @@
           "Entities"
         ],
         "description": "Timeline for an entity.",
-        "operationId": "EntitiesTimeline_List",
+        "operationId": "EntitiesTimeline_list",
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersion"
@@ -6083,10 +6083,10 @@
     "EntityTimelineParameters": {
       "description": "The parameters required to execute s timeline operation on the given entity.",
       "properties": {
-        "queryKinds": {
+        "kinds": {
           "description": "Array of timeline Item kinds.",
           "items": {
-            "$ref": "#/definitions/EntityQueryKind"
+            "$ref": "#/definitions/EntityTimelineKind"
           },
           "type": "array"
         },
@@ -6392,7 +6392,7 @@
       },
       "type": "object"
     },
-    "EntityQueryKind": {
+    "EntityTimelineKind": {
       "description": "The entity query kind",
       "enum": [
         "Activity",
@@ -6402,7 +6402,7 @@
       "type": "string",
       "x-ms-enum": {
         "modelAsString": true,
-        "name": "EntityQueryKind",
+        "name": "EntityTimelineKind",
         "values": [
           {
             "description": "activity",
@@ -6528,25 +6528,33 @@
           "type": "integer",
           "format": "int32"
         },
-        "queryErrors": {
+        "aggregations": {
+          "description": "timeline aggregation per kind",
+          "items": {
+            "$ref": "#/definitions/TimelineAggregation"
+          },
+          "type": "array"
+        },
+        "errors": {
           "description": "information about the failure queries",
           "items": {
-            "$ref": "#/definitions/QueriesErrors"
+            "$ref": "#/definitions/TimelineError"
           },
           "type": "array"
         }
       },
       "required": [
-        "totalCount"
+        "totalCount",
+        "aggregations"
       ],
       "type": "object"
     },
-    "QueriesErrors": {
+    "TimelineError": {
       "description": "Timeline Query Errors.",
       "properties": {
-        "queryKind": {
+        "kind": {
           "description": "the query kind",
-          "$ref": "#/definitions/EntityQueryKind"
+          "$ref": "#/definitions/EntityTimelineKind"
         },
         "queryId": {
           "description": "the query id",
@@ -6558,23 +6566,42 @@
         }
       },
       "required": [
-        "queryKind",
+        "kind",
         "errorMessage"
+      ],
+      "type": "object"
+    },
+    "TimelineAggregation": {
+      "description": "timeline aggregation information per kind",
+      "properties": {
+        "count": {
+          "description": "the total items found for a kind",
+          "type": "integer",
+          "format": "int32"
+        },
+        "kind": {
+          "description": "the query kind",
+          "$ref": "#/definitions/EntityTimelineKind"
+        }
+      },
+      "required": [
+        "kind",
+        "count"
       ],
       "type": "object"
     },
     "EntityTimelineItem": {
       "description": "Entity timeline Item.",
-      "discriminator": "queryKind",
+      "discriminator": "kind",
       "type": "object",
       "properties": {
-        "queryKind": {
-          "$ref": "#/definitions/EntityQueryKind",
+        "kind": {
+          "$ref": "#/definitions/EntityTimelineKind",
           "description": "The entity query kind type."
         }
       },
       "required": [
-        "queryKind"
+        "kind"
       ]
     },
     "FileEntity": {

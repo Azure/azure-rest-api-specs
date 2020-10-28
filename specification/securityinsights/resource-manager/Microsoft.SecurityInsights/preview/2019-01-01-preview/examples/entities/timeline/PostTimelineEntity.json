@@ -17,7 +17,7 @@
       "body": {
         "value": [
           {
-            "queryKind": "SecurityAlert",
+            "kind": "SecurityAlert",
             "azureResourceId": "4467341f-fb73-4f99-a9b3-29473532cf5a_bf7c3a2f-b743-6410-3ff0-ec64b5995d50",
             "productName": "Azure Sentinel",
             "displayName": "Alert display name",
@@ -28,7 +28,7 @@
             "alertType": "4467341f-fb73-4f99-a9b3-29473532cf5a_c93bf33e-055e-4972-9e7d-f84fe3fb61ae"
           },
           {
-            "queryKind": "Activity",
+            "kind": "Activity",
             "queryId": "e0459780-ac9d-4b72-8bd4-fecf6b46a0a1",
             "bucketStartTimeUTC": "2020-08-29T21:31:28.02Z",
             "bucketEndTimeUTC": "2020-08-29T23:31:28.02Z",
@@ -40,14 +40,24 @@
         ],
         "metaData": {
           "totalCount": 6,
-          "queryErrors": [
+          "aggregations": [
             {
-              "queryKind": "Activity",
+              "count": 4,
+              "kind": "Activity"
+            },
+            {
+              "count": 2,
+              "kind": "SecurityAlert"
+            }
+          ],
+          "errors": [
+            {
+              "kind": "Activity",
               "queryId": "11067f9f-d6a7-4488-887f-0ba564268879",
               "errorMessage": "syntax error"
             },
             {
-              "queryKind": "SecurityAlert",
+              "kind": "SecurityAlert",
               "errorMessage": "internal server error"
             }
           ]
