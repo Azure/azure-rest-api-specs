@@ -379,7 +379,7 @@
           "description": "The time when a job was successfully cancelled."
         },
         "errorData": {
-          "$ref": "#/definitions/restError",
+          "$ref": "#/definitions/errorData",
           "readOnly": true,
           "description": "The error data for the job. This is expected only when Status 'Failed'."
         }
@@ -500,8 +500,17 @@
           "description": "A page with detailed status of the provider."
         }
       }
-    },
+    },    
     "restError": {
+      "type": "object",
+      "description": "Error information returned by the API",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/errorData"
+        }
+      }
+    },
+    "errorData": {
       "properties": {
         "code": {
           "type": "string",
