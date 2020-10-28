@@ -669,6 +669,10 @@ directive:
     where: $.definitions.DataPolicyManifestProperties.properties.isBuiltInOnly
     from: dataPolicyManifests.json
     reason: 'This property can only have two values. '
+  - suppress: PageableOperation
+    where: '$.paths["/providers/Microsoft.Authorization/dataPolicyManifests"].get'
+    from: dataPolicyManifests.json
+    reason: Pagination not supported. The size of the result list is pretty limited
 ```
 
 ---
