@@ -246,7 +246,6 @@
       "type": "object",
       "properties": {
         "value": {
-          "description": "Array of results.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/PrivateEndpointConnection"
@@ -254,7 +253,6 @@
           "readOnly": true
         },
         "nextLink": {
-          "description": "Link to retrieve next page of results.",
           "type": "string",
           "readOnly": true
         }
@@ -270,7 +268,6 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/PrivateEndpointConnectionProperties",
-          "description": "Private endpoint connection properties.",
           "x-ms-client-flatten": true
         }
       }
@@ -279,15 +276,12 @@
       "type": "object",
       "properties": {
         "privateEndpoint": {
-          "$ref": "#/definitions/PrivateEndpoint",
-          "description": "The private endpoint which the connection belongs to."
+          "$ref": "#/definitions/PrivateEndpoint"
         },
         "privateLinkServiceConnectionState": {
-          "$ref": "#/definitions/PrivateLinkServiceConnectionState",
-          "description": "Connection state of the private endpoint connection."
+          "$ref": "#/definitions/PrivateLinkServiceConnectionState"
         },
         "provisioningState": {
-          "description": "Provisioning state of the private endpoint connection.",
           "type": "string",
           "readOnly": true
         }
