@@ -673,6 +673,10 @@ directive:
     where: '$.paths["/providers/Microsoft.Authorization/dataPolicyManifests"].get'
     from: dataPolicyManifests.json
     reason: Pagination not supported. The size of the result list is pretty limited
+  - suppress: DescriptionAndTitleMissing
+    where: $.definitions.AliasPathMetadata
+    from: resources.json
+    reason: This was already checked in - not my code
 ```
 
 ---
