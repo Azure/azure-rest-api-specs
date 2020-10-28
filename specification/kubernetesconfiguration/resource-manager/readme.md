@@ -62,9 +62,6 @@ swagger-to-sdk:
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-js
-  - repo: azure-sdk-for-ruby
-    after_scripts:
-      - bundle install && rake arm:regen_all_profiles['azure_mgmt_kubernetesconfiguration']
   - repo: azure-resource-manager-schemas
     after_scripts:
       - node sdkauto_afterscript.js kubernetesconfiguration/resource-manager
@@ -77,10 +74,6 @@ See configuration in [readme.go.md](./readme.go.md)
 ## Python
 
 See configuration in [readme.python.md](./readme.python.md)
-
-## Ruby
-
-See configuration in [readme.ruby.md](./readme.ruby.md)
 
 ## TypeScript
 
