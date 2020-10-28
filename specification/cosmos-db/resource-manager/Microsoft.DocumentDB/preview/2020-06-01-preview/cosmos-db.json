@@ -4303,7 +4303,7 @@
       "get": {
         "operationId": "RestorableSqlDatabases_List",
         "x-ms-examples": {
-          "CosmosDBDatabaseAccountList": {
+          "CosmosDBRestorableDatabaseList": {
             "$ref": "./examples/CosmosDBRestorableDatabaseList.json"
           }
         },
@@ -4345,7 +4345,7 @@
       "get": {
         "operationId": "RestorableSqlDatabase_Get",
         "x-ms-examples": {
-          "CosmosDBDatabaseAccountGet": {
+          "CosmosDBRestorableDatabaseGet": {
             "$ref": "./examples/CosmosDBRestorableDatabaseGet.json"
           }
         },
@@ -4387,11 +4387,11 @@
       "get": {
         "operationId": "RestorableSqlContainers_List",
         "x-ms-examples": {
-          "CosmosDBDatabaseAccountList": {
+          "CosmosDBRestorableContainerList": {
             "$ref": "./examples/CosmosDBRestorableContainerList.json"
           }
         },
-        "description": "Lists all the restorable Azure Cosmos DB SQL databases available for a specific database.",
+        "description": "Lists all the restorable Azure Cosmos DB SQL containers available for a specific database.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
@@ -4432,7 +4432,7 @@
       "get": {
         "operationId": "RestorableSqlContainer_Get",
         "x-ms-examples": {
-          "CosmosDBDatabaseAccountList": {
+          "CosmosDBRestorableContainerGet": {
             "$ref": "./examples/CosmosDBRestorableContainerGet.json"
           }
         },
@@ -4477,11 +4477,11 @@
       "get": {
         "operationId": "RestorableSqlContainers_List",
         "x-ms-examples": {
-          "CosmosDBDatabaseAccountList": {
-            "$ref": "./examples/CosmosDBRestorableContainerList.json"
+          "CosmosDBRestorableResourceList": {
+            "$ref": "./examples/CosmosDBRestorableResourceList.json"
           }
         },
-        "description": "Lists all the restorable Azure Cosmos DB SQL databases available for a specific database.",
+        "description": "Lists all the restorable Azure Cosmos DB SQL resources available for a specific database account at a given time.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
@@ -8113,11 +8113,11 @@
             },
             "ownerId": {
               "type": "string",
-              "description": "The name of type of this restorable sql database."
+              "description": "The name of type of this restorable SQL database."
             },
             "ownerResourceId": {
               "type": "string",
-              "description": "The resource Id of type of this restorable sql database."
+              "description": "The resource Id of type of this restorable SQL database."
             },
             "database": {
               "properties": {
@@ -8198,11 +8198,11 @@
             },
             "ownerId": {
               "type": "string",
-              "description": "The name of type of this restorable sql container."
+              "description": "The name of type of this restorable SQL container."
             },
             "ownerResourceId": {
               "type": "string",
-              "description": "The resource Id of type of this restorable sql container."
+              "description": "The resource Id of type of this restorable SQL container."
             },
             "documentCollection": {
               "properties": {
@@ -8429,7 +8429,6 @@
       "x-ms-parameter-location": "method",
       "description": "The snapshot GUID of the restorable SQL container."
     },
-
     "restorableSqlDatabaseRidParameter": {
       "name": "restorableSqlDatabaseRid",
       "in": "query",
@@ -8452,7 +8451,7 @@
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method",
-      "description": "The timestamp when the resource exists."
+      "description": "The timestamp when the resources exist."
     }
   }
 }
