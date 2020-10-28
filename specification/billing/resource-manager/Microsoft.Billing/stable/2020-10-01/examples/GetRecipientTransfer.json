@@ -1,0 +1,35 @@
+{
+  "parameters": {
+    "api-version": "2020-10-01",
+    "transferName": "transferName"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/providers/Microsoft.Billing/transfers/{transferName}",
+        "name": "{transferName}",
+        "type": "Microsoft.Billing/transfers",
+        "properties": {
+          "creationTime": "2018-10-10T17:32:28Z",
+          "expirationTime": "2018-11-05T17:32:28Z",
+          "transferStatus": "InProgress",
+          "recipientEmailId": "user@contoso.com",
+          "initiatorEmailId": "xyz@contoso.com",
+          "lastModifiedTime": "2018-10-10T17:32:28Z",
+          "detailedTransferStatus": [
+            {
+              "productType": "AzureSubscription",
+              "productId": "subscriptionId",
+              "transferStatus": "InProgress"
+            },
+            {
+              "productType": "AzureReservation",
+              "productId": "reservedInstanceId",
+              "transferStatus": "InProgress"
+            }
+          ]
+        }
+      }
+    }
+  }
+}
