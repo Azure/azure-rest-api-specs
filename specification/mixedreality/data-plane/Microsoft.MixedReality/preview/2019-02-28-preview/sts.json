@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "Mixed Reality Cloud STS service",
+    "title": "MixedRealityStsClient",
     "description": "Definition for the Mixed Reality Cloud STS service APIs.",
     "version": "2019-02-28-preview"
   },
@@ -29,10 +29,19 @@
             "type": "string"
           },
           {
-            "in": "header",
             "name": "X-MRC-CV",
-            "description": "The client request correlation vector, which should be set to a new value for each request.",
-            "required": true,
+            "x-ms-client-name": "clientRequestId",
+            "in": "header",
+            "description": "The client request correlation vector, which should be set to a new value for each request. Useful when debugging with Microsoft.",
+            "type": "string",
+            "x-ms-parameter-grouping": {
+              "name": "token-request-options"
+            }
+          },
+          {
+            "in": "query",
+            "name": "api-version",
+            "description": "The API version.",
             "type": "string"
           }
         ],
@@ -40,22 +49,78 @@
           "200": {
             "description": "Success",
             "schema": {
-              "$ref": "#/definitions/StsTokenReponseMessage"
+              "$ref": "#/definitions/StsTokenResponseMessage"
             },
             "headers": {
               "MS-CV": {
-                "description": "The service response correlation vector, which will be a new value for every response.",
-                "type": "string",
-                "format": ""
+                "x-ms-client-name": "requestId",
+                "description": "The service response correlation vector, which will be a new value for every response. Useful when debugging with Microsoft.",
+                "type": "string"
               }
             }
+          },
+          "400": {
+            "description": "Bad request",
+            "headers": {
+              "MS-CV": {
+                "x-ms-client-name": "requestId",
+                "description": "The service response correlation vector, which will be a new value for every response. Useful when debugging with Microsoft.",
+                "type": "string"
+              },
+              "WWW-Authenticate": {
+                "description": "Describes the error encountered while trying to authenticate the resource.",
+                "type": "string"
+              }
+            },
+            "x-ms-error-response": true
+          },
+          "401": {
+            "description": "Unauthorized",
+            "headers": {
+              "MS-CV": {
+                "x-ms-client-name": "requestId",
+                "description": "The service response correlation vector, which will be a new value for every response. Useful when debugging with Microsoft.",
+                "type": "string"
+              },
+              "WWW-Authenticate": {
+                "description": "Describes the error encountered while trying to authenticate the resource.",
+                "type": "string"
+              }
+            },
+            "x-ms-error-response": true
+          },
+          "429": {
+            "description": "Too many requests",
+            "headers": {
+              "MS-CV": {
+                "x-ms-client-name": "requestId",
+                "description": "The service response correlation vector, which will be a new value for every response. Useful when debugging with Microsoft.",
+                "type": "string"
+              },
+              "WWW-Authenticate": {
+                "description": "Describes the error encountered while trying to authenticate the resource.",
+                "type": "string"
+              }
+            },
+            "x-ms-error-response": true
+          },
+          "default": {
+            "description": "Error",
+            "headers": {
+              "MS-CV": {
+                "x-ms-client-name": "requestId",
+                "description": "The service response correlation vector, which will be a new value for every response. Useful when debugging with Microsoft.",
+                "type": "string"
+              }
+            },
+            "x-ms-error-response": true
           }
         }
       }
     }
   },
   "definitions": {
-    "StsTokenReponseMessage": {
+    "StsTokenResponseMessage": {
       "description": "Represents a token response message from the STS service.",
       "required": [
         "AccessToken"
