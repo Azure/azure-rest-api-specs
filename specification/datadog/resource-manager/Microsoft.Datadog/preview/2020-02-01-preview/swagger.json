@@ -1339,18 +1339,19 @@
         "name": "MonitoringStatus"
       }
     },
-      "MarketplaceSubscriptionStatus": {
-        "description": "Flag specifying the Marketplace Subscription Status of the resource. If payment is not made in time, the resource will go in Suspended state.",
-        "enum": [
-          "Active",
-          "Suspended"
-          ],
-        "type": "string",
-        "x-ms-enum": {
-          "modelAsString": true,
-          "name": "MarketplaceSubscriptionStatus"
-        }
-      },
+    "MarketplaceSubscriptionStatus": {
+      "description": "Flag specifying the Marketplace Subscription Status of the resource. If payment is not made in time, the resource will go in Suspended state.",
+      "enum": [
+        "Provisioning",
+        "Active",
+        "Suspended"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "modelAsString": true,
+        "name": "MarketplaceSubscriptionStatus"
+      }
+    },
     "DatadogOrganizationProperties": {
       "type": "object",
       "properties": {
@@ -1429,9 +1430,9 @@
         "monitoringStatus": {
           "$ref": "#/definitions/MonitoringStatus"
         },
-          "marketplaceSubscriptionStatus": {
-            "$ref": "#/definitions/MarketplaceSubscriptionStatus"
-          },
+        "marketplaceSubscriptionStatus": {
+          "$ref": "#/definitions/MarketplaceSubscriptionStatus"
+        },
         "datadogOrganizationProperties": {
           "$ref": "#/definitions/DatadogOrganizationProperties"
         },
@@ -1583,7 +1584,7 @@
       }
     },
     "FilteringTag": {
-      "description": "The definition of a filtering tag. Filtering tags are used for capturing resources and include/exclude them from being monitored.",
+      "description": "The definition of a filtering tag. Filtering tags are used for\r\ncapturing resources and include/exclude them from being monitored.",
       "type": "object",
       "properties": {
         "name": {
@@ -1616,7 +1617,7 @@
           "type": "boolean"
         },
         "filteringTags": {
-          "description": "List of filtering tags to be used for capturing logs. This only takes effect if SendResourceLogs flag is enabled. If empty, all resources will be captured. If only Exclude action is specified, the rules will apply to the list of all available resources. If Include actions are specified, the rules will only include resources with the associated tags.",
+          "description": "List of filtering tags to be used for capturing logs.\r\nThis only takes effect if SendResourceLogs flag is enabled.\r\nIf empty, all resources will be captured.\r\nIf only Exclude action is specified, the rules will apply to the list of all available resources.\r\nIf Include actions are specified, the rules will only include resources with the associated tags.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/FilteringTag"
@@ -1629,7 +1630,7 @@
       "type": "object",
       "properties": {
         "filteringTags": {
-          "description": "List of filtering tags to be used for capturing metrics. If empty, all resources will be captured. If only Exclude action is specified, the rules will apply to the list of all available resources. If Include actions are specified, the rules will only include resources with the associated tags.",
+          "description": "List of filtering tags to be used for capturing metrics.\r\nIf empty, all resources will be captured.\r\nIf only Exclude action is specified, the rules will apply to the list of all available resources.\r\nIf Include actions are specified, the rules will only include resources with the associated tags.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/FilteringTag"
@@ -1697,7 +1698,7 @@
         "Initial",
         "Enable",
         "Disable",
-        "Exisiting"
+        "Existing"
       ],
       "type": "string",
       "x-ms-enum": {

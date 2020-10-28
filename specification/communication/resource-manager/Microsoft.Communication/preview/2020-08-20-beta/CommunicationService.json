@@ -56,6 +56,60 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Communication/checkNameAvailability": {
+      "post": {
+        "description": "Checks that the CommunicationService name is valid and is not already in use.",
+        "operationId": "CommunicationService_CheckNameAvailability",
+        "summary": "Check Name Availability",
+        "tags": [
+          "CommunicationService"
+        ],
+        "parameters": [
+          {
+            "name": "nameAvailabilityParameters",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/NameAvailabilityParameters"
+            },
+            "description": "Parameters supplied to the operation."
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success. The response describes the name availability.",
+            "schema": {
+              "$ref": "#/definitions/NameAvailability"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-examples": {
+          "Check name availability available": {
+            "$ref": "./examples/checkNameAvailabilityAvailable.json"
+          },
+          "Check name availability unavailable": {
+            "$ref": "./examples/checkNameAvailabilityUnavailable.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Communication/communicationServices/{communicationServiceName}/linkNotificationHub": {
       "post": {
         "description": "Links an Azure Notification Hub to this communication service.",
@@ -708,6 +762,42 @@
         "toBeExportedForShoebox": {
           "description": "A Boolean flag indicating whether this dimension should be included for the shoebox export scenario.",
           "type": "boolean"
+        }
+      }
+    },
+    "NameAvailabilityParameters": {
+      "description": "Data POST-ed to the nameAvailability action",
+      "required": [
+        "type",
+        "name"
+      ],
+      "type": "object",
+      "properties": {
+        "type": {
+          "description": "The resource type. Should be always \"Microsoft.Communication/CommunicationServices\".",
+          "type": "string"
+        },
+        "name": {
+          "description": "The CommunicationService name to validate. e.g.\"my-CommunicationService-name-here\"",
+          "type": "string"
+        }
+      }
+    },
+    "NameAvailability": {
+      "description": "Result of the request to check name availability. It contains a flag and possible reason of failure.",
+      "type": "object",
+      "properties": {
+        "nameAvailable": {
+          "description": "Indicates whether the name is available or not.",
+          "type": "boolean"
+        },
+        "reason": {
+          "description": "The reason of the availability. Required if name is not available.",
+          "type": "string"
+        },
+        "message": {
+          "description": "The message of the operation.",
+          "type": "string"
         }
       }
     },

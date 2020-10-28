@@ -1,0 +1,80 @@
+{
+  "parameters": {
+    "api-version": "2020-10-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "myResourceGroup",
+    "monitorName": "myMonitor",
+    "requestBody": {
+      "name": "myMonitor",
+      "type": "Microsoft.Logz/monitors",
+      "sku": {
+        "name": "free_Monthly"
+      },
+      "properties": {
+        "provisioningState": "Succeeded",
+        "monitoringStatus": "Enabled",
+        "marketplaceSubscriptionStatus": "Active",
+        "logzOrganizationProperties": {
+          "companyName": "myOrg",
+          "id": "myOrg123",
+          "apiKey": null,
+          "enterpriseAppId": null
+        },
+        "liftrResourceCategory": "MonitorLogs",
+        "liftrResourcePreference": 1
+      },
+      "tags": {
+        "Environment": "Dev"
+      },
+      "location": "West US"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/monitors/myMonitor",
+        "name": "myMonitor",
+        "type": "Microsoft.Elastic/monitors",
+        "sku": {
+          "name": "free_Monthly"
+        },
+        "properties": {
+          "provisioningState": "Succeeded",
+          "logzOrganizationProperties": {
+            "companyName": "myOrg",
+            "id": "myOrg123",
+            "apiKey": null,
+            "enterpriseAppId": null
+          }
+        },
+        "tags": {
+          "Environment": "Dev"
+        },
+        "location": "West US 2"
+      }
+    },
+    "201": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/monitors/myMonitor",
+        "name": "myMonitor",
+        "type": "Microsoft.Elastic/monitors",
+        "sku": {
+          "name": "free_Monthly"
+        },
+        "properties": {
+          "provisioningState": "Succeeded",
+          "logzOrganizationProperties": {
+            "companyName": "myOrg",
+            "id": "myOrg123",
+            "apiKey": null,
+            "enterpriseAppId": null
+          }
+        },
+        "tags": {
+          "Environment": "Dev"
+        },
+        "location": "West US 2"
+      }
+    }
+  }
+}

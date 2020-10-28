@@ -145,7 +145,10 @@
             }
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
       },
       "delete": {
         "tags": [
@@ -283,7 +286,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Lists all VmmServers under the resouce group.",
+            "description": "Lists all VmmServers under the resource group.",
             "schema": {
               "$ref": "#/definitions/VMMServerListResult"
             }
@@ -487,7 +490,10 @@
             }
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
       },
       "delete": {
         "tags": [
@@ -625,7 +631,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Lists all Clouds under the resouce group.",
+            "description": "Lists all Clouds under the resource group.",
             "schema": {
               "$ref": "#/definitions/CloudListResult"
             }
@@ -793,7 +799,10 @@
             }
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
       },
       "delete": {
         "tags": [
@@ -931,7 +940,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Lists all VirtualNetworks under the resouce group.",
+            "description": "Lists all VirtualNetworks under the resource group.",
             "schema": {
               "$ref": "#/definitions/VirtualNetworkListResult"
             }
@@ -1099,7 +1108,10 @@
             }
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
       },
       "delete": {
         "tags": [
@@ -1410,7 +1422,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Lists all VirtualMachines under the resouce group.",
+            "description": "Lists all VirtualMachines under the resource group.",
             "schema": {
               "$ref": "#/definitions/VirtualMachineListResult"
             }
@@ -1578,7 +1590,10 @@
             }
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
       },
       "delete": {
         "tags": [
@@ -1716,7 +1731,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Lists all VirtualMachineTemplates under the resouce group.",
+            "description": "Lists all VirtualMachineTemplates under the resource group.",
             "schema": {
               "$ref": "#/definitions/VirtualMachineTemplateListResult"
             }
@@ -1844,6 +1859,20 @@
         }
       }
     },
+    "ExtendedLocation": {
+      "type": "object",
+      "description": "The extended location.",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "The extended location type."
+        },
+        "name": {
+          "type": "string",
+          "description": "The extended location name."
+        }
+      }
+    },
     "VMMServer": {
       "type": "object",
       "x-ms-azure-resource": true,
@@ -1888,18 +1917,8 @@
           "description": "The system data."
         },
         "extendedLocation": {
-          "type": "object",
-          "description": "The extended location.",
-          "properties": {
-            "type": {
-              "type": "string",
-              "description": "The extended location type."
-            },
-            "name": {
-              "type": "string",
-              "description": "The extended location name."
-            }
-          }
+          "$ref": "#/definitions/ExtendedLocation",
+          "description": "The extended location."
         }
       },
       "required": [
@@ -2021,18 +2040,8 @@
           "description": "The system data."
         },
         "extendedLocation": {
-          "type": "object",
-          "description": "The extended location.",
-          "properties": {
-            "type": {
-              "type": "string",
-              "description": "The extended location type."
-            },
-            "name": {
-              "type": "string",
-              "description": "The extended location name."
-            }
-          }
+          "$ref": "#/definitions/ExtendedLocation",
+          "description": "The extended location."
         }
       },
       "required": [
@@ -2132,18 +2141,8 @@
           "description": "The system data."
         },
         "extendedLocation": {
-          "type": "object",
-          "description": "The extended location.",
-          "properties": {
-            "type": {
-              "type": "string",
-              "description": "The extended location type."
-            },
-            "name": {
-              "type": "string",
-              "description": "The extended location name."
-            }
-          }
+          "$ref": "#/definitions/ExtendedLocation",
+          "description": "The extended location."
         }
       },
       "required": [
@@ -2173,7 +2172,6 @@
     "VirtualMachineProperties": {
       "description": "Defines the resource properties.",
       "required": [
-        "vmmServerId",
         "cloudId"
       ],
       "properties": {
@@ -2213,6 +2211,11 @@
         "uuid": {
           "type": "string",
           "description": "Unique ID of the virtual machine."
+        },
+        "generation": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Gets or sets the generation for the vm."
         },
         "powerState": {
           "description": "Gets the power state of the virtual machine.",
@@ -2552,18 +2555,8 @@
           "description": "The system data."
         },
         "extendedLocation": {
-          "type": "object",
-          "description": "The extended location.",
-          "properties": {
-            "type": {
-              "type": "string",
-              "description": "The extended location type."
-            },
-            "name": {
-              "type": "string",
-              "description": "The extended location name."
-            }
-          }
+          "$ref": "#/definitions/ExtendedLocation",
+          "description": "The extended location."
         }
       },
       "required": [
@@ -2654,6 +2647,12 @@
           "description": "Gets or sets the min dynamic memory for the vm.",
           "readOnly": true
         },
+        "generation": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Gets or sets the generation for the vm.",
+          "readOnly": true
+        },
         "networkInterfaces": {
           "description": "Gets or sets the network interfaces of the template.",
           "type": "array",
@@ -2721,18 +2720,8 @@
           "description": "The system data."
         },
         "extendedLocation": {
-          "type": "object",
-          "description": "The extended location.",
-          "properties": {
-            "type": {
-              "type": "string",
-              "description": "The extended location type."
-            },
-            "name": {
-              "type": "string",
-              "description": "The extended location name."
-            }
-          }
+          "$ref": "#/definitions/ExtendedLocation",
+          "description": "The extended location."
         }
       },
       "required": [
