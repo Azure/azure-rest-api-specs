@@ -114,57 +114,6 @@
           "$ref": "../../../../common/v1/privateEndpointConnection.json#/parameters/PrivateEndpointConnectionProxyNameParameter"
         }
       ],
-      "put": {
-        "operationId": "CreatePrivateEndpointConnectionProxy",
-        "description": "Create PrivateEndpointConnectionProxy",
-        "tags": [
-          "PrivateEndpointConnectionProxy"
-        ],
-        "deprecated": false,
-        "parameters": [
-          {
-            "in": "body",
-            "name": "request",
-            "description": "PrivateEndpointConnectionProxy as JSON request",
-            "required": true,
-            "schema": {
-              "$ref": "../../../../common/v1/privateEndpointConnection.json#/definitions/PrivateEndpointConnectionProxy"
-            }
-          }
-        ],
-        "responses": {
-          "202": {
-            "schema": {
-              "$ref": "../../../../common/v1/types.json#/definitions/OperationResource_Common"
-            },
-            "description": "Accepted"
-          },
-          "409": {
-            "description": "Authentication error."
-          },
-          "default": {
-            "schema": {
-              "$ref": "../../../../common/v1/types.json#/definitions/ErrorContract"
-            },
-            "description": ""
-          }
-        },
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
-        },
-        "x-ms-examples": {
-          "Create PrivateEndPointConnectionProxy in workspace": {
-            "$ref": "./examples/CreatePrivateEndpointConnectionProxy.json"
-          }
-        }
-      },
       "get": {
         "operationId": "GetPrivateEndpointConnectionProxyByName",
         "description": "Get PrivateEndpointConnectionProxy by name in the workspace",
@@ -375,63 +324,6 @@
         "x-ms-examples": {
           "Create PrivateEndPointConnectionProxy in PrivateLinkHub": {
             "$ref": "./examples/DeletePrivateEndpointConnectionForPrivateLinkHubProxy.json"
-          }
-        }
-      },
-      "put": {
-        "operationId": "CreatePrivateEndpointConnectionForPrivateLinkHubProxy",
-        "description": "Create PrivateEndpointConnection for PrivateLinkHubProxy",
-        "tags": [
-          "PrivateEndpointConnectionProxy"
-        ],
-        "deprecated": false,
-        "parameters": [
-          {
-            "in": "body",
-            "name": "request",
-            "description": "PrivateEndpointConnectionProxy as JSON request",
-            "required": true,
-            "schema": {
-              "$ref": "../../../../common/v1/privateEndpointConnection.json#/definitions/PrivateEndpointConnectionForPrivateLinkHubProxy"
-            }
-          }
-        ],
-        "responses": {
-          "202": {
-            "description": "Accepted",
-            "schema": {
-              "$ref": "../../../../common/v1/types.json#/definitions/OperationResource_Common"
-            }
-          },
-          "400": {
-            "schema": {
-              "$ref": "../../../../common/v1/types.json#/definitions/ErrorContract"
-            },
-            "description": "Bad request."
-          },
-          "409": {
-            "description": "Authentication error"
-          },
-          "default": {
-            "schema": {
-              "$ref": "../../../../common/v1/types.json#/definitions/ErrorContract"
-            },
-            "description": ""
-          }
-        },
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        },
-        "x-ms-examples": {
-          "Create PrivateEndPointConnectionProxy in PrivateLinkHub": {
-            "$ref": "./examples/CreatePrivateEndpointConnectionForPrivateLinkHubProxy.json"
           }
         }
       }
