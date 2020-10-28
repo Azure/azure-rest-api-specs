@@ -1,0 +1,427 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2019-06-01-preview",
+    "title": "ArtifactsClient"
+  },
+  "x-ms-parameterized-host": {
+    "hostTemplate": "{endpoint}",
+    "useSchemePrefix": false,
+    "parameters": [
+      {
+        "$ref": "#/parameters/Endpoint"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/libraries": {
+      "get": {
+        "tags": [
+          "Library"
+        ],
+        "operationId": "Library_GetLibraryByWorkspace",
+        "x-ms-examples": {
+          "List Libraries": {
+            "$ref": "./examples/Library_ListByWorkspace.json"
+          }
+        },
+        "description": "Lists Library.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/LibraryListResponse"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Azure Synapse service.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/libraries/{libraryName}/create": {
+      "put": {
+        "tags": [
+          "Library"
+        ],
+        "operationId": "Library_Create",
+        "x-ms-examples": {
+          "Create Library": {
+            "$ref": "./examples/Library_Create.json"
+          }
+        },
+        "description": "Create Library",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/LibraryNameParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted."
+          },
+          "default": {
+            "description": "An error response received from the Azure Synapse service.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/libraries/{libraryName}/flush": {
+      "post": {
+        "tags": [
+          "Library"
+        ],
+        "operationId": "Library_Flush",
+        "x-ms-examples": {
+          "Flush Library": {
+            "$ref": "./examples/Library_Flush.json"
+          }
+        },
+        "description": "Flush Library",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/LibraryNameParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted."
+          },
+          "default": {
+            "description": "An error response received from the Azure Synapse service.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/libraryOperationResults/{operationId}": {
+      "get": {
+        "tags": [
+          "Library"
+        ],
+        "operationId": "Library_GetOperationResult",
+        "x-ms-examples": {
+          "Get Operation Result for Library": {
+            "$ref": "./examples/Library_GetOperationResult.json"
+          }
+        },
+        "description": "Get Operation result for Library",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/OperationId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Ok.",
+            "schema": {
+              "$ref": "#/definitions/LibraryResource"
+            }
+          },
+          "202": {
+            "description": "Accepted.",
+            "schema": {
+              "$ref": "#/definitions/OperationResult"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Azure Synapse service.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/libraries/{libraryName}": {
+      "delete": {
+        "tags": [
+          "Library"
+        ],
+        "operationId": "Library_Delete",
+        "x-ms-examples": {
+          "Delete Library": {
+            "$ref": "./examples/Library_Delete.json"
+          }
+        },
+        "description": "Delete Library",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/LibraryNameParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted."
+          },
+          "409": {
+            "description": "Conflict."
+          },
+          "default": {
+            "description": "An error response received from the Azure Synapse service.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Library"
+        ],
+        "operationId": "Library_Get",
+        "description": "Get Library",
+        "x-ms-examples": {
+          "Get Library": {
+            "$ref": "./examples/Library_Get.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/LibraryNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/LibraryResource"
+            }
+          },
+          "304": {
+            "description": "Not modified."
+          },
+          "default": {
+            "description": "An error response received from the Azure Synapse service.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "OperationResult": {
+      "description": "Operation status for the operation",
+      "type": "object",
+      "properties": {
+        "status": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Operation status"
+        },
+        "error": {
+          "x-ms-client-flatten": true,
+          "description": "Error data",
+          "$ref": "#/definitions/CloudErrorBody"
+        }
+      }
+    },
+    "SubResource": {
+      "description": "Azure Synapse nested resource, which belongs to a workspace.",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/AzureEntityResource"
+        }
+      ]
+    },
+    "LibraryListResponse": {
+      "description": "A list of Library resources.",
+      "type": "object",
+      "required": [
+        "value"
+      ],
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "List of Library.",
+          "items": {
+            "$ref": "#/definitions/LibraryResource"
+          }
+        },
+        "nextLink": {
+          "description": "The link to the next page of results, if any remaining results exist.",
+          "type": "string"
+        }
+      }
+    },
+    "LibraryResource": {
+      "description": "Library response details",
+      "allOf": [
+        {
+          "$ref": "#/definitions/SubResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/Library",
+          "description": "Library/package properties."
+        }
+      },
+      "required": [
+        "properties"
+      ]
+    },
+    "Library": {
+      "description": "Library/package properties",
+      "type": "object",
+      "properties": {
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Name of the library/package."
+        },
+        "path": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Location of library/package in storage account."
+        },
+        "containerName": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Container name of the library/package."
+        },
+        "uploadedTimestamp": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The last update time of the library/package."
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Type of the library/package."
+        },
+        "provisioningStatus": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Provisioning status of the library/package."
+        },
+        "creatorId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Creator Id of the library/package."
+        }
+      }
+    },
+    "CloudError": {
+      "x-ms-external": true,
+      "description": "The object that defines the structure of an Azure Synapse error response.",
+      "type": "object",
+      "properties": {
+        "error": {
+          "x-ms-client-flatten": true,
+          "description": "Error data",
+          "$ref": "#/definitions/CloudErrorBody"
+        }
+      },
+      "required": [
+        "error"
+      ]
+    },
+    "CloudErrorBody": {
+      "x-ms-external": true,
+      "description": "The object that defines the structure of an Azure Synapse error.",
+      "type": "object",
+      "properties": {
+        "code": {
+          "description": "Error code.",
+          "type": "string"
+        },
+        "message": {
+          "description": "Error message.",
+          "type": "string"
+        },
+        "target": {
+          "description": "Property name/path in request associated with error.",
+          "type": "string"
+        },
+        "details": {
+          "description": "Array with additional error details.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CloudError"
+          }
+        }
+      },
+      "required": [
+        "code",
+        "message"
+      ]
+    }
+  },
+  "parameters": {
+    "LibraryNameParameter": {
+      "name": "libraryName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "file name to upload",
+      "x-ms-parameter-location": "method"
+    },
+    "OperationId": {
+      "name": "operationId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "operation id for which status is requested",
+      "x-ms-parameter-location": "method"
+    },
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "The Synapse client API Version."
+    },
+    "Endpoint": {
+      "name": "endpoint",
+      "description": "The workspace development endpoint, for example https://myworkspace.dev.azuresynapse.net.",
+      "required": true,
+      "type": "string",
+      "in": "path",
+      "x-ms-skip-url-encoding": true,
+      "x-ms-parameter-location": "client"
+    }
+  }
+}
