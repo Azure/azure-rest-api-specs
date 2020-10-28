@@ -159,13 +159,13 @@
         ],
         "responses": {
           "201": {
-            "description": "The cluster was/is being created. Check provisioningState to see detailed status.",
+            "description": "The cluster was/is being created. Check provisioningState and resourceState to see detailed status.",
             "schema": {
               "$ref": "#/definitions/Cluster"
             }
           },
           "200": {
-            "description": "The cluster was/is being updated. Check provisioningState to see detailed status.",
+            "description": "The cluster was/is being updated. Check provisioningState and resourceState to see detailed status.",
             "schema": {
               "$ref": "#/definitions/Cluster"
             }
@@ -218,7 +218,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The cluster was/is being updated. Check provisioningState to see detailed status.",
+            "description": "The cluster was/is being updated. Check provisioningState and resourceState to see detailed status.",
             "schema": {
               "$ref": "#/definitions/Cluster"
             }
@@ -494,13 +494,13 @@
         ],
         "responses": {
           "200": {
-            "description": "The database was/is being updated. Check provisioningState for detailed status.",
+            "description": "The database was/is being updated. Check provisioningState and resourceState for detailed status.",
             "schema": {
               "$ref": "#/definitions/Database"
             }
           },
           "201": {
-            "description": "The database was/is being created. Check provisioningState for detailed status.",
+            "description": "The database was/is being created. Check provisioningState and resourceState for detailed status.",
             "schema": {
               "$ref": "#/definitions/Database"
             }
@@ -557,7 +557,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The database was/is being updated. Check provisioningState for detailed status.",
+            "description": "The database was/is being updated. Check provisioningState and resourceState for detailed status.",
             "schema": {
               "$ref": "#/definitions/Database"
             }
@@ -1161,18 +1161,39 @@
     "ProvisioningState": {
       "type": "string",
       "readOnly": true,
-      "description": "Current status",
+      "description": "Current provisioning status",
       "enum": [
         "Succeeded",
         "Failed",
+        "Canceled",
         "Creating",
-        "Updating",
-        "Deleting",
-        "DeleteFailed",
-        "Disabled"
+        "Updating"
       ],
       "x-ms-enum": {
         "name": "ProvisioningState",
+        "modelAsString": true
+      }
+    },
+    "ResourceState": {
+      "type": "string",
+      "readOnly": true,
+      "description": "Current resource status",
+      "enum": [
+        "Running",
+        "Creating",
+        "CreateFailed",
+        "Updating",
+        "UpdateFailed",
+        "Deleting",
+        "DeleteFailed",
+        "Enabling",
+        "EnableFailed",
+        "Disabling",
+        "DisableFailed",
+        "Disabled"
+      ],
+      "x-ms-enum": {
+        "name": "ResourceState",
         "modelAsString": true
       }
     },
@@ -1247,7 +1268,12 @@
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
           "readOnly": true,
-          "description": "Current status of the cluster"
+          "description": "Current provisioning status of the cluster"
+        },
+        "resourceState": {
+          "$ref": "#/definitions/ResourceState",
+          "readOnly": true,
+          "description": "Current resource status of the cluster"
         },
         "redisVersion": {
           "type": "string",
@@ -1334,7 +1360,12 @@
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
           "readOnly": true,
-          "description": "Current status of the database"
+          "description": "Current provisioning status of the database"
+        },
+        "resourceState": {
+          "$ref": "#/definitions/ResourceState",
+          "readOnly": true,
+          "description": "Current resource status of the database"
         },
         "clusteringPolicy": {
           "type": "string",
