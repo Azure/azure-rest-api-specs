@@ -3285,18 +3285,33 @@
     },
     "SqlScriptResource": {
       "description": "Sql Script resource type.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/SubResource"
-        }
-      ],
       "properties": {
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Fully qualified resource Id for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}"
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the resource"
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The type of the resource. Ex- Microsoft.Compute/virtualMachines or Microsoft.Storage/storageAccounts."
+        },
+        "etag": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Resource Etag."
+        },
         "properties": {
           "$ref": "./entityTypes/SqlScript.json#/definitions/SqlScript",
           "description": "Properties of sql script."
         }
       },
       "required": [
+        "name",
         "properties"
       ]
     },
@@ -3359,18 +3374,33 @@
     },
     "NotebookResource": {
       "description": "Notebook resource type.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/SubResource"
-        }
-      ],
       "properties": {
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Fully qualified resource Id for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}"
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the resource"
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The type of the resource. Ex- Microsoft.Compute/virtualMachines or Microsoft.Storage/storageAccounts."
+        },
+        "etag": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Resource Etag."
+        },
         "properties": {
           "$ref": "./entityTypes/Notebook.json#/definitions/Notebook",
           "description": "Properties of Notebook."
         }
       },
       "required": [
+        "name",
         "properties"
       ]
     },
