@@ -73,43 +73,40 @@
         }
      },
      "/subscriptions/{subscriptionId}/providers/Microsoft.Confluent/agreements/all/setTerms": {
-          "post": {
-            "tags": [
-              "Agreements"
-            ],
-            "summary": "Set marketplace terms.",
-            "operationId": "MarketplaceAgreementsSetTerms_List",
-            "produces": [
-              "application/json"
-            ],
-            "parameters": [
-              {
-                "$ref": "#/parameters/SubscriptionIdParameter"
-              }
-            ],
-            "responses": {
-              "200": {
-                "description": "Success",
-                "schema": {
-                  "$ref": "#/definitions/AgreementTermsListResponse"
-                }
-              },
-              "default": {
-                "description": "Default error response.",
-                "schema": {
-                  "$ref": "#/definitions/ResourceProviderDefaultErrorResponse"
-                }
-              }
-            },
-            "x-ms-pageable": {
-              "nextLinkName": "nextLink"
-            },
-            "x-ms-examples": {
-              "MarketplaceAgreements_Set": {
-                "$ref": "./examples/MarketplaceAgreements_Set.json"
-              }
-           }
-       }
+      "post": {
+        "tags": [
+          "Agreements"
+        ],
+        "summary": "Set marketplace terms.",
+        "operationId": "MarketplaceAgreements_SetTerms",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/AgreementTermsListResponse"
+            }
+          },
+          "default": {
+            "description": "Default error response.",
+            "schema": {
+              "$ref": "#/definitions/ResourceProviderDefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "MarketplaceAgreements_Set": {
+            "$ref": "./examples/MarketplaceAgreements_Set.json"
+          }
+        }
+      }
     },
     "/providers/Microsoft.Confluent/operations": {
       "get": {
