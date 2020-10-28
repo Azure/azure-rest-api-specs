@@ -84,6 +84,9 @@ These settings apply only when `--tag=package-composite-v1` is specified on the 
 
 ``` yaml $(tag) == 'package-composite-v1'
 input-file:
+- Microsoft.Security/preview/2020-07-01-preview/sqlVulnerabilityAssessmentsScanOperations.json
+- Microsoft.Security/preview/2020-07-01-preview/sqlVulnerabilityAssessmentsScanResultsOperations.json
+- Microsoft.Security/preview/2020-07-01-preview/sqlVulnerabilityAssessmentsBaselineRuleOperations.json
 - Microsoft.Security/preview/2020-01-01-preview/secureScore.json
 - Microsoft.Security/preview/2020-01-01-preview/connectors.json
 - Microsoft.Security/preview/2019-01-01-preview/automations.json
@@ -122,6 +125,9 @@ These settings apply only when `--tag=package-composite-v2` is specified on the 
 
 ``` yaml $(tag) == 'package-composite-v2'
 input-file:
+- Microsoft.Security/preview/2020-07-01-preview/sqlVulnerabilityAssessmentsScanOperations.json
+- Microsoft.Security/preview/2020-07-01-preview/sqlVulnerabilityAssessmentsScanResultsOperations.json
+- Microsoft.Security/preview/2020-07-01-preview/sqlVulnerabilityAssessmentsBaselineRuleOperations.json
 - Microsoft.Security/preview/2020-01-01-preview/secureScore.json
 - Microsoft.Security/preview/2020-01-01-preview/connectors.json
 - Microsoft.Security/preview/2019-01-01-preview/automations.json
@@ -205,6 +211,9 @@ input-file:
 - Microsoft.Security/preview/2020-08-06-preview/iotSensors.json
 - Microsoft.Security/preview/2020-08-06-preview/devices.json
 - Microsoft.Security/preview/2020-08-06-preview/onPremiseIotSensors.json
+- Microsoft.Security/preview/2020-07-01-preview/sqlVulnerabilityAssessmentsScanOperations.json
+- Microsoft.Security/preview/2020-07-01-preview/sqlVulnerabilityAssessmentsScanResultsOperations.json
+- Microsoft.Security/preview/2020-07-01-preview/sqlVulnerabilityAssessmentsBaselineRuleOperations.json
 
 # Needed when there is more than one input file
 override-info:
@@ -377,6 +386,21 @@ input-file:
 - Microsoft.Security/stable/2020-01-01/serverVulnerabilityAssessments.json	
 - Microsoft.Security/stable/2020-01-01/topologies.json
 - Microsoft.Security/stable/2020-01-01/secureScore.json
+
+# Needed when there is more than one input file
+override-info:
+  title: SecurityCenter
+```
+
+### Tag: package-2020-07-preview-only
+
+These settings apply only when `--tag=package-2020-07-preview-only` is specified on the command line. This tag is used for Ruby SDK.
+
+``` yaml $(tag) == 'package-2020-07-preview-only'
+input-file:
+- Microsoft.Security/preview/2020-07-01-preview/sqlVulnerabilityAssessmentsScanOperations.json
+- Microsoft.Security/preview/2020-07-01-preview/sqlVulnerabilityAssessmentsScanResultsOperations.json
+- Microsoft.Security/preview/2020-07-01-preview/sqlVulnerabilityAssessmentsBaselineRuleOperations.json
 
 # Needed when there is more than one input file
 override-info:
