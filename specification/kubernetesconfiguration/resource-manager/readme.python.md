@@ -7,7 +7,6 @@ Use `--python-mode=update` if you already have a setup.py and just want to updat
 ```yaml $(python)
 python:
   python-mode: create
-  azure-arm: true
   license-header: MICROSOFT_MIT_NO_VERSION
   payload-flattening-threshold: 2
   namespace: azure.mgmt.kubernetesconfiguration

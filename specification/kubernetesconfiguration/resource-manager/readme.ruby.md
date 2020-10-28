@@ -5,7 +5,6 @@ These settings apply only when `--ruby` is specified on the command line.
 ```yaml
 package-name: azure_mgmt_kubernetesconfiguration
 package-version: "0.1.1"
-azure-arm: true
 ```
 
 ### Ruby multi-api
