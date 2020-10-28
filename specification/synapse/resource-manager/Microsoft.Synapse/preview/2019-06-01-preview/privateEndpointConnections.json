@@ -243,9 +243,11 @@
   },
   "definitions": {
     "PrivateEndpointConnectionList": {
+      "description": "A list of private endpoint connections",
       "type": "object",
       "properties": {
         "value": {
+          "description": "Array of results.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/PrivateEndpointConnection"
@@ -253,12 +255,14 @@
           "readOnly": true
         },
         "nextLink": {
+          "description": "Link to retrieve next page of results.",
           "type": "string",
           "readOnly": true
         }
       }
     },
     "PrivateEndpointConnection": {
+      "description": "A private endpoint connection",
       "type": "object",
       "allOf": [
         {
@@ -267,8 +271,59 @@
       ],
       "properties": {
         "properties": {
-          "$ref": "./privatelinkhub.json#/definitions/PrivateEndpointConnectionProperties",
+          "$ref": "#/definitions/PrivateEndpointConnectionProperties",
+          "description": "Private endpoint connection properties.",
           "x-ms-client-flatten": true
+        }
+      }
+    },
+    "PrivateEndpointConnectionProperties": {
+      "description": "Properties of a private endpoint connection.",
+      "type": "object",
+      "properties": {
+        "privateEndpoint": {
+          "$ref": "#/definitions/PrivateEndpoint",
+          "description": "The private endpoint which the connection belongs to."
+        },
+        "privateLinkServiceConnectionState": {
+          "$ref": "#/definitions/PrivateLinkServiceConnectionState",
+          "description": "Connection state of the private endpoint connection."
+        },
+        "provisioningState": {
+          "description": "Provisioning state of the private endpoint connection.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "PrivateEndpoint": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "PrivateLinkServiceConnectionState": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "string",
+          "enum": [
+            "Approved",
+            "Pending",
+            "Rejected",
+            "Disconnected"
+          ]
+        },
+        "description": {
+          "type": "string"
+        },
+        "actionsRequired": {
+          "type": "string",
+          "readOnly": true
         }
       }
     }
