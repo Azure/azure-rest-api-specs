@@ -78,15 +78,17 @@
               "isBuiltInOnly": false,
               "effects": [
                 {
-                  "name": "EnforceOPAConstraint",
+                  "name": "audit",
                   "detailsSchema": {
                     "type": "object",
                     "properties": {
                       "constraintTemplate": {
-                        "type": "string"
+                        "type": "string",
+                        "pattern": "^(?i)(https:\\/\\/raw\\.githubusercontent\\.com\\/){1}(.+)(\\.){1}(yaml|yml){1}$"
                       },
                       "constraint": {
-                        "type": "string"
+                        "type": "string",
+                        "pattern": "^(?i)(https:\\/\\/raw\\.githubusercontent\\.com\\/){1}(.+)(\\.){1}(yaml|yml){1}$"
                       },
                       "values": {
                         "type": "object",
@@ -95,8 +97,7 @@
                       }
                     },
                     "required": [
-                      "constraintTemplate",
-                      "constraint"
+                      "constraintTemplate"
                     ],
                     "additionalProperties": false
                   }
