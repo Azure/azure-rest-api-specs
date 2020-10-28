@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "ApplicationInsightsManagementClient",
-    "description": "Azure Application Insights client for application insights profiler tokens.",
+    "description": "Azure Application Insights client for application insights diagnostic services token.",
     "version": "2020-10-26-preview"
   },
   "host": "management.azure.com",
@@ -74,13 +74,13 @@
         }
       }
     },
-    "/{resourceUri}/providers/Microsoft.Insights/profilerToken": {
+    "/{resourceUri}/providers/Microsoft.Insights/diagnosticServiceToken": {
       "get": {
         "tags": [
-          "ProfilerToken"
+          "DiagnosticServiceToken"
         ],
-        "operationId": "profilerToken_GET",
-        "description": "**Gets an read-only access token for application insights profiler data.**",
+        "operationId": "DiagnosticServiceToken_GET",
+        "description": "**Gets an read-only access token for application insights diagnostic service data.**",
         "parameters": [
           {
             "$ref": "#/parameters/ResourceUriParameter"
@@ -97,9 +97,9 @@
             }
           },
           "200": {
-            "description": "Successful response containing the application insights profiler token.",
+            "description": "Successful response containing the application insights diagnostic services token.",
             "schema": {
-              "$ref": "#/definitions/ProfilerTokenResponse"
+              "$ref": "#/definitions/DiagnosticServicesTokenResponse"
             },
             "examples": {
               "application/json": {
@@ -109,17 +109,17 @@
           }
         },
         "x-ms-examples": {
-          "Get profiler token for resource": {
-            "$ref": "./examples/ProfilerTokenGetAndPost.json"
+          "Get diagnostic services token for resource": {
+            "$ref": "./examples/DiagnosticServicesTokenGetAndPost.json"
           }
         }
       },
       "post": {
         "tags": [
-          "ProfilerToken"
+          "DiagnosticServiceToken"
         ],
-        "operationId": "profilerToken",
-        "description": "**Gets an read-write access token for application insights profiler data.**",
+        "operationId": "DiagnosticServiceToken_POST",
+        "description": "**Gets an read-write access token for application insights diagnostic service data.**",
         "parameters": [
           {
             "$ref": "#/parameters/ResourceUriParameter"
@@ -136,9 +136,9 @@
             }
           },
           "200": {
-            "description": "Successful response containing the application insights profiler token.",
+            "description": "Successful response containing the application insights diagnostic services token.",
             "schema": {
-              "$ref": "#/definitions/ProfilerTokenResponse"
+              "$ref": "#/definitions/DiagnosticServicesTokenResponse"
             },
             "examples": {
               "application/json": {
@@ -148,23 +148,23 @@
           }
         },
         "x-ms-examples": {
-          "Get profiler token for resource": {
-            "$ref": "./examples/ProfilerTokenGetAndPost.json"
+          "Get diagnostic services token for resource": {
+            "$ref": "./examples/DiagnosticServicesTokenGetAndPost.json"
           }
         }
       }
     }
   },
   "definitions": {
-    "ProfilerTokenResponse": {
+    "DiagnosticServicesTokenResponse": {
       "type": "object",
       "properties": {
         "token": {
           "type": "string",
-          "description": "JWT token for accessing application insights profiler data."
+          "description": "JWT token for accessing application insights diagnostic service data."
         }
       },
-      "description": "The response to a profiler token query."
+      "description": "The response to a diagnostic services token query."
     },
     "OperationsListResult": {
       "description": "Result of the List Operations operation",
@@ -174,7 +174,7 @@
           "description": "A collection of operations",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/OperationProfilerToken"
+            "$ref": "#/definitions/OperationDiagnosticServicesToken"
           }
         },
         "nextLink": {
@@ -183,7 +183,7 @@
         }
       }
     },
-    "OperationProfilerToken": {
+    "OperationDiagnosticServicesToken": {
       "description": "Represents an operation returned by the GetOperations request",
       "type": "object",
       "properties": {
