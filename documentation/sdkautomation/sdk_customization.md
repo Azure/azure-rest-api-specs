@@ -118,7 +118,14 @@ This is type of file `./specificationRepositoryConfiguration.json` in swagger sp
       // that all interaction should go to instead.
       "type": "object",
       "additionalProperties": {
-        "$ref": "#/definitions/SdkRepositoryConfig"
+        "oneOf": [
+          {
+            "$ref": "#/definitions/SdkRepositoryConfig"
+          },
+          {
+            "type": "string"
+          }
+        ]
       },
       "propertyNames": {
         // The property name is the sdk name identifier.
@@ -135,11 +142,9 @@ This is type of file `./specificationRepositoryConfiguration.json` in swagger sp
         // The property name is the sdk repo ref.
         "$ref": "#/definitions/RepositoryName"
       }
-    },
-    "required": [
-      "sdkRepositoryMappings"
-    ]
+    }
   },
+  "required": ["sdkRepositoryMappings"],
   "definitions": {
     "RepositoryName": {
       // Reference to a repository on github. Could be <repo> or <owner>/<repo>.
@@ -183,9 +188,7 @@ This is type of file `./specificationRepositoryConfiguration.json` in swagger sp
           "default": "swagger_to_sdk_config.json"
         }
       },
-      "required": [
-        "mainRepository"
-      ]
+      "required": ["mainRepository"]
     }
   }
 }
@@ -205,6 +208,10 @@ The working folder of all the scripts is the __root folder of sdk repo__.
   },
   "initOptions": {
     "initScript": {
+      // Script to init dependencies.
+      // Param: <path_to_initInput.json> <path_to_initOutput.json>
+      // initInput.json: Not implemented. Placeholder for input arguments.
+      // initOutput.json: See #initOutput.
       "path": "./eng/tools/sdk_init"
     }
   },
@@ -279,12 +286,17 @@ The working folder of all the scripts is the __root folder of sdk repo__.
           // If we have multiple related readme.md, should we call generation once with
           // all the readme.md or should we call generation multiple times and one per readme.md.
           "type": "string",
-          "enum": [
-            "one-per-config",
-            "one-for-all-configs"
-          ],
+          "enum": ["one-per-config", "one-for-all-configs"],
           "default": "one-for-all-configs"
+        },
+        "clondDir": {
+          // SDK clone directory. By default it's name of sdk repo
+          "type": "string"
         }
+      },
+      "default": {
+        "createSdkPullRequests": true,
+        "closeIntegrationPR": true
       }
     },
     "initOptions": {
@@ -296,9 +308,7 @@ The working folder of all the scripts is the __root folder of sdk repo__.
           "$ref": "#/definitions/RunOptions"
         }
       },
-      "required": [
-        "initScript"
-      ]
+      "default": {}
     },
     "generateOptions": {
       // Generate the SDK code.
@@ -326,9 +336,10 @@ The working folder of all the scripts is the __root folder of sdk repo__.
           "default": true
         }
       },
-      "required": [
-        "generateScript"
-      ]
+      "default": {
+        "preprocessDryRunGetPackageName": false,
+        "parseGenerateOutput": false
+      }
     },
     "packageOptions": {
       // Get package folder and build / get changelog
@@ -354,21 +365,19 @@ The working folder of all the scripts is the __root folder of sdk repo__.
                   "type": "string",
                   "format": "regex"
                 },
-                "pageNamePrefix": {
-                  // Prefix to be appended to packageName. By default packageName will be the folder name of packageFolder
+                "packageNamePrefix": {
+                  // Prefix to be appended to packageName.
+                  // By default packageName will be the folder name of packageFolder
                   "type": "string"
                 }
               },
-              "required": [
-                "searchRegex"
-              ]
+              "required": ["searchRegex"]
             },
             {
               // If this option is set to false, then package folder will be from generateOutput.json.
               "const": false
             }
-          ],
-          "default": false,
+          ]
         },
         "buildScript": {
           // Build the generated sdk.
@@ -381,53 +390,60 @@ The working folder of all the scripts is the __root folder of sdk repo__.
           // Param: <path_to_package_folder>
           // Package folder could be a list separated by space if it's from generateOutput.json.
           // Expected output from stdout/stderr: Changelog in markdown
-          "allOf": {
-            "$ref": "#/definitions/RunOptions"
-          },
+          "allOf": [
+            {
+              "$ref": "#/definitions/RunOptions"
+            }
+          ],
           "properties": {
             "breakingChangeDetect": {
               // If stdout or stderr matches this in output of changelog tool
               // then we assume this SDK has breaking change.
               "$ref": "#/definitions/RunLogFilterOptions"
+            },
+            "breakingChangeLabel": {
+              "type": "string"
             }
           }
         }
-      }
+      },
+      "default": {}
     },
     "artifactOptions": {
-      "artifactPathFromFileSearch": {
-        "oneOf": [
-          {
-            // If this option is set to object, then artifacts will be detected automatically
-            //   based on filename regex search.
-            // This options must be set to object if parseGenerateOutput is false.
-            "type": "object",
-            "properties": {
-              "searchRegex": {
-                // Any file under package folder matching the searchRegex is package artifact.
-                "type": "string",
-                "format": "regex",
-              }
+      "properties": {
+        "artifactPathFromFileSearch": {
+          "oneOf": [
+            {
+              // If this option is set to object, then artifacts will be detected automatically
+              //   based on filename regex search.
+              // This options must be set to object if parseGenerateOutput is false.
+              "type": "object",
+              "properties": {
+                "searchRegex": {
+                  // Any file under package folder matching the searchRegex is package artifact.
+                  "type": "string",
+                  "format": "regex"
+                }
+              },
+              "required": ["searchRegex"]
+            },
+            {
+              // If this option is set to false, then package folder will be from generateOutput.json
+              "const": false
             }
-          },
-          {
-            // If this option is set to false, then package folder will be from generateOutput.json
-            "const": false
-          }
-        ],
-        "default": false
-      },
-      "installInstructionScript": {
-        // Generate install instruction that could be shown in spec PR comment (lite version)
-        //  or in generated SDK PR (full version).
-        // If generateOutput.json contains installInstruction then this could be skipped.
-        // Param: <path_to_installInstructionInput.json> <path_to_installInstructionOutput.json>
-        // installInstructionInput.json: See #InstallInstructionScriptInput .
-        // installInstructionOutput.json: See #InstallInstructionScriptInput .
-        "allOf": {
+          ]
+        },
+        "installInstructionScript": {
+          // Generate install instruction that could be shown in spec PR comment (lite version)
+          //  or in generated SDK PR (full version).
+          // If generateOutput.json contains installInstruction then this could be skipped.
+          // Param: <path_to_installInstructionInput.json> <path_to_installInstructionOutput.json>
+          // installInstructionInput.json: See #InstallInstructionScriptInput .
+          // installInstructionOutput.json: See #InstallInstructionScriptInput .
           "$ref": "#/definitions/RunOptions"
         }
-      }
+      },
+      "default": {}
     }
   },
   "definitions": {
@@ -445,32 +461,45 @@ The working folder of all the scripts is the __root folder of sdk repo__.
         },
         "stdout": {
           // How should SDK Automation handle the script stdout stream
-          "$ref": "#/definitions/RunLogOptions"
+          "allOf": [
+            {
+              "$ref": "#/definitions/RunLogOptions"
+            }
+          ]
         },
         "stderr": {
           // How should SDK Automation handle the script stderr stream
-          "$ref": "#/definitions/RunLogOptions"
-        },
-        "exitCode": {
-          // How should SDK Automation handle non-zero exitCode.
-          "showInComment": {
-            // Should we show this error in comment.
-            "type": "boolean",
-            "default": true
-          },
-          "result": {
-            // If script has non-error exitCode how should we mark the script's result.
-            "type": "string",
-            "enum": [
-              "error", "warning", "ignore"
-            ],
-            "default": "error"
+          "allOf": [
+            {
+              "$ref": "#/definitions/RunLogOptions"
+            }
+          ],
+          "default": {
+            "scriptWarning": true
           }
         },
-        "required": [
-          "path"
-        ]
-      }
+        "exitCode": {
+          "properties": {
+            // How should SDK Automation handle non-zero exitCode.
+            "showInComment": {
+              // Should we show this error in comment.
+              "type": "boolean",
+              "default": true
+            },
+            "result": {
+              // If script has non-error exitCode how should we mark the script's result.
+              "type": "string",
+              "enum": ["error", "warning", "ignore"],
+              "default": "error"
+            }
+          },
+          "default": {
+            "showInComment": true,
+            "result": "error"
+          }
+        }
+      },
+      "required": ["path"]
     },
     "RunLogOptions": {
       // How should SDK Automation handle the log stream.
@@ -538,6 +567,7 @@ Input file for generate script.
       // If dryRun is true, generateScript is expected to parse readme.md
       // and output the package list with package name and related readme.md.
       // Should not run codegen at this time.
+      // ** Not supported yet **
       "type": "boolean"
     },
     "specFolder": {
@@ -558,12 +588,7 @@ Input file for generate script.
       "type": "string"
     },
     "trigger": {
-      // How this generation is triggered.
-      "type": "string",
-      "enum": [
-        "pullRequest",
-        "continuousIntegration"
-      ]
+      "$ref": "TriggerType#"
     },
     "changedFiles": {
       // Changed file list in spec PR.
@@ -581,13 +606,10 @@ Input file for generate script.
     },
     "installInstructionInput": {
       // See #InstallInstructionScriptInput
-      "$ref": "#/definitions/InstallInstructionScriptInput"
+      "$ref": "InstallInstructionScriptInput#"
     }
   },
-  "required": [
-    "specFolder", "headSha", "headRef", "repoHttpsUrl",
-    "trigger", "changedFiles", "relatedReadmeMdFiles"
-  ]
+  "required": ["specFolder", "headSha", "headRef", "repoHttpsUrl", "trigger", "changedFiles", "relatedReadmeMdFiles"]
 }
 ```
 
@@ -639,16 +661,14 @@ Output file for generate script.
       }
     }
   },
-  "required": [
-    "packages"
-  ],
+  "required": ["packages"],
   "definitions": {
     "PackageResult": {
       "properties": {
         "packageName": {
           // Name of package. Will be used in branch name and PR title.
           // By default it's folder name of first entry in path.
-          "type": "string",
+          "type": "string"
         },
         "path": {
           // List of package content paths.
@@ -679,9 +699,7 @@ Output file for generate script.
               "type": "boolean"
             }
           },
-          "required": [
-            "content"
-          ]
+          "required": ["content"]
         },
         "artifacts": {
           "type": "array",
@@ -691,12 +709,10 @@ Output file for generate script.
         },
         "installInstructions": {
           // See #InstallInstructionScriptOutput
-          "$ref": "#/definitions/InstallInstructionScriptOutput"
-        },
+          "$ref": "InstallInstructionScriptOutput"
+        }
       },
-      "required": [
-        "path"
-      ]
+      "required": ["path"]
     }
   }
 }
@@ -726,6 +742,7 @@ Input of install instruction script.
 
 ```jsonc
 {
+  "$id": "InstallInstructionScriptInput",
   "type": "object",
   "properties": {
     "packageName": {
@@ -743,7 +760,7 @@ Input of install instruction script.
       // Is the download url public accessible.
       // If it's false, the download command template will be
       //  az rest --resource <client-id> -u "{URL}" --output-file {FILENAME}
-      "type": "boolean",
+      "type": "boolean"
     },
     "downloadUrlPrefix": {
       // All the artifacts will be uploaded and user could access the artifact via
@@ -755,11 +772,7 @@ Input of install instruction script.
       "type": "string"
     },
     "trigger": {
-      "type": "string",
-      "enum": [
-        "pullRequest",
-        "continuousIntegration"
-      ]
+      "$ref": "TriggerType#"
     }
   }
 }
@@ -781,6 +794,7 @@ Output of install instruction script.
 
 ```jsonc
 {
+  "$id": "InstallInstructionScriptOutput",
   "type": "object",
   "properties": {
     "full": {
@@ -794,8 +808,37 @@ Output of install instruction script.
       "type": "string"
     }
   },
-  "required": [
-    "full"
-  ]
+  "required": ["full"]
+}
+```
+
+### TriggerType
+
+#### TriggerType Schema
+
+```jsonc
+{
+  // How this generation is triggered.
+  "$id": "TriggerType",
+  "type": "string",
+  "enum": ["pullRequest", "continuousIntegration"]
+}
+```
+
+### InitOutput
+
+#### InitOutput Schema
+
+```jsonc
+{
+  "type": "object",
+  "properties": {
+    "envs": {
+      // Environment variable to be set in following scripts.
+      "additionalProperties": {
+        "type": "string"
+      }
+    }
+  }
 }
 ```
