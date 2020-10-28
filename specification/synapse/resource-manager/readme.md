@@ -80,6 +80,12 @@ directive:
     suppress: 
         - R4015
     reason: SQL doesn't support 'list' operation everywhere, so we cannot support List for certain Sql pool operations
+  - from: Microsoft.Synapse/preview/2019-06-01-preview/sqlPool.json
+    where :
+        - '$.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces/{workspaceName}/sqlPools/{sqlPoolName}/restorePoints/{restorePointName}"].delete.responses' 
+    suppress:
+        - R4011
+    reason: SQL Pools APIs are proxy APIs that call SQL DB APIs. The SQL DB delete restore points API only supports return method 200, so we cannot support 204. It is not possible for the SQL DB team to add 204 support for delete restore points.
 ```
 
 ---
