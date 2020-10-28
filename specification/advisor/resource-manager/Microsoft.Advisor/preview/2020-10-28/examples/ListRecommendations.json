@@ -1,0 +1,57 @@
+{
+  "parameters": {
+    "subscriptionId": "subscriptionId",
+    "$top": 10,
+    "api-version": "2020-01-01"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "nextLink": "https://management.azure.com/subscriptions/subscriptionId/providers/Microsoft.Advisor/recommendations?api-version=2020-01-01&$top=10&$skiptoken=skiptoken",
+        "value": [
+          {
+            "id": "/resourceUri/providers/Microsoft.Advisor/recommendations/recGUID1",
+            "name": "recGUID1",
+            "properties": {
+              "category": "HighAvailability",
+              "impact": "Medium",
+              "impactedField": "Microsoft.Compute/availabilitySets",
+              "impactedValue": "armavset",
+              "lastUpdated": "2017-02-24T22:24:43.3216408Z",
+              "risk": "Warning",
+              "shortDescription": {
+                "problem": "This availability set is not configured for fault tolerance",
+                "solution": "To ensure high availability add one or more virtual machines to this availability set"
+              },
+              "resourceMetadata": {
+                "resourceId": "/subscriptions/subscriptionId/resourceGroups/resourceGroup/providers/Microsoft.Compute/availabilitysets/abc"
+              }
+            },
+            "type": "Microsoft.Advisor/recommendations"
+          },
+          {
+            "id": "/resourceUri/providers/Microsoft.Advisor/recommendations/recGUID2",
+            "name": "recGUID2",
+            "properties": {
+              "category": "Security",
+              "impact": "Medium",
+              "impactedField": "Microsoft.Compute/virtualMachines",
+              "impactedValue": "armavset",
+              "lastUpdated": "2017-02-24T22:24:43.3216408Z",
+              "risk": "Warning",
+              "shortDescription": {
+                "problem": "Monitoring agent is not installed on your machines",
+                "solution": "Monitoring agent should be installed on your machines"
+              },
+              "resourceMetadata": {
+                "resourceId": "/subscriptions/subscriptionId/resourceGroups/resourceGroup/providers/Microsoft.Compute/virtualMachines/xyz",
+                "source": "/subscriptions/subscriptionId/resourceGroups/resourceGroup/providers/Microsoft.Compute/virtualMachines/xyz/providers/Microsoft.Security/assessments/assessmentGuid"
+              }
+            },
+            "type": "Microsoft.Advisor/recommendations"
+          }
+        ]
+      }
+    }
+  }
+}
