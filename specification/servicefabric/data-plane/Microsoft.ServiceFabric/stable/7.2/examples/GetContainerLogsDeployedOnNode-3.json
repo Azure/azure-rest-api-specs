@@ -1,0 +1,20 @@
+{
+  "operationId": "GetContainerLogsDeployedOnNode",
+  "description": "This example shows how to get container logs of previous dead container on a Service Fabric node for the given code package.",
+  "parameters": {
+    "api-version": "6.2",
+    "nodeName": "_Node_0",
+    "applicationId": "SimpleHttpServerApp",
+    "ServiceManifestName": "SimpleHttpServerSvcPkg",
+    "CodePackageName": "Code",
+    "Previous": true
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "body": {
+        "Content": "Exception encountered: System.Net.Http.HttpRequestException: Response status code does not indicate success: 500 (Internal Server Error).\r\n\tat System.Net.Http.HttpResponseMessage.EnsureSuccessStatusCode()\r\n"
+      }
+    }
+  }
+}

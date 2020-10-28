@@ -6,6 +6,7 @@ These settings apply only when `--azureresourceschema` is specified on the comma
 
 ``` yaml $(azureresourceschema) && $(multiapi)
 batch:
+  - tag: schema-healthcareapis-2020-03-30
   - tag: schema-healthcareapis-2020-03-15
   - tag: schema-healthcareapis-2019-09-16
   - tag: schema-healthcareapis-2018-08-20-preview
@@ -13,6 +14,17 @@ batch:
 ```
 
 Please also specify `--azureresourceschema-folder=<path to the root directory of your azure-resource-manager-schemas clone>`.
+
+### Tag: schema-healthcareapis-2020-03-30 and azureresourceschema
+
+``` yaml $(tag) == 'schema-healthcareapis-2020-03-30' && $(azureresourceschema)
+output-folder: $(azureresourceschema-folder)/schemas
+
+# all the input files in this apiVersion
+input-file:
+  - Microsoft.HealthcareApis/stable/2020-03-30/healthcare-apis.json
+
+```
 
 ### Tag: schema-healthcareapis-2020-03-15 and azureresourceschema
 
