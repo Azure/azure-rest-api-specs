@@ -8284,6 +8284,41 @@
       },
       "description": "Specifies the storage settings for the virtual machine disks."
     },
+    "GalleryApplication": {
+      "properties": {
+        "tags": {
+          "type": "string",
+          "description": "Optional, Specifies a passthrough value for more generic context."
+        },
+        "order": {
+          "type": "integer",
+          "description": "Optional, Specifies the order in which the packages have to be installed, has no effect if manuallyManaged is set to true"
+        },
+        "manuallyManaged": {
+          "type": "boolean",
+          "default": false,
+          "description": "Specifies whether the gallery application would be manually managed. If set to true, the VMApplicationExtension would not manage the gallery application"
+        },
+        "packageReferenceId": {
+          "type": "string",
+          "description": "Specifies the GalleryApplicationVersion reference in URL form. e.g. /subscriptions/{subid}/resourceGroups/{rgName}/providers/Microsoft.Compute/galleries/{galleryName}/applications/{application}/versions/{version}"
+        },
+        "configurationReference": {
+          "type": "string",
+          "description": "Optional, Specifies the uri to an azure blob that will replace the default configuration for the package if provided"
+        }
+      },
+      "required": [
+        "packageReferenceId"
+      ]
+    },
+    "ApplicationProfile": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/GalleryApplication"
+      },
+      "description": "Specifies the gallery applications that should me made available to the VM/VMSS"
+    },
     "SecurityProfile": {
       "properties": {
         "encryptionAtHost": {
@@ -8903,6 +8938,10 @@
         "hardwareProfile": {
           "$ref": "#/definitions/HardwareProfile",
           "description": "Specifies the hardware settings for the virtual machine."
+        },
+        "applicationProfile": {
+          "$ref": "#/definitions/ApplicationProfile",
+          "description": "Specifies the gallery applications that should me made available to the VM/VMSS"
         },
         "storageProfile": {
           "$ref": "#/definitions/StorageProfile",
@@ -10234,6 +10273,10 @@
           "$ref": "#/definitions/VirtualMachineScaleSetOSProfile",
           "description": "Specifies the operating system settings for the virtual machines in the scale set."
         },
+        "applicationProfile": {
+          "$ref": "#/definitions/ApplicationProfile",
+          "description": "Specifies the gallery applications that should me made available to the VM/VMSS"
+        },
         "storageProfile": {
           "$ref": "#/definitions/VirtualMachineScaleSetStorageProfile",
           "description": "Specifies the storage settings for the virtual machine disks."
@@ -10282,6 +10325,10 @@
         "osProfile": {
           "$ref": "#/definitions/VirtualMachineScaleSetUpdateOSProfile",
           "description": "The virtual machine scale set OS profile."
+        },
+        "applicationProfile": {
+          "$ref": "#/definitions/ApplicationProfile",
+          "description": "Specifies the gallery applications that should me made available to the VM/VMSS"
         },
         "storageProfile": {
           "$ref": "#/definitions/VirtualMachineScaleSetUpdateStorageProfile",
@@ -10915,6 +10962,10 @@
         "hardwareProfile": {
           "$ref": "#/definitions/HardwareProfile",
           "description": "Specifies the hardware settings for the virtual machine."
+        },
+        "applicationProfile": {
+          "$ref": "#/definitions/ApplicationProfile",
+          "description": "Specifies the gallery applications that should me made available to the VM/VMSS"
         },
         "storageProfile": {
           "$ref": "#/definitions/StorageProfile",
