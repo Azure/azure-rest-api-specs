@@ -62,9 +62,6 @@
             }
           }
         },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
         "x-ms-examples": {
           "MarketplaceAgreements_List": {
             "$ref": "./examples/MarketplaceAgreements_List.json"
@@ -78,7 +75,10 @@
           "Agreements"
         ],
         "summary": "Accept marketplace terms.",
-        "operationId": "MarketplaceAgreements_Set",
+        "operationId": "MarketplaceAgreements_AcceptTerms",
+        "consumes": [
+          "application/json"
+        ],
         "produces": [
           "application/json"
         ],
@@ -89,10 +89,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success",
-            "schema": {
-              "$ref": "#/definitions/AgreementTermsListResponse"
-            }
+            "description": "Success"
           },
           "default": {
             "description": "Default error response.",
@@ -100,9 +97,6 @@
               "$ref": "#/definitions/ResourceProviderDefaultErrorResponse"
             }
           }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
           "MarketplaceAgreements_Set": {
