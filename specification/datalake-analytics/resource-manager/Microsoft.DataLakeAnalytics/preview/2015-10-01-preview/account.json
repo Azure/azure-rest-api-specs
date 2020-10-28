@@ -251,6 +251,12 @@
           },
           "400": {
             "description": "InvalidArgument"
+          },
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/ErrorContract"
+            },
+            "description": ""
           }
         },
         "x-ms-examples": {
@@ -1633,6 +1639,17 @@
       },
       "x-ms-azure-resource": true,
       "description": "The resource model definition for a nested resource."
+    },
+    "ErrorContract": {
+      "title": "Error details.",
+      "description": "Contains details when the response code indicates an error.",
+      "type": "object",
+      "properties": {
+        "error": {
+          "description": "The error details.",
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+        }
+      }
     },
     "DataLakeAnalyticsAccount": {
       "allOf": [
