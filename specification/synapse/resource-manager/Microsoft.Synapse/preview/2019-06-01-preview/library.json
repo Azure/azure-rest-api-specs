@@ -1,0 +1,210 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2019-06-01-preview",
+    "title": "SynapseManagementClient",
+    "description": "Azure Synapse Analytics APIs"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "type": "oauth2",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      },
+      "description": "Azure Active Directory OAuth2 Flow"
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces/{workspaceName}/libraries": {
+      "get": {
+        "operationId": "Libraries_ListByWorkspace",
+        "summary": "List the libraries in a workspace.",
+        "description": "List libraries in a workspace.",
+        "tags": [
+          "Libraries"
+        ],
+        "deprecated": false,
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./workspace.json#/parameters/workspaceNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/LibraryListResponse"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Azure Synapse service.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-examples": {
+          "List libraries in a workspace": {
+            "$ref": "./examples/Libraries_ListByWorkspace.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    }
+  },
+  "definitions": {
+    "CloudError": {
+      "x-ms-external": true,
+      "description": "The object that defines the structure of an Azure Synapse error response.",
+      "type": "object",
+      "properties": {
+        "error": {
+          "x-ms-client-flatten": true,
+          "description": "Error data",
+          "$ref": "#/definitions/CloudErrorBody"
+        }
+      },
+      "required": [
+        "error"
+      ]
+    },
+    "CloudErrorBody": {
+      "x-ms-external": true,
+      "description": "The object that defines the structure of an Azure Synapse error.",
+      "type": "object",
+      "properties": {
+        "code": {
+          "description": "Error code.",
+          "type": "string"
+        },
+        "message": {
+          "description": "Error message.",
+          "type": "string"
+        },
+        "target": {
+          "description": "Property name/path in request associated with error.",
+          "type": "string"
+        },
+        "details": {
+          "description": "Array with additional error details.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CloudError"
+          }
+        }
+      },
+      "required": [
+        "code",
+        "message"
+      ]
+    },
+    "SubResource": {
+      "description": "Azure Synapse nested resource, which belongs to a workspace.",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/AzureEntityResource"
+        }
+      ]
+    },
+    "LibraryListResponse": {
+      "type": "object",
+      "description": "Collection of libraries information",
+      "title": "Collection of libraries",
+      "properties": {
+        "nextLink": {
+          "type": "string",
+          "description": "The link to the next page of results, if any remaining results exist."
+        },
+        "value": {
+          "type": "array",
+          "description": "List of libraries",
+          "items": {
+            "$ref": "#/definitions/LibraryResource"
+          }
+        }
+      }
+    },
+    "LibraryResource": {
+      "type": "object",
+      "description": "A library resource",
+      "title": "Library artifact",
+      "allOf": [
+        {
+          "$ref": "#/definitions/SubResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/LibraryResourceProperties",
+          "description": "Library/package properties.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "required": [
+        "properties"
+      ]
+    },
+    "LibraryResourceProperties": {
+      "description": "Library/package properties",
+      "type": "object",
+      "properties": {
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Name of the library/package."
+        },
+        "path": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Location of library/package in storage account."
+        },
+        "containerName": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Container name of the library/package."
+        },
+        "uploadedTimestamp": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The last update time of the library/package."
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Type of the library/package."
+        },
+        "provisioningStatus": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Provisioning status of the library/package."
+        },
+        "creatorId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Creator Id of the library/package."
+        }
+      }
+    }
+  }
+}

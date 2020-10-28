@@ -49,6 +49,7 @@ input-file:
 - Microsoft.Synapse/preview/2019-06-01-preview/privatelinkhub.json
 - Microsoft.Synapse/preview/2019-06-01-preview/sqlServer.json
 - Microsoft.Synapse/preview/2019-06-01-preview/keys.json
+- Microsoft.Synapse/preview/2019-06-01-preview/library.json
 ```
 
 ### Tag: package-sqlGen3-2020-04-01-preview

@@ -46,6 +46,7 @@ input-file:
   - Microsoft.Synapse/preview/2019-06-01-preview/privatelinkhub.json
   - Microsoft.Synapse/preview/2019-06-01-preview/sqlServer.json
   - Microsoft.Synapse/preview/2019-06-01-preview/keys.json
+  - Microsoft.Synapse/preview/2019-06-01-preview/library.json
 
 ```
 ### Tag: schema-synapse-2020-12-01 and azureresourceschema
