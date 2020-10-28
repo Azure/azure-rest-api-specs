@@ -27,31 +27,6 @@
     }
   },
   "paths": {
-    "/providers/Microsoft.AlertsManagement/operations": {
-      "get": {
-        "operationId": "Operations_List",
-        "description": "List all operations available through Azure Alerts Management Resource Provider.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          }
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "responses": {
-          "200": {
-            "description": "OK. Successfully retrieved operations list.",
-            "schema": {
-              "$ref": "#/definitions/operationsList"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.AlertsManagement/resourceHealthAlerts": {
       "get": {
         "tags": [
@@ -562,56 +537,6 @@
           "type": "string"
         }
       }
-    },
-    "operation": {
-      "description": "Operation provided by provider",
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "Name of the operation"
-        },
-        "display": {
-          "type": "object",
-          "description": "Properties of the operation",
-          "properties": {
-            "provider": {
-              "type": "string",
-              "description": "Provider name"
-            },
-            "resource": {
-              "type": "string",
-              "description": "Resource name"
-            },
-            "operation": {
-              "type": "string",
-              "description": "Operation name"
-            },
-            "description": {
-              "type": "string",
-              "description": "Description of the operation"
-            }
-          }
-        }
-      }
-    },
-    "operationsList": {
-      "description": "Lists the operations available in the AlertsManagement RP.",
-      "properties": {
-        "nextLink": {
-          "description": "URL to fetch the next set of operations.",
-          "type": "string"
-        },
-        "value": {
-          "description": "Array of operations",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/operation"
-          }
-        }
-      },
-      "required": [
-        "value"
-      ]
     }
   },
   "parameters": {
