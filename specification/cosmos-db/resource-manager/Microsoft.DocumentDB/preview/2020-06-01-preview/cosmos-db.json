@@ -4343,7 +4343,7 @@
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.DocumentDB/locations/{location}/restorableDatabaseAccounts/{instanceId}/restorableSqlDatabases/{databaseSnapshotId}": {
       "get": {
-        "operationId": "RestorableSqlDatabase_Get",
+        "operationId": "RestorableSqlDatabases_Get",
         "x-ms-examples": {
           "CosmosDBRestorableDatabaseGet": {
             "$ref": "./examples/CosmosDBRestorableDatabaseGet.json"
@@ -4430,7 +4430,7 @@
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.DocumentDB/locations/{location}/restorableDatabaseAccounts/{instanceId}/restorableSqlContainers/{containerSnapshotId}": {
       "get": {
-        "operationId": "RestorableSqlContainer_Get",
+        "operationId": "RestorableSqlContainers_Get",
         "x-ms-examples": {
           "CosmosDBRestorableContainerGet": {
             "$ref": "./examples/CosmosDBRestorableContainerGet.json"
@@ -8059,6 +8059,12 @@
           "type": "string",
           "format": "date-time",
           "description": "The time at which the restorable database account has been deleted (ISO-8601 format)."
+        },
+        "apiType": {
+          "description": "Enum to indicate the API type of the restorable database account.",
+          "type": "string",
+          "default": "Default",
+          "$ref": "#/definitions/ApiType"
         }
       }
     },
@@ -8236,6 +8242,24 @@
         }
       },
       "description": "The List operation response, that contains the restorable SQL resources."
+    },
+    "ApiType": {
+      "description": "Enum to indicate the API type of the restorable database account.",
+      "type": "string",
+      "enum": [
+        "None",
+        "MongoDB",
+        "Gremlin",
+        "Cassandra",
+        "Table",
+        "Sql",
+        "Etcd",
+        "GremlinV2"
+      ],
+      "x-ms-enum": {
+        "name": "ApiType",
+        "modelAsString": true
+      }
     }
   },
   "parameters": {
