@@ -169,6 +169,9 @@ directive:
   - suppress: RequiredDefaultResponse
     from: webTestLocations_API.json
     reason: 'consistent with existing default response | owned by another team'
+  - suppress: RequiredDefaultResponse
+    from: webTests_API.json
+    reason: 'consistent with existing default response | owned by another team'
   - suppress: PathResourceTypeNameCamelCase
     from: componentAnnotations_API.json
     reason: 'consistent with existing path | owned by another team'
