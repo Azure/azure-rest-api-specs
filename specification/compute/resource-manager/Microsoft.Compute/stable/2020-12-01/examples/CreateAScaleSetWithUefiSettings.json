@@ -1,17 +1,88 @@
 {
+  "parameters": {
+    "subscriptionId": "{subscription-id}",
+    "resourceGroupName": "myResourceGroup",
+    "vmScaleSetName": "{vmss-name}",
+    "api-version": "2020-12-01",
     "parameters": {
-      "subscriptionId": "{subscription-id}",
-      "resourceGroupName": "myResourceGroup",
-      "vmScaleSetName": "{vmss-name}",
-      "api-version": "2020-12-01",
-      "parameters": {
+      "sku": {
+        "tier": "Standard",
+        "capacity": 3,
+        "name": "Standard_D2s_v3"
+      },
+      "properties": {
+        "overprovision": true,
+        "virtualMachineProfile": {
+          "storageProfile": {
+            "imageReference": {
+              "sku": "windows10-tvm",
+              "publisher": "MicrosoftWindowsServer",
+              "version": "18363.592.2001092016",
+              "offer": "windowsserver-gen2preview-preview"
+            },
+            "osDisk": {
+              "caching": "ReadOnly",
+              "managedDisk": {
+                "storageAccountType": "StandardSSD_LRS"
+              },
+              "createOption": "FromImage"
+            }
+          },
+          "securityProfile": {
+            "uefiSettings": {
+              "secureBootEnabled": true,
+              "vTpmEnabled": true
+            }
+          },
+          "osProfile": {
+            "computerNamePrefix": "{vmss-name}",
+            "adminUsername": "{your-username}",
+            "adminPassword": "{your-password}"
+          },
+          "networkProfile": {
+            "networkInterfaceConfigurations": [
+              {
+                "name": "{vmss-name}",
+                "properties": {
+                  "primary": true,
+                  "enableIPForwarding": true,
+                  "ipConfigurations": [
+                    {
+                      "name": "{vmss-name}",
+                      "properties": {
+                        "subnet": {
+                          "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Network/virtualNetworks/{existing-virtual-network-name}/subnets/{existing-subnet-name}"
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        },
+        "upgradePolicy": {
+          "mode": "Manual"
+        }
+      },
+      "location": "westus"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
         "sku": {
           "tier": "Standard",
           "capacity": 3,
           "name": "Standard_D2s_v3"
         },
+        "name": "{vmss-name}",
+        "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachineScaleSets/{vmss-name}",
+        "type": "Microsoft.Compute/virtualMachineScaleSets",
         "properties": {
+          "singlePlacementGroup": true,
           "overprovision": true,
+          "uniqueId": "b9e23088-6ffc-46e0-9e02-b0a6eeef47db",
           "virtualMachineProfile": {
             "storageProfile": {
               "imageReference": {
@@ -32,18 +103,26 @@
               "uefiSettings": {
                 "secureBootEnabled": true,
                 "vTpmEnabled": true
-              }
+              },
+              "securityType": "SecureBoot"
             },
             "osProfile": {
               "computerNamePrefix": "{vmss-name}",
               "adminUsername": "{your-username}",
-              "adminPassword": "{your-password}"
+              "secrets": [],
+              "windowsConfiguration": {
+                "provisionVMAgent": true,
+                "enableAutomaticUpdates": true
+              }
             },
             "networkProfile": {
               "networkInterfaceConfigurations": [
                 {
                   "name": "{vmss-name}",
                   "properties": {
+                    "dnsSettings": {
+                      "dnsServers": []
+                    },
                     "primary": true,
                     "enableIPForwarding": true,
                     "ipConfigurations": [
@@ -51,11 +130,13 @@
                         "name": "{vmss-name}",
                         "properties": {
                           "subnet": {
-                            "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Network/virtualNetworks/{existing-virtual-network-name}/subnets/{existing-subnet-name}"
-                          }
+                            "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Network/virtualNetworks/nsgExistingVnet/subnets/nsgExistingSubnet"
+                          },
+                          "privateIPAddressVersion": "IPv4"
                         }
                       }
-                    ]
+                    ],
+                    "enableAcceleratedNetworking": false
                   }
                 }
               ]
@@ -63,173 +144,92 @@
           },
           "upgradePolicy": {
             "mode": "Manual"
-          }
+          },
+          "provisioningState": "Creating"
         },
         "location": "westus"
       }
     },
-    "responses": {
-      "200": {
-        "body": {
-          "sku": {
-            "tier": "Standard",
-            "capacity": 3,
-            "name": "Standard_D2s_v3"
-          },
-          "name": "{vmss-name}",
-          "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachineScaleSets/{vmss-name}",
-          "type": "Microsoft.Compute/virtualMachineScaleSets",
-          "properties": {
-            "singlePlacementGroup": true,
-            "overprovision": true,
-            "uniqueId": "b9e23088-6ffc-46e0-9e02-b0a6eeef47db",
-            "virtualMachineProfile": {
-              "storageProfile": {
-                "imageReference": {
-                    "sku": "windows10-tvm",
-                    "publisher": "MicrosoftWindowsServer",
-                    "version": "18363.592.2001092016",
-                    "offer": "windowsserver-gen2preview-preview"
+    "201": {
+      "body": {
+        "sku": {
+          "tier": "Standard",
+          "capacity": 3,
+          "name": "Standard_D2s_v3"
+        },
+        "name": "{vmss-name}",
+        "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachineScaleSets/{vmss-name}",
+        "type": "Microsoft.Compute/virtualMachineScaleSets",
+        "properties": {
+          "singlePlacementGroup": true,
+          "overprovision": true,
+          "uniqueId": "b9e23088-6ffc-46e0-9e02-b0a6eeef47db",
+          "virtualMachineProfile": {
+            "storageProfile": {
+              "imageReference": {
+                "sku": "windows10-tvm",
+                "publisher": "MicrosoftWindowsServer",
+                "version": "18363.592.2001092016",
+                "offer": "windowsserver-gen2preview-preview"
+              },
+              "osDisk": {
+                "caching": "ReadOnly",
+                "managedDisk": {
+                  "storageAccountType": "StandardSSD_LRS"
                 },
-                "osDisk": {
-                  "caching": "ReadOnly",
-                  "managedDisk": {
-                    "storageAccountType": "StandardSSD_LRS"
-                  },
-                  "createOption": "FromImage"
-                }
-              },
-              "securityProfile": {
-                "uefiSettings": {
-                    "secureBootEnabled": true,
-                    "vTpmEnabled": true
-                },
-                "securityType": "SecureBoot"
-              },
-              "osProfile": {
-                "computerNamePrefix": "{vmss-name}",
-                "adminUsername": "{your-username}",
-                "secrets": [],
-                "windowsConfiguration": {
-                  "provisionVMAgent": true,
-                  "enableAutomaticUpdates": true
-                }
-              },
-              "networkProfile": {
-                "networkInterfaceConfigurations": [
-                  {
-                    "name": "{vmss-name}",
-                    "properties": {
-                      "dnsSettings": {
-                        "dnsServers": []
-                      },
-                      "primary": true,
-                      "enableIPForwarding": true,
-                      "ipConfigurations": [
-                        {
-                          "name": "{vmss-name}",
-                          "properties": {
-                            "subnet": {
-                              "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Network/virtualNetworks/nsgExistingVnet/subnets/nsgExistingSubnet"
-                            },
-                            "privateIPAddressVersion": "IPv4"
-                          }
-                        }
-                      ],
-                      "enableAcceleratedNetworking": false
-                    }
-                  }
-                ]
+                "createOption": "FromImage"
               }
             },
-            "upgradePolicy": {
-              "mode": "Manual"
+            "securityProfile": {
+              "uefiSettings": {
+                "secureBootEnabled": true,
+                "vTpmEnabled": true
+              },
+              "securityType": "SecureBoot"
             },
-            "provisioningState": "Creating"
-          },
-          "location": "westus"
-        }
-      },
-      "201": {
-        "body": {
-          "sku": {
-            "tier": "Standard",
-            "capacity": 3,
-            "name": "Standard_D2s_v3"
-          },
-          "name": "{vmss-name}",
-          "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachineScaleSets/{vmss-name}",
-          "type": "Microsoft.Compute/virtualMachineScaleSets",
-          "properties": {
-            "singlePlacementGroup": true,
-            "overprovision": true,
-            "uniqueId": "b9e23088-6ffc-46e0-9e02-b0a6eeef47db",
-            "virtualMachineProfile": {
-              "storageProfile": {
-                "imageReference": {
-                    "sku": "windows10-tvm",
-                    "publisher": "MicrosoftWindowsServer",
-                    "version": "18363.592.2001092016",
-                    "offer": "windowsserver-gen2preview-preview"
-                },
-                "osDisk": {
-                  "caching": "ReadOnly",
-                  "managedDisk": {
-                    "storageAccountType": "StandardSSD_LRS"
-                  },
-                  "createOption": "FromImage"
-                }
-              },
-              "securityProfile": {
-                "uefiSettings": {
-                    "secureBootEnabled": true,
-                    "vTpmEnabled": true
-                },
-                "securityType": "SecureBoot"
-              },
-              "osProfile": {
-                "computerNamePrefix": "{vmss-name}",
-                "adminUsername": "{your-username}",
-                "secrets": [],
-                "windowsConfiguration": {
-                  "provisionVMAgent": true,
-                  "enableAutomaticUpdates": true
-                }
-              },
-              "networkProfile": {
-                "networkInterfaceConfigurations": [
-                  {
-                    "name": "{vmss-name}",
-                    "properties": {
-                      "dnsSettings": {
-                        "dnsServers": []
-                      },
-                      "primary": true,
-                      "enableIPForwarding": true,
-                      "ipConfigurations": [
-                        {
-                          "name": "{vmss-name}",
-                          "properties": {
-                            "subnet": {
-                              "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Network/virtualNetworks/nsgExistingVnet/subnets/nsgExistingSubnet"
-                            },
-                            "privateIPAddressVersion": "IPv4"
-                          }
-                        }
-                      ],
-                      "enableAcceleratedNetworking": false
-                    }
-                  }
-                ]
+            "osProfile": {
+              "computerNamePrefix": "{vmss-name}",
+              "adminUsername": "{your-username}",
+              "secrets": [],
+              "windowsConfiguration": {
+                "provisionVMAgent": true,
+                "enableAutomaticUpdates": true
               }
             },
-            "upgradePolicy": {
-              "mode": "Manual"
-            },
-            "provisioningState": "Creating"
+            "networkProfile": {
+              "networkInterfaceConfigurations": [
+                {
+                  "name": "{vmss-name}",
+                  "properties": {
+                    "dnsSettings": {
+                      "dnsServers": []
+                    },
+                    "primary": true,
+                    "enableIPForwarding": true,
+                    "ipConfigurations": [
+                      {
+                        "name": "{vmss-name}",
+                        "properties": {
+                          "subnet": {
+                            "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Network/virtualNetworks/nsgExistingVnet/subnets/nsgExistingSubnet"
+                          },
+                          "privateIPAddressVersion": "IPv4"
+                        }
+                      }
+                    ],
+                    "enableAcceleratedNetworking": false
+                  }
+                }
+              ]
+            }
           },
-          "location": "westus"
-        }
+          "upgradePolicy": {
+            "mode": "Manual"
+          },
+          "provisioningState": "Creating"
+        },
+        "location": "westus"
       }
     }
   }
+}
