@@ -20,6 +20,16 @@ For other options on installation see [Installing AutoRest](https://aka.ms/autor
 
 ## Configuration
 
+## Suppression
+
+``` yaml
+directive:
+  - suppress: R3016
+    from: mr-sts.json
+    where: $.definitions.StsTokenResponseMessage.properties.AccessToken
+    reason: The API is already public and changing the casing will involve a breaking change.
+```
+
 ### Basic Information
 
 These are the global settings for Azure Mixed Reality STS.
