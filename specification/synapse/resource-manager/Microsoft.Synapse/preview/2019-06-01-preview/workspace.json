@@ -679,6 +679,97 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces/{workspaceName}/managedIdentitySqlControlSettings/default": {
+      "get": {
+        "operationId": "WorkspaceManagedIdentitySqlControlSettings_Get",
+        "summary": "Get Managed Identity Sql Control Settings",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/workspaceNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/ManagedIdentitySqlControlSettingsModel"
+            },
+            "description": "OK"
+          },
+          "default": {
+            "schema": {
+              "$ref": "../../../../common/v1/types.json#/definitions/ErrorContract"
+            },
+            "description": "Error"
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-examples": {
+          "Get managed identity sql control settings": {
+            "$ref": "./examples/GetManagedIdentitySqlControlSettings.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "WorkspaceManagedIdentitySqlControlSettings_CreateOrUpdate",
+        "summary": "Create or update Managed Identity Sql Control Settings",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./workspace.json#/parameters/workspaceNameParameter"
+          },
+          {
+            "description": "Managed Identity Sql Control Settings",
+            "schema": {
+              "$ref": "#/definitions/ManagedIdentitySqlControlSettingsModel"
+            },
+            "in": "body",
+            "name": "managedIdentitySqlControlSettings",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/ManagedIdentitySqlControlSettingsModel"
+            },
+            "description": "OK"
+          },
+          "default": {
+            "schema": {
+              "$ref": "../../../../common/v1/types.json#/definitions/ErrorContract"
+            },
+            "description": "Error"
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-examples": {
+          "Create or update managed identity sql control settings": {
+            "$ref": "./examples/CreateOrUpdateManagedIdentitySqlControlSettings.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces/{workspaceName}/restorableDroppedSqlPools/{restorableDroppedSqlPoolId}": {
       "get": {
         "tags": [
@@ -1106,6 +1197,51 @@
           "description": "Resource provisioning state",
           "type": "string",
           "readOnly": true
+        }
+      }
+    },
+    "ManagedIdentitySqlControlSettingsModel": {
+      "type": "object",
+      "title": "Managed Identity Sql Control Settings",
+      "description": "Sql Control Settings for workspace managed identity",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "title": "Managed Identity Sql Control Settings",
+          "description": "Sql Control Settings for workspace managed identity",
+          "properties": {
+            "grantSqlControlToManagedIdentity": {
+              "type": "object",
+              "description": "Grant sql control to managed identity",
+              "properties": {
+                "desiredState": {
+                  "description": "Desired state",
+                  "type": "string",
+                  "enum": [
+                    "Enabled",
+                    "Disabled"
+                  ]
+                },
+                "actualState": {
+                  "description": "Actual state",
+                  "type": "string",
+                  "enum": [
+                    "Enabling",
+                    "Enabled",
+                    "Disabling",
+                    "Disabled",
+                    "Unknown"
+                  ],
+                  "readOnly": true
+                }
+              }
+            }
+          },
+          "x-ms-client-flatten": true
         }
       }
     },
