@@ -1013,7 +1013,111 @@
         },
         "x-ms-long-running-operation": true
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppConfiguration/configurationStores/{configStoreName}/eventGridFilters": {
+      "get": {
+        "tags": [
+          "EventGridFilters"
+        ],
+        "description": "Lists the event grid filters for a given configuration store.",
+        "operationId": "EventGridFilters_ListByConfigurationStore",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ConfigStoreNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "$skipToken",
+            "in": "query",
+            "description": "A skip token is used to continue retrieving items after an operation returns a partial result. If a previous response contains a nextLink element, the value of the nextLink element will include a skipToken parameter that specifies a starting point to use for subsequent calls.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "#/definitions/EventGridFilterListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "EventGridFilters_ListByConfigurationStore": {
+            "$ref": "./examples/ConfigurationStoresListEventGridFilters.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppConfiguration/configurationStores/{configStoreName}/eventGridFilters/{eventGridFilterName}": {
+      "get": {
+        "tags": [
+          "EventGridFilters"
+        ],
+        "description": "Gets the properties of the specified event grid filter.",
+        "operationId": "EventGridFilters_Get",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ConfigStoreNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "eventGridFilterName",
+            "in": "path",
+            "description": "The name of the event grid filter to retrieve.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "#/definitions/EventGridFilter"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "EventGridFilters_Get": {
+            "$ref": "./examples/ConfigurationStoresGetEventGridFilter.json"
+          }
+        }
+      }
     }
+
+
+
   },
   "definitions": {
     "ConfigurationStoreListResult": {
@@ -1403,6 +1507,137 @@
           "additionalProperties": {
             "type": "string"
           }
+        }
+      }
+    },
+    "EventGridFilterListResult": {
+      "description": "The result of a request to list event grid filters.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "The collection value.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/EventGridFilter"
+          }
+        },
+        "nextLink": {
+          "description": "The URI that can be used to request the next set of paged results.",
+          "type": "string"
+        }
+      }
+    },
+    "EventGridFilter": {
+      "description": "The event grid filter resource along with all resource properties.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "The resource ID.",
+          "type": "string",
+          "readOnly": true
+        },
+        "name": {
+          "description": "The name of the resource.",
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "description": "The type of the resource.",
+          "type": "string",
+          "readOnly": true
+        },
+        "properties": {
+          "$ref": "#/definitions/EventGridFilterProperties",
+          "description": "All event grid filter properties.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "EventGridFilterProperties": {
+      "description": "All event grid filter properties.",
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "description": "The provisioning state of the event grid filter.",
+          "enum": [
+            "Creating",
+            "Updating",
+            "Deleting",
+            "Succeeded",
+            "Failed",
+            "Canceled"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "ProvisioningState",
+            "modelAsString": true
+          }
+        },
+        "filter": {
+          "description": "Properties describing the filtering behavior of the event grid filter.",
+          "readOnly": true,
+          "$ref": "#/definitions/EventFilter"
+        },
+        "subscriberIdentityInfo": {
+          "description": "Information describing the event subscriber.",
+          "readOnly": true,
+          "$ref": "#/definitions/SubscriberIdentityInfo"
+        }
+      }
+    },
+    "EventFilter": {
+      "description": "Properties describing the filtering behavior of the event grid filter.",
+      "type": "object",
+      "properties": {
+        "subjectBeginsWith": {
+          "description": "The subject prefix used for filtering events",
+          "type": "string",
+          "readOnly": true
+        },
+        "subjectEndsWith": {
+          "description": "The subject suffix used for filtering events",
+          "type": "string",
+          "readOnly": true
+        },
+        "includedEventTypes": {
+          "description": "The event types that will be sent to Event Grid.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "SubscriberIdentityInfo": {
+      "description": "Information describing the event subscriber.",
+      "type": "object",
+      "properties": {
+        "clientPrincipalId": {
+          "description": "The principal id of the subscriber.",
+          "type": "string",
+          "readOnly": true
+        },
+        "clientObjectId": {
+          "description": "The object id of the subscriber.",
+          "type": "string",
+          "readOnly": true
+        },
+        "clientTenantId": {
+          "description": "The client id of the subscriber.",
+          "type": "string",
+          "readOnly": true
+        },
+        "clientApplicationId": {
+          "description": "The application id of the subscriber.",
+          "type": "string",
+          "readOnly": true
+        },
+        "clientAuthorizationSource": {
+          "description": "The authorization source of the sbuscriber.",
+          "type": "string",
+          "readOnly": true
         }
       }
     },
