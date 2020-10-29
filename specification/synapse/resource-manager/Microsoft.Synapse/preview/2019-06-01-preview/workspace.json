@@ -770,6 +770,50 @@
         }
       }
     },
+    "EncryptionDetails": {
+      "description": "Details of the encryption associated with the workspace",
+      "type": "object",
+      "properties": {
+        "doubleEncryptionEnabled": {
+          "description": "Double Encryption enabled",
+          "type": "boolean",
+          "readOnly": true
+        },
+        "cmk": {
+          "description": "Customer Managed Key Details",
+          "$ref": "#/definitions/CustomerManagedKeyDetails"
+        }
+      }
+    },
+    "CustomerManagedKeyDetails": {
+      "description": "Details of the customer managed key associated with the workspace",
+      "type": "object",
+      "properties": {
+        "status": {
+          "description": "The customer managed key status on the workspace",
+          "type": "string",
+          "readOnly": true
+        },
+        "key": {
+          "description": "The key object of the workspace",
+          "$ref": "#/definitions/WorkspaceKeyDetails"
+        }
+      }
+    },
+    "WorkspaceKeyDetails": {
+      "description": "Details of the customer managed key associated with the workspace",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Workspace Key sub-resource name",
+          "type": "string"
+        },
+        "keyVaultUrl": {
+          "description": "Workspace Key sub-resource key vault url",
+          "type": "string"
+        }
+      }
+    },
     "ManagedIdentity": {
       "description": "The workspace managed identity",
       "type": "object",
@@ -913,6 +957,15 @@
           "items": {
             "$ref": "./privateEndpointConnections.json#/definitions/PrivateEndpointConnection"
           }
+        },
+        "encryption": {
+          "description": "The encryption details of the workspace",
+          "$ref": "#/definitions/EncryptionDetails"
+        },
+        "workspaceUID": {
+          "description": "The workspace unique identifier",
+          "type": "string",
+          "readOnly": true
         },
         "extraProperties": {
           "description": "Workspace level configs and feature flags",
