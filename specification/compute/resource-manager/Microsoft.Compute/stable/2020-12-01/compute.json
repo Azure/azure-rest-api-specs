@@ -8290,7 +8290,7 @@
       },
       "description": "Specifies the storage settings for the virtual machine disks."
     },
-    "GalleryApplication": {
+    "VMGalleryApplication": {
       "properties": {
         "tags": {
           "type": "string",
@@ -8319,11 +8319,15 @@
       ]
     },
     "ApplicationProfile": {
-      "type": "array",
-      "items": {
-        "$ref": "#/definitions/GalleryApplication"
-      },
-      "description": "Specifies the gallery applications that should be made available to the VM/VMSS"
+      "properties": {
+        "galleryApplications": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VMGalleryApplication"
+          },
+          "description": "Specifies the gallery applications that should be made available to the VM/VMSS"
+        }
+      }
     },
     "SecurityProfile": {
       "properties": {

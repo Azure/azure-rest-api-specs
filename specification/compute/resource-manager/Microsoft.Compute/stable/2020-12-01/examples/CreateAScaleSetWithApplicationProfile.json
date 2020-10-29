@@ -29,18 +29,20 @@
               "createOption": "FromImage"
             }
           },
-          "applicationProfile": [
-            {
-              "tags": "myTag1",
-              "order": 1,
-              "manuallyManaged": true,
-              "packageReferenceId": "/subscriptions/32c17a9e-aa7b-4ba5-a45b-e324116b6fdb/resourceGroups/myresourceGroupName2/providers/Microsoft.Compute/galleries/myGallery1/applications/MyApplication1/versions/1.0",
-              "configurationReference": "https://mystorageaccount.blob.core.windows.net/configurations/settings.config"
-            },
-            {
-              "packageReferenceId": "/subscriptions/32c17a9e-aa7b-4ba5-a45b-e324116b6fdg/resourceGroups/myresourceGroupName3/providers/Microsoft.Compute/galleries/myGallery2/applications/MyApplication2/versions/1.1"
-            }
-          ],
+          "applicationProfile": {
+            "galleryApplications": [
+              {
+                "tags": "myTag1",
+                "order": 1,
+                "manuallyManaged": true,
+                "packageReferenceId": "/subscriptions/32c17a9e-aa7b-4ba5-a45b-e324116b6fdb/resourceGroups/myresourceGroupName2/providers/Microsoft.Compute/galleries/myGallery1/applications/MyApplication1/versions/1.0",
+                "configurationReference": "https://mystorageaccount.blob.core.windows.net/configurations/settings.config"
+              },
+              {
+                "packageReferenceId": "/subscriptions/32c17a9e-aa7b-4ba5-a45b-e324116b6fdg/resourceGroups/myresourceGroupName3/providers/Microsoft.Compute/galleries/myGallery2/applications/MyApplication2/versions/1.1"
+              }
+            ]
+          },
           "osProfile": {
             "computerNamePrefix": "{vmss-name}",
             "adminUsername": "{your-username}",
@@ -103,19 +105,21 @@
                 "createOption": "FromImage"
               }
             },
-            "applicationProfile": [
-              {
-                "tags": "myTag1",
-                "order": 1,
-                "manuallyManaged": true,
-                "packageReferenceId": "/subscriptions/32c17a9e-aa7b-4ba5-a45b-e324116b6fdb/resourceGroups/myresourceGroupName2/providers/Microsoft.Compute/galleries/myGallery1/applications/MyApplication1/versions/1.0",
-                "configurationReference": "https://mystorageaccount.blob.core.windows.net/configurations/settings.config"
-              },
-              {
-                "manuallyManaged": false,
-                "packageReferenceId": "/subscriptions/32c17a9e-aa7b-4ba5-a45b-e324116b6fdg/resourceGroups/myresourceGroupName3/providers/Microsoft.Compute/galleries/myGallery2/applications/MyApplication2/versions/1.1"
-              }
-            ],
+            "applicationProfile": {
+              "galleryApplications": [
+                {
+                  "tags": "myTag1",
+                  "order": 1,
+                  "manuallyManaged": true,
+                  "packageReferenceId": "/subscriptions/32c17a9e-aa7b-4ba5-a45b-e324116b6fdb/resourceGroups/myresourceGroupName2/providers/Microsoft.Compute/galleries/myGallery1/applications/MyApplication1/versions/1.0",
+                  "configurationReference": "https://mystorageaccount.blob.core.windows.net/configurations/settings.config"
+                },
+                {
+                  "manuallyManaged": false,
+                  "packageReferenceId": "/subscriptions/32c17a9e-aa7b-4ba5-a45b-e324116b6fdg/resourceGroups/myresourceGroupName3/providers/Microsoft.Compute/galleries/myGallery2/applications/MyApplication2/versions/1.1"
+                }
+              ]
+            },
             "osProfile": {
               "computerNamePrefix": "{vmss-name}",
               "adminUsername": "{your-username}",
@@ -190,19 +194,21 @@
                 "createOption": "FromImage"
               }
             },
-            "applicationProfile": [
-              {
-                "tags": "myTag1",
-                "order": 1,
-                "manuallyManaged": true,
-                "packageReferenceId": "/subscriptions/32c17a9e-aa7b-4ba5-a45b-e324116b6fdb/resourceGroups/myresourceGroupName2/providers/Microsoft.Compute/galleries/myGallery1/applications/MyApplication1/versions/1.0",
-                "configurationReference": "https://mystorageaccount.blob.core.windows.net/configurations/settings.config"
-              },
-              {
-                "manuallyManaged": false,
-                "packageReferenceId": "/subscriptions/32c17a9e-aa7b-4ba5-a45b-e324116b6fdg/resourceGroups/myresourceGroupName3/providers/Microsoft.Compute/galleries/myGallery2/applications/MyApplication2/versions/1.1"
-              }
-            ],
+            "applicationProfile": {
+              "galleryApplications": [
+                {
+                  "tags": "myTag1",
+                  "order": 1,
+                  "manuallyManaged": true,
+                  "packageReferenceId": "/subscriptions/32c17a9e-aa7b-4ba5-a45b-e324116b6fdb/resourceGroups/myresourceGroupName2/providers/Microsoft.Compute/galleries/myGallery1/applications/MyApplication1/versions/1.0",
+                  "configurationReference": "https://mystorageaccount.blob.core.windows.net/configurations/settings.config"
+                },
+                {
+                  "manuallyManaged": false,
+                  "packageReferenceId": "/subscriptions/32c17a9e-aa7b-4ba5-a45b-e324116b6fdg/resourceGroups/myresourceGroupName3/providers/Microsoft.Compute/galleries/myGallery2/applications/MyApplication2/versions/1.1"
+                }
+              ]
+            },
             "osProfile": {
               "computerNamePrefix": "{vmss-name}",
               "adminUsername": "{your-username}",
