@@ -7,9 +7,12 @@
     "parameters": {
       "properties": {
         "policySettings": {
+          "enabledState": "Enabled",
+          "mode": "Prevention",
           "redirectUrl": "http://www.bing.com",
           "customBlockResponseStatusCode": 499,
-          "customBlockResponseBody": "PGh0bWw+CjxoZWFkZXI+PHRpdGxlPkhlbGxvPC90aXRsZT48L2hlYWRlcj4KPGJvZHk+CkhlbGxvIHdvcmxkCjwvYm9keT4KPC9odG1sPg=="
+          "customBlockResponseBody": "PGh0bWw+CjxoZWFkZXI+PHRpdGxlPkhlbGxvPC90aXRsZT48L2hlYWRlcj4KPGJvZHk+CkhlbGxvIHdvcmxkCjwvYm9keT4KPC9odG1sPg==",
+          "requestBodyCheck": "Disabled"
         },
         "customRules": {
           "rules": [
@@ -63,6 +66,7 @@
             {
               "ruleSetType": "DefaultRuleSet",
               "ruleSetVersion": "1.0",
+              "ruleSetAction": "Block",
               "exclusions": [
                 {
                   "matchVariable": "RequestHeaderNames",
@@ -128,7 +132,8 @@
             "mode": "Prevention",
             "redirectUrl": "http://www.bing.com",
             "customBlockResponseStatusCode": 499,
-            "customBlockResponseBody": "PGh0bWw+CjxoZWFkZXI+PHRpdGxlPkhlbGxvPC90aXRsZT48L2hlYWRlcj4KPGJvZHk+CkhlbGxvIHdvcmxkCjwvYm9keT4KPC9odG1sPg=="
+            "customBlockResponseBody": "PGh0bWw+CjxoZWFkZXI+PHRpdGxlPkhlbGxvPC90aXRsZT48L2hlYWRlcj4KPGJvZHk+CkhlbGxvIHdvcmxkCjwvYm9keT4KPC9odG1sPg==",
+            "requestBodyCheck": "Disabled"
           },
           "customRules": {
             "rules": [
@@ -193,6 +198,7 @@
               {
                 "ruleSetType": "DefaultRuleSet",
                 "ruleSetVersion": "1.0",
+                "ruleSetAction": "Block",
                 "exclusions": [
                   {
                     "matchVariable": "RequestHeaderNames",
@@ -233,7 +239,8 @@
               }
             ]
           },
-          "frontendEndpointLinks": []
+          "frontendEndpointLinks": [],
+          "securityPolicyLinks": []
         },
         "sku": {
           "name": "Classic_AzureFrontDoor"
@@ -388,7 +395,8 @@
             "mode": "Prevention",
             "redirectUrl": "http://www.bing.com",
             "customBlockResponseStatusCode": 499,
-            "customBlockResponseBody": "PGh0bWw+CjxoZWFkZXI+PHRpdGxlPkhlbGxvPC90aXRsZT48L2hlYWRlcj4KPGJvZHk+CkhlbGxvIHdvcmxkCjwvYm9keT4KPC9odG1sPg=="
+            "customBlockResponseBody": "PGh0bWw+CjxoZWFkZXI+PHRpdGxlPkhlbGxvPC90aXRsZT48L2hlYWRlcj4KPGJvZHk+CkhlbGxvIHdvcmxkCjwvYm9keT4KPC9odG1sPg==",
+            "requestBodyCheck": "Disabled"
           },
           "customRules": {
             "rules": [
@@ -453,6 +461,7 @@
               {
                 "ruleSetType": "DefaultRuleSet",
                 "ruleSetVersion": "1.0",
+                "ruleSetAction": "Block",
                 "exclusions": [
                   {
                     "matchVariable": "RequestHeaderNames",
@@ -493,7 +502,8 @@
               }
             ]
           },
-          "frontendEndpointLinks": []
+          "frontendEndpointLinks": [],
+          "securityPolicyLinks": []
         },
         "sku": {
           "name": "Classic_AzureFrontDoor"

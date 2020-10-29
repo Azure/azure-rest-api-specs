@@ -24,7 +24,8 @@
             "mode": "Prevention",
             "redirectUrl": "http://www.bing.com",
             "customBlockResponseStatusCode": 499,
-            "customBlockResponseBody": "PGh0bWw+CjxoZWFkZXI+PHRpdGxlPkhlbGxvPC90aXRsZT48L2hlYWRlcj4KPGJvZHk+CkhlbGxvIHdvcmxkCjwvYm9keT4KPC9odG1sPg=="
+            "customBlockResponseBody": "PGh0bWw+CjxoZWFkZXI+PHRpdGxlPkhlbGxvPC90aXRsZT48L2hlYWRlcj4KPGJvZHk+CkhlbGxvIHdvcmxkCjwvYm9keT4KPC9odG1sPg==",
+            "requestBodyCheck": "Disabled"
           },
           "customRules": {
             "rules": [
@@ -89,6 +90,7 @@
               {
                 "ruleSetType": "DefaultRuleSet",
                 "ruleSetVersion": "1.0",
+                "ruleSetAction": "Block",
                 "exclusions": [
                   {
                     "matchVariable": "RequestHeaderNames",
@@ -99,11 +101,13 @@
                 "ruleGroupOverrides": [
                   {
                     "ruleGroupName": "SQLI",
+                    "exclusions": [],
                     "rules": [
                       {
                         "ruleId": "942100",
                         "enabledState": "Enabled",
-                        "action": "Redirect"
+                        "action": "Redirect",
+                        "exclusions": []
                       },
                       {
                         "ruleId": "942110",
@@ -119,7 +123,8 @@
             {
               "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/frontdoors/fd1/frontendendpoints/fd1-azurefd-net"
             }
-          ]
+          ],
+          "securityPolicyLinks": []
         },
         "sku": {
           "name": "Classic_AzureFrontDoor"
