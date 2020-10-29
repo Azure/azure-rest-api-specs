@@ -164,6 +164,15 @@ input-file:
 - Microsoft.Devices/stable/2016-02-03/iothub.json
 ```
 
+### Tag: profile-hybrid-2020-09-01
+
+These settings apply only when `--tag=profile-hybrid-2020-09-01` is specified on the command line.
+
+``` yaml $(tag) == 'profile-hybrid-2020-09-01'
+input-file:
+- Microsoft.Devices/preview/2019-07-01-preview/iothub.json
+```
+
 ---
 
 # Code Generation

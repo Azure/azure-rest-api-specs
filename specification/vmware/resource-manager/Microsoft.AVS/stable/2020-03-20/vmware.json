@@ -1213,6 +1213,7 @@
         "availableHosts": {
           "description": "Number of trial hosts available",
           "type": "integer",
+          "format": "int32",
           "readOnly": true
         }
       }
@@ -1226,6 +1227,7 @@
           "readOnly": true,
           "additionalProperties": {
             "type": "integer",
+            "format": "int32",
             "readOnly": true
           }
         },
@@ -1353,6 +1355,152 @@
               "readOnly": true
             }
           }
+        },
+        "isDataAction": {
+          "description": "Gets or sets a value indicating whether the operation is a data action or not",
+          "type": "boolean"
+        },
+        "origin": {
+          "description": "Origin of the operation",
+          "type": "string"
+        },
+        "properties": {
+          "$ref": "#/definitions/OperationProperties",
+          "description": "Properties of the operation"
+        }
+      }
+    },
+    "OperationProperties": {
+      "description": "Extra Operation properties",
+      "type": "object",
+      "properties": {
+        "serviceSpecification": {
+          "$ref": "#/definitions/ServiceSpecification",
+          "description": "Service specifications of the operation"
+        }
+      }
+    },
+    "ServiceSpecification": {
+      "description": "Service specification payload",
+      "type": "object",
+      "properties": {
+        "logSpecifications": {
+          "description": "Specifications of the Log for Azure Monitoring",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/LogSpecification"
+          }
+        },
+        "metricSpecifications": {
+          "description": "Specifications of the Metrics for Azure Monitoring",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MetricSpecification"
+          }
+        }
+      }
+    },
+    "LogSpecification": {
+      "description": "Specifications of the Log for Azure Monitoring",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Name of the log",
+          "type": "string"
+        },
+        "displayName": {
+          "description": "Localized friendly display name of the log",
+          "type": "string"
+        },
+        "blobDuration": {
+          "description": "Blob duration of the log",
+          "type": "string"
+        }
+      }
+    },
+    "MetricSpecification": {
+      "description": "Specifications of the Metrics for Azure Monitoring",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Name of the metric",
+          "type": "string"
+        },
+        "displayName": {
+          "description": "Localized friendly display name of the metric",
+          "type": "string"
+        },
+        "displayDescription": {
+          "description": "Localized friendly description of the metric",
+          "type": "string"
+        },
+        "unit": {
+          "description": "Unit that makes sense for the metric",
+          "type": "string"
+        },
+        "category": {
+          "description": "Name of the metric category that the metric belongs to. A metric can only belong to a single category.",
+          "type": "string"
+        },
+        "aggregationType": {
+          "description": "Only provide one value for this field. Valid values: Average, Minimum, Maximum, Total, Count.",
+          "type": "string"
+        },
+        "supportedAggregationTypes": {
+          "description": "Supported aggregation types",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "supportedTimeGrainTypes": {
+          "description": "Supported time grain types",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "fillGapWithZero": {
+          "description": "Optional. If set to true, then zero will be returned for time duration where no metric is emitted/published.",
+          "type": "boolean"
+        },
+        "dimensions": {
+          "description": "Dimensions of the metric",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MetricDimension"
+          }
+        },
+        "enableRegionalMdmAccount": {
+          "description": "Whether or not the service is using regional MDM accounts.",
+          "type": "string"
+        },
+        "sourceMdmAccount": {
+          "description": "The name of the MDM account.",
+          "type": "string"
+        },
+        "sourceMdmNamespace": {
+          "description": "The name of the MDM namespace.",
+          "type": "string"
+        }
+      }
+    },
+    "MetricDimension": {
+      "description": "Specifications of the Dimension of metrics",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Name of the dimension",
+          "type": "string"
+        },
+        "displayName": {
+          "description": "Localized friendly display name of the dimension",
+          "type": "string"
         }
       }
     },
@@ -1704,7 +1852,8 @@
       "properties": {
         "clusterSize": {
           "description": "The cluster size",
-          "type": "integer"
+          "type": "integer",
+          "format": "int32"
         }
       }
     },
@@ -1719,9 +1868,14 @@
         }
       ],
       "properties": {
+        "provisioningState": {
+          "description": "The state of the cluster provisioning",
+          "$ref": "#/definitions/ClusterProvisioningState"
+        },
         "clusterId": {
           "description": "The identity",
           "type": "integer",
+          "format": "int32",
           "readOnly": true
         },
         "hosts": {
@@ -1744,20 +1898,24 @@
       "properties": {
         "provisioningState": {
           "description": "The state of the cluster provisioning",
-          "type": "string",
-          "readOnly": true,
-          "enum": [
-            "Succeeded",
-            "Failed",
-            "Cancelled",
-            "Deleting",
-            "Updating"
-          ],
-          "x-ms-enum": {
-            "name": "ClusterProvisioningState",
-            "modelAsString": true
-          }
+          "$ref": "#/definitions/ClusterProvisioningState"
         }
+      }
+    },
+    "ClusterProvisioningState": {
+      "description": "The state of the cluster provisioning",
+      "type": "string",
+      "readOnly": true,
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Cancelled",
+        "Deleting",
+        "Updating"
+      ],
+      "x-ms-enum": {
+        "name": "ClusterProvisioningState",
+        "modelAsString": true
       }
     },
     "PrivateCloudList": {

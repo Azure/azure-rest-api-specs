@@ -92,12 +92,12 @@ These settings apply only when `--tag=release_3_1_preview.2` is specified on the
 input-file: preview/v3.1-preview.2/TextAnalytics.json
 ```
 
-### Release 3.2-Preview.1
+### Release 3.1-Preview.3
 
 These settings apply only when `--tag=release_3_2_preview.1` is specified on the command line.
 
 ``` yaml $(tag) == 'release_3_2_preview.1'
-input-file: preview/v3.2-preview.1/TextAnalytics.json
+input-file: preview/v3.1-preview.3/TextAnalytics.json
 ```
 
 ## Swagger to SDK

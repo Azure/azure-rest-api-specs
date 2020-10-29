@@ -107,14 +107,14 @@ input-file:
     - "Microsoft.Fabric.Admin/preview/2016-05-01/LogicalSubnet.json"
     - "Microsoft.Fabric.Admin/preview/2016-05-01/MacAddressPool.json"
     - "Microsoft.Fabric.Admin/preview/2016-05-01/NetworkOperationResults.json"
-    - "Microsoft.Fabric.Admin/preview/2016-05-01/ScaleUnit.json"
-    - "Microsoft.Fabric.Admin/preview/2016-05-01/ScaleUnitNode.json"
     - "Microsoft.Fabric.Admin/preview/2016-05-01/SlbMuxInstance.json"
     - "Microsoft.Fabric.Admin/preview/2016-05-01/StorageOperationResults.json"
     - "Microsoft.Fabric.Admin/preview/2018-10-01/StorageSubSystem.json"
     - "Microsoft.Fabric.Admin/preview/2019-05-01/Drive.json"
     - "Microsoft.Fabric.Admin/preview/2019-05-01/Volume.json"
     - "Microsoft.Fabric.Admin/preview/2019-05-01/NasCluster.json"
+    - "Microsoft.Fabric.Admin/preview/2020-10-01/ScaleUnit.json"
+    - "Microsoft.Fabric.Admin/preview/2020-10-01/ScaleUnitNode.json"
 ```
 
 ## Suppression
@@ -187,6 +187,8 @@ input-file:
   - $(this-folder)/Microsoft.Fabric.Admin/preview/2019-05-01/Drive.json
   - $(this-folder)/Microsoft.Fabric.Admin/preview/2019-05-01/Volume.json
   - $(this-folder)/Microsoft.Fabric.Admin/preview/2019-05-01/NasCluster.json
+  - $(this-folder)/Microsoft.Fabric.Admin/preview/2020-10-01/ScaleUnit.json
+  - $(this-folder)/Microsoft.Fabric.Admin/preview/2020-10-01/ScaleUnitNode.json
 
 ```
 
