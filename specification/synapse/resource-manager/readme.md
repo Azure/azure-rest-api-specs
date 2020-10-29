@@ -92,8 +92,6 @@ directive:
     suppress:
         - R4011
     reason: SQL Pools APIs are proxy APIs that call SQL DB APIs. The SQL DB delete restore points API only supports return method 200, so we cannot support 204. It is not possible for the SQL DB team to add 204 support for delete restore points.
-  - suppress: DescriptionAndTitleMissing
-    reason: Temporary suppression in branch to reduce clutter in report.
   - suppress: AllResourcesMustHaveGetOperation
     from: Microsoft.Synapse/preview/2019-06-01-preview/sqlPool.json
     where:
@@ -104,19 +102,9 @@ directive:
     from: Microsoft.Synapse/preview/2019-06-01-preview/workspace_managedIdentity.json
     where:
       - $.definitions.ManagedIdentitySqlControlSettingsInfo
-  - suppress: GetCollectionResponseSchema
-    reason: Needs implmentation
-    from: Microsoft.Synapse/preview/2019-06-01-preview/workspace_keys.json
-    where:
-      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces/{workspaceName}/keys"]
   - suppress: R2010
     reason: x-ms-long-running-operation-options not available in datafactory swagger
     from: Microsoft.Synapse/preview/2019-06-01-preview/integrationRuntime.json
-  - suppress: OperationIdNounConflictingModelNames
-    reason: Existing spec, does it really need changes
-    from: Microsoft.Synapse/preview/2019-06-01-preview/integrationRuntime.json
-  - suppress: GuidUsage
-    reason: GUIDs are everywhere
   - suppress: AvoidNestedProperties
     reason: Existing models
     from: Microsoft.Synapse/preview/2019-06-01-preview/integrationRuntime.json
@@ -124,11 +112,6 @@ directive:
       - $.definitions.IntegrationRuntimeResource.properties.properties
       - $.definitions.IntegrationRuntimeStatusResponse.properties.properties
       - $.definitions.SsisObjectMetadataStatusResponse.properties.properties
-  - suppress: AvoidNestedProperties
-    reason: Existing models
-    from: Microsoft.Synapse/preview/2019-06-01-preview/privateLinkResources.json
-    where:
-      - $.definitions.PrivateLinkResource.properties.properties
 ```
 
 ---
