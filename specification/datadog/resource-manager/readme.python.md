@@ -26,14 +26,24 @@ no-namespace-folders: true
 package-version: 1.0.0
 ```
 
-``` yaml $(python) && $(python-mode) == 'update'
+``` yaml $(python) && $(python-mode) == 'update' && !$(track2)
 python:
   no-namespace-folders: true
   output-folder: $(python-sdks-folder)/datadog/azure-mgmt-datadog/azure/mgmt/datadog
 ```
 
-``` yaml $(python) && $(python-mode) == 'create'
+``` yaml $(python) && $(python-mode) == 'create' && !$(track2)
 python:
   basic-setup-py: true
   output-folder: $(python-sdks-folder)/datadog/azure-mgmt-datadog
+```
+
+``` yaml $(python) && $(python-mode) == 'update' && $(track2)
+no-namespace-folders: true
+output-folder: $(python-sdks-folder)/datadog/azure-mgmt-datadog/azure/mgmt/datadog
+```
+
+``` yaml $(python) && $(python-mode) == 'create' && $(track2)
+basic-setup-py: true
+output-folder: $(python-sdks-folder)/datadog/azure-mgmt-datadog
 ```
