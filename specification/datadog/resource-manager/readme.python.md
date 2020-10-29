@@ -30,14 +30,10 @@ package-version: 1.0.0
 python:
   no-namespace-folders: true
   output-folder: $(python-sdks-folder)/datadog/azure-mgmt-datadog/azure/mgmt/datadog
-no-namespace-folders: true
-output-folder: $(python-sdks-folder)/datadog/azure-mgmt-datadog/azure/mgmt/datadog
 ```
 
 ``` yaml $(python) && $(python-mode) == 'create'
 python:
   basic-setup-py: true
   output-folder: $(python-sdks-folder)/datadog/azure-mgmt-datadog
-basic-setup-py: true
-output-folder: $(python-sdks-folder)/datadog/azure-mgmt-datadog
 ```
