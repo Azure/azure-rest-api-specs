@@ -24,9 +24,21 @@ Generate all API versions currently shipped for this package
 
 ```yaml $(python) && $(multiapi)
 batch:
+  - tag: package-2020-11
   - tag: package-2020-04
   - tag: package-2019-09
   - tag: package-2018-01
+```
+
+### Tag: package-2020-11 and python
+
+These settings apply only when `--tag=package-2020-11 --python` is specified on the command line.
+Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
+
+``` yaml $(tag) == 'package-2020-11' && $(python)
+python:
+  namespace: azure.mgmt.databox.v2020_11_01
+  output-folder: $(python-sdks-folder)/databox/azure-mgmt-databox/azure/mgmt/databox/v2020_11_01
 ```
 
 ### Tag: package-2020-04 and python
