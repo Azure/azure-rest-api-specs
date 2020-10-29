@@ -477,7 +477,9 @@
         "Deleting",
         "Succeeded",
         "Failed",
-        "Canceled"
+        "Canceled",
+        "Deleted",
+        "NotSpecified"
       ],
       "type": "string",
       "description": "Provision states for confluent RP",
@@ -485,6 +487,27 @@
       "x-ms-enum": {
         "name": "ProvisionState",
         "modelAsString": true
+      }
+    },
+    "SaaSOfferStatus": {
+      "enum": [
+        "Started",
+        "PendingFulfillmentStart",
+        "InProgress",
+        "Subscribed",
+        "Suspended",
+        "Reinstated",
+        "Succeeded",
+        "Failed",
+        "Unsubscribed",
+        "Updating"
+      ],
+      "type": "string",
+      "description": "SaaS Offer Status for confluent RP",
+      "title": "SaaSOfferStatus",
+      "x-ms-enum": {
+        "modelAsString": true,
+        "name": "SaaSOfferStatus"
       }
     },
     "OfferDetail": {
@@ -515,6 +538,10 @@
           "description": "Offer Plan Term unit",
           "maxLength": 25,
           "type": "string"
+        },
+        "status": {
+          "description": "SaaS Offer Status",
+          "$ref": "#/definitions/SaaSOfferStatus"
         }
       }
     },
@@ -533,13 +560,8 @@
           "type": "string"
         },
         "emailAddress": {
-          "description": "Email address. Validation Pattern: ^\\w+@[a-zA-Z_]+?\\.[a-zA-Z]{2,3}$",
-          "pattern": "^\\w+@[a-zA-Z_]+?\\.[a-zA-Z]{2,3}$",
-          "type": "string"
-        },
-        "phoneNumber": {
-          "description": "Phone number. Validation Pattern: ^(\\+\\d{1,2}\\s)?\\(?\\d{3}\\)?[\\s.-]?\\d{3}[\\s.-]?\\d{4}$",
-          "pattern": "^(\\+\\d{1,2}\\s)?\\(?\\d{3}\\)?[\\s.-]?\\d{3}[\\s.-]?\\d{4}$",
+          "description": "Email address",
+          "pattern": "^[\\w\\.\\-+!%\"\\s]+@[a-zA-Z_]+?\\.[a-zA-Z]{2,3}$",
           "type": "string"
         }
       }

@@ -33,6 +33,10 @@
           "FullBackup"
         ],
         "operationId": "FullBackup",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
         "description": "Creates a full backup using a user-provided SAS token to an Azure blob storage container.",
         "parameters": [
           {
@@ -124,6 +128,10 @@
           "FullRestore"
         ],
         "operationId": "FullRestoreOperation",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
         "description": "Restores all key materials using the SAS token pointing to a previously stored Azure Blob storage backup folder",
         "parameters": [
           {
@@ -152,7 +160,7 @@
               }
             },
             "schema": {
-              "$ref": "#/definitions/FullRestoreOperation"
+              "$ref": "#/definitions/RestoreOperation"
             }
           },
           "default": {
@@ -174,15 +182,15 @@
         "tags": [
           "FullRestore"
         ],
-        "operationId": "FullRestoreStatus",
-        "description": "Returns the status of full restore operation",
+        "operationId": "RestoreStatus",
+        "description": "Returns the status of restore operation",
         "parameters": [
           {
             "name": "jobId",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The Job Id returned part of the full restore operation"
+            "description": "The Job Id returned part of the restore operation"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -192,7 +200,7 @@
           "200": {
             "description": "OK - Returns the full restore status",
             "schema": {
-              "$ref": "#/definitions/FullRestoreOperation"
+              "$ref": "#/definitions/RestoreOperation"
             }
           },
           "default": {
@@ -203,8 +211,8 @@
           }
         },
         "x-ms-examples": {
-          "Full restore status": {
-            "$ref": "./examples/FullRestore-pending-example.json"
+          "Restore status": {
+            "$ref": "./examples/Restore-pending-example.json"
           }
         }
       }
@@ -215,6 +223,10 @@
           "Keys"
         ],
         "operationId": "SelectiveKeyRestoreOperation",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
         "description": "Restores all key versions of a given key using user supplied SAS token pointing to a previously stored Azure Blob storage backup folder",
         "parameters": [
           {
@@ -325,7 +337,8 @@
         "endTime": {
           "type": "integer",
           "format": "unixtime",
-          "description": "The end time of the restore operation"
+          "description": "The end time of the restore operation",
+          "x-nullable": true
         }
       },
       "description": "Selective Key Restore operation"
@@ -368,7 +381,8 @@
         "endTime": {
           "type": "integer",
           "format": "unixtime",
-          "description": "The end time of the backup operation in UTC"
+          "description": "The end time of the backup operation in UTC",
+          "x-nullable": true
         },
         "jobId": {
           "type": "string",
@@ -381,7 +395,7 @@
       },
       "description": "Full backup operation"
     },
-    "FullRestoreOperation": {
+    "RestoreOperation": {
       "properties": {
         "status": {
           "type": "string",
@@ -393,11 +407,11 @@
         },
         "error": {
           "$ref": "common.json#/definitions/Error",
-          "description": "Error encountered, if any, during the full restore operation."
+          "description": "Error encountered, if any, during the restore operation."
         },
         "jobId": {
           "type": "string",
-          "description": "Identifier for the full restore operation."
+          "description": "Identifier for the restore operation."
         },
         "startTime": {
           "type": "integer",
@@ -407,10 +421,11 @@
         "endTime": {
           "type": "integer",
           "format": "unixtime",
-          "description": "The end time of the restore operation"
+          "description": "The end time of the restore operation",
+          "x-nullable": true
         }
       },
-      "description": "Full restore operation"
+      "description": "Restore operation"
     }
   },
   "parameters": {

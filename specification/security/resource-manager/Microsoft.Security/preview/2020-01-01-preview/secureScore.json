@@ -331,6 +331,14 @@
           "readOnly": true,
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/ScoreDetails"
+        },
+        "weight": {
+          "description": "The relative weight for each subscription. Used when calculating an aggregated secure score for multiple subscriptions.",
+          "readOnly": true,
+          "type": "integer",
+          "format": "int64",
+          "minimum": 0,
+          "exclusiveMinimum": false
         }
       }
     },
@@ -354,6 +362,16 @@
           "format": "double",
           "minimum": 0.00,
           "exclusiveMinimum": false
+        },
+        "percentage": {
+          "description": "Ratio of the current score divided by the maximum. Rounded to 4 digits after the decimal point",
+          "readOnly": true,
+          "type": "number",
+          "format": "double",
+          "minimum": 0.00,
+          "maximum": 1.00,
+          "exclusiveMinimum": false,
+          "exclusiveMaximum": false
         }
       }
     },
@@ -378,6 +396,16 @@
           "minimum": 0.00,
           "maximum": 10.00,
           "exclusiveMinimum": false
+        },
+        "percentage": {
+          "description": "Ratio of the current score divided by the maximum. Rounded to 4 digits after the decimal point",
+          "readOnly": true,
+          "type": "number",
+          "format": "double",
+          "minimum": 0.00,
+          "maximum": 1.00,
+          "exclusiveMinimum": false,
+          "exclusiveMaximum": false
         }
       }
     },
@@ -446,6 +474,14 @@
           "readOnly": true,
           "type": "integer",
           "format": "int32"
+        },
+        "weight": {
+          "description": "The relative weight for this specific control in each of your subscriptions. Used when calculating an aggregated score for this control across all of your subscriptions.",
+          "readOnly": true,
+          "type": "integer",
+          "format": "int64",
+          "minimum": 0,
+          "exclusiveMinimum": false
         },
         "definition": {
           "$ref": "#/definitions/SecureScoreControlDefinitionItem"

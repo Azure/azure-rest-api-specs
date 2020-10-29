@@ -609,6 +609,68 @@
         }
       }
     },
+    "/providers/Microsoft.Resources/deployments/{deploymentName}/whatIf": {
+      "post": {
+        "tags": [
+          "Deployments"
+        ],
+        "operationId": "Deployments_WhatIfAtTenantScope",
+        "description": "Returns changes that will be made by the deployment if executed at the scope of the tenant group.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/DeploymentNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ScopedDeploymentWhatIf"
+            },
+            "description": "Parameters to validate."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - Returns What-If operation status",
+            "schema": {
+              "$ref": "#/definitions/WhatIfOperationResult"
+            }
+          },
+          "202": {
+            "description": "Accepted - Returns URL in Location header to query for long-running operation status.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "URL to get status of this long-running operation."
+              },
+              "Retry-After": {
+                "type": "string",
+                "description": "Number of seconds to wait before polling for status."
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Predict template changes at management group scope": {
+            "$ref": "./examples/PostDeploymentWhatIfOnTenant.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      }
+    },
     "/providers/Microsoft.Resources/deployments/{deploymentName}/exportTemplate": {
       "post": {
         "tags": [
@@ -923,6 +985,71 @@
               "$ref": "#/definitions/CloudError"
             }
           }
+        }
+      }
+    },
+    "/providers/Microsoft.Management/managementGroups/{groupId}/providers/Microsoft.Resources/deployments/{deploymentName}/whatIf": {
+      "post": {
+        "tags": [
+          "Deployments"
+        ],
+        "operationId": "Deployments_WhatIfAtManagementGroupScope",
+        "description": "Returns changes that will be made by the deployment if executed at the scope of the management group.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/GroupIdParameter"
+          },
+          {
+            "$ref": "#/parameters/DeploymentNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ScopedDeploymentWhatIf"
+            },
+            "description": "Parameters to validate."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - Returns What-If operation status",
+            "schema": {
+              "$ref": "#/definitions/WhatIfOperationResult"
+            }
+          },
+          "202": {
+            "description": "Accepted - Returns URL in Location header to query for long-running operation status.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "URL to get status of this long-running operation."
+              },
+              "Retry-After": {
+                "type": "string",
+                "description": "Number of seconds to wait before polling for status."
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Predict template changes at management group scope": {
+            "$ref": "./examples/PostDeploymentWhatIfOnManagementGroup.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
         }
       }
     },
@@ -1920,6 +2047,41 @@
         }
       }
     },
+    "/providers/Microsoft.Management/managementGroups/{groupId}/providers/{resourceProviderNamespace}/register": {
+      "post": {
+        "tags": [
+          "Providers"
+        ],
+        "operationId": "Providers_RegisterAtManagementGroupScope",
+        "description": "Registers a management group with a resource provider.",
+        "parameters": [
+          {
+            "name": "resourceProviderNamespace",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The namespace of the resource provider to register."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/GroupIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - Returns information about the resource provider."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/providers/{resourceProviderNamespace}/register": {
       "post": {
         "tags": [
@@ -2103,6 +2265,11 @@
         "tags": [
           "Providers"
         ],
+        "x-ms-examples": {
+          "Get a resource provider at tenant scope": {
+            "$ref": "./examples/GetNamedProviderAtTenant.json"
+          }
+        },
         "operationId": "Providers_GetAtTenantScope",
         "description": "Gets the specified resource provider at the tenant level.",
         "parameters": [
@@ -2628,7 +2795,7 @@
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SourceSubscriptionIdParameter"
+            "$ref": "#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -2758,7 +2925,8 @@
             "in": "query",
             "required": true,
             "type": "string",
-            "description": "The API version to use for the operation."
+            "description": "The API version to use for the operation.",
+            "x-ms-api-version": false
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -2831,7 +2999,8 @@
             "in": "query",
             "required": true,
             "type": "string",
-            "description": "The API version to use for the operation."
+            "description": "The API version to use for the operation.",
+            "x-ms-api-version": false
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -2908,7 +3077,8 @@
             "in": "query",
             "required": true,
             "type": "string",
-            "description": "The API version to use for the operation."
+            "description": "The API version to use for the operation.",
+            "x-ms-api-version": false
           },
           {
             "name": "parameters",
@@ -3000,7 +3170,8 @@
             "in": "query",
             "required": true,
             "type": "string",
-            "description": "The API version to use for the operation."
+            "description": "The API version to use for the operation.",
+            "x-ms-api-version": false
           },
           {
             "name": "parameters",
@@ -3086,7 +3257,8 @@
             "in": "query",
             "required": true,
             "type": "string",
-            "description": "The API version to use for the operation."
+            "description": "The API version to use for the operation.",
+            "x-ms-api-version": false
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -3129,7 +3301,8 @@
             "in": "query",
             "required": true,
             "type": "string",
-            "description": "The API version to use for the operation."
+            "description": "The API version to use for the operation.",
+            "x-ms-api-version": false
           }
         ],
         "responses": {
@@ -3167,7 +3340,8 @@
             "in": "query",
             "required": true,
             "type": "string",
-            "description": "The API version to use for the operation."
+            "description": "The API version to use for the operation.",
+            "x-ms-api-version": false
           }
         ],
         "responses": {
@@ -3209,7 +3383,8 @@
             "in": "query",
             "required": true,
             "type": "string",
-            "description": "The API version to use for the operation."
+            "description": "The API version to use for the operation.",
+            "x-ms-api-version": false
           },
           {
             "name": "parameters",
@@ -3266,7 +3441,8 @@
             "in": "query",
             "required": true,
             "type": "string",
-            "description": "The API version to use for the operation."
+            "description": "The API version to use for the operation.",
+            "x-ms-api-version": false
           },
           {
             "name": "parameters",
@@ -3317,7 +3493,8 @@
             "in": "query",
             "required": true,
             "type": "string",
-            "description": "The API version to use for the operation."
+            "description": "The API version to use for the operation.",
+            "x-ms-api-version": false
           }
         ],
         "responses": {
@@ -3341,7 +3518,7 @@
         "tags": [
           "Tags"
         ],
-        "operationId": "TagsOperation_DeleteValue",
+        "operationId": "Tags_DeleteValue",
         "summary": "Deletes a predefined tag value for a predefined tag name.",
         "description": "This operation allows deleting a value from the list of predefined values for an existing predefined tag name. The value being deleted must not be in use as a tag value for the given tag name for any resource.",
         "parameters": [
@@ -3385,7 +3562,7 @@
         "tags": [
           "Tags"
         ],
-        "operationId": "TagsOperation_CreateOrUpdateValue",
+        "operationId": "Tags_CreateOrUpdateValue",
         "summary": "Creates a predefined value for a predefined tag name.",
         "description": "This operation allows adding a value to the list of predefined values for an existing predefined tag name. A tag value can have a maximum of 256 characters.",
         "parameters": [
@@ -3437,7 +3614,7 @@
         "tags": [
           "Tags"
         ],
-        "operationId": "TagsOperation_CreateOrUpdate",
+        "operationId": "Tags_CreateOrUpdate",
         "summary": "Creates a predefined tag name.",
         "description": "This operation allows adding a name to the list of predefined tag names for the given subscription. A tag name can have a maximum of 512 characters and is case-insensitive. Tag names cannot have the following prefixes which are reserved for Azure use: 'microsoft', 'azure', 'windows'.",
         "parameters": [
@@ -3480,7 +3657,7 @@
         "tags": [
           "Tags"
         ],
-        "operationId": "TagsOperation_Delete",
+        "operationId": "Tags_Delete",
         "summary": "Deletes a predefined tag name.",
         "description": "This operation allows deleting a name from the list of predefined tag names for the given subscription. The name being deleted must not be in use as a tag name for any resource. All predefined values for the given name must have already been deleted.",
         "parameters": [
@@ -3519,7 +3696,7 @@
         "tags": [
           "Tags"
         ],
-        "operationId": "TagsOperation_List",
+        "operationId": "Tags_List",
         "summary": "Gets a summary of tag usage under the subscription.",
         "description": "This operation performs a union of predefined tags, resource tags, resource group tags and subscription tags, and returns a summary of usage for each tag name and value under the given subscription. In case of a large number of tags, this operation may return a previously cached result.",
         "parameters": [
@@ -4040,7 +4217,7 @@
         "tags": [
           "Tags"
         ],
-        "operationId": "TagsOperation_CreateOrUpdateAtScope",
+        "operationId": "Tags_CreateOrUpdateAtScope",
         "summary": "Creates or updates the entire set of tags on a resource or subscription.",
         "description": "This operation allows adding or replacing the entire set of tags on the specified resource or subscription. The specified entity can have a maximum of 50 tags.",
         "parameters": [
@@ -4086,7 +4263,7 @@
         "tags": [
           "Tags"
         ],
-        "operationId": "TagsOperation_UpdateAtScope",
+        "operationId": "Tags_UpdateAtScope",
         "summary": "Selectively updates the set of tags on a resource or subscription.",
         "description": "This operation allows replacing, merging or selectively deleting tags on the specified resource or subscription. The specified entity can have a maximum of 50 tags at the end of the operation. The 'replace' option replaces the entire set of existing tags with a new set. The 'merge' option allows adding tags with new names and updating the values of tags with existing names. The 'delete' option allows selectively deleting tags based on given names or name/value pairs.",
         "parameters": [
@@ -4124,7 +4301,7 @@
         "tags": [
           "Tags"
         ],
-        "operationId": "TagsOperation_GetAtScope",
+        "operationId": "Tags_GetAtScope",
         "summary": "Gets the entire set of tags on a resource or subscription.",
         "parameters": [
           {
@@ -4161,7 +4338,7 @@
         "tags": [
           "Tags"
         ],
-        "operationId": "TagsOperation_DeleteAtScope",
+        "operationId": "Tags_DeleteAtScope",
         "summary": "Deletes the entire set of tags on a resource or subscription.",
         "parameters": [
           {
@@ -4299,6 +4476,10 @@
         "onErrorDeployment": {
           "$ref": "#/definitions/OnErrorDeployment",
           "description": "The deployment on error behavior."
+        },
+        "expressionEvaluationOptions": {
+          "$ref": "#/definitions/ExpressionEvaluationOptions",
+          "description": "Specifies whether template expressions are evaluated within the scope of the parent template or nested template. Only applicable to nested templates. If not specified, default value is outer."
         }
       },
       "required": [
@@ -4387,6 +4568,23 @@
       ],
       "description": "Deployment What-if operation parameters."
     },
+    "ScopedDeploymentWhatIf": {
+      "properties": {
+        "location": {
+          "type": "string",
+          "description": "The location to store the deployment data."
+        },
+        "properties": {
+          "$ref": "#/definitions/DeploymentWhatIfProperties",
+          "description": "The deployment properties."
+        }
+      },
+      "required": [
+        "location",
+        "properties"
+      ],
+      "description": "Deployment What-if operation parameters."
+    },
     "DeploymentWhatIfProperties": {
       "properties": {
         "whatIfSettings": {
@@ -4427,6 +4625,100 @@
       },
       "description": "An error response for a resource management request."
     },
+    "ApiProfile": {
+      "properties": {
+        "profileVersion": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The profile version."
+        },
+        "apiVersion": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The API version."
+        }
+      }
+    },
+    "AliasPathMetadata": {
+      "properties": {
+        "type": {
+          "type": "string",
+          "readOnly": true,
+          "enum": [
+            "NotSpecified",
+            "Any",
+            "String",
+            "Object",
+            "Array",
+            "Integer",
+            "Number",
+            "Boolean"
+          ],
+          "x-ms-enum": {
+            "name": "AliasPathTokenType",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "NotSpecified",
+                "description": "The token type is not specified."
+              },
+              {
+                "value": "Any",
+                "description": "The token type can be anything."
+              },
+              {
+                "value": "String",
+                "description": "The token type is string."
+              },
+              {
+                "value": "Object",
+                "description": "The token type is object."
+              },
+              {
+                "value": "Array",
+                "description": "The token type is array."
+              },
+              {
+                "value": "Integer",
+                "description": "The token type is integer."
+              },
+              {
+                "value": "Number",
+                "description": "The token type is number."
+              },
+              {
+                "value": "Boolean",
+                "description": "The token type is boolean."
+              }
+            ]
+          },
+          "description": "The type of the token that the alias path is referring to."
+        },
+        "attributes": {
+          "type": "string",
+          "readOnly": true,
+          "enum": [
+            "None",
+            "Modifiable"
+          ],
+          "x-ms-enum": {
+            "name": "AliasPathAttributes",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "None",
+                "description": "The token that the alias path is referring to has no attributes."
+              },
+              {
+                "value": "Modifiable",
+                "description": "The token that the alias path is referring to is modifiable by policies with 'modify' effect."
+              }
+            ]
+          },
+          "description": "The attributes of the token that the alias path is referring to."
+        }
+      }
+    },
     "AliasPath": {
       "properties": {
         "path": {
@@ -4443,6 +4735,11 @@
         "pattern": {
           "$ref": "#/definitions/AliasPattern",
           "description": "The pattern for an alias path."
+        },
+        "metadata": {
+          "readOnly": true,
+          "$ref": "#/definitions/AliasPathMetadata",
+          "description": "The metadata of the alias path. If missing, fall back to the default metadata of the alias."
         }
       },
       "description": "The type of the paths for alias."
@@ -4529,6 +4826,11 @@
         "defaultPattern": {
           "$ref": "#/definitions/AliasPattern",
           "description": "The default pattern for an alias."
+        },
+        "defaultMetadata": {
+          "readOnly": true,
+          "$ref": "#/definitions/AliasPathMetadata",
+          "description": "The default alias path metadata. Applies to the default path and to any alias path that doesn't have metadata"
         }
       },
       "description": "The alias type. "
@@ -4559,6 +4861,19 @@
             "type": "string"
           },
           "description": "The API version."
+        },
+        "defaultApiVersion": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The default API version."
+        },
+        "apiProfiles": {
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/ApiProfile"
+          },
+          "description": "The API profiles for the resource provider."
         },
         "capabilities": {
           "type": "string",
@@ -5805,7 +6120,25 @@
             "Replace",
             "Merge",
             "Delete"
-          ]
+          ],
+          "x-ms-enum": {
+            "name": "tagsPatchOperation",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Replace",
+                "description": "The 'replace' option replaces the entire set of existing tags with a new set."
+              },
+              {
+                "value": "Merge",
+                "description": "The 'merge' option allows adding tags with new names and updating the values of tags with existing names."
+              },
+              {
+                "value": "Delete",
+                "description": "The 'delete' option allows selectively deleting tags based on given names or name/value pairs."
+              }
+            ]
+          }
         },
         "properties": {
           "$ref": "#/definitions/Tags",
@@ -5855,6 +6188,24 @@
           "description": "The error reported by the operation."
         }
       }
+    },
+    "ExpressionEvaluationOptions": {
+      "properties": {
+        "scope": {
+          "type": "string",
+          "description": "The scope to be used for evaluation of parameters, variables and functions in a nested template.",
+          "enum": [
+            "NotSpecified",
+            "Outer",
+            "Inner"
+          ],
+          "x-ms-enum": {
+            "name": "ExpressionEvaluationOptionsScopeType",
+            "modelAsString": true
+          }
+        }
+      },
+      "description": "Specifies whether template expressions are evaluated within the scope of the parent template or nested template."
     }
   },
   "parameters": {
@@ -5883,13 +6234,6 @@
       "required": true,
       "type": "string",
       "description": "The ID of the target subscription."
-    },
-    "SourceSubscriptionIdParameter": {
-      "name": "subscriptionId",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "The ID of the source subscription."
     },
     "DeploymentNameParameter": {
       "name": "deploymentName",
