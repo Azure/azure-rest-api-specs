@@ -1,0 +1,82 @@
+{
+  "parameters": {
+    "Ocp-Apim-Subscription-Key": "{API key}",
+    "Endpoint": "{Endpoint}",
+    "input": {
+      "documents": [
+        {
+          "id": "1",
+          "text": "Hello world"
+        },
+        {
+          "id": "2",
+          "text": "Bonjour tout le monde"
+        },
+        {
+          "id": "3",
+          "text": "Hola mundo"
+        }
+      ]
+    }
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "body": {
+        "documents": [
+          {
+            "detectedLanguage": {
+              "confidenceScore": 1,
+              "iso6391Name": "en",
+              "name": "English"
+            },
+            "id": "1",
+            "warnings": []
+          },
+          {
+            "detectedLanguage": {
+              "confidenceScore": 1,
+              "iso6391Name": "fr",
+              "name": "French"
+            },
+            "id": "2",
+            "warnings": []
+          },
+          {
+            "detectedLanguage": {
+              "confidenceScore": 1,
+              "iso6391Name": "es",
+              "name": "Spanish"
+            },
+            "id": "3",
+            "warnings": []
+          }
+        ],
+        "errors": [],
+        "modelVersion": "2020-04-01"
+      }
+    },
+    "400": {
+      "headers": {},
+      "body": {
+        "error": {
+          "code": "InvalidRequest",
+          "message": "Invalid Request.",
+          "innererror": {
+            "code": "MissingInputRecords",
+            "message": "Missing input records."
+          }
+        }
+      }
+    },
+    "500": {
+      "headers": {},
+      "body": {
+        "error": {
+          "code": "InternalServerError",
+          "message": "Internal Server Error"
+        }
+      }
+    }
+  }
+}

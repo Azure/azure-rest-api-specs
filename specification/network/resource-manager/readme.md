@@ -1400,6 +1400,23 @@ input-file:
 - Microsoft.Network/preview/2015-05-01-preview/network.json
 ```
 
+### Tag: profile-hybrid-2020-09-01
+
+These settings apply only when `--tag=profile-hybrid-2020-09-01` is specified on the command line.
+
+``` yaml $(tag) == 'profile-hybrid-2020-09-01'
+input-file:
+  - Microsoft.Network/stable/2018-11-01/virtualNetworkGateway.json
+  - Microsoft.Network/stable/2018-11-01/loadBalancer.json
+  - Microsoft.Network/stable/2018-11-01/network.json
+  - Microsoft.Network/stable/2018-11-01/networkInterface.json
+  - Microsoft.Network/stable/2018-11-01/networkSecurityGroup.json
+  - Microsoft.Network/stable/2018-11-01/operation.json
+  - Microsoft.Network/stable/2018-11-01/publicIpAddress.json
+  - Microsoft.Network/stable/2018-11-01/routeTable.json
+  - Microsoft.Network/stable/2018-11-01/virtualNetwork.json
+```
+
 ## Suppression
 
 ``` yaml
