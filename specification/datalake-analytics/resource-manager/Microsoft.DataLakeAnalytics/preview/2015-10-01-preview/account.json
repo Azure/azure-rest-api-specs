@@ -42,7 +42,7 @@
         "tags": [
           "Accounts"
         ],
-        "operationId": "Accounts_List",
+        "operationId": "Account_List",
         "description": "Gets the first page of Data Lake Analytics accounts, if any, within the current subscription. This includes a link to the next page, if any.",
         "parameters": [
           {
@@ -128,7 +128,7 @@
         "tags": [
           "Accounts"
         ],
-        "operationId": "Accounts_ListByResourceGroup",
+        "operationId": "Account_ListByResourceGroup",
         "description": "Gets the first page of Data Lake Analytics accounts, if any, within a specific resource group. This includes a link to the next page, if any.",
         "parameters": [
           {
@@ -271,9 +271,9 @@
       },
       "get": {
         "tags": [
-          "Accounts"
+          "Account"
         ],
-        "operationId": "Accounts_Get",
+        "operationId": "Account_Get",
         "description": "Gets details of the specified Data Lake Analytics account.",
         "parameters": [
           {
@@ -375,7 +375,7 @@
         "tags": [
           "Accounts"
         ],
-        "operationId": "Accounts_Delete",
+        "operationId": "Account_Delete",
         "description": "Begins the delete process for the Data Lake Analytics account object specified by the account name.",
         "parameters": [
           {
@@ -2116,13 +2116,13 @@
         "properties": {
           "readOnly": true,
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/DataLakeStoreAccountInformationProperties",
+          "$ref": "#/definitions/DataLakeStoreAccountInfoProperties",
           "description": "The Data Lake Store account properties."
         }
       },
       "description": "Data Lake Store account information."
     },
-    "DataLakeStoreAccountInformationProperties": {
+    "DataLakeStoreAccountInfoProperties": {
       "properties": {
         "suffix": {
           "readOnly": true,
@@ -2131,7 +2131,7 @@
         }
       },
       "description": "The Data Lake Store account properties."
-    },
+    },    
     "DataLakeStoreAccountInformationListResult": {
       "properties": {
         "value": {
@@ -3091,7 +3091,7 @@
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/AddStorageAccountProperties",
+          "$ref": "#/definitions/StorageAccountProperties",
           "description": "The Azure Storage account properties to use when adding a new Azure Storage account."
         }
       },
@@ -3109,13 +3109,13 @@
         },
         "properties": {
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/AddStorageAccountProperties",
+          "$ref": "#/definitions/StorageAccountProperties",
           "description": "The Azure Storage account properties to use when adding a new Azure Storage account."
         }
       },
       "description": "The parameters used to add a new Azure Storage account while creating a new Data Lake Analytics account."
     },
-    "AddStorageAccountProperties": {
+    "StorageAccountProperties": {
       "required": [
         "accessKey"
       ],
