@@ -1020,68 +1020,6 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces/{workspaceName}/sqlPools/{sqlPoolName}/restorePoints/{restorePointName}": {
-      "get": {
-        "operationId": "SqlPoolRestorePoints_GetByName",
-        "summary": "Get SQL pool backup",
-        "description": "Get SQL pool backup information",
-        "tags": [
-          "SqlPools, Backup"
-        ],
-        "deprecated": false,
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "./workspace.json#/parameters/workspaceNameParameter"
-          },
-          {
-            "type": "string",
-            "in": "path",
-            "name": "sqlPoolName",
-            "description": "SQL pool name",
-            "required": true
-          },
-          {
-            "name": "restorePointName",
-            "in": "path",
-            "description": "The name of the restore point.",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "schema": {
-              "$ref": "#/definitions/RestorePoint"
-            },
-            "description": "OK"
-          },
-          "default": {
-            "schema": {
-              "$ref": "../../../../common/v1/types.json#/definitions/ErrorContract"
-            },
-            "description": ""
-          }
-        },
-        "consumes": [],
-        "produces": [
-          "application/json"
-        ],
-        "x-ms-examples": {
-          "Get a list of restore points of a SQL Analytics pool": {
-            "$ref": "./examples/SqlPoolRestorePoints_GetByName.json"
-          }
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces/{workspaceName}/sqlPools/{sqlPoolName}/replicationLinks": {
       "get": {
         "operationId": "SqlPoolReplicationLinks_List",
