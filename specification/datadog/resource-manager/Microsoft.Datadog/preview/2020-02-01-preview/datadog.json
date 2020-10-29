@@ -26,6 +26,81 @@
     }
   },
   "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Datadog/agreements": {
+      "get": {
+        "tags": [
+          "Agreements"
+        ],
+        "summary": "List Datadog marketplace agreements in the subscription.",
+        "operationId": "MarketplaceAgreements_List",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/AgreementTermsListResponse"
+            }
+          },
+          "default": {
+            "description": "Default error response.",
+            "schema": {
+              "$ref": "#/definitions/ResourceProviderDefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "MarketplaceAgreements_List": {
+            "$ref": "./examples/MarketplaceAgreements_List.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Datadog/agreements/all/acceptTerms": {
+      "post": {
+        "tags": [
+          "Agreements"
+        ],
+        "summary": "Accept marketplace terms.",
+        "operationId": "MarketplaceAgreements_Set",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "default": {
+            "description": "Default error response.",
+            "schema": {
+              "$ref": "#/definitions/ResourceProviderDefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "MarketplaceAgreements_Set": {
+            "$ref": "./examples/MarketplaceAgreements_Set.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Datadog/monitors/{monitorName}/listApiKeys": {
       "post": {
         "tags": [
@@ -1022,6 +1097,85 @@
     }
   },
   "definitions": {
+    "AgreementProperties": {
+      "description": "Terms properties for Marketplace and Datadog.",
+      "type": "object",
+      "properties": {
+        "publisher": {
+          "description": "Publisher identifier string.",
+          "type": "string"
+        },
+        "product": {
+          "description": "Product identifier string.",
+          "type": "string"
+        },
+        "plan": {
+          "description": "Plan identifier string.",
+          "type": "string"
+        },
+        "licenseTextLink": {
+          "description": "Link to HTML with Microsoft and Publisher terms.",
+          "type": "string"
+        },
+        "privacyPolicyLink": {
+          "description": "Link to the privacy policy of the publisher.",
+          "type": "string"
+        },
+        "retrieveDatetime": {
+          "format": "date-time",
+          "description": "Date and time in UTC of when the terms were accepted. This is empty if Accepted is false.",
+          "type": "string"
+        },
+        "signature": {
+          "description": "Terms signature.",
+          "type": "string"
+        },
+        "accepted": {
+          "description": "If any version of the terms have been accepted, otherwise false.",
+          "type": "boolean"
+        }
+      }
+    },
+    "AgreementTerms": {
+      "description": "Agreement Terms definition",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "The id of agreement resource.",
+          "type": "string"
+        },
+        "name": {
+          "description": "The name of the agreement.",
+          "type": "string"
+        },
+        "type": {
+          "description": "The type of the agreement.",
+          "type": "string"
+        },
+        "properties": {
+          "$ref": "#/definitions/AgreementProperties",
+          "description": "Represents the properties of the resource.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "AgreementTermsListResponse": {
+      "description": "Response of a list operation.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Results of a list operation.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AgreementTerms"
+          }
+        },
+        "nextLink": {
+          "description": "Link to the next set of results, if any.",
+          "type": "string"
+        }
+      }
+    },
     "DatadogApiKey": {
       "required": [
         "key"
