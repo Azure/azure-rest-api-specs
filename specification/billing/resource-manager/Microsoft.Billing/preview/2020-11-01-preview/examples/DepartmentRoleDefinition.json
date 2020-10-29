@@ -1,0 +1,33 @@
+{
+  "parameters": {
+    "api-version": "2020-11-01-preview",
+    "billingAccountName": "{billingAccountName}",
+    "departmentName": "{departmentName}",
+    "billingRoleDefinitionName": "{billingRoleDefinitionName}"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/providers/Microsoft.Billing/billingAccounts/7898901/departments/97603/billingRoleDefinitions/fb2cf67f-be5b-42e7-8025-4683c668f840",
+        "name": "fb2cf67f-be5b-42e7-8025-4683c668f840",
+        "properties": {
+          "description": "The department administrator role gives the user read/write permissions including access management rights to an Enrollment Department and its accounts.",
+          "permissions": [
+            {
+              "actions": [
+                "Microsoft.Billing/billingAccounts/departments/read",
+                "Microsoft.Billing/billingAccounts/departments/write",
+                "Microsoft.Billing/billingAccounts/enrollmentAccounts/read",
+                "Microsoft.Billing/billingAccounts/enrollmentAccounts/write",
+                "Microsoft.Billing/billingAccounts/enrollmentAccounts/billingSubscriptions/read",
+                "Microsoft.Billing/billingAccounts/enrollmentAccounts/billingSubscriptions/write"
+              ]
+            }
+          ],
+          "roleName": "Department administrator"
+        },
+        "type": "Microsoft.Billing/billingAccounts/departments/billingRoleDefinitions"
+      }
+    }
+  }
+}

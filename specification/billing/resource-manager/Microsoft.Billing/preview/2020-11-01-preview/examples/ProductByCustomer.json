@@ -1,0 +1,43 @@
+{
+  "parameters": {
+    "api-version": "2020-11-01-preview",
+    "billingAccountName": "{billingAccountName}",
+    "customerName": "{customerName}",
+    "productName": "{productName}"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/providers/Microsoft.Billing/BillingAccounts/{billingAccountName}/customers/{customerName}/products/{productName}",
+        "name": "{productName}",
+        "type": "Microsoft.Billing/billingAccounts/customers/products",
+        "properties": {
+          "productTypeId": "A12345",
+          "productType": "Subscription",
+          "displayName": "AIP Dev",
+          "status": "Active",
+          "purchaseDate": "2018-05-01T17:32:28Z",
+          "lastCharge": {
+            "currency": "USD",
+            "value": 5000.00
+          },
+          "lastChargeDate": "2018-06-15T17:32:28Z",
+          "billingFrequency": "Monthly",
+          "quantity": 4,
+          "skuId": "0001",
+          "skuDescription": "Enterprise Agreement Development",
+          "availabilityId": "AvailabilityId1",
+          "parentProductId": "45000000-0000-0000-0000-0000000001242",
+          "customerId": "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/customers/{customerName}",
+          "customerDisplayName": "Customer 1",
+          "billingProfileId": "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/11000000-0000-0000-0000-000000000000",
+          "billingProfileDisplayName": "Contoso operations billing",
+          "reseller": {
+            "resellerId": "3b65b5a8-bd4f-4084-90e9-e1bd667a2b19",
+            "description": "Reseller2"
+          }
+        }
+      }
+    }
+  }
+}

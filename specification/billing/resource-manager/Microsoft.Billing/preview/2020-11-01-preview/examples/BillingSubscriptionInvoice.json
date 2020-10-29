@@ -1,0 +1,55 @@
+{
+  "parameters": {
+    "api-version": "2020-11-01-preview",
+    "billingAccountName": "{billingAccountName}",
+    "billingSubscriptionName": "{billingSubscriptionName}",
+    "invoiceName": "{invoiceName}"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingSubscriptions/11000000-0000-0000-0000-000000000000/invoices/1383724",
+        "name": "1383724",
+        "type": "Microsoft.Billing/billingAccounts/billingSubscriptions/invoices",
+        "properties": {
+          "dueDate": "2018-03-01T17:32:28Z",
+          "invoiceDate": "2018-02-01T17:32:28Z",
+          "status": "Paid",
+          "amountDue": {
+            "currency": "USD",
+            "value": 2000.00
+          },
+          "billedAmount": {
+            "currency": "USD",
+            "value": 2000.00
+          },
+          "invoicePeriodStartDate": "2018-02-01T17:32:28Z",
+          "invoicePeriodEndDate": "2018-02-30T17:32:28Z",
+          "invoiceType": "AzureMarketplace",
+          "billingProfileId": "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingSubscriptions/11000000-0000-0000-0000-000000000000",
+          "billingProfileDisplayName": "Contoso Operations Billing",
+          "purchaseOrderNumber": "123456",
+          "documents": [
+            {
+              "kind": "Invoice",
+              "url": "https://management.azure.com/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingSubscriptions/11000000-0000-0000-0000-000000000000/invoices/1383724/download"
+            }
+          ],
+          "payments": [
+            {
+              "date": "2018-01-14T17:32:28Z",
+              "paymentType": "credited",
+              "amount": {
+                "currency": "USD",
+                "value": 2000.00
+              },
+              "paymentMethodFamily": "CreditCard",
+              "paymentMethodType": "visa"
+            }
+          ],
+          "subscriptionId": "55000000-0000-0000-0000-000000000011"
+        }
+      }
+    }
+  }
+}

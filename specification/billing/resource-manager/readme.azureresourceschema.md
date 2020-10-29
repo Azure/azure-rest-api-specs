@@ -7,7 +7,7 @@ These settings apply only when `--azureresourceschema` is specified on the comma
 ``` yaml $(azureresourceschema) && $(multiapi)
 batch:
   - tag: schema-billing-2020-05-01
-  - tag: schema-billing-2020-10-01-preview
+  - tag: schema-billing-2020-11-01-preview
   - tag: schema-billing-2019-10-01-preview
   - tag: schema-billing-2018-11-01-preview
   - tag: schema-billing-2018-03-01-preview
@@ -29,14 +29,14 @@ input-file:
 
 ```
 
-### Tag: schema-billing-2020-10-01-preview and azureresourceschema
+### Tag: schema-billing-2020-11-01-preview and azureresourceschema
 
-``` yaml $(tag) == 'schema-billing-2020-10-01-preview' && $(azureresourceschema)
+``` yaml $(tag) == 'schema-billing-2020-11-01-preview' && $(azureresourceschema)
 output-folder: $(azureresourceschema-folder)/schemas
 
 # all the input files in this apiVersion
 input-file:
-  - Microsoft.Billing/preview/2020-10-01-preview/billing.json
+  - Microsoft.Billing/preview/2020-11-01-preview/billing.json
 
 ```
 

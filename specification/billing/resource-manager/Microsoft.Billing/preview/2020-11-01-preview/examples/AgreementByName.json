@@ -1,0 +1,36 @@
+{
+  "parameters": {
+    "api-version": "2020-11-01-preview",
+    "billingAccountName": "{billingAccountName}",
+    "agreementName": "{agreementName}"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/agreements/{agreementName}",
+        "name": "{agreementName}",
+        "type": "Microsoft.Billing/billingAccounts/agreements",
+        "properties": {
+          "agreementLink": "https://agreementuri1.com",
+          "category": "MicrosoftCustomerAgreement",
+          "acceptanceMode": "ClickToAccept",
+          "effectiveDate": "2018-12-05T00:00:00Z",
+          "expirationDate": "2018-12-05T00:00:00Z",
+          "participants": [
+            {
+              "status": "Accepted",
+              "statusDate": "2018-11-01T00:00:00Z",
+              "email": "abc@contoso.com"
+            },
+            {
+              "status": "Declined",
+              "statusDate": "2018-11-02T00:00:00Z",
+              "email": "xyz@contoso.com"
+            }
+          ],
+          "status": "Published"
+        }
+      }
+    }
+  }
+}
