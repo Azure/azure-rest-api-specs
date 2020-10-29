@@ -19,5 +19,5 @@ directive:
       subject: MachineExtension
       parameter-name: extension-name
     set:
-      parameter-name: name
+      parameter-name: namee
 ```
