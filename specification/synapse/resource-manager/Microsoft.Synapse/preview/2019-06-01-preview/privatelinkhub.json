@@ -413,6 +413,7 @@
         },
         "privateEndpointConnections": {
           "description": "List of private endpoint connections",
+          "readOnly": true,
           "type": "array",
           "items": {
             "$ref": "#/definitions/PrivateEndpointConnectionForPrivateLinkHubBasic"
@@ -438,10 +439,12 @@
     },
     "PrivateEndpointConnectionProperties": {
       "description": "Private Endpoint Connection Properties",
+      "type": "object",
       "properties": {
         "provisioningState": {
           "description": "Provisioning state",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "privateEndpoint": {
           "description": "Private Endpoint",
