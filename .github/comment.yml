@@ -2,14 +2,6 @@
 - rule:
     type: checkbox
     keywords:
-      - "Removing API(s)"
-      - "Updating API in stable version"
-    onCheckedLabels:
-      - breakingChange
-
-- rule:
-    type: checkbox
-    keywords:
       - "WaitForARMFeedback"
     booleanFilterExpression: "!(ARMSignedOff||ARMChangesRequested||Approved-OkToMerge||WaitForARMRevisit)"
     onCheckedLabels:
@@ -25,7 +17,7 @@
 - rule:
     type: label
     label: BreakingChangeReviewRequired
-    onLabeledComments: "Hi @${PRAuthor}, one or multiple breaking change(s) is detected in your PR. Pls follow [breaking change policy](https://aka.ms/AzBreakingChangesPolicy) to request breaking change review and approval before proceeding swagger PR review. "
+    onLabeledComments: "Hi @${PRAuthor}, one or multiple breaking change(s) is detected in your PR. Please check out the breaking change(s), and provide business justification in the PR comment and @ PR assignee why you must have these change(s), and how external customer impact can be mitigated. Please ensure to follow [breaking change policy](https://aka.ms/AzBreakingChangesPolicy) to request breaking change review and approval before proceeding swagger PR review. </br> If you think it is false positive breaking change, please provide the reasons in the PR comment, report to Swagger Tooling Team via https://aka.ma/swaggerfeedback. "
 
 - rule:
     type: label
