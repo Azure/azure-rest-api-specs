@@ -257,6 +257,9 @@
           "200": {
             "description": "OK"
           },
+          "202": {
+            "description": "Accepted"
+          },
           "204": {
             "description": "PrivateLinkHub resource not found."
           },
@@ -271,6 +274,7 @@
         "produces": [
           "application/json"
         ],
+        "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "Delete a privateLinkHub": {
             "$ref": "./examples/DeletePrivateLinkHub.json"
@@ -402,8 +406,86 @@
           "type": "string",
           "enum": [
             "Succeeded",
-            "Failed"
+            "Failed",
+            "Deleting"
           ],
+          "readOnly": true
+        },
+        "privateEndpointConnections": {
+          "description": "List of private endpoint connections",
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PrivateEndpointConnectionForPrivateLinkHubBasic"
+          }
+        }
+      }
+    },
+    "PrivateEndpointConnectionForPrivateLinkHubBasic": {
+      "description": "Private Endpoint Connection For Private Link Hub - Basic",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "identifier",
+          "type": "string",
+          "readOnly": true
+        },
+        "properties": {
+          "description": "",
+          "type": "object",
+          "$ref": "#/definitions/PrivateEndpointConnectionProperties"
+        }
+      }
+    },
+    "PrivateEndpointConnectionProperties": {
+      "description": "Private Endpoint Connection Properties",
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "description": "Provisioning state",
+          "type": "string",
+          "readOnly": true
+        },
+        "privateEndpoint": {
+          "description": "Private Endpoint",
+          "type": "object",
+          "$ref": "#/definitions/PrivateEndpoint"
+        },
+        "privateLinkServiceConnectionState": {
+          "description": "Private Link Service Connection State",
+          "type": "object",
+          "$ref": "#/definitions/PrivateLinkServiceConnectionState"
+        }
+      }
+    },
+    "PrivateLinkServiceConnectionState": {
+      "description": "Private Link Service Connection State",
+      "type": "object",
+      "properties": {
+        "status": {
+          "description": "Status of private link service connection state",
+          "type": "string",
+          "readOnly": true
+        },
+        "description": {
+          "description": "Description of private link service connection state",
+          "type": "string",
+          "readOnly": true
+        },
+        "actionsRequired": {
+          "description": "Actions Required",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "PrivateEndpoint": {
+      "description": "Private Endpoint",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "identifier",
+          "type": "string",
           "readOnly": true
         }
       }
