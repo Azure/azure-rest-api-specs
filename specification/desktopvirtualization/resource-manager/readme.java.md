@@ -16,18 +16,18 @@ output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-desktopvirtualizati
 
 ``` yaml $(java) && $(multiapi)
 batch:
-  - tag: package-2020-09-21-preview
+  - tag: package-2020-10-19-preview
 ```
 
-### Tag: package-2020-09-21-preview and java
+### Tag: package-2020-10-19-preview and java
 
-These settings apply only when `--tag=package-2020-09-21-preview --java` is specified on the command line.
+These settings apply only when `--tag=package-2020-10-19-preview --java` is specified on the command line.
 Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
 
-``` yaml $(tag) == 'package-2020-09-21-preview' && $(java) && $(multiapi)
+``` yaml $(tag) == 'package-2020-10-19-preview' && $(java) && $(multiapi)
 java:
-  namespace: com.microsoft.azure.management.desktopvirtualization.v2020_09_21_preview
-  output-folder: $(azure-libraries-for-java-folder)/sdk/desktopvirtualization/mgmt-v2020_09_21_preview
+  namespace: com.microsoft.azure.management.desktopvirtualization.v2020_10_19_preview
+  output-folder: $(azure-libraries-for-java-folder)/sdk/desktopvirtualization/mgmt-v2020_10_19_preview
 regenerate-manager: true
 generate-interface: true
 ```
