@@ -136,11 +136,23 @@
       "properties": {
         "desiredState": {
           "description": "Desired state",
-          "type": "string"
+          "type": "string",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ]
         },
         "actualState": {
           "description": "Actual state",
-          "type": "string"
+          "type": "string",
+          "enum": [
+            "Enabling",
+            "Enabled",
+            "Disabling",
+            "Disabled",
+            "Unknown"
+          ],
+          "readOnly": true
         }
       }
     },
