@@ -1,6 +1,27 @@
 <i>MSFT employees can try out our new experience at <b>[OpenAPI Hub](https://aka.ms/openapiportal) </b> - one location for using our validation tools and finding your workflow. 
 </i>
 
+### Changelog
+Please ensure to add changelog with this PR by answering the following questions.
+  1. What's the purpose of the update?    
+      - [ ] new service onboarding 
+      - [ ] new API version 
+      - [ ] update existing version for new feature 
+      - [ ] update existing version to fix swagger quality issue in s360
+      - [ ] Other, please clarify 
+  2. When you are targeting to deploy new service/feature to public regions? Please provide date, or month to public if date is not available yet.
+  3. When you expect to publish swagger? Please provide date, or month to public if date is not available yet.
+  4. If it's an update to existing version,  please select SDKs of specific language and CLIs that require refresh after swagger is published.
+      - [ ] SDK of .NET (need service team to ensure code readiness)
+      - [ ] SDK of Python
+      - [ ] SDK of Java
+      - [ ] SDK of Js
+      - [ ] SDK of Go
+      - [ ] PowerShell
+      - [ ] CLI
+      - [ ] Terraform
+      - [ ] No, no need to refresh for updates in this PR
+
 ### Contribution checklist:
 - [ ] I commit to follow the [Breaking Change Policy](http://aka.ms/bcforapi) of “no breaking changes
 - [ ] I have reviewed the [documentation](https://aka.ms/ameonboard) for the workflow.
