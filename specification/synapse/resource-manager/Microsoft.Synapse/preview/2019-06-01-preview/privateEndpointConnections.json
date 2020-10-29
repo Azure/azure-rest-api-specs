@@ -267,44 +267,8 @@
       ],
       "properties": {
         "properties": {
-          "$ref": "#/definitions/PrivateEndpointConnectionProperties",
+          "$ref": "./privatelinkhub.json#/definitions/PrivateEndpointConnectionProperties",
           "x-ms-client-flatten": true
-        }
-      }
-    },
-    "PrivateEndpointConnectionProperties": {
-      "type": "object",
-      "properties": {
-        "privateEndpoint": {
-          "$ref": "./privatelinkhub.json#/definitions/PrivateEndpoint"
-        },
-        "privateLinkServiceConnectionState": {
-          "$ref": "#/definitions/PrivateLinkServiceConnectionState"
-        },
-        "provisioningState": {
-          "type": "string",
-          "readOnly": true
-        }
-      }
-    },
-    "PrivateLinkServiceConnectionState": {
-      "type": "object",
-      "properties": {
-        "status": {
-          "type": "string",
-          "enum": [
-            "Approved",
-            "Pending",
-            "Rejected",
-            "Disconnected"
-          ]
-        },
-        "description": {
-          "type": "string"
-        },
-        "actionsRequired": {
-          "type": "string",
-          "readOnly": true
         }
       }
     }
