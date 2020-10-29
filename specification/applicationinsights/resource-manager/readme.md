@@ -199,6 +199,9 @@ directive:
   - suppress: TopLevelResourcesListBySubscription
     from: workbooks_API.json
     reason: 'get workbook list by subscription is not supported'
+  - suppress: OperationsAPIImplementation
+    from: workbookOperations_API.json
+    reason: 'Previously implemented operation apis are using an incorrect RP case format which I cannot change.'
 ```
 
 ### Tag: package-2020-10-20
