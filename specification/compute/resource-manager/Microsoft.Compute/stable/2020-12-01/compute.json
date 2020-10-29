@@ -3046,6 +3046,9 @@
           },
           "Create a vm with an extensions time budget.": {
             "$ref": "./examples/CreateAVmWithExtensionsTimeBudget.json"
+          },
+          "Create a VM with Uefi Settings of secureBoot and vTPM.": {
+            "$ref": "./examples/CreateAVmWithUefiSettings.json"
           }
         }
       },
@@ -4077,6 +4080,9 @@
           },
           "Create a scale set with Host Encryption using encryptionAtHost property.": {
             "$ref": "./examples/CreateAScaleSetWithEncryptionAtHost.json"
+          },
+          "Create a scale set with Uefi Settings of secureBoot and vTPM.": {
+            "$ref": "./examples/CreateAScaleSetWithUefiSettings.json"
           }
         }
       },
@@ -8617,11 +8623,40 @@
       },
       "description": "Specifies the storage settings for the virtual machine disks."
     },
+    "UefiSettings": {
+      "properties": {
+        "secureBootEnabled": {
+          "type": "boolean",
+          "description": "Specifies whether secure boot should be enabled on the virtual machine. <br><br>Minimum api-version: 2020-12-01"
+        },
+        "vTpmEnabled": {
+          "type": "boolean",
+          "description": "Specifies whether vTPM should be enabled on the virtual machine. <br><br>Minimum api-version: 2020-12-01"
+        }
+      },
+      "description": "Specifies the security settings like secure boot and vTPM used while creating the virtual machine. <br><br>Minimum api-version: 2020-12-01"
+    },
     "SecurityProfile": {
       "properties": {
+        "uefiSettings": {
+          "$ref": "#/definitions/UefiSettings",
+          "description": "Specifies the security settings like secure boot and vTPM used while creating the virtual machine. <br><br>Minimum api-version: 2020-12-01"
+        },
         "encryptionAtHost": {
           "type": "boolean",
           "description": "This property can be used by user in the request to enable or disable the Host Encryption for the virtual machine or virtual machine scale set. This will enable the encryption for all the disks including Resource/Temp disk at host itself. <br><br> Default: The Encryption at host will be disabled unless this property is set to true for the resource."
+        },
+        "securityType": {
+          "type": "string",
+          "description": "Specifies the SecurityType of the VM. It is set as SecureBoot for TrustedVMs, and MemoryEncryption for Confidential VMs. <br><br> Default: The SecurityType would not be set for other VMs",
+          "enum": [
+            "SecureBoot",
+            "MemoryEncryption"
+          ],
+          "x-ms-enum": {
+            "name": "SecurityTypes",
+            "modelAsString": false
+          }
         }
       },
       "description": "Specifies the Security profile settings for the virtual machine or virtual machine scale set."
