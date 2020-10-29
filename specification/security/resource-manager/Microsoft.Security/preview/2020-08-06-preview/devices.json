@@ -420,20 +420,17 @@
           "maximum": 100,
           "description": "risk score of the device."
         },
-        "sensorName": {
+        "sensors": {
           "readOnly": true,
-          "type": "string",
-          "description": "When the device is unmanaged, the sensor that scanned this device."
+          "type": "array",
+          "description": "List of sensors that scanned this device.",
+          "items": {
+            "$ref": "#/definitions/Sensor"
+          }
         },
-        "siteName": {
+        "site": {
           "readOnly": true,
-          "type": "string",
-          "description": "The sensor site name."
-        },
-        "zoneName": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The sensor zone name."
+          "$ref": "#/definitions/Site"
         },
         "deviceStatus": {
           "readOnly": true,
@@ -599,6 +596,33 @@
         "identifiers": {
           "type": "string",
           "description": "list of protocol identifiers."
+        }
+      }
+    },
+    "Sensor": {
+      "type": "object",
+      "description": "Sensor data",
+      "properties": {
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Sensor name"
+        },
+        "zone": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Zone Name."
+        }
+      }
+    },
+    "Site": {
+      "type": "object",
+      "description": "Site data",
+      "properties": {
+        "displayName": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Site display name"
         }
       }
     }
