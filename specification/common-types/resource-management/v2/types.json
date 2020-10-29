@@ -7,11 +7,12 @@
   "paths": {},
   "definitions": {
     "Resource": {
+      "description": "Common fields that are returned in the response for all Azure Resource Manager resources",
       "properties": {
         "id": {
           "readOnly": true,
           "type": "string",
-          "description": "Fully qualified resource Id for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}"
+          "description": "Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}"
         },
         "name": {
           "readOnly": true,
@@ -21,14 +22,14 @@
         "type": {
           "readOnly": true,
           "type": "string",
-          "description": "The type of the resource. Ex- Microsoft.Compute/virtualMachines or Microsoft.Storage/storageAccounts."
+          "description": "The type of the resource. E.g. \"Microsoft.Compute/virtualMachines\" or \"Microsoft.Storage/storageAccounts\""
         }
       },
       "x-ms-azure-resource": true
     },
     "AzureEntityResource": {
       "x-ms-client-name": "AzureEntityResource",
-      "description": "The resource model definition for a Azure Resource Manager resource with an etag.",
+      "description": "The resource model definition for an Azure Resource Manager resource with an etag.",
       "properties": {
         "etag": {
           "type": "string",
@@ -43,7 +44,7 @@
       ]
     },
     "TrackedResource": {
-      "description": "The resource model definition for a ARM tracked top level resource",
+      "description": "The resource model definition for an Azure Resource Manager tracked top level resource",
       "properties": {
         "tags": {
           "type": "object",
@@ -76,7 +77,7 @@
       ]
     },
     "ProxyResource": {
-      "description": "The resource model definition for a ARM proxy resource. It will have everything other than required location and tags",
+      "description": "The resource model definition for an Azure Resource Manager proxy resource. It will have everything other than required location and tags",
       "allOf": [
         {
           "$ref": "#/definitions/Resource"
@@ -92,7 +93,7 @@
           "x-ms-mutability": [
             "read"
           ],
-          "description": "Fully qualified resource Id for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}"
+          "description": "Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}"
         },
         "name": {
           "readOnly": true,
@@ -105,7 +106,7 @@
           "x-ms-mutability": [
             "read"
           ],
-          "description": "The type of the resource. Ex- Microsoft.Compute/virtualMachines or Microsoft.Storage/storageAccounts.."
+          "description": "The type of the resource. E.g. \"Microsoft.Compute/virtualMachines\" or \"Microsoft.Storage/storageAccounts\""
         },
         "location": {
           "type": "string",
@@ -122,7 +123,7 @@
             "create",
             "update"
           ],
-          "description": "The  fully qualified resource ID of the resource that manages this resource. Indicates if this resource is managed by another azure resource. If this is present, complete mode deployment will not delete the resource if it is removed from the template since it is managed by another resource."
+          "description": "The fully qualified resource ID of the resource that manages this resource. Indicates if this resource is managed by another Azure resource. If this is present, complete mode deployment will not delete the resource if it is removed from the template since it is managed by another resource."
         },
         "kind": {
           "type": "string",
@@ -206,7 +207,7 @@
         "capacity": {
           "type": "integer",
           "format": "int32",
-          "description": "If the SKU supports scale out/in then the capacity integer should be included. If scale out/in is not possible for the resource this may be omitted."
+          "description": "If the SKU supports scale out/in then the capacity integer indicates the current scaling-factor of the resource. If scale out/in is not possible for the resource this may be omitted."
         }
       },
       "required": [
@@ -326,6 +327,91 @@
       },
       "description": "The resource management error additional info."
     },
+    "Operation": {
+      "description": "Details of a REST API operation, returned from the Resource Provider Operations API",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "The name of the operation, as per Resource-Based Access Control (RBAC). Examples: \"Microsoft.Compute/virtualMachines/write\", \"Microsoft.Compute/virtualMachines/capture/action\"",
+          "type": "string",
+          "readOnly": true
+        },
+        "isDataAction": {
+          "description": "Whether the operation applies to data-plane. This is \"true\" for data-plane operations and \"false\" for ARM/control-plane operations.",
+          "type": "boolean",
+          "readOnly": true
+        },
+        "display": {
+          "description": "Localized display information for this particular operation.",
+          "properties": {
+            "provider": {
+              "description": "The localized friendly form of the resource provider name, e.g. \"Microsoft Monitoring Insights\" or \"Microsoft Compute\".",
+              "type": "string",
+              "readOnly": true
+            },
+            "resource": {
+              "description": "The localized friendly name of the resource type related to this operation. E.g. \"Virtual Machines\" or \"Job Schedule Collections\".",
+              "type": "string",
+              "readOnly": true
+            },
+            "operation": {
+              "description": "The concise, localized friendly name for the operation; suitable for dropdowns. E.g. \"Create or Update Virtual Machine\", \"Restart Virtual Machine\".",
+              "type": "string",
+              "readOnly": true
+            },
+            "description": {
+              "description": "The short, localized friendly description of the operation; suitable for tool tips and detailed views.",
+              "type": "string",
+              "readOnly": true
+            }
+          }
+        },
+        "origin": {
+          "description": "The intended executor of the operation; as in Resource Based Access Control (RBAC) and audit logs UX. Default value is \"user,system\"",
+          "type": "string",
+          "readOnly": true,
+          "enum": [
+            "user",
+            "system",
+            "user,system"
+          ],
+          "x-ms-enum": {
+            "name": "Origin",
+            "modelAsString": true
+          }
+        },
+        "actionType": {
+          "description": "Enum. Indicates the action type. \"Internal\" refers to actions that are for internal only APIs.",
+          "type": "string",
+          "readOnly": true,
+          "enum": [
+            "Internal"
+          ],
+          "x-ms-enum": {
+            "name": "ActionType",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "OperationListResult": {
+      "description": "A list of REST API operations supported by an Azure Resource Provider. It contains an URL link to get the next set of results.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Operation"
+          },
+          "description": "List of operations supported by the resource provider",
+          "readOnly": true
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "URL to get the next set of operation list results (if there are any).",
+          "readOnly": true
+        }
+      }
+    },
     "locationData": {
       "description": "Metadata pertaining to the geographic location of the resource.",
       "type": "object",
@@ -435,7 +521,7 @@
           "type": "string"
         },
         "identity": {
-          "description": "The client id of the identity which will be used to access key vault.",
+          "description": "The client ID of the identity which will be used to access key vault.",
           "type": "string"
         }
       }
