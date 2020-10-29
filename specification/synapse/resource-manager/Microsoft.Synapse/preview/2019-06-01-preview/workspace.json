@@ -365,6 +365,12 @@
               "$ref": "#/definitions/WorkspaceAadAdminInfo"
             },
             "description": "OK"
+          },
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/ErrorContract"
+            },
+            "description": ""
           }
         },
         "consumes": [],
@@ -566,6 +572,12 @@
               "$ref": "#/definitions/ManagedIdentitySqlControlSettingsModel"
             },
             "description": "OK"
+          },
+          "201": {
+            "schema": {
+              "$ref": "#/definitions/ManagedIdentitySqlControlSettingsModel"
+            },
+            "description": "Created"
           },
           "default": {
             "schema": {
@@ -826,6 +838,7 @@
         "tenantId": {
           "description": "The tenant ID of the workspace managed identity",
           "type": "string",
+          "format": "uuid",
           "readOnly": true
         },
         "type": {
@@ -965,7 +978,8 @@
         "workspaceUID": {
           "description": "The workspace unique identifier",
           "type": "string",
-          "readOnly": true
+          "readOnly": true,
+          "format": "uuid"
         },
         "extraProperties": {
           "description": "Workspace level configs and feature flags",
