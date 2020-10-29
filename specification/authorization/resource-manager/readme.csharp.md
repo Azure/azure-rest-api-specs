@@ -109,3 +109,15 @@ output-folder: $(csharp-sdks-folder)/$(csharp-profile)/Authorization/Management.
 batch:
  - tag: profile-hybrid-2019-03-01
  ```
+
+ ### Profile: hybrid_2020_09_01
+
+These settings apply only when `--csharp-profile=hybrid_2020_09_01` is specified on the command line.
+
+ ``` yaml $(csharp-profile)=='hybrid_2020_09_01'
+namespace: Microsoft.Azure.Management.Profiles.$(csharp-profile).Authorization
+output-folder: $(csharp-sdks-folder)/$(csharp-profile)/Authorization/Management.Authorization/Generated
+
+batch:
+ - tag: profile-hybrid-2020-09-01
+ ```
