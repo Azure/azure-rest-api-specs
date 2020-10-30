@@ -2924,7 +2924,7 @@
           "description": "The dead peer detection timeout of this connection in seconds."
         },
         "connectionMode": {
-          "type": "string",
+          "$ref": "#/definitions/VirtualNetworkGatewayConnectionMode",
           "description": "The connection mode for this connection."
         },
         "sharedKey": {
@@ -3326,6 +3326,10 @@
           "format": "int32",
           "description": "The routing weight."
         },
+        "connectionMode": {
+          "$ref": "#/definitions/VirtualNetworkGatewayConnectionMode",
+          "description": "The connection mode for this connection."
+        },
         "sharedKey": {
           "type": "string",
           "description": "The IPSec shared key."
@@ -3589,6 +3593,19 @@
       ],
       "x-ms-enum": {
         "name": "VirtualNetworkGatewayConnectionType",
+        "modelAsString": true
+      }
+    },
+    "VirtualNetworkGatewayConnectionMode": {
+      "type": "string",
+      "description": "Gateway connection type.",
+      "enum": [
+        "Default",
+        "ResponderOnly",
+        "InitiatorOnly"
+      ],
+      "x-ms-enum": {
+        "name": "VirtualNetworkGatewayConnectionMode",
         "modelAsString": true
       }
     },
