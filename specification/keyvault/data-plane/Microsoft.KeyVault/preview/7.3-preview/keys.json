@@ -1136,7 +1136,7 @@
             "description": "The name of the key in the given vault."
           },
           {
-            "name": "KeyPolicy",
+            "name": "keyPolicy",
             "in": "body",
             "required": true,
             "schema": {
@@ -1493,7 +1493,7 @@
           "readOnly": true,
           "description": "True if the key's lifetime is managed by key vault. If this is a key backing a certificate, then managed will be true."
         },
-        "keyPolicy": {
+        "policy": {
           "$ref": "#/definitions/KeyPolicy",
           "description": "The policy for the key."
         },
@@ -2084,10 +2084,10 @@
           "description": "The key policy id.",
           "readOnly": true
         },
-        "lifetime_actions": {
+        "lifetimeActions": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/LifetimeAction"
+            "$ref": "#/definitions/LifetimeActions"
           },
           "description": "Actions that will be performed by Key Vault over the lifetime of a key."
         },
@@ -2098,7 +2098,7 @@
       },
       "description": "Management policy for a key."
     },
-    "LifetimeAction": {
+    "LifetimeActions": {
       "properties": {
         "trigger": {
           "$ref": "#/definitions/Trigger",
@@ -2130,7 +2130,7 @@
     },
     "Action": {
       "properties": {
-        "action_type": {
+        "type": {
           "type": "string",
           "description": "The type of the action.",
           "enum": [
@@ -2151,7 +2151,7 @@
           "type": "boolean",
           "description": "Determines whether key auto rotation is enabled."
         },
-        "expirationTime": {
+        "rotationTime": {
           "type": "string",
           "format": "string",
           "description": "Time to attempt rotate."
