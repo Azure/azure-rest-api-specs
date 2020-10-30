@@ -84,7 +84,7 @@ These settings apply only when `--tag=package-2020-01-15-generalAvailability` is
 
 ```yaml $(tag) == '2020-01-15-generalAvailability'
 input-file:
-  - Microsoft.CommunicationServicesIdentity/preview/2020-01-15-generalAvailability/CommunicationIdentity.json
+  - Microsoft.CommunicationServicesIdentity/2020-01-15-generalAvailability/CommunicationIdentity.json
 ```
 
 
