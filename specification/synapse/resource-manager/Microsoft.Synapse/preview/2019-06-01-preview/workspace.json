@@ -365,6 +365,12 @@
               "$ref": "#/definitions/WorkspaceAadAdminInfo"
             },
             "description": "OK"
+          },
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/ErrorContract"
+            },
+            "description": ""
           }
         },
         "consumes": [],
@@ -566,6 +572,12 @@
               "$ref": "#/definitions/ManagedIdentitySqlControlSettingsModel"
             },
             "description": "OK"
+          },
+          "201": {
+            "schema": {
+              "$ref": "#/definitions/ManagedIdentitySqlControlSettingsModel"
+            },
+            "description": "Created"
           },
           "default": {
             "schema": {
@@ -826,6 +838,7 @@
         "tenantId": {
           "description": "The tenant ID of the workspace managed identity",
           "type": "string",
+          "format": "uuid",
           "readOnly": true
         },
         "type": {
@@ -871,6 +884,16 @@
             "type": "string",
             "description": "Tenant Id"
           }
+        }
+      }
+    },
+    "BabylonConfiguration": {
+      "description": "Babylon Configuration",
+      "type": "object",
+      "properties": {
+        "babylonResourceId": {
+          "description": "Babylon Resource ID",
+          "type": "string"
         }
       }
     },
@@ -965,7 +988,8 @@
         "workspaceUID": {
           "description": "The workspace unique identifier",
           "type": "string",
-          "readOnly": true
+          "readOnly": true,
+          "format": "uuid"
         },
         "extraProperties": {
           "description": "Workspace level configs and feature flags",
@@ -978,6 +1002,10 @@
         "managedVirtualNetworkSettings": {
           "description": "Managed Virtual Network Settings",
           "$ref": "#/definitions/ManagedVirtualNetworkSettings"
+        },
+        "babylonConfiguration": {
+          "description": "Babylon Configuration",
+          "$ref": "#/definitions/BabylonConfiguration"
         }
       }
     },
@@ -1014,6 +1042,10 @@
         "managedVirtualNetworkSettings": {
           "description": "Managed Virtual Network Settings",
           "$ref": "#/definitions/ManagedVirtualNetworkSettings"
+        },
+        "babylonConfiguration": {
+          "description": "Babylon Configuration",
+          "$ref": "#/definitions/BabylonConfiguration"
         },
         "provisioningState": {
           "description": "Resource provisioning state",

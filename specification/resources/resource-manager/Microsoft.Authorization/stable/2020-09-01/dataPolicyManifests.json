@@ -1,0 +1,307 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "PolicyClient",
+    "version": "2020-09-01",
+    "description": "To manage and control access to your resources, you can define customized policies and assign them at a scope."
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/providers/Microsoft.Authorization/dataPolicyManifests/{policyMode}": {
+      "get": {
+        "tags": [
+          "DataPolicyManifests"
+        ],
+        "operationId": "DataPolicyManifests_GetByPolicyMode",
+        "summary": "Retrieves a data policy manifest.",
+        "description": "This operation retrieves the data policy manifest with the given policy mode.",
+        "x-ms-examples": {
+          "Retrieve a data policy manifest by policy mode": {
+            "$ref": "./examples/getDataPolicyManifest.json"
+          }
+        },
+        "parameters": [
+          {
+            "name": "policyMode",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The policy mode of the data policy manifest to get."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - Returns information about a data policy manifest.",
+            "schema": {
+              "$ref": "#/definitions/DataPolicyManifest"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Authorization/dataPolicyManifests": {
+      "get": {
+        "tags": [
+          "DataPolicyManifests"
+        ],
+        "operationId": "DataPolicyManifests_List",
+        "summary": "Retrieves data policy manifests",
+        "description": "This operation retrieves a list of all the data policy manifests that match the optional given $filter. Valid values for $filter are: \"$filter=namespace eq '{0}'\". If $filter is not provided, the unfiltered list includes all data policy manifests for data resource types. If $filter=namespace is provided, the returned list only includes all data policy manifests that have a namespace matching the provided value.",
+        "x-ms-examples": {
+          "List data policy manifests": {
+            "$ref": "./examples/listDataPolicyManifests.json"
+          },
+          "List data policy manifests with namespace filter": {
+            "$ref": "./examples/listDataPolicyManifestsNamespaceFilter.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/DataPolicyManifestsFilterParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - Returns an array of data policy manifests.",
+            "schema": {
+              "$ref": "#/definitions/DataPolicyManifestListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    }
+  },
+  "definitions": {
+    "CloudError": {
+      "x-ms-external": true,
+      "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse",
+      "description": "An error response from a policy operation."
+    },
+    "DataManifestCustomResourceFunctionDefinition": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The function name as it will appear in the policy rule. eg - 'vault'."
+        },
+        "fullyQualifiedResourceType": {
+          "type": "string",
+          "description": "The fully qualified control plane resource type that this function represents. eg - 'Microsoft.KeyVault/vaults'."
+        },
+        "defaultProperties": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "The top-level properties that can be selected on the function's output. eg - [ \"name\", \"location\" ] if vault().name and vault().location are supported"
+        },
+        "allowCustomProperties": {
+          "type": "boolean",
+          "description": "A value indicating whether the custom properties within the property bag are allowed. Needs api-version to be specified in the policy rule eg - vault('2019-06-01')."
+        }
+      },
+      "description": "The custom resource function definition."
+    },
+    "DataManifestResourceFunctionsDefinition": {
+      "properties": {
+        "standard": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "The standard resource functions (subscription and/or resourceGroup)."
+        },
+        "custom": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DataManifestCustomResourceFunctionDefinition"
+          },
+          "description": "An array of data manifest custom resource definition."
+        }
+      },
+      "description": "The resource functions supported by a manifest"
+    },
+    "DataEffect": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The data effect name."
+        },
+        "detailsSchema": {
+          "type": "object",
+          "description": "The data effect details schema."
+        }
+      },
+      "description": "The data effect definition."
+    },
+    "ResourceTypeAliases": {
+      "properties": {
+        "resourceType": {
+          "type": "string",
+          "description": "The resource type name."
+        },
+        "aliases": {
+          "type": "array",
+          "items": {
+            "$ref": "../../../Microsoft.Resources/stable/2020-06-01/resources.json#/definitions/Alias"
+          },
+          "description": "The aliases for property names."
+        }
+      },
+      "description": "The resource type aliases definition."
+    },
+    "DataPolicyManifestProperties": {
+      "properties": {
+        "namespaces": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "The list of namespaces for the data policy manifest."
+        },
+        "policyMode": {
+          "type": "string",
+          "description": "The policy mode of the data policy manifest."
+        },
+        "isBuiltInOnly": {
+          "type": "boolean",
+          "description": "A value indicating whether policy mode is allowed only in built-in definitions."
+        },
+        "resourceTypeAliases": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ResourceTypeAliases"
+          },
+          "description": "An array of resource type aliases."
+        },
+        "effects": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DataEffect"
+          },
+          "description": "The effect definition."
+        },
+        "fieldValues": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "The non-alias field accessor values that can be used in the policy rule."
+        },
+        "resourceFunctions": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/DataManifestResourceFunctionsDefinition",
+          "description": "The resource functions definition specified in the data manifest."
+        }
+      },
+      "description": "The properties of the data policy manifest."
+    },
+    "DataPolicyManifest": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/DataPolicyManifestProperties",
+          "description": "The data policy manifest properties."
+        },
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The ID of the data policy manifest."
+        },
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The name of the data policy manifest (it's the same as the Policy Mode)."
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The type of the resource (Microsoft.Authorization/dataPolicyManifests)."
+        }
+      },
+      "description": "The data policy manifest.",
+      "x-ms-azure-resource": true
+    },
+    "DataPolicyManifestListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DataPolicyManifest"
+          },
+          "description": "An array of data policy manifests."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The URL to use for getting the next set of results."
+        }
+      },
+      "description": "List of data policy manifests."
+    }
+  },
+  "parameters": {
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "The API version to use for the operation."
+    },
+    "DataPolicyManifestsFilterParameter": {
+      "name": "$filter",
+      "in": "query",
+      "required": false,
+      "type": "string",
+      "description": "The filter to apply on the operation. Valid values for $filter are: \"namespace eq '{value}'\". If $filter is not provided, no filtering is performed. If $filter=namespace eq '{value}' is provided, the returned list only includes all data policy manifests that have a namespace matching the provided value.",
+      "x-ms-skip-url-encoding": true,
+      "x-ms-parameter-location": "method"
+    }
+  }
+}
