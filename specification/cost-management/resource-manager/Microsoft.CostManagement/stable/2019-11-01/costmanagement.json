@@ -379,54 +379,6 @@
         }
       }
     },
-    "/{scope}/providers/Microsoft.CostManagement/views/render": {
-      "post": {
-        "tags": [
-          "Views"
-        ],
-        "operationId": "Views_Render",
-        "description": "Renders the view at the given scope and returns the result as a downloadable PNG link.",
-        "externalDocs": {
-          "url": "https://docs.microsoft.com/en-us/rest/api/costmanagement/"
-        },
-        "x-ms-examples": {
-          "ResourceGroupViewList": {
-            "$ref": "./examples/ViewRender.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "#/parameters/scopeViewParameter"
-          },
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          },
-          {
-            "name": "parameters",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/View"
-            },
-            "description": "Parameters supplied to the Render View operation."
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK. The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/ViewRenderResult"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        }
-      }
-    },
     "/{scope}/providers/Microsoft.CostManagement/alerts": {
       "get": {
         "tags": [
@@ -1441,36 +1393,6 @@
         "operator",
         "values"
       ]
-    },
-    "ViewRenderResult": {
-      "description": "Result of rendering a view.",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/ProxyResource"
-        }
-      ],
-      "properties": {
-        "properties": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/ViewRenderProperties",
-          "title": "Render properties"
-        }
-      }
-    },
-    "ViewRenderProperties": {
-      "description": "Contains the PNG image url, and the error message in case of failure.",
-      "type": "object",
-      "properties": {
-        "imageUrl": {
-          "description": "Image url for the PNG download.",
-          "type": "string"
-        },
-        "errorMessage": {
-          "description": "The error description in case of download failure.",
-          "type": "string"
-        }
-      }
     },
     "ViewListResult": {
       "description": "Result of listing views. It contains a list of available views.",
