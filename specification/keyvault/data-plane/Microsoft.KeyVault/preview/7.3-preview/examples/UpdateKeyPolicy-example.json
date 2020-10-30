@@ -4,38 +4,38 @@
     "key-name": "updateKey01",
     "api-version": "7.3-preview",
     "keyPolicy": {
-	  "lifetimeActions":[
-		  {
-            "trigger": {
-              "timeAfterCreation": "90D"
-            },
-            "action": {
-              "type": "Rotate"
-            }
+      "lifetimeActions": [
+        {
+          "trigger": {
+            "timeAfterCreation": "90D"
           },
-		  {
-            "trigger": {
-              "timeBeforeExpiry": "30D"
-            },
-            "action": {
-              "type": "Notify"
-            }
+          "action": {
+            "type": "Rotate"
           }
-	  ],
-	  "attributes": {
-	    "rotationEnabled": true,
-		"rotationTime": "2Y",
-		"created": 1482188947,
-		"updated": 1482188948
-      }      
+        },
+        {
+          "trigger": {
+            "timeBeforeExpiry": "30D"
+          },
+          "action": {
+            "type": "Notify"
+          }
+        }
+      ],
+      "attributes": {
+        "rotationEnabled": true,
+        "rotationTime": "2Y",
+        "created": 1482188947,
+        "updated": 1482188948
+      }
     }
   },
   "responses": {
     "200": {
       "body": {
         "id": "https://myvault.vault.azure.net/keys/updateKey01/policy",
-		"lifetimeActions":[
-		  {
+        "lifetimeActions": [
+          {
             "trigger": {
               "timeAfterCreation": "90D"
             },
@@ -43,7 +43,7 @@
               "type": "Rotate"
             }
           },
-		  {
+          {
             "trigger": {
               "timeBeforeExpiry": "30D"
             },
@@ -51,12 +51,12 @@
               "type": "Notify"
             }
           }
-		],
-		"attributes": {
-		  "rotationEnabled": true,
-		  "rotationTime": "2Y",
-		  "created": 1482188947,
-		  "updated": 1482188948
+        ],
+        "attributes": {
+          "rotationEnabled": true,
+          "rotationTime": "2Y",
+          "created": 1482188947,
+          "updated": 1482188948
         }
       }
     }

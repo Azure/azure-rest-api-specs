@@ -19,33 +19,33 @@
         "purpose": "unit test",
         "test name ": "CreateGetDeleteKeyTest"
       },
-	  "policy": {
-	    "id": "https://myvault.vault.azure.net/keys/CreateSoftKeyTest/policy",
-	    "lifetimeActions":[
-		  {
-		    "trigger": {
-			  "timeAfterCreation": "90D"
-		    },
-		    "action": {
-			  "type": "Rotate"
-		    }
-		  },
-		  { 
-		    "trigger": {
-			  "timeBeforeExpiry": "30D"
-		    },
-		    "action": {
-			  "type": "Notify"
-		    }
-		  }
-	    ],
-	    "attributes": {
-		  "rotationEnabled": true,
-		  "rotationTime": "2Y",
-		  "created": 1482188947,
-		  "updated": 1482188948
-	    }
-	  }	  
+      "policy": {
+        "id": "https://myvault.vault.azure.net/keys/CreateSoftKeyTest/policy",
+        "lifetimeActions": [
+          {
+            "trigger": {
+              "timeAfterCreation": "90D"
+            },
+            "action": {
+              "type": "Rotate"
+            }
+          },
+          {
+            "trigger": {
+              "timeBeforeExpiry": "30D"
+            },
+            "action": {
+              "type": "Notify"
+            }
+          }
+        ],
+        "attributes": {
+          "rotationEnabled": true,
+          "rotationTime": "2Y",
+          "created": 1482188947,
+          "updated": 1482188948
+        }
+      }
     }
   },
   "responses": {
@@ -77,8 +77,8 @@
         },
         "policy": {
           "id": "https://myvault.vault.azure.net/keys/CreateSoftKeyTest/policy",
-		  "lifetimeActions":[
-		    {
+          "lifetimeActions": [
+            {
               "trigger": {
                 "timeAfterCreation": "90D"
               },
@@ -86,7 +86,7 @@
                 "type": "Rotate"
               }
             },
-		    { 
+            {
               "trigger": {
                 "timeBeforeExpiry": "30D"
               },
@@ -94,14 +94,14 @@
                 "type": "Notify"
               }
             }
-		  ],
-		  "attributes": {
-		    "rotationEnabled": true,
-		    "rotationTime": "2Y",
-		    "created": 1482188947,
-		    "updated": 1482188948
-		  }
-        }		
+          ],
+          "attributes": {
+            "rotationEnabled": true,
+            "rotationTime": "2Y",
+            "created": 1482188947,
+            "updated": 1482188948
+          }
+        }
       }
     }
   }

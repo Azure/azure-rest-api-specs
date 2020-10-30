@@ -55,16 +55,6 @@
             "description": "The parameters to create a key."
           },
           {
-            "name": "keyPolicy",
-            "in": "body",
-            "required": false,
-            "x-ms-client-flatten": true,
-            "schema": {
-              "$ref": "#/definitions/KeyPolicy"
-            },
-            "description": "The policy for the key."
-          },
-          {
             "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
@@ -99,6 +89,14 @@
         "description": "The operation will rotate the key based on the key policy. It requires the keys/rotate permission.",
         "parameters": [
           {
+            "name": "key-name",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[0-9a-zA-Z-]+$",
+            "description": "The name for the new key. The system will generate the version name for the new key."
+          },
+          {
             "name": "force",
             "in": "query",
             "required": false,
@@ -129,7 +127,7 @@
           }
         }
       }
-    },    
+    },
     "/keys/{key-name}": {
       "put": {
         "tags": [
@@ -1106,7 +1104,7 @@
           "200": {
             "description": "The key policy.",
             "schema": {
-              "$ref": "#/definitions/keyPolicy"
+              "$ref": "#/definitions/KeyPolicy"
             }
           },
           "default": {
@@ -1709,6 +1707,10 @@
             "modelAsString": true
           }
         },
+        "policy": {
+          "x-ms-client-name": "keyPolicy",
+          "$ref": "#/definitions/KeyPolicy"
+        },        
         "release_policy": {
           "$ref": "#/definitions/KeyReleasePolicy",
           "description": "The policy rules under which the key can be exported."
@@ -2097,73 +2099,77 @@
       "description": "Management policy for a key."
     },
     "LifetimeAction": {
-        "properties": {
-          "trigger": {
-            "$ref": "#/definitions/Trigger",
-            "description": "The condition that will execute the action."
-          },
-          "action": {
-            "$ref": "#/definitions/Action",
-            "description": "The action that will be executed."
-          }
+      "properties": {
+        "trigger": {
+          "$ref": "#/definitions/Trigger",
+          "description": "The condition that will execute the action."
         },
-        "description": "Action and its trigger that will be performed by Key Vault over the lifetime of a key."
+        "action": {
+          "$ref": "#/definitions/Action",
+          "description": "The action that will be executed."
+        }
+      },
+      "description": "Action and its trigger that will be performed by Key Vault over the lifetime of a key."
     },
     "Trigger": {
-        "properties": {
-          "timeAfterCreation": {
-            "type": "string",
-            "format": "string",
-            "minimum": 1,
-            "maximum": 99,
-            "description": "Days after creation to attempt rotate."
-          },
-          "timeBeforeExpiry": {
-            "type": "string",
-            "format": "string",
-            "description": "Days before expiry to attempt rotate."
-          }
+      "properties": {
+        "timeAfterCreation": {
+          "type": "string",
+          "format": "string",
+          "minimum": 1,
+          "maximum": 99,
+          "description": "Days after creation to attempt rotate."
         },
-        "description": "A condition to be satisfied for an action to be executed."
+        "timeBeforeExpiry": {
+          "type": "string",
+          "format": "string",
+          "description": "Days before expiry to attempt rotate."
+        }
+      },
+      "description": "A condition to be satisfied for an action to be executed."
     },
     "Action": {
-        "properties": {
-          "action_type": {
-            "type": "string",
-            "description": "The type of the action.",
-            "enum": [
-                "Rotate",
-                "Notify"
-            ],
-            "x-ms-enum": {
-                "name": "ActionType",
-                "modelAsString": false
-            }
+      "properties": {
+        "action_type": {
+          "type": "string",
+          "description": "The type of the action.",
+          "enum": [
+            "Rotate",
+            "Notify"
+          ],
+          "x-ms-enum": {
+            "name": "ActionType",
+            "modelAsString": false
           }
-        },
-        "description": "The action that will be executed."
+        }
+      },
+      "description": "The action that will be executed."
     },
-    "KeyPolicyAttributes":{
-        "properties": {
-          "rotationEnabled":{
-            "type": "boolean",
-            "description": "Determines whether key auto rotation is enabled."
-          },
-          "expirationTime":{
-            "type": "string",
-            "format": "string",
-            "description": "Time to attempt rotate."
-          },
-          "created":{
-            "$ref": "common.json#/definitions/Attributes/created",
-            "description": "The key policy created time in UTC."
-          },
-          "updated":{
-            "$ref": "common.json#/definitions/Attributes/created/updated",
-            "description": "The key policy's last updated time in UTC."
-          }
+    "KeyPolicyAttributes": {
+      "properties": {
+        "rotationEnabled": {
+          "type": "boolean",
+          "description": "Determines whether key auto rotation is enabled."
         },
-        "description": "The key policy attributs."
+        "expirationTime": {
+          "type": "string",
+          "format": "string",
+          "description": "Time to attempt rotate."
+        },
+        "created": {
+          "type": "integer",
+          "format": "unixtime",
+          "readOnly": true,
+          "description": "The key policy created time in UTC."
+        },
+        "updated": {
+          "type": "integer",
+          "format": "unixtime",
+          "readOnly": true,
+          "description": "The key policy's last updated time in UTC."
+        }
+      },
+      "description": "The key policy attributs."
     }
   },
   "parameters": {
