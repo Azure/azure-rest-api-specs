@@ -829,7 +829,7 @@
             "$ref": "#/parameters/RequiredQueueMessage"
           },
           {
-            "$ref": "#/parameters/VisibilityTimeout"
+            "$ref": "#/parameters/VisibilityTimeoutForEnqueue"
           },
           {
             "$ref": "#/parameters/MessageTTL"
@@ -1862,6 +1862,17 @@
       "maximum": 604800,
       "x-ms-parameter-location": "method",
       "description": "Optional. Specifies the new visibility timeout value, in seconds, relative to server time. The default value is 30 seconds. A specified value must be larger than or equal to 1 second, and cannot be larger than 7 days, or larger than 2 hours on REST protocol versions prior to version 2011-08-18. The visibility timeout of a message can be set to a value later than the expiry time."
+    },
+    "VisibilityTimeoutForEnqueue": {
+      "name": "visibilitytimeout",
+      "x-ms-client-name": "visibilityTimeout",
+      "in": "query",
+      "required": false,
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 604800,
+      "x-ms-parameter-location": "method",
+      "description": "Optional. If specified, the request must be made using an x-ms-version of 2011-08-18 or later. If not specified, the default value is 0. Specifies the new visibility timeout value, in seconds, relative to server time. The new value must be larger than or equal to 0, and cannot be larger than 7 days. The visibility timeout of a message cannot be set to a value later than the expiry time. visibilitytimeout should be set to a value smaller than the time-to-live value."
     }
   }
 }
