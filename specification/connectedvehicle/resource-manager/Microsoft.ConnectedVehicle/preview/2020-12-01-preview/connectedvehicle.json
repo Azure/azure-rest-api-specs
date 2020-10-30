@@ -564,18 +564,6 @@
       ],
       "description": "Specifies the networking configuration."
     },
-    "CosmosDb": {
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "Specifies the ID of the Cosmos DB resource."
-        }
-      },
-      "required": [
-        "id"
-      ],
-      "description": "Specifies the Cosmos DB resource in the user's subscription."
-    },
     "Extensions": {
       "properties": {
         "id": {
@@ -659,10 +647,6 @@
           "$ref": "#/definitions/Analytics",
           "description": "Specifies the analytics configuration."
         },
-        "cosmosDb": {
-          "$ref": "#/definitions/CosmosDb",
-          "description": "Specifies the ID of the Cosmos DB resource in the user's subscription."
-        },
         "extensions": {
           "$ref": "#/definitions/Extensions",
           "description": "Specifies the extensions configuration."
@@ -699,7 +683,6 @@
         }
       },
       "required": [
-        "cosmosDb",
         "networking"
       ],
       "description": "Specifies the properties of the platform account."
