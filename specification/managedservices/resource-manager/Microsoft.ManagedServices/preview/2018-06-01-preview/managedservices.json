@@ -759,18 +759,29 @@
           "type": "string",
           "description": "Principal Id of the security group/service principal/user that would be assigned permissions to the projected subscription"
         },
+        "principalIdDisplayName": {
+          "type": "string",
+          "description": "Display name of the principal Id."
+        },
         "roleDefinitionId": {
           "type": "string",
           "description": "The role definition identifier. This role will define all the permissions that the security group/service principal/user must have on the projected subscription. This role cannot be an owner role."
-        }
+        },
+        "delegatedRoleDefinitionIds": {
+          "type": "array",
+          "description": "The delegatedRoleDefinitionIds field is required when the roleDefinitionId refers to the User Access Administrator Role. It is the list of role definition ids which define all the permissions that the user in the authorization can assign to other security groups/service principals/users.",
+          "items": {
+            "format": "uuid",
+            "type": "string"
+          }
+        },
+        "required": [
+          "principalId",
+          "roleDefinitionId"
+        ],
+        "type": "object",
+        "description": "Authorization tuple containing principal Id (of user/service principal/security group) and role definition id."
       },
-      "required": [
-        "principalId",
-        "roleDefinitionId"
-      ],
-      "type": "object",
-      "description": "Authorization tuple containing principal Id (of user/service principal/security group) and role definition id."
-    },
     "ErrorResponse": {
       "properties": {
         "error": {
