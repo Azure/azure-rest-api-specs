@@ -79,55 +79,6 @@
         }
       }
     },
-    "/keys/{key-name}/roll": {
-      "put": {
-        "tags": [
-          "Keys"
-        ],
-        "operationId": "RotateKey",
-        "summary": "Creates a new key version, stores it, then returns key parameters, attributes and policy to the client.",
-        "description": "The operation will rotate the key based on the key policy. It requires the keys/rotate permission.",
-        "parameters": [
-          {
-            "name": "key-name",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "pattern": "^[0-9a-zA-Z-]+$",
-            "description": "The name for the new key. The system will generate the version name for the new key."
-          },
-          {
-            "name": "force",
-            "in": "query",
-            "required": false,
-            "type": "boolean",
-            "description": "Key rotation will happen immediately when it is true. Otherwise, the api will compute current key policy to make key rotation decision. The value will be true if not specified."
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "A key bundle containing the result of the rotate key request.",
-            "schema": {
-              "$ref": "#/definitions/KeyBundle"
-            }
-          },
-          "default": {
-            "description": "Key Vault error response describing why the operation failed.",
-            "schema": {
-              "$ref": "common.json#/definitions/KeyVaultError"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Create key": {
-            "$ref": "./examples/RotateKey-example.json"
-          }
-        }
-      }
-    },
     "/keys/{key-name}": {
       "put": {
         "tags": [
@@ -1079,95 +1030,6 @@
           }
         }
       }
-    },
-    "/keys/{key-name}/policy": {
-      "get": {
-        "tags": [
-          "Keys"
-        ],
-        "operationId": "GetKeyPolicy",
-        "summary": "Lists the policy for a key.",
-        "description": "The GetKeyPolicy operation returns the specified key policy resources in the specified key vault. This operation requires the keys/get permission.",
-        "parameters": [
-          {
-            "name": "key-name",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the key in a given key vault."
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The key policy.",
-            "schema": {
-              "$ref": "#/definitions/KeyPolicy"
-            }
-          },
-          "default": {
-            "description": "Key Vault error response describing why the operation failed.",
-            "schema": {
-              "$ref": "common.json#/definitions/KeyVaultError"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "GetkeyPolicy": {
-            "$ref": "./examples/GetKeyPolicy-example.json"
-          }
-        }
-      },
-      "patch": {
-        "tags": [
-          "keys"
-        ],
-        "operationId": "UpdateKeyPolicy",
-        "summary": "Updates the policy for a key.",
-        "description": "Set specified members in the key policy. Leave others as null. This operation requires the keys/update permission.",
-        "parameters": [
-          {
-            "name": "key-name",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the key in the given vault."
-          },
-          {
-            "name": "keyPolicy",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/KeyPolicy"
-            },
-            "description": "The policy for the key."
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The policy for the key.",
-            "schema": {
-              "$ref": "#/definitions/KeyPolicy"
-            }
-          },
-          "default": {
-            "description": "Key Vault error response describing why the operation failed.",
-            "schema": {
-              "$ref": "common.json#/definitions/KeyVaultError"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "UpdatekeyPolicy": {
-            "$ref": "./examples/UpdateKeyPolicy-example.json"
-          }
-        }
-      }
     }
   },
   "definitions": {
@@ -1493,10 +1355,6 @@
           "readOnly": true,
           "description": "True if the key's lifetime is managed by key vault. If this is a key backing a certificate, then managed will be true."
         },
-        "policy": {
-          "$ref": "#/definitions/KeyPolicy",
-          "description": "The policy for the key."
-        },
         "release_policy": {
           "$ref": "#/definitions/KeyReleasePolicy",
           "description": "The policy rules under which the key can be exported."
@@ -1707,10 +1565,6 @@
             "modelAsString": true
           }
         },
-        "policy": {
-          "x-ms-client-name": "keyPolicy",
-          "$ref": "#/definitions/KeyPolicy"
-        },        
         "release_policy": {
           "$ref": "#/definitions/KeyReleasePolicy",
           "description": "The policy rules under which the key can be exported."
@@ -2076,100 +1930,6 @@
         }
       },
       "description": "The backup key result, containing the backup blob."
-    },
-    "KeyPolicy": {
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "The key policy id.",
-          "readOnly": true
-        },
-        "lifetimeActions": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/LifetimeActions"
-          },
-          "description": "Actions that will be performed by Key Vault over the lifetime of a key."
-        },
-        "attributes": {
-          "$ref": "#/definitions/KeyPolicyAttributes",
-          "description": "The key policy attributes."
-        }
-      },
-      "description": "Management policy for a key."
-    },
-    "LifetimeActions": {
-      "properties": {
-        "trigger": {
-          "$ref": "#/definitions/LifetimeActionsTrigger",
-          "description": "The condition that will execute the action."
-        },
-        "action": {
-          "$ref": "#/definitions/LifetimeActionsType",
-          "description": "The action that will be executed."
-        }
-      },
-      "description": "Action and its trigger that will be performed by Key Vault over the lifetime of a key."
-    },
-    "LifetimeActionsTrigger": {
-      "properties": {
-        "timeAfterCreation": {
-          "type": "string",
-          "format": "string",
-          "minimum": 1,
-          "maximum": 99,
-          "description": "Days after creation to attempt rotate."
-        },
-        "timeBeforeExpiry": {
-          "type": "string",
-          "format": "string",
-          "description": "Days before expiry to attempt rotate."
-        }
-      },
-      "description": "A condition to be satisfied for an action to be executed."
-    },
-    "LifetimeActionsType": {
-      "properties": {
-        "type": {
-          "type": "string",
-          "description": "The type of the action.",
-          "enum": [
-            "Rotate",
-            "Notify"
-          ],
-          "x-ms-enum": {
-            "name": "ActionType",
-            "modelAsString": false
-          }
-        }
-      },
-      "description": "The action that will be executed."
-    },
-    "KeyPolicyAttributes": {
-      "properties": {
-        "rotationEnabled": {
-          "type": "boolean",
-          "description": "Determines whether key auto rotation is enabled."
-        },
-        "rotationTime": {
-          "type": "string",
-          "format": "string",
-          "description": "Time to attempt rotate."
-        },
-        "created": {
-          "type": "integer",
-          "format": "unixtime",
-          "readOnly": true,
-          "description": "The key policy created time in UTC."
-        },
-        "updated": {
-          "type": "integer",
-          "format": "unixtime",
-          "readOnly": true,
-          "description": "The key policy's last updated time in UTC."
-        }
-      },
-      "description": "The key policy attributs."
     }
   },
   "parameters": {

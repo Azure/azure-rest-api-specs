@@ -18,30 +18,6 @@
       "tags": {
         "purpose": "unit test",
         "test name ": "CreateGetDeleteKeyTest"
-      },
-      "policy": {
-        "lifetimeActions": [
-          {
-            "trigger": {
-              "timeAfterCreation": "90D"
-            },
-            "action": {
-              "type": "Rotate"
-            }
-          },
-          {
-            "trigger": {
-              "timeBeforeExpiry": "30D"
-            },
-            "action": {
-              "type": "Notify"
-            }
-          }
-        ],
-        "attributes": {
-          "rotationEnabled": true,
-          "rotationTime": "2Y"
-        }
       }
     }
   },
@@ -71,33 +47,6 @@
         "tags": {
           "purpose": "unit test",
           "test name ": "CreateGetDeleteKeyTest"
-        },
-        "policy": {
-          "id": "https://myvault.vault.azure.net/keys/CreateSoftKeyTest/policy",
-          "lifetimeActions": [
-            {
-              "trigger": {
-                "timeAfterCreation": "90D"
-              },
-              "action": {
-                "type": "Rotate"
-              }
-            },
-            {
-              "trigger": {
-                "timeBeforeExpiry": "30D"
-              },
-              "action": {
-                "type": "Notify"
-              }
-            }
-          ],
-          "attributes": {
-            "rotationEnabled": true,
-            "rotationTime": "2Y",
-            "created": 1482188947,
-            "updated": 1482188948
-          }
         }
       }
     }
