@@ -810,6 +810,7 @@ This document lists the set of automated rules that can be validated against swa
 
 **How to fix the violation**: If the property is a read-only, update the swagger definition for this property to mark it as "readOnly": true. Alternatively, keep the property in the GET schema but remove it from the PUT schema. If the property has a default value, update the Swagger definition for this property to mark it with "default": <default value> annotation.
 
+
 ### <a name="ROUNDTRIP_MISSING_PROPERTY" />ROUNDTRIP_MISSING_PROPERTY
 
 **Output Message**: The property is present in the PUT request but is either never returned in the GET response or is returned with a null value. If this is a property that carries a secret such as a password, update the Swagger definition to mark it with the "x-ms-secret": true annotation.
