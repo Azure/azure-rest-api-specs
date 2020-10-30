@@ -774,14 +774,14 @@
             "format": "uuid",
             "type": "string"
           }
-        },
-        "required": [
-          "principalId",
-          "roleDefinitionId"
-        ],
-        "type": "object",
-        "description": "Authorization tuple containing principal Id (of user/service principal/security group) and role definition id."
-      }
+        }
+      },
+      "required": [
+        "principalId",
+        "roleDefinitionId"
+      ],
+      "type": "object",
+      "description": "Authorization tuple containing principal Id (of user/service principal/security group) and role definition id."
     },
     "ErrorDefinition": {
       "properties": {
@@ -809,9 +809,9 @@
       "description": "Error response indicates Azure Resource Manager is not able to process the incoming request. The reason is provided in the error message."
     },
     "ErrorResponse": {
+      "description": "Error response.",
       "properties": {
         "error": {
-          "readOnly": true,
           "$ref": "#/definitions/ErrorDefinition",
           "description": "The error details."
         }
