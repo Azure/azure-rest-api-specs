@@ -8843,7 +8843,55 @@
         "code": {
           "type": "string",
           "readOnly": true,
-          "description": "One of a server-defined set of error codes."
+          "description": "One of a server-defined set of error codes.",
+          "enum": [
+            "OperationNotAllowed",
+            "FeatureNotSupportedInApiVersion",
+            "FeatureNotSupportedInService",
+            "InvalidRequestParameter",
+            "MissingRequiredParameter",
+            "InvalidName",
+            "InvalidPayloadFormat",
+            "LimitExceeded"
+          ],
+          "x-ms-enum": {
+            "name": "",
+            "modelAsExtensible": true,
+            "values": [
+              {
+                "value": "OperationNotAllowed",
+                "description": "Operation is not allowed."
+              },
+              {
+                "value": "FeatureNotSupportedInApiVersion",
+                "description": "Operation is not supported in the current API version."
+              },
+              {
+                "value": "FeatureNotSupportedInService",
+                "description": "Operation is not supported in the current service."
+              },
+              {
+                "value": "InvalidRequestParameter",
+                "description": "Request contains an invalid parameter."
+              },
+              {
+                "value": "MissingRequiredParameter",
+                "description": "Required parameter is missing from the request."
+              },
+              {
+                "value": "InvalidName",
+                "description": "Request contains an entity name that is syntactically wrong."
+              },
+              {
+                "value": "InvalidPayloadFormat",
+                "description": "Request payload format is invalid."
+              },
+              {
+                "value": "LimitExceeded",
+                "description": "Fulfilling the request would exceed a limit of some sort."
+              }
+            ]
+          }
         },
         "message": {
           "type": "string",
