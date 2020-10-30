@@ -1162,6 +1162,154 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces/{workspaceName}/sqlUsages": {
+      "get": {
+        "tags": [
+          "WorkspaceManagedSqlServer",
+          "sqlUsages"
+        ],
+        "operationId": "WorkspaceManagedSqlServerUsages_List",
+        "summary": "Get list of usages metric for the server.",
+        "description": "Get list of server usages metric for workspace managed sql server.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./workspace.json#/parameters/workspaceNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ServerUsageListResult"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found.\n\n * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription.\n\n * 409 UnsupportedWorkspaceType - Unsupported operation for the workspace type.\n\n * 500 InternalServerError - Something went wrong."
+          }
+        },
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List usages metric for the workspace managed sql server": {
+            "$ref": "./examples/ListWorkspaceManagedSqlServerUsages.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces/{workspaceName}/recoverableSqlpools": {
+      "get": {
+        "tags": [
+          "WorkspaceManagedSqlServer",
+          "recoverableSqlpools"
+        ],
+        "operationId": "WorkspaceManagedSqlServerRecoverableSqlpools_List",
+        "summary": "Get list of recoverable sql pools for the server.",
+        "description": "Get list of recoverable sql pools for workspace managed sql server.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./workspace.json#/parameters/workspaceNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/RecoverableSqlPoolListResult"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found.\n\n * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription.\n\n * 409 UnsupportedWorkspaceType - Unsupported operation for the workspace type.\n\n * 500 InternalServerError - Something went wrong."
+          }
+        },
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List recoverable sql pools for the server": {
+            "$ref": "./examples/ListWorkspaceManagedSqlServerRecoverableSqlPool.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces/{workspaceName}/recoverableSqlPools/{sqlComputeName}": {
+      "get": {
+        "tags": [
+          "WorkspaceManagedSqlServer",
+          "recoverableSqlPools"
+        ],
+        "operationId": "WorkspaceManagedSqlServerRecoverableSqlPools_Get",
+        "summary": "Get recoverable sql pools for the server.",
+        "description": "Get recoverable sql pools for workspace managed sql server.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./workspace.json#/parameters/workspaceNameParameter"
+          },
+          {
+            "name": "sqlComputeName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the sql compute"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/RecoverableSqlPool"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found.\n\n * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription.\n\n * 409 UnsupportedWorkspaceType - Unsupported operation for the workspace type.\n\n * 500 InternalServerError - Something went wrong."
+          }
+        },
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-examples": {
+          "Get recoverable sql pools for the server": {
+            "$ref": "./examples/GetWorkspaceManagedSqlServerRecoverableSqlPool.json"
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -1695,6 +1843,131 @@
           "$ref": "#/definitions/ServerKeyProperties",
           "description": "Resource properties.",
           "x-ms-client-flatten": true
+        }
+      }
+    },
+    "ServerUsage": {
+      "properties": {
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Name of the server usage metric."
+        },
+        "resourceName": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The name of the resource."
+        },
+        "displayName": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The metric display name."
+        },
+        "currentValue": {
+          "readOnly": true,
+          "type": "number",
+          "format": "double",
+          "description": "The current value of the metric."
+        },
+        "limit": {
+          "readOnly": true,
+          "type": "number",
+          "format": "double",
+          "description": "The current limit of the metric."
+        },
+        "unit": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The units of the metric."
+        },
+        "nextResetTime": {
+          "readOnly": true,
+          "type": "string",
+          "format": "date-time",
+          "description": "The next reset time for the metric (ISO8601 format)."
+        }
+      },
+      "description": "Represents server metrics."
+    },
+    "ServerUsageListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ServerUsage"
+          },
+          "description": "The list of server metrics for the server."
+        },
+        "nextLink": {
+          "description": "Link to retrieve next page of results.",
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "value"
+      ],
+      "description": "Represents the response to a list server metrics request."
+    },
+    "RecoverableSqlPoolProperties": {
+      "type": "object",
+      "properties": {
+        "edition": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The edition of the database"
+        },
+        "serviceLevelObjective": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The service level objective name of the database"
+        },
+        "elasticPoolName": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The elastic pool name of the database"
+        },
+        "lastAvailableBackupDate": {
+          "readOnly": true,
+          "type": "string",
+          "format": "date-time",
+          "description": "The last available backup date of the database (ISO8601 format)"
+        }
+      },
+      "description": "The properties of a recoverable sql pool"
+    },
+    "RecoverableSqlPool": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/RecoverableSqlPoolProperties",
+          "description": "The properties of a recoverable sql pool",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "description": "A recoverable sql pool"
+    },
+    "RecoverableSqlPoolListResult": {
+      "description": "The response to a list recoverable sql pools request",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "A list of recoverable sql pool",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RecoverableSqlPool"
+          },
+          "readOnly": true
+        },
+        "nextLink": {
+          "description": "Link to retrieve next page of results.",
+          "type": "string",
+          "readOnly": true
         }
       }
     }
