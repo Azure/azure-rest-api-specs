@@ -401,6 +401,9 @@
           "204": {
             "description": "The specified account was not found."
           },
+          "404": {
+            "description": ""
+          },
           "default": {
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
@@ -2865,15 +2868,11 @@
         "maxJobCount": {
           "type": "integer",
           "format": "int32",
-          "minimum": 1,
-          "default": 3,
           "description": "The maximum supported jobs running under the account at the same time."
         },
         "maxDegreeOfParallelism": {
           "type": "integer",
           "format": "int32",
-          "minimum": 1,
-          "default": 30,
           "description": "The maximum supported degree of parallelism for this account."
         },
         "maxDegreeOfParallelismPerJob": {
