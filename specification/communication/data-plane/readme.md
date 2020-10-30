@@ -77,14 +77,16 @@ input-file:
   - Microsoft.CommunicationServicesIdentity/preview/2020-07-20-preview2/CommunicationIdentity.json
 ```
 
-### Tag: package-2020-11-19-preview1
 
-These settings apply only when `--tag=package-2020-11-19-preview1` is specified on the command line.
+### Tag: 2020-01-15-generalAvailability
 
-```yaml $(tag) == 'package-2020-11-19-preview1'
+These settings apply only when `--tag=package-2020-01-15-generalAvailability` is specified on the command line.
+
+```yaml $(tag) == '2020-01-15-generalAvailability'
 input-file:
-  - Microsoft.CommunicationServicesCommon/preview/2020-11-19-preview1/common.json
+  - Microsoft.CommunicationServicesIdentity/preview/2020-01-15-generalAvailability/CommunicationIdentity.json
 ```
+
 
 ---
 
