@@ -2101,17 +2101,17 @@
     "LifetimeActions": {
       "properties": {
         "trigger": {
-          "$ref": "#/definitions/Trigger",
+          "$ref": "#/definitions/LifetimeActionsTrigger",
           "description": "The condition that will execute the action."
         },
         "action": {
-          "$ref": "#/definitions/Action",
+          "$ref": "#/definitions/LifetimeActionsType",
           "description": "The action that will be executed."
         }
       },
       "description": "Action and its trigger that will be performed by Key Vault over the lifetime of a key."
     },
-    "Trigger": {
+    "LifetimeActionsTrigger": {
       "properties": {
         "timeAfterCreation": {
           "type": "string",
@@ -2128,7 +2128,7 @@
       },
       "description": "A condition to be satisfied for an action to be executed."
     },
-    "Action": {
+    "LifetimeActionsType": {
       "properties": {
         "type": {
           "type": "string",
