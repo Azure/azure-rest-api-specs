@@ -605,7 +605,7 @@ This document lists the set of automated rules that can be validated against swa
 
 **Description**: The property {0} is required and has to provide in request or response of example (or of traffic payload).
 
-**How to fix the violation**: Provide the requried property in example(or in traffic payload) or remove this property from the required list of the definition in swagger spec. Or add items property if the type is array.
+**How to fix the violation**: Provide the required property in example(or in traffic payload) or remove this property from the required list of the definition in swagger spec. Or add items property if the type is array.
 
 ### <a name="DISCRIMINATOR_VALUE_NOT_FOUND" />DISCRIMINATOR_VALUE_NOT_FOUND
 
@@ -760,7 +760,7 @@ This document lists the set of automated rules that can be validated against swa
 
 **Description**: Required parameter is not provided in example.
 
-**How to fix the violation**: Add the requried parameter in example.
+**How to fix the violation**: Add the required parameter in example.
 
 ### <a name="RESOLVE_SPEC_ERROR" />RESOLVE_SPEC_ERROR 
 
