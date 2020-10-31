@@ -128,7 +128,7 @@ input-file:
 - Microsoft.KeyVault/stable/2019-09-01/secrets.json
 ```
 
-### Supressions
+### Suppressions
 
 ``` yaml
 directive:
