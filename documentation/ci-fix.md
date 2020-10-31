@@ -6,7 +6,7 @@ Here are guides to fix some of the CI failure.
 
 Please add your words to `./custom-words.txt` if you think you have the correct spell.
 
-If your problem is some existing error name that is not a word and need to supress the error in that file (and don't want to add to custom-words.txt), you can add it to `./cSpell.txt`.
+If your problem is some existing error name that is not a word and need to suppress the error in that file (and don't want to add to custom-words.txt), you can add it to `./cSpell.txt`.
 
 ## Prettier check
 
