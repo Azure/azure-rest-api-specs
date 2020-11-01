@@ -6,7 +6,7 @@ This directory contains the Cli common model for the Dns service.
 
 
 ``` yaml
-# Migrated from Powershell's readme
+# Migrated from PowerShell's readme
 cli:
     cli-name: servicebus 
     package-name: azure-mgmt-servicebus

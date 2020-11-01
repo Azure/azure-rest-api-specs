@@ -5,7 +5,7 @@ This directory contains the Cli common model for the Aks service.
 > Metadata
 
 ``` yaml
-# Migrated from Powershell's readme
+# Migrated from PowerShell's readme
 cli:
     naming:
         cli:

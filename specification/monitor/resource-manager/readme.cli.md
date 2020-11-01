@@ -6,7 +6,7 @@ This directory contains the Cli common model for the Dns service.
 
 
 ``` yaml
-# Migrated from Powershell's readme
+# Migrated from PowerShell's readme
 title: Monitor
 cli:
     cli-directive:
