@@ -91,7 +91,7 @@ _This will keep the spec cleaner and easy to manage._
         "headers": { ... }, //Examples for location, azure-asyncoperation, retry-after response headers for long running (asynchronous) operations would be valuable
         "body": { ... }
       },
-      "statuscode2": { ... }
+      "statusCode2": { ... }
     }
   }
 }
