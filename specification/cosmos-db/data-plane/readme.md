@@ -1,4 +1,4 @@
-# Table Dataplane
+# Table Data Plane
 
 > see https://aka.ms/autorest
 
