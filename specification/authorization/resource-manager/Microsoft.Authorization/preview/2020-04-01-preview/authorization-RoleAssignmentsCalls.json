@@ -503,7 +503,7 @@
               "$ref": "#/definitions/RoleAssignmentListResult"
             }
           },
-            "400": {
+          "400": {
             "description": "Bad Request - Indicates the request has missing information and can not be completed",
             "schema": {
               "$ref": "#/definitions/Error"
@@ -586,11 +586,28 @@
           "type": "string",
           "description": "Version of the condition. Currently accepted value is '2.0'"
         },
-        "createdOn":{"type":"string","description":"Time it was created", "format":"date-time"},
-        "updatedOn":{"type":"string","description":"Time it was updated", "format":"date-time"},
-        "createdBy":{"type":"string","description":"Id of the user who created the assignment"},
-        "updatedBy":{"type":"string","description":"Id of the user who updated the assignment"},
-        "delegatedManagedIdentityResourceId":{"type":"string","description":"Id of the delegated managed identity resource"}
+        "createdOn": {
+          "type": "string",
+          "description": "Time it was created",
+          "format": "date-time"
+        },
+        "updatedOn": {
+          "type": "string",
+          "description": "Time it was updated",
+          "format": "date-time"
+        },
+        "createdBy": {
+          "type": "string",
+          "description": "Id of the user who created the assignment"
+        },
+        "updatedBy": {
+          "type": "string",
+          "description": "Id of the user who updated the assignment"
+        },
+        "delegatedManagedIdentityResourceId": {
+          "type": "string",
+          "description": "Id of the delegated managed identity resource"
+        }
       },
       "description": "Role assignment properties with scope."
     },
@@ -703,8 +720,19 @@
     },
     "Error": {
       "properties": {
-        "code": {"type":"string","description":"Brief error code"},
-        "message": {"type":"string","description":"Longer message explaining the details of the error"}
+        "error": {
+          "type": "object",
+          "properties": {
+            "code": {
+              "type": "string",
+              "description": "Brief error code"
+            },
+            "message": {
+              "type": "string",
+              "description": "Longer message explaining the details of the error"
+            }
+          }
+        }
       },
       "description": "Object to be thrown in case of an unsuccesful response"
     }
