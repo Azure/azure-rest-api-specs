@@ -4652,7 +4652,7 @@
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.DocumentDB/locations/{location}/restorableDatabaseAccounts/{instanceId}/restorableMongodbCollections/{mongodbCollectionSnapshotId}": {
       "get": {
-        "operationId": "RestorableMongodbCollection_Get",
+        "operationId": "RestorableMongodbCollections_Get",
         "x-ms-examples": {
           "CosmosDBRestorableMongodbCollectionGet": {
             "$ref": "./examples/CosmosDBRestorableMongodbCollectionGet.json"
@@ -8290,8 +8290,9 @@
         "restorableLocations": {
           "description": "List of regions where the of the database account can be restored from.",
           "type": "array",
-          "default": "Default",
-          "$ref": "#/definitions/RestorableLocationResource"
+          "items": {
+            "$ref": "#/definitions/RestorableLocationResource"
+          }
         }
       }
     },
@@ -8316,7 +8317,7 @@
     "RestorableLocationResource": {
       "type": "object",
       "description": "Properties of the regional restorable account.",
-      "properties": {       
+      "properties": {
         "locationName": {
           "type": "string",
           "description": "The location of the regional restorable account."
@@ -8678,7 +8679,7 @@
         }
       },
       "description": "The List operation response, that contains the restorable MongoDB resources."
-    }    
+    }
   },
   "parameters": {
     "resourceGroupNameParameter": {
@@ -8896,7 +8897,7 @@
       "description": "The resource id of the restorable SQL database."
     },
     "restorableMongodbDatabaseRidParameter": {
-      "name": "restorableMongoDatabaseRid",
+      "name": "restorableMongodbDatabaseRid",
       "in": "query",
       "required": true,
       "type": "string",
