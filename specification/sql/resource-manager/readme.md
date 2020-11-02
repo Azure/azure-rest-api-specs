@@ -213,6 +213,7 @@ input-file:
 - Microsoft.Sql/preview/2017-10-01-preview/managedDatabaseVulnerabilityAssessmentScans.json
 - Microsoft.Sql/preview/2017-10-01-preview/managedDatabaseVulnerabilityAssessments.json
 - Microsoft.Sql/preview/2017-10-01-preview/instanceFailoverGroups.json
+- Microsoft.Sql/preview/2017-10-01-preview/shortTermRetentionPolicies.json
 - Microsoft.Sql/preview/2017-10-01-preview/TdeCertificates.json
 - Microsoft.Sql/preview/2017-10-01-preview/ManagedInstanceTdeCertificates.json
 - Microsoft.Sql/preview/2017-10-01-preview/ManagedInstanceKeys.json
@@ -238,7 +239,6 @@ input-file:
 - Microsoft.Sql/preview/2019-06-01-preview/syncGroups.json
 - Microsoft.Sql/preview/2019-06-01-preview/syncMembers.json
 - Microsoft.Sql/preview/2019-06-01-preview/FailoverManagedInstance.json
-- Microsoft.Sql/preview/2020-02-02-preview/shortTermRetentionPolicies.json
 - Microsoft.Sql/preview/2020-02-02-preview/managedDatabases.json
 - Microsoft.Sql/preview/2020-02-02-preview/ServerAzureADOnlyAuthentications.json
 - Microsoft.Sql/preview/2020-02-02-preview/managedInstances.json
@@ -664,7 +664,7 @@ input-file:
 # Needed when there is more than one input file
 override-info:
   title: SqlManagementClient
-```
+  ```
 
 ### Tag: package-pure-2018-06-preview
 
