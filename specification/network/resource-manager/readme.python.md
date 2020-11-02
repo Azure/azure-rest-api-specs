@@ -114,6 +114,7 @@ output-folder: $(python-sdks-folder)/network/azure-mgmt-network/azure/mgmt/netwo
 python:
   namespace: azure.mgmt.network.v2020_07_01
   output-folder: $(python-sdks-folder)/network/azure-mgmt-network/azure/mgmt/network/v2020_07_01
+```
 
 ### Tag: package-2020-06 and python
 
