@@ -32,6 +32,22 @@
         "type": "Microsoft.Authorization/roleAssignments",
         "name": "roleassignmentId"
       }
+    },
+    "400": {
+      "body": {
+        "error": {
+          "code": "BadRequest",
+          "message": "Your request was badly formed please correct it and try again"
+        }
+      }
+    },
+    "409": {
+      "body": {
+        "error": {
+          "code": "ConflictError",
+          "message": "the request could not be completed due to a conflict with the current state of the target resource"
+        }
+      }
     }
   }
 }
