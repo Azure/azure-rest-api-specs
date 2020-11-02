@@ -1532,6 +1532,11 @@
                 "x-ms-client-name": "Continuation",
                 "description": "When deleting a directory, the number of paths that are deleted with each invocation is limited.  If the number of paths to be deleted exceeds this limit, a continuation token is returned in this response header.  When a continuation token is returned in the response, it must be specified in a subsequent invocation of the delete operation to continue deleting the directory.",
                 "type": "string"
+              },
+              "x-ms-deletion-id": {
+                "x-ms-client-name": "DeletionId",
+                "description": "Returned only for hierarchical namespace space enabled accounts when soft delete is enabled. A unique identifier for the entity that can be used to restore it. See the Undelete REST API for more information.",
+                "type": "string"
               }
             }
           },
