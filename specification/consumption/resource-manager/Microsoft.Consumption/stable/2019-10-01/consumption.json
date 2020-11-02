@@ -792,6 +792,9 @@
           },
           "ReservationSummariesMonthlyWithBillingProfileId": {
             "$ref": "./examples/ReservationSummariesMonthlyWithBillingProfileId.json"
+          },
+          "ReservationSummariesMonthlyWithBillingProfileIdReservationId": {
+            "$ref": "./examples/ReservationSummariesMonthlyWithBillingProfileIdReservationId.json"
           }
         },
         "parameters": [
@@ -823,6 +826,22 @@
             "in": "query",
             "required": false,
             "type": "string"
+          },
+          {
+            "name": "reservationId",
+            "in": "query",
+            "description": "Reservation Id GUID. Only valid if reservationOrderId is also provided. Filter to a specific reservation",
+            "required": false,
+            "type": "string",
+            "x-ms-parameter-location": "method"
+          },
+          {
+            "name": "reservationOrderId",
+            "in": "query",
+            "description": "Reservation Order Id GUID. Required if reservationId is provided. Filter to a specific reservation order",
+            "required": false,
+            "type": "string",
+            "x-ms-parameter-location": "method"
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
@@ -868,7 +887,7 @@
           },
           {
             "name": "$filter",
-            "description": "Filter reservation details by date range. The properties/UsageDate for start date and end date. The filter supports 'le' and  'ge' ",
+            "description": "Filter reservation details by date range. The properties/UsageDate for start date and end date. The filter supports 'le' and  'ge'",
             "in": "query",
             "required": true,
             "type": "string"
@@ -964,6 +983,9 @@
           },
           "ReservationDetailsByBillingProfileId": {
             "$ref": "./examples/ReservationDetailsByBillingProfileId.json"
+          },
+          "ReservationDetailsByBillingProfileIdReservationId": {
+            "$ref": "./examples/ReservationDetailsByBillingProfileIdReservationId.json"
           }
         },
         "parameters": [
@@ -992,6 +1014,22 @@
             "in": "query",
             "required": false,
             "type": "string"
+          },
+          {
+            "name": "reservationId",
+            "in": "query",
+            "description": "Reservation Id GUID. Only valid if reservationOrderId is also provided. Filter to a specific reservation",
+            "required": false,
+            "type": "string",
+            "x-ms-parameter-location": "method"
+          },
+          {
+            "name": "reservationOrderId",
+            "in": "query",
+            "description": "Reservation Order Id GUID. Required if reservationId is provided. Filter to a specific reservation order",
+            "required": false,
+            "type": "string",
+            "x-ms-parameter-location": "method"
           },
           {
             "$ref": "#/parameters/apiVersionParameter"

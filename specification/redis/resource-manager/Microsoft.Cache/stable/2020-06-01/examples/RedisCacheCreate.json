@@ -1,0 +1,178 @@
+{
+  "parameters": {
+    "name": "cache1",
+    "resourceGroupName": "rg1",
+    "api-version": "2020-06-01",
+    "subscriptionId": "subid",
+    "parameters": {
+      "location": "West US",
+      "zones": [
+        "1"
+      ],
+      "properties": {
+        "sku": {
+          "name": "Premium",
+          "family": "P",
+          "capacity": 1
+        },
+        "enableNonSslPort": true,
+        "shardCount": 2,
+        "replicasPerMaster": 2,
+        "redisConfiguration": {
+          "maxmemory-policy": "allkeys-lru"
+        },
+        "subnetId": "/subscriptions/subid/resourceGroups/rg2/providers/Microsoft.Network/virtualNetworks/network1/subnets/subnet1",
+        "staticIP": "192.168.0.5",
+        "minimumTlsVersion": "1.2"
+      }
+    }
+  },
+  "responses": {
+    "201": {
+      "body": {
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Cache/Redis/cache1",
+        "location": "West US",
+        "zones": [
+          "1"
+        ],
+        "name": "cache1",
+        "type": "Microsoft.Cache/Redis",
+        "tags": {},
+        "properties": {
+          "accessKeys": {
+            "primaryKey": "secretkey1",
+            "secondaryKey": "secretKey2"
+          },
+          "provisioningState": "Succeeded",
+          "redisVersion": "3.0",
+          "sku": {
+            "name": "Premium",
+            "family": "P",
+            "capacity": 1
+          },
+          "enableNonSslPort": false,
+          "replicasPerMaster": 2,
+          "redisConfiguration": {
+            "maxmemory-policy": "allkeys-lru"
+          },
+          "hostName": "cache1.redis.cache.windows.net",
+          "port": 6379,
+          "sslPort": 6380,
+          "minimumTlsVersion": "1.2",
+          "instances": [
+            {
+              "sslPort": 15000,
+              "nonSslPort": 13000,
+              "zone": "1",
+              "shardId": 0
+            },
+            {
+              "sslPort": 15001,
+              "nonSslPort": 13001,
+              "zone": "1",
+              "shardId": 0
+            },
+            {
+              "sslPort": 15002,
+              "nonSslPort": 13002,
+              "zone": "1",
+              "shardId": 0
+            },
+            {
+              "sslPort": 15003,
+              "nonSslPort": 13003,
+              "zone": "1",
+              "shardId": 1
+            },
+            {
+              "sslPort": 15004,
+              "nonSslPort": 13004,
+              "zone": "1",
+              "shardId": 1
+            },
+            {
+              "sslPort": 15005,
+              "nonSslPort": 13005,
+              "zone": "1",
+              "shardId": 1
+            }
+          ]
+        }
+      }
+    },
+    "200": {
+      "body": {
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Cache/Redis/cache1",
+        "location": "West US",
+        "zones": [
+          "1"
+        ],
+        "name": "cache1",
+        "type": "Microsoft.Cache/Redis",
+        "tags": {},
+        "properties": {
+          "accessKeys": {
+            "primaryKey": "secretkey1",
+            "secondaryKey": "secretKey2"
+          },
+          "provisioningState": "Succeeded",
+          "redisVersion": "3.0",
+          "sku": {
+            "name": "Premium",
+            "family": "P",
+            "capacity": 1
+          },
+          "enableNonSslPort": false,
+          "replicasPerMaster": 2,
+          "redisConfiguration": {
+            "maxclients": "1000",
+            "maxmemory-reserved": "50",
+            "maxmemory-delta": "50"
+          },
+          "hostName": "cache1.redis.cache.windows.net",
+          "port": 6379,
+          "sslPort": 6380,
+          "minimumTlsVersion": "1.2",
+          "instances": [
+            {
+              "sslPort": 15000,
+              "nonSslPort": 13000,
+              "zone": "1",
+              "shardId": 0
+            },
+            {
+              "sslPort": 15001,
+              "nonSslPort": 13001,
+              "zone": "1",
+              "shardId": 0
+            },
+            {
+              "sslPort": 15002,
+              "nonSslPort": 13002,
+              "zone": "1",
+              "shardId": 0
+            },
+            {
+              "sslPort": 15003,
+              "nonSslPort": 13003,
+              "zone": "1",
+              "shardId": 1
+            },
+            {
+              "sslPort": 15004,
+              "nonSslPort": 13004,
+              "zone": "1",
+              "shardId": 1
+            },
+            {
+              "sslPort": 15005,
+              "nonSslPort": 13005,
+              "zone": "1",
+              "shardId": 1
+            }
+          ]
+        }
+      }
+    }
+  }
+}

@@ -140,7 +140,17 @@ We request OpenAPI(Swagger) spec authoring be assigned to engineers who have an
 | [R2007](#r2007) | [LongRunningOperationsWithLongRunningExtension](#r2007) | ARM OpenAPI(swagger) specs |
 | [R2029](#r2029) | [PageableOperation](#r2029) | ARM and Data plane OpenAPI(swagger) specs |
 | [R4006](#r4006) | [DeprecatedXmsCodeGenerationSetting](#r4006) | ARM and Data plane OpenAPI(swagger) specs |
-  
+| [R4024](#r4024) | [PreviewVersionOverOneYear](#r4024) | ARM OpenAPI(swagger) specs |
+
+
+### RPaaS Violations
+
+#### RPaaS Errors
+
+| Id | Rule Name | Applies to |
+| --- | --- | --- |
+| [R4023](#r4023) | [RPaasPutLongRunningOperation201Only](#r4023) | ARM OpenAPI(swagger) specs |
+
 ### Documentation
 
 #### Documentation Errors
@@ -1423,7 +1433,7 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 
 **Applies to** : ARM OpenAPI(swagger) specs
 
-**Output Message**: Top level properties should be one of name, type, id, location, properties, tags, plan, sku, etag, managedBy, identity, systemData. Model definition '{0}' has extra properties ['{1}'].
+**Output Message**: Top level properties should be one of name, type, id, location, properties, tags, plan, sku, etag, managedBy, identity, systemData, extendedlocation. Model definition '{0}' has extra properties ['{1}'].
 
 **Description**: Per [ARM guidelines](https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/resource-api-reference.md), top level properties of a resource should be only ones from the allowed set.
 
@@ -1681,7 +1691,7 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 **Output Message**: Properties of a PATCH request body must not be {0}. PATCH operation: '{1}' Model Definition: '{2}' Property: '{3}'
 
 **Description**: A request parameter of the Patch Operation must not have a required/default value.
-But it's allowed when all required properties are marked as discriminator, because the discriminator must be required.
+But it's allowed when the only required properties is marked as discriminator, because the discriminator must be required.
 
 **CreatedAt** : N/A
 
@@ -1985,7 +1995,7 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 
 ### <a name="r3021" ></a>R3021 PathResourceTypeNameCamelCase
 
-**Category** : ARM Warning
+**Category** : ARM Error
 
 **Applies to** : ARM and Data Plane OpenAPI(swagger) specs
 
@@ -2890,3 +2900,73 @@ The following response is a good example:
 ...
 ```
 Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [ARM](#arm-violations): [Errors](#arm-errors) or [Warnings](#arm-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
+
+### <a name="r4023" ></a>R4023 RPaasPutLongRunningOperation201Only
+
+**Category** : RPaaS Error
+
+**Applies to** : ARM OpenAPI(swagger) specs
+
+**Output Message** : [RPaaS] Only 201 is the supported response code for PUT async response
+
+**Description** : An async PUT operation response include status code 201 with Azure-async-operation header. Must also support status code 200, for simple updates that can be completed synchronously (ex: tags). Operation must also add "x-ms-long-running-operation and x-ms-long-running-operation-options" to describe how the long running operation is tracked.
+
+**CreatedAt**: August 10, 2020
+
+**LastModifiedAt**: August 10, 2020
+
+**Why this rule is important**: RPaaS only supports 201 for async operations. This is enforced at runtime via swagger validation.
+
+**How to fix the violation**: Add the following for async PUT operations.
+
+The following would be valid:
+
+```json
+...
+  "responses": {
+      "201": {
+        "description": "Created",
+        "schema": {
+          "$ref": "#/definitions/MySimpleObject"
+        }
+      },
+      "200": {
+        "description": "Succeeded",
+        "schema": {
+          "$ref": "#/definitions/MySimpleObject"
+        }
+      },
+      "default": {
+        "description": "Error response describing why the operation failed.",
+        "schema": {
+          "$ref": "#/definitions/ErrorResponse"
+        }
+      }
+    },
+    "x-ms-long-running-operation": true,
+    "x-ms-long-running-operation-options": {
+      "final-state-via": "azure-async-operation"
+  }
+...
+```
+Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [ARM](#arm-violations): [Errors](#arm-errors) or [Warnings](#arm-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
+
+### <a name="r4024" ></a>R4024 PreviewVersionOverOneYear
+
+**Category** : SDK Warning
+
+**Applies to** : ARM OpenAPI(swagger) specs
+
+**Output Message** : The API version:{api-version} having been in a preview state over one year , please move to GA or retire.
+
+**Description** : Per [Retirement-of-Previews](https://dev.azure.com/msazure/AzureWiki/_wiki/wikis/AzureWiki.wiki/37683/Retirement-of-Previews), service, feature, API, and SKU in preview for over one year need to move to GA or retire.
+
+**CreatedAt**: Sep 8, 2020
+
+**LastModifiedAt**: Sep 8, 2020
+
+**How to fix the violation**: 
+   Consider retiring or moving to GA. 
+   
+Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [ARM](#arm-violations): [Errors](#arm-errors) or [Warnings](#arm-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
+
