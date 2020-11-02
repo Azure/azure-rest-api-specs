@@ -493,11 +493,7 @@
             "x-nullable": false
           },
           {
-            "name": "locale",
-            "in": "query",
-            "description": "Locale of the business card. Supported locales include: en-AU, en-CA, en-GB, en-IN, en-US(default).",
-            "required": false,
-            "type": "string"
+            "$ref": "#/parameters/Locale"
           },
           {
             "$ref": "#/parameters/FileStream"
@@ -595,11 +591,7 @@
             "x-nullable": false
           },
           {
-            "name": "locale",
-            "in": "query",
-            "description": "Locale of the invoice. Supported locales include: en-AU, en-CA, en-GB, en-IN, en-US(default).",
-            "required": false,
-            "type": "string"
+            "$ref": "#/parameters/Locale"
           },
           {
             "$ref": "#/parameters/FileStream"
@@ -697,11 +689,7 @@
             "x-nullable": false
           },
           {
-            "name": "locale",
-            "in": "query",
-            "description": "Locale of the receipt. Supported locales include: en-AU, en-CA, en-GB, en-IN, en-US(default).",
-            "required": false,
-            "type": "string"
+            "$ref": "#/parameters/Locale"
           },
           {
             "$ref": "#/parameters/FileStream"
@@ -2148,6 +2136,20 @@
         "type": "string",
         "pattern": "(^[0-9]+-[0-9]+$)|(^[0-9]+$)"
       }
+    },
+    "Locale": {
+      "name": "locale",
+      "in": "query",
+      "description": "Locale of the input document. Supported locales include: en-AU, en-CA, en-GB, en-IN, en-US(default).",
+      "required": false,
+      "type": "string",
+      "enum": [
+        "en-AU",
+        "en-CA",
+        "en-GB",
+        "en-IN",
+        "en-US"
+      ]
     }
   }
 }
