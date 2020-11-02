@@ -3379,11 +3379,8 @@
         }
       }
     },
-    "ManagementCluster": {
-      "description": "The properties of a default cluster",
-      "required": [
-        "clusterSize"
-      ],
+    "CommonClusterProperties": {
+      "description": "The common properties of a cluster",
       "properties": {
         "provisioningState": {
           "description": "The state of the cluster provisioning",
@@ -3422,17 +3419,36 @@
         }
       }
     },
-    "ClusterProperties": {
-      "description": "The properties of a cluster",
+    "ManagementCluster": {
+      "description": "The properties of a management cluster",
+      "required": [
+        "clusterSize"
+      ],
       "allOf": [
         {
-          "$ref": "#/definitions/ManagementCluster"
+          "$ref": "#/definitions/CommonClusterProperties"
         }
       ],
       "properties": {
         "storagePolicy": {
           "description": "The storage policy of the cluster",
-          "$ref": "#/definitions/StoragePolicy"
+          "$ref": "#/definitions/StoragePolicy",
+          "readOnly": true
+        }
+      }
+    },
+    "ClusterProperties": {
+      "description": "The properties of a cluster",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CommonClusterProperties"
+        }
+      ],
+      "properties": {
+        "storagePolicy": {
+          "description": "The storage policy of the cluster",
+          "$ref": "#/definitions/StoragePolicy",
+          "readOnly": false
         }
       }
     },
