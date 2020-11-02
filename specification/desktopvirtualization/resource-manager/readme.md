@@ -24,7 +24,6 @@ These are the global settings for the DesktopVirtualizationClient API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2020-10-19-preview
 tag: package-2020-11-02-preview
 ```
 
