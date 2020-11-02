@@ -7,6 +7,7 @@ These settings apply only when `--azureresourceschema` is specified on the comma
 ``` yaml $(azureresourceschema) && $(multiapi)
 batch:
   - tag: schema-operationalinsights-2020-08-01
+  - tag: schema-operationalinsights-2020-10-01
   - tag: schema-operationalinsights-2020-03-01-preview
   - tag: schema-operationalinsights-2019-08-01-preview
   - tag: schema-operationalinsights-2015-11-01-preview
@@ -42,6 +43,18 @@ input-file:
   - Microsoft.OperationalInsights/stable/2020-08-01/Schema.json
   - Microsoft.OperationalInsights/stable/2020-08-01/WorkspacePurge.json
   - Microsoft.OperationalInsights/stable/2020-08-01/Tables.json
+
+```
+
+### Tag: schema-operationalinsights-2020-10-01 and azureresourceschema
+
+``` yaml $(tag) == 'schema-operationalinsights-2020-10-01' && $(azureresourceschema)
+output-folder: $(azureresourceschema-folder)/schemas
+
+# all the input files in this apiVersion
+input-file:
+  - Microsoft.OperationalInsights/stable/2020-10-01/Clusters.json
+  - Microsoft.OperationalInsights/stable/2020-10-01/Operations.json
 
 ```
 
