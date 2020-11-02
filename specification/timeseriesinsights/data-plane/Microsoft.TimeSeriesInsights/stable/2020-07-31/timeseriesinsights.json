@@ -1530,7 +1530,7 @@
           }
         },
         "instanceFields": {
-          "description": "Set of key-value pairs that contain user-defined instance properties. May be null.",
+          "description": "Set of key-value pairs that contain user-defined instance properties. It may be null. Supported property value types are: bool, string, long, double and it cannot be nested or null.",
           "type": "object",
           "additionalProperties": {}
         }
@@ -1556,14 +1556,14 @@
           }
         },
         "update": {
-          "description": "Time series instances to be updated onlRequest to perform a single operation on a batch of instances. y. If instance does not exist, an error is returned.",
+          "description": "Time series instance to be updated. If instance does not exist, an error is returned.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/TimeSeriesInstance"
           }
         },
         "delete": {
-          "description": "Time series IDs or names of time series instances to delete.",
+          "description": "Time series instances to be deleted. Time series ID or name may be specified.",
           "$ref": "#/definitions/InstancesRequestBatchGetOrDelete"
         }
       }
