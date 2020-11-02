@@ -16,48 +16,6 @@
     "application/json"
   ],
   "paths": {
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/inaccessibleManagedDatabases": {
-      "get": {
-        "tags": [
-          "ManagedDatabases"
-        ],
-        "description": "Gets a list of inaccessible managed databases in a managed instance",
-        "operationId": "ManagedDatabases_ListInaccessibleByInstance",
-        "parameters": [
-          {
-            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
-          },
-          {
-            "$ref": "#/parameters/ManagedInstanceNameParameter"
-          },
-          {
-            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successfully retrieved the list of inaccessible managed databases in a managed instance.",
-            "schema": {
-              "$ref": "#/definitions/ManagedDatabaseListResult"
-            }
-          },
-          "default": {
-            "description": "*** Error Responses: ***\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription."
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
-        "x-ms-examples": {
-          "List inaccessible managed databases by managed instances": {
-            "$ref": "./examples/InaccessibleManagedDatabaseListByManagedInstance.json"
-          }
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/databases": {
       "get": {
         "tags": [
@@ -416,6 +374,48 @@
         "x-ms-examples": {
           "Export a managed database.": {
             "$ref": "./examples/ExportManagedDatabase.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/inaccessibleManagedDatabases": {
+      "get": {
+        "tags": [
+          "ManagedDatabases"
+        ],
+        "description": "Gets a list of inaccessible managed databases in a managed instance",
+        "operationId": "ManagedDatabases_ListInaccessibleByInstance",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ManagedInstanceNameParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the list of inaccessible managed databases in a managed instance.",
+            "schema": {
+              "$ref": "#/definitions/ManagedDatabaseListResult"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription."
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List inaccessible managed databases by managed instances": {
+            "$ref": "./examples/InaccessibleManagedDatabaseListByManagedInstance.json"
           }
         }
       }
