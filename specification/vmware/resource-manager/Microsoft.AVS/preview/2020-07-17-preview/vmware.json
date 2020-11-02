@@ -3385,6 +3385,22 @@
         "clusterSize"
       ],
       "properties": {
+        "provisioningState": {
+          "description": "The state of the cluster provisioning",
+          "type": "string",
+          "readOnly": true,
+          "enum": [
+            "Succeeded",
+            "Failed",
+            "Cancelled",
+            "Deleting",
+            "Updating"
+          ],
+          "x-ms-enum": {
+            "name": "ClusterProvisioningState",
+            "modelAsString": true
+          }
+        },
         "clusterSize": {
           "description": "The cluster size",
           "type": "integer",
@@ -3414,22 +3430,6 @@
         }
       ],
       "properties": {
-        "provisioningState": {
-          "description": "The state of the cluster provisioning",
-          "type": "string",
-          "readOnly": true,
-          "enum": [
-            "Succeeded",
-            "Failed",
-            "Cancelled",
-            "Deleting",
-            "Updating"
-          ],
-          "x-ms-enum": {
-            "name": "ClusterProvisioningState",
-            "modelAsString": true
-          }
-        },
         "storagePolicy": {
           "description": "The storage policy of the cluster",
           "$ref": "#/definitions/StoragePolicy"
