@@ -476,7 +476,8 @@
           "application/json",
           "image/jpeg",
           "image/png",
-          "image/tiff"
+          "image/tiff",
+          "image/bmp"
         ],
         "produces": [
           "application/json"
@@ -577,7 +578,8 @@
           "application/json",
           "image/jpeg",
           "image/png",
-          "image/tiff"
+          "image/tiff",
+          "image/bmp"
         ],
         "produces": [
           "application/json"
@@ -678,7 +680,8 @@
           "application/json",
           "image/jpeg",
           "image/png",
-          "image/tiff"
+          "image/tiff",
+          "image/bmp"
         ],
         "produces": [
           "application/json"
@@ -775,11 +778,33 @@
         "description": "Extract text and layout information from a given document. The input document must be of one of the supported content types - 'application/pdf', 'image/jpeg', 'image/png', 'image/tiff' or 'image/bmp'. Alternatively, use 'application/json' type to specify the location (Uri or local path) of the document to be analyzed.",
         "operationId": "AnalyzeLayoutAsync",
         "consumes": [
+          "application/pdf",
+          "application/json",
+          "image/jpeg",
+          "image/png",
+          "image/tiff",
+          "image/bmp"
         ],
         "produces": [
           "application/json"
         ],
         "parameters": [
+          {
+            "name": "language",
+            "in": "query",
+            "description": "The BCP-47 language code of the text in the document. Currently, only English ('en'), Dutch (‘nl’), French (‘fr’), German (‘de’), Italian (‘it’), Portuguese (‘pt'), simplified Chinese ('zh-Hans') and Spanish ('es') are supported (print – nine languages and handwritten – English only). Layout supports auto language identification and multilanguage documents, so only provide a language code if you would like to force the documented to be processed as that specific language.",
+            "type": "string",
+            "enum": [
+              "de",
+              "en",
+              "es",
+              "fr",
+              "it",
+              "nl",
+              "pt",
+              "zh-Hans"
+            ]
+          },
           {
             "$ref": "#/parameters/FileStream"
           },
@@ -1611,6 +1636,10 @@
           "items": {
             "$ref": "#/definitions/TextWord"
           }
+        },
+        "appearance": {
+          "description": "Text appearance properties.",
+          "$ref": "#/definitions/Appearance"
         }
       }
     },
@@ -1633,10 +1662,6 @@
         "confidence": {
           "description": "Confidence value.",
           "$ref": "#/definitions/Confidence"
-        },
-        "appearance": {
-          "description": "Text appearance properties.",
-          "$ref": "#/definitions/Appearance"
         }
       }
     },
@@ -1791,7 +1816,8 @@
       "required": [
         "rows",
         "columns",
-        "cells"
+        "cells",
+        "boundingBox"
       ],
       "properties": {
         "rows": {
@@ -1812,6 +1838,10 @@
           "items": {
             "$ref": "#/definitions/DataTableCell"
           }
+        },
+        "boundingBox": {
+          "description": "Bounding box of the table.",
+          "$ref": "#/definitions/BoundingBox"
         }
       }
     },
@@ -1916,7 +1946,7 @@
           }
         },
         "docTypeConfidence": {
-          "description": "Confidence score.",
+          "description": "Predicted document type confidence.",
           "$ref": "#/definitions/Confidence"
         },
         "fields": {
