@@ -35,7 +35,7 @@ These settings apply only when `--tag=package-2020-11-privatePreview` is specifi
 ``` yaml $(tag) == 'package-2020-11-privatePreview'
 input-file:
 - Microsoft.Billing/privatePreview/2020-11-01-privatePreview/billing.json
-
+```
 
 ### Tag: package-2020-05
 
