@@ -1161,9 +1161,18 @@
           "minimum": 0,
           "maximum": 1
         },
-        "publicIpRequested": {
-          "type": "boolean",
-          "description": "If public IP is requested or not for server."
+        "publicNetworkAccess": {
+          "type": "string",
+          "description": "public network access is enabled or not",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "ServerPublicNetworkAccessState",
+            "modelAsString": true
+          },
+          "readOnly": true
         }
       }
     },
