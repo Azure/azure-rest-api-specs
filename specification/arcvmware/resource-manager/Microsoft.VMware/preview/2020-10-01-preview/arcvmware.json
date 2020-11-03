@@ -1959,8 +1959,7 @@
     "ResourcePoolProperties": {
       "description": "Defines the resource properties.",
       "required": [
-        "moRefId",
-        "vCenterId"
+        "moRefId"
       ],
       "type": "object",
       "properties": {
@@ -2032,8 +2031,7 @@
       "description": "Define the resourcePool.",
       "required": [
         "location",
-        "properties",
-        "extendedLocation"
+        "properties"
       ],
       "type": "object",
       "x-ms-azure-resource": true,
@@ -2124,8 +2122,7 @@
     "VCenterProperties": {
       "description": "Defines the resource properties.",
       "required": [
-        "fqdn",
-        "credentials"
+        "fqdn"
       ],
       "type": "object",
       "properties": {
@@ -2168,14 +2165,6 @@
         "credentials": {
           "description": "Username / Password Credentials to connect to vcenter.",
           "$ref": "#/definitions/VICredential"
-        },
-        "conditions": {
-          "description": "Defines a list of readiness conditions for the vcenter.",
-          "type": "object",
-          "additionalProperties": {
-            "$ref": "#/definitions/Condition"
-          },
-          "readOnly": true
         },
         "provisioningState": {
           "description": "Gets or sets the provisioning state.",
@@ -2290,8 +2279,7 @@
       "description": "Defines the vCenter.",
       "required": [
         "location",
-        "properties",
-        "extendedLocation"
+        "properties"
       ],
       "type": "object",
       "x-ms-azure-resource": true,
@@ -2590,17 +2578,8 @@
     },
     "VirtualMachineProperties": {
       "description": "Defines the resource properties.",
-      "required": [
-        "resourcePoolId",
-        "templateId"
-      ],
       "type": "object",
       "properties": {
-        "uuid": {
-          "description": "Gets or sets a unique identifier for this resource.",
-          "type": "string",
-          "readOnly": true
-        },
         "resourcePoolId": {
           "description": "Gets or sets the ARM Id of the resourcePool resource on which this virtual machine will\r\ndeploy.",
           "type": "string"
@@ -2658,14 +2637,6 @@
           "type": "string",
           "readOnly": true
         },
-        "conditions": {
-          "description": "Defines a list of readiness conditions for the vm.",
-          "type": "object",
-          "additionalProperties": {
-            "$ref": "#/definitions/Condition"
-          },
-          "readOnly": true
-        },
         "provisioningState": {
           "description": "Gets or sets the provisioning state.",
           "type": "string",
@@ -2677,8 +2648,7 @@
       "description": "Define the virtualMachine.",
       "required": [
         "location",
-        "properties",
-        "extendedLocation"
+        "properties"
       ],
       "type": "object",
       "x-ms-azure-resource": true,
@@ -2792,8 +2762,7 @@
     "VirtualMachineTemplateProperties": {
       "description": "Defines the resource properties.",
       "required": [
-        "moRefId",
-        "vCenterId"
+        "moRefId"
       ],
       "type": "object",
       "properties": {
@@ -2880,8 +2849,7 @@
       "description": "Define the virtualMachineTemplate.",
       "required": [
         "location",
-        "properties",
-        "extendedLocation"
+        "properties"
       ],
       "type": "object",
       "x-ms-azure-resource": true,
@@ -2953,8 +2921,7 @@
     "VirtualNetworkProperties": {
       "description": "Defines the resource properties.",
       "required": [
-        "moRefId",
-        "vCenterId"
+        "moRefId"
       ],
       "type": "object",
       "properties": {
@@ -2992,8 +2959,7 @@
       "description": "Define the virtualNetwork.",
       "required": [
         "location",
-        "properties",
-        "extendedLocation"
+        "properties"
       ],
       "type": "object",
       "x-ms-azure-resource": true,
