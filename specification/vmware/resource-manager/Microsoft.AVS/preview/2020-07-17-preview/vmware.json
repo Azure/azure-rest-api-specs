@@ -194,52 +194,6 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.AVS/locations/{location}/defaultStoragePolicies": {
-      "post": {
-        "tags": [
-          "Locations"
-        ],
-        "description": "Lists all of the available storage policies",
-        "operationId": "Locations_ListDefaultStoragePolicies",
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "name": "location",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "Azure region"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Request has succeeded",
-            "schema": {
-              "$ref": "#/definitions/StoragePolicyList"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Operations_List": {
-            "$ref": "./examples/DefaultStoragePolicies_List.json"
-          }
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.AVS/locations/{location}/checkTrialAvailability": {
       "post": {
         "tags": [
@@ -3372,10 +3326,6 @@
           "description": "The cluster size",
           "type": "integer",
           "format": "int32"
-        },
-        "storagePolicy": {
-          "description": "The storage policy of the cluster",
-          "$ref": "#/definitions/StoragePolicy"
         }
       }
     },
@@ -3428,14 +3378,7 @@
         {
           "$ref": "#/definitions/CommonClusterProperties"
         }
-      ],
-      "properties": {
-        "storagePolicy": {
-          "description": "The storage policy of the cluster",
-          "$ref": "#/definitions/StoragePolicy",
-          "readOnly": true
-        }
-      }
+      ]
     },
     "ClusterProperties": {
       "description": "The properties of a cluster",
@@ -3444,13 +3387,7 @@
           "$ref": "#/definitions/CommonClusterProperties"
         }
       ],
-      "properties": {
-        "storagePolicy": {
-          "description": "The storage policy of the cluster",
-          "$ref": "#/definitions/StoragePolicy",
-          "readOnly": false
-        }
-      }
+      "properties": {}
     },
     "PrivateCloudList": {
       "description": "A paged list of private clouds",
@@ -3526,28 +3463,6 @@
       "required": [
         "name"
       ]
-    },
-    "StoragePolicy": {
-      "description": "The storage policy for the cluster",
-      "type": "string"
-    },
-    "StoragePolicyList": {
-      "description": "A list of available storage policies",
-      "properties": {
-        "value": {
-          "description": "The total storage policies",
-          "type": "array",
-          "readOnly": true,
-          "items": {
-            "$ref": "#/definitions/StoragePolicy"
-          }
-        },
-        "nextLink": {
-          "description": "URL to get the next page if any",
-          "type": "string",
-          "readOnly": true
-        }
-      }
     },
     "HcxEnterpriseSiteList": {
       "description": "A paged list of HCX Enterprise Sites",
