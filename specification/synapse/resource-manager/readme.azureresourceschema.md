@@ -23,7 +23,7 @@ input-file:
   - Microsoft.Synapse/preview/2020-04-01-preview/operations.json
   - Microsoft.Synapse/preview/2020-04-01-preview/sqlPool.json
   - Microsoft.Synapse/preview/2020-04-01-preview/sqlDatabase.json
-
+  - Microsoft.Synapse/preview/2020-04-01-preview/workspace.json
 ```
 
 ### Tag: schema-synapse-2019-06-01-preview and azureresourceschema
@@ -43,5 +43,5 @@ input-file:
   - Microsoft.Synapse/preview/2019-06-01-preview/privateLinkResources.json
   - Microsoft.Synapse/preview/2019-06-01-preview/privateEndpointConnections.json
   - Microsoft.Synapse/preview/2019-06-01-preview/privatelinkhub.json
-
+  - Microsoft.Synapse/preview/2019-06-01-preview/gitintegration.json
 ```
