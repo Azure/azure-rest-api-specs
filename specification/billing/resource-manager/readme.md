@@ -28,13 +28,13 @@ These are the global settings for the Billing API.
 openapi-type: arm
 tag: package-2020-05
 ```
-### Tag: package-2020-11-privatePreview
+### Tag: package-2020-11-privatepreview
 
-These settings apply only when `--tag=package-2020-11-privatePreview` is specified on the command line.
+These settings apply only when `--tag=package-2020-11-privatepreview` is specified on the command line.
 
-``` yaml $(tag) == 'package-2020-11-privatePreview'
+``` yaml $(tag) == 'package-2020-11-privatepreview'
 input-file:
-- Microsoft.Billing/privatePreview/2020-11-01-privatePreview/billing.json
+- Microsoft.Billing/privatepreview/2020-11-01-privatepreview/billing.json
 ```
 
 ### Tag: package-2020-05
