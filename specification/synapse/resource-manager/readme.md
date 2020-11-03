@@ -58,7 +58,7 @@ These settings apply only when `--tag=package-sqlGen3-2020-04-01-preview` is spe
 input-file:
 - Microsoft.Synapse/preview/2020-04-01-preview/operations.json
 - Microsoft.Synapse/preview/2020-04-01-preview/sqlPool.json
-- Microsoft.Synapse/preview/2020-04-01-preview/sqlDatabase.json
+- Microsoft.Synapse/preview/2020-04-01-preview/sqlDatabase.json	
 ```
 
 ## Suppressions
