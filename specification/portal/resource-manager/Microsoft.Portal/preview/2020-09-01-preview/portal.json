@@ -213,6 +213,9 @@
               "$ref": "#/definitions/Dashboard"
             }
           },
+          "404": {
+            "description": "Not found. Dashboard with provided id doesn't exist."
+          },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
@@ -267,6 +270,9 @@
             "schema": {
               "$ref": "#/definitions/Dashboard"
             }
+          },
+          "404": {
+            "description": "Not found. Dashboard with provided id doesn't exist."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -700,7 +706,7 @@
       "properties": {
         "code": {
           "description": "Service specific error code which serves as the substatus for the HTTP error code.",
-          "type": "string",
+          "type": "integer",
           "readOnly": true
         },
         "message": {
