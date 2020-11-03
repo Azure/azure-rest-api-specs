@@ -6,19 +6,18 @@ These settings apply only when `--azureresourceschema` is specified on the comma
 
 ``` yaml $(azureresourceschema) && $(multiapi)
 batch:
-  - tag: schema-yourservicename-YYYY-MM-DD
-
+  - tag: schema-[[ServiceName]]-[[Version]]
+  
 ```
 
 Please also specify `--azureresourceschema-folder=<path to the root directory of your azure-resource-manager-schemas clone>`.
 
-### Tag: schema-yourservicename-YYYY-MM-DD and azureresourceschema
+### Tag: schema-[[ServiceName]]-[[Version]] and azureresourceschema
 
-``` yaml $(tag) == 'schema-yourservicename-YYYY-MM-DD' && $(azureresourceschema)
+``` yaml $(tag) == 'schema-[[ServiceName]]-[[Version]]' && $(azureresourceschema)
 output-folder: $(azureresourceschema-folder)/schemas
 
 # all the input files in this apiVersion
 input-file:
-  - Microsoft.YourServiceName/stable/YYYY-MM-DD/YourServiceName.json
-
+  - [[ResourceProviderName]]/[[ReleaseState]]/[[Version]]/[[ServiceName]].json
 ```
