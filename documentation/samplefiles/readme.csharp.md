@@ -10,6 +10,6 @@ csharp:
   payload-flattening-threshold: 1
   clear-output-folder: true
   client-side-validation: false
-  namespace: Microsoft.YourServiceName
-  output-folder: $(csharp-sdks-folder)/YourServiceName/management/Microsoft.YourServiceName/GeneratedProtocol
+  namespace: [[ResourceProviderName]]
+  output-folder: $(csharp-sdks-folder)/[[ServiceName]]/management/[[ResourceProviderName]]/GeneratedProtocol
 ```
