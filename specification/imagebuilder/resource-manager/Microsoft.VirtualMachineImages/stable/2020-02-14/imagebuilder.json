@@ -934,6 +934,23 @@
         }
       }
     },
+    "ImageTemplateKeyvaultProperties": {
+      "description": "Specifies a key or version of a key in a Keyvault.",
+      "properties": {
+        "keyvaultUri": {
+          "type": "string",
+          "description": "URI of Keyvault."
+        },
+        "keyName": {
+          "type": "string",
+          "description": "Name of Keyvault key."
+        },
+        "keyVersion": {
+          "type": "string",
+          "description": "Version of Keyvault key. Leave empty to always use the latest version of the key."
+        }
+      }
+    },
     "ImageTemplateVmProfile": {
       "description": "Describes the virtual machine used to build, customize and capture images",
       "properties": {
@@ -1066,6 +1083,10 @@
             "$ref": "#/definitions/ImageTemplateDistributor"
           },
           "description": "The distribution targets where the image output needs to go to."
+        },
+        "keyvaultProperties": {
+          "$ref": "#/definitions/ImageTemplateKeyvaultProperties",
+          "description": "Customer Managed Key to be used for second level of encryption. Leave empty to disable second level of encryption."
         },
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
