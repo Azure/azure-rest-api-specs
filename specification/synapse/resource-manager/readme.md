@@ -28,6 +28,7 @@ description: Azure Synapse Analytics Management Client
 openapi-type: arm
 azure-arm: true
 tag: package-2019-06-01-preview
+generate-empty-classes: true
 ```
 
 ### Tag: package-2019-06-01-preview
@@ -78,6 +79,9 @@ directive:
     where: 
         - $.definitions.SqlPoolVulnerabilityAssessmentRuleBaseline
         - $.definitions.DataMaskingPolicy
+        - $.definitions.DataWarehouseUserActivities
+        - $.definitions.SqlPoolConnectionPolicy
+        - $.definitions.TransparentDataEncryption
     suppress: 
         - R4015
     reason: SQL doesn't support 'list' operation everywhere, so we cannot support List for certain Sql pool operations
@@ -87,6 +91,26 @@ directive:
     suppress:
         - R4011
     reason: SQL Pools APIs are proxy APIs that call SQL DB APIs. The SQL DB delete restore points API only supports return method 200, so we cannot support 204. It is not possible for the SQL DB team to add 204 support for delete restore points.
+  - suppress: AllResourcesMustHaveGetOperation
+    from: Microsoft.Synapse/preview/2019-06-01-preview/sqlPool.json
+    where:
+      - $.definitions.DataMaskingRule
+      - $.definitions.SqlPoolOperation
+  - suppress: R4015
+    reason: Needs implmentation
+    from: Microsoft.Synapse/preview/2019-06-01-preview/workspace_managedIdentity.json
+    where:
+      - $.definitions.ManagedIdentitySqlControlSettingsInfo
+  - suppress: R2010
+    reason: x-ms-long-running-operation-options not available in datafactory swagger
+    from: Microsoft.Synapse/preview/2019-06-01-preview/integrationRuntime.json
+  - suppress: AvoidNestedProperties
+    reason: Existing models
+    from: Microsoft.Synapse/preview/2019-06-01-preview/integrationRuntime.json
+    where:
+      - $.definitions.IntegrationRuntimeResource.properties.properties
+      - $.definitions.IntegrationRuntimeStatusResponse.properties.properties
+      - $.definitions.SsisObjectMetadataStatusResponse.properties.properties
 ```
 
 ---
