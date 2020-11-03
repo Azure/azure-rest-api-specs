@@ -58,6 +58,12 @@
             "schema": {
               "$ref": "#/definitions/PermissionGetResult"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
           }
         },
         "x-ms-pageable": {
@@ -120,6 +126,12 @@
             "schema": {
               "$ref": "#/definitions/PermissionGetResult"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
           }
         },
         "x-ms-pageable": {
@@ -165,6 +177,12 @@
             "schema": {
               "$ref": "#/definitions/RoleDefinition"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
           }
         },
         "x-ms-examples": {
@@ -204,6 +222,12 @@
             "description": "OK - Returns information about the role definition.",
             "schema": {
               "$ref": "#/definitions/RoleDefinition"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/Error"
             }
           }
         },
@@ -254,6 +278,12 @@
             "schema": {
               "$ref": "#/definitions/RoleDefinition"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
           }
         },
         "x-ms-examples": {
@@ -296,6 +326,12 @@
             "schema": {
               "$ref": "#/definitions/RoleDefinitionListResult"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
           }
         },
         "x-ms-pageable": {
@@ -337,6 +373,12 @@
             "schema": {
               "$ref": "#/definitions/RoleDefinition"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
           }
         },
         "x-ms-examples": {
@@ -348,6 +390,24 @@
     }
   },
   "definitions": {
+    "Error": {
+      "properties": {
+        "error": {
+          "type": "object",
+          "properties": {
+            "code": {
+              "type": "string",
+              "description": "Brief error code"
+            },
+            "message": {
+              "type": "string",
+              "description": "Longer message explaining the details of the error"
+            }
+          }
+        }
+      },
+      "description": "Object to be thrown in case of an unsuccesful response"
+    },
     "RoleDefinitionFilter": {
       "properties": {
         "roleName": {

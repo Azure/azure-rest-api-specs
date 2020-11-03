@@ -91,6 +91,12 @@
             "schema": {
               "$ref": "#/definitions/RoleAssignmentListResult"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
           }
         },
         "x-ms-pageable": {
@@ -134,6 +140,12 @@
             "description": "OK - Returns an array of role assignments.",
             "schema": {
               "$ref": "#/definitions/RoleAssignmentListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/Error"
             }
           }
         },
@@ -180,6 +192,12 @@
             "description": "OK - Returns information about the role assignment.",
             "schema": {
               "$ref": "#/definitions/RoleAssignment"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/Error"
             }
           }
         },
@@ -230,6 +248,12 @@
             "schema": {
               "$ref": "#/definitions/RoleAssignment"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
           }
         },
         "x-ms-examples": {
@@ -270,6 +294,12 @@
             "schema": {
               "$ref": "#/definitions/RoleAssignment"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
           }
         },
         "x-ms-examples": {
@@ -304,6 +334,12 @@
             "description": "OK - Returns information about the role assignment.",
             "schema": {
               "$ref": "#/definitions/RoleAssignment"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/Error"
             }
           }
         },
@@ -347,6 +383,12 @@
             "schema": {
               "$ref": "#/definitions/RoleAssignment"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
           }
         },
         "x-ms-examples": {
@@ -379,6 +421,12 @@
             "description": "OK - Returns the role assignment.",
             "schema": {
               "$ref": "#/definitions/RoleAssignment"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/Error"
             }
           }
         },
@@ -416,6 +464,12 @@
             "description": "OK - Returns an array of role assignments.",
             "schema": {
               "$ref": "#/definitions/RoleAssignmentListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/Error"
             }
           }
         },
@@ -463,6 +517,12 @@
             "schema": {
               "$ref": "#/definitions/RoleAssignmentListResult"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
           }
         },
         "x-ms-pageable": {
@@ -478,6 +538,24 @@
     }
   },
   "definitions": {
+    "Error": {
+      "properties": {
+        "error": {
+          "type": "object",
+          "properties": {
+            "code": {
+              "type": "string",
+              "description": "Brief error code"
+            },
+            "message": {
+              "type": "string",
+              "description": "Longer message explaining the details of the error"
+            }
+          }
+        }
+      },
+      "description": "Object to be thrown in case of an unsuccesful response"
+    },
     "RoleAssignmentFilter": {
       "properties": {
         "principalId": {
