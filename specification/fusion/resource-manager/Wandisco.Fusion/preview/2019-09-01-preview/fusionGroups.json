@@ -1983,12 +1983,22 @@
               "$ref": "#/definitions/LiveDataMigration"
             }
           },
+          "201": {
+            "description": "Creating LiveDataMigration.",
+            "schema": {
+              "$ref": "#/definitions/LiveDataMigration"
+            }
+          },
           "default": {
             "description": "Error response describing the reason for operation failure.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
         },
         "x-ms-examples": {
           "Create Migration": {
@@ -2778,7 +2788,7 @@
           {
             "$ref": "#/parameters/ApiVersionParameter"
           }
-          ],
+        ],
         "responses": {
           "200": {
             "description": "operationStatus details.",
@@ -3391,7 +3401,9 @@
         },
         "storageAccessKey": {
           "x-ms-secret": true,
-          "x-ms-mutability": ["create"],
+          "x-ms-mutability": [
+            "create"
+          ],
           "description": "Access Key for storage (use either key or identity)",
           "type": "string"
         },
@@ -3682,7 +3694,7 @@
           },
           "default": "HDPSandbox"
         },
-        "externalIp" : {
+        "externalIp": {
           "description": "The external IP of the managed OnPrem fusion server",
           "type": "string"
         },
@@ -3790,7 +3802,7 @@
           "$ref": "#/definitions/ProvisioningState",
           "readOnly": true
         },
-        "deploymentType" : {
+        "deploymentType": {
           "description": "The type of install required for the migrator",
           "type": "string",
           "enum": [
@@ -3826,6 +3838,39 @@
           "description": "The remaining allowance for the company associated with the Migrator",
           "$ref": "#/definitions/Allowance",
           "readOnly": true
+        },
+        "migratorStatus": {
+          "description": "Status of the Migrator server",
+          "$ref": "#/definitions/MigratorDetails"
+        }
+      }
+    },
+    "MigratorDetails": {
+      "title": "MigratorDetails",
+      "description": "Details of a migrator",
+      "type": "object",
+      "properties": {
+        "status": {
+          "description": "The status of the migrator (Up/Down)",
+          "type": "string",
+          "enum": [
+            "Up",
+            "Down"
+          ],
+          "x-ms-enum": {
+            "name": "MigratorServerStatus",
+            "modelAsString": true
+          }
+        },
+        "seenAt": {
+          "description": "last time a response was received from the server",
+          "type": "string",
+          "format": "date-time"
+        },
+        "consecutiveErrors": {
+          "description": "failed attempts to reach the server",
+          "type": "integer",
+          "format": "int32"
         }
       }
     },
@@ -3882,7 +3927,9 @@
         },
         "storageAccessKey": {
           "x-ms-secret": true,
-          "x-ms-mutability": ["create"],
+          "x-ms-mutability": [
+            "create"
+          ],
           "description": "Access Key for storage",
           "type": "string"
         }
