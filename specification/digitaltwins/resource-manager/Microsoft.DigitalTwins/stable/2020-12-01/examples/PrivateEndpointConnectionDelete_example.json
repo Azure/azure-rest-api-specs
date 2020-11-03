@@ -7,10 +7,44 @@
     "privateEndpointConnectionName": "myPrivateConnection"
   },
   "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/50016170-c839-41ba-a724-51e9df440b9e/resourcegroups/resRg/providers/Microsoft.DigitalTwins/digitalTwinsInstances/myDigitalTwinsService/privateEndpointConnections/myPrivateConnection",
+        "name": "myPrivateConnection",
+        "type": "Microsoft.DigitalTwins/digitalTwinsInstances/privateEndpointConnections",
+        "properties": {
+          "provisioningState": "Failed",
+          "privateEndpoint": {
+            "id": "/subscriptions/50016170-c839-41ba-a724-51e9df440b9e/resourceGroups/resRg/providers/Microsoft.Network/privateEndpoints/myPrivateEndpoint"
+          },
+          "groupIds": [
+            "digitalTwinsInstance"
+          ],
+          "privateLinkServiceConnectionState": {
+            "status": "Approved",
+            "description": "Approved by johndoe@company.com."
+          }
+        }
+      }
+    },
     "202": {
-      "headers": {
-        "Location": "https://management.azure.com/subscriptions/50016170-c839-41ba-a724-51e9df440b9e/providers/Microsoft.DigitalTwins/digitalTwinsInstances/myDigitalTwinsService/privateEndpointConnections/myPrivateConnection/operationResults/myOperationId?api-version=2020-12-01",
-        "Retry-After": "17"
+      "body": {
+        "id": "/subscriptions/50016170-c839-41ba-a724-51e9df440b9e/resourcegroups/resRg/providers/Microsoft.DigitalTwins/digitalTwinsInstances/myDigitalTwinsService/privateEndpointConnections/myPrivateConnection",
+        "name": "myPrivateConnection",
+        "type": "Microsoft.DigitalTwins/digitalTwinsInstances/privateEndpointConnections",
+        "properties": {
+          "provisioningState": "Deleting",
+          "privateEndpoint": {
+            "id": "/subscriptions/50016170-c839-41ba-a724-51e9df440b9e/resourceGroups/resRg/providers/Microsoft.Network/privateEndpoints/myPrivateEndpoint"
+          },
+          "groupIds": [
+            "digitalTwinsInstance"
+          ],
+          "privateLinkServiceConnectionState": {
+            "status": "Approved",
+            "description": "Approved by johndoe@company.com."
+          }
+        }
       }
     },
     "204": {}
