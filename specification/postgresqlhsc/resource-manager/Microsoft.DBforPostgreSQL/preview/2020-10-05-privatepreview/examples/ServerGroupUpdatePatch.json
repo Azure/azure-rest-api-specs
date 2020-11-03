@@ -1,0 +1,39 @@
+{
+  "parameters": {
+    "serverGroupName": "pgtestsvc4",
+    "resourceGroupName": "TestGroup",
+    "api-version": "2017-12-01-preview",
+    "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff",
+    "parameters": {
+      "properties": {
+        "version": "12",
+        "administratorLoginPassword": "secret",
+        "backupRetentionMinutes": 100800,
+        "serverRoleGroups": [
+          {
+            "name": "",
+            "role": "Coordinator",
+            "serverCount": 1,
+            "serverEdition": "GeneralPurpose",
+            "vCores": 8,
+            "storageQuotaInMb": 1048576,
+            "standbyCount": 0
+          },
+          {
+            "name": "",
+            "role": "Worker",
+            "serverCount": 4,
+            "serverEdition": "MemoryOptimized",
+            "vCores": 4,
+            "storageQuotaInMb": 524288,
+            "standbyCount": 1
+          }
+        ]
+      },
+      "tags": {
+        "ElasticServer": "2"
+      }
+    }
+  },
+  "responses": {}
+}

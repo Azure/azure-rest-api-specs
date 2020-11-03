@@ -1,0 +1,48 @@
+{
+  "parameters": {
+    "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff",
+    "resourceGroupName": "TestResourceGroup",
+    "serverGroupName": "hsctestsg",
+    "configurationName": "array_nulls",
+    "api-version": "2020-10-05-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/TestResourceGroup/providers/Microsoft.DBforPostgreSQL/serverGroupsv2/hsctestsg/configurations/array_nulls",
+        "name": "hsctestsgconfigs",
+        "type": "Microsoft.DBforPostgreSQL/serverGroupsv2/configurations",
+        "properties": {
+          "serverRoleGroupConfigurations": [
+            {
+              "role": "Coordinator",
+              "configurations": [
+                {
+                  "value": "on",
+                  "description": "Enable input of NULL elements in arrays.",
+                  "defaultValue": "on",
+                  "dataType": "Boolean",
+                  "allowedValues": "on,off",
+                  "source": "system-default"
+                }
+              ]
+            },
+            {
+              "role": "Worker",
+              "configurations": [
+                {
+                  "value": "on",
+                  "description": "Enable input of NULL elements in arrays.",
+                  "defaultValue": "on",
+                  "dataType": "Boolean",
+                  "allowedValues": "on,off",
+                  "source": "system-default"
+                }
+              ]
+            }
+          ]
+        }
+      }
+    }
+  }
+}

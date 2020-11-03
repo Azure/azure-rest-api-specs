@@ -1,0 +1,52 @@
+{
+  "parameters": {
+    "resourceGroupName": "TestGroup",
+    "api-version": "2017-12-01-preview",
+    "serverGroupName": "pgtestsvc4",
+    "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff",
+    "parameters": {
+      "location": "westus",
+      "properties": {
+        "createMode": "Create",
+        "administratorLogin": "cloudsa",
+        "administratorLoginPassword": "password",
+        "backupRetentionMinutes": 50400,
+        "vnetInjArgs": {
+          "delegatedSubnetName": "test-subnet",
+          "delegatedVnetID": "6ed504a3-24b8-4ba8-ac1f-7a1780195437",
+          "delegatedVnetName": "test-vnet"
+        },
+        "mx": "Enabled",
+        "zfs": "Disabled",
+        "version": "12",
+        "citusVersion": "9.5",
+        "serverRoleGroups": [
+          {
+            "name": "",
+            "role": "Coordinator",
+            "serverCount": 1,
+            "serverEdition": "GeneralPurpose",
+            "vCores": 4,
+            "storageQuotaInMb": 524288,
+            "standbyCount": 1,
+            "publicIpRequested": true
+          },
+          {
+            "name": "",
+            "role": "Worker",
+            "serverCount": 3,
+            "serverEdition": "MemoryOptimized", 
+            "vCores": 4,
+            "storageQuotaInMb": 524288,
+            "standbyCount": 0,
+            "publicIpRequested": false
+          }
+        ]
+      },
+      "tags": {
+        "ElasticServer": "1"
+      }
+    }
+  },
+  "responses": {}
+}

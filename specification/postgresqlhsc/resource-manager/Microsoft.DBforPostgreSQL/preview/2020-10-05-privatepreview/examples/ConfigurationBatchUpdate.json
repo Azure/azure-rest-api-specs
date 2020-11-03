@@ -1,0 +1,45 @@
+{
+  "parameters": {
+    "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff",
+    "resourceGroupName": "TestResourceGroup",
+    "serverGroupName": "hsctestsg",
+    "api-version": "2020-10-05-preview",
+    "parameters": {
+      "properties": {
+        "serverRoleGroupConfigurations": [
+          {
+            "role": "Coordinator",
+            "configurations": [
+              {
+                "name": "array_nulls",
+                "value": "on"
+              },
+              {
+                "name": "backslash_quote",
+                "value": "safe_encoding"
+              },
+              {
+                "name": "bytea_output",
+                "value": "hex"
+              }
+            ]
+          },
+          {
+            "role": "Worker",
+            "configurations": [
+              {
+                "name": "check_function_bodies",
+                "value": "on"
+              },
+              {
+                "name": "client_encoding",
+                "value": "sql_ascii"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "responses": {}
+}

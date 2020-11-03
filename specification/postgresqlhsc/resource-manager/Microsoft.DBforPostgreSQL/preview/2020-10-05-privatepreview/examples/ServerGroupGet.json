@@ -1,0 +1,64 @@
+{
+  "parameters": {
+    "serverGroupName": "hsctestsg1",
+    "resourceGroupName": "TestGroup",
+    "api-version": "2017-12-01-preview",
+    "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "2a3fe856-9ba3-4551-97e2-d496c1a39bba",
+        "name": "hsctestsg1",
+        "tags": {
+          "additionalProp1": "string",
+          "additionalProp2": "string",
+          "additionalProp3": "string"
+        },
+        "location": "eastus",
+        "properties": {
+          "administratorLogin": "string",
+          "version": "12",
+          "citusVersion": "9.5",
+          "mx": "Enabled",
+          "zfs": "Disabled",
+          "vnetInjArgs": {
+            "delegatedSubnetName": "test-subnet",
+            "delegatedVnetID": "6ed504a3-24b8-4ba8-ac1f-7a1780195437",
+            "delegatedVnetName": "test-vnet"
+          },
+          "serverRoleGroups": [
+            {
+              "name": "",
+              "role": "Coordinator",
+              "serverCount": 1,
+              "serverEdition": "MemoryOptimized",
+              "storageQuotaInMb": 10000,
+              "vCores": 4,
+              "standbyCount": 1,
+              "publicIpRequested": true,
+              "serverNames": [
+                "hsctestsg1-c"
+              ]
+            },
+            {
+              "name": "",
+              "role": "Worker",
+              "serverCount": 3,
+              "serverEdition": "GeneralPurpose",
+              "storageQuotaInMb": 10000,
+              "vCores": 8,
+              "standbyCount": 0,
+              "publicIpRequested": false,
+              "serverNames": [
+                "hsctestsg1-w0",
+                "hsctestsg1-w1",
+                "hsctestsg1-w2"
+              ]
+            }
+          ]
+        }
+      }
+    }
+  }
+}
