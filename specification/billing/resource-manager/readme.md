@@ -4,10 +4,10 @@
 
 This is the AutoRest configuration file for Billing.
 
+
+
 ---
-
 ## Getting Started
-
 To build the SDK for Billing, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
 
 > `autorest`
@@ -15,20 +15,19 @@ To build the SDK for Billing, simply [Install AutoRest](https://aka.ms/autorest/
 To see additional help and options, run:
 
 > `autorest --help`
-
 ---
 
 ## Configuration
 
-### Basic Information
 
+
+### Basic Information
 These are the global settings for the Billing API.
 
 ``` yaml
 openapi-type: arm
 tag: package-2020-05
 ```
-
 
 ### Tag: package-2020-05
 
@@ -86,8 +85,8 @@ input-file:
 ```
 
 ---
-
 # Code Generation
+
 
 ## Swagger to SDK
 
@@ -110,6 +109,7 @@ swagger-to-sdk:
     after_scripts:
       - node sdkauto_afterscript.js billing/resource-manager
 ```
+
 
 ## C#
 
@@ -232,6 +232,8 @@ java:
 regenerate-manager: true
 generate-interface: true
 ```
+
+
 
 ## AzureResourceSchema
 
