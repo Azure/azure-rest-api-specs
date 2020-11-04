@@ -28,7 +28,7 @@ directive:
     reason: Existing Clients use these definitions which must be maintained.
   - suppress: DefinitionsPropertiesNamesCamelCase
     from: attestation.json
-    where: $.definitions.PolicyResult
+    where: $.definitions.AttestationResult
     reason: Existing Clients use these definitions which must be maintained.
 
 ### Basic Information
