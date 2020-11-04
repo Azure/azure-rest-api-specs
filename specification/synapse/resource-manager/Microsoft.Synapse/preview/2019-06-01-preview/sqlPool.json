@@ -4247,6 +4247,10 @@
             "type": "string"
           }
         ],
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
         "responses": {
           "200": {
             "description": "Successfully retrieved maintenance windows settings.",
@@ -4259,7 +4263,7 @@
           }
         },
         "x-ms-examples": {
-          "Gets maintenance window settings for a selected database.": {
+          "Gets maintenance window settings for a selected Sql Pool.": {
             "$ref": "./examples/GetMaintenanceWindows.json"
           }
         }
@@ -4306,6 +4310,10 @@
             }
           }
         ],
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
         "responses": {
           "200": {
             "description": "Successfully set maintenance windows settings."
@@ -4326,7 +4334,7 @@
         "tags": [
           "SqlPool, MaintenanceWindowOptions"
         ],
-        "description": "Gets a list of available maintenance windows.",
+        "description": "Gets the maintenance window options for the given maintenance window.",
         "operationId": "MaintenanceWindowOptions_Get",
         "parameters": [
           {
@@ -4356,9 +4364,13 @@
             "type": "string"
           }
         ],
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
         "responses": {
           "200": {
-            "description": "Successfully retrieved the list of maintenance windows options.",
+            "description": "Successfully retrieved the maintenance window options.",
             "schema": {
               "$ref": "#/definitions/MaintenanceWindowOptions"
             }
@@ -4368,7 +4380,7 @@
           }
         },
         "x-ms-examples": {
-          "Gets a list of available maintenance windows for a selected Sql pool.": {
+          "Gets a list of available maintenance window options for a selected Sql pool.": {
             "$ref": "./examples/GetMaintenanceWindowOptions.json"
           }
         }
