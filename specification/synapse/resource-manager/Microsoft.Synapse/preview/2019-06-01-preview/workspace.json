@@ -46,6 +46,12 @@
               "$ref": "#/definitions/WorkspaceInfoListResult"
             },
             "description": ""
+          },
+          "default": {
+            "schema": {
+              "$ref": "../../../../common/v1/types.json#/definitions/ErrorContract"
+            },
+            "description": ""
           }
         },
         "consumes": [],
@@ -93,7 +99,7 @@
           },
           "default": {
             "schema": {
-              "$ref": "#/definitions/ErrorContract"
+              "$ref": "../../../../common/v1/types.json#/definitions/ErrorContract"
             },
             "description": ""
           }
@@ -153,7 +159,7 @@
           },
           "default": {
             "schema": {
-              "$ref": "#/definitions/ErrorContract"
+              "$ref": "../../../../common/v1/types.json#/definitions/ErrorContract"
             },
             "description": ""
           }
@@ -219,7 +225,7 @@
           },
           "default": {
             "schema": {
-              "$ref": "#/definitions/ErrorContract"
+              "$ref": "../../../../common/v1/types.json#/definitions/ErrorContract"
             },
             "description": ""
           }
@@ -279,7 +285,7 @@
           },
           "default": {
             "schema": {
-              "$ref": "#/definitions/ErrorContract"
+              "$ref": "../../../../common/v1/types.json#/definitions/ErrorContract"
             },
             "description": ""
           }
@@ -319,6 +325,12 @@
           "200": {
             "schema": {
               "$ref": "#/definitions/WorkspaceInfoListResult"
+            },
+            "description": ""
+          },
+          "default": {
+            "schema": {
+              "$ref": "../../../../common/v1/types.json#/definitions/ErrorContract"
             },
             "description": ""
           }
@@ -365,6 +377,12 @@
               "$ref": "#/definitions/WorkspaceAadAdminInfo"
             },
             "description": "OK"
+          },
+          "default": {
+            "schema": {
+              "$ref": "../../../../common/v1/types.json#/definitions/ErrorContract"
+            },
+            "description": ""
           }
         },
         "consumes": [],
@@ -422,7 +440,7 @@
           },
           "default": {
             "schema": {
-              "$ref": "#/definitions/ErrorContract"
+              "$ref": "../../../../common/v1/types.json#/definitions/ErrorContract"
             },
             "description": ""
           }
@@ -468,12 +486,180 @@
           "200": {
             "description": ""
           },
+          "204": {
+            "description": "Accepted"
+          },
           "202": {
             "description": ""
           },
           "default": {
             "schema": {
-              "$ref": "#/definitions/ErrorContract"
+              "$ref": "../../../../common/v1/types.json#/definitions/ErrorContract"
+            },
+            "description": ""
+          }
+        },
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "Delete workspace active directory admin": {
+            "$ref": "./examples/DeleteWorkspaceAadAdmin.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces/{workspaceName}/sqlAdministrators/activeDirectory": {
+      "get": {
+        "operationId": "WorkspaceSqlAadAdmins_Get",
+        "description": "Gets a workspace SQL active directory admin",
+        "tags": [
+          "Workspaces"
+        ],
+        "deprecated": false,
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/workspaceNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/WorkspaceAadAdminInfo"
+            },
+            "description": "OK"
+          },
+          "default": {
+            "schema": {
+              "$ref": "../../../../common/v1/types.json#/definitions/ErrorContract"
+            },
+            "description": ""
+          }
+        },
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-examples": {
+          "Get workspace active directory admin": {
+            "$ref": "./examples/GetWorkspaceAadAdmin.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "WorkspaceSqlAadAdmins_CreateOrUpdate",
+        "description": "Creates or updates a workspace SQL active directory admin",
+        "tags": [
+          "Workspaces"
+        ],
+        "deprecated": false,
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/workspaceNameParameter"
+          },
+          {
+            "description": "Workspace active directory administrator properties",
+            "schema": {
+              "$ref": "#/definitions/WorkspaceAadAdminInfo"
+            },
+            "in": "body",
+            "name": "aadAdminInfo",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/WorkspaceAadAdminInfo"
+            }
+          },
+          "202": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/WorkspaceAadAdminInfo"
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": "../../../../common/v1/types.json#/definitions/ErrorContract"
+            },
+            "description": ""
+          }
+        },
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "Create or update workspace active directory admin": {
+            "$ref": "./examples/CreateOrUpdateWorkspaceAadAdmin.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "WorkspaceSqlAadAdmins_Delete",
+        "description": "Deletes a workspace SQL active directory admin",
+        "tags": [
+          "Workspaces"
+        ],
+        "deprecated": false,
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/workspaceNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          },
+          "204": {
+            "description": "Accepted"
+          },
+          "202": {
+            "description": ""
+          },
+          "default": {
+            "schema": {
+              "$ref": "../../../../common/v1/types.json#/definitions/ErrorContract"
             },
             "description": ""
           }
@@ -508,7 +694,7 @@
             "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "./workspace.json#/parameters/workspaceNameParameter"
+            "$ref": "#/parameters/workspaceNameParameter"
           }
         ],
         "responses": {
@@ -520,7 +706,7 @@
           },
           "default": {
             "schema": {
-              "$ref": "./workspace.json#/definitions/ErrorContract"
+              "$ref": "../../../../common/v1/types.json#/definitions/ErrorContract"
             },
             "description": "Error"
           }
@@ -569,7 +755,7 @@
           },
           "default": {
             "schema": {
-              "$ref": "./workspace.json#/definitions/ErrorContract"
+              "$ref": "../../../../common/v1/types.json#/definitions/ErrorContract"
             },
             "description": "Error"
           }
@@ -700,12 +886,98 @@
           "description": "Error code",
           "type": "string"
         },
-        "target": {
-          "description": "Error target",
-          "type": "string"
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/workspaceNameParameter"
+          },
+          {
+            "name": "restorableDroppedSqlPoolId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The id of the deleted Sql Pool in the form of sqlPoolName,deletionTimeInFileTimeFormat"
+          }
+        ],
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/RestorableDroppedSqlPool"
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": "../../../../common/v1/types.json#/definitions/ErrorContract"
+            },
+            "description": "Error"
+          }
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces/{workspaceName}/restorableDroppedSqlPools": {
+      "get": {
+        "tags": [
+          "RestorableDroppedSqlPools"
+        ],
+        "operationId": "RestorableDroppedSqlPools_ListByWorkspace",
+        "description": "Gets a list of deleted Sql pools that can be restored",
+        "x-ms-examples": {
+          "Get list of restorable dropped Sql pools": {
+            "$ref": "./examples/RestorableDroppedSqlpoolList.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/workspaceNameParameter"
+          }
+        ],
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/RestorableDroppedSqlPoolListResult"
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": "../../../../common/v1/types.json#/definitions/ErrorContract"
+            },
+            "description": "Error"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    }
+  },
+  "definitions": {
     "ErrorContract": {
       "title": "Error details.",
       "description": "Contains details when the response code indicates an error.",
@@ -770,6 +1042,50 @@
         }
       }
     },
+    "EncryptionDetails": {
+      "description": "Details of the encryption associated with the workspace",
+      "type": "object",
+      "properties": {
+        "doubleEncryptionEnabled": {
+          "description": "Double Encryption enabled",
+          "type": "boolean",
+          "readOnly": true
+        },
+        "cmk": {
+          "description": "Customer Managed Key Details",
+          "$ref": "#/definitions/CustomerManagedKeyDetails"
+        }
+      }
+    },
+    "CustomerManagedKeyDetails": {
+      "description": "Details of the customer managed key associated with the workspace",
+      "type": "object",
+      "properties": {
+        "status": {
+          "description": "The customer managed key status on the workspace",
+          "type": "string",
+          "readOnly": true
+        },
+        "key": {
+          "description": "The key object of the workspace",
+          "$ref": "#/definitions/WorkspaceKeyDetails"
+        }
+      }
+    },
+    "WorkspaceKeyDetails": {
+      "description": "Details of the customer managed key associated with the workspace",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Workspace Key sub-resource name",
+          "type": "string"
+        },
+        "keyVaultUrl": {
+          "description": "Workspace Key sub-resource key vault url",
+          "type": "string"
+        }
+      }
+    },
     "ManagedIdentity": {
       "description": "The workspace managed identity",
       "type": "object",
@@ -782,6 +1098,7 @@
         "tenantId": {
           "description": "The tenant ID of the workspace managed identity",
           "type": "string",
+          "format": "uuid",
           "readOnly": true
         },
         "type": {
@@ -827,6 +1144,16 @@
             "type": "string",
             "description": "Tenant Id"
           }
+        }
+      }
+    },
+    "BabylonConfiguration": {
+      "description": "Babylon Configuration",
+      "type": "object",
+      "properties": {
+        "babylonResourceId": {
+          "description": "Babylon Resource ID",
+          "type": "string"
         }
       }
     },
@@ -911,8 +1238,18 @@
           "description": "Private endpoint connections to the workspace",
           "type": "array",
           "items": {
-            "$ref": "./privateEndpointConnections.json#/definitions/PrivateEndpointConnection"
+            "$ref": "../../../../common/v1/privateEndpointConnection.json#/definitions/PrivateEndpointConnection"
           }
+        },
+        "encryption": {
+          "description": "The encryption details of the workspace",
+          "$ref": "#/definitions/EncryptionDetails"
+        },
+        "workspaceUID": {
+          "description": "The workspace unique identifier",
+          "type": "string",
+          "readOnly": true,
+          "format": "uuid"
         },
         "extraProperties": {
           "description": "Workspace level configs and feature flags",
@@ -925,6 +1262,10 @@
         "managedVirtualNetworkSettings": {
           "description": "Managed Virtual Network Settings",
           "$ref": "#/definitions/ManagedVirtualNetworkSettings"
+        },
+        "babylonConfiguration": {
+          "description": "Babylon Configuration",
+          "$ref": "#/definitions/BabylonConfiguration"
         }
       }
     },
@@ -961,6 +1302,10 @@
         "managedVirtualNetworkSettings": {
           "description": "Managed Virtual Network Settings",
           "$ref": "#/definitions/ManagedVirtualNetworkSettings"
+        },
+        "babylonConfiguration": {
+          "description": "Babylon Configuration",
+          "$ref": "#/definitions/BabylonConfiguration"
         },
         "provisioningState": {
           "description": "Resource provisioning state",
