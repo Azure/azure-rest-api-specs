@@ -1,0 +1,52 @@
+{
+  "parameters": {
+    "subscriptionId": "5b4b650e-28b9-4790-b3ab-ddbd88d727c4",
+    "resourceGroupName": "examplerg",
+    "api-version": "2020-10-01-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "properties": {
+              "provisioningState": "Succeeded",
+              "version": "1.0.0-preview",
+              "service": {
+                "serviceType": "ClusterIP",
+                "supportedProtocols": [
+                  "HTTPS"
+                ],
+                "tls": {
+                  "secretName": "exampleTLSSecretName1"
+                }
+              },
+              "dataStorage": {
+                "storageClassName": "exampleStorageClassName1",
+                "size": "1Gi"
+              },
+              "diagnostics": {
+                "metrics": {
+                  "metricsReporterType": "Prometheus"
+                }
+              }
+            },
+            "location": "global",
+            "extendedLocation": {
+              "type": "exampleExtendedLocationType1",
+              "name": "exampleExtendedLocation1"
+            },
+            "tags": {
+              "key1": "value1",
+              "key2": "Value2",
+              "key3": "Value3"
+            },
+            "id": "/subscriptions/5b4b650e-28b9-4790-b3ab-ddbd88d727c4/resourceGroups/examplerg/providers/Microsoft.EventGrid/kubernetesBrokers/exampleKubernetesBrokerName1",
+            "name": "exampleKubernetesBrokerName1",
+            "type": "Microsoft.EventGrid/kubernetesBrokers"
+          }
+        ]
+      }
+    }
+  }
+}

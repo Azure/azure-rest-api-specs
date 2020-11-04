@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "2020-04-01-preview",
+    "version": "2020-10-01-preview",
     "title": "EventGridManagementClient",
     "description": "Azure EventGrid Management Client"
   },
@@ -2623,6 +2623,328 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/kubernetesBrokers/{kubernetesBrokerName}": {
+      "get": {
+        "tags": [
+          "KubernetesBroker"
+        ],
+        "summary": "Get a kubernetes broker.",
+        "description": "Gets a kubernetes broker with the specified parameters.",
+        "operationId": "KubernetesBrokers_Get",
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "The name of the resource group within the user's subscription.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "kubernetesBrokerName",
+            "in": "path",
+            "description": "Name of the kubernetes broker.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/KubernetesBroker"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 Bad Request.\n\n * 404 Not Found.\n\n * 500 Internal Server Error."
+          }
+        },
+        "x-ms-examples": {
+          "KubernetesBrokers_Get": {
+            "$ref": "./examples/KubernetesBrokers_Get.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "KubernetesBroker"
+        ],
+        "summary": "Create a kubernetes broker.",
+        "description": "Creates a new kubernetes broker with the specified parameters.",
+        "operationId": "KubernetesBrokers_CreateOrUpdate",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "The name of the resource group within the user's subscription.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "kubernetesBrokerName",
+            "in": "path",
+            "description": "Name of the kubernetes broker.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "kubernetesBrokerInfo",
+            "in": "body",
+            "description": "Kubernetes broker information.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/KubernetesBroker"
+            }
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "201": {
+            "description": "Kubernetes broker create request accepted.",
+            "schema": {
+              "$ref": "#/definitions/KubernetesBroker"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 Bad Request.\n\n * 404 Not Found.\n\n * 500 Internal Server Error."
+          }
+        },
+        "x-ms-examples": {
+          "KubernetesBrokers_CreateOrUpdate": {
+            "$ref": "./examples/KubernetesBrokers_CreateOrUpdate.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "tags": [
+          "KubernetesBroker"
+        ],
+        "summary": "Delete a kubernetes broker.",
+        "description": "Deletes a kubernetes broker with the specified parameters.",
+        "operationId": "KubernetesBrokers_Delete",
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "The name of the resource group within the user's subscription.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "kubernetesBrokerName",
+            "in": "path",
+            "description": "Name of the kubernetes broker.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted"
+          },
+          "204": {
+            "description": "NoContent"
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 Bad Request.\n\n * 404 Not Found.\n\n * 500 Internal Server Error."
+          }
+        },
+        "x-ms-examples": {
+          "KubernetesBrokers_Delete": {
+            "$ref": "./examples/KubernetesBrokers_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "tags": [
+          "KubernetesBroker"
+        ],
+        "summary": "Update a kubernetes broker.",
+        "description": "Updates a kubernetes broker with the specified parameters.",
+        "operationId": "KubernetesBrokers_Update",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "The name of the resource group within the user's subscription.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "kubernetesBrokerName",
+            "in": "path",
+            "description": "Name of the kubernetes broker.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "kubernetesBrokerUpdateParameters",
+            "in": "body",
+            "description": "Kubernetes broker update information.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/KubernetesBrokerUpdateParameters"
+            }
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "201": {
+            "description": "Kubernetes broker update request accepted.",
+            "schema": {
+              "$ref": "#/definitions/KubernetesBroker"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 Bad Request.\n\n * 404 Not Found.\n\n * 500 Internal Server Error."
+          }
+        },
+        "x-ms-examples": {
+          "KubernetesBrokers_Update": {
+            "$ref": "./examples/KubernetesBrokers_Update.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.EventGrid/kubernetesBrokers": {
+      "get": {
+        "tags": [
+          "KubernetesBroker"
+        ],
+        "summary": "List kubernetes brokers under an Azure subscription.",
+        "description": "List all the kubernetes brokers under an Azure subscription.",
+        "operationId": "KubernetesBrokers_ListBySubscription",
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/KubernetesBrokerListResult"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 Bad Request.\n\n * 500 Internal Server Error."
+          }
+        },
+        "x-ms-examples": {
+          "KubernetesBrokers_ListBySubscription": {
+            "$ref": "./examples/KubernetesBrokers_ListBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/kubernetesBrokers": {
+      "get": {
+        "tags": [
+          "KubernetesBroker"
+        ],
+        "summary": "List kubernetes brokers under a resource group.",
+        "description": "List all the kubernetes brokers under a resource group.",
+        "operationId": "KubernetesBrokers_ListByResourceGroup",
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "The name of the resource group within the user's subscription.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/KubernetesBrokerListResult"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 Bad Request.\n\n * 500 Internal Server Error."
+          }
+        },
+        "x-ms-examples": {
+          "KubernetesBrokers_ListByResourceGroup": {
+            "$ref": "./examples/KubernetesBrokers_ListByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
         }
       }
     },
@@ -5457,6 +5779,20 @@
         }
       }
     },
+    "ExtendedLocation": {
+      "description": "Definition of an Extended Location",
+      "type": "object",
+      "properties": {
+        "type": {
+          "description": "Type of the extended location.",
+          "type": "string"
+        },
+        "name": {
+          "description": "Fully qualified name of the extended location.",
+          "type": "string"
+        }
+      }
+    },
     "InboundIpRule": {
       "type": "object",
       "properties": {
@@ -5501,12 +5837,12 @@
           "readOnly": true
         },
         "name": {
-          "description": "Name of the resource",
+          "description": "Name of the resource.",
           "type": "string",
           "readOnly": true
         },
         "type": {
-          "description": "Type of the resource",
+          "description": "Type of the resource.",
           "type": "string",
           "readOnly": true
         }
@@ -5699,6 +6035,10 @@
             "read",
             "create"
           ]
+        },
+        "extendedLocation": {
+          "$ref": "#/definitions/ExtendedLocation",
+          "description": "Extended location of the resource."
         },
         "tags": {
           "description": "Tags of the resource.",
@@ -6478,6 +6818,13 @@
         "azureActiveDirectoryApplicationIdOrUri": {
           "description": "The Azure Active Directory Application ID or URI to get the access token that will be included as the bearer token in delivery requests.",
           "type": "string"
+        },
+        "deliveryAttributeMappings": {
+          "description": "Delivery attribute details.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DeliveryAttributeMapping"
+          }
         }
       }
     },
@@ -6494,6 +6841,87 @@
           "type": "string"
         }
       }
+    },
+    "StaticDeliveryAttributeMappingProperties": {
+      "description": "Properties of static delivery attribute mapping.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Value of the delivery attribute.",
+          "type": "string"
+        },
+        "isSecret": {
+          "description": "Boolean flag to tell if the attibute contains sensitive information .",
+          "type": "boolean"
+        }
+      }
+    },
+    "StaticDeliveryAttributeMapping": {
+      "description": "Static delivery attribute mapping details.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DeliveryAttributeMapping"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/StaticDeliveryAttributeMappingProperties",
+          "description": "Properties of static delivery attribute mapping.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "x-ms-discriminator-value": "Static"
+    },
+    "DynamicDeliveryAttributeMappingProperties": {
+      "description": "Properties of dynamic delivery attribute mapping.",
+      "type": "object",
+      "properties": {
+        "sourceField": {
+          "description": "JSON path in the event which contains attribute value.",
+          "type": "string"
+        }
+      }
+    },
+    "DynamicDeliveryAttributeMapping": {
+      "description": "Dynamic delivery attribute mapping details.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DeliveryAttributeMapping"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/DynamicDeliveryAttributeMappingProperties",
+          "description": "Properties of dynamic delivery attribute mapping.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "x-ms-discriminator-value": "Dynamic"
+    },
+    "DeliveryAttributeMapping": {
+      "description": "Delevery attribute mapping details.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Name of the delivery attribute or header.",
+          "type": "string"
+        },
+        "type": {
+          "description": "Type of the delivery attribute or header name.",
+          "enum": [
+            "Static",
+            "Dynamic"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "DeliveryAttributeMappingType",
+            "modelAsString": true
+          }
+        }
+      },
+      "discriminator": "type"
     },
     "StorageBlobDeadLetterDestination": {
       "description": "Information about the storage blob based dead letter destination.",
@@ -6557,6 +6985,13 @@
         "resourceId": {
           "description": "The Azure Resource Id that represents the endpoint of an Event Hub destination of an event subscription.",
           "type": "string"
+        },
+        "deliveryAttributeMappings": {
+          "description": "Delivery attribute details.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DeliveryAttributeMapping"
+          }
         }
       }
     },
@@ -6615,6 +7050,13 @@
         "resourceId": {
           "description": "The Azure Resource ID of an hybrid connection that is the destination of an event subscription.",
           "type": "string"
+        },
+        "deliveryAttributeMappings": {
+          "description": "Delivery attribute details.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DeliveryAttributeMapping"
+          }
         }
       }
     },
@@ -6642,6 +7084,13 @@
         "resourceId": {
           "description": "The Azure Resource Id that represents the endpoint of the Service Bus destination of an event subscription.",
           "type": "string"
+        },
+        "deliveryAttributeMappings": {
+          "description": "Delivery attribute details.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DeliveryAttributeMapping"
+          }
         }
       }
     },
@@ -6669,6 +7118,13 @@
         "resourceId": {
           "description": "The Azure Resource Id that represents the endpoint of the Service Bus Topic destination of an event subscription.",
           "type": "string"
+        },
+        "deliveryAttributeMappings": {
+          "description": "Delivery attribute details.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DeliveryAttributeMapping"
+          }
         }
       }
     },
@@ -6706,6 +7162,13 @@
           "format": "int32",
           "description": "Preferred batch size in Kilobytes.",
           "type": "integer"
+        },
+        "deliveryAttributeMappings": {
+          "description": "Delivery attribute details.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DeliveryAttributeMapping"
+          }
         }
       }
     },
@@ -6766,6 +7229,18 @@
           "$ref": "#/definitions/EventSubscriptionProperties",
           "description": "Properties of the event subscription.",
           "x-ms-client-flatten": true
+        },
+        "kind": {
+          "description": "Kind of the resource.",
+          "enum": [
+            "Azure",
+            "AzureArc"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "ResourceKind",
+            "modelAsString": true
+          }
         }
       }
     },
@@ -6847,6 +7322,216 @@
         },
         "nextLink": {
           "description": "A link for the next page of event subscriptions",
+          "type": "string"
+        }
+      }
+    },
+    "KubernetesBrokerProperties": {
+      "description": "Properties of the kubernetes broker.",
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "description": "Provisioning state of the kubernetes broker.",
+          "enum": [
+            "Creating",
+            "Updating",
+            "Deleting",
+            "Succeeded",
+            "Canceled",
+            "Failed"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "KubernetesBrokerProvisioningState",
+            "modelAsString": true
+          }
+        },
+        "version": {
+          "description": "Version of the kubernetes broker.",
+          "type": "string"
+        },
+        "service": {
+          "$ref": "#/definitions/KubernetesBrokerService",
+          "description": "Configuration of kubernetes service exposed by kubernetes broker."
+        },
+        "dataStorage": {
+          "$ref": "#/definitions/KubernetesBrokerDataStorage",
+          "description": "Data storage used by the kubernetes broker."
+        },
+        "diagnostics": {
+          "$ref": "#/definitions/KubernetesBrokerDiagnostics",
+          "description": "Diagnostics configuration of the kubernetes broker."
+        }
+      }
+    },
+    "KubernetesBrokerService": {
+      "description": "Configuration of the kubernetes service exposed by kubernetes broker.",
+      "type": "object",
+      "properties": {
+        "serviceType": {
+          "description": "Type of the kubernetes service exposed by kubernetes broker resource.",
+          "enum": [
+            "ClusterIP",
+            "LoadBalancer"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "KubernetesBrokerServiceType",
+            "modelAsString": true
+          }
+        },
+        "supportedProtocols": {
+          "type": "array",
+          "items": {
+            "enum": [
+              "HTTPS",
+              "HTTP"
+            ],
+            "type": "string"
+          }
+        },
+        "tls": {
+          "$ref": "#/definitions/KubernetesBrokerTLS",
+          "description": "TLS configuration used by kubernetes broker for incoming HTTPS requests."
+        }
+      }
+    },
+    "KubernetesBrokerDataStorage": {
+      "description": "Data storage used by the kubernetes broker.",
+      "type": "object",
+      "properties": {
+        "storageClassName": {
+          "description": "StorageClass name for the data storage.",
+          "type": "string"
+        },
+        "size": {
+          "description": "Size of the data storage.",
+          "type": "string"
+        }
+      }
+    },
+    "KubernetesBrokerDiagnostics": {
+      "description": "Diagnostics configuration of the kubernetes broker.",
+      "type": "object",
+      "properties": {
+        "metrics": {
+          "$ref": "#/definitions/KubernetesBrokerMetrics",
+          "description": "Metrics configuration of the kubernetes broker."
+        }
+      }
+    },
+    "KubernetesBrokerTLS": {
+      "description": "TLS configuration used the by the kubernetes broker to support TLS for incoming requests.",
+      "type": "object",
+      "properties": {
+        "secretName": {
+          "description": "Name of the secret containing TLS certificate to be used by kubernetes broker.",
+          "type": "string"
+        }
+      }
+    },
+    "KubernetesBrokerMetrics": {
+      "description": "Metrics configuration of the kubernetes broker.",
+      "type": "object",
+      "properties": {
+        "metricsReporterType": {
+          "description": "Type of the metrics format exposed by the kubernetes broker.",
+          "enum": [
+            "Prometheus",
+            "None"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "KubernetesBrokerMetricsReporterType",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "KubernetesBroker": {
+      "description": "EventGrid kubernetes broker",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/TrackedResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/KubernetesBrokerProperties",
+          "description": "Properties of the kubernetes broker.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "KubernetesBrokerUpdateParameters": {
+      "description": "Properties of the KubernetesBroker update",
+      "type": "object",
+      "properties": {
+        "tags": {
+          "description": "Tags of the resource.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "properties": {
+          "$ref": "#/definitions/KubernetesBrokerUpdateParameterProperties",
+          "description": "Properties of the resource.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "KubernetesBrokerUpdateParameterProperties": {
+      "description": "Properties of kubernetes broker to update.",
+      "type": "object",
+      "properties": {
+        "version": {
+          "description": "Version of the kubernetes broker.",
+          "type": "string"
+        },
+        "service": {
+          "$ref": "#/definitions/KubernetesBrokerServiceUpdateParameter",
+          "description": "Configuration of kubernetes service exposed by kubernetes broker."
+        }
+      }
+    },
+    "KubernetesBrokerServiceUpdateParameter": {
+      "description": "Properties of the kubernetes broker update request.",
+      "type": "object",
+      "properties": {
+        "serviceType": {
+          "description": "Type of the kubernetes service exposed by kubernetes broker resource.",
+          "enum": [
+            "ClusterIP",
+            "LoadBalancer"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "KubernetesBrokerServiceType",
+            "modelAsString": true
+          }
+        },
+        "tls": {
+          "$ref": "#/definitions/KubernetesBrokerTLS",
+          "description": "TLS configuration used by kubernetes broker for incoming HTTPS requests."
+        }
+      }
+    },
+    "KubernetesBrokerListResult": {
+      "description": "Result of the List operation",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "A collection of resources",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/KubernetesBroker"
+          }
+        },
+        "nextLink": {
+          "description": "A link for the next page of resources",
           "type": "string"
         }
       }
@@ -7300,6 +7985,10 @@
           "$ref": "#/definitions/PartnerTopicProperties",
           "description": "Properties of the partner topic.",
           "x-ms-client-flatten": true
+        },
+        "identity": {
+          "$ref": "#/definitions/IdentityInfo",
+          "description": "Identity information for the resource."
         }
       }
     },
@@ -7432,11 +8121,11 @@
           "type": "string"
         },
         "name": {
-          "description": "Name of the resource",
+          "description": "Name of the resource.",
           "type": "string"
         },
         "type": {
-          "description": "Type of the resource",
+          "description": "Type of the resource.",
           "type": "string"
         }
       }
@@ -7530,6 +8219,10 @@
           "$ref": "#/definitions/SystemTopicProperties",
           "description": "Properties of the system topic.",
           "x-ms-client-flatten": true
+        },
+        "identity": {
+          "$ref": "#/definitions/IdentityInfo",
+          "description": "Identity information for the resource."
         }
       }
     },
@@ -7543,6 +8236,10 @@
           "additionalProperties": {
             "type": "string"
           }
+        },
+        "identity": {
+          "$ref": "#/definitions/IdentityInfo",
+          "description": "Resource identity information."
         }
       }
     },
@@ -7636,6 +8333,10 @@
           "items": {
             "$ref": "#/definitions/InboundIpRule"
           }
+        },
+        "kubernetesBrokerArmId": {
+          "description": "Kubernetes borker resource ARM Id where this topic gets deployed.",
+          "type": "string"
         }
       }
     },
@@ -7660,6 +8361,18 @@
         "identity": {
           "$ref": "#/definitions/IdentityInfo",
           "description": "Identity information for the resource."
+        },
+        "kind": {
+          "description": "Kind of the resource.",
+          "enum": [
+            "Azure",
+            "AzureArc"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "ResourceKind",
+            "modelAsString": true
+          }
         }
       }
     },
@@ -7855,6 +8568,18 @@
         "sourceResourceFormat": {
           "description": "Source resource format.",
           "type": "string"
+        },
+        "supportedScopesForSource": {
+          "description": "Supported source scopes.",
+          "type": "array",
+          "items": {
+            "enum": [
+              "Resource",
+              "ResourceGroup",
+              "AzureSubscription"
+            ],
+            "type": "string"
+          }
         }
       }
     },
