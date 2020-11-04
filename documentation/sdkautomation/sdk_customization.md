@@ -169,7 +169,9 @@ The working folder of all the scripts is the __root folder of sdk repo__.
     "changelogScript": {
       "path": "./eng/tools/sdk_breaking_change",
       "breakingChangeDetect": "Breaking Change"
-    }
+    },
+
+    "breakingChangeLabel": "CI-BreakingChange-DotNet"
   },
   "artifactOptions": {
     // Param: <path_to_installInstructionInput.json> <path_to_installInstructionOutput.json>
@@ -205,7 +207,13 @@ Input file for generate script.
   ],
   "relatedReadmeMdFiles": [
     "specification/cdn/something/readme.md"
-  ]
+  ],
+  "installInstructionInput": {
+    "isPublic": false,
+    "downloadUrlPrefix": "https://openapihub.test.azure-devex-tools.com/api/sdk-dl-pub?p=Azure/1234/azure-sdk-for-net/",
+    "downloadCommandTemplate": "curl -L \"{URL}\" -o {FILENAME}",
+    "trigger": "pullRequest"
+  }
 }
 ```
 
