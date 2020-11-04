@@ -2629,7 +2629,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/kubernetesBrokers/{kubernetesBrokerName}": {
       "get": {
         "tags": [
-          "KubernetesBroker"
+          "KubernetesBrokers"
         ],
         "summary": "Get a kubernetes broker.",
         "description": "Gets a kubernetes broker with the specified parameters.",
@@ -2679,7 +2679,7 @@
       },
       "put": {
         "tags": [
-          "KubernetesBroker"
+          "KubernetesBrokers"
         ],
         "summary": "Create a kubernetes broker.",
         "description": "Creates a new kubernetes broker with the specified parameters.",
@@ -2722,9 +2722,6 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "OK"
-          },
           "201": {
             "description": "Kubernetes broker create request accepted.",
             "schema": {
@@ -2744,7 +2741,7 @@
       },
       "delete": {
         "tags": [
-          "KubernetesBroker"
+          "KubernetesBrokers"
         ],
         "summary": "Delete a kubernetes broker.",
         "description": "Deletes a kubernetes broker with the specified parameters.",
@@ -2795,7 +2792,7 @@
       },
       "patch": {
         "tags": [
-          "KubernetesBroker"
+          "KubernetesBrokers"
         ],
         "summary": "Update a kubernetes broker.",
         "description": "Updates a kubernetes broker with the specified parameters.",
@@ -2851,13 +2848,18 @@
             "description": "*** Error Responses: ***\n\n * 400 Bad Request.\n\n * 404 Not Found.\n\n * 500 Internal Server Error."
           }
         },
+        "x-ms-examples": {
+          "KubernetesBrokers_Update": {
+            "$ref": "./examples/KubernetesBrokers_Update.json"
+          }
+        },
         "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.EventGrid/kubernetesBrokers": {
       "get": {
         "tags": [
-          "KubernetesBroker"
+          "KubernetesBrokers"
         ],
         "summary": "List kubernetes brokers under an Azure subscription.",
         "description": "List all the kubernetes brokers under an Azure subscription.",
@@ -2898,7 +2900,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/kubernetesBrokers": {
       "get": {
         "tags": [
-          "KubernetesBroker"
+          "KubernetesBrokers"
         ],
         "summary": "List kubernetes brokers under a resource group.",
         "description": "List all the kubernetes brokers under a resource group.",
