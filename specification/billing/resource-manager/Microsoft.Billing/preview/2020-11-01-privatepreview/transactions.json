@@ -158,38 +158,29 @@
     "TransactionSummaryProperties": {
       "description": "The properties of transaction summary.",
       "properties": {
-        "totalAzureCreditApplied": {
+        "azureCreditApplied": {
           "description": "The total amount of any Azure credits applied.",
           "readOnly": true,
-          "$ref": "#/definitions/Amount"
+          "type": "number"
         },
-        "totalCharges": {
+        "billingCurrency": {
+          "description": "The ISO 4217 code for the currency in which the transactions are billed.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "subTotal": {
           "description": "The total pre-tax charged amount.",
           "readOnly": true,
-          "$ref": "#/definitions/Amount"
+          "type": "number"
         },
-        "totalTax": {
+        "tax": {
           "description": "The total tax amount applied.",
           "readOnly": true,
-          "$ref": "#/definitions/Amount"
+          "type": "number"
         },
-        "totalTransactionAmount": {
-          "description": "The total charge.",
+        "total": {
+          "description": "The total charges.",
           "readOnly": true,
-          "$ref": "#/definitions/Amount"
-        }
-      }
-    },
-    "Amount": {
-      "description": "The amount.",
-      "properties": {
-        "currency": {
-          "description": "The currency for the amount value.",
-          "type": "string",
-          "readOnly": true
-        },
-        "value": {
-          "description": "Amount value.",
           "type": "number"
         }
       }
