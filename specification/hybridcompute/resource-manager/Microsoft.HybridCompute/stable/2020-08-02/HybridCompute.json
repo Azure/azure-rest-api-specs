@@ -461,6 +461,9 @@
           },
           "202": {
             "description": "Accepted"
+          },
+          "404": {
+            "description": "Not Found"
           }
         },
         "x-ms-examples": {
@@ -514,6 +517,9 @@
           },
           "204": {
             "description": "No Content"
+          },
+          "404": {
+            "description": "Not found"
           }
         },
         "x-ms-long-running-operation": true,
@@ -563,6 +569,9 @@
             "description": "OK",
             "schema": {
               "$ref": "#/definitions/MachineExtension"
+            },
+            "404": {
+              "description": "Not found"
             }
           }
         },
@@ -615,6 +624,9 @@
             "schema": {
               "$ref": "#/definitions/MachineExtensionsListResult"
             }
+          },
+          "404": {
+            "description": "Not found"
           }
         },
         "x-ms-pageable": {
@@ -693,6 +705,11 @@
             }
           ],
           "description": "Display properties"
+        },
+        "isDataAction": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Indicates whether the operation applies to data-plane"
         }
       },
       "description": "Describes the properties of a Compute Operation value."
@@ -768,7 +785,6 @@
         "lastStatusChange": {
           "readOnly": true,
           "type": "string",
-          "format": "date-time",
           "description": "The time of the last status change."
         },
         "errorDetails": {
@@ -983,10 +999,7 @@
           "description": "The error details.",
           "$ref": "#/definitions/ErrorDetail"
         }
-      },
-      "required": [
-        "error"
-      ]
+      }
     },
     "Identity": {
       "title": "Managed Identity.",
