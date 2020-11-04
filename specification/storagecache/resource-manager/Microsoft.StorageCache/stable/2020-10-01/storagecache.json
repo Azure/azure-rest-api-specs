@@ -175,7 +175,7 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The region name which the operation will lookup into."
+            "description": "The name of the region used to look up the operation."
           },
           {
             "name": "operationId",
@@ -207,7 +207,7 @@
         "tags": [
           "AscOperations"
         ],
-        "description": "Gets the status of an asynchronous operation for the Azure HPC cache",
+        "description": "Gets the status of an asynchronous operation for the Azure HPC Cache",
         "operationId": "AscOperations_Get"
       }
     },
@@ -316,7 +316,7 @@
             "type": "string"
           },
           {
-            "description": "Name of Cache. Length of name must be not greater than 80 and chars must be in list of [-0-9a-zA-Z_] char class.",
+            "description": "Name of Cache. Length of name must not be greater than 80 and chars must be in list of [-0-9a-zA-Z_] char class.",
             "in": "path",
             "name": "cacheName",
             "pattern": "^[-0-9a-zA-Z_]{1,80}$",
@@ -372,7 +372,7 @@
             "type": "string"
           },
           {
-            "description": "Name of Cache. Length of name must be not greater than 80 and chars must be in list of [-0-9a-zA-Z_] char class.",
+            "description": "Name of Cache. Length of name must not be greater than 80 and chars must be in list of [-0-9a-zA-Z_] char class.",
             "in": "path",
             "name": "cacheName",
             "pattern": "^[-0-9a-zA-Z_]{1,80}$",
@@ -433,7 +433,7 @@
             "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
-            "description": "Name of Cache. Length of name must be not greater than 80 and chars must be in list of [-0-9a-zA-Z_] char class.",
+            "description": "Name of Cache. Length of name must not be greater than 80 and chars must be in list of [-0-9a-zA-Z_] char class.",
             "in": "path",
             "name": "cacheName",
             "pattern": "^[-0-9a-zA-Z_]{1,80}$",
@@ -457,13 +457,13 @@
             }
           },
           "201": {
-            "description": "Cache creation or update has been initiated. Poll the new Cache's provisioningState property to monitor creation progress.",
+            "description": "Cache creation or update has been initiated. Poll the Cache's provisioningState property to monitor creation/update progress.",
             "schema": {
               "$ref": "#/definitions/Cache"
             }
           },
           "202": {
-            "description": "Cache creation or update has been initiated. Poll the new Cache's provisioningState property to monitor creation progress."
+            "description": "Cache creation or update has been initiated. Poll the Cache's provisioningState property to monitor creation/update progress."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -506,7 +506,7 @@
             "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
-            "description": "Name of Cache. Length of name must be not greater than 80 and chars must be in list of [-0-9a-zA-Z_] char class.",
+            "description": "Name of Cache. Length of name must not be greater than 80 and chars must be in list of [-0-9a-zA-Z_] char class.",
             "in": "path",
             "name": "cacheName",
             "pattern": "^[-0-9a-zA-Z_]{1,80}$",
@@ -568,7 +568,7 @@
             "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
-            "description": "Name of Cache. Length of name must be not greater than 80 and chars must be in list of [-0-9a-zA-Z_] char class.",
+            "description": "Name of Cache. Length of name must not be greater than 80 and chars must be in list of [-0-9a-zA-Z_] char class.",
             "in": "path",
             "name": "cacheName",
             "pattern": "^[-0-9a-zA-Z_]{1,80}$",
@@ -629,7 +629,7 @@
             "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
-            "description": "Name of Cache. Length of name must be not greater than 80 and chars must be in list of [-0-9a-zA-Z_] char class.",
+            "description": "Name of Cache. Length of name must not be greater than 80 and chars must be in list of [-0-9a-zA-Z_] char class.",
             "in": "path",
             "name": "cacheName",
             "pattern": "^[-0-9a-zA-Z_]{1,80}$",
@@ -690,7 +690,7 @@
             "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
-            "description": "Name of Cache. Length of name must be not greater than 80 and chars must be in list of [-0-9a-zA-Z_] char class.",
+            "description": "Name of Cache. Length of name must not be greater than 80 and chars must be in list of [-0-9a-zA-Z_] char class.",
             "in": "path",
             "name": "cacheName",
             "pattern": "^[-0-9a-zA-Z_]{1,80}$",
@@ -751,7 +751,7 @@
             "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
-            "description": "Name of Cache. Length of name must be not greater than 80 and chars must be in list of [-0-9a-zA-Z_] char class.",
+            "description": "Name of Cache. Length of name must not be greater than 80 and chars must be in list of [-0-9a-zA-Z_] char class.",
             "in": "path",
             "name": "cacheName",
             "pattern": "^[-0-9a-zA-Z_]{1,80}$",
@@ -808,7 +808,7 @@
             "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
-            "description": "Name of Cache. Length of name must be not greater than 80 and chars must be in list of [-0-9a-zA-Z_] char class.",
+            "description": "Name of Cache. Length of name must not be greater than 80 and chars must be in list of [-0-9a-zA-Z_] char class.",
             "in": "path",
             "name": "cacheName",
             "pattern": "^[-0-9a-zA-Z_]{1,80}$",
@@ -872,7 +872,7 @@
             "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
-            "description": "Name of Cache. Length of name must be not greater than 80 and chars must be in list of [-0-9a-zA-Z_] char class.",
+            "description": "Name of Cache. Length of name must not be greater than 80 and chars must be in list of [-0-9a-zA-Z_] char class.",
             "in": "path",
             "name": "cacheName",
             "pattern": "^[-0-9a-zA-Z_]{1,80}$",
@@ -880,7 +880,7 @@
             "type": "string"
           },
           {
-            "description": "Name of the Storage Target. Length of name must be not greater than 80 and chars must be in list of [-0-9a-zA-Z_] char class.",
+            "description": "Name of the Storage Target. Length of name must not be greater than 80 and chars must be in list of [-0-9a-zA-Z_] char class.",
             "in": "path",
             "name": "storageTargetName",
             "pattern": "^[-0-9a-zA-Z_]{1,80}$",
@@ -935,7 +935,7 @@
             "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
-            "description": "Name of Cache. Length of name must be not greater than 80 and chars must be in list of [-0-9a-zA-Z_] char class.",
+            "description": "Name of Cache. Length of name must not be greater than 80 and chars must be in list of [-0-9a-zA-Z_] char class.",
             "in": "path",
             "name": "cacheName",
             "pattern": "^[-0-9a-zA-Z_]{1,80}$",
@@ -943,7 +943,7 @@
             "type": "string"
           },
           {
-            "description": "Name of the Storage Target. Length of name must be not greater than 80 and chars must be in list of [-0-9a-zA-Z_] char class.",
+            "description": "Name of the Storage Target. Length of name must not be greater than 80 and chars must be in list of [-0-9a-zA-Z_] char class.",
             "in": "path",
             "name": "storageTargetName",
             "pattern": "^[-0-9a-zA-Z_]{1,80}$",
@@ -1018,7 +1018,7 @@
             "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
-            "description": "Name of Cache. Length of name must be not greater than 80 and chars must be in list of [-0-9a-zA-Z_] char class.",
+            "description": "Name of Cache. Length of name must not be greater than 80 and chars must be in list of [-0-9a-zA-Z_] char class.",
             "in": "path",
             "name": "cacheName",
             "pattern": "^[-0-9a-zA-Z_]{1,80}$",
@@ -1388,23 +1388,23 @@
       "description": "Active Directory settings used to join a Cache to a Domain.",
       "properties": {
         "primaryDnsIpAddress": {
-          "description": "primary DNS IP address of the AD Domain controller.",
+          "description": "Primary DNS IP address used to resolve the Active Directory domain controller's fully qualified domain name.",
           "type": "string"
         },
         "secondaryDnsIpAddress": {
-          "description": "secondary DNS IP address of the AD Domain controller.",
+          "description": "Secondary DNS IP address used to resolve the Active Directory domain controller's fully qualified domain name.",
           "type": "string"
         },
         "domainName": {
-          "description": "The Fully Qualified Domain Name of the Active Directory Domain.",
+          "description": "The fully qualified domain name of the Active Directory domain controller.",
           "type": "string"
         },
         "domainNetBios": {
-          "description": "The Active Directory Domain's NetBios.",
+          "description": "The Active Directory domain's NetBIOS name.",
           "type": "string"
         },
         "smbServerName": {
-          "description": "The name (NetBIOS) used for the HPC Cache to join the Active Directory Domain. Length must be not greater than 15 and chars must be in list of [-0-9a-zA-Z_] char class.",
+          "description": "The name (NetBIOS) used for the HPC Cache to join the Active Directory Domain. Length must not be greater than 15 and chars must be in list of [-0-9a-zA-Z_] char class.",
           "pattern": "^[-0-9a-zA-Z_]{1,15}$",
           "type": "string"
         },
@@ -1423,7 +1423,7 @@
           }
         },
         "credentials": {
-          "description": "Active Directory admin or user credentials used to join the HPC Cache to a Domain.",
+          "description": "Active Directory admin or user credentials used to join the HPC Cache to a domain.",
           "properties": {
             "username": {
               "description": "User name of the Active Directory domain administrator. This value is stored encrypted and not returned on response.",
@@ -1453,7 +1453,7 @@
       "description": "Settings for username and group download for Extended groups.",
       "type": "object",
       "properties": {
-        "extendedGroups": {
+        "extendedGroupsEnabled": {
           "type": "boolean",
           "description": "This indicates if Extended Groups is enabled."
         },
@@ -1474,11 +1474,11 @@
         },
         "groupFileURI": {
           "type": "string",
-          "description": "The URI of the file containing the group (etc/group) information. This field must be populated when 'usernameSource' is set to 'File'."
+          "description": "The URI of the file containing the group information (in etc/group file format).  This field must be populated when 'usernameSource' is set to 'File'."
         },
         "userFileURI": {
           "type": "string",
-          "description": "The URI of the file containing the user (etc/passwd) information. This field must be populated when 'usernameSource' is set to 'File'."
+          "description": "The URI of the file containing the user information (in etc/passwd file format). This field must be populated when 'usernameSource' is set to 'File'."
         },
         "ldapServer": {
           "type": "string",
@@ -1502,7 +1502,7 @@
         },
         "caCertificateURI": {
           "type": "string",
-          "description": "The URI of the CA certificate to validate the LDAP secure connection. This field must be populated when 'requireValidCertificate' is set to 'true'."
+          "description": "The URI of the CA certificate to validate the LDAP secure connection. This field must be populated when 'requireValidCertificate' is set to true."
         },
         "usernamePolled": {
           "description": "Indicates if the HPC Cache has performed the username download successfully.",
@@ -1519,11 +1519,11 @@
           }
         },
         "credentials": {
-          "description": "When present, these are the credentials for secure LDAP connection.",
+          "description": "When present, these are the credentials for the secure LDAP connection.",
           "properties": {
             "bindDn": {
               "type": "string",
-              "description": "The Bind Distinguished Name identity to be used in the secure LDAP connection. This value is stored encrypted and not returned on response."
+              "description": "The Bind distinguished name identity to be used in the secure LDAP connection. This value is stored encrypted and not returned on response."
             },
             "bindPassword": {
               "type": "string",
@@ -1538,7 +1538,7 @@
       "description": "A set of rules describing access policies applied to NFSv3 clients of the cache.",
       "properties": {
         "name": {
-          "description": "Name identifying this policy.  Access Policy names are not case sensitive.",
+          "description": "Name identifying this policy. Access Policy names are not case sensitive.",
           "type": "string"
         },
         "accessRules": {
@@ -1567,7 +1567,7 @@
           }
         },
         "filter": {
-          "description": "Filter applied to this rule: format depends on scope.  Default: unused, network: CIDR (eg 10.99.1.0/24), host: IP address or FQDN",
+          "description": "Filter applied to this rule. The filter's format depends on its scope.  'default' scope is reserved for system use. 'network' is in CIDR format (e.g., 10.99.1.0/24) and 'host' is an IP address or fully qualified domain name.",
           "type": "string"
         },
         "access": {
@@ -1884,10 +1884,10 @@
           "items": {
             "type": "string"
           },
-          "description": "The set of locations that the SKU is available. This will be supported and registered Azure Geo Regions (e.g., West US, East US, Southeast Asia, etc.)."
+          "description": "The set of locations where the SKU is available. This is the supported and registered Azure Geo Regions (e.g., West US, East US, Southeast Asia, etc.)."
         },
         "locationInfo": {
-          "description": "The set of locations that the SKU is available.",
+          "description": "The set of locations where the SKU is available.",
           "items": {
             "$ref": "#/definitions/ResourceSkuLocationInfo"
           },
