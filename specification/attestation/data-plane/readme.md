@@ -113,11 +113,19 @@ uncomment the  `exclude-file` section below and add the file paths.
 directive:
   - suppress: DefinitionsPropertiesNamesCamelCase
     from: attestation.json
-    where: $.definitions.StoredAttestationPolicy
+    where: $.definitions.StoredAttestationPolicy.properties.AttestationPolicy
     reason: Existing Clients use these definitions which must be maintained.
   - suppress: DefinitionsPropertiesNamesCamelCase
     from: attestation.json
-    where: $.definitions.AttestationResult
+    where: $.definitions.AttestationResult.properties.policy_signer
+    reason: Existing Clients use these definitions which must be maintained.
+  - suppress: DefinitionsPropertiesNamesCamelCase
+    from: attestation.json
+    where: $.definitions.AttestationResult.properties.policy_hash
+    reason: Existing Clients use these definitions which must be maintained.
+  - suppress: DefinitionsPropertiesNamesCamelCase
+    from: attestation.json
+    where: $.definitions.AttestationResult.properties.rp_data
     reason: Existing Clients use these definitions which must be maintained.
 ```
 
