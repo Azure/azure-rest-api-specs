@@ -564,6 +564,12 @@
           },
           {
             "$ref": "#/parameters/Environment"
+          },
+          {
+            "$ref": "#/parameters/source"
+          },
+          {
+            "$ref": "#/parameters/changedSince"
           }
         ],
         "consumes": [
@@ -1415,6 +1421,24 @@
       "description": "Knowledgebase id.",
       "x-ms-parameter-location": "method"
     },
+    "source": {
+      "type": "string",
+      "name": "source",
+      "in": "query",
+      "required": false,
+      "x-nullable": false,
+      "description": "The source property filter to apply. Sample value: Editorial, smartLight%20FAQ.tsv .",
+      "x-ms-parameter-location": "method"
+    },
+    "changedSince": {
+      "type": "string",
+      "name": "changedSince",
+      "in": "query",
+      "required": false,
+      "x-nullable": false,
+      "description": "changedSince property is used to return all QnAs created or updated after a specific time duration. The user can filter QnAs by seconds (s), minutes (m), hours (h) and days (d). The user may use any integral value along with the suffix for time. For instance, the value of 5m returns all QnA pairs updated or created in the last 5 minutes.",
+      "x-ms-parameter-location": "method"
+    },
     "OperationId": {
       "type": "string",
       "name": "operationId",
@@ -1446,7 +1470,7 @@
     },
     "Endpoint": {
       "name": "Endpoint",
-      "description": "Supported Cognitive Services endpoints (protocol and hostname, for example: https://westus.api.cognitive.microsoft.com).",
+      "description": "Supported Cognitive Services endpoint (e.g., https://< qnamaker-resource-name> .api.cognitiveservices.azure.com).",
       "x-ms-parameter-location": "client",
       "required": true,
       "type": "string",
