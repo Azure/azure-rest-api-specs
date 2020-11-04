@@ -20,19 +20,6 @@ To see additional help and options, run:
 ## Configuration
 Following are the settings for using this specification with [AutoRest](https://aka.ms/autorest) tool to validation and optionally generate SDK.
 
-### Suppression
-``` yaml
-directive:
-  - suppress: DefinitionsPropertiesNamesCamelCase
-    from: attestation.json
-    where: $.definitions.StoredAttestationPolicy
-    reason: Existing Clients use these definitions which must be maintained.
-  - suppress: DefinitionsPropertiesNamesCamelCase
-    from: attestation.json
-    where: $.definitions.AttestationResult
-    reason: Existing Clients use these definitions which must be maintained.
-```
-
 ### Basic Information
 These are the global settings for the Attestation APIs.
 
@@ -119,5 +106,18 @@ uncomment the  `exclude-file` section below and add the file paths.
 ``` yaml $(tag) == 'all-api-versions'
 #exclude-file: 
 #  - $(this-folder)/Microsoft.Example/stable/2010-01-01/somefile.json
+```
+
+### Suppression
+``` yaml
+directive:
+  - suppress: DefinitionsPropertiesNamesCamelCase
+    from: attestation.json
+    where: $.definitions.StoredAttestationPolicy
+    reason: Existing Clients use these definitions which must be maintained.
+  - suppress: DefinitionsPropertiesNamesCamelCase
+    from: attestation.json
+    where: $.definitions.AttestationResult
+    reason: Existing Clients use these definitions which must be maintained.
 ```
 
