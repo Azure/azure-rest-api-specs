@@ -9171,6 +9171,9 @@
           },
           {
             "$ref": "#/parameters/IfTags"
+          },
+          {
+            "$ref": "#/parameters/LeaseIdOptional"
           }
         ],
         "responses": {
@@ -9243,6 +9246,9 @@
           },
           {
             "$ref": "#/parameters/IfTags"
+          },
+          {
+            "$ref": "#/parameters/LeaseIdOptional"
           },
           {
             "$ref": "#/parameters/BlobTagsBody"
@@ -10359,8 +10365,8 @@
         "ContainerName": {
           "type": "string"
         },
-        "TagValue": {
-          "type": "string"
+        "Tags": {
+          "$ref": "#/definitions/BlobTags"
         }
       }
     },
