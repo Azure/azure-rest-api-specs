@@ -21,6 +21,13 @@ To see additional help and options, run:
 Following are the settings for using this specification with [AutoRest](https://aka.ms/autorest) tool to validation and optionally generate SDK.
 
 ### Suppression
+directive:
+  - NO_CAMEL_CASE
+  - from: attestation
+    where:
+      - $.definitions.StoredAttestationPolicy
+      - $.definitions.PolicyResult
+    reason: Existing Clients use these definitions which must be maintained.
 
 ### Basic Information
 These are the global settings for the Attestation APIs.
@@ -100,7 +107,6 @@ require: $(this-folder)/../../../profiles/readme.md
 input-file:
   - $(this-folder)/Microsoft.Attestation/stable/2018-09-01/attestation.json
   - $(this-folder)/Microsoft.Attestation/stable/2020-10-01/attestation.json
-
 ```
 
 If there are files that should not be in the `all-api-versions` set, 
