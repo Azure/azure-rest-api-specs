@@ -21,6 +21,7 @@ To see additional help and options, run:
 Following are the settings for using this specification with [AutoRest](https://aka.ms/autorest) tool to validation and optionally generate SDK.
 
 ### Suppression
+``` yaml
 directive:
   - suppress: DefinitionsPropertiesNamesCamelCase
     from: attestation.json
@@ -30,6 +31,7 @@ directive:
     from: attestation.json
     where: $.definitions.AttestationResult
     reason: Existing Clients use these definitions which must be maintained.
+```
 
 ### Basic Information
 These are the global settings for the Attestation APIs.
