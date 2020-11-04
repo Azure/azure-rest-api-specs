@@ -347,11 +347,11 @@ input-file:
 - Microsoft.Insights/stable/2017-04-01/activityLogAlerts_API.json
 ```
 
-### Tag: package-2019-11-preview-only
+### Tag: package-2019-11-01-preview-only
 
-These settings apply only when `--tag=package-2019-11-preview-only` is specified on the command line.
+These settings apply only when `--tag=package-2019-11-01-preview-only` is specified on the command line.
 
-``` yaml $(tag) == 'package-2019-11-preview-only'
+``` yaml $(tag) == 'package-2019-11-01-preview-only'
 input-file:
   - Microsoft.Insights/preview/2019-11-01-preview/dataCollectionRuleAssociations_API.json
   - Microsoft.Insights/preview/2019-11-01-preview/dataCollectionRules_API.json
