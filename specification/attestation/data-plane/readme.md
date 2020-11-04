@@ -22,11 +22,13 @@ Following are the settings for using this specification with [AutoRest](https://
 
 ### Suppression
 directive:
-  - NO_CAMEL_CASE
-  - from: attestation
-    where:
-      - $.definitions.StoredAttestationPolicy
-      - $.definitions.PolicyResult
+  - suppress: DefinitionsPropertiesNamesCamelCase
+    from: attestation.json
+    where: $.definitions.StoredAttestationPolicy
+    reason: Existing Clients use these definitions which must be maintained.
+  - suppress: DefinitionsPropertiesNamesCamelCase
+    from: attestation.json
+    where: $.definitions.PolicyResult
     reason: Existing Clients use these definitions which must be maintained.
 
 ### Basic Information
