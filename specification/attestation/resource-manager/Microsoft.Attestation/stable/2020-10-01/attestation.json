@@ -3,7 +3,7 @@
   "info": {
     "title": "AttestationManagementClient",
     "description": "Various APIs for managing resources in attestation service. This primarily encompasses per-tenant instance management.",
-    "version": "2018-09-01-preview"
+    "version": "2020-10-01"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -110,7 +110,7 @@
           "AttestationProviders"
         ],
         "operationId": "AttestationProviders_Create",
-        "description": "Creates or updates the Attestation Provider.",
+        "description": "Creates a new Attestation Provider instance.",
         "x-ms-examples": {
           "AttestationProviders_Create": {
             "$ref": "./examples/Create_AttestationProvider.json"
@@ -128,7 +128,7 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "Name of the attestation service"
+            "description": "Name of the attestation service instance."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -188,7 +188,7 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "Name of the attestation service"
+            "description": "Name of the attestation service instance."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -426,6 +426,11 @@
   "definitions": {
     "OperationList": {
       "properties": {
+        "systemData": {
+          "readOnly": true,
+          "description": "The system metadata relating to this resource",
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/systemData"
+        },
         "value": {
           "type": "array",
           "description": "List of supported operations.",
@@ -483,6 +488,11 @@
         }
       ],
       "properties": {
+        "systemData": {
+          "readOnly": true,
+          "description": "The system metadata relating to this resource",
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/systemData"
+        },
         "properties": {
           "type": "object",
           "$ref": "#/definitions/StatusResult",
@@ -544,6 +554,11 @@
     "AttestationProviderListResult": {
       "description": "Attestation Providers List.",
       "properties": {
+        "systemData": {
+          "readOnly": true,
+          "description": "The system metadata relating to this resource",
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/systemData"
+        },
         "value": {
           "type": "array",
           "description": "Attestation Provider array.",
@@ -594,10 +609,6 @@
     "AttestationServiceCreationSpecificParams": {
       "description": "Client supplied parameters used to create a new attestation service instance.",
       "properties": {
-        "attestationPolicy": {
-          "type": "string",
-          "description": "Name of attestation policy."
-        },
         "policySigningCertificates": {
           "description": "JSON Web Key Set defining a set of X.509 Certificates that will represent the parent certificate for the signing certificate used for policy operations",
           "$ref": "../../../../../common-types/rfcs/rfc7517.json#/definitions/JSONWebKeySet"
@@ -611,10 +622,7 @@
       "in": "query",
       "required": true,
       "type": "string",
-      "description": "Client API version.",
-      "enum": [
-        "2018-09-01-preview"
-      ]
+      "description": "Client API version. Current version is 2020-10-01"
     }
   }
 }
