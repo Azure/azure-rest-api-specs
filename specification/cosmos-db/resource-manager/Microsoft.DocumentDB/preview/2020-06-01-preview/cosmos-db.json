@@ -4341,7 +4341,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.DocumentDB/locations/{location}/restorableDatabaseAccounts/{instanceId}/restorableSqlDatabases/{sqlDatabaseSnapshotId}": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.DocumentDB/locations/{location}/restorableDatabaseAccounts/{instanceId}/restorableSqlDatabases/{restorableSqlDatabaseId}": {
       "get": {
         "operationId": "RestorableSqlDatabases_Get",
         "x-ms-examples": {
@@ -4364,7 +4364,7 @@
             "$ref": "#/parameters/instanceIdParameter"
           },
           {
-            "$ref": "#/parameters/sqlDatabaseSnapshotIdParameter"
+            "$ref": "#/parameters/restorableSqlDatabaseIdParameter"
           }
         ],
         "responses": {
@@ -4428,7 +4428,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.DocumentDB/locations/{location}/restorableDatabaseAccounts/{instanceId}/restorableSqlContainers/{sqlContainerSnapshotId}": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.DocumentDB/locations/{location}/restorableDatabaseAccounts/{instanceId}/restorableSqlContainers/{restorableSqlContainerId}": {
       "get": {
         "operationId": "RestorableSqlContainers_Get",
         "x-ms-examples": {
@@ -4451,7 +4451,7 @@
             "$ref": "#/parameters/instanceIdParameter"
           },
           {
-            "$ref": "#/parameters/sqlContainerSnapshotIdParameter"
+            "$ref": "#/parameters/restorableSqlContainerIdParameter"
           }
         ],
         "responses": {
@@ -4563,7 +4563,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.DocumentDB/locations/{location}/restorableDatabaseAccounts/{instanceId}/restorableMongodbDatabases/{mongodbDatabaseSnapshotId}": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.DocumentDB/locations/{location}/restorableDatabaseAccounts/{instanceId}/restorableMongodbDatabases/{restorableMongodbDatabaseId}": {
       "get": {
         "operationId": "RestorableMongodbDatabases_Get",
         "x-ms-examples": {
@@ -4586,7 +4586,7 @@
             "$ref": "#/parameters/instanceIdParameter"
           },
           {
-            "$ref": "#/parameters/mongodbDatabaseSnapshotIdParameter"
+            "$ref": "#/parameters/restorableMongodbDatabaseIdParameter"
           }
         ],
         "responses": {
@@ -4650,7 +4650,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.DocumentDB/locations/{location}/restorableDatabaseAccounts/{instanceId}/restorableMongodbCollections/{mongodbCollectionSnapshotId}": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.DocumentDB/locations/{location}/restorableDatabaseAccounts/{instanceId}/restorableMongodbCollections/{restorableMongodbCollectionId}": {
       "get": {
         "operationId": "RestorableMongodbCollections_Get",
         "x-ms-examples": {
@@ -4673,7 +4673,7 @@
             "$ref": "#/parameters/instanceIdParameter"
           },
           {
-            "$ref": "#/parameters/mongodbCollectionSnapshotIdParameter"
+            "$ref": "#/parameters/restorableMongodbCollectionIdParameter"
           }
         ],
         "responses": {
@@ -8270,18 +8270,15 @@
       "properties": {
         "accountName": {
           "type": "string",
-          "readOnly": true,
           "description": "The name of the global database account"
         },
         "creationTime": {
           "type": "string",
-          "readOnly": true,
           "format": "date-time",
           "description": "The creation time of the restorable database account (ISO-8601 format)."
         },
         "deletionTime": {
           "type": "string",
-          "readOnly": true,
           "format": "date-time",
           "description": "The time at which the restorable database account has been deleted (ISO-8601 format)."
         },
@@ -8386,37 +8383,44 @@
           "properties": {
             "_rid": {
               "type": "string",
-              "description": "A system generated property. A unique identifier.",
-              "readOnly": true
+              "readOnly": true,
+              "description": "A system generated property. A unique identifier."
             },
             "operationType": {
               "type": "string",
+              "readOnly": true,
               "description": "The operation type of this database event."
             },
             "eventTimestamp": {
               "type": "string",
+              "readOnly": true,
               "description": "The timestamp of this database event."
             },
             "ownerId": {
               "type": "string",
-              "description": "The name of type of this restorable SQL database."
+              "readOnly": true,
+              "description": "The name of this restorable SQL database."
             },
             "ownerResourceId": {
               "type": "string",
-              "description": "The resource Id of type of this restorable SQL database."
+              "readOnly": true,
+              "description": "The resource Id of this restorable SQL database."
             },
             "database": {
               "properties": {
                 "_colls": {
                   "type": "string",
-                  "description": "A system generated property that specified the addressable path of the collections resource."
+                  "readOnly": true,
+              "description": "A system generated property that specified the addressable path of the collections resource."
                 },
                 "_users": {
                   "type": "string",
+                  "readOnly": true,
                   "description": "A system generated property that specifies the addressable path of the users resource."
                 },
                 "_self": {
                   "type": "string",
+                  "readOnly": true,
                   "description": "A system generated property that specifies the addressable path of the database resource."
                 }
               },
@@ -8471,29 +8475,34 @@
           "properties": {
             "_rid": {
               "type": "string",
-              "description": "A system generated property. A unique identifier.",
-              "readOnly": true
+              "readOnly": true,
+              "description": "A system generated property. A unique identifier."
             },
             "operationType": {
               "type": "string",
+              "readOnly": true,
               "description": "The operation type of this container event."
             },
             "eventTimestamp": {
               "type": "string",
+              "readOnly": true,
               "description": "The timestamp of this container event."
             },
             "ownerId": {
               "type": "string",
-              "description": "The name of type of this restorable SQL container."
+              "readOnly": true,
+              "description": "The name of this restorable SQL container."
             },
             "ownerResourceId": {
               "type": "string",
-              "description": "The resource Id of type of this restorable SQL container."
+              "readOnly": true,
+              "description": "The resource Id of this restorable SQL container."
             },
             "documentCollection": {
               "properties": {
                 "_self": {
                   "type": "string",
+                  "readOnly": true,
                   "description": "A system generated property that specifies the addressable path of the container resource."
                 }
               },
@@ -8561,29 +8570,34 @@
           "properties": {
             "_rid": {
               "type": "string",
-              "description": "A system generated property. A unique identifier.",
-              "readOnly": true
+              "readOnly": true,
+              "description": "A system generated property. A unique identifier."
             },
             "operationType": {
               "type": "string",
+              "readOnly": true,
               "description": "The operation type of this database event."
             },
             "eventTimestamp": {
               "type": "string",
+              "readOnly": true,
               "description": "The timestamp of this database event."
             },
             "ownerId": {
               "type": "string",
-              "description": "The name of type of this restorable MongoDB database."
+              "readOnly": true,
+              "description": "The name of this restorable MongoDB database."
             },
             "ownerResourceId": {
               "type": "string",
-              "description": "The resource Id of type of this restorable MongoDB database."
+              "readOnly": true,
+              "description": "The resource Id of this restorable MongoDB database."
             },
             "database": {
               "properties": {
                 "_self": {
                   "type": "string",
+                  "readOnly": true,
                   "description": "A system generated property that specifies the addressable path of the database resource."
                 }
               },
@@ -8638,24 +8652,28 @@
           "properties": {
             "_rid": {
               "type": "string",
-              "description": "A system generated property. A unique identifier.",
-              "readOnly": true
+              "readOnly": true,
+              "description": "A system generated property. A unique identifier."
             },
             "operationType": {
               "type": "string",
+              "readOnly": true,
               "description": "The operation type of this collection event."
             },
             "eventTimestamp": {
               "type": "string",
+              "readOnly": true,
               "description": "The timestamp of this collection event."
             },
             "ownerId": {
               "type": "string",
-              "description": "The name of type of this restorable MongoDB collection."
+              "readOnly": true,
+              "description": "The name of this restorable MongoDB collection."
             },
             "ownerResourceId": {
               "type": "string",
-              "description": "The resource Id of type of this restorable MongoDB collection."
+              "readOnly": true,
+              "description": "The resource Id of this restorable MongoDB collection."
             },
             "documentCollection": {
               "properties": {
@@ -8866,37 +8884,37 @@
       "x-ms-parameter-location": "method",
       "description": "The instanceId GUID of a restorable database account."
     },
-    "sqlDatabaseSnapshotIdParameter": {
-      "name": "sqlDatabaseSnapshotId",
+    "restorableSqlDatabaseIdParameter": {
+      "name": "restorableSqlDatabaseId",
       "in": "path",
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method",
-      "description": "The snapshot GUID of the restorable SQL database."
+      "description": "The GUID of the restorable SQL database."
     },
-    "mongodbDatabaseSnapshotIdParameter": {
-      "name": "mongodbDatabaseSnapshotId",
+    "restorableMongodbDatabaseIdParameter": {
+      "name": "restorableMongodbDatabaseId",
       "in": "path",
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method",
-      "description": "The snapshot GUID of the restorable MongoDB database."
+      "description": "The GUID of the restorable MongoDB database."
     },
-    "sqlContainerSnapshotIdParameter": {
-      "name": "sqlContainerSnapshotId",
+    "restorableSqlContainerIdParameter": {
+      "name": "restorableSqlContainerId",
       "in": "path",
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method",
-      "description": "The snapshot GUID of the restorable SQL container."
+      "description": "The GUID of the restorable SQL container."
     },
-    "mongodbCollectionSnapshotIdParameter": {
-      "name": "mongodbCollectionSnapshotId",
+    "restorableMongodbCollectionIdParameter": {
+      "name": "restorableMongodbCollectionId",
       "in": "path",
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method",
-      "description": "The snapshot GUID of the restorable MongoDB collection."
+      "description": "The GUID of the restorable MongoDB collection."
     },
     "restorableSqlDatabaseRidParameter": {
       "name": "restorableSqlDatabaseRid",
