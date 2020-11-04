@@ -39,7 +39,6 @@ output-folder: $(azureresourceschema-folder)/schemas
 
 # all the input files in this apiVersion
 input-file:
-  - Microsoft.Sql/preview/2020-02-02-preview/shortTermRetentionPolicies.json
   - Microsoft.Sql/preview/2020-02-02-preview/managedDatabases.json
   - Microsoft.Sql/preview/2020-02-02-preview/ServerAzureADOnlyAuthentications.json
   - Microsoft.Sql/preview/2020-02-02-preview/managedInstances.json

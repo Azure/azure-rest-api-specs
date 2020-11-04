@@ -37,7 +37,7 @@ tag: package-locks-2016-09
 ```
 
 ``` yaml $(package-policy)
-tag: package-policy-2020-03
+tag: package-policy-2020-09
 ```
 
 ``` yaml $(package-resources)
@@ -61,18 +61,27 @@ tag: package-deploymentscripts-2020-10
 ```
 
 ``` yaml $(package-templatespecs)
-tag: package-preview-2020-08
+tag: package-2020-09
 ```
 
+### Tag: package-policy-2020-09
+
+These settings apply only when `--tag=package-policy-2020-09` is specified on the command line.
+
+``` yaml $(tag) == 'package-policy-2020-09'
+input-file:
+- Microsoft.Authorization/stable/2020-09-01/dataPolicyManifests.json
+```
 
 ### Tag: package-preview-2020-08
 
 These settings apply only when `--tag=package-preview-2020-08` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2020-08'
+``` yaml $(tag) == 'package-preview-2020-08'
 input-file:
   - Microsoft.Solutions/preview/2020-08-21-preview/managedapplications.json
 ```
+
 ### Tag: package-resources-2020-06
 
 These settings apply only when `--tag=package-resources-2020-06` is specified on the command line.
@@ -555,7 +564,7 @@ directive:
   - suppress: BodyTopLevelProperties
     from: resources.json
     where: $.definitions.GenericResourceExpanded.properties
-    reason: createdTime,changedTime & provisioningState are top-level properties
+    reason: 'createdTime,changedTime & provisioningState are top-level properties'
   - suppress: BodyTopLevelProperties
     from: resources.json
     where: $.definitions.TagDetails.properties
@@ -574,7 +583,7 @@ directive:
     reason: TagDetails will be deprecated soon
   - suppress: XmsResourceInPutResponse
     from: resources.json
-    where: $.paths["/subscriptions/{subscriptionId}/tagNames/{tagName}"].put
+    where: '$.paths["/subscriptions/{subscriptionId}/tagNames/{tagName}"].put'
     reason: TagDetails is not an Azure resource
   - suppress: BodyTopLevelProperties
     from: managedapplications.json
@@ -593,19 +602,19 @@ directive:
     where: $.definitions.GenericResource.properties
     reason: managedBy is a top level property
   - from: deploymentScripts.json
-    suppress: TrackedResourceGetOperation 
+    suppress: TrackedResourceGetOperation
     where: $.definitions.AzureCliScript
     reason: Tooling issue.
   - from: deploymentScripts.json
-    suppress: TrackedResourcePatchOperation 
+    suppress: TrackedResourcePatchOperation
     where: $.definitions.AzureCliScript
     reason: Tooling issue.
   - from: deploymentScripts.json
-    suppress: TrackedResourceGetOperation 
+    suppress: TrackedResourceGetOperation
     where: $.definitions.AzurePowerShellScript
     reason: Tooling issue
   - from: deploymentScripts.json
-    suppress: TrackedResourcePatchOperation 
+    suppress: TrackedResourcePatchOperation
     where: $.definitions.AzurePowerShellScript
     reason: Tooling issue
   - from: deploymentScripts.json
@@ -613,23 +622,23 @@ directive:
     where: $.paths
     reason: OperationsAPI will come from Resources
   - from: deploymentScripts.json
-    suppress: R3006 #BodyTopLevelProperties
-    where: 
-    - $.definitions.DeploymentScript.properties
-    - $.definitions.AzureCliScript.properties
-    - $.definitions.AzurePowerShellScript.properties
+    suppress: R3006
+    where:
+      - $.definitions.DeploymentScript.properties
+      - $.definitions.AzureCliScript.properties
+      - $.definitions.AzurePowerShellScript.properties
     reason: Currently systemData is not allowed
   - suppress: OperationsAPIImplementation
     from: templateSpecs.json
     where: $.paths
     reason: OperationsAPI will come from Resources
-  - suppress: R3006 #BodyTopLevelProperties
+  - suppress: R3006
     from: templateSpecs.json
-    where: 
-    - $.definitions.TemplateSpec.properties
-    - $.definitions.TemplateSpecVersion.properties
-    - $.definitions.TemplateSpecUpdateModel.properties
-    - $.definitions.TemplateSpecVersionUpdateModel.properties
+    where:
+      - $.definitions.TemplateSpec.properties
+      - $.definitions.TemplateSpecVersion.properties
+      - $.definitions.TemplateSpecUpdateModel.properties
+      - $.definitions.TemplateSpecVersionUpdateModel.properties
     reason: Currently systemData is not allowed
   - suppress: TrackedResourceListByImmediateParent
     from: templateSpecs.json
@@ -639,6 +648,26 @@ directive:
     from: templateSpecs.json
     where: $.definitions.TemplateSpecVersion
     reason: Tooling issue
+  - suppress: OperationsAPIImplementation
+    where: $.paths
+    from: dataPolicyManifests.json
+    reason: operation APIs for Microsoft.Authorization are to be defined in RBAC swagger
+  - suppress: EnumInsteadOfBoolean
+    where: $.definitions.DataManifestCustomResourceFunctionDefinition.properties.allowCustomProperties
+    from: dataPolicyManifests.json
+    reason: 'This property can only have two values. '
+  - suppress: EnumInsteadOfBoolean
+    where: $.definitions.DataPolicyManifestProperties.properties.isBuiltInOnly
+    from: dataPolicyManifests.json
+    reason: 'This property can only have two values. '
+  - suppress: PageableOperation
+    where: '$.paths["/providers/Microsoft.Authorization/dataPolicyManifests"].get'
+    from: dataPolicyManifests.json
+    reason: Pagination not supported. The size of the result list is pretty limited
+  - suppress: DescriptionAndTitleMissing
+    where: $.definitions.AliasPathMetadata
+    from: resources.json
+    reason: This was already checked in - not my code
 ```
 
 ---
@@ -718,4 +747,3 @@ override-info:
 ## AzureResourceSchema
 
 See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
-
