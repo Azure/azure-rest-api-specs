@@ -30,7 +30,7 @@ batch:
 These settings apply only when `--tag=package-2020-12 --python` is specified on the command line.
 Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
 
-``` yaml $(tag) == 'package-2020-10' && $(python)
+``` yaml $(tag) == 'package-2020-12' && $(python)
 python:
   namespace: azure.mgmt.digitaltwins.v2020_12_01
   output-folder: $(python-sdks-folder)/digitaltwins/azure-mgmt-digitaltwins/azure/mgmt/digitaltwins/v2020_12_01
