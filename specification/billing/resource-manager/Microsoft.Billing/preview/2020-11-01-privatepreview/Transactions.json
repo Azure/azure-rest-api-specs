@@ -3,7 +3,7 @@
   "info": {
     "version": "2020-11-01-privatepreview",
     "title": "BillingManagementClient",
-    "description": "Billing client provides access to billing resources for Azure subscriptions."
+    "description": "Billing client provides access to billing resources."
   },
   "host": "management.azure.com",
   "schemes": [
@@ -136,12 +136,12 @@
     },
     "TransactionSummaryProperties": {
       "description": "The properties of transaction summary.",
-      "properties": {        
+      "properties": {
         "totalAzureCreditApplied": {
           "description": "The total amount of any Azure credits applied.",
           "readOnly": true,
           "$ref": "#/definitions/Amount"
-        },        
+        },
         "totalCharges": {
           "description": "The total pre-tax charged amount.",
           "readOnly": true,
@@ -186,14 +186,6 @@
       "name": "billingAccountName",
       "in": "path",
       "description": "The ID that uniquely identifies a billing account.",
-      "required": true,
-      "type": "string",
-      "x-ms-parameter-location": "method"
-    },
-    "operationIdParameter": {
-      "name": "operationId",
-      "in": "path",
-      "description": "Operation Id.",
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method"
