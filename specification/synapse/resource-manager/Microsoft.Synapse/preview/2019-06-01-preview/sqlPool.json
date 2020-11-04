@@ -4211,6 +4211,168 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces/{workspaceName}/sqlPools/{sqlPoolName}/maintenanceWindows/current": {
+      "get": {
+        "tags": [
+          "SqlPools, MaintenanceWindows"
+        ],
+        "description": "Gets maintenance windows settings for a Sql Pool.",
+        "operationId": "MaintenanceWindows_Get",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./workspace.json#/parameters/workspaceNameParameter"
+          },
+          {
+            "type": "string",
+            "in": "path",
+            "name": "sqlPoolName",
+            "description": "SQL pool name",
+            "required": true
+          },
+          {
+            "name": "maintenanceWindowName",
+            "in": "query",
+            "description": "Maintenance window name.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved maintenance windows settings.",
+            "schema": {
+              "$ref": "#/definitions/MaintenanceWindows"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***"
+          }
+        },
+        "x-ms-examples": {
+          "Gets maintenance window settings for a selected database.": {
+            "$ref": "./examples/GetMaintenanceWindows.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "SqlPools, MaintenanceWindows"
+        ],
+        "description": "Sets maintenance windows settings for a Sql Pool.",
+        "operationId": "MaintenanceWindows_CreateOrUpdate",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./workspace.json#/parameters/workspaceNameParameter"
+          },
+          {
+            "type": "string",
+            "in": "path",
+            "name": "sqlPoolName",
+            "description": "SQL pool name",
+            "required": true
+          },
+          {
+            "name": "maintenanceWindowName",
+            "in": "query",
+            "description": "Maintenance window name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/MaintenanceWindows"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully set maintenance windows settings."
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 InvalidMaintenanceWindowSelection - Invalid maintenance window selection."
+          }
+        },
+        "x-ms-examples": {
+          "Sets maintenance window settings for a selected database.": {
+            "$ref": "./examples/CreateOrUpdateMaintenanceWindows.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces/{workspaceName}/sqlPools/{sqlPoolName}/maintenanceWindowOptions/current": {
+      "get": {
+        "tags": [
+          "SqlPool, MaintenanceWindowOptions"
+        ],
+        "description": "Gets a list of available maintenance windows.",
+        "operationId": "MaintenanceWindowOptions_Get",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./workspace.json#/parameters/workspaceNameParameter"
+          },
+          {
+            "type": "string",
+            "in": "path",
+            "name": "sqlPoolName",
+            "description": "SQL pool name",
+            "required": true
+          },
+          {
+            "name": "maintenanceWindowOptionsName",
+            "in": "query",
+            "description": "Maintenance window options name.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the list of maintenance windows options.",
+            "schema": {
+              "$ref": "#/definitions/MaintenanceWindowOptions"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***"
+          }
+        },
+        "x-ms-examples": {
+          "Gets a list of available maintenance windows for a selected Sql pool.": {
+            "$ref": "./examples/GetMaintenanceWindowOptions.json"
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -6166,6 +6328,122 @@
         "code",
         "message"
       ]
+    },
+    "MaintenanceWindows": {
+      "description": "Maintenance windows.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/MaintenanceWindowsProperties",
+          "description": "Resource properties.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "MaintenanceWindowsProperties": {
+      "description": "Maintenance windows resource properties.",
+      "type": "object",
+      "properties": {
+        "timeRanges": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MaintenanceWindowTimeRange"
+          }
+        }
+      }
+    },
+    "MaintenanceWindowTimeRange": {
+      "description": "Maintenance window time range.",
+      "type": "object",
+      "properties": {
+        "dayOfWeek": {
+          "description": "Day of maintenance window.",
+          "enum": [
+            "Sunday",
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday",
+            "Saturday"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "DayOfWeek",
+            "modelAsString": true
+          }
+        },
+        "startTime": {
+          "description": "Start time minutes offset from 12am.",
+          "type": "string"
+        },
+        "duration": {
+          "description": "Duration of maintenance window in minutes.",
+          "type": "string"
+        }
+      }
+    },
+    "MaintenanceWindowOptions": {
+      "description": "Maintenance window options.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/MaintenanceWindowOptionsProperties",
+          "description": "Resource properties.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "MaintenanceWindowOptionsProperties": {
+      "description": "Maintenance window options properties.",
+      "type": "object",
+      "properties": {
+        "isEnabled": {
+          "description": "Whether maintenance windows are enabled for the Sql pool.",
+          "type": "boolean"
+        },
+        "maintenanceWindowCycles": {
+          "description": "Available maintenance cycles e.g. {Saturday, 0, 48*60}, {Wednesday, 0, 24*60}.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MaintenanceWindowTimeRange"
+          }
+        },
+        "minDurationInMinutes": {
+          "format": "int32",
+          "description": "Minimum duration of maintenance window.",
+          "type": "integer"
+        },
+        "defaultDurationInMinutes": {
+          "format": "int32",
+          "description": "Default duration for maintenance window.",
+          "type": "integer"
+        },
+        "minCycles": {
+          "format": "int32",
+          "description": "Minimum number of maintenance windows cycles to be set on the Sql pool.",
+          "type": "integer"
+        },
+        "timeGranularityInMinutes": {
+          "format": "int32",
+          "description": "Time granularity in minutes for maintenance windows.",
+          "type": "integer"
+        },
+        "allowMultipleMaintenanceWindowsPerCycle": {
+          "description": "Whether we allow multiple maintenance windows per cycle.",
+          "type": "boolean"
+        }
+      }
     }
   },
   "parameters": {
