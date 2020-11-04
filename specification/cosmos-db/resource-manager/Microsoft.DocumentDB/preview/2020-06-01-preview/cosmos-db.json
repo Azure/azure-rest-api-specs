@@ -8270,26 +8270,31 @@
       "properties": {
         "accountName": {
           "type": "string",
+          "readOnly": true,
           "description": "The name of the global database account"
         },
         "creationTime": {
           "type": "string",
+          "readOnly": true,
           "format": "date-time",
           "description": "The creation time of the restorable database account (ISO-8601 format)."
         },
         "deletionTime": {
           "type": "string",
+          "readOnly": true,
           "format": "date-time",
           "description": "The time at which the restorable database account has been deleted (ISO-8601 format)."
         },
         "apiType": {
-          "description": "Enum to indicate the API type of the restorable database account.",
           "type": "string",
+          "readOnly": true,
+          "description": "Enum to indicate the API type of the restorable database account.",
           "$ref": "#/definitions/ApiType"
         },
         "restorableLocations": {
-          "description": "List of regions where the of the database account can be restored from.",
           "type": "array",
+          "readOnly": true,
+          "description": "List of regions where the of the database account can be restored from.",
           "items": {
             "$ref": "#/definitions/RestorableLocationResource"
           }
@@ -8299,6 +8304,7 @@
     "ApiType": {
       "description": "Enum to indicate the API type of the restorable database account.",
       "type": "string",
+      "readOnly": true,
       "enum": [
         "None",
         "MongoDB",
@@ -8320,19 +8326,23 @@
       "properties": {
         "locationName": {
           "type": "string",
+          "readOnly": true,
           "description": "The location of the regional restorable account."
         },
         "regionalDatabaseAccountInstanceId": {
           "type": "string",
+          "readOnly": true,
           "description": "The instance id of the regional restorable account."
         },
         "creationTime": {
           "type": "string",
+          "readOnly": true,
           "format": "date-time",
           "description": "The creation time of the regional restorable database account (ISO-8601 format)."
         },
         "deletionTime": {
           "type": "string",
+          "readOnly": true,
           "format": "date-time",
           "description": "The time at which the regional restorable database account has been deleted (ISO-8601 format)."
         }
