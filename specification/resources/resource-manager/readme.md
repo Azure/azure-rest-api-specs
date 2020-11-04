@@ -41,7 +41,7 @@ tag: package-policy-2020-03
 ```
 
 ``` yaml $(package-resources)
-tag: package-resources-2020-06
+tag: package-resources-2020-08
 ```
 
 ``` yaml $(package-subscriptions)
@@ -73,13 +73,13 @@ These settings apply only when `--tag=package-preview-2020-08` is specified on t
 input-file:
   - Microsoft.Solutions/preview/2020-08-21-preview/managedapplications.json
 ```
-### Tag: package-resources-2020-06
+### Tag: package-resources-2020-08
 
-These settings apply only when `--tag=package-resources-2020-06` is specified on the command line.
+These settings apply only when `--tag=package-resources-2020-08` is specified on the command line.
 
-``` yaml $(tag) == 'package-resources-2020-06'
+``` yaml $(tag) == 'package-resources-2020-08'
 input-file:
-- Microsoft.Resources/stable/2020-06-01/resources.json
+- Microsoft.Resources/stable/2020-08-01/resources.json
 ```
 
 ### Tag: package-subscriptions-2020-01
@@ -295,6 +295,15 @@ These settings apply only when `--tag=package-policy-2015-10` is specified on th
 ``` yaml $(tag) == 'package-policy-2015-10'
 input-file:
 - Microsoft.Authorization/preview/2015-10-01-preview/policy.json
+```
+
+### Tag: package-resources-2020-06
+
+These settings apply only when `--tag=package-resources-2020-06` is specified on the command line.
+
+``` yaml $(tag) == 'package-resources-2020-06'
+input-file:
+- Microsoft.Resources/stable/2020-06-01/resources.json
 ```
 
 ### Tag: package-resources-2019-10
