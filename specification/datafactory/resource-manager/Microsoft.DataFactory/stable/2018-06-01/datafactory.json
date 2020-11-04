@@ -3954,6 +3954,15 @@
             "required": false,
             "type": "string",
             "description": "ETag of the managed private endpoint entity. Should only be specified for update, for which it should match existing entity or can be * for unconditional update."
+          },
+          {
+            "name": "managedPrivateEndpoint",
+            "description": "Managed private endpoint resource definition.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ManagedPrivateEndpointResource"
+            }
           }
         ],
         "responses": {
