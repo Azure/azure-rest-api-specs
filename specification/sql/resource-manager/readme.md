@@ -625,7 +625,6 @@ input-file:
  - ./Microsoft.Sql/preview/2020-08-01-preview/ImportExport.json
  - ./Microsoft.Sql/preview/2020-08-01-preview/InstanceFailoverGroups.json
  - ./Microsoft.Sql/preview/2020-08-01-preview/InstancePools.json
- - ./Microsoft.Sql/preview/2020-08-01-preview/InterfaceEndpointProfiles.json
  - ./Microsoft.Sql/preview/2020-08-01-preview/JobAgents.json
  - ./Microsoft.Sql/preview/2020-08-01-preview/JobCredentials.json
  - ./Microsoft.Sql/preview/2020-08-01-preview/JobExecutions.json
