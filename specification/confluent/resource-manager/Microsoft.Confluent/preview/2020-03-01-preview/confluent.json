@@ -77,8 +77,8 @@
             "tags": [
               "Agreements"
             ],
-            "summary": "Accept marketplace terms.",
-            "operationId": "MarketplaceAgreements_AcceptTerms",
+            "summary": "Create Confluent Marketplace agreement in the subscription.",
+            "operationId": "MarketplaceAgreements_Create",
             "produces": [
               "application/json"
             ],
@@ -109,8 +109,8 @@
               }
             },
             "x-ms-examples": {
-              "MarketplaceAgreements_Set": {
-                "$ref": "./examples/MarketplaceAgreements_Set.json"
+              "MarketplaceAgreements_Create": {
+                "$ref": "./examples/MarketplaceAgreements_Create.json"
               }
            }
        }
@@ -498,23 +498,26 @@
      "ConfluentAgreementResource": {
         "description": "Agreement Terms definition",
         "type": "object",
+        "x-ms-azure-resource": true,
         "properties": {
           "id": {
-            "description": "The id of agreement resource.",
-            "type": "string"
+            "description": "The ARM id of the resource.",
+            "type": "string",
+            "readOnly": true
           },
           "name": {
             "description": "The name of the agreement.",
-            "type": "string"
+            "type": "string",
+            "readOnly": true
           },
           "type": {
             "description": "The type of the agreement.",
-            "type": "string"
+            "type": "string",
+            "readOnly": true
           },
           "properties": {
             "$ref": "#/definitions/ConfluentAgreementProperties",
-            "description": "Represents the properties of the resource.",
-            "x-ms-client-flatten": true
+            "description": "Represents the properties of the resource."
           }
         }
       },
