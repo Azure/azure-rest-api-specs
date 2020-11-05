@@ -5257,7 +5257,7 @@
                 "ShareItems": {
                     "type": "array",
                     "items": {
-                        "$ref": "#/definitions/ShareItem"
+                        "$ref": "#/definitions/ShareItemInternal"
                     },
                     "xml": {
                         "name": "Shares",
@@ -5419,7 +5419,7 @@
                 }
             }
         },
-        "ShareItem": {
+        "ShareItemInternal": {
             "xml": {
                 "name": "Share"
             },
@@ -5443,14 +5443,14 @@
                     "type": "string"
                 },
                 "Properties": {
-                    "$ref": "#/definitions/ShareProperties"
+                    "$ref": "#/definitions/SharePropertiesInternal"
                 },
                 "Metadata": {
                     "$ref": "#/definitions/Metadata"
                 }
             }
         },
-        "ShareProperties": {
+        "SharePropertiesInternal": {
             "description": "Properties of a share.",
             "type": "object",
             "required": [
@@ -5616,7 +5616,7 @@
             }
         },
         "ShareEnabledProtocols": {
-            "type": "string",
+            "type": "string"
         },
         "ShareRootSquash": {
             "type": "string",
