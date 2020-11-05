@@ -3196,14 +3196,26 @@
           }
         },
         "vcenterPassword": {
-          "description": "Reset the vCenter admin password for the private cloud",
+          "description": "Indicate to rotate the vCenter admin password for the private cloud",
           "type": "string",
-          "x-ms-secret": true
+          "enum": [
+            "OnetimeRotate"
+          ],
+          "x-ms-enum": {
+            "name": "VcsaAdminRotateEnum",
+            "modelAsString": true
+          }
         },
         "nsxtPassword": {
-          "description": "Reset the NSX-T admin password for the private cloud",
+          "description": "Indicate to rotate the NSX-T Manager password for the private cloud",
           "type": "string",
-          "x-ms-secret": true
+          "enum": [
+            "OnetimeRotate"
+          ],
+          "x-ms-enum": {
+            "name": "NsxtAdminRotateEnum",
+            "modelAsString": true
+          }
         }
       }
     },
