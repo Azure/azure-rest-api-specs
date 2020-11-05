@@ -36,7 +36,7 @@ output-folder: $(azureresourceschema-folder)/schemas
 
 # all the input files in this apiVersion
 input-file:
-  - Microsoft.Billing/preview/2020-11-01-preview/billing.json
+  - Microsoft.Billing/preview/2020-11-01-preview/reservations.json
 
 ```
 
