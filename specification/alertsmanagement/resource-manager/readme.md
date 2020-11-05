@@ -112,6 +112,7 @@ These settings apply only when `--tag=package-2020-08-04` is specified on the co
 ``` yaml $(tag) == 'package-2020-08-04-preview'
 input-file:
 - Microsoft.AlertsManagement/preview/2020-08-04-preview/AlertsManagement.json
+- Microsoft.AlertsManagement/preview/2020-08-04-preview/ResourceHealthAlertRules.json
 ```
 
 ---

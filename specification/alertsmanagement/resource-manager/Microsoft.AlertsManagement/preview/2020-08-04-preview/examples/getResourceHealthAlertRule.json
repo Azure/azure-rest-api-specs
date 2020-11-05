@@ -3,34 +3,7 @@
     "subscriptionId": "14ddf0c5-77c5-4b53-84f6-e1fa43ad68f7",
     "resourceGroupName": "gigtest",
     "ruleName": "highcpu",
-    "api-version": "2020-08-04-preview",
-    "parameters": {
-      "location": "global",
-      "properties": {
-        "description": "This is the description of the rule1",
-        "enabled": true,
-        "scopes": [
-          "/subscriptions/14ddf0c5-77c5-4b53-84f6-e1fa43ad68f7/resourceGroups/gigtest/providers/Microsoft.Compute/virtualMachines/gigwadme"
-        ],
-        "criteria": {
-          "allOf": [
-            {
-              "healthMonitorName": "root",
-              "namespace": "VmGuestHealth"
-            }
-          ]
-        },
-        "actions": [
-          {
-            "actionGroupId": "/subscriptions/14ddf0c5-77c5-4b53-84f6-e1fa43ad68f7/resourcegroups/gigtest/providers/microsoft.insights/notificationgroups/group2",
-            "webHookProperties": {
-              "key11": "value11",
-              "key12": "value12"
-            }
-          }
-        ]
-      }
-    }
+    "api-version": "2020-08-04-preview"
   },
   "responses": {
     "200": {
@@ -40,7 +13,7 @@
         "type": "Microsoft.AlertsManagement/resourceHealthAlerts",
         "location": "global",
         "properties": {
-          "description": "This is the description of the first rule",
+          "description": "This is the description of the rule1",
           "enabled": true,
           "scopes": [
             "/subscriptions/14ddf0c5-77c5-4b53-84f6-e1fa43ad68f7/resourceGroups/gigtest/providers/Microsoft.Compute/virtualMachines/gigwadme"
@@ -48,7 +21,9 @@
           "criteria": {
             "allOf": [
               {
-                "healthMonitorName": "root",
+                "monitorNames": [
+                  "root"
+                ],
                 "namespace": "VmGuestHealth"
               }
             ]

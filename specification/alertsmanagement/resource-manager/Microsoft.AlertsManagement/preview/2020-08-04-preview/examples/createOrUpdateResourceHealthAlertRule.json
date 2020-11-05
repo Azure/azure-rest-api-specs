@@ -5,6 +5,7 @@
     "ruleName": "highcpu",
     "api-version": "2020-08-04-preview",
     "parameters": {
+      "location": "global",
       "properties": {
         "description": "This is the description of the rule1",
         "enabled": true,
@@ -14,7 +15,9 @@
         "criteria": {
           "allOf": [
             {
-              "healthMonitorName": "root",
+              "monitorNames": [
+                "root"
+              ],
               "namespace": "VmGuestHealth"
             }
           ]
@@ -39,7 +42,7 @@
         "type": "Microsoft.AlertsManagement/resourceHealthAlerts",
         "location": "global",
         "properties": {
-          "description": "This is the description of the rule1",
+          "description": "This is the description of the first rule",
           "enabled": true,
           "scopes": [
             "/subscriptions/14ddf0c5-77c5-4b53-84f6-e1fa43ad68f7/resourceGroups/gigtest/providers/Microsoft.Compute/virtualMachines/gigwadme"
@@ -47,7 +50,7 @@
           "criteria": {
             "allOf": [
               {
-                "healthMonitorName": "root",
+                "monitorNames": "root",
                 "namespace": "VmGuestHealth"
               }
             ]
