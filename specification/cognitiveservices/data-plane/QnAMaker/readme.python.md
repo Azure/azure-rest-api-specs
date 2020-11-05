@@ -48,5 +48,5 @@ These settings apply only when `--tag=release_5_0_preview.1 --python` is specifi
 ``` yaml $(tag) == 'release_5_0_preview.1' && $(python)
 python:
   namespace: azure.cognitiveservices.knowledge.qnamaker.v5_0
-  output-folder: $(python-sdks-folder)/cognitiveservices/azure-cognitiveservices-knowledge-qnamaker/azure/cognitiveservices/knowledge/qnamaker/v5_0_preview
+  output-folder: $(python-sdks-folder)/cognitiveservices/azure-cognitiveservices-knowledge-qnamaker/azure/cognitiveservices/knowledge/qnamaker/v5_0_preview.1
 ```
