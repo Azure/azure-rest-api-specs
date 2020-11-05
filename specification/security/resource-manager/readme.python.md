@@ -24,6 +24,116 @@ namespace: azure.mgmt.security
 package-name: azure-mgmt-security
 package-version: 1.0.0b1
 clear-output-folder: true
+
+directive:
+  - from: jitNetworkAccessPolicies.json
+    where: $.definitions.JitNetworkAccessPortRule.properties
+    transform: >
+      return {
+        "number": {
+          "$ref": "#/definitions/PortNumber"
+        },
+        "protocol": {
+          "type": "string",
+          "enum": [
+            "TCP",
+            "UDP",
+            "*"
+          ],
+          "x-ms-enum": {
+            "name": "protocolEnum",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "TCP"
+              },
+              {
+                "value": "UDP"
+              },
+              {
+                "value": "*",
+                "name": "All"
+              }
+            ]
+          }
+        },
+        "allowedSourceAddressPrefix": {
+          "type": "string",
+          "description": "Mutually exclusive with the \"allowedSourceAddressPrefixes\" parameter. Should be an IP address or CIDR, for example \"192.168.0.3\" or \"192.168.0.0/16\"."
+        },
+        "allowedSourceAddressPrefixes": {
+          "type": "array",
+          "description": "Mutually exclusive with the \"allowedSourceAddressPrefix\" parameter.",
+          "items": {
+            "type": "string",
+            "description": "IP address or CIDR, for example \"192.168.0.3\" or \"192.168.0.0/16\"."
+          }
+        },
+        "maxRequestAccessDuration": {
+          "type": "string",
+          "description": "Maximum duration requests can be made for. In ISO 8601 duration format. Minimum 5 minutes, maximum 1 day"
+        }
+      }
+
+  - from: externalSecuritySolutions.json
+    where: $.definitions.ExternalSecuritySolutionKind.properties
+    transform: >
+      return {
+        "kind": {
+          "type": "string",
+          "description": "The kind of the external solution",
+          "enum": [
+            "CEF",
+            "ATA",
+            "AAD"
+          ],
+          "x-ms-enum": {
+            "name": "ExternalSecuritySolutionKindEnum",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "CEF"
+              },
+              {
+                "value": "ATA"
+              },
+              {
+                "value": "AAD"
+              }
+            ]
+          }
+        }
+      }
+
+  - from: externalSecuritySolutions.json
+    where: $.definitions.AadConnectivityState.properties
+    transform: >
+      return {
+        "connectivityState": {
+          "type": "string",
+          "title": "The connectivity state of the external AAD solution ",
+          "enum": [
+            "Discovered",
+            "NotLicensed",
+            "Connected"
+          ],
+          "x-ms-enum": {
+            "name": "AadConnectivityStateEnum",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Discovered"
+              },
+              {
+                "value": "NotLicensed"
+              },
+              {
+                "value": "Connected"
+              }
+            ]
+          }
+        }
+      }
 ```
 
 ``` yaml $(python) && $(python-mode) == 'update'
