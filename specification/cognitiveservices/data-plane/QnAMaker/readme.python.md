@@ -12,18 +12,41 @@ package-name: azure-cognitiveservices-knowledge-qnamaker
 no-namespace-folders: true
 clear-output-folder: true
 ```
+### Python multi-api
 
-``` yaml $(tag) == 'release_4_0'
-namespace: azure.cognitiveservices.knowledge.qnamaker.authoring
-output-folder: $(python-sdks-folder)/cognitiveservices/azure-cognitiveservices-knowledge-qnamaker/azure/cognitiveservices/knowledge/qnamaker/authoring
+Generate all API versions currently shipped for this package
+
+```yaml $(python) && $(multiapi)
+batch:
+  - tag: release_5_0_preview.1
+  - tag: release_4_0
+  - tag: runtime_release_4_0
 ```
+### Tag: release_4_0 and python
 
-``` yaml $(tag) == 'runtime_release_4_0'
-namespace: azure.cognitiveservices.knowledge.qnamaker.runtime
-output-folder: $(python-sdks-folder)/cognitiveservices/azure-cognitiveservices-knowledge-qnamaker/azure/cognitiveservices/knowledge/qnamaker/runtime
+These settings apply only when `--tag=release_4_0 --python` is specified on the command line.
+
+
+``` yaml $(tag) == 'release_4_0' && $(python)
+python:
+  namespace: azure.cognitiveservices.knowledge.qnamaker.authoring
+  output-folder: $(python-sdks-folder)/cognitiveservices/azure-cognitiveservices-knowledge-qnamaker/azure/cognitiveservices/knowledge/qnamaker/authoring
 ```
+### Tag: runtime_release_4_0 and python
 
-``` yaml $(tag) == 'release_5_0_preview.1'
-namespace: azure.cognitiveservices.knowledge.qnamaker.preview
-output-folder: $(python-sdks-folder)/cognitiveservices/azure-cognitiveservices-knowledge-qnamaker/azure/cognitiveservices/knowledge/qnamaker/preview/
+These settings apply only when `--tag=runtime_release_4_0 --python` is specified on the command line.
+
+``` yaml $(tag) == 'runtime_release_4_0' && $(python)
+python:
+  namespace: azure.cognitiveservices.knowledge.qnamaker.runtime
+  output-folder: $(python-sdks-folder)/cognitiveservices/azure-cognitiveservices-knowledge-qnamaker/azure/cognitiveservices/knowledge/qnamaker/runtime
+```
+### Tag: release_5_0_preview.1 and python
+
+These settings apply only when `--tag=release_5_0_preview.1 --python` is specified on the command line.
+
+``` yaml $(tag) == 'release_5_0_preview.1' && $(python)
+python:
+  namespace: azure.cognitiveservices.knowledge.qnamaker.v5_0
+  output-folder: $(python-sdks-folder)/cognitiveservices/azure-cognitiveservices-knowledge-qnamaker/azure/cognitiveservices/knowledge/qnamaker/v5_0_preview
 ```
