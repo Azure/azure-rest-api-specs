@@ -7709,7 +7709,7 @@
 		  }
 		},
 		"vmDisks": {
-		  "description": "The list of vm disk inpts.",
+		  "description": "The list of vm disk inputs.",
 		  "type": "array",
 		  "items": {
 		    "$ref":"#/definitions/A2AProtectionIntentDiskInputDetails"
@@ -15688,53 +15688,53 @@
         }
       }
     },
-    "NewProtectionProfile": {
-      "description": "New protection profile input.",
-      "required": [
-        "policyName",
-        "multiVmSyncStatus"
-      ],
-      "type": "object",
+	"NewProtectionProfile": {
+	  "description": "New Protection profile input.",
+	  "required": [
+	    "policyName",
+		"multiVmSyncStatus"
+	  ],
+	  "type": "object",
       "allOf": [
-        {
-          "$ref": "#/definitions/ProtectionProfileCustomInput"
-        }
-      ],
-      "properties": {
-        "policyName": {
-          "description": "The protection profile input.",
-          "type": "string"
-        },
+	    {
+		  "$ref": "#/definitions/ProtectionProfileCustomDetails"
+		}
+	  ],
+	  "properties": {
+	    "policyName": {
+		  "description": "The protection profile input.",
+		  "type": "string"
+		},
         "recoveryPointHistory": {
-          "format": "int32",
-          "description": "The duration in minutes until which the recovery points need to be stored.",
-          "type": "integer"
-        },
+		  "format": "int32",
+		  "description": "The duration in minutes until which the recovery points need to be stored.",
+		  "type": "integer"
+		},
         "crashConsistentFrequencyInMinutes": {
-          "format": "int32",
-          "description": "The crash consistent snapshot frequency (in minutes).",
-          "type": "integer"
-        },
+		  "format": "int32",
+		  "description": "The crash consistent snapshot frequency (in minutes).",
+		  "type": "integer"
+		},
         "appConsistentFrequencyInMinutes": {
-          "format": "int32",
-          "description": "The app consistent snapshot frequency (in minutes).",
-          "type": "integer"
-        },
+		  "format": "int32",
+		  "description": "The app consistent snapshot frequency (in minutes).",
+		  "type": "integer"
+		},
         "multiVmSyncStatus": {
-          "description": "A value indicating whether multi-VM sync has to be enabled. Value should be 'Enabled' or 'Disabled'.",
+		  "description": "A value indicating whether multi-VM sync has to be enabled. Value should be 'Enabled' or 'Disabled'.",
           "enum": [
-            "Enable",
-            "Disable"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "SetMultiVmSyncStatus",
-            "modelAsString": true
-          }
-        }
-      },
-      "x-ms-discriminator-value": "New"
-    },
+		    "Enable",
+			"Disable"
+		  ],
+		  "type": "string",
+		  "x-ms-enum": {
+		    "name": "SetMultiVmSyncStatus",
+			"modelAsString": true
+		  }
+		}
+	  },
+	  "x-ms-discriminator-value": "New"
+	},
     "Object": {
       "description": "Base of all objects.",
       "type": "object",
@@ -17804,7 +17804,7 @@
 		  "type": "string"
 		}
 	  },
-	  "discriminator": "instanceType"
+	  "discriminator": "resourceType"
 	},
     "RemoveDisksInput": {
       "description": "Input for remove disk(s) operation.",
@@ -18633,17 +18633,17 @@
         }
       }
     },
-    "StorageAccountCustomInput": {
-      "description": "Storage account custom input.",
-      "type": "object",
-      "properties": {
-        "instanceType": {
-          "description": "The class type.",
-          "type": "string"
-        }
-      },
-      "discriminator": "instanceType"
-    },
+	"StorageAccountCustomDetails": {
+	  "description": "Storage account custom input.",
+	  "type": "object",
+	  "properties": {
+	    "resourceType": {
+	      "description": "The class type.",
+		  "type": "string"
+		}
+	  },
+	  "discriminator": "resourceType"
+	},
     "StorageClassification": {
       "description": "Storage object definition.",
       "type": "object",
