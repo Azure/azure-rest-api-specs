@@ -20,8 +20,17 @@ output-folder: $(azureresourceschema-folder)/schemas
 
 # all the input files in this apiVersion
 input-file:
+  - Microsoft.Synapse/preview/2020-10-01-preview/bigDataPool.json
+  - Microsoft.Synapse/preview/2020-10-01-preview/checkNameAvailability.json
+  - Microsoft.Synapse/preview/2020-10-01-preview/firewallRule.json
   - Microsoft.Synapse/preview/2020-10-01-preview/operations.json
+  - Microsoft.Synapse/preview/2020-10-01-preview/sqlPool.json
   - Microsoft.Synapse/preview/2020-10-01-preview/workspace.json
+  - Microsoft.Synapse/preview/2020-10-01-preview/integrationRuntime.json
+  - Microsoft.Synapse/preview/2020-10-01-preview/privateLinkResources.json
+  - Microsoft.Synapse/preview/2020-10-01-preview/privateEndpointConnections.json
+  - Microsoft.Synapse/preview/2020-10-01-preview/privatelinkhub.json
+  - Microsoft.Synapse/preview/2020-10-01-preview/keys.json
 ```
 
 Please also specify `--azureresourceschema-folder=<path to the root directory of your azure-resource-manager-schemas clone>`.

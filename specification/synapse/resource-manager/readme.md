@@ -67,8 +67,17 @@ These settings apply only when `--tag=package-2020-10-01-preview` is specified o
 
 ``` yaml $(tag) == 'package-2020-10-01-preview'
 input-file:
+- Microsoft.Synapse/preview/2020-10-01-preview/bigDataPool.json
+- Microsoft.Synapse/preview/2020-10-01-preview/checkNameAvailability.json
+- Microsoft.Synapse/preview/2020-10-01-preview/firewallRule.json
 - Microsoft.Synapse/preview/2020-10-01-preview/operations.json
+- Microsoft.Synapse/preview/2020-10-01-preview/sqlPool.json
 - Microsoft.Synapse/preview/2020-10-01-preview/workspace.json
+- Microsoft.Synapse/preview/2020-10-01-preview/integrationRuntime.json
+- Microsoft.Synapse/preview/2020-10-01-preview/privateLinkResources.json
+- Microsoft.Synapse/preview/2020-10-01-preview/privateEndpointConnections.json
+- Microsoft.Synapse/preview/2020-10-01-preview/privatelinkhub.json
+- Microsoft.Synapse/preview/2020-10-01-preview/keys.json
 ```
 
 
@@ -118,6 +127,42 @@ directive:
   - suppress: AvoidNestedProperties
     reason: Existing models
     from: Microsoft.Synapse/preview/2019-06-01-preview/integrationRuntime.json
+    where:
+      - $.definitions.IntegrationRuntimeResource.properties.properties
+      - $.definitions.IntegrationRuntimeStatusResponse.properties.properties
+      - $.definitions.SsisObjectMetadataStatusResponse.properties.properties
+  - from: Microsoft.Synapse/preview/2020-10-01-preview/sqlPool.json
+    where: 
+        - $.definitions.SqlPoolVulnerabilityAssessmentRuleBaseline
+        - $.definitions.DataMaskingPolicy
+        - $.definitions.DataWarehouseUserActivities
+        - $.definitions.SqlPoolConnectionPolicy
+        - $.definitions.TransparentDataEncryption
+    suppress: 
+        - R4015
+    reason: SQL doesn't support 'list' operation everywhere, so we cannot support List for certain Sql pool operations
+  - from: Microsoft.Synapse/preview/2020-10-01-preview/sqlPool.json
+    where :
+        - '$.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces/{workspaceName}/sqlPools/{sqlPoolName}/restorePoints/{restorePointName}"].delete.responses' 
+    suppress:
+        - R4011
+    reason: SQL Pools APIs are proxy APIs that call SQL DB APIs. The SQL DB delete restore points API only supports return method 200, so we cannot support 204. It is not possible for the SQL DB team to add 204 support for delete restore points.
+  - suppress: AllResourcesMustHaveGetOperation
+    from: Microsoft.Synapse/preview/2020-10-01-preview/sqlPool.json
+    where:
+      - $.definitions.DataMaskingRule
+      - $.definitions.SqlPoolOperation
+  - suppress: R4015
+    reason: Needs implmentation
+    from: Microsoft.Synapse/preview/2020-10-01-preview/workspace_managedIdentity.json
+    where:
+      - $.definitions.ManagedIdentitySqlControlSettingsInfo
+  - suppress: R2010
+    reason: x-ms-long-running-operation-options not available in datafactory swagger
+    from: Microsoft.Synapse/preview/2020-10-01-preview/integrationRuntime.json
+  - suppress: AvoidNestedProperties
+    reason: Existing models
+    from: Microsoft.Synapse/preview/2020-10-01-preview/integrationRuntime.json
     where:
       - $.definitions.IntegrationRuntimeResource.properties.properties
       - $.definitions.IntegrationRuntimeStatusResponse.properties.properties
