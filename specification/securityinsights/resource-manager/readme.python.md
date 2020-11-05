@@ -25,17 +25,24 @@ package-name: azure-mgmt-securityinsight
 package-version: 0.1.0
 clear-output-folder: true
 ```
-``` yaml $(python) && $(python-mode) == 'update'
+``` yaml $(python) && $(python-mode) == 'update' && !$(track2)
 python:
   no-namespace-folders: true
   output-folder: $(python-sdks-folder)/azure-mgmt-securityinsight/azure/mgmt/securityinsight
-no-namespace-folders: true
-output-folder: $(python-sdks-folder)/azure-mgmt-securityinsight/azure/mgmt/securityinsight
 ```
-``` yaml $(python) && $(python-mode) == 'create'
+
+``` yaml $(python) && $(python-mode) == 'create' && !$(track2)
 python:
   basic-setup-py: true
   output-folder: $(python-sdks-folder)/azure-mgmt-securityinsight
+```
+
+``` yaml $(python) && $(python-mode) == 'update' && $(track2)
+no-namespace-folders: true
+output-folder: $(python-sdks-folder)/azure-mgmt-securityinsight/azure/mgmt/securityinsight
+```
+
+``` yaml $(python) && $(python-mode) == 'create' && $(track2)
 basic-setup-py: true
 output-folder: $(python-sdks-folder)/azure-mgmt-securityinsight
 ```
