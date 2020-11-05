@@ -63,7 +63,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.AAD/domainServices": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Aad/domainServices": {
       "get": {
         "tags": [
           "DomainServices"
@@ -103,7 +103,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AAD/domainServices": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Aad/domainServices": {
       "get": {
         "tags": [
           "DomainServices"
@@ -146,7 +146,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AAD/domainServices/{domainServiceName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Aad/domainServices/{domainServiceName}": {
       "put": {
         "tags": [
           "DomainServices"
@@ -546,7 +546,7 @@
         "healthLastEvaluated": {
           "readOnly": true,
           "type": "string",
-          "format": "date-time",
+          "format": "date-time-rfc1123",
           "description": "Last domain evaluation run DateTime"
         },
         "healthMonitors": {
@@ -799,6 +799,18 @@
           "description": "A flag to determine whether or not SyncNtlmPasswords is enabled or disabled.",
           "x-ms-enum": {
             "name": "SyncNtlmPasswords",
+            "modelAsString": true
+          }
+        },
+        "syncKerberosPasswords": {
+          "type": "string",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "description": "A flag to determine whether or not SyncKerberosPasswords is enabled or disabled.",
+          "x-ms-enum": {
+            "name": "SyncKerberosPasswords",
             "modelAsString": true
           }
         },
