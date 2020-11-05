@@ -1755,14 +1755,14 @@
           "$ref": "#/definitions/DiskEncryptionSetType"
         },
         "activeKey": {
-          "$ref": "#/definitions/KeyVaultAndKeyReference",
+          "$ref": "#/definitions/KeyForDiskEncryptionSet",
           "description": "The key vault key which is currently used by this disk encryption set."
         },
         "previousKeys": {
           "type": "array",
           "readOnly": true,
           "items": {
-            "$ref": "#/definitions/KeyVaultAndKeyReference"
+            "$ref": "#/definitions/KeyForDiskEncryptionSet"
           },
           "description": "A readonly collection of key vault keys previously used by this disk encryption set while a key rotation is in progress. It will be empty if there is no ongoing key rotation."
         },
@@ -1842,6 +1842,22 @@
         "sourceVault"
       ],
       "description": "Key Vault Key Url and vault id of KeK, KeK is optional and when provided is used to unwrap the encryptionKey"
+    },
+	"KeyForDiskEncryptionSet": {
+      "properties": {
+        "sourceVault": {
+          "$ref": "#/definitions/SourceVault",
+          "description": "Resource id of the KeyVault containing the key or secret. This property is optional."
+        },
+        "keyUrl": {
+          "type": "string",
+          "description": "Fully versioned Key Url pointing of a key in KeyVault"
+        }
+      },
+      "required": [
+        "keyUrl",
+      ],
+      "description": "Key Vault Key Url to be used for server side encryption of Managed Disks and Snapshots"
     },
     "SourceVault": {
       "properties": {
@@ -2049,7 +2065,7 @@
           "$ref": "#/definitions/DiskEncryptionSetType"
         },
         "activeKey": {
-          "$ref": "#/definitions/KeyVaultAndKeyReference"
+          "$ref": "#/definitions/KeyForDiskEncryptionSet"
         }
       },
       "description": "disk encryption set resource update properties."
@@ -2305,13 +2321,14 @@
         "type": {
           "type": "string",
           "enum": [
-            "SystemAssigned"
+            "SystemAssigned",
+			"None"
           ],
           "x-ms-enum": {
             "name": "DiskEncryptionSetIdentityType",
             "modelAsString": true
           },
-          "description": "The type of Managed Identity used by the DiskEncryptionSet. Only SystemAssigned is supported."
+          "description": "The type of Managed Identity used by the DiskEncryptionSet. Only SystemAssigned is supported for new creations. Identity type None is supported on existing Disk Encryption Set for AAD Tenant migration."
         },
         "principalId": {
           "readOnly": true,
