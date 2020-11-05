@@ -57,6 +57,12 @@
               "$ref": "#/definitions/SqlPool"
             },
             "description": "OK"
+          },
+          "default": {
+            "schema": {
+              "$ref": "../../../../common/v1/types.json#/definitions/ErrorContract"
+            },
+            "description": ""
           }
         },
         "consumes": [],
@@ -114,8 +120,11 @@
             },
             "description": "OK"
           },
-          "202": {
-            "description": "Accepted"
+          "default": {
+            "schema": {
+              "$ref": "../../../../common/v1/types.json#/definitions/ErrorContract"
+            },
+            "description": ""
           }
         },
         "consumes": [],
@@ -181,7 +190,7 @@
           },
           "default": {
             "schema": {
-              "$ref": "./workspace.json#/definitions/ErrorContract"
+              "$ref": "../../../../common/v1/types.json#/definitions/ErrorContract"
             },
             "description": ""
           }
@@ -249,7 +258,7 @@
           },
           "default": {
             "schema": {
-              "$ref": "./workspace.json#/definitions/ErrorContract"
+              "$ref": "../../../../common/v1/types.json#/definitions/ErrorContract"
             },
             "description": ""
           }
@@ -296,6 +305,12 @@
           "200": {
             "schema": {
               "$ref": "#/definitions/SqlPoolInfoListResult"
+            },
+            "description": ""
+          },
+          "default": {
+            "schema": {
+              "$ref": "../../../../common/v1/types.json#/definitions/ErrorContract"
             },
             "description": ""
           }
@@ -356,6 +371,12 @@
           },
           "202": {
             "description": "Accepted"
+          },
+          "default": {
+            "schema": {
+              "$ref": "../../../../common/v1/types.json#/definitions/ErrorContract"
+            },
+            "description": ""
           }
         },
         "consumes": [],
@@ -412,6 +433,12 @@
           },
           "202": {
             "description": "Accepted"
+          },
+          "default": {
+            "schema": {
+              "$ref": "../../../../common/v1/types.json#/definitions/ErrorContract"
+            },
+            "description": ""
           }
         },
         "consumes": [],
@@ -528,7 +555,7 @@
           },
           "default": {
             "schema": {
-              "$ref": "./workspace.json#/definitions/ErrorContract"
+              "$ref": "../../../../common/v1/types.json#/definitions/ErrorContract"
             },
             "description": ""
           }
@@ -593,7 +620,7 @@
           },
           "default": {
             "schema": {
-              "$ref": "./workspace.json#/definitions/ErrorContract"
+              "$ref": "../../../../common/v1/types.json#/definitions/ErrorContract"
             },
             "description": ""
           }
@@ -652,6 +679,18 @@
               "type": "object"
             },
             "description": "OK"
+          },
+          "202": {
+            "schema": {
+              "type": "object"
+            },
+            "description": "Accepted"
+          },
+          "default": {
+            "schema": {
+              "$ref": "../../../../common/v1/types.json#/definitions/ErrorContract"
+            },
+            "description": ""
           }
         },
         "consumes": [],
@@ -661,6 +700,64 @@
         "x-ms-examples": {
           "Get the result of an operation on a SQL Analytics pool": {
             "$ref": "./examples/GetLocationHeaderResultWithSqlPool.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces/{workspaceName}/sqlPools/{sqlPoolName}/geoBackupPolicies": {
+      "get": {
+        "operationId": "SqlPoolGeoBackupPolicies_List",
+        "summary": "List SQL pool geo backup policies",
+        "description": "Get list of SQL pool geo backup policies",
+        "tags": [
+          "SqlPools, GeoBackupPolicies"
+        ],
+        "deprecated": false,
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./workspace.json#/parameters/workspaceNameParameter"
+          },
+          {
+            "type": "string",
+            "in": "path",
+            "name": "sqlPoolName",
+            "description": "SQL pool name",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/GeoBackupPolicyListResult"
+            },
+            "description": "OK"
+          },
+          "default": {
+            "schema": {
+              "$ref": "../../../../common/v1/types.json#/definitions/ErrorContract"
+            },
+            "description": ""
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        },
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-examples": {
+          "Get Sql pool geo backup policy": {
+            "$ref": "./examples/SqlPoolGeoBackupPolicies_List.json"
           }
         }
       }
@@ -716,6 +813,12 @@
               "$ref": "#/definitions/GeoBackupPolicy"
             },
             "description": "OK"
+          },
+          "default": {
+            "schema": {
+              "$ref": "../../../../common/v1/types.json#/definitions/ErrorContract"
+            },
+            "description": ""
           }
         },
         "consumes": [],
@@ -831,6 +934,12 @@
               "$ref": "#/definitions/RestorePointListResult"
             },
             "description": "OK"
+          },
+          "default": {
+            "schema": {
+              "$ref": "../../../../common/v1/types.json#/definitions/ErrorContract"
+            },
+            "description": ""
           }
         },
         "x-ms-pageable": {
@@ -952,6 +1061,12 @@
             "schema": {
               "$ref": "#/definitions/ReplicationLinkListResult"
             }
+          },
+          "default": {
+            "schema": {
+              "$ref": "../../../../common/v1/types.json#/definitions/ErrorContract"
+            },
+            "description": ""
           }
         },
         "consumes": [],
@@ -964,6 +1079,67 @@
         "x-ms-examples": {
           "Lists a Sql Analytic pool's replication links": {
             "$ref": "./examples/ListSqlPoolReplicationLinks.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces/{workspaceName}/sqlPools/{sqlPoolName}/replicationLinks/{linkId}": {
+      "get": {
+        "operationId": "SqlPoolReplicationLinks_GetByName",
+        "summary": "Get SQL pool replication link by name",
+        "description": "Get SQL pool replication link by name.",
+        "tags": [
+          "SqlPools, ReplicationLinks"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./workspace.json#/parameters/workspaceNameParameter"
+          },
+          {
+            "type": "string",
+            "in": "path",
+            "name": "sqlPoolName",
+            "description": "SQL pool name",
+            "required": true
+          },
+          {
+            "name": "linkId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The ID of the replication link."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ReplicationLink"
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": "../../../../common/v1/types.json#/definitions/ErrorContract"
+            },
+            "description": ""
+          }
+        },
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-examples": {
+          "Lists a Sql Analytic pool's replication links": {
+            "$ref": "./examples/SqlPoolReplicationLinks_GetByName.json"
           }
         }
       }
@@ -1018,6 +1194,12 @@
             "schema": {
               "$ref": "#/definitions/TransparentDataEncryption"
             }
+          },
+          "default": {
+            "schema": {
+              "$ref": "../../../../common/v1/types.json#/definitions/ErrorContract"
+            },
+            "description": ""
           }
         },
         "consumes": [],
@@ -1094,6 +1276,12 @@
             "schema": {
               "$ref": "#/definitions/TransparentDataEncryption"
             }
+          },
+          "default": {
+            "schema": {
+              "$ref": "../../../../common/v1/types.json#/definitions/ErrorContract"
+            },
+            "description": ""
           }
         },
         "consumes": [],
@@ -1336,6 +1524,12 @@
             "schema": {
               "$ref": "#/definitions/SqlPoolUsageListResult"
             }
+          },
+          "default": {
+            "schema": {
+              "$ref": "../../../../common/v1/types.json#/definitions/ErrorContract"
+            },
+            "description": ""
           }
         },
         "consumes": [],
@@ -1394,6 +1588,12 @@
             "schema": {
               "$ref": "#/definitions/SensitivityLabelListResult"
             }
+          },
+          "default": {
+            "schema": {
+              "$ref": "../../../../common/v1/types.json#/definitions/ErrorContract"
+            },
+            "description": ""
           }
         },
         "consumes": [],
@@ -1651,6 +1851,9 @@
         "responses": {
           "200": {
             "description": "Successfully deleted the sensitivity label."
+          },
+          "204": {
+            "description": "No content"
           },
           "default": {
             "description": "*** Error Responses: ***\n\n * 400 DatawarehouseDatabaseIsDeactivated - Could not execute Data Classification operation because the database is paused. Please resume it.\n\n * 400 SensitivityLabelSourceNameNotSupported - The specified sensitivity label source is not valid\n\n * 404 SensitivityLabelsColumnNotFound - The specified schema/table/column could not be found\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 DatabaseDoesNotExist - User has specified a database name that does not exist on this server instance.\n\n * 404 SensitivityLabelsLabelNotFound - The specified sensitivity label could not be found\n\n * 501 SensitivityLabelRecommendedSourceNameNotSupported - 'Recommended' sensitivity label source is not supported yet"
@@ -2165,6 +2368,12 @@
             "schema": {
               "$ref": "#/definitions/SqlPoolConnectionPolicy"
             }
+          },
+          "default": {
+            "schema": {
+              "$ref": "../../../../common/v1/types.json#/definitions/ErrorContract"
+            },
+            "description": ""
           }
         },
         "consumes": [],
@@ -2441,6 +2650,60 @@
         "x-ms-examples": {
           "Export a database's vulnerability assessment scan results.": {
             "$ref": "./examples/ExportSqlPoolVulnerabilityAssessmentScan.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces/{workspaceName}/sqlPools/{sqlPoolName}/securityAlertPolicies": {
+      "get": {
+        "operationId": "SqlPoolSecurityAlertPolicies_List",
+        "summary": "List Sql pool's security alert policies",
+        "description": "Get a list of Sql pool's security alert policies.",
+        "tags": [
+          "SqlPools, SecurityAlertPolicies"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./workspace.json#/parameters/workspaceNameParameter"
+          },
+          {
+            "type": "string",
+            "in": "path",
+            "name": "sqlPoolName",
+            "description": "SQL pool name",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ListSqlPoolSecurityAlertPolicies"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 SecurityAlertPoliciesInvalidStorageAccountName - The provided storage account is not valid or does not exist.\n\n * 400 SecurityAlertPoliciesInvalidStorageAccountCredentials - The provided storage account access key is not valid.\n\n * 400 InvalidServerSecurityAlertPolicyCreateRequest - The create server Threat Detection security alert policy request does not exist or has no properties object.\n\n * 400 DataSecurityInvalidUserSuppliedParameter - An invalid parameter value was provided by the client.\n\n * 400 UpsertServerSecurityAlertPolicyFailed - An error has occurred while saving Threat detection settings, please try again later\n\n * 400 UpsertServerSecurityAlertPolicyFailed - An error has occurred while saving Threat detection settings, please try again later\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 UpsertServerSecurityAlertPolicyFailed - An error has occurred while saving Threat detection settings, please try again later\n\n * 409 ServerSecurityAlertPolicyInProgress - Set server security alert policy is already in progress\n\n * 409 UpsertServerSecurityAlertPolicyFailed - An error has occurred while saving Threat detection settings, please try again later\n\n * 500 DatabaseIsUnavailable - Loading failed. Please try again later.\n\n * 500 UpsertServerSecurityAlertPolicyFailed - An error has occurred while saving Threat detection settings, please try again later\n\n * 500 GetServerSecurityAlertPolicyFailed - Failed to get Threat Detection settings"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-examples": {
+          "Get a security alert of a SQL Analytics pool": {
+            "$ref": "./examples/SqlPoolSecurityAlertPolicies_List.json"
           }
         }
       }
@@ -2752,6 +3015,9 @@
           "200": {
             "description": "Successfully removed the database vulnerability assessment rule baseline."
           },
+          "204": {
+            "description": "No content"
+          },
           "default": {
             "description": "*** Error Responses: ***\n\n * 400 VulnerabilityAssessmentStorageAuthenticationFailed - Could not authenticate to storage account '{0}' .\n\n * 400 VulnerabilityAssessmentInvalidPolicy - Vulnerability Assessment settings don't exist or invalid storage specified in settings. \n\n * 400 VulnerabilityAssessmentDatawarehouseDatabaseIsDeactivated - Could not execute Vulnerability Assessment operation because the database is paused. Please resume it.\n\n * 400 InvalidVulnerabilityAssessmentOperationRequest - The vulnerability assessment operation request does not exist or has no properties object.\n\n * 400 DataSecurityInvalidUserSuppliedParameter - An invalid parameter value was provided by the client.\n\n * 404 VulnerabilityAssessmentInvalidStorageAccount - The storage account '{0}' that was defined in the policy is invalid.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 SourceDatabaseNotFound - The source database does not exist.\n\n * 404 DatabaseDoesNotExist - User has specified a database name that does not exist on this server instance.\n\n * 404 VulnerabilityAssessmentRuleDoesNotExists - Rule '{0}' does not exist.\n\n * 404 VulnerabilityAssessmentBaselineDoesNotExists - Baseline does not exist for rule '{0}'\n\n * 500 DatabaseIsUnavailable - Loading failed. Please try again later."
           }
@@ -3040,6 +3306,9 @@
         "responses": {
           "200": {
             "description": "Successfully removed the Sql pool vulnerability assessment."
+          },
+          "204": {
+            "description": "No content"
           },
           "default": {
             "description": "*** Error Responses: ***\n\n * 400 InvalidStorageAccountName - The provided storage account is not valid or does not exist.\n\n * 400 InvalidStorageAccountCredentials - The provided storage account shared access signature or account storage key is not valid.\n\n * 400 DatabaseVulnerabilityAssessmentMissingStorageContainerPath - Storage container path must be provided if it isn't set in server level policy\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 SourceDatabaseNotFound - The source database does not exist.\n\n * 404 DatabaseDoesNotExist - User has specified a database name that does not exist on this server instance.\n\n * 500 DatabaseIsUnavailable - Loading failed. Please try again later."
@@ -3833,6 +4102,115 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces/{workspaceName}/sqlPools/{sqlPoolName}/restorePoints/{restorePointName}": {
+      "get": {
+        "tags": [
+          "SqlPools, RestorePoints"
+        ],
+        "description": "Gets a restore point.",
+        "operationId": "SqlPoolRestorePoints_Get",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./workspace.json#/parameters/workspaceNameParameter"
+          },
+          {
+            "type": "string",
+            "in": "path",
+            "name": "sqlPoolName",
+            "description": "SQL pool name",
+            "required": true
+          },
+          {
+            "name": "restorePointName",
+            "in": "path",
+            "description": "The name of the restore point.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully returned the restore point.",
+            "schema": {
+              "$ref": "#/definitions/RestorePoint"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 FeatureDisabledOnSelectedEdition - User attempted to use a feature which is disabled on current database edition.\n\n * 400 BackupNotAllowedOnDeactivatedDatabase - Cannot create restore point on a deactivated database.\n\n * 400 RestorePointLimitReached - A restore point cannot be created because database would exceed the allowed quota of restore points.\n\n * 400 RestorePointAttemptToDeleteSystemBackup - Cannot delete system restore point.\n\n * 404 DatabaseRestorePointNotFound - Can not find database restore point.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 DatabaseDoesNotExist - User has specified a database name that does not exist on this server instance.\n\n * 408 DatabaseRestorePointTimedOut - Create database restore point failed."
+          }
+        },
+        "x-ms-examples": {
+          "Gets a Sql pool restore point.": {
+            "$ref": "./examples/SqlPoolRestorePointsGet.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "SqlPools, RestorePoints"
+        ],
+        "description": "Deletes a restore point.",
+        "operationId": "SqlPoolRestorePoints_Delete",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./workspace.json#/parameters/workspaceNameParameter"
+          },
+          {
+            "type": "string",
+            "in": "path",
+            "name": "sqlPoolName",
+            "description": "SQL pool name",
+            "required": true
+          },
+          {
+            "name": "restorePointName",
+            "in": "path",
+            "description": "The name of the restore point.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully deleted the restore point."
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 FeatureDisabledOnSelectedEdition - User attempted to use a feature which is disabled on current database edition.\n\n * 400 BackupNotAllowedOnDeactivatedDatabase - Cannot create restore point on a deactivated database.\n\n * 400 RestorePointLimitReached - A restore point cannot be created because database would exceed the allowed quota of restore points.\n\n * 400 RestorePointAttemptToDeleteSystemBackup - Cannot delete system restore point.\n\n * 404 DatabaseRestorePointNotFound - Can not find database restore point.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 DatabaseDoesNotExist - User has specified a database name that does not exist on this server instance.\n\n * 408 DatabaseRestorePointTimedOut - Create database restore point failed."
+          }
+        },
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-examples": {
+          "Deletes a restore point.": {
+            "$ref": "./examples/SqlPoolRestorePointsDelete.json"
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -3985,6 +4363,11 @@
             "enabled": {
               "type": "boolean",
               "description": "Indicates whether the metadata sync is enabled or disabled"
+            },
+            "syncIntervalInMinutes": {
+              "type": "integer",
+              "format": "int32",
+              "description": "The Sync Interval in minutes."
             }
           },
           "x-ms-client-flatten": true
@@ -4044,6 +4427,18 @@
         }
       ],
       "description": "A database geo backup policy."
+    },
+    "GeoBackupPolicyListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/GeoBackupPolicy"
+          },
+          "description": "The list of geo backup policies."
+        }
+      },
+      "description": "The response to a list geo backup policies request."
     },
     "TopQueries": {
       "properties": {
@@ -5307,6 +5702,25 @@
           "$ref": "#/definitions/SecurityAlertPolicyProperties",
           "description": "Resource properties.",
           "x-ms-client-flatten": true
+        }
+      }
+    },
+    "ListSqlPoolSecurityAlertPolicies": {
+      "description": "A list of SQL pool security alert policies.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Array of results.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SqlPoolSecurityAlertPolicy"
+          },
+          "readOnly": true
+        },
+        "nextLink": {
+          "description": "Link to retrieve next page of results.",
+          "type": "string",
+          "readOnly": true
         }
       }
     },
