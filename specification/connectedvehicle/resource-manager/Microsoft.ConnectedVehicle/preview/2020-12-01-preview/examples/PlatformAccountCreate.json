@@ -31,10 +31,15 @@
             "primary": "sample-primary-certificate",
             "secondary": "sample-secondary-certificate"
           }
-        }
+        },
+        "stampLocations": [
+          {
+            "locationName": "sample-location-name"
+          }
+        ]
       },
       "sku": {
-        "name": "S0",
+        "name": "D0",
         "capacity": 1
       },
       "tags": {
@@ -46,7 +51,7 @@
   "responses": {
     "200": {
       "body": {
-        "id": "/subscriptions/sample-subscription-id/resourceGroups/sample-resource-group-name/providers/Microsoft.Mobility/mcvpAccounts/sample-account-name",
+        "id": "/subscriptions/sample-subscription-id/resourceGroups/sample-resource-group-name/providers/Microsoft.ConnectedVehicle/platformAccounts/sample-account-name",
         "location": "eastus",
         "name": "sample-account-name",
         "properties": {
@@ -75,23 +80,36 @@
               "secondary": "sample-secondary-certificate"
             }
           },
-          "provisioningState": "Succeeded"
+          "provisioningState": "Succeeded",
+          "stampLocations": [
+            {
+              "locationName": "sample-location-name"
+            }
+          ]
         },
         "sku": {
-          "name": "S0",
-          "tier": "Standard",
+          "name": "D0",
+          "tier": "Dedicated",
           "capacity": 1
+        },
+        "systemData": {
+          "createdBy": "sample-user1",
+          "createdByType": "User",
+          "createdAt": "2020-10-20T05:37:46.404Z",
+          "lastModifiedBy": "sample-user2",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2020-10-21T05:37:46.404Z"
         },
         "tags": {
           "sample-key1": "sample-value1",
           "sample-key2": "sample-value2"
         },
-        "type": "Microsoft.Mobility/mcvpAccounts"
+        "type": "Microsoft.ConnectedVehicle/platformAccounts"
       }
     },
     "201": {
       "body": {
-        "id": "/subscriptions/sample-subscription-id/resourceGroups/sample-resource-group-name/providers/Microsoft.Mobility/mcvpAccounts/account-name",
+        "id": "/subscriptions/sample-subscription-id/resourceGroups/sample-resource-group-name/providers/Microsoft.ConnectedVehicle/platformAccounts/account-name",
         "location": "eastus",
         "name": "sample-account-name",
         "properties": {
@@ -120,18 +138,31 @@
               "secondary": "sample-secondary-certificate"
             }
           },
-          "provisioningState": "Accepted"
+          "provisioningState": "Accepted",
+          "stampLocations": [
+            {
+              "locationName": "sample-location-name"
+            }
+          ]
         },
         "sku": {
-          "name": "S0",
-          "tier": "Standard",
+          "name": "D0",
+          "tier": "Dedicated",
           "capacity": 1
+        },
+        "systemData": {
+          "createdBy": "sample-user1",
+          "createdByType": "User",
+          "createdAt": "2020-10-20T05:37:46.404Z",
+          "lastModifiedBy": "sample-user2",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2020-10-21T05:37:46.404Z"
         },
         "tags": {
           "sample-key1": "sample-value1",
           "sample-key2": "sample-value2"
         },
-        "type": "Microsoft.Mobility/mcvpAccounts"
+        "type": "Microsoft.ConnectedVehicle/platformAccounts"
       }
     }
   }

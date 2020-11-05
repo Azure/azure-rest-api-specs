@@ -1,8 +1,8 @@
-# mobility
+# Connected Vehicle
 
 > see https://aka.ms/autorest
 
-This is the AutoRest configuration file for mobility.
+This is the AutoRest configuration file for connectedvehicle.
 
 ## Getting Started
 
@@ -22,7 +22,7 @@ For other options on installation see [Installing AutoRest](https://aka.ms/autor
 
 ### Basic Information
 
-These are the global settings for the mobility.
+These are the global settings for the connectedvehicle API.
 
 ```yaml
 openapi-type: arm
@@ -36,7 +36,7 @@ These settings apply only when `--tag=package-2020-12-01-preview` is specified o
 
 ```yaml $(tag) == 'package-2020-12-01-preview'
 input-file:
-  - Microsoft.Mobility/preview/2020-12-01-preview/mobility.json
+  - Microsoft.ConnectedVehicle/preview/2020-12-01-preview/connectedvehicle.json
 ```
 
 ---
@@ -56,7 +56,7 @@ swagger-to-sdk:
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-ruby
     after_scripts:
-      - bundle install && rake arm:regen_all_profiles['azure_mgmt_mobility']
+      - bundle install && rake arm:regen_all_profiles['azure_mgmt_connectedvehicle']
   - repo: azure-cli-extensions
 ```
 

@@ -6,8 +6,8 @@ Please also specify `--typescript-sdks-folder=<path to root folder of your azure
 ```yaml $(typescript)
 typescript:
   azure-arm: true
-  package-name: "mobility"
-  output-folder: "$(typescript-sdks-folder)/packages/mobility"
+  package-name: "connectedvehicle"
+  output-folder: "$(typescript-sdks-folder)/packages/connectedvehicle"
   payload-flattening-threshold: 1
   generate-metadata: true
 ```

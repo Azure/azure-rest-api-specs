@@ -2,11 +2,8 @@
   "swagger": "2.0",
   "info": {
     "version": "2020-12-01-preview",
-    "title": "mobility",
-    "description": "Resource Provider for the Microsoft Connected Vehicle Platform",
-    "x-ms-code-generation-settings": {
-      "name": "mobilityClient"
-    }
+    "title": "ConnectedVehicle",
+    "description": "Resource Provider for Microsoft.ConnectedVehicle"
   },
   "host": "management.azure.com",
   "schemes": ["https"],
@@ -29,33 +26,33 @@
     }
   },
   "paths": {
-      "/subscriptions/{subscriptionId}/providers/Microsoft.Mobility/checkNameAvailability": {
+      "/subscriptions/{subscriptionId}/providers/Microsoft.ConnectedVehicle/checkNameAvailability": {
         "post": {
           "tags": [
-            "MCVPAccounts"
+            "PlatformAccounts"
           ],
-          "operationId": "MCVPAccounts_CheckNameAvailability",
-          "description": "Checks that the specified MCVP account name is valid and globally unique.",
+          "operationId": "PlatformAccounts_CheckNameAvailability",
+          "description": "Checks that the specified platform account name is valid and globally unique.",
           "x-ms-examples": {
-            "MCVPAccountCheckNameAvailability": {
-              "$ref": "./examples/MCVPAccountCheckNameAvailability.json"
+            "PlatformAccountCheckNameAvailability": {
+              "$ref": "./examples/PlatformAccountCheckNameAvailability.json"
             }
           },
           "parameters": [
             {
-              "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
             },
             {
-              "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
             },
             {
               "name": "checkNameAvailabilityParameters",
               "in": "body",
               "required": true,
               "schema": {
-                "$ref": "#/definitions/MCVPAccountCheckNameAvailabilityParameters"
+                "$ref": "#/definitions/PlatformAccountCheckNameAvailabilityParameters"
               },
-              "description": "The name and type of MCVP account to validate within the specified subscription."
+              "description": "The name and type of platform account to validate within the specified subscription."
             }
           ],
           "responses": {
@@ -68,64 +65,64 @@
             "default": {
               "description": "Error response describing why the operation failed.",
               "schema": {
-                "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ErrorResponse"
+                "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
               }
             }
           }
         }
       },
-      "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Mobility/mcvpAccounts/{accountName}": {
+      "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ConnectedVehicle/platformAccounts/{accountName}": {
         "put": {
           "tags": [
-            "MCVPAccounts"
+            "PlatformAccounts"
           ],
-          "operationId": "MCVPAccounts_Create",
-          "description": "Creates a new MCVP account.",
+          "operationId": "PlatformAccounts_Create",
+          "description": "Creates a new platform account.",
           "x-ms-examples": {
-            "MCVPAccountCreate": {
-              "$ref": "./examples/MCVPAccountCreate.json"
+            "PlatformAccountCreate": {
+              "$ref": "./examples/PlatformAccountCreate.json"
             }
           },
           "parameters": [
             {
-              "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
             },
             {
-              "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
             },
             {
-              "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
             },
             {
-              "$ref": "#/parameters/MCVPAccountNameParameter"
+              "$ref": "#/parameters/PlatformAccountNameParameter"
             },
             {
               "name": "parameters",
               "in": "body",
               "required": true,
               "schema": {
-                "$ref": "#/definitions/MCVPAccount"
+                "$ref": "#/definitions/PlatformAccount"
               },
-              "description": "The parameters used to create an MCVP account."
+              "description": "The parameters used to create the platform account."
             }
           ],
           "responses": {
             "200": {
-              "description": "OK. The specified MCVP account has been created or updated successfully.",
+              "description": "OK. The specified platform account has been created or updated successfully.",
               "schema": {
-                "$ref": "#/definitions/MCVPAccount"
+                "$ref": "#/definitions/PlatformAccount"
               }
             },
             "201": {
-              "description": "Created. The specified MCVP account will be created or updated asynchronously.",
+              "description": "Created. The specified platform account will be created or updated asynchronously.",
               "schema": {
-                "$ref": "#/definitions/MCVPAccount"
+                "$ref": "#/definitions/PlatformAccount"
               }
             },
             "default": {
               "description": "Error response describing why the operation failed.",
               "schema": {
-                "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ErrorResponse"
+                "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
               }
             }
           },
@@ -136,43 +133,43 @@
         },
         "delete": {
           "tags": [
-            "MCVPAccounts"
+            "PlatformAccounts"
           ],
-          "operationId": "MCVPAccounts_Delete",
-          "description": "Deletes the specified MCVP account.",
+          "operationId": "PlatformAccounts_Delete",
+          "description": "Deletes the specified platform account.",
           "x-ms-examples": {
-            "MCVPAccountDelete": {
-              "$ref": "./examples/MCVPAccountDelete.json"
+            "PlatformAccountDelete": {
+              "$ref": "./examples/PlatformAccountDelete.json"
             }
           },
           "parameters": [
             {
-              "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
             },
             {
-              "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
             },
             {
-              "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
             },
             {
-              "$ref": "#/parameters/MCVPAccountNameParameter"
+              "$ref": "#/parameters/PlatformAccountNameParameter"
             }
           ],
           "responses": {
             "200": {
-              "description": "OK. The specified MCVP account was deleted successfully."
+              "description": "OK. The specified platform account was deleted successfully."
             },
             "202": {
-              "description": "Accepted. The specified MCVP account will be deleted asynchronously."
+              "description": "Accepted. The specified platform account will be deleted asynchronously."
             },
             "204": {
-              "description": "NoContent. The specified MCVP account does not exist."
+              "description": "NoContent. The specified platform account does not exist."
             },
             "default": {
               "description": "Error response describing why the operation failed.",
               "schema": {
-                "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ErrorResponse"
+                "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
               }
             }
           },
@@ -180,132 +177,132 @@
         },
         "get": {
           "tags": [
-            "MCVPAccounts"
+            "PlatformAccounts"
           ],
-          "operationId": "MCVPAccounts_GetProperties",
-          "description": "Gets the specified MCVP account.",
+          "operationId": "PlatformAccounts_GetProperties",
+          "description": "Gets the specified platform account.",
           "x-ms-examples": {
-            "MCVPAccountGetProperties": {
-              "$ref": "./examples/MCVPAccountGetProperties.json"
+            "PlatformAccountGetProperties": {
+              "$ref": "./examples/PlatformAccountGetProperties.json"
             }
           },
           "parameters": [
             {
-              "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
             },
             {
-              "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
             },
             {
-              "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
             },
             {
-              "$ref": "#/parameters/MCVPAccountNameParameter"
+              "$ref": "#/parameters/PlatformAccountNameParameter"
             }
           ],
           "responses": {
             "200": {
-              "description": "OK. The response contains the specified MCVP account.",
+              "description": "OK. The response contains the specified platform account.",
               "schema": {
-                "$ref": "#/definitions/MCVPAccount"
+                "$ref": "#/definitions/PlatformAccount"
               }
             },
             "default": {
               "description": "Error response describing why the operation failed.",
               "schema": {
-                "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ErrorResponse"
+                "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
               }
             }
           }
         },
         "patch": {
           "tags": [
-            "MCVPAccounts"
+            "PlatformAccounts"
           ],
-          "operationId": "MCVPAccounts_Update",
-          "description": "Updates the specified MCVP account.",
+          "operationId": "PlatformAccounts_Update",
+          "description": "Updates the specified platform account.",
           "x-ms-examples": {
-            "MCVPAccountUpdate": {
-              "$ref": "./examples/MCVPAccountUpdate.json"
+            "PlatformAccountUpdate": {
+              "$ref": "./examples/PlatformAccountUpdate.json"
             }
           },
           "parameters": [
             {
-              "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
             },
             {
-              "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
             },
             {
-              "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
             },
             {
-              "$ref": "#/parameters/MCVPAccountNameParameter"
+              "$ref": "#/parameters/PlatformAccountNameParameter"
             },
             {
               "name": "parameters",
               "in": "body",
               "required": true,
               "schema": {
-                "$ref": "#/definitions/MCVPAccountUpdateParameters"
+                "$ref": "#/definitions/PlatformAccountUpdateParameters"
               },
               "description": "The parameters to provide for the updated account."
             }
           ],
           "responses": {
             "200": {
-              "description": "OK. The specified MCVP account has been updated successfully.",
+              "description": "OK. The specified platform account has been updated successfully.",
               "schema": {
-                "$ref": "#/definitions/MCVPAccount"
+                "$ref": "#/definitions/PlatformAccount"
               }
             },
             "202": {
-              "description": "Accepted. The specified MCVP account will be updated asynchronously.",
+              "description": "Accepted. The specified platform account will be updated asynchronously.",
               "schema": {
-                "$ref": "#/definitions/MCVPAccount"
+                "$ref": "#/definitions/PlatformAccount"
               }
             },
             "default": {
               "description": "Error response describing why the operation failed.",
               "schema": {
-                "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ErrorResponse"
+                "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
               }
             }
           },
           "x-ms-long-running-operation": true
         }
       },
-      "/subscriptions/{subscriptionId}/providers/Microsoft.Mobility/mcvpAccounts": {
+      "/subscriptions/{subscriptionId}/providers/Microsoft.ConnectedVehicle/platformAccounts": {
         "get": {
           "tags": [
-            "MCVPAccounts"
+            "PlatformAccounts"
           ],
-          "operationId": "MCVPAccounts_ListBySubscription",
-          "description": "Lists all of the MCVP accounts under the specified subscription.",
+          "operationId": "PlatformAccounts_ListBySubscription",
+          "description": "Lists all of the platform accounts under the specified subscription.",
           "x-ms-examples": {
-            "MCVPAccountListBySubscription": {
-              "$ref": "./examples/MCVPAccountListBySubscription.json"
+            "PlatformAccountListBySubscription": {
+              "$ref": "./examples/PlatformAccountListBySubscription.json"
             }
           },
           "parameters": [
             {
-              "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
             },
             {
-              "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
             }
           ],
           "responses": {
             "200": {
-              "description": "OK. The response includes a list of all the MCVP accounts under the specified subscription.",
+              "description": "OK. The response includes a list of all the platform accounts under the specified subscription.",
               "schema": {
-                "$ref": "#/definitions/MCVPAccountListResult"
+                "$ref": "#/definitions/PlatformAccountListResult"
               }
             },
             "default": {
               "description": "Error response describing why the operation failed.",
               "schema": {
-                "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ErrorResponse"
+                "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
               }
             }
           },
@@ -314,40 +311,40 @@
           }
         }
       },
-      "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Mobility/mcvpAccounts": {
+      "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ConnectedVehicle/platformAccounts": {
         "get": {
           "tags": [
-            "MCVPAccounts"
+            "PlatformAccounts"
           ],
-          "operationId": "MCVPAccounts_ListByResourceGroup",
-          "description": "Lists all of the MCVP accounts under the specified resource group.",
+          "operationId": "PlatformAccounts_ListByResourceGroup",
+          "description": "Lists all of the platform accounts under the specified resource group.",
           "x-ms-examples": {
-            "MCVPAccountListByResourceGroup": {
-              "$ref": "./examples/MCVPAccountListByResourceGroup.json"
+            "PlatformAccountListByResourceGroup": {
+              "$ref": "./examples/PlatformAccountListByResourceGroup.json"
             }
           },
           "parameters": [
             {
-              "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
             },
             {
-              "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
             },
             {
-              "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
             }
           ],
           "responses": {
             "200": {
-              "description": "OK. The response includes a list of all the MCVP accounts under the specified resource group.",
+              "description": "OK. The response includes a list of all the platform accounts under the specified resource group.",
               "schema": {
-                "$ref": "#/definitions/MCVPAccountListResult"
+                "$ref": "#/definitions/PlatformAccountListResult"
               }
             },
             "default": {
               "description": "Error response describing why the operation failed.",
               "schema": {
-                "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ErrorResponse"
+                "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
               }
             }
           },
@@ -356,21 +353,21 @@
           }
         }
       },
-      "/providers/Microsoft.Mobility/operations": {
+      "/providers/Microsoft.ConnectedVehicle/operations": {
         "get": {
           "tags": [
             "Operations"
           ],
-          "description": "Lists all of the supported Mobility REST API operations.",
+          "description": "Lists all of the supported REST API operations.",
           "operationId": "Operations_List",
           "parameters": [
             {
-                "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+                "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
             }
           ],
           "responses": {
             "200": {
-              "description": "OK. The response contains a list of all the supported Mobility REST API operations.",
+              "description": "OK. The response contains a list of all the supported REST API operations.",
               "schema": {
                 "$ref": "#/definitions/OperationsListResult"
               }
@@ -378,7 +375,7 @@
             "default": {
               "description": "Error response describing why the operation failed.",
               "schema": {
-                "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ErrorResponse"
+                "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
               }
             }
           },
@@ -389,29 +386,29 @@
       }
   },
   "definitions": {
-    "MCVPAccountCheckNameAvailabilityParameters": {
+    "PlatformAccountCheckNameAvailabilityParameters": {
       "properties": {
         "name": {
           "type": "string",
-          "description": "Specifies the name of the MCVP account."
+          "description": "Specifies the name of the platform account."
         },
         "type": {
           "type": "string",
           "enum": [
-            "Microsoft.Mobility/mcvpAccounts"
+            "Microsoft.ConnectedVehicle/platformAccounts"
           ],
           "x-ms-enum": {
             "name": "Type",
             "modelAsString": false
           },
-          "description": "Specifies the type of the resource to validate, i.e. Microsoft.Mobility/mcvpAccounts"
+          "description": "Specifies the type of the resource to validate, i.e. Microsoft.ConnectedVehicle/platformAccounts"
         }
       },
       "required": [
         "name",
         "type"
       ],
-      "description": "Specifies the parameters used to check the availability of a given MCVP account name."
+      "description": "Specifies the parameters used to check the availability of a given platform account name."
     },
     "CheckNameAvailabilityResult": {
       "properties": {
@@ -439,7 +436,7 @@
           "description": "If the name is invalid or unavailable, specifies the reason why it cannot be used in detail."
         }
       },
-      "description": "Specifies the response indicating whether the MCVP account name is valid and available."
+      "description": "Specifies the response indicating whether the platform account name is valid and available."
     },
     "Sku": {
       "properties": {
@@ -461,13 +458,12 @@
         "name",
         "capacity"
       ],
-      "description": "Specifies the SKU of the MCVP account."
+      "description": "Specifies the SKU of the platform account."
     },
     "SkuName": {
       "type": "string",
       "enum": [
-        "S0",
-        "P0"
+        "D0"
       ],
       "x-ms-enum": {
         "name": "SkuName",
@@ -478,12 +474,11 @@
     "Tier": {
       "type": "string",
       "enum": [
-        "Standard",
-        "Premium"
+        "Dedicated"
       ],
       "x-ms-enum": {
         "name": "SkuTier",
-        "modelAsString": false
+        "modelAsString": true
       },
       "readOnly": true,
       "description": "Specifies the SKU tier."
@@ -605,23 +600,60 @@
       ],
       "description": "Specifies the analytics configuration."
     },
-    "MCVPAccountUpdateParameters": {
+    "StampLocation": {
+      "properties": {
+        "locationName": {
+          "type": "string",
+          "description": "Specifies the location name of the stamp location."
+        }
+      },
+      "required": [
+        "locationName"
+      ],
+      "description": "Specifies the stamp location."
+    },
+    "PlatformAccountPropertiesUpdateParameters": {
+      "properties": {
+        "extensions": {
+          "$ref": "#/definitions/Extensions",
+          "description": "Specifies the extensions configuration."
+        },
+        "networking": {
+          "$ref": "#/definitions/Networking",
+          "description": "Specifies the networking configuration."
+        },
+        "stampLocations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/StampLocation"
+          },
+          "description": "Specifies the list of stamp locations."
+        }
+      },
+      "description": "Specifies the properties of the platform account to update."
+    },
+    "PlatformAccountUpdateParameters": {
       "properties": {
         "sku": {
           "$ref": "#/definitions/Sku",
-          "description": "Specifies the SKU of the MCVP account."
+          "description": "Specifies the SKU of the platform account."
         },
         "tags": {
           "type": "object",
           "additionalProperties": {
             "type": "string"
           },
-          "description": "Specifies the list of key-value pairs that describe the MCVP account."
+          "description": "Specifies the list of key-value pairs that describe the platform account."
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/PlatformAccountPropertiesUpdateParameters",
+          "description": "Specifies the properties of the platform account to update."
         }
       },
-      "description": "Specifies the parameters used to update the properties of an MCVP account."
+      "description": "Specifies the parameters used to update the properties of the platform account."
     },
-    "MCVPAccountProperties": {
+    "PlatformAccountProperties": {
       "properties": {
         "analytics": {
           "$ref": "#/definitions/Analytics",
@@ -633,7 +665,7 @@
         },
         "extensions": {
           "$ref": "#/definitions/Extensions",
-          "description": "Specifies the ID to the custom extensions resource in the user's subscription."
+          "description": "Specifies the extensions configuration."
         },
         "networking": {
           "$ref": "#/definitions/Networking",
@@ -656,25 +688,36 @@
             "modelAsString": true
           },
           "readOnly": true,
-          "description": "Specifies the current provisioning state of the MCVP account."
+          "description": "Specifies the current provisioning state of the platform account."
+        },
+        "stampLocations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/StampLocation"
+          },
+          "description": "Specifies the list of stamp locations."
         }
       },
       "required": [
         "cosmosDb",
         "networking"
       ],
-      "description": "Specifies the properties of the MCVP account."
+      "description": "Specifies the properties of the platform account."
     },
-    "MCVPAccount": {
+    "PlatformAccount": {
       "properties": {
         "sku": {
           "$ref": "#/definitions/Sku",
-          "description": "Specifies the SKU of the MCVP account."
+          "description": "Specifies the SKU of the platform account."
+        },
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "description": "Specifies the system metadata associated with this resource."
         },
         "properties": {
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/MCVPAccountProperties",
-          "description": "Specifies the properties of the MCVP account."
+          "$ref": "#/definitions/PlatformAccountProperties",
+          "description": "Specifies the properties of the platform account."
         }
       },
       "required": [
@@ -683,28 +726,28 @@
       ],
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/TrackedResource"
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/TrackedResource"
         }
       ],
-      "description": "Specifies the MCVP account."
+      "description": "Specifies the platform account."
     },
-    "MCVPAccountListResult": {
+    "PlatformAccountListResult": {
       "properties": {
         "value": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/MCVPAccount"
+            "$ref": "#/definitions/PlatformAccount"
           },
           "readOnly": true,
-          "description": "Specifies the list of MCVP accounts."
+          "description": "Specifies the list of platform accounts."
         },
         "nextLink": {
           "type": "string",
           "readOnly": true,
-          "description": "Specifies the URL to query the next page of MCVP accounts. This is returned when the total number of MCVP accounts exceeds the maximum page size."
+          "description": "Specifies the URL to query the next page of platform accounts. This is returned when the total number of platform accounts exceeds the maximum page size."
         }
       },
-      "description": "Specifies the response listing MCVP accounts."
+      "description": "Specifies the response listing platform accounts."
     },
     "Operation": {
       "properties": {
@@ -767,12 +810,12 @@
     }
   },
   "parameters": {
-    "MCVPAccountNameParameter": {
+    "PlatformAccountNameParameter": {
       "name": "accountName",
       "in": "path",
       "required": true,
       "type": "string",
-      "description": "The name of the MCVP account within the specified resource group.",
+      "description": "The name of the platform account within the specified resource group.",
       "x-ms-parameter-location": "method"
     }
   }
