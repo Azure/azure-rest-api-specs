@@ -40,6 +40,20 @@
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "name": "$filter",
+            "description": "May be used to filter the results by azure plan, azure credit applied, date, invoice section, product description, product family, sub total, tax, transaction amount and transaction type. Optional.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "$search",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "A search expression to match for whether a particular transaction should be considered in aggregation. Any transaction with azure plan, transaction type, invoice section name, product description, product family containing the search text will be included in the aggregation."
           }
         ],
         "responses": {
