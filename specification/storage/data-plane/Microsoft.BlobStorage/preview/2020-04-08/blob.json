@@ -3846,9 +3846,6 @@
           },
           {
             "$ref": "#/parameters/ClientRequestId"
-          },
-          {
-            "$ref": "#/parameters/BlobDeleteType"
           }
         ],
         "responses": {
@@ -6174,7 +6171,7 @@
             "$ref": "#/parameters/SourceIfNoneMatch"
           },
           {
-            "$ref": "#/parameters/SourceIfTags"	
+            "$ref": "#/parameters/SourceIfTags"
           },
           {
             "$ref": "#/parameters/IfModifiedSince"
@@ -10825,7 +10822,7 @@
           "$ref": "#/definitions/QuerySerialization",
           "xml": {
             "name": "InputSerialization"
-          }      
+          }
         },
         "OutputSerialization": {
           "$ref": "#/definitions/QuerySerialization",
@@ -10918,10 +10915,6 @@
           "description": "Indicates the number of days that metrics or logging or soft-deleted data should be retained. All data older than this value will be deleted",
           "type": "integer",
           "minimum": 1
-        },
-        "AllowPermanentDelete": {
-          "description": "Indicates whether permanent delete is allowed on this storage account.",
-          "type": "boolean"
         }
       }
     },
@@ -11327,22 +11320,6 @@
         "name": "blob-HTTP-headers"
       },
       "description": "Optional. Sets the blob's content type. If specified, this property is stored with the blob and returned with a read request."
-    },
-    "BlobDeleteType": {
-      "name": "deletetype",
-      "x-ms-client-name": "blobDeleteType",
-      "in": "query",
-      "required": false,
-      "type": "string",
-      "enum": [
-        "Permanent"
-      ],
-      "x-ms-enum": {
-        "name": "BlobDeleteType",
-        "modelAsString": false
-      },
-      "x-ms-parameter-location": "method",
-      "description": "Optional.  Only possible value is 'permanent', which specifies to permanently delete a blob if blob soft delete is enabled."
     },
     "BlobExpiryOptions": {
       "name": "x-ms-expiry-option",
