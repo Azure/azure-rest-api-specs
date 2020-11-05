@@ -506,8 +506,28 @@
       "description": "Customer Managed Identity",
       "properties": {
         "userAssignedIdentities": {
-          "type": "object",
-          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/Identity"
+          "principalId": {
+            "readOnly": true,
+            "type": "string",
+            "description": "The principal ID of resource identity."
+          },
+          "tenantId": {
+            "readOnly": true,
+            "type": "string",
+            "description": "The tenant ID of resource."
+          },
+          "type": {
+            "type": "string",
+            "description": "The identity type.",
+            "enum": [
+              "UserAssigned",
+              "None"
+            ],
+            "x-ms-enum": {
+              "name": "ResourceIdentityType",
+              "modelAsString": false
+            }
+          }
         }
       }
     }
