@@ -1,0 +1,47 @@
+{
+  "parameters": {
+    "api-version": "2017-04-01-preview",
+    "subscriptionId": "56b5e0a9-b645-407d-99b0-c64f86013e3d",
+    "resourceGroupName": "sjrg",
+    "jobName": "sj2790",
+    "outputName": "output958",
+    "output": {
+      "properties": {
+        "datasource": {
+          "type": "Microsoft.Storage/Table",
+          "properties": {
+            "partitionKey": "differentPartitionKey"
+          }
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "headers": {
+        "ETag": "ea1d20bf-6cb3-40bc-bc7b-ec3a7fd5977e"
+      },
+      "body": {
+        "id": "/subscriptions/56b5e0a9-b645-407d-99b0-c64f86013e3d/resourceGroups/sjrg/providers/Microsoft.StreamAnalytics/streamingjobs/sj2790/outputs/output958",
+        "name": "output958",
+        "type": "Microsoft.StreamAnalytics/streamingjobs/outputs",
+        "properties": {
+          "datasource": {
+            "type": "Microsoft.Storage/Table",
+            "properties": {
+              "accountName": "someAccountName",
+              "table": "samples",
+              "partitionKey": "differentPartitionKey",
+              "rowKey": "rowKey",
+              "columnsToRemove": [
+                "column1",
+                "column2"
+              ],
+              "batchSize": 25
+            }
+          }
+        }
+      }
+    }
+  }
+}
