@@ -530,17 +530,17 @@
       ],
       "description": "Specifies the networking configuration."
     },
-    "Extensions": {
+    "Extension": {
       "properties": {
-        "id": {
+        "resourceId": {
           "type": "string",
-          "description": "Specifies the ID of the custom extensions resource."
+          "description": "Specifies the ID of the extension resource."
         }
       },
       "required": [
-        "id"
+        "resourceId"
       ],
-      "description": "Specifies the custom extensions resource in the user's subscription."
+      "description": "Specifies the extension configuration."
     },
     "Analytics": {
       "properties": {
@@ -569,8 +569,11 @@
     "PlatformAccountPropertiesUpdateParameters": {
       "properties": {
         "extensions": {
-          "$ref": "#/definitions/Extensions",
-          "description": "Specifies the extensions configuration."
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Extension"
+          },
+          "description": "Specifies the list of extensions."
         },
         "networking": {
           "$ref": "#/definitions/Networking",
@@ -614,8 +617,11 @@
           "description": "Specifies the analytics configuration."
         },
         "extensions": {
-          "$ref": "#/definitions/Extensions",
-          "description": "Specifies the extensions configuration."
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Extension"
+          },
+          "description": "Specifies the list of extensions."
         },
         "networking": {
           "$ref": "#/definitions/Networking",
