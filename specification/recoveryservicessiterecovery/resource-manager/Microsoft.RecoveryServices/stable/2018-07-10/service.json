@@ -18173,20 +18173,12 @@
     },
     "ReplicationProtectionIntent": {
       "description": "Replication protection intent.",
-      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
       "properties": {
-        "id": {
-          "description": "The Id.",
-          "type": "string"
-        },
-        "name": {
-          "description": "The name.",
-          "type": "string"
-        },
-        "type": {
-          "description": "The Type of the object.",
-          "type": "string"
-        },
         "properties": {
           "$ref": "#/definitions/ReplicationProtectionIntentProperties",
           "description": "The custom data."
