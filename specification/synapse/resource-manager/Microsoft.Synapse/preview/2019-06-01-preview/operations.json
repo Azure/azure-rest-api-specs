@@ -43,6 +43,12 @@
               }
             },
             "description": ""
+          },
+          "default": {
+            "schema": {
+              "$ref": "../../../../common/v1/types.json#/definitions/ErrorContract"
+            },
+            "description": ""
           }
         },
         "x-ms-examples": {
@@ -90,12 +96,18 @@
           "200": {
             "description": ""
           },
+          "201": {
+            "description": ""
+          },
+          "202": {
+            "description": ""
+          },
           "204": {
             "description": ""
           },
           "default": {
             "schema": {
-              "$ref": "./workspace.json#/definitions/ErrorContract"
+              "$ref": "../../../../common/v1/types.json#/definitions/ErrorContract"
             },
             "description": ""
           }
@@ -149,11 +161,11 @@
             "description": ""
           },
           "404": {
-            "description": ""
+            "description": "Not found"
           },
-          "500": {
+          "default": {
             "schema": {
-              "$ref": "./workspace.json#/definitions/ErrorContract"
+              "$ref": "../../../../common/v1/types.json#/definitions/ErrorContract"
             },
             "description": ""
           }
@@ -226,7 +238,7 @@
           "x-ms-client-flatten": true
         },
         "error": {
-          "$ref": "./workspace.json#/definitions/ErrorDetail",
+          "$ref": "../../../../common/v1/types.json#/definitions/ErrorDetail",
           "description": "Errors from the operation"
         },
         "startTime": {
