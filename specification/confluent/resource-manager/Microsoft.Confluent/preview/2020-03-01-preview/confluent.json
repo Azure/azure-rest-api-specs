@@ -52,7 +52,7 @@
           "200": {
             "description": "Success",
             "schema": {
-              "$ref": "#/definitions/AgreementTermsListResponse"
+              "$ref": "#/definitions/ConfluentAgreementResourceListResponse"
             }
           },
           "default": {
@@ -85,11 +85,21 @@
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/ConfluentAgreementResource"
+            }
           }
         ],
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ConfluentAgreementResource"
+            }
           },
           "default": {
             "description": "Default error response.",
@@ -446,7 +456,7 @@
     }
   },
   "definitions": {
-    "AgreementProperties": {
+    "ConfluentAgreementProperties": {
       "description": "Terms properties for Marketplace and Confluent.",
       "type": "object",
       "properties": {
@@ -485,7 +495,7 @@
         }
       }
     },
-    "AgreementTerms": {
+    "ConfluentAgreementResource": {
       "description": "Agreement Terms definition",
       "type": "object",
       "properties": {
@@ -502,13 +512,13 @@
           "type": "string"
         },
         "properties": {
-          "$ref": "#/definitions/AgreementProperties",
+          "$ref": "#/definitions/ConfluentAgreementProperties",
           "description": "Represents the properties of the resource.",
           "x-ms-client-flatten": true
         }
       }
     },
-    "AgreementTermsListResponse": {
+    "ConfluentAgreementResourceListResponse": {
       "description": "Response of a list operation.",
       "type": "object",
       "properties": {
@@ -516,7 +526,7 @@
           "description": "Results of a list operation.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/AgreementTerms"
+            "$ref": "#/definitions/ConfluentAgreementResource"
           }
         },
         "nextLink": {
