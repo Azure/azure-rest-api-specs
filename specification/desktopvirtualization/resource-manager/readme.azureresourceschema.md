@@ -11,10 +11,22 @@ batch:
   - tag: schema-desktopvirtualization-2019-01-23-preview
   - tag: schema-desktopvirtualization-2020-09-21-preview
   - tag: schema-desktopvirtualization-2020-10-19-preview
+  - tag: schema-desktopvirtualization-2020-11-02-preview
 
 ```
 
 Please also specify `--azureresourceschema-folder=<path to the root directory of your azure-resource-manager-schemas clone>`.
+
+### Tag: schema-desktopvirtualization-2020-11-02-preview and azureresourceschema
+
+``` yaml $(tag) == 'schema-desktopvirtualization-2020-11-02-preview' && $(azureresourceschema)
+output-folder: $(azureresourceschema-folder)/schemas
+
+# all the input files in this apiVersion
+input-file:
+  - Microsoft.DesktopVirtualization/preview/2020-11-02-preview/desktopvirtualization.json
+
+```
 
 ### Tag: schema-desktopvirtualization-2020-10-19-preview and azureresourceschema
 
