@@ -6,12 +6,20 @@
     "description": "Resource Provider for Microsoft.ConnectedVehicle"
   },
   "host": "management.azure.com",
-  "schemes": ["https"],
-  "consumes": ["application/json"],
-  "produces": ["application/json"],
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
   "security": [
     {
-      "azure_auth": ["user_impersonation"]
+      "azure_auth": [
+        "user_impersonation"
+      ]
     }
   ],
   "securityDefinitions": {
@@ -26,364 +34,364 @@
     }
   },
   "paths": {
-      "/subscriptions/{subscriptionId}/providers/Microsoft.ConnectedVehicle/checkNameAvailability": {
-        "post": {
-          "tags": [
-            "PlatformAccounts"
-          ],
-          "operationId": "PlatformAccounts_CheckNameAvailability",
-          "description": "Checks that the specified platform account name is valid and globally unique.",
-          "x-ms-examples": {
-            "PlatformAccountCheckNameAvailability": {
-              "$ref": "./examples/PlatformAccountCheckNameAvailability.json"
-            }
-          },
-          "parameters": [
-            {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
-            },
-            {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
-            },
-            {
-              "name": "checkNameAvailabilityParameters",
-              "in": "body",
-              "required": true,
-              "schema": {
-                "$ref": "#/definitions/PlatformAccountCheckNameAvailabilityParameters"
-              },
-              "description": "The name and type of platform account to validate within the specified subscription."
-            }
-          ],
-          "responses": {
-            "200": {
-              "description": "OK. The response indicates whether the name is valid and available.",
-              "schema": {
-                "$ref": "#/definitions/CheckNameAvailabilityResult"
-              }
-            },
-            "default": {
-              "description": "Error response describing why the operation failed.",
-              "schema": {
-                "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
-              }
-            }
-          }
-        }
-      },
-      "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ConnectedVehicle/platformAccounts/{accountName}": {
-        "put": {
-          "tags": [
-            "PlatformAccounts"
-          ],
-          "operationId": "PlatformAccounts_Create",
-          "description": "Creates a new platform account.",
-          "x-ms-examples": {
-            "PlatformAccountCreate": {
-              "$ref": "./examples/PlatformAccountCreate.json"
-            }
-          },
-          "parameters": [
-            {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
-            },
-            {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
-            },
-            {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
-            },
-            {
-              "$ref": "#/parameters/PlatformAccountNameParameter"
-            },
-            {
-              "name": "parameters",
-              "in": "body",
-              "required": true,
-              "schema": {
-                "$ref": "#/definitions/PlatformAccount"
-              },
-              "description": "The parameters used to create the platform account."
-            }
-          ],
-          "responses": {
-            "200": {
-              "description": "OK. The specified platform account has been created or updated successfully.",
-              "schema": {
-                "$ref": "#/definitions/PlatformAccount"
-              }
-            },
-            "201": {
-              "description": "Created. The specified platform account will be created or updated asynchronously.",
-              "schema": {
-                "$ref": "#/definitions/PlatformAccount"
-              }
-            },
-            "default": {
-              "description": "Error response describing why the operation failed.",
-              "schema": {
-                "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
-              }
-            }
-          },
-          "x-ms-long-running-operation": true,
-          "x-ms-long-running-operation-options": {
-            "final-state-via": "azure-async-operation"
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ConnectedVehicle/checkNameAvailability": {
+      "post": {
+        "tags": [
+          "PlatformAccounts"
+        ],
+        "operationId": "PlatformAccounts_CheckNameAvailability",
+        "description": "Checks that the specified platform account name is valid and globally unique.",
+        "x-ms-examples": {
+          "PlatformAccountCheckNameAvailability": {
+            "$ref": "./examples/PlatformAccountCheckNameAvailability.json"
           }
         },
-        "delete": {
-          "tags": [
-            "PlatformAccounts"
-          ],
-          "operationId": "PlatformAccounts_Delete",
-          "description": "Deletes the specified platform account.",
-          "x-ms-examples": {
-            "PlatformAccountDelete": {
-              "$ref": "./examples/PlatformAccountDelete.json"
-            }
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
           },
-          "parameters": [
-            {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
-            },
-            {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
-            },
-            {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
-            },
-            {
-              "$ref": "#/parameters/PlatformAccountNameParameter"
-            }
-          ],
-          "responses": {
-            "200": {
-              "description": "OK. The specified platform account was deleted successfully."
-            },
-            "202": {
-              "description": "Accepted. The specified platform account will be deleted asynchronously."
-            },
-            "204": {
-              "description": "NoContent. The specified platform account does not exist."
-            },
-            "default": {
-              "description": "Error response describing why the operation failed.",
-              "schema": {
-                "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
-              }
-            }
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
-          "x-ms-long-running-operation": true
-        },
-        "get": {
-          "tags": [
-            "PlatformAccounts"
-          ],
-          "operationId": "PlatformAccounts_GetProperties",
-          "description": "Gets the specified platform account.",
-          "x-ms-examples": {
-            "PlatformAccountGetProperties": {
-              "$ref": "./examples/PlatformAccountGetProperties.json"
-            }
-          },
-          "parameters": [
-            {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          {
+            "name": "checkNameAvailabilityParameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PlatformAccountCheckNameAvailabilityParameters"
             },
-            {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
-            },
-            {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
-            },
-            {
-              "$ref": "#/parameters/PlatformAccountNameParameter"
-            }
-          ],
-          "responses": {
-            "200": {
-              "description": "OK. The response contains the specified platform account.",
-              "schema": {
-                "$ref": "#/definitions/PlatformAccount"
-              }
-            },
-            "default": {
-              "description": "Error response describing why the operation failed.",
-              "schema": {
-                "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
-              }
-            }
+            "description": "The name and type of platform account to validate within the specified subscription."
           }
-        },
-        "patch": {
-          "tags": [
-            "PlatformAccounts"
-          ],
-          "operationId": "PlatformAccounts_Update",
-          "description": "Updates the specified platform account.",
-          "x-ms-examples": {
-            "PlatformAccountUpdate": {
-              "$ref": "./examples/PlatformAccountUpdate.json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The response indicates whether the name is valid and available.",
+            "schema": {
+              "$ref": "#/definitions/CheckNameAvailabilityResult"
             }
           },
-          "parameters": [
-            {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
-            },
-            {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
-            },
-            {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
-            },
-            {
-              "$ref": "#/parameters/PlatformAccountNameParameter"
-            },
-            {
-              "name": "parameters",
-              "in": "body",
-              "required": true,
-              "schema": {
-                "$ref": "#/definitions/PlatformAccountUpdateParameters"
-              },
-              "description": "The parameters to provide for the updated account."
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
-          ],
-          "responses": {
-            "200": {
-              "description": "OK. The specified platform account has been updated successfully.",
-              "schema": {
-                "$ref": "#/definitions/PlatformAccount"
-              }
-            },
-            "202": {
-              "description": "Accepted. The specified platform account will be updated asynchronously.",
-              "schema": {
-                "$ref": "#/definitions/PlatformAccount"
-              }
-            },
-            "default": {
-              "description": "Error response describing why the operation failed.",
-              "schema": {
-                "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
-              }
-            }
-          },
-          "x-ms-long-running-operation": true
-        }
-      },
-      "/subscriptions/{subscriptionId}/providers/Microsoft.ConnectedVehicle/platformAccounts": {
-        "get": {
-          "tags": [
-            "PlatformAccounts"
-          ],
-          "operationId": "PlatformAccounts_ListBySubscription",
-          "description": "Lists all of the platform accounts under the specified subscription.",
-          "x-ms-examples": {
-            "PlatformAccountListBySubscription": {
-              "$ref": "./examples/PlatformAccountListBySubscription.json"
-            }
-          },
-          "parameters": [
-            {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
-            },
-            {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
-            }
-          ],
-          "responses": {
-            "200": {
-              "description": "OK. The response includes a list of all the platform accounts under the specified subscription.",
-              "schema": {
-                "$ref": "#/definitions/PlatformAccountListResult"
-              }
-            },
-            "default": {
-              "description": "Error response describing why the operation failed.",
-              "schema": {
-                "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
-              }
-            }
-          },
-          "x-ms-pageable": {
-            "nextLinkName": "nextLink"
-          }
-        }
-      },
-      "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ConnectedVehicle/platformAccounts": {
-        "get": {
-          "tags": [
-            "PlatformAccounts"
-          ],
-          "operationId": "PlatformAccounts_ListByResourceGroup",
-          "description": "Lists all of the platform accounts under the specified resource group.",
-          "x-ms-examples": {
-            "PlatformAccountListByResourceGroup": {
-              "$ref": "./examples/PlatformAccountListByResourceGroup.json"
-            }
-          },
-          "parameters": [
-            {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
-            },
-            {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
-            },
-            {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
-            }
-          ],
-          "responses": {
-            "200": {
-              "description": "OK. The response includes a list of all the platform accounts under the specified resource group.",
-              "schema": {
-                "$ref": "#/definitions/PlatformAccountListResult"
-              }
-            },
-            "default": {
-              "description": "Error response describing why the operation failed.",
-              "schema": {
-                "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
-              }
-            }
-          },
-          "x-ms-pageable": {
-            "nextLinkName": "nextLink"
-          }
-        }
-      },
-      "/providers/Microsoft.ConnectedVehicle/operations": {
-        "get": {
-          "tags": [
-            "Operations"
-          ],
-          "description": "Lists all of the supported REST API operations.",
-          "operationId": "Operations_List",
-          "parameters": [
-            {
-                "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
-            }
-          ],
-          "responses": {
-            "200": {
-              "description": "OK. The response contains a list of all the supported REST API operations.",
-              "schema": {
-                "$ref": "#/definitions/OperationsListResult"
-              }
-            },
-            "default": {
-              "description": "Error response describing why the operation failed.",
-              "schema": {
-                "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
-              }
-            }
-          },
-          "x-ms-pageable": {
-            "nextLinkName": "nextLink"
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ConnectedVehicle/platformAccounts/{accountName}": {
+      "put": {
+        "tags": [
+          "PlatformAccounts"
+        ],
+        "operationId": "PlatformAccounts_Create",
+        "description": "Creates a new platform account.",
+        "x-ms-examples": {
+          "PlatformAccountCreate": {
+            "$ref": "./examples/PlatformAccountCreate.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/PlatformAccountNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PlatformAccount"
+            },
+            "description": "The parameters used to create the platform account."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The specified platform account has been created or updated successfully.",
+            "schema": {
+              "$ref": "#/definitions/PlatformAccount"
+            }
+          },
+          "201": {
+            "description": "Created. The specified platform account will be created or updated asynchronously.",
+            "schema": {
+              "$ref": "#/definitions/PlatformAccount"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      },
+      "delete": {
+        "tags": [
+          "PlatformAccounts"
+        ],
+        "operationId": "PlatformAccounts_Delete",
+        "description": "Deletes the specified platform account.",
+        "x-ms-examples": {
+          "PlatformAccountDelete": {
+            "$ref": "./examples/PlatformAccountDelete.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/PlatformAccountNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The specified platform account was deleted successfully."
+          },
+          "202": {
+            "description": "Accepted. The specified platform account will be deleted asynchronously."
+          },
+          "204": {
+            "description": "NoContent. The specified platform account does not exist."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "get": {
+        "tags": [
+          "PlatformAccounts"
+        ],
+        "operationId": "PlatformAccounts_GetProperties",
+        "description": "Gets the specified platform account.",
+        "x-ms-examples": {
+          "PlatformAccountGetProperties": {
+            "$ref": "./examples/PlatformAccountGetProperties.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/PlatformAccountNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The response contains the specified platform account.",
+            "schema": {
+              "$ref": "#/definitions/PlatformAccount"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "PlatformAccounts"
+        ],
+        "operationId": "PlatformAccounts_Update",
+        "description": "Updates the specified platform account.",
+        "x-ms-examples": {
+          "PlatformAccountUpdate": {
+            "$ref": "./examples/PlatformAccountUpdate.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/PlatformAccountNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PlatformAccountUpdateParameters"
+            },
+            "description": "The parameters to provide for the updated account."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The specified platform account has been updated successfully.",
+            "schema": {
+              "$ref": "#/definitions/PlatformAccount"
+            }
+          },
+          "202": {
+            "description": "Accepted. The specified platform account will be updated asynchronously.",
+            "schema": {
+              "$ref": "#/definitions/PlatformAccount"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ConnectedVehicle/platformAccounts": {
+      "get": {
+        "tags": [
+          "PlatformAccounts"
+        ],
+        "operationId": "PlatformAccounts_ListBySubscription",
+        "description": "Lists all of the platform accounts under the specified subscription.",
+        "x-ms-examples": {
+          "PlatformAccountListBySubscription": {
+            "$ref": "./examples/PlatformAccountListBySubscription.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The response includes a list of all the platform accounts under the specified subscription.",
+            "schema": {
+              "$ref": "#/definitions/PlatformAccountListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ConnectedVehicle/platformAccounts": {
+      "get": {
+        "tags": [
+          "PlatformAccounts"
+        ],
+        "operationId": "PlatformAccounts_ListByResourceGroup",
+        "description": "Lists all of the platform accounts under the specified resource group.",
+        "x-ms-examples": {
+          "PlatformAccountListByResourceGroup": {
+            "$ref": "./examples/PlatformAccountListByResourceGroup.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The response includes a list of all the platform accounts under the specified resource group.",
+            "schema": {
+              "$ref": "#/definitions/PlatformAccountListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.ConnectedVehicle/operations": {
+      "get": {
+        "tags": [
+          "Operations"
+        ],
+        "description": "Lists all of the supported REST API operations.",
+        "operationId": "Operations_List",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The response contains a list of all the supported REST API operations.",
+            "schema": {
+              "$ref": "#/definitions/OperationsListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    }
   },
   "definitions": {
     "PlatformAccountCheckNameAvailabilityParameters": {
