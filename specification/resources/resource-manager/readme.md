@@ -265,15 +265,6 @@ input-file:
 - Microsoft.Resources/preview/2019-06-01-preview/templateSpecs.json
 ```
 
-### Tag: package-templatespecs-2020-10-preview
-
-These settings apply only when `--tag=package-templatespecs-2020-10-preview` is specified on the command line.
-
-``` yaml $(tag) == 'package-templatespecs-2020-10-preview'
-input-file:
-- Microsoft.Resources/preview/2020-10-01-preview/templateSpecs.json
-```
-
 ### Tag: package-policy-2016-12
 
 These settings apply only when `--tag=package-policy-2016-12` is specified on the command line.
