@@ -16,6 +16,7 @@ python-sdk-output-folder: "$(az-output-folder)/azext_communication/vendored_sdks
 # Az.Communication
 
 ``` yaml
+extension-mode: preview
 
 cli:
     cli-directive:
