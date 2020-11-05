@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "version": "2020-08-01-preview",
-    "title": "SynapseClient"
+    "title": "AccessControlClient"
   },
   "x-ms-parameterized-host": {
     "hostTemplate": "{endpoint}",
@@ -98,6 +98,7 @@
             "name": "request",
             "in": "body",
             "required": true,
+            "x-ms-client-flatten": true,
             "description": "Details of role id, scope and object id.",
             "schema": {
               "$ref": "#/definitions/RoleAssignmentRequest"
@@ -262,6 +263,11 @@
     "RoleAssignmentRequest": {
       "description": "Role Assignment request details",
       "type": "object",
+      "required": [
+        "roleId",
+        "principalId",
+        "scope"
+      ],
       "properties": {
         "roleId": {
           "description": "Role ID of the Synapse Built-In Role",

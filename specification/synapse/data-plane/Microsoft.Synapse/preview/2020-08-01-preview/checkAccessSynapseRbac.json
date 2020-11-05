@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "version": "2020-08-01-preview",
-    "title": "SynapseClient"
+    "title": "AccessControlClient"
   },
   "x-ms-parameterized-host": {
     "hostTemplate": "{endpoint}",
@@ -42,6 +42,7 @@
             "name": "request",
             "in": "body",
             "required": true,
+            "x-ms-client-flatten": true,
             "description": "Details of scope, list of actions and principal.",
             "schema": {
               "$ref": "#/definitions/CheckAccessSynapseRbacRequest"
@@ -125,29 +126,20 @@
     "CheckAccessSynapseRbacRequest": {
       "description": "Check access request details",
       "type": "object",
+      "required": [
+        "scope",
+        "actions",
+        "subject"
+      ],
       "properties": {
-        "subject": {
+        "subject":{
           "description": "Subject details",
           "type": "object",
-          "properties": {
-            "principalId": {
-              "description": "Principal Id",
-              "format": "uuid",
-              "type": "string"
-            },
-            "groupIds": {
-              "description": "List of group Ids that the principalId is part of.",
-              "type": "array",
-              "items": {
-                "format": "uuid",
-                "type": "string"
-              }
-            }
-          }
+          "$ref": "#/definitions/SubjectInfo"
         },
         "actions": {
           "description": "List of actions.",
-          "type": "array",
+          "type": "array",          
           "items": {
             "$ref": "#/definitions/Action"
           }
@@ -161,6 +153,10 @@
     "Action": {
       "description": "Action Info",
       "type": "object",
+      "required": [
+        "id",
+        "isDataAction"
+      ],
       "properties": {
         "id": {
           "description": "Action Id.",
@@ -177,6 +173,28 @@
       "type": "array",
       "items": {
         "$ref": "#/definitions/CheckAccessDecision"
+      }
+    },
+    "SubjectInfo": {
+      "description": "Subject details",
+      "type": "object",
+      "required": [
+        "principalId"
+      ],
+      "properties":{
+          "principalId": {
+              "description" : "Principal Id",
+              "format": "uuid",
+              "type": "string"
+          },
+          "groupIds": {
+              "description" : "List of group Ids that the principalId is part of.",
+              "type": "array",
+              "items": {
+                  "format": "uuid",
+                  "type": "string"
+              }
+          }
       }
     },
     "CheckAccessDecision": {
