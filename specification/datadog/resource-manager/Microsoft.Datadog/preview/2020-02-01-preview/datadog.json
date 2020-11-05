@@ -45,7 +45,7 @@
           "200": {
             "description": "Success",
             "schema": {
-              "$ref": "#/definitions/AgreementTermsListResponse"
+              "$ref": "#/definitions/DatadogAgreementResourceListResponse"
             }
           },
           "default": {
@@ -65,13 +65,13 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Datadog/agreements/all/acceptTerms": {
-      "post": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Datadog/agreements/default": {
+      "put": {
         "tags": [
           "Agreements"
         ],
-        "summary": "Accept marketplace terms.",
-        "operationId": "MarketplaceAgreements_Set",
+        "summary": "Create Datadog marketplace agreement in the subscription.",
+        "operationId": "MarketplaceAgreements_Create",
         "consumes": [
           "application/json"
         ],
@@ -81,11 +81,21 @@
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/DatadogAgreementResource"
+            }
           }
         ],
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/DatadogAgreementResource"
+            }
           },
           "default": {
             "description": "Default error response.",
@@ -95,8 +105,8 @@
           }
         },
         "x-ms-examples": {
-          "MarketplaceAgreements_Set": {
-            "$ref": "./examples/MarketplaceAgreements_Set.json"
+          "MarketplaceAgreements_Create": {
+            "$ref": "./examples/MarketplaceAgreements_Create.json"
           }
         }
       }
@@ -1101,8 +1111,8 @@
     }
   },
   "definitions": {
-    "AgreementProperties": {
-      "description": "Terms properties for Marketplace and Datadog.",
+    "DatadogAgreementProperties": {
+      "description": "Terms properties.",
       "type": "object",
       "properties": {
         "publisher": {
@@ -1140,30 +1150,32 @@
         }
       }
     },
-    "AgreementTerms": {
-      "description": "Agreement Terms definition",
+    "DatadogAgreementResource": {
       "type": "object",
+      "x-ms-azure-resource": true,
       "properties": {
         "id": {
-          "description": "The id of agreement resource.",
-          "type": "string"
+          "description": "ARM id of the resource.",
+          "type": "string",
+          "readOnly": true
         },
         "name": {
-          "description": "The name of the agreement.",
-          "type": "string"
+          "description": "Name of the agreement.",
+          "type": "string",
+          "readOnly": true
         },
         "type": {
-          "description": "The type of the agreement.",
-          "type": "string"
+          "description": "The type of the resource.",
+          "type": "string",
+          "readOnly": true
         },
         "properties": {
-          "$ref": "#/definitions/AgreementProperties",
-          "description": "Represents the properties of the resource.",
-          "x-ms-client-flatten": true
+          "$ref": "#/definitions/DatadogAgreementProperties",
+          "description": "Represents the properties of the resource."
         }
       }
     },
-    "AgreementTermsListResponse": {
+    "DatadogAgreementResourceListResponse": {
       "description": "Response of a list operation.",
       "type": "object",
       "properties": {
@@ -1171,7 +1183,7 @@
           "description": "Results of a list operation.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/AgreementTerms"
+            "$ref": "#/definitions/DatadogAgreementResource"
           }
         },
         "nextLink": {
