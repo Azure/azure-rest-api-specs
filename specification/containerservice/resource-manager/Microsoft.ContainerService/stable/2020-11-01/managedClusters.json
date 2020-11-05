@@ -741,6 +741,9 @@
           },
           "Create Agent Pool with Ephemeral OS Disk": {
             "$ref": "./examples/AgentPoolsCreate_Ephemeral.json"
+          },
+          "Create Agent Pool with KubeletConfig and LinuxOSConfig": {
+            "$ref": "./examples/AgentPoolsCreate_CustomNodeConfig.json"
           }
         }
       },
@@ -2004,6 +2007,14 @@
         "proximityPlacementGroupID": {
           "$ref": "#/definitions/ProximityPlacementGroupID",
           "description": "The ID for Proximity Placement Group."
+        },
+        "kubeletConfig": {
+          "$ref": "#/definitions/KubeletConfig",
+          "description": "KubeletConfig specifies the configuration of kubelet on agent nodes."
+        },
+        "linuxOSConfig": {
+          "$ref": "#/definitions/LinuxOSConfig",
+          "description": "LinuxOSConfig specifies the OS configuration of linux agent nodes."
         }
       },
       "description": "Properties for the container service agent pool profile."
@@ -3417,6 +3428,216 @@
         "modelAsString": true
       },
       "description": "OSDiskType represents the type of an OS disk on an agent pool."
+    },
+    "KubeletConfig": {
+      "description": "Kubelet configurations of agent nodes.",
+      "type": "object",
+      "properties": {
+        "cpuManagerPolicy": {
+          "type": "string",
+          "description": "CPU Manager policy to use."
+        },
+        "cpuCfsQuota": {
+          "type": "boolean",
+          "description": "Enable CPU CFS quota enforcement for containers that specify CPU limits."
+        },
+        "cpuCfsQuotaPeriod": {
+          "type": "string",
+          "description": "Sets CPU CFS quota period value."
+        },
+        "imageGcHighThreshold": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The percent of disk usage after which image garbage collection is always run."
+        },
+        "imageGcLowThreshold": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The percent of disk usage before which image garbage collection is never run."
+        },
+        "topologyManagerPolicy": {
+          "type": "string",
+          "description": "Topology Manager policy to use."
+        },
+        "allowedUnsafeSysctls": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Allowlist of unsafe sysctls or unsafe sysctl patterns (ending in `*`)."
+        },
+        "failSwapOn": {
+          "type": "boolean",
+          "description": "If set to true it will make the Kubelet fail to start if swap is enabled on the node."
+        }
+      }
+    },
+    "LinuxOSConfig": {
+      "description": "OS configurations of Linux agent nodes.",
+      "type": "object",
+      "properties": {
+        "sysctls": {
+          "$ref": "#/definitions/SysctlConfig",
+          "description": "Sysctl settings for Linux agent nodes."
+        },
+        "transparentHugePageEnabled": {
+          "type": "string",
+          "description": "Transparent Huge Page enabled configuration."
+        },
+        "transparentHugePageDefrag": {
+          "type": "string",
+          "description": "Transparent Huge Page defrag configuration."
+        },
+        "swapFileSizeMB": {
+          "type": "integer",
+          "format": "int32",
+          "description": "SwapFileSizeMB specifies size in MB of a swap file will be created on each node."
+        }
+      }
+    },
+    "SysctlConfig": {
+      "description": "Sysctl settings for Linux agent nodes.",
+      "type": "object",
+      "properties": {
+        "netCoreSomaxconn": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Sysctl setting net.core.somaxconn."
+        },
+        "netCoreNetdevMaxBacklog": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Sysctl setting net.core.netdev_max_backlog."
+        },
+        "netCoreRmemMax": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Sysctl setting net.core.rmem_max."
+        },
+        "netCoreWmemMax": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Sysctl setting net.core.wmem_max."
+        },
+        "netCoreOptmemMax": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Sysctl setting net.core.optmem_max."
+        },
+        "netIpv4TcpMaxSynBacklog": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Sysctl setting net.ipv4.tcp_max_syn_backlog."
+        },
+        "netIpv4TcpMaxTwBuckets": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Sysctl setting net.ipv4.tcp_max_tw_buckets."
+        },
+        "netIpv4TcpFinTimeout": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Sysctl setting net.ipv4.tcp_fin_timeout."
+        },
+        "netIpv4TcpKeepaliveTime": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Sysctl setting net.ipv4.tcp_keepalive_time."
+        },
+        "netIpv4TcpKeepaliveProbes": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Sysctl setting net.ipv4.tcp_keepalive_probes."
+        },
+        "netIpv4TcpkeepaliveIntvl": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Sysctl setting net.ipv4.tcp_keepalive_intvl."
+        },
+        "netIpv4TcpRmem": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Sysctl setting net.ipv4.tcp_rmem."
+        },
+        "netIpv4TcpWmem": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Sysctl setting net.ipv4.tcp_wmem."
+        },
+        "netIpv4TcpTwReuse": {
+          "type": "boolean",
+          "description": "Sysctl setting net.ipv4.tcp_tw_reuse."
+        },
+        "netIpv4IpLocalPortRange": {
+          "type": "string",
+          "description": "Sysctl setting net.ipv4.ip_local_port_range."
+        },
+        "netIpv4NeighDefaultGcThresh1": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Sysctl setting net.ipv4.neigh.default.gc_thresh1."
+        },
+        "netIpv4NeighDefaultGcThresh2": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Sysctl setting net.ipv4.neigh.default.gc_thresh2."
+        },
+        "netIpv4NeighDefaultGcThresh3": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Sysctl setting net.ipv4.neigh.default.gc_thresh3."
+        },
+        "netNetfilterNfConntrackMax": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Sysctl setting net.netfilter.nf_conntrack_max."
+        },
+        "netNetfilterNfConntrackBuckets": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Sysctl setting net.netfilter.nf_conntrack_buckets."
+        },
+        "fsInotifyMaxUserWatches": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Sysctl setting fs.inotify.max_user_watches."
+        },
+        "fsFileMax": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Sysctl setting fs.file-max."
+        },
+        "fsAioMaxNr": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Sysctl setting fs.aio-max-nr."
+        },
+        "fsNrOpen": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Sysctl setting fs.nr_open."
+        },
+        "kernelThreadsMax": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Sysctl setting kernel.threads-max."
+        },
+        "vmMaxMapCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Sysctl setting vm.max_map_count."
+        },
+        "vmSwappiness": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Sysctl setting vm.swappiness."
+        },
+        "vmVfsCachePressure": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Sysctl setting vm.vfs_cache_pressure."
+        }
+      }
     }
   },
   "parameters": {
