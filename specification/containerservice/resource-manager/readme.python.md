@@ -18,6 +18,8 @@ Generate all API versions currently shipped for this package
 
 ```yaml $(python) && $(multiapi)
 batch:
+  - tag: package-2020-09-01-only
+  - tag: package-2020-07-01-only
   - tag: package-2020-06-01-only
   - tag: package-2020-04-01-only
   - tag: package-2020-03-01-only
@@ -36,6 +38,28 @@ batch:
   - tag: package-2018-08-preview-only
   - tag: package-2018-03-only
   - tag: package-2017-07-only-extended
+```
+
+### Tag: package-2020-09-01-only and python
+
+These settings apply only when `--tag=package-2020-09-01-only --python` is specified on the command line.
+Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
+
+``` yaml $(tag) == 'package-2020-09-01-only' && $(python)
+python:
+  namespace: azure.mgmt.containerservice.v2020_09_01
+  output-folder: $(python-sdks-folder)/containerservice/azure-mgmt-containerservice/azure/mgmt/containerservice/v2020_09_01
+```
+
+### Tag: package-2020-07-01-only and python
+
+These settings apply only when `--tag=package-2020-07-01-only --python` is specified on the command line.
+Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
+
+``` yaml $(tag) == 'package-2020-07-01-only' && $(python)
+python:
+  namespace: azure.mgmt.containerservice.v2020_07_01
+  output-folder: $(python-sdks-folder)/containerservice/azure-mgmt-containerservice/azure/mgmt/containerservice/v2020_07_01
 ```
 
 ### Tag: package-2020-06-01-only and python

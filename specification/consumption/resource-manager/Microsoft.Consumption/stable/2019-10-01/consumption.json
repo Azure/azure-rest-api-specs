@@ -792,6 +792,9 @@
           },
           "ReservationSummariesMonthlyWithBillingProfileId": {
             "$ref": "./examples/ReservationSummariesMonthlyWithBillingProfileId.json"
+          },
+          "ReservationSummariesMonthlyWithBillingProfileIdReservationId": {
+            "$ref": "./examples/ReservationSummariesMonthlyWithBillingProfileIdReservationId.json"
           }
         },
         "parameters": [
@@ -823,6 +826,22 @@
             "in": "query",
             "required": false,
             "type": "string"
+          },
+          {
+            "name": "reservationId",
+            "in": "query",
+            "description": "Reservation Id GUID. Only valid if reservationOrderId is also provided. Filter to a specific reservation",
+            "required": false,
+            "type": "string",
+            "x-ms-parameter-location": "method"
+          },
+          {
+            "name": "reservationOrderId",
+            "in": "query",
+            "description": "Reservation Order Id GUID. Required if reservationId is provided. Filter to a specific reservation order",
+            "required": false,
+            "type": "string",
+            "x-ms-parameter-location": "method"
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
@@ -868,7 +887,7 @@
           },
           {
             "name": "$filter",
-            "description": "Filter reservation details by date range. The properties/UsageDate for start date and end date. The filter supports 'le' and  'ge' ",
+            "description": "Filter reservation details by date range. The properties/UsageDate for start date and end date. The filter supports 'le' and  'ge'",
             "in": "query",
             "required": true,
             "type": "string"
@@ -964,6 +983,9 @@
           },
           "ReservationDetailsByBillingProfileId": {
             "$ref": "./examples/ReservationDetailsByBillingProfileId.json"
+          },
+          "ReservationDetailsByBillingProfileIdReservationId": {
+            "$ref": "./examples/ReservationDetailsByBillingProfileIdReservationId.json"
           }
         },
         "parameters": [
@@ -992,6 +1014,22 @@
             "in": "query",
             "required": false,
             "type": "string"
+          },
+          {
+            "name": "reservationId",
+            "in": "query",
+            "description": "Reservation Id GUID. Only valid if reservationOrderId is also provided. Filter to a specific reservation",
+            "required": false,
+            "type": "string",
+            "x-ms-parameter-location": "method"
+          },
+          {
+            "name": "reservationOrderId",
+            "in": "query",
+            "description": "Reservation Order Id GUID. Required if reservationId is provided. Filter to a specific reservation order",
+            "required": false,
+            "type": "string",
+            "x-ms-parameter-location": "method"
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
@@ -1060,6 +1098,9 @@
             "schema": {
               "$ref": "#/definitions/ReservationRecommendationsListResult"
             }
+          },
+          "204": {
+            "description": "An empty response is sent when there are no recommendations."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -2947,6 +2988,14 @@
         }
       ],
       "properties": {
+        "location": {
+          "type": "string",
+          "description": "Resource Location."
+        },
+        "sku": {
+          "type": "string",
+          "description": "Resource sku"
+        },
         "properties": {
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/ReservationRecommendationDetailsProperties",
@@ -3016,6 +3065,10 @@
           "description": "The cost of the suggested quantity.",
           "type": "number",
           "readOnly": true
+        },
+        "reservedUnitCount": {
+          "description": "The number of reserved units used to calculate savings. Always 1 for virtual machines.",
+          "type": "number"
         },
         "savings": {
           "description": "The amount saved by purchasing the recommended quantity of reservation.",
@@ -3515,7 +3568,7 @@
       "x-ms-discriminator-value": "Modern",
       "allOf": [
         {
-          "$ref": "#/definitions/Resource"
+          "$ref": "#/definitions/ReservationTransactionResource"
         }
       ],
       "properties": {
@@ -3662,7 +3715,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/Resource"
+          "$ref": "#/definitions/ReservationTransactionResource"
         }
       ],
       "properties": {
@@ -4861,6 +4914,35 @@
           "readOnly": true,
           "type": "object",
           "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags."
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "ReservationTransactionResource": {
+      "description": "The Resource model definition.",
+      "properties": {
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource Id."
+        },
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource name."
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource type."
+        },
+        "tags": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
             "type": "string"
           },
           "description": "Resource tags."
