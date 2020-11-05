@@ -484,17 +484,7 @@
       "properties": {
         
         "userAssignedIdentities": {
-          "type": "object",
-          "principalId": {
-            "readOnly": true,
-            "type": "string",
-            "description": "The principal ID of resource identity."
-          },
-          "tenantId": {
-            "readOnly": true,
-            "type": "string",
-            "description": "The tenant ID of resource."
-          }
+          "$ref": "#/definitions/UserAssignedIdentities"
         },
         "type": {
           "type": "string",
@@ -504,6 +494,19 @@
             "None"
           ]
         }
+      }
+    },
+    "UserAssignedIdentities": {
+      "description": "Customer Managed Identity",
+      "principalId": {
+        "readOnly": true,
+        "type": "string",
+        "description": "The principal ID of resource identity."
+      },
+      "tenantId": {
+        "readOnly": true,
+        "type": "string",
+        "description": "The tenant ID of resource."
       }
     }
   },
