@@ -45,6 +45,12 @@
             "schema": {
               "$ref": "#/definitions/OperationEntityListResult"
             }
+          },
+          "default": {
+            "description": "Domain Service error response.",
+            "schema": {
+              "$ref": "#/definitions/DefaultErrorResponse"
+            }
           }
         },
         "x-ms-examples": {
@@ -57,7 +63,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.AAD/domainServices": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Aad/domainServices": {
       "get": {
         "tags": [
           "DomainServices"
@@ -79,6 +85,12 @@
             "schema": {
               "$ref": "#/definitions/DomainServiceListResult"
             }
+          },
+          "default": {
+            "description": "Domain Service error response.",
+            "schema": {
+              "$ref": "#/definitions/DefaultErrorResponse"
+            }
           }
         },
         "x-ms-examples": {
@@ -91,7 +103,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AAD/domainServices": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Aad/domainServices": {
       "get": {
         "tags": [
           "DomainServices"
@@ -116,6 +128,12 @@
             "schema": {
               "$ref": "#/definitions/DomainServiceListResult"
             }
+          },
+          "default": {
+            "description": "Domain Service error response.",
+            "schema": {
+              "$ref": "#/definitions/DefaultErrorResponse"
+            }
           }
         },
         "x-ms-examples": {
@@ -128,7 +146,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AAD/domainServices/{domainServiceName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Aad/domainServices/{domainServiceName}": {
       "put": {
         "tags": [
           "DomainServices"
@@ -218,6 +236,12 @@
             "description": "HTTP 200 (OK) if the operation was successful.",
             "schema": {
               "$ref": "#/definitions/DomainService"
+            }
+          },
+          "default": {
+            "description": "Domain Service error response.",
+            "schema": {
+              "$ref": "#/definitions/DefaultErrorResponse"
             }
           }
         },
@@ -436,10 +460,26 @@
           "$ref": "#/definitions/LdapsSettings",
           "description": "Secure LDAP Settings"
         },
+        "domainSecuritySettings": {
+          "$ref": "#/definitions/DomainSecuritySettings",
+          "description": "DomainSecurity Settings"
+        },
+        "resourceForestSettings": {
+          "$ref": "#/definitions/ResourceForestSettings",
+          "description": "Resource Forest Settings"
+        },
+        "domainConfigurationType": {
+          "type": "string",
+          "description": "Domain Configuration Type"
+        },
+        "sku": {
+          "type": "string",
+          "description": "Sku Type"
+        },
         "healthLastEvaluated": {
           "readOnly": true,
           "type": "string",
-          "format": "date-time",
+          "format": "date-time-rfc1123",
           "description": "Last domain evaluation run DateTime"
         },
         "healthMonitors": {
@@ -658,6 +698,48 @@
         }
       }
     },
+    "ResourceForestSettings": {
+      "description": "Settings for Resource Forest",
+      "properties": {
+        "settings": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ForestTrust"
+          },
+          "description": "List of settings for Resource Forest"
+        },
+        "resourceForest": {
+          "type": "string",
+          "description": "Resource Forest"
+        }
+      }
+    },
+    "ForestTrust": {
+      "description": "Forest Trust Setting",
+      "properties": {
+        "trustedDomainFqdn": {
+          "type": "string",
+          "description": "Trusted Domain FQDN"
+        },
+        "trustDirection": {
+          "type": "string",
+          "description": "Trust Direction"
+        },
+        "friendlyName": {
+          "type": "string",
+          "description": "Friendly Name"
+        },
+        "remoteDnsIps": {
+          "type": "string",
+          "description": "Remote Dns ips"
+        },
+        "trustPassword": {
+          "type": "string",
+          "description": "Trust Password",
+          "x-ms-secret": true
+        }
+      }
+    },
     "DomainSecuritySettings": {
       "description": "Domain Security Settings",
       "properties": {
@@ -694,6 +776,30 @@
           "description": "A flag to determine whether or not SyncNtlmPasswords is enabled or disabled.",
           "x-ms-enum": {
             "name": "SyncNtlmPasswords",
+            "modelAsString": true
+          }
+        },
+        "syncKerberosPasswords": {
+          "type": "string",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "description": "A flag to determine whether or not SyncKerberosPasswords is enabled or disabled.",
+          "x-ms-enum": {
+            "name": "SyncKerberosPasswords",
+            "modelAsString": true
+          }
+        },
+        "syncOnPremPasswords": {
+          "type": "string",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "description": "A flag to determine whether or not SyncOnPremPasswords is enabled or disabled.",
+          "x-ms-enum": {
+            "name": "SyncOnPremPasswords",
             "modelAsString": true
           }
         }
@@ -757,6 +863,7 @@
         }
       }
     },
+    
     "DefaultErrorResponse": {
       "description": "Domain Service error response.",
       "type": "object",
