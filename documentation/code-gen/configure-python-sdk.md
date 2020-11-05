@@ -142,10 +142,7 @@ python:
 no-namespace-folders: true
 output-folder: $(python-sdks-folder)/appconfiguration/azure-mgmt-appconfiguration/azure/mgmt/appconfiguration
 ```
-``` yaml $(python-mode) == 'create'
-python:
-  basic-setup-py: true
-  output-folder: $(python-sdks-folder)/appconfiguration/azure-mgmt-appconfiguration
+``` yaml $(python-mode) == 'create' && $(track2)
 basic-setup-py: true
 output-folder: $(python-sdks-folder)/appconfiguration/azure-mgmt-appconfiguration
 ```
@@ -180,7 +177,7 @@ batch:
   - multiapiscript: true
 ```
 
-``` yaml $(multiapiscript)                  // For track2
+``` yaml $(multiapiscript) && $(track2)      // For track2
 output-folder: $(python-sdks-folder)/compute/azure-mgmt-compute/azure/mgmt/compute/
 clear-output-folder: false
 perform-load: false
@@ -197,12 +194,9 @@ Then, the output folder and namespace should be configured for each of the tag. 
 These settings apply only when `--tag=package-2020-06-01-only --python` is specified on the command line.
 Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
 
-``` yaml $(tag) == 'package-2020-06-01-only'
+``` yaml $(tag) == 'package-2020-06-01-only' && $(track2)      // For track2
 namespace: azure.mgmt.compute.v2020_06_01
 output-folder: $(python-sdks-folder)/compute/azure-mgmt-compute/azure/mgmt/compute/v2020_06_01
-python:
-  namespace: azure.mgmt.compute.v2020_06_01
-  output-folder: $(python-sdks-folder)/compute/azure-mgmt-compute/azure/mgmt/compute/v2020_06_01
 ```
 ~~~
 
@@ -235,5 +229,5 @@ Track 2 is based on the latest AutoRest code generator
 
 ~~~
 > autorest --reset
-> autorest --python --track2 --use=@autorest/python@5.3.0 --python-sdks-folder=..\azure-sdk-for-python\sdk --multiapi --python-mode=update  ..\azure-rest-api-specs\specification\appconfiguration\resource-manager\readme.md
+> autorest --python --track2 --use=@autorest/python@5.4.1 --python-sdks-folder=..\azure-sdk-for-python\sdk --multiapi --python-mode=update  ..\azure-rest-api-specs\specification\appconfiguration\resource-manager\readme.md
 ~~~
