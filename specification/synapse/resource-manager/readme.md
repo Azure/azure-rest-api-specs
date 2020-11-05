@@ -59,8 +59,18 @@ input-file:
 - Microsoft.Synapse/preview/2020-04-01-preview/operations.json
 - Microsoft.Synapse/preview/2020-04-01-preview/sqlPool.json
 - Microsoft.Synapse/preview/2020-04-01-preview/sqlDatabase.json
-- Microsoft.Synapse/preview/2020-04-01-preview/workspace.json
 ```
+
+### Tag: package-2020-10-01-preview
+
+These settings apply only when `--tag=package-2020-10-01-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2020-10-01-preview'
+input-file:
+- Microsoft.Synapse/preview/2020-10-01-preview/operations.json
+- Microsoft.Synapse/preview/2020-10-01-preview/workspace.json
+```
+
 
 ## Suppressions
 
@@ -157,6 +167,7 @@ csharp:
 batch:
  - tag: package-2019-06-01-preview
  - tag: package-sqlGen3-2020-04-01-preview
+ - tag: package-2020-10-01-preview
 ```
 
 ## Go
