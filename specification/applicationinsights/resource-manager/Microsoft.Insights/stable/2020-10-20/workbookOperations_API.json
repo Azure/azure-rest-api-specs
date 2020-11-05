@@ -111,7 +111,7 @@
       "description": "Error Field contract."
     },
     "Operation": {
-      "description": "CDN REST API operation",
+      "description": "Azure Workbooks REST API operation",
       "type": "object",
       "properties": {
         "name": {
@@ -122,7 +122,7 @@
           "description": "The object that represents the operation.",
           "properties": {
             "provider": {
-              "description": "Service provider: Microsoft.Cdn",
+              "description": "Service provider: Microsoft.Insights",
               "type": "string"
             },
             "resource": {
@@ -138,14 +138,14 @@
       }
     },
     "OperationListResult": {
-      "description": "Result of the request to list CDN operations. It contains a list of operations and a URL link to get the next set of results.",
+      "description": "Result of the request to list Azure Workbooks operations. It contains a list of operations and a URL link to get the next set of results.",
       "properties": {
         "value": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/Operation"
           },
-          "description": "List of CDN operations supported by the CDN resource provider."
+          "description": "List of Workbook operations supported by the Microsoft.Insights resource provider."
         },
         "nextLink": {
           "type": "string",
