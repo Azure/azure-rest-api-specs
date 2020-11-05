@@ -99,7 +99,7 @@
         "summary": "Get analysis status and results",
         "parameters": [
           {
-            "$ref": "#/parameters/JobId"
+            "$ref": "#/parameters/AnalyzeJobId"
           },
           {
             "$ref": "#/parameters/ShowStats"
@@ -1045,10 +1045,12 @@
         "tasks": {
           "properties": {
             "details": {
-              "items": {
-                "$ref": "#/definitions/TaskState"
+              "properties": {
+                "allof": {
+                  "$ref": "#/definitions/TaskState"
+                }
               },
-              "type": "array"
+              "type": "object"
             },
             "completed": {
               "type": "integer"
@@ -2257,6 +2259,14 @@
     "JobId": {
       "description": "Job ID",
       "format": "uuid",
+      "in": "path",
+      "name": "jobId",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "AnalyzeJobId": {
+      "description": "Job ID for Analyze",
       "in": "path",
       "name": "jobId",
       "required": true,
