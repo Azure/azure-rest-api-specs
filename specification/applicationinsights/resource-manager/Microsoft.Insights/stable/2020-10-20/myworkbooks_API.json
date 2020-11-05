@@ -307,7 +307,7 @@
       "properties": {
         "identity": {
           "description": "Identity used for BYOS",
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/Identity"
+          "$ref": "#/definitions/ManagedIdentity"
         },
         "id": {
           "type": "string",
@@ -478,6 +478,16 @@
         }
       },
       "description": "Error message body that will indicate why the operation failed."
+    },
+    "ManagedIdentity": {
+      "description": "Customer Managed Identity",
+      
+      "properties": {
+        "userAssignedIdentities": {
+          "type": "object",
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/Identity"
+        }
+      }
     }
   },
   "parameters": {

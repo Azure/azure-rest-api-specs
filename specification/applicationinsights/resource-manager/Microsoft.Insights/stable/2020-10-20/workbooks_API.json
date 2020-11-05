@@ -283,7 +283,7 @@
       "properties": {
         "identity": {
           "description": "Identity used for BYOS",
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/Identity"
+          "$ref": "#/definitions/ManagedIdentity"
         },
         "id": {
           "type": "string",
@@ -499,6 +499,16 @@
             "$ref": "#/definitions/ErrorFieldContract"
           },
           "description": "The list of invalid fields send in request, in case of validation error."
+        }
+      }
+    },
+    "ManagedIdentity": {
+      "description": "Customer Managed Identity",
+      
+      "properties": {
+        "userAssignedIdentities": {
+          "type": "object",
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/Identity"
         }
       }
     }
