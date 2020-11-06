@@ -17,6 +17,12 @@
           // By default it's folder name of first entry in path.
           "type": "string"
         },
+        "result": {
+          // Status of package. By default it's succeeded.
+          "type": "string",
+          "enum": ["failed", "succeeded", "warning"],
+          "default": "succeeded"
+        },
         "path": {
           // List of package content paths.
           // If the path points to a folder then
