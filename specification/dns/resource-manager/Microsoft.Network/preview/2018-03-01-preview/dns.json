@@ -1384,6 +1384,12 @@
           "description": "The maximum number of record sets that can be created in this DNS zone.  This is a read-only property and any attempt to set this value will be ignored.",
           "readOnly": true
         },
+        "maxNumberOfRecordsPerRecordSet": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The maximum number of records per record set that can be created in this DNS zone.  This is a read-only property and any attempt to set this value will be ignored.",
+          "readOnly": true
+        },
         "numberOfRecordSets": {
           "type": "integer",
           "format": "int64",
@@ -1488,10 +1494,9 @@
     "CloudError": {
       "type": "object",
       "properties": {
-        "error": {
-          "$ref": "#/definitions/CloudErrorBody",
-          "description": "The error message body"
-        }
+        "x-ms-client-flatten": true,
+        "$ref": "#/definitions/CloudErrorBody",
+        "description": "The error message body"
       },
       "x-ms-external": true,
       "description": "An error message"
