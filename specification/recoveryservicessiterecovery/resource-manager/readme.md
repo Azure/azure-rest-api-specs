@@ -25,6 +25,10 @@ directive:
   - from: service.json
     suppress: OAV131 
     reason: Testing purpose.
+
+  - from: service.json 
+    suppress: R4010
+	reason: Testing purpose
 ```
 
 ## Configuration
