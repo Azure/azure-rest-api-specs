@@ -28,7 +28,7 @@ These are the global settings for the ApplicationInsights API.
 title: ApplicationInsightsManagementClient
 description: Composite Swagger for Application Insights Management Client
 openapi-type: arm
-tag: package-preview-2020-10-26-only
+tag: package-preview-2020-10
 ```
 
 ## Suppression
@@ -267,7 +267,23 @@ These settings apply only when `--tag=package-preview-2020-10` is specified on t
 
 ```yaml $(tag) == 'package-preview-2020-10'
 input-file:
-  - Microsoft.Insights/preview/2020-10-05-preview/webTests_API.json
+  - Microsoft.Insights/stable/2015-05-01/aiOperations_API.json
+  - Microsoft.Insights/stable/2015-05-01/componentAnnotations_API.json
+  - Microsoft.Insights/stable/2015-05-01/componentApiKeys_API.json
+  - Microsoft.Insights/stable/2015-05-01/componentContinuousExport_API.json
+  - Microsoft.Insights/stable/2015-05-01/componentFeaturesAndPricing_API.json
+  - Microsoft.Insights/stable/2015-05-01/componentProactiveDetection_API.json
+  - Microsoft.Insights/stable/2015-05-01/componentWorkItemConfigs_API.json
+  - Microsoft.Insights/stable/2015-05-01/favorites_API.json
+  - Microsoft.Insights/stable/2015-05-01/webTestLocations_API.json
+  - Microsoft.Insights/stable/2015-05-01/webTests_API.json
+  - Microsoft.Insights/stable/2015-05-01/analyticsItems_API.json
+  - Microsoft.Insights/stable/2015-05-01/workbooks_API.json
+  - Microsoft.Insights/stable/2015-05-01/myworkbooks_API.json
+  - Microsoft.Insights/preview/2018-05-01-preview/components_API.json
+  - Microsoft.Insights/preview/2020-03-01-preview/componentLinkedStorageAccounts_API.json
+  - Microsoft.Insights/preview/2020-06-02-preview/livetoken_API.json
+  - Microsoft.Insights/preview/2020-10-26-preview/diagnosticServicesToken_API.json
 ```
 
 ### Tag: package-preview-2020-06-only

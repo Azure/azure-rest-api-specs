@@ -34,51 +34,12 @@
     }
   },
   "paths": {
-    "/{resourceUri}/providers/Microsoft.Insights/diagnosticServiceToken": {
-      "get": {
-        "tags": [
-          "DiagnosticServiceToken"
-        ],
-        "operationId": "DiagnosticServiceToken_GET",
-        "description": "**Gets an read-only access token for application insights diagnostic service data.**",
-        "parameters": [
-          {
-            "$ref": "#/parameters/ResourceUriParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ErrorResponse"
-            }
-          },
-          "200": {
-            "description": "Successful response containing the application insights diagnostic services token.",
-            "schema": {
-              "$ref": "#/definitions/DiagnosticServicesTokenResponse"
-            },
-            "examples": {
-              "application/json": {
-                "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c"
-              }
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Get diagnostic services token for resource": {
-            "$ref": "./examples/DiagnosticServicesTokenGetAndPost.json"
-          }
-        }
-      },
+    "/{resourceUri}/providers/Microsoft.Insights/generateDiagnosticServiceToken": {
       "post": {
         "tags": [
-          "DiagnosticServiceToken"
+          "generateDiagnosticServiceToken"
         ],
-        "operationId": "DiagnosticServiceToken_POST",
+        "operationId": "generateDiagnosticServiceToken",
         "description": "**Gets an read-write access token for application insights diagnostic service data.**",
         "parameters": [
           {
@@ -90,7 +51,7 @@
         ],
         "responses": {
           "default": {
-            "description": "Error response describing why the operation failed.",
+            "description": "Error response describing why the operation failed .",
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ErrorResponse"
             }
@@ -116,78 +77,29 @@
     }
   },
   "definitions": {
+    "ErrorResponse": {
+      "description": "Error response indicates Insights service is not able to process the incoming request. The reason is provided in the error message.",
+      "type": "object",
+      "properties": {
+        "code": {
+          "description": "Error code.",
+          "type": "string"
+        },
+        "message": {
+          "description": "Error message indicating why the operation failed.",
+          "type": "string"
+        }
+      }
+    },
     "DiagnosticServicesTokenResponse": {
       "type": "object",
       "properties": {
         "token": {
-          "x-ms-secret": true,
           "type": "string",
           "description": "JWT token for accessing application insights diagnostic service data."
         }
       },
       "description": "The response to a diagnostic services token query."
-    },
-    "OperationsListResult": {
-      "description": "Result of the List Operations operation",
-      "type": "object",
-      "properties": {
-        "value": {
-          "description": "A collection of operations",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/OperationDiagnosticServicesToken"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "description": "URL to get the next set of operation list results if there are any."
-        }
-      }
-    },
-    "OperationDiagnosticServicesToken": {
-      "description": "Represents an operation returned by the GetOperations request",
-      "type": "object",
-      "properties": {
-        "name": {
-          "description": "Name of the operation",
-          "type": "string"
-        },
-        "display": {
-          "$ref": "#/definitions/OperationInfo",
-          "description": "Display name of the operation"
-        },
-        "origin": {
-          "description": "Origin of the operation",
-          "type": "string"
-        },
-        "properties": {
-          "description": "Properties of the operation",
-          "type": "object",
-          "x-ms-client-flatten": true
-        }
-      }
-    },
-    "OperationInfo": {
-      "description": "Information about an operation",
-      "type": "object",
-      "properties": {
-        "provider": {
-          "description": "Name of the provider",
-          "type": "string"
-        },
-        "resource": {
-          "description": "Name of the resource type",
-          "type": "string"
-        },
-        "operation": {
-          "description": "Name of the operation",
-          "type": "string"
-        },
-        "description": {
-          "description": "Description of the operation",
-          "type": "string"
-        }
-      }
     }
   },
   "parameters": {
