@@ -52,6 +52,10 @@ directive:
     where: $.definitions.Operation.properties.isDataAction
     from: types.json
     reason: This is in the common types. Changing this would effect a number of unrelated API.
+  - suppress: BodyTopLevelProperties
+    where: $.definitions.ConfigurationProfilePreference.properties
+    from: automanage.json
+    reason: 'I believe this is a false positive. Near as I can tell, "systemData" is a valid top level property, along with name, type, id, location, properties, tags, plan, sku, etag, managedBy, identity, zones.'
 ```
 
 ---
