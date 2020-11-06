@@ -1,20 +1,17 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "2020-01-01-privatepreview",
-    "title": "servicelinker",
-    "description": "Description of the new service",
-    "x-ms-code-generation-settings": {
-      "name": "servicelinkerClient"
-    }
+    "title": "Microsoft.ServiceLinker",
+    "description": "Microsoft.ServiceLinker provider",
+    "version": "2019-01-01"
   },
   "host": "management.azure.com",
-  "schemes": ["https"],
-  "consumes": ["application/json"],
-  "produces": ["application/json"],
+  "schemes": [ "https" ],
+  "consumes": [ "application/json" ],
+  "produces": [ "application/json" ],
   "security": [
     {
-      "azure_auth": ["user_impersonation"]
+      "azure_auth": [ "user_impersonation" ]
     }
   ],
   "securityDefinitions": {
@@ -22,34 +19,128 @@
       "type": "oauth2",
       "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
       "flow": "implicit",
-      "description": "Azure Active Directory OAuth2 Flow",
+      "description": "Azure Active Directory OAuth2 Flow.",
       "scopes": {
         "user_impersonation": "impersonate your user account"
       }
     }
   },
   "paths": {
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceLinker/operations": {
+    "/{resourceUri}/providers/Microsoft.ServiceLinker/linkers": {
       "get": {
-        "tags": ["Tag1"],
-        "operationId": "OperationGroup_Get",
-        "x-ms-examples": {
-          "BatchAccountDelete": { "$ref": "./examples/OperationGroupGet.json" }
-        },
-        "description": "This is a sample get operation, please see guidelines in azure-rest-api-specs repository for more info",
+        "deprecated": false,
+        "description": "Returns list of Linkers.",
+        "operationId": "linker_List",
         "parameters": [
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
+            "$ref": "#/parameters/ResourceUriParameter"
           }
         ],
         "responses": {
           "200": {
-            "description": "Describe the result of a successful operation.",
+            "description": "linker details.",
             "schema": {
-              "$ref": "#/definitions/Result"
+              "$ref": "#/definitions/LinkerList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/{resourceUri}/providers/Microsoft.ServiceLinker/linker/{linkerName}": {
+      "get": {
+        "description": "Returns Linker resource for a given name.",
+        "operationId": "linker_Get",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceUriParameter"
+          },
+          {
+            "$ref": "#/parameters/LinkerNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Linker details.",
+            "schema": {
+              "$ref": "#/definitions/Linker"
+            }
+          }
+        }
+      },
+      "put": {
+        "description": "Create or update linker resource.",
+        "operationId": "Linker_CreateAndUpdate",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceUriParameter"
+          },
+          {
+            "$ref": "#/parameters/LinkerNameParameter"
+          },
+          {
+            "name": "Linker",
+            "description": "Linker details.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Linker"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful.",
+            "schema": {
+              "$ref": "#/definitions/Linker"
+            }
+          },
+          "201": {
+            "description": "Long running operation."
+          }
+        }
+      }
+    },
+    "/{resourceUri}/providers/Microsoft.ServiceLinker/linker/{linkerName}/validate": {
+      "post": {
+        "tags": [
+          "Links"
+        ],
+        "operationId": "Links_Validate",
+        "description": "Validate a link.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/LinkerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceUriParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ValidateResult"
             }
           },
           "default": {
@@ -63,21 +154,132 @@
     }
   },
   "definitions": {
-    "Result": {
-      "description": "Sample result definition",
+    "AdditionalInfo": {
+      "description": "The additional information required for creating a linker.",
+      "type": "object",
       "properties": {
-        "sampleProperty": {
+        "bindingType": {
           "type": "string",
-          "description": "Sample property of type string"
+          "description": "The binding type."
         }
       }
     },
-    "ErrorResponse": {
-      "description": "Error response.",
+    "AuthInfo": {
+      "description": "The authentication info.",
+      "type": "object",
       "properties": {
-        "error": {
-          "$ref": "#/definitions/ErrorDefinition",
-          "description": "The error details."
+        "authType": {
+          "description": "The authentication type.",
+          "$ref": "#/definitions/AuthType"
+        },
+        "identity": {
+          "description": "The identity info for the linker.",
+          "type": "string"
+        },
+        "secret": {
+          "description": "The secret info for the linker.",
+          "type": "string",
+          "x-ms-secret": true
+        },
+        "permissions": {
+          "description": "The permissions info for the linker.",
+          "type": "array",
+          "items": {
+            "description": "A single permission info.",
+            "type": "string"
+          }
+        }
+      }
+    },
+    "AuthType": {
+      "description": "The authentication type.",
+      "type": "string",
+      "enum": [
+        "systemAssignedIdentity",
+        "userAssignedIdentity",
+        "servicePrincipal",
+        "secret",
+        "certificate"
+      ]
+    },
+    "Linker": {
+      "type": "object",
+      "description": "Linker",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "required": [ "properties" ],
+      "properties": {
+        "properties": {
+          "description": "The properties of the linker.",
+          "$ref": "#/definitions/LinkerProperties",
+          "x-ms-client-flatten": true
+        },
+        "systemData": {
+          "readOnly": true,
+          "description": "The system meta data relating to this resource.",
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/systemData"
+        }
+      }
+    },
+    "LinkerList": {
+      "description": "The list of Linker.",
+      "type": "object",
+      "properties": {
+        "nextLink": {
+          "description": "The linker used to get the next page of Linker list.",
+          "type": "string"
+        },
+        "value": {
+          "description": "The list of Linkers.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Linker"
+          }
+        }
+      }
+    },
+    "LinkerProperties": {
+      "description": "The properties of the linker.",
+      "properties": {
+        "sourceId": {
+          "description": "The resource Id of source service.",
+          "type": "string"
+        },
+        "targetId": {
+          "description": "The resource Id of target service.",
+          "type": "string"
+        },
+        "authInfo": {
+          "description": "The authentication information.",
+          "$ref": "#/definitions/AuthInfo"
+        },
+        "additionalInfo": {
+          "description": "The additional info for the linker.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AdditionalInfo"
+          }
+        },
+        "sourceConfigurations": {
+          "description": "The configuration properties for source resource.",
+          "type": "array",
+          "items": {
+            "description": "A setting.",
+            "type": "object",
+            "properties": {
+              "type": {
+                "description": "The type of setting.",
+                "type": "string"
+              },
+              "linkConfig": {
+                "description": "The configuration of the linker.",
+                "type": "object"
+              }
+            }
+          }
         }
       }
     },
@@ -96,37 +298,113 @@
         },
         "details": {
           "description": "Internal error details.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ErrorDefinition"
-          },
+          "type": "string",
           "readOnly": true
+        }
+      }
+    },
+    "ErrorResponse": {
+      "description": "Error response.",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/ErrorDefinition",
+          "description": "The error details."
+        }
+      }
+    },
+    "Resource": {
+      "description": "An Azure resource.",
+      "properties": {
+        "id": {
+          "description": "Azure resource Id.",
+          "type": "string",
+          "readOnly": true
+        },
+        "name": {
+          "description": "Azure resource name.",
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "description": "Azure resource type.",
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "ValidateResult": {
+      "description": "The validation result for a linker.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "The linker name.",
+          "type": "string"
+        },
+        "linkStatus": {
+          "description": "Specifies if the linker is healthy.",
+          "type": "string",
+          "enum": [
+            "Healthy",
+            "Not healthy"
+          ],
+          "x-ms-enum": {
+            "name": "linkStatus",
+            "modelAsString": true
+          }
+        },
+        "reason": {
+          "description": "The reason of the error.",
+          "type": "string"
+        },
+        "reportStartTimeUtc": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The start time of the validation report."
+        },
+        "reportEndTimeUtc": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The end time of the validation report."
+        },
+        "sourceId": {
+          "description": "The resource Id of source service.",
+          "type": "string"
+        },
+        "targetId": {
+          "description": "The resource Id of target service.",
+          "type": "string"
+        },
+        "authType": {
+          "description": "The authentication type.",
+          "$ref": "#/definitions/AuthType"
         }
       }
     }
   },
   "parameters": {
-    "SubscriptionIdParameter": {
-      "name": "subscriptionId",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "The Azure subscription ID. This is a GUID-formatted string (e.g. 00000000-0000-0000-0000-000000000000)"
-    },
-    "ResourceGroupNameParameter": {
-      "name": "resourceGroupName",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "The name of the resource group.",
-      "x-ms-parameter-location": "method"
-    },
     "ApiVersionParameter": {
       "name": "api-version",
       "in": "query",
       "required": true,
       "type": "string",
-      "description": "The API version to be used with the HTTP request."
+      "description": "Client Api Version."
+    },
+    "LinkerNameParameter": {
+      "name": "LinkerName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name Linker resource.",
+      "x-ms-parameter-location": "method"
+    },
+    "ResourceUriParameter": {
+      "name": "ResourceUri",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The fully qualified Azure Resource manager identifier of the resource, or scope, whose status to retrieve.",
+      "x-ms-skip-url-encoding": true
     }
   }
 }
