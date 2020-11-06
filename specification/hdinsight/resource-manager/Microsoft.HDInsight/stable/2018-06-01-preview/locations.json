@@ -431,6 +431,59 @@
             "type": "string"
           },
           "readOnly": true
+        },
+        "vmSizeProperties": {
+          "description": "vmsize properties",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VmSizeProperty"
+          }
+        }
+      }
+    },
+    "VmSizeProperty":{
+      "type": "object",
+      "description": "The vm size property",
+      "properties": {
+        "name": {
+          "description": "The name",
+          "type": "string"
+        },
+        "cores": {
+          "description": "The cores",
+          "type": "string"
+        },
+        "dataDiskStorageTier": {
+          "description": "The dataDiskStorageTier",
+          "type": "string"
+        },
+        "label": {
+          "description": "The label",
+          "type": "string"
+        },
+        "maxDataDiskCount": {
+          "description": "The maxDataDiskCount",
+          "type": "string"
+        },
+        "memoryInMb": {
+          "description": "The memoryInMb",
+          "type": "string"
+        },
+        "supportedByVirtualMachines": {
+          "description": "The supportedByVirtualMachines",
+          "type": "string"
+        },
+        "supportedByWebWorkerRolesbel": {
+          "description": "The supportedByWebWorkerRolesbel",
+          "type": "string"
+        },
+        "virtualMachineResourceDiskSizeInMb": {
+          "description": "The virtualMachineResourceDiskSizeInMb",
+          "type": "string"
+        },
+        "webWorkerResourceDiskSizeInMb": {
+          "description": "The webWorkerResourceDiskSizeInMb",
+          "type": "string"
         }
       }
     },
@@ -442,10 +495,7 @@
           "description": "The filtering mode. Effectively this can enabling or disabling the VM sizes in a particular set.",
           "type": "string",
           "enum": [
-            "Exclude",
-            "Include",
-            "Recommend",
-            "DefaultVmSize"
+            "Exclude"
           ],
           "x-ms-enum": {
             "name": "FilterMode",
