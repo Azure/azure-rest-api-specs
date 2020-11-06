@@ -191,6 +191,16 @@
           // Script path related to repo root
           "type": "string"
         },
+        "envs": {
+          // Extra environment variable to be passed to the script.
+          // By default the following envs will be passed:
+          // USER, HOME, PATH, SHELL, PWD (current directory), TMPDIR (dedicated temp folder) 
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "default": []
+        },
         "logPrefix": {
           // Prefix to be added to SDK Automation log. By default it would be filename of the script.
           "type": "string"
