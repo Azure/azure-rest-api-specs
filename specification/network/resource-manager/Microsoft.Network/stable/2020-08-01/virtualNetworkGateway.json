@@ -1825,12 +1825,12 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/connections/{virtualNetworkGatewayConnectionName}/listikesas": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/connections/{virtualNetworkGatewayConnectionName}/getikesas": {
       "post": {
         "tags": [
           "VirtualNetworkGatewayConnections"
         ],
-        "operationId": "VirtualNetworkGatewayConnections_ListIkeSas",
+        "operationId": "VirtualNetworkGatewayConnections_GetIkeSas",
         "description": "Lists IKE Security Associations for the virtual network gateway connection in the specified resource group.",
         "parameters": [
           {
@@ -1859,7 +1859,7 @@
             "description": "Accepted and the operation will complete asynchronously."
           },
           "200": {
-            "description": "Request successful. The operation listikesas completed on virtual network gateway connection.",
+            "description": "Request successful. The operation getikesas completed on virtual network gateway connection.",
             "schema": {
               "type": "string"
             }
@@ -1873,7 +1873,7 @@
         },
         "x-ms-examples": {
           "List IKE Security Associations for virtual network gateway connection": {
-            "$ref": "./examples/VirtualNetworkGatewayConnectionListIkeSas.json"
+            "$ref": "./examples/VirtualNetworkGatewayConnectionGetIkeSas.json"
           }
         },
         "x-ms-long-running-operation": true,
@@ -3417,7 +3417,7 @@
         },
         "description": "A list of main mode security associations"
       },
-      "description": "IKE security association parameters for virtual network gateway connection. Response for ListIkeSas API service call."
+      "description": "IKE security association parameters for virtual network gateway connection. Response for GetIkeSas API service call."
     },
     "LocalNetworkGatewayPropertiesFormat": {
       "properties": {
