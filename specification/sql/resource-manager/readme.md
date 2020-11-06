@@ -24,7 +24,7 @@ These are the global settings for the Sql API.
 title: SqlManagementClient
 description: 'The Azure SQL Database management API provides a RESTful set of web services that interact with Azure SQL Database services to manage your databases. The API enables you to create, retrieve, update, and delete databases.'
 openapi-type: arm
-tag: package-composite-v3
+tag: package-composite-v4
 ```
 
 ## Composite packages
@@ -101,6 +101,7 @@ input-file:
 - Microsoft.Sql/preview/2017-10-01-preview/ManagedInstanceKeys.json
 - Microsoft.Sql/preview/2017-10-01-preview/ManagedInstanceEncryptionProtectors.json
 - Microsoft.Sql/preview/2017-10-01-preview/recoverableManagedDatabases.json
+- Microsoft.Sql/preview/2017-10-01-preview/shortTermRetentionPolicies.json
 - Microsoft.Sql/preview/2018-06-01-preview/ManagedInstanceVulnerabilityAssessments.json
 - Microsoft.Sql/preview/2018-06-01-preview/ServerVulnerabilityAssessments.json
 - Microsoft.Sql/preview/2018-06-01-preview/managedDatabaseSensitivityLabels.json
@@ -119,7 +120,6 @@ input-file:
 - Microsoft.Sql/preview/2019-06-01-preview/syncGroups.json
 - Microsoft.Sql/preview/2019-06-01-preview/syncMembers.json
 - Microsoft.Sql/preview/2019-06-01-preview/FailoverManagedInstance.json
-- Microsoft.Sql/preview/2020-02-02-preview/shortTermRetentionPolicies.json
 - Microsoft.Sql/preview/2020-02-02-preview/managedDatabases.json
 - Microsoft.Sql/preview/2020-02-02-preview/ServerAzureADOnlyAuthentications.json
 - Microsoft.Sql/preview/2020-02-02-preview/managedInstances.json
@@ -218,6 +218,7 @@ input-file:
 - Microsoft.Sql/preview/2017-10-01-preview/ManagedInstanceKeys.json
 - Microsoft.Sql/preview/2017-10-01-preview/ManagedInstanceEncryptionProtectors.json
 - Microsoft.Sql/preview/2017-10-01-preview/recoverableManagedDatabases.json
+- Microsoft.Sql/preview/2017-10-01-preview/shortTermRetentionPolicies.json
 - Microsoft.Sql/preview/2018-06-01-preview/ManagedInstanceVulnerabilityAssessments.json
 - Microsoft.Sql/preview/2018-06-01-preview/ServerVulnerabilityAssessments.json
 - Microsoft.Sql/preview/2018-06-01-preview/managedDatabaseSensitivityLabels.json
@@ -238,7 +239,6 @@ input-file:
 - Microsoft.Sql/preview/2019-06-01-preview/syncGroups.json
 - Microsoft.Sql/preview/2019-06-01-preview/syncMembers.json
 - Microsoft.Sql/preview/2019-06-01-preview/FailoverManagedInstance.json
-- Microsoft.Sql/preview/2020-02-02-preview/shortTermRetentionPolicies.json
 - Microsoft.Sql/preview/2020-02-02-preview/managedDatabases.json
 - Microsoft.Sql/preview/2020-02-02-preview/ServerAzureADOnlyAuthentications.json
 - Microsoft.Sql/preview/2020-02-02-preview/managedInstances.json
