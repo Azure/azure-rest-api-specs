@@ -30,14 +30,14 @@ Generate all API versions currently shipped for this package
 ```yaml !$(track2)
 batch:
   - tag: package-2020-01-01
-  - tag: package-2020-02-14-privatepreview
+  - tag: package-2020-02-14-preview
 ```
 
 ```yaml $(track2)
 clear-output-folder: true
 batch:
   - tag: package-2020-01-01
-  - tag: package-2020-02-14-privatepreview
+  - tag: package-2020-02-14-preview
 ```
 
 ### Tag: package-2020-01-01 and python
@@ -53,12 +53,12 @@ python:
   output-folder: $(python-sdks-folder)/rdbms/azure-mgmt-rdbms/azure/mgmt/rdbms/postgresql
 ```
 
-### Tag: package-2020-02-14-privatepreview and python
+### Tag: package-2020-02-14-preview and python
 
-These settings apply only when `--tag=package-2020-02-14-privatepreview --python` is specified on the command line.
+These settings apply only when `--tag=package-2020-02-14-preview --python` is specified on the command line.
 Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
 
-``` yaml $(tag) == 'package-2020-02-14-privatepreview' && $(python)
+``` yaml $(tag) == 'package-2020-02-14-preview' && $(python)
 namespace: azure.mgmt.rdbms.postgresql_flexibleservers
 output-folder: $(python-sdks-folder)/rdbms/azure-mgmt-rdbms/azure/mgmt/rdbms/postgresql_flexibleservers
 python:
