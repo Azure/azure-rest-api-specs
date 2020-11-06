@@ -13,17 +13,14 @@ no-namespace-folders: true
 clear-output-folder: true
 ```
 
-``` yaml $(tag) == 'release_4_0'
-namespace: azure.cognitiveservices.knowledge.qnamaker.authoring
-output-folder: $(python-sdks-folder)/cognitiveservices/azure-cognitiveservices-knowledge-qnamaker/azure/cognitiveservices/knowledge/qnamaker/authoring
+``` yaml $(tag) == 'release_5_0_preview.1'
+python:
+  namespace: azure.cognitiveservices.knowledge.qnamaker.authoring
+  output-folder: $(python-sdks-folder)/cognitiveservices/azure-cognitiveservices-knowledge-qnamaker/azure/cognitiveservices/knowledge/qnamaker/authoring
 ```
 
 ``` yaml $(tag) == 'runtime_release_4_0'
-namespace: azure.cognitiveservices.knowledge.qnamaker.runtime
-output-folder: $(python-sdks-folder)/cognitiveservices/azure-cognitiveservices-knowledge-qnamaker/azure/cognitiveservices/knowledge/qnamaker/runtime
-```
-
-``` yaml $(tag) == 'release_5_0_preview.1'
-namespace: azure.cognitiveservices.knowledge.qnamaker.preview
-output-folder: $(python-sdks-folder)/cognitiveservices/azure-cognitiveservices-knowledge-qnamaker/azure/cognitiveservices/knowledge/qnamaker/preview/
+python:
+  namespace: azure.cognitiveservices.knowledge.qnamaker.runtime
+  output-folder: $(python-sdks-folder)/cognitiveservices/azure-cognitiveservices-knowledge-qnamaker/azure/cognitiveservices/knowledge/qnamaker/runtime
 ```
