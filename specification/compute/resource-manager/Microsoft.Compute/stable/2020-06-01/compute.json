@@ -2775,6 +2775,9 @@
         "x-ms-examples": {
           "Update a VM by detaching data disk": {
             "$ref": "./examples/UpdateVMDetachDataDiskUsingToBeDetachedProperty.json"
+          },
+          "Update a VM by force-detaching managed data disk": {
+            "$ref": "./examples/UpdateVMForceDetachDataDisk.json"
           }
         }
       },
@@ -8139,6 +8142,17 @@
         "modelAsString": true
       }
     },
+    "DetachOption": {
+      "type": "string",
+      "description": "Specifies the detach behavior to be used while detaching a disk or which is already in the process of detachment from the virtual machine. Supported values: **ForceDetach**. <br><br> detachOption: **ForceDetach** is applicable only for managed data disks. If a previous detachment attempt of the data disk did not complete due to an unexpected failure from the virtual machine and the disk is still not released then use force-detach as a last resort option to detach the disk forcibly from the VM. All writes might not have been flushed when using this detach behavior. <br><br> This feature is still in preview mode and is not supported for VirtualMachineScaleSet. To force-detach a data disk update toBeDetached to 'true' along with setting detachOption: 'ForceDetach'.",
+      "enum": [
+        "ForceDetach"
+      ],
+      "x-ms-enum": {
+        "name": "DiskDetachOptionTypes",
+        "modelAsString": true
+      }
+    },
     "StorageAccountType": {
       "type": "string",
       "description": "Specifies the storage account type for the managed disk. Managed OS disk storage account type can only be set when you create the scale set. NOTE: UltraSSD_LRS can only be used with data disks. It cannot be used with OS Disk. Standard_LRS uses Standard HDD. StandardSSD_LRS uses Standard SSD. Premium_LRS uses Premium SSD. UltraSSD_LRS uses Ultra disk. For more information regarding disks supported for Windows Virtual Machines, refer to https://docs.microsoft.com/en-us/azure/virtual-machines/windows/disks-types and, for Linux Virtual Machines, refer to https://docs.microsoft.com/en-us/azure/virtual-machines/linux/disks-types",
@@ -8311,6 +8325,10 @@
         "toBeDetached": {
           "type": "boolean",
           "description": "Specifies whether the data disk is in process of detachment from the VirtualMachine/VirtualMachineScaleset"
+        },
+        "detachOption": {
+          "$ref": "#/definitions/DetachOption",
+          "description": "Specifies the detach behavior to be used while detaching a disk or which is already in the process of detachment from the virtual machine. Supported values: **ForceDetach**. <br><br> detachOption: **ForceDetach** is applicable only for managed data disks. If a previous detachment attempt of the data disk did not complete due to an unexpected failure from the virtual machine and the disk is still not released then use force-detach as a last resort option to detach the disk forcibly from the VM. All writes might not have been flushed when using this detach behavior. <br><br> This feature is still in preview mode and is not supported for VirtualMachineScaleSet. To force-detach a data disk update toBeDetached to 'true' along with setting detachOption: 'ForceDetach'."
         },
         "diskIOPSReadWrite": {
           "type": "integer",
