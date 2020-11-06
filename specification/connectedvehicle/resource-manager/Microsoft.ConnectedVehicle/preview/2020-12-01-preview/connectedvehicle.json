@@ -446,45 +446,6 @@
       },
       "description": "Specifies the response indicating whether the platform account name is valid and available."
     },
-    "Sku": {
-      "properties": {
-        "name": {
-          "$ref": "#/definitions/SkuName",
-          "description": "Specifies the name of the SKU."
-        },
-        "tier": {
-          "$ref": "#/definitions/Tier",
-          "description": "Specifies the tier of the SKU."
-        }
-      },
-      "required": [
-        "name"
-      ],
-      "description": "Specifies the SKU of the platform account."
-    },
-    "SkuName": {
-      "type": "string",
-      "enum": [
-        "D0"
-      ],
-      "x-ms-enum": {
-        "name": "SkuName",
-        "modelAsString": true
-      },
-      "description": "Specifies the SKU name."
-    },
-    "Tier": {
-      "type": "string",
-      "enum": [
-        "Dedicated"
-      ],
-      "x-ms-enum": {
-        "name": "SkuTier",
-        "modelAsString": true
-      },
-      "readOnly": true,
-      "description": "Specifies the SKU tier."
-    },
     "MqttEndpoint": {
       "properties": {
         "enabled": {
@@ -600,7 +561,7 @@
     "PlatformAccountUpdateParameters": {
       "properties": {
         "sku": {
-          "$ref": "#/definitions/Sku",
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/Sku",
           "description": "Specifies the SKU of the platform account."
         },
         "tags": {
@@ -669,7 +630,7 @@
     "PlatformAccount": {
       "properties": {
         "sku": {
-          "$ref": "#/definitions/Sku",
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/Sku",
           "description": "Specifies the SKU of the platform account."
         },
         "systemData": {
