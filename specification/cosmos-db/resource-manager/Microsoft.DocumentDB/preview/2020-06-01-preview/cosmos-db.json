@@ -4481,7 +4481,7 @@
             "$ref": "./examples/CosmosDBRestorableSqlResourceList.json"
           }
         },
-        "description": "Lists all the restorable Azure Cosmos DB SQL resources available for a specific database account at a given time.",
+        "description": "Lists all the restorable Azure Cosmos DB SQL resources available for a specific database account at a given time and location.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
@@ -4703,7 +4703,7 @@
             "$ref": "./examples/CosmosDBRestorableMongodbResourceList.json"
           }
         },
-        "description": "Lists all the restorable Azure Cosmos DB MongoDB resources available for a specific database account at a given time.",
+        "description": "Lists all the restorable Azure Cosmos DB MongoDB resources available for a specific database account at a given time and location.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
@@ -8139,7 +8139,7 @@
         },
         "databasesToRestore": {
           "type": "array",
-          "description": "List of specific databases to restore.",
+          "description": "List of specific databases available for restore.",
           "items": {
             "$ref": "#/definitions/DatabaseRestoreResource"
           }
@@ -8152,11 +8152,11 @@
       "properties": {
         "databaseName": {
           "type": "string",
-          "description": "The name of the database to restore."
+          "description": "The name of the database available for restore."
         },
         "collectionNames": {
           "type": "array",
-          "description": "The names of the collections to restore.",
+          "description": "The names of the collections available for restore.",
           "items": {
             "$ref": "#/definitions/CollectionName"
           }
