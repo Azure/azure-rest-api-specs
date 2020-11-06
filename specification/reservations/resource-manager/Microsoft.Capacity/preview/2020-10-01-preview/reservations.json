@@ -322,6 +322,49 @@
         }
       }
     },
+    "/providers/Microsoft.Capacity/reservationOrders/{reservationOrderId}/changeDirectory": {
+      "post": {
+        "summary": "Change direcotory of `ReservationOrder`.",
+        "description": "Change directory (tenant) of `ReservationOrder` and all `Reservation` under it to specified tenant id",
+        "operationId": "ReservationOrder_ChangeDirectory",
+        "x-ms-examples": {
+          "Split": {
+            "$ref": "./examples/ChangeDirectoryReservationOrder.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ReservationOrderIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ChangeDirectoryParameter"
+          }
+        ],
+        "tags": [
+          "ReservationOrder, ChangeDirectory"
+        ],
+        "responses": {
+          "200": {
+            "description": "List of `Reservation`s created after the split operation.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/ChangeDirectoryResponse"
+              }
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
     "/providers/Microsoft.Capacity/reservationOrders/{reservationOrderId}/split": {
       "post": {
         "summary": "Split the `Reservation`.",
@@ -1482,6 +1525,59 @@
         }
       }
     },
+    "ChangeDirectoryResponse": {
+      "type": "object",
+      "description": "Change direcotry response",
+      "properties": {
+        "reservationOrder": {
+          "type": "object",
+          "description": "Change direcotry result for reservation order",
+          "properties": {
+            "id": {
+              "type": "string",
+              "description": "Identifier of the reservation order"
+            },
+            "name": {
+              "type": "string",
+              "description": "Name of the reservation order"
+            },
+            "isSucceeded": {
+              "description": "True if change directory operation succeeded on this reservation order",
+              "type": "boolean"
+            },
+            "error": {
+              "type": "string",
+              "description": "Error reason if operation failed. Null otherwise"
+            }
+          }
+        },
+        "reservations": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "description": "Change direcotry result for reservation",
+            "properties": {
+              "id": {
+                "type": "string",
+                "description": "Identifier of the reservation"
+              },
+              "name": {
+                "type": "string",
+                "description": "Name of the reservation"
+              },
+              "isSucceeded": {
+                "description": "True if change directory operation succeeded on this reservation",
+                "type": "boolean"
+              },
+              "error": {
+                "type": "string",
+                "description": "Error reason if operation failed. Null otherwise"
+              }
+            }
+          }
+        }
+      }
+    },
     "RenewPropertiesResponse": {
       "type": "object",
       "properties": {
@@ -1826,6 +1922,15 @@
         "properties": {
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/SplitProperties"
+        }
+      }
+    },
+    "ChangeDirectoryRequest": {
+      "type": "object",
+      "properties": {
+        "destinationTenantId": {
+          "description": "Tenant id GUID that reservation order is to be tranferred to",
+          "type": "string"
         }
       }
     },
@@ -2181,6 +2286,16 @@
       "description": "Information needed to Split a reservation item",
       "schema": {
         "$ref": "#/definitions/SplitRequest"
+      }
+    },
+    "ChangeDirectoryParameter": {
+      "name": "body",
+      "x-ms-parameter-location": "method",
+      "in": "body",
+      "required": true,
+      "description": "Information needed to change directory of reservation order",
+      "schema": {
+        "$ref": "#/definitions/ChangeDirectoryRequest"
       }
     },
     "ApiVersionParameter": {
