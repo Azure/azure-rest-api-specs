@@ -963,7 +963,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/OperationList"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/OperationListResult"
             }
           },
           "default": {
@@ -1129,14 +1129,18 @@
       "description": "Automanage configuration profile assignment properties."
     },
     "ConfigurationProfileAssignmentCompliance": {
+      "description": "Data related to assignment profile compliance.",
+      "readOnly": true,
+      "required": [
+        "status"
+      ],
+      "type": "object",
       "properties": {
-        "updateStatus": {
-          "readOnly": true,
+        "status": {
           "type": "string",
-          "description": "The state of compliance, which only appears in the response.",
-          "x-nullable": true,
+          "description": "The status of the assignment profile compliance.",
           "x-ms-enum": {
-            "name": "updateStatus",
+            "name": "complianceStatus",
             "modelAsString": true
           },
           "enum": [
@@ -1146,7 +1150,7 @@
           ]
         }
       },
-      "description": "The compliance status for the configuration profile assignment."
+      "additionalProperties": true
     },
     "ConfigurationProfilePreference": {
       "properties": {
@@ -1159,6 +1163,9 @@
       "allOf": [
         {
           "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/TrackedResource"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
         }
       ],
       "description": "Definition of the configuration profile preference."
@@ -1184,8 +1191,8 @@
           "$ref": "#/definitions/ConfigurationProfilePreferenceVmBackup",
           "description": "The custom preferences for Azure VM Backup."
         },
-        "antiMalware": {
-          "$ref": "#/definitions/ConfigurationProfilePreferenceAntiMalware",
+        "antimalware": {
+          "$ref": "#/definitions/ConfigurationProfilePreferenceAntimalware",
           "description": "The custom preferences for Azure Antimalware."
         }
       },
@@ -1216,7 +1223,7 @@
       },
       "description": "Automanage configuration profile VM Backup preferences."
     },
-    "ConfigurationProfilePreferenceAntiMalware": {
+    "ConfigurationProfilePreferenceAntimalware": {
       "properties": {
         "enableRealTimeProtection": {
           "type": "string",
@@ -1286,63 +1293,6 @@
         }
       },
       "description": "The response of the list ConfigurationProfilePreference operation."
-    },
-    "Operation": {
-      "description": "Automanage REST API operation",
-      "type": "object",
-      "properties": {
-        "name": {
-          "description": "Operation name: For ex. providers/Microsoft.Automanage/configurationProfileAssignments/write or read",
-          "type": "string"
-        },
-        "isDataAction": {
-          "description": "Indicates whether the operation is a data action",
-          "type": "string"
-        },
-        "display": {
-          "properties": {
-            "provider": {
-              "description": "Service provider: Microsoft.Automanage",
-              "type": "string"
-            },
-            "resource": {
-              "description": "Resource on which the operation is performed:  For ex. ",
-              "type": "string"
-            },
-            "operation": {
-              "description": "Operation type: Read, write, delete, etc.",
-              "type": "string"
-            },
-            "description": {
-              "description": "Description about operation.",
-              "type": "string"
-            }
-          },
-          "description": "Provider, Resource, Operation and description values."
-        },
-        "properties": {
-          "properties": {
-            "statusCode": {
-              "description": "Service provider: Microsoft.Automanage",
-              "type": "string"
-            }
-          },
-          "x-ms-client-flatten": true,
-          "description": "Provider, Resource, Operation and description values."
-        }
-      }
-    },
-    "OperationList": {
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Operation"
-          },
-          "description": "List of Automanage operations supported by the Automanage resource provider."
-        }
-      },
-      "description": "The response model for the list of Automanage operations"
     },
     "UpdateResource": {
       "description": "Represents an update resource",
