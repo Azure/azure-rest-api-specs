@@ -59,6 +59,16 @@ directive:
 ```
 
 ---
+
+## Suppression:
+``` yaml
+directive:
+  - from: Microsoft.WorkloadMonitor.json
+    suppress:
+      - R4017 # HealthMonitors only applied to top-level resources.
+    
+```
+
 # Code Generation
 
 
@@ -71,6 +81,7 @@ This is not used by Autorest itself.
 swagger-to-sdk:
   - repo: azure-sdk-for-net
   - repo: azure-sdk-for-python
+  - repo: azure-sdk-for-python-track2
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-node
@@ -96,69 +107,11 @@ csharp:
 
 ## Python
 
-These settings apply only when `--python` is specified on the command line.
-Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
-Use `--python-mode=update` if you already have a setup.py and just want to update the code itself.
-``` yaml $(python)
-python-mode: create
-python:
-  azure-arm: true
-  license-header: MICROSOFT_MIT_NO_VERSION
-  payload-flattening-threshold: 2
-  namespace: azure.mgmt.workloadmonitor
-  package-name: azure-mgmt-workloadmonitor
-  clear-output-folder: true
-```
-``` yaml $(python) && $(python-mode) == 'update'
-python:
-  no-namespace-folders: true
-  output-folder: $(python-sdks-folder)/azure-mgmt-workloadmonitor/azure/mgmt/workloadmonitor
-```
-``` yaml $(python) && $(python-mode) == 'create'
-python:
-  basic-setup-py: true
-  output-folder: $(python-sdks-folder)/azure-mgmt-workloadmonitor
-```
-
-
+See configuration in [readme.python.md](./readme.python.md)
 
 ## Go
 
-These settings apply only when `--go` is specified on the command line.
-
-``` yaml $(go)
-go:
-  license-header: MICROSOFT_APACHE_NO_VERSION
-  namespace: workloadmonitor
-  clear-output-folder: true
-```
-
-### Go multi-api
-
-``` yaml $(go) && $(multiapi)
-batch:
-  - tag: package-2020-01-13-preview
-  - tag: package-2018-08-31-preview
-```
-
-### Tag: package-2018-08-31-preview and go
-
-These settings apply only when `--tag=package-2018-08-31-preview --go` is specified on the command line.
-Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
-
-``` yaml $(tag) == 'package-2018-08-31-preview' && $(go)
-output-folder: $(go-sdk-folder)/services/preview/workloadmonitor/mgmt/2018-08-31-preview/workloadmonitor
-```
-
-### Tag: package-2020-01-13-preview and go
-
-These settings apply only when `--tag=package-2020-01-13-preview --go` is specified on the command line.
-Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
-
-``` yaml $(tag) == 'package-2020-01-13-preview' && $(go)
-output-folder: $(go-sdk-folder)/services/preview/workloadmonitor/mgmt/2020-01-13-preview/workloadmonitor
-```
-
+See configuration in [readme.go.md](./readme.go.md)
 
 ## Java
 
