@@ -60,7 +60,7 @@
           "200": {
             "description": "OK. The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/TransactionSummary"
+              "$ref": "#/definitions/TransactionSummaryProperties"
             }
           },
           "default": {
@@ -129,43 +129,6 @@
             "type": "string",
             "readOnly": true
           }
-        }
-      }
-    },
-    "Resource": {
-      "description": "The Resource model definition.",
-      "properties": {
-        "id": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Resource Id."
-        },
-        "name": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Resource name."
-        },
-        "type": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Resource type."
-        }
-      },
-      "x-ms-azure-resource": true
-    },
-    "TransactionSummary": {
-      "description": "Transaction summary.",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/Resource"
-        }
-      ],
-      "properties": {
-        "properties": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/TransactionSummaryProperties",
-          "title": "Transaction summary properties"
         }
       }
     },
