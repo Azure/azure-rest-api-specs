@@ -201,6 +201,11 @@ directive:
     reason: 'get workbook list by subscription is not supported'
   - suppress: OperationsAPIImplementation
     reason: 'Previously implemented operation apis are using an incorrect RP case format which I cannot change.'
+  - suppress: SECRET_PROPERTY
+    from: diagnosticServicesToken_API.json
+    where:
+      - $.definitions.DiagnosticServicesTokenResponse.properties.token
+    reason: 'Secrets are OK to return in a POST response.'
 ```
 
 ### Tag: package-preview-2020-10-26-only
