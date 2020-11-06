@@ -243,6 +243,46 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerRegistry/registries/{registryName}/connectedRegistries/{connectedRegistryName}/deactivate": {
+      "post": {
+        "tags": [
+          "ConnectedRegistries"
+        ],
+        "description": "Deactivates the connected registry instance.",
+        "operationId": "ConnectedRegistries_Deactivate",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/RegistryNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ConnectedRegistryNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly."
+          },
+          "202": {
+            "description": "The request was successful; the operation will complete asynchronously."
+          }
+        },
+        "x-ms-examples": {
+          "ConnectedRegistryDeactivate": {
+            "$ref": "./examples/ConnectedRegistryDeactivate.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerRegistry/registries/{registryName}/exportPipelines/{exportPipelineName}": {
       "get": {
         "tags": [
@@ -2629,6 +2669,11 @@
           "type": "string",
           "readOnly": true
         },
+        "activation": {
+          "$ref": "#/definitions/ActivationProperties",
+          "description": "The activation properties of the connected registry.",
+          "readOnly": true
+        },
         "parent": {
           "$ref": "#/definitions/ParentProperties",
           "description": "The parent of the connected registry."
@@ -2655,6 +2700,25 @@
             "$ref": "#/definitions/StatusDetailProperties"
           },
           "readOnly": true
+        }
+      }
+    },
+    "ActivationProperties": {
+      "description": "The activation properties of the connected registry.",
+      "type": "object",
+      "properties": {
+        "status": {
+          "description": "The activation status of the connected registry.",
+          "enum": [
+            "Activated",
+            "Unactivated"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "ActivationStatus",
+            "modelAsString": true
+          }
         }
       }
     },
@@ -2752,7 +2816,7 @@
           "readOnly": true
         },
         "correlationId": {
-          "description": "The correlation id of the status.",
+          "description": "The correlation ID of the status.",
           "type": "string",
           "readOnly": true
         }
@@ -3944,6 +4008,32 @@
             "name": "PublicNetworkAccess",
             "modelAsString": true
           }
+        },
+        "networkRuleBypassOptions": {
+          "description": "Whether to allow trusted Azure services to access a network restricted registry.",
+          "default": "AzureServices",
+          "enum": [
+            "AzureServices",
+            "None"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "NetworkRuleBypassOptions",
+            "modelAsString": true
+          }
+        },
+        "zoneRedundancy": {
+          "description": "Whether or not zone redundancy is enabled for this container registry",
+          "default": "Disabled",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "ZoneRedundancy",
+            "modelAsString": true
+          }
         }
       }
     },
@@ -4269,6 +4359,19 @@
             "name": "PublicNetworkAccess",
             "modelAsString": true
           }
+        },
+        "networkRuleBypassOptions": {
+          "description": "Whether to allow trusted Azure services to access a network restricted registry.",
+          "default": "AzureServices",
+          "enum": [
+            "AzureServices",
+            "None"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "NetworkRuleBypassOptions",
+            "modelAsString": true
+          }
         }
       }
     },
@@ -4507,7 +4610,7 @@
           "type": "boolean"
         },
         "zoneRedundancy": {
-          "description": "Zone redundancy level configured for this replication",
+          "description": "Whether or not zone redundancy is enabled for this container registry replication",
           "default": "Disabled",
           "enum": [
             "Enabled",

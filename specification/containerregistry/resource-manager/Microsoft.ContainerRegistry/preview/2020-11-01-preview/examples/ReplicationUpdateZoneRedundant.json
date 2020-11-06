@@ -5,10 +5,13 @@
     "resourceGroupName": "myResourceGroup",
     "registryName": "myRegistry",
     "replicationName": "myReplication",
-    "replication": {
-      "location": "eastus",
+    "replicationUpdateParameters": {
       "tags": {
         "key": "value"
+      },
+      "properties": {
+        "regionEndpointEnabled": true,
+        "zoneRedundancy": "Enabled"
       }
     }
   },
@@ -30,7 +33,7 @@
             "timestamp": "2017-03-01T23:15:37.0707808Z"
           },
           "regionEndpointEnabled": true,
-          "zoneRedundancy" : "Disabled"   
+          "zoneRedundancy" : "Enabled"
         }
       }
     },
@@ -44,14 +47,14 @@
           "key": "value"
         },
         "properties": {
-          "provisioningState": "Creating",
+          "provisioningState": "Updating",
           "status": {
             "displayStatus": "Provisioning",
             "message": "The replication is provisioning.",
             "timestamp": "2017-03-01T23:15:37.0707808Z"
           },
           "regionEndpointEnabled": true,
-          "zoneRedundancy" : "Disabled"
+          "zoneRedundancy" : "Enabled"
         }
       }
     }
