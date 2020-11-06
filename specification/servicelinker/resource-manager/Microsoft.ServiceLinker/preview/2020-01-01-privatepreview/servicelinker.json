@@ -31,6 +31,11 @@
         "deprecated": false,
         "description": "Returns list of Linkers.",
         "operationId": "linker_List",
+        "x-ms-examples": {
+          "DeleteLink": {
+            "$ref": "./examples/LinkList.json"
+          }
+        },
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -62,6 +67,11 @@
       "get": {
         "description": "Returns Linker resource for a given name.",
         "operationId": "linker_Get",
+        "x-ms-examples": {
+          "DeleteLink": {
+            "$ref": "./examples/UpdateLink.json"
+          }
+        },
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -85,6 +95,11 @@
       "put": {
         "description": "Create or update linker resource.",
         "operationId": "Linker_CreateAndUpdate",
+        "x-ms-examples": {
+          "DeleteLink": {
+            "$ref": "./examples/PutLink.json"
+          }
+        },
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -114,6 +129,47 @@
           },
           "201": {
             "description": "Long running operation."
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Links"
+        ],
+        "operationId": "Links_Delete",
+        "description": "Delete a link.",
+        "x-ms-examples": {
+          "DeleteLink": {
+            "$ref": "./examples/DeleteLink.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceUriParameter"
+          },
+          {
+            "$ref": "#/parameters/LinkerNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The link is deleted."
+          },
+          "202": {
+            "description": "Accepted. The response indicates the delete operation is performed in the background."
+          },
+          "204": {
+            "description": "Success. The response indicates the link is already deleted."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         }
       }
@@ -204,7 +260,7 @@
     },
     "Linker": {
       "type": "object",
-      "description": "Linker",
+      "description": "Linker of source and target resource",
       "allOf": [
         {
           "$ref": "#/definitions/Resource"
