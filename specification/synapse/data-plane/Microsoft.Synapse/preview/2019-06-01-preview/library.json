@@ -28,7 +28,7 @@
         "tags": [
           "Library"
         ],
-        "operationId": "Library_GetLibraryByWorkspace",
+        "operationId": "Library_List",
         "x-ms-examples": {
           "List Libraries": {
             "$ref": "./examples/Library_ListByWorkspace.json"
@@ -71,6 +71,7 @@
           }
         },
         "description": "Create Library",
+        "x-ms-long-running-operation": true,
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -80,8 +81,14 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "Ok."
+          },
           "202": {
-            "description": "Accepted."
+            "description": "Accepted.",
+            "schema": {
+              "$ref": "#/definitions/LibraryResourceInfo"
+            }
           },
           "default": {
             "description": "An error response received from the Azure Synapse service.",
@@ -104,6 +111,7 @@
           }
         },
         "description": "Flush Library",
+        "x-ms-long-running-operation": true,
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -113,8 +121,14 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "Ok."
+          },
           "202": {
-            "description": "Accepted."
+            "description": "Accepted.",
+            "schema": {
+              "$ref": "#/definitions/LibraryResourceInfo"
+            }
           },
           "default": {
             "description": "An error response received from the Azure Synapse service.",
@@ -221,6 +235,7 @@
           }
         },
         "description": "Delete Library",
+        "x-ms-long-running-operation": true,
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -230,8 +245,14 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "Ok."
+          },
           "202": {
-            "description": "Accepted."
+            "description": "Accepted.",
+            "schema": {
+              "$ref": "#/definitions/LibraryResourceInfo"
+            }
           },
           "409": {
             "description": "Conflict."
@@ -338,6 +359,57 @@
         }
       }
     },
+    "LibraryResourceInfo": {
+      "description": "Library resource info ",
+      "type": "object",
+      "properties": {
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}"
+        },
+        "recordId": {
+          "readOnly": true,
+          "type": "integer",
+          "description": "record Id of the library/package."
+        },
+        "state": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Provisioning status of the library/package."
+        },
+        "created": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The creation time of the library/package."
+        },
+        "changed": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The last updated time of the library/package."
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The type of the resource. E.g. LibraryArtifact"
+        },
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Name of the library/package."
+        },
+        "operationId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Operation Id of the operation performed on library/package."
+        },
+        "artifactId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "artifact Id of the library/package."
+        }
+      }
+    },
     "LibraryResource": {
       "description": "Library response details",
       "allOf": [
@@ -347,7 +419,7 @@
       ],
       "properties": {
         "properties": {
-          "$ref": "#/definitions/Library",
+          "$ref": "#/definitions/LibraryResourceProperties",
           "description": "Library/package properties."
         }
       },
@@ -355,7 +427,7 @@
         "properties"
       ]
     },
-    "Library": {
+    "LibraryResourceProperties": {
       "description": "Library/package properties",
       "type": "object",
       "properties": {
