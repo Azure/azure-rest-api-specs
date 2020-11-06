@@ -5929,6 +5929,19 @@
           "format": "int32",
           "description": "Routing weight for vpn connection."
         },
+        "vpnLinkConnectionMode": {
+          "type": "string",
+          "description": "Vpn link connection mode.",
+          "enum": [
+            "Default",
+            "ResponderOnly",
+            "InitiatorOnly"
+          ],
+          "x-ms-enum": {
+            "name": "vpnLinkConnectionMode",
+            "modelAsString": true
+          }
+        },
         "connectionStatus": {
           "description": "The connection status.",
           "$ref": "#/definitions/VpnConnectionStatus"
