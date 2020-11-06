@@ -48,6 +48,10 @@ directive:
     from: automanage.json
     where: $.paths
     reason: 'Microsoft.Automanage is a proxy resource provider under Microsoft. Please refer PR https://github.com/Azure/azure-rest-api-specs-pr/pull/1283'
+  - suppress: EnumInsteadOfBoolean
+    where: $.definitions.Operation.properties.isDataAction
+    from: types.json
+    reason: This is in the common types. Changing this would effect a number of unrelated API.
 ```
 
 ---
@@ -85,4 +89,3 @@ csharp:
   output-folder: $(csharp-sdks-folder)/automanage/Microsoft.Azure.Management.Automanage/src/Generated
   clear-output-folder: true
 ```
-
