@@ -10,6 +10,6 @@ csharp:
   payload-flattening-threshold: 1
   clear-output-folder: true
   client-side-validation: false
-  namespace: Microsoft.Mobility
-  output-folder: $(csharp-sdks-folder)/mobility/management/Microsoft.Mobility/GeneratedProtocol
+  namespace: Microsoft.ConnectedVehicle
+  output-folder: $(csharp-sdks-folder)/connectedvehicle/management/Microsoft.ConnectedVehicle/GeneratedProtocol
 ```
