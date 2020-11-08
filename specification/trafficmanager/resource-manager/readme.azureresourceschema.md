@@ -6,85 +6,91 @@ These settings apply only when `--azureresourceschema` is specified on the comma
 
 ``` yaml $(azureresourceschema) && $(multiapi)
 batch:
-  - tag: package-2018-04
-  - tag: package-2018-03
-  - tag: package-2018-02
-  - tag: package-2017-09-preview
-  - tag: package-2017-09-preview-only
-  - tag: package-2017-05
-  - tag: package-2017-03
-  - tag: package-2015-11
+  - tag: schema-network-2018-04-01
+  - tag: schema-network-2018-03-01
+  - tag: schema-network-2018-02-01
+  - tag: schema-network-2017-09-01-preview
+  - tag: schema-network-2017-05-01
+  - tag: schema-network-2017-03-01
+  - tag: schema-network-2015-11-01
+
 ```
 
-### Tag: package-2018-04 and azureresourceschema
-
-These settings apply only when `--tag=package-2018-04 --azureresourceschema` is specified on the command line.
 Please also specify `--azureresourceschema-folder=<path to the root directory of your azure-resource-manager-schemas clone>`.
 
-``` yaml $(tag) == 'package-2018-04' && $(azureresourceschema)
+### Tag: schema-network-2018-04-01 and azureresourceschema
+
+``` yaml $(tag) == 'schema-network-2018-04-01' && $(azureresourceschema)
 output-folder: $(azureresourceschema-folder)/schemas
+
+# all the input files in this apiVersion
+input-file:
+  - Microsoft.Network/stable/2018-04-01/trafficmanager.json
+
 ```
 
-### Tag: package-2018-03 and azureresourceschema
+### Tag: schema-network-2018-03-01 and azureresourceschema
 
-These settings apply only when `--tag=package-2018-03 --azureresourceschema` is specified on the command line.
-Please also specify `--azureresourceschema-folder=<path to the root directory of your azure-resource-manager-schemas clone>`.
-
-``` yaml $(tag) == 'package-2018-03' && $(azureresourceschema)
+``` yaml $(tag) == 'schema-network-2018-03-01' && $(azureresourceschema)
 output-folder: $(azureresourceschema-folder)/schemas
+
+# all the input files in this apiVersion
+input-file:
+  - Microsoft.Network/stable/2018-03-01/trafficmanager.json
+
 ```
 
-### Tag: package-2018-02 and azureresourceschema
+### Tag: schema-network-2018-02-01 and azureresourceschema
 
-These settings apply only when `--tag=package-2018-02 --azureresourceschema` is specified on the command line.
-Please also specify `--azureresourceschema-folder=<path to the root directory of your azure-resource-manager-schemas clone>`.
-
-``` yaml $(tag) == 'package-2018-02' && $(azureresourceschema)
+``` yaml $(tag) == 'schema-network-2018-02-01' && $(azureresourceschema)
 output-folder: $(azureresourceschema-folder)/schemas
+
+# all the input files in this apiVersion
+input-file:
+  - Microsoft.Network/stable/2018-02-01/trafficmanager.json
+
 ```
 
-### Tag: package-2017-09-preview and azureresourceschema
+### Tag: schema-network-2017-09-01-preview and azureresourceschema
 
-These settings apply only when `--tag=package-2017-09-preview --azureresourceschema` is specified on the command line.
-Please also specify `--azureresourceschema-folder=<path to the root directory of your azure-resource-manager-schemas clone>`.
-
-``` yaml $(tag) == 'package-2017-09-preview' && $(azureresourceschema)
+``` yaml $(tag) == 'schema-network-2017-09-01-preview' && $(azureresourceschema)
 output-folder: $(azureresourceschema-folder)/schemas
+
+# all the input files in this apiVersion
+input-file:
+  - Microsoft.Network/preview/2017-09-01-preview/trafficmanageranalytics.json
+
 ```
 
-### Tag: package-2017-09-preview-only and azureresourceschema
+### Tag: schema-network-2017-05-01 and azureresourceschema
 
-These settings apply only when `--tag=package-2017-09-preview-only --azureresourceschema` is specified on the command line.
-Please also specify `--azureresourceschema-folder=<path to the root directory of your azure-resource-manager-schemas clone>`.
-
-``` yaml $(tag) == 'package-2017-09-preview-only' && $(azureresourceschema)
+``` yaml $(tag) == 'schema-network-2017-05-01' && $(azureresourceschema)
 output-folder: $(azureresourceschema-folder)/schemas
+
+# all the input files in this apiVersion
+input-file:
+  - Microsoft.Network/stable/2017-05-01/trafficmanager.json
+
 ```
 
-### Tag: package-2017-05 and azureresourceschema
+### Tag: schema-network-2017-03-01 and azureresourceschema
 
-These settings apply only when `--tag=package-2017-05 --azureresourceschema` is specified on the command line.
-Please also specify `--azureresourceschema-folder=<path to the root directory of your azure-resource-manager-schemas clone>`.
-
-``` yaml $(tag) == 'package-2017-05' && $(azureresourceschema)
+``` yaml $(tag) == 'schema-network-2017-03-01' && $(azureresourceschema)
 output-folder: $(azureresourceschema-folder)/schemas
+
+# all the input files in this apiVersion
+input-file:
+  - Microsoft.Network/stable/2017-03-01/trafficmanager.json
+
 ```
 
-### Tag: package-2017-03 and azureresourceschema
+### Tag: schema-network-2015-11-01 and azureresourceschema
 
-These settings apply only when `--tag=package-2017-03 --azureresourceschema` is specified on the command line.
-Please also specify `--azureresourceschema-folder=<path to the root directory of your azure-resource-manager-schemas clone>`.
-
-``` yaml $(tag) == 'package-2017-03' && $(azureresourceschema)
+``` yaml $(tag) == 'schema-network-2015-11-01' && $(azureresourceschema)
 output-folder: $(azureresourceschema-folder)/schemas
+
+# all the input files in this apiVersion
+input-file:
+  - Microsoft.Network/stable/2015-11-01/trafficmanager.json
+
 ```
-
-### Tag: package-2015-11 and azureresourceschema
-
-These settings apply only when `--tag=package-2015-11 --azureresourceschema` is specified on the command line.
-Please also specify `--azureresourceschema-folder=<path to the root directory of your azure-resource-manager-schemas clone>`.
-
-``` yaml $(tag) == 'package-2015-11' && $(azureresourceschema)
-output-folder: $(azureresourceschema-folder)/schemas
-```
-

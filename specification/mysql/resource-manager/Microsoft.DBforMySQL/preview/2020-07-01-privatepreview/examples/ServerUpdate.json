@@ -7,8 +7,7 @@
     "parameters": {
       "properties": {
         "administratorLoginPassword": "newpa$$w0rd",
-        "sslEnforcement": "Disabled",
-        "publicNetworkAccess": "Disabled"
+        "sslEnforcement": "Disabled"
       }
     }
   },
@@ -27,9 +26,20 @@
           },
           "version": "5.7",
           "sslEnforcement": "Disabled",
-          "publicNetworkAccess": "Disabled",
+          "publicNetworkAccess": "Enabled",
           "state": "Ready",
-          "fullyQualifiedDomainName": "mysqltestsvc4.mysql.database.azure.com"
+          "fullyQualifiedDomainName": "mysqltestsvc4.mysql.database.azure.com",
+          "haEnabled": "Enabled",
+          "haState": "Healthy",
+          "availabilityZone": "1",
+          "standbyAvailabilityZone": "2",
+          "maintenanceWindow": {
+            "dayOfWeek": 0,
+            "startHour": 0,
+            "startMinute": 0,
+            "customWindow": "Disabled"
+          },
+          "delegatedSubnetArguments": {}
         },
         "location": "westus",
         "tags": {

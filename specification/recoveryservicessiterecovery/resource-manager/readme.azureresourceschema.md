@@ -6,35 +6,43 @@ These settings apply only when `--azureresourceschema` is specified on the comma
 
 ``` yaml $(azureresourceschema) && $(multiapi)
 batch:
-  - tag: package-2018-07
-  - tag: package-2018-01
-  - tag: package-2016-08
+  - tag: schema-recoveryservices-2018-07-10
+  - tag: schema-recoveryservices-2018-01-10
+  - tag: schema-recoveryservices-2016-08-10
+
 ```
 
-### Tag: package-2018-07 and azureresourceschema
-
-These settings apply only when `--tag=package-2018-07 --azureresourceschema` is specified on the command line.
 Please also specify `--azureresourceschema-folder=<path to the root directory of your azure-resource-manager-schemas clone>`.
 
-``` yaml $(tag) == 'package-2018-07' && $(azureresourceschema)
+### Tag: schema-recoveryservices-2018-07-10 and azureresourceschema
+
+``` yaml $(tag) == 'schema-recoveryservices-2018-07-10' && $(azureresourceschema)
 output-folder: $(azureresourceschema-folder)/schemas
+
+# all the input files in this apiVersion
+input-file:
+  - Microsoft.RecoveryServices/stable/2018-07-10/service.json
+
 ```
 
-### Tag: package-2018-01 and azureresourceschema
+### Tag: schema-recoveryservices-2018-01-10 and azureresourceschema
 
-These settings apply only when `--tag=package-2018-01 --azureresourceschema` is specified on the command line.
-Please also specify `--azureresourceschema-folder=<path to the root directory of your azure-resource-manager-schemas clone>`.
-
-``` yaml $(tag) == 'package-2018-01' && $(azureresourceschema)
+``` yaml $(tag) == 'schema-recoveryservices-2018-01-10' && $(azureresourceschema)
 output-folder: $(azureresourceschema-folder)/schemas
+
+# all the input files in this apiVersion
+input-file:
+  - Microsoft.RecoveryServices/stable/2018-01-10/service.json
+
 ```
 
-### Tag: package-2016-08 and azureresourceschema
+### Tag: schema-recoveryservices-2016-08-10 and azureresourceschema
 
-These settings apply only when `--tag=package-2016-08 --azureresourceschema` is specified on the command line.
-Please also specify `--azureresourceschema-folder=<path to the root directory of your azure-resource-manager-schemas clone>`.
-
-``` yaml $(tag) == 'package-2016-08' && $(azureresourceschema)
+``` yaml $(tag) == 'schema-recoveryservices-2016-08-10' && $(azureresourceschema)
 output-folder: $(azureresourceschema-folder)/schemas
-```
 
+# all the input files in this apiVersion
+input-file:
+  - Microsoft.RecoveryServices/stable/2016-08-10/service.json
+
+```

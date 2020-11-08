@@ -4362,6 +4362,128 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualHubs/{hubName}/bgpConnections/{connectionName}/learnedRoutes": {
+      "post": {
+        "operationId": "VirtualHubBgpConnections_ListLearnedRoutes",
+        "description": "Retrieves a list of routes the virtual hub bgp connection has learned.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "hubName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the virtual hub."
+          },
+          {
+            "name": "connectionName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the virtual hub bgp connection."
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of advertised BGP routes.",
+            "schema": {
+              "$ref": "#/definitions/PeerRouteList"
+            }
+          },
+          "202": {
+            "description": "Accepted and the operation will complete asynchronously."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "VirtualRouterPeerListLearnedRoutes": {
+            "$ref": "./examples/VirtualRouterPeerListLearnedRoute.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualHubs/{hubName}/bgpConnections/{connectionName}/advertisedRoutes": {
+      "post": {
+        "operationId": "VirtualHubBgpConnections_ListAdvertisedRoutes",
+        "description": "Retrieves a list of routes the virtual hub bgp connection is advertising to the specified peer.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "hubName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the virtual hub."
+          },
+          {
+            "name": "connectionName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the virtual hub bgp connection."
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of learned BGP routes.",
+            "schema": {
+              "$ref": "#/definitions/PeerRouteList"
+            }
+          },
+          "202": {
+            "description": "Accepted and the operation will complete asynchronously."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "VirtualRouterPeerListAdvertisedRoutes": {
+            "$ref": "./examples/VirtualRouterPeerListAdvertisedRoute.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualHubs/{virtualHubName}/ipConfigurations/{ipConfigName}": {
       "get": {
         "operationId": "VirtualHubIpConfiguration_Get",
@@ -5342,6 +5464,59 @@
       },
       "description": "Properties of the bgp connection."
     },
+    "PeerRoute": {
+      "properties": {
+        "localAddress": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The peer's local address."
+        },
+        "network": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The route's network prefix."
+        },
+        "nextHop": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The route's next hop."
+        },
+        "sourcePeer": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The peer this route was learned from."
+        },
+        "origin": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The source this route was learned from."
+        },
+        "asPath": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The route's AS path sequence."
+        },
+        "weight": {
+          "type": "integer",
+          "format": "int32",
+          "readOnly": true,
+          "description": "The route's weight."
+        }
+      },
+      "description": "Peer routing details."
+    },
+    "PeerRouteList": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PeerRoute"
+          },
+          "description": "List of peer routes."
+        }
+      },
+      "description": "List of virtual router peer routes."
+    },
     "HubIpConfiguration": {
       "properties": {
         "properties": {
@@ -5946,7 +6121,7 @@
           "description": "List of all connections associated with this route table.",
           "readOnly": true,
           "items": {
-            "$ref": "./network.json#/definitions/SubResource"
+            "type": "string"
           }
         },
         "propagatingConnections": {
@@ -5954,7 +6129,7 @@
           "description": "List of all connections that advertise to this route table.",
           "readOnly": true,
           "items": {
-            "$ref": "./network.json#/definitions/SubResource"
+            "type": "string"
           }
         },
         "provisioningState": {
@@ -7025,7 +7200,7 @@
         }
       }
     },
-    "VirtualHubEffectiveRouteEffectiveRouteList": {
+    "VirtualHubEffectiveRouteList": {
       "description": "EffectiveRoutes List.",
       "properties": {
         "value": {
@@ -7072,7 +7247,7 @@
       "description": "The parameters specifying the resource whose effective routes are being requested.",
       "properties": {
         "resourceId": {
-          "$ref": "./network.json#/definitions/Resource",
+          "type": "string",
           "description": "The resource whose effective routes are being requested."
         },
         "virtualWanResourceType": {

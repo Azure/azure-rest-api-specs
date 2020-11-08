@@ -66,14 +66,14 @@
           "Create cluster with TLS 1.2": {
             "$ref": "./examples/CreateHDInsightClusterWithTLS12.json"
           },
-          "Create cluster with custom network settings": {
-            "$ref": "./examples/CreateHDInsightClusterWithCustomNetworkSettings.json"
-          },
           "Create cluster with encryption in transit": {
             "$ref": "./examples/CreateHDInsightClusterWithEncryptionInTransit.json"
           },
           "Create cluster with encryption at host": {
             "$ref": "./examples/CreateHDInsightClusterWithEncryptionAtHost.json"
+          },
+          "Create cluster with network properties": {
+            "$ref": "./examples/CreateHDInsightClusterWithCustomNetworkProperties.json"
           }
         },
         "parameters": [
@@ -1014,34 +1014,34 @@
       },
       "description": "The storage profile."
     },
-    "NetworkSettings": {
+    "NetworkProperties": {
+      "description": "The network properties.",
       "properties": {
-        "publicNetworkAccess": {
+        "resourceProviderConnection": {
           "type": "string",
-          "description": "Specifies whether public network access is enabled for inbound and outbound, or outbound only.",
+          "description": "The direction for the resource provider connection.",
           "enum": [
-            "InboundAndOutbound",
-            "OutboundOnly"
+            "Inbound",
+            "Outbound"
           ],
           "x-ms-enum": {
-            "name": "PublicNetworkAccess",
+            "name": "ResourceProviderConnection",
             "modelAsString": true
           }
         },
-        "outboundOnlyPublicNetworkAccessType": {
+        "privateLink": {
           "type": "string",
-          "description": "The mechanism through which the cluster will have outbound access to the public network.",
+          "description": "Indicates whether or not private link is enabled.",
           "enum": [
-            "PublicLoadBalancer",
-            "UDR"
+            "Disabled",
+            "Enabled"
           ],
           "x-ms-enum": {
-            "name": "OutboundOnlyPublicNetworkAccessType",
+            "name": "PrivateLink",
             "modelAsString": true
           }
         }
-      },
-      "description": "The network settings."
+      }
     },
     "ClusterCreateProperties": {
       "description": "The cluster create parameters.",
@@ -1106,9 +1106,9 @@
           "type": "string",
           "description": "The minimal supported tls version."
         },
-        "networkSettings": {
-          "$ref": "#/definitions/NetworkSettings",
-          "description": "The network settings."
+        "networkProperties": {
+          "$ref": "#/definitions/NetworkProperties",
+          "description": "The network properties."
         }
       }
     },
@@ -1225,6 +1225,10 @@
             "modelAsString": false
           }
         },
+        "clusterId": {
+          "type": "string",
+          "description": "The cluster id."
+        },
         "clusterDefinition": {
           "$ref": "#/definitions/ClusterDefinition",
           "description": "The cluster definition."
@@ -1294,9 +1298,9 @@
           "type": "string",
           "description": "The minimal supported tls version."
         },
-        "networkSettings": {
-          "$ref": "#/definitions/NetworkSettings",
-          "description": "The network settings."
+        "networkProperties": {
+          "$ref": "#/definitions/NetworkProperties",
+          "description": "The network properties."
         }
       },
       "required": [

@@ -6,15 +6,19 @@ These settings apply only when `--azureresourceschema` is specified on the comma
 
 ``` yaml $(azureresourceschema) && $(multiapi)
 batch:
-  - tag: package-2018-05
+  - tag: schema-serialconsole-2018-05-01
+
 ```
 
-### Tag: package-2018-05 and azureresourceschema
-
-These settings apply only when `--tag=package-2018-05 --azureresourceschema` is specified on the command line.
 Please also specify `--azureresourceschema-folder=<path to the root directory of your azure-resource-manager-schemas clone>`.
 
-``` yaml $(tag) == 'package-2018-05' && $(azureresourceschema)
-output-folder: $(azureresourceschema-folder)/schemas
-```
+### Tag: schema-serialconsole-2018-05-01 and azureresourceschema
 
+``` yaml $(tag) == 'schema-serialconsole-2018-05-01' && $(azureresourceschema)
+output-folder: $(azureresourceschema-folder)/schemas
+
+# all the input files in this apiVersion
+input-file:
+  - Microsoft.SerialConsole/stable/2018-05-01/serialconsole.json
+
+```
