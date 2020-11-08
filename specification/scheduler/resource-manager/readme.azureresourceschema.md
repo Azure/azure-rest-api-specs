@@ -6,35 +6,43 @@ These settings apply only when `--azureresourceschema` is specified on the comma
 
 ``` yaml $(azureresourceschema) && $(multiapi)
 batch:
-  - tag: package-2016-03
-  - tag: package-2016-01
-  - tag: package-2014-08-preview
+  - tag: schema-scheduler-2016-03-01
+  - tag: schema-scheduler-2016-01-01
+  - tag: schema-scheduler-2014-08-01-preview
+
 ```
 
-### Tag: package-2016-03 and azureresourceschema
-
-These settings apply only when `--tag=package-2016-03 --azureresourceschema` is specified on the command line.
 Please also specify `--azureresourceschema-folder=<path to the root directory of your azure-resource-manager-schemas clone>`.
 
-``` yaml $(tag) == 'package-2016-03' && $(azureresourceschema)
+### Tag: schema-scheduler-2016-03-01 and azureresourceschema
+
+``` yaml $(tag) == 'schema-scheduler-2016-03-01' && $(azureresourceschema)
 output-folder: $(azureresourceschema-folder)/schemas
+
+# all the input files in this apiVersion
+input-file:
+  - Microsoft.Scheduler/stable/2016-03-01/scheduler.json
+
 ```
 
-### Tag: package-2016-01 and azureresourceschema
+### Tag: schema-scheduler-2016-01-01 and azureresourceschema
 
-These settings apply only when `--tag=package-2016-01 --azureresourceschema` is specified on the command line.
-Please also specify `--azureresourceschema-folder=<path to the root directory of your azure-resource-manager-schemas clone>`.
-
-``` yaml $(tag) == 'package-2016-01' && $(azureresourceschema)
+``` yaml $(tag) == 'schema-scheduler-2016-01-01' && $(azureresourceschema)
 output-folder: $(azureresourceschema-folder)/schemas
+
+# all the input files in this apiVersion
+input-file:
+  - Microsoft.Scheduler/stable/2016-01-01/scheduler.json
+
 ```
 
-### Tag: package-2014-08-preview and azureresourceschema
+### Tag: schema-scheduler-2014-08-01-preview and azureresourceschema
 
-These settings apply only when `--tag=package-2014-08-preview --azureresourceschema` is specified on the command line.
-Please also specify `--azureresourceschema-folder=<path to the root directory of your azure-resource-manager-schemas clone>`.
-
-``` yaml $(tag) == 'package-2014-08-preview' && $(azureresourceschema)
+``` yaml $(tag) == 'schema-scheduler-2014-08-01-preview' && $(azureresourceschema)
 output-folder: $(azureresourceschema-folder)/schemas
-```
 
+# all the input files in this apiVersion
+input-file:
+  - Microsoft.Scheduler/preview/2014-08-01-preview/scheduler.json
+
+```

@@ -6,15 +6,22 @@ These settings apply only when `--azureresourceschema` is specified on the comma
 
 ``` yaml $(azureresourceschema) && $(multiapi)
 batch:
-  - tag: package-2016-06
+  - tag: schema-recoveryservices-2016-06-01
+
 ```
 
-### Tag: package-2016-06 and azureresourceschema
-
-These settings apply only when `--tag=package-2016-06 --azureresourceschema` is specified on the command line.
 Please also specify `--azureresourceschema-folder=<path to the root directory of your azure-resource-manager-schemas clone>`.
 
-``` yaml $(tag) == 'package-2016-06' && $(azureresourceschema)
-output-folder: $(azureresourceschema-folder)/schemas
-```
+### Tag: schema-recoveryservices-2016-06-01 and azureresourceschema
 
+``` yaml $(tag) == 'schema-recoveryservices-2016-06-01' && $(azureresourceschema)
+output-folder: $(azureresourceschema-folder)/schemas
+
+# all the input files in this apiVersion
+input-file:
+  - Microsoft.RecoveryServices/stable/2016-06-01/registeredidentities.json
+  - Microsoft.RecoveryServices/stable/2016-06-01/replicationusages.json
+  - Microsoft.RecoveryServices/stable/2016-06-01/vaults.json
+  - Microsoft.RecoveryServices/stable/2016-06-01/vaultusages.json
+
+```

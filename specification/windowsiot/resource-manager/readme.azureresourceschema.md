@@ -6,25 +6,31 @@ These settings apply only when `--azureresourceschema` is specified on the comma
 
 ``` yaml $(azureresourceschema) && $(multiapi)
 batch:
-  - tag: package-2019-06
-  - tag: package-2018-02-preview
+  - tag: schema-windowsiot-2019-06-01
+  - tag: schema-windowsiot-2018-02-16-preview
+
 ```
 
-### Tag: package-2019-06 and azureresourceschema
-
-These settings apply only when `--tag=package-2019-06 --azureresourceschema` is specified on the command line.
 Please also specify `--azureresourceschema-folder=<path to the root directory of your azure-resource-manager-schemas clone>`.
 
-``` yaml $(tag) == 'package-2019-06' && $(azureresourceschema)
+### Tag: schema-windowsiot-2019-06-01 and azureresourceschema
+
+``` yaml $(tag) == 'schema-windowsiot-2019-06-01' && $(azureresourceschema)
 output-folder: $(azureresourceschema-folder)/schemas
+
+# all the input files in this apiVersion
+input-file:
+  - Microsoft.WindowsIoT/stable/2019-06-01/WindowsIotServices.json
+
 ```
 
-### Tag: package-2018-02-preview and azureresourceschema
+### Tag: schema-windowsiot-2018-02-16-preview and azureresourceschema
 
-These settings apply only when `--tag=package-2018-02-preview --azureresourceschema` is specified on the command line.
-Please also specify `--azureresourceschema-folder=<path to the root directory of your azure-resource-manager-schemas clone>`.
-
-``` yaml $(tag) == 'package-2018-02-preview' && $(azureresourceschema)
+``` yaml $(tag) == 'schema-windowsiot-2018-02-16-preview' && $(azureresourceschema)
 output-folder: $(azureresourceschema-folder)/schemas
-```
 
+# all the input files in this apiVersion
+input-file:
+  - Microsoft.WindowsIoT/preview/2018-02-16-preview/WindowsIotServices.json
+
+```

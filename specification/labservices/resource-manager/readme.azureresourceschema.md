@@ -6,15 +6,19 @@ These settings apply only when `--azureresourceschema` is specified on the comma
 
 ``` yaml $(azureresourceschema) && $(multiapi)
 batch:
-  - tag: package-2018-10
+  - tag: schema-labservices-2018-10-15
+
 ```
 
-### Tag: package-2018-10 and azureresourceschema
-
-These settings apply only when `--tag=package-2018-10 --azureresourceschema` is specified on the command line.
 Please also specify `--azureresourceschema-folder=<path to the root directory of your azure-resource-manager-schemas clone>`.
 
-``` yaml $(tag) == 'package-2018-10' && $(azureresourceschema)
-output-folder: $(azureresourceschema-folder)/schemas
-```
+### Tag: schema-labservices-2018-10-15 and azureresourceschema
 
+``` yaml $(tag) == 'schema-labservices-2018-10-15' && $(azureresourceschema)
+output-folder: $(azureresourceschema-folder)/schemas
+
+# all the input files in this apiVersion
+input-file:
+  - Microsoft.LabServices/stable/2018-10-15/ML.json
+
+```

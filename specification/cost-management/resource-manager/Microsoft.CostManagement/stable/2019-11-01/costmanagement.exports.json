@@ -1,0 +1,951 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2019-11-01",
+    "title": "CostManagementClient"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/{scope}/providers/Microsoft.CostManagement/exports": {
+      "get": {
+        "tags": [
+          "Exports"
+        ],
+        "operationId": "Exports_List",
+        "description": "The operation to list all exports at the given scope.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/costmanagement/"
+        },
+        "x-ms-examples": {
+          "SubscriptionExportList": {
+            "$ref": "./examples/ExportListBySubscription.json"
+          },
+          "ResourceGroupExportList": {
+            "$ref": "./examples/ExportListByResourceGroup.json"
+          },
+          "BillingAccountExportList": {
+            "$ref": "./examples/ExportListByBillingAccount.json"
+          },
+          "DepartmentExportList": {
+            "$ref": "./examples/ExportListByDepartment.json"
+          },
+          "EnrollmentAccountExportList": {
+            "$ref": "./examples/ExportListByEnrollmentAccount.json"
+          },
+          "ManagementGroupExportList": {
+            "$ref": "./examples/ExportListByManagementGroup.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/scopeQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ExportListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/{scope}/providers/Microsoft.CostManagement/exports/{exportName}": {
+      "get": {
+        "tags": [
+          "Exports"
+        ],
+        "operationId": "Exports_Get",
+        "description": "The operation to get the export for the defined scope by export name.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/costmanagement/"
+        },
+        "x-ms-examples": {
+          "SubscriptionExport": {
+            "$ref": "./examples/ExportBySubscription.json"
+          },
+          "ResourceGroupExport": {
+            "$ref": "./examples/ExportByResourceGroup.json"
+          },
+          "BillingAccountExport": {
+            "$ref": "./examples/ExportByBillingAccount.json"
+          },
+          "DepartmentExport": {
+            "$ref": "./examples/ExportByDepartment.json"
+          },
+          "EnrollmentAccountExport": {
+            "$ref": "./examples/ExportByEnrollmentAccount.json"
+          },
+          "ManagementGroupExport": {
+            "$ref": "./examples/ExportByManagementGroup.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/scopeQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/exportNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Export"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Exports"
+        ],
+        "operationId": "Exports_CreateOrUpdate",
+        "description": "The operation to create or update a export. Update operation requires latest eTag to be set in the request. You may obtain the latest eTag by performing a get operation. Create operation does not require eTag.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/costmanagement/"
+        },
+        "x-ms-examples": {
+          "SubscriptionCreateOrUpdateExport": {
+            "$ref": "./examples/ExportCreateOrUpdateBySubscription.json"
+          },
+          "ResourceGroupCreateOrUpdateExport": {
+            "$ref": "./examples/ExportCreateOrUpdateByResourceGroup.json"
+          },
+          "BillingAccountCreateOrUpdateExport": {
+            "$ref": "./examples/ExportCreateOrUpdateByBillingAccount.json"
+          },
+          "DepartmentCreateOrUpdateExport": {
+            "$ref": "./examples/ExportCreateOrUpdateByDepartment.json"
+          },
+          "EnrollmentAccountCreateOrUpdateExport": {
+            "$ref": "./examples/ExportCreateOrUpdateByEnrollmentAccount.json"
+          },
+          "ManagementGroupCreateOrUpdateExport": {
+            "$ref": "./examples/ExportCreateOrUpdateByManagementGroup.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/scopeQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/exportNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Export"
+            },
+            "description": "Parameters supplied to the CreateOrUpdate Export operation."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Export"
+            }
+          },
+          "201": {
+            "description": "Created.",
+            "schema": {
+              "$ref": "#/definitions/Export"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Exports"
+        ],
+        "operationId": "Exports_Delete",
+        "description": "The operation to delete a export.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/costmanagement/"
+        },
+        "x-ms-examples": {
+          "SubscriptionDeleteExport": {
+            "$ref": "./examples/ExportDeleteBySubscription.json"
+          },
+          "ResourceGroupDeleteExport": {
+            "$ref": "./examples/ExportDeleteByResourceGroup.json"
+          },
+          "BillingAccountDeleteExport": {
+            "$ref": "./examples/ExportDeleteByBillingAccount.json"
+          },
+          "EnrollmentAccountDeleteExport": {
+            "$ref": "./examples/ExportDeleteByEnrollmentAccount.json"
+          },
+          "DepartmentDeleteExport": {
+            "$ref": "./examples/ExportDeleteByDepartment.json"
+          },
+          "ManagementGroupDeleteExport": {
+            "$ref": "./examples/ExportDeleteByManagementGroup.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/scopeQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/exportNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/{scope}/providers/Microsoft.CostManagement/exports/{exportName}/run": {
+      "post": {
+        "tags": [
+          "Exports"
+        ],
+        "operationId": "Exports_Execute",
+        "description": "The operation to execute a export.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/costmanagement/"
+        },
+        "x-ms-examples": {
+          "SubscriptionExecuteExport": {
+            "$ref": "./examples/ExportExecutionBySubscription.json"
+          },
+          "ResourceGroupExecuteExport": {
+            "$ref": "./examples/ExportExecutionByResourceGroup.json"
+          },
+          "BillingAccountExecuteExport": {
+            "$ref": "./examples/ExportExecutionByBillingAccount.json"
+          },
+          "DepartmentExecuteExport": {
+            "$ref": "./examples/ExportExecutionByDepartment.json"
+          },
+          "EnrollmentAccountExecuteExport": {
+            "$ref": "./examples/ExportExecutionByEnrollmentAccount.json"
+          },
+          "ManagementGroupExecuteExport": {
+            "$ref": "./examples/ExportExecutionByManagementGroup.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/scopeQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/exportNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/{scope}/providers/Microsoft.CostManagement/exports/{exportName}/runHistory": {
+      "get": {
+        "tags": [
+          "Exports"
+        ],
+        "operationId": "Exports_GetExecutionHistory",
+        "description": "The operation to get the execution history of an export for the defined scope by export name.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/costmanagement/"
+        },
+        "x-ms-examples": {
+          "SubscriptionExecutionHistoryExport": {
+            "$ref": "./examples/ExportExecutionListBySubscription.json"
+          },
+          "ResourceGroupExecutionHistoryExport": {
+            "$ref": "./examples/ExportExecutionListByResourceGroup.json"
+          },
+          "BillingAccountExecutionHistoryExport": {
+            "$ref": "./examples/ExportExecutionListByBillingAccount.json"
+          },
+          "DepartmentExecutionHistoryExport": {
+            "$ref": "./examples/ExportExecutionListByDepartment.json"
+          },
+          "EnrollmentAccountExecutionHistoryExport": {
+            "$ref": "./examples/ExportExecutionListByEnrollmentAccount.json"
+          },
+          "ManagementGroupExecutionHistoryExport": {
+            "$ref": "./examples/ExportExecutionListByManagementGroup.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/scopeQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/exportNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ExportExecutionListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ErrorDetails": {
+      "description": "The details of the error.",
+      "properties": {
+        "code": {
+          "description": "Error code.",
+          "type": "string",
+          "readOnly": true
+        },
+        "message": {
+          "description": "Error message indicating why the operation failed.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "ErrorResponse": {
+      "description": "Error response indicates that the service is not able to process the incoming request. The reason is provided in the error message. \n\nSome Error responses: \n\n * 429 TooManyRequests - Request is throttled. Retry after waiting for the time specified in the \"x-ms-ratelimit-microsoft.consumption-retry-after\" header. \n\n * 503 ServiceUnavailable - Service is temporarily unavailable. Retry after waiting for the time specified in the \"Retry-After\" header.",
+      "type": "object",
+      "properties": {
+        "error": {
+          "description": "The details of the error.",
+          "$ref": "#/definitions/ErrorDetails"
+        }
+      }
+    },
+    "Resource": {
+      "description": "The Resource model definition.",
+      "properties": {
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource Id."
+        },
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource name."
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource type."
+        },
+        "tags": {
+          "readOnly": true,
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags."
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "QueryDefinition": {
+      "description": "The definition of a query.",
+      "properties": {
+        "type": {
+          "description": "The type of the query.",
+          "type": "string",
+          "enum": [
+            "Usage",
+            "ActualCost",
+            "AmortizedCost"
+          ],
+          "x-ms-enum": {
+            "name": "ExportType",
+            "modelAsString": true
+          }
+        },
+        "timeframe": {
+          "description": "The time frame for pulling data for the query. If custom, then a specific time period must be provided.",
+          "type": "string",
+          "enum": [
+            "MonthToDate",
+            "BillingMonthToDate",
+            "TheLastMonth",
+            "TheLastBillingMonth",
+            "WeekToDate",
+            "Custom"
+          ],
+          "x-ms-enum": {
+            "name": "TimeframeType",
+            "modelAsString": true
+          }
+        },
+        "timePeriod": {
+          "description": "Has time period for pulling data for the query.",
+          "$ref": "#/definitions/QueryTimePeriod"
+        },
+        "dataset": {
+          "description": "Has definition for data in this query.",
+          "$ref": "#/definitions/QueryDataset"
+        }
+      },
+      "required": [
+        "type",
+        "timeframe"
+      ]
+    },
+    "QueryTimePeriod": {
+      "description": "The start and end date for pulling data for the query.",
+      "properties": {
+        "from": {
+          "description": "The start date to pull data from.",
+          "type": "string",
+          "format": "date-time"
+        },
+        "to": {
+          "description": "The end date to pull data to.",
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "required": [
+        "from",
+        "to"
+      ]
+    },
+    "QueryDataset": {
+      "description": "The definition of data present in the query.",
+      "properties": {
+        "granularity": {
+          "description": "The granularity of rows in the query.",
+          "type": "string",
+          "enum": [
+            "Daily"
+          ],
+          "x-ms-enum": {
+            "name": "GranularityType",
+            "modelAsString": true
+          }
+        },
+        "configuration": {
+          "description": "Has configuration information for the data in the export. The configuration will be ignored if aggregation and grouping are provided.",
+          "$ref": "#/definitions/QueryDatasetConfiguration"
+        },
+        "aggregation": {
+          "type": "object",
+          "description": "Dictionary of aggregation expression to use in the query. The key of each item in the dictionary is the alias for the aggregated column. Query can have up to 2 aggregation clauses.",
+          "additionalProperties": {
+            "type": "object",
+            "$ref": "#/definitions/QueryAggregation"
+          },
+          "maxItems": 2
+        },
+        "grouping": {
+          "description": "Array of group by expression to use in the query. Query can have up to 2 group by clauses.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/QueryGrouping"
+          },
+          "maxItems": 2
+        },
+        "filter": {
+          "type": "object",
+          "description": "Has filter expression to use in the query.",
+          "$ref": "#/definitions/QueryFilter"
+        }
+      }
+    },
+    "QueryDatasetConfiguration": {
+      "description": "The configuration of dataset in the query.",
+      "properties": {
+        "columns": {
+          "description": "Array of column names to be included in the query. Any valid query column name is allowed. If not provided, then query includes all columns.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "QueryAggregation": {
+      "description": "The aggregation expression to be used in the query.",
+      "properties": {
+        "name": {
+          "description": "The name of the column to aggregate.",
+          "type": "string"
+        },
+        "function": {
+          "description": "The name of the aggregation function to use.",
+          "type": "string",
+          "enum": [
+            "Sum"
+          ],
+          "x-ms-enum": {
+            "name": "FunctionType",
+            "modelAsString": true
+          }
+        }
+      },
+      "required": [
+        "name",
+        "function"
+      ]
+    },
+    "QueryGrouping": {
+      "description": "The group by expression to be used in the query.",
+      "properties": {
+        "type": {
+          "description": "Has type of the column to group.",
+          "$ref": "#/definitions/QueryColumnType"
+        },
+        "name": {
+          "description": "The name of the column to group.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "type",
+        "name"
+      ]
+    },
+    "QueryFilter": {
+      "description": "The filter expression to be used in the export.",
+      "properties": {
+        "and": {
+          "description": "The logical \"AND\" expression. Must have at least 2 items.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/QueryFilter"
+          },
+          "minItems": 2
+        },
+        "or": {
+          "description": "The logical \"OR\" expression. Must have at least 2 items.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/QueryFilter"
+          },
+          "minItems": 2
+        },
+        "not": {
+          "description": "The logical \"NOT\" expression.",
+          "$ref": "#/definitions/QueryFilter"
+        },
+        "dimension": {
+          "description": "Has comparison expression for a dimension",
+          "$ref": "#/definitions/QueryComparisonExpression"
+        },
+        "tag": {
+          "description": "Has comparison expression for a tag",
+          "$ref": "#/definitions/QueryComparisonExpression"
+        }
+      }
+    },
+    "QueryColumnType": {
+      "description": "The type of the column in the export.",
+      "type": "string",
+      "enum": [
+        "Tag",
+        "Dimension"
+      ],
+      "x-ms-enum": {
+        "name": "QueryColumnType",
+        "modelAsString": true
+      }
+    },
+    "QueryComparisonExpression": {
+      "description": "The comparison expression to be used in the query.",
+      "properties": {
+        "name": {
+          "description": "The name of the column to use in comparison.",
+          "type": "string"
+        },
+        "operator": {
+          "description": "The operator to use for comparison.",
+          "type": "string",
+          "enum": [
+            "In"
+          ],
+          "x-ms-enum": {
+            "name": "OperatorType",
+            "modelAsString": true
+          }
+        },
+        "values": {
+          "description": "Array of values to use for comparison",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1
+        }
+      },
+      "required": [
+        "name",
+        "operator",
+        "values"
+      ]
+    },
+    "ExportListResult": {
+      "description": "Result of listing exports. It contains a list of available exports in the scope provided.",
+      "properties": {
+        "value": {
+          "description": "The list of exports.",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/Export"
+          }
+        }
+      }
+    },
+    "Export": {
+      "description": "A export resource.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ExportProperties",
+          "title": "Export properties"
+        }
+      }
+    },
+    "ExportProperties": {
+      "description": "The properties of the export.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CommonExportProperties"
+        }
+      ],
+      "properties": {
+        "schedule": {
+          "description": "Has schedule information for the export.",
+          "$ref": "#/definitions/ExportSchedule"
+        }
+      }
+    },
+    "CommonExportProperties": {
+      "description": "The common properties of the export.",
+      "properties": {
+        "format": {
+          "description": "The format of the export being delivered.",
+          "type": "string",
+          "enum": [
+            "Csv"
+          ],
+          "x-ms-enum": {
+            "name": "FormatType",
+            "modelAsString": true
+          }
+        },
+        "deliveryInfo": {
+          "description": "Has delivery information for the export.",
+          "$ref": "#/definitions/ExportDeliveryInfo"
+        },
+        "definition": {
+          "description": "Has definition for the export.",
+          "$ref": "#/definitions/QueryDefinition"
+        }
+      },
+      "required": [
+        "deliveryInfo",
+        "definition"
+      ]
+    },
+    "ExportSchedule": {
+      "description": "The schedule associated with a export.",
+      "properties": {
+        "status": {
+          "description": "The status of the schedule. Whether active or not. If inactive, the export's scheduled execution is paused.",
+          "type": "string",
+          "enum": [
+            "Active",
+            "Inactive"
+          ],
+          "x-ms-enum": {
+            "name": "StatusType",
+            "modelAsString": true
+          }
+        },
+        "recurrence": {
+          "description": "The schedule recurrence.",
+          "type": "string",
+          "enum": [
+            "Daily",
+            "Weekly",
+            "Monthly",
+            "Annually"
+          ],
+          "x-ms-enum": {
+            "name": "RecurrenceType",
+            "modelAsString": true
+          }
+        },
+        "recurrencePeriod": {
+          "description": "Has start and end date of the recurrence. The start date must be in future. If present, the end date must be greater than start date.",
+          "$ref": "#/definitions/ExportRecurrencePeriod"
+        }
+      },
+      "required": [
+        "recurrence"
+      ]
+    },
+    "ExportDeliveryInfo": {
+      "description": "The delivery information associated with a export.",
+      "properties": {
+        "destination": {
+          "description": "Has destination for the export being delivered.",
+          "$ref": "#/definitions/ExportDeliveryDestination"
+        }
+      },
+      "required": [
+        "destination"
+      ]
+    },
+    "ExportRecurrencePeriod": {
+      "description": "The start and end date for recurrence schedule.",
+      "properties": {
+        "from": {
+          "description": "The start date of recurrence.",
+          "type": "string",
+          "format": "date-time"
+        },
+        "to": {
+          "description": "The end date of recurrence.",
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "required": [
+        "from"
+      ]
+    },
+    "ExportDeliveryDestination": {
+      "description": "The destination information for the delivery of the export. To allow access to a storage account, you must register the account's subscription with the Microsoft.CostManagementExports resource provider. This is required once per subscription. When creating an export in the Azure portal, it is done automatically, however API users need to register the subscription. For more information see https://docs.microsoft.com/en-us/azure/azure-resource-manager/resource-manager-supported-services .",
+      "properties": {
+        "resourceId": {
+          "description": "The resource id of the storage account where exports will be delivered.",
+          "type": "string"
+        },
+        "container": {
+          "description": "The name of the container where exports will be uploaded.",
+          "type": "string"
+        },
+        "rootFolderPath": {
+          "description": "The name of the directory where exports will be uploaded.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "resourceId",
+        "container"
+      ]
+    },
+    "ExportExecutionListResult": {
+      "description": "Result of listing exports execution history of a export by name",
+      "properties": {
+        "value": {
+          "description": "The list of export executions.",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/ExportExecution"
+          }
+        }
+      }
+    },
+    "ExportExecution": {
+      "description": "A export execution.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ExportExecutionProperties",
+          "title": "Export execution properties"
+        }
+      }
+    },
+    "ExportExecutionProperties": {
+      "description": "The properties of the export execution.",
+      "properties": {
+        "executionType": {
+          "description": "The type of the export execution.",
+          "type": "string",
+          "enum": [
+            "OnDemand",
+            "Scheduled"
+          ],
+          "x-ms-enum": {
+            "name": "ExecutionType",
+            "modelAsString": true
+          }
+        },
+        "status": {
+          "description": "The status of the export execution.",
+          "type": "string",
+          "enum": [
+            "Queued",
+            "InProgress",
+            "Completed",
+            "Failed",
+            "Timeout",
+            "NewDataNotAvailable",
+            "DataNotAvailable"
+          ],
+          "x-ms-enum": {
+            "name": "ExecutionStatus",
+            "modelAsString": true
+          }
+        },
+        "submittedBy": {
+          "description": "The identifier for the entity that executed the export. For OnDemand executions, it is the email id. For Scheduled executions, it is the constant value - System.",
+          "type": "string"
+        },
+        "submittedTime": {
+          "description": "The time when export was queued to be executed.",
+          "type": "string",
+          "format": "date-time"
+        },
+        "processingStartTime": {
+          "description": "The time when export was picked up to be executed.",
+          "type": "string",
+          "format": "date-time"
+        },
+        "processingEndTime": {
+          "description": "The time when export execution finished.",
+          "type": "string",
+          "format": "date-time"
+        },
+        "fileName": {
+          "description": "The name of the file export got written to.",
+          "type": "string"
+        },
+        "runSettings": {
+          "$ref": "#/definitions/CommonExportProperties"
+        }
+      }
+    }
+  },
+  "parameters": {
+    "apiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "Version of the API to be used with the client request. The current version is 2019-11-01."
+    },
+    "exportNameParameter": {
+      "name": "exportName",
+      "in": "path",
+      "description": "Export Name.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "scopeQueryParameter": {
+      "name": "scope",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The scope associated with query and export operations. This includes '/subscriptions/{subscriptionId}/' for subscription scope, '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}' for resourceGroup scope, '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}' for Billing Account scope and '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/departments/{departmentId}' for Department scope, '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/enrollmentAccounts/{enrollmentAccountId}' for EnrollmentAccount scope, '/providers/Microsoft.Management/managementGroups/{managementGroupId} for Management Group scope, '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingProfiles/{billingProfileId}' for billingProfile scope, '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingProfiles/{billingProfileId}/invoiceSections/{invoiceSectionId}' for invoiceSection scope, and '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/customers/{customerId}' specific for partners.",
+      "x-ms-parameter-location": "method",
+      "x-ms-skip-url-encoding": true
+    }
+  }
+}

@@ -140,6 +140,7 @@ We request OpenAPI(Swagger) spec authoring be assigned to engineers who have an
 | [R2007](#r2007) | [LongRunningOperationsWithLongRunningExtension](#r2007) | ARM OpenAPI(swagger) specs |
 | [R2029](#r2029) | [PageableOperation](#r2029) | ARM and Data plane OpenAPI(swagger) specs |
 | [R4006](#r4006) | [DeprecatedXmsCodeGenerationSetting](#r4006) | ARM and Data plane OpenAPI(swagger) specs |
+| [R4024](#r4024) | [PreviewVersionOverOneYear](#r4024) | ARM OpenAPI(swagger) specs |
 
 
 ### RPaaS Violations
@@ -1432,7 +1433,7 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 
 **Applies to** : ARM OpenAPI(swagger) specs
 
-**Output Message**: Top level properties should be one of name, type, id, location, properties, tags, plan, sku, etag, managedBy, identity, systemData. Model definition '{0}' has extra properties ['{1}'].
+**Output Message**: Top level properties should be one of name, type, id, location, properties, tags, plan, sku, etag, managedBy, identity, systemData, extendedlocation. Model definition '{0}' has extra properties ['{1}'].
 
 **Description**: Per [ARM guidelines](https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/resource-api-reference.md), top level properties of a resource should be only ones from the allowed set.
 
@@ -1690,7 +1691,7 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 **Output Message**: Properties of a PATCH request body must not be {0}. PATCH operation: '{1}' Model Definition: '{2}' Property: '{3}'
 
 **Description**: A request parameter of the Patch Operation must not have a required/default value.
-But it's allowed when all required properties are marked as discriminator, because the discriminator must be required.
+But it's allowed when the only required properties is marked as discriminator, because the discriminator must be required.
 
 **CreatedAt** : N/A
 
@@ -1994,7 +1995,7 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 
 ### <a name="r3021" ></a>R3021 PathResourceTypeNameCamelCase
 
-**Category** : ARM Warning
+**Category** : ARM Error
 
 **Applies to** : ARM and Data Plane OpenAPI(swagger) specs
 
@@ -2949,3 +2950,23 @@ The following would be valid:
 ...
 ```
 Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [ARM](#arm-violations): [Errors](#arm-errors) or [Warnings](#arm-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
+
+### <a name="r4024" ></a>R4024 PreviewVersionOverOneYear
+
+**Category** : SDK Warning
+
+**Applies to** : ARM OpenAPI(swagger) specs
+
+**Output Message** : The API version:{api-version} having been in a preview state over one year , please move to GA or retire.
+
+**Description** : Per [Retirement-of-Previews](https://dev.azure.com/msazure/AzureWiki/_wiki/wikis/AzureWiki.wiki/37683/Retirement-of-Previews), service, feature, API, and SKU in preview for over one year need to move to GA or retire.
+
+**CreatedAt**: Sep 8, 2020
+
+**LastModifiedAt**: Sep 8, 2020
+
+**How to fix the violation**: 
+   Consider retiring or moving to GA. 
+   
+Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [ARM](#arm-violations): [Errors](#arm-errors) or [Warnings](#arm-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
+

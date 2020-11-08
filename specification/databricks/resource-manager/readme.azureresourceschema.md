@@ -6,15 +6,19 @@ These settings apply only when `--azureresourceschema` is specified on the comma
 
 ``` yaml $(azureresourceschema) && $(multiapi)
 batch:
-  - tag: package-2018-04-01
+  - tag: schema-databricks-2018-04-01
+
 ```
 
-### Tag: package-2018-04-01 and azureresourceschema
-
-These settings apply only when `--tag=package-2018-04-01 --azureresourceschema` is specified on the command line.
 Please also specify `--azureresourceschema-folder=<path to the root directory of your azure-resource-manager-schemas clone>`.
 
-``` yaml $(tag) == 'package-2018-04-01' && $(azureresourceschema)
-output-folder: $(azureresourceschema-folder)/schemas
-```
+### Tag: schema-databricks-2018-04-01 and azureresourceschema
 
+``` yaml $(tag) == 'schema-databricks-2018-04-01' && $(azureresourceschema)
+output-folder: $(azureresourceschema-folder)/schemas
+
+# all the input files in this apiVersion
+input-file:
+  - Microsoft.Databricks/stable/2018-04-01/databricks.json
+
+```

@@ -6,44 +6,57 @@ These settings apply only when `--azureresourceschema` is specified on the comma
 
 ``` yaml $(azureresourceschema) && $(multiapi)
 batch:
-  - tag: package-2020-01-01
-  - tag: package-2018-06-01
-  - tag: package-2017-12-01-preview
-  - tag: package-2017-12-01
+  - tag: schema-dbforpostgresql-2020-01-01
+  - tag: schema-dbforpostgresql-2018-06-01
+  - tag: schema-dbforpostgresql-2017-12-01-preview
+  - tag: schema-dbforpostgresql-2017-12-01
+
 ```
 
-### Tag: package-2020-01-01 and azureresourceschema
-
-These settings apply only when `--tag=package-2020-01-01 --azureresourceschema` is specified on the command line.
 Please also specify `--azureresourceschema-folder=<path to the root directory of your azure-resource-manager-schemas clone>`.
 
-``` yaml $(tag) == 'package-2020-01-01' && $(azureresourceschema)
+### Tag: schema-dbforpostgresql-2020-01-01 and azureresourceschema
+
+``` yaml $(tag) == 'schema-dbforpostgresql-2020-01-01' && $(azureresourceschema)
 output-folder: $(azureresourceschema-folder)/schemas
+
+# all the input files in this apiVersion
+input-file:
+  - Microsoft.DBforPostgreSQL/stable/2020-01-01/DataEncryptionKeys.json
+
 ```
 
-### Tag: package-2018-06-01 and azureresourceschema
+### Tag: schema-dbforpostgresql-2018-06-01 and azureresourceschema
 
-These settings apply only when `--tag=package-2018-06-01 --azureresourceschema` is specified on the command line.
-Please also specify `--azureresourceschema-folder=<path to the root directory of your azure-resource-manager-schemas clone>`.
-
-``` yaml $(tag) == 'package-2018-06-01' && $(azureresourceschema)
+``` yaml $(tag) == 'schema-dbforpostgresql-2018-06-01' && $(azureresourceschema)
 output-folder: $(azureresourceschema-folder)/schemas
+
+# all the input files in this apiVersion
+input-file:
+  - Microsoft.DBforPostgreSQL/stable/2018-06-01/PrivateEndpointConnections.json
+  - Microsoft.DBforPostgreSQL/stable/2018-06-01/PrivateLinkResources.json
+
 ```
 
-### Tag: package-2017-12-01-preview and azureresourceschema
+### Tag: schema-dbforpostgresql-2017-12-01-preview and azureresourceschema
 
-These settings apply only when `--tag=package-2017-12-01-preview --azureresourceschema` is specified on the command line.
-Please also specify `--azureresourceschema-folder=<path to the root directory of your azure-resource-manager-schemas clone>`.
-
-``` yaml $(tag) == 'package-2017-12-01-preview' && $(azureresourceschema)
+``` yaml $(tag) == 'schema-dbforpostgresql-2017-12-01-preview' && $(azureresourceschema)
 output-folder: $(azureresourceschema-folder)/schemas
+
+# all the input files in this apiVersion
+input-file:
+  - Microsoft.DBforPostgreSQL/preview/2017-12-01-preview/postgresql.json
+
 ```
 
-### Tag: package-2017-12-01 and azureresourceschema
+### Tag: schema-dbforpostgresql-2017-12-01 and azureresourceschema
 
-These settings apply only when `--tag=package-2017-12-01 --azureresourceschema` is specified on the command line.
-Please also specify `--azureresourceschema-folder=<path to the root directory of your azure-resource-manager-schemas clone>`.
-
-``` yaml $(tag) == 'package-2017-12-01' && $(azureresourceschema)
+``` yaml $(tag) == 'schema-dbforpostgresql-2017-12-01' && $(azureresourceschema)
 output-folder: $(azureresourceschema-folder)/schemas
+
+# all the input files in this apiVersion
+input-file:
+  - Microsoft.DBforPostgreSQL/stable/2017-12-01/postgresql.json
+  - Microsoft.DBforPostgreSQL/stable/2017-12-01/ServerSecurityAlertPolicies.json
+
 ```
