@@ -568,22 +568,19 @@
       "allOf": [
         {
           "$ref": "#/definitions/Resource"
-        },
-        {
-          "type": "object",
-          "properties": {
-            "properties": {
-              "x-ms-client-flatten": true,
-              "$ref": "#/definitions/ManagedClusterProperties",
-              "description": "The managed cluster resource properties"
-            },
-            "sku": {
-              "$ref": "#/definitions/Sku",
-              "description": "The sku of the managed cluster"
-            }
-          }
         }
-      ]
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ManagedClusterProperties",
+          "description": "The managed cluster resource properties"
+        },
+        "sku": {
+          "$ref": "#/definitions/Sku",
+          "description": "The sku of the managed cluster"
+        }
+      }
     },
     "ManagedClusterListResult": {
       "properties": {

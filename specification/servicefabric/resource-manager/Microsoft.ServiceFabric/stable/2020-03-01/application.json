@@ -34,42 +34,6 @@
     }
   ],
   "paths": {
-    "/providers/Microsoft.ServiceFabric/operations": {
-      "get": {
-        "tags": [
-          "Operations"
-        ],
-        "summary": "Lists all of the available Service Fabric resource provider API operations.",
-        "description": "Get the list of available Service Fabric resource provider API operations.",
-        "operationId": "Operations_List",
-        "parameters": [
-          {
-            "name": "api-version",
-            "in": "query",
-            "description": "The version of the Service Fabric resource provider API",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK. The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/OperationListResult"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorModel"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceFabric/clusters/{clusterName}/applicationTypes/{applicationTypeName}": {
       "get": {
         "tags": [
@@ -1518,10 +1482,6 @@
       "allOf": [
         {
           "$ref": "#/definitions/PartitionSchemeDescription"
-        },
-        {
-          "type": "object",
-          "description": "NamedPartitionSchemeDescription"
         }
       ],
       "x-ms-discriminator-value": "Named",
@@ -1542,44 +1502,6 @@
           "description": "Array of size specified by the ‘count’ parameter, for the names of the partitions."
         }
       }
-    },
-    "OperationListResult": {
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "List of operations supported by the Service Fabric resource provider.",
-          "items": {
-            "$ref": "#/definitions/OperationResult"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "description": "URL to get the next set of operation list results if there are any.",
-          "readOnly": true
-        }
-      },
-      "description": "Describes the result of the request to list Service Fabric resource provider operations."
-    },
-    "OperationResult": {
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "The name of the operation."
-        },
-        "display": {
-          "$ref": "#/definitions/AvailableOperationDisplay",
-          "description": "The object that represents the operation."
-        },
-        "origin": {
-          "type": "string",
-          "description": "Origin result"
-        },
-        "nextLink": {
-          "type": "string",
-          "description": "The URL to use for getting the next set of results."
-        }
-      },
-      "description": "Available operation list result"
     },
     "PartitionScheme": {
       "type": "string",
@@ -2068,10 +1990,6 @@
       "allOf": [
         {
           "$ref": "#/definitions/PartitionSchemeDescription"
-        },
-        {
-          "type": "object",
-          "description": "SingletonPartitionSchemeDescription"
         }
       ],
       "x-ms-discriminator-value": "Singleton"
@@ -2218,10 +2136,6 @@
       "allOf": [
         {
           "$ref": "#/definitions/PartitionSchemeDescription"
-        },
-        {
-          "type": "object",
-          "description": "UniformInt64RangePartitionSchemeDescription"
         }
       ],
       "x-ms-discriminator-value": "UniformInt64Range",
