@@ -418,30 +418,20 @@
         },
         "subnetDetails": {
           "description": "orchestrator details",
-          "$ref": "#/definitions/subnetDetails"
+          "$ref": "#/definitions/SubnetDetails"
         },
         "controllerDetails": {
           "description": "controller details",
-          "$ref": "#/definitions/controllerDetails"
+          "$ref": "./orchestrators.json#/definitions/ControllerDetails"
         }
       }
     },
-    "subnetDetails": {
+    "SubnetDetails": {
       "description": "Properties of orchestrator",
       "type": "object",
       "properties": {
         "id": {
           "description": "subnet arm resource id",
-          "type": "string"
-        }
-      }
-    },
-    "controllerDetails": {
-      "description": "controller details",
-      "type": "object",
-      "properties": {
-        "id": {
-          "description": "controller arm resource id",
           "type": "string"
         }
       }
