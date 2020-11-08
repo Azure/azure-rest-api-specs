@@ -609,6 +609,10 @@ directive:
     where: $.paths
     from: activityLogAlerts_API.json
     reason: 'Operations API is defined in a separate swagger spec for Microsoft.Insights namespace (https://github.com/Azure/azure-rest-api-specs/blob/master/specification/monitor/resource-manager/Microsoft.Insights/stable/2015-04-01/operations_API.json)'
+  - suppress: EnumInsteadOfBoolean
+    where: $.definitions.AlertRuleProperties.properties.enabled
+    from: activityLogAlerts_API.json
+    reason: 'This property indicates whether the alert rule is enabled or not  - it has only ''''true'''' or ''''false'''' options, so it fits boolean type.'
 ```
 
 ### Tag: profile-hybrid-2019-03-01
