@@ -31,15 +31,15 @@ openapi-type: arm
 tag: package-2020-10
 ```
 
-
 ### Tag: package-2020-10
 
 These settings apply only when `--tag=package-2020-10` is specified on the command line.
 
-```yaml $(tag) == 'package-2020-10'
+``` yaml $(tag) == 'package-2020-10'
 input-file:
   - Microsoft.Insights/stable/2020-10-01/activityLogAlerts_API.json
 ```
+
 ### Tag: package-2020-05-preview
 
 These settings apply only when `--tag=package-2020-05-preview` is specified on the command line.
@@ -595,7 +595,7 @@ output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-monitor
 
 ``` yaml
 directive:
-  - suppress: R3016  # DefinitionsPropertiesNamesCamelCase (to suppress the error due to odata.type)
+  - suppress: R3016
     reason: The feature (polymorphic types) is in the process of deprecation and fixing this will require changes in the backend.
   - suppress: OperationsAPIImplementation
     from: dataCollectionRules_API.json
@@ -604,6 +604,10 @@ directive:
   - suppress: OperationsAPIImplementation
     from: dataCollectionRuleAssociations_API.json
     where: $.paths
+    reason: 'Operations API is defined in a separate swagger spec for Microsoft.Insights namespace (https://github.com/Azure/azure-rest-api-specs/blob/master/specification/monitor/resource-manager/Microsoft.Insights/stable/2015-04-01/operations_API.json)'
+  - suppress: OperationsAPIImplementation
+    where: $.paths
+    from: activityLogAlerts_API.json
     reason: 'Operations API is defined in a separate swagger spec for Microsoft.Insights namespace (https://github.com/Azure/azure-rest-api-specs/blob/master/specification/monitor/resource-manager/Microsoft.Insights/stable/2015-04-01/operations_API.json)'
 ```
 
