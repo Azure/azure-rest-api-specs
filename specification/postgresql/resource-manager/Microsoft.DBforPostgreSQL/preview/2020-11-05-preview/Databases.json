@@ -249,37 +249,37 @@
       "description": "The properties of a database."
     },
     "Database": {
-    "properties": {
       "properties": {
-      "$ref": "#/definitions/DatabaseProperties",
-      "x-ms-client-flatten": true,
-      "description": "The properties of a database."
-      }
-    },
-    "allOf": [
-      {
-      "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ProxyResource"
-      }
-    ],
-    "description": "Represents a Database."
+        "properties": {
+          "$ref": "#/definitions/DatabaseProperties",
+          "x-ms-client-flatten": true,
+          "description": "The properties of a database."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "description": "Represents a Database."
     },
     "DatabaseListResult": {
       "type": "object",
       "properties": {
         "value": {
-        "type": "array",
-        "items": {
+          "type": "array",
+          "items": {
             "$ref": "#/definitions/Database"
-        },
-        "description": "The list of databases housed in a server"
+          },
+          "description": "The list of databases housed in a server"
         },
         "nextLink": {
-        "description": "The link used to get the next page of databases.",
-        "type": "string"
+          "description": "The link used to get the next page of databases.",
+          "type": "string"
         }
       },
       "description": "A List of databases."
-    },  
+    },
     "CloudError": {
       "x-ms-external": true,
       "properties": {
