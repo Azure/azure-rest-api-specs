@@ -10,6 +10,7 @@ batch:
   - tag: schema-containerservice-2016-09-30
   - tag: schema-containerservice-2016-03-30
   - tag: schema-containerservice-2015-11-01-preview
+  - tag: schema-compute-2020-09-30
   - tag: schema-compute-2020-06-30
   - tag: schema-compute-2020-06-01
   - tag: schema-compute-2020-05-01
@@ -74,6 +75,18 @@ output-folder: $(azureresourceschema-folder)/schemas
 # all the input files in this apiVersion
 input-file:
   - Microsoft.ContainerService/preview/2015-11-01-preview/containerService.json
+
+```
+
+### Tag: schema-compute-2020-09-30 and azureresourceschema
+
+``` yaml $(tag) == 'schema-compute-2020-09-30' && $(azureresourceschema)
+output-folder: $(azureresourceschema-folder)/schemas
+
+# all the input files in this apiVersion
+input-file:
+  - Microsoft.Compute/preview/2020-09-30/gallery.json
+  - Microsoft.Compute/preview/2020-09-30/sharedGallery.json
 
 ```
 
