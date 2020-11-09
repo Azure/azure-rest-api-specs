@@ -38,6 +38,14 @@ input-file:
 - Microsoft.Billing/stable/2020-05-01/billing.json
 - Microsoft.Billing/preview/2018-03-01-preview/billingV2.json
 ```
+### Tag: package-2020-11-preview
+
+These settings apply only when `--tag=package-2020-11-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2020-11-preview'
+input-file:
+- Microsoft.Billing/preview/2020-11-01-preview/billing.json
+```
 
 ### Tag: package-2019-10-preview
 
@@ -147,6 +155,7 @@ output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-billing
 ``` yaml $(java) && $(multiapi)
 batch:
   - tag: package-2020-05
+  - tag: package-2020-11-preview
   - tag: package-2019-10-preview
   - tag: package-2018-11-preview
   - tag: package-2018-03-preview
