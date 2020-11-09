@@ -137,7 +137,6 @@
         ],
         "description": "Update metadata of DigitalTwinsInstance.",
         "operationId": "DigitalTwins_Update",
-        "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "Patch a DigitalTwinsInstance resource": {
             "$ref": "./examples/DigitalTwinsPatch_example.json"
@@ -927,7 +926,10 @@
           "description": "DigitalTwinsInstance endpoint resource properties.",
           "$ref": "#/definitions/DigitalTwinsEndpointResourceProperties"
         }
-      }
+      },
+      "required": [
+        "properties"
+      ]
     },
     "DigitalTwinsEndpointResourceProperties": {
       "description": "Properties related to Digital Twins Endpoint",
