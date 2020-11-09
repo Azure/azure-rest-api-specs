@@ -8,12 +8,17 @@
       "location": "South India",
       "tags": {},
       "properties": {
-        "pipelineType": "azurePipeline",
-        "organization": {
-          "name": "myAspNetWebAppPipeline-org"
-        },
-        "project": {
-          "name": "myAspNetWebAppPipeline-project"
+        "pipelineType": "githubWorkflow",
+        "repository": {
+          "repositoryType": "gitHub",
+          "id": "contoso/myAspNetWebAppPipeline-org",
+          "defaultBranch": "master",
+          "authorization": {
+            "authorizationType": "personalAccessToken",
+            "parameters": {
+              "token": "mypat"
+            }
+          }
         },
         "bootstrapConfiguration": {
           "template": {
@@ -48,12 +53,11 @@
         "type": "Microsoft.DevOps/pipelines",
         "location": "South India",
         "properties": {
-          "pipelineType": "azurePipeline",
-          "organization": {
-            "name": "myAspNetWebAppPipeline-org"
-          },
-          "project": {
-            "name": "myAspNetWebAppPipeline-project"
+          "pipelineType": "githubWorkflow",
+          "repository": {
+            "repositoryType": "gitHub",
+            "id": "contoso/myAspNetWebAppPipeline-org",
+            "defaultBranch": "master"
           },
           "bootstrapConfiguration": {
             "template": {

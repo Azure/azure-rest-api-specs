@@ -3,7 +3,7 @@
   "info": {
     "title": "Azure DevOps",
     "description": "Azure DevOps Resource Provider",
-    "version": "2019-07-01-preview",
+    "version": "2020-07-13-preview",
     "x-ms-code-generation-settings": {
       "name": "DevOpsClient"
     }
@@ -79,7 +79,7 @@
           "PipelineTemplateDefinitions"
         ],
         "operationId": "PipelineTemplateDefinitions_List",
-        "description": "Lists all pipeline templates which can be used to configure an Azure Pipeline.",
+        "description": "Lists all pipeline templates which can be used to configure a Pipeline.",
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -115,7 +115,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevOps/pipelines/{pipelineName}": {
       "put": {
         "operationId": "Pipelines_CreateOrUpdate",
-        "description": "Creates or updates an Azure Pipeline.",
+        "description": "Creates or updates a Pipeline.",
         "tags": [
           "Pipelines"
         ],
@@ -131,7 +131,7 @@
           },
           {
             "name": "pipelineName",
-            "description": "The name of the Azure Pipeline resource in ARM.",
+            "description": "The name of the Pipeline resource in ARM.",
             "in": "path",
             "type": "string",
             "required": true,
@@ -139,7 +139,7 @@
           },
           {
             "name": "createOperationParameters",
-            "description": "The request payload to create the Azure Pipeline.",
+            "description": "The request payload to create the Pipeline.",
             "in": "body",
             "required": true,
             "schema": {
@@ -149,10 +149,10 @@
         ],
         "responses": {
           "202": {
-            "description": "The request has been accepted for processing and the Azure Pipeline will be configured asynchronously."
+            "description": "The request has been accepted for processing and the Pipeline will be configured asynchronously."
           },
           "200": {
-            "description": "The Azure Pipeline has been configured successfully.",
+            "description": "The Pipeline has been configured successfully.",
             "schema": {
               "$ref": "#/definitions/Pipeline"
             }
@@ -168,12 +168,15 @@
         "x-ms-examples": {
           "Create an Azure pipeline to deploy a sample ASP.Net application to Azure web-app": {
             "$ref": "./examples/CreateAzurePipeline-Sample-AspNet-WindowsWebApp.json"
+          },
+          "Create a GitHub pipeline to deploy a sample ASP.Net application to Azure web-app": {
+            "$ref": "./examples/CreateGitHubPipeline-Sample-AspNet-WindowsWebApp.json"
           }
         }
       },
       "get": {
         "operationId": "Pipelines_Get",
-        "description": "Gets an existing Azure Pipeline.",
+        "description": "Gets an existing Pipeline.",
         "tags": [
           "Pipelines"
         ],
@@ -189,7 +192,7 @@
           },
           {
             "name": "pipelineName",
-            "description": "The name of the Azure Pipeline resource in ARM.",
+            "description": "The name of the Pipeline resource in ARM.",
             "in": "path",
             "type": "string",
             "required": true,
@@ -198,7 +201,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The Azure Pipeline has been fetched successfully.",
+            "description": "The Pipeline has been fetched successfully.",
             "schema": {
               "$ref": "#/definitions/Pipeline"
             }
@@ -211,14 +214,14 @@
           }
         },
         "x-ms-examples": {
-          "Get an existing Azure pipeline": {
-            "$ref": "./examples/GetAzurePipeline.json"
+          "Get an existing pipeline": {
+            "$ref": "./examples/GetPipeline.json"
           }
         }
       },
       "patch": {
         "operationId": "Pipelines_Update",
-        "description": "Updates the properties of an Azure Pipeline. Currently, only tags can be updated.",
+        "description": "Updates the properties of an Azure Pipeline. Currently, it is not supported on 'githubWorkflow' pipeline type and only tags can be updated for 'azurePipeline' pipeline type.",
         "tags": [
           "Pipelines"
         ],
@@ -265,14 +268,14 @@
           }
         },
         "x-ms-examples": {
-          "Get an existing Azure pipeline": {
+          "Update an existing Azure pipeline": {
             "$ref": "./examples/UpdateAzurePipeline.json"
           }
         }
       },
       "delete": {
         "operationId": "Pipelines_Delete",
-        "description": "Deletes an Azure Pipeline.",
+        "description": "Deletes a Pipeline.",
         "tags": [
           "Pipelines"
         ],
@@ -288,7 +291,7 @@
           },
           {
             "name": "pipelineName",
-            "description": "The name of the Azure Pipeline resource.",
+            "description": "The name of the Pipeline resource.",
             "in": "path",
             "type": "string",
             "required": true,
@@ -297,10 +300,10 @@
         ],
         "responses": {
           "200": {
-            "description": "The Azure Pipeline has been deleted successfully."
+            "description": "The Pipeline has been deleted successfully."
           },
           "204": {
-            "description": "The Azure Pipeline is not found or has been deleted already."
+            "description": "The Pipeline is not found or has been deleted already."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -310,8 +313,8 @@
           }
         },
         "x-ms-examples": {
-          "Get an existing Azure pipeline": {
-            "$ref": "./examples/DeleteAzurePipeline.json"
+          "Delete an existing pipeline": {
+            "$ref": "./examples/DeletePipeline.json"
           }
         }
       }
@@ -319,7 +322,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevOps/pipelines": {
       "get": {
         "operationId": "Pipelines_ListByResourceGroup",
-        "description": "Lists all Azure Pipelines under the specified resource group.",
+        "description": "Lists all Pipelines under the specified resource group.",
         "tags": [
           "Pipelines"
         ],
@@ -336,7 +339,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The Azure Pipelines have been fetched successfully.",
+            "description": "The Pipelines have been fetched successfully.",
             "schema": {
               "$ref": "#/definitions/PipelineListResult"
             }
@@ -352,8 +355,8 @@
           "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
-          "List all Azure Pipelines under the specified resource group": {
-            "$ref": "./examples/ListAzurePipelinesByResourceGroup.json"
+          "List all Pipelines under the specified resource group": {
+            "$ref": "./examples/ListPipelinesByResourceGroup.json"
           }
         }
       }
@@ -361,7 +364,7 @@
     "/subscriptions/{subscriptionId}/providers/Microsoft.DevOps/pipelines": {
       "get": {
         "operationId": "Pipelines_ListBySubscription",
-        "description": "Lists all Azure Pipelines under the specified subscription.",
+        "description": "Lists all Pipelines under the specified subscription.",
         "tags": [
           "Pipelines"
         ],
@@ -375,7 +378,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The Azure Pipelines have been fetched successfully.",
+            "description": "The Pipelines have been fetched successfully.",
             "schema": {
               "$ref": "#/definitions/PipelineListResult"
             }
@@ -391,8 +394,8 @@
           "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
-          "List all Azure pipelines under the specified subscription": {
-            "$ref": "./examples/ListAzurePipelinesBySubscription.json"
+          "List all pipelines under the specified subscription": {
+            "$ref": "./examples/ListPipelinesBySubscription.json"
           }
         }
       }
@@ -592,7 +595,7 @@
     },
     "Pipeline": {
       "type": "object",
-      "description": "Azure DevOps Pipeline used to configure Continuous Integration (CI) & Continuous Delivery (CD) for Azure resources.",
+      "description": "Pipeline used to configure Continuous Integration (CI) & Continuous Delivery (CD) for Azure resources.",
       "properties": {
         "properties": {
           "$ref": "#/definitions/PipelineProperties",
@@ -612,19 +615,24 @@
     "PipelineProperties": {
       "type": "object",
       "description": "Custom properties of a Pipeline.",
+      "discriminator": "pipelineType",
       "properties": {
         "pipelineId": {
           "type": "integer",
           "readOnly": true,
-          "description": "Unique identifier of the Azure Pipeline within the Azure DevOps Project."
+          "description": "Unique identifier of the Pipeline"
         },
-        "organization": {
-          "$ref": "#/definitions/OrganizationReference",
-          "description": "Reference to the Azure DevOps Organization containing the Pipeline."
-        },
-        "project": {
-          "$ref": "#/definitions/ProjectReference",
-          "description": "Reference to the Azure DevOps Project containing the Pipeline."
+        "pipelineType": {
+          "type": "string",
+          "enum": [
+            "githubWorkflow",
+            "azurePipeline"
+          ],
+          "x-ms-enum": {
+            "name": "pipelineTypeEnum",
+            "modelAsString": true
+          },
+          "description": "Specifies which CI/CD provider to use. Valid options are 'azurePipeline', 'githubWorkflow'."
         },
         "bootstrapConfiguration": {
           "$ref": "#/definitions/BootstrapConfiguration",
@@ -632,9 +640,51 @@
         }
       },
       "required": [
-        "organization",
-        "project",
+        "pipelineType",
         "bootstrapConfiguration"
+      ]
+    },
+    "azurePipelineProperties": {
+      "type": "object",
+      "x-ms-discriminator-value": "azurePipeline",
+      "description": "Custom properties of a Azure Pipeline.",
+      "properties": {
+        "organization": {
+          "$ref": "#/definitions/OrganizationReference",
+          "description": "Reference to the Azure DevOps Organization containing the Pipeline. Required for 'azurePipeline' pipeline type."
+        },
+        "project": {
+          "$ref": "#/definitions/ProjectReference",
+          "description": "Reference to the Azure DevOps Project containing the Pipeline. Required for 'azurePipeline' pipeline type."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/PipelineProperties"
+        }
+      ],
+      "required": [
+        "organization",
+        "project"
+      ]
+    },
+    "githubWorkflowProperties": {
+      "type": "object",
+      "x-ms-discriminator-value": "githubWorkflow",
+      "description": "Custom properties of an Github Pipeline.",
+      "properties": {
+        "repository": {
+          "$ref": "#/definitions/CodeRepository",
+          "description": "Contains the specifications of the repository to be created for generating the workflow. Required for 'githubWorkflow' pipeline type."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/PipelineProperties"
+        }
+      ],
+      "required": [
+        "repository"
       ]
     },
     "OrganizationReference": {
@@ -677,9 +727,9 @@
       "type": "object",
       "description": "Configuration used to bootstrap a Pipeline.",
       "properties": {
-        "repository": {
+        "sourceRepository": {
           "$ref": "#/definitions/CodeRepository",
-          "description": "Repository containing the source code for the pipeline."
+          "description": "Repository containing the source code for the pipeline. Currently only 'azurePipeline' pipeline type supports this."
         },
         "template": {
           "$ref": "#/definitions/PipelineTemplate",
@@ -827,7 +877,7 @@
       }
     },
     "PipelineListResult": {
-      "description": "Result of a request to list all Azure Pipelines under a given scope.",
+      "description": "Result of a request to list all Pipelines under a given scope.",
       "properties": {
         "value": {
           "description": "List of pipelines.",
