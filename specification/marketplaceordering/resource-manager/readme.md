@@ -130,19 +130,26 @@ clear-output-folder: true
 package-version: 1.0.0b1
 ```
 
-``` yaml $(python) && $(python-mode) == 'update'
-no-namespace-folders: true
-output-folder: $(python-sdks-folder)/marketplaceordering/azure-mgmt-marketplaceordering/azure/mgmt/marketplaceordering
+``` yaml $(python) && $(python-mode) == 'update' && !$(track2)
 python:
   no-namespace-folders: true
   output-folder: $(python-sdks-folder)/marketplaceordering/azure-mgmt-marketplaceordering/azure/mgmt/marketplaceordering
 ```
-``` yaml $(python) && $(python-mode) == 'create'
-basic-setup-py: true
-output-folder: $(python-sdks-folder)/marketplaceordering/azure-mgmt-marketplaceordering
+
+``` yaml $(python) && $(python-mode) == 'update' && $(track2)
+no-namespace-folders: true
+output-folder: $(python-sdks-folder)/marketplaceordering/azure-mgmt-marketplaceordering/azure/mgmt/marketplaceordering
+```
+
+``` yaml $(python) && $(python-mode) == 'create' && !$(track2)
 python:
   basic-setup-py: true
   output-folder: $(python-sdks-folder)/marketplaceordering/azure-mgmt-marketplaceordering
+```
+
+``` yaml $(python) && $(python-mode) == 'create' && $(track2)
+basic-setup-py: true
+output-folder: $(python-sdks-folder)/marketplaceordering/azure-mgmt-marketplaceordering
 ```
 
 Workaround invalid date-time returned by the server.
