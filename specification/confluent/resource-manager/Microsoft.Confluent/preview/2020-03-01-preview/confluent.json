@@ -33,6 +33,88 @@
     }
   },
   "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Confluent/agreements": {
+      "get": {
+        "tags": [
+          "Agreements"
+        ],
+        "summary": "List Confluent marketplace agreements in the subscription.",
+        "operationId": "MarketplaceAgreements_List",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ConfluentAgreementResourceListResponse"
+            }
+          },
+          "default": {
+            "description": "Default error response.",
+            "schema": {
+              "$ref": "#/definitions/ResourceProviderDefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "MarketplaceAgreements_List": {
+            "$ref": "./examples/MarketplaceAgreements_List.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Confluent/agreements/default": {
+      "put": {
+        "tags": [
+          "Agreements"
+        ],
+        "summary": "Create Confluent Marketplace agreement in the subscription.",
+        "operationId": "MarketplaceAgreements_Create",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/ConfluentAgreementResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ConfluentAgreementResource"
+            }
+          },
+          "default": {
+            "description": "Default error response.",
+            "schema": {
+              "$ref": "#/definitions/ResourceProviderDefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "MarketplaceAgreements_Create": {
+            "$ref": "./examples/MarketplaceAgreements_Create.json"
+          }
+        }
+      }
+    },
     "/providers/Microsoft.Confluent/operations": {
       "get": {
         "tags": [
@@ -374,6 +456,88 @@
     }
   },
   "definitions": {
+    "ConfluentAgreementProperties": {
+      "description": "Terms properties for Marketplace and Confluent.",
+      "type": "object",
+      "properties": {
+        "publisher": {
+          "description": "Publisher identifier string.",
+          "type": "string"
+        },
+        "product": {
+          "description": "Product identifier string.",
+          "type": "string"
+        },
+        "plan": {
+          "description": "Plan identifier string.",
+          "type": "string"
+        },
+        "licenseTextLink": {
+          "description": "Link to HTML with Microsoft and Publisher terms.",
+          "type": "string"
+        },
+        "privacyPolicyLink": {
+          "description": "Link to the privacy policy of the publisher.",
+          "type": "string"
+        },
+        "retrieveDatetime": {
+          "format": "date-time",
+          "description": "Date and time in UTC of when the terms were accepted. This is empty if Accepted is false.",
+          "type": "string"
+        },
+        "signature": {
+          "description": "Terms signature.",
+          "type": "string"
+        },
+        "accepted": {
+          "description": "If any version of the terms have been accepted, otherwise false.",
+          "type": "boolean"
+        }
+      }
+    },
+    "ConfluentAgreementResource": {
+      "description": "Agreement Terms definition",
+      "type": "object",
+      "x-ms-azure-resource": true,
+      "properties": {
+        "id": {
+          "description": "The ARM id of the resource.",
+          "type": "string",
+          "readOnly": true
+        },
+        "name": {
+          "description": "The name of the agreement.",
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "description": "The type of the agreement.",
+          "type": "string",
+          "readOnly": true
+        },
+        "properties": {
+          "$ref": "#/definitions/ConfluentAgreementProperties",
+          "description": "Represents the properties of the resource."
+        }
+      }
+    },
+    "ConfluentAgreementResourceListResponse": {
+      "description": "Response of a agreements operation.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Results of a list operation.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ConfluentAgreementResource"
+          }
+        },
+        "nextLink": {
+          "description": "Link to the next set of results, if any.",
+          "type": "string"
+        }
+      }
+    },
     "OperationDisplay": {
       "description": "The object that represents the operation.",
       "type": "object",
