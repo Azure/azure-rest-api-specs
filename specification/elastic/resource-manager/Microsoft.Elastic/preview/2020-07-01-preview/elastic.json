@@ -780,6 +780,11 @@
           "type": "string",
           "readOnly": true
         },
+        "deploymentId": {
+          "description": "Elastic deployment Id",
+          "type": "string",
+          "readOnly": true
+        },
         "azureSubscriptionId": {
           "description": "Associated Azure subscription Id for the elastic deployment.",
           "type": "string",
@@ -873,7 +878,7 @@
         },
         "emailAddress": {
           "description": "Email of the user used by Elastic for contacting them if needed",
-          "pattern": "^[A-Za-z0-9._%+-]+@(?:[A-Za-z0-9-]+\\.)+[A-Za-z]{2,}$",
+          "pattern": "^([^<>()\\[\\]\\.,;:\\s@\"]+(\\.[^<>()\\[\\]\\.,;:\\s@\"]+)*)@(([a-zA-Z-_0-9]+\\.)+[a-zA-Z]{2,})$",
           "type": "string"
         },
         "companyInfo": {
