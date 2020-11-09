@@ -1855,6 +1855,33 @@
         }
       }
     },
+    "ProxyResource": {
+      "description": "The resource model definition for a ARM proxy resource. It will have everything other than required location and tags.",
+      "properties": {
+        "id": {
+          "description": "The resource ID.",
+          "type": "string",
+          "readOnly": true
+        },
+        "name": {
+          "description": "The name of the resource.",
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "description": "The type of the resource.",
+          "type": "string",
+          "readOnly": true
+        },
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/systemData",
+          "description": "Metadata pertaining to creation and last modification of the resource.",
+          "type": "object",
+          "readOnly": true
+        }
+      },
+      "x-ms-azure-resource": true
+    },
     "ExportPipelineProperties": {
       "description": "The properties of an export pipeline.",
       "required": [
@@ -3089,6 +3116,17 @@
         "identity": {
           "description": "The client id of the identity which will be used to access key vault.",
           "type": "string"
+        },
+        "keyRotationEnabled": {
+          "description": "Auto key rotation status for a CMK enabled registry.",
+          "type": "boolean",
+          "readOnly": true
+        },
+        "lastKeyRotationTimestamp": {
+          "format": "date-time",
+          "description": "Timestamp of the last successful key rotation.",
+          "type": "string",
+          "readOnly": true
         }
       }
     },
@@ -3931,27 +3969,6 @@
         }
       }
     },
-    "ProxyResource": {
-      "description": "The resource model definition for a ARM proxy resource. It will have everything other than required location and tags.",
-      "properties": {
-        "id": {
-          "description": "The resource ID.",
-          "type": "string",
-          "readOnly": true
-        },
-        "name": {
-          "description": "The name of the resource.",
-          "type": "string",
-          "readOnly": true
-        },
-        "type": {
-          "description": "The type of the resource.",
-          "type": "string",
-          "readOnly": true
-        }
-      },
-      "x-ms-azure-resource": true
-    },
     "Resource": {
       "description": "An Azure resource.",
       "required": [
@@ -3987,6 +4004,12 @@
           "additionalProperties": {
             "type": "string"
           }
+        },
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/systemData",
+          "description": "Metadata pertaining to creation and last modification of the resource.",
+          "type": "object",
+          "readOnly": true
         }
       },
       "x-ms-azure-resource": true
