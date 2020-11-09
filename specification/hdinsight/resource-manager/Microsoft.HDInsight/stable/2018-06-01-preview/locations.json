@@ -433,56 +433,57 @@
           "readOnly": true
         },
         "vmSizeProperties": {
-          "description": "vmsize properties",
+          "description": "The vm size properties.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/VmSizeProperty"
-          }
+          },
+          "readOnly": true
         }
       }
     },
-    "VmSizeProperty":{
+    "VmSizeProperty": {
       "type": "object",
       "description": "The vm size property",
       "properties": {
         "name": {
-          "description": "The name",
+          "description": "The vm size name",
           "type": "string"
         },
         "cores": {
-          "description": "The cores",
+          "description": "The number of cores that the vm size has.",
           "type": "string"
         },
         "dataDiskStorageTier": {
-          "description": "The dataDiskStorageTier",
+          "description": "The data disk storage tier of the vm size.",
           "type": "string"
         },
         "label": {
-          "description": "The label",
+          "description": "The label of the vm size.",
           "type": "string"
         },
         "maxDataDiskCount": {
-          "description": "The maxDataDiskCount",
+          "description": "The max data disk count of the vm size.",
           "type": "string"
         },
         "memoryInMb": {
-          "description": "The memoryInMb",
+          "description": "The memory whose unit is MB of the vm size.",
           "type": "string"
         },
         "supportedByVirtualMachines": {
-          "description": "The supportedByVirtualMachines",
+          "description": "This indicates this vm size is supported by virtual machines or not",
           "type": "string"
         },
-        "supportedByWebWorkerRolesbel": {
-          "description": "The supportedByWebWorkerRolesbel",
+        "supportedByWebWorkerRoles": {
+          "description": "The indicates this vm size is supported by web worker roles or not",
           "type": "string"
         },
         "virtualMachineResourceDiskSizeInMb": {
-          "description": "The virtualMachineResourceDiskSizeInMb",
+          "description": "The virtual machine resource disk size whose unit is MB of the vm size.",
           "type": "string"
         },
         "webWorkerResourceDiskSizeInMb": {
-          "description": "The webWorkerResourceDiskSizeInMb",
+          "description": "The web worker resource disk size whose unit is MB of the vm size.",
           "type": "string"
         }
       }
@@ -495,7 +496,8 @@
           "description": "The filtering mode. Effectively this can enabling or disabling the VM sizes in a particular set.",
           "type": "string",
           "enum": [
-            "Exclude"
+            "Exclude",
+            "Include"
           ],
           "x-ms-enum": {
             "name": "FilterMode",
