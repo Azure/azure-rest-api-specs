@@ -1799,10 +1799,6 @@
       "properties": {
         "credentials": {
           "type": "object",
-          "required": [
-            "username",
-            "password"
-          ],
           "description": "Credentials to connect to VMMServer.",
           "properties": {
             "username": {
@@ -1965,8 +1961,7 @@
     "CloudProperties": {
       "description": "Defines the resource properties.",
       "required": [
-        "uuid",
-        "vmmServerId"
+        "uuid"
       ],
       "type": "object",
       "properties": {
@@ -2071,8 +2066,7 @@
     "VirtualNetworkProperties": {
       "description": "Defines the resource properties.",
       "required": [
-        "uuid",
-        "vmmServerId"
+        "uuid"
       ],
       "type": "object",
       "properties": {
@@ -2171,9 +2165,6 @@
     },
     "VirtualMachineProperties": {
       "description": "Defines the resource properties.",
-      "required": [
-        "cloudId"
-      ],
       "properties": {
         "vmmServerId": {
           "type": "string",
@@ -2393,6 +2384,10 @@
         "macAddressType": {
           "description": "Gets or sets the mac address type.",
           "$ref": "#/definitions/AllocationMethod"
+        },
+        "nicId": {
+          "description": "Gets or sets the nic id.",
+          "type": "string"
         }
       }
     },
@@ -2428,8 +2423,7 @@
         },
         "diskId": {
           "description": "Gets or sets the disk id.",
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         },
         "diskSizeGB": {
           "format": "int32",
@@ -2439,8 +2433,7 @@
         "maxDiskSizeGB": {
           "format": "int32",
           "description": "Gets or sets the max disk size.",
-          "type": "integer",
-          "readOnly": true
+          "type": "integer"
         },
         "diskName": {
           "description": "Gets or sets the name of the virtual disk in vmmServer.",
@@ -2459,18 +2452,19 @@
         },
         "busType": {
           "description": "Gets or sets the disk bus type.",
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         },
         "vhdType": {
           "description": "Gets or sets the disk vhd type.",
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         },
         "volumeType": {
           "description": "Gets or sets the disk volume type.",
-          "type": "string",
-          "readOnly": true
+          "type": "string"
+        },
+        "templateDiskId": {
+          "description": "Gets or sets the disk id in the template.",
+          "type": "string"
         },
         "createDiffDisk": {
           "type": "string",
@@ -2482,8 +2476,7 @@
           "x-ms-enum": {
             "modelAsString": true,
             "name": "CreateDiffDisk"
-          },
-          "readOnly": true
+          }
         }
       }
     },
@@ -2586,8 +2579,7 @@
     "VirtualMachineTemplateProperties": {
       "description": "Defines the resource properties.",
       "required": [
-        "uuid",
-        "vmmServerId"
+        "uuid"
       ],
       "type": "object",
       "properties": {
