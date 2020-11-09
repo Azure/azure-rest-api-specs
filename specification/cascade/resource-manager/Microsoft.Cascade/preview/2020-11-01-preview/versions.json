@@ -70,7 +70,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cascade/Versions":{
+    "/subscriptions/{subscriptionId}/resourceGroups/{ResourceGroupName}/providers/Microsoft.Cascade/Versions":{
       "get":{
           "description":"Returns list of Versions.",
           "operationId":"Versions_List",
@@ -101,7 +101,7 @@
           }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cascade/Versions/{resourceName}":{
+    "/subscriptions/{subscriptionId}/resourceGroups/{ResourceGroupName}/providers/Microsoft.Cascade/Versions/{ResourceName}":{
       "get":{
           "description":"Returns Versions resource for a given name.",
           "operationId":"Versions_Get",
@@ -222,18 +222,15 @@
       "properties": {
         "id": {
           "description": "The resource ID.",
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         },
         "name": {
           "description": "The name of the resource.",
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         },
         "type": {
           "description": "The type of the resource.",
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         },
         "properties": {
           "description": "the subscription definition properties",
@@ -343,7 +340,7 @@
        "description":"Client Api Version."
     },
     "ResourceGroupNameParameter":{
-       "name":"resourceGroupName",
+       "name":"ResourceGroupName",
        "in":"path",
        "required":true,
        "type":"string",
@@ -351,7 +348,7 @@
        "x-ms-parameter-location":"method"
     },
     "ResourceNameParameter":{
-      "name":"resourceName",
+      "name":"ResourceName",
       "in":"path",
       "required":true,
       "type":"string",
