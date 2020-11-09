@@ -1043,6 +1043,40 @@
         }
       }
     },
+    "WorkspaceRepositoryConfiguration": {
+      "description": "Git integration settings",
+      "type": "object",
+      "properties": {
+        "type": {
+          "description": "Type of workspace repositoryID configuration. Example WorkspaceVSTSConfiguration, WorkspaceGitHubConfiguration",
+          "type": "string"
+        },
+        "hostName": {
+          "description": "GitHub Enterprise host name. For example: https://github.mydomain.com",
+          "type": "string"
+        },
+        "accountName": {
+          "description": "Account name",
+          "type": "string"
+        },
+        "projectName": {
+          "description": "VSTS project name",
+          "type": "string"
+        },
+        "repositoryName": {
+          "description": "Repository name",
+          "type": "string"
+        },
+        "collaborationBranch": {
+          "description": "Collaboration branch",
+          "type": "string"
+        },
+        "rootFolder": {
+          "description": "Root folder to use in the repository",
+          "type": "string"
+        }
+      }
+    },
     "BabylonConfiguration": {
       "description": "Babylon Configuration",
       "type": "object",
@@ -1159,6 +1193,10 @@
           "description": "Managed Virtual Network Settings",
           "$ref": "#/definitions/ManagedVirtualNetworkSettings"
         },
+        "workspaceRepositoryConfiguration": {
+          "description": "Git integration settings",
+          "$ref": "#/definitions/WorkspaceRepositoryConfiguration"
+        },
         "babylonConfiguration": {
           "description": "Babylon Configuration",
           "$ref": "#/definitions/BabylonConfiguration"
@@ -1198,6 +1236,10 @@
         "managedVirtualNetworkSettings": {
           "description": "Managed Virtual Network Settings",
           "$ref": "#/definitions/ManagedVirtualNetworkSettings"
+        },
+        "workspaceRepositoryConfiguration": {
+          "description": "Git integration settings",
+          "$ref": "#/definitions/WorkspaceRepositoryConfiguration"
         },
         "babylonConfiguration": {
           "description": "Babylon Configuration",
