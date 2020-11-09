@@ -62,6 +62,18 @@
             "schema": {
               "$ref": "#/definitions/Vault"
             }
+          },
+          "400": {
+            "description": "Bad request.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          },
+          "409": {
+            "description": "A conflict occurred to prevent the operation from completing.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         },
         "x-ms-examples": {
@@ -129,6 +141,18 @@
             "schema": {
               "$ref": "#/definitions/Vault"
             }
+          },
+          "400": {
+            "description": "Bad request.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          },
+          "409": {
+            "description": "A conflict occurred to prevent the operation from completing.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         },
         "x-ms-examples": {
@@ -177,6 +201,12 @@
           },
           "204": {
             "description": "No Content."
+          },
+          "400": {
+            "description": "Bad request.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         },
         "x-ms-examples": {
@@ -224,6 +254,12 @@
             "description": "Retrieved vault",
             "schema": {
               "$ref": "#/definitions/Vault"
+            }
+          },
+          "404": {
+            "description": "The specified resource does not exist.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -306,6 +342,24 @@
             "description": "The updated access policies",
             "schema": {
               "$ref": "#/definitions/VaultAccessPolicyParameters"
+            }
+          },
+          "400": {
+            "description": "Bad request.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          },
+          "404": {
+            "description": "The specified resource does not exist.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          },
+          "409": {
+            "description": "A conflict occurred to prevent the operation from completing.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -442,6 +496,18 @@
             "schema": {
               "$ref": "#/definitions/DeletedVaultListResult"
             }
+          },
+          "400": {
+            "description": "Bad request.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          },
+          "404": {
+            "description": "The specified resource does not exist.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         },
         "x-ms-pageable": {
@@ -495,6 +561,12 @@
             "schema": {
               "$ref": "#/definitions/DeletedVault"
             }
+          },
+          "404": {
+            "description": "The specified resource does not exist.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         },
         "x-ms-examples": {
@@ -546,6 +618,18 @@
           },
           "202": {
             "description": "Vault is being purged."
+          },
+          "400": {
+            "description": "Bad request.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          },
+          "404": {
+            "description": "The specified resource does not exist.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         },
         "x-ms-examples": {
@@ -705,11 +789,8 @@
               "$ref": "#/definitions/PrivateEndpointConnection"
             }
           },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
+          "204": {
+            "description": "The private endpoint connection does not exist."
           }
         }
       },
@@ -1690,7 +1771,7 @@
           "type": "string",
           "description": "The reason for approval or rejection."
         },
-        "actionRequired": {
+        "actionsRequired": {
           "type": "string",
           "description": "A message indicating if changes on the service provider require any updates on the consumer."
         }
