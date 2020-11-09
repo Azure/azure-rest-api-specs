@@ -2132,6 +2132,16 @@
         }
       }
     },
+    "EncryptionIdentity":{
+       "description": "Encryption Identity properties when storage account is associated with a UserAssignedIdentity.",
+       "properties": {
+         "userAssignedIdentity":{
+           "type": "string",
+           "description": "ResourceID of the UserAssignedIdentity to be associated with the storage account.",
+           "x-ms-client-name": "UserAssignedIdentity"
+         }
+       }
+    },
     "Encryption": {
       "properties": {
         "services": {
@@ -2160,6 +2170,11 @@
           "$ref": "#/definitions/KeyVaultProperties",
           "x-ms-client-name": "KeyVaultProperties",
           "description": "Properties provided by key vault."
+        },
+        "identity": {
+          "$ref": "#/definitions/EncryptionIdentity",
+          "x-ms-client-name": "Identity",
+          "description": "Encryption Identity properties when storage account is associated with a UserAssignedIdentity."
         }
       },
       "required": [
