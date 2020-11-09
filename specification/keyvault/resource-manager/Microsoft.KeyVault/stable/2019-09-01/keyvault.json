@@ -1249,6 +1249,10 @@
           "$ref": "#/definitions/NetworkRuleSet",
           "description": "Rules governing the accessibility of the key vault from specific network locations."
         },
+        "provisioningState": {
+          "type": "string",
+          "description": "Provisioning state of the vault."
+        },
         "privateEndpointConnections": {
           "readOnly": true,
           "type": "array",
@@ -1376,6 +1380,11 @@
             "type": "string"
           },
           "description": "Tags of the original vault."
+        },
+        "purgeProtectionEnabled": {
+          "readOnly": true,
+          "type": "boolean",
+          "description": "Purge protection status of the original vault."
         }
       },
       "description": "Properties of the deleted vault."
@@ -1735,6 +1744,10 @@
           "$ref": "#/definitions/PrivateEndpointConnectionProperties",
           "x-ms-client-flatten": true,
           "description": "Resource properties."
+        },
+        "etag": {
+          "type": "string",
+          "description": "Modified whenever the user or NRP changes the state of PE connection."
         }
       },
       "allOf": [
