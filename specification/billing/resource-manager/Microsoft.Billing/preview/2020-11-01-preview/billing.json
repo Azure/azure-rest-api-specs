@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "2019-10-01-preview",
+    "version": "2020-11-01-preview",
     "title": "BillingManagementClient",
     "description": "Billing client provides access to billing resources for Azure subscriptions."
   },
@@ -7278,6 +7278,7 @@
             "Disabled",
             "Warned"
           ],
+          "type": "string",
           "readOnly": true,
           "x-ms-enum": {
             "name": "BillingProfileStatus",
@@ -9076,12 +9077,7 @@
     },
     "PromotionCheckEligibilityResponse": {
       "type": "object",
-      "x-ms-azure-resource": true,
       "properties": {
-        "etag": {
-          "type": "integer",
-          "format": "int64"
-        },
         "properties": {
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/PromotionCheckEligibilityResponseProperties"
