@@ -26,6 +26,91 @@
     }
   },
   "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Datadog/agreements": {
+      "get": {
+        "tags": [
+          "Agreements"
+        ],
+        "summary": "List Datadog marketplace agreements in the subscription.",
+        "operationId": "MarketplaceAgreements_List",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/DatadogAgreementResourceListResponse"
+            }
+          },
+          "default": {
+            "description": "Default error response.",
+            "schema": {
+              "$ref": "#/definitions/ResourceProviderDefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "MarketplaceAgreements_List": {
+            "$ref": "./examples/MarketplaceAgreements_List.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Datadog/agreements/default": {
+      "put": {
+        "tags": [
+          "Agreements"
+        ],
+        "summary": "Create Datadog marketplace agreement in the subscription.",
+        "operationId": "MarketplaceAgreements_Create",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/DatadogAgreementResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/DatadogAgreementResource"
+            }
+          },
+          "default": {
+            "description": "Default error response.",
+            "schema": {
+              "$ref": "#/definitions/ResourceProviderDefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "MarketplaceAgreements_Create": {
+            "$ref": "./examples/MarketplaceAgreements_Create.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Datadog/monitors/{monitorName}/listApiKeys": {
       "post": {
         "tags": [
@@ -766,6 +851,7 @@
             "$ref": "#/parameters/MonitorNameParameter"
           },
           {
+            "description": "Rule set name",
             "in": "path",
             "name": "ruleSetName",
             "required": true,
@@ -822,6 +908,7 @@
             "$ref": "#/parameters/MonitorNameParameter"
           },
           {
+            "description": "Rule set name",
             "in": "path",
             "name": "ruleSetName",
             "required": true,
@@ -924,6 +1011,7 @@
             "$ref": "#/parameters/MonitorNameParameter"
           },
           {
+            "description": "Configuration name",
             "in": "path",
             "name": "configurationName",
             "required": true,
@@ -990,6 +1078,7 @@
             "$ref": "#/parameters/MonitorNameParameter"
           },
           {
+            "description": "Configuration name",
             "in": "path",
             "name": "configurationName",
             "required": true,
@@ -1022,6 +1111,87 @@
     }
   },
   "definitions": {
+    "DatadogAgreementProperties": {
+      "description": "Terms properties.",
+      "type": "object",
+      "properties": {
+        "publisher": {
+          "description": "Publisher identifier string.",
+          "type": "string"
+        },
+        "product": {
+          "description": "Product identifier string.",
+          "type": "string"
+        },
+        "plan": {
+          "description": "Plan identifier string.",
+          "type": "string"
+        },
+        "licenseTextLink": {
+          "description": "Link to HTML with Microsoft and Publisher terms.",
+          "type": "string"
+        },
+        "privacyPolicyLink": {
+          "description": "Link to the privacy policy of the publisher.",
+          "type": "string"
+        },
+        "retrieveDatetime": {
+          "format": "date-time",
+          "description": "Date and time in UTC of when the terms were accepted. This is empty if Accepted is false.",
+          "type": "string"
+        },
+        "signature": {
+          "description": "Terms signature.",
+          "type": "string"
+        },
+        "accepted": {
+          "description": "If any version of the terms have been accepted, otherwise false.",
+          "type": "boolean"
+        }
+      }
+    },
+    "DatadogAgreementResource": {
+      "type": "object",
+      "x-ms-azure-resource": true,
+      "properties": {
+        "id": {
+          "description": "ARM id of the resource.",
+          "type": "string",
+          "readOnly": true
+        },
+        "name": {
+          "description": "Name of the agreement.",
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "description": "The type of the resource.",
+          "type": "string",
+          "readOnly": true
+        },
+        "properties": {
+          "$ref": "#/definitions/DatadogAgreementProperties",
+          "description": "Represents the properties of the resource."
+        }
+      }
+    },
+    "DatadogAgreementResourceListResponse": {
+      "description": "Response of a list operation.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Results of a list operation.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DatadogAgreementResource"
+          }
+        },
+        "nextLink": {
+          "description": "Link to the next set of results, if any.",
+          "type": "string"
+        }
+      }
+    },
     "DatadogApiKey": {
       "required": [
         "key"
@@ -1356,6 +1526,7 @@
       }
     },
     "DatadogOrganizationProperties": {
+      "description": "Datadog organization properties",
       "type": "object",
       "properties": {
         "name": {
@@ -1392,6 +1563,7 @@
       }
     },
     "UserInfo": {
+      "description": "User info",
       "type": "object",
       "properties": {
         "name": {
@@ -1459,6 +1631,7 @@
         "UserAssigned"
       ],
       "type": "string",
+      "description": "Identity type",
       "x-ms-enum": {
         "modelAsString": true,
         "name": "ManagedIdentityTypes"
