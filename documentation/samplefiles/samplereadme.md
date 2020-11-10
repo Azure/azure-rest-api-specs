@@ -1,8 +1,8 @@
-# YourServiceName
+# [[ServiceName]]
 
 > see https://aka.ms/autorest
 
-This is the AutoRest configuration file for YourServiceName.
+This is the AutoRest configuration file for [[ServiceName]].
 
 ## Getting Started
 
@@ -22,20 +22,20 @@ For other options on installation see [Installing AutoRest](https://aka.ms/autor
 
 ### Basic Information
 
-These are the global settings for the YourServiceName.
+These are the global settings for the [[ServiceName]].
 
 ```yaml
-openapi-type: arm
-tag: package-YYYY-MM-DD
+openapi-type: [[OpenApiType]]
+tag: package-[[Version]]
 ```
 
-### Tag: package-YYYY-MM-DD
+### Tag: package-[[Version]]
 
-These settings apply only when `--tag=package-YYYY-MM-DD` is specified on the command line.
+These settings apply only when `--tag=package-[[Version]]` is specified on the command line.
 
-```yaml $(tag) == 'package-YYYY-MM-DD'
+```yaml $(tag) == 'package-[[Version]]'
 input-file:
-  - Microsoft.YourServiceName/stable/YYYY-MM-DD/YourServiceName.json
+  - [[ResourceProviderName]]/[[ReleaseState]]/[[Version]]/[[ServiceName]].json
 ```
 
 ---
@@ -53,12 +53,11 @@ swagger-to-sdk:
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-js
-  - repo: azure-sdk-for-ruby
     after_scripts:
-      - bundle install && rake arm:regen_all_profiles['azure_mgmt_YourServiceName']
+      - bundle install && rake arm:regen_all_profiles['azure_mgmt_[[ServiceName]]']
   - repo: azure-resource-manager-schemas
     after_scripts:
-      - node sdkauto_afterscript.js yourservicename/resource-manager
+      - node sdkauto_afterscript.js [[ServiceName]]/resource-manager
 ```
 
 ## Go
@@ -68,10 +67,6 @@ See configuration in [readme.go.md](https://github.com/Azure/azure-rest-api-spec
 ## Python
 
 See configuration in [readme.python.md](https://github.com/Azure/azure-rest-api-specs/blob/master/documentation/samplefiles/readme.python.md)
-
-## Ruby
-
-See configuration in [readme.ruby.md](https://github.com/Azure/azure-rest-api-specs/blob/master/documentation/samplefiles/readme.ruby.md)
 
 ## TypeScript
 
