@@ -45,7 +45,7 @@ Differences in v5 (compared to v4):
 
   * `-2020-11-01/databases.json`
 
-``` yaml $(tag) == 'package-composite-v4'
+``` yaml $(tag) == 'package-composite-v5'
 input-file:
 - Microsoft.Sql/stable/2014-04-01/backups.json
 - Microsoft.Sql/stable/2014-04-01/connectionPolicies.json
