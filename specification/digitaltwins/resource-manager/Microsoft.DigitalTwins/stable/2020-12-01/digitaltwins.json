@@ -153,6 +153,9 @@
           },
           "Patch a DigitalTwinsInstance resource with identity": {
             "$ref": "./examples/DigitalTwinsPatch_WithIdentity_example.json"
+          },
+          "Patch a DigitalTwinsInstance resource with publicNetworkAccess property": {
+            "$ref": "./examples/DigitalTwinsPatch_WithPublicNetworkAccess.json"
           }
         },
         "parameters": [
@@ -361,6 +364,9 @@
           },
           "Put a DigitalTwinsInstance resource with identity": {
             "$ref": "./examples/DigitalTwinsEndpointPut_WithIdentity_example.json"
+          },
+          "Put a DigitalTwinsInstance resource with publicNetworkAccess property": {
+            "$ref": "./examples/DigitalTwinsPut_WithPublicNeworkAccess.json"
           }
         },
         "parameters": [
@@ -914,6 +920,25 @@
     }
   },
   "definitions": {
+    "DigitalTwinsPatchProperties": {
+      "description": "The properties of a DigitalTwinsInstance.",
+      "type": "object",
+      "properties": {
+        "publicNetworkAccess": {
+          "description": "Public network access for the DigitalTwinsInstance.",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "type": "string",
+          "x-nullable": true,
+          "x-ms-enum": {
+            "name": "publicNetworkAccess",
+            "modelAsString": true
+          }
+        }
+      }
+    },
     "DigitalTwinsProperties": {
       "description": "The properties of a DigitalTwinsInstance.",
       "type": "object",
@@ -1011,6 +1036,11 @@
           "description": "The managed identity for the DigitalTwinsInstance.",
           "x-nullable": true,
           "$ref": "#/definitions/DigitalTwinsIdentity"
+        },
+        "properties": {
+          "description": "Properties for the DigitalTwinsInstance.",
+          "x-nullable": true,
+          "$ref": "#/definitions/DigitalTwinsPatchProperties"
         }
       }
     },
