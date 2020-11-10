@@ -3820,6 +3820,13 @@
             "description": "The name of the VM scale set."
           },
           {
+            "name": "forceDeletion",
+            "in": "query",
+            "required": false,
+            "type": "boolean",
+            "description": "Optional parameter to force delete a VM scale set."
+          },
+          {
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
@@ -3961,6 +3968,13 @@
               "$ref": "#/definitions/VirtualMachineScaleSetVMInstanceRequiredIDs"
             },
             "description": "A list of virtual machine instance IDs from the VM scale set."
+          },
+          {
+            "name": "forceDeletion",
+            "in": "query",
+            "required": false,
+            "type": "boolean",
+            "description": "Optional parameter to force delete virtual machines from the VM scale set."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -5722,6 +5736,13 @@
             "required": true,
             "type": "string",
             "description": "The instance ID of the virtual machine."
+          },
+          {
+            "name": "forceDeletion",
+            "in": "query",
+            "required": false,
+            "type": "boolean",
+            "description": "Optional parameter to force delete a virtual machine from a VM scale set."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
