@@ -61,6 +61,7 @@ These settings apply only when `--tag=package-2019-09` is specified on the comma
 input-file:
 - Microsoft.KeyVault/stable/2019-09-01/keyvault.json
 - Microsoft.KeyVault/stable/2019-09-01/providers.json
+- Microsoft.KeyVault/stable/2019-09-01/keys.json
 ```
 
 ### Tag: package-2018-02-14-preview
@@ -100,6 +101,18 @@ These settings apply only when `--tag=package-2015-06` is specified on the comma
 ``` yaml $(tag) == 'package-2015-06'
 input-file:
 - Microsoft.KeyVault/stable/2015-06-01/keyvault.json
+```
+
+### Tag: profile-hybrid-2020-09-01
+
+These settings apply only when `--tag=profile-hybrid-2020-09-01` is specified on the command line.
+Creating this tag to pick proper resources from the hybrid profile.
+
+``` yaml $(tag) == 'profile-hybrid-2020-09-01'
+input-file:
+- Microsoft.KeyVault/stable/2019-09-01/keyvault.json
+- Microsoft.KeyVault/stable/2019-09-01/providers.json
+- Microsoft.KeyVault/stable/2019-09-01/secrets.json
 ```
 
 ### Supressions
