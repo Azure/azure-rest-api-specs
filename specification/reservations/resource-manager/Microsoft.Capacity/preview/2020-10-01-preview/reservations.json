@@ -348,12 +348,9 @@
         ],
         "responses": {
           "200": {
-            "description": "List of `Reservation`s created after the split operation.",
+            "description": "List of `Reservation`s created after the change directory operation.",
             "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/ChangeDirectoryResponse"
-              }
+              "$ref": "#/definitions/ChangeDirectoryResponse"
             }
           },
           "default": {
@@ -1530,51 +1527,35 @@
       "description": "Change direcotry response",
       "properties": {
         "reservationOrder": {
-          "type": "object",
-          "description": "Change direcotry result for reservation order",
-          "properties": {
-            "id": {
-              "type": "string",
-              "description": "Identifier of the reservation order"
-            },
-            "name": {
-              "type": "string",
-              "description": "Name of the reservation order"
-            },
-            "isSucceeded": {
-              "description": "True if change directory operation succeeded on this reservation order",
-              "type": "boolean"
-            },
-            "error": {
-              "type": "string",
-              "description": "Error reason if operation failed. Null otherwise"
-            }
-          }
+          "$ref": "#/definitions/ChangeDirectoryResult"
         },
         "reservations": {
           "type": "array",
           "items": {
-            "type": "object",
-            "description": "Change direcotry result for reservation",
-            "properties": {
-              "id": {
-                "type": "string",
-                "description": "Identifier of the reservation"
-              },
-              "name": {
-                "type": "string",
-                "description": "Name of the reservation"
-              },
-              "isSucceeded": {
-                "description": "True if change directory operation succeeded on this reservation",
-                "type": "boolean"
-              },
-              "error": {
-                "type": "string",
-                "description": "Error reason if operation failed. Null otherwise"
-              }
-            }
+            "$ref": "#/definitions/ChangeDirectoryResult"
           }
+        }
+      }
+    },
+    "ChangeDirectoryResult": {
+      "type": "object",
+      "description": "Change direcotry result for reservation order or reservation",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Identifier of the reservation order or reservation"
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of the reservation order or reservation"
+        },
+        "isSucceeded": {
+          "description": "True if change directory operation succeeded on this reservation order or reservation",
+          "type": "boolean"
+        },
+        "error": {
+          "type": "string",
+          "description": "Error reason if operation failed. Null otherwise"
         }
       }
     },
