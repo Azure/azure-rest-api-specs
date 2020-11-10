@@ -1861,7 +1861,7 @@
           "200": {
             "description": "Request successful. The operation getikesas completed on virtual network gateway connection.",
             "schema": {
-              "type": "string"
+              "$ref": "#/definitions/IkeSaParameters"
             }
           },
           "default": {
@@ -3280,17 +3280,14 @@
       },
       "encryption": {
         "type": "string",
-        "$ref": "#/definitions/IpsecEncryption",
         "description": "The IPSec encryption algorithm (IKE phase 2)."
       },
       "integrity": {
         "type": "string",
-        "$ref": "#/definitions/IpsecIntegrity",
         "description": "The IPSec integrity algorithm (IKE phase 2)."
       },
       "pfsGroupId": {
         "type": "string",
-        "$ref": "#/definitions/PfsGroup",
         "description": "The PFS Group"
       },
       "inboundSPI": {
@@ -3372,17 +3369,14 @@
       },
       "encryption": {
         "type": "string",
-        "$ref": "#/definitions/IkeEncryption",
         "description": "The IKE encryption algorithm (IKE phase 1)."
       },
       "integrity": {
         "type": "string",
-        "$ref": "#/definitions/IkeIntegrity",
         "description": "The IKE integrity algorithm (IKE phase 1)."
       },
       "dhGroup": {
         "type": "string",
-        "$ref": "#/definitions/DhGroup",
         "description": "The DH Group."
       },
       "lifeTimeSeconds": {
