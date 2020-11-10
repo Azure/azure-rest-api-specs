@@ -70,10 +70,10 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{ResourceGroupName}/providers/Microsoft.Cascade/Versions":{
+    "/subscriptions/{SubscriptionId}/resourceGroups/{ResourceGroupName}/providers/Microsoft.Cascade/sites":{
       "get":{
-          "description":"Returns list of Versions.",
-          "operationId":"Versions_List",
+          "description":"Returns list of sites.",
+          "operationId":"sites_List_In_ReSourceGroup",
           "deprecated":false,
           "parameters":[
             {
@@ -88,23 +88,51 @@
           ],
           "responses":{
             "200":{
-                "description":"Versions list for allresource",
+                "description":"sites list for all resource",
                 "schema":{
-                  "$ref":"#/definitions/VersionResourceList"
+                  "$ref":"#/definitions/SiteResourceList"
                 }
             }
           },
           "x-ms-examples":{
-            "VersionsGet":{
-                "$ref":"./examples/VersionsGet.json"
+            "sitesGet":{
+                "$ref":"./examples/SitesList.json"
             }
           }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{ResourceGroupName}/providers/Microsoft.Cascade/Versions/{ResourceName}":{
+    "/subscriptions/{SubscriptionId}/providers/Microsoft.Cascade/sites":{
       "get":{
-          "description":"Returns Versions resource for a given name.",
-          "operationId":"Versions_Get",
+          "description":"Returns list of sites given subscription id",
+          "operationId":"sites_List_In_Subscription",
+          "deprecated":false,
+          "parameters":[
+            {
+              "$ref": "#/parameters/ApiVersionParameter"
+            },
+            {
+              "$ref": "#/parameters/SubscriptionIdParameter"
+            }
+          ],
+          "responses":{
+            "200":{
+                "description":"sites list for all resource",
+                "schema":{
+                  "$ref":"#/definitions/SiteResourceList"
+                }
+            }
+          },
+          "x-ms-examples":{
+            "sitesGet":{
+                "$ref":"./examples/SitesListAll.json"
+            }
+          }
+      }
+    },
+    "/subscriptions/{SubscriptionId}/resourceGroups/{ResourceGroupName}/providers/Microsoft.Cascade/sites/{ResourceName}":{
+      "get":{
+          "description":"Returns sites resource for a given name.",
+          "operationId":"sites_Get",
           "parameters":[
             {
               "$ref": "#/parameters/ApiVersionParameter"
@@ -121,21 +149,21 @@
           ],
           "responses":{
             "200":{
-                "description":"Versions details for a specific resource",
+                "description":"sites details for a specific resource",
                 "schema":{
-                  "$ref":"#/definitions/VersionResource"
+                  "$ref":"#/definitions/SiteResource"
                 }
             }
           },
           "x-ms-examples":{
-            "VersionsGet":{
-                "$ref":"./examples/VersionPropertyGet.json"
+            "sitesGet":{
+                "$ref":"./examples/SiteResourceGetExample.json"
             }
           }
       },
       "put":{
-          "description":"update Versions resource.",
-          "operationId":"Versions_Update",
+          "description":"create or update sites resource.",
+          "operationId":"sites_Update",
           "parameters":[
             {
               "$ref": "#/parameters/ApiVersionParameter"
@@ -151,72 +179,112 @@
             },
             {
                 "name":"body",
-                "description":"Versions details.",
+                "description":"sites details.",
                 "in":"body",
                 "required":true,
                 "schema":{
-                  "$ref":"#/definitions/VersionResource"
+                  "$ref":"#/definitions/SiteResource"
                 }
             }
           ],
           "responses":{
-            "200":{
-                "description":"Successful.",
+            "201":{
+                "description":"Successfully created a new site resource",
                 "schema":{
-                  "$ref":"#/definitions/VersionResource"
+                  "$ref":"#/definitions/SiteResource"
                 }
+            },
+            "200":{
+              "description":"Successfully update a site resource",
+              "schema":{
+                "$ref":"#/definitions/SiteResource"
+              }
             }
           },
           "x-ms-examples":{
-            "VersionsGet":{
-                "$ref":"./examples/VersionPropertyPut.json"
+            "sitesGet":{
+                "$ref":"./examples/SiteResourcePutExample.json"
             }
           }
       },
-      "post":{
-          "description":"Create Versions resource.",
-          "operationId":"Versions_Create",
-          "parameters":[
-            {
-              "$ref": "#/parameters/ApiVersionParameter"
-            },
-            {
-              "$ref": "#/parameters/SubscriptionIdParameter"
-            },
-            {
-              "$ref": "#/parameters/ResourceGroupNameParameter"
-            },
-            {
-              "$ref": "#/parameters/ResourceNameParameter"
-            },
-            {
-                "name":"body",
-                "description":"Versions details.",
-                "in":"body",
-                "required":true,
-                "schema":{
-                  "$ref":"#/definitions/VersionResource"
-                }
-            }
-          ],
-          "responses":{
-            "200":{
-                "description":"Successful.",
-                "schema":{
-                  "$ref":"#/definitions/VersionResource"
-                }
+      "delete": {
+        "summary": "Delete the Site Resource",
+        "operationId": "Site_Delete",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema":{
+              "$ref":"#/definitions/SiteResource"
             }
           },
-          "x-ms-examples":{
-            "VersionsGet":{
-                "$ref":"./examples/VersionPropertyPost.json"
+          "204": {
+            "description": "NoContent"
+          }
+        },
+        "x-ms-examples": {
+          "AccountsDeleteExample": {
+            "$ref": "./examples/SiteResourceDeleteExample.json"
+          }
+        }
+      },
+      "patch": {
+        "summary": "Update EngagementFabric account",
+        "operationId": "SiteResource_Update",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceNameParameter"
+          },
+          {
+              "name":"body",
+              "description":"sites details.",
+              "in":"body",
+              "required":true,
+              "schema":{
+                "$ref":"#/definitions/SiteResource"
+              }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema":{
+              "$ref":"#/definitions/SiteResource"
             }
           }
+        },
+        "x-ms-examples": {
+          "AccountsUpdateExample": {
+            "$ref": "./examples/SiteResourcePatchExample.json"
+          }
+        }
       }
     }
   },
   "definitions":{
-    "VersionResource": {
+    "SiteResource": {
       "description": "The subscription definition used to create the subscription.",
       "x-ms-azure-resource": true,
       "properties": {
@@ -238,11 +306,11 @@
         "properties": {
           "description": "the subscription definition properties",
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/VersionProperty"
+          "$ref": "#/definitions/SiteProperty"
         }
       }
     },
-    "VersionProperty":{
+    "SiteProperty":{
        "description":"An Azure resource.",
        "type":"object",
        "properties":{
@@ -256,15 +324,15 @@
           }
        }
     },
-    "VersionResourceList":{
-       "description":"The list of Versions.",
+    "SiteResourceList":{
+       "description":"The list of sites.",
        "type":"object",
        "properties":{
           "value":{
              "description":"The list of versions resource.",
              "type":"array",
              "items":{
-                "$ref":"#/definitions/VersionResource"
+                "$ref":"#/definitions/SiteResource"
              }
           }
        }
@@ -329,7 +397,7 @@
  },
  "parameters":{
     "SubscriptionIdParameter":{
-       "name":"subscriptionId",
+       "name":"SubscriptionId",
        "in":"path",
        "required":true,
        "type":"string",
@@ -340,7 +408,7 @@
        "in":"query",
        "required":true,
        "type":"string",
-       "description":"Client Api Version."
+       "description":"Client Api site."
     },
     "ResourceGroupNameParameter":{
        "name":"ResourceGroupName",
