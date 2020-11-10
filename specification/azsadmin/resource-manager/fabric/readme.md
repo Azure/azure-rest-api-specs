@@ -94,7 +94,6 @@ These settings apply only when `--tag=package-2019-05-01` is specified on the co
 ``` yaml $(tag) == 'package-2019-05-01'
 input-file:
     - "Microsoft.Fabric.Admin/preview/2016-05-01/ApplicationOperationResults.json"
-    - "Microsoft.Fabric.Admin/preview/2016-05-01/ComputeOperationResults.json"
     - "Microsoft.Fabric.Admin/preview/2016-05-01/Fabric.json"
     - "Microsoft.Fabric.Admin/preview/2016-05-01/EdgeGateway.json"
     - "Microsoft.Fabric.Admin/preview/2016-05-01/EdgeGatewayPool.json"
@@ -115,6 +114,7 @@ input-file:
     - "Microsoft.Fabric.Admin/preview/2019-05-01/NasCluster.json"
     - "Microsoft.Fabric.Admin/preview/2020-10-01/ScaleUnit.json"
     - "Microsoft.Fabric.Admin/preview/2020-10-01/ScaleUnitNode.json"
+    - "Microsoft.Fabric.Admin/preview/2020-10-01/ComputeOperationResults.json"
 ```
 
 ## Suppression
@@ -161,7 +161,6 @@ require: $(this-folder)/../../../../profiles/readme.md
 # all the input files across all versions
 input-file:
   - $(this-folder)/Microsoft.Fabric.Admin/preview/2016-05-01/ApplicationOperationResults.json
-  - $(this-folder)/Microsoft.Fabric.Admin/preview/2016-05-01/ComputeOperationResults.json
   - $(this-folder)/Microsoft.Fabric.Admin/preview/2016-05-01/Fabric.json
   - $(this-folder)/Microsoft.Fabric.Admin/preview/2016-05-01/EdgeGateway.json
   - $(this-folder)/Microsoft.Fabric.Admin/preview/2016-05-01/EdgeGatewayPool.json
@@ -189,7 +188,7 @@ input-file:
   - $(this-folder)/Microsoft.Fabric.Admin/preview/2019-05-01/NasCluster.json
   - $(this-folder)/Microsoft.Fabric.Admin/preview/2020-10-01/ScaleUnit.json
   - $(this-folder)/Microsoft.Fabric.Admin/preview/2020-10-01/ScaleUnitNode.json
-
+  - $(this-folder)/Microsoft.Fabric.Admin/preview/2020-10-01/ComputeOperationResults.json
 ```
 
 If there are files that should not be in the `all-api-versions` set, 
