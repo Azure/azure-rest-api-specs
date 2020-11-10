@@ -16,6 +16,8 @@ batch:
   - package-spark: true
   - package-artifacts: true
   - package-access-control: true
+  - package-vnet: true
+  - package-monitoring: true
 ```
 ``` yaml $(package-spark)
 no-namespace-folders: true
@@ -33,4 +35,16 @@ output-folder: $(python-sdks-folder)/synapse/azure-synapse-artifacts/azure/synap
 no-namespace-folders: true
 namespace: azure.synapse.accesscontrol
 output-folder: $(python-sdks-folder)/synapse/azure-synapse-accesscontrol/azure/synapse/accesscontrol
+```
+
+``` yaml $(package-vnet)
+no-namespace-folders: true
+namespace: azure.synapse.vnet
+output-folder: $(python-sdks-folder)/synapse/azure-synapse-vnet/azure/synapse/vnet
+```
+
+``` yaml $(package-monitoring)
+no-namespace-folders: true
+namespace: azure.synapse.monitoring
+output-folder: $(python-sdks-folder)/synapse/azure-synapse-monitoring/azure/synapse/monitoring
 ```
