@@ -6,6 +6,7 @@ These settings apply only when `--azureresourceschema` is specified on the comma
 
 ``` yaml $(azureresourceschema) && $(multiapi)
 batch:
+  - tag: schema-documentdb-2020-09-01
   - tag: schema-documentdb-2020-06-01-preview
   - tag: schema-documentdb-2020-04-01
   - tag: schema-documentdb-2020-03-01
@@ -21,6 +22,19 @@ batch:
 ```
 
 Please also specify `--azureresourceschema-folder=<path to the root directory of your azure-resource-manager-schemas clone>`.
+
+### Tag: schema-documentdb-2020-09-01 and azureresourceschema
+
+``` yaml $(tag) == 'schema-documentdb-2020-09-01' && $(azureresourceschema)
+output-folder: $(azureresourceschema-folder)/schemas
+
+# all the input files in this apiVersion
+input-file:
+  - Microsoft.DocumentDB/stable/2020-09-01/cosmos-db.json
+  - Microsoft.DocumentDB/stable/2020-09-01/notebook.json
+  - Microsoft.DocumentDB/stable/2020-09-01/privateEndpointConnection.json
+  - Microsoft.DocumentDB/stable/2020-09-01/privateLinkResources.json
+```
 
 ### Tag: schema-documentdb-2020-06-01-preview and azureresourceschema
 
