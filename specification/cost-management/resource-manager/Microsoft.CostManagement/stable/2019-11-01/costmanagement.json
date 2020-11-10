@@ -33,6 +33,161 @@
     }
   },
   "paths": {
+    "/providers/Microsoft.CostManagement/settings": {
+      "get": {
+        "tags": [
+          "Settings"
+        ],
+        "operationId": "Settings_GetList",
+        "description": "Get settings",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/costmanagement/"
+        },
+        "x-ms-examples": {
+          "PrivateSettingList": {
+            "$ref": "./examples/PrivateSettingsList.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/SettingsListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.CostManagement/settings/{settingName}": {
+      "get": {
+        "tags": [
+          "Settings"
+        ],
+        "operationId": "Settings_Get",
+        "description": "Gets the setting by setting name.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/costmanagement/"
+        },
+        "x-ms-examples": {
+          "PrivateSettings": {
+            "$ref": "./examples/PrivateSettings.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/settingNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Setting"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Settings"
+        ],
+        "operationId": "Settings_CreateOrUpdate",
+        "description": "The operation to create or update a setting. If the setting already exist then the setting will be updated.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/costmanagement/"
+        },
+        "x-ms-examples": {
+          "CreateOrUpdatePrivateSetting": {
+            "$ref": "./examples/PrivateSettingsCreateOrUpdate.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/settingNameParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Setting"
+            },
+            "description": "Body supplied to the CreateOrUpdate Setting operation."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Setting"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Settings"
+        ],
+        "operationId": "Settings_Delete",
+        "description": "The operation to delete a setting.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/costmanagement/"
+        },
+        "x-ms-examples": {
+          "DeletePrivateSetting": {
+            "$ref": "./examples/PrivateSettingsDelete.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/settingNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
     "/providers/Microsoft.CostManagement/views": {
       "get": {
         "tags": [
@@ -1523,6 +1678,36 @@
         "values"
       ]
     },
+    "SettingsListResult": {
+      "description": "Result of listing settings. It contains a list of available settings.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "The list of settings.",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/Setting"
+          }
+        }
+      }
+    },
+    "Setting": {
+      "description": "States of Settings",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxySettingResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/SettingsProperties",
+          "title": "Setting properties"
+        }
+      }
+    },
     "ViewListResult": {
       "description": "Result of listing views. It contains a list of available views.",
       "type": "object",
@@ -1555,6 +1740,16 @@
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/ViewProperties",
           "title": "View properties"
+        }
+      }
+    },
+    "SettingsProperties": {
+      "type": "object",
+      "description": "The properties of the setting.",
+      "properties": {
+        "scope": {
+          "description": "The scope set by the user",
+          "type": "string"
         }
       }
     },
@@ -1745,6 +1940,26 @@
         }
       },
       "x-ms-azure-resource": true
+    },
+    "ProxySettingResource": {
+      "description": "The Resource model definition.",
+      "properties": {
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource Id."
+        },
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource name."
+        },
+        "kind": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource kind."
+        }
+      }
     },
     "ProxyResource": {
       "description": "The Resource model definition.",
@@ -2576,6 +2791,14 @@
     }
   },
   "parameters": {
+    "settingNameParameter": {
+      "name": "settingName",
+      "in": "path",
+      "description": "Setting name",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
     "viewNameParameter": {
       "name": "viewName",
       "in": "path",
