@@ -1984,6 +1984,14 @@
           "description": "Capacity of the cloud.",
           "readOnly": true
         },
+        "storageQoSPolicies": {
+          "description": "List of QoS policies available for the cloud.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/StorageQoSPolicy"
+          },
+          "readOnly": true
+        },
         "provisioningState": {
           "type": "string",
           "description": "Gets or sets the provisioning state.",
@@ -2805,6 +2813,38 @@
             "$ref": "#/definitions/ErrorDefinition"
           },
           "readOnly": true
+        }
+      }
+    },
+    "StorageQoSPolicy": {
+      "description": "The StorageQoSPolicy definition.",
+      "properties": {
+        "name": {
+          "description": "The name of the policy.",
+          "type": "string"
+        },
+        "id": {
+          "description": "The ID of the QoS policy.",
+          "type": "string"
+        },
+        "iopsMaximum": {
+          "description": "The maximum IO operations per second.",
+          "type": "integer",
+          "format": "int64"
+        },
+        "iopsMinimum": {
+          "description": "The minimum IO operations per second.",
+          "type": "integer",
+          "format": "int64"
+        },
+        "bandwidthLimit": {
+          "description": "The Bandwidth Limit for internet traffic.",
+          "type": "integer",
+          "format": "int64"
+        },
+        "policyId": {
+          "description": "The underlying policy.",
+          "type": "string"
         }
       }
     },
