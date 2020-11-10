@@ -824,7 +824,7 @@
       "type": "object",
       "properties": {
         "sourceUrl": {
-          "description": "Location of the folder / container with your documents",
+          "description": "Location of the folder / container or single file with your documents",
           "type": "string",
           "example": "https://myblob.blob.core.windows.net/Container/"
         },
@@ -900,6 +900,14 @@
         }
       }
     },
+    "StorageInputType": {
+      "description": "Storage type of the input documents source string",
+      "enum": [
+        "Folder",
+        "File"
+      ],
+      "type": "string"
+    },
     "BatchRequest": {
       "description": "Definition for the input batch translation request",
       "required": [
@@ -917,6 +925,9 @@
           "items": {
             "$ref": "#/definitions/TargetInput"
           }
+        },
+        "storageType": {
+          "$ref": "#/definitions/StorageInputType"
         }
       }
     },
