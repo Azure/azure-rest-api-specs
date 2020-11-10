@@ -1,0 +1,25 @@
+---
+- rule:
+    type: checkbox
+    keywords:
+      - "WaitForARMFeedback"
+    booleanFilterExpression: "!(ARMSignedOff||ARMChangesRequested||Approved-OkToMerge||WaitForARMRevisit)"
+    onCheckedLabels:
+      - WaitForARMFeedback
+    onCheckedComments: "Hi, @${PRAuthor} your PR are labelled with <b> WaitForARMFeedback</b>. A notification email will be sent out shortly afterwards to notify ARM review board(armapireview@microsoft.com). cc @${PRAssignee} "
+
+- rule:
+    type: checkbox
+    keywords:
+      - "I have reviewed the [documentation](https://aka.ms/ameonboard) for the workflow."
+    onCheckedComments: "Hi, @${PRAuthor} Thanks for your PR. I am workflow bot for review process. Here are some small tips. </br> <li> Please ensure to do self-check against checklists in first PR comment.</li> <li> PR assignee is the person auto-assigned and responsible for your current PR reviewing and merging. </li>  <li> If there is CI failure(s), to fix CI error(s) is mandatory for PR merging; or you need to provide justification in PR comment for explanation. [How to fix?](https://github.com/Azure/azure-rest-api-specs/blob/master/documentation/ci-fix.md)</li></br> Any feedback about review process or workflow bot, pls contact swagger and tools team. vsswagger@microsoft.com"
+
+- rule:
+    type: label
+    label: BreakingChangeReviewRequired
+    onLabeledComments: "Hi @${PRAuthor}, one or multiple breaking change(s) is detected in your PR. Pls follow [breaking change policy](https://aka.ms/AzBreakingChangesPolicy) to request breaking change review and approval before proceeding swagger PR review. "
+
+- rule:
+    type: label
+    label: ApprovedOkToMerge
+    onLabeledComments: "Hi @${PRAuthor},Your PR is approved. Congratulations. </br> <li> If your PR is in public repo (azure-rest-api-specs),  PR assignee will merge all updates in the PR shortly afterwards; or pause the PR merge, you need to put on a label <b>DoNotMerge</b> to PR as soon as possible. </li><li>If your PR is in private repo (azure-rest-api-specs-pr),  there won’t be PR merge.  Please refer to this [wiki](https://dev.azure.com/azure-sdk/internal/_wiki/wikis/internal.wiki/205/RP-Scenarios-to-Contribute-to-Swagger?anchor=**public-repository-vs.-private-repository**) for further guidance on how to proceed. </li>"
