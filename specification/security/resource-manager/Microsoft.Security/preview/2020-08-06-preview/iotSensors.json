@@ -1,0 +1,292 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Security Center",
+    "description": "API spec for Microsoft.Security (Azure Security Center) resource provider",
+    "version": "2020-08-06-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/{scope}/providers/Microsoft.Security/iotSensors": {
+      "get": {
+        "x-ms-examples": {
+          "List IoT sensors": {
+            "$ref": "./examples/IotSensors/List.json"
+          }
+        },
+        "tags": [
+          "IoT Sensors"
+        ],
+        "description": "List IoT sensors",
+        "operationId": "IotSensors_List",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/IotSensorScope"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/IotSensorsList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/{scope}/providers/Microsoft.Security/iotSensors/{iotSensorName}": {
+      "get": {
+        "x-ms-examples": {
+          "Get IoT sensor": {
+            "$ref": "./examples/IotSensors/Get.json"
+          }
+        },
+        "tags": [
+          "IoT Sensors"
+        ],
+        "operationId": "IotSensors_Get",
+        "description": "Get IoT sensor",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/IotSensorScope"
+          },
+          {
+            "$ref": "#/parameters/IotSensorName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/IotSensor"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "put": {
+        "x-ms-examples": {
+          "Create or update IoT sensor": {
+            "$ref": "./examples/IotSensors/Put.json"
+          }
+        },
+        "tags": [
+          "IoT Sensors"
+        ],
+        "operationId": "IotSensors_CreateOrUpdate",
+        "description": "Create or update IoT sensor",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/IotSensorScope"
+          },
+          {
+            "$ref": "#/parameters/IotSensorName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Updated IoT sensor",
+            "schema": {
+              "$ref": "#/definitions/IotSensor"
+            }
+          },
+          "201": {
+            "description": "Created IoT sensor",
+            "schema": {
+              "$ref": "#/definitions/IotSensor"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "delete": {
+        "x-ms-examples": {
+          "Delete IoT sensor": {
+            "$ref": "./examples/IotSensors/Delete.json"
+          }
+        },
+        "tags": [
+          "IoT Sensors"
+        ],
+        "operationId": "IotSensors_Delete",
+        "description": "Delete IoT sensor",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/IotSensorScope"
+          },
+          {
+            "$ref": "#/parameters/IotSensorName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Deleted IoT sensor"
+          },
+          "204": {
+            "description": "IoT sensor does not exist"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/{scope}/providers/Microsoft.Security/iotSensors/{iotSensorName}/downloadActivation": {
+      "post": {
+        "x-ms-examples": {
+          "Download activation file": {
+            "$ref": "./examples/IotSensors/DownloadActivation.json"
+          }
+        },
+        "tags": [
+          "IoT Sensors"
+        ],
+        "operationId": "IotSensors_DownloadActivation",
+        "description": "Download sensor activation file",
+        "produces": [
+          "application/zip"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/IotSensorScope"
+          },
+          {
+            "$ref": "#/parameters/IotSensorName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Downloaded activation file",
+            "schema": {
+              "type": "object",
+              "format": "file"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "IotSensorsList": {
+      "description": "List of IoT sensors",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "List data",
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/IotSensor"
+          }
+        }
+      }
+    },
+    "IotSensor": {
+      "type": "object",
+      "description": "IoT sensor",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "IoT sensor properties",
+          "$ref": "#/definitions/IotSensorProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../common/v1/types.json#/definitions/Resource"
+        }
+      ]
+    },
+    "IotSensorProperties": {
+      "type": "object",
+      "description": "IoT sensor properties",
+      "properties": {}
+    }
+  },
+  "parameters": {
+    "IotSensorScope": {
+      "name": "scope",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Scope of the query (IoT Hub, /providers/Microsoft.Devices/iotHubs/myHub)",
+      "x-ms-parameter-location": "method",
+      "x-ms-skip-url-encoding": true
+    },
+    "IotSensorName": {
+      "name": "iotSensorName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Name of the IoT sensor",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}

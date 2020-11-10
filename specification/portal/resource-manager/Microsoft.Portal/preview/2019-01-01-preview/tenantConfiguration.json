@@ -1,0 +1,256 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2019-01-01-preview",
+    "title": "portal",
+    "description": "Manage tenant configuration.",
+    "x-ms-code-generation-settings": {
+      "name": "portalClient"
+    }
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "paths": {
+    "/providers/Microsoft.Portal/tenantConfigurations": {
+      "get": {
+        "tags": [
+          "tenantConfiguration"
+        ],
+        "operationId": "TenantConfigurations_List",
+        "description": "Gets list of the tenant configurations.",
+        "parameters": [
+          {
+            "$ref": "portal.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. Returns the list of tenant configurations.",
+            "schema": {
+              "$ref": "#/definitions/ConfigurationList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "portal.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get list of Tenant configurations": {
+            "$ref": "examples/TenantConfiguration/GetListOfTenantConfigurations.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Portal/tenantConfigurations/{configurationName}": {
+      "get": {
+        "tags": [
+          "tenantConfiguration"
+        ],
+        "operationId": "TenantConfigurations_Get",
+        "description": "Gets the tenant configuration.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ConfigurationNameParameter"
+          },
+          {
+            "$ref": "portal.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. Returns the tenant configuration.",
+            "schema": {
+              "$ref": "#/definitions/Configuration"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "portal.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Tenant configuration": {
+            "$ref": "examples/TenantConfiguration/GetTenantConfiguration.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "tenantConfiguration"
+        ],
+        "operationId": "TenantConfigurations_Create",
+        "description": "Create the tenant configuration. If configuration already exists - update it. User has to be a Tenant Admin for this operation.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ConfigurationNameParameter"
+          },
+          {
+            "$ref": "portal.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "tenantConfiguration",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Configuration"
+            },
+            "description": "The parameters required to create or update tenant configuration."
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created. New configuration was created",
+            "schema": {
+              "$ref": "#/definitions/Configuration"
+            }
+          },
+          "200": {
+            "description": "OK. Existing configuration updated.",
+            "schema": {
+              "$ref": "#/definitions/Configuration"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "portal.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create or update Tenant configuration": {
+            "$ref": "examples/TenantConfiguration/CreateOrUpdateTenantConfiguration.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "tenantConfiguration"
+        ],
+        "operationId": "TenantConfigurations_Delete",
+        "description": "Delete the tenant configuration. User has to be a Tenant Admin for this operation.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ConfigurationNameParameter"
+          },
+          {
+            "$ref": "portal.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. Configuration was deleted."
+          },
+          "204": {
+            "description": "No content. Configuration was not found."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "portal.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete Tenant configuration": {
+            "$ref": "examples/TenantConfiguration/DeleteTenantConfiguration.json"
+          }
+        }
+      }
+    }
+  },
+  "parameters": {
+    "ConfigurationNameParameter": {
+      "name": "configurationName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The configuration name. Value must be 'default'",
+      "enum": [
+        "default"
+      ],
+      "x-ms-enum": {
+        "name": "configurationName",
+        "modelAsString": true
+      },
+      "x-ms-parameter-location": "method"
+    }
+  },
+  "definitions": {
+    "ConfigurationList": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Configuration"
+          },
+          "description": "The array of tenant configurations."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The URL to use for getting the next set of results."
+        }
+      },
+      "description": "List of tenant configurations."
+    },
+    "Configuration": {
+      "type": "object",
+      "description": "Tenant configuration.",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ConfigurationProperties",
+          "description": "Tenant configuration properties."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "ConfigurationProperties": {
+      "type": "object",
+      "description": "Tenant configuration properties.",
+      "x-ms-azure-resource": true,
+      "properties": {
+        "enforcePrivateMarkdownStorage": {
+          "type": "boolean",
+          "description": "When flag is set to true Markdown tile will require external storage configuration (URI). The inline content configuration will be prohibited."
+        }
+      }
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  }
+}

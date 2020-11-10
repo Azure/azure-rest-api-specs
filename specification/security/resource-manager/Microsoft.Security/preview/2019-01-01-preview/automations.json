@@ -158,8 +158,11 @@
       },
       "put": {
         "x-ms-examples": {
-          "Create or update a security automation": {
-            "$ref": "./examples/Automations/PutAutomation_example.json"
+          "Create or update a security automation for all assessments": {
+            "$ref": "./examples/Automations/PutAutomationAllAssessments_example.json"
+          },
+          "Create or update a security automation for all high severity assessments": {
+            "$ref": "./examples/Automations/PutAutomationHighSeverityAssessments_example.json"
           },
           "Disable or enable a security automation": {
             "$ref": "./examples/Automations/PutDisableAutomation_example.json"
@@ -373,6 +376,7 @@
           "description": "A valid event source type.",
           "enum": [
             "Assessments",
+            "SubAssessments",
             "Alerts"
           ],
           "x-ms-enum": {
@@ -381,6 +385,9 @@
             "values": [
               {
                 "value": "Assessments"
+              },
+              {
+                "value": "SubAssessments"
               },
               {
                 "value": "Alerts"

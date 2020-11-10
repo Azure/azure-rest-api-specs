@@ -24,6 +24,47 @@ batch:
   - tag: package-2020-02
   - tag: package-2020-03
   - tag: package-2020-04
+  - tag: package-2020-06
+  - tag: package-2020-07
+  - tag: package-2020-09
+```
+
+### Tag: package-2020-07 and java
+
+These settings apply only when `--tag=package-2020-07` is specified on the command line.
+Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-2020-07' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.containerservice.v2020_07_01
+  output-folder: $(azure-libraries-for-java-folder)/sdk/containerservice/mgmt-v2020_07_01
+regenerate-manager: true
+generate-interface: true
+```
+### Tag: package-2020-09 and java
+
+These settings apply only when `--tag=package-2020-09` is specified on the command line.
+Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-2020-09' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.containerservice.v2020_09_01
+  output-folder: $(azure-libraries-for-java-folder)/sdk/containerservice/mgmt-v2020_09_01
+regenerate-manager: true
+generate-interface: true
+```
+
+### Tag: package-2020-06 and java
+
+These settings apply only when `--tag=package-2020-06` is specified on the command line.
+Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-2020-06' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.containerservice.v2020_06_01
+  output-folder: $(azure-libraries-for-java-folder)/sdk/containerservice/mgmt-v2020_06_01
+regenerate-manager: true
+generate-interface: true
 ```
 
 ### Tag: package-2020-04 and java
