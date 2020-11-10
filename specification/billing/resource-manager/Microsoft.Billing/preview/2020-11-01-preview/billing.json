@@ -687,7 +687,8 @@
               },
               "Retry-After": {
                 "description": "Recommended time to wait before making another request to check the status of the operation. The time is specified in seconds.",
-                "type": "integer"
+                "type": "integer",
+                "format": "int64"
               }
             }
           },
@@ -947,7 +948,8 @@
               },
               "Retry-After": {
                 "description": "Recommended time to wait before making another request to check the status of the operation. The time is specified in seconds.",
-                "type": "integer"
+                "type": "integer",
+                "format": "int64"
               }
             }
           },
@@ -2479,7 +2481,8 @@
               },
               "Retry-After": {
                 "description": "Recommended time to wait before making another request to check the status of the operation. The time is specified in seconds.",
-                "type": "integer"
+                "type": "integer",
+                "format": "int64"
               }
             }
           },
@@ -2746,7 +2749,8 @@
               },
               "Retry-After": {
                 "description": "Recommended time to wait before making another request to check the status of the operation. The time is specified in seconds.",
-                "type": "integer"
+                "type": "integer",
+                "format": "int64"
               }
             }
           },
@@ -5714,7 +5718,7 @@
         "tags": [
           "Promotion_CheckEligibility"
         ],
-        "operationId": "Promotion_CheckEligibility_get",
+        "operationId": "Promotion_CheckEligibility",
         "description": "Checks the eligibility of a subscription for all active promotions.",
         "x-ms-examples": {
           "PromotionCheckEligibility": {
@@ -6595,6 +6599,7 @@
             "SpendingLimitReached",
             "SpendingLimitExpired"
           ],
+          "type": "string",
           "readOnly": true,
           "x-ms-enum": {
             "name": "BillingProfileStatusReasonCode",
@@ -6607,6 +6612,7 @@
             "Off",
             "On"
           ],
+          "type": "string",
           "readOnly": true,
           "x-ms-enum": {
             "name": "BillingProfileSpendingLimit",
@@ -7014,6 +7020,7 @@
         "invoiceDay": {
           "description": "The day of the month when the invoice for the billing profile is generated.",
           "type": "integer",
+          "format": "int64",
           "readOnly": true
         },
         "currency": {
@@ -7047,6 +7054,7 @@
             "Disabled",
             "Warned"
           ],
+          "type": "string",
           "readOnly": true,
           "x-ms-enum": {
             "name": "BillingProfileStatus",
@@ -8205,6 +8213,7 @@
         "quantity": {
           "description": "The quantity purchased in the transaction.",
           "type": "integer",
+          "format": "int64",
           "readOnly": true
         },
         "invoiceSectionId": {
@@ -9000,7 +9009,8 @@
       "x-ms-azure-resource": true,
       "properties": {
         "etag": {
-          "type": "integer"
+          "type": "integer",
+          "format": "int64"
         },
         "id": {
           "type": "string",
@@ -9069,7 +9079,8 @@
       "x-ms-azure-resource": true,
       "properties": {
         "etag": {
-          "type": "integer"
+          "type": "integer",
+          "format": "int64"
         },
         "properties": {
           "x-ms-client-flatten": true,
