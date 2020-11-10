@@ -38,8 +38,8 @@
         "tags": [
           "Settings"
         ],
-        "operationId": "Settings_GetList",
-        "description": "Get settings",
+        "operationId": "Settings_List",
+        "description": "Lists all settings within a single partition.",
         "externalDocs": {
           "url": "https://docs.microsoft.com/en-us/rest/api/costmanagement/"
         },
@@ -75,7 +75,7 @@
           "Settings"
         ],
         "operationId": "Settings_Get",
-        "description": "Gets the setting by setting name.",
+        "description": "Gets the setting by name.",
         "externalDocs": {
           "url": "https://docs.microsoft.com/en-us/rest/api/costmanagement/"
         },
@@ -112,7 +112,7 @@
           "Settings"
         ],
         "operationId": "Settings_CreateOrUpdate",
-        "description": "The operation to create or update a setting. If the setting already exist then the setting will be updated.",
+        "description": "The operation to create or update a setting.",
         "externalDocs": {
           "url": "https://docs.microsoft.com/en-us/rest/api/costmanagement/"
         },
@@ -135,7 +135,7 @@
             "schema": {
               "$ref": "#/definitions/Setting"
             },
-            "description": "Body supplied to the CreateOrUpdate Setting operation."
+            "description": "Body supplied to the CreateOrUpdate setting operation."
           }
         ],
         "responses": {
@@ -1693,7 +1693,7 @@
       }
     },
     "Setting": {
-      "description": "States of Settings",
+      "description": "State of Setting",
       "type": "object",
       "allOf": [
         {
