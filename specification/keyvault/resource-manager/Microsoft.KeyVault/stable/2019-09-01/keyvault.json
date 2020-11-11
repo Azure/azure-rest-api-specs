@@ -413,6 +413,9 @@
             }
           }
         },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
         "x-ms-examples": {
           "List vaults in the specified resource group": {
             "$ref": "./examples/listVaultByResourceGroup.json"
@@ -456,6 +459,9 @@
             }
           }
         },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
         "x-ms-examples": {
           "List vaults in the specified subscription": {
             "$ref": "./examples/listVaultBySubscription.json"
@@ -490,19 +496,10 @@
             "schema": {
               "$ref": "#/definitions/DeletedVaultListResult"
             }
-          },
-          "400": {
-            "description": "Bad request.",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          },
-          "404": {
-            "description": "The specified resource does not exist.",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
           "List deleted vaults in the specified subscription": {
@@ -683,6 +680,9 @@
               "$ref": "#/definitions/ResourceListResult"
             }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
           "List vaults in the specified subscription": {
