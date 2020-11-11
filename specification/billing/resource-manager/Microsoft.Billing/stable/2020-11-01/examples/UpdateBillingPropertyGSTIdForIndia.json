@@ -1,56 +1,52 @@
 {
+  "parameters": {
+    "api-version": "2020-11-01",
+    "subscriptionId": "10000000-0000-0000-0000-000000000000",
     "parameters": {
-        "api-version": "2020-11-01",
-        "subscriptionId": "10000000-0000-0000-0000-000000000000",
-        "parameters": {
-            "properties": {
-                "SubscriptionTaxDetails": [
-                    {
-                        "id": "35PQRST1234F2Z4",
-                        "state": "MH"
-                    }
-                ]
-            }
-        }
-    },
-    "responses": {
-        "200": {
-            "body": {
-                "id": "/subscriptions/10000000-0000-0000-0000-000000000000/providers/Microsoft.Billing/billingProperty/default",
-                "name": "default",
-                "type": "Microsoft.Billing/billingProperty",
-                "properties": {
-                    "billingAccountAgreementType": "MicrosoftOnlineServiceProgram",
-                    "billingAccountType": "Individual",
-                    "billingAccountDisplayName": "My Account",
-                    "billingAccountId": "/providers/Microsoft.Billing/billingAccounts/00000000-0000-0000-0000-000000000000",
-                    "billingAccountSoldToCountry": "US",
-                    "freeServicesBenefitEndDate": "2018-01-01T17:32:28Z",
-                    "accountAdminNotificationEmailAddress": "test@contoso.com",
-                    "isAccountAdmin": true,
-                    "subscriptionServiceUsageAddress": {
-                        "firstName": "FirstName",
-                        "lastName": "LastName",
-                        "middleName": "MiddleName",
-                        "addressLine1": "Adddress line 1",
-                        "addressLine2": "Adddress line 2",
-                        "city": "City",
-                        "region": "State",
-                        "country": "US",
-                        "postalCode": "12345"
-                    },
-                    "subscriptionBillingType": "Free",
-                    "subscriptionBillingTaxDetails": [
-                        {
-                            "id": "35PQRST1234F2Z4",
-                            "state": "MH",
-                            "status": "Valid",
-                            "type": "GSTINID"
-                        }
-                    ],
-                    "subscriptionWorkloadType": "Production"
-                }
-            }
-        }
+      "properties": {
+        "SubscriptionTaxDetails": [{
+          "id": "35PQRST1234F2Z4",
+          "state": "MH"
+        }]
+      }
     }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/10000000-0000-0000-0000-000000000000/providers/Microsoft.Billing/billingProperty/default",
+        "name": "default",
+        "type": "Microsoft.Billing/billingProperty",
+        "properties": {
+          "billingAccountAgreementType": "MicrosoftOnlineServiceProgram",
+          "billingAccountType": "Individual",
+          "billingAccountDisplayName": "My Account",
+          "billingAccountId": "/providers/Microsoft.Billing/billingAccounts/00000000-0000-0000-0000-000000000000",
+          "billingAccountSoldToCountry": "US",
+          "freeServicesBenefitEndDate": "2018-01-01T17:32:28Z",
+          "accountAdminNotificationEmailAddress": "test@contoso.com",
+          "isAccountAdmin": true,
+          "subscriptionServiceUsageAddress": {
+            "firstName": "FirstName",
+            "lastName": "LastName",
+            "middleName": "MiddleName",
+            "addressLine1": "Adddress line 1",
+            "addressLine2": "Adddress line 2",
+            "city": "City",
+            "region": "State",
+            "country": "US",
+            "postalCode": "12345"
+          },
+          "subscriptionBillingType": "Free",
+          "subscriptionBillingTaxDetails": [{
+            "id": "35PQRST1234F2Z4",
+            "state": "MH",
+            "status": "Valid",
+            "type": "GSTINID"
+          }],
+          "subscriptionWorkloadType": "Production"
+        }
+      }
+    }
+  }
 }
