@@ -8925,6 +8925,16 @@
       "type": "object",
       "description": "The encryption configuration for the integration service environment.",
       "properties": {
+        "encryptionKeyReference": {
+          "$ref": "#/definitions/IntegrationServiceEnvironmenEncryptionKeyReference",
+          "description": "The encryption key reference."
+        }
+      }
+    },
+    "IntegrationServiceEnvironmenEncryptionKeyReference": {
+      "type": "object",
+      "description": "The encryption key details for the integration service environment.",
+      "properties": {
         "keyVault": {
           "$ref": "#/definitions/ResourceReference",
           "description": "The key vault reference."
