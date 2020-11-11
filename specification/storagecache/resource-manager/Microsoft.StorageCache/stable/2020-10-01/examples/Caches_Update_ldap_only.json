@@ -62,16 +62,15 @@
           ]
         },
         "directoryServicesSettings": {
-          "activeDirectory": {
-            "primaryDnsIpAddress": "192.0.2.10",
-            "secondaryDnsIpAddress": "192.0.2.11",
-            "smbServerName": "contosoSmb",
-            "domainName": "contosoAd.contoso.local",
-            "domainNetBios": "contosoAd"
-          },
           "usernameDownload": {
             "extendedGroupsEnabled": true,
-            "usernameSource": "AD"
+            "usernameSource": "LDAP",
+            "ldapServer": "192.0.2.12",
+            "ldapBaseDn": "dc=contosoad,dc=contoso,dc=local",
+            "credentials": {
+              "bindDn": "cn=ldapadmin,dc=contosoad,dc=contoso,dc=local",
+              "bindPassword": "ldapPassword123"
+            }
           }
         }
       },
@@ -167,26 +166,18 @@
             ]
           },
           "directoryServicesSettings": {
-            "activeDirectory": {
-              "primaryDnsIpAddress": "192.0.2.10",
-              "secondaryDnsIpAddress": "192.0.2.11",
-              "domainName": "contosoAd.contoso.local",
-              "domainNetBios": "contosoAd",
-              "smbServerName": "contosoSmb",
-              "domainJoined": "Yes"
-            },
             "usernameDownload": {
               "extendedGroupsEnabled": true,
-              "usernameSource": "AD",
+              "usernameSource": "LDAP",
               "groupFileURI": "",
               "userFileURI": "",
-              "ldapServer": "",
-              "ldapBaseDn": "",
+              "ldapServer": "192.0.2.12",
+              "ldapBaseDn": "dc=contosoad,dc=contoso,dc=local",
               "encryptLdapConnection": false,
               "requireValidCertificate": false,
               "autoDownloadCertificate": false,
               "caCertificateURI": "",
-              "usernameDownloaded": "Yes"
+              "usernameDownloaded": "No"
             }
           }
         },
