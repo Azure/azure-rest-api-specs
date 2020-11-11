@@ -271,7 +271,6 @@
           "enum": [
             "Unknown",
             "Active",
-            "Deleted",
             "Disabled",
             "Expired",
             "Transferred",
@@ -746,7 +745,7 @@
       }
     },
     "spendingLimitDetails": {
-      "description": "The details of spending limit policy set on billingProfile.",
+      "description": "The details of spending limit policy set on billing profile.",
       "properties": {
         "amount": {
           "description": "The initial amount for the billing profile.",
@@ -759,12 +758,12 @@
           "readOnly": true
         },
         "endDate": {
-          "description": "The date when this benefit ends.",
+          "description": "The date when this spending limit is no longer in effect.",
           "type": "string",
           "format": "date-time"
         },
         "startDate": {
-          "description": "The date when this benefit starts.",
+          "description": "The date when this spending limit goes into effect.",
           "type": "string",
           "format": "date-time"
         },
@@ -786,8 +785,8 @@
           "enum": [
             "Active",
             "Expired",
-            "LimitReached",
-            "LimitRemoved"
+            "Reached",
+            "Removed"
           ],
           "type": "string",
           "readOnly": true,
