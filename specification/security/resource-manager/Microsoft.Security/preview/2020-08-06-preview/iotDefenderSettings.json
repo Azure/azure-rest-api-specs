@@ -218,6 +218,46 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Security/iotDefenderSettings/default/downloadQuotaData": {
+      "post": {
+        "x-ms-examples": {
+          "Download quota data of the subscription": {
+            "$ref": "./examples/IotDefenderSettings/DownloadQuotaData.json"
+          }
+        },
+        "tags": [
+          "IoT Defender Settings"
+        ],
+        "operationId": "IotDefenderSettings_DownloadQuotaData",
+        "description": "Download devices quota data defined for this subscription",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
+          }
+        ],
+        "produces": [
+          "application/zip"
+        ],
+        "responses": {
+          "200": {
+            "description": "Downloaded file",
+            "schema": {
+              "type": "object",
+              "format": "file"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
+            }
+          }
+        }
+      }
     }
   },
   "definitions": {
