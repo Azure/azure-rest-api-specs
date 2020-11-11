@@ -1,217 +1,214 @@
 {
-    "swagger": "2.0",
-    "info": {
-        "version": "2020-11-01",
-        "title": "BillingManagementClient",
-        "description": "Billing client provides access to billing resources for Azure subscriptions."
-    },
-    "host": "management.azure.com",
-    "schemes": [
-        "https"
-    ],
-    "consumes": [
-        "application/json"
-    ],
-    "produces": [
-        "application/json"
-    ],
-    "paths": {
-        "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingSubscriptions": {
-            "get": {
-              "tags": [
-                "BillingSubscriptions"
-              ],
-              "operationId": "BillingSubscriptions_ListByBillingAccount",
-              "description": "Lists the subscriptions for a billing account. The operation is supported for billing accounts with agreement type Microsoft Customer Agreement or Microsoft Partner Agreement.",
-              "externalDocs": {
-                "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
-              },
-              "x-ms-examples": {
-                "BillingSubscriptionsListByBillingAccount": {
-                  "$ref": "./examples/BillingSubscriptionsListByBillingAccount.json"
-                }
-              },
-              "parameters": [
-                {
-                  "$ref": "#/parameters/billingAccountNameParameter"
-                },
-                {
-                  "$ref": "#/parameters/apiVersionParameter"
-                }
-              ],
-              "responses": {
-                "200": {
-                  "description": "OK. The request has succeeded.",
-                  "schema": {
-                    "$ref": "#/definitions/BillingSubscriptionsListResult"
-                  }
-                },
-                "default": {
-                  "description": "Error response describing why the operation failed.",
-                  "schema": {
-                    "$ref": "#/definitions/ErrorResponse"
-                  }
-                }
-              },
-              "x-ms-pageable": {
-                "nextLinkName": "nextLink"
-              }
+  "swagger": "2.0",
+  "info": {
+    "version": "2020-11-01",
+    "title": "BillingManagementClient",
+    "description": "Billing client provides access to billing resources for Azure subscriptions."
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingSubscriptions": {
+      "get": {
+        "tags": [
+          "BillingSubscriptions"
+        ],
+        "operationId": "BillingSubscriptions_ListByBillingAccount",
+        "description": "Lists the subscriptions for a billing account. The operation is supported for billing accounts with agreement type Microsoft Customer Agreement or Microsoft Partner Agreement.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
+        },
+        "x-ms-examples": {
+          "BillingSubscriptionsListByBillingAccount": {
+            "$ref": "./examples/BillingSubscriptionsListByBillingAccount.json"
+          }
+        },
+        "parameters": [{
+            "$ref": "#/parameters/billingAccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/BillingSubscriptionsListResult"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
-    },
-    "definitions": {
-        "BillingSubscriptionsListResult": {
-            "description": "The list of billing subscriptions.",
-            "properties": {
-              "value": {
-                "description": "The list of billing subscriptions.",
-                "type": "array",
-                "readOnly": true,
-                "items": {
-                  "$ref": "#/definitions/BillingSubscription"
-                }
-              },
-              "nextLink": {
-                "description": "The link (url) to the next page of results.",
-                "type": "string",
-                "readOnly": true
-              }
-            }
-        },
-        "BillingSubscription": {
-            "description": "A billing subscription.",
-            "type": "object",
-            "allOf": [
-              {
-                "$ref": "#/definitions/Resource"
-              }
-            ],
-            "properties": {
-              "properties": {
-                "x-ms-client-flatten": true,
-                "$ref": "#/definitions/BillingSubscriptionProperties",
-                "title": "Billing subscription properties"
-              }
-            }
-        },
-        "BillingSubscriptionProperties": {
-            "description": "The billing properties of a subscription.",
-            "properties": {
-              "displayName": {
-                "description": "The name of the subscription.",
-                "type": "string",
-                "readOnly": true
-              },
-              "subscriptionId": {
-                "description": "The ID of the subscription.",
-                "type": "string",
-                "format": "uuid",
-                "readOnly": true
-              },
-              "subscriptionBillingStatus": {
-                "description": "The current billing status of the subscription.",
-                "type": "string",
-                "enum": [
-                  "Active",
-                  "Inactive",
-                  "Abandoned",
-                  "Deleted",
-                  "Warning"
-                ],
-                "x-ms-enum": {
-                  "name": "BillingSubscriptionStatusType",
-                  "modelAsString": true
-                }
-              },
-              "lastMonthCharges": {
-                "description": "The last month charges.",
-                "readOnly": true,
-                "$ref": "#/definitions/Amount"
-              },
-              "monthToDateCharges": {
-                "description": "The current month to date charges.",
-                "readOnly": true,
-                "$ref": "#/definitions/Amount"
-              },
-              "billingProfileId": {
-                "description": "The ID of the billing profile to which the subscription is billed.",
-                "type": "string",
-                "readOnly": true
-              },
-              "billingProfileDisplayName": {
-                "description": "The name of the billing profile to which the subscription is billed.",
-                "type": "string",
-                "readOnly": true
-              },
-              "costCenter": {
-                "description": "The cost center applied to the subscription.",
-                "type": "string"
-              },
-              "customerId": {
-                "description": "The ID of the customer for whom the subscription was created. The field is applicable only for Microsoft Partner Agreement billing account.",
-                "type": "string",
-                "readOnly": true
-              },
-              "customerDisplayName": {
-                "description": "The name of the customer for whom the subscription was created. The field is applicable only for Microsoft Partner Agreement billing account.",
-                "type": "string",
-                "readOnly": true
-              },
-              "invoiceSectionId": {
-                "description": "The ID of the invoice section to which the subscription is billed.",
-                "type": "string",
-                "readOnly": true
-              },
-              "invoiceSectionDisplayName": {
-                "description": "The name of the invoice section to which the subscription is billed.",
-                "type": "string",
-                "readOnly": true
-              },
-              "reseller": {
-                "description": "Reseller for this subscription.",
-                "readOnly": true,
-                "$ref": "#/definitions/Reseller"
-              },
-              "skuId": {
-                "description": "The sku ID of the Azure plan for the subscription.",
-                "type": "string"
-              },
-              "skuDescription": {
-                "description": "The sku description of the Azure plan for the subscription.",
-                "type": "string",
-                "readOnly": true
-              }
-            }
-        },
-        "ErrorResponse": {
-            "description": "Error response indicates that the service is not able to process the incoming request. The reason is provided in the error message.",
-            "type": "object",
-            "properties": {
-              "error": {
-                "description": "The details of the error.",
-                "$ref": "#/definitions/ErrorDetails"
-              }
-            }
-        },
-        "ErrorDetails": {
-            "description": "The details of the error.",
-            "properties": {
-              "code": {
-                "description": "Error code.",
-                "type": "string",
-                "readOnly": true
-              },
-              "message": {
-                "description": "Error message indicating why the operation failed.",
-                "type": "string",
-                "readOnly": true
-              },
-              "target": {
-                "description": "The target of the particular error.",
-                "type": "string",
-                "readOnly": true
-              }
-            }
-        }
+      }
     }
+  },
+  "definitions": {
+    "BillingSubscriptionsListResult": {
+      "description": "The list of billing subscriptions.",
+      "properties": {
+        "value": {
+          "description": "The list of billing subscriptions.",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/BillingSubscription"
+          }
+        },
+        "nextLink": {
+          "description": "The link (url) to the next page of results.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "BillingSubscription": {
+      "description": "A billing subscription.",
+      "type": "object",
+      "allOf": [{
+        "$ref": "#/definitions/Resource"
+      }],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/BillingSubscriptionProperties",
+          "title": "Billing subscription properties"
+        }
+      }
+    },
+    "BillingSubscriptionProperties": {
+      "description": "The billing properties of a subscription.",
+      "properties": {
+        "displayName": {
+          "description": "The name of the subscription.",
+          "type": "string",
+          "readOnly": true
+        },
+        "subscriptionId": {
+          "description": "The ID of the subscription.",
+          "type": "string",
+          "format": "uuid",
+          "readOnly": true
+        },
+        "subscriptionBillingStatus": {
+          "description": "The current billing status of the subscription.",
+          "type": "string",
+          "enum": [
+            "Active",
+            "Inactive",
+            "Abandoned",
+            "Deleted",
+            "Warning"
+          ],
+          "x-ms-enum": {
+            "name": "BillingSubscriptionStatusType",
+            "modelAsString": true
+          }
+        },
+        "lastMonthCharges": {
+          "description": "The last month charges.",
+          "readOnly": true,
+          "$ref": "#/definitions/Amount"
+        },
+        "monthToDateCharges": {
+          "description": "The current month to date charges.",
+          "readOnly": true,
+          "$ref": "#/definitions/Amount"
+        },
+        "billingProfileId": {
+          "description": "The ID of the billing profile to which the subscription is billed.",
+          "type": "string",
+          "readOnly": true
+        },
+        "billingProfileDisplayName": {
+          "description": "The name of the billing profile to which the subscription is billed.",
+          "type": "string",
+          "readOnly": true
+        },
+        "costCenter": {
+          "description": "The cost center applied to the subscription.",
+          "type": "string"
+        },
+        "customerId": {
+          "description": "The ID of the customer for whom the subscription was created. The field is applicable only for Microsoft Partner Agreement billing account.",
+          "type": "string",
+          "readOnly": true
+        },
+        "customerDisplayName": {
+          "description": "The name of the customer for whom the subscription was created. The field is applicable only for Microsoft Partner Agreement billing account.",
+          "type": "string",
+          "readOnly": true
+        },
+        "invoiceSectionId": {
+          "description": "The ID of the invoice section to which the subscription is billed.",
+          "type": "string",
+          "readOnly": true
+        },
+        "invoiceSectionDisplayName": {
+          "description": "The name of the invoice section to which the subscription is billed.",
+          "type": "string",
+          "readOnly": true
+        },
+        "reseller": {
+          "description": "Reseller for this subscription.",
+          "readOnly": true,
+          "$ref": "#/definitions/Reseller"
+        },
+        "skuId": {
+          "description": "The sku ID of the Azure plan for the subscription.",
+          "type": "string"
+        },
+        "skuDescription": {
+          "description": "The sku description of the Azure plan for the subscription.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "ErrorResponse": {
+      "description": "Error response indicates that the service is not able to process the incoming request. The reason is provided in the error message.",
+      "type": "object",
+      "properties": {
+        "error": {
+          "description": "The details of the error.",
+          "$ref": "#/definitions/ErrorDetails"
+        }
+      }
+    },
+    "ErrorDetails": {
+      "description": "The details of the error.",
+      "properties": {
+        "code": {
+          "description": "Error code.",
+          "type": "string",
+          "readOnly": true
+        },
+        "message": {
+          "description": "Error message indicating why the operation failed.",
+          "type": "string",
+          "readOnly": true
+        },
+        "target": {
+          "description": "The target of the particular error.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    }
+  }
 }
