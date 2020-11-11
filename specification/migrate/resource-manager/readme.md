@@ -68,6 +68,13 @@ To see additional help and options, run:
 
 These are the global settings for the API.
 
+``` yaml
+title: MigrateManagementClient
+description: The Microsoft Azure management API provides create, read, update, and delete functionality for Azure Migrate resources.
+openapi-type: arm
+tag: package-2019-10
+```
+
 ### Tag: package-2018-02
 
 These settings apply only when `--tag=package-2018-02` is specified on the command line.
