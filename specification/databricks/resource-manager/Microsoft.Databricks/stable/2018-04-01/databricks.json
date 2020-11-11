@@ -768,10 +768,21 @@
           "description": "The tenant Id where the Managed Identity is created.",
           "readOnly": true
         },
+        "identity": {
+          "type": "string",
+          "description": "User assigned identity that will be used for Customer Managed Key Encryption while accessing Key Vault."
+        },
         "type": {
           "type": "string",
           "description": "The type of Identity created. It can be either SystemAssigned or UserAssigned.",
-          "readOnly": true
+          "enum": [
+            "SystemAssigned",
+            "UserAssigned"
+          ],
+          "x-ms-enum": {
+            "name": "Type",
+            "modelAsString": true
+          }
         }
       }
     },
