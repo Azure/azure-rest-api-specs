@@ -91,3 +91,6 @@ Note: When running in Swagger PR pipeline, Avocado only report errors with file 
 
 Refer to [Avocado Readme](https://github.com/Azure/avocado/blob/master/README.md) for detailed description of validations and how-to-fix guidance.
 
+## Suppression Process
+
+In case there are validation errors reported against your service that you believe do not apply, we have a suppression process you can follow to permanently remove these reported errors for your specs.  Refer to [Swagger Suppression Process](https://dev.azure.com/azure-sdk/internal/_wiki/wikis/internal.wiki/85/Swagger-Suppression-Process) for detailed guidance. 

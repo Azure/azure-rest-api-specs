@@ -382,6 +382,9 @@
           },
           "Registries_ScheduleRun_WithCustomCredentials": {
             "$ref": "./examples/RegistriesScheduleRun_WithCustomCredentials.json"
+          },
+          "Registries_ScheduleRun_WithLogTemplate": {
+            "$ref": "./examples/RegistriesScheduleRun_WithLogTemplate.json"
           }
         }
       }
@@ -721,11 +724,7 @@
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "name": "taskRunName",
-            "in": "path",
-            "description": "The run request name.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/TaskRunNameParameter"
           }
         ],
         "responses": {
@@ -768,11 +767,7 @@
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "name": "taskRunName",
-            "in": "path",
-            "description": "The name of task run.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/TaskRunNameParameter"
           },
           {
             "name": "taskRun",
@@ -831,11 +826,7 @@
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "name": "taskRunName",
-            "in": "path",
-            "description": "The task run name.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/TaskRunNameParameter"
           }
         ],
         "responses": {
@@ -882,11 +873,7 @@
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "name": "taskRunName",
-            "in": "path",
-            "description": "The task run name.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/TaskRunNameParameter"
           },
           {
             "name": "updateParameters",
@@ -947,11 +934,7 @@
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "name": "taskRunName",
-            "in": "path",
-            "description": "The run request name.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/TaskRunNameParameter"
           }
         ],
         "responses": {
@@ -1174,6 +1157,9 @@
           },
           "Tasks_Create_WithUserIdentities": {
             "$ref": "./examples/ManagedIdentity/TasksCreate_WithUserIdentities.json"
+          },
+          "Tasks_Create_QuickTask": {
+            "$ref": "./examples/TasksCreate_QuickTask.json"
           }
         }
       },
@@ -1289,6 +1275,9 @@
           },
           "Tasks_Update_WithOpaqueCustomCredentials": {
             "$ref": "./examples/TasksUpdate_WithOpaqueCustomCredentials.json"
+          },
+          "Tasks_Update_QuickTask": {
+            "$ref": "./examples/TasksUpdate_QuickTask.json"
           }
         }
       }
@@ -1479,6 +1468,10 @@
         "agentPoolName": {
           "description": "The dedicated agent pool for the run.",
           "type": "string"
+        },
+        "logTemplate": {
+          "description": "The template that describes the repository and tag information for run log artifact.",
+          "type": "string"
         }
       },
       "discriminator": "type"
@@ -1613,6 +1606,11 @@
         "updateTriggerToken": {
           "description": "The update trigger token passed for the Run.",
           "type": "string"
+        },
+        "logArtifact": {
+          "$ref": "#/definitions/ImageDescriptor",
+          "description": "The image description for the log artifact.",
+          "readOnly": true
         },
         "provisioningState": {
           "description": "The provisioning state of a run.",
@@ -1904,6 +1902,10 @@
         "logLink": {
           "description": "The link to logs for a run on a azure container registry.",
           "type": "string"
+        },
+        "logArtifactLink": {
+          "description": "The link to logs in registry for a run on a azure container registry.",
+          "type": "string"
         }
       }
     },
@@ -1912,7 +1914,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/Resource"
+          "$ref": "#/definitions/ProxyResource"
         }
       ],
       "properties": {
@@ -1924,6 +1926,10 @@
           "$ref": "#/definitions/TaskRunProperties",
           "description": "The properties associated with the task run, i.e., request and result of the run",
           "x-ms-client-flatten": true
+        },
+        "location": {
+          "description": "The location of the resource",
+          "type": "string"
         }
       }
     },
@@ -2024,6 +2030,10 @@
           "description": "The properties for updating a task run.",
           "x-ms-client-flatten": true
         },
+        "location": {
+          "description": "The location of the resource",
+          "type": "string"
+        },
         "tags": {
           "description": "The ARM resource tags.",
           "type": "object",
@@ -2103,10 +2113,6 @@
     },
     "TaskProperties": {
       "description": "The properties of a task.",
-      "required": [
-        "platform",
-        "step"
-      ],
       "type": "object",
       "properties": {
         "provisioningState": {
@@ -2175,6 +2181,15 @@
         "credentials": {
           "$ref": "#/definitions/Credentials",
           "description": "The properties that describes a set of credentials that will be used when this run is invoked."
+        },
+        "logTemplate": {
+          "description": "The template that describes the repository and tag information for run log artifact.",
+          "type": "string"
+        },
+        "isSystemTask": {
+          "description": "The value of this property indicates whether the task resource is system task or not.",
+          "default": false,
+          "type": "boolean"
         }
       }
     },
@@ -2622,6 +2637,10 @@
         "credentials": {
           "$ref": "#/definitions/Credentials",
           "description": "The parameters that describes a set of credentials that will be used when this run is invoked."
+        },
+        "logTemplate": {
+          "description": "The template that describes the repository and tag information for run log artifact.",
+          "type": "string"
         }
       }
     },
@@ -3596,6 +3615,17 @@
       "type": "string",
       "maxLength": 20,
       "minLength": 3,
+      "pattern": "^[a-zA-Z0-9-]*$",
+      "x-ms-parameter-location": "method"
+    },
+    "TaskRunNameParameter": {
+      "name": "taskRunName",
+      "in": "path",
+      "description": "The name of the task run.",
+      "required": true,
+      "type": "string",
+      "maxLength": 50,
+      "minLength": 5,
       "pattern": "^[a-zA-Z0-9-]*$",
       "x-ms-parameter-location": "method"
     }

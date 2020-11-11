@@ -3545,13 +3545,13 @@
           "type": "boolean"
         },
         "approvalRequired": {
-          "description": "whether subscription approval is required. If false, new subscriptions will be approved automatically enabling developers to call the product’s APIs immediately after subscribing. If true, administrators must manually approve the subscription before the developer can any of the product’s APIs. Can be present only if subscriptionRequired property is present and has a value of false.",
+          "description": "whether subscription approval is required. If false, new subscriptions will be approved automatically enabling developers to call the product’s APIs immediately after subscribing. If true, administrators must manually approve the subscription before the developer can any of the product’s APIs. Can be present only if subscriptionRequired property is present and has a value of true.",
           "type": "boolean"
         },
         "subscriptionsLimit": {
           "type": "integer",
           "format": "int32",
-          "description": "Whether the number of subscriptions a user can have to this product at the same time. Set to null or omit to allow unlimited per user subscriptions. Can be present only if subscriptionRequired property is present and has a value of false."
+          "description": "Whether the number of subscriptions a user can have to this product at the same time. Set to null or omit to allow unlimited per user subscriptions. Can be present only if subscriptionRequired property is present and has a value of true."
         },
         "state": {
           "type": "string",
@@ -3843,6 +3843,16 @@
           "type": "number",
           "format": "double",
           "description": "Data Transferred in KiloBytes."
+        }
+      },
+      "description": "Quota counter value details."
+    },
+    "QuotaCounterValueUpdateContract": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/QuotaCounterValueContractProperties",
+          "description": "Quota counter value details."
         }
       },
       "description": "Quota counter value details."
@@ -4519,7 +4529,7 @@
         },
         "stateComment": {
           "type": "string",
-          "description": "Optional subscription comment added by an administrator."
+          "description": "Optional subscription comment added by an administrator when the state is changed to the 'rejected'."
         },
         "allowTracing": {
           "type": "boolean",
@@ -4675,7 +4685,7 @@
         },
         "stateComment": {
           "type": "string",
-          "description": "Comments describing subscription state change by the administrator."
+          "description": "Comments describing subscription state change by the administrator when the state is changed to the 'rejected'."
         },
         "allowTracing": {
           "type": "boolean",
@@ -5044,14 +5054,19 @@
         },
         "appType": {
           "type": "string",
-          "description": "Determines the type of application which send the create user request. Default is old publisher portal.",
+          "description": "Determines the type of application which send the create user request. Default is legacy portal.",
           "enum": [
+            "portal",
             "developerPortal"
           ],
           "x-ms-enum": {
             "name": "AppType",
             "modelAsString": true,
             "values": [
+              {
+                "value": "portal",
+                "description": "User create request was sent by legacy developer portal."
+              },
               {
                 "value": "developerPortal",
                 "description": "User create request was sent by new developer portal."
@@ -5555,6 +5570,100 @@
         }
       ],
       "description": "Association entity details."
+    },
+    "ContentTypeCollection": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ContentTypeContract"
+          },
+          "description": "Collection of content types.",
+          "readOnly": true
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Next page link, if any.",
+          "readOnly": true
+        }
+      },
+      "description": "Paged list of content types."
+    },
+    "ContentTypeContract": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ContentTypeContractProperties",
+          "description": "Properties of the content type."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./apimanagement.json#/definitions/Resource"
+        }
+      ],
+      "description": "Content type contract details."
+    },
+    "ContentTypeContractProperties": {
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Content type identifier"
+        },
+        "name": {
+          "type": "string",
+          "description": "Content type name. Must be 1 to 250 characters long."
+        },
+        "description": {
+          "type": "string",
+          "description": "Content type description."
+        },
+        "schema": {
+          "type": "object",
+          "description": "Content type schema."
+        },
+        "version": {
+          "type": "string",
+          "description": "Content type version."
+        }
+      }
+    },
+    "ContentItemCollection": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ContentItemContract"
+          },
+          "description": "Collection of content items.",
+          "readOnly": true
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Next page link, if any.",
+          "readOnly": true
+        }
+      },
+      "description": "Paged list of content items."
+    },
+    "ContentItemContract": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ContentItemContractProperties",
+          "description": "Properties of the content item."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./apimanagement.json#/definitions/Resource"
+        }
+      ],
+      "description": "Content type contract details."
+    },
+    "ContentItemContractProperties": {
+      "properties": {},
+      "additionalProperties": true
     }
   },
   "parameters": {}

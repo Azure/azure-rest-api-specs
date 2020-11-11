@@ -251,7 +251,7 @@
             "in": "query",
             "required": false,
             "type": "string",
-            "description": "The expand expression to apply to the operation."
+            "description": "The expand expression to apply to the operation. Allowed values are 'instanceView'."
           }
         ],
         "responses": {
@@ -4198,21 +4198,21 @@
             "in": "query",
             "required": false,
             "type": "string",
-            "description": "The filter to apply to the operation."
+            "description": "The filter to apply to the operation. Allowed values are 'startswith(instanceView/statuses/code, 'PowerState') eq true', 'properties/latestModelApplied eq true', 'properties/latestModelApplied eq false'."
           },
           {
             "name": "$select",
             "in": "query",
             "required": false,
             "type": "string",
-            "description": "The list parameters."
+            "description": "The list parameters. Allowed values are 'instanceView', 'instanceView/statuses'."
           },
           {
             "name": "$expand",
             "in": "query",
             "required": false,
             "type": "string",
-            "description": "The expand expression to apply to the operation."
+            "description": "The expand expression to apply to the operation. Allowed values are 'instanceView'."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -6230,6 +6230,7 @@
           "type": "object",
           "additionalProperties": {
             "type": "object",
+            "x-ms-client-name": "userAssignedIdentitiesValue",
             "properties": {
               "principalId": {
                 "readOnly": true,
@@ -6816,6 +6817,7 @@
           "type": "object",
           "additionalProperties": {
             "type": "object",
+            "x-ms-client-name": "VirtualMachineScaleSetIdentityUserAssignedIdentitiesValue",
             "properties": {
               "principalId": {
                 "readOnly": true,
