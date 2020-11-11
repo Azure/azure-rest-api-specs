@@ -9554,11 +9554,11 @@
         },
         "enableCrossZoneUpgrade": {
           "type": "boolean",
-          "description": "Enable rolling upgrade across multiple zones during UD walk within the limit of MaxBatchInstanceCount or BatchInstancePercent"
+          "description": "Allow VMSS to ignore AZ boundaries when constructing upgrade batches. Take into consideration the Update Domain and maxBatchInstancePercent to determine the batch size."
         },
         "prioritizeUnhealthyInstances": {
           "type": "boolean",
-          "description": "Enable rolling upgrade to start with the batch which has most unhealthy VMs in percentage. If enableCrossZoneUpgrade is not enabled, the rolling upgrade will start from the most unhealthy availability zone,and within the zone, walk the UD that has the most unhealhty VMs first"
+          "description": "Upgrade all unhealthy virtual machine instances in a scale set before any healthy instances."
         }
       },
       "description": "The configuration parameters used while performing a rolling upgrade."
