@@ -534,7 +534,14 @@
         },
         "isDataAction" : {
           "description": "Whether or not this is a data plane operation",
-          "type": "boolean"
+          "enum": [
+            "true",
+            "false"
+          ],
+          "x-ms-enum": {
+            "name": "isDataAction",
+            "modelAsString": true
+          }
         }
       }
     },
