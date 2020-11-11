@@ -2421,6 +2421,19 @@
       },
       "readOnly": true
     },
+    "StorageQoSPolicyDetails": {
+      "description": "The StorageQoSPolicyDetails definition.",
+      "properties": {
+        "name": {
+          "description": "The name of the policy.",
+          "type": "string"
+        },
+        "id": {
+          "description": "The ID of the QoS policy.",
+          "type": "string"
+        }
+      }
+    },
     "VirtualDisk": {
       "description": "Virtual disk model",
       "type": "object",
@@ -2473,6 +2486,10 @@
         "templateDiskId": {
           "description": "Gets or sets the disk id in the template.",
           "type": "string"
+        },
+        "storageQoSPolicy": {
+          "description": "The QoS policy for the disk.",
+          "$ref": "#/definitions/StorageQoSPolicyDetails"
         },
         "createDiffDisk": {
           "type": "string",
