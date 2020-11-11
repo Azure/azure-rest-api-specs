@@ -34,21 +34,30 @@ These are the global settings for the ContainerServices API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2020-09
+tag: package-2020-11
 ```
 
 
+### Tag: package-2020-11
+
+These settings apply only when `--tag=package-2020-11` is specified on the command line.
+
+```yaml $(tag) == 'package-2020-11'
+input-file:
+  - Microsoft.ContainerService/stable/2020-11-01/managedClusters.json
+```
 ### Tag: package-2020-09
 
 These settings apply only when `--tag=package-2020-09` is specified on the command line.
 
-```yaml $(tag) == 'package-2020-09'
+``` yaml $(tag) == 'package-2020-09'
 input-file:
   - Microsoft.ContainerService/stable/2019-04-30/openShiftManagedClusters.json
   - Microsoft.ContainerService/stable/2017-07-01/containerService.json
   - Microsoft.ContainerService/stable/2019-08-01/location.json
   - Microsoft.ContainerService/stable/2020-09-01/managedClusters.json
 ```
+
 ### Tag: package-2020-07
 
 These settings apply only when `--tag=package-2020-07` is specified on the command line.
@@ -282,6 +291,20 @@ input-file:
 - Microsoft.ContainerService/stable/2017-07-01/containerService.json
 
 ```
+
+### Tag: package-2020-11-01-only
+
+These settings apply only when `--tag=package-2020-11-01-only` is specified on the command line.
+
+``` yaml $(tag) == 'package-2020-11-01-only'
+input-file:
+- Microsoft.ContainerService/stable/2020-11-01/managedClusters.json
+directive:
+  - suppress: DefinitionsPropertiesNamesCamelCase
+    where: $.definitions.ManagedClusterProperties.properties.autoScalerProfile
+    reason: Cluster-autoscaler settings are not camel-cased
+```
+
 ### Tag: package-2020-09-01-only
 
 These settings apply only when `--tag=package-2020-09-01-only` is specified on the command line.
@@ -603,4 +626,3 @@ directive:
 ## AzureResourceSchema
 
 See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
-
