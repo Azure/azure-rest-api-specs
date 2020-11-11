@@ -341,12 +341,100 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Storage/locations/{location}/deletedAccounts/{deletedAccountName}": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Storage/deletedAccounts/{deletedAccountName}": {
       "get": {
         "tags": [
           "DeletedAccounts"
         ],
         "operationId": "DeletedAccounts_Get",
+        "description": "Get properties of specified deleted account resource.",
+        "x-ms-examples": {
+          "DeletedAccountGet": {
+            "$ref": "./examples/DeletedAccountGet.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/DeletedAccountName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK -- properties retrieved and returned successfully for the deleted account.",
+            "schema": {
+              "$ref": "#/definitions/DeletedAccountListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Storage/locations/{location}/deletedAccounts": {
+      "get": {
+        "tags": [
+          "DeletedAccounts"
+        ],
+        "operationId": "DeletedAccounts_ListWithLocation",
+        "description": "Lists deleted accounts under the subscription within a given location.",
+        "x-ms-examples": {
+          "DeletedAccountList": {
+            "$ref": "./examples/DeletedAccountList.json"
+          }
+        },
+        "parameters": [
+          {
+            "name": "location",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The location of the deleted storage account."
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK -- List of deleted accounts was retrieved and returned successfully.",
+            "schema": {
+              "$ref": "#/definitions/DeletedAccountListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Storage/locations/{location}/deletedAccounts/{deletedAccountName}": {
+      "get": {
+        "tags": [
+          "DeletedAccounts"
+        ],
+        "operationId": "DeletedAccounts_GetWithLocation",
         "description": "Get properties of specified deleted account resource.",
         "x-ms-examples": {
           "DeletedAccountGet": {
@@ -375,7 +463,7 @@
           "200": {
             "description": "OK -- properties retrieved and returned successfully for the deleted account.",
             "schema": {
-              "$ref": "#/definitions/DeletedAccount"
+              "$ref": "#/definitions/DeletedAccountListResult"
             }
           },
           "default": {
@@ -384,6 +472,9 @@
               "$ref": "#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
