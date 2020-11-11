@@ -27,6 +27,33 @@ batch:
   - tag: package-2020-06
   - tag: package-2020-07
   - tag: package-2020-09
+  - tag: package-2020-11
+```
+
+### Tag: package-2020-11 and java
+
+These settings apply only when `--tag=package-2020-11` is specified on the command line.
+Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-2020-11' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.containerservice.v2020_11_01
+  output-folder: $(azure-libraries-for-java-folder)/sdk/containerservice/mgmt-v2020_11_01
+regenerate-manager: true
+generate-interface: true
+```
+
+### Tag: package-2020-09 and java
+
+These settings apply only when `--tag=package-2020-09` is specified on the command line.
+Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-2020-09' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.containerservice.v2020_09_01
+  output-folder: $(azure-libraries-for-java-folder)/sdk/containerservice/mgmt-v2020_09_01
+regenerate-manager: true
+generate-interface: true
 ```
 
 ### Tag: package-2020-07 and java
@@ -38,18 +65,6 @@ Please also specify `--azure-libraries-for-java-folder=<path to the root directo
 java:
   namespace: com.microsoft.azure.management.containerservice.v2020_07_01
   output-folder: $(azure-libraries-for-java-folder)/sdk/containerservice/mgmt-v2020_07_01
-regenerate-manager: true
-generate-interface: true
-```
-### Tag: package-2020-09 and java
-
-These settings apply only when `--tag=package-2020-09` is specified on the command line.
-Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-sdk-for-java clone>`.
-
-``` yaml $(tag) == 'package-2020-09' && $(java) && $(multiapi)
-java:
-  namespace: com.microsoft.azure.management.containerservice.v2020_09_01
-  output-folder: $(azure-libraries-for-java-folder)/sdk/containerservice/mgmt-v2020_09_01
 regenerate-manager: true
 generate-interface: true
 ```
