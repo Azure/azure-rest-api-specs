@@ -8699,10 +8699,10 @@
         },
         "securityType": {
           "type": "string",
-          "description": "Specifies the SecurityType of the VM. It is set as SecureBoot for TrustedVMs, and MemoryEncryption for Confidential VMs. <br><br> Default: The SecurityType would not be set for other VMs",
+          "description": "Specifies the SecurityType of the virtual machine. It is set as SecureBoot to enable UefiSettings. <br><br> Default: UefiSettings will not be enabled unless this property is set as SecureBoot.",
           "enum": [
-            "SecureBoot",
-            "MemoryEncryption"
+            "None",
+            "SecureBoot"
           ],
           "x-ms-enum": {
             "name": "SecurityTypes",
