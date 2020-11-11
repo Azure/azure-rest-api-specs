@@ -534,14 +534,7 @@
         },
         "isDataAction" : {
           "description": "Whether or not this is a data plane operation",
-          "enum": [
-            "true",
-            "false"
-          ],
-          "x-ms-enum": {
-            "name": "isDataAction",
-            "modelAsString": true
-          }
+          "$ref": "#/definitions/IsDataAction"
         }
       }
     },
@@ -573,6 +566,18 @@
         }
       }
     },
+    "IsDataAction": {
+      "description": "Whether or not this is a data plane operation",
+      "type": "string",
+      "enum": [
+        "true",
+        "false"
+      ],
+      "x-ms-enum": {
+        "name": "IsDataAction",
+        "modelAsString": true
+      }
+    },    
     "NameAvailability": {
       "description": "Whether or not the name is available.",
       "type": "string",
@@ -632,7 +637,8 @@
           "type": "string"
         },
         "kind": {
-          "description": "The account kind"
+          "description": "The account kind",
+          "type": "string"
         }
       }
     },
