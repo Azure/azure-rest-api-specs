@@ -1,6 +1,6 @@
 {
   "parameters": {
-    "api-version": "2020-05-01",
+    "api-version": "2020-11-01",
     "$expand": "soldTo,billingProfiles,billingProfiles/invoiceSections"
   },
   "responses": {
@@ -8,37 +8,23 @@
       "body": {
         "value": [
           {
-            "id": "/providers/Microsoft.Billing/billingAccounts/00000000-0000-0000-0000-000000000000_00000000-0000-0000-0000-000000000000",
-            "name": "00000000-0000-0000-0000-000000000000_00000000-0000-0000-0000-000000000000",
+            "id": "/providers/Microsoft.Billing/billingAccounts/00000000-0000-0000-0000-000000000000:00000000-0000-0000-0000-000000000000",
+            "name": "00000000-0000-0000-0000-000000000000:00000000-0000-0000-0000-000000000000",
             "type": "Microsoft.Billing/billingAccounts",
             "properties": {
-              "displayName": "Test Account 1",
-              "agreementType": "MicrosoftCustomerAgreement",
               "accountStatus": "Active",
-              "soldTo": {
-                "companyName": "Contoso",
-                "firstName": "Test",
-                "lastName": "User",
-                "addressLine1": "Test Address",
-                "addressLine2": "Test Address",
-                "addressLine3": "Test Address",
-                "city": "City",
-                "postalCode": "00000",
-                "region": "WA",
-                "country": "US",
-                "email": "abc@contoso.com",
-                "phoneNumber": "000-000-0000"
-              },
               "accountType": "Enterprise",
+              "agreementType": "MicrosoftCustomerAgreement",
               "billingProfiles": {
                 "hasMoreResults": true,
                 "value": [
                   {
-                    "id": "/providers/Microsoft.Billing/billingAccounts/00000000-0000-0000-0000-000000000000_00000000-0000-0000-0000-000000000000/billingProfiles/11000000-0000-0000-0000-000000000000",
+                    "id": "/providers/Microsoft.Billing/billingAccounts/00000000-0000-0000-0000-000000000000:00000000-0000-0000-0000-000000000000/billingProfiles/11000000-0000-0000-0000-000000000000",
                     "name": "11000000-0000-0000-0000-000000000000",
                     "type": "Microsoft.Billing/billingAccounts/billingProfiles",
                     "properties": {
                       "displayName": "BillingProfile1",
+                      "billingRelationshipType": "Direct",
                       "billTo": {
                         "companyName": "Contoso",
                         "firstName": "Test",
@@ -72,32 +58,44 @@
                       "status": "Warned",
                       "statusReasonCode": "PastDue",
                       "spendingLimit": "On",
+                      "spendingLimitDetails": [
+                        {
+                          "amount": "200",
+                          "currency": "USD",
+                          "endDate": "2018-01-01T17:32:28Z",
+                          "startDate": "2018-01-01T17:32:28Z",
+                          "type": "FreeAccount",
+                          "spendingLimitStatus": "LimitReached"
+                        }
+                      ],
                       "invoiceSections": {
                         "hasMoreResults": false,
                         "value": [
                           {
-                            "id": "/providers/Microsoft.Billing/billingAccounts/00000000-0000-0000-0000-000000000000_00000000-0000-0000-0000-000000000000/billingProfiles/11000000-0000-0000-0000-000000000000/invoiceSections/invoiceSectionId1",
+                            "id": "/providers/Microsoft.Billing/billingAccounts/00000000-0000-0000-0000-000000000000:00000000-0000-0000-0000-000000000000/billingProfiles/11000000-0000-0000-0000-000000000000/invoiceSections/invoiceSectionId1",
                             "name": "invoiceSectionId1",
                             "type": "Microsoft.Billing/billingAccounts/billingProfiles/invoiceSections",
                             "properties": {
                               "displayName": "invoiceSectionName1",
-                              "tags": {
+                              "labels": {
                                 "pcCode": "A123456",
                                 "costCategory": "Support"
                               },
+                              "state": "Active",
                               "systemId": "9XXX-11XX-XX1-XXXX-XXX"
                             }
                           },
                           {
-                            "id": "/providers/Microsoft.Billing/billingAccounts/00000000-0000-0000-0000-000000000000_00000000-0000-0000-0000-000000000000/billingProfiles/11000000-0000-0000-0000-000000000000/invoiceSections/invoiceSectionId2",
+                            "id": "/providers/Microsoft.Billing/billingAccounts/00000000-0000-0000-0000-000000000000:00000000-0000-0000-0000-000000000000/billingProfiles/11000000-0000-0000-0000-000000000000/invoiceSections/invoiceSectionId2",
                             "name": "invoiceSectionId2",
                             "type": "Microsoft.Billing/billingAccounts/billingProfiles/invoiceSections",
                             "properties": {
                               "displayName": "invoiceSectionName2",
-                              "tags": {
+                              "labels": {
                                 "pcCode": "B223456",
                                 "costCategory": "Finance"
                               },
+                              "state": "Active",
                               "systemId": "9XXX-22XX-XX1-XXXX-XXX"
                             }
                           }
@@ -106,11 +104,12 @@
                     }
                   },
                   {
-                    "id": "/providers/Microsoft.Billing/billingAccounts/00000000-0000-0000-0000-000000000000_00000000-0000-0000-0000-000000000000/billingProfiles/11000000-0000-0000-0000-000000000001",
+                    "id": "/providers/Microsoft.Billing/billingAccounts/00000000-0000-0000-0000-000000000000:00000000-0000-0000-0000-000000000000/billingProfiles/11000000-0000-0000-0000-000000000001",
                     "name": "11000000-0000-0000-0000-000000000001",
                     "type": "Microsoft.Billing/billingAccounts/billingProfiles",
                     "properties": {
                       "displayName": "BillingProfile2",
+                      "billingRelationshipType": "CSPPartner",
                       "billTo": {
                         "companyName": "Contoso",
                         "firstName": "Test",
@@ -147,15 +146,16 @@
                         "hasMoreResults": false,
                         "value": [
                           {
-                            "id": "/providers/Microsoft.Billing/billingAccounts/00000000-0000-0000-0000-000000000000_00000000-0000-0000-0000-000000000000/billingProfiles/11000000-0000-0000-0000-000000000001/invoiceSections/invoiceSectionId11",
+                            "id": "/providers/Microsoft.Billing/billingAccounts/00000000-0000-0000-0000-000000000000:00000000-0000-0000-0000-000000000000/billingProfiles/11000000-0000-0000-0000-000000000001/invoiceSections/invoiceSectionId11",
                             "name": "invoiceSectionId11",
                             "type": "Microsoft.Billing/billingAccounts/billingProfiles/invoiceSections",
                             "properties": {
                               "displayName": "invoiceSectionName11",
-                              "tags": {
+                              "labels": {
                                 "pcCode": "Z223456",
                                 "costCategory": "Marketing"
                               },
+                              "state": "Active",
                               "systemId": "9XXX-33XX-XX1-XXXX-XXX"
                             }
                           }
@@ -165,7 +165,22 @@
                   }
                 ]
               },
-              "hasReadAccess": true
+              "hasReadAccess": true,
+              "displayName": "Test Account 1",
+              "soldTo": {
+                "companyName": "Contoso",
+                "firstName": "Test",
+                "lastName": "User",
+                "addressLine1": "Test Address",
+                "addressLine2": "Test Address",
+                "addressLine3": "Test Address",
+                "city": "City",
+                "postalCode": "00000",
+                "region": "WA",
+                "country": "US",
+                "email": "abc@contoso.com",
+                "phoneNumber": "000-000-0000"
+              }
             }
           },
           {
@@ -173,11 +188,9 @@
             "name": "10000000-0000-0000-0000-000000000001_00000000-0000-0000-0000-000000000000",
             "type": "Microsoft.Billing/billingAccounts",
             "properties": {
-              "displayName": "Test Account 2",
-              "agreementType": "MicrosoftCustomerAgreement",
               "accountStatus": "Active",
-              "soldTo": null,
               "accountType": "Enterprise",
+              "agreementType": "MicrosoftCustomerAgreement",
               "billingProfiles": {
                 "hasMoreResults": true,
                 "value": [
@@ -201,6 +214,7 @@
                         "email": "abc@contoso.com",
                         "phoneNumber": "000-000-0000"
                       },
+                      "billingRelationshipType": "IndirectPartner",
                       "currency": "USD",
                       "enabledAzurePlans": [
                         {
@@ -212,6 +226,11 @@
                           "skuDescription": "Microsoft Azure Plan for DevTest"
                         }
                       ],
+                      "indirectRelationshipInfo": {
+                        "billingAccountName": "20000000-0000-0000-0000-000000000001_00000000-0000-0000-0000-000000000000",
+                        "billingProfileName": "22000000-0000-0000-0000-000000000001",
+                        "displayName": "Customer1"
+                      },
                       "invoiceDay": 5,
                       "invoiceEmailOptIn": true,
                       "poNumber": "ABC12345",
@@ -220,6 +239,10 @@
                       "status": "Warned",
                       "statusReasonCode": "PastDue",
                       "spendingLimit": "On",
+                      "targetClouds": [
+                        "USNat",
+                        "USSec"
+                      ],
                       "invoiceSections": {
                         "hasMoreResults": true,
                         "value": [
@@ -229,11 +252,13 @@
                             "type": "Microsoft.Billing/billingAccounts/billingProfiles/invoiceSections",
                             "properties": {
                               "displayName": "invoiceSectionName3",
-                              "tags": {
+                              "labels": {
                                 "pcCode": "C123456",
                                 "costCategory": "Support"
                               },
-                              "systemId": "9XXX-44XX-XX1-XXXX-XXX"
+                              "state": "Restricted",
+                              "systemId": "9XXX-44XX-XX1-XXXX-XXX",
+                              "targetCloud": "USNat"
                             }
                           },
                           {
@@ -242,11 +267,13 @@
                             "type": "Microsoft.Billing/billingAccounts/billingProfiles/invoiceSections",
                             "properties": {
                               "displayName": "invoiceSectionName4",
-                              "tags": {
+                              "labels": {
                                 "pcCode": "D123456",
                                 "costCategory": "Marketing"
                               },
-                              "systemId": "9XXX-55XX-XX1-XXXX-XXX"
+                              "state": "Restricted",
+                              "systemId": "9XXX-55XX-XX1-XXXX-XXX",
+                              "targetCloud": "USSec"
                             }
                           }
                         ]
@@ -273,6 +300,7 @@
                         "email": "abc@contoso.com",
                         "phoneNumber": "000-000-0000"
                       },
+                      "billingRelationshipType": "IndirectCustomer",
                       "currency": "USD",
                       "enabledAzurePlans": [
                         {
@@ -284,6 +312,11 @@
                           "skuDescription": "Microsoft Azure Plan for DevTest"
                         }
                       ],
+                      "indirectRelationshipInfo": {
+                        "billingAccountName": "30000000-0000-0000-0000-000000000001_00000000-0000-0000-0000-000000000000",
+                        "billingProfileName": "33000000-0000-0000-0000-000000000001",
+                        "displayName": "Partner1"
+                      },
                       "invoiceDay": 5,
                       "invoiceEmailOptIn": true,
                       "poNumber": "ABC12345",
@@ -292,6 +325,9 @@
                       "status": "Warned",
                       "statusReasonCode": "PastDue",
                       "spendingLimit": "On",
+                      "targetClouds": [
+                        "USSec"
+                      ],
                       "invoiceSections": {
                         "hasMoreResults": true,
                         "value": [
@@ -301,10 +337,11 @@
                             "type": "Microsoft.Billing/billingAccounts/billingProfiles/invoiceSections",
                             "properties": {
                               "displayName": "invoiceSectionName5",
-                              "tags": {
+                              "labels": {
                                 "pcCode": "E123456",
                                 "costCategory": "Finance"
                               },
+                              "state": "Active",
                               "systemId": "9XXX-66XX-XX1-XXXX-XXX"
                             }
                           },
@@ -314,11 +351,13 @@
                             "type": "Microsoft.Billing/billingAccounts/billingProfiles/invoiceSections",
                             "properties": {
                               "displayName": "invoiceSectionName6",
-                              "tags": {
+                              "labels": {
                                 "pcCode": "O123456",
                                 "costCategory": "Support"
                               },
-                              "systemId": "9XXX-77XX-XX1-XXXX-XXX"
+                              "state": "Restricted",
+                              "systemId": "9XXX-77XX-XX1-XXXX-XXX",
+                              "targetCloud": "USSec"
                             }
                           }
                         ]
@@ -327,7 +366,9 @@
                   }
                 ]
               },
-              "hasReadAccess": true
+              "displayName": "Test Account 2",
+              "hasReadAccess": true,
+              "soldTo": null
             }
           }
         ]
