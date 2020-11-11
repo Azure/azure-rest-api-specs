@@ -21,7 +21,7 @@ tag: package-2019-10-28-preview
 directive:
   - suppress: ValidFormats
     from: iotcentral.json
-    where: $.definitions.EmailUser.properties.email.format
+    where: $.definitions.EmailUser.allOf[1].properties.email.format
     reason: email format is allowed
 ```
 
