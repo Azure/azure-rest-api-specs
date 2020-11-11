@@ -48,6 +48,6 @@ If there are following updates in the PR, ensure to request an approval from API
 - [ ] Updating API in stable version with Breaking Change Validation errors
 - [ ] Updating API(s) in preview over 1 year
 
-To initiate an evaluation of the breaking change, create a new intake using the [template for breaking changes](https://msazure.visualstudio.com/One/_workitems/create/Scenario?templateId=d1c215ec-5d6a-4cb3-a193-95ddd0a1ba96&ownerId=85bb92fb-21fe-41ca-9309-47f2c5f57515). Addition details on the process and office hours are on the [Breaking change Wiki](https://dev.azure.com/msazure/AzureWiki/_wiki/wikis/AzureWiki.wiki/37684/Breaking-Changes).
+**Action**: to initiate an evaluation of the breaking change, create a new intake using the [template for breaking changes](https://msazure.visualstudio.com/One/_workitems/create/Scenario?templateId=d1c215ec-5d6a-4cb3-a193-95ddd0a1ba96&ownerId=85bb92fb-21fe-41ca-9309-47f2c5f57515). Addition details on the process and office hours are on the [Breaking change Wiki](https://dev.azure.com/msazure/AzureWiki/_wiki/wikis/AzureWiki.wiki/37684/Breaking-Changes).
 
 Please follow the link to find more details on [PR review process](https://aka.ms/SwaggerPRReview).
