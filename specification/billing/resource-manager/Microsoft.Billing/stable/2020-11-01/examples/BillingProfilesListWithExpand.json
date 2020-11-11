@@ -1,6 +1,6 @@
 {
   "parameters": {
-    "api-version": "2020-05-01",
+    "api-version": "2020-11-01",
     "billingAccountName": "{billingAccountName}",
     "$expand": "invoiceSections"
   },
@@ -45,8 +45,18 @@
               "hasReadAccess": true,
               "systemId": "1XXX-11XX-XX1-XXXX-XXX",
               "status": "Warned",
-              "statusReasonCode": "PastDue",
+              "statusReasonCode": "Active",
               "spendingLimit": "On",
+              "spendingLimitDetails": [
+                {
+                  "amount": "200",
+                  "currency": "USD",
+                  "endDate": "2018-01-01T17:32:28Z",
+                  "startDate": "2018-01-01T17:32:28Z",
+                  "type": "FreeAccount",
+                  "spendingLimitStatus": "Active"
+                }
+              ],
               "invoiceSections": {
                 "hasMoreResults": false,
                 "value": [
@@ -105,7 +115,7 @@
               "systemId": "2XXX-22XX-XX1-XXXX-XXX",
               "status": "Warned",
               "statusReasonCode": "PastDue",
-              "spendingLimit": "On",
+              "spendingLimit": "Off",
               "invoiceSections": {
                 "hasMoreResults": false,
                 "value": [

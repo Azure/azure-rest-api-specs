@@ -1,0 +1,42 @@
+{
+    "parameters": {
+      "api-version": "2020-11-01",
+      "$expand": "soldTo"
+    },
+    "responses": {
+      "200": {
+        "body": {
+          "value": [
+            {
+              "id": "/providers/Microsoft.Billing/billingAccounts/00000000-0000-0000-0000-000000000000",
+              "name": "00000000-0000-0000-0000-000000000000",
+              "type": "Microsoft.Billing/billingAccounts",
+              "properties": {
+                "accountStatus": "Active",
+                "accountType": "Individual",
+                "agreementType": "MicrosoftOnlineServicesProgram",                
+                "displayName": "Test Account 1",
+                "hasReadAccess": true,
+                "notificationEmailAddress":"abc@contoso.com",
+                "soldTo": {
+                  "companyName": "Contoso",
+                  "firstName": "Test",
+                  "lastName": "User",
+                  "addressLine1": "Test Address",
+                  "addressLine2": "Test Address",
+                  "addressLine3": "Test Address",
+                  "city": "City",
+                  "postalCode": "00000",
+                  "region": "WA",
+                  "country": "US",
+                  "email": "abc@contoso.com",
+                  "phoneNumber": "000-000-0000"
+                }
+              }
+            }           
+          ]
+        }
+      }
+    }
+  }
+  
