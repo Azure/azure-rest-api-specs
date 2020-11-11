@@ -109,7 +109,6 @@ input-file:
 - Microsoft.EventHub/stable/2017-04-01/AuthorizationRules.json
 - Microsoft.EventHub/stable/2017-04-01/CheckNameAvailability.json
 - Microsoft.EventHub/stable/2017-04-01/consumergroups.json
-- Microsoft.EventHub/stable/2017-04-01/disasterRecoveryConfigs.json
 - Microsoft.EventHub/stable/2017-04-01/operations.json
 - Microsoft.EventHub/stable/2017-04-01/eventhubs.json
 - Microsoft.EventHub/stable/2017-04-01/sku.json

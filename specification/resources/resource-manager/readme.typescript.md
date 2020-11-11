@@ -102,3 +102,47 @@ typescript:
   batch:
     - tag: package-subscriptions-2016-06
 ```
+
+```yaml $(tag)=='package-resources-2019-10' && $(profile)=='profile-hybrid-2020-09-01'
+typescript:
+  azure-arm: true
+  generate-metadata: true
+  package-name: "@azure/arm-resources-profile-hybrid-2020-09-01"
+  output-folder: "$(typescript-sdks-folder)/sdk/resources/arm-resources-profile-hybrid-2020-09-01"
+  clear-output-folder: true
+  batch:
+    - tag: package-resources-2019-10
+```
+
+```yaml $(tag)=='package-policy-2016-12' && $(profile)=='profile-hybrid-2020-09-01'
+typescript:
+  azure-arm: true
+  generate-metadata: true
+  package-name: "@azure/arm-policy-profile-hybrid-2020-09-01"
+  output-folder: "$(typescript-sdks-folder)/sdk/resources/arm-policy-profile-hybrid-2020-09-01"
+  clear-output-folder: true
+  batch:
+    - tag: package-policy-2016-12
+```
+
+```yaml $(tag)=='package-locks-2016-09' && $(profile)=='profile-hybrid-2020-09-01'
+typescript:
+  azure-arm: true
+  generate-metadata: true
+  package-name: "@azure/arm-locks-profile-hybrid-2020-09-01"
+  output-folder: "$(typescript-sdks-folder)/sdk/resources/arm-locks-profile-hybrid-2020-09-01"
+  clear-output-folder: true
+  batch:
+    - tag: package-locks-2016-09
+```
+
+```yaml $(tag)=='package-subscriptions-2016-06' && $(profile)=='profile-hybrid-2020-09-01'
+typescript:
+  azure-arm: true
+  generate-metadata: true
+  package-name: "@azure/arm-subscriptions-profile-hybrid-2020-09-01"
+  output-folder: "$(typescript-sdks-folder)/sdk/subscription/arm-subscriptions-profile-hybrid-2020-09-01"
+  clear-output-folder: true
+  batch:
+    - tag: package-subscriptions-2016-06
+```
