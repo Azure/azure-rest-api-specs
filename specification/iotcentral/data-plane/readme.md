@@ -1,9 +1,9 @@
 # IoT Central - API client generation
 > see https://aka.ms/autorest
-This is the AutoRest configuration file for MonitorClient.
+This is the AutoRest configuration file for Azure IoT Central.
 ---
 ## Getting Started
-To build the SDK for MonitorClient, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
+To build the SDK for Azure IoT Central, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
 > `autorest`
 To see additional help and options, run:
 > `autorest --help`
@@ -14,6 +14,17 @@ These are the global settings for the IoT Central API.
 openapi-type: data-plane
 tag: package-2019-10-28-preview
 ```
+
+## Suppression
+
+``` yaml
+directive:
+  - suppress: ValidFormats
+    from: iotcentral.json
+    where: $.definitions.EmailUser.properties.email.format
+    reason: email format is allowed
+```
+
 ### Tag: package-2019-10-28-preview
 These settings apply only when `--tag=package-2019-10-28-preview` is specified on the command line.
 
