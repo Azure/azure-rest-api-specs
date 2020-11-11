@@ -1,0 +1,40 @@
+{
+  "parameters": {
+    "tenantBaseUrl": "'https://mytest.attest.azure.net'",
+    "api-version": "2018-09-01-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "response_types_supported": [
+          "token",
+          "none"
+        ],
+        "id_token_signing_alg_values_supported": [
+          "RS256"
+        ],
+        "revocation_endpoint": "https://mytest.attest.azure.net/revoke",
+        "jwks_uri": "https://mytest.attest.azure.net/certs",
+        "claims_supported": [
+          "is-debuggable",
+          "sgx-mrsigner",
+          "sgx-mrenclave",
+          "product-id",
+          "svn",
+          "tee",
+          "device_id",
+          "component_0_id",
+          "expected_components"
+        ]
+      }
+    },
+    "400": {
+      "body": {
+        "error": {
+          "code": "400",
+          "message": "error message"
+        }
+      }
+    }
+  }
+}
