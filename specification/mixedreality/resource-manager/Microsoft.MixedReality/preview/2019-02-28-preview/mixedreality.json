@@ -55,7 +55,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/OperationListResult"
+              "$ref": "#/definitions/OperationList"
             }
           },
           "default": {
@@ -534,7 +534,8 @@
         },
         "isDataAction" : {
           "description": "Whether or not this is a data plane operation",
-          "$ref": "#/definitions/IsDataAction"
+          "type": "boolean"
+          }
         }
       }
     },
@@ -566,18 +567,6 @@
         }
       }
     },
-    "IsDataAction": {
-      "description": "Whether or not this is a data plane operation",
-      "type": "string",
-      "enum": [
-        "true",
-        "false"
-      ],
-      "x-ms-enum": {
-        "name": "IsDataAction",
-        "modelAsString": true
-      }
-    },    
     "NameAvailability": {
       "description": "Whether or not the name is available.",
       "type": "string",
@@ -603,12 +592,20 @@
       }
     },
     "OperationList": {
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/OperationListResult"
+      "description": "Result of the request to list Resource Provider operations. It contains a list of operations and a URL link to get the next set of results.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Operation"
+          },
+          "description": "List of operations supported by the Resource Provider."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "URL to get the next set of operation list results if there are any."
         }
-      ],      
-      "description": "Result of the request to list Resource Provider operations. It contains a list of operations and a URL link to get the next set of results."
+      }
     },
     "SpatialAnchorsAccount": {
       "allOf": [
@@ -626,7 +623,7 @@
         },
         "identity": {
           "description" : "The identity associated with this account",
-          "type": "string"
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/Identity"
         }
       }
     },
