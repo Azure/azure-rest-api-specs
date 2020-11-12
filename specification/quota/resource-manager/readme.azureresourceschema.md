@@ -32,4 +32,5 @@ output-folder: $(azureresourceschema-folder)/schemas
 # all the input files in this apiVersion
 input-file:
   - Microsoft.Capacity/preview/2019-07-19/quota.json
+  
 ```
