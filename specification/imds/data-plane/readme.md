@@ -309,6 +309,7 @@ input-file:
        - $.definitions.IdentityTokenResponse.properties.object_id
        - $.definitions.IdentityTokenResponse.properties.msi_res_id
        - $.definitions.IdentityErrorResponse.properties.error_description
+ ```
 
 ---
 # Code Generation
