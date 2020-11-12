@@ -1020,10 +1020,11 @@
         },
         "status": {
           "enum": [
-            "notstarted",
+            "notStarted",
             "running",
             "succeeded",
             "failed",
+            "rejected",
             "cancelled",
             "cancelling"
           ],
@@ -1034,7 +1035,6 @@
         }
       },
       "required": [
-        "name",
         "status",
         "lastUpdateDateTime"
       ],
@@ -1045,11 +1045,11 @@
         "tasks": {
           "properties": {
             "details": {
-              "properties": {
-                "allof": {
-                  "$ref": "#/definitions/TaskState"
+              "allOf": [
+                {
+                "$ref": "#/definitions/TaskState"
                 }
-              },
+              ],
               "type": "object"
             },
             "completed": {
@@ -1078,7 +1078,10 @@
                       "results": {
                         "$ref": "#/definitions/EntitiesResult"
                       }
-                    }
+                    },
+                    "required": [
+                      "results"
+                    ]
                   }
                 ]
               }
@@ -1097,7 +1100,10 @@
                       "results": {
                         "$ref": "#/definitions/PiiResult"
                       }
-                    }
+                    },
+                    "required": [
+                      "results"
+                    ]
                   }
                 ]
               }
@@ -1116,7 +1122,10 @@
                       "results": {
                         "$ref": "#/definitions/KeyPhraseResult"
                       }
-                    }
+                    },
+                    "required": [
+                      "results"
+                    ]
                   }
                 ]
               }
