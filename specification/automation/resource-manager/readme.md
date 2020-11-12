@@ -25,8 +25,20 @@ These are the global settings for the Automation API.
 title: AutomationClient
 description: Automation Client
 openapi-type: arm
-tag: package-2018-06-preview
+tag: package-2018-06
 ```
+
+### Tag: package-2018-06
+
+These settings apply only when `--tag=package-2018-06` is specified on the command line.
+
+``` yaml $(tag) == 'package-2018-06'
+input-file:
+- Microsoft.Automation/stable/2018-06-30/runbook.json
+- Microsoft.Automation/stable/2015-10-31/account.json
+- Microsoft.Automation/preview/2017-05-15-preview/job.json
+```
+
 
 ### Tag: package-2015-10
 
@@ -241,6 +253,7 @@ swagger-to-sdk:
   - repo: azure-resource-manager-schemas
     after_scripts:
       - node sdkauto_afterscript.js automation/resource-manager
+  - repo: azure-cli-extensions
 ```
 
 

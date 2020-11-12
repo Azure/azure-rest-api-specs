@@ -7,6 +7,45 @@ cli:
   cli-name: automation
   package-name: azure-mgmt-automation
   namespace: azure.mgmt.automation
+  cli-directive:
+    - where:
+        group: 'TestJobStreams'
+      hidden: true
+    - where:
+        group: 'TestJob'
+      hidden: true
+    - where:
+        group: 'JobStream'
+      hidden: true
+    - where:
+        group: 'Operations'
+      hidden: true
+    - where:
+        group: 'Statistics'
+      hidden: true
+    - where:
+        group: 'Usages'
+      hidden: true
+    - where:
+        group: 'Keys'
+      hidden: true
+    - where:
+        group: 'RunbookDraft'
+      hidden: true
+    - where:
+        group: 'Runbook'
+        op: 'GetContent'
+      hidden: true
+    - where:
+        group: 'Runbook'
+        op: 'CreateOrUpdate'
+      hidden: true
+    - where:
+        group: 'Job'
+      hidden: true
+    - where:
+        group: 'AutomationAccount'
+      hidden: true
   test-scenario:
     - name: Create or update automation account
     - name: Create job
