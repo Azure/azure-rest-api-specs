@@ -531,6 +531,10 @@ directive:
     where: $.paths
     reason: policy set definition under an extension resource with Microsoft.Management
   - suppress: UniqueResourcePaths
+    from: resources.json
+    where: $.paths
+    reason: route definitions under an extension resource with Microsoft.Management
+  - suppress: UniqueResourcePaths
     from: policyDefinitions.json
     where: $.paths
     reason: policy definition under an extension resource with Microsoft.Management
@@ -677,6 +681,10 @@ directive:
     where: $.definitions.AliasPathMetadata
     from: resources.json
     reason: This was already checked in - not my code
+  - suppress: XmsExamplesRequired
+    where: $.paths
+    from: resources.json
+    reason: Pre-existing lint error. Not related to this version release.
 ```
 
 ---
