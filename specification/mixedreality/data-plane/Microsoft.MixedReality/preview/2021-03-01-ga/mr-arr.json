@@ -1,0 +1,1033 @@
+{
+  "openapi": "3.0.0",
+  "servers": [
+    {
+      "url": "https://remoterendering.westus2.mixedreality.azure.com/",
+      "description": "West US 2 region (westus2)"
+    },
+    {
+      "url": "https://remoterendering.eastus.mixedreality.azure.com/",
+      "description": "East US region (eastus)"
+    },
+    {
+      "url": "https://remoterendering.westeurope.mixedreality.azure.com/",
+      "description": "West Europe region (westeurope)"
+    },
+    {
+      "url": "https://remoterendering.southeastasia.mixedreality.azure.com/",
+      "description": "Southeast Asia  region (southeastasia)"
+    }
+  ],
+  "info": {
+    "version": "1.0.0",
+    "title": "Azure Remote Rendering API",
+    "description": "Describing the [Azure Remote Rendering](https://docs.microsoft.com/azure/remote-rendering/) REST API for rendering sessions and asset conversions. \n\nAll requests to these APIs must be authenticated using the Secure Token Service as described in the [Azure Remote rendering documentation chapter about authentication](https://docs.microsoft.com/en-us/azure/remote-rendering/how-tos/tokens).\n"
+  },
+  "paths": {
+    "/v1/accounts/{account_id}/conversions/create": {
+      "post": {
+        "tags": [
+          "conversion"
+        ],
+        "summary": "Starting a conversion using a model stored in a linked Azure Blob Storage account.",
+        "description": "Starting a conversion using a model stored in an Azure Blob Storage account linked with your Azure Remote Rendering account. Documentation how to link your Azure Remote Rendering account with the Azure Blob Storage account can be found in the [documentation](https://docs.microsoft.com/azure/remote-rendering/how-tos/create-an-account#link-storage-accounts).\n  \nAll files under the folderpath in the input container will be retrieved to perform the conversion.  To cut down on conversion times no other model files etc should be present as children of folderPath - since they will be retrieved but not used.\n",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/account_id"
+          }
+        ],
+        "requestBody": {
+          "description": "Starting a conversion using a model stored in a connected Azure Blob Storage account.",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/conversion_settings"
+              },
+              "examples": {
+                "StorageInputWithFolderPath": {
+                  "description": "Example of using folderpaths to specify which subdirectories of the input model will be copied to perform the conversion and where to upload the output.\nMake sure that the folder given contains all files referenced by the input asset (textures, external geometry ... ). \n\nAll files under the folderpath \"/geometry/sphere/\" in the input container \"inputassets\" will be retrieved to perform the conversion. E.g. the files \"/geometry/sphere/geometry.bin\", \"/geometry/sphere/textures/texture.png\" will be copied. The files \"/geometry/cube.fbx\", \"/llama.fbx\", \"/architecture/house.fbx\" will not be retrieved. \n \n To cut down on conversion times no other model files etc should be present under the folderPath - since they will be retrieved but not used.        \n",
+                  "value": {
+                    "input": {
+                      "storageAccountName": "contosostorage01",
+                      "blobContainerName": "inputassets",
+                      "folderPath": "geometry/sphere",
+                      "inputAssetPath": "sphere.fbx"
+                    },
+                    "output": {
+                      "storageAccountName": "contosostorage01",
+                      "blobContainerName": "outputassets",
+                      "folderPath": "converted/sphere",
+                      "outputAsssetFileName": "convertedsphere.arrAsset"
+                    }
+                  }
+                },
+                "DefaultmodelOutputname": {
+                  "description": "The parameter outputAssetFileName in the output settings is optional. If this parameter is not provided the output asset name will be derived from the input asset given by inputAssetPath by replacing the files suffix with \"arrAsset\".\n\nIn this example on successful conversion a \"sphere.arrAsset\" will be placed in the outputassets container of the contosostorage01\n",
+                  "value": {
+                    "input": {
+                      "storageAccountName": "contosostorage01",
+                      "blobContainerName": "inputassets",
+                      "folderPath": "geometry/sphere",
+                      "inputAssetPath": "sphere.fbx"
+                    },
+                    "output": {
+                      "storageAccountName": "contosostorage01",
+                      "blobContainerName": "outputassets",
+                      "folderPath": "converted/sphere"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "202": {
+            "description": "Request accepted. The response contains the id of the conversion.",
+            "headers": {
+              "Location": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "The location of the created resource."
+              },
+              "MS-CV": {
+                "$ref": "#/components/headers/mscv"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/create_conversion_response"
+                },
+                "example": {
+                  "conversionId": "366fcaf5-d280-45b9-846c-d5035c2d666c"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/create_conversion_error_response"
+                    },
+                    {
+                      "$ref": "#/components/schemas/invalid_request_format_error"
+                    }
+                  ],
+                  "example": {
+                    "error": "Unable to start conversion: Invalid request - the following errors occurred:\\n\\tInvalid input asset path file type - allowed types are: .fbx,.gltf,.glb."
+                  }
+                }
+              }
+            },
+            "headers": {
+              "MS-CV": {
+                "$ref": "#/components/headers/mscv"
+              }
+            }
+          },
+          "429": {
+            "$ref": "#/components/responses/429Throttled"
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/create_conversion_error_response"
+                },
+                "example": {
+                  "error": "Unable to start conversion"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/accounts/{account_id}/conversions/createwithsharedaccesssignature": {
+      "post": {
+        "tags": [
+          "conversion"
+        ],
+        "summary": "Start a new asset conversion using Azure Blob Container Shared Access Signatures for file accesss.",
+        "description": "Start a new asset conversion using Azure Blob Container Shared Access Signatures for file accesss. The steps required to generate a Shared Access Signature (SAS) token is described in the [Azure Remote Rendering documentation](https://docs.microsoft.com/en-us/azure/remote-rendering/how-tos/conversion/blob-storage#retrieve-sas-for-the-storage-containers).\n\nEnsure that the Shared Access Signature is generated for the blob container and not for individual files. In addition to this ensure that the input containerReadListSas has read and list rights and the output containerWriteSas has write rights.\n\nAll files under the folderpath in the input container will be retrieved to perform the conversion.  To cut down on conversion times no other model files etc should be present as children of folderPath - since they will be retrieved but not used.\n",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/account_id"
+          }
+        ],
+        "requestBody": {
+          "description": "Settings of the conversion to be created. As with the conversions/create API the inputAssetPath is used to define which files of the input blob container will be retrieved for the conversion process.",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/conversion_settings_sas"
+              },
+              "example": {
+                "input": {
+                  "storageAccountName": "contosostorage01",
+                  "blobContainerName": "inputassets",
+                  "folderPath": "geometry/sphere",
+                  "inputAssetPath": "sphere.fbx",
+                  "containerReadListSas": "?sv=2019-10-10&st=2020-11-05T17%3A57%3A11Z&se=2020-11-06T17%3A57%3A11Z&sr=c&sp=rl&sig=signatureommited"
+                },
+                "output": {
+                  "storageAccountName": "contosostorage01",
+                  "blobContainerName": "outputassets",
+                  "folderPath": "converted/sphere",
+                  "outputAsssetFileName": "convertedsphere.arrAsset",
+                  "containerWriteSas": "?sv=2019-10-10&st=2020-11-05T17%3A58%3A10Z&se=2020-11-06T17%3A58%3A10Z&sr=c&sp=w&sig=signatureommited"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "202": {
+            "description": "Request accepted. The response contains the id of the conversion.",
+            "headers": {
+              "Location": {
+                "schema": {
+                  "type": "string",
+                  "description": "The location of the created resource."
+                }
+              },
+              "MS-CV": {
+                "$ref": "#/components/headers/mscv"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/create_conversion_response"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/create_conversion_error_response"
+                    },
+                    {
+                      "$ref": "#/components/schemas/invalid_request_format_error"
+                    }
+                  ],
+                  "example": {
+                    "error": "Unable to start conversion: Invalid request - the following errors occured:\\n\\tInvalid input asset path file type - allowed types are: .fbx,.gltf,.glb."
+                  }
+                }
+              }
+            },
+            "headers": {
+              "MS-CV": {
+                "$ref": "#/components/headers/mscv"
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/401Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/403Forbidden"
+          },
+          "429": {
+            "$ref": "#/components/responses/429Throttled"
+          },
+          "500": {
+            "$ref": "#/components/responses/500InternalError"
+          }
+        }
+      }
+    },
+    "/v1/accounts/{account_id}/conversions/{conversion_id}": {
+      "get": {
+        "tags": [
+          "conversion"
+        ],
+        "summary": "Get the status of a previously created asset conversion",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/account_id"
+          },
+          {
+            "$ref": "#/components/parameters/conversion_id"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/conversion"
+                },
+                "example": {
+                  "conversionId": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+                  "status": "Success",
+                  "error": null,
+                  "convertedAsset": {
+                    "storageAccountName": "contosostorage01",
+                    "blobContainerName": "outputassets",
+                    "assetFilePath": "convertedsphere.arrAsset"
+                  }
+                }
+              }
+            },
+            "headers": {
+              "MS-CV": {
+                "$ref": "#/components/headers/mscv"
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/400UserError"
+          },
+          "401": {
+            "$ref": "#/components/responses/401Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/403Forbidden"
+          },
+          "429": {
+            "$ref": "#/components/responses/429Throttled"
+          },
+          "500": {
+            "$ref": "#/components/responses/500InternalError"
+          }
+        }
+      }
+    },
+    "/v1/accounts/{account_id}/conversions": {
+      "get": {
+        "tags": [
+          "conversion"
+        ],
+        "summary": "Get a list of all conversions. Returns a batch of conversions- if more conversions are available the @nextLink property contains the a URL where the next batch of conversions can be requested. This URL will need the same authentication as all calls to the Azure Remote Rendering API.",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/account_id"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "conversions"
+                  ],
+                  "properties": {
+                    "conversions": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/conversion"
+                      }
+                    },
+                    "@nextLink": {
+                      "type": "string",
+                      "description": "If more conversions are available this link with the same authentication header can be used to retrieve further values"
+                    }
+                  }
+                },
+                "example": {
+                  "conversions": [
+                    {
+                      "conversionId": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+                      "status": "Success",
+                      "error": null,
+                      "convertedAsset": {
+                        "storageAccountName": "contosostorage01",
+                        "blobContainerName": "outputassets",
+                        "assetFilePath": "convertedsphere.arrAsset"
+                      }
+                    },
+                    {
+                      "conversionId": "fdcc58c3-e191-4fb7-a91c-fa4d590d6e76",
+                      "status": "Success",
+                      "error": null,
+                      "convertedAsset": {
+                        "storageAccountName": "contosostorage01",
+                        "blobContainerName": "outputassets",
+                        "assetFilePath": "convertedllama.arrAsset"
+                      }
+                    }
+                  ],
+                  "@nextlink": "https://remoterendering.westus2.mixedreality.azure.com/v1/accounts/30ea64bd-100f-4bf0-adc9-29fa45d4880c/conversions?skiptoken=someskiptokenvalue"
+                }
+              }
+            },
+            "headers": {
+              "MS-CV": {
+                "$ref": "#/components/headers/mscv"
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/401Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/403Forbidden"
+          },
+          "429": {
+            "$ref": "#/components/responses/429Throttled"
+          },
+          "500": {
+            "$ref": "#/components/responses/500InternalError"
+          }
+        }
+      }
+    },
+    "/v1/accounts/{account_id}/sessions": {
+      "get": {
+        "tags": [
+          "vm session"
+        ],
+        "summary": "Get a list of all sessions",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/account_id"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - returns a list of session properties",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/sessions_list"
+                }
+              }
+            }
+          },
+          "204": {
+            "description": "204 Options"
+          },
+          "400": {
+            "$ref": "#/components/responses/400UserError"
+          },
+          "401": {
+            "$ref": "#/components/responses/401Unauthorized"
+          },
+          "429": {
+            "$ref": "#/components/responses/429Throttled"
+          },
+          "500": {
+            "$ref": "#/components/responses/500InternalError"
+          }
+        }
+      }
+    },
+    "/v1/accounts/{account_id}/sessions/create": {
+      "post": {
+        "tags": [
+          "vm session"
+        ],
+        "summary": "Create a new VM session",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/account_id"
+          }
+        ],
+        "requestBody": {
+          "$ref": "#/components/requestBodies/session_settings"
+        },
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200Ok"
+          },
+          "202": {
+            "$ref": "#/components/responses/202Accepted"
+          },
+          "400": {
+            "$ref": "#/components/responses/400UserError"
+          },
+          "401": {
+            "$ref": "#/components/responses/401Unauthorized"
+          },
+          "429": {
+            "$ref": "#/components/responses/429Throttled"
+          },
+          "500": {
+            "$ref": "#/components/responses/500InternalError"
+          }
+        }
+      }
+    },
+    "/v1/accounts/{account_id}/sessions/{session_id}": {
+      "patch": {
+        "tags": [
+          "vm session"
+        ],
+        "summary": "Update a particular VM session",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/account_id"
+          },
+          {
+            "$ref": "#/components/parameters/session_id"
+          }
+        ],
+        "requestBody": {
+          "description": "The new session settings",
+          "$ref": "#/components/requestBodies/session_settings"
+        },
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200Ok"
+          },
+          "400": {
+            "$ref": "#/components/responses/400UserError"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "vm session"
+        ],
+        "summary": "Delete a particular VM session",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/account_id"
+          },
+          {
+            "$ref": "#/components/parameters/session_id"
+          }
+        ],
+        "responses": {
+          "204": {
+            "$ref": "#/components/responses/204NoContent"
+          },
+          "400": {
+            "$ref": "#/components/responses/400UserError"
+          },
+          "401": {
+            "$ref": "#/components/responses/401Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/403Forbidden"
+          },
+          "404": {
+            "$ref": "#/components/responses/404NotFound"
+          },
+          "429": {
+            "$ref": "#/components/responses/429Throttled"
+          },
+          "500": {
+            "$ref": "#/components/responses/500InternalError"
+          }
+        }
+      }
+    },
+    "/v1/accounts/{account_id}/sessions/{session_id}/properties": {
+      "get": {
+        "tags": [
+          "vm session"
+        ],
+        "summary": "Get properties of a particular VM session",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/account_id"
+          },
+          {
+            "$ref": "#/components/parameters/session_id"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - returns a session properties object",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/session_properties"
+                }
+              }
+            }
+          },
+          "204": {
+            "$ref": "#/components/responses/204NoContent"
+          },
+          "401": {
+            "$ref": "#/components/responses/401Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/403Forbidden"
+          },
+          "404": {
+            "$ref": "#/components/responses/404NotFound"
+          },
+          "429": {
+            "$ref": "#/components/responses/429Throttled"
+          },
+          "500": {
+            "$ref": "#/components/responses/500InternalError"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "responses": {
+      "200Ok": {
+        "description": "OK"
+      },
+      "202Accepted": {
+        "description": "Accepted",
+        "headers": {
+          "MS-CV": {
+            "$ref": "#/components/headers/mscv"
+          }
+        }
+      },
+      "204NoContent": {
+        "description": "NoContent",
+        "headers": {
+          "MS-CV": {
+            "$ref": "#/components/headers/mscv"
+          }
+        }
+      },
+      "400UserError": {
+        "description": "BadRequest",
+        "headers": {
+          "MS-CV": {
+            "$ref": "#/components/headers/mscv"
+          }
+        }
+      },
+      "401Unauthorized": {
+        "description": "Unauthorized",
+        "headers": {
+          "MS-CV": {
+            "$ref": "#/components/headers/mscv"
+          }
+        }
+      },
+      "403Forbidden": {
+        "description": "Forbidden",
+        "headers": {
+          "MS-CV": {
+            "$ref": "#/components/headers/mscv"
+          }
+        }
+      },
+      "404NotFound": {
+        "description": "The specified resource was not found.",
+        "headers": {
+          "MS-CV": {
+            "$ref": "#/components/headers/mscv"
+          }
+        }
+      },
+      "429Throttled": {
+        "description": "In case the rate limit has been exceeded.",
+        "headers": {
+          "Retry-After": {
+            "description": "The minimum number of seconds to wait before not getting this response anymore.",
+            "schema": {
+              "type": "integer"
+            }
+          },
+          "MS-CV": {
+            "$ref": "#/components/headers/mscv"
+          }
+        }
+      },
+      "500InternalError": {
+        "description": "InternalError",
+        "headers": {
+          "MS-CV": {
+            "$ref": "#/components/headers/mscv"
+          }
+        }
+      }
+    },
+    "headers": {
+      "mscv": {
+        "schema": {
+          "type": "string"
+        },
+        "description": "Microsoft Correlation Vector. Include this value when reporting errors to the Azure Remote Rendering team."
+      }
+    },
+    "parameters": {
+      "account_id": {
+        "in": "path",
+        "name": "account_id",
+        "schema": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "required": true,
+        "description": "the Azure Remote Rendering account id",
+        "example": "30ea64bd-100f-4bf0-adc9-29fa45d4880c"
+      },
+      "conversion_id": {
+        "in": "path",
+        "name": "conversion_id",
+        "schema": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "required": true,
+        "description": "the conversion id",
+        "example": "9e3b420e-393d-4863-815d-37c0a9a32d0d"
+      },
+      "session_id": {
+        "in": "path",
+        "name": "session_id",
+        "example": "366fcaf5-d280-45b9-846c-d5035c2d666c",
+        "schema": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "required": true,
+        "description": "guid"
+      }
+    },
+    "schemas": {
+      "session_status": {
+        "type": "string",
+        "enum": [
+          "None",
+          "Error",
+          "Expired",
+          "Starting",
+          "Ready",
+          "Stopped"
+        ]
+      },
+      "session_settings": {
+        "type": "object",
+        "properties": {
+          "size": {
+            "type": "string",
+            "enum": [
+              "Standard",
+              "Premium"
+            ],
+            "example": "Standard"
+          },
+          "maxLeaseTime": {
+            "type": "string",
+            "example": "01:00:00"
+          }
+        }
+      },
+      "session_properties": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string",
+            "description": "In case 'sessionStatus' is in error state, this string carries an additional error message",
+            "example": null
+          },
+          "sessionElapsedTime": {
+            "type": "string",
+            "description": "Amount of time the session is or has been in ready state",
+            "example": "01:00:00"
+          },
+          "sessionHostname": {
+            "type": "string",
+            "example": "d4cefb7b-10b9-4631-934d-67445ffa9126.remoterenderingvm.westus2.mixedreality.azure.com"
+          },
+          "sessionId": {
+            "type": "string",
+            "example": "366fcaf5-d280-45b9-846c-d5035c2d666c"
+          },
+          "sessionMaxLeaseTime": {
+            "type": "string",
+            "example": "01:00:00",
+            "maximum": "1.00:00:00"
+          },
+          "sessionSize": {
+            "type": "string",
+            "enum": [
+              "Standard",
+              "Premium"
+            ],
+            "example": "Standard"
+          },
+          "sessionStatus": {
+            "$ref": "#/components/schemas/session_status",
+            "example": "Ready"
+          },
+          "teraflops": {
+            "type": "number",
+            "format": "float",
+            "example": 10.6
+          },
+          "handshakePort": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 65535,
+            "example": 50051
+          },
+          "arrInspectorPort": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 65535,
+            "example": 50052
+          }
+        }
+      },
+      "sessions_list": {
+        "type": "object",
+        "properties": {
+          "sessions": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/session_properties"
+            }
+          }
+        }
+      },
+      "conversion_input_settings": {
+        "type": "object",
+        "properties": {
+          "storageAccountName": {
+            "type": "string"
+          },
+          "blobContainerName": {
+            "type": "string"
+          },
+          "folderPath": {
+            "type": "string"
+          },
+          "inputAssetPath": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "storageAccountName",
+          "blobContainerName",
+          "inputAssetPath"
+        ]
+      },
+      "conversion_output_settings": {
+        "type": "object",
+        "properties": {
+          "storageAccountName": {
+            "type": "string"
+          },
+          "blobContainerName": {
+            "type": "string"
+          },
+          "folderPath": {
+            "type": "string"
+          },
+          "outputAssetFilename": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "storageAccountName",
+          "blobContainerName"
+        ]
+      },
+      "conversion_input_settings_sas": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/conversion_input_settings"
+          },
+          {
+            "type": "object",
+            "required": [
+              "containerReadListSas"
+            ],
+            "properties": {
+              "containerReadListSas": {
+                "type": "string"
+              }
+            }
+          }
+        ]
+      },
+      "conversion_output_settings_sas": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/conversion_output_settings"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "containerWriteSas": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "containerWriteSas"
+            ]
+          }
+        ]
+      },
+      "conversion_settings": {
+        "description": "Describes the input and output location",
+        "type": "object",
+        "properties": {
+          "input": {
+            "$ref": "#/components/schemas/conversion_input_settings"
+          },
+          "output": {
+            "$ref": "#/components/schemas/conversion_output_settings"
+          }
+        },
+        "required": [
+          "input",
+          "output"
+        ]
+      },
+      "conversion_settings_sas": {
+        "type": "object",
+        "properties": {
+          "input": {
+            "$ref": "#/components/schemas/conversion_input_settings_sas"
+          },
+          "output": {
+            "$ref": "#/components/schemas/conversion_output_settings_sas"
+          }
+        },
+        "required": [
+          "input",
+          "output"
+        ]
+      },
+      "conversion_status": {
+        "type": "string",
+        "enum": [
+          "UnknownError",
+          "NotFound",
+          "Created",
+          "Running",
+          "Aborted",
+          "Failure",
+          "Success"
+        ]
+      },
+      "create_conversion_response": {
+        "type": "object",
+        "properties": {
+          "conversionId": {
+            "type": "string",
+            "format": "uuid"
+          }
+        }
+      },
+      "create_conversion_error_response": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string",
+            "description": "a description why the request was rejected"
+          }
+        }
+      },
+      "invalid_request_format_error": {
+        "type": "object",
+        "properties": {
+          "errors": {
+            "type": "object",
+            "description": "Decription of individual field errors"
+          },
+          "type": {
+            "type": "string",
+            "description": "a description of the type of error which occured"
+          },
+          "title": {
+            "type": "string",
+            "description": "a title for the error"
+          },
+          "status": {
+            "type": "integer",
+            "description": "the HTTP status code"
+          },
+          "traceId": {
+            "type": "string"
+          }
+        }
+      },
+      "conversion": {
+        "type": "object",
+        "required": [
+          "conversionId",
+          "status",
+          "error"
+        ],
+        "properties": {
+          "conversionId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "status": {
+            "$ref": "#/components/schemas/conversion_status"
+          },
+          "error": {
+            "type": "string",
+            "nullable": true
+          },
+          "convertedAsset": {
+            "description": "Azure Storage location of the converted asset on successful conversion",
+            "type": "object",
+            "required": [
+              "storageAccountName",
+              "blobContainerName",
+              "assetFilePath"
+            ],
+            "properties": {
+              "storageAccountName": {
+                "type": "string"
+              },
+              "blobContainerName": {
+                "type": "string"
+              },
+              "assetFilePath": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    },
+    "requestBodies": {
+      "session_settings": {
+        "description": "Settings of the session to be created",
+        "required": true,
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/session_settings"
+            }
+          }
+        }
+      }
+    },
+    "securitySchemes": {
+      "MrcBearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      }
+    }
+  },
+  "security": [
+    {
+      "MrcBearerAuth": [
+
+      ]
+    }
+  ]
+}
