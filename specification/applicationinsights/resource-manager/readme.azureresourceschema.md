@@ -21,6 +21,17 @@ batch:
 
 Please also specify `--azureresourceschema-folder=<path to the root directory of your azure-resource-manager-schemas clone>`.
 
+### Tag: schema-insights-2020-10-26-preview and azureresourceschema
+
+``` yaml $(tag) == 'schema-insights-2020-10-26-preview' && $(azureresourceschema)
+output-folder: $(azureresourceschema-folder)/schemas
+
+# all the input files in this apiVersion
+input-file:
+  - Microsoft.Insights/preview/2020-10-26-preview/diagnosticServicesToken_API.json
+
+```
+
 ### Tag: schema-insights-2020-06-02-preview and azureresourceschema
 
 ``` yaml $(tag) == 'schema-insights-2020-06-02-preview' && $(azureresourceschema)
