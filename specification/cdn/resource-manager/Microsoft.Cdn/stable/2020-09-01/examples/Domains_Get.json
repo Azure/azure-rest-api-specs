@@ -1,0 +1,40 @@
+{
+    "parameters": {
+      "api-version": "2020-09-01",
+      "subscriptionId": "subid",
+      "resourceGroupName": "RG",
+      "profileName": "profile1",
+      "domainName": "domain1"
+    },
+    "responses": {
+      "200": {        
+        "name": "domain1",
+        "id": "/subscriptions/subid/resourcegroups/RG/providers/Microsoft.Cdn/profiles/profile1/domains/domain1",
+        "type": "Microsoft.Cdn/profiles/domains",
+        "tags": {},
+        "location": "CentralUs",
+        "properties": {
+          "hostName": "www.someDomain.net",
+          "resourceState": "Active",
+          "domainProvisioningState": "Enabled",
+          "domainProvisioningSubstate": "DomainControlValidationRequestApproved",
+          "customHttpsProvisioningState": "Enabled",
+          "customHttpsProvisioningSubstate": "CertificateDeployed",               
+          "sslEnabled": true,
+          "ipv4Only": false,
+          "ownershipIdentifier": "identifier1",
+          "azureDnsZone": {
+              "id": "/subscriptions/subid/resourceGroups/RG/providers/Microsoft.Network/dnsZones/{zoneName}"
+            },
+          "domainHttps": {
+              "certificateSource": "Cdn",
+              "protocolType": "ServerNameIndication",
+              "cipherSuites" : "RSA",
+              "MinimumTLSVersion": "TLS12",
+              "autoRedirectToHttps": true
+            } 
+        }
+      }
+    }
+  }
+  
