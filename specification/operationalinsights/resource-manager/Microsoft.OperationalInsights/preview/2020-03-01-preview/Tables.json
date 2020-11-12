@@ -186,7 +186,24 @@
           "minimum": 30,
           "maximum": 730,
           "description": "The data table data retention in days, between 30 and 730. Setting this property to null will default to the workspace retention."
-        }
+        },
+        "IsTroubleshootingAllowed" : {          
+          "readOnly": true,
+          "type": "bool",
+          "description": "Whether the table is capable of being IsTroubleshootingEnabled."
+        },
+        "IsTroubleshootingEnabled" : {
+          "default": null,
+          "required": false,
+          "type": "bool",
+          "description": "Whether the table is in the state of IsTroubleshootingEnabled."
+        },
+        "IsTroubleshootingEnabledLastActivation" : {  
+          "default": null,
+          "readOnly": true,      
+          "type": "string",
+          "format": "date-time",
+          "description": "Last enabled time of IsTroubleshootingEnabled."}
       },
       "description": "Table properties."
     },
