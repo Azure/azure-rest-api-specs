@@ -6892,6 +6892,87 @@
           "description": "The wait time to get a response from SharePoint Online. Default value is 5 minutes (00:05:00). Type: string (or Expression with resultType string), pattern: ((\\d+)\\.)?(\\d\\d):(60|([0-5][0-9])):(60|([0-5][0-9]))."
         }
       }
+    },
+    "SqlPartitionOption": {
+      "description": "The partition mechanism that will be used for Sql read in parallel.",
+      "type": "string",
+      "enum": [
+        "None",
+        "PhysicalPartitionsOfTable",
+        "DynamicRange"
+      ],
+      "x-ms-enum": {
+        "name": "SqlPartitionOption",
+        "modelAsString": true
+      }
+    },
+    "SapHanaPartitionOption": {
+      "description": "The partition mechanism that will be used for SAP HANA read in parallel.",
+      "type": "string",
+      "enum": [
+        "None",
+        "PhysicalPartitionsOfTable",
+        "SapHanaDynamicRange"
+      ],
+      "x-ms-enum": {
+        "name": "SapHanaPartitionOption",
+        "modelAsString": true
+      }
+    },
+    "SapTablePartitionOption": {
+      "description": "The partition mechanism that will be used for SAP table read in parallel.",
+      "type": "string",
+      "enum": [
+        "None",
+        "PartitionOnInt",
+        "PartitionOnCalendarYear",
+        "PartitionOnCalendarMonth",
+        "PartitionOnCalendarDate",
+        "PartitionOnTime"
+      ],
+      "x-ms-enum": {
+        "name": "SapTablePartitionOption",
+        "modelAsString": true
+      }
+    },
+    "OraclePartitionOption": {
+      "description": "The partition mechanism that will be used for Oracle read in parallel.",
+      "type": "string",
+      "enum": [
+        "None",
+        "PhysicalPartitionsOfTable",
+        "DynamicRange"
+      ],
+      "x-ms-enum": {
+        "name": "OraclePartitionOption",
+        "modelAsString": true
+      }
+    },
+    "TeradataPartitionOption": {
+      "description": "The partition mechanism that will be used for teradata read in parallel.",
+      "type": "string",
+      "enum": [
+        "None",
+        "Hash",
+        "DynamicRange"
+      ],
+      "x-ms-enum": {
+        "name": "TeradataPartitionOption",
+        "modelAsString": true
+      }
+    },
+    "NetezzaPartitionOption": {
+      "description": "The partition mechanism that will be used for Netezza read in parallel.",
+      "type": "string",
+      "enum": [
+        "None",
+        "DataSlice",
+        "DynamicRange"
+      ],
+      "x-ms-enum": {
+        "name": "NetezzaPartitionOption",
+        "modelAsString": true
+      }
     }
   }
 }
