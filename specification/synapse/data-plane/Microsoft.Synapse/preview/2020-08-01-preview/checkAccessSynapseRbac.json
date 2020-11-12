@@ -132,14 +132,14 @@
         "subject"
       ],
       "properties": {
-        "subject":{
+        "subject": {
           "description": "Subject details",
           "type": "object",
           "$ref": "#/definitions/SubjectInfo"
         },
         "actions": {
           "description": "List of actions.",
-          "type": "array",          
+          "type": "array",
           "items": {
             "$ref": "#/definitions/Action"
           }
@@ -181,20 +181,20 @@
       "required": [
         "principalId"
       ],
-      "properties":{
-          "principalId": {
-              "description" : "Principal Id",
-              "format": "uuid",
-              "type": "string"
-          },
-          "groupIds": {
-              "description" : "List of group Ids that the principalId is part of.",
-              "type": "array",
-              "items": {
-                  "format": "uuid",
-                  "type": "string"
-              }
+      "properties": {
+        "principalId": {
+          "description": "Principal Id",
+          "format": "uuid",
+          "type": "string"
+        },
+        "groupIds": {
+          "description": "List of group Ids that the principalId is part of.",
+          "type": "array",
+          "items": {
+            "format": "uuid",
+            "type": "string"
           }
+        }
       }
     },
     "CheckAccessDecision": {
