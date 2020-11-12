@@ -36,7 +36,7 @@ These settings apply only when `--tag=package-2020-10-25` is specified on the co
 ``` yaml $(tag) == 'package-2020-10-25'
 input-file:
   - Microsoft.Capacity/stable/2020-10-25/quota.json
-tag: package-2020-10-preview
+tag: package-2020-10-25
 ```
 
 ### Tag: package-preview-2019-07-19

@@ -37,7 +37,7 @@ These settings apply only when `--tag=package-2020-10-25` is specified on the co
 input-file:
   - Microsoft.Capacity/stable/2017-11-01/reservations.json
   - Microsoft.Capacity/stable/2020-10-25/quota.json
-tag: package-2020-10-preview
+tag: package-2020-10-25
 ```
 
 ### Tag: package-2020-10-preview
