@@ -120,11 +120,11 @@ These settings apply only when `--tag=package-2019-11 --python` is specified on 
 Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
 
 ``` yaml $(tag) == 'package-2019-11'
-namespace: $(python-base-namespace).v2019-11
-output-folder: $(python-sdks-folder)/$(python-base-folder)/v2019-11
+namespace: $(python-base-namespace).v2019_11
+output-folder: $(python-sdks-folder)/$(python-base-folder)/v2019_11
 python:
-  namespace: $(python-base-namespace).v2019-11
-  output-folder: $(python-sdks-folder)/$(python-base-folder)/v2019-11
+  namespace: $(python-base-namespace).v2019_11
+  output-folder: $(python-sdks-folder)/$(python-base-folder)/v2019_11
 ```
 
 ### Tag: package-2019-11-01-preview-only and python
