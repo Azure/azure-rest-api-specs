@@ -21,13 +21,13 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Communication/CommunicationServices/{communicationServiceName}/eventgridfilters/{eventGridFilterName}": {
       "parameters": [
         {
-          "$ref": "CommunicationService.json#/parameters/ApiVersionParameter"
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
         },
         {
-          "$ref": "CommunicationService.json#/parameters/SubscriptionIdParameter"
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
         },
         {
-          "$ref": "CommunicationService.json#/parameters/ResourceGroupParameter"
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
         },
         {
           "$ref": "CommunicationService.json#/parameters/CommunicationServiceName"
@@ -62,7 +62,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "CommunicationService.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -88,7 +88,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "CommunicationService.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -126,7 +126,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "CommunicationService.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -156,11 +156,14 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "CommunicationService.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
         "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
         "x-ms-examples": {
           "Delete resource": {
             "$ref": "./examples/eventGridFilterDelete.json"
@@ -171,13 +174,13 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Communication/CommunicationServices/{communicationServiceName}/eventgridfilters": {
       "parameters": [
         {
-          "$ref": "CommunicationService.json#/parameters/ApiVersionParameter"
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
         },
         {
-          "$ref": "CommunicationService.json#/parameters/SubscriptionIdParameter"
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
         },
         {
-          "$ref": "CommunicationService.json#/parameters/ResourceGroupParameter"
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
         },
         {
           "$ref": "CommunicationService.json#/parameters/CommunicationServiceName"
@@ -198,7 +201,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "CommunicationService.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -220,7 +223,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "CommunicationService.json#/definitions/Resource"
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/Resource"
         }
       ],
       "properties": {
@@ -277,23 +280,23 @@
           "properties": {
             "clientPrincipalId": {
               "description": "The client principal ID",
-              "type":"string"
+              "type": "string"
             },
             "clientObjectId": {
               "description": "The client object ID",
-              "type":"string"
+              "type": "string"
             },
             "clientTenantId": {
               "description": "The client tenant ID",
-              "type":"string"
+              "type": "string"
             },
             "clientApplicationId": {
               "description": "The client application ID",
-              "type":"string"
+              "type": "string"
             },
             "clientAuthorizationSource": {
               "description": "The client authorization source",
-              "type":"string"
+              "type": "string"
             }
           }
         }
