@@ -88,8 +88,13 @@ input-file:
 
 These settings apply only when `--tag=package-2020-04-preview` is specified on the command line.
 
-``` yaml $(tag) == 'package-2020-04-01-preview-only'
+``` yaml $(tag) == 'package-2020-04-preview'
 input-file:
+- Microsoft.Authorization/preview/2015-06-01/authorization-ClassicAdminCalls.json
+- Microsoft.Authorization/stable/2015-07-01/authorization-ElevateAccessCalls.json
+- Microsoft.Authorization/preview/2018-01-01-preview/authorization-ProviderOperationsCalls.json
+- Microsoft.Authorization/preview/2018-01-01-preview/authorization-RoleDefinitionsCalls.json
+- Microsoft.Authorization/preview/2018-07-01-preview/authorization-DenyAssignmentGetCalls.json
 - Microsoft.Authorization/preview/2020-04-01-preview/authorization-RoleAssignmentsCalls.json
 ```
 
