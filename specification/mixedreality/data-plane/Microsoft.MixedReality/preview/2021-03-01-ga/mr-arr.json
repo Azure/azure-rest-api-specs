@@ -38,7 +38,7 @@
                   {
                     "conversionId": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
                     "convertedAsset": {
-                      "assetFilePath": "convertedsphere.arrAsset",
+                      "assetFilePath": "converted_sphere.arrAsset",
                       "blobContainerName": "outputassets",
                       "storageAccountName": "contosostorage01"
                     },
@@ -48,7 +48,7 @@
                   {
                     "conversionId": "fdcc58c3-e191-4fb7-a91c-fa4d590d6e76",
                     "convertedAsset": {
-                      "assetFilePath": "convertedllama.arrAsset",
+                      "assetFilePath": "converted_box.arrAsset",
                       "blobContainerName": "outputassets",
                       "storageAccountName": "contosostorage01"
                     },
@@ -282,7 +282,7 @@
             },
             "schema": {
               "example": {
-                "error": "Unable to start conversion: Invalid request - the following errors occured:\\n\\tInvalid input asset path file type - allowed types are: .fbx,.gltf,.glb."
+                "error": "Unable to start conversion: Invalid request - the following errors occurred:\\n\\tInvalid input asset path file type - allowed types are: .fbx,.gltf,.glb."
               }
             }
           },
@@ -330,8 +330,8 @@
         "tags": [
           "conversion"
         ],
-        "description": "Start a new asset conversion using Azure Blob Container Shared Access Signatures for file accesss. The steps required to generate a Shared Access Signature (SAS) token is described in the [Azure Remote Rendering documentation](https://docs.microsoft.com/en-us/azure/remote-rendering/how-tos/conversion/blob-storage#retrieve-sas-for-the-storage-containers).\n\nEnsure that the Shared Access Signature is generated for the blob container and not for individual files. In addition to this ensure that the input containerReadListSas has read and list rights and the output containerWriteSas has write rights.\n\nAll files under the folderpath in the input container will be retrieved to perform the conversion.  To cut down on conversion times no other model files etc should be present as children of folderPath - since they will be retrieved but not used.\n",
-        "summary": "Start a new asset conversion using Azure Blob Container Shared Access Signatures for file accesss."
+        "description": "Start a new asset conversion using Azure Blob Container Shared Access Signatures for file access. The steps required to generate a Shared Access Signature (SAS) token is described in the [Azure Remote Rendering documentation](https://docs.microsoft.com/en-us/azure/remote-rendering/how-tos/conversion/blob-storage#retrieve-sas-for-the-storage-containers).\n\nEnsure that the Shared Access Signature is generated for the blob container and not for individual files. In addition to this ensure that the input containerReadListSas has read and list rights and the output containerWriteSas has write rights.\n\nAll files under the folderpath in the input container will be retrieved to perform the conversion.  To cut down on conversion times no other model files etc should be present as children of folderPath - since they will be retrieved but not used.\n",
+        "summary": "Start a new asset conversion using Azure Blob Container Shared Access Signatures for file access."
       }
     },
     "/v1/accounts/{account_id}/conversions/{conversion_id}": {
@@ -1036,7 +1036,7 @@
     "invalid_request_format_error": {
       "properties": {
         "errors": {
-          "description": "Decription of individual field errors",
+          "description": "Description of individual field errors",
           "type": "object"
         },
         "status": {
@@ -1051,7 +1051,7 @@
           "type": "string"
         },
         "type": {
-          "description": "a description of the type of error which occured",
+          "description": "a description of the type of error which occurred",
           "type": "string"
         }
       },
