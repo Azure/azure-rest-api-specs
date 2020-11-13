@@ -25,19 +25,19 @@ directive:
     reason: email format is allowed
   - suppress: LongRunningOperationsWithLongRunningExtension
     from: iotcentral.json
-    where: $.paths[\\"/devices/{device_id}/components/{component_name}/properties\\"].put
+    where: $.paths["/devices/{device_id}/components/{component_name}/properties"].put
     reason: Long running due to device response time, but the API can't implement a standard pattern around
   - suppress: LongRunningOperationsWithLongRunningExtension
     from: iotcentral.json
-    where: $.paths[\\"/devices/{device_id}/modules/{module_name}/components/{component_name}/properties\\"].put
+    where: $.paths["/devices/{device_id}/modules/{module_name}/components/{component_name}/properties"].put
     reason: Long running due to device response time, but the API can't implement a standard pattern around
   - suppress: LongRunningOperationsWithLongRunningExtension
     from: iotcentral.json
-    where: $.paths[\\"/devices/{device_id}/modules/{module_name}/properties\\"].put
+    where: $.paths["/devices/{device_id}/modules/{module_name}/properties"].put
     reason: Long running due to device response time, but the API can't implement a standard pattern around
   - suppress: LongRunningOperationsWithLongRunningExtension
     from: iotcentral.json
-    where: $.paths[\\"/devices/{device_id}/properties\\"].put
+    where: $.paths["/devices/{device_id}/properties"].put
     reason: Long running due to device response time, but the API can't implement a standard pattern around
     
 ```
