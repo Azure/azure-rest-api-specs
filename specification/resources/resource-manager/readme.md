@@ -61,7 +61,7 @@ tag: package-deploymentscripts-2020-10
 ```
 
 ``` yaml $(package-templatespecs)
-tag: package-templatespecs-2019-06-preview
+tag: package-preview-2020-08
 ```
 
 ### Tag: package-resources-2020-10
