@@ -201,6 +201,41 @@
             "$ref": "./examples/UpdatePrivateStoreOffer.json"
           }
         }
+      },
+      "post": {
+        "tags": [
+          "PrivateStores"
+        ],
+        "operationId": "PrivateStoreOffer_Post",
+        "description": "Delete Private store offer. This is a workaround.",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "payload",
+            "schema": {
+              "$ref": "#/definitions/PrivateStoreOperation"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Operation succeeded"
+          },
+          "default": {
+            "description": "Microsoft.Marketplace error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PostPrivateStoreOffer": {
+            "$ref": "./examples/PostPrivateStoreOffer.json"
+          }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Marketplace/privateStores/{privateStoreId}/offers/{offerId}": {
@@ -542,6 +577,18 @@
         }
       }
     },
+    "PrivateStoreOperation": {
+      "description": "Set the Operation for the POST method. Ping or Delete",
+      "type": "string",
+      "enum": [
+        "DeletePrivateStoreOffer",
+        "Ping"
+      ],
+      "x-ms-enum": {
+        "name": "Operation",
+        "modelAsString": true
+      }
+    },
     "PrivateStore": {
       "description": "The PrivateStore data structure.",
       "type": "object",
@@ -695,36 +742,36 @@
           "type": "boolean"
         },
         "iconFileUris": {
-          "description": "",
-          "type": "array",
-          "items": {
-            "type": "object",
-            "$ref": "#/definitions/icon"
-          }
-        }
-      }
-    },
-    "icon": {
-      "type": "object",
-      "properties": {
-        "iconKind": {
-          "description": "Icon size",
-          "type": "string",
-          "enum": [
-            "Small",
-            "Medium",
-            "Large",
-            "Wide",
-            "Hero"
-          ],
-          "x-ms-enum": {
-            "name": "IconKind",
-            "modelAsString": true
+          "description": "Icon File Uris",
+          "type": "object",
+          "properties": {
+            "iconKind": {
+              "description": "Icon size",
+              "type": "string",
+              "enum": [
+                "Small",
+                "Medium",
+                "Large",
+                "Wide",
+                "Hero"
+              ],
+              "x-ms-enum": {
+                "name": "IconKind",
+                "modelAsString": true
+              }
+            },
+            "uri": {
+              "description": "Icon uri",
+              "type": "string"
+            }
           }
         },
-        "uri": {
-          "description": "Icon uri",
-          "type": "string"
+        "plans": {
+          "description": "Offer plans",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Plan"
+          }
         }
       }
     },
@@ -743,6 +790,30 @@
         },
         "planDisplayName": {
           "description": "Friendly name for the plan for display in the marketplace",
+          "type": "string",
+          "readOnly": true
+        },
+        "accessibility": {
+          "description": "Plan accessibility",
+          "type": "string",
+          "enum": [
+            "Unknown",
+            "Public",
+            "PrivateTenantOnLevel",
+            "PrivateSubscriptionOnLevel"
+          ],
+          "x-ms-enum": {
+            "name": "accessibility",
+            "modelAsString": true
+          }
+        },
+        "altStackReference": {
+          "description": "Alternative stack type",
+          "type": "string",
+          "readOnly": true
+        },
+        "stackType": {
+          "description": "Stack type (classic or arm)",
           "type": "string",
           "readOnly": true
         }
