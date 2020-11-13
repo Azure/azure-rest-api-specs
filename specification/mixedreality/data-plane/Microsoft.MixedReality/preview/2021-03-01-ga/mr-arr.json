@@ -1,5 +1,5 @@
 {
-  "openapi": "3.0.0",
+  "swagger": "2.0",
   "servers": [
     {
       "url": "https://remoterendering.westus2.mixedreality.azure.com/",
@@ -30,7 +30,7 @@
           "conversion"
         ],
         "summary": "Starting a conversion using a model stored in a linked Azure Blob Storage account.",
-        "description": "Starting a conversion using a model stored in an Azure Blob Storage account linked with your Azure Remote Rendering account. Documentation how to link your Azure Remote Rendering account with the Azure Blob Storage account can be found in the [documentation](https://docs.microsoft.com/azure/remote-rendering/how-tos/create-an-account#link-storage-accounts).\n  \nAll files under the folderpath in the input container will be retrieved to perform the conversion.  To cut down on conversion times no other model files etc should be present as children of folderPath - since they will be retrieved but not used.\n",
+        "description": "Starting a conversion using a model stored in an Azure Blob Storage account linked with your Azure Remote Rendering account. Documentation how to link your Azure Remote Rendering account with the Azure Blob Storage account can be found in the [documentation](https://docs.microsoft.com/azure/remote-rendering/how-tos/create-an-account#link-storage-accounts).\n  \nAll files under the \"folderPath\" in the input container will be retrieved to perform the conversion.  To cut down on conversion times no other model files etc should be present as children of \"folderPath\" - since they will be retrieved but not used.\n",
         "parameters": [
           {
             "$ref": "#/components/parameters/account_id"
@@ -46,7 +46,7 @@
               },
               "examples": {
                 "StorageInputWithFolderPath": {
-                  "description": "Example of using folderpaths to specify which subdirectories of the input model will be copied to perform the conversion and where to upload the output.\nMake sure that the folder given contains all files referenced by the input asset (textures, external geometry ... ). \n\nAll files under the folderpath \"/geometry/sphere/\" in the input container \"inputassets\" will be retrieved to perform the conversion. E.g. the files \"/geometry/sphere/geometry.bin\", \"/geometry/sphere/textures/texture.png\" will be copied. The files \"/geometry/cube.fbx\", \"/llama.fbx\", \"/architecture/house.fbx\" will not be retrieved. \n \n To cut down on conversion times no other model files etc should be present under the folderPath - since they will be retrieved but not used.        \n",
+                  "description": "Example of using \"folderPath\" to specify which subdirectories of the input model will be copied to perform the conversion and where to upload the output.\nMake sure that the folder given contains all files referenced by the input asset (textures, external geometry ... ). \n\nAll files under the \"folderPath\" \"/geometry/sphere/\" in the input container \"inputassets\" will be retrieved to perform the conversion. E.g. the files \"/geometry/sphere/geometry.bin\", \"/geometry/sphere/textures/texture.png\" will be copied. The files \"/geometry/cube.fbx\", \"/llama.fbx\", \"/architecture/house.fbx\" will not be retrieved. \n \n To cut down on conversion times no other model files etc should be present under the \"folderPath\" - since they will be retrieved but not used.        \n",
                   "value": {
                     "input": {
                       "storageAccountName": "contosostorage01",
@@ -63,7 +63,7 @@
                   }
                 },
                 "DefaultmodelOutputname": {
-                  "description": "The parameter outputAssetFileName in the output settings is optional. If this parameter is not provided the output asset name will be derived from the input asset given by inputAssetPath by replacing the files suffix with \"arrAsset\".\n\nIn this example on successful conversion a \"sphere.arrAsset\" will be placed in the outputassets container of the contosostorage01\n",
+                  "description": "The parameter outputAssetFileName in the output settings is optional. If this parameter is not provided the output asset name will be derived from the input asset given by \"inputAssetPath\" by replacing the files suffix with \"arrAsset\".\n\nIn this example on successful conversion a \"sphere.arrAsset\" will be placed in the outputassets container of the \"contosostorage01\"\n",
                   "value": {
                     "input": {
                       "storageAccountName": "contosostorage01",
@@ -157,14 +157,14 @@
           "conversion"
         ],
         "summary": "Start a new asset conversion using Azure Blob Container Shared Access Signatures for file accesss.",
-        "description": "Start a new asset conversion using Azure Blob Container Shared Access Signatures for file accesss. The steps required to generate a Shared Access Signature (SAS) token is described in the [Azure Remote Rendering documentation](https://docs.microsoft.com/en-us/azure/remote-rendering/how-tos/conversion/blob-storage#retrieve-sas-for-the-storage-containers).\n\nEnsure that the Shared Access Signature is generated for the blob container and not for individual files. In addition to this ensure that the input containerReadListSas has read and list rights and the output containerWriteSas has write rights.\n\nAll files under the folderpath in the input container will be retrieved to perform the conversion.  To cut down on conversion times no other model files etc should be present as children of folderPath - since they will be retrieved but not used.\n",
+        "description": "Start a new asset conversion using Azure Blob Container Shared Access Signatures for file accesss. The steps required to generate a Shared Access Signature (SAS) token is described in the [Azure Remote Rendering documentation](https://docs.microsoft.com/en-us/azure/remote-rendering/how-tos/conversion/blob-storage#retrieve-sas-for-the-storage-containers).\n\nEnsure that the Shared Access Signature is generated for the blob container and not for individual files. In addition to this ensure that the input containerReadListSas has read and list rights and the output containerWriteSas has write rights.\n\nAll files under the \"folderPath\" in the input container will be retrieved to perform the conversion.  To cut down on conversion times no other model files etc should be present as children of \"folderPath\" - since they will be retrieved but not used.\n",
         "parameters": [
           {
             "$ref": "#/components/parameters/account_id"
           }
         ],
         "requestBody": {
-          "description": "Settings of the conversion to be created. As with the conversions/create API the inputAssetPath is used to define which files of the input blob container will be retrieved for the conversion process.",
+          "description": "Settings of the conversion to be created. As with the conversions/create API the \"inputAssetPath\" is used to define which files of the input blob container will be retrieved for the conversion process.",
           "required": true,
           "content": {
             "application/json": {
