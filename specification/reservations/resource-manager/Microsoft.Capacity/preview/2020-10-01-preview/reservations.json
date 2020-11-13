@@ -797,7 +797,7 @@
           "type": "array",
           "description": "List of reservations that are being returned in this exchange.",
           "items": {
-            "$ref": "#/definitions/ReturnRequest"
+            "$ref": "#/definitions/ReservationToReturn"
           }
         }
       }
@@ -812,41 +812,9 @@
         }
       }
     },
-    "ReturnRequest": {
-      "type": "object",
-      "description": "Return request",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "Fully qualified identifier of the ReservationOrder being returned"
-        },
-        "properties": {
-          "$ref": "#/definitions/ReturnRequestProperties"
-        }
-      }
-    },
-    "ReturnRequestProperties": {
-      "type": "object",
-      "description": "Return request properties",
-      "properties": {
-        "scope": {
-          "$ref": "#/definitions/ReturnRequestScope"
-        },
-        "reservationToReturn": {
-          "$ref": "#/definitions/ReservationToReturn"
-        }
-      }
-    },
-    "ReturnRequestScope": {
-      "type": "string",
-      "description": "Indicates whether it is a reservation return or entire order return",
-      "enum": [
-        "Reservation"
-      ]
-    },
     "ReservationToReturn": {
       "type": "object",
-      "description": "To be present only if ReturnRequestScope = Reservation and null otherwise",
+      "description": "Reservation to return",
       "properties": {
         "reservationId": {
           "type": "string",
