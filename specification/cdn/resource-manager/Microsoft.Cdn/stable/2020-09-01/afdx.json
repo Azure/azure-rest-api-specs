@@ -34,7 +34,7 @@
     }
   },
   "paths": {
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/profiles/{profileName}/usages": {
+"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/profiles/{profileName}/usages": {
       "post": {
         "tags": [
           "AFDProfiles"
@@ -3707,7 +3707,7 @@
         ],
         "operationId": "LogAnalytics_GetWafLogAnalyticsRankings",
         "x-ms-examples": {
-          "LogAnalytics_GetLogAnalyticsResources": {
+          "LogAnalytics_GetWafLogAnalyticsRankings": {
             "$ref": "./examples/LogAnalytics_GetWafLogAnalyticsRankings.json"
           }
         },
@@ -4081,7 +4081,7 @@
     "AFDDomainHttpsParameters": {
       "description": "The JSON object that contains the properties to secure a domain.",
       "required": [
-        "certificateType"
+        "certificateType"      
       ],
       "properties": {
         "certificateType": {
@@ -5174,13 +5174,16 @@
                 ]
               },
               "groups": {
-                "type": "object",
-                "properties": {
-                  "name": {
-                    "type": "string"
-                  },
-                  "value": {
-                    "type": "string"
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "name": {
+                      "type": "string"
+                    },
+                    "value": {
+                      "type": "string"
+                    }
                   }
                 }
               },
@@ -5302,6 +5305,26 @@
               },
               "history": {
                 "type": "boolean"
+              },
+              "customDomains": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string"
+                    },
+                    "name": {
+                      "type": "string"
+                    },
+                    "endpointId": {
+                      "type": "string"
+                    },
+                    "history": {
+                      "type": "boolean"
+                    }
+                  }
+                }
               }
             }
           }
@@ -5361,6 +5384,20 @@
                   "count"
                 ]
               },
+              "groups": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "name": {
+                      "type": "string"
+                    },
+                    "value": {
+                      "type": "string"
+                    }
+                  }
+                }
+              },
               "data": {
                 "type": "array",
                 "items": {
@@ -5418,6 +5455,9 @@
                       "type": "string"
                     },
                     "value": {
+                      "type": "integer"
+                    },
+                    "percentage": {
                       "type": "integer"
                     }
                   }
