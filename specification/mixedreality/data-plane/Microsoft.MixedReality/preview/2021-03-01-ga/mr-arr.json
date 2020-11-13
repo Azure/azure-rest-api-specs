@@ -3,7 +3,7 @@
   "info": {
     "description": "Describing the [Azure Remote Rendering](https://docs.microsoft.com/azure/remote-rendering/) REST API for rendering sessions and asset conversions. \n\nAll requests to these APIs must be authenticated using the Secure Token Service as described in the [Azure Remote rendering documentation chapter about authentication](https://docs.microsoft.com/en-us/azure/remote-rendering/how-tos/tokens).\n",
     "title": "Azure Remote Rendering API",
-    "version": "1.0.0"
+    "version": "2031-03-01"
   },
   "host": "remoterendering.westus2.mixedreality.azure.com",
   "basePath": "/",
@@ -13,6 +13,7 @@
   "paths": {
     "/v1/accounts/{account_id}/conversions": {
       "get": {
+        "operationId": "GetConversions",
         "produces": [
           "application/json"
         ],
@@ -131,6 +132,7 @@
     },
     "/v1/accounts/{account_id}/conversions/create": {
       "post": {
+        "operationId": "CreateConversion",
         "consumes": [
           "application/json"
         ],
@@ -227,6 +229,7 @@
     },
     "/v1/accounts/{account_id}/conversions/createwithsharedaccesssignature": {
       "post": {
+        "operationId": "CreateConversionWithSas",
         "consumes": [
           "application/json"
         ],
@@ -333,6 +336,7 @@
     },
     "/v1/accounts/{account_id}/conversions/{conversion_id}": {
       "get": {
+        "operationId": "GetConversion",
         "produces": [
           "application/json"
         ],
@@ -439,6 +443,7 @@
     },
     "/v1/accounts/{account_id}/sessions": {
       "get": {
+        "operationId": "GetSessions",
         "produces": [
           "application/json"
         ],
@@ -512,6 +517,7 @@
     },
     "/v1/accounts/{account_id}/sessions/create": {
       "post": {
+        "operationId": "CreateSession",
         "consumes": [
           "application/json"
         ],
@@ -597,6 +603,7 @@
     },
     "/v1/accounts/{account_id}/sessions/{session_id}": {
       "delete": {
+        "operationId": "DeleteSession",
         "parameters": [
           {
             "description": "the Azure Remote Rendering account id",
@@ -692,6 +699,7 @@
         "summary": "Delete a particular VM session"
       },
       "patch": {
+        "operationId": "UpdateSession",
         "consumes": [
           "application/json"
         ],
@@ -746,6 +754,7 @@
     },
     "/v1/accounts/{account_id}/sessions/{session_id}/properties": {
       "get": {
+        "operationId": "GetSessionProperties",
         "produces": [
           "application/json"
         ],
