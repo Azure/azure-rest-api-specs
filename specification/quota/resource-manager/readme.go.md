@@ -13,17 +13,17 @@ go:
 
 ``` yaml $(go) && $(multiapi)
 batch:
-  - tag: package-2020-11-11
+  - tag: package-2020-10-25
   - tag: package-preview-2019-07-19
 ```
 
-### Tag: package-2020-11-11 and go
+### Tag: package-2020-10-25 and go
 
-These settings apply only when `--tag=package-2020-11-11 --go` is specified on the command line.
+These settings apply only when `--tag=package-2020-10-25 --go` is specified on the command line.
 Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
 
-``` yaml $(tag)=='package-2020-11-11' && $(go)
-output-folder: $(go-sdk-folder)/services/$(namespace)/mgmt/2020-11-11/$(namespace)
+``` yaml $(tag)=='package-2020-10-25' && $(go)
+output-folder: $(go-sdk-folder)/services/$(namespace)/mgmt/2020-10-25/$(namespace)
 ```
 
 ### Tag: package-preview-2019-07-19 and go

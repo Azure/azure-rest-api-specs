@@ -26,17 +26,17 @@ These are the global settings for the Reservations API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2020-11-11
+tag: package-2020-10-25
 ```
 
-### Tag: package-2020-11-11
+### Tag: package-2020-10-25
 
-These settings apply only when `--tag=package-2020-11-11` is specified on the command line.
+These settings apply only when `--tag=package-2020-10-25` is specified on the command line.
 
-``` yaml $(tag) == 'package-2020-11-11'
+``` yaml $(tag) == 'package-2020-10-25'
 input-file:
-  - Microsoft.Capacity/stable/2020-11-11/quota.json
-tag: package-2020-11-11
+  - Microsoft.Capacity/stable/2020-10-25/quota.json
+tag: package-2020-10-25
 ```
 
 ### Tag: package-preview-2019-07-19
@@ -97,7 +97,7 @@ python:
   payload-flattening-threshold: 2
   namespace: azure.mgmt.quota
   package-name: azure-mgmt-quota
-  package-version: 0.3.4
+  package-version: 0.3.2
   clear-output-folder: true
 ```
 
