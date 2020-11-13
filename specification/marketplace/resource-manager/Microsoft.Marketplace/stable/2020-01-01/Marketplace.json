@@ -201,42 +201,42 @@
             "$ref": "./examples/UpdatePrivateStoreOffer.json"
           }
         }
-	  },
-	  "post": {
-		"tags": [
-		  "PrivateStores"
-		],
-		"operationId": "PrivateStoreOffer_Post",
-		"description": "Delete Private store offer. This is a workaround.",
-		"produces": [
-		  "application/json"
-		],
-		"parameters": [
-		  {
-			"in": "body",
-			"name": "payload",
-			"schema": {
-			  "$ref": "#/definitions/PrivateStoreOperation"
-			}
-		  }
-		],
-		"responses": {
-		  "200": {
-			"description": "Operation succedded"
-		  },
-		  "default": {
-			"description": "Microsoft.Marketplace error response describing why the operation failed.",
-			"schema": {
-			  "$ref": "#/definitions/ErrorResponse"
-			}
-		  }
-		},
-		"x-ms-examples": {
-		  "PostPrivateStoreOffer": {
-			"$ref": "./examples/PostPrivateStoreOffer.json"
-		  }
-		}
-	  }
+      },
+      "post": {
+        "tags": [
+          "PrivateStores"
+        ],
+        "operationId": "PrivateStoreOffer_Post",
+        "description": "Delete Private store offer. This is a workaround.",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "payload",
+            "schema": {
+              "$ref": "#/definitions/PrivateStoreOperation"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Operation succeeded"
+          },
+          "default": {
+            "description": "Microsoft.Marketplace error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PostPrivateStoreOffer": {
+            "$ref": "./examples/PostPrivateStoreOffer.json"
+          }
+        }
+      }
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Marketplace/privateStores/{privateStoreId}/offers/{offerId}": {
       "parameters": [
@@ -576,19 +576,19 @@
           "type": "string"
         }
       }
-	},
-	"PrivateStoreOperation":{
-	  "description": "Set the Operation for the POST method. Ping or Delete",
-	  "type": "string",
-		"enum": [
-		  "DeletePrivateStoreOffer",
-		  "Ping"
-		],
-		"x-ms-enum": {
-		  "name": "Operation",
-		  "modelAsString": true
-	   }
-	},
+    },
+    "PrivateStoreOperation": {
+      "description": "Set the Operation for the POST method. Ping or Delete",
+      "type": "string",
+      "enum": [
+        "DeletePrivateStoreOffer",
+        "Ping"
+      ],
+      "x-ms-enum": {
+        "name": "Operation",
+        "modelAsString": true
+      }
+    },
     "PrivateStore": {
       "description": "The PrivateStore data structure.",
       "type": "object",
@@ -744,38 +744,38 @@
         "iconFileUris": {
           "description": "Icon File Uris",
           "type": "object",
-		  "properties": {
-			"iconKind": {
-			  "description": "Icon size",
-			  "type": "string",
-			  "enum": [
-				"Small",
-				"Medium",
-				"Large",
-				"Wide",
-				"Hero"
-			  ],
-			  "x-ms-enum": {
-				"name": "IconKind",
-				"modelAsString": true
-			  }
-			},
-			"uri": {
-			  "description": "Icon uri",
-			  "type": "string"
-			}
-		  }
-		},
-		"plans": {
-			"description": "Offer plans",
-			"type": "array",
-			"items": {
-			  "$ref": "#/definitions/Plan"
-			}
-		}
+          "properties": {
+            "iconKind": {
+              "description": "Icon size",
+              "type": "string",
+              "enum": [
+                "Small",
+                "Medium",
+                "Large",
+                "Wide",
+                "Hero"
+              ],
+              "x-ms-enum": {
+                "name": "IconKind",
+                "modelAsString": true
+              }
+            },
+            "uri": {
+              "description": "Icon uri",
+              "type": "string"
+            }
+          }
+        },
+        "plans": {
+          "description": "Offer plans",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Plan"
+          }
+        }
       }
     },
-     "Plan": {
+    "Plan": {
       "type": "object",
       "properties": {
         "skuId": {
