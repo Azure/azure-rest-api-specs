@@ -22,7 +22,6 @@ license-header: MICROSOFT_MIT_NO_VERSION
 namespace: azure.mgmt.iothub
 package-name: azure-mgmt-iothub
 package-version: 1.0.0b1
-clear-output-folder: true
 no-namespace-folders: true
 ```
 
@@ -43,6 +42,7 @@ batch:
 ```
 
 ```yaml $(python) && $(multiapi) && $(track2)
+clear-output-folder: true
 batch:
   - tag: package-2020-03
   - tag: package-2019-11
@@ -52,7 +52,7 @@ batch:
   - tag: package-2017-07
   - tag: package-2017-01
   - tag: package-2016-02
-  - multiapisceipt: true
+  - multiapiscript: true
 ```
 
 ``` yaml $(multiapiscript)
