@@ -26,6 +26,7 @@ Generate all API versions currently shipped for this package
 
 ```yaml $(python) && $(multiapi) && !$(track2)
 batch:
+  - tag: package-2020-11-01-only
   - tag: package-2020-09-01-only
   - tag: package-2020-07-01-only
   - tag: package-2020-06-01-only
@@ -89,6 +90,8 @@ Please also specify `--python-sdks-folder=<path to the root directory of your az
 python:
   namespace: azure.mgmt.containerservice.v2020_11_01
   output-folder: $(python-sdks-folder)/containerservice/azure-mgmt-containerservice/azure/mgmt/containerservice/v2020_11_01
+namespace: azure.mgmt.containerservice.v2020_11_01
+output-folder: $(python-sdks-folder)/containerservice/azure-mgmt-containerservice/azure/mgmt/containerservice/v2020_11_01
 ```
 
 ### Tag: package-2020-09-01-only and python
