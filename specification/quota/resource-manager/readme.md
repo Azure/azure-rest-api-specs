@@ -1,14 +1,14 @@
-# Quota
+# Reservations
 
 > see https://aka.ms/autorest
 
-This is the AutoRest configuration file for Quota RP.
+This is the AutoRest configuration file for Reservations RP.
 
 ---
 
 ## Getting Started
 
-To build the SDK for Quota, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
+To build the SDK for Reservations, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
 
 > `autorest`
 
@@ -22,7 +22,7 @@ To see additional help and options, run:
 
 ### Basic Information
 
-These are the global settings for the Quota API.
+These are the global settings for the Reservations API.
 
 ``` yaml
 openapi-type: arm
