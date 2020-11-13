@@ -350,3 +350,4 @@ python:
   namespace: azure.mgmt.containerservice.v2019_09_30_preview
   output-folder: $(python-sdks-folder)/containerservice/azure-mgmt-containerservice/azure/mgmt/containerservice/v2019_09_30_preview
 ```
+
