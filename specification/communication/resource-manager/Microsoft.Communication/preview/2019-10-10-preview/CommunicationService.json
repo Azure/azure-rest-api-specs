@@ -12,7 +12,9 @@
     "application/json"
   ],
   "host": "management.azure.com",
-  "schemes": [ "https" ],
+  "schemes": [
+    "https"
+  ],
   "securityDefinitions": {
     "azure_auth": {
       "type": "oauth2",
@@ -30,7 +32,9 @@
         "description": "Lists all of the available REST API operations of the Microsoft.Communication provider.",
         "operationId": "Operations_List",
         "summary": "List Operations",
-        "tags": [ "Operations" ],
+        "tags": [
+          "Operations"
+        ],
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -50,7 +54,9 @@
             }
           }
         },
-        "produces": [ "application/json" ],
+        "produces": [
+          "application/json"
+        ],
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -61,7 +67,9 @@
         "description": "Checks that the CommunicationService name is valid and is not already in use.",
         "operationId": "CommunicationService_CheckNameAvailability",
         "summary": "Check Name Availability",
-        "tags": [ "CommunicationService" ],
+        "tags": [
+          "CommunicationService"
+        ],
         "parameters": [
           {
             "name": "nameAvailabilityParameters",
@@ -78,7 +86,9 @@
             "$ref": "#/parameters/LocationParameter"
           }
         ],
-        "consumes": [ "application/json" ],
+        "consumes": [
+          "application/json"
+        ],
         "responses": {
           "200": {
             "description": "Success. The response describes the name availability.",
@@ -93,7 +103,9 @@
             }
           }
         },
-        "produces": [ "application/json" ],
+        "produces": [
+          "application/json"
+        ],
         "x-ms-examples": {
           "Check name availability available": {
             "$ref": "./examples/checkNameAvailabilityAvailable.json"
@@ -109,7 +121,9 @@
         "description": "Links an Azure Notification Hub to this communication service.",
         "operationId": "CommunicationService_LinkNotificationHub",
         "summary": "Link Notification Hub",
-        "tags": [ "CommunicationService" ],
+        "tags": [
+          "CommunicationService"
+        ],
         "parameters": [
           {
             "name": "linkNotificationHubParameters",
@@ -132,7 +146,9 @@
             "$ref": "#/parameters/CommunicationServiceName"
           }
         ],
-        "consumes": [ "application/json" ],
+        "consumes": [
+          "application/json"
+        ],
         "responses": {
           "200": {
             "description": "Success. The notification hub has been linked.",
@@ -147,7 +163,9 @@
             }
           }
         },
-        "produces": [ "application/json" ],
+        "produces": [
+          "application/json"
+        ],
         "x-ms-examples": {
           "Link notification hub": {
             "$ref": "./examples/linkNotificationHub.json"
@@ -160,7 +178,9 @@
         "description": "Gets the current status of an async operation.",
         "operationId": "OperationStatuses_Get",
         "summary": "Get Operation Status",
-        "tags": [ "OperationStatus" ],
+        "tags": [
+          "OperationStatus"
+        ],
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -172,7 +192,9 @@
             "$ref": "#/parameters/OperationIdParameter"
           }
         ],
-        "consumes": [ "application/json" ],
+        "consumes": [
+          "application/json"
+        ],
         "responses": {
           "200": {
             "description": "The requested operation status",
@@ -187,7 +209,9 @@
             }
           }
         },
-        "produces": [ "application/json" ],
+        "produces": [
+          "application/json"
+        ],
         "x-ms-examples": {
           "Get OperationStatus": {
             "$ref": "./examples/getOperationStatus.json"
@@ -200,7 +224,9 @@
         "description": "Handles requests to list all resources in a subscription.",
         "operationId": "CommunicationService_ListBySubscription",
         "summary": "List By Subscription",
-        "tags": [ "CommunicationService" ],
+        "tags": [
+          "CommunicationService"
+        ],
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -223,7 +249,9 @@
             }
           }
         },
-        "produces": [ "application/json" ],
+        "produces": [
+          "application/json"
+        ],
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         },
@@ -239,7 +267,9 @@
         "description": "Handles requests to list all resources in a resource group.",
         "operationId": "CommunicationService_ListByResourceGroup",
         "summary": "List By Resource Group",
-        "tags": [ "CommunicationService" ],
+        "tags": [
+          "CommunicationService"
+        ],
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -268,7 +298,9 @@
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         },
-        "produces": [ "application/json" ],
+        "produces": [
+          "application/json"
+        ],
         "x-ms-examples": {
           "List by resource group": {
             "$ref": "./examples/listByResourceGroup.json"
@@ -281,7 +313,9 @@
         "description": "Operation to update an existing CommunicationService.",
         "operationId": "CommunicationService_Update",
         "summary": "Update",
-        "tags": [ "CommunicationService" ],
+        "tags": [
+          "CommunicationService"
+        ],
         "parameters": [
           {
             "name": "parameters",
@@ -319,7 +353,9 @@
             }
           }
         },
-        "produces": [ "application/json" ],
+        "produces": [
+          "application/json"
+        ],
         "x-ms-examples": {
           "Update resource": {
             "$ref": "./examples/update.json"
@@ -330,7 +366,9 @@
         "description": "Get the CommunicationService and its properties.",
         "operationId": "CommunicationService_Get",
         "summary": "Get",
-        "tags": [ "CommunicationService" ],
+        "tags": [
+          "CommunicationService"
+        ],
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -359,7 +397,9 @@
             }
           }
         },
-        "produces": [ "application/json" ],
+        "produces": [
+          "application/json"
+        ],
         "x-ms-examples": {
           "Get resource": {
             "$ref": "./examples/get.json"
@@ -370,7 +410,9 @@
         "description": "Create a new CommunicationService or update an existing CommunicationService.",
         "operationId": "CommunicationService_CreateOrUpdate",
         "summary": "Create Or Update",
-        "tags": [ "CommunicationService" ],
+        "tags": [
+          "CommunicationService"
+        ],
         "parameters": [
           {
             "name": "parameters",
@@ -394,7 +436,9 @@
             "$ref": "#/parameters/CommunicationServiceName"
           }
         ],
-        "consumes": [ "application/json" ],
+        "consumes": [
+          "application/json"
+        ],
         "responses": {
           "200": {
             "description": "The create or update request was completed successfully",
@@ -421,7 +465,9 @@
             }
           }
         },
-        "produces": [ "application/json" ],
+        "produces": [
+          "application/json"
+        ],
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "Create or update resource": {
@@ -433,7 +479,9 @@
         "description": "Operation to delete a CommunicationService.",
         "operationId": "CommunicationService_Delete",
         "summary": "Delete",
-        "tags": [ "CommunicationService" ],
+        "tags": [
+          "CommunicationService"
+        ],
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -484,7 +532,9 @@
         "description": "Get the access keys of the CommunicationService resource.",
         "operationId": "CommunicationService_ListKeys",
         "summary": "List Keys",
-        "tags": [ "CommunicationService" ],
+        "tags": [
+          "CommunicationService"
+        ],
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -513,7 +563,9 @@
             }
           }
         },
-        "produces": [ "application/json" ],
+        "produces": [
+          "application/json"
+        ],
         "x-ms-examples": {
           "List keys": {
             "$ref": "./examples/listKeys.json"
@@ -526,7 +578,9 @@
         "description": "Regenerate CommunicationService access key. PrimaryKey and SecondaryKey cannot be regenerated at the same time.",
         "operationId": "CommunicationService_RegenerateKey",
         "summary": "Regenerate Key",
-        "tags": [ "CommunicationService" ],
+        "tags": [
+          "CommunicationService"
+        ],
         "parameters": [
           {
             "name": "parameters",
@@ -570,8 +624,12 @@
             }
           }
         },
-        "consumes": [ "application/json" ],
-        "produces": [ "application/json" ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
         "x-ms-examples": {
           "Regenerate key": {
             "$ref": "./examples/regenerateKey.json"
@@ -828,7 +886,7 @@
       "type": "object",
       "properties": {
         "id": {
-          "description": "Fully qualified ID for the operationstatus.",
+          "description": "Fully qualified ID for the operation status.",
           "type": "string",
           "readOnly": true
         },
@@ -943,7 +1001,10 @@
         "location": {
           "description": "The Azure location where the CommunicationService is running.",
           "type": "string",
-          "x-ms-mutability": ["create", "read"]
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
         }
       }
     },
@@ -1104,4 +1165,3 @@
     }
   }
 }
-
