@@ -23,7 +23,7 @@ output-folder: $(azureresourceschema-folder)/schemas
 
 # all the input files in this apiVersion
 input-file:
-  - Microsoft.Capacity/stable/2017-11-01/reservations.json
+  - Microsoft.Capacity/stable/2020-10-25/quota.json
 
 ```
 
@@ -34,8 +34,8 @@ output-folder: $(azureresourceschema-folder)/schemas
 
 # all the input files in this apiVersion
 input-file:
-  - Microsoft.Capacity/preview/2019-04-01/reservations.json
-  
+  - Microsoft.Capacity/preview/2019-07-19/quota.json
+
 ```
 
 ### Tag: schema-capacity-2019-04-01 and azureresourceschema
