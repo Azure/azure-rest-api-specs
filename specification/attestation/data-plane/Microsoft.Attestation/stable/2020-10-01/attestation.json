@@ -419,49 +419,6 @@
         }
       }
     },
-    "/attest/SevSnpVm": {
-      "post": {
-        "tags": [
-          "attestation"
-        ],
-        "summary": "Attest to an SEV SNP Virtual Machine.",
-        "description": "Processes a SEV SNP Boot chain. The type of artifact produced is dependent upon attestation policy.",
-        "operationId": "Attestation_AttestSevSnpVm",
-        "parameters": [
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "name": "request",
-            "in": "body",
-            "description": "Request object containing the quote",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/AttestSevSnpVmRequest"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success",
-            "schema": {
-              "$ref": "#/definitions/AttestationResponse"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Attest SevSnpVm": {
-            "$ref": "./examples/AttestSevSnpVm.json"
-          }
-        }
-      }
-    },
     "/certs": {
       "get": {
         "tags": [
