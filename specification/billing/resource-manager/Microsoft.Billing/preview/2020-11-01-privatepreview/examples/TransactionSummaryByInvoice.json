@@ -1,0 +1,20 @@
+{
+  "parameters": {
+    "api-version": "2020-11-01-privatepreview",
+    "billingAccountName": "{billingAccountName}",
+    "invoiceName": "{invoiceName}",
+    "$filter": "properties/date gt '2020-10-01'",
+    "$search": "azure"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "azureCreditApplied": 100.00,
+        "billingCurrency": "USD",
+        "subTotal": 5000.00,
+        "tax": 500.00,
+        "total": 5400.00
+      }
+    }
+  }
+}
