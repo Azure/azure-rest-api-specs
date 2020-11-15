@@ -2191,6 +2191,104 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{operationalInsightsResourceProvider}/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/entities/{entityId}/queries": {
+      "get": {
+        "x-ms-examples": {
+          "Entity timeline": {
+            "$ref": "./examples/entities/timeline/QueriesEntity.json"
+          }
+        },
+        "tags": [
+          "Entities"
+        ],
+        "description": "Execute Insights for an entity.",
+        "operationId": "Entities_Quries",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/OperationalInsightsResourceProvider"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "#/parameters/EntityId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+      			  "type": "array",
+              "items": {
+				          "$ref": "#/definitions/EntityInsightItem"
+			        }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{operationalInsightsResourceProvider}/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/entities/{entityId}/getInsights": {
+      "post": {
+        
+        "tags": [
+          "Entities"
+        ],
+        "description": "Execute Insights for an entity.",
+        "operationId": "Entities_GetInsights",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/OperationalInsightsResourceProvider"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "#/parameters/EntityId"
+          },
+          {
+            "$ref": "#/parameters/GetInsightsEntityQueriesRequestBody"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/EntityGetInsightsResponse"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{operationalInsightsResourceProvider}/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/entities/{entityId}/relations": {
       "get": {
         "x-ms-examples": {
@@ -10773,6 +10871,188 @@
       },
       "x-ms-parameter-location": "method"
     },
+    "GetInsightsEntityQueriesRequestBody":{
+      "description": "The parameters required to execute insights on the given entity.",
+      "in": "body",
+      "name": "parameters",
+      "required": true,
+      "schema": {
+        "$ref": "#/definitions/EntityGetInsightsParameters"
+      },
+      "x-ms-parameter-location": "method"
+    },
+    "EntityGetInsightsParameters": {
+      "description": "The parameters required to execute insights operation on the given entity.",
+      "properties": {        
+        "queryKind": {
+          "description": "The kind of the insights",
+          "enum": [
+            "Insight"
+          ]
+        },
+        "startTime": {
+          "description": "The start timeline date, so the results returned are after this date.",
+          "format": "date-time",
+          "type": "string"
+        },
+        "endTime": {
+          "description": "The end timeline date, so the results returned are before this date.",
+          "format": "date-time",
+          "type": "string"
+        },
+        "addDefaultExtendedTimeRange": {
+          "description": "Indicates if query time range should be extended with default time range of the query. Default value is false",
+          "type": "boolean"
+        },
+        "insightQueryId":{
+          "description": "List of Insights Query Id. If empty, default value is all insights of this entity",
+          "type": array,
+          "items": {
+              "description": "Insight Query Id, (GUID)",
+              "type": "string"
+          }
+        }
+      },
+      "required": [
+        "startTime",
+        "endTime",
+        "queryKind"
+        ]
+    },
+    "EntityGetInsightsResponse": {
+      "description": "The Get Insights result operation response.",
+      "properties": {
+        "metaData": {
+          "$ref": "#/definitions/GetInsightsResultsMetadata",
+          "description": "The metadata from the get insights operation results."
+        },
+        "value": {
+          "description": "The insights result values.",
+          "items": {
+            "$ref": "#/definitions/EntityInsightItem"
+          },
+          "type": "array"
+        }
+      }
+    },
+    "GetInsightsResultsMetadata": {
+      "description": "Get Insights result metadata.",
+      "properties": {
+        "totalCount": {
+          "description": "the total items found for the insights request",
+          "type": "integer",
+          "format": "int32"
+        },
+        "errors": {
+          "description": "information about the failed queries",
+          "items": {
+            "$ref": "#/definitions/GetInsightsError"
+          },
+          "type": "array"
+        }
+      },
+      "required": [
+        "totalCount",
+        "aggregations"
+      ],
+      "type": "object"
+    },
+    "GetInsightsError": {
+      "description": "GetInsights Query Errors.",
+      "properties": {
+        "kind": {
+          "description": "the query kind",
+          "type": "string",
+          "enum": ["Insight"]
+        },
+        "queryId": {
+          "description": "the query id",
+          "type": "string"
+        },
+        "errorMessage": {
+          "description": "the error message",
+          "type": "string"
+        }
+      },
+      "required": [
+        "kind",
+        "errorMessage"
+      ],
+      "type": "object"
+    },
+	"EntityInsightItem": {
+      "description": "Entity insight Item.",
+      "type": "object",
+      "properties": {
+        "queryId": {
+          "type": "string",
+          "description": "The query id of the insight"
+        },
+        "queryTimeInterval": {
+          "type": "object",
+          "description": "The Time interval that the query actually executed on.",
+		      "properties": {
+			    "startTime":{
+			        "format": "date-time",
+              "type": "string",
+              "description": "Insight query start time"
+		    },
+			"endTime":{
+			  "format": "date-time",
+              "type": "string",
+              "description": "Insight query end time"
+			}
+			
+		  }
+        },
+		"tableQueryResults": {
+          "$ref": "#/definitions/InsightsTableResult",
+          "description": Query results for table insights query."
+        },
+        "chartQueryResults": {
+          "type": "array",
+          "description": "Query results for table insights query.",
+              "items": {
+              "$ref": "#/definitions/InsightsTableResult",
+              "description": "Query results for table insights query."
+              }
+        }
+      }      
+    },
+	"InsightsTableResult":{
+	  "type": "object",
+	  "description": Query results for table insights query.",
+	  "properties": {
+		"columns": {
+		  "type": "array",
+		  "description": "Columns Metadata of the table",
+		  "items": {
+  			"properties": {
+  			  "type": {
+    				"type": string,
+    				"description": "the type of the colum"
+  			   },
+  			  "name": {
+    				"type": string,
+    				"description": "the name of the colum"
+  			  }
+  			}
+		  }
+		},
+		"rows": {
+		  "type": "array",
+		  "description": "Rows data of the table",
+		  "items":  {
+		    "type": array,
+		    "description": "Single row of data",
+		    "items": {
+		      "type": string,
+		      "description": "Cell in the table",
+		    }
+		  }
+		}
+	  },
+	},
     "EntityId": {
       "description": "entity ID",
       "in": "path",
