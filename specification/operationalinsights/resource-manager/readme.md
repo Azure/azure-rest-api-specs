@@ -99,6 +99,7 @@ These settings apply only when `--tag=package-2020-10` is specified on the comma
 input-file:
 - Microsoft.OperationalInsights/stable/2020-10-01/Clusters.json
 - Microsoft.OperationalInsights/stable/2020-10-01/Operations.json
+- Microsoft.OperationalInsights/stable/2020-10-01/Workspaces.json
 ```
 
 ### Tag: package-2020-08
