@@ -1,739 +1,742 @@
 {
-    "swagger": "2.0",
-    "info": {
-      "version": "2018-03-01-beta",
-      "title": "SaaS",
-      "description": "REST APIs for Azure Marketplace SaaS Offers"
-    },
-    "host": "management.azure.com",
-    "schemes": [
-      "https"
-    ],
-    "consumes": [
-      "application/json"
-    ],
-    "produces": [
-      "application/json"
-    ],
-    "security": [
-      {
-        "azure_auth": [
-          "user_impersonation"
-        ]
+  "swagger": "2.0",
+  "info": {
+    "version": "2018-03-01-beta",
+    "title": "SaaS",
+    "description": "REST APIs for Azure Marketplace SaaS Offers"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
       }
-    ],
-    "securityDefinitions": {
-      "azure_auth": {
-        "type": "oauth2",
-        "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
-        "flow": "implicit",
-        "description": "Azure Active Directory OAuth2 Flow",
-        "scopes": {
-          "user_impersonation": "impersonate your user account"
-        }
-      }
-    },
-    "paths": {
-      "/providers/microsoft.saas/operations": {
-        "get": {
-          "tags": [
-            "SaaSResources"
-          ],
-          "operationId": "SaasApp_Get",
-          "description": "Gets all SaaS app operations.",
-          "produces": [
-            "application/json"
-          ],
-          "parameters": [
-            {
-              "$ref": "#/parameters/ApiVersionParameter"
-            }
-          ],
-          "responses": {
-            "200": {
-              "description": "OK",
-              "schema": {
-                "$ref": "#/definitions/SaasAppOperationsResponseWithContinuation"
-              }
-            }
-          },
-          "x-ms-examples": {
-            "Get Subscription Level SaaS resource": {
-              "$ref": "./examples/saasV1/SaaSGetOperations.json"
-            }
+    }
+  },
+  "paths": {
+    "/providers/microsoft.saas/operations": {
+      "get": {
+        "tags": [
+          "SaaSResources"
+        ],
+        "operationId": "SaasApp_Get",
+        "description": "Gets all SaaS app operations.",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
           }
-        }
-      },
-      "/subscriptions/{subscriptionId}/providers/microsoft.saas/checkmoderneligibility": {
-        "get": {
-          "tags": [
-            "SaaSResources"
-          ],
-          "operationId": "SaaS_checkmoderneligibility",
-          "description": "Check if the Azure Subscription has been converted to modern.",
-          "parameters": [
-            {
-              "$ref": "#/parameters/SubscriptionIdParameter"
-            },
-            {
-              "$ref": "#/parameters/ApiVersionParameter"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SaasAppOperationsResponseWithContinuation"
             }
-          ],
-          "responses": {
-            "200": {
-              "description": "Request successful. The request returns the genetaring access token.",
-              "schema": {
-                "$ref": "#/definitions/SaasRpModernEligibility"
-              }
-            },
-            "404": {
-              "description": "not found"
-            },
-            "502": {
-              "description": "Internal Server Error"
-            },
-            "x-ms-examples": {
-              "Get Subscription Level SaaS resource": {
-                "$ref": "./examples/saasV1/SaaSGetModerneligibility.json"
-              }
-            }
-          }
-        }
-      },
-      "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SaaS/applications": {
-        "get": {
-          "tags": [
-            "SaaSResources"
-          ],
-          "operationId": "SaaS_GetAppplications",
-          "description": "Gets all SaaS resources by subscription id and resource group name.",
-          "produces": [
-            "application/json"
-          ],
-          "parameters": [
-            {
-              "$ref": "#/parameters/SubscriptionIdParameter"
-            },
-            {
-              "$ref": "#/parameters/ResourceGroupNameParameter"
-            },
-            {
-              "$ref": "#/parameters/ApiVersionParameter"
-            }
-          ],
-          "responses": {
-            "200": {
-              "description": "OK",
-              "schema": {
-                "$ref": "#/definitions/SaasAppResponseWithContinuation"
-              }
-            },
-            "502": {
-              "description": "Internal Server Error"
-            }
-          },
-          "x-ms-examples": {
-            "Get Subscription Level SaaS resource": {
-              "$ref": "./examples/saasV1/SaaSGetApplications.json"
-            }
-          }
-        }
-      },
-      "/providers/Microsoft.SaaS/saasresources/{resourceId}": {
-        "delete": {
-          "tags": [
-            "SaaSResources"
-          ],
-          "operationId": "SaaS_Delete",
-          "description": "Deletes the specified SaaS.",
-          "parameters": [
-            {
-              "$ref": "#/parameters/SaasResourceIdParameter"
-            },
-            {
-              "$ref": "#/parameters/ApiVersionParameter"
-            },
-            {
-              "name": "parameters",
-              "in": "body",
-              "required": true,
-              "schema": {
-                "$ref": "#/definitions/deleteOptions"
-              },
-              "description": "Parameters supplied to delete saas operation."
-            }
-          ],
-          "responses": {
-            "204": {
-              "description": "Request successful. Resource does not exist."
-            },
-            "202": {
-              "description": "Accepted and the operation will complete asynchronously."
-            },
-            "502": {
-              "description": "Internal Server Error"
-            }
-          },
-          "x-ms-examples": {
-            "Delete Subscription Level SaaS resource": {
-              "$ref": "./examples/saasV2/SaasDelete.json"
-            }
-          },
-          "x-ms-long-running-operation": true,
-          "x-ms-long-running-operation-options": {
-            "final-state-via": "location"
           }
         },
-        "get": {
-          "tags": [
-            "SaaSResources"
-          ],
-          "operationId": "SaaS_GetResource",
-          "description": "Gets information about the specified SaaS.",
-          "parameters": [
-            {
-              "$ref": "#/parameters/SaasResourceIdParameter"
-            },
-            {
-              "$ref": "#/parameters/ApiVersionParameter"
-            }
-          ],
-          "responses": {
-            "200": {
-              "description": "Request successful. The request returns the resulting SaaS resource.",
-              "schema": {
-                "$ref": "#/definitions/SaasResource"
-              }
-            },
-            "404": {
-              "description": "not found"
-            },
-            "502": {
-              "description": "Internal Server Error"
-            }
-          },
-          "x-ms-examples": {
-            "Get Subscription Level SaaS resource": {
-              "$ref": "./examples/saasV2/SaasGet.json"
-            }
+        "x-ms-examples": {
+          "Get Subscription Level SaaS resource": {
+            "$ref": "./examples/saasV1/SaaSGetOperations.json"
           }
         }
-      },
-      "/providers/microsoft.saas/saasresources": {
-        "put": {
-          "tags": [
-            "SaaSResources"
-          ],
-          "operationId": "SaaS_CreateResorce",
-          "description": "Creates a SaaS resource.",
-          "parameters": [
-            {
-              "$ref": "#/parameters/ApiVersionParameter"
-            },
-            {
-              "name": "parameters",
-              "in": "body",
-              "required": true,
-              "schema": {
-                "$ref": "#/definitions/SaasResourceCreation"
-              },
-              "description": "Parameters supplied to the create saas operation."
-            }
-          ],
-          "responses": {
-            "202": {
-              "description": "Accepted and the operation will complete asynchronously."
-            },
-            "403": {
-              "description": "Forbidden"
-            },
-            "400": {
-              "description": "BadRequest"
-            },
-            "502": {
-              "description": "Internal Server Error"
-            }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/microsoft.saas/checkmoderneligibility": {
+      "get": {
+        "tags": [
+          "SaaSResources"
+        ],
+        "operationId": "SaaS_checkmoderneligibility",
+        "description": "Check if the Azure Subscription has been converted to modern.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
           },
-          "x-ms-examples": {
-            "Create Subscription Level SaaS resource": {
-              "$ref": "./examples/saasV2/SaasPut.json"
-            }
-          },
-          "x-ms-long-running-operation": true,
-          "x-ms-long-running-operation-options": {
-            "final-state-via": "location"
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
           }
-        },
-        "get": {
-          "tags": [
-            "SaaSResources"
-          ],
-          "operationId": "SaasResource-GetAllResources",
-          "description": "Get All Resources",
-          "parameters": [
-            {
-              "$ref": "#/parameters/ApiVersionParameter"
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. The request returns the genetaring access token.",
+            "schema": {
+              "$ref": "#/definitions/SaasRpModernEligibility"
             }
-          ],
-          "responses": {
-            "200": {
-              "description": "OK",
-              "schema": {
-                "$ref": "#/definitions/SaasResourceResponseWithContinuation"
-              }
-            },
-            "404": {
-              "description": "not found"
-            },
-            "502": {
-              "description": "Internal Server Error"
-            }
+          },
+          "404": {
+            "description": "not found"
+          },
+          "502": {
+            "description": "Internal Server Error"
           },
           "x-ms-examples": {
             "Get Subscription Level SaaS resource": {
-              "$ref": "./examples/saasV2/SaaSGetAllResources.json"
-            }
-          }
-        }
-      },
-      "/providers/Microsoft.SaaS/saasresources/{resourceId}/listAccessToken": {
-        "post": {
-          "tags": [
-            "SaaSResources"
-          ],
-          "operationId": "SaasResource-GetAccessToken",
-          "description": "Gets the ISV access token for a SaaS resource.",
-          "parameters": [
-            {
-              "$ref": "#/parameters/SaasResourceIdParameter"
-            },
-            {
-              "$ref": "#/parameters/ApiVersionParameter"
-            }
-          ],
-          "responses": {
-            "200": {
-              "description": "Request successful. The request returns the genetaring access token.",
-              "schema": {
-                "$ref": "#/definitions/AccessTokenResult"
-              }
-            },
-            "502": {
-              "description": "Internal Server Error"
-            }
-          },
-          "x-ms-examples": {
-            "Get Subscription Level SaaS resource": {
-              "$ref": "./examples/saasV2/ListAccessTokenPost.json"
+              "$ref": "./examples/saasV1/SaaSGetModerneligibility.json"
             }
           }
         }
       }
     },
-    "definitions": {
-      "Result": {
-        "description": "Sample result definition",
-        "properties": {
-          "sampleProperty": {
-            "type": "string",
-            "description": "Sample property of type string"
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SaaS/applications": {
+      "get": {
+        "tags": [
+          "SaaSResources"
+        ],
+        "operationId": "SaaS_GetAppplications",
+        "description": "Gets all SaaS resources by subscription id and resource group name.",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
           }
-        }
-      },
-      "OperationListResult": {
-        "description": "Operation List Result Response",
-        "properties": {
-          "value": {
-            "description": "List of SaaS operations supported by the SaaS resource provider.",
-            "type": "array",
-            "items": {
-              "$ref": "#/definitions/Operation"
-            }
-          }
-        }
-      },
-      "Operation": {
-        "description": "SaaS REST API operation definition.",
-        "type": "object",
-        "properties": {
-          "name": {
-            "description": "Operation name: {provider}/{resource}/{operation}",
-            "type": "string"
-          },
-          "display": {
-            "description": "Display metadata associated with the operation.",
-            "properties": {
-              "provider": {
-                "description": "Service provider: Microsoft SaaS.",
-                "type": "string"
-              },
-              "resource": {
-                "description": "Resource on which the operation is performed.",
-                "type": "string"
-              },
-              "operation": {
-                "description": "Type of the operation: get, read, delete, etc.",
-                "type": "string"
-              },
-              "description": {
-                "description": "Description of the operation.",
-                "type": "string"
-              }
-            }
-          }
-        }
-      },
-      "SaasResource": {
-        "description": "SaaS REST API resource definition.",
-        "type": "object",
-        "properties": {
-          "properties": {
-            "type": "object",
-            "allOf": [
-              {
-                "$ref": "#/definitions/SaasProperties"
-              },
-              {
-                "$ref": "#/definitions/SaasCreationProperties"
-              }
-            ]
-          },
-          "name": {
-            "type": "string",
-            "description": "The name of the resource"
-          },
-          "id": {
-            "description": "The resource uri",
-            "type": "string"
-          },
-          "type": {
-            "readOnly": true,
-            "type": "string",
-            "description": "Resource type."
-          },
-          "tags": {
-            "description": "the resource tags.",
-            "$ref": "#/definitions/Tags"
-          }
-        }
-      },
-      "SaasResourceCreation": {
-        "description": "SaaS REST API resource definition for creation.",
-        "type": "object",
-        "properties": {
-          "id": {
-            "description": "The resource uri",
-            "type": "string"
-          },
-          "name": {
-            "description": "The resource name",
-            "type": "string"
-          },
-          "type": {
-            "readOnly": true,
-            "type": "string",
-            "description": "Resource type."
-          },
-          "properties": {
-            "$ref": "#/definitions/SaasCreationProperties",
-            "description": "Properties of the SaaS resource that are relevant for creation."
-          }
-        }
-      },
-      "SaasProperties": {
-        "type": "object",
-        "properties": {
-          "status": {
-            "type": "string",
-            "description": "The SaaS Subscription Status.",
-            "enum": [
-              "NotStarted",
-              "PendingFulfillmentStart",
-              "Subscribed",
-              "Unsubscribed",
-              "Suspended"
-            ]
-          },
-          "term": {
-            "type": "object",
-            "description": "The current Term object.",
-            "properties": {
-              "termUnit": {
-                "type": "string",
-                "description": "The unit indicating Monthly / Yearly"
-              },
-              "startDate": {
-                "type": "string",
-                "description": "The start date of the current term"
-              },
-              "endDate": {
-                "type": "string",
-                "description": "The end date of the current term"
-              }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SaasAppResponseWithContinuation"
             }
           },
-          "isFreeTrial": {
-            "type": "boolean",
-            "description": "Whether the current term is a Free Trial term"
-          },
-          "created": {
-            "type": "string",
-            "description": "The created date of this resource."
-          },
-          "lastModified": {
-            "type": "string",
-            "description": "The last modifier date if this resource."
+          "502": {
+            "description": "Internal Server Error"
+          }
+        },
+        "x-ms-examples": {
+          "Get Subscription Level SaaS resource": {
+            "$ref": "./examples/saasV1/SaaSGetApplications.json"
           }
         }
-      },
-      "SaasCreationProperties": {
-        "type": "object",
-        "properties": {
-          "offerId": {
-            "type": "string",
-            "description": "The offer id."
+      }
+    },
+    "/providers/Microsoft.SaaS/saasresources/{resourceId}": {
+      "delete": {
+        "tags": [
+          "SaaSResources"
+        ],
+        "operationId": "SaaS_Delete",
+        "description": "Deletes the specified SaaS.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SaasResourceIdParameter"
           },
-          "publisherId": {
-            "type": "string",
-            "description": "The publisher id."
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
           },
-          "quantity": {
-            "type": "number",
-            "description": "The seat count."
-          },
-          "skuId": {
-            "type": "string",
-            "description": "The plan id."
-          },
-          "paymentChannelType": {
-            "type": "string",
-            "description": "The Payment channel for the SaaSsubscription.",
-            "enum": [
-              "SubscriptionDelegated"
-            ]
-          },
-          "paymentChannelMetadata": {
-            "type": "object",
-            "description": "The metadata about the SaaS subscription such as the AzureSubscriptionId and ResourceUri.",
-            "additionalProperties": {
-              "type": "string"
-            }
-          },
-          "saasResourceName": {
-            "type": "string",
-            "description": "The SaaS resource name."
-          },
-          "termId": {
-            "type": "string",
-            "description": "The current Term id."
-          },
-          "autoRenew": {
-            "type": "boolean",
-            "description": "Whether the SaaS subscription will auto renew upon term end."
-          },
-          "publisherTestEnvironment": {
-            "type": "string",
-            "description": "The environement in the publisher side for this resource."
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/deleteOptions"
+            },
+            "description": "Parameters supplied to delete saas operation."
           }
+        ],
+        "responses": {
+          "204": {
+            "description": "Request successful. Resource does not exist."
+          },
+          "202": {
+            "description": "Accepted and the operation will complete asynchronously."
+          },
+          "502": {
+            "description": "Internal Server Error"
+          }
+        },
+        "x-ms-examples": {
+          "Delete Subscription Level SaaS resource": {
+            "$ref": "./examples/saasV2/SaasDelete.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
         }
       },
-      "AccessTokenResult": {
-        "description": "the ISV access token result response.",
-        "type": "object",
-        "properties": {
-          "PublisherOfferBaseUri": {
-            "description": "The Publisher Offer Base Uri",
-            "type": "string"
+      "get": {
+        "tags": [
+          "SaaSResources"
+        ],
+        "operationId": "SaaS_GetResource",
+        "description": "Gets information about the specified SaaS.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SaasResourceIdParameter"
           },
-          "Token": {
-            "description": "The generated token",
-            "type": "string"
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
           }
-        }
-      },
-      "SaasAppResponseWithContinuation": {
-        "description": "saas app response with continuation.",
-        "type": "object",
-        "properties": {
-          "nextLink": {
-            "description": "the next link to query to get the remaining results.",
-            "type": "string"
-          },
-          "value": {
-            "description": "the value of response.",
-            "type": "array",
-            "items": {
-              "$ref": "#/definitions/SaasApp"
-            }
-          }
-        }
-      },
-      "SaasAppOperationsResponseWithContinuation": {
-        "description": "saas app operation response with continuation.",
-        "type": "object",
-        "properties": {
-          "nextLink": {
-            "description": "the next link to query to get the remaining results.",
-            "type": "string"
-          },
-          "value": {
-            "description": "the value of response.",
-            "type": "array",
-            "items": {
-              "$ref": "#/definitions/SaasAppOperation"
-            }
-          }
-        }
-      },
-      "SaasResourceResponseWithContinuation": {
-        "description": "saas resources response with continuation.",
-        "type": "object",
-        "properties": {
-          "nextLink": {
-            "description": "the next link to query to get the remaining results.",
-            "type": "string"
-          },
-          "value": {
-            "description": "the value of response.",
-            "type": "array",
-            "items": {
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. The request returns the resulting SaaS resource.",
+            "schema": {
               "$ref": "#/definitions/SaasResource"
             }
+          },
+          "404": {
+            "description": "not found"
+          },
+          "502": {
+            "description": "Internal Server Error"
+          }
+        },
+        "x-ms-examples": {
+          "Get Subscription Level SaaS resource": {
+            "$ref": "./examples/saasV2/SaasGet.json"
           }
         }
+      }
+    },
+    "/providers/microsoft.saas/saasresources": {
+      "put": {
+        "tags": [
+          "SaaSResources"
+        ],
+        "operationId": "SaaS_CreateResorce",
+        "description": "Creates a SaaS resource.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SaasResourceCreation"
+            },
+            "description": "Parameters supplied to the create saas operation."
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted and the operation will complete asynchronously."
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "400": {
+            "description": "BadRequest"
+          },
+          "502": {
+            "description": "Internal Server Error"
+          }
+        },
+        "x-ms-examples": {
+          "Create Subscription Level SaaS resource": {
+            "$ref": "./examples/saasV2/SaasPut.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
       },
-      "SaasApp": {
-        "description": "the saasApp resource.",
-        "type": "object",
-        "properties": {
-          "id": {
-            "description": "the resource Id.",
-            "type": "string"
+      "get": {
+        "tags": [
+          "SaaSResources"
+        ],
+        "operationId": "SaasResource-GetAllResources",
+        "description": "Get All Resources",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SaasResourceResponseWithContinuation"
+            }
           },
-          "location": {
-            "description": "tthe resource location.",
-            "type": "string"
+          "404": {
+            "description": "not found"
           },
-          "name": {
-            "description": "the resource name.",
-            "type": "string"
+          "502": {
+            "description": "Internal Server Error"
+          }
+        },
+        "x-ms-examples": {
+          "Get Subscription Level SaaS resource": {
+            "$ref": "./examples/saasV2/SaaSGetAllResources.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.SaaS/saasresources/{resourceId}/listAccessToken": {
+      "post": {
+        "tags": [
+          "SaaSResources"
+        ],
+        "operationId": "SaasResource-GetAccessToken",
+        "description": "Gets the ISV access token for a SaaS resource.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SaasResourceIdParameter"
           },
-          "type": {
-            "description": "the resource type.",
-            "type": "string"
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. The request returns the genetaring access token.",
+            "schema": {
+              "$ref": "#/definitions/AccessTokenResult"
+            }
           },
+          "502": {
+            "description": "Internal Server Error"
+          }
+        },
+        "x-ms-examples": {
+          "Get Subscription Level SaaS resource": {
+            "$ref": "./examples/saasV2/ListAccessTokenPost.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Result": {
+      "description": "Sample result definition",
+      "properties": {
+        "sampleProperty": {
+          "type": "string",
+          "description": "Sample property of type string"
+        }
+      }
+    },
+    "OperationListResult": {
+      "description": "Operation List Result Response",
+      "properties": {
+        "value": {
+          "description": "List of SaaS operations supported by the SaaS resource provider.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Operation"
+          }
+        }
+      }
+    },
+    "Operation": {
+      "description": "SaaS REST API operation definition.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Operation name: {provider}/{resource}/{operation}",
+          "type": "string"
+        },
+        "display": {
+          "description": "Display metadata associated with the operation.",
           "properties": {
-            "description": "the resource properties.",
-            "$ref": "#/definitions/SaasAppProperties"
-          },
-          "tags": {
-            "description": "the resource tags.",
-            "$ref": "#/definitions/Tags"
+            "provider": {
+              "description": "Service provider: Microsoft SaaS.",
+              "type": "string"
+            },
+            "resource": {
+              "description": "Resource on which the operation is performed.",
+              "type": "string"
+            },
+            "operation": {
+              "description": "Type of the operation: get, read, delete, etc.",
+              "type": "string"
+            },
+            "description": {
+              "description": "Description of the operation.",
+              "type": "string"
+            }
           }
         }
-      },
-      "SaasAppProperties": {
-        "description": "Saas resource properties.",
-        "type": "object",
+      }
+    },
+    "SaasResource": {
+      "description": "SaaS REST API resource definition.",
+      "type": "object",
+      "properties": {
         "properties": {
-          "status": {
-            "type": "string",
-            "description": "the Saas resource status.",
-            "enum": [
-              "Pending",
-              "Subscribed",
-              "Unsubscribed",
-              "Suspended",
-              "Deactivated"
-            ]
-          },
-          "saasAppPlan": {
-            "description": "the resource plan details.",
-            "$ref": "#/definitions/SaasAppPlan"
-          }
+          "type": "object",
+          "allOf": [
+            {
+              "$ref": "#/definitions/SaasProperties"
+            },
+            {
+              "$ref": "#/definitions/SaasCreationProperties"
+            }
+          ]
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the resource"
+        },
+        "id": {
+          "description": "The resource uri",
+          "type": "string"
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource type."
+        },
+        "tags": {
+          "description": "the resource tags.",
+          "$ref": "#/definitions/Tags"
         }
-      },
-      "SaasAppPlan": {
-        "description": "Saas resource plan.",
-        "type": "object",
+      }
+    },
+    "SaasResourceCreation": {
+      "description": "SaaS REST API resource definition for creation.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "The resource uri",
+          "type": "string"
+        },
+        "name": {
+          "description": "The resource name",
+          "type": "string"
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource type."
+        },
         "properties": {
-          "publisher": {
-            "description": "the publisher id.",
-            "type": "string"
-          },
-          "product": {
-            "description": "the offer id.",
-            "type": "string"
-          },
-          "name": {
-            "description": "the plan id.",
+          "$ref": "#/definitions/SaasCreationProperties",
+          "description": "Properties of the SaaS resource that are relevant for creation."
+        }
+      }
+    },
+    "SaasProperties": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "string",
+          "description": "The SaaS Subscription Status.",
+          "enum": [
+            "NotStarted",
+            "PendingFulfillmentStart",
+            "Subscribed",
+            "Unsubscribed",
+            "Suspended"
+          ]
+        },
+        "term": {
+          "type": "object",
+          "description": "The current Term object.",
+          "properties": {
+            "termUnit": {
+              "type": "string",
+              "description": "The unit indicating Monthly / Yearly"
+            },
+            "startDate": {
+              "type": "string",
+              "description": "The start date of the current term"
+            },
+            "endDate": {
+              "type": "string",
+              "description": "The end date of the current term"
+            }
+          }
+        },
+        "isFreeTrial": {
+          "type": "boolean",
+          "description": "Whether the current term is a Free Trial term"
+        },
+        "created": {
+          "type": "string",
+          "description": "The created date of this resource."
+        },
+        "lastModified": {
+          "type": "string",
+          "description": "The last modifier date if this resource."
+        }
+      }
+    },
+    "SaasCreationProperties": {
+      "type": "object",
+      "properties": {
+        "offerId": {
+          "type": "string",
+          "description": "The offer id."
+        },
+        "publisherId": {
+          "type": "string",
+          "description": "The publisher id."
+        },
+        "quantity": {
+          "type": "number",
+          "description": "The seat count."
+        },
+        "skuId": {
+          "type": "string",
+          "description": "The plan id."
+        },
+        "paymentChannelType": {
+          "type": "string",
+          "description": "The Payment channel for the SaaSsubscription.",
+          "enum": [
+            "SubscriptionDelegated"
+          ]
+        },
+        "paymentChannelMetadata": {
+          "type": "object",
+          "description": "The metadata about the SaaS subscription such as the AzureSubscriptionId and ResourceUri.",
+          "additionalProperties": {
             "type": "string"
           }
+        },
+        "saasResourceName": {
+          "type": "string",
+          "description": "The SaaS resource name."
+        },
+        "termId": {
+          "type": "string",
+          "description": "The current Term id."
+        },
+        "autoRenew": {
+          "type": "boolean",
+          "description": "Whether the SaaS subscription will auto renew upon term end."
+        },
+        "publisherTestEnvironment": {
+          "type": "string",
+          "description": "The environement in the publisher side for this resource."
         }
-      },
-      "Tags": {
-        "description": "the resource tags.",
-        "type": "object",
-        "additionalProperties": {
-          "description": "additional properties.",
+      }
+    },
+    "AccessTokenResult": {
+      "description": "the ISV access token result response.",
+      "type": "object",
+      "properties": {
+        "PublisherOfferBaseUri": {
+          "description": "The Publisher Offer Base Uri",
+          "type": "string"
+        },
+        "Token": {
+          "description": "The generated token",
           "type": "string"
         }
-      },
-      "SaasAppOperation": {
-        "description": "",
-        "type": "object",
-        "properties": {
-          "name": {
-            "description": "the operation name",
-            "type": "string"
-          },
-          "display": {
-            "description": "the operation display",
-            "$ref": "#/definitions/SaasAppOperationDisplay"
-          },
-          "origin": {
-            "description": "the operation origin",
-            "type": "string"
+      }
+    },
+    "SaasAppResponseWithContinuation": {
+      "description": "saas app response with continuation.",
+      "type": "object",
+      "properties": {
+        "nextLink": {
+          "description": "the next link to query to get the remaining results.",
+          "type": "string"
+        },
+        "value": {
+          "description": "the value of response.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SaasApp"
           }
         }
-      },
-      "SaasAppOperationDisplay": {
-        "description": "Saas app operation display",
-        "type": "object",
-        "properties": {
-          "Provider": {
-            "description": "",
-            "type": "string"
-          },
-          "Resource": {
-            "description": "",
-            "type": "string"
-          },
-          "Operation": {
-            "description": "Type of the operation: get, read, delete, etc.",
-            "type": "string"
-          },
-          "Description": {
-            "description": "Type of the operation: get, read, delete, etc.",
-            "type": "string"
+      }
+    },
+    "SaasAppOperationsResponseWithContinuation": {
+      "description": "saas app operation response with continuation.",
+      "type": "object",
+      "properties": {
+        "nextLink": {
+          "description": "the next link to query to get the remaining results.",
+          "type": "string"
+        },
+        "value": {
+          "description": "the value of response.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SaasAppOperation"
           }
         }
-      },
-      "SaasRpModernEligibility": {
-        "description": "",
-        "type": "object",
-        "properties": {
-          "Id": {
-            "description": "the azure subscription id",
-            "type": "string"
-          },
-          "isModern": {
-            "description": "whether the azure subscription has been converted to modern.",
-            "type": "boolean"
+      }
+    },
+    "SaasResourceResponseWithContinuation": {
+      "description": "saas resources response with continuation.",
+      "type": "object",
+      "properties": {
+        "nextLink": {
+          "description": "the next link to query to get the remaining results.",
+          "type": "string"
+        },
+        "value": {
+          "description": "the value of response.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SaasResource"
           }
         }
-      },
-      "deleteOptions": {
+      }
+    },
+    "SaasApp": {
+      "description": "the saasApp resource.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "the resource Id.",
+          "type": "string"
+        },
+        "location": {
+          "description": "tthe resource location.",
+          "type": "string"
+        },
+        "name": {
+          "description": "the resource name.",
+          "type": "string"
+        },
+        "type": {
+          "description": "the resource type.",
+          "type": "string"
+        },
+        "properties": {
+          "description": "the resource properties.",
+          "$ref": "#/definitions/SaasAppProperties"
+        },
+        "tags": {
+          "description": "the resource tags.",
+          "$ref": "#/definitions/Tags"
+        }
+      }
+    },
+    "SaasAppProperties": {
+      "description": "Saas resource properties.",
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "string",
+          "description": "the Saas resource status.",
+          "enum": [
+            "Pending",
+            "Subscribed",
+            "Unsubscribed",
+            "Suspended",
+            "Deactivated"
+          ]
+        },
+        "saasAppPlan": {
+          "description": "the resource plan details.",
+          "$ref": "#/definitions/SaasAppPlan"
+        }
+      }
+    },
+    "SaasAppPlan": {
+      "description": "Saas resource plan.",
+      "type": "object",
+      "properties": {
+        "publisher": {
+          "description": "the publisher id.",
+          "type": "string"
+        },
+        "product": {
+          "description": "the offer id.",
+          "type": "string"
+        },
+        "name": {
+          "description": "the plan id.",
+          "type": "string"
+        }
+      }
+    },
+    "Tags": {
+      "description": "the resource tags.",
+      "type": "object",
+      "additionalProperties": {
+        "description": "additional properties.",
+        "type": "string"
+      }
+    },
+    "SaasAppOperation": {
+      "description": "",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "the operation name",
+          "type": "string"
+        },
+        "display": {
+          "description": "the operation display",
+          "$ref": "#/definitions/SaasAppOperationDisplay"
+        },
+        "origin": {
+          "description": "the operation origin",
+          "type": "string"
+        }
+      }
+    },
+    "SaasAppOperationDisplay": {
+      "description": "Saas app operation display",
+      "type": "object",
+      "properties": {
+        "Provider": {
+          "description": "",
+          "type": "string"
+        },
+        "Resource": {
+          "description": "",
+          "type": "string"
+        },
+        "Operation": {
+          "description": "Type of the operation: get, read, delete, etc.",
+          "type": "string"
+        },
+        "Description": {
+          "description": "Type of the operation: get, read, delete, etc.",
+          "type": "string"
+        }
+      }
+    },
+    "SaasRpModernEligibility": {
+      "description": "SaasRp Modern Eligibility",
+      "type": "object",
+      "properties": {
+        "Id": {
+          "description": "the azure subscription id",
+          "type": "string"
+        },
+        "isModern": {
+          "description": "whether the azure subscription has been converted to modern.",
+          "type": "boolean"
+        }
+      }
+    },
+    "deleteOptions": {
+      "description": "delete Options",
+      "type": "object",
+      "properties": {
         "UnsubscribeOnly": {
           "type": "boolean",
           "description": "whether it is unsubscribeOnly"
@@ -747,43 +750,44 @@
           "description": "Feedback"
         }
       }
+    }
+  },
+  "parameters": {
+    "SaasResourceIdParameter": {
+      "name": "resourceId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The Saas resource ID. This is a GUID-formatted string (e.g. 00000000-0000-0000-0000-000000000000)"
     },
-    "parameters": {
-      "SaasResourceIdParameter": {
-        "name": "resourceId",
-        "in": "path",
-        "required": true,
-        "type": "string",
-        "description": "The Saas resource ID. This is a GUID-formatted string (e.g. 00000000-0000-0000-0000-000000000000)"
-      },
-      "ApiVersionParameter": {
-        "name": "api-version",
-        "in": "query",
-        "required": true,
-        "type": "string",
-        "description": "The API version to be used with the HTTP request."
-      },
-      "OperationIdParameter": {
-        "name": "operationId",
-        "in": "path",
-        "required": true,
-        "type": "string",
-        "description": "the operation Id parameter."
-      },
-      "SubscriptionIdParameter": {
-        "name": "subscriptionId",
-        "in": "path",
-        "required": true,
-        "type": "string",
-        "description": "The Azure subscription ID. This is a GUID-formatted string (e.g. 00000000-0000-0000-0000-000000000000)"
-      },
-      "ResourceGroupNameParameter": {
-        "name": "resourceGroupName",
-        "in": "path",
-        "required": true,
-        "type": "string",
-        "description": "The name of the resource group.",
-        "x-ms-parameter-location": "method"
-      }
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "The API version to be used with the HTTP request."
+    },
+    "OperationIdParameter": {
+      "name": "operationId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "the operation Id parameter."
+    },
+    "SubscriptionIdParameter": {
+      "name": "subscriptionId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The Azure subscription ID. This is a GUID-formatted string (e.g. 00000000-0000-0000-0000-000000000000)"
+    },
+    "ResourceGroupNameParameter": {
+      "name": "resourceGroupName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the resource group.",
+      "x-ms-parameter-location": "method"
     }
   }
+}
