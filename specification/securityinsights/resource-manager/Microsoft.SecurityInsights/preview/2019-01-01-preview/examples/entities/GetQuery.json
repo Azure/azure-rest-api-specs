@@ -1,0 +1,90 @@
+{
+  "parameters": {
+    "api-version": "2019-01-01-preview",
+    "subscriptionId": "d0cfe6b2-9ac0-4464-9919-dccaee2e48c0",
+    "resourceGroupName": "myRg",
+    "workspaceName": "myWorkspace",
+    "operationalInsightsResourceProvider": "Microsoft.OperationalIinsights",
+    "entityId": "e1d3d618-e11f-478b-98e3-bb381539a8e1",
+    "kind": "Insight",
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "tableQueryResults": {
+              "columns": [{
+                  "name": "Title",
+                  "type": "string"
+                }, {
+                  "name": "NameCount",
+                  "type": "long"
+                }, {
+                  "name": "SIDCount",
+                  "type": "long"
+                }, {
+                  "name": "InternalOrder",
+                  "type": "long"
+                }, {
+                  "name": "Index",
+                  "type": "long"
+                }
+              ],
+              "rows": [
+                [
+                  "MyTitle",
+                  "15",
+                  "SID",
+                  "1",
+                  "1"
+                ]
+              ]
+            },
+            "chartQueryResults": [{
+                "columns": [{
+                    "name": "TimeGenerated",
+                    "type": "datetime"
+                  }, {
+                    "name": "Count",
+                    "type": "long"
+                  }, {
+                    "name": "Legend",
+                    "type": "string"
+                  }
+                ],
+                "rows": [
+                  [
+                    "2019-04-25T00:00:00.000Z",
+                    "55",
+                    "SomeLegend"
+                  ]
+                ]
+              }
+            ],
+            "queryTimeInterval": {
+              "startTime": "2020-07-07T23:35:20Z",
+              "endTime": "2020-11-11T23:35:20Z"
+            },
+            "queryId": "e29ee1ef-7445-455e-85f1-269f2d536d61"
+          }
+        ],
+        "metaData": {
+          "totalCount": 6,
+          "errors": [
+            {
+              "kind": "Insight",
+              "queryId": "11067f9f-d6a7-4488-887f-0ba564268879",
+              "errorMessage": "syntax error"
+            },
+            {
+              "kind": "Insight",
+        "queryId": "44442f9f-d6a7-4488-887f-0ba564268879",
+              "errorMessage": "internal server error"
+            }
+          ]
+        }
+      }
+    }
+  }
+}
