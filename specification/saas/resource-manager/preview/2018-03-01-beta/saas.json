@@ -410,6 +410,10 @@
             "readOnly": true,
             "type": "string",
             "description": "Resource type."
+          },
+          "tags": {
+            "description": "the resource tags.",
+            "$ref": "#/definitions/Tags"
           }
         }
       },
@@ -439,7 +443,7 @@
       "SaasProperties": {
         "type": "object",
         "properties": {
-          "Status": {
+          "status": {
             "type": "string",
             "description": "The SaaS Subscription Status.",
             "enum": [
@@ -469,7 +473,7 @@
             }
           },
           "isFreeTrial": {
-            "type": "string",
+            "type": "boolean",
             "description": "Whether the current term is a Free Trial term"
           },
           "created": {
@@ -485,19 +489,19 @@
       "SaasCreationProperties": {
         "type": "object",
         "properties": {
-          "OfferId": {
+          "offerId": {
             "type": "string",
             "description": "The offer id."
           },
-          "PublisherId": {
+          "publisherId": {
             "type": "string",
             "description": "The publisher id."
           },
-          "Quantity": {
+          "quantity": {
             "type": "number",
             "description": "The seat count."
           },
-          "SKUId": {
+          "skuId": {
             "type": "string",
             "description": "The plan id."
           },
@@ -515,11 +519,11 @@
               "type": "string"
             }
           },
-          "SaasResourceName": {
+          "saasResourceName": {
             "type": "string",
             "description": "The SaaS resource name."
           },
-          "TermId": {
+          "termId": {
             "type": "string",
             "description": "The current Term id."
           },
@@ -683,11 +687,11 @@
             "description": "the operation name",
             "type": "string"
           },
-          "Display": {
+          "display": {
             "description": "the operation display",
             "$ref": "#/definitions/SaasAppOperationDisplay"
           },
-          "Origin": {
+          "origin": {
             "description": "the operation origin",
             "type": "string"
           }

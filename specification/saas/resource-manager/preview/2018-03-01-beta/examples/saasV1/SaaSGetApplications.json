@@ -1,12 +1,13 @@
 {
   "parameters": {
-    "api-version": "2018-03-01-beta",
     "subscriptionId": "bc6c2f82-a39d-41b8-a648-71527498a23e",
-    "resourceGroupName": "myResourceGroup"
+    "resourceGroupName": "myResourceGroup",
+    "api-version": "2018-03-01-beta"
   },
-  "responses": {
-    "200": {
-      "body": {
+  "response": {
+    "nextLink": null,
+    "value": [
+      {
         "id": "/subscriptions/bc6c2f82-a39d-41b8-a648-71527498a23e/resourceGroups/myResourceGroup/providers/Microsoft.SaaS/applications/myapp",
         "location": "location",
         "name": "myapp",
@@ -16,7 +17,26 @@
           "saasAppPlan": {
             "publisher": "contoso",
             "product": "myOffer",
-            "name": "myPlan"
+            "name": "myPlan1"
+          }
+        },
+        "tags": [
+          {
+            "additionalProperties": "additionalProperties"
+          }
+        ]
+      },
+      {
+        "id": "/subscriptions/bc6c2f82-a39d-41b8-a648-71527498a23e/resourceGroups/myResourceGroup/providers/Microsoft.SaaS/applications/myapp",
+        "location": "location",
+        "name": "myapp",
+        "type": "Microsoft.SaaS/applications",
+        "properties": {
+          "status": "Subscribed",
+          "saasAppPlan": {
+            "publisher": "contoso",
+            "product": "myOffer",
+            "name": "myPlan2"
           }
         },
         "tags": [
@@ -25,6 +45,6 @@
           }
         ]
       }
-    }
+    ]
   }
 }
