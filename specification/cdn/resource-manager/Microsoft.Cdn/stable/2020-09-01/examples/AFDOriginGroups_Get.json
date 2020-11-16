@@ -13,22 +13,22 @@
           "type": "Microsoft.Cdn/profiles/origingroups",
           "name": "origingroup1",
           "properties": {
-              "loadBalancingSettings": {
-                  "sampleSize": 3,
-                  "successfulSamplesRequired": 3,
-                  "additionalLatencyMilliseconds": 1000
-              },
-              "healthProbeSettings": {
-                  "probePath": "/path1",
-                  "probeRequestType": "HEAD",
-                  "probeProtocol": "Http",
-                  "probeIntervalInSeconds": 10
-              },
-              "responseBasedOriginErrorDetectionSettings": null,
-              "trafficRestorationTimeToHealedOrNewEndpointsInMinutes": 5,
-              "provisioningState": "Succeeded",
-              "deploymentStatus": "NotStarted"
-          }
+            "loadBalancingSettings": {
+                "sampleSize": 3,
+                "successfulSamplesRequired": 3,
+                "additionalLatencyInMilliseconds": 1000
+            },
+            "healthProbeSettings": {
+                "probePath": "/path1",
+                "probeRequestType": "HEAD",
+                "probeProtocol": "Http",
+                "probeIntervalInSeconds": 10
+            },
+            "responseBasedAfdOriginErrorDetectionSettings": null,
+            "trafficRestorationTimeToHealedOrNewEndpointsInMinutes": 5,
+            "provisioningState": "Succeeded",
+            "deploymentStatus": "NotStarted"
+        }
       }
     }
   }

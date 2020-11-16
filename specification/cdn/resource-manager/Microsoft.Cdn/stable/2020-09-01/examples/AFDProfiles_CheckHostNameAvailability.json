@@ -1,6 +1,9 @@
 {
     "parameters": {
       "api-version": "2020-09-01",
+      "subscriptionId": "subid",
+      "resourceGroupName": "RG",
+      "profileName": "profile1",
       "checkNameAvailabilityInput": {
         "name": "www.someDomain.net",
         "type": "Microsoft.Cdn/Profiles/CustomDomains"
@@ -9,7 +12,7 @@
     "responses": {
       "200": {
         "body": {
-          "nameAvailable": false,
+          "customDomainValidated": false,
           "reason": "Hostname is already owned by another profile.",
           "message": "Hostname is already owned by another profile."
         }

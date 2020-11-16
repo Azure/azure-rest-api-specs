@@ -269,7 +269,7 @@
             "type": "string"
           },
           {
-            "name": "domain",
+            "name": "customDomain",
             "in": "body",
             "description": "Domain properties",
             "required": true,
@@ -336,7 +336,7 @@
             "type": "string"
           },
           {
-            "name": "domainUpdateProperties",
+            "name": "customDomainUpdateProperties",
             "in": "body",
             "description": "Domain properties",
             "required": true,
@@ -469,13 +469,7 @@
             "schema": {
               "type": "string"
             }
-          },
-          "202": {
-            "description": "Accepted",
-            "schema": {
-              "type": "string"
-            }
-          },
+          },        
           "default": {
             "description": "CDN error response describing why the operation failed.",
             "schema": {
@@ -1951,10 +1945,10 @@
           "RuleSets"
         ],
         "description": "Lists existing AFDX rule sets within a profile.",
-        "operationId": "RuleSet_ListByProfile",
+        "operationId": "RuleSets_ListByProfile",
         "x-ms-examples": {
-          "RuleSet_ListByProfile": {
-            "$ref": "./examples/RuleSet_ListByProfile.json"
+          "RuleSets_ListByProfile": {
+            "$ref": "./examples/RuleSets_ListByProfile.json"
           }
         },
         "parameters": [
@@ -2000,10 +1994,10 @@
           "RuleSets"
         ],
         "description": "Gets an existing AFDX rule set with the specified rule set name under the specified subscription, resource group and profile.",
-        "operationId": "RuleSet_Get",
+        "operationId": "RuleSets_Get",
         "x-ms-examples": {
-          "RuleSet_Get": {
-            "$ref": "./examples/RuleSet_Get.json"
+          "RuleSets_Get": {
+            "$ref": "./examples/RuleSets_Get.json"
           }
         },
         "parameters": [
@@ -2051,10 +2045,10 @@
           "RuleSets"
         ],
         "description": "Creates a new rule set within the specified profile.",
-        "operationId": "RuleSet_Create",
+        "operationId": "RuleSets_Create",
         "x-ms-examples": {
-          "RuleSet_Create": {
-            "$ref": "./examples/RuleSet_Create.json"
+          "RuleSets_Create": {
+            "$ref": "./examples/RuleSets_Create.json"
           }
         },
         "parameters": [
@@ -2118,10 +2112,10 @@
           "RuleSets"
         ],
         "description": "Updates an existing rule set within a profile.",
-        "operationId": "RuleSet_Update",
+        "operationId": "RuleSets_Update",
         "x-ms-examples": {
-          "RuleSet_Update": {
-            "$ref": "./examples/RuleSet_Update.json"
+          "RuleSets_Update": {
+            "$ref": "./examples/RuleSets_Update.json"
           }
         },
         "parameters": [
@@ -2185,10 +2179,10 @@
           "RuleSets"
         ],
         "description": "Deletes an existing AFDX rule set with the specified rule set name under the specified subscription, resource group and profile.",
-        "operationId": "RuleSet_Delete",
+        "operationId": "RuleSets_Delete",
         "x-ms-examples": {
-          "RuleSet_Delete": {
-            "$ref": "./examples/RuleSet_Delete.json"
+          "RuleSets_Delete": {
+            "$ref": "./examples/RuleSets_Delete.json"
           }
         },
         "parameters": [
@@ -3854,15 +3848,15 @@
     "Certificate": {
       "description": "Certificate used for https",
       "properties": {
-        "Subject": {
+        "subject": {
           "description": "Subject name in the certificate.",
           "type": "string"
         },
-        "ExpirationDate": {
+        "expirationDate": {
           "description": "Certificate expiration date.",
           "type": "string"
         },
-        "Thumbprint": {
+        "thumbprint": {
           "description": "Certificate thumbprint.",
           "type": "string"
         }
@@ -4092,7 +4086,7 @@
           ],
           "type": "string",
           "x-ms-enum": {
-            "name": "certificateType",
+            "name": "AfdCertificateType",
             "modelAsString": true
           }
         },
@@ -4104,7 +4098,7 @@
           ],
           "type": "string",
           "x-ms-enum": {
-            "name": "MinimumTlsVersion",
+            "name": "AfdMinimumTlsVersion",
             "modelAsString": false
           }
         },
@@ -4159,7 +4153,7 @@
           ],
           "type": "string",
           "x-ms-enum": {
-            "name": "type",
+            "name": "SecurityPolicyType",
             "modelAsString": true
           }
         }
@@ -4409,7 +4403,7 @@
           ],
           "type": "string",
           "x-ms-enum": {
-            "name": "type",
+            "name": "SecretType",
             "modelAsString": true
           }
         }
@@ -4534,9 +4528,6 @@
     "RuleSetProperties": {
       "description": "The JSON object that contains the properties of the Rule Set to create.",
       "type": "object",
-      "required": [
-        "order"
-      ],
       "allOf": [
         {
           "$ref": "#/definitions/RuleSetUpdatePropertiesParameters"
@@ -4549,9 +4540,6 @@
     "RuleSetUpdateParameters": {
       "description": "The rule set JSON object required for rule set creation or update.",
       "type": "object",
-      "required": [
-        "order"
-      ],
       "allOf": [
         {
           "$ref": "#/definitions/RuleSetUpdatePropertiesParameters"
@@ -4566,10 +4554,6 @@
     "RuleSetUpdatePropertiesParameters": {
       "description": "The JSON object that contains the properties of the domain to create.",
       "properties": {
-        "order": {
-          "description": "The order in which the rules are applied for the endpoint. Possible values {0,1,2,3,………}. A rule with a lesser order will be applied before a rule with a greater order. Rule with order 0 is a special rule. It does not require any condition and actions listed in it will always be applied.",
-          "type": "integer"
-        }
       }
     },
     "AFDOrigin": {
@@ -4787,7 +4771,7 @@
           "maximum": 50,
           "minimum": 0
         },
-        "responseBasedAFDOriginErrorDetectionSettings": {
+        "responseBasedAfdOriginErrorDetectionSettings": {
           "description": "The JSON object that contains the properties to determine origin health using real requests/responses. This property is currently not supported.",
           "type": "object",
           "$ref": "./cdn.json#/definitions/ResponseBasedOriginErrorDetectionParameters"
@@ -5118,7 +5102,7 @@
             "Creating"
           ],
           "x-ms-enum": {
-            "name": "provisioningState",
+            "name": "AfdProvisioningState",
             "modelAsString": true
           }
         },
