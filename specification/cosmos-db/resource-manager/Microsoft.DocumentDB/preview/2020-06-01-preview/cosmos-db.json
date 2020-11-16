@@ -8303,7 +8303,6 @@
       "type": "string",
       "readOnly": true,
       "enum": [
-        "None",
         "MongoDB",
         "Gremlin",
         "Cassandra",
@@ -8498,7 +8497,7 @@
               "readOnly": true,
               "description": "The resource Id of this restorable SQL container."
             },
-            "documentCollection": {
+            "container": {
               "properties": {
                 "_self": {
                   "type": "string",
@@ -8592,23 +8591,6 @@
               "type": "string",
               "readOnly": true,
               "description": "The resource Id of this restorable MongoDB database."
-            },
-            "database": {
-              "properties": {
-                "_self": {
-                  "type": "string",
-                  "readOnly": true,
-                  "description": "A system generated property that specifies the addressable path of the database resource."
-                }
-              },
-              "allOf": [
-                {
-                  "$ref": "#/definitions/MongoDBDatabaseResource"
-                },
-                {
-                  "$ref": "#/definitions/ExtendedResourceProperties"
-                }
-              ]
             }
           }
         }
@@ -8674,22 +8656,6 @@
               "type": "string",
               "readOnly": true,
               "description": "The resource Id of this restorable MongoDB collection."
-            },
-            "documentCollection": {
-              "properties": {
-                "_self": {
-                  "type": "string",
-                  "description": "A system generated property that specifies the addressable path of the collection resource."
-                }
-              },
-              "allOf": [
-                {
-                  "$ref": "#/definitions/MongoDBCollectionResource"
-                },
-                {
-                  "$ref": "#/definitions/ExtendedResourceProperties"
-                }
-              ]
             }
           }
         }
@@ -8938,7 +8904,7 @@
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method",
-      "description": "The location where the resources are located."
+      "description": "The location where the restorable resources are located."
     },
     "restoreTimestampInUtcParameter": {
       "name": "restoreTimestampInUtc",
@@ -8946,7 +8912,7 @@
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method",
-      "description": "The timestamp when the resources exist."
+      "description": "The timestamp when the restorable resources existed."
     }
   }
 }
