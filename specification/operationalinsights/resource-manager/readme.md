@@ -205,6 +205,25 @@ python:
   package-name: azure-mgmt-loganalytics
   clear-output-folder: true
 ```
+
+``` yaml $(python) && $(track2)
+directive:
+    - from: swagger-document
+      where: $.info
+      transform: >
+          $.title = 'LogAnalyticsManagementClient';
+          $.description = 'The Log Analytics Client.';
+          return $;
+         
+python-mode: create
+azure-arm: true
+license-header: MICROSOFT_MIT_NO_VERSION
+namespace: azure.mgmt.loganalytics
+package-name: azure-mgmt-loganalytics
+package-version: 7.0.0b1
+clear-output-folder: true
+```
+
 ``` yaml $(python) && $(python-mode) == 'update' && !$(track2)
 python:
   no-namespace-folders: true
@@ -214,6 +233,15 @@ python:
 python:
   basic-setup-py: true
   output-folder: $(python-sdks-folder)/loganalytics/azure-mgmt-loganalytics
+```
+
+``` yaml $(python) && $(python-mode) == 'update' && $(track2)
+no-namespace-folders: true
+output-folder: $(python-sdks-folder)/loganalytics/azure-mgmt-loganalytics/azure/mgmt/loganalytics
+```
+``` yaml $(python) && $(python-mode) == 'create'  && $(track2)
+basic-setup-py: true
+output-folder: $(python-sdks-folder)/loganalytics/azure-mgmt-loganalytics
 ```
 
 ## Go
